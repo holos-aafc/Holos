@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace H.Core.Providers.AnaerobicDigestion
 {
+    // Provider that calculates the Biodegraded fraction during storage.
     public class BiodegradedFractionDuringStorageData
     {
         /// <summary>

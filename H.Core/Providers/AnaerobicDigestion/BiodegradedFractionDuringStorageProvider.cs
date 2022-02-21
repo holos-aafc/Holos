@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace H.Core.Providers.AnaerobicDigestion
 {
+    // Provider that calculates the Biodegraded fraction during storage.
     public class BiodegradedFractionDuringStorageProvider
     {
         #region Fields
