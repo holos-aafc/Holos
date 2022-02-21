@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ab_car_to_slc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ab_car_to_slc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ab_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ab_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Agt_Ratios" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Agt_Ratios.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="bc_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bc_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="caragana__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\caragana__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climate_norms_by_poly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climate_norms_by_poly.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climate_parameter_tool_input" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climate_parameter_tool_input.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="cmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cmp.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="dairy_feed_composition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dairy_feed_composition.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ecodistrict_to_ecozone_mapping" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ecodistrict_to_ecozone_mapping.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ednames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ednames.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="feeds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\feeds.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ft_AB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ft-AB.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="green_ash__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green_ash__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="hybrid_poplar__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hybrid_poplar__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icons8_settings_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-settings-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kapuskasing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Kapuskasing.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="lookup_ecodistricts_clusters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lookup_ecodistricts_clusters.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="manitoba_maple__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manitoba_maple__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="map___Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map - Copy.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="mb_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mb_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="on_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\on_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="pat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pat.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="qc_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\qc_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="residue_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\residue_table.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="scots_pine__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scots_pine__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Settings_50_px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings_50_px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shelterbelt_allometric_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelterbelt_allometric_table.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="shelterbelt_ecodistrict_lookup_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelterbelt_ecodistrict_lookup_table.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="shelterbelt_ecodistrict_weights" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelterbelt_ecodistrict_weights.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="shelterbelt_hardinesszone_lookup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelterbelt_hardinesszone_lookup.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="shelterbelt_lookup_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelterbelt_lookup_table.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sk_default_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sk_default_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="slc_to_hardiness_zone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\slc_to_hardiness_zone.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_ab" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_ab.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_bc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_bc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_mb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_mb.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_nb.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_nl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_nl.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_ns" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_ns.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_on.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_pe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_pe.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_qc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_qc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sl_sk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sl_sk.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_ab" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_ab.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_bc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_bc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_mb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_mb.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_nb.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_nl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_nl.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_ns" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_ns.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_on.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_pe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_pe.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_qc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_qc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sn_sk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sn_sk.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_1.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_10.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_11_16_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_11_16_26.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_12_17_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_12_17_30.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_13_18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_13_18.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_14_19_23" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_14_19_23.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_2.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_20.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_21.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_22_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_22_24.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_3.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_30.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_33.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_38.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_5.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_6.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_7.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_7_8_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_7_8_9.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_8.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Table_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_9.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="white_spruce__31_allclusters_future" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white_spruce__31_allclusters_future.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="sk_car_to_slc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sk_car_to_slc.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Swine_Feed_Ingredient_List" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Swine_Feed_Ingredient_List.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GrowingDegreeCoefficients" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GrowingDegreeCoefficients.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Condensed_LethbridgeSOCData_AllRotations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Condensed_LethbridgeSOCData_AllRotations.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="climateNorms_by_poly_1950_1980" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climateNorms_by_poly_1950_1980.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climateNorms_by_poly_1960_1990" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climateNorms_by_poly_1960_1990.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climateNorms_by_poly_1970_2000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climateNorms_by_poly_1970_2000.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climateNorms_by_poly_1980_2010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climateNorms_by_poly_1980_2010.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="climateNorms_by_poly_1990_2017" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\climateNorms_by_poly_1990_2017.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="crop_economics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\crop_economics.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="fertilizer_blends" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fertilizer_blends.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="small_area_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\small_area_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="electricity_conversion_values" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\electricity_conversion_values.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="IrrigationByMonth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IrrigationByMonth.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="fuel_energy_requirement_estimates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fuel_energy_requirement_estimates.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="herbicide_energy_requirement_estimates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\herbicide_energy_requirement_estimates.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="global_radiative_forcing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\global_radiative_forcing.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="global_warming_potential_of_emissions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\global_warming_potential_of_emissions.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="globally_calibrated_model_parameters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\globally_calibrated_model_parameters.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="nitrogen_lingin_contents_steadystate_methods" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nitrogen_lingin_contents_steadystate_methods.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="silage_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\silage_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="parameters_biogas_methane_production" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\parameters_biogas_methane_production.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="emission_factor_digestate_storage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emission_factor_digestate_storage.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="average_milk_production_dairy_cows" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\average_milk_production_dairy_cows.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CG__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CG__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GA__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GA__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="HP__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HP__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MM__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MM__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SP__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WS__31_allclusters_future_DOM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WS__31_allclusters_future_DOM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CG_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CG_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GA_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GA_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="HP_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HP_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MM_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MM_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SP_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WS_31_allclusters_past_CBM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WS_31_allclusters_past_CBM.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+</root>

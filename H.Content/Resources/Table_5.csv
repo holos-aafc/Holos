@@ -1,0 +1,7 @@
+TreeSpecies,a,b,MinDiameter,MaxDiameter,MinHeight,MaxHeight,MinAge,MaxAge,MinSpacing,MaxSpacing,MinMortality,MaxMortality
+HybridPoplar,0.09142,2.3011,13.6,59,8.8,23.5,13,60,0.5,10,0,25
+WhiteSpruce,0.0066,3.1832,1.3,38,1.9,21.5,6,76,0.5,4,0,66
+ScotsPine,0.43264,1.887,17.5,63,6.9,16.7,15,74,1,3.2,0,50
+ManitobaMaple,0.29428,1.898,3.2,43.6,2.9,15.2,5,100,1,5,0,47
+GreenAsh,0.20637,2.1217,10.9,37,4.1,14.2,12,79,1,5,0,68
+Caragana,0.0284,2.576,5.3,24.2,2.5,13.6,7,43,0.4,2.4,0,29

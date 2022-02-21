@@ -1,0 +1,163 @@
+Ecozone,Texture,TillagePracticeChange,k,LumCKMax
+Boreal Shield West,Coarse,IntenseToReduced,0.0262,143
+Boreal Shield West,Coarse,ReducedToNone,0.0284,441
+Boreal Shield West,Coarse,IntenseToNone,0.0306,584
+Boreal Shield West,Coarse,ReducedToIntense,0.0262,-143
+Boreal Shield West,Coarse,NoneToReduced,0.0284,-441
+Boreal Shield West,Coarse,NoneToIntense,0.0306,-584
+Boreal Shield West,Medium,IntenseToReduced,0.0253,217
+Boreal Shield West,Medium,ReducedToNone,0.0282,478
+Boreal Shield West,Medium,IntenseToNone,0.0311,695
+Boreal Shield West,Medium,ReducedToIntense,0.0253,-217
+Boreal Shield West,Medium,NoneToReduced,0.0282,-478
+Boreal Shield West,Medium,NoneToIntense,0.0311,-695
+Boreal Shield West,Fine,IntenseToReduced,0.0258,155
+Boreal Shield West,Fine,ReducedToNone,0.0331,398
+Boreal Shield West,Fine,IntenseToNone,0.0403,553
+Boreal Shield West,Fine,ReducedToIntense,0.0258,-155
+Boreal Shield West,Fine,NoneToReduced,0.0331,-398
+Boreal Shield West,Fine,NoneToIntense,0.0403,-553
+Atlantic Maritimes,Coarse,IntenseToReduced,0.0282,232
+Atlantic Maritimes,Coarse,ReducedToNone,0.0252,25
+Atlantic Maritimes,Coarse,IntenseToNone,0.0222,257
+Atlantic Maritimes,Coarse,ReducedToIntense,0.0282,-232
+Atlantic Maritimes,Coarse,NoneToReduced,0.0252,-25
+Atlantic Maritimes,Coarse,NoneToIntense,0.0222,-257
+Atlantic Maritimes,Medium,IntenseToReduced,0.0227,246
+Atlantic Maritimes,Medium,ReducedToNone,0.0219,241
+Atlantic Maritimes,Medium,IntenseToNone,0.0211,486
+Atlantic Maritimes,Medium,ReducedToIntense,0.0227,-246
+Atlantic Maritimes,Medium,NoneToReduced,0.0219,-241
+Atlantic Maritimes,Medium,NoneToIntense,0.0211,-486
+Atlantic Maritimes,Fine,IntenseToReduced,0.0285,349
+Atlantic Maritimes,Fine,ReducedToNone,0.0291,184
+Atlantic Maritimes,Fine,IntenseToNone,0.0298,533
+Atlantic Maritimes,Fine,ReducedToIntense,0.0285,-349
+Atlantic Maritimes,Fine,NoneToReduced,0.0291,-184
+Atlantic Maritimes,Fine,NoneToIntense,0.0298,-533
+Boreal Plains,Coarse,IntenseToReduced,0.027,221
+Boreal Plains,Coarse,ReducedToNone,0.0283,450
+Boreal Plains,Coarse,IntenseToNone,0.0296,671
+Boreal Plains,Coarse,ReducedToIntense,0.027,-221
+Boreal Plains,Coarse,NoneToReduced,0.0283,-450
+Boreal Plains,Coarse,NoneToIntense,0.0296,-671
+Boreal Plains,Medium,IntenseToReduced,0.0219,233
+Boreal Plains,Medium,ReducedToNone,0.0238,464
+Boreal Plains,Medium,IntenseToNone,0.0258,698
+Boreal Plains,Medium,ReducedToIntense,0.0219,-233
+Boreal Plains,Medium,NoneToReduced,0.0238,-464
+Boreal Plains,Medium,NoneToIntense,0.0258,-698
+Boreal Plains,Fine,IntenseToReduced,0.018,163
+Boreal Plains,Fine,ReducedToNone,0.0231,467
+Boreal Plains,Fine,IntenseToNone,0.0283,630
+Boreal Plains,Fine,ReducedToIntense,0.018,-163
+Boreal Plains,Fine,NoneToReduced,0.0231,-467
+Boreal Plains,Fine,NoneToIntense,0.0283,-630
+Boreal Shield East,Coarse,IntenseToReduced,0.0295,277
+Boreal Shield East,Coarse,ReducedToNone,0.0268,665
+Boreal Shield East,Coarse,IntenseToNone,0.0242,941
+Boreal Shield East,Coarse,ReducedToIntense,0.0295,-277
+Boreal Shield East,Coarse,NoneToReduced,0.0268,-665
+Boreal Shield East,Coarse,NoneToIntense,0.0242,-941
+Boreal Shield East,Medium,IntenseToReduced,0.0266,238
+Boreal Shield East,Medium,ReducedToNone,0.023,311
+Boreal Shield East,Medium,IntenseToNone,0.0193,549
+Boreal Shield East,Medium,ReducedToIntense,0.0266,-238
+Boreal Shield East,Medium,NoneToReduced,0.023,-311
+Boreal Shield East,Medium,NoneToIntense,0.0193,-549
+Boreal Shield East,Fine,IntenseToReduced,0.0228,206
+Boreal Shield East,Fine,ReducedToNone,0.0178,235
+Boreal Shield East,Fine,IntenseToNone,0.0127,441
+Boreal Shield East,Fine,ReducedToIntense,0.0228,-206
+Boreal Shield East,Fine,NoneToReduced,0.0178,-235
+Boreal Shield East,Fine,NoneToIntense,0.0127,-441
+Mixedwood Plains,Coarse,IntenseToReduced,0.0307,181
+Mixedwood Plains,Coarse,ReducedToNone,0.03,435
+Mixedwood Plains,Coarse,IntenseToNone,0.0293,616
+Mixedwood Plains,Coarse,ReducedToIntense,0.0307,-181
+Mixedwood Plains,Coarse,NoneToReduced,0.03,-435
+Mixedwood Plains,Coarse,NoneToIntense,0.0293,-616
+Mixedwood Plains,Medium,IntenseToReduced,0.0262,173
+Mixedwood Plains,Medium,ReducedToNone,0.0256,264
+Mixedwood Plains,Medium,IntenseToNone,0.025,437
+Mixedwood Plains,Medium,ReducedToIntense,0.0262,-173
+Mixedwood Plains,Medium,NoneToReduced,0.0256,-264
+Mixedwood Plains,Medium,NoneToIntense,0.025,-437
+Mixedwood Plains,Fine,IntenseToReduced,0.0208,197
+Mixedwood Plains,Fine,ReducedToNone,0.0216,207
+Mixedwood Plains,Fine,IntenseToNone,0.0223,404
+Mixedwood Plains,Fine,ReducedToIntense,0.0208,-197
+Mixedwood Plains,Fine,NoneToReduced,0.0216,-207
+Mixedwood Plains,Fine,NoneToIntense,0.0223,-404
+Semiarid Prairies,Coarse,IntenseToReduced,0.0226,183
+Semiarid Prairies,Coarse,ReducedToNone,0.0239,316
+Semiarid Prairies,Coarse,IntenseToNone,0.0252,499
+Semiarid Prairies,Coarse,ReducedToIntense,0.0226,-183
+Semiarid Prairies,Coarse,NoneToReduced,0.0239,-316
+Semiarid Prairies,Coarse,NoneToIntense,0.0252,-499
+Semiarid Prairies,Medium,IntenseToReduced,0.0193,233
+Semiarid Prairies,Medium,ReducedToNone,0.023,261
+Semiarid Prairies,Medium,IntenseToNone,0.0266,495
+Semiarid Prairies,Medium,ReducedToIntense,0.0193,-233
+Semiarid Prairies,Medium,NoneToReduced,0.023,-261
+Semiarid Prairies,Medium,NoneToIntense,0.0266,-495
+Semiarid Prairies,Fine,IntenseToReduced,0.0149,268
+Semiarid Prairies,Fine,ReducedToNone,0.0194,193
+Semiarid Prairies,Fine,IntenseToNone,0.024,462
+Semiarid Prairies,Fine,ReducedToIntense,0.0149,-268
+Semiarid Prairies,Fine,NoneToReduced,0.0194,-193
+Semiarid Prairies,Fine,NoneToIntense,0.024,-462
+Montane Cordillera,Coarse,IntenseToReduced,0.0141,51
+Montane Cordillera,Coarse,ReducedToNone,0.0138,289
+Montane Cordillera,Coarse,IntenseToNone,0.0135,340
+Montane Cordillera,Coarse,ReducedToIntense,0.0141,-51
+Montane Cordillera,Coarse,NoneToReduced,0.0138,-289
+Montane Cordillera,Coarse,NoneToIntense,0.0135,-340
+Montane Cordillera,Medium,IntenseToReduced,0.0163,446
+Montane Cordillera,Medium,ReducedToNone,0.0159,115
+Montane Cordillera,Medium,IntenseToNone,0.0155,561
+Montane Cordillera,Medium,ReducedToIntense,0.0163,-446
+Montane Cordillera,Medium,NoneToReduced,0.0159,-115
+Montane Cordillera,Medium,NoneToIntense,0.0155,-561
+Montane Cordillera,Fine,IntenseToReduced,0.0073,31
+Montane Cordillera,Fine,ReducedToNone,0.0101,581
+Montane Cordillera,Fine,IntenseToNone,0.0129,613
+Montane Cordillera,Fine,ReducedToIntense,0.0073,-31
+Montane Cordillera,Fine,NoneToReduced,0.0101,-581
+Montane Cordillera,Fine,NoneToIntense,0.0129,-613
+Pacific Maritime,Coarse,IntenseToReduced,0.0175,105
+Pacific Maritime,Coarse,ReducedToNone,0.0153,638
+Pacific Maritime,Coarse,IntenseToNone,0.0132,743
+Pacific Maritime,Coarse,ReducedToIntense,0.0175,-105
+Pacific Maritime,Coarse,NoneToReduced,0.0153,-638
+Pacific Maritime,Coarse,NoneToIntense,0.0132,-743
+Pacific Maritime,Medium,IntenseToReduced,0.012,763
+Pacific Maritime,Medium,ReducedToNone,0.0131,807
+Pacific Maritime,Medium,IntenseToNone,0.0143,1570
+Pacific Maritime,Medium,ReducedToIntense,0.012,-763
+Pacific Maritime,Medium,NoneToReduced,0.0219,-1256
+Pacific Maritime,Medium,NoneToIntense,0.0143,-1570
+Pacific Maritime,Fine,IntenseToReduced,0.0091,533
+Pacific Maritime,Fine,ReducedToNone,0.0106,778
+Pacific Maritime,Fine,IntenseToNone,0.0121,1311
+Pacific Maritime,Fine,ReducedToIntense,0.0091,-533
+Pacific Maritime,Fine,NoneToReduced,0.031,-441
+Pacific Maritime,Fine,NoneToIntense,0.0121,-1311
+Subhumid Prairies,Coarse,IntenseToReduced,0.023,256
+Subhumid Prairies,Coarse,ReducedToNone,0.0266,411
+Subhumid Prairies,Coarse,IntenseToNone,0.0302,667
+Subhumid Prairies,Coarse,ReducedToIntense,0.023,-256
+Subhumid Prairies,Coarse,NoneToReduced,0.0266,-411
+Subhumid Prairies,Coarse,NoneToIntense,0.0302,-667
+Subhumid Prairies,Medium,IntenseToReduced,0.0271,331
+Subhumid Prairies,Medium,ReducedToNone,0.0287,320
+Subhumid Prairies,Medium,IntenseToNone,0.0302,651
+Subhumid Prairies,Medium,ReducedToIntense,0.0271,-331
+Subhumid Prairies,Medium,NoneToReduced,0.0287,-320
+Subhumid Prairies,Medium,NoneToIntense,0.0302,-651
+Subhumid Prairies,Fine,IntenseToReduced,0.0203,196
+Subhumid Prairies,Fine,ReducedToNone,0.023,189
+Subhumid Prairies,Fine,IntenseToNone,0.0257,385
+Subhumid Prairies,Fine,ReducedToIntense,0.0203,-196
+Subhumid Prairies,Fine,NoneToReduced,0.023,-189
+Subhumid Prairies,Fine,NoneToIntense,0.0257,-385

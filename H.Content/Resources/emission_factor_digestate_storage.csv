@@ -1,0 +1,10 @@
+Emission Type,Emission Origin,Emission Factor,Description
+Methane,Raw Digestate,0.59,Fraction of biodegraded TC in digestate during storage
+Methane,Liquid Fraction,0.59,Fraction of biodegraded TC in LF digestate during storage
+Methane,Solid Fraction,0.01,Fraction of biodegraded TC in SF digestate during storage
+Ammonia,Raw Digestate,0.36,Fraction of TAN in digestate before storage
+Ammonia,Liquid Fraction,0.44,Fraction of TAN in LF digestate before storage
+Ammonia,Solid Fraction,0.44,Fraction of TAN in SF digestate before storage
+NitrousOxide,Raw Digestate,0,Fraction of TAN in digestate before storage
+NitrousOxide,Liquid Fraction,0,Fraction of TAN in LF digestate before storage
+NitrousOxide,Solid Fraction,0.16,Fraction of TAN in SF digestate before storage

@@ -1,0 +1,467 @@
+SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,SOILNAME,KIND,WATERTBL,ROOTRESTRI,RESTR_TYPE,DRAINAGE,PMTEX1,PMTEX2,PMTEX3,PMCHEM1,PMCHEM2,PMCHEM3,MDEP1,MDEP2,MDEP3,ORDER2,G_GROUP2,S_GROUP2,ORDER3,G_GROUP3,S_GROUP3
+NLAARE1~~~N,NL,AAR,E1~~~,N,Aaron Cove,M,YU,4,PL,MW,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLABH~~~~~N,NL,ABH,~~~~~,N,Abraham,M,YU,0,-,MW,F,F,-,EA,AN,UD,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLABNE1~~~N,NL,ABN,E1~~~,N,Alderburn,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLABNE2~~~N,NL,ABN,E2~~~,N,Alderburn,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLABNE3~~~A,NL,ABN,E3~~~,A,Alderburn,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLABN~~~~~A,NL,ABN,~~~~~,A,Alderburn,M,YU,0,-,W,MS,MS,-,AN,AN,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLADLE1~~~N,NL,ADL,E1~~~,N,Adies Lake,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLADLE2~~~N,NL,ADL,E2~~~,N,Adies Lake,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLADP~~~~~N,NL,ADP,~~~~~,N,Adies Pond,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLAGL~~~~~N,NL,AGL,~~~~~,N,Anguille,M,YU,0,-,I,M,MS,-,EA,AN,AN,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLAGT~~~~~N,NL,AGT,~~~~~,N,Aguathuna,M,YB,0,-,P,FS,MS,-,AN,AN,AN,TILL,-,-,GL,LG,FE,GL,LG,FE
+NLAGV~~~~~N,NL,AGV,~~~~~,N,Angels Cove,M,YN,0,-,W,MF,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLALV~~~~~N,NL,ALV,~~~~~,N,Alluvium,M,YU,0,-,W,MS,MS,-,EA,EA,EA,FLUV,-,-,RG,R,GL,RG,R,GL
+NLASPE1~~~N,NL,ASP,E1~~~,N,Aspen Cove,M,YN,0,-,W,MS,MS,-,EA,EA,EA,MARI,-,-,PZ,HFP,O,PZ,HFP,O
+NLASPE2~~~N,NL,ASP,E2~~~,N,Aspen Cove,M,YN,0,-,W,MS,MS,-,EA,EA,EA,MARI,-,-,PZ,FHP,O,PZ,FHP,O
+NLATKE1~~~N,NL,ATK,E1~~~,N,Atlantic Lake,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLAYO~~~~~N,NL,AYO,~~~~~,N,Adey Brook,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLAYP~~~~~N,NL,AYP,~~~~~,N,Adey Pond,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLAYW~~~~~N,NL,AYW,~~~~~,N,Adey Town,M,YN,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLBAB~~~~~N,NL,BAB,~~~~~,N,Brown's Arm Brook,M,YU,0,-,VP,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBAC~~~~~N,NL,BAC,~~~~~,N,Black Duck Brook,M,YU,0,-,I,CS,CS,-,EA,EA,EA,MARI,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBAP~~~~~N,NL,BAP,~~~~~,N,Barry's Pond,M,YN,0,-,W,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBARE1~~~N,NL,BAR,E1~~~,N,Barachois,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBARE2~~~N,NL,BAR,E2~~~,N,Barachois,M,YN,0,-,P,M,M,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBAR~~~~~N,NL,BAR,~~~~~,N,Barachois,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBBB~~~~~N,NL,BBB,~~~~~,N,Black Bank Beach,M,YN,0,-,MW,C,CS,-,EA,EA,EA,MARI,-,-,PZ,HFP,O,PZ,HFP,O
+NLBBK~~~~~N,NL,BBK,~~~~~,N,Beaver Brook,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBCN~~~~~N,NL,BCN,~~~~~,N,Beach Point,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLBEP~~~~~N,NL,BEP,~~~~~,N,Butterpot,M,YN,0,-,R,MS,MS,-,EA,EA,UD,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBGF~~~~~N,NL,BGF,~~~~~,N,Big Falls,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBHPE1~~~N,NL,BHP,E1~~~,N,Berry Hill Pond,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBHPE2~~~N,NL,BHP,E2~~~,N,Berry Hill Pond,M,YN,0,-,P,M,M,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBHPE4~~~N,NL,BHP,E4~~~,N,Berry Hill Pond,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBHPE5~~~N,NL,BHP,E5~~~,N,Berry Hill Pond,M,YN,0,-,MW,M,M,-,EA,EA,UD,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLBHPE6~~~N,NL,BHP,E6~~~,N,Berry Hill Pond,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBHPE8~~~N,NL,BHP,E8~~~,N,Berry Hill Pond,M,YU,4,OR,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLBIB~~~~~N,NL,BIB,~~~~~,N,Big Tenth Brook,M,YN,0,-,R,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLBIG~~~~~N,NL,BIG,~~~~~,N,Big Cove,O,YB,0,-,P,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLBIP~~~~~N,NL,BIP,~~~~~,N,Bingles Pond,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBLG~~~~~N,NL,BLG,~~~~~,N,Blue Gulch,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLBLM~~~~~N,NL,BLM,~~~~~,N,Belman,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,OG,O,GL,G,O
+NLBMNE1~~~N,NL,BMN,E1~~~,N,Bald Mountain,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLBMNE2~~~N,NL,BMN,E2~~~,N,Bald Mountain,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBMS~~~~~N,NL,BMS,~~~~~,N,Brooms,M,YU,0,-,I,M,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBNR~~~~~N,NL,BNR,~~~~~,N,Blundon Brook,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBOW~~~~~N,NL,BOW,~~~~~,N,Bowater,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBRH~~~~~N,NL,BRH,~~~~~,N,Branch,M,YU,0,-,W,M,M,-,EA,EA,EA,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLBRPE1~~~N,NL,BRP,E1~~~,N,Bear Pond,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,BR,EB,O,BR,EB,O
+NLBRPE2~~~N,NL,BRP,E2~~~,N,Bear Pond,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,BR,EB,GL,BR,EB,GL
+NLBSP~~~~~N,NL,BSP,~~~~~,N,Butts Pond,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBSY~~~~~N,NL,BSY,~~~~~,N,Barasway,M,YU,0,-,R,FR,FR,-,EA,EA,EA,MARI,-,-,RG,OR,O,RG,R,O
+NLBTA~~~~~N,NL,BTA,~~~~~,N,Burnt Arm,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBTB~~~~~N,NL,BTB,~~~~~,N,Butts Bight,M,YN,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBTC~~~~~N,NL,BTC,~~~~~,N,Butts Cove,M,YU,0,-,I,M,M,M,EA,EA,EA,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLBTOE1~~~A,NL,BTO,E1~~~,A,Benton,M,YU,0,-,I,M,M,-,AN,AN,EA,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLBTOE3~~~N,NL,BTO,E3~~~,N,Benton,M,YB,0,-,P,M,M,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBTOE4~~~N,NL,BTO,E4~~~,N,Benton,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBUI~~~~~A,NL,BUI,~~~~~,A,Bauline,M,YU,0,-,W,MC,MC,-,AN,AN,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBUI~~~~~N,NL,BUI,~~~~~,N,Bauline,M,YU,8,PL,R,CS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,P,PZ,HFP,P
+NLBVT~~~~~N,NL,BVT,~~~~~,N,Bonavista,M,YN,0,-,MW,MS,MS,-,AN,AN,AN,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBWA~~~~~N,NL,BWA,~~~~~,N,Boswarlos,M,YU,0,-,I,MS,MS,-,WC,WC,WC,TILL,-,-,LU,GL,GL,LU,GL,GL
+NLBXJ~~~~~N,NL,BXJ,~~~~~,N,Block Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,F,ME,OR,F,ME
+NLBXV~~~~~N,NL,BXV,~~~~~,N,Blundon,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBYB~~~~~N,NL,BYB,~~~~~,N,Biscay Bay,M,YU,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLBYC~~~~~N,NL,BYC,~~~~~,N,Bulley's Cove,M,YN,0,-,VP,CS,CS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBYRE3~~~N,NL,BYR,E3~~~,N,Birchy Ridge,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLBYRE4~~~N,NL,BYR,E4~~~,N,Birchy Ridge,M,YN,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLBYR~~~~~N,NL,BYR,~~~~~,N,Birchy Ridge,M,YN,0,-,MW,MS,MS,-,EA,EA,UD,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLBYV~~~~~N,NL,BYV,~~~~~,N,Bay De Verde,M,YB,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,R,GL,G,R
+NLCAE~~~~~N,NL,CAE,~~~~~,N,Chapel Arm,M,YN,0,-,W,MS,MS,-,EA,EA,UD,TILL,-,-,BR,DYB,E,BR,DYB,E
+NLCAL~~~~~N,NL,CAL,~~~~~,N,Canal,M,YU,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLCAM~~~~~N,NL,CAM,~~~~~,N,Cambells Cove,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLCBCE1~~~N,NL,CBC,E1~~~,N,Come By Chance,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TME,OR,F,TME
+NLCBCE2~~~N,NL,CBC,E2~~~,N,Come By Chance,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,T,OR,F,T
+NLCBCE3~~~N,NL,CBC,E3~~~,N,Come by Chance,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,M,TFI,OR,M,TFI
+NLCBCE4~~~N,NL,CBC,E4~~~,N,Come By Chance,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,M,TFI,OR,M,TFI
+NLCBK~~~~~N,NL,CBK,~~~~~,N,Coal Brook,M,YU,4,OR,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLCCP~~~~~N,NL,CCP,~~~~~,N,Coopers Pond,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCCVE1~~~N,NL,CCV,E1~~~,N,Cox's Cove,M,YN,0,-,W,MF,MF,-,EA,EA,UD,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCCVE2~~~N,NL,CCV,E2~~~,N,Cox's Cove,M,YN,0,-,P,MS,MF,-,EA,AN,AN,TILL,-,-,GL,OG,O,GL,G,O
+NLCCVE3~~~N,NL,CCV,E3~~~,N,Cox's Cove,M,YU,0,-,P,MS,MF,-,EA,AN,AN,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCEA~~~~~N,NL,CEA,~~~~~,N,Crow Head,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,LU,GL,GL,LU,GL,GL
+NLCFC~~~~~N,NL,CFC,~~~~~,N,Comfort Cove,M,YN,0,-,W,MF,MF,-,EA,EA,EA,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+NLCGC~~~~~N,NL,CGC,~~~~~,N,Chignic,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLCHD~~~~~N,NL,CHD,~~~~~,N,Comfort Head,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCKE~~~~~N,NL,CKE,~~~~~,N,Crooked Feeder,M,YB,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,R,GL,G,R
+NLCLA~~~~~N,NL,CLA,~~~~~,N,Clambank Cove,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TY,OR,F,TY
+NLCLC~~~~~N,NL,CLC,~~~~~,N,Chapel Cove,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCMY~~~~~N,NL,CMY,~~~~~,N,Camp Mortley,M,YN,0,-,W,SM,SM,-,EA,EA,EA,LACU,-,-,PZ,HFP,O,PZ,HFP,O
+NLCOC~~~~~N,NL,COC,~~~~~,N,Cormack,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCOH~~~~~N,NL,COH,~~~~~,N,Cochrane,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCOI~~~~~N,NL,COI,~~~~~,N,Cointres Brook,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,TY,OR,H,TY
+NLCOL~~~~~A,NL,COL,~~~~~,A,Colinet,O,YB,0,-,MW,ME,ME,-,AN,AN,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLCOL~~~~~N,NL,COL,~~~~~,N,Colinet,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLCOYE1~~~N,NL,COY,E1~~~,N,Codroy,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLCOYE2~~~N,NL,COY,E2~~~,N,Codroy,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCOYE3~~~N,NL,COY,E3~~~,N,Codroy,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCOY~~~~~A,NL,COY,~~~~~,A,Codroy,M,YU,0,-,MW,MC,MC,-,WC,AN,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCOY~~~~~N,NL,COY,~~~~~,N,Codroy,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCPA~~~~~N,NL,CPA,~~~~~,N,Cape Anguille,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCRB~~~~~A,NL,CRB,~~~~~,A,Carbonear,M,YU,0,-,W,MC,MC,-,AN,AN,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLCRB~~~~~N,NL,CRB,~~~~~,N,Carbonear,M,YU,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCRYE1~~~N,NL,CRY,E1~~~,N,Cape Ray,M,YU,0,-,W,SM,SM,-,EA,EA,EA,MARI,-,-,RG,R,O,RG,R,O
+NLCTA~~~~~N,NL,CTA,~~~~~,N,Costa,M,YU,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCUE~~~~~N,NL,CUE,~~~~~,N,Cuslett,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLCWC~~~~~N,NL,CWC,~~~~~,N,Crow Cliff,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLDBB~~~~~N,NL,DBB,~~~~~,N,Dribble Brook,M,YU,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLDCP~~~~~N,NL,DCP,~~~~~,N,Dancing Point,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLDEL~~~~~N,NL,DEL,~~~~~,N,Deer Lake,M,YU,0,-,I,C,C,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLDNPE1~~~N,NL,DNP,E1~~~,N,Dunns Pond,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLDNPE2~~~N,NL,DNP,E2~~~,N,Dunns Pond,O,YB,0,-,P,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,TME,OR,H,TME
+NLDNPE3~~~N,NL,DNP,E3~~~,N,Dunns Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLDUS~~~~~N,NL,DUS,~~~~~,N,Doucets,M,YU,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,RG,R,O,RG,R,O
+NLDWDE1~~~A,NL,DWD,E1~~~,A,Deadwolf Pond,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TY,OR,F,TY
+NLDWDE2~~~N,NL,DWD,E2~~~,N,Deadwolf Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,F,ME,OR,F,ME
+NLDWDE3~~~N,NL,DWD,E3~~~,N,Deadwolf Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,F,TME,OR,F,TME
+NLDWDE4~~~N,NL,DWD,E4~~~,N,Deadwolf Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,TY,OR,M,TY
+NLDWDE5~~~N,NL,DWD,E5~~~,N,Deadwolf Pond,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,T,OR,F,T
+NLDWDE6~~~N,NL,DWD,E6~~~,N,Deadwolf Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,T,OR,M,T
+NLDWD~~~~~A,NL,DWD,~~~~~,A,Deadwolf Pond,O,YG,0,-,MW,ME,ME,-,AN,AN,-,SPPT,-,-,OR,M,TY,OR,M,TY
+NLDWD~~~~~N,NL,DWD,~~~~~,N,Deadwolf Pond,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLDYB~~~~~N,NL,DYB,~~~~~,N,Dogberry Brook,M,YB,0,-,VP,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,R,GL,G,R
+NLDYS~~~~~A,NL,DYS,~~~~~,A,Doyles,M,YU,0,-,I,M,M,-,WC,WC,WC,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+NLDYS~~~~~N,NL,DYS,~~~~~,N,Doyles,M,YU,0,-,I,FS,MS,-,AN,AN,AN,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+NLEBGE2~~~N,NL,EBG,E2~~~,N,Ebbegunbaeg,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,T,OR,M,T
+NLEBGE3~~~N,NL,EBG,E3~~~,N,Ebbegunbaeg,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLEBG~~~~~N,NL,EBG,~~~~~,N,Ebbegunbaeg,O,YB,0,-,P,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,TY,OR,M,TY
+NLELE~~~~~N,NL,ELE,~~~~~,N,Earle,M,YN,0,-,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLENP~~~~~N,NL,ENP,~~~~~,N,Evans Point,M,YU,0,-,VP,VC,VC,-,EA,EA,EA,FLUV,-,-,GL,G,O,GL,G,O
+NLEPT~~~~~N,NL,EPT,~~~~~,N,Eastport,M,YN,0,-,R,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLFAS~~~~~N,NL,FAS,~~~~~,N,Friars,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLFCV~~~~~N,NL,FCV,~~~~~,N,Friars Cove,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLFEL~~~~~N,NL,FEL,~~~~~,N,Felix Cove,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLFHCE1~~~N,NL,FHC,E1~~~,N,Frenchman's Cove,M,YU,4,OR,MW,SM,SM,-,EA,EA,EA,MARI,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLFHCE2~~~N,NL,FHC,E2~~~,N,Frenchman's Cove,M,YN,0,-,W,SM,SM,-,EA,EA,EA,MARI,-,-,PZ,FHP,O,PZ,FHP,O
+NLFHV~~~~~N,NL,FHV,~~~~~,N,Fair Haven,M,YU,5,PL,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,P,PZ,HFP,P
+NLFIRE1~~~N,NL,FIR,E1~~~,N,Fox Island River,O,YB,0,-,P,FI,FI,-,EA,EA,EA,FNPT,-,-,OR,F,TY,OR,F,TY
+NLFOGE1~~~N,NL,FOG,E1~~~,N,Fogo,M,YN,0,-,W,M,M,-,EA,EA,UD,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLFOGE2~~~N,NL,FOG,E2~~~,N,Fogo,M,YU,0,-,I,M,M,-,EA,EA,UD,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLFRPE1~~~N,NL,FRP,E1~~~,N,Freshwater Pond,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLFTBE1~~~N,NL,FTB,E1~~~,N,Flat Bay,O,YB,0,-,P,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,TY,OR,M,TY
+NLFTBE2~~~N,NL,FTB,E2~~~,N,Flat Bay,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLFXH~~~~~N,NL,FXH,~~~~~,N,Fox Harbour,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLFXP~~~~~N,NL,FXP,~~~~~,N,Foxtrap,M,YU,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLGAHE1~~~N,NL,GAH,E1~~~,N,Garrison Hill,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLGAHE2~~~N,NL,GAH,E2~~~,N,Garrison Hill,M,YU,4,OR,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLGAHE3~~~N,NL,GAH,E3~~~,N,Garrison Hill,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGBEE1~~~N,NL,GBE,E1~~~,N,Grand Beach,M,YN,0,-,MW,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGBEE2~~~N,NL,GBE,E2~~~,N,Grand Beach,M,YU,5,PL,MW,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,FHP,P,PZ,FHP,P
+NLGBEE3~~~N,NL,GBE,E3~~~,N,Grand Beach,M,YU,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLGBEE4~~~N,NL,GBE,E4~~~,N,Grand Beach,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,FHP,O,PZ,FHP,O
+NLGBH~~~~~A,NL,GBH,~~~~~,A,Grebs Head,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGCV~~~~~N,NL,GCV,~~~~~,N,Gull Cove,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLGCY~~~~~N,NL,GCY,~~~~~,N,Great Codroy,M,YN,0,-,MW,MS,MS,-,AN,AN,AN,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLGDRE1~~~N,NL,GDR,E1~~~,N,Gander,M,YN,0,-,W,MS,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGDRE2~~~N,NL,GDR,E2~~~,N,Gander,M,YB,0,-,P,M,M,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLGDRE3~~~N,NL,GDR,E3~~~,N,Gander,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLGDR~~~~~A,NL,GDR,~~~~~,A,Gander,M,YN,0,-,W,MS,MS,-,AN,AN,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGDR~~~~~N,NL,GDR,~~~~~,N,Gander,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGIL~~~~~N,NL,GIL,~~~~~,N,Gillard,M,YN,0,-,P,SM,SM,-,EA,EA,EA,FLUV,-,-,GL,G,O,GL,G,O
+NLGMBE1~~~N,NL,GMB,E1~~~,N,Gambo,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLGMBE2~~~N,NL,GMB,E2~~~,N,Gambo,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGMB~~~~~N,NL,GMB,~~~~~,N,Gambo,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLGMN~~~~~N,NL,GMN,~~~~~,N,Glide Mountain,M,YU,4,FP,MW,MF,MF,-,EA,EA,EA,TILL,-,-,PZ,HFP,FR,PZ,HFP,FR
+NLGOM~~~~~N,NL,GOM,~~~~~,N,Goose Arm,M,YU,0,-,I,MS,MS,-,WC,WC,WC,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLGRB~~~~~A,NL,GRB,~~~~~,A,Grebs Pond,M,YU,0,-,W,MS,MS,-,AN,WC,WC,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+NLGRDE1~~~N,NL,GRD,E1~~~,N,Grand Bay,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLGULE1~~~N,NL,GUL,E1~~~,N,Gulls Marsh,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLHBK~~~~~N,NL,HBK,~~~~~,N,Hughes Brooke,M,YN,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHBP~~~~~N,NL,HBP,~~~~~,N,Hobo Pond,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,CU,OR,H,CU
+NLHGPE1~~~N,NL,HGP,E1~~~,N,Hungry Grove Pond,M,YU,1,OR,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLHGPE2~~~N,NL,HGP,E2~~~,N,Hungry Grove Pond,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHGPE3~~~N,NL,HGP,E3~~~,N,Hungry Grove Pond,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLHGPE4~~~N,NL,HGP,E4~~~,N,Hungry Grove Pond,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLHOP~~~~~N,NL,HOP,~~~~~,N,Home Pond,M,YN,0,-,W,MS,MS,-,EA,AN,AN,TILL,-,-,GL,G,O,GL,G,O
+NLHOW~~~~~N,NL,HOW,~~~~~,N,Howley,M,YU,4,OR,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLHPD~~~~~N,NL,HPD,~~~~~,N,Hampden,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLHPO~~~~~N,NL,HPO,~~~~~,N,High Point,M,YU,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHRM~~~~~N,NL,HRM,~~~~~,N,Harrimans,M,YB,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,RG,R,GL,RG,R,GL
+NLHRVE1~~~A,NL,HRV,E1~~~,A,Harry's River,M,YN,0,-,W,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHRVE2~~~A,NL,HRV,E2~~~,A,Harry's River,M,YU,4,-,MW,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLHRVE3~~~N,NL,HRV,E3~~~,N,Harry's River,M,YN,0,-,P,MS,MS,-,EA,EA,EA,GLFL,-,-,GL,G,O,GL,G,O
+NLHRV~~~~~A,NL,HRV,~~~~~,A,Harry's River,M,YU,0,-,W,MS,MS,-,AN,AN,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHTC~~~~~N,NL,HTC,~~~~~,N,Hearts Content,M,YU,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLHUB~~~~~A,NL,HUB,~~~~~,A,Humber,M,YU,0,-,MW,M,M,-,WC,AN,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHUB~~~~~N,NL,HUB,~~~~~,N,Humber,M,YN,0,-,W,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHWD~~~~~N,NL,HWD,~~~~~,N,Hardwood,M,YN,0,-,R,MS,MS,-,EA,EA,EA,TILL,-,-,LU,GL,O,LU,GL,O
+NLHYO~~~~~N,NL,HYO,~~~~~,N,Holyrood,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLHYP~~~~~N,NL,HYP,~~~~~,N,Hynes Pond,O,YB,0,-,P,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLIDC~~~~~N,NL,IDC,~~~~~,N,Indian Cove,M,YU,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLIDN~~~~~N,NL,IDN,~~~~~,N,Indian Neck,M,YU,4,OR,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLILP~~~~~N,NL,ILP,~~~~~,N,Island Pond,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLINDE1~~~N,NL,IND,E1~~~,N,Indian Island,M,YN,0,-,W,MC,MC,-,EA,EA,EA,UNDO,-,-,PZ,FHP,O,PZ,FHP,O
+NLJACE1~~~N,NL,JAC,E1~~~,N,Jacques Fontaine,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLJACE2~~~N,NL,JAC,E2~~~,N,Jacques Fontaine,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLJACE3~~~N,NL,JAC,E3~~~,N,Jacques Fontaine,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLJACE4~~~N,NL,JAC,E4~~~,N,Jacques Fontaine,M,YU,4,PL,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,P,PZ,FHP,P
+NLJACE6~~~N,NL,JAC,E6~~~,N,Jacques Fontaine,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLJBO~~~~~N,NL,JBO,~~~~~,N,Junction Brook,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLJER~~~~~N,NL,JER,~~~~~,N,Jerry's Nose,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLJFY~~~~~N,NL,JFY,~~~~~,N,Jeffrey's,M,YU,5,OR,P,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GLOT,PZ,HFP,GLOT
+NLJSC~~~~~N,NL,JSC,~~~~~,N,Jesse Cove,O,YB,0,-,P,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLKGH~~~~~N,NL,KGH,~~~~~,N,Kingman Harbour,O,YB,0,-,P,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,M,FI,OR,M,FI
+NLKIC~~~~~N,NL,KIC,~~~~~,N,Kittyham Cove,O,YB,0,-,P,ME,HU,-,EA,EA,EA,UNDO,-,-,OR,H,TFI,OR,H,TFI
+NLKIPE1~~~N,NL,KIP,E1~~~,N,King's Point,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLKIPE2~~~N,NL,KIP,E2~~~,N,King's Point,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLKNC~~~~~N,NL,KNC,~~~~~,N,Kingman Cove,O,YB,0,-,P,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLKNF~~~~~N,NL,KNF,~~~~~,N,Kingford Cove,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,M,FI,OR,M,FI
+NLKNH~~~~~N,NL,KNH,~~~~~,N,Kingford Harbour,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLKPD~~~~~N,NL,KPD,~~~~~,N,Keats Pond,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLKTC~~~~~N,NL,KTC,~~~~~,N,Kite Cove,M,YB,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLKWS~~~~~N,NL,KWS,~~~~~,N,Kelligrews,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLAK~~~~~N,NL,LAK,~~~~~,N,Lakelannd,M,YN,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLLCV~~~~~N,NL,LCV,~~~~~,N,Loggers Cove,M,YU,3,OR,W,C,CS,-,EA,EA,EA,FLUV,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLLEA~~~~~A,NL,LEA,~~~~~,A,Lead,M,YU,0,-,W,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,SM,PZ,HFP,SM
+NLLEG~~~~~N,NL,LEG,~~~~~,N,Letbridge,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLFS~~~~~N,NL,LFS,~~~~~,N,Little Falls,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLGO~~~~~N,NL,LGO,~~~~~,N,Long Point,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLIV~~~~~N,NL,LIV,~~~~~,N,Little River,M,YU,0,-,I,MS,MS,-,EA,EA,EA,COLL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLMDE1~~~N,NL,LMD,E1~~~,N,Lomond,M,YN,0,-,MW,MC,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLMDE2~~~N,NL,LMD,E2~~~,N,Lomond,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLMDE3~~~N,NL,LMD,E3~~~,N,Lomond,M,YU,0,-,I,CS,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLMD~~~~~N,NL,LMD,~~~~~,N,Lomond,M,YU,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLMNE1~~~A,NL,LMN,E1~~~,A,Lamaline,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,SPPT,-,-,OR,M,THU,OR,M,THU
+NLLNB~~~~~N,NL,LNB,~~~~~,N,Little North Brook,M,YU,0,-,I,MF,MF,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLLPT~~~~~N,NL,LPT,~~~~~,N,Loon Point,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLRD~~~~~N,NL,LRD,~~~~~,N,Little Rapids,M,YN,0,-,I,MF,MF,-,EA,EA,EA,TILL,-,-,GL,HG,O,GL,HG,O
+NLLSP~~~~~N,NL,LSP,~~~~~,N,Lower Sandy Point,M,YU,0,-,W,C,CS,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLLTO~~~~~N,NL,LTO,~~~~~,N,Letbrook,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLLTP~~~~~N,NL,LTP,~~~~~,N,Let Pond,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLLVE~~~~~N,NL,LVE,~~~~~,N,Lourdes,M,YN,0,-,W,M,M,-,AN,AN,AN,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLWCE1~~~N,NL,LWC,E1~~~,N,Lower Cove,M,YN,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLLWCE2~~~N,NL,LWC,E2~~~,N,Lower Cove,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLLWCE3~~~N,NL,LWC,E3~~~,N,Lower Cove,M,YN,3,OR,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLLWCE5~~~N,NL,LWC,E5~~~,N,Lower Cove,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLLWP~~~~~N,NL,LWP,~~~~~,N,Low Point,M,YU,6,PL,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HP,P,PZ,HP,P
+NLMAB~~~~~N,NL,MAB,~~~~~,N,Milord Arm Brook,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLMAP~~~~~N,NL,MAP,~~~~~,N,Mattis Point,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLMAR~~~~~N,NL,MAR,~~~~~,N,Marches Point,O,YB,0,-,P,ME,ME,-,EA,EA,EA,SPPT,-,-,OR,M,TY,OR,M,TY
+NLMAX~~~~~N,NL,MAX,~~~~~,N,Maxwell,M,YU,3,OR,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLMCB~~~~~N,NL,MCB,~~~~~,N,Mcisaacs Brook,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,SPPT,-,-,OR,M,TY,OR,M,TY
+NLMCV~~~~~N,NL,MCV,~~~~~,N,Microwave,M,YU,0,-,P,MF,MF,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLMDA~~~~~N,NL,MDA,~~~~~,N,Milord Arm,M,YU,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLMDHE2~~~N,NL,MDH,E2~~~,N,Muddy Hole,M,YN,0,-,W,SM,SM,-,EA,EA,EA,MARI,-,-,PZ,FHP,O,PZ,FHP,O
+NLMDHE3~~~N,NL,MDH,E3~~~,N,Muddy Hole,M,NO,0,-,R,SM,SM,-,EA,EA,EA,MARI,-,-,RG,R,O,RG,R,O
+NLMHK~~~~~N,NL,MHK,~~~~~,N,Muddy Hole Brook,M,NO,0,-,VP,SM,SM,-,EA,EA,EA,GLFL,-,-,G,R,R,GL,G,R
+NLMHR~~~~~N,NL,MHR,~~~~~,N,Michael's Harbour,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLMIB~~~~~N,NL,MIB,~~~~~,N,Main Brook,M,YU,0,-,P,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLMICE1~~~N,NL,MIC,E1~~~,N,Michaels Harbour,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TME,OR,F,TME
+NLMIK~~~~~N,NL,MIK,~~~~~,N,Mistaken Pond,M,YU,0,-,I,C,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLMKD~~~~~N,NL,MKD,~~~~~,N,Markland,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLMKP~~~~~N,NL,MKP,~~~~~,N,Mistaken Point,O,YB,0,-,P,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLMLD~~~~~N,NL,MLD,~~~~~,N,Middland,M,YN,0,-,I,SM,SM,-,EA,EA,EA,FLUV,-,-,GL,G,O,GL,G,O
+NLMLP~~~~~N,NL,MLP,~~~~~,N,Mill Pond,M,YB,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLMLV~~~~~N,NL,MLV,~~~~~,N,Millville,M,YN,0,-,P,M,M,-,AN,AN,AN,TILL,-,-,GL,G,O,GL,G,O
+NLMMG~~~~~N,NL,MMG,~~~~~,N,Main Gut,M,YU,0,-,P,C,CS,-,EA,EA,EA,MARI,-,-,GL,G,O,GL,G,O
+NLMNU~~~~~N,NL,MNU,~~~~~,N,Manuels,M,YN,0,-,W,F,F,-,EA,EA,EA,TILL,-,-,BR,DYB,E,BR,DYB,E
+NLMOD~~~~~N,NL,MOD,~~~~~,N,Moose Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,SPPT,-,-,OR,M,T,OR,M,T
+NLMPDE1~~~N,NL,MPD,E1~~~,N,Mint Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,THU,OR,M,THU
+NLMPDE2~~~N,NL,MPD,E2~~~,N,Mint Pond,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLMPDE3~~~N,NL,MPD,E3~~~,N,Mint Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,M,FI,OR,M,FI
+NLMPDE4~~~N,NL,MPD,E4~~~,N,Mint Pond,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLMPDE5~~~N,NL,MPD,E5~~~,N,Mint Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,HU,OR,M,HU
+NLMPDE6~~~N,NL,MPD,E6~~~,N,Mint Pond,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,M,TFI,OR,M,TFI
+NLMPD~~~~~N,NL,MPD,~~~~~,N,Mint Pond,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLMPGE1~~~N,NL,MPG,E1~~~,N,Meelpaeg,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,SPPT,-,-,OR,M,T,OR,M,T
+NLMPGE2~~~N,NL,MPG,E2~~~,N,Meelpaeg,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLMRGE1~~~N,NL,MRG,E1~~~,N,Middle Ridge,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLMRGE2~~~N,NL,MRG,E2~~~,N,Middle Ridge,M,YN,0,-,VP,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLMTT~~~~~N,NL,MTT,~~~~~,N,Mutton,M,NO,0,-,R,C,CS,-,EA,EA,EA,EOLI,-,-,RG,R,O,RG,R,O
+NLMUP~~~~~N,NL,MUP,~~~~~,N,Musgrave Pond,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLMUW~~~~~N,NL,MUW,~~~~~,N,Musgrave Town,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLMVG~~~~~N,NL,MVG,~~~~~,N,Molychignic,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLMXC~~~~~N,NL,MXC,~~~~~,N,Mainland,M,YB,0,-,VP,MS,MS,-,EA,EA,EA,TILL,-,-,GL,LG,FE,GL,LG,FE
+NLNBK~~~~~N,NL,NBK,~~~~~,N,Ninth Brook,O,YB,0,-,P,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TY,OR,F,TY
+NLNBR~~~~~N,NL,NBR,~~~~~,N,New Bay River,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNBU~~~~~N,NL,NBU,~~~~~,N,North Harbour,M,YU,5,PL,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,P,PZ,FHP,P
+NLNBW~~~~~N,NL,NBW,~~~~~,N,North Bow,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLNCH~~~~~N,NL,NCH,~~~~~,N,Net Cove Head,M,YU,0,-,P,M,M,-,EA,EA,EA,GLMA,-,-,GL,G,R,GL,G,R
+NLNHA~~~~~N,NL,NHA,~~~~~,N,Northern Arm,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNHB~~~~~N,NL,NHB,~~~~~,N,Nichols Brook,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,HY,OR,F,HY
+NLNHO~~~~~N,NL,NHO,~~~~~,N,North Brook,M,YB,0,-,VP,MS,MS,-,WC,WC,WC,TILL,-,-,GL,G,R,GL,G,R
+NLNHV~~~~~N,NL,NHV,~~~~~,N,Nicholsville,M,YN,0,-,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLNOBE1~~~N,NL,NOB,E1~~~,N,North Bay,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNOBE2~~~N,NL,NOB,E2~~~,N,North Bay,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNOH~~~~~N,NL,NOH,~~~~~,N,North,M,YU,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLNOKE1~~~N,NL,NOK,E1~~~,N,North Lake,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNOKE2~~~N,NL,NOK,E2~~~,N,North Lake,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNOKE3~~~N,NL,NOK,E3~~~,N,North Lake,M,YB,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLNOKE4~~~N,NL,NOK,E4~~~,N,North Lake,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNOKE5~~~N,NL,NOK,E5~~~,N,North Lake,M,YN,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNOK~~~~~N,NL,NOK,~~~~~,N,North Lake,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNPD~~~~~N,NL,NPD,~~~~~,N,North Pond,M,YN,0,-,W,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNSA~~~~~N,NL,NSA,~~~~~,N,Norris Arm,M,YU,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNSD~~~~~N,NL,NSD,~~~~~,N,Newstead Harbour,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+NLNTC~~~~~N,NL,NTC,~~~~~,N,Net Cove,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+NLNTD~~~~~N,NL,NTD,~~~~~,N,North Dam,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLNWYE1~~~N,NL,NWY,E1~~~,N,New Bay,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNWYE2~~~N,NL,NWY,E2~~~,N,New Bay,M,YB,6,DU,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLNWYE3~~~N,NL,NWY,E3~~~,N,New Bay,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLNWYE4~~~N,NL,NWY,E4~~~,N,New Bay,M,YB,0,-,P,MS,MS,-,EA,EA,UD,TILL,-,-,GL,G,O,GL,G,O
+NLOCPE1~~~N,NL,OCP,E1~~~,N,Old Country Pond,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLOGS~~~~~N,NL,OGS,~~~~~,N,Oregans,M,YN,0,-,VP,MS,MS,-,WC,WC,WC,TILL,-,-,GL,G,O,GL,G,O
+NLOPC~~~~~N,NL,OPC,~~~~~,N,Old Perlican,M,YN,0,-,MW,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HP,O,PZ,HP,O
+NLOVF~~~~~N,NL,OVF,~~~~~,N,Overfalls,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,O,PZ,FHP,O
+NLPETE1~~~N,NL,PET,E1~~~,N,Peters Arm,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPETE2~~~N,NL,PET,E2~~~,N,Peters Arm,M,YU,4,OR,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLPETE3~~~N,NL,PET,E3~~~,N,Peters Arm,M,YU,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPHD~~~~~N,NL,PHD,~~~~~,N,Phillips Head,M,YB,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,BR,GLD,GL,BR,DYB,GL
+NLPHLE1~~~N,NL,PHL,E1~~~,N,Pot Hill,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPIG~~~~~N,NL,PIG,~~~~~,N,Pigeon Head,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLPJU~~~~~N,NL,PJU,~~~~~,N,Placentia Junction,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPLN~~~~~N,NL,PLN,~~~~~,N,Point Leamington,M,YN,0,-,I,MC,MC,-,EA,EA,EA,GLFL,-,-,GL,HFP,GL,PZ,HFP,GL
+NLPOC~~~~~N,NL,POC,~~~~~,N,Point Lance,M,YU,6,PL,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,FHP,P,PZ,FHP,P
+NLPOV~~~~~N,NL,POV,~~~~~,N,Patricks Cove,M,YU,4,PL,MW,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,FHP,P,PZ,FHP,P
+NLPPHE1~~~N,NL,PPH,E1~~~,N,Piper's Hole,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,FNPT,-,-,OR,M,T,OR,M,T
+NLPPHE2~~~N,NL,PPH,E2~~~,N,Pipers Hole,O,YB,0,-,P,FI,ME,-,EA,EA,EA,FNPT,-,-,OR,M,TFI,OR,M,TFI
+NLPPTE1~~~N,NL,PPT,E1~~~,N,Port Au Port,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPPTE2~~~N,NL,PPT,E2~~~,N,Port Au Port,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPPT~~~~~N,NL,PPT,~~~~~,N,Port Au Port,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPSV~~~~~N,NL,PSV,~~~~~,N,Peters River,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPTC~~~~~N,NL,PTC,~~~~~,N,Porters Cove,M,YU,0,-,P,MC,MC,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPTDE1~~~N,NL,PTD,E1~~~,N,Pitts Pond,M,YN,0,-,W,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPTDE2~~~N,NL,PTD,E2~~~,N,Pitts Pond,M,YU,4,OR,MW,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLPTDE3~~~N,NL,PTD,E3~~~,N,Pitts Pond,M,YU,0,-,I,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPTDE4~~~N,NL,PTD,E4~~~,N,Pitts Pond,M,YU,4,OR,MW,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLPTDE5~~~N,NL,PTD,E5~~~,N,Pitts Pond,M,YB,0,-,VP,CS,CS,-,EA,EA,EA,GLFL,-,-,GL,G,O,GL,G,O
+NLPTDE6~~~N,NL,PTD,E6~~~,N,Pitts Pond,M,YB,4,OR,I,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,GLOT,PZ,HFP,GLOT
+NLPTDE7~~~N,NL,PTD,E7~~~,N,Pitts Pond,M,YU,4,OR,MW,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLPTD~~~~~A,NL,PTD,~~~~~,A,Pitts Pond,M,YN,0,-,I,SM,SM,SM,AN,AN,EA,GLFL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPTD~~~~~N,NL,PTD,~~~~~,N,Pitts Pond,M,YN,0,-,W,CS,CS,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPTP~~~~~N,NL,PTP,~~~~~,N,Peters Pond,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPTR~~~~~N,NL,PTR,~~~~~,N,Peters Arm,M,YN,0,-,W,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPUV~~~~~A,NL,PUV,~~~~~,A,Pouch Cove,M,YU,0,-,MW,MC,MC,-,AN,AN,-,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPUV~~~~~N,NL,PUV,~~~~~,N,Pouch Cove,M,YU,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPYP~~~~~N,NL,PYP,~~~~~,N,Piccadilly Pond,M,YN,0,-,P,M,M,-,AN,AN,AN,TILL,-,-,GL,G,O,GL,G,O
+NLPYTE1~~~N,NL,PYT,E1~~~,N,Peyton,M,YU,5,OR,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GLOT,PZ,HFP,GLOT
+NLPYTE2~~~N,NL,PYT,E2~~~,N,Peyton,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLPYTE3~~~N,NL,PYT,E3~~~,N,Peyton,M,YU,4,OR,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLPYTE4~~~N,NL,PYT,E4~~~,N,Peyton,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLPYTE5~~~N,NL,PYT,E5~~~,N,Peyton,M,YU,5,OR,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLRAB~~~~~N,NL,RAB,~~~~~,N,Rabbit,M,YU,0,-,MW,M,M,-,AN,AN,AN,TILL,-,-,BR,DYB,GL,BR,DYB,GL
+NLRALE1~~~N,NL,RAL,E1~~~,N,Rainy Lake,O,YB,0,-,VP,FI,ME,-,EA,EA,EA,FNPT,-,-,OR,M,T,OR,M,T
+NLRCF~~~~~N,NL,RCF,~~~~~,N,Red Cliff Pond,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLRCV~~~~~N,NL,RCV,~~~~~,N,Red Cove,M,YU,0,-,W,MS,MS,-,EA,EA,UD,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLRDIE1~~~N,NL,RDI,E1~~~,N,Red Indian,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLRDIE2~~~N,NL,RDI,E2~~~,N,Red Indian,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLRDIE3~~~N,NL,RDI,E3~~~,N,Red Indian,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLRDIE4~~~N,NL,RDI,E4~~~,N,Red Indian,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLRED~~~~~N,NL,RED,~~~~~,N,Red Island,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,HU,OR,M,HU
+NLREI~~~~~N,NL,REI,~~~~~,N,Reidville,M,YN,0,-,W,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLRKL~~~~~N,NL,RKL,~~~~~,N,Rockland,N,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+NLRUN~~~~~N,NL,RUN,~~~~~,N,Round Head,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,LU,GL,O,LU,GL,O
+NLRVW~~~~~N,NL,RVW,~~~~~,N,Riverview,O,YB,0,-,VP,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,TY,OR,H,TY
+NLRYB~~~~~N,NL,RYB,~~~~~,N,Ryans Brook,M,YN,0,-,P,M,MS,-,EA,EA,EA,LACU,-,-,GL,G,O,GL,G,O
+NLSAC~~~~~N,NL,SAC,~~~~~,N,Sandring Ham Cove,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,M,M,TY,OR,M,T
+NLSAL~~~~~N,NL,SAL,~~~~~,N,Salmonier,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLSCV~~~~~N,NL,SCV,~~~~~,N,Seal Cove,M,YU,6,PL,R,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,P,PZ,HFP,P
+NLSDL~~~~~N,NL,SDL,~~~~~,N,Sandy Lake,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TY,OR,F,TY
+NLSEC~~~~~N,NL,SEC,~~~~~,N,Seamans Cove,O,YB,0,-,W,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,THU,OR,M,THU
+NLSEH~~~~~N,NL,SEH,~~~~~,N,Seamans Harbour,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLSELE1~~~N,NL,SEL,E1~~~,N,Seldom Cove,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TY,OR,F,TY
+NLSFDE1~~~N,NL,SFD,E1~~~,N,Sheffield Lake,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSFDE2~~~N,NL,SFD,E2~~~,N,Sheffield Lake,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSFDE3~~~N,NL,SFD,E3~~~,N,Sheffield Lake,M,YN,0,-,R,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,DU,PZ,HFP,DU
+NLSFDE4~~~N,NL,SFD,E4~~~,N,Sheffield Lake,M,YU,4,OR,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLSFDE6~~~N,NL,SFD,E6~~~,N,Sheffield Lake,M,YU,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLSGRE1~~~N,NL,SGR,E1~~~,N,St. George's,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSGRE2~~~N,NL,SGR,E2~~~,N,St. George's,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLSHA~~~~~N,NL,SHA,~~~~~,N,Sharrons Pond,O,YB,0,-,P,FI,FI,-,EA,EA,EA,UNDO,-,-,OR,F,TY,OR,F,TY
+NLSHB~~~~~A,NL,SHB,~~~~~,A,South Branch,M,YU,0,-,W,MS,MS,-,AN,AN,AN,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSHB~~~~~N,NL,SHB,~~~~~,N,South Branch,M,YN,0,-,W,MS,MS,-,AN,AN,AN,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSHE~~~~~N,NL,SHE,~~~~~,N,Sheaves Cove,O,YB,0,-,VP,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,F,ME,OR,F,ME
+NLSHI~~~~~N,NL,SHI,~~~~~,N,Ship Cove,O,YB,0,-,VP,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,T,OR,F,T
+NLSHR~~~~~N,NL,SHR,~~~~~,N,Snug Harbour,M,YU,0,-,I,SM,SM,-,EA,EA,EA,FLUV,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSHW~~~~~N,NL,SHW,~~~~~,N,Shearstown,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSLI~~~~~N,NL,SLI,~~~~~,N,Shoal Point,M,YN,0,-,R,FS,FS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLSLME1~~~N,NL,SLM,E1~~~,N,Salmon River,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSLW~~~~~N,NL,SLW,~~~~~,N,Smallwood,M,YN,0,-,VP,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSLYE1~~~N,NL,SLY,E1~~~,N,Sally's Cove,M,YN,0,-,R,CS,CS,-,EA,EA,EA,MARI,-,-,PZ,FHP,O,PZ,FHP,O
+NLSLYE2~~~N,NL,SLY,E2~~~,N,Sally's Cove,M,YU,0,-,I,CS,CS,-,EA,EA,EA,MARI,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLSMC~~~~~N,NL,SMC,~~~~~,N,Summerford Cove,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,TME,OR,F,TME
+NLSMH~~~~~N,NL,SMH,~~~~~,N,Summerford Harbour,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLSMOE1~~~N,NL,SMO,E1~~~,N,Silver Mountain,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSMOE2~~~N,NL,SMO,E2~~~,N,Silver Mountain,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSMOE3~~~N,NL,SMO,E3~~~,N,Silver Mountain,M,YU,1,OR,MW,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLSMOE4~~~N,NL,SMO,E4~~~,N,Silver Mountain,M,YN,0,-,MW,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSMOE5~~~N,NL,SMO,E5~~~,N,Silver Mountain,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLSMO~~~~~N,NL,SMO,~~~~~,N,Silver Mountain,M,YU,0,-,P,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSNB~~~~~N,NL,SNB,~~~~~,N,Snakes Bight,M,YU,4,PL,I,CS,CS,-,AN,AN,AN,TILL,-,-,PZ,HFP,P,PZ,HFP,P
+NLSNW~~~~~N,NL,SNW,~~~~~,N,St Andrews,M,YU,0,-,I,MS,CS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLSOC~~~~~N,NL,SOC,~~~~~,N,Salmon Cove,M,YB,0,-,P,MS,MS,-,EA,EA,EA,FLUV,-,-,GL,OG,O,GL,G,O
+NLSPIE1~~~N,NL,SPI,E1~~~,N,St. Paul's Inlet,M,YN,0,-,MW,C,C,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLSPIE2~~~N,NL,SPI,E2~~~,N,St. Paul's Inlet,M,YU,0,-,I,C,C,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSPRE1~~~N,NL,SPR,E1~~~,N,Serpentine Range,M,YU,0,-,I,M,M,-,AN,AN,AN,TILL,-,-,BR,EB,GL,BR,EB,GL
+NLSPRE2~~~N,NL,SPR,E2~~~,N,Serpentine Range,U,YB,0,-,I,C,C,-,EA,EA,EA,TILL,-,-,RG,R,GL,RG,R,GL
+NLSPRE3~~~N,NL,SPR,E3~~~,N,Serpentine Range,U,YU,0,-,I,C,C,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSPRE4~~~N,NL,SPR,E4~~~,N,Serpentine Range,U,YU,0,-,MW,C,C,-,EA,EA,EA,TILL,-,-,RG,R,O,RG,R,O
+NLSPT~~~~~N,NL,SPT,~~~~~,N,Square Point,M,YN,0,-,P,MF,MF,-,EA,EA,EA,TILL,-,-,GL,OG,O,GL,G,O
+NLSQD~~~~~N,NL,SQD,~~~~~,N,Square Pond,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLSSN~~~~~N,NL,SSN,~~~~~,N,Searston Bay,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+NLSSP~~~~~N,NL,SSP,~~~~~,N,St Stephen,M,YU,5,PL,MW,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,FHP,P,PZ,FHP,P
+NLSWM~~~~~N,NL,SWM,~~~~~,N,South West Arm,M,YN,0,-,I,SM,SM,-,EA,EA,EA,GLFL,-,-,GL,OG,O,GL,G,O
+NLSWSE1~~~N,NL,SWS,E1~~~,N,Swanger's,M,YN,0,-,MW,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,FHP,O,PZ,FHP,O
+NLSWSE2~~~N,NL,SWS,E2~~~,N,Swanger's,M,YU,4,OR,I,SM,SM,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLSXGE2~~~N,NL,SXG,E2~~~,N,Stephenville Crossi,M,YN,0,-,MW,C,C,-,EA,EA,EA,MARI,-,-,PZ,HFP,O,PZ,HFP,O
+NLSXGE3~~~N,NL,SXG,E3~~~,N,Stephenville Crossi,M,YU,0,-,I,C,C,-,EA,EA,EA,MARI,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLSXG~~~~~N,NL,SXG,~~~~~,N,Stephenville Crossi,M,YU,0,-,R,C,C,-,EA,EA,EA,MARI,-,-,RG,R,O,RG,R,O
+NLTBY~~~~~A,NL,TBY,~~~~~,A,Torbay,M,YB,0,-,I,MC,MC,-,AN,AN,-,TILL,-,-,GL,G,R,GL,G,R
+NLTBY~~~~~N,NL,TBY,~~~~~,N,Torbay,M,YB,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,R,GL,G,R
+NLTCP~~~~~N,NL,TCP,~~~~~,N,Turtle Creek Pond,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,T,OR,M,T
+NLTCV~~~~~N,NL,TCV,~~~~~,N,Tea Cove,M,YU,0,-,I,MS,MS,-,EA,EA,EA,FLUV,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLTEC~~~~~N,NL,TEC,~~~~~,N,Teaham Cove,O,YB,0,-,P,HU,HU,-,EA,EA,EA,UNDO,-,-,OR,H,T,OR,H,T
+NLTEH~~~~~N,NL,TEH,~~~~~,N,Templeman Harbour,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLTEM~~~~~N,NL,TEM,~~~~~,N,Templeman Cove,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,THU,OR,M,THU
+NLTEO~~~~~N,NL,TEO,~~~~~,N,Teaham Harbour,O,YB,0,-,P,FI,ME,-,EA,EA,EA,UNDO,-,-,OR,H,FI,OR,H,FI
+NLTEU~~~~~N,NL,TEU,~~~~~,N,Telford Harbour,O,YB,0,-,P,FI,FI,-,EA,EA,EA,SPPT,-,-,OR,F,ME,OR,F,ME
+NLTEV~~~~~N,NL,TEV,~~~~~,N,Three Rock Cove,M,YN,0,-,W,FR,FR,-,EA,EA,EA,MARI,-,-,RG,R,O,RG,R,O
+NLTHE~~~~~A,NL,THE,~~~~~,A,The Grasses,M,YU,0,-,W,MF,MF,-,EA,EA,EA,TILL,-,-,RG,R,O,RG,R,O
+NLTKV~~~~~N,NL,TKV,~~~~~,N,Turks Cove,M,YU,5,OR,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLTLC~~~~~N,NL,TLC,~~~~~,N,Turtle Creek,M,YN,0,-,W,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLTNAE1~~~N,NL,TNA,E1~~~,N,Terra Nova,M,YU,4,OR,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLTNAE2~~~N,NL,TNA,E2~~~,N,Terra Nova,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLTNA~~~~~N,NL,TNA,~~~~~,N,Terra Nova,M,YN,0,-,W,MC,MC,-,EA,EA,EA,GLFL,-,-,PZ,FHP,O,PZ,FHP,O
+NLTPSE2~~~N,NL,TPS,E2~~~,N,Tompkins,M,YN,0,-,W,M,M,-,EA,EA,EA,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+NLTPSE3~~~N,NL,TPS,E3~~~,N,Tompkins,U,YN,0,-,W,M,M,-,EA,EA,EA,GLFL,-,-,BR,DYB,E,BR,DYB,E
+NLTPSE4~~~N,NL,TPS,E4~~~,N,Tompkins,M,YN,0,-,P,M,M,-,EA,EA,EA,GLFL,-,-,GL,G,O,GL,G,O
+NLTPS~~~~~A,NL,TPS,~~~~~,A,Tompkins,M,YU,0,-,W,M,M,-,EA,EA,EA,FLUV,-,-,RG,R,O,RG,R,O
+NLTPY~~~~~N,NL,TPY,~~~~~,N,Trepassey,M,YU,7,PL,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,P,PZ,HFP,P
+NLTRVE1~~~N,NL,TRV,E1~~~,N,Trout River,M,NO,0,-,R,MS,MS,-,EA,EA,EA,MARI,-,-,PZ,HFP,O,PZ,HFP,O
+NLTSWE1~~~N,NL,TSW,E1~~~,N,Toslow,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLTSWE2~~~N,NL,TSW,E2~~~,N,Toslow,M,YN,0,-,W,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLTSWE3~~~N,NL,TSW,E3~~~,N,Toslow,M,YU,0,-,I,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLTSWE5~~~N,NL,TSW,E5~~~,N,Toslow,M,YN,0,-,W,CS,CS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLTTPE1~~~N,NL,TTP,E1~~~,N,The Topsails,M,YU,1,OR,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLTTPE2~~~N,NL,TTP,E2~~~,N,The Topsails,M,YU,1,OR,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLTTPE3~~~N,NL,TTP,E3~~~,N,The Topsails,M,YU,1,OR,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLTTPE4~~~N,NL,TTP,E4~~~,N,The Topsails,M,YU,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GL,PZ,FHP,GL
+NLTTPE5~~~N,NL,TTP,E5~~~,N,The Topsails,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLTTPE6~~~N,NL,TTP,E6~~~,N,The Topsails,M,YU,4,OR,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,OT,PZ,HFP,OT
+NLTTPE7~~~N,NL,TTP,E7~~~,N,The Topsails,M,YU,0,-,I,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,FHP,GLOT,PZ,FHP,GLOT
+NLTWIE1~~~N,NL,TWI,E1~~~,N,Twillingate,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLUFY~~~~~N,NL,UFY,~~~~~,N,Upper Ferry,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,TY,OR,M,TY
+NLUPP~~~~~N,NL,UPP,~~~~~,N,Upper Gullies,M,YN,0,-,P,MS,MS,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLVCP~~~~~N,NL,VCP,~~~~~,N,Victoria Pond,M,YU,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLVIV~~~~~N,NL,VIV,~~~~~,N,Vivian,M,YU,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLVOK~~~~~N,NL,VOK,~~~~~,N,Victors Brook,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,LU,GL,GL,LU,GL,GL
+NLWESE1~~~N,NL,WES,E1~~~,N,Wesleyville,M,YU,4,OR,W,M,M,-,EA,EA,EA,TILL,-,-,PZ,FHP,OT,PZ,FHP,OT
+NLWESE2~~~N,NL,WES,E2~~~,N,Wesleyville,M,YN,0,-,W,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLWFO~~~~~N,NL,WFO,~~~~~,N,Waterford,M,YB,0,-,I,CS,CS,-,EA,EA,EA,FLUV,-,-,GL,G,R,GL,G,R
+NLWGP~~~~~N,NL,WGP,~~~~~,N,Wing Pond,M,YU,0,-,I,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWHD~~~~~N,NL,WHD,~~~~~,N,Wiseman Head,M,YB,0,-,W,MC,MC,-,EA,EA,EA,UNDO,-,-,OR,FO,HE,OR,FO,HE
+NLWHV~~~~~N,NL,WHV,~~~~~,N,White River,M,YN,0,-,I,C,C,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLWIDE1~~~N,NL,WID,E1~~~,N,Woods Island,M,YN,0,-,MW,MC,MC,-,EA,EA,EA,MARI,-,-,PZ,HFP,O,PZ,HFP,O
+NLWIDE2~~~N,NL,WID,E2~~~,N,Woods Island,M,YN,0,-,P,MC,MC,-,EA,EA,EA,MARI,-,-,GL,G,O,GL,G,O
+NLWIDE3~~~N,NL,WID,E3~~~,N,Woods Island,M,YU,0,-,I,MC,MC,-,EA,EA,EA,MARI,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWOP~~~~~N,NL,WOP,~~~~~,N,Woody Cape,O,YB,0,-,P,ME,ME,-,EA,EA,EA,UNDO,-,-,OR,M,HU,OR,M,HU
+NLWPDE1~~~N,NL,WPD,E1~~~,N,Wedding Pond,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWSH~~~~~N,NL,WSH,~~~~~,N,Whetstone Hill,M,YB,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWSO~~~~~N,NL,WSO,~~~~~,N,West Pond,M,YN,0,-,P,MC,MC,-,EA,EA,EA,TILL,-,-,GL,G,O,GL,G,O
+NLWSPE1~~~N,NL,WSP,E1~~~,N,Westport,M,YN,0,-,MW,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+NLWSPE2~~~N,NL,WSP,E2~~~,N,Westport,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWSPE3~~~N,NL,WSP,E3~~~,N,Westport,M,YU,0,-,I,M,M,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL
+NLWTU~~~~~N,NL,WTU,~~~~~,N,Winterhouse,M,YN,0,-,I,MS,MS,-,EA,EA,EA,FLUV,-,-,LU,GL,O,LU,GL,O
+NLWTY~~~~~N,NL,WTY,~~~~~,N,West Bay,M,YN,0,-,MW,MS,MS,-,EA,EA,EA,FLUV,-,-,PZ,HFP,O,PZ,HFP,O
+NLWWK~~~~~N,NL,WWK,~~~~~,N,Wigwam Brook,M,YU,0,-,MW,MC,MC,-,EA,EA,EA,TILL,-,-,PZ,HFP,GL,PZ,HFP,GL

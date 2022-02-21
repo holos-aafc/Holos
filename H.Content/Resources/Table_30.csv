@@ -1,0 +1,4 @@
+Sheep Class, Cf (MJ d-1 kg-1), a (MJ kg-1), b (MJ kg-2), Initial Weight (kg), Final Weight (kg), Wool Production (kg year-1)
+Ewe,0.217,2.1,0.45,70,70,4
+Ram,0.25,2.5,0.35,125,125,4
+Weaned Lambs,0.236,3.25,0.385,30,50,0

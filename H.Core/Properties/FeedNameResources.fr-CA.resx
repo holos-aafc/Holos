@@ -1,0 +1,1991 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ADF" xml:space="preserve">
+    <value>FDA</value>
+  </data>
+  <data name="ADICP" xml:space="preserve">
+    <value>PBIDA</value>
+  </data>
+  <data name="ALA" xml:space="preserve">
+    <value>Ala</value>
+  </data>
+  <data name="AlfalfaCubes" xml:space="preserve">
+    <value>luzerne en cubes</value>
+  </data>
+  <data name="AlfalfaDehy" xml:space="preserve">
+    <value>luzerne déshydratée</value>
+  </data>
+  <data name="AlfalfaFresh" xml:space="preserve">
+    <value>luzerne fraîche</value>
+  </data>
+  <data name="AlfalfaGreenchop" xml:space="preserve">
+    <value>fourrage vert de luzerne</value>
+  </data>
+  <data name="AlfalfaHay" xml:space="preserve">
+    <value>foin de luzerne</value>
+  </data>
+  <data name="AlfalfaHaylage" xml:space="preserve">
+    <value>ensilage préfané de luzerne</value>
+  </data>
+  <data name="AlfalfaMeal" xml:space="preserve">
+    <value>farine de luzerne</value>
+  </data>
+  <data name="AlfalfaMedicago" xml:space="preserve">
+    <value>luzerne (Medicago sativa 17 % PB)</value>
+  </data>
+  <data name="AlmondHulls" xml:space="preserve">
+    <value>coques d'amandes</value>
+  </data>
+  <data name="AmmoniumPhosphateDibasic" xml:space="preserve">
+    <value>phosphate d'ammonium (dibasique)</value>
+  </data>
+  <data name="AmmoniumPhosphateMonobasic" xml:space="preserve">
+    <value>phosphate d'ammonium (monobasique)</value>
+  </data>
+  <data name="AmmoniumSulfate" xml:space="preserve">
+    <value>sulfate d'ammonium</value>
+  </data>
+  <data name="ApplePomace" xml:space="preserve">
+    <value>marc de pomme</value>
+  </data>
+  <data name="ApplePomaceWet" xml:space="preserve">
+    <value>pomme (marc, humide)</value>
+  </data>
+  <data name="ARG" xml:space="preserve">
+    <value>Arg</value>
+  </data>
+  <data name="Ash" xml:space="preserve">
+    <value>cendres  </value>
+  </data>
+  <data name="ASP" xml:space="preserve">
+    <value>Asp</value>
+  </data>
+  <data name="ATTDPhosphorus" xml:space="preserve">
+    <value>ATTP du P</value>
+  </data>
+  <data name="BakeryBreadMeal" xml:space="preserve">
+    <value>sous-produit de boulangerie-pâtisserie, pain, farine</value>
+  </data>
+  <data name="BakeryByProductMeal" xml:space="preserve">
+    <value>sous-produit de boulangerie-pâtisserie, farine de sous-produit</value>
+  </data>
+  <data name="BakeryCerealByProduct" xml:space="preserve">
+    <value>sous-produit de boulangerie-pâtisserie, sous-produit céréalier</value>
+  </data>
+  <data name="BakeryCookieByProduct" xml:space="preserve">
+    <value>sous-produit de boulangerie-pâtisserie, sous-produit de biscuits</value>
+  </data>
+  <data name="BakeryMeal" xml:space="preserve">
+    <value>farine de biscuit</value>
+  </data>
+  <data name="BakeryProducts" xml:space="preserve">
+    <value>produits de boulangerie-pâtisserie</value>
+  </data>
+  <data name="Barley" xml:space="preserve">
+    <value>orge</value>
+  </data>
+  <data name="BarleyDistillersDriedGrainsWithSolubles" xml:space="preserve">
+    <value>drêches sèches d'orge de distillerie avec solubles</value>
+  </data>
+  <data name="BarleyGrain" xml:space="preserve">
+    <value>grain d'orge</value>
+  </data>
+  <data name="BarleyGrainFlaked" xml:space="preserve">
+    <value>orge en flocons</value>
+  </data>
+  <data name="BarleyGrainRolled" xml:space="preserve">
+    <value>orge roulée</value>
+  </data>
+  <data name="BarleyHay" xml:space="preserve">
+    <value>foin d'orge</value>
+  </data>
+  <data name="BarleyHulless" xml:space="preserve">
+    <value>orge nue</value>
+  </data>
+  <data name="BarleyMaltSprouts" xml:space="preserve">
+    <value>orge, germes de malt</value>
+  </data>
+  <data name="BarleySilage" xml:space="preserve">
+    <value>ensilage d'orge </value>
+  </data>
+  <data name="BarleySilageHeaded" xml:space="preserve">
+    <value>ensilage d'orge, épiée</value>
+  </data>
+  <data name="BarleyStraw" xml:space="preserve">
+    <value>paille d'orge</value>
+  </data>
+  <data name="BeansPhaseolusSPP" xml:space="preserve">
+    <value>haricots, Phaseolus spp</value>
+  </data>
+  <data name="BeetPulpDry" xml:space="preserve">
+    <value>pulpe de betterave, sèche</value>
+  </data>
+  <data name="BeetPulpWet" xml:space="preserve">
+    <value>pulpe de betterave, humide</value>
+  </data>
+  <data name="BeetSugarPulpDried" xml:space="preserve">
+    <value>betterave à sucre, pulpe, séchée</value>
+  </data>
+  <data name="BermudaGrassCoastalHayEarlyHead" xml:space="preserve">
+    <value>chiendent pied-de-poule (Cynodon dactylon), zone côtière, foin, épiaison précoce</value>
+  </data>
+  <data name="BermudaGrassFresh" xml:space="preserve">
+    <value>chiendent pied-de-poule frais</value>
+  </data>
+  <data name="BermudaGrassHay" xml:space="preserve">
+    <value>foin de chiendent pied-de-poule</value>
+  </data>
+  <data name="BermudaGrassSilage" xml:space="preserve">
+    <value>ensilage de chiendent pied-de-poule</value>
+  </data>
+  <data name="BermudaGrassTiftonHayThreeTo4WeekGrowth" xml:space="preserve">
+    <value>chiendent pied-de-poule (Cynodon dactylon), Tifton-85, foin, croissance 3-4 sem</value>
+  </data>
+  <data name="BetaCarotene" xml:space="preserve">
+    <value>bêta carotène</value>
+  </data>
+  <data name="Biotin" xml:space="preserve">
+    <value>biotine</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>noir</value>
+  </data>
+  <data name="BloodCells" xml:space="preserve">
+    <value>cellules sanguines</value>
+  </data>
+  <data name="BloodCellsSprayDried" xml:space="preserve">
+    <value>cellules sanguines, séchées par pulvérisation</value>
+  </data>
+  <data name="BloodMeal" xml:space="preserve">
+    <value>farine de sang</value>
+  </data>
+  <data name="BloodMealBatchDried" xml:space="preserve">
+    <value>farine de sang, séchée par lots (données sur la composition à partir du séchage en anneau)</value>
+  </data>
+  <data name="BloodMealRingDried" xml:space="preserve">
+    <value>sang, farine, séchée en anneau</value>
+  </data>
+  <data name="BloodPlasma" xml:space="preserve">
+    <value>plasma sanguin</value>
+  </data>
+  <data name="BloodPlasmaSprayDried" xml:space="preserve">
+    <value>plasma sanguin, séché par pulvérisation</value>
+  </data>
+  <data name="BlueGrassHay" xml:space="preserve">
+    <value>foin de pâturin des prés</value>
+  </data>
+  <data name="BlueStemFresh" xml:space="preserve">
+    <value>barbon de Gérard frais</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="BlueStemHay" xml:space="preserve">
+    <value>foin de barbon de Gérard</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="BoneMeal" xml:space="preserve">
+    <value>farine d'os</value>
+  </data>
+  <data name="BrewersDriedGrains" xml:space="preserve">
+    <value>drêches sèches de brasserie</value>
+  </data>
+  <data name="BrewersGrains" xml:space="preserve">
+    <value>drêches de brasserie</value>
+  </data>
+  <data name="BrewersWetGrains" xml:space="preserve">
+    <value>drêches humides de brasserie</value>
+  </data>
+  <data name="BrewersYeast" xml:space="preserve">
+    <value>levure de brasserie</value>
+  </data>
+  <data name="BrewersYeastWet" xml:space="preserve">
+    <value>levure de brasserie, humide</value>
+  </data>
+  <data name="BromeGrassHay" xml:space="preserve">
+    <value>foin de brome</value>
+  </data>
+  <data name="BromeGrassSilage" xml:space="preserve">
+    <value>ensilage de brome</value>
+  </data>
+  <data name="Brown" xml:space="preserve">
+    <value>brun</value>
+  </data>
+  <data name="BuffaloGrass" xml:space="preserve">
+    <value>herbe aux bisons</value>
+  </data>
+  <data name="c120" xml:space="preserve">
+    <value>C-12:0</value>
+  </data>
+  <data name="c140" xml:space="preserve">
+    <value>C-14:0</value>
+  </data>
+  <data name="c160" xml:space="preserve">
+    <value>C-16:0</value>
+  </data>
+  <data name="c161" xml:space="preserve">
+    <value>C-16:1</value>
+  </data>
+  <data name="c180" xml:space="preserve">
+    <value>C-18:0</value>
+  </data>
+  <data name="c181" xml:space="preserve">
+    <value>C-18:1</value>
+  </data>
+  <data name="c182" xml:space="preserve">
+    <value>C-18:2</value>
+  </data>
+  <data name="c183" xml:space="preserve">
+    <value>C-18:3</value>
+  </data>
+  <data name="c184" xml:space="preserve">
+    <value>C-18:4</value>
+  </data>
+  <data name="c200" xml:space="preserve">
+    <value>C-20:0</value>
+  </data>
+  <data name="c201" xml:space="preserve">
+    <value>C-20:1</value>
+  </data>
+  <data name="c204" xml:space="preserve">
+    <value>C-20:4</value>
+  </data>
+  <data name="c205" xml:space="preserve">
+    <value>C-20:5</value>
+  </data>
+  <data name="c220" xml:space="preserve">
+    <value>C-22:0</value>
+  </data>
+  <data name="c221" xml:space="preserve">
+    <value>C-22:1</value>
+  </data>
+  <data name="c225" xml:space="preserve">
+    <value>C-22:5</value>
+  </data>
+  <data name="c226" xml:space="preserve">
+    <value>C-22:6</value>
+  </data>
+  <data name="c240" xml:space="preserve">
+    <value>C-24:0</value>
+  </data>
+  <data name="Ca" xml:space="preserve">
+    <value>Ca</value>
+  </data>
+  <data name="CalciumCarbonate" xml:space="preserve">
+    <value>carbonate de calcium</value>
+  </data>
+  <data name="CalciumChlorideAnhyrdrous" xml:space="preserve">
+    <value>chlorure de calcium anhydre</value>
+  </data>
+  <data name="CalciumChlorideDihydrate" xml:space="preserve">
+    <value>dihydrate de chlorure de calcium</value>
+  </data>
+  <data name="CalciumHydroxide" xml:space="preserve">
+    <value>hydroxyde de calcium</value>
+  </data>
+  <data name="CalciumOxide" xml:space="preserve">
+    <value>oxyde de calcium</value>
+  </data>
+  <data name="CalciumPhosphateMonobasic" xml:space="preserve">
+    <value>phosphate de calcium (monobasique)</value>
+  </data>
+  <data name="CalciumSulfateDihydrate" xml:space="preserve">
+    <value>dihydrate de sulfate de calcium</value>
+  </data>
+  <data name="CamelinaMeal" xml:space="preserve">
+    <value>tourteau de caméline</value>
+  </data>
+  <data name="CamelinaMealMech" xml:space="preserve">
+    <value>tourteau de caméline, extraction mécanique</value>
+  </data>
+  <data name="CaneFresh" xml:space="preserve">
+    <value>sorgho fourrager frais</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="CaneHay" xml:space="preserve">
+    <value>foin de sorgho fourrager</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="CaneSilage" xml:space="preserve">
+    <value>ensilage de sorgho fourrager</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="Canola" xml:space="preserve">
+    <value>canola</value>
+  </data>
+  <data name="CanolaFullFat" xml:space="preserve">
+    <value>canola, non déshuilé</value>
+  </data>
+  <data name="CanolaGrain" xml:space="preserve">
+    <value>grain de canola</value>
+  </data>
+  <data name="CanolaMeal" xml:space="preserve">
+    <value>tourteau de canola</value>
+  </data>
+  <data name="CanolaMealExpelled" xml:space="preserve">
+    <value>tourteau de canola, de presse continue</value>
+  </data>
+  <data name="CanolaMealMechExtracted" xml:space="preserve">
+    <value>canola, tourteau, extraction mécanique</value>
+  </data>
+  <data name="CanolaMealSolvent" xml:space="preserve">
+    <value>tourteau de canola (tourteau de colza), extraction au solvant</value>
+  </data>
+  <data name="CanolaSeed" xml:space="preserve">
+    <value>canola, graine</value>
+  </data>
+  <data name="Casein" xml:space="preserve">
+    <value>caséine</value>
+  </data>
+  <data name="CassavaMeal" xml:space="preserve">
+    <value>farine de manioc</value>
+  </data>
+  <data name="CB1ID" xml:space="preserve">
+    <value>CB1ID</value>
+  </data>
+  <data name="CB2ID" xml:space="preserve">
+    <value>CB2ID</value>
+  </data>
+  <data name="ChickPea" xml:space="preserve">
+    <value>pois chiches</value>
+  </data>
+  <data name="Chickpeas" xml:space="preserve">
+    <value>pois chiches</value>
+  </data>
+  <data name="ChocolateByProduct" xml:space="preserve">
+    <value>sous-produit du CHOCOLAT</value>
+  </data>
+  <data name="Choline" xml:space="preserve">
+    <value>choline</value>
+  </data>
+  <data name="CitrusPulp" xml:space="preserve">
+    <value>pulpe d'agrumes</value>
+  </data>
+  <data name="CitrusPulpDry" xml:space="preserve">
+    <value>pulpe d'agrumes, séchée</value>
+  </data>
+  <data name="CitrusPulpWet" xml:space="preserve">
+    <value>pulpe d'agrumes, humide</value>
+  </data>
+  <data name="Cl" xml:space="preserve">
+    <value>Cl</value>
+  </data>
+  <data name="Co" xml:space="preserve">
+    <value>Co</value>
+  </data>
+  <data name="Coarse" xml:space="preserve">
+    <value>grossier</value>
+  </data>
+  <data name="CobaltCarbonate" xml:space="preserve">
+    <value>carbonate de cobalt</value>
+  </data>
+  <data name="CopperSulfatePentahydrate" xml:space="preserve">
+    <value>sulfate de cuivre pentahydraté</value>
+  </data>
+  <data name="CopraExpelled" xml:space="preserve">
+    <value>coprah, de presse continue</value>
+  </data>
+  <data name="CopraMeal" xml:space="preserve">
+    <value>tourteau de coprah</value>
+  </data>
+  <data name="CopraMealMech" xml:space="preserve">
+    <value>tourteau de coprah, extraction mécanique</value>
+  </data>
+  <data name="CopraMealSolvent" xml:space="preserve">
+    <value>tourteau de coprah, extraction au solvant</value>
+  </data>
+  <data name="CornBran" xml:space="preserve">
+    <value>son de maïs</value>
+  </data>
+  <data name="CornCobs" xml:space="preserve">
+    <value>rafles de maïs </value>
+  </data>
+  <data name="CornDistillersDriedGrains" xml:space="preserve">
+    <value>drêches sèches de maïs de distillerie</value>
+  </data>
+  <data name="CornDistillersDriedGrainsSolubles" xml:space="preserve">
+    <value>drêches sèches de maïs de distillerie avec solubles</value>
+  </data>
+  <data name="CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil" xml:space="preserve">
+    <value>DDS de maïs, &gt;6 et &lt;9 % d'huile</value>
+  </data>
+  <data name="CornDistillersDriedGrainsSolublesGreaterThanTenPercentOil" xml:space="preserve">
+    <value>DDS de maïs, &gt;10 % d'huile</value>
+  </data>
+  <data name="CornDistillersDriedGrainsSolublesLessThanFourPercentOil" xml:space="preserve">
+    <value>DDS de maïs, &lt;4 % d'huile</value>
+  </data>
+  <data name="CornDistillersSolubles" xml:space="preserve">
+    <value>solubles de maïs de distillerie</value>
+  </data>
+  <data name="CornEarCorn" xml:space="preserve">
+    <value>maïs en épi</value>
+  </data>
+  <data name="CornEarlage" xml:space="preserve">
+    <value>ensilage d'épis de maïs</value>
+  </data>
+  <data name="CornGerm" xml:space="preserve">
+    <value>germe de maïs</value>
+  </data>
+  <data name="CornGermMeal" xml:space="preserve">
+    <value>tourteau de germe de maïs</value>
+  </data>
+  <data name="CornGlutenFeed" xml:space="preserve">
+    <value>maïs, gros gluten</value>
+  </data>
+  <data name="CornGlutenFeedAndDistillersGoldenSynergy" xml:space="preserve">
+    <value>drêches et gros gluten de maïs; Golden synergy™</value>
+  </data>
+  <data name="CornGlutenFeedDry" xml:space="preserve">
+    <value>gros gluten de maïs, sec</value>
+  </data>
+  <data name="CornGlutenFeedWet" xml:space="preserve">
+    <value>gros gluten de maïs humide</value>
+  </data>
+  <data name="CornGlutenFeedWetSweetBran" xml:space="preserve">
+    <value>gros gluten de maïs humide de marque; Sweet Bran™</value>
+  </data>
+  <data name="CornGlutenMeal" xml:space="preserve">
+    <value>farine de gluten de maïs</value>
+  </data>
+  <data name="CornGrain" xml:space="preserve">
+    <value>mais-grain</value>
+  </data>
+  <data name="CornGrainDry" xml:space="preserve">
+    <value>maïs-grain sec</value>
+  </data>
+  <data name="CornGrainHighMoisture" xml:space="preserve">
+    <value>maïs-grain humide</value>
+  </data>
+  <data name="CornGrainSteamFlaked" xml:space="preserve">
+    <value>maïs-grain en flocons, précuit à la vapeur</value>
+  </data>
+  <data name="CornGreenchop" xml:space="preserve">
+    <value>fourrage vert de maïs</value>
+  </data>
+  <data name="CornGritsHominyFeed" xml:space="preserve">
+    <value>gruau de maïs lessivé</value>
+  </data>
+  <data name="CornHominyFeed" xml:space="preserve">
+    <value>farine de maïs lessivé</value>
+  </data>
+  <data name="CornHpDistillersDriedGrains" xml:space="preserve">
+    <value>DDS de maïs RP</value>
+  </data>
+  <data name="CornNutridense" xml:space="preserve">
+    <value>maïs, Nutridense</value>
+  </data>
+  <data name="CornScreenings" xml:space="preserve">
+    <value>criblures de maïs</value>
+  </data>
+  <data name="CornSilage" xml:space="preserve">
+    <value>ensilage de maïs</value>
+  </data>
+  <data name="CornSnaplage" xml:space="preserve">
+    <value>ensilage de maïs épi-hampe </value>
+  </data>
+  <data name="CornStalklage" xml:space="preserve">
+    <value>ensilage de tiges de maïs</value>
+  </data>
+  <data name="CornStalks" xml:space="preserve">
+    <value>tiges de maïs</value>
+  </data>
+  <data name="CornSteep" xml:space="preserve">
+    <value>eau de trempage du maïs</value>
+  </data>
+  <data name="CornYellowCobs" xml:space="preserve">
+    <value>maïs, jaune, rafles</value>
+  </data>
+  <data name="CornYellowDent" xml:space="preserve">
+    <value>maïs jaune, denté</value>
+  </data>
+  <data name="CornYellowDistillersGrainSolublesDried" xml:space="preserve">
+    <value>maïs, jaune, drêches de distillerie avec solubles, séché</value>
+  </data>
+  <data name="CornYellowGlutenFeedDried" xml:space="preserve">
+    <value>maïs, jaune, gros gluten, séché</value>
+  </data>
+  <data name="CornYellowGlutenMealDried" xml:space="preserve">
+    <value>maïs, jaune, tourteau de gluten, séché</value>
+  </data>
+  <data name="CornYellowGrainAndCobDryGround" xml:space="preserve">
+    <value>maïs, jaune, grain et rafle, sec et broyé</value>
+  </data>
+  <data name="CornYellowGrainAndCobHighMoistureGround" xml:space="preserve">
+    <value>maïs, jaune, grain et rafle, teneur élevée en humidité, broyé</value>
+  </data>
+  <data name="CornYellowGrainCrackedDry" xml:space="preserve">
+    <value>maïs, jaune, grain sec concassé</value>
+  </data>
+  <data name="CornYellowGrainGraundDry" xml:space="preserve">
+    <value>maïs, jaune, grain sec broyé</value>
+  </data>
+  <data name="CornYellowGrainGroundHighMoisture" xml:space="preserve">
+    <value>maïs, jaune, grain humide broyé</value>
+  </data>
+  <data name="CornYellowGrainRolledHighMoisture" xml:space="preserve">
+    <value>maïs, jaune, grain humide roulé</value>
+  </data>
+  <data name="CornYellowGrainSteamFlacked" xml:space="preserve">
+    <value>maïs, jaune, grain, floconné et précuit à la vapeur</value>
+  </data>
+  <data name="CornYellowHominy" xml:space="preserve">
+    <value>maïs, jaune, lessivé</value>
+  </data>
+  <data name="CornYellowSilageImmature" xml:space="preserve">
+    <value>maïs, jaune immature ensilé (&lt;25 % MS)</value>
+  </data>
+  <data name="CornYellowSilageMature" xml:space="preserve">
+    <value>maïs, jaune mature ensilé (&gt;40 % MS)</value>
+  </data>
+  <data name="CornYellowSilageNormal" xml:space="preserve">
+    <value>maïs, jaune ensilé (32-38 % MS)</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>coût</value>
+  </data>
+  <data name="CottonBurrs" xml:space="preserve">
+    <value>bourre de coton</value>
+  </data>
+  <data name="CottonGinTrash" xml:space="preserve">
+    <value>résidus d'égrenage du coton</value>
+  </data>
+  <data name="CottonSeed" xml:space="preserve">
+    <value>graines de coton</value>
+  </data>
+  <data name="CottonseedFullFat" xml:space="preserve">
+    <value>graines de coton, non déshuilées</value>
+  </data>
+  <data name="CottonseedHulls" xml:space="preserve">
+    <value>coques de coton</value>
+  </data>
+  <data name="CottonseedMeal" xml:space="preserve">
+    <value>tourteau de coton</value>
+  </data>
+  <data name="CottonSeedMealMech" xml:space="preserve">
+    <value>tourteau de coton, extraction mécanique</value>
+  </data>
+  <data name="CottonSeedMealSolvent" xml:space="preserve">
+    <value>graines de coton, tourteau, extraction au solvant, 41 % PB</value>
+  </data>
+  <data name="CottonseedWhole" xml:space="preserve">
+    <value>graine de coton entière</value>
+  </data>
+  <data name="CottonSeedWholeWithLint" xml:space="preserve">
+    <value>graine de coton entières et vêtues</value>
+  </data>
+  <data name="CowPeas" xml:space="preserve">
+    <value>doliques</value>
+  </data>
+  <data name="Cr" xml:space="preserve">
+    <value>Cr</value>
+  </data>
+  <data name="CrudeProtein" xml:space="preserve">
+    <value>protéine brute</value>
+  </data>
+  <data name="Cu" xml:space="preserve">
+    <value>Cu</value>
+  </data>
+  <data name="CYS" xml:space="preserve">
+    <value>Cys</value>
+  </data>
+  <data name="DarkBrown" xml:space="preserve">
+    <value>brun foncé</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
+  </data>
+  <data name="DE" xml:space="preserve">
+    <value>ED</value>
+  </data>
+  <data name="DicalciumPhosphate" xml:space="preserve">
+    <value>phosphate dicalcique</value>
+  </data>
+  <data name="DistillersGrainPlusSolubleDry" xml:space="preserve">
+    <value>drêches de distillerie avec solubles, sèches</value>
+  </data>
+  <data name="DistillersGrainPlusSolubleModified" xml:space="preserve">
+    <value>drêches de distillerie avec solubles, modifées</value>
+  </data>
+  <data name="DistillersGrainPlusSolubleWet" xml:space="preserve">
+    <value>drêches de distillerie avec solubles, humides</value>
+  </data>
+  <data name="DistillersSolubles" xml:space="preserve">
+    <value>solubles de distillerie</value>
+  </data>
+  <data name="DriedYeast" xml:space="preserve">
+    <value>levure sèche</value>
+  </data>
+  <data name="DryMatter" xml:space="preserve">
+    <value>matière sèche</value>
+  </data>
+  <data name="DryPeas" xml:space="preserve">
+    <value>pois secs</value>
+  </data>
+  <data name="EDTA" xml:space="preserve">
+    <value>EDTA</value>
+  </data>
+  <data name="EggWholeSprayDried" xml:space="preserve">
+    <value>œuf, entier, déshydraté par pulvérisation</value>
+  </data>
+  <data name="FabaBeans" xml:space="preserve">
+    <value>féveroles</value>
+  </data>
+  <data name="Fallow" xml:space="preserve">
+    <value>jachère</value>
+  </data>
+  <data name="Fat" xml:space="preserve">
+    <value>gras</value>
+  </data>
+  <data name="FatAndOilsCalciumSoaps" xml:space="preserve">
+    <value>gras et huiles, savons de calcium</value>
+  </data>
+  <data name="FatAndOilsHydrolyzedTallowFattyAcids" xml:space="preserve">
+    <value>gras et huiles, acides gras de suif hydrolysés</value>
+  </data>
+  <data name="FatAndOilsPartiallyHydrogenatedTallow" xml:space="preserve">
+    <value>gras et huiles, suif partiellement hydrogéné</value>
+  </data>
+  <data name="FatAndOilsTallow" xml:space="preserve">
+    <value>gras et huiles, suif </value>
+  </data>
+  <data name="FatAndOilsVegitableOils" xml:space="preserve">
+    <value>gras et huiles, huiles végétales</value>
+  </data>
+  <data name="Fe" xml:space="preserve">
+    <value>Fe</value>
+  </data>
+  <data name="FeatherMeal" xml:space="preserve">
+    <value>farine de plumes</value>
+  </data>
+  <data name="FeathersHydrolizedMeal" xml:space="preserve">
+    <value>plumes, farine hydrolysée</value>
+  </data>
+  <data name="FeathersHydrolizedMealSomeViscera" xml:space="preserve">
+    <value>plumes, farine hydrolysée avec quelques viscères</value>
+  </data>
+  <data name="FeedName" xml:space="preserve">
+    <value>nom de l'aliment</value>
+  </data>
+  <data name="FescueHay" xml:space="preserve">
+    <value>foin de fétuque</value>
+  </data>
+  <data name="FieldPeas" xml:space="preserve">
+    <value>pois cultivés</value>
+  </data>
+  <data name="FieldPeasHighCP" xml:space="preserve">
+    <value>pois cultivés à teneur élevée en PB</value>
+  </data>
+  <data name="FieldPeasLowCP" xml:space="preserve">
+    <value>pois cultivés à faible teneur en PB</value>
+  </data>
+  <data name="FieldPeaSplits" xml:space="preserve">
+    <value>pois cassés cultivés</value>
+  </data>
+  <data name="Fine" xml:space="preserve">
+    <value>fin</value>
+  </data>
+  <data name="FishByProductsAnchovyMealMech" xml:space="preserve">
+    <value>sous-produits de poisson, anchois, farine, extraction mécanique</value>
+  </data>
+  <data name="FishByProductsMenhadenMealMech" xml:space="preserve">
+    <value>sous-produits de poisson, menhaden, farine, extraction mécanique</value>
+  </data>
+  <data name="FishMeal" xml:space="preserve">
+    <value>farine de poisson</value>
+  </data>
+  <data name="FishMealCombined" xml:space="preserve">
+    <value>farine de poisson, combiné</value>
+  </data>
+  <data name="FishMealMech" xml:space="preserve">
+    <value>farine de poisson, extraction mécanique</value>
+  </data>
+  <data name="FishProteinHydrolized" xml:space="preserve">
+    <value>protéine de poisson hydrolysée</value>
+  </data>
+  <data name="Flax" xml:space="preserve">
+    <value>lin</value>
+  </data>
+  <data name="Flaxseed" xml:space="preserve">
+    <value>graines de lin</value>
+  </data>
+  <data name="FlaxseedMeal" xml:space="preserve">
+    <value>tourteau de graines de lin</value>
+  </data>
+  <data name="FlaxseedMealMech" xml:space="preserve">
+    <value>tourteau de graines de lin, extraction mécanique</value>
+  </data>
+  <data name="FodderCorn" xml:space="preserve">
+    <value>maïs fourrager</value>
+  </data>
+  <data name="Folacin" xml:space="preserve">
+    <value>folacine</value>
+  </data>
+  <data name="Forage" xml:space="preserve">
+    <value>fourrage</value>
+  </data>
+  <data name="ForageSorghamFresh" xml:space="preserve">
+    <value>sorgho fourrager, frais</value>
+  </data>
+  <data name="ForageSorghamHay" xml:space="preserve">
+    <value>sorgho fourrager, foin</value>
+  </data>
+  <data name="ForageSorghamSilage" xml:space="preserve">
+    <value>ensilage de sorgho fourrager</value>
+  </data>
+  <data name="ForageSorghamSudan" xml:space="preserve">
+    <value>sorgho du Soudan fourrager </value>
+  </data>
+  <data name="ForageSorghamSudanHay" xml:space="preserve">
+    <value>foin de sorgho du Soudan  fourrager </value>
+  </data>
+  <data name="ForageSorghamSudanSilage" xml:space="preserve">
+    <value>ensilage de sorgho du Soudan fourrager </value>
+  </data>
+  <data name="FoxtailMillet" xml:space="preserve">
+    <value>millet des oiseaux</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>français</value>
+  </data>
+  <data name="FreshSoybeanForage" xml:space="preserve">
+    <value>fourrage vert de soya</value>
+  </data>
+  <data name="Gelatin" xml:space="preserve">
+    <value>gélatine</value>
+  </data>
+  <data name="Gleysol" xml:space="preserve">
+    <value>gleysol</value>
+  </data>
+  <data name="GLU" xml:space="preserve">
+    <value>Glu</value>
+  </data>
+  <data name="GLY" xml:space="preserve">
+    <value>GLY</value>
+  </data>
+  <data name="Glycerin" xml:space="preserve">
+    <value>glycérine</value>
+  </data>
+  <data name="GrainCorn" xml:space="preserve">
+    <value>maïs-grain</value>
+  </data>
+  <data name="GrainSorghum" xml:space="preserve">
+    <value>sorgho-grain</value>
+  </data>
+  <data name="GrainSorghumFlaked" xml:space="preserve">
+    <value>sorgho-grain, flocons</value>
+  </data>
+  <data name="GrainSorghumGrain" xml:space="preserve">
+    <value>graine de sorgho-grain</value>
+  </data>
+  <data name="GrainSorghumHay" xml:space="preserve">
+    <value>foin de sorgho-grain</value>
+  </data>
+  <data name="GrainSorghumHighMoisture" xml:space="preserve">
+    <value>sorgho-grain, humide</value>
+  </data>
+  <data name="GrainSorghumSilage" xml:space="preserve">
+    <value>ensilage de sorgho-grain</value>
+  </data>
+  <data name="GrainSorghumStalks" xml:space="preserve">
+    <value>tiges de sorgho-grain</value>
+  </data>
+  <data name="GrapePomaceDry" xml:space="preserve">
+    <value>marc de raisin, sec</value>
+  </data>
+  <data name="GrapePomaceWet" xml:space="preserve">
+    <value>marc de raisin, humide</value>
+  </data>
+  <data name="GrassesCoolHayAllSamples" xml:space="preserve">
+    <value>graminées de saison froide, foin, tous les échantillons</value>
+  </data>
+  <data name="GrassesCoolHayImmature" xml:space="preserve">
+    <value>graminées de saison froide, foin, immature (&lt;35 % NDF)</value>
+  </data>
+  <data name="GrassesCoolHayMature" xml:space="preserve">
+    <value>graminées de saison froide, foin, mature (&gt;60 % NDF)</value>
+  </data>
+  <data name="GrassesCoolHayMidMaturity" xml:space="preserve">
+    <value>graminées de saison froide, foin, mi-maturité (35-60 % NDF)</value>
+  </data>
+  <data name="GrassesCoolPastureIntense" xml:space="preserve">
+    <value>graminées de saison froide, pâturage, gestion intensive</value>
+  </data>
+  <data name="GrassesCoolSilageAllSamples" xml:space="preserve">
+    <value>graminées de saison froide, ensilage, tous les échantillons</value>
+  </data>
+  <data name="GrassesCoolSilageImmature" xml:space="preserve">
+    <value>graminées de saison froide, ensilage, immature (&lt;35 % NDF)</value>
+  </data>
+  <data name="GrassesCoolSilageMature" xml:space="preserve">
+    <value>graminées de saison froide, ensilage, mature (&gt;60 % NDF)</value>
+  </data>
+  <data name="GrassesCoolSilageMidMaturity" xml:space="preserve">
+    <value>graminées de saison froide, ensilage, mi-maturité (35-60 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeHayImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), foin, immature (&lt;47 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeHayMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), foin, mature (&gt;53 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeHayMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), foin, mi-maturité (47-53 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeSilageImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), ensilage, immature (&lt;47 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeSilageMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), ensilage, mature (&gt;53 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesMixedGrassAndLegumeSilageMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, mixtes (12-15 % hémicellulose), ensilage, mi-maturité (47-53 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassHayImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), foin, immature (&lt;51 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassHayMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), foin, mature (&gt;57 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassHayMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), foin, mi-maturité (51-57 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassSilageImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), ensilage, immature (&lt;51 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassSilageMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), ensilage, mature (&gt;57 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomGrassSilageMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, graminées en majorité (17-22 % hémicellulose), ensilage, mi-maturité (51-57 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesHayImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), foin, immature (&lt;44 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesHayMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), foin, mature (&gt;50 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesHayMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), foin, mi-maturité (44-50 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesSilageImmature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), ensilage, immature (&lt;44 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesSilageMature" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), ensilage, mature (&gt;50 % NDF)</value>
+  </data>
+  <data name="GrassLegumeMixturesPredomLegumesSilageMidMaturity" xml:space="preserve">
+    <value>graminées-légumineuses mélangées, légumineuses en majorité (10-13 % hémicellulose), ensilage, mi-maturité (44-50 % NDF)</value>
+  </data>
+  <data name="HayGrass" xml:space="preserve">
+    <value>foin de graminées</value>
+  </data>
+  <data name="HayLegume" xml:space="preserve">
+    <value>foin de légumineuses</value>
+  </data>
+  <data name="HayMixed" xml:space="preserve">
+    <value>foin mixte</value>
+  </data>
+  <data name="Hemicellulose" xml:space="preserve">
+    <value>hémicellulose</value>
+  </data>
+  <data name="HIS" xml:space="preserve">
+    <value>histidine</value>
+  </data>
+  <data name="Hominy" xml:space="preserve">
+    <value>maïs lessivé</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>heures</value>
+  </data>
+  <data name="I" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="IDF" xml:space="preserve">
+    <value>FIL</value>
+  </data>
+  <data name="IFN" xml:space="preserve">
+    <value>IFN</value>
+  </data>
+  <data name="ILE" xml:space="preserve">
+    <value>isoleucine</value>
+  </data>
+  <data name="IronSulfate" xml:space="preserve">
+    <value>sulfate ferreux</value>
+  </data>
+  <data name="IV" xml:space="preserve">
+    <value>indice d'iode</value>
+  </data>
+  <data name="IVP" xml:space="preserve">
+    <value>indice d'iode d'un produit</value>
+  </data>
+  <data name="JohnsonGrass" xml:space="preserve">
+    <value>sorgho d'Alep</value>
+  </data>
+  <data name="K" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="KdCB1" xml:space="preserve">
+    <value>KdCB1</value>
+  </data>
+  <data name="KdCB2" xml:space="preserve">
+    <value>KdCB2</value>
+  </data>
+  <data name="KdCB3" xml:space="preserve">
+    <value>KdCB3</value>
+  </data>
+  <data name="kdPB" xml:space="preserve">
+    <value>KdpB</value>
+  </data>
+  <data name="KidneyBeansExtruded" xml:space="preserve">
+    <value>haricots, extrudés</value>
+  </data>
+  <data name="KidneyBeansRaw" xml:space="preserve">
+    <value>haricots, bruts</value>
+  </data>
+  <data name="Kochia" xml:space="preserve">
+    <value>kochia à balais</value>
+  </data>
+  <data name="KochiaSilage" xml:space="preserve">
+    <value>ensilage de kochia à balais</value>
+  </data>
+  <data name="LabelEe" xml:space="preserve">
+    <value>EE</value>
+  </data>
+  <data name="Lactose" xml:space="preserve">
+    <value>lactose</value>
+  </data>
+  <data name="LegumesForageHayAllSamples" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, foin, tous les échantillons</value>
+  </data>
+  <data name="LegumesForageHayImmature" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, foin, immature (&lt;40 % NDF)</value>
+  </data>
+  <data name="LegumesForageHayMature" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, foin, mature (&gt;46 % NDF)</value>
+  </data>
+  <data name="LegumesForageHayMidMaturity" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, foin, mi-maturité (40-46 % NDF)</value>
+  </data>
+  <data name="LegumesForagePastureIntense" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, pâturage, gestion intensive</value>
+  </data>
+  <data name="LegumesForageSilageAllSamples" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, ensilage, tous les échantillons</value>
+  </data>
+  <data name="LegumesForageSilageImmature" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, ensilage, immature (&lt;40 % NDF)</value>
+  </data>
+  <data name="LegumesForageSilageMature" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, ensilage, mature (&gt;46 % NDF)</value>
+  </data>
+  <data name="LegumesForageSilageMidMaturity" xml:space="preserve">
+    <value>LÉGUMINEUSES, FOURRAGE, ensilage, mi-maturité (40-46 % NDF)</value>
+  </data>
+  <data name="Lentils" xml:space="preserve">
+    <value>lentilles</value>
+  </data>
+  <data name="LEU" xml:space="preserve">
+    <value>LEU</value>
+  </data>
+  <data name="Lignin" xml:space="preserve">
+    <value>lignine</value>
+  </data>
+  <data name="Limestone" xml:space="preserve">
+    <value>pierre à chaux</value>
+  </data>
+  <data name="LimestoneDilomiticMagnesium" xml:space="preserve">
+    <value>pierre à chaux dolomitique, magnésium</value>
+  </data>
+  <data name="LinSeedFlaxMealSolvent" xml:space="preserve">
+    <value>tourteau de lin, extraction au solvant</value>
+  </data>
+  <data name="LinseedMeal" xml:space="preserve">
+    <value>tourteau de lin</value>
+  </data>
+  <data name="Lupins" xml:space="preserve">
+    <value>lupin</value>
+  </data>
+  <data name="LupinSeed" xml:space="preserve">
+    <value>graine de lupin</value>
+  </data>
+  <data name="LYS" xml:space="preserve">
+    <value>LYS</value>
+  </data>
+  <data name="MagnesiumCarbonate" xml:space="preserve">
+    <value>carbonate de magnésium</value>
+  </data>
+  <data name="MagnesiumChlorideHexahydrate" xml:space="preserve">
+    <value>chlorure de magnésium hexahydrate</value>
+  </data>
+  <data name="MagnesiumHydroxide" xml:space="preserve">
+    <value>hydroxyde de magnésium</value>
+  </data>
+  <data name="MagnesiumOxide" xml:space="preserve">
+    <value>oxyde de magnésium</value>
+  </data>
+  <data name="MagnesiumSulfateHeptahydrate" xml:space="preserve">
+    <value>sulfate de magnésium heptahydrate</value>
+  </data>
+  <data name="ManganeseCarbonate" xml:space="preserve">
+    <value>carbonate de manganèse</value>
+  </data>
+  <data name="ManganeseOxide" xml:space="preserve">
+    <value>oxydes de manganèse</value>
+  </data>
+  <data name="ManganeseSulfateMonohydrate" xml:space="preserve">
+    <value>monohydrate de sulfate de manganèse</value>
+  </data>
+  <data name="ManganeseSulfatePentahydrate" xml:space="preserve">
+    <value>pentahydrate de sulfate de manganèse</value>
+  </data>
+  <data name="ME" xml:space="preserve">
+    <value>énergie métabolisée</value>
+  </data>
+  <data name="MeadowHay" xml:space="preserve">
+    <value>foin de prairie</value>
+  </data>
+  <data name="MeatAndBoneMealPhosphorusGreaterThanFourPercent" xml:space="preserve">
+    <value>farine de viande et d'os, P &gt; 4 %</value>
+  </data>
+  <data name="MeatBoneMeal" xml:space="preserve">
+    <value>farine de viande et d'os</value>
+  </data>
+  <data name="MeatMeal" xml:space="preserve">
+    <value>farine de viande</value>
+  </data>
+  <data name="MeatMealRendered" xml:space="preserve">
+    <value>VIANDE, farine, équarrie</value>
+  </data>
+  <data name="MeatMeatAndBoneRendered" xml:space="preserve">
+    <value>VIANDE, viande et os, équarris</value>
+  </data>
+  <data name="Mesisol" xml:space="preserve">
+    <value>mésisol</value>
+  </data>
+  <data name="MET" xml:space="preserve">
+    <value>MET</value>
+  </data>
+  <data name="Mg" xml:space="preserve">
+    <value>Mg</value>
+  </data>
+  <data name="Millet" xml:space="preserve">
+    <value>millet</value>
+  </data>
+  <data name="MilletForageFresh" xml:space="preserve">
+    <value>millet fourrager frais</value>
+  </data>
+  <data name="MilletForageHay" xml:space="preserve">
+    <value>foin de millet </value>
+  </data>
+  <data name="MilletGrain" xml:space="preserve">
+    <value>graine de millet</value>
+  </data>
+  <data name="MilletSilage" xml:space="preserve">
+    <value>ensilage de millet </value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Mn" xml:space="preserve">
+    <value>Mn</value>
+  </data>
+  <data name="Mo" xml:space="preserve">
+    <value>Mo</value>
+  </data>
+  <data name="MolassesBeet" xml:space="preserve">
+    <value>mélasse, betterave</value>
+  </data>
+  <data name="MolassesBeetSugar" xml:space="preserve">
+    <value>mélasse, betterave à sucre</value>
+  </data>
+  <data name="MolassesCane" xml:space="preserve">
+    <value>mélasse, canne à sucre</value>
+  </data>
+  <data name="MolassesSugarBeets" xml:space="preserve">
+    <value>mélasse, betterave à sucre</value>
+  </data>
+  <data name="MolassesSugarCane" xml:space="preserve">
+    <value>mélasse, canne à sucre</value>
+  </data>
+  <data name="MUFA" xml:space="preserve">
+    <value>acide gras monoinsaturé; AGMI</value>
+  </data>
+  <data name="Mustard" xml:space="preserve">
+    <value>moutarde</value>
+  </data>
+  <data name="Na" xml:space="preserve">
+    <value>Na</value>
+  </data>
+  <data name="NativePrairieHay" xml:space="preserve">
+    <value>foin de prairie naturelle</value>
+  </data>
+  <data name="NDF" xml:space="preserve">
+    <value>FDN</value>
+  </data>
+  <data name="NEga" xml:space="preserve">
+    <value>NEg</value>
+  </data>
+  <data name="NelThreeX" xml:space="preserve">
+    <value>NEL-3x</value>
+  </data>
+  <data name="NEma" xml:space="preserve">
+    <value>valeur énergétique nette pour l'entretien</value>
+  </data>
+  <data name="Niacin" xml:space="preserve">
+    <value>niacine</value>
+  </data>
+  <data name="OA" xml:space="preserve">
+    <value>OA</value>
+  </data>
+  <data name="OatForage" xml:space="preserve">
+    <value>fourrage d'avoine</value>
+  </data>
+  <data name="OatGrain" xml:space="preserve">
+    <value>grain d'avoine</value>
+  </data>
+  <data name="OatGroats" xml:space="preserve">
+    <value>gruau d'avoine</value>
+  </data>
+  <data name="OatHay" xml:space="preserve">
+    <value>foin d'avoine</value>
+  </data>
+  <data name="OatHayHeaded" xml:space="preserve">
+    <value>foin d'avoine, épiée</value>
+  </data>
+  <data name="OatHulls" xml:space="preserve">
+    <value>écales d'avoine</value>
+  </data>
+  <data name="Oatlage" xml:space="preserve">
+    <value>ensilage d'avoine</value>
+  </data>
+  <data name="Oats" xml:space="preserve">
+    <value>avoine</value>
+  </data>
+  <data name="OatsGrainRolled" xml:space="preserve">
+    <value>avoine, grain, roulée</value>
+  </data>
+  <data name="OatsHayHeaded" xml:space="preserve">
+    <value>avoine, foin, épiée</value>
+  </data>
+  <data name="OatSilageHeaded" xml:space="preserve">
+    <value>ensilage d'avoine, épiée</value>
+  </data>
+  <data name="OatsNaked" xml:space="preserve">
+    <value>avoine, nue</value>
+  </data>
+  <data name="OatsRolledDehulled" xml:space="preserve">
+    <value>avoine, roulée, déglumée</value>
+  </data>
+  <data name="OatsSilageHeaded" xml:space="preserve">
+    <value>avoine, ensilage, épiée</value>
+  </data>
+  <data name="OatStraw" xml:space="preserve">
+    <value>paille d'avoine</value>
+  </data>
+  <data name="Oilseeds" xml:space="preserve">
+    <value>oléagineux</value>
+  </data>
+  <data name="Oligosaccharides" xml:space="preserve">
+    <value>oligosaccharides</value>
+  </data>
+  <data name="Onions" xml:space="preserve">
+    <value>oignons</value>
+  </data>
+  <data name="OrchardgrassHay" xml:space="preserve">
+    <value>foin de dactyle pelotonné</value>
+  </data>
+  <data name="OystershellGround" xml:space="preserve">
+    <value>coquilles d'huîtres moulues</value>
+  </data>
+  <data name="P" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="PalmKernelExpelled" xml:space="preserve">
+    <value>tourteau de palmiste, de presse continue</value>
+  </data>
+  <data name="PalmKernelMeal" xml:space="preserve">
+    <value>tourteau de palmiste</value>
+  </data>
+  <data name="PalmKernelMealMech" xml:space="preserve">
+    <value>tourteau de palmiste, extraction mécanique</value>
+  </data>
+  <data name="PantothenicAcid" xml:space="preserve">
+    <value>acide pantothénique</value>
+  </data>
+  <data name="Pasture" xml:space="preserve">
+    <value>pâturage</value>
+  </data>
+  <data name="PatatoProtein" xml:space="preserve">
+    <value>protéine de pomme de terre</value>
+  </data>
+  <data name="PBID" xml:space="preserve">
+    <value>DIPD</value>
+  </data>
+  <data name="PeaHulls" xml:space="preserve">
+    <value>pellicules de pois</value>
+  </data>
+  <data name="PeanutHay" xml:space="preserve">
+    <value>foin d'arachides</value>
+  </data>
+  <data name="PeanutHulls" xml:space="preserve">
+    <value>coques d'arachides</value>
+  </data>
+  <data name="PeanutMeal" xml:space="preserve">
+    <value>tourteau d'arachides</value>
+  </data>
+  <data name="PeanutMealExpelled" xml:space="preserve">
+    <value>tourteau d'arachides, de presse continue</value>
+  </data>
+  <data name="PeanutMealMech" xml:space="preserve">
+    <value>tourteau d'arachides, extraction mécanique</value>
+  </data>
+  <data name="PeanutMealSolvent" xml:space="preserve">
+    <value>tourteau d'ARACHIDES, extraction au solvant</value>
+  </data>
+  <data name="PeanutSilage" xml:space="preserve">
+    <value>ensilage d'arachides </value>
+  </data>
+  <data name="PeaProteinConcentrate" xml:space="preserve">
+    <value>concentré de protéines de pois</value>
+  </data>
+  <data name="PeaProteinIsolate" xml:space="preserve">
+    <value>isolat de protéines de pois</value>
+  </data>
+  <data name="Peas" xml:space="preserve">
+    <value>pois</value>
+  </data>
+  <data name="PeavineForage" xml:space="preserve">
+    <value>fourrage de tiges de pois</value>
+  </data>
+  <data name="PeavineHay" xml:space="preserve">
+    <value>foin de tiges de pois</value>
+  </data>
+  <data name="PeavineSilage" xml:space="preserve">
+    <value>ensilage de tiges de pois</value>
+  </data>
+  <data name="Pef" xml:space="preserve">
+    <value>empreinte écologique du produit</value>
+  </data>
+  <data name="Perennial" xml:space="preserve">
+    <value>vivace</value>
+  </data>
+  <data name="PetFoodByProducts" xml:space="preserve">
+    <value>sous-produits d'aliments pour animaux de compagnie</value>
+  </data>
+  <data name="PhaselousBeans" xml:space="preserve">
+    <value>haricots communs</value>
+  </data>
+  <data name="PHE" xml:space="preserve">
+    <value>PHE</value>
+  </data>
+  <data name="PhosphateDeflourinated" xml:space="preserve">
+    <value>phosphate défluoré</value>
+  </data>
+  <data name="PhosphateMonoMono" xml:space="preserve">
+    <value>phosphate mono-mono</value>
+  </data>
+  <data name="PhosphateRock" xml:space="preserve">
+    <value>phosphate de calcium minéral</value>
+  </data>
+  <data name="PhosphateRockLowFlour" xml:space="preserve">
+    <value>phosphate de calcium minéral, faible teneur en fluor</value>
+  </data>
+  <data name="PhosphateRockSoft" xml:space="preserve">
+    <value>phosphate de calcium minéral, tendre</value>
+  </data>
+  <data name="PhosphoricAcid" xml:space="preserve">
+    <value>acide phosphorique</value>
+  </data>
+  <data name="PhytatePhosphorus" xml:space="preserve">
+    <value>P sous forme de phytate</value>
+  </data>
+  <data name="PopcornGrain" xml:space="preserve">
+    <value>grain de maïs à souffler</value>
+  </data>
+  <data name="PorcineSolublesDried" xml:space="preserve">
+    <value>solubles porcins, secs</value>
+  </data>
+  <data name="PotassiumBicarbonate" xml:space="preserve">
+    <value>carbonate acide de potassium</value>
+  </data>
+  <data name="PotassiumCarbonate" xml:space="preserve">
+    <value>carbonate de potassium</value>
+  </data>
+  <data name="PotassiumChloride" xml:space="preserve">
+    <value>chlorure de potassium</value>
+  </data>
+  <data name="PotassiumIodide" xml:space="preserve">
+    <value>iodure de potassium</value>
+  </data>
+  <data name="PotassiumSulfate" xml:space="preserve">
+    <value>sulfate de potassium</value>
+  </data>
+  <data name="PotatoByproductDry" xml:space="preserve">
+    <value>sous-produit de pomme de terre, sec</value>
+  </data>
+  <data name="PotatoByProductMeal" xml:space="preserve">
+    <value>farine de sous-produits de pomme de terre</value>
+  </data>
+  <data name="PotatoByproductWet" xml:space="preserve">
+    <value>sous-produit de pomme de terre, humide</value>
+  </data>
+  <data name="Potatoes" xml:space="preserve">
+    <value>pommes de terre</value>
+  </data>
+  <data name="PotatoPeels" xml:space="preserve">
+    <value>pelures de pomme de terre</value>
+  </data>
+  <data name="PotatoProtein" xml:space="preserve">
+    <value>protéine de pomme de terre</value>
+  </data>
+  <data name="PotatoProteinConcentrate" xml:space="preserve">
+    <value>concentré de protéines de pomme de terre</value>
+  </data>
+  <data name="PoultryByProduct" xml:space="preserve">
+    <value>sous-produit de volaille</value>
+  </data>
+  <data name="PoultryByProductMeal" xml:space="preserve">
+    <value>farine de sous-produits de volaille</value>
+  </data>
+  <data name="PoultryMeal" xml:space="preserve">
+    <value>farine de volaille</value>
+  </data>
+  <data name="PRO" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="PUFA" xml:space="preserve">
+    <value>AGPI</value>
+  </data>
+  <data name="PulseCrops" xml:space="preserve">
+    <value>légumineuses</value>
+  </data>
+  <data name="Raffinose" xml:space="preserve">
+    <value>raffinose</value>
+  </data>
+  <data name="RainFed" xml:space="preserve">
+    <value>en culture sèche</value>
+  </data>
+  <data name="RDP" xml:space="preserve">
+    <value>PDR</value>
+  </data>
+  <data name="ReducedTillage" xml:space="preserve">
+    <value>travail réduit du sol</value>
+  </data>
+  <data name="Riboflavin" xml:space="preserve">
+    <value>riboflavine</value>
+  </data>
+  <data name="Rice" xml:space="preserve">
+    <value>riz</value>
+  </data>
+  <data name="RiceBran" xml:space="preserve">
+    <value>son de riz</value>
+  </data>
+  <data name="RiceBranDefatted" xml:space="preserve">
+    <value>son de riz déshuilé</value>
+  </data>
+  <data name="RiceBroken" xml:space="preserve">
+    <value>riz, en brisures</value>
+  </data>
+  <data name="RiceGrain" xml:space="preserve">
+    <value>grain de riz</value>
+  </data>
+  <data name="RiceHay" xml:space="preserve">
+    <value>foin de riz</value>
+  </data>
+  <data name="RiceHulls" xml:space="preserve">
+    <value>balles de riz</value>
+  </data>
+  <data name="RicePolished" xml:space="preserve">
+    <value>riz, poli</value>
+  </data>
+  <data name="RiceProteinConcentrate" xml:space="preserve">
+    <value>concentré de protéines de riz</value>
+  </data>
+  <data name="RiceSilage" xml:space="preserve">
+    <value>ensilage de riz</value>
+  </data>
+  <data name="RUP" xml:space="preserve">
+    <value>PRU</value>
+  </data>
+  <data name="Rye" xml:space="preserve">
+    <value>seigle</value>
+  </data>
+  <data name="RyeAnnualFresh" xml:space="preserve">
+    <value>seigle annuel, frais</value>
+  </data>
+  <data name="RyeAnnualSilageVegetative" xml:space="preserve">
+    <value>seigle, annuel, ensilage, stade végétatif </value>
+  </data>
+  <data name="RyeGrain" xml:space="preserve">
+    <value>seigle, grain</value>
+  </data>
+  <data name="RyegrassHay" xml:space="preserve">
+    <value>foin de ray-grass</value>
+  </data>
+  <data name="RyegrassSilage" xml:space="preserve">
+    <value>ensilage de ray-grass</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SafflowerMeal" xml:space="preserve">
+    <value>tourteau de carthame</value>
+  </data>
+  <data name="SafflowerMealDehulled" xml:space="preserve">
+    <value>tourteau de carthame, décortiqué</value>
+  </data>
+  <data name="SafflowerMealSolvent" xml:space="preserve">
+    <value>tourteau de carthame, extraction au solvant</value>
+  </data>
+  <data name="SalmonProteinHydrolysate" xml:space="preserve">
+    <value>hydrolysat de protéines de saumon</value>
+  </data>
+  <data name="SaltSodiumChloride" xml:space="preserve">
+    <value>sel (chlorure de sodium)</value>
+  </data>
+  <data name="SDF" xml:space="preserve">
+    <value>FAS </value>
+  </data>
+  <data name="Se" xml:space="preserve">
+    <value>Se</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>secondes</value>
+  </data>
+  <data name="SER" xml:space="preserve">
+    <value>SER</value>
+  </data>
+  <data name="SesameMeal" xml:space="preserve">
+    <value>tourteau de sésame</value>
+  </data>
+  <data name="SesameMealMech" xml:space="preserve">
+    <value>tourteau de sésame, extraction mécanique</value>
+  </data>
+  <data name="SFA" xml:space="preserve">
+    <value>AGS</value>
+  </data>
+  <data name="SkimmedMilkPowder" xml:space="preserve">
+    <value>lait écrémé, poudre</value>
+  </data>
+  <data name="SodiumBicarbonate" xml:space="preserve">
+    <value>bicarbonate de soude</value>
+  </data>
+  <data name="SodiumPhosphateMonobasicMonohydrate" xml:space="preserve">
+    <value>phosphate de sodium (monobasique, monohydraté)</value>
+  </data>
+  <data name="SodiumSelenite" xml:space="preserve">
+    <value>sélénite de sodium</value>
+  </data>
+  <data name="SodiumSulfateDecahydrate" xml:space="preserve">
+    <value>décahydrate de sulfate de sodium</value>
+  </data>
+  <data name="SodiumTripolyphosphate" xml:space="preserve">
+    <value>tripolyphosphate de sodium</value>
+  </data>
+  <data name="Solod" xml:space="preserve">
+    <value>solod</value>
+  </data>
+  <data name="SolodizedSolonetz" xml:space="preserve">
+    <value>solonetz solodisé</value>
+  </data>
+  <data name="Solonetz" xml:space="preserve">
+    <value>solonetz </value>
+  </data>
+  <data name="SolubleCrudeProtein" xml:space="preserve">
+    <value>protéine brute soluble</value>
+  </data>
+  <data name="SombricBrunisol" xml:space="preserve">
+    <value>brunisol sombrique</value>
+  </data>
+  <data name="Sorghum" xml:space="preserve">
+    <value>sorgho</value>
+  </data>
+  <data name="SorghumDistillersDriedGrainsWithSolubles" xml:space="preserve">
+    <value>drêches sèches de sorgho de distillerie avec solubles</value>
+  </data>
+  <data name="SorghumGrainDryRolled" xml:space="preserve">
+    <value>SORGHO, grain, roulé à sec</value>
+  </data>
+  <data name="SorghumGrainSteamFlaked" xml:space="preserve">
+    <value>SORGHO, grain, floconné et précuit à la vapeur</value>
+  </data>
+  <data name="SorghumSilage" xml:space="preserve">
+    <value>SORGHO, ensilage</value>
+  </data>
+  <data name="SorghumSudanTypeHay" xml:space="preserve">
+    <value>SORGHO du Soudan, foin</value>
+  </data>
+  <data name="SorghumSudanTypeSilage" xml:space="preserve">
+    <value>SORGHO du Soudan, type d'ensilage</value>
+  </data>
+  <data name="SoybeanHay" xml:space="preserve">
+    <value>foin de soja</value>
+  </data>
+  <data name="SoybeanHulls" xml:space="preserve">
+    <value>pellicules de soja</value>
+  </data>
+  <data name="SoybeanMealDehulledExpelled" xml:space="preserve">
+    <value>tourteau de soja décortiqué, de presse continue</value>
+  </data>
+  <data name="SoybeanMealDehulledSolventExtracted" xml:space="preserve">
+    <value>tourteau de soja décortiqué, extraction au solvant</value>
+  </data>
+  <data name="SoybeanMealEnzymeTreated" xml:space="preserve">
+    <value>tourteau de soja, traitement enzymatique</value>
+  </data>
+  <data name="SoybeanMealExpelled" xml:space="preserve">
+    <value>tourteau de soja, de presse continue</value>
+  </data>
+  <data name="SoybeanMealExpellers" xml:space="preserve">
+    <value>tourteau de soja, de presse continue, 45 % PB</value>
+  </data>
+  <data name="SoybeanMealFermented" xml:space="preserve">
+    <value>tourteau de soja, fermenté</value>
+  </data>
+  <data name="SoybeanMealHeated" xml:space="preserve">
+    <value>tourteau de soja, chauffé</value>
+  </data>
+  <data name="SoybeanMealHighCP" xml:space="preserve">
+    <value>tourteau de soja, teneur élevée en PB</value>
+  </data>
+  <data name="SoybeanMealHighProteinDehulledSolventExtracted" xml:space="preserve">
+    <value>tourteau de soja, décortiqué, extraction au solvant, teneur élevée en protéines</value>
+  </data>
+  <data name="SoybeanMealHighProteinExpelled" xml:space="preserve">
+    <value>tourteau de soja, de presse continue, teneur élevée en protéines</value>
+  </data>
+  <data name="SoybeanMealLowCP" xml:space="preserve">
+    <value>tourteau de soja à faible teneur en PB</value>
+  </data>
+  <data name="SoybeanMealLowOligosaccharideDehulledSolventExtracted" xml:space="preserve">
+    <value>tourteau de soja décortiqué, extraction au solvant, faible teneur en oligosides</value>
+  </data>
+  <data name="SoybeanMealLowOligosaccharideExpelled" xml:space="preserve">
+    <value>tourteau de soja, de presse continue, faible teneur en oligosaccharides</value>
+  </data>
+  <data name="SoybeanMealMech" xml:space="preserve">
+    <value>tourteau de soja, extraction mécanique</value>
+  </data>
+  <data name="SoybeanMealNonEnzymaticallyBrowned" xml:space="preserve">
+    <value>tourteau de soja, bruni sans enzymes</value>
+  </data>
+  <data name="SoybeanMealSolvent" xml:space="preserve">
+    <value>tourteau de soja, extraction au solvant</value>
+  </data>
+  <data name="SoybeanMealSolvent44" xml:space="preserve">
+    <value>tourteau de soja, extraction au solvant, 44 % PB</value>
+  </data>
+  <data name="SoybeanMealSolvent48" xml:space="preserve">
+    <value>tourteau de soja, extraction au solvant, 48 % PB</value>
+  </data>
+  <data name="SoybeanMealSolventHighProtein" xml:space="preserve">
+    <value>tourteau de soja, extraction au solvant, teneur élevée en protéines</value>
+  </data>
+  <data name="Soybeans" xml:space="preserve">
+    <value>soja</value>
+  </data>
+  <data name="SoybeanSeed" xml:space="preserve">
+    <value>graine de soja</value>
+  </data>
+  <data name="SoybeanSeedsWhole" xml:space="preserve">
+    <value>graines de soja, entières</value>
+  </data>
+  <data name="SoybeanSeedsWholeRoasted" xml:space="preserve">
+    <value>graines de soja, entières, grillées</value>
+  </data>
+  <data name="SoybeansExpelled" xml:space="preserve">
+    <value>soja, de presse continue</value>
+  </data>
+  <data name="SoybeansExtruded" xml:space="preserve">
+    <value>soja, extrudé</value>
+  </data>
+  <data name="SoybeansFullFat" xml:space="preserve">
+    <value>soja, non déshuilé</value>
+  </data>
+  <data name="SoybeansHighProteinFullFat" xml:space="preserve">
+    <value>soja, non déshuilé, teneur élevée en protéines</value>
+  </data>
+  <data name="SoybeanSilage" xml:space="preserve">
+    <value>ensilage de soja</value>
+  </data>
+  <data name="SoybeanSilageEarlyMaturity" xml:space="preserve">
+    <value>ensilage de soja, maturité hâtive</value>
+  </data>
+  <data name="SoybeansLowOligosaccharideFullFat" xml:space="preserve">
+    <value>soja, non déshuilé, faible teneur en oligosides</value>
+  </data>
+  <data name="SoybeansRoasted" xml:space="preserve">
+    <value>soja, grillé</value>
+  </data>
+  <data name="SoybeanStubble" xml:space="preserve">
+    <value>chaume de soja</value>
+  </data>
+  <data name="SoybeansWhole" xml:space="preserve">
+    <value>soja, graine entière</value>
+  </data>
+  <data name="SoyProteinConcentrate" xml:space="preserve">
+    <value>concentré de protéines de soja</value>
+  </data>
+  <data name="SoyProteinIsolate" xml:space="preserve">
+    <value>isolat de protéines de soja</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>PS</value>
+  </data>
+  <data name="Stachyose" xml:space="preserve">
+    <value>stachyose</value>
+  </data>
+  <data name="Starch" xml:space="preserve">
+    <value>amidon</value>
+  </data>
+  <data name="STTDPhosphorus" xml:space="preserve">
+    <value>STTD du P</value>
+  </data>
+  <data name="Sucrose" xml:space="preserve">
+    <value>sucrose</value>
+  </data>
+  <data name="SudangrassFresh" xml:space="preserve">
+    <value>herbe du Soudan, frais</value>
+  </data>
+  <data name="SudangrassHay" xml:space="preserve">
+    <value>herbe du Soudan, foin</value>
+  </data>
+  <data name="SudangrassSilage" xml:space="preserve">
+    <value>herbe du Soudan, ensilage</value>
+  </data>
+  <data name="SugarbeetMolasses" xml:space="preserve">
+    <value>mélasse de betterave à sucre</value>
+  </data>
+  <data name="SugarBeetPulp" xml:space="preserve">
+    <value>pulpe de betterave à sucre</value>
+  </data>
+  <data name="SugarbeetPulpDry" xml:space="preserve">
+    <value>pulpe de betterave à sucre, sèche</value>
+  </data>
+  <data name="SugarcaneBagasseSilage" xml:space="preserve">
+    <value>bagasse de canne à sucre, ensilage</value>
+  </data>
+  <data name="SugarcaneHay" xml:space="preserve">
+    <value>foin de canne à sucre</value>
+  </data>
+  <data name="SugarcaneMolasses" xml:space="preserve">
+    <value>mélasse de canne à sucre</value>
+  </data>
+  <data name="SugarcaneSilage" xml:space="preserve">
+    <value>ensilage de canne à sucre</value>
+  </data>
+  <data name="Sugars" xml:space="preserve">
+    <value>sucres</value>
+  </data>
+  <data name="SunflowerFullFat" xml:space="preserve">
+    <value>tournesol, entier</value>
+  </data>
+  <data name="SunflowerHulls" xml:space="preserve">
+    <value>écales de tournesol</value>
+  </data>
+  <data name="SunflowerMeal" xml:space="preserve">
+    <value>tourteau de tournesol</value>
+  </data>
+  <data name="SunflowerMealDehulledSolventExtracted" xml:space="preserve">
+    <value>tourteau de tournesol, déglumé, extraction au solvant</value>
+  </data>
+  <data name="SunflowerMealSolvent" xml:space="preserve">
+    <value>tourteau de tournesol, extraction au solvant</value>
+  </data>
+  <data name="SunflowerOilSeedsWhole" xml:space="preserve">
+    <value>graines entières de tournesol oléagineux</value>
+  </data>
+  <data name="Sunflowers" xml:space="preserve">
+    <value>tournesol</value>
+  </data>
+  <data name="SunflowerScreenings" xml:space="preserve">
+    <value>criblures de tournesol</value>
+  </data>
+  <data name="SunflowerSeed" xml:space="preserve">
+    <value>graine de tournesol</value>
+  </data>
+  <data name="SunflowerSilage" xml:space="preserve">
+    <value>ensilage de tournesol</value>
+  </data>
+  <data name="SwitchgrassHay" xml:space="preserve">
+    <value>foin de panic érigé</value>
+  </data>
+  <data name="TeffLovegrassHay" xml:space="preserve">
+    <value>foin de teff (éragrostide)</value>
+  </data>
+  <data name="Thiamin" xml:space="preserve">
+    <value>thiamine</value>
+  </data>
+  <data name="THR" xml:space="preserve">
+    <value>Thr</value>
+  </data>
+  <data name="TimothyHay" xml:space="preserve">
+    <value>foin de fléole des prés</value>
+  </data>
+  <data name="TomatoPomace" xml:space="preserve">
+    <value>marc de tomate</value>
+  </data>
+  <data name="TotalDigestibleNutrient" xml:space="preserve">
+    <value>unité nutritive totale</value>
+  </data>
+  <data name="Triticale" xml:space="preserve">
+    <value>triticale</value>
+  </data>
+  <data name="TriticaleDistillersDriedGrainsWithSolubles" xml:space="preserve">
+    <value>drêches sèches de triticale de distillerie avec solubles</value>
+  </data>
+  <data name="TriticaleForageFresh" xml:space="preserve">
+    <value>fourrage de triticale, frais</value>
+  </data>
+  <data name="TriticaleGrain" xml:space="preserve">
+    <value>grain de triticale</value>
+  </data>
+  <data name="TriticaleHay" xml:space="preserve">
+    <value>foin de triticale</value>
+  </data>
+  <data name="TriticaleSilage" xml:space="preserve">
+    <value>ensilage de triticale</value>
+  </data>
+  <data name="TriticaleSilageHeaded" xml:space="preserve">
+    <value>ensilage de triticale, épié</value>
+  </data>
+  <data name="TRP" xml:space="preserve">
+    <value>Trp</value>
+  </data>
+  <data name="TYR" xml:space="preserve">
+    <value>Tyr</value>
+  </data>
+  <data name="Urea" xml:space="preserve">
+    <value>urée</value>
+  </data>
+  <data name="VAL" xml:space="preserve">
+    <value>Val</value>
+  </data>
+  <data name="Verbascose" xml:space="preserve">
+    <value>verbascose</value>
+  </data>
+  <data name="VitA" xml:space="preserve">
+    <value>VitA</value>
+  </data>
+  <data name="VitB12" xml:space="preserve">
+    <value>VitB12</value>
+  </data>
+  <data name="VitB6" xml:space="preserve">
+    <value>VitB6</value>
+  </data>
+  <data name="VitD" xml:space="preserve">
+    <value>VitD</value>
+  </data>
+  <data name="VitE" xml:space="preserve">
+    <value>VitE</value>
+  </data>
+  <data name="WheatBran" xml:space="preserve">
+    <value>son de blé</value>
+  </data>
+  <data name="WheatDistillersDriedGrainsWithSolubles" xml:space="preserve">
+    <value>drêches sèches de blé de distillerie avec solubles</value>
+  </data>
+  <data name="WheatForageFresh" xml:space="preserve">
+    <value>fourrage de blé, frais</value>
+  </data>
+  <data name="WheatGluten" xml:space="preserve">
+    <value>gluten du blé</value>
+  </data>
+  <data name="WheatGrain" xml:space="preserve">
+    <value>grain de blé</value>
+  </data>
+  <data name="WheatGrainFlaked" xml:space="preserve">
+    <value>grain de blé en flocons</value>
+  </data>
+  <data name="WheatGrainRolled" xml:space="preserve">
+    <value>grain de blé, roulé</value>
+  </data>
+  <data name="WheatHardRed" xml:space="preserve">
+    <value>blé de force roux</value>
+  </data>
+  <data name="WheatHay" xml:space="preserve">
+    <value>foin de blé</value>
+  </data>
+  <data name="WheatHayHeaded" xml:space="preserve">
+    <value>foin de blé, épié</value>
+  </data>
+  <data name="WheatMiddlings" xml:space="preserve">
+    <value>issues de blé</value>
+  </data>
+  <data name="WheatScreenings" xml:space="preserve">
+    <value>criblures de blé</value>
+  </data>
+  <data name="WheatShorts" xml:space="preserve">
+    <value>gru rouge de blé</value>
+  </data>
+  <data name="WheatSilage" xml:space="preserve">
+    <value>ensilage de blé</value>
+  </data>
+  <data name="WheatSilageEarlyHead" xml:space="preserve">
+    <value>ensilage de blé, début épiaison</value>
+  </data>
+  <data name="WheatSoftRed" xml:space="preserve">
+    <value>blé, tendre rouge</value>
+  </data>
+  <data name="WheatStraw" xml:space="preserve">
+    <value>paille de blé</value>
+  </data>
+  <data name="WheyDry" xml:space="preserve">
+    <value>lactosérum sec</value>
+  </data>
+  <data name="WheyPermeateLactose" xml:space="preserve">
+    <value>perméat de lactosérum, 80 % lactose</value>
+  </data>
+  <data name="WheyPermeateLactose80" xml:space="preserve">
+    <value>perméat de lactosérum, 80 % lactose</value>
+  </data>
+  <data name="WheyPermeateLactose85" xml:space="preserve">
+    <value>perméat de lactosérum, 85 % lactose</value>
+  </data>
+  <data name="WheyPowder" xml:space="preserve">
+    <value>poudre de lactosérum</value>
+  </data>
+  <data name="WheyPowderProteinConcentrate" xml:space="preserve">
+    <value>poudre de lactosérum, concentré de protéines</value>
+  </data>
+  <data name="WheyWet" xml:space="preserve">
+    <value>lactosérum humide</value>
+  </data>
+  <data name="WheyWetCattle" xml:space="preserve">
+    <value>lactosérum humide, bovin</value>
+  </data>
+  <data name="YeastEthanol" xml:space="preserve">
+    <value>éthanol à base de levure</value>
+  </data>
+  <data name="YeastSingleCellProtein" xml:space="preserve">
+    <value>levure de protéines unicellulaires</value>
+  </data>
+  <data name="YeastTorula" xml:space="preserve">
+    <value>levure torula </value>
+  </data>
+  <data name="ZincOxide" xml:space="preserve">
+    <value>oxyde de zinc</value>
+  </data>
+  <data name="ZincSulfate" xml:space="preserve">
+    <value>sulfate de zinc</value>
+  </data>
+  <data name="Zn" xml:space="preserve">
+    <value>Zn</value>
+  </data>
+</root>

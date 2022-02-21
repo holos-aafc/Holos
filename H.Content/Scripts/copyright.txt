@@ -1,0 +1,19 @@
+#region Copyright
+/* Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Minister of Agriculture & Agri-Food Canada, 2022
+Agriculture and Agri-Food Canada hereby disclaims all copyright interest in the program "Holos" written by Agriculture and Agri-Food Canada (AAFC).
+
+This file is part of Holos.
+    Holos is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Holos is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Holos.  If not, see https://www.gnu.org/licenses/
+*/
+#endregion

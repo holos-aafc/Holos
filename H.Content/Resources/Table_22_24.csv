@@ -1,0 +1,121 @@
+Animal Type,Province,Crude Protein (kg Protein kg-1 Feed As Fed),Feed Intake (kg Head -1 Day-1)
+Boar,Alberta,0.145,2.55
+Dry Sow,Alberta,0.145,2.55
+SwineFinisher,Alberta,0.155,3
+Grower,Alberta,0.18,2
+Lactating Sow,Alberta,0.2,6.11
+Starter,Alberta,0.22,0.7
+Boar,British Columbia,0.145,2.55
+Dry Sow,British Columbia,0.145,2.55
+SwineFinisher,British Columbia,0.155,3
+Grower,British Columbia,0.18,2
+Lactating Sow,British Columbia,0.2,6.11
+Starter,British Columbia,0.22,0.7
+Boar,Manitoba,0.145,2.55
+Dry Sow,Manitoba,0.145,2.55
+SwineFinisher,Manitoba,0.155,3
+Grower,Manitoba,0.18,2
+Lactating Sow,Manitoba,0.2,6.11
+Starter,Manitoba,0.22,0.7
+Boar,New Brunswick,0.145,2.55
+Dry Sow,New Brunswick,0.145,2.55
+SwineFinisher,New Brunswick,0.155,3
+Grower,New Brunswick,0.18,2
+Lactating Sow,New Brunswick,0.2,6.11
+Starter,New Brunswick,0.22,0.7
+Boar,Newfoundland and Labrador,0.145,2.55
+Dry Sow,Newfoundland and Labrador,0.145,2.55
+SwineFinisher,Newfoundland and Labrador,0.155,3
+Grower,Newfoundland and Labrador,0.18,2
+Lactating Sow,Newfoundland and Labrador,0.2,6.11
+Starter,Newfoundland and Labrador,0.22,0.7
+Boar,Nova Scotia,0.145,2.55
+Dry Sow,Nova Scotia,0.145,2.55
+SwineFinisher,Nova Scotia,0.155,3
+Grower,Nova Scotia,0.18,2
+Lactating Sow,Nova Scotia,0.2,6.11
+Starter,Nova Scotia,0.22,0.7
+Boar,Ontario,0.135,2.45
+Dry Sow,Ontario,0.135,2.45
+SwineFinisher,Ontario,0.135,2.8
+Grower,Ontario,0.175,2
+Lactating Sow,Ontario,0.185,5.85
+Starter,Ontario,0.21,0.65
+Boar,Prince Edward Island,0.145,2.55
+Dry Sow,Prince Edward Island,0.145,2.55
+SwineFinisher,Prince Edward Island,0.155,3
+Grower,Prince Edward Island,0.18,2
+Lactating Sow,Prince Edward Island,0.2,6.11
+Starter,Prince Edward Island,0.22,0.7
+Boar,Quebec,0.135,2.45
+Dry Sow,Quebec,0.135,2.45
+SwineFinisher,Quebec,0.135,2.8
+Grower,Quebec,0.175,2
+Lactating Sow,Quebec,0.185,5.85
+Starter,Quebec,0.21,0.65
+Boar,Saskatchewan,0.145,2.55
+Dry Sow,Saskatchewan,0.145,2.55
+SwineFinisher,Saskatchewan,0.155,3
+Grower,Saskatchewan,0.18,2
+Lactating Sow,Saskatchewan,0.2,6.11
+Starter,Saskatchewan,0.22,0.7
+Boar,Alberta,0.145,2.55
+Dry Sow,Alberta,0.145,2.55
+SwineFinisher,Alberta,0.155,3
+Grower,Alberta,0.18,2
+Lactating Sow,Alberta,0.2,6.11
+Starter,Alberta,0.22,0.7
+Boar,Colombie-Britannique,0.145,2.55
+Dry Sow,Colombie-Britannique,0.145,2.55
+SwineFinisher,Colombie-Britannique,0.155,3
+Grower,Colombie-Britannique,0.18,2
+Lactating Sow,Colombie-Britannique,0.2,6.11
+Starter,Colombie-Britannique,0.22,0.7
+Boar,Manitoba,0.145,2.55
+Dry Sow,Manitoba,0.145,2.55
+SwineFinisher,Manitoba,0.155,3
+Grower,Manitoba,0.18,2
+Lactating Sow,Manitoba,0.2,6.11
+Starter,Manitoba,0.22,0.7
+Boar,Nouveau-Brunswick,0.145,2.55
+Dry Sow,Nouveau-Brunswick,0.145,2.55
+SwineFinisher,Nouveau-Brunswick,0.155,3
+Grower,Nouveau-Brunswick,0.18,2
+Lactating Sow,Nouveau-Brunswick,0.2,6.11
+Starter,Nouveau-Brunswick,0.22,0.7
+Boar,Terre-Neuve-et-Labrador,0.145,2.55
+Dry Sow,Terre-Neuve-et-Labrador,0.145,2.55
+SwineFinisher,Terre-Neuve-et-Labrador,0.155,3
+Grower,Terre-Neuve-et-Labrador,0.18,2
+Lactating Sow,Terre-Neuve-et-Labrador,0.2,6.11
+Starter,Terre-Neuve-et-Labrador,0.22,0.7
+Boar,Nouvelle-Ecosse,0.145,2.55
+Dry Sow,Nouvelle-Ecosse,0.145,2.55
+SwineFinisher,Nouvelle-Ecosse,0.155,3
+Grower,Nouvelle-Ecosse,0.18,2
+Lactating Sow,Nouvelle-Ecosse,0.2,6.11
+Starter,Nouvelle-Ecosse,0.22,0.7
+Boar,Ontario,0.135,2.45
+Dry Sow,Ontario,0.135,2.45
+SwineFinisher,Ontario,0.135,2.8
+Grower,Ontario,0.175,2
+Lactating Sow,Ontario,0.185,5.85
+Starter,Ontario,0.21,0.65
+Boar,Ile-du-Prince-Edouard,0.145,2.55
+Dry Sow,Ile-du-Prince-Edouard,0.145,2.55
+SwineFinisher,Ile-du-Prince-Edouard,0.155,3
+Grower,Ile-du-Prince-Edouard,0.18,2
+Lactating Sow,Ile-du-Prince-Edouard,0.2,6.11
+Starter,Ile-du-Prince-Edouard,0.22,0.7
+Boar,Quebec,0.135,2.45
+Dry Sow,Quebec,0.135,2.45
+SwineFinisher,Quebec,0.135,2.8
+Grower,Quebec,0.175,2
+Lactating Sow,Quebec,0.185,5.85
+Starter,Quebec,0.21,0.65
+Boar,Saskatchewan,0.145,2.55
+Dry Sow,Saskatchewan,0.145,2.55
+SwineFinisher,Saskatchewan,0.155,3
+Grower,Saskatchewan,0.18,2
+Lactating Sow,Saskatchewan,0.2,6.11
+Starter,Saskatchewan,0.22,0.7

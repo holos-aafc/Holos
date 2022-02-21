@@ -1,0 +1,320 @@
+﻿<!-- saved from url=(0014)about:internet -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<style type="text/css">
+
+		h4, form { display: inline; }
+
+		h4 { margin-left: 5px; }
+
+		form { margin-left: 15px; }
+
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
+
+		h4 { color: white; }
+
+		#container {
+			background-color: transparent;
+			height: 100%;
+			width: 100%;
+		}
+
+		#header {
+			background-color: #2A579A;
+			height: 24px;
+			text-align: left;
+			top: 0;
+			width: 100%;
+		}
+
+		#toolbar {
+			position: absolute;
+			top: 2px;
+		}
+
+		html, body, #holosMap {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+		}
+
+		#holosMap { position: relative; }
+        
+	</style>
+
+	<!--https://stackoverflow.com/questions/45583852/browser-not-supported-by-google-maps-->
+	<style>
+		.infomsg { display: none; }
+	</style>
+
+</head>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCoCnZgZw85uWPCZWZ_kKcC89SywSg--w4">
+</script>
+
+<script type="text/javascript">
+	var map;
+
+	function setLocation(province) {
+		//if (document.getElementById('province').value != "Select") {
+		//	province = document.getElementById('province').value;
+		//}	    
+
+		map = new google.maps.Map(document.getElementById('holosMap'),
+			{
+				center: new google.maps.LatLng(56.00, -96.00),
+				disableDefaultUI: true,
+				zoomControl: true,
+				zoom: 4,
+				minZoom: 4,
+				maxZoom: 14,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			});
+
+		//Alternate color: #ff00c5
+		if (province == "Alberta") {
+			newLocation(54.4, -115);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1yVAo85uRG14KpZ1CA0uhjf7jgJi8ORCOxcyjEWCG'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "BritishColumbia") {
+			newLocation(55, -125.15);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1E1KXBrPTSaQNNgDuczzrAsZTGOR8bLoN_oqA8MCW'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "Manitoba") {
+			newLocation(55.3, -97);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '12hbY3dDdK5As1osn1wp6yNUtmxVh2CZ2It_1wUfJ'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "NewBrunswick") {
+			newLocation(46.5, -66.3);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1W2_I-f6FpIXb8WlGcH9tbWRiYsflviQc6iI3exS2'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "Newfoundland") {
+			newLocation(49, -55);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1hDGdenpJNN0OHjrx-t3VTY1INpRWQj8heHOxfGTZ'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "PrinceEdwardIsland") {
+			newLocation(46.2, -63.2);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1F6aXoQiOfJYmziR34EXdfzXgkdd9m3XFgKlxOW9r'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "NovaScotia") {
+			newLocation(45.1, -63);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1XlQcYnO-bdJcNJ7YuP4u-Z2NT0m-x6J6KWF-5StM'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "Ontario") {
+			newLocation(48, -83);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1cbwhaX4_7BvHTEiyftn2J7O__nIAWhAdr-trIOh6'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "Quebec") {
+			newLocation(48, -74);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1bDPOibyWzBIFkbFaIiYzox6hS9eyFufinIq0c4ME'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		} else if (province == "Saskatchewan") {
+			newLocation(54.6, -106);
+
+			var slcLayer = new google.maps.FusionTablesLayer
+			({
+				suppressInfoWindows: true,
+				query: {
+					select: 'geometry',
+					from: '1UdUXjNHsTLmJMAu3emYGSYvTA2Yuvoy8Bt6qoPay'
+				},
+				styles: [
+					{
+						polygonOptions: {
+							fillOpacity: 0.01,
+							strokeColor: '#FF4747',
+							strokeOpacity: 0.5
+						}
+					}
+				]
+			});
+		}
+
+		slcLayer.setMap(map);
+
+		google.maps.event.addListener(slcLayer,
+			'click',
+			function(e) {
+				//e.infoWindowHtml = "ID: " + e.row['name'].value;
+				sendToHolos(e.row['name'].value);
+			});
+
+
+		function newLocation(newLat, newLng) {
+			map.setCenter({
+				lat: newLat,
+				lng: newLng
+			});
+
+			map.setZoom(5);
+		}
+
+
+		function sendToHolos(number) {
+			window.external.GetFromScript(number);
+		}
+	}
+
+</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<body>
+<div id="container">
+	<div id="holosMap"></div>
+</div>
+</body>
+</html>

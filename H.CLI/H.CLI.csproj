@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A9469D6-B913-49DB-B85F-319FD195C212}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>H.CLI</RootNamespace>
+    <AssemblyName>H.CLI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>%24/Holos 4/H/H.CLI</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>https://aafcholos.visualstudio.com</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>C:\temp\ClickOnce_CLI\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://s3.amazonaws.com/aafc-holos-cli/</InstallUrl>
+    <ProductName>Holos 4 CLI</ProductName>
+    <PublisherName>AAFC-AAC</PublisherName>
+    <SuiteName>Holos</SuiteName>
+    <MinimumRequiredVersion>1.0.0.13</MinimumRequiredVersion>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>79D63327BE9A435FB961394C04655518290B4C02</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\source\Workspaces\Holos 4\H\packages\CommonServiceLocator.2.0.5\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.13.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\source\Workspaces\Holos 4\H\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComponentKeys\BeefCattleKeys.cs" />
+    <Compile Include="ComponentKeys\DairyCattleKeys.cs" />
+    <Compile Include="ComponentKeys\OtherLiveStockKeys.cs" />
+    <Compile Include="ComponentKeys\PoultryKeys.cs" />
+    <Compile Include="ComponentKeys\SheepKeys.cs" />
+    <Compile Include="ComponentKeys\SwineKeys.cs" />
+    <Compile Include="Converters\BeefConverter.cs" />
+    <Compile Include="Converters\DairyConverter.cs" />
+    <Compile Include="Converters\OtherLiveStockConverter.cs" />
+    <Compile Include="Converters\PoultryConverter.cs" />
+    <Compile Include="Converters\SheepConverter.cs" />
+    <Compile Include="Converters\SwineConverter.cs" />
+    <Compile Include="Factorys\ComponentProcessorFactory.cs" />
+    <Compile Include="FileAndDirectoryAccessors\ReadSettingsFile.cs" />
+    <Compile Include="FileAndDirectoryAccessors\TemplateFarmHandler.cs" />
+    <Compile Include="Handlers\ErrorHandler.cs" />
+    <Compile Include="Handlers\ExportedFarmsHandler.cs" />
+    <Compile Include="InfrastructureConstants.cs" />
+    <Compile Include="Interfaces\IProcessor.cs" />
+    <Compile Include="Processors\FieldProcessor.cs" />
+    <Compile Include="Processors\ProcessorHandler.cs" />
+    <Compile Include="Processors\ShelterbeltProcessor.cs" />
+    <Compile Include="ResourceManagerHelper.cs" />
+    <Compile Include="Results\ComponentResultsProcessor.cs" />
+    <Compile Include="Results\EstimatesOfProductionResults.cs" />
+    <Compile Include="Results\FeedEstimateResults.cs" />
+    <Compile Include="Results\GHGAndCO2Results.cs" />
+    <Compile Include="TemporaryComponentStorage\BeefCattleTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\DairyTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\InputHelper.cs" />
+    <Compile Include="TemporaryComponentStorage\OtherLiveStockTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\PoultryTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\SheepTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\SwineTemporaryInput.cs" />
+    <Compile Include="UserInput\CLILanguageConstants.cs" />
+    <Compile Include="ComponentKeys\FieldKeys.cs" />
+    <Compile Include="Converters\ComponentConverterHandler.cs" />
+    <Compile Include="Converters\ConvertingComponentStrategy.cs" />
+    <Compile Include="Converters\FieldSystemInputConverter.cs" />
+    <Compile Include="Factorys\ComponentConverterFactory.cs" />
+    <Compile Include="FileAndDirectoryAccessors\DirectoryHandler.cs" />
+    <Compile Include="FileAndDirectoryAccessors\DirectoryKeys.cs" />
+    <Compile Include="FileAndDirectoryAccessors\BuildSettingsFileString.cs" />
+    <Compile Include="FileAndDirectoryAccessors\TemplateFileHandler.cs" />
+    <Compile Include="FileAndDirectoryAccessors\SettingsHandler.cs" />
+    <Compile Include="Handlers\GuidComponentHandler.cs" />
+    <Compile Include="Interfaces\IConverter.cs" />
+    <Compile Include="UserInput\CLIUnitsOfMeasurementConstants.cs" />
+    <Compile Include="KeyConverter\KeyConverter.cs" />
+    <Compile Include="Converters\ShelterbeltConverter.cs" />
+    <Compile Include="Parser\ParserHandler.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.fr-CA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fr-CA.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Factorys\ComponentKeyFactory.cs" />
+    <Compile Include="Factorys\ComponentTemporaryInputFactory.cs" />
+    <Compile Include="FileAndDirectoryAccessors\ExcelInitializer.cs" />
+    <Compile Include="Interfaces\IComponentKeys.cs" />
+    <Compile Include="Interfaces\IComponentTemporaryInput.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\ParsingStrategy.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileAndDirectoryAccessors\DataInputHandler.cs" />
+    <Compile Include="FileAndDirectoryAccessors\RetrieveFilesInDirectories.cs" />
+    <Compile Include="ComponentKeys\ShelterBeltKeys.cs" />
+    <Compile Include="TemporaryComponentStorage\FieldTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\InvalidPropertyNameException.cs" />
+    <Compile Include="TemporaryComponentStorage\ShelterBeltTemporaryInput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="H.CLI_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\H.Content\H.Content.csproj">
+      <Project>{272ede97-f58a-42a9-828d-8b3524e390eb}</Project>
+      <Name>H.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.Core\H.Core.csproj">
+      <Project>{08d833ef-d06e-42f1-b548-89e985dfc26b}</Project>
+      <Name>H.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
+      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
+      <Name>H.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H\H.csproj">
+      <Project>{9bc7ff04-2b6c-4f86-8fb8-4ee1184be83b}</Project>
+      <Name>H</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr-CA.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr-CA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

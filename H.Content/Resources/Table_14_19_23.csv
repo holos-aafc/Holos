@@ -1,0 +1,25 @@
+AnimalType,HandlingSystemName,MCF,EFDirect,FractionalVolatilization
+Beef,Compost Intensive,0.005,0.1,0.45
+Beef,Compost Passive,0.005,0.01,0.45
+Beef,Deep Bedding,0.17,0.01,0.3
+Beef,Pasture,0.01,0.02,0.2
+Beef,Solid Storage,0.02,0.005,0.45
+Dairy,Anaerobic Digester,0.01,0,0.4
+Dairy,Compost Intensive,0.005,0.1,0.3
+Dairy,Compost Passive,0.005,0.01,0.3
+Dairy,Deep Bedding,0.17,0.01,0.3
+Dairy,Liquid No Crust,0.17,0,0.4
+Dairy,Liquid Crust,0.283,0.005,0.4
+Dairy,Pasture,0.01,0.02,0.2
+Dairy,Solid Storage,0.02,0.005,0.3
+Dairy,Daily Spread,0.001,0,0.07
+Sheep,Compost Intensive,0.005,0.1,0.12
+Sheep,Compost Passive,0.005,0.01,0.12
+Sheep,Deep Bedding,0.17,0.01,0.25
+Sheep,Pasture,0.01,0.01,0.2
+Sheep,Solid Storage,0.02,0.005,0.12
+Swine,Anaerobic Digester,0.01,0,0.48
+Swine,Deep Pit,0.3514,0.002,0.25
+Swine,Liquid No Crust,0.17,0,0.48
+Swine,Liquid Crust,0.283,0.005,0.48
+Swine,Solid Storage,0.02,0.005,0.45

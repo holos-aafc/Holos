@@ -1,0 +1,2155 @@
+SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,SOILNAME,KIND,WATERTBL,ROOTRESTRI,RESTR_TYPE,DRAINAGE,PMTEX1,PMTEX2,PMTEX3,PMCHEM1,PMCHEM2,PMCHEM3,MDEP1,MDEP2,MDEP3,ORDER2,G_GROUP2,S_GROUP2,ORDER3,G_GROUP3,S_GROUP3
+ABABCgl~~~N,AB,ABC,gl~~~,N,ATHABASCA,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABABCst~~~A,AB,ABC,st~~~,A,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABABCst~~~N,AB,ABC,st~~~,N,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABABC~~~~~A,AB,ABC,~~~~~,A,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABABC~~~~~N,AB,ABC,~~~~~,N,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABABNaa~~~N,AB,ABN,aa~~~,N,ALBIAN,O,YB,0,-,VP,FI,-,-,AN,-,-,FNPT,-,-,,,,OR,F,TY
+ABABNxt~~~N,AB,ABN,xt~~~,N,ALBIAN,O,YB,0,-,VP,FI,MF,-,AN,WC,-,FNPT,TILL,-,,,,OR,F,T
+ABABN~~~~~N,AB,ABN,~~~~~,N,ALBIAN,O,YB,0,-,VP,FI,-,-,AN,-,-,FNPT,-,-,,,,OR,F,TY
+ABACE~~~~~A,AB,ACE,~~~~~,A,ALLIANCE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABACV~~~~~A,AB,ACV,~~~~~,A,ACADIA VALLEY,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,VE,V,O
+ABACV~~~~~N,AB,ACV,~~~~~,N,ACADIA VALLEY,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,VE,V,O
+ABADMgl~~~N,AB,ADM,gl~~~,N,ARDMORE,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GLE
+ABADMxt~~~N,AB,ADM,xt~~~,N,ARDMORE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABADM~~~~~N,AB,ADM,~~~~~,N,ARDMORE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABADYgl~~~N,AB,ADY,gl~~~,N,ACADEMY,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABADYsa~~~N,AB,ADY,sa~~~,N,ACADEMY,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABADYxp~~~N,AB,ADY,xp~~~,N,ACADEMY,M,NO,5,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABADY~~~~~A,AB,ADY,~~~~~,A,ACADEMY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABADY~~~~~N,AB,ADY,~~~~~,N,ACADEMY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABAGH~~~~~A,AB,AGH,~~~~~,A,ALBRIGHT,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABAGH~~~~~N,AB,AGH,~~~~~,N,ALBRIGHT,M,NO,8,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABAGSer~~~A,AB,AGS,er~~~,A,ANGUS RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABAGSsa~~~A,AB,AGS,sa~~~,A,ANGUS RIDGE,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABAGSsc~~~A,AB,AGS,sc~~~,A,ANGUS RIDGE,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABAGSst~~~A,AB,AGS,st~~~,A,ANGUS RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABAGS~~~~~A,AB,AGS,~~~~~,A,ANGUS RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABAGS~~~~~N,AB,AGS,~~~~~,N,ANGUS RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABALCaaxp~A,AB,ALC,aaxp~,A,ALCAN,M,NO,0,-,MW,F,F,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABALCco~~~A,AB,ALC,co~~~,A,ALCAN,M,NO,0,-,MW,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABALC~~~~~N,AB,ALC,~~~~~,N,ALCAN,M,NO,0,-,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABALGxt~~~N,AB,ALG,xt~~~,N,ALGAR LAKE,M,YU,0,-,P,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,LG,O
+ABALG~~~~~N,AB,ALG,~~~~~,N,ALGAR LAKE,M,YU,0,-,P,F,-,-,AN,-,-,GLLC,-,-,,,,GL,LG,O
+ABALTsc~~~N,AB,ALT,sc~~~,N,ALTARIO,M,NO,4,SA,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABALT~~~~~A,AB,ALT,~~~~~,A,ALTARIO,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABALT~~~~~N,AB,ALT,~~~~~,N,ALTARIO,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABALX~~~~~N,AB,ALX,~~~~~,N,ALTRUDE,M,NO,0,-,W,C,-,-,EC,-,-,FLUV,-,-,,,,BR,EB,O
+ABAMK~~~~~N,AB,AMK,~~~~~,N,AMISK,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,EB,E
+ABAMT~~~~~N,AB,AMT,~~~~~,N,AMITY,M,NO,0,-,W,M,MC,-,WC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABANOer~~~A,AB,ANO,er~~~,A,ANTONIO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BC,O
+ABANOgl~~~A,AB,ANO,gl~~~,A,ANTONIO,M,YU,0,-,I,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BC,GL
+ABANOst~~~A,AB,ANO,st~~~,A,ANTONIO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BC,O
+ABANO~~~~~A,AB,ANO,~~~~~,A,ANTONIO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BC,O
+ABANO~~~~~N,AB,ANO,~~~~~,N,ANTONIO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BC,O
+ABANR~~~~~A,AB,ANR,~~~~~,A,ANTROSE,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABANR~~~~~N,AB,ANR,~~~~~,N,ANTROSE,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABANZ~~~~~N,AB,ANZ,~~~~~,N,ANZAC,M,YB,0,-,P,MF,-,-,AN,-,-,TILL,-,-,,,,GL,G,R
+ABARE~~~~~A,AB,ARE,~~~~~,A,ARDENODE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABARE~~~~~N,AB,ARE,~~~~~,N,ARDENODE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABARM~~~~~A,AB,ARM,~~~~~,A,ARMENA,M,NO,4,BN,MW,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,BL
+ABARM~~~~~N,AB,ARM,~~~~~,N,ARMENA,M,NO,3,BN,MW,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,BL
+ABARV~~~~~N,AB,ARV,~~~~~,N,AMBER VALLEY,M,YB,0,-,VP,MF,-,-,WC,-,-,TILL,-,-,,,,GL,G,R
+ABASLaast~N,AB,ASL,aast~,N,ANSELL,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABASLaaxp~N,AB,ASL,aaxp~,N,ANSELL,M,NO,0,-,W,MF,MC,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABASLaa~~~N,AB,ASL,aa~~~,N,ANSELL,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABASLst~~~N,AB,ASL,st~~~,N,ANSELL,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABASLxp~~~N,AB,ASL,xp~~~,N,ANSELL,M,NO,0,-,W,MF,MC,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABASL~~~~~N,AB,ASL,~~~~~,N,ANSELL,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABASPaa~~~N,AB,ASP,aa~~~,N,ASPLUND CREEK,M,NO,8,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLD
+ABASPxt~~~N,AB,ASP,xt~~~,N,ASPLUND CREEK,M,NO,8,SA,MW,F,MF,-,WC,UD,-,LATL,TILL,-,,,,LU,GL,GLD
+ABASP~~~~~N,AB,ASP,~~~~~,N,ASPLUND CREEK,M,NO,8,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLD
+ABAST~~~~~N,AB,AST,~~~~~,N,ASPHALT,M,YU,0,-,P,FI,-,-,EA,-,-,FLUV,-,-,,,,GL,G,R
+ABATLcr~~~N,AB,ATL,cr~~~,N,ANTLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,CA
+ABATLgl~~~N,AB,ATL,gl~~~,N,ANTLER,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABATLst~~~A,AB,ATL,st~~~,A,ANTLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABATLxp~~~N,AB,ATL,xp~~~,N,ANTLER,M,NO,5,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABATLzr~~~N,AB,ATL,zr~~~,N,ANTLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABATL~~~~~A,AB,ATL,~~~~~,A,ANTLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABATL~~~~~N,AB,ATL,~~~~~,N,ANTLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABATM~~~~~N,AB,ATM,~~~~~,N,ATIMOSWE,M,NO,0,-,W,MC,VC,-,WC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABATOaa~~~A,AB,ATO,aa~~~,A,ANTON,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABATOxc~~~N,AB,ATO,xc~~~,N,ANTON,M,YU,0,-,I,M,F,-,VC,UD,-,GLLC,GLLC,-,,,,CH,DGC,GL
+ABATO~~~~~A,AB,ATO,~~~~~,A,ANTON,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABATO~~~~~N,AB,ATO,~~~~~,N,ANTON,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABATP~~~~~N,AB,ATP,~~~~~,N,ANTELOPE,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,RG,R,O
+ABATX~~~~~N,AB,ATX,~~~~~,N,ATHABASCA_X,M,NO,0,-,R,VC,-,-,EC,-,-,GLFL,-,-,,,,BR,EB,E
+ABAWDaa~~~A,AB,AWD,aa~~~,A,ARROWWOOD,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,DB
+ABAWD~~~~~A,AB,AWD,~~~~~,A,ARROWWOOD,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,DB
+ABAWD~~~~~N,AB,AWD,~~~~~,N,ARROWWOOD,M,NO,4,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,DB
+ABAZX~~~~~N,AB,AZX,~~~~~,N,AZURE,M,NO,4,UN,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABBABgl~~~N,AB,BAB,gl~~~,N,BEARBERRY,M,YU,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABBAB~~~~~N,AB,BAB,~~~~~,N,BEARBERRY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABBAK~~~~~A,AB,BAK,~~~~~,A,BARD LAKE,M,YB,0,-,VP,M,MC,-,WC,UD,-,LACU,LACU,-,,,,GL,HG,R
+ABBAK~~~~~N,AB,BAK,~~~~~,N,BARD LAKE,M,YB,0,-,VP,M,MC,-,WC,UD,-,LACU,LACU,-,,,,GL,HG,R
+ABBAN~~~~~N,AB,BAN,~~~~~,N,BRAATEN,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,BR
+ABBBNst~~~N,AB,BBN,st~~~,N,BRAEBURN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBBNxp~~~N,AB,BBN,xp~~~,N,BRAEBURN,M,NO,9,LI,W,MF,MC,,WC,UD,,TILL,RESD,RKUD,,,,LU,GL,O
+ABBBN~~~~~A,AB,BBN,~~~~~,A,BRAEBURN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBBN~~~~~N,AB,BBN,~~~~~,N,BRAEBURN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBCHgl~~~N,AB,BCH,gl~~~,N,BUSCHE,M,NO,0,-,I,M,VF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,GL
+ABBCH~~~~~N,AB,BCH,~~~~~,N,BUSCHE,M,NO,0,-,MW,M,VF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABBCRaa~~~N,AB,BCR,aa~~~,N,BICKERDIKE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABBCR~~~~~N,AB,BCR,~~~~~,N,BICKERDIKE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABBDEpt~~~N,AB,BDE,pt~~~,N,BEDE CREEK,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABBDE~~~~~N,AB,BDE,~~~~~,N,BEDE CREEK,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABBDYgr~~~N,AB,BDY,gr~~~,N,BIRDSEYE,M,NO,0,-,W,MF,F,-,VC,UD,-,TILL,RESD,-,,,,CH,DGC,O
+ABBDY~~~~~A,AB,BDY,~~~~~,A,BIRDSEYE,M,NO,0,-,W,MF,F,-,VC,UD,-,TILL,RESD,-,,,,CH,DGC,O
+ABBDY~~~~~N,AB,BDY,~~~~~,N,BIRDSEYE,M,NO,0,-,W,MF,F,-,VC,UD,-,TILL,RESD,-,,,,CH,DGC,O
+ABBED~~~~~N,AB,BED,~~~~~,N,BEDDINGTON,M,NO,3,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABBEJ~~~~~N,AB,BEJ,~~~~~,N,BENJAMIN,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABBEL~~~~~A,AB,BEL,~~~~~,A,BELLSHILL,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABBENaa~~~A,AB,BEN,aa~~~,A,BENALTO,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBENaa~~~N,AB,BEN,aa~~~,N,BENALTO,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBENgl~~~A,AB,BEN,gl~~~,A,BENALTO,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABBENst~~~N,AB,BEN,st~~~,N,BENALTO,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBENxp~~~N,AB,BEN,xp~~~,N,BENALTO,M,NO,0,-,W,MF,MC,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,D
+ABBENxs~~~N,AB,BEN,xs~~~,N,BENALTO,M,NO,0,-,W,MF,VC,-,WC,UD,-,TILL,GLFL,-,,,,LU,GL,D
+ABBEN~~~~~A,AB,BEN,~~~~~,A,BENALTO,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBEN~~~~~N,AB,BEN,~~~~~,N,BENALTO,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBER~~~~~N,AB,BER,~~~~~,N,BERLAND,M,NO,0,-,W,MC,MC,-,VC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABBEVzz~~~A,AB,BEV,zz~~~,A,BELLEVUE,M,NO,6,LI,W,M,MF,,AN,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABBEVzz~~~N,AB,BEV,zz~~~,N,BELLEVUE,M,NO,6,LI,W,M,MF,,AN,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABBEV~~~~~A,AB,BEV,~~~~~,A,BELLEVUE,M,NO,6,LI,W,M,MF,,AN,UD,,COLL,RESD,RKUD,,,,CH,DBC,O
+ABBEV~~~~~N,AB,BEV,~~~~~,N,BELLEVUE,M,NO,6,LI,W,M,MF,,AN,UD,,COLL,RESD,RKUD,,,,CH,DBC,O
+ABBEZ~~~~~A,AB,BEZ,~~~~~,A,BEZANSON,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABBEZ~~~~~N,AB,BEZ,~~~~~,N,BEZANSON,M,NO,0,-,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABBFDaa~~~A,AB,BFD,aa~~~,A,BROWNFIELD,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABBFDaa~~~N,AB,BFD,aa~~~,N,BROWNFIELD,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABBFDer~~~A,AB,BFD,er~~~,A,BROWNFIELD,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABBFD~~~~~A,AB,BFD,~~~~~,A,BROWNFIELD,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABBFD~~~~~N,AB,BFD,~~~~~,N,BROWNFIELD,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABBFTzr~~~N,AB,BFT,zr~~~,N,BLACKFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,FLUV,GLFL,-,,,,CH,BLC,R
+ABBFT~~~~~A,AB,BFT,~~~~~,A,BLACKFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,FLUV,GLFL,-,,,,CH,BLC,O
+ABBFT~~~~~N,AB,BFT,~~~~~,N,BLACKFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,FLUV,GLFL,-,,,,CH,BLC,O
+ABBGY~~~~~N,AB,BGY,~~~~~,N,BIGORAY,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,O
+ABBHD~~~~~N,AB,BHD,~~~~~,N,BUSHY HEAD,M,YU,0,-,P,VC,-,-,VC,-,-,LACU,-,-,,,,GL,HG,R
+ABBHP~~~~~A,AB,BHP,~~~~~,A,BUFFALO HEAD,M,NO,8,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABBHP~~~~~N,AB,BHP,~~~~~,N,BUFFALO HEAD,M,NO,9,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABBIL~~~~~N,AB,BIL,~~~~~,N,BARIL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,BR,EB,E
+ABBISpt~~~N,AB,BIS,pt~~~,N,BISON,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABBIS~~~~~N,AB,BIS,~~~~~,N,BISON,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABBIT~~~~~N,AB,BIT,~~~~~,N,BITTERN,M,YB,2,SA,VP,F,-,-,WC,-,-,LACU,-,-,,,,GL,G,R
+ABBKEco~~~N,AB,BKE,co~~~,N,BROCKET,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABBKEsa~~~N,AB,BKE,sa~~~,N,BROCKET,M,YU,4,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABBKExp~~~A,AB,BKE,xp~~~,A,BROCKET,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,RESD,-,,,,CH,DBC,R
+ABBKExt~~~A,AB,BKE,xt~~~,A,BROCKET,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,R
+ABBKE~~~~~A,AB,BKE,~~~~~,A,BROCKET,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABBKE~~~~~N,AB,BKE,~~~~~,N,BROCKET,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABBKF~~~~~N,AB,BKF,~~~~~,N,BIGKNIFE,M,YU,3,BN,MW,M,-,-,WC,-,-,FLUV,-,-,,,,RG,R,O
+ABBKN~~~~~N,AB,BKN,~~~~~,N,BUCKTON,M,NO,0,-,W,MF,MF,-,AN,UD,-,COLL,RESD,-,,,,LU,GL,O
+ABBKX~~~~~N,AB,BKX,~~~~~,N,BAKER CREEK,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABBLAaa~~~N,AB,BLA,aa~~~,N,BIRKLAND,O,YB,0,-,VP,FI,MF,-,AN,UD,-,SPPT,TILL,-,,,,OR,F,T
+ABBLA~~~~~N,AB,BLA,~~~~~,N,BIRKLAND,O,YB,0,-,VP,FI,MF,-,AN,UD,-,SPPT,TILL,-,,,,OR,F,T
+ABBLB~~~~~A,AB,BLB,~~~~~,A,BLOOMSBURY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABBLB~~~~~N,AB,BLB,~~~~~,N,BLOOMSBURY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABBLKst~~~N,AB,BLK,st~~~,N,BUCK LAKE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,BR
+ABBLK~~~~~N,AB,BLK,~~~~~,N,BUCK LAKE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,BR
+ABBLL~~~~~A,AB,BLL,~~~~~,A,BLAINE LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABBLL~~~~~N,AB,BLL,~~~~~,N,BLAINE LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABBLPsa~~~N,AB,BLP,sa~~~,N,BULLPOUND,M,YU,2,BN,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABBLP~~~~~A,AB,BLP,~~~~~,A,BULLPOUND,M,NO,2,BN,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABBLP~~~~~N,AB,BLP,~~~~~,N,BULLPOUND,M,NO,2,BN,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABBLRcb~~~N,AB,BLR,cb~~~,N,BLUE RIDGE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABBLRxt~~~N,AB,BLR,xt~~~,N,BLUE RIDGE,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABBLR~~~~~N,AB,BLR,~~~~~,N,BLUE RIDGE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABBLT~~~~~N,AB,BLT,~~~~~,N,BLUET,M,YB,0,-,VP,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABBLYaa~~~N,AB,BLY,aa~~~,N,BELLOY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABBLYgrxc~N,AB,BLY,grxc~,N,BELLOY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABBLYgr~~~N,AB,BLY,gr~~~,N,BELLOY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABBLYstxc~N,AB,BLY,stxc~,N,BELLOY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABBLYst~~~N,AB,BLY,st~~~,N,BELLOY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABBLYxc~~~N,AB,BLY,xc~~~,N,BELLOY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABBLY~~~~~A,AB,BLY,~~~~~,A,BELLOY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABBLY~~~~~N,AB,BLY,~~~~~,N,BELLOY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABBMT~~~~~N,AB,BMT,~~~~~,N,BITUMOUNT,M,YB,0,-,VP,VC,-,-,AN,-,-,GLFL,-,-,,,,GL,G,O
+ABBMYpt~~~N,AB,BMY,pt~~~,N,BREMAY,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABBMY~~~~~A,AB,BMY,~~~~~,A,BREMAY,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABBMY~~~~~N,AB,BMY,~~~~~,N,BREMAY,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABBNNaa~~~N,AB,BNN,aa~~~,N,BONNIE,O,YB,0,-,VP,HU,-,-,AN,-,-,FNPT,-,-,,,,OR,H,TY
+ABBNN~~~~~N,AB,BNN,~~~~~,N,BONNIE,O,YB,0,-,VP,HU,-,-,AN,-,-,FNPT,-,-,,,,OR,H,TY
+ABBNT~~~~~N,AB,BNT,~~~~~,N,BURNT,M,NO,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABBOA~~~~~N,AB,BOA,~~~~~,N,BOAG,M,YB,3,SA,VP,F,-,-,WC,-,-,GLLC,-,-,,,,GL,G,R
+ABBOB~~~~~N,AB,BOB,~~~~~,N,BOSCOMBE,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABBOC~~~~~A,AB,BOC,~~~~~,A,BRONCO,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABBOC~~~~~N,AB,BOC,~~~~~,N,BRONCO,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABBOVaa~~~A,AB,BOV,aa~~~,A,BOW VALLEY,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABBOVaa~~~N,AB,BOV,aa~~~,N,BOW VALLEY,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABBOVzr~~~N,AB,BOV,zr~~~,N,BOW VALLEY,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABBOV~~~~~A,AB,BOV,~~~~~,A,BOW VALLEY,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABBOV~~~~~N,AB,BOV,~~~~~,N,BOW VALLEY,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABBPExl~~~N,AB,BPE,xl~~~,N,BEAUPRE,M,NO,6,LI,W,MF,,-,VC,,-,TILL,RKUD,-,,,,BR,EB,O
+ABBPE~~~~~N,AB,BPE,~~~~~,N,BEAUPRE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,BR,EB,O
+ABBPT~~~~~N,AB,BPT,~~~~~,N,BAPTISTE,M,NO,0,-,R,VC,-,-,AN,-,-,EOLI,-,-,,,,PZ,HFP,O
+ABBPW~~~~~A,AB,BPW,~~~~~,A,BEARSPAW,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABBPW~~~~~N,AB,BPW,~~~~~,N,BEARSPAW,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABBPX~~~~~N,AB,BPX,~~~~~,N,BOULDER PASS,M,NO,0,-,W,MC,-,-,EC,-,-,COLL,-,-,,,,BR,EB,O
+ABBQE~~~~~N,AB,BQE,~~~~~,N,BOURQUE LAKE,M,YB,0,-,VP,VC,-,-,WC,-,-,GLFL,-,-,,,,GL,HG,R
+ABBRG~~~~~N,AB,BRG,~~~~~,N,BRAGG CREEK,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,BR,EB,E
+ABBRHpt~~~N,AB,BRH,pt~~~,N,BEAVER RANCH,M,YU,0,-,P,MF,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABBRH~~~~~N,AB,BRH,~~~~~,N,BEAVER RANCH,M,YU,0,-,P,MF,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABBRK~~~~~N,AB,BRK,~~~~~,N,BRIGHTBANK,M,NO,0,-,W,MC,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,D
+ABBRRpt~~~N,AB,BRR,pt~~~,N,BEAR RIVER,M,YU,6,SA,P,F,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABBRR~~~~~N,AB,BRR,~~~~~,N,BEAR RIVER,M,YU,6,SA,P,F,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABBRYxp~~~N,AB,BRY,xp~~~,N,BLUEBERRY,M,NO,7,SA,MW,F,F,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,GL
+ABBRY~~~~~N,AB,BRY,~~~~~,N,BLUEBERRY,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABBSUcrzr~A,AB,BSU,crzr~,A,BROSSEAU,M,NO,0,-,W,MF,-,-,WC,-,-,RESD,-,-,,,,CH,DGC,R
+ABBSUer~~~A,AB,BSU,er~~~,A,BROSSEAU,M,NO,0,-,W,MF,-,-,WC,-,-,RESD,-,-,,,,CH,DGC,O
+ABBSU~~~~~A,AB,BSU,~~~~~,A,BROSSEAU,M,NO,0,-,W,MF,-,-,WC,-,-,RESD,-,-,,,,CH,DGC,O
+ABBSU~~~~~N,AB,BSU,~~~~~,N,BROSSEAU,M,NO,0,-,W,MF,-,-,WC,-,-,RESD,-,-,,,,CH,DGC,O
+ABBSX~~~~~N,AB,BSX,~~~~~,N,BOW SUMMIT,M,NO,0,-,R,MC,-,-,EC,-,-,COLL,-,-,,,,BR,MB,O
+ABBSY~~~~~A,AB,BSY,~~~~~,A,BLUESKY,M,NO,7,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,DGC,SZ
+ABBTH~~~~~A,AB,BTH,~~~~~,A,BOTHA,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,BL
+ABBTH~~~~~N,AB,BTH,~~~~~,N,BOTHA,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,BL
+ABBTNaa~~~A,AB,BTN,aa~~~,A,BRETON,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBTNaa~~~N,AB,BTN,aa~~~,N,BRETON,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBTNst~~~N,AB,BTN,st~~~,N,BRETON,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBTNxp~~~N,AB,BTN,xp~~~,N,BRETON,M,NO,0,-,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABBTN~~~~~A,AB,BTN,~~~~~,A,BRETON,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBTN~~~~~N,AB,BTN,~~~~~,N,BRETON,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABBTRaa~~~N,AB,BTR,aa~~~,N,BAY TREE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABBTRpt~~~N,AB,BTR,pt~~~,N,BAY TREE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABBTR~~~~~N,AB,BTR,~~~~~,N,BAY TREE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABBUD~~~~~N,AB,BUD,~~~~~,N,BOUNDARY,M,NO,0,-,W,MF,F,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABBUFgl~~~N,AB,BUF,gl~~~,N,BUFFALO,M,YU,0,-,I,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,GL
+ABBUF~~~~~N,AB,BUF,~~~~~,N,BUFFALO,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABBUL~~~~~A,AB,BUL,~~~~~,A,BULLHORN,M,NO,3,SA,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABBUL~~~~~N,AB,BUL,~~~~~,N,BULLHORN,M,NO,4,SA,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABBURaa~~~N,AB,BUR,aa~~~,N,BURMIS,M,NO,0,-,R,VC,-,-,EC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABBURzz~~~N,AB,BUR,zz~~~,N,BURMIS,M,NO,0,-,R,VC,-,-,EC,-,-,GLFL,-,-,,,,CH,BLC,CA
+ABBUR~~~~~N,AB,BUR,~~~~~,N,BURMIS,M,NO,0,-,R,VC,-,-,EC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABBUTsazr~N,AB,BUT,sazr~,N,BUNTON,M,YU,2,SA,MW,M,-,-,VC,-,-,GLFL,-,-,,,,RG,HR,O
+ABBUTsa~~~A,AB,BUT,sa~~~,A,BUNTON,M,YU,4,SA,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBUTsa~~~N,AB,BUT,sa~~~,N,BUNTON,M,YU,4,SA,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBUTxp~~~A,AB,BUT,xp~~~,A,BUNTON,M,NO,6,LI,W,M,M,,VC,UD,,GLFL,RESD,RKUD,,,,CH,BC,O
+ABBUTzr~~~N,AB,BUT,zr~~~,N,BUNTON,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,RG,HR,O
+ABBUT~~~~~A,AB,BUT,~~~~~,A,BUNTON,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBUT~~~~~N,AB,BUT,~~~~~,N,BUNTON,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVAaa~~~A,AB,BVA,aa~~~,A,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVAaa~~~N,AB,BVA,aa~~~,N,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVAgr~~~A,AB,BVA,gr~~~,A,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVAgr~~~N,AB,BVA,gr~~~,N,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVA~~~~~A,AB,BVA,~~~~~,A,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVA~~~~~N,AB,BVA,~~~~~,N,BEAUVAIS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABBVHcr~~~N,AB,BVH,cr~~~,N,BEAVERHILLS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,CA
+ABBVHer~~~A,AB,BVH,er~~~,A,BEAVERHILLS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBVHsa~~~N,AB,BVH,sa~~~,N,BEAVERHILLS,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBVHsc~~~N,AB,BVH,sc~~~,N,BEAVERHILLS,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBVH~~~~~A,AB,BVH,~~~~~,A,BEAVERHILLS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBVH~~~~~N,AB,BVH,~~~~~,N,BEAVERHILLS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBVLer~~~A,AB,BVL,er~~~,A,BINGVILLE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVLgl~~~N,AB,BVL,gl~~~,N,BINGVILLE,M,YU,0,-,I,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,GL
+ABBVLgr~~~A,AB,BVL,gr~~~,A,BINGVILLE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVLgr~~~N,AB,BVL,gr~~~,N,BINGVILLE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVLsa~~~N,AB,BVL,sa~~~,N,BINGVILLE,M,YU,3,SA,MW,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVLxl~~~A,AB,BVL,xl~~~,A,BINGVILLE,M,NO,5,LI,W,MC,,-,WC,,-,GLFL,RKUD,-,,,,CH,BC,O
+ABBVLzr~~~A,AB,BVL,zr~~~,A,BINGVILLE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,R
+ABBVLzr~~~N,AB,BVL,zr~~~,N,BINGVILLE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,R
+ABBVL~~~~~A,AB,BVL,~~~~~,A,BINGVILLE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVL~~~~~N,AB,BVL,~~~~~,N,BINGVILLE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BC,O
+ABBVX~~~~~N,AB,BVX,~~~~~,N,BOW VALLEY MTN,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABBWD~~~~~N,AB,BWD,~~~~~,N,BIRCHWOOD,M,YU,0,-,I,M,MF,-,EA,WC,-,GLFL,TILL,-,,,,LU,GL,GL
+ABBWFxt~~~N,AB,BWF,xt~~~,N,BAWLF,M,YU,2,SA,MW,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,R
+ABBWF~~~~~A,AB,BWF,~~~~~,A,BAWLF,M,YU,3,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABBWF~~~~~N,AB,BWF,~~~~~,N,BAWLF,M,YU,2,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABBWV~~~~~N,AB,BWV,~~~~~,N,BROWNVALE,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLSZ
+ABBYN~~~~~A,AB,BYN,~~~~~,A,BERWYN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBYN~~~~~N,AB,BYN,~~~~~,N,BERWYN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABBYRda~~~A,AB,BYR,da~~~,A,BOYER,M,NO,3,BN,MW,F,-,-,VC,-,-,LATL,-,-,,,,SZ,SS,DG
+ABBYRda~~~N,AB,BYR,da~~~,N,BOYER,M,NO,4,BN,MW,F,-,-,VC,-,-,LATL,-,-,,,,SZ,SS,DG
+ABBYR~~~~~A,AB,BYR,~~~~~,A,BOYER,M,NO,3,BN,MW,F,-,-,VC,-,-,LATL,-,-,,,,SZ,SS,G
+ABBYR~~~~~N,AB,BYR,~~~~~,N,BOYER,M,NO,3,BN,MW,F,-,-,VC,-,-,LATL,-,-,,,,SZ,SS,G
+ABBYX~~~~~N,AB,BYX,~~~~~,N,BRYANT,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,BR,EB,E
+ABBZCaa~~~N,AB,BZC,aa~~~,N,BALZAC,M,YB,2,SA,VP,F,MF,-,VC,UD,-,LACU,TILL,-,,,,GL,HG,R
+ABBZC~~~~~N,AB,BZC,~~~~~,N,BALZAC,M,YB,2,SA,VP,F,MF,-,VC,UD,-,LACU,TILL,-,,,,GL,HG,R
+ABBZRaa~~~A,AB,BZR,aa~~~,A,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZRaa~~~N,AB,BZR,aa~~~,N,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZRca~~~N,AB,BZR,ca~~~,N,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,CA
+ABBZRgl~~~A,AB,BZR,gl~~~,A,BEAZER,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABBZRsa~~~N,AB,BZR,sa~~~,N,BEAZER,M,YU,0,-,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZRst~~~N,AB,BZR,st~~~,N,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZRta~~~N,AB,BZR,ta~~~,N,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZRyl~~~A,AB,BZR,yl~~~,A,BEAZER,M,NO,5,LI,W,MF,,-,VC,,-,TILL,RKUD,-,,,,CH,BLC,O
+ABBZR~~~~~A,AB,BZR,~~~~~,A,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABBZR~~~~~N,AB,BZR,~~~~~,N,BEAZER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABCAJco~~~N,AB,CAJ,co~~~,N,CARCAJOU,M,NO,0,-,W,VC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCAJgl~~~N,AB,CAJ,gl~~~,N,CARCAJOU,M,NO,0,-,MW,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,GL
+ABCAJgr~~~N,AB,CAJ,gr~~~,N,CARCAJOU,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCAJst~~~N,AB,CAJ,st~~~,N,CARCAJOU,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCAJ~~~~~N,AB,CAJ,~~~~~,N,CARCAJOU,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCALaa~~~N,AB,CAL,aa~~~,N,CALAIS,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GL
+ABCALxp~~~N,AB,CAL,xp~~~,N,CALAIS,M,NO,0,-,MW,F,F,-,WC,UD,-,LATL,RESD,-,,,,LU,GL,GL
+ABCAL~~~~~N,AB,CAL,~~~~~,N,CALAIS,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GL
+ABCAR~~~~~N,AB,CAR,~~~~~,N,CAROLINE,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABCAWaa~~~N,AB,CAW,aa~~~,N,CAW,M,NO,4,LI,W,MF,,-,AN,,-,COLL,RKUD,-,,,,RG,HR,CU
+ABCAW~~~~~N,AB,CAW,~~~~~,N,CAW,M,NO,4,LI,W,MF,,-,AN,,-,COLL,RKUD,-,,,,RG,HR,CU
+ABCAX~~~~~N,AB,CAX,~~~~~,N,CAVELL,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,BR,DYB,E
+ABCBDaa~~~N,AB,CBD,aa~~~,N,CARBONDALE,M,NO,6,LI,W,M,,-,WC,,-,TILL,RKUD,-,,,,BR,EB,O
+ABCBD~~~~~N,AB,CBD,~~~~~,N,CARBONDALE,M,NO,6,LI,W,M,,-,WC,,-,TILL,RKUD,-,,,,BR,EB,O
+ABCBUgr~~~N,AB,CBU,gr~~~,N,CARIBOU,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABCBUst~~~N,AB,CBU,st~~~,N,CARIBOU,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABCBU~~~~~N,AB,CBU,~~~~~,N,CARIBOU,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABCCB~~~~~N,AB,CCB,~~~~~,N,CUCUMBER,M,NO,0,-,MW,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABCCLst~~~N,AB,CCL,st~~~,N,CECIL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABCCL~~~~~A,AB,CCL,~~~~~,A,CECIL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABCCL~~~~~N,AB,CCL,~~~~~,N,CECIL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABCCRaa~~~A,AB,CCR,aa~~~,A,CROOKED CREEK,M,NO,6,LI,W,MF,M,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,D
+ABCCR~~~~~N,AB,CCR,~~~~~,N,CROOKED CREEK,M,NO,7,LI,W,MF,M,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,D
+ABCDMaa~~~N,AB,CDM,aa~~~,N,CADOMIN,M,NO,5,LI,W,M,,-,AN,,-,RESD,RKUD,-,,,,BR,DYB,E
+ABCDM~~~~~N,AB,CDM,~~~~~,N,CADOMIN,M,NO,5,LI,W,M,,-,AN,,-,RESD,RKUD,-,,,,BR,DYB,E
+ABCFDer~~~A,AB,CFD,er~~~,A,CRANFORD,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,O
+ABCFDgl~~~A,AB,CFD,gl~~~,A,CRANFORD,M,YU,0,-,I,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,GL
+ABCFDsa~~~N,AB,CFD,sa~~~,N,CRANFORD,M,YU,4,SA,MW,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,O
+ABCFDsc~~~N,AB,CFD,sc~~~,N,CRANFORD,M,NO,5,SA,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,O
+ABCFD~~~~~A,AB,CFD,~~~~~,A,CRANFORD,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,O
+ABCFD~~~~~N,AB,CFD,~~~~~,N,CRANFORD,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,O
+ABCFTaa~~~A,AB,CFT,aa~~~,A,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,O
+ABCFTaa~~~N,AB,CFT,aa~~~,N,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,O
+ABCFTca~~~N,AB,CFT,ca~~~,N,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,CA
+ABCFTco~~~A,AB,CFT,co~~~,A,CROWFOOT,M,NO,0,-,W,MC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,O
+ABCFTzr~~~A,AB,CFT,zr~~~,A,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,R
+ABCFT~~~~~A,AB,CFT,~~~~~,A,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,O
+ABCFT~~~~~N,AB,CFT,~~~~~,N,CROWFOOT,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DBC,O
+ABCGAxc~~~N,AB,CGA,xc~~~,N,CHINCHAGA,O,YB,0,-,VP,ME,F,-,WC,UD,-,FNPT,GLLC,-,,,,OR,M,T
+ABCGAxs~~~N,AB,CGA,xs~~~,N,CHINCHAGA,O,YB,0,-,VP,ME,VC,-,WC,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABCGAxt~~~N,AB,CGA,xt~~~,N,CHINCHAGA,O,YB,0,-,VP,ME,MF,-,WC,UD,-,FNPT,TILL,-,,,,OR,M,T
+ABCGAxu~~~N,AB,CGA,xu~~~,N,CHINCHAGA,O,YB,0,-,VP,ME,MF,-,WC,UD,-,FNPT,UNDM,-,,,,OR,M,T
+ABCGA~~~~~N,AB,CGA,~~~~~,N,CHINCHAGA,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABCGE~~~~~N,AB,CGE,~~~~~,N,CROWLODGE,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,BL
+ABCGWgl~~~N,AB,CGW,gl~~~,N,CRAIGOWER,M,YU,3,BN,I,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,GLDB
+ABCGW~~~~~N,AB,CGW,~~~~~,N,CRAIGOWER,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABCHK~~~~~A,AB,CHK,~~~~~,A,CHICKADEE,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCHK~~~~~N,AB,CHK,~~~~~,N,CHICKADEE,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCHLpt~~~N,AB,CHL,pt~~~,N,CHILD LAKE,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,LG,O
+ABCHL~~~~~N,AB,CHL,~~~~~,N,CHILD LAKE,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,LG,O
+ABCHNer~~~A,AB,CHN,er~~~,A,CHIN,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABCHNgl~~~A,AB,CHN,gl~~~,A,CHIN,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,GL
+ABCHNsa~~~N,AB,CHN,sa~~~,N,CHIN,M,YU,3,SA,MW,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABCHNsc~~~N,AB,CHN,sc~~~,N,CHIN,M,NO,4,SA,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABCHN~~~~~A,AB,CHN,~~~~~,A,CHIN,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABCHN~~~~~N,AB,CHN,~~~~~,N,CHIN,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABCHT~~~~~N,AB,CHT,~~~~~,N,CHATEH,M,YB,0,-,P,F,-,-,AN,-,-,GLLC,-,-,,,,GL,G,O
+ABCHZ~~~~~A,AB,CHZ,~~~~~,A,CHINZ,M,NO,4,SA,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABCHZ~~~~~N,AB,CHZ,~~~~~,N,CHINZ,M,NO,4,SA,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABCIOsa~~~A,AB,CIO,sa~~~,A,CHOKIO,M,YU,3,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,CA
+ABCIOxp~~~A,AB,CIO,xp~~~,A,CHOKIO,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,RESD,-,,,,CH,DBC,CA
+ABCIO~~~~~A,AB,CIO,~~~~~,A,CHOKIO,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,CA
+ABCIO~~~~~N,AB,CIO,~~~~~,N,CHOKIO,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,CA
+ABCLDca~~~N,AB,CLD,ca~~~,N,COALDALE,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,CA
+ABCLDsa~~~N,AB,CLD,sa~~~,N,COALDALE,M,YU,3,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABCLDxt~~~A,AB,CLD,xt~~~,A,COALDALE,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABCLD~~~~~A,AB,CLD,~~~~~,A,COALDALE,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABCLD~~~~~N,AB,CLD,~~~~~,N,COALDALE,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABCLKgl~~~A,AB,CLK,gl~~~,A,CHIP LAKE,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABCLK~~~~~A,AB,CLK,~~~~~,A,CHIP LAKE,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABCLK~~~~~N,AB,CLK,~~~~~,N,CHIP LAKE,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABCLL~~~~~A,AB,CLL,~~~~~,A,CLEARDALE,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABCLL~~~~~N,AB,CLL,~~~~~,N,CLEARDALE,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABCLRst~~~A,AB,CLR,st~~~,A,CLARINDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABCLRst~~~N,AB,CLR,st~~~,N,CLARINDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABCLR~~~~~A,AB,CLR,~~~~~,A,CLARINDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABCLR~~~~~N,AB,CLR,~~~~~,N,CLARINDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABCLSpt~~~N,AB,CLS,pt~~~,N,CHELSEA,M,YU,0,-,P,MF,-,-,VC,-,-,FLUV,-,-,,,,GL,G,O
+ABCLS~~~~~N,AB,CLS,~~~~~,N,CHELSEA,M,YU,0,-,P,MF,-,-,VC,-,-,FLUV,-,-,,,,GL,G,O
+ABCMBca~~~A,AB,CMB,ca~~~,A,COLUMBINE,M,YB,0,-,VP,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABCMB~~~~~N,AB,CMB,~~~~~,N,COLUMBINE,M,YB,0,-,VP,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,R
+ABCMOglxp~N,AB,CMO,glxp~,N,CAMROSE,M,YU,3,BN,I,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,SZ,SS,GLBL
+ABCMOgl~~~N,AB,CMO,gl~~~,N,CAMROSE,M,YU,3,BN,I,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,GLBL
+ABCMOsa~~~N,AB,CMO,sa~~~,N,CAMROSE,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABCMOst~~~N,AB,CMO,st~~~,N,CAMROSE,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABCMO~~~~~A,AB,CMO,~~~~~,A,CAMROSE,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABCMO~~~~~N,AB,CMO,~~~~~,N,CAMROSE,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABCMR~~~~~N,AB,CMR,~~~~~,N,COMREY,M,NO,4,LI,W,MC,,-,VC,,-,RESD,RKUD,-,,,,CH,BC,O
+ABCMY~~~~~A,AB,CMY,~~~~~,A,CARMANGAY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABCMY~~~~~N,AB,CMY,~~~~~,N,CARMANGAY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABCNA~~~~~N,AB,CNA,~~~~~,N,CORNELIA,M,NO,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABCNNca~~~A,AB,CNN,ca~~~,A,CORONATION,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,CA
+ABCNNgl~~~A,AB,CNN,gl~~~,A,CORONATION,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,GL
+ABCNN~~~~~A,AB,CNN,~~~~~,A,CORONATION,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABCNN~~~~~N,AB,CNN,~~~~~,N,CORONATION,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABCOAer~~~A,AB,COA,er~~~,A,COOKING LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABCOAst~~~N,AB,COA,st~~~,N,COOKING LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABCOA~~~~~A,AB,COA,~~~~~,A,COOKING LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABCOA~~~~~N,AB,COA,~~~~~,N,COOKING LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABCODpt~~~N,AB,COD,pt~~~,N,CODNER,M,YB,0,-,VP,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,O
+ABCOD~~~~~A,AB,COD,~~~~~,A,CODNER,M,YB,0,-,VP,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,O
+ABCOD~~~~~N,AB,COD,~~~~~,N,CODNER,M,YB,0,-,VP,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,O
+ABCOH~~~~~N,AB,COH,~~~~~,N,COGHILL,O,YB,0,-,VP,ME,MF,-,AN,UD,-,FNPT,TILL,-,,,,OR,M,THU
+ABCON~~~~~N,AB,CON,~~~~~,N,CONNOP,M,NO,6,SA,W,MC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABCOPaa~~~N,AB,COP,aa~~~,N,COPTON,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,BR,DYB,E
+ABCOP~~~~~N,AB,COP,~~~~~,N,COPTON,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,BR,DYB,E
+ABCOR~~~~~N,AB,COR,~~~~~,N,CORDEL,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABCOSaa~~~N,AB,COS,aa~~~,N,CODESA,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCOSgrxc~N,AB,COS,grxc~,N,CODESA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCOSgr~~~N,AB,COS,gr~~~,N,CODESA,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCOSstxc~N,AB,COS,stxc~,N,CODESA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCOSst~~~N,AB,COS,st~~~,N,CODESA,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCOSxc~~~N,AB,COS,xc~~~,N,CODESA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABCOSxp~~~N,AB,COS,xp~~~,N,CODESA,M,NO,0,-,W,MC,MF,,WC,UD,,GLFL,TILL,RKUD,,,,LU,GL,O
+ABCOS~~~~~A,AB,COS,~~~~~,A,CODESA,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCOS~~~~~N,AB,COS,~~~~~,N,CODESA,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCPLxt~~~N,AB,CPL,xt~~~,N,CAMP LAKE,M,NO,0,-,W,VC,MF,-,WC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABCPL~~~~~A,AB,CPL,~~~~~,A,CAMP LAKE,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCPL~~~~~N,AB,CPL,~~~~~,N,CAMP LAKE,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCPN~~~~~N,AB,CPN,~~~~~,N,CHIPEWYAN,M,YU,0,-,I,MF,-,-,VC,-,-,FLUV,-,-,,,,RG,R,GLCU
+ABCPX~~~~~N,AB,CPX,~~~~~,N,COPPER,M,NO,0,-,W,MC,-,-,AN,-,-,RESD,-,-,,,,BR,DYB,O
+ABCRA~~~~~N,AB,CRA,~~~~~,N,CHRISTINA,M,NO,0,-,W,M,MF,-,EA,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABCRDca~~~A,AB,CRD,ca~~~,A,CRADDUCK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,CA
+ABCRDsa~~~N,AB,CRD,sa~~~,N,CRADDUCK,M,YU,3,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABCRDst~~~N,AB,CRD,st~~~,N,CRADDUCK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABCRDzt~~~A,AB,CRD,zt~~~,A,CRADDUCK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABCRDzt~~~N,AB,CRD,zt~~~,N,CRADDUCK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DB
+ABCRD~~~~~A,AB,CRD,~~~~~,A,CRADDUCK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABCRD~~~~~N,AB,CRD,~~~~~,N,CRADDUCK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABCRN~~~~~A,AB,CRN,~~~~~,A,CARDINAL,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABCRN~~~~~N,AB,CRN,~~~~~,N,CARDINAL,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABCRWco~~~N,AB,CRW,co~~~,N,CARWAY,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCRWfi~~~N,AB,CRW,fi~~~,N,CARWAY,M,NO,0,-,W,MF,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCRW~~~~~A,AB,CRW,~~~~~,A,CARWAY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCRW~~~~~N,AB,CRW,~~~~~,N,CARWAY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABCSNaa~~~N,AB,CSN,aa~~~,N,CASLAN,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABCSN~~~~~N,AB,CSN,~~~~~,N,CASLAN,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABCSPaa~~~N,AB,CSP,aa~~~,N,COALSPUR,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABCSPst~~~N,AB,CSP,st~~~,N,COALSPUR,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABCSP~~~~~N,AB,CSP,~~~~~,N,COALSPUR,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABCSTaa~~~N,AB,CST,aa~~~,N,CLOUSTON,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCST~~~~~N,AB,CST,~~~~~,N,CLOUSTON,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCTE~~~~~A,AB,CTE,~~~~~,A,CADOTTE,M,NO,7,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABCTE~~~~~N,AB,CTE,~~~~~,N,CADOTTE,M,NO,8,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABCTNsa~~~N,AB,CTN,sa~~~,N,CARDSTON,M,NO,4,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABCTNxp~~~N,AB,CTN,xp~~~,N,CARDSTON,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,RESD,-,,,,CH,BLC,O
+ABCTNzt~~~N,AB,CTN,zt~~~,N,CARDSTON,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABCTN~~~~~A,AB,CTN,~~~~~,A,CARDSTON,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABCTN~~~~~N,AB,CTN,~~~~~,N,CARDSTON,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABCTW~~~~~N,AB,CTW,~~~~~,N,CHATWIN,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABCULaa~~~N,AB,CUL,aa~~~,N,CULP,M,NO,0,-,R,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCULco~~~N,AB,CUL,co~~~,N,CULP,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCULst~~~N,AB,CUL,st~~~,N,CULP,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCUL~~~~~N,AB,CUL,~~~~~,N,CULP,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABCUR~~~~~A,AB,CUR,~~~~~,A,CURRENT_LAKE,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABCUR~~~~~N,AB,CUR,~~~~~,N,CURRENT_LAKE,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABCVDcrsa~N,AB,CVD,crsa~,N,CAVENDISH,M,YU,3,SA,MW,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,CA
+ABCVDer~~~A,AB,CVD,er~~~,A,CAVENDISH,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,O
+ABCVDglsa~N,AB,CVD,glsa~,N,CAVENDISH,M,YU,3,SA,I,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,GL
+ABCVDgl~~~N,AB,CVD,gl~~~,N,CAVENDISH,M,YU,0,-,I,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,GL
+ABCVDsa~~~N,AB,CVD,sa~~~,N,CAVENDISH,M,YU,3,SA,MW,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,O
+ABCVDsc~~~N,AB,CVD,sc~~~,N,CAVENDISH,M,NO,4,SA,W,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,O
+ABCVD~~~~~A,AB,CVD,~~~~~,A,CAVENDISH,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,O
+ABCVD~~~~~N,AB,CVD,~~~~~,N,CAVENDISH,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,O
+ABCVLaa~~~A,AB,CVL,aa~~~,A,CARVEL,M,NO,0,-,W,M,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,D
+ABCVL~~~~~N,AB,CVL,~~~~~,N,CARVEL,M,NO,0,-,W,M,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,D
+ABCVX~~~~~N,AB,CVX,~~~~~,N,CONSOLATION VALLEY,M,YB,0,-,P,M,-,-,WC,-,-,TILL,-,-,,,,GL,G,R
+ABCWLpt~~~N,AB,CWL,pt~~~,N,CORNWALL,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABCWL~~~~~N,AB,CWL,~~~~~,N,CORNWALL,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABCWYsa~~~N,AB,CWY,sa~~~,N,COWLEY,M,YU,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABCWYzr~~~N,AB,CWY,zr~~~,N,COWLEY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABCWY~~~~~A,AB,CWY,~~~~~,A,COWLEY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABCWY~~~~~N,AB,CWY,~~~~~,N,COWLEY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABCYGaa~~~N,AB,CYG,aa~~~,N,CYGNET,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABCYG~~~~~A,AB,CYG,~~~~~,A,CYGNET,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABCYG~~~~~N,AB,CYG,~~~~~,N,CYGNET,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABCYN~~~~~A,AB,CYN,~~~~~,A,CYNTHIA,M,YB,0,-,VP,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABCYN~~~~~N,AB,CYN,~~~~~,N,CYNTHIA,M,YB,0,-,VP,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABCYY~~~~~N,AB,CYY,~~~~~,N,COYGARY,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABDAN~~~~~N,AB,DAN,~~~~~,N,DAPHNE,M,NO,5,LI,W,MC,,-,AN,,-,GLFL,RKSS,-,,,,BR,DYB,E
+ABDAR~~~~~N,AB,DAR,~~~~~,N,DAROUGH,M,YB,2,SA,P,F,-,-,VC,-,-,LACU,-,-,,,,GL,HG,O
+ABDAUaaxl~N,AB,DAU,aaxl~,N,DALEHURST,M,NO,7,LI,W,M,,-,VC,,-,TILL,RKUD,-,,,,LU,GL,BR
+ABDAUaa~~~N,AB,DAU,aa~~~,N,DALEHURST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABDAUxl~~~N,AB,DAU,xl~~~,N,DALEHURST,M,NO,7,LI,W,M,,-,VC,,-,TILL,RKUD,-,,,,LU,GL,BR
+ABDAU~~~~~N,AB,DAU,~~~~~,N,DALEHURST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABDBOaa~~~A,AB,DBO,aa~~~,A,DEBOLT,M,NO,2,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SO,G
+ABDBOaa~~~N,AB,DBO,aa~~~,N,DEBOLT,M,NO,5,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SO,G
+ABDBO~~~~~A,AB,DBO,~~~~~,A,DEBOLT,M,NO,2,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SO,G
+ABDBO~~~~~N,AB,DBO,~~~~~,N,DEBOLT,M,NO,5,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SO,G
+ABDCYaa~~~A,AB,DCY,aa~~~,A,DOLCY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDCYaa~~~N,AB,DCY,aa~~~,N,DOLCY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDCYgl~~~A,AB,DCY,gl~~~,A,DOLCY,M,YU,0,-,I,M,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,GL
+ABDCYsc~~~A,AB,DCY,sc~~~,A,DOLCY,M,NO,5,SA,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDCYsc~~~N,AB,DCY,sc~~~,N,DOLCY,M,NO,5,SA,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDCY~~~~~A,AB,DCY,~~~~~,A,DOLCY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDCY~~~~~N,AB,DCY,~~~~~,N,DOLCY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABDDEaa~~~N,AB,DDE,aa~~~,N,DRYSDALE,O,YB,0,-,VP,FI,-,-,AN,-,-,FNPT,-,-,,,,OR,F,TY
+ABDDE~~~~~N,AB,DDE,~~~~~,N,DRYSDALE,O,YB,0,-,VP,FI,-,-,AN,-,-,FNPT,-,-,,,,OR,F,TY
+ABDDY~~~~~A,AB,DDY,~~~~~,A,DIDSBURY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDDY~~~~~N,AB,DDY,~~~~~,N,DIDSBURY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDEC~~~~~N,AB,DEC,~~~~~,N,DEER CREEK,M,YU,0,-,I,M,F,-,AN,VC,-,GLFL,LATL,-,,,,LU,GL,GL
+ABDEKxt~~~N,AB,DEK,xt~~~,N,DEERLICK,M,NO,0,-,W,F,M,-,AN,UD,-,GLLC,TILL,-,,,,LU,GL,BR
+ABDEK~~~~~N,AB,DEK,~~~~~,N,DEERLICK,M,NO,0,-,W,F,-,-,AN,-,-,GLLC,-,-,,,,LU,GL,BR
+ABDELgl~~~N,AB,DEL,gl~~~,N,DELACOUR,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABDELst~~~A,AB,DEL,st~~~,A,DELACOUR,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDEL~~~~~A,AB,DEL,~~~~~,A,DELACOUR,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDEL~~~~~N,AB,DEL,~~~~~,N,DELACOUR,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDEVaa~~~N,AB,DEV,aa~~~,N,DEVON,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABDEVxc~~~N,AB,DEV,xc~~~,N,DEVON,O,YB,0,-,VP,ME,F,-,AN,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABDEVyc~~~N,AB,DEV,yc~~~,N,DEVON,O,YB,0,-,VP,ME,F,-,AN,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABDEV~~~~~N,AB,DEV,~~~~~,N,DEVON,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABDHPaa~~~N,AB,DHP,aa~~~,N,DISHPAN,M,YB,1,SA,VP,MF,-,-,AN,-,-,LACU,-,-,,,,GL,G,R
+ABDHP~~~~~N,AB,DHP,~~~~~,N,DISHPAN,M,YB,1,SA,VP,MF,-,-,AN,-,-,LACU,-,-,,,,GL,G,R
+ABDHSer~~~A,AB,DHS,er~~~,A,DUCHESS,M,NO,2,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,B
+ABDHS~~~~~A,AB,DHS,~~~~~,A,DUCHESS,M,NO,2,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,B
+ABDHS~~~~~N,AB,DHS,~~~~~,N,DUCHESS,M,NO,5,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,B
+ABDIMgl~~~A,AB,DIM,gl~~~,A,DIAMOND,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,GLR
+ABDIMsa~~~A,AB,DIM,sa~~~,A,DIAMOND,M,YU,2,SA,MW,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABDIMxt~~~A,AB,DIM,xt~~~,A,DIAMOND,M,NO,0,-,W,M,M,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,R
+ABDIM~~~~~A,AB,DIM,~~~~~,A,DIAMOND,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABDIM~~~~~N,AB,DIM,~~~~~,N,DIAMOND,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABDIN~~~~~N,AB,DIN,~~~~~,N,DRINNAN,M,NO,0,-,W,M,VC,-,VC,UD,-,EOLI,GLFL,-,,,,BR,EB,O
+ABDKKpt~~~N,AB,DKK,pt~~~,N,DUNKIRK,M,YU,0,-,P,MF,-,-,AN,-,-,TILL,-,-,,,,GL,LG,O
+ABDKK~~~~~N,AB,DKK,~~~~~,N,DUNKIRK,M,YU,0,-,P,MF,-,-,AN,-,-,TILL,-,-,,,,GL,LG,O
+ABDKNpt~~~N,AB,DKN,pt~~~,N,DAKEN,M,YB,0,-,VP,VC,-,-,WC,-,-,GLFL,-,-,,,,GL,HG,R
+ABDKN~~~~~N,AB,DKN,~~~~~,N,DAKEN,M,YB,0,-,VP,VC,-,-,WC,-,-,GLFL,-,-,,,,GL,HG,R
+ABDKT~~~~~N,AB,DKT,~~~~~,N,DEKALTA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABDLA~~~~~A,AB,DLA,~~~~~,A,DELIA,M,NO,5,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABDLA~~~~~N,AB,DLA,~~~~~,N,DELIA,M,NO,5,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABDLB~~~~~A,AB,DLB,~~~~~,A,DEL BONITA,M,NO,0,-,W,M,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABDLB~~~~~N,AB,DLB,~~~~~,N,DEL BONITA,M,NO,0,-,W,M,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABDMD~~~~~A,AB,DMD,~~~~~,A,DIMSDALE,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,CH,BLC,E
+ABDMHzzxt~A,AB,DMH,zzxt~,A,DRUMHELLER,M,NO,0,-,MW,F,F,-,WC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABDMHzz~~~A,AB,DMH,zz~~~,A,DRUMHELLER,M,NO,0,-,MW,F,-,-,WC,-,-,GLLC,-,-,,,,CH,DBC,V
+ABDMHzz~~~N,AB,DMH,zz~~~,N,DRUMHELLER,M,NO,0,-,MW,F,-,-,WC,-,-,GLLC,-,-,,,,CH,DBC,V
+ABDMH~~~~~A,AB,DMH,~~~~~,A,DRUMHELLER,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,VE,HV,O
+ABDMH~~~~~N,AB,DMH,~~~~~,N,DRUMHELLER,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,VE,HV,O
+ABDMS~~~~~A,AB,DMS,~~~~~,A,DELMAS,M,NO,0,-,W,VC,-,-,VC,-,-,FLUV,-,-,,,,CH,DBC,O
+ABDMS~~~~~N,AB,DMS,~~~~~,N,DELMAS,M,NO,0,-,W,VC,-,-,VC,-,-,FLUV,-,-,,,,CH,DBC,O
+ABDMYcrsa~N,AB,DMY,crsa~,N,DEMAY,M,YU,7,SA,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABDMY~~~~~N,AB,DMY,~~~~~,N,DEMAY,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABDNL~~~~~N,AB,DNL,~~~~~,N,DARNELL,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABDNTaa~~~A,AB,DNT,aa~~~,A,DNISTER,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABDNTaa~~~N,AB,DNT,aa~~~,N,DNISTER,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABDNT~~~~~A,AB,DNT,~~~~~,A,DNISTER,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABDNT~~~~~N,AB,DNT,~~~~~,N,DNISTER,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABDONxt~~~N,AB,DON,xt~~~,N,DONNELLY,M,NO,0,-,MW,F,MF,-,WC,UD,-,LATL,TILL,-,,,,LU,GL,GL
+ABDON~~~~~A,AB,DON,~~~~~,A,DONNELLY,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GL
+ABDON~~~~~N,AB,DON,~~~~~,N,DONNELLY,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GL
+ABDOVxt~~~N,AB,DOV,xt~~~,N,DOVER,M,NO,0,-,MW,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABDOV~~~~~N,AB,DOV,~~~~~,N,DOVER,M,NO,0,-,MW,F,-,-,AN,-,-,GLLC,-,-,,,,LU,GL,O
+ABDPTfi~~~A,AB,DPT,fi~~~,A,DEMPSTER,M,NO,0,-,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABDPTfi~~~N,AB,DPT,fi~~~,N,DEMPSTER,M,NO,0,-,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABDPT~~~~~A,AB,DPT,~~~~~,A,DEMPSTER,M,NO,0,-,W,MC,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABDPT~~~~~N,AB,DPT,~~~~~,N,DEMPSTER,M,NO,0,-,W,MC,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABDPVaa~~~N,AB,DPV,aa~~~,N,DEEP VALLEY,M,NO,0,-,W,MC,-,-,WC,-,-,COLL,-,-,,,,BR,EB,E
+ABDPV~~~~~N,AB,DPV,~~~~~,N,DEEP VALLEY,M,NO,0,-,W,MC,-,-,WC,-,-,COLL,-,-,,,,BR,EB,E
+ABDRNgl~~~N,AB,DRN,gl~~~,N,DIRLETON,M,YU,0,-,I,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,GL
+ABDRN~~~~~A,AB,DRN,~~~~~,A,DIRLETON,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABDRN~~~~~N,AB,DRN,~~~~~,N,DIRLETON,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABDRWaa~~~N,AB,DRW,aa~~~,N,DRYWOOD,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABDRWgr~~~N,AB,DRW,gr~~~,N,DRYWOOD,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABDRWzr~~~N,AB,DRW,zr~~~,N,DRYWOOD,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BLC,R
+ABDRW~~~~~N,AB,DRW,~~~~~,N,DRYWOOD,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABDSJaa~~~N,AB,DSJ,aa~~~,N,DESJARLAIS,M,YU,0,-,P,MC,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABDSJzr~~~N,AB,DSJ,zr~~~,N,DESJARLAIS,M,YB,3,SA,VP,MC,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,R
+ABDSJ~~~~~N,AB,DSJ,~~~~~,N,DESJARLAIS,M,YU,2,SA,P,MC,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABDUGgl~~~N,AB,DUG,gl~~~,N,DUAGH,M,YU,2,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABDUGxp~~~N,AB,DUG,xp~~~,N,DUAGH,M,NO,2,BN,MW,F,F,-,VC,UD,-,GLLC,RESD,-,,,,SZ,SZ,BL
+ABDUG~~~~~A,AB,DUG,~~~~~,A,DUAGH,M,NO,2,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,BL
+ABDUG~~~~~N,AB,DUG,~~~~~,N,DUAGH,M,NO,2,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,BL
+ABDUN~~~~~A,AB,DUN,~~~~~,A,DUNVEGAN,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABDUN~~~~~N,AB,DUN,~~~~~,N,DUNVEGAN,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABDVGaa~~~A,AB,DVG,aa~~~,A,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVGaa~~~N,AB,DVG,aa~~~,N,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVGca~~~N,AB,DVG,ca~~~,N,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,CA
+ABDVGco~~~A,AB,DVG,co~~~,A,DUNVARGAN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVGgl~~~A,AB,DVG,gl~~~,A,DUNVARGAN,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABDVGgr~~~N,AB,DVG,gr~~~,N,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVGxp~~~N,AB,DVG,xp~~~,N,DUNVARGAN,M,NO,6,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABDVGzr~~~N,AB,DVG,zr~~~,N,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABDVGzt~~~N,AB,DVG,zt~~~,N,DUNVARGAN,M,NO,5,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABDVG~~~~~A,AB,DVG,~~~~~,A,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVG~~~~~N,AB,DVG,~~~~~,N,DUNVARGAN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABDVK~~~~~N,AB,DVK,~~~~~,N,DEVIL LAKE,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABDVL~~~~~N,AB,DVL,~~~~~,N,DEVILLE,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABDVSfi~~~A,AB,DVS,fi~~~,A,DAVIS,M,NO,0,-,W,MF,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABDVSsc~~~A,AB,DVS,sc~~~,A,DAVIS,M,NO,5,SA,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABDVSxc~~~A,AB,DVS,xc~~~,A,DAVIS,M,NO,0,-,W,M,MF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABDVS~~~~~A,AB,DVS,~~~~~,A,DAVIS,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABDVS~~~~~N,AB,DVS,~~~~~,N,DAVIS,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABDVX~~~~~N,AB,DVX,~~~~~,N,DEVONA,M,NO,0,-,W,M,-,-,EC,-,-,EOLI,-,-,,,,RG,R,O
+ABDWGaa~~~N,AB,DWG,aa~~~,N,DOWNING,M,NO,0,-,W,VC,MF,-,AN,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABDWG~~~~~N,AB,DWG,~~~~~,N,DOWNING,M,NO,0,-,W,VC,MF,-,AN,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABDWTpt~~~N,AB,DWT,pt~~~,N,DEWINTON,M,YB,0,-,VP,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABDWTxp~~~N,AB,DWT,xp~~~,N,DEWINTON,M,YB,6,LI,VP,F,MF,,VC,UD,,GLLC,TILL,RKUD,,,,GL,HG,R
+ABDWT~~~~~N,AB,DWT,~~~~~,N,DEWINTON,M,YB,0,-,VP,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABDXVaa~~~N,AB,DXV,aa~~~,N,DIXONVILLE,M,NO,0,-,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABDXV~~~~~N,AB,DXV,~~~~~,N,DIXONVILLE,M,NO,0,-,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABDYDgl~~~N,AB,DYD,gl~~~,N,DAYSLAND,M,YU,4,BN,I,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,GLBL
+ABDYD~~~~~A,AB,DYD,~~~~~,A,DAYSLAND,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,BL
+ABDYD~~~~~N,AB,DYD,~~~~~,N,DAYSLAND,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,BL
+ABDZY~~~~~N,AB,DZY,~~~~~,N,DIZZY,O,YB,0,-,VP,ME,-,-,WC,-,-,FOPT,-,-,,,,CY,OC,ME
+ABEAT~~~~~A,AB,EAT,~~~~~,A,EVARTS,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABEAT~~~~~N,AB,EAT,~~~~~,N,EVARTS,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABEBGaa~~~A,AB,EBG,aa~~~,A,EVANSBURG,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABEBG~~~~~A,AB,EBG,~~~~~,A,EVANSBURG,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABEBG~~~~~N,AB,EBG,~~~~~,N,EVANSBURG,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABEBO~~~~~A,AB,EBO,~~~~~,A,EAST BOW,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,R
+ABEBO~~~~~N,AB,EBO,~~~~~,N,EAST BOW,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,R
+ABECYgr~~~N,AB,ECY,gr~~~,N,ECONOMY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABECYst~~~N,AB,ECY,st~~~,N,ECONOMY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABECY~~~~~N,AB,ECY,~~~~~,N,ECONOMY,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABEDG~~~~~A,AB,EDG,~~~~~,A,EDBURG,M,YU,1,SA,I,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,GLR
+ABEDG~~~~~N,AB,EDG,~~~~~,N,EDBURG,M,YU,1,SA,I,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,GLR
+ABEDWaa~~~N,AB,EDW,aa~~~,N,EDWAND,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,BR,EB,E
+ABEDW~~~~~N,AB,EDW,~~~~~,N,EDWAND,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,BR,EB,E
+ABEFX~~~~~N,AB,EFX,~~~~~,N,EIFFEL,M,NO,0,-,W,MC,-,-,AN,-,-,TILL,-,-,,,,PZ,FHP,O
+ABEGG~~~~~N,AB,EGG,~~~~~,N,EGG LAKE,M,NO,0,-,W,MF,-,-,EA,-,-,TILL,-,-,,,,LU,GL,BR
+ABEGLxs~~~N,AB,EGL,xs~~~,N,EAGLESHAM,O,YB,0,-,VP,ME,MC,-,WC,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABEGLxt~~~N,AB,EGL,xt~~~,N,EAGLESHAM,O,YB,0,-,VP,ME,MF,-,WC,UD,-,FNPT,TILL,-,,,,OR,M,T
+ABEGLxu~~~N,AB,EGL,xu~~~,N,EAGLESHAM,O,YB,0,-,VP,ME,MF,-,WC,UD,-,FNPT,UNDM,-,,,,OR,M,T
+ABEGL~~~~~N,AB,EGL,~~~~~,N,EAGLESHAM,O,YB,0,-,VP,ME,F,-,WC,UD,-,FNPT,GLLC,-,,,,OR,M,T
+ABEGO~~~~~A,AB,EGO,~~~~~,A,EGREMONT,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,GL
+ABEGO~~~~~N,AB,EGO,~~~~~,N,EGREMONT,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,GL
+ABEGX~~~~~N,AB,EGX,~~~~~,N,EGYPT,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,BR,DYB,O
+ABEKAgr~~~N,AB,EKA,gr~~~,N,EUREKA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABEKAst~~~N,AB,EKA,st~~~,N,EUREKA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABEKA~~~~~N,AB,EKA,~~~~~,N,EUREKA,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABEKW~~~~~A,AB,EKW,~~~~~,A,ELKWATER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABEKW~~~~~N,AB,EKW,~~~~~,N,ELKWATER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABELBaa~~~N,AB,ELB,aa~~~,N,ELBOW,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABELB~~~~~N,AB,ELB,~~~~~,N,ELBOW,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABELL~~~~~A,AB,ELL,~~~~~,A,ELLERSLIE,M,NO,3,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABELL~~~~~N,AB,ELL,~~~~~,N,ELLERSLIE,M,NO,3,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABELPaa~~~N,AB,ELP,aa~~~,N,ELK POINT,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABELP~~~~~N,AB,ELP,~~~~~,N,ELK POINT,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABELS~~~~~N,AB,ELS,~~~~~,N,ELLS RIVER,M,YB,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,G,R
+ABEMWaa~~~A,AB,EMW,aa~~~,A,ELMWORTH,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,D
+ABEMW~~~~~A,AB,EMW,~~~~~,A,ELMWORTH,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,D
+ABEMW~~~~~N,AB,EMW,~~~~~,N,ELMWORTH,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,D
+ABENDaa~~~N,AB,END,aa~~~,N,ENILDA,M,YB,0,-,P,M,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABENDpt~~~N,AB,END,pt~~~,N,ENILDA,M,YB,0,-,P,M,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABEND~~~~~N,AB,END,~~~~~,N,ENILDA,M,YB,0,-,P,M,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABENX~~~~~N,AB,ENX,~~~~~,N,ENDLESS CHAIN,M,NO,0,-,R,MC,-,-,AN,-,-,COLL,-,-,,,,BR,DYB,E
+ABEORer~~~A,AB,EOR,er~~~,A,ELNORA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABEORgl~~~N,AB,EOR,gl~~~,N,ELNORA,M,NO,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABEORsa~~~N,AB,EOR,sa~~~,N,ELNORA,M,YU,3,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABEORsc~~~N,AB,EOR,sc~~~,N,ELNORA,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABEOR~~~~~A,AB,EOR,~~~~~,A,ELNORA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABEOR~~~~~N,AB,EOR,~~~~~,N,ELNORA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABERHzh~~~N,AB,ERH,zh~~~,N,ERITH,M,YB,0,-,VP,MC,-,-,AN,-,-,TILL,-,-,,,,GL,HG,O
+ABERH~~~~~N,AB,ERH,~~~~~,N,ERITH,M,YB,0,-,VP,MC,-,-,AN,-,-,TILL,-,-,,,,GL,G,O
+ABERR~~~~~N,AB,ERR,~~~~~,N,ERRINGTON,M,NO,0,-,W,M,-,-,AN,-,-,COLL,-,-,,,,BR,DYB,E
+ABERS~~~~~N,AB,ERS,~~~~~,N,EMBARRAS,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABERTaa~~~N,AB,ERT,aa~~~,N,EDGERTON,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,RG,R,O
+ABERT~~~~~N,AB,ERT,~~~~~,N,EDGERTON,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,RG,R,O
+ABESFpt~~~N,AB,ESF,pt~~~,N,EASYFORD,M,YB,0,-,VP,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABESF~~~~~N,AB,ESF,~~~~~,N,EASYFORD,M,YB,0,-,VP,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABESHxt~~~N,AB,ESH,xt~~~,N,ESHER,M,NO,8,SA,MW,F,MF,-,WC,UD,-,LATL,TILL,-,,,,LU,GL,GLD
+ABESH~~~~~A,AB,ESH,~~~~~,A,ESHER,M,NO,7,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLD
+ABESH~~~~~N,AB,ESH,~~~~~,N,ESHER,M,NO,8,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLD
+ABETA~~~~~N,AB,ETA,~~~~~,N,ETA,M,YU,0,-,I,M,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABETC~~~~~N,AB,ETC,~~~~~,N,ENTRANCE,M,NO,0,-,W,M,M,-,VC,UD,-,EOLI,TILL,-,,,,RG,HR,O
+ABETP~~~~~A,AB,ETP,~~~~~,A,EAST PRAIRIE,M,YU,0,-,I,F,MF,-,WC,UD,-,FLUV,FLUV,-,,,,CH,DGC,GL
+ABETP~~~~~N,AB,ETP,~~~~~,N,EAST PRAIRIE,M,YU,0,-,I,F,MF,-,WC,UD,-,FLUV,FLUV,-,,,,CH,DGC,GL
+ABEUC~~~~~N,AB,EUC,~~~~~,N,EUNICE,M,YB,0,-,VP,F,-,-,AN,-,-,GLLC,-,-,,,,GL,G,O
+ABEVLaa~~~A,AB,EVL,aa~~~,A,ECKVILLE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABEVLaa~~~N,AB,EVL,aa~~~,N,ECKVILLE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABEVLgl~~~A,AB,EVL,gl~~~,A,ECKVILLE,M,YU,0,-,I,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,GL
+ABEVLgl~~~N,AB,EVL,gl~~~,N,ECKVILLE,M,YU,0,-,I,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,GL
+ABEVL~~~~~A,AB,EVL,~~~~~,A,ECKVILLE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABEVL~~~~~N,AB,EVL,~~~~~,N,ECKVILLE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABEXPaa~~~A,AB,EXP,aa~~~,A,EXPANSE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,CA
+ABEXP~~~~~A,AB,EXP,~~~~~,A,EXPANSE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,CA
+ABEXP~~~~~N,AB,EXP,~~~~~,N,EXPANSE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,CA
+ABEYM~~~~~N,AB,EYM,~~~~~,N,EYMUNDSON,M,YU,0,-,I,F,-,-,AN,-,-,FLUV,-,-,,,,BR,EB,GLE
+ABEZM~~~~~N,AB,EZM,~~~~~,N,ETZIKOM,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,RG,R,O
+ABFALaa~~~A,AB,FAL,aa~~~,A,FALHER,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,DGC,GLSZ
+ABFAL~~~~~A,AB,FAL,~~~~~,A,FALHER,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,DGC,GLSZ
+ABFBG~~~~~N,AB,FBG,~~~~~,N,FORESTBURG,M,YU,4,SA,P,MF,-,-,WC,-,-,RESD,-,-,,,,GL,HG,O
+ABFDLaa~~~N,AB,FDL,aa~~~,N,FIDLER,M,NO,6,LI,W,M,,-,AN,,-,TILL,RKUD,-,,,,BR,DYB,E
+ABFDL~~~~~N,AB,FDL,~~~~~,N,FIDLER,M,NO,6,LI,W,M,,-,AN,,-,TILL,RKUD,-,,,,BR,DYB,E
+ABFIRaa~~~N,AB,FIR,aa~~~,N,FIRE BAG,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABFIR~~~~~N,AB,FIR,~~~~~,N,FIRE BAG,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABFKEaa~~~N,AB,FKE,aa~~~,N,FICKLE,O,YB,0,-,VP,ME,-,-,WC,-,-,FOPT,-,-,,,,OR,M,TY
+ABFKE~~~~~N,AB,FKE,~~~~~,N,FICKLE,O,YB,0,-,VP,ME,-,-,WC,-,-,FOPT,-,-,,,,OR,M,TY
+ABFLTaa~~~N,AB,FLT,aa~~~,N,FLEET,M,YU,3,SA,P,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,O
+ABFLT~~~~~N,AB,FLT,~~~~~,N,FLEET,M,YB,3,SA,VP,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,HG,O
+ABFLUaa~~~A,AB,FLU,aa~~~,A,FALUN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABFLUer~~~A,AB,FLU,er~~~,A,FALUN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABFLUst~~~N,AB,FLU,st~~~,N,FALUN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABFLU~~~~~A,AB,FLU,~~~~~,A,FALUN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABFLU~~~~~N,AB,FLU,~~~~~,N,FALUN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABFMK~~~~~N,AB,FMK,~~~~~,N,FORT MACKAY,M,NO,0,-,MW,M,F,-,AN,VC,-,GLFL,LATL,-,,,,LU,GL,O
+ABFMNaa~~~N,AB,FMN,aa~~~,N,FOREMAN,M,YU,2,BN,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,SZ
+ABFMN~~~~~N,AB,FMN,~~~~~,N,FOREMAN,M,YU,2,BN,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,SZ
+ABFMTca~~~A,AB,FMT,ca~~~,A,FOREMOST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABFMTco~~~N,AB,FMT,co~~~,N,FOREMOST,M,NO,0,-,W,MC,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABFMTst~~~N,AB,FMT,st~~~,N,FOREMOST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABFMTzr~~~A,AB,FMT,zr~~~,A,FOREMOST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABFMT~~~~~A,AB,FMT,~~~~~,A,FOREMOST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABFMT~~~~~N,AB,FMT,~~~~~,N,FOREMOST,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABFNC~~~~~N,AB,FNC,~~~~~,N,FRANCHERE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABFNR~~~~~A,AB,FNR,~~~~~,A,FENNER,M,NO,4,BN,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,SZ,SS,DB
+ABFNR~~~~~N,AB,FNR,~~~~~,N,FENNER,M,NO,4,BN,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,SZ,SS,DB
+ABFORgr~~~A,AB,FOR,gr~~~,A,FORK,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABFORgr~~~N,AB,FOR,gr~~~,N,FORK,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABFOR~~~~~A,AB,FOR,~~~~~,A,FORK,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABFOR~~~~~N,AB,FOR,~~~~~,N,FORK,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,DBC,O
+ABFRKaa~~~N,AB,FRK,aa~~~,N,FRANK,M,NO,0,-,R,M,-,-,VC,-,-,COLL,-,-,,,,BR,EB,O
+ABFRKxl~~~N,AB,FRK,xl~~~,N,FRANK,M,NO,8,LI,R,M,,-,VC,,-,COLL,RKUD,-,,,,BR,EB,O
+ABFRK~~~~~N,AB,FRK,~~~~~,N,FRANK,M,NO,0,-,R,M,-,-,VC,-,-,COLL,-,-,,,,BR,EB,O
+ABFRT~~~~~N,AB,FRT,~~~~~,N,FORT,M,NO,0,-,W,MF,VC,-,VC,UD,-,GLFL,GLFL,-,,,,LU,GL,O
+ABFRX~~~~~N,AB,FRX,~~~~~,N,FIRESIDE,M,NO,0,-,W,C,-,-,EC,-,-,FLUV,-,-,,,,BR,EB,O
+ABFRY~~~~~A,AB,FRY,~~~~~,A,FERGY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABFRY~~~~~N,AB,FRY,~~~~~,N,FERGY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,E
+ABFSHaaxt~A,AB,FSH,aaxt~,A,FISH CREEK,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABFSHaa~~~A,AB,FSH,aa~~~,A,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSHaa~~~N,AB,FSH,aa~~~,N,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSHca~~~A,AB,FSH,ca~~~,A,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABFSHgr~~~A,AB,FSH,gr~~~,A,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSHsa~~~N,AB,FSH,sa~~~,N,FISH CREEK,M,YU,4,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSHxt~~~A,AB,FSH,xt~~~,A,FISH CREEK,M,NO,0,-,W,F,F,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABFSH~~~~~A,AB,FSH,~~~~~,A,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSH~~~~~N,AB,FSH,~~~~~,N,FISH CREEK,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABFSTaa~~~A,AB,FST,aa~~~,A,FLAGSTAFF,M,NO,7,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABFSTaa~~~N,AB,FST,aa~~~,N,FLAGSTAFF,M,NO,7,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABFSTst~~~N,AB,FST,st~~~,N,FLAGSTAFF,M,NO,7,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABFST~~~~~A,AB,FST,~~~~~,A,FLAGSTAFF,M,NO,7,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABFST~~~~~N,AB,FST,~~~~~,N,FLAGSTAFF,M,NO,7,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABFTHaa~~~N,AB,FTH,aa~~~,N,FERINTOSH,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABFTH~~~~~A,AB,FTH,~~~~~,A,FERINTOSH,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABFTH~~~~~N,AB,FTH,~~~~~,N,FERINTOSH,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABFTOaa~~~N,AB,FTO,aa~~~,N,FELTON,M,NO,5,LI,W,M,,-,AN,UD,-,TILL,RKUD,-,,,,BR,EB,E
+ABFTOst~~~N,AB,FTO,st~~~,N,FELTON,M,NO,5,LI,W,M,,-,AN,UD,-,TILL,RKUD,-,,,,BR,EB,E
+ABFTO~~~~~N,AB,FTO,~~~~~,N,FELTON,M,NO,5,LI,W,M,,-,AN,UD,-,TILL,RKUD,-,,,,BR,EB,E
+ABFTVglsc~A,AB,FTV,glsc~,A,FORT VERMILION,M,YU,5,SA,I,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GLD
+ABFTVgl~~~N,AB,FTV,gl~~~,N,FORT VERMILION,M,NO,0,-,I,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GLD
+ABFTVsc~~~N,AB,FTV,sc~~~,N,FORT VERMILION,M,NO,7,SA,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABFTVxt~~~N,AB,FTV,xt~~~,N,FORT VERMILION,M,NO,9,SA,W,M,F,-,VC,UD,-,GLFL,LATL,-,,,,LU,GL,D
+ABFTV~~~~~A,AB,FTV,~~~~~,A,FORT VERMILION,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABFTV~~~~~N,AB,FTV,~~~~~,N,FORT VERMILION,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABFTZ~~~~~N,AB,FTZ,~~~~~,N,FITZSIMMONS,M,NO,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABFVW~~~~~A,AB,FVW,~~~~~,A,FAIRVIEW,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,O
+ABFVX~~~~~N,AB,FVX,~~~~~,N,FAIRVIEW MTN,M,NO,0,-,R,MC,-,-,AN,-,-,COLL,-,-,,,,BR,DYB,E
+ABFWT~~~~~A,AB,FWT,~~~~~,A,FAWCETT,M,NO,0,-,W,M,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,D
+ABFWT~~~~~N,AB,FWT,~~~~~,N,FAWCETT,M,NO,0,-,W,M,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,D
+ABFXC~~~~~A,AB,FXC,~~~~~,A,FOX CREEK,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABFXC~~~~~N,AB,FXC,~~~~~,N,FOX CREEK,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABFYS~~~~~A,AB,FYS,~~~~~,A,FLYINGSHOT,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABGAR~~~~~N,AB,GAR,~~~~~,N,GARRY,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABGAX~~~~~N,AB,GAX,~~~~~,N,GARONNE,M,NO,0,-,W,M,-,-,WC,-,-,COLL,-,-,,,,BR,EB,O
+ABGAY~~~~~N,AB,GAY,~~~~~,N,GAYFORD,M,YU,0,-,P,MC,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABGBLaa~~~N,AB,GBL,aa~~~,N,GABRIEL,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABGBLer~~~A,AB,GBL,er~~~,A,GABRIEL,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DGC,O
+ABGBL~~~~~N,AB,GBL,~~~~~,N,GABRIEL,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABGCH~~~~~N,AB,GCH,~~~~~,N,GLOUCHER,M,YU,0,-,I,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,GLR
+ABGDBgl~~~N,AB,GDB,gl~~~,N,GADSBY,M,YU,3,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,GLBL
+ABGDB~~~~~N,AB,GDB,~~~~~,N,GADSBY,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABGDIaa~~~N,AB,GDI,aa~~~,N,GRANDIN,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABGDI~~~~~N,AB,GDI,~~~~~,N,GRANDIN,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABGDNpt~~~N,AB,GDN,pt~~~,N,GOODWIN,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABGDN~~~~~N,AB,GDN,~~~~~,N,GOODWIN,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,HG,O
+ABGEM~~~~~A,AB,GEM,~~~~~,A,GEM,M,NO,2,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,B
+ABGEM~~~~~N,AB,GEM,~~~~~,N,GEM,M,NO,4,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,B
+ABGEN~~~~~A,AB,GEN,~~~~~,A,GENESEE,M,NO,0,-,MW,FI,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABGFR~~~~~N,AB,GFR,~~~~~,N,GOODFARE,M,NO,0,-,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABGGGaa~~~N,AB,GGG,aa~~~,N,GREGG,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABGGG~~~~~N,AB,GGG,~~~~~,N,GREGG,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABGGRaa~~~N,AB,GGR,aa~~~,N,GREGOIRE,O,YB,0,-,VP,FI,-,-,EA,-,-,SPPT,-,-,,,,OR,F,TY
+ABGGRxt~~~N,AB,GGR,xt~~~,N,GREGOIRE,O,YB,0,-,VP,FI,MF,-,EA,UD,-,SPPT,TILL,-,,,,OR,F,T
+ABGGR~~~~~N,AB,GGR,~~~~~,N,GREGOIRE,O,YB,0,-,VP,FI,-,-,EA,-,-,SPPT,-,-,,,,OR,F,TY
+ABGIFaa~~~N,AB,GIF,aa~~~,N,GRIFFIN,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,R
+ABGIF~~~~~N,AB,GIF,~~~~~,N,GRIFFIN,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,R
+ABGLD~~~~~A,AB,GLD,~~~~~,A,GALAHAD,M,YU,0,-,I,M,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,GL
+ABGLD~~~~~N,AB,GLD,~~~~~,N,GALAHAD,M,YU,0,-,I,M,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,GL
+ABGLK~~~~~N,AB,GLK,~~~~~,N,GOUGH LAKE,M,YB,1,SA,VP,F,-,-,VC,-,-,GLLC,-,-,,,,GL,G,R
+ABGLS~~~~~N,AB,GLS,~~~~~,N,GLEDDIES,M,YB,1,SA,VP,F,-,-,VC,-,-,LACU,-,-,,,,GL,G,R
+ABGMT~~~~~N,AB,GMT,~~~~~,N,GROSMONT,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABGMWaa~~~A,AB,GMW,aa~~~,A,GRIMSHAW,M,NO,3,BN,MW,F,-,-,WC,-,-,LATL,-,-,,,,SZ,SS,DG
+ABGMWco~~~A,AB,GMW,co~~~,A,GRIMSHAW,M,NO,3,BN,MW,F,-,-,WC,-,-,TILL,-,-,,,,SZ,SS,DG
+ABGMWco~~~N,AB,GMW,co~~~,N,GRIMSHAW,M,NO,4,BN,MW,F,-,-,WC,-,-,TILL,-,-,,,,SZ,SS,DG
+ABGMW~~~~~A,AB,GMW,~~~~~,A,GRIMSHAW,M,NO,3,BN,MW,F,-,-,WC,-,-,LATL,-,-,,,,SZ,SS,DG
+ABGMW~~~~~N,AB,GMW,~~~~~,N,GRIMSHAW,M,NO,4,BN,MW,F,-,-,WC,-,-,LATL,-,-,,,,SZ,SS,DG
+ABGNNxt~~~N,AB,GNN,xt~~~,N,GLENBANNER,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABGNN~~~~~N,AB,GNN,~~~~~,N,GLENBANNER,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABGOGaa~~~N,AB,GOG,aa~~~,N,GOODRIDGE,M,NO,0,-,W,MC,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABGOGgr~~~N,AB,GOG,gr~~~,N,GOODRIDGE,M,NO,0,-,W,MC,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABGOG~~~~~N,AB,GOG,~~~~~,N,GOODRIDGE,M,NO,0,-,W,MC,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABGOSpt~~~N,AB,GOS,pt~~~,N,GOOSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABGOS~~~~~N,AB,GOS,~~~~~,N,GOOSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABGOYaa~~~A,AB,GOY,aa~~~,A,GLORY,M,NO,0,-,W,M,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,O
+ABGOY~~~~~A,AB,GOY,~~~~~,A,GLORY,M,NO,0,-,W,M,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,O
+ABGOY~~~~~N,AB,GOY,~~~~~,N,GLORY,M,NO,0,-,W,M,-,-,AN,-,-,GLFL,-,-,,,,LU,GL,O
+ABGPHxp~~~N,AB,GPH,xp~~~,N,GOPHER,M,NO,4,BN,W,MC,MC,,VC,UD,,GLFL,TILL,RKUD,,,,SZ,SS,B
+ABGPH~~~~~A,AB,GPH,~~~~~,A,GOPHER,M,NO,4,BN,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,B
+ABGPH~~~~~N,AB,GPH,~~~~~,N,GOPHER,M,NO,4,BN,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,B
+ABGRDaa~~~N,AB,GRD,aa~~~,N,GROUARD,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABGRD~~~~~N,AB,GRD,~~~~~,N,GROUARD,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,D
+ABGRGer~~~A,AB,GRG,er~~~,A,GRUDGE,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABGRG~~~~~A,AB,GRG,~~~~~,A,GRUDGE,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABGRG~~~~~N,AB,GRG,~~~~~,N,GRUDGE,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABGRNzb~~~N,AB,GRN,zb~~~,N,GRANADA,M,NO,6,LI,R,MC,,-,AN,,-,RESD,RKUD,-,,,,BR,EB,E
+ABGRN~~~~~N,AB,GRN,~~~~~,N,GRANADA,M,NO,0,-,W,MC,-,-,VC,-,-,RESD,-,-,,,,LU,GL,O
+ABGRZaa~~~A,AB,GRZ,aa~~~,A,GRATZ,M,NO,0,-,W,M,-,-,WC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABGRZcagl~N,AB,GRZ,cagl~,N,GRATZ,M,YU,0,-,I,M,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,GLCU
+ABGRZ~~~~~A,AB,GRZ,~~~~~,A,GRATZ,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABGRZ~~~~~N,AB,GRZ,~~~~~,N,GRATZ,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABGSPaa~~~N,AB,GSP,aa~~~,N,GOLDEN SPIKE,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABGSP~~~~~N,AB,GSP,~~~~~,N,GOLDEN SPIKE,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABGST~~~~~N,AB,GST,~~~~~,N,GHOST,M,NO,0,-,W,MC,-,-,EC,-,-,GLFL,-,-,,,,CH,DGC,CA
+ABGTX~~~~~N,AB,GTX,~~~~~,N,GOAT,M,NO,0,-,W,M,-,-,EC,-,-,TILL,-,-,,,,RG,R,O
+ABGUNaa~~~N,AB,GUN,aa~~~,N,GUNDERSON,M,YU,0,-,P,MC,-,-,WC,-,-,GLFL,-,-,,,,GL,G,R
+ABGUNpt~~~N,AB,GUN,pt~~~,N,GUNDERSON,M,YU,0,-,P,MC,-,-,WC,-,-,GLFL,-,-,,,,GL,G,R
+ABGUN~~~~~N,AB,GUN,~~~~~,N,GUNDERSON,M,YU,0,-,P,MC,-,-,WC,-,-,GLFL,-,-,,,,GL,G,R
+ABGUR~~~~~A,AB,GUR,~~~~~,A,GOURIN,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,R
+ABGUR~~~~~N,AB,GUR,~~~~~,N,GOURIN,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,R
+ABGYP~~~~~N,AB,GYP,~~~~~,N,GYPSY,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABHAL~~~~~A,AB,HAL,~~~~~,A,HUGHALLEN,M,NO,0,-,MW,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABHAMaa~~~N,AB,HAM,aa~~~,N,HAY MARSH,O,YB,0,-,VP,ME,M,-,VC,VC,-,FNPT,LACU,-,,,,OR,M,T
+ABHAM~~~~~N,AB,HAM,~~~~~,N,HAY MARSH,O,YB,0,-,VP,ME,M,-,VC,VC,-,FNPT,LACU,-,,,,OR,M,T
+ABHANgl~~~A,AB,HAN,gl~~~,A,HANALTA,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GL
+ABHANst~~~N,AB,HAN,st~~~,N,HANALTA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABHANxp~~~N,AB,HAN,xp~~~,N,HANALTA,M,NO,6,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABHANzr~~~A,AB,HAN,zr~~~,A,HANALTA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABHANzr~~~N,AB,HAN,zr~~~,N,HANALTA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABHAN~~~~~A,AB,HAN,~~~~~,A,HANALTA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABHAN~~~~~N,AB,HAN,~~~~~,N,HANALTA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABHARcr~~~N,AB,HAR,cr~~~,N,HARMATTON,M,YB,0,-,VP,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABHARpt~~~N,AB,HAR,pt~~~,N,HARMATTON,M,YB,0,-,VP,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABHAR~~~~~N,AB,HAR,~~~~~,N,HARMATTON,M,YB,0,-,VP,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABHATgr~~~N,AB,HAT,gr~~~,N,HATTONFORD,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABHATst~~~N,AB,HAT,st~~~,N,HATTONFORD,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABHAT~~~~~N,AB,HAT,~~~~~,N,HATTONFORD,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABHBGaa~~~A,AB,HBG,aa~~~,A,HORBURG,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABHBGgl~~~A,AB,HBG,gl~~~,A,HORBURG,M,YU,0,-,I,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GLBR
+ABHBG~~~~~N,AB,HBG,~~~~~,N,HORBURG,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABHBK~~~~~N,AB,HBK,~~~~~,N,HORNBECK,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,PZ,HFP,O
+ABHBMsa~~~N,AB,HBM,sa~~~,N,HOBBEMA,M,YU,4,SA,MW,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABHBMsc~~~N,AB,HBM,sc~~~,N,HOBBEMA,M,NO,6,SA,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABHBM~~~~~A,AB,HBM,~~~~~,A,HOBBEMA,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABHBM~~~~~N,AB,HBM,~~~~~,N,HOBBEMA,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABHBRxp~~~N,AB,HBR,xp~~~,N,HILLBURN,M,NO,8,LI,MW,MF,MC,,WC,UD,,TILL,RESD,RKUD,,,,LU,GL,O
+ABHBR~~~~~N,AB,HBR,~~~~~,N,HILLBURN,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABHCHaa~~~A,AB,HCH,aa~~~,A,HOUCHER,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,R
+ABHCHaa~~~N,AB,HCH,aa~~~,N,HOUCHER,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,R
+ABHCH~~~~~A,AB,HCH,~~~~~,A,HOUCHER,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,R
+ABHCH~~~~~N,AB,HCH,~~~~~,N,HOUCHER,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,R
+ABHCK~~~~~N,AB,HCK,~~~~~,N,HAT CREEK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABHCX~~~~~N,AB,HCX,~~~~~,N,HECTOR,M,NO,0,-,P,MC,-,-,VC,-,-,FLUV,-,-,,,,GL,G,R
+ABHDR~~~~~N,AB,HDR,~~~~~,N,HELDAR,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABHDX~~~~~N,AB,HDX,~~~~~,N,HILLSDALE,M,NO,0,-,W,MC,-,-,EC,-,-,FLUV,-,-,,,,RG,R,CU
+ABHDYer~~~A,AB,HDY,er~~~,A,HALLIDAY,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,B
+ABHDYst~~~N,AB,HDY,st~~~,N,HALLIDAY,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,B
+ABHDYta~~~N,AB,HDY,ta~~~,N,HALLIDAY,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,B
+ABHDY~~~~~A,AB,HDY,~~~~~,A,HALLIDAY,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,B
+ABHDY~~~~~N,AB,HDY,~~~~~,N,HALLIDAY,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,B
+ABHEG~~~~~A,AB,HEG,~~~~~,A,HEGSON,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,DBC,O
+ABHEG~~~~~N,AB,HEG,~~~~~,N,HEGSON,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,DBC,O
+ABHENaa~~~N,AB,HEN,aa~~~,N,HELEN,M,YU,1,SA,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABHEN~~~~~N,AB,HEN,~~~~~,N,HELEN,M,YU,1,SA,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABHER~~~~~A,AB,HER,~~~~~,A,HEISLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABHER~~~~~N,AB,HER,~~~~~,N,HEISLER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABHEX~~~~~N,AB,HEX,~~~~~,N,HEATHER,M,NO,6,LI,W,M,,-,AN,,-,RESD,RKUD,-,,,,BR,DYB,O
+ABHFDaa~~~A,AB,HFD,aa~~~,A,HATFIELD,M,NO,7,LI,W,M,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABHFDaa~~~N,AB,HFD,aa~~~,N,HATFIELD,M,NO,7,LI,W,M,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABHFD~~~~~A,AB,HFD,~~~~~,A,HATFIELD,M,NO,7,LI,W,M,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABHFD~~~~~N,AB,HFD,~~~~~,N,HATFIELD,M,NO,7,LI,W,M,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABHGTaa~~~N,AB,HGT,aa~~~,N,HAIGHT,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABHGT~~~~~N,AB,HGT,~~~~~,N,HAIGHT,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABHGVxt~~~A,AB,HGV,xt~~~,A,HIGHVALE,M,NO,0,-,W,MF,MF,-,WC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABHGV~~~~~A,AB,HGV,~~~~~,A,HIGHVALE,M,NO,0,-,W,MF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABHGV~~~~~N,AB,HGV,~~~~~,N,HIGHVALE,M,NO,0,-,W,MF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABHGWaa~~~N,AB,HGW,aa~~~,N,HARGWEN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHGWxl~~~N,AB,HGW,xl~~~,N,HARGWEN,M,NO,6,LI,W,M,,-,VC,,-,TILL,RKUD,-,,,,LU,GL,O
+ABHGW~~~~~N,AB,HGW,~~~~~,N,HARGWEN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHHY~~~~~N,AB,HHY,~~~~~,N,HOOHEY,M,NO,0,-,W,F,-,-,AN,-,-,GLLC,-,-,,,,BR,EB,E
+ABHID~~~~~N,AB,HID,~~~~~,N,HILDA,O,YB,0,-,VP,HU,VC,-,AN,UD,-,FNPT,GLFL,-,,,,OR,H,T
+ABHIT~~~~~A,AB,HIT,~~~~~,A,HERMIT,M,NO,6,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABHIW~~~~~A,AB,HIW,~~~~~,A,HIGHWOOD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABHIW~~~~~N,AB,HIW,~~~~~,N,HIGHWOOD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABHKRaa~~~A,AB,HKR,aa~~~,A,HALKIRK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABHKRer~~~N,AB,HKR,er~~~,N,HALKIRK,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABHKRst~~~N,AB,HKR,st~~~,N,HALKIRK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABHKRxp~~~N,AB,HKR,xp~~~,N,HALKIRK,M,NO,4,BN,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABHKR~~~~~A,AB,HKR,~~~~~,A,HALKIRK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABHKR~~~~~N,AB,HKR,~~~~~,N,HALKIRK,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABHKSaa~~~N,AB,HKS,aa~~~,N,HOTCHKISS,M,NO,7,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABHKSxt~~~N,AB,HKS,xt~~~,N,HOTCHKISS,M,NO,7,SA,MW,F,F,-,WC,UD,-,LATL,TILL,-,,,,LU,GL,GLSZ
+ABHKS~~~~~A,AB,HKS,~~~~~,A,HOTCHKISS,M,NO,5,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABHKS~~~~~N,AB,HKS,~~~~~,N,HOTCHKISS,M,NO,7,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,GLSZ
+ABHLB~~~~~N,AB,HLB,~~~~~,N,HOLBURN,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABHLLglsc~N,AB,HLL,glsc~,N,HIGH LEVEL,M,NO,5,SA,I,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GL
+ABHLLglxc~A,AB,HLL,glxc~,A,HIGH LEVEL,M,YU,0,-,I,M,MF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,GL
+ABHLLgl~~~N,AB,HLL,gl~~~,N,HIGH LEVEL,M,NO,0,-,I,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GL
+ABHLLxc~~~A,AB,HLL,xc~~~,A,HIGH LEVEL,M,NO,0,-,W,M,MF,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABHLLxg~~~N,AB,HLL,xg~~~,N,HIGH LEVEL,M,NO,0,-,R,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,LU,GL,O
+ABHLL~~~~~A,AB,HLL,~~~~~,A,HIGH LEVEL,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABHLL~~~~~N,AB,HLL,~~~~~,N,HIGH LEVEL,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABHLMgr~~~A,AB,HLM,gr~~~,A,HILLMER,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABHLMgr~~~N,AB,HLM,gr~~~,N,HILLMER,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABHLM~~~~~A,AB,HLM,~~~~~,A,HILLMER,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABHLM~~~~~N,AB,HLM,~~~~~,N,HILLMER,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABHLWgl~~~N,AB,HLW,gl~~~,N,HELLIWELL,M,YU,0,-,I,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,GL
+ABHLWxc~~~N,AB,HLW,xc~~~,N,HELLIWELL,M,NO,0,-,W,VC,F,-,WC,UD,-,GLFL,GLLC,-,,,,CH,DGC,O
+ABHLWxt~~~N,AB,HLW,xt~~~,N,HELLIWELL,M,NO,0,-,W,VC,MF,-,WC,UD,-,GLFL,TILL,-,,,,CH,DGC,O
+ABHLW~~~~~A,AB,HLW,~~~~~,A,HELLIWELL,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABHLW~~~~~N,AB,HLW,~~~~~,N,HELLIWELL,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABHLY~~~~~N,AB,HLY,~~~~~,N,HARTLEY,O,YB,0,-,VP,FI,MF,-,AN,UD,-,FOPT,TILL,-,,,,OR,M,T
+ABHML~~~~~A,AB,HML,~~~~~,A,HAMELIN,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABHMSst~~~A,AB,HMS,st~~~,A,HELMSDALE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABHMSst~~~N,AB,HMS,st~~~,N,HELMSDALE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABHMS~~~~~A,AB,HMS,~~~~~,A,HELMSDALE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABHMS~~~~~N,AB,HMS,~~~~~,N,HELMSDALE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,R
+ABHNDsc~~~N,AB,HND,sc~~~,N,HUGHENDEN,M,NO,3,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABHNDst~~~N,AB,HND,st~~~,N,HUGHENDEN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABHNDxp~~~N,AB,HND,xp~~~,N,HUGHENDEN,M,NO,6,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABHND~~~~~A,AB,HND,~~~~~,A,HUGHENDEN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABHND~~~~~N,AB,HND,~~~~~,N,HUGHENDEN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABHNLaast~N,AB,HNL,aast~,N,HANLAN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHNLaaxp~N,AB,HNL,aaxp~,N,HANLAN,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABHNLaa~~~N,AB,HNL,aa~~~,N,HANLAN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHNLstxp~N,AB,HNL,stxp~,N,HANLAN,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABHNLst~~~N,AB,HNL,st~~~,N,HANLAN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHNLxp~~~N,AB,HNL,xp~~~,N,HANLAN,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABHNL~~~~~N,AB,HNL,~~~~~,N,HANLAN,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHODyp~~~N,AB,HOD,yp~~~,N,HOADLEY,M,NO,0,-,W,MC,MF,MF,WC,UD,UD,GLFL,TILL,RESD,,,,LU,GL,O
+ABHODzb~~~N,AB,HOD,zb~~~,N,HOADLEY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABHOD~~~~~N,AB,HOD,~~~~~,N,HOADLEY,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHPEaa~~~N,AB,HPE,aa~~~,N,HIGH PRAIRIE,M,YU,0,-,I,M,-,-,WC,-,-,FLUV,-,-,,,,CH,DGC,GL
+ABHPE~~~~~A,AB,HPE,~~~~~,A,HIGH PRAIRIE,M,YU,0,-,I,M,-,-,WC,-,-,FLUV,-,-,,,,CH,DGC,GL
+ABHPE~~~~~N,AB,HPE,~~~~~,N,HIGH PRAIRIE,M,YU,0,-,I,M,-,-,WC,-,-,FLUV,-,-,,,,CH,DGC,GL
+ABHPVaa~~~A,AB,HPV,aa~~~,A,HAPPY VALLEY,M,NO,0,-,R,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,R
+ABHPVgr~~~A,AB,HPV,gr~~~,A,HAPPY VALLEY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,R
+ABHPVxl~~~A,AB,HPV,xl~~~,A,HAPPY VALLEY,M,NO,3,LI,W,MC,,-,VC,,-,GLFL,RKUD,-,,,,CH,BLC,R
+ABHPV~~~~~A,AB,HPV,~~~~~,A,HAPPY VALLEY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,R
+ABHPV~~~~~N,AB,HPV,~~~~~,N,HAPPY VALLEY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,R
+ABHRKaa~~~A,AB,HRK,aa~~~,A,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABHRKaa~~~N,AB,HRK,aa~~~,N,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABHRKca~~~N,AB,HRK,ca~~~,N,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,CA
+ABHRKzr~~~N,AB,HRK,zr~~~,N,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,R
+ABHRK~~~~~A,AB,HRK,~~~~~,A,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABHRK~~~~~N,AB,HRK,~~~~~,N,HEARTBREAK,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABHRL~~~~~N,AB,HRL,~~~~~,N,HERCULES,M,YU,2,SA,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABHRO~~~~~N,AB,HRO,~~~~~,N,HARO,M,NO,0,-,W,M,MF,-,VC,UD,-,GLFL,TILL,-,,,,BR,EB,O
+ABHRR~~~~~N,AB,HRR,~~~~~,N,HORSE RIVER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABHRSaa~~~N,AB,HRS,aa~~~,N,HARRISON,M,NO,0,-,R,VC,-,-,AN,-,-,EOLI,-,-,,,,RG,R,O
+ABHRS~~~~~N,AB,HRS,~~~~~,N,HARRISON,M,NO,0,-,R,VC,-,-,AN,-,-,EOLI,-,-,,,,RG,R,O
+ABHRT~~~~~N,AB,HRT,~~~~~,N,HEART,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,BR,EB,E
+ABHSR~~~~~N,AB,HSR,~~~~~,N,HUSSAR,M,YB,1,SA,VP,F,-,-,VC,-,-,GLLC,-,-,,,,GL,G,R
+ABHSYst~~~N,AB,HSY,st~~~,N,HARDISTY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABHSYxp~~~N,AB,HSY,xp~~~,N,HARDISTY,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,BR
+ABHSY~~~~~N,AB,HSY,~~~~~,N,HARDISTY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABHTLgr~~~N,AB,HTL,gr~~~,N,HUTCH LAKE,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHTLst~~~N,AB,HTL,st~~~,N,HUTCH LAKE,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHTL~~~~~A,AB,HTL,~~~~~,A,HUTCH LAKE,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHTL~~~~~N,AB,HTL,~~~~~,N,HUTCH LAKE,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHTWaa~~~N,AB,HTW,aa~~~,N,HIGHTOWER,M,NO,0,-,R,MC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABHTW~~~~~N,AB,HTW,~~~~~,N,HIGHTOWER,M,NO,0,-,R,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABHUBgl~~~A,AB,HUB,gl~~~,A,HUBALTA,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABHUBst~~~N,AB,HUB,st~~~,N,HUBALTA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABHUBxp~~~N,AB,HUB,xp~~~,N,HUBALTA,M,NO,0,-,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABHUB~~~~~A,AB,HUB,~~~~~,A,HUBALTA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABHUB~~~~~N,AB,HUB,~~~~~,N,HUBALTA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABHUKersa~A,AB,HUK,ersa~,A,HEMARUKA,M,YU,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHUKer~~~A,AB,HUK,er~~~,A,HEMARUKA,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHUKgl~~~N,AB,HUK,gl~~~,N,HEMARUKA,M,YU,3,BN,I,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,GLB
+ABHUKsa~~~N,AB,HUK,sa~~~,N,HEMARUKA,M,YU,3,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHUKst~~~N,AB,HUK,st~~~,N,HEMARUKA,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHUKxp~~~N,AB,HUK,xp~~~,N,HEMARUKA,M,NO,3,BN,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,SZ,SS,B
+ABHUK~~~~~A,AB,HUK,~~~~~,A,HEMARUKA,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHUK~~~~~N,AB,HUK,~~~~~,N,HEMARUKA,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,B
+ABHVNaa~~~N,AB,HVN,aa~~~,N,HALVERSON,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHVNgr~~~N,AB,HVN,gr~~~,N,HALVERSON,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHVNst~~~N,AB,HVN,st~~~,N,HALVERSON,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHVN~~~~~N,AB,HVN,~~~~~,N,HALVERSON,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABHYH~~~~~N,AB,HYH,~~~~~,N,HYTHE,M,NO,0,-,W,M,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABHYLaa~~~N,AB,HYL,aa~~~,N,HAIRY HILL,M,YB,2,SA,VP,MF,-,-,VC,-,-,TILL,-,-,,,,GL,HG,R
+ABHYL~~~~~N,AB,HYL,~~~~~,N,HAIRY HILL,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,HG,R
+ABHZMaa~~~N,AB,HZM,aa~~~,N,HAZELMERE,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABHZMxp~~~N,AB,HZM,xp~~~,N,HAZELMERE,M,NO,7,SA,MW,F,F,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,GL
+ABHZM~~~~~A,AB,HZM,~~~~~,A,HAZELMERE,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABHZM~~~~~N,AB,HZM,~~~~~,N,HAZELMERE,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABIBXzr~~~N,AB,IBX,zr~~~,N,ISHBEL,M,NO,0,-,W,M,-,-,EC,-,-,COLL,-,-,,,,RG,R,O
+ABIBX~~~~~N,AB,IBX,~~~~~,N,ISHBEL,M,NO,0,-,R,M,-,-,EC,-,-,COLL,-,-,,,,BR,EB,E
+ABIMY~~~~~N,AB,IMY,~~~~~,N,IDAMAY,M,NO,2,BN,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,DB
+ABINDsa~~~N,AB,IND,sa~~~,N,INDUS,M,YU,6,SA,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABIND~~~~~N,AB,IND,~~~~~,N,INDUS,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABINSsa~~~N,AB,INS,sa~~~,N,ISLANDS,M,YB,2,SA,VP,VC,-,-,VC,-,-,FLEO,-,-,,,,GL,G,R
+ABINS~~~~~N,AB,INS,~~~~~,N,ISLANDS,M,YB,0,-,VP,VC,-,-,VC,-,-,FLEO,-,-,,,,GL,G,R
+ABIOS~~~~~N,AB,IOS,~~~~~,N,IOSEGUN,M,NO,0,-,W,M,VC,-,AN,UD,-,FLUV,FLUV,-,,,,RG,R,CU
+ABIRMcr~~~N,AB,IRM,cr~~~,N,IRMA,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,CA
+ABIRMgl~~~N,AB,IRM,gl~~~,N,IRMA,M,NO,0,-,I,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,GL
+ABIRM~~~~~A,AB,IRM,~~~~~,A,IRMA,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABIRM~~~~~N,AB,IRM,~~~~~,N,IRMA,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABIRQglxt~A,AB,IRQ,glxt~,A,IROQUOIS,M,YU,0,-,I,M,M,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,GL
+ABIRQ~~~~~A,AB,IRQ,~~~~~,A,IROQUOIS,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABIRQ~~~~~N,AB,IRQ,~~~~~,N,IROQUOIS,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABISF~~~~~N,AB,ISF,~~~~~,N,INNISFAIL,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,R
+ABIWT~~~~~N,AB,IWT,~~~~~,N,ILLINGWORTH,M,YU,0,-,P,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABJATsa~~~N,AB,JAT,sa~~~,N,JOANTO,M,YB,3,SA,VP,F,-,-,VC,-,-,LACU,-,-,,,,GL,HG,R
+ABJAT~~~~~N,AB,JAT,~~~~~,N,JOANTO,M,YB,0,-,VP,F,-,-,VC,-,-,LACU,-,-,,,,GL,HG,R
+ABJDP~~~~~A,AB,JDP,~~~~~,A,JEAN D'OR PRAIRIE,M,YU,0,-,I,M,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABJDP~~~~~N,AB,JDP,~~~~~,N,JEAN D'OR PRAIRIE,M,YU,0,-,I,M,-,-,WC,-,-,FLUV,-,-,,,,GL,HG,O
+ABJFF~~~~~A,AB,JFF,~~~~~,A,JEFFREY,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GLE
+ABJFF~~~~~N,AB,JFF,~~~~~,N,JEFFREY,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GLE
+ABJMRxs~~~N,AB,JMR,xs~~~,N,JAMES RIVER,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,LU,GL,D
+ABJMRxt~~~N,AB,JMR,xt~~~,N,JAMES RIVER,M,NO,0,-,W,M,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABJMR~~~~~A,AB,JMR,~~~~~,A,JAMES RIVER,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABJMR~~~~~N,AB,JMR,~~~~~,N,JAMES RIVER,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABJNX~~~~~N,AB,JNX,~~~~~,N,JONAS,M,NO,6,LI,W,M,MC,,AN,UD,,TILL,RESD,RKUD,,,,BR,DYB,O
+ABJOPaa~~~N,AB,JOP,aa~~~,N,JOSEPHINE,M,YU,0,-,P,F,-,-,AN,-,-,RESD,-,-,,,,GL,LG,HU
+ABJOP~~~~~N,AB,JOP,~~~~~,N,JOSEPHINE,M,YU,0,-,P,F,-,-,AN,-,-,RESD,-,-,,,,GL,LG,HU
+ABJRVaa~~~N,AB,JRV,aa~~~,N,JARVIS,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABJRV~~~~~N,AB,JRV,~~~~~,N,JARVIS,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABJSNaa~~~N,AB,JSN,aa~~~,N,JOSLYN,M,NO,3,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,G
+ABJSNglzs~N,AB,JSN,glzs~,N,JOSLYN,M,NO,4,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,GLG
+ABJSN~~~~~N,AB,JSN,~~~~~,N,JOSLYN,M,NO,3,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,G
+ABJSR~~~~~N,AB,JSR,~~~~~,N,JENSEN RESERVOIR,M,NO,0,-,W,MF,-,-,VC,-,-,FLUV,-,-,,,,RG,R,CU
+ABJUHaa~~~N,AB,JUH,aa~~~,N,JUDAH,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABJUHsc~~~N,AB,JUH,sc~~~,N,JUDAH,M,NO,6,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABJUH~~~~~A,AB,JUH,~~~~~,A,JUDAH,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABJUH~~~~~N,AB,JUH,~~~~~,N,JUDAH,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABJUY~~~~~N,AB,JUY,~~~~~,N,JUDY,M,NO,0,-,W,MC,MF,-,AN,UD,-,EOLI,GLFL,-,,,,LU,GL,BR
+ABJVEpt~~~N,AB,JVE,pt~~~,N,JARVIE,M,YU,0,-,P,M,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABJVE~~~~~N,AB,JVE,~~~~~,N,JARVIE,M,YU,0,-,P,M,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABKAK~~~~~N,AB,KAK,~~~~~,N,KAKHI,M,NO,0,-,R,VC,-,-,AN,-,-,FLEO,-,-,,,,CH,BLC,R
+ABKAMxp~~~N,AB,KAM,xp~~~,N,KAMISAK,M,NO,7,SA,MW,F,F,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,GLSZ
+ABKAM~~~~~N,AB,KAM,~~~~~,N,KAMISAK,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLSZ
+ABKBDer~~~A,AB,KBD,er~~~,A,KARLSBAD,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABKBDgl~~~N,AB,KBD,gl~~~,N,KARLSBAD,M,YU,4,BN,I,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,GLB
+ABKBDsa~~~N,AB,KBD,sa~~~,N,KARLSBAD,M,YU,4,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABKBD~~~~~A,AB,KBD,~~~~~,A,KARLSBAD,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABKBD~~~~~N,AB,KBD,~~~~~,N,KARLSBAD,M,NO,4,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABKCH~~~~~A,AB,KCH,~~~~~,A,KIRKCHAMP,M,NO,7,SA,W,MF,VF,-,VC,UD,-,GLLC,GLLC,-,,,,CH,DBC,SZ
+ABKCH~~~~~N,AB,KCH,~~~~~,N,KIRKCHAMP,M,NO,7,SA,W,MF,VF,-,VC,UD,-,GLLC,GLLC,-,,,,CH,DBC,SZ
+ABKCPaa~~~N,AB,KCP,aa~~~,N,KYISCAP,M,YU,3,SA,W,MF,-,-,VC,-,-,GLLC,-,-,,,,RG,R,O
+ABKCP~~~~~N,AB,KCP,~~~~~,N,KYISCAP,M,YU,3,SA,I,MF,-,-,VC,-,-,GLLC,-,-,,,,RG,R,O
+ABKEGpt~~~N,AB,KEG,pt~~~,N,KEG,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABKEG~~~~~N,AB,KEG,~~~~~,N,KEG,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABKELgr~~~N,AB,KEL,gr~~~,N,KEARL,M,NO,0,-,R,VC,-,-,AN,-,-,GLLC,-,-,,,,BR,DYB,E
+ABKELxc~~~N,AB,KEL,xc~~~,N,KEARL,M,NO,0,-,R,VC,F,-,AN,UD,-,GLLC,GLLC,-,,,,BR,DYB,E
+ABKEL~~~~~N,AB,KEL,~~~~~,N,KEARL,M,NO,0,-,R,VC,-,-,AN,-,-,GLLC,-,-,,,,BR,DYB,E
+ABKEOco~~~N,AB,KEO,co~~~,N,KEOMA,M,YU,3,BN,I,M,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,GLBL
+ABKEO~~~~~N,AB,KEO,~~~~~,N,KEOMA,M,YU,3,BN,I,MF,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,GLBL
+ABKGOxp~~~N,AB,KGO,xp~~~,N,KANGAROO,M,NO,6,LI,R,VC,MC,,VC,UD,,GLFL,RESD,RKUD,,,,CH,BC,O
+ABKGO~~~~~A,AB,KGO,~~~~~,A,KANGAROO,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABKGO~~~~~N,AB,KGO,~~~~~,N,KANGAROO,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABKGTsa~~~N,AB,KGT,sa~~~,N,KLEMENGURT,M,YU,1,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,BL
+ABKGT~~~~~N,AB,KGT,~~~~~,N,KLEMENGURT,M,NO,2,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,BL
+ABKHOaa~~~A,AB,KHO,aa~~~,A,KEHOL,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABKHOer~~~A,AB,KHO,er~~~,A,KEHOL,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABKHOfi~~~A,AB,KHO,fi~~~,A,KEHOL,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABKHO~~~~~A,AB,KHO,~~~~~,A,KEHOL,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABKHO~~~~~N,AB,KHO,~~~~~,N,KEHOL,M,NO,3,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABKHS~~~~~N,AB,KHS,~~~~~,N,KEEPHILLS,M,NO,0,-,W,MF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,D
+ABKHWgl~~~A,AB,KHW,gl~~~,A,KEHIWIN,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,GL
+ABKHW~~~~~A,AB,KHW,~~~~~,A,KEHIWIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABKHW~~~~~N,AB,KHW,~~~~~,N,KEHIWIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABKIAaa~~~N,AB,KIA,aa~~~,N,KIA NEA,M,NO,0,-,R,VC,-,-,VC,-,-,EOLI,-,-,,,,BR,MB,O
+ABKIA~~~~~N,AB,KIA,~~~~~,N,KIA NEA,M,NO,0,-,R,VC,-,-,VC,-,-,EOLI,-,-,,,,BR,MB,O
+ABKKNaa~~~A,AB,KKN,aa~~~,A,KLESKUN,M,NO,2,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABKKNaa~~~N,AB,KKN,aa~~~,N,KLESKUN,M,NO,3,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABKKN~~~~~A,AB,KKN,~~~~~,A,KLESKUN,M,NO,2,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABKKN~~~~~N,AB,KKN,~~~~~,N,KLESKUN,M,NO,3,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABKKY~~~~~N,AB,KKY,~~~~~,N,KINKY,M,NO,0,-,R,VC,-,-,VC,-,-,EOLI,-,-,,,,BR,EB,E
+ABKLMgl~~~N,AB,KLM,gl~~~,N,KILLAM,M,YU,3,BN,I,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,GLBL
+ABKLM~~~~~A,AB,KLM,~~~~~,A,KILLAM,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABKLM~~~~~N,AB,KLM,~~~~~,N,KILLAM,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABKME~~~~~N,AB,KME,~~~~~,N,KILOME,M,NO,0,-,I,F,-,-,AN,-,-,GLLC,-,-,,,,LU,GL,GL
+ABKMPgl~~~N,AB,KMP,gl~~~,N,KEMP,M,NO,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABKMP~~~~~A,AB,KMP,~~~~~,A,KEMP,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKMP~~~~~N,AB,KMP,~~~~~,N,KEMP,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKNA~~~~~A,AB,KNA,~~~~~,A,KINSELLA,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABKNA~~~~~N,AB,KNA,~~~~~,N,KINSELLA,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABKNSgl~~~N,AB,KNS,gl~~~,N,KINOSIS,M,NO,0,-,I,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,GL
+ABKNS~~~~~N,AB,KNS,~~~~~,N,KINOSIS,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABKNTco~~~N,AB,KNT,co~~~,N,KNIGHT,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABKNTzr~~~N,AB,KNT,zr~~~,N,KNIGHT,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABKNT~~~~~A,AB,KNT,~~~~~,A,KNIGHT,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABKNT~~~~~N,AB,KNT,~~~~~,N,KNIGHT,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABKNZxs~~~N,AB,KNZ,xs~~~,N,KENZIE,O,YB,0,-,VP,ME,MC,-,WC,UD,-,SPPT,GLFL,-,,,,OR,M,T
+ABKNZxt~~~N,AB,KNZ,xt~~~,N,KENZIE,O,YB,0,-,VP,ME,MF,-,WC,UD,-,SPPT,TILL,-,,,,OR,M,T
+ABKNZ~~~~~N,AB,KNZ,~~~~~,N,KENZIE,O,YB,0,-,VP,ME,F,-,WC,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABKPO~~~~~N,AB,KPO,~~~~~,N,KAPONA,M,NO,4,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,BL
+ABKRKaa~~~N,AB,KRK,aa~~~,N,KIRKCALDY,M,NO,4,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,DB
+ABKRK~~~~~N,AB,KRK,~~~~~,N,KIRKCALDY,M,NO,4,BN,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,DB
+ABKSD~~~~~N,AB,KSD,~~~~~,N,KAVASAND,M,NO,4,BN,W,VC,MF,-,WC,UD,-,GLFL,RESD,-,,,,SZ,SS,G
+ABKSRaa~~~A,AB,KSR,aa~~~,A,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSRaa~~~N,AB,KSR,aa~~~,N,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSRgl~~~N,AB,KSR,gl~~~,N,KESSLER,M,YU,0,-,I,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,GL
+ABKSRgr~~~A,AB,KSR,gr~~~,A,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSRgr~~~N,AB,KSR,gr~~~,N,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSRzr~~~N,AB,KSR,zr~~~,N,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,R
+ABKSR~~~~~A,AB,KSR,~~~~~,A,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSR~~~~~N,AB,KSR,~~~~~,N,KESSLER,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABKSYptxc~N,AB,KSY,ptxc~,N,KERENSKY,M,YB,0,-,VP,MF,F,-,VC,UD,-,GLLC,GLLC,-,,,,GL,HG,R
+ABKSYxt~~~N,AB,KSY,xt~~~,N,KERENSKY,M,YB,0,-,VP,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,HG,R
+ABKSY~~~~~N,AB,KSY,~~~~~,N,KERENSKY,M,YB,0,-,VP,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABKTHaa~~~N,AB,KTH,aa~~~,N,KATHLEEN,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKTHsc~~~A,AB,KTH,sc~~~,A,KATHLEEN,M,NO,6,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKTH~~~~~A,AB,KTH,~~~~~,A,KATHLEEN,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKTH~~~~~N,AB,KTH,~~~~~,N,KATHLEEN,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABKTM~~~~~N,AB,KTM,~~~~~,N,KITSIM,M,YB,1,SA,VP,MF,-,-,VC,-,-,TILL,-,-,,,,GL,G,R
+ABKTWaa~~~N,AB,KTW,aa~~~,N,KAYTWO,O,YB,0,-,VP,ME,-,-,VC,-,-,FNPT,-,-,,,,OR,M,TY
+ABKTW~~~~~N,AB,KTW,~~~~~,N,KAYTWO,O,YB,0,-,VP,ME,-,-,VC,-,-,FNPT,-,-,,,,OR,M,TY
+ABKTY~~~~~A,AB,KTY,~~~~~,A,KITSCOTY,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABKTY~~~~~N,AB,KTY,~~~~~,N,KITSCOTY,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABKURst~~~A,AB,KUR,st~~~,A,KIRRIEMUIR,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABKURst~~~N,AB,KUR,st~~~,N,KIRRIEMUIR,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABKUR~~~~~A,AB,KUR,~~~~~,A,KIRRIEMUIR,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABKUR~~~~~N,AB,KUR,~~~~~,N,KIRRIEMUIR,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABKVGaa~~~A,AB,KVG,aa~~~,A,KAVANAGH,M,NO,2,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,BL
+ABKVGaa~~~N,AB,KVG,aa~~~,N,KAVANAGH,M,NO,3,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,BL
+ABKVG~~~~~A,AB,KVG,~~~~~,A,KAVANAGH,M,NO,2,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,BL
+ABKVG~~~~~N,AB,KVG,~~~~~,N,KAVANAGH,M,NO,3,BN,MW,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,BL
+ABKWOaa~~~A,AB,KWO,aa~~~,A,KAWOOD,M,NO,2,BN,W,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,G
+ABKWO~~~~~N,AB,KWO,~~~~~,N,KAWOOD,M,NO,4,BN,W,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,G
+ABKYNco~~~A,AB,KYN,co~~~,A,KATHYRN,M,YU,0,-,I,M,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,GL
+ABKYN~~~~~A,AB,KYN,~~~~~,A,KATHYRN,M,YU,0,-,I,MF,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,GL
+ABKYN~~~~~N,AB,KYN,~~~~~,N,KATHYRN,M,YU,0,-,I,MF,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,GL
+ABLADaa~~~A,AB,LAD,aa~~~,A,LANDRY,M,NO,6,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,CH,BLC,SZ
+ABLADxp~~~A,AB,LAD,xp~~~,A,LANDRY,M,NO,6,SA,MW,F,F,-,WC,UD,-,LATL,RESD,-,,,,CH,BLC,SZ
+ABLADxt~~~A,AB,LAD,xt~~~,A,LANDRY,M,NO,6,SA,MW,F,MF,-,WC,UD,-,LATL,TILL,-,,,,CH,BLC,SZ
+ABLAD~~~~~A,AB,LAD,~~~~~,A,LANDRY,M,NO,6,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,CH,BLC,SZ
+ABLAT~~~~~N,AB,LAT,~~~~~,N,LATORNELL,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABLAV~~~~~N,AB,LAV,~~~~~,N,LAHAIEVILLE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABLBH~~~~~N,AB,LBH,~~~~~,N,LAC LA BICHE,M,YU,0,-,I,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABLBK~~~~~N,AB,LBK,~~~~~,N,LINDBROOK,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,RG,R,O
+ABLCTpt~~~N,AB,LCT,pt~~~,N,LA CRETE,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABLCT~~~~~N,AB,LCT,~~~~~,N,LA CRETE,M,YU,0,-,P,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABLCY~~~~~A,AB,LCY,~~~~~,A,LA COREY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABLCY~~~~~N,AB,LCY,~~~~~,N,LA COREY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABLEGpt~~~N,AB,LEG,pt~~~,N,LIEGE,M,YU,0,-,P,MF,-,-,EA,-,-,GLFL,-,-,,,,GL,LG,O
+ABLEGxtpt~N,AB,LEG,xtpt~,N,LIEGE,M,YU,0,-,P,MF,MF,-,EA,UD,-,GLFL,TILL,-,,,,GL,LG,O
+ABLEGxt~~~N,AB,LEG,xt~~~,N,LIEGE,M,YU,0,-,P,MF,MF,-,EA,UD,-,GLFL,TILL,-,,,,GL,LG,O
+ABLEG~~~~~N,AB,LEG,~~~~~,N,LIEGE,M,YU,0,-,P,MF,-,-,EA,-,-,GLFL,-,-,,,,GL,LG,O
+ABLETaa~~~A,AB,LET,aa~~~,A,LETHBRIDGE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABLETaa~~~N,AB,LET,aa~~~,N,LETHBRIDGE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABLETgl~~~A,AB,LET,gl~~~,A,LETHBRIDGE,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,GL
+ABLETsc~~~N,AB,LET,sc~~~,N,LETHBRIDGE,M,NO,5,SA,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABLETxp~~~N,AB,LET,xp~~~,N,LETHBRIDGE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,RESD,-,,,,CH,DBC,O
+ABLET~~~~~A,AB,LET,~~~~~,A,LETHBRIDGE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABLET~~~~~N,AB,LET,~~~~~,N,LETHBRIDGE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABLEVaa~~~N,AB,LEV,aa~~~,N,LEVI,M,NO,6,LI,W,MC,,-,AN,,-,RESD,RKUD,-,,,,BR,EB,E
+ABLEV~~~~~N,AB,LEV,~~~~~,N,LEVI,M,NO,6,LI,W,MC,,-,AN,,-,RESD,RKUD,-,,,,BR,EB,E
+ABLFEst~~~A,AB,LFE,st~~~,A,LANFINE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,E
+ABLFEst~~~N,AB,LFE,st~~~,N,LANFINE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,E
+ABLFE~~~~~A,AB,LFE,~~~~~,A,LANFINE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,E
+ABLFE~~~~~N,AB,LFE,~~~~~,N,LANFINE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,E
+ABLGCpt~~~N,AB,LGC,pt~~~,N,LA GLACE,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABLGC~~~~~N,AB,LGC,~~~~~,N,LA GLACE,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABLGDgl~~~N,AB,LGD,gl~~~,N,LEGEND,M,NO,0,-,I,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,GL
+ABLGD~~~~~N,AB,LGD,~~~~~,N,LEGEND,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABLHD~~~~~A,AB,LHD,~~~~~,A,LEITHEAD,M,NO,4,BN,W,MC,-,-,VC,-,-,GLFL,-,-,,,,SZ,SS,DB
+ABLHD~~~~~N,AB,LHD,~~~~~,N,LEITHEAD,M,NO,4,BN,W,MC,-,-,VC,-,-,GLFL,-,-,,,,SZ,SS,DB
+ABLIHaa~~~N,AB,LIH,aa~~~,N,LEITH,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABLIHer~~~A,AB,LIH,er~~~,A,LEITH,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABLIH~~~~~N,AB,LIH,~~~~~,N,LEITH,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABLIZ~~~~~N,AB,LIZ,~~~~~,N,LIZA,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABLKEcogl~A,AB,LKE,cogl~,A,LINTON LAKE,M,YU,0,-,I,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GL
+ABLKEgl~~~A,AB,LKE,gl~~~,A,LINTON LAKE,M,YU,0,-,I,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GL
+ABLKExc~~~A,AB,LKE,xc~~~,A,LINTON LAKE,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLFL,-,,,,LU,GL,O
+ABLKE~~~~~N,AB,LKE,~~~~~,N,LINTON LAKE,M,NO,0,-,R,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABLLD~~~~~N,AB,LLD,~~~~~,N,LILYDALE,M,YU,1,SA,I,M,-,-,VC,-,-,FLUV,-,-,,,,CH,DBC,GL
+ABLLKglsa~N,AB,LLK,glsa~,N,LLOYD LAKE,M,YU,3,SA,I,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABLLKgl~~~N,AB,LLK,gl~~~,N,LLOYD LAKE,M,YU,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABLLK~~~~~A,AB,LLK,~~~~~,A,LLOYD LAKE,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABLLK~~~~~N,AB,LLK,~~~~~,N,LLOYD LAKE,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABLLN~~~~~N,AB,LLN,~~~~~,N,LILLIAN,M,YB,4,CR,P,F,-,-,AN,-,-,LACU,-,-,,,,CY,SC,GL
+ABLNBaa~~~N,AB,LNB,aa~~~,N,LUNDBRECK,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABLNB~~~~~A,AB,LNB,~~~~~,A,LUNDBRECK,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABLNB~~~~~N,AB,LNB,~~~~~,N,LUNDBRECK,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABLNN~~~~~A,AB,LNN,~~~~~,A,LANONNE,M,NO,6,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,SZ
+ABLNN~~~~~N,AB,LNN,~~~~~,N,LANONNE,M,NO,6,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,SZ
+ABLOBaa~~~A,AB,LOB,aa~~~,A,LOBLEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABLOBaa~~~N,AB,LOB,aa~~~,N,LOBLEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABLOB~~~~~A,AB,LOB,~~~~~,A,LOBLEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABLOB~~~~~N,AB,LOB,~~~~~,N,LOBLEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABLOG~~~~~N,AB,LOG,~~~~~,N,LOUGHEED,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABLOM~~~~~A,AB,LOM,~~~~~,A,LOOMA,M,NO,0,-,W,VF,MF,-,WC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABLOM~~~~~N,AB,LOM,~~~~~,N,LOOMA,M,NO,0,-,W,VF,MF,-,WC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABLPN~~~~~N,AB,LPN,~~~~~,N,LONEPINE,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABLRC~~~~~A,AB,LRC,~~~~~,A,LAWRENCE,M,NO,2,BN,W,F,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABLRC~~~~~N,AB,LRC,~~~~~,N,LAWRENCE,M,NO,4,BN,W,F,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,G
+ABLRDaa~~~A,AB,LRD,aa~~~,A,LESSARD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABLRDxt~~~A,AB,LRD,xt~~~,A,LESSARD,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABLRD~~~~~A,AB,LRD,~~~~~,A,LESSARD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABLRD~~~~~N,AB,LRD,~~~~~,N,LESSARD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABLSDaa~~~N,AB,LSD,aa~~~,N,LAKESEND,M,NO,3,BN,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,DB
+ABLSD~~~~~N,AB,LSD,~~~~~,N,LAKESEND,M,NO,3,BN,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,DB
+ABLTAcr~~~N,AB,LTA,cr~~~,N,LYALTA,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABLTAgl~~~N,AB,LTA,gl~~~,N,LYALTA,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABLTAsa~~~N,AB,LTA,sa~~~,N,LYALTA,M,YU,4,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABLTA~~~~~A,AB,LTA,~~~~~,A,LYALTA,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABLTA~~~~~N,AB,LTA,~~~~~,N,LYALTA,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABLTCaa~~~N,AB,LTC,aa~~~,N,LEIGHTON CENTRE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABLTCgr~~~N,AB,LTC,gr~~~,N,LEIGHTON CENTRE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABLTCxl~~~N,AB,LTC,xl~~~,N,LEIGHTON CENTRE,M,NO,6,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,LU,GL,D
+ABLTC~~~~~N,AB,LTC,~~~~~,N,LEIGHTON CENTRE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABLTP~~~~~A,AB,LTP,~~~~~,A,LOTHROP,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,D
+ABLTP~~~~~N,AB,LTP,~~~~~,N,LOTHROP,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,D
+ABLUP~~~~~A,AB,LUP,~~~~~,A,LUPEN,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABLUP~~~~~N,AB,LUP,~~~~~,N,LUPEN,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABLVKac~~~N,AB,LVK,ac~~~,N,LIVOCK,M,NO,0,-,W,MF,M,-,EA,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABLVKxc~~~N,AB,LVK,xc~~~,N,LIVOCK,M,NO,0,-,W,M,VF,-,AN,UD,-,GLFL,GLLC,-,,,,LU,GL,O
+ABLVK~~~~~N,AB,LVK,~~~~~,N,LIVOCK,M,NO,0,-,MW,M,MF,-,AN,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABLVTst~~~N,AB,LVT,st~~~,N,LAVESTA,M,NO,0,-,W,MF,MF,-,WC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABLVT~~~~~N,AB,LVT,~~~~~,N,LAVESTA,M,NO,0,-,W,MF,MF,-,WC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABLVX~~~~~N,AB,LVX,~~~~~,N,LARCH,M,NO,0,-,W,MC,-,-,AN,-,-,TILL,-,-,,,,BR,DYB,E
+ABLVY~~~~~A,AB,LVY,~~~~~,A,LONELY VALLEY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABLVY~~~~~N,AB,LVY,~~~~~,N,LONELY VALLEY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABLWT~~~~~A,AB,LWT,~~~~~,A,LOWATER,M,NO,2,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,G
+ABLWT~~~~~N,AB,LWT,~~~~~,N,LOWATER,M,NO,5,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,G
+ABLYB~~~~~N,AB,LYB,~~~~~,N,LILYBROWN,M,YU,1,SA,I,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BC,GL
+ABMAA~~~~~N,AB,MAA,~~~~~,N,MAUGHAN,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,LU,GL,O
+ABMABca~~~N,AB,MAB,ca~~~,N,MALEB,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABMABco~~~A,AB,MAB,co~~~,A,MALEB,M,NO,4,SA,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMABcrsa~N,AB,MAB,crsa~,N,MALEB,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABMABsa~~~N,AB,MAB,sa~~~,N,MALEB,M,YU,4,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMABst~~~N,AB,MAB,st~~~,N,MALEB,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMABta~~~N,AB,MAB,ta~~~,N,MALEB,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMABxp~~~N,AB,MAB,xp~~~,N,MALEB,M,NO,4,SA,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BC,O
+ABMAB~~~~~A,AB,MAB,~~~~~,A,MALEB,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMAB~~~~~N,AB,MAB,~~~~~,N,MALEB,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMACzr~~~N,AB,MAC,zr~~~,N,MACLEOD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,R
+ABMAC~~~~~A,AB,MAC,~~~~~,A,MACLEOD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,CA
+ABMAC~~~~~N,AB,MAC,~~~~~,N,MACLEOD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,CA
+ABMAKcr~~~N,AB,MAK,cr~~~,N,MENAIK,M,YB,0,-,VP,M,-,-,VC,-,-,FLUV,-,-,,,,GL,HG,R
+ABMAKpt~~~N,AB,MAK,pt~~~,N,MENAIK,M,YB,0,-,VP,M,-,-,VC,-,-,FLUV,-,-,,,,GL,HG,R
+ABMAKsa~~~N,AB,MAK,sa~~~,N,MENAIK,M,YB,2,SA,VP,M,-,-,VC,-,-,FLUV,-,-,,,,GL,HG,R
+ABMAK~~~~~N,AB,MAK,~~~~~,N,MENAIK,M,YB,0,-,VP,M,-,-,VC,-,-,FLUV,-,-,,,,GL,HG,R
+ABMAMer~~~N,AB,MAM,er~~~,N,MAMI,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABMAM~~~~~A,AB,MAM,~~~~~,A,MAMI,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABMAM~~~~~N,AB,MAM,~~~~~,N,MAMI,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABMAR~~~~~N,AB,MAR,~~~~~,N,MARGUERITE,M,NO,0,-,R,VC,-,-,AN,-,-,EOLI,-,-,,,,BR,DYB,E
+ABMASaa~~~N,AB,MAS,aa~~~,N,MASKUTA,M,NO,0,-,W,MC,-,-,VC,-,-,RESD,-,-,,,,LU,GL,O
+ABMAS~~~~~N,AB,MAS,~~~~~,N,MASKUTA,M,NO,0,-,W,MC,-,-,VC,-,-,RESD,-,-,,,,LU,GL,O
+ABMAYxt~~~N,AB,MAY,xt~~~,N,MAY RIVER,O,YB,0,-,VP,ME,M,-,EA,EA,-,SPPT,TILL,-,,,,OR,M,T
+ABMAY~~~~~N,AB,MAY,~~~~~,N,MAY RIVER,O,YB,0,-,VP,ME,-,-,EA,-,-,SPPT,-,-,,,,OR,M,TY
+ABMCA~~~~~A,AB,MCA,~~~~~,A,MCALPINE,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABMCA~~~~~N,AB,MCA,~~~~~,N,MCALPINE,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABMCEgl~~~A,AB,MCE,gl~~~,A,MINK CREEK,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABMCE~~~~~A,AB,MCE,~~~~~,A,MINK CREEK,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABMCE~~~~~N,AB,MCE,~~~~~,N,MINK CREEK,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABMCK~~~~~N,AB,MCK,~~~~~,N,MOUNTAIN CREEK,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABMCLaa~~~N,AB,MCL,aa~~~,N,MERCOAL,M,NO,0,-,W,M,MC,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,PZ
+ABMCLst~~~N,AB,MCL,st~~~,N,MERCOAL,M,NO,0,-,W,M,MC,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,PZ
+ABMCL~~~~~N,AB,MCL,~~~~~,N,MERCOAL,M,NO,0,-,W,M,MC,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,PZ
+ABMCNaasa~N,AB,MCN,aasa~,N,MCNAB,M,YU,4,SA,MW,M,-,-,VC,-,-,FLUV,-,-,,,,RG,R,O
+ABMCNaa~~~N,AB,MCN,aa~~~,N,MCNAB,M,NO,6,SA,W,M,-,-,VC,-,-,FLUV,-,-,,,,RG,R,O
+ABMCNgl~~~N,AB,MCN,gl~~~,N,MCNAB,M,YU,0,-,I,M,-,-,VC,-,-,FLUV,-,-,,,,RG,R,GL
+ABMCN~~~~~N,AB,MCN,~~~~~,N,MCNAB,M,NO,6,SA,W,M,-,-,VC,-,-,FLUV,-,-,,,,RG,R,O
+ABMCOaa~~~A,AB,MCO,aa~~~,A,MICO,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABMCOgl~~~N,AB,MCO,gl~~~,N,MICO,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABMCO~~~~~A,AB,MCO,~~~~~,A,MICO,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABMCO~~~~~N,AB,MCO,~~~~~,N,MICO,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABMCTsa~~~N,AB,MCT,sa~~~,N,MILLICENT,M,YU,3,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABMCT~~~~~A,AB,MCT,~~~~~,A,MILLICENT,M,NO,5,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABMCT~~~~~N,AB,MCT,~~~~~,N,MILLICENT,M,NO,5,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABMDE~~~~~A,AB,MDE,~~~~~,A,MODESTE,M,NO,0,-,W,M,-,-,WC,-,-,RESD,-,-,,,,LU,GL,O
+ABMDE~~~~~N,AB,MDE,~~~~~,N,MODESTE,M,NO,0,-,W,M,-,-,WC,-,-,RESD,-,-,,,,LU,GL,O
+ABMDL~~~~~A,AB,MDL,~~~~~,A,MCDOUGALL,M,NO,0,-,W,M,-,-,WC,-,-,RESD,-,-,,,,CH,DGC,O
+ABMDPsa~~~A,AB,MDP,sa~~~,A,MIDNAPORE,M,YU,3,SA,MW,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABMDPxp~~~N,AB,MDP,xp~~~,N,MIDNAPORE,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,RESD,-,,,,CH,BLC,O
+ABMDPxt~~~N,AB,MDP,xt~~~,N,MIDNAPORE,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABMDP~~~~~A,AB,MDP,~~~~~,A,MIDNAPORE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABMDP~~~~~N,AB,MDP,~~~~~,N,MIDNAPORE,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABMDR~~~~~A,AB,MDR,~~~~~,A,MUNDARE,M,NO,0,-,W,VC,-,-,WC,-,-,FLEO,-,-,,,,CH,BLC,O
+ABMDR~~~~~N,AB,MDR,~~~~~,N,MUNDARE,M,NO,0,-,W,VC,-,-,WC,-,-,FLEO,-,-,,,,CH,BLC,O
+ABMDWxt~~~N,AB,MDW,xt~~~,N,MEADOW,O,YB,0,-,VP,ME,MF,-,AN,AN,-,FNPT,TILL,-,,,,OR,M,T
+ABMDW~~~~~N,AB,MDW,~~~~~,N,MEADOW,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABMER~~~~~N,AB,MER,~~~~~,N,MEANDER,M,NO,7,SA,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABMETsc~~~N,AB,MET,sc~~~,N,METISKO,M,NO,4,SA,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABMET~~~~~A,AB,MET,~~~~~,A,METISKO,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABMET~~~~~N,AB,MET,~~~~~,N,METISKO,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABMEW~~~~~A,AB,MEW,~~~~~,A,MEWASSIN,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABMEW~~~~~N,AB,MEW,~~~~~,N,MEWASSIN,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABMFTaaxt~A,AB,MFT,aaxt~,A,MAYCROFT,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABMFTaa~~~A,AB,MFT,aa~~~,A,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABMFTca~~~A,AB,MFT,ca~~~,A,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABMFTglzr~N,AB,MFT,glzr~,N,MAYCROFT,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GLR
+ABMFTgl~~~A,AB,MFT,gl~~~,A,MAYCROFT,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABMFTgr~~~A,AB,MFT,gr~~~,A,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABMFTxt~~~A,AB,MFT,xt~~~,A,MAYCROFT,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABMFTzr~~~N,AB,MFT,zr~~~,N,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABMFT~~~~~A,AB,MFT,~~~~~,A,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABMFT~~~~~N,AB,MFT,~~~~~,N,MAYCROFT,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABMGNaa~~~A,AB,MGN,aa~~~,A,MULLIGAN,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABMGNaa~~~N,AB,MGN,aa~~~,N,MULLIGAN,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABMGN~~~~~A,AB,MGN,~~~~~,A,MULLIGAN,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABMGN~~~~~N,AB,MGN,~~~~~,N,MULLIGAN,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,O
+ABMGRaa~~~A,AB,MGR,aa~~~,A,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGRaa~~~N,AB,MGR,aa~~~,N,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGRgr~~~A,AB,MGR,gr~~~,A,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGRgr~~~N,AB,MGR,gr~~~,N,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGR~~~~~A,AB,MGR,~~~~~,A,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGR~~~~~N,AB,MGR,~~~~~,N,MIGRA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,O
+ABMGS~~~~~A,AB,MGS,~~~~~,A,MORNINGSIDE,M,NO,0,-,R,VC,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABMGS~~~~~N,AB,MGS,~~~~~,N,MORNINGSIDE,M,NO,0,-,R,VC,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABMGTsa~~~A,AB,MGT,sa~~~,A,MAGRATH,M,NO,5,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABMGTsa~~~N,AB,MGT,sa~~~,N,MAGRATH,M,NO,5,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABMGT~~~~~A,AB,MGT,~~~~~,A,MAGRATH,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABMGT~~~~~N,AB,MGT,~~~~~,N,MAGRATH,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABMGVzz~~~N,AB,MGV,zz~~~,N,MCGILLVARY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,O
+ABMGV~~~~~N,AB,MGV,~~~~~,N,MCGILLVARY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,BR,EB,E
+ABMHLgl~~~N,AB,MHL,gl~~~,N,MOOSE HILLS,M,YU,0,-,I,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,GL
+ABMHL~~~~~N,AB,MHL,~~~~~,N,MOOSE HILLS,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABMHN~~~~~A,AB,MHN,~~~~~,A,MEACHIN,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,GL
+ABMHN~~~~~N,AB,MHN,~~~~~,N,MEACHIN,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,GL
+ABMHR~~~~~N,AB,MHR,~~~~~,N,MAHER,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABMIC~~~~~A,AB,MIC,~~~~~,A,MICHICHI,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,DB
+ABMIC~~~~~N,AB,MIC,~~~~~,N,MICHICHI,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,DB
+ABMILaa~~~N,AB,MIL,aa~~~,N,MILDRED,M,NO,0,-,VR,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABMIL~~~~~N,AB,MIL,~~~~~,N,MILDRED,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABMIQ~~~~~N,AB,MIQ,~~~~~,N,MIQUELON,M,NO,0,-,MW,VF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABMJU~~~~~A,AB,MJU,~~~~~,A,MAJEAU,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,SZ
+ABMJU~~~~~N,AB,MJU,~~~~~,N,MAJEAU,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,SZ
+ABMKL~~~~~A,AB,MKL,~~~~~,A,MEIKLE,M,NO,6,SA,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABMKL~~~~~N,AB,MKL,~~~~~,N,MEIKLE,M,NO,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABMKNaa~~~N,AB,MKN,aa~~~,N,MOKOWAN,M,NO,0,-,W,M,-,-,VC,-,-,RESD,-,-,,,,RG,R,O
+ABMKN~~~~~N,AB,MKN,~~~~~,N,MOKOWAN,M,NO,0,-,W,M,-,-,VC,-,-,RESD,-,-,,,,RG,R,O
+ABMKRaa~~~N,AB,MKR,aa~~~,N,MILK RIVER,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,R,CU
+ABMKR~~~~~N,AB,MKR,~~~~~,N,MILK RIVER,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,R,CU
+ABMKV~~~~~A,AB,MKV,~~~~~,A,MARKERVILLE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABMKV~~~~~N,AB,MKV,~~~~~,N,MARKERVILLE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,DGC,O
+ABMKWaa~~~N,AB,MKW,aa~~~,N,MIKKWA,O,YU,4,CR,VP,FI,FI,FI,AN,UD,UD,SPPT,FOPT,FNPT,,,,CY,OC,ME
+ABMKW~~~~~N,AB,MKW,~~~~~,N,MIKKWA,O,YB,4,CR,VP,ME,ME,ME,AN,UD,UD,SPPT,FOPT,FNPT,,,,CY,OC,ME
+ABMKYpt~~~N,AB,MKY,pt~~~,N,MACKAY,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMKY~~~~~A,AB,MKY,~~~~~,A,MACKAY,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMKY~~~~~N,AB,MKY,~~~~~,N,MACKAY,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMLAaa~~~N,AB,MLA,aa~~~,N,MACOLA,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABMLAgl~~~A,AB,MLA,gl~~~,A,MACOLA,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABMLAxt~~~N,AB,MLA,xt~~~,N,MACOLA,M,NO,0,-,MW,VF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,D
+ABMLA~~~~~A,AB,MLA,~~~~~,A,MACOLA,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABMLA~~~~~N,AB,MLA,~~~~~,N,MACOLA,M,NO,0,-,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,D
+ABMLDaa~~~N,AB,MLD,aa~~~,N,MCLELLAND,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABMLDxc~~~N,AB,MLD,xc~~~,N,MCLELLAND,O,YB,0,-,VP,ME,F,-,AN,UD,-,FNPT,GLLC,-,,,,OR,M,T
+ABMLDxs~~~N,AB,MLD,xs~~~,N,MCLELLAND,O,YB,0,-,VP,ME,VC,-,AN,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABMLDxt~~~N,AB,MLD,xt~~~,N,MCLELLAND,O,YB,0,-,VP,ME,MF,-,AN,UD,-,FNPT,TILL,-,,,,OR,M,T
+ABMLD~~~~~N,AB,MLD,~~~~~,N,MCLELLAND,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABMLS~~~~~A,AB,MLS,~~~~~,A,MILL WOODS,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,BL
+ABMLS~~~~~N,AB,MLS,~~~~~,N,MILL WOODS,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,BL
+ABMLT~~~~~N,AB,MLT,~~~~~,N,MILLET,M,YU,0,-,P,MC,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABMLX~~~~~N,AB,MLX,~~~~~,N,MORAINE LAKE,M,NO,0,-,W,MC,-,-,AN,-,-,TILL,-,-,,,,BR,DYB,E
+ABMLY~~~~~N,AB,MLY,~~~~~,N,MALOY,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,HU
+ABMMD~~~~~A,AB,MMD,~~~~~,A,MARMADUKE,M,NO,0,-,W,M,VC,-,VC,UD,-,FLUV,FLUV,-,,,,CH,DBC,O
+ABMMD~~~~~N,AB,MMD,~~~~~,N,MARMADUKE,M,NO,0,-,W,M,VC,-,VC,UD,-,FLUV,FLUV,-,,,,CH,DBC,O
+ABMMOxt~~~A,AB,MMO,xt~~~,A,MALMO,M,NO,0,-,W,F,F,-,WC,UD,-,GLLC,TILL,-,,,,CH,BLC,E
+ABMMO~~~~~A,AB,MMO,~~~~~,A,MALMO,M,NO,0,-,W,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABMMO~~~~~N,AB,MMO,~~~~~,N,MALMO,M,NO,0,-,W,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABMMW~~~~~N,AB,MMW,~~~~~,N,MAMAWI,M,YU,0,-,P,M,-,-,WC,-,-,FLUV,-,-,,,,GL,G,R
+ABMMYgl~~~N,AB,MMY,gl~~~,N,MCMURRAY,M,YU,0,-,I,M,-,-,AN,-,-,FLUV,-,-,,,,RG,R,GLCU
+ABMMY~~~~~N,AB,MMY,~~~~~,N,MCMURRAY,M,NO,0,-,MW,M,-,-,AN,-,-,FLUV,-,-,,,,RG,R,CU
+ABMNA~~~~~N,AB,MNA,~~~~~,N,MINDA,M,NO,3,BN,W,M,M,-,VC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABMNHco~~~N,AB,MNH,co~~~,N,MONARCH,M,YU,0,-,P,MC,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABMNHsa~~~N,AB,MNH,sa~~~,N,MONARCH,M,YB,1,SA,VP,M,-,-,VC,-,-,GLLC,-,-,,,,GL,G,R
+ABMNH~~~~~N,AB,MNH,~~~~~,N,MONARCH,M,YB,0,-,VP,M,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABMNKxp~~~N,AB,MNK,xp~~~,N,MINISTIK,M,NO,3,BN,W,F,MF,-,VC,UD,-,GLLC,RESD,-,,,,SZ,SS,G
+ABMNK~~~~~A,AB,MNK,~~~~~,A,MINISTIK,M,NO,2,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,G
+ABMNK~~~~~N,AB,MNK,~~~~~,N,MINISTIK,M,NO,3,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,G
+ABMNR~~~~~A,AB,MNR,~~~~~,A,MANIR,M,NO,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABMNR~~~~~N,AB,MNR,~~~~~,N,MANIR,M,NO,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABMNSaa~~~N,AB,MNS,aa~~~,N,MOONSHINE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMNSpt~~~N,AB,MNS,pt~~~,N,MOONSHINE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMNS~~~~~N,AB,MNS,~~~~~,N,MOONSHINE,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABMNTaa~~~N,AB,MNT,aa~~~,N,MANATOKAN,O,YB,0,-,VP,ME,MC,-,AN,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABMNT~~~~~N,AB,MNT,~~~~~,N,MANATOKAN,O,YB,0,-,VP,ME,MC,-,AN,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABMPHaast~N,AB,MPH,aast~,N,MCPHERSON,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABMPHaaxp~N,AB,MPH,aaxp~,N,MCPHERSON,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABMPHaa~~~N,AB,MPH,aa~~~,N,MCPHERSON,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABMPHst~~~N,AB,MPH,st~~~,N,MCPHERSON,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABMPHxp~~~N,AB,MPH,xp~~~,N,MCPHERSON,M,NO,0,-,W,M,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABMPH~~~~~N,AB,MPH,~~~~~,N,MCPHERSON,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABMPVaa~~~A,AB,MPV,aa~~~,A,MAPOVA,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABMPVaa~~~N,AB,MPV,aa~~~,N,MAPOVA,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABMPVpt~~~N,AB,MPV,pt~~~,N,MAPOVA,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABMPV~~~~~A,AB,MPV,~~~~~,A,MAPOVA,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABMPV~~~~~N,AB,MPV,~~~~~,N,MAPOVA,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,LG,HU
+ABMPX~~~~~N,AB,MPX,~~~~~,N,MOLAR,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,BR,EB,O
+ABMRG~~~~~N,AB,MRG,~~~~~,N,MARGARET LAKE,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABMRN~~~~~N,AB,MRN,~~~~~,N,MARIANA,O,YB,0,-,VP,ME,MF,-,AN,UD,-,SPPT,TILL,-,,,,OR,M,T
+ABMRY~~~~~N,AB,MRY,~~~~~,N,MORLEY,M,NO,0,-,R,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABMSBaaxl~N,AB,MSB,aaxl~,N,MESA BUTTE,M,NO,4,LI,W,M,,-,WC,,-,COLL,RKUD,-,,,,CH,BLC,O
+ABMSBaa~~~A,AB,MSB,aa~~~,A,MESA BUTTE,M,NO,0,-,W,M,M,-,WC,UD,-,COLL,RESD,-,,,,CH,BLC,O
+ABMSBaa~~~N,AB,MSB,aa~~~,N,MESA BUTTE,M,NO,0,-,W,M,M,-,WC,UD,-,COLL,RESD,-,,,,CH,BLC,O
+ABMSBxl~~~N,AB,MSB,xl~~~,N,MESA BUTTE,M,NO,4,LI,W,M,,-,WC,,-,COLL,RKUD,-,,,,CH,BLC,O
+ABMSB~~~~~A,AB,MSB,~~~~~,A,MESA BUTTE,M,NO,0,-,W,M,M,-,WC,UD,-,COLL,RESD,-,,,,CH,BLC,O
+ABMSB~~~~~N,AB,MSB,~~~~~,N,MESA BUTTE,M,NO,0,-,W,M,M,-,WC,UD,-,COLL,RESD,-,,,,CH,BLC,O
+ABMSH~~~~~A,AB,MSH,~~~~~,A,MARSH HEAD,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABMSH~~~~~N,AB,MSH,~~~~~,N,MARSH HEAD,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABMSNgr~~~N,AB,MSN,gr~~~,N,MASINASIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMSNsa~~~N,AB,MSN,sa~~~,N,MASINASIN,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMSNst~~~N,AB,MSN,st~~~,N,MASINASIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMSN~~~~~A,AB,MSN,~~~~~,A,MASINASIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMSN~~~~~N,AB,MSN,~~~~~,N,MASINASIN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,O
+ABMSRxc~~~N,AB,MSR,xc~~~,N,MUSREAU,O,YB,0,-,VP,ME,F,-,WC,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABMSRxs~~~N,AB,MSR,xs~~~,N,MUSREAU,O,YB,0,-,VP,ME,MC,-,WC,UD,-,SPPT,GLFL,-,,,,OR,M,T
+ABMSRxt~~~N,AB,MSR,xt~~~,N,MUSREAU,O,YB,0,-,VP,ME,MF,-,AN,UD,-,SPPT,TILL,-,,,,OR,M,T
+ABMSRxu~~~N,AB,MSR,xu~~~,N,MUSREAU,O,YB,0,-,VP,ME,MF,-,WC,UD,-,SPPT,UNDM,-,,,,OR,M,T
+ABMSR~~~~~N,AB,MSR,~~~~~,N,MUSREAU,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABMSW~~~~~N,AB,MSW,~~~~~,N,MOOSWA,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,E
+ABMTF~~~~~N,AB,MTF,~~~~~,N,MITFORD,O,YB,0,-,VP,ME,MF,-,AN,UD,-,FNPT,TILL,-,,,,OR,M,T
+ABMTR~~~~~A,AB,MTR,~~~~~,A,MONITOR,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABMTR~~~~~N,AB,MTR,~~~~~,N,MONITOR,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,R
+ABMTW~~~~~N,AB,MTW,~~~~~,N,MOUNT WATT,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLSZ
+ABMUDaa~~~N,AB,MUD,aa~~~,N,MURDALE,M,NO,9,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABMUD~~~~~N,AB,MUD,~~~~~,N,MURDALE,M,NO,9,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABMUSaa~~~N,AB,MUS,aa~~~,N,MUSKEG,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABMUSxc~~~N,AB,MUS,xc~~~,N,MUSKEG,O,YB,0,-,VP,ME,F,-,AN,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABMUSxs~~~N,AB,MUS,xs~~~,N,MUSKEG,O,YB,0,-,VP,ME,VC,-,AN,UD,-,SPPT,GLFL,-,,,,OR,M,T
+ABMUS~~~~~N,AB,MUS,~~~~~,N,MUSKEG,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABMUT~~~~~N,AB,MUT,~~~~~,N,MUSTUS LAKE,O,YB,0,-,VP,ME,F,-,WC,UD,-,FNPT,GLLC,-,,,,OR,M,T
+ABMVLgl~~~N,AB,MVL,gl~~~,N,MORINVILLE,M,YU,0,-,I,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,BLC,GLE
+ABMVL~~~~~A,AB,MVL,~~~~~,A,MORINVILLE,M,NO,0,-,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,BLC,E
+ABMVL~~~~~N,AB,MVL,~~~~~,N,MORINVILLE,M,NO,0,-,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,BLC,E
+ABMWI~~~~~N,AB,MWI,~~~~~,N,MISSAWAWI,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABMYK~~~~~A,AB,MYK,~~~~~,A,MYNARSKI,M,NO,4,BN,W,MF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABMYK~~~~~N,AB,MYK,~~~~~,N,MYNARSKI,M,NO,3,BN,W,MF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABMYW~~~~~A,AB,MYW,~~~~~,A,MAYWOOD,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABMYW~~~~~N,AB,MYW,~~~~~,N,MAYWOOD,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABNAMcugl~N,AB,NAM,cugl~,N,NAMUR,M,NO,0,-,I,F,-,-,AN,-,-,FLUV,-,-,,,,RG,R,GLCU
+ABNAMcu~~~N,AB,NAM,cu~~~,N,NAMUR,M,NO,0,-,MW,F,-,-,AN,-,-,FLUV,-,-,,,,RG,R,CU
+ABNAMgl~~~N,AB,NAM,gl~~~,N,NAMUR,M,NO,0,-,I,F,-,-,AN,-,-,FLUV,-,-,,,,RG,R,GL
+ABNAM~~~~~N,AB,NAM,~~~~~,N,NAMUR,M,NO,0,-,MW,F,-,-,AN,-,-,FLUV,-,-,,,,RG,R,O
+ABNDG~~~~~N,AB,NDG,~~~~~,N,NORDEGG,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABNDP~~~~~N,AB,NDP,~~~~~,N,NEIDPATH,M,YU,0,-,P,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABNEDaa~~~A,AB,NED,aa~~~,A,NEW DAYTON,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABNEDaa~~~N,AB,NED,aa~~~,N,NEW DAYTON,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABNED~~~~~A,AB,NED,~~~~~,A,NEW DAYTON,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABNED~~~~~N,AB,NED,~~~~~,N,NEW DAYTON,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABNEM~~~~~A,AB,NEM,~~~~~,A,NINE MILE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,CA
+ABNEM~~~~~N,AB,NEM,~~~~~,N,NINE MILE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,CA
+ABNFK~~~~~N,AB,NFK,~~~~~,N,NORTH FORK,M,NO,6,LI,W,M,,-,WC,,-,TILL,RKUD,-,,,,BR,EB,O
+ABNHLaast~N,AB,NHL,aast~,N,NOSEHILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,BR
+ABNHLaaxp~N,AB,NHL,aaxp~,N,NOSEHILL,M,NO,0,-,W,MF,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,BR
+ABNHLaa~~~N,AB,NHL,aa~~~,N,NOSEHILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,BR
+ABNHLst~~~N,AB,NHL,st~~~,N,NOSEHILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,BR
+ABNHLxp~~~N,AB,NHL,xp~~~,N,NOSEHILL,M,NO,0,-,W,MF,MC,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,BR
+ABNHL~~~~~N,AB,NHL,~~~~~,N,NOSEHILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,BR
+ABNIB~~~~~A,AB,NIB,~~~~~,A,NIOBE,M,NO,4,SA,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,BL
+ABNIB~~~~~N,AB,NIB,~~~~~,N,NIOBE,M,NO,6,SA,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SO,BL
+ABNITxt~~~A,AB,NIT,xt~~~,A,NICOT,M,NO,0,-,R,VC,MF,-,WC,UD,-,GLFL,TILL,-,,,,BR,EB,E
+ABNIT~~~~~N,AB,NIT,~~~~~,N,NICOT,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,BR,EB,E
+ABNKN~~~~~N,AB,NKN,~~~~~,N,NICKERSON,M,NO,3,UN,P,M,-,-,WC,-,-,COLL,-,-,,,,RG,HR,O
+ABNKU~~~~~A,AB,NKU,~~~~~,A,NAKAMUN,M,NO,5,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,SZ
+ABNKU~~~~~N,AB,NKU,~~~~~,N,NAKAMUN,M,NO,6,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,SZ
+ABNKW~~~~~A,AB,NKW,~~~~~,A,NOTIKEWIN,M,NO,3,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,GLDG
+ABNKW~~~~~N,AB,NKW,~~~~~,N,NOTIKEWIN,M,NO,3,BN,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,GLDG
+ABNLK~~~~~A,AB,NLK,~~~~~,A,NINA LAKE,M,NO,7,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABNLK~~~~~N,AB,NLK,~~~~~,N,NINA LAKE,M,NO,8,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABNMAaa~~~N,AB,NMA,aa~~~,N,NAMPA,M,NO,8,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABNMA~~~~~A,AB,NMA,~~~~~,A,NAMPA,M,NO,6,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABNMA~~~~~N,AB,NMA,~~~~~,N,NAMPA,M,NO,8,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABNMKgr~~~N,AB,NMK,gr~~~,N,NORTHMARK,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABNMKst~~~N,AB,NMK,st~~~,N,NORTHMARK,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABNMK~~~~~N,AB,NMK,~~~~~,N,NORTHMARK,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABNMPaa~~~A,AB,NMP,aa~~~,A,NAMEPI,M,YU,2,BN,I,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,GLBL
+ABNMP~~~~~A,AB,NMP,~~~~~,A,NAMEPI,M,YU,2,BN,I,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,GLBL
+ABNMP~~~~~N,AB,NMP,~~~~~,N,NAMEPI,M,YU,4,BN,I,MF,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,GLBL
+ABNNK~~~~~A,AB,NNK,~~~~~,A,NINASTOKO,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABNNK~~~~~N,AB,NNK,~~~~~,N,NINASTOKO,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,BL
+ABNOR~~~~~N,AB,NOR,~~~~~,N,NORBERTA,M,YB,0,-,VP,VC,-,-,VC,-,-,LACU,-,-,,,,GL,G,R
+ABNOS~~~~~N,AB,NOS,~~~~~,N,NOSE,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABNRMxp~~~N,AB,NRM,xp~~~,N,NORMA,M,NO,5,SA,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,BLC,SZ
+ABNRM~~~~~A,AB,NRM,~~~~~,A,NORMA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABNRM~~~~~N,AB,NRM,~~~~~,N,NORMA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,SZ
+ABNSKaa~~~A,AB,NSK,aa~~~,A,NOSE CREEK,M,NO,3,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABNSKaa~~~N,AB,NSK,aa~~~,N,NOSE CREEK,M,NO,3,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABNSKsa~~~N,AB,NSK,sa~~~,N,NOSE CREEK,M,YU,2,SA,MW,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABNSK~~~~~A,AB,NSK,~~~~~,A,NOSE CREEK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABNSK~~~~~N,AB,NSK,~~~~~,N,NOSE CREEK,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABNST~~~~~A,AB,NST,~~~~~,A,NORTHSTAR,M,NO,0,-,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABNTN~~~~~N,AB,NTN,~~~~~,N,NITON,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABNTV~~~~~A,AB,NTV,~~~~~,A,NORTHERN VALLEY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,E
+ABNTV~~~~~N,AB,NTV,~~~~~,N,NORTHERN VALLEY,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,E
+ABNTWaa~~~A,AB,NTW,aa~~~,A,NESTOW,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABNTW~~~~~N,AB,NTW,~~~~~,N,NESTOW,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABNUTst~~~A,AB,NUT,st~~~,A,NEUTRAL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABNUTst~~~N,AB,NUT,st~~~,N,NEUTRAL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABNUTxp~~~N,AB,NUT,xp~~~,N,NEUTRAL,M,NO,6,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,R
+ABNUT~~~~~A,AB,NUT,~~~~~,A,NEUTRAL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABNUT~~~~~N,AB,NUT,~~~~~,N,NEUTRAL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABNVRsa~~~N,AB,NVR,sa~~~,N,NAVARRE,M,YU,5,SA,I,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABNVRscxt~N,AB,NVR,scxt~,N,NAVARRE,M,YU,5,SA,I,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,GL
+ABNVRsc~~~N,AB,NVR,sc~~~,N,NAVARRE,M,YU,5,SA,I,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABNVRxt~~~N,AB,NVR,xt~~~,N,NAVARRE,M,YU,0,-,I,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,GL
+ABNVR~~~~~A,AB,NVR,~~~~~,A,NAVARRE,M,YU,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABNVR~~~~~N,AB,NVR,~~~~~,N,NAVARRE,M,YU,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABNWBpt~~~N,AB,NWB,pt~~~,N,NEWBROOK,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABNWB~~~~~A,AB,NWB,~~~~~,A,NEWBROOK,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABNWB~~~~~N,AB,NWB,~~~~~,N,NEWBROOK,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABNYX~~~~~N,AB,NYX,~~~~~,N,NORQUAY,M,NO,0,-,W,M,-,-,EC,-,-,TILL,-,-,,,,BR,EB,O
+ABOASaa~~~A,AB,OAS,aa~~~,A,OASIS,M,NO,0,-,W,M,MC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,DBC,O
+ABOASca~~~N,AB,OAS,ca~~~,N,OASIS,M,NO,0,-,W,MF,MC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,DBC,CA
+ABOAS~~~~~A,AB,OAS,~~~~~,A,OASIS,M,NO,0,-,W,M,MC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,DBC,O
+ABOAS~~~~~N,AB,OAS,~~~~~,N,OASIS,M,NO,0,-,W,M,MC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,DBC,O
+ABODM~~~~~A,AB,ODM,~~~~~,A,OLDMAN,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABODM~~~~~N,AB,ODM,~~~~~,N,OLDMAN,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,R
+ABOGR~~~~~N,AB,OGR,~~~~~,N,OGRE,M,NO,0,-,W,MC,-,-,VC,-,-,EOLI,-,-,,,,RG,R,O
+ABOHSaa~~~N,AB,OHS,aa~~~,N,OCHIESE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,BR
+ABOHSst~~~N,AB,OHS,st~~~,N,OCHIESE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,BR
+ABOHS~~~~~N,AB,OHS,~~~~~,N,OCHIESE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,BR
+ABOKYaa~~~A,AB,OKY,aa~~~,A,OCKEY,M,NO,7,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABOKYaa~~~N,AB,OKY,aa~~~,N,OCKEY,M,NO,7,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABOKYgr~~~N,AB,OKY,gr~~~,N,OCKEY,M,NO,7,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABOKYxl~~~A,AB,OKY,xl~~~,A,OCKEY,M,NO,6,LI,W,M,,-,VC,,-,TILL,RKUD,-,,,,CH,BLC,O
+ABOKYzr~~~N,AB,OKY,zr~~~,N,OCKEY,M,NO,5,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,R
+ABOKY~~~~~A,AB,OKY,~~~~~,A,OCKEY,M,NO,7,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABOKY~~~~~N,AB,OKY,~~~~~,N,OCKEY,M,NO,7,LI,W,M,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,BLC,O
+ABONWaa~~~N,AB,ONW,aa~~~,N,ONOWAY,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,HG,O
+ABONWpt~~~N,AB,ONW,pt~~~,N,ONOWAY,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,HG,O
+ABONW~~~~~N,AB,ONW,~~~~~,N,ONOWAY,M,YU,0,-,P,MF,-,-,VC,-,-,TILL,-,-,,,,GL,HG,O
+ABORCaa~~~N,AB,ORC,aa~~~,N,ORCHARD,M,NO,0,-,R,M,-,-,VC,-,-,EOLI,-,-,,,,LU,GL,D
+ABORC~~~~~N,AB,ORC,~~~~~,N,ORCHARD,M,NO,0,-,W,M,-,-,VC,-,-,EOLI,-,-,,,,LU,GL,D
+ABORNaa~~~N,AB,ORN,aa~~~,N,ORION,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,RG,R,O
+ABORNsa~~~N,AB,ORN,sa~~~,N,ORION,M,YU,2,SA,MW,M,-,-,WC,-,-,GLFL,-,-,,,,RG,R,O
+ABORN~~~~~N,AB,ORN,~~~~~,N,ORION,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,RG,R,O
+ABOSIpt~~~N,AB,OSI,pt~~~,N,OSI LAKE,M,YU,0,-,P,M,-,-,AN,-,-,TILL,-,-,,,,GL,LG,O
+ABOSI~~~~~N,AB,OSI,~~~~~,N,OSI LAKE,M,YU,0,-,P,M,-,-,AN,-,-,TILL,-,-,,,,GL,LG,O
+ABOSNzr~~~N,AB,OSN,zr~~~,N,OLSEN,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,R
+ABOSN~~~~~A,AB,OSN,~~~~~,A,OLSEN,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,CA
+ABOSN~~~~~N,AB,OSN,~~~~~,N,OLSEN,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,CA
+ABOTPaa~~~A,AB,OTP,aa~~~,A,OUTPOST,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABOTPzr~~~N,AB,OTP,zr~~~,N,OUTPOST,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABOTP~~~~~A,AB,OTP,~~~~~,A,OUTPOST,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABOTP~~~~~N,AB,OTP,~~~~~,N,OUTPOST,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABOVE~~~~~A,AB,OVE,~~~~~,A,ONNEVUE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABOVE~~~~~N,AB,OVE,~~~~~,N,ONNEVUE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,SZ
+ABOWDzr~~~A,AB,OWD,zr~~~,A,OWENDALE,M,NO,5,LI,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,R
+ABOWDzr~~~N,AB,OWD,zr~~~,N,OWENDALE,M,NO,5,LI,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,R
+ABOWD~~~~~A,AB,OWD,~~~~~,A,OWENDALE,M,NO,6,LI,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABOWD~~~~~N,AB,OWD,~~~~~,N,OWENDALE,M,NO,6,LI,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BLC,O
+ABOWRgl~~~N,AB,OWR,gl~~~,N,OWL RIVER,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABOWRxt~~~N,AB,OWR,xt~~~,N,OWL RIVER,M,NO,0,-,W,MF,MF,-,WC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABOWR~~~~~N,AB,OWR,~~~~~,N,OWL RIVER,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABOXY~~~~~N,AB,OXY,~~~~~,N,OXLEY,M,NO,2,BN,MW,M,-,-,WC,-,-,RESD,-,-,,,,SZ,SZ,BL
+ABPAK~~~~~N,AB,PAK,~~~~~,N,PAKASHAN,M,NO,7,SA,I,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLSZ
+ABPAR~~~~~A,AB,PAR,~~~~~,A,PARR,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABPAR~~~~~N,AB,PAR,~~~~~,N,PARR,M,NO,3,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SS,DB
+ABPCM~~~~~N,AB,PCM,~~~~~,N,PITCHIMI,M,NO,0,-,MW,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABPCO~~~~~N,AB,PCO,~~~~~,N,PERCOTTE,M,NO,0,-,W,M,M,-,VC,UD,-,EOLI,TILL,-,,,,BR,EB,E
+ABPCR~~~~~N,AB,PCR,~~~~~,N,PASS CREEK,M,YB,0,-,VP,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,HG,O
+ABPCV~~~~~A,AB,PCV,~~~~~,A,PEACE RIVER,M,NO,7,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABPCV~~~~~N,AB,PCV,~~~~~,N,PEACE RIVER,M,NO,8,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABPDY~~~~~N,AB,PDY,~~~~~,N,PEDLEY,M,NO,0,-,W,MC,-,-,VC,-,-,EOLI,-,-,,,,LU,GL,BR
+ABPEAxt~~~A,AB,PEA,xt~~~,A,PEAVINE,M,NO,0,-,W,M,M,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABPEA~~~~~N,AB,PEA,~~~~~,N,PEAVINE,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABPEDgl~~~N,AB,PED,gl~~~,N,PENHOLD,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABPEDxc~~~N,AB,PED,xc~~~,N,PENHOLD,M,NO,0,-,W,M,F,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,O
+ABPED~~~~~A,AB,PED,~~~~~,A,PENHOLD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABPED~~~~~N,AB,PED,~~~~~,N,PENHOLD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABPER~~~~~A,AB,PER,~~~~~,A,PEORIA,M,NO,0,-,W,M,F,-,VC,UD,-,GLFL,GLLC,-,,,,CH,BLC,E
+ABPER~~~~~N,AB,PER,~~~~~,N,PEORIA,M,NO,0,-,W,M,F,-,VC,UD,-,GLFL,GLLC,-,,,,CH,BLC,E
+ABPGE~~~~~N,AB,PGE,~~~~~,N,PEREGRINE,M,YU,0,-,I,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,GLR
+ABPGN~~~~~A,AB,PGN,~~~~~,A,PEIGAN,M,NO,2,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABPGN~~~~~N,AB,PGN,~~~~~,N,PEIGAN,M,NO,3,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABPGS~~~~~N,AB,PGS,~~~~~,N,PEGASUS,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,LU,GL,O
+ABPGT~~~~~N,AB,PGT,~~~~~,N,PAGENT,M,NO,2,BN,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,SZ
+ABPHF~~~~~N,AB,PHF,~~~~~,N,PATHFINDER,M,NO,0,-,W,MC,-,-,WC,-,-,RESD,-,-,,,,LU,GL,D
+ABPHN~~~~~N,AB,PHN,~~~~~,N,PINHORN,M,NO,0,-,W,M,-,-,VC,-,-,RESD,-,-,,,,CH,BC,O
+ABPHSglxc~N,AB,PHS,glxc~,N,PEACE HILLS,M,YU,0,-,I,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,CH,BLC,GL
+ABPHSgl~~~A,AB,PHS,gl~~~,A,PEACE HILLS,M,YU,0,-,I,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,GL
+ABPHS~~~~~A,AB,PHS,~~~~~,A,PEACE HILLS,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABPHS~~~~~N,AB,PHS,~~~~~,N,PEACE HILLS,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABPIB~~~~~A,AB,PIB,~~~~~,A,PIBROCH,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GLE
+ABPIB~~~~~N,AB,PIB,~~~~~,N,PIBROCH,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GLE
+ABPINzl~~~N,AB,PIN,zl~~~,N,PINEHURST,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,O
+ABPIN~~~~~N,AB,PIN,~~~~~,N,PINEHURST,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,BR,EB,E
+ABPLMaa~~~A,AB,PLM,aa~~~,A,PLAMONDON,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABPLMxt~~~N,AB,PLM,xt~~~,N,PLAMONDON,M,NO,0,-,W,VF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABPLM~~~~~A,AB,PLM,~~~~~,A,PLAMONDON,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABPLM~~~~~N,AB,PLM,~~~~~,N,PLAMONDON,M,NO,0,-,W,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABPLP~~~~~N,AB,PLP,~~~~~,N,PHILP,M,NO,0,-,W,M,M,-,VC,UD,-,TILL,RESD,-,,,,CH,DBC,O
+ABPLSer~~~A,AB,PLS,er~~~,A,PURPLE SPRINGS,M,NO,0,-,W,VC,MF,-,WC,UD,-,FLEO,TILL,-,,,,CH,BC,O
+ABPLS~~~~~A,AB,PLS,~~~~~,A,PURPLE SPRINGS,M,NO,0,-,W,VC,MF,-,WC,UD,-,FLEO,TILL,-,,,,CH,BC,O
+ABPLS~~~~~N,AB,PLS,~~~~~,N,PURPLE SPRINGS,M,NO,0,-,W,VC,MF,-,WC,UD,-,FLEO,TILL,-,,,,CH,BC,O
+ABPLX~~~~~N,AB,PLX,~~~~~,N,PEYTO,M,NO,0,-,W,M,-,-,EC,-,-,TILL,-,-,,,,BR,EB,E
+ABPMA~~~~~N,AB,PMA,~~~~~,N,PARMA,M,YU,3,BN,I,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,SZ
+ABPMExp~~~N,AB,PME,xp~~~,N,PLUME,M,NO,0,-,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,DBC,R
+ABPME~~~~~N,AB,PME,~~~~~,N,PLUME,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABPNCaa~~~N,AB,PNC,aa~~~,N,PRENTICE,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABPNC~~~~~N,AB,PNC,~~~~~,N,PRENTICE,M,NO,0,-,R,MC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABPNR~~~~~A,AB,PNR,~~~~~,A,PINCHER,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABPNR~~~~~N,AB,PNR,~~~~~,N,PINCHER,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABPNT~~~~~N,AB,PNT,~~~~~,N,PRAIRIE POINT,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABPOKgl~~~A,AB,POK,gl~~~,A,PONOKA,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,GLE
+ABPOKsa~~~N,AB,POK,sa~~~,N,PONOKA,M,YU,3,SA,MW,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABPOKsc~~~N,AB,POK,sc~~~,N,PONOKA,M,NO,4,SA,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABPOKst~~~N,AB,POK,st~~~,N,PONOKA,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABPOKxc~~~N,AB,POK,xc~~~,N,PONOKA,M,NO,0,-,W,M,F,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,E
+ABPOKxp~~~N,AB,POK,xp~~~,N,PONOKA,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,RESD,-,,,,CH,BLC,E
+ABPOK~~~~~A,AB,POK,~~~~~,A,PONOKA,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABPOK~~~~~N,AB,POK,~~~~~,N,PONOKA,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,E
+ABPON~~~~~N,AB,PON,~~~~~,N,PONTON,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,LU,GL,O
+ABPOTaa~~~N,AB,POT,aa~~~,N,POTHOLE CREEK,M,YB,0,-,VP,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABPOTpt~~~N,AB,POT,pt~~~,N,POTHOLE CREEK,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABPOTzr~~~N,AB,POT,zr~~~,N,POTHOLE CREEK,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABPOT~~~~~N,AB,POT,~~~~~,N,POTHOLE CREEK,M,YU,0,-,P,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABPPEaa~~~A,AB,PPE,aa~~~,A,PORCUPINE,M,NO,0,-,W,M,-,-,VC,-,-,COLL,-,-,,,,CH,BLC,O
+ABPPEzr~~~N,AB,PPE,zr~~~,N,PORCUPINE,M,NO,0,-,W,M,-,-,VC,-,-,COLL,-,-,,,,CH,BLC,R
+ABPPE~~~~~A,AB,PPE,~~~~~,A,PORCUPINE,M,NO,0,-,W,M,-,-,VC,-,-,COLL,-,-,,,,CH,BLC,O
+ABPPE~~~~~N,AB,PPE,~~~~~,N,PORCUPINE,M,NO,0,-,W,M,-,-,VC,-,-,COLL,-,-,,,,CH,BLC,O
+ABPPR~~~~~A,AB,PPR,~~~~~,A,PADDLE PRAIRIE,M,NO,6,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABPPR~~~~~N,AB,PPR,~~~~~,N,PADDLE PRAIRIE,M,NO,8,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABPPSaa~~~N,AB,PPS,aa~~~,N,PEPPERS,M,NO,0,-,R,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABPPS~~~~~N,AB,PPS,~~~~~,N,PEPPERS,M,NO,0,-,R,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABPPX~~~~~N,AB,PPX,~~~~~,N,PIPESTONE,M,NO,0,-,W,MC,-,-,EC,-,-,FLUV,-,-,,,,RG,R,CU
+ABPRM~~~~~N,AB,PRM,~~~~~,N,PRIMULA,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,EB,E
+ABPROca~~~N,AB,PRO,ca~~~,N,PROVOST,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,CA
+ABPRO~~~~~A,AB,PRO,~~~~~,A,PROVOST,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABPRO~~~~~N,AB,PRO,~~~~~,N,PROVOST,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABPRS~~~~~N,AB,PRS,~~~~~,N,PEERS,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,BR,EB,E
+ABPRT~~~~~N,AB,PRT,~~~~~,N,PRESTVILLE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,G,O
+ABPRX~~~~~N,AB,PRX,~~~~~,N,PANORAMA RIDGE,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,BR,EB,O
+ABPSOaa~~~A,AB,PSO,aa~~~,A,PARSONS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABPSOst~~~A,AB,PSO,st~~~,A,PARSONS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABPSO~~~~~A,AB,PSO,~~~~~,A,PARSONS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABPSO~~~~~N,AB,PSO,~~~~~,N,PARSONS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,R
+ABPTAer~~~A,AB,PTA,er~~~,A,PATRICIA,M,NO,3,SA,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABPTAsa~~~N,AB,PTA,sa~~~,N,PATRICIA,M,YU,3,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABPTAta~~~N,AB,PTA,ta~~~,N,PATRICIA,M,NO,2,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABPTA~~~~~A,AB,PTA,~~~~~,A,PATRICIA,M,NO,2,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABPTA~~~~~N,AB,PTA,~~~~~,N,PATRICIA,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABPTE~~~~~A,AB,PTE,~~~~~,A,PAINTEARTH,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,CH,DBC,O
+ABPTE~~~~~N,AB,PTE,~~~~~,N,PAINTEARTH,M,NO,0,-,W,MF,-,-,AN,-,-,RESD,-,-,,,,CH,DBC,O
+ABPTOaa~~~N,AB,PTO,aa~~~,N,PINTO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABPTO~~~~~N,AB,PTO,~~~~~,N,PINTO,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,BR
+ABPTX~~~~~N,AB,PTX,~~~~~,N,PATRICIA_X,M,NO,0,-,W,M,-,-,EC,-,-,TILL,-,-,,,,BR,EB,E
+ABPUNsc~~~N,AB,PUN,sc~~~,N,PEMUKAN,M,NO,4,SA,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABPUN~~~~~A,AB,PUN,~~~~~,A,PEMUKAN,M,NO,4,SA,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABPUN~~~~~N,AB,PUN,~~~~~,N,PEMUKAN,M,NO,4,SA,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BC,O
+ABPURaa~~~A,AB,PUR,aa~~~,A,PURESCAPE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPURaa~~~N,AB,PUR,aa~~~,N,PURESCAPE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPURgr~~~N,AB,PUR,gr~~~,N,PURESCAPE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPURxp~~~N,AB,PUR,xp~~~,N,PURESCAPE,M,NO,6,LI,W,MF,MF,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABPUR~~~~~A,AB,PUR,~~~~~,A,PURESCAPE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPUR~~~~~N,AB,PUR,~~~~~,N,PURESCAPE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPUYxp~~~N,AB,PUY,xp~~~,N,PULTENEY,M,NO,0,-,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,DBC,O
+ABPUY~~~~~A,AB,PUY,~~~~~,A,PULTENEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPUY~~~~~N,AB,PUY,~~~~~,N,PULTENEY,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABPZYgl~~~N,AB,PZY,gl~~~,N,PUTZY,M,NO,0,-,I,MC,-,-,AN,-,-,TILL,-,-,,,,PZ,HFP,GL
+ABPZY~~~~~N,AB,PZY,~~~~~,N,PUTZY,M,NO,0,-,W,MC,-,-,AN,-,-,TILL,-,-,,,,PZ,HFP,O
+ABRABpt~~~N,AB,RAB,pt~~~,N,RABBIT,M,YU,0,-,P,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,LG,O
+ABRABxtpt~N,AB,RAB,xtpt~,N,RABBIT,M,YU,0,-,P,MF,MF,-,AN,AN,-,GLLC,TILL,-,,,,GL,LG,O
+ABRABxt~~~N,AB,RAB,xt~~~,N,RABBIT,M,YU,0,-,P,MF,MF,-,AN,AN,-,GLLC,TILL,-,,,,GL,LG,O
+ABRAB~~~~~N,AB,RAB,~~~~~,N,RABBIT,M,YU,0,-,P,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,LG,O
+ABRAMst~~~A,AB,RAM,st~~~,A,RAMILLIES,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BC,O
+ABRAM~~~~~A,AB,RAM,~~~~~,A,RAMILLIES,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BC,O
+ABRAM~~~~~N,AB,RAM,~~~~~,N,RAMILLIES,M,NO,0,-,W,M,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BC,O
+ABRAT~~~~~N,AB,RAT,~~~~~,N,RAT,M,YU,0,-,I,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,GL
+ABRCSaa~~~N,AB,RCS,aa~~~,N,ROCHESTER,M,YU,0,-,P,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,HG,O
+ABRCSpt~~~N,AB,RCS,pt~~~,N,ROCHESTER,M,YB,0,-,VP,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,HG,O
+ABRCS~~~~~N,AB,RCS,~~~~~,N,ROCHESTER,M,YU,0,-,P,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,HG,O
+ABRDL~~~~~N,AB,RDL,~~~~~,N,RED DEER LAKE,M,YU,4,BN,I,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,GLBL
+ABRDMst~~~A,AB,RDM,st~~~,A,READYMADE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABRDMzr~~~N,AB,RDM,zr~~~,N,READYMADE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABRDM~~~~~A,AB,RDM,~~~~~,A,READYMADE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABRDM~~~~~N,AB,RDM,~~~~~,N,READYMADE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABRDWaa~~~A,AB,RDW,aa~~~,A,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDWaa~~~N,AB,RDW,aa~~~,N,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDWcaxt~N,AB,RDW,caxt~,N,REDWATER,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DGC,CA
+ABRDWer~~~A,AB,RDW,er~~~,A,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDWgr~~~N,AB,RDW,gr~~~,N,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDWsa~~~N,AB,RDW,sa~~~,N,REDWATER,M,YU,4,SA,MW,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDWxt~~~N,AB,RDW,xt~~~,N,REDWATER,M,NO,0,-,MW,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,DGC,O
+ABRDW~~~~~A,AB,RDW,~~~~~,A,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDW~~~~~N,AB,RDW,~~~~~,N,REDWATER,M,NO,0,-,W,MC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABRDX~~~~~N,AB,RDX,~~~~~,N,REDOUBT,M,NO,0,-,R,MC,-,-,AN,-,-,COLL,-,-,,,,RG,R,O
+ABRED~~~~~A,AB,RED,~~~~~,A,REDWILLOW,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRED~~~~~N,AB,RED,~~~~~,N,REDWILLOW,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRFDaa~~~A,AB,RFD,aa~~~,A,ROCKFORD,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRFD~~~~~A,AB,RFD,~~~~~,A,ROCKFORD,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRFD~~~~~N,AB,RFD,~~~~~,N,ROCKFORD,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRFR~~~~~N,AB,RFR,~~~~~,N,RIFLE RIDGE,M,NO,0,-,R,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABRFX~~~~~N,AB,RFX,~~~~~,N,RED FOX,M,YU,0,-,I,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABRHK~~~~~N,AB,RHK,~~~~~,N,RICH LAKE,M,YU,0,-,I,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,GLD
+ABRHSsa~~~N,AB,RHS,sa~~~,N,ROLLING HILLS,M,YU,5,BN,MW,VC,MF,-,VC,UD,-,FLEO,GLLC,-,,,,SZ,SS,B
+ABRHS~~~~~A,AB,RHS,~~~~~,A,ROLLING HILLS,M,NO,4,BN,W,VC,MF,-,VC,UD,-,FLEO,GLLC,-,,,,SZ,SS,B
+ABRHS~~~~~N,AB,RHS,~~~~~,N,ROLLING HILLS,M,NO,5,BN,W,VC,MF,-,VC,UD,-,FLEO,GLLC,-,,,,SZ,SS,B
+ABRIB~~~~~A,AB,RIB,~~~~~,A,RIBSTONE,M,NO,0,-,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,CH,DBC,O
+ABRIB~~~~~N,AB,RIB,~~~~~,N,RIBSTONE,M,NO,0,-,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,CH,DBC,O
+ABRIRsa~~~A,AB,RIR,sa~~~,A,RAINIER,M,YU,2,SA,MW,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,BC,O
+ABRIR~~~~~A,AB,RIR,~~~~~,A,RAINIER,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,BC,O
+ABRIR~~~~~N,AB,RIR,~~~~~,N,RAINIER,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,CH,BC,O
+ABRKV~~~~~A,AB,RKV,~~~~~,A,ROCKYVIEW,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABRKV~~~~~N,AB,RKV,~~~~~,N,ROCKYVIEW,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABRLEco~~~N,AB,RLE,co~~~,N,ROCKY LANE,M,NO,0,-,W,VC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABRLEgl~~~N,AB,RLE,gl~~~,N,ROCKY LANE,M,NO,0,-,MW,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,GLD
+ABRLEgr~~~N,AB,RLE,gr~~~,N,ROCKY LANE,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABRLEst~~~N,AB,RLE,st~~~,N,ROCKY LANE,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABRLE~~~~~N,AB,RLE,~~~~~,N,ROCKY LANE,M,NO,0,-,W,MC,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,D
+ABRLKxt~~~A,AB,RLK,xt~~~,A,RUSH LAKE,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABRLK~~~~~A,AB,RLK,~~~~~,A,RUSH LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABRLK~~~~~N,AB,RLK,~~~~~,N,RUSH LAKE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,DBC,O
+ABRLV~~~~~A,AB,RLV,~~~~~,A,ROLLY VIEW,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABRLV~~~~~N,AB,RLV,~~~~~,N,ROLLY VIEW,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DGC,O
+ABRMRer~~~A,AB,RMR,er~~~,A,ROSEMARY,M,NO,2,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABRMRsa~~~N,AB,RMR,sa~~~,N,ROSEMARY,M,YU,5,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABRMRta~~~N,AB,RMR,ta~~~,N,ROSEMARY,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABRMR~~~~~A,AB,RMR,~~~~~,A,ROSEMARY,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABRMR~~~~~N,AB,RMR,~~~~~,N,ROSEMARY,M,NO,5,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SO,B
+ABRMYca~~~N,AB,RMY,ca~~~,N,RIMBEY,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,CA
+ABRMYgl~~~N,AB,RMY,gl~~~,N,RIMBEY,M,YU,0,-,I,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABRMYxc~~~N,AB,RMY,xc~~~,N,RIMBEY,M,NO,0,-,W,M,VF,-,VC,UD,-,GLLC,GLLC,-,,,,CH,DGC,O
+ABRMYxt~~~N,AB,RMY,xt~~~,N,RIMBEY,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DGC,O
+ABRMY~~~~~A,AB,RMY,~~~~~,A,RIMBEY,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABRMY~~~~~N,AB,RMY,~~~~~,N,RIMBEY,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,O
+ABRNDca~~~N,AB,RND,ca~~~,N,RINARD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,CA
+ABRND~~~~~A,AB,RND,~~~~~,A,RINARD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABRND~~~~~N,AB,RND,~~~~~,N,RINARD,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABROLst~~~N,AB,ROL,st~~~,N,RONALAINE,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABROL~~~~~A,AB,ROL,~~~~~,A,RONALAINE,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABROL~~~~~N,AB,ROL,~~~~~,N,RONALAINE,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,SZ
+ABROSsa~~~N,AB,ROS,sa~~~,N,ROSEBANK,M,YU,5,SA,MW,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABROS~~~~~N,AB,ROS,~~~~~,N,ROSEBANK,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABRRD~~~~~A,AB,RRD,~~~~~,A,ROLWARD,M,NO,4,BN,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,SZ,SS,B
+ABRRD~~~~~N,AB,RRD,~~~~~,N,ROLWARD,M,NO,5,BN,W,MC,MF,-,VC,UD,-,GLFL,GLLC,-,,,,SZ,SS,B
+ABRSB~~~~~N,AB,RSB,~~~~~,N,ROSEBUD,M,NO,0,-,W,MF,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABRSC~~~~~A,AB,RSC,~~~~~,A,ROSE CREEK,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABRSC~~~~~N,AB,RSC,~~~~~,N,ROSE CREEK,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABRSNaa~~~N,AB,RSN,aa~~~,N,ROBINSON,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABRSNzz~~~N,AB,RSN,zz~~~,N,ROBINSON,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABRSN~~~~~N,AB,RSN,~~~~~,N,ROBINSON,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABRSRzz~~~N,AB,RSR,zz~~~,N,REESOR,M,NO,0,-,W,M,-,-,WC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABRSR~~~~~N,AB,RSR,~~~~~,N,REESOR,M,NO,0,-,W,M,-,-,WC,-,-,FLUV,-,-,,,,LU,GL,D
+ABRSVaa~~~N,AB,RSV,aa~~~,N,ROSEVEAR,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABRSV~~~~~N,AB,RSV,~~~~~,N,ROSEVEAR,M,NO,0,-,MW,M,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABRUT~~~~~N,AB,RUT,~~~~~,N,RUTH LAKE,M,NO,0,-,R,VC,VC,-,AN,UD,-,GLFL,GLFL,-,,,,BR,EB,E
+ABRVNpt~~~N,AB,RVN,pt~~~,N,RAVEN,M,YB,0,-,VP,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABRVN~~~~~A,AB,RVN,~~~~~,A,RAVEN,M,YB,0,-,VP,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABRVN~~~~~N,AB,RVN,~~~~~,N,RAVEN,M,YB,0,-,VP,VF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABRYFaa~~~A,AB,RYF,aa~~~,A,RYCROFT,M,NO,6,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GLSZ
+ABRYFaa~~~N,AB,RYF,aa~~~,N,RYCROFT,M,NO,7,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GLSZ
+ABRYF~~~~~A,AB,RYF,~~~~~,A,RYCROFT,M,NO,6,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GLSZ
+ABRYF~~~~~N,AB,RYF,~~~~~,N,RYCROFT,M,NO,7,SA,MW,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GLSZ
+ABSADaa~~~N,AB,SAD,aa~~~,N,SADDLE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABSADzt~~~N,AB,SAD,zt~~~,N,SADDLE,M,NO,8,SA,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABSAD~~~~~N,AB,SAD,~~~~~,N,SADDLE,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABSAKaa~~~A,AB,SAK,aa~~~,A,SAKALO,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,O
+ABSAKaa~~~N,AB,SAK,aa~~~,N,SAKALO,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,O
+ABSAKzr~~~N,AB,SAK,zr~~~,N,SAKALO,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,R
+ABSAK~~~~~A,AB,SAK,~~~~~,A,SAKALO,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,O
+ABSAK~~~~~N,AB,SAK,~~~~~,N,SAKALO,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BLC,O
+ABSAV~~~~~A,AB,SAV,~~~~~,A,SAVILLE,M,NO,0,-,R,MC,VC,-,AN,VC,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABSAV~~~~~N,AB,SAV,~~~~~,N,SAVILLE,M,NO,0,-,R,MC,VC,-,AN,VC,-,GLFL,GLFL,-,,,,CH,BLC,O
+ABSBNaa~~~N,AB,SBN,aa~~~,N,STEBBING,O,YB,0,-,VP,FI,-,-,AN,-,-,SPPT,-,-,,,,OR,F,TY
+ABSBN~~~~~N,AB,SBN,~~~~~,N,STEBBING,O,YB,0,-,VP,FI,-,-,AN,-,-,SPPT,-,-,,,,OR,F,TY
+ABSBT~~~~~N,AB,SBT,~~~~~,N,SEIBERT,M,YB,0,-,VP,MF,-,-,WC,-,-,TILL,-,-,,,,GL,G,R
+ABSBX~~~~~N,AB,SBX,~~~~~,N,SAWBACK,M,NO,0,-,W,M,-,-,EC,-,-,COLL,-,-,,,,BR,EB,O
+ABSCD~~~~~A,AB,SCD,~~~~~,A,SCOLLARD,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABSCD~~~~~N,AB,SCD,~~~~~,N,SCOLLARD,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,CH,DBC,O
+ABSCHaa~~~N,AB,SCH,aa~~~,N,SUNCHILD,M,NO,0,-,W,MF,M,-,VC,UD,-,FLEO,TILL,-,,,,LU,GL,BR
+ABSCH~~~~~N,AB,SCH,~~~~~,N,SUNCHILD,M,NO,0,-,W,MF,M,-,VC,UD,-,FLEO,TILL,-,,,,LU,GL,BR
+ABSCO~~~~~A,AB,SCO,~~~~~,A,STRATHCONA,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABSCO~~~~~N,AB,SCO,~~~~~,N,STRATHCONA,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,O
+ABSCYxt~~~N,AB,SCY,xt~~~,N,SCULLY,M,NO,8,SA,MW,VF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,GLSZ
+ABSCY~~~~~A,AB,SCY,~~~~~,A,SCULLY,M,NO,6,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABSCY~~~~~N,AB,SCY,~~~~~,N,SCULLY,M,NO,8,SA,MW,VF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GLSZ
+ABSDGgl~~~N,AB,SDG,gl~~~,N,SEDGEWICK,M,YU,2,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,GLBL
+ABSDG~~~~~N,AB,SDG,~~~~~,N,SEDGEWICK,M,YU,2,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,BL
+ABSDLxg~~~N,AB,SDL,xg~~~,N,SLED ISLAND,M,NO,0,-,R,VC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,LU,GL,O
+ABSDL~~~~~N,AB,SDL,~~~~~,N,SLED ISLAND,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABSDN~~~~~A,AB,SDN,~~~~~,A,SPEDDEN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABSDN~~~~~N,AB,SDN,~~~~~,N,SPEDDEN,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABSEN~~~~~N,AB,SEN,~~~~~,N,STEEN,M,NO,0,-,MW,F,-,-,AN,-,-,GLLC,-,-,,,,LU,GL,SZ
+ABSFD~~~~~N,AB,SFD,~~~~~,N,SCOTFIELD,M,YU,2,SA,P,MF,-,-,VC,-,-,GLLC,-,-,,,,RG,R,GL
+ABSFX~~~~~N,AB,SFX,~~~~~,N,SNOWFLAKE,M,NO,7,CR,MW,M,-,-,VC,-,-,TILL,-,-,,,,CY,SC,R
+ABSGYsa~~~N,AB,SGY,sa~~~,N,SHAUGHNESSY,M,YB,1,SA,VP,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABSGY~~~~~N,AB,SGY,~~~~~,N,SHAUGHNESSY,M,YB,0,-,VP,F,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABSHD~~~~~N,AB,SHD,~~~~~,N,SHANDRO,M,YU,2,SA,P,MF,-,-,VC,-,-,RESD,-,-,,,,GL,HG,O
+ABSHLxt~~~A,AB,SHL,xt~~~,A,SHARP HILLS,M,NO,0,-,R,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,R
+ABSHL~~~~~A,AB,SHL,~~~~~,A,SHARP HILLS,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABSHL~~~~~N,AB,SHL,~~~~~,N,SHARP HILLS,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,CH,BLC,R
+ABSHP~~~~~N,AB,SHP,~~~~~,N,SHEEP,M,NO,0,-,I,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,BR
+ABSHR~~~~~N,AB,SHR,~~~~~,N,SHEERNESS,M,NO,2,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,DB
+ABSHS~~~~~A,AB,SHS,~~~~~,A,SHONTS,M,NO,3,BN,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,BL
+ABSHS~~~~~N,AB,SHS,~~~~~,N,SHONTS,M,NO,3,BN,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,BL
+ABSIGgl~~~N,AB,SIG,gl~~~,N,STIRLING,M,YU,2,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,GLB
+ABSIGsa~~~N,AB,SIG,sa~~~,N,STIRLING,M,YU,2,BN,I,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABSIG~~~~~A,AB,SIG,~~~~~,A,STIRLING,M,NO,2,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABSIG~~~~~N,AB,SIG,~~~~~,N,STIRLING,M,NO,2,BN,MW,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,B
+ABSILer~~~A,AB,SIL,er~~~,A,STEVEVILLE,M,NO,2,BN,W,M,M,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,B
+ABSILst~~~N,AB,SIL,st~~~,N,STEVEVILLE,M,NO,3,BN,W,M,M,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,B
+ABSIL~~~~~A,AB,SIL,~~~~~,A,STEVEVILLE,M,NO,2,BN,W,M,M,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,B
+ABSIL~~~~~N,AB,SIL,~~~~~,N,STEVEVILLE,M,NO,3,BN,W,M,M,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,B
+ABSIPaapt~N,AB,SIP,aapt~,N,SNIPE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,LG,O
+ABSIPaa~~~N,AB,SIP,aa~~~,N,SNIPE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,LG,O
+ABSIPpt~~~N,AB,SIP,pt~~~,N,SNIPE,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABSIP~~~~~N,AB,SIP,~~~~~,N,SNIPE,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABSIS~~~~~N,AB,SIS,~~~~~,N,SNIPE HILLS,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABSKE~~~~~N,AB,SKE,~~~~~,N,SURETTE LAKE,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,BR,EB,E
+ABSKF~~~~~N,AB,SKF,~~~~~,N,SKIFF,M,YU,0,-,P,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,LG,O
+ABSKL~~~~~N,AB,SKL,~~~~~,N,SKYLINE,M,NO,0,-,W,MC,-,-,AN,-,-,RESD,-,-,,,,BR,EB,E
+ABSKYaapt~N,AB,SKY,aapt~,N,SMOKY,M,YG,0,-,P,M,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABSKYaa~~~N,AB,SKY,aa~~~,N,SMOKY,M,YG,0,-,P,M,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABSKYpt~~~N,AB,SKY,pt~~~,N,SMOKY,M,YG,0,-,P,M,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABSKY~~~~~N,AB,SKY,~~~~~,N,SMOKY,M,YG,0,-,P,M,-,-,VC,-,-,TILL,-,-,,,,GL,LG,O
+ABSLN~~~~~N,AB,SLN,~~~~~,N,ST LINA,O,YB,0,-,VP,ME,MF,-,AN,UD,-,FNPT,GLLC,-,,,,OR,M,THU
+ABSLT~~~~~N,AB,SLT,~~~~~,N,SALT,M,YU,2,SA,P,F,-,-,VC,-,-,LACU,-,-,,,,GL,G,O
+ABSLVaa~~~N,AB,SLV,aa~~~,N,SILVER VALLEY,M,NO,0,-,MW,MF,F,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABSLVgl~~~N,AB,SLV,gl~~~,N,SILVER VALLEY,M,NO,0,-,I,MF,F,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,GL
+ABSLV~~~~~N,AB,SLV,~~~~~,N,SILVER VALLEY,M,NO,0,-,W,MF,F,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABSLW~~~~~A,AB,SLW,~~~~~,A,SLAWA,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABSLW~~~~~N,AB,SLW,~~~~~,N,SLAWA,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABSLY~~~~~N,AB,SLY,~~~~~,N,SLOUGHAY,M,YB,0,-,VP,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,R
+ABSNDzr~~~N,AB,SND,zr~~~,N,SHANDOR,M,NO,0,-,W,F,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,R
+ABSND~~~~~A,AB,SND,~~~~~,A,SHANDOR,M,NO,0,-,W,F,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSND~~~~~N,AB,SND,~~~~~,N,SHANDOR,M,NO,0,-,W,F,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSOFca~~~N,AB,SOF,ca~~~,N,STANDOFF,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,CA
+ABSOFsa~~~N,AB,SOF,sa~~~,N,STANDOFF,M,YU,4,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABSOFxt~~~N,AB,SOF,xt~~~,N,STANDOFF,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABSOF~~~~~A,AB,SOF,~~~~~,A,STANDOFF,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABSOF~~~~~N,AB,SOF,~~~~~,N,STANDOFF,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABSOLca~~~N,AB,SOL,ca~~~,N,SPROLE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,CA
+ABSOLst~~~N,AB,SOL,st~~~,N,SPROLE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABSOLzr~~~N,AB,SOL,zr~~~,N,SPROLE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABSOL~~~~~A,AB,SOL,~~~~~,A,SPROLE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABSOL~~~~~N,AB,SOL,~~~~~,N,SPROLE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABSPRgr~~~N,AB,SPR,gr~~~,N,SPRUCE RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABSPRxp~~~N,AB,SPR,xp~~~,N,SPRUCE RIDGE,M,NO,0,-,W,MF,M,-,VC,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABSPR~~~~~N,AB,SPR,~~~~~,N,SPRUCE RIDGE,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,O
+ABSPSgl~~~N,AB,SPS,gl~~~,N,SEVEN PERSONS,M,YU,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,GL
+ABSPSsa~~~N,AB,SPS,sa~~~,N,SEVEN PERSONS,M,YU,3,SA,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABSPSzr~~~N,AB,SPS,zr~~~,N,SEVEN PERSONS,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,R
+ABSPS~~~~~A,AB,SPS,~~~~~,A,SEVEN PERSONS,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABSPS~~~~~N,AB,SPS,~~~~~,N,SEVEN PERSONS,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,O
+ABSPX~~~~~N,AB,SPX,~~~~~,N,SPRAY,M,NO,0,-,W,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABSPY~~~~~A,AB,SPY,~~~~~,A,SPY HILL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABSPY~~~~~N,AB,SPY,~~~~~,N,SPY HILL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,O
+ABSRCaa~~~A,AB,SRC,aa~~~,A,SARCEE,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSRCaa~~~N,AB,SRC,aa~~~,N,SARCEE,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSRC~~~~~A,AB,SRC,~~~~~,A,SARCEE,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSRC~~~~~N,AB,SRC,~~~~~,N,SARCEE,M,NO,0,-,W,M,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSRTaa~~~N,AB,SRT,aa~~~,N,SURMONT,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABSRTgl~~~N,AB,SRT,gl~~~,N,SURMONT,M,YU,0,-,I,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,GL
+ABSRT~~~~~N,AB,SRT,~~~~~,N,SURMONT,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABSRVaa~~~A,AB,SRV,aa~~~,A,SPIRIT RIVER,M,NO,0,-,W,F,-,-,WC,-,-,FLUV,-,-,,,,CH,DGC,O
+ABSRVaa~~~N,AB,SRV,aa~~~,N,SPIRIT RIVER,M,NO,0,-,W,F,-,-,WC,-,-,FLUV,-,-,,,,CH,DGC,O
+ABSRV~~~~~A,AB,SRV,~~~~~,A,SPIRIT RIVER,M,NO,0,-,W,M,-,-,WC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABSST~~~~~A,AB,SST,~~~~~,A,SUNSET,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABSST~~~~~N,AB,SST,~~~~~,N,SUNSET,M,NO,8,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GLD
+ABSTB~~~~~N,AB,STB,~~~~~,N,STOLBERG,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,PZ
+ABSTCaa~~~N,AB,STC,aa~~~,N,STERCO,M,NO,0,-,MW,M,-,-,WC,-,-,RESD,-,-,,,,LU,GL,O
+ABSTC~~~~~N,AB,STC,~~~~~,N,STERCO,M,NO,0,-,I,M,-,-,WC,-,-,RESD,-,-,,,,LU,GL,O
+ABSTE~~~~~A,AB,STE,~~~~~,A,SANTE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABSTE~~~~~N,AB,STE,~~~~~,N,SANTE,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABSTH~~~~~N,AB,STH,~~~~~,N,STEEPHILL,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABSTL~~~~~A,AB,STL,~~~~~,A,ST ALBERT,M,NO,0,-,W,F,M,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,E
+ABSTL~~~~~N,AB,STL,~~~~~,N,ST ALBERT,M,NO,0,-,W,F,M,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,E
+ABSTNpt~~~N,AB,STN,pt~~~,N,STURGEON,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABSTN~~~~~N,AB,STN,~~~~~,N,STURGEON,M,YU,0,-,P,MF,-,-,WC,-,-,TILL,-,-,,,,GL,LG,O
+ABSTPzr~~~N,AB,STP,zr~~~,N,STEEPBANK,M,YB,0,-,VP,MF,-,-,AN,-,-,TILL,-,-,,,,GL,G,R
+ABSTP~~~~~N,AB,STP,~~~~~,N,STEEPBANK,M,YB,0,-,P,MF,-,-,AN,-,-,TILL,-,-,,,,GL,G,O
+ABSTTaa~~~N,AB,STT,aa~~~,N,SIMONETTE,M,YB,0,-,P,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,G,FE
+ABSTT~~~~~N,AB,STT,~~~~~,N,SIMONETTE,M,YB,0,-,P,MC,-,-,AN,-,-,GLFL,-,-,,,,GL,G,FE
+ABSUCaa~~~N,AB,SUC,aa~~~,N,SUNDANCE,M,NO,0,-,R,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABSUCst~~~N,AB,SUC,st~~~,N,SUNDANCE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABSUC~~~~~N,AB,SUC,~~~~~,N,SUNDANCE,M,NO,0,-,W,VC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABSUDaa~~~A,AB,SUD,aa~~~,A,SUNDRE,M,NO,0,-,R,MC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DGC,O
+ABSUDgr~~~A,AB,SUD,gr~~~,A,SUNDRE,M,NO,0,-,R,MC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DGC,O
+ABSUD~~~~~A,AB,SUD,~~~~~,A,SUNDRE,M,NO,0,-,W,MC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DGC,O
+ABSUD~~~~~N,AB,SUD,~~~~~,N,SUNDRE,M,NO,0,-,W,MC,VC,-,VC,UD,-,GLFL,GLFL,-,,,,CH,DGC,O
+ABSUKpt~~~N,AB,SUK,pt~~~,N,SUCKER CREEK,M,YB,0,-,P,F,MF,-,WC,UD,-,FLUV,FLUV,-,,,,GL,HG,O
+ABSUK~~~~~N,AB,SUK,~~~~~,N,SUCKER CREEK,M,YB,0,-,P,F,MF,-,WC,UD,-,FLUV,FLUV,-,,,,GL,HG,O
+ABSUL~~~~~A,AB,SUL,~~~~~,A,SULLIVAN LAKE,M,NO,4,BN,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,DB
+ABSUL~~~~~N,AB,SUL,~~~~~,N,SULLIVAN LAKE,M,NO,4,BN,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,SZ,SS,DB
+ABSUTac~~~N,AB,SUT,ac~~~,N,SUTHERLAND,M,NO,0,-,R,VC,M,-,AN,UD,-,GLFL,TILL,-,,,,BR,DYB,E
+ABSUTxc~~~N,AB,SUT,xc~~~,N,SUTHERLAND,M,NO,0,-,R,VC,F,-,AN,VC,-,GLFL,LATL,-,,,,BR,DYB,E
+ABSUT~~~~~N,AB,SUT,~~~~~,N,SUTHERLAND,M,NO,0,-,R,VC,MF,-,AN,AN,-,GLFL,TILL,-,,,,BR,DYB,E
+ABSVGpt~~~N,AB,SVG,pt~~~,N,SAVAGE,M,YU,0,-,P,F,-,-,AN,-,-,GLLC,-,-,,,,GL,G,R
+ABSVG~~~~~N,AB,SVG,~~~~~,N,SAVAGE,M,YU,0,-,P,F,-,-,AN,-,-,GLLC,-,-,,,,GL,G,R
+ABSVY~~~~~N,AB,SVY,~~~~~,N,SLAVEY,M,NO,0,-,I,MF,-,-,AN,-,-,TILL,-,-,,,,BR,EB,GL
+ABSWHaapt~N,AB,SWH,aapt~,N,SWEATHOUSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABSWHaa~~~N,AB,SWH,aa~~~,N,SWEATHOUSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABSWHpt~~~N,AB,SWH,pt~~~,N,SWEATHOUSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABSWH~~~~~N,AB,SWH,~~~~~,N,SWEATHOUSE,M,YU,0,-,P,F,-,-,WC,-,-,LATL,-,-,,,,GL,HG,O
+ABSWY~~~~~N,AB,SWY,~~~~~,N,SAWDY,M,YU,0,-,P,F,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABSXH~~~~~N,AB,SXH,~~~~~,N,SEXSMITH,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,CH,BLC,E
+ABSXTaa~~~N,AB,SXT,aa~~~,N,SEXTON,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABSXTcr~~~N,AB,SXT,cr~~~,N,SEXTON,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABSXTgl~~~N,AB,SXT,gl~~~,N,SEXTON,M,YU,0,-,I,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,GLCU
+ABSXTsa~~~N,AB,SXT,sa~~~,N,SEXTON,M,YU,3,SA,MW,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABSXT~~~~~N,AB,SXT,~~~~~,N,SEXTON,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,RG,HR,CU
+ABSXX~~~~~N,AB,SXX,~~~~~,N,SPHINX,M,NO,0,-,I,M,-,-,AN,-,-,TILL,-,-,,,,BR,DYB,GL
+ABSYK~~~~~A,AB,SYK,~~~~~,A,SUNNYNOOK,M,NO,4,BN,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,SZ,SS,B
+ABSYK~~~~~N,AB,SYK,~~~~~,N,SUNNYNOOK,M,NO,5,BN,W,VC,MF,-,VC,UD,-,FLEO,TILL,-,,,,SZ,SS,B
+ABTAB~~~~~A,AB,TAB,~~~~~,A,TABER,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BC,O
+ABTAB~~~~~N,AB,TAB,~~~~~,N,TABER,M,NO,0,-,W,M,VC,-,VC,UD,-,GLLC,GLFL,-,,,,CH,BC,O
+ABTAGaaxt~A,AB,TAG,aaxt~,A,TANGENT,M,NO,0,-,W,M,M,-,VC,UD,-,GLFL,TILL,-,,,,LU,GL,D
+ABTAGaa~~~A,AB,TAG,aa~~~,A,TANGENT,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABTAGaa~~~N,AB,TAG,aa~~~,N,TANGENT,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABTAG~~~~~A,AB,TAG,~~~~~,A,TANGENT,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABTAG~~~~~N,AB,TAG,~~~~~,N,TANGENT,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,D
+ABTAX~~~~~N,AB,TAX,~~~~~,N,TALBOT,M,NO,0,-,R,M,M,-,EC,UD,-,EOLI,TILL,-,,,,RG,R,O
+ABTBRaa~~~N,AB,TBR,aa~~~,N,TWIN BRIDGES,M,YU,0,-,I,MC,-,-,EC,-,-,FLUV,-,-,,,,RG,HR,GL
+ABTBR~~~~~N,AB,TBR,~~~~~,N,TWIN BRIDGES,M,YU,0,-,I,MC,-,-,EC,-,-,FLUV,-,-,,,,RG,HR,GL
+ABTBY~~~~~A,AB,TBY,~~~~~,A,THORSBY,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DG
+ABTBY~~~~~N,AB,TBY,~~~~~,N,THORSBY,M,NO,5,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,DG
+ABTCK~~~~~N,AB,TCK,~~~~~,N,TUCKER,O,YB,0,-,VP,FI,VC,-,WC,UD,-,SPPT,FLUV,-,,,,OR,F,TME
+ABTDCaa~~~A,AB,TDC,aa~~~,A,TODD CREEK,M,YU,0,-,I,MF,MF,-,VC,UD,-,FLUV,FLUV,-,,,,CH,DGC,GL
+ABTDCgr~~~N,AB,TDC,gr~~~,N,TODD CREEK,M,YU,0,-,I,MF,-,-,VC,-,-,FLUV,-,-,,,,CH,DGC,GL
+ABTDCzz~~~N,AB,TDC,zz~~~,N,TODD CREEK,M,YU,0,-,W,MF,MF,-,VC,UD,-,FLUV,FLUV,-,,,,CH,DGC,O
+ABTDC~~~~~N,AB,TDC,~~~~~,N,TODD CREEK,M,YU,0,-,I,MF,MF,-,VC,UD,-,FLUV,FLUV,-,,,,CH,DGC,GL
+ABTEP~~~~~A,AB,TEP,~~~~~,A,TEMPEST,M,YU,0,-,P,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABTEP~~~~~N,AB,TEP,~~~~~,N,TEMPEST,M,YU,0,-,P,MF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,HU
+ABTFDgl~~~A,AB,TFD,gl~~~,A,TOFIELD,M,YU,5,BN,I,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,GLBL
+ABTFDxp~~~N,AB,TFD,xp~~~,N,TOFIELD,M,NO,4,BN,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,SZ,SO,BL
+ABTFD~~~~~A,AB,TFD,~~~~~,A,TOFIELD,M,NO,5,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,BL
+ABTFD~~~~~N,AB,TFD,~~~~~,N,TOFIELD,M,NO,4,BN,W,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SO,BL
+ABTGLaa~~~A,AB,TGL,aa~~~,A,TIGERLILY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABTGLaa~~~N,AB,TGL,aa~~~,N,TIGERLILY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABTGLxczb~N,AB,TGL,xczb~,N,TIGERLILY,M,NO,0,-,W,MC,F,-,VC,UD,-,GLFL,GLLC,-,,,,LU,GL,BR
+ABTGLzb~~~N,AB,TGL,zb~~~,N,TIGERLILY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABTGL~~~~~A,AB,TGL,~~~~~,A,TIGERLILY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABTGL~~~~~N,AB,TGL,~~~~~,N,TIGERLILY,M,NO,0,-,W,MC,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABTHA~~~~~A,AB,THA,~~~~~,A,THELMA,M,NO,0,-,W,MF,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABTHA~~~~~N,AB,THA,~~~~~,N,THELMA,M,NO,0,-,W,MF,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABTHB~~~~~A,AB,THB,~~~~~,A,THUMB,M,NO,0,-,W,MF,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABTHB~~~~~N,AB,THB,~~~~~,N,THUMB,M,NO,0,-,W,MF,-,-,VC,-,-,EOLI,-,-,,,,CH,BLC,O
+ABTHHgl~~~N,AB,THH,gl~~~,N,THREE HILLS,M,YU,0,-,I,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,GL
+ABTHH~~~~~A,AB,THH,~~~~~,A,THREE HILLS,M,NO,0,-,W,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABTHH~~~~~N,AB,THH,~~~~~,N,THREE HILLS,M,NO,0,-,W,VF,-,-,WC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABTHRsa~~~N,AB,THR,sa~~~,N,THRONE,M,YB,1,SA,VP,M,-,-,VC,-,-,GLLC,-,-,,,,GL,G,R
+ABTHR~~~~~N,AB,THR,~~~~~,N,THRONE,M,YB,0,-,VP,M,-,-,VC,-,-,GLLC,-,-,,,,GL,G,O
+ABTIK~~~~~A,AB,TIK,~~~~~,A,TIMKO,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,SZ
+ABTIK~~~~~N,AB,TIK,~~~~~,N,TIMKO,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BC,SZ
+ABTIY~~~~~A,AB,TIY,~~~~~,A,TILLEY,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABTIY~~~~~N,AB,TIY,~~~~~,N,TILLEY,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,CH,BC,SZ
+ABTKX~~~~~N,AB,TKX,~~~~~,N,TEKARRA,M,NO,0,-,R,VC,-,-,AN,-,-,COLL,-,-,,,,BR,DYB,O
+ABTLAaa~~~A,AB,TLA,aa~~~,A,TORLEA,M,NO,3,BN,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLAaa~~~N,AB,TLA,aa~~~,N,TORLEA,M,NO,3,BN,W,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLAer~~~N,AB,TLA,er~~~,N,TORLEA,M,NO,2,BN,MW,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLAst~~~A,AB,TLA,st~~~,A,TORLEA,M,NO,3,BN,MW,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLAst~~~N,AB,TLA,st~~~,N,TORLEA,M,NO,3,BN,MW,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLA~~~~~A,AB,TLA,~~~~~,A,TORLEA,M,NO,3,BN,MW,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTLA~~~~~N,AB,TLA,~~~~~,N,TORLEA,M,NO,3,BN,MW,MF,MF,-,WC,UD,-,TILL,RESD,-,,,,SZ,SS,DB
+ABTMK~~~~~N,AB,TMK,~~~~~,N,TOMKINS,O,YB,0,-,VP,FI,MF,-,AN,UD,-,SPPT,TILL,-,,,,OR,F,THU
+ABTMLaast~N,AB,TML,aast~,N,TOM HILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABTMLaaxp~N,AB,TML,aaxp~,N,TOM HILL,M,NO,0,-,W,MF,MC,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABTMLaa~~~N,AB,TML,aa~~~,N,TOM HILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABTMLst~~~N,AB,TML,st~~~,N,TOM HILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABTMLxp~~~N,AB,TML,xp~~~,N,TOM HILL,M,NO,0,-,W,MF,MC,-,AN,UD,-,TILL,RESD,-,,,,LU,GL,O
+ABTML~~~~~N,AB,TML,~~~~~,N,TOM HILL,M,NO,0,-,W,MF,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABTNB~~~~~N,AB,TNB,~~~~~,N,THORNBURY,M,NO,0,-,R,VC,MF,-,EA,UD,-,GLFL,TILL,-,,,,BR,DYB,E
+ABTNW~~~~~N,AB,TNW,~~~~~,N,TAWATINAW,M,NO,0,-,W,MC,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABTOAxt~~~A,AB,TOA,xt~~~,A,THOMAS LAKE,M,NO,0,-,MW,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,BLC,O
+ABTOA~~~~~A,AB,TOA,~~~~~,A,THOMAS LAKE,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABTOA~~~~~N,AB,TOA,~~~~~,N,THOMAS LAKE,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,O
+ABTODxc~~~N,AB,TOD,xc~~~,N,TOAD,M,NO,0,-,W,M,F,-,WC,UD,-,GLFL,GLLC,-,,,,LU,GL,BR
+ABTOD~~~~~N,AB,TOD,~~~~~,N,TOAD,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,BR
+ABTOMgl~~~N,AB,TOM,gl~~~,N,TOLMAN,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABTOMxt~~~A,AB,TOM,xt~~~,A,TOLMAN,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABTOM~~~~~A,AB,TOM,~~~~~,A,TOLMAN,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABTOM~~~~~N,AB,TOM,~~~~~,N,TOLMAN,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABTORaa~~~N,AB,TOR,aa~~~,N,TORRENS,M,NO,0,-,MW,F,-,-,AN,-,-,RESD,-,-,,,,LU,GL,O
+ABTOR~~~~~N,AB,TOR,~~~~~,N,TORRENS,M,NO,0,-,MW,F,-,-,AN,-,-,RESD,-,-,,,,LU,GL,O
+ABTPEaa~~~N,AB,TPE,aa~~~,N,TEEPEE,M,NO,0,-,R,VC,-,-,AN,-,-,RESD,-,-,,,,BR,DYB,E
+ABTPExl~~~N,AB,TPE,xl~~~,N,TEEPEE,M,NO,7,LI,W,VC,,-,AN,,-,RESD,RKUD,-,,,,BR,DYB,E
+ABTPE~~~~~N,AB,TPE,~~~~~,N,TEEPEE,M,NO,0,-,W,VC,-,-,AN,-,-,RESD,-,-,,,,BR,DYB,E
+ABTRX~~~~~N,AB,TRX,~~~~~,N,TYRRELL,M,NO,0,-,W,M,-,-,EC,-,-,TILL,-,-,,,,BR,EB,O
+ABTTHst~~~A,AB,TTH,st~~~,A,TOTHILL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABTTHxl~~~N,AB,TTH,xl~~~,N,TOTHILL,M,NO,4,LI,W,MF,,-,VC,,-,TILL,RKUD,-,,,,CH,DBC,O
+ABTTHxp~~~N,AB,TTH,xp~~~,N,TOTHILL,M,NO,5,LI,W,MF,MF,-,VC,UD,-,TILL,RESD,-,,,,CH,DBC,O
+ABTTH~~~~~A,AB,TTH,~~~~~,A,TOTHILL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABTTH~~~~~N,AB,TTH,~~~~~,N,TOTHILL,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABTUCaa~~~N,AB,TUC,aa~~~,N,TOUGH CREEK,M,NO,6,LI,W,MF,MC,,VC,UD,,TILL,RESD,RKUD,,,,LU,GL,O
+ABTUC~~~~~N,AB,TUC,~~~~~,N,TOUGH CREEK,M,NO,6,LI,W,MF,MC,,VC,UD,,TILL,RESD,RKUD,,,,LU,GL,O
+ABTUT~~~~~N,AB,TUT,~~~~~,N,TUTTLE,M,YU,0,-,P,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,HG,O
+ABTVSst~~~A,AB,TVS,st~~~,A,TRAVERS,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABTVSst~~~N,AB,TVS,st~~~,N,TRAVERS,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABTVS~~~~~A,AB,TVS,~~~~~,A,TRAVERS,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABTVS~~~~~N,AB,TVS,~~~~~,N,TRAVERS,M,NO,4,SA,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BC,CA
+ABTWG~~~~~A,AB,TWG,~~~~~,A,TWINING,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABTWG~~~~~N,AB,TWG,~~~~~,N,TWINING,M,NO,4,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,CH,BLC,SZ
+ABTWHaa~~~A,AB,TWH,aa~~~,A,TWO HILLS,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABTWH~~~~~A,AB,TWH,~~~~~,A,TWO HILLS,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABTWH~~~~~N,AB,TWH,~~~~~,N,TWO HILLS,M,NO,0,-,W,VC,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABTWS~~~~~A,AB,TWS,~~~~~,A,TWEEDSMUIR,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABTWS~~~~~N,AB,TWS,~~~~~,N,TWEEDSMUIR,M,NO,0,-,W,MC,-,-,VC,-,-,FLUV,-,-,,,,CH,BLC,O
+ABTZX~~~~~N,AB,TZX,~~~~~,N,TOPAZ,M,NO,0,-,R,VC,-,-,AN,-,-,GLFL,-,-,,,,BR,DYB,E
+ABUCSst~~~A,AB,UCS,st~~~,A,UNCAS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABUCSst~~~N,AB,UCS,st~~~,N,UNCAS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABUCS~~~~~A,AB,UCS,~~~~~,A,UNCAS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABUCS~~~~~N,AB,UCS,~~~~~,N,UNCAS,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,LU,GL,D
+ABUKTaa~~~A,AB,UKT,aa~~~,A,UKALTA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABUKTgl~~~N,AB,UKT,gl~~~,N,UKALTA,M,YU,0,-,I,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,GL
+ABUKTsc~~~N,AB,UKT,sc~~~,N,UKALTA,M,NO,4,SA,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABUKTzt~~~A,AB,UKT,zt~~~,A,UKALTA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,SZ
+ABUKT~~~~~A,AB,UKT,~~~~~,A,UKALTA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABUKT~~~~~N,AB,UKT,~~~~~,N,UKALTA,M,NO,0,-,W,MC,MF,-,VC,UD,-,GLFL,TILL,-,,,,CH,BLC,O
+ABVACaa~~~A,AB,VAC,aa~~~,A,VAN CLEEVE,M,NO,5,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABVACaa~~~N,AB,VAC,aa~~~,N,VAN CLEEVE,M,NO,5,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABVACca~~~N,AB,VAC,ca~~~,N,VAN CLEEVE,M,NO,5,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,CA
+ABVACzr~~~N,AB,VAC,zr~~~,N,VAN CLEEVE,M,NO,4,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,R
+ABVAC~~~~~A,AB,VAC,~~~~~,A,VAN CLEEVE,M,NO,5,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABVAC~~~~~N,AB,VAC,~~~~~,N,VAN CLEEVE,M,NO,5,LI,W,MF,M,,VC,UD,,TILL,RESD,RKUD,,,,CH,DBC,O
+ABVEB~~~~~A,AB,VEB,~~~~~,A,VERBURG,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABVEB~~~~~N,AB,VEB,~~~~~,N,VERBURG,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABVEN~~~~~N,AB,VEN,~~~~~,N,VENICE,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABVET~~~~~N,AB,VET,~~~~~,N,VENTRE,M,YB,0,-,VP,MF,-,-,VC,-,-,GLLC,-,-,,,,GL,G,R
+ABVGRaa~~~N,AB,VGR,aa~~~,N,VERDIGRIS,M,NO,0,-,W,MF,-,-,VC,-,-,FLUV,-,-,,,,RG,R,CU
+ABVGRgl~~~N,AB,VGR,gl~~~,N,VERDIGRIS,M,YU,0,-,I,MF,-,-,VC,-,-,FLUV,-,-,,,,RG,R,GLCU
+ABVGR~~~~~N,AB,VGR,~~~~~,N,VERDIGRIS,M,NO,0,-,W,MF,-,-,VC,-,-,FLUV,-,-,,,,RG,R,CU
+ABVIL~~~~~A,AB,VIL,~~~~~,A,VILNA,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GLE
+ABVIL~~~~~N,AB,VIL,~~~~~,N,VILNA,M,YU,0,-,I,MF,-,-,VC,-,-,TILL,-,-,,,,CH,BLC,GLE
+ABVLX~~~~~N,AB,VLX,~~~~~,N,VERMILLION LAKES,M,NO,0,-,P,M,-,-,EC,-,-,FLUV,-,-,,,,GL,G,R
+ABVOL~~~~~A,AB,VOL,~~~~~,A,VOLMER,M,YU,4,SA,I,F,M,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,GLE
+ABVOL~~~~~N,AB,VOL,~~~~~,N,VOLMER,M,YU,4,SA,I,F,M,-,VC,UD,-,GLLC,GLLC,-,,,,CH,BLC,GLE
+ABVSTgl~~~A,AB,VST,gl~~~,A,VENDISANT,M,YU,0,-,I,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,GLR
+ABVST~~~~~A,AB,VST,~~~~~,A,VENDISANT,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,R
+ABVST~~~~~N,AB,VST,~~~~~,N,VENDISANT,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,BC,R
+ABVTR~~~~~A,AB,VTR,~~~~~,A,VICTOR,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,DB
+ABVTR~~~~~N,AB,VTR,~~~~~,N,VICTOR,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SZ,DB
+ABVVWaa~~~A,AB,VVW,aa~~~,A,VALLEYVIEW,M,NO,3,BN,MW,F,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,DG
+ABVVWaa~~~N,AB,VVW,aa~~~,N,VALLEYVIEW,M,NO,5,BN,MW,F,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,DG
+ABVVW~~~~~A,AB,VVW,~~~~~,A,VALLEYVIEW,M,NO,3,BN,MW,F,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,DG
+ABVVW~~~~~N,AB,VVW,~~~~~,N,VALLEYVIEW,M,NO,5,BN,MW,F,-,-,WC,-,-,RESD,-,-,,,,SZ,SS,DG
+ABVXN~~~~~A,AB,VXN,~~~~~,A,VIXEN,M,NO,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABVXN~~~~~N,AB,VXN,~~~~~,N,VIXEN,M,NO,0,-,I,F,-,-,WC,-,-,GLLC,-,-,,,,LU,GL,GLD
+ABWAB~~~~~A,AB,WAB,~~~~~,A,WABAMUN,M,NO,3,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SO,DG
+ABWAB~~~~~N,AB,WAB,~~~~~,N,WABAMUN,M,NO,5,BN,W,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SO,DG
+ABWAPzl~~~N,AB,WAP,zl~~~,N,WAPITI,M,NO,0,-,R,MC,-,-,VC,-,-,EOLI,-,-,,,,LU,GL,BR
+ABWAPzz~~~N,AB,WAP,zz~~~,N,WAPITI,M,NO,0,-,R,VC,-,-,AN,-,-,EOLI,-,-,,,,BR,DYB,E
+ABWAP~~~~~N,AB,WAP,~~~~~,N,WAPITI,M,NO,0,-,R,VC,-,-,WC,-,-,EOLI,-,-,,,,BR,EB,E
+ABWBB~~~~~A,AB,WBB,~~~~~,A,WEBBER,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABWBB~~~~~N,AB,WBB,~~~~~,N,WEBBER,M,NO,8,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABWBG~~~~~N,AB,WBG,~~~~~,N,WARBURG,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
+ABWBH~~~~~A,AB,WBH,~~~~~,A,WABASH,M,YU,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABWBH~~~~~N,AB,WBH,~~~~~,N,WABASH,M,YU,0,-,I,F,-,-,VC,-,-,GLLC,-,-,,,,CH,DGC,GL
+ABWBYaa~~~N,AB,WBY,aa~~~,N,WEMBLEY,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABWBYpt~~~N,AB,WBY,pt~~~,N,WEMBLEY,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABWBY~~~~~N,AB,WBY,~~~~~,N,WEMBLEY,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,HG,O
+ABWCR~~~~~N,AB,WCR,~~~~~,N,WOOLCHESTER,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABWCT~~~~~N,AB,WCT,~~~~~,N,WESTCASTLE,M,NO,0,-,W,M,-,-,AN,-,-,TILL,-,-,,,,LU,GL,O
+ABWDC~~~~~N,AB,WDC,~~~~~,N,WILDCAT,M,YU,0,-,P,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,GL,LG,HU
+ABWDL~~~~~N,AB,WDL,~~~~~,N,WADDELL,M,NO,0,-,R,MC,MF,-,EA,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABWDN~~~~~A,AB,WDN,~~~~~,A,WHEIDEN,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,BC,O
+ABWDN~~~~~N,AB,WDN,~~~~~,N,WHEIDEN,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,BC,O
+ABWDWer~~~A,AB,WDW,er~~~,A,WARDLOW,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABWDWsa~~~N,AB,WDW,sa~~~,N,WARDLOW,M,YU,4,SA,MW,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABWDW~~~~~A,AB,WDW,~~~~~,A,WARDLOW,M,NO,2,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABWDW~~~~~N,AB,WDW,~~~~~,N,WARDLOW,M,NO,4,BN,W,MF,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,B
+ABWEN~~~~~N,AB,WEN,~~~~~,N,WENTZEL,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABWESxt~~~N,AB,WES,xt~~~,N,WIESE,M,NO,3,BN,W,F,MF,-,VC,UD,-,GLLC,TILL,-,,,,SZ,SS,DB
+ABWES~~~~~A,AB,WES,~~~~~,A,WIESE,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABWES~~~~~N,AB,WES,~~~~~,N,WIESE,M,NO,3,BN,W,F,-,-,VC,-,-,GLLC,-,-,,,,SZ,SS,DB
+ABWFX~~~~~N,AB,WFX,~~~~~,N,WILDFLOWER,M,NO,0,-,R,M,-,-,EC,-,-,COLL,-,-,,,,BR,EB,O
+ABWGN~~~~~N,AB,WGN,~~~~~,N,WAGON,M,NO,7,SA,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABWHF~~~~~A,AB,WHF,~~~~~,A,WHITFORD,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABWHF~~~~~N,AB,WHF,~~~~~,N,WHITFORD,M,NO,2,BN,MW,MF,-,-,VC,-,-,TILL,-,-,,,,SZ,SZ,BL
+ABWHMaa~~~A,AB,WHM,aa~~~,A,WANHAM,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABWHMpt~~~N,AB,WHM,pt~~~,N,WANHAM,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABWHM~~~~~N,AB,WHM,~~~~~,N,WANHAM,M,YU,0,-,P,M,-,-,VC,-,-,GLFL,-,-,,,,GL,LG,O
+ABWHW~~~~~N,AB,WHW,~~~~~,N,WHITELAW,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABWHX~~~~~N,AB,WHX,~~~~~,N,WHITEHORN,M,NO,0,-,R,MC,-,-,AN,-,-,COLL,-,-,,,,BR,DYB,O
+ABWHYaast~N,AB,WHY,aast~,N,WILDHAY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,PZ
+ABWHYaaxp~N,AB,WHY,aaxp~,N,WILDHAY,M,NO,0,-,W,M,MC,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,PZ
+ABWHYaa~~~N,AB,WHY,aa~~~,N,WILDHAY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,PZ
+ABWHYst~~~N,AB,WHY,st~~~,N,WILDHAY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,PZ
+ABWHYxp~~~N,AB,WHY,xp~~~,N,WILDHAY,M,NO,0,-,W,M,MC,-,WC,UD,-,TILL,RESD,-,,,,LU,GL,PZ
+ABWHY~~~~~N,AB,WHY,~~~~~,N,WILDHAY,M,NO,0,-,W,M,-,-,VC,-,-,TILL,-,-,,,,LU,GL,PZ
+ABWID~~~~~A,AB,WID,~~~~~,A,WILDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABWID~~~~~N,AB,WID,~~~~~,N,WILDA,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,R
+ABWIL~~~~~N,AB,WIL,~~~~~,N,WILKIN,M,NO,7,SA,MW,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,SZ
+ABWKNaa~~~A,AB,WKN,aa~~~,A,WETASKIWIN,M,NO,4,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABWKNaa~~~N,AB,WKN,aa~~~,N,WETASKIWIN,M,NO,3,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABWKN~~~~~A,AB,WKN,~~~~~,A,WETASKIWIN,M,NO,4,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABWKN~~~~~N,AB,WKN,~~~~~,N,WETASKIWIN,M,NO,3,BN,MW,F,-,-,WC,-,-,GLLC,-,-,,,,SZ,SS,BL
+ABWLBxl~~~N,AB,WLB,xl~~~,N,WILLOUGHBY,M,NO,7,LI,W,M,M,,AN,UD,,TILL,TILL,RKUD,,,,BR,DYB,E
+ABWLBzz~~~N,AB,WLB,zz~~~,N,WILLOUGHBY,M,NO,0,-,W,M,M,-,AN,UD,-,TILL,TILL,-,,,,BR,DYB,O
+ABWLB~~~~~N,AB,WLB,~~~~~,N,WILLOUGHBY,M,NO,0,-,W,M,M,-,AN,UD,-,TILL,TILL,-,,,,BR,DYB,E
+ABWLD~~~~~N,AB,WLD,~~~~~,N,WEALD,M,NO,0,-,W,M,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,BR
+ABWLG~~~~~A,AB,WLG,~~~~~,A,WELLING,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,DBC,R
+ABWLG~~~~~N,AB,WLG,~~~~~,N,WELLING,M,NO,0,-,W,F,-,-,VC,-,-,LATL,-,-,,,,CH,DBC,R
+ABWLH~~~~~A,AB,WLH,~~~~~,A,WALSH,M,YU,0,-,P,F,-,-,WC,-,-,LACU,-,-,,,,GL,G,R
+ABWLH~~~~~N,AB,WLH,~~~~~,N,WALSH,M,YU,0,-,P,F,-,-,WC,-,-,LACU,-,-,,,,GL,G,R
+ABWLL~~~~~N,AB,WLL,~~~~~,N,WOLF LAKE,M,YB,0,-,VP,VC,-,-,WC,-,-,GLFL,-,-,,,,GL,HG,R
+ABWNC~~~~~N,AB,WNC,~~~~~,N,WINCHELL,M,NO,0,-,W,M,-,-,VC,-,-,GLFL,-,-,,,,LU,GL,O
+ABWND~~~~~N,AB,WND,~~~~~,N,WINDFALL,M,NO,0,-,W,VC,-,-,AN,-,-,EOLI,-,-,,,,BR,DYB,E
+ABWNFac~~~N,AB,WNF,ac~~~,N,WINEFRED,M,NO,0,-,W,MC,MF,-,EA,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABWNF~~~~~N,AB,WNF,~~~~~,N,WINIFRED,M,NO,0,-,W,MC,MF,-,WC,UD,-,GLFL,TILL,-,,,,LU,GL,O
+ABWNKpt~~~N,AB,WNK,pt~~~,N,WABATANISK,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABWNK~~~~~N,AB,WNK,~~~~~,N,WABATANISK,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABWNYgl~~~N,AB,WNY,gl~~~,N,WHITNEY,M,YU,0,-,I,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,GL
+ABWNYsa~~~A,AB,WNY,sa~~~,A,WHITNEY,M,YU,3,SA,MW,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABWNYzr~~~A,AB,WNY,zr~~~,A,WHITNEY,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,R
+ABWNY~~~~~A,AB,WNY,~~~~~,A,WHITNEY,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABWNY~~~~~N,AB,WNY,~~~~~,N,WHITNEY,M,NO,0,-,W,M,MF,-,VC,UD,-,GLLC,TILL,-,,,,CH,DBC,O
+ABWOKaa~~~N,AB,WOK,aa~~~,N,WOKING,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABWOKxp~~~N,AB,WOK,xp~~~,N,WOKING,M,NO,9,LI,W,MF,MC,,WC,UD,,TILL,RESD,RKUD,,,,LU,GL,O
+ABWOK~~~~~A,AB,WOK,~~~~~,A,WOKING,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABWOK~~~~~N,AB,WOK,~~~~~,N,WOKING,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
+ABWOLaa~~~A,AB,WOL,aa~~~,A,WOLLIM,M,NO,0,-,W,MF,M,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,R
+ABWOL~~~~~A,AB,WOL,~~~~~,A,WOLLIM,M,NO,0,-,W,MF,M,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,R
+ABWOL~~~~~N,AB,WOL,~~~~~,N,WOLLIM,M,NO,0,-,W,MF,M,-,VC,UD,-,GLFL,TILL,-,,,,CH,DBC,R
+ABWPGxs~~~N,AB,WPG,xs~~~,N,WHOOPING,O,YB,0,-,VP,ME,VC,-,WC,UD,-,FNPT,GLFL,-,,,,OR,M,T
+ABWPGxt~~~N,AB,WPG,xt~~~,N,WHOOPING,O,YB,0,-,VP,ME,F,-,VC,UD,-,FNPT,TILL,-,,,,OR,M,T
+ABWPGxu~~~N,AB,WPG,xu~~~,N,WHOOPING,O,YB,0,-,VP,ME,MF,-,WC,UD,-,FNPT,UNDM,-,,,,OR,M,T
+ABWPG~~~~~N,AB,WPG,~~~~~,N,WHOOPING,O,YB,0,-,VP,ME,-,-,AN,-,-,FNPT,-,-,,,,OR,M,TY
+ABWPS~~~~~N,AB,WPS,~~~~~,N,WAMPUS,M,NO,0,-,W,MF,-,-,AN,-,-,GLLC,-,-,,,,LU,GL,O
+ABWSMst~~~N,AB,WSM,st~~~,N,WISDOM,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABWSM~~~~~N,AB,WSM,~~~~~,N,WISDOM,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,,,,CH,DBC,O
+ABWSN~~~~~N,AB,WSN,~~~~~,N,WEASONE,M,NO,0,-,MW,F,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABWSRgl~~~N,AB,WSR,gl~~~,N,WESTEROSE,M,YU,0,-,I,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,GL
+ABWSRxt~~~A,AB,WSR,xt~~~,A,WESTEROSE,M,NO,0,-,W,MF,MF,-,VC,UD,-,GLLC,TILL,-,,,,LU,GL,O
+ABWSR~~~~~N,AB,WSR,~~~~~,N,WESTEROSE,M,NO,0,-,W,MF,-,-,VC,-,-,GLLC,-,-,,,,LU,GL,O
+ABWST~~~~~N,AB,WST,~~~~~,N,WINSTON,M,NO,0,-,W,F,-,-,WC,-,-,TILL,-,-,,,,LU,GL,D
+ABWTBaa~~~A,AB,WTB,aa~~~,A,WINTERBURN,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABWTBgl~~~N,AB,WTB,gl~~~,N,WINTERBURN,M,YU,0,-,I,M,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,GL
+ABWTB~~~~~A,AB,WTB,~~~~~,A,WINTERBURN,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABWTB~~~~~N,AB,WTB,~~~~~,N,WINTERBURN,M,NO,0,-,W,M,-,-,WC,-,-,GLFL,-,-,,,,CH,DGC,O
+ABWTH~~~~~A,AB,WTH,~~~~~,A,WITHAM,M,NO,7,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,D
+ABWTH~~~~~N,AB,WTH,~~~~~,N,WITHAM,M,NO,8,SA,MW,F,-,-,WC,-,-,LATL,-,-,,,,LU,GL,D
+ABWTNaa~~~N,AB,WTN,aa~~~,N,WESTON,M,NO,0,-,MW,F,-,-,AN,-,-,GLLC,-,-,,,,RG,R,O
+ABWTNgl~~~N,AB,WTN,gl~~~,N,WESTON,M,YU,0,-,I,F,-,-,AN,-,-,GLLC,-,-,,,,RG,R,GL
+ABWTNsa~~~N,AB,WTN,sa~~~,N,WESTON,M,YU,2,SA,I,F,-,-,WC,-,-,GLLC,-,-,,,,RG,R,O
+ABWTN~~~~~N,AB,WTN,~~~~~,N,WESTON,M,NO,0,-,MW,F,-,-,AN,-,-,GLLC,-,-,,,,RG,R,O
+ABWTX~~~~~N,AB,WTX,~~~~~,N,WATERTON,M,NO,0,-,W,M,-,-,AN,-,-,COLL,-,-,,,,PZ,HFP,O
+ABWVRxc~~~N,AB,WVR,xc~~~,N,WOLVERINE,O,YB,0,-,VP,ME,F,-,WC,UD,-,SPPT,GLLC,-,,,,OR,M,T
+ABWVRxs~~~N,AB,WVR,xs~~~,N,WOLVERINE,O,YB,0,-,VP,ME,VC,-,WC,UD,-,SPPT,GLFL,-,,,,OR,M,T
+ABWVRxt~~~N,AB,WVR,xt~~~,N,WOLVERINE,O,YB,0,-,VP,ME,F,-,VC,UD,-,SPPT,TILL,-,,,,OR,M,T
+ABWVRxu~~~N,AB,WVR,xu~~~,N,WOLVERINE,O,YB,0,-,VP,ME,MF,-,WC,UD,-,SPPT,UNDM,-,,,,OR,M,T
+ABWVR~~~~~N,AB,WVR,~~~~~,N,WOLVERINE,O,YB,0,-,VP,ME,-,-,AN,-,-,SPPT,-,-,,,,OR,M,TY
+ABWWOpt~~~N,AB,WWO,pt~~~,N,WILDWOOD,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABWWO~~~~~N,AB,WWO,~~~~~,N,WILDWOOD,M,YU,0,-,P,VF,-,-,WC,-,-,GLLC,-,-,,,,GL,LG,O
+ABWWTaa~~~A,AB,WWT,aa~~~,A,WAINWRIGHT,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,O
+ABWWT~~~~~A,AB,WWT,~~~~~,A,WAINWRIGHT,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,O
+ABWWT~~~~~N,AB,WWT,~~~~~,N,WAINWRIGHT,M,NO,0,-,R,VC,-,-,VC,-,-,FLEO,-,-,,,,CH,DBC,O
+ABWWX~~~~~N,AB,WWX,~~~~~,N,WARWICK,M,NO,0,-,MW,M,-,-,EC,-,-,TILL,-,-,,,,RG,HR,O
+ABYNYta~~~A,AB,YNY,ta~~~,A,YARNLEY,M,NO,2,BN,W,VC,-,-,WC,-,-,FLEO,-,-,,,,SZ,SS,B
+ABYNYta~~~N,AB,YNY,ta~~~,N,YARNLEY,M,NO,2,BN,W,VC,-,-,WC,-,-,FLEO,-,-,,,,SZ,SS,B
+ABYNY~~~~~A,AB,YNY,~~~~~,A,YARNLEY,M,NO,4,BN,W,VC,-,-,WC,-,-,FLEO,-,-,,,,SZ,SS,B
+ABYNY~~~~~N,AB,YNY,~~~~~,N,YARNLEY,M,NO,4,BN,W,VC,-,-,WC,-,-,FLEO,-,-,,,,SZ,SS,B
+ABYTWer~~~A,AB,YTW,er~~~,A,YOUNGSTOWN,M,NO,2,BN,W,MC,-,-,VC,-,-,GLFL,-,-,,,,SZ,SS,B
+ABYTW~~~~~A,AB,YTW,~~~~~,A,YOUNGSTOWN,M,NO,4,BN,W,MC,-,-,VC,-,-,GLFL,-,-,,,,SZ,SS,B
+ABYTW~~~~~N,AB,YTW,~~~~~,N,YOUNGSTOWN,M,NO,3,BN,W,MC,-,-,VC,-,-,GLFL,-,-,,,,SZ,SS,B
+ABZAV~~~~~N,AB,ZAV,~~~~~,N,MISC.ALLUVIUM,M,YU,0,-,I,UD,-,-,UD,-,-,FLUV,-,-,,,,RG,HR,O
+ABZBR~~~~~N,AB,ZBR,~~~~~,N,MISC.BEDROCK,U,NO,1,LI,,,-,-,,-,-,RKUD,-,-,,,,-,-,-
+ABZCOzbl~~N,AB,ZCO,zbl~~,N,MISC.COARSE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,O
+ABZCOzbr~~N,AB,ZCO,zbr~~,N,MISC.COARSE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BC,O
+ABZCOzdb~~N,AB,ZCO,zdb~~,N,MISC.COARSE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DBC,O
+ABZCOzdg~~N,AB,ZCO,zdg~~,N,MISC.COARSE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DGC,O
+ABZCO~~~~~N,AB,ZCO,~~~~~,N,MISC.COARSE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,O
+ABZDL~~~~~N,AB,ZDL,~~~~~,N,MISC.DISTURBED.LAND,U,NO,0,-,,UD,-,-,UD,-,-,UNDM,-,-,,,,-,-,-
+ABZERzbl~~A,AB,ZER,zbl~~,A,MISC.ERODED,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,R
+ABZERzbr~~A,AB,ZER,zbr~~,A,MISC.ERODED,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BC,R
+ABZERzdb~~A,AB,ZER,zdb~~,A,MISC.ERODED,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DBC,R
+ABZERzdg~~A,AB,ZER,zdg~~,A,MISC.ERODED,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DGC,R
+ABZER~~~~~A,AB,ZER,~~~~~,A,MISC.ERODED,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,R
+ABZFIzbl~~N,AB,ZFI,zbl~~,N,MISC.FINE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,O
+ABZFIzbr~~N,AB,ZFI,zbr~~,N,MISC.FINE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BC,O
+ABZFIzdb~~N,AB,ZFI,zdb~~,N,MISC.FINE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DBC,O
+ABZFIzdg~~N,AB,ZFI,zdg~~,N,MISC.FINE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DGC,O
+ABZFI~~~~~N,AB,ZFI,~~~~~,N,MISC.FINE,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,O
+ABZGL~~~~~N,AB,ZGL,~~~~~,N,MISC.GLEYSOL,M,YU,0,-,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGWblsa~N,AB,ZGW,blsa~,N,MISC.GLEYSOL,M,YU,3,SA,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGWbrsa~N,AB,ZGW,brsa~,N,MISC.GLEYSOL,M,YU,3,SA,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGWdbsa~N,AB,ZGW,dbsa~,N,MISC.GLEYSOL,M,YU,3,SA,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGWpt~~~N,AB,ZGW,pt~~~,N,MISC.GLEYSOL,M,YU,0,-,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGWsa~~~N,AB,ZGW,sa~~~,N,MISC.GLEYSOL,M,YU,3,SA,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZGW~~~~~N,AB,ZGW,~~~~~,N,MISC.GLEYSOL,M,YU,0,-,P,UD,-,-,UD,-,-,UNDM,-,-,,,,GL,HG,O
+ABZIC~~~~~N,AB,ZIC,~~~~~,N,MISC. ICE,N,-,-,-,-,-,-,-,-,-,-,-,-,-,,,,-,-,-
+ABZNAzbl~~N,AB,ZNA,zbl~~,N,MISC.SAL,M,YU,1,SA,I,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,GLR
+ABZNAzbr~~N,AB,ZNA,zbr~~,N,MISC.SALINE,M,YU,1,SA,I,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BC,GLR
+ABZNAzdb~~N,AB,ZNA,zdb~~,N,MISC.SALINE,M,YU,1,SA,I,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,DBC,GLR
+ABZNA~~~~~N,AB,ZNA,~~~~~,N,MISC.SALINE,M,YU,1,SA,I,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,GLR
+ABZOR~~~~~N,AB,ZOR,~~~~~,N,MISC.ORGANIC,O,YB,0,-,VP,UD,-,-,UD,-,-,UNDO,-,-,,,,OR,M,TY
+ABZRB~~~~~N,AB,ZRB,~~~~~,N,MISC.ROUGH.BROKEN,M,NO,0,-,R,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,R
+ABZRG~~~~~N,AB,ZRG,~~~~~,N,MISC.REGOSOL,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,RG,R,O
+ABZSA~~~~~N,AB,ZSA,~~~~~,N,MISC.SALINE,M,YU,1,SA,I,UD,-,-,UD,-,-,UNDM,-,-,,,,CH,BLC,GLR
+ABZSZzbl~~N,AB,ZSZ,zbl~~,N,MISC.SOLONETZIC,M,NO,3,BN,W,UD,-,-,UD,-,-,UNDM,-,-,,,,SZ,SS,BL
+ABZSZzbr~~N,AB,ZSZ,zbr~~,N,MISC.SOLONETIC.,M,NO,3,BN,W,UD,-,-,UD,-,-,UNDM,-,-,,,,SZ,SS,B
+ABZSZzdb~~N,AB,ZSZ,zdb~~,N,MISC.SOLONETZIC,M,NO,3,BN,W,UD,-,-,UD,-,-,UNDM,-,-,,,,SZ,SS,DB
+ABZSZzdg~~N,AB,ZSZ,zdg~~,N,MISC.SOLONETZIC,M,NO,3,BN,W,UD,-,-,UD,-,-,UNDM,-,-,,,,SZ,SS,DG
+ABZSZ~~~~~N,AB,ZSZ,~~~~~,N,MISC.SOLONETZIC,M,NO,3,BN,W,UD,-,-,UD,-,-,UNDM,-,-,,,,SZ,SS,BL
+ABZUL~~~~~N,AB,ZUL,~~~~~,N,MISC.URBAN,U,NO,0,-,,UD,-,-,UD,-,-,ANTH,-,-,,,,-,-,-
+ABZUN~~~~~N,AB,ZUN,~~~~~,N,MISC.UNDIFF.MINERAL,M,NO,0,-,W,UD,-,-,UD,-,-,UNDM,-,-,,,,RG,R,O
+ABZWA~~~~~N,AB,ZWA,~~~~~,N,MISC.WATER,N,-,-,-,-,-,-,-,-,-,-,-,-,-,,,,-,-,-
+ABZZZ~~~~~N,AB,ZZZ,~~~~~,N,MISC.WATER,N,-,-,-,-,-,-,-,-,-,-,-,-,-,,,,-,-,-

@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{272EDE97-F58A-42A9-828D-8B3524E390EB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H.Content</RootNamespace>
+    <AssemblyName>H.Content</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CsvResourceNames.cs" />
+    <Compile Include="CsvResourceReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\chapter10\figure10-1.png" />
+    <Content Include="Images\chapter10\figure10-10.png" />
+    <Content Include="Images\chapter10\figure10-11.png" />
+    <Content Include="Images\chapter10\figure10-12.png" />
+    <Content Include="Images\chapter10\figure10-13.png" />
+    <Content Include="Images\chapter10\figure10-14.png" />
+    <Content Include="Images\chapter10\figure10-15.png" />
+    <Content Include="Images\chapter10\figure10-16.png" />
+    <Content Include="Images\chapter10\figure10-17.png" />
+    <Content Include="Images\chapter10\figure10-18.png" />
+    <Content Include="Images\chapter10\figure10-19.png" />
+    <Content Include="Images\chapter10\figure10-2.png" />
+    <Content Include="Images\chapter10\figure10-20.png" />
+    <Content Include="Images\chapter10\figure10-21.png" />
+    <Content Include="Images\chapter10\figure10-22.png" />
+    <Content Include="Images\chapter10\figure10-23.png" />
+    <Content Include="Images\chapter10\figure10-24.png" />
+    <Content Include="Images\chapter10\figure10-25.png" />
+    <Content Include="Images\chapter10\figure10-26.png" />
+    <Content Include="Images\chapter10\figure10-27.png" />
+    <Content Include="Images\chapter10\figure10-28.png" />
+    <Content Include="Images\chapter10\figure10-29.png" />
+    <Content Include="Images\chapter10\figure10-3.png" />
+    <Content Include="Images\chapter10\figure10-30.png" />
+    <Content Include="Images\chapter10\figure10-31.png" />
+    <Content Include="Images\chapter10\figure10-32.png" />
+    <Content Include="Images\chapter10\figure10-33.png" />
+    <Content Include="Images\chapter10\figure10-34.png" />
+    <Content Include="Images\chapter10\figure10-35.png" />
+    <Content Include="Images\chapter10\figure10-36.png" />
+    <Content Include="Images\chapter10\figure10-37.png" />
+    <Content Include="Images\chapter10\figure10-38.png" />
+    <Content Include="Images\chapter10\figure10-39.png" />
+    <Content Include="Images\chapter10\figure10-4.png" />
+    <Content Include="Images\chapter10\figure10-40.png" />
+    <Content Include="Images\chapter10\figure10-41.png" />
+    <Content Include="Images\chapter10\figure10-42.png" />
+    <Content Include="Images\chapter10\figure10-43.png" />
+    <Content Include="Images\chapter10\figure10-44.png" />
+    <Content Include="Images\chapter10\figure10-45.png" />
+    <Content Include="Images\chapter10\figure10-5.png" />
+    <Content Include="Images\chapter10\figure10-6.png" />
+    <Content Include="Images\chapter10\figure10-7.png" />
+    <Content Include="Images\chapter10\figure10-8.png" />
+    <Content Include="Images\chapter10\figure10-9.png" />
+    <Content Include="Images\chapter11\figure11-1.png" />
+    <Content Include="Images\chapter11\figure11-2.png" />
+    <Content Include="Images\chapter11\figure11-3.png" />
+    <Content Include="Images\chapter11\figure11-4.png" />
+    <Content Include="Images\chapter1\figure1-1.png" />
+    <Content Include="Images\chapter1\figure1-2.png" />
+    <Content Include="Images\chapter1\figure1-3.png" />
+    <Content Include="Images\chapter1\figure1-4.png" />
+    <Content Include="Images\chapter2\figure2-1.png" />
+    <Content Include="Images\chapter2\figure2-10.PNG" />
+    <Content Include="Images\chapter2\figure2-2.png" />
+    <Content Include="Images\chapter2\figure2-3.png" />
+    <Content Include="Images\chapter2\figure2-4.png" />
+    <Content Include="Images\chapter2\figure2-5.png" />
+    <Content Include="Images\chapter2\figure2-6.png" />
+    <Content Include="Images\chapter2\figure2-7.PNG" />
+    <Content Include="Images\chapter2\figure2-8.PNG" />
+    <Content Include="Images\chapter2\figure2-9-1.PNG" />
+    <Content Include="Images\chapter2\figure2-9-2.PNG" />
+    <Content Include="Images\chapter2\figure2-9-3.PNG" />
+    <Content Include="Images\chapter2\figure2-9.PNG" />
+    <Content Include="Images\chapter3\figure3-1.png" />
+    <Content Include="Images\chapter3\figure3-10.png" />
+    <Content Include="Images\chapter3\figure3-11.png" />
+    <Content Include="Images\chapter3\figure3-12.png" />
+    <Content Include="Images\chapter3\figure3-13.png" />
+    <Content Include="Images\chapter3\figure3-14.png" />
+    <Content Include="Images\chapter3\figure3-2.png" />
+    <Content Include="Images\chapter3\figure3-3.png" />
+    <Content Include="Images\chapter3\figure3-4.png" />
+    <Content Include="Images\chapter3\figure3-5.png" />
+    <Content Include="Images\chapter3\figure3-6.png" />
+    <Content Include="Images\chapter3\figure3-7.png" />
+    <Content Include="Images\chapter3\figure3-8.png" />
+    <Content Include="Images\chapter3\figure3-9.png" />
+    <Content Include="Images\chapter4\figure4-1.png" />
+    <Content Include="Images\chapter4\figure4-2.png" />
+    <Content Include="Images\chapter4\figure4-3.png" />
+    <Content Include="Images\chapter4\figure4-4.png" />
+    <Content Include="Images\chapter4\figure4-5.png" />
+    <Content Include="Images\chapter4\figure4-6.png" />
+    <Content Include="Images\chapter4\figure4-7.png" />
+    <Content Include="Images\chapter4\figure4-8.png" />
+    <Content Include="Images\chapter4\figure4-9.png" />
+    <Content Include="Images\chapter5\figure5-1.png" />
+    <Content Include="Images\chapter5\figure5-2.png" />
+    <Content Include="Images\chapter5\figure5-3.png" />
+    <Content Include="Images\chapter5\figure5-4.png" />
+    <Content Include="Images\chapter5\figure5-5.png" />
+    <Content Include="Images\chapter5\figure5-6.png" />
+    <Content Include="Images\chapter6\figure6-1.png" />
+    <Content Include="Images\chapter6\figure6-10.png" />
+    <Content Include="Images\chapter6\figure6-11.png" />
+    <Content Include="Images\chapter6\figure6-12.png" />
+    <Content Include="Images\chapter6\figure6-13.png" />
+    <Content Include="Images\chapter6\figure6-14.png" />
+    <Content Include="Images\chapter6\figure6-15.png" />
+    <Content Include="Images\chapter6\figure6-16.png" />
+    <Content Include="Images\chapter6\figure6-17.png" />
+    <Content Include="Images\chapter6\figure6-18.png" />
+    <Content Include="Images\chapter6\figure6-19.png" />
+    <Content Include="Images\chapter6\figure6-2.png" />
+    <Content Include="Images\chapter6\figure6-20.png" />
+    <Content Include="Images\chapter6\figure6-21.png" />
+    <Content Include="Images\chapter6\figure6-3.png" />
+    <Content Include="Images\chapter6\figure6-4.png" />
+    <Content Include="Images\chapter6\figure6-5.png" />
+    <Content Include="Images\chapter6\figure6-6.png" />
+    <Content Include="Images\chapter6\figure6-7.png" />
+    <Content Include="Images\chapter6\figure6-8.png" />
+    <Content Include="Images\chapter6\figure6-9.png" />
+    <Content Include="Images\chapter7\figure7-1.png" />
+    <Content Include="Images\chapter8\figure8-1.png" />
+    <Content Include="Images\chapter9\figure9-1.png" />
+    <Content Include="Images\chapter9\figure9-10.png" />
+    <Content Include="Images\chapter9\figure9-11.png" />
+    <Content Include="Images\chapter9\figure9-12.png" />
+    <Content Include="Images\chapter9\figure9-2.png" />
+    <Content Include="Images\chapter9\figure9-3.png" />
+    <Content Include="Images\chapter9\figure9-4.png" />
+    <Content Include="Images\chapter9\figure9-5.png" />
+    <Content Include="Images\chapter9\figure9-6.png" />
+    <Content Include="Images\chapter9\figure9-7.png" />
+    <Content Include="Images\chapter9\figure9-8.png" />
+    <Content Include="Images\chapter9\figure9-9.png" />
+    <Content Include="Scripts\addCopyright.py" />
+    <Content Include="Scripts\copyright.txt" />
+    <None Include="app.config" />
+    <None Include="Documentation\Doxyfile" />
+    <None Include="Documentation\User Guide\User Guide.md" />
+    <None Include="packages.config" />
+    <None Include="Resources\ab_car_to_slc.csv" />
+    <None Include="Resources\ab_default_yields.csv" />
+    <None Include="Resources\Agt_Ratios.csv" />
+    <None Include="Resources\average_milk_production_dairy_cows.csv" />
+    <None Include="Resources\bc_default_yields.csv" />
+    <None Include="Resources\caragana__31_allclusters_future.csv" />
+    <Content Include="Resources\climateNorms_by_poly_1950_1980.csv" />
+    <Content Include="Resources\climateNorms_by_poly_1960_1990.csv" />
+    <Content Include="Resources\climateNorms_by_poly_1970_2000.csv" />
+    <Content Include="Resources\climateNorms_by_poly_1980_2010.csv" />
+    <Content Include="Resources\climateNorms_by_poly_1990_2017.csv" />
+    <None Include="Resources\CG_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\CG__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\climate_norms_by_poly.csv" />
+    <None Include="Resources\climate_parameter_tool_input.csv" />
+    <None Include="Resources\cmp.csv" />
+    <None Include="Resources\Condensed_LethbridgeSOCData_AllRotations.csv" />
+    <None Include="Resources\crop_economics.csv" />
+    <None Include="Resources\dairy_feed_composition.csv" />
+    <None Include="Resources\ecodistrict_to_ecozone_mapping.csv" />
+    <None Include="Resources\ednames.csv" />
+    <None Include="Resources\electricity_conversion_values.csv" />
+    <None Include="Resources\emission_factor_digestate_storage.csv" />
+    <None Include="Resources\feeds.csv" />
+    <None Include="Resources\fertilizer_blends.csv" />
+    <None Include="Resources\ft-AB.csv" />
+    <None Include="Resources\fuel_energy_requirement_estimates.csv" />
+    <None Include="Resources\GA_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\GA__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\globally_calibrated_model_parameters.csv" />
+    <None Include="Resources\global_radiative_forcing.csv" />
+    <None Include="Resources\global_warming_potential_of_emissions.csv" />
+    <None Include="Resources\green_ash__31_allclusters_future.csv" />
+    <None Include="Resources\GrowingDegreeCoefficients.csv" />
+    <None Include="Resources\herbicide_energy_requirement_estimates.csv" />
+    <None Include="Resources\HP_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\HP__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\hybrid_poplar__31_allclusters_future.csv" />
+    <None Include="Resources\IrrigationByMonth.csv" />
+    <None Include="Resources\Kapuskasing.csv" />
+    <None Include="Resources\lookup_ecodistricts_clusters.csv" />
+    <None Include="Resources\manitoba_maple__31_allclusters_future.csv" />
+    <None Include="Resources\mb_default_yields.csv" />
+    <None Include="Resources\MM_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\MM__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\nitrogen_lingin_contents_steadystate_methods.csv" />
+    <None Include="Resources\on_default_yields.csv" />
+    <None Include="Resources\parameters_biogas_methane_production.csv" />
+    <None Include="Resources\pat.csv" />
+    <None Include="Resources\qc_default_yields.csv" />
+    <Content Include="Resources\residue_table.csv" />
+    <None Include="Resources\scots_pine__31_allclusters_future.csv" />
+    <None Include="Resources\shelterbelt_allometric_table.csv" />
+    <None Include="Resources\shelterbelt_ecodistrict_lookup_table.csv" />
+    <None Include="Resources\shelterbelt_ecodistrict_weights.csv" />
+    <None Include="Resources\shelterbelt_hardinesszone_lookup.csv" />
+    <None Include="Resources\shelterbelt_lookup_table.csv" />
+    <None Include="Resources\silage_yields.csv" />
+    <None Include="Resources\sk_car_to_slc.csv" />
+    <None Include="Resources\sk_default_yields.csv" />
+    <None Include="Resources\slc_to_hardiness_zone.csv" />
+    <None Include="Resources\sl_ab.csv" />
+    <None Include="Resources\sl_bc.csv" />
+    <None Include="Resources\sl_mb.csv" />
+    <None Include="Resources\sl_nb.csv" />
+    <None Include="Resources\sl_nl.csv" />
+    <None Include="Resources\sl_ns.csv" />
+    <None Include="Resources\sl_on.csv" />
+    <None Include="Resources\sl_pe.csv" />
+    <None Include="Resources\sl_qc.csv" />
+    <None Include="Resources\sl_sk.csv" />
+    <None Include="Resources\small_area_yields.csv" />
+    <None Include="Resources\sn_ab.csv" />
+    <None Include="Resources\sn_bc.csv" />
+    <None Include="Resources\sn_mb.csv" />
+    <None Include="Resources\sn_nb.csv" />
+    <None Include="Resources\sn_nl.csv" />
+    <None Include="Resources\sn_ns.csv" />
+    <None Include="Resources\sn_on.csv" />
+    <None Include="Resources\sn_pe.csv" />
+    <None Include="Resources\sn_qc.csv" />
+    <None Include="Resources\sn_sk.csv" />
+    <None Include="Resources\SP_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\SP__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\Swine_Feed_Ingredient_List.csv" />
+    <None Include="Resources\Table_1.csv" />
+    <None Include="Resources\Table_10.csv" />
+    <None Include="Resources\Table_11_16_26.csv" />
+    <None Include="Resources\Table_12_17_30.csv" />
+    <None Include="Resources\Table_13_18.csv" />
+    <None Include="Resources\Table_14_19_23.csv" />
+    <None Include="Resources\Table_2.csv" />
+    <None Include="Resources\Table_20.csv" />
+    <None Include="Resources\Table_21.csv" />
+    <None Include="Resources\Table_22_24.csv" />
+    <None Include="Resources\Table_3.csv" />
+    <None Include="Resources\Table_30.csv" />
+    <None Include="Resources\Table_33.csv" />
+    <None Include="Resources\Table_38.csv" />
+    <None Include="Resources\Table_5.csv" />
+    <None Include="Resources\Table_6.csv" />
+    <None Include="Resources\Table_7.csv" />
+    <None Include="Resources\Table_7_8_9.csv" />
+    <None Include="Resources\Table_8.csv" />
+    <None Include="Resources\Table_9.csv" />
+    <None Include="Resources\white_spruce__31_allclusters_future.csv" />
+    <None Include="Resources\WS_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\WS__31_allclusters_future_DOM.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
+      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
+      <Name>H.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-settings-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map - Copy.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings_50_px.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

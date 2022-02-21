@@ -1,0 +1,3459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Acres" xml:space="preserve">
+    <value>acre</value>
+  </data>
+  <data name="Alberta" xml:space="preserve">
+    <value>Alberta</value>
+  </data>
+  <data name="AlfalfaSeed" xml:space="preserve">
+    <value>semence de luzerne</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>tous</value>
+  </data>
+  <data name="AmmoniaPerCubicMeterPerDay" xml:space="preserve">
+    <value>NH3 m^-3 d^-1</value>
+  </data>
+  <data name="AmmoniaPerCubicYardPerDay" xml:space="preserve">
+    <value>NH3 yd^-3 d^-1</value>
+  </data>
+  <data name="AnaerobicDigesterHandlingSystemName" xml:space="preserve">
+    <value>digesteur anaérobie</value>
+  </data>
+  <data name="AnaerobicDigestionStepOneInfo" xml:space="preserve">
+    <value>The default biogas and methane paramters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure or farm residue substrate types.</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>avril</value>
+  </data>
+  <data name="AtlanticMaritimes" xml:space="preserve">
+    <value>maritime de l'Atlantique</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>août</value>
+  </data>
+  <data name="AverageConifer" xml:space="preserve">
+    <value>conifère moyen</value>
+  </data>
+  <data name="AverageDeciduous" xml:space="preserve">
+    <value>feuillu moyen</value>
+  </data>
+  <data name="AverageQualityForage" xml:space="preserve">
+    <value>fourrage de qualité moyenne</value>
+  </data>
+  <data name="Barley" xml:space="preserve">
+    <value>orge </value>
+  </data>
+  <data name="BarleyDietType" xml:space="preserve">
+    <value>ration d'orge</value>
+  </data>
+  <data name="BarleySilage" xml:space="preserve">
+    <value>ensilage d'orge</value>
+  </data>
+  <data name="BarleySilageUnderSeed" xml:space="preserve">
+    <value>ensilage d'orge contre-ensemencée</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>noir </value>
+  </data>
+  <data name="BlackChernozem" xml:space="preserve">
+    <value>chernozem noir</value>
+  </data>
+  <data name="BlackGrayChernozem" xml:space="preserve">
+    <value>chernozem gris-noir</value>
+  </data>
+  <data name="BorealPlains" xml:space="preserve">
+    <value>Plaines boréales</value>
+  </data>
+  <data name="BorealShieldEast" xml:space="preserve">
+    <value>Bouclier boréal est</value>
+  </data>
+  <data name="BorealShieldWest" xml:space="preserve">
+    <value>Bouclier boréal ouest</value>
+  </data>
+  <data name="BritishColumbia" xml:space="preserve">
+    <value>Colombie-Britannique</value>
+  </data>
+  <data name="BromeHay" xml:space="preserve">
+    <value>foin de brome</value>
+  </data>
+  <data name="Brown" xml:space="preserve">
+    <value>brun</value>
+  </data>
+  <data name="BrownChernozem" xml:space="preserve">
+    <value>chernozem brun</value>
+  </data>
+  <data name="Buckwheat" xml:space="preserve">
+    <value>sarrasin </value>
+  </data>
+  <data name="BulkDensity" xml:space="preserve">
+    <value>densité apparente</value>
+  </data>
+  <data name="BushelsPerAcre" xml:space="preserve">
+    <value>boiss. a^-1</value>
+  </data>
+  <data name="ButtonAddFarmResidueSubstrateTypes" xml:space="preserve">
+    <value>Add Farm Residue Substrate Type</value>
+  </data>
+  <data name="ButtonAddManureSubstrateTypes" xml:space="preserve">
+    <value>Add Manure Substrate Type</value>
+  </data>
+  <data name="CanarySeed" xml:space="preserve">
+    <value>graine à canaris</value>
+  </data>
+  <data name="Canola" xml:space="preserve">
+    <value>canola</value>
+  </data>
+  <data name="Caragana" xml:space="preserve">
+    <value>caragana</value>
+  </data>
+  <data name="Caraway" xml:space="preserve">
+    <value>carvi commun</value>
+  </data>
+  <data name="Carrot" xml:space="preserve">
+    <value>carotte</value>
+  </data>
+  <data name="Centimeters" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="Chickpeas" xml:space="preserve">
+    <value>pois chiches</value>
+  </data>
+  <data name="CloseUpDietType" xml:space="preserve">
+    <value>ration de début de tarissement</value>
+  </data>
+  <data name="CO2Equivalents" xml:space="preserve">
+    <value>CO₂e</value>
+  </data>
+  <data name="Coarse" xml:space="preserve">
+    <value>grossier</value>
+  </data>
+  <data name="ColoradoSpruce" xml:space="preserve">
+    <value>épinette du Colorado</value>
+  </data>
+  <data name="ColouredWhiteFabaBeans" xml:space="preserve">
+    <value>féveroles de couleur blanche</value>
+  </data>
+  <data name="CommandShowAdditionalInformation" xml:space="preserve">
+    <value>Afficher les renseignements additionnels</value>
+  </data>
+  <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
+    <value>compost intensif</value>
+  </data>
+  <data name="CompostPassiveHandlingSystemName" xml:space="preserve">
+    <value>compost passif</value>
+  </data>
+  <data name="Confined" xml:space="preserve">
+    <value>confiné</value>
+  </data>
+  <data name="ConfinedNoBarn" xml:space="preserve">
+    <value>confiné ailleurs que dans une étable</value>
+  </data>
+  <data name="ContinousCroppingToFallow" xml:space="preserve">
+    <value>transition de cultures en continu à jachère</value>
+  </data>
+  <data name="CornDietType" xml:space="preserve">
+    <value>ration à base de maïs</value>
+  </data>
+  <data name="CornSilage" xml:space="preserve">
+    <value>ensilage de maïs</value>
+  </data>
+  <data name="CPSWheat" xml:space="preserve">
+    <value>blé CPS</value>
+  </data>
+  <data name="CubicKilogramPerTonne" xml:space="preserve">
+    <value>(kg t^-1)^3</value>
+  </data>
+  <data name="CubicMetersMethanePerKilogramVolatileSolids" xml:space="preserve">
+    <value>m³ CH₄ (kg SV)^-1</value>
+  </data>
+  <data name="CubicPoundsPerTon" xml:space="preserve">
+    <value>(lb ton^-1)^3</value>
+  </data>
+  <data name="CubicYardsMethanePerPoundVolatileSolids" xml:space="preserve">
+    <value>verges³ CH₄ (lb SV)^-1</value>
+  </data>
+  <data name="DailySpreadHandlingSystemName" xml:space="preserve">
+    <value>épandage quotidien</value>
+  </data>
+  <data name="Dairy" xml:space="preserve">
+    <value>bovins laitiers</value>
+  </data>
+  <data name="DarkBrown" xml:space="preserve">
+    <value>brun foncé</value>
+  </data>
+  <data name="DarkBrownChernozem" xml:space="preserve">
+    <value>chernozem brun foncé</value>
+  </data>
+  <data name="DarkGrayChernozem" xml:space="preserve">
+    <value>chernozem gris foncé</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>décembre</value>
+  </data>
+  <data name="DecreaseInPerennialCroppingArea" xml:space="preserve">
+    <value>diminution de la superficie en cultures vivaces</value>
+  </data>
+  <data name="DeepBeddingHandlingSystemName" xml:space="preserve">
+    <value>litière accumulée</value>
+  </data>
+  <data name="DeepPitHandlingSystemName" xml:space="preserve">
+    <value>fosse profonde</value>
+  </data>
+  <data name="DegreesCelsius" xml:space="preserve">
+    <value>° C</value>
+  </data>
+  <data name="DegreesFahrenheit" xml:space="preserve">
+    <value>° F</value>
+  </data>
+  <data name="Dill" xml:space="preserve">
+    <value>aneth</value>
+  </data>
+  <data name="DryBean" xml:space="preserve">
+    <value>haricot sec</value>
+  </data>
+  <data name="Drylot" xml:space="preserve">
+    <value>parc d'élevage</value>
+  </data>
+  <data name="DryPeas" xml:space="preserve">
+    <value>pois secs</value>
+  </data>
+  <data name="Durum" xml:space="preserve">
+    <value>blé dur</value>
+  </data>
+  <data name="DystricBrunisol" xml:space="preserve">
+    <value>brunisol dystrique</value>
+  </data>
+  <data name="EasternCanada" xml:space="preserve">
+    <value>Est du Canada</value>
+  </data>
+  <data name="Ecodistrict" xml:space="preserve">
+    <value>écodistrict</value>
+  </data>
+  <data name="EnclosedPasture" xml:space="preserve">
+    <value>pâturage en enclos</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>anglais</value>
+  </data>
+  <data name="EnumAcres" xml:space="preserve">
+    <value>acres</value>
+  </data>
+  <data name="EnumAlpacas" xml:space="preserve">
+    <value>alpagas</value>
+  </data>
+  <data name="EnumAnimal" xml:space="preserve">
+    <value>animal</value>
+  </data>
+  <data name="EnumApril" xml:space="preserve">
+    <value>avril</value>
+  </data>
+  <data name="EnumAugust" xml:space="preserve">
+    <value>août</value>
+  </data>
+  <data name="EnumAverageYield" xml:space="preserve">
+    <value>rendement moyen</value>
+  </data>
+  <data name="EnumBackgrounding" xml:space="preserve">
+    <value>semi-finition</value>
+  </data>
+  <data name="EnumBarley" xml:space="preserve">
+    <value>orge</value>
+  </data>
+  <data name="EnumBarleyStraw" xml:space="preserve">
+    <value>Barley Straw</value>
+  </data>
+  <data name="EnumBeans" xml:space="preserve">
+    <value>Beans</value>
+  </data>
+  <data name="EnumBeansDryField" xml:space="preserve">
+    <value>haricots (champ sec)</value>
+  </data>
+  <data name="EnumBeef" xml:space="preserve">
+    <value>bovins de boucherie</value>
+  </data>
+  <data name="EnumBeefBackgrounder" xml:space="preserve">
+    <value>bovin semi-fini</value>
+  </data>
+  <data name="EnumBeefBackgrounderHeifer" xml:space="preserve">
+    <value>génisses</value>
+  </data>
+  <data name="EnumBeefBackgrounderSteer" xml:space="preserve">
+    <value>bouvillons</value>
+  </data>
+  <data name="EnumBeefBull" xml:space="preserve">
+    <value>taureaux</value>
+  </data>
+  <data name="EnumBeefCalf" xml:space="preserve">
+    <value>veaux</value>
+  </data>
+  <data name="EnumBeefCow" xml:space="preserve">
+    <value>vache de boucherie</value>
+  </data>
+  <data name="EnumBeefCowDry" xml:space="preserve">
+    <value>vaches taries</value>
+  </data>
+  <data name="EnumBeefCowLactating" xml:space="preserve">
+    <value>vaches</value>
+  </data>
+  <data name="EnumBeefFinisher" xml:space="preserve">
+    <value>bovin fini</value>
+  </data>
+  <data name="EnumBeefFinishingHeifer" xml:space="preserve">
+    <value>génisses</value>
+  </data>
+  <data name="EnumBeefFinishingSteer" xml:space="preserve">
+    <value>bouvillons</value>
+  </data>
+  <data name="EnumBeefManure" xml:space="preserve">
+    <value>fumier de bœuf</value>
+  </data>
+  <data name="EnumBeefProduction" xml:space="preserve">
+    <value>production bovine</value>
+  </data>
+  <data name="EnumBerriesAndGraps" xml:space="preserve">
+    <value>baies et raisins</value>
+  </data>
+  <data name="EnumBison" xml:space="preserve">
+    <value>bison</value>
+  </data>
+  <data name="EnumBoar" xml:space="preserve">
+    <value>verrats</value>
+  </data>
+  <data name="EnumBroilers" xml:space="preserve">
+    <value>poulets à griller</value>
+  </data>
+  <data name="EnumBrokenGrassland" xml:space="preserve">
+    <value>prairie (défrichée)</value>
+  </data>
+  <data name="EnumCalf" xml:space="preserve">
+    <value>veaux</value>
+  </data>
+  <data name="EnumCanola" xml:space="preserve">
+    <value>canola</value>
+  </data>
+  <data name="EnumCarMultipleYearAverage" xml:space="preserve">
+    <value>moyenne RAR</value>
+  </data>
+  <data name="EnumCarSingleYear" xml:space="preserve">
+    <value>année donnée RAR</value>
+  </data>
+  <data name="EnumCARValue" xml:space="preserve">
+    <value>valeur RAR (région agricole de recensement)</value>
+  </data>
+  <data name="EnumCashCrop" xml:space="preserve">
+    <value>culture commerciale</value>
+  </data>
+  <data name="EnumCattle" xml:space="preserve">
+    <value>Cattle</value>
+  </data>
+  <data name="EnumCereals" xml:space="preserve">
+    <value>Cereals</value>
+  </data>
+  <data name="EnumChemicalFallow" xml:space="preserve">
+    <value>chimique</value>
+  </data>
+  <data name="EnumChicken" xml:space="preserve">
+    <value>poules</value>
+  </data>
+  <data name="EnumChickpeas" xml:space="preserve">
+    <value>pois chiches</value>
+  </data>
+  <data name="EnumClay" xml:space="preserve">
+    <value>argile</value>
+  </data>
+  <data name="EnumComposted" xml:space="preserve">
+    <value>composté</value>
+  </data>
+  <data name="EnumConc" xml:space="preserve">
+    <value>conc </value>
+  </data>
+  <data name="EnumCorn" xml:space="preserve">
+    <value>maïs</value>
+  </data>
+  <data name="EnumCornFodder" xml:space="preserve">
+    <value>maïs (fourrager)</value>
+  </data>
+  <data name="EnumCornGrain" xml:space="preserve">
+    <value>maïs (grain)</value>
+  </data>
+  <data name="EnumCornSilage" xml:space="preserve">
+    <value>Corn Silage</value>
+  </data>
+  <data name="EnumCornStover" xml:space="preserve">
+    <value>Corn Stover</value>
+  </data>
+  <data name="EnumCowCalf" xml:space="preserve">
+    <value>vache-veau</value>
+  </data>
+  <data name="EnumCropNotSelected" xml:space="preserve">
+    <value>choisir culture</value>
+  </data>
+  <data name="EnumCropsDirectN2O" xml:space="preserve">
+    <value>émissions directes de N2O de la culture</value>
+  </data>
+  <data name="EnumCropsIndirectN2O" xml:space="preserve">
+    <value>émissions indirectes de N2O de la culture</value>
+  </data>
+  <data name="EnumCustom" xml:space="preserve">
+    <value>personnalisé</value>
+  </data>
+  <data name="EnumCustomYield" xml:space="preserve">
+    <value>rendement personnalisé</value>
+  </data>
+  <data name="EnumDairy" xml:space="preserve">
+    <value>bovins laitiers</value>
+  </data>
+  <data name="EnumDairyBulls" xml:space="preserve">
+    <value>taureaux laitiers</value>
+  </data>
+  <data name="EnumDairyCalves" xml:space="preserve">
+    <value>veaux laitiers</value>
+  </data>
+  <data name="EnumDairyDry" xml:space="preserve">
+    <value>laitier tari / laitière tarie</value>
+  </data>
+  <data name="EnumDairyHeifers" xml:space="preserve">
+    <value>génisses laitières</value>
+  </data>
+  <data name="EnumDairyLactating" xml:space="preserve">
+    <value>laitier en lactation / laitière en lactation</value>
+  </data>
+  <data name="EnumDairyManure" xml:space="preserve">
+    <value>fumier de bovins laitiers</value>
+  </data>
+  <data name="EnumDecayRateActive" xml:space="preserve">
+    <value>Decary Rate Active</value>
+  </data>
+  <data name="EnumDecayRatePassive" xml:space="preserve">
+    <value>Decay Rate Passive</value>
+  </data>
+  <data name="EnumDecayRateSlow" xml:space="preserve">
+    <value>Decay Rate Slow</value>
+  </data>
+  <data name="EnumDecember" xml:space="preserve">
+    <value>décembre</value>
+  </data>
+  <data name="EnumDeer" xml:space="preserve">
+    <value>chevreuil</value>
+  </data>
+  <data name="EnumDefault" xml:space="preserve">
+    <value>défaut</value>
+  </data>
+  <data name="EnumDryFieldPeas" xml:space="preserve">
+    <value>Dry field peas</value>
+  </data>
+  <data name="EnumDryPeas" xml:space="preserve">
+    <value>pois secs</value>
+  </data>
+  <data name="EnumDrySow" xml:space="preserve">
+    <value>truies taries</value>
+  </data>
+  <data name="EnumDucks" xml:space="preserve">
+    <value>canards</value>
+  </data>
+  <data name="EnumElk" xml:space="preserve">
+    <value>wapiti</value>
+  </data>
+  <data name="EnumEllisEq8d" xml:space="preserve">
+    <value>Ellis et al. (2007) Éq. 8 d</value>
+  </data>
+  <data name="EnumEllisEtAlEquation10B" xml:space="preserve">
+    <value>Ellis et al. (2007) Éq. 10 b</value>
+  </data>
+  <data name="EnumEllisEtAlEquation12B" xml:space="preserve">
+    <value>Ellis et al. (2007) Éq. 12 b</value>
+  </data>
+  <data name="EnumEllisEtAlEquation9B" xml:space="preserve">
+    <value>Ellis et al. (2007) Éq. 9 b</value>
+  </data>
+  <data name="EnumEllisEtAlEquationG" xml:space="preserve">
+    <value>Ellis et al. (2009) Éq. G</value>
+  </data>
+  <data name="EnumEllisEtAlEquationN" xml:space="preserve">
+    <value>Ellis et al. (2009) Éq. N</value>
+  </data>
+  <data name="EnumEnglish" xml:space="preserve">
+    <value>English/Anglais</value>
+  </data>
+  <data name="EnumEntericMethane" xml:space="preserve">
+    <value>méthane entérique</value>
+  </data>
+  <data name="EnumEscobarBahamondes2017aLFMC" xml:space="preserve">
+    <value>Escobar-Bahamondes et al. (2017a) Éq. LF-MC</value>
+  </data>
+  <data name="EnumEscobarBahamondesEtAlHighForage" xml:space="preserve">
+    <value>Escobar-Bahamondes et al. (2017a) — régime riche en fourrage</value>
+  </data>
+  <data name="EnumEscobarBahamondesEtAlLowForage" xml:space="preserve">
+    <value>Escobar-Bahamondes et al. (2017a) — régime faible en fourrage</value>
+  </data>
+  <data name="EnumEscobarBahamondesEtAlMediumForage" xml:space="preserve">
+    <value>Escobar-Bahamondes et al. (2017a) — régime moyen en fourrage</value>
+  </data>
+  <data name="EnumEscobarEcobarBahamondes2017a" xml:space="preserve">
+    <value>Escobar-Bahamondes et al. (2017a) Éq. AL-OR</value>
+  </data>
+  <data name="EnumEwes" xml:space="preserve">
+    <value>brebis</value>
+  </data>
+  <data name="EnumFallow" xml:space="preserve">
+    <value>jachère</value>
+  </data>
+  <data name="EnumFallRye" xml:space="preserve">
+    <value>seigle d'automne</value>
+  </data>
+  <data name="EnumFarrowToWean" xml:space="preserve">
+    <value>naissage-sevrage</value>
+  </data>
+  <data name="EnumFebruary" xml:space="preserve">
+    <value>février</value>
+  </data>
+  <data name="EnumField" xml:space="preserve">
+    <value>champ</value>
+  </data>
+  <data name="EnumFieldPeas" xml:space="preserve">
+    <value>pois cultivés</value>
+  </data>
+  <data name="EnumFinishing" xml:space="preserve">
+    <value>finition</value>
+  </data>
+  <data name="EnumFlax" xml:space="preserve">
+    <value>lin</value>
+  </data>
+  <data name="EnumFlooding" xml:space="preserve">
+    <value>inondation</value>
+  </data>
+  <data name="EnumFoodWaste" xml:space="preserve">
+    <value>Food Waste</value>
+  </data>
+  <data name="EnumForage" xml:space="preserve">
+    <value>fourrage</value>
+  </data>
+  <data name="EnumForageForSeed" xml:space="preserve">
+    <value>fourrage pour la production de semence</value>
+  </data>
+  <data name="EnumForageGrowthStageOne" xml:space="preserve">
+    <value>précoce</value>
+  </data>
+  <data name="EnumForageGrowthStageThree" xml:space="preserve">
+    <value>tardif</value>
+  </data>
+  <data name="EnumForageGrowthStageTwo" xml:space="preserve">
+    <value>mi-saison</value>
+  </data>
+  <data name="EnumFourPercentFat" xml:space="preserve">
+    <value>4 % de matières grasses</value>
+  </data>
+  <data name="EnumFractionActiveDecayToPassive" xml:space="preserve">
+    <value>Fraction active sub-pool decay to passive</value>
+  </data>
+  <data name="EnumFractionMetabolicDMActivePool" xml:space="preserve">
+    <value>Fraction metabolic dead matter active pool</value>
+  </data>
+  <data name="EnumFractionOrganicNitrogen" xml:space="preserve">
+    <value>ex</value>
+  </data>
+  <data name="EnumFractionPassiveDecayToActive" xml:space="preserve">
+    <value>Fraction passive sub-pool decay to active</value>
+  </data>
+  <data name="EnumFractionRawMaterials" xml:space="preserve">
+    <value>Fraction raw materials</value>
+  </data>
+  <data name="EnumFractionSlowDecayToActive" xml:space="preserve">
+    <value>Fraction slow sub-pool decay to active</value>
+  </data>
+  <data name="EnumFractionSlowDecayToPassive" xml:space="preserve">
+    <value>Fraction slow sub-pool decay to passive</value>
+  </data>
+  <data name="EnumFractionStructuralDMActivePool" xml:space="preserve">
+    <value>Fraction structural  dead matter active pool</value>
+  </data>
+  <data name="EnumFractionStructuralDMSlowPool" xml:space="preserve">
+    <value>Fraction structural dead matter slow pool</value>
+  </data>
+  <data name="EnumFractionTotalAmmoniumNitrogen" xml:space="preserve">
+    <value>Fraction total ammonium nitrogen</value>
+  </data>
+  <data name="EnumFractionTotalSolids" xml:space="preserve">
+    <value>Fraction total solids</value>
+  </data>
+  <data name="EnumFractionVolatileSolids" xml:space="preserve">
+    <value>Fraction volatile solids</value>
+  </data>
+  <data name="EnumFrench" xml:space="preserve">
+    <value>Français/French</value>
+  </data>
+  <data name="EnumGeese" xml:space="preserve">
+    <value>oies</value>
+  </data>
+  <data name="EnumGenericGrains" xml:space="preserve">
+    <value>Generic grains</value>
+  </data>
+  <data name="EnumGoats" xml:space="preserve">
+    <value>chèvres</value>
+  </data>
+  <data name="EnumGrains" xml:space="preserve">
+    <value>grains</value>
+  </data>
+  <data name="EnumGrams" xml:space="preserve">
+    <value>grammes</value>
+  </data>
+  <data name="EnumGrassClippings" xml:space="preserve">
+    <value>Grass Clippings</value>
+  </data>
+  <data name="EnumGrassCloverMixtures" xml:space="preserve">
+    <value>Grass-clover mixtures</value>
+  </data>
+  <data name="EnumGrasslandNative" xml:space="preserve">
+    <value>prairie (indigène)</value>
+  </data>
+  <data name="EnumGrasslandSeeded" xml:space="preserve">
+    <value>prairie (ensemencée)</value>
+  </data>
+  <data name="EnumGrassSilage" xml:space="preserve">
+    <value>Grass Silage</value>
+  </data>
+  <data name="EnumGrazed" xml:space="preserve">
+    <value>brouté</value>
+  </data>
+  <data name="EnumGreenManure" xml:space="preserve">
+    <value>engrais vert</value>
+  </data>
+  <data name="EnumGrower" xml:space="preserve">
+    <value>porcs  </value>
+  </data>
+  <data name="EnumHairyVetch" xml:space="preserve">
+    <value>vesce velue</value>
+  </data>
+  <data name="EnumHairyVetchAndRye" xml:space="preserve">
+    <value>vesce velue et seigle</value>
+  </data>
+  <data name="EnumHayed" xml:space="preserve">
+    <value>fauché</value>
+  </data>
+  <data name="EnumHayGrass" xml:space="preserve">
+    <value>foin de graminées</value>
+  </data>
+  <data name="EnumHayLegume" xml:space="preserve">
+    <value>foin de légumineuses</value>
+  </data>
+  <data name="EnumHayMixed" xml:space="preserve">
+    <value>mélange de foin</value>
+  </data>
+  <data name="EnumHectares" xml:space="preserve">
+    <value>hectares</value>
+  </data>
+  <data name="EnumHeifer" xml:space="preserve">
+    <value>génisses</value>
+  </data>
+  <data name="EnumHorses" xml:space="preserve">
+    <value>chevaux</value>
+  </data>
+  <data name="EnumImperfectlyDrained" xml:space="preserve">
+    <value>imparfaitement drainé</value>
+  </data>
+  <data name="EnumImported" xml:space="preserve">
+    <value>importé</value>
+  </data>
+  <data name="EnumInches" xml:space="preserve">
+    <value>pouces</value>
+  </data>
+  <data name="EnumInfrastructure" xml:space="preserve">
+    <value>Infrastructure</value>
+  </data>
+  <data name="EnumInputFile" xml:space="preserve">
+    <value>fichier d'entrée</value>
+  </data>
+  <data name="EnumIntensiveTillage" xml:space="preserve">
+    <value>travail intensif du sol</value>
+  </data>
+  <data name="EnumIonophore" xml:space="preserve">
+    <value>ionophore</value>
+  </data>
+  <data name="EnumIonophorePlusFourPercentFat" xml:space="preserve">
+    <value>ionophore + 4 % de matières grasses</value>
+  </data>
+  <data name="EnumIonophorePlusTwoPercentFat" xml:space="preserve">
+    <value>ionophore + 2 % de matières grasses</value>
+  </data>
+  <data name="EnumJanuary" xml:space="preserve">
+    <value>janvier</value>
+  </data>
+  <data name="EnumJuly" xml:space="preserve">
+    <value>juillet</value>
+  </data>
+  <data name="EnumJune" xml:space="preserve">
+    <value>juin</value>
+  </data>
+  <data name="EnumKgC02e" xml:space="preserve">
+    <value>kg CO2e</value>
+  </data>
+  <data name="EnumKgGhg" xml:space="preserve">
+    <value>kg de GES</value>
+  </data>
+  <data name="EnumKilograms" xml:space="preserve">
+    <value>kilogrammes</value>
+  </data>
+  <data name="EnumLactatingSow" xml:space="preserve">
+    <value>truies en lactation</value>
+  </data>
+  <data name="EnumLambs" xml:space="preserve">
+    <value>agneaux</value>
+  </data>
+  <data name="EnumLambsAndEwes" xml:space="preserve">
+    <value>agneaux et brebis</value>
+  </data>
+  <data name="EnumLandManagement" xml:space="preserve">
+    <value>gestion des terres</value>
+  </data>
+  <data name="EnumLayersDryPoultry" xml:space="preserve">
+    <value>pondeuses (fumier sec)</value>
+  </data>
+  <data name="EnumLayersWetPoultry" xml:space="preserve">
+    <value>pondeuses (fumier humide)</value>
+  </data>
+  <data name="EnumLingen2019eq17" xml:space="preserve">
+    <value>Lingen et al. (2019) Éq. 17</value>
+  </data>
+  <data name="EnumLiquid" xml:space="preserve">
+    <value>liquide</value>
+  </data>
+  <data name="EnumLiquidSeparated" xml:space="preserve">
+    <value>liquide séparé</value>
+  </data>
+  <data name="EnumLivestock" xml:space="preserve">
+    <value>bétail</value>
+  </data>
+  <data name="EnumLivestockDirectN20" xml:space="preserve">
+    <value>bétail N2O direct</value>
+  </data>
+  <data name="EnumLivestockIndirectN2O" xml:space="preserve">
+    <value>bétail N2O indirect</value>
+  </data>
+  <data name="EnumLlamas" xml:space="preserve">
+    <value>lamas</value>
+  </data>
+  <data name="EnumLoam" xml:space="preserve">
+    <value>loam</value>
+  </data>
+  <data name="EnumMaizeGrain" xml:space="preserve">
+    <value>Maize Grain</value>
+  </data>
+  <data name="EnumMaizeSilage" xml:space="preserve">
+    <value>Maize Silage</value>
+  </data>
+  <data name="EnumManureMethane" xml:space="preserve">
+    <value>méthane du fumier</value>
+  </data>
+  <data name="EnumMarch" xml:space="preserve">
+    <value>mars</value>
+  </data>
+  <data name="EnumMaximumAvgTemperature" xml:space="preserve">
+    <value>Maximum Montly Average Temperature</value>
+  </data>
+  <data name="EnumMay" xml:space="preserve">
+    <value>mai</value>
+  </data>
+  <data name="EnumMechanicalFallow" xml:space="preserve">
+    <value>mécanique</value>
+  </data>
+  <data name="EnumMgC02e" xml:space="preserve">
+    <value>Mg de CO2e</value>
+  </data>
+  <data name="EnumMgGhg" xml:space="preserve">
+    <value>Mg de GES</value>
+  </data>
+  <data name="EnumMillimeters" xml:space="preserve">
+    <value>millimètres</value>
+  </data>
+  <data name="EnumMillsEtAl" xml:space="preserve">
+    <value>Mills et al. (2013) Éq. NL2</value>
+  </data>
+  <data name="EnumModeratelyWellDrained" xml:space="preserve">
+    <value>modérément bien drainé</value>
+  </data>
+  <data name="EnumMoraesEtAlDietaryAnimalLevel1" xml:space="preserve">
+    <value>Moraes et al. (2014) : niveau animal (1)</value>
+  </data>
+  <data name="EnumMoraesEtAlDietaryAnimalLevel2" xml:space="preserve">
+    <value>Moraes et al. (2014) : niveau animal (2)</value>
+  </data>
+  <data name="EnumMoraesEtAlDietaryLevel1" xml:space="preserve">
+    <value>Moraes et al. (2014) : niveau alimentaire (1)</value>
+  </data>
+  <data name="EnumMoraesEtAlDietaryLevel2" xml:space="preserve">
+    <value>Moraes et al. (2014) : niveau alimentaire (2)</value>
+  </data>
+  <data name="EnumMules" xml:space="preserve">
+    <value>mules</value>
+  </data>
+  <data name="EnumNFixingForages" xml:space="preserve">
+    <value>N-fixing forages</value>
+  </data>
+  <data name="EnumNineteenEightyToNineteenNinety" xml:space="preserve">
+    <value>1980 à 1990</value>
+  </data>
+  <data name="EnumNineteenNinetyToTwoThousand" xml:space="preserve">
+    <value>1990 à 2000</value>
+  </data>
+  <data name="EnumNo" xml:space="preserve">
+    <value>non</value>
+  </data>
+  <data name="EnumNone" xml:space="preserve">
+    <value>aucun</value>
+  </data>
+  <data name="EnumNonLegumeHay" xml:space="preserve">
+    <value>Non-legume hay</value>
+  </data>
+  <data name="EnumNonNFixingForages" xml:space="preserve">
+    <value>Non-N-fixing forages</value>
+  </data>
+  <data name="EnumNotApplicable" xml:space="preserve">
+    <value>sans objet</value>
+  </data>
+  <data name="EnumNotAvailable" xml:space="preserve">
+    <value>non disponible</value>
+  </data>
+  <data name="EnumNoTillTillage" xml:space="preserve">
+    <value>culture sans travail du sol</value>
+  </data>
+  <data name="EnumNotSelected" xml:space="preserve">
+    <value>non sélectionné</value>
+  </data>
+  <data name="EnumNovember" xml:space="preserve">
+    <value>novembre</value>
+  </data>
+  <data name="EnumNuiEtAl" xml:space="preserve">
+    <value>Niu et al. (2018) Éq. 5</value>
+  </data>
+  <data name="EnumOatSilage" xml:space="preserve">
+    <value>Oat Silage</value>
+  </data>
+  <data name="EnumOatStraw" xml:space="preserve">
+    <value>Oat Straw</value>
+  </data>
+  <data name="EnumOctober" xml:space="preserve">
+    <value>octobre</value>
+  </data>
+  <data name="EnumOptimumTemperature" xml:space="preserve">
+    <value>Optimum Temperature</value>
+  </data>
+  <data name="EnumOptionA" xml:space="preserve">
+    <value>Option A</value>
+  </data>
+  <data name="EnumOptionB" xml:space="preserve">
+    <value>Option B</value>
+  </data>
+  <data name="EnumOptionC" xml:space="preserve">
+    <value>Option C</value>
+  </data>
+  <data name="EnumOrganicNitrogen" xml:space="preserve">
+    <value>Organic nitrogen</value>
+  </data>
+  <data name="EnumOtherDryFieldBeans" xml:space="preserve">
+    <value>Other dry field beans</value>
+  </data>
+  <data name="EnumOtherFieldCrops" xml:space="preserve">
+    <value>autres grandes cultures</value>
+  </data>
+  <data name="EnumOtherLivestock" xml:space="preserve">
+    <value>autre animal d'élevage</value>
+  </data>
+  <data name="EnumOtherLivestockManure" xml:space="preserve">
+    <value>fumier d'autre animal</value>
+  </data>
+  <data name="EnumPaddock" xml:space="preserve">
+    <value>enclos</value>
+  </data>
+  <data name="EnumPaddyStraw" xml:space="preserve">
+    <value>Paddy Straw</value>
+  </data>
+  <data name="EnumPeanuts" xml:space="preserve">
+    <value>Peanuts</value>
+  </data>
+  <data name="EnumPerennialForages" xml:space="preserve">
+    <value>plantes fourragères vivaces</value>
+  </data>
+  <data name="EnumPerennialGrasses" xml:space="preserve">
+    <value>Perennial grasses</value>
+  </data>
+  <data name="EnumPivot" xml:space="preserve">
+    <value>pivot </value>
+  </data>
+  <data name="EnumPoorlyDrained" xml:space="preserve">
+    <value>mal drainé</value>
+  </data>
+  <data name="EnumPoultry" xml:space="preserve">
+    <value>volaille</value>
+  </data>
+  <data name="EnumPoultryBroilers" xml:space="preserve">
+    <value>volaille à griller </value>
+  </data>
+  <data name="EnumPoultryDucks" xml:space="preserve">
+    <value>canards d'élevage</value>
+  </data>
+  <data name="EnumPoultryGeese" xml:space="preserve">
+    <value>oies d'élevage</value>
+  </data>
+  <data name="EnumPoultryLayersDry" xml:space="preserve">
+    <value>pondeuses – fumier sec</value>
+  </data>
+  <data name="EnumPoultryLayersWet" xml:space="preserve">
+    <value>pondeuses – fumier humide</value>
+  </data>
+  <data name="EnumPoultryManure" xml:space="preserve">
+    <value>fumier de volaille</value>
+  </data>
+  <data name="EnumPoultryTurkeys" xml:space="preserve">
+    <value>dindes d'élevage</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="EnumPounds" xml:space="preserve">
+    <value>livres</value>
+  </data>
+  <data name="EnumProjectionPeriod" xml:space="preserve">
+    <value>période de prévision</value>
+  </data>
+  <data name="EnumProvinceNotSelected" xml:space="preserve">
+    <value>choisir une province</value>
+  </data>
+  <data name="EnumPulses" xml:space="preserve">
+    <value>Pulses</value>
+  </data>
+  <data name="EnumRam" xml:space="preserve">
+    <value>béliers</value>
+  </data>
+  <data name="EnumRaminAndHuhtanen" xml:space="preserve">
+    <value>Ramin and Huhtanen (2013) Quad</value>
+  </data>
+  <data name="EnumRams" xml:space="preserve">
+    <value>béliers</value>
+  </data>
+  <data name="EnumRange" xml:space="preserve">
+    <value>aire de distribution</value>
+  </data>
+  <data name="EnumRapidlyDrained" xml:space="preserve">
+    <value>rapidement drainé</value>
+  </data>
+  <data name="EnumRawMaterial" xml:space="preserve">
+    <value>Raw material</value>
+  </data>
+  <data name="EnumReducedTillage" xml:space="preserve">
+    <value>travail réduit du sol</value>
+  </data>
+  <data name="EnumReplacementHeifers" xml:space="preserve">
+    <value>génisses de relève</value>
+  </data>
+  <data name="EnumRice" xml:space="preserve">
+    <value>Rice</value>
+  </data>
+  <data name="EnumRotation" xml:space="preserve">
+    <value>rotation</value>
+  </data>
+  <data name="EnumRyeStraw" xml:space="preserve">
+    <value>Rye Straw</value>
+  </data>
+  <data name="EnumSand" xml:space="preserve">
+    <value>sable</value>
+  </data>
+  <data name="EnumSeparatedManureSolid" xml:space="preserve">
+    <value>solides séparés du fumier</value>
+  </data>
+  <data name="EnumSeptember" xml:space="preserve">
+    <value>septembre</value>
+  </data>
+  <data name="EnumSheep" xml:space="preserve">
+    <value>mouton</value>
+  </data>
+  <data name="EnumSheepFeedlot" xml:space="preserve">
+    <value>parc d'engraissement de moutons</value>
+  </data>
+  <data name="EnumSheepManure" xml:space="preserve">
+    <value>fumier de mouton</value>
+  </data>
+  <data name="EnumSilage" xml:space="preserve">
+    <value>ensilage  </value>
+  </data>
+  <data name="EnumSilageCorn" xml:space="preserve">
+    <value>maïs-ensilage</value>
+  </data>
+  <data name="EnumSlopeParameter" xml:space="preserve">
+    <value>Slope Parameter</value>
+  </data>
+  <data name="EnumSlurry" xml:space="preserve">
+    <value>lisier  </value>
+  </data>
+  <data name="EnumSoilFunctionalAll" xml:space="preserve">
+    <value>tous</value>
+  </data>
+  <data name="EnumSolid" xml:space="preserve">
+    <value>solide</value>
+  </data>
+  <data name="EnumSorghum" xml:space="preserve">
+    <value>sorgho</value>
+  </data>
+  <data name="EnumSteer" xml:space="preserve">
+    <value>bouvillons</value>
+  </data>
+  <data name="EnumStockerHeifers" xml:space="preserve">
+    <value>génisse de long engraissement</value>
+  </data>
+  <data name="EnumStockerSteers" xml:space="preserve">
+    <value>bouvillon de long engraissement</value>
+  </data>
+  <data name="EnumStraw" xml:space="preserve">
+    <value>paille</value>
+  </data>
+  <data name="EnumStrawPellets" xml:space="preserve">
+    <value>Straw Pellets</value>
+  </data>
+  <data name="EnumStrawSample" xml:space="preserve">
+    <value>Straw Sample</value>
+  </data>
+  <data name="EnumSugarBeets" xml:space="preserve">
+    <value>betteraves à sucre</value>
+  </data>
+  <data name="EnumSummerFallow" xml:space="preserve">
+    <value>jachère d'été</value>
+  </data>
+  <data name="EnumSunflowerResidues" xml:space="preserve">
+    <value>Sunflower Residues</value>
+  </data>
+  <data name="EnumSwath" xml:space="preserve">
+    <value>andain</value>
+  </data>
+  <data name="EnumSwathing" xml:space="preserve">
+    <value>aindainage</value>
+  </data>
+  <data name="EnumSweageSludge" xml:space="preserve">
+    <value>Sweage Sludge</value>
+  </data>
+  <data name="EnumSwine" xml:space="preserve">
+    <value>porc</value>
+  </data>
+  <data name="EnumSwineDrySows" xml:space="preserve">
+    <value>truies taries</value>
+  </data>
+  <data name="EnumSwineFinishers" xml:space="preserve">
+    <value>porcs de finition</value>
+  </data>
+  <data name="EnumSwineGilts" xml:space="preserve">
+    <value>jeunes truies</value>
+  </data>
+  <data name="EnumSwineGrowers" xml:space="preserve">
+    <value>éleveurs de porcs</value>
+  </data>
+  <data name="EnumSwineIsoWean" xml:space="preserve">
+    <value>sevrage en isolement</value>
+  </data>
+  <data name="EnumSwineLactatingSows" xml:space="preserve">
+    <value>truies en lactation</value>
+  </data>
+  <data name="EnumSwineManure" xml:space="preserve">
+    <value>fumier de porc</value>
+  </data>
+  <data name="EnumSwinePiglets" xml:space="preserve">
+    <value>porcelets</value>
+  </data>
+  <data name="EnumSwineSows" xml:space="preserve">
+    <value>truies</value>
+  </data>
+  <data name="EnumSwineStarters" xml:space="preserve">
+    <value>porcs de début</value>
+  </data>
+  <data name="EnumSwineSwineFarrowToFinish" xml:space="preserve">
+    <value>naissage-finition</value>
+  </data>
+  <data name="EnumTillageAl" xml:space="preserve">
+    <value>tous</value>
+  </data>
+  <data name="EnumTillageModifier" xml:space="preserve">
+    <value>Tillage Modifier</value>
+  </data>
+  <data name="EnumTobacco" xml:space="preserve">
+    <value>tabac</value>
+  </data>
+  <data name="EnumTon" xml:space="preserve">
+    <value>Ton</value>
+  </data>
+  <data name="EnumTonne" xml:space="preserve">
+    <value>Tonne</value>
+  </data>
+  <data name="EnumTotalAmmoniaNitrogen" xml:space="preserve">
+    <value>Total ammonia nitrogen</value>
+  </data>
+  <data name="EnumTotalSolids" xml:space="preserve">
+    <value>Total solids</value>
+  </data>
+  <data name="EnumTreeFruitAndNuts" xml:space="preserve">
+    <value>fruits ou noix de l'arbre</value>
+  </data>
+  <data name="EnumTriticaleSilage" xml:space="preserve">
+    <value>ensilage de triticale</value>
+  </data>
+  <data name="EnumTriticaleStraw" xml:space="preserve">
+    <value>Triticale Straw</value>
+  </data>
+  <data name="EnumTubers" xml:space="preserve">
+    <value>Tubers</value>
+  </data>
+  <data name="EnumTurkeys" xml:space="preserve">
+    <value>dindes</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="EnumTwoPercentFat" xml:space="preserve">
+    <value>2 % de matières grasses</value>
+  </data>
+  <data name="EnumTwoThousandToCurrent" xml:space="preserve">
+    <value>de 2000 à aujourd'hui</value>
+  </data>
+  <data name="EnumVegetableOil" xml:space="preserve">
+    <value>Vegetable Oil</value>
+  </data>
+  <data name="EnumVegetables" xml:space="preserve">
+    <value>légumes</value>
+  </data>
+  <data name="EnumVeryPoorlyDrained" xml:space="preserve">
+    <value>très mal drainé</value>
+  </data>
+  <data name="EnumVeryRapidlyDrained" xml:space="preserve">
+    <value>très rapidement drainé</value>
+  </data>
+  <data name="EnumVolatileSolids" xml:space="preserve">
+    <value>Volatile solids</value>
+  </data>
+  <data name="EnumWeanedLamb" xml:space="preserve">
+    <value>agneaux sevrés</value>
+  </data>
+  <data name="EnumWellDrained" xml:space="preserve">
+    <value>bien drainé</value>
+  </data>
+  <data name="EnumWheat" xml:space="preserve">
+    <value>blé</value>
+  </data>
+  <data name="EnumWheatRye" xml:space="preserve">
+    <value>Wheat rye</value>
+  </data>
+  <data name="EnumWheatSilage" xml:space="preserve">
+    <value>ensilage de blé</value>
+  </data>
+  <data name="EnumWheatStraw" xml:space="preserve">
+    <value>Wheat Straw</value>
+  </data>
+  <data name="EnumWhiteBeans" xml:space="preserve">
+    <value>White beans</value>
+  </data>
+  <data name="EnumWinterWeeds" xml:space="preserve">
+    <value>mauvaises herbes hivernales</value>
+  </data>
+  <data name="EnumWoodChips" xml:space="preserve">
+    <value>copeaux de bois</value>
+  </data>
+  <data name="EnumYards" xml:space="preserve">
+    <value>verges</value>
+  </data>
+  <data name="EnumYes" xml:space="preserve">
+    <value>oui</value>
+  </data>
+  <data name="EnumYoungBulls" xml:space="preserve">
+    <value>taurillons</value>
+  </data>
+  <data name="ErrorFieldAreaCannotBeZero" xml:space="preserve">
+    <value>Le champ ne peut pas être 0</value>
+  </data>
+  <data name="EutricBrunisol" xml:space="preserve">
+    <value>brunisol eutrique</value>
+  </data>
+  <data name="ExceptionUnknowFeedTypeString" xml:space="preserve">
+    <value>type d’aliment inconnu '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownAnimalTypeString" xml:space="preserve">
+    <value>animal inconnu '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownCropType" xml:space="preserve">
+    <value>culture inconnue '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownDietType" xml:space="preserve">
+    <value>type de ration inconnue'{0}'</value>
+  </data>
+  <data name="ExceptionUnknownEcozoneString" xml:space="preserve">
+    <value>écozone inconnue '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownHandlingSystemName" xml:space="preserve">
+    <value>système de manutention inconnu '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownHardinessZoneString" xml:space="preserve">
+    <value>zone de rusticité inconnue '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownHousing" xml:space="preserve">
+    <value>logement inconnu '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownProvinceString" xml:space="preserve">
+    <value>province inconnue '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownSoilTextureString" xml:space="preserve">
+    <value>texture de sol inconnue '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownTillageType" xml:space="preserve">
+    <value>type de travail du sol inconnu '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownTreeSpecies" xml:space="preserve">
+    <value>espèce d’arbre inconnue '{0}'</value>
+  </data>
+  <data name="FabaBeans" xml:space="preserve">
+    <value>féveroles</value>
+  </data>
+  <data name="Fallow" xml:space="preserve">
+    <value>jachère</value>
+  </data>
+  <data name="FallowCroppingToContinous" xml:space="preserve">
+    <value>transition de jachère à cultures en continu</value>
+  </data>
+  <data name="FarOffDryDietType" xml:space="preserve">
+    <value>ration de fin de tarissement</value>
+  </data>
+  <data name="Fat" xml:space="preserve">
+    <value>gras</value>
+  </data>
+  <data name="FatG" xml:space="preserve">
+    <value>gras + G</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>février</value>
+  </data>
+  <data name="FerroHumicPodzol" xml:space="preserve">
+    <value>podzol ferrohumique</value>
+  </data>
+  <data name="Fibrisol" xml:space="preserve">
+    <value>fibrisol</value>
+  </data>
+  <data name="Fine" xml:space="preserve">
+    <value>fin </value>
+  </data>
+  <data name="FlatPasture" xml:space="preserve">
+    <value>pâturage plan</value>
+  </data>
+  <data name="Flax" xml:space="preserve">
+    <value>lin</value>
+  </data>
+  <data name="FlaxSeed" xml:space="preserve">
+    <value>graines de lin</value>
+  </data>
+  <data name="FodderCorn" xml:space="preserve">
+    <value>maïs fourrager</value>
+  </data>
+  <data name="Folisol" xml:space="preserve">
+    <value>folisol</value>
+  </data>
+  <data name="Forage" xml:space="preserve">
+    <value>fourrage</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>French </value>
+  </data>
+  <data name="FreshCornSweet" xml:space="preserve">
+    <value>maïs sucré frais</value>
+  </data>
+  <data name="FreshPeas" xml:space="preserve">
+    <value>pois frais</value>
+  </data>
+  <data name="GigajoulesPerAcre" xml:space="preserve">
+    <value>GJ a^-1</value>
+  </data>
+  <data name="GigajoulesPerHectare" xml:space="preserve">
+    <value>GJ ha^-1</value>
+  </data>
+  <data name="Gleysol" xml:space="preserve">
+    <value>gleysol</value>
+  </data>
+  <data name="GoodQualityForage" xml:space="preserve">
+    <value>fourrage de bonne qualité</value>
+  </data>
+  <data name="GrainCorn" xml:space="preserve">
+    <value>maïs-grain</value>
+  </data>
+  <data name="Grains" xml:space="preserve">
+    <value>grains</value>
+  </data>
+  <data name="GrainSorghum" xml:space="preserve">
+    <value>sorgho-grain</value>
+  </data>
+  <data name="GrainsPerPound" xml:space="preserve">
+    <value>grains lb^-1</value>
+  </data>
+  <data name="GramsPerKilogram" xml:space="preserve">
+    <value>g kg^-1</value>
+  </data>
+  <data name="GraphToolTipInfo" xml:space="preserve">
+    <value>Move your mouse over a field's graph to get information about specific years.</value>
+  </data>
+  <data name="GrassHay" xml:space="preserve">
+    <value>foin de graminées</value>
+  </data>
+  <data name="GrassSeed" xml:space="preserve">
+    <value>semences de graminées</value>
+  </data>
+  <data name="GrayBrownLuvisol" xml:space="preserve">
+    <value>luvisol brun gris</value>
+  </data>
+  <data name="GrayLuvisol" xml:space="preserve">
+    <value>luvisol gris</value>
+  </data>
+  <data name="GrazingOver3kmd" xml:space="preserve">
+    <value>pâturage sur plus de 3 km/j</value>
+  </data>
+  <data name="GrazingUnder3kmd" xml:space="preserve">
+    <value>pâturage sur moins de 3 km/j</value>
+  </data>
+  <data name="GreenAsh" xml:space="preserve">
+    <value>frêne vert</value>
+  </data>
+  <data name="GreenFeed" xml:space="preserve">
+    <value>fourrage vert</value>
+  </data>
+  <data name="H0a" xml:space="preserve">
+    <value>0a</value>
+  </data>
+  <data name="H0b" xml:space="preserve">
+    <value>0b</value>
+  </data>
+  <data name="H1a" xml:space="preserve">
+    <value>1a</value>
+  </data>
+  <data name="H1b" xml:space="preserve">
+    <value>1b</value>
+  </data>
+  <data name="H2a" xml:space="preserve">
+    <value>2a</value>
+  </data>
+  <data name="H2b" xml:space="preserve">
+    <value>2b</value>
+  </data>
+  <data name="H3a" xml:space="preserve">
+    <value>3a</value>
+  </data>
+  <data name="H3b" xml:space="preserve">
+    <value>3b</value>
+  </data>
+  <data name="H4a" xml:space="preserve">
+    <value>4a</value>
+  </data>
+  <data name="H4b" xml:space="preserve">
+    <value>4b</value>
+  </data>
+  <data name="H5a" xml:space="preserve">
+    <value>5a</value>
+  </data>
+  <data name="H5b" xml:space="preserve">
+    <value>5b</value>
+  </data>
+  <data name="H6a" xml:space="preserve">
+    <value>6a</value>
+  </data>
+  <data name="H6b" xml:space="preserve">
+    <value>6b</value>
+  </data>
+  <data name="H7a" xml:space="preserve">
+    <value>7a</value>
+  </data>
+  <data name="H7b" xml:space="preserve">
+    <value>7b</value>
+  </data>
+  <data name="H8a" xml:space="preserve">
+    <value>8a</value>
+  </data>
+  <data name="H8b" xml:space="preserve">
+    <value>8b</value>
+  </data>
+  <data name="H9a" xml:space="preserve">
+    <value>9a</value>
+  </data>
+  <data name="HardRedSpringWheat" xml:space="preserve">
+    <value>blé de force roux de printemps</value>
+  </data>
+  <data name="HayAndForageSeed" xml:space="preserve">
+    <value>foin et graines fourragères</value>
+  </data>
+  <data name="HayGrass" xml:space="preserve">
+    <value>foin – graminées</value>
+  </data>
+  <data name="HayLegume" xml:space="preserve">
+    <value>foin – légumineuses</value>
+  </data>
+  <data name="HayMixed" xml:space="preserve">
+    <value>foin – mélange</value>
+  </data>
+  <data name="Hectares" xml:space="preserve">
+    <value>ha</value>
+  </data>
+  <data name="HighEnergyAndProteinDietType" xml:space="preserve">
+    <value>ration à teneur élevée en énergie et en protéine</value>
+  </data>
+  <data name="HighEnergyDietType" xml:space="preserve">
+    <value>ration à teneur élevée en énergie  </value>
+  </data>
+  <data name="HighlyDigestibleFeed" xml:space="preserve">
+    <value>aliment hautement digestible</value>
+  </data>
+  <data name="HillyPastureOrOpenRange" xml:space="preserve">
+    <value>pâturage vallonné ou parcours libre</value>
+  </data>
+  <data name="HousedEwes" xml:space="preserve">
+    <value>brebis logées</value>
+  </data>
+  <data name="HousedInBarn" xml:space="preserve">
+    <value>logé en étable</value>
+  </data>
+  <data name="HousedInBarnSlurry" xml:space="preserve">
+    <value>logé en étable (lisier)</value>
+  </data>
+  <data name="HousedInBarnSolid" xml:space="preserve">
+    <value>logé en étable (solide)</value>
+  </data>
+  <data name="HumicGleysol" xml:space="preserve">
+    <value>gleysol humique</value>
+  </data>
+  <data name="HumicPodzol" xml:space="preserve">
+    <value>podzol humique</value>
+  </data>
+  <data name="HumicRegosol" xml:space="preserve">
+    <value>régosol humique</value>
+  </data>
+  <data name="HumicVertisol" xml:space="preserve">
+    <value>vertisol humique</value>
+  </data>
+  <data name="Humisol" xml:space="preserve">
+    <value>humisol</value>
+  </data>
+  <data name="HumoFerricPodzol" xml:space="preserve">
+    <value>podzol humo-ferrique</value>
+  </data>
+  <data name="HybridPoplar" xml:space="preserve">
+    <value>peuplier hybride</value>
+  </data>
+  <data name="Hyola" xml:space="preserve">
+    <value>Hyola</value>
+  </data>
+  <data name="Imperial" xml:space="preserve">
+    <value>impérial</value>
+  </data>
+  <data name="Inches" xml:space="preserve">
+    <value>po</value>
+  </data>
+  <data name="InchesPerYear" xml:space="preserve">
+    <value>po année^-1</value>
+  </data>
+  <data name="InchesToCm" xml:space="preserve">
+    <value>po</value>
+  </data>
+  <data name="InchesToMm" xml:space="preserve">
+    <value>po</value>
+  </data>
+  <data name="IncreaseInPerennialCroppingArea" xml:space="preserve">
+    <value>augmentation de la superficie des cultures vivaces</value>
+  </data>
+  <data name="IntenseToNone" xml:space="preserve">
+    <value>transition de travail intensif du sol à semis direct</value>
+  </data>
+  <data name="IntenseToReduced" xml:space="preserve">
+    <value>transition de travail intensif du sol à travail réduit du sol</value>
+  </data>
+  <data name="IntensiveTillage" xml:space="preserve">
+    <value>travail intensif du sol</value>
+  </data>
+  <data name="InternationalUnitsPerGrain" xml:space="preserve">
+    <value>UI céréales^-1</value>
+  </data>
+  <data name="InternationalUnitsPerGram" xml:space="preserve">
+    <value>UI g^-1</value>
+  </data>
+  <data name="InterpolatedGroupNumber" xml:space="preserve">
+    <value>groupe #{0}</value>
+  </data>
+  <data name="InvalidUnitOfMeasurement" xml:space="preserve">
+    <value>{0} est une unité de mesure invalide</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>janvier</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>juillet</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>juin</value>
+  </data>
+  <data name="KilogramPerHeadPerDay" xml:space="preserve">
+    <value>kg tête^-1 jour^-1</value>
+  </data>
+  <data name="KilogramPerHeadPerYear" xml:space="preserve">
+    <value>kg tête^-1année^-1</value>
+  </data>
+  <data name="KilogramPerKilogram" xml:space="preserve">
+    <value>kg kg^-1</value>
+  </data>
+  <data name="Kilograms" xml:space="preserve">
+    <value>kg</value>
+  </data>
+  <data name="KilogramsCarbonDioxidePerShelterbelt" xml:space="preserve">
+    <value>kg CO2 brise-vent^-1</value>
+  </data>
+  <data name="KilogramsCarbonPerHectare" xml:space="preserve">
+    <value>kg C ha^-1</value>
+  </data>
+  <data name="KilogramsCarbonPerPlanting" xml:space="preserve">
+    <value>kg C plantation^-1</value>
+  </data>
+  <data name="KilogramsCarbonPerTree" xml:space="preserve">
+    <value>kg C arbre^-1</value>
+  </data>
+  <data name="KilogramsMethane" xml:space="preserve">
+    <value>kg CH₄</value>
+  </data>
+  <data name="KilogramsMethanePerKilogramMethane" xml:space="preserve">
+    <value>kg CH4 (kg CH4)^-1</value>
+  </data>
+  <data name="KilogramsMethanePerYear" xml:space="preserve">
+    <value>kg CH₄ année^-1</value>
+  </data>
+  <data name="KilogramsN2NPerHectare" xml:space="preserve">
+    <value>kg N2-N ha^-1</value>
+  </data>
+  <data name="KilogramsN2NPerHectareString" xml:space="preserve">
+    <value>kg N2-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsN2ON" xml:space="preserve">
+    <value>kg N₂O-N</value>
+  </data>
+  <data name="KilogramsN2ONPerHectare" xml:space="preserve">
+    <value>kg N2O-N ha^-1</value>
+  </data>
+  <data name="KilogramsN2ONPerHectareString" xml:space="preserve">
+    <value>kg N2O-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsN2ONPerKilogramN" xml:space="preserve">
+    <value>kg N2O-N (kg N)^-1</value>
+  </data>
+  <data name="KilogramsN2ONPerYear" xml:space="preserve">
+    <value>kg N₂O-N année^-1</value>
+  </data>
+  <data name="KilogramsN2OPerYear" xml:space="preserve">
+    <value>kg N₂O année^-1</value>
+  </data>
+  <data name="KilogramsNH4NPerHectare" xml:space="preserve">
+    <value>kg NH4-N ha^-1</value>
+  </data>
+  <data name="KilogramsNH4NPerHectareString" xml:space="preserve">
+    <value>kg NH4-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsNitrogen" xml:space="preserve">
+    <value>kg N</value>
+  </data>
+  <data name="KilogramsNitrogenPerHectare" xml:space="preserve">
+    <value>kg N ha^-1</value>
+  </data>
+  <data name="KilogramsNitrogenPerHectarePerYear" xml:space="preserve">
+    <value>kg N ha^-1 année^-1</value>
+  </data>
+  <data name="KilogramsNitrogenPerKilogram" xml:space="preserve">
+    <value>kg N kg^-1</value>
+  </data>
+  <data name="KilogramsNO3NPerHectare" xml:space="preserve">
+    <value>kg NO3-N ha^-1</value>
+  </data>
+  <data name="KilogramsNO3NPerHectareString" xml:space="preserve">
+    <value>kg NO3-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsNONPerHectare" xml:space="preserve">
+    <value>kg NO-N ha^-1</value>
+  </data>
+  <data name="KilogramsNONPerHectareString" xml:space="preserve">
+    <value>kg NO-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsPerDay" xml:space="preserve">
+    <value>kg jour^-1</value>
+  </data>
+  <data name="KilogramsPerHectare" xml:space="preserve">
+    <value>kg ha^-1</value>
+  </data>
+  <data name="KilogramsPerHectareCrop" xml:space="preserve">
+    <value>kg ha^-1</value>
+  </data>
+  <data name="KilogramsPerKilogramProteinIntake" xml:space="preserve">
+    <value>kg (kg apport en protéines)^-1</value>
+  </data>
+  <data name="KilogramsPerYear" xml:space="preserve">
+    <value>kg année^-1</value>
+  </data>
+  <data name="KilogramsPhosphorousPerHectare" xml:space="preserve">
+    <value>kg P ha^-1</value>
+  </data>
+  <data name="KilogramsTan" xml:space="preserve">
+    <value>kg AAT</value>
+  </data>
+  <data name="KilogramsTanPerAnimalPerMonth" xml:space="preserve">
+    <value>kg AAT tête^-1 mois^-1</value>
+  </data>
+  <data name="KilogramsVolatileSolidsPerKilogramFeed" xml:space="preserve">
+    <value>kg SV kg^-1 aliments</value>
+  </data>
+  <data name="KilogramVolatileSolidsPerCubicMeterPerDay" xml:space="preserve">
+    <value>Kg VS m^-3 d^-1</value>
+  </data>
+  <data name="LabelAboveGroundCarbonInput" xml:space="preserve">
+    <value>apport de carbone aérien (a_a)</value>
+  </data>
+  <data name="LabelAboveGroundNitrogenResidueForCrop" xml:space="preserve">
+    <value>azote des résidus de culture aériens (N_résidusA_culture)</value>
+  </data>
+  <data name="LabelAboveGroundResiduePool_AGresidueN" xml:space="preserve">
+    <value>N résiduel aérien (N_résiduelA_champ)</value>
+  </data>
+  <data name="LabelAcidDetergentInsolubleCrudeProtein" xml:space="preserve">
+    <value>Acid Detergent Insoluble Crude Protein</value>
+  </data>
+  <data name="LabelAcidDetergentLignin" xml:space="preserve">
+    <value>Acid Detergent Lignin</value>
+  </data>
+  <data name="LabelAcidEtherExtract" xml:space="preserve">
+    <value>Acid Ether Extract</value>
+  </data>
+  <data name="LabelAIBoars" xml:space="preserve">
+    <value>verrats IA</value>
+  </data>
+  <data name="LabelAIDAlanine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Alanine</value>
+  </data>
+  <data name="LabelAIDArginine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Arginine</value>
+  </data>
+  <data name="LabelAIDAsparticAcid" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Aspartic acid</value>
+  </data>
+  <data name="LabelAIDCrudeProtein" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Cude Protein</value>
+  </data>
+  <data name="LabelAIDCysteine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Cysteine</value>
+  </data>
+  <data name="LabelAIDGlutamineAcid" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Glutamine acid</value>
+  </data>
+  <data name="LabelAIDGlycine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Glycine</value>
+  </data>
+  <data name="LabelAIDHistidine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Histidine</value>
+  </data>
+  <data name="LabelAIDIsoleucine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Isoleucine</value>
+  </data>
+  <data name="LabelAIDLeucine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Leucine</value>
+  </data>
+  <data name="LabelAIDLysine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Lysine</value>
+  </data>
+  <data name="LabelAIDMethionine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Methionine</value>
+  </data>
+  <data name="LabelAIDPhenylalanine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Phenylalanine</value>
+  </data>
+  <data name="LabelAIDProline" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Proline</value>
+  </data>
+  <data name="LabelAIDSerine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Serine</value>
+  </data>
+  <data name="LabelAIDThreonine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Threonine</value>
+  </data>
+  <data name="LabelAIDTryptophan" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Tryptophan</value>
+  </data>
+  <data name="LabelAIDTyrosine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Tyrosine</value>
+  </data>
+  <data name="LabelAIDValine" xml:space="preserve">
+    <value>Apparent Ileal Digestibility of Valine</value>
+  </data>
+  <data name="LabelAlanine" xml:space="preserve">
+    <value>Alanine</value>
+  </data>
+  <data name="LabelAmountOfManure" xml:space="preserve">
+    <value>quantité de fumier</value>
+  </data>
+  <data name="LabelAmountOfManureAppliedPerHectare" xml:space="preserve">
+    <value>Amount of manure applied per hectare (kg ha^-1)</value>
+  </data>
+  <data name="LabelAmountOfNFromAppliedManure" xml:space="preserve">
+    <value>Amount of N from applied manure (kg N ha^-1)</value>
+  </data>
+  <data name="LabelAnimalType" xml:space="preserve">
+    <value>Animal Type</value>
+  </data>
+  <data name="LabelArea" xml:space="preserve">
+    <value>superficie</value>
+  </data>
+  <data name="LabelAreYouSureYouWantToResetAllRowValues" xml:space="preserve">
+    <value>Are you sure you want to reset all values in the current row?</value>
+  </data>
+  <data name="LabelArginine" xml:space="preserve">
+    <value>Arginine</value>
+  </data>
+  <data name="LabelAshContent" xml:space="preserve">
+    <value>Ash content of feed</value>
+  </data>
+  <data name="LabelAsparticAcid" xml:space="preserve">
+    <value>Aspartic Acid</value>
+  </data>
+  <data name="LabelATTDPhosphorus" xml:space="preserve">
+    <value>Aapparent Total Tract Digestibility of Phosphorus</value>
+  </data>
+  <data name="LabelAvailalabilityOfNFromManureDecomposition" xml:space="preserve">
+    <value>Disponibilité de N issu de la décomposition du fumier</value>
+  </data>
+  <data name="LabelAverageSoilCarbonAllFieldsInFarm" xml:space="preserve">
+    <value>Quantité moyenne de carbone dans le sol de tous les champs de la ferme (C_t_moy_champs)</value>
+  </data>
+  <data name="LabelBarleyGrainBasedDiet" xml:space="preserve">
+    <value>ration à base de grains d'orge</value>
+  </data>
+  <data name="LabelBarleySilageBasedDiet" xml:space="preserve">
+    <value>ration à base d'ensilage d'orge</value>
+  </data>
+  <data name="LabelBeddingMaterialType" xml:space="preserve">
+    <value>Bedding Material Type</value>
+  </data>
+  <data name="LabelBelowGroundCarbonInput" xml:space="preserve">
+    <value>apport de carbone souterrain (a_s)</value>
+  </data>
+  <data name="LabelBelowGroundResidueNitrogenForCrop" xml:space="preserve">
+    <value>N résiduel du sol disponible à la culture (Nrésiduelsol_culture)</value>
+  </data>
+  <data name="LabelBelowGroundResiduePool_BGresidueN" xml:space="preserve">
+    <value>Réservoir de N résiduel du sol (Nrésiduelsol_champ)</value>
+  </data>
+  <data name="LabelBioMethanePotential" xml:space="preserve">
+    <value>Biomethane Potential</value>
+  </data>
+  <data name="LabelBoarSelection" xml:space="preserve">
+    <value>sélection des verrats</value>
+  </data>
+  <data name="LabelBoarTest" xml:space="preserve">
+    <value>test des verrats</value>
+  </data>
+  <data name="LabelBredGilts" xml:space="preserve">
+    <value>jeunes truies saillies</value>
+  </data>
+  <data name="LabelBredSows" xml:space="preserve">
+    <value>truies saillies</value>
+  </data>
+  <data name="LabelBreedingBoar" xml:space="preserve">
+    <value>verrats reproducteurs</value>
+  </data>
+  <data name="Labelc120LauricAcid" xml:space="preserve">
+    <value>Lauric Acid</value>
+  </data>
+  <data name="Labelc140MyristicAcid" xml:space="preserve">
+    <value>Myristic Acid</value>
+  </data>
+  <data name="Labelc160PalmiticAcid" xml:space="preserve">
+    <value>Palmitic Acid</value>
+  </data>
+  <data name="Labelc161PalmitoleicAcid" xml:space="preserve">
+    <value>Palmitoleic Acid</value>
+  </data>
+  <data name="Labelc180StearicAcid" xml:space="preserve">
+    <value>Stearic Acid</value>
+  </data>
+  <data name="Labelc181OleicAcid" xml:space="preserve">
+    <value>Oleic Acid</value>
+  </data>
+  <data name="Labelc182LinoleicAcid" xml:space="preserve">
+    <value>Linoleic Acid</value>
+  </data>
+  <data name="Labelc183LinolenicAcid" xml:space="preserve">
+    <value>Linolenic Acid</value>
+  </data>
+  <data name="Labelc184StearidonicAcid" xml:space="preserve">
+    <value>Stearidonic Acid</value>
+  </data>
+  <data name="Labelc200ArachidicAcid" xml:space="preserve">
+    <value>Arachidic Acid</value>
+  </data>
+  <data name="Labelc201PaullinicAcid" xml:space="preserve">
+    <value>Paullinic Acid</value>
+  </data>
+  <data name="Labelc204ArachidonicAcid" xml:space="preserve">
+    <value>Arachidonic Acid</value>
+  </data>
+  <data name="Labelc205TimnodonicAcid" xml:space="preserve">
+    <value>Timnodonic Acid</value>
+  </data>
+  <data name="Labelc220BehenicAcid" xml:space="preserve">
+    <value>Behenic Acid</value>
+  </data>
+  <data name="Labelc221ErucicAcid" xml:space="preserve">
+    <value>Erucic Acid</value>
+  </data>
+  <data name="Labelc225OsbondAcid" xml:space="preserve">
+    <value>Osbond Acid</value>
+  </data>
+  <data name="Labelc226CervonicAcid" xml:space="preserve">
+    <value>Cervonic Acid</value>
+  </data>
+  <data name="Labelc240LignocericAcid" xml:space="preserve">
+    <value>Lignoceric Acid</value>
+  </data>
+  <data name="LabelCalcium" xml:space="preserve">
+    <value>Calcium</value>
+  </data>
+  <data name="LabelCalculatedCarbonDifferenceFromStartYear" xml:space="preserve">
+    <value>Différence de C calculée par rapport au début de l’année (différence_C_t_calculée_prt_début_année)</value>
+  </data>
+  <data name="LabelCarbonInputFromExtraroots" xml:space="preserve">
+    <value>Apport de carbone du matériel extraracinaire (C_e)</value>
+  </data>
+  <data name="LabelCarbonInputFromProduct" xml:space="preserve">
+    <value>Apport de carbone du produit (C_ptausol)</value>
+  </data>
+  <data name="LabelCarbonInputFromRoots" xml:space="preserve">
+    <value>Apport de carbone des racines (C_r)</value>
+  </data>
+  <data name="LabelCarbonInputFromStraw" xml:space="preserve">
+    <value>Apport de carbone de la paille (C_p)</value>
+  </data>
+  <data name="LabelCarbonNitrogenRatio" xml:space="preserve">
+    <value>Carbon to Nitrogen ratio of manure</value>
+  </data>
+  <data name="LabelCarbonPerHeadPerMonth" xml:space="preserve">
+    <value>kg C tête^-1 mois^-1</value>
+  </data>
+  <data name="LabelCB1ID" xml:space="preserve">
+    <value>Postruminal Starch Digestibility</value>
+  </data>
+  <data name="LabelChangeInSoilCarbon" xml:space="preserve">
+    <value>variation de la teneur en carbone du sol (delta_tC)</value>
+  </data>
+  <data name="LabelChlorine" xml:space="preserve">
+    <value>Chlorine</value>
+  </data>
+  <data name="LabelChromium" xml:space="preserve">
+    <value>Chromium</value>
+  </data>
+  <data name="LabelClimateFactor" xml:space="preserve">
+    <value>facteur climatique (re_culture)</value>
+  </data>
+  <data name="LabelCloseUpDiet" xml:space="preserve">
+    <value>ration de début de tarissement</value>
+  </data>
+  <data name="LabelCopper" xml:space="preserve">
+    <value>Copper</value>
+  </data>
+  <data name="LabelCornGrainBasedDiet" xml:space="preserve">
+    <value>ration à base de grains de maïs</value>
+  </data>
+  <data name="LabelCornSilageBasedDiet" xml:space="preserve">
+    <value>ration à base d'ensilage de maïs</value>
+  </data>
+  <data name="LabelCrop" xml:space="preserve">
+    <value>culture</value>
+  </data>
+  <data name="LabelCropNitrogenDemand" xml:space="preserve">
+    <value>besoins de la culture en azote (besoinsN_culture)</value>
+  </data>
+  <data name="LabelCropResiduesBeforeAdjustment" xml:space="preserve">
+    <value>résidus de culture avant ajustement (N_RésidusCulture)</value>
+  </data>
+  <data name="LabelCysteine" xml:space="preserve">
+    <value>Cysteine</value>
+  </data>
+  <data name="LabelDailyManureAddedToDigester" xml:space="preserve">
+    <value>Daily manure added to digester</value>
+  </data>
+  <data name="LabelDenitrificationForArea" xml:space="preserve">
+    <value>dénitrification pour la superficie (perte_N2-N)</value>
+  </data>
+  <data name="LabelDifferenceBetweenInputsAndOutputs" xml:space="preserve">
+    <value>différence de N total</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromCropResidues" xml:space="preserve">
+    <value>N2O-N des résidus de culture (N2O-N_NRCdirect)</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromNMinealization" xml:space="preserve">
+    <value>N2O-N de la minéralisation d'azote (N2O-N_NRCmindirect)</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromOrganicNitrogen" xml:space="preserve">
+    <value>N2O-N d’azote organique (N2O-N_AOdirect)</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromSyntheticN" xml:space="preserve">
+    <value>N2O-N d’azote synthétique (N2O-N_ASdirect)</value>
+  </data>
+  <data name="LabelFarm" xml:space="preserve">
+    <value>ferme</value>
+  </data>
+  <data name="LabelFarmResidue" xml:space="preserve">
+    <value>Farm Residue</value>
+  </data>
+  <data name="LabelFarmResidueSubstrateType" xml:space="preserve">
+    <value>Farm Residue Substrate Type</value>
+  </data>
+  <data name="LabelFarOffDiet" xml:space="preserve">
+    <value>ration de fin de tarissement</value>
+  </data>
+  <data name="LabelFarrowingGilts" xml:space="preserve">
+    <value>cochettes en maternité</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="LabelFarrowingSows" xml:space="preserve">
+    <value>truies en maternité</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="LabelFeedingStrategy" xml:space="preserve">
+    <value>stratégie d'alimentation</value>
+  </data>
+  <data name="LabelFertilizerApplicationRate" xml:space="preserve">
+    <value>Application rate</value>
+  </data>
+  <data name="LabelField" xml:space="preserve">
+    <value>champ</value>
+  </data>
+  <data name="LabelGiltSelection" xml:space="preserve">
+    <value>sélection de jeunes truies</value>
+  </data>
+  <data name="LabelGlutamicAcid" xml:space="preserve">
+    <value>Glutamic Acid</value>
+  </data>
+  <data name="LabelGlycine" xml:space="preserve">
+    <value>Glycine</value>
+  </data>
+  <data name="LabelGramsPerMeterSquared" xml:space="preserve">
+    <value>g m^-2</value>
+  </data>
+  <data name="LabelGrossEnergy" xml:space="preserve">
+    <value>Gross Energy</value>
+  </data>
+  <data name="LabelGrowerFinisherHogs" xml:space="preserve">
+    <value>porcs à l'engrais</value>
+  </data>
+  <data name="LabelHighEnergyProteinDiet" xml:space="preserve">
+    <value>protéine à valeur énergétique élevée</value>
+  </data>
+  <data name="LabelHighFiberDiet" xml:space="preserve">
+    <value>haute teneur en fibres</value>
+  </data>
+  <data name="LabelHistidine" xml:space="preserve">
+    <value>Histidine</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromCropResidueLeaching" xml:space="preserve">
+    <value>N2O-N issu du lessivage des résidus de culture (N2O-N_lessivageNRC)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromMineralLeaching" xml:space="preserve">
+    <value>N2O-N issu du lessivage des minéraux (N2O-N_lessivagemin)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNLeaching" xml:space="preserve">
+    <value>N2O-N issu du lessivage de l’azote organique (N2O-N_lessivageNorg)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromSyntheticNitrogenLeaching" xml:space="preserve">
+    <value>N2O-N issu du lessivage de l’azote de synthèse (N2O-N_lessivageNsynt)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromSyntheticNVolatilization" xml:space="preserve">
+    <value> N2O-N issu de la volatilisation de l’azote de synthèse (N2O-N_volatilisationNsynt)</value>
+  </data>
+  <data name="LabelInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="LabelInsolubleDietryFiber" xml:space="preserve">
+    <value>Insoluble Dietry Fiber</value>
+  </data>
+  <data name="LabelIodine" xml:space="preserve">
+    <value>Iodine</value>
+  </data>
+  <data name="LabelIodineValue" xml:space="preserve">
+    <value>liodine Value</value>
+  </data>
+  <data name="LabelIodineValueProduct" xml:space="preserve">
+    <value>liodine Value Product</value>
+  </data>
+  <data name="LabelIron" xml:space="preserve">
+    <value>Iron</value>
+  </data>
+  <data name="LabelIsoleucine" xml:space="preserve">
+    <value>Isoleucine</value>
+  </data>
+  <data name="LabelKDCB1" xml:space="preserve">
+    <value>Digestion rate of Starch</value>
+  </data>
+  <data name="LabelKDCB2" xml:space="preserve">
+    <value>Digestion rate of Soluble Fiber</value>
+  </data>
+  <data name="LabelKilogramsCarbon" xml:space="preserve">
+    <value>kg C</value>
+  </data>
+  <data name="LabelKilogramsCarbonPerYear" xml:space="preserve">
+    <value>kg C année^-1</value>
+  </data>
+  <data name="LabelKilogramsNH3" xml:space="preserve">
+    <value>kg NH3</value>
+  </data>
+  <data name="LabelKilogramsNH3N" xml:space="preserve">
+    <value>kg NH3-N</value>
+  </data>
+  <data name="LabelKilogramsNitrogenPerHeadPerMonth" xml:space="preserve">
+    <value>kg N tête^-1 mois^-1</value>
+  </data>
+  <data name="LabelKilogramsNitrogenPerYear" xml:space="preserve">
+    <value>kg N année^-1</value>
+  </data>
+  <data name="LabelLegumeForageBasedDiet" xml:space="preserve">
+    <value>ration à base de fourrage de légumineuses</value>
+  </data>
+  <data name="LabelLeucine" xml:space="preserve">
+    <value>Leucine</value>
+  </data>
+  <data name="LabelLigninContent" xml:space="preserve">
+    <value>Lignin content</value>
+  </data>
+  <data name="LabelLowFiberDiet" xml:space="preserve">
+    <value>faible teneur en fibres</value>
+  </data>
+  <data name="LabelLysine" xml:space="preserve">
+    <value>Lysine</value>
+  </data>
+  <data name="LabelMagnesium" xml:space="preserve">
+    <value>Magnesium</value>
+  </data>
+  <data name="LabelMaintenanceBoars" xml:space="preserve">
+    <value>verrats d'entretien</value>
+  </data>
+  <data name="LabelManagementFactor" xml:space="preserve">
+    <value>facteur de gestion (r_e)</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="LabelManganese" xml:space="preserve">
+    <value>Manganese</value>
+  </data>
+  <data name="LabelManureResiduePool_ManureN" xml:space="preserve">
+    <value>réservoir de résidus de fumier (fumierN)</value>
+  </data>
+  <data name="LabelManureSubstrateType" xml:space="preserve">
+    <value>Manure Substrate Type</value>
+  </data>
+  <data name="LabelManureType" xml:space="preserve">
+    <value>Manure Type</value>
+  </data>
+  <data name="LabelMeasuredCarbonDifferenceFromStartYear" xml:space="preserve">
+    <value>Différence de carbone mesurée par rapport au début de l’année (différence_C_t_mesurée__prt_début_année)</value>
+  </data>
+  <data name="LabelMeasuredSoilCarbon" xml:space="preserve">
+    <value>carbone du sol mesuré (tC_mesuré)</value>
+  </data>
+  <data name="LabelMediumEnergyProteinDiet" xml:space="preserve">
+    <value>protéine à valeur énergétique moyenne</value>
+  </data>
+  <data name="LabelMediumGrowthDiet" xml:space="preserve">
+    <value>ration pour croissance moyenne</value>
+  </data>
+  <data name="LabelMethaneFraction" xml:space="preserve">
+    <value>Methane Fraction in Biogas</value>
+  </data>
+  <data name="LabelMethionine" xml:space="preserve">
+    <value>Methionine</value>
+  </data>
+  <data name="LabelMicrobeDeath" xml:space="preserve">
+    <value>mort microbienne</value>
+  </data>
+  <data name="LabelMicrobeNitrogenPool_N_microbeN" xml:space="preserve">
+    <value>réservoir d'azote microbien (microbeN)</value>
+  </data>
+  <data name="LabelMicrobePoolAfterCloseOfBudget" xml:space="preserve">
+    <value>réservoir microbien (après la clôture du budget)</value>
+  </data>
+  <data name="LabelMicrobePoolAfterCropDemandReduction" xml:space="preserve">
+    <value>réservoir microbien (après la réduction des besoins de la culture)</value>
+  </data>
+  <data name="LabelMicrobePoolAfterOldPoolDemandReduction" xml:space="preserve">
+    <value>réservoir microbien (après la réduction de vieux réservoirs)</value>
+  </data>
+  <data name="LabelMicrobialNitrogenBalance" xml:space="preserve">
+    <value>bilan d'azote microbien (N_bilanNmicrobe)</value>
+  </data>
+  <data name="LabelMineralNitrogenBalance" xml:space="preserve">
+    <value>bilan d'azote minéral (N_bilanNminéral)</value>
+  </data>
+  <data name="LabelMineralNitrogenPool_N_mineralN" xml:space="preserve">
+    <value>réservoir d'azote minéral (Nminéral)</value>
+  </data>
+  <data name="LabelMineralPlusMicrobial" xml:space="preserve">
+    <value>minéral + microbien</value>
+  </data>
+  <data name="LabelMonosaturatedFattyAcid" xml:space="preserve">
+    <value>Monosaturated Fatty Acid</value>
+  </data>
+  <data name="LabelNetEnergy" xml:space="preserve">
+    <value>Net Energy</value>
+  </data>
+  <data name="LabelNetEnergyForGrowth" xml:space="preserve">
+    <value>Net Energy For Growth</value>
+  </data>
+  <data name="LabelNetEnergyForMaintenance" xml:space="preserve">
+    <value>Net Energy For Maintenance</value>
+  </data>
+  <data name="LabelNFractionOfAppliedManure" xml:space="preserve">
+    <value>N Fraction of Applied Manure</value>
+  </data>
+  <data name="LabelNo" xml:space="preserve">
+    <value>non</value>
+  </data>
+  <data name="LabelN_min_FromDecompositionOfOldCarbon" xml:space="preserve">
+    <value>Minéralisation de l’azote issu de la décomposition du vieux carbone (min_N_issudedécompositionvieuxcarbone)</value>
+  </data>
+  <data name="LabelOldPoolNitrogenRequirement" xml:space="preserve">
+    <value>besoins en azote d'un vieux réservoir (delta_O_Ndemande)</value>
+  </data>
+  <data name="LabelOldPoolSoilCarbon" xml:space="preserve">
+    <value>carbone du sol d'un vieux réservoir (V_t)</value>
+  </data>
+  <data name="LabelOleicAcid" xml:space="preserve">
+    <value>Oleic Acid</value>
+  </data>
+  <data name="LabelOpenGilts" xml:space="preserve">
+    <value>jeunes truies vides</value>
+  </data>
+  <data name="LabelOpenSows" xml:space="preserve">
+    <value>truies vides</value>
+  </data>
+  <data name="LabelOverflow" xml:space="preserve">
+    <value>trop-plein</value>
+  </data>
+  <data name="LabelPhenylalanine" xml:space="preserve">
+    <value>Phenylalanine</value>
+  </data>
+  <data name="LabelPhysicalEffectivenessFactor" xml:space="preserve">
+    <value>Physical Effectiveness Factor</value>
+  </data>
+  <data name="LabelPiglets" xml:space="preserve">
+    <value>porcelets</value>
+  </data>
+  <data name="LabelPlantCarbonInProduct" xml:space="preserve">
+    <value>carbone végétal dans le produit (C_p)</value>
+  </data>
+  <data name="LabelPolyunsaturatedFattyAcids" xml:space="preserve">
+    <value>Polyunsaturated Fatty Acids</value>
+  </data>
+  <data name="LabelProline" xml:space="preserve">
+    <value>Proline</value>
+  </data>
+  <data name="LabelRatio" xml:space="preserve">
+    <value>rapport</value>
+  </data>
+  <data name="LabelRumenUndegradableProtein" xml:space="preserve">
+    <value>Rumen Undegradable Protein</value>
+  </data>
+  <data name="LabelSaturatedFattyAcid" xml:space="preserve">
+    <value>Saturated Fatty Acid</value>
+  </data>
+  <data name="LabelSelenium" xml:space="preserve">
+    <value>Selenium</value>
+  </data>
+  <data name="LabelSerine" xml:space="preserve">
+    <value>Serine</value>
+  </data>
+  <data name="LabelShelterbelt" xml:space="preserve">
+    <value>brise-vent</value>
+  </data>
+  <data name="LabelSIDAlanine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Alanine</value>
+  </data>
+  <data name="LabelSIDArginine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Arginine</value>
+  </data>
+  <data name="LabelSIDAsparticAcid" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Aspartic acid</value>
+  </data>
+  <data name="LabelSIDCrudeProtein" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of CrudeProtein</value>
+  </data>
+  <data name="LabelSIDCysteine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Cysteine</value>
+  </data>
+  <data name="LabelSIDGlutamineAcid" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Glutamine acid</value>
+  </data>
+  <data name="LabelSIDGlycine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Glycine</value>
+  </data>
+  <data name="LabelSIDHistidine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Histidine</value>
+  </data>
+  <data name="LabelSIDIsoleucine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Isoleucine</value>
+  </data>
+  <data name="LabelSIDLeucine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Leucine</value>
+  </data>
+  <data name="LabelSIDLysine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Lysine</value>
+  </data>
+  <data name="LabelSIDMethionine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Methionine</value>
+  </data>
+  <data name="LabelSIDPhenylalanine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Phenylalanine</value>
+  </data>
+  <data name="LabelSIDProline" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Proline</value>
+  </data>
+  <data name="LabelSIDSerine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Serine</value>
+  </data>
+  <data name="LabelSIDThreonine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Threonine</value>
+  </data>
+  <data name="LabelSIDTryptophan" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Tryptophan</value>
+  </data>
+  <data name="LabelSIDTyrosine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Tyrosine</value>
+  </data>
+  <data name="LabelSIDValine" xml:space="preserve">
+    <value>Standardized Ileal Digestibility of Valine</value>
+  </data>
+  <data name="LabelSlowGrowthDiet" xml:space="preserve">
+    <value>ration pour croissance lente</value>
+  </data>
+  <data name="LabelSodium" xml:space="preserve">
+    <value>Sodium</value>
+  </data>
+  <data name="LabelSoilCarbon" xml:space="preserve">
+    <value>carbone du sol (tC)</value>
+  </data>
+  <data name="LabelSoilCarbonMAE" xml:space="preserve">
+    <value>carbone du sol EMA (tC_ema)</value>
+  </data>
+  <data name="LabelSoilCarbonRMSE" xml:space="preserve">
+    <value>carbone du sol EQM (tC_eqm)</value>
+  </data>
+  <data name="LabelSolubleDietaryFiber" xml:space="preserve">
+    <value>Soluble Dietary Fiber</value>
+  </data>
+  <data name="LabelSolubleProtein" xml:space="preserve">
+    <value>Soluble Protein</value>
+  </data>
+  <data name="LabelStage" xml:space="preserve">
+    <value>étape</value>
+  </data>
+  <data name="LabelSTTDPhosphorus" xml:space="preserve">
+    <value>Standardized Total Tract Digestibility of Phosphorus</value>
+  </data>
+  <data name="LabelSubstrateType" xml:space="preserve">
+    <value>Substrate type</value>
+  </data>
+  <data name="LabelSucklingPiglets" xml:space="preserve">
+    <value>porcelets non sevrés</value>
+  </data>
+  <data name="LabelSulfur" xml:space="preserve">
+    <value>Sulfur</value>
+  </data>
+  <data name="LabelSumOfMineralAndMicrobialPools" xml:space="preserve">
+    <value>minéral + microbien</value>
+  </data>
+  <data name="LabelSyntheticInputsBeforeAdjustment" xml:space="preserve">
+    <value>Apports d’azote de synthèse avant rajustements (N_synt)</value>
+  </data>
+  <data name="LabelThreonine" xml:space="preserve">
+    <value>Threonine</value>
+  </data>
+  <data name="LabelTillageFactor" xml:space="preserve">
+    <value>facteur de travail du sol (r_c)</value>
+    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+  </data>
+  <data name="LabelTimePeriod" xml:space="preserve">
+    <value>période</value>
+  </data>
+  <data name="LabelTotalAmmoniaForArea" xml:space="preserve">
+    <value>NH4-N_volatilisé</value>
+  </data>
+  <data name="LabelTotalDietaryFiber" xml:space="preserve">
+    <value>Total Dietary Fiber</value>
+  </data>
+  <data name="LabelTotalDirectNitrousOxide" xml:space="preserve">
+    <value>N2O-N_direct</value>
+  </data>
+  <data name="LabelTotalIndirectNitrousOxide" xml:space="preserve">
+    <value>N2O-N_indirect</value>
+  </data>
+  <data name="LabelTotalNitrateLeachingForArea" xml:space="preserve">
+    <value>NO3-N_lessivageTotal</value>
+  </data>
+  <data name="LabelTotalNitricOxide" xml:space="preserve">
+    <value>NO-N_total</value>
+  </data>
+  <data name="LabelTotalNitrogen" xml:space="preserve">
+    <value>Total Nitrogen</value>
+  </data>
+  <data name="LabelTotalNitrogenEmissions" xml:space="preserve">
+    <value>émissions totales de N</value>
+  </data>
+  <data name="LabelTotalNitrogenInputs" xml:space="preserve">
+    <value>apports totaux de N</value>
+  </data>
+  <data name="LabelTotalNitrogenOutputs" xml:space="preserve">
+    <value>pertes totales de N</value>
+  </data>
+  <data name="LabelTotalSolids" xml:space="preserve">
+    <value>Total Solids</value>
+  </data>
+  <data name="LabelTotalUptake" xml:space="preserve">
+    <value>absorption totale de N</value>
+  </data>
+  <data name="LabelTryptophan" xml:space="preserve">
+    <value>Tryptophan</value>
+  </data>
+  <data name="LabelTyrosine" xml:space="preserve">
+    <value>Tyrosine</value>
+  </data>
+  <data name="LabelValine" xml:space="preserve">
+    <value>Valine</value>
+  </data>
+  <data name="LabelVitaminA" xml:space="preserve">
+    <value>Vitamin A</value>
+  </data>
+  <data name="LabelVitaminB12" xml:space="preserve">
+    <value>Vitamin B12</value>
+  </data>
+  <data name="LabelVitaminB6" xml:space="preserve">
+    <value>VitaminB6</value>
+  </data>
+  <data name="LabelVitaminD" xml:space="preserve">
+    <value>Vitamin D</value>
+  </data>
+  <data name="LabelVitaminE" xml:space="preserve">
+    <value>Vitamin E</value>
+  </data>
+  <data name="LabelVolatileSolidsPercentage" xml:space="preserve">
+    <value>Volatile Solids (% of TS)</value>
+  </data>
+  <data name="LabelWeanedPiglets" xml:space="preserve">
+    <value>porcelets sevrés</value>
+  </data>
+  <data name="LabelWeaners" xml:space="preserve">
+    <value>animaux sevrés</value>
+  </data>
+  <data name="LabelWeaningSows" xml:space="preserve">
+    <value>truies en sevrage</value>
+  </data>
+  <data name="LabelYear" xml:space="preserve">
+    <value>année</value>
+  </data>
+  <data name="LabelYes" xml:space="preserve">
+    <value>oui</value>
+  </data>
+  <data name="LabelYield" xml:space="preserve">
+    <value>rendement</value>
+  </data>
+  <data name="LabelYoungPoolAboveGround" xml:space="preserve">
+    <value>jeune réservoir aérien (J_a)</value>
+  </data>
+  <data name="LabelYoungPoolBelowGround" xml:space="preserve">
+    <value>jeune réservoir souterrain (J_s)</value>
+  </data>
+  <data name="LabelYoungPoolManure" xml:space="preserve">
+    <value>fumier d'un jeune réservoir (J_f)</value>
+  </data>
+  <data name="LabelZinc" xml:space="preserve">
+    <value>Zinc</value>
+  </data>
+  <data name="LargeFreeStall" xml:space="preserve">
+    <value>grande stalle libre</value>
+  </data>
+  <data name="LayersWetPoultry" xml:space="preserve">
+    <value>pondeuses (fumier humide)</value>
+  </data>
+  <data name="Lentils" xml:space="preserve">
+    <value>lentilles</value>
+  </data>
+  <data name="Linola" xml:space="preserve">
+    <value>linola</value>
+  </data>
+  <data name="LiquidCrustHandlingSystemName" xml:space="preserve">
+    <value>liquide avec croûte</value>
+  </data>
+  <data name="LiquidNoCrustHandlingSystemName" xml:space="preserve">
+    <value>liquide sans croûte</value>
+  </data>
+  <data name="LowEnergyAndProteinDietType" xml:space="preserve">
+    <value>ration à teneur faible en énergie et en protéine</value>
+  </data>
+  <data name="LowEnergyDietType" xml:space="preserve">
+    <value>ration à teneur faible en énergie</value>
+  </data>
+  <data name="LowEnergyProtein" xml:space="preserve">
+    <value>protéine à faible valeur énergétique</value>
+  </data>
+  <data name="LuvicGleysol" xml:space="preserve">
+    <value>gleysol luvique</value>
+  </data>
+  <data name="MaltBarley" xml:space="preserve">
+    <value>orge de brasserie</value>
+  </data>
+  <data name="Manitoba" xml:space="preserve">
+    <value>Manitoba</value>
+  </data>
+  <data name="ManitobaMaple" xml:space="preserve">
+    <value>érable à Giguère</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>mars</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>mai</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>moyen</value>
+  </data>
+  <data name="MediumEnergyAndProteinDietType" xml:space="preserve">
+    <value>ration à teneur moyenne en énergie et en protéine</value>
+  </data>
+  <data name="MediumEnergyDietType" xml:space="preserve">
+    <value>ration à teneur moyenne en énergie</value>
+  </data>
+  <data name="MediumGrowthDietType" xml:space="preserve">
+    <value>ration pour croissance moyenne</value>
+  </data>
+  <data name="MegaCaloriesPerKilogram" xml:space="preserve">
+    <value>Mcal kg^-1</value>
+  </data>
+  <data name="MegaJoulesPerDayPerKilogram" xml:space="preserve">
+    <value>MJ jour^-1 kg^-1</value>
+  </data>
+  <data name="MegaJoulesPerDayPerPound" xml:space="preserve">
+    <value>MJ jour^-1 lb^-1</value>
+  </data>
+  <data name="MegaJoulesPerKilogram" xml:space="preserve">
+    <value>MJ kg^-1</value>
+  </data>
+  <data name="MegaJoulesPerKilogramSquared" xml:space="preserve">
+    <value>MJ kg^-2</value>
+  </data>
+  <data name="MegaJoulesPerPound" xml:space="preserve">
+    <value>MJ lb^-1</value>
+  </data>
+  <data name="MegaJoulesPerPoundSquared" xml:space="preserve">
+    <value>MJ lb^-2</value>
+  </data>
+  <data name="MelanicBrunisol" xml:space="preserve">
+    <value>brunisol mélanique</value>
+  </data>
+  <data name="Mesisol" xml:space="preserve">
+    <value>mésisol</value>
+  </data>
+  <data name="MessageDefaultManureApplicationSummaryHeader" xml:space="preserve">
+    <value>A summary of the manure application of all fields in the farm</value>
+  </data>
+  <data name="MessageMonthlyEvapotranspirationBreakdownHeader" xml:space="preserve">
+    <value>The monthly evapotranspiration averages for the farm.</value>
+  </data>
+  <data name="MessageMonthlySoilN2OBreakdownHeader" xml:space="preserve">
+    <value>The monthly emissions distribution for the year. This distribution can be adjusted based on your farm's results. Please note that the addition of all montly percentages should add up to 100%</value>
+  </data>
+  <data name="MessageMonthlyTemperatureBreakdownHeader" xml:space="preserve">
+    <value>The montly temperature averages for the farm.</value>
+  </data>
+  <data name="MessageMontlyPrecipitationBreakdownHeader" xml:space="preserve">
+    <value>The monthly precipitation averages for the farm.</value>
+  </data>
+  <data name="Meters" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="MethanePerCubicMeterPerDay" xml:space="preserve">
+    <value>CH4 m^-3 d^-1</value>
+  </data>
+  <data name="MethanePerCubicYardPerDay" xml:space="preserve">
+    <value>CH4 yd^-3 d^-1</value>
+  </data>
+  <data name="Metric" xml:space="preserve">
+    <value>métrique</value>
+  </data>
+  <data name="MicrogramsPerKilogram" xml:space="preserve">
+    <value>µg kg^-1</value>
+  </data>
+  <data name="MilkVetch" xml:space="preserve">
+    <value>astragale</value>
+  </data>
+  <data name="Millet" xml:space="preserve">
+    <value>millet</value>
+  </data>
+  <data name="MilligramsPerKilogram" xml:space="preserve">
+    <value>mg kg^-1</value>
+  </data>
+  <data name="Millimeters" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="MillimetersPerYear" xml:space="preserve">
+    <value>mm année^-1</value>
+  </data>
+  <data name="Mint" xml:space="preserve">
+    <value>menthe</value>
+  </data>
+  <data name="MixedGrains" xml:space="preserve">
+    <value>grains mélangés</value>
+  </data>
+  <data name="MixedwoodPlains" xml:space="preserve">
+    <value>plaines à forêts mixtes</value>
+  </data>
+  <data name="Monarda" xml:space="preserve">
+    <value>monarde</value>
+  </data>
+  <data name="MontaneCordillera" xml:space="preserve">
+    <value>Cordillère montagnarde</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>mois</value>
+  </data>
+  <data name="Mustard" xml:space="preserve">
+    <value>moutarde</value>
+  </data>
+  <data name="MustardSeed" xml:space="preserve">
+    <value>graine de moutarde</value>
+  </data>
+  <data name="NativePasture" xml:space="preserve">
+    <value>pâturage naturel</value>
+  </data>
+  <data name="NewBrunswick" xml:space="preserve">
+    <value>Nouveau-Brunswick</value>
+  </data>
+  <data name="Newfoundland" xml:space="preserve">
+    <value>Terre-Neuve</value>
+  </data>
+  <data name="NitrousOxidePerCubicMeterPerDay" xml:space="preserve">
+    <value>N2O m^-3 d^-1</value>
+  </data>
+  <data name="NitrousOxidePerCubicYardPerDay" xml:space="preserve">
+    <value>N2O yd^-3 d^-1</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>aucun</value>
+  </data>
+  <data name="NoneToIntense" xml:space="preserve">
+    <value>transition de semis direct à travail intensif du sol</value>
+  </data>
+  <data name="NoneToReduced" xml:space="preserve">
+    <value>transition de semis direct à travail réduit du sol</value>
+  </data>
+  <data name="NormalCubicMeterPerMetricTonVolatileSolids" xml:space="preserve">
+    <value>Nm^3 ton^-1 VS</value>
+  </data>
+  <data name="NorthwestTerritories" xml:space="preserve">
+    <value>Territoires du Nord-Ouest</value>
+  </data>
+  <data name="NotApplicable" xml:space="preserve">
+    <value>sans objet</value>
+  </data>
+  <data name="NotAValidFallowPracticeChangeType" xml:space="preserve">
+    <value>{0} n’est pas un changement valide de la pratique de la jachère</value>
+  </data>
+  <data name="NotAValidPerennialCroppingChangeType" xml:space="preserve">
+    <value>{0} n’est pas un changement valide de cultures vivaces</value>
+  </data>
+  <data name="NotAValidSoilFunctionalCategory" xml:space="preserve">
+    <value>{0} est une catégorie fonctionnelle du sol invalide</value>
+  </data>
+  <data name="NotAValidTillageChangeType" xml:space="preserve">
+    <value>{0} n’est pas un changement valide de travail du sol</value>
+  </data>
+  <data name="NoTillTillage" xml:space="preserve">
+    <value>semis direct</value>
+  </data>
+  <data name="NovaScotia" xml:space="preserve">
+    <value>Nouvelle-Écosse</value>
+  </data>
+  <data name="NovaScotiaAndPrinceEdwardIsland" xml:space="preserve">
+    <value>Nouvelle-Écosse et Île-du-Prince-Édouard</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>novembre</value>
+  </data>
+  <data name="Nunavut" xml:space="preserve">
+    <value>Nunavut</value>
+  </data>
+  <data name="Oats" xml:space="preserve">
+    <value>avoine</value>
+  </data>
+  <data name="OatSilage" xml:space="preserve">
+    <value>ensilage d'avoine</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>octobre</value>
+  </data>
+  <data name="Oilseeds" xml:space="preserve">
+    <value>oléagineux</value>
+  </data>
+  <data name="Onion" xml:space="preserve">
+    <value>oignon</value>
+  </data>
+  <data name="Ontario" xml:space="preserve">
+    <value>Ontario</value>
+  </data>
+  <data name="OpenRangeOrHills" xml:space="preserve">
+    <value>parcours libre ou collines</value>
+  </data>
+  <data name="Organic" xml:space="preserve">
+    <value>organique</value>
+  </data>
+  <data name="OrganicCryosol" xml:space="preserve">
+    <value>cryosol organique</value>
+  </data>
+  <data name="PacificMaritime" xml:space="preserve">
+    <value>maritime du Pacifique</value>
+  </data>
+  <data name="ParentMaterialTexture" xml:space="preserve">
+    <value>texture de matériel parent</value>
+  </data>
+  <data name="PartsPerMillion" xml:space="preserve">
+    <value>ppm</value>
+  </data>
+  <data name="Pasture" xml:space="preserve">
+    <value>pâturage</value>
+  </data>
+  <data name="PastureHandlingSystemName" xml:space="preserve">
+    <value>pâturage</value>
+  </data>
+  <data name="Peas" xml:space="preserve">
+    <value>pois </value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="PercentageAF" xml:space="preserve">
+    <value>% AF</value>
+  </data>
+  <data name="PercentageCrudeProtein" xml:space="preserve">
+    <value>% PB</value>
+  </data>
+  <data name="PercentageDryMatter" xml:space="preserve">
+    <value>% MS</value>
+  </data>
+  <data name="PercentageEE" xml:space="preserve">
+    <value>% EE</value>
+  </data>
+  <data name="PercentageH" xml:space="preserve">
+    <value>% h</value>
+  </data>
+  <data name="PercentageNdf" xml:space="preserve">
+    <value>% FDN</value>
+  </data>
+  <data name="PerDay" xml:space="preserve">
+    <value>day^-1</value>
+  </data>
+  <data name="Phytate Phosphorus" xml:space="preserve">
+    <value>Phytate Phosphorus</value>
+  </data>
+  <data name="Polygon" xml:space="preserve">
+    <value>polygone</value>
+  </data>
+  <data name="PoorQualityForage" xml:space="preserve">
+    <value>fourrage de mauvaise qualité</value>
+  </data>
+  <data name="Poplar" xml:space="preserve">
+    <value>peuplier  </value>
+  </data>
+  <data name="Potatoes" xml:space="preserve">
+    <value>pommes de terre</value>
+  </data>
+  <data name="PoundPerHeadPerDay" xml:space="preserve">
+    <value>lb tête^-1 jour^-1</value>
+  </data>
+  <data name="PoundPerHeadPerYear" xml:space="preserve">
+    <value>lb tête^-1 année^-1</value>
+  </data>
+  <data name="Pounds" xml:space="preserve">
+    <value>lb</value>
+  </data>
+  <data name="PoundsCarbonDioxidePerShelterbelt" xml:space="preserve">
+    <value>lb CO₂ brise-vent^-1</value>
+  </data>
+  <data name="PoundsCarbonPerAcre" xml:space="preserve">
+    <value>lb C a^-1</value>
+  </data>
+  <data name="PoundsCarbonPerPlanting" xml:space="preserve">
+    <value>lb C plantation^-1</value>
+  </data>
+  <data name="PoundsCarbonPerTree" xml:space="preserve">
+    <value>lb C arbre^-1</value>
+  </data>
+  <data name="PoundsMethane" xml:space="preserve">
+    <value>lb CH₄</value>
+  </data>
+  <data name="PoundsMethanePerPoundMethane" xml:space="preserve">
+    <value>lb CH₄ (lb CH₄)^-1</value>
+  </data>
+  <data name="PoundsMethanePerYear" xml:space="preserve">
+    <value>lb CH₄ année^-1</value>
+  </data>
+  <data name="PoundsN2ONPerPoundN" xml:space="preserve">
+    <value>lb N₂O-N (lb N)^-1</value>
+  </data>
+  <data name="PoundsN2ONPerYear" xml:space="preserve">
+    <value>lb N₂O-N année^-1</value>
+  </data>
+  <data name="PoundsN2OPerYear" xml:space="preserve">
+    <value>lb N₂O année^-1</value>
+  </data>
+  <data name="PoundsNitrogen" xml:space="preserve">
+    <value>lb N</value>
+  </data>
+  <data name="PoundsNitrogenPerAcre" xml:space="preserve">
+    <value>lb N a^-1</value>
+  </data>
+  <data name="PoundsNitrogenPerPound" xml:space="preserve">
+    <value>lb N lb^-1</value>
+  </data>
+  <data name="PoundsPerAcre" xml:space="preserve">
+    <value>lb a^-1</value>
+  </data>
+  <data name="PoundsPerDay" xml:space="preserve">
+    <value>lb jour^-1</value>
+  </data>
+  <data name="PoundsPerPound" xml:space="preserve">
+    <value>lb lb^-1</value>
+  </data>
+  <data name="PoundsPerPoundProteinIntake" xml:space="preserve">
+    <value>lb (lb apport en protéines)^-1</value>
+  </data>
+  <data name="PoundsPerYear" xml:space="preserve">
+    <value>lb an^-1</value>
+  </data>
+  <data name="PoundsPhosphorousPerAcre" xml:space="preserve">
+    <value>lb P a^-1</value>
+  </data>
+  <data name="PoundsVolatileSolidsPerPoundFeed" xml:space="preserve">
+    <value>lb SV lb^-1 aliment</value>
+  </data>
+  <data name="PoundVolatileSolidsPerCubicYardPerDay" xml:space="preserve">
+    <value>lb VS yd^-3 day^-1</value>
+  </data>
+  <data name="PrinceEdwardIsland" xml:space="preserve">
+    <value>Île-du-Prince-Édouard</value>
+  </data>
+  <data name="ProportionOfClayInSoil" xml:space="preserve">
+    <value>proportion d'argile du sol</value>
+  </data>
+  <data name="ProportionOfSandInSoil" xml:space="preserve">
+    <value>proportion de sable du sol</value>
+  </data>
+  <data name="ProportionOfSoilOrganicCarbon" xml:space="preserve">
+    <value>proportion de carbone organique dans le sol</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>province</value>
+  </data>
+  <data name="PulseCrops" xml:space="preserve">
+    <value>légumineuses</value>
+  </data>
+  <data name="QuarticKilogramNitrogenPerTonne" xml:space="preserve">
+    <value>(kg N t^-1)^5</value>
+  </data>
+  <data name="QuarticPoundsNitrogenPerTon" xml:space="preserve">
+    <value>(lb N ton^-1)^5</value>
+  </data>
+  <data name="Quebec" xml:space="preserve">
+    <value>Québec</value>
+  </data>
+  <data name="ReducedProtein" xml:space="preserve">
+    <value>protéines réduites</value>
+  </data>
+  <data name="ReducedTillage" xml:space="preserve">
+    <value>travail réduit du sol</value>
+  </data>
+  <data name="ReducedToIntense" xml:space="preserve">
+    <value>transition de travail réduit du sol à travail intensif du sol</value>
+  </data>
+  <data name="ReducedToNone" xml:space="preserve">
+    <value>transition de travail réduit du sol à semis direct</value>
+  </data>
+  <data name="Regosol" xml:space="preserve">
+    <value>régosol</value>
+  </data>
+  <data name="Rye" xml:space="preserve">
+    <value>seigle</value>
+  </data>
+  <data name="Safflower" xml:space="preserve">
+    <value>carthame</value>
+  </data>
+  <data name="Sand" xml:space="preserve">
+    <value>sable</value>
+  </data>
+  <data name="Saskatchewan" xml:space="preserve">
+    <value>Saskatchewan</value>
+  </data>
+  <data name="ScotsPine" xml:space="preserve">
+    <value>pin sylvestre</value>
+  </data>
+  <data name="SeedPotato" xml:space="preserve">
+    <value>pomme de terre de semence</value>
+  </data>
+  <data name="SemiaridPrairies" xml:space="preserve">
+    <value>prairies semi-arides</value>
+  </data>
+  <data name="SeparatedManureSolid" xml:space="preserve">
+    <value>solides séparés du fumier liquide</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>septembre</value>
+  </data>
+  <data name="SiberianElm" xml:space="preserve">
+    <value>orme de Sibérie</value>
+  </data>
+  <data name="SlowGrowthDietType" xml:space="preserve">
+    <value>ration pour croissance lente</value>
+  </data>
+  <data name="SlurryWithNaturalCrust" xml:space="preserve">
+    <value>fumier liquide ou lisier de porc, recouvert d’une croûte naturelle</value>
+  </data>
+  <data name="SlurryWithoutNaturalCrust" xml:space="preserve">
+    <value>fumier liquide ou lisier de porc, non recouvert d’une croûte naturelle </value>
+  </data>
+  <data name="SmallFreeStall" xml:space="preserve">
+    <value>petite logette</value>
+  </data>
+  <data name="SmallFruit" xml:space="preserve">
+    <value>petit fruit</value>
+  </data>
+  <data name="SmallGrainCereals" xml:space="preserve">
+    <value>céréales à petits grains</value>
+  </data>
+  <data name="SoftWheat" xml:space="preserve">
+    <value>blé tendre</value>
+  </data>
+  <data name="SoilFunctionalCategory" xml:space="preserve">
+    <value>catégorie fonctionnelle de sol</value>
+  </data>
+  <data name="SoilGreatGroupType" xml:space="preserve">
+    <value>grand groupe de sols</value>
+  </data>
+  <data name="SoilPh" xml:space="preserve">
+    <value>pH du sol</value>
+  </data>
+  <data name="SoilTexture" xml:space="preserve">
+    <value>texture du sol</value>
+  </data>
+  <data name="SolidStorageHandlingSystemName" xml:space="preserve">
+    <value>entreposage solide</value>
+  </data>
+  <data name="Solod" xml:space="preserve">
+    <value>solod</value>
+  </data>
+  <data name="SolodizedSolonetz" xml:space="preserve">
+    <value>solonetz solodisé</value>
+  </data>
+  <data name="Solonetz" xml:space="preserve">
+    <value>solonetz </value>
+  </data>
+  <data name="SombricBrunisol" xml:space="preserve">
+    <value>brunisol sombrique</value>
+  </data>
+  <data name="SorghumSudanGrass" xml:space="preserve">
+    <value>sorgho-herbe du Soudan</value>
+  </data>
+  <data name="Soybeans" xml:space="preserve">
+    <value>soja</value>
+  </data>
+  <data name="SpringRye" xml:space="preserve">
+    <value>seigle de printemps</value>
+  </data>
+  <data name="SpringWheat" xml:space="preserve">
+    <value>blé de printemps  </value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>norme</value>
+  </data>
+  <data name="StandardCubicFootPerTonVolatileSolids" xml:space="preserve">
+    <value>Scf ton^-1 VS</value>
+  </data>
+  <data name="Starter" xml:space="preserve">
+    <value>démarrage</value>
+  </data>
+  <data name="StaticCryosol" xml:space="preserve">
+    <value>gélisol statique</value>
+  </data>
+  <data name="StepOneText" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="StepThreeText" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="StepTwoText" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="Stockers" xml:space="preserve">
+    <value>bovins de long engraissement</value>
+  </data>
+  <data name="Straw" xml:space="preserve">
+    <value>paille</value>
+  </data>
+  <data name="String1ToolTipResidueCarbonCoefficientRootsInfo" xml:space="preserve">
+    <value>coefficient d’allocation relatif de la biomasse des racines</value>
+  </data>
+  <data name="SubhumidPrairies" xml:space="preserve">
+    <value>prairies subhumides</value>
+  </data>
+  <data name="Sunflower" xml:space="preserve">
+    <value>tournesol</value>
+  </data>
+  <data name="SunflowerSeed" xml:space="preserve">
+    <value>graine de tournesol</value>
+  </data>
+  <data name="SwathGrazing" xml:space="preserve">
+    <value>pâturage en andain</value>
+  </data>
+  <data name="SwineFinisher" xml:space="preserve">
+    <value>porc de finition</value>
+  </data>
+  <data name="TamePasture" xml:space="preserve">
+    <value>pâturage artificiel</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>température</value>
+  </data>
+  <data name="TieStall" xml:space="preserve">
+    <value>stalle entravée</value>
+  </data>
+  <data name="TilledLand" xml:space="preserve">
+    <value>terre travaillée</value>
+  </data>
+  <data name="TimothyHay" xml:space="preserve">
+    <value>foin de fléole des prés</value>
+  </data>
+  <data name="TitleAnaerobicDigestionComponent" xml:space="preserve">
+    <value>Anaerobic Digestion</value>
+  </data>
+  <data name="TitleBackgroundingComponentDisplayString" xml:space="preserve">
+    <value>bovins de long engraissement et semi-finis</value>
+  </data>
+  <data name="TitleCNRatio" xml:space="preserve">
+    <value>C:N</value>
+  </data>
+  <data name="TitleCowCalfComponentDisplayString" xml:space="preserve">
+    <value>bœuf vache-veau</value>
+  </data>
+  <data name="TitleCropRotation" xml:space="preserve">
+    <value>rotation culturale</value>
+  </data>
+  <data name="TitleFarmManureApplication" xml:space="preserve">
+    <value>Farm Manure Application</value>
+  </data>
+  <data name="TitleFinishingComponentDisplayString" xml:space="preserve">
+    <value>bovin fini</value>
+  </data>
+  <data name="TitleGrowerToFinish" xml:space="preserve">
+    <value>croissance à la finition</value>
+  </data>
+  <data name="TitleIsoWean" xml:space="preserve">
+    <value>sevrage en isolement</value>
+  </data>
+  <data name="TitlePesticide" xml:space="preserve">
+    <value>pesticide</value>
+  </data>
+  <data name="TitleSheepComponentDisplayString" xml:space="preserve">
+    <value>mouton</value>
+  </data>
+  <data name="ToolTipAdvancedDietAcidDetergentFiberInfo" xml:space="preserve">
+    <value>The percentage of the plant material in the forage that is often difficult to digest</value>
+  </data>
+  <data name="ToolTipAdvancedDietCrudeProteinInfo" xml:space="preserve">
+    <value>Percentage of Crude Protein in dry matter diet</value>
+  </data>
+  <data name="ToolTipAdvancedDietEtherExtractInfo" xml:space="preserve">
+    <value>Dietary Fat or Ether Extract. The part of diet that is soluble in ether and consists chiefly of fats and fatty acids</value>
+  </data>
+  <data name="ToolTipAdvancedDietFatInfo" xml:space="preserve">
+    <value>Percentage of Fat in dry matter diet</value>
+  </data>
+  <data name="ToolTipAdvancedDietForageInfo" xml:space="preserve">
+    <value>Total percentage of Forage in diet.</value>
+  </data>
+  <data name="ToolTipAdvancedDietMetabolizableEnergyInfo" xml:space="preserve">
+    <value>This is the net energy remaining after fecal and urinary energy loss.</value>
+  </data>
+  <data name="ToolTipAdvancedDIetMethaneConversionFactorInfo" xml:space="preserve">
+    <value>Defines the portion of methane-producing potential achieved for each type of manure management system</value>
+  </data>
+  <data name="ToolTipAdvancedDietNEL3xInfo" xml:space="preserve">
+    <value>Net energy for lactation measured at 3 times maintenance</value>
+  </data>
+  <data name="ToolTipAdvancedDietNeutralDetergentFiberInfo" xml:space="preserve">
+    <value>Percentage of Neutral Detergent Fiber in dry matter diet</value>
+  </data>
+  <data name="ToolTipAdvancedDietStarchInfo" xml:space="preserve">
+    <value>Percentage of Starch in dry matter diet</value>
+  </data>
+  <data name="ToolTipAdvancedDietTotalDigestableNutrientInfo" xml:space="preserve">
+    <value>Percentage of Total Digestable Nutrient in dry matter diet</value>
+  </data>
+  <data name="ToolTipAdvancedDigestibleEnergyInfo" xml:space="preserve">
+    <value>The amount of energy in the feed minus the amount of energy lost in fecal excretions</value>
+  </data>
+  <data name="ToolTipBeefCowGeneralGainCoefficientOfBullsInfo" xml:space="preserve">
+    <value>The gain coefficient</value>
+  </data>
+  <data name="ToolTipCoordinateDescription" xml:space="preserve">
+    <value>The latitude and longitude coordinates of the selected farm</value>
+  </data>
+  <data name="ToolTipEwesAndLambsGeneralEnergyRequiredForMilkInfo" xml:space="preserve">
+    <value>Net energy required for milk production</value>
+  </data>
+  <data name="ToolTipEwesAndLambsGeneralEnergyRequiredForWoolInfo" xml:space="preserve">
+    <value>Net energy required for wool production</value>
+  </data>
+  <data name="ToolTipEwesAndLambsGeneralGainCoefficientAInfo" xml:space="preserve">
+    <value>Gain coefficient A for ewes and lambs</value>
+  </data>
+  <data name="ToolTipEwesAndLambsGeneralGainCoefficientBInfo" xml:space="preserve">
+    <value>Gain coefficient B for ewes and lambs</value>
+  </data>
+  <data name="ToolTipEwesAndLambsGeneralWoolProductionInfo" xml:space="preserve">
+    <value>Wool production from ewes and lambs measured as kg per year</value>
+  </data>
+  <data name="ToolTipFarrowToFinishProductionSystem" xml:space="preserve">
+    <value>Les exploitations de naissage-finition ont des truies reproductrices qu'elles font saillir, prennent soin des portées de porcelets et les élèvent jusqu’à ce qu'ils atteignent un poids de marché.</value>
+  </data>
+  <data name="ToolTipFarrowToWeanProductionSystem" xml:space="preserve">
+    <value>Les exploitations de naissage (maternités) gardent des truies, des cochettes et parfois des verrats; elles gardent le stock de reproducteurs, mais vendent les porcelets à des pouponnières en isolement ou à des exploitations d'engraissement.</value>
+  </data>
+  <data name="ToolTipGrowerToFinishProductionSystem" xml:space="preserve">
+    <value>Les entreprises d’engraissement-finition élèvent des porcs à l’engrais jusqu’à ce qu'ils atteigent un poids vif de marché d’environ 110-115 kg. Elles ne possèdent aucun reproducteur et achètent des porcelets sevrés.</value>
+  </data>
+  <data name="ToolTipIsoWeanProductionSystem" xml:space="preserve">
+    <value>Les pouponnières en isolement élèvent des porcelets qui ont été sevrés entre 18 et 28 jours. Ces animaux sont gardés séparés des truies et des porcs plus gros pour éviter la transmission de maladies. En général, les porcs séjournent à la pouponnière de 5 à 8 semaines, mais parfois seulement deux semaines.</value>
+  </data>
+  <data name="ToolTipLandEconmomicsBuildingRepairsCostInfo" xml:space="preserve">
+    <value>Cost of building repairs</value>
+  </data>
+  <data name="ToolTipLandEconmomicsCustomWorkCostInfo" xml:space="preserve">
+    <value>Cost of custom work </value>
+  </data>
+  <data name="ToolTipLandEconmomicsLabourCostInfo" xml:space="preserve">
+    <value>Cost of labour (paid and unpaid)</value>
+  </data>
+  <data name="ToolTipLandEconmomicsOperatingInterestCostInfo" xml:space="preserve">
+    <value>Cost of operating interest</value>
+  </data>
+  <data name="ToolTipLandEconmomicsUtilitiesCostInfo" xml:space="preserve">
+    <value>Cost of utilities</value>
+  </data>
+  <data name="ToolTipLandEconomicsChemicalCostInfo" xml:space="preserve">
+    <value>Cost of chemicals</value>
+  </data>
+  <data name="ToolTipLandEconomicsCropInsuranceCostInfo" xml:space="preserve">
+    <value>Cost of crop and hail insurance</value>
+  </data>
+  <data name="ToolTipLandEconomicsExpectedMarkedPriceInfo" xml:space="preserve">
+    <value>Average regional market price of the crop</value>
+  </data>
+  <data name="ToolTipLandEconomicsFertilizerCostInfo" xml:space="preserve">
+    <value>Cost of fertilizer</value>
+  </data>
+  <data name="ToolTipLandEconomicsFuelOilAndLubeCostInfo" xml:space="preserve">
+    <value>Cost of fuel, oil and lube</value>
+  </data>
+  <data name="ToolTipLandEconomicsMachineryRepairsCostInfo" xml:space="preserve">
+    <value>Cost of machinery and repairs</value>
+  </data>
+  <data name="ToolTipLandEconomicsSeedCleaningTreatmentInfo" xml:space="preserve">
+    <value>Cost of seed, cleaning and treatment</value>
+  </data>
+  <data name="ToolTipLandEconomicsTotalFixedCostInfo" xml:space="preserve">
+    <value>Costs that do not change such as property taxes and business overhead</value>
+  </data>
+  <data name="ToolTipLandEconomicsTotalVariableCostInfo" xml:space="preserve">
+    <value>Cost that change or vary with each season such as crop insurance and seed treatment</value>
+  </data>
+  <data name="ToolTipLandEconomicsTruckingAndMarketingCostInfo" xml:space="preserve">
+    <value>Cost of trucking and marketing</value>
+  </data>
+  <data name="ToolTipLandFertilizerEfficiencyBlendInfo" xml:space="preserve">
+    <value>Amount of nutrients retained for crop use and not lost to the environment</value>
+  </data>
+  <data name="ToolTipLandFertilizerNitrogenBlendInfo" xml:space="preserve">
+    <value>Amount of phosphorus in blend</value>
+  </data>
+  <data name="ToolTipLandFertilizerNitrogenDepositionAmountInfo" xml:space="preserve">
+    <value>Amount of nitrogen deposited from atmosphere to local environment as gases, dry deposition and in precipitation as wet deposition.</value>
+  </data>
+  <data name="ToolTipLandFertilizerNitrogenFixationInfo" xml:space="preserve">
+    <value>Amount of nitrogen supplied to the crop through biological nitrogen fixation</value>
+  </data>
+  <data name="ToolTipLandFertilizerPhosphorusBlendInfo" xml:space="preserve">
+    <value>Amount of nitrogen in blend</value>
+  </data>
+  <data name="ToolTipLandFertilizerPotassiumBlendInfo" xml:space="preserve">
+    <value>Amount of potassium in blend</value>
+  </data>
+  <data name="ToolTipLandFertilizerSoilTestNitrogenInfo" xml:space="preserve">
+    <value>This value indicates the existing soil nitrogen supply for which the fertilization rate was adapted</value>
+  </data>
+  <data name="ToolTipLandFertilizerSulphurBlendInfo" xml:space="preserve">
+    <value>Amount of sulphur in blend</value>
+  </data>
+  <data name="ToolTipLandFertilizerTableApplicationMethodInfo" xml:space="preserve">
+    <value>The method of fertilizer application. Methods include Fully Injected, Broadcast and Incorporated or Partially Injected</value>
+  </data>
+  <data name="ToolTipLandFertilizerTableApplicationRateInfo" xml:space="preserve">
+    <value>The rate of fertilizer application</value>
+  </data>
+  <data name="ToolTipLandFertilizerTableBlendInfo" xml:space="preserve">
+    <value>Type of blend used</value>
+  </data>
+  <data name="ToolTipLandFertilizerTableSeasonOfApplicationInfo" xml:space="preserve">
+    <value>The season when the fertilizer was applied, either spring or fall</value>
+  </data>
+  <data name="ToolTipLandGeneralFuelEnergyInfo" xml:space="preserve">
+    <value>Fuel energy used during the agriculture process</value>
+  </data>
+  <data name="ToolTipLandGeneralHerbicideEnergyInfo" xml:space="preserve">
+    <value>Energy required to manufacture the herbicide</value>
+  </data>
+  <data name="ToolTipLandGeneralMoistureContentInfo" xml:space="preserve">
+    <value>Refers to the content of moisture/water in the crop</value>
+  </data>
+  <data name="ToolTipLandGeneralTillageTypeInfo" xml:space="preserve">
+    <value>Select tillage type from either No Tillage, Intensive Tillage or Reduced Tillage</value>
+  </data>
+  <data name="ToolTipLandManureTableAmountOfNitrogenFromAppliedManureInfo" xml:space="preserve">
+    <value>The amount of Nitrogen from applied manure. This value depends on the fraction specified under 'N fraction of applied manure'</value>
+  </data>
+  <data name="ToolTipLandManureTableManureHandlingSystemInfo" xml:space="preserve">
+    <value>Select a manure handling system. Options depend on your 'Manure Type' selection.</value>
+  </data>
+  <data name="ToolTipLandManureTableManureTyppeInfo" xml:space="preserve">
+    <value>Select the type of manure applied</value>
+  </data>
+  <data name="ToolTipLandManureTableNitrogenFractionOfAppliedManureInfo" xml:space="preserve">
+    <value>This displays the fraction of Nitrogen of the applied manure. The field helps calculate the value in 'Amount of N from applied manure'</value>
+  </data>
+  <data name="ToolTipLandManureTableOriginOfManureInfo" xml:space="preserve">
+    <value>Select the origin of the manure. This can be either imported or from farm livestock</value>
+  </data>
+  <data name="ToolTipLandResidueCarbonCoefficientExtraRootsInfo" xml:space="preserve">
+    <value>coefficient d’allocation relatif de la biomasse du matériel extraracinaire</value>
+  </data>
+  <data name="ToolTipLandResidueCarbonCoefficientProductInfo" xml:space="preserve">
+    <value>coefficient d’allocation relatif de la biomasse du produit</value>
+  </data>
+  <data name="ToolTipLandResidueCarbonCoefficientRootsInfo" xml:space="preserve">
+    <value>coefficient d’allocation relatif de la biomasse du matériel racines</value>
+  </data>
+  <data name="ToolTipLandResidueCarbonCoefficientStrawInfo" xml:space="preserve">
+    <value>coefficient d’allocation relatif de la biomasse de la paille</value>
+  </data>
+  <data name="ToolTipLandResidueLigninContent" xml:space="preserve">
+    <value>Lignin content</value>
+  </data>
+  <data name="ToolTipLandResidueLigningContentInfo" xml:space="preserve">
+    <value>Lignin content of residues</value>
+  </data>
+  <data name="ToolTipLandResidueNitrogenContentInExtraRootsInfo" xml:space="preserve">
+    <value>contenu en azote du matériel extraracinaire</value>
+  </data>
+  <data name="ToolTipLandResidueNitrogenContentInProductInfo" xml:space="preserve">
+    <value>contenu en azote du produit</value>
+  </data>
+  <data name="ToolTipLandResidueNitrogenContentInRootsInfo" xml:space="preserve">
+    <value>contenu en azote des racines</value>
+  </data>
+  <data name="ToolTipLandResidueNitrogenContentInStrawInfo" xml:space="preserve">
+    <value>contenu en azote de la paille</value>
+  </data>
+  <data name="ToolTipLandResidueProductReturnedToSoilInfo" xml:space="preserve">
+    <value>pourcentage du rendement du produit qui est retourné au sol</value>
+  </data>
+  <data name="ToolTipLandResidueRootsReturnedToSoilInfo" xml:space="preserve">
+    <value>pourcentage des racines qui est retourné au sol</value>
+  </data>
+  <data name="ToolTipLandResidueStrawReturnedToSoilInfo" xml:space="preserve">
+    <value>pourcentage de la paille qui est retourné au sol</value>
+  </data>
+  <data name="ToolTipManureTableAmountOfManureInfo" xml:space="preserve">
+    <value>The amount of manure applied</value>
+  </data>
+  <data name="ToolTipOtherAnimalsManureDirectEmissionFactorInfo" xml:space="preserve">
+    <value>Direct emission factor of manure</value>
+  </data>
+  <data name="ToolTipOtherAnimalsManureManureMethaneRateInfo" xml:space="preserve">
+    <value>Methane emission rate of the manure</value>
+  </data>
+  <data name="ToolTipOtherAnimalsManureNitrogenExcretionRateInfo" xml:space="preserve">
+    <value>Amount of nitrogen excreted by livestock as urine and faeces</value>
+  </data>
+  <data name="ToolTipOtherAnimalsManureVolatilizationFractionInfo" xml:space="preserve">
+    <value>Volatilization fraction of manure</value>
+  </data>
+  <data name="ToolTipOtherAnimalsManureYearlyEntericMethaneRateInfo" xml:space="preserve">
+    <value>Methane emission rate from enteric fermentation</value>
+  </data>
+  <data name="ToolTipRamGeneralEnergyRequiredForWoolInfo" xml:space="preserve">
+    <value>Net energy required for wool production</value>
+  </data>
+  <data name="ToolTipRamGeneralGainCoefficientAInfo" xml:space="preserve">
+    <value>Gain coefficient A</value>
+  </data>
+  <data name="ToolTipRamGeneralGainCoefficientBInfo" xml:space="preserve">
+    <value>Gain coefficient B</value>
+  </data>
+  <data name="ToolTipRamGeneralWoolProductionInfo" xml:space="preserve">
+    <value>Wool production from ram measured as kg per year</value>
+  </data>
+  <data name="ToolTipSharedDietTabDietInfo" xml:space="preserve">
+    <value>Select a diet type from Low, Medium or High energy diets</value>
+  </data>
+  <data name="ToolTipSharedHousingActivityCoefficientFeedingSituationInfo" xml:space="preserve">
+    <value>A cofficient that accounts for the animal's feeding situation e.g. stall, pasture etc.</value>
+  </data>
+  <data name="ToolTipSharedHousingBeddingApplicationCalculatorInfo" xml:space="preserve">
+    <value>Create a custom bedding application rate by entering information like number of bales, animals, average weight of bales etc.</value>
+  </data>
+  <data name="ToolTipSharedHousingBeddingApplicationRateInfo" xml:space="preserve">
+    <value>Helps estimate the amount of bedding material applied per head per day</value>
+  </data>
+  <data name="ToolTipSharedHousingBeddingTypeInfo" xml:space="preserve">
+    <value>The type of bedding used for animals</value>
+  </data>
+  <data name="ToolTipSharedHousingMaintenanceCoefficientInfo" xml:space="preserve">
+    <value>Used in the calculation of net energy for maintenance</value>
+  </data>
+  <data name="ToolTipSharedHousingPastureLocationInfo" xml:space="preserve">
+    <value>Select the location of the pasture where the animals are housed</value>
+  </data>
+  <data name="ToolTipSharedHousingType" xml:space="preserve">
+    <value>Select the Housing Type of the animals</value>
+  </data>
+  <data name="ToolTipSharedHousingTypeOfGrazingInfo" xml:space="preserve">
+    <value>Select a grazing system of the above specified pasture location</value>
+  </data>
+  <data name="ToolTipSharedManureAshContentOfManureInfo" xml:space="preserve">
+    <value>Enter the ash content of the feed</value>
+  </data>
+  <data name="ToolTipSharedManureHandlingSystem" xml:space="preserve">
+    <value>Select the manure handling system used on the farm</value>
+  </data>
+  <data name="ToolTipSharedManureMethaneProducingCapacityOfManureInfo" xml:space="preserve">
+    <value>Methane producing capacity of manure. Helps in calculating methane emissions from manure</value>
+  </data>
+  <data name="ToolTipSheepFeedLotGeneralGainCoefficientAInfo" xml:space="preserve">
+    <value>Gain coefficient A</value>
+  </data>
+  <data name="ToolTipSheepFeedLotGeneralGainCoefficientBInfo" xml:space="preserve">
+    <value>Gain coefficient B</value>
+  </data>
+  <data name="ToolTipSheepGeneralGainCoefficientA" xml:space="preserve">
+    <value>Gain coefficient A</value>
+  </data>
+  <data name="ToolTipSheepGeneralGainCoefficientB" xml:space="preserve">
+    <value>Gain coefficient B</value>
+  </data>
+  <data name="ToolTipSheepSharedDietCrudeProteinInfo" xml:space="preserve">
+    <value>Crude protein content in diet</value>
+  </data>
+  <data name="ToolTipSheepSharedDietMethaneConversionFactorInfo" xml:space="preserve">
+    <value>Defines the portion of methane-producing potential achieved for each type of manure management system</value>
+  </data>
+  <data name="ToolTipSheepSharedDietTotalDigestibleNutrientInfo" xml:space="preserve">
+    <value>Percent total digestible nutirents in feed</value>
+  </data>
+  <data name="ToolTipSwineDietCrudeProteinInfo" xml:space="preserve">
+    <value>Used to calculate protein intake of animals</value>
+  </data>
+  <data name="ToolTipSwineDietFeedIntakeInfo" xml:space="preserve">
+    <value>Feed Intake measured as kiilogram per head per day</value>
+  </data>
+  <data name="ToolTipSwineDietTabDietInfo" xml:space="preserve">
+    <value>Select a Diet from the given options. New custom diets created will appear here</value>
+  </data>
+  <data name="ToolTipSwineGeneralYearlyEntericMethaneRateInfo" xml:space="preserve">
+    <value>Methane emission rate from enteric fermentation</value>
+  </data>
+  <data name="TopLayerThickness" xml:space="preserve">
+    <value>épaisseur de la couche supérieure</value>
+  </data>
+  <data name="Triticale" xml:space="preserve">
+    <value>triticale</value>
+  </data>
+  <data name="TurbicCryosol" xml:space="preserve">
+    <value>gélisol turbique</value>
+  </data>
+  <data name="TurfSod" xml:space="preserve">
+    <value>gazon en plaques</value>
+  </data>
+  <data name="UndersownBarley" xml:space="preserve">
+    <value>orge contre-ensemencée</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>inconnu</value>
+  </data>
+  <data name="UnknownDairyFeedClassType" xml:space="preserve">
+    <value>{0} n’est pas une catégorie valide d’aliments pour bovins laitiers</value>
+  </data>
+  <data name="UntilledLand" xml:space="preserve">
+    <value>terre non travaillée (travail réduit du sol)</value>
+  </data>
+  <data name="VerticSolonetz" xml:space="preserve">
+    <value>solonetz vertique</value>
+  </data>
+  <data name="Vertisol" xml:space="preserve">
+    <value>vertisol</value>
+  </data>
+  <data name="WesternCanada" xml:space="preserve">
+    <value>Ouest du Canada</value>
+  </data>
+  <data name="WetWeight" xml:space="preserve">
+    <value>poids humide</value>
+  </data>
+  <data name="WheatBolinder" xml:space="preserve">
+    <value>blé – Bolinder</value>
+  </data>
+  <data name="WheatGan" xml:space="preserve">
+    <value>blé – Gan</value>
+  </data>
+  <data name="WhiteSpruce" xml:space="preserve">
+    <value>épinette blanche</value>
+  </data>
+  <data name="WinterWheat" xml:space="preserve">
+    <value>blé d'hiver</value>
+  </data>
+  <data name="WoodChip" xml:space="preserve">
+    <value>copeau de bois</value>
+  </data>
+  <data name="Yards" xml:space="preserve">
+    <value>verges</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>années</value>
+  </data>
+  <data name="Yukon" xml:space="preserve">
+    <value>Yukon</value>
+  </data>
+</root>

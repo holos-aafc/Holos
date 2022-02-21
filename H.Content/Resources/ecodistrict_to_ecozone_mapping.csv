@@ -1,0 +1,470 @@
+Ecodistrict,Ecozone,Province,PMayToOct,PEMayToOct,Ftopo,SoilType,SoilTexture
+358,Boreal Shield West,Manitoba,348,453,0,Brown Chernozem,Coarse
+358,Boreal Shield West,Saskatchewan,348,453,0,Brown Chernozem,Coarse
+371,Boreal Shield West,Manitoba,376,581,0.33,Black/Gray Chernozem,Fine
+371,Boreal Shield West,Ontario,376,581,0.33,Eastern Canada,Fine
+375,Boreal Shield West,Manitoba,411,579,0.33,Black/Gray Chernozem,Fine
+377,Boreal Shield West,Manitoba,501,492,3.38,Eastern Canada,Fine
+377,Boreal Shield West,Ontario,501,492,3.38,Black/Gray Chernozem,Fine
+378,Boreal Shield West,Ontario,436,505,3.38,Eastern Canada,Medium
+379,Boreal Shield West,Manitoba,413,587,3.38,Black/Gray Chernozem,Medium
+379,Boreal Shield West,Ontario,498,574,3.38,Eastern Canada,Medium
+380,Boreal Shield West,Manitoba,516,608,0,Black/Gray Chernozem,Coarse
+381,Boreal Shield West,Ontario,532,574,3.38,Eastern Canada,Medium
+383,Boreal Shield West,Ontario,502,602,3.38,Eastern Canada,Medium
+386,Boreal Shield West,Ontario,498,574,3.38,Eastern Canada,Coarse
+391,Boreal Shield West,Ontario,498,589,3.38,Eastern Canada,Medium
+400,Boreal Shield East,Ontario,498,586,0.8,Eastern Canada,Medium
+401,Boreal Shield East,Ontario,504,574,0.8,Eastern Canada,Fine
+401,Boreal Shield East,Quebec,559,529,0.8,Eastern Canada,Fine
+407,Boreal Shield East,Ontario,453,574,0.8,Eastern Canada,Coarse
+407,Boreal Shield East,Quebec,453,574,0.8,Eastern Canada,Coarse
+408,Boreal Shield East,Ontario,478,571,2.99,Eastern Canada,Medium
+408,Boreal Shield East,Quebec,559,529,2.99,Eastern Canada,Medium
+409,Boreal Shield East,Ontario,555,555,2.99,Eastern Canada,Medium
+410,Boreal Shield East,Ontario,514,509,21.77,Eastern Canada,Coarse
+411,Boreal Shield East,Ontario,530,544,21.77,Eastern Canada,Coarse
+412,Boreal Shield East,Ontario,551,531,21.77,Eastern Canada,Coarse
+413,Boreal Shield East,Ontario,498,593,21.77,Eastern Canada,Medium
+415,Boreal Shield East,Quebec,559,526,0,Eastern Canada,Coarse
+418,Boreal Shield East,Quebec,559,525,45.54,Eastern Canada,Coarse
+419,Boreal Shield East,Quebec,559,529,0,Eastern Canada,Coarse
+422,Boreal Shield East,Quebec,554,529,13.9,Eastern Canada,Coarse
+423,Boreal Shield East,Ontario,603,522,12.88,Eastern Canada,Medium
+423,Boreal Shield East,Quebec,603,522,12.88,Eastern Canada,Medium
+424,Boreal Shield East,Quebec,479,556,40.48,Eastern Canada,Fine
+425,Boreal Shield East,Ontario,565,581,13.9,Eastern Canada,Medium
+425,Boreal Shield East,Quebec,565,581,13.9,Eastern Canada,Medium
+426,Boreal Shield East,Quebec,559,581,0.85,Eastern Canada,Coarse
+438,Boreal Shield East,Quebec,544,449,0,Eastern Canada,Coarse
+440,Boreal Shield East,Quebec,546,529,0,Eastern Canada,Medium
+441,Boreal Shield East,Quebec,559,512,18.89,Eastern Canada,Medium
+455,Boreal Shield East,Newfoundland and Labrador,556,333,0,Eastern Canada,Medium
+458,Boreal Shield East,Newfoundland and Labrador,621,407,0,Eastern Canada,Medium
+461,Boreal Shield East,Newfoundland and Labrador,692,365,13.35,Eastern Canada,Medium
+463,Boreal Shield East,Newfoundland and Labrador,737,351,2.3,Eastern Canada,Medium
+466,Boreal Shield East,Newfoundland and Labrador,567,460,3.29,Eastern Canada,Medium
+468,Boreal Shield East,Newfoundland and Labrador,629,408,0,Eastern Canada,Medium
+470,Boreal Shield East,Newfoundland and Labrador,585,414,16.93,Eastern Canada,Medium
+471,Boreal Shield East,Newfoundland and Labrador,720,384,21.5,Eastern Canada,Medium
+475,Boreal Shield East,Newfoundland and Labrador,633,400,0.69,Eastern Canada,Medium
+476,Boreal Shield East,Newfoundland and Labrador,633,400,0.69,Eastern Canada,Medium
+477,Boreal Shield East,Newfoundland and Labrador,543,333,0.69,Eastern Canada,Medium
+478,Atlantic Maritimes,New Brunswick,522,472,0,Eastern Canada,Medium
+478,Atlantic Maritimes,Quebec,522,472,0,Eastern Canada,Medium
+479,Atlantic Maritimes,New Brunswick,542,467,14.75,Eastern Canada,Medium
+479,Atlantic Maritimes,Quebec,542,467,14.75,Eastern Canada,Medium
+480,Atlantic Maritimes,Quebec,522,472,0,Eastern Canada,Medium
+481,Atlantic Maritimes,New Brunswick,662,502,60,Eastern Canada,Medium
+481,Atlantic Maritimes,Quebec,559,529,60,Eastern Canada,Medium
+482,Atlantic Maritimes,Quebec,611,547,27.18,Eastern Canada,Medium
+483,Atlantic Maritimes,Quebec,550,586,27.82,Eastern Canada,Medium
+484,Atlantic Maritimes,New Brunswick,543,504,0,Eastern Canada,Medium
+484,Atlantic Maritimes,Quebec,559,529,4.77,Eastern Canada,Medium
+485,Atlantic Maritimes,New Brunswick,607,507,0,Eastern Canada,Medium
+486,Atlantic Maritimes,New Brunswick,590,564,6.16,Eastern Canada,Medium
+487,Atlantic Maritimes,New Brunswick,594,559,5.31,Eastern Canada,Coarse
+487,Atlantic Maritimes,Quebec,559,529,30.05,Eastern Canada,Coarse
+488,Atlantic Maritimes,New Brunswick,618,600,0,Eastern Canada,Medium
+489,Atlantic Maritimes,New Brunswick,599,557,2.31,Eastern Canada,Medium
+490,Atlantic Maritimes,New Brunswick,580,557,0,Eastern Canada,Coarse
+491,Atlantic Maritimes,New Brunswick,599,557,2.31,Eastern Canada,Medium
+492,Atlantic Maritimes,New Brunswick,599,557,2.31,Eastern Canada,Medium
+493,Atlantic Maritimes,New Brunswick,573,566,8.57,Eastern Canada,Medium
+494,Atlantic Maritimes,New Brunswick,578,594,10.62,Eastern Canada,Medium
+495,Atlantic Maritimes,New Brunswick,562,583,0,Eastern Canada,Medium
+496,Atlantic Maritimes,New Brunswick,574,581,5.77,Eastern Canada,Medium
+497,Atlantic Maritimes,New Brunswick,619,575,0,Eastern Canada,Medium
+498,Atlantic Maritimes,New Brunswick,597,528,0,Eastern Canada,Coarse
+499,Atlantic Maritimes,New Brunswick,548,567,2.99,Eastern Canada,Fine
+500,Atlantic Maritimes,New Brunswick,544,514,0.22,Eastern Canada,Coarse
+501,Atlantic Maritimes,New Brunswick,547,539,0,Eastern Canada,Medium
+502,Atlantic Maritimes,New Brunswick,579,608,0.28,Eastern Canada,Medium
+503,Atlantic Maritimes,New Brunswick,567,553,0.42,Eastern Canada,Medium
+504,Atlantic Maritimes,New Brunswick,550,488,0,Eastern Canada,Medium
+504,Atlantic Maritimes,Nova Scotia,629,522,5.48,Eastern Canada,Medium
+505,Atlantic Maritimes,New Brunswick,528,576,0,Eastern Canada,Medium
+506,Atlantic Maritimes,New Brunswick,568,593,0,Eastern Canada,Medium
+507,Atlantic Maritimes,New Brunswick,581,535,2,Eastern Canada,Medium
+507,Atlantic Maritimes,Nova Scotia,629,522,6.23,Eastern Canada,Medium
+508,Atlantic Maritimes,New Brunswick,613,522,3.9,Eastern Canada,Coarse
+509,Atlantic Maritimes,New Brunswick,569,554,2.07,Eastern Canada,Medium
+509,Atlantic Maritimes,Nova Scotia,569,554,2.07,Eastern Canada,Medium
+510,Atlantic Maritimes,Nova Scotia,616,566,18.25,Eastern Canada,Coarse
+511,Atlantic Maritimes,Nova Scotia,617,535,19.7,Eastern Canada,Medium
+512,Atlantic Maritimes,Nova Scotia,625,577,17.75,Eastern Canada,Medium
+513,Atlantic Maritimes,Nova Scotia,584,501,27.87,Eastern Canada,Coarse
+514,Atlantic Maritimes,Nova Scotia,628,557,2.8,Eastern Canada,Coarse
+515,Atlantic Maritimes,Nova Scotia,628,557,2.8,Eastern Canada,Coarse
+516,Atlantic Maritimes,Nova Scotia,654,523,8.65,Eastern Canada,Coarse
+517,Atlantic Maritimes,Nova Scotia,607,544,13.8,Eastern Canada,Medium
+518,Atlantic Maritimes,Nova Scotia,564,563,8.66,Eastern Canada,Medium
+519,Atlantic Maritimes,Nova Scotia,669,529,10.55,Eastern Canada,Coarse
+520,Atlantic Maritimes,Nova Scotia,640,523,17.09,Eastern Canada,Medium
+521,Atlantic Maritimes,Nova Scotia,667,473,0,Eastern Canada,Coarse
+522,Atlantic Maritimes,Nova Scotia,645,497,31.36,Eastern Canada,Medium
+523,Atlantic Maritimes,Nova Scotia,665,475,33.56,Eastern Canada,Medium
+524,Atlantic Maritimes,Nova Scotia,671,466,49.71,Eastern Canada,Medium
+525,Atlantic Maritimes,Nova Scotia,660,490,14.16,Eastern Canada,Medium
+526,Atlantic Maritimes,Nova Scotia,665,475,33.56,Eastern Canada,Medium
+527,Atlantic Maritimes,Nova Scotia,652,523,20.35,Eastern Canada,Medium
+528,Atlantic Maritimes,Nova Scotia,587,511,15.36,Eastern Canada,Coarse
+529,Atlantic Maritimes,Nova Scotia,677,475,35.34,Eastern Canada,Medium
+530,Atlantic Maritimes,Nova Scotia,587,533,7.45,Eastern Canada,Medium
+531,Atlantic Maritimes,Nova Scotia,623,545,15.76,Eastern Canada,Medium
+532,Atlantic Maritimes,Nova Scotia,667,473,0,Eastern Canada,Coarse
+533,Atlantic Maritimes,Nova Scotia,667,473,0,Eastern Canada,Coarse
+534,Atlantic Maritimes,Prince Edward Island,549,464,0,Eastern Canada,Coarse
+535,Atlantic Maritimes,Prince Edward Island,559,464,0,Eastern Canada,Medium
+536,Atlantic Maritimes,Prince Edward Island,587,471,0.42,Eastern Canada,Medium
+537,Atlantic Maritimes,Prince Edward Island,570,461,25.7,Eastern Canada,Medium
+538,Atlantic Maritimes,Prince Edward Island,584,476,30,Eastern Canada,Coarse
+539,Atlantic Maritimes,Quebec,559,529,0,Eastern Canada,Coarse
+540,Mixedwood Plains,Quebec,652,556,11.71,Eastern Canada,Coarse
+541,Mixedwood Plains,Ontario,558,563,19.96,Eastern Canada,Fine
+541,Mixedwood Plains,Quebec,559,529,9.66,Eastern Canada,Fine
+542,Mixedwood Plains,Ontario,468,603,12.16,Eastern Canada,Medium
+543,Mixedwood Plains,Ontario,525,596,5.68,Eastern Canada,Fine
+543,Mixedwood Plains,Quebec,559,529,5.07,Eastern Canada,Fine
+544,Mixedwood Plains,Ontario,524,601,5.62,Eastern Canada,Coarse
+545,Mixedwood Plains,Ontario,483,586,8.35,Eastern Canada,Medium
+546,Mixedwood Plains,Ontario,526,601,1.51,Eastern Canada,Coarse
+546,Mixedwood Plains,Quebec,559,529,0,Eastern Canada,Coarse
+547,Mixedwood Plains,Ontario,513,594,29.67,Eastern Canada,Medium
+548,Mixedwood Plains,Quebec,541,587,0,Eastern Canada,Medium
+549,Mixedwood Plains,Ontario,503,574,23.69,Eastern Canada,Medium
+550,Mixedwood Plains,Ontario,498,574,0,Eastern Canada,Fine
+551,Mixedwood Plains,Ontario,505,541,6.42,Eastern Canada,Fine
+552,Mixedwood Plains,Ontario,501,593,6.7,Eastern Canada,Medium
+553,Mixedwood Plains,Ontario,480,572,5.61,Eastern Canada,Medium
+554,Mixedwood Plains,Ontario,451,626,2.76,Eastern Canada,Medium
+555,Mixedwood Plains,Ontario,449,518,6.29,Eastern Canada,Medium
+556,Mixedwood Plains,Ontario,528,541,16.02,Eastern Canada,Medium
+557,Mixedwood Plains,Ontario,526,589,2.23,Eastern Canada,Medium
+558,Mixedwood Plains,Ontario,530,573,8.57,Eastern Canada,Medium
+559,Mixedwood Plains,Ontario,476,590,0,Eastern Canada,Medium
+560,Mixedwood Plains,Ontario,490,601,9.79,Eastern Canada,Medium
+561,Mixedwood Plains,Ontario,471,566,0,Eastern Canada,Medium
+562,Mixedwood Plains,Ontario,461,586,2.03,Eastern Canada,Medium
+563,Mixedwood Plains,Ontario,445,531,10.01,Eastern Canada,Medium
+564,Mixedwood Plains,Ontario,477,596,10.96,Eastern Canada,Medium
+565,Mixedwood Plains,Ontario,506,575,8.12,Eastern Canada,Medium
+566,Mixedwood Plains,Ontario,471,571,12.91,Eastern Canada,Medium
+567,Mixedwood Plains,Ontario,516,611,7.61,Eastern Canada,Medium
+568,Mixedwood Plains,Ontario,521,613,7.05,Eastern Canada,Coarse
+569,Mixedwood Plains,Ontario,490,568,15.6,Eastern Canada,Fine
+570,Mixedwood Plains,Ontario,483,607,10.18,Eastern Canada,Medium
+571,Mixedwood Plains,Ontario,513,608,5.08,Eastern Canada,Coarse
+572,Mixedwood Plains,Ontario,471,578,9.03,Eastern Canada,Medium
+581,Boreal Plains,Alberta,321,554,0,Black/Gray Chernozem,Medium
+581,Boreal Plains,British Columbia,321,554,0,Black/Gray Chernozem,Medium
+583,Boreal Plains,Alberta,308,526,14.29,Black/Gray Chernozem,Fine
+583,Boreal Plains,British Columbia,321,554,5.63,Black/Gray Chernozem,Fine
+584,Boreal Plains,Alberta,321,554,5.63,Black/Gray Chernozem,Fine
+585,Boreal Plains,British Columbia,322,444,1.52,Black/Gray Chernozem,Medium
+586,Boreal Plains,Alberta,285,505,4.57,Black/Gray Chernozem,Medium
+587,Boreal Plains,Alberta,281,503,9.12,Black/Gray Chernozem,Coarse
+588,Boreal Plains,Alberta,285,544,0.75,Black/Gray Chernozem,Fine
+589,Boreal Plains,Alberta,299,547,0,Black/Gray Chernozem,Medium
+590,Boreal Plains,Alberta,297,512,0,Black/Gray Chernozem,Fine
+591,Boreal Plains,Alberta,323,485,0,Black/Gray Chernozem,Medium
+591,Boreal Plains,British Columbia,321,554,3.3,Black/Gray Chernozem,Medium
+592,Boreal Plains,Alberta,320,520,0,Black/Gray Chernozem,Fine
+593,Boreal Plains,Alberta,318,504,2.32,Black/Gray Chernozem,Fine
+594,Boreal Plains,Alberta,322,504,0,Black/Gray Chernozem,Fine
+595,Boreal Plains,Alberta,310,528,0,Black/Gray Chernozem,Fine
+596,Boreal Plains,Alberta,308,527,0.63,Black/Gray Chernozem,Medium
+597,Boreal Plains,Alberta,316,517,0,Black/Gray Chernozem,Fine
+598,Boreal Plains,Alberta,318,493,0.53,Black/Gray Chernozem,Fine
+599,Boreal Plains,Alberta,314,509,0.53,Black/Gray Chernozem,Fine
+600,Boreal Plains,Alberta,327,515,0,Brown Chernozem,Coarse
+601,Boreal Plains,Alberta,285,544,0.75,Brown Chernozem,Fine
+602,Boreal Plains,Alberta,318,570,5.98,Brown Chernozem,Medium
+603,Boreal Plains,Alberta,318,570,5.98,Brown Chernozem,Medium
+607,Boreal Plains,Alberta,318,570,5.98,Black/Gray Chernozem,Medium
+609,Boreal Plains,Alberta,318,570,16.83,Black/Gray Chernozem,Fine
+610,Boreal Plains,Alberta,334,520,1.7,Black/Gray Chernozem,Fine
+610,Boreal Plains,British Columbia,321,554,0,Black/Gray Chernozem,Fine
+611,Boreal Plains,Alberta,311,529,15.41,Black/Gray Chernozem,Fine
+612,Boreal Plains,Alberta,316,520,5.98,Black/Gray Chernozem,Medium
+613,Boreal Plains,Alberta,316,520,5.98,Black/Gray Chernozem,Medium
+614,Boreal Plains,Alberta,367,481,16.83,Brown Chernozem,Medium
+615,Boreal Plains,Alberta,371,493,16.83,Black/Gray Chernozem,Medium
+616,Boreal Plains,Alberta,369,496,0,Black/Gray Chernozem,Coarse
+617,Boreal Plains,Alberta,380,514,0,Black/Gray Chernozem,Medium
+618,Boreal Plains,Alberta,342,528,12.88,Black/Gray Chernozem,Medium
+618,Boreal Plains,British Columbia,321,554,0.39,Black/Gray Chernozem,Medium
+619,Boreal Plains,Alberta,396,513,1.7,Black/Gray Chernozem,Medium
+620,Boreal Plains,Alberta,396,513,1.7,Black/Gray Chernozem,Medium
+622,Boreal Plains,Alberta,417,526,11.35,Black/Gray Chernozem,Medium
+623,Boreal Plains,Alberta,405,548,4.88,Black/Gray Chernozem,Medium
+624,Boreal Plains,Alberta,440,520,4.88,Black/Gray Chernozem,Medium
+625,Boreal Plains,Alberta,410,549,4.88,Black/Gray Chernozem,Medium
+626,Boreal Plains,Alberta,410,549,4.88,Black/Gray Chernozem,Medium
+627,Boreal Plains,Alberta,404,549,15.16,Black/Gray Chernozem,Medium
+628,Boreal Plains,Alberta,398,550,15.16,Black/Gray Chernozem,Medium
+629,Boreal Plains,Alberta,404,543,15.16,Black/Gray Chernozem,Medium
+630,Boreal Plains,Alberta,392,547,8.02,Black/Gray Chernozem,Medium
+631,Boreal Plains,Alberta,336,571,16.02,Black/Gray Chernozem,Medium
+640,Boreal Plains,Saskatchewan,295,594,13.81,Black/Gray Chernozem,Coarse
+647,Boreal Plains,Saskatchewan,327,554,13.81,Black/Gray Chernozem,Coarse
+650,Boreal Plains,Alberta,322,517,11.91,Black/Gray Chernozem,Medium
+650,Boreal Plains,Saskatchewan,322,517,11.91,Black/Gray Chernozem,Medium
+653,Boreal Plains,Saskatchewan,332,511,6.69,Black/Gray Chernozem,Medium
+657,Boreal Plains,Saskatchewan,331,537,6.69,Black/Gray Chernozem,Medium
+658,Boreal Plains,Saskatchewan,332,538,15.01,Black/Gray Chernozem,Coarse
+660,Boreal Plains,Saskatchewan,326,549,17.96,Black/Gray Chernozem,Medium
+661,Boreal Plains,Saskatchewan,332,509,11.3,Black/Gray Chernozem,Medium
+667,Boreal Plains,Manitoba,328,488,0,Brown Chernozem,Medium
+669,Boreal Plains,Manitoba,330,510,0,Brown Chernozem,Medium
+669,Boreal Plains,Saskatchewan,295,594,0,Brown Chernozem,Medium
+672,Boreal Plains,Manitoba,339,528,2.92,Black/Gray Chernozem,Medium
+672,Boreal Plains,Saskatchewan,339,528,2.92,Black/Gray Chernozem,Medium
+677,Boreal Plains,Manitoba,413,515,0,Black/Gray Chernozem,Fine
+678,Boreal Plains,Alberta,369,508,4.49,Black/Gray Chernozem,Medium
+679,Boreal Plains,Alberta,337,539,13.89,Black/Gray Chernozem,Medium
+680,Boreal Plains,Alberta,317,514,1.67,Black/Gray Chernozem,Medium
+680,Boreal Plains,Saskatchewan,295,594,14.57,Black/Gray Chernozem,Medium
+681,Boreal Plains,Alberta,370,526,0,Brown Chernozem,Medium
+682,Boreal Plains,Saskatchewan,323,552,13.81,Black/Gray Chernozem,Coarse
+683,Boreal Plains,Alberta,360,525,4.83,Black/Gray Chernozem,Coarse
+684,Boreal Plains,Alberta,378,529,9.07,Black/Gray Chernozem,Medium
+685,Boreal Plains,Saskatchewan,324,551,8.48,Black/Gray Chernozem,Medium
+686,Boreal Plains,Alberta,311,538,8.68,Black/Gray Chernozem,Medium
+686,Boreal Plains,Saskatchewan,295,594,17.69,Black/Gray Chernozem,Medium
+687,Boreal Plains,Alberta,308,544,1.76,Black/Gray Chernozem,Medium
+687,Boreal Plains,Saskatchewan,295,594,16.59,Black/Gray Chernozem,Medium
+688,Boreal Plains,Alberta,315,551,12.77,Black/Gray Chernozem,Medium
+689,Boreal Plains,Saskatchewan,326,549,11.3,Black/Gray Chernozem,Medium
+690,Boreal Plains,Saskatchewan,298,569,9.47,Black/Gray Chernozem,Medium
+691,Boreal Plains,Saskatchewan,339,557,0,Black/Gray Chernozem,Coarse
+692,Boreal Plains,Alberta,379,539,4.57,Black/Gray Chernozem,Fine
+693,Boreal Plains,Saskatchewan,337,556,8.66,Black/Gray Chernozem,Medium
+694,Boreal Plains,Saskatchewan,337,555,8.33,Black/Gray Chernozem,Medium
+695,Boreal Plains,Saskatchewan,300,550,11.44,Black/Gray Chernozem,Coarse
+696,Boreal Plains,Saskatchewan,322,568,10.69,Black/Gray Chernozem,Coarse
+697,Boreal Plains,Saskatchewan,337,559,6.45,Black/Gray Chernozem,Fine
+698,Boreal Plains,Saskatchewan,329,559,10.31,Brown Chernozem,Coarse
+699,Boreal Plains,Saskatchewan,291,570,6.99,Black/Gray Chernozem,Medium
+700,Boreal Plains,Saskatchewan,331,559,2.76,Black/Gray Chernozem,Fine
+701,Boreal Plains,Saskatchewan,316,567,12.66,Black/Gray Chernozem,Coarse
+702,Boreal Plains,Saskatchewan,319,554,9.52,Black/Gray Chernozem,Medium
+703,Boreal Plains,Alberta,389,548,14.34,Black/Gray Chernozem,Medium
+704,Boreal Plains,Saskatchewan,368,548,0.97,Black/Gray Chernozem,Medium
+705,Boreal Plains,Saskatchewan,314,546,4.84,Black/Gray Chernozem,Fine
+706,Boreal Plains,Saskatchewan,312,556,9.24,Black/Gray Chernozem,Medium
+707,Boreal Plains,Saskatchewan,326,548,8.32,Black/Gray Chernozem,Medium
+708,Boreal Plains,Alberta,379,552,13.5,Black/Gray Chernozem,Medium
+709,Boreal Plains,Manitoba,355,581,6.59,Black/Gray Chernozem,Medium
+709,Boreal Plains,Saskatchewan,295,594,11.67,Black/Gray Chernozem,Medium
+710,Boreal Plains,Saskatchewan,316,539,21.14,Black/Gray Chernozem,Medium
+711,Boreal Plains,Saskatchewan,312,547,17.24,Black/Gray Chernozem,Medium
+714,Boreal Plains,Manitoba,366,556,0,Black/Gray Chernozem,Medium
+714,Boreal Plains,Saskatchewan,295,594,12.4,Black/Gray Chernozem,Medium
+715,Boreal Plains,Manitoba,360,573,8.32,Black/Gray Chernozem,Medium
+715,Boreal Plains,Saskatchewan,295,594,10.29,Black/Gray Chernozem,Medium
+716,Boreal Plains,Manitoba,371,575,15.93,Black/Gray Chernozem,Medium
+717,Boreal Plains,Manitoba,373,569,1.76,Brown Chernozem,Medium
+717,Boreal Plains,Saskatchewan,295,594,1.76,Brown Chernozem,Medium
+718,Boreal Plains,Manitoba,375,556,0,Black/Gray Chernozem,Medium
+720,Boreal Plains,Manitoba,362,576,0,Black/Gray Chernozem,Medium
+723,Boreal Plains,Manitoba,374,572,0,Black/Gray Chernozem,Medium
+724,Boreal Plains,Manitoba,380,559,0.4,Black/Gray Chernozem,Fine
+726,Boreal Plains,Manitoba,401,609,0,Black/Gray Chernozem,Coarse
+727,Subhumid Prairies,Alberta,363,530,0.04,Black/Gray Chernozem,Fine
+728,Subhumid Prairies,Alberta,325,548,5.8,Black/Gray Chernozem,Medium
+729,Subhumid Prairies,Alberta,295,556,5.9,Black/Gray Chernozem,Medium
+729,Subhumid Prairies,Saskatchewan,295,594,12.91,Black/Gray Chernozem,Medium
+730,Subhumid Prairies,Alberta,312,559,12.89,Black/Gray Chernozem,Medium
+731,Subhumid Prairies,Alberta,345,533,13.56,Brown Chernozem,Medium
+732,Subhumid Prairies,Alberta,355,529,22.5,Black/Gray Chernozem,Medium
+733,Subhumid Prairies,Saskatchewan,280,566,11.29,Black/Gray Chernozem,Medium
+734,Subhumid Prairies,Saskatchewan,281,562,18.81,Black/Gray Chernozem,Coarse
+735,Subhumid Prairies,Saskatchewan,272,568,10.04,Black/Gray Chernozem,Medium
+736,Subhumid Prairies,Saskatchewan,281,588,9.5,Black/Gray Chernozem,Medium
+737,Subhumid Prairies,Alberta,362,557,11.3,Black/Gray Chernozem,Medium
+738,Subhumid Prairies,Alberta,327,581,14.15,Black/Gray Chernozem,Medium
+739,Subhumid Prairies,Alberta,294,575,14.1,Dark Brown Chernozem,Coarse
+739,Subhumid Prairies,Saskatchewan,295,594,17.51,Dark Brown Chernozem,Coarse
+740,Subhumid Prairies,Alberta,357,560,17.65,Black/Gray Chernozem,Medium
+741,Subhumid Prairies,Saskatchewan,300,567,11.92,Black/Gray Chernozem,Medium
+742,Subhumid Prairies,Saskatchewan,280,586,20.28,Black/Gray Chernozem,Coarse
+743,Subhumid Prairies,Alberta,295,579,14.23,Dark Brown Chernozem,Medium
+743,Subhumid Prairies,Saskatchewan,295,594,9.07,Dark Brown Chernozem,Medium
+744,Subhumid Prairies,Alberta,349,571,13.55,Black/Gray Chernozem,Medium
+745,Subhumid Prairies,Saskatchewan,320,553,10.24,Black/Gray Chernozem,Medium
+746,Subhumid Prairies,Alberta,357,551,15.79,Black/Gray Chernozem,Medium
+747,Subhumid Prairies,Saskatchewan,340,560,3.67,Black/Gray Chernozem,Coarse
+748,Subhumid Prairies,Saskatchewan,328,559,11.55,Black/Gray Chernozem,Medium
+749,Subhumid Prairies,Saskatchewan,340,577,13,Black/Gray Chernozem,Medium
+750,Subhumid Prairies,Alberta,326,588,16.02,Black/Gray Chernozem,Medium
+751,Subhumid Prairies,Manitoba,341,586,1.18,Black/Gray Chernozem,Medium
+751,Subhumid Prairies,Saskatchewan,295,594,9.83,Black/Gray Chernozem,Medium
+752,Subhumid Prairies,Manitoba,345,587,5.56,Black/Gray Chernozem,Medium
+752,Subhumid Prairies,Saskatchewan,295,594,12.39,Black/Gray Chernozem,Medium
+753,Subhumid Prairies,Manitoba,333,562,1.04,Black/Gray Chernozem,Medium
+754,Subhumid Prairies,Saskatchewan,317,605,11.01,Black/Gray Chernozem,Medium
+755,Subhumid Prairies,Saskatchewan,309,629,11.33,Dark Brown Chernozem,Medium
+756,Subhumid Prairies,Saskatchewan,322,604,12.37,Black/Gray Chernozem,Medium
+757,Subhumid Prairies,Manitoba,369,596,8.91,Black/Gray Chernozem,Coarse
+758,Subhumid Prairies,Manitoba,349,631,3.69,Black/Gray Chernozem,Medium
+759,Subhumid Prairies,Manitoba,369,595,2.75,Black/Gray Chernozem,Medium
+760,Subhumid Prairies,Manitoba,339,613,12.61,Black/Gray Chernozem,Medium
+760,Subhumid Prairies,Saskatchewan,295,594,4.85,Black/Gray Chernozem,Medium
+761,Subhumid Prairies,Saskatchewan,329,611,17.76,Black/Gray Chernozem,Medium
+762,Subhumid Prairies,Saskatchewan,324,621,14.15,Dark Brown Chernozem,Medium
+763,Subhumid Prairies,Manitoba,346,629,2.84,Black/Gray Chernozem,Coarse
+763,Subhumid Prairies,Saskatchewan,295,594,8.51,Black/Gray Chernozem,Coarse
+764,Subhumid Prairies,Manitoba,379,614,6.87,Black/Gray Chernozem,Medium
+765,Subhumid Prairies,Manitoba,369,613,1.41,Black/Gray Chernozem,Medium
+766,Subhumid Prairies,Manitoba,387,596,2.06,Black/Gray Chernozem,Medium
+767,Semiarid Prairies,Saskatchewan,255,586,9.94,Dark Brown Chernozem,Medium
+768,Semiarid Prairies,Saskatchewan,273,586,17.14,Dark Brown Chernozem,Medium
+769,Semiarid Prairies,Alberta,305,589,15,Brown Chernozem,Medium
+770,Semiarid Prairies,Saskatchewan,262,632,14.95,Dark Brown Chernozem,Medium
+771,Semiarid Prairies,Alberta,279,612,19.6,Dark Brown Chernozem,Medium
+771,Semiarid Prairies,Saskatchewan,295,594,13.14,Dark Brown Chernozem,Medium
+772,Semiarid Prairies,Saskatchewan,259,599,10.92,Dark Brown Chernozem,Coarse
+773,Semiarid Prairies,Saskatchewan,280,594,11.57,Dark Brown Chernozem,Medium
+774,Semiarid Prairies,Saskatchewan,278,587,13.91,Dark Brown Chernozem,Medium
+775,Semiarid Prairies,Saskatchewan,261,594,14.65,Dark Brown Chernozem,Medium
+776,Semiarid Prairies,Saskatchewan,261,603,19.87,Dark Brown Chernozem,Coarse
+777,Semiarid Prairies,Alberta,304,590,14.25,Brown Chernozem,Coarse
+778,Semiarid Prairies,Saskatchewan,257,599,9.89,Dark Brown Chernozem,Coarse
+779,Semiarid Prairies,Alberta,308,599,22.5,Dark Brown Chernozem,Medium
+780,Semiarid Prairies,Saskatchewan,234,660,9.27,Dark Brown Chernozem,Fine
+781,Semiarid Prairies,Alberta,304,612,14.55,Dark Brown Chernozem,Fine
+782,Semiarid Prairies,Saskatchewan,286,613,14.53,Dark Brown Chernozem,Medium
+783,Semiarid Prairies,Saskatchewan,293,558,13.17,Dark Brown Chernozem,Medium
+784,Semiarid Prairies,Saskatchewan,293,595,8.35,Dark Brown Chernozem,Medium
+785,Semiarid Prairies,Saskatchewan,290,603,12.23,Dark Brown Chernozem,Medium
+786,Semiarid Prairies,Alberta,296,615,15.37,Dark Brown Chernozem,Medium
+787,Semiarid Prairies,Alberta,264,644,20.63,Dark Brown Chernozem,Medium
+788,Semiarid Prairies,Alberta,267,634,12.09,Dark Brown Chernozem,Medium
+789,Semiarid Prairies,Saskatchewan,277,627,9.74,Dark Brown Chernozem,Medium
+790,Semiarid Prairies,Alberta,265,636,14.71,Dark Brown Chernozem,Medium
+791,Semiarid Prairies,Alberta,289,631,12.03,Dark Brown Chernozem,Medium
+792,Semiarid Prairies,Saskatchewan,289,648,7.2,Dark Brown Chernozem,Coarse
+793,Semiarid Prairies,Alberta,277,653,14.03,Dark Brown Chernozem,Medium
+794,Semiarid Prairies,Saskatchewan,312,640,13.83,Dark Brown Chernozem,Medium
+795,Semiarid Prairies,Saskatchewan,303,649,15.06,Brown Chernozem,Medium
+796,Semiarid Prairies,Saskatchewan,302,656,5.18,Dark Brown Chernozem,Medium
+797,Semiarid Prairies,Alberta,282,644,20.75,Dark Brown Chernozem,Medium
+798,Subhumid Prairies,Alberta,308,590,14.86,Black/Gray Chernozem,Medium
+799,Subhumid Prairies,Alberta,298,619,12.5,Black/Gray Chernozem,Medium
+800,Subhumid Prairies,Alberta,313,620,16.17,Black/Gray Chernozem,Medium
+801,Subhumid Prairies,Alberta,356,585,15.06,Black/Gray Chernozem,Medium
+802,Subhumid Prairies,Alberta,301,628,18.77,Black/Gray Chernozem,Medium
+803,Semiarid Prairies,Saskatchewan,243,628,8.31,Brown Chernozem,Medium
+804,Semiarid Prairies,Alberta,257,631,11.94,Brown Chernozem,Medium
+805,Semiarid Prairies,Alberta,228,650,14.02,Brown Chernozem,Medium
+805,Semiarid Prairies,Saskatchewan,295,594,7.45,Brown Chernozem,Medium
+806,Semiarid Prairies,Alberta,230,668,12.78,Brown Chernozem,Medium
+807,Semiarid Prairies,Saskatchewan,245,648,10.52,Brown Chernozem,Medium
+808,Semiarid Prairies,Saskatchewan,233,653,12.75,Brown Chernozem,Fine
+809,Semiarid Prairies,Alberta,227,652,21.22,Brown Chernozem,Medium
+809,Semiarid Prairies,Saskatchewan,295,594,16.26,Brown Chernozem,Medium
+810,Semiarid Prairies,Saskatchewan,257,631,17.32,Dark Brown Chernozem,Medium
+811,Semiarid Prairies,Alberta,233,640,13.12,Brown Chernozem,Fine
+811,Semiarid Prairies,Saskatchewan,295,594,9.95,Brown Chernozem,Fine
+812,Semiarid Prairies,Alberta,244,657,16.65,Brown Chernozem,Coarse
+813,Semiarid Prairies,Saskatchewan,262,634,14.77,Brown Chernozem,Fine
+814,Semiarid Prairies,Alberta,229,665,22.5,Brown Chernozem,Medium
+815,Semiarid Prairies,Alberta,231,673,8.92,Brown Chernozem,Coarse
+815,Semiarid Prairies,Saskatchewan,295,594,16.57,Brown Chernozem,Coarse
+816,Semiarid Prairies,Saskatchewan,272,639,12.37,Brown Chernozem,Medium
+817,Semiarid Prairies,Saskatchewan,237,672,7.95,Brown Chernozem,Medium
+818,Semiarid Prairies,Alberta,252,656,14.03,Brown Chernozem,Medium
+819,Semiarid Prairies,Saskatchewan,232,678,22.5,Brown Chernozem,Coarse
+820,Semiarid Prairies,Saskatchewan,244,658,13.66,Brown Chernozem,Medium
+821,Semiarid Prairies,Alberta,233,684,5.66,Brown Chernozem,Medium
+821,Semiarid Prairies,Saskatchewan,295,594,16.01,Brown Chernozem,Medium
+822,Semiarid Prairies,Saskatchewan,282,649,13.37,Dark Brown Chernozem,Medium
+823,Semiarid Prairies,Alberta,236,679,13.66,Brown Chernozem,Medium
+824,Semiarid Prairies,Saskatchewan,259,649,14.15,Brown Chernozem,Coarse
+825,Semiarid Prairies,Saskatchewan,264,635,7.2,Dark Brown Chernozem,Medium
+826,Semiarid Prairies,Saskatchewan,264,678,6.13,Brown Chernozem,Medium
+827,Semiarid Prairies,Saskatchewan,247,686,13,Brown Chernozem,Medium
+828,Semiarid Prairies,Alberta,245,675,11.16,Brown Chernozem,Medium
+829,Semiarid Prairies,Alberta,242,664,11.94,Brown Chernozem,Coarse
+830,Semiarid Prairies,Saskatchewan,286,637,12.7,Brown Chernozem,Medium
+831,Semiarid Prairies,Saskatchewan,298,643,14.77,Dark Brown Chernozem,Medium
+832,Semiarid Prairies,Saskatchewan,247,702,3.97,Brown Chernozem,Medium
+833,Semiarid Prairies,Alberta,236,684,14.35,Brown Chernozem,Medium
+833,Semiarid Prairies,Saskatchewan,295,594,12.97,Brown Chernozem,Medium
+834,Semiarid Prairies,Saskatchewan,251,684,13.11,Brown Chernozem,Medium
+835,Semiarid Prairies,Saskatchewan,254,658,22.5,Brown Chernozem,Medium
+836,Semiarid Prairies,Alberta,242,691,0,Dark Brown Chernozem,Medium
+837,Semiarid Prairies,Alberta,248,683,0,Dark Brown Chernozem,Medium
+837,Semiarid Prairies,Saskatchewan,295,594,3.24,Dark Brown Chernozem,Medium
+838,Semiarid Prairies,Alberta,250,679,1.95,Dark Brown Chernozem,Medium
+838,Semiarid Prairies,Saskatchewan,295,594,12.87,Dark Brown Chernozem,Medium
+839,Subhumid Prairies,Manitoba,381,586,8.2,Black/Gray Chernozem,Medium
+840,Subhumid Prairies,Manitoba,384,584,6.18,Black/Gray Chernozem,Coarse
+841,Subhumid Prairies,Manitoba,373,513,6.56,Black/Gray Chernozem,Medium
+843,Subhumid Prairies,Manitoba,384,556,4.06,Black/Gray Chernozem,Coarse
+844,Subhumid Prairies,Manitoba,405,572,0,Black/Gray Chernozem,Medium
+846,Subhumid Prairies,Manitoba,373,571,10.54,Black/Gray Chernozem,Medium
+847,Subhumid Prairies,Manitoba,367,600,9.46,Black/Gray Chernozem,Medium
+848,Subhumid Prairies,Manitoba,377,548,8.76,Black/Gray Chernozem,Medium
+849,Subhumid Prairies,Manitoba,391,623,8.41,Black/Gray Chernozem,Fine
+850,Subhumid Prairies,Manitoba,370,602,0.15,Black/Gray Chernozem,Coarse
+851,Subhumid Prairies,Manitoba,369,559,3.24,Black/Gray Chernozem,Medium
+852,Subhumid Prairies,Manitoba,382,625,7.77,Black/Gray Chernozem,Medium
+853,Subhumid Prairies,Manitoba,391,625,5.03,Black/Gray Chernozem,Fine
+854,Subhumid Prairies,Manitoba,387,606,7.91,Black/Gray Chernozem,Medium
+855,Subhumid Prairies,Manitoba,397,598,7.03,Black/Gray Chernozem,Medium
+940,Pacific Maritime,British Columbia,321,554,2.86,Brown Chernozem,Medium
+943,Pacific Maritime,British Columbia,321,554,2.86,Brown Chernozem,Medium
+944,Pacific Maritime,British Columbia,444,460,2.86,Brown Chernozem,Coarse
+948,Pacific Maritime,British Columbia,321,554,0,Brown Chernozem,Coarse
+950,Pacific Maritime,British Columbia,512,483,0,Brown Chernozem,Medium
+951,Pacific Maritime,British Columbia,393,423,0,Brown Chernozem,Coarse
+955,Pacific Maritime,British Columbia,321,554,7.21,Brown Chernozem,Coarse
+956,Pacific Maritime,British Columbia,318,428,4.68,Brown Chernozem,Fine
+957,Pacific Maritime,British Columbia,387,405,11.01,Brown Chernozem,Medium
+958,Pacific Maritime,British Columbia,388,404,11.01,Brown Chernozem,Medium
+959,Pacific Maritime,British Columbia,480,506,6.53,Brown Chernozem,Medium
+960,Pacific Maritime,British Columbia,506,533,9.43,Brown Chernozem,Medium
+969,Montane Cordillera,British Columbia,321,554,0,Black/Gray Chernozem,Medium
+971,Montane Cordillera,British Columbia,444,460,2.86,Black/Gray Chernozem,Medium
+972,Montane Cordillera,British Columbia,321,554,2.86,Black/Gray Chernozem,Coarse
+974,Montane Cordillera,British Columbia,321,554,2.86,Black/Gray Chernozem,Medium
+975,Montane Cordillera,British Columbia,321,554,0,Brown Chernozem,Medium
+976,Montane Cordillera,British Columbia,321,554,2.98,Black/Gray Chernozem,Medium
+977,Montane Cordillera,British Columbia,321,554,0,Brown Chernozem,Medium
+978,Montane Cordillera,British Columbia,321,554,9.97,Black/Gray Chernozem,Medium
+979,Montane Cordillera,British Columbia,321,554,4.13,Black/Gray Chernozem,Medium
+980,Montane Cordillera,British Columbia,308,488,3.84,Brown Chernozem,Coarse
+981,Montane Cordillera,British Columbia,348,508,3.84,Black/Gray Chernozem,Medium
+982,Montane Cordillera,British Columbia,350,517,3.84,Black/Gray Chernozem,Fine
+984,Montane Cordillera,British Columbia,321,554,0,Brown Chernozem,Coarse
+985,Montane Cordillera,British Columbia,321,554,0,Black/Gray Chernozem,Medium
+986,Montane Cordillera,British Columbia,328,566,3.84,Black/Gray Chernozem,Coarse
+987,Montane Cordillera,British Columbia,321,554,2.98,Black/Gray Chernozem,Medium
+988,Montane Cordillera,British Columbia,384,578,0,Black/Gray Chernozem,Coarse
+990,Montane Cordillera,British Columbia,321,554,16.82,Brown Chernozem,Medium
+991,Montane Cordillera,British Columbia,274,640,6.87,Brown Chernozem,Medium
+992,Montane Cordillera,British Columbia,274,641,16.07,Brown Chernozem,Medium
+995,Montane Cordillera,Alberta,321,554,7.02,Brown Chernozem,Medium
+995,Montane Cordillera,British Columbia,321,554,7.02,Brown Chernozem,Medium
+1001,Montane Cordillera,British Columbia,159,680,5.63,Brown Chernozem,Coarse
+1002,Montane Cordillera,British Columbia,321,554,5.63,Brown Chernozem,Coarse
+1003,Montane Cordillera,British Columbia,544,539,0,Brown Chernozem,Coarse
+1004,Montane Cordillera,British Columbia,159,678,7.57,Black/Gray Chernozem,Medium
+1005,Montane Cordillera,British Columbia,159,679,11.2,Brown Chernozem,Medium
+1006,Montane Cordillera,British Columbia,180,664,7.33,Black/Gray Chernozem,Coarse
+1007,Montane Cordillera,British Columbia,191,644,6.73,Brown Chernozem,Coarse
+1008,Montane Cordillera,British Columbia,191,647,3.03,Black/Gray Chernozem,Coarse
+1009,Montane Cordillera,British Columbia,222,683,5.82,Brown Chernozem,Medium
+1010,Montane Cordillera,British Columbia,197,669,3.98,Brown Chernozem,Coarse
+1011,Montane Cordillera,British Columbia,205,602,48.96,Brown Chernozem,Coarse
+1012,Montane Cordillera,British Columbia,321,554,1.37,Brown Chernozem,Medium
+1013,Montane Cordillera,British Columbia,321,554,0,Black/Gray Chernozem,Fine
+1015,Montane Cordillera,British Columbia,321,554,7.02,Brown Chernozem,Coarse
+1016,Montane Cordillera,Alberta,333,545,16.02,Black/Gray Chernozem,Medium
+1017,Montane Cordillera,Alberta,329,588,0,Black/Gray Chernozem,Medium
+1017,Montane Cordillera,British Columbia,321,554,0,Black/Gray Chernozem,Medium
+1018,Montane Cordillera,Alberta,326,574,12.62,Black/Gray Chernozem,Medium
+1019,Montane Cordillera,Alberta,335,581,12.62,Black/Gray Chernozem,Medium
+1019,Montane Cordillera,British Columbia,335,581,12.62,Black/Gray Chernozem,Medium

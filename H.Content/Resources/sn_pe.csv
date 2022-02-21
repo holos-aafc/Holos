@@ -1,0 +1,553 @@
+SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,SOILNAME,KIND,WATERTBL,ROOTRESTRI,RESTR_TYPE,DRAINAGE,PMTEX1,PMTEX2,PMTEX3,PMCHEM1,PMCHEM2,PMCHEM3,MDEP1,MDEP2,MDEP3,ORDER2,G_GROUP2,S_GROUP2,ORDER3,G_GROUP3,S_GROUP3
+PEAND612~~N,PE,AND,612~~,N,Abney Road,U,YB,0,-,VP,,,-,,,-,FOPT,UNDM,-,OR,M,T,OR,M,T
+PEAPT~~~~~N,PE,APT,~~~~~,N,Airport,N,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEARN611~~N,PE,ARN,611~~,N,Arlington,U,YB,0,-,VP,,-,-,,-,-,SPPT,-,-,OR,F,TY,OR,F,TY
+PEARYAB~~~A,PE,ARY,AB~~~,A,Alberry,M,YU,0,-,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYA~~~~A,PE,ARY,A~~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBCD~~A,PE,ARY,BCD~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBC~~~A,PE,ARY,BC~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBDC~~A,PE,ARY,BDC~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBDE~~A,PE,ARY,BDE~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBD~~~A,PE,ARY,BD~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYBE~~~A,PE,ARY,BE~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYB~~~~A,PE,ARY,B~~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCAC~~A,PE,ARY,CAC~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCBC~~A,PE,ARY,CBC~~,A,Alberry,M,YU,5,LI,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCB~~~A,PE,ARY,CB~~~,A,Alberry,M,YU,0,-,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCCD~~A,PE,ARY,CCD~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCC~~~A,PE,ARY,CC~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCDC~~A,PE,ARY,CDC~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCDE~~A,PE,ARY,CDE~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCD~~~A,PE,ARY,CD~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCED~~A,PE,ARY,CED~~,A,Alberry,M,NO,5,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCE~~~A,PE,ARY,CE~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYCG~~~A,PE,ARY,CG~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYC~~~~A,PE,ARY,C~~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDAD~~A,PE,ARY,DAD~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDA~~~A,PE,ARY,DA~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDBC~~A,PE,ARY,DBC~~,A,Alberry,M,YU,5,LI,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDB~~~A,PE,ARY,DB~~~,A,Alberry,M,YU,0,-,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDCE~~A,PE,ARY,DCE~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDC~~~A,PE,ARY,DC~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDDC~~A,PE,ARY,DDC~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDD~~~A,PE,ARY,DD~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDEC~~A,PE,ARY,DEC~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDE~~~A,PE,ARY,DE~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYDG~~~A,PE,ARY,DG~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYD~~~~A,PE,ARY,D~~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYD~~~~N,PE,ARY,D~~~~,N,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYED~~~A,PE,ARY,ED~~~,A,Alberry,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEARYE~~~~A,PE,ARY,E~~~~,A,Alberry,M,NO,0,-,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PEBBRA~~~~N,PE,BBR,A~~~~,N,Bunbury,M,NO,4,UN,R,SM,-,-,,-,-,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+PEBBRBD~~~N,PE,BBR,BD~~~,N,Bunbury,M,NO,4,LI,R,SM,-,-,,-,-,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+PEBBRB~~~~N,PE,BBR,B~~~~,N,Bunbury,M,NO,4,UN,R,SM,-,-,,-,-,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+PEBBRCE~~~N,PE,BBR,CE~~~,N,Bunbury,M,NO,4,UN,R,SM,-,-,,-,-,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+PEBBRC~~~~N,PE,BBR,C~~~~,N,Bunbury,M,NO,4,UN,R,SM,-,-,,-,-,GLFL,-,-,PZ,HFP,OT,PZ,HFP,OT
+PEBKYA~~~~N,PE,BKY,A~~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYBC~~~N,PE,BKY,BC~~~,N,Brackley,M,YB,5,LI,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYB~~~~N,PE,BKY,B~~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYCC~~~N,PE,BKY,CC~~~,N,Brackley,M,YB,5,LI,I,FR,-,-,,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYCF~~~N,PE,BKY,CF~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYCG~~~N,PE,BKY,CG~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYCI~~~N,PE,BKY,CI~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYCK~~~N,PE,BKY,CK~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYC~~~~N,PE,BKY,C~~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYDG~~~N,PE,BKY,DG~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYD~~~~N,PE,BKY,D~~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBKYE~~~~N,PE,BKY,E~~~~,N,Brackley,M,YB,5,CT,I,FR,,-,,,-,GLFL,TILL,-,BR,DYB,GLE,BR,DYB,GLE
+PEBPSBF~~~N,PE,BPS,BF~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSBI~~~N,PE,BPS,BI~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSB~~~~N,PE,BPS,B~~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSCD~~~N,PE,BPS,CD~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSCFI~~N,PE,BPS,CFI~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSCF~~~N,PE,BPS,CF~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSCI~~~N,PE,BPS,CI~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSCK~~~N,PE,BPS,CK~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSC~~~~N,PE,BPS,C~~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDD~~~N,PE,BPS,DD~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDFJ~~N,PE,BPS,DFJ~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDFK~~N,PE,BPS,DFK~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDF~~~N,PE,BPS,DF~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDIC~~N,PE,BPS,DIC~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDIK~~N,PE,BPS,DIK~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDI~~~N,PE,BPS,DI~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDJC~~N,PE,BPS,DJC~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDJ~~~N,PE,BPS,DJ~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSDK~~~N,PE,BPS,DK~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSD~~~~N,PE,BPS,D~~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEFJ~~N,PE,BPS,EFJ~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEF~~~N,PE,BPS,EF~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEIK~~N,PE,BPS,EIK~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEI~~~N,PE,BPS,EI~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEJ~~~N,PE,BPS,EJ~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSEK~~~N,PE,BPS,EK~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSE~~~~N,PE,BPS,E~~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBPSF~~~~N,PE,BPS,F~~~~,N,Baptist Point,M,YB,3,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEBSHD~~~~A,PE,BSH,D~~~~,A,Bonshaw,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,RKSS,-,BR,SB,O,BR,SB,O
+PEBSHD~~~~N,PE,BSH,D~~~~,N,Bonshaw,M,NO,7,LI,W,MC,-,-,EA,-,-,TILL,RKSS,-,PZ,HFP,O,PZ,HFP,O
+PECLOA~~~~A,PE,CLO,A~~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBA~~~A,PE,CLO,BA~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBBC~~A,PE,CLO,BBC~~,A,Culloden,M,YU,5,LI,MW,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBB~~~A,PE,CLO,BB~~~,A,Culloden,M,YU,5,UN,MW,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBCD~~A,PE,CLO,BCD~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBC~~~A,PE,CLO,BC~~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBDC~~A,PE,CLO,BDC~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBDE~~A,PE,CLO,BDE~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBD~~~A,PE,CLO,BD~~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOBE~~~A,PE,CLO,BE~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOB~~~~A,PE,CLO,B~~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCB~~~A,PE,CLO,CB~~~,A,Culloden,M,YU,5,UN,MW,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCCD~~A,PE,CLO,CCD~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCC~~~A,PE,CLO,CC~~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCDE~~A,PE,CLO,CDE~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCD~~~A,PE,CLO,CD~~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOCE~~~A,PE,CLO,CE~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOC~~~~A,PE,CLO,C~~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOC~~~~N,PE,CLO,C~~~~,N,Culloden,M,NO,0,-,R,C,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLODB~~~A,PE,CLO,DB~~~,A,Culloden,M,YU,5,UN,MW,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLODCD~~A,PE,CLO,DCD~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLODC~~~A,PE,CLO,DC~~~,A,Culloden,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLODE~~~A,PE,CLO,DE~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOD~~~~A,PE,CLO,D~~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECLOE~~~~A,PE,CLO,E~~~~,A,Culloden,M,NO,5,UN,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PECPDA~~~~A,PE,CPD,A~~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDB~~~~A,PE,CPD,B~~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDCC~~~A,PE,CPD,CC~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDCD~~~A,PE,CPD,CD~~~,A,Crapaud,M,YB,5,LI,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDC~~~~A,PE,CPD,C~~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDDB~~~A,PE,CPD,DB~~~,A,Crapaud,M,YU,5,CT,MW,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDDC~~~A,PE,CPD,DC~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDDE~~~A,PE,CPD,DE~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDDG~~~A,PE,CPD,DG~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDD~~~~A,PE,CPD,D~~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECPDE~~~~A,PE,CPD,E~~~~,A,Crapaud,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,EB,GLE,BR,EB,GLE
+PECTWA~~~~A,PE,CTW,A~~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWBB~~~A,PE,CTW,BB~~~,A,Charlottetown,M,YU,4,CT,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWBC~~~A,PE,CTW,BC~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWBE~~~A,PE,CTW,BE~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWB~~~~A,PE,CTW,B~~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWCB~~~A,PE,CTW,CB~~~,A,Charlottetown,M,YU,4,CT,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWCCD~~A,PE,CTW,CCD~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWCC~~~A,PE,CTW,CC~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWCD~~~A,PE,CTW,CD~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWCE~~~A,PE,CTW,CE~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWC~~~~A,PE,CTW,C~~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDA~~~A,PE,CTW,DA~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDBC~~A,PE,CTW,DBC~~,A,Charlottetown,M,YU,5,LI,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDBD~~A,PE,CTW,DBD~~,A,Charlottetown,M,YU,5,LI,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDBE~~A,PE,CTW,DBE~~,A,Charlottetown,M,YU,4,CT,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDB~~~A,PE,CTW,DB~~~,A,Charlottetown,M,YU,4,CT,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDCB~~A,PE,CTW,DCB~~,A,Charlottetown,M,YU,5,LI,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDCD~~A,PE,CTW,DCD~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDCE~~A,PE,CTW,DCE~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDC~~~A,PE,CTW,DC~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDDC~~A,PE,CTW,DDC~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDD~~~A,PE,CTW,DD~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDEC~~A,PE,CTW,DEC~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDE~~~A,PE,CTW,DE~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDG~~~A,PE,CTW,DG~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWDK~~~A,PE,CTW,DK~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWD~~~~A,PE,CTW,D~~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWD~~~~N,PE,CTW,D~~~~,N,Charlottetown,M,NO,6,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWEB~~~A,PE,CTW,EB~~~,A,Charlottetown,M,YU,4,CT,MW,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWEC~~~A,PE,CTW,EC~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWED~~~A,PE,CTW,ED~~~,A,Charlottetown,M,NO,5,LI,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECTWE~~~~A,PE,CTW,E~~~~,A,Charlottetown,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,PZ,HFP,O,PZ,HFP,O
+PECVY612~~N,PE,CVY,612~~,N,Canavoy,U,YB,0,-,VP,,,-,,,-,FOPT,UNDM,-,OR,M,T,OR,M,T
+PECYPA~~~~A,PE,CYP,A~~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPBC~~~A,PE,CYP,BC~~~,A,Carey Point,M,YB,5,LI,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPBK~~~A,PE,CYP,BK~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPB~~~~A,PE,CYP,B~~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPB~~~~N,PE,CYP,B~~~~,N,Carey Point,M,YU,0,-,I,C,-,-,EA,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPCC~~~A,PE,CYP,CC~~~,A,Carey Point,M,YB,5,LI,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPCD~~~A,PE,CYP,CD~~~,A,Carey Point,M,YB,4,LI,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPCF~~~A,PE,CYP,CF~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPCI~~~A,PE,CYP,CI~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPCK~~~A,PE,CYP,CK~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPC~~~~A,PE,CYP,C~~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPDC~~~A,PE,CYP,DC~~~,A,Carey Point,M,YB,5,LI,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPDI~~~A,PE,CYP,DI~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPDJ~~~A,PE,CYP,DJ~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPD~~~~A,PE,CYP,D~~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PECYPE~~~~A,PE,CYP,E~~~~,A,Carey Point,M,YB,0,-,I,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEDBLBB~~~A,PE,DBL,BB~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLBI~~~A,PE,DBL,BI~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLB~~~~A,PE,DBL,B~~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLCB~~~A,PE,DBL,CB~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLCI~~~A,PE,DBL,CI~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLC~~~~A,PE,DBL,C~~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLDB~~~A,PE,DBL,DB~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLDC~~~A,PE,DBL,DC~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLDD~~~A,PE,DBL,DD~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLDI~~~A,PE,DBL,DI~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLDJ~~~A,PE,DBL,DJ~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLD~~~~A,PE,DBL,D~~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLEI~~~A,PE,DBL,EI~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLEJ~~~A,PE,DBL,EJ~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDBLE~~~~A,PE,DBL,E~~~~,A,Dunblane,M,YU,4,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,DYB,E,BR,DYB,E
+PEDFGAE~~~A,PE,DFG,AE~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGA~~~~A,PE,DFG,A~~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGBC~~~A,PE,DFG,BC~~~,A,Dunstaffnage,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGBE~~~A,PE,DFG,BE~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGBG~~~A,PE,DFG,BG~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGB~~~~A,PE,DFG,B~~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGCC~~~A,PE,DFG,CC~~~,A,Dunstaffnage,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGCE~~~A,PE,DFG,CE~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGC~~~~A,PE,DFG,C~~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGDC~~~A,PE,DFG,DC~~~,A,Dunstaffnage,M,NO,5,LI,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGDE~~~A,PE,DFG,DE~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGD~~~~A,PE,DFG,D~~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDFGE~~~~A,PE,DFG,E~~~~,A,Dunstaffnage,M,NO,0,-,R,SM,-,-,EA,-,-,GLFL,-,-,PZ,HFP,O,PZ,HFP,O
+PEDUVBE~~~N,PE,DUV,BE~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVB~~~~N,PE,DUV,B~~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVC~~~~N,PE,DUV,C~~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVDC~~~N,PE,DUV,DC~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVDD~~~N,PE,DUV,DD~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVDE~~~N,PE,DUV,DE~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVDK~~~N,PE,DUV,DK~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVD~~~~N,PE,DUV,D~~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVEA~~~N,PE,DUV,EA~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVEC~~~N,PE,DUV,EC~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVED~~~N,PE,DUV,ED~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVEE~~~N,PE,DUV,EE~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVEK~~~N,PE,DUV,EK~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVE~~~~A,PE,DUV,E~~~~,A,Duvar,M,YU,3,CT,I,M,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVE~~~~N,PE,DUV,E~~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEDUVF~~~~N,PE,DUV,F~~~~,N,Duvar,M,YB,3,CT,I,MC,-,-,,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEEGMC~~~~A,PE,EGM,C~~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMD~~~~A,PE,EGM,D~~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMED~~~A,PE,EGM,ED~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMEFK~~A,PE,EGM,EFK~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMEF~~~A,PE,EGM,EF~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMEK~~~A,PE,EGM,EK~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGME~~~~A,PE,EGM,E~~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEGMF~~~~A,PE,EGM,F~~~~,A,Egmont,M,YB,3,CT,P,MF,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEEMR612~~N,PE,EMR,612~~,N,Enmore,U,YB,0,-,VP,,,-,,,-,FOPT,UNDM,-,OR,M,T,OR,M,T
+PEEYLB~~~~A,PE,EYL,B~~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLC~~~~A,PE,EYL,C~~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLDA~~~A,PE,EYL,DA~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLDD~~~A,PE,EYL,DD~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLDE~~~A,PE,EYL,DE~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLD~~~~A,PE,EYL,D~~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEEYLD~~~~N,PE,EYL,D~~~~,N,Emyvale,M,NO,6,LI,W,MC,-,-,EA,-,-,RESD,RKSM,-,BR,DYB,O,BR,DYB,O
+PEEYLE~~~~A,PE,EYL,E~~~~,A,Emyvale,M,NO,4,LI,W,MC,-,-,EA,-,-,RESD,-,-,BR,DYB,O,BR,DYB,O
+PEFCF611~~N,PE,FCF,611~~,N,Frenchfort,U,YB,0,-,VP,,,-,,,-,FNPT,UNDM,-,OR,F,T,OR,F,T
+PEFCFP~~~~N,PE,FCF,P~~~~,N,Frenchfort,O,YB,0,-,VP,FI,SM,-,EA,EA,-,FNPT,MARI,-,OR,F,T,OR,F,T
+PEFFEC~~~~A,PE,FFE,C~~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFED~~~~A,PE,FFE,D~~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFEEC~~~A,PE,FFE,EC~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFEED~~~A,PE,FFE,ED~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFEE~~~~A,PE,FFE,E~~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFEFD~~~A,PE,FFE,FD~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEFFEF~~~~A,PE,FFE,F~~~~,A,Fifteen Point,M,YU,3,CT,MW,MF,-,-,AN,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEGWBA~~~~A,PE,GWB,A~~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBBB~~~A,PE,GWB,BB~~~,A,Gowanbrae,M,YU,6,CT,MW,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBBC~~~A,PE,GWB,BC~~~,A,Gowanbrae,M,NO,6,LI,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBBE~~~A,PE,GWB,BE~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBB~~~~A,PE,GWB,B~~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBCB~~~A,PE,GWB,CB~~~,A,Gowanbrae,M,YU,6,CT,MW,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBCC~~~A,PE,GWB,CC~~~,A,Gowanbrae,M,NO,6,LI,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBCE~~~A,PE,GWB,CE~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBC~~~~A,PE,GWB,C~~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBC~~~~N,PE,GWB,C~~~~,N,Gowanbrae,M,NO,0,-,R,C,MC,-,EA,EA,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBDB~~~A,PE,GWB,DB~~~,A,Gowanbrae,M,YU,6,LI,MW,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBDC~~~A,PE,GWB,DC~~~,A,Gowanbrae,M,NO,6,LI,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBD~~~~A,PE,GWB,D~~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBEC~~~A,PE,GWB,EC~~~,A,Gowanbrae,M,NO,6,LI,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEGWBE~~~~A,PE,GWB,E~~~~,A,Gowanbrae,M,NO,6,CT,R,MC,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEHBBB~~~~A,PE,HBB,B~~~~,A,Haliburton Brook,M,YU,0,-,MW,SM,-,-,,-,-,GLMA,-,-,BR,EB,O,BR,EB,O
+PEHBBC~~~~A,PE,HBB,C~~~~,A,Haliburton Brook,M,YU,0,-,MW,SM,-,-,,-,-,GLMA,-,-,BR,EB,O,BR,EB,O
+PEHBBDC~~~A,PE,HBB,DC~~~,A,Haliburton Brook,M,YU,6,LI,MW,SM,-,-,,-,-,GLMA,-,-,BR,EB,O,BR,EB,O
+PEHBBD~~~~A,PE,HBB,D~~~~,A,Haliburton Brook,M,YU,0,-,MW,SM,-,-,,-,-,GLMA,-,-,BR,EB,O,BR,EB,O
+PEHBK612~~N,PE,HBK,612~~,N,Hazelbrook,U,YB,0,-,VP,,,-,,,-,FNPT,UNDM,-,OR,M,T,OR,M,T
+PEHBNBC~~~A,PE,HBN,BC~~~,A,Haliburton,M,NO,4,LI,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNB~~~~A,PE,HBN,B~~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNCC~~~A,PE,HBN,CC~~~,A,Haliburton,M,NO,4,LI,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNCD~~~A,PE,HBN,CD~~~,A,Haliburton,M,NO,4,LI,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNC~~~~A,PE,HBN,C~~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDA~~~A,PE,HBN,DA~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDC~~~A,PE,HBN,DC~~~,A,Haliburton,M,NO,4,LI,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDD~~~A,PE,HBN,DD~~~,A,Haliburton,M,NO,4,LI,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDE~~~A,PE,HBN,DE~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDG~~~A,PE,HBN,DG~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNDK~~~A,PE,HBN,DK~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBND~~~~A,PE,HBN,D~~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBND~~~~N,PE,HBN,D~~~~,N,Haliburton,M,NO,0,-,W,MC,-,-,EA,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBNE~~~~A,PE,HBN,E~~~~,A,Haliburton,M,NO,0,-,W,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEHBOB~~~~A,PE,HBO,B~~~~,A,Hebron,M,YB,0,-,I,MC,-,-,,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEHBOD~~~~A,PE,HBO,D~~~~,A,Hebron,M,YB,0,-,I,MC,-,-,,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEHBOE~~~~A,PE,HBO,E~~~~,A,Hebron,M,YB,0,-,I,MC,-,-,,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEKIDA~~~~A,PE,KID,A~~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDBB~~~A,PE,KID,BB~~~,A,Kildare,M,YU,0,-,MW,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDBC~~~A,PE,KID,BC~~~,A,Kildare,M,NO,6,LI,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDBD~~~A,PE,KID,BD~~~,A,Kildare,M,NO,6,LI,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDBE~~~A,PE,KID,BE~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDBG~~~A,PE,KID,BG~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDB~~~~A,PE,KID,B~~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDB~~~~N,PE,KID,B~~~~,N,Kildare,M,NO,0,-,R,C,-,-,EA,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDCB~~~A,PE,KID,CB~~~,A,Kildare,M,YU,0,-,MW,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDCC~~~A,PE,KID,CC~~~,A,Kildare,M,NO,6,LI,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDCD~~~A,PE,KID,CD~~~,A,Kildare,M,NO,6,LI,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDCE~~~A,PE,KID,CE~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDCG~~~A,PE,KID,CG~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDC~~~~A,PE,KID,C~~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDDC~~~A,PE,KID,DC~~~,A,Kildare,M,NO,6,LI,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDD~~~~A,PE,KID,D~~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PEKIDE~~~~A,PE,KID,E~~~~,A,Kildare,M,NO,0,-,R,SM,-,-,,-,-,GLMA,-,-,PZ,HFP,O,PZ,HFP,O
+PELEWD~~~~A,PE,LEW,D~~~~,A,Lewes,M,NO,5,LI,W,C,-,-,EA,-,-,TILL,RKSS,-,PZ,HFP,O,PZ,HFP,O
+PELEWD~~~~N,PE,LEW,D~~~~,N,Lewes,M,NO,7,LI,W,C,-,-,EA,-,-,TILL,RKSS,-,PZ,HFP,O,PZ,HFP,O
+PELOKBF~~~N,PE,LOK,BF~~~,N,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKBI~~~A,PE,LOK,BI~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKCI~~~A,PE,LOK,CI~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKCK~~~A,PE,LOK,CK~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKC~~~~A,PE,LOK,C~~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDD~~~A,PE,LOK,DD~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDF~~~N,PE,LOK,DF~~~,N,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDIF~~N,PE,LOK,DIF~~,N,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDI~~~A,PE,LOK,DI~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDJ~~~A,PE,LOK,DJ~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKDK~~~A,PE,LOK,DK~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKD~~~~A,PE,LOK,D~~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKEF~~~N,PE,LOK,EF~~~,N,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKEI~~~A,PE,LOK,EI~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKEJK~~A,PE,LOK,EJK~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKEJ~~~A,PE,LOK,EJ~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKEK~~~A,PE,LOK,EK~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELOKE~~~~A,PE,LOK,E~~~~,A,Locke Road,M,YB,3,UN,VP,SM,-,-,WC,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PELVD612~~N,PE,LVD,612~~,N,Lake Verde,U,YB,0,-,VP,,,-,,,-,FOPT,UNDM,-,OR,M,TFI,OR,M,TFI
+PEMNRBI~~~N,PE,MNR,BI~~~,N,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRB~~~~N,PE,MNR,B~~~~,N,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRCI~~~A,PE,MNR,CI~~~,A,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRDB~~~A,PE,MNR,DB~~~,A,Munn Road,M,YU,3,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRDI~~~A,PE,MNR,DI~~~,A,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRDJ~~~A,PE,MNR,DJ~~~,A,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRD~~~~A,PE,MNR,D~~~~,A,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNREC~~~N,PE,MNR,EC~~~,N,Munn Road,M,YB,4,LI,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNREI~~~N,PE,MNR,EI~~~,N,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNREJ~~~N,PE,MNR,EJ~~~,N,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMNRE~~~~N,PE,MNR,E~~~~,N,Munn Road,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEMPQB~~~~N,PE,MPQ,B~~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQCK~~~N,PE,MPQ,CK~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQC~~~~N,PE,MPQ,C~~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQDC~~~N,PE,MPQ,DC~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQDD~~~N,PE,MPQ,DD~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQDE~~~N,PE,MPQ,DE~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQDF~~~N,PE,MPQ,DF~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQDK~~~N,PE,MPQ,DK~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQD~~~~A,PE,MPQ,D~~~~,A,Malpeque,M,YU,3,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,SB,GLE,BR,SB,GLE
+PEMPQD~~~~N,PE,MPQ,D~~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMPQE~~~~N,PE,MPQ,E~~~~,N,Malpeque,M,YB,5,CT,I,MC,-,-,EA,-,-,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEMRGAF~~~N,PE,MRG,AF~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGB~~~~N,PE,MRG,B~~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGCC~~~N,PE,MRG,CC~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGCF~~~N,PE,MRG,CF~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGCK~~~N,PE,MRG,CK~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGC~~~~N,PE,MRG,C~~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGDF~~~N,PE,MRG,DF~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGDK~~~N,PE,MRG,DK~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGD~~~~N,PE,MRG,D~~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGEC~~~N,PE,MRG,EC~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGEF~~~N,PE,MRG,EF~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGEJF~~N,PE,MRG,EJF~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGEK~~~N,PE,MRG,EK~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMRGE~~~~N,PE,MRG,E~~~~,N,Margate,M,YB,3,CT,P,MC,-,-,AN,-,-,TILL,-,-,GL,LG,O,GL,LG,O
+PEMYPBF~~~N,PE,MYP,BF~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPBGF~~N,PE,MYP,BGF~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPBI~~~A,PE,MYP,BI~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPBK~~~A,PE,MYP,BK~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPB~~~~A,PE,MYP,B~~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCD~~~A,PE,MYP,CD~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCF~~~N,PE,MYP,CF~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCIF~~N,PE,MYP,CIF~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCIK~~A,PE,MYP,CIK~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCI~~~A,PE,MYP,CI~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPCK~~~A,PE,MYP,CK~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPC~~~~A,PE,MYP,C~~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDC~~~A,PE,MYP,DC~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDD~~~A,PE,MYP,DD~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDF~~~N,PE,MYP,DF~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDIF~~N,PE,MYP,DIF~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDI~~~A,PE,MYP,DI~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDJC~~A,PE,MYP,DJC~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPDK~~~A,PE,MYP,DK~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPD~~~~A,PE,MYP,D~~~~,A,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPEC~~~N,PE,MYP,EC~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPEJ~~~N,PE,MYP,EJ~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPEK~~~N,PE,MYP,EK~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PEMYPE~~~~N,PE,MYP,E~~~~,N,Mossy Point,M,YB,4,UN,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PENWTB~~~~A,PE,NWT,B~~~~,A,Newton,M,NO,4,CT,W,SM,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PENWTC~~~~A,PE,NWT,C~~~~,A,Newton,M,NO,4,CT,W,SM,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PENWTDC~~~A,PE,NWT,DC~~~,A,Newton,M,NO,5,CT,W,SM,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PENWTD~~~~A,PE,NWT,D~~~~,A,Newton,M,NO,5,CT,W,SM,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PENWTE~~~~A,PE,NWT,E~~~~,A,Newton,M,NO,5,CT,W,SM,,-,EA,,-,GLFL,TILL,-,PZ,HFP,O,PZ,HFP,O
+PEOLYB~~~~A,PE,OLY,B~~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYCA~~~A,PE,OLY,CA~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYC~~~~A,PE,OLY,C~~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYDA~~~A,PE,OLY,DA~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYDC~~~A,PE,OLY,DC~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYDD~~~A,PE,OLY,DD~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYDE~~~A,PE,OLY,DE~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYD~~~~A,PE,OLY,D~~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYEA~~~A,PE,OLY,EA~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYEC~~~A,PE,OLY,EC~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYEDC~~A,PE,OLY,EDC~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYED~~~A,PE,OLY,ED~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYE~~~~A,PE,OLY,E~~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOLYE~~~~N,PE,OLY,E~~~~,N,O`Leary,M,YU,5,CT,MW,M,-,-,EA,-,-,TILL,-,-,LU,GL,D,LU,GL,D
+PEOLYF~~~~A,PE,OLY,F~~~~,A,O`Leary,M,YU,3,CT,MW,MC,-,-,EA,-,-,TILL,-,-,LU,GL,BR,LU,GL,BR
+PEOWLA~~~~N,PE,OWL,A~~~~,N,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLBC~~~A,PE,OWL,BC~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLBF~~~N,PE,OWL,BF~~~,N,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLBG~~~A,PE,OWL,BG~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLB~~~~A,PE,OWL,B~~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLCF~~~N,PE,OWL,CF~~~,N,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLCG~~~A,PE,OWL,CG~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLCK~~~A,PE,OWL,CK~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLC~~~~A,PE,OWL,C~~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLDC~~~A,PE,OWL,DC~~~,A,Orwell,M,YB,3,LI,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLDF~~~N,PE,OWL,DF~~~,N,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLD~~~~A,PE,OWL,D~~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLD~~~~N,PE,OWL,D~~~~,N,Orwell,M,YB,3,UN,P,M,-,-,EA,-,-,GLFL,-,-,GL,HG,O,GL,HG,O
+PEOWLEF~~~N,PE,OWL,EF~~~,N,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEOWLE~~~~A,PE,OWL,E~~~~,A,Orwell,M,YB,3,UN,P,SM,-,-,EA,-,-,GLFL,-,-,GL,G,O,GL,G,O
+PEPOW612~~N,PE,POW,612~~,N,Pownal,U,YB,0,-,VP,,-,-,,-,-,SPPT,-,-,OR,M,TY,OR,M,TY
+PEPOWP~~~~N,PE,POW,P~~~~,N,Pownal,O,YB,0,-,VP,ME,-,-,EA,-,-,SPPT,-,-,OR,M,TY,OR,M,TY
+PEPQD612~~N,PE,PQD,612~~,N,Pisquid,U,YB,0,-,VP,,,-,,,-,SPPT,UNDM,-,OR,M,THU,OR,M,THU
+PERYPAF~~~N,PE,RYP,AF~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPA~~~~N,PE,RYP,A~~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBC~~~N,PE,RYP,BC~~~,N,Rocky Point,M,YB,5,LI,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBFG~~N,PE,RYP,BFG~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBFK~~N,PE,RYP,BFK~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBF~~~N,PE,RYP,BF~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBG~~~N,PE,RYP,BG~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBIF~~N,PE,RYP,BIF~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBI~~~N,PE,RYP,BI~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBKI~~N,PE,RYP,BKI~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPBK~~~N,PE,RYP,BK~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPB~~~~N,PE,RYP,B~~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCC~~~N,PE,RYP,CC~~~,N,Rocky Point,M,YB,5,LI,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCD~~~N,PE,RYP,CD~~~,N,Rocky Point,M,YB,5,LI,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCF~~~N,PE,RYP,CF~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCG~~~N,PE,RYP,CG~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCI~~~N,PE,RYP,CI~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCJ~~~N,PE,RYP,CJ~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPCK~~~N,PE,RYP,CK~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPC~~~~N,PE,RYP,C~~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPDF~~~N,PE,RYP,DF~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPDI~~~N,PE,RYP,DI~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPDJ~~~N,PE,RYP,DJ~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPD~~~~N,PE,RYP,D~~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPEIK~~N,PE,RYP,EIK~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPEJ~~~N,PE,RYP,EJ~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PERYPE~~~~N,PE,RYP,E~~~~,N,Rocky Point,M,YB,0,-,VP,SM,-,-,AN,-,-,GLMA,-,-,GL,G,O,GL,G,O
+PESSIBF~~~N,PE,SSI,BF~~~,N,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIBI~~~A,PE,SSI,BI~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIBK~~~A,PE,SSI,BK~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIB~~~~A,PE,SSI,B~~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSICC~~~A,PE,SSI,CC~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSICD~~~A,PE,SSI,CD~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSICG~~~A,PE,SSI,CG~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSICI~~~A,PE,SSI,CI~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSICK~~~A,PE,SSI,CK~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIC~~~~A,PE,SSI,C~~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDC~~~A,PE,SSI,DC~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDD~~~A,PE,SSI,DD~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDF~~~N,PE,SSI,DF~~~,N,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDG~~~A,PE,SSI,DG~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDI~~~A,PE,SSI,DI~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDJ~~~A,PE,SSI,DJ~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIDK~~~A,PE,SSI,DK~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSID~~~~A,PE,SSI,D~~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSID~~~~N,PE,SSI,D~~~~,N,Salt Grass Point,M,YU,0,-,I,MC,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIEC~~~A,PE,SSI,EC~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIEJ~~~A,PE,SSI,EJ~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PESSIE~~~~A,PE,SSI,E~~~~,A,Salt Grass Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PETGHB~~~~A,PE,TGH,B~~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHCC~~~A,PE,TGH,CC~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHCDC~~A,PE,TGH,CDC~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHC~~~~A,PE,TGH,C~~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDA~~~A,PE,TGH,DA~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDCD~~A,PE,TGH,DCD~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDC~~~A,PE,TGH,DC~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDDC~~A,PE,TGH,DDC~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDD~~~A,PE,TGH,DD~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDE~~~A,PE,TGH,DE~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHDK~~~A,PE,TGH,DK~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHD~~~~A,PE,TGH,D~~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHEC~~~A,PE,TGH,EC~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHEDC~~A,PE,TGH,EDC~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHED~~~A,PE,TGH,ED~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHE~~~~A,PE,TGH,E~~~~,A,Tignish,M,NO,4,CT,W,MC,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PETGHE~~~~N,PE,TGH,E~~~~,N,Tignish,M,NO,5,UN,W,M,-,-,EA,-,-,TILL,-,-,LU,GL,PZ,LU,GL,PZ
+PEUGGA~~~~A,PE,UGG,A~~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGBE~~~A,PE,UGG,BE~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGBG~~~A,PE,UGG,BG~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGB~~~~A,PE,UGG,B~~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGB~~~~N,PE,UGG,B~~~~,N,Uigg,M,YU,6,CT,I,C,MC,-,EA,EA,-,GLFL,TILL,-,BR,SB,GLE,BR,SB,GLE
+PEUGGCC~~~A,PE,UGG,CC~~~,A,Uigg,M,YB,5,LI,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGCE~~~A,PE,UGG,CE~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGCG~~~A,PE,UGG,CG~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGCK~~~A,PE,UGG,CK~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGC~~~~A,PE,UGG,C~~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGDC~~~A,PE,UGG,DC~~~,A,Uigg,M,YB,5,LI,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGD~~~~A,PE,UGG,D~~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEUGGE~~~~A,PE,UGG,E~~~~,A,Uigg,M,YB,0,-,I,SM,-,-,EA,-,-,GLFL,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEWFTC~~~~N,PE,WFT,C~~~~,N,Wolfe Inlet,M,YB,3,CT,I,MF,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEWFTDD~~~N,PE,WFT,DD~~~,N,Wolfe Inlet,M,YB,3,CT,I,MF,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEWFTD~~~~N,PE,WFT,D~~~~,N,Wolfe Inlet,M,YB,3,CT,I,MF,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEWFTED~~~N,PE,WFT,ED~~~,N,Wolfe Inlet,M,YB,3,CT,I,MF,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEWFTE~~~~N,PE,WFT,E~~~~,N,Wolfe Inlet,M,YB,3,CT,I,MF,-,-,EA,-,-,TILL,-,-,LU,GL,GL,LU,GL,GL
+PEWONAF~~~N,PE,WON,AF~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONA~~~~N,PE,WON,A~~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONBF~~~N,PE,WON,BF~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONB~~~~N,PE,WON,B~~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONCFC~~N,PE,WON,CFC~~,N,Wood Island,M,YB,6,LI,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONCFG~~N,PE,WON,CFG~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONCF~~~N,PE,WON,CF~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONCG~~~N,PE,WON,CG~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONCK~~~N,PE,WON,CK~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONC~~~~N,PE,WON,C~~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONDF~~~N,PE,WON,DF~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWOND~~~~N,PE,WON,D~~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONEF~~~N,PE,WON,EF~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWONE~~~~N,PE,WON,E~~~~,N,Wood Island,M,YB,5,UN,P,SM,-,-,EA,-,-,GLFL,-,-,PZ,HP,OT,PZ,HP,OT
+PEWSOAF~~~N,PE,WSO,AF~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOA~~~~N,PE,WSO,A~~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOBF~~~N,PE,WSO,BF~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOB~~~~N,PE,WSO,B~~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOCF~~~N,PE,WSO,CF~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOCG~~~N,PE,WSO,CG~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOC~~~~N,PE,WSO,C~~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSODC~~~N,PE,WSO,DC~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSODF~~~N,PE,WSO,DF~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSODG~~~N,PE,WSO,DG~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOD~~~~N,PE,WSO,D~~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOEF~~~N,PE,WSO,EF~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWSOE~~~~N,PE,WSO,E~~~~,N,Winsloe,M,YB,3,CT,VP,MC,-,-,EA,-,-,TILL,-,-,GL,G,O,GL,G,O
+PEWTPBF~~~N,PE,WTP,BF~~~,N,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPBI~~~A,PE,WTP,BI~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPB~~~~A,PE,WTP,B~~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPCI~~~A,PE,WTP,CI~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPC~~~~A,PE,WTP,C~~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPDC~~~A,PE,WTP,DC~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPDD~~~A,PE,WTP,DD~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPDI~~~A,PE,WTP,DI~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPDJ~~~A,PE,WTP,DJ~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPDK~~~A,PE,WTP,DK~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPD~~~~A,PE,WTP,D~~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPEB~~~A,PE,WTP,EB~~~,A,West Point,M,YU,3,UN,MW,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPEC~~~A,PE,WTP,EC~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPED~~~A,PE,WTP,ED~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPEI~~~A,PE,WTP,EI~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPEJ~~~A,PE,WTP,EJ~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPE~~~~A,PE,WTP,E~~~~,A,West Point,M,YB,3,UN,I,SM,-,-,AN,-,-,GLMA,-,-,BR,EB,GLE,BR,EB,GLE
+PEWTPE~~~~N,PE,WTP,E~~~~,N,West Point,M,YU,4,UN,I,M,-,-,AN,-,-,GLMA,-,-,BR,DYB,GLE,BR,DYB,GLE
+PEZCB~~~~~N,PE,ZCB,~~~~~,N,Coastal Beach,U,-,-,-,-,,-,-,,-,-,MARI,-,-,-,-,-,-,-,-
+PEZCE~~~~~N,PE,ZCE,~~~~~,N,Cemetery,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZDS~~~~~N,PE,ZDS,~~~~~,N,Dune Sand,U,NO,0,-,VR,,-,-,,-,-,EOLI,-,-,-,-,-,-,-,-
+PEZPB~~~~~N,PE,ZPB,~~~~~,N,Borrow Pit,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZPG~~~~~N,PE,ZPG,~~~~~,N,Gravel Pit,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZSC~~~~~N,PE,ZSC,~~~~~,N,Stream Complex,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZSM~~~~~N,PE,ZSM,~~~~~,N,Salt Marsh,U,YB,0,-,VP,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZST~~~~~N,PE,ZST,~~~~~,N,Steep,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+PEZZZ~~~~~N,PE,ZZZ,~~~~~,N,Water,U,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-

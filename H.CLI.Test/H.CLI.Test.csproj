@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B72F63D6-F041-4F49-92B8-B94AD3BD932E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H.CLI.Test</RootNamespace>
+    <AssemblyName>H.CLI.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.13.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\BeefConverterTest.cs" />
+    <Compile Include="Converters\OtherLivestockConverterTest.cs" />
+    <Compile Include="Converters\PoultryConverterTest.cs" />
+    <Compile Include="Converters\SheepConverterTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\DataInputHandlerTest.cs" />
+    <Compile Include="Handlers\ExportedFarmsHandlerTest.cs" />
+    <Compile Include="Processors\FieldProcessorTest.cs" />
+    <Compile Include="ResourceManagerHelperTest.cs" />
+    <Compile Include="UserInput\CLILanguageConstantsTest.cs" />
+    <Compile Include="ComponentTemporaryInputs\ShelterbeltFrenchTemporaryInputTest.cs" />
+    <Compile Include="Converters\ComponentConverterHandlerTest.cs" />
+    <Compile Include="ComponentTemporaryInputs\FieldTemporaryInputTest.cs" />
+    <Compile Include="ComponentTemporaryInputs\ShelterBeltTemporaryInputTest.cs" />
+    <Compile Include="Converters\DairyConverterTest.cs" />
+    <Compile Include="Converters\FieldConverterTest.cs" />
+    <Compile Include="Converters\ShelterbeltConverterTest.cs" />
+    <Compile Include="Converters\SwineConverterTest.cs" />
+    <Compile Include="Factorys\ComponentConverterFactoryTest.cs" />
+    <Compile Include="Factorys\ComponentKeyFactoryTest.cs" />
+    <Compile Include="Factorys\ComponentProcessorFactoryTest.cs" />
+    <Compile Include="Factorys\ComponentTestInputFactoryTests.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\DirectoryHandlerTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\ExcelInitializerTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\GlobalSettingsFileHandlerTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\GlobalSettingsFileKeyTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\ReadSettingsFileTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\RetrieveFilesInDirectoriesTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\TemplateFarmHandlerTest.cs" />
+    <Compile Include="FilesAndDirectoryAccessors\TemplateFileHandlerTest.cs" />
+    <Compile Include="Handlers\GuidComponentHandlerTest.cs" />
+    <Compile Include="Handlers\ErrorHandlerTest.cs" />
+    <Compile Include="KeyConverter\KeyConverterTest.cs" />
+    <Compile Include="Parsers\ParserHandlerTest.cs" />
+    <Compile Include="Parsers\ParserTest.cs" />
+    <Compile Include="Parsers\ParsingStrategyTest.cs" />
+    <Compile Include="Processors\ProccessorHandlerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ComponentResultsProcessorTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\H.CLI\H.CLI.csproj">
+      <Project>{7a9469d6-b913-49db-b85f-319fd195c212}</Project>
+      <Name>H.CLI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.Content\H.Content.csproj">
+      <Project>{272EDE97-F58A-42A9-828D-8B3524E390EB}</Project>
+      <Name>H.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.Core\H.Core.csproj">
+      <Project>{08D833EF-D06E-42F1-B548-89E985DFC26B}</Project>
+      <Name>H.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
+      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
+      <Name>H.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H\H.csproj">
+      <Project>{9bc7ff04-2b6c-4f86-8fb8-4ee1184be83b}</Project>
+      <Name>H</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets')" />
+</Project>

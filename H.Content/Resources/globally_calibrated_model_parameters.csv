@@ -1,0 +1,43 @@
+Parameter,Practice,Value,Min,Max,Standard Deviation,Description
+TillFac,Conventional,3.036,1.4,4,0.579,Tillage disturbance modifier for decay rates
+TillFac,Reduced,2.075,1,3,0.569,Tillage disturbance modifier for decay rates
+TillFac,No-till,1,0,0,0,Tillage disturbance modifier for decay rates
+Ws,Conventional,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
+Ws,Reduced,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
+Ws,No-till,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
+Kfaca,Conventional,7.4,0,0,0,Decay rate constant under optimal conditions for decomposition of the active sub-pool
+Kfaca,Reduced,7.4,0,0,0,Decay rate constant under optimal conditions for decomposition of the active sub-pool
+Kfaca,No-till,7.4,0,0,0,Decay rate constant under optimal conditions for decomposition of the active sub-pool
+Kfacs,Conventional,0.209,0.058,0.3,0.566,Decay rate constant under optimal conditions for decomposition of the slow sub-pool
+Kfacs,Reduced,0.209,0.058,0.3,0.566,Decay rate constant under optimal conditions for decomposition of the slow sub-pool
+Kfacs,No-till,0.209,0.058,0.3,0.566,Decay rate constant under optimal conditions for decomposition of the slow sub-pool
+Kfacp,Conventional,0.00689,0.005,0.01,0.00125,Decay rate constant under optimal conditions for decomposition of the passive sub-pool
+Kfacp,Reduced,0.00689,0.005,0.01,0.00125,Decay rate constant under optimal conditions for decomposition of the passive sub-pool
+Kfacp,No-till,0.00689,0.005,0.01,0.00125,Decay rate constant under optimal conditions for decomposition of the passive sub-pool
+f1,Conventional,0.378,0.01,0.8,0.0719,Fraction of metabolic dead organic matter decay products transferred to the active sub-pool
+f1,Reduced,0.378,0.01,0.8,0.0719,Fraction of metabolic dead organic matter decay products transferred to the active sub-pool
+f1,No-till,0.378,0.01,0.8,0.0719,Fraction of metabolic dead organic matter decay products transferred to the active sub-pool
+f2,Conventional,0.368,0.007,0.5,0.0998,Fraction of structural dead organic matter decay products transferred the active sub-pool
+f2,No-till,0.368,0.007,0.5,0.0998,Fraction of structural dead organic matter decay products transferred the active sub-pool
+f2,Reduced,0.368,0.007,0.5,0.0998,Fraction of structural dead organic matter decay products transferred the active sub-pool
+f3,Conventional,0.455,0.1,0.8,0.201,Fraction of structural dead organic matter decay products transferred to the slow sub-pool
+f3,Reduced,0.455,0.1,0.8,0.201,Fraction of structural dead organic matter decay products transferred to the slow sub-pool
+f3,No-till,0.455,0.1,0.8,0.201,Fraction of structural dead organic matter decay products transferred to the slow sub-pool
+f5,Conventional,0.0855,0.037,0.1,0.0122,Fraction of active sub-pool decay products transferred to the passive sub-pool
+f5,Reduced,0.0855,0.037,0.1,0.0122,Fraction of active sub-pool decay products transferred to the passive sub-pool
+f5,No-till,0.0855,0.037,0.1,0.0122,Fraction of active sub-pool decay products transferred to the passive sub-pool
+f6,Conventional,0.0504,0.02,0.19,0.028,Fraction of slow sub-pool decay products transferred to the passive sub-pool
+f6,Reduced,0.0504,0.02,0.19,0.028,Fraction of slow sub-pool decay products transferred to the passive sub-pool
+f6,No-till,0.0504,0.02,0.19,0.028,Fraction of slow sub-pool decay products transferred to the passive sub-pool
+f7,Conventional,0.42,0,0,0,Fraction of slow sub-pool decay products transferred to the active sub-pool
+f7,Reduced,0.42,0,0,0,Fraction of slow sub-pool decay products transferred to the active sub-pool
+f7,No-till,0.42,0,0,0,Fraction of slow sub-pool decay products transferred to the active sub-pool
+f8,Conventional,0.45,0,0,0,Fraction of passive sub-pool decay products transferred to the active sub-pool
+f8,Reduced,0.45,0,0,0,Fraction of passive sub-pool decay products transferred to the active sub-pool
+f8,No-till,0.45,0,0,0,Fraction of passive sub-pool decay products transferred to the active sub-pool
+Topt,Conventional,33.69,30.7,35.34,0.66,Optimum temperature to estimate temperature modifier on decomposition
+Topt,Reduced,33.69,30.7,35.34,0.66,Optimum temperature to estimate temperature modifier on decomposition
+Topt,No-till,33.69,30.7,35.34,0.66,Optimum temperature to estimate temperature modifier on decomposition
+Tmax,Conventional,45,0,0,0,Maximum monthly average temperature for decomposition.
+Tmax,Reduced,45,0,0,0,Maximum monthly average temperature for decomposition.
+Tmax,No-till,45,0,0,0,Maximum monthly average temperature for decomposition.

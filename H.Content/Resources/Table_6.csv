@@ -1,0 +1,392 @@
+CropType,Province,SoilType,NApplicationRate(kgNha^-1),PApplicationRate(kgPha^-1)
+Barley,British Columbia,All,78,40
+Barley,Manitoba,All,81,40
+Barley,New Brunswick,All,70,40
+Barley,Newfoundland and Labrador,All,70,40
+Barley,Nova Scotia,All,70,40
+Barley,Ontario,All,53,40
+Barley,Prince Edward Island,All,55,40
+Barley,Quebec,All,49,40
+Barley silage,British Columbia,All,80,40
+Barley silage,Manitoba,All,80,40
+Barley silage,New Brunswick,All,80,40
+Barley silage,Newfoundland and Labrador,All,80,40
+Barley silage,Nova Scotia,All,80,40
+Barley silage,Ontario,All,80,40
+Barley silage,Prince Edward Island,All,80,40
+Buckwheat,British Columbia,All,85,40
+Buckwheat,Manitoba,All,89,40
+Buckwheat,New Brunswick,All,100,40
+Buckwheat,Newfoundland and Labrador,All,100,40
+Buckwheat,Nova Scotia,All,100,40
+Buckwheat,Ontario,All,109,40
+Buckwheat,Prince Edward Island,All,100,40
+Buckwheat,Quebec,All,105,40
+Canary seed,British Columbia,All,67,40
+Canary seed,Manitoba,All,59,40
+Canary seed,New Brunswick,All,45,40
+Canary seed,Newfoundland and Labrador,All,45,40
+Canary seed,Nova Scotia,All,45,40
+Canary seed,Ontario,All,53,40
+Canary seed,Prince Edward Island,All,45,40
+Canary seed,Quebec,All,49,40
+Canola,British Columbia,All,85,40
+Canola,Manitoba,All,89,40
+Canola,New Brunswick,All,100,40
+Canola,Newfoundland and Labrador,All,100,40
+Canola,Nova Scotia,All,100,40
+Canola,Ontario,All,109,40
+Canola,Prince Edward Island,All,100,40
+Canola,Quebec,All,105,40
+Chickpeas,British Columbia,All,0,40
+Chickpeas,Manitoba,All,0,40
+Chickpeas,New Brunswick,All,0,40
+Chickpeas,Newfoundland and Labrador,All,0,40
+Chickpeas,Nova Scotia,All,0,40
+Chickpeas,Ontario,All,0,40
+Chickpeas,Prince Edward Island,All,20,40
+Chickpeas,Quebec,All,0,40
+Coloured/white faba beans,British Columbia,All,0,40
+Coloured/white faba beans,Manitoba,All,0,40
+Coloured/white faba beans,New Brunswick,All,0,40
+Coloured/white faba beans,Newfoundland and Labrador,All,0,40
+Coloured/white faba beans,Nova Scotia,All,0,40
+Coloured/white faba beans,Ontario,All,0,40
+Coloured/white faba beans,Prince Edward Island,All,20,40
+Coloured/white faba beans,Quebec,All,0,40
+Dry peas,British Columbia,All,0,40
+Dry peas,Manitoba,All,0,40
+Dry peas,New Brunswick,All,0,40
+Dry peas,Newfoundland and Labrador,All,0,40
+Dry peas,Nova Scotia,All,0,40
+Dry peas,Ontario,All,0,40
+Dry peas,Prince Edward Island,All,20,40
+Dry peas,Quebec,All,0,40
+Flax,British Columbia,All,67,40
+Flax,Manitoba,All,59,40
+Flax,New Brunswick,All,45,40
+Flax,Newfoundland and Labrador,All,45,40
+Flax,Nova Scotia,All,45,40
+Flax,Ontario,All,53,40
+Flax,Prince Edward Island,All,45,40
+Flax,Quebec,All,49,40
+Fodder corn,British Columbia,All,127,40
+Fodder corn,Manitoba,All,112,40
+Fodder corn,New Brunswick,All,140,40
+Fodder corn,Newfoundland and Labrador,All,140,40
+Fodder corn,Nova Scotia,All,140,40
+Fodder corn,Ontario,All,114,40
+Fodder corn,Prince Edward Island,All,130,40
+Fodder corn,Quebec,All,123,40
+Grain corn,British Columbia,All,127,40
+Grain corn,Manitoba,All,112,40
+Grain corn,New Brunswick,All,140,40
+Grain corn,Newfoundland and Labrador,All,140,40
+Grain corn,Nova Scotia,All,140,40
+Grain corn,Ontario,All,114,40
+Grain corn,Prince Edward Island,All,130,40
+Grain corn,Quebec,All,123,40
+Hay - grass,British Columbia,All,86,40
+Hay - grass,Manitoba,All,56,40
+Hay - grass,New Brunswick,All,48,40
+Hay - grass,Newfoundland and Labrador,All,48,40
+Hay - grass,Nova Scotia,All,48,40
+Hay - grass,Ontario,All,60,40
+Hay - grass,Prince Edward Island,All,50,40
+Hay - grass,Quebec,All,60,40
+Hay - legume,British Columbia,All,0,40
+Hay - legume,Manitoba,All,0,40
+Hay - legume,New Brunswick,All,28,40
+Hay - legume,Newfoundland and Labrador,All,28,40
+Hay - legume,Nova Scotia,All,28,40
+Hay - legume,Ontario,All,0,40
+Hay - legume,Prince Edward Island,All,20,40
+Hay - legume,Quebec,All,0,40
+Hay - mixed,British Columbia,All,60,40
+Hay - mixed,Manitoba,All,0,40
+Hay - mixed,New Brunswick,All,48,40
+Hay - mixed,Newfoundland and Labrador,All,48,40
+Hay - mixed,Nova Scotia,All,48,40
+Hay - mixed,Ontario,All,60,40
+Hay - mixed,Prince Edward Island,All,50,40
+Hay - mixed,Quebec,All,60,40
+Hay and forage seed,British Columbia,All,60,40
+Hay and forage seed,Manitoba,All,0,40
+Hay and forage seed,New Brunswick,All,48,40
+Hay and forage seed,Newfoundland and Labrador,All,48,40
+Hay and forage seed,Nova Scotia,All,48,40
+Hay and forage seed,Ontario,All,60,40
+Hay and forage seed,Prince Edward Island,All,50,40
+Hay and forage seed,Quebec,All,60,40
+Lentils,British Columbia,All,0,40
+Lentils,Manitoba,All,0,40
+Lentils,New Brunswick,All,0,40
+Lentils,Newfoundland and Labrador,All,0,40
+Lentils,Nova Scotia,All,0,40
+Lentils,Ontario,All,0,40
+Lentils,Prince Edward Island,All,20,40
+Lentils,Quebec,All,0,40
+Mixed grains,British Columbia,All,67,40
+Mixed grains,Manitoba,All,81,40
+Mixed grains,New Brunswick,All,45,40
+Mixed grains,Newfoundland and Labrador,All,45,40
+Mixed grains,Nova Scotia,All,45,40
+Mixed grains,Ontario,All,41,40
+Mixed grains,Prince Edward Island,All,55,40
+Mixed grains,Quebec,All,38,40
+Mustard,British Columbia,All,85,40
+Mustard,Manitoba,All,89,40
+Mustard,New Brunswick,All,100,40
+Mustard,Newfoundland and Labrador,All,100,40
+Mustard,Nova Scotia,All,100,40
+Mustard,Ontario,All,109,40
+Mustard,Prince Edward Island,All,100,40
+Mustard,Quebec,All,105,40
+Oats,British Columbia,All,67,40
+Oats,Manitoba,All,81,40
+Oats,New Brunswick,All,45,40
+Oats,Newfoundland and Labrador,All,45,40
+Oats,Nova Scotia,All,45,40
+Oats,Ontario,All,41,40
+Oats,Prince Edward Island,All,55,40
+Oats,Quebec,All,38,40
+Pasture,British Columbia,All,50,40
+Pasture,Manitoba,All,0,40
+Pasture,New Brunswick,All,48,40
+Pasture,Newfoundland and Labrador,All,48,40
+Pasture,Nova Scotia,All,48,40
+Pasture,Ontario,All,50,40
+Pasture,Prince Edward Island,All,50,40
+Pasture,Quebec,All,50,40
+Potatoes,British Columbia,All,70,40
+Potatoes,Manitoba,All,84,40
+Potatoes,New Brunswick,All,155,40
+Potatoes,Newfoundland and Labrador,All,155,40
+Potatoes,Nova Scotia,All,155,40
+Potatoes,Ontario,All,114,40
+Potatoes,Prince Edward Island,All,157,40
+Potatoes,Quebec,All,121,40
+Rye,British Columbia,All,67,40
+Rye,Manitoba,All,55,40
+Rye,New Brunswick,All,30,40
+Rye,Newfoundland and Labrador,All,30,40
+Rye,Nova Scotia,All,30,40
+Rye,Ontario,All,90,40
+Rye,Prince Edward Island,All,32,40
+Rye,Quebec,All,90,40
+Safflower,British Columbia,All,85,40
+Safflower,Manitoba,All,89,40
+Safflower,New Brunswick,All,100,40
+Safflower,Newfoundland and Labrador,All,100,40
+Safflower,Nova Scotia,All,100,40
+Safflower,Ontario,All,109,40
+Safflower,Prince Edward Island,All,100,40
+Safflower,Quebec,All,105,40
+Soybeans,British Columbia,All,0,40
+Soybeans,Manitoba,All,0,40
+Soybeans,New Brunswick,All,0,40
+Soybeans,Newfoundland and Labrador,All,0,40
+Soybeans,Nova Scotia,All,0,40
+Soybeans,Ontario,All,0,40
+Soybeans,Prince Edward Island,All,20,40
+Soybeans,Quebec,All,0,40
+Spring wheat,British Columbia,All,78,40
+Spring wheat,Manitoba,All,90,40
+Spring wheat,New Brunswick,All,75,40
+Spring wheat,Newfoundland and Labrador,All,75,40
+Spring wheat,Nova Scotia,All,75,40
+Spring wheat,Ontario,All,70,40
+Spring wheat,Prince Edward Island,All,60,40
+Spring wheat,Quebec,All,70,40
+Sunflower seed,British Columbia,All,85,40
+Sunflower seed,Manitoba,All,89,40
+Sunflower seed,New Brunswick,All,100,40
+Sunflower seed,Newfoundland and Labrador,All,100,40
+Sunflower seed,Nova Scotia,All,100,40
+Sunflower seed,Ontario,All,109,40
+Sunflower seed,Prince Edward Island,All,100,40
+Sunflower seed,Quebec,All,105,40
+Triticale,British Columbia,All,67,40
+Triticale,Manitoba,All,55,40
+Triticale,New Brunswick,All,30,40
+Triticale,Newfoundland and Labrador,All,30,40
+Triticale,Nova Scotia,All,30,40
+Triticale,Ontario,All,90,40
+Triticale,Prince Edward Island,All,32,40
+Triticale,Quebec,All,90,40
+Winter wheat,British Columbia,All,67,40
+Winter wheat,Manitoba,All,112,40
+Winter wheat,New Brunswick,All,30,40
+Winter wheat,Newfoundland and Labrador,All,30,40
+Winter wheat,Nova Scotia,All,30,40
+Winter wheat,Ontario,All,67,40
+Winter wheat,Prince Edward Island,All,32,40
+Winter wheat,Quebec,All,67,40
+Barley,Alberta,Black/Gray Chernozem,61,30
+Barley,Saskatchewan,Black/Gray Chernozem,77,30
+Barley silage,Alberta,Black/Gray Chernozem,80,30
+Barley silage,Saskatchewan,Black/Gray Chernozem,80,30
+Buckwheat,Alberta,Black/Gray Chernozem,71,30
+Buckwheat,Saskatchewan,Black/Gray Chernozem,82,30
+Canary seed,Alberta,Black/Gray Chernozem,36,30
+Canary seed,Saskatchewan,Black/Gray Chernozem,77,30
+Canola,Alberta,Black/Gray Chernozem,71,30
+Canola,Saskatchewan,Black/Gray Chernozem,82,30
+Chickpeas,Alberta,Black/Gray Chernozem,0,30
+Chickpeas,Saskatchewan,Black/Gray Chernozem,0,30
+Coloured/white faba beans,Alberta,Black/Gray Chernozem,0,30
+Coloured/white faba beans,Saskatchewan,Black/Gray Chernozem,0,30
+Dry peas,Alberta,Black/Gray Chernozem,0,30
+Dry peas,Saskatchewan,Black/Gray Chernozem,0,30
+Flax,Alberta,Black/Gray Chernozem,36,30
+Flax,Saskatchewan,Black/Gray Chernozem,77,30
+Fodder corn,Alberta,Black/Gray Chernozem,60,30
+Fodder corn,Saskatchewan,Black/Gray Chernozem,65,30
+Grain corn,Alberta,Black/Gray Chernozem,60,30
+Grain corn,Saskatchewan,Black/Gray Chernozem,65,30
+Hay - grass,Alberta,Black/Gray Chernozem,99,30
+Hay - grass,Saskatchewan,Black/Gray Chernozem,67,30
+Hay - legume,Alberta,Black/Gray Chernozem,5,30
+Hay - legume,Saskatchewan,Black/Gray Chernozem,0,30
+Hay - mixed,Alberta,Black/Gray Chernozem,50,30
+Hay - mixed,Saskatchewan,Black/Gray Chernozem,0,30
+Hay and forage seed,Alberta,Black/Gray Chernozem,50,30
+Hay and forage seed,Saskatchewan,Black/Gray Chernozem,0,30
+Lentils,Alberta,Black/Gray Chernozem,0,30
+Lentils,Saskatchewan,Black/Gray Chernozem,0,30
+Mixed grains,Alberta,Black/Gray Chernozem,75,30
+Mixed grains,Saskatchewan,Black/Gray Chernozem,77,30
+Mustard,Alberta,Black/Gray Chernozem,71,30
+Mustard,Saskatchewan,Black/Gray Chernozem,82,30
+Oats,Alberta,Black/Gray Chernozem,75,30
+Oats,Saskatchewan,Black/Gray Chernozem,77,30
+Pasture,Alberta,Black/Gray Chernozem,0,30
+Pasture,Saskatchewan,Black/Gray Chernozem,0,30
+Potatoes,Alberta,Black/Gray Chernozem,75,30
+Potatoes,Saskatchewan,Black/Gray Chernozem,65,30
+Rye,Alberta,Black/Gray Chernozem,56,30
+Rye,Saskatchewan,Black/Gray Chernozem,56,30
+Safflower,Alberta,Black/Gray Chernozem,71,30
+Safflower,Saskatchewan,Black/Gray Chernozem,82,30
+Soybeans,Alberta,Black/Gray Chernozem,0,30
+Soybeans,Saskatchewan,Black/Gray Chernozem,0,30
+Spring wheat,Alberta,Black/Gray Chernozem,61,30
+Spring wheat,Saskatchewan,Black/Gray Chernozem,77,30
+Sunflower seed,Alberta,Black/Gray Chernozem,71,30
+Sunflower seed,Saskatchewan,Black/Gray Chernozem,82,30
+Triticale,Alberta,Black/Gray Chernozem,56,30
+Triticale,Saskatchewan,Black/Gray Chernozem,56,30
+Winter wheat,Alberta,Black/Gray Chernozem,67,30
+Winter wheat,Saskatchewan,Black/Gray Chernozem,67,30
+Barley,Alberta,Brown Chernozem,47,20
+Barley,Saskatchewan,Brown Chernozem,54,20
+Barley silage,Alberta,Brown Chernozem,80,20
+Barley silage,Saskatchewan,Brown Chernozem,80,20
+Buckwheat,Alberta,Brown Chernozem,56,20
+Buckwheat,Saskatchewan,Brown Chernozem,55,20
+Canary seed,Alberta,Brown Chernozem,33,20
+Canary seed,Saskatchewan,Brown Chernozem,54,20
+Canola,Alberta,Brown Chernozem,56,20
+Canola,Saskatchewan,Brown Chernozem,55,20
+Chickpeas,Alberta,Brown Chernozem,0,20
+Chickpeas,Saskatchewan,Brown Chernozem,0,20
+Coloured/white faba beans,Alberta,Brown Chernozem,0,20
+Coloured/white faba beans,Saskatchewan,Brown Chernozem,0,20
+Dry peas,Alberta,Brown Chernozem,0,20
+Dry peas,Saskatchewan,Brown Chernozem,0,20
+Flax,Alberta,Brown Chernozem,33,20
+Flax,Saskatchewan,Brown Chernozem,54,20
+Fodder corn,Alberta,Brown Chernozem,60,20
+Fodder corn,Saskatchewan,Brown Chernozem,61,20
+Grain corn,Alberta,Brown Chernozem,60,20
+Grain corn,Saskatchewan,Brown Chernozem,61,20
+Hay - grass,Alberta,Brown Chernozem,57,20
+Hay - grass,Saskatchewan,Brown Chernozem,57,20
+Hay - legume,Alberta,Brown Chernozem,0,20
+Hay - legume,Saskatchewan,Brown Chernozem,0,20
+Hay - mixed,Alberta,Brown Chernozem,0,20
+Hay - mixed,Saskatchewan,Brown Chernozem,0,20
+Hay and forage seed,Alberta,Brown Chernozem,0,20
+Hay and forage seed,Saskatchewan,Brown Chernozem,0,20
+Lentils,Alberta,Brown Chernozem,0,20
+Lentils,Saskatchewan,Brown Chernozem,0,20
+Mixed grains,Alberta,Brown Chernozem,59,20
+Mixed grains,Saskatchewan,Brown Chernozem,54,20
+Mustard,Alberta,Brown Chernozem,56,20
+Mustard,Saskatchewan,Brown Chernozem,55,20
+Oats,Alberta,Brown Chernozem,59,20
+Oats,Saskatchewan,Brown Chernozem,54,20
+Pasture,Alberta,Brown Chernozem,0,20
+Pasture,Saskatchewan,Brown Chernozem,0,20
+Potatoes,Alberta,Brown Chernozem,21,20
+Potatoes,Saskatchewan,Brown Chernozem,65,20
+Rye,Alberta,Brown Chernozem,48,20
+Rye,Saskatchewan,Brown Chernozem,47,20
+Safflower,Alberta,Brown Chernozem,56,20
+Safflower,Saskatchewan,Brown Chernozem,55,20
+Soybeans,Alberta,Brown Chernozem,0,20
+Soybeans,Saskatchewan,Brown Chernozem,0,20
+Spring wheat,Alberta,Brown Chernozem,51,20
+Spring wheat,Saskatchewan,Brown Chernozem,54,20
+Sunflower seed,Alberta,Brown Chernozem,56,20
+Sunflower seed,Saskatchewan,Brown Chernozem,55,20
+Triticale,Alberta,Brown Chernozem,48,20
+Triticale,Saskatchewan,Brown Chernozem,47,20
+Winter wheat,Alberta,Brown Chernozem,58,20
+Winter wheat,Saskatchewan,Brown Chernozem,86,20
+Barley,Alberta,Dark Brown Chernozem,42,25
+Barley,Saskatchewan,Dark Brown Chernozem,45,25
+Barley silage,Alberta,Dark Brown Chernozem,80,25
+Barley silage,Saskatchewan,Dark Brown Chernozem,80,25
+Buckwheat,Alberta,Dark Brown Chernozem,58,25
+Buckwheat,Saskatchewan,Dark Brown Chernozem,45,25
+Canary seed,Alberta,Dark Brown Chernozem,28,25
+Canary seed,Saskatchewan,Dark Brown Chernozem,45,25
+Canola,Alberta,Dark Brown Chernozem,58,25
+Canola,Saskatchewan,Dark Brown Chernozem,45,25
+Chickpeas,Alberta,Dark Brown Chernozem,0,25
+Chickpeas,Saskatchewan,Dark Brown Chernozem,0,25
+Coloured/white faba beans,Alberta,Dark Brown Chernozem,0,25
+Coloured/white faba beans,Saskatchewan,Dark Brown Chernozem,0,25
+Dry peas,Alberta,Dark Brown Chernozem,0,25
+Dry peas,Saskatchewan,Dark Brown Chernozem,0,25
+Flax,Alberta,Dark Brown Chernozem,28,25
+Flax,Saskatchewan,Dark Brown Chernozem,45,25
+Fodder corn,Alberta,Dark Brown Chernozem,60,25
+Fodder corn,Saskatchewan,Dark Brown Chernozem,60,25
+Grain corn,Alberta,Dark Brown Chernozem,60,25
+Grain corn,Saskatchewan,Dark Brown Chernozem,60,25
+Hay - grass,Alberta,Dark Brown Chernozem,73,25
+Hay - grass,Saskatchewan,Dark Brown Chernozem,57,25
+Hay - legume,Alberta,Dark Brown Chernozem,5,25
+Hay - legume,Saskatchewan,Dark Brown Chernozem,0,25
+Hay - mixed,Alberta,Dark Brown Chernozem,42,25
+Hay - mixed,Saskatchewan,Dark Brown Chernozem,0,25
+Hay and forage seed,Alberta,Dark Brown Chernozem,42,25
+Hay and forage seed,Saskatchewan,Dark Brown Chernozem,0,25
+Lentils,Alberta,Dark Brown Chernozem,0,25
+Lentils,Saskatchewan,Dark Brown Chernozem,0,25
+Mixed grains,Alberta,Dark Brown Chernozem,56,25
+Mixed grains,Saskatchewan,Dark Brown Chernozem,45,25
+Mustard,Alberta,Dark Brown Chernozem,58,25
+Mustard,Saskatchewan,Dark Brown Chernozem,45,25
+Oats,Alberta,Dark Brown Chernozem,56,25
+Oats,Saskatchewan,Dark Brown Chernozem,45,25
+Pasture,Alberta,Dark Brown Chernozem,0,25
+Pasture,Saskatchewan,Dark Brown Chernozem,0,25
+Potatoes,Alberta,Dark Brown Chernozem,0,25
+Potatoes,Saskatchewan,Dark Brown Chernozem,65,25
+Rye,Alberta,Dark Brown Chernozem,48,25
+Rye,Saskatchewan,Dark Brown Chernozem,48,25
+Safflower,Alberta,Dark Brown Chernozem,58,25
+Safflower,Saskatchewan,Dark Brown Chernozem,45,25
+Soybeans,Alberta,Dark Brown Chernozem,0,25
+Soybeans,Saskatchewan,Dark Brown Chernozem,0,25
+Spring wheat,Alberta,Dark Brown Chernozem,47,25
+Spring wheat,Saskatchewan,Dark Brown Chernozem,45,25
+Sunflower seed,Alberta,Dark Brown Chernozem,58,25
+Sunflower seed,Saskatchewan,Dark Brown Chernozem,45,25
+Triticale,Alberta,Dark Brown Chernozem,48,25
+Triticale,Saskatchewan,Dark Brown Chernozem,48,25
+Winter wheat,Alberta,Dark Brown Chernozem,53,25
+Winter wheat,Saskatchewan,Dark Brown Chernozem,53,25

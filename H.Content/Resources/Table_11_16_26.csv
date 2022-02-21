@@ -1,0 +1,14 @@
+AnimalType,Housing,CA
+Beef,Confined No Barn,0
+Beef,Housed In Barn,0
+Beef,Enclosed Pasture,0.17
+Beef,Open Range Or Hills,0.36
+Dairy,Tie-Stall,0
+Dairy,Small Free-Stall,0
+Dairy,Large Free-Stall,0
+Dairy,Drylot,0
+Dairy,Grazing < 3km/d,0.17
+Dairy,Grazing > 3km/d,0.3
+Sheep,Confined,0.0067
+Sheep,Flat Pasture,0.0107
+Sheep,Hilly Pasture / Open Range,0.024
