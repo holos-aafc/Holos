@@ -12,3 +12,9 @@ Les utilisateurs peuvent choisir les scénarios et les pratiques agricoles qui c
 Une fois les renseignements entrés dans le logiciel, Holos évalue les émissions de dioxyde de carbone, d'oxyde nitreux et de méthane issues de la fermentation entérique et de l'utilisation du fumier, des systèmes de culture et de la consommation d'énergie. La séquestration du carbone et les pertes causées par les plantations linéaires d'arbres et les changements dans l'utilisation et la gestion des terres sont aussi évalués. On obtient ainsi une estimation des émissions de GES pour l'ensemble de l'exploitation agricole, ce qui peut aider l'utilisateur à déterminer des moyens de réduire les émissions produites par son exploitation.
 
 Nous sommes heureux de recueillir les commentaires des chercheurs, des agriculteurs et de l'industrie en vue d'améliorer le logiciel. Pour de plus amples renseignements sur Holos, veuillez envoyer un courriel à l'adresse Holos@agr.gc.ca.
+
+# License
+
+Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
+
+Le mot-symbole « Canada » et les éléments graphiques connexes liés à cette distribution sont protégés en vertu des lois portant sur les marques de commerce et le droit d'auteur. Aucune autorisation n'est accordée pour leur utilisation à l'extérieur des paramètres du programme de coordination de l'image de marque du gouvernement du Canada. Pour obtenir davantage de renseignements à ce sujet, veuillez consulter les <a href="https://www.canada.ca/fr/secretariat-conseil-tresor/sujets/communications-gouvernementales/exigences-image-marque.html" target="_blank">Exigences pour l'image de marque</a>.
