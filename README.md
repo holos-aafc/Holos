@@ -16,6 +16,12 @@ We welcome feedback from researchers, farmers and industry to help us improve th
 
 See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a>
 
+# Training Guide
+
+There is a Holos 4 Training Guide for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
+
+*Note that the Holos 4 GUI is not open source at this time.*
+
 # License
 
 Unless otherwise noted, the source code of this project is covered under Crown Copyright, Government of Canada, and is distributed under the <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GNU General Public License (GPLv3)</a>.

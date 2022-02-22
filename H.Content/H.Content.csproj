@@ -195,6 +195,8 @@
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
     <None Include="Documentation\Doxyfile" />
+    <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
+    <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
     <None Include="Documentation\User Guide\User Guide.md" />
     <None Include="packages.config" />
     <None Include="Resources\ab_car_to_slc.csv" />
@@ -331,5 +333,6 @@
   <ItemGroup>
     <None Include="Resources\Settings_50_px.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
