@@ -13,7 +13,7 @@ Une fois les renseignements entrés dans le logiciel, Holos évalue les émissio
 
 Nous sommes heureux de recueillir les commentaires des chercheurs, des agriculteurs et de l'industrie en vue d'améliorer le logiciel. Pour de plus amples renseignements sur Holos, veuillez envoyer un courriel à l'adresse Holos@agr.gc.ca.
 
-# License
+# Licence
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
 
