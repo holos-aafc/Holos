@@ -125,8 +125,8 @@ namespace H.Core.Services.LandManagement
                 nitrogenContentOfExtrarootReturnedToSoil: nitrogenContentOfExtrarootReturnedToSoil,
                 fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
                 soilTestN: viewItem.SoilTestNitrogen,
-                fixation: viewItem.NitrogenFixation, 
-                isNitrogenFixingCrop: isLeguminousCrop);
+                isNitrogenFixingCrop: isLeguminousCrop,
+                nitrogenFixationAmount: defaults.DefaultNitrogenFixation);
 
             return syntheticFertilizerApplied;
         }
@@ -1173,7 +1173,7 @@ namespace H.Core.Services.LandManagement
                 nitrogenConcentrationInTheStraw: currentYearResults.NitrogenContentInStraw,
                 nitrogenConcentrationInTheRoots: currentYearResults.NitrogenContentInRoots,
                 nitrogenConcentrationInExtraroots: currentYearResults.NitrogenContentInExtraroot,
-                nitrogenFixation: currentYearResults.NitrogenFixation);
+                nitrogenFixation: farm.Defaults.DefaultNitrogenFixation);
 
             currentYearResults.TotalUptake += oldPoolNitrogenDemand;
             currentYearResults.TotalUptake += cropNitrogenDemand;

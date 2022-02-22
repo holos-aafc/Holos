@@ -59,10 +59,10 @@ namespace H.Core.Test.Calculators.Nitrogen
                 nitrogenContentOfExtrarootReturnedToSoil: 200,
                 fertilizerEfficiencyFraction: 0.5,
                 soilTestN: 10,
-                fixation: 5, 
-                isNitrogenFixingCrop: false);
+                isNitrogenFixingCrop: false,
+                nitrogenFixationAmount: 0);
 
-            Assert.AreEqual(395, firstRate);
+            Assert.AreEqual(400, firstRate);
 
             // Increasing efficiency should reduce the required amount of fertilzer
             var secondRate = _calculator.CalculateSyntheticFertilizerApplied(
@@ -72,8 +72,8 @@ namespace H.Core.Test.Calculators.Nitrogen
                 nitrogenContentOfExtrarootReturnedToSoil: 200,
                 fertilizerEfficiencyFraction: 0.75,
                 soilTestN: 10,
-                fixation: 5, 
-                isNitrogenFixingCrop: false);
+                isNitrogenFixingCrop: false,
+                nitrogenFixationAmount: 0);
 
             Assert.IsTrue(secondRate < firstRate);
         }

@@ -170,6 +170,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="soilTestN">User defined value for existing Soil N supply for which fertilization rate was adapted</param>
         /// <param name="fixation">Amount of N supplied to the crop through biological N fixation (kg N ha^-1)</param>
         /// <param name="isNitrogenFixingCrop">Indicates if the type of crop is nitrogen fixing.</param>
+        /// <param name="nitrogenFixationAmount">The amount of nitrogen fixation by the crop (fraction)</param>
         /// <returns>N fertilizer applied (kg ha^-1)</returns>
         public double CalculateSyntheticFertilizerApplied(double nitrogenContentOfGrainReturnedToSoil,
                                                           double nitrogenContentOfStrawReturnedToSoil,
@@ -177,8 +178,8 @@ namespace H.Core.Calculators.Nitrogen
                                                           double nitrogenContentOfExtrarootReturnedToSoil,
                                                           double fertilizerEfficiencyFraction,
                                                           double soilTestN,
-                                                          double fixation, 
-                                                          bool isNitrogenFixingCrop)
+                                                          bool isNitrogenFixingCrop,
+                                                          double nitrogenFixationAmount)
         {
             var totalNitrogenContent = (nitrogenContentOfGrainReturnedToSoil + nitrogenContentOfStrawReturnedToSoil + nitrogenContentOfRootReturnedToSoil + nitrogenContentOfExtrarootReturnedToSoil);
 
@@ -189,7 +190,7 @@ namespace H.Core.Calculators.Nitrogen
             }
             else
             {
-                result = (totalNitrogenContent - soilTestN) * (1 - fertilizerEfficiencyFraction);
+                result = (totalNitrogenContent * (1 - nitrogenFixationAmount)) * (1 - fertilizerEfficiencyFraction);
             }
 
             // Suggested amount can never be less than zero

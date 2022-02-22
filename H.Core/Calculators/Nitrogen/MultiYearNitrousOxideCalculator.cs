@@ -725,7 +725,7 @@ namespace H.Core.Calculators.Nitrogen
                    (carbonInputFromStraw / 0.45 * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheStraw +
                    (carbonInputFromRoots / 0.45 * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheRoots +
 
-                   (carbonInputFromExtraroots / 0.45 * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInExtraroots - nitrogenFixation;
+                   (carbonInputFromExtraroots / 0.45 * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInExtraroots - (1 - nitrogenFixation);
         }
 
         /// <summary>
