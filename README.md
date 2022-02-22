@@ -12,6 +12,10 @@ Once information is entered into the program, Holos estimates carbon dioxide, ni
 
 We welcome feedback from researchers, farmers and industry to help us improve this software. For more information on Holos, please contact Holos@agr.gc.ca.
 
+# How to Contribute
+
+See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a>
+
 # License
 
 Unless otherwise noted, the source code of this project is covered under Crown Copyright, Government of Canada, and is distributed under the <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GNU General Public License (GPLv3)</a>.
