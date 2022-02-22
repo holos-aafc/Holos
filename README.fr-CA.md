@@ -17,6 +17,12 @@ Nous sommes heureux de recueillir les commentaires des chercheurs, des agriculte
 
 Voir <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.fr-CA.md" target="_blank">CONTRIBUTING.fr-CA.md</a>
 
+# Guide de formation
+
+Il existe un <a href="https://github.com/holos-aafc/Holos/tree/main/H.Content/Documentation/Training/Holos_4_Training_Guide_French.pdf" target="_blank">guide de formation Holos 4</a> pour l'interface utilisateur graphique (GUI) disponible. Ce guide peut être utilisé comme un didacticiel étape par étape sur la façon de configurer une batterie de serveurs et de calculer les émissions dans l'interface graphique.
+
+*Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
+
 # License
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
