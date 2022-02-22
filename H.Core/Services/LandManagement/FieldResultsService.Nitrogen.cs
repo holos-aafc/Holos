@@ -116,6 +116,8 @@ namespace H.Core.Services.LandManagement
                 carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots / defaults.CarbonConcentration,
                 nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
 
+            var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
+
             var syntheticFertilizerApplied = _singleYearNitrogenEmissionsCalculator.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: nitrogenContentOfGrainReturnedToSoil,
                 nitrogenContentOfStrawReturnedToSoil: nitrogenContentOfStrawReturnedToSoil,
@@ -123,7 +125,8 @@ namespace H.Core.Services.LandManagement
                 nitrogenContentOfExtrarootReturnedToSoil: nitrogenContentOfExtrarootReturnedToSoil,
                 fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
                 soilTestN: viewItem.SoilTestNitrogen,
-                fixation: viewItem.NitrogenFixation);
+                fixation: viewItem.NitrogenFixation, 
+                isNitrogenFixingCrop: isLeguminousCrop);
 
             return syntheticFertilizerApplied;
         }

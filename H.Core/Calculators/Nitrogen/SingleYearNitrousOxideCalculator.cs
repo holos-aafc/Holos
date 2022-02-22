@@ -169,19 +169,34 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="fertilizerEfficiencyFraction">Fertilizer use efficiency (fraction)</param>
         /// <param name="soilTestN">User defined value for existing Soil N supply for which fertilization rate was adapted</param>
         /// <param name="fixation">Amount of N supplied to the crop through biological N fixation (kg N ha^-1)</param>
+        /// <param name="isNitrogenFixingCrop">Indicates if the type of crop is nitrogen fixing.</param>
         /// <returns>N fertilizer applied (kg ha^-1)</returns>
-        public double CalculateSyntheticFertilizerApplied(
-            double nitrogenContentOfGrainReturnedToSoil,
-            double nitrogenContentOfStrawReturnedToSoil,
-            double nitrogenContentOfRootReturnedToSoil,
-            double nitrogenContentOfExtrarootReturnedToSoil,
-            double fertilizerEfficiencyFraction,
-            double soilTestN, 
-            double fixation)
+        public double CalculateSyntheticFertilizerApplied(double nitrogenContentOfGrainReturnedToSoil,
+                                                          double nitrogenContentOfStrawReturnedToSoil,
+                                                          double nitrogenContentOfRootReturnedToSoil,
+                                                          double nitrogenContentOfExtrarootReturnedToSoil,
+                                                          double fertilizerEfficiencyFraction,
+                                                          double soilTestN,
+                                                          double fixation, 
+                                                          bool isNitrogenFixingCrop)
         {
             var totalNitrogenContent = (nitrogenContentOfGrainReturnedToSoil + nitrogenContentOfStrawReturnedToSoil + nitrogenContentOfRootReturnedToSoil + nitrogenContentOfExtrarootReturnedToSoil);
 
-            var result = (totalNitrogenContent * (1 - fertilizerEfficiencyFraction)) - soilTestN - (fixation / 2);
+            var result = 0d;
+            if (isNitrogenFixingCrop)
+            {
+                result = (((totalNitrogenContent) - soilTestN) * (1 - fertilizerEfficiencyFraction));
+            }
+            else
+            {
+                result = (totalNitrogenContent - soilTestN) * (1 - fertilizerEfficiencyFraction);
+            }
+
+            // Suggested amount can never be less than zero
+            if (result < 0)
+            {
+                result = 0;
+            }
 
             return result;
         }
