@@ -18,7 +18,7 @@ See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" targ
 
 # Training Guide
 
-There is a Holos 4 Training Guide for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
+There is a <a href="https://github.com/holos-aafc/Holos/tree/main/H.Content/Documentation/Training/Holos_4_Training_Guide.pdf" target="_blank">Holos 4 Training Guide</a> for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
 
 *Note that the Holos 4 GUI is not open source at this time.*
 
