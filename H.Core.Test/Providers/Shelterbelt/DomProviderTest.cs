@@ -12,7 +12,7 @@ namespace H.Core.Test.Providers.Shelterbelt
         [TestMethod]
         public void TestAllTreeSpeciesGetReturnedFromProvider()
         {
-            var result = ShelterbeltCarbonDataProvider.GetData(1990);
+            var result = ShelterbeltCarbonDataProvider.GetData();
 
             Assert.IsTrue(result.Any(x => x.Species == TreeSpecies.Caragana));
             Assert.IsTrue(result.Any(x => x.Species == TreeSpecies.GreenAsh));
@@ -25,18 +25,16 @@ namespace H.Core.Test.Providers.Shelterbelt
         [TestMethod]
         public void GetColumn()
         {
-            var result = ShelterbeltCarbonDataProvider.GetInterpolatedValue(
+            var result = ShelterbeltCarbonDataProvider.GetLookupValue(
                 treeSpecies: TreeSpecies.WhiteSpruce,
-                hardinessZone: HardinessZone.H3b,
-                ecodistrictId: 709,
+                ecodistrictId: 689,
                 percentMortality: 50,
                 mortalityLow: 30,
                 mortalityHigh: 50,
                 age: 5,
-                column: ShelterbeltCarbonDataProvider.Columns.Dom_Mg_C_km, 
-                year: 1990);
+                column: ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km);
 
-            Assert.AreEqual(result, 94.65483856);
+            Assert.AreEqual(result, 99.79055023);
         }
     }
 }

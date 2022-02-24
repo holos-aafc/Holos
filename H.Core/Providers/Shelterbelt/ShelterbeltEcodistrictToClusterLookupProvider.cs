@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using H.Content;
 using H.Core.Tools;
 using H.Infrastructure;
@@ -50,6 +51,19 @@ namespace H.Core.Providers.Shelterbelt
                 return defaultValue;
             }
             return clusterData;
+        }
+
+        public static bool CanLookupByEcodistrict(int ecodistrict)
+        {
+            var clusterData = GetClusterData(ecodistrict);
+            if (string.IsNullOrWhiteSpace(clusterData.ClusterId))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

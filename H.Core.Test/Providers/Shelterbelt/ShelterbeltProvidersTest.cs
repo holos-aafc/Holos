@@ -28,12 +28,5 @@ namespace H.Core.Test.Providers.Shelterbelt
             var table = ShelterbeltEcodistrictLookupTableProvider.GetShelterbeltEcodistrictLookupTable();
             Assert.AreEqual(709, table[0].EcodistrictID);
         }
-
-        [TestMethod]
-        public void ShelterbeltHardinessZoneLookupOffsetsCorrect()
-        {
-            var table = ShelterbeltHardinessZoneLookupProvider.GetShelterbeltHardinessZoneLookup();
-            Assert.AreEqual(0.443080544471741000212006156289, table[0].DiameterCMMin);
-        }
     }
 }

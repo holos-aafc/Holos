@@ -38,6 +38,8 @@ namespace H.Core
         /// </summary>
         public static double CarbonConcentrationOfTrees = 0.5;
 
+        public static int ShelterbeltCarbonTablesMaximumAge = 60;
+
         public static int IcbmProjectionPeriod = 30;
         public static int IcbmEquilibriumYear = 1985;
 

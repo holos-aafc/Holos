@@ -152,11 +152,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             get
             {
-                if (_plantDate < new DateTime(1985, 1, 1))
-                {
-                    return new DateTime(1985, 1, 1);
-                }
-
                 return _plantDate;
             }
         }
@@ -165,11 +160,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             get
             {
-                if (_cutDate > new DateTime(2050, 12, 31))
-                {
-                    return new DateTime(2050, 12, 31);
-                }
-
                 return _cutDate;
             }
         }

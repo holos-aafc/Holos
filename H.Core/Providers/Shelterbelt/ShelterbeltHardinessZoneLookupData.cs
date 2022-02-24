@@ -11,6 +11,9 @@ namespace H.Core.Providers.Shelterbelt
         public double DiameterCMMin { get; set; }
         public double DiameterCMMax { get; set; }
         public double DiameterCMWeightedMean { get; set; }
+        public double AvgTecMgCkm { get; set; }
+        public double AvgBiomMgKmCYr { get; set; }
+        public double AvgDomMgKmCYr { get; set; }
         public double RootsKgBiomassPerTreeMin { get; set; }
         public double RootsKgBiomassPerTreeMax { get; set; }
         public double RootsKgBiomassPerTreeWeightedMean { get; set; }

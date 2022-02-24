@@ -103,7 +103,8 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             {
                 for (var year = treeGroup.PlantYear; year <= treeGroup.CutYear; year = year + 1)
                 {
-                    this.TrannumData.Add(new TrannumData(shelterbelt, row, treeGroup, year));
+                    var trannumData = new TrannumData(shelterbelt, row, treeGroup, year);
+                    this.TrannumData.Add(trannumData);
                 }
             }
         }

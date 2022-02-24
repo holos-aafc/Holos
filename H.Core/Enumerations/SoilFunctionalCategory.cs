@@ -36,6 +36,9 @@ namespace H.Core.Enumerations
         EasternCanada,
 
         [LocalizedDescription("EnumSoilFunctionalAll", typeof(Resources))]
-        All
+        All,
+
+        Grey,
+        DarkGrey
     }
 }

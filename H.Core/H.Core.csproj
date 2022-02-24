@@ -564,6 +564,7 @@
     <Compile Include="Providers\Polygon\IHolosMapPolygonIdListProvider.cs" />
     <Compile Include="Providers\ProviderBase.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltCarbonDataProvider.cs" />
+    <Compile Include="Providers\Shelterbelt\ShelterbeltCarbonDataProviderColumns.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltDomProviderData.cs" />
     <Compile Include="Providers\SlcClimateDataProvider.cs" />
     <Compile Include="Providers\Shelterbelt\CoefficientsForAboveGroundBiomassEstimationForShelterbeltTreeSpeciesProvider_Table_5.cs" />

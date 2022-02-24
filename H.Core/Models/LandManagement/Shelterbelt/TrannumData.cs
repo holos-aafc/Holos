@@ -46,12 +46,12 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         private double _percentMortalityLow;
 
         private double _totalBiomassPerTree;
-        private double _totalLivingCarbonPerTreeType;
+        private double _totalLivingCarbonPerTreeTypePerStandardLength;
 
         private double _biomassPerTreeType;
         private double _totalCarbonForAllTreesOfSameSpecies;
 
-        private double _totalLivingBiomassPerTreeType;
+        private double _totalLivingBiomassPerTreeTypePerStandardLength;
         private double _totalCarbonForAllTreesOfSameSpeciesPerStandardPlanting;
 
         private double _totalCarbonForShelterbeltAtYear;
@@ -330,9 +330,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             set {SetProperty(ref _age, value); }
         }
 
-        public double AboveGroundCarbonStocksOfAParticularKind { get; set; }
-        public double AboveGroundBiomass { get; set; }
-
         /// <summary>
         /// The total biomass of the tree (includes aboveground and belowground)
         ///
@@ -344,18 +341,15 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             set { SetProperty(ref _totalBiomassPerTree, value); }
         }
 
-        public double RootsBiomassPerTree { get; set; }
-        public double RootsCarbonPerTree { get; set; }
-
         /// <summary>
-        /// Total carbon per tree (includes aboveground and belowground)
+        /// Total carbon per tree (includes aboveground and belowground) per standard length
         ///
-        /// (kg C)
+        /// (kg C km^-1)
         /// </summary>
-        public double TotalLivingCarbonPerTreeType 
+        public double TotalLivingCarbonPerTreeTypePerStandardLength 
         {
-            get { return _totalLivingCarbonPerTreeType; }
-            set { SetProperty(ref _totalLivingCarbonPerTreeType, value); }
+            get { return _totalLivingCarbonPerTreeTypePerStandardLength; }
+            set { SetProperty(ref _totalLivingCarbonPerTreeTypePerStandardLength, value); }
         }
 
         /// <summary>
@@ -374,56 +368,10 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         ///
         /// (kg km^-1)
         /// </summary>
-        public double TotalLivingBiomassPerTreeType
+        public double TotalLivingBiomassPerTreeTypePerStandardLength
         {
-            get => _totalLivingBiomassPerTreeType;
-            set => SetProperty(ref _totalLivingBiomassPerTreeType, value);
-        }
-
-        /// <summary>
-        /// Total carbon of all trees in the same row of the same species
-        ///
-        /// (kg C species^-1 row^-1)
-        /// </summary>
-        public double TotalCarbonForAllTreesOfSameSpecies
-        {
-            get => _totalCarbonForAllTreesOfSameSpecies;
-            set => SetProperty(ref _totalCarbonForAllTreesOfSameSpecies, value);
-        }
-
-        /// <summary>
-        /// Total carbon for the shelterbelt (all rows) during the year
-        ///
-        /// (kg C shelterbelt^-1)
-        /// </summary>
-        public double TotalCarbonForShelterbeltAtYear
-        {
-            get => _totalCarbonForShelterbeltAtYear;
-            set => SetProperty(ref _totalCarbonForShelterbeltAtYear, value);
-        }
-
-        public double TotalCarbonForAllTreesOfSameSpeciesPerStandardPlanting
-        {
-            get => _totalCarbonForAllTreesOfSameSpeciesPerStandardPlanting;
-            set => SetProperty(ref _totalCarbonForAllTreesOfSameSpeciesPerStandardPlanting, value);
-        }
-
-        public double TotalCarbonForShelterbeltSequesteredAtYear
-        {
-            get => _totalCarbonForShelterbeltSequesteredAtYear;
-            set => SetProperty(ref _totalCarbonForShelterbeltSequesteredAtYear, value);
-        }
-
-        public double TotalCarbonForShelterbeltAtYearPerStandardPlanting
-        {
-            get => _totalCarbonForShelterbeltAtYearPerStandardPlanting;
-            set => SetProperty(ref _totalCarbonForShelterbeltAtYearPerStandardPlanting, value);
-        }
-
-        public double TotalCarbonDioxideForShelterbeltSequesteredAtYearPerStandardPlanting
-        {
-            get => _totalCarbonDioxideForShelterbeltSequesteredAtYearPerStandardPlanting;
-            set => SetProperty(ref _totalCarbonDioxideForShelterbeltSequesteredAtYearPerStandardPlanting, value);
+            get => _totalLivingBiomassPerTreeTypePerStandardLength;
+            set => SetProperty(ref _totalLivingBiomassPerTreeTypePerStandardLength, value);
         }
 
         /// <summary>
@@ -439,9 +387,9 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public double EstimatedBiomassCarbonBasedOnRealGrowth { get; set; }
 
         /// <summary>
-        /// (kg C km^-1)
+        /// Used to determine if biomass/carbon values from lookup tables will use the hardiness zone or ecodistrict.
         /// </summary>
-        public double BiomasCarbonPerKilometerInKilograms { get; set; }
+        public bool CanLookupByEcodistrict { get; set; }
 
         #endregion
 

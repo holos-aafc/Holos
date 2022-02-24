@@ -12,16 +12,6 @@ namespace H.Core.Providers.Shelterbelt
 {
     public static class ShelterbeltCarbonDataProvider
     {
-        public enum Columns
-        {
-            Dom_Mg_C_km,
-            Dom_Mg_C_km_yr,
-            Biom_Mg_C_km,
-            Biom_Mg_C_km_yr,
-            Tec_Mg_C_km,
-            Tec_Mg_C_km_yr,
-        }
-
         #region Fields
 
         /// <summary>
@@ -48,16 +38,14 @@ namespace H.Core.Providers.Shelterbelt
 
         #region Public Methods
 
-        public static List<ShelterbeltDomProviderData> GetData(int year)
+        /// <summary>
+        /// Returns the future or past data set.
+        /// </summary>
+        public static List<ShelterbeltDomProviderData> GetData()
         {
-            if (year >= 2016)
-            {
-                return _futureData;
-            }
-            else
-            {
-                return _pastData;
-            }
+            // Beyhan's email say to use future data lookups (10/11/2019)
+
+            return _futureData;
         }
 
         #endregion
@@ -144,26 +132,28 @@ namespace H.Core.Providers.Shelterbelt
             return result;
         }
 
-        public static double GetInterpolatedValue(
-            TreeSpecies treeSpecies, 
-            HardinessZone hardinessZone, 
-            int ecodistrictId, 
-            double percentMortality, 
-            int mortalityLow, 
-            int mortalityHigh, 
-            int age, 
-            Columns column, 
-            int year)
+        /// <summary>
+        /// If we are in Saskatchewan, we can do lookups for biomass directly by using the cluster id.
+        ///
+        /// If we are not in Saskatchewan, we use <see cref="ShelterbeltHardinessZoneLookupProvider.GetLookupValue"/> instead.
+        /// </summary>
+        public static double GetLookupValue(TreeSpecies treeSpecies,
+                                            int ecodistrictId,
+                                            double percentMortality,
+                                            double mortalityLow,
+                                            double mortalityHigh,
+                                            int age,
+                                            ShelterbeltCarbonDataProviderColumns column)
         {
-            if (age > 60)
+            if (age > CoreConstants.ShelterbeltCarbonTablesMaximumAge)
             {
-                age = 60;
+                age = CoreConstants.ShelterbeltCarbonTablesMaximumAge;
             }
 
             // Data in table is indexed by cluster. Get the cluster id from the ecodistrict now
             var clusterData = ShelterbeltEcodistrictToClusterLookupProvider.GetClusterData(ecodistrictId);
 
-            var data = GetData(year);
+            var data = GetData();
 
             var tableLookupLow = data.SingleOrDefault(
                 x => x.Species == treeSpecies &&
@@ -179,44 +169,27 @@ namespace H.Core.Providers.Shelterbelt
 
             if (tableLookupHigh != null && tableLookupLow != null)
             {
-                var low = mortalityLow;
-                var high = mortalityHigh;
-
                 var targetLow = 0d;
                 var targetHigh = 0d;
 
-                if (column == Columns.Dom_Mg_C_km)
+                if (column == ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km)
                 {
                     targetLow = tableLookupLow.DeadOrganicMatterCarbonPerKilometer;
                     targetHigh = tableLookupHigh.DeadOrganicMatterCarbonPerKilometer;
                 }
-                else if (column == Columns.Dom_Mg_C_km_yr)
-                {
-                    targetLow = tableLookupLow.DeadOrganicMatterCarbonPerKilometerPerYear;
-                    targetHigh = tableLookupHigh.DeadOrganicMatterCarbonPerKilometerPerYear;
-                }
-                else if (column == Columns.Biom_Mg_C_km)
+                else if (column == ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km)
                 {
                     targetLow = tableLookupLow.BiomassCarbonPerKilometer;
                     targetHigh = tableLookupHigh.BiomassCarbonPerKilometer;
                 }
-                else if (column == Columns.Biom_Mg_C_km_yr)
-                {
-                    targetLow = tableLookupLow.BiomassCarbonPerKilometerPerYear;
-                    targetHigh = tableLookupHigh.BiomassCarbonPerKilometerPerYear;
-                }
-                else if (column == Columns.Tec_Mg_C_km)
+              
+                else if (column == ShelterbeltCarbonDataProviderColumns.Tec_Mg_C_km)
                 {
                     targetLow = tableLookupLow.TecPerKilometer;
                     targetHigh = tableLookupHigh.TecPerKilometer;
                 }
-                else if (column == Columns.Tec_Mg_C_km_yr)
-                {
-                    targetLow = tableLookupLow.TecPerKilometerPerYear;
-                    targetHigh = tableLookupHigh.TecPerKilometerPerYear;
-                }
 
-                var ratio = (targetLow - targetHigh) / (high - low);
+                var ratio = (targetLow - targetHigh) / (mortalityHigh - mortalityLow);
                 var product = (percentMortality - mortalityLow) * ratio;
                 var result = targetLow - product;
 

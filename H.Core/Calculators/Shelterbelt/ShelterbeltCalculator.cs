@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper.Configuration.Conventions;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Shelterbelt;
@@ -14,38 +15,41 @@ namespace H.Core.Calculators.Shelterbelt
         #region Fields
 
         private readonly ShelterbeltAgTRatioProvider _shelterbeltAgTRatioProvider = new ShelterbeltAgTRatioProvider();
-        private readonly List<TrannumData> _trannums = new List<TrannumData>();
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        /// Gets the A value for a species that is present in Beyhan Amichev's paper: Carbon sequestration and growth of six common tree and shrub shelterbelts in Saskatchewan, Canada
+        /// Gets the A value for aboveground biomass estimation.
         /// </summary>
         public double GetA(TreeSpecies species)
         {
-            var entry = ShelterbeltAllometricTableProvider.GetShelterbeltAllometricTable()
-                .Find(x => x.TreeSpecies == species);
+            var entry = ShelterbeltAllometricTableProvider.GetShelterbeltAllometricTable().Find(x => x.TreeSpecies == species);
             if (entry == null)
-                throw new Exception(
-                    "GetA received a species which does not exist in table (Must not average the coefficients, calculate carbon first.) : " +
-                    species.GetDescription());
-            return entry.A;
+            {
+                throw new Exception("Species does not exist in table: " + species.GetDescription());
+            }
+            else
+            {
+                return entry.A;
+            }
         }
 
         /// <summary>
-        /// Gets the B value for a species that is present in Beyhan Amichev's paper: Carbon sequestration and growth of six common tree and shrub shelterbelts in Saskatchewan, Canada
+        /// Gets the B value for aboveground biomass estimation.
         /// </summary>
         public double GetB(TreeSpecies species)
         {
-            var entry = ShelterbeltAllometricTableProvider.GetShelterbeltAllometricTable()
-                .Find(x => x.TreeSpecies == species);
+            var entry = ShelterbeltAllometricTableProvider.GetShelterbeltAllometricTable().Find(x => x.TreeSpecies == species);
             if (entry == null)
-                throw new Exception(
-                    "GetA received a species which does not exist in table (Must not average the coefficients, calculate carbon first.) : " +
-                    species.GetDescription());
-            return entry.B;
+            {
+                throw new Exception("Species does not exist in table: " + species.GetDescription());
+            }
+            else
+            {
+                return entry.B;
+            }
         }
 
         public double AverageTwo(double one, double two)
@@ -53,6 +57,9 @@ namespace H.Core.Calculators.Shelterbelt
             return (one + two) / 2.0;
         }
 
+        /// <summary>
+        /// Builds <see cref="TrannumData"/>s for the <see cref="ShelterbeltComponent"/> and calculates biomass for each group of tree in each row of the shelterbelt.
+        /// </summary>
         public void CalculateInitialResults(ShelterbeltComponent component)
         {
             component.BuildTrannums();
@@ -61,18 +68,15 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         public void CalculateInitialResults(
-            IEnumerable<TrannumData> trannumData)
+            IList<TrannumData> trannumData)
         {
-            _trannums.Clear();
-            _trannums.AddRange(trannumData);
-
-            // Group trannums by treetype since we could have two groups of trees with the same year of observation in the row
-            var groups = _trannums.GroupBy(x => x.TreeGroupGuid);
+            // Group trannums by tree groups since we could have two groups of trees with the same year of observation in the same row
+            var groups = trannumData.GroupBy(x => x.TreeGroupGuid);
             foreach (var treeGroup in groups)
             {
                 /*
-                 * User has entered the circumference of the trees at the year of observation (year of measurement). We can only calculate biomass/carbon
-                 * for this one year. Once we have these calculated biomass/carbon values, we compare these against the lookup values for TEC, BIOM, DOM, etc. and
+                 * User has entered the circumference of the trees at the year of observation only (year of measurement). We can only calculate biomass/carbon
+                 * for this one year. Once we have these calculated biomass/carbon values, we then compare these against the lookup values for total living biomass and
                  * get a ratio of actual growth to ideal (lookup) growth.
                  *
                  * With this ratio we then lookup values for TEC, BIOM, DOM for all other years and multiply by the calculated ratio to get estimated growth in past/future years.
@@ -80,25 +84,34 @@ namespace H.Core.Calculators.Shelterbelt
 
                 var yearOfObservationTrannum = treeGroup.Single(x => Math.Abs(x.Year - x.YearOfObservation) < double.Epsilon);
 
-                // Calculate results for the year of observation
-                this.CalculateBiomassPerTree(yearOfObservationTrannum);
+                // Calculate biomass carbon for the year of observation
+                this.CalculateBiomassPerTreeAtYearOfObservation(yearOfObservationTrannum);
+
+                // We now check if the farm location is inside of Saskatchewan or not - this will determine which lookup table we use for biomass/carbon values
+                yearOfObservationTrannum.CanLookupByEcodistrict = ShelterbeltEcodistrictToClusterLookupProvider.CanLookupByEcodistrict(yearOfObservationTrannum.EcodistrictId);
+
+                // Now we calculate the ratio of real growth compared to ideal growth
                 yearOfObservationTrannum.RealGrowthRatio = this.CalculateRealGrowthRatio(yearOfObservationTrannum);
 
-                // Now that we have calculated the real grown ratio, we assign this to all other years
+                // Now that we have calculated the real growth ratio, we assign this to all other years and indicate the table lookup method we will use
                 foreach (var trannum in trannumData)
                 {
                     trannum.RealGrowthRatio = yearOfObservationTrannum.RealGrowthRatio;
+                    trannum.CanLookupByEcodistrict = yearOfObservationTrannum.CanLookupByEcodistrict;
                 }
 
-                // Calculate growth based on real growth ratio for all other years (i.e. from plant date to the cut date)
+                // Finally, calculate estimated growth based on real growth ratio for all other years (i.e. from plant date to the cut date)
                 foreach (var data in trannumData)
                 {
-                    this.CalculateEstimatesBasedOnRealGrowth(data);
+                    this.CalculateEstimatedGrowth(data);
                 }
             }
         }
 
-        public void CalculateBiomassPerTree(TrannumData trannumData)
+        /// <summary>
+        /// Calulcates the actual biomass of trees at the year of observation. Performs calucation of biomass only - not carbon.
+        /// </summary>
+        public void CalculateBiomassPerTreeAtYearOfObservation(TrannumData trannumData)
         {
             // Calculate biomass per tree first
             if (trannumData.TreeSpecies == TreeSpecies.AverageConifer)
@@ -111,7 +124,7 @@ namespace H.Core.Calculators.Shelterbelt
             }
             else
             {
-                trannumData.TotalBiomassPerTree = this.CalculateBiomassOfNonAverageTree(trannumData);
+                trannumData.TotalBiomassPerTree = this.CalculateBiomassOfTrees(trannumData);
             }
 
             // Biomass_treetype
@@ -120,120 +133,161 @@ namespace H.Core.Calculators.Shelterbelt
                 treeCount: trannumData.TreeCount);
 
             // TLB_treetype
-            trannumData.TotalLivingBiomassPerTreeType = this.CalculateTotalLivingBiomassPerStandardLength(
+            trannumData.TotalLivingBiomassPerTreeTypePerStandardLength = this.CalculateTotalLivingBiomassPerStandardLength(
                 biomassOfAllTrees: trannumData.BiomassPerTreeType,
                 rowLength: trannumData.RowLength);
         }
 
+        /// <summary>
+        /// Compares the actual growth with that of the ideal growth for trees of the same age and species.
+        /// </summary>
         public double CalculateRealGrowthRatio(TrannumData trannumData)
         {
-            // TLC_treetype
-            trannumData.TotalLivingCarbonPerTreeType = this.CalculateTotalLivingCarbonPerTreeType(trannumData.TotalLivingBiomassPerTreeType);
+            // Convert total living biomass to total living carbon
+            trannumData.TotalLivingCarbonPerTreeTypePerStandardLength = this.CalculateTotalLivingCarbonPerTreeType(trannumData.TotalLivingBiomassPerTreeTypePerStandardLength);
 
-            var biomasCarbonPerKilometer = ShelterbeltCarbonDataProvider.GetInterpolatedValue(
-                treeSpecies: trannumData.TreeSpecies,
-                hardinessZone: trannumData.HardinessZone,
-                ecodistrictId: trannumData.EcodistrictId,
-                percentMortality: trannumData.PercentMortality,
-                mortalityLow: (int)trannumData.PercentMortalityLow,
-                mortalityHigh: (int)trannumData.PercentMortalityHigh,
-                age: trannumData.Age,
-                column: ShelterbeltCarbonDataProvider.Columns.Biom_Mg_C_km,
-                year: (int)trannumData.Year);
+            var age = trannumData.Age;
+            var result = 0d;
 
-            // Convert to kilograms
-            trannumData.BiomasCarbonPerKilometerInKilograms = biomasCarbonPerKilometer * 1000;
+            /*
+             * Lookup tables do not have total living biomass for first three years (in some situations). If user has a year of observation that is in these first few years of growth (i.e. age = 1, 2, 3)
+             * it will not be possible to calculate the real growth ratio. Go foward in time until we get a non-zero value and use that for comparison.
+             */
 
-            // Calculate the real growth ratio
-            var result = this.CalculateRealGrowthRatio(
-                calculatedTotalLivingCarbon: trannumData.TotalLivingCarbonPerTreeType,
-                lookupTotalLivingCarbon: trannumData.BiomasCarbonPerKilometerInKilograms);
+            var biomasCarbonPerKilometerMegagrams = 0d;
+
+            var biomasCarbonPerStandardLengthInKilograms = 0d;
+            if (trannumData.CanLookupByEcodistrict)
+            {
+                do
+                {
+                    // Get total living biomass carbon of an ideal tree
+                    biomasCarbonPerKilometerMegagrams = ShelterbeltCarbonDataProvider.GetLookupValue(
+                        treeSpecies: trannumData.TreeSpecies,
+                        ecodistrictId: trannumData.EcodistrictId,
+                        percentMortality: trannumData.PercentMortality,
+                        mortalityLow: trannumData.PercentMortalityLow,
+                        mortalityHigh: trannumData.PercentMortalityHigh,
+                        age: age,
+                        column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
+
+                    age++;
+                } while (biomasCarbonPerKilometerMegagrams == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+            }
+            else
+            {
+                // If we are outside of Saskatchewan, we won't have access to the cluster id that is need to lookup live biomass values, instead we lookup values by hardiness zone instead.
+                do
+                {
+                    // Get total living biomass carbon of an ideal tree
+                    biomasCarbonPerKilometerMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                        treeSpecies: trannumData.TreeSpecies,
+                        hardinessZone: trannumData.HardinessZone,
+                        percentMortality: trannumData.PercentMortality,
+                        mortalityLow: trannumData.PercentMortalityLow,
+                        mortalityHigh: trannumData.PercentMortalityHigh,
+                        age: age,
+                        column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
+
+                    age++;
+                } while (biomasCarbonPerKilometerMegagrams == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+            }
+
+            // Convert total living biomass carbon to kilograms
+            biomasCarbonPerStandardLengthInKilograms = biomasCarbonPerKilometerMegagrams * 1000;
+
+            result = this.CalculateRealGrowthRatio(
+                calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
+                lookupTotalLivingCarbonKilogramsPerStandardLength: biomasCarbonPerStandardLengthInKilograms);
 
             return result;
         }
 
         /// <summary>
-        /// For all years except the year of observation/measurement, we need to estimate growth based on the real growth.
+        /// For all years except the year of observation/measurement, we need to estimate growth based on the calculated real growth ratio. Calculated the estimated
+        /// growth (living biomass carbon) for the particular species at the given year.
         /// </summary>
-        public void CalculateEstimatesBasedOnRealGrowth(TrannumData trannumData)
+        public void CalculateEstimatedGrowth(TrannumData trannumData)
         {
-            var tec = 0d;
-            var dom = 0d;
+            var totalEcosystemCarbon = 0d;
+            var deadOrganicMatter = 0d;
 
-            // Check if tree is average type
             if (trannumData.TreeSpecies == TreeSpecies.AverageConifer)
             {
+                /*
+                 * Take the average of white spruce and scots pine
+                 */
+
                 trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
 
-                var whiteSpruceTec = this.GetTecFarm(trannumData);
-                var whiteSpruceDom = this.GetDomFarm(trannumData);
+                var whiteSpruceTotalEcosystemCarbon = this.GetIdealTotalEcosystemCarbon(trannumData);
+                var whiteSpruceDeadOrganicMatterCarbon = this.GetIdealDeadOrganicMatter(trannumData);
 
-                trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
+                trannumData.TreeSpecies = TreeSpecies.ScotsPine;
 
-                var scotsPineTec = this.GetTecFarm(trannumData);
-                var scotsPineDom = this.GetDomFarm(trannumData);
+                var scotsPineTotalEcosystemCarbon = this.GetIdealTotalEcosystemCarbon(trannumData);
+                var scotsPineDeadOrganicMatterCarbon = this.GetIdealDeadOrganicMatter(trannumData);
 
                 // Change back to original species
                 trannumData.TreeSpecies = TreeSpecies.AverageConifer;
 
-                tec = AverageTwo(whiteSpruceTec, scotsPineTec);
-                dom = AverageTwo(whiteSpruceDom, scotsPineDom);
+                totalEcosystemCarbon = AverageTwo(whiteSpruceTotalEcosystemCarbon, scotsPineTotalEcosystemCarbon);
+                deadOrganicMatter = AverageTwo(whiteSpruceDeadOrganicMatterCarbon, scotsPineDeadOrganicMatterCarbon);
 
             }
             else if (trannumData.TreeSpecies == TreeSpecies.AverageDeciduous)
             {
-                trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
+                /*
+                 * Take the average of manitoba maple and green ash
+                 */
 
-                var manitobaMapleTec = this.GetTecFarm(trannumData);
-                var manitobaMapleDom = this.GetDomFarm(trannumData);
+                trannumData.TreeSpecies = TreeSpecies.ManitobaMaple;
 
-                trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
+                var manitobaMapleTotalEcoystemCarbon = this.GetIdealTotalEcosystemCarbon(trannumData);
+                var manitobaMapleDeadOrganicMatterCarbon = this.GetIdealDeadOrganicMatter(trannumData);
 
-                var greenAshTec = this.GetTecFarm(trannumData);
-                var greenAshDom = this.GetDomFarm(trannumData);
+                trannumData.TreeSpecies = TreeSpecies.GreenAsh;
+
+                var greenAshTotalEcosystemCarbon = this.GetIdealTotalEcosystemCarbon(trannumData);
+                var greenAshDeadOrganicMatterCarbon = this.GetIdealDeadOrganicMatter(trannumData);
 
                 // Change back to original species
                 trannumData.TreeSpecies = TreeSpecies.AverageDeciduous;
 
-                tec = AverageTwo(greenAshTec, greenAshDom);
-                dom = AverageTwo(manitobaMapleTec, manitobaMapleDom);
+                totalEcosystemCarbon = AverageTwo(greenAshTotalEcosystemCarbon, manitobaMapleTotalEcoystemCarbon);
+                deadOrganicMatter = AverageTwo(greenAshDeadOrganicMatterCarbon, manitobaMapleDeadOrganicMatterCarbon);
             }
             else
             {
-                tec = this.GetTecFarm(trannumData);
-                dom = this.GetDomFarm(trannumData);
+                totalEcosystemCarbon = this.GetIdealTotalEcosystemCarbon(trannumData);
+                deadOrganicMatter = this.GetIdealDeadOrganicMatter(trannumData);
             }
 
-            var biom = tec - dom;
+            var livingBiomass = totalEcosystemCarbon - deadOrganicMatter;
 
-            // Use ratio of actual tree 
-            var domRatio = dom * trannumData.RealGrowthRatio;
-            var biomRatio = biom * trannumData.RealGrowthRatio;
+            var deadOrganicMatterRatio = deadOrganicMatter * trannumData.RealGrowthRatio;
+            var livingBiomassRatio = livingBiomass * trannumData.RealGrowthRatio;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
-            trannumData.EstimatedBiomassCarbonBasedOnRealGrowth = biomRatio;
+            trannumData.EstimatedBiomassCarbonBasedOnRealGrowth = livingBiomassRatio;
 
             // Calculate the estimated dead organic matter based on the real growth ratio
-            trannumData.EstimatedDeadOrganicMatterBasedOnRealGrowth = domRatio;
+            trannumData.EstimatedDeadOrganicMatterBasedOnRealGrowth = deadOrganicMatterRatio;
         }
 
         /// <summary>
-        /// Once the yearly values have been calculated, we can then total up the biomass/carbon/CO2 values for each shelterbelt.
+        /// Once the yearly values have been calculated, we can then total up the biomass/carbon/CO2 values for each shelterbelt during each year.
         /// </summary>
-        public List<TrannumResultViewItem> CalculateFinalResults(
+        public List<TrannumResultViewItem> TotalResultsForEachYear(
             IEnumerable<ShelterbeltComponent> shelterbeltComponents)
         {
             var results = new List<TrannumResultViewItem>();
 
             foreach (var component in shelterbeltComponents)
             {
-                if (component.StageStateSet == false)
-                {
-                    this.CalculateInitialResults(component); 
-                }
-
                 var resultsForComponent = new List<TrannumResultViewItem>();
 
+                // There may be several rows each with multiple groups. We need to get a list of distinct years so we can get the totals for each year.
                 var distinctYears = component.TrannumData.Select(x => x.Year).Distinct();
                 foreach (var year in distinctYears)
                 {
@@ -244,27 +298,26 @@ namespace H.Core.Calculators.Shelterbelt
                     resultViewItem.ShelterbeltComponent = component;
                     resultViewItem.Year = (int)year;
 
-                    resultViewItem.Age = (int) viewItemsForYear.First().Age; // All items in the same year in the same shelterbelt will have the same age
-
-                    resultViewItem.TotalShelterbeltBiomassCarbon = this.CalculateTotalShelterbeltBiomassCarbon(viewItemsForYear);
-                    resultViewItem.TotalDeadOrganicMatter = this.CalculateTotalDeadOrganicMatter(viewItemsForYear);
-                    resultViewItem.TotalEquivalentCarbon = this.CalculateTotalEquivalentCarbon(
-                        biomassCarbon: resultViewItem.TotalShelterbeltBiomassCarbon,
-                        deadOrganicMatterCarbon: resultViewItem.TotalDeadOrganicMatter);
+                    resultViewItem.TotalLivingBiomassCarbon = this.CalculateTotalShelterbeltBiomassCarbon(viewItemsForYear) / 1000; // Convert to Mg
+                    resultViewItem.TotalDeadOrganicMatterCarbon = this.CalculateTotalDeadOrganicMatter(viewItemsForYear) / 1000; // Convert to Mg
+                    resultViewItem.TotalEcosystemCarbon = this.CalculateTotalEcosystemCarbon(
+                        biomassCarbon: resultViewItem.TotalLivingBiomassCarbon,
+                        deadOrganicMatterCarbon: resultViewItem.TotalDeadOrganicMatterCarbon);
 
                     resultsForComponent.Add(resultViewItem);
                 }
 
                 results.AddRange(resultsForComponent);
 
+                // Next we calculate the changes in the total ecosystem carbon, living biomass carbon, and dead organic matter carbon from year to year
                 for (int i = 0; i < resultsForComponent.Count; i++)
                 {
                     if (i == 0)
                     {
                         var resultViewItem = resultsForComponent.ElementAt(0);
-                        resultViewItem.TotalDeadOrganicMatterDelta = 0;
-                        resultViewItem.TotalEquivalentCarbonDelta = 0;
-                        resultViewItem.TotalShelterbeltBiomassCarbonDelta = 0;
+                        resultViewItem.TotalDeadOrganicMatterChange = 0;
+                        resultViewItem.TotalEcosystemCarbonChange = 0;
+                        resultViewItem.TotalLivingBiomassCarbonChange = 0;
 
                         continue;
                     }
@@ -272,12 +325,9 @@ namespace H.Core.Calculators.Shelterbelt
                     var previousYearViewItem = resultsForComponent.ElementAt(i - 1);
                     var currentYearViewItem = resultsForComponent.ElementAt(i);
 
-                    /*
-                     * Calculate the changes (delta) from year to year
-                     */
-                    currentYearViewItem.TotalDeadOrganicMatterDelta = currentYearViewItem.TotalDeadOrganicMatter - previousYearViewItem.TotalDeadOrganicMatter;
-                    currentYearViewItem.TotalEquivalentCarbonDelta = currentYearViewItem.TotalEquivalentCarbon - previousYearViewItem.TotalEquivalentCarbon;
-                    currentYearViewItem.TotalShelterbeltBiomassCarbonDelta = currentYearViewItem.TotalShelterbeltBiomassCarbon - previousYearViewItem.TotalShelterbeltBiomassCarbon;
+                    currentYearViewItem.TotalDeadOrganicMatterChange = (currentYearViewItem.TotalDeadOrganicMatterCarbon - previousYearViewItem.TotalDeadOrganicMatterCarbon);
+                    currentYearViewItem.TotalEcosystemCarbonChange = (currentYearViewItem.TotalEcosystemCarbon - previousYearViewItem.TotalEcosystemCarbon);
+                    currentYearViewItem.TotalLivingBiomassCarbonChange = (currentYearViewItem.TotalLivingBiomassCarbon - previousYearViewItem.TotalLivingBiomassCarbon);
                 }
             }
 
@@ -289,17 +339,17 @@ namespace H.Core.Calculators.Shelterbelt
         #region Private Methods
 
         /// <summary>
-        /// An 'average' coniferous tree is the average of white spruce and scots pine
+        /// An 'average' coniferous tree is the average biomass carbon of white spruce and scots pine at the same age
         /// </summary>
         private double CalculateAverageConiferBiomass(TrannumData trannumData)
         {
             trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
 
-            var whiteSpruceBiomass = this.CalculateBiomassOfNonAverageTree(trannumData);
+            var whiteSpruceBiomass = this.CalculateBiomassOfTrees(trannumData);
 
             trannumData.TreeSpecies = TreeSpecies.ScotsPine;
 
-            var scotsPineBiomass = this.CalculateBiomassOfNonAverageTree(trannumData);
+            var scotsPineBiomass = this.CalculateBiomassOfTrees(trannumData);
 
             var result = this.AverageTwo(scotsPineBiomass, whiteSpruceBiomass);
 
@@ -309,17 +359,17 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// An 'average' deciduous tree is the average of green ash and manitoba maple
+        /// An 'average' deciduous tree is the average biomass carbon of green ash and manitoba maple trees at the same age
         /// </summary>
         private double CalculateAverageDeciduousBiomass(TrannumData trannumData)
         {
             trannumData.TreeSpecies = TreeSpecies.ManitobaMaple;
 
-            var manitobaMapleBiomass = this.CalculateBiomassOfNonAverageTree(trannumData);
+            var manitobaMapleBiomass = this.CalculateBiomassOfTrees(trannumData);
 
             trannumData.TreeSpecies = TreeSpecies.GreenAsh;
 
-            var greenAshBiomass = this.CalculateBiomassOfNonAverageTree(trannumData);
+            var greenAshBiomass = this.CalculateBiomassOfTrees(trannumData);
 
             var result = this.AverageTwo(greenAshBiomass, manitobaMapleBiomass);
 
@@ -328,7 +378,7 @@ namespace H.Core.Calculators.Shelterbelt
             return result;
         }
 
-        private double CalculateBiomassOfNonAverageTree(TrannumData trannumData)
+        private double CalculateBiomassOfTrees(TrannumData trannumData)
         {
             // Get the two lookup values (a, b) that will be used to calculate the above ground biomass of the tree
             var a = this.GetA(trannumData.TreeSpecies);
@@ -363,39 +413,19 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-10 
         ///
-        /// Calculates the ratio of user specified over average (ideal) tree growth.
+        /// Calculates the ratio of user specified growth (biomass carbon) over ideal tree growth (biomass carbon).
         /// </summary>
         public double CalculateRealGrowthRatio(
-            double calculatedTotalLivingCarbon,
-            double lookupTotalLivingCarbon)
+            double calculatedTotalLivingCarbonKilogramPerStandardLength,
+            double lookupTotalLivingCarbonKilogramsPerStandardLength)
         {
-            if (lookupTotalLivingCarbon == 0)
+            if (lookupTotalLivingCarbonKilogramsPerStandardLength == 0)
             {
                 // Assume value is not available and return 1 to indicate we are assuming an ideal tree for this year
                 return 1;
             }
 
-            return calculatedTotalLivingCarbon / lookupTotalLivingCarbon;
-        }
-
-        /// <summary>
-        /// Equation 2.1.6-26 
-        ///
-        /// Calculates the total carbon gain in the current year
-        /// </summary>
-        public double CalculateTotalEquivalentCarbon(
-            double domFarm,
-            double tecTreeyTypeCurrentYear,
-            double tecTreeTypePreviousYear,
-            double rowLength,
-            double standardLength)
-        {
-            var a = (domFarm + (tecTreeyTypeCurrentYear - tecTreeTypePreviousYear));
-            var b = rowLength / standardLength;
-
-            var result = a / b;
-
-            return result;
+            return calculatedTotalLivingCarbonKilogramPerStandardLength / lookupTotalLivingCarbonKilogramsPerStandardLength;
         }
 
         /// <summary>
@@ -546,16 +576,6 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-10
         /// </summary>
-        public double CalculateEstimatedCarbonInLivingTreeBiomass(
-            double biomassLookup,
-            double ratio)
-        {
-            return biomassLookup * ratio;
-        }
-
-        /// <summary>
-        /// Equation 2.1.6-10
-        /// </summary>
         /// <param name="biomassPerKilometer">Biomass (kg)</param>
         /// <returns>Total carbon in the living biomass per standard length linear planting (kg C km^-1)</returns>
         public double CalculateTotalLivingCarbonPerTreeType(
@@ -640,19 +660,34 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-26
         /// </summary>
-        /// <returns>The total dead organic matter (kg C km^-1)</returns>
-        private double GetDomFarm(TrannumData trannumData)
+        /// <returns>The total dead organic matter carbon (kg C km^-1)</returns>
+        private double GetIdealDeadOrganicMatter(TrannumData trannumData)
         {
-            var deadOrganicMatterMegagrams = ShelterbeltCarbonDataProvider.GetInterpolatedValue(
-                treeSpecies: trannumData.TreeSpecies,
-                hardinessZone: trannumData.HardinessZone,
-                ecodistrictId: trannumData.EcodistrictId,
-                percentMortality: trannumData.PercentMortality,
-                mortalityLow: (int)trannumData.PercentMortalityLow,
-                mortalityHigh: (int)trannumData.PercentMortalityHigh,
-                age: trannumData.Age,
-                column: ShelterbeltCarbonDataProvider.Columns.Dom_Mg_C_km,
-                year: (int)trannumData.Year);
+            var deadOrganicMatterMegagrams = 0d;
+            if (trannumData.CanLookupByEcodistrict)
+            {
+                // We can lookup by ecodistrict->cluster id mapping
+                deadOrganicMatterMegagrams = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    ecodistrictId: trannumData.EcodistrictId,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: (int)trannumData.PercentMortalityLow,
+                    mortalityHigh: (int)trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km);
+            }
+            else
+            {
+                // We need to lookup values by hardiness zone
+                deadOrganicMatterMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    hardinessZone: trannumData.HardinessZone,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: trannumData.PercentMortalityLow,
+                    mortalityHigh: trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km);
+            }
 
             var deadOrganicMatterKilograms = deadOrganicMatterMegagrams * 1000;
 
@@ -662,43 +697,74 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-26
         /// </summary>
-        /// <returns>The total dead organic matter (kg C km^-1)</returns>
-        private double GetTecFarm(TrannumData trannumData)
+        /// <returns>The total ecosystem carbon (kg C km^-1)</returns>
+        private double GetIdealTotalEcosystemCarbon(TrannumData trannumData)
         {
-            var deadOrganicMatterMegagrams = ShelterbeltCarbonDataProvider.GetInterpolatedValue(
-                treeSpecies: trannumData.TreeSpecies,
-                hardinessZone: trannumData.HardinessZone,
-                ecodistrictId: trannumData.EcodistrictId,
-                percentMortality: trannumData.PercentMortality,
-                mortalityLow: (int)trannumData.PercentMortalityLow,
-                mortalityHigh: (int)trannumData.PercentMortalityHigh,
-                age: trannumData.Age,
-                column: ShelterbeltCarbonDataProvider.Columns.Tec_Mg_C_km,
-                year: (int)trannumData.Year);
+            var totalEcosystemCarbonMegagrams = 0d;
+            if (trannumData.CanLookupByEcodistrict)
+            {
+                // We can lookup by ecodistrict->cluster id mapping
+                totalEcosystemCarbonMegagrams = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    ecodistrictId: trannumData.EcodistrictId,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: (int)trannumData.PercentMortalityLow,
+                    mortalityHigh: (int)trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Tec_Mg_C_km);
+            }
+            else
+            {
+                // We need to lookup values by hardiness zone
+                totalEcosystemCarbonMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    hardinessZone: trannumData.HardinessZone,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: trannumData.PercentMortalityLow,
+                    mortalityHigh: trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Tec_Mg_C_km);
+            }
 
-            var deadOrganicMatterKilograms = deadOrganicMatterMegagrams * 1000;
+            var totalEcosystemCarbonKilograms = totalEcosystemCarbonMegagrams * 1000;
 
-            return deadOrganicMatterKilograms;
+            return totalEcosystemCarbonKilograms;
         }
 
         /// <summary>
         /// Equation 2.1.6-26
         /// </summary>
         /// <returns>The total living biomass carbon (kg C km^-1)</returns>
-        private double GetBiomFarm(TrannumData trannumData)
+        private double GetIdealTotalLivingBiomassCarbon(TrannumData trannumData)
         {
-            var deadOrganicMatterMegagrams = ShelterbeltCarbonDataProvider.GetInterpolatedValue(
-                treeSpecies: trannumData.TreeSpecies,
-                hardinessZone: trannumData.HardinessZone,
-                ecodistrictId: trannumData.EcodistrictId,
-                percentMortality: trannumData.PercentMortality,
-                mortalityLow: (int)trannumData.PercentMortalityLow,
-                mortalityHigh: (int)trannumData.PercentMortalityHigh,
-                age: trannumData.Age,
-                column: ShelterbeltCarbonDataProvider.Columns.Biom_Mg_C_km,
-                year: (int)trannumData.Year);
+            var totalLivingBiomassMegagrams = 0d;
 
-            var biomassCarbonKilograms = deadOrganicMatterMegagrams * 1000;
+            if (trannumData.CanLookupByEcodistrict)
+            {
+                // We can lookup by ecodistrict->cluster id mapping
+                totalLivingBiomassMegagrams = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    ecodistrictId: trannumData.EcodistrictId,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: (int)trannumData.PercentMortalityLow,
+                    mortalityHigh: (int)trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
+            }
+            else
+            {
+                // We need to lookup values by hardiness zone
+                totalLivingBiomassMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                    treeSpecies: trannumData.TreeSpecies,
+                    hardinessZone: trannumData.HardinessZone,
+                    percentMortality: trannumData.PercentMortality,
+                    mortalityLow: trannumData.PercentMortalityLow,
+                    mortalityHigh: trannumData.PercentMortalityHigh,
+                    age: trannumData.Age,
+                    column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
+            }
+
+            var biomassCarbonKilograms = totalLivingBiomassMegagrams * 1000;
 
             return biomassCarbonKilograms;
         }
@@ -724,9 +790,9 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// (kg C km^-1)
+        /// (Mg C km^-1)
         /// </summary>
-        private double CalculateTotalEquivalentCarbon(
+        private double CalculateTotalEcosystemCarbon(
             double biomassCarbon,
             double deadOrganicMatterCarbon)
         {

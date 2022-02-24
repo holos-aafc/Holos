@@ -35,63 +35,46 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public int Year { get; set; }
 
         /// <summary>
-        /// Biom_kgCkm
-        ///
         /// The accumulated biomass carbon for the shelterbelt at a particular year
         ///
-        /// (kg C km^-1)
+        /// (Mg C km^-1)
         /// </summary>
-        public double TotalShelterbeltBiomassCarbon { get; set; }
+        public double TotalLivingBiomassCarbon { get; set; }
 
         /// <summary>
-        /// Biom_kgCkmyr
-        ///
         /// The difference in accumulated biomass carbon for the shelterbelt between two years
         ///
-        /// (kg C km^-1 year^-1)
+        /// (Mg C km^-1 year^-1)
         /// </summary>
-        public double TotalShelterbeltBiomassCarbonDelta { get; set; }
+        public double TotalLivingBiomassCarbonChange { get; set; }
 
         /// <summary>
-        /// DOM_kgCkm
-        ///
         /// The accumulated dead organic matter for the shelterbelt at a particular year
         ///
-        /// (kg C km^-1)
+        /// (Mg C km^-1)
         /// </summary>
-        public double TotalDeadOrganicMatter { get; set; }
+        public double TotalDeadOrganicMatterCarbon { get; set; }
 
         /// <summary>
-        /// DOM_kgCkmyr
-        ///
         /// The difference in accumulated dead organic matter for the shelterbelt between two years
         ///
-        /// (kg C km^-1 year^-1)
+        /// (Mg C km^-1 year^-1)
         /// </summary>
-        public double TotalDeadOrganicMatterDelta { get; set; }
+        public double TotalDeadOrganicMatterChange { get; set; }
 
         /// <summary>
-        /// TEC_kgCkm
-        ///
-        /// The accumulated total equivalent carbon for the shelterbelt at a particular year
+        /// The accumulated total ecosystem carbon for the shelterbelt at a particular year
         /// 
-        /// (kg C km^-1)
+        /// (Mg C km^-1)
         /// </summary>
-        public double TotalEquivalentCarbon { get; set; }
+        public double TotalEcosystemCarbon { get; set; }
 
         /// <summary>
-        /// TEC_kgCkmyr
-        ///
-        /// The difference in accumulated total equivalent carbon for the shelterbelt between two years
+        /// The difference in accumulated total ecosystem carbon for the shelterbelt between two years
         /// 
-        /// (kg C km^-1 year^-1)
+        /// (Mg C km^-1 year^-1)
         /// </summary>
-        public double TotalEquivalentCarbonDelta { get; set; }
-
-        /// <summary>
-        /// The age of the shelterbelt
-        /// </summary>
-        public int Age { get; set; }
+        public double TotalEcosystemCarbonChange { get; set; }
 
         #endregion
 
