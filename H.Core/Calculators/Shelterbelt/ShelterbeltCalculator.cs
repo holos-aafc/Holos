@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -58,7 +59,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Builds <see cref="TrannumData"/>s for the <see cref="ShelterbeltComponent"/> and calculates biomass for each group of tree in each row of the shelterbelt.
+        /// Builds <see cref="TrannumData"/>s for the <see cref="ShelterbeltComponent"/> and calculates biomass carbon for each group of tree in each row of the shelterbelt.
         /// </summary>
         public void CalculateInitialResults(ShelterbeltComponent component)
         {
@@ -67,6 +68,9 @@ namespace H.Core.Calculators.Shelterbelt
             this.CalculateInitialResults(component.TrannumData);
         }
 
+        /// <summary>
+        /// Calculate the biomass carbon for each group of tree in each row of the shelterbelt.
+        /// </summary>
         public void CalculateInitialResults(
             IList<TrannumData> trannumData)
         {
@@ -79,29 +83,39 @@ namespace H.Core.Calculators.Shelterbelt
                  * for this one year. Once we have these calculated biomass/carbon values, we then compare these against the lookup values for total living biomass and
                  * get a ratio of actual growth to ideal (lookup) growth.
                  *
-                 * With this ratio we then lookup values for TEC, BIOM, DOM for all other years and multiply by the calculated ratio to get estimated growth in past/future years.
+                 * With this ratio we then lookup values for TEC, BIOM, DOM for all other years and multiply by the calculated ratio to get the estimated growth in past/future years.
                  */
 
-                var yearOfObservationTrannum = treeGroup.Single(x => Math.Abs(x.Year - x.YearOfObservation) < double.Epsilon);
+                var yearOfObservationTrannum = treeGroup.SingleOrDefault(x => Math.Abs(x.Year - x.YearOfObservation) < double.Epsilon);
+                if (yearOfObservationTrannum == null)
+                {
+                    // If year is out of range, fallback to maximum year
 
-                // Calculate biomass carbon for the year of observation
+                    var maxYear = treeGroup.Select(x => x.Year).Max();
+                    yearOfObservationTrannum = treeGroup.Single(x => Math.Abs(x.Year - maxYear) < double.Epsilon);
+                }
+
+                // Calculate biomass for the year of observation
                 this.CalculateBiomassPerTreeAtYearOfObservation(yearOfObservationTrannum);
 
-                // We now check if the farm location is inside of Saskatchewan or not - this will determine which lookup table we use for biomass/carbon values
+                /* We now check if the farm location is inside of Saskatchewan or not - this will determine which lookup table we use for biomass/carbon values. Currently,
+                 * only ecodistricts in Saskatchewan (and some close neightbouring ecodistricts can be mapped to a cluster id).
+                 */
+
                 yearOfObservationTrannum.CanLookupByEcodistrict = ShelterbeltEcodistrictToClusterLookupProvider.CanLookupByEcodistrict(yearOfObservationTrannum.EcodistrictId);
 
-                // Now we calculate the ratio of real growth compared to ideal growth
-                yearOfObservationTrannum.RealGrowthRatio = this.CalculateRealGrowthRatio(yearOfObservationTrannum);
+                // Now we calculate the ratio of real growth compared to ideal growth for the trees at this age
+                yearOfObservationTrannum.RealGrowthRatio = this.CalculateRealGrowthRatioComparedToIdealGrowth(yearOfObservationTrannum);
 
-                // Now that we have calculated the real growth ratio, we assign this to all other years and indicate the table lookup method we will use
-                foreach (var trannum in trannumData)
+                // Now that we have calculated the real growth ratio, we assign this to all other years within same group and indicate the table lookup method we will use
+                foreach (var trannum in treeGroup)
                 {
                     trannum.RealGrowthRatio = yearOfObservationTrannum.RealGrowthRatio;
                     trannum.CanLookupByEcodistrict = yearOfObservationTrannum.CanLookupByEcodistrict;
                 }
 
-                // Finally, calculate estimated growth based on real growth ratio for all other years (i.e. from plant date to the cut date)
-                foreach (var data in trannumData)
+                // Finally, calculate the estimated growth based on real growth ratio for all other years within same group (i.e. from plant date to the cut date)
+                foreach (var data in treeGroup)
                 {
                     this.CalculateEstimatedGrowth(data);
                 }
@@ -109,7 +123,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Calulcates the actual biomass of trees at the year of observation. Performs calucation of biomass only - not carbon.
+        /// Calculates the actual biomass of trees at the year of observation. Performs calucation of biomass only - not carbon.
         /// </summary>
         public void CalculateBiomassPerTreeAtYearOfObservation(TrannumData trannumData)
         {
@@ -127,36 +141,34 @@ namespace H.Core.Calculators.Shelterbelt
                 trannumData.TotalBiomassPerTree = this.CalculateBiomassOfTrees(trannumData);
             }
 
-            // Biomass_treetype
-            trannumData.BiomassPerTreeType = this.CalculateBiomassPerTreeType(
+            // Calculate living biomass of all trees that are of the same species
+            trannumData.TotalLivingBiomassForAllTreesOfSameType = this.CalculateTotalLivingBiomassPerTreeType(
                 biomassPerTree: trannumData.TotalBiomassPerTree,
                 treeCount: trannumData.TreeCount);
 
-            // TLB_treetype
+            // Calculate living biomass of all trees that are of the same species per standard length (i.e. 1 km)
             trannumData.TotalLivingBiomassPerTreeTypePerStandardLength = this.CalculateTotalLivingBiomassPerStandardLength(
-                biomassOfAllTrees: trannumData.BiomassPerTreeType,
+                biomassOfAllTrees: trannumData.TotalLivingBiomassForAllTreesOfSameType,
                 rowLength: trannumData.RowLength);
         }
 
         /// <summary>
         /// Compares the actual growth with that of the ideal growth for trees of the same age and species.
         /// </summary>
-        public double CalculateRealGrowthRatio(TrannumData trannumData)
+        public double CalculateRealGrowthRatioComparedToIdealGrowth(TrannumData trannumData)
         {
-            // Convert total living biomass to total living carbon
+            // Convert total living biomass to total living carbon per standard length since lookup tables have values that are all measured in units of carbon
             trannumData.TotalLivingCarbonPerTreeTypePerStandardLength = this.CalculateTotalLivingCarbonPerTreeType(trannumData.TotalLivingBiomassPerTreeTypePerStandardLength);
 
-            var age = trannumData.Age;
-            var result = 0d;
-
             /*
-             * Lookup tables do not have total living biomass for first three years (in some situations). If user has a year of observation that is in these first few years of growth (i.e. age = 1, 2, 3)
-             * it will not be possible to calculate the real growth ratio. Go foward in time until we get a non-zero value and use that for comparison.
+             * Lookup tables do not have total living biomass for first three years (in some situations). If user has a year of observation that is in
+             * these first few years of growth (i.e. age = 1, 2, 3) it will not be possible to calculate the real growth ratio. Go foward in time (and increment the age)
+             * until we get a non-zero value and use that for comparison.
              */
 
+            var age = trannumData.Age;
             var biomasCarbonPerKilometerMegagrams = 0d;
-
-            var biomasCarbonPerStandardLengthInKilograms = 0d;
+            var idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength = 0d;
             if (trannumData.CanLookupByEcodistrict)
             {
                 do
@@ -176,7 +188,11 @@ namespace H.Core.Calculators.Shelterbelt
             }
             else
             {
-                // If we are outside of Saskatchewan, we won't have access to the cluster id that is need to lookup live biomass values, instead we lookup values by hardiness zone instead.
+                /*
+                 * If we are outside of Saskatchewan, we won't have access to the cluster id that is need to lookup live biomass values, instead we lookup values by
+                 * hardiness zone instead.
+                 */
+
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
@@ -193,18 +209,18 @@ namespace H.Core.Calculators.Shelterbelt
                 } while (biomasCarbonPerKilometerMegagrams == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
 
-            // Convert total living biomass carbon to kilograms
-            biomasCarbonPerStandardLengthInKilograms = biomasCarbonPerKilometerMegagrams * 1000;
+            // Convert total living biomass carbon in megagrams to kilograms
+            idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength = biomasCarbonPerKilometerMegagrams * 1000;
 
-            result = this.CalculateRealGrowthRatio(
+            var result = this.CalculateRealGrowthRatio(
                 calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
-                lookupTotalLivingCarbonKilogramsPerStandardLength: biomasCarbonPerStandardLengthInKilograms);
+                lookupTotalLivingCarbonKilogramsPerStandardLength: idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength);
 
             return result;
         }
 
         /// <summary>
-        /// For all years except the year of observation/measurement, we need to estimate growth based on the calculated real growth ratio. Calculated the estimated
+        /// For all years except the year of observation/measurement, we need to estimate growth based on the calculated real growth ratio. Calculate the estimated
         /// growth (living biomass carbon) for the particular species at the given year.
         /// </summary>
         public void CalculateEstimatedGrowth(TrannumData trannumData)
@@ -265,18 +281,18 @@ namespace H.Core.Calculators.Shelterbelt
 
             var livingBiomass = totalEcosystemCarbon - deadOrganicMatter;
 
-            var deadOrganicMatterRatio = deadOrganicMatter * trannumData.RealGrowthRatio;
-            var livingBiomassRatio = livingBiomass * trannumData.RealGrowthRatio;
+            var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
+            var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
-            trannumData.EstimatedBiomassCarbonBasedOnRealGrowth = livingBiomassRatio;
+            trannumData.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth = livingBiomassFraction;
 
             // Calculate the estimated dead organic matter based on the real growth ratio
-            trannumData.EstimatedDeadOrganicMatterBasedOnRealGrowth = deadOrganicMatterRatio;
+            trannumData.EstimatedDeadOrganicMatterBasedOnRealGrowth = deadOrganicMatterFraction;
         }
 
         /// <summary>
-        /// Once the yearly values have been calculated, we can then total up the biomass/carbon/CO2 values for each shelterbelt during each year.
+        /// Once the yearly values have been calculated, we can then total up the values for each shelterbelt during each year.
         /// </summary>
         public List<TrannumResultViewItem> TotalResultsForEachYear(
             IEnumerable<ShelterbeltComponent> shelterbeltComponents)
@@ -287,7 +303,7 @@ namespace H.Core.Calculators.Shelterbelt
             {
                 var resultsForComponent = new List<TrannumResultViewItem>();
 
-                // There may be several rows each with multiple groups. We need to get a list of distinct years so we can get the totals for each year.
+                // There may be several rows each with multiple groups all in the same year. We need to get a list of distinct years so we can group items by year.
                 var distinctYears = component.TrannumData.Select(x => x.Year).Distinct();
                 foreach (var year in distinctYears)
                 {
@@ -314,6 +330,7 @@ namespace H.Core.Calculators.Shelterbelt
                 {
                     if (i == 0)
                     {
+                        // In the first year, there are no changes from the previous year
                         var resultViewItem = resultsForComponent.ElementAt(0);
                         resultViewItem.TotalDeadOrganicMatterChange = 0;
                         resultViewItem.TotalEcosystemCarbonChange = 0;
@@ -413,7 +430,8 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-10 
         ///
-        /// Calculates the ratio of user specified growth (biomass carbon) over ideal tree growth (biomass carbon).
+        /// Calculates the ratio of user specified growth (biomass carbon) over ideal tree growth (biomass carbon). User specified growth is based on measure circumference/diameter and compared
+        /// to lookup tables of ideal tree biomass carbon values.
         /// </summary>
         public double CalculateRealGrowthRatio(
             double calculatedTotalLivingCarbonKilogramPerStandardLength,
@@ -437,8 +455,14 @@ namespace H.Core.Calculators.Shelterbelt
             List<double> plantedTreeCountAllSpecies,
             List<double> liveTreeCountAllSpecies)
         {
-            return 100.0 * (plantedTreeCountAllSpecies.Sum() - liveTreeCountAllSpecies.Sum()) /
-                   plantedTreeCountAllSpecies.Sum();
+            var plantedTreesOfSameSpeciesSum = plantedTreeCountAllSpecies.Sum();
+            var liveTreeCountAllSpeciesSum = liveTreeCountAllSpecies.Sum();
+
+            var ratio = (plantedTreesOfSameSpeciesSum - liveTreeCountAllSpeciesSum) / plantedTreesOfSameSpeciesSum;
+
+            var result = ratio * 100;
+
+            return result;
         }
 
         /// <summary>
@@ -459,7 +483,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-13
         ///
-        /// There are only 3 lookup values in the table for mortality.
+        /// There are only 3 lookup values in the table for mortality. Use one level up from the mortality low value.
         /// </summary>
         public int CalculateMortalityHigh(int mortalityLow)
         {
@@ -553,7 +577,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// <param name="biomassPerTree">Total tree biomass (aboveground + belowground) (kg tree^-1)</param>
         /// <param name="treeCount">Total number of trees (of same type) within the row</param>
         /// <returns>Biomass of trees of a particular species within a row (kg row^-1)</returns>
-        public double CalculateBiomassPerTreeType(
+        public double CalculateTotalLivingBiomassPerTreeType(
             double biomassPerTree,
             double treeCount)
         {
@@ -576,7 +600,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-10
         /// </summary>
-        /// <param name="biomassPerKilometer">Biomass (kg)</param>
+        /// <param name="biomassPerKilometer">Biomass (kg km^-1)</param>
         /// <returns>Total carbon in the living biomass per standard length linear planting (kg C km^-1)</returns>
         public double CalculateTotalLivingCarbonPerTreeType(
             double biomassPerKilometer)
@@ -776,7 +800,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// </summary>
         public double CalculateTotalShelterbeltBiomassCarbon(IEnumerable<TrannumData> trannumData)
         {
-            return trannumData.Sum(x => x.EstimatedBiomassCarbonBasedOnRealGrowth);
+            return trannumData.Sum(x => x.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth);
         }
 
         /// <summary>

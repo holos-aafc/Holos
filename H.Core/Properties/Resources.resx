@@ -4850,4 +4850,7 @@
   <data name="TitleDefaultExportedFarms" xml:space="preserve">
     <value>My Exported Farms</value>
   </data>
+  <data name="LabelHolosOnlySupportsCertainHardinessZones" xml:space="preserve">
+    <value>Please note Holos only supports hardiness zones in the range of 2A to 4B. Hardiness zones outside of this range will be supported as more data becomes available.</value>
+  </data>
 </root>

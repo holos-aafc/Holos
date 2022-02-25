@@ -8566,6 +8566,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note Holos only supports hardiness zones in the range of 2A to 4B. Hardiness zones outside of this range will be supported as more data becomes available..
+        /// </summary>
+        public static string LabelHolosOnlySupportsCertainHardinessZones {
+            get {
+                return ResourceManager.GetString("LabelHolosOnlySupportsCertainHardinessZones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incubation.
         /// </summary>
         public static string LabelIncubation {

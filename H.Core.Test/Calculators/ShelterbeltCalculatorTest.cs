@@ -177,7 +177,7 @@ namespace H.Core.Test.Calculators
             List<double> plantedTreeCountAllSpecies = new List<double> { 276.750, 71.375, 82.000, 144.500, 41.250, 12.375, 156.750, 301.375, 161.87 };
             List<double> liveTreeCountAllSpecies = new List<double> { 42.625, 3.125, 204.750, 4.125, 89.375, 88.625, 108.000, 79.375, 184.50 };
             var result = calc.CalculatePercentMortalityOfALinearPlanting(plantedTreeCountAllSpecies, liveTreeCountAllSpecies);
-            Assert.AreEqual(100.0 * (plantedTreeCountAllSpecies.Sum() - liveTreeCountAllSpecies.Sum()) / plantedTreeCountAllSpecies.Sum(), result);
+            Assert.AreEqual(100.0 * (plantedTreeCountAllSpecies.Sum() - liveTreeCountAllSpecies.Sum()) / plantedTreeCountAllSpecies.Sum(), result, 0.0001);
         }
 
 

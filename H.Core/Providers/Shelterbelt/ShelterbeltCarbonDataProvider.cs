@@ -10,6 +10,9 @@ using H.Infrastructure;
 
 namespace H.Core.Providers.Shelterbelt
 {
+    /// <summary>
+    /// Allows for the lookup of biomass carbon values by using an ecodistrict to cluster id mapping. Currently, only trees inside of Saskatchewan can use this method of lookup.
+    /// </summary>
     public static class ShelterbeltCarbonDataProvider
     {
         #region Fields
@@ -40,11 +43,11 @@ namespace H.Core.Providers.Shelterbelt
 
         /// <summary>
         /// Returns the future or past data set.
+        ///
+        /// <remarks>Beyhan's email say to use future data lookups (10/11/2019)</remarks>
         /// </summary>
         public static List<ShelterbeltDomProviderData> GetData()
         {
-            // Beyhan's email say to use future data lookups (10/11/2019)
-
             return _futureData;
         }
 

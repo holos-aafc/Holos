@@ -44,20 +44,10 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         private double _percentMortality;
         private double _percentMortalityHigh;
         private double _percentMortalityLow;
-
         private double _totalBiomassPerTree;
         private double _totalLivingCarbonPerTreeTypePerStandardLength;
-
-        private double _biomassPerTreeType;
-        private double _totalCarbonForAllTreesOfSameSpecies;
-
+        private double _totalLivingBiomassForAllTreesOfSameType;
         private double _totalLivingBiomassPerTreeTypePerStandardLength;
-        private double _totalCarbonForAllTreesOfSameSpeciesPerStandardPlanting;
-
-        private double _totalCarbonForShelterbeltAtYear;
-        private double _totalCarbonForShelterbeltAtYearPerStandardPlanting;
-        private double _totalCarbonForShelterbeltSequesteredAtYear;
-        private double _totalCarbonDioxideForShelterbeltSequesteredAtYearPerStandardPlanting;
 
         private Guid _treeGroupGuid;
 
@@ -144,16 +134,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             this.RowGuid = row.Guid;
             this.TreeGroupGuid = treeGroup.Guid;
 
-            // Assume the tree died in its first year
-            if (treeGroup.PlantYear == year) 
-            {
-                this.TreeCount = treeGroup.PlantedTreeCount;
-            }
-            else
-            {
-                this.TreeCount = treeGroup.LiveTreeCount;
-            }
-
             List<double> livetrees = new List<double>();
             List<double> plantedtrees = new List<double>();
             foreach (var treegroup in row.TreeGroupData)
@@ -164,27 +144,31 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
             this.PercentMortality = _shelterbeltCalculator.CalculatePercentMortalityOfALinearPlanting(plantedtrees, livetrees);
 
-            int mortalityLow = _shelterbeltCalculator.CalculateMortalityLow(PercentMortality);
-            int mortalityHigh = _shelterbeltCalculator.CalculateMortalityHigh(mortalityLow);
+            var mortalityLow = _shelterbeltCalculator.CalculateMortalityLow(PercentMortality);
+            var mortalityHigh = _shelterbeltCalculator.CalculateMortalityHigh(mortalityLow);
 
             this.RowLength = row.Length;
             this.TreeSpacing = _shelterbeltCalculator.CalculateTreeSpacing(this.RowLength, this.TreeCount);
-            this.TreeCount = _shelterbeltCalculator.CalculateTreeCount(this.RowLength, this.TreeSpacing, this.PercentMortality);
 
             this.PercentMortalityLow = mortalityLow;
             this.PercentMortalityHigh = mortalityHigh;
             this.HardinessZone = shelterbeltComponent.HardinessZone;
             this.EcodistrictId = shelterbeltComponent.EcoDistrictId;
+            this.Age = (int)(this.Year - treeGroup.PlantYear) + 1;
 
-            // Define a default circumference for all years except the year of observation since the user will have defined a value for that year
-
-            var ageOfTree = (int)(this.Year - treeGroup.PlantYear) + 1;
-            this.Age = ageOfTree;
+            // Assume all trees died in first year
+            if (this.Age == 1)
+            {
+                this.TreeCount = treeGroup.PlantedTreeCount;
+            }
+            else
+            {
+                // For all other years, we use the number of trees that have lived past the first year
+                this.TreeCount = (100 - this.PercentMortality) / 100.0;
+            }
 
             this.SharedConstruction();
         }
-
-        public int EcodistrictId { get; set; }
 
         private void SharedConstruction()
         {
@@ -195,6 +179,16 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         #region Properties
 
+        /// <summary>
+        /// Will be used to lookup growth data for trees located in Saskatchewan. Trees outside of Saskatchewan will use the hardiness zone
+        /// to lookup growth data.
+        /// </summary>
+        public int EcodistrictId { get; set; }
+
+        /// <summary>
+        /// Will be used to lookup growth data for trees located outside of Saskatchewan. Trees located in Saskatchewan will use a ecodistrict to
+        /// cluster id mapping to lookup growth data.
+        /// </summary>
         public HardinessZone HardinessZone { get; set; }
 
         public TreeGroupData TreeGroupData { get; set; }
@@ -331,7 +325,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         }
 
         /// <summary>
-        /// The total biomass of the tree (includes aboveground and belowground)
+        /// The total biomass of a single tree (includes aboveground and belowground)
         ///
         /// (kg)
         /// </summary>
@@ -357,10 +351,10 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         ///
         /// (kg)
         /// </summary>
-        public double BiomassPerTreeType
+        public double TotalLivingBiomassForAllTreesOfSameType
         {
-            get => _biomassPerTreeType;
-            set => SetProperty(ref _biomassPerTreeType, value);
+            get => _totalLivingBiomassForAllTreesOfSameType;
+            set => SetProperty(ref _totalLivingBiomassForAllTreesOfSameType, value);
         }
 
         /// <summary>
@@ -384,7 +378,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         /// <summary>
         /// (kg C km^-1)
         /// </summary>
-        public double EstimatedBiomassCarbonBasedOnRealGrowth { get; set; }
+        public double EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth { get; set; }
 
         /// <summary>
         /// Used to determine if biomass/carbon values from lookup tables will use the hardiness zone or ecodistrict.
