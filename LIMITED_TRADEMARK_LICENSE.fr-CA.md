@@ -1,0 +1,5 @@
+[![en](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/holos-aafc/Holos/blob/main/LIMITED_TRADEMARK_LICENSE.md)
+
+**Licence de marque limitée.** 
+
+Sa Majesté la Reine du chef du Canada, représentée par le ministre de l'Agriculture et de l'Agroalimentaire (la Couronne), accorde par la présente à l'utilisateur du code source ouvert Holos ™️ 4 holos 4 une licence limitée, non concluante, révocable, libre de redevances et non transférable pour afficher notre marque de commerce autorisée pour faire référence à l'utilisation de HOLOS ™️ dans les nouveaux développements dans les manuscrits scientifiques, articles et revues pour le terme. Cette subvention ne comprend pas l'utilisation sur l'emballage de produits commerciaux, la commercialisation ou la vente de produits ou de services. Ce permis peut être révoqué en tout temps si l'utilisation est préjudiciable de quelque façon que ce soit à l'État.
