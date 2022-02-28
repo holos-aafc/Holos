@@ -92,7 +92,12 @@ namespace H.Core.Providers.Soil
                 return 2.55;
             }
 
-            if (soilTexture == SoilTexture.Coarse || soilTexture == SoilTexture.Medium)
+            if (soilTexture == SoilTexture.Medium)
+            {
+                return 1;
+            }
+
+            if (soilTexture == SoilTexture.Coarse)
             {
                 return 0.49;
             }
