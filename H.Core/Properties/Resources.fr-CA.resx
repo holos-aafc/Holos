@@ -781,7 +781,7 @@
     <value>pouces</value>
   </data>
   <data name="EnumInfrastructure" xml:space="preserve">
-    <value>Infrastructure</value>
+    <value>infrastructure</value>
   </data>
   <data name="EnumInputFile" xml:space="preserve">
     <value>fichier d'entrée</value>
@@ -1739,6 +1739,9 @@
   <data name="LabelAcidEtherExtract" xml:space="preserve">
     <value>Acid Ether Extract</value>
   </data>
+  <data name="LabelAdvancedMode" xml:space="preserve">
+    <value>Mode avancé</value>
+  </data>
   <data name="LabelAIBoars" xml:space="preserve">
     <value>verrats IA</value>
   </data>
@@ -1843,6 +1846,9 @@
   </data>
   <data name="LabelBarleySilageBasedDiet" xml:space="preserve">
     <value>ration à base d'ensilage d'orge</value>
+  </data>
+  <data name="LabelBasicMode" xml:space="preserve">
+    <value>Mode simple</value>
   </data>
   <data name="LabelBeddingMaterialType" xml:space="preserve">
     <value>Bedding Material Type</value>
@@ -2011,6 +2017,9 @@
   </data>
   <data name="LabelDirectNitrousOxideEmissionsFromSyntheticN" xml:space="preserve">
     <value>N2O-N d’azote synthétique (N2O-N_ASdirect)</value>
+  </data>
+  <data name="LabelEnableMulitYearMode" xml:space="preserve">
+    <value>Activer le mode pluriannuel</value>
   </data>
   <data name="LabelFarm" xml:space="preserve">
     <value>ferme</value>
@@ -2365,6 +2374,9 @@
   </data>
   <data name="LabelStage" xml:space="preserve">
     <value>étape</value>
+  </data>
+  <data name="LabelStartYearOfFieldHistory" xml:space="preserve">
+    <value>année de début</value>
   </data>
   <data name="LabelSTTDPhosphorus" xml:space="preserve">
     <value>Standardized Total Tract Digestibility of Phosphorus</value>
@@ -3001,13 +3013,13 @@
     <value>gélisol statique</value>
   </data>
   <data name="StepOneText" xml:space="preserve">
-    <value>Step 1</value>
+    <value>Étape 1</value>
   </data>
   <data name="StepThreeText" xml:space="preserve">
-    <value>Step 3</value>
+    <value>Étape 3</value>
   </data>
   <data name="StepTwoText" xml:space="preserve">
-    <value>Step 2</value>
+    <value>Étape 2</value>
   </data>
   <data name="Stockers" xml:space="preserve">
     <value>bovins de long engraissement</value>
@@ -3063,14 +3075,26 @@
   <data name="TitleCropRotation" xml:space="preserve">
     <value>rotation culturale</value>
   </data>
+  <data name="TitleEconomics" xml:space="preserve">
+    <value>économie</value>
+  </data>
   <data name="TitleFarmManureApplication" xml:space="preserve">
     <value>Farm Manure Application</value>
+  </data>
+  <data name="TitleFertilizer" xml:space="preserve">
+    <value>engrais</value>
   </data>
   <data name="TitleFinishingComponentDisplayString" xml:space="preserve">
     <value>bovin fini</value>
   </data>
+  <data name="TitleGrazing" xml:space="preserve">
+    <value>pâturage</value>
+  </data>
   <data name="TitleGrowerToFinish" xml:space="preserve">
     <value>croissance à la finition</value>
+  </data>
+  <data name="TitleInfrastructure" xml:space="preserve">
+    <value>infrastructure</value>
   </data>
   <data name="TitleIsoWean" xml:space="preserve">
     <value>sevrage en isolement</value>
@@ -3080,6 +3104,9 @@
   </data>
   <data name="TitleSheepComponentDisplayString" xml:space="preserve">
     <value>mouton</value>
+  </data>
+  <data name="TitleWinterCoverUndersownCrops" xml:space="preserve">
+    <value>culture d'hiver/de couverture</value>
   </data>
   <data name="ToolTipAdvancedDietAcidDetergentFiberInfo" xml:space="preserve">
     <value>The percentage of the plant material in the forage that is often difficult to digest</value>

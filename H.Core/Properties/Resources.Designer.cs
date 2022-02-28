@@ -7009,6 +7009,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Mode.
+        /// </summary>
+        public static string LabelAdvancedMode {
+            get {
+                return ResourceManager.GetString("LabelAdvancedMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A.I. boars.
         /// </summary>
         public static string LabelAIBoars {
@@ -7446,6 +7455,15 @@ namespace H.Core.Properties {
         public static string LabelBarleySilageBasedDiet {
             get {
                 return ResourceManager.GetString("LabelBarleySilageBasedDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Mode.
+        /// </summary>
+        public static string LabelBasicMode {
+            get {
+                return ResourceManager.GetString("LabelBasicMode", resourceCulture);
             }
         }
         
@@ -8175,6 +8193,15 @@ namespace H.Core.Properties {
         public static string LabelEmissionFactorForLeachingAndRunoff {
             get {
                 return ResourceManager.GetString("LabelEmissionFactorForLeachingAndRunoff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Multi-Year Mode.
+        /// </summary>
+        public static string LabelEnableMulitYearMode {
+            get {
+                return ResourceManager.GetString("LabelEnableMulitYearMode", resourceCulture);
             }
         }
         
@@ -12778,6 +12805,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Economics.
+        /// </summary>
+        public static string TitleEconomics {
+            get {
+                return ResourceManager.GetString("TitleEconomics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected Market Price.
         /// </summary>
         public static string TitleExpectedMarketPrice {
@@ -12864,6 +12900,15 @@ namespace H.Core.Properties {
         public static string TitleICBMResults {
             get {
                 return ResourceManager.GetString("TitleICBMResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infrastructure.
+        /// </summary>
+        public static string TitleInfrastructure {
+            get {
+                return ResourceManager.GetString("TitleInfrastructure", resourceCulture);
             }
         }
         
