@@ -61,15 +61,12 @@ namespace H.Core.Providers.Feed
                 };
             }
 
+            // Sheep default diets don't specify which diets belong to which animal groups. Use these diets for all sheep groups
             if (animalType.IsSheepType())
             {
                 return new List<AnimalType>()
                 {
-                    AnimalType.LambsAndEwes,
-                    AnimalType.Ram,
-                    AnimalType.Lambs,
-                    AnimalType.Ewes,
-                    AnimalType.SheepFeedlot,
+                    AnimalType.Sheep,
                 };
             }
 
@@ -900,6 +897,7 @@ namespace H.Core.Providers.Feed
             {
                 Name = Resources.None,
                 IsCustomPlaceholderDiet = true,
+                AnimalType = AnimalType.NotSelected,
             };
         }
 
