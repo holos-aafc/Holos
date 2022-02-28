@@ -307,6 +307,9 @@ namespace H.Core.Providers.Feed
             set { this.SetProperty(ref _isDefaultDiet, value); }
         }
 
+        /// <summary>
+        /// Some animal groups will not have a diet (poultry, other livestock, suckling pigs, etc.). In these cases, a non-null diet must still be set. This flag indicates if the diet is related to that situation.
+        /// </summary>
         public bool IsCustomPlaceholderDiet
         {
             get { return _isCustomPlaceholderDiet; }

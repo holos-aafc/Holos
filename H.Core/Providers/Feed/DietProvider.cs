@@ -894,7 +894,6 @@ namespace H.Core.Providers.Feed
         /// <summary>
         /// Some animal groups will not have a diet (poultry, other livestock, suckling pigs, etc.). In these cases, a non-null diet must still be set.
         /// </summary>
-        /// <returns></returns>
         public Diet GetNoDiet()
         {
             return new Diet()
