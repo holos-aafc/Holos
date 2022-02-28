@@ -750,3 +750,8 @@ If we click on one of these points, we can then view a more detailed breakdown o
 An ecosystem consists of not only the organisms and the environment they live in but also the interactions within and between. A whole systems approach seeks to describe and understand the entire system as an integrated whole, rather than as individual components. This holistic approach can be very complex and describing the process can be difficult. One method to conceptualize a whole system is with a mathematical model. 
 
 The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
+
+To download Holos, for more information, or to access a recent list of Holos related publications, visit: www.agr.gc.ca
+
+To contact us, email:
+aafc.holos.acc@canada.ca
