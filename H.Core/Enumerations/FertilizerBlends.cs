@@ -49,5 +49,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumCustom", typeof(Resources))]
         Custom,
+
+        [LocalizedDescription("EnumLime", typeof(Resources))]
+        Lime,
     }
 }

@@ -4868,4 +4868,7 @@
   <data name="TitleInfrastructure" xml:space="preserve">
     <value>Infrastructure</value>
   </data>
+  <data name="EnumLime" xml:space="preserve">
+    <value>Lime</value>
+  </data>
 </root>

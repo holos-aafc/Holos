@@ -98,6 +98,8 @@ namespace H.Core.Providers.Feed
 
         #region Properties
 
+        public DietType DietType { get; set; }
+
         /// <summary>
         /// The type of animal this diet is for. This could also be a catch-all since a cow diet is given to cows and calves
         /// </summary>

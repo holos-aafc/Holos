@@ -83,6 +83,7 @@ namespace H.Core.Services.LandManagement
             results.EnergyCarbonDioxideFromPhosphorusFertilizer = this.CalculateEnergyEmissionsFromPhosphorusFertilizer(viewItem);
             results.EnergyCarbonDioxideFromPotassiumFertilizer = this.CalculateEnergyEmissionsFromPotassiumFertilizer(viewItem);
             results.EnergyCarbonDioxideFromSulphurFertilizer = 0;// No methodology yet but we have amounts from currently available fertilizer blends
+            results.EnergyCarbonDioxideFromLimeUse = this.CalculateEnergyEmissionsFromLimeFertilizer(viewItem);
 
             if (viewItem.AmountOfIrrigation > 0)
             {
@@ -200,6 +201,24 @@ namespace H.Core.Services.LandManagement
                 var gateEmissions = fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate;
 
                 result += amountOfPotassiumApplied * area * gateEmissions;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 6.1.3.5
+        /// </summary>
+        /// <returns>Total CO2 emissions from liming application (kg CO2 year^-1)</returns>
+        private double CalculateEnergyEmissionsFromLimeFertilizer(CropViewItem viewItem)
+        {
+            var result = 0.0;
+
+            const double emissionsFactor = 0.12;
+
+            foreach (var viewItemFertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.Lime))
+            {
+                result += (viewItemFertilizerApplicationViewItem.AmountOfBlendedProductApplied * emissionsFactor) * CoreConstants.ConvertFromCToCO2;
             }
 
             return result;

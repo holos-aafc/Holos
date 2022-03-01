@@ -113,11 +113,12 @@ namespace H.Core.Services.LandManagement
                         currentYearViewItem: currentYearViewItem,
                         nextYearViewItem: nextYearViewItem,
                         farm: farm);
-
-                    currentYearViewItem.ClimateParameter = this.CalculateClimateParameter(currentYearViewItem, farm);
-                    currentYearViewItem.TillageFactor = this.CalculateTillageFactor(currentYearViewItem, farm);
-                    currentYearViewItem.ManagementFactor = this.CalculateManagementFactor(currentYearViewItem.ClimateParameter, currentYearViewItem.TillageFactor);                    
                 }
+
+                // Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
+                currentYearViewItem.ClimateParameter = this.CalculateClimateParameter(currentYearViewItem, farm);
+                currentYearViewItem.TillageFactor = this.CalculateTillageFactor(currentYearViewItem, farm);
+                currentYearViewItem.ManagementFactor = this.CalculateManagementFactor(currentYearViewItem.ClimateParameter, currentYearViewItem.TillageFactor);
             }
 
             // Consider the secondary crops
@@ -425,20 +426,21 @@ namespace H.Core.Services.LandManagement
         {
             var fieldSystemComponent = farm.GetFieldSystemComponent(fieldSystemGuid);
 
-            // Check if user specified ICBM or Tier 2
+            // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,
                     viewItemsByField: viewItemsForField,
                     fieldSystemComponent: fieldSystemComponent);
+
+                // Note: N buget calclations are not being performed when user selects Tier 2. Methodology has to be completed for this scenario
             }
             else
             {
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
 
-                // Create a result view item for each detail view item
                 for (int i = 0; i < viewItemsForField.Count; i++)
                 {
                     var currentYearResults = viewItemsForField.ElementAt(i);
@@ -446,7 +448,7 @@ namespace H.Core.Services.LandManagement
                     // Get previous year results, if there is no previous year (i.e. t = 0), then use equilibrium year values
                     var previousYearResults = i == 0 ? equilibriumYearResults : viewItemsForField.ElementAt(i - 1);
 
-                    // Carbon must be calculated before nitrogen since nitrogen uses the carbon calculations
+                    // Carbon must be calculated before nitrogen
                     this.CalculateCarbonAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,

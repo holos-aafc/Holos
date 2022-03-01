@@ -409,6 +409,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LowEnergyProtein,
+                DietType = DietType.LowEnergyAndProtein,
                 AnimalType = AnimalType.BeefCow,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -433,6 +434,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelMediumEnergyProteinDiet,
+                DietType = DietType.MediumEnergyAndProtein,
                 AnimalType = AnimalType.BeefCow,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -459,6 +461,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelHighEnergyProteinDiet,
+                DietType = DietType.HighEnergyAndProtein,
                 AnimalType = AnimalType.BeefCow,
 
                 // This is the breakdown of the diet if ingredients are not added.

@@ -3202,6 +3202,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lime.
+        /// </summary>
+        public static string EnumLime {
+            get {
+                return ResourceManager.GetString("EnumLime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lingen et al. (2019) Eq. 17.
         /// </summary>
         public static string EnumLingen2019eq17 {

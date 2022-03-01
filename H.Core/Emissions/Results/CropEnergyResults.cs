@@ -17,6 +17,7 @@ namespace H.Core.Emissions.Results
         private double _energyCarbonDioxideFromPotassiumFertilizer;
         private double _energyCarbonDioxideFromSulphurFertilizer;
         private double _energyCarbonDioxideFromIrrigation;
+        private double _energyCarbonDioxideFromLime;
 
         private ObservableCollection<MonthlyManureSpreadingResults> _manureSpreadingResults;
 
@@ -49,6 +50,7 @@ namespace H.Core.Emissions.Results
                        this.EnergyCarbonDioxideFromPotassiumFertilizer +
                        this.EnergyCarbonDioxideFromSulphurFertilizer +
                        this.EnergyCarbonDioxideFromIrrigation +
+                       this.EnergyCarbonDioxideFromLimeUse +
                        this.EnergyCarbonDioxideFromManureSpreading;
             }
         }
@@ -111,6 +113,15 @@ namespace H.Core.Emissions.Results
         {
             get => _energyCarbonDioxideFromPotassiumFertilizer;
             set => SetProperty(ref _energyCarbonDioxideFromPotassiumFertilizer, value);
+        }
+
+        /// <summary>
+        /// (kg CO2)
+        /// </summary>
+        public double EnergyCarbonDioxideFromLimeUse
+        {
+            get => _energyCarbonDioxideFromLime;
+            set => SetProperty(ref _energyCarbonDioxideFromLime, value);
         }
 
         /// <summary>
