@@ -63,8 +63,6 @@ namespace H.Core.Converters
                     return AnimalType.Turkeys;
                 case "goat":
                     return AnimalType.Goats;
-                case "cattle":
-                    return AnimalType.Cattle;
                 default:
                 {
                     Trace.TraceError($"{nameof(AnimalTypeStringConverter)}.{nameof(AnimalTypeStringConverter.Convert)}: unknown animal type {input}. Returning {AnimalType.BeefBackgrounder}");

@@ -27,11 +27,13 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 </p>
 <br>
 
+<br>
 <p align="center">
-    <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="650"/>
+    <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="750"/>
     <br>
-    <em>Figure 2: If a farm has been saved previously, this screen will appear.</em>
+    <em>Figure 2: If a farm has been previously saved, Holos will prompt to re-open that farm.</em>
 </p>
+<br>
 
 <br>
 <p align="center">
@@ -107,8 +109,9 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 
 Click the “Next” button to proceed to the next step.
 
+<div style="page-break-after: always"></div>
 
-# Selecting farm Components
+# Selecting Farm Components
 
 Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
 
@@ -124,6 +127,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
 
+<div style="page-break-after: always"></div>
 
 ## Crop and Hay Production
 
@@ -181,7 +185,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
 
-<br>
+<div style="page-break-after: always"></div>
 
 ## Pasture (native) / Grasslands Information
 
@@ -254,7 +258,7 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 If the hay field is harvested more than once, the “Add Harvest/Grazing Date” button can be used to add subsequent harvests.
 
-<br>
+<div style="page-break-after: always"></div>
 
 ## Cow-Calf Operation
 
@@ -350,7 +354,7 @@ Click on the management period named **Summer Grazing**. Ensure that the start d
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy protein** as the diet type.
+    * Select **High energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
@@ -371,7 +375,7 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **Medium energy protein** as the diet type.
+    * Select **Medium energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
@@ -425,7 +429,7 @@ Rename this period from Management Period # 1 to **Confinement**.
     * All other options as default.
 
 * **Diet Tab:**
-    * Select **Medium energy protein** as the diet type.
+    * Select **Medium energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Confined no barn** as the housing type.
@@ -443,7 +447,7 @@ Rename this period from Management Period # 2 to **Grazing**.
     * Enter **110** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy protein** as the diet type.
+    * Select **High energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
@@ -568,8 +572,6 @@ We can also add additional hay/forage for animals that are grazing on a particul
     - Keep the moisture content as the default value.
    
 
-<br>
-<br>
 
 ## Pullet Farm Operation:
 
@@ -589,9 +591,9 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 - The management data for the **Cockerels** group is the same as **Pullets**. Right click on the Cockerels group to activate the right click menu and select **Copy Management From -> Pullets**
 
-<br>
-<br>
 
+
+<div style="page-break-after: always"></div>
 
 # Timeline Screen
 
@@ -648,6 +650,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 <br>
 
 
+<div style="page-break-after: always"></div>
 
 # Details Screen
 
@@ -679,6 +682,8 @@ We will adjust this grid so that we can view the above ground and below ground c
     <em>Figure 23: Details screen</em>
 </p> 
 <br>
+
+<div style="page-break-after: always"></div>
 
 #  Discover results
 
@@ -742,6 +747,7 @@ If we click on one of these points, we can then view a more detailed breakdown o
 </p> 
 <br>
 
+<div style="page-break-after: always"></div>
 
 # Finally...
 
@@ -755,3 +761,6 @@ To download Holos, for more information, or to access a recent list of Holos rel
 
 To contact us, email:
 aafc.holos.acc@canada.ca
+
+<div style="page-break-after: always"></div>
+.

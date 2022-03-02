@@ -16,7 +16,7 @@ namespace H.Core.Models
                 case ComponentType.Backgrounding:
                 case ComponentType.Finishing:
                 case ComponentType.CowCalf:
-                    return AnimalType.Cattle;
+                    return AnimalType.Beef;
 
                 case ComponentType.Dairy:
                     return AnimalType.Dairy;
