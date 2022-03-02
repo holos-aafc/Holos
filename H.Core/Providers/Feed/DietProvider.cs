@@ -155,6 +155,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelHighFiberDiet,
+                DietType = DietType.HighFiber,
                 AnimalType = AnimalType.DairyHeifers,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -169,6 +170,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelLowFiberDiet,
+                DietType = DietType.LowFiber,
                 AnimalType = AnimalType.DairyHeifers,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -192,6 +194,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelCloseUpDiet,
+                DietType = DietType.CloseUp,
                 AnimalType = AnimalType.DairyDryCow,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -208,6 +211,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelFarOffDiet,
+                DietType = DietType.FarOff,
                 AnimalType = AnimalType.DairyDryCow,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -231,6 +235,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelLegumeForageBasedDiet,
+                DietType = DietType.LegumeForageBased,
                 AnimalType = AnimalType.DairyLactatingCow,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -249,6 +254,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelBarleySilageBasedDiet,
+                DietType = DietType.BarleySilageBased,
                 AnimalType = AnimalType.DairyLactatingCow,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -268,6 +274,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Properties.Resources.LabelCornSilageBasedDiet,
+                DietType = DietType.CornSilageBased,
                 AnimalType = AnimalType.DairyLactatingCow,
 
                 Ingredients = new ObservableCollection<FeedIngredient>()
@@ -294,6 +301,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelSlowGrowthDiet,
+                DietType = DietType.SlowGrowth,
                 AnimalType = AnimalType.BeefBackgrounder,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -318,6 +326,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelMediumGrowthDiet,
+                DietType = DietType.MediumGrowth,
                 AnimalType = AnimalType.BeefBackgrounder,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -351,6 +360,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelBarleyGrainBasedDiet,
+                DietType = DietType.BarleyGrainBased,
                 AnimalType = AnimalType.BeefFinisher,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -375,6 +385,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelCornGrainBasedDiet,
+                DietType = DietType.CornGrainBased,
                 AnimalType = AnimalType.BeefFinisher,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -497,6 +508,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LowEnergyProtein,
+                DietType = DietType.LowEnergyAndProtein,
                 AnimalType = AnimalType.Stockers,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -521,6 +533,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelMediumEnergyProteinDiet,
+                DietType = DietType.MediumEnergyAndProtein,
                 AnimalType = AnimalType.Stockers,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -547,6 +560,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelHighEnergyProteinDiet,
+                DietType = DietType.HighEnergyAndProtein,
                 AnimalType = AnimalType.Stockers,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -582,6 +596,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LowEnergyProtein,
+                DietType = DietType.LowEnergyAndProtein,
                 AnimalType = AnimalType.BeefBulls,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -604,6 +619,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelMediumEnergyProteinDiet,
+                DietType = DietType.MediumEnergyAndProtein,
                 AnimalType = AnimalType.BeefBulls,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -628,6 +644,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelHighEnergyProteinDiet,
+                DietType = DietType.HighEnergyAndProtein,
                 AnimalType = AnimalType.BeefBulls,
 
                 // This is the breakdown of the diet if ingredients are not added.
@@ -666,6 +683,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelGestationDiet,
+                DietType = DietType.Gestation,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietA,
 
@@ -690,6 +708,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelLactationDiet,
+                DietType = DietType.Lactation,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietB,
 
@@ -713,6 +732,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelNurseryWeanersStarterDiet1,
+                DietType = DietType.NurseryWeanersStarter1,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietC1,
 
@@ -736,6 +756,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelNurseryWeanersStarterDiet2,
+                DietType = DietType.NurseryWeanersStarter2,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietC2,
 
@@ -759,6 +780,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelGrowerFinisherDiet1,
+                DietType = DietType.GrowerFinisherDiet1,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietD1,
 
@@ -782,6 +804,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelGrowerFinisherDiet2,
+                DietType = DietType.GrowerFinisherDiet2,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietD2,
 
@@ -805,6 +828,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelGrowerFinisherDiet3,
+                DietType = DietType.GrowerFinisherDiet3,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietD3,
 
@@ -829,6 +853,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Resources.LabelGrowerFinisherDiet4,
+                DietType = DietType.GrowerFinisherDiet4,
                 AnimalType = AnimalType.Swine,
                 Comments = Resources.LabelDietD4,
 
@@ -859,6 +884,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Core.Properties.Resources.GoodQualityForage,
+                DietType = DietType.GoodQualityForage,
                 AnimalType = AnimalType.Sheep,
                 TotalDigestibleNutrient = 65,
                 CrudeProtein = 18,
@@ -871,6 +897,7 @@ namespace H.Core.Providers.Feed
                 IsDefaultDiet = true,
                 Name = Core.Properties.Resources.AverageQualityForage,
                 AnimalType = AnimalType.Sheep,
+                DietType = DietType.AverageQualityForage,
                 TotalDigestibleNutrient = 55,
                 CrudeProtein = 12,
                 Ash = 8,
@@ -881,6 +908,7 @@ namespace H.Core.Providers.Feed
             {
                 IsDefaultDiet = true,
                 Name = Core.Properties.Resources.PoorQualityForage,
+                DietType = DietType.PoorQualityForage,
                 AnimalType = AnimalType.Sheep,
                 TotalDigestibleNutrient = 45,
                 CrudeProtein = 6,

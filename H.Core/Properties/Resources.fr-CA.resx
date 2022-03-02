@@ -159,14 +159,23 @@
   <data name="AverageQualityForage" xml:space="preserve">
     <value>fourrage de qualité moyenne</value>
   </data>
+  <data name="AverageQualityForageDietType" xml:space="preserve">
+    <value>Average quality forage diet</value>
+  </data>
   <data name="Barley" xml:space="preserve">
     <value>orge </value>
   </data>
   <data name="BarleyDietType" xml:space="preserve">
     <value>ration d'orge</value>
   </data>
+  <data name="BarleyGrainBasedDietType" xml:space="preserve">
+    <value>ration à base de grains d'orge</value>
+  </data>
   <data name="BarleySilage" xml:space="preserve">
     <value>ensilage d'orge</value>
+  </data>
+  <data name="BarleySilageBasedDietType" xml:space="preserve">
+    <value>ration à base d'ensilage d'orge</value>
   </data>
   <data name="BarleySilageUnderSeed" xml:space="preserve">
     <value>ensilage d'orge contre-ensemencée</value>
@@ -273,8 +282,14 @@
   <data name="CornDietType" xml:space="preserve">
     <value>ration à base de maïs</value>
   </data>
+  <data name="CornGrainBasedDietType" xml:space="preserve">
+    <value>ration à base de grains de maïs</value>
+  </data>
   <data name="CornSilage" xml:space="preserve">
     <value>ensilage de maïs</value>
+  </data>
+  <data name="CornSilageBasedDietType" xml:space="preserve">
+    <value>ration à base d'ensilage de maïs</value>
   </data>
   <data name="CPSWheat" xml:space="preserve">
     <value>blé CPS</value>
@@ -1331,6 +1346,9 @@
   <data name="FallowCroppingToContinous" xml:space="preserve">
     <value>transition de jachère à cultures en continu</value>
   </data>
+  <data name="FarOffDietType" xml:space="preserve">
+    <value>ration de fin de tarissement</value>
+  </data>
   <data name="FarOffDryDietType" xml:space="preserve">
     <value>ration de fin de tarissement</value>
   </data>
@@ -1379,6 +1397,9 @@
   <data name="FreshPeas" xml:space="preserve">
     <value>pois frais</value>
   </data>
+  <data name="GestationDietType" xml:space="preserve">
+    <value>Gestation based diet</value>
+  </data>
   <data name="GigajoulesPerAcre" xml:space="preserve">
     <value>GJ a^-1</value>
   </data>
@@ -1390,6 +1411,9 @@
   </data>
   <data name="GoodQualityForage" xml:space="preserve">
     <value>fourrage de bonne qualité</value>
+  </data>
+  <data name="GoodQualityForageDietType" xml:space="preserve">
+    <value>Good quality forage diet</value>
   </data>
   <data name="GrainCorn" xml:space="preserve">
     <value>maïs-grain</value>
@@ -1432,6 +1456,18 @@
   </data>
   <data name="GreenFeed" xml:space="preserve">
     <value>fourrage vert</value>
+  </data>
+  <data name="GrowerFinisherDiet1Type" xml:space="preserve">
+    <value>Grower/Finisher diet #1</value>
+  </data>
+  <data name="GrowerFinisherDiet2Type" xml:space="preserve">
+    <value>Grower/Finisher diet #2</value>
+  </data>
+  <data name="GrowerFinisherDiet3Type" xml:space="preserve">
+    <value>Grower/Finisher diet #3</value>
+  </data>
+  <data name="GrowerFinisherDiet4Type" xml:space="preserve">
+    <value>Grower/Finisher diet #4</value>
   </data>
   <data name="H0a" xml:space="preserve">
     <value>0a</value>
@@ -1513,6 +1549,9 @@
   </data>
   <data name="HighEnergyDietType" xml:space="preserve">
     <value>ration à teneur élevée en énergie  </value>
+  </data>
+  <data name="HighFiberDietType" xml:space="preserve">
+    <value>haute teneur en fibres</value>
   </data>
   <data name="HighlyDigestibleFeed" xml:space="preserve">
     <value>aliment hautement digestible</value>
@@ -2499,11 +2538,17 @@
   <data name="LabelZinc" xml:space="preserve">
     <value>Zinc</value>
   </data>
+  <data name="LactationDietType" xml:space="preserve">
+    <value>Lactation based diet</value>
+  </data>
   <data name="LargeFreeStall" xml:space="preserve">
     <value>grande stalle libre</value>
   </data>
   <data name="LayersWetPoultry" xml:space="preserve">
     <value>pondeuses (fumier humide)</value>
+  </data>
+  <data name="LegumeForageBasedDietType" xml:space="preserve">
+    <value>ration à base de fourrage de légumineuses</value>
   </data>
   <data name="Lentils" xml:space="preserve">
     <value>lentilles</value>
@@ -2525,6 +2570,9 @@
   </data>
   <data name="LowEnergyProtein" xml:space="preserve">
     <value>protéine à faible valeur énergétique</value>
+  </data>
+  <data name="LowFiberDietType" xml:space="preserve">
+    <value>faible teneur en fibres</value>
   </data>
   <data name="LuvicGleysol" xml:space="preserve">
     <value>gleysol luvique</value>
@@ -2712,6 +2760,12 @@
   <data name="Nunavut" xml:space="preserve">
     <value>Nunavut</value>
   </data>
+  <data name="NurseryWeanersStarterDiet1Type" xml:space="preserve">
+    <value>Nursery weaners (starter diet #1)</value>
+  </data>
+  <data name="NurseryWeanersStarterDiet2Type" xml:space="preserve">
+    <value>Nursery weaners (starter diet #2)</value>
+  </data>
   <data name="Oats" xml:space="preserve">
     <value>avoine</value>
   </data>
@@ -2789,6 +2843,9 @@
   </data>
   <data name="PoorQualityForage" xml:space="preserve">
     <value>fourrage de mauvaise qualité</value>
+  </data>
+  <data name="PoorQualityForageDietType" xml:space="preserve">
+    <value>Poor quality forage diet</value>
   </data>
   <data name="Poplar" xml:space="preserve">
     <value>peuplier  </value>
