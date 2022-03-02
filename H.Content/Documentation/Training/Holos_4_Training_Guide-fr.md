@@ -51,8 +51,9 @@ Assurez-vous de sélectionner « Mesure » comme unité de type de mesure, puis 
 </p>
 
 <br>
-<br>
 
+
+<div style="page-break-after: always"></div>
 
 # Création et localisation de la nouvelle ferme bovine
 
@@ -114,6 +115,7 @@ Conservez le premier type de sol sélectionné et la « zone de rusticité » pa
 Cliquez sur le bouton « Suivant » pour continuer.
 
 
+<div style="page-break-after: always"></div>
 
 #  Sélection des composantes de la ferme
 
@@ -408,7 +410,7 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
     <em>Figure 18 </em>
 </p> 
 <br>
-<br>
+
 
 ## Exploitation d’un parc de finition
 
@@ -476,7 +478,8 @@ Nous ajouterons une dernière composante animale à notre ferme. En plus des exp
 
 
 <br>
-<br>
+
+<div style="page-break-after: always"></div>
 
 # Écran Calendrier
 
@@ -526,6 +529,7 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 
 <br>
 
+<div style="page-break-after: always"></div>
 
 # Écran Détails
 
@@ -560,6 +564,8 @@ Nous ajusterons cette grille afin de pouvoir voir les intrants de carbone en sur
 
 
 <br>
+
+<div style="page-break-after: always"></div>
 
 # Découvrir les résultats
 
@@ -617,6 +623,7 @@ Si vous cliquez sur l’un de ces points, vous pouvez alors voir une répartitio
 </p> 
 <br>
 
+<div style="page-break-after: always"></div>
 
 # Finalement…
 
@@ -628,3 +635,6 @@ Pour télécharger Holos, obtenir de plus amples renseignements ou accéder à u
 www.agr.gc.ca
 
 Pour nous joindre, envoyez un courriel à : Holos@agr.gc.ca
+
+<div style="page-break-after: always"></div>
+.

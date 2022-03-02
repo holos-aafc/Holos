@@ -109,8 +109,9 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 
 Click the “Next” button to proceed to the next step.
 
+<div style="page-break-after: always"></div>
 
-# Selecting farm Components
+# Selecting Farm Components
 
 Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
 
@@ -126,6 +127,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
 
+<div style="page-break-after: always"></div>
 
 ## Crop and Hay Production
 
@@ -571,7 +573,6 @@ We can also add additional hay/forage for animals that are grazing on a particul
    
 
 <br>
-<br>
 
 ## Pullet Farm Operation:
 
@@ -594,6 +595,7 @@ We will add one last animal component to our farm. In addition to the beef cattl
 <br>
 <br>
 
+<div style="page-break-after: always"></div>
 
 # Timeline Screen
 
@@ -650,6 +652,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 <br>
 
 
+<div style="page-break-after: always"></div>
 
 # Details Screen
 
@@ -681,6 +684,8 @@ We will adjust this grid so that we can view the above ground and below ground c
     <em>Figure 23: Details screen</em>
 </p> 
 <br>
+
+<div style="page-break-after: always"></div>
 
 #  Discover results
 
@@ -744,6 +749,7 @@ If we click on one of these points, we can then view a more detailed breakdown o
 </p> 
 <br>
 
+<div style="page-break-after: always"></div>
 
 # Finally...
 
@@ -757,3 +763,6 @@ To download Holos, for more information, or to access a recent list of Holos rel
 
 To contact us, email:
 aafc.holos.acc@canada.ca
+
+<div style="page-break-after: always"></div>
+.
