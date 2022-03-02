@@ -4928,4 +4928,7 @@
   <data name="PoorQualityForageDietType" xml:space="preserve">
     <value>Poor quality forage diet</value>
   </data>
+  <data name="LabelUseCustomMilkProductionForEwes" xml:space="preserve">
+    <value>Use custom milk production value for ewes</value>
+  </data>
 </root>

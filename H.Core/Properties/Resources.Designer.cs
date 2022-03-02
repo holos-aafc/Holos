@@ -10258,6 +10258,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use custom milk production value for ewes.
+        /// </summary>
+        public static string LabelUseCustomMilkProductionForEwes {
+            get {
+                return ResourceManager.GetString("LabelUseCustomMilkProductionForEwes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use custom volatilization fraction.
         /// </summary>
         public static string LabelUseCustomVolatilizationFraction {

@@ -117,10 +117,20 @@ namespace H.Core.Services.Animals
                 var dailyGainForLambs = _dailyWeightGainProvider.GetDailyWeightGain(
                     lambRatio: dailyEmissions.LambEweRatio);
 
-                // Equation 3.3.1-5
-                dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
-                    dailyWeightGainOfLambs: dailyGainForLambs,
-                    energyRequiredToProduceAKilogramOfMilk: managementPeriod.EnergyRequiredForMilk);
+                if (managementPeriod.UseCustomMilkProductionValue == false)
+                {
+                    // Equation 3.3.1-5
+                    dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
+                        dailyWeightGainOfLambs: dailyGainForLambs,
+                        energyRequiredToProduceAKilogramOfMilk: managementPeriod.EnergyRequiredForMilk);
+                }
+                else
+                {
+                    // Equation 3.3.1-6
+                    dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactationUsingMilkProduction(
+                        milkProduction: managementPeriod.MilkProduction,
+                        energyRequiredToProduceAKilogramOfMilk: managementPeriod.EnergyRequiredForMilk);
+                }
             }
 
             if (animalGroup.GroupType.IsPregnantType())
@@ -443,6 +453,19 @@ namespace H.Core.Services.Animals
             double energyRequiredToProduceAKilogramOfMilk)
         {
             return 5.0 / CoreConstants.DaysInYear * dailyWeightGainOfLambs * energyRequiredToProduceAKilogramOfMilk;
+        }
+
+        /// <summary>
+        /// Equation 3.4.1-6
+        /// </summary>
+        /// <param name="milkProduction">Amount of milk produced (kg milk head^-1 day^-1)</param>
+        /// <param name="energyRequiredToProduceAKilogramOfMilk">Energy required to produce 1 kg of milk (MJ kg^-1)</param>
+        /// <returns>Net energy for lactation (MJ head^-1 day^-1)</returns>
+        public double CalculateNetEnergyForLactationUsingMilkProduction(
+            double milkProduction,
+            double energyRequiredToProduceAKilogramOfMilk)
+        {
+            return milkProduction * energyRequiredToProduceAKilogramOfMilk;
         }
 
         /// <summary>

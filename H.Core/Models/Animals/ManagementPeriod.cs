@@ -61,6 +61,8 @@ namespace H.Core.Models.Animals
         private double _liveWeightOfYoungAtWeaningAge;
         private double _liveWeightOfYoungAtBirth;
 
+        private bool _useCustomMilkProductionValue;
+
         private bool _animalsAreMilkFedOnly;
 
         #endregion
@@ -455,6 +457,12 @@ namespace H.Core.Models.Animals
         {
             get => _animalsAreMilkFedOnly;
             set => SetProperty(ref _animalsAreMilkFedOnly, value);
+        }
+
+        public bool UseCustomMilkProductionValue
+        {
+            get => _useCustomMilkProductionValue;
+            set => SetProperty(ref _useCustomMilkProductionValue, value);
         }
 
         #endregion
