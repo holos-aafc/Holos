@@ -185,7 +185,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
 
-<br>
+<div style="page-break-after: always"></div>
 
 ## Pasture (native) / Grasslands Information
 
@@ -258,7 +258,7 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 If the hay field is harvested more than once, the “Add Harvest/Grazing Date” button can be used to add subsequent harvests.
 
-<br>
+<div style="page-break-after: always"></div>
 
 ## Cow-Calf Operation
 
@@ -572,7 +572,6 @@ We can also add additional hay/forage for animals that are grazing on a particul
     - Keep the moisture content as the default value.
    
 
-<br>
 
 ## Pullet Farm Operation:
 
@@ -592,8 +591,7 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 - The management data for the **Cockerels** group is the same as **Pullets**. Right click on the Cockerels group to activate the right click menu and select **Copy Management From -> Pullets**
 
-<br>
-<br>
+
 
 <div style="page-break-after: always"></div>
 
