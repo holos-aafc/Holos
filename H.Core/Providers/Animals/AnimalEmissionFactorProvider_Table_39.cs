@@ -10,11 +10,11 @@ using H.Infrastructure;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 35
+    /// Table 39.
     /// 
     /// Default methane conversion factors, N2O emission factors, and leaching fractions by livestock group, manure handling system, and climate.
     /// </summary>
-    public class AnimalEmissionFactorProvider_Table_38 : IEmissionDataProvider
+    public class AnimalEmissionFactorProvider_Table_39 : IEmissionDataProvider
     {
         #region Fields
 
@@ -22,7 +22,7 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
-        public AnimalEmissionFactorProvider_Table_38()
+        public AnimalEmissionFactorProvider_Table_39()
         {
             HTraceListener.AddTraceListener();
         }
@@ -127,7 +127,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -245,7 +245,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -344,7 +344,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -422,7 +422,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -475,7 +475,7 @@ namespace H.Core.Providers.Animals
                         }
 
                         System.Diagnostics.Trace.TraceError(
-                            $"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                            $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                             $": Unable to get data for manure state type: {manureStateType}." +
                             $" Returning default value.");
 
@@ -529,7 +529,7 @@ namespace H.Core.Providers.Animals
                 // Unknown component category (or no values for category yet)
                 default:
                     {
-                        System.Diagnostics.Trace.TraceError($"{nameof(AnimalEmissionFactorProvider_Table_38)}.{nameof(AnimalEmissionFactorProvider_Table_38.GetByHandlingSystem)}" +
+                        System.Diagnostics.Trace.TraceError($"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
                                                             $": Unable to get data for manure state type '{manureStateType.GetDescription()}' and component category '{componentCategory.GetDescription()}'." +
                                                             $" Returning default value.");
                         return new EmissionData();

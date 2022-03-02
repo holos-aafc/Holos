@@ -475,7 +475,7 @@
     <Compile Include="Providers\Animals\FeedIntakeAndCrudeProteinForSwineData.cs" />
     <Compile Include="Providers\Animals\DefaultFeedIntakeForSwineProviderTable_Table_32.cs" />
     <Compile Include="Providers\Animals\DefaultManureCompositionProvider_Table_9.cs" />
-    <Compile Include="Providers\Animals\AnimalEmissionFactorProvider_Table_38.cs" />
+    <Compile Include="Providers\Animals\AnimalEmissionFactorProvider_Table_39.cs" />
     <Compile Include="Providers\Animals\EmissionData.cs" />
     <Compile Include="Providers\Animals\MethaneConversionFactorsAndNitrogenOxideEmissionsForBeefDairySwineProvider.cs" />
     <Compile Include="Providers\Animals\ProviderBase.cs" />

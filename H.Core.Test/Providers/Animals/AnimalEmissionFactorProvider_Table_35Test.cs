@@ -8,12 +8,12 @@ namespace H.Core.Test.Providers.Animals
     [TestClass]
     public class AnimalEmissionFactorProvider_Table_35Test
     {
-        private AnimalEmissionFactorProvider_Table_38 _provider;
+        private AnimalEmissionFactorProvider_Table_39 _provider;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new AnimalEmissionFactorProvider_Table_38();
+            _provider = new AnimalEmissionFactorProvider_Table_39();
         }
 
         [TestMethod]
