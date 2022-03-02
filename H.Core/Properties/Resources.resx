@@ -4871,4 +4871,61 @@
   <data name="EnumLime" xml:space="preserve">
     <value>Lime</value>
   </data>
+  <data name="BarleySilageBasedDietType" xml:space="preserve">
+    <value>Barley silage based diet</value>
+  </data>
+  <data name="CornSilageBasedDietType" xml:space="preserve">
+    <value>Corn silage based diet</value>
+  </data>
+  <data name="FarOffDietType" xml:space="preserve">
+    <value>Far off diet</value>
+  </data>
+  <data name="HighFiberDietType" xml:space="preserve">
+    <value>High fiber diet</value>
+  </data>
+  <data name="LegumeForageBasedDietType" xml:space="preserve">
+    <value>Legume forage based diet</value>
+  </data>
+  <data name="LowFiberDietType" xml:space="preserve">
+    <value>Low fiber diet</value>
+  </data>
+  <data name="AverageQualityForageDietType" xml:space="preserve">
+    <value>Average quality forage diet</value>
+  </data>
+  <data name="BarleyGrainBasedDietType" xml:space="preserve">
+    <value>Barley grain based diet</value>
+  </data>
+  <data name="CornGrainBasedDietType" xml:space="preserve">
+    <value>Corn grain based diet</value>
+  </data>
+  <data name="GestationDietType" xml:space="preserve">
+    <value>Gestation based diet</value>
+  </data>
+  <data name="GoodQualityForageDietType" xml:space="preserve">
+    <value>Good quality forage diet</value>
+  </data>
+  <data name="GrowerFinisherDiet1Type" xml:space="preserve">
+    <value>Grower/Finisher diet #1</value>
+  </data>
+  <data name="GrowerFinisherDiet2Type" xml:space="preserve">
+    <value>Grower/Finisher diet #2</value>
+  </data>
+  <data name="GrowerFinisherDiet3Type" xml:space="preserve">
+    <value>Grower/Finisher diet #3</value>
+  </data>
+  <data name="GrowerFinisherDiet4Type" xml:space="preserve">
+    <value>Grower/Finisher diet #4</value>
+  </data>
+  <data name="LactationDietType" xml:space="preserve">
+    <value>Lactation based diet</value>
+  </data>
+  <data name="NurseryWeanersStarterDiet1Type" xml:space="preserve">
+    <value>Nursery weaners (starter diet #1)</value>
+  </data>
+  <data name="NurseryWeanersStarterDiet2Type" xml:space="preserve">
+    <value>Nursery weaners (starter diet #2)</value>
+  </data>
+  <data name="PoorQualityForageDietType" xml:space="preserve">
+    <value>Poor quality forage diet</value>
+  </data>
 </root>

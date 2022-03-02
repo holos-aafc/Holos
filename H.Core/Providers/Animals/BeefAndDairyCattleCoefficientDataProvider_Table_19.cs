@@ -150,7 +150,7 @@ namespace H.Core.Providers.Animals
                         AnimalType = AnimalType.DairyHeifers,
                         BaselineMaintenanceCoefficient = 0.322,
                         GainCoefficient = 0.8,
-                        DefaultInitialWeight = 455,
+                        DefaultInitialWeight = 637,
                         DefaultFinalWeight = 687,
                     };
                 }

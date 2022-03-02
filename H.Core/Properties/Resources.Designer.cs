@@ -187,6 +187,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average quality forage diet.
+        /// </summary>
+        public static string AverageQualityForageDietType {
+            get {
+                return ResourceManager.GetString("AverageQualityForageDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barley.
         /// </summary>
         public static string Barley {
@@ -205,11 +214,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Barley grain based diet.
+        /// </summary>
+        public static string BarleyGrainBasedDietType {
+            get {
+                return ResourceManager.GetString("BarleyGrainBasedDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barley silage.
         /// </summary>
         public static string BarleySilage {
             get {
                 return ResourceManager.GetString("BarleySilage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barley silage based diet.
+        /// </summary>
+        public static string BarleySilageBasedDietType {
+            get {
+                return ResourceManager.GetString("BarleySilageBasedDietType", resourceCulture);
             }
         }
         
@@ -628,11 +655,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Corn grain based diet.
+        /// </summary>
+        public static string CornGrainBasedDietType {
+            get {
+                return ResourceManager.GetString("CornGrainBasedDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Corn Silage.
         /// </summary>
         public static string CornSilage {
             get {
                 return ResourceManager.GetString("CornSilage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corn silage based diet.
+        /// </summary>
+        public static string CornSilageBasedDietType {
+            get {
+                return ResourceManager.GetString("CornSilageBasedDietType", resourceCulture);
             }
         }
         
@@ -5551,6 +5596,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Far off diet.
+        /// </summary>
+        public static string FarOffDietType {
+            get {
+                return ResourceManager.GetString("FarOffDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Far off dry diet.
         /// </summary>
         public static string FarOffDryDietType {
@@ -5695,6 +5749,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gestation based diet.
+        /// </summary>
+        public static string GestationDietType {
+            get {
+                return ResourceManager.GetString("GestationDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GJ 1000 litre^1.
         /// </summary>
         public static string GigaJoulesPer1000Litres {
@@ -5736,6 +5799,15 @@ namespace H.Core.Properties {
         public static string GoodQualityForage {
             get {
                 return ResourceManager.GetString("GoodQualityForage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Good quality forage diet.
+        /// </summary>
+        public static string GoodQualityForageDietType {
+            get {
+                return ResourceManager.GetString("GoodQualityForageDietType", resourceCulture);
             }
         }
         
@@ -5862,6 +5934,42 @@ namespace H.Core.Properties {
         public static string GreenFeed {
             get {
                 return ResourceManager.GetString("GreenFeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grower/Finisher diet #1.
+        /// </summary>
+        public static string GrowerFinisherDiet1Type {
+            get {
+                return ResourceManager.GetString("GrowerFinisherDiet1Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grower/Finisher diet #2.
+        /// </summary>
+        public static string GrowerFinisherDiet2Type {
+            get {
+                return ResourceManager.GetString("GrowerFinisherDiet2Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grower/Finisher diet #3.
+        /// </summary>
+        public static string GrowerFinisherDiet3Type {
+            get {
+                return ResourceManager.GetString("GrowerFinisherDiet3Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grower/Finisher diet #4.
+        /// </summary>
+        public static string GrowerFinisherDiet4Type {
+            get {
+                return ResourceManager.GetString("GrowerFinisherDiet4Type", resourceCulture);
             }
         }
         
@@ -6105,6 +6213,15 @@ namespace H.Core.Properties {
         public static string HighEnergyDietType {
             get {
                 return ResourceManager.GetString("HighEnergyDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High fiber diet.
+        /// </summary>
+        public static string HighFiberDietType {
+            get {
+                return ResourceManager.GetString("HighFiberDietType", resourceCulture);
             }
         }
         
@@ -10366,6 +10483,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lactation based diet.
+        /// </summary>
+        public static string LactationDietType {
+            get {
+                return ResourceManager.GetString("LactationDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Large free-stall.
         /// </summary>
         public static string LargeFreeStall {
@@ -10380,6 +10506,15 @@ namespace H.Core.Properties {
         public static string LayersWetPoultry {
             get {
                 return ResourceManager.GetString("LayersWetPoultry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legume forage based diet.
+        /// </summary>
+        public static string LegumeForageBasedDietType {
+            get {
+                return ResourceManager.GetString("LegumeForageBasedDietType", resourceCulture);
             }
         }
         
@@ -10443,6 +10578,15 @@ namespace H.Core.Properties {
         public static string LowEnergyProtein {
             get {
                 return ResourceManager.GetString("LowEnergyProtein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low fiber diet.
+        /// </summary>
+        public static string LowFiberDietType {
+            get {
+                return ResourceManager.GetString("LowFiberDietType", resourceCulture);
             }
         }
         
@@ -11302,6 +11446,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nursery weaners (starter diet #1).
+        /// </summary>
+        public static string NurseryWeanersStarterDiet1Type {
+            get {
+                return ResourceManager.GetString("NurseryWeanersStarterDiet1Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nursery weaners (starter diet #2).
+        /// </summary>
+        public static string NurseryWeanersStarterDiet2Type {
+            get {
+                return ResourceManager.GetString("NurseryWeanersStarterDiet2Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oats.
         /// </summary>
         public static string Oats {
@@ -11550,6 +11712,15 @@ namespace H.Core.Properties {
         public static string PoorQualityForage {
             get {
                 return ResourceManager.GetString("PoorQualityForage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poor quality forage diet.
+        /// </summary>
+        public static string PoorQualityForageDietType {
+            get {
+                return ResourceManager.GetString("PoorQualityForageDietType", resourceCulture);
             }
         }
         

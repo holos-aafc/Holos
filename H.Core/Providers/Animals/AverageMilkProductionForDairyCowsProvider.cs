@@ -54,6 +54,18 @@ namespace H.Core.Providers.Animals
         /// <returns>Returns a value of milk production (kg head-1 day-1). If value isn't found, the method returns 0.</returns>
         public double GetAverageMilkProductionForDairyCowsValue(int year, Province province)
         {
+            // Maximum year in table is 2020
+            if (year > 2020)
+            {
+                year = 2020;
+            }
+
+            // Minimum year in table is 1990
+            if (year < 1990)
+            {
+                year = 1990;
+            }
+
             AverageMilkProductionForDairyCowsData data = this.AvgMilkProductionData.Find(x => (x.Year == year) && (x.Province == province));
 
             if (data != null)

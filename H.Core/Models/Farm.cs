@@ -901,9 +901,9 @@ namespace H.Core.Models
             return this.Latitude != 0 && this.Latitude != 0;
         }
 
-        public Diet GetDietByName(string name)
+        public Diet GetDietByName(DietType dietType)
         {
-            return this.Diets.FirstOrDefault(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            return this.Diets.FirstOrDefault(x => x.DietType == dietType);
         }
 
         /// <summary>

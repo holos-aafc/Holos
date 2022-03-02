@@ -163,9 +163,11 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// Methane conversion factor for diet (kg CH4 kg CH4^-1)
+        /// Methane conversion factor for diet 
         /// 
         /// Y_m
+        ///
+        /// (kg CH4 kg CH4^-1)
         /// </summary>
         public double MethaneConversionFactor
         {
@@ -563,7 +565,6 @@ namespace H.Core.Providers.Feed
         /// <summary>
         /// converts feed ingredient to metric or imperial for the GUI bindings
         /// </summary>
-        /// <param name="feedIngredient"></param>
         private static void ConvertToBindingIngredientFromSystem(FeedIngredient feedIngredient)
         {
             //property converter for this exact ingredient
@@ -586,14 +587,12 @@ namespace H.Core.Providers.Feed
         #endregion
 
         #region Private Methods
+
         private void AssignYmValue()
         {
             // Assign a default ym so that if there are no cases that cover the diet below, there will be a value assigned
             this.MethaneConversionFactor = 0.04;
 
-            /*
-             * Table 22
-             */
 
             if (this.AnimalType == AnimalType.DairyLactatingCow ||
                 this.AnimalType == AnimalType.DairyDryCow ||
@@ -612,10 +611,6 @@ namespace H.Core.Providers.Feed
                     this.MethaneConversionFactor = 0.07;
                 }
             }
-
-            /*
-             * Table 14
-             */
 
             if (this.AnimalType == AnimalType.BeefCow ||
                 this.AnimalType == AnimalType.BeefReplacementHeifers ||

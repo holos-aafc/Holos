@@ -10,7 +10,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Swine;
-
+using H.Core.Providers.Feed;
 #endregion
 
 namespace H.Core.Services.Animals
@@ -53,6 +53,14 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+
+            // Swine piglets do not have a diet as they are still suckling. They still need to be assigned a SelectedDiet
+            // otherwise any calls to SelectedDiet throws an exception as managementPeriod.SelectedDiet will be null.
+            if (managementPeriod.AnimalType == AnimalType.SwinePiglets)
+            {
+               managementPeriod.SelectedDiet = farm.Diets.SingleOrDefault(x => x.IsCustomPlaceholderDiet);
+            }
+         
 
             /*
              * Enteric methane (CH4)
