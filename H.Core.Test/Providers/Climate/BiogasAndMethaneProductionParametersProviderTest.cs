@@ -42,7 +42,7 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void GetBiogasMethanePotentialManureType()
         {
-            BiogasAndMethaneProductionParametersData data = _provider.GetBiogasMethaneProductionInstance(AnimalType.Cattle, BeddingMaterialType.None);
+            BiogasAndMethaneProductionParametersData data = _provider.GetBiogasMethaneProductionInstance(AnimalType.Beef, BeddingMaterialType.None);
             Assert.AreEqual(308, data.BioMethanePotential);
         }
 

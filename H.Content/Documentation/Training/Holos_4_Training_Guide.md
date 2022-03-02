@@ -27,11 +27,13 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 </p>
 <br>
 
+<br>
 <p align="center">
-    <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="650"/>
+    <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="750"/>
     <br>
-    <em>Figure 2: If a farm has been saved previously, this screen will appear.</em>
+    <em>Figure 2: If a farm has been previously saved, Holos will prompt to re-open that farm.</em>
 </p>
+<br>
 
 <br>
 <p align="center">
@@ -350,7 +352,7 @@ Click on the management period named **Summer Grazing**. Ensure that the start d
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy protein** as the diet type.
+    * Select **High energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
@@ -371,7 +373,7 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **Medium energy protein** as the diet type.
+    * Select **Medium energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
@@ -425,7 +427,7 @@ Rename this period from Management Period # 1 to **Confinement**.
     * All other options as default.
 
 * **Diet Tab:**
-    * Select **Medium energy protein** as the diet type.
+    * Select **Medium energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Confined no barn** as the housing type.
@@ -443,7 +445,7 @@ Rename this period from Management Period # 2 to **Grazing**.
     * Enter **110** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy protein** as the diet type.
+    * Select **High energy & protein diet** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.

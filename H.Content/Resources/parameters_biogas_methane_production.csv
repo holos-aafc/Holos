@@ -1,6 +1,6 @@
 ﻿Subtrate Type,Bedding Type,Biomethane potential (Nm^3 ton^-1 VS),f_CH4 Fraction of methane in biogas,Volatile Solids(% TS),TS (kg t^-1)^3,TN Substrate (KG N t^-1)^5
 Manure,,,,,,
-Cattle,None,308,0.6,0,0,0
+Beef,None,308,0.6,0,0,0
 Dairy,None,243,0.6,0,0,0
 Goat,None,112,0.6,0,0,0
 Horse,None,284,0.6,0,0,0
