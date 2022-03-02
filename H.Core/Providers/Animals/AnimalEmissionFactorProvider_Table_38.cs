@@ -18,7 +18,7 @@ namespace H.Core.Providers.Animals
     {
         #region Fields
 
-        private readonly MethaneConversionFactorsByClimateZone_Table_36 _methaneConversionFactorsByClimateZone = new MethaneConversionFactorsByClimateZone_Table_36();
+        private readonly MethaneConversionFactorsByClimateZone_Table_40 _methaneConversionFactorsByClimateZone = new MethaneConversionFactorsByClimateZone_Table_40();
 
         #endregion
 

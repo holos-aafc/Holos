@@ -5,11 +5,11 @@ using H.Core.Enumerations;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 36.
+    /// Table 40.
     ///
     /// Methane conversion factors (MCF) by climate zone, by livestock group and manure handling system
     /// </summary>
-    public class MethaneConversionFactorsByClimateZone_Table_36
+    public class MethaneConversionFactorsByClimateZone_Table_40
     {
         public double GetByClimateAndHandlingSystem(
             ManureStateType manureStateType,
@@ -75,17 +75,16 @@ namespace H.Core.Providers.Animals
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
-                        return 0.21;
+                        return 0.06;
                     case ClimateZones.CoolTemperateDry:
-                        return 0.26;
+                        return 0.08;
                     case ClimateZones.BorealDry:
                     case ClimateZones.BorealMoist:
-                        return 0.014;
-
+                        return 0.04;
                     case ClimateZones.WarmTemperateDry:
-                        return 0.41;
+                        return 0.15;
                     case ClimateZones.WarmTemperateMoist:
-                        return 0.37;
+                        return 0.13;
                 }
             }
 
@@ -144,7 +143,7 @@ namespace H.Core.Providers.Animals
                 return ClimateZones.WarmTemperateDry;
             }
 
-            Trace.TraceError($"{nameof(MethaneConversionFactorsByClimateZone_Table_36.GetClimateZone)}" +
+            Trace.TraceError($"{nameof(MethaneConversionFactorsByClimateZone_Table_40.GetClimateZone)}" +
                              $" unable to get data for methane conversion factor since climate zone is unknown" +
                              $" Returning default value of 0.");
             return 0;

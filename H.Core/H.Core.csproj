@@ -454,7 +454,7 @@
     <Compile Include="Providers\Animals\IFeedingActivityCoefficientProvider.cs" />
     <Compile Include="Providers\Animals\ISheepCoefficientData.cs" />
     <Compile Include="Providers\Animals\ISheepCoefficientDataProvider.cs" />
-    <Compile Include="Providers\Animals\MethaneConversionFactorsByClimateZone_Table_36.cs" />
+    <Compile Include="Providers\Animals\MethaneConversionFactorsByClimateZone_Table_40.cs" />
     <Compile Include="Providers\Animals\MethaneProducingCapacityOfManureProvider_Table_37.cs" />
     <Compile Include="Providers\Animals\NitrogenConcentrationLiquidManureProvider_Table_40.cs" />
     <Compile Include="Providers\Animals\NitrogenConcentrationOfLiquidManureTableData.cs" />
