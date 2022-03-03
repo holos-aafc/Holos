@@ -63,7 +63,8 @@ namespace H.Core.Test.Providers.Animals
         {
             var avgMilkProduction = _provider.GetAverageMilkProductionForDairyCowsValue(1989, Province.Ontario);
 
-            Assert.AreEqual(0, avgMilkProduction);
+            // Should return value for last available year
+            Assert.AreEqual(21.7, avgMilkProduction);
         }
 
         [TestMethod]
