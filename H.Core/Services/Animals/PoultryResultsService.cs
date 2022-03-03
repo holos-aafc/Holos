@@ -18,7 +18,8 @@ namespace H.Core.Services.Animals
 
         //Referenced in  Eqn. 3.5.3-4
         private const double FractionLeaching = 0;
-        
+        private PoultryDietInformationProvider_Table_44 _dietInformationProvider = new PoultryDietInformationProvider_Table_44();
+
         #endregion
 
         #region Constructors
@@ -132,11 +133,51 @@ namespace H.Core.Services.Animals
              * Direct manure N2O
              */
 
-            // Equation 4.2.1-24
-            dailyEmissions.NitrogenExcretionRate = managementPeriod.ManureDetails.NitrogenExretionRate;
+            if (managementPeriod.AnimalType.IsTurkeyType())
+            {
+                /*
+                 * Turkeys groups have a constant rate defined by table 44
+                 */
 
-            dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(dailyEmissions.DryMatterIntake,
-                managementPeriod.SelectedDiet.CrudeProtein);
+                // Equation 4.2.1-24
+                dailyEmissions.NitrogenExcretionRate = managementPeriod.ManureDetails.NitrogenExretionRate;
+            }
+            else
+            {
+                /*
+                 * Chickens have a calculated rate
+                 */
+
+                var poultryDietData = _dietInformationProvider.Get(managementPeriod.AnimalType);
+
+                dailyEmissions.DryMatterIntake = poultryDietData.DailyMeanIntake;
+                managementPeriod.SelectedDiet.CrudeProtein = poultryDietData.CrudeProtein;
+
+                dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(
+                    dryMatterIntake: dailyEmissions.DryMatterIntake,
+                    crudeProtein: managementPeriod.SelectedDiet.CrudeProtein);
+
+                if (managementPeriod.AnimalType == AnimalType.LayersDryPoultry ||
+                    managementPeriod.AnimalType == AnimalType.LayersWetPoultry)
+                {
+                    dailyEmissions.ProteinRetained = this.CalculateProteinRetainedLayers(
+                        proteinInLiveWeight: poultryDietData.ProteinLiveWeight,
+                        weightGain: poultryDietData.WeightGain,
+                        proteinContentOfEggs: poultryDietData.ProteinContentEgg,
+                        eggProduction: poultryDietData.EggProduction);
+                }
+                else
+                {
+                    dailyEmissions.ProteinRetained = this.CalculateProteinRetainedBroilers(
+                        initialWeight: poultryDietData.InitialWeight,
+                        finalWeight: poultryDietData.FinalWeight,
+                        productionPeriod: poultryDietData.ProductionPeriod);
+                }
+
+                dailyEmissions.NitrogenExcretionRate = this.CalculateNitrogenExcretionRateChickens(
+                    proteinIntake: dailyEmissions.ProteinIntake,
+                    proteinRetained: dailyEmissions.ProteinRetained);
+            }
 
             // Equation 4.2.1-29 (used in volatilization calculation)
             dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
@@ -274,6 +315,8 @@ namespace H.Core.Services.Animals
 
             return dailyEmissions;
         }
+
+
         protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
         {
             if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsNewlyHatchedEggs() || groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsEggs())
@@ -408,6 +451,63 @@ namespace H.Core.Services.Animals
         {
             return dryMatterIntake * crudeProtein;
         }
+
+        /// <summary>
+        /// Equation 4.2.1-26
+        /// </summary>
+        /// <param name="proteinInLiveWeight">Average protein content in live weight (kg protein (kg head)^-1)</param>
+        /// <param name="weightGain">Average daily weight gain for cohort (kg head^-1 day^-1)</param>
+        /// <param name="proteinContentOfEggs">Average protein content of eggs (kg protein (kg egg)^-1)</param>
+        /// <param name="eggProduction">Egg mass production (g egg head-1 day-1)</param>
+        /// <returns>Protein retained in animal in cohort (kg head^-1 day^-1)</returns>
+        private double CalculateProteinRetainedLayers(
+            double proteinInLiveWeight,
+            double weightGain,
+            double proteinContentOfEggs,
+            double eggProduction)
+        {
+            var result = (proteinInLiveWeight * weightGain) + ((proteinContentOfEggs * eggProduction) / 1000);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.2.1-27
+        /// </summary>
+        /// <param name="initialWeight">Live weight of the animal at the beginning of the stage (kg)</param>
+        /// <param name="finalWeight">Live weight of the animal at the end of the stage (kg)</param>
+        /// <param name="productionPeriod">Length of time from chick to slaughter</param>
+        /// <returns>Protein retained in animal (kg head^-1 day^-1)</returns>
+        private double CalculateProteinRetainedBroilers(
+            double initialWeight,
+            double finalWeight,
+            double productionPeriod)
+        {
+            const double proteinRetainedForGain = 0.175;
+
+            var result = ((finalWeight - initialWeight) * proteinRetainedForGain) / productionPeriod;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.2.1-28
+        /// </summary>
+        /// <param name="proteinIntake">Protein intake (kg head^-1 day^-1)</param>
+        /// <param name="proteinRetained">Protein retained in animal in cohort (kg head^-1 day^-1)</param>
+        /// <returns>N excretion rate (kg head-1 day-1)</returns>
+        private double CalculateNitrogenExcretionRateChickens(
+            double proteinIntake,
+            double proteinRetained)
+        {
+            // Conversion from dietary protein to dietary N
+            const double conversion = 6.25;
+
+            var result = (proteinIntake / conversion) - (proteinRetained / conversion);
+
+            return result;
+        }
+
 
         /// <summary>
         ///  Equation 3.5.3-3
