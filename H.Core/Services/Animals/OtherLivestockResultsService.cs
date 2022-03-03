@@ -160,9 +160,15 @@ namespace H.Core.Services.Animals
             // Equation 4.3.3-1
             dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
 
-            // Equation 4.3.3-3
-            dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRateNonBeefCattle(
+            dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
+                volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
+
+            dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRate(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 

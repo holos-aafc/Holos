@@ -157,8 +157,7 @@ namespace H.Core.Services.Animals
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
                     crudeProtein: managementPeriod.SelectedDiet.CrudeProtein);
 
-                if (managementPeriod.AnimalType == AnimalType.LayersDryPoultry ||
-                    managementPeriod.AnimalType == AnimalType.LayersWetPoultry)
+                if (managementPeriod.AnimalType == AnimalType.ChickenHens)
                 {
                     dailyEmissions.ProteinRetained = this.CalculateProteinRetainedLayers(
                         proteinInLiveWeight: poultryDietData.ProteinLiveWeight,
@@ -188,8 +187,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial =
                 base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
                     beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-                    nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails
-                        .TotalNitrogenKilogramsDryMatterForBedding,
+                    nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
                     beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
 
             // Equation 4.2.1-31
@@ -248,9 +246,9 @@ namespace H.Core.Services.Animals
                     amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
             }
 
-            // Equation 4.3.3-3
-            dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRateNonBeefCattle(
+            dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 

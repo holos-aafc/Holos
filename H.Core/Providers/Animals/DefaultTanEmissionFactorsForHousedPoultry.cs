@@ -9,7 +9,7 @@ namespace H.Core.Providers.Animals
 {
     public class DefaultTanEmissionFactorsForHousedPoultry
     {
-        public double GetDefaultTanEmissionFactor(AnimalType animalType)
+        public double GetDefaultAmmoniaEmissionFactorForHousing(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {

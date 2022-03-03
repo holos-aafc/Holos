@@ -7,7 +7,7 @@ namespace H.Core.Providers.Animals
     /// </summary>
     public class DefaultYearlyTanExcretionRatesForPoultry
     {
-        public double GetYearlyTanExcretion(AnimalType animalType)
+        public double GetTanExcretion(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {

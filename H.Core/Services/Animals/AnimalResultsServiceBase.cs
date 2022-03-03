@@ -1312,7 +1312,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.3-1
+        /// Equation 4.3.4-1
         /// </summary>
         /// <param name="ammoniaEmissionsFromHousing">Ammonia emission from housing (kg NH3-N)</param>
         /// <param name="ammoniaEmissionsFromStorage">Ammonia nitrogen loss from stored manure (kg NH3-N)</param>
@@ -1335,41 +1335,24 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.3-2
+        /// Equation 4.3.4-2
         /// </summary>
-        /// <param name="nitrogenExcretion">Amount of N excreted (kg N)</param>
-        /// <param name="directManureEmissions">Manure direct N emission (kg N₂O-N)</param>
+        /// <param name="nitrogenExcretionRate">Amount of N excreted (kg N)</param>
         /// <param name="beddingNitrogen">Bedding nitrogen (kg N)</param>
         /// <param name="volatilizationFraction">Fraction of manure N volatilized as NH3 and NOx from the specific manure management system</param>
         /// <param name="volatilizationEmissionFactor">Emission factor for volatilization [kg N2O-N (kg N)^-1]</param>
         /// <returns>Manure volatilization N emission rate (kg N2O-N head^-1 day^-1)</returns>
         public double CalculateManureVolatilizationEmissionRate(
-            double nitrogenExcretion,
-            double directManureEmissions,
+            double nitrogenExcretionRate,
             double beddingNitrogen,
             double volatilizationFraction,
             double volatilizationEmissionFactor)
         {
-            return ((nitrogenExcretion - directManureEmissions) + beddingNitrogen) * volatilizationFraction * volatilizationEmissionFactor;
+            return nitrogenExcretionRate + beddingNitrogen * volatilizationFraction * volatilizationEmissionFactor;
         }
 
         /// <summary>
-        /// Equation 4.3.3-3
-        /// </summary>
-        /// <param name="nitrogenExcretionRate"></param>
-        /// <param name="volatilizationFraction">Fraction of manure N volatilized as NH3 and NOx from the specific manure management system</param>
-        /// <param name="volatilizationEmissionFactor">Emission factor for volatilization [kg N2O-N (kg N)^-1]</param>
-        /// <returns>Manure volatilization N emission rate (kg N2O-N head^-1 day^-1)</returns>
-        public double CalculateManureVolatilizationEmissionRateNonBeefCattle(
-            double nitrogenExcretionRate,
-            double volatilizationFraction,
-            double volatilizationEmissionFactor)
-        {
-            return nitrogenExcretionRate * volatilizationFraction * volatilizationEmissionFactor;
-        }
-
-        /// <summary>
-        /// Equation 4.3.3-4
+        /// Equation 4.3.4-3
         /// </summary>
         /// <param name="volatilizationRate">Manure volatilization N emission rate (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>

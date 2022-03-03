@@ -872,8 +872,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.3-2
-        /// Equation 4.3.3-3
+        /// Equation 4.3.4-2
         ///
         /// (kg N2O-N head^-1 day^-1)
         /// </summary>

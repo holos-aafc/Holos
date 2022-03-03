@@ -325,7 +325,7 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 4.3.3-1
+                // Equation 4.3.4-1
                 dailyEmissions.FractionOfManureVolatilized = this.CalculateFractionOfManureVolatilized(
                     ammoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
@@ -333,10 +333,9 @@ namespace H.Core.Services.Animals
                     amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
             }
 
-            // Equation 4.3.3-2
+            // Equation 4.3.4-2
             dailyEmissions.ManureVolatilizationRate = this.CalculateManureVolatilizationEmissionRate(
-                nitrogenExcretion: dailyEmissions.NitrogenExcretionRate,
-                directManureEmissions: dailyEmissions.ManureDirectN2ONEmissionRate,
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 beddingNitrogen: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
@@ -866,8 +865,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.3-2
             dailyEmissions.ManureVolatilizationRate = this.CalculateManureVolatilizationEmissionRate(
-                nitrogenExcretion: dailyEmissions.NitrogenExcretionRate,
-                directManureEmissions: dailyEmissions.ManureDirectN2ONEmissionRate,
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 beddingNitrogen: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
