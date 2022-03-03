@@ -462,6 +462,7 @@
     <Compile Include="Providers\Animals\NitrogenConcentrationOfSolidManureTableData.cs" />
     <Compile Include="Providers\Animals\IEmissionData.cs" />
     <Compile Include="Providers\Animals\IEmissionDataProvider.cs" />
+    <Compile Include="Providers\Animals\PoultryDietInformationProvider_Table_44.cs" />
     <Compile Include="Providers\Animals\SheepFeedingActivityCoefficientProviderTable31.cs" />
     <Compile Include="Providers\Animals\DefaultPregnancyCoefficientsForSheepProvider_Table_33.cs" />
     <Compile Include="Providers\Animals\DefaultsCompositionOfBeddingMaterialsData.cs" />
