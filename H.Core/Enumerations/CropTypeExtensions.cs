@@ -32,13 +32,19 @@ namespace H.Core.Enumerations
         {
             switch (cropType)
             {
-                case CropType.Forage://
+                case CropType.Forage:
                 case CropType.HayGrass:
                 case CropType.HayLegume:
                 case CropType.HayMixed:
                 case CropType.PerennialForages:
-                case CropType.ForageForSeed:
                 case CropType.Pasture:
+
+                case CropType.RangelandNative:
+                case CropType.SeededGrassland:
+                case CropType.TameGrass:
+                case CropType.TameLegume:
+                case CropType.TameMixed:
+                case CropType.ForageForSeed:
                     return true;
 
                 default:

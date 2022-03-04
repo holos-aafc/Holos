@@ -537,8 +537,6 @@
     <Compile Include="Providers\Nitrogen\NitrogenFixationResult.cs" />
     <Compile Include="Providers\Plants\CropFactorsData.cs" />
     <Compile Include="Providers\Plants\CropFactorsProvider_Table7.cs" />
-    <Compile Include="Providers\Plants\CropTypeToDetermineEFuelAndEHerbicideForEasternCanadaTableData.cs" />
-    <Compile Include="Providers\Plants\CropTypeToDetermineEFuelAndEHerbicideForEasternCanada_Table_39.cs" />
     <Compile Include="Providers\Plants\DefaultSoilN2OEmissionBreakDownData.cs" />
     <Compile Include="Providers\Plants\DefaultSoilN2OEmissionBreakDownProvider_Table_11.cs" />
     <Compile Include="Providers\Plants\EnergyRequirementsForCropsData.cs" />
