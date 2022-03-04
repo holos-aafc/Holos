@@ -34,7 +34,7 @@ namespace H.Core.Test.Providers.Plants
         {
             var provider = new EnergyRequirementsForCropsProvider_Table_38();
 
-            var result = provider.GetEnergyData(Province.NewBrunswick, SoilFunctionalCategory.EasternCanada, TillageType.Intensive, CropType.HayGrass);
+            var result = provider.GetEnergyData(Province.NewBrunswick, SoilFunctionalCategory.EasternCanada, TillageType.Intensive, CropType.TameGrass);
 
             Assert.AreEqual(0.81, result.EnergyForFuel);
             Assert.AreEqual(0, result.EnergyForHerbicide);
@@ -45,7 +45,7 @@ namespace H.Core.Test.Providers.Plants
         {
             var provider = new EnergyRequirementsForCropsProvider_Table_38();
 
-            var result = provider.GetEnergyData(Province.Alberta, SoilFunctionalCategory.Black, TillageType.Intensive, CropType.HayGrass);
+            var result = provider.GetEnergyData(Province.Alberta, SoilFunctionalCategory.Black, TillageType.Intensive, CropType.TameGrass);
 
             Assert.AreEqual(2.63, result.EnergyForFuel);
             Assert.AreEqual(0.16, result.EnergyForHerbicide);

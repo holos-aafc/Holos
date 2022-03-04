@@ -33,18 +33,12 @@ namespace H.Core.Enumerations
             switch (cropType)
             {
                 case CropType.Forage:
-                case CropType.HayGrass:
-                case CropType.HayLegume:
-                case CropType.HayMixed:
-                case CropType.PerennialForages:
-                case CropType.Pasture:
-
-                case CropType.RangelandNative:
-                case CropType.SeededGrassland:
                 case CropType.TameGrass:
                 case CropType.TameLegume:
                 case CropType.TameMixed:
+                case CropType.PerennialForages:
                 case CropType.ForageForSeed:
+                case CropType.SeededGrassland:
                     return true;
 
                 default:
@@ -154,12 +148,12 @@ namespace H.Core.Enumerations
 
             return cropType == CropType.BrokenGrassland ||
                    cropType == CropType.GrasslandSeeded ||
-                   cropType == CropType.GrasslandNative;
+                   cropType == CropType.RangelandNative;
         }
 
         public static bool IsNativeGrassland(this CropType cropType)
         {
-            return cropType == CropType.GrasslandNative;
+            return cropType == CropType.RangelandNative;
         }
 
         public static bool IsFallow(this CropType cropType)
@@ -383,9 +377,9 @@ namespace H.Core.Enumerations
                 CropType.Flax,
                 CropType.ForageForSeed,
                 CropType.GrainCorn,
-                CropType.HayGrass,
-                CropType.HayLegume,
-                CropType.HayMixed,
+                CropType.TameGrass,
+                CropType.TameLegume,
+                CropType.TameMixed,
                 CropType.Lentils,
                 CropType.MixedGrains,
                 CropType.Mustard,
@@ -393,8 +387,7 @@ namespace H.Core.Enumerations
                 CropType.Oats,
                 CropType.Oilseeds,
                 CropType.OtherFieldCrops,
-                CropType.Pasture,
-                CropType.PerennialForages,
+                CropType.SeededGrassland,
                 CropType.Potatoes,
                 CropType.PulseCrops,
                 CropType.Safflower,
@@ -429,7 +422,7 @@ namespace H.Core.Enumerations
                 CropType.FeedBarley,
                 CropType.FieldPeas,
                 CropType.Flax,
-                CropType.HayMixed,
+                CropType.TameMixed,
                 CropType.KabuliChickpea,
                 CropType.MaltBarley,
                 CropType.MillingOats,

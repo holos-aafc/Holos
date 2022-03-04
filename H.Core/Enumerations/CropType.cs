@@ -79,8 +79,8 @@ namespace H.Core.Enumerations
         [LocalizedDescription("GrainCorn", typeof(Resources))]
         GrainCorn,
 
-        [LocalizedDescription("EnumGrasslandNative", typeof(Resources))]
-        GrasslandNative,
+        [LocalizedDescription("EnumRangelandNative", typeof(Resources))]
+        RangelandNative,
 
         [LocalizedDescription("EnumHairyVetch", typeof(Resources))]
         HairyVetch,
@@ -88,14 +88,14 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumHairyVetchAndRye", typeof(Resources))]
         HairyVetchAndRye,
 
-        [LocalizedDescription("EnumHayGrass", typeof(Resources))]
-        HayGrass,
+        [LocalizedDescription("EnumTameGrass", typeof(Resources))]
+        TameGrass,
 
-        [LocalizedDescription("EnumHayLegume", typeof(Resources))]
-        HayLegume,
+        [LocalizedDescription("EnumTameLegume", typeof(Resources))]
+        TameLegume,
 
-        [LocalizedDescription("EnumHayMixed", typeof(Resources))]
-        HayMixed,
+        [LocalizedDescription("EnumTameMixed", typeof(Resources))]
+        TameMixed,
 
         [LocalizedDescription("HayAndForageSeed", typeof(Resources))]
         HayAndForageSeed,
@@ -124,8 +124,8 @@ namespace H.Core.Enumerations
         [LocalizedDescription("Peas", typeof(Resources))]
         Peas,
 
-        [LocalizedDescription("Pasture", typeof(Resources))]
-        Pasture,
+        [LocalizedDescription("EnumSeededGrassland", typeof(Resources))]
+        SeededGrassland,
 
         [LocalizedDescription("EnumPerennialForages", typeof(Resources))]
         PerennialForages,
@@ -613,20 +613,5 @@ namespace H.Core.Enumerations
         Cereals,
 
         #endregion
-
-        [LocalizedDescription("EnumRangelandNative", typeof(Resources))]
-        RangelandNative,
-
-        [LocalizedDescription("EnumSeededGrassland", typeof(Resources))]
-        SeededGrassland,
-
-        [LocalizedDescription("EnumTameGrass", typeof(Resources))]
-        TameGrass,
-
-        [LocalizedDescription("EnumTameLegume", typeof(Resources))]
-        TameLegume,
-
-        [LocalizedDescription("EnumTameMixed", typeof(Resources))]
-        TameMixed,
     }
 }

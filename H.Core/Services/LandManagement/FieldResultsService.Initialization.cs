@@ -41,7 +41,7 @@ namespace H.Core.Services.LandManagement
             this.AssignHarvestMethod(viewItem, farm);
             this.AssignDefaultLigninContent(viewItem, farm);
 
-            if (viewItem.CropType == CropType.GrasslandNative)
+            if (viewItem.CropType == CropType.RangelandNative)
             {
                 viewItem.IsNativeGrassland = true;
             }

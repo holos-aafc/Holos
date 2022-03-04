@@ -410,10 +410,10 @@ namespace H.Core.Providers.Economics
                     return CropType.FieldPeas;
                 case CropType.Flax:
                     return CropType.Flax;
-                case CropType.HayMixed:
-                case CropType.HayGrass:
-                case CropType.HayLegume:
-                    return CropType.HayMixed;
+                case CropType.TameMixed:
+                case CropType.TameGrass:
+                case CropType.TameLegume:
+                    return CropType.TameMixed;
                 case CropType.Lentils:
                     return CropType.RedLentils;
                 case CropType.Mustard:

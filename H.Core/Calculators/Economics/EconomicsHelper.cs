@@ -172,11 +172,11 @@ namespace H.Core.Calculators.Economics
                         return pricePerBushel * FodderCornBushelPerTonne;
                     case CropType.GrainCorn:
                         return pricePerBushel * GrainCornBushelPerTonne;
-                    case CropType.HayGrass:
+                    case CropType.TameGrass:
                         return pricePerBushel * HayGrassBushelPerTonne;
-                    case CropType.HayMixed:
+                    case CropType.TameMixed:
                         return pricePerBushel * HayMixedBushelPerTonne;
-                    case CropType.HayLegume:
+                    case CropType.TameLegume:
                         return pricePerBushel * LegumeBushelPerTonne;
                     case CropType.Lentils:
                         return pricePerBushel * LentilsBushelPerTonne;

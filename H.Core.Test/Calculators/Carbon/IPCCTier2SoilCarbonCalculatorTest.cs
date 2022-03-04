@@ -966,7 +966,7 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void CanCalculateInputsForCropReturnsFalse()
         {
-            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.HayMixed });
+            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.TameMixed });
 
             Assert.IsFalse(result);
         }

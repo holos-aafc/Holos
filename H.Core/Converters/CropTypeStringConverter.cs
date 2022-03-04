@@ -99,23 +99,23 @@ namespace H.Core.Converters
                     return CropType.GrainSorghum;
                 case "grassseed":
                     return CropType.GrassSeed;
-                case "grasslandnative":
-                    return CropType.GrasslandNative;
+                case "rangelandlandnative":
+                    return CropType.RangelandNative;
                 case "greenfeed":
                     return CropType.GreenFeed;
                 case "hardredspringwheat":
                     return CropType.HardRedSpringWheat;
-                case "haygrass":
-                    return CropType.HayGrass;
+                case "tamegrass":
+                    return CropType.TameGrass;
                 case "grasshay":
                     return CropType.GrassHay;
-                case "haylegume":
-                    return CropType.HayLegume;
+                case "tamelegume":
+                    return CropType.TameLegume;
                 case "nonlegumehay":
                     return CropType.NonLegumeHay;
-                case "haymixed":
+                case "tamemixed":
                 case "mixedhay":
-                    return CropType.HayMixed;
+                    return CropType.TameMixed;
                 case "hayandforageseed":
                     return CropType.HayAndForageSeed;
                 case "hairyvetch":
@@ -166,8 +166,8 @@ namespace H.Core.Converters
                     return CropType.Pulses;
                 case "pulsecrops":
                     return CropType.PulseCrops;
-                case "pasture":
-                    return CropType.Pasture;
+                case "seededgrassland":
+                    return CropType.SeededGrassland;
                 case "peanuts":
                     return CropType.Peanuts;
                 case "perennialforages":
@@ -393,6 +393,8 @@ namespace H.Core.Converters
                     return CropType.SouthernOntarioBarley;
                 case "northernontariooats":
                     return CropType.NorthernOntarioOats;
+                case "rangelandnative":
+                    return CropType.RangelandNative;
                 case "southernontariooats":
                     return CropType.SouthernOntarioOats;
                 case "springcanolaht":
@@ -425,14 +427,6 @@ namespace H.Core.Converters
                     return CropType.NFixingForages;
                 case "nonnfixingforages":
                     return CropType.NonNFixingForages;
-                case "rangelandnative":
-                    return CropType.RangelandNative;
-                case "seededgrassland":
-                    return CropType.SeededGrassland;
-                case "tamegrass":
-                    return CropType.TameGrass;
-                case "tamemixedgrasslegume":
-                    return CropType.TameMixed;
 
                 default:
                     {

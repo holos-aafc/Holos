@@ -27,7 +27,7 @@ namespace H.Core.Test.Providers.Climate
 
             #region Asserts
             Assert.AreEqual(Enumerations.CropType.AlfalfaSeed, data[0].Crop);
-            Assert.AreEqual(Enumerations.CropType.HayLegume, data[1].Crop);
+            Assert.AreEqual(Enumerations.CropType.TameLegume, data[1].Crop);
             Assert.AreEqual(Enumerations.CropType.Dill, data[15].Crop);
             Assert.AreEqual(Enumerations.CropType.GreenFeed, data[33].Crop);
             Assert.AreEqual(Enumerations.CropType.FallRye, data[74].Crop);
@@ -50,11 +50,6 @@ namespace H.Core.Test.Providers.Climate
             Assert.AreEqual(0, data[29].C);
             Assert.AreEqual(0, data[29].D);
             Assert.AreEqual(0, data[29].E);
-            Assert.AreEqual(2.37E-01, data[77].A);
-            Assert.AreEqual(1.61E-03, data[77].B);
-            Assert.AreEqual(-9.88E-07, data[77].C);
-            Assert.AreEqual(3.77E-10, data[77].D);
-            Assert.AreEqual(-9.49E-14, data[77].E);
         }
         [TestMethod]
         public void TestGetByCropType()

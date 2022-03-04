@@ -19,21 +19,6 @@ namespace H.Core.Providers.Plants
         {
             switch (cropType)
             {
-                case CropType.RangelandNative:
-                    return 45;
-
-                case CropType.SeededGrassland:
-                    return 50;
-
-                case CropType.TameGrass:
-                    return 60;
-
-                case CropType.TameLegume:
-                    return 60;
-
-                case CropType.TameMixed:
-                    return 60;
-
                 default:
                 {
                     Trace.TraceError($"No data found for '{cropType.GetDescription()}'");

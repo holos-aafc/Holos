@@ -63,7 +63,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // No fuel is used on grasslands/pasture
-            if (viewItem.CropType == CropType.Pasture == false)
+            if (viewItem.CropType == CropType.SeededGrassland == false)
             {
                 results.EnergyCarbonDioxideFromFuelUse = this.CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
                     energyFromFuelUse: viewItem.FuelEnergy,

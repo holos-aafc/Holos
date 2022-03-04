@@ -714,7 +714,7 @@ namespace H.Core.Test.Calculators
         {
             var currentYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 1000,
                 PercentageOfProductYieldReturnedToSoil = 10,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
@@ -758,7 +758,7 @@ namespace H.Core.Test.Calculators
         {
             var currentYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 0,      // Set to 0 to set condition
                 PercentageOfProductYieldReturnedToSoil = 10,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
@@ -772,7 +772,7 @@ namespace H.Core.Test.Calculators
 
             var nextYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 1000,
                 PercentageOfProductYieldReturnedToSoil = 10,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
@@ -831,7 +831,7 @@ namespace H.Core.Test.Calculators
         {
             var currentYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 0,      // Set to 0 to set condition
                 PercentageOfProductYieldReturnedToSoil = 10,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
@@ -845,7 +845,7 @@ namespace H.Core.Test.Calculators
 
             var nextYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 0,      // Set to zero to set condition
                 PercentageOfProductYieldReturnedToSoil = 10,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
@@ -908,7 +908,7 @@ namespace H.Core.Test.Calculators
         {
             var currentYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 Yield = 1000,
                 PercentageOfRootsReturnedToSoil = 100,
                 CarbonConcentration = 0.45,
@@ -968,7 +968,7 @@ namespace H.Core.Test.Calculators
 
             var previousYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 PerennialStandGroupId = perennialGroupId,
                 Yield = 1000,
                 PercentageOfRootsReturnedToSoil = 100,
@@ -987,7 +987,7 @@ namespace H.Core.Test.Calculators
 
             var currentYearViewItem = new CropViewItem()
             {
-                CropType = CropType.HayMixed,
+                CropType = CropType.TameMixed,
                 PerennialStandGroupId = perennialGroupId,
                 Yield = 0,                          // Set yield to 0 so we can simulate the situation where the current year's below ground inputs are less than the previous year's inputs
                 PercentageOfRootsReturnedToSoil = 100,

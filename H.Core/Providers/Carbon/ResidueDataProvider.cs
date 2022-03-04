@@ -57,7 +57,7 @@ namespace H.Core.Providers.Carbon
             if (cropType.IsGrassland())
             {
                 // Only have values for grassland (native). If type is grassland (broken) or grassland (seeded), return values for grassland (native)
-                cropType = CropType.GrasslandNative;
+                cropType = CropType.RangelandNative;
             }
 
             var byCropType = _data.Where(x => x.CropType == cropType).ToList();

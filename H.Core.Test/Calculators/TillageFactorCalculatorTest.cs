@@ -75,7 +75,7 @@ namespace H.Core.Test.Calculators
         {
             Assert.AreEqual(0.9,
                             _calculator.CalculateTillageFactor(Province.Manitoba, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.HayLegume, 1));
+                                                               CropType.TameLegume, 1));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace H.Core.Test.Calculators
         {
             Assert.AreEqual(0.6,
                             _calculator.CalculateTillageFactor(Province.Manitoba, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.HayLegume, 2));
+                                                               CropType.TameLegume, 2));
         }
 
         #endregion

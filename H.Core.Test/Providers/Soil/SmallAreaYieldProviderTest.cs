@@ -141,7 +141,7 @@ namespace H.Core.Test.Providers.Soil
             const int year = 2018;
             const Province province = Province.PrinceEdwardIsland;
             const int polygon = 538001;
-            const CropType cropType = CropType.HayGrass;
+            const CropType cropType = CropType.TameGrass;
 
             // Wait until the async reading of the file has completed
             _manualResetEvent.WaitOne(5000, false);

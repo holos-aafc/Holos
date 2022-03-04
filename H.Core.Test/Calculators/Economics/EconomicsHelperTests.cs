@@ -84,7 +84,7 @@ namespace H.Core.Test.Calculators.Economics
 
             //tons
             var mixedHayTons =
-                _economicsProvider.Get(CropType.HayMixed, SoilFunctionalCategory.Brown, Province.Alberta);
+                _economicsProvider.Get(CropType.TameMixed, SoilFunctionalCategory.Brown, Province.Alberta);
             _economicsHelper.ConvertExpectedMarketPriceToMetricIfNecessary(mixedHayTons, _farm);
             var mixedHayPricePerKilo = 0.08;
 

@@ -286,11 +286,11 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return value * KgToLbsFactor / (HectaresToAcresFactor * GrainCornBushelToPoundsFactor);
                 case CropType.GrainSorghum:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * SorghumBushelToPoundsFactor);
-                case CropType.HayGrass:
+                case CropType.TameGrass:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * HayGrassBushelToPoundsFactor);
-                case CropType.HayLegume:
+                case CropType.TameLegume:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * LegumeBushelToPoundsFactor);
-                case CropType.HayMixed:
+                case CropType.TameMixed:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * HayMixedBushelToPoundsFactor);
                 case CropType.Lentils:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * LentilsBushelToPoundsFactor);
@@ -352,11 +352,11 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return value / KgToLbsFactor * (HectaresToAcresFactor * GrainCornBushelToPoundsFactor);
                 case CropType.GrainSorghum:
                     return value / KgToLbsFactor * (HectaresToAcresFactor * SorghumBushelToPoundsFactor);
-                case CropType.HayGrass:
+                case CropType.TameGrass:
                     return value / KgToLbsFactor * (HectaresToAcresFactor * HayGrassBushelToPoundsFactor);
-                case CropType.HayLegume:
+                case CropType.TameLegume:
                     return value / KgToLbsFactor * (HectaresToAcresFactor * LegumeBushelToPoundsFactor);
-                case CropType.HayMixed:
+                case CropType.TameMixed:
                     return value / KgToLbsFactor * (HectaresToAcresFactor * HayMixedBushelToPoundsFactor);
                 case CropType.Lentils:
                     return value / KgToLbsFactor * (HectaresToAcresFactor * LentilsBushelToPoundsFactor);
