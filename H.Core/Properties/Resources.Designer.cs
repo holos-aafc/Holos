@@ -4201,6 +4201,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rangeland (Native).
+        /// </summary>
+        public static string EnumRangelandNative {
+            get {
+                return ResourceManager.GetString("EnumRangelandNative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rapeseed (Brassica napus L.).
         /// </summary>
         public static string EnumRapeseedBrassicaNapusL {
@@ -4323,6 +4332,15 @@ namespace H.Core.Properties {
         public static string EnumSand {
             get {
                 return ResourceManager.GetString("EnumSand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeded grassland.
+        /// </summary>
+        public static string EnumSeededGrassland {
+            get {
+                return ResourceManager.GetString("EnumSeededGrassland", resourceCulture);
             }
         }
         
@@ -4899,6 +4917,33 @@ namespace H.Core.Properties {
         public static string EnumSwitchgrassUnderseededNoTill {
             get {
                 return ResourceManager.GetString("EnumSwitchgrassUnderseededNoTill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tame grass.
+        /// </summary>
+        public static string EnumTameGrass {
+            get {
+                return ResourceManager.GetString("EnumTameGrass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tame legume.
+        /// </summary>
+        public static string EnumTameLegume {
+            get {
+                return ResourceManager.GetString("EnumTameLegume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tame mixed (grass/legume).
+        /// </summary>
+        public static string EnumTameMixed {
+            get {
+                return ResourceManager.GetString("EnumTameMixed", resourceCulture);
             }
         }
         

@@ -4931,4 +4931,19 @@
   <data name="LabelUseCustomMilkProductionForEwes" xml:space="preserve">
     <value>Use custom milk production value for ewes</value>
   </data>
+  <data name="EnumRangelandNative" xml:space="preserve">
+    <value>Rangeland (Native)</value>
+  </data>
+  <data name="EnumSeededGrassland" xml:space="preserve">
+    <value>Seeded grassland</value>
+  </data>
+  <data name="EnumTameGrass" xml:space="preserve">
+    <value>Tame grass</value>
+  </data>
+  <data name="EnumTameLegume" xml:space="preserve">
+    <value>Tame legume</value>
+  </data>
+  <data name="EnumTameMixed" xml:space="preserve">
+    <value>Tame mixed (grass/legume)</value>
+  </data>
 </root>

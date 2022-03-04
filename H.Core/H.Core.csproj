@@ -545,6 +545,7 @@
     <Compile Include="Providers\Plants\EnergyRequirementsForCropsProvider_Table_38.cs" />
     <Compile Include="Providers\Plants\FertilizerApplicationRatesData.cs" />
     <Compile Include="Providers\Plants\FertilizerApplicationRatesProvider_Table_6.cs" />
+    <Compile Include="Providers\Plants\ForageUtilizationRateProvider.cs" />
     <Compile Include="Providers\Plants\LumCMaxAndKValuesForFallowPracticeChangeData.cs" />
     <Compile Include="Providers\Plants\LumCMaxAndKValuesForFallowPracticeChangeProvider_Table_2.cs" />
     <Compile Include="Providers\Plants\LumCMaxAndkValuesForPerennialCroppingChangeData.cs" />

@@ -613,5 +613,20 @@ namespace H.Core.Enumerations
         Cereals,
 
         #endregion
+
+        [LocalizedDescription("EnumRangelandNative", typeof(Resources))]
+        RangelandNative,
+
+        [LocalizedDescription("EnumSeededGrassland", typeof(Resources))]
+        SeededGrassland,
+
+        [LocalizedDescription("EnumTameGrass", typeof(Resources))]
+        TameGrass,
+
+        [LocalizedDescription("EnumTameLegume", typeof(Resources))]
+        TameLegume,
+
+        [LocalizedDescription("EnumTameMixed", typeof(Resources))]
+        TameMixed,
     }
 }
