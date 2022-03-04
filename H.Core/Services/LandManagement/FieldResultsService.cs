@@ -67,6 +67,7 @@ namespace H.Core.Services.LandManagement
         private readonly DefaultAmmoniaEmissionProvider_Table_39 _defaultAmmoniaEmissionFactorProvider = new DefaultAmmoniaEmissionProvider_Table_39();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly NitogenFixationProvider _nitrogenFixationProvider = new NitogenFixationProvider();
+        private readonly ForageUtilizationRateProvider _forageUtilizationRateProvider = new ForageUtilizationRateProvider();
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly ResidueDataProvider _residueDataProvider = new ResidueDataProvider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();

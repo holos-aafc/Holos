@@ -90,6 +90,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _lumCMax;
         private double _kValue;
         private double _nitrogenFixation;
+        private double _forageUtilizationRate;
 
         private Guid _perennialStandGroupId;
         private Guid _detailViewItemToComponentSelectionViewItemMap;
@@ -1035,6 +1036,17 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _ligninContent;
             set => SetProperty(ref _ligninContent, value);
+        }
+
+        /// <summary>
+        /// Grazing utilization rate depends on the type of forage rather than the type of grazing system or number of animals
+        ///
+        /// (%)
+        /// </summary>
+        public double ForageUtilizationRate
+        {
+            get => _forageUtilizationRate;
+            set => SetProperty(ref _forageUtilizationRate, value);
         }
 
         #endregion

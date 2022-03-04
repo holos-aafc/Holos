@@ -77,7 +77,8 @@ namespace H.Core.Services.LandManagement
             {
                 viewItem.TillageType = TillageType.NoTill;
                 viewItem.PastTillageType = TillageType.NoTill;
-                viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast; 
+                viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
+                viewItem.ForageUtilizationRate = _forageUtilizationRateProvider.GetUtilizationRate(viewItem.CropType);
             }
         }
 
