@@ -4946,4 +4946,7 @@
   <data name="EnumTameMixed" xml:space="preserve">
     <value>Tame mixed (grass/legume)</value>
   </data>
+  <data name="BarleySilageBasedDiet" xml:space="preserve">
+    <value>Barley silage based diet</value>
+  </data>
 </root>

@@ -234,6 +234,15 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Barley silage based diet.
         /// </summary>
+        public static string BarleySilageBasedDiet {
+            get {
+                return ResourceManager.GetString("BarleySilageBasedDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barley silage based diet.
+        /// </summary>
         public static string BarleySilageBasedDietType {
             get {
                 return ResourceManager.GetString("BarleySilageBasedDietType", resourceCulture);
