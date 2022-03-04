@@ -108,6 +108,11 @@ Perennial forages,Grassland (native),Canada,13,,,,,0,0.233,0.465,0.302,Bolinder 
 ,Hay-legume,Canada,13,,,,,0,0.571,0.26,0.169,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.072
 ,Hay-mixed,Canada,13,,,,,0,0.298,0.426,0.277,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.061
 ,Pasture ,Canada,13,,,,,0,0.317,0.414,0.269,Little et al. (2008),,15,15,15,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.049
-,Forage for seed,Canada,13,,,,,0.1,0.392,0.308,0.2,Perenial forages (Bolinder et al. 2007),,30,15,13,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.049
+,Rangeland (native),Canada,13,,,,,0,0.233,0.465,0.302,Bolinder et al. (2007),,15,15,15,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.049
+,Seeded grassland,Canada,13,,,,,0,0.317,0.414,0.269,Little et al. (2008),,15,15,15,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.049
+,Tame grass,Canada,13,,,,,0,0.441,0.339,0.22,Bolinder et al. (2007),,16,16,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.057
+,Tame legume,Canada,13,,,,,0,0.571,0.26,0.169,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.072
+,Tame mixed (grass/legume),Canada,13,,,,,0,0.298,0.426,0.277,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.061
+,Forage for seed,Canada,13,,,,,0.1,0.392,0.308,0.2,Perenial forages (Bolinder et al. 2007),,30,15,13,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.049
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Trees,Total tree fruits & nuts,Canada,84,,,,,,,,,,,2,10,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

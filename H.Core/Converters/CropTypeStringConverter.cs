@@ -425,6 +425,14 @@ namespace H.Core.Converters
                     return CropType.NFixingForages;
                 case "nonnfixingforages":
                     return CropType.NonNFixingForages;
+                case "rangelandnative":
+                    return CropType.RangelandNative;
+                case "seededgrassland":
+                    return CropType.SeededGrassland;
+                case "tamegrass":
+                    return CropType.TameGrass;
+                case "tamemixedgrasslegume":
+                    return CropType.TameMixed;
 
                 default:
                     {

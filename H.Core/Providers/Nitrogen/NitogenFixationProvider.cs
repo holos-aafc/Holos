@@ -50,6 +50,12 @@ namespace H.Core.Providers.Nitrogen
                 new NitrogenFixationResult() { CropType = CropType.HayMixed, Fixation =  12},
                 new NitrogenFixationResult() { CropType = CropType.Pasture, Fixation = 2 },
                 new NitrogenFixationResult() { CropType = CropType.ForageForSeed, Fixation = 4 },
+                new NitrogenFixationResult() { CropType = CropType.RangelandNative, Fixation = 0 },
+                new NitrogenFixationResult() { CropType = CropType.SeededGrassland, Fixation = 2 },
+                new NitrogenFixationResult() { CropType = CropType.TameGrass, Fixation = 0 },
+                new NitrogenFixationResult() { CropType = CropType.TameLegume, Fixation = 86 },
+                new NitrogenFixationResult() { CropType = CropType.TameMixed, Fixation = 12 },
+                new NitrogenFixationResult() { CropType = CropType.ForageForSeed, Fixation = 4 },
             };
         }
 

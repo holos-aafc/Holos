@@ -50,7 +50,7 @@ namespace H.Core.Test.Providers.Carbon
         {
             var result = _sut.GetData().ToList();            
 
-            Assert.AreEqual(89, result.Count);
+            Assert.AreEqual(94, result.Count);
         }
 
         [TestMethod]
@@ -183,7 +183,25 @@ namespace H.Core.Test.Providers.Carbon
             Assert.AreEqual(0.133, data.LigninContent);
         }
 
-        
+        [TestMethod]
+        public void GetPerennials()
+        {
+            ResidueData data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.RangelandNative, SoilFunctionalCategory.Black, Province.Alberta);
+            Assert.AreEqual(0.465, data.RelativeBiomassRoot);
+
+            data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.SeededGrassland, SoilFunctionalCategory.Black, Province.Alberta);
+            Assert.AreEqual(0.414, data.RelativeBiomassRoot);
+
+            data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.TameGrass, SoilFunctionalCategory.Black, Province.Alberta);
+            Assert.AreEqual(0.339, data.RelativeBiomassRoot);
+
+            data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.TameMixed, SoilFunctionalCategory.Black, Province.Alberta);
+            Assert.AreEqual(0.426, data.RelativeBiomassRoot);
+
+            data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.ForageForSeed, SoilFunctionalCategory.Black, Province.Alberta);
+            Assert.AreEqual(0.308, data.RelativeBiomassRoot);
+        }
+
         #endregion
     }
 }

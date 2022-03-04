@@ -4,11 +4,11 @@ namespace H.Core.Converters
 {
 	public abstract class ConverterBase
 	{
-		public ConverterBase()
+        protected ConverterBase()
 		{
 			HTraceListener.AddTraceListener();
 		}
-		//does not deal with removing accents since we will be parsing from the english values of the csv
+
 		protected string GetLettersAsLowerCase(string input)
 		{
 			var cleanedInput = "";
