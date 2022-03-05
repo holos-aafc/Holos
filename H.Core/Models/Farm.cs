@@ -284,6 +284,7 @@ namespace H.Core.Models
             set { this.SetProperty(ref _comments, value); }
         }
 
+        
         public Province Province
         {
             get { return _province; }

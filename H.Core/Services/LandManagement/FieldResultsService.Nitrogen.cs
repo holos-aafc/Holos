@@ -373,7 +373,7 @@ namespace H.Core.Services.LandManagement
                 cropType: viewItem.CropType);
 
             var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
-                region: farm.Province.GetRegion(),
+                region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
             var syntheticNitrogenModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
@@ -580,7 +580,7 @@ namespace H.Core.Services.LandManagement
                 cropType: viewItem.CropType);
 
             var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
-                region: farm.Province.GetRegion(),
+                region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
@@ -618,7 +618,7 @@ namespace H.Core.Services.LandManagement
                 cropType: viewItem.CropType);
 
             var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
-                region: farm.Province.GetRegion(),
+                region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
@@ -656,7 +656,7 @@ namespace H.Core.Services.LandManagement
                 cropType: viewItem.CropType);
 
             var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
-                region: farm.Province.GetRegion(),
+                region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
@@ -1596,7 +1596,7 @@ namespace H.Core.Services.LandManagement
         {
             var fractionOfLandOccupiedByLowerPortionsOfLandscape = _ecodistrictDefaultsProvider.GetFractionOfLandOccupiedByPortionsOfLandscape(
                 ecodistrictId: farm.DefaultSoilData.EcodistrictId,
-                province: farm.Province);
+                province: farm.DefaultSoilData.Province);
 
             var emissionsDueToLandscapeAndTopography = _singleYearNitrogenEmissionsCalculator.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
@@ -1606,7 +1606,7 @@ namespace H.Core.Services.LandManagement
             var baseEcodistrictFactor = _singleYearNitrogenEmissionsCalculator.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,
                 soilTexture: farm.DefaultSoilData.SoilTexture,
-                region: farm.Province.GetRegion());
+                region: farm.DefaultSoilData.Province.GetRegion());
 
             return baseEcodistrictFactor;
         } 

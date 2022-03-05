@@ -245,7 +245,7 @@ namespace H.Core.Services.LandManagement
                         year: year,
                         polygon: farm.PolygonId,
                         cropType: viewItem.CropType,
-                        province: farm.Province);
+                        province: farm.DefaultSoilData.Province);
 
                     if (smallAreaYieldData != null)
                     {
