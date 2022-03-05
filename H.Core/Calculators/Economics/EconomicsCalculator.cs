@@ -463,7 +463,7 @@ namespace H.Core.Calculators.Economics
 
         private bool EconomicDataExistsForProvinceOrCrop(Farm farm)
         {
-            if (!HasEconDataForProvince(farm.Province))
+            if (!HasEconDataForProvince(farm.DefaultSoilData.Province))
             {
                 return false;
             }

@@ -141,7 +141,7 @@ namespace H.Core.Services.LandManagement
         public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
         {
             var energyRequirements = _energyRequirementsForCropsProviderTable38.GetEnergyData(
-                province: farm.Province,
+                province: farm.DefaultSoilData.Province,
                 soilFunctionalCategory: farm.DefaultSoilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
                 cropType: viewItem.CropType);
@@ -271,7 +271,7 @@ namespace H.Core.Services.LandManagement
                 year: viewItem.Year,
                 polygon: farm.PolygonId,
                 cropType: viewItem.CropType,
-                province: farm.Province);
+                province: farm.DefaultSoilData.Province);
 
             if (smallAreaYield != null)
             {
@@ -503,7 +503,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm)
         {
-            var province = farm.Province;
+            var province = farm.DefaultSoilData.Province;
             var soilData = farm.DefaultSoilData;
 
             // Start with a default then get lookup value if one is available
@@ -545,7 +545,7 @@ namespace H.Core.Services.LandManagement
             cropViewItem.CropEconomicData = _economicsProvider.Get(
                 cropType: cropViewItem.CropType,
                 soilFunctionalCategory: farm.DefaultSoilData.SoilFunctionalCategory,
-                province: farm.Province);
+                province: farm.DefaultSoilData.Province);
 
             _economicsHelper.ConvertValuesToMetricIfNecessary(cropViewItem.CropEconomicData, farm);
 
@@ -559,7 +559,7 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem, 
             Farm farm)
         {
-            var province = farm.Province;
+            var province = farm.DefaultSoilData.Province;
             var residueData = this.GetResidueData(viewItem, farm);
             if (residueData != null)
             {

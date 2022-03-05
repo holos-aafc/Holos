@@ -305,7 +305,7 @@ namespace H.Core.Services.LandManagement
         public double CalculateTillageFactor(CropViewItem viewItem, Farm farm)
         {
             var result = _tillageFactorCalculator.CalculateTillageFactor(
-                province: farm.Province,
+                province: farm.DefaultSoilData.Province,
                 soilFunctionalCategory: farm.GeographicData.DefaultSoilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
                 cropType: viewItem.CropType,
@@ -323,7 +323,7 @@ namespace H.Core.Services.LandManagement
 
         public ResidueData GetResidueData(CropViewItem cropViewItem, Farm farm)
         {
-            var province = farm.Province;
+            var province = farm.DefaultSoilData.Province;
             var geographicData = farm.GeographicData;
             var soilData = geographicData.DefaultSoilData;
             if (soilData == null)

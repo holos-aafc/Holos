@@ -278,13 +278,19 @@ namespace H.Core.Models
             set { SetProperty(ref _enableDebugDisplay, value); }
         }
 
+        /// <summary>
+        /// Additional user comments for the <see cref="Farm"/>.
+        /// </summary>
         public string Comments
         {
             get { return _comments; }
             set { this.SetProperty(ref _comments, value); }
         }
 
-        
+        /// <summary>
+        /// Indicates which province the user has selected. Do not use this value for calculations/lookups. Use the province associated with the
+        /// <see cref="DefaultSoilData"/> instead since the two values for the province could differ if the selected polygon spans two polygons.
+        /// </summary>
         public Province Province
         {
             get { return _province; }
@@ -302,12 +308,13 @@ namespace H.Core.Models
             set { this.SetProperty(ref _geographicData, value); }
         }
 
+        /// <summary>
+        /// The default soil data selected by the user if there was more than one soil component found within the selected polygon.
+        /// </summary>
         public SoilData DefaultSoilData
         {
             get
             {
-
-
                 return GeographicData?.DefaultSoilData;
             }
         }
@@ -553,7 +560,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// When enabled, will show a simplifed results screen instead of the composite results view (with the various associated tabs). Also, enabling this will skip over the details
+        /// When enabled, will show a simplified results screen instead of the composite results view (with the various associated tabs). Also, enabling this will skip over the details
         /// view. Detail view items must still be created when skipping over the details view.
         /// </summary>
         public bool ShowSimplifiedResults
