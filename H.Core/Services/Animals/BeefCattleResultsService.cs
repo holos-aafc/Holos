@@ -75,6 +75,13 @@ namespace H.Core.Services.Animals
                 dietaryNetEnergyConcentration: managementPeriod.SelectedDiet.DietaryNetEnergyConcentration,
                 weight: dailyEmissions.AnimalWeight);
 
+            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
+                dryMatterIntake: dailyEmissions.DryMatterIntake,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
+
             // Equation 3.1.2-3
             dailyEmissions.GrossEnergyIntake = CalculateGrossEnergyIntakeForCalves(
                 dryMatterIntake: dailyEmissions.DryMatterIntake);
@@ -543,6 +550,13 @@ namespace H.Core.Services.Animals
             // Equation 12.3.1-1
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
+
+            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
+                dryMatterIntake: dailyEmissions.DryMatterIntake,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             // Equation 12.3.1-5
             dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(

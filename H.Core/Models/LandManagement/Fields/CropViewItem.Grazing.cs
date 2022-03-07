@@ -6,6 +6,8 @@ namespace H.Core.Models.LandManagement.Fields
     {
         #region Fields
 
+        private double _totalCarbonUptakeByGrazingAnimals;
+
         private ObservableCollection<GrazingViewItem> _grazingViewItems;
 
         #endregion
@@ -16,6 +18,18 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _grazingViewItems;
             set => SetProperty(ref _grazingViewItems, value);
+        }
+
+        /// <summary>
+        /// Equation 12.3.2-1
+        /// Equation 12.3.2-2
+        /// 
+        /// (kg C)
+        /// </summary>
+        public double TotalCarbonUptakeByGrazingAnimals
+        {
+            get => _totalCarbonUptakeByGrazingAnimals;
+            set => SetProperty(ref _totalCarbonUptakeByGrazingAnimals, value);
         }
 
         #endregion

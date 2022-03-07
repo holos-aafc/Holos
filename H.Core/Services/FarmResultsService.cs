@@ -218,11 +218,13 @@ namespace H.Core.Services
             farmResults.MineralN2OEmissionsResults = _fieldResultsService.CalculateMineralN2OEmissionsForFarm(farmResults);
             farmResults.ManureN2OEmissionResults = _fieldResultsService.CalculateManureN2OEmissionsForFarm(farmResults);
 
+            // Before we can model multi-year carbon, we need animal results so we can calculate carbon uptake by grazing animals
+
             //Field results
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
             farmResults.FinalFieldResultViewItems.AddRange(finalFieldResults);
 
-            // Manure calculations - must be calculated after field results and animal results have been calculated.
+            // Manure calculations - must be calculated after both field and animal results have been calculated.
             this.UpdateStorageTanks(farmResults);
 
             //Energy
@@ -240,6 +242,31 @@ namespace H.Core.Services
             Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results for farm: '{farm.Name}' calculated. {farmResults.ToString()}");
 
             return farmResults;
+        }
+
+        public void CalculateCarbonUptakeByGrazingAnimals(FarmEmissionResults farmEmissionResults)
+        {
+            var farm = farmEmissionResults.Farm;
+
+            var totalUptakeForField = 0d;
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+                foreach (var grazingViewItem in viewItem.GrazingViewItems)
+                {
+                    var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                    if (animalComponentEmissionsResults != null)
+                    {
+                        var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                        if (groupEmissionResults != null)
+                        {
+                            totalUptakeForField += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                        }
+                    }
+                }
+
+                viewItem.TotalCarbonUptakeByGrazingAnimals = totalUptakeForField;
+            }
         }
 
         /// <summary>
@@ -480,6 +507,5 @@ namespace H.Core.Services
         }
 
         #endregion
-
     }
 }

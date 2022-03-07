@@ -400,6 +400,80 @@ namespace H.Core.Test.Services
             Assert.AreEqual(300, manureTank.TotalAvailableManureNitrogenAvailableForLandApplication);
         }
 
+        [TestMethod]
+        public void CalculateCarbonUptakeByGrazingAnimals()
+        {
+            var farm = new Farm();
+            var fieldSystemComponent = new FieldSystemComponent();
+            var cropViewItem = new CropViewItem();
+
+            var cowCalfComponent = new CowCalfComponent();
+            var cowCalfComponentGuid = Guid.NewGuid();
+            cowCalfComponent.Guid = cowCalfComponentGuid;
+
+            var animalGroup = new AnimalGroup();
+            var animalGroupGuid = Guid.NewGuid();
+            animalGroup.Guid = animalGroupGuid;
+
+            var managementPeriod = new ManagementPeriod();
+            var managementPeriodGuid = Guid.NewGuid();
+            managementPeriod.Guid = managementPeriodGuid;
+
+            var grazingViewItem = new GrazingViewItem()
+            {
+                AnimalComponentGuid = cowCalfComponentGuid,
+                AnimalGroupGuid = animalGroupGuid,
+                ManagementPeriodGuid = managementPeriodGuid,
+            };
+
+            cropViewItem.GrazingViewItems.Add(grazingViewItem);
+            fieldSystemComponent.CropViewItems.Add(cropViewItem);
+
+            animalGroup.ManagementPeriods.Add(managementPeriod);
+            cowCalfComponent.Groups.Add(animalGroup);
+
+            farm.Components.Add(fieldSystemComponent);
+            farm.Components.Add(cowCalfComponent);
+
+            var farmEmissionResults = new FarmEmissionResults()
+            {
+                Farm = farm,
+                AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>()
+                {
+                    new AnimalComponentEmissionsResults() 
+                    {
+                        Component = cowCalfComponent, 
+                        EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() 
+                        {
+                            new AnimalGroupEmissionResults()
+                            {
+                                AnimalGroup = animalGroup,
+                                GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
+                                {
+                                    new GroupEmissionsByMonth(new MonthsAndDaysData(), new List<GroupEmissionsByDay>()
+                                    {
+                                        new GroupEmissionsByDay()
+                                        {
+                                            TotalCarbonUptakeForGroup = 10,
+                                        },
+
+                                        new GroupEmissionsByDay()
+                                        {
+                                            TotalCarbonUptakeForGroup = 20,
+                                        },
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            _farmResultsService.CalculateCarbonUptakeByGrazingAnimals(farmEmissionResults: farmEmissionResults);
+
+            Assert.AreEqual(30, cropViewItem.TotalCarbonUptakeByGrazingAnimals);
+        }
+
         #endregion
     }
 }

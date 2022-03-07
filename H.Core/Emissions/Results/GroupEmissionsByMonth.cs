@@ -369,6 +369,19 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Total carbon uptake by all animals in the group for the month.
+        ///
+        /// (kg C)
+        /// </summary>
+        public double TotalMonthlyCarbonUptake
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.TotalCarbonUptakeForGroup);
+            }
+        }
+
+        /// <summary>
         /// (kg N)
         /// </summary>
         public double MonthlyOrganicNitrogenInStoredManure 

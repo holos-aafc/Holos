@@ -26,6 +26,8 @@ namespace H.Core.Emissions.Results
         private double _entericMethaneEmissionRate;
         private double _entericMethaneEmission;
         private double _dryMatterIntake;
+        private double _dryMatterIntakeForGroup;
+        private double _carbonUptake;
         private double _dryMatterIntakeMax;
         private double _crudeFatIntake;
         private double _crudeProteinIntake;
@@ -313,6 +315,19 @@ namespace H.Core.Emissions.Results
         {
             get => _dryMatterIntake;
             set => SetProperty(ref _dryMatterIntake, value);
+        }
+
+        /// <summary>
+        /// Equation 12.3.1-4
+        ///
+        /// Amount of carbon foraged by all animals in group
+        ///
+        /// (kg C day^-1)
+        /// </summary>
+        public double TotalCarbonUptakeForGroup
+        {
+            get => _carbonUptake;
+            set => SetProperty(ref _carbonUptake, value);
         }
 
         /// <summary>
@@ -1329,6 +1344,17 @@ namespace H.Core.Emissions.Results
         { 
             get => _flowOfStoredVolatileSolidsEnteringDigestor; 
             set => SetProperty(ref _flowOfStoredVolatileSolidsEnteringDigestor, value); 
+        }
+
+        /// <summary>
+        /// Equation 12.3.1-2
+        ///
+        /// (kg group^-1 day^-1)
+        /// </summary>
+        public double DryMatterIntakeForGroup
+        {
+            get => _dryMatterIntakeForGroup;
+            set => SetProperty(ref _dryMatterIntakeForGroup, value);
         }
 
         #endregion

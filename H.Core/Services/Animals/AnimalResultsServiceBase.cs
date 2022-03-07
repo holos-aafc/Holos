@@ -2071,6 +2071,19 @@ namespace H.Core.Services.Animals
             return result;
         }
 
+        /// <summary>
+        /// Calculate the total daily carbon uptake.
+        /// </summary>
+        /// <param name="totalDailyDryMatterIntakeForGroup">Total dry matter intake for all animals in the group.</param>
+        /// <returns>Total carbon uptake by the group of animals (kg C day^-1)</returns>
+        public double CaclulateDailyCarbonUptakeForGroup(
+            double totalDailyDryMatterIntakeForGroup)
+        {
+            var result = totalDailyDryMatterIntakeForGroup * CoreConstants.CarbonConcentration;
+
+            return result;
+        }
+
         #endregion
     }
 }

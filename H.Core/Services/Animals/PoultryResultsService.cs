@@ -151,6 +151,14 @@ namespace H.Core.Services.Animals
                 var poultryDietData = _dietInformationProvider.Get(managementPeriod.AnimalType);
 
                 dailyEmissions.DryMatterIntake = poultryDietData.DailyMeanIntake;
+
+                dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
+                    dryMatterIntake: dailyEmissions.DryMatterIntake,
+                    numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+                dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+                    totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
+
                 managementPeriod.SelectedDiet.CrudeProtein = poultryDietData.CrudeProtein;
 
                 dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(

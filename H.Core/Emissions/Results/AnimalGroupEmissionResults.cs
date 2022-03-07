@@ -70,6 +70,14 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kg C)
+        /// </summary>
+        public double TotalCarbonUptakeByAnimals()
+        {
+            return GroupEmissionsByMonths.Sum(groupEmisionsByMonth => groupEmisionsByMonth.TotalMonthlyCarbonUptake);
+        }
+
+        /// <summary>
         /// (kg head^-1 day^-1)
         /// </summary>
         public double TotalDryMatterIntake
