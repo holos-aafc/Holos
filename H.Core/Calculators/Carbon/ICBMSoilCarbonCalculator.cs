@@ -47,11 +47,16 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.CarbonInputFromProduct = this.CalculateCarbonInputFromProduct(
+            var carbonInputFromProduct = this.CalculateCarbonInputFromProduct(
                 previousYearViewItem: previousYearViewItem,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
+
+            // Subtract carbon utilized from grazing animals and carbon exported as bales
+            var resultingCarbonInputFromProduct = carbonInputFromProduct - currentYearViewItem.TotalCarbonUtilizedByGrazingAnimals;
+
+            currentYearViewItem.CarbonInputFromProduct = resultingCarbonInputFromProduct;
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
                 previousYearViewItem: previousYearViewItem,

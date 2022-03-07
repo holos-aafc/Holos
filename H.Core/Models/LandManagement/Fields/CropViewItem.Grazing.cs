@@ -32,6 +32,24 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _totalCarbonUptakeByGrazingAnimals, value);
         }
 
+        /// <summary>
+        /// Equation 12.3.2-4
+        ///
+        /// (kg C)
+        /// </summary>
+        public double TotalCarbonUtilizedByGrazingAnimals
+        {
+            get
+            {
+                if (this.ForageUtilizationRate <= 0)
+                {
+                    return 0;
+                }
+
+                return this.TotalCarbonUptakeByGrazingAnimals * (1.0 / (this.ForageUtilizationRate / 100.0));
+            }
+        }
+
         #endregion
     }
 }
