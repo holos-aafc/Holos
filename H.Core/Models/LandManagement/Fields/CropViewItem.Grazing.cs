@@ -24,6 +24,9 @@ namespace H.Core.Models.LandManagement.Fields
         /// Equation 12.3.2-1
         /// Equation 12.3.2-2
         /// 
+        /// The total carbon uptake from grazing animals (this will be more than is actually utilized). Use
+        /// <see cref="TotalCarbonUtilizedByGrazingAnimals"/> for calculations.
+        /// 
         /// (kg C)
         /// </summary>
         public double TotalCarbonUptakeByGrazingAnimals
@@ -46,7 +49,9 @@ namespace H.Core.Models.LandManagement.Fields
                     return 0;
                 }
 
-                return this.TotalCarbonUptakeByGrazingAnimals * (1.0 / (this.ForageUtilizationRate / 100.0));
+                var result = this.TotalCarbonUptakeByGrazingAnimals *  (this.ForageUtilizationRate / 100.0);
+
+                return result;
             }
         }
 

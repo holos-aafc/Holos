@@ -54,7 +54,10 @@ namespace H.Core.Calculators.Carbon
                 farm: farm);
 
             // Subtract carbon utilized from grazing animals and carbon exported as bales
-            var resultingCarbonInputFromProduct = carbonInputFromProduct - currentYearViewItem.TotalCarbonUtilizedByGrazingAnimals;
+
+            // Get total field value so are working with same units
+            var lossesFromGrazing = currentYearViewItem.TotalCarbonUtilizedByGrazingAnimals;
+            var resultingCarbonInputFromProduct = (carbonInputFromProduct ) - lossesFromGrazing;
 
             currentYearViewItem.CarbonInputFromProduct = resultingCarbonInputFromProduct;
 

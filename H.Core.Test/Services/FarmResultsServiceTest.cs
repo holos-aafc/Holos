@@ -469,7 +469,7 @@ namespace H.Core.Test.Services
                 }
             };
 
-            _farmResultsService.CalculateCarbonUptakeByGrazingAnimals(farmEmissionResults: farmEmissionResults);
+            _farmResultsService.CalculateCarbonLostByGrazingAnimals(farmEmissionResults: farmEmissionResults);
 
             Assert.AreEqual(30, cropViewItem.TotalCarbonUptakeByGrazingAnimals);
         }

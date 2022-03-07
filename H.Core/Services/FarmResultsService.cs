@@ -219,6 +219,7 @@ namespace H.Core.Services
             farmResults.ManureN2OEmissionResults = _fieldResultsService.CalculateManureN2OEmissionsForFarm(farmResults);
 
             // Before we can model multi-year carbon, we need animal results so we can calculate carbon uptake by grazing animals
+            this.CalculateCarbonLostByGrazingAnimals(farmResults);
 
             //Field results
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
@@ -244,28 +245,49 @@ namespace H.Core.Services
             return farmResults;
         }
 
-        public void CalculateCarbonUptakeByGrazingAnimals(FarmEmissionResults farmEmissionResults)
+        public void CalculateCarbonLostByGrazingAnimals(FarmEmissionResults farmEmissionResults)
         {
             var farm = farmEmissionResults.Farm;
 
-            var totalUptakeForField = 0d;
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
-                var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-                foreach (var grazingViewItem in viewItem.GrazingViewItems)
+                var totalLossForField = 0d;
+
+                foreach (var viewItem in fieldSystemComponent.CropViewItems)
                 {
-                    var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-                    if (animalComponentEmissionsResults != null)
+                    foreach (var grazingViewItem in viewItem.GrazingViewItems)
                     {
-                        var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-                        if (groupEmissionResults != null)
+                        var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                        if (animalComponentEmissionsResults != null)
                         {
-                            totalUptakeForField += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                            var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                            if (groupEmissionResults != null)
+                            {
+                                totalLossForField += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                            }
                         }
                     }
-                }
 
-                viewItem.TotalCarbonUptakeByGrazingAnimals = totalUptakeForField;
+                    viewItem.TotalCarbonUptakeByGrazingAnimals = totalLossForField;
+                }
+            }
+        }
+
+        public void CalculateCarbonLostFromHayExports(FarmEmissionResults farmEmissionResults)
+        {
+            var farm = farmEmissionResults.Farm;
+
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                var totalLossForField = 0d;
+
+                foreach (var viewItem in fieldSystemComponent.CropViewItems)
+                {
+                    foreach (var viewItemHayImportViewItem in viewItem.HayImportViewItems)
+                    {
+                        
+                    }   
+                }
             }
         }
 
