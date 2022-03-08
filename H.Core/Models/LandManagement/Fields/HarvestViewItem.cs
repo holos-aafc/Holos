@@ -16,6 +16,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _baleWeight;
         private double _harvestLossPercentage;
 
+        private Guid _fieldGuid;
+
         #endregion
 
         #region Constructors
@@ -65,6 +67,15 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _harvestLossPercentage;
             set => SetProperty(ref _harvestLossPercentage, value);
+        }
+
+        /// <summary>
+        /// The <see cref="FieldSystemComponent"/> GUID that produced this harvest.
+        /// </summary>
+        public Guid FieldGuid
+        {
+            get => _fieldGuid;
+            set => SetProperty(ref _fieldGuid, value);
         }
 
         #endregion

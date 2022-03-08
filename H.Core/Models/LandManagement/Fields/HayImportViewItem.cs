@@ -17,6 +17,7 @@ namespace H.Core.Models.LandManagement.Fields
         private int _numberOfBales;
         private double _moistureContentAsPercentage;
         private double _baleWeight;
+        private Guid _fieldSourceGuid;
 
         #endregion
 
@@ -76,6 +77,15 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _baleWeight;
             set => SetProperty(ref _baleWeight, value);
+        }
+
+        /// <summary>
+        /// The field from where these bases came from (if sourced on farm).
+        /// </summary>
+        public Guid FieldSourceGuid
+        {
+            get => _fieldSourceGuid;
+            set => SetProperty(ref _fieldSourceGuid, value);
         }
 
         #endregion

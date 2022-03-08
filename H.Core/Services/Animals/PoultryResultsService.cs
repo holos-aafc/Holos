@@ -159,11 +159,9 @@ namespace H.Core.Services.Animals
                 dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
                     totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
-                managementPeriod.SelectedDiet.CrudeProtein = poultryDietData.CrudeProtein;
-
                 dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
-                    crudeProtein: managementPeriod.SelectedDiet.CrudeProtein);
+                    crudeProtein: poultryDietData.CrudeProtein);
 
                 if (managementPeriod.AnimalType == AnimalType.ChickenHens)
                 {

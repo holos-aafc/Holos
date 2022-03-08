@@ -283,10 +283,6 @@ namespace H.Core.Services
 
                 foreach (var viewItem in fieldSystemComponent.CropViewItems)
                 {
-                    foreach (var viewItemHayImportViewItem in viewItem.HayImportViewItems)
-                    {
-                        
-                    }   
                 }
             }
         }

@@ -27,6 +27,8 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
+                case AnimalType.ChickenCockerels:
+                case AnimalType.ChickenRoosters:
                 case AnimalType.Broilers:
                 {
                     return new PoultryDietInformationProviderData()
@@ -39,6 +41,7 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
+                case AnimalType.ChickenHens:
                 case AnimalType.LayersDryPoultry:
                 case AnimalType.LayersWetPoultry:
                 {
@@ -55,7 +58,7 @@ namespace H.Core.Providers.Animals
 
                 default:
                 { 
-                    Trace.TraceError($"No data for '{animalType.GetDescription()}'");
+                    Trace.TraceError($"{nameof(PoultryDietInformationProvider_Table_44)}.{nameof(Get)}: No data for '{animalType.GetDescription()}'");
 
                     return new PoultryDietInformationProviderData();
                 }
