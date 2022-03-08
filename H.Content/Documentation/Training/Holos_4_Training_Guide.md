@@ -3,6 +3,7 @@
     <br>
 </p>
 
+
 The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. optional inputs.
 
 For the purpose of this training, we are going to create a farm that has an annual beef production system, and a feed crop production system. The farm is located in Manitoba near Portage La Prairie. 
@@ -125,7 +126,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 </p> 
 <br>
 
-The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
+The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific Pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
 
 <div style="page-break-after: always"></div>
 
@@ -153,10 +154,11 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 2. Select "**Wheat**" as the main crop and "**Hairy Vetch**" as the cover crop in "**Step 2**".
 
 3. Under the "**General**" tab:
-    * Select "**Reduced Tillage**" as the tillage type.
     * Enter a yield of **3000 kg/ha** (wet weight). The dry weight value will automatically be calculated based on the moisture content of crop value.
+    * Select "**Reduced Tillage**" as the tillage type.
     * Enter "**200**" as the amount of irrigation.
     * Select '**0**' as the pesticide passes.
+    * Leave Harvest method as default selection.
     
 <br>
 
@@ -168,7 +170,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <br> 
 
 
-4. Select the ‘**Fertilizer**’ tab and click the “**Add Fertilizer Application**” button. Holos has now added a new fertilizer application for this field and will suggest Urea as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the “Show Additional Information” button (e.g., season of application, different fertilizer blend, etc.).
+4. Select the ‘**Fertilizer**’ tab and click the “**Add Fertilizer Application**” button. Holos has now added a new fertilizer application for this field and will suggest Urea as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the “**Show Additional Information**” button (e.g., season of application, different fertilizer blend, etc.).
 
 <br>
 <p align="center">
@@ -191,9 +193,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 The cow-calf operation (defined later on) relies on native pasture for the summer months (May through October).
 
-1. Drag a new “**Field**” tab component to your list of components. Enter the name “**Native grassland**” in the ‘Field name’ input box.
+1. Drag a new “**Field**” tab component to your list of components. Enter the name “**Native Grassland**” in the ‘Field name’ input box.
 2. Enter "**100**" as the total area of the field.
-3. Select "**Pasture**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the 'Winter/Cover/Undersown Crop' area when a perennial crop is selected.
+3. Select "**Seeded Grassland**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the 'Winter/Cover/Undersown Crop' area when a perennial crop is selected.
 4. Keep '**0**' as the amount of irrigation and pesticide passes.
 5. No fertilizer is used for this crop.
 
@@ -201,7 +203,7 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 <p align="center">
     <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 12: Pastures/Grasslands information.</em>
+    <em>Figure 12: Native Grasslands information.</em>
 </p> 
 <br>
 
@@ -219,10 +221,10 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 1. Add one "**Crop Rotation**" component from the available components.
 2. To expand the horizontal space available in Holos, click on "**View**" from the top menu bar and select "**Hide List of Available Components**".
 3. The rotation of this field **begins in 1985 and ends in 2022**. Under step 1, please ensure that these two values are set as the start and end year respectively.
-4. Enter "**70**" ha as the total area of this field.
-5. Under **Step 2** change the crop to **Barley**. The year for this crop should be 2022.
-    * Under the **General Tab** change the tillage type to **Reduced Tillage**.
-    * Enter **3000** kg/ha (wet weight) as the yield for this crop. 
+4. Enter "**70**" ha as the **total area** of this field.
+5. Under **Step 2** change the crop to **Barley**. The **year** for this crop should be 2022.
+    * Under the **General Tab** enter **3000** kg/ha (wet weight) as the **yield** for this crop.
+    * Change the **tillage type** to **Reduced Tillage**.
     * Keep **0** as the amount of irrigation and number of pesticide passes.
 6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. Note that Holos sets the year for this new crop to 2021 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985. 
 
@@ -233,9 +235,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 <br>
 
-7. For this newly added crop select "**Mixed Hay/Hay Mixed**" as the crop type.
+7. For this newly added crop select "**Tame Mixed(grass/legume)**" as the crop type.
 
-8. Click on the "**Add crop****" button a final time. For this third crop, select "Hay Mixed**" once again as the crop type.
+8. Click on the "**Add crop****" button one more time. For this third crop, select "**Tame Mixed(grass/legume)** once again as the crop type.
 
 <br>
 <p align="center">
@@ -246,17 +248,17 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 <br>
 
 
-9. Now add harvest data to each of the mixed hay crops. You will need to select each **mixed hay** crop and add the harvest data to that specific crop. So select the first mixed hay crop (2021) and then:
+9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2021) and then:
     * Go under the **Harvest Tab** and click **Add Harvest Data** button to create a new harvest.
     * Select a Harvest date of "August 31, 2021", assuming the harvest is done on the same day every year.
     * Select **Mid** for **Forage growth stage**.
     * Enter **5** as the total number of bales.
     * Enter **500** as the **Wet bale weight**.
     
-10. Repeat the above steps (step 9) for the second mixed hay crop.
+10. Repeat the above steps (step 9) for the second tame mixed crop.
 
 
-If the hay field is harvested more than once, the “Add Harvest/Grazing Date” button can be used to add subsequent harvests.
+If the tame mixed field is harvested more than once, the “Add Harvest Date” button can be used to add subsequent harvests.
 
 <div style="page-break-after: always"></div>
 
@@ -265,7 +267,7 @@ If the hay field is harvested more than once, the “Add Harvest/Grazing Date”
 
 Click the view menu item again and uncheck **Hide List of Available Components** option so that we can see all of the available components again.
 
-Adding animal components follows the exact same approach that was used for land management components. Under the **Beef Production** category in the available components, drag and drop one **Beef Cow-Calf** component to the **My farm** section on the right. Replacement heifers will not be used in this example, so we will remove this group by clicking the **X** icon right next to its entry under **Step 1**.
+Adding animal components follows the exact same approach that was used for land management components. Under the **Beef Production** category in the available components, drag and drop one **Beef Cow-Calf** component to the **My farm** section on the right. **Replacement heifers** will not be used in this example, so we will remove this group by clicking the **X** icon right next to its entry under **Step 1**.
 
 <br>
 <p align="center">
@@ -354,12 +356,11 @@ Click on the management period named **Summer Grazing**. Ensure that the start d
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy & protein diet** as the diet type.
+    * Select **High energy protein** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
     * Select **Native Grassland** as the pasture location.
-    * Select **Continuous/Mob Grazing** as the type of grazing.
  
 * Manure Tab:
     * Select **Pasture** as the manure handling system.
@@ -375,12 +376,11 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
     * Enter **150** as the number of animals.
 
 * **Diet Tab:**
-    * Select **Medium energy & protein diet** as the diet type.
+    * Select **Medium energy protein** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
     * Select **Native Grassland** as the pasture location.
-    * Select **Switchback Grazing** as the type of grazing.
  
 * Manure Tab:
     * Select **Pasture** as the manure handling system.
@@ -410,14 +410,14 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
     <br>
     <em>Figure 17: Copying data from another animal group</em>
 </p> 
-<br>  
+<br>
 
 
 #### Beef Calves
 
 Calves on our farm are born on March 1 and weaned on September 30 at the age of seven months. Using a final weaning rate of 85%, we will have 110 calves from March to September. Following the cows, calves will be in confinement for the months of March and April and will be grazing on pasture from May to September. This will result in two separate management periods.
 
-Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 31, 2020** and the second management period will span from **May 1, 2020 to September 30, 2020**.
+Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 31, 2021** and the second management period will span from **May 1, 2021 to September 30, 2021**.
 
 
 **Management Period # 1:**
@@ -429,7 +429,7 @@ Rename this period from Management Period # 1 to **Confinement**.
     * All other options as default.
 
 * **Diet Tab:**
-    * Select **Medium energy & protein diet** as the diet type.
+    * Select **Medium energy protein** as the diet type.
 
 * **Housing Tab:**
     * Select **Confined no barn** as the housing type.
@@ -447,12 +447,11 @@ Rename this period from Management Period # 2 to **Grazing**.
     * Enter **110** as the number of animals.
 
 * **Diet Tab:**
-    * Select **High energy & protein diet** as the diet type.
+    * Select **High energy protein** as the diet type.
 
 * **Housing Tab:**
     * Select **Pasture** as the housing type.
     * Select **Native Grassland** as the pasture location.
-    * Select **Continuous/mob grazing** as the type of grazing.
  
 * Manure Tab:
     * Select **Pasture** as the manure handling system.
@@ -461,7 +460,7 @@ Rename this period from Management Period # 2 to **Grazing**.
 
 
 
-## Beef stocker & backgrounder operation
+## Beef Stocker & Backgrounder operation
 
 To enter information on backgrounder and stocker animals, we will add a new “**Beef Stockers & Backgrounders**” component to our farm.
 
@@ -580,7 +579,7 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 ***“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg)”***
 
-1. Drag one "Chicken Meat Production" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of 400 animals. This means numbers of animals will be consistent throughout the management periods / year.
+1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of 400 animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
     - **Brooding Stage:** Start January 1st, 2022 - End January 22nd, 2022. 
     - **Rearing Stage:** Start January 23rd, 2022 - End June 26th, 2022.

@@ -13057,6 +13057,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Energy.
+        /// </summary>
+        public static string TitleEnergy {
+            get {
+                return ResourceManager.GetString("TitleEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected Market Price.
         /// </summary>
         public static string TitleExpectedMarketPrice {

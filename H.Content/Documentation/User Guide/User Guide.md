@@ -5,7 +5,7 @@ To install Holos navigate [here](https://https://aafc-holos.s3.amazonaws.com/set
 <p align="center">
  <img src="../../Images/UserGuide/chapter1/figure1-1.png" alt="Figure 1-1" width="450"/>
     <br>
-    <em>Figure 1.1 The install screen for Holos 4.</em>
+    <em>Figure 1.1: The install screen for Holos 4.</em>
 </p>
 
 The installation will take several minutes to complete, you can do other things on your computer while you wait for it to install.
@@ -13,7 +13,7 @@ The installation will take several minutes to complete, you can do other things 
 <p align="center">
  <img src="../../Images/UserGuide/chapter1/figure1-2.png" alt="Figure 1-2" width="450"/>
     <br>
-    <em>Figure 1.2 Loading bar for Holos install.</em>
+    <em>Figure 1.2: Loading bar for Holos install.</em>
 </p>
 
 Once the install is complete Holos should begin immediately, greeting you with a disclaimer shown below.
@@ -28,9 +28,9 @@ Once the install is complete Holos should begin immediately, greeting you with a
 You can access Holos from the Windows start menu. Open the start menu, Holos should be found under in a folder labeled AAFC-AAC.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter1/figure1-4.png" alt="Figure 1-4" width="450"/>
+ <img src="../../Images/UserGuide/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
     <br>
-    <em>Figure 1.4 Holos in the start menu.</em>
+    <em>Figure 1.4: Holos in the start menu.</em>
 </p>
 
 
@@ -54,21 +54,23 @@ Holos can handle multiple farms created by the user, each representing different
 
 1. On every Holos start-up you either create a new farm or open an existing farm or import a farm from file.  Figure  2.1 displays the interface you are greeted with on every start-up. Your initial start-up of Holos after installation will skip this screen and send you to step two, automatically selecting “New” for you, to begin the creation process. 
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-1.png" alt="Figure 2-1" width="550"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-1.png" alt="Figure 2-1" width="650"/>
     <br>
 		<em>
-			Create a new farm or open an existing farm selection screen or import from a file.
+			Figure 2-1: Create a new farm or open an existing farm selection screen or import from a file.
 			<br>
 			 A: Click “New” to create a new farm.
 		</em>
 </p>
+<br>
 
 
 2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. Once you have named your farm you must specify what mode you would like to operate Holos under, either “Basic” or “Advanced” mode.  When you are finished, click the “OK” button to proceed.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-2.png" alt="Figure 2-2" width="450"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-2.png" alt="Figure 2-2" width="650"/>
     <br>
     <em> Figure 2.2 Entering name, comments, and selecting operating mode.</em>
 </p>
@@ -77,9 +79,9 @@ Holos can handle multiple farms created by the user, each representing different
 3. If you chose “Advanced Mode” you can choose “Metric” or “Imperial” from the drop-down list (“Basic Mode” will skip this step and set your units to “Metric” for you). After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-3.png" alt="Figure 2-3" width="450"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-3.png" alt="Figure 2-3" width="650"/>
     <br>
-    <em>Figure 2.3 Unit of Measurement Selection Screen. 
+    <em>Figure: 2.3 Unit of Measurement Selection Screen. 
 	<br>
 	A: Please select a unit of measurement using the drop-down menu.</em>
 </p>
@@ -87,37 +89,38 @@ Holos can handle multiple farms created by the user, each representing different
 4. Select your province from the drop-down list and click “Next” on the bottom of the screen.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-4.png" alt="Figure 2-4" width="450"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-4.png" alt="Figure 2-4" width="650"/>
     <br>
 		<em>
-			Figure 2.4 Province Selection Screen. 
+			Figure: 2.4 Province Selection Screen. 
 			<br>
 			 A: Please select your Province with the drop-down menu here. 
 			<br>
 			 B: Click here once you have selected your Province.
 		</em>
 </p>
-
 <br>
 
 ## Selecting farm location
 
 1. On your screen, you will now see many regions for the province you selected. Each specific region is shaded in red.  You can adjust the magnification (i.e. zoom in/out) of the map by using your mouse wheel or by selecting the magnifying glass near the bottom of the screen. Please select the location of your farm by right-clicking on one of the regions (see figure 2.5). 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter2/figure2-5.png" alt="Figure 2-5" width="650"/>
     <br>
-    <em>Figure 2.5 Mousing over the regions on the map will display a tool tip near you mouse pointer.</em>
+    <em>Figure: 2.5 Hovering the mouse cursor over the regions on the map will display a tool tip near you mouse pointer.</em>
 </p>
+<br>
 
 2. When you have successfully clicked on one of the regions, Holos will download the climate data directly from NASA.  A progress bar will display the progress in downloading the data, it should only take a few seconds.   The details of that region will be displayed on the right side of the screen (Only for “Advanced Mode” see figure 2.6). You will see the location details, soil and hardiness zones, and climate details for the location you have selected. 
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-6.png" alt="Figure 2-6" width="650"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-6.png" alt="Figure 2-6" width="750"/>
     <br>
 	<em>
-		Figure 2.6 Farm Location Selection Screen. 
+		Figure: 2.6 Farm Location Selection Screen. 
 		<br>
 		A: Select the location of your farm in this section.
 		<br>
@@ -128,37 +131,42 @@ Holos can handle multiple farms created by the user, each representing different
 		D: The details of the soil zones, hardiness zones and climate details for your chosen location will be shown here.
 	</em>
 </p>
+<br>
 
 3. If the region you have selected has multiple soil types, please select the appropriate option for your farm based on either the predominant soil type in your area or the location of farming activities/management practices. The selected option will appear darker to indicate that it has been selected. 
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-7.PNG" alt="Figure 2-7" width="350"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-7.PNG" alt="Figure 2-7" width="450"/>
     <br>
-    <em>Figure 2.7 Soil Zone Selection.</em>
+    <em>Figure: 2.7 Soil Zone Selection.</em>
 </p>
-
+<br>
 
 4. If the region you have selected has multiple hardiness zones, please select the appropriate option for your farm. The selected option will appear shaded to indicate that it has been selected. To see the list of hardiness zones, please click on the tab at the top that says, “Hardiness Zones”.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-8.PNG" alt="Figure 2-8" width="350"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-8.PNG" alt="Figure 2-8" width="450"/>
     <br>
 	<em>
-		Figure 2.8 Hardiness Zone Selection. 
+		Figure: 2.8 Hardiness Zone Selection. 
 		<br>
 		A: Select the Hardiness Zone Tab, Soil Zone Tab, or the Climate Data Tab to see the available options.
 		<br>
 		B: Please select your hardiness zone here.
 	</em>
 </p>
+<br>
 
-5. Each region you select has access to the climate data.  Holos will load the appropriate climate data by default should you choose to ignore this tab.  If you would like to load custom data, you can load your own data from a file with “.csv” extension.  Holos will confirm your custom data is loaded
+5. Each region you select has access to the climate data.  Holos will load the appropriate climate data by default should you choose to ignore this tab.  If you would like to load custom data, you can load your own data from a file with “**.csv**” extension.  Holos will confirm your custom data is loaded
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-9.PNG" alt="Figure 2-9" width="650"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-9.PNG" alt="Figure 2-9" width="750"/>
     <br>
 	<em>
-		Figure 2.9 Climate Data Tab. 
+		Figure: 2.9 Climate Data Tab. 
 		<br>
 		A: Load your custom climate data file by clicking the button.
 		<br>
@@ -167,8 +175,9 @@ Holos can handle multiple farms created by the user, each representing different
 		C: If successful, you'll see a confirmation message.
 	</em>
 </p>
+<br>
 
-6. When you are finished selecting your soil type, hardiness zone and climate data, click “Next”.
+6. When you are finished selecting your soil type, hardiness zone and climate data, click “**Next**”.
 
 
 <br>
@@ -184,11 +193,11 @@ In order to import your own climate data into Holos, the file must be a Comma Se
 *	**Mean daily precipitation** – The mean precipitation of that day.
 * **Mean daily potential evapotranspiration (PET)** – The mean potential evapotranspiration of that day.
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-10.PNG" alt="Figure 2-10" width="450"/>
+ <img src="../../Images/UserGuide/chapter2/figure2-10.PNG" alt="Figure 2-10" width=""/>
     <br>
-    <em>Figure 2.10 custom climate data file format.</em>
+    <em>Figure: 2.10 custom climate data file format.</em>
 </p>
 
 <br>
@@ -203,11 +212,12 @@ When you are selecting your components for your farm, at the top of the screen a
 ## File Tab
 In the “**File**” tab there are several options to manage your farm(s) files as shown below
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-1.png" alt="Figure3-1" width="150"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-1.png" alt="Figure3-1" width=""/>
     <br>
     <em>
-		Figure 3.1 Holos File Tab Toolbar 
+		Figure 3.1: Holos File Tab Toolbar 
 		<br>
 		These are options available for the user to manipulate the files associated with Holos.
 	</em>
@@ -230,65 +240,67 @@ In the “**File**” tab there are several options to manage your farm(s) files
 2.	After you have clicked “**Open**”, a list of Farms that you have previously made will be shown with details such as the **Farm Name**, **Comments**, **Date Created** and **Date Modified.**
 3.	The details of your farms can be **sorted by clicking on each header**. For example, by clicking on “**Name**” the Farm files will be sorted alphabetically and **the type of sort will be indicated by an up or down arrow** located beside the header name. **For example**, if we want the name of the farms to be sorted from A-Z, then click the “**Name**” header until an up arrow appears and vice-versa.
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-2.png" alt="Figure3-2" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-2.png" alt="Figure3-2" width="650"/>
     <br>
     <em>
-		Figure 3.2 Open Farm Selection
+		Figure 3.2: Open Farm Selection
 		<br>
-		A: A display of all the pre-existing farms available in Holos
+		A: A display of all the pre-existing farms available in Holos.
 		<br>
-		B: Click on any of the data headers to sort the farms alphabetically
+		B: Click on any of the data headers to sort the farms alphabetically.
 		<br>
 		C: Displays the type of sort that has occurred on the list of farms. Up = A-Z, Down = Z-A.
 	</em>
 </p>
-
+<br>
 
 4. If you would like to **filter your farms more extensively** (i.e. a more detailed search), beside each header is a **funnel icon** that you can click. A window will pop up indicating options for you to filter the header you have chosen.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-3.png" alt="Figure3-3" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-3.png" alt="Figure3-3" width="650"/>
     <br>
     <em>
-		Figure 3.3 Additional Filtering For Farms Available For Each Data Header
+		Figure 3.3: Additional Filtering For Farms Available For Each Data Header.
 		<br>
-		Click on the funnel icon beside the header to apply additional filtering
+		Click on the funnel icon beside the header to apply additional filtering.
 	</em>
 </p>
-
+<br>
 
 5.	If you would like to **search the list of farms for a keyword**, there is a section at the top of the window called “**Full Text Search**”. Enter the word you would like to search and the results pertaining to that word will be highlighted
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-4.png" alt="Figure3-4" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-4.png" alt="Figure3-4" width="650"/>
     <br>
     <em>
-		Figure 3.4 Full Text Search Option
+		Figure 3.4: Full Text Search Option
 		<br>
-		A: Enter the text you would like to search for in the box
+		A: Enter the text you would like to search for in the box.
 		<br>
-		B: The results of the search will be highlighted as shown here
+		B: The results of the search will be highlighted as shown here.
 	</em>
 </p>
+<br>
 
 
 6. Select the farm you would like to open by clicking on one of the options. The selected farm will appear darker and will be indicated by a “>” on the left. To open the file, click “Open” at the bottom of the screen.
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-5.png" alt="Figure3-5" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-5.png" alt="Figure3-5" width="650"/>
     <br>
     <em>
-		Figure 3.5 Opening A Farm
+		Figure 3.5: Opening A Farm.
 		<br>
-		A: Select one of the farms in the list here
+		A: Select one of the farms in the list here.
 		<br>
-		B: Click here to open the farm that you have selected
+		B: Click here to open the farm that you have selected.
 	</em>
 </p>
-
 <br>
 
 #### Closing
@@ -309,16 +321,16 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 2.	You can **add a description** to each farm or modify the name of the farm by clicking on the appropriate box and modifying its contents. 
 3. Click on the **farm**(s) you would like to include and click “**Export**” at the bottom to **choose a location for your exported file. The selected farm(s) will appear shaded*.*
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-6.png" alt="Figure3-6" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-6.png" alt="Figure3-6" width="650"/>
     <br>
     <em>
-		Figure 3.6 Exporting a farm
+		Figure 3.6: Exporting a farm
 		<br>
-		A: list of farms available to export. Select the farm(s) you would like to export by clicking anywhere in their row
+		A: list of farms available to export. Select the farm(s) you would like to export by clicking anywhere in their row.
 		<br>
-		B: A row corresponding to a farm, you can modify any of the data values here such as the name and description
+		B: A row corresponding to a farm, you can modify any of the data values here such as the name and description.
 		<br>
 		C: Click here after you have chosen your farm(s) you would like to export.
 	</em>
@@ -331,20 +343,20 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen.
 8. Click “**Save**” to finish once you have selected a location
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-7.png" alt="Figure3-7" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-7.png" alt="Figure3-7" width="650"/>
     <br>
     <em>
-		Figure 3.7 Choosing A Location To Export The Chosen Farms
+		Figure 3.7: Choosing A Location To Export The Chosen Farms.
 		<br>
-		A: Navigate through your computer using this section
+		A: Navigate through your computer using this section.
 		<br>
-		B: Customize the name for your exported farm(s) here
+		B: Customize the name for your exported farm(s) here.
 		<br>
-		C: Click “Save” to finalize the exporting of your farm(s)
+		C: Click “Save” to finalize the exporting of your farm(s).
 	</em>
 </p>
-
 <br>
 
 
@@ -353,17 +365,18 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 1.	To import your farm(s), click “**Import**” under the “**File**” tab. This will open a window (shown below) were you can see the locations of files on your computer. 
 2. Navigate to the file you would like to import into Holos and select the file by clicking on it. Then, click “**Open**”.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-8.png" alt="Figure3-8" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-8.png" alt="Figure3-8" width="650"/>
     <br>
     <em>
-		Figure 3.8 Choosing the farm(s) to import
+		Figure 3.8: Choosing the farm(s) to import.
 		<br>
-		A: Navigate through your computer here
+		A: Navigate through your computer here.
 		<br>
-		B: Select the file which contains the farm(s) you would like to import 
+		B: Select the file which contains the farm(s) you would like to import.
 		<br>
-		C: Click “Open” to choose the farm(s) you would like to import
+		C: Click “Open” to choose the farm(s) you would like to import.
 	</em>
 </p>
 <br>
@@ -371,15 +384,16 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 4.	After the file has been opened, a window will pop up displaying the list of farms in that file, **select the farm(s) that you would like to import by clicking anywhere in their sections**.  They are selected when the box becomes a darker shade.
 5.	Click “**Import**” to proceed
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-9.png" alt="Figure3-9" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-9.png" alt="Figure3-9" width="650"/>
     <br>
     <em>
-		Figure 3.9 Selecting Farm(s) to Import
+		Figure 3.9: Selecting Farm(s) to Import.
 		<br>
-		A: Click anywhere in the row of the farm(s) you would like to import. You can select more than one farm
+		A: Click anywhere in the row of the farm(s) you would like to import. You can select more than one farm.
 		<br>
-		B: Click Import to import the farm(s) you have selected
+		B: Click Import to import the farm(s) you have selected.
 	</em>
 </p>
 <br>
@@ -388,16 +402,16 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 1.	To import farms from more than one file select “**Bulk Import**”.  A window will open where you can select the folder that contains your files.
 2.	Navigate to the folder(s) where you store your exported farms.  You can select multiple folders should your files be separated into different folders.  To select multiple press and hold CTRL key while clicking on the folders. When you have selected the folder(s), click “**Open**”.  If you do not select any folders Holos use the current working folder as the folder to open. 
-3.	3.	Continue with steps 3 and 4 from [Importing](#importing). 
+3.	Continue with steps 3 and 4 from [Importing](#importing). 
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-10.png" alt="Figure3-10" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-10.png" alt="Figure3-10" width="650"/>
     <br>
     <em>
-		Figure 3.10 Selecting Farm(s) to Import from multiple folders
+		Figure 3.10: Selecting Farm(s) to Import from multiple folders.
 		<br>
-		A: The selected folders containing exported farm files
+		A: The selected folders containing exported farm files.
 		<br>
 		B: The current working folder where the export data/folders is located.
 		<br>
@@ -422,15 +436,16 @@ In this section, you can see all the farms that are in the current file you are 
 2.	A window will pop up displaying each farm in the file. Each section of the farm such as **Name, Comments, Date Created and Date Modified** can be changed by clicking on the appropriate box and modifying its contents
 3. To **remove a farm**, select the farm you would like to remove by clicking on it and then click the “**Remove**” button at the bottom of the screen
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-11.png" alt="Figure3-11" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-11.png" alt="Figure3-11" width="650"/>
     <br>
     <em>
-		Figure 3.11 Managing Farms Screen
+		Figure 3.11: Managing Farms Screen.
 		<br>
 		A: A list of farms.
 		<br>
-		B: After you have selected a farm, if you would like to remove that farm, click “Remove”
+		B: After you have selected a farm, if you would like to remove that farm, click “Remove”.
 	</em>
 </p>
 <br>
@@ -440,11 +455,12 @@ In this section, you can see all the farms that are in the current file you are 
 
 Under the “**Help**” tab, there is the option to “**Send Feedback**”, view “**About Holos**”, or view the “**Disclaimer**”.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-12.png" alt="Figure3-12" width="150"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-12.png" alt="Figure3-12" width=""/>
     <br>
     <em>
-		Figure 3.12 Help Menu Display
+		Figure 3.12: Help Menu Display.
 	</em>
 </p>
 <br>
@@ -454,11 +470,12 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 1.	Click on “**Send Feedback**”.
 2.	 You will be presented with form requesting certain information such as: first name, last name, reason for feedback and user feedback
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-13.png" alt="Figure3-13" width="550"/>
+ <img src="../../Images/UserGuide/chapter3/figure3-13.png" alt="Figure3-13" width=""/>
     <br>
     <em>
-		Figure 3.13 Send Feedback Form
+		Figure 3.13: Send Feedback Form.
 		<br>
 		A: Should the Holos team need to contact the user, they will have the individual's full name.
 		<br>
@@ -474,15 +491,16 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 <br>
 
 4.	There is the option to offer feedback on user experience (how easy was it to use the application?) this is completely optional and can be left unchecked.
-	3.1.	Should you wish to check this box you will be asked to select your experience with the program ranging from “**very easy**” to “**very difficult**” using a range of buttons. 
-	3.2.	Once your choice is selected you can explain your experience.
+	* Should you wish to check this box you will be asked to select your experience with the program ranging from “**very easy**” to “**very difficult**” using a range of buttons. 
+	
+	* Once your choice is selected you can explain your experience.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter3/figure3-14.png" alt="Figure3-14" width="550"/>
     <br>
     <em>
-		Figure 3.14 Send Feedback Form with Optional Survey Displayed
+		Figure 3.14: Send Feedback Form with Optional Survey Displayed.
 		<br>
 		A: The choices the user can select to record their experience.
 		<br>
@@ -505,17 +523,18 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 
 Under the “**Defaults**” header, there are three options available: **Farm Details, User Settings and Crop Defaults**.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-1.png" alt="Figure4-1" width="150"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-1.png" alt="Figure4-1" width=""/>
     <br>
     <em>
-		Figure 4.1 Defaults Options
+		Figure 4.1: Defaults Options
 		<br>
-		A: A list of options available to set the defaults for your operations
+		A: A list of options available to set the defaults for your operations.
 		<br>
-		B: Allows the user to set custom default values for individual crops
+		B: Allows the user to set custom default values for individual crops.
 		<br>
-		C: Option to show results in single or multi-year format
+		C: Option to show results in single or multi-year format.
 	</em>
 </p>
 <br>
@@ -527,15 +546,16 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 2.	Here, you will be able to set certain default settings for your farm such as: **Farm**, **Soil, Precipitation, Temperature, Evaporation, Soil N2O breakdown, Default Bedding Composition, and Default Manure Composition**. Select the category you would like to modify the default settings for.
 3. Each category has its own set of input fields for you to populate. **Every time you create a new farm in this file, it will have these default settings.**
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-2.png" alt="Figure4-2" width="550"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-2.png" alt="Figure4-2" width="650"/>
     <br>
     <em>
-		Figure 4.2 Farm Details Selection
+		Figure 4.2: Farm Details Selection.
 		<br>
-		A: The different Defaults available:
+		A: The different defaults available.
 		<br>
-		B: The specific default settings corresponding to the category you have selected that can be adjusted
+		B: The specific default settings corresponding to the category you have selected that can be adjusted.
 	</em>
 </p>
 <br>
@@ -561,11 +581,12 @@ The default data for this screen is based on information found in the algorithm 
 2.	Here, you will be able to set certain user default settings such as: Carbon concentration (kg kg^-1), Emergence day or Soil Top Thickness (mm). 
 3.	Click “OK” to save the changes to your User Settings
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>
     <br>
     <em>
-		Figure 4.3 User Default Settings
+		Figure 4.3: User Default Settings
 		<br>
 		The specific user default settings that can be adjusted for **all farms.**
 	</em>
@@ -577,15 +598,14 @@ The default data for this screen is based on information found in the algorithm 
 -	The energy tab displays the conversion of energy from the farm (electricity, diesel, production) into greenhouse gas emissions.
 -	The energy tab provides the amount of energy used for each available farm component.
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-4.png" alt="Figure4-4" width="550"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-4.png" alt="Figure4-4" width="650"/>
     <br>
     <em>
-		Figure 4.4 - Energy Settings
+		Figure 4.4: - Energy Settings
 	</em>
 </p>
-
 <br>
 
 ## Crop Defaults
@@ -594,11 +614,12 @@ The default data for this screen is based on information found in the algorithm 
 2.	This view allows you to specify default values for each crop that you might come across in Holos.  For example, every time you enter barley as the crop in a field component, Holos will use the values recorded here to complete its calculations.
 3.	To **edit a crop** select it from the left scroll area. Click “**Yes**” under “**Step 2**” if you would like to customize the default values.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-5.png" alt="Figure4-5" width="550"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-5.png" alt="Figure4-5" width="650"/>
     <br>
     <em>
-		Figure 4.5 - Crop Defaults
+		Figure 4.5: Crop Defaults
 		<br>
 		A: Step 1. Select a crop type for which you'd like to supply custom default values.
 		<br>
@@ -609,8 +630,9 @@ The default data for this screen is based on information found in the algorithm 
 
 4. If you select '**Yes**' in **Step 2**, a new section will appear that indicates the custom default values you can set.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-6.png" alt="Figure4-6" width="550"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-6.png" alt="Figure4-6" width="650"/>
     <br>
     <em>
 		Figure 4.6 - Step 3 section.
@@ -627,22 +649,23 @@ The default data for this screen is based on information found in the algorithm 
 -	**SYM** is the simplest mode to use Holos, simply add components to your farm and press “Next” to load the results. This is the default mode when a new farm is created in Holos.
 -	MYM changes the interface of certain components (see figure 4.6). 
 
-
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-7.png" alt="Figure4-7" width="750"/>
+ <img src="../../Images/UserGuide/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
     <br>
     <em>
-		Figure 4.7 - A field component properties in single year mode
+		Figure 4.7: - A field component properties in single year mode.
  	</em>
 </p>
 
 <br>
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
     <br>
     <em>
-		Figure 4.8 - A field component properties in multi year mode.
+		Figure 4.8: - A field component properties in multi year mode.
  	</em>
 </p>
 <br>
@@ -652,11 +675,12 @@ The default data for this screen is based on information found in the algorithm 
 The bottom of Holos will display the current working mode either SYM or MYM.
 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
     <br>
     <em>
-		Figure 4.7 - The current year mode is displayed in the bottom right corner.
+		Figure 4.9 - The current year mode is displayed in the bottom right corner.
 	 	<br>
 		A: The year mode change toggle.
 		<br>
@@ -671,6 +695,7 @@ The bottom of Holos will display the current working mode either SYM or MYM.
 
 Under the “**Tools**” header, you can create a custom diet for your chosen livestock
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter5/figure5-1.png" alt="Figure5-1"/>
     <br>
@@ -696,13 +721,14 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 4.	Add feed ingredients to your diet by selecting from the feed ingredient list
 5. If you do not know how to add a feed ingredient, follow the instructions in the next section titled, **How To Add A Feed Ingredient To My Diet**
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-2.png" alt="Figure5-2" width="750"/>
+ <img src="../../Images/UserGuide/chapter5/figure5-2.png" alt="Figure5-2" width=""/>
     <br>
     <em>
 		Figure 5.2 - Creating A Custom Diet.
 	 	<br>
-		A: A list of diets (may include default diets) and their corresponding data
+		A: A list of diets (may include default diets) and their corresponding data.
 		<br>
 		B: Add a new custom diet. This will be shown in the current diet list.
 		<br>
@@ -712,7 +738,7 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 		<br>
 		E: A list of the feed ingredient(s) associated with the diet you have selected in the list of diets in section A.
 		<br>
-		F: The current total percentage of all the feed ingredient(s). This total must equal 100(%)
+		F: The current total percentage of all the feed ingredient(s). This total must equal 100(%).
 	</em>
 </p>
 
@@ -728,6 +754,7 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 
 You can click on “Yes” beside “Show Additional Columns” to see additional data fields associated to the ingredients
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter5/figure5-3.png" alt="Figure5-3" width="750"/>
     <br>
@@ -744,11 +771,12 @@ You can click on “Yes” beside “Show Additional Columns” to see additiona
 2. An empty field of data will appear in the list of available feed ingredients. You can customize each data field to conform to the custom ingredient that you wish to add such as the name, **Forage (%), Dry matter (% AF) and Crude protein (% DM)**.
 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter5/figure5-4.png" alt="Figure5-4" width="750"/>
     <br>
     <em>
-		Figure 5.4 - Creating a custom feed ingredient
+		Figure 5.4 - Creating a custom feed ingredient.
 	</em>
 </p>
 
@@ -760,6 +788,7 @@ Tooltips are an informational message that help describe various elements in the
 
 Tooltips are initiated when the mouse cursor (or pointer) is placed on top of a specific element in the program
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter5/figure5-5.png" alt="Figure5-5"/>
     <br>
@@ -776,6 +805,7 @@ A tooltip displays the following information about non-abbreviated program eleme
 
 Tooltips are also available for abbreviated terms found in various parts of the Holos program e.g., in the previously mentioned custom diet creator:
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter5/figure5-6.png" alt="Figure5-6">
     <br>
@@ -798,6 +828,7 @@ With Holos, you can create your own farm through a selection of **components** t
 
 **Each** component is categorized by their type and include the following: **Land Management, Beef Production, Dairy, Swine, Poultry, Sheep and Other livestock.** 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-1.png" alt="Figure6-1" width="950"/>
     <br>
@@ -811,7 +842,6 @@ With Holos, you can create your own farm through a selection of **components** t
 		C: All the components that have been added to the Farm
 	</em>
 </p>
-
 <br>
 
 ### Adding a Component to Your Farm
@@ -821,17 +851,18 @@ With Holos, you can create your own farm through a selection of **components** t
 3.	To switch between selected farm components, click on the component that you want to see, and the program will automatically switch to display that component’s information.
 4.	See Figure 6.2 below for a visual representation.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-2.png" alt="Figure6-2" width="850"/>
     <br>
     <em>
 		Figure 6.2- Adding a Component 
 	 	<br>
-		A: A list of all available components that can be added to the farm, separated by component category
+		A: A list of all available components that can be added to the farm, separated by component category.
 		<br>
-		B: A list of components that have been added to the farm
+		B: A list of components that have been added to the farm.
 		<br>
-		C: The data associated with the selected component
+		C: The data associated with the selected component.
 	</em>
 </p>
 <br>
@@ -841,11 +872,12 @@ With Holos, you can create your own farm through a selection of **components** t
 1.	You can copy a component in you farm by right clicking on the component and selecting “**Create a Copy**”.
 2.	A window will appear.  You can select how many copies you would like to create. Press “**OK**” when finished (**see Figure 6.3**).
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-3.png" alt="Figure6-3"/>
     <br>
     <em>
-		Figure 6.3 – Window to get the number of copies of your component 
+		Figure 6.3 – Window to get the number of copies of your component.
 	</em>
 </p>
 <br>
@@ -858,11 +890,12 @@ With Holos, you can create your own farm through a selection of **components** t
 -	To enter specific details about the field you need to access the **Tab View** containing: **General, Manure, and Residue** properties for the field
 -	To view additional information **Tab View**, click “**Yes**” beside “**Show Additional Information**”.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-4.png" alt="Figure6-4" width="550"/>
     <br>
     <em>
-		Figure 6.4 – Field Step 1. Define name, area, crop, and tillage type for your field component
+		Figure 6.4 – Field Step 1. Define name, area, crop, and tillage type for your field component.
 	</em>
 </p>
 <br>
@@ -877,11 +910,12 @@ The field component contains different tabs for each aspect of the component.
 
 Contains such information like: yield, harvest method, fertilizer application rate etc.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-5.png" alt="Figure6-5" width="550"/>
     <br>
     <em>
-		Figure 6.5 – General tab for a field component
+		Figure 6.5 – General tab for a field component.
 	</em>
 </p>
 <br>
@@ -890,8 +924,9 @@ Contains such information like: yield, harvest method, fertilizer application ra
 
 Allows the user to add a fertilizer application to the field. This application includes information like Season of Application, Blend Type and Application Rate.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-6.png" alt="Figure6-6"  width="550"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-6.png" alt="Figure6-6"  width="650"/>
     <br>
     <em>
 		Figure 6.6 – Fertilizer tab for a field component. This shows the fertilizer application table for a field.
@@ -905,8 +940,9 @@ Allows the user to add a manure application to the field. This application inclu
 
 A summary of all manure applications to a farm can be seen in the [Farm Details](#farm-details) section of the program. The farm details section is available under the [Settings](#chapter-4-settings) header/menu item.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-7.png" alt="Figure6-7"  width="550"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-7.png" alt="Figure6-7"  width="650"/>
     <br>
     <em>
 		Figure 6.7 – Manure tab for a field component. This shows the manure application table for a field.
@@ -918,8 +954,9 @@ A summary of all manure applications to a farm can be seen in the [Farm Details]
 
 This section lets the user specify how much carbon and nitrogen are in your crops.  They can also specify how much of the crop remains above or below the ground after harvest. 
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-8.png" alt="Figure6-8"  width="550"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-8.png" alt="Figure6-8"  width="650"/>
     <br>
     <em>
 		Figure 6.8 – Residue tab for a field component. 
@@ -932,8 +969,9 @@ This section lets the user specify how much carbon and nitrogen are in your crop
 
 The economics section shows various economic data related to the component including crop price, direct costs and total fixed and variable costs.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-9.png" alt="Figure6-9"  width="550"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-9.png" alt="Figure6-9"  width="650"/>
     <br>
     <em>
 		Figure 6.9 – Economic tab for a field component showing various costs related to the field.
@@ -959,22 +997,7 @@ After adding a shelterbelt component, you have various options to configure this
 1.	Enter the “**Year of Observation**” for your shelterbelt.
 2.	By default, there is one row of trees in the shelterbelt when the component is added to your farm. **To add an additional row of trees, click “Additional Row”.**
 
-<p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-10.png" alt="Figure6-10"  width="650"/>
-    <br>
-    <em>
-		Figure 6.10 - Shelterbelt Component
-		<br>
-		A: The shelterbelt component
-		<br>
-		B: Shelterbelt name and year of observation
-		<br>
-		C: A Shelterbelt row: row length and row name
-		<br>
-		D: A Tree type in a shelterbelt row
-	</em>
-</p>
-<br>
+
 
 #### Modifying the Shelterbelt Rows
 
@@ -992,6 +1015,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 2.	**Input the rest of the data corresponding to your tree type** which includes: average spacing between trees(m), number of trees and the average circumference(cm) and the tree type name. 
 3.	If you do not know the average circumference for your tree type, click on the “Calculator” button beside the “Average Circumference” field. For more information on the Average Circumference Calculator,follow instructions in the next section titled, Average Circumference Calculator.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-11.png" alt="Figure6-11"  width="650"/>
     <br>
@@ -1006,6 +1030,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	The calculator will produce the average circumference of the tree type you are interested in based on the circumference of the trunks at Breast Height of the tree(s).  
 -	**If you already know the average circumference of the trees**, you can set the data field on the top left of the Circumference Calculator and select **“Direct Entry” as shown below in Figure 6.5, Section A.**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-12.png" alt="Figure6-12"/>
     <br>
@@ -1021,27 +1046,28 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 		D: Circumference of trunks at breast height associated with the tree(s) for your tree type
 	</em>
 </p>
+<br>
 
 -	There is a section called “**Circumferences of Trunks at Breast Height on Measured Trees (cm)**”. In this section, you can input the appropriate data associated with your tree(s).
 -	**To add another trunk to a tree**, click on the “**More Trunks On Tree**” and a new data field will appear underneath the data associated with the tree you are adding a trunk to.
 -	**If you would like to add another tree**, click “Additional Tree” as shown in Figure 6.11, Section B. The new tree will be added underneath the “Circumference of Trunks at Breast Height on Measure Trees(cm)” section.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-13.png" alt="Figure6-13"/>
     <br>
     <em>
 		Figure 6.13 - Circumference of Trunks at Breast Height on Measured Trees Data
 		<br>
-		A: Tree 1
+		A: Tree 1.
 		<br>
-		B: Tree 2
+		B: Tree 2.
 		<br>
-		C: The Trunk(s) and their Circumference at Breast Height associated with Tree 1
+		C: The Trunk(s) and their Circumference at Breast Height associated with Tree 1.
 		<br>
 		D: The delete trunk button. Clicking this will delete that specific trunk row.
 	</em>
 </p>
-
 <br>
 
 
@@ -1058,23 +1084,21 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	If you would like to see the Calculator columns (for Average Circumference) click “Show Calculator Columns” at the top right of the Shelterbelt Details page and a Calculator Column will appear. If you do not know what the Average Circumference Calculator is please click here: [How To Use Average Circumference Calculator](#average-circumference-calculator)
 
 <br>
-
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
     <br>
     <em>
 		Figure 6.14 – Shelterbelt Details
 		<br>
-		A: The Shelterbelts in your Farm
+		A: The Shelterbelts in your Farm.
 		<br>
-		B: If you have modified any data on the previous pages, please click here to rebuild the data columns
+		B: If you have modified any data on the previous pages, please click here to rebuild the data columns.
 		<br>
-		C: The data associated with each Shelterbelt Row and their corresponding Tree Type(s) from Plant Year up Until The Cut Year
+		C: The data associated with each Shelterbelt Row and their corresponding Tree Type(s) from Plant Year up Until The Cut Year.
 		<br>
-		D:If you have sorted the data and want to reset back to the default, click here
+		D:If you have sorted the data and want to reset back to the default, click here.
 	</em>
 </p>
-
 <br>
 
 ##### Shelterbelt Results
@@ -1101,17 +1125,18 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	Each **animal component** consists of **one or more animal groups (e.g. heifers vs steers)**, where **each animal group has one or more management periods.**
 - The **management period** is separated into categories and allows the user to enter data for **General, Diet, Housing and Manure** details for each **animal group.**
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-15.png" alt="Figure6-15" width="650"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
     <br>
     <em>
 		Figure 6.15 - Beef Stockers & Backgrounders Layout showcasing an animal component.
 		<br>
-		A: A list of animal groups that have been added to the animal component
+		A: A list of animal groups that have been added to the animal component.
 		<br>
-		B: A list of management periods for **a selected animal group**
+		B: A list of management periods for a selected animal group.
 		<br>
-		C: The details for the selected management period
+		C: The details for the selected management period.
 	</em>
 </p>
 <br>
@@ -1127,6 +1152,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. the selected animal group will be indicated by a “>” symbol in the left column.
 -	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-16.png" alt="Figure6-16"/>
     <br>
@@ -1156,8 +1182,9 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	The details for a management period can be split into four categories: **General, Diet, Housing and Manure**.
 -	To see the details for a management period, please click on the period you would like to view.
 
+<br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-17.png" alt="Figure6-17" width="450"/>
+ <img src="../../Images/UserGuide/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
     <br>
     <em>
 		Figure 6.17 - Management Periods for Animal Group
@@ -1180,11 +1207,12 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	You can also enter the **start** and **end** weights for your animal group.
 -	Some animal groups will have additional data fields specific to that group.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
     <br>
     <em>
-		Figure 6.17 - Management Periods General Tab
+		Figure 6.18 - Management Periods General Tab
 		<br>
 		A: The 'Show Additional Information' toggle allows you to see additional information in a tab.
 		<br>
@@ -1200,11 +1228,12 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	If you have selected to see **additional information**, you are able to adjust more specific details for the diet such as: forage, crude protein, fat etc.
 - If you want to create your own **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you do not know how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
-		Figure 6.17 - Management Periods - Diet Tab
+		Figure 6.19 - Management Periods - Diet Tab.
 	</em>
 </p>
 <br>
@@ -1214,11 +1243,12 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	The housing section contains details pertaining to the housing situation for your selected animal group in the selected management period.
 -	You can select default housing types such as: confined no barn, confined, enclosed pasture, etc.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
     <br>
     <em>
-		Figure 6.20 - Management Periods - Housing Tab
+		Figure 6.20 - Management Periods - Housing Tab.
 	</em>
 </p>
 
@@ -1232,11 +1262,12 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 - 	You can select default manure management types such as:  Deep Bedding, Solid Storage, etc.
 - 	If you have selected to see additional information, you are able to provide data inputs for more specific manure details.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
     <br>
     <em>
-		Figure 6.20 - Management Periods - Manure Tab
+		Figure 6.21 - Management Periods - Manure Tab.
 	</em>
 </p>
 <br>
@@ -1325,6 +1356,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 -	Once clicked the system is now active, click either “**Add Historical Production System**” or “**Add Projected Production System**”.
 -	Adding a **historical production system** will create a new inline block with the original field at the **beginning of the timeline** while a **projected production system** places the new block at the **end of timeline.**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter7/figure7-1.png" alt="Figure7-1" width="750"/>
     <br>
@@ -1339,9 +1371,9 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 		<br>
 		D: The original production system from the component selection screen
 		<br>
-		E: A projected production system
+		E: A projected production system.
 		<br>
-		F: Timeline regio
+		F: Timeline region.
 	</em>
 </p>
 
@@ -1364,7 +1396,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 -	You can change how the screen reports the yields of your fields with the drop-down menu beside “**Yield Assignment Method**” **(default is “Average Yield”).**
 -	Like other grids in Holos you can sort and filter each column shown.  Anything to the right of the Yield column can be edited by hand.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter8/figure8-1.png" alt="Figure8-1" width="850"/>
     <br>
@@ -1462,6 +1494,7 @@ Provides details on farm production.  The report can be shown in a monthly or ye
 
 Shows the market price and total revenue for the crops in your farm.  Economic data is provided by various data sources from 2020 and might be incorrect.  This tab offers a rough estimate of what you stand to gain and should be used with caution.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-3.png" alt="Figure9-3" width="850"/>
     <br>
@@ -1481,6 +1514,7 @@ Shows the market price and total revenue for the crops in your farm.  Economic d
 
 A proportional representation of all farm emissions.  You can view how each farm component contributes by clicking “Yes” beside “Show Details”.  You can also change the units of measurement, click on the drop-down box beside “Units of Measurement”. The chart will highlight whichever slice you mouse over for easy identification. 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-4.png" alt="Figure9-4" width="850"/>
     <br>
@@ -1500,11 +1534,12 @@ A proportional representation of all farm emissions.  You can view how each farm
 
 Display the overall amount of each greenhouse gas produced by the farm.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-5.png" alt="Figure9-5" width="850"/>
     <br>
     <em>
-		Figure 9-5 - Overall Emissions Results Tab
+		Figure 9-5 - Overall Emissions Results Tab.
 	</em>
 </p>
 <br>
@@ -1513,11 +1548,12 @@ Display the overall amount of each greenhouse gas produced by the farm.
 
 Shows a breakdown of all emissions from a farm on a monthly basis.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-6.png" alt="Figure9-6" width="850"/>
     <br>
     <em>
-		Figure 9-6 - Component Emissions Results Tab
+		Figure 9-6 - Component Emissions Results Tab.
 	</em>
 </p>
 <br>
@@ -1526,6 +1562,7 @@ Shows a breakdown of all emissions from a farm on a monthly basis.
 
 A detailed summary of each component in the farm, showing emission breakdown for each component in the farm (i.e. total Direct/Indirect N2O, Enteric CH4, and Manure CH4 produced by the given component).  You can export this data to a CSV file of your choosing.  You can also compare multiple farms and see the comparison in the table.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-7.png" alt="Figure9-7" width="850"/>
     <br>
@@ -1545,11 +1582,12 @@ A detailed summary of each component in the farm, showing emission breakdown for
 
 Displayed only when an animal component is added to a farm. Displays how much each animal component group consumed on average per day (can be displayed monthly or yearly). 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-8.png" alt="Figure9-8" width="850"/>
     <br>
     <em>
-		Figure 9-8 - Feed Estimate Report Results Tab
+		Figure 9-8 - Feed Estimate Report Results Tab.
 	</em>
 </p>
 <br>
@@ -1558,11 +1596,12 @@ Displayed only when an animal component is added to a farm. Displays how much ea
 
 Displayed only when an animal component is added to a farm. Holos will display how much manure details for each animal group in your system.  Like the Details screen this screen also has the data tray to toggle any of the columns in the grid
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-9.png" alt="Figure9-9" width="850"/>
     <br>
     <em>
-		Figure 9-9 - Manure Management Results Tab
+		Figure 9-9 - Manure Management Results Tab.
 	</em>
 </p>
 <br>
@@ -1577,25 +1616,28 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 
 **While in the graph view**, **hovering** the mouse over data points of any year shows basic information regarding that point. The user is also able to click a link in each pop-up to view further information about that year's data in the "Grid" view.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-10.png" alt="Figure9-10" width="850"/>
     <br>
     <em>
-		Figure 9-10 - Multi-Year Carbon Modelling Results Tab - Graph View
+		Figure 9-10 - Multi-Year Carbon Modelling Results Tab - Graph View.
 		<br>
 		A: Toggle that allows switching between Grid and Graph representation.
 	</em>
 </p>
 <br>
 
+
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>
     <br>
     <em>
-		Figure 9-11 - Multi-Year Carbon Modelling Results Tab - Table/Grid View
+		Figure 9-11 - Multi-Year Carbon Modelling Results Tab - Table/Grid View.
 	</em>
 </p>
 <br>
+
 
 <p align="center">
  <img src="../../Images/UserGuide/chapter9/figure9-12.png" alt="Figure9-12" width="850"/>
@@ -1606,7 +1648,6 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 </p>
 <br>
 
-<br>
 <br>
 
 # Chapter 10 - Command Line Interface
@@ -1640,11 +1681,12 @@ In this section, we will go through the steps to properly set up the CLI regardi
 
 	This default folder will contain multiple other folders for each of Holo's Components as well as a '**Farm.Settings**' file containing all settings related to this specific farm.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-1.png" alt="Figure10-1" width="750"/>
     <br>
     <em>
-		Figure 10-1 - Prompt to enter location of farm
+		Figure 10-1 - Prompt to enter location of farm.
 	</em>
 </p>
 <br>
@@ -1653,7 +1695,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
  <img src="../../Images/UserGuide/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
     <br>
     <em>
-		Figure 10-2 - Default farm folder created by CLI
+		Figure 10-2 - Default farm folder created by CLI.
 	</em>
 </p>
 <br>
@@ -1662,7 +1704,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
  <img src="../../Images/UserGuide/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
     <br>
     <em>
-		Figure 10-3 - Default component folders created by CLI
+		Figure 10-3 - Default component folders created by CLI.
 	</em>
 </p>
 <br>
@@ -1672,7 +1714,7 @@ You will then be prompted to import any farms from the Holos GUI version. Subseq
 
 2. To create a proper template farm folder, Holos needs to know the units of measurement you would prefer. Please select Metric or Imperial when prompted.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-4.png" alt="Figure10-4" width="750"/>
     <br>
@@ -1686,7 +1728,8 @@ You will then be prompted to import any farms from the Holos GUI version. Subseq
 3. The default template farm folder will be created in your specified directory. Press “enter” to allow the program to exit so you can create data input files for your farm(s). Navigate to the location to see your new farm folder.
 
 	This default template Farm folder will contain all the necessary component directories, a settings file and template data files for each component for you to use to create your own farms
-	
+
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-5.png" alt="Figure10-5" width="750"/>
     <br>
@@ -1699,6 +1742,7 @@ You will then be prompted to import any farms from the Holos GUI version. Subseq
 
 Please note that if you have previously used the Holos CLI, after opening the CLI again you will be prompted to enter the location of the previously used "Farms" folder or select a new "Farms folder"
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-6.png" alt="Figure10-6" width="550"/>
     <br>
@@ -1717,6 +1761,8 @@ There are two methods to add a new farm to an existing farms folder. [The common
 #### Navigating through the Farms Folder:
 
 1. By default, Holos will create an example farm folder in the Holos CLI “Farms” directory as shown below
+
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
     <br>
@@ -1728,6 +1774,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 2.	This example farm folder will automatically contain a list of folders corresponding to all the components that are available for use in Holos (i.e., fields, cow-calf etc.). As well as a settings file for that specific farm folder
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
     <br>
@@ -1741,6 +1788,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 	For example, if we are in the shelterbelts folder, each data input Excel file will represent one shelterbelt in your farm. So, if you have two shelterbelts in your farm, you will have two of these data input files.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-6.png" alt="Figure10-6" width="650"/>
     <br>
@@ -1760,6 +1808,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 3. In the settings file, you can modify the default values for settings that are relevant to the operations in your farm such as:  Global Settings, Precipitation, Temperature, Evapotranspiration and Soil Defaults.
 4. This settings file can be opened using any text editor e.g. Notepad.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-7.png" alt="Figure10-7" width="750"/>
     <br>
@@ -1768,7 +1817,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 	</em>
 </p>
 <br>
-<br>
+
 
 ### Modifying Component Data Input Excel Files
 
@@ -1791,23 +1840,25 @@ There are two methods to add a new farm to an existing farms folder. [The common
 	-	**Tree Group Data**: Species, Planted Tree Count, Planted Tree Spacing(m), Live Tree Count, DBH 
 -	If your shelterbelt row consists of more than one tree type, you would create an Excel data row that corresponds to each tree type that is a part of that shelterbelt row.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-8.png" alt="Figure10-8" width="950"/>
     <br>
     <em>
-		Figure 10-8 - Shelterbelt Data Input Excel Files
+		Figure 10-8 - Shelterbelt Data Input Excel Files.
 		<br>
-		A: Selterbelt Data
+		A: Selterbelt Data.
 		<br>
-		B: Shelterbelt Row Data
+		B: Shelterbelt Row Data.
 		<br>
-		C: Tree Group Data
+		C: Tree Group Data.
 	</em>
 </p>
 <br>
 
 -	Below, we can see that both of the highlighted Excel rows are referring to the same shelterbelt row, the only difference is that **one Excel row refers to the tree type,** **caragana**, while the **other row refers to the tree type, green ash**. These two Excel rows together, represent the data for the shelterbelt row, “**Caragana, Green Ash**” which consists of the two tree groups where **each tree group has its own set of data, but they belong to the same row.**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-9.png" alt="Figure10-9" width="950"/>
     <br>
@@ -1859,6 +1910,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 **Field Data Input Section (Field and Crop Row Data)**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-10.png" alt="Figure10-10" width="950"/>
     <br>
@@ -1874,6 +1926,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 **Field Data Input Section (Crop Row Data)**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-11.png" alt="Figure10-11" width="950"/>
     <br>
@@ -1887,6 +1940,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 **Field Data Input Section (Crop Data)**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-12.png" alt="Figure10-12" width="950"/>
     <br>
@@ -1900,6 +1954,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 **Field Data Input Section (Crop Data, Manure Data, Cover Crop Data)**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-13.png" alt="Figure10-13" width="950"/>
     <br>
@@ -1917,13 +1972,14 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 **Field Data Input Section (Undersown Crops or Grazed Crop Data)**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-14.png" alt="Figure10-14" width="950"/>
     <br>
     <em>
-		Figure 10-14 - Field Data Input Section (Crop Data)
+		Figure 10-14 - Field Data Input Section (Crop Data).
 		<br>
-		F: Undersown Crops/Grazed Crop Data
+		F: Undersown Crops/Grazed Crop Data.
 	</em>
 </p>
 <br>
@@ -2032,45 +2088,48 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 ##### Example of Animal Component Data Broken Down into Sections
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-15.png" alt="Figure10-15" width="950"/>
     <br>
     <em>
 		Figure 10-15 - Swine Data Section 1
 		<br>
-		A:  Swine Component Name
+		A:  Swine Component Name.
 		<br>
-		B: Swine group data
+		B: Swine group data.
 		<br>
-		C: Swine group management period'
+		C: Swine group management period'.
 		<br>
-		D: Diet details for management period  
+		D: Diet details for management period.
 	</em>
 </p>
 <br>
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-16.png" alt="Figure10-16" width="950"/>
     <br>
     <em>
-		Figure 10-16 - Swine Data Section 2
+		Figure 10-16 - Swine Data Section 2.
 		<br>
-		D:  Diet details for management period
+		D:  Diet details for management period.
 		<br>
-		E: Housing details for management period
+		E: Housing details for management period.
 		<br>
-		F: Manure details for management period
+		F: Manure details for management period.
 	</em>
 </p>
 <br>
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-17.png" alt="Figure10-17" width="950"/>
     <br>
     <em>
-		Figure 10-17 - Swine Data Section 2
+		Figure 10-17 - Swine Data Section 2.
 		<br>
-		F: Manure details for management period
+		F: Manure details for management period.
 	</em>
 </p>
 <br>
@@ -2110,6 +2169,7 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 Below is an example of a beef component data file broken into sections
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-18.png" alt="Figure10-18" width="950"/>
     <br>
@@ -2125,6 +2185,7 @@ Below is an example of a beef component data file broken into sections
 </p>
 <br>
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-19.png" alt="Figure10-19" width="950"/>
     <br>
@@ -2137,6 +2198,7 @@ Below is an example of a beef component data file broken into sections
 	</em>
 </p>
 <br>
+
 
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-20.png" alt="Figure10-20" width="950"/>
@@ -2154,7 +2216,7 @@ Below is an example of a beef component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-21.png" alt="Figure10-21" width="650"/>
+ <img src="../../Images/UserGuide/chapter10/figure10-21.png" alt="Figure10-21" width="750"/>
     <br>
     <em>
 		Figure 10-21 - Swine Data Section 4
@@ -2189,17 +2251,18 @@ Below is an example of a beef component data file broken into sections
 
 **Below is an example of a dairy component data file broken into sections:**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-22.png" alt="Figure10-22" width="950"/>
     <br>
     <em>
-		Figure 10-22 - Dairy Data Section 1
+		Figure 10-22 - Dairy Data Section 1.
 		<br>
-		A: Dairy component name
+		A: Dairy component name.
 		<br>
-		B: Dairy group name
+		B: Dairy group name.
 		<br>
-		C: Dairy group management period
+		C: Dairy group management period.
 	</em>
 </p>
 <br>
@@ -2208,35 +2271,35 @@ Below is an example of a beef component data file broken into sections
  <img src="../../Images/UserGuide/chapter10/figure10-23.png" alt="Figure10-23" width="950"/>
     <br>
     <em>
-		Figure 10-23 - Dairy Data Section 2
+		Figure 10-23 - Dairy Data Section 2.
 		<br>
-		D: Diet details for management period
+		D: Diet details for management period.
 	</em>
 </p>
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-22.png" alt="Figure10-22" width="950"/>
+ <img src="../../Images/UserGuide/chapter10/figure10-24.png" alt="Figure10-22" width="950"/>
     <br>
     <em>
-		Figure 10-22 - Dairy Data Section 3
+		Figure 10-24 - Dairy Data Section 3.
 		<br>
-		D: Diet details for management period
+		D: Diet details for management period.
 		<br>
-		E: Housing details for management period
+		E: Housing details for management period.
 		<br>
-		F: Manure details for management period
+		F: Manure details for management period.
 	</em>
 </p>
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-24.png" alt="Figure10-24" width="950"/>
+ <img src="../../Images/UserGuide/chapter10/figure10-25.png" alt="Figure10-24" width="950"/>
     <br>
     <em>
-		Figure 10-23 - Dairy Data Section 4
+		Figure 10-25 - Dairy Data Section 4.
 		<br>
-		F: Manure details for management period
+		F: Manure details for management period.
 	</em>
 </p>
 <br>
@@ -2269,13 +2332,13 @@ Below is an example of a sheep component data file broken into sections
  <img src="../../Images/UserGuide/chapter10/figure10-26.png" alt="Figure10-26" width="950"/>
     <br>
     <em>
-		Figure 10-26 - Sheep Data Section 1
+		Figure 10-26 - Sheep Data Section 1.
 		<br>
-		A: Sheep component name
+		A: Sheep component name.
 		<br>
-		B: Sheep group name
+		B: Sheep group name.
 		<br>
-		C: Sheep group management period
+		C: Sheep group management period.
 	</em>
 </p>
 <br>
@@ -2284,11 +2347,11 @@ Below is an example of a sheep component data file broken into sections
  <img src="../../Images/UserGuide/chapter10/figure10-27.png" alt="Figure10-27" width="950"/>
     <br>
     <em>
-		Figure 10-27 - Sheep Data Section 2
+		Figure 10-27 - Sheep Data Section 2.
 		<br>
-		C: Sheep group management period
+		C: Sheep group management period.
 		<br>
-		D: Diet details for management period
+		D: Diet details for management period.
 	</em>
 </p>
 <br>
@@ -2298,11 +2361,11 @@ Below is an example of a sheep component data file broken into sections
  <img src="../../Images/UserGuide/chapter10/figure10-28.png" alt="Figure10-28" width="950"/>
     <br>
     <em>
-		Figure 10-28 - Sheep Data Section 3
+		Figure 10-28 - Sheep Data Section 3.
 		<br>
-		E: Housing details for management period
+		E: Housing details for management period.
 		<br>
-		F: Manure details for management period
+		F: Manure details for management period.
 	</em>
 </p>
 <br>
@@ -2326,17 +2389,18 @@ Below is an example of a sheep component data file broken into sections
 
 **Below is an example of a poultry component data file broken into sections**
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-29.png" alt="Figure10-29" width="850"/>
     <br>
     <em>
-		Figure 10-29 - Poultry Data Section 1
+		Figure 10-29 - Poultry Data Section 1.
 		<br>
-		A: Poultry component name
+		A: Poultry component name.
 		<br>
-		B: Poultry group data
+		B: Poultry group data.
 		<br>
-		C: Poultry group management period
+		C: Poultry group management period.
 	</em>
 </p>
 <br>
@@ -2345,9 +2409,9 @@ Below is an example of a sheep component data file broken into sections
  <img src="../../Images/UserGuide/chapter10/figure10-30.png" alt="Figure10-30" width="850"/>
     <br>
     <em>
-		Figure 10-30 - Poultry Data Section 2
+		Figure 10-30 - Poultry Data Section 2.
 		<br>
-		C: Poultry group management period
+		C: Poultry group management period.
 	</em>
 </p>
 <br>
@@ -2371,6 +2435,7 @@ Below is an example of a sheep component data file broken into sections
 -	**Each row** in the Excel file will refer to **one of these animal groups** and **one management period** (an animal group can have multiple management periods).
 -	**If you have multiple management periods for an animal group (same group name and group type)**, please add another row referring to the same animal group but change the management period data accordingly.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-31.png" alt="Figure10-31" width="850"/>
     <br>
@@ -2441,6 +2506,7 @@ Below is an example of a sheep component data file broken into sections
 	
 5. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder to be in Step 1. 
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-33.png" alt="Figure10-33" width="650"/>
     <br>
@@ -2473,7 +2539,7 @@ Below is an example of a sheep component data file broken into sections
 -	The results for each of these component categories and their respective components will be calculated and displayed for each farm.
 -	These results will be in the “**Outputs**” folder located in the base directory of your “**Farms**” folder in the “**TotalResultsForAllFarms**” folder
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-34.png" alt="Figure10-34" width="950"/>
     <br>
@@ -2505,6 +2571,7 @@ Below is an example of a sheep component data file broken into sections
 -	**Each** animal group is split up into **months**.
 -	The results for each of these component categories and their respective components will be calculated and displayed for each farm. The **farm totals** will be displayed at the very bottom
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-35.png" alt="Figure10-35" width="950"/>
     <br>
@@ -2574,6 +2641,7 @@ Below are example directories and their corresponding results
 
 #### Total Results Example Directory
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-36.png" alt="Figure10-36" width="650"/>
     <br>
@@ -2590,6 +2658,7 @@ Below are example directories and their corresponding results
 
 #### Results for a Farm Example Directory
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-37.png" alt="Figure10-37" width="650"/>
     <br>
@@ -2641,7 +2710,7 @@ The user must ensure that the references to other components are valid and the c
 -	Therefore, if the custom field component you have created has its **field name** set to “**FieldNameExample1**”, then whenever you would like to refer to that specific field in any component that can have a reference to a field, you would set the data field to be “FieldNameExample1”. 
 -	As a result, for the pasture data field of the swine component, you would set the data input field to be “FieldNameExample1” if you would like to refer to that custom field.
 
-
+<br>
 
 ### CLI Generated Cmponent Directory Names are not Changed
 
@@ -2666,6 +2735,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 1. Below is an example of an empty data value in a shelterbelt data input Excel file
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-38.png" alt="Figure10-38" width="850"/>
     <br>
@@ -2679,13 +2749,14 @@ If the names of the component’s are not valid, the data will not be processed.
 
 2.	If this error occurs, you will be shown a message on the Command Line Interface stating that there is an empty data value at row, column, and the file where the error occurred.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-39.png" alt="Figure10-39" width="650"/>
     <br>
     <em>
-		Figure 10-39 - Command Line Interface Encountering Empty Data Error
+		Figure 10-39 - Command Line Interface Encountering Empty Data Error.
 		<br>
-		A: The error message displayed if the data input excel file has an empty data value
+		A: The error message displayed if the data input excel file has an empty data value.
 	</em>
 </p>
 <br>
@@ -2696,6 +2767,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 1. Below is an example of a negative value for a data field in a Shelterbelt data input Excel file. It does not make sense for the Year of Observation to be -1996.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-40.png" alt="Figure10-40" width="850"/>
     <br>
@@ -2709,7 +2781,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 2. If this error occurs, you will be shown a message on the Command Line Interface stating the invalid, negative data value and the row, column, and file where the error occurred.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-41.png" alt="Figure10-41" width="650"/>
     <br>
@@ -2728,6 +2800,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 1. Below is an example of a header that has been modified – meaning it is empty or has been misspelled
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-42.png" alt="Figure10-42" width="950"/>
     <br>
@@ -2741,14 +2814,14 @@ Please do not modify the headers in any of the component data input Excel files.
 
 2.	If this error occurs, you will be shown a message on the Command Line Interface stating the location of the invalid header by the row and the file where the error occurred. You will also be shown the valid header that should be in that file.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-43.png" alt="Figure10-43" width="650"/>
     <br>
     <em>
-		Figure 10-43 - Command Line Interface Encountering An Invalid Header
+		Figure 10-43 - Command Line Interface Encountering An Invalid Header.
 		<br>
-		A: Invalid header value
+		A: Invalid header value.
 	</em>
 </p>
 <br>
@@ -2762,7 +2835,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 1. Below is an example of a special data field in the shelterbelt data input file that has been incorrectly entered. A “Hardiness Zone” can take a data value in the following format: “H(0-9)(a-b)”. Meaning the data values should always be preceded by an “H” and the subsequent numbers/letter can be any value within the specified range (0-9 or a-b).
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-44.png" alt="Figure10-44" width="850"/>
     <br>
@@ -2776,7 +2849,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 2. If this error occurs, you will be shown a message on the Command Line Interface stating the invalid, data value corresponding to a specific unique field, and the row, column, and file where the error occurred
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter10/figure10-45.png" alt="Figure10-45" width="650"/>
     <br>
@@ -2802,6 +2875,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 2. Select **"Farm Defaults"**.
 3. Select "Advanced Mode" under the "**Farm**" tab.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter11/figure11-1.png" alt="Figure4-2" width="650"/>
     <br>
@@ -2815,6 +2889,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 
 Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
     <br>
@@ -2832,7 +2907,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 2. Select "**User Settings**".
 3. In the "**Carbon Modelling Strategy**" drop-down, select the carbon model you want to use in your calculations.
 
-
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
     <br>
@@ -2858,6 +2933,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 2. You will be prompted to use the previously used Farms folder. Select**yes**.
 3. Select the appropriate units of measurement in the next prompt.
 
+<br>
 <p align="center">
  <img src="../../Images/UserGuide/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
     <br>

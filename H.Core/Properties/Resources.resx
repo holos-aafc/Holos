@@ -4949,4 +4949,7 @@
   <data name="BarleySilageBasedDiet" xml:space="preserve">
     <value>Barley silage based diet</value>
   </data>
+  <data name="TitleEnergy" xml:space="preserve">
+    <value>Energy</value>
+  </data>
 </root>
