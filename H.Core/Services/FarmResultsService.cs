@@ -220,6 +220,7 @@ namespace H.Core.Services
 
             // Before we can model multi-year carbon, we need animal results so we can calculate carbon uptake by grazing animals
             this.CalculateCarbonLostByGrazingAnimals(farmResults);
+            this.CalculateCarbonLostFromHayExports(farmResults);
 
             //Field results
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
@@ -249,6 +250,8 @@ namespace H.Core.Services
         {
             var farm = farmEmissionResults.Farm;
 
+            // Go over each item by year using the items from the stage state
+
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
                 var totalLossForField = 0d;
@@ -276,13 +279,45 @@ namespace H.Core.Services
         public void CalculateCarbonLostFromHayExports(FarmEmissionResults farmEmissionResults)
         {
             var farm = farmEmissionResults.Farm;
-
-            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
             {
-                var totalLossForField = 0d;
-
-                foreach (var viewItem in fieldSystemComponent.CropViewItems)
+                var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
+                foreach (var year in distinctYears)
                 {
+                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+                    foreach (var viewItem in viewItemsForYear)
+                    {
+
+                        // Check if this item has a harvest and then check if other fields are using/importing bales...
+                        if (viewItem.HasHarvestViewItems)
+                        {
+                            // This is the field with harvest bales
+                            var fieldId = viewItem.FieldSystemComponentGuid;
+                            var totalHarvestedBales = viewItem.HarvestViewItems.Sum(x => x.TotalNumberOfBalesHarvested);
+                            var totalBalesImported = 0d;
+
+                            // Get all fields using bales from this harvest
+                            var importingFields = viewItemsForYear.Where(y =>
+                                y.HasHayImportViewItems &&
+                                y.HayImportViewItems.Any(z => z.FieldSourceGuid.Equals(fieldId))).ToList();
+
+                            foreach (var field in importingFields)
+                            {
+                                // This field/year is using bales 
+                                foreach (var fieldHayImportViewItem in field.HayImportViewItems)
+                                {
+                                    totalBalesImported += fieldHayImportViewItem.NumberOfBales;
+                                }
+                            }
+
+                            var totalLoss = totalHarvestedBales - totalBalesImported;
+                            if (totalLoss > 0)
+                            {
+                                viewItem.TotalCarbonExportedFromBales = totalLoss;
+                            }
+                        }
+                    }
                 }
             }
         }

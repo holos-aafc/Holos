@@ -12,6 +12,7 @@ namespace H.Core.Models.LandManagement.Fields
         #region Fields
 
         private int _totalNumberOfBalesHarvested;
+        private int _totalNumberOfBalesExported;
 
         private double _baleWeight;
         private double _harvestLossPercentage;
@@ -76,6 +77,15 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _fieldGuid;
             set => SetProperty(ref _fieldGuid, value);
+        }
+
+        /// <summary>
+        /// Allows for accounting of bales that have been used for supplemental feeding or exporting
+        /// </summary>
+        public int TotalNumberOfBalesExported
+        {
+            get => _totalNumberOfBalesExported;
+            set => SetProperty(ref _totalNumberOfBalesExported, value);
         }
 
         #endregion

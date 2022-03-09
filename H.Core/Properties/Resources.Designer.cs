@@ -7180,6 +7180,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To add hay for supplemental feeding from the field &apos;{0}&apos;, at least one harvest must be made on that field..
+        /// </summary>
+        public static string LabelAddAtLeastOneHarvestBeforeAddingHayImport {
+            get {
+                return ResourceManager.GetString("LabelAddAtLeastOneHarvestBeforeAddingHayImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust details for fallow.
         /// </summary>
         public static string LabelAdjustDetailsForFallow {
@@ -9381,6 +9390,15 @@ namespace H.Core.Properties {
         public static string LabelNumberOfBales {
             get {
                 return ResourceManager.GetString("LabelNumberOfBales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} bales harvested from field &apos;{1}&apos; available for supplemental feed.
+        /// </summary>
+        public static string LabelNumberOfBalesAvailableForSupplementalFeeding {
+            get {
+                return ResourceManager.GetString("LabelNumberOfBalesAvailableForSupplementalFeeding", resourceCulture);
             }
         }
         
@@ -13039,11 +13057,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Bedding Composition.
+        /// </summary>
+        public static string TitleDefaultBeddingComposition {
+            get {
+                return ResourceManager.GetString("TitleDefaultBeddingComposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My Exported Farms.
         /// </summary>
         public static string TitleDefaultExportedFarms {
             get {
                 return ResourceManager.GetString("TitleDefaultExportedFarms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Manure Composition.
+        /// </summary>
+        public static string TitleDefaultManureComposition {
+            get {
+                return ResourceManager.GetString("TitleDefaultManureComposition", resourceCulture);
             }
         }
         

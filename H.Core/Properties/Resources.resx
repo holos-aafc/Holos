@@ -4952,4 +4952,16 @@
   <data name="TitleEnergy" xml:space="preserve">
     <value>Energy</value>
   </data>
+  <data name="LabelNumberOfBalesAvailableForSupplementalFeeding" xml:space="preserve">
+    <value>{0} bales harvested from field '{1}' available for supplemental feed</value>
+  </data>
+  <data name="TitleDefaultBeddingComposition" xml:space="preserve">
+    <value>Default Bedding Composition</value>
+  </data>
+  <data name="TitleDefaultManureComposition" xml:space="preserve">
+    <value>Default Manure Composition</value>
+  </data>
+  <data name="LabelAddAtLeastOneHarvestBeforeAddingHayImport" xml:space="preserve">
+    <value>To add hay for supplemental feeding from the field '{0}', at least one harvest must be made on that field.</value>
+  </data>
 </root>

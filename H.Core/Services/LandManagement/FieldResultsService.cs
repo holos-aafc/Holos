@@ -53,6 +53,8 @@ namespace H.Core.Services.LandManagement
 
         private readonly IMapper _detailViewItemMapper;
         private readonly IMapper _manureApplicationViewItemMapper;
+        private readonly IMapper _harvestViewItemMapper;
+        private readonly IMapper _hayImportViewItemMapper;
 
         private readonly FertilizerBlendProvider _fertilizerBlendProvider = new FertilizerBlendProvider();
         private readonly NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12 _slopeProviderTable = new NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12();
@@ -105,7 +107,23 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
+            var hayImportViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<HayImportViewItem, HayImportViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
+            var harvestViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<HarvestViewItem, HarvestViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
             _manureApplicationViewItemMapper = manureApplicationViewItemConfiguration.CreateMapper();
+            _hayImportViewItemMapper = hayImportViewItemMapperConfiguration.CreateMapper();
+            _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
 
             _smallAreaYieldProvider.InitializeAsync();
         }

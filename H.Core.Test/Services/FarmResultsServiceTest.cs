@@ -401,6 +401,48 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void CalculateCarbonLostFromHayExport()
+        {
+            var fieldId = Guid.NewGuid();
+            var farm = new Farm();
+            var year = 2020;
+            var farmEmissionResults = new FarmEmissionResults
+            {
+                Farm = farm
+            };
+
+            var harvestingField = new CropViewItem()
+            {
+                Name = "Harvesting field",
+                Year = 2020,
+                FieldSystemComponentGuid = fieldId,
+            };
+
+            harvestingField.HarvestViewItems.Add(new HarvestViewItem() { TotalNumberOfBalesHarvested = 20, Start = new DateTime(year, 1, 1) });
+
+            var importingField = new CropViewItem()
+            {
+                Name = "Importing field",
+                Year = 2020,
+            };
+
+            importingField.HayImportViewItems.Add(new HayImportViewItem() { NumberOfBales = 10, FieldSourceGuid = fieldId, Date = new DateTime(year, 1, 1) });
+
+            farm.StageStates.Add(new FieldSystemDetailsStageState()
+            {
+                DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
+                {
+                    harvestingField,
+                    importingField,
+                }
+            });
+
+            _farmResultsService.CalculateCarbonLostFromHayExports(farmEmissionResults);
+
+            Assert.AreEqual(10, harvestingField.TotalCarbonExportedFromBales);
+        }
+
+        [TestMethod]
         public void CalculateCarbonUptakeByGrazingAnimals()
         {
             var farm = new Farm();

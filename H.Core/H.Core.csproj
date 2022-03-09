@@ -663,6 +663,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItem.Harvest.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings" />
     <None Include="Services\OCR\tessdata\eng.traineddata">

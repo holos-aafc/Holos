@@ -252,7 +252,6 @@ namespace H.Core.Models.LandManagement.Fields
 
         public bool IsPartOfRotationComponent { get; set; }
 
-
         #endregion
 
         #region Public Methods

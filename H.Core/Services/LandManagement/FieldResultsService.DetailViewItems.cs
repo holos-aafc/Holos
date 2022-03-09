@@ -30,6 +30,18 @@ namespace H.Core.Services.LandManagement
                 result.ManureApplicationViewItems.Add(copiedManureApplicationViewItem);
             }
 
+            foreach (var harvestViewItem in viewItem.HarvestViewItems)
+            {
+                var copiedHarvestViewItem = _harvestViewItemMapper.Map<HarvestViewItem, HarvestViewItem>(harvestViewItem);
+                result.HarvestViewItems.Add(copiedHarvestViewItem);
+            }
+
+            foreach (var hayImportViewItem in viewItem.HayImportViewItems)
+            {
+                var copiedHayImportViewItem = _hayImportViewItemMapper.Map<HayImportViewItem, HayImportViewItem>(hayImportViewItem);
+                result.HayImportViewItems.Add(copiedHayImportViewItem);
+            }
+
             return result;
         }
 
