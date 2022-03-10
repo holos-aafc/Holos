@@ -4964,4 +4964,16 @@
   <data name="LabelAddAtLeastOneHarvestBeforeAddingHayImport" xml:space="preserve">
     <value>To add hay for supplemental feeding from the field '{0}', at least one harvest must be made on that field.</value>
   </data>
+  <data name="LabelEnableColumns" xml:space="preserve">
+    <value>Enable Columns</value>
+  </data>
+  <data name="LabelInvertSelection" xml:space="preserve">
+    <value>Invert Selection</value>
+  </data>
+  <data name="LabelResetToDefaults" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="LabelSelectNone" xml:space="preserve">
+    <value>Select None</value>
+  </data>
 </root>

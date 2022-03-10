@@ -8386,6 +8386,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Columns.
+        /// </summary>
+        public static string LabelEnableColumns {
+            get {
+                return ResourceManager.GetString("LabelEnableColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable Multi-Year Mode.
         /// </summary>
         public static string LabelEnableMulitYearMode {
@@ -8859,6 +8868,15 @@ namespace H.Core.Properties {
         public static string LabelInsolubleDietryFiber {
             get {
                 return ResourceManager.GetString("LabelInsolubleDietryFiber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invert Selection.
+        /// </summary>
+        public static string LabelInvertSelection {
+            get {
+                return ResourceManager.GetString("LabelInvertSelection", resourceCulture);
             }
         }
         
@@ -9646,6 +9664,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset to Defaults.
+        /// </summary>
+        public static string LabelResetToDefaults {
+            get {
+                return ResourceManager.GetString("LabelResetToDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My rotation uses a left shift over the fields.
         /// </summary>
         public static string LabelRotateCropsLeft {
@@ -9687,6 +9714,15 @@ namespace H.Core.Properties {
         public static string LabelSeededGrassland {
             get {
                 return ResourceManager.GetString("LabelSeededGrassland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select None.
+        /// </summary>
+        public static string LabelSelectNone {
+            get {
+                return ResourceManager.GetString("LabelSelectNone", resourceCulture);
             }
         }
         

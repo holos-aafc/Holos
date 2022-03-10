@@ -786,6 +786,9 @@
   <data name="EnumHorses" xml:space="preserve">
     <value>chevaux</value>
   </data>
+  <data name="EnumICBM" xml:space="preserve">
+    <value>MIBC</value>
+  </data>
   <data name="EnumImperfectlyDrained" xml:space="preserve">
     <value>imparfaitement drainé</value>
   </data>
@@ -812,6 +815,9 @@
   </data>
   <data name="EnumIonophorePlusTwoPercentFat" xml:space="preserve">
     <value>ionophore + 2 % de matières grasses</value>
+  </data>
+  <data name="EnumIPCCTier2" xml:space="preserve">
+    <value>niveau 2 du GIEC</value>
   </data>
   <data name="EnumJanuary" xml:space="preserve">
     <value>janvier</value>
@@ -1991,6 +1997,9 @@
   <data name="LabelCarbonInputFromStraw" xml:space="preserve">
     <value>Apport de carbone de la paille (C_p)</value>
   </data>
+  <data name="LabelCarbonModellingStrategy" xml:space="preserve">
+    <value>stratégie de modélisation du carbone</value>
+  </data>
   <data name="LabelCarbonNitrogenRatio" xml:space="preserve">
     <value>Carbon to Nitrogen ratio of manure</value>
   </data>
@@ -2056,6 +2065,9 @@
   </data>
   <data name="LabelDirectNitrousOxideEmissionsFromSyntheticN" xml:space="preserve">
     <value>N2O-N d’azote synthétique (N2O-N_ASdirect)</value>
+  </data>
+  <data name="LabelEnableColumns" xml:space="preserve">
+    <value>activer les colonnes</value>
   </data>
   <data name="LabelEnableMulitYearMode" xml:space="preserve">
     <value>Activer le mode pluriannuel</value>
@@ -2136,6 +2148,9 @@
   </data>
   <data name="LabelInsolubleDietryFiber" xml:space="preserve">
     <value>Insoluble Dietry Fiber</value>
+  </data>
+  <data name="LabelInvertSelection" xml:space="preserve">
+    <value>inverser sélection</value>
   </data>
   <data name="LabelIodine" xml:space="preserve">
     <value>Iodine</value>
@@ -2276,6 +2291,9 @@
   <data name="LabelNo" xml:space="preserve">
     <value>non</value>
   </data>
+  <data name="LabelNotes" xml:space="preserve">
+    <value>nota</value>
+  </data>
   <data name="LabelN_min_FromDecompositionOfOldCarbon" xml:space="preserve">
     <value>Minéralisation de l’azote issu de la décomposition du vieux carbone (min_N_issudedécompositionvieuxcarbone)</value>
   </data>
@@ -2318,11 +2336,17 @@
   <data name="LabelRatio" xml:space="preserve">
     <value>rapport</value>
   </data>
+  <data name="LabelResetToDefaults" xml:space="preserve">
+    <value>réinitialiser par défaut</value>
+  </data>
   <data name="LabelRumenUndegradableProtein" xml:space="preserve">
     <value>Rumen Undegradable Protein</value>
   </data>
   <data name="LabelSaturatedFattyAcid" xml:space="preserve">
     <value>Saturated Fatty Acid</value>
+  </data>
+  <data name="LabelSelectNone" xml:space="preserve">
+    <value>sélectionner aucun</value>
   </data>
   <data name="LabelSelenium" xml:space="preserve">
     <value>Selenium</value>
@@ -3132,6 +3156,12 @@
   <data name="TitleCropRotation" xml:space="preserve">
     <value>rotation culturale</value>
   </data>
+  <data name="TitleDefaultBeddingComposition" xml:space="preserve">
+    <value>composition par défaut de la literie</value>
+  </data>
+  <data name="TitleDefaultManureComposition" xml:space="preserve">
+    <value>composition du fumier par défaut</value>
+  </data>
   <data name="TitleEconomics" xml:space="preserve">
     <value>économie</value>
   </data>
@@ -3139,7 +3169,7 @@
     <value>énergie</value>
   </data>
   <data name="TitleFarmManureApplication" xml:space="preserve">
-    <value>Farm Manure Application</value>
+    <value>épandage de fumier agricole</value>
   </data>
   <data name="TitleFertilizer" xml:space="preserve">
     <value>engrais</value>
@@ -3158,6 +3188,9 @@
   </data>
   <data name="TitleIsoWean" xml:space="preserve">
     <value>sevrage en isolement</value>
+  </data>
+  <data name="TitleMultiYearCarbonModelling" xml:space="preserve">
+    <value>modélisation pluriannuelle du carbone</value>
   </data>
   <data name="TitlePesticide" xml:space="preserve">
     <value>pesticide</value>
