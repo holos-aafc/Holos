@@ -598,7 +598,7 @@ Les données par défaut pour cet écran sont basées sur les informations conte
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>
+ <img src="../../Images/UserGuide/fr/chapter4/figure4-3.png" alt="Figure4-3" width=""/>
     <br>
     <em>
 		Figure 4.3 Paramètres d’utilisateur par défaut. 
@@ -1588,7 +1588,7 @@ Les résultats sont disponibles sous forme simplifiée ou détaillée. Les résu
 -   La page présente également un graphique montrant les émissions globales pour chaque composante de la ferme.
 
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-1.png" alt="Figure9-1" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-1.png" alt="Figure9-1" width="950"/>
     <br>
     <em>
 		Figure 9-1 - Résultats simplifiés en mode année unique.
@@ -1612,7 +1612,7 @@ Fournit des détails sur la production de la ferme. Le rapport peut être prése
 
 
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-2.png" alt="Figure9-2" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-2.png" alt="Figure9-2" width="950"/>
     <br>
     <em>
 		Figure 9-2 - Onglet des résultats des estimations de la production.
@@ -1658,7 +1658,7 @@ faciliter l'identification.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-4.png" alt="Figure9-4" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-4.png" alt="Figure9-4" width="950"/>
     <br>
     <em>
 		Figure 9-4 - Onglet des résultats du graphique circulaire économique.
@@ -1682,7 +1682,7 @@ Afficher la quantité totale de chaque gaz à effet de serre produit par la ferm
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-5.png" alt="Figure9-5" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-5.png" alt="Figure9-5" width="950"/>
     <br>
     <em>
 		Figure 9-5 - Onglet Résultats des émissions globales
@@ -1700,7 +1700,7 @@ Présente une ventilation mensuelle de toutes les émissions d'une ferme.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-6.png" alt="Figure9-6" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-6.png" alt="Figure9-6" width="950"/>
     <br>
     <em>
 		Figure 9-6 - Onglet Résultats des émissions des composantes.
@@ -1718,7 +1718,7 @@ la comparaison dans le tableau.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-7.png" alt="Figure9-7" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-7.png" alt="Figure9-7" width="950"/>
     <br>
     <em>
 		Figure 9-7 - Onglet Résultats des émissions détaillées.
@@ -1741,7 +1741,7 @@ Affiché seulement lorsqu'une composante animale est ajoutée à une ferme. Affi
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-8.png" alt="Figure9-8" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-8.png" alt="Figure9-8" width="950"/>
     <br>
     <em>
 		Figure 9-8 - Onglet Résultats du rapport d'estimation des aliments.
@@ -1758,7 +1758,7 @@ Affichée seulement lorsqu'une composante animale est ajoutée à une ferme. Hol
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-9.png" alt="Figure9-9" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-9.png" alt="Figure9-9" width="950"/>
     <br>
     <em>
 		Figure 9-9 - Onglet Résultats de la gestion du fumier.
@@ -1780,7 +1780,7 @@ Cliquez sur le bouton à bascule « Grille » ou « Graphique » pour affich
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-10.png" alt="Figure9-10" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-10.png" alt="Figure9-10" width="950"/>
     <br>
     <em>
 		Figure 9-10 - Onglet Résultats de la modélisation pluriannuelle du carbone - Vue Graphique.
@@ -1792,7 +1792,7 @@ Cliquez sur le bouton à bascule « Grille » ou « Graphique » pour affich
 
 
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-11.png" alt="Figure9-11" width="950"/>
     <br>
     <em>
 		Figure 9-11 - Onglet Résultats de la modélisation pluriannuelle du carbone - Vue Tableau/Grille
@@ -1802,7 +1802,7 @@ Cliquez sur le bouton à bascule « Grille » ou « Graphique » pour affich
 
 
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter9/figure9-12.png" alt="Figure9-12" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter9/figure9-12.png" alt="Figure9-12" width="950"/>
     <br>
     <em>
 		Figure 9-12 - Infobulle dans la vue Graphique montrant de l'information supplémentaire pour un point de données.
@@ -3201,13 +3201,13 @@ Le mode pluriannuel n’est disponible que si vous êtes actuellement en mode av
 
 Holos utilise par défaut le modèle de carbone de niveau 2 du GIEC, mais il permet à l’utilisateur de passer au modèle de carbone MIBC. Pour passer d’un modèle à l’autre :
 1.	Cliquez sur Paramètres dans la barre de menu supérieure.
-2.	Sélectionnez « Paramètres de l’utilisateur ».
-3.	Dans la liste déroulante « Stratégie de modélisation du carbone », sélectionnez le modèle de carbone que vous voulez utiliser dans vos calculs.
+2.	Sélectionnez « **Paramètres de l’utilisateur** ».
+3.	Dans la liste déroulante « **Stratégie de modélisation du carbone** », sélectionnez le modèle de carbone que vous voulez utiliser dans vos calculs.
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-3.png" alt="Figure11-3" width="550"/>
     <br>
     <em>
 		Figure 11-3 - Changement de modèle de carbone utilisé dans Holos. 

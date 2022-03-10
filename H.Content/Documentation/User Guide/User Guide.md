@@ -3,7 +3,7 @@
 To install Holos navigate [here](https://https://aafc-holos.s3.amazonaws.com/setup.exe) on the web.  Click on the specified zip file to download it. Once downloaded, navigate to your downloads folder, and double click the installer named **setup**.  You will be asked if you would like to install the application, click **install**.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter1/figure1-1.png" alt="Figure 1-1" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-1.png" alt="Figure 1-1" width="450"/>
     <br>
     <em>Figure 1.1: The install screen for Holos 4.</em>
 </p>
@@ -11,7 +11,7 @@ To install Holos navigate [here](https://https://aafc-holos.s3.amazonaws.com/set
 The installation will take several minutes to complete, you can do other things on your computer while you wait for it to install.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter1/figure1-2.png" alt="Figure 1-2" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-2.png" alt="Figure 1-2" width="450"/>
     <br>
     <em>Figure 1.2: Loading bar for Holos install.</em>
 </p>
@@ -19,7 +19,7 @@ The installation will take several minutes to complete, you can do other things 
 Once the install is complete Holos should begin immediately, greeting you with a disclaimer shown below.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter1/figure1-3.png" alt="Figure 1-3" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-3.png" alt="Figure 1-3" width="450"/>
     <br>
     <em>Figure 1.3 Holos disclaimer on startup.</em>
 </p>
@@ -28,7 +28,7 @@ Once the install is complete Holos should begin immediately, greeting you with a
 You can access Holos from the Windows start menu. Open the start menu, Holos should be found under in a folder labeled AAFC-AAC.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
     <br>
     <em>Figure 1.4: Holos in the start menu.</em>
 </p>
@@ -56,7 +56,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-1.png" alt="Figure 2-1" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-1.png" alt="Figure 2-1" width="650"/>
     <br>
 		<em>
 			Figure 2-1: Create a new farm or open an existing farm selection screen or import from a file.
@@ -70,7 +70,7 @@ Holos can handle multiple farms created by the user, each representing different
 2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. Once you have named your farm you must specify what mode you would like to operate Holos under, either “Basic” or “Advanced” mode.  When you are finished, click the “OK” button to proceed.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-2.png" alt="Figure 2-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-2.png" alt="Figure 2-2" width="650"/>
     <br>
     <em> Figure 2.2 Entering name, comments, and selecting operating mode.</em>
 </p>
@@ -79,7 +79,7 @@ Holos can handle multiple farms created by the user, each representing different
 3. If you chose “Advanced Mode” you can choose “Metric” or “Imperial” from the drop-down list (“Basic Mode” will skip this step and set your units to “Metric” for you). After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-3.png" alt="Figure 2-3" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-3.png" alt="Figure 2-3" width="650"/>
     <br>
     <em>Figure: 2.3 Unit of Measurement Selection Screen. 
 	<br>
@@ -89,7 +89,7 @@ Holos can handle multiple farms created by the user, each representing different
 4. Select your province from the drop-down list and click “Next” on the bottom of the screen.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-4.png" alt="Figure 2-4" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-4.png" alt="Figure 2-4" width="650"/>
     <br>
 		<em>
 			Figure: 2.4 Province Selection Screen. 
@@ -107,7 +107,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-5.png" alt="Figure 2-5" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-5.png" alt="Figure 2-5" width="650"/>
     <br>
     <em>Figure: 2.5 Hovering the mouse cursor over the regions on the map will display a tool tip near you mouse pointer.</em>
 </p>
@@ -117,7 +117,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-6.png" alt="Figure 2-6" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-6.png" alt="Figure 2-6" width="750"/>
     <br>
 	<em>
 		Figure: 2.6 Farm Location Selection Screen. 
@@ -137,7 +137,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-7.PNG" alt="Figure 2-7" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-7.png" alt="Figure 2-7" width="450"/>
     <br>
     <em>Figure: 2.7 Soil Zone Selection.</em>
 </p>
@@ -147,7 +147,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-8.PNG" alt="Figure 2-8" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-8.png" alt="Figure 2-8" width="450"/>
     <br>
 	<em>
 		Figure: 2.8 Hardiness Zone Selection. 
@@ -163,7 +163,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-9.PNG" alt="Figure 2-9" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-9.PNG" alt="Figure 2-9" width="750"/>
     <br>
 	<em>
 		Figure: 2.9 Climate Data Tab. 
@@ -195,7 +195,7 @@ In order to import your own climate data into Holos, the file must be a Comma Se
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter2/figure2-10.PNG" alt="Figure 2-10" width=""/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-10.PNG" alt="Figure 2-10" width=""/>
     <br>
     <em>Figure: 2.10 custom climate data file format.</em>
 </p>
@@ -214,7 +214,7 @@ In the “**File**” tab there are several options to manage your farm(s) files
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-1.png" alt="Figure3-1" width=""/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-1.png" alt="Figure3-1" width=""/>
     <br>
     <em>
 		Figure 3.1: Holos File Tab Toolbar 
@@ -242,7 +242,7 @@ In the “**File**” tab there are several options to manage your farm(s) files
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-2.png" alt="Figure3-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-2.png" alt="Figure3-2" width="650"/>
     <br>
     <em>
 		Figure 3.2: Open Farm Selection
@@ -260,7 +260,7 @@ In the “**File**” tab there are several options to manage your farm(s) files
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-3.png" alt="Figure3-3" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-3.png" alt="Figure3-3" width="650"/>
     <br>
     <em>
 		Figure 3.3: Additional Filtering For Farms Available For Each Data Header.
@@ -274,7 +274,7 @@ In the “**File**” tab there are several options to manage your farm(s) files
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-4.png" alt="Figure3-4" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-4.png" alt="Figure3-4" width="650"/>
     <br>
     <em>
 		Figure 3.4: Full Text Search Option
@@ -291,7 +291,7 @@ In the “**File**” tab there are several options to manage your farm(s) files
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-5.png" alt="Figure3-5" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-5.png" alt="Figure3-5" width="650"/>
     <br>
     <em>
 		Figure 3.5: Opening A Farm.
@@ -323,7 +323,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-6.png" alt="Figure3-6" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-6.png" alt="Figure3-6" width="650"/>
     <br>
     <em>
 		Figure 3.6: Exporting a farm
@@ -345,7 +345,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-7.png" alt="Figure3-7" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-7.png" alt="Figure3-7" width="650"/>
     <br>
     <em>
 		Figure 3.7: Choosing A Location To Export The Chosen Farms.
@@ -367,7 +367,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-8.png" alt="Figure3-8" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-8.png" alt="Figure3-8" width="650"/>
     <br>
     <em>
 		Figure 3.8: Choosing the farm(s) to import.
@@ -386,7 +386,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-9.png" alt="Figure3-9" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-9.png" alt="Figure3-9" width="650"/>
     <br>
     <em>
 		Figure 3.9: Selecting Farm(s) to Import.
@@ -406,7 +406,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-10.png" alt="Figure3-10" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-10.png" alt="Figure3-10" width="650"/>
     <br>
     <em>
 		Figure 3.10: Selecting Farm(s) to Import from multiple folders.
@@ -438,7 +438,7 @@ In this section, you can see all the farms that are in the current file you are 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-11.png" alt="Figure3-11" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-11.png" alt="Figure3-11" width="650"/>
     <br>
     <em>
 		Figure 3.11: Managing Farms Screen.
@@ -457,7 +457,7 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-12.png" alt="Figure3-12" width=""/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-12.png" alt="Figure3-12" width=""/>
     <br>
     <em>
 		Figure 3.12: Help Menu Display.
@@ -472,7 +472,7 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-13.png" alt="Figure3-13" width=""/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-13.png" alt="Figure3-13" width=""/>
     <br>
     <em>
 		Figure 3.13: Send Feedback Form.
@@ -497,7 +497,7 @@ Under the “**Help**” tab, there is the option to “**Send Feedback**”, vi
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter3/figure3-14.png" alt="Figure3-14" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter3/figure3-14.png" alt="Figure3-14" width="550"/>
     <br>
     <em>
 		Figure 3.14: Send Feedback Form with Optional Survey Displayed.
@@ -525,7 +525,7 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-1.png" alt="Figure4-1" width=""/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-1.png" alt="Figure4-1" width=""/>
     <br>
     <em>
 		Figure 4.1: Defaults Options
@@ -548,7 +548,7 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-2.png" alt="Figure4-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-2.png" alt="Figure4-2" width="650"/>
     <br>
     <em>
 		Figure 4.2: Farm Details Selection.
@@ -583,7 +583,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>
     <br>
     <em>
 		Figure 4.3: User Default Settings
@@ -600,7 +600,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-4.png" alt="Figure4-4" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-4.png" alt="Figure4-4" width="650"/>
     <br>
     <em>
 		Figure 4.4: - Energy Settings
@@ -616,7 +616,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-5.png" alt="Figure4-5" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-5.png" alt="Figure4-5" width="650"/>
     <br>
     <em>
 		Figure 4.5: Crop Defaults
@@ -632,7 +632,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-6.png" alt="Figure4-6" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-6.png" alt="Figure4-6" width="650"/>
     <br>
     <em>
 		Figure 4.6 - Step 3 section.
@@ -651,7 +651,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
     <br>
     <em>
 		Figure 4.7: - A field component properties in single year mode.
@@ -662,7 +662,7 @@ The default data for this screen is based on information found in the algorithm 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
     <br>
     <em>
 		Figure 4.8: - A field component properties in multi year mode.
@@ -677,7 +677,7 @@ The bottom of Holos will display the current working mode either SYM or MYM.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
     <br>
     <em>
 		Figure 4.9 - The current year mode is displayed in the bottom right corner.
@@ -697,7 +697,7 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-1.png" alt="Figure5-1"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-1.png" alt="Figure5-1"/>
     <br>
     <em>
 		Figure 5.1 - Custom Diet Creator Tool
@@ -723,7 +723,7 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-2.png" alt="Figure5-2" width=""/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-2.png" alt="Figure5-2" width=""/>
     <br>
     <em>
 		Figure 5.2 - Creating A Custom Diet.
@@ -756,7 +756,7 @@ You can click on “Yes” beside “Show Additional Columns” to see additiona
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-3.png" alt="Figure5-3" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width="750"/>
     <br>
     <em>
 		Figure 5.3 - Adding a feed ingredient to a diet.
@@ -773,7 +773,7 @@ You can click on “Yes” beside “Show Additional Columns” to see additiona
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-4.png" alt="Figure5-4" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-4.png" alt="Figure5-4" width="750"/>
     <br>
     <em>
 		Figure 5.4 - Creating a custom feed ingredient.
@@ -790,7 +790,7 @@ Tooltips are initiated when the mouse cursor (or pointer) is placed on top of a 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-5.png" alt="Figure5-5"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5"/>
     <br>
     <em>
 		Figure 5.5 - A tooltip for a field in the program.
@@ -807,7 +807,7 @@ Tooltips are also available for abbreviated terms found in various parts of the 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter5/figure5-6.png" alt="Figure5-6">
+ <img src="../../Images/UserGuide/en/chapter5/figure5-6.png" alt="Figure5-6">
     <br>
     <em>
 		Figure 5.6 - Tooltip for a abbreviated table heading.
@@ -830,7 +830,7 @@ With Holos, you can create your own farm through a selection of **components** t
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-1.png" alt="Figure6-1" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-1.png" alt="Figure6-1" width="950"/>
     <br>
     <em>
 		Figure 6.1 - Component Selection 
@@ -853,7 +853,7 @@ With Holos, you can create your own farm through a selection of **components** t
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-2.png" alt="Figure6-2" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-2.png" alt="Figure6-2" width="850"/>
     <br>
     <em>
 		Figure 6.2- Adding a Component 
@@ -874,7 +874,7 @@ With Holos, you can create your own farm through a selection of **components** t
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-3.png" alt="Figure6-3"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-3.png" alt="Figure6-3"/>
     <br>
     <em>
 		Figure 6.3 – Window to get the number of copies of your component.
@@ -892,7 +892,7 @@ With Holos, you can create your own farm through a selection of **components** t
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-4.png" alt="Figure6-4" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-4.png" alt="Figure6-4" width="550"/>
     <br>
     <em>
 		Figure 6.4 – Field Step 1. Define name, area, crop, and tillage type for your field component.
@@ -912,7 +912,7 @@ Contains such information like: yield, harvest method, fertilizer application ra
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-5.png" alt="Figure6-5" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-5.png" alt="Figure6-5" width="550"/>
     <br>
     <em>
 		Figure 6.5 – General tab for a field component.
@@ -926,7 +926,7 @@ Allows the user to add a fertilizer application to the field. This application i
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-6.png" alt="Figure6-6"  width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-6.png" alt="Figure6-6"  width="650"/>
     <br>
     <em>
 		Figure 6.6 – Fertilizer tab for a field component. This shows the fertilizer application table for a field.
@@ -942,7 +942,7 @@ A summary of all manure applications to a farm can be seen in the [Farm Details]
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-7.png" alt="Figure6-7"  width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-7.png" alt="Figure6-7"  width="650"/>
     <br>
     <em>
 		Figure 6.7 – Manure tab for a field component. This shows the manure application table for a field.
@@ -956,7 +956,7 @@ This section lets the user specify how much carbon and nitrogen are in your crop
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-8.png" alt="Figure6-8"  width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-8.png" alt="Figure6-8"  width="650"/>
     <br>
     <em>
 		Figure 6.8 – Residue tab for a field component. 
@@ -971,7 +971,7 @@ The economics section shows various economic data related to the component inclu
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-9.png" alt="Figure6-9"  width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-9.png" alt="Figure6-9"  width="650"/>
     <br>
     <em>
 		Figure 6.9 – Economic tab for a field component showing various costs related to the field.
@@ -997,6 +997,22 @@ After adding a shelterbelt component, you have various options to configure this
 1.	Enter the “**Year of Observation**” for your shelterbelt.
 2.	By default, there is one row of trees in the shelterbelt when the component is added to your farm. **To add an additional row of trees, click “Additional Row”.**
 
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-10.png" alt="Figure6-10"  width="650"/>
+    <br>
+    <em>
+		Figure 6.10 - Shelterbelt Component
+		<br>
+		A: The shelterbelt component
+		<br>
+		B: Shelterbelt name and year of observation
+		<br>
+		C: A Shelterbelt row: row length and row name
+		<br>
+		D: A Tree type in a shelterbelt row
+	</em>
+</p>
+<br>
 
 
 #### Modifying the Shelterbelt Rows
@@ -1017,7 +1033,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-11.png" alt="Figure6-11"  width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-11.png" alt="Figure6-11"  width="650"/>
     <br>
     <em>
 		Figure 6.11 - Tree Types in A Shelterbelt Row  
@@ -1032,7 +1048,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-12.png" alt="Figure6-12"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-12.png" alt="Figure6-12"/>
     <br>
     <em>
 		Figure 6.12 - Average Circumference Calculator
@@ -1054,7 +1070,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-13.png" alt="Figure6-13"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-13.png" alt="Figure6-13"/>
     <br>
     <em>
 		Figure 6.13 - Circumference of Trunks at Breast Height on Measured Trees Data
@@ -1085,7 +1101,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
     <br>
     <em>
 		Figure 6.14 – Shelterbelt Details
@@ -1127,7 +1143,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
     <br>
     <em>
 		Figure 6.15 - Beef Stockers & Backgrounders Layout showcasing an animal component.
@@ -1154,7 +1170,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-16.png" alt="Figure6-16"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-16.png" alt="Figure6-16"/>
     <br>
     <em>
 		Figure 6.16 - Animal Groups
@@ -1184,7 +1200,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
     <br>
     <em>
 		Figure 6.17 - Management Periods for Animal Group
@@ -1209,7 +1225,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
     <br>
     <em>
 		Figure 6.18 - Management Periods General Tab
@@ -1230,7 +1246,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
 		Figure 6.19 - Management Periods - Diet Tab.
@@ -1245,7 +1261,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
     <br>
     <em>
 		Figure 6.20 - Management Periods - Housing Tab.
@@ -1264,7 +1280,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
     <br>
     <em>
 		Figure 6.21 - Management Periods - Manure Tab.
@@ -1358,7 +1374,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter7/figure7-1.png" alt="Figure7-1" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter7/figure7-1.png" alt="Figure7-1" width="750"/>
     <br>
     <em>
 		Figure 7.1 – Timeline Screen
@@ -1398,7 +1414,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter8/figure8-1.png" alt="Figure8-1" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-1.png" alt="Figure8-1" width="850"/>
     <br>
     <em>
 		Figure 8.1 – Detail Screen
@@ -1455,7 +1471,7 @@ Results are available in a simplified or detailed form.  The detailed results ar
 -  The page also shows a graph displaying overall emission for each farm component.
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-1.png" alt="Figure9-1" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-1.png" alt="Figure9-1" width="650"/>
     <br>
     <em>
 		Figure 9-1 - Simplified Results in Single Year mode.
@@ -1476,7 +1492,7 @@ Results are available in a simplified or detailed form.  The detailed results ar
 Provides details on farm production.  The report can be shown in a monthly or yearly format. If the component has multiple products like beef cattle (manure and beef), there will be buttons that appear above the graph portion of the report to display the appropriate graph
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-2.png" alt="Figure9-2" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-2.png" alt="Figure9-2" width="850"/>
     <br>
     <em>
 		Figure 9-2 - Estimates of Production Results Tab
@@ -1496,7 +1512,7 @@ Shows the market price and total revenue for the crops in your farm.  Economic d
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-3.png" alt="Figure9-3" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-3.png" alt="Figure9-3" width="850"/>
     <br>
     <em>
 		Figure 9-3 - Economics Results Tab
@@ -1516,7 +1532,7 @@ A proportional representation of all farm emissions.  You can view how each farm
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-4.png" alt="Figure9-4" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-4.png" alt="Figure9-4" width="850"/>
     <br>
     <em>
 		Figure 9-4 - Economics Pie Chart Results Tab
@@ -1536,7 +1552,7 @@ Display the overall amount of each greenhouse gas produced by the farm.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-5.png" alt="Figure9-5" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-5.png" alt="Figure9-5" width="850"/>
     <br>
     <em>
 		Figure 9-5 - Overall Emissions Results Tab.
@@ -1550,7 +1566,7 @@ Shows a breakdown of all emissions from a farm on a monthly basis.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-6.png" alt="Figure9-6" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-6.png" alt="Figure9-6" width="850"/>
     <br>
     <em>
 		Figure 9-6 - Component Emissions Results Tab.
@@ -1564,7 +1580,7 @@ A detailed summary of each component in the farm, showing emission breakdown for
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-7.png" alt="Figure9-7" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.png" alt="Figure9-7" width="850"/>
     <br>
     <em>
 		Figure 9-7 - Detailed Emissions Results Tab
@@ -1584,7 +1600,7 @@ Displayed only when an animal component is added to a farm. Displays how much ea
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-8.png" alt="Figure9-8" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-8.png" alt="Figure9-8" width="850"/>
     <br>
     <em>
 		Figure 9-8 - Feed Estimate Report Results Tab.
@@ -1598,7 +1614,7 @@ Displayed only when an animal component is added to a farm. Holos will display h
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-9.png" alt="Figure9-9" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-9.png" alt="Figure9-9" width="850"/>
     <br>
     <em>
 		Figure 9-9 - Manure Management Results Tab.
@@ -1618,7 +1634,7 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-10.png" alt="Figure9-10" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-10.png" alt="Figure9-10" width="850"/>
     <br>
     <em>
 		Figure 9-10 - Multi-Year Carbon Modelling Results Tab - Graph View.
@@ -1630,7 +1646,7 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>
     <br>
     <em>
 		Figure 9-11 - Multi-Year Carbon Modelling Results Tab - Table/Grid View.
@@ -1640,7 +1656,7 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter9/figure9-12.png" alt="Figure9-12" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter9/figure9-12.png" alt="Figure9-12" width="850"/>
     <br>
     <em>
 		Figure 9-12 - ToolTip in Graph View showing additional information for a data point.
@@ -1683,7 +1699,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-1.png" alt="Figure10-1" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-1.png" alt="Figure10-1" width="750"/>
     <br>
     <em>
 		Figure 10-1 - Prompt to enter location of farm.
@@ -1692,7 +1708,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
     <br>
     <em>
 		Figure 10-2 - Default farm folder created by CLI.
@@ -1701,7 +1717,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
     <br>
     <em>
 		Figure 10-3 - Default component folders created by CLI.
@@ -1716,7 +1732,7 @@ You will then be prompted to import any farms from the Holos GUI version. Subseq
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-4.png" alt="Figure10-4" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-4.png" alt="Figure10-4" width="750"/>
     <br>
     <em>
 		Figure 10-4 - Prompt the select the Units of Measurement.
@@ -1731,7 +1747,7 @@ You will then be prompted to import any farms from the Holos GUI version. Subseq
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-5.png" alt="Figure10-5" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-5.png" alt="Figure10-5" width="750"/>
     <br>
     <em>
 		Figure 10-5 - Prompt after the default farm folder is created.
@@ -1744,7 +1760,7 @@ Please note that if you have previously used the Holos CLI, after opening the CL
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-6.png" alt="Figure10-6" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-6.png" alt="Figure10-6" width="550"/>
     <br>
     <em>
 		Figure 10-6 - Prompt to enter location of farm
@@ -1764,7 +1780,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-2.png" alt="Figure10-2" width="650"/>
     <br>
     <em>
 		Default farm folder created by CLI
@@ -1776,7 +1792,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-3.png" alt="Figure10-3" width="650"/>
     <br>
     <em>
 		Default component folders created by CLI
@@ -1790,7 +1806,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-6.png" alt="Figure10-6" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-6.png" alt="Figure10-6" width="650"/>
     <br>
     <em>
 		Figure 10-6 - A template file representing a single component.
@@ -1810,7 +1826,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-7.png" alt="Figure10-7" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-7.png" alt="Figure10-7" width="750"/>
     <br>
     <em>
 		Figure 10-7 - Farm global settings file.
@@ -1842,7 +1858,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-8.png" alt="Figure10-8" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-8.png" alt="Figure10-8" width="950"/>
     <br>
     <em>
 		Figure 10-8 - Shelterbelt Data Input Excel Files.
@@ -1860,7 +1876,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-9.png" alt="Figure10-9" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-9.png" alt="Figure10-9" width="950"/>
     <br>
     <em>
 		Figure 10-9 - Representation of a Single-Row Shelterbelt
@@ -1912,7 +1928,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-10.png" alt="Figure10-10" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-10.png" alt="Figure10-10" width="950"/>
     <br>
     <em>
 		Figure 10-10 - Field Data Input Section (Field and Crop Row Data)
@@ -1928,7 +1944,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-11.png" alt="Figure10-11" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-11.png" alt="Figure10-11" width="950"/>
     <br>
     <em>
 		Figure 10-11 - Field Data Input Section (Crop Row Data)
@@ -1942,7 +1958,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-12.png" alt="Figure10-12" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-12.png" alt="Figure10-12" width="950"/>
     <br>
     <em>
 		Figure 10-12 - Field Data Input Section (Crop Data)
@@ -1956,7 +1972,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-13.png" alt="Figure10-13" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-13.png" alt="Figure10-13" width="950"/>
     <br>
     <em>
 		Figure 10-13 - Field Data Input Section (Crop Data, Manure Data, Cover Crop Data)
@@ -1974,7 +1990,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-14.png" alt="Figure10-14" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-14.png" alt="Figure10-14" width="950"/>
     <br>
     <em>
 		Figure 10-14 - Field Data Input Section (Crop Data).
@@ -2090,7 +2106,7 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-15.png" alt="Figure10-15" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-15.png" alt="Figure10-15" width="950"/>
     <br>
     <em>
 		Figure 10-15 - Swine Data Section 1
@@ -2108,7 +2124,7 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-16.png" alt="Figure10-16" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-16.png" alt="Figure10-16" width="950"/>
     <br>
     <em>
 		Figure 10-16 - Swine Data Section 2.
@@ -2124,7 +2140,7 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-17.png" alt="Figure10-17" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-17.png" alt="Figure10-17" width="950"/>
     <br>
     <em>
 		Figure 10-17 - Swine Data Section 2.
@@ -2171,7 +2187,7 @@ Below is an example of a beef component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-18.png" alt="Figure10-18" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-18.png" alt="Figure10-18" width="950"/>
     <br>
     <em>
 		Figure 10-18 - Beef Data Section 1
@@ -2187,7 +2203,7 @@ Below is an example of a beef component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-19.png" alt="Figure10-19" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-19.png" alt="Figure10-19" width="950"/>
     <br>
     <em>
 		Figure 10-19 - Beef Data Section 2
@@ -2201,7 +2217,7 @@ Below is an example of a beef component data file broken into sections
 
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-20.png" alt="Figure10-20" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-20.png" alt="Figure10-20" width="950"/>
     <br>
     <em>
 		Figure 10-20 - Beef Data Section 3
@@ -2216,7 +2232,7 @@ Below is an example of a beef component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-21.png" alt="Figure10-21" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-21.png" alt="Figure10-21" width="750"/>
     <br>
     <em>
 		Figure 10-21 - Swine Data Section 4
@@ -2253,7 +2269,7 @@ Below is an example of a beef component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-22.png" alt="Figure10-22" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-22.png" alt="Figure10-22" width="950"/>
     <br>
     <em>
 		Figure 10-22 - Dairy Data Section 1.
@@ -2268,7 +2284,7 @@ Below is an example of a beef component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-23.png" alt="Figure10-23" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-23.png" alt="Figure10-23" width="950"/>
     <br>
     <em>
 		Figure 10-23 - Dairy Data Section 2.
@@ -2279,7 +2295,7 @@ Below is an example of a beef component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-24.png" alt="Figure10-22" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-24.png" alt="Figure10-22" width="950"/>
     <br>
     <em>
 		Figure 10-24 - Dairy Data Section 3.
@@ -2294,7 +2310,7 @@ Below is an example of a beef component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-25.png" alt="Figure10-24" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-25.png" alt="Figure10-24" width="950"/>
     <br>
     <em>
 		Figure 10-25 - Dairy Data Section 4.
@@ -2329,7 +2345,7 @@ Below is an example of a sheep component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-26.png" alt="Figure10-26" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-26.png" alt="Figure10-26" width="950"/>
     <br>
     <em>
 		Figure 10-26 - Sheep Data Section 1.
@@ -2344,7 +2360,7 @@ Below is an example of a sheep component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-27.png" alt="Figure10-27" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-27.png" alt="Figure10-27" width="950"/>
     <br>
     <em>
 		Figure 10-27 - Sheep Data Section 2.
@@ -2358,7 +2374,7 @@ Below is an example of a sheep component data file broken into sections
 
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-28.png" alt="Figure10-28" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-28.png" alt="Figure10-28" width="950"/>
     <br>
     <em>
 		Figure 10-28 - Sheep Data Section 3.
@@ -2391,7 +2407,7 @@ Below is an example of a sheep component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-29.png" alt="Figure10-29" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-29.png" alt="Figure10-29" width="850"/>
     <br>
     <em>
 		Figure 10-29 - Poultry Data Section 1.
@@ -2406,7 +2422,7 @@ Below is an example of a sheep component data file broken into sections
 <br>
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-30.png" alt="Figure10-30" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-30.png" alt="Figure10-30" width="850"/>
     <br>
     <em>
 		Figure 10-30 - Poultry Data Section 2.
@@ -2437,7 +2453,7 @@ Below is an example of a sheep component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-31.png" alt="Figure10-31" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-31.png" alt="Figure10-31" width="850"/>
     <br>
     <em>
 		Figure 10-31 - Other Livestock Data Section 1
@@ -2453,7 +2469,7 @@ Below is an example of a sheep component data file broken into sections
 
 
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-32.png" alt="Figure10-32" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-32.png" alt="Figure10-32" width="850"/>
     <br>
     <em>
 		Figure 10-32 - Other Livestock Data Section 1
@@ -2508,7 +2524,7 @@ Below is an example of a sheep component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-33.png" alt="Figure10-33" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-33.png" alt="Figure10-33" width="650"/>
     <br>
     <em>
 		Figure 10-33 - The output folder is created after the CLI is finished processing files.
@@ -2541,7 +2557,7 @@ Below is an example of a sheep component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-34.png" alt="Figure10-34" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-34.png" alt="Figure10-34" width="950"/>
     <br>
     <em>
 		Figure 10-34 - Total Results For A Farm – Yearly Basis
@@ -2573,7 +2589,7 @@ Below is an example of a sheep component data file broken into sections
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-35.png" alt="Figure10-35" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-35.png" alt="Figure10-35" width="950"/>
     <br>
     <em>
 		Figure 10-35 - Total Results For A Farm – Monthly Basis
@@ -2643,7 +2659,7 @@ Below are example directories and their corresponding results
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-36.png" alt="Figure10-36" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-36.png" alt="Figure10-36" width="650"/>
     <br>
     <em>
 		Figure 10-36 - Total Farm results directory
@@ -2660,7 +2676,7 @@ Below are example directories and their corresponding results
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-37.png" alt="Figure10-37" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-37.png" alt="Figure10-37" width="650"/>
     <br>
     <em>
 		Figure 10-37 - Results for each calculated category
@@ -2737,7 +2753,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-38.png" alt="Figure10-38" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-38.png" alt="Figure10-38" width="850"/>
     <br>
     <em>
 		Figure 10-38 - Example of an Empty Data Value in a Shelterbelt Data Input Excel File
@@ -2751,7 +2767,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-39.png" alt="Figure10-39" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-39.png" alt="Figure10-39" width="650"/>
     <br>
     <em>
 		Figure 10-39 - Command Line Interface Encountering Empty Data Error.
@@ -2769,7 +2785,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-40.png" alt="Figure10-40" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-40.png" alt="Figure10-40" width="850"/>
     <br>
     <em>
 		Figure 10-40 - Example of a Negative Value That Does Not Make Sense in a Shelterbelt Data Input Excel File
@@ -2783,7 +2799,7 @@ If the names of the component’s are not valid, the data will not be processed.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-41.png" alt="Figure10-41" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-41.png" alt="Figure10-41" width="650"/>
     <br>
     <em>
 		Figure 10-41 - Command Line Interface Encountering Invalid Negative Data Value
@@ -2802,7 +2818,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-42.png" alt="Figure10-42" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-42.png" alt="Figure10-42" width="950"/>
     <br>
     <em>
 		Figure 10-42 - Example of an Invalid Header in a Shelterbelt Data Input Excel File
@@ -2816,7 +2832,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-43.png" alt="Figure10-43" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-43.png" alt="Figure10-43" width="650"/>
     <br>
     <em>
 		Figure 10-43 - Command Line Interface Encountering An Invalid Header.
@@ -2837,7 +2853,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-44.png" alt="Figure10-44" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-44.png" alt="Figure10-44" width="850"/>
     <br>
     <em>
 		Figure 10-44 - Example of an Invalid Special Data Input Value for Hardiness Zone in a Shelterbelt Data Input Excel File
@@ -2851,7 +2867,7 @@ Please do not modify the headers in any of the component data input Excel files.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter10/figure10-45.png" alt="Figure10-45" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter10/figure10-45.png" alt="Figure10-45" width="650"/>
     <br>
     <em>
 		Figure 10-45 - Command Line Interface Encountering Invalid Special Data Input Value
@@ -2877,7 +2893,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter11/figure11-1.png" alt="Figure4-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure4-2" width="650"/>
     <br>
     <em>
 		Figure 11-1 - Advanced mode can be selected from the farm defaults/details setting.
@@ -2891,7 +2907,7 @@ Multi-year mode is only available if you are currently in Advanced Mode. If you 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
     <br>
     <em>
 		Figure 11-2 - Click the Toggle to Switch between Basic and Advanced Mode.
@@ -2909,7 +2925,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
     <br>
     <em>
 		Figure 11-3 - Switching between carbon models that are used in Holos.
@@ -2935,7 +2951,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
     <br>
     <em>
 		Figure 11-4 - Using the Holos CLI to create a new farms folder.
