@@ -439,7 +439,7 @@ namespace H.Core.Test.Services
 
             _farmResultsService.CalculateCarbonLostFromHayExports(farmEmissionResults);
 
-            Assert.AreEqual(4.5, harvestingField.TotalCarbonExportedFromBales);
+            Assert.AreEqual(4.5, harvestingField.TotalCarbonLossFromBaleExports);
         }
 
         [TestMethod]
@@ -521,7 +521,7 @@ namespace H.Core.Test.Services
 
             _farmResultsService.CalculateCarbonLostByGrazingAnimals(farmEmissionResults: farmEmissionResults);
 
-            Assert.AreEqual(30, cropViewItem.TotalCarbonUptakeByGrazingAnimals);
+            Assert.AreEqual(30, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
         #endregion

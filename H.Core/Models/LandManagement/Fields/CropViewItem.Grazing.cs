@@ -6,7 +6,7 @@ namespace H.Core.Models.LandManagement.Fields
     {
         #region Fields
 
-        private double _totalCarbonUptakeByGrazingAnimals;
+        private double _totalCarbonLossesFromGrazingAnimals;
 
         private ObservableCollection<GrazingViewItem> _grazingViewItems;
 
@@ -21,38 +21,14 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Equation 12.3.2-1
-        /// Equation 12.3.2-2
-        /// 
-        /// The total carbon uptake from grazing animals (this will be more than is actually utilized). Use
-        /// <see cref="TotalCarbonUtilizedByGrazingAnimals"/> for calculations.
-        /// 
-        /// (kg C)
-        /// </summary>
-        public double TotalCarbonUptakeByGrazingAnimals
-        {
-            get => _totalCarbonUptakeByGrazingAnimals;
-            set => SetProperty(ref _totalCarbonUptakeByGrazingAnimals, value);
-        }
-
-        /// <summary>
         /// Equation 12.3.2-4
         ///
         /// (kg C)
         /// </summary>
-        public double TotalCarbonUtilizedByGrazingAnimals
+        public double TotalCarbonLossesByGrazingAnimals
         {
-            get
-            {
-                if (this.ForageUtilizationRate <= 0)
-                {
-                    return 0;
-                }
-
-                var result = this.TotalCarbonUptakeByGrazingAnimals /  (1 - (this.ForageUtilizationRate / 100.0));
-
-                return result;
-            }
+            get => _totalCarbonLossesFromGrazingAnimals;
+            set => SetProperty(ref _totalCarbonLossesFromGrazingAnimals, value);
         }
 
         #endregion

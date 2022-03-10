@@ -3,17 +3,22 @@
     public partial class CropViewItem
     {
         #region Fields
-
-        private double _totalCarbonExportedFromBales;
+        
+        private double _totalCarbonLossFromBaleExports;
 
         #endregion
 
         #region Properties
 
-        public double TotalCarbonExportedFromBales
+        /// <summary>
+        /// Equation 12.3.2-4
+        ///
+        /// (kg C)
+        /// </summary>
+        public double TotalCarbonLossFromBaleExports
         {
-            get => _totalCarbonExportedFromBales;
-            set => SetProperty(ref _totalCarbonExportedFromBales, value);
+            get => _totalCarbonLossFromBaleExports;
+            set => SetProperty(ref _totalCarbonLossFromBaleExports, value);
         }
 
         #endregion

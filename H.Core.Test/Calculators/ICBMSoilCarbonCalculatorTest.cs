@@ -424,18 +424,20 @@ namespace H.Core.Test.Calculators
             {
                 Defaults = new Defaults()
                 {
-                    DefaultSupplementalFeedingLossPercentage = 30,
+                    DefaultSupplementalFeedingLossPercentage = 20,
                 },
             };
 
             var currentYearViewItem = new CropViewItem()
             {
                 CarbonConcentration = 0.45,
+
+                // This is a supplemental feeding to grazing animals and the extra carbon left over once animals are finished must be accounted for in total above ground inputs
                 HayImportViewItems = new ObservableCollection<HayImportViewItem>()
                 {
                     new HayImportViewItem()
                     {
-                        NumberOfBales = 100,
+                        NumberOfBales = 10,
                         BaleWeight = 500,
                         MoistureContentAsPercentage = 12,
                     }
@@ -448,11 +450,11 @@ namespace H.Core.Test.Calculators
                 nextYearViewItems: null,
                 farm: farm);
 
-            // = [(100 * 500) * (1 - 12/100) * (1 - 30/100)] * 0.45
-            // = (50000 * 0.88 * 0.7) * 0.45
-            // = 13860
+            // = [(10 * 500) * (1 - 12/100) * (1 - 20/100)] * 0.45
+            // = (5000 * 0.88 * 0.2) * 0.45
+            // = 396
 
-            //Assert.AreEqual(13860, result);
+            Assert.AreEqual(396, result);
         }
 
         #endregion

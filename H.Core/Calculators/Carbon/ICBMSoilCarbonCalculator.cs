@@ -6,6 +6,7 @@ using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
 using H.Core.Services.LandManagement;
 
@@ -47,19 +48,19 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem: currentYearViewItem,
                 farm: farm);
 
-            var carbonInputFromProduct = this.CalculateCarbonInputFromProduct(
+            var lossesFromGrazingAndBaleExports = this.CalculateLossesFromGrazingAndBaleExports(
+                lossesFromGrazing: currentYearViewItem.TotalCarbonLossesByGrazingAnimals,
+                lossesFromBaleExport: currentYearViewItem.TotalCarbonLossFromBaleExports,
+                area: currentYearViewItem.Area);
+
+            // Subtract carbon utilized from grazing animals and carbon exported as bales
+            currentYearViewItem.PlantCarbonInAgriculturalProduct -= lossesFromGrazingAndBaleExports;
+
+            currentYearViewItem.CarbonInputFromProduct = this.CalculateCarbonInputFromProduct(
                 previousYearViewItem: previousYearViewItem,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
-
-            // Subtract carbon utilized from grazing animals and carbon exported as bales
-
-            // Get total field value so are working with same units
-            var lossesFromGrazing = currentYearViewItem.TotalCarbonUtilizedByGrazingAnimals;
-            var resultingCarbonInputFromProduct = (carbonInputFromProduct ) - lossesFromGrazing;
-
-            currentYearViewItem.CarbonInputFromProduct = resultingCarbonInputFromProduct;
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
                 previousYearViewItem: previousYearViewItem,
@@ -80,14 +81,14 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            // Add in any supplemental feeding amounts that were given to animals grazing on a pasture during the year
-            //var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
-            //    previousYearViewItem: previousYearViewItem,
-            //    currentYearViewItem: currentYearViewItem,
-            //    nextYearViewItems: nextYearViewItem,
-            //    farm: farm);
+            var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
+                previousYearViewItem: previousYearViewItem,
+                currentYearViewItem: currentYearViewItem,
+                nextYearViewItems: nextYearViewItem,
+                farm: farm);
 
-            //currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
+            // Add in any supplemental feeding amounts that were given to grazing animals
+            currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
 
             currentYearViewItem.BelowGroundCarbonInput = this.CalculateTotalBelowGroundCarbonInput(
                 cropViewItem: currentYearViewItem,
@@ -158,7 +159,7 @@ namespace H.Core.Calculators.Carbon
         {
             var result = 0.0;
 
-            // Get total amount of hay added
+            // Get total amount of supplemental hay added
             var hayImportViewItems = currentYearViewItem.HayImportViewItems;
             foreach (var hayImportViewItem in hayImportViewItems)
             {
@@ -166,8 +167,9 @@ namespace H.Core.Calculators.Carbon
                 var totalDryMatterWeight = hayImportViewItem.GetTotalDryMatterWeightOfAllBales();
 
                 // Amount lost during feeding
-                var loss = 1 - farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
+                var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
 
+                // Total additional carbon that must be added to above ground inputs for the field
                 var totalCarbon = totalDryMatterWeight * loss * currentYearViewItem.CarbonConcentration;
 
                 result += totalCarbon;
@@ -1065,6 +1067,21 @@ namespace H.Core.Calculators.Carbon
             var carbonDioxideChangeForSoilByMonth = changeInCarbonDioxideEquivalentsForSoil / 12.0;
             return carbonDioxideChangeForSoilByMonth;
         }
+
+        /// <summary>
+        /// Equation 12.3.2-5
+        /// </summary>
+        /// <returns>Total carbon losses from grazing animals and bale exports (kg C)</returns>
+        public double CalculateLossesFromGrazingAndBaleExports(
+            double lossesFromGrazing,
+            double lossesFromBaleExport,
+            double area)
+        {
+            var result = ((lossesFromGrazing + lossesFromBaleExport) / area);
+
+            return result;
+        }
+
         #endregion
     }
 }
