@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -60,6 +61,8 @@ namespace H.Core.Services.LandManagement
                 };
             }
         }
+
+
 
         /// <summary>
         /// Before carbon change can be calculated, all view items must have yields assigned so that we can determine the total carbon inputs from all crops, manure applications, supplemental 
@@ -463,7 +466,130 @@ namespace H.Core.Services.LandManagement
                         yearIndex: i);
                 }
             }
-        }        
+        }
+
+        /// <summary>
+        /// Calculates how much carbon was lost due to bales being exported off field.
+        /// </summary>
+        public void CalculateCarbonLostFromHayExports(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            // Get hay exports from component, find other components dependent on exports, assign losses to view item
+            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            {
+                if (cropViewItem.HasHarvestViewItems)
+                {
+                    var totalHarvestedBales = cropViewItem.HarvestViewItems.Sum(x => x.TotalNumberOfBalesHarvested);
+                    var totalBalesImportedFromOtherFields = 0d;
+                    var moistureContentOfImportedBales = new List<double>();
+
+                    // Check all other fields to see if anyone is using these harvested bales
+                    foreach (var component in farm.FieldSystemComponents)
+                    {
+                        foreach (var viewItem in component.CropViewItems)
+                        {
+                            foreach (var hayImportViewItem in viewItem.HayImportViewItems.Where(x => x.FieldSourceGuid.Equals(fieldSystemComponent.Guid) && x.Date.Year == cropViewItem.Year))
+                            {
+                                if (hayImportViewItem.SourceOfBales == ResourceSourceLocation.OffFarm)
+                                {
+                                    continue;
+                                }
+
+                                totalBalesImportedFromOtherFields += hayImportViewItem.NumberOfBales;
+                                moistureContentOfImportedBales.Add(hayImportViewItem.MoistureContentAsPercentage);
+                            }
+                        }
+                    }
+
+                    var totalWetWeight = totalHarvestedBales - totalBalesImportedFromOtherFields;
+                    if (totalWetWeight > 0)
+                    {
+                        // Get average moisture content to calculate the dry matter
+                        var averageMoistureContentPercentage = moistureContentOfImportedBales.Average();
+
+                        // Calculate dry matter of the bales
+                        var totalDryMatter = totalWetWeight * (1 - (averageMoistureContentPercentage / 100.0));
+
+                        // Calculate total carbon in dry matter
+                        var totalCarbonInExportedBales = totalDryMatter * CoreConstants.CarbonConcentration;
+
+                        cropViewItem.TotalCarbonLossFromBaleExports = this.CalculateTotalCarbonLossFromBaleExports(
+                            percentageOfProductReturnedToSoil: cropViewItem.PercentageOfProductYieldReturnedToSoil,
+                            totalCarbonInExprtedBales: totalCarbonInExportedBales);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Equation 12.3.2-4
+        /// </summary>
+        /// <param name="percentageOfProductReturnedToSoil">Amount of product yield returned to soil (%)</param>
+        /// <param name="totalCarbonInExprtedBales">Total amount of carbon in bales (kg C)</param>
+        /// <returns>Total amount of carbon lost from exported bales (kg C)</returns>
+        private double CalculateTotalCarbonLossFromBaleExports(
+            double percentageOfProductReturnedToSoil,
+            double totalCarbonInExprtedBales)
+        {
+            var result = totalCarbonInExprtedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates how much carbon was lost due to animals grazing on the field.
+        /// </summary>
+        public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            // Go over each item by year using the items from the stage state
+            var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
+            {
+                var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
+                foreach (var year in distinctYears)
+                {
+                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
+                    foreach (var viewItem in viewItemsForYear)
+                    {
+                        var totalCarbonUptakeByAnimals = 0d;
+
+                        foreach (var grazingViewItem in viewItem.GrazingViewItems)
+                        {
+                            // Assumption here is that the calculated emissions from animals are the same for each year of the field's history.
+                            //var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                            //if (animalComponentEmissionsResults != null)
+                            //{
+                            //    var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                            //    if (groupEmissionResults != null)
+                            //    {
+                            //        totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                            //    }
+                            //}
+                        }
+
+                        viewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
+                            forageUtilizationRate: viewItem.ForageUtilizationRate,
+                            totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Equation 12.3.2-4
+        /// </summary>
+        /// <param name="forageUtilizationRate">Utilization rate for the particular forage (%)</param>
+        /// <param name="totalCarbonUptakeByGrazingAnimals">Total carbon uptake from grazing animals (kg C)</param>
+        /// <returns>Total carbon lost from grazing animals (kg C)</returns>
+        private double CalculateTotalCarbonLossFromGrazingAnimals(
+            double forageUtilizationRate,
+            double totalCarbonUptakeByGrazingAnimals)
+        {
+            var result = totalCarbonUptakeByGrazingAnimals / (1 - (forageUtilizationRate / 100.0));
+
+            return result;
+        }
+
+
 
         #endregion
     }

@@ -109,8 +109,6 @@ namespace H.Core.Services.Animals
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
             }
 
-            //
-
             /*
              * Manure carbon (C) and methane (CH4)
              */

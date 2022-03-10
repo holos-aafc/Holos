@@ -95,6 +95,7 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore())
                     .ForMember(property => property.HarvestViewItems, options => options.Ignore())
                     .ForMember(property => property.GrazingViewItems, options => options.Ignore())
+                    .ForMember(property => property.HayImportViewItems, options => options.Ignore())
                     .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore());
             });
 
