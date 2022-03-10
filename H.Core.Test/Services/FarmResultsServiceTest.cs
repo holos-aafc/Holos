@@ -439,7 +439,7 @@ namespace H.Core.Test.Services
 
             _farmResultsService.CalculateCarbonLostFromHayExports(farmEmissionResults);
 
-            Assert.AreEqual(10, harvestingField.TotalCarbonExportedFromBales);
+            Assert.AreEqual(4.5, harvestingField.TotalCarbonExportedFromBales);
         }
 
         [TestMethod]
@@ -476,6 +476,14 @@ namespace H.Core.Test.Services
 
             farm.Components.Add(fieldSystemComponent);
             farm.Components.Add(cowCalfComponent);
+
+            farm.StageStates.Add(new FieldSystemDetailsStageState()
+            {
+                DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
+                {
+                   cropViewItem,
+                }
+            });
 
             var farmEmissionResults = new FarmEmissionResults()
             {

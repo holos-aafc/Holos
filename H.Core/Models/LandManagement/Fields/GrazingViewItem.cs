@@ -44,6 +44,9 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _managementPeriodGuid, value);
         }
 
+        /// <summary>
+        /// Identifies the <see cref="AnimalComponentBase"/> that contains the <see cref="AnimalGroup"/> grazing on the <see cref="CropViewItem"/>.
+        /// </summary>
         public Guid AnimalComponentGuid
         {
             get => _animalComponentGuid;

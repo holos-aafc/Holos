@@ -225,7 +225,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.1.4-1
+        /// Equation 6.1.4-1
         /// </summary>
         /// <param name="areaOfCropIrrigated">area of crop irrigated (ha)</param>
         /// <param name="irrigationConversion">Conversion of area irrigated to kg CO2 (kg CO2 ha^1)</param>

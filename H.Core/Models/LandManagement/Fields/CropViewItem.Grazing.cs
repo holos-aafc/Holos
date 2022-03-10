@@ -49,7 +49,7 @@ namespace H.Core.Models.LandManagement.Fields
                     return 0;
                 }
 
-                var result = this.TotalCarbonUptakeByGrazingAnimals *  (this.ForageUtilizationRate / 100.0);
+                var result = this.TotalCarbonUptakeByGrazingAnimals /  (1 - (this.ForageUtilizationRate / 100.0));
 
                 return result;
             }

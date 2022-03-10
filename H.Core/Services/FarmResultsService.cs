@@ -246,32 +246,41 @@ namespace H.Core.Services
             return farmResults;
         }
 
+        /// <summary>
+        /// Calculates how much carbon was lost due to animals grazing on the field
+        /// </summary>
         public void CalculateCarbonLostByGrazingAnimals(FarmEmissionResults farmEmissionResults)
         {
             var farm = farmEmissionResults.Farm;
 
             // Go over each item by year using the items from the stage state
-
-            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
             {
-                var totalLossForField = 0d;
-
-                foreach (var viewItem in fieldSystemComponent.CropViewItems)
+                var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
+                foreach (var year in distinctYears)
                 {
-                    foreach (var grazingViewItem in viewItem.GrazingViewItems)
+                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
+                    foreach (var viewItem in viewItemsForYear)
                     {
-                        var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-                        if (animalComponentEmissionsResults != null)
+                        var totalLossForField = 0d;
+
+                        foreach (var grazingViewItem in viewItem.GrazingViewItems)
                         {
-                            var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-                            if (groupEmissionResults != null)
+                            // Assumption here is that the calculated emissions from animals are the same for each year of the field's history.
+                            var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                            if (animalComponentEmissionsResults != null)
                             {
-                                totalLossForField += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                                var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                                if (groupEmissionResults != null)
+                                {
+                                    totalLossForField += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                                }
                             }
                         }
-                    }
 
-                    viewItem.TotalCarbonUptakeByGrazingAnimals = totalLossForField;
+                        viewItem.TotalCarbonUptakeByGrazingAnimals = totalLossForField;
+                    }
                 }
             }
         }
@@ -285,10 +294,9 @@ namespace H.Core.Services
                 var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
                 foreach (var year in distinctYears)
                 {
-                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
                     foreach (var viewItem in viewItemsForYear)
                     {
-
                         // Check if this item has a harvest and then check if other fields are using/importing bales...
                         if (viewItem.HasHarvestViewItems)
                         {
@@ -296,6 +304,8 @@ namespace H.Core.Services
                             var fieldId = viewItem.FieldSystemComponentGuid;
                             var totalHarvestedBales = viewItem.HarvestViewItems.Sum(x => x.TotalNumberOfBalesHarvested);
                             var totalBalesImported = 0d;
+                            var moistureContentOfBales = new List<double>();
+                            var percentageOfProductReturnedToSoil = viewItem.PercentageOfProductYieldReturnedToSoil;
 
                             // Get all fields using bales from this harvest
                             var importingFields = viewItemsForYear.Where(y =>
@@ -308,12 +318,20 @@ namespace H.Core.Services
                                 foreach (var fieldHayImportViewItem in field.HayImportViewItems)
                                 {
                                     totalBalesImported += fieldHayImportViewItem.NumberOfBales;
+                                    moistureContentOfBales.Add(fieldHayImportViewItem.MoistureContentAsPercentage);
                                 }
                             }
 
-                            var totalLoss = totalHarvestedBales - totalBalesImported;
-                            if (totalLoss > 0)
+                            // Get average moisture content to calculate the dry matter
+                            var averageMoistureContentPercentage = moistureContentOfBales.Average();
+
+                            var totalWetWeight = totalHarvestedBales - totalBalesImported;
+                            if (totalWetWeight > 0)
                             {
+                                var totalDryMatter = totalWetWeight * (1 - (averageMoistureContentPercentage / 100.0));
+                                var totalCarbon = totalDryMatter * CoreConstants.CarbonConcentration;
+                                var totalLoss = totalCarbon / (1 - (percentageOfProductReturnedToSoil / 100.0));
+
                                 viewItem.TotalCarbonExportedFromBales = totalLoss;
                             }
                         }
