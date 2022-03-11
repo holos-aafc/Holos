@@ -545,40 +545,36 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
-            var farmResultsService = _animalResultsService.GetAnimalResults(farm);
+            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
 
-            // Go over each item by year using the items from the stage state
-            //var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
-            //if (stageState != null)
-            //{
-            //    var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
-            //    foreach (var year in distinctYears)
-            //    {
-            //        var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
-            //        foreach (var viewItem in viewItemsForYear)
-            //        {
-            //            var totalCarbonUptakeByAnimals = 0d;
+            this.CalculateCarbonLostByGrazingAnimals(
+                fieldSystemComponent: fieldSystemComponent,
+                results: animalComponentEmissionResults);
+        }
 
-            //            foreach (var grazingViewItem in viewItem.GrazingViewItems)
-            //            {
-            //                // Assumption here is that the calculated emissions from animals are the same for each year of the field's history.
-            //                //var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-            //                //if (animalComponentEmissionsResults != null)
-            //                //{
-            //                //    var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-            //                //    if (groupEmissionResults != null)
-            //                //    {
-            //                //        totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
-            //                //    }
-            //                //}
-            //            }
+        public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        {
+            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            {
+                var totalCarbonUptakeByAnimals = 0d;
 
-            //            viewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
-            //                forageUtilizationRate: viewItem.ForageUtilizationRate,
-            //                totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
-            //        }
-            //    }
-            //}
+                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                {
+                    var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                    if (animalComponentEmissionsResults != null)
+                    {
+                        var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                        if (groupEmissionResults != null)
+                        {
+                            totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                        }
+                    }
+                }
+
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
+                    forageUtilizationRate: cropViewItem.ForageUtilizationRate,
+                    totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+            }
         }
 
         /// <summary>
