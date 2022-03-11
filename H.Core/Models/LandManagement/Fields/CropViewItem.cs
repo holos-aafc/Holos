@@ -1063,12 +1063,12 @@ namespace H.Core.Models.LandManagement.Fields
 
         public void CalculateDryYield()
         {
-            this.DryYield =  this.Yield - (this.Yield * (this.MoistureContentOfCrop));
+            this.DryYield = this.Yield * (1 - this.MoistureContentOfCrop);
         }
 
         public void CalculateWetWeightYield()
         {
-            this.Yield = this.DryYield + (this.DryYield * this.MoistureContentOfCrop);
+            this.Yield = this.DryYield  /  (1 - this.MoistureContentOfCrop);
         }
 
         /// <summary>
