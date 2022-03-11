@@ -90,9 +90,18 @@ namespace H.Core.Test.Providers.Climate
             
             climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 1) , Year = 2020, MeanDailyAirTemperature = 10, });
             climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 2), Year = 2020 , MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 2, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 3, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 4, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 5, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 6, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 7, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 8, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 9, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 10, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 11, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 12, 2), Year = 2020, MeanDailyAirTemperature = 20, });
 
-            // Has a different month and so should not be included in average
-            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 2, 1), Year = 2020 , MeanDailyAirTemperature = 30 });
 
             var result = climateData.GetAverageTemperatureForMonthAndYear(2020, Enumerations.Months.January);
 

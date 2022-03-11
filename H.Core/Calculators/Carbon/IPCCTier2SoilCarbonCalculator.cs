@@ -603,7 +603,7 @@ namespace H.Core.Calculators.Carbon
         {
             var monthlyValues = new List<double>();
 
-            // There might be an imcomplete year where there isn't 12 values for precipitation or evapotranspiration, take minimum and use that 
+            // There might be an incomplete year where there isn't 12 values for precipitation or evapotranspiration, take minimum and use that 
             // to average since we need both a precipitation and a evapotranspiration for each month
             var numberOfMonths = Math.Min(monthlyTotalPrecipitations.Count, monthlyTotalEvapotranspirations.Count);
 

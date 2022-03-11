@@ -27,6 +27,7 @@ using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
+using H.Core.Services.Animals;
 using H.Core.Tools;
 using H.Infrastructure;
 
@@ -37,6 +38,8 @@ namespace H.Core.Services.LandManagement
         #region Fields
 
         private const int DefaultNumberOfDecimalPlaces = 3;
+
+        private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
         private readonly SoilEmissionsCalculator _soilEmissionsCalculator = new SoilEmissionsCalculator();
@@ -226,6 +229,10 @@ namespace H.Core.Services.LandManagement
                 {
                     var fieldGuid = groupingByFieldSystem.Key;
                     var fieldSystemComponent = farm.GetFieldSystemComponent(fieldGuid);
+                    if (fieldSystemComponent == null)
+                    {
+                        continue;
+                    }
 
                     var detailViewItems = groupingByFieldSystem.ToList();
 

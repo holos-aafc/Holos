@@ -180,7 +180,9 @@ namespace H.Core.Providers.Climate
             var targetMonth = (int)month;
 
             var key = new Tuple<int, int>(year, targetMonth);
-            if (_dataByYearAndMonth.ContainsKey(key))
+
+            // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
+            if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
                 return _dataByYearAndMonth[key].Sum(x => x.MeanDailyPrecipitation);
             }
@@ -214,7 +216,9 @@ namespace H.Core.Providers.Climate
             var targetMonth = (int)month;
 
             var key = new Tuple<int, int>(year, targetMonth);
-            if (_dataByYearAndMonth.ContainsKey(key))
+
+            // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
+            if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
                 return _dataByYearAndMonth[key].Average(x => x.MeanDailyAirTemperature);
             }
@@ -245,7 +249,9 @@ namespace H.Core.Providers.Climate
             var targetMonth = (int)month;
 
             var key = new Tuple<int, int>(year, targetMonth);
-            if (_dataByYearAndMonth.ContainsKey(key))
+
+            // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
+            if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
                 return _dataByYearAndMonth[key].Sum(x => x.MeanDailyPET);
             }

@@ -618,6 +618,7 @@
     <Compile Include="ResultConversionClass.cs" />
     <Compile Include="Services\AnaerobicDigestionComponentHelper.cs" />
     <Compile Include="Services\AnimalComponentHelper.cs" />
+    <Compile Include="Services\Animals\AnimalResultsService.cs" />
     <Compile Include="Services\Animals\AnimalResultsServiceBase.cs" />
     <Compile Include="Services\Animals\BeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\DairyCattleResultsService.cs" />

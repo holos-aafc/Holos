@@ -102,7 +102,7 @@ namespace H.Core.Services.LandManagement
                 if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(currentYearViewItem))
                 {
-                    // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calucating inputs
+                    // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
                         viewItem: currentYearViewItem);
                 }
@@ -131,7 +131,7 @@ namespace H.Core.Services.LandManagement
                 if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(secondaryCrop))
                 {
-                    // If IPCC Tier 2 is the selected strategy and we can calucate inputs for the specified crop, then use the IPCC methodology for calucating inputs
+                    // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
                         viewItem: secondaryCrop);
                 }
@@ -437,7 +437,7 @@ namespace H.Core.Services.LandManagement
                     viewItemsByField: viewItemsForField,
                     fieldSystemComponent: fieldSystemComponent);
 
-                // Note: N buget calclations are not being performed when user selects Tier 2. Methodology has to be completed for this scenario
+                // Note: N budget calculations are not being performed when user selects Tier 2. Methodology has to be completed for this scenario
             }
             else
             {
@@ -500,6 +500,11 @@ namespace H.Core.Services.LandManagement
                         }
                     }
 
+                    if (totalBalesImportedFromOtherFields == 0)
+                    {
+                        continue;
+                    }
+
                     var totalWetWeight = totalHarvestedBales - totalBalesImportedFromOtherFields;
                     if (totalWetWeight > 0)
                     {
@@ -540,38 +545,40 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
+            var farmResultsService = _animalResultsService.GetAnimalResults(farm);
+
             // Go over each item by year using the items from the stage state
-            var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
-            if (stageState != null)
-            {
-                var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
-                foreach (var year in distinctYears)
-                {
-                    var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
-                    foreach (var viewItem in viewItemsForYear)
-                    {
-                        var totalCarbonUptakeByAnimals = 0d;
+            //var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            //if (stageState != null)
+            //{
+            //    var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct();
+            //    foreach (var year in distinctYears)
+            //    {
+            //        var viewItemsForYear = stageState.DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsSecondaryCrop == false).ToList();
+            //        foreach (var viewItem in viewItemsForYear)
+            //        {
+            //            var totalCarbonUptakeByAnimals = 0d;
 
-                        foreach (var grazingViewItem in viewItem.GrazingViewItems)
-                        {
-                            // Assumption here is that the calculated emissions from animals are the same for each year of the field's history.
-                            //var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-                            //if (animalComponentEmissionsResults != null)
-                            //{
-                            //    var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-                            //    if (groupEmissionResults != null)
-                            //    {
-                            //        totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
-                            //    }
-                            //}
-                        }
+            //            foreach (var grazingViewItem in viewItem.GrazingViewItems)
+            //            {
+            //                // Assumption here is that the calculated emissions from animals are the same for each year of the field's history.
+            //                //var animalComponentEmissionsResults = farmEmissionResults.AnimalComponentEmissionsResults.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+            //                //if (animalComponentEmissionsResults != null)
+            //                //{
+            //                //    var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+            //                //    if (groupEmissionResults != null)
+            //                //    {
+            //                //        totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
+            //                //    }
+            //                //}
+            //            }
 
-                        viewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
-                            forageUtilizationRate: viewItem.ForageUtilizationRate,
-                            totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
-                    }
-                }
-            }
+            //            viewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
+            //                forageUtilizationRate: viewItem.ForageUtilizationRate,
+            //                totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+            //        }
+            //    }
+            //}
         }
 
         /// <summary>
