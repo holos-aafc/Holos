@@ -4976,4 +4976,19 @@
   <data name="LabelSelectNone" xml:space="preserve">
     <value>Select None</value>
   </data>
+  <data name="EnumElectricPump" xml:space="preserve">
+    <value>Electric pump</value>
+  </data>
+  <data name="EnumNaturalGasPump" xml:space="preserve">
+    <value>Natural gas pump</value>
+  </data>
+  <data name="LabelPumpType" xml:space="preserve">
+    <value>Pump type</value>
+  </data>
+  <data name="TitleIrrigation" xml:space="preserve">
+    <value>Irrigation</value>
+  </data>
+  <data name="ToolTipPumpTypeInfo" xml:space="preserve">
+    <value>The type of pump used in the farm during irrigation.</value>
+  </data>
 </root>

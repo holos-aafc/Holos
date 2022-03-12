@@ -89,7 +89,8 @@ namespace H.Core.Services.LandManagement
             {
                 results.EnergyCarbonDioxideFromIrrigation = this.CalculateTotalCarbonDioxideEmissionsFromIrrigation(
                     areaOfCropIrrigated: fieldSystemComponent.FieldArea,
-                    irrigationConversion: IrrigationConversion);
+                    irrigationConversion: IrrigationConversion,
+                    pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
             }
 
             var manureSpreadingResults = this.GetManureSpreadingResults(
@@ -231,10 +232,11 @@ namespace H.Core.Services.LandManagement
         /// <param name="irrigationConversion">Conversion of area irrigated to kg CO2 (kg CO2 ha^1)</param>
         /// <returns>Total CO2 emissions from irrigation (kg CO2 year^-1)</returns>
         public double CalculateTotalCarbonDioxideEmissionsFromIrrigation(
-            double areaOfCropIrrigated, 
-            double irrigationConversion)
+               double areaOfCropIrrigated, 
+               double irrigationConversion,
+               double pumpEmissionsFactor)
         {
-            return areaOfCropIrrigated * irrigationConversion;
+            return areaOfCropIrrigated * irrigationConversion * pumpEmissionsFactor;
         }
 
         /// <summary>

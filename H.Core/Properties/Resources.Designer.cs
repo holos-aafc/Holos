@@ -2113,6 +2113,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Electric pump.
+        /// </summary>
+        public static string EnumElectricPump {
+            get {
+                return ResourceManager.GetString("EnumElectricPump", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elk.
         /// </summary>
         public static string EnumElk {
@@ -3576,6 +3585,15 @@ namespace H.Core.Properties {
         public static string EnumN2O {
             get {
                 return ResourceManager.GetString("EnumN2O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Natural gas pump.
+        /// </summary>
+        public static string EnumNaturalGasPump {
+            get {
+                return ResourceManager.GetString("EnumNaturalGasPump", resourceCulture);
             }
         }
         
@@ -9610,6 +9628,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pump type.
+        /// </summary>
+        public static string LabelPumpType {
+            get {
+                return ResourceManager.GetString("LabelPumpType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ratio.
         /// </summary>
         public static string LabelRatio {
@@ -13237,6 +13264,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Irrigation.
+        /// </summary>
+        public static string TitleIrrigation {
+            get {
+                return ResourceManager.GetString("TitleIrrigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iso-Wean.
         /// </summary>
         public static string TitleIsoWean {
@@ -14104,6 +14140,15 @@ namespace H.Core.Properties {
         public static string ToolTipPulletFarm {
             get {
                 return ResourceManager.GetString("ToolTipPulletFarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type of pump used in the farm during irrigation..
+        /// </summary>
+        public static string ToolTipPumpTypeInfo {
+            get {
+                return ResourceManager.GetString("ToolTipPumpTypeInfo", resourceCulture);
             }
         }
         

@@ -195,7 +195,7 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 1. Drag a new “**Field**” tab component to your list of components. Enter the name “**Native Grassland**” in the ‘Field name’ input box.
 2. Enter "**100**" as the total area of the field.
-3. Select "**Seeded Grassland**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the 'Winter/Cover/Undersown Crop' area when a perennial crop is selected.
+3. Select "**Seeded Grassland**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the '**Winter/Cover/Undersown Crop**' area when a perennial crop is selected.
 4. Keep '**0**' as the amount of irrigation and pesticide passes.
 5. No fertilizer is used for this crop.
 
@@ -237,7 +237,7 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 7. For this newly added crop select "**Tame Mixed(grass/legume)**" as the crop type.
 
-8. Click on the "**Add crop****" button one more time. For this third crop, select "**Tame Mixed(grass/legume)** once again as the crop type.
+8. Click on the "**Add crop**" button one more time. For this third crop, select "**Tame Mixed(grass/legume)** once again as the crop type.
 
 <br>
 <p align="center">
@@ -249,13 +249,13 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 
 9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2021) and then:
-    * Go under the **Harvest Tab** and click **Add Harvest Data** button to create a new harvest.
+    * Go under the **Harvest Tab** and click **Add Harvest Date** button to create a new harvest.
     * Select a Harvest date of "August 31, 2021", assuming the harvest is done on the same day every year.
     * Select **Mid** for **Forage growth stage**.
     * Enter **5** as the total number of bales.
     * Enter **500** as the **Wet bale weight**.
     
-10. Repeat the above steps (step 9) for the second tame mixed crop.
+10. **Repeat** the above steps (step 9) **for the second** tame mixed crop.
 
 
 If the tame mixed field is harvested more than once, the “Add Harvest Date” button can be used to add subsequent harvests.
@@ -320,7 +320,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
     * Enter **50%** for ‘**Barley Hay**’ and **50%** for ‘**Alfalfa Hay**’ in “**Step 3**”. Note that Holos now reports the diet being complete since all ingredients total up to 100%.
 
 * Click the “**OK**” button to save the new custom diet
-* Select the “**My Custom Cow Diet**” diet from the diet drop down-down menu.
+* Select the “**My Custom Cow Diet**” from the drop down-down menu in front of **Diet Type**.
 
 <br>
 
@@ -566,11 +566,21 @@ We can also add additional hay/forage for animals that are grazing on a particul
 1. Select the **Native Grassland** field component we created earlier.
 2. Click on the **Grazing tab.**
     - Click the **Add Supplemental Hay** button to add additional forage for the animals on this field.
+    - Enter "**On-farm**" as the **Sources of bales**.
+    - Choose **Crop rotation #1 [Field #2] - Tame Mixed (grass/legume)** under **Field** to select the source of the supplemental hay.
     - Change the **Number of bales** to 1
     - Enter **500** as the wet bale weight.
     - Keep the moisture content as the default value.
-   
 
+
+<br>
+<p align="center">
+    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="950"/>
+    <br>
+    <em>Figure 20 - Adding supplemental hay/forage for grazing animals.</em>
+</p>
+<br> 
+<br>
 
 ## Pullet Farm Operation:
 
@@ -613,11 +623,11 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 3. We will set the end year of this historical management practice to the year **2000**. To adjust this we use the numeric up/down buttons within the cell.
 
-4. We then click the “**Edit Selected**” button. This will open a new screen that allows us to adjust the crops grown and the management during this period.
+4. Select the newly added **Historical management practice** and then click the “**Edit Selected**” button. This will open a new screen that allows us to adjust the crops grown and the management during this period.
 
 5. Click on the “**Barley**” crop under the “**Step 2**” section. Change the crop type to ‘**Wheat**’ and on the ‘**General**’ tab change the yield to **3,500** kg/ha. We will keep the other settings unchanged.
 
-6. We also need to remove the “Hay mixed” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Hay mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
+6. We also need to remove the “**Hay mixed**” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Hay mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
 
 7. Click “**Ok**” to save adjustments we just made to this field.
 
@@ -626,25 +636,25 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="850"/>
+    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="850"/>
     <br>
-    <em>Figure 20: Customized Timeline Screen</em>
+    <em>Figure 21: Customized Timeline Screen</em>
 </p> 
 <br>  
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="550"/>
+    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="550"/>
     <br>
-    <em>Figure 21: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 22: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 <br> 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="750"/>
+    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="750"/>
     <br>
-    <em>Figure 22: </em>
+    <em>Figure 23: Editing crops in a historical period of the rotation. </em>
 </p> 
 <br>
 
@@ -659,7 +669,7 @@ To avoid the requirement that a user needs to provide crop yields going back to 
 
 We will adjust this grid so that we can view the above ground and below ground carbon inputs for our wheat field and then we will adjust the crop yield for one specific year.
 
-1. We will set a filter on the first column named ‘**Field name**’ so that we only display information for our wheat and hairy vetch field. Beside the column heading, click the ‘**funnel**’ icon to set a filter. Check the box beside **Wheat & hairy vetch**.
+1. We will set a filter on the first column named ‘**Field name**’ so that we only display information for our **wheat and hairy vetch field**. Beside the column heading, click the ‘**funnel**’ icon to set a filter. Check the box beside **Wheat & hairy vetch**.
 
 2. On the far left of this screen, click the “**Enable Columns**” sidebar (located near the “Field name” column).
 
@@ -676,9 +686,9 @@ We will adjust this grid so that we can view the above ground and below ground c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
     <br>
-    <em>Figure 23: Details screen</em>
+    <em>Figure 24: Details screen</em>
 </p> 
 <br>
 
@@ -711,17 +721,25 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="850"/>
+    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="850"/>
     <br>
-    <em>Figure 24: Detailed Emissions Report section of results.</em>
+    <em>Figure 25: Detailed emissions report.</em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="850"/>
+    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="850"/>
     <br>
-    <em>Figure 25: Field Estimates Report section of results.</em>
+    <em>Figure 26: Estimates of production report.</em>
+</p> 
+<br>
+
+<br>
+<p align="center">
+    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="850"/>
+    <br>
+    <em>Figure 27: Feed estimate report.</em>
 </p> 
 <br>
 
@@ -740,9 +758,9 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/en/figure28.png" alt="Figure 28" width="850"/>
     <br>
-    <em>Figure 26: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 28: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 <br>
 

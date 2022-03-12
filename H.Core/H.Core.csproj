@@ -249,6 +249,7 @@
     <Compile Include="Enumerations\PlantMassType.cs" />
     <Compile Include="Enumerations\Province.cs" />
     <Compile Include="Enumerations\ProvinceExtension.cs" />
+    <Compile Include="Enumerations\PumpType.cs" />
     <Compile Include="Enumerations\Region.cs" />
     <Compile Include="Enumerations\ResourceSourceLocation.cs" />
     <Compile Include="Enumerations\Seasons.cs" />
