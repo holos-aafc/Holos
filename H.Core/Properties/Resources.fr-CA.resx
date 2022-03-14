@@ -588,6 +588,9 @@
   <data name="EnumDucks" xml:space="preserve">
     <value>canards</value>
   </data>
+  <data name="EnumElectricPump" xml:space="preserve">
+    <value>Pompe électrique</value>
+  </data>
   <data name="EnumElk" xml:space="preserve">
     <value>wapiti</value>
   </data>
@@ -929,6 +932,9 @@
   </data>
   <data name="EnumMules" xml:space="preserve">
     <value>mules</value>
+  </data>
+  <data name="EnumNaturalGasPump" xml:space="preserve">
+    <value>Pompe à gaz naturelle</value>
   </data>
   <data name="EnumNFixingForages" xml:space="preserve">
     <value>N-fixing forages</value>
@@ -2333,6 +2339,9 @@
   <data name="LabelProline" xml:space="preserve">
     <value>Proline</value>
   </data>
+  <data name="LabelPumpType" xml:space="preserve">
+    <value>Type de pompe</value>
+  </data>
   <data name="LabelRatio" xml:space="preserve">
     <value>rapport</value>
   </data>
@@ -3186,6 +3195,9 @@
   <data name="TitleInfrastructure" xml:space="preserve">
     <value>infrastructure</value>
   </data>
+  <data name="TitleIrrigation" xml:space="preserve">
+    <value>Irrigation</value>
+  </data>
   <data name="TitleIsoWean" xml:space="preserve">
     <value>sevrage en isolement</value>
   </data>
@@ -3434,6 +3446,9 @@
   </data>
   <data name="ToolTipOtherAnimalsManureYearlyEntericMethaneRateInfo" xml:space="preserve">
     <value>Methane emission rate from enteric fermentation</value>
+  </data>
+  <data name="ToolTipPumpTypeInfo" xml:space="preserve">
+    <value>The type of pump used in the farm during irrigation.</value>
   </data>
   <data name="ToolTipRamGeneralEnergyRequiredForWoolInfo" xml:space="preserve">
     <value>Net energy required for wool production</value>

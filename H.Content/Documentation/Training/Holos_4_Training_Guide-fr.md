@@ -172,6 +172,13 @@ Entrez un rendement de **3 000 kg/ha** (poids humide), assurez-vous que la « **
 
 
 <br>
+<p align="center">
+    <img src="../../Images/Training/fr/figure11.png" alt="Figure 11" width="950"/>
+    <br>
+    <em>Figure 11: Ajouter l’épandage d’un engrais.</em>
+</p> 
+<br> 
+
 
 ***Remarque** : À tout le moins, Holos a besoin de la superficie du champ, du type de culture et d’un taux d’épandage d’engrais propre au champ pour calculer les émissions directes et indirectes d’oxyde nitreux.*
 
@@ -253,7 +260,7 @@ L’ajout de composantes animales suit exactement l’approche utilisée pour le
 <p align="center">
     <img src="../../Images/Training/fr/figure14.png" alt="Figure 14" width="850"/>
     <br>
-    <em>Figure 14 </em>
+    <em>Figure 14 - Composant vache-veau</em>
 </p> 
 <br>
 
@@ -314,7 +321,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 <p align="center">
     <img src="../../Images/Training/fr/figure15.png" alt="Figure 15" width="850"/>
     <br>
-    <em>Figure 15</em>
+    <em>Figure 15 - Créateur de ration personnalisée</em>
 </p> 
 <br>
 
@@ -350,7 +357,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 <p align="center">
     <img src="../../Images/Training/fr/figure16.png" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 16 </em>
+    <em>Figure 16 - Volet vache-veau - Section vaches</em>
 </p> 
 <br> 
 
@@ -369,7 +376,7 @@ Cliquez sur la ligne « **Taureaux** » dans la section du groupe d’animaux à
 <p align="center">
     <img src="../../Images/Training/fr/figure17.gif" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 17 </em>
+    <em>Figure 17 - Copier la section des vaches </em>
 </p> 
 <br> 
 
@@ -407,7 +414,7 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 <p align="center">
     <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 18 </em>
+    <em>Figure 18 - Élevage de bovins de long engraissement et semi-finis</em>
 </p> 
 <br>
 
@@ -430,7 +437,7 @@ Cliquez sur le groupe « **Bouvillons** » pour l’activer. Les données de ges
 <p align="center">
     <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 19 </em>
+    <em>Figure 19 - Exploitation d’un parc de finition</em>
 </p> 
 <br>
 
@@ -505,7 +512,7 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 <p align="center">
     <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 20 </em>
+    <em>Figure 20 - Écran Calendrier personnalisé </em>
 </p> 
 <br>
 
@@ -513,7 +520,7 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 <p align="center">
     <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="750"/>
     <br>
-    <em>Figure 21 </em>
+    <em>Figure 21 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
 </p> 
 <br>
 
@@ -522,7 +529,7 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
     <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="750
     "/>
     <br>
-    <em>Figure 22 </em>
+    <em>Figure 22 - Modification des cultures au cours d’une période historique de rotation</em>
 </p> 
 <br>
 
@@ -558,7 +565,7 @@ Nous ajusterons cette grille afin de pouvoir voir les intrants de carbone en sur
 <p align="center">
     <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="950"/>
     <br>
-    <em>Figure 23 </em>
+    <em>Figure 23 - Écran Détails</em>
 </p> 
 <br>
 
@@ -593,7 +600,7 @@ Le rapport « **Estimations sur l’alimentation** » fournit une estimation de 
 <p align="center">
     <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="850"/>
     <br>
-    <em>Figure 24 </em>
+    <em>Figure 24 - Rapport détaillé sur les émissions</em>
 </p> 
 <br>
 
@@ -601,7 +608,7 @@ Le rapport « **Estimations sur l’alimentation** » fournit une estimation de 
 <p align="center">
     <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="850"/>
     <br>
-    <em>Figure 25 </em>
+    <em>Figure 25 - Rapport d’estimation des aliments du bétail</em>
 </p> 
 <br>
 
@@ -619,7 +626,7 @@ Si vous cliquez sur l’un de ces points, vous pouvez alors voir une répartitio
 <p align="center">
     <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
     <br>
-    <em>Figure 26 .</em>
+    <em>Figure 26 - Modification du format du rapport en mode pluriannuel.</em>
 </p> 
 <br>
 
