@@ -251,17 +251,7 @@ namespace H.Core.Services.LandManagement
                         farm: farm, 
                         fieldSystemGuid: groupingByFieldSystem.Key);
 
-                    // Add the merged items for this field into the results collection
-
-                    if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && farm.Defaults.OutputRunInPeriodItems == false)
-                    {
-                        // Remove the run in period items
-                        result.AddRange(mergedItems.Where(x => x.Year >= fieldSystemComponent.StartYear));
-                    }
-                    else
-                    {
-                        result.AddRange(mergedItems);
-                    }
+                    result.AddRange(mergedItems);
                 }
 
                 this.CalculateAverageSoilOrganicCarbonForFields(result);

@@ -844,58 +844,7 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(5749, viewItem.TotalCarbonInputs, 1);
         }
 
-        [TestMethod]
-        public void GetRunInPeriodItems()
-        {
-            var viewItems = new List<CropViewItem>()
-            {
-                new CropViewItem() { Year = 1987 },
-                new CropViewItem() { Year = 1985 },
-                new CropViewItem() { Year = 1986 },
-            };
-
-            var farm = new Farm()
-            {
-                Defaults = new Defaults()
-                {
-                    DefaultRunInPeriod = 2,
-                }
-            };
-
-            var result = _sut.GetRunInPeriodItems(
-                farm: farm,
-                cropViewItems: viewItems);
-
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(1985, result.ElementAt(0).Year);
-            Assert.AreEqual(1986, result.ElementAt(1).Year);
-        }
-
-        [TestMethod]
-        public void GetNonRunInPeriodItems()
-        {
-            var viewItems = new List<CropViewItem>()
-            {
-                new CropViewItem() { Year = 1987 },
-                new CropViewItem() { Year = 1985 },
-                new CropViewItem() { Year = 1986 },
-            };
-
-            var farm = new Farm()
-            {
-                Defaults = new Defaults()
-                {
-                    DefaultRunInPeriod = 2,
-                }
-            };
-
-            var result = _sut.GetNonRunInPeriodItems(
-                farm: farm,
-                viewItems: viewItems);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(1987, result.ElementAt(0).Year);            
-        }
+      
 
         [TestMethod]
         public void CalculateResults()
@@ -931,12 +880,14 @@ namespace H.Core.Test.Calculators.Carbon
                 _sut.CalculateInputs(viewItem);
             }
 
+            fieldSystemComponent.RunInPeriodItems.Add(new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 });
+
             _sut.CalculateResults(
                 farm: farm, 
                 viewItemsByField: viewItems, 
                 fieldSystemComponent: fieldSystemComponent);
 
-            // The non-run in period items (only 1 in this case) should have caclculate values for all pools
+            // The non-run in period items (only 1 in this case) should have calculate values for all pools
             var firstItemInSimulation = viewItems.Single(x => x.Year == 1987);
 
             Assert.IsTrue(firstItemInSimulation.ActivePoolDecayRate > 0);

@@ -29,6 +29,8 @@ namespace H.Core.Models.LandManagement.Fields
         private bool _beginOrderingAtStartYearOfRotation;
         private bool _useCustomStartingSoilOrganicCarbon;
 
+        private ObservableCollection<CropViewItem> _runInPeriodItems;
+
         #endregion
 
         #region Constructors
@@ -38,6 +40,8 @@ namespace H.Core.Models.LandManagement.Fields
             this.ComponentNameDisplayString = Properties.Resources.LabelField;
             this.ComponentCategory = ComponentCategory.LandManagement;
             this.ComponentType = ComponentType.Field;
+
+            this.RunInPeriodItems = new ObservableCollection<CropViewItem>();
 
             this.FieldArea = 1.0;
 
@@ -251,6 +255,12 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         public bool IsPartOfRotationComponent { get; set; }
+
+        public ObservableCollection<CropViewItem> RunInPeriodItems
+        {
+            get => _runInPeriodItems;
+            set => SetProperty(ref _runInPeriodItems, value);
+        }
 
         #endregion
 

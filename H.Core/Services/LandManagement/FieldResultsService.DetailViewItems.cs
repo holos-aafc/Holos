@@ -328,7 +328,8 @@ namespace H.Core.Services.LandManagement
                     startYearOfField: startYear,
                     viewItemsForField: result);
 
-                result.AddRange(runInPeriodItems);
+                fieldSystemComponent.RunInPeriodItems.Clear();
+                fieldSystemComponent.RunInPeriodItems.AddRange(runInPeriodItems);
             }
 
             return result.OrderBy(x => x.Year).ThenByDescending(x => x.CropType.IsAnnual()).ThenByDescending(x => x.CropType.IsCoverCrop()).ThenByDescending(x => x.CropType.IsPerennial());

@@ -33,20 +33,21 @@ namespace H.Core.Calculators.Carbon
             Farm farm, 
             List<CropViewItem> viewItemsByField, 
             FieldSystemComponent fieldSystemComponent)
-        {            
-            var runInPeriodItems = this.GetRunInPeriodItems(
-                farm: farm,
-                cropViewItems: viewItemsByField);            
+        {
+            var runInPeriodItems = fieldSystemComponent.RunInPeriodItems.ToList();
+            if (runInPeriodItems.Any() == false)
+            {
+                // Will occur with some old farm. User will have to rebuild detail view items
+                return;
+            }
 
             var runInPeriod = this.CalculateRunInPeriod(
                 farm: farm,
                 runInPeriodItems: runInPeriodItems);
 
-            var nonRunInPeriodItems = this .GetNonRunInPeriodItems(
-                farm: farm,
-                viewItems: viewItemsByField);
-            
-            for(int i = 0; i < nonRunInPeriodItems.Count; i++)
+            var nonRunInPeriodItems = viewItemsByField.OrderBy(x => x.Year).ToList();
+
+            for (int i = 0; i < nonRunInPeriodItems.Count; i++)
             {
                 CropViewItem currentYearViewItem = nonRunInPeriodItems.ElementAt(i);
                 CropViewItem previousYearViewItem;
@@ -140,20 +141,11 @@ namespace H.Core.Calculators.Carbon
                 belowGroundCarbonConcentration: BelowGroundCarbonContent);            
         }
 
-        public List<CropViewItem> GetRunInPeriodItems(
-            Farm farm, 
-            List<CropViewItem> cropViewItems)
-        {
-            var result = cropViewItems.OrderBy(x => x.Year).Take(farm.Defaults.DefaultRunInPeriod).ToList();
-
-            return result;
-        }
-        
         public List<CropViewItem> GetNonRunInPeriodItems(
             Farm farm, 
             List<CropViewItem> viewItems)
         {
-            return viewItems.OrderBy(x => x.Year).Skip(farm.Defaults.DefaultRunInPeriod).ToList();
+            return viewItems.OrderBy(x => x.Year).ToList();
         }
 
         /// <summary>

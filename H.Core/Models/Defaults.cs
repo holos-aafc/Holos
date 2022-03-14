@@ -131,6 +131,11 @@ namespace H.Core.Models
         private double _defaultBiodegradableFractionOtherManure;
         private double _defaultBiodegradableFractionGreenWaste;
 
+        // Irrigation
+
+        private PumpType _defaulPumpType;
+        private double _pumpEmissionsFactor;
+
         #endregion
 
         #region Constructors
@@ -261,7 +266,7 @@ namespace H.Core.Models
         #region Properties
 
         /// <summary>
-        /// Inidicates if the system should display/output run in period items when displaying final results
+        /// Indicates if the system should display/output run in period items when displaying final results
         /// </summary>
         public bool OutputRunInPeriodItems { get; set; }
 
@@ -837,6 +842,37 @@ namespace H.Core.Models
         { 
             get => _defaultRunInPeriod; 
             set => SetProperty (ref _defaultRunInPeriod, value); 
+        }
+
+
+        /// <summary>
+        /// The type of pump used for irrigation in the farm. Can be changed by the user in the User Settings menu of the UI.
+        /// </summary>
+        public PumpType DefaultPumpType
+        {
+            get => _defaulPumpType;
+            set => SetProperty (ref _defaulPumpType, value);
+        }
+
+        public double PumpEmissionFactor
+        {
+            get
+            {
+                if (DefaultPumpType == PumpType.ElectricPump)
+                {
+                    _pumpEmissionsFactor =  0.266;
+                }
+                else if (DefaultPumpType == PumpType.NaturalGasPump)
+                {
+                    _pumpEmissionsFactor = 1.145;
+                }
+                else
+                {
+                    _pumpEmissionsFactor = 1;
+                }
+
+                return _pumpEmissionsFactor;
+            }
         }
 
         #endregion

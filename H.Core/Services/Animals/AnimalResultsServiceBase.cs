@@ -1348,7 +1348,9 @@ namespace H.Core.Services.Animals
             double volatilizationFraction,
             double volatilizationEmissionFactor)
         {
-            return nitrogenExcretionRate + beddingNitrogen * volatilizationFraction * volatilizationEmissionFactor;
+            var result =  (nitrogenExcretionRate + beddingNitrogen) * volatilizationFraction * volatilizationEmissionFactor;
+
+            return result;
         }
 
         /// <summary>
