@@ -2983,7 +2983,7 @@ The Holos program data files contain useful information that can help the Holos 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-6.png" alt="Figure11-6" width=""/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
     <br>
     <em>
 		Figure 11-6 - Opening the local folder inside the Appdata folder.
