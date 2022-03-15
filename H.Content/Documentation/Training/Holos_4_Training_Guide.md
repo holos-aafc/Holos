@@ -602,7 +602,8 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 
 
-<div style="page-break-after: always"></div>
+<br>
+<br>
 
 # Timeline Screen
 
@@ -642,7 +643,6 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 </p> 
 <br>  
 
-<br>
 <p align="center">
     <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="550"/>
     <br>
@@ -652,14 +652,13 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="750"/>
+    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="650"/>
     <br>
     <em>Figure 23: Editing crops in a historical period of the rotation. </em>
 </p> 
-<br>
-
 
 <div style="page-break-after: always"></div>
+
 
 # Details Screen
 
@@ -691,8 +690,7 @@ We will adjust this grid so that we can view the above ground and below ground c
     <em>Figure 24: Details screen</em>
 </p> 
 <br>
-
-<div style="page-break-after: always"></div>
+<br>
 
 #  Discover results
 
@@ -719,7 +717,6 @@ The **Estimates of Production** report provides total harvest yields, amount of 
 The **Feed Estimate** report provides an estimate of dry matter intake based on energy requirements of the animal and the energy in the feed.
 
 
-<br>
 <p align="center">
     <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="850"/>
     <br>
@@ -727,7 +724,6 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 </p> 
 <br>
 
-<br>
 <p align="center">
     <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="850"/>
     <br>
