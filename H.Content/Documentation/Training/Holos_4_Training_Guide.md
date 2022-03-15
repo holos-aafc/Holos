@@ -134,7 +134,7 @@ The Holos model is designed to define the land management before livestock. This
 
 Note: In order to calculate soil carbon change for fields and crop rotations, click on the “Settings” menu and select the “Multi-year” option (default is Single-Year).
 
-Now we can add our first component to the farm. Drag a “Field” component from the left side of the screen and drop it on the “My Farm” on the right side (Figure 6). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as “Field #1”. At this point, we can now enter production information related to the crop being grown on this field.  
+Now we can add our first component to the farm. Drag a “Field” component from the left side of the screen and drop it on the “My Farm” on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as “Field #1”. At this point, we can now enter production information related to the crop being grown on this field.  
 
 
 <p align="center">
@@ -210,11 +210,11 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 ## Barley Grain and Mixed Hay Rotation
 
-To demonstrate the crop rotation component (as opposed to using individual field components), we will assume that barley grain and mixed hay are grown in rotation, with the mixed hay under seeded to the barley so that it can be harvested in both main years (example derived from University of Alberta’s Breton plots, Figure ). 
+To demonstrate the crop rotation component (as opposed to using individual field components), we will assume that barley grain and mixed hay are grown in rotation, with the mixed hay under seeded to the barley so that it can be harvested in both main years (example derived from University of Alberta’s Breton plots). 
 
 When using the “Crop Rotation” component, any sequence of crops that are input into this components will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different historical management, soil carbon algorithms will run for each field.
 
-For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to setup three fields where barley grain is rotated in each field every two years (Figure 7). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
+For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to setup three fields where barley grain is rotated in each field every two years (Figure 13). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
 
 **To setup the rotation:** 
 
@@ -491,11 +491,9 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 - The management data for the **Steers** group is the same as **Heifers**. Right click on the Steers group to activate the right-click menu and select **Copy Management From -> Heifers**
 
 <br>
-<br>
 
-<br>
 <p align="center">
-    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="850"/>
+    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="800"/>
     <br>
     <em>Figure 18: Beef stocker & backgrounder operation</em>
 </p> 
