@@ -138,7 +138,7 @@ Le modèle est conçu pour définir la gestion des terres avant le bétail. C’
 *Pour calculer la variation du carbone dans le sol pour les rotations des champs et des cultures, cliquez sur le menu « Paramètres » et sélectionnez l’option « Pluriannuel ».*
 
 
-Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 6). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
+Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 9). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
 
 <br>
 <p align="center">
@@ -216,7 +216,7 @@ Pour démontrer la composante de rotation des cultures (plutôt que d’utiliser
 
 Lorsqu’on utilise la composante « rotation de cultures », toute séquence de cultures entrée dans cette composante sera appliquée à chaque champ individuel qui fait partie de la configuration de rotation. Cela signifie qu’un champ est ajouté pour chaque phase de rotation et que la rotation se décale de manière à ce que chaque phase de rotation soit présente dans un champ. Étant donné que chaque champ peut avoir une gestion historique différente, des algorithmes de carbone du sol seront appliqués pour chaque champ.
 
-Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 7]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
+Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 13]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
 
 
 Pour configurer la rotation :
@@ -284,7 +284,7 @@ Après le cycle annuel d’alimentation, la ferme bovine avec laquelle nous trav
 3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** » [121 jours]. Veuillez noter que le nombre de jours qui s’affiche comprend les dates de début et de fin.
 
 
-Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration [Figurec].
+Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration.
 
 
 Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’animaux ».
@@ -518,15 +518,14 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="750"/>
+    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="650"/>
     <br>
     <em>Figure 21 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
 </p> 
 <br>
 
-<br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="750
+    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="650
     "/>
     <br>
     <em>Figure 22 - Modification des cultures au cours d’une période historique de rotation</em>
