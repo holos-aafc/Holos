@@ -288,7 +288,7 @@ Following the annual feeding cycle, the beef farm we are working with is **divid
 
 2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
 
-3. Ensure “January 1, 2021” is set as the ‘Start date’ and that “April 30, 2021” is set as the ‘End date’ (120 days). Note that the ‘Number of days’ being shown will be inclusive of the start and end dates.
+3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’ (120 days). Note that the ‘Number of days’ being shown will be inclusive of the start and end dates.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
@@ -349,7 +349,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 #### Beef Cows - Summer Grazing
 
-Click on the management period named **Summer Grazing**. Ensure that the start date is set to April 1st, 2021 and the end date is set to October 31st, 2021.
+Click on the management period named **Summer Grazing**. Ensure that the start date is set to May 1st, 2021 and the end date is set to October 31st, 2021.
 
 
 * **General Tab:**
@@ -417,7 +417,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 Calves on our farm are born on March 1 and weaned on September 30 at the age of seven months. Using a final weaning rate of 85%, we will have 110 calves from March to September. Following the cows, calves will be in confinement for the months of March and April and will be grazing on pasture from May to September. This will result in two separate management periods.
 
-Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 31, 2021** and the second management period will span from **May 1, 2021 to September 30, 2021**.
+Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 30, 2021** and the second management period will span from **May 1, 2021 to September 30, 2021**.
 
 
 **Management Period # 1:**
@@ -502,7 +502,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 <br> 
 
 
-## Finishing Feedalot Operation
+## Finishing Feedlot Operation
 
 
 We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter the beef feedlot management data. Drag a new **Beef Finisher** component from **All components** to your list of components.
@@ -512,7 +512,7 @@ We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “January 19, 2022” as the **Start date** and “July 7th, 2022” as the **End date**.
+    * For “Management period #1”, enter “**January 19, 2022**” as the **Start date** and “**July 7th, 2022**” as the **End date**.
 
 
     * **General Tab:**
@@ -584,17 +584,17 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 ## Pullet Farm Operation:
 
-We will add one last animal component to our farm. In addition to the beef cattle operations of this farm, we will also be adding a “Chicken Meat Production” component to our farm. If you hover your mouse cursor over the “Chicken Meat Production” component under the “Poultry” category, Holos will display a tooltip that gives a brief description of a chicken meat production operation:
+We will add one last animal component to our farm. In addition to the beef cattle operations of this farm, we will also be adding a “**Chicken Meat Production**” component to our farm. If you hover your mouse cursor over the “Chicken Meat Production” component under the “Poultry” category, Holos will display a tooltip that gives a brief description of a chicken meat production operation:
     
 
 ***“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg)”***
 
-1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of 400 animals. This means numbers of animals will be consistent throughout the management periods / year.
+1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
     - **Brooding Stage:** Start January 1st, 2022 - End January 22nd, 2022. 
     - **Rearing Stage:** Start January 23rd, 2022 - End June 26th, 2022.
     - **Rearing Stage:** Start June 27th, 2022 - End November 28th, 2022.
-3. For each management period, set number of animals to 400.
+3. For each management period, set number of animals to **400**.
 4. Leave the entries in Housing and Manure as default.
 
 
@@ -714,7 +714,7 @@ Click the **Report Format (Monthly)** button to switch to a monthly report. Now 
 
 In the **Unit of measurements** drop-down menu, you can choose to have the results displayed as CO2 equivalents (CO2e) or as unconverted greenhouse gas (GHG), and you can also choose the unit of measurement as either tonnes or kilograms.
 
-The **Estimate of Production** report provides total harvest yields, amount of land applied manure, and estimates of milk production for dairy components.
+The **Estimates of Production** report provides total harvest yields, amount of land applied manure, and estimates of milk production for dairy components.
 
 The **Feed Estimate** report provides an estimate of dry matter intake based on energy requirements of the animal and the energy in the feed.
 
