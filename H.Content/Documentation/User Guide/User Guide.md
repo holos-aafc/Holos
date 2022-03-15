@@ -2880,10 +2880,10 @@ Please do not modify the headers in any of the component data input Excel files.
 <br>
 <br>
 
-# Chapter 11 Common Questions
+# Chapter 11 Common Questions & Toubleshooting
 
 
-#### How do I enable Advanced Mode:
+### How do I enable Advanced Mode:
 
 If you have started the farm in Basic mode and want to switch to Advanced mode, the process is extremely simple.
 
@@ -2901,7 +2901,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 </p>
 <br>
 
-#### How do I enable Multi Year Mode
+### How do I enable Multi Year Mode
 
 Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
 
@@ -2915,7 +2915,7 @@ Multi-year mode is only available if you are currently in Advanced Mode. If you 
 </p>
 <br>
 
-#### How to switch between IPCC Tier 2 & ICBM Carbon models
+### How to switch between IPCC Tier 2 & ICBM Carbon models
 
 Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch to and from the ICBM carbon model. To switch between the models:
 
@@ -2934,7 +2934,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 <br>
 
 
-#### How do I add a new farm to my current farms CLI folder:
+### How do I add a new farm to my current farms CLI folder:
 
 
 ##### Method 1: Copying an existing empty farm folder.
@@ -2958,3 +2958,210 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 	</em>
 </p>
 <br>
+
+
+
+### How to find the Holos Program data file(s).
+
+The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
+
+
+- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
+    <br>
+    <em>
+		Figure 11-5 - Type run in windows search.
+	</em>
+</p>
+<br>
+
+
+- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%** and then **press enter again** or click on the **OK button**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-6.png" alt="Figure11-6" width=""/>
+    <br>
+    <em>
+		Figure 11-6 - Opening the local folder inside the Appdata folder.
+	</em>
+</p>
+<br>
+
+
+- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Appdata folder on your PC. In this new window, find a folder called **HOLOS_4**. You might have to scroll down and look for the folders starting with the letter **H**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-7.png" alt="Figure11-7" width="950"/>
+    <br>
+    <em>
+		Figure 11-7 - Locate the folder called HOLOS_4
+	</em>
+</p>
+<br>
+
+- Open the folder called HOLOS_4 and inside this folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
+	</em>
+</p>
+<br>
+
+
+-	If you are trying to troubleshoot Holos, please add all these files to a zip archive and send that .zip file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
+
+
+
+<br>
+
+
+### How to create a .zip archive file
+
+
+#### Instructions for Windows 11 based systems
+
+Please follow these steps for Windows 11 based systems. In this example we will work with the **HOLOS_4** folder mentioned in the [how to find the holos data files section.](#how-to-find-the-holos-program-data-files)
+
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-9.gif" alt="Figure11-9" width="650"/>
+    <br>
+    <em>
+		Figure 11-9 - Highlight all the files you want to add to the archive.
+	</em>
+</p>
+<br>
+
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. Selecting this option will open a pop-up with a progress bar showing your files being compressed. This process will create a single .zip file containing all the files you selected in **Step 1.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-10.gif" alt="Figure11-10" width="650"/>
+    <br>
+    <em>
+		Figure 11-10 - Adding files to a .zip archive.
+	</em>
+</p>
+<br>
+
+3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can then send this compressed/zipped file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zipped archive file will contain all the files that you selected in step 1.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-11.gif" alt="Figure11-11" width="650"/>
+    <br>
+    <em>
+		Figure 11-11 - Renaming the new folder to holos-data-files.
+	</em>
+</p>
+<br>
+
+#### Instructions for Windows 10 based systems
+
+Please follow these steps for Windows 10 based systems. In this example we will work with the HOLOS_4 folder mentioned in the [how to find the holos data files section](#how-to-find-the-holos-program-data-files)
+
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-12.gif" alt="Figure11-12" width="650"/>
+    <br>
+    <em>
+		Figure 11-12 - Highlight all the files you want to add to the archive.
+	</em>
+</p>
+<br>
+
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, go to **Send to** and select “**Compressed (zipped) folder**”. Selecting this will create a single new .zip file containing all the files you selected/highlighted in **Step 1.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-13.gif" alt="Figure11-13" width="650"/>
+    <br>
+    <em>
+		Figure 11-13 - Adding files to a .zip archive.
+	</em>
+</p>
+<br>
+
+3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then send this compressed (zipped) file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zip file will contain all the files that you selected in step 1.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-14.gif" alt="Figure11-14" width="650"/>
+    <br>
+    <em>
+		Figure 11-14 - Renaming the new folder to holos-data-files.
+	</em>
+</p>
+<br>
+
+
+<br>
+
+
+### Holos Error Messages
+
+Error messages can appear when Holos encounters an internal error and is unable to resolve the issue. When Holos encounters an internal error, it displays a message in the program informing the user that an error has occurred. Below is an example of a similar error.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-15.png" alt="Figure11-15" width="750"/>
+    <br>
+    <em>
+		Figure 11-15 - Error message screen.
+	</em>
+</p>
+<br>
+
+The message that Holos displays includes information about what the error was and how to report this error to the Holos developers. The next section describes the process of reporting this error to the Holos team.
+
+
+
+### How to report an Error Message.
+
+Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error to the developers, follow these steps:
+
+-	Click the button that says **Copy to Clipboard**. This will copy the error message and all the relevant information to your computer’s clipboard. Clicking this button now allows you to paste this information in a different program.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-16.png" alt="Figure11-16" width="750"/>
+    <br>
+    <em>
+		Figure 11-16 - Click copy to clipboard to copy the information.
+	</em>
+</p>
+<br>
+
+-	To send this information to the Holos developers, you will have to paste your clipboard's information (that you just copied) into a new email and send that email to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca).
+
+-	In order to do this, open your email account (website or client like outlook) and compose a new email. In that new email **right click** anywhere in the body of the email and choose **paste**.
+-	Write anything descriptive as the subject of the email.
+-	Send this email to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
+    <br>
+    <em>
+		Figure 11-17 - Send an email to the aafc.holos address with the copied information.
+	</em>
+</p>
+<br>
+
+Please note that clicking copy to clipboard does not automatically send any information, it simply copies the error to your computer’s clipboard. In order to send this information for troubleshooting, you will need to manually paste the information in a new email and send it to the above-mentioned email address.
+
+- To further help with the troubleshooting process, you can also attach your data and log files to this troubleshooting email. Please see, [how do I find my holos data files](#how-to-find-the-holos-program-data-files) for more details.
