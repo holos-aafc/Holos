@@ -30,6 +30,7 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
+                case HousingType.Pasture:
                 case HousingType.EnclosedPasture:
                 {
                     return new FeedingActivityCoefficientData()

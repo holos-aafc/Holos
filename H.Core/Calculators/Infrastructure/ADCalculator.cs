@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Models.Animals;
 
 namespace H.Core.Calculators.Infrastructure
 {
@@ -23,7 +24,8 @@ namespace H.Core.Calculators.Infrastructure
 
         #region Public Methods
 
-        public void CaculateResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        public void CalculateFlowsFromNonFreshManure(Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
             var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
             if (component == null)
@@ -32,25 +34,32 @@ namespace H.Core.Calculators.Infrastructure
                 return;
             }
 
-            var residueSubstrates = component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.ToList();
+            /*
+             * When the user is specifying non-fresh manure, they need to tell us where it is coming from (i.e. which component, which group, and which management period). This
+             * is the only way we can access the number of animals daily emissions etc.
+             */
+            var managementPeriod = new ManagementPeriod();
 
-            // Equation 4.8.1-7
-            // TODO: Add flow rate column to farm residue grid view. Also, unit attributes/comments needed for FarmResidueSubstrateViewItem class.
-            var flowRateOfResidueSubstrates = this.CalculateFlowOfTotalMassOfCropResidueEnteringDigester(residueSubstrates.Select(x => x.FlowRate));
+            // Get a list of the crop residues/farm residues the user inputs into the system
+            var manureSubstrates = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.ToList();
 
-            // There may be multiple entries for the same type of farm resiude (i.e. 2 entries for OatStraw), so we group by residue type.
-            var residueSubstratesGroupedByType = component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.GroupBy(x => x.FarmResidueType).ToList();
+            // There may be multiple entries for the same type of substrate (i.e. 2 entries for beef cattle manure), so we group by residue type.
+            var manureSubstratesGroupedByAnimalType = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.GroupBy(x => x.AnimalType).ToList();
 
-            // A dictionary of calculated volatile solids for each type of farm crop residue (allows for detailed reporting by residue type).
-            Dictionary<FarmResidueType, double> totalSolidsFlowByType = new Dictionary<FarmResidueType, double>();
-            Dictionary<FarmResidueType, double> volatileSolidsFlowByType = new Dictionary<FarmResidueType, double>();
-            Dictionary<FarmResidueType, double> nitrogenFlowByType = new Dictionary<FarmResidueType, double>();
-            Dictionary<FarmResidueType, double> carbonFlowByType = new Dictionary<FarmResidueType, double>();
+            var totalManureAvailableForLandApplication = animalComponentEmissionsResults.TotalVolumeOfManureAvailableForLandApplication();
+
+            // A dictionary of calculated volatile solids for each type of stored (non-fresh) animal manure (allows for detailed reporting by residue type).
+            var totalSolidsFlowByType = new Dictionary<AnimalType, double>();
+            var volatileSolidsFlowByType = new Dictionary<AnimalType, double>();
+            var nitrogenFlowByType = new Dictionary<AnimalType, double>();
+            var carbonFlowByType = new Dictionary<AnimalType, double>();
+
+            var totalFlowOfStoredManureEnteringSystem = manureSubstrates.Sum(x => x.FlowRate);
 
             // Go over all the different groups of residue types and get the total TS, VS, N, etc. for each type of residue
-            foreach (var group in residueSubstratesGroupedByType)
+            foreach (var substrateGroupedByAnimalType in manureSubstratesGroupedByAnimalType)
             {
-                var currentResidueType = group.Key;
+                var currentAnimalManureType = substrateGroupedByAnimalType.Key;
 
                 var totalSolidsByType = 0.0;
                 var volatileSolidsByType = 0.0;
@@ -58,24 +67,72 @@ namespace H.Core.Calculators.Infrastructure
                 var carbonByType = 0.0;
 
                 // All items in this loop have the same residue type
-                foreach (var substrateViewItem in group)
+                foreach (var animalManureSubstrate in substrateGroupedByAnimalType)
                 {
-                    // Equation 4.8.1-8  
+                    totalSolidsByType += this.CalculateFlowOfVSEnteringDigesterFromStoredManure(
+                        flowRate: animalManureSubstrate.FlowRate,
+                        totalSolidsConcentration: animalManureSubstrate.TotalSolids);
+
+                    // Need VS rate from liquid manure
+
+                    volatileSolidsByType += this.CalculateVolatileSolidsFlowFromStoredManure(
+                        volatileSolids: animalManureSubstrate.VolatileSolids,
+                        reductionFactor: 1, // TODO
+                        numberOfAnimals: managementPeriod.NumberOfAnimals,
+                        1);// TODO
+                }
+            }
+        }
+
+        public void CalculateFlowsFromFarmSubstrates(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                // This farm doesn't have an AD
+                return;
+            }
+
+            // Get a list of the crop residues/farm residues the user inputs into the system
+            var residueSubstrates = component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.ToList();
+
+            // TODO: Add flow rate column to farm residue grid view. Also, unit attributes/comments needed for FarmResidueSubstrateViewItem class.
+            var flowRateOfResidueSubstrates = this.CalculateFlowOfTotalMassOfCropResidueEnteringDigester(residueSubstrates.Select(x => x.FlowRate));
+
+            // There may be multiple entries for the same type of farm residue (i.e. 2 entries for OatStraw), so we group by residue type.
+            var farmResidueSubstratesGroupedByType = component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.GroupBy(x => x.FarmResidueType).ToList();
+
+            // A dictionary of calculated volatile solids for each type of farm crop residue (allows for detailed reporting by residue type).
+            var totalSolidsFlowByType = new Dictionary<FarmResidueType, double>();
+            var volatileSolidsFlowByType = new Dictionary<FarmResidueType, double>();
+            var nitrogenFlowByType = new Dictionary<FarmResidueType, double>();
+            var carbonFlowByType = new Dictionary<FarmResidueType, double>();
+
+            // Go over all the different groups of residue types and get the total TS, VS, N, etc. for each type of residue
+            foreach (var substratesGroupedByType in farmResidueSubstratesGroupedByType)
+            {
+                var currentResidueType = substratesGroupedByType.Key;
+
+                var totalSolidsByType = 0.0;
+                var volatileSolidsByType = 0.0;
+                var nitrogenByType = 0.0;
+                var carbonByType = 0.0;
+
+                // All items in this loop have the same residue type
+                foreach (var substrateViewItem in substratesGroupedByType)
+                {
                     totalSolidsByType += this.CalculateFlowOfCropResidueTotalSolidsEnteringDigester(
                     flowRateOfSubstrateEnteringDigester: substrateViewItem.FlowRate,
                     totalSolidsConcentrationOfSubstrate: substrateViewItem.TotalSolids);
 
-                    // Equation 4.8.1-9
                     volatileSolidsByType += this.CalculateFlowOfCropResidueVolatileSolidsEnteringDigester(
                     flowRateOfSubstrateEnteringDigester: substrateViewItem.FlowRate,
                     volatileSolidsConcentrationOfSubstrate: substrateViewItem.VolatileSolids);
 
-                    // Equation 4.8.1-10
                     nitrogenByType += this.CalculateFlowOfCropResidueNitrogenEnteringDigester(
                     flowRateOfSubstrateEnteringDigester: substrateViewItem.FlowRate,
                     nitrogenConcentrationOfSubstrate: substrateViewItem.TotalNitrogen);
 
-                    // Equation 4.8.1-11
                     carbonByType += this.CalculateFlowOfTotalCarbonEnteringDigesterCropResidue(
                     flowRateOfSubstrateEnteringDigester: substrateViewItem.FlowRate,
                     carbonConcentrationOfSubstrate: substrateViewItem.TotalCarbon); // TODO: Add column for Carbon to farm residue grid view but set visibility to collapsed since we don't have default values yet.
@@ -89,10 +146,14 @@ namespace H.Core.Calculators.Infrastructure
             }
 
             // These are the total sums for all substrates entered into system                          
-            var totalSolidsFlowFromAllSubstrates = totalSolidsFlowByType.Sum(x => x.Value);
-            var volatileSolidsFlowFromAllSubstrates = volatileSolidsFlowByType.Sum(x => x.Value);
-            var nitrogenFlowFromAllSusbstrates = nitrogenFlowByType.Sum(x => x.Value);
-            var carbonFlowRateFromAllSubstrates = carbonFlowByType.Sum(x => x.Value);
+            var totalSolidsFlowFromAllResidues = totalSolidsFlowByType.Sum(x => x.Value);
+            var volatileSolidsFlowFromAllResidues = volatileSolidsFlowByType.Sum(x => x.Value);
+            var nitrogenFlowFromAllResidues = nitrogenFlowByType.Sum(x => x.Value);
+            var carbonFlowRateFromAllResidues = carbonFlowByType.Sum(x => x.Value);
+        }
+
+        public void CaculateResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
         }
 
         #endregion
@@ -102,23 +163,16 @@ namespace H.Core.Calculators.Infrastructure
 
         #region Equations
 
-        // missing equations:
-        // 4.8.3-4
-        // 4.8.3-5
-        // 4.8.3-6
-        // 4.8.3-7
+        #region 4.9.1 For Fresh/raw Livestock Manure Entering The Digester
 
-        // equations with sigma notation in parameters = paramters are taken in as a collection.
-
-        #region 4.8.1.1 For Fresh/raw Livestock Manure Entering The Digester
         /// <summary>
-        /// Eq. 4.8.1-1
+        /// Eq. 4.9.1-1
         /// </summary>
         /// <param name="volatileSolids">Volatile solids (kg head-1 day-1). </param>
         /// <param name="numberOfAnimals">Number of animals</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of volatile solids in substrate entering the digester (kg day-1)</returns>
-        public double CalculateFlowOfVolatileSolidsEnteringDigester(double volatileSolids,
+        public double CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(double volatileSolids,
                                                                     double numberOfAnimals,
                                                                     double proportionTotalManureAddedToAD)
         {
@@ -126,13 +180,13 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq. 4.8.1-2 
+        /// Eq. 4.9.1-5
         /// </summary>
         /// <param name="totalNitrogenExcreted">Total amount of N excreted (kg N day-1)</param>
         /// <param name="totalNitrogenAddedFromBeddingMaterial">Total amount of N added from bedding materials (kg N day-1)</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of total N in substrate entering the digester (kg day-1)</returns>
-        public double CalculateFlowOfTotalNitrogenEnteringDigester(double totalNitrogenExcreted,
+        public double CalculateFlowOfTotalNitrogenEnteringDigesterFromFreshManure(double totalNitrogenExcreted,
                                                                    double totalNitrogenAddedFromBeddingMaterial,
                                                                    double proportionTotalManureAddedToAD)
         {
@@ -140,26 +194,26 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq. 4.8.1-3 - Beef and Dairy Cattle
+        /// Eq. 4.9.1-6
         /// </summary>
         /// <param name="dailyOrganicNitrogenInStoredManure">Flow rate of organic N in substrate entering the digester (kg day-1)</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Daily organic N in stored manure (kg N day-1) for beef and dairy cattle.</returns>
-        public double CalculateFlowOfOrganicNEnteringDigesterBeefDairy(double dailyOrganicNitrogenInStoredManure,
+        public double CalculateFlowOfOrganicNEnteringDigesterBeefDairyFreshManure(double dailyOrganicNitrogenInStoredManure,
                                                                      double proportionTotalManureAddedToAD)
         {
             return dailyOrganicNitrogenInStoredManure * proportionTotalManureAddedToAD;
         }
 
         /// <summary>
-        /// Eq. 4.8.1-4 - For Poultry
+        /// Eq. 4.9.1-7
         /// </summary>
         /// <param name="totalNitrogenExcreted">Total amount of N excreted (kg N day-1)</param>
         /// <param name="totalAmmonicalNitrogenExcretionRate">Total ammonical N (TAN) excretion rate (kg TAN head-1 day-1). For broilers, layers and turkeys, default TANexcretion_rate values are used </param>
         /// <param name="numberOfAnimals">Number of animals (broilers, layers or turkeys)</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Daily organic N in stored manure (kg N day-1) for Poultry</returns>
-        public double CalculateFlowOfOrganicNEnteringDigesterPoultry(double totalNitrogenExcreted,
+        public double CalculateFlowOfOrganicNEnteringDigesterPoultryFreshManure(double totalNitrogenExcreted,
                                                                      double totalAmmonicalNitrogenExcretionRate,
                                                                      double numberOfAnimals,
                                                                      double proportionTotalManureAddedToAD)
@@ -168,13 +222,13 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq. 4.8.1-5
+        /// Eq. 4.9.1-8
         /// </summary>
         /// <param name="totalAmmonicalNitrogenExcretionRate">Total ammonical N (TAN) excretion rate (kg TAN head-1 day-1).</param>
         /// <param name="numberOfAnimals">Number of animals</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of TAN in substrate entering the digester (kg day-1) for beef cattle, dairy cattle, broilers, layers and turkeys. </returns>
-        public double CalculateFlowOfTANEnteringDigester(double totalAmmonicalNitrogenExcretionRate,
+        public double CalculateFlowOfTANEnteringDigesterFreshManure(double totalAmmonicalNitrogenExcretionRate,
                                                          double numberOfAnimals,
                                                          double proportionTotalManureAddedToAD)
         {
@@ -182,12 +236,12 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq. 4.8.1-6
+        /// Eq. 4.9.1-9
         /// </summary>
         /// <param name="totalCarbonAddedInManure">Total amount of C added in manure (including bedding) (kg N day-1)</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of total C in substrate entering the digester (kg day^-1)</returns>
-        public double CalculateFlowOfTotalCarbonEnteringDigester(double totalCarbonAddedInManure,
+        public double CalculateFlowOfTotalCarbonEnteringDigesterFreshManure(double totalCarbonAddedInManure,
                                                                  double proportionTotalManureAddedToAD)
         {
             return totalCarbonAddedInManure * proportionTotalManureAddedToAD;
@@ -195,10 +249,10 @@ namespace H.Core.Calculators.Infrastructure
 
         #endregion
 
-        #region 4.8.1.2 For Crop Residues Entering The Digester
+        #region 4.9.1 For Crop Residues Entering The Digester
 
         /// <summary>
-        /// Eq 4.8.1-7
+        /// Eq 4.9.1-11
         /// </summary>
         /// <param name="flowRatesOfSubstrates">A collection of flow rate of substrate i entering the digester (kg day-1)</param>
         /// <returns>Total flow rate of substrate entering the digester (kg day-1)</returns>
@@ -208,7 +262,7 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq 4.8.1-8
+        /// Eq 4.9.1-8
         /// </summary>
         /// <param name="flowRateOfSubstrateEnteringDigester">Flow rate of substrate i entering the digester (kg day-1)</param>
         /// <param name="totalSolidsConcentrationOfSubstrate">Total solids concentration of substrate I (kg kg-1) </param>
@@ -287,11 +341,11 @@ namespace H.Core.Calculators.Infrastructure
         #region 4.8.1.3 For Livestock Manure Stored For A Period Of Time Prior To Entering The Digester
 
         /// <summary>
-        /// Eq. 4.8.1-13 (TODO: verify eq. #)
+        /// Eq. 4.9.1-19
         /// </summary>
         /// <param name="volatileSolids">Volatile solids excreted (kg head-1 day-1)</param>
         /// <param name="reductionFactor">Fixed reduction in VS in stored solid manure entering the digester following a pre-digester storage period</param>
-        /// <param name="numberOfAnimals">Number ofanimals</param>
+        /// <param name="numberOfAnimals">Number of animals</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of volatile solids in stored solid manure entering the digester from previously stored solid manure (kg day-1)</returns>
         public double CalculateVolatileSolidsFlowFromStoredManure(
@@ -315,6 +369,19 @@ namespace H.Core.Calculators.Infrastructure
                                                                               double proportionTotalManureAddedToAD)
         {
             return (sumVolatileSolidsLoaded - sumVolatileSolidsConsumed) * proportionTotalManureAddedToAD;
+        }
+
+        /// <summary>
+        /// Eq 4.9.1-17
+        /// </summary>
+        /// <param name="flowRate"></param>
+        /// <param name="totalSolidsConcentration"></param>
+        /// <returns></returns>
+        public double CalculateFlowOfVSEnteringDigesterFromStoredManure(
+            double flowRate,
+            double totalSolidsConcentration)
+        {
+            return flowRate * totalSolidsConcentration;
         }
 
         /// <summary>

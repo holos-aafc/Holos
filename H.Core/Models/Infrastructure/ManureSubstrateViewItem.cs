@@ -18,6 +18,7 @@ namespace H.Core.Models.Infrastructure
         private double _totalSolids;
         private double _totalNitrogen;
         private double _dailyManureAddedToDigester;
+        private double _flowRate;
 
         public AnimalType AnimalType
         {
@@ -49,6 +50,9 @@ namespace H.Core.Models.Infrastructure
             set => this.SetProperty(ref _volatileSolids, value);
         }
 
+        /// <summary>
+        /// (kg t^-1)
+        /// </summary>
         public double TotalSolids
         {
             get => _totalSolids;
@@ -65,6 +69,15 @@ namespace H.Core.Models.Infrastructure
         {
             get => _dailyManureAddedToDigester;
             set => this.SetProperty(ref _dailyManureAddedToDigester, value);
+        }
+
+        /// <summary>
+        /// (kg or L day^-1)
+        /// </summary>
+        public double FlowRate
+        {
+            get => _flowRate;
+            set => SetProperty(ref _flowRate, value);
         }
     }
 }

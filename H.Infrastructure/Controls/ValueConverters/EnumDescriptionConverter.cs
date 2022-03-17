@@ -54,8 +54,7 @@ namespace H.Infrastructure.Controls.ValueConverters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var enumeration = (Enum) value;
-            if (enumeration != null)
+            if (value is Enum enumeration)
             {
                 var description = this.GetEnumDescription(enumeration);
 

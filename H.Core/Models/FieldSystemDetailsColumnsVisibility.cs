@@ -45,11 +45,11 @@ namespace H.Core.Models
             this.Year = true;
             this.CropType = true;
             this.Yield = true;
-            this.PercentageOfProductReturned = true;
-            this.PercentageOfStrawReturned = true;
-            this.PercentageOfRootsReturned = true;
-            this.AboveGroundCarbonInput = true;
-            this.BelowGroundCarbonInput = true;
+            this.PercentageOfProductReturned = false;
+            this.PercentageOfStrawReturned = false;
+            this.PercentageOfRootsReturned = false;
+            this.AboveGroundCarbonInput = false;
+            this.BelowGroundCarbonInput = false;
             this.Description = true;
         }
 

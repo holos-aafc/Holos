@@ -317,6 +317,24 @@ namespace H.Core.Emissions.Results
             return result;
         }
 
+        /// <summary>
+        /// (kg for solid manure, L for liquid manure)
+        /// </summary>
+        public static double TotalVolumeOfManureAvailableForLandApplication(this IEnumerable<AnimalComponentEmissionsResults> results)
+        {
+            var result = 0d;
+
+            foreach (var item in results)
+            {
+                foreach (var animalGroupEmissionResult in item.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                }
+            }
+
+            return result;
+        }
+
         public static double TotalLambProduced(this IEnumerable<AnimalComponentEmissionsResults> results)
         {
             var total = 0.0;

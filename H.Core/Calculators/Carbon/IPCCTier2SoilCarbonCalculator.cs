@@ -37,7 +37,7 @@ namespace H.Core.Calculators.Carbon
             var runInPeriodItems = fieldSystemComponent.RunInPeriodItems.ToList();
             if (runInPeriodItems.Any() == false)
             {
-                // Will occur with some old farm. User will have to rebuild detail view items
+                // Will occur with some old farms. User will have to rebuild detail view items
                 return;
             }
 

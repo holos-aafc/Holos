@@ -72,11 +72,6 @@ namespace H.Core.Test.Models
                 "Year",
                 "CropType",
                 "Yield",
-                "PercentageOfProductReturned",
-                "PercentageOfStrawReturned",
-                "PercentageOfRootsReturned",
-                "AboveGroundCarbonInput",
-                "BelowGroundCarbonInput",
                 "Description",
             };
 

@@ -196,14 +196,12 @@ namespace H.Core.Services.Animals
 
             #region Flows for fresh manure
 
-            // Equation 4.8.1-1
-            groupEmissionsByDay.FlowOfFreshVolatileSolidsEnteringDigestor = _aDCalculator.CalculateFlowOfVolatileSolidsEnteringDigester(
+            groupEmissionsByDay.FlowOfFreshVolatileSolidsEnteringDigestor = _aDCalculator.CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(
                 volatileSolids: groupEmissionsByDay.VolatileSolids,
                 numberOfAnimals: managementPeriod.NumberOfAnimals,
                 proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
 
-            // Equation 4.8.1-2
-            groupEmissionsByDay.FlowOfFreshNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigester(
+            groupEmissionsByDay.FlowOfFreshNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigesterFromFreshManure(
                 totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
                 totalNitrogenAddedFromBeddingMaterial: groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
                 proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
@@ -211,15 +209,13 @@ namespace H.Core.Services.Animals
             // Organic flow depends on animal type
             if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
             {
-                // Equation 4.8.1-3
-                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterBeefDairy(
+                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterBeefDairyFreshManure(
                     dailyOrganicNitrogenInStoredManure: groupEmissionsByDay.OrganicNitrogenInStoredManure,
                     proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
             }
             else if(managementPeriod.AnimalType.IsPoultryType())
             {
-                // Equation 4.8.1-4
-                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterPoultry(
+                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterPoultryFreshManure(
                     totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
                     totalAmmonicalNitrogenExcretionRate: managementPeriod.ManureDetails.YearlyTanExcretion,
                     numberOfAnimals: managementPeriod.NumberOfAnimals,
@@ -232,16 +228,21 @@ namespace H.Core.Services.Animals
 
             var tanExcretionRate = managementPeriod.AnimalType.IsPoultryType() ? managementPeriod.ManureDetails.YearlyTanExcretion : groupEmissionsByDay.TanExcretionRate;
 
-            // Equation 4.8.1-5
-            groupEmissionsByDay.FlowOfFreshTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigester(
+            groupEmissionsByDay.FlowOfFreshTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
                 totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals,
                 proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
 
             // Equation 4.8.1-6
-            groupEmissionsByDay.FlowOfFreshCarbonEnteringDigestor = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigester(
+            groupEmissionsByDay.FlowOfFreshCarbonEnteringDigestor = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigesterFreshManure(
                 totalCarbonAddedInManure: groupEmissionsByDay.CarbonFromManureAndBedding,
                 proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+
+            #endregion
+
+            #region Flows for crop residues
+
+            // See ADCalculator
 
             #endregion
 
@@ -303,7 +304,7 @@ namespace H.Core.Services.Animals
 
             // Verify equation number
             // TODO: need proportion input from user
-            var flowOfTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigester(
+            var flowOfTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
                     totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
                     numberOfAnimals: managementPeriod.NumberOfAnimals,
                     proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
