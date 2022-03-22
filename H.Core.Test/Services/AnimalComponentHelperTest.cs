@@ -28,6 +28,7 @@ namespace H.Core.Test.Services
 
             managementPeriod.Start = new DateTime(2020, 1, 1);
             managementPeriod.End = managementPeriod.Start.AddDays(numberOfDays);
+            managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
             managementPeriod.NumberOfDays = numberOfDays;
             managementPeriod.StartWeight = 100;
             managementPeriod.PeriodDailyGain = 1;
@@ -42,7 +43,7 @@ namespace H.Core.Test.Services
 
             var secondMonthData = result[1];
             Assert.AreEqual(131, secondMonthData.StartWeightInMonth);
-            Assert.AreEqual(160, secondMonthData.EndWeightInMonth);
+            Assert.AreEqual(159, secondMonthData.EndWeightInMonth);
         }
 
         [TestMethod]

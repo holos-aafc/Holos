@@ -6,11 +6,11 @@ using H.Core.Enumerations;
 namespace H.Core.Test.Providers.AnaerobicDigestion
 {
     [TestClass]
-    public class ParameterAdjustmentForDriedOrStockpiledManureProviderTest
+    public class ParameterAdjustmentForDriedOrStockpiledManureProviderTest_Table_47
     {
         #region Fields
 
-        private ParameterAdjustmentForDriedOrStockpiledManureProvider _provider;
+        private ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47 _provider;
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace H.Core.Test.Providers.AnaerobicDigestion
         [TestInitialize]
         public void TestIntialize()
         {
-            _provider = new ParameterAdjustmentForDriedOrStockpiledManureProvider();
+            _provider = new ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47();
         }
 
         [TestCleanup]

@@ -69,44 +69,18 @@ namespace H.Core.Models.Animals
 
         #region Constructors
 
-        public ManagementPeriod() : this(true)
-        {
-        }
-
-        // Normally we can set 'attach' to true but in the case of having unit conversion work in the GUI
-        // we need to make sure that we don't set all the event handlers up on creation so we set 'attach'
-        // to false and we will attach the remaining handlers later.
-        /// <summary>
-        /// This should only be used when working with the GUI and the BindingManagmentPeriod.
-        /// </summary>
-        /// <param name="attach">true for normal behaviour, false if working with unit conversion in the GUI</param>
-        public ManagementPeriod(bool attach)
+        public ManagementPeriod()
         {
             this.Start = new DateTime(DateTime.Now.Year, 1, 1);
 
             this.ManureDetails = new ManureDetails();
-            this.ManureDetails.PropertyChanged += ManureDetailsOnPropertyChanged;
 
             this.HousingDetails = new HousingDetails();
-            this.HousingDetails.PropertyChanged += HousingDetailsOnPropertyChanged;
 
             this.NumberOfAnimals = 20;
             this.MilkProduction = 8;
             this.MilkFatContent = 4;
             this.MilkProteinContentAsPercentage = 3.5;
-
-            //attach all the handlers for the objects that composes a management period
-            this.PropertyChanged -= OnNestedObjectsChanged;
-            this.PropertyChanged += OnNestedObjectsChanged;
-
-            //when we make a binding management period in th GUI we want to make a copy of 
-            //an already existing management period we do not want properties changing on
-            //the new management period while we are initialising our new management period. 
-            if (attach)
-            {
-                this.PropertyChanged -= this.OnPropertyChanged;
-                this.PropertyChanged += this.OnPropertyChanged;
-            }
         }
 
         #endregion
@@ -341,12 +315,13 @@ namespace H.Core.Models.Animals
             get { return _start; }
             set
             {
+                // Don't allow the start date to start after the end date
                 if (value > this.End && this.End.Equals(default(DateTime)) == false)
                 {
                     return;
                 }
 
-                SetProperty(ref _start, value, OnStartChanged);
+                SetProperty(ref _start, value);
             }
         }
 
@@ -358,12 +333,13 @@ namespace H.Core.Models.Animals
             get { return _end; }
             set
             {
+                // Don't allow the end date to begin before the start date
                 if (value < this.Start && this.Start.Equals(default(DateTime)) == false)
                 {
                     return;
                 }
 
-                SetProperty(ref _end, value, OnEndChanged);
+                SetProperty(ref _end, value);
             }
         }
 
@@ -474,132 +450,13 @@ namespace H.Core.Models.Animals
             return $"{nameof(this.Start)}: {this.Start}, {nameof(this.End)}: {this.End}";
         }
 
-        /// <summary>
-        /// Attach <see cref="OnPropertyChanged"/> handler to the management period. 
-        /// </summary>
-        public void AttachRemainingEventHandlers()
-        {
-            this.PropertyChanged -= OnPropertyChanged;
-            this.PropertyChanged += OnPropertyChanged;
-        }
         #endregion
 
         #region Private Methods
 
-        private void UpdateNumberOfDays()
-        {
-            this.NumberOfDays = (int)(this.End.Subtract(this.Start).TotalDays + 1);
-        }
-
-        private void UpdateDuration()
-        {
-            this.Duration = (this.End.Subtract(this.Start)).Add(TimeSpan.FromDays(1));
-        }
-
-        private void UpdateEndWeights()
-        {
-            this.EndWeight = this.StartWeight + (this.NumberOfDays * this.PeriodDailyGain);
-        }
-
         #endregion
 
         #region Event Handlers
-
-        private void OnEndChanged()
-        {
-            this.UpdateNumberOfDays();
-            this.UpdateDuration();
-        }
-
-        private void OnStartChanged()
-        {
-            this.UpdateNumberOfDays();
-            this.UpdateDuration();
-        }
-
-        private void OnNestedObjectsChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.SelectedDiet)))
-            {
-                if (this.SelectedDiet != null)
-                {
-                    this.SelectedDiet.PropertyChanged -= SelectedDietOnPropertyChanged;
-                    this.SelectedDiet.PropertyChanged += SelectedDietOnPropertyChanged;
-                }
-            }           
-
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.HousingDetails)))
-            {
-                if (this.HousingDetails != null)
-                {
-                    this.HousingDetails.PropertyChanged -= HousingDetailsOnPropertyChanged;
-                    this.HousingDetails.PropertyChanged += HousingDetailsOnPropertyChanged;
-                }
-            }
-
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.ManureDetails)))
-            {
-                if (this.ManureDetails != null)
-                {
-                    this.ManureDetails.PropertyChanged -= ManureDetailsOnPropertyChanged;
-                    this.ManureDetails.PropertyChanged += ManureDetailsOnPropertyChanged;
-                }
-            }
-        }
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.StartWeight)))
-            {
-                this.UpdateEndWeights();
-            }
-
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.NumberOfDays)))
-            {
-                this.UpdateEndWeights();
-            }
-
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.PeriodDailyGain)))
-            {
-                this.PropertyChanged -= OnPropertyChanged;
-
-                this.UpdateEndWeights();
-
-                this.PropertyChanged += OnPropertyChanged;
-            }
-
-            if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.EndWeight)))
-            {
-                this.PropertyChanged -= OnPropertyChanged;
-
-                this.PeriodDailyGain = (this.EndWeight - this.StartWeight) / this.NumberOfDays;
-
-                this.PropertyChanged += OnPropertyChanged;
-            }
-
-        }
-
-        private void SelectedDietOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            // Any time user updates the selected diet in the diet formulator, these changes need to be reflected in the display diet as well
-            if (this.SelectedDiet != null)
-            {
-            }
-        }       
-
-        private void ManureDetailsOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (sender is ManureDetails manureDetails)
-            {
-            }
-        }
-
-        private void HousingDetailsOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (sender is HousingDetails housingDetails)
-            {
-            }
-        }
 
         #endregion
     }

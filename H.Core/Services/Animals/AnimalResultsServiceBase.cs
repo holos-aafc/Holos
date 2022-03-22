@@ -10,6 +10,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
+using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Energy;
 using H.Core.Tools;
@@ -20,6 +21,7 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
+        protected readonly ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47 _parameterAdjustmentForDriedOrStockpiledManureProvider = new ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47();
         protected readonly ElectricityConversionDefaultsProvider_Table_47 _energyConversionDefaultsProvider = new ElectricityConversionDefaultsProvider_Table_47();
         protected readonly DefaultAmmoniaEmissionProvider_Table_39 defaultAmmoniaEmissionFactorProvider = new DefaultAmmoniaEmissionProvider_Table_39();
         protected readonly FractionOfOrganicNitrogenMineralizedAsTanProvider_Table_40 _fractionOfOrganicNitrogenMineralizedAsTanProvider = new FractionOfOrganicNitrogenMineralizedAsTanProvider_Table_40();
@@ -182,6 +184,135 @@ namespace H.Core.Services.Animals
             AnimalGroup animalGroup,
             Farm farm);
 
+        protected void CalculateFlowsFromFreshManure(
+            Farm farm,
+            GroupEmissionsByDay groupEmissionsByDay,
+            ManagementPeriod managementPeriod)
+        {
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                // This farm doesn't have an AD
+                return;
+            }
+
+            groupEmissionsByDay.TotalMassEnteringDigesterFromFreshManure = _aDCalculator.CalculateTotalFreshMassEnteringDigester(
+            totalVolumeOfLandManure: groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication,
+            component.ProportionTotalManureAddedToAD);
+
+            groupEmissionsByDay.FlowOfTotalSolidsEnteringDigesterFromFreshManure = _aDCalculator.CalculateTotalSolidsEnteringDigester(
+                totalMassFlowRate: groupEmissionsByDay.TotalMassEnteringDigesterFromFreshManure,
+                concentration: 1); // TODO
+
+            groupEmissionsByDay.FlowOfVolatileSolidsFromEnteringDigesterFreshManure = _aDCalculator.CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(
+                volatileSolids: groupEmissionsByDay.VolatileSolids,
+                numberOfAnimals: managementPeriod.NumberOfAnimals,
+                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+
+            groupEmissionsByDay.FlowOfNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigesterFromFreshManure(
+                totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
+                totalNitrogenAddedFromBeddingMaterial: groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
+                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+
+            // Organic flow depends on animal type
+            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+            {
+                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterBeefDairyFreshManure(
+                    dailyOrganicNitrogenInStoredManure: groupEmissionsByDay.OrganicNitrogenInStoredManure,
+                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+            }
+            else if (managementPeriod.AnimalType.IsPoultryType())
+            {
+                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterPoultryFreshManure(
+                    totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
+                    totalAmmonicalNitrogenExcretionRate: managementPeriod.ManureDetails.YearlyTanExcretion,
+                    numberOfAnimals: managementPeriod.NumberOfAnimals,
+                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+            }
+            else
+            {
+                // Currently, only beef, dairy, and poultry supported.
+            }
+
+            var tanExcretionRate = managementPeriod.AnimalType.IsPoultryType() ? managementPeriod.ManureDetails.YearlyTanExcretion : groupEmissionsByDay.TanExcretionRate;
+            groupEmissionsByDay.FlowOfTanEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
+                totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
+                numberOfAnimals: managementPeriod.NumberOfAnimals,
+                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+
+            groupEmissionsByDay.FlowOfCarbonEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigesterFreshManure(
+                totalCarbonAddedInManure: groupEmissionsByDay.CarbonFromManureAndBedding,
+                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+        }
+
+        protected void CalculateFlowsFromStoredManure(
+            Farm farm,
+            GroupEmissionsByDay groupEmissionsByDay,
+            ManagementPeriod managementPeriod)
+        {
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                // This farm doesn't have an AD
+                return;
+            }
+
+            groupEmissionsByDay.TotalMassEnteringDigesterFromStoredManure =  _aDCalculator.CalculateTotalFlowFromStoredManure(
+                totalVolumeOfLandManure: groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication,
+                proportion: 1); // TODO
+
+            groupEmissionsByDay.FlowOfTotalSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateTotalSolidsEnteringDigesterFromStoredManure(
+                totalMassFlowRate: groupEmissionsByDay.TotalMassEnteringDigesterFromStoredManure,
+                concentration: 1); // TODO
+
+            if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
+            {
+                groupEmissionsByDay.FlowOfVolatileSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateVolatileSolidsFlowFromStoredLiquidManure(
+                    sumVolatileSolidsLoaded: groupEmissionsByDay.VolatileSolidsLoaded,
+                    sumVolatileSolidsConsumed: groupEmissionsByDay.VolatileSolidsConsumed,
+                    component.ProportionTotalManureAddedToAD);
+            }
+            else
+            {
+                var volatileSolidsReductionFactor = _parameterAdjustmentForDriedOrStockpiledManureProvider.GetParametersAdjustmentInstance(
+                    manureStateType: managementPeriod.ManureDetails.StateType);
+
+                groupEmissionsByDay.FlowOfVolatileSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateVolatileSolidsFlowFromStoredManure(
+                    volatileSolids: groupEmissionsByDay.VolatileSolids,
+                    reductionFactor: volatileSolidsReductionFactor.VolatileSolidsReductionFactor,
+                    numberOfAnimals: managementPeriod.NumberOfAnimals,
+                    proportionTotalManureAddedToAD: 1); // TODO
+            }
+
+            groupEmissionsByDay.FlowRateOfNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowRateOfTotalNitrogenEnteringDigesterFromStoredManure(
+                nitrogenAvailalbleForLandApplication: groupEmissionsByDay.NitrogenAvailableForLandApplication,
+                proportion: 1); // TODO
+
+            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+            {
+                groupEmissionsByDay.FlowOfTanEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfTanFromStoredManureBeefDairy(
+                    tanAvailableForLandApplication: groupEmissionsByDay.TanAvailableForLandApplication,
+                    proportion: 1);// TODO
+
+                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfOrganicNitrogenFromStoredManureBeefDairy(
+                    organicNitrogenAvailableForLandApplication: groupEmissionsByDay.OrganicNitrogenAvailableForLandApplication,
+                    proportion: 1); // TODO
+            }
+            else
+            {
+                groupEmissionsByDay.FlowOfTanEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfTANEnteringDigesterFromStoredPoultryManure(
+                    totalAmmonicalNitrogenExcretionRate: groupEmissionsByDay.TanExcretionRate,
+                    indirectNLossesFromManureInHousingNH3: groupEmissionsByDay.AmmoniaConcentrationInHousing,
+                    indirectNLossesFromManureInStorageNH3: groupEmissionsByDay.AmmoniaLostFromStorage,
+                    numberOfAnimals: managementPeriod.NumberOfAnimals,
+                    proportionTotalManureAddedToAD: 1);
+                
+                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfOrganicNitrogenFromStoredPoultryManure(
+                    nitrogenFlowFromSubstrate: groupEmissionsByDay.FlowRateOfNitrogenEnteringDigesterFromStoredManure,
+                    tanFlowFromSubstrate: 1);
+            }
+        }
+
         protected void CaclulateADResults(
             Farm farm,
             GroupEmissionsByDay groupEmissionsByDay,
@@ -194,127 +325,22 @@ namespace H.Core.Services.Animals
                 return;
             }
 
-            #region Flows for fresh manure
-
-            groupEmissionsByDay.FlowOfFreshVolatileSolidsEnteringDigestor = _aDCalculator.CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(
-                volatileSolids: groupEmissionsByDay.VolatileSolids,
-                numberOfAnimals: managementPeriod.NumberOfAnimals,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            groupEmissionsByDay.FlowOfFreshNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigesterFromFreshManure(
-                totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                totalNitrogenAddedFromBeddingMaterial: groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            // Organic flow depends on animal type
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+            if (managementPeriod.ManureDetails.StateType == ManureStateType.AnaerobicDigester)
             {
-                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterBeefDairyFreshManure(
-                    dailyOrganicNitrogenInStoredManure: groupEmissionsByDay.OrganicNitrogenInStoredManure,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-            }
-            else if(managementPeriod.AnimalType.IsPoultryType())
-            {
-                groupEmissionsByDay.FlowOfFreshOrganicNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterPoultryFreshManure(
-                    totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                    totalAmmonicalNitrogenExcretionRate: managementPeriod.ManureDetails.YearlyTanExcretion,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
+                // Manure gets sent to AD component (fresh manure)   
+                this.CalculateFlowsFromFreshManure(
+                    farm: farm,
+                    groupEmissionsByDay: groupEmissionsByDay,
+                    managementPeriod: managementPeriod) ;
             }
             else
             {
-                // Currently, only beef, dairy, and poultry supported.
+                // Stored manure gets sent to AD component
+                this.CalculateFlowsFromStoredManure(
+                    farm: farm,
+                    groupEmissionsByDay: groupEmissionsByDay,
+                    managementPeriod: managementPeriod);
             }
-
-            var tanExcretionRate = managementPeriod.AnimalType.IsPoultryType() ? managementPeriod.ManureDetails.YearlyTanExcretion : groupEmissionsByDay.TanExcretionRate;
-
-            groupEmissionsByDay.FlowOfFreshTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
-                totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            // Equation 4.8.1-6
-            groupEmissionsByDay.FlowOfFreshCarbonEnteringDigestor = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigesterFreshManure(
-                totalCarbonAddedInManure: groupEmissionsByDay.CarbonFromManureAndBedding,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            #endregion
-
-            #region Flows for crop residues
-
-            // See ADCalculator
-
-            #endregion
-
-            #region Flows for stored manure
-
-            // TODO: get value from provider
-            var volatileSolidsReductionFactor = 0.9;
-
-            groupEmissionsByDay.FlowOfStoredVolatileSolidsEnteringDigestor = _aDCalculator.CalculateVolatileSolidsFlowFromStoredManure(
-                volatileSolids: groupEmissionsByDay.VolatileSolids,
-                reductionFactor: volatileSolidsReductionFactor,
-                numberOfAnimals: managementPeriod.NumberOfAnimals,
-                proportionTotalManureAddedToAD: 0);
-
-            #endregion
-
-            // Equation 4.8.1-16 
-            groupEmissionsByDay.TotalNitrogenEnteringDigestor = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigester(
-                nitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                nitrogenAddedFromBeddingMaterial: groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
-                directNitrousOxideToNitrogenEmissions: groupEmissionsByDay.ManureDirectN2ONEmission,
-                indirectNLossesFromManureInHousingNH3: groupEmissionsByDay.AmmoniaConcentrationInHousing,
-                indirectNLossesFromManureInStorageNH3: groupEmissionsByDay.AmmoniaLostFromStorage,
-                indirectNLossesFromManureInHousingLeaching: groupEmissionsByDay.ManureN2ONLeachingEmission,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD); // TODO (Aaron): ensure we add another N2O-N property if needed to distinguish between pre/post AD calculations. Also, check last description note for this equation as it says for all livestock groups (not just current group being considered - pass in all group emissions?)
-
-            // Equation 4.8.1-17
-            var nh3NHousingStorage = _aDCalculator.CalculateIndirectNLossesFromManureInHousingViaNH3(
-                totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                volatilizationFraction: managementPeriod.ManureDetails.VolatilizationFraction);
-
-            var organicFlowFromSubstrate = 0.0;
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
-            {
-                // TODO: need proportion input from user
-                // Equation 4.8.1-17 (duplicate equation number)
-                organicFlowFromSubstrate = _aDCalculator.CalculateFlowOrganicNitrogenEnteringDigesterBeefDairyCattle(
-                    dailyOrganicNitrogenInStoredManure: groupEmissionsByDay.OrganicNitrogenInStoredManure,
-                    directNitrousOxideToNitrogenEmissions: groupEmissionsByDay.ManureDirectN2ONEmission,
-                    indirectNLossesFromManureInHousingNH3: groupEmissionsByDay.AmmoniaConcentrationInHousing,
-                    indirectNLossesFromManureInStorageNH3: groupEmissionsByDay.AmmoniaLostFromStorage,
-                    indirectNLossesFromManureInHousingLeaching: groupEmissionsByDay.ManureN2ONLeachingEmission,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-            }
-            else if (managementPeriod.AnimalType.IsPoultryType())
-            {
-                // TODO: need proportion input from user
-                // Equation 4.8.1-18
-                organicFlowFromSubstrate = _aDCalculator.CalculateFlowOrganicNitrogenEnteringDigesterPoultry(
-                    totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                    totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-            }   
-            else
-            {
-                // Only beef, dairy, and poultry currently supported
-            }
-
-            // Verify equation number
-            // TODO: need proportion input from user
-            var flowOfTanEnteringDigestor = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
-                    totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            // Verify equation number
-            // TODO: need proportion input from user
-            var flowOfCarbonEnteringDigestor = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigester(
-                    totalCarbonInManure: groupEmissionsByDay.CarbonFromManureAndBedding,
-                    carbonLostAsCH4: groupEmissionsByDay.AmountOfCarbonLostAsMethaneDuringManagement,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);          
         }
 
         #endregion

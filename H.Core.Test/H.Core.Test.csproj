@@ -135,7 +135,7 @@
     <Compile Include="Models\MonthsAndDaysDataTest.cs" />
     <Compile Include="Models\ColumnsVisibilityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureProviderTest.cs" />
+    <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureProviderTest_Table_47.cs" />
     <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsTest.cs" />
     <Compile Include="Providers\AnaerobicDigestion\BiodegradedFractionDuringStorageProviderTest.cs" />
     <Compile Include="Providers\AnaerobicDigestion\EmissionFactorsForDigestateStorageProviderTest.cs" />

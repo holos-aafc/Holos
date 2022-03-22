@@ -57,7 +57,7 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void CalculateResultsForComponentReturnsNonEmptyListOfAnimalGroupEmissionResults()
         {
-            var managementPeriod = new ManagementPeriod(attach: true);
+            var managementPeriod = new ManagementPeriod();
             managementPeriod.Start = new DateTime(2019, 1, 1);
             managementPeriod.End = managementPeriod.Start.AddDays(90);
             managementPeriod.SelectedDiet = new Diet();
@@ -87,9 +87,10 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void CalculateResultsForComponentReturnsNonEmptyListOfGroupEmissionsByMonth()
         {
-            var managementPeriod = new ManagementPeriod(attach: true);
+            var managementPeriod = new ManagementPeriod();
             managementPeriod.Start = new DateTime(2019, 1, 1);
             managementPeriod.End = managementPeriod.Start.AddDays(89);
+            managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
             managementPeriod.SelectedDiet = new Diet();
 
             var cowGroup = new AnimalGroup()

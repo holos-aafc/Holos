@@ -8,7 +8,7 @@ using H.Core.Enumerations;
 
 namespace H.Core.Providers.AnaerobicDigestion
 {
-    public class ParameterAdjustmentForDriedOrStockpiledManureProvider
+    public class ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47
     {
         #region Fields
         #endregion
@@ -25,9 +25,9 @@ namespace H.Core.Providers.AnaerobicDigestion
         /// Method returns a <see cref="ParameterAdjustmentForDriedOrStockpiledManureData"/> based on the parameter. The only valid parameters are
         /// <see cref="ManureStateType.DeepBedding"/> (drying in pads) and <see cref="ManureStateType.SolidStorage"/> (stockpiling).
         /// </summary>
-        /// <param name="manureStateType">The manure state type. This is either Deepbedding/Drying in pads or SolidStorage/Stockpiling.</param>
+        /// <param name="manureStateType">The manure state type. This is either Deep bedding/Drying in pads or SolidStorage/Stockpiling.</param>
         /// <returns>Returns an instance of <see cref="ParameterAdjustmentForDriedOrStockpiledManureData"/> containing the parameter values.
-        /// If incorrect paramter is specified, the method returns an empty instance.</returns>
+        /// If incorrect parameter is specified, the method returns an empty instance.</returns>
         public ParameterAdjustmentForDriedOrStockpiledManureData GetParametersAdjustmentInstance(ManureStateType manureStateType)
         {
             if (manureStateType == ManureStateType.DeepBedding)
@@ -50,7 +50,7 @@ namespace H.Core.Providers.AnaerobicDigestion
 
             else
             {
-                Trace.TraceError($"{nameof(ParameterAdjustmentForDriedOrStockpiledManureProvider)}.{nameof(ParameterAdjustmentForDriedOrStockpiledManureProvider.GetParametersAdjustmentInstance)}" +
+                Trace.TraceError($"{nameof(ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47)}.{nameof(ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47.GetParametersAdjustmentInstance)}" +
                     $" does not contain ManureStateType: {manureStateType}. Please specify either {nameof(ManureStateType.DeepBedding)} or {nameof(ManureStateType.SolidStorage)}" +
                     $" returning empty object instance.");
                 return new ParameterAdjustmentForDriedOrStockpiledManureData();

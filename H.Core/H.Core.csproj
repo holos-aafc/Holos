@@ -413,7 +413,7 @@
     <Compile Include="Providers\AnaerobicDigestion\EmissionFactorsForDigestateStorageData.cs" />
     <Compile Include="Providers\AnaerobicDigestion\EmissionFactorsForDigestateStorageProvider.cs" />
     <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureData.cs" />
-    <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureProvider.cs" />
+    <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47.cs" />
     <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsData.cs" />
     <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsProvider.cs" />
     <Compile Include="Providers\Animals\AdditiveReductionFactorsForAllCattleData.cs" />

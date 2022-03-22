@@ -34,19 +34,29 @@ namespace H.Core.Calculators.Infrastructure
                 return;
             }
 
-            /*
-             * When the user is specifying non-fresh manure, they need to tell us where it is coming from (i.e. which component, which group, and which management period). This
-             * is the only way we can access the number of animals daily emissions etc.
-             */
-            var managementPeriod = new ManagementPeriod();
+            // Go over all results and get group emissions by day that have AD set as the manure handling system
+            foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
+            {
+                foreach (var animalGroupEmissionResults in animalComponentEmissionsResult.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                   
+                }
+            }
 
-            // Get a list of the crop residues/farm residues the user inputs into the system
+
+            // Get a list of the manure substrates the user inputs into the system
             var manureSubstrates = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.ToList();
+
+            var totalFlowRateOfStoredManureEnteringSystem = this.CalculateFlowOfTotalMassOfStoredManureEnteringDigester(manureSubstrates.Select(x => x.FlowRate));
+
+            // TODO: need to get this value from only the components the user has specified will be used for stored manure inputs
+            var totalManureAvailableForLandApplication = animalComponentEmissionsResults.TotalVolumeOfManureAvailableForLandApplication();
+            var flowOfStoredManure = this.CalculateTotalFlowFromStoredManure(
+                totalVolumeOfLandManure: totalManureAvailableForLandApplication,
+                proportion: 1); // TODO
 
             // There may be multiple entries for the same type of substrate (i.e. 2 entries for beef cattle manure), so we group by residue type.
             var manureSubstratesGroupedByAnimalType = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.GroupBy(x => x.AnimalType).ToList();
-
-            var totalManureAvailableForLandApplication = animalComponentEmissionsResults.TotalVolumeOfManureAvailableForLandApplication();
 
             // A dictionary of calculated volatile solids for each type of stored (non-fresh) animal manure (allows for detailed reporting by residue type).
             var totalSolidsFlowByType = new Dictionary<AnimalType, double>();
@@ -54,7 +64,11 @@ namespace H.Core.Calculators.Infrastructure
             var nitrogenFlowByType = new Dictionary<AnimalType, double>();
             var carbonFlowByType = new Dictionary<AnimalType, double>();
 
-            var totalFlowOfStoredManureEnteringSystem = manureSubstrates.Sum(x => x.FlowRate);
+            /*
+             * When the user is specifying non-fresh manure, they need to tell us where it is coming from (i.e. which component, which group, and which management period). This
+             * is the only way we can access the number of animals daily emissions etc.
+             */
+            var managementPeriod = new ManagementPeriod();
 
             // Go over all the different groups of residue types and get the total TS, VS, N, etc. for each type of residue
             foreach (var substrateGroupedByAnimalType in manureSubstratesGroupedByAnimalType)
@@ -166,15 +180,35 @@ namespace H.Core.Calculators.Infrastructure
         #region 4.9.1 For Fresh/raw Livestock Manure Entering The Digester
 
         /// <summary>
-        /// Eq. 4.9.1-1
+        /// Eq. 4.9.1-2
         /// </summary>
-        /// <param name="volatileSolids">Volatile solids (kg head-1 day-1). </param>
+        public double CalculateTotalFreshMassEnteringDigester(
+            double totalVolumeOfLandManure,
+            double propotion)
+        {
+            return totalVolumeOfLandManure * propotion;
+        }
+
+        /// <summary>
+        /// Eq. 4.9.1-3
+        /// </summary>
+        public double CalculateTotalSolidsEnteringDigester(
+            double totalMassFlowRate,
+            double concentration)
+        {
+            return totalMassFlowRate * concentration;
+        }
+
+        /// <summary>
+        /// Eq. 4.9.1-4
+        /// </summary>
+        /// <param name="volatileSolids">Volatile solids (kg head^-1 day^-1). </param>
         /// <param name="numberOfAnimals">Number of animals</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of volatile solids in substrate entering the digester (kg day-1)</returns>
         public double CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(double volatileSolids,
-                                                                    double numberOfAnimals,
-                                                                    double proportionTotalManureAddedToAD)
+            double numberOfAnimals,
+            double proportionTotalManureAddedToAD)
         {
             return volatileSolids * numberOfAnimals * proportionTotalManureAddedToAD;
         }
@@ -341,6 +375,36 @@ namespace H.Core.Calculators.Infrastructure
         #region 4.8.1.3 For Livestock Manure Stored For A Period Of Time Prior To Entering The Digester
 
         /// <summary>
+        /// Eq 4.9.1-15
+        /// </summary>
+        /// <param name="flowRatesOfSubstrates">A collection of flow rate of substrate i entering the digester (kg day-1)</param>
+        /// <returns>Total flow rate of substrate entering the digester (kg day-1)</returns>
+        public double CalculateFlowOfTotalMassOfStoredManureEnteringDigester(IEnumerable<double> flowRatesOfSubstrates)
+        {
+            return flowRatesOfSubstrates.Sum();
+        }
+
+        /// <summary>
+        /// Eq. 4.9.1-16
+        /// </summary>
+        public double CalculateTotalFlowFromStoredManure(
+            double totalVolumeOfLandManure,
+            double proportion)
+        {
+            return totalVolumeOfLandManure * proportion;
+        }
+
+        /// <summary>
+        /// Eq. 4.9.1-17
+        /// </summary>
+        public double CalculateTotalSolidsEnteringDigesterFromStoredManure(
+            double totalMassFlowRate,
+            double concentration)
+        {
+            return totalMassFlowRate * concentration;
+        }
+
+        /// <summary>
         /// Eq. 4.9.1-19
         /// </summary>
         /// <param name="volatileSolids">Volatile solids excreted (kg head-1 day-1)</param>
@@ -358,13 +422,13 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq 4.8.1-14
+        /// Eq 4.9.1-18
         /// </summary>
         /// <param name="sumVolatileSolidsLoaded">Sum of volatile solids (kg) into storage system across all days of pre-digester storage period</param>
         /// <param name="sumVolatileSolidsConsumed">Sum of volatile solids (kg) consumed across all days of pre-digester storage period.</param>
         /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
         /// <returns>Flow rate of volatile solids in substrate entering the digester (kg day-1)</returns>
-        public double CalculateFlowOfVSEnteringDigesterFromLiquidManureSystem(double sumVolatileSolidsLoaded,
+        public double CalculateVolatileSolidsFlowFromStoredLiquidManure(double sumVolatileSolidsLoaded,
                                                                               double sumVolatileSolidsConsumed,
                                                                               double proportionTotalManureAddedToAD)
         {
@@ -399,28 +463,71 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         /// <summary>
-        /// Eq 4.8.1-16
+        /// Eq 4.9.1-20
         /// </summary>
-        /// <param name="nitrogenExcreted">Total amount of N excreted (kg N day-1)</param>
-        /// <param name="nitrogenAddedFromBeddingMaterial">Total amount of N added from bedding materials (kg N day-1)</param>
-        /// <param name="directNitrousOxideToNitrogenEmissions">Direct N2O-N emissions from manure during the pre-AD stage (kg N2O-N day-1)</param>
-        /// <param name="indirectNLossesFromManureInHousingNH3">Indirect N losses from manure in housing via NH3 volatilization during the pre-AD stage (kg NH3-N day-1)</param>
-        /// <param name="indirectNLossesFromManureInStorageNH3">Indirect N losses from manure in storage via NH3 volatilization during the pre-AD stage.</param>
-        /// <param name="indirectNLossesFromManureInHousingLeaching">Indirect N losses from manure in housing via leaching during the pre-AD stage.</param>
-        /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
+        /// <param name="nitrogenAvailalbleForLandApplication"></param>
+        /// <param name="proportion"></param>
         /// <returns>Flow rate of total N in substrate entering the digester (kg day-1)</returns>
-        public double CalculateFlowOfTotalNitrogenEnteringDigester(double nitrogenExcreted,
-                                                                   double nitrogenAddedFromBeddingMaterial,
-                                                                   double directNitrousOxideToNitrogenEmissions,
-                                                                   double indirectNLossesFromManureInHousingNH3,
-                                                                   double indirectNLossesFromManureInStorageNH3,
-                                                                   double indirectNLossesFromManureInHousingLeaching,
-                                                                   double proportionTotalManureAddedToAD)
+        public double CalculateFlowRateOfTotalNitrogenEnteringDigesterFromStoredManure(double nitrogenAvailalbleForLandApplication,
+            double proportion)
         {
-            return (nitrogenExcreted + nitrogenAddedFromBeddingMaterial) -
-                   (directNitrousOxideToNitrogenEmissions + indirectNLossesFromManureInHousingNH3 +
-                   indirectNLossesFromManureInStorageNH3 + indirectNLossesFromManureInHousingLeaching) *
-                   proportionTotalManureAddedToAD;
+            return nitrogenAvailalbleForLandApplication * proportion;
+        }
+
+        /// <summary>
+        /// Eq 4.9.1-21
+        /// </summary>
+        /// <param name="organicNitrogenAvailableForLandApplication"></param>
+        /// <param name="proportion"></param>
+        /// <returns></returns>
+        public double CalculateFlowOfOrganicNitrogenFromStoredManureBeefDairy(
+            double organicNitrogenAvailableForLandApplication,
+            double proportion)
+        {
+            return organicNitrogenAvailableForLandApplication * proportion;
+        }
+
+        /// <summary>
+        /// Eq 4.9.1-22
+        /// </summary>
+        /// <returns></returns>
+        public double CalculateFlowOfOrganicNitrogenFromStoredPoultryManure(
+            double nitrogenFlowFromSubstrate,
+            double tanFlowFromSubstrate)
+        {
+            return nitrogenFlowFromSubstrate - tanFlowFromSubstrate;
+        }
+
+        /// <summary>
+        /// Equation 4.9.1-23
+        /// </summary>
+        /// <param name="tanAvailableForLandApplication"></param>
+        /// <param name="proportion"></param>
+        /// <returns></returns>
+        public double CalculateFlowOfTanFromStoredManureBeefDairy(
+            double tanAvailableForLandApplication,
+            double proportion)
+        {
+            return tanAvailableForLandApplication * proportion;
+        }
+
+        /// <summary>
+        /// Eq 4.9.1-24
+        /// </summary>
+        /// <param name="totalAmmonicalNitrogenExcretionRate">Total ammonical N (TAN) excretion rate (kg TAN head-1 day-1).</param>
+        /// <param name="indirectNLossesFromManureInHousingNH3">Indirect N losses from manure in housing via NH3 volatilization during the pre-AD stage (kg NH3-N day-1)</param>
+        /// <param name="indirectNLossesFromManureInStorageNH3">Indirect N losses from manure in storage via NH3 volatilization during the pre-AD stage. </param>
+        /// <param name="numberOfAnimals">The total number of animals.</param>
+        /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
+        /// <returns>Flow rate of TAN in substrate entering the digester (kg day-1) for beef cattle, dairy cattle, broilers, layers and turkeys.</returns>
+        public double CalculateFlowOfTANEnteringDigesterFromStoredPoultryManure(double totalAmmonicalNitrogenExcretionRate,
+            double indirectNLossesFromManureInHousingNH3,
+            double indirectNLossesFromManureInStorageNH3,
+            double numberOfAnimals,
+            double proportionTotalManureAddedToAD)
+        {
+            return (totalAmmonicalNitrogenExcretionRate * numberOfAnimals -
+                    (indirectNLossesFromManureInHousingNH3 + indirectNLossesFromManureInStorageNH3)) * proportionTotalManureAddedToAD;
         }
 
         /// <summary>
@@ -474,24 +581,7 @@ namespace H.Core.Calculators.Infrastructure
             return (totalNitrogenExcreted - (totalAmmonicalNitrogenExcretionRate * numberOfAnimals)) * proportionTotalManureAddedToAD;
         }
 
-        /// <summary>
-        /// Eq 4.8.1-20
-        /// </summary>
-        /// <param name="totalAmmonicalNitrogenExcretionRate">Total ammonical N (TAN) excretion rate (kg TAN head-1 day-1).</param>
-        /// <param name="indirectNLossesFromManureInHousingNH3">Indirect N losses from manure in housing via NH3 volatilization during the pre-AD stage (kg NH3-N day-1)</param>
-        /// <param name="indirectNLossesFromManureInStorageNH3">Indirect N losses from manure in storage via NH3 volatilization during the pre-AD stage. </param>
-        /// <param name="numberOfAnimals">The total number of animals.</param>
-        /// <param name="proportionTotalManureAddedToAD">Proportion of total manure produced added to the AD system</param>
-        /// <returns>Flow rate of TAN in substrate entering the digester (kg day-1) for beef cattle, dairy cattle, broilers, layers and turkeys.</returns>
-        public double CalculateFlowOfTANEnteringDigester(double totalAmmonicalNitrogenExcretionRate,
-                                                         double indirectNLossesFromManureInHousingNH3,
-                                                         double indirectNLossesFromManureInStorageNH3,
-                                                         double numberOfAnimals,
-                                                         double proportionTotalManureAddedToAD)
-        {
-            return (totalAmmonicalNitrogenExcretionRate * numberOfAnimals -
-                   (indirectNLossesFromManureInHousingNH3 + indirectNLossesFromManureInStorageNH3)) * proportionTotalManureAddedToAD;
-        }
+
 
         /// <summary>
         /// Eq 4.8.1-21

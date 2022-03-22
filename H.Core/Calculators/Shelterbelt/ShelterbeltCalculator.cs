@@ -162,7 +162,7 @@ namespace H.Core.Calculators.Shelterbelt
 
             /*
              * Lookup tables do not have total living biomass for first three years (in some situations). If user has a year of observation that is in
-             * these first few years of growth (i.e. age = 1, 2, 3) it will not be possible to calculate the real growth ratio. Go foward in time (and increment the age)
+             * these first few years of growth (i.e. age = 1, 2, 3) it will not be possible to calculate the real growth ratio. Go forward in time (and increment the age)
              * until we get a non-zero value and use that for comparison.
              */
 
@@ -189,7 +189,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 /*
-                 * If we are outside of Saskatchewan, we won't have access to the cluster id that is need to lookup live biomass values, instead we lookup values by
+                 * If we are outside of Saskatchewan, we won't have access to the cluster id that is needed to lookup live biomass values, instead we lookup values by
                  * hardiness zone instead.
                  */
 

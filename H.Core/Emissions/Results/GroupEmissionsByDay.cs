@@ -114,13 +114,19 @@ namespace H.Core.Emissions.Results
         private double _lambEweRatio;
         private double _proteinRetainedByPiglets;
         private double _optimumTdn;
-        private double _flowOfFreshVolatileSolidsEnteringDigestor;
-        private double _flowOfFreshNitrogenEnteringDigestor;
-        private double _flowOfFreshOrganicNitrogenEnteringDigestor;
-        private double _flowOfFreshTanEnteringDigestor;
-        private double _flowOfFreshCarbonEnteringDigestor;
-        private double _totalNitrogenEnteringDigestor;
-        private double _flowOfStoredVolatileSolidsEnteringDigestor;
+        private double _totalMassEnteringDigesterFromFreshManure;
+        private double _totalMassEnteringDigesterFromStoredManure;
+        private double _flowOfTotalSolidsEnteringDigesterFromFreshManure;
+        private double _flowOfTotalSolidsEnteringDigesterFromStoredManure;
+        private double _flowOfVolatileSolidsFromEnteringDigesterFreshManure;
+        private double _flowOfNitrogenEnteringDigesterFromFreshManure;
+        private double _flowOfOrganicNitrogenEnteringDigesterFromFreshManure;
+        private double _flowOfOrganicNitrogenEnteringDigesterFromStoredManure;
+        private double _flowOfTanEnteringDigesterFromFreshManure;
+        private double _flowOfTanEnteringDigesterFromStoredManure;
+        private double _flowOfCarbonEnteringDigesterFromFreshManure;
+        private double _flowRateOfNitrogenEnteringDigesterFromStoredManure;
+        private double _flowOfVolatileSolidsEnteringDigesterFromStoredManure;
 
         #endregion
 
@@ -1275,75 +1281,7 @@ namespace H.Core.Emissions.Results
         public double OptimumTdn 
         { 
             get => _optimumTdn; 
-            set => _optimumTdn = value; 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-1
-        /// 
-        /// (kg day^-1)
-        /// </summary>
-        public double FlowOfFreshVolatileSolidsEnteringDigestor 
-        { 
-            get => _flowOfFreshVolatileSolidsEnteringDigestor; 
-            set => SetProperty(ref _flowOfFreshVolatileSolidsEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-2
-        /// 
-        /// (kg day^-1)
-        /// </summary>
-        public double FlowOfFreshNitrogenEnteringDigestor 
-        { 
-            get => _flowOfFreshNitrogenEnteringDigestor; 
-            set => SetProperty(ref _flowOfFreshNitrogenEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-3
-        /// Equation 4.8.1-4
-        /// </summary>
-        public double FlowOfFreshOrganicNitrogenEnteringDigestor 
-        { 
-            get => _flowOfFreshOrganicNitrogenEnteringDigestor; 
-            set => SetProperty(ref _flowOfFreshOrganicNitrogenEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-5
-        /// </summary>
-        public double FlowOfFreshTanEnteringDigestor 
-        { 
-            get => _flowOfFreshTanEnteringDigestor; 
-            set => SetProperty(ref _flowOfFreshTanEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-6
-        /// </summary>
-        public double FlowOfFreshCarbonEnteringDigestor 
-        { 
-            get => _flowOfFreshCarbonEnteringDigestor; 
-            set => SetProperty(ref _flowOfFreshCarbonEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-16
-        /// </summary>
-        public double TotalNitrogenEnteringDigestor 
-        { 
-            get => _totalNitrogenEnteringDigestor; 
-            set => SetProperty(ref _totalNitrogenEnteringDigestor, value); 
-        }
-
-        /// <summary>
-        /// Equation 4.8.1-13
-        /// </summary>
-        public double FlowOfStoredVolatileSolidsEnteringDigestor 
-        { 
-            get => _flowOfStoredVolatileSolidsEnteringDigestor; 
-            set => SetProperty(ref _flowOfStoredVolatileSolidsEnteringDigestor, value); 
+            set => SetProperty(ref _optimumTdn, value); 
         }
 
         /// <summary>
@@ -1355,6 +1293,84 @@ namespace H.Core.Emissions.Results
         {
             get => _dryMatterIntakeForGroup;
             set => SetProperty(ref _dryMatterIntakeForGroup, value);
+        }
+
+        public double FlowOfVolatileSolidsFromEnteringDigesterFreshManure 
+        { 
+            get => _flowOfVolatileSolidsFromEnteringDigesterFreshManure; 
+            set => SetProperty(ref _flowOfVolatileSolidsFromEnteringDigesterFreshManure, value); 
+        }
+
+        public double FlowOfNitrogenEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfNitrogenEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfNitrogenEnteringDigesterFromFreshManure, value); 
+        }
+
+        public double FlowOfOrganicNitrogenEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfOrganicNitrogenEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfOrganicNitrogenEnteringDigesterFromFreshManure, value); 
+        }
+
+        public double FlowOfTanEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfTanEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfTanEnteringDigesterFromFreshManure, value); 
+        }
+
+        public double FlowOfCarbonEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfCarbonEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfCarbonEnteringDigesterFromFreshManure, value); 
+        }
+
+        public double FlowRateOfNitrogenEnteringDigesterFromStoredManure 
+        { 
+            get => _flowRateOfNitrogenEnteringDigesterFromStoredManure; 
+            set => SetProperty(ref _flowRateOfNitrogenEnteringDigesterFromStoredManure, value); 
+        }
+
+        public double FlowOfVolatileSolidsEnteringDigesterFromStoredManure 
+        { 
+            get => _flowOfVolatileSolidsEnteringDigesterFromStoredManure; 
+            set => SetProperty(ref _flowOfVolatileSolidsEnteringDigesterFromStoredManure, value); 
+        }
+
+        public double TotalMassEnteringDigesterFromFreshManure
+        {
+            get => _totalMassEnteringDigesterFromFreshManure;
+            set => SetProperty(ref _totalMassEnteringDigesterFromFreshManure, value);
+        }
+
+        public double FlowOfTotalSolidsEnteringDigesterFromFreshManure
+        {
+            get => _flowOfTotalSolidsEnteringDigesterFromFreshManure;
+            set => SetProperty(ref _flowOfTotalSolidsEnteringDigesterFromFreshManure, value);
+        }
+
+        public double TotalMassEnteringDigesterFromStoredManure
+        {
+            get => _totalMassEnteringDigesterFromStoredManure;
+            set => SetProperty(ref _totalMassEnteringDigesterFromStoredManure, value);
+        }
+
+        public double FlowOfTotalSolidsEnteringDigesterFromStoredManure
+        {
+            get => _flowOfTotalSolidsEnteringDigesterFromStoredManure;
+            set => SetProperty(ref _flowOfTotalSolidsEnteringDigesterFromStoredManure, value);
+        }
+
+        public double FlowOfOrganicNitrogenEnteringDigesterFromStoredManure
+        {
+            get => _flowOfOrganicNitrogenEnteringDigesterFromStoredManure;
+            set => SetProperty(ref _flowOfOrganicNitrogenEnteringDigesterFromStoredManure, value);
+        }
+
+        public double FlowOfTanEnteringDigesterFromStoredManure
+        {
+            get => _flowOfTanEnteringDigesterFromStoredManure;
+            set => SetProperty(ref _flowOfTanEnteringDigesterFromStoredManure, value);
         }
 
         #endregion
