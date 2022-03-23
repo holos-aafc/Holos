@@ -2558,7 +2558,7 @@
     <value>Juvenile females (pullets) are transported from hatcheries to pullet farms or to pullet barns on egg production operations where they remain until they reach breeding age (approximately 18-20 weeks), after which they are moved to egg laying operations/barns.
 </value>
   </data>
-  <data name="ToolTipMultiplierBreeder" xml:space="preserve">
+  <data name="ToolTipChickenMultiplierBreeder" xml:space="preserve">
     <value>Represents the reproduction portion of bird production where birds that produce eggs for reproduction are managed; these eggs are then sent to reproduction hatcheries to be hatched. In the multiplier breeder operation, adult males and females are housed together.
 </value>
   </data>
@@ -4094,7 +4094,7 @@
   <data name="LabelSerine" xml:space="preserve">
     <value>Serine</value>
   </data>
-  <data name="LabelSolubleDietaryFiber" xml:space="preserve">
+  <data name="LabelSolubleDietryFiber" xml:space="preserve">
     <value>Soluble Dietary Fiber</value>
   </data>
   <data name="LabelTotalDietaryFiber" xml:space="preserve">
@@ -4990,5 +4990,8 @@
   </data>
   <data name="ToolTipPumpTypeInfo" xml:space="preserve">
     <value>The type of pump used in the farm during irrigation.</value>
+  </data>
+  <data name="LabelSulphur" xml:space="preserve">
+    <value>Sulphur</value>
   </data>
 </root>

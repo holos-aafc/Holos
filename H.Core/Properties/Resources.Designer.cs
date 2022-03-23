@@ -10017,9 +10017,9 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Soluble Dietary Fiber.
         /// </summary>
-        public static string LabelSolubleDietaryFiber {
+        public static string LabelSolubleDietryFiber {
             get {
-                return ResourceManager.GetString("LabelSolubleDietaryFiber", resourceCulture);
+                return ResourceManager.GetString("LabelSolubleDietryFiber", resourceCulture);
             }
         }
         
@@ -10101,6 +10101,15 @@ namespace H.Core.Properties {
         public static string LabelSulfur {
             get {
                 return ResourceManager.GetString("LabelSulfur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sulphur.
+        /// </summary>
+        public static string LabelSulphur {
+            get {
+                return ResourceManager.GetString("LabelSulphur", resourceCulture);
             }
         }
         
@@ -13482,6 +13491,16 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Represents the reproduction portion of bird production where birds that produce eggs for reproduction are managed; these eggs are then sent to reproduction hatcheries to be hatched. In the multiplier breeder operation, adult males and females are housed together.
+        ///.
+        /// </summary>
+        public static string ToolTipChickenMultiplierBreeder {
+            get {
+                return ResourceManager.GetString("ToolTipChickenMultiplierBreeder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hatcheries receive fertile eggs from multiplier breeder farms, hatch them and then deliver the hatchlings (day old chicks or poults) to pullet farms (female chicks only), to pullet barns on egg-laying operations, or to meat production operations (male and female chicks, for chicken and/or turkey).
         ///.
         /// </summary>
@@ -14075,16 +14094,6 @@ namespace H.Core.Properties {
         public static string ToolTipManureApplicationMethodInfo {
             get {
                 return ResourceManager.GetString("ToolTipManureApplicationMethodInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Represents the reproduction portion of bird production where birds that produce eggs for reproduction are managed; these eggs are then sent to reproduction hatcheries to be hatched. In the multiplier breeder operation, adult males and females are housed together.
-        ///.
-        /// </summary>
-        public static string ToolTipMultiplierBreeder {
-            get {
-                return ResourceManager.GetString("ToolTipMultiplierBreeder", resourceCulture);
             }
         }
         
