@@ -465,6 +465,8 @@ namespace H.Core.Services.Animals
                 temperature = 20;
             }
 
+            dailyEmissions.Temperature = temperature;
+
             // Equation 3.1.1-2
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,

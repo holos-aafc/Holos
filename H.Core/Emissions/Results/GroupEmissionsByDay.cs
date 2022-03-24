@@ -127,6 +127,7 @@ namespace H.Core.Emissions.Results
         private double _flowOfCarbonEnteringDigesterFromFreshManure;
         private double _flowRateOfNitrogenEnteringDigesterFromStoredManure;
         private double _flowOfVolatileSolidsEnteringDigesterFromStoredManure;
+        private double _temperature;
 
         #endregion
 
@@ -1371,6 +1372,12 @@ namespace H.Core.Emissions.Results
         {
             get => _flowOfTanEnteringDigesterFromStoredManure;
             set => SetProperty(ref _flowOfTanEnteringDigesterFromStoredManure, value);
+        }
+
+        public double Temperature
+        {
+            get => _temperature;
+            set => SetProperty(ref _temperature, value);
         }
 
         #endregion

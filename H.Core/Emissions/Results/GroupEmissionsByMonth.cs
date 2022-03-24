@@ -1135,6 +1135,14 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double AverageTemperature
+        {
+            get
+            {
+                return _dailyEmissions.Average(x => x.Temperature);
+            }
+        }
+
         /// <summary>
         /// (kg)
         /// </summary>
