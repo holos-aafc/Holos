@@ -4994,4 +4994,13 @@
   <data name="LabelSulphur" xml:space="preserve">
     <value>Sulphur</value>
   </data>
+  <data name="LabelTotals" xml:space="preserve">
+    <value>Totals</value>
+  </data>
+  <data name="LabelDiesel" xml:space="preserve">
+    <value>Diesel</value>
+  </data>
+  <data name="LabelIrrigation" xml:space="preserve">
+    <value>Irrigation</value>
+  </data>
 </root>

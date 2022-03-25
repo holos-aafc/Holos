@@ -8251,6 +8251,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diesel.
+        /// </summary>
+        public static string LabelDiesel {
+            get {
+                return ResourceManager.GetString("LabelDiesel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Diet A.
         /// </summary>
         public static string LabelDietA {
@@ -8931,6 +8940,15 @@ namespace H.Core.Properties {
         public static string LabelIron {
             get {
                 return ResourceManager.GetString("LabelIron", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Irrigation.
+        /// </summary>
+        public static string LabelIrrigation {
+            get {
+                return ResourceManager.GetString("LabelIrrigation", resourceCulture);
             }
         }
         
@@ -10317,6 +10335,15 @@ namespace H.Core.Properties {
         public static string LabelTotalNitrogenOutputs {
             get {
                 return ResourceManager.GetString("LabelTotalNitrogenOutputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Totals.
+        /// </summary>
+        public static string LabelTotals {
+            get {
+                return ResourceManager.GetString("LabelTotals", resourceCulture);
             }
         }
         

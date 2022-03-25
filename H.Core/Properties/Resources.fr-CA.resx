@@ -1534,6 +1534,9 @@
   <data name="EnumSand" xml:space="preserve">
     <value>sable</value>
   </data>
+  <data name="EnumSeededGrassland" xml:space="preserve">
+    <value>prairie ensemencée</value>
+  </data>
   <data name="EnumSeparatedManureSolid" xml:space="preserve">
     <value>solides séparés du fumier</value>
   </data>
@@ -1874,13 +1877,13 @@
     <value>canola hybride d’hiver</value>
   </data>
   <data name="EnumWinterTurnipRapeBrassicaRapaSppOleiferaLCVLargo" xml:space="preserve">
-    <value>Navette d'hiver [Brassica rapa ssp. oleifera L. (cv. « Largo »)]</value>
+    <value>navette d'hiver [brassica rapa ssp. oleifera L. (cv. « Largo »)]</value>
   </data>
   <data name="EnumWinterWeeds" xml:space="preserve">
     <value>mauvaises herbes d’hiver</value>
   </data>
   <data name="EnumWinterWheatTriticumAestivum" xml:space="preserve">
-    <value>Blé d’hiver (Triticum aestivum)</value>
+    <value>blé d’hiver (triticum aestivum)</value>
   </data>
   <data name="EnumWoodChips" xml:space="preserve">
     <value>copeaux de bois</value>
@@ -2797,6 +2800,9 @@
   <data name="LabelDenitrificationForArea" xml:space="preserve">
     <value>dénitrification pour la superficie (perte_N2-N)</value>
   </data>
+  <data name="LabelDiesel" xml:space="preserve">
+    <value>diesel</value>
+  </data>
   <data name="LabelDietA" xml:space="preserve">
     <value>régime A</value>
   </data>
@@ -2879,15 +2885,13 @@
     <value>ration de fin de tarissement</value>
   </data>
   <data name="LabelFarrowingGilts" xml:space="preserve">
-    <value>cochettes en maternité</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>jeunes truies de naissage</value>
   </data>
   <data name="LabelFarrowingGilts1" xml:space="preserve">
     <value>jeunes truies de naissage</value>
   </data>
   <data name="LabelFarrowingSows" xml:space="preserve">
-    <value>truies en maternité</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>truies de naissage</value>
   </data>
   <data name="LabelFarrowingSows1" xml:space="preserve">
     <value>truies de naissage</value>
@@ -2899,7 +2903,7 @@
     <value>taux de fécondité</value>
   </data>
   <data name="LabelFertilizerApplicationRate" xml:space="preserve">
-    <value>Application rate</value>
+    <value>dose d'application</value>
   </data>
   <data name="LabelFertilizerBlend" xml:space="preserve">
     <value>mélange</value>
@@ -3026,6 +3030,9 @@
   </data>
   <data name="LabelIron" xml:space="preserve">
     <value>Iron</value>
+  </data>
+  <data name="LabelIrrigation" xml:space="preserve">
+    <value>irrigation</value>
   </data>
   <data name="LabelIsBrokenGrassland" xml:space="preserve">
     <value>c’est une prairie défrichée</value>
@@ -3471,6 +3478,9 @@
   </data>
   <data name="LabelTotalNitrogenOutputs" xml:space="preserve">
     <value>pertes totales de N</value>
+  </data>
+  <data name="LabelTotals" xml:space="preserve">
+    <value>totaux</value>
   </data>
   <data name="LabelTotalSequestration" xml:space="preserve">
     <value>séquestration totale</value>
