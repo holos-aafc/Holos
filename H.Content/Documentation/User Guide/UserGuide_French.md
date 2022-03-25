@@ -1004,7 +1004,7 @@ Dans cette section, l'utilisateur peut indiquer la quantité de carbone et d'azo
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-8.png" alt="Figure6-8"  width="650"/>
+ <img src="" alt="Figure6-8"  width="650"/>
     <br>
     <em>
 		Figure 6.8 -- Onglet Résidus pour une composante sur le terrain.

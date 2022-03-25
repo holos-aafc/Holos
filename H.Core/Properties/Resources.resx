@@ -4478,7 +4478,7 @@
   <data name="LabelInformation" xml:space="preserve">
     <value>Information</value>
   </data>
-  <data name="ToolTipICBMResultsGraph" xml:space="preserve">
+  <data name="LabelClickHereForFurtherInformation" xml:space="preserve">
     <value>Click here for further information</value>
   </data>
   <data name="EnumCattle" xml:space="preserve">
@@ -5002,5 +5002,8 @@
   </data>
   <data name="LabelIrrigation" xml:space="preserve">
     <value>Irrigation</value>
+  </data>
+  <data name="LabelDetailedEntry" xml:space="preserve">
+    <value>Detailed Entry</value>
   </data>
 </root>

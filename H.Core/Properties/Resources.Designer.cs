@@ -8107,6 +8107,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here for further information.
+        /// </summary>
+        public static string LabelClickHereForFurtherInformation {
+            get {
+                return ResourceManager.GetString("LabelClickHereForFurtherInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Climate Factor (re_crop).
         /// </summary>
         public static string LabelClimateFactor {
@@ -8247,6 +8256,15 @@ namespace H.Core.Properties {
         public static string LabelDenitrificationForArea {
             get {
                 return ResourceManager.GetString("LabelDenitrificationForArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detailed Entry.
+        /// </summary>
+        public static string LabelDetailedEntry {
+            get {
+                return ResourceManager.GetString("LabelDetailedEntry", resourceCulture);
             }
         }
         
@@ -13643,15 +13661,6 @@ namespace H.Core.Properties {
         public static string ToolTipGrowerToFinishProductionSystem {
             get {
                 return ResourceManager.GetString("ToolTipGrowerToFinishProductionSystem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click here for further information.
-        /// </summary>
-        public static string ToolTipICBMResultsGraph {
-            get {
-                return ResourceManager.GetString("ToolTipICBMResultsGraph", resourceCulture);
             }
         }
         

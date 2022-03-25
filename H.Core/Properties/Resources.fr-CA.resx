@@ -2755,6 +2755,9 @@
   <data name="LabelChromium" xml:space="preserve">
     <value>chrome</value>
   </data>
+  <data name="LabelClickHereForFurtherInformation" xml:space="preserve">
+    <value>cliquez ici pour plus d'informations</value>
+  </data>
   <data name="LabelClimateFactor" xml:space="preserve">
     <value>facteur climatique (re_culture)</value>
   </data>
@@ -2799,6 +2802,9 @@
   </data>
   <data name="LabelDenitrificationForArea" xml:space="preserve">
     <value>dénitrification pour la superficie (perte_N2-N)</value>
+  </data>
+  <data name="LabelDetailedEntry" xml:space="preserve">
+    <value>entrée détaillée</value>
   </data>
   <data name="LabelDiesel" xml:space="preserve">
     <value>diesel</value>
