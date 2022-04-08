@@ -8107,6 +8107,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here for further information.
+        /// </summary>
+        public static string LabelClickHereForFurtherInformation {
+            get {
+                return ResourceManager.GetString("LabelClickHereForFurtherInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Climate Factor (re_crop).
         /// </summary>
         public static string LabelClimateFactor {
@@ -8247,6 +8256,24 @@ namespace H.Core.Properties {
         public static string LabelDenitrificationForArea {
             get {
                 return ResourceManager.GetString("LabelDenitrificationForArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detailed Entry.
+        /// </summary>
+        public static string LabelDetailedEntry {
+            get {
+                return ResourceManager.GetString("LabelDetailedEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diesel.
+        /// </summary>
+        public static string LabelDiesel {
+            get {
+                return ResourceManager.GetString("LabelDiesel", resourceCulture);
             }
         }
         
@@ -8931,6 +8958,15 @@ namespace H.Core.Properties {
         public static string LabelIron {
             get {
                 return ResourceManager.GetString("LabelIron", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Irrigation.
+        /// </summary>
+        public static string LabelIrrigation {
+            get {
+                return ResourceManager.GetString("LabelIrrigation", resourceCulture);
             }
         }
         
@@ -10017,9 +10053,9 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Soluble Dietary Fiber.
         /// </summary>
-        public static string LabelSolubleDietaryFiber {
+        public static string LabelSolubleDietryFiber {
             get {
-                return ResourceManager.GetString("LabelSolubleDietaryFiber", resourceCulture);
+                return ResourceManager.GetString("LabelSolubleDietryFiber", resourceCulture);
             }
         }
         
@@ -10101,6 +10137,15 @@ namespace H.Core.Properties {
         public static string LabelSulfur {
             get {
                 return ResourceManager.GetString("LabelSulfur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sulphur.
+        /// </summary>
+        public static string LabelSulphur {
+            get {
+                return ResourceManager.GetString("LabelSulphur", resourceCulture);
             }
         }
         
@@ -10308,6 +10353,15 @@ namespace H.Core.Properties {
         public static string LabelTotalNitrogenOutputs {
             get {
                 return ResourceManager.GetString("LabelTotalNitrogenOutputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Totals.
+        /// </summary>
+        public static string LabelTotals {
+            get {
+                return ResourceManager.GetString("LabelTotals", resourceCulture);
             }
         }
         
@@ -13482,6 +13536,16 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Represents the reproduction portion of bird production where birds that produce eggs for reproduction are managed; these eggs are then sent to reproduction hatcheries to be hatched. In the multiplier breeder operation, adult males and females are housed together.
+        ///.
+        /// </summary>
+        public static string ToolTipChickenMultiplierBreeder {
+            get {
+                return ResourceManager.GetString("ToolTipChickenMultiplierBreeder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hatcheries receive fertile eggs from multiplier breeder farms, hatch them and then deliver the hatchlings (day old chicks or poults) to pullet farms (female chicks only), to pullet barns on egg-laying operations, or to meat production operations (male and female chicks, for chicken and/or turkey).
         ///.
         /// </summary>
@@ -13597,15 +13661,6 @@ namespace H.Core.Properties {
         public static string ToolTipGrowerToFinishProductionSystem {
             get {
                 return ResourceManager.GetString("ToolTipGrowerToFinishProductionSystem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click here for further information.
-        /// </summary>
-        public static string ToolTipICBMResultsGraph {
-            get {
-                return ResourceManager.GetString("ToolTipICBMResultsGraph", resourceCulture);
             }
         }
         
@@ -14075,16 +14130,6 @@ namespace H.Core.Properties {
         public static string ToolTipManureApplicationMethodInfo {
             get {
                 return ResourceManager.GetString("ToolTipManureApplicationMethodInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Represents the reproduction portion of bird production where birds that produce eggs for reproduction are managed; these eggs are then sent to reproduction hatcheries to be hatched. In the multiplier breeder operation, adult males and females are housed together.
-        ///.
-        /// </summary>
-        public static string ToolTipMultiplierBreeder {
-            get {
-                return ResourceManager.GetString("ToolTipMultiplierBreeder", resourceCulture);
             }
         }
         

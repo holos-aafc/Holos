@@ -14,7 +14,7 @@ namespace H.Core.Models.Animals.Poultry.Chicken
             this.ComponentCategory = ComponentCategory.Poultry;
             this.ComponentType = ComponentType.ChickenMultiplierBreeder;
 
-            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipMultiplierBreeder;
+            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipChickenMultiplierBreeder;
         }
     }
 }

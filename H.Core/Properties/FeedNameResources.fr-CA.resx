@@ -293,11 +293,9 @@
   </data>
   <data name="BlueStemFresh" xml:space="preserve">
     <value>barbon de Gérard frais</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="BlueStemHay" xml:space="preserve">
-    <value>foin de barbon de Gérard</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>barbon de Gérard – foin</value>
   </data>
   <data name="BoneMeal" xml:space="preserve">
     <value>farine d'os</value>
@@ -414,16 +412,13 @@
     <value>tourteau de caméline, extraction mécanique</value>
   </data>
   <data name="CaneFresh" xml:space="preserve">
-    <value>sorgho fourrager frais</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>canne fraîche</value>
   </data>
   <data name="CaneHay" xml:space="preserve">
-    <value>foin de sorgho fourrager</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>foin de canne</value>
   </data>
   <data name="CaneSilage" xml:space="preserve">
-    <value>ensilage de sorgho fourrager</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>ensilage de canne</value>
   </data>
   <data name="Canola" xml:space="preserve">
     <value>canola</value>
@@ -1237,6 +1232,9 @@
   </data>
   <data name="NDF" xml:space="preserve">
     <value>FDN</value>
+  </data>
+  <data name="Ne" xml:space="preserve">
+    <value>Énergie nette</value>
   </data>
   <data name="NEga" xml:space="preserve">
     <value>NEg</value>

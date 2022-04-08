@@ -155,11 +155,9 @@
   </data>
   <data name="CA" xml:space="preserve">
     <value>CA</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="CFTemp" xml:space="preserve">
     <value>CF temp</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="CO2" xml:space="preserve">
     <value>CO2 {0}</value>
@@ -219,8 +217,7 @@
     <value>bœuf</value>
   </data>
   <data name="DefaultDairyInputFolder" xml:space="preserve">
-    <value>laitier / laitière</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>bovins laitiers</value>
   </data>
   <data name="DefaultFieldsInputFolder" xml:space="preserve">
     <value>champs</value>
@@ -289,8 +286,7 @@
     <value>Veuillez entrer votre choix :</value>
   </data>
   <data name="EnumOutputDirectory" xml:space="preserve">
-    <value>répertoire de sortie</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>répertoire d’extrants</value>
   </data>
   <data name="EvapotranspirationData" xml:space="preserve">
     <value>#données d'évapotranspiration{0}</value>
@@ -305,8 +301,7 @@
     <value>nom de la ferme</value>
   </data>
   <data name="FarmResultsCO2E" xml:space="preserve">
-    <value>_ÉmissionsDeCO2E_</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>_CO2EÉmissions_</value>
   </data>
   <data name="FarmResultsEP" xml:space="preserve">
     <value>_EstimationsDeLaProduction_</value>
@@ -349,15 +344,12 @@
   </data>
   <data name="GainCoefficient" xml:space="preserve">
     <value>coefficient de gain</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="GainCoefficientA" xml:space="preserve">
     <value>coefficient de gain A</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="GainCoefficientB" xml:space="preserve">
     <value>coefficient de gain B</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
   </data>
   <data name="GroupId" xml:space="preserve">
     <value>ID du groupe</value>
@@ -381,8 +373,7 @@
     <value>type de logement</value>
   </data>
   <data name="ICBMSettingsHeader" xml:space="preserve">
-    <value># ICBM/Climat</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value># MIBC/Climat</value>
   </data>
   <data name="IndirectN2O" xml:space="preserve">
     <value>N2O indirect {0}</value>
@@ -541,8 +532,7 @@
     <value>année en cours</value>
   </data>
   <data name="Key_FieldSystemComponentGuid" xml:space="preserve">
-    <value>Guide de composantes du système du champ</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>GUID des composants du système de champ</value>
   </data>
   <data name="Key_HarvestMethod" xml:space="preserve">
     <value>méthode de récolte</value>
@@ -641,8 +631,7 @@
     <value>type de travail du sol</value>
   </data>
   <data name="Key_TimePeriodCategoryString" xml:space="preserve">
-    <value>chaîne de la catégorie de période</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>chaîne de catégories de période</value>
   </data>
   <data name="Key_UnderSownCropsUsed" xml:space="preserve">
     <value>cultures contre-semées utilisées</value>
@@ -983,6 +972,9 @@
   <data name="Settings_EmissionFactorForVolatilization" xml:space="preserve">
     <value>facteur d'émission due à la volatilisation</value>
   </data>
+  <data name="Settings_EnableCarbonModelling" xml:space="preserve">
+    <value>permettre la modélisation du carbone</value>
+  </data>
   <data name="Settings_FebruaryMeanTemperature" xml:space="preserve">
     <value>température moyenne de février</value>
   </data>
@@ -1182,8 +1174,7 @@
     <value>Utilisez un paramètre climatique au lieu d’un facteur de gestion</value>
   </data>
   <data name="Settings_Variance" xml:space="preserve">
-    <value>variance</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>écart</value>
   </data>
   <data name="Settings_YearOfObservation" xml:space="preserve">
     <value>année d'observation</value>
@@ -1234,8 +1225,7 @@
     <value>C total_brise-vent</value>
   </data>
   <data name="TotalResultsAllFields" xml:space="preserve">
-    <value>ICBM_résultats_toutes_les_fermes</value>
-    <comment>TO BE DOUBLE CHECKED FOR TRANSLATION</comment>
+    <value>ICBM_Resultats_toutes les_farms</value>
   </data>
   <data name="TotalResultsCO2E" xml:space="preserve">
     <value>résultatstotaux_EmissionsCO2E</value>

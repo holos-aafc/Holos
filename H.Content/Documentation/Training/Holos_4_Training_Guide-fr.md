@@ -142,7 +142,7 @@ Nous pouvons maintenant ajouter notre première composante à la ferme. Faites g
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure9.gif" alt="Figure 9" width="850"/>
+    <img src="../../Images/Training/fr/figure9.gif" alt="Figure 9" width="950"/>
     <br>
     <em>Figure 9: Ajouter un composant à la ferme.</em>
 </p> 
@@ -154,9 +154,9 @@ Nous pouvons maintenant ajouter notre première composante à la ferme. Faites g
 
 Dans notre premier champ de la ferme, on cultivera du blé en continu avec une culture de couverture de vesce velue.
 1. Renommez le champ « **Blé et vesce velue** » dans la section « **Étape 1** » de l’écran. Changez la superficie du champ à **18** ha.
-2. Sélectionnez « **Blé** » dans la liste des cultures dans la colonne « Culture » et « Vesce velue » comme culture de couverture à **l’étape 2**.
-3. Cliquez sur l’onglet « Général », puis sélectionnez « **Travail réduit du sol** » comme type de travail du sol.
-Entrez un rendement de **3 000 kg/ha** (poids humide), assurez-vous que la « **culture commerciale** » est sélectionnée comme « méthode de récolte », inscrivez **200 mm** comme quantité d’irrigation.
+2. Sélectionnez « **Blé** » dans la liste des cultures dans la colonne « **Culture** » et « **Vesce velue** » comme culture de couverture à **l’étape 2**.
+3. Cliquez sur l’onglet « **Général** », puis sélectionnez « **Travail réduit du sol** » comme type de travail du sol.
+Entrez un rendement de **3 000 kg/ha** (poids humide),assurez-vous que la « **culture commerciale** » est sélectionnée comme « **méthode de récolte** », inscrivez **200 mm** comme quantité d’irrigation.
 4. Aucun pesticide n’est utilisé dans ce champ.
 
 <br>
@@ -173,7 +173,7 @@ Entrez un rendement de **3 000 kg/ha** (poids humide), assurez-vous que la « **
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure11.png" alt="Figure 11" width="950"/>
+    <img src="../../Images/Training/fr/figure11.gif" alt="Figure 11" width="950"/>
     <br>
     <em>Figure 11: Ajouter l’épandage d’un engrais.</em>
 </p> 
@@ -195,7 +195,7 @@ L’exploitation de naissage (définie plus loin) dépend des pâturages indigè
 1. Faites glisser un nouveau champ vers votre liste de composantes.
 2. Entrez le nom « **Prairie indigène** » dans la case de saisie « Nom du champ ».
 3. Entrez **100** ha pour la superficie totale du champ.
-4. Sélectionnez « **Pâturage** » dans la colonne « Culture » de la liste des cultures à **l’étape 2**.
+4. Sélectionnez « **prairie ensemencée** » dans la colonne « Culture » de la liste des cultures à **l’étape 2**.
 5. Veuillez noter que Holos remplit automatiquement la colonne « Culture d’hiver/de couverture/intermédiaire » lorsqu’un type de culture vivace est sélectionné.
 6. Cette prairie n’est pas irriguée (**0 mm**) et aucun engrais n’est utilisé.
 
@@ -326,7 +326,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 <br>
 
 
-10. Cliquez sur l’onglet « Logement » et sélectionnez « **Confiné sans étable** ».
+10. Cliquez sur l’onglet « **Logement** » et sélectionnez « **Confiné sans étable** ».
 
 11. Cliquez sur l’onglet « **Fumier** » et sélectionnez « **Litière profonde** » dans la liste.
 
@@ -395,6 +395,13 @@ Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 
 - À l’onglet « **Fumier** », assurez-vous que « **Pâturage** » est réglé comme système de manutention du fumier.
 
 <br>
+<p align="center">
+    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
+    <br>
+    <em>Figure 18 - Veaux de boucherie
+ </em>
+</p> 
+<br> 
 
 ## Élevage de bovins de long engraissement et semi-finis
 
@@ -412,9 +419,9 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 18 - Élevage de bovins de long engraissement et semi-finis</em>
+    <em>Figure 19 - Élevage de bovins de long engraissement et semi-finis</em>
 </p> 
 <br>
 
@@ -435,9 +442,9 @@ Cliquez sur le groupe « **Bouvillons** » pour l’activer. Les données de ges
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 19 - Exploitation d’un parc de finition</em>
+    <em>Figure 20 - Exploitation d’un parc de finition</em>
 </p> 
 <br>
 
@@ -459,12 +466,21 @@ Holos a la capacité d’ajouter des épandages de fumier à partir de fumier pr
 
 Nous pouvons également ajouter du foin et du fourrage pour les animaux qui broutent dans un champ particulier. Étant donné que nous avons maintenant placé un groupe d’animaux dans la composante de champs « prairies indigènes », et que nous avons également fourni des renseignements sur les récoltes pour nos cultures de mélanges de foin dans la composante de rotation des cultures, nous pouvons ensuite ajouter un supplément fourrager supplémentaire pour ces animaux au pacage.
 
-1. Sélectionnez la composante de champ « **Prairie indigène** » que nous avons créée plus tôt.
-2. Cliquez sur l’onglet « **Broutage** ».
-3. Cliquez sur le bouton « **Ajouter du foin supplémentaire** » pour ajouter du fourrage supplémentaire pour les animaux dans ce champ.
-4. Changez le nombre de balles à **1** et le poids de la balle mouillée à **500 kg**.
+1. Sélectionnez le composant de champ **prairie indigène** que nous avons créé précédemment.
+2. Cliquez sur l'onglet **Pâturage.**
+     - Cliquez sur le bouton **Ajouter du foin supplémentaire** pour ajouter du fourrage supplémentaire pour les animaux de ce champ.
+     - Entrez "**À la ferme**" comme **Sources de balles**.
+     - Choisissez **Rotation des cultures #1 [Champ #2] - Tame Mixed (graminées/légumineuses)** sous **Champ** pour sélectionner la source du foin supplémentaire.
+     - Changez le **Nombre de balles** à 1.
+     - Entrez **500** comme poids de balle humide.
+     - Gardez la teneur en humidité comme valeur par défaut.
 
-
+<br>
+<p align="center">
+    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="950"/>
+    <br>
+    <em>Figure 21 - Ajout de foin/fourrage supplémentaire pour les animaux au pacage</em>
+</p> 
 <br>
 <br>
 
@@ -510,25 +526,25 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="950"/>
     <br>
-    <em>Figure 20 - Écran Calendrier personnalisé </em>
+    <em>Figure 22 - Écran Calendrier personnalisé </em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="650"/>
+    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="650"/>
     <br>
-    <em>Figure 21 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
+    <em>Figure 23 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="650
+    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="650
     "/>
     <br>
-    <em>Figure 22 - Modification des cultures au cours d’une période historique de rotation</em>
+    <em>Figure 24 - Modification des cultures au cours d’une période historique de rotation</em>
 </p> 
 <br>
 
@@ -562,9 +578,9 @@ Nous ajusterons cette grille afin de pouvoir voir les intrants de carbone en sur
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="950"/>
     <br>
-    <em>Figure 23 - Écran Détails</em>
+    <em>Figure 25 - Écran Détails</em>
 </p> 
 <br>
 
@@ -597,17 +613,17 @@ Le rapport « **Estimations sur l’alimentation** » fournit une estimation de 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="850"/>
+    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
     <br>
-    <em>Figure 24 - Rapport détaillé sur les émissions</em>
+    <em>Figure 26 - Rapport détaillé sur les émissions</em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="850"/>
+    <img src="../../Images/Training/fr/figure27.png" alt="Figure 27" width="850"/>
     <br>
-    <em>Figure 25 - Rapport d’estimation des aliments du bétail</em>
+    <em>Figure 27 - Rapport d’estimation des aliments du bétail</em>
 </p> 
 <br>
 
@@ -623,9 +639,9 @@ Si vous cliquez sur l’un de ces points, vous pouvez alors voir une répartitio
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/fr/figure28.png" alt="Figure 28" width="850"/>
     <br>
-    <em>Figure 26 - Modification du format du rapport en mode pluriannuel.</em>
+    <em>Figure 28 - Modification du format du rapport en mode pluriannuel.</em>
 </p> 
 <br>
 
