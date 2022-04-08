@@ -638,7 +638,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Equation 4.2.1-29
         /// 
-        /// (kg N)
+        /// (kg N day^-1)
         /// </summary>
         public double AmountOfNitrogenExcreted
         {

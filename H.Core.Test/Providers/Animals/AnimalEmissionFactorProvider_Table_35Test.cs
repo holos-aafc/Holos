@@ -19,13 +19,13 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void GetByAnimalType()
         {
-            var result = _provider.GetByHandlingSystem(manureStateType: ManureStateType.SolidStorage,
+            var result = _provider.GetFactors(manureStateType: ManureStateType.SolidStorage,
                 componentCategory: ComponentCategory.BeefProduction,
                 meanAnnualPrecipitation: 100,
                 meanAnnualTemperature: 23,
                 meanAnnualEvapotranspiration: 40, 
                 beddingRate: 20, 
-                animalType: AnimalType.Beef);
+                animalType: AnimalType.Beef, farm: new Farm());
 
             Assert.AreEqual(0.040, result.MethaneConversionFactor);
         }

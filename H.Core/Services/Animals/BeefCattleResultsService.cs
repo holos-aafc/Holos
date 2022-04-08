@@ -414,8 +414,8 @@ namespace H.Core.Services.Animals
                 temperature: temperature,
                 managementPeriod: managementPeriod);
 
-            // Equation 5.2.5-5
-            dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = base.GetAmmoniaEmissionsFromBeefAndDairyGrazingAnimals(
+            // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
+            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);
@@ -947,8 +947,8 @@ namespace H.Core.Services.Animals
                 temperature: temperature,
                 managementPeriod: managementPeriod);
 
-            // Equation 5.2.5-5
-            dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = base.GetAmmoniaEmissionsFromBeefAndDairyGrazingAnimals(
+            // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
+            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);

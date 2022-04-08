@@ -5,9 +5,9 @@ namespace H.Core.Providers.Animals
 {
     public interface IEmissionDataProvider
     {
-        IEmissionData GetByHandlingSystem(ManureStateType manureStateType, ComponentCategory componentCategory,
-                                          double meanAnnualPrecipitation, double meanAnnualTemperature,
-                                          double meanAnnualEvapotranspiration, double beddingRate,
-                                          AnimalType animalType);
+        IEmissionData GetFactors(ManureStateType manureStateType, ComponentCategory componentCategory,
+            double meanAnnualPrecipitation, double meanAnnualTemperature,
+            double meanAnnualEvapotranspiration, double beddingRate,
+            AnimalType animalType, Farm farm);
     }
 }

@@ -1729,45 +1729,68 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Checks if dairy or beef cattle animals are grazing during the <see cref="ManagementPeriod"/> and calculates ammonia emissions from grazing animals as required.
+        /// Checks if dairy or beef cattle animals are grazing during the <see cref="ManagementPeriod"/> and calculates manure direct/indirect emissions.
         /// </summary>
-        public double GetAmmoniaEmissionsFromBeefAndDairyGrazingAnimals(
+        public void GetEmissionsFromBeefAndDairyGrazingAnimals(
             ManagementPeriod managementPeriod,
             double temperature,
             GroupEmissionsByDay groupEmissionsByDay)
         {
-            var result = 0.0;
-
             if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture && managementPeriod.HousingDetails.PastureLocation != null)
             {
-                // Equation 5.2.1-1
+                // Equation 5.3.1-1
+                groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.TanExcretionRate * managementPeriod.ManureDetails.N2ODirectEmissionFactor;
+
+                // Equation 5.3.1-5
+                groupEmissionsByDay.ManureDirectN2ONEmission = groupEmissionsByDay.ManureDirectN2ONEmissionRate * managementPeriod.NumberOfAnimals;
+
+                // Equation 5.3.3-1
                 var temperatureAdjustmentForGrazing = this.GetAmbientTemperatureAdjustmentForGrazing(
                     temperature: temperature);
 
                 var emissionFactorForGrazing = defaultAmmoniaEmissionFactorProvider.GetEmissionFactorByHousing(
                     housingType: managementPeriod.HousingDetails.HousingType);
 
-                // Equation 5.2.5-2
+                // Equation 5.3.3-2
                 var adjustedAmmoniaEmissionFactor = this.GetAdjustedEmissionFactorForGrazing(
                     emissionFactor: emissionFactorForGrazing,
                     temperatureAdjustment: temperatureAdjustmentForGrazing);
 
-                // Equation 5.2.5-3
+                // Equation 5.3.3-3
                 var ammoniaEmissionRateFromGrazingAnimals = this.GetAmmoniaEmissionRateForGrazingAnimals(
                     tanExcretionRate: groupEmissionsByDay.TanExcretionRate,
                     adjustedEmissionFactor: adjustedAmmoniaEmissionFactor);
 
-                // Equation 5.2.5-4
+                // Equation 5.3.3-4
                 var totalAmmoniaProductionFromGrazingAnimals = this.GetTotalAmmoniaProductionFromGrazingAnimals(
                     ammoniaEmissionRate: ammoniaEmissionRateFromGrazingAnimals,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-                // Equation 5.2.5-5
-                result = this.GetAmmoniaEmissionsFromAnimalsOnPasture(
+                // Equation 5.3.3-5
+                var ammoniaEmissionsFromAnimalsOnPasture = this.GetAmmoniaEmissionsFromAnimalsOnPasture(
                     totalAmmoniaProduction: totalAmmoniaProductionFromGrazingAnimals);
-            }
 
-            return result;
+                // Equation 5.3.5-1
+                var volatilizationFraction = totalAmmoniaProductionFromGrazingAnimals / groupEmissionsByDay.AmountOfNitrogenExcreted;
+
+                // Equation 5.3.5-2
+                groupEmissionsByDay.ManureVolatilizationRate = groupEmissionsByDay.NitrogenExcretionRate * volatilizationFraction * managementPeriod.ManureDetails.EmissionFactorVolatilization;
+
+                // Equation 5.3.5-3
+                groupEmissionsByDay.ManureVolatilizationN2ONEmission = groupEmissionsByDay.ManureVolatilizationRate * managementPeriod.NumberOfAnimals;
+
+                // Equation 5.3.6-1
+                groupEmissionsByDay.ManureNitrogenLeachingRate = groupEmissionsByDay.NitrogenExcretionRate * managementPeriod.ManureDetails.LeachingFraction * 0.011;
+
+                // Equation 5.3.6-2
+                groupEmissionsByDay.ManureN2ONLeachingEmission = groupEmissionsByDay.ManureNitrogenLeachingRate * managementPeriod.NumberOfAnimals;
+
+                // Equation 5.3.7-1
+                groupEmissionsByDay.ManureIndirectN2ONEmission = groupEmissionsByDay.ManureN2ONLeachingEmission + groupEmissionsByDay.ManureVolatilizationN2ONEmission;
+
+                // Not in document but needed so monthly emissions can be calculated
+                groupEmissionsByDay.ManureN2ONEmission = groupEmissionsByDay.ManureDirectN2ONEmission + groupEmissionsByDay.ManureIndirectN2ONEmission;
+            }
         }
 
         /// <summary>
@@ -1813,7 +1836,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 5.2.5-1
+        /// Equation 5.3.3-1
         /// </summary>
         /// <param name="temperature">Temperature (degrees C)</param>
         /// <returns>Ambient temperature adjustment for grazing ammonia emission factor</returns>
@@ -1823,7 +1846,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 5.2.5-2
+        /// Equation 5.3.3-2
         /// </summary>
         /// <param name="emissionFactor">Ammonia emission factor for grazing animals</param>
         /// <param name="temperatureAdjustment">Ambient temperature adjustment</param>
@@ -1848,7 +1871,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 5.2.5-3
+        /// Equation 5.3.3-3
         /// </summary>
         /// <param name="tanExcretionRate">TAN excretion rate of animals</param>
         /// <param name="adjustedEmissionFactor">Adjusted ammonia emission factor</param>
@@ -1861,7 +1884,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 5.2.5-4
+        /// Equation 5.3.3-4
         /// Equation 5.2.5-7
         /// </summary>
         /// <param name="ammoniaEmissionRate">Ammonia emission rate for animals managed on pasture</param>

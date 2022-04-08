@@ -319,8 +319,7 @@ namespace H.Core.Services.Animals
                 temperature: temperature,
                 managementPeriod: managementPeriod);
 
-            // Equation 5.2.5-5
-            dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = base.GetAmmoniaEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);
@@ -739,8 +738,7 @@ namespace H.Core.Services.Animals
                 temperature: temperature, 
                 managementPeriod: managementPeriod);
 
-            // Equation 5.2.5-5
-            dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = base.GetAmmoniaEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);

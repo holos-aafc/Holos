@@ -61,6 +61,7 @@ namespace H.Core.Emissions.Results
 
         /// <summary>
         /// Equation 4.1.3-10
+        /// Equation 5.4.1-1
         /// 
         /// Total manure CH4 emissions from all animal groups in component over all months
         ///
@@ -104,6 +105,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 5.4.2-1
+        /// 
         /// Total manure direct N2O-N emissions from all animal groups in component over all months
         ///
         /// (kg N2O-N)
@@ -149,6 +152,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 5.4.2-2
+        /// 
         /// (kg N2O-N)
         /// </summary>
         public double TotalManureVolatilizationN2ONEmission
@@ -187,6 +192,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 5.4.2-3
+        /// 
         /// Total N2O-N manure leaching emissions from all animal groups in component over all months
         ///
         /// (kg N2O-N)
@@ -232,6 +239,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 5.4.2-4
+        /// 
         /// Total manure indirect N2O-N emissions from all animal groups in component over all months
         ///
         /// (kg N2O-N)
@@ -258,6 +267,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 5.4.2-5
+        /// 
         /// Total N2O-N manure emissions from all animal groups in component over all months
         ///
         /// (kg N2O-N)

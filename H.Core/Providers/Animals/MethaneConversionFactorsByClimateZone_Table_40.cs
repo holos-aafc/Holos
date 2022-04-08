@@ -75,16 +75,16 @@ namespace H.Core.Providers.Animals
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
-                        return 0.06;
+                        return 0.21;
                     case ClimateZones.CoolTemperateDry:
-                        return 0.08;
+                        return 0.26;
                     case ClimateZones.BorealDry:
                     case ClimateZones.BorealMoist:
-                        return 0.04;
+                        return 0.14;
                     case ClimateZones.WarmTemperateDry:
-                        return 0.15;
+                        return 0.37;
                     case ClimateZones.WarmTemperateMoist:
-                        return 0.13;
+                        return 0.41;
                 }
             }
 
@@ -96,11 +96,31 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.CoolTemperateDry:
                     case ClimateZones.BorealDry:
                     case ClimateZones.BorealMoist:
-                        return 0.02;
+                        return 0.001;
 
                     case ClimateZones.WarmTemperateDry:
                     case ClimateZones.WarmTemperateMoist:
+                        return 0.005;
+                }
+            }
+
+            if (manureStateType == ManureStateType.DeepPit)
+            {
+                switch (climateZone)
+                {
+                    case ClimateZones.CoolTemperateMoist:
+                        return 0.06;
+                    case ClimateZones.CoolTemperateDry:
+                        return 0.08;
+                    case ClimateZones.BorealDry:
                         return 0.04;
+                    case ClimateZones.BorealMoist:
+                        return 0.04;
+
+                    case ClimateZones.WarmTemperateDry:
+                        return 0.15;
+                    case ClimateZones.WarmTemperateMoist:
+                        return 0.13;
                 }
             }
 

@@ -29,12 +29,13 @@ namespace H.Core.Providers.Animals
 
         #region Public Methods
 
-        public IEmissionData GetByHandlingSystem(ManureStateType manureStateType,
-                                                 ComponentCategory componentCategory,
-                                                 double meanAnnualPrecipitation,
-                                                 double meanAnnualTemperature,
-                                                 double meanAnnualEvapotranspiration,
-                                                 double beddingRate, AnimalType animalType)
+        public IEmissionData GetFactors(ManureStateType manureStateType,
+            ComponentCategory componentCategory,
+            double meanAnnualPrecipitation,
+            double meanAnnualTemperature,
+            double meanAnnualEvapotranspiration,
+            double beddingRate,
+            AnimalType animalType, Farm farm)
         {
             var climateDependentMethaneConversionFactor = _methaneConversionFactorsByClimateZone.GetByClimateAndHandlingSystem(
                 manureStateType: manureStateType,
@@ -50,7 +51,8 @@ namespace H.Core.Providers.Animals
                 precipitation: meanAnnualPrecipitation,
                 evapotranspiration: meanAnnualEvapotranspiration);
 
-
+            var region = farm.Province.GetRegion();
+            var soilTexture = farm.DefaultSoilData.SoilTexture;
 
             switch (componentCategory)
             {
@@ -61,14 +63,39 @@ namespace H.Core.Providers.Animals
                             case ManureStateType.Pasture:
                             case ManureStateType.Paddock:
                             case ManureStateType.Range:
-                                return new EmissionData
                                 {
-                                    MethaneConversionFactor = 0.0047,
-                                    N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
-                                    VolatilizationFraction = 0.21,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    EmissionFactorLeach = 0.011
-                                };
+                                    var factors =  new EmissionData
+                                    {
+                                        MethaneConversionFactor = 0.0047,
+                                        N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
+                                        VolatilizationFraction = 0.21,
+                                        EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
+                                        EmissionFactorLeach = 0.011
+                                    };
+
+                                    if (region == Region.WesternCanada)
+                                    {
+                                        factors.N20DirectEmissionFactor = 0.0006;
+                                    }
+                                    else
+                                    {
+                                        if (soilTexture == SoilTexture.Fine)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0078;
+                                        }
+                                        else if (soilTexture == SoilTexture.Medium)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0062;
+                                        }
+                                        else
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0047;
+                                        }
+                                    }
+
+                                    return factors;
+                                }
+
 
                             case ManureStateType.SolidStorage:
                                 return new EmissionData
@@ -127,7 +154,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -245,7 +272,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -344,7 +371,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -422,7 +449,7 @@ namespace H.Core.Providers.Animals
 
                             default:
                                 System.Diagnostics.Trace.TraceError(
-                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                                    $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                                     $": Unable to get data for manure state type: {manureStateType}." +
                                     $" Returning default value.");
                                 return new EmissionData();
@@ -475,7 +502,7 @@ namespace H.Core.Providers.Animals
                         }
 
                         System.Diagnostics.Trace.TraceError(
-                            $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                            $"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                             $": Unable to get data for manure state type: {manureStateType}." +
                             $" Returning default value.");
 
@@ -529,7 +556,7 @@ namespace H.Core.Providers.Animals
                 // Unknown component category (or no values for category yet)
                 default:
                     {
-                        System.Diagnostics.Trace.TraceError($"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetByHandlingSystem)}" +
+                        System.Diagnostics.Trace.TraceError($"{nameof(AnimalEmissionFactorProvider_Table_39)}.{nameof(AnimalEmissionFactorProvider_Table_39.GetFactors)}" +
                                                             $": Unable to get data for manure state type '{manureStateType.GetDescription()}' and component category '{componentCategory.GetDescription()}'." +
                                                             $" Returning default value.");
                         return new EmissionData();
