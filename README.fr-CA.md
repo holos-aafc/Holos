@@ -23,6 +23,8 @@ Il existe un <a href="https://github.com/holos-aafc/Holos/tree/main/H.Content/Do
 
 *Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
 
+L'interface graphique de Holos 4 peut être téléchargée et utilisée à partir du <a href="https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program" > Page Web d'Agriculture et Agroalimentaire Canada</a>.
+
 # License
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
