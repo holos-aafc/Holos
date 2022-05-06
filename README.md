@@ -22,6 +22,8 @@ There is a <a href="https://github.com/holos-aafc/Holos/tree/main/H.Content/Docu
 
 *Note that the Holos 4 GUI is not open source at this time.*
 
+The GUI for Holos 4 is available to download and use from the <a href="https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program"> Agriculture and Agri-Food Canada webpage</a>.
+
 # License
 
 Unless otherwise noted, the source code of this project is covered under Crown Copyright, Government of Canada, and is distributed under the <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GNU General Public License (GPLv3)</a>.
