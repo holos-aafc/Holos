@@ -1,5 +1,5 @@
 <p align="center">
- <img src="../../Images/Training/logo.png" alt="Holos Logo" width="650"/>
+ <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
     <br>
 </p>
 

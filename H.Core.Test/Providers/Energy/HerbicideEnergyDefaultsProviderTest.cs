@@ -9,7 +9,7 @@ namespace H.Core.Test.Providers.Energy
     public class HerbicideEnergyDefaultsProviderTest
     {
         #region Fields
-        private static HerbicideEnergyEstimatesProvider_Table_51 _provider;
+        private static HerbicideEnergyEstimatesProvider _provider;
         #endregion
 
         #region Initialization
@@ -17,7 +17,7 @@ namespace H.Core.Test.Providers.Energy
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _provider = new HerbicideEnergyEstimatesProvider_Table_51();
+            _provider = new HerbicideEnergyEstimatesProvider();
         }
 
         [ClassCleanup]

@@ -76,6 +76,10 @@ namespace H.Core.Services.LandManagement
             // If a perennial is grown, the yield will contain the summation of all harvested view items (biomasses) entered by the user for that year (# bales x bale weight)
             if (viewItem.CropType.IsPerennial())
             {
+                if (viewItem.HasHarvestViewItems)
+                {
+                    return viewItem.TotalBiomassHarvest;
+                }
                 return viewItem.Yield;
             }
             else

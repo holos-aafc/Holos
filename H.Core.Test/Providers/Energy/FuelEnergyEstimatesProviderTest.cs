@@ -9,7 +9,7 @@ namespace H.Core.Test.Providers.Energy
     public class FuelEnergyEstimatesProviderTest
     {
         #region Fields
-        private static FuelEnergyEstimatesProvider_Table_50 _provider;
+        private static FuelEnergyEstimatesProvider _provider;
         #endregion
 
         #region Initialization
@@ -17,7 +17,7 @@ namespace H.Core.Test.Providers.Energy
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _provider = new FuelEnergyEstimatesProvider_Table_50();
+            _provider = new FuelEnergyEstimatesProvider();
         }
 
         [ClassCleanup]

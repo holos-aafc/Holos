@@ -19,6 +19,7 @@ namespace H.Core.Models.Animals.Beef
             this.ComponentCategory = ComponentCategory.BeefProduction;
             this.ComponentType = ComponentType.CowCalf;
             this.ComponentNameDisplayString = Properties.Resources.TitleCowCalfComponentDisplayString;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipCowCalfComponent;
         }
 
         #endregion

@@ -513,11 +513,11 @@
     <Compile Include="Providers\Energy\ElectricityConversionDefaultsData.cs" />
     <Compile Include="Providers\Energy\ElectricityConversionDefaultsProvider.cs" />
     <Compile Include="Providers\Energy\FuelEnergyEstimatesData.cs" />
-    <Compile Include="Providers\Energy\FuelEnergyEstimatesProvider_Table_50.cs" />
+    <Compile Include="Providers\Energy\FuelEnergyEstimatesProvider.cs" />
     <Compile Include="Providers\Energy\FuelEnergyDataCharacteristics.cs" />
     <Compile Include="Providers\Energy\HerbicideEnergyDataCharacteristics.cs" />
     <Compile Include="Providers\Energy\HerbicideEnergyEstimatesData.cs" />
-    <Compile Include="Providers\Energy\HerbicideEnergyEstimatesProvider_Table_51.cs" />
+    <Compile Include="Providers\Energy\HerbicideEnergyEstimatesProvider.cs" />
     <Compile Include="Providers\Fertilizer\FertilizerBlendData.cs" />
     <Compile Include="Providers\Fertilizer\FertilizerBlendProvider.cs" />
     <Compile Include="Providers\GeographicDataProviderBase.cs" />

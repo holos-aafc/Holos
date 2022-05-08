@@ -16,6 +16,7 @@ namespace H.Core.Models.Animals.Beef
             this.ComponentNameDisplayString = Properties.Resources.TitleBackgroundingComponentDisplayString;
             this.ComponentCategory = ComponentCategory.BeefProduction;
             this.ComponentType = ComponentType.Backgrounding;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipBackgroundingComponent;
         }
 
         #endregion

@@ -9,6 +9,7 @@ namespace H.Core.Models.Animals.OtherAnimals
         public AlpacaComponent()
         {
             this.ComponentNameDisplayString = ComponentType.Alpaca.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipAlpacaComponent;
             this.ComponentCategory = ComponentCategory.OtherLivestock;
             this.ComponentType = ComponentType.Alpaca;
         }

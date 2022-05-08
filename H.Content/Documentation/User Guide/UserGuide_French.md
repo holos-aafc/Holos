@@ -1,3 +1,8 @@
+<p align="center">
+ <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
+    <br>
+</p>
+
 # Chapitre 1 Introduction
 
 Pour installer Holos, rendez-vous ici sur le Web. Cliquez sur le fichier zip indiqué pour le télécharger. Une fois le téléchargement effectué, accédez au dossier de téléchargement et double-cliquez sur le programme **Installation**. Si vous souhaitez installer l’application, cliquez sur **Installer**.

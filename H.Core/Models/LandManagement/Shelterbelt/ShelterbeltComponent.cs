@@ -16,6 +16,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public ShelterbeltComponent()
         {
             this.ComponentNameDisplayString = Properties.Resources.LabelShelterbelt;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipShelterbeltComponent;
             this.ComponentCategory = ComponentCategory.LandManagement;
             this.ComponentType = ComponentType.Shelterbelt;
             _rowData = new ObservableCollection<RowData>();

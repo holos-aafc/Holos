@@ -13,6 +13,7 @@ namespace H.Core.Models.Animals.Beef
         public FinishingComponent()
         {
             this.ComponentNameDisplayString = Properties.Resources.TitleFinishingComponentDisplayString;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipFinishingComponent;
             this.ComponentCategory = ComponentCategory.BeefProduction;
             this.ComponentType = ComponentType.Finishing;
         }

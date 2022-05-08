@@ -1,3 +1,9 @@
+<p align="center">
+ <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
+    <br>
+</p>
+
+
 # Chapter - 1 Introduction
 
 To install Holos navigate [here](https://https://aafc-holos.s3.amazonaws.com/setup.exe) on the web.  Click on the specified zip file to download it. Once downloaded, navigate to your downloads folder, and double click the installer named **setup**.  You will be asked if you would like to install the application, click **install**.

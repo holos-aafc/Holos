@@ -5006,4 +5006,58 @@
   <data name="LabelDetailedEntry" xml:space="preserve">
     <value>Detailed Entry</value>
   </data>
+  <data name="ToolTipAlpacaComponent" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipAnaerobicDigestionComponent" xml:space="preserve">
+    <value>Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. Anaerobic digestion produces two valuable outputs: biogas and digestate.</value>
+  </data>
+  <data name="ToolTipBackgroundingComponent" xml:space="preserve">
+    <value>Backgrounder/Stocker operations take weaned calves and provide them feed to add weight before being sent to a feed yard for finishing. The beef stockers and backgrounders component include Heifers and Steers groups.</value>
+  </data>
+  <data name="ToolTipBisonComponent" xml:space="preserve">
+    <value>The bison component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipCowCalfComponent" xml:space="preserve">
+    <value>Includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group including weight, diet, housing and manure handling information.</value>
+  </data>
+  <data name="ToolTipDairyComponent" xml:space="preserve">
+    <value>Dairy cattle or cows are cattle bred for the ability to produce milk, from which dairy products are made. The dairy cattle component includes the Dairy heifers, Dairy dry, Dairy Calves and Dairy lactating groups.</value>
+  </data>
+  <data name="ToolTipDeerComponent" xml:space="preserve">
+    <value>The deer component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipElkComponent" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipEwesAndLambsComponent" xml:space="preserve">
+    <value>The lambs and ewes component allows the creation and maintenance of management periods and other information related to each animal group including animal  weight, diet, housing and manure handling information</value>
+  </data>
+  <data name="ToolTipFieldsComponent" xml:space="preserve">
+    <value>A field component contains details like the crop sown, land area, and tillage regime. Crops are categorized by their growth type (i.e., Annual, Perennial, etc.). A field component allows the creation of various fields representing crops on the farm.</value>
+  </data>
+  <data name="ToolTipFinishingComponent" xml:space="preserve">
+    <value>The finishing period is when beef animals are fed an energy-dense diet so that they will grow rapidly and add muscle to their frame. The beef finisher component includes the Heifers and Steers groups</value>
+  </data>
+  <data name="ToolTipGoatsComponent" xml:space="preserve">
+    <value>The goats component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipHorsesComponent" xml:space="preserve">
+    <value>The horse component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipLlamasComponent" xml:space="preserve">
+    <value>The Llamas component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipMulesComponent" xml:space="preserve">
+    <value>The mules component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+  </data>
+  <data name="ToolTipRamsComponent" xml:space="preserve">
+    <value>The rams component allows the creation and maintenance of management periods and other information related to rams including animal weight, diet, housing and manure handling information.</value>
+  </data>
+  <data name="ToolTipSheepFeedlotComponent" xml:space="preserve">
+    <value>The sheep feedlot component allows the creation and maintenance of management periods and other information related to sheep feedlots including animal weight, diet, housing and manure handling information.</value>
+  </data>
+  <data name="ToolTipShelterbeltComponent" xml:space="preserve">
+    <value>Shelterbelts are linear plantings of trees and/or shrubs that form part of an agriculture production system. A Shelterbelt component consists of rows of trees where each row contains various tree types such as Caragana, Green Ash, Hybrid Polar etc.</value>
+  </data>
 </root>

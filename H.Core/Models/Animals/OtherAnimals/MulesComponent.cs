@@ -7,6 +7,7 @@ namespace H.Core.Models.Animals.OtherAnimals
         public MulesComponent()
         {
             this.ComponentNameDisplayString = ComponentType.Mules.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipMulesComponent;
             this.ComponentCategory = ComponentCategory.OtherLivestock;
             this.ComponentType = ComponentType.Mules;
         }

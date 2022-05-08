@@ -79,6 +79,7 @@ namespace H.Core.Services.LandManagement
                 viewItem.PastTillageType = TillageType.NoTill;
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
                 viewItem.ForageUtilizationRate = _forageUtilizationRateProvider.GetUtilizationRate(viewItem.CropType);
+                viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
             }
         }
 
@@ -140,16 +141,26 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
         {
-            var energyRequirements = _energyRequirementsForCropsProviderTable38.GetEnergyData(
+            var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
                 province: farm.DefaultSoilData.Province,
-                soilFunctionalCategory: farm.DefaultSoilData.SoilFunctionalCategory,
+                soilCategory: farm.DefaultSoilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
                 cropType: viewItem.CropType);
 
-            if (energyRequirements != null)
+            var herbicideEnergyEstimates = _herbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance(
+                provinceName: farm.DefaultSoilData.Province,
+                soilCategory: farm.DefaultSoilData.SoilFunctionalCategory,
+                tillageType: viewItem.TillageType,
+                cropType: viewItem.CropType);
+
+            if (fuelEnergyEstimates != null)
             {
-                viewItem.FuelEnergy = energyRequirements.EnergyForFuel;
-                viewItem.HerbicideEnergy = energyRequirements.EnergyForHerbicide;
+                viewItem.FuelEnergy = fuelEnergyEstimates.FuelEstimate;
+            }
+
+            if (herbicideEnergyEstimates != null)
+            {
+                viewItem.HerbicideEnergy = herbicideEnergyEstimates.HerbicideEstimate;
             }
         }
 
@@ -256,6 +267,7 @@ namespace H.Core.Services.LandManagement
                 if (yields.Any())
                 {
                     viewItem.Yield = Math.Round(yields.Average(), 1);
+                    viewItem.DefaultYield = viewItem.Yield;
                 }
                 else
                 {

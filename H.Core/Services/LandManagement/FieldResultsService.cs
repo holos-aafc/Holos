@@ -23,6 +23,7 @@ using H.Core.Models.Results;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
 using H.Core.Providers.Economics;
+using H.Core.Providers.Energy;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Plants;
@@ -69,6 +70,8 @@ namespace H.Core.Services.LandManagement
         private readonly CanadianAgriculturalRegionIdToSlcIdProvider _canadianAgriculturalRegionIdToSlcIdProvider = new CanadianAgriculturalRegionIdToSlcIdProvider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
         private readonly EnergyRequirementsForCropsProvider_Table_38 _energyRequirementsForCropsProviderTable38 = new EnergyRequirementsForCropsProvider_Table_38();
+        private readonly FuelEnergyEstimatesProvider _fuelEnergyEstimatesProvider = new FuelEnergyEstimatesProvider();
+        private readonly HerbicideEnergyEstimatesProvider _herbicideEnergyEstimatesProvider = new HerbicideEnergyEstimatesProvider();
         private readonly DefaultAmmoniaEmissionProvider_Table_39 _defaultAmmoniaEmissionFactorProvider = new DefaultAmmoniaEmissionProvider_Table_39();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly NitogenFixationProvider _nitrogenFixationProvider = new NitogenFixationProvider();

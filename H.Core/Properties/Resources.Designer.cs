@@ -13507,11 +13507,47 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ToolTipAlpacaComponent {
+            get {
+                return ResourceManager.GetString("ToolTipAlpacaComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. Anaerobic digestion produces two valuable outputs: biogas and digestate..
+        /// </summary>
+        public static string ToolTipAnaerobicDigestionComponent {
+            get {
+                return ResourceManager.GetString("ToolTipAnaerobicDigestionComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backgrounder/Stocker operations take weaned calves and provide them feed to add weight before being sent to a feed yard for finishing. The beef stockers and backgrounders component include Heifers and Steers groups..
+        /// </summary>
+        public static string ToolTipBackgroundingComponent {
+            get {
+                return ResourceManager.GetString("ToolTipBackgroundingComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The gain coefficient.
         /// </summary>
         public static string ToolTipBeefCowGeneralGainCoefficientOfBullsInfo {
             get {
                 return ResourceManager.GetString("ToolTipBeefCowGeneralGainCoefficientOfBullsInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bison component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipBisonComponent {
+            get {
+                return ResourceManager.GetString("ToolTipBisonComponent", resourceCulture);
             }
         }
         
@@ -13565,11 +13601,47 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group including weight, diet, housing and manure handling information..
+        /// </summary>
+        public static string ToolTipCowCalfComponent {
+            get {
+                return ResourceManager.GetString("ToolTipCowCalfComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To begin entering your crop history from the starting year of this field, select &apos;Yes&apos;. To begin entering your crop history from the end year of this field, select &apos;No&apos;..
         /// </summary>
         public static string TooltipCropEntryStartingPoint {
             get {
                 return ResourceManager.GetString("TooltipCropEntryStartingPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dairy cattle or cows are cattle bred for the ability to produce milk, from which dairy products are made. The dairy cattle component includes the Dairy heifers, Dairy dry, Dairy Calves and Dairy lactating groups..
+        /// </summary>
+        public static string ToolTipDairyComponent {
+            get {
+                return ResourceManager.GetString("ToolTipDairyComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The deer component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipDeerComponent {
+            get {
+                return ResourceManager.GetString("ToolTipDeerComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ToolTipElkComponent {
+            get {
+                return ResourceManager.GetString("ToolTipElkComponent", resourceCulture);
             }
         }
         
@@ -13588,6 +13660,15 @@ namespace H.Core.Properties {
         public static string TooltipEndYearOfRotation {
             get {
                 return ResourceManager.GetString("TooltipEndYearOfRotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The lambs and ewes component allows the creation and maintenance of management periods and other information related to each animal group including animal  weight, diet, housing and manure handling information.
+        /// </summary>
+        public static string ToolTipEwesAndLambsComponent {
+            get {
+                return ResourceManager.GetString("ToolTipEwesAndLambsComponent", resourceCulture);
             }
         }
         
@@ -13656,11 +13737,47 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A field component contains details like the crop sown, land area, and tillage regime. Crops are categorized by their growth type (i.e., Annual, Perennial, etc.). A field component allows the creation of various fields representing crops on the farm..
+        /// </summary>
+        public static string ToolTipFieldsComponent {
+            get {
+                return ResourceManager.GetString("ToolTipFieldsComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The finishing period is when beef animals are fed an energy-dense diet so that they will grow rapidly and add muscle to their frame. The beef finisher component includes the Heifers and Steers groups.
+        /// </summary>
+        public static string ToolTipFinishingComponent {
+            get {
+                return ResourceManager.GetString("ToolTipFinishingComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The goats component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipGoatsComponent {
+            get {
+                return ResourceManager.GetString("ToolTipGoatsComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grower-to-finish operations house feeder hogs until they are marketed at ~110-115 kg live weight. These operations do not keep breeding animals but purchase their pigs from weaner operations..
         /// </summary>
         public static string ToolTipGrowerToFinishProductionSystem {
             get {
                 return ResourceManager.GetString("ToolTipGrowerToFinishProductionSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The horse component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipHorsesComponent {
+            get {
+                return ResourceManager.GetString("ToolTipHorsesComponent", resourceCulture);
             }
         }
         
@@ -14125,11 +14242,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Llamas component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipLlamasComponent {
+            get {
+                return ResourceManager.GetString("ToolTipLlamasComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the method of manure application to this field.
         /// </summary>
         public static string ToolTipManureApplicationMethodInfo {
             get {
                 return ResourceManager.GetString("ToolTipManureApplicationMethodInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mules component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        /// </summary>
+        public static string ToolTipMulesComponent {
+            get {
+                return ResourceManager.GetString("ToolTipMulesComponent", resourceCulture);
             }
         }
         
@@ -14230,6 +14365,15 @@ namespace H.Core.Properties {
         public static string ToolTipRamGeneralWoolProductionInfo {
             get {
                 return ResourceManager.GetString("ToolTipRamGeneralWoolProductionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The rams component allows the creation and maintenance of management periods and other information related to rams including animal weight, diet, housing and manure handling information..
+        /// </summary>
+        public static string ToolTipRamsComponent {
+            get {
+                return ResourceManager.GetString("ToolTipRamsComponent", resourceCulture);
             }
         }
         
@@ -14361,6 +14505,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The sheep feedlot component allows the creation and maintenance of management periods and other information related to sheep feedlots including animal weight, diet, housing and manure handling information..
+        /// </summary>
+        public static string ToolTipSheepFeedlotComponent {
+            get {
+                return ResourceManager.GetString("ToolTipSheepFeedlotComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gain coefficient A.
         /// </summary>
         public static string ToolTipSheepFeedLotGeneralGainCoefficientAInfo {
@@ -14402,6 +14555,15 @@ namespace H.Core.Properties {
         public static string ToolTipSheepSharedDietTotalDigestibleNutrientInfo {
             get {
                 return ResourceManager.GetString("ToolTipSheepSharedDietTotalDigestibleNutrientInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shelterbelts are linear plantings of trees and/or shrubs that form part of an agriculture production system. A Shelterbelt component consists of rows of trees where each row contains various tree types such as Caragana, Green Ash, Hybrid Polar etc..
+        /// </summary>
+        public static string ToolTipShelterbeltComponent {
+            get {
+                return ResourceManager.GetString("ToolTipShelterbeltComponent", resourceCulture);
             }
         }
         

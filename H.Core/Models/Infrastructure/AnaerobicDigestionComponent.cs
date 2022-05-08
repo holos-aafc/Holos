@@ -70,6 +70,7 @@ namespace H.Core.Models.Infrastructure
         public AnaerobicDigestionComponent()
         {
             this.ComponentNameDisplayString = Properties.Resources.TitleAnaerobicDigestionComponent;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipAnaerobicDigestionComponent;
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();

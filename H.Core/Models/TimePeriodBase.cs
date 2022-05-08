@@ -78,7 +78,15 @@ namespace H.Core.Models
         public int EndYear
         {
             get { return _endYear; }
-            set { this.SetProperty(ref _endYear, value, this.OnEndYearChanged); }
+            set 
+            {
+                if (value < this.StartYear)
+                {
+                    return;
+                }
+                
+                this.SetProperty(ref _endYear, value, this.OnEndYearChanged);
+            }
         }
 
         #endregion

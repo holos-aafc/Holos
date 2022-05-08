@@ -51,6 +51,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _pastPerennialArea;
         private double _yield;
         private double _dryYield;
+        private double _defaultYield;
+        private double _totalHarvestBiomass;
         private double _soilTestNitrogen;
         private double _moistureContentOfCrop;
         private double _moistureContentOfCropPercentage;
@@ -330,6 +332,39 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _dryYield;
             set => SetProperty(ref _dryYield, value);
+        }
+
+        /// <summary>
+        /// The total biomass value from the harvest tab of a perennial crop. The value is calculated based on
+        /// (number of bales * weight per bale). This is set by the user when adding harvest information.
+        /// 
+        /// This property is set to default yield value when crop is initially loaded. The value is reset to default
+        /// yield again when the user removes all harvest information for their component.
+        /// </summary>
+        public double TotalBiomassHarvest
+        {
+            get => _totalHarvestBiomass;
+            set
+            {
+                if (!this.HasHarvestViewItems)
+                {
+                    value = this.DefaultYield;
+                }
+
+                SetProperty(ref _totalHarvestBiomass, value);
+            }
+        }
+
+        /// <summary>
+        /// The default yield as read from the data files. This is set when the yield value is set for the first
+        /// time based on lookup table defaults.
+        /// 
+        /// (kg ha^-1)
+        /// </summary>
+        public double DefaultYield
+        {
+            get => _defaultYield;
+            set => SetProperty(ref _defaultYield, value);
         }
 
         public Response IsIrrigated

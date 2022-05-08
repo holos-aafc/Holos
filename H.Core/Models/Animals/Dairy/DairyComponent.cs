@@ -19,6 +19,7 @@ namespace H.Core.Models.Animals.Dairy
         public DairyComponent()
         {
             this.ComponentNameDisplayString = ComponentType.Dairy.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipDairyComponent;
             this.ComponentCategory = ComponentCategory.Dairy;
             this.ComponentType = ComponentType.Dairy;
         }

@@ -38,6 +38,7 @@ namespace H.Core.Models.LandManagement.Fields
         public FieldSystemComponent()
         {
             this.ComponentNameDisplayString = Properties.Resources.LabelField;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipFieldsComponent;
             this.ComponentCategory = ComponentCategory.LandManagement;
             this.ComponentType = ComponentType.Field;
 
