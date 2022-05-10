@@ -395,6 +395,11 @@ namespace H.Core.Calculators.Carbon
                 activePool: currentYearViewItem.ActivePool,
                 passivePool: currentYearViewItem.PassivePool,
                 slowPool: currentYearViewItem.SlowPool);
+
+            if (previousYearViewItem != null)
+            {
+                currentYearViewItem.ChangeInCarbon = currentYearViewItem.SoilCarbon - previousYearViewItem.SoilCarbon;
+            }
         }
 
         #endregion

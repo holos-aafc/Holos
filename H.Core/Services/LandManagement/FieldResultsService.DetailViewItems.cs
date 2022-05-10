@@ -217,6 +217,9 @@ namespace H.Core.Services.LandManagement
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             this.CalculateCarbonLostByGrazingAnimals(fieldSystemComponent, farm);
 
+            // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
+            //this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
+
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
 
@@ -336,7 +339,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Returns a collection of run in period items that are needed to calulcate a starting state for the IPCC Tier 2 carbon model
+        /// Returns a collection of run in period items that are needed to calculate a starting state for the IPCC Tier 2 carbon model
         /// </summary>
         /// <param name="farm"></param>
         /// <param name="viewItemsForRotation">The crops that define a rotation</param>

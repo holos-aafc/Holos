@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
@@ -87,8 +88,13 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItems: nextYearViewItem,
                 farm: farm);
 
+            //var carbonInputsFromGrazingAnimalManure = currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+
             // Add in any supplemental feeding amounts that were given to grazing animals
             currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
+
+            // Add in any carbon from manure of grazing animals
+            //currentYearViewItem.AboveGroundCarbonInput += carbonInputsFromGrazingAnimalManure;
 
             currentYearViewItem.BelowGroundCarbonInput = this.CalculateTotalBelowGroundCarbonInput(
                 cropViewItem: currentYearViewItem,

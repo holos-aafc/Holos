@@ -552,6 +552,18 @@ namespace H.Core.Services.LandManagement
                 results: animalComponentEmissionResults);
         }
 
+        /// <summary>
+        /// Calculates how much carbon added from manure of animals grazing on the field.
+        /// </summary>
+        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
+
+            this.CalculateManureCarbonInputByGrazingAnimals(
+                fieldSystemComponent: fieldSystemComponent,
+                results: animalComponentEmissionResults);
+        }
+
         public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
         {
             foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
@@ -574,6 +586,39 @@ namespace H.Core.Services.LandManagement
                 cropViewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
                     forageUtilizationRate: cropViewItem.ForageUtilizationRate,
                     totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+            }
+        }
+
+        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        {
+            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            {
+                var totalCarbonExcretedByAnimals = 0d;
+                var manureMethaneEmissions = 0d;
+                var totalVolumeOfManure = 0d;
+
+                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                {
+                    var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+                    if (animalComponentEmissionsResults != null)
+                    {
+                        var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                        if (groupEmissionResults != null)
+                        {
+                            totalCarbonExcretedByAnimals += groupEmissionResults.TotalCarbonExcreted;
+                            manureMethaneEmissions += groupEmissionResults.TotalManureMethane;
+                            totalVolumeOfManure += groupEmissionResults.TotalVolumeOfManure;
+                        }
+                    }
+                }
+
+                if (totalVolumeOfManure == 0)
+                {
+                    continue;
+                }
+
+                // Equation 5.5.1-1
+                cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture = (totalCarbonExcretedByAnimals - manureMethaneEmissions) / totalVolumeOfManure;
             }
         }
 

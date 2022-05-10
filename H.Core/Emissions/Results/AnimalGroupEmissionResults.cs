@@ -114,6 +114,14 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double TotalVolumeOfManure
+        {
+            get
+            {
+                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication);
+            }
+        }
+
         /// <summary>
         /// Total direct nitrous oxide emitted from all animals in this group over all months.
         ///
@@ -161,6 +169,17 @@ namespace H.Core.Emissions.Results
             get
             {
                 return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication);
+            }
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double TotalCarbonExcreted
+        {
+            get
+            {
+                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyFecalCarbonExcretion);
             }
         }
 
