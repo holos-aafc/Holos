@@ -381,7 +381,6 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem.PassivePoolDiff = this.CalculateSocChange(
                     socAtYear: currentYearViewItem.PassivePool,
                     socAtPreviousYear: previousYearViewItem.PassivePool);
-
             }
             else
             {
