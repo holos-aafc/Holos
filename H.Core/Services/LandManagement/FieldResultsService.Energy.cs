@@ -52,6 +52,8 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Calculates emissions from energy usage for fuel use, herbicide, N and P fertilizer, and irrigation.
+        ///
+        /// <remarks>Both upstream and on-farm emissions are calculated here.</remarks>
         /// </summary>
         public CropEnergyResults CalculateCropEnergyResults(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
@@ -73,13 +75,19 @@ namespace H.Core.Services.LandManagement
 
             if (viewItem.IsHerbicideUsed)
             {
-                results.EnergyCarbonDioxideFromHerbicideUse = this.CalculateCarbonDioxideEmissionsFromCroppingHerbicideProduction(
+                // Upstream emissions
+                results.UpstreamEnergyCarbonDioxideFromHerbicideUse = this.CalculateCarbonDioxideEmissionsFromCroppingHerbicideProduction(
                     energyForHerbicideProduction: viewItem.HerbicideEnergy,
                     area: viewItem.Area,
                     herbicideConversion: HerbicideConversion);
             }
 
-            results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateEnergyEmissionsFromNitrogenFertilizer(viewItem);
+            // Upstream emissions
+            results.UpstreamEnergyFromNitrogenFertilizer = this.CalculateUpstreamEnergyEmissionsFromNitrogenFertilizer(viewItem);
+
+            // Application (on-farm) emissions
+            results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(viewItem);
+
             results.EnergyCarbonDioxideFromPhosphorusFertilizer = this.CalculateEnergyEmissionsFromPhosphorusFertilizer(viewItem);
             results.EnergyCarbonDioxideFromPotassiumFertilizer = this.CalculateEnergyEmissionsFromPotassiumFertilizer(viewItem);
             results.EnergyCarbonDioxideFromSulphurFertilizer = 0;// No methodology yet but we have amounts from currently available fertilizer blends
@@ -119,8 +127,8 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.1.2-1
-        /// Equation 4.1.2-2
+        /// Equation 6.1.2-1
+        /// Equation 6.1.2-2
         /// </summary>
         /// <param name="energyForHerbicideProduction">Energy for herbicide production (GJ ha^1)</param>
         /// <param name="area">Area (ha)</param>
@@ -144,29 +152,49 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.1.3-1
+        /// Equation 6.1.3-1
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from N fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateEnergyEmissionsFromNitrogenFertilizer(CropViewItem viewItem)
+        public double CalculateUpstreamEnergyEmissionsFromNitrogenFertilizer(CropViewItem viewItem)
         {
-            var result = 0.0;
+            var upstreamEmissions = 0.0;
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
                 var area = viewItem.Area;
                 var gateEmissions = fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate;
-                var applicationEmissions = fertilizerApplicationViewItem.FertilizerBlendData.ApplicationEmissions;
 
-                result += amountOfNitrogenApplied * area * (gateEmissions + applicationEmissions);
+                upstreamEmissions += amountOfNitrogenApplied * area * gateEmissions;
             }
 
-            return result;
+            return upstreamEmissions;
         }
 
         /// <summary>
-        /// Equation 4.1.3-2
+        /// Equation 6.1.3-2
+        /// </summary>
+        /// <param name="viewItem">The crop details for the year</param>
+        /// <returns>CO2 emissions from N fertilizer production (kg CO2 year^-1)</returns>
+        public double CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(CropViewItem viewItem)
+        {
+            var onFarmEmissions = 0.0;
+
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
+            {
+                var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
+                var area = viewItem.Area;
+                var applicationEmissions = fertilizerApplicationViewItem.FertilizerBlendData.ApplicationEmissions;
+
+                onFarmEmissions += amountOfNitrogenApplied * area * applicationEmissions;
+            }
+
+            return onFarmEmissions;
+        }
+
+        /// <summary>
+        /// Equation 6.1.3-3
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from P fertilizer production (kg CO2 year^-1)</returns>
@@ -187,7 +215,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 6.1.3-3
+        /// Equation 6.1.3-4
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from K fertilizer production (kg CO2 year^-1)</returns>
@@ -209,6 +237,7 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Equation 6.1.3.5
+        /// Equation 6.1.3.6
         /// </summary>
         /// <returns>Total CO2 emissions from liming application (kg CO2 year^-1)</returns>
         private double CalculateEnergyEmissionsFromLimeFertilizer(CropViewItem viewItem)

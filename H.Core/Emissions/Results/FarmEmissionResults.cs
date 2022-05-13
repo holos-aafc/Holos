@@ -230,13 +230,15 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Returns the sum of all CO2e from land management of the farm.
         ///
+        /// <remarks>Does not include upstream emissions from herbicide and fertilizer production.</remarks>
+        ///
         /// (kg CO2e)
         /// </summary>
         public double TotalCarbonDioxideEquivalentsFromLandManagementForFarm
         {
             get
             {
-                var result = this.FarmEnergyResults.TotalCroppingEnergyEmissionsForFarm * CoreConstants.CO2ToCO2eConversionFactor +
+                var result = this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm * CoreConstants.CO2ToCO2eConversionFactor +
                              this.TotalNitrousOxideEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor +
                              this.TotalCarbonDioxideFromLandUseChange * CoreConstants.CO2ToCO2eConversionFactor;
 
@@ -534,7 +536,7 @@ namespace H.Core.Emissions.Results
             get
             {
                 return this.TotalCarbonDioxideFromLandUseChange +
-                       this.FarmEnergyResults.TotalCroppingEnergyEmissionsForFarm;
+                       this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm;
                 // Animal CO2 total is output under the Energy CO2 column (in the GUI and CLI reports) so don't include it here)
                 //this.TotalCarbonDioxideFromAnimals;
             }
@@ -547,7 +549,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.FarmEnergyResults.TotalCroppingEnergyEmissionsForFarm +
+                return this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm +
                        this.TotalCarbonDioxideFromAnimals;
             }
         }

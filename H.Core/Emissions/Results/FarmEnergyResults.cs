@@ -12,20 +12,22 @@ namespace H.Core.Emissions.Results
         #region Fields
 
         private double _energyCarbonDioxideFromManureApplication;
-        private double _totalCroppingEnergyEmissionsForFarm;
+        private double _totalOnFarmCroppingEnergyEmissionsForFarm;
 
         #endregion
 
         #region Properties
 
         /// <summary>
+        /// <remarks>This value does should not include emissions from upstream production of herbicide, fertilizer, etc. Only on-farm emissions are included.</remarks>
+        /// 
         /// (kg CO2e)
         /// </summary>
         public double TotalCroppingEnergyEmissionsForFarmAsCarbonDioxideEquivalents
         {
             get
             {
-                return this.TotalCroppingEnergyEmissionsForFarm * CoreConstants.CO2ToCO2eConversionFactor;
+                return this.TotalOnFarmCroppingEnergyEmissionsForFarm * CoreConstants.CO2ToCO2eConversionFactor;
             }
         }
 
@@ -41,10 +43,10 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg CO2)
         /// </summary>
-        public double TotalCroppingEnergyEmissionsForFarm
+        public double TotalOnFarmCroppingEnergyEmissionsForFarm
         {
-            get => _totalCroppingEnergyEmissionsForFarm;
-            set => SetProperty(ref _totalCroppingEnergyEmissionsForFarm, value);
+            get => _totalOnFarmCroppingEnergyEmissionsForFarm;
+            set => SetProperty(ref _totalOnFarmCroppingEnergyEmissionsForFarm, value);
         }
 
         #endregion

@@ -193,26 +193,26 @@ namespace H.Core.Services
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
 
-            //components
+            // Components
             farmResults.FieldComponentEmissionResults.AddRange(_fieldResultsService.CalculateResultsForFieldComponent(farm));
             farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
 
-            //N20 emissions
+            // N20 emissions
             farmResults.MineralN2OEmissionsResults = _fieldResultsService.CalculateMineralN2OEmissionsForFarm(farmResults);
             farmResults.ManureN2OEmissionResults = _fieldResultsService.CalculateManureN2OEmissionsForFarm(farmResults);
 
-            //Field results
+            // Field results
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
             farmResults.FinalFieldResultViewItems.AddRange(finalFieldResults);
 
             // Manure calculations - must be calculated after both field and animal results have been calculated.
             this.UpdateStorageTanks(farmResults);
 
-            //Energy
+            // Energy
             farmResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication = farmResults.AnimalComponentEmissionsResults.TotalCarbonDioxideEmissionsFromManureSpreading();
-            farmResults.FarmEnergyResults.TotalCroppingEnergyEmissionsForFarm = farmResults.FieldComponentEmissionResults.TotalCroppingEnergyEmissions();
+            farmResults.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm = farmResults.FieldComponentEmissionResults.TotalOnFarmCroppingEnergyEmissions();
 
-            //economics
+            // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(_fieldResultsService, farm));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);
 

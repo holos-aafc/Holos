@@ -8449,6 +8449,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Energy CO2.
+        /// </summary>
+        public static string LabelEnergyCO2 {
+            get {
+                return ResourceManager.GetString("LabelEnergyCO2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust the details of {0}. These adjustments will be copied to the other fields in the rotation when {0} was grown.
         /// </summary>
         public static string LabelEnterCropDetailsDuringRotationInstructionalString {
@@ -9066,6 +9075,15 @@ namespace H.Core.Properties {
         public static string LabelLactationDiet {
             get {
                 return ResourceManager.GetString("LabelLactationDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Land Use Change CO2.
+        /// </summary>
+        public static string LabelLandUseChangeCO2 {
+            get {
+                return ResourceManager.GetString("LabelLandUseChangeCO2", resourceCulture);
             }
         }
         
@@ -10434,6 +10452,15 @@ namespace H.Core.Properties {
         public static string LabelUndersown {
             get {
                 return ResourceManager.GetString("LabelUndersown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upstream CO2.
+        /// </summary>
+        public static string LabelUpstreamCarbonDioxide {
+            get {
+                return ResourceManager.GetString("LabelUpstreamCarbonDioxide", resourceCulture);
             }
         }
         
@@ -13664,6 +13691,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Includes emissions from manure spreading, electricity usage for housed animals, farm machinery fuel usage, and crop irrigation. All emissions in this column result from emissions on farm. Upstream CO2 emissions are reported separately..
+        /// </summary>
+        public static string ToolTipEnergyCO2Emissions {
+            get {
+                return ResourceManager.GetString("ToolTipEnergyCO2Emissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The lambs and ewes component allows the creation and maintenance of management periods and other information related to each animal group including animal  weight, diet, housing and manure handling information.
         /// </summary>
         public static string ToolTipEwesAndLambsComponent {
@@ -14242,6 +14278,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Includes emissions from land use change (e.g. changing from Intensive Tillage to No-Till). Land use change emissions in this report are for the current year only..
+        /// </summary>
+        public static string ToolTipLandUseChangeEmissions {
+            get {
+                return ResourceManager.GetString("ToolTipLandUseChangeEmissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Llamas component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
         /// </summary>
         public static string ToolTipLlamasComponent {
@@ -14638,6 +14683,15 @@ namespace H.Core.Properties {
         public static string ToolTipTurkeyMultiplierBreeder {
             get {
                 return ResourceManager.GetString("ToolTipTurkeyMultiplierBreeder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Includes ‘upstream’ estimates for emissions created through the production of farm inputs (e.g., CO2 losses from fertilizer, and herbicide production). These values are not associated with the total emissions produced by the farm..
+        /// </summary>
+        public static string ToolTipUpstreamEmissions {
+            get {
+                return ResourceManager.GetString("ToolTipUpstreamEmissions", resourceCulture);
             }
         }
         

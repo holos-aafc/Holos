@@ -11,13 +11,15 @@ namespace H.Core.Emissions.Results
         #region Fields
 
         private double _energyCarbonDioxideFromFuelUse;
-        private double _energyCarbonDioxideFromHerbicideUse;
         private double _energyCarbonDioxideFromNitrogenFertilizer;
         private double _energyCarbonDioxideFromPhosphorusFertilizer;
         private double _energyCarbonDioxideFromPotassiumFertilizer;
         private double _energyCarbonDioxideFromSulphurFertilizer;
         private double _energyCarbonDioxideFromIrrigation;
         private double _energyCarbonDioxideFromLime;
+
+        private double _upstreamEnergyCarbonDioxideFromHerbicideUse;
+        private double _upstreamEnergyFromNitrogenFertilizer;
 
         private ObservableCollection<MonthlyManureSpreadingResults> _manureSpreadingResults;
 
@@ -35,16 +37,15 @@ namespace H.Core.Emissions.Results
         #region Properties
 
         /// <summary>
-        /// Returns the sum of energy emissions from fuel use, herbicide use, fertilizer (N & P) conversion, irrigation, and manure spreading operations
+        /// Returns the sum of energy emissions from fuel use, fertilizer (N & P) application, irrigation, and manure spreading operations
         ///
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
-        public double TotalCroppingEnergyEmissions
+        public double TotalOnFarmCroppingEnergyEmissions
         {
             get
             {
-                return this.EnergyCarbonDioxideFromFuelUse + 
-                       this.EnergyCarbonDioxideFromHerbicideUse +
+                return this.EnergyCarbonDioxideFromFuelUse +
                        this.EnergyCarbonDioxideFromNitrogenFertilizer +
                        this.EnergyCarbonDioxideFromPhosphorusFertilizer +
                        this.EnergyCarbonDioxideFromPotassiumFertilizer +
@@ -55,6 +56,20 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        /// <summary>
+        /// Returns the sum of upstream emissions resulting from herbicide and fertilizer production
+        ///
+        /// (kg CO2)
+        /// </summary>
+        public double TotalUpstreamCroppingEnergyEmissions
+        {
+            get
+            {
+                return this.UpstreamEnergyCarbonDioxideFromHerbicideUse +
+                       this.UpstreamEnergyFromNitrogenFertilizer;
+            }
+        }
+
         public ObservableCollection<MonthlyManureSpreadingResults> ManureSpreadingResults
         {
             get => _manureSpreadingResults;
@@ -62,7 +77,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromFuelUse
         {
@@ -71,16 +86,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// This is an upstream emission
+        /// 
+        /// (kg CO2)
         /// </summary>
-        public double EnergyCarbonDioxideFromHerbicideUse
+        public double UpstreamEnergyCarbonDioxideFromHerbicideUse
         {
-            get => _energyCarbonDioxideFromHerbicideUse;
-            set => SetProperty(ref _energyCarbonDioxideFromHerbicideUse, value);
+            get => _upstreamEnergyCarbonDioxideFromHerbicideUse;
+            set => SetProperty(ref _upstreamEnergyCarbonDioxideFromHerbicideUse, value);
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromNitrogenFertilizer
         {
@@ -89,7 +106,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromPhosphorusFertilizer
         {
@@ -98,7 +115,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromIrrigation
         {
@@ -107,7 +124,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromPotassiumFertilizer
         {
@@ -125,7 +142,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromSulphurFertilizer
         {
@@ -134,7 +151,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// kg CO2
+        /// (kg CO2)
         /// </summary>
         public double EnergyCarbonDioxideFromManureSpreading
         {
@@ -142,6 +159,12 @@ namespace H.Core.Emissions.Results
             {
                 return this.ManureSpreadingResults.Sum(x => x.TotalEmissions);
             }
+        }
+
+        public double UpstreamEnergyFromNitrogenFertilizer
+        {
+            get => _upstreamEnergyFromNitrogenFertilizer;
+            set => SetProperty(ref _upstreamEnergyFromNitrogenFertilizer, value);
         }
 
         #endregion

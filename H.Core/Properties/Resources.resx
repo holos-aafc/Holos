@@ -1162,6 +1162,9 @@
   <data name="Acres" xml:space="preserve">
     <value>ac</value>
   </data>
+  <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
+    <value>Upstream CO2</value>
+  </data>
   <data name="LabelBirthWeight" xml:space="preserve">
     <value>Birth weight</value>
   </data>
@@ -1548,6 +1551,12 @@
   </data>
   <data name="EnumMillsEtAl" xml:space="preserve">
     <value>Mills et al. (2013) Eq. NL2</value>
+  </data>
+  <data name="LabelLandUseChangeCO2" xml:space="preserve">
+    <value>Land Use Change CO2</value>
+  </data>
+  <data name="LabelEnergyCO2" xml:space="preserve">
+    <value>Energy CO2</value>
   </data>
   <data name="EnumMoraesEtAlDietaryAnimalLevel1" xml:space="preserve">
     <value>Moraes et al. (2014): Animal Level (1)</value>
@@ -3796,6 +3805,15 @@
   </data>
   <data name="ToolTipLandFertilizerTableSeasonOfApplicationInfo" xml:space="preserve">
     <value>The season when the fertilizer was applied, either spring or fall</value>
+  </data>
+  <data name="ToolTipUpstreamEmissions" xml:space="preserve">
+    <value>Includes ‘upstream’ estimates for emissions created through the production of farm inputs (e.g., CO2 losses from fertilizer, and herbicide production). These values are not associated with the total emissions produced by the farm.</value>
+  </data>
+  <data name="ToolTipLandUseChangeEmissions" xml:space="preserve">
+    <value>Includes emissions from land use change (e.g. changing from Intensive Tillage to No-Till). Land use change emissions in this report are for the current year only.</value>
+  </data>
+  <data name="ToolTipEnergyCO2Emissions" xml:space="preserve">
+    <value>Includes emissions from manure spreading, electricity usage for housed animals, farm machinery fuel usage, and crop irrigation. All emissions in this column result from emissions on farm. Upstream CO2 emissions are reported separately.</value>
   </data>
   <data name="ToolTipLandManureTableAmountOfNitrogenFromAppliedManureInfo" xml:space="preserve">
     <value>The amount of Nitrogen from applied manure. This value depends on the fraction specified under 'N fraction of applied manure'</value>

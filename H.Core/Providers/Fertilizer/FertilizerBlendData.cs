@@ -83,6 +83,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
+        /// These are upstream emissions - not from farm
+        /// 
         /// (kg CO2eq kg product^-1)
         /// </summary>
         public double CarbonDioxideEmissionsAtTheGate
@@ -92,7 +94,9 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// (kg CO2 kg^-1)
+        /// These are emission from the farm
+        /// 
+        /// (kg CO2eq kg product^-1)
         /// </summary>
         public double ApplicationEmissions
         {
