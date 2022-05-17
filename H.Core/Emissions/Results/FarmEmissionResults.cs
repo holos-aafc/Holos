@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -50,12 +51,12 @@ namespace H.Core.Emissions.Results
 
             this.ManureTanks = new ObservableCollection<ManureTank>()
             {
-                new ManureTank() {AnimalType = AnimalType.Beef },
-                new ManureTank() {AnimalType = AnimalType.Dairy },
-                new ManureTank() {AnimalType = AnimalType.Swine},
-                new ManureTank() {AnimalType = AnimalType.Sheep},
-                new ManureTank() {AnimalType = AnimalType.Poultry},
-                new ManureTank() {AnimalType = AnimalType.OtherLivestock},
+                new ManureTank() {AnimalType = AnimalType.Beef , Year = DateTime.Now.Year},
+                new ManureTank() {AnimalType = AnimalType.Dairy  , Year = DateTime.Now.Year},
+                new ManureTank() {AnimalType = AnimalType.Swine , Year = DateTime.Now.Year},
+                new ManureTank() {AnimalType = AnimalType.Sheep , Year = DateTime.Now.Year},
+                new ManureTank() {AnimalType = AnimalType.Poultry , Year = DateTime.Now.Year},
+                new ManureTank() {AnimalType = AnimalType.OtherLivestock , Year = DateTime.Now.Year},
             };
         }
 
@@ -683,9 +684,17 @@ namespace H.Core.Emissions.Results
             };
         }
 
-        public ManureTank GetManureTankByAnimalType(AnimalType animalType)
+        public ManureTank GetManureTankByAnimalType(AnimalType animalType, int year)
         {
-            return this.ManureTanks.Single(x => x.AnimalType.GetCategory() == animalType.GetCategory());
+            var tank = this.ManureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year);
+            if (tank == null)
+            {
+                tank = new ManureTank() {AnimalType = animalType, Year = year};
+
+                this.ManureTanks.Add(tank);
+            }
+
+            return tank;
         }
 
         public override string ToString()

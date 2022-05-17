@@ -20,20 +20,53 @@ namespace H.Core.Services.LandManagement
             }
         }
 
-        protected void AssignPerennialStandPositionalYears(
+        public void AssignPerennialStandPositionalYears(
             IEnumerable<CropViewItem> viewItems,
             FieldSystemComponent fieldSystemComponent)
         {
             var groups = viewItems.Where(x => x.CropType.IsPerennial()).GroupBy(x => x.PerennialStandGroupId);
             foreach (var group in groups)
             {
-                var totalLength = group.Count();
+                var distinctYears = group.Select(x => x.Year).Distinct();
+                var totalLength = distinctYears.Count();
 
-                for (int i = 0; i < group.Count(); i++)
+                for (int i = 0; i < distinctYears.Count(); i++)
                 {
-                    var viewItem = group.OrderBy(x => x.Year).ElementAt(i);
-                    viewItem.YearInPerennialStand = i + 1;
-                    viewItem.PerennialStandLength = totalLength;
+                    var position = i + 1;
+                    var year = distinctYears.ElementAt(i);
+                    var itemsByYear = group.Where(x => x.Year == year);
+                    var mainCropForYear = itemsByYear.SingleOrDefault(x => x.IsSecondaryCrop == false);
+                    var secondaryCropForYear = itemsByYear.SingleOrDefault(x => x.IsSecondaryCrop);
+
+                    if (i == 0)
+                    {
+                        if (mainCropForYear != null)
+                        {
+                            mainCropForYear.YearInPerennialStand = position;
+                            mainCropForYear.PerennialStandLength = totalLength;
+
+                            continue;
+                        }
+
+                        // If year == 1, consider secondary crop as first year in stand        
+                        if (secondaryCropForYear != null)
+                        {
+                            secondaryCropForYear.YearInPerennialStand = position;
+                            secondaryCropForYear.PerennialStandLength = totalLength;
+
+                            continue;
+                        }
+
+
+                    }
+                    else
+                    {
+                        if (mainCropForYear != null && mainCropForYear.CropType.IsPerennial())
+                        {
+                            mainCropForYear.YearInPerennialStand = position;
+                            mainCropForYear.PerennialStandLength = totalLength;
+                        }
+                    }
                 }
             }
         }
@@ -65,47 +98,71 @@ namespace H.Core.Services.LandManagement
         }
 
         public IEnumerable<IGrouping<Guid, CropViewItem>> AssignPerennialStandIds(
-            IEnumerable<CropViewItem> viewItems, FieldSystemComponent fieldSystemComponent)
+            IEnumerable<CropViewItem> viewItems, 
+            FieldSystemComponent fieldSystemComponent)
         {
-            var years = viewItems.Select(x => x.Year).ToList();
-            var distinctYears = years.Distinct().OrderBy(x => x);
+            var distinctYears = viewItems.Select(y => y.Year).Distinct().OrderBy(x => x);
 
-            var currentGuid = Guid.NewGuid();
+            var currentPerennialId = Guid.NewGuid();
+            var lastCropType = CropType.None;
+
             foreach (var year in distinctYears)
             {
-                var previousYear = year - 1;
-                var previousYearPerennial = viewItems.SingleOrDefault(x => x.Year == previousYear && x.CropType.IsPerennial() && x.IsSecondaryCrop == false);
-                var currentYearPerennial = viewItems.SingleOrDefault(x => x.Year == year && x.CropType.IsPerennial() && x.IsSecondaryCrop == false);
-                var mainCropForNextYear = this.GetMainCropForYear(
-                    viewItems: viewItems,
-                    year: year + 1, fieldSystemComponent: fieldSystemComponent);
+                var mainCrop = viewItems.Single(x => x.Year == year && x.IsSecondaryCrop == false);
+                var secondaryCrop = viewItems.SingleOrDefault(x => x.Year == year && x.IsSecondaryCrop == true);
 
-                if (currentYearPerennial != null)
+                if (secondaryCrop == null)
                 {
-                    if (previousYearPerennial == null)
+                    // Consider case where only one crop grown in the year (no undersown or cover crop)
+
+                    if (mainCrop.CropType.IsPerennial())
                     {
-                        currentYearPerennial.PerennialStandGroupId = currentGuid;
-                    }
-                    else if (currentYearPerennial.CropType == previousYearPerennial.CropType)
-                    {
-                        currentYearPerennial.PerennialStandGroupId = currentGuid;
+                        if (mainCrop.CropType != lastCropType)
+                        {
+                            currentPerennialId = Guid.NewGuid();
+                        }
+
+                        mainCrop.PerennialStandGroupId = currentPerennialId;
+                        lastCropType = mainCrop.CropType;
                     }
                     else
                     {
-                        currentGuid = Guid.NewGuid();
-                        currentYearPerennial.PerennialStandGroupId = currentGuid;
+                        currentPerennialId = Guid.NewGuid();
                     }
 
-                    // Check if the perennial grown in this year concludes the stand (is harvest year)
-                    if (mainCropForNextYear != null && mainCropForNextYear.CropType.IsPerennial() == false)
-                    {
-                        // This is the last item in the stand
-                        currentGuid = Guid.NewGuid();
-                    }
+                    continue;
                 }
                 else
                 {
-                    currentGuid = Guid.NewGuid();
+                    if (mainCrop.CropType.IsPerennial())
+                    {
+                        if (mainCrop.CropType != lastCropType)
+                        {
+                            currentPerennialId = Guid.NewGuid();
+                        }
+
+                        mainCrop.PerennialStandGroupId = currentPerennialId;
+                        lastCropType = mainCrop.CropType;
+                    }
+                    else
+                    {
+                        currentPerennialId = Guid.NewGuid();
+                    }
+
+                    if (secondaryCrop.CropType.IsPerennial())
+                    {
+                        if (secondaryCrop.CropType != lastCropType)
+                        {
+                            currentPerennialId = Guid.NewGuid();
+                        }
+
+                        secondaryCrop.PerennialStandGroupId = currentPerennialId;
+                        lastCropType = secondaryCrop.CropType;
+                    }
+                    else
+                    {
+                        currentPerennialId = Guid.NewGuid();
+                    }
                 }
             }
 

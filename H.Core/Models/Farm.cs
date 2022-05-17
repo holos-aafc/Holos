@@ -611,6 +611,52 @@ namespace H.Core.Models
 
         #region Public Methods
 
+        public List<ManureStateType> GetManureStateTypesInUseOnFarm(AnimalType animalType)
+        {
+            var componentCategory = animalType.GetComponentCategoryFromAnimalType();
+            var components = new List<AnimalComponentBase>();
+
+            if (componentCategory == ComponentCategory.BeefProduction)
+            {
+                components.AddRange(this.BeefCattleComponents.Cast<AnimalComponentBase>());
+            }
+            else if (componentCategory == ComponentCategory.Dairy)
+            {
+                components.AddRange(this.DairyComponents.Cast<AnimalComponentBase>());
+            }
+            else if (componentCategory == ComponentCategory.Swine)
+            {
+                components.AddRange(this.SwineComponents.Cast<AnimalComponentBase>());
+            }
+            else if (componentCategory == ComponentCategory.Sheep)
+            {
+                components.AddRange(this.SheepComponents.Cast<AnimalComponentBase>());
+            }
+            else if (componentCategory == ComponentCategory.Poultry)
+            {
+                components.AddRange(this.PoultryComponents.Cast<AnimalComponentBase>());
+            }
+            else
+            {
+                components.AddRange(this.OtherLivestockComponents.Cast<AnimalComponentBase>());
+            }
+
+            var stateTypes = new List<ManureStateType>();
+            foreach (var animalComponentBase in components)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var manureHandlingSystem = animalGroupManagementPeriod.ManureDetails.StateType;
+                        stateTypes.Add(manureHandlingSystem);
+                    }
+                }
+            }
+
+            return stateTypes.Distinct().ToList();
+        }
+
         /// <summary>
         /// When user add/removes/edits a manure application, the animal results cache needs to be cleared so that we recalculate manure spreading emissions
         /// </summary>

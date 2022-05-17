@@ -28,7 +28,7 @@ namespace H.Core.Services.LandManagement
                 foreach (var cropViewItem in yearGroup)
                 {
                     // Check for undersown status since that will be a  different description string being used
-                    if (cropViewItem.IsSecondaryCrop && cropViewItem.UnderSownCropsUsed == false)
+                    if (cropViewItem.IsSecondaryCrop && cropViewItem.UnderSownCropsUsed == false && cropViewItem.CropType.IsFallow() == false)
                     {
                         cropViewItem.Description = $"{H.Core.Properties.Resources.CoverCropGrowingType}";
                     }

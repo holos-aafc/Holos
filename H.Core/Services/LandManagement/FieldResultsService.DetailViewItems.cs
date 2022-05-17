@@ -415,6 +415,19 @@ namespace H.Core.Services.LandManagement
 
                 secondaryCrop.IsSecondaryCrop = true;
 
+                // If the secondary crop is a perennial and the main crop is a perennial of the same type, do not add an extra view item for the perennial grown in the second slot of the same year.
+                // This is confusing on the details screen because the user will see two entries for the same year (1985 = Tame Legume && 1985 Tame Legume (cover crop))
+                if (secondaryCrop.CropType.IsPerennial())
+                {
+                    // Check if the main crop is the same
+                    var mainCrop = fieldSystemComponent.CropViewItems.SingleOrDefault(x => x.Year == secondaryCrop.Year);
+                    if (mainCrop.CropType == secondaryCrop.CropType)
+                    {
+                        continue;
+                    }
+                }
+
+
                 // Year property will already have been set at the component selection view stage
                 result.Add(secondaryCrop);
             }

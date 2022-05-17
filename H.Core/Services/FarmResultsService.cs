@@ -356,8 +356,7 @@ namespace H.Core.Services
             // Go over each field on the farm and subtract any field application made with the manure
             foreach (var fieldComponent in farm.FieldSystemComponents)
             {
-                var viewItem = fieldComponent.GetSingleYearViewItem();
-                if (viewItem != null)
+                foreach (var viewItem in fieldComponent.CropViewItems)
                 {
                     foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
                     {
@@ -368,7 +367,7 @@ namespace H.Core.Services
                         }
 
                         // Get the correct manure tank based on the animal type of manure that was applied
-                        var tank = farmEmissionResults.GetManureTankByAnimalType(manureApplicationViewItem.AnimalType);
+                        var tank = farmEmissionResults.GetManureTankByAnimalType(manureApplicationViewItem.AnimalType, viewItem.Year);
 
                         // Get the amount of nitrogen applied
                         var amountOfNitrogenAppliedPerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
@@ -409,18 +408,31 @@ namespace H.Core.Services
              * Set the state of the tanks as if there had been no field applications made
              */
 
-            foreach (var componentCategory in animalComponentCategories)
+            var years = new List<int>();
+            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
             {
-                // Get the animal component results for a particular category of animal components
-                var animalComponentResultsByCategory = farmEmissionResults.AnimalComponentEmissionsResults.Where(x => x.Component.ComponentCategory == componentCategory).ToList();
+                foreach (var viewItems in farmFieldSystemComponent.CropViewItems)
+                {
+                    years.Add(viewItems.Year);
+                }
+            }
 
-                // Get the manure tank associated with the animal category
-                var tank = farmEmissionResults.GetManureTankByAnimalType(componentCategory.GetAnimalTypeFromComponentCategory());
+            var distinctYears = years.Distinct();
+            foreach (var distinctYear in distinctYears)
+            {
+                foreach (var componentCategory in animalComponentCategories)
+                {
+                    // Get the animal component results for a particular category of animal components
+                    var animalComponentResultsByCategory = farmEmissionResults.AnimalComponentEmissionsResults.Where(x => x.Component.ComponentCategory == componentCategory).ToList();
 
-                // Set the state of the tank as if no manure applications had been made
-                this.SetStartingStateOfManureTank(
-                    manureTank: tank,
-                    animalComponentResults: animalComponentResultsByCategory);
+                    // Get the manure tank associated with the animal category
+                    var tank = farmEmissionResults.GetManureTankByAnimalType(componentCategory.GetAnimalTypeFromComponentCategory(), distinctYear);
+
+                    // Set the state of the tank as if no manure applications had been made
+                    this.SetStartingStateOfManureTank(
+                        manureTank: tank,
+                        animalComponentResults: animalComponentResultsByCategory);
+                }
             }
         }
 
@@ -437,13 +449,14 @@ namespace H.Core.Services
             var totalTanAvailableForLandApplication = 0.0;
             var totalAmountOfCarbonInStoredManure = 0.0;
             var totalAvailableManureNitrogenInStoredManureAvailableForLandApplication = 0.0;
+            var yearOfTank = manureTank.Year;
 
-            // Don't include manure that is on pasture in the total amounts avaialble
+            // Don't include manure that is on pasture in the total amounts available
             foreach (var componentResults in animalComponentResults)
             {
                 foreach (var allGroupResults in componentResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    foreach (var groupEmissionsByMonth in allGroupResults.GroupEmissionsByMonths.Where(x => x.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType != HousingType.Pasture))
+                    foreach (var groupEmissionsByMonth in allGroupResults.GroupEmissionsByMonths.Where(x => x.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType != HousingType.Pasture && x.MonthsAndDaysData.Year == yearOfTank))
                     {
                         totalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyOrganicNitrogenAvailableForLandApplication;
                         totalTanAvailableForLandApplication += groupEmissionsByMonth.MonthlyTanAvailableForLandApplication;

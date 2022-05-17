@@ -24,6 +24,11 @@ namespace H.Core.Models
 
         #region Properties
 
+        /// <summary>
+        /// When user defines multiple years for a field history, there will need to be a tank for each year of the history
+        /// </summary>
+        public int Year { get; set; }
+
         public AnimalType AnimalType
         {
             get => _animalType;
