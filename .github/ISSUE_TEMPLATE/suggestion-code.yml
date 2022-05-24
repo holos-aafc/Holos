@@ -1,6 +1,5 @@
 name: Code Suggestion
 description: Suggest a change to the Holos source code.
-title: "[Suggestion]:"
 labels: ["suggestion", "code"]
 assignees:
   - hafzaal

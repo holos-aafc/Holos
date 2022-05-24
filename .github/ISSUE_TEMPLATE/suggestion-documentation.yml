@@ -1,6 +1,5 @@
 name: Holos Documentation Suggestion
 description: Suggest a change to the Holos documentation.
-title: "[Suggestion]:"
 labels: ["suggestion", "documentation"]
 assignees:
   - hafzaal
