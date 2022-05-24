@@ -217,7 +217,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-3
+        /// Equation 2.5.2-11
         /// </summary>
         /// <param name="inputsFromSyntheticFertilizer">N inputs from synthetic fertilizer (kg N)</param>
         /// <param name="factor">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
@@ -227,6 +227,21 @@ namespace H.Core.Calculators.Nitrogen
             double factor)
         {
             var result = inputsFromSyntheticFertilizer * factor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 2.5.2-12
+        /// </summary>
+        /// <param name="inputsFromOrganicFertilizer">N inputs from organic fertilizer (kg N)</param>
+        /// <param name="factor">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
+        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from organic fertilizer application</returns>
+        public double CalculateEmissionsFromOrganicFetilizer(
+            double inputsFromOrganicFertilizer,
+            double factor)
+        {
+            var result = inputsFromOrganicFertilizer * factor;
 
             return result;
         }
@@ -540,12 +555,15 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.5.4-1
         /// </summary>
         /// <param name="emissionsFromSyntheticFertilizer">N emissions from cropland due to synthetic fertilizer inputs (kg N2O-N)</param>
-        /// <param name="emissionsFromResidues">N emissions from cropland due to crop resiudes(kg N2O-N)</param>
+        /// <param name="emissionsFromResidues">N emissions from cropland due to crop residues(kg N2O-N)</param>
+        /// <param name="emissionsFromOrganicFertilizer"></param>
         /// <returns>Total direct N emissions from cropland (kg N2O-N year-1)</returns>
-        public double CalculateTotalDirectEmissionsForCrop(double emissionsFromSyntheticFertilizer,
-                                                           double emissionsFromResidues)
+        public double CalculateTotalDirectEmissionsForCrop(
+            double emissionsFromSyntheticFertilizer,
+            double emissionsFromResidues, 
+            double emissionsFromOrganicFertilizer)
         {
-            return emissionsFromSyntheticFertilizer + emissionsFromResidues;
+            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer;
         }
 
         /// <summary>

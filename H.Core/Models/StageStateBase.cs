@@ -6,7 +6,7 @@ using Prism.Mvvm;
 
 namespace H.Core.Models
 {
-    public abstract class StageStateBase : BindableBase
+    public class StageStateBase : BindableBase
     {
         #region Fields
 

@@ -47,10 +47,19 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumAmmoniumNitroSulphate", typeof(Resources))]
         AmmoniumNitroSulphate,
 
-        [LocalizedDescription("EnumCustom", typeof(Resources))]
+        /// <summary>
+        /// Custom synthetic (there is also a custom organic)
+        /// </summary>
+        [LocalizedDescription("EnumCustomSynthetic", typeof(Resources))]
         Custom,
 
         [LocalizedDescription("EnumLime", typeof(Resources))]
         Lime,
+
+        /// <summary>
+        /// Custom organic
+        /// </summary>
+        [LocalizedDescription("EnumCustomOrganic", typeof(Resources))]
+        CustomOrganic,
     }
 }

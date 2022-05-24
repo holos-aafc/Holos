@@ -90,14 +90,14 @@ namespace H.Core.Calculators.Carbon
             var slope = cropData.SlopeValue;
             var intercept = cropData.InterceptValue;            
 
-            // Equation 2.2.2-1
+            // Equation 2.2.3-1
             var harvestRatio = this.CalculateHarvestRatio(
                 slope: slope,
                 freshWeightOfYield: viewItem.Yield,
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            // Equation 2.2.2-2
+            // Equation 2.2.3-2
             var aboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
                 harvestRatio: harvestRatio,
@@ -105,7 +105,7 @@ namespace H.Core.Calculators.Carbon
 
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
-            // Equation 2.2.2-3
+            // Equation 2.2.3-3
             var aboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
                 aboveGroundResidueForCrop: aboveGroundResidueDryMatter,
                 area: viewItem.Area,
@@ -115,7 +115,11 @@ namespace H.Core.Calculators.Carbon
                 combustionFactor: 0);
 
             const double AboveGroundCarbonContent = 0.42;
-            viewItem.AboveGroundCarbonInput = aboveGroundResidue * AboveGroundCarbonContent;
+
+            var totalAboveGroundCarbonInputsForField = aboveGroundResidue * AboveGroundCarbonContent;
+
+            // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
+            viewItem.AboveGroundCarbonInput = totalAboveGroundCarbonInputsForField / viewItem.Area;
 
             var rootToShoot = cropData.RSTRatio;
             
@@ -127,18 +131,19 @@ namespace H.Core.Calculators.Carbon
                 fractionRenewed: fractionRenewed);
 
             const double BelowGroundCarbonContent = 0.42;
-            viewItem.BelowGroundCarbonInput = belowGroundResidue * BelowGroundCarbonContent;
+
+            var totalBelowGroundCarbonInputsForField = belowGroundResidue * BelowGroundCarbonContent;
+
+            // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
+            viewItem.BelowGroundCarbonInput = totalBelowGroundCarbonInputsForField / viewItem.Area;
 
             // TODO: get all manure applications and calculate manure inputs
 
-            // Equation 2.2.2-5
+            // Equation 2.2.3-5
             viewItem.TotalCarbonInputs = this.CalculateTotalCarbonInputs(
-                annualAboveGroundResidue: aboveGroundResidue,
-                annualBelowGroundResidue: belowGroundResidue,
-                annualManureNitrogenApplied: 0,
-                carbonToNitrogenRatio: 0, 
-                aboveGroundCarbonConcentration: AboveGroundCarbonContent, 
-                belowGroundCarbonConcentration: BelowGroundCarbonContent);            
+                aboveGroundInputs: totalAboveGroundCarbonInputsForField,
+                belowGroundInputs: totalBelowGroundCarbonInputsForField,
+                manureInputs: 0);            
         }
 
         public List<CropViewItem> GetNonRunInPeriodItems(
@@ -406,7 +411,7 @@ namespace H.Core.Calculators.Carbon
         #region Equations
 
         /// <summary>
-        /// Equation 2.2.2-1
+        /// Equation 2.2.3-1
         /// </summary>
         /// <param name="slope">(unitless)</param>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
@@ -474,25 +479,21 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-5
+        /// Equation 2.2.3-5
         /// </summary>
-        /// <param name="annualAboveGroundResidue">Annual total amount of above-ground residue (kg year^-1)</param>
-        /// <param name="annualBelowGroundResidue">Annual total amount of below-ground residue (kg year^-1)</param>
-        /// <param name="annualManureNitrogenApplied">Annual amount of manure applied to crop (kg N year^-1)</param>
-        /// <param name="carbonToNitrogenRatio">Carbon to nitrogen ratio of animal manures applied to crop (kg C (kg N)^-1)</param>
-        /// <param name="aboveGroundCarbonConcentration"></param>
-        /// <param name="belowGroundCarbonConcentration"></param>
+        /// <param name="aboveGroundInputs">Annual total amount of above-ground residue (kg year^-1)</param>
+        /// <param name="belowGroundInputs">Annual total amount of below-ground residue (kg year^-1)</param>
+        /// <param name="manureInputs">Annual amount of manure applied to crop (kg N year^-1)</param>
         /// <returns>Total carbon inputs (tonnes C ha^-1)</returns>
         public double CalculateTotalCarbonInputs(
-            double annualAboveGroundResidue,
-            double annualBelowGroundResidue,
-            double annualManureNitrogenApplied,
-            double carbonToNitrogenRatio, 
-            double aboveGroundCarbonConcentration
-            , 
-            double belowGroundCarbonConcentration)
+            double aboveGroundInputs,
+            double belowGroundInputs,
+            double manureInputs)
         {
-            return ((annualAboveGroundResidue * aboveGroundCarbonConcentration) + (annualBelowGroundResidue * belowGroundCarbonConcentration) + (annualManureNitrogenApplied * carbonToNitrogenRatio));
+            // Note that at this point, the above ground residue (as well as below ground residues) has been multiplied by the C content
+            var result = aboveGroundInputs + belowGroundInputs + (manureInputs / 1000);
+
+            return result;
         }
 
         /// <summary>

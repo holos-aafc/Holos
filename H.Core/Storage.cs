@@ -64,20 +64,6 @@ namespace H.Core
             }
         }
 
-        private void SaveInternal(string path)
-        {
-            // Use streams instead of JsonConvert.SerializeObject to prevent OutOfMemoryExceptions
-            using (StreamWriter fileStream = File.CreateText(path))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-
-                // Serializer and deserializer must both have this set to Auto
-                serializer.TypeNameHandling = TypeNameHandling.Auto;
-
-                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
-            }
-        }
-
         public void ClearStorage()
         {
             if (File.Exists(this.GetFullPathToStorageFile()))
@@ -98,43 +84,54 @@ namespace H.Core
             var destination = Path.Combine(userFilePath, StorageFileName);
 
             return destination;
-        }      
+        }
+
+        private void SaveInternal(string path)
+        {
+            // Use streams instead of JsonConvert.SerializeObject to prevent OutOfMemoryExceptions
+            using (StreamWriter fileStream = File.CreateText(path))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+
+                // Serializer and deserializer must both have this set to Auto
+                serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
+            }
+        }
 
         public void Load()
         {
-            var jsonData = string.Empty;
-            var success = true;
-
             try
             {
-                jsonData = File.ReadAllText(this.GetFullPathToStorageFile());
-            }
-            catch (FileNotFoundException e)
-            {
-                success = false;
-
-                Trace.TraceInformation("No storage file found. Building new storage object.");
-            }
-
-            if (success)
-            {
-                try
-                {                   
-                    this.ApplicationData = JsonConvert.DeserializeObject<ApplicationData>(jsonData, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-                }
-                catch (Exception e)
+                // Use streams instead of File.ReadAllText() to prevent OutOfMemoryExceptions when reading large files
+                using (StreamReader r = new StreamReader(this.GetFullPathToStorageFile()))
                 {
-                    // Write exception to file here
-                    this.WriteExceptionToFile(e);
+                    using (JsonReader reader = new JsonTextReader(r))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
 
-                    // Save the farm that can't be deserialized correctly to a crash file
-                    this.WriteCrashFile();
-                    File.Delete(this.GetFullPathToStorageFile());
-                    this.ApplicationData = new ApplicationData();
+                        // Serializer and deserializer must both have this set to Auto
+                        serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                        this.ApplicationData = serializer.Deserialize<ApplicationData>(reader);
+                    }
                 }
             }
-            else
+            catch (FileNotFoundException)
             {
+                Trace.TraceInformation("No storage file found. Building new storage object.");
+
+                this.ApplicationData = new ApplicationData();
+            }
+            catch (Exception e)
+            {
+                // Write exception to file here
+                this.WriteExceptionToFile(e);
+
+                // Save the farm that can't be deserialized correctly to a crash file
+                this.WriteCrashFile();
+                File.Delete(this.GetFullPathToStorageFile());
                 this.ApplicationData = new ApplicationData();
             }
         }

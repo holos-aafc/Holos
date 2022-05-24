@@ -148,6 +148,12 @@ namespace H.Core.Services.LandManagement
                 viewItem: viewItem, 
                 fertilizerApplicationViewItem: fertilizerApplicationViewItem);
 
+            // If blend is custom, default N value will be zero and so we can't calculate the amount of product required
+            if (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen == 0)
+            {
+                return 0;
+            }
+
             // Need to convert to amount of fertilizer product from required nitrogen
             var requiredAmountOfProduct = (requiredNitrogen / fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen) * 100;
 
@@ -379,6 +385,10 @@ namespace H.Core.Services.LandManagement
             var syntheticNitrogenModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
                 nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
+            var organicNitrogenModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.OrganicNitrogen,
+                cropViewItem: viewItem);
+
             var cropResidueModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
                 nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
@@ -388,6 +398,12 @@ namespace H.Core.Services.LandManagement
                 croppingSystemModifier: croppingSystemModifier,
                 tillageModifier: tillageModifier,
                 nitrogenSourceModifier: syntheticNitrogenModifier);
+
+            var emissionFactorForOrganicFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
+                baseEcodistictEmissionFactor: baseEcodistrictFactor,
+                croppingSystemModifier: croppingSystemModifier,
+                tillageModifier: tillageModifier,
+                nitrogenSourceModifier: organicNitrogenModifier);
 
             // Equation 2.5.1-8
             var emissionFactorForCropResidues = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
@@ -401,12 +417,21 @@ namespace H.Core.Services.LandManagement
                     fertilizerApplied: viewItem.NitrogenFertilizerRate,
                     area: viewItem.Area);
 
-            // Equation 2.5.2-3
             var emissionsFromSyntheticFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionsFromSyntheticFetilizer(
                 inputsFromSyntheticFertilizer: inputsFromSyntheticFertilizer,
                 factor: emissionFactorForSyntheticFertilizer);
 
             result.EmissionsFromSyntheticFertilizer = emissionsFromSyntheticFertilizer;
+
+            var totalOrganicNitrogenInputs = 0d;
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.CustomOrganic))
+            {
+                totalOrganicNitrogenInputs += fertilizerApplicationViewItem.AmountOfNitrogenApplied;
+            }
+
+            var emissionsFromOrganicFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionsFromOrganicFetilizer(
+                inputsFromOrganicFertilizer: totalOrganicNitrogenInputs,
+                factor: emissionFactorForOrganicFertilizer);
 
             // Equation 2.6.6-2
             var aboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(
@@ -464,7 +489,8 @@ namespace H.Core.Services.LandManagement
             // Equation 2.5.4-1
             var directEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalDirectEmissionsForCrop(
                 emissionsFromSyntheticFertilizer: emissionsFromSyntheticFertilizer,
-                emissionsFromResidues: emissionsFromResidues);
+                emissionsFromResidues: emissionsFromResidues, 
+                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer);
 
             // Equation 2.5.4-4
             var indirectEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalIndirectNitrogenEmissions(

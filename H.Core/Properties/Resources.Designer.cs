@@ -61,6 +61,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CP.
+        /// </summary>
+        public static string AbbrevCrudeProtein {
+            get {
+                return ResourceManager.GetString("AbbrevCrudeProtein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EE.
+        /// </summary>
+        public static string AbbrevEtherExtract {
+            get {
+                return ResourceManager.GetString("AbbrevEtherExtract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ac.
         /// </summary>
         public static string Acres {
@@ -1893,6 +1911,24 @@ namespace H.Core.Properties {
         public static string EnumCustom {
             get {
                 return ResourceManager.GetString("EnumCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom (Organic).
+        /// </summary>
+        public static string EnumCustomOrganic {
+            get {
+                return ResourceManager.GetString("EnumCustomOrganic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom (Synthetic).
+        /// </summary>
+        public static string EnumCustomSynthetic {
+            get {
+                return ResourceManager.GetString("EnumCustomSynthetic", resourceCulture);
             }
         }
         
@@ -8080,6 +8116,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CB2ID.
+        /// </summary>
+        public static string LabelCB2ID {
+            get {
+                return ResourceManager.GetString("LabelCB2ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change in soil carbon (delta_C_t).
         /// </summary>
         public static string LabelChangeInSoilCarbon {
@@ -8211,6 +8256,15 @@ namespace H.Core.Properties {
         public static string LabelCropResiduesBeforeAdjustment {
             get {
                 return ResourceManager.GetString("LabelCropResiduesBeforeAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crude Fiber.
+        /// </summary>
+        public static string LabelCrudeFiber {
+            get {
+                return ResourceManager.GetString("LabelCrudeFiber", resourceCulture);
             }
         }
         
@@ -8953,7 +9007,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to liodineValue Product.
+        ///   Looks up a localized string similar to liodine Value Product.
         /// </summary>
         public static string LabelIodineValueProduct {
             get {
@@ -9012,6 +9066,24 @@ namespace H.Core.Properties {
         public static string LabelKDCB2 {
             get {
                 return ResourceManager.GetString("LabelKDCB2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Degradation rate of slowly degradable fiber.
+        /// </summary>
+        public static string LabelKdCB3 {
+            get {
+                return ResourceManager.GetString("LabelKdCB3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Degradation rate of degradable protein.
+        /// </summary>
+        public static string LabelKdPB {
+            get {
+                return ResourceManager.GetString("LabelKdPB", resourceCulture);
             }
         }
         
@@ -10146,6 +10218,15 @@ namespace H.Core.Properties {
         public static string LabelSucklingPiglets {
             get {
                 return ResourceManager.GetString("LabelSucklingPiglets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sugars.
+        /// </summary>
+        public static string LabelSugars {
+            get {
+                return ResourceManager.GetString("LabelSugars", resourceCulture);
             }
         }
         
@@ -13075,6 +13156,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TDN.
+        /// </summary>
+        public static string TDN {
+            get {
+                return ResourceManager.GetString("TDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temperature.
         /// </summary>
         public static string Temperature {
@@ -14791,6 +14881,96 @@ namespace H.Core.Properties {
         public static string Vertisol {
             get {
                 return ResourceManager.GetString("Vertisol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cyanocobalamin.
+        /// </summary>
+        public static string VitB12Info {
+            get {
+                return ResourceManager.GetString("VitB12Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thianin.
+        /// </summary>
+        public static string VitB1Info {
+            get {
+                return ResourceManager.GetString("VitB1Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rivoflavin.
+        /// </summary>
+        public static string VitB2Info {
+            get {
+                return ResourceManager.GetString("VitB2Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niacin.
+        /// </summary>
+        public static string VitB3Info {
+            get {
+                return ResourceManager.GetString("VitB3Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panthothenic acid.
+        /// </summary>
+        public static string VitB5Info {
+            get {
+                return ResourceManager.GetString("VitB5Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pyridoxine.
+        /// </summary>
+        public static string VitB6Info {
+            get {
+                return ResourceManager.GetString("VitB6Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biotin.
+        /// </summary>
+        public static string VitB7Info {
+            get {
+                return ResourceManager.GetString("VitB7Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folacin.
+        /// </summary>
+        public static string VitB9Info {
+            get {
+                return ResourceManager.GetString("VitB9Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cholecalciferol.
+        /// </summary>
+        public static string VitDInfo {
+            get {
+                return ResourceManager.GetString("VitDInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alfa-Tocopherol.
+        /// </summary>
+        public static string VitEInfo {
+            get {
+                return ResourceManager.GetString("VitEInfo", resourceCulture);
             }
         }
         

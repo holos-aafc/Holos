@@ -83,7 +83,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // Upstream emissions
-            results.UpstreamEnergyFromNitrogenFertilizer = this.CalculateUpstreamEnergyEmissionsFromNitrogenFertilizer(viewItem);
+            results.UpstreamEnergyFromNitrogenFertilizer = this.CalculateUpstreamEnergyEmissionsFromSyntheticNitrogenFertilizer(viewItem);
 
             // Application (on-farm) emissions
             results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(viewItem);
@@ -156,11 +156,12 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from N fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateUpstreamEnergyEmissionsFromNitrogenFertilizer(CropViewItem viewItem)
+        public double CalculateUpstreamEnergyEmissionsFromSyntheticNitrogenFertilizer(CropViewItem viewItem)
         {
             var upstreamEmissions = 0.0;
 
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
+            // There are no upstream emissions associated with organic fertilizer applications
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic))
             {
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
                 var area = viewItem.Area;

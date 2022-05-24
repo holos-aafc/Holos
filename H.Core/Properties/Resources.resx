@@ -4314,7 +4314,7 @@
     <value>liodine Value</value>
   </data>
   <data name="LabelIodineValueProduct" xml:space="preserve">
-    <value>liodineValue Product</value>
+    <value>liodine Value Product</value>
   </data>
   <data name="LabelKDCB1" xml:space="preserve">
     <value>Digestion rate of Starch</value>
@@ -5077,5 +5077,65 @@
   </data>
   <data name="ToolTipShelterbeltComponent" xml:space="preserve">
     <value>Shelterbelts are linear plantings of trees and/or shrubs that form part of an agriculture production system. A Shelterbelt component consists of rows of trees where each row contains various tree types such as Caragana, Green Ash, Hybrid Polar etc.</value>
+  </data>
+  <data name="LabelCB2ID" xml:space="preserve">
+    <value>CB2ID</value>
+  </data>
+  <data name="LabelKdCB3" xml:space="preserve">
+    <value>Degradation rate of slowly degradable fiber</value>
+  </data>
+  <data name="LabelKdPB" xml:space="preserve">
+    <value>Degradation rate of degradable protein</value>
+  </data>
+  <data name="LabelSugars" xml:space="preserve">
+    <value>Sugars</value>
+  </data>
+  <data name="AbbrevCrudeProtein" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="TDN" xml:space="preserve">
+    <value>TDN</value>
+  </data>
+  <data name="AbbrevEtherExtract" xml:space="preserve">
+    <value>EE</value>
+  </data>
+  <data name="LabelCrudeFiber" xml:space="preserve">
+    <value>Crude Fiber</value>
+  </data>
+  <data name="VitB12Info" xml:space="preserve">
+    <value>Cyanocobalamin</value>
+  </data>
+  <data name="VitB1Info" xml:space="preserve">
+    <value>Thianin</value>
+  </data>
+  <data name="VitB2Info" xml:space="preserve">
+    <value>Rivoflavin</value>
+  </data>
+  <data name="VitB3Info" xml:space="preserve">
+    <value>Niacin</value>
+  </data>
+  <data name="VitB5Info" xml:space="preserve">
+    <value>Panthothenic acid</value>
+  </data>
+  <data name="VitB6Info" xml:space="preserve">
+    <value>Pyridoxine</value>
+  </data>
+  <data name="VitB7Info" xml:space="preserve">
+    <value>Biotin</value>
+  </data>
+  <data name="VitB9Info" xml:space="preserve">
+    <value>Folacin</value>
+  </data>
+  <data name="VitDInfo" xml:space="preserve">
+    <value>Cholecalciferol</value>
+  </data>
+  <data name="VitEInfo" xml:space="preserve">
+    <value>Alfa-Tocopherol</value>
+  </data>
+  <data name="EnumCustomOrganic" xml:space="preserve">
+    <value>Custom (Organic)</value>
+  </data>
+  <data name="EnumCustomSynthetic" xml:space="preserve">
+    <value>Custom (Synthetic)</value>
   </data>
 </root>
