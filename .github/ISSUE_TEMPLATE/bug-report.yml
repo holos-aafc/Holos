@@ -1,0 +1,64 @@
+name: Bug/Issue Report
+description: File a bug or report an issue with Holos.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more information?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected Behaviour
+      description: What did you expect to happen when you encountered this issue?
+    validations:
+      required: false
+  - type: textarea
+    id: actual-behaviour
+    attributes:
+      label: Actual Behaviour
+      description: What actually happened in the program?
+    validations:
+      required: false
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Describe the Issue & Steps to Reproduce
+      description: Please include detailed information regarding the issue including the steps we can take to reproduce the issue in Holos. You can also export and attach your farm file here. To learn how to export your farm [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exportingimporting-farm-configuration-files).
+      placeholder: |
+        1.
+        2.
+        3.
+        
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: exception-information
+    attributes:
+      label: Error Message
+      description: If you got an error message while using Holos, paste the information from the clipboard here. To learn how to copy the error message to your clipboard, [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#holos-error-messages).
+  - type: input
+    id: version
+    attributes:
+      label: Holos Version Number
+      description: What version of our software are you running? This can be located when you first start Holos.
+      placeholder: 4.0.0.336
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/holos-aafc/Holos/blob/main/CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow Holos' Code of Conduct.
+          required: true

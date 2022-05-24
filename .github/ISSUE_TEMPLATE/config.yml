@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Reporting Security Issues
+    url: https://github.com/holos-aafc/Holos/blob/main/SECURITY.md
+    about: How to report security vulnerabilities (github.com/holos-aafc/Holos/blob/main/SECURITY.md)
+  - name: Contributing to the Project
+    url: https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md
+    about: Details on how to contribute to the project (github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md)
+  - name: Holos User Guide & FAQ
+    url: https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md
+    about: The user guide showcases the different functionalities in Holos and contains some frequently asked troubleshooting questions. 
