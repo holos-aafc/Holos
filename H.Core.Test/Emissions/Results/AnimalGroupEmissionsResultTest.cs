@@ -3,6 +3,7 @@ using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using H.Core.Models.Animals;
 
 namespace H.Core.Test.Emissions.Results
 {
@@ -22,12 +23,13 @@ namespace H.Core.Test.Emissions.Results
                         {
                             DryMatterIntake = 10,
                             DryMatterIntakeMax = 20,
+                            DateTime = DateTime.Now,
                         }
                     })
                 }
             };
 
-            var result = animalGroupEmissionResults.IsDmiOverDmiMaxForPeriod();
+            var result = animalGroupEmissionResults.IsDmiOverDmiMaxForPeriod(new ManagementPeriod() {Start = DateTime.Now.Subtract(TimeSpan.FromDays(30)), End = DateTime.Now.Subtract(TimeSpan.FromDays(20))});
 
             Assert.IsFalse(result);
         }
@@ -45,12 +47,13 @@ namespace H.Core.Test.Emissions.Results
                         {
                             DryMatterIntake = 60,
                             DryMatterIntakeMax = 20,
+                            DateTime = DateTime.Now,
                         }
                     })
                 }
             };
 
-            var result = animalGroupEmissionResults.IsDmiOverDmiMaxForPeriod();
+            var result = animalGroupEmissionResults.IsDmiOverDmiMaxForPeriod(new ManagementPeriod() { Start = DateTime.Now.Subtract(TimeSpan.FromDays(30)), End = DateTime.Now.Add(TimeSpan.FromDays(20)) });
 
             Assert.IsTrue(result);
         }

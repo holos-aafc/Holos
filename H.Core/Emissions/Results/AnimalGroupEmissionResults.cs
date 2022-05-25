@@ -189,20 +189,22 @@ namespace H.Core.Emissions.Results
 
         /// <summary>
         /// Determines if the animals are being fed a poor quality diet by checking each <see cref="GroupEmissionsByDay"/> to see if the DMI > DMI_max.
+        ///
+        /// DMI over check needs to consider JUST the dates that the animals have the specific diet
         /// </summary>
-        public bool IsDmiOverDmiMaxForPeriod()
+        /// <param name="bindingManagementPeriod"></param>
+        public bool IsDmiOverDmiMaxForPeriod(ManagementPeriod bindingManagementPeriod)
         {
-            var result = false;
-
             foreach (var groupEmissionsByMonth in this.GroupEmissionsByMonths)
             {
-                if (groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax().Any())
+                var dates = groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax().Where(x => x >= bindingManagementPeriod.Start && x <= bindingManagementPeriod.End);
+                if (dates.Any())
                 {
                     return true;
                 }
             }
 
-            return result;
+            return false;
         }
 
         /// <summary>
