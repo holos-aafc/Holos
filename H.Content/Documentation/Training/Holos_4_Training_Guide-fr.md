@@ -455,7 +455,7 @@ Holos a la capacité d’ajouter des épandages de fumier à partir de fumier pr
 
 1. Sélectionnez le champ « **Blé et vesce velue** » dans la liste des composantes ajoutées à notre ferme.
 
-2. Cliquez sur l’onglet « **Fumier** », puis sur le bouton « **Ajouter un épandage de fumier** ». Sélectionnez « **Bovins de boucherie** » comme « **Type de fumier** », sélectionnez « **Bétail** » comme « **Origine du fumier** », « **Entreposage solide** » comme « **Système de manutention du fumier** », et inscrivez **1 000 kg/ha** comme quantité de fumier épandue sur ce champ.
+2. Cliquez sur l’onglet « **Fumier** », puis sur le bouton « **Ajouter un épandage de fumier** ». Sélectionnez « **Bovins de boucherie** » comme « **Type de fumier** », sélectionnez « **Bétail** » comme « **Origine du fumier** », « **Litière profonde** » comme « **Système de manutention du fumier** », et inscrivez **200 kg/ha** comme quantité de fumier épandue sur ce champ.
 
 3. Il est à noter que les engrais chimiques et le fumier peuvent être épandus sur le même champ.
 
@@ -657,6 +657,3 @@ Pour télécharger Holos, obtenir de plus amples renseignements ou accéder à u
 www.agr.gc.ca
 
 Pour nous joindre, envoyez un courriel à : Holos@agr.gc.ca
-
-<div style="page-break-after: always"></div>
-.

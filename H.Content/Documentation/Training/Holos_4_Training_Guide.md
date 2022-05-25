@@ -2,8 +2,6 @@
  <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
     <br>
 </p>
-
-
 The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. optional inputs.
 
 For the purpose of this training, we are going to create a farm that has an annual beef production system, and a feed crop production system. The farm is located in Manitoba near Portage La Prairie. 
@@ -550,8 +548,8 @@ Holos has the ability to add manure applications from manure that is sourced fro
 2. Click on the **Manure tab** and then click the **Add Manure Application** button. 
     * Select **Beef cattle** as the **Manure type**.
     * Select **Livestock** as the **Origin of manure**.
-    * Select **Solid storage** as the **Manure handling system**.
-    * Enter **1,000 kg/ha** as the amount of manure applied to this field.
+    * Select **Deep Bedding** as the **Manure handling system**.
+    * Enter **200 kg/ha** as the amount of manure applied to this field.
 3. Note that both chemical fertilizers and manure applications can be made on the same field
 
 <br>
@@ -569,7 +567,8 @@ We can also add additional hay/forage for animals that are grazing on a particul
     - Change the **Number of bales** to 1
     - Enter **500** as the wet bale weight.
     - Keep the moisture content as the default value.
-
+  
+  *Note: It is not recommended to mix different species of grasses together. Here, we are only demonstrating the ability of Holos to add supplemental hay to a field that has grazing animals*
 
 <br>
 <p align="center">
@@ -772,6 +771,3 @@ To download Holos, for more information, or to access a recent list of Holos rel
 
 To contact us, email:
 aafc.holos.acc@canada.ca
-
-<div style="page-break-after: always"></div>
-.
