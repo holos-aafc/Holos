@@ -3558,7 +3558,7 @@
     <value>Animal feed quality details can be adjusted here. Holos provides a set of default (predefined) diets that can be selected.</value>
   </data>
   <data name="MessageAnExceptionHasOccurred" xml:space="preserve">
-    <value>An unexpected error occurred in the application. Data has been saved. To help troubleshoot this error send a new email to aafc.holos.aac@canada.ca with information about the error. Before sending the email, click the ‘Copy to Clipboard’ button. This will copy relevant information about the error to your computer’s clipboard. You can then paste this information in the new email you send to the above address. Including this information with your email can help us troubleshoot and resolve this error.</value>
+    <value>An unexpected error occurred in the application. Data has been saved. To help troubleshoot this error, create a new issue in Holo's official github repository https://github.com/holos-aafc/Holos/issues . Before create a new issue, click the ‘Copy to Clipboard’ button. This will copy relevant information about the error to your computer’s clipboard. You can then paste this information in the "Error Message" field of the Bug/Issue report. Including this information in your issue report can help us troubleshoot and resolve this error.</value>
   </data>
   <data name="LabelUndersown" xml:space="preserve">
     <value>Undersown</value>

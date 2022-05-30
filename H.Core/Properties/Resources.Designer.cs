@@ -11113,7 +11113,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An unexpected error occurred in the application. Data has been saved. To help troubleshoot this error send a new email to aafc.holos.aac@canada.ca with information about the error. Before sending the email, click the ‘Copy to Clipboard’ button. This will copy relevant information about the error to your computer’s clipboard. You can then paste this information in the new email you send to the above address. Including this information with your email can help us troubleshoot and resolve this error..
+        ///   Looks up a localized string similar to An unexpected error occurred in the application. Data has been saved. To help troubleshoot this error, create a new issue in Holo&apos;s official github repository https://github.com/holos-aafc/Holos/issues . Before create a new issue, click the ‘Copy to Clipboard’ button. This will copy relevant information about the error to your computer’s clipboard. You can then paste this information in the &quot;Error Message&quot; field of the Bug/Issue report. Including this information in your issue report can help us troubleshoo [rest of string was truncated]&quot;;.
         /// </summary>
         public static string MessageAnExceptionHasOccurred {
             get {
