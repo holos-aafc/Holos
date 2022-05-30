@@ -32,6 +32,9 @@ namespace H.Core.Providers.Climate
 
         private EvapotranspirationCalculator _evapotranspirationCalculator = new EvapotranspirationCalculator();
 
+        // Timeout is in seconds. 60s = 1 minute.
+        private const int Timeout = 60;
+
         #endregion
 
         public NasaClimateProvider()
@@ -51,7 +54,6 @@ namespace H.Core.Providers.Climate
         public List<DailyClimateData> GetCustomClimateData(double latitude, double longitude)
         {
             var url = GetCorrectApiUrl(latitude, longitude);
-            var webClient = new WebClient();
             var content = this.GetCachedData(latitude, longitude);
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -59,12 +61,21 @@ namespace H.Core.Providers.Climate
 
                 try
                 {
-                    content = webClient.DownloadString(url);
+                    // Run a task that forces the NASA API to timeout if the timeout property isn't able to gracefully time out the API call. If the API
+                    // does not respond within this time (slow internet connection or API issues), we
+                    // switch over to SLC data.
+                    var getNasaApi = Task.Run(() => GetNasaApiString(url));
+                    if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
+                        content = getNasaApi.Result;
+                    else
+                        throw new Exception("NASA API couldn't be reached.");
+
                 }
                 catch (Exception e)
                 {
-                    Trace.TraceInformation($"{e.Message}");
+                    Trace.TraceInformation($"NASA API: {e.Message}");
 
+                    
                     return new List<DailyClimateData>();
                 }
 
@@ -221,6 +232,19 @@ namespace H.Core.Providers.Climate
             var path = this.GetCachedPath(latitude, longitude);
 
             File.WriteAllText(path, content); // Overwrite any existing file for now
+        }
+
+        /// <summary>
+        /// Makes a call to the WebClient class to download the API url string. Used to setup a task that runs on a timer to initiate a timeout if the NASA API doesn't respond.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private string GetNasaApiString(string url)
+        {
+            var webClient = new WebClient();
+            string content = webClient.DownloadString(url);
+
+            return content;
         }
 
         #endregion
