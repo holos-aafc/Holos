@@ -1132,6 +1132,58 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 <br>
 <br>
 
+### Crop Rotation Component
+
+A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. If a farm contains multiple field components that are added to represent the rotation of crops on a field over the years, a crop rotation component can represent the same information through a single entry. This allows for easier and more manageable representation of fields and crops on the farm.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
+    <br>
+    <em>
+		Figure 6.58 - Crop Rotation Component
+	</em>
+</p>
+<br>
+
+
+The crop rotation component allows to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
+    <br>
+    <em>
+		Figure 6.59 – Crop Rotation - Setting up the crops
+		<br>
+		A: The year and crop information.
+		<br>
+		B: Arrow buttons allow adjustment of the crops in the rotation.
+		<br>
+		C: The current rotation for each field.
+	</em>
+</p>
+<br>
+
+Most of the remaining settings in the crop rotation component are similar to the [field component mentioned earlier](#field-component).
+
+An additional settings tab is present in the crop rotation component that is missing from the field component, i.e., 'Winter & Cover Crops'. This tab provides options to manage and change settings related to the cover crop for each field.
+
+Adding a winter/cover/undersown crop to any specific crop will enable this tab for that particular crop.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
+    <br>
+    <em>
+		Figure 6.60 - Winter & Cover Crops settings
+	</em>
+</p>
+<br>
+<br>
+
+
 ## Animal Components
 
 -	The animal components are separated into the following component categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
@@ -1222,6 +1274,40 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 -	To see additional information for each section, click “Yes” beside the “Show Additional Information” header.
 
 <br>
+<br>
+
+
+### Beef Production
+
+The beef production category contains the following animal components: 
+
+<br>
+
+#### Beef Cow-Calf
+
+The Beef Cow-Calf component contains the following groups:
+
+* Bulls
+* Replacement heifers
+* Cows
+* Calves
+
+Holos allows the user to add additional groups and create copies of a group if required. A group can be added/copied by clicking the "**Add Group**" button in Step 1.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
+    <br>
+    <em>
+		Figure 6.18 - Beef Cow-Calf Component
+	</em>
+</p>
+<br>
+
+
+
+Each animal group has the following sections that can be further edited and configured. 
 
 ##### General
 
@@ -1231,10 +1317,10 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
-		Figure 6.18 - Management Periods General Tab
+		Figure 6.19 - Management Periods General Tab
 		<br>
 		A: The 'Show Additional Information' toggle allows you to see additional information in a tab.
 		<br>
@@ -1252,10 +1338,10 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
     <br>
     <em>
-		Figure 6.19 - Management Periods - Diet Tab.
+		Figure 6.20 - Management Periods - Diet Tab.
 	</em>
 </p>
 <br>
@@ -1267,10 +1353,10 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
     <br>
     <em>
-		Figure 6.20 - Management Periods - Housing Tab.
+		Figure 6.21 - Management Periods - Housing Tab.
 	</em>
 </p>
 
@@ -1286,67 +1372,692 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
     <br>
     <em>
-		Figure 6.21 - Management Periods - Manure Tab.
+		Figure 6.22 - Management Periods - Manure Tab.
 	</em>
 </p>
 <br>
-
-### Beef Production
-
-The beef production category contains the following animal components: 
-
-- Beef Cow-Calf
-- Beef Stockers & Backgrounders
-- Beef Finishers
 <br>
+
+
+
+#### Beef Stockers & Backgrounders
+
+The Beef Stockers and Backgrounders component has the following animal groups:
+
+- Heifers
+- Steers
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
+    <br>
+    <em>
+		Figure 6.23 - Beef Stockers and Backgrounders component.
+	</em>
+</p>
+<br>
+<br>
+
+#### Beef Finishers
+
+The Beef Finisher component has the following animal groups:
+
+- Heifers
+- Steers
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
+    <br>
+    <em>
+		Figure 6.24 - Beef Finisher component.
+	</em>
+</p>
+<br>
+<br>
+
 
 ### Dairy
 
-The dairy category contains the following animal component:
-- Dairy Cattle
+The Dairy category contains the following components:
+
+#### Dairy cattle
+
+The Dairy cattle component has the following animal groups:
+
+- Dairy heifers
+- Dairy dry
+- Dairy calves
+- Dairy lactating
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general) which allows further information to be entered regarding each group.
+
 
 <br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
+    <br>
+    <em>
+		Figure 6.25 - Dairy cattle component.
+	</em>
+</p>
+<br>
+<br>
+
 
 ### Swine
 
 The swine category contains the following animal components:
-- Grower-to-Finish
-- Farrow-to-Wean
-- Iso-Wean
-- Farrow-to-Finish
+
+
+#### Grower-to-Finish
+
+The Grower-to-Finish component has the following animal groups:
+
+- Hogs
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
+    <br>
+    <em>
+		Figure 6.26 - Grower-to-Finish component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
+
+<br>
+
+##### General - Swine Component
+
+The general tab allows editing the following information:
+
+- The **production stage** of the animal group.
+- The **number of animals** on the farm.
+- The **daily weight gain** of the animals in the selected animal group.
+- The **start and end weight** of the animals in the selected animal group.
+- Additional general information regarding the animal group (after selecting "S
+- how Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
+    <br>
+    <em>
+		Figure 6.27 - Swine component - General tab.
+	</em>
+</p>
+<br>
+
+##### Diet - Swine Component
+
+The diet tab allows editing the following information:
+
+- The **type of diet** of the animal group.
+- The **custom diet creator** to create a custom diet for the selected animal group.
+- Additional diet information regarding the animal group (after selecting "Show Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
+    <br>
+    <em>
+		Figure 6.28 - Swine component - Diet tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Swine Component
+
+The manure tab allows editing the following information:
+
+- The **manure handling system** for the animal group.
+- Additional manure information regarding the animal group (after selecting "Show Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
+    <br>
+    <em>
+		Figure 6.29 - Swine component - Diet tab.
+	</em>
+</p>
+<br>
+
+
+#### Farrow-to-Wean
+
+The Farrow-to-Wean component has the following animal groups:
+
+- Gilts
+- Soars
+- Boars
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
+    <br>
+    <em>
+		Figure 6.30 - Farrow-to-Wean component.
+	</em>
+</p>
+<br>
+
+
+#### Iso-Wean
+
+The Iso-Wean component has the following animal groups:
+
+- Piglets
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
+    <br>
+    <em>
+		Figure 6.31 - Iso-Wean component.
+	</em>
+</p>
+<br>
+
+#### Farrow-to-Finish
+
+The Farrow-to-Finish component has the following animal groups:
+
+- Gilts
+- Sows
+- Boars
+- Piglets
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
+    <br>
+    <em>
+		Figure 6.32 - Farrow-to-Finish component.
+	</em>
+</p>
+<br>
+
 <br>
 
 ### Poultry
-The poultry category contains the following animal components:  
-- Pullet Farm
-- Chicken Multiplier Breeder
-- Chicken Meat Production
-- Turkey Multiplier Breeder
-- Turkey Meat Production
-- Chicken Egg Production
-- Chicken Multiplier Hatchery
+The poultry category contains the following animal components:
+<br>
+
+#### Pullet Farm
+
+The Pullet Farm component has the following animal groups:
+
+- Pullets
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
+    <br>
+    <em>
+		Figure 6.34 - Pullet Farm component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
+
+
+##### General - Poultry Component
+
+The general tab allows editing the following information:
+
+- The **number of animals** on the farm.
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
+    <br>
+    <em>
+		Figure 6.35 - Poultry component - General tab.
+	</em>
+</p>
+<br>
+
+
+##### Housing - Poultry Component
+
+The housing tab allows editing the following information:
+
+- The **housing type** for the animals in the selected animal group.
+- Additional housing information regarding the animal group (after selecting "Show Additional Information").
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
+    <br>
+    <em>
+		Figure 6.36 - Poultry component - Housing tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Poultry Component
+
+The manure tab allows editing the following information:
+
+- The **manure handling system** for the animals in the selected animal group.
+- Additional manure information regarding the animal group (after selecting "Show Additional Information").
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
+    <br>
+    <em>
+		Figure 6.37 - Poultry component - Manure tab.
+	</em>
+</p>
+<br>
+
+
+<br>
+
+#### Chicken Multiplier Breeder
+
+The Chicken Multiplier Breeder component has the following animal groups:
+
+- Pullets
+- Cockerels
+- Roosters
+- Hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
+    <br>
+    <em>
+		Figure 6.38 - Chicken Multiplier Breeder component.
+	</em>
+</p>
+<br>
+
+<br>
+
+#### Chicken Meat Production
+
+The Chicken Meat Production component has the following animal groups:
+
+- Pullets
+- Cockerels
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+    <br>
+    <em>
+		Figure 6.39 - Chicken Meat Production component.
+	</em>
+</p>
+<br>
+
+#### Turkey Multiplier Breeder
+
+The Turkey Multiplier Breeder component has the following animal groups:
+
+- Young toms
+- Toms
+- Young turkey hens
+- Turkey hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+    <br>
+    <em>
+		Figure 6.39 - Turkey Multiplier Breeder.
+	</em>
+</p>
+<br>
+
+#### Turkey Meat Production
+
+The Turkey Meat Production component has the following animal groups:
+
+- Young toms
+- Young turkey hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
+    <br>
+    <em>
+		Figure 6.40 - Turkey Meat Production component.
+	</em>
+</p>
+<br>
+
+#### Chicken Egg Production
+
+The Chicken Egg Production component has the following animal groups:
+
+- Hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
+    <br>
+    <em>
+		Figure 6.41 - Chicken Egg Production component.
+	</em>
+</p>
+<br>
+
+#### Chicken Multiplier Hatchery
+
+The Chicken Multiplier Hatchery component has the following animal groups:
+
+- Chicken eggs
+- Chicks
+- Turkey eggs
+- Poults
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
+    <br>
+    <em>
+		Figure 6.42 - Chicken Multiplier Hatchery component.
+	</em>
+</p>
+<br>
+
 <br>
 
 ### Sheep
 
-The sheep category contains the following animal components: 
--	Sheep Feedlot
--	Rams
--	Lambs & Ewes
+The sheep category contains the following animal components:
+<br>
+
+#### Sheep Feedlot
+
+The Sheep Feedlot component has the following animal groups:
+
+- Sheep feedlot
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
+    <br>
+    <em>
+		Figure 6.43 - Sheep Feedlot component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
+
+
+##### General - Sheep Component
+
+The general tab in this category allows changing the following information regarding each animal group:
+
+- Number of animals
+- Daily gain
+- Start and end weight
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
+    <br>
+    <em>
+		Figure 6.44 - Sheep Category - General tab.
+	</em>
+</p>
+<br>
+
+##### Diet - Sheep Component
+
+The diet tab in this category allows changing the following information regarding each animal group:
+
+- Diet type
+- Open the custom diet creator.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
+    <br>
+    <em>
+		Figure 6.45 - Sheep Category - Diet tab.
+	</em>
+</p>
+<br>
+
+##### Housing - Sheep Component
+
+The housing tab in this category allows changing the following information regarding each animal group:
+
+- Housing type
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
+    <br>
+    <em>
+		Figure 6.46 - Sheep Category - Housing tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Sheep Component
+
+The manure tab in this category allows changing the following information regarding each animal group:
+
+- Manure handling system
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
+    <br>
+    <em>
+		Figure 6.47 - Sheep Category - manure tab.
+	</em>
+</p>
+<br>
+
+
+####	Rams
+
+The Rams component has the following animal groups:
+
+- Rams
+
+This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
+    <br>
+    <em>
+		Figure 6.48 - Rams Hatchery component.
+	</em>
+</p>
+<br>
+
+####	Lambs & Ewes
+
+The Lambs & Ewes component has the following animal groups:
+
+- Lambs
+- Ewes
+
+This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
+    <br>
+    <em>
+		Figure 6.49 - Lambs & Ewes component.
+	</em>
+</p>
+<br>
 <br>
 
 ### Other Livestock
 
-The other livestock category contains the following animal components: 
-- Goats
-- Deer
-- Horses
-- Mules
-- Bison
-- Llamas.
+The other livestock category contains various other livestock that is currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
+
+#### General - Other Livestock
+
+The general tab in this category allows changing the following information regarding the animal:
+
+- Number of animals
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
+    <br>
+    <em>
+		Figure 6.50 - Other Livestock - General tab.
+	</em>
+</p>
+<br>
+
+
+#### Manure - Other Livestock
+
+The manure tab in this category allows changing the following information regarding the animal:
+
+- Manure handling system
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
+    <br>
+    <em>
+		Figure 6.51 - Other Livestock - Manure tab.
+	</em>
+</p>
+<br>
+
+The other livestock category contains the following animal components:
+
+#### Goats
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
+    <br>
+    <em>
+		Figure 6.52 - Goats component.
+	</em>
+</p>
+<br>
+
+#### Deer
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
+    <br>
+    <em>
+		Figure 6.53 - Deer component.
+	</em>
+</p>
+<br>
+
+#### Horses
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
+    <br>
+    <em>
+		Figure 6.54 - Horses component.
+	</em>
+</p>
+<br>
+
+#### Mules
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
+    <br>
+    <em>
+		Figure 6.55 - Mules component.
+	</em>
+</p>
+<br>
+
+#### Bison
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
+    <br>
+    <em>
+		Figure 6.56 - Bison component.
+	</em>
+</p>
+<br>
+
+
+#### Llamas
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
+    <br>
+    <em>
+		Figure 6.57 - Llams component.
+	</em>
+</p>
+<br>
+
 <br>
 
 ## Infrastructure Components
@@ -1365,14 +2076,19 @@ This category contains components related to the infrastructure of the farm.
 # Chapter 7 - Timeline
 
 
-To view the TIMELINE, your farm must be in Advanced mode and enable Multi-Year Mode in the Component Selection Screen
+To view the Timeline, your farm must be in Advanced mode and enable Multi-Year Mode in the Component Selection Screen
 - [Learn how to switch between Basic and Advanced modes](#how-do-i-enable-advanced-mode).
 - [Learn how to enable Multi Year Mode](#how-do-i-enable-multi-year-mode)
 
-The timeline screen allows you to see your farm over a period from 1985 to present day. 
+The timeline screen allows you to see your farm over a period from 1985 to present day. The timeline screen is used for the following components:
+
+- Farm crop system timeline
+- Shelterbelt timeline
 
 
-## Setup a Production System:
+## Farm crop system timeline:
+
+The farm crop system timeline is displayed when the farm is set to 'Multi-Year Mode'. The crop system timeline shows an overview of the crop(s) grown on the farm and allows the user to add historical and future projections to a particular field and its crop systems.
 
 -	To **add a historical or projected production system** click on the field in the list of production systems under “**Step 1**” or by selecting the system in the timeline region.  
 -	Once clicked the system is now active, click either “**Add Historical Production System**” or “**Add Projected Production System**”.
@@ -1383,7 +2099,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
  <img src="../../Images/UserGuide/en/chapter7/figure7-1.png" alt="Figure7-1" width="750"/>
     <br>
     <em>
-		Figure 7.1 – Timeline Screen
+		Figure 7.1 – Farm crop system timeline Screen
 		<br>
 		A: The available production systems.
 		<br>
@@ -1396,6 +2112,30 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 		E: A projected production system.
 		<br>
 		F: Timeline region.
+	</em>
+</p>
+
+
+## Shelterbelt Timeline
+
+The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year. In the shelterbelt timeline you can adjust:
+
+- The year the tree was planted.
+- The cut-off year of the timeline.
+- The year of observation.
+- Number of trees alive today (from drop down named 'Mortality').
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter7/figure7-2.png" alt="Figure7-2" width="750"/>
+    <br>
+    <em>
+		Figure 7.2 – Shelterbelt timeline
+		<br>
+		A: Switch between crop timeline and shelterbelt timeline.
+		<br>
+		B: The timeline for a specific tree added to the shelterbelt.
+		<br>
 	</em>
 </p>
 
@@ -1600,6 +2340,65 @@ A detailed summary of each component in the farm, showing emission breakdown for
 </p>
 <br>
 
+
+#### Comparing Emissions of Farms
+
+The detailed emission report tab allows emissions to be compared between different farms added to Holos by the user. If more than one farm is present, the "Compare Multiple Farms" option becomes available.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.1.png" alt="Figure9-7.1" width="850"/>
+    <br>
+    <em>
+		Figure 9-7.1 - Compare multiple farms option
+	</em>
+</p>
+<br>
+
+After clicking on 'yes', a new menu will show up which provides further options.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.2.png" alt="Figure9-7.2" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.2 - Select farms to compare settings
+		<br>
+		A: Tabs in the top bar present different options to the user.
+		<br>
+		B: The current farms added to Holos by the user. Click the farms that need to be compared.
+		<br>
+		C: Click here to compare the farms.
+		<br>
+		D: Options that allow the user to select all available farms, clear the current selection and close the select farm setting menu.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.3.png" alt="Figure9-7.3" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.3 - Default settings for the farms.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.4.png" alt="Figure9-7.4" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.4 - Animal settings for the farm. Each setting and be included and excluded from the comparison.
+	</em>
+</p>
+<br>
+<br> 
+
+
+
+
 ### Feed Estimate Report
 
 Displayed only when an animal component is added to a farm. Displays how much each animal component group consumed on average per day (can be displayed monthly or yearly). 
@@ -1666,6 +2465,21 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
     <br>
     <em>
 		Figure 9-12 - ToolTip in Graph View showing additional information for a data point.
+	</em>
+</p>
+<br>
+
+
+### Shelterbelt Results
+
+Displayed only when a shelterbelt is added to a farm. Displays how much each animal component group consumed on average per day (can be displayed monthly or yearly). 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-13.png" alt="Figure9-13" width="850"/>
+    <br>
+    <em>
+		Figure 9-13 - Shelterbelt Results Tab.
 	</em>
 </p>
 <br>
@@ -2259,6 +3073,7 @@ Below is an example of a beef component data file broken into sections
 	- Replacement Heifers 
 	- Lactating Cows
 	- Calves
+
 
 <br>
 
