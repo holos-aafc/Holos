@@ -111,7 +111,7 @@ namespace H.Core.Enumerations
             }
         }
 
-        public static bool IsNonIsLeguminousCoverCrop (this CropType cropType)
+        public static bool IsNonLeguminousCoverCrop (this CropType cropType)
         {
             switch (cropType)
             {
@@ -225,6 +225,54 @@ namespace H.Core.Enumerations
 
                 default:
                     return false;
+            }
+        }
+
+        /// <summary>
+        /// Check whether default yield data is available for a given silage crop.
+        /// </summary>
+        /// <param name="cropType">The silage crop which we need to check.</param>
+        /// <returns>True if default yield data exists for this silage crop, false otherwise.</returns>
+        public static bool IsSilageCropWithoutDefaults(this CropType cropType)
+        {
+            switch (cropType)
+            {
+                case CropType.BarleySilage:
+                case CropType.OatSilage:
+                case CropType.TriticaleSilage:
+                case CropType.WheatSilage:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns the grain crop equivalent of a silage crop. For example, if silage crop is Barley Silage, then its grain
+        /// crop equivalent will be Barley.
+        /// </summary>
+        /// <param name="cropType">The silage crop for which we need the equivalent grain crop.</param>
+        /// <returns>Returns the equivalent grain crop.</returns>
+        public static CropType GetGrainCropEquivalentOfSilageCrop(this CropType cropType)
+        {
+            switch (cropType)
+            {
+                case CropType.BarleySilage:
+                    return CropType.Barley;
+                case CropType.OatSilage:
+                    return CropType.Oats;
+                case CropType.TriticaleSilage:
+                    return CropType.Triticale;
+                case CropType.WheatSilage:
+                    return CropType.Wheat;
+                case CropType.CornSilage:
+                case CropType.SilageCorn:
+                    return CropType.Corn;
+                case CropType.CerealSilage:
+                    return CropType.Cereals;
+                default:
+                    return CropType.None;
             }
         }
 

@@ -19,7 +19,7 @@ namespace H.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FeedNameResources {
@@ -75,6 +75,195 @@ namespace H.Core.Properties {
         public static string ADICP {
             get {
                 return ResourceManager.GetString("ADICP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ADL.
+        /// </summary>
+        public static string ADL {
+            get {
+                return ResourceManager.GetString("ADL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AEE.
+        /// </summary>
+        public static string AEE {
+            get {
+                return ResourceManager.GetString("AEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ALA AID.
+        /// </summary>
+        public static string AidAlanine {
+            get {
+                return ResourceManager.GetString("AidAlanine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ARG AID.
+        /// </summary>
+        public static string AidArginine {
+            get {
+                return ResourceManager.GetString("AidArginine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ASP AID.
+        /// </summary>
+        public static string AidAsparticAcid {
+            get {
+                return ResourceManager.GetString("AidAsparticAcid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CP AID.
+        /// </summary>
+        public static string AidCrudeProtein {
+            get {
+                return ResourceManager.GetString("AidCrudeProtein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CYS AID.
+        /// </summary>
+        public static string AidCysteine {
+            get {
+                return ResourceManager.GetString("AidCysteine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GLU AID.
+        /// </summary>
+        public static string AidGlutamineAcid {
+            get {
+                return ResourceManager.GetString("AidGlutamineAcid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GLY AID.
+        /// </summary>
+        public static string AidGlycine {
+            get {
+                return ResourceManager.GetString("AidGlycine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HIS AID.
+        /// </summary>
+        public static string AidHistidine {
+            get {
+                return ResourceManager.GetString("AidHistidine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILE AID.
+        /// </summary>
+        public static string AidIsoleucine {
+            get {
+                return ResourceManager.GetString("AidIsoleucine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LEU AID.
+        /// </summary>
+        public static string AidLeucine {
+            get {
+                return ResourceManager.GetString("AidLeucine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LYS AID.
+        /// </summary>
+        public static string AidLysine {
+            get {
+                return ResourceManager.GetString("AidLysine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MET AID.
+        /// </summary>
+        public static string AidMethionine {
+            get {
+                return ResourceManager.GetString("AidMethionine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PHE AID.
+        /// </summary>
+        public static string AidPhenylalanine {
+            get {
+                return ResourceManager.GetString("AidPhenylalanine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRO AID.
+        /// </summary>
+        public static string AidProline {
+            get {
+                return ResourceManager.GetString("AidProline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SER AID.
+        /// </summary>
+        public static string AidSerine {
+            get {
+                return ResourceManager.GetString("AidSerine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to THR AID.
+        /// </summary>
+        public static string AidThreonine {
+            get {
+                return ResourceManager.GetString("AidThreonine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRY AID.
+        /// </summary>
+        public static string AidTryptophan {
+            get {
+                return ResourceManager.GetString("AidTryptophan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TYR AID.
+        /// </summary>
+        public static string AidTyrosine {
+            get {
+                return ResourceManager.GetString("AidTyrosine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAL AID.
+        /// </summary>
+        public static string AidValine {
+            get {
+                return ResourceManager.GetString("AidValine", resourceCulture);
             }
         }
         
@@ -1078,6 +1267,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CF.
+        /// </summary>
+        public static string CF {
+            get {
+                return ResourceManager.GetString("CF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chick Peas.
         /// </summary>
         public static string ChickPea {
@@ -1771,6 +1969,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CP.
+        /// </summary>
+        public static string CP {
+            get {
+                return ResourceManager.GetString("CP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cr.
         /// </summary>
         public static string Cr {
@@ -1879,6 +2086,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DM.
+        /// </summary>
+        public static string DM {
+            get {
+                return ResourceManager.GetString("DM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dried yeast.
         /// </summary>
         public static string DriedYeast {
@@ -1911,6 +2127,15 @@ namespace H.Core.Properties {
         public static string EDTA {
             get {
                 return ResourceManager.GetString("EDTA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EE.
+        /// </summary>
+        public static string EE {
+            get {
+                return ResourceManager.GetString("EE", resourceCulture);
             }
         }
         
@@ -2289,6 +2514,15 @@ namespace H.Core.Properties {
         public static string FreshSoybeanForage {
             get {
                 return ResourceManager.GetString("FreshSoybeanForage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GE.
+        /// </summary>
+        public static string GE {
+            get {
+                return ResourceManager.GetString("GE", resourceCulture);
             }
         }
         
@@ -3427,7 +3661,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NEl-3x.
+        ///   Looks up a localized string similar to NEL-3x.
         /// </summary>
         public static string NelThreeX {
             get {
@@ -4444,6 +4678,177 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ALA SID.
+        /// </summary>
+        public static string SidAlanine {
+            get {
+                return ResourceManager.GetString("SidAlanine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ARG SID.
+        /// </summary>
+        public static string SidArginine {
+            get {
+                return ResourceManager.GetString("SidArginine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ASP SID.
+        /// </summary>
+        public static string SidAsparticAcid {
+            get {
+                return ResourceManager.GetString("SidAsparticAcid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CP SID.
+        /// </summary>
+        public static string SidCrudeProtein {
+            get {
+                return ResourceManager.GetString("SidCrudeProtein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CYS SID.
+        /// </summary>
+        public static string SidCysteine {
+            get {
+                return ResourceManager.GetString("SidCysteine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GLU SID.
+        /// </summary>
+        public static string SidGlutamineAcid {
+            get {
+                return ResourceManager.GetString("SidGlutamineAcid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GLY SID.
+        /// </summary>
+        public static string SidGlycine {
+            get {
+                return ResourceManager.GetString("SidGlycine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HIS SID.
+        /// </summary>
+        public static string SidHistidine {
+            get {
+                return ResourceManager.GetString("SidHistidine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILE SID.
+        /// </summary>
+        public static string SidIsoleucine {
+            get {
+                return ResourceManager.GetString("SidIsoleucine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LEU SID.
+        /// </summary>
+        public static string SidLeucine {
+            get {
+                return ResourceManager.GetString("SidLeucine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LYS SID.
+        /// </summary>
+        public static string SidLysine {
+            get {
+                return ResourceManager.GetString("SidLysine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MET SID.
+        /// </summary>
+        public static string SidMethionine {
+            get {
+                return ResourceManager.GetString("SidMethionine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PHE SID.
+        /// </summary>
+        public static string SidPhenylalanine {
+            get {
+                return ResourceManager.GetString("SidPhenylalanine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRO SID.
+        /// </summary>
+        public static string SidProline {
+            get {
+                return ResourceManager.GetString("SidProline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SER SID.
+        /// </summary>
+        public static string SidSerine {
+            get {
+                return ResourceManager.GetString("SidSerine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to THR SID.
+        /// </summary>
+        public static string SidThreonine {
+            get {
+                return ResourceManager.GetString("SidThreonine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRP SID.
+        /// </summary>
+        public static string SidTryptophan {
+            get {
+                return ResourceManager.GetString("SidTryptophan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TYR SID.
+        /// </summary>
+        public static string SidTyrosine {
+            get {
+                return ResourceManager.GetString("SidTyrosine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAL SID.
+        /// </summary>
+        public static string SidValine {
+            get {
+                return ResourceManager.GetString("SidValine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skimmed milk, powder.
         /// </summary>
         public static string SkimmedMilkPowder {
@@ -5182,6 +5587,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TDF.
+        /// </summary>
+        public static string TDF {
+            get {
+                return ResourceManager.GetString("TDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDN.
+        /// </summary>
+        public static string TDN {
+            get {
+                return ResourceManager.GetString("TDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Teff (lovegrass) hay.
         /// </summary>
         public static string TeffLovegrassHay {
@@ -5353,6 +5776,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VitB1.
+        /// </summary>
+        public static string VitB1 {
+            get {
+                return ResourceManager.GetString("VitB1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VitB12.
         /// </summary>
         public static string VitB12 {
@@ -5362,11 +5794,56 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VitB2.
+        /// </summary>
+        public static string VitB2 {
+            get {
+                return ResourceManager.GetString("VitB2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VitB3.
+        /// </summary>
+        public static string VitB3 {
+            get {
+                return ResourceManager.GetString("VitB3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VitB5.
+        /// </summary>
+        public static string VitB5 {
+            get {
+                return ResourceManager.GetString("VitB5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VitB6.
         /// </summary>
         public static string VitB6 {
             get {
                 return ResourceManager.GetString("VitB6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VitB7.
+        /// </summary>
+        public static string VitB7 {
+            get {
+                return ResourceManager.GetString("VitB7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VitB9.
+        /// </summary>
+        public static string VitB9 {
+            get {
+                return ResourceManager.GetString("VitB9", resourceCulture);
             }
         }
         

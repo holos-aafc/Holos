@@ -1414,7 +1414,7 @@
     <value>EE</value>
   </data>
   <data name="NelThreeX" xml:space="preserve">
-    <value>NEl-3x</value>
+    <value>NEL-3x</value>
   </data>
   <data name="AlfalfaMeal" xml:space="preserve">
     <value>Alfalfa meal</value>
@@ -1985,5 +1985,164 @@
   </data>
   <data name="OatSilageHeaded" xml:space="preserve">
     <value>Oat Silage, Headed</value>
+  </data>
+  <data name="CP" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="EE" xml:space="preserve">
+    <value>EE</value>
+  </data>
+  <data name="TDN" xml:space="preserve">
+    <value>TDN</value>
+  </data>
+  <data name="ADL" xml:space="preserve">
+    <value>ADL</value>
+  </data>
+  <data name="AEE" xml:space="preserve">
+    <value>AEE</value>
+  </data>
+  <data name="AidArginine" xml:space="preserve">
+    <value>ARG AID</value>
+  </data>
+  <data name="AidCrudeProtein" xml:space="preserve">
+    <value>CP AID</value>
+  </data>
+  <data name="AidHistidine" xml:space="preserve">
+    <value>HIS AID</value>
+  </data>
+  <data name="AidIsoleucine" xml:space="preserve">
+    <value>ILE AID</value>
+  </data>
+  <data name="AidLeucine" xml:space="preserve">
+    <value>LEU AID</value>
+  </data>
+  <data name="AidLysine" xml:space="preserve">
+    <value>LYS AID</value>
+  </data>
+  <data name="AidMethionine" xml:space="preserve">
+    <value>MET AID</value>
+  </data>
+  <data name="AidPhenylalanine" xml:space="preserve">
+    <value>PHE AID</value>
+  </data>
+  <data name="CF" xml:space="preserve">
+    <value>CF</value>
+  </data>
+  <data name="DM" xml:space="preserve">
+    <value>DM</value>
+  </data>
+  <data name="GE" xml:space="preserve">
+    <value>GE</value>
+  </data>
+  <data name="TDF" xml:space="preserve">
+    <value>TDF</value>
+  </data>
+  <data name="AidAlanine" xml:space="preserve">
+    <value>ALA AID</value>
+  </data>
+  <data name="AidAsparticAcid" xml:space="preserve">
+    <value>ASP AID</value>
+  </data>
+  <data name="AidCysteine" xml:space="preserve">
+    <value>CYS AID</value>
+  </data>
+  <data name="AidGlutamineAcid" xml:space="preserve">
+    <value>GLU AID</value>
+  </data>
+  <data name="AidGlycine" xml:space="preserve">
+    <value>GLY AID</value>
+  </data>
+  <data name="AidProline" xml:space="preserve">
+    <value>PRO AID</value>
+  </data>
+  <data name="AidSerine" xml:space="preserve">
+    <value>SER AID</value>
+  </data>
+  <data name="AidThreonine" xml:space="preserve">
+    <value>THR AID</value>
+  </data>
+  <data name="AidTryptophan" xml:space="preserve">
+    <value>TRY AID</value>
+  </data>
+  <data name="AidTyrosine" xml:space="preserve">
+    <value>TYR AID</value>
+  </data>
+  <data name="AidValine" xml:space="preserve">
+    <value>VAL AID</value>
+  </data>
+  <data name="SidAlanine" xml:space="preserve">
+    <value>ALA SID</value>
+  </data>
+  <data name="SidArginine" xml:space="preserve">
+    <value>ARG SID</value>
+  </data>
+  <data name="SidAsparticAcid" xml:space="preserve">
+    <value>ASP SID</value>
+  </data>
+  <data name="SidCrudeProtein" xml:space="preserve">
+    <value>CP SID</value>
+  </data>
+  <data name="SidCysteine" xml:space="preserve">
+    <value>CYS SID</value>
+  </data>
+  <data name="SidGlutamineAcid" xml:space="preserve">
+    <value>GLU SID</value>
+  </data>
+  <data name="SidGlycine" xml:space="preserve">
+    <value>GLY SID</value>
+  </data>
+  <data name="SidHistidine" xml:space="preserve">
+    <value>HIS SID</value>
+  </data>
+  <data name="SidIsoleucine" xml:space="preserve">
+    <value>ILE SID</value>
+  </data>
+  <data name="SidLeucine" xml:space="preserve">
+    <value>LEU SID</value>
+  </data>
+  <data name="SidLysine" xml:space="preserve">
+    <value>LYS SID</value>
+  </data>
+  <data name="SidMethionine" xml:space="preserve">
+    <value>MET SID</value>
+  </data>
+  <data name="SidPhenylalanine" xml:space="preserve">
+    <value>PHE SID</value>
+  </data>
+  <data name="SidProline" xml:space="preserve">
+    <value>PRO SID</value>
+  </data>
+  <data name="SidSerine" xml:space="preserve">
+    <value>SER SID</value>
+  </data>
+  <data name="SidThreonine" xml:space="preserve">
+    <value>THR SID</value>
+  </data>
+  <data name="SidTryptophan" xml:space="preserve">
+    <value>TRP SID</value>
+  </data>
+  <data name="SidTyrosine" xml:space="preserve">
+    <value>TYR SID</value>
+  </data>
+  <data name="SidValine" xml:space="preserve">
+    <value>VAL SID</value>
+  </data>
+  <data name="VitB1" xml:space="preserve">
+    <value>VitB1</value>
+  </data>
+  <data name="VitB2" xml:space="preserve">
+    <value>VitB2</value>
+  </data>
+  <data name="VitB3" xml:space="preserve">
+    <value>VitB3</value>
+  </data>
+  <data name="VitB5" xml:space="preserve">
+    <value>VitB5</value>
+  </data>
+  <data name="VitB7" xml:space="preserve">
+    <value>VitB7</value>
+  </data>
+  <data name="VitB9" xml:space="preserve">
+    <value>VitB9</value>
   </data>
 </root>
