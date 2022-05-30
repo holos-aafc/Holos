@@ -270,8 +270,6 @@ namespace H.Core.Services.LandManagement
             var startYear = fieldSystemComponent.StartYear;
             var endYear = fieldSystemComponent.EndYear;
 
-
-
             var moduloIndex = 0;
 
             // All the years in which the user specified a crop was grown
@@ -426,7 +424,6 @@ namespace H.Core.Services.LandManagement
                         continue;
                     }
                 }
-
 
                 // Year property will already have been set at the component selection view stage
                 result.Add(secondaryCrop);

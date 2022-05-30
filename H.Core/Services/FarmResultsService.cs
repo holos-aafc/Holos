@@ -157,8 +157,6 @@ namespace H.Core.Services
 
         #region Public Methods
 
-
-
         /// <summary>
         /// Calculates final results for a farm.
         /// </summary>

@@ -146,12 +146,6 @@ namespace H.Core.Calculators.Carbon
                 manureInputs: 0);            
         }
 
-        public List<CropViewItem> GetNonRunInPeriodItems(
-            Farm farm, 
-            List<CropViewItem> viewItems)
-        {
-            return viewItems.OrderBy(x => x.Year).ToList();
-        }
 
         /// <summary>
         /// The run in period is the 'year' that is the averages carbon inputs, climate effects etc. and is used as the 'year 0' item when

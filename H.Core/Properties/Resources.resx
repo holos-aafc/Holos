@@ -5138,4 +5138,7 @@
   <data name="EnumCustomSynthetic" xml:space="preserve">
     <value>Custom (Synthetic)</value>
   </data>
+  <data name="MessageIncorrectHarvestMethodSelected" xml:space="preserve">
+    <value>'{0}' is currently set to grow an annual cash crop. If you would like to graze an annual crop, please switch the harvest method to {1} instead and choose the silage version of the same (or similar) crop, or grow a perennial crop instead ('{0}' is currently growing {2} in {3}). Holos will allow animals to graze on cover crops in a future update of the model.</value>
+  </data>
 </root>

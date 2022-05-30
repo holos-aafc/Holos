@@ -311,7 +311,8 @@ namespace H.Core.Models.Animals
                 var nextManagementPeriod = this.ManagementPeriods.ElementAtOrDefault(index + 1);
                 if (nextManagementPeriod != null)
                 {
-                    nextManagementPeriod.StartWeight = currentManagementPeriod.EndWeight;                    
+                    nextManagementPeriod.StartWeight = currentManagementPeriod.EndWeight;  
+                    nextManagementPeriod.EndWeight = nextManagementPeriod.StartWeight + nextManagementPeriod.PeriodDailyGain * nextManagementPeriod.NumberOfDays;
                     index++;
                 }
                 else

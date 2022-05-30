@@ -11230,6 +11230,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is currently set to grow an annual cash crop. If you would like to graze an annual crop, please switch the harvest method to {1} instead and choose the silage version of the same (or similar) crop, or grow a perennial crop instead (&apos;{0}&apos; is currently growing {2} in {3}). Holos will allow animals to graze on cover crops in a future update of the model..
+        /// </summary>
+        public static string MessageIncorrectHarvestMethodSelected {
+            get {
+                return ResourceManager.GetString("MessageIncorrectHarvestMethodSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Holos accounts for the {0} {1} of manure deposited from this group of animals while grazing on the pasture..
         /// </summary>
         public static string MessageManureFromAnimalsOnPastureAccountedFor {

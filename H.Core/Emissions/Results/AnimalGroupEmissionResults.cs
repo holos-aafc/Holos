@@ -192,16 +192,19 @@ namespace H.Core.Emissions.Results
         ///
         /// DMI over check needs to consider JUST the dates that the animals have the specific diet
         /// </summary>
-        /// <param name="bindingManagementPeriod"></param>
-        public bool IsDmiOverDmiMaxForPeriod(ManagementPeriod bindingManagementPeriod)
+        /// <param name="managementPeriod"></param>
+        public bool IsDmiOverDmiMaxForPeriod(ManagementPeriod managementPeriod)
         {
-            foreach (var groupEmissionsByMonth in this.GroupEmissionsByMonths)
+            if (managementPeriod != null)
             {
-                var dates = groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax().Where(x => x >= bindingManagementPeriod.Start && x <= bindingManagementPeriod.End);
-                if (dates.Any())
+                foreach (var groupEmissionsByMonth in this.GroupEmissionsByMonths)
                 {
-                    return true;
-                }
+                    var dates = groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax().Where(x => x >= managementPeriod.Start && x <= managementPeriod.End);
+                    if (dates.Any())
+                    {
+                        return true;
+                    }
+                } 
             }
 
             return false;

@@ -62,8 +62,6 @@ namespace H.Core.Services.LandManagement
             }
         }
 
-
-
         /// <summary>
         /// Before carbon change can be calculated, all view items must have yields assigned so that we can determine the total carbon inputs from all crops, manure applications, supplemental 
         /// hay applications, etc. Then we can proceed to the actual carbon change calculations.

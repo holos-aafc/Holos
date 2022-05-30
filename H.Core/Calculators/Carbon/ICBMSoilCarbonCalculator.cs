@@ -55,7 +55,8 @@ namespace H.Core.Calculators.Carbon
                 area: currentYearViewItem.Area);
 
             // Subtract carbon utilized from grazing animals and carbon exported as bales
-            currentYearViewItem.PlantCarbonInAgriculturalProduct -= lossesFromGrazingAndBaleExports;
+            // Commented out. Incorrect calculation. Results are negative when subtracting losses.
+            //currentYearViewItem.PlantCarbonInAgriculturalProduct -= lossesFromGrazingAndBaleExports;
 
             currentYearViewItem.CarbonInputFromProduct = this.CalculateCarbonInputFromProduct(
                 previousYearViewItem: previousYearViewItem,
