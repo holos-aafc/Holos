@@ -201,7 +201,7 @@ namespace H.Core.Services.LandManagement
                 viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
             }
 
-            if (viewItem.HarvestMethod == HarvestMethods.Silage)
+            if (viewItem.HarvestMethod == HarvestMethods.Silage || viewItem.HarvestMethod == HarvestMethods.Swathing)
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 35;
                 viewItem.PercentageOfStrawReturnedToSoil = 0;
