@@ -3954,35 +3954,87 @@ The message that Holos displays includes information about what the error was an
 
 Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error to the developers, follow these steps:
 
--	Click the button that says **Copy to Clipboard**. This will copy the error message and all the relevant information to your computer’s clipboard. Clicking this button now allows you to paste this information in a different program.
+-	Click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
+
+*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers. It simply copies information to your computer's clipboard.*
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-16.png" alt="Figure11-16" width="750"/>
     <br>
     <em>
-		Figure 11-16 - Click copy to clipboard to copy the information.
+		Figure 11-16 - Click copy to clipboard to copy information related to the error.
 	</em>
 </p>
 <br>
 
--	To send this information to the Holos developers, you will have to paste your clipboard's information (that you just copied) into a new email and send that email to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca).
+-	To send this information to the Holos developers, you will have to create a new issue in the official Github repository for Holos. You can click [here](https://github.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
 
--	In order to do this, open your email account (website or client like outlook) and compose a new email. In that new email **right click** anywhere in the body of the email and choose **paste**.
--	Write anything descriptive as the subject of the email.
--	Send this email to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca).
 
+-	After going to the issue reporting page, click on "**New Issue**".
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
     <br>
     <em>
-		Figure 11-17 - Send an email to the aafc.holos address with the copied information.
+		Figure 11-17 - The new issue button on the Holos Github repository.
 	</em>
 </p>
 <br>
 
-Please note that clicking copy to clipboard does not automatically send any information, it simply copies the error to your computer’s clipboard. In order to send this information for troubleshooting, you will need to manually paste the information in a new email and send it to the above-mentioned email address.
+- On this page, you will click on "**Get Started**" opposite the "**Bug / Issue Report**" category.
 
-- To further help with the troubleshooting process, you can also attach your data and log files to this troubleshooting email. Please see, [how do I find my holos data files](#how-to-find-the-holos-program-data-files) for more details.
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
+    <br>
+    <em>
+		Figure 11-18 - The new issue button on the Holos Github repository.
+	</em>
+</p>
+<br>
+
+
+- You will be presented with a new page where you can post details about the issue and provide additional information. This information includes:
+  - **Title of issue**
+  - **Contact details** (in case we need to contact you outside of Github)
+  - **Expected Behaviour** when using Holos.
+  - **Actual Behaviour** displayed by Holos resulting in the bug/issue.
+  - **Details of issue including steps to reproduce the issue**.
+  - **Error message.**
+  - **Holos version number.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-19.png" alt="Figure11-19" width="750"/>
+    <br>
+    <em>
+		Figure 11-19 - The Bug/Issue reporting category.
+	</em>
+</p>
+<br>
+
+
+- Paste the information you [copied earlier to your clipboard](#how-to-report-an-error-message), in the section titled "**Error Message**" and fill the other information as directed.
+
+
+- Click on "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
+
+- A new issue will now be created with the included information.
+
+<br>
+
+### Finding the Holos Software version number
+
+The version number of your current Holos installation is displayed when you first launch the program. After starting the program, look for the version number in the small window that pops up where you're able to select your language.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-20.png" alt="Figure11-20" width="650"/>
+    <br>
+    <em>
+		Figure 11-20 - Version number of the Holos installation.
+	</em>
+</p>
+<br>

@@ -50,7 +50,7 @@ body:
     id: version
     attributes:
       label: Holos Version Number
-      description: What version of our software are you running? This can be located when you first start Holos.
+      description: What version of our software are you running? To learn how to find your installation's version number, [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#finding-the-holos-software-version-number)
       placeholder: 4.0.0.336
     validations:
       required: true
