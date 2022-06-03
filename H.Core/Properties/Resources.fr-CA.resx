@@ -3073,6 +3073,9 @@
   <data name="LabelLactationDiet" xml:space="preserve">
     <value>lactation</value>
   </data>
+  <data name="LabelLandUseChangeCO2" xml:space="preserve">
+    <value>Land Use Change CO₂</value>
+  </data>
   <data name="LabelLegumeForageBasedDiet" xml:space="preserve">
     <value>ration à base de fourrage de légumineuses</value>
   </data>
@@ -3508,6 +3511,9 @@
   </data>
   <data name="LabelUndersown" xml:space="preserve">
     <value>sous-semis</value>
+  </data>
+  <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
+    <value>Upstream CO₂</value>
   </data>
   <data name="LabelUseCustomVolatilizationFraction" xml:space="preserve">
     <value>utilisez un facteur de conversion du méthane personnalisé</value>

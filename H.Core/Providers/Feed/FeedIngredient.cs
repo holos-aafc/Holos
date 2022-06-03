@@ -1314,6 +1314,22 @@ namespace H.Core.Providers.Feed
 
         #endregion
 
+        #region Calculated Properties
+
+        /// <summary>
+        /// Calculation from personal email with Aklilu Alemu 6/1/22
+        /// </summary>
+        public double Nemf
+        {
+            get
+            {
+                // NEmf (MJ/kg DM) = [NEma (Mcal/kg DM) + NEga (Mcal/kg DM)] * 4.184 (conversion factor for Mcal to MJ)
+                return (this.NEga + this.NEma) * 4.184;
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         public static FeedIngredient CopyFeedIngredient(FeedIngredient ingredient)

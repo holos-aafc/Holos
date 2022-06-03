@@ -8,6 +8,11 @@ using H.Core.Enumerations;
 
 namespace H.Core.Providers.AnaerobicDigestion
 {
+    /// <summary>
+    /// Table 47
+    ///
+    /// Parameter adjustments for dried or stockpiled manure entering the anaerobic digester
+    /// </summary>
     public class ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47
     {
         #region Fields

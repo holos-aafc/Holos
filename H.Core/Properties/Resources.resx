@@ -1163,7 +1163,7 @@
     <value>ac</value>
   </data>
   <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
-    <value>Upstream CO2</value>
+    <value>Upstream CO₂</value>
   </data>
   <data name="LabelBirthWeight" xml:space="preserve">
     <value>Birth weight</value>
@@ -1553,7 +1553,7 @@
     <value>Mills et al. (2013) Eq. NL2</value>
   </data>
   <data name="LabelLandUseChangeCO2" xml:space="preserve">
-    <value>Land Use Change CO2</value>
+    <value>Land Use Change CO₂</value>
   </data>
   <data name="LabelEnergyCO2" xml:space="preserve">
     <value>Energy CO2</value>

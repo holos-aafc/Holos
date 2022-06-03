@@ -71,8 +71,20 @@ namespace H.Core.Services.Animals
                 currentDate: dailyEmissions.DateTime);
 
             // Equation 3.1.2-2
+            var nemf = 0d;
+            if (managementPeriod.SelectedDiet.DietaryNetEnergyConcentration == 0)
+            {
+                // Default/system diets will have a predefined (lookup table) NEmf value
+                nemf = managementPeriod.SelectedDiet.CalculateNemf();
+            }
+            else
+            {
+                // Custom diets will not have a predefined value and must therefore be calculated
+                nemf = managementPeriod.SelectedDiet.DietaryNetEnergyConcentration;
+            }
+
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
-                dietaryNetEnergyConcentration: managementPeriod.SelectedDiet.DietaryNetEnergyConcentration,
+                dietaryNetEnergyConcentration: nemf,
                 weight: dailyEmissions.AnimalWeight);
 
             dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(

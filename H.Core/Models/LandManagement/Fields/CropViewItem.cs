@@ -865,6 +865,14 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _yearOfConversion, value);
         }
 
+        public int YearsSinceYearOfConversion
+        {
+            get
+            {
+                return this.Year - this.YearOfConversion;
+            }
+        }
+
         public double PastFallowArea
         {
             get => _pastFallowArea;

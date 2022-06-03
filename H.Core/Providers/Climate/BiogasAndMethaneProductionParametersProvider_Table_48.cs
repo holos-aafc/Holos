@@ -11,7 +11,12 @@ using H.Content;
 
 namespace H.Core.Providers.Climate
 {
-    public class BiogasAndMethaneProductionParametersProvider
+    /// <summary>
+    /// Table 48
+    ///
+    /// Parameters used for the calculation of biogas and methane production using an anaerobic digestion system
+    /// </summary>
+    public class BiogasAndMethaneProductionParametersProvider_Table_48
     {
         #region Fields
 
@@ -23,7 +28,7 @@ namespace H.Core.Providers.Climate
 
         #region Constructors
 
-        public BiogasAndMethaneProductionParametersProvider()
+        public BiogasAndMethaneProductionParametersProvider_Table_48()
         {
             _farmResidueTypeStringConverter = new FarmResidueTypeStringConverter();
             _beddingMaterialTypeStringConverter = new BeddingMaterialTypeStringConverter();
@@ -61,13 +66,13 @@ namespace H.Core.Providers.Climate
 
             if (data != null)
             {
-                Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider)}.{nameof(BiogasAndMethaneProductionParametersProvider.GetBiogasMethaneProductionInstance)}" +
-                    $" does not contain BeddingMaterialType of {beddingMaterial}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider)}");
+                Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}.{nameof(BiogasAndMethaneProductionParametersProvider_Table_48.GetBiogasMethaneProductionInstance)}" +
+                    $" does not contain BeddingMaterialType of {beddingMaterial}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}");
             }
             else
             {
-                Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider)}.{nameof(BiogasAndMethaneProductionParametersProvider.GetBiogasMethaneProductionInstance)}" +
-                    $" does not contain AnimalType of {animalType}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider)}");
+                Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}.{nameof(BiogasAndMethaneProductionParametersProvider_Table_48.GetBiogasMethaneProductionInstance)}" +
+                    $" does not contain AnimalType of {animalType}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}");
             }
 
             return new BiogasAndMethaneProductionParametersData();
@@ -89,8 +94,8 @@ namespace H.Core.Providers.Climate
                 return data;
             }
 
-            Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider)}.{nameof(BiogasAndMethaneProductionParametersProvider.GetBiogasMethaneProductionInstance)}" +
-             $" does not contain FarmResidueTyoe of {residueType}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider)}");
+            Trace.TraceError($"{nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}.{nameof(BiogasAndMethaneProductionParametersProvider_Table_48.GetBiogasMethaneProductionInstance)}" +
+             $" does not contain FarmResidueType of {residueType}. Returning an empty instance of {nameof(BiogasAndMethaneProductionParametersProvider_Table_48)}");
 
             return new BiogasAndMethaneProductionParametersData();
 
@@ -105,7 +110,7 @@ namespace H.Core.Providers.Climate
         /// </summary>
         private void ReadFile()
         {
-            // If more manure type subtrates are added to csv file, increase the value of int const LastManureRow accordingly.
+            // If more manure type substrates are added to csv file, increase the value of int const LastManureRow accordingly.
             // If LastManureRow is changed, also change the lines the foreach loop skips to get to farm residue substrate types.
 
             List<BiogasAndMethaneProductionManureData> manureData = new List<BiogasAndMethaneProductionManureData>();

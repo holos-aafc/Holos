@@ -1609,10 +1609,24 @@ namespace H.Core.Services.LandManagement
 
             if (currentYearViewItem.CropType.IsPerennial())
             {
-                belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogenForPerennialForage(
-                    nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
-                    nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil,
-                    perennialStandLength: currentYearViewItem.PerennialStandLength);
+                if (farm.EnableCarbonModelling)
+                {
+                    // Use the stand length as determined by the sequence of perennial crops entered by the user (Hay-Hay-Hay-Wheat = 3 year stand)
+                    belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator
+                        .CalculateBelowGroundResidueNitrogenForPerennialForage(
+                            nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
+                            nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil,
+                            perennialStandLength: currentYearViewItem.PerennialStandLength);
+                }
+                else
+                {
+                    // Use the input that specifies when the perennial was first seeded
+                    belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator
+                        .CalculateBelowGroundResidueNitrogenForPerennialForage(
+                            nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
+                            nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil,
+                            perennialStandLength: currentYearViewItem.YearsSinceYearOfConversion);
+                };
             }
 
             return belowGroundNitrogen;

@@ -72,7 +72,10 @@ namespace H.Core.Models
         public int StartYear
         {
             get { return _startYear; }
-            set { this.SetProperty(ref _startYear, value, this.OnStartYearChanged); }
+            set
+            {
+                this.SetProperty(ref _startYear, value, this.OnStartYearChanged);
+            }
         }
 
         public int EndYear

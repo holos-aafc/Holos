@@ -336,8 +336,10 @@
     <Compile Include="Models\FieldSystemDetailsTier2ColumnsVisibility.cs" />
     <Compile Include="Models\Infrastructure\AnaerobicDigestionComponent.cs" />
     <Compile Include="Models\Infrastructure\AnaerobicDigestionViewItem.cs" />
+    <Compile Include="Models\Infrastructure\SubstrateFlowInformation.cs" />
     <Compile Include="Models\Infrastructure\FarmResiduesSubstrateViewItem.cs" />
     <Compile Include="Models\Infrastructure\ManureSubstrateViewItem.cs" />
+    <Compile Include="Models\Infrastructure\SubstrateViewItemBase.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Results.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Fertilizer.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Grazing.cs" />
@@ -415,7 +417,7 @@
     <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureData.cs" />
     <Compile Include="Providers\AnaerobicDigestion\ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47.cs" />
     <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsData.cs" />
-    <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsProvider.cs" />
+    <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsProvider_Table_49.cs" />
     <Compile Include="Providers\Animals\AdditiveReductionFactorsForAllCattleData.cs" />
     <Compile Include="Providers\Animals\AdditiveReductionFactorsProviderTable19.cs" />
     <Compile Include="Providers\Animals\AmmoniaEmissionFactorData.cs" />
@@ -444,7 +446,7 @@
     <Compile Include="Providers\Animals\DefaultTanEmissionFactorsForHousedPoultry.cs" />
     <Compile Include="Providers\Animals\DefaultTanEmissionFactors_Table_18.cs" />
     <Compile Include="Providers\Animals\DefaultVolatileSolidExcretionProvider_Table_36.cs" />
-    <Compile Include="Providers\Animals\DefaultYearlyTanExcretionRatesForPoultry.cs" />
+    <Compile Include="Providers\Animals\DefaultDailyTanExcretionRatesForPoultry.cs" />
     <Compile Include="Providers\Animals\FractionOfOrganicNitrogenMineralizedAsTanProvider_Table_40.cs" />
     <Compile Include="Providers\Animals\FractionOfOrganicNitrogenMineralizedData.cs" />
     <Compile Include="Providers\Animals\HousingTypeProvider.cs" />
@@ -455,6 +457,7 @@
     <Compile Include="Providers\Animals\IFeedingActivityCoefficientProvider.cs" />
     <Compile Include="Providers\Animals\ISheepCoefficientData.cs" />
     <Compile Include="Providers\Animals\ISheepCoefficientDataProvider.cs" />
+    <Compile Include="Providers\Animals\ManureHandlingSystemProvider.cs" />
     <Compile Include="Providers\Animals\MethaneConversionFactorsByClimateZone_Table_40.cs" />
     <Compile Include="Providers\Animals\MethaneProducingCapacityOfManureProvider_Table_37.cs" />
     <Compile Include="Providers\Animals\NitrogenConcentrationLiquidManureProvider_Table_40.cs" />
@@ -495,7 +498,7 @@
     <Compile Include="Providers\Climate\BiogasAndMethaneProductionFarmResiduesData.cs" />
     <Compile Include="Providers\Climate\BiogasAndMethaneProductionManureData.cs" />
     <Compile Include="Providers\Climate\BiogasAndMethaneProductionParametersData.cs" />
-    <Compile Include="Providers\Climate\BiogasAndMethaneProductionParametersProvider.cs" />
+    <Compile Include="Providers\Climate\BiogasAndMethaneProductionParametersProvider_Table_48.cs" />
     <Compile Include="Providers\Climate\ClimateData.cs" />
     <Compile Include="Providers\Climate\ClimateProvider.cs" />
     <Compile Include="Providers\Climate\CustomFileClimateDataProvider.cs" />

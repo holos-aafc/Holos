@@ -103,10 +103,8 @@ namespace H.Core.Providers.AnaerobicDigestion
                 });
             }
 
-
             return results;
         }
-
 
         #endregion
     }

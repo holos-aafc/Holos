@@ -441,6 +441,11 @@ namespace H.Core.Models.Animals
             set => SetProperty(ref _useCustomMilkProductionValue, value);
         }
 
+        /// <summary>
+        /// Indicates if the manure emissions should be calculated by the anaerobic digester algorithms
+        /// </summary>
+        public bool IsProcessedByAnaerobicDigester { get; set; }
+
         #endregion
 
         #region Public Methods

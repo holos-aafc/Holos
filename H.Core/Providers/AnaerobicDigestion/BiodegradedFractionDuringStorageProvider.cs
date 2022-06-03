@@ -180,6 +180,5 @@ namespace H.Core.Providers.AnaerobicDigestion
 
         #region Private Methods
         #endregion
-
     }
 }

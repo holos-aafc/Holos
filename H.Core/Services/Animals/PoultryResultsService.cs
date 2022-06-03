@@ -19,6 +19,7 @@ namespace H.Core.Services.Animals
         //Referenced in  Eqn. 3.5.3-4
         private const double FractionLeaching = 0;
         private PoultryDietInformationProvider_Table_44 _dietInformationProvider = new PoultryDietInformationProvider_Table_44();
+        private readonly DefaultDailyTanExcretionRatesForPoultry _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
 
         #endregion
 
@@ -219,9 +220,11 @@ namespace H.Core.Services.Animals
              * Volatilization
              */
 
+
+
             // Equation 4.3.3-1
             dailyEmissions.AmmoniaConcentrationInHousing = this.CalculateAmmoniaLossFromHousing(
-                yearlyTanExcreted: managementPeriod.ManureDetails.YearlyTanExcretion,
+                tanExcretionRate: managementPeriod.ManureDetails.DailyTanExcretion,
                 housingEmissionFactor: managementPeriod.HousingDetails.AmmoniaEmissionFactorForHousing);
 
             // Equation 4.3.3-2
@@ -230,7 +233,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.3-3
             dailyEmissions.AmmoniaLostFromStorage = this.CalculateAmmoniaLossFromStorage(
-                yearlyTanExcreted: managementPeriod.ManureDetails.YearlyTanExcretion,
+                tanExcretionRate: managementPeriod.ManureDetails.DailyTanExcretion,
                 emissionFactorForStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
 
             // Equation 4.3.3-4
@@ -342,14 +345,14 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.3-1
         /// </summary>
-        /// <param name="yearlyTanExcreted">TAN excreted by animals per year</param>
+        /// <param name="tanExcretionRate">TAN excreted by animals per year</param>
         /// <param name="housingEmissionFactor">Default fraction of TAN emission as NH3</param>
         /// <returns>Ammonia lost from housing (kg NH3-N day^-1)</returns>
         public double CalculateAmmoniaLossFromHousing(
-            double yearlyTanExcreted,
+            double tanExcretionRate,
             double housingEmissionFactor)
         {
-            return (yearlyTanExcreted / 365) * housingEmissionFactor;
+            return (tanExcretionRate / 365) * housingEmissionFactor;
         }
 
         /// <summary>
@@ -366,14 +369,14 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.3-3
         /// </summary>
-        /// <param name="yearlyTanExcreted">TAN excreted by animals per year</param>
+        /// <param name="tanExcretionRate">TAN excreted by animals per year</param>
         /// <param name="emissionFactorForStorage">Default fraction of TAN emission as NH3</param>
         /// <returns>Ammonia lost from housing (kg NH3-N day^-1)</returns>
         public double CalculateAmmoniaLossFromStorage(
-            double yearlyTanExcreted,
+            double tanExcretionRate,
             double emissionFactorForStorage)
         {
-            return (yearlyTanExcreted / 365) * emissionFactorForStorage;
+            return (tanExcretionRate / 365) * emissionFactorForStorage;
         }
 
         /// <summary>

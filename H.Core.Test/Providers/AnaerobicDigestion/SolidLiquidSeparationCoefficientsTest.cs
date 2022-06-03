@@ -9,7 +9,7 @@ namespace H.Core.Test.Providers.AnaerobicDigestion
     public class SolidLiquidSeparationCoefficientsTest
     {
         #region Fields
-        SolidLiquidSeparationCoefficientsProvider _provider;
+        SolidLiquidSeparationCoefficientsProvider_Table_49 _provider;
         #endregion
 
         #region Initialization
@@ -23,7 +23,7 @@ namespace H.Core.Test.Providers.AnaerobicDigestion
         [TestInitialize]
         public void TestIntialize()
         {
-            _provider = new SolidLiquidSeparationCoefficientsProvider();
+            _provider = new SolidLiquidSeparationCoefficientsProvider_Table_49();
         }
 
         [TestCleanup]

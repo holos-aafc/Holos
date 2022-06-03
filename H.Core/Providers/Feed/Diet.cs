@@ -477,7 +477,7 @@ namespace H.Core.Providers.Feed
             var copiedDiet = new Diet();
             
 
-            // This needs to be new'd up here, for some reason setting this property to be ignored in the mapper configuration doesn't acutally ignore it. Instead, auto mapper
+            // This needs to be new'd up here, for some reason setting this property to be ignored in the mapper configuration doesn't actually ignore it. Instead, auto mapper
             // will just use the same reference to the Ingredients property and the result will be that ingredients get duplicated back into the dietToCopy variable. This is not
             // what is wanted as we just want to copy ingredients to the copiedDiet property.
             copiedDiet.Ingredients = new ObservableCollection<FeedIngredient>();
@@ -582,6 +582,11 @@ namespace H.Core.Providers.Feed
                 //set the converted value for the  ingredient
                 prop.SetValue(feedIngredient, convertedValue);
             }
+        }
+
+        public double CalculateNemf()
+        {
+            return this.Ingredients.Average(x => x.Nemf);
         }
 
         #endregion

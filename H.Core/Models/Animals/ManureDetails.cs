@@ -335,17 +335,16 @@ namespace H.Core.Models.Animals
             set => SetProperty(ref _dailyManureMethaneEmissionRate, value);
         }
 
-        /// <summary>
-        /// Currently used by poultry groups only
-        /// 
-        /// (kg TAN location^-1 year^-1)
-        /// </summary>
         public double YearlyTanExcretion
         {
             get => _yearlyTanExcretion;
             set => SetProperty(ref _yearlyTanExcretion, value);
         }
 
+        /// <summary>
+        /// Currently used by poultry groups only
+        /// </summary>
+        public double DailyTanExcretion { get; set; }
 
         public double AmmoniaEmissionFactorForLandApplication
         {
