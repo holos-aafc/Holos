@@ -1,5 +1,11 @@
 # Introduction
-We have set out a template that you can follow to fill out missing data. As long as you have a valid source, and you follow this guide, you should have no issues filling out the blank template on the next sheet!
+We have set out a template that you can follow to fill out missing data. As long as you have a valid source, and you follow this guide, you should have no issues filling out the blank template!
+
+Steps:
+1) Figure out what data we need from the `Data\Crops\Holos.Grid.csv` file
+2) Fill out the template with the associated sources
+3) Create a Pull Request for to the Holos.Grid using your filled in template
+4) Submit your sources to the `Data\Crops\Sources.csv`
 
 # Structure
 The Holos Model has 8 different crop groups as detailed on the table below.
