@@ -63,7 +63,7 @@ namespace H.Infrastructure
             }
             else
             {
-                throw new DivideByZeroException();
+                return 0;
             }
         }
 

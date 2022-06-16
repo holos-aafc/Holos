@@ -479,13 +479,13 @@ namespace H.Core.Providers.Feed
         public double NEma
         {
             get { return _nEma; }
-            set { this.SetProperty(ref _nEma, value); }
+            set { this.SetProperty(ref _nEma, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
         }
 
         public double NEga
         {
             get { return _nEga; }
-            set { this.SetProperty(ref _nEga, value); }
+            set { this.SetProperty(ref _nEga, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
         }
 
         public double RUP

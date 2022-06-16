@@ -586,7 +586,7 @@ namespace H.Core.Providers.Feed
 
         public double CalculateNemf()
         {
-            return this.Ingredients.Average(x => x.Nemf);
+            return this.Ingredients.WeightedAverage(x => x.Nemf, x => x.PercentageInDiet);
         }
 
         #endregion
