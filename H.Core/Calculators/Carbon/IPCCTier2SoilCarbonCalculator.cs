@@ -141,11 +141,10 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.2.3-5
             viewItem.TotalCarbonInputs = this.CalculateTotalCarbonInputs(
-                aboveGroundInputs: totalAboveGroundCarbonInputsForField,
-                belowGroundInputs: totalBelowGroundCarbonInputsForField,
+                aboveGroundCarbonInputs: viewItem.AboveGroundCarbonInput,
+                belowGroundCarbonInputs: viewItem.BelowGroundCarbonInput,
                 manureInputs: 0);            
         }
-
 
         /// <summary>
         /// The run in period is the 'year' that is the averages carbon inputs, climate effects etc. and is used as the 'year 0' item when
@@ -473,19 +472,18 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-5
+        /// Equation 2.2.3-5 (modified)
         /// </summary>
-        /// <param name="aboveGroundInputs">Annual total amount of above-ground residue (kg year^-1)</param>
-        /// <param name="belowGroundInputs">Annual total amount of below-ground residue (kg year^-1)</param>
-        /// <param name="manureInputs">Annual amount of manure applied to crop (kg N year^-1)</param>
-        /// <returns>Total carbon inputs (tonnes C ha^-1)</returns>
+        /// <param name="aboveGroundCarbonInputs">Annual total amount of above-ground carbon inputs (kg C year^-1)</param>
+        /// <param name="belowGroundCarbonInputs">Annual total amount of below-ground carbon inputs (kg C year^-1)</param>
+        /// <param name="manureInputs">Annual amount of manure carbon applied to crop (kg C year^-1)</param>
+        /// <returns>Total carbon inputs (kg C ha^-1)</returns>
         public double CalculateTotalCarbonInputs(
-            double aboveGroundInputs,
-            double belowGroundInputs,
+            double aboveGroundCarbonInputs,
+            double belowGroundCarbonInputs,
             double manureInputs)
         {
-            // Note that at this point, the above ground residue (as well as below ground residues) has been multiplied by the C content
-            var result = aboveGroundInputs + belowGroundInputs + (manureInputs / 1000);
+            var result = aboveGroundCarbonInputs + belowGroundCarbonInputs + (manureInputs / 1000);
 
             return result;
         }
