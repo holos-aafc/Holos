@@ -96,7 +96,7 @@ From these 8 groups, we have 69 crops that we need to fill out, as seen in the f
 | Perennial forages   | 69      | Forage for seed                                                     |
 
 These values need to be filled out for every province and for every soil type, we will show you how to deal with different soil types in the next section. Furthermore, there may be some crops that are close to the names we have below but not quite, we will also address this in the next section.   
-This last table  shows all the variables we need to fill in. If you need some help figuring out how to map the values from the crop production guide to the holos variables, please refer to this document. [Holos Mapping](https://github.com/Espartaco-Gonzalez-Arteaga/Holos_economic_data/blob/455276957db186abdca15315e3f6b4b19cdd8a7e/H.Economic.Data/Templates/Crops/Holos%20Mapping.docx)
+This last table  shows all the variables we need to fill in. If you need some help figuring out how to map the values from the crop production guide to the holos variables, please refer to this document. [Holos Mapping](https://github.com/Espartaco-Gonzalez-Arteaga/Holos_economic_data/blob/b72939c38d0cbaa0d224ada4f61a69d6294a3aa7/H.Economic.Data/Templates/Crops/Holos.Crops.Mapping.md)
 
 | Variable               | Definition                                                                                |
 | ---------------------- | ----------------------------------------------------------------------------------------- |
