@@ -304,11 +304,11 @@ Agriculture’s Custom Rate and Rental Guide assumptions an interest rate of 5% 
 > Totals $/ha
 14.	Total Fixed Cost:
 - Name on Source: -
-- Name on File: Fixed Cost $/ Acre
+- Name on File: Fixed Cost
 - Notes: Not included in source
 15.	Total Variable Cost:
 - Name on Source: -
-- Name on File: Variable Cost $/Acre
+- Name on File: Variable Cost 
 - Notes: Not given by source. Total Inputs + Total Machinery + Total Overhead
 * Total Inputs = Seed + Seed Treatment + Fertility + Pesticides
 * Total Machinery = Tillage + Planting + Spraying + Fertilizing + Harvesting & Trucking
