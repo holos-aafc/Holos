@@ -58,7 +58,9 @@ namespace H.Core.Providers.Energy
         ///  Unit of measurement of fuel energy estimate value = GJ ha-1</returns>
         public FuelEnergyEstimatesData GetFuelEnergyEstimatesDataInstance(Province province, SoilFunctionalCategory soilCategory, TillageType tillageType, CropType cropType)
         {
-            FuelEnergyEstimatesData data = this.Data.Find(x => (x.Province == province) && (x.SoilFunctionalCategory == soilCategory)
+            var soilLookupType = soilCategory.GetSimplifiedSoilCategory();
+
+            FuelEnergyEstimatesData data = this.Data.Find(x => (x.Province == province) && (x.SoilFunctionalCategory == soilLookupType)
                                                             && (x.TillageType == tillageType) && (x.CropType == cropType));
             
             // If instance is found return the instance
@@ -68,7 +70,7 @@ namespace H.Core.Providers.Energy
             }
 
             // If instance is not found, we do a few searches to help trace which input parameter was wrong.
-            data = this.Data.Find(x => (x.Province == province) && (x.SoilFunctionalCategory == soilCategory) && (x.TillageType == tillageType));
+            data = this.Data.Find(x => (x.Province == province) && (x.SoilFunctionalCategory == soilLookupType) && (x.TillageType == tillageType));
 
             // The specified crop type was wrong
             if (data != null)
@@ -84,7 +86,7 @@ namespace H.Core.Providers.Energy
             if (data != null)
             {
                 Trace.TraceError($"{nameof(FuelEnergyEstimatesProvider)}.{nameof(FuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance)}" +
-                                 $" unable to find Soil Category: {soilCategory} in the available soil data. Returning null");
+                                 $" unable to find Soil Category: {soilLookupType} in the available soil data. Returning null");
             }
 
             // The specified province type was wrong

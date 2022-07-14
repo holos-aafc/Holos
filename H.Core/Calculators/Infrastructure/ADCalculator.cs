@@ -216,7 +216,7 @@ namespace H.Core.Calculators.Infrastructure
             return result;
         }
 
-        public void CaculateResults(Farm farm, GroupEmissionsByDay dailyEmissions)
+        public void CalculateResults(Farm farm, GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
         {
             var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
             if (component == null)
@@ -225,8 +225,8 @@ namespace H.Core.Calculators.Infrastructure
             }
 
             var cropResidueFlows = this.GetFarmResidueFlowRates(component);
-            var freshManureFlows = this.GetFreshManureFlowRates(component, new GroupEmissionsByDay(), new ManagementPeriod());
-            var storedManureFlows = this.GetStoredManureFlowRates(component, new GroupEmissionsByDay(), new ManagementPeriod());
+            var freshManureFlows = this.GetFreshManureFlowRates(component, dailyEmissions, managementPeriod);
+            var storedManureFlows = this.GetStoredManureFlowRates(component, dailyEmissions, managementPeriod);
 
             // All flows
             var flowInformationForAllSubstrates = new List<SubstrateFlowInformation>();

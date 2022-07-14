@@ -409,6 +409,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="slope">(unitless)</param>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="intercept">(unitless)</param>
+        /// <param name="moistureContentAsPercentage">The moisture content of the yield (%)</param>
         /// <returns>The harvest ratio</returns>
         public double CalculateHarvestRatio(
             double slope,
@@ -424,12 +425,18 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="harvestRatio">The harvest ratio (kg ha^-1)</param>
+        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
         public double CalculateAboveGroundResidueDryMatter(
             double freshWeightOfYield,
             double harvestRatio,
             double moistureContentOfCropAsPercentage)
         {
+            if (harvestRatio <= 0)
+            {
+                return 0;
+            }
+
             return (freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100) ) / harvestRatio;
         }
 

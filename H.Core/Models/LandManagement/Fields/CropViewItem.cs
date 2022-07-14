@@ -1092,6 +1092,10 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _forageUtilizationRate, value);
         }
 
+        public double CombinedAboveGroundInput { get; set; }
+        public double CombinedBelowGroundInput { get; set; }
+        public double CombinedManureInput { get; set; }
+
         #endregion
 
         #region Public Methods

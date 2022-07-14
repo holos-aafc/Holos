@@ -661,6 +661,7 @@
     <Compile Include="Services\ITimePeriodHelper.cs" />
     <Compile Include="Services\LandManagement\MonthlyManureSpreadingResults.cs" />
     <Compile Include="Converters\PropertyConverter.cs" />
+    <Compile Include="Services\RotationComponentHelper.cs" />
     <Compile Include="Services\ShelterbeltComponentHelper.cs" />
     <Compile Include="Services\TimePeriodHelper.cs" />
     <Compile Include="Storage.cs" />
