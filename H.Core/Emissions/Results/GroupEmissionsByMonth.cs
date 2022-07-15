@@ -1143,6 +1143,30 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double MonthlyElectricityProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.ElectricityProducedFromAnaerobicDigestion);
+            }
+        }
+
+        public double MonthlyHeatProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.HeatProducedFromAnaerobicDigestion);
+            }
+        }
+
+        public double MonthlyMethaneInjectionIntoGrid
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.PotentialMethaneInjectionIntoGridFromAnaerobicDigestion);
+            }
+        }
+
         /// <summary>
         /// (kg)
         /// </summary>

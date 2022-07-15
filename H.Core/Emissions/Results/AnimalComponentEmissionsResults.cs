@@ -607,6 +607,60 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kWh year^-1)
+        /// </summary>
+        public double TotalElectricityProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.MonthlyElectricityProducedFromAnaerobicDigestion);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// (kWh year^-1)
+        /// </summary>
+        public double TotalHeatProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.MonthlyHeatProducedFromAnaerobicDigestion);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// (kWh year^-1)
+        /// </summary>
+        public double TotalMethaneInjectedIntoGridFromAnaerobicDigestion
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.MonthlyMethaneInjectionIntoGrid);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// The farm which created the emissions.
         /// </summary>
         public Farm Farm { get; set; }

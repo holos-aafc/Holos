@@ -8,14 +8,19 @@ using System.Diagnostics;
 
 namespace H.Core.Providers.AnaerobicDigestion
 {
-    public class SolidLiquidSeparationCoefficientsProvider
+    /// <summary>
+    /// Table 49
+    ///
+    /// Default values for separation coefficients (fraction in solid fraction) for solid-liquid separation of digestate
+    /// </summary>
+    public class SolidLiquidSeparationCoefficientsProvider_Table_49
     {
         #region Fields
         #endregion
 
         #region Constructors
 
-        public SolidLiquidSeparationCoefficientsProvider() { }
+        public SolidLiquidSeparationCoefficientsProvider_Table_49() { }
 
         #endregion
 
@@ -77,7 +82,7 @@ namespace H.Core.Providers.AnaerobicDigestion
 
                 default:
                     {
-                        Trace.TraceError($"{nameof(SolidLiquidSeparationCoefficientsProvider)}.{nameof(SolidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance)} " +
+                        Trace.TraceError($"{nameof(SolidLiquidSeparationCoefficientsProvider_Table_49)}.{nameof(SolidLiquidSeparationCoefficientsProvider_Table_49.GetSolidLiquidSeparationCoefficientInstance)} " +
                             $"invalid DigestateParameters specified : {coefficient}. Returning an empty instance of SolidLiquidSeparationCoefficientsData.");
                         return new SolidLiquidSeparationCoefficientsData();
                     }

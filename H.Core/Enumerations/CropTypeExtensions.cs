@@ -39,6 +39,7 @@ namespace H.Core.Enumerations
                 case CropType.PerennialForages:
                 case CropType.ForageForSeed:
                 case CropType.SeededGrassland:
+                case CropType.RangelandNative:
                     return true;
 
                 default:
@@ -164,7 +165,7 @@ namespace H.Core.Enumerations
 
         public static bool IsAnnual(this CropType cropType)
         {
-            if (cropType.IsSilageCrop() || cropType.IsRootCrop() || cropType.IsCoverCrop())
+            if (cropType.IsSilageCrop() || cropType.IsRootCrop())
             {
                 return true;
             }
@@ -290,6 +291,7 @@ namespace H.Core.Enumerations
                 case CropType.WinterWheat:
                 case CropType.WheatSilage:
                 case CropType.Barley:
+                case CropType.GrainCorn:
                 case CropType.BarleySilage:
                 case CropType.UndersownBarley:
                 case CropType.Oats:
@@ -359,7 +361,6 @@ namespace H.Core.Enumerations
             // Concat two lists so first item is always CropType.None followed by a sorted list afterwards
             return new List<CropType>()
             {
-                //CropType.None,
             }.Concat(new List<CropType>()
             {
                 CropType.RedCloverTrifoliumPratenseL,
@@ -434,6 +435,7 @@ namespace H.Core.Enumerations
                 CropType.OatSilage,
                 CropType.Oats,
                 CropType.Oilseeds,
+                CropType.RangelandNative,
                 CropType.OtherFieldCrops,
                 CropType.SeededGrassland,
                 CropType.Potatoes,
@@ -453,8 +455,20 @@ namespace H.Core.Enumerations
                 CropType.Vegetables,
                 CropType.Wheat,
                 CropType.WheatSilage,
-            }.Concat(CropTypeExtensions.GetValidCoverCropTypes()) // Cover crops added to main list of crops so user can grow a cover crop as a 'main' crop
-                .OrderBy(x => x.GetDescription());
+            }.OrderBy(x => x.GetDescription());
+        }
+
+        public static IOrderedEnumerable<CropType> GetValidPerennialTypes()
+        {
+            return new List<CropType>
+            {
+                CropType.ForageForSeed,
+                CropType.TameGrass,
+                CropType.TameLegume,
+                CropType.TameMixed,
+                CropType.RangelandNative,
+                CropType.SeededGrassland,
+            }.OrderBy(x => x.GetDescription());
         }
 
         public static IOrderedEnumerable<CropType> GetAlbertaEconomicCropTypes()

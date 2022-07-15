@@ -6,7 +6,7 @@ namespace H.Core.Emissions
     public class ExpressionOfUncertaintyCalculator
     {
         /// <summary>
-        /// Equation 7.2.1-1
+        /// Equation 9.1.1-1
         /// </summary>
         /// <param name="emissionEstimatePairedWithIndividualUncertainty">Emission estimate paired with individual uncertainty</param>
         /// <returns>Uncertainty associated with net farm emission estimate</returns>

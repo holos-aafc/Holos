@@ -5,25 +5,29 @@ namespace H.Core.Providers.Animals
     /// <summary>
     /// No table number
     /// </summary>
-    public class DefaultYearlyTanExcretionRatesForPoultry
+    public class DefaultDailyTanExcretionRatesForPoultry
     {
-        public double GetTanExcretion(AnimalType animalType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>kg TAN head^-1 day^-1</returns>
+        public double GetDailyTanExcretionRate(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {
                 if (animalType == AnimalType.ChickenHens)
                 {
-                    return 0.4;
+                    return 0.0007;
                 }
                 else
                 {
-                    return 0.18;
+                    return 0.0011;
                 }
             }
             else
             {
                 // Turkeys
-                return 0.83;
+                return 0.0026;
             }
         }
     }

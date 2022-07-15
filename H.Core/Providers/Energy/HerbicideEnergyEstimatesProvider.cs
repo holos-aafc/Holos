@@ -56,7 +56,9 @@ namespace H.Core.Providers.Energy
         ///  Unit of measurement of herbicide energy estimates is GJ ha-1</returns>
         public HerbicideEnergyEstimatesData GetHerbicideEnergyDataInstance(Province provinceName, SoilFunctionalCategory soilCategory, TillageType tillageType, CropType cropType)
         {
-            HerbicideEnergyEstimatesData data = Data.Find(x => (x.Province == provinceName) && (x.SoilFunctionalCategory == soilCategory) 
+            var soilLookupType = soilCategory.GetSimplifiedSoilCategory();
+
+            HerbicideEnergyEstimatesData data = Data.Find(x => (x.Province == provinceName) && (x.SoilFunctionalCategory == soilLookupType) 
                                                             && (x.TillageType == tillageType) && (x.CropType == cropType));
 
             // If instance is found return the instance
@@ -66,7 +68,7 @@ namespace H.Core.Providers.Energy
             }
 
             // If instance is not found, we do a few searches to help trace which input parameter was wrong.
-            data = this.Data.Find(x => (x.Province == provinceName) && (x.SoilFunctionalCategory == soilCategory) && (x.TillageType == tillageType));
+            data = this.Data.Find(x => (x.Province == provinceName) && (x.SoilFunctionalCategory == soilLookupType) && (x.TillageType == tillageType));
 
             // If we found an instance that contained our province, tillage and soil then the specified crop type was wrong
             if (data != null)
@@ -82,7 +84,7 @@ namespace H.Core.Providers.Energy
             if (data != null)
             {
                 Trace.TraceError($"{nameof(HerbicideEnergyEstimatesProvider)}.{nameof(HerbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance)}" +
-                                 $" unable to find Soil Category: {soilCategory} in the available soil data. Returning null");
+                                 $" unable to find Soil Category: {soilLookupType} in the available soil data. Returning null");
             }
 
             // The specified province type was wrong

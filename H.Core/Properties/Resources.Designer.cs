@@ -9151,7 +9151,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Land Use Change CO2.
+        ///   Looks up a localized string similar to Land Use Change CO₂.
         /// </summary>
         public static string LabelLandUseChangeCO2 {
             get {
@@ -10537,7 +10537,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upstream CO2.
+        ///   Looks up a localized string similar to Upstream CO₂.
         /// </summary>
         public static string LabelUpstreamCarbonDioxide {
             get {

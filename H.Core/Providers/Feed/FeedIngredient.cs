@@ -479,13 +479,13 @@ namespace H.Core.Providers.Feed
         public double NEma
         {
             get { return _nEma; }
-            set { this.SetProperty(ref _nEma, value); }
+            set { this.SetProperty(ref _nEma, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
         }
 
         public double NEga
         {
             get { return _nEga; }
-            set { this.SetProperty(ref _nEga, value); }
+            set { this.SetProperty(ref _nEga, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
         }
 
         public double RUP
@@ -1310,6 +1310,22 @@ namespace H.Core.Providers.Feed
         {
             get { return _ivp; }
             set { this.SetProperty(ref _ivp, value); }
+        }
+
+        #endregion
+
+        #region Calculated Properties
+
+        /// <summary>
+        /// Calculation from personal email with Aklilu Alemu 6/1/22
+        /// </summary>
+        public double Nemf
+        {
+            get
+            {
+                // NEmf (MJ/kg DM) = [NEma (Mcal/kg DM) + NEga (Mcal/kg DM)] * 4.184 (conversion factor for Mcal to MJ)
+                return (this.NEga + this.NEma) * 4.184;
+            }
         }
 
         #endregion

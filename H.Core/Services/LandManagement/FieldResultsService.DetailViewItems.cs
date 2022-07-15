@@ -157,12 +157,22 @@ namespace H.Core.Services.LandManagement
 
                 // Combine inputs from other crops grown in the same year (undersown, cover crop, etc.)
 
+                var coverCropAboveGroundInput = 0d;
+                var coverCropBelowGroundInput = 0d;
+                var coverCropManureInput = 0d;
                 var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCrop});
                 foreach (var cropViewItem in cropsOtherThanMainCrop)
                 {
-                    mainCrop.AboveGroundCarbonInput += cropViewItem.AboveGroundCarbonInput;
-                    mainCrop.BelowGroundCarbonInput += cropViewItem.BelowGroundCarbonInput;
+                    coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
+                    coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
+                    coverCropManureInput += cropViewItem.ManureCarbonInput;
                 }
+
+                mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
+                mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
+                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInput + coverCropManureInput;
+
+                mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput;
             }
         }
 
@@ -419,6 +429,13 @@ namespace H.Core.Services.LandManagement
                 {
                     // Check if the main crop is the same
                     var mainCrop = fieldSystemComponent.CropViewItems.SingleOrDefault(x => x.Year == secondaryCrop.Year);
+                    if (mainCrop == null)
+                    {
+                        // If main crop is null, then we are in a situation where we are considering a projected system since the year for the main crop will not be equal to the year for the cover crops
+                        // in the context of a current rotation (as opposed to a future projection)
+                        continue;
+                    }
+
                     if (mainCrop.CropType == secondaryCrop.CropType)
                     {
                         continue;

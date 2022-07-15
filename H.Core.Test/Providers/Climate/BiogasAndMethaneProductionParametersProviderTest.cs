@@ -9,7 +9,7 @@ namespace H.Core.Test.Providers.Climate
     public class BiogasAndMethaneProductionParametersProviderTest
     {
         #region Fields
-        private static BiogasAndMethaneProductionParametersProvider _provider;
+        private static BiogasAndMethaneProductionParametersProvider_Table_48 _provider;
         #endregion
 
         #region Initialization
@@ -17,7 +17,7 @@ namespace H.Core.Test.Providers.Climate
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _provider = new BiogasAndMethaneProductionParametersProvider();
+            _provider = new BiogasAndMethaneProductionParametersProvider_Table_48();
         }
 
         [ClassCleanup]

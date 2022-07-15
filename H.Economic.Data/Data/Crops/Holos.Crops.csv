@@ -1,0 +1,796 @@
+
+Year,ID,Province,Soil Type,Group,Crop ID,Crop,"unit (bu, t, etc)",Yield,Crop Price,Seed,Fertilizer,Chemical,Trucking and Marketing,Fuel Oil Lube,Machinery Repairs,Crop Insurance,Building Repairs,Custom Work,Labour,Utilities,Operating Interest,Fixed Cost $/Acre,Variable Cost $/acre,Total Costs $/Acre,Notes,Source
+2021,1,Saskatchewan,Black,Small-grain cereals,3,Wheat,bu,68.3,6.04,33.05,74.95,108.21,0,19.25,11.49,3.87,0.88,23.05,0,4.88,5.48,119.57,284.23,403.8,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,2,Saskatchewan,Brown,Small-grain cereals,3,Wheat,bu,52.9,6.04,26.32,57.76,107.71,0,12.32,9,4.46,0.49,22.3,0,3.23,4.78,95.34,247.88,343.22,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,3,Saskatchewan,Dark Brown,Small-grain cereals,3,Wheat,bu,61.4,6.04,29.07,67.31,107.71,0,15.4,10.15,4.18,0.65,22.05,0,4.23,5.12,109.53,265.22,374.75,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,4,Saskatchewan,Brown,Small-grain cereals,4,Durum Wheat,bu,54,7.5,36.43,59.19,62.41,0,12.32,9,6.1,0.49,22.3,0,3.23,4.15,95.34,215.13,310.47,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,5,Saskatchewan,Dark Brown,Small-grain cereals,4,Durum Wheat,bu,61.7,7.5,40.25,67.78,62.41,0,15.4,10.15,7.94,0.65,22.05,0,4.23,4.53,109.53,234.75,344.28,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,6,Saskatchewan,Black,Small-grain cereals,5,Barley,bu,96.5,4.37,31.82,70.15,47.73,0,19.25,11.49,4.9,0.88,21.05,0,4.88,4.53,119.57,234.91,354.48,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,7,Saskatchewan,Black,Small-grain cereals,5,Barley,bu,78.3,5.2,41.95,56.8,105.73,0,19.25,11.49,3.98,0.88,21.05,0,4.88,5.21,119.57,270.35,389.92,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,8,Saskatchewan,Brown,Small-grain cereals,5,Barley,bu,78.1,4.37,25.46,56.8,47.73,0,12.32,9,5.84,0.49,20.8,0,3.23,3.56,95.34,184.74,280.08,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,9,Saskatchewan,Brown,Small-grain cereals,5,Barley,bu,63.9,5.2,33.7,46.77,105.73,0,12.32,9,4.79,0.49,20.8,0,3.23,4.65,95.34,240.98,336.32,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,10,Saskatchewan,Dark Brown,Small-grain cereals,5,Barley,bu,85.4,4.37,28.06,62.04,47.73,0,15.4,10.15,5.2,0.65,21.05,0,4.23,3.81,109.53,197.68,307.21,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,11,Saskatchewan,Dark Brown,Small-grain cereals,5,Barley,bu,69.9,5.2,36.87,50.59,105.73,0,15.4,10.15,4.26,0.65,21.05,0,4.23,4.88,109.53,253.17,362.7,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,12,Saskatchewan,Black,Small-grain cereals,7,Oats,bu,145.9,3.33,43.78,66.82,51.23,0,19.25,11.49,7.14,0.88,21.05,0,4.88,4.81,119.57,249.56,369.14,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,13,Saskatchewan,Brown,Small-grain cereals,7,Oats,bu,81.1,3.33,43.78,37.23,51.23,0,12.32,9,8.33,0.49,20.8,0,3.23,3.66,95.34,189.58,284.92,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,14,Saskatchewan,Dark Brown,Small-grain cereals,7,Oats,bu,110.2,3.33,43.78,50.6,51.23,0,15.4,10.15,7.88,0.65,21.05,0,4.23,4.02,109.53,208.34,317.87,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,15,Saskatchewan,Dark Brown,Small-grain cereals,10,Canary seed,lb,1918,0.28,18.2,72.93,63.96,0,18.12,10.15,7.35,0.65,22.05,0,4.23,4.27,109.53,221.26,330.79,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,16,Saskatchewan,Black,Small-grain cereals,12,Grain corn,bu,117.7,4.85,96.3,86.86,76.81,0,21.52,14.1,10.7,0.88,58.26,0,4.88,7.27,134.46,376.7,511.17,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,17,Saskatchewan,Brown,Small-grain cereals,12,Grain corn,bu,76.8,4.85,96.3,56.79,76.81,0,13.77,11.61,6.47,0.49,49.04,0,3.23,6.18,110.23,320.2,430.43,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,18,Saskatchewan,Dark Brown,Small-grain cereals,12,Grain corn,bu,76.8,4.85,96.3,56.79,65.86,0,17.21,12.76,7.31,0.65,45.48,0,4.23,6.02,124.42,311.97,436.38,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,19,Saskatchewan,Black,Oilseeds,20,Canola,bu,56,11.25,79.55,92.96,114.36,0,20.39,11.49,8.6,0.88,21.05,0,4.88,6.95,119.57,360.23,479.8,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,20,Saskatchewan,Brown,Oilseeds,20,Canola,bu,48.06,11.25,79.55,80.01,79.44,0,13.05,9,10.4,0.49,21.05,0,3.23,5.82,95.34,301.54,396.89,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,21,Saskatchewan,Dark Brown,Oilseeds,20,Canola,bu,52,11.25,79.55,86.38,107.57,0,16.31,10.15,8.16,0.65,21.05,0,4.23,6.56,109.53,339.96,449.49,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,22,Saskatchewan,Brown,Oilseeds,21,Mustard,lb,1301,0.35,23.64,41.53,50.7,0,19.03,9,7.07,0.49,20.3,0,3.23,3.43,95.34,177.92,273.26,Brown,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,23,Saskatchewan,Brown,Oilseeds,21,Mustard,lb,1389,0.3,20.64,43.43,50.7,0,19.03,9,5.87,0.49,20.3,0,3.23,3.39,95.34,175.59,270.93,Oriental,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,24,Saskatchewan,Brown,Oilseeds,21,Mustard,lb,1168,0.42,34.4,38.19,42.24,0,19.03,9,8.47,0.49,20.3,0,3.23,3.44,95.34,178.29,273.63,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,25,Saskatchewan,Black,Oilseeds,22,Flax,bu,37.4,13.97,22.96,53.96,83.18,0,19.25,11.49,6.43,0.88,21.05,0,4.88,4.39,119.57,227.59,347.17,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,26,Saskatchewan,Brown,Oilseeds,22,Flax,bu,30.3,13.97,19.92,43.93,71.6,0,12.32,9,9.01,0.49,20.8,0,3.23,3.73,95.34,193.54,288.88,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,27,Saskatchewan,Dark Brown,Oilseeds,22,Flax,bu,34.3,13.97,21.58,49.66,99.73,0,15.4,10.15,7.02,0.65,21.05,0,4.23,4.5,109.53,233.33,342.86,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,28,Saskatchewan,Black,Pulse crops,25,Soybean,bu,37.5,10.93,112,16.11,56.99,0,21.52,11.49,3.69,0.88,23.05,0,4.88,4.91,119.57,254.65,374.22,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,29,Saskatchewan,Brown,Pulse crops,25,Soybean,bu,32,10.93,112,13.83,56.99,0,13.77,9,5.68,0.49,22.3,0,3.23,4.66,95.34,241.46,336.8,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,30,Saskatchewan,Dark Brown,Pulse crops,25,Soybean,bu,34.5,10.93,112,14.97,56.99,0,17.21,10.15,4.53,0.65,22.05,0,4.23,4.76,109.53,246.9,356.43,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,31,Saskatchewan,Dark Brown,Pulse crops,26,Beans (dry field),lb,1200,0.33,85.14,12.89,128.09,0,17.21,10.15,13.4,0.65,19.8,0,4.23,5.72,109.53,296.64,406.17,Black Bean,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,32,Saskatchewan,Black,Pulse crops,28,Fababean,lb,3902,0.12,42.23,29.38,107.51,0,19.93,11.49,10.81,0.88,19.8,0,4.88,4.84,119.57,250.88,370.45,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,33,Saskatchewan,Brown,Pulse crops,29,Chickpea,lb,2138,0.3,52.87,20.44,112.14,0,19.93,9,12.25,0.49,19.8,0,3.23,4.91,95.34,254.57,349.91,Desi,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,34,Saskatchewan,Brown,Pulse crops,29,Chickpea,lb,2491,0.3,74.71,22.34,112.14,0,19.93,9,11.64,0.49,19.8,0,3.23,5.36,95.34,278.15,373.49,"Kabuli, Large",\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,35,Saskatchewan,Brown,Pulse crops,29,Chickpea,lb,2161,0.25,59.59,18.54,112.14,0,19.93,9,11.14,0.49,19.8,0,3.23,4.98,95.34,258.35,353.69,"Kabuli, Small",\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,36,Saskatchewan,Black,Pulse crops,32,Lentil,lb,1918,0.27,54.87,12.07,89.13,0,21.52,11.49,12.03,0.88,22.8,0,4.88,4.5,119.57,233.3,352.87,Large Green,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,37,Saskatchewan,Black,Pulse crops,32,Lentil,lb,2491,0.25,40.29,16.11,89.13,0,21.52,11.49,8.21,0.88,22.8,0,4.88,4.22,119.57,218.66,218.66,Red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,38,Saskatchewan,Brown,Pulse crops,32,Lentil,lb,1676,0.27,54.87,11.15,90.87,0,13.77,9,9.86,0.49,21.8,0,3.23,4.22,95.34,218.77,314.11,Large Green,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,39,Saskatchewan,Brown,Pulse crops,32,Lentil,lb,1940,0.25,40.29,12.69,90.87,0,13.77,9,9.3,0.49,21.8,0,3.23,3.95,95.34,204.9,204.9,Red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,40,Saskatchewan,Dark Brown,Pulse crops,32,Lentil,lb,1852,0.27,54.87,12.07,90.87,0,17.21,10.15,10.52,0.65,21.05,0,4.23,4.35,109.53,225.34,334.87,Large Green,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,41,Saskatchewan,Dark Brown,Pulse crops,32,Lentil,lb,2205,0.25,40.29,13.83,90.87,0,17.21,10.15,9.47,0.65,21.05,0,4.23,4.07,109.53,211.18,211.18,Red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,42,Saskatchewan,Dark Brown,Other field crops,37,Sunflower seed,lb,2293,0.25,55.12,76.19,86.83,0,19.93,10.15,7.43,0.65,20.8,0,4.23,5.52,109.53,286.21,395.74,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,43,Saskatchewan,Black,Cover crops,49,Faba bean/broad bean (Vicia faba),lb,3902,0.12,42.23,29.38,107.51,0,19.93,11.49,10.81,0.88,19.8,0,4.88,4.84,119.57,250.88,370.45,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,44,Saskatchewan,Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),lb,1301,0.35,23.64,41.53,50.7,0,19.03,9,7.07,0.49,20.3,0,3.23,3.43,95.34,177.92,273.26,Brown,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,45,Saskatchewan,Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),lb,1389,0.3,20.64,43.43,50.7,0,19.03,9,5.87,0.49,20.3,0,3.23,3.39,95.34,175.59,270.93,Oriental,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,46,Saskatchewan,Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),lb,1168,0.42,34.4,38.19,42.24,0,19.03,9,8.47,0.49,20.3,0,3.23,3.44,95.34,178.29,273.63,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,47,Saskatchewan,Black,Cover crops,57,Barley (Hordeum vulgare),bu,96.5,4.37,31.82,70.15,47.73,0,19.25,11.49,4.9,0.88,21.05,0,4.88,4.53,119.57,234.91,354.48,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,48,Saskatchewan,Black,Cover crops,57,Barley (Hordeum vulgare),bu,78.3,5.2,41.95,56.8,105.73,0,19.25,11.49,3.98,0.88,21.05,0,4.88,5.21,119.57,270.35,389.92,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,49,Saskatchewan,Brown,Cover crops,57,Barley (Hordeum vulgare),bu,78.1,4.37,25.46,56.8,47.73,0,12.32,9,5.84,0.49,20.8,0,3.23,3.56,95.34,184.74,280.08,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,50,Saskatchewan,Brown,Cover crops,57,Barley (Hordeum vulgare),bu,63.9,5.2,33.7,46.77,105.73,0,12.32,9,4.79,0.49,20.8,0,3.23,4.65,95.34,240.98,336.32,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,51,Saskatchewan,Dark Brown,Cover crops,57,Barley (Hordeum vulgare),bu,85.4,4.37,28.06,62.04,47.73,0,15.4,10.15,5.2,0.65,21.05,0,4.23,3.81,109.53,197.68,307.21,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,52,Saskatchewan,Dark Brown,Cover crops,57,Barley (Hordeum vulgare),bu,69.9,5.2,36.87,50.59,105.73,0,15.4,10.15,4.26,0.65,21.05,0,4.23,4.88,109.53,253.17,362.7,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,53,Saskatchewan,Black,Cover crops,58,Oat (Avena sativa),bu,145.9,3.33,43.78,66.82,51.23,0,19.25,11.49,7.14,0.88,21.05,0,4.88,4.81,119.57,249.56,369.14,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,54,Saskatchewan,Brown,Cover crops,58,Oat (Avena sativa),bu,81.1,3.33,43.78,37.23,51.23,0,12.32,9,8.33,0.49,20.8,0,3.23,3.66,95.34,189.58,284.92,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,55,Saskatchewan,Dark Brown,Cover crops,58,Oat (Avena sativa),bu,110.2,3.33,43.78,50.6,51.23,0,15.4,10.15,7.88,0.65,21.05,0,4.23,4.02,109.53,208.34,317.87,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,56,Saskatchewan,Black,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,bu,78.3,5.1,67.2,61.57,22.3,0,19.25,11.49,5.8,0.88,21.05,0,4.88,9.45,119.57,223,342.57,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,57,Saskatchewan,Brown,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,bu,50.8,5.1,67.2,40.09,22.3,0,12.32,9,8.5,0.49,20.8,0,3.23,8.12,95.34,191.56,286.9,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,58,Saskatchewan,Dark Brown,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,bu,66.9,5.1,67.2,52.97,22.3,0,15.4,10.15,5.76,0.65,20.8,0,4.23,8.8,109.53,207.63,317.16,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,59,Saskatchewan,Black,Cover crops,61,Flax (Linum usitatissimum),bu,37.4,13.97,22.96,53.96,83.18,0,19.25,11.49,6.43,0.88,21.05,0,4.88,4.39,119.57,227.59,347.17,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,60,Saskatchewan,Brown,Cover crops,61,Flax (Linum usitatissimum),bu,30.3,13.97,19.92,43.93,71.6,0,12.32,9,9.01,0.49,20.8,0,3.23,3.73,95.34,193.54,288.88,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,61,Saskatchewan,Dark Brown,Cover crops,61,Flax (Linum usitatissimum),bu,34.3,13.97,21.58,49.66,99.73,0,15.4,10.15,7.02,0.65,21.05,0,4.23,4.5,109.53,233.33,342.86,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,62,Saskatchewan,Black,Cover crops,67,Winter wheat (Triticum aestivum),bu,71.3,5.83,36.82,57.74,63.62,0,19.25,11.49,6.82,0.88,23.05,0,4.88,10.74,119.57,253.51,373.08,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,63,Saskatchewan,Brown,Cover crops,67,Winter wheat (Triticum aestivum),bu,59.5,5.83,36.82,48.19,63.62,0,12.32,9,8.34,0.49,22.3,0,3.23,9.02,95.34,212.84,308.18,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,64,Saskatchewan,Dark Brown,Cover crops,67,Winter wheat (Triticum aestivum),bu,60.3,5.83,36.82,49.15,63.62,0,15.4,10.15,8.37,0.65,22.05,0,4.23,10.13,109.53,239.02,348.55,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,65,Saskatchewan,Black,Cover crops,68,(Fall) Rye,bu,78.3,5.1,67.2,61.57,22.3,0,19.25,11.49,5.8,0.88,21.05,0,4.88,9.45,119.57,223,342.57,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,66,Saskatchewan,Brown,Cover crops,68,(Fall) Rye,bu,50.8,5.1,67.2,40.09,22.3,0,12.32,9,8.5,0.49,20.8,0,3.23,8.12,95.34,191.56,286.9,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,67,Saskatchewan,Dark Brown,Cover crops,68,(Fall) Rye,bu,66.9,5.1,67.2,52.97,22.3,0,15.4,10.15,5.76,0.65,20.8,0,4.23,8.8,109.53,207.63,317.16,Hybrid Fall Rye,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Saskatchewan\Saskatchewan Crop Production Guide 2021.pdf
+2021,68,Manitoba,Black,Small-grain cereals,3,Wheat,bu,61,6.75,29,76.9,47.23,0,21.64,12.88,12.99,0,0,4.8,7.75,5.29,136.6,240.4,401, Hard Red Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,69,Manitoba,Black,Small-grain cereals,3,Wheat,bu,70,6.25,27,83.87,47.23,0,22.38,12.88,15.13,0,0,4.8,7.75,5.49,136.6,249.49,410.09,Northern Hard Red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,70,Manitoba,Black,Small-grain cereals,3,Wheat,bu,70,5.75,27,83.87,47.23,0,22.38,12.88,13.01,0,0,4.8,7.75,5.44,136.6,247.31,407.91,Prairie Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,71,Manitoba,Black,Small-grain cereals,3,Wheat,bu,63,5.75,27,76.9,47.23,0,21.8,12.88,14.72,0,0,4.8,7.75,5.29,136.6,240.52,401.12,Other Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,72,Manitoba,Black,Small-grain cereals,5,Barley,bu,80,4.75,18,62.53,51.5,0,23.3,12.88,14.65,0,0,4.8,7.75,4.94,136.6,224.44,385.03,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,73,Manitoba,Black,Small-grain cereals,7,Oats,bu,110,3.75,19.38,57.42,19.63,0,25.79,12.88,17.47,0,0,4.8,7.75,4.33,136.6,196.94,357.54,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,74,Manitoba,Black,Oilseeds,20,Canola,bu,45,11.25,67.5,88.16,30.91,0,20.82,12.88,14.12,0,0,4.8,7.75,6.01,136.6,273.06,433.66,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,75,Manitoba,Black,Oilseeds,22,Flax,bu,25,14,25.2,38.44,35.13,0,19.67,12.88,16.67,0,0,4.8,7.75,4.01,136.6,182.39,342.99,Flaxseed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,76,Manitoba,Black,Pulse crops,25,Soybean,bu,37,11.4,93.38,23.88,10.47,0,18.71,12.88,20.41,0,0,4.8,7.75,4.76,136.6,216.25,376.84,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,77,Manitoba,Black,Pulse crops,26,Beans (dry field),lb,1900,0.33,82.5,47.74,96.23,0,17.5,12.88,33.77,0,0,4.8,7.75,7.24,141.98,329.01,494.99,Pinto,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,78,Manitoba,Black,Pulse crops,27,Whitebeans,lb,1750,0.35,78.1,52.39,100.39,0,17.3,12.88,30.5,0,0,4.8,7.75,7.25,141.98,329.66,495.65,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,79,Manitoba,Black,Other field crops,37,Sunflower seed,lb,1700,0.3,49.5,72.58,72.32,0,21.03,29.88,32.62,0,0,4.8,17.75,7.27,144.68,330.47,499.14,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,80,Manitoba,Black,Cover crops,57,Barley (Hordeum vulgare),bu,80,4.75,18,62.53,51.5,0,23.3,12.88,14.65,0,0,4.8,7.75,4.94,136.6,224.44,385.03,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,81,Manitoba,Black,Cover crops,58,Oat (Avena sativa),bu,110,3.75,19.38,57.42,19.63,0,25.79,12.88,17.47,0,0,4.8,7.75,4.33,136.6,196.94,357.54,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,82,Manitoba,Black,Cover crops,61,Flax (Linum usitatissimum),bu,25,14,25.2,38.44,35.13,0,19.67,12.88,16.67,0,0,4.8,7.75,4.01,136.6,182.39,342.99,Flaxseed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,83,Manitoba,Black,Cover crops,67,Winter wheat (Triticum aestivum),bu,67,5.75,25,79.22,30.98,0,22.13,12.88,12.74,0,0,4.8,7.75,4.91,136.6,223.02,383.62,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2021,84,Manitoba,Black,Cover crops,68,(Fall) Rye,bu,73,5.25,12,93.17,7.5,0,18.81,12.88,18.03,0,0,4.8,7.75,4.46,136.6,202.69,363.28,Hybrid,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Manitoba\manitoba 2021 crop production cost estimator.pdf
+2020,85,Alberta,Brown,Small-grain cereals,1,Summer fallow,,,,,,12.07,,7.73,9.38,,1.04,0,10.22,2.6,0.6,80.87,43.64,124.51,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,86,Alberta,Black,Small-grain cereals,3,Wheat,bu,65,6.7,25.88,59,36.12,22.87,19.74,17.7,16.16,2.14,1.71,18.62,10.34,6.05,154.98,236.32,391.3,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,87,Alberta,Brown,Small-grain cereals,3,Wheat,bu,38,6.7,23,37,35.37,13.37,15.01,15.36,14.67,1.56,4.08,21.45,10.34,4.77,91.99,195.98,287.97,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,88,Alberta,Dark Brown,Small-grain cereals,3,Wheat,bu,44,6.7,23,44.5,35.37,15.48,13.15,12.76,15.78,1.04,2.04,12.77,10.34,5.14,98.13,191.38,289.51,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,89,Alberta,Grey-Wooded,Small-grain cereals,3,Wheat,bu,58,6.5,25.88,56.5,33.43,20.41,26.8,17.71,21.47,1.04,5.1,21.96,10.34,5.79,155.91,246.44,402.35,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,90,Alberta,Irrigated,Small-grain cereals,3,Wheat,bu,96,6.7,28.75,72,38.28,33.78,24.77,29.69,13.43,2.08,8.17,30.65,13.46,6.95,302.71,324.62,627.33,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,91,Alberta,Black,Small-grain cereals,3,Wheat,bu,72,5.5,25.88,59,36.12,25.33,17.87,17.44,18.71,5.36,1.71,22.76,10.34,6.05,154.98,246.56,401.54,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,92,Alberta,Brown,Small-grain cereals,3,Wheat,bu,40,5.75,23,37,35.37,14.07,14.25,11.72,18.04,2.6,1.53,17.88,10.34,4.77,91.99,190.57,282.56,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,93,Alberta,Dark Brown,Small-grain cereals,3,Wheat,bu,49,5.75,23,44.5,35.37,17.24,15.02,13.02,18.8,1.56,3.06,13.28,10.34,5.14,98.13,200.34,298.47,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,94,Alberta,Grey-Wooded,Small-grain cereals,3,Wheat,bu,70,5.75,25.88,56.5,33.43,24.63,24.54,15.36,22.34,2.6,5.36,20.94,10.34,5.79,155.91,247.72,403.63,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,95,Alberta,Irrigated,Small-grain cereals,3,Wheat,bu,105,5.75,28.75,72,38.28,36.95,26.79,27.34,17.71,2.08,8.17,31.67,13.46,6.95,302.71,333.27,635.98,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,96,Alberta,Irrigated,Small-grain cereals,3,Wheat,bu,111,5.25,26.44,77,38.28,39.06,28.01,27.6,11.35,2.08,9.19,31.67,13.46,7.09,302.71,334.34,637.05,Soft,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,97,Alberta,Grey-Wooded (Peace Region),Small-grain cereals,3,Wheat,bu,56,6,23,49.5,33.43,19.7,28.61,12.5,17.78,3.91,3.06,18.39,10.34,5.3,123.27,225.52,348.79,Spring,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,98,Alberta,Grey-Wooded (Peace Region),Small-grain cereals,3,Wheat,bu,65,5.5,23,49.5,33.43,22.87,29.34,12.5,19.56,3.13,3.06,18.39,10.34,5.3,123.27,230.41,353.68,CPS,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,99,Alberta,Brown,Small-grain cereals,4,Durum Wheat,bu,40,6.75,33,37,35.37,14.07,14.43,12.5,15.21,1.3,3.57,17.88,8.96,5.27,91.99,198.56,290.55,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,100,Alberta,Dark Brown,Small-grain cereals,4,Durum Wheat,bu,41,6.7,33,44.5,35.37,14.43,15.47,11.46,16.35,1.04,3.06,11.75,8.96,5.64,98.13,201.02,299.15,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,101,Alberta,Irrigated,Small-grain cereals,4,Durum Wheat,bu,103,6.7,37.13,72,38.28,36.24,26.89,30.21,16.64,2.08,9.19,31.92,13.46,7.37,302.71,344.29,647,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,102,Alberta,Black,Small-grain cereals,5,Barley,bu,83,5.25,25.88,62,36.12,23.9,20.54,17.19,17.43,5.89,2.56,24.31,10.34,6.2,154.98,252.35,407.33,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,103,Alberta,Black,Small-grain cereals,5,Barley,bu,85,4.25,23.18,59,18.66,24.47,18.67,13.85,14.35,2.14,1.92,15,10.34,5.04,154.98,206.62,361.6,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,104,Alberta,Brown,Small-grain cereals,5,Barley,bu,53,5.25,23,48,35.37,15.26,14.8,8.33,15.08,1.04,2.55,16.35,8.96,5.32,91.99,194.05,286.04,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,105,Alberta,Brown,Small-grain cereals,5,Barley,bu,53,4.7,20.6,44.5,18.77,15.26,13.87,8.85,13.45,1.04,4.08,16.35,8.96,4.19,91.99,169.93,261.92,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,106,Alberta,Dark Brown,Small-grain cereals,5,Barley,bu,63,5.25,23,55,35.37,18.14,14.23,13.02,16.9,2.6,6.12,13.28,8.96,5.67,98.13,212.28,310.41,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,107,Alberta,Dark Brown,Small-grain cereals,5,Barley,bu,63,4,20.6,49.5,18.77,18.14,13.34,12.5,11.51,2.08,6.12,12.51,8.96,4.44,98.13,178.48,276.61,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,108,Alberta,Grey-Wooded,Small-grain cereals,5,Barley,bu,78,5.25,25.88,59.5,33.43,22.46,25.19,17.71,21.08,2.08,5.61,20.18,10.34,5.94,155.91,249.39,405.3,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,109,Alberta,Grey-Wooded,Small-grain cereals,5,Barley,bu,78,4.15,23.18,59,18.77,22.46,21.59,14.58,17.72,2.6,5.61,21.45,10.34,5.05,155.91,222.35,378.26,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,110,Alberta,Grey-Wooded (Peace Region),Small-grain cereals,5,Barley,bu,76,4.75,23,50.5,33.43,21.88,34.71,12.5,18.39,2.08,6.38,18.9,10.34,5.35,123.27,237.46,360.73,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,111,Alberta,Grey-Wooded (Peace Region),Small-grain cereals,5,Barley,bu,76,3.7,20.6,49.5,18.77,21.88,30.23,11.46,15.37,2.08,6.12,17.37,10.34,4.44,123.27,208.18,331.45,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,112,Alberta,Irrigated,Small-grain cereals,5,Barley,bu,125,5.25,28.75,62,38.28,35.99,31.3,30.11,13.22,2.08,12.76,34.73,13.46,6.45,302.71,327.95,630.66,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,113,Alberta,Irrigated,Small-grain cereals,5,Barley,bu,125,4.7,25.75,72,22.84,35.99,29.34,28.91,13.22,2.08,12.25,34.73,13.46,6.03,302.71,315.41,618.12,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,114,Alberta,Grey-Wooded (Peace Region),Oilseeds,20,Canola,bu,26,10.2,23,51.5,15.25,7.76,42.56,12.5,13.97,2.08,2.81,16.86,8.96,4.49,123.27,201.72,324.99,Polish,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,115,Alberta,Brown,Oilseeds,20,Canola,bu,30,10.5,51.45,53.5,30.19,8.96,16.49,8.33,21.71,1.56,6.12,18.9,8.96,6.76,91.99,232.92,324.91,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,116,Alberta,Dark Brown,Oilseeds,20,Canola,bu,35,10.5,57.75,63,30.19,10.45,15.49,15.63,23.25,1.56,5.1,14.3,8.96,7.55,98.13,253.23,351.36,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,117,Alberta,Grey-Wooded (Peace Region),Oilseeds,20,Canola,bu,39,10.2,52.5,72,25.92,11.64,35.99,13.02,21.23,4.43,3.57,19.41,12.59,7.52,123.27,279.82,403.09,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,118,Alberta,Grey-Wooded,Oilseeds,20,Canola,bu,44,10.5,51.45,88.5,25.92,13.14,24.8,23.44,22.18,2.08,5.61,24.52,12.59,8.29,155.91,302.51,458.42,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,119,Alberta,Black,Oilseeds,20,Canola,bu,46,10.5,57.75,84.5,32.13,16.19,20.27,15.65,19.62,2.41,2.13,19.14,12.59,8.72,154.98,291.09,446.07,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,120,Alberta,Irrigated,Oilseeds,20,Canola,bu,58,10.5,57.75,90.5,36.59,17.32,30.46,30.21,20.61,2.08,7.15,31.67,13.46,9.24,302.71,366.51,669.22,Argentine HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,121,Alberta,Brown,Oilseeds,21,Mustard,lb,661,0.35,23,34.5,13.21,3.95,13.87,8.85,16.15,1.04,3.06,13.79,7.18,3.54,91.99,142.15,234.14,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,122,Alberta,Dark Brown,Oilseeds,21,Mustard,lb,706,0.35,24.15,41.5,13.21,4.22,13.87,11.46,14.61,1.56,4.59,13.79,8.96,3.94,98.13,155.86,253.99,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,123,Alberta,Dark Brown,Oilseeds,22,Flax,bu,21,11.75,28.6,35,20.02,6.94,11.86,11.46,17.8,1.56,8.17,14.81,8.96,4.18,98.13,169.35,267.48,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,124,Alberta,Irrigated,Pulse crops,26,Beans (dry field),lb,2459,0.35,49.51,68.5,28.86,26.17,45.88,65.1,43.43,4.43,30.11,69.98,17.91,7.34,326.37,475.82,802.19,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,125,Alberta,Brown,Pulse crops,29,Chickpea,lb,1463,0.3,72,16.5,42.73,8.74,14.67,9.38,35.91,2.08,4.08,15.32,7.66,6.56,91.99,235.62,327.61,Kabuli,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,126,Alberta,Black,Pulse crops,31,Field Pea,bu,56,7,43.06,22.5,36.88,19.7,25.6,18.21,23.69,4.82,7.04,22.76,12.59,5.12,154.98,241.98,396.96,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,127,Alberta,Brown,Pulse crops,31,Field Pea,bu,45,7,39.75,15.5,37.1,15.83,14.81,11.2,20.75,2.34,2.04,13.54,8.96,4.62,91.99,186.43,278.42,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,128,Alberta,Dark Brown,Pulse crops,31,Field Pea,bu,48,7,39.09,15.5,37.1,16.89,15.41,14.06,20.75,1.82,3.06,12.51,8.96,4.58,98.13,189.73,287.86,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,129,Alberta,Grey-Wooded,Pulse crops,31,Field Pea,bu,50,7,39.75,20,37.1,17.59,25.67,21.09,22.88,3.65,5.1,23.24,12.59,4.84,155.91,233.5,389.41,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,130,Alberta,Grey-Wooded (Peace Region),Pulse crops,31,Field Pea,bu,50,6.8,36.44,17.5,37.1,17.59,36.07,13.54,22.88,3.13,5.1,15.32,8.96,4.55,123.27,218.18,341.45,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,131,Alberta,Brown,Pulse crops,32,Lentil,lb,1525,0.19,36,12,65.35,9.11,12.27,8.33,26.94,2.86,2.04,13.28,6.71,5.67,91.99,200.55,292.54,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,132,Alberta,Dark Brown,Pulse crops,32,Lentil,lb,1500,0.19,36,14,60.35,8.96,12.27,8.33,26.94,2.86,2.04,13.28,6.71,5.52,98.13,197.26,295.39,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,133,Alberta,Black,Cover crops,48,Alfalfa (Medicago sativa L.),t,2.5,110,9,14,1.01,60.03,5.33,7.18,NA,3.21,3.84,11.38,6.27,1.2,107.53,122.46,229.99,Alfalfa Hay,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,134,Alberta,Grey-Wooded,Cover crops,48,Alfalfa (Medicago sativa L.),t,2.25,110,11,14,1.02,54.76,11.67,7.81,NA,1.56,17.35,17.88,6.27,1.3,71.97,144.63,216.6,Alfalfa Hay,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,135,Alberta,Irrigated,Cover crops,48,Alfalfa (Medicago sativa L.),t,4,110,15.4,21,1.22,97.29,45.34,35.42,NA,1.04,8.17,34.73,28.73,1.88,278.77,322.62,601.39,Alfalfa Hay,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,136,Alberta,Grey-Wooded (Peace Region),Cover crops,48,Alfalfa (Medicago sativa L.),t,2,110,11,12,1.02,48.64,19,8.33,19.58,1.04,0,10.22,5.84,1.2,54.78,137.88,192.66,Alfalfa Hay,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,137,Alberta,Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),lb,661,0.35,23,34.5,13.21,3.95,13.87,8.85,16.15,1.04,3.06,13.79,7.18,3.54,91.99,142.15,234.14,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,138,Alberta,Dark Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),lb,706,0.35,24.15,41.5,13.21,4.22,13.87,11.46,14.61,1.56,4.59,13.79,8.96,3.94,98.13,155.86,253.99,Yellow,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,139,Alberta,Black,Cover crops,57,Barley (Hordeum vulgare),bu,83,5.25,25.88,62,36.12,23.9,20.54,17.19,17.43,5.89,2.56,24.31,10.34,6.2,154.98,252.35,407.33,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,140,Alberta,Black,Cover crops,57,Barley (Hordeum vulgare),bu,85,4.25,23.18,59,18.66,24.47,18.67,13.85,14.35,2.14,1.92,15,10.34,5.04,154.98,206.62,361.6,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,141,Alberta,Brown,Cover crops,57,Barley (Hordeum vulgare),bu,53,5.25,23,48,35.37,15.26,14.8,8.33,15.08,1.04,2.55,16.35,8.96,5.32,91.99,194.05,286.04,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,142,Alberta,Brown,Cover crops,57,Barley (Hordeum vulgare),bu,53,4.7,20.6,44.5,18.77,15.26,13.87,8.85,13.45,1.04,4.08,16.35,8.96,4.19,91.99,169.93,261.92,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,143,Alberta,Dark Brown,Cover crops,57,Barley (Hordeum vulgare),bu,63,5.25,23,55,35.37,18.14,14.23,13.02,16.9,2.6,6.12,13.28,8.96,5.67,98.13,212.28,310.41,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,144,Alberta,Dark Brown,Cover crops,57,Barley (Hordeum vulgare),bu,63,4,20.6,49.5,18.77,18.14,13.34,12.5,11.51,2.08,6.12,12.51,8.96,4.44,98.13,178.48,276.61,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,145,Alberta,Grey-Wooded,Cover crops,57,Barley (Hordeum vulgare),bu,78,5.25,25.88,59.5,33.43,22.46,25.19,17.71,21.08,2.08,5.61,20.18,10.34,5.94,155.91,249.39,405.3,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,146,Alberta,Grey-Wooded,Cover crops,57,Barley (Hordeum vulgare),bu,78,4.15,23.18,59,18.77,22.46,21.59,14.58,17.72,2.6,5.61,21.45,10.34,5.05,155.91,222.35,378.26,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,147,Alberta,Grey-Wooded (Peace Region),Cover crops,57,Barley (Hordeum vulgare),bu,76,4.75,23,50.5,33.43,21.88,34.71,12.5,18.39,2.08,6.38,18.9,10.34,5.35,123.27,237.46,360.73,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,148,Alberta,Grey-Wooded (Peace Region),Cover crops,57,Barley (Hordeum vulgare),bu,76,3.7,20.6,49.5,18.77,21.88,30.23,11.46,15.37,2.08,6.12,17.37,10.34,4.44,123.27,208.18,331.45,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,149,Alberta,Irrigated,Cover crops,57,Barley (Hordeum vulgare),bu,125,5.25,28.75,62,38.28,35.99,31.3,30.11,13.22,2.08,12.76,34.73,13.46,6.45,302.71,327.95,630.66,Malt,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,150,Alberta,Irrigated,Cover crops,57,Barley (Hordeum vulgare),bu,125,4.7,25.75,72,22.84,35.99,29.34,28.91,13.22,2.08,12.25,34.73,13.46,6.03,302.71,315.41,618.12,Feed,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,151,Alberta,Dark Brown,Cover crops,61,Flax (Linum usitatissimum),bu,21,11.75,28.6,35,20.02,6.94,11.86,11.46,17.8,1.56,8.17,14.81,8.96,4.18,98.13,169.35,267.48,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,152,Alberta,Dark Brown,Cover crops,67,Winter wheat (Triticum aestivum),bu,46,5.5,25,44.5,19.44,16.19,15,12.5,12.35,1.04,3.06,12.77,8.96,4.45,98.13,175.25,273.38,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Alberta\alberta 2020 crop planning guide.pdf
+2020,153,Ontario,Eastern Canada,Small-grain cereals,3,Wheat,bu,56,6.4,70,101.37,26.95,13.72,34.75,34.25,8.5,0,34,26.55,0,8.45,70.2,373.11,443.31,Hard red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,154,Ontario,Eastern Canada,Small-grain cereals,5,Barley,bu,70,5.3,58.8,84.69,36.55,15.5,34.75,34.25,7,0,34,26.55,0,8.15,70.2,360.26,430.46,Southern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,155,Ontario,Eastern Canada,Small-grain cereals,5,Barley,bu,70,5.3,58.8,98.35,36.55,15.5,34.75,34.25,7,0,34,26.55,0,8.49,70.2,374.26,444.46,Northern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,156,Ontario,Eastern Canada,Small-grain cereals,7,Oats,bu,81,3.95,46.75,82.2,24.4,14.04,34.75,34.25,7,0,34,26.55,0,7.44,70.2,330.56,400.76,Southern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,157,Ontario,Eastern Canada,Small-grain cereals,7,Oats,bu,81,3.95,47,93.05,24.4,14.04,34.75,34.25,7,0,34,26.55,0,7.71,70.2,341.84,412.04,Northern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,158,Ontario,Eastern Canada,Small-grain cereals,12,Grain corn,bu,174,4.96,111.68,138.24,26.4,39.78,37.85,27.8,11.6,0,23,15.3,0,12.86,60.9,573.85,634.75,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,159,Ontario,Eastern Canada,Silage,14,Corn Silage,t,16,39,111.68,225.38,26.4,0,19.7,18.5,11.6,0,23,8.9,0,13.25,41.65,548.4,590.05,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,160,Ontario,Eastern Canada,Oilseeds,20,Canola,t,1,493,79.99,101.85,55.5,13,31.05,23.2,16.05,0,45,15.5,0,9.35,51.85,399.94,451.79,Spring Canola HT,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,161,Ontario,Eastern Canada,Oilseeds,20,Canola,t,1.3,493,85.7,155.11,58.2,16.9,24.15,16.05,16.05,0,45,12.05,0,10.51,33.95,452.07,486.02,Winter canola hybrid,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,162,Ontario,Eastern Canada,Oilseeds,22,Flax,bu,30,11.4,28.41,83.45,37.4,6.86,34.75,34.25,7.7,0,34,26.55,0,7.3,70.2,309.17,379.37,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,163,Ontario,Eastern Canada,Pulse crops,25,Soybean,bu,47,11.4,61.68,46.14,69.95,13.42,28.6,26.45,7.85,0,23,12.65,0,7.19,59.2,311.21,370.41,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,164,Ontario,Eastern Canada,Pulse crops,25,Soybean,bu,47,11.4,61.68,46.14,82.7,13.42,19.1,14.15,7.85,0,34,8.65,0,7.14,30.8,309.11,339.91,No till,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,165,Ontario,Eastern Canada,Pulse crops,25,Soybean,bu,47,11.4,85.92,46.14,27.1,13.42,19.1,14.15,7.85,0,34,8.65,0,6.37,30.8,276.98,307.78,Round-up ready,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,166,Ontario,Eastern Canada,Pulse crops,26,Beans (dry field),cwt,19,36,149.86,43.14,121.65,13.62,47.1,49.15,25.65,0,56,25.1,11.65,13.12,113.5,556.78,670.28,Colored bean,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,167,Ontario,Eastern Canada,Pulse crops,27,Whitebeans,cwt,22,36,88.35,43.64,130.1,15.77,35,29.8,17.65,0,67,18.6,0,10.98,66.6,470.29,536.89,White Black bean,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,168,Ontario,Eastern Canada,Cover crops,48,Alfalfa (Medicago sativa L.),t,3.5,220,74.17,42.44,15.4,0,28.1,18.6,22.3,0,88.4,27.85,0,7,26.6,362.51,389.11,Alfalfa hay,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,169,Ontario,Eastern Canada,Cover crops,57,Barley (Hordeum vulgare),bu,70,5.3,58.8,84.69,36.55,15.5,34.75,34.25,7,0,34,26.55,0,8.15,70.2,360.26,430.46,Southern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,170,Ontario,Eastern Canada,Cover crops,57,Barley (Hordeum vulgare),bu,70,5.3,58.8,98.35,36.55,15.5,34.75,34.25,7,0,34,26.55,0,8.49,70.2,374.26,444.46,Northern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,171,Ontario,Eastern Canada,Cover crops,58,Oat (Avena sativa),bu,81,3.95,46.75,82.2,24.4,14.04,34.75,34.25,7,0,34,26.55,0,7.44,70.2,330.56,400.76,Southern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,172,Ontario,Eastern Canada,Cover crops,58,Oat (Avena sativa),bu,81,3.95,47,93.05,24.4,14.04,34.75,34.25,7,0,34,26.55,0,7.71,70.2,341.84,412.04,Northern,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,173,Ontario,Eastern Canada,Cover crops,61,Flax (Linum usitatissimum),bu,30,11.4,28.41,83.45,37.4,6.86,34.75,34.25,7.7,0,34,26.55,0,7.3,70.2,309.17,379.37,,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,174,Ontario,Eastern Canada,Cover crops,67,Winter wheat (Triticum aestivum),bu,87,7.15,71.12,134.82,37.45,23.35,34.75,33.5,8.85,0,34,26.55,0,15.8,70.9,432.84,503.74,soft,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,175,Ontario,Eastern Canada,Cover crops,67,Winter wheat (Triticum aestivum),bu,87,7.15,71.12,134.82,37.45,23.35,25.25,22.5,8.85,0,24,22.55,0,14.79,43.9,407.33,451.23,Soft No till,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,176,Ontario,Eastern Canada,Cover crops,67,Winter wheat (Triticum aestivum),bu,82,7.27,71.4,116.97,37.45,21.01,34.75,33.75,10.25,0,46,26.55,0,15.62,70.9,427,497.9,Hard Red,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2020,177,Ontario,Eastern Canada,Cover crops,67,Winter wheat (Triticum aestivum),bu,82,7.27,71.4,146.61,37.45,21.01,25.25,22.5,10.25,0,46,22.55,0,15.83,43.9,432.47,476.37,Hard Red No till,\\letemci01-cifs.efs.agr.gc.ca\common\Group_Shares\GHG_Software\Economic Components\Crop Production Budget\Sources\Ontario\Ontario cost of production budget 2020.pdf
+2021,,Saskatchewan,Black,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,4,Durum Wheat,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Black,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Brown,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2021,,Saskatchewan,Dark Brown,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,4,Durum Wheat,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Pulse crops,32,Lentil,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2021,,Manitoba,Black,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,4,Durum Wheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,4,Durum Wheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,7,Oats,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,7,Oats,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,7,Oats,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,7,Oats,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,7,Oats,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,12,Grain corn,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Silage,14,Corn Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Oilseeds,22,Flax,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Oilseeds,22,Flax,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Oilseeds,22,Flax,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Oilseeds,22,Flax,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,25,Soybean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,25,Soybean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,25,Soybean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,25,Soybean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,25,Soybean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,26,Beans (dry field),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,27,Whitebeans,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Pulse crops,32,Lentil,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Pulse crops,32,Lentil,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Pulse crops,32,Lentil,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,48,Alfalfa (Medicago sativa L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,58,Oat (Avena sativa),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,58,Oat (Avena sativa),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,58,Oat (Avena sativa),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,58,Oat (Avena sativa),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,58,Oat (Avena sativa),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,61,Flax (Linum usitatissimum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,61,Flax (Linum usitatissimum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,61,Flax (Linum usitatissimum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,61,Flax (Linum usitatissimum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,67,Winter wheat (Triticum aestivum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,67,Winter wheat (Triticum aestivum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,67,Winter wheat (Triticum aestivum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,67,Winter wheat (Triticum aestivum),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Black,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Brown,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Dark Brown,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Grey-Wooded,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Alberta,Irrigated,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,4,Durum Wheat,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,6,Undersown Barley,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,8,Triticale,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,9,Sorghum,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,10,Canary seed,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,11,Buckwheat,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Small-grain cereals,13,Mixed grains,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Silage,15,Barley Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Silage,16,Oat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Silage,17,Triticale Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Silage,18,Wheat Silage,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Oilseeds,19,Oilseeds,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Oilseeds,21,Mustard,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,23,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,24,Pulse crops,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,28,Fababean,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,29,Chickpea,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,30,Dry Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,31,Field Pea,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Pulse crops,32,Lentil,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Root crops,33,Potato,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Root crops,34,Potato ,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Root crops,35,Sugar Beets,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,36,Safflower,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,37,Sunflower seed,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,38,Tobacco,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,39,Vegetables,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,40,Berries & grapes,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Other field crops,41,Other field crops,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,42,Winter weeds,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,43,Red clover (Trifolium pratense L.),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,44,Berseem clover (Trifolium alexandrium L.),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,45,Sweet clover (Melilotus officinalis),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,46,Crimson clover (Trifolium incarnatum),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,47,Hairy Vetch (Vicia villosa roth),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,49,Faba bean/broad bean (Vicia faba),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,50,Cowpea (Vigna unguiculata),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,51,Austrian winter pea,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,52,Rapeseed (Brassica Napus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,53,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,54,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,55,Forage radish (Raphanus sativus L.),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,56,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,59,Rye (Secale cereale) / Winter rye / Cereal rye,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,60,Sesame (Sesamum indicum),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,62,Ryegrass (Lolium Perenne L.),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,63,Annual Ryegrass (Lolium multiflorum),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,64,Sorghum (Sorghum bicolour),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,65,Pigeon Bean,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,66,Shepherd's purse,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Cover crops,68,(Fall) Rye,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,69,Rangeland (native),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,70,Seeded grassland,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,71,Tame grass,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,72,Tame legume,,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,73,Tame mixed (grass/legume),,,,,,,,,,,,,,,,,,,,
+2020,,Ontario,Eastern Canada,Perennial forages,74,Forage for seed,,,,,,,,,,,,,,,,,,,,

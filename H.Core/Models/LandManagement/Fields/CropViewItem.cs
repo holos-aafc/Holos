@@ -865,6 +865,14 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _yearOfConversion, value);
         }
 
+        public int YearsSinceYearOfConversion
+        {
+            get
+            {
+                return this.Year - this.YearOfConversion;
+            }
+        }
+
         public double PastFallowArea
         {
             get => _pastFallowArea;
@@ -1083,6 +1091,10 @@ namespace H.Core.Models.LandManagement.Fields
             get => _forageUtilizationRate;
             set => SetProperty(ref _forageUtilizationRate, value);
         }
+
+        public double CombinedAboveGroundInput { get; set; }
+        public double CombinedBelowGroundInput { get; set; }
+        public double CombinedManureInput { get; set; }
 
         #endregion
 

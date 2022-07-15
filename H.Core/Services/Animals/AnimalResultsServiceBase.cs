@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows.Navigation;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Emissions;
@@ -12,6 +13,7 @@ using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
 using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 using H.Core.Providers.Energy;
 using H.Core.Tools;
 
@@ -27,6 +29,8 @@ namespace H.Core.Services.Animals
         protected readonly FractionOfOrganicNitrogenMineralizedAsTanProvider_Table_40 _fractionOfOrganicNitrogenMineralizedAsTanProvider = new FractionOfOrganicNitrogenMineralizedAsTanProvider_Table_40();
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new AdditiveReductionFactorsProviderTable19();
         protected readonly ADCalculator _aDCalculator = new ADCalculator();
+        protected readonly BiogasAndMethaneProductionParametersProvider_Table_48 _biogasAndMethaneProductionParametersProvider = new BiogasAndMethaneProductionParametersProvider_Table_48();
+        protected readonly SolidLiquidSeparationCoefficientsProvider_Table_49 _solidLiquidSeparationCoefficientsProvider = new SolidLiquidSeparationCoefficientsProvider_Table_49();
 
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 
@@ -69,7 +73,7 @@ namespace H.Core.Services.Animals
         }
 
         public virtual IList<AnimalGroupEmissionResults> CalculateResultsForComponent(
-            AnimalComponentBase animalComponent, 
+            AnimalComponentBase animalComponent,
             Farm farm)
         {
             // Don't calculate results for a component that has not been initialized yet since calculations are expensive and should only be done once all properties on a component have been set (i.e. has been initialized)
@@ -172,9 +176,9 @@ namespace H.Core.Services.Animals
 
         #region Protected Methods
 
-        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm) {}
+        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm) { }
 
-        protected virtual void CalculateEstimatesOfProduction(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm) {}
+        protected virtual void CalculateEstimatesOfProduction(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm) { }
 
         protected abstract GroupEmissionsByDay CalculateDailyEmissions(
             AnimalComponentBase animalComponentBase,
@@ -183,135 +187,6 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay previousDaysEmissions,
             AnimalGroup animalGroup,
             Farm farm);
-
-        protected void CalculateFlowsFromFreshManure(
-            Farm farm,
-            GroupEmissionsByDay groupEmissionsByDay,
-            ManagementPeriod managementPeriod)
-        {
-            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
-            if (component == null)
-            {
-                // This farm doesn't have an AD
-                return;
-            }
-
-            groupEmissionsByDay.TotalMassEnteringDigesterFromFreshManure = _aDCalculator.CalculateTotalFreshMassEnteringDigester(
-            totalVolumeOfLandManure: groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication,
-            component.ProportionTotalManureAddedToAD);
-
-            groupEmissionsByDay.FlowOfTotalSolidsEnteringDigesterFromFreshManure = _aDCalculator.CalculateTotalSolidsEnteringDigester(
-                totalMassFlowRate: groupEmissionsByDay.TotalMassEnteringDigesterFromFreshManure,
-                concentration: 1); // TODO
-
-            groupEmissionsByDay.FlowOfVolatileSolidsFromEnteringDigesterFreshManure = _aDCalculator.CalculateFlowOfVolatileSolidsEnteringDigesterFromFreshManure(
-                volatileSolids: groupEmissionsByDay.VolatileSolids,
-                numberOfAnimals: managementPeriod.NumberOfAnimals,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            groupEmissionsByDay.FlowOfNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTotalNitrogenEnteringDigesterFromFreshManure(
-                totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                totalNitrogenAddedFromBeddingMaterial: groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            // Organic flow depends on animal type
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
-            {
-                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterBeefDairyFreshManure(
-                    dailyOrganicNitrogenInStoredManure: groupEmissionsByDay.OrganicNitrogenInStoredManure,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-            }
-            else if (managementPeriod.AnimalType.IsPoultryType())
-            {
-                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfOrganicNEnteringDigesterPoultryFreshManure(
-                    totalNitrogenExcreted: groupEmissionsByDay.AmountOfNitrogenExcreted,
-                    totalAmmonicalNitrogenExcretionRate: managementPeriod.ManureDetails.YearlyTanExcretion,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-            }
-            else
-            {
-                // Currently, only beef, dairy, and poultry supported.
-            }
-
-            var tanExcretionRate = managementPeriod.AnimalType.IsPoultryType() ? managementPeriod.ManureDetails.YearlyTanExcretion : groupEmissionsByDay.TanExcretionRate;
-            groupEmissionsByDay.FlowOfTanEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTANEnteringDigesterFreshManure(
-                totalAmmonicalNitrogenExcretionRate: tanExcretionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-
-            groupEmissionsByDay.FlowOfCarbonEnteringDigesterFromFreshManure = _aDCalculator.CalculateFlowOfTotalCarbonEnteringDigesterFreshManure(
-                totalCarbonAddedInManure: groupEmissionsByDay.CarbonFromManureAndBedding,
-                proportionTotalManureAddedToAD: component.ProportionTotalManureAddedToAD);
-        }
-
-        protected void CalculateFlowsFromStoredManure(
-            Farm farm,
-            GroupEmissionsByDay groupEmissionsByDay,
-            ManagementPeriod managementPeriod)
-        {
-            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
-            if (component == null)
-            {
-                // This farm doesn't have an AD
-                return;
-            }
-
-            groupEmissionsByDay.TotalMassEnteringDigesterFromStoredManure =  _aDCalculator.CalculateTotalFlowFromStoredManure(
-                totalVolumeOfLandManure: groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication,
-                proportion: 1); // TODO
-
-            groupEmissionsByDay.FlowOfTotalSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateTotalSolidsEnteringDigesterFromStoredManure(
-                totalMassFlowRate: groupEmissionsByDay.TotalMassEnteringDigesterFromStoredManure,
-                concentration: 1); // TODO
-
-            if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
-            {
-                groupEmissionsByDay.FlowOfVolatileSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateVolatileSolidsFlowFromStoredLiquidManure(
-                    sumVolatileSolidsLoaded: groupEmissionsByDay.VolatileSolidsLoaded,
-                    sumVolatileSolidsConsumed: groupEmissionsByDay.VolatileSolidsConsumed,
-                    component.ProportionTotalManureAddedToAD);
-            }
-            else
-            {
-                var volatileSolidsReductionFactor = _parameterAdjustmentForDriedOrStockpiledManureProvider.GetParametersAdjustmentInstance(
-                    manureStateType: managementPeriod.ManureDetails.StateType);
-
-                groupEmissionsByDay.FlowOfVolatileSolidsEnteringDigesterFromStoredManure = _aDCalculator.CalculateVolatileSolidsFlowFromStoredManure(
-                    volatileSolids: groupEmissionsByDay.VolatileSolids,
-                    reductionFactor: volatileSolidsReductionFactor.VolatileSolidsReductionFactor,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: 1); // TODO
-            }
-
-            groupEmissionsByDay.FlowRateOfNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowRateOfTotalNitrogenEnteringDigesterFromStoredManure(
-                nitrogenAvailalbleForLandApplication: groupEmissionsByDay.NitrogenAvailableForLandApplication,
-                proportion: 1); // TODO
-
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
-            {
-                groupEmissionsByDay.FlowOfTanEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfTanFromStoredManureBeefDairy(
-                    tanAvailableForLandApplication: groupEmissionsByDay.TanAvailableForLandApplication,
-                    proportion: 1);// TODO
-
-                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfOrganicNitrogenFromStoredManureBeefDairy(
-                    organicNitrogenAvailableForLandApplication: groupEmissionsByDay.OrganicNitrogenAvailableForLandApplication,
-                    proportion: 1); // TODO
-            }
-            else
-            {
-                groupEmissionsByDay.FlowOfTanEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfTANEnteringDigesterFromStoredPoultryManure(
-                    totalAmmonicalNitrogenExcretionRate: groupEmissionsByDay.TanExcretionRate,
-                    indirectNLossesFromManureInHousingNH3: groupEmissionsByDay.AmmoniaConcentrationInHousing,
-                    indirectNLossesFromManureInStorageNH3: groupEmissionsByDay.AmmoniaLostFromStorage,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals,
-                    proportionTotalManureAddedToAD: 1);
-                
-                groupEmissionsByDay.FlowOfOrganicNitrogenEnteringDigesterFromStoredManure = _aDCalculator.CalculateFlowOfOrganicNitrogenFromStoredPoultryManure(
-                    nitrogenFlowFromSubstrate: groupEmissionsByDay.FlowRateOfNitrogenEnteringDigesterFromStoredManure,
-                    tanFlowFromSubstrate: 1);
-            }
-        }
 
         protected void CaclulateADResults(
             Farm farm,
@@ -323,23 +198,6 @@ namespace H.Core.Services.Animals
             {
                 // This farm doesn't have an AD
                 return;
-            }
-
-            if (managementPeriod.ManureDetails.StateType == ManureStateType.AnaerobicDigester)
-            {
-                // Manure gets sent to AD component (fresh manure)   
-                this.CalculateFlowsFromFreshManure(
-                    farm: farm,
-                    groupEmissionsByDay: groupEmissionsByDay,
-                    managementPeriod: managementPeriod) ;
-            }
-            else
-            {
-                // Stored manure gets sent to AD component
-                this.CalculateFlowsFromStoredManure(
-                    farm: farm,
-                    groupEmissionsByDay: groupEmissionsByDay,
-                    managementPeriod: managementPeriod);
             }
         }
 
@@ -621,7 +479,7 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfAnimals"></param>
         /// <returns>Dry matter intake per animal group during the entire management period (kg group^-1 period^-1)</returns>
         public double CalculateDryMatterIntakeForAnimalGroup(
-            double dryMatterIntake, 
+            double dryMatterIntake,
             double numberOfAnimals)
         {
             return dryMatterIntake * numberOfAnimals;
@@ -634,7 +492,7 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfDaysInManagementPeriod"></param>
         /// <returns></returns>
         public double CalculateDryMatterIntakeForManagementPeriod(
-            double drymMatterIntakeForGroup, 
+            double drymMatterIntakeForGroup,
             double numberOfDaysInManagementPeriod)
         {
             return drymMatterIntakeForGroup * numberOfDaysInManagementPeriod;
@@ -689,8 +547,8 @@ namespace H.Core.Services.Animals
         /// <param name="beddingMaterialType"></param>
         /// <returns>Rate of carbon added from bedding material (kg C head^-1 day^-1)</returns>
         public double CalculateRateOfCarbonAddedFromBeddingMaterial(
-            double beddingRate, 
-            double carbonConcentrationOfBeddingMaterial, 
+            double beddingRate,
+            double carbonConcentrationOfBeddingMaterial,
             BeddingMaterialType beddingMaterialType)
         {
             var dryMatterContent = beddingMaterialType == BeddingMaterialType.Sand ? 1 : 0.96;
@@ -888,8 +746,8 @@ namespace H.Core.Services.Animals
         /// <param name="beddingMaterialType"></param>
         /// <returns>Rate of nitrogen added from bedding material (kg N head^-1 day^-1)</returns>
         public double CalculateRateOfNitrogenAddedFromBeddingMaterial(
-            double beddingRate, 
-            double nitrogenConcentrationOfBeddingMaterial, 
+            double beddingRate,
+            double nitrogenConcentrationOfBeddingMaterial,
             BeddingMaterialType beddingMaterialType)
         {
             var dryMatterContent = beddingMaterialType == BeddingMaterialType.Sand ? 1 : 0.96;
@@ -940,9 +798,9 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfAnimals">Number of cows</param>
         /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
         public double CalculateProteinRetainedForLactation(
-            double milkProduction, 
-            double proteinContentOfMilk, 
-            double numberOfYoungAnimals, 
+            double milkProduction,
+            double proteinContentOfMilk,
+            double numberOfYoungAnimals,
             double numberOfAnimals)
         {
             if (Math.Abs(numberOfAnimals) < Double.Epsilon)
@@ -1126,7 +984,7 @@ namespace H.Core.Services.Animals
         /// <param name="amountOfNitrogenAddedFromBedding">Total amount of nitrogen added from bedding materials (kg N animal^-1 day^-1)</param>
         /// <returns>Organic nitrogen in stored manure (kg N)</returns>
         public double CalculateOrganicNitrogenInStoredManure(
-            double totalNitrogenExcretedThroughFeces, 
+            double totalNitrogenExcretedThroughFeces,
             double amountOfNitrogenAddedFromBedding)
         {
             return totalNitrogenExcretedThroughFeces + amountOfNitrogenAddedFromBedding;
@@ -1375,7 +1233,7 @@ namespace H.Core.Services.Animals
             double volatilizationFraction,
             double volatilizationEmissionFactor)
         {
-            var result =  (nitrogenExcretionRate + beddingNitrogen) * volatilizationFraction * volatilizationEmissionFactor;
+            var result = (nitrogenExcretionRate + beddingNitrogen) * volatilizationFraction * volatilizationEmissionFactor;
 
             return result;
         }
@@ -1563,7 +1421,7 @@ namespace H.Core.Services.Animals
         /// <returns>Ambient temperature-based adjustment</returns>
         public double CalculateAmbientTemperatureAdjustmentForLandApplication(double temperature)
         {
-            var result =  1 - (0.058 * (15 - temperature));
+            var result = 1 - (0.058 * (15 - temperature));
 
             if (result > 1)
             {
@@ -1640,7 +1498,7 @@ namespace H.Core.Services.Animals
         public double CalculateAmmoniaEmissionFromLandApplication(
             double ammoniaLossFromLandApplication)
         {
-            return  ammoniaLossFromLandApplication * CoreConstants.ConvertNH3NToNH3;
+            return ammoniaLossFromLandApplication * CoreConstants.ConvertNH3NToNH3;
         }
 
         /// <summary>
@@ -1926,7 +1784,7 @@ namespace H.Core.Services.Animals
             {
                 return 0;
             }
-            
+
             return nitrogenFromManure / nitrogenConcentration;
         }
 
@@ -1979,7 +1837,7 @@ namespace H.Core.Services.Animals
         /// <param name="calfProteinIntakeFromSolidFood">Calf protein intake from solid food (kg head^-1 day^-1)</param>
         /// <returns>Calf protein intake (kg head^-1 day^-1)</returns>
         public double CalculateCalfProteinIntake(
-            double calfProteinIntakeFromMilk, 
+            double calfProteinIntakeFromMilk,
             double calfProteinIntakeFromSolidFood)
         {
             return calfProteinIntakeFromMilk + calfProteinIntakeFromSolidFood;
@@ -2050,7 +1908,7 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfAnimals"></param>
         /// <returns>Enteric CH4 Emissions (kg CH4 day^-1) </returns>
         public double CalculateEntericMethaneEmissionForSwinePoultryAndOtherLivestock(
-            double entericMethaneEmissionRate, 
+            double entericMethaneEmissionRate,
             double numberOfAnimals)
         {
             return (entericMethaneEmissionRate / 365) * numberOfAnimals;
@@ -2093,16 +1951,16 @@ namespace H.Core.Services.Animals
         /// <param name="finalWeightOfAnimal">Final weight of animal (kg animal^-1)</param>
         /// <returns></returns>
         public double CalculateDryMatterMax(
-            AnimalType animalType, 
+            AnimalType animalType,
             double finalWeightOfAnimal)
         {
-            var intakeLimit = 2.25;          
+            var intakeLimit = 2.25;
 
             var weightLimit = finalWeightOfAnimal * (intakeLimit / 100.0);
 
             // Add in additional 15%
             var result = weightLimit * 1.15;
-            
+
             return result;
         }
 
@@ -2111,9 +1969,9 @@ namespace H.Core.Services.Animals
         /// Equation 3.1.2-1
         /// </summary>
         public double GetCurrentAnimalWeight(
-            double startWeight, 
-            double averageDailyGain, 
-            DateTime startDate, 
+            double startWeight,
+            double averageDailyGain,
+            DateTime startDate,
             DateTime currentDate)
         {
             var totalDaysElapsed = currentDate.Subtract(startDate).TotalDays + 1;
