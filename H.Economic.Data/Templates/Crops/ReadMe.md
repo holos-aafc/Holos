@@ -2,9 +2,9 @@
 We have set out a template that you can follow to fill out missing data. As long as you have a valid source, and you follow this guide, you should have no issues filling out the blank template!
 
 Steps:
-1) Figure out what data we need from the `Data\Crops\Holos.Grid.csv` file
+1) Figure out what data we need from the `Data\Crops\Holos Crops.csv` file
 2) Fill out the template with the associated sources
-3) Create a Pull Request for to the Holos.Grid using your filled in template
+3) Create a Pull Request for to the Holos Crops using your filled in template
 4) Submit your sources to the `Data\Crops\Sources.csv`
 
 # Structure
@@ -97,6 +97,7 @@ From these 8 groups, we have 69 crops that we need to fill out, as seen in the f
 
 These values need to be filled out for every province and for every soil type, we will show you how to deal with different soil types in the next section. Furthermore, there may be some crops that are close to the names we have below but not quite, we will also address this in the next section.   
 This last table  shows all the variables we need to fill in. If you need some help figuring out how to map the values from the crop production guide to the holos variables, please refer to this document. [Holos Mapping](https://github.com/Espartaco-Gonzalez-Arteaga/Holos_economic_data/blob/b72939c38d0cbaa0d224ada4f61a69d6294a3aa7/H.Economic.Data/Templates/Crops/Holos.Crops.Mapping.md)
+*Note: Holos only uses the metric system, so please make sure everything is in kilograms and hectares.*
 
 | Variable               | Definition                                                                                |
 | ---------------------- | ----------------------------------------------------------------------------------------- |
@@ -108,24 +109,24 @@ This last table  shows all the variables we need to fill in. If you need some he
 | Crop ID                |                                                                                           |
 | Crop                   |                                                                                           |
 | Variant / Species      | Write about the crop's special characteristics if applicable.                             |
-| Unit (bu, t, etc)      | what unit is the measurement given?                                                       |
-| Yield                  |                                                                                           |
-| Crop Price             |                                                                                           |
-| Seed                   | Seed, Innoculants, and other Treatments                                                   |
-| Fertilizer             |                                                                                           |
-| Chemical               | Herbicide, Pesticide, and all other chemicals added                                       |
-| Trucking and Marketing | trucking fees, and marketing fees, as well as any related crop fees, like membership fees |
-| Fuel Oil Lube          | Allocation for fuel, oil, lube and other machine-related consumables                      |
-| Machinery Repairs      |                                                                                           |
-| Crop Insurance         | Hail, Crop Production, and all other insurance directly applicable to the   crop.         |
-| Building Repairs       |                                                                                           |
-| Custom Work            | Any crop specific extra work applied, like drying, twining, pruning   etc...              |
-| Labour                 |                                                                                           |
-| Utilities              | Utilities and Miscellanous                                                                |
-| Operating Interest     | Interest on operating loans, short term loans for purchase of inputs                      |
-| Fixed Cost $/Acre      |                                                                                           |
-| Variable Cost $/acre   |                                                                                           |
-| Total Costs $/Acre     |                                                                                           |
+| Unit (bu, t, etc)      | what unit is the measurement given orignially?                                                       |
+| Yield Kg/Ha                  |                                                                                           |
+| Crop Price $/Kg             |                                                                                           |
+| Seed $/Ha                   | Seed, Innoculants, and other Treatments                                                   |
+| Fertilizer $/Ha             |                                                                                           |
+| Chemical $/Ha               | Herbicide, Pesticide, and all other chemicals added                                       |
+| Trucking and Marketing $/Ha | trucking fees, and marketing fees, as well as any related crop fees, like membership fees |
+| Fuel Oil Lube  $/Ha          | Allocation for fuel, oil, lube and other machine-related consumables                      |
+| Machinery Repairs  $/Ha     |                                                                                           |
+| Crop Insurance  $/Ha        | Hail, Crop Production, and all other insurance directly applicable to the   crop.         |
+| Building Repairs  $/Ha      |                                                                                           |
+| Custom Work  $/Ha           | Any crop specific extra work applied, like drying, twining, pruning   etc...              |
+| Labour  $/Ha                |                                                                                           |
+| Utilities  $/Ha             | Utilities and Miscellanous                                                                |
+| Operating Interest $/Ha     | Interest on operating loans, short term loans for purchase of inputs                      |
+| Fixed Cost $/Ha   |                                                                                           |
+| Variable Cost $/Ha   |                                                                                           |
+| Total Costs $/Ha    |                                                                                           |
 | Source                 | Source of your document                                                                   |
 
 # Examples and Instructions
@@ -136,12 +137,12 @@ This is an example of what a filled out template should look like. Some variable
 
 Take note on the first three rows, you can see that even though there is no data for small grain cereals, we still keep them. If a value is not avaliable, instead of filling it with a '0' just leave it blank.  
 
-| ID | Year | Province | Soil Type | Group               | Crop ID | Crop                | Variant / Species     | unit (bu, t, etc) | Yield | Crop Price | ... |
-|----|------|----------|-----------|---------------------|---------|---------------------|-----------------------|-------------------|-------|------------|-----|
-| 1  | 2021 | Manitoba | Black     | Small-grain cereals | 1       | Summer fallow       |                       |                   |       |            | ... |
-| 2  | 2021 | Manitoba | Black     | Small-grain cereals | 2       | Small grain cereals |                       |                   |       |            | ... |
-| 3  | 2021 | Manitoba | Black     | Small-grain cereals | **3**   | Wheat               | **Hard Red Spring**   | bu                | 61    | 6.75       | ... |
-| 4  | 2021 | Manitoba | Black     | Small-grain cereals | **3**   | Wheat               | **Northern Hard Red** | bu                | 70    | 6.25       | ... |
+| ID | Year | Province | Soil Type | Group               | Crop ID | Crop                | Variant / Species     | unit (bu, t, etc) |
+|----|------|----------|-----------|---------------------|---------|---------------------|-----------------------|-------------------|
+| 1  | 2021 | Manitoba | Black     | Small-grain cereals | 1       | Summer fallow       |                       |                   |
+| 2  | 2021 | Manitoba | Black     | Small-grain cereals | 2       | Small grain cereals |                       |                   |
+| 3  | 2021 | Manitoba | Black     | Small-grain cereals | **3**   | Wheat               | **Hard Red Spring**   | bu                |
+| 4  | 2021 | Manitoba | Black     | Small-grain cereals | **3**   | Wheat               | **Northern Hard Red** | bu                |
 
 
 Look at the bottom two rows, see how they seem like a duplicate of the Black Soil wheat? Look at the `Variant \ Species`, you will notice that one is Hard Red Spring Wheat, and the other is Northern Hard Red Wheat.... This is the suggested way to fill out the template, please remember to duplicate the `Crop ID` as well as all the other variables to the left of the `Crop`
@@ -197,7 +198,7 @@ Lastly, this is the expected input data types for each of the variables.
 | Labour                 | Numeric/Float      |
 | Utilities              | Numeric/Float      |
 | Operating Interest     | Numeric/Float      |
-| Fixed Cost $/Acre      | Numeric/Float      |
-| Variable Cost $/acre   | Numeric/Float      |
-| Total Costs $/Acre     | Numeric/Float      |
+| Fixed Cost      | Numeric/Float      |
+| Variable Cost  | Numeric/Float      |
+| Total Costs     | Numeric/Float      |
 | Source                 | Character/String   |
