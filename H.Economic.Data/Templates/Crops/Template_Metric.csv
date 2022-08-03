@@ -1,4 +1,4 @@
-ID,Year,Province,Soil Type,Group,Crop ID,Crop,Species / Variant,Yield Kg/Ha,Crop Price $/Ha,Seed $/Ha,Fertilizer $/Ha,Chemical $/Ha,Trucking and Marketing $/Ha,Fuel Oil Lube $/Ha,Machinery Repairs $/Ha,Crop Insurance $/Ha,Building Repairs $/Ha,Custom Work $/Ha,Labour $/Ha,Utilities $/Ha,Operating Interest $/Ha,Fixed Cost $/Ha,Variable Cost $/Ha,Total Costs $/Ha,Source
+ID,Year,Province,Soil Type,Group,Crop ID,Crop,Species / Variant,Yield Kg/Ha,Crop Price $/Kg,Seed $/Ha,Fertilizer $/Ha,Chemical $/Ha,Trucking and Marketing $/Ha,Fuel Oil Lube $/Ha,Machinery Repairs $/Ha,Crop Insurance $/Ha,Building Repairs $/Ha,Custom Work $/Ha,Labour $/Ha,Utilities $/Ha,Operating Interest $/Ha,Fixed Cost $/Ha,Variable Cost $/Ha,Total Costs $/Ha,Source
 ,,,,Small-grain cereals,1,Summer fallow,,,,,,,,,,,,,,,,,,,
 ,,,,Small-grain cereals,2,Small grain cereals,,,,,,,,,,,,,,,,,,,
 ,,,,Small-grain cereals,3,Wheat,,,,,,,,,,,,,,,,,,,
