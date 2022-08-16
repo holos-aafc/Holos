@@ -84,7 +84,7 @@ namespace H.CLI.Results
         public double EmissionFileCounter { get; set; }
 
         #region Calculators
-        private readonly ExpressionOfUncertaintyCalculator _uncertaintyCalculator = new ExpressionOfUncertaintyCalculator();
+        private readonly Table_68_69_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator = new Table_68_69_Expression_Of_Uncertainty_Calculator();
         #endregion
 
         #region Constants

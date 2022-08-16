@@ -103,7 +103,7 @@ namespace H.Core.Calculators.Carbon
 
             currentYearViewItem.ManureCarbonInput = this.CalculateManureCarbonInput(currentYearViewItem, farm);
 
-            currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInput;            
+            currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare;            
 
             return currentYearViewItem;
         }
@@ -723,40 +723,16 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Calculate amount of carbon input from all manure applications in a year
+        /// Equation 2.2.2-26
+        /// 
+        /// Calculate amount of carbon input from all manure applications in a year.
         /// </summary>
         /// <returns>The amount of carbon input during the year (kg C)</returns>
         public double CalculateManureCarbonInput(
             CropViewItem viewItem,
             Farm farm)
         {
-            var result = 0.0;
-
-            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-            {
-                var manureCompositionData = manureApplicationViewItem.DefaultManureCompositionData;
-
-                // Value will be a percentage, so we divide by 100.
-                var carbonFraction = manureCompositionData.CarbonFraction / 100;
-
-                var amountOfCarbon = CalculateAmountOfCarbonAppliedFromManure(
-                    manureAmount: manureApplicationViewItem.AmountOfManureAppliedPerHectare,
-                    carbonFraction);
-
-                result += amountOfCarbon;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.2.2-26
-        /// </summary>
-        public double CalculateAmountOfCarbonAppliedFromManure(
-            double manureAmount, 
-            double fractionOfCarbonInAppliedManure)
-        {
-            return manureAmount * fractionOfCarbonInAppliedManure;
+            return viewItem.GetTotalCarbonFromAppliedManure();
         }
 
         /// <summary>

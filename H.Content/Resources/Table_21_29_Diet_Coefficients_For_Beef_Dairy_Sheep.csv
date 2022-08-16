@@ -1,0 +1,33 @@
+AnimalType,DietType,Forage (%DM),CP (kg kg^-1),YM,Starch (kg kg^-1),NDF  (kg kg^-1,ADF (kg kg^-1,TDN (%),ME (Mcal kg^-1),EE (%),NEL-3x  (Mcal kg-1)
+CowCalf,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
+CowCalf,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
+CowCalf,High Energy/ptn,85,0.177,0.07,0.099,0.451,0,60,2.14,0,0
+Stockers,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
+Stockers,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
+Stockers,High Energy/ptn,85,0.177,0.07,0.099,0.451,0,60,2.14,0,0
+Backgrounder,Slow Growth,65,0.116,0.063,0.285,0.405,0,69,2.51,0,0
+Backgrounder,Medium Growth,60,0.126,0.063,0.303,0.385,0,70,2.51,0,0
+BeefFinisher,Barley,7.5,0.126,0.035,0.521,0.21,0,81,2.91,0,0
+BeefFinisher,Corn,7.5,0.126,0.03,0.66,0.135,0,84,3.04,0,0
+Beef Calves (3),Forage based,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
+DairyLactating (4),Legume forage-based,77.8,16.15,0.056,0,0.353,0.231,70,0,2.37,1.53
+DairyLactating (4),Barley silage-based,60.5,16.82,0.056,0,0.383,0.225,71,0,3.47,1.57
+DairyLactating (4),Corn silage-based,59.1,16.44,0.056,0,0.38,0.224,72,0,3.08,1.62
+DairyDry (5),Close Up,52.4,18.32,0.063,0,0.371,0.245,69,0,3.21,1.54
+DairyDry (5),Far Off Dry,90.2,17.4,0.07,0,0.41,0.261,67,0,2.38,1.46
+DairyHeifers (5),High fiber,87.6,13.3,0.07,0,0.45,0.246,70,0,2.4,1.51
+DairyHeifers (5),Low fiber,63,12.63,0.063,0,0.336,0.187,75,0,2.96,1.65
+DairyBulls,Low Energy,0,0.14,0.065,0,0,0,63,0,0,0
+DairyBulls,Medium Energy,0,0.18,0.065,0,0,0,68,0,0,0
+Sheep (6),High Energy/ptn,0,0.18,0.065,0,0,0,65,0,0,0
+Sheep (6),Medium Energy/ptn,0,0.12,0.065,0,0,0,55,0,0,0
+Sheep (6),Low Energy/ptn,0,0.08,0.065,0,0,0,45,0,0,0
+,,,,,,,,,,,
+,,,,,,,,,,,
+1 Values for beef cattle were obtained using feed information included in NASEM (2016). Ym values for beef cattle from IPCC (2019).,,,,,,,,,,,
+2 Poor quality (low energy/protein) diets will lead to a negative ADG with growing animals due to the TDN value (?48%).,,,,,,,,,,,
+"3 Values for beef calves on forage are the same as those for the beef cows, as by default Holos assumes that calves on a forage diet are on the same diets as the cows.",,,,,,,,,,,
+"4 Ym values for lactating dairy cows are from ECCC (2022), and are mid-point of the reported 5.5-5.7% average range. ",,,,,,,,,,,
+"5 Ym values for dry dairy cows and dairy heifers are from IPCC (2019); for DairyHeifers (Low fiber) and DairyDry (Close-up), the Ym value for backgrounding beef cattle was used.",,,,,,,,,,,
+"6 Values for TDN and CP are the same as those for high, medium and low energy/protein diets for beef stocker animals",,,,,,,,,,,
+"6 Ym values for sheep diets are from IPCC (2019), Table 10.13 (Table 10.13 proposes a common Ym value for all sheep irrespective of feed quality values)",,,,,,,,,,,

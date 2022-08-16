@@ -233,7 +233,7 @@ namespace H.Core.Enumerations
         /// Check whether default yield data is available for a given silage crop.
         /// </summary>
         /// <param name="cropType">The silage crop which we need to check.</param>
-        /// <returns>True if default yield data exists for this silage crop, false otherwise.</returns>
+        /// <returns>True if the silage crop does not have default data, false if the crop does have default data available.</returns>
         public static bool IsSilageCropWithoutDefaults(this CropType cropType)
         {
             switch (cropType)

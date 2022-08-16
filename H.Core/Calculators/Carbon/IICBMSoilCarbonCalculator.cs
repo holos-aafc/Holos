@@ -87,10 +87,6 @@ namespace H.Core.Calculators.Carbon
             double youngPoolDecompositionRate, 
             double climateParameter);
 
-        double CalculateAmountOfCarbonAppliedFromManure(
-            double manureAmount, 
-            double fractionOfCarbonInAppliedManure);
-
         double CalculateAmountOfNitrogenAppliedFromManure(
             double manureAmount, 
             double fractionOfNitrogenInAppliedManure);

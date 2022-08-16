@@ -163,6 +163,8 @@ namespace H.Core.Emissions.Results
         private double _methaneEmissionsDuringDigestateStorage;
         private double _nitrousOxideEmissionsDuringDigestateStorage;
         private double _ammoniaEmissionsDuringDigestateStorage;
+        private double _adjustedAmmoniaFromHousing;
+        private double _adjustedAmmoniaFromStorage;
 
         #endregion
 
@@ -1161,8 +1163,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.6.1-4
-        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
+
+        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+
+        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure
@@ -1632,6 +1644,18 @@ namespace H.Core.Emissions.Results
         {
             get => _ammoniaEmissionsDuringDigestateStorage;
             set => SetProperty(ref _ammoniaEmissionsDuringDigestateStorage, value);
+        }
+
+        public double AdjustedAmmoniaFromHousing
+        {
+            get => _adjustedAmmoniaFromHousing;
+            set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
+        }
+
+        public double AdjustedAmmoniaFromStorage
+        {
+            get => _adjustedAmmoniaFromStorage;
+            set => SetProperty(ref _adjustedAmmoniaFromStorage, value);
         }
 
         public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }

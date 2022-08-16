@@ -49,8 +49,8 @@
         EnergyRequirementsForCrops,
         FertilizerApplicationRates,
         CropFactors,
-        TillageRatioFactosForDirectSoilNitrousOxideEmissions,
-        TextureRatioFactorsForDirectSoilNitrousOxideEmissions,
+        SoilN2OEmissionFactorsInfluencedByTillPractice,
+        SoilN2OEmissionFactorsInfluencedBySoilTexture,
         NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops,
 
         CoefficientsForAboveGroundBiomassEstimationForShelterbeltTreeSpecies,
@@ -130,5 +130,14 @@
         ManitobaMapleCarbonDataPast,
         ScotsPineCarbonDataPast,
         WhiteSpruceCarbonDataPast,
+
+        SteadyStateMethodDefaultNValues,
+
+        BeefCattleFedWinterFeedCost,
+        BeefCattlePastureSummerFeedCost,
+        BeefFeedCost,
+
+        ManureTypesDefaultComposition,
+        PoultryNExcretionParameterValues,
     }
 }

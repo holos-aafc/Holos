@@ -52,7 +52,7 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm);
         void AssignDefaultNitrogenContentValues(CropViewItem viewItem, Farm farm);
         void AssignDefaultBiomassCoefficients(CropViewItem viewItem, Farm farm);
-        ResidueData GetResidueData(CropViewItem cropViewItem, Farm farm);
+        Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
         FieldComponentEmissionResults CalculateResultsForFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem);

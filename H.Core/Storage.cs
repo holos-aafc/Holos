@@ -142,6 +142,7 @@ namespace H.Core
             var userFilePath = Path.Combine(localAppData, "HOLOS_4");
             return userFilePath;
         }
+
         /// <summary>
         /// Save the farm file to a crash file when we can't load the farm file correctly
         /// </summary>

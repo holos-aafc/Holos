@@ -1,0 +1,27 @@
+﻿Group,Daily mean intake (kg DM head-1 day-1),"Crude protein content (CP, % of DM)",PRlw (average protein content in live weight (kg kg-1 live weight),"WG (weight gain, kg head-1 day-1)",PRegg average protein content of eggs (kg protein kg-1 egg),EGG (g egg head-1 day-1),BWfinal (kg),BWinitial (kg),production_period (days)
+Pullets,0.0447 (1),18.2 (4),0,0,0,0,1.37 (11),0.043 (11),133 (14)
+Broilers,0.095 (2),19 (5),0,0,0,0,2 (12),0.043 (11),42 (15)
+Cockerels,0.095,19,0,0,0,0,2,0.043,42
+Roasters,0.095 (2),19 (5),0,0,0,0,3.5 (13),0.043 (11),56
+Hens,0.0978,17.5,0.175,0.0015,0.12,48.5,0,0,358
+Layers,0.0978 (3),17.5 (6),0.175 (7),0.0015 (8),0.12 (9),48.5 (10),0,0,358 (15)
+Layers Dry,0.0978 (3),17.5 (6),0.175 (7),0.0015 (8),0.12 (9),48.5 (10),0,0,358 (15)
+Layers Wet,0.0978 (3),17.5  (6),0.175 (7),0.0015 (8),0.12 (9),48.5 (10),0,0,358 (15)
+,,,,,,,,,
+,,,,,,,,,
+"1 Daily dry matter intake for pullets estimated based on a typical production period of 19 weeks and values reported in Pelletier (2017): 5.94 t feed per 1,000 pullets produced from a pullet operation.",,,,,,,,,
+2 Calculated based on 4 kg total DM intake across 42 days = 0.095 kg head-1 day-1; length of production period from Sheppard et al. (2009a).,,,,,,,,,
+ Total DM feed intake was derived from: https://www.gov.mb.ca/agriculture/livestock/production/poultry/basic-feeding-programs-for-small-chicken-flocks.html. The value for broilers was also applied to roasters.,,,,,,,,,
+"3 Daily dry matter intake for layers is calculated based on 56 pullets required to produce 1 tonne of eggs in a year, consuming 2 tonnes of feed: 2,000 kg feed / 56 pullets / 365 days = 0.0978 kg feed head-1 day-1",,,,,,,,,
+"4 CP content of feed for pullets is a time-weighted average of CP contents across all feeding phases from 0 to 112 days of age (New Life Mills, 2016).",,,,,,,,,
+5 Value for CP content of feed for broilers is a body mass-weighted average from Sheppard et al. (2009a). The value for broilers was also applied to roasters.,,,,,,,,,
+6 CP content of feed for layers is a time-weighted average derived from Sheppard et al. (2009a).,,,,,,,,,
+"7 Calculated as 0.028 * 6.25, where 0.028 kg N kg-1 live weight is the N content of live layers (2.8%, Sheppard et al., 2009a) and 6.25 is the dietary N to dietary protein conversion factor.",,,,,,,,,
+8 From Sheppard et al. (2009a).,,,,,,,,,
+"9 Calculated as 0.0192 * 6.25, where 0.0192 kg N kg-1 egg is the N content of eggs (1.92%, from Sheppard et al., 2009a) and 6.25 is the dietary N to dietary protein conversion factor.",,,,,,,,,
+"10 A default value of 48.50 g egg head-1 day-1 is used; this value is calculated based on a layer producing 0.811 eggs per day and an average egg weight of 59.5 g (Sheppard et al., 2009a).",,,,,,,,,
+"11 Initial and final body weights for pullets are from Pelletier (2017) – values for conventional pullet facilities (in Canada, conventional cage systems account for 92.3% of Canadian layers).",,,,,,,,,
+12 Final weight for a broiler derived from Let’s Talk Chicken (https://letstalkchicken.ca/farm-to-table/chicken-farm/).,,,,,,,,,
+13 Value for final body weight for a roaster is the mid-point for the typical 3-4 kg range reported by Let’s Talk Chicken (https://letstalkchicken.ca/farm-to-table/chicken-farm/).,,,,,,,,,
+14 A default production period of 133 days (19 weeks) is used for pullets based on Farm and Food Care Ontario (2016).,,,,,,,,,
+15 Length of production period for broilers and layers from Sheppard et al. (2009a).,,,,,,,,,

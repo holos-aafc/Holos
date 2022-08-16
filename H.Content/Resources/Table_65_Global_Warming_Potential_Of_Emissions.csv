@@ -1,0 +1,9 @@
+Reference Year,Source,CO2,CH4,CH4NonFossil,N2O
+1990,IPCC 1st assessment,1,21,21,290
+1995,IPCC 2nd assessment,1,21,21,310
+2001,IPCC 3rd assessment,1,23,23,296
+2005,IPCC 4th assessment,1,25,25,298
+2013,IPCC 5th assessment,1,28,28,265
+2021,IPCC 6th assessment,1,27,30,273
+,,,,,
+These conversion factors are the Direct Global Warming Potentials (mass basis) relative to carbon dioxide (for gases for which the lifetimes have been adequately characterised). The time horizon is 100 years (IPCC 2006).,,,,,

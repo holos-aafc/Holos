@@ -430,6 +430,10 @@ namespace H.Core.Providers.Feed
             this.TotalDigestibleNutrient = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.TotalDigestibleNutrient);
             this.CrudeProtein = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeProtein);
             this.Forage = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Forage);
+            if (this.DietType == DietType.MediumEnergyAndProtein)
+            {
+                var animal = this.AnimalType;
+            }
             this.Starch = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Starch);
             this.Fat = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Fat);
 

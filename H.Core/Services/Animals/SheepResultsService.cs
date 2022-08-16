@@ -18,8 +18,8 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        private readonly DefaultLambsDailyWeightGainProvider_Table_23 _dailyWeightGainProvider;
-        private readonly DefaultPregnancyCoefficientsForSheepProvider_Table_33 _pregnancyCoefficientProvider;
+        private readonly Table_27_Lamb_Daily_Weight_Gain_Provider _lambDailyWeightGainProvider;
+        private readonly Table_28_Pregnancy_Coefficients_For_Sheep_Provider _pregnancyCoefficientProvider;
 
         #endregion
 
@@ -27,8 +27,8 @@ namespace H.Core.Services.Animals
 
         public SheepResultsService() : base()
         {
-            _pregnancyCoefficientProvider = new DefaultPregnancyCoefficientsForSheepProvider_Table_33();
-            _dailyWeightGainProvider = new DefaultLambsDailyWeightGainProvider_Table_23();
+            _pregnancyCoefficientProvider = new Table_28_Pregnancy_Coefficients_For_Sheep_Provider();
+            _lambDailyWeightGainProvider = new Table_27_Lamb_Daily_Weight_Gain_Provider();
 
             _animalComponentCategory = ComponentCategory.Sheep;
         }
@@ -114,7 +114,7 @@ namespace H.Core.Services.Animals
             var isLactatingAnimalGroup = totalNumberOfYoungAnimalsOnDate > 0;
             if (isLactatingAnimalGroup)
             {
-                var dailyGainForLambs = _dailyWeightGainProvider.GetDailyWeightGain(
+                var dailyGainForLambs = _lambDailyWeightGainProvider.GetDailyWeightGain(
                     lambRatio: dailyEmissions.LambEweRatio);
 
                 if (managementPeriod.UseCustomMilkProductionValue == false)
@@ -344,7 +344,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.ManureNitrogenLeachingRate = base.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
-                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
+                amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
             // Equation 4.3.4-2
             dailyEmissions.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(

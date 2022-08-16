@@ -59,18 +59,14 @@ namespace H.Core.Providers.Nitrogen
 
         public NitrogenFixationResult GetNitrogenFixationResult(CropType cropType)
         {
-            const double defaultValue = 0;
-
-            var result = _table.FirstOrDefault(fixationResult => fixationResult.CropType == cropType);
-            if (result != null)
+            // Table values are no longer used. A default of 0.7 is used for legumous crops and 0 for non-legumous crops
+            if (cropType.IsPulseCrop())
             {
-                return result;
+                return new NitrogenFixationResult() {Fixation = 0.7};
             }
             else
             {
-                Trace.TraceError($"{nameof(NitogenFixationProvider)}.{nameof(GetNitrogenFixationResult)} no result found for crop type: '{cropType.GetDescription()}'. Returning default of {defaultValue}.");
-
-                return new NitrogenFixationResult() {Fixation = defaultValue };
+                return new NitrogenFixationResult() { Fixation = 0 };
             }
         }
 

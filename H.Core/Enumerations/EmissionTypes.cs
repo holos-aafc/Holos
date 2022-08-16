@@ -38,5 +38,8 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumNH3", typeof(Resources))]
         NH3,
 
+        [LocalizedDescription("EnumNonFossilCH4", typeof(Resources))]
+        NonFossilCH4,
+
     }
 }

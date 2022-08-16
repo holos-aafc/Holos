@@ -16,8 +16,8 @@ namespace H.Core.Calculators.Infrastructure
     {
         #region Fields
 
-        protected readonly SolidLiquidSeparationCoefficientsProvider_Table_49 _solidLiquidSeparationCoefficientsProvider = new SolidLiquidSeparationCoefficientsProvider_Table_49();
-        private readonly ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47 _reductionFactors = new ParameterAdjustmentForDriedOrStockpiledManureProvider_Table_47();
+        protected readonly Table_50_Solid_Liquid_Separation_Coefficients_Provider _solidLiquidSeparationCoefficientsProvider = new Table_50_Solid_Liquid_Separation_Coefficients_Provider();
+        private readonly Table_48_Parameter_Adjustments_For_Manure_Provider _reductionFactors = new Table_48_Parameter_Adjustments_For_Manure_Provider();
 
         #endregion
 

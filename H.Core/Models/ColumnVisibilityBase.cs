@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace H.Core.Models
 {
     /// <summary>
-    /// base class for *ColumnVisibility classes
+    /// base class for ColumnVisibility classes
     /// </summary>
     public abstract class ColumnVisibilityBase : BindableBase
     {
         /// <summary>
-        /// this method to be called when ever we want to restore back to defualt columns
+        /// this method to be called when ever we want to restore back to default columns
         /// </summary>
         public void SetAllColumnsInvisible()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Windows.Markup;
 using H.Core.Models;
 
 namespace H.Core.Enumerations
@@ -94,6 +95,7 @@ namespace H.Core.Enumerations
                 case AnimalType.Poultry:
                 case AnimalType.LayersWetPoultry:
                 case AnimalType.LayersDryPoultry:
+                case AnimalType.Layers:
                 case AnimalType.Broilers:
                 case AnimalType.Turkeys:
                 case AnimalType.Ducks:
@@ -143,6 +145,8 @@ namespace H.Core.Enumerations
             {
                 case AnimalType.Chicken:
                 case AnimalType.ChickenHens:
+                case AnimalType.Layers:
+                case AnimalType.Broilers:
                 case AnimalType.ChickenRoosters:
                 case AnimalType.ChickenPullets:
                 case AnimalType.ChickenCockerels:

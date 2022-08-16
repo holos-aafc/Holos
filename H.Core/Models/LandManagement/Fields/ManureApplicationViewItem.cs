@@ -155,6 +155,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// Amount of nitrogen applied per hectare from the amount of manure applied
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare)]
         public double AmountOfNitrogenAppliedPerHectare

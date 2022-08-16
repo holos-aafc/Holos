@@ -343,6 +343,8 @@ namespace H.Core.Models.Animals
 
         /// <summary>
         /// Currently used by poultry groups only
+        ///
+        /// (kg TAN head^-1 day^-1)
         /// </summary>
         public double DailyTanExcretion { get; set; }
 

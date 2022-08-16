@@ -419,7 +419,7 @@ namespace H.Core.Test.Services
             var leachingFraction = 210.6875;
             var emissionFactorForLeaching = 993.6250;
             var result = _dairyCattleResultsService.CalculateManureLeachingNitrogenEmissionRate(nitrogenExcretionRate, leachingFraction,
-                                                                          emissionFactorForLeaching);
+                                                                          emissionFactorForLeaching, 0);
             Assert.AreEqual(151421397.59130859375, result);
         }
 

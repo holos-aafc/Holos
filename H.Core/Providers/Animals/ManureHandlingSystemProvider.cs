@@ -29,8 +29,8 @@ namespace H.Core.Providers.Animals
                 return new List<ManureStateType>()
                 {
                     ManureStateType.Pasture,
-                    ManureStateType.DailySpread,
                     ManureStateType.SolidStorage,
+                    ManureStateType.DailySpread,
                     ManureStateType.CompostIntensive,
                     ManureStateType.CompostPassive,
                     ManureStateType.DeepBedding,
