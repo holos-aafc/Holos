@@ -165,6 +165,9 @@ namespace H.Core.Emissions.Results
         private double _ammoniaEmissionsDuringDigestateStorage;
         private double _adjustedAmmoniaFromHousing;
         private double _adjustedAmmoniaFromStorage;
+        private double _ammoniaEmissionsFromHousingAndStorage;
+        private double _totalNitrogenLossesFromHousingAndStorage;
+        private double _ammoniaEmissionRateFromHousingAndStorage;
 
         #endregion
 
@@ -1682,6 +1685,39 @@ namespace H.Core.Emissions.Results
 
         public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3)
+        /// </summary>
+        public double AmmoniaEmissionsFromHousingAndStorage
+        {
+            get => _ammoniaEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionsFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg N)
+        /// </summary>
+        public double TotalNitrogenLossesFromHousingAndStorage
+        {
+            get => _totalNitrogenLossesFromHousingAndStorage;
+            set => SetProperty(ref _totalNitrogenLossesFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniaEmissionRateFromHousingAndStorage
+        {
+            get => _ammoniaEmissionRateFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionRateFromHousingAndStorage, value);
+        }
 
         #endregion
     }

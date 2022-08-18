@@ -14,7 +14,6 @@ namespace H.Core.Providers.Animals
     /// </summary>
     public class Table_45_Poultry_OtherLivestock_Default_NExcretionRates_Provider
     {
-
         #region Public Methods
         public double GetNitrogenExcretionRateValue(AnimalType animalType)
         {
@@ -29,7 +28,6 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        
         public Table_45_Poultry_OtherLivestock_Default_NExcretionRates_Data GetNExcretionRateByAnimalType(AnimalType animalType)
         {
             if (animalType == AnimalType.ChickenPullets || animalType == AnimalType.ChickenCockerels)
@@ -165,7 +163,6 @@ namespace H.Core.Providers.Animals
         }
 
         #endregion
-
 
         #region Footnotes
 

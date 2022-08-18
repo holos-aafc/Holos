@@ -18,13 +18,11 @@ namespace H.Core.Providers.Animals
     /// </summary>
     public class Table_44_Poultry_NExcretionRate_Parameter_Values_Provider
     {
-
         #region Fields
 
         private readonly AnimalTypeStringConverter _animalTypeStringConverter;
 
         #endregion
-
 
         #region Properties
 
@@ -34,8 +32,6 @@ namespace H.Core.Providers.Animals
         public List<Table_44_Poultry_NExcretionRate_Parameter_Values_Data> PoultryParameterValueData { get;  }
 
         #endregion
-
-
 
         #region Constructor
 
@@ -71,8 +67,6 @@ namespace H.Core.Providers.Animals
         }
 
         #endregion
-
-
 
         #region Private Methods
 

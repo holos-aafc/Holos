@@ -99,7 +99,6 @@ namespace H.Core.Providers.Animals
                                     return factors;
                                 }
 
-
                             case ManureStateType.SolidStorage:
                                 return new Table_39_Livestock_Emission_Conversion_Factors_Data
                                 {
@@ -386,15 +385,42 @@ namespace H.Core.Providers.Animals
                         switch (manureStateType)
                         {
                             case ManureStateType.Pasture:
-                                return new Table_39_Livestock_Emission_Conversion_Factors_Data()
+                            case ManureStateType.Paddock:
+                            case ManureStateType.Range:
                                 {
-                                    MethaneConversionFactor = 0.0047,
-                                    N20DirectEmissionFactor = 0.003,
-                                    VolatilizationFraction = 0.21,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.011
-                                };
+                                    var factors = new Table_39_Livestock_Emission_Conversion_Factors_Data
+                                    {
+                                        MethaneConversionFactor = 0.0047,
+                                        N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
+                                        VolatilizationFraction = 0.21,
+                                        EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
+                                        EmissionFactorLeach = 0.011
+                                    };
+
+                                    if (region == Region.WesternCanada)
+                                    {
+                                        factors.N20DirectEmissionFactor = 0.0006;
+                                    }
+                                    else
+                                    {
+                                        if (soilTexture == SoilTexture.Fine)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0078;
+                                        }
+                                        else if (soilTexture == SoilTexture.Medium)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0062;
+                                        }
+                                        else
+                                        {
+                                            // SoilTexture = Coarse
+                                            // Footnote 1
+                                            factors.N20DirectEmissionFactor = 0.0047;
+                                        }
+                                    }
+
+                                    return factors;
+                                }
 
                             case ManureStateType.SolidStorage:
                                 return new Table_39_Livestock_Emission_Conversion_Factors_Data()
@@ -514,45 +540,63 @@ namespace H.Core.Providers.Animals
 
                 case ComponentCategory.OtherLivestock:
                     {
-                        if (animalType == AnimalType.Bison && manureStateType == ManureStateType.Pasture)
+                        switch (manureStateType)
                         {
-                            // Only situation where the EF_direct differs for the other animal groups category
-                            return new Table_39_Livestock_Emission_Conversion_Factors_Data()
-                            {
-                                MethaneConversionFactor = 0.0047,
-                                N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
-                                VolatilizationFraction = 0.21,
-                                EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                EmissionFactorLeach = 0.011,
-                            };
-                        }
-                        else
-                        {
-                            if (manureStateType == ManureStateType.SolidStorage)
-                            {
-                                return new Table_39_Livestock_Emission_Conversion_Factors_Data()
+                            case ManureStateType.Pasture:
+                            case ManureStateType.Paddock:
+                            case ManureStateType.Range:
+                                {
+                                    var factors = new Table_39_Livestock_Emission_Conversion_Factors_Data
+                                    {
+                                        MethaneConversionFactor = 0.0047,
+                                        N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
+                                        VolatilizationFraction = 0.21,
+                                        EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
+                                        EmissionFactorLeach = 0.011
+                                    };
+
+                                    if (region == Region.WesternCanada)
+                                    {
+                                        factors.N20DirectEmissionFactor = 0.0006;
+                                    }
+                                    else
+                                    {
+                                        if (soilTexture == SoilTexture.Fine)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0078;
+                                        }
+                                        else if (soilTexture == SoilTexture.Medium)
+                                        {
+                                            factors.N20DirectEmissionFactor = 0.0062;
+                                        }
+                                        else
+                                        {
+                                            // SoilTexture = Coarse
+                                            // Footnote 1
+                                            factors.N20DirectEmissionFactor = 0.0047;
+                                        }
+                                    }
+
+                                    return factors;
+                                }
+
+                            case ManureStateType.SolidStorage:
+                                return new Table_39_Livestock_Emission_Conversion_Factors_Data
                                 {
                                     MethaneConversionFactor = climateDependentMethaneConversionFactor,
                                     N20DirectEmissionFactor = 0.01,
                                     VolatilizationFraction = 0.12,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.011,
+                                    EmissionFactorLeach = 0.0011
                                 };
-                            }
-                            else
-                            {
-                                // Pasture/range/paddock
-                                return new Table_39_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = 0.0047,
-                                    N20DirectEmissionFactor = 0.003,
-                                    VolatilizationFraction = 0.21,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.011,
-                                };
-                            }
+
+                            default:
+                                System.Diagnostics.Trace.TraceError(
+                                    $"{nameof(Table_39_Livestock_Emission_Conversion_Factors_Provider)}.{nameof(Table_39_Livestock_Emission_Conversion_Factors_Provider.GetFactors)}" +
+                                    $": Unable to get data for manure state type: {manureStateType}." +
+                                    $" Returning default value.");
+                                return new Table_39_Livestock_Emission_Conversion_Factors_Data();
                         }
                     }
 
@@ -606,7 +650,6 @@ namespace H.Core.Providers.Animals
 
 
         #endregion
-
 
         #region Footnotes
 

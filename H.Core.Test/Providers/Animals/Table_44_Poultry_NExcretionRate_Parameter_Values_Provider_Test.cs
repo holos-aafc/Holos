@@ -55,7 +55,7 @@ namespace H.Core.Test.Providers.Animals
 
 
         [TestMethod]
-        public void GetWetDryLayersInforation()
+        public void GetWetDryLayersInformation()
         {
             var data = _provider.GetParameterValues(AnimalType.LayersDryPoultry);
 
@@ -69,7 +69,7 @@ namespace H.Core.Test.Providers.Animals
         }
 
         [TestMethod]
-        public void GetLayersInforation()
+        public void GetLayersInformation()
         {
             var data = _provider.GetParameterValues(AnimalType.Layers);
 
@@ -83,7 +83,7 @@ namespace H.Core.Test.Providers.Animals
         }
 
         [TestMethod]
-        public void GetHensInforation()
+        public void GetHensInformation()
         {
             var data = _provider.GetParameterValues(AnimalType.ChickenHens);
 

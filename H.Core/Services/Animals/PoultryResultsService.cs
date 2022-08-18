@@ -84,7 +84,7 @@ namespace H.Core.Services.Animals
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                 carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails
                     .TotalCarbonKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.1.1-6
             dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
@@ -195,7 +195,7 @@ namespace H.Core.Services.Animals
                 base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
                     beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                     nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
-                    beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                    moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.2.1-31
             dailyEmissions.AmountOfNitrogenAddedFromBedding = base.CalculateAmountOfNitrogenAddedFromBeddingMaterial(
@@ -212,8 +212,6 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmissionRate: dailyEmissions.ManureDirectN2ONEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            #region New
-
             // Equation 4.3.3-1
             dailyEmissions.TanExcretion = base.CalculateTANExcretion(
                 tanExcretionRate: managementPeriod.ManureDetails.DailyTanExcretion,
@@ -222,11 +220,11 @@ namespace H.Core.Services.Animals
             // Equation 4.3.3-2
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                fractionOfNitrogenExcretedInUrine: dailyEmissions.TanExcretionRate);
+                tanExcretionRate: dailyEmissions.TanExcretionRate);
 
             // Equation 4.3.3-3
             dailyEmissions.FecalNitrogenExcretion = base.CalculateFecalNitrogenExcretion(
-                fecalNitrogenRate: dailyEmissions.FecalNitrogenExcretionRate,
+                fecalNitrogenExcretionRate: dailyEmissions.FecalNitrogenExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.3.3-4
@@ -369,8 +367,6 @@ namespace H.Core.Services.Animals
 
             // Equation 4.6.3-5
             var adjustedAmmoniaEmissionsFromLandApplication = adjustedAmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
-
-            #endregion
 
             return dailyEmissions;
         }

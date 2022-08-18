@@ -547,16 +547,13 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="beddingRate">Rate of bedding material added (kg head^-1 day^-1)</param>
         /// <param name="carbonConcentrationOfBeddingMaterial">Carbon concentration of bedding material (kg C kg^-1 DM)</param>
-        /// <param name="beddingMaterialType"></param>
+        /// <param name="moistureContentOfBeddingMaterial">Moisture content of bedding material (%)</param>
         /// <returns>Rate of carbon added from bedding material (kg C head^-1 day^-1)</returns>
-        public double CalculateRateOfCarbonAddedFromBeddingMaterial(
-            double beddingRate,
+        public double CalculateRateOfCarbonAddedFromBeddingMaterial(double beddingRate,
             double carbonConcentrationOfBeddingMaterial,
-            BeddingMaterialType beddingMaterialType)
+            double moistureContentOfBeddingMaterial)
         {
-            var dryMatterContent = beddingMaterialType == BeddingMaterialType.Sand ? 1 : 0.96;
-
-            return beddingRate * carbonConcentrationOfBeddingMaterial * dryMatterContent;
+            return beddingRate * carbonConcentrationOfBeddingMaterial * (1 - (moistureContentOfBeddingMaterial / 100.0));
         }
 
         /// <summary>
@@ -746,16 +743,14 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="beddingRate">Rate of bedding material added (kg head^-1 day^-1)</param>
         /// <param name="nitrogenConcentrationOfBeddingMaterial">Nitrogen concentration of bedding material (kg N kg^-1 DM)</param>
-        /// <param name="beddingMaterialType"></param>
+        /// <param name="moistureContentOfBeddingMaterial">Moisture content of bedding material (%)</param>
         /// <returns>Rate of nitrogen added from bedding material (kg N head^-1 day^-1)</returns>
         public double CalculateRateOfNitrogenAddedFromBeddingMaterial(
             double beddingRate,
             double nitrogenConcentrationOfBeddingMaterial,
-            BeddingMaterialType beddingMaterialType)
+            double moistureContentOfBeddingMaterial)
         {
-            var dryMatterContent = beddingMaterialType == BeddingMaterialType.Sand ? 1 : 0.96;
-
-            return beddingRate * nitrogenConcentrationOfBeddingMaterial * dryMatterContent;
+            return beddingRate * nitrogenConcentrationOfBeddingMaterial * (1 - (moistureContentOfBeddingMaterial / 100.0));
         }
 
         /// <summary>
@@ -914,7 +909,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Used for beef cattle. Dairy has different methodology for calculating fraction of N excreted in urine
+        /// Used for beef cattle and sheep. Dairy has different methodology for calculating fraction of N excreted in urine
         /// </summary>
         /// <returns>Fraction of nitrogen excreted in urine [kg TAN (kg manure-N)^-1]</returns>
         public double GetFractionOfNitrogenExcretedInUrine(double crudeProteinInDiet)
@@ -934,7 +929,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-3
+        /// Equation 4.3.1-3, 4.3.4-1
         /// </summary>
         /// <param name="nitrogenExcretionRate">N excretion rate (kg head^-1 day^-1)</param>
         /// <param name="fractionOfNitrogenExcretedInUrine">Fraction of N excreted in urine (urinary-N or urea-N fraction), varied with diet CP content (kg N kg^-1 total N excreted)</param>
@@ -945,8 +940,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-4
-        /// Equation 4.3.3-1
+        /// Equation 4.3.1-4, 4.3.4-2
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -957,34 +951,31 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-5
-        /// Equation 4.3.3-2
+        /// Equation 4.3.1-5, 4.3.4-3
         /// </summary>
         /// <param name="nitrogenExcretionRate">N excretion rate (kg head^-1 day^-1)</param>
-        /// <param name="fractionOfNitrogenExcretedInUrine">Fraction of N excreted in urine (urinary-N or urea-N fraction), varied with diet CP content (kg N kg^-1 total N excreted)</param>
+        /// <param name="tanExcretionRate">Fraction of N excreted in urine (urinary-N or urea-N fraction), varied with diet CP content (kg N kg^-1 total N excreted)</param>
         /// <returns>Fecal N excretion rate (kg N head^-1 d^-1)</returns>
         public double CalculateFecalNitrogenExcretionRate(
             double nitrogenExcretionRate, 
-            double fractionOfNitrogenExcretedInUrine)
+            double tanExcretionRate)
         {
-            return nitrogenExcretionRate * (1 - fractionOfNitrogenExcretedInUrine);
+            return nitrogenExcretionRate * (1 - tanExcretionRate);
         }
 
         /// <summary>
-        /// Equation 4.3.1-6
-        /// Equation 4.3.3-3
+        /// Equation 4.3.1-6, 4.3.4-4
         /// </summary>
-        /// <param name="fecalNitrogenRate">Fecal N excretion rate (kg N head^-1 day^-1)</param>
+        /// <param name="fecalNitrogenExcretionRate">Fecal N excretion rate (kg N head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
         /// <returns>Total nitrogen excreted through feces (kg N day^-1)</returns>
-        public double CalculateFecalNitrogenExcretion(double fecalNitrogenRate, double numberOfAnimals)
+        public double CalculateFecalNitrogenExcretion(double fecalNitrogenExcretionRate, double numberOfAnimals)
         {
-            return fecalNitrogenRate * numberOfAnimals;
+            return fecalNitrogenExcretionRate * numberOfAnimals;
         }
 
         /// <summary>
-        /// Equation 4.3.1-7
-        /// Equation 4.3.3-4
+        /// Equation 4.3.1-7, 4.3.4-5
         ///
         /// Organic N in stored manure
         /// </summary>
@@ -996,6 +987,45 @@ namespace H.Core.Services.Animals
             double amountOfNitrogenAddedFromBedding)
         {
             return totalNitrogenExcretedThroughFeces + amountOfNitrogenAddedFromBedding;
+        }
+
+        /// <summary>
+        /// Equation 4.3.4-6
+        /// </summary>
+        /// <param name="nitrogenExcretionRate">Fecal N excretion rate (kg N head^-1 day^-1)</param>
+        /// <param name="rateOfNitrogenAddedFromBedding">Total amount of nitrogen added from bedding materials (kg N animal^-1 day^-1)</param>
+        /// <param name="volatilizationFraction">Volatilization fraction for sheep, swine and other livestock groups</param>
+        /// <returns>Manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</returns>
+        public double CalculateAmmoniaEmissionRateFromHousingAndStorage(
+            double nitrogenExcretionRate,
+            double rateOfNitrogenAddedFromBedding,
+            double volatilizationFraction)
+        {
+            return (nitrogenExcretionRate + rateOfNitrogenAddedFromBedding) * volatilizationFraction;
+        }
+
+        /// <summary>
+        /// Equation 4.3.4-7
+        /// </summary>
+        /// <param name="ammoniaEmissionRate">Manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</param>
+        /// <param name="numberOfAnimals">Number of animals</param>
+        /// <returns>Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</returns>
+        public double CalculateTotalNitrogenLossFromHousingAndStorage(
+            double ammoniaEmissionRate,
+            double numberOfAnimals)
+        {
+            return ammoniaEmissionRate * numberOfAnimals;
+        }
+
+        /// <summary>
+        /// Equation 4.3.4-8
+        /// </summary>
+        /// <param name="totalNitrogenLossFromHousingAndStorage">Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</param>
+        /// <returns>Daily NH3 emission from sheep, swine and other livestock manure during the housing and storage stages (kg NH3)</returns>
+        public double CalculateAmmoniaLossFromHousingAndStorage(
+            double totalNitrogenLossFromHousingAndStorage)
+        {
+            return totalNitrogenLossFromHousingAndStorage * CoreConstants.ConvertNH3NToNH3;
         }
 
         /// <summary>
@@ -1023,7 +1053,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-6
+        /// Equation 4.3.1-8
         /// </summary>
         /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
         /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission for feedlot (confined no barn) housing, or pasture (unitless)</returns>
@@ -1033,7 +1063,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-11
+        /// Equation 4.3.1-13
         ///
         /// For naturally ventilated enclosures (barn) - assumption is temperature is 2 degrees higher. Dairy enclosed housing types
         /// are climate controlled and so do not use this equation
@@ -1046,8 +1076,9 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-8
-        /// Equation 4.3.3-5
+        /// Equation 4.3.1-10, 4.3.1-15, 4.3.3-5
+        ///
+        /// Method is used for multiple equation numbers since only the parameter values differs between the equations
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical Nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="adjustedEmissionFactor">Adjusted ammonia emission factor</param>
@@ -1060,8 +1091,9 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-9
-        /// Equation 4.3.3-6
+        /// Equation 4.3.1-11, 4.3.1-16, 4.3.3-6
+        ///
+        /// Method is used for multiple equation numbers since only the parameter values differs between the equations
         /// </summary>
         /// <param name="emissionRate">Ammonia nitrogen emission rate from housing of animals (kg NH3 head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -1074,8 +1106,9 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-10
-        /// Equation 4.3.3-7
+        /// Equation 4.3.1-12, 4.3.1-17, 4.3.3-7
+        ///
+        /// Method is used for multiple equation numbers since only the parameter values differs between the equations
         /// </summary>
         /// <param name="ammoniaConcentrationInHousing">Total ammonia nitrogen production from cattle (kg NH3-N)</param>
         /// <returns>Ammonia emissions from animals (kg NH3)</returns>
@@ -1086,8 +1119,9 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-7
-        /// Equation 4.3.1-12
+        /// Equation 4.3.1-9, 4.3.1-14
+        ///
+        /// Method is used for both equation numbers since only the parameter values differs between the two equations
         /// </summary>
         /// <param name="emissionFactor">Default ammonia emission factor</param>
         /// <param name="temperatureAdjustment">Ambient temperature-based adjustments used to correct default NH3 emission factor (Table 17)</param>
@@ -1896,9 +1930,6 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-2
-        /// Equation 4.3.1-5
-        ///
         /// Note: calculation is the same for both liquid and solid manure
         ///
         /// In v3 the emissions from manure application were separated into emissions from solid manure and emissions from liquid manure. In v4 Aklilu updated

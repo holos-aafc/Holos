@@ -240,7 +240,7 @@ namespace H.Core.Services.Animals
              */
 
             // Equation 4.2.1-15
-            dailyEmissions.NitrogenExcretionRate = 0.057;
+            dailyEmissions.NitrogenExcretionRate = 0.078;
 
             // Equation 4.2.1-29 (used in volatilization calculation)
             dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
@@ -516,8 +516,8 @@ namespace H.Core.Services.Animals
             // Equation 4.1.1-5
             dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding, 
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.1.1-6
             dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
@@ -681,7 +681,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial = base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                 nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.2.1-31
             dailyEmissions.AmountOfNitrogenAddedFromBedding = base.CalculateAmountOfNitrogenAddedFromBeddingMaterial(
@@ -803,10 +803,13 @@ namespace H.Core.Services.Animals
 
         #region Equations
 
-        private void CalculateIndirectManureNitrousOxide(GroupEmissionsByDay dailyEmissions,
-                                                   ManagementPeriod managementPeriod,
-                                                   AnimalGroup animalGroup, Farm farm, DateTime dateTime,
-                                                   GroupEmissionsByDay previousDaysEmissions)
+        private void CalculateIndirectManureNitrousOxide(
+            GroupEmissionsByDay dailyEmissions, 
+            ManagementPeriod managementPeriod, 
+            AnimalGroup animalGroup, 
+            Farm farm, 
+            DateTime dateTime, 
+            GroupEmissionsByDay previousDaysEmissions)
         {
             // Equation 4.3.1-1
             // Equation 4.3.1-2
@@ -827,14 +830,14 @@ namespace H.Core.Services.Animals
             // Equation 4.3.1-5
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                fractionOfNitrogenExcretedInUrine: dailyEmissions.TanExcretionRate);
+                tanExcretionRate: dailyEmissions.TanExcretionRate);
 
             // Equation 4.3.1-6
             dailyEmissions.FecalNitrogenExcretion = base.CalculateFecalNitrogenExcretion(
-                fecalNitrogenRate: dailyEmissions.FecalNitrogenExcretionRate,
+                fecalNitrogenExcretionRate: dailyEmissions.FecalNitrogenExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.1-5 (duplicate equation number)
+            // Equation 4.3.1-7
             dailyEmissions.OrganicNitrogenInStoredManure = base.CalculateOrganicNitrogenInStoredManure(
                 totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
@@ -843,30 +846,29 @@ namespace H.Core.Services.Animals
              * Ammonia (NH3) from housing
              */
 
-            // Equation 4.3.1-6
+            // Equation 4.3.1-8
             dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = base.CalculateAmbientTemperatureAdjustment(
                 averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
 
             var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
                 housingType: managementPeriod.HousingDetails.HousingType);
 
-            // Equation 4.3.1-7
-            // Equation 4.3.1-12
+            // Equation 4.3.1-9
             dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = base.CalculateAdjustedEmissionFactorHousing(
                 emissionFactor: ammoniaEmissionFactorForHousingType,
                 temperatureAdjustment: dailyEmissions.AmbientAirTemperatureAdjustmentForHousing);
 
-            // Equation 4.3.1-8
+            // Equation 4.3.1-10
             dailyEmissions.AmmoniaEmissionRateFromHousing = base.CalculateAmmoniaEmissionRateFromHousing(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
                 adjustedEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
 
-            // Equation 4.3.1-9
+            // Equation 4.3.1-11
             dailyEmissions.AmmoniaConcentrationInHousing = base.CalculateAmmoniaConcentrationInHousing(
                 emissionRate: dailyEmissions.AmmoniaEmissionRateFromHousing,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.1-10
+            // Equation 4.3.1-12
             dailyEmissions.AmmoniaEmissionsFromHousingSystem = base.CalculateTotalAmmoniaEmissionsFromHousing(
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 

@@ -165,7 +165,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.SoybeanMealExpellers), 5),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 87.6,
+                MethaneConversionFactor = 0.07,
             });
 
             diets.Add(new Diet()
@@ -182,7 +183,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CanolaMealMechExtracted), 8),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 63,
+                MethaneConversionFactor = 0.063,
             });
 
             return diets;
@@ -210,7 +212,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenMealDried), 8),                   
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 52.4,
+                MethaneConversionFactor = 0.063,
             });
 
             diets.Add(new Diet()
@@ -227,7 +230,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.SoybeanMealExpellers), 5),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 90.2,
+                MethaneConversionFactor = 0.070,
             });
 
             return diets;
@@ -257,6 +261,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenFeedDried), 3),
                 },
 
+                Forage = 77.8,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -279,6 +284,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.MolassesSugarCane), 1),
                 },
 
+                Forage = 60.5,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -299,6 +305,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenFeedDried), 11),
                 },
 
+                Forage = 59.1,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -392,7 +399,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 90),
                 },
 
-                MethaneConversionFactor = 0.04,
+                MethaneConversionFactor = 0.035,
             });
 
             diets.Add(new Diet
@@ -489,7 +496,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.070,
                 DietaryNetEnergyConcentration = 6,
             });
 
@@ -516,7 +523,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.070,
                 DietaryNetEnergyConcentration = 7.0,
             });
 
@@ -576,7 +583,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.07,
             });
 
             diets.Add(new Diet
@@ -602,7 +609,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.07,
             });
 
             return diets;

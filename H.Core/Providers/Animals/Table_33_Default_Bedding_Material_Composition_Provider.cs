@@ -137,30 +137,6 @@ namespace H.Core.Providers.Animals
                 MoistureContent = 9.57, // Footnote 12
             });
 
-            // Swine
-            //
-            this.Data.Add(new Table_33_Default_Bedding_Material_Composition_Data()
-            {
-                AnimalType = AnimalType.Swine,
-                BeddingMaterial = BeddingMaterialType.StrawLong,
-                TotalNitrogenKilogramsDryMatter = 0.0057,
-                TotalCarbonKilogramsDryMatter = 0.447,
-                TotalPhosphorusKilogramsDryMatter = 0.000635,
-                CarbonToNitrogenRatio = 90.5,
-                MoistureContent = 9.57, // Footnote 12
-            });
-
-            this.Data.Add(new Table_33_Default_Bedding_Material_Composition_Data()
-            {
-                AnimalType = AnimalType.Swine,
-                BeddingMaterial = BeddingMaterialType.StrawChopped,
-                TotalNitrogenKilogramsDryMatter = 0.0057,
-                TotalCarbonKilogramsDryMatter = 0.447,
-                TotalPhosphorusKilogramsDryMatter = 0.000635,
-                CarbonToNitrogenRatio = 90.5,
-                MoistureContent = 9.57, // Footnote 12
-            });
-
             /*
              * Sheep
              */
@@ -194,7 +170,7 @@ namespace H.Core.Providers.Animals
             this.Data.Add(new Table_33_Default_Bedding_Material_Composition_Data()
             {
                 AnimalType = AnimalType.Poultry,
-                BeddingMaterial = BeddingMaterialType.Straw, // Footnotes 9
+                BeddingMaterial = BeddingMaterialType.Straw, // Footnote 9
                 TotalNitrogenKilogramsDryMatter = 0.0057,
                 TotalCarbonKilogramsDryMatter = 0.447,
                 TotalPhosphorusKilogramsDryMatter = 0.000635,
@@ -205,7 +181,7 @@ namespace H.Core.Providers.Animals
             this.Data.Add(new Table_33_Default_Bedding_Material_Composition_Data()
             {
                 AnimalType = AnimalType.Poultry,
-                BeddingMaterial = BeddingMaterialType.Shavings, // Footnotes 9
+                BeddingMaterial = BeddingMaterialType.Shavings, // Footnote 9
                 TotalNitrogenKilogramsDryMatter = 0.00185,
                 TotalCarbonKilogramsDryMatter = 0.506,
                 TotalPhosphorusKilogramsDryMatter = 0.000275,
@@ -363,7 +339,7 @@ namespace H.Core.Providers.Animals
 
             if (animalType.IsDairyCattleType())
             {
-                if (housingType.IsTieStall() || housingType.IsFreeStall() || housingType == HousingType.DryLot) // Currently both housing types have same rates for bedding types
+                if (housingType.IsTieStall() || housingType.IsFreeStall() || housingType == HousingType.DryLot) // Currently, all housing types have same rates for bedding types
                 {
                     if (beddingMaterialType == BeddingMaterialType.Sand)
                     {
@@ -421,9 +397,14 @@ namespace H.Core.Providers.Animals
 
                 if (beddingMaterialType == BeddingMaterialType.Sawdust)
                 {
-                    if (animalType.IsChickenType())
+                    if (animalType == AnimalType.Broilers)
                     {
                         return 0.0014;
+                    }
+
+                    if (animalType == AnimalType.Layers)
+                    {
+                        return 0.0028;
                     }
 
                     if (animalType.IsTurkeyType())
@@ -431,7 +412,7 @@ namespace H.Core.Providers.Animals
                         return 0.011;
                     }
 
-                    return 0.0028;
+                    return 0;
                 }
 
                 return 0;

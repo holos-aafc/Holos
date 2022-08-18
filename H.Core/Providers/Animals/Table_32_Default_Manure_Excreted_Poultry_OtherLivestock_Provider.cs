@@ -80,8 +80,8 @@ namespace H.Core.Providers.Animals
                 return 23;
             }
 
-            
-            if (animalType == AnimalType.Bison) // Footnote 5
+            // Footnote 6:
+            if (animalType == AnimalType.Bison)
             {
                 return 37;
             }
