@@ -5,6 +5,7 @@ using AutoMapper;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Economics;
+using H.Core.Providers.Fertilizer;
 
 namespace H.Core.Services
 {
@@ -17,6 +18,7 @@ namespace H.Core.Services
         private readonly IMapper _grazingPeriodMapper;
         private readonly IMapper _harvestPeriodMapper;
         private readonly IMapper _manureApplicationViewItemMapper;
+        private readonly IMapper _fertilizerApplicationViewItemMapper;
 
         #endregion
 
@@ -31,7 +33,8 @@ namespace H.Core.Services
                     .ForMember(y => y.HarvestViewItems, z => z.Ignore())
                     .ForMember(y => y.GrazingViewItems, z => z.Ignore())
                     .ForMember(y => y.ManureApplicationViewItems, z => z.Ignore())
-                    .ForMember(y => y.CropEconomicData, z => z.Ignore());
+                    .ForMember(y => y.CropEconomicData, z => z.Ignore())
+                    .ForMember(y => y.FertilizerApplicationViewItems, z => z.Ignore());
             });
 
             _cropViewItemMapper = cropViewItemMapperConfiguration.CreateMapper();
@@ -62,6 +65,15 @@ namespace H.Core.Services
             });
 
             _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
+
+            var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data>();
+                x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
+                
+            });
+            
+            _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
         }
 
         #endregion
@@ -161,6 +173,14 @@ namespace H.Core.Services
 
                     _manureApplicationViewItemMapper.Map(manureApplicationViewItem, copiedManureApplicationViewItem);
                     copiedViewItem.ManureApplicationViewItems.Add(copiedManureApplicationViewItem);
+                }
+
+                foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
+                {
+                    var copiedFertilizerApplicationViewItem = new FertilizerApplicationViewItem();
+
+                    _fertilizerApplicationViewItemMapper.Map(fertilizerApplicationViewItem, copiedFertilizerApplicationViewItem);
+                    copiedViewItem.FertilizerApplicationViewItems.Add(copiedFertilizerApplicationViewItem);
                 }
             }
         }

@@ -11,6 +11,7 @@ using H.Core.Tools;
 namespace H.Core.Calculators.Tillage
 {
     /// <summary>
+    /// Calculates the tillage factor for various types. Implements Table 6. rc factor from the algorithm document.
     /// </summary>
     public class TillageFactorCalculator : ITillageFactorCalculator
     {

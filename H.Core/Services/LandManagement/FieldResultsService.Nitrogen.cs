@@ -35,12 +35,12 @@ namespace H.Core.Services.LandManagement
                 //var emissionFactorForApplicationType = 0.0;
                 //if (manureApplicationViewItem.ManureStateType.IsLiquidManure())
                 //{
-                //    emissionFactorForApplicationType = _defaultAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
+                //    emissionFactorForApplicationType = _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
                 //        manureApplicationType: manureApplicationViewItem.ManureApplicationMethod);
                 //}
                 //else
                 //{
-                //    emissionFactorForApplicationType = _defaultAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
+                //    emissionFactorForApplicationType = _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
                 //        tillageType: cropViewItem.TillageType);
                 //}
 
@@ -99,21 +99,20 @@ namespace H.Core.Services.LandManagement
                 nextYearViewItem: null,
                 farm: farm);
 
-            // Use the C_p and not C_ptoSoil in this calculation
-            var nitrogenContentOfGrainReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
-                carbonInputFromProduct: viewItem.PlantCarbonInAgriculturalProduct / defaults.CarbonConcentration,
+            var nitrogenContentOfGrainReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogenTotal(
+                carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
             var nitrogenContentOfStrawReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
-                carbonInputFromStraw: viewItem.CarbonInputFromStraw / defaults.CarbonConcentration,
+                carbonInputFromStraw: viewItem.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
 
             var nitrogenContentOfRootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
-                carbonInputFromRoots: viewItem.CarbonInputFromRoots / defaults.CarbonConcentration,
+                carbonInputFromRoots: viewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
 
             var nitrogenContentOfExtrarootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
-                carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots / defaults.CarbonConcentration,
+                carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
 
             var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
@@ -126,7 +125,8 @@ namespace H.Core.Services.LandManagement
                 fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
                 soilTestN: viewItem.SoilTestNitrogen,
                 isNitrogenFixingCrop: isLeguminousCrop,
-                nitrogenFixationAmount: defaults.DefaultNitrogenFixation);
+                nitrogenFixationAmount: viewItem.NitrogenFixation, 
+                atmosphericNitrogenDeposition: viewItem.NitrogenDepositionAmount);
 
             return syntheticFertilizerApplied;
         }
@@ -155,9 +155,120 @@ namespace H.Core.Services.LandManagement
             }
 
             // Need to convert to amount of fertilizer product from required nitrogen
-            var requiredAmountOfProduct = (requiredNitrogen / fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen) * 100;
+            var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen/100));
 
             return requiredAmountOfProduct;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-1
+        /// 
+        /// Calculates emissions from the manure specifically applied to the field (kg N2O-N (kg N)^-1).
+        /// </summary>
+        public double CalculateDirectEmissionsFromFieldSpecificManureSpreading(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateManureApplicationEmissionFactor(
+                viewItem: viewItem,
+                farm: farm);
+
+            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+            var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-2
+        ///
+        /// (kg N)
+        /// </summary>
+        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults)
+        {
+            var result = 0d;
+
+            foreach (var fieldComponentEmissionResult in farmEmissionResults.FieldComponentEmissionResults)
+            {
+                var viewItem = fieldComponentEmissionResult.FieldSystemComponent.GetSingleYearViewItem();
+                var appliedNitrogenFromManure = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+                result += appliedNitrogenFromManure;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-3
+        ///
+        /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
+        /// we take the weight average of these fields when calculating the EF for organic nitrogen(ON)
+        /// </summary>
+        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults)
+        {
+            var fieldComponentEmissionResults = farmEmissionResults.FieldComponentEmissionResults;
+            if (fieldComponentEmissionResults.Any() == false)
+            {
+                return 0;
+            }
+
+            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
+
+            foreach (var emissionResults in fieldComponentEmissionResults)
+            {
+                var emissionFactor = this.CalculateManureApplicationEmissionFactor(
+                    viewItem: emissionResults.FieldSystemComponent.GetSingleYearViewItem(),
+                    farm: farmEmissionResults.Farm);
+
+                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
+                {
+                    Value = emissionFactor,
+                    Weight = emissionResults.FieldSystemComponent.FieldArea,
+                });
+            }
+
+            var weightedEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
+
+            return weightedEmissionFactor;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-4
+        /// </summary>
+        public double CalculateTotalNitrogenFromLandManureRemaining(
+            double totalManureAvailableForLandApplication, 
+            double totalManureAlreadyAppliedToFields, 
+            double totalManureExported)
+        {
+            return totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-5
+        /// </summary>
+        public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
+            double weightedEmissionFactor, 
+            double totalNitrogenFromLandManureRemaining)
+        {
+
+            var result = totalNitrogenFromLandManureRemaining * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-6
+        /// </summary>
+        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults, 
+            double totalExportedManure)
+        {
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
+
+            var result = totalExportedManure * weightedEmissionFactor;
+
+            return result;
         }
 
         /// <summary>
@@ -174,43 +285,29 @@ namespace H.Core.Services.LandManagement
                 Name = LandEmissionSourceType.Manure.GetDescription(),
             };
 
-            var fieldComponentEmissionResults = farmEmissionResults.FieldComponentEmissionResults;
-            if (fieldComponentEmissionResults.Any() == false)
-            {
-                return result;
-            }
-
-            /*
-             * There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop typ, fertilizer, etc.). So
-             * we take the weight average of these fields when calculating the EF for organic nitrogen (ON)
-             */
-            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
-
-            foreach (var fieldSystemComponent in fieldComponentEmissionResults)
-            {
-                var emissionFactor = this.CalculateManureApplicationEmissionFactor(
-                    fieldSystemComponent: fieldSystemComponent.FieldSystemComponent,
-                    farm: farmEmissionResults.Farm);
-
-                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
-                {
-                    Value = emissionFactor,
-                    Weight = fieldSystemComponent.FieldSystemComponent.FieldArea,
-                });
-            }
-
             // Equation 2.5.2-20
-            var weightedEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
 
             /*
              * Direct emissions for organic nitrogen inputs from all fields on the farm (considers all manure produced by all animals)
              */
 
-            // Equation 2.5.2-24
-            // Equation 2.5.4-3
-            var directEmissionsFromManureApplication = _singleYearNitrogenEmissionsCalculator.CalculateNitrogenEmissionsDueToLandAppliedManureNitrogen(
-                totalLandAppliedManureNitrogen: farmEmissionResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication,
-                weightedEcodistrictEmissionFactorForManureNitrogen: weightedEmissionFactor);
+            var totalManureNitrogenAppliedToFields = this.CalculateTotalManureNitrogenAppliedToAllFields(farmEmissionResults);
+
+            /*
+             * All manure nitrogen applied to fields will need to be subtracted from the total amount of manure produced on farm. Any remaining amount is still associated with
+             * the farm and must be accounted for in the 'left over' manure.
+             */
+
+            var remainingManure = this.CalculateTotalNitrogenFromLandManureRemaining(
+                totalManureAvailableForLandApplication: farmEmissionResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication,
+                totalManureAlreadyAppliedToFields: totalManureNitrogenAppliedToFields,
+                totalManureExported: 0);
+
+            // Equation 
+            var directEmissionsFromManureApplication = this.CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
+                weightedEmissionFactor: weightedEmissionFactor,
+                totalNitrogenFromLandManureRemaining: remainingManure);
 
             // Equation 2.5.3-1
             var fractionLeach = _singleYearNitrogenEmissionsCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
@@ -375,22 +472,22 @@ namespace H.Core.Services.LandManagement
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
-            var croppingSystemModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForCroppingSystem(
+            var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
 
-            var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
+            var tillageModifier = _soilN2OEmissionFactorsProvider.GetFactorForTillagePractice(
                 region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
-            var syntheticNitrogenModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+            var syntheticNitrogenModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
-            var organicNitrogenModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.OrganicNitrogen,
+            var organicNitrogenModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen,
                 cropViewItem: viewItem);
 
-            var cropResidueModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+            var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
             // Equation 2.5.1-8
             var emissionFactorForSyntheticFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
@@ -432,6 +529,8 @@ namespace H.Core.Services.LandManagement
             var emissionsFromOrganicFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionsFromOrganicFetilizer(
                 inputsFromOrganicFertilizer: totalOrganicNitrogenInputs,
                 factor: emissionFactorForOrganicFertilizer);
+
+            result.FieldSpecificDirectEmissionsFromManureApplication = CalculateDirectEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
 
             // Equation 2.6.6-2
             var aboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(
@@ -490,7 +589,8 @@ namespace H.Core.Services.LandManagement
             var directEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalDirectEmissionsForCrop(
                 emissionsFromSyntheticFertilizer: emissionsFromSyntheticFertilizer,
                 emissionsFromResidues: emissionsFromResidues, 
-                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer);
+                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer, 
+                emissionsFromLandAppliedManure: result.FieldSpecificDirectEmissionsFromManureApplication);
 
             // Equation 2.5.4-4
             var indirectEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalIndirectNitrogenEmissions(
@@ -519,7 +619,9 @@ namespace H.Core.Services.LandManagement
         /// 
         /// Frac_volatilizationSoil
         ///
-        /// This value used to be a constant (0.1) but is now calculated according to crop type, fertilizer type, etc.
+        /// <para>This value used to be a constant (0.1) but is now calculated according to crop type, fertilizer type, etc.</para>
+        ///
+        /// <para>Implements: Table 17. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
         /// </summary>
         public double  CalculateFractionOfNitrogenLostByVolatilization(
             CropViewItem cropViewItem, 
@@ -556,6 +658,7 @@ namespace H.Core.Services.LandManagement
             }
 
             var methodOfApplicationFactor = 0.0;
+            // Footnote 1: Broadcast application of fertilizer is assumed for perennials
             if (cropViewItem.FertilizerApplicationMethodology == FertilizerApplicationMethodologies.Broadcast)
             {
                 methodOfApplicationFactor = -1.305;
@@ -602,15 +705,15 @@ namespace H.Core.Services.LandManagement
         {
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
-            var croppingSystemModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForCroppingSystem(
+            var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
 
-            var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
+            var tillageModifier = _soilN2OEmissionFactorsProvider.GetFactorForTillagePractice(
                 region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
-            var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+            var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
             var syntheticNitrogenEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -640,15 +743,15 @@ namespace H.Core.Services.LandManagement
         {
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
-            var croppingSystemModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForCroppingSystem(
+            var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
 
-            var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
+            var tillageModifier = _soilN2OEmissionFactorsProvider.GetFactorForTillagePractice(
                 region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
-            var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+            var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
             var ecodistrictMineralEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -660,33 +763,25 @@ namespace H.Core.Services.LandManagement
         }
 
         private double CalculateManureApplicationEmissionFactor(
-            FieldSystemComponent fieldSystemComponent,
+            CropViewItem viewItem,
             Farm farm)
         {
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
             if (viewItem == null)
             {
                 return 0;
             }
 
-            return this.CalculateManureApplicationEmissionFactor(viewItem, farm);
-        }
-
-        private double CalculateManureApplicationEmissionFactor(
-            CropViewItem viewItem,
-            Farm farm)
-        {
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
-            var croppingSystemModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForCroppingSystem(
+            var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
 
-            var tillageModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForTillagePractice(
+            var tillageModifier = _soilN2OEmissionFactorsProvider.GetFactorForTillagePractice(
                 region: farm.DefaultSoilData.Province.GetRegion(),
                 cropViewItem: viewItem);
 
-            var nitrogenSourceModifier = _soilNitrousOxideEmissionFactorProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: SoilNitrousOxideEmissionFactorProvider_Table_15.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
+            var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
 
             var ecodistrictManureEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,

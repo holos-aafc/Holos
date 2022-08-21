@@ -87,6 +87,7 @@
     <Compile Include="NetworkHelper.cs" />
     <Compile Include="NotificationInformation.cs" />
     <Compile Include="ObservableCollectionExtensions.cs" />
+    <Compile Include="StringHelper.cs" />
     <Compile Include="WeightedAverageInput.cs" />
     <Compile Include="FileSystemHelper.cs" />
     <Compile Include="InfrastructureConstants.cs" />

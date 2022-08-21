@@ -32,7 +32,6 @@ namespace H.Core.Emissions.Results
             this.CropN2OEmissionsResults = new SoilN2OEmissionsResults();
 
             this.HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>();
-            
         }
 
         #endregion

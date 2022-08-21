@@ -1,0 +1,79 @@
+﻿Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
+Beef cattle,Pasture,50 (1),0.625 (1),??,0.159 (1),??
+Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
+Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
+Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
+Beef cattle,Composted intensive (5),37.42,1.041,14.48,0.398,13.91
+Dairy cattle,Pasture,50 (6),1 (6),??,0.118 (6),??
+Dairy cattle,Deep bedding (2),60.08 (2),0.715 (2),12.63 (2),0.236 (2),17.66
+Dairy cattle,Solid storage (7),77.3 (7),0.392 (7),2.99 (7),0.118 (7),7.63
+Dairy cattle,Composted (8),78.11 (8),0.265 (8),4.72 (8),??,17.77
+Swine,Composted (9),79.23 (9),0.279 (9),9.13 (9),??,32.76
+Sheep,Pasture,75.0 (10),0.765 (10),??,0.211 (10),??
+Sheep,Solid storage,67.8 (11),0.870 (11),??,0.340( 11),??
+Poultry,Solid storage (12),44.83 (12),2.427 (12),10.12 (12),1.06 (12),4.17
+Llamas ,Pasture,75.0 (13),0.765 (13),??,0.211 (13),
+Alpacas,Pasture,75.0 (13),0.765 (13),??,0.211 (13),
+Deer,Pasture,??,??,??,??,??
+Elk,Pasture,??,??,??,??,??
+Goats,Pasture,??,1.096 (14),??,0.271 (14),??
+Horses,Pasture,80.0 (15),0.590 (15),??,0.140 (15),??
+Mules,Pasture,80.0 (16),0.590 (16),??,0.140 (16),??
+Bison,Pasture,50.0 (17),0.625 (17),??,0.159 (17),??
+Llamas,Solid Storage,67.8 (18),0.870 (18),??,0.340 (18),??
+Alpacas,Solid Storage,67.8 (18),0.870 (18),??,0.340 (18),??
+Deer,Solid Storage,35 (19),0.638 (19),??,0.210 (19),??
+Elk,Solid Storage,35 (19),0.638 (19),??,0.210 (19),??
+Goats,Solid Storage,53.58 (20),0.729 (20),??,0.280 (20),??
+Horses,Solid Storage,56.65 (21),0.864 (21),??,0.155 (21),??
+Mules,Solid Storage,56.65 (22),0.864 (22),??,0.155 (22),??
+Bison,Solid Storage,35 (23),0.638 (23),??,0.214 (23),??
+Dairy cattle,Liquid (21),94.41 (24),0.209 (24),2.19 (24),0.06 (24),10.58 (24)
+Dairy cattle,Slurry (21),94.41 (24),0.209 (24),2.19 (24),0.06 (24),10.58 (24)
+Dairy cattle,Liquid separated (22),95.5 (25),0.013 (25),0.125 (25),0.002 (25),6.53 (25)
+Dairy cattle,Anaerobic digestor (23),95 (26),0.233 (26),2.39 (26),??,10.42 (26)
+Swine,Liquid (24),95.16 (27),0.325 (27),1.29 (27),0.118 (27),3.25 (27)
+Swine,Slurry (24),95.16 (27),0.325 (27),1.29 (27),0.118 (27),3.25 (27)
+Swine,Deep pit,??,0.577 (28),??,0.214 (28),?? 
+Swine,Anaerobic digestion ,??,??,?? ,?? ,?? 
+Swine,Liquid Solid Cover,95.16,0.325,1.29,0.118,3.25
+Poultry,Liquid (26),89.510 (29),0.836 (29),2.92 (29),0.268 (29),3.49
+Poultry,Slurry (26),89.510 (29),0.836 (29),2.92 (29),0.268 (29),3.49
+Beef cattle,Liquid,89.9,0.37,??,0.08,21.5
+Swine,Compost Intensive,79.23,0.279,9.13,??,30.88
+Swine,Compost Passive,79.23,0.279,9.13,??,30.88
+Swine,Liquid Natural Crust,95.16,0.325,1.29,0.118,3.25
+Swine,Liquid No Crust,95.16,0.325,1.29,0.118,3.25
+,,,,,,
+,,,,,,
+"Data on manure composition were organized from multiple publications based on Canadian studies (extension documents, reports, journal publications). Where data from Canada were not available, data were sourced from outside Canada – any non-Canadian data used is indicated in the relevant notes below.",,,,,,
+N concentration values for all liquid manures from: Agricultural Operation Practices Act (2001) as cited in Ormann 2005 & Tri-Provincial Manure Application and Use Guidelines 2004. All values for solid manures from Agricultural Operation Practices Act (2001) as cited in Ormann 2005.,,,,,,
+"1 Moisture content  derived from Government of Alberta (2021), Table 2 for beef cows with calves and cows/bulls; the median moisture content (%) value was used; Nfraction is the average of values derived from ECCC (2021) and Hofmann and Beaulieu (2006); Pfraction is the average of values derived from Hofmann and Beaulieu (2006);",,,,,,
+"2 Default values for moisture content and N, C and P fractions for deep bedding manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1994); Hao et al. (2001,2004,2009,2014); Whalen et al. (2002); Miller et al. (2003,2004,2009); Helgason et al. (2005); Larney and Olson (2006); Larney et al. (2006);Zvomuya et al. (2006);  Stefankiw (2012). These values were also used for deep bedding for dairy cattle.",,,,,,
+"3 Default values for moisture content and C, N and P fractions for solid storage (stockpiled) manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1993); Olson and Papworth (2002); Sommer et al. (2004); Loro (2005); Pattey et al. (2005); Larney et al. (2006); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a,b); Government of Manitoba (2009); Brown (2013).",,,,,,
+"4 Default values for moisture content and C, N and P fractions for composted passive manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1989,1993,1994); Pattey et al. (2005); Larney and Olson (2006); Larney et al. (2006).",,,,,,
+"5 Default values for moisture content and C, N and P fractions for composted intensive manure for beef cattle were averages calculated from data derived from the following sources: Miller et al. (2003,2004,2009); Hao et al. (2004, 2014); Helgason et al. (2005); Larney and Olson (2006); Zvomuya et al. (2006); Larney et al. (2008,2014); Stefankiw (2012).",,,,,,
+6 The Nfraction of excreted dairy manure (urine + feces) deposited on pasture is from Nennich et al. (2005) as follows: lactating cow: 0.653%; dry cow: 0.591%; heifer: 0.478%; calf: 0.508% (these values were calculated using data in Table 4 in this publication); The Pfraction of excreted dairy manure was calculated using data for dairy cows from Hofmann and Beaulieu (2006),,,,,,
+"7 Default values for moisture content and C, N and P fractions for solid storage (stockpiled) manure for dairy cattle were averages calculated from data derived from the following sources: Pattey et al. (2005); Government of Manitoba (2009); Brown (2013); Manitoba Agriculture, Food and Rural Development (2015); Fillingham et al. (2017); Ackerman et al. (2018).",,,,,,
+"8 Default values for moisture content and C, N and P fractions for composted manure for dairy cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1989,1993); Pattey et al. (2005); Cambareri et al. (2017); Fillingham et al. (2017).",,,,,,
+"9 Default values for moisture content and C, N and P fractions for composted manure for swine were averages calculated from data derived from the following sources: Thompson et al. (2004); Park et al. (2014).",,,,,,
+10 Values for moisture content of sheep manure (as excreted) from Bell (1983); Nfraction was calculated using data from ECCC (2021) and Hofmann and Beaulieu (2006); Pfraction was calculated from Hofmann and Beaulieu (2006),,,,,,
+"11 Default values for moisture content and C, N and P fractions for solid poultry manure were averages calculated from data derived from the following sources: Brown (2013); Government of Alberta (2013,2021); Sukler et al. (2015)’ ",,,,,,
+"12 Default values for moisture content and C, N and P fractions for solid poultry manure were averages calculated from data derived from the following sources: Paul and Beauchamp (1989); Government of Manitoba (2009); Brown (2013); Manitoba Agriculture, Food and Rural Development (2015); Sukler et al. (2015); Government of Alberta (2021).",,,,,,
+"13 Default values for moisture content and C, N and P fractions for sheep manure deposited on pasture were applied to llama and alpaca manure deposited on pasture. ",,,,,,
+14 The Nfraction of goat manure deposited on pasture was calculated using data from ECCC (2021) and Hofmann and Beaulieu (2006); Pfraction was calculated from Hofmann and Beaulieu (2006); ,,,,,,
+"15 Default values for moisture content, Nfraction and Pfraction for horse manure deposited on pasture were derived from: Bell (1983); Hofmann and Beaulieu (2006; ECCC (2021).",,,,,,
+"16 Moisture content, Nfraction and Pfraction values for horses on pasture used for mules on pasture.",,,,,,
+"17 Moisture content, Nfraction and Pfraction values for beef cattle on pasture used for bison on pasture.",,,,,,
+"18 Moisture content, Nfraction and Pfraction values for sheep manure in solid storage are used for llama and alpaca manure in solid storage (drylot).",,,,,,
+"19 Default values for moisture content, Nfraction and Pfraction values for deer/elk manure in solid storage (drylot) wre derived from Government of Alberta (2013,2021).",,,,,,
+"20 Moisture content, Nfraction and Pfraction values for manure in solid storage (drylot) for goats derived from Brown (2013); Government of Alberta (2013).",,,,,,
+"21 Default values for moisture content, Nfraction and Pfraction for horse manure in solid storage (drylot) were derived from: Brown (2013); Government of Alberta (2013,2021); Sukler et al. (2015); Fraser (2021).",,,,,,
+"22 Moisture content, Nfraction and Pfraction values for horse manure in solid storage are used for mule manure in solid storage (drylot).",,,,,,
+"23 Default values for moisture content, Nfraction and Pfraction for bison manure in solid storage (drylot) were derived from: Government of Alberta (2013,2021).",,,,,,
+"24 Default values for moisture content and C, N and P fractions for liquid/slurry manure for dairy cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1989,1993); Pattey et al. (2005); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a); Government of Manitoba (2009); VanderZaag et al. (2009,2010a,b); Brown (2013); Manitoba Agriculture, Food and Rural Development (2015); LeRiche et al. (2016); Ngwabie et al. (2016); Fillingham et al. (2017); Ackerman et al. (2018); Balde et al. (2018); Johannesson et al. (2018); Kariyapperuma et al. (2018a,b); Maldaner et al. (2018). ",,,,,,
+"25 Default values for moisture content and C, N and P fractions for separated liquid manure for dairy cattle were averages calculated from data derived from the following sources: Cambareri et al. (2017); Fillingham et al. (2017); Ackerman et al. (2018); Balde et al. (2018); Evans et al. (2018); VanderZaag et al. (2019); C:N ratio calculated as Cfraction/Nfraction.",,,,,,
+"26 Default values for moisture content and C, N and P fractions for anaerobic digestate for dairy cattle were averages calculated from data derived from the following sources: Balde et al. (2018); Evans et al. (2018); Maldaner et al (2018).",,,,,,
+"27 Default values for moisture content and C, N and P fractions for liquid slurry for swine were averages calculated from data derived from the following sources: Paul and Beauchamp (1989); Fitzgerald and Racz (2001); Olson and Papworth (2002); Dick (2003); Thompson et al. (2004); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006b); Government of Manitoba (2009); Coppi (2012); Brown (2013); Tenuta et al. (2013); Park et al. (2014); Manitoba Agriculture, Food and Rural Development (2015).",,,,,,
+"28 Values for Nfraction and Pfraction for liquid pit manure for swine are estimated as average values (in lbs per 1,000 gallons) for agitated and unagitated liquid swine pits at different depths and for different stages of production from Lorimor et al. (2004 – Tables 2, 3 and 7).",,,,,,
+"29 Default values for moisture content and C, N and P fractions for liquid slurry for poultry were averages calculated from data derived from the following sources: Paul and Beauchamp (1989); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a);; Government of Manitoba (2009,2015); Brown (2013); Government of Alberta (2013,2021); Manitoba Agriculture, Food and Rural Development (2015).",,,,,,

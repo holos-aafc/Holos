@@ -15,7 +15,7 @@ namespace H.Core.Providers.Animals
         {
             if (animalType.IsChickenType())
             {
-                if (animalType == AnimalType.ChickenHens)
+                if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
                 {
                     return 0.0007;
                 }
@@ -28,6 +28,46 @@ namespace H.Core.Providers.Animals
             {
                 // Turkeys
                 return 0.0026;
+            }
+        }
+
+        public double GetEmissionFactorForHousing(AnimalType animalType)
+        {
+            if (animalType.IsChickenType())
+            {
+                if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
+                {
+                    return 0.26;
+                }
+                else
+                {
+                    return 0.25;
+                }
+            }
+            else
+            {
+                // Turkeys
+                return 0.2;
+            }
+        }
+
+        public double GetEmissionFactorForStorage(AnimalType animalType)
+        {
+            if (animalType.IsChickenType())
+            {
+                if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
+                {
+                    return 0.087;
+                }
+                else
+                {
+                    return 0.087;
+                }
+            }
+            else
+            {
+                // Turkeys
+                return 0.087;
             }
         }
     }

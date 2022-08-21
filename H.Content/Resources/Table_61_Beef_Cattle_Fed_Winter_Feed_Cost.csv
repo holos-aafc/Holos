@@ -1,0 +1,7 @@
+﻿Type of Cattle,Diet,Variable cost_feed,Variable cost_other ($ / day / animal),Fixed costs ($ / day / animal),Labour costs ($ / day / animal)
+Cow-calf,All,calculated,0.92,0.24,0.44
+Backgrounder,Slow growth,calculated,4.05,0.08,0.08
+Backgrounder,Medium growth,calculated,5.86,0.11,0.12
+Finisher,Barley based,calculated,5.66,0.1,0.16
+Finisher,Corn based,calculated,5.66,0.1,0.16
+Bull,All,calculated,1.19,0.31,0.57

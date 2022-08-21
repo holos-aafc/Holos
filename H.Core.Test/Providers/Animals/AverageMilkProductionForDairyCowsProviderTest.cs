@@ -10,7 +10,7 @@ namespace H.Core.Test.Providers.Animals
     {
         #region Fields
 
-        private AverageMilkProductionForDairyCowsProvider _provider;
+        private Table_24_Average_Milk_Production_Dairy_Cows_Provider _provider;
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace H.Core.Test.Providers.Animals
         [TestInitialize]
         public void TestIntialize()
         {
-            _provider = new AverageMilkProductionForDairyCowsProvider();
+            _provider = new Table_24_Average_Milk_Production_Dairy_Cows_Provider();
         }
 
         [TestCleanup]

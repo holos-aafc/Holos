@@ -163,6 +163,11 @@ namespace H.Core.Emissions.Results
         private double _methaneEmissionsDuringDigestateStorage;
         private double _nitrousOxideEmissionsDuringDigestateStorage;
         private double _ammoniaEmissionsDuringDigestateStorage;
+        private double _adjustedAmmoniaFromHousing;
+        private double _adjustedAmmoniaFromStorage;
+        private double _ammoniaEmissionsFromHousingAndStorage;
+        private double _totalNitrogenLossesFromHousingAndStorage;
+        private double _ammoniaEmissionRateFromHousingAndStorage;
 
         #endregion
 
@@ -1161,8 +1166,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.6.1-4
-        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
+
+        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+
+        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure
@@ -1634,6 +1649,18 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _ammoniaEmissionsDuringDigestateStorage, value);
         }
 
+        public double AdjustedAmmoniaFromHousing
+        {
+            get => _adjustedAmmoniaFromHousing;
+            set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
+        }
+
+        public double AdjustedAmmoniaFromStorage
+        {
+            get => _adjustedAmmoniaFromStorage;
+            set => SetProperty(ref _adjustedAmmoniaFromStorage, value);
+        }
+
         public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
         public double TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication { get; set; }
         public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplication { get; set; }
@@ -1658,6 +1685,39 @@ namespace H.Core.Emissions.Results
 
         public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3)
+        /// </summary>
+        public double AmmoniaEmissionsFromHousingAndStorage
+        {
+            get => _ammoniaEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionsFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg N)
+        /// </summary>
+        public double TotalNitrogenLossesFromHousingAndStorage
+        {
+            get => _totalNitrogenLossesFromHousingAndStorage;
+            set => SetProperty(ref _totalNitrogenLossesFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniaEmissionRateFromHousingAndStorage
+        {
+            get => _ammoniaEmissionRateFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionRateFromHousingAndStorage, value);
+        }
 
         #endregion
     }

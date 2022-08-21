@@ -37,8 +37,8 @@ namespace H.Core.Services
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
         private readonly IDietProvider _dietProvider = new DietProvider();
-        private readonly DefaultManureCompositionProvider_Table_9 _defaultManureCompositionProvider = new DefaultManureCompositionProvider_Table_9();
-        private readonly DefaultBeddingMaterialCompositionProvider_Table_29 _defaultBeddingMaterialCompositionProviderTable = new DefaultBeddingMaterialCompositionProvider_Table_29();
+        private readonly Table_9_ManureTypes_Default_Composition_Provider _defaultManureCompositionProvider = new Table_9_ManureTypes_Default_Composition_Provider();
+        private readonly Table_33_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_33_Default_Bedding_Material_Composition_Provider();
 
         private readonly IMapper _farmMapper;
         private readonly IMapper _defaultsMapper;
@@ -247,8 +247,8 @@ namespace H.Core.Services
             farm.DateCreated = DateTime.Now;
 
             farm.Diets.AddRange(_dietProvider.GetDiets());
-            farm.DefaultManureCompositionData.AddRange(_defaultManureCompositionProvider.Data);
-            farm.DefaultsCompositionOfBeddingMaterials.AddRange(_defaultBeddingMaterialCompositionProviderTable.Data);
+            farm.DefaultManureCompositionData.AddRange(_defaultManureCompositionProvider.ManureCompositionData);
+            farm.DefaultsCompositionOfBeddingMaterials.AddRange(_defaultBeddingMaterialCompositionProvider.Data);
 
             return farm;
         }

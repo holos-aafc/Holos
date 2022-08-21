@@ -8,7 +8,7 @@ namespace H.Core.Providers.Animals
         {
             if (animalType.IsChickenType())
             {
-                if (animalType == AnimalType.ChickenHens)
+                if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
                 {
                     return 0.025;
                 }

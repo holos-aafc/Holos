@@ -20,7 +20,7 @@ namespace H.Core.Providers.Feed
     {
         #region Fields
 
-        private DefaultCrudeProteinInFeedForSwineProvider_Table_38 _swineCrudeProteinProvider;
+        private Table_42_Crude_Protein_Content_Swine_Feed_Provider _swineCrudeProteinProvider;
         private readonly IFeedIngredientProvider _feedIngredientProvider;
 
         #endregion
@@ -30,7 +30,7 @@ namespace H.Core.Providers.Feed
         public DietProvider()
         {
             _feedIngredientProvider = new FeedIngredientProvider();
-            _swineCrudeProteinProvider = new DefaultCrudeProteinInFeedForSwineProvider_Table_38();
+            _swineCrudeProteinProvider = new Table_42_Crude_Protein_Content_Swine_Feed_Provider();
         }
 
         #endregion
@@ -165,7 +165,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.SoybeanMealExpellers), 5),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 87.6,
+                MethaneConversionFactor = 0.07,
             });
 
             diets.Add(new Diet()
@@ -182,7 +183,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CanolaMealMechExtracted), 8),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 63,
+                MethaneConversionFactor = 0.063,
             });
 
             return diets;
@@ -210,7 +212,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenMealDried), 8),                   
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 52.4,
+                MethaneConversionFactor = 0.063,
             });
 
             diets.Add(new Diet()
@@ -227,7 +230,8 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.SoybeanMealExpellers), 5),
                 },
 
-                MethaneConversionFactor = 0.065,
+                Forage = 90.2,
+                MethaneConversionFactor = 0.070,
             });
 
             return diets;
@@ -257,6 +261,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenFeedDried), 3),
                 },
 
+                Forage = 77.8,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -279,6 +284,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.MolassesSugarCane), 1),
                 },
 
+                Forage = 60.5,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -299,6 +305,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(dairyIngredients.Single(x => x.IngredientType == IngredientType.CornYellowGlutenFeedDried), 11),
                 },
 
+                Forage = 59.1,
                 MethaneConversionFactor = 0.056,
             });
 
@@ -392,7 +399,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 90),
                 },
 
-                MethaneConversionFactor = 0.04,
+                MethaneConversionFactor = 0.035,
             });
 
             diets.Add(new Diet
@@ -424,8 +431,19 @@ namespace H.Core.Providers.Feed
             return diets;
         }
 
+        /// <summary>
+        /// Implements: Table 23. Examples of NEmf content of typical diets fed to cattle for estimation of dry matter intake (IPCC, 2019, Table 10.8a).
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<Diet> CreateBeefCowDiets()
         {
+            /*
+             * Footnote 1: The low, moderate and high quality forage diets are equivalent to the low, medium and high energy/protein diets, respectively, for beef cows in Table 21.
+               
+               Footnote 2: If the model user wants to formulate their own diet, the feed energy content {NEmf (MJkg-1 DM)] 
+               can be calculated from the default feed tables built into Holos. The values are included in the default 
+               table as NEma and NEga (Mcal kg-1); therefore, NEmf can be calculated as: NEmf (MJ kg-1 DM)=[NEma+NEga]*4.184 (conversion factor for Mcal to MJ).
+             */
             var beefIngredients = _feedIngredientProvider.GetBeefFeedIngredients().ToList();
 
             var diets = new List<Diet>();
@@ -478,7 +496,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.070,
                 DietaryNetEnergyConcentration = 6,
             });
 
@@ -505,7 +523,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.070,
                 DietaryNetEnergyConcentration = 7.0,
             });
 
@@ -565,7 +583,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.07,
             });
 
             diets.Add(new Diet
@@ -591,7 +609,7 @@ namespace H.Core.Providers.Feed
                     _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
                 },
 
-                MethaneConversionFactor = 0.065,
+                MethaneConversionFactor = 0.07,
             });
 
             return diets;

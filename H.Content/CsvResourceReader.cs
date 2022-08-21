@@ -101,63 +101,67 @@ namespace H.Content
                     return SplitFileIntoLinesUsingRegex(Resource.dairy_feed_composition);
 
                 case CsvResourceNames.CoefficientsForAboveGroundBiomassEstimationForShelterbeltTreeSpecies:
-                    return SplitFileIntoLines(Resource.Table_5);
+                    return SplitFileIntoLines(Resource.Table_14_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees);
 
                 case CsvResourceNames.FertilizerApplicationRates:
-                    return SplitFileIntoLines(Resource.Table_6);
+                    return SplitFileIntoLines(Resource.FertilizerApplicationRates);
 
                 case CsvResourceNames.CropFactors:
-                    return SplitFileIntoLines(Resource.Table_7);
+                    return SplitFileIntoLines(Resource.CropFactors);
+                    
+                case CsvResourceNames.SoilN2OEmissionFactorsInfluencedByTillPractice:
+                    return SplitFileIntoLines(Resource.Table_15_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice);
 
-                case CsvResourceNames.TillageRatioFactosForDirectSoilNitrousOxideEmissions:
-                    return SplitFileIntoLines(Resource.Table_8);
-
-                case CsvResourceNames.TextureRatioFactorsForDirectSoilNitrousOxideEmissions:
-                    return SplitFileIntoLines(Resource.Table_9);
+                case CsvResourceNames.SoilN2OEmissionFactorsInfluencedBySoilTexture:
+                    return SplitFileIntoLines(Resource.Table_15_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture);
 
                 case CsvResourceNames.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops:
-                    return SplitFileIntoLines(Resource.Table_10);
+                    return SplitFileIntoLines(Resource.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops);
 
                 case CsvResourceNames.LumCMaxAndKValuesForTillagePracticeChange:
-                    return SplitFileIntoLines(Resource.Table_1);
+                    return SplitFileIntoLines(Resource.Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change);
 
                 case CsvResourceNames.LumCMaxAndKValuesForFallowPracticeChange:
-                    return SplitFileIntoLines(Resource.Table_2);
+                    return SplitFileIntoLines(Resource.Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change);
 
                 case CsvResourceNames.LumCMaxAndKValuesForPerennialCroppingChange:
-                    return SplitFileIntoLines(Resource.Table_3);
-                case CsvResourceNames.SoilCarbonEmissions:
-                    return SplitFileIntoLines(Resource.Table_7_8_9);
+                    return SplitFileIntoLines(Resource.Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change);
 
+                case CsvResourceNames.SoilCarbonEmissions:
+                    return SplitFileIntoLines(Resource.SoilCarbonEmissions);
+
+                // Provider does not exist
                 case CsvResourceNames.ActivityCoefficientsForDairyBeefSheep:
-                    return SplitFileIntoLines(Resource.Table_11_16_26);
+                    return SplitFileIntoLines(Resource.Table_20_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients);
 
                 case CsvResourceNames.DietCoefficientsForDairyBeefSheep:
-                    return SplitFileIntoLines(Resource.Table_12_17_30);
+                    return SplitFileIntoLines(Resource.Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep);
 
                 case CsvResourceNames.AdditiveReductionFactorsForAllCattle:
-                    return SplitFileIntoLines(Resource.Table_13_18);
+                    return SplitFileIntoLines(Resource.Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle);
 
+                // Provider not being used. Duplicate
                 case CsvResourceNames.MethaneConversionFactorsAndNitrogenOxideEmissionsForBeefDairySwine:
-                    return SplitFileIntoLines(Resource.Table_14_19_23);
+                    return SplitFileIntoLines(Resource.MCFAndNitrogenOxideEmissionsForBeefDairySwine);
 
                 case CsvResourceNames.SwineVolatileExcretion:
-                    return SplitFileIntoLines(Resource.Table_20);
-
+                    return SplitFileIntoLines(Resource.SwineVolatileExcretion_34);
+                
+                // Provider not being used. Duplicate
                 case CsvResourceNames.SwineVolatileAndSoilNitrogenExcretionAdjustmentFactors:
-                    return SplitFileIntoLines(Resource.Table_21);
+                    return SplitFileIntoLines(Resource.Table_35_VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group);
 
                 case CsvResourceNames.FeedIntakeAndCrudeProteinForSwine:
-                    return SplitFileIntoLines(Resource.Table_22_24);
+                    return SplitFileIntoLines(Resource.Table_36_Daily_Feed_Intake_For_Swine_Groups);
 
                 case CsvResourceNames.SheepCoefficients:
-                    return SplitFileIntoLines(Resource.Table_30);
+                    return SplitFileIntoLines(Resource.Table_25_Livestock_Coefficients_For_Sheep);
 
                 case CsvResourceNames.ShelterbeltCarbonAccumulationCoefficients:
-                    return SplitFileIntoLines(Resource.Table_33);
+                    return SplitFileIntoLines(Resource.ShelterbeltCarbonAccumulationCoefficients);
 
                 case CsvResourceNames.EnergyRequirementsForCrops:
-                    return SplitFileIntoLines(Resource.Table_38);
+                    return SplitFileIntoLines(Resource.EnergyRequirementsForCrops);
 
                 case CsvResourceNames.ShelterbeltAllometricTable:
                     return SplitFileIntoLines(Resource.shelterbelt_allometric_table);
@@ -202,7 +206,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.ft_AB);
 
                 case CsvResourceNames.ResidueDataFile:
-                    return SplitFileIntoLines(Resource.residue_table);
+                    return SplitFileIntoLines(Resource.Table_10_A_B_Relative_Biomass_Information);
 
                 case CsvResourceNames.EcodistrictToEcozoneMapping:
                     return SplitFileIntoLines(Resource.ecodistrict_to_ecozone_mapping);
@@ -235,10 +239,10 @@ namespace H.Content
                     return SplitFileIntoLinesUsingRegex(Resource.Swine_Feed_Ingredient_List);
 
                 case CsvResourceNames.IrrigationByMonth:
-                    return SplitFileIntoLines(Resource.IrrigationByMonth);
+                    return SplitFileIntoLines(Resource.Table_7_Percentage_Total_Annual_Irrigation_Water_Applied);
 
                 case CsvResourceNames.GrowingDegreeCoefficients:
-                    return SplitFileIntoLines(Resource.GrowingDegreeCoefficients);
+                    return SplitFileIntoLines(Resource.Table_1_Growing_Degree_Crop_Coefficients);
 
                 case CsvResourceNames.CondensedLethbridgeSOCData:
                     return SplitFileIntoLines(Resource.Condensed_LethbridgeSOCData_AllRotations);
@@ -262,43 +266,43 @@ namespace H.Content
                     return SplitFileIntoLinesUsingRegex(Resource.crop_economics);
 
                 case CsvResourceNames.FertilizerBlends:
-                    return SplitFileIntoLinesUsingRegex(Resource.fertilizer_blends);
+                    return SplitFileIntoLinesUsingRegex(Resource.Table_51_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends);
 
                 case CsvResourceNames.SmallAreaYields:
                     return SplitFileIntoLines(Resource.small_area_yields);
 
                 case CsvResourceNames.ElectricityConversionValues:
-                    return SplitFileIntoLines(Resource.electricity_conversion_values);
+                    return SplitFileIntoLines(Resource.Table_52_Electricity_Conversion_Values_By_Province);
 
                 case CsvResourceNames.FuelEnergyEstimates:
-                    return SplitFileIntoLines(Resource.fuel_energy_requirement_estimates);
+                    return SplitFileIntoLines(Resource.Table_53_Fuel_Energy_Requirement_Estimates_By_Region);
 
                 case CsvResourceNames.HerbicideEnergyEstimates:
-                    return SplitFileIntoLines(Resource.herbicide_energy_requirement_estimates);
+                    return SplitFileIntoLines(Resource.Table_54_Herbicide_Energy_Requirement_Estimates_By_Region);
 
                 case CsvResourceNames.GlobalRadiativeForcing:
-                    return SplitFileIntoLines(Resource.global_radiative_forcing);
+                    return SplitFileIntoLines(Resource.Table_66_Global_Radiative_Forcing);
 
                 case CsvResourceNames.GlobalWarmingPotential:
-                    return SplitFileIntoLines(Resource.global_warming_potential_of_emissions);
+                    return SplitFileIntoLines(Resource.Table_65_Global_Warming_Potential_Of_Emissions);
 
                 case CsvResourceNames.CalibratedModelParameters:
-                    return SplitFileIntoLines(Resource.globally_calibrated_model_parameters);
+                    return SplitFileIntoLines(Resource.Table_11_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes);
 
                 case CsvResourceNames.NitrogenLinginContentsInSteadyStateMethods:
-                    return SplitFileIntoLines(Resource.nitrogen_lingin_contents_steadystate_methods);
+                    return SplitFileIntoLines(Resource.Table_12_Default_Values_For_Nitrogen_Lignin_In_Crops);
 
                 case CsvResourceNames.SilageYields:
                     return SplitFileIntoLines(Resource.silage_yields);
 
                 case CsvResourceNames.ParametersBiogasMethaneProduction:
-                    return SplitFileIntoLines(Resource.parameters_biogas_methane_production);
+                    return SplitFileIntoLines(Resource.Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System);
 
                 case CsvResourceNames.EmissionFactorsForDigestateStorage:
                     return SplitFileIntoLines(Resource.emission_factor_digestate_storage);
 
                 case CsvResourceNames.AverageMilkProductionDairyCows:
-                    return SplitFileIntoLines(Resource.average_milk_production_dairy_cows);
+                    return SplitFileIntoLines(Resource.Table_24_Average_Milk_Production_For_Dairy_Cows_By_Province);
 
                 case CsvResourceNames.CaraganaCarbonDataFuture:
                     return SplitFileIntoLines(Resource.CG__31_allclusters_future_DOM);
@@ -336,6 +340,23 @@ namespace H.Content
                 case CsvResourceNames.WhiteSpruceCarbonDataPast:
                     return SplitFileIntoLines(Resource.WS_31_allclusters_past_CBM);
 
+                case CsvResourceNames.SteadyStateMethodDefaultNValues:
+                    return SplitFileIntoLines(Resource.Table_13_Default_Values_For_Steady_State_Method);
+
+                case CsvResourceNames.BeefCattleFedWinterFeedCost:
+                    return SplitFileIntoLines(Resource.Table_61_Beef_Cattle_Fed_Winter_Feed_Cost);
+
+                case CsvResourceNames.BeefFeedCost:
+                    return SplitFileIntoLines(Resource.Table_62_Feed_Costs_For_Beef);
+
+                case CsvResourceNames.BeefCattlePastureSummerFeedCost:
+                    return SplitFileIntoLines(Resource.Table_63_Beef_Cattle_Pasture_Summer_Feed_Cost);
+
+                case CsvResourceNames.ManureTypesDefaultComposition:
+                    return SplitFileIntoLines(Resource.Table_9_Manure_Types_And_Default_Composition);
+
+                case CsvResourceNames.PoultryNExcretionParameterValues:
+                    return SplitFileIntoLines(Resource.Table_44_Poultry_N_Excretion_Rate_Parameter_Values);
                 default:
                     return null;
             }

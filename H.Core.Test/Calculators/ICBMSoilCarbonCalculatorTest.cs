@@ -85,13 +85,16 @@ namespace H.Core.Test.Calculators
 
             var cropViewItem = new CropViewItem()
             {
+                Year = DateTime.Now.Year,
                 ManureApplicationViewItems = new ObservableCollection<ManureApplicationViewItem>()
                 {
                     new ManureApplicationViewItem()
                     {
                         ManureStateType = ManureStateType.Composted,
                         ManureAnimalSourceType = ManureAnimalSourceTypes.BeefManure,
+                        ManureLocationSourceType = ManureLocationSourceType.Livestock,
                         AnimalType = AnimalType.Beef,
+                        DateOfApplication = DateTime.Now,
                         DefaultManureCompositionData = manureComposition,
                         AmountOfManureAppliedPerHectare = 100,
                     }
@@ -130,16 +133,6 @@ namespace H.Core.Test.Calculators
                 carbonConcentration: carbonConcentration);
 
             Assert.AreEqual(158.47, result, 2);
-        }
-
-        /// <summary>
-        /// Equation 2.2.2-26
-        /// </summary>
-        [TestMethod]
-        public void CalculateAmountOfCarbonAppliedFromManure()
-        {
-            var result = _sut.CalculateAmountOfCarbonAppliedFromManure(0.12312, 0.3453453);
-            Assert.AreEqual(0.042518913336, result);
         }
 
         /// <summary>

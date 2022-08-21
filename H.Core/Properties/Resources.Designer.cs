@@ -907,6 +907,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to $ day^-1 animal^-1.
+        /// </summary>
+        public static string DollarsPerDayPerAnimal {
+            get {
+                return ResourceManager.GetString("DollarsPerDayPerAnimal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to $ ha^-1.
         /// </summary>
         public static string DollarsPerHectare {
@@ -921,6 +930,33 @@ namespace H.Core.Properties {
         public static string DollarsPerKilogram {
             get {
                 return ResourceManager.GetString("DollarsPerKilogram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $ lb^-1.
+        /// </summary>
+        public static string DollarsPerPound {
+            get {
+                return ResourceManager.GetString("DollarsPerPound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $ ton^-1.
+        /// </summary>
+        public static string DollarsPerTon {
+            get {
+                return ResourceManager.GetString("DollarsPerTon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $ tonne^-1.
+        /// </summary>
+        public static string DollarsPerTonne {
+            get {
+                return ResourceManager.GetString("DollarsPerTonne", resourceCulture);
             }
         }
         
@@ -1785,6 +1821,15 @@ namespace H.Core.Properties {
         public static string EnumContinuousAndMobGrazing {
             get {
                 return ResourceManager.GetString("EnumContinuousAndMobGrazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controlled release.
+        /// </summary>
+        public static string EnumControlledRelease {
+            get {
+                return ResourceManager.GetString("EnumControlledRelease", resourceCulture);
             }
         }
         
@@ -3229,6 +3274,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string EnumLayers {
+            get {
+                return ResourceManager.GetString("EnumLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poultry layers (dry manure).
         /// </summary>
         public static string EnumLayersDryPoultry {
@@ -3715,6 +3769,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nitrification and Urease inhibitor.
+        /// </summary>
+        public static string EnumNitrificationAndUreaseInhibitor {
+            get {
+                return ResourceManager.GetString("EnumNitrificationAndUreaseInhibitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nitrification inhibitor.
+        /// </summary>
+        public static string EnumNitrificationInhibitor {
+            get {
+                return ResourceManager.GetString("EnumNitrificationInhibitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string EnumNo {
@@ -3729,6 +3801,15 @@ namespace H.Core.Properties {
         public static string EnumNone {
             get {
                 return ResourceManager.GetString("EnumNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CH4 (non-fossil).
+        /// </summary>
+        public static string EnumNonFossilCH4 {
+            get {
+                return ResourceManager.GetString("EnumNonFossilCH4", resourceCulture);
             }
         }
         
@@ -5245,6 +5326,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Urease inhibitor.
+        /// </summary>
+        public static string EnumUreaseInhibitor {
+            get {
+                return ResourceManager.GetString("EnumUreaseInhibitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User defined.
         /// </summary>
         public static string EnumUserDefined {
@@ -5830,6 +5920,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fraction.
+        /// </summary>
+        public static string FractionString {
+            get {
+                return ResourceManager.GetString("FractionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Français.
         /// </summary>
         public static string French {
@@ -6303,6 +6402,15 @@ namespace H.Core.Properties {
         public static string Hectares {
             get {
                 return ResourceManager.GetString("Hectares", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hemp.
+        /// </summary>
+        public static string Hemp {
+            get {
+                return ResourceManager.GetString("Hemp", resourceCulture);
             }
         }
         
@@ -7023,6 +7131,15 @@ namespace H.Core.Properties {
         public static string KilogramsNPer1000Litres {
             get {
                 return ResourceManager.GetString("KilogramsNPer1000Litres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kg N (kg N)^-1.
+        /// </summary>
+        public static string KilogramsNPerKilogramNitrogenString {
+            get {
+                return ResourceManager.GetString("KilogramsNPerKilogramNitrogenString", resourceCulture);
             }
         }
         
@@ -9160,6 +9277,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leaching fraction.
+        /// </summary>
+        public static string LabelLeachingFraction {
+            get {
+                return ResourceManager.GetString("LabelLeachingFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legume forage based diet.
         /// </summary>
         public static string LabelLegumeForageBasedDiet {
@@ -9255,6 +9381,24 @@ namespace H.Core.Properties {
         public static string LabelManganese {
             get {
                 return ResourceManager.GetString("LabelManganese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure Carbon Input (i_m).
+        /// </summary>
+        public static string LabelManureCarbonInput {
+            get {
+                return ResourceManager.GetString("LabelManureCarbonInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure not applied to field(s).
+        /// </summary>
+        public static string LabelManureNotAppliedToAnyField {
+            get {
+                return ResourceManager.GetString("LabelManureNotAppliedToAnyField", resourceCulture);
             }
         }
         
@@ -11887,6 +12031,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paper products.
+        /// </summary>
+        public static string PaperProducts {
+            get {
+                return ResourceManager.GetString("PaperProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parent material texture.
         /// </summary>
         public static string ParentMaterialTexture {
@@ -11914,6 +12067,33 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pasture grass, high quality.
+        /// </summary>
+        public static string PastureGrassHigh {
+            get {
+                return ResourceManager.GetString("PastureGrassHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pasture grass, low quality.
+        /// </summary>
+        public static string PastureGrassLow {
+            get {
+                return ResourceManager.GetString("PastureGrassLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pasture grass, medium quality.
+        /// </summary>
+        public static string PastureGrassMedium {
+            get {
+                return ResourceManager.GetString("PastureGrassMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pasture.
         /// </summary>
         public static string PastureHandlingSystemName {
@@ -11928,6 +12108,15 @@ namespace H.Core.Properties {
         public static string Peas {
             get {
                 return ResourceManager.GetString("Peas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peat.
+        /// </summary>
+        public static string Peat {
+            get {
+                return ResourceManager.GetString("Peat", resourceCulture);
             }
         }
         

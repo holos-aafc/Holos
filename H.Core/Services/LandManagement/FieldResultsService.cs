@@ -60,24 +60,24 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _harvestViewItemMapper;
         private readonly IMapper _hayImportViewItemMapper;
 
-        private readonly FertilizerBlendProvider _fertilizerBlendProvider = new FertilizerBlendProvider();
-        private readonly NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12 _slopeProviderTable = new NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12();
-        private readonly LumCMaxAndkValueForPerennialsAndGrasslandProvider_Table_3 _lumCMaxAndkValueForPerennialsAndGrasslandProviderTable3 = new LumCMaxAndkValueForPerennialsAndGrasslandProvider_Table_3();
-        private readonly LumCMaxAndKValuesForTillagePracticeChangeProvider_Table_1 _lumCMaxAndKValuesForTillagePracticeChangeProviderTable1 = new LumCMaxAndKValuesForTillagePracticeChangeProvider_Table_1();
-        private readonly LumCMaxAndKValuesForFallowPracticeChangeProvider_Table_2 _lumCMaxAndKValuesForFallowPracticeChangeProviderTable2 = new LumCMaxAndKValuesForFallowPracticeChangeProvider_Table_2();
-        private readonly SoilNitrousOxideEmissionFactorProvider_Table_15 _soilNitrousOxideEmissionFactorProvider = new SoilNitrousOxideEmissionFactorProvider_Table_15();
-        private readonly DefaultManureCompositionProvider_Table_9 _defaultManureCompositionProvider = new DefaultManureCompositionProvider_Table_9();
+        private readonly Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider();
+        private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
+        private readonly Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider();
+        private readonly Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider();
+        private readonly Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider();
+        private readonly Table_15_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_15_16_Soil_N2O_Emission_Factors_Provider();
+        private readonly Table_9_ManureTypes_Default_Composition_Provider _defaultManureCompositionProvider = new Table_9_ManureTypes_Default_Composition_Provider();
         private readonly CanadianAgriculturalRegionIdToSlcIdProvider _canadianAgriculturalRegionIdToSlcIdProvider = new CanadianAgriculturalRegionIdToSlcIdProvider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
-        private readonly EnergyRequirementsForCropsProvider_Table_38 _energyRequirementsForCropsProviderTable38 = new EnergyRequirementsForCropsProvider_Table_38();
-        private readonly FuelEnergyEstimatesProvider _fuelEnergyEstimatesProvider = new FuelEnergyEstimatesProvider();
-        private readonly HerbicideEnergyEstimatesProvider _herbicideEnergyEstimatesProvider = new HerbicideEnergyEstimatesProvider();
-        private readonly DefaultAmmoniaEmissionProvider_Table_39 _defaultAmmoniaEmissionFactorProvider = new DefaultAmmoniaEmissionProvider_Table_39();
+        private readonly Duplicate_EnergyRequirementsForCropsProvider _duplicateEnergyRequirementsForCropsProviderTable38 = new Duplicate_EnergyRequirementsForCropsProvider();
+        private readonly Table_53_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_53_Fuel_Energy_Estimates_Provider();
+        private readonly Table_54_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider = new Table_54_Herbicide_Energy_Estimates_Provider();
+        private readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly NitogenFixationProvider _nitrogenFixationProvider = new NitogenFixationProvider();
-        private readonly ForageUtilizationRateProvider_Table_67 _forageUtilizationRateProvider = new ForageUtilizationRateProvider_Table_67();
+        private readonly Table_67_Conversion_Factors_Atomic_To_Molecular_Weight_Provider _conversionFactorsAtomicToMolecularWeightProvider = new Table_67_Conversion_Factors_Atomic_To_Molecular_Weight_Provider();
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
-        private readonly ResidueDataProvider _residueDataProvider = new ResidueDataProvider();
+        private readonly Table_10_Relative_Biomass_Provider _relativeBiomassProvider = new Table_10_Relative_Biomass_Provider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();
 
         private readonly Dictionary<FieldSystemComponent, FieldComponentEmissionResults> _fieldComponentEmissionResultsCache = new Dictionary<FieldSystemComponent, FieldComponentEmissionResults>();
@@ -340,17 +340,17 @@ namespace H.Core.Services.LandManagement
             return Math.Round(result, DefaultNumberOfDecimalPlaces);
         }
 
-        public ResidueData GetResidueData(CropViewItem cropViewItem, Farm farm)
+        public Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm)
         {
             var province = farm.DefaultSoilData.Province;
             var geographicData = farm.GeographicData;
             var soilData = geographicData.DefaultSoilData;
             if (soilData == null)
             {
-                return new ResidueData();
+                return new Table_10_Relative_Biomass_Data();
             }
 
-            var residueData = _residueDataProvider.GetResidueData(
+            var residueData = _relativeBiomassProvider.GetResidueData(
                 irrigationType: cropViewItem.IrrigationType,
                 irrigationAmount: cropViewItem.AmountOfIrrigation,
                 cropType: cropViewItem.CropType,

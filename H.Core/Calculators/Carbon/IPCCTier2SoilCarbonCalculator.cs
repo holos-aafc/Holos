@@ -17,8 +17,8 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        private readonly NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12 _slopeProvider = new NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12();
-        private readonly GloballyCalibratedModelParametersProvider _globallyCalibratedModelParametersProvider = new GloballyCalibratedModelParametersProvider();        
+        private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
+        private readonly Table_11_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider = new Table_11_Globally_Calibrated_Model_Parameters_Provider();        
 
         #endregion
 
@@ -137,13 +137,8 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = totalBelowGroundCarbonInputsForField / viewItem.Area;
 
-            // TODO: get all manure applications and calculate manure inputs
-
             // Equation 2.2.3-5
-            viewItem.TotalCarbonInputs = this.CalculateTotalCarbonInputs(
-                aboveGroundCarbonInputs: viewItem.AboveGroundCarbonInput,
-                belowGroundCarbonInputs: viewItem.BelowGroundCarbonInput,
-                manureInputs: 0);            
+            viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare;  
         }
 
         /// <summary>
@@ -476,23 +471,6 @@ namespace H.Core.Calculators.Carbon
             double fractionRenewed)
         {
             return aboveGroundResideDryMatterForCrop * shootToRootRatio * area * fractionRenewed;
-        }
-
-        /// <summary>
-        /// Equation 2.2.3-5 (modified)
-        /// </summary>
-        /// <param name="aboveGroundCarbonInputs">Annual total amount of above-ground carbon inputs (kg C year^-1)</param>
-        /// <param name="belowGroundCarbonInputs">Annual total amount of below-ground carbon inputs (kg C year^-1)</param>
-        /// <param name="manureInputs">Annual amount of manure carbon applied to crop (kg C year^-1)</param>
-        /// <returns>Total carbon inputs (kg C ha^-1)</returns>
-        public double CalculateTotalCarbonInputs(
-            double aboveGroundCarbonInputs,
-            double belowGroundCarbonInputs,
-            double manureInputs)
-        {
-            var result = aboveGroundCarbonInputs + belowGroundCarbonInputs + (manureInputs / 1000);
-
-            return result;
         }
 
         /// <summary>

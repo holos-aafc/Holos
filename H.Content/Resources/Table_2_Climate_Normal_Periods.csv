@@ -1,0 +1,21 @@
+﻿Time frame simulated,Climate normals (period),
+,Startyear,Endyear
+1980 – 1990,1981,2000
+1990 – 2000,1981,2010
+2000 – current  ,1990,2020
+Projection period,User can use or iterate the 1990 – 2020 normals,
+,,
+Climate normals (months),Julian day range,
+,Startmonth,Endmonth
+January,1,31
+February,32,59
+March,60,90
+April,91,120
+May,121,151
+June,152,181
+July,182,212
+August,213,243
+September,244,273
+October,274,304
+November,305,334
+December,335,365

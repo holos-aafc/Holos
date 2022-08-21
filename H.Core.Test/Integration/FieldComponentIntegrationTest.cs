@@ -70,7 +70,7 @@ namespace H.Core.Test.Integration
             // Now can set or read various soil details for this location by reading the DefaultSoilData property. For example we can get or set the soil Ph
             var soilPh = farm.GeographicData.DefaultSoilData.SoilPh;
 
-            // We will now get climate data from the NASA API. Note that if the latitude and longitude are know, we can get precise climate data for our location. If precise location
+            // We will now get climate data from the NASA API. Note that if the latitude and longitude are known, we can get precise climate data for our location. If precise location
             // is not know, we call use slightly less accurate 30 year climate normals.
 
             farm.ClimateData = _climateProvider.Get(49.699498, -112.775813, TimeFrame.NineteenNinetyToTwoThousand); // Lethbridge research station coordinates

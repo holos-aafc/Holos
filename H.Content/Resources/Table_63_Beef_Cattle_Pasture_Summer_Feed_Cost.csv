@@ -1,0 +1,10 @@
+﻿Type of Cattle,Diet,Pasture type,Variable cost - feed ($ / day / animal),Variable cost - other  ($ / day / animal),Fixed costs  ($ / day / animal),Labour costs  ($ / day / animal)
+Cow-calf,High energy/protein ,Pasture Grass/High quality,1.09,0.92,0.24,0.44
+Cow-calf,Medium energy/protein ,Pasture Grass/Medium quality ,0.92,0.92,0.24,0.44
+Cow-calf,Low energy/protein,Pasture Grass/Low quality,0.76,0.92,0.24,0.44
+Stockers,High energy/protein ,Pasture Grass/High quality,0.9,8.31,0.08,0.02
+Stockers,Medium energy/protein ,Pasture Grass/Medium quality ,0.82,8.31,0.08,0.02
+Stockers,Low energy/protein,Pasture Grass/Low quality,0.71,8.31,0.08,0.02
+Bull ,High energy/protein ,Pasture Grass/High quality,1.42,1.19,0.31,0.57
+Bull ,Medium energy/protein ,Pasture Grass/Medium quality ,1.2,1.19,0.31,0.57
+Bull ,Low energy/protein,Pasture Grass/Low quality,0.99,1.19,0.31,0.57

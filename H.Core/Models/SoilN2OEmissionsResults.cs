@@ -30,6 +30,8 @@ namespace H.Core.Models
             }
         }
 
+        public double FieldSpecificDirectEmissionsFromManureApplication { get; set; }
+
         /// <summary>
         /// A ratio
         /// NFertilizer from v.3 (kg N2O-N kg^-1 N)

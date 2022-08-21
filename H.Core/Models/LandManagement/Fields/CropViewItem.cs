@@ -1,11 +1,14 @@
 ﻿#region Imports
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Documents;
+using System.Windows.Media.Animation;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Economics;
@@ -197,8 +200,6 @@ namespace H.Core.Models.LandManagement.Fields
             get => _cropEconomicDataApplied;
             set => SetProperty(ref _cropEconomicDataApplied, value);
         }
-
-
 
         /// <summary>
         /// A collection of hay import events that occurs when animals grazing on pasture need additional forage for consumption.
@@ -900,14 +901,14 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Total carbon inputs
         /// 
-        /// (kg ha^-1)
+        /// (kg C ha^-1)
         /// </summary>
         public double TotalCarbonInputs { get; set; }
 
         /// <summary>
         /// C_ag 
         /// 
-        /// (kg ha^-1)
+        /// (kg C ha^-1)
         /// </summary>
         public double AboveGroundCarbonInput
         {
@@ -918,7 +919,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// C_bg 
         /// 
-        /// (kg ha^-1)
+        /// (kg C ha^-1)
         /// </summary>
         public double BelowGroundCarbonInput
         {
@@ -965,12 +966,24 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// kg ha^-1
+        /// (kg C year^-1)
+        ///
+        /// Total manure C for entire year and for entire field
         /// </summary>
         public double ManureCarbonInput
         {
             get { return _manureCarbonInput; }
             set { SetProperty(ref _manureCarbonInput, value); }
+        }
+
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total manure C from all manure applications
+        /// </summary>
+        public double ManureCarbonInputsPerHectare
+        {
+            get { return this.GetTotalCarbonFromAppliedManure() / this.Area; }
         }
 
         public double TillageFactor
@@ -1144,6 +1157,86 @@ namespace H.Core.Models.LandManagement.Fields
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double GetTotalManureNitrogenAppliedFromLivestockInYear()
+        {
+            var totalNitrogen = 0d;
+
+            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year &&
+                         manureViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock))
+            {
+                totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
+            }
+
+            return totalNitrogen;
+        }
+
+        /// <summary>
+        /// Get all manure applications made on all fields on this date using the specified type of manure
+        /// </summary>
+        public IEnumerable<ManureApplicationViewItem> GetManureApplicationsFromLivestock(AnimalType animalType, DateTime dateOfManureApplication)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var manureApplicationViewItem in this.ManureApplicationViewItems)
+            {
+                if (manureApplicationViewItem.AnimalType == animalType &&
+                    manureApplicationViewItem.DateOfApplication.Equals(dateOfManureApplication) &&
+                    manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock)
+                {
+                    result.Add(manureApplicationViewItem);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// (kg C year^-1)
+        /// </summary>
+        public double GetTotalCarbonFromAppliedManure()
+        {
+            return this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock) + this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+        }
+
+        /// <summary>
+        /// (kg C year^-1)
+        /// </summary>
+        public double GetTotalCarbonFromAppliedManure(ManureLocationSourceType manureLocationSourceType)
+        {
+            var manureApplications = this.GetManureApplicationsInYear(manureLocationSourceType);
+            var result = this.CalculateTotalCarbonFromManureApplications(manureApplications);
+
+            return result;
+        }
+
+        public IEnumerable<ManureApplicationViewItem> GetManureApplicationsInYear(ManureLocationSourceType manureLocationSourceType)
+        {
+            return this.ManureApplicationViewItems.Where(manureApplicationViewItem => manureApplicationViewItem.ManureLocationSourceType == manureLocationSourceType && manureApplicationViewItem.DateOfApplication.Year == this.Year);
+        }
+
+        /// <summary>
+        /// (kg C year^-1)
+        /// </summary>
+        public double CalculateTotalCarbonFromManureApplications(IEnumerable<ManureApplicationViewItem> manureApplicationViewItems)
+        {
+            var result = 0d;
+
+            foreach (var manureApplication in manureApplicationViewItems)
+            {
+                // Value will be a percentage so divide to use fraction
+                var carbonFraction = manureApplication.DefaultManureCompositionData.CarbonFraction / 100;
+                var volumeOfManure = manureApplication.AmountOfManureAppliedPerHectare;
+                var area = this.Area;
+
+                result += carbonFraction * volumeOfManure * area;
+            }
+
+            return result;
         }
 
         #endregion
