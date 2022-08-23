@@ -203,7 +203,7 @@ namespace H.Core.Providers.Soil
                     return 0.90;
 
                 case SoilReductionFactors.UreaseInhibitor:
-                    return 0.14;
+                    return 1.14;
 
                 case SoilReductionFactors.NitrificationAndUreaseInhibitor:
                     return 0.94;
