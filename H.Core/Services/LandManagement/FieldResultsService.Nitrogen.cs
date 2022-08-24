@@ -70,8 +70,7 @@ namespace H.Core.Services.LandManagement
             {
                 var manureCompositionData = manureApplicationViewItem.DefaultManureCompositionData;
 
-                // Value will be a percentage, so we divide by 100.
-                var fractionOfNitrogen = manureCompositionData.NitrogenFraction / 100;
+                var fractionOfNitrogen = manureCompositionData.NitrogenContent;
 
                 var amountOfNitrogen = _icbmSoilCarbonCalculator.CalculateAmountOfNitrogenAppliedFromManure(
                     manureAmount: manureApplicationViewItem.AmountOfManureAppliedPerHectare,
@@ -480,14 +479,14 @@ namespace H.Core.Services.LandManagement
                 cropViewItem: viewItem);
 
             var syntheticNitrogenModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
             var organicNitrogenModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen,
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen,
                 cropViewItem: viewItem);
 
             var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
             // Equation 2.5.1-8
             var emissionFactorForSyntheticFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
@@ -713,7 +712,7 @@ namespace H.Core.Services.LandManagement
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
             var syntheticNitrogenEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -751,7 +750,7 @@ namespace H.Core.Services.LandManagement
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
             var ecodistrictMineralEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -781,7 +780,7 @@ namespace H.Core.Services.LandManagement
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_15_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
 
             var ecodistrictManureEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,

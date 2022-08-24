@@ -8161,6 +8161,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Carbon content of manure.
+        /// </summary>
+        public static string LabelCarbonContentOfManure {
+            get {
+                return ResourceManager.GetString("LabelCarbonContentOfManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Carbon input from extraroots (C_e).
         /// </summary>
         public static string LabelCarbonInputFromExtraroots {
@@ -9655,6 +9664,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nitrogen content of manure.
+        /// </summary>
+        public static string LabelNitrogenContentOfManure {
+            get {
+                return ResourceManager.GetString("LabelNitrogenContentOfManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nitrogen fertilizer type.
         /// </summary>
         public static string LabelNitrogenFertilizerType {
@@ -9813,6 +9831,15 @@ namespace H.Core.Properties {
         public static string LabelPhosphorus {
             get {
                 return ResourceManager.GetString("LabelPhosphorus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phosphorus content of manure.
+        /// </summary>
+        public static string LabelPhosphorusContentOfManure {
+            get {
+                return ResourceManager.GetString("LabelPhosphorusContentOfManure", resourceCulture);
             }
         }
         

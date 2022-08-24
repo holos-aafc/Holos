@@ -6,14 +6,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Soil
 {
     [TestClass]
-    public class Table_15_16_Soil_N2O_Emission_Factors_Provider_Test
+    public class Table_16_Soil_N2O_Emission_Factors_Provider_Test
     {
-        private Table_15_16_Soil_N2O_Emission_Factors_Provider _provider;
+        private Table_16_Soil_N2O_Emission_Factors_Provider _provider;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new Table_15_16_Soil_N2O_Emission_Factors_Provider();
+            _provider = new Table_16_Soil_N2O_Emission_Factors_Provider();
         }
 
         [TestMethod]

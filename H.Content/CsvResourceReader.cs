@@ -170,7 +170,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.shelterbelt_ecodistrict_lookup_table);
 
                 case CsvResourceNames.ShelterbeltHardinessZoneLookup:
-                    return SplitFileIntoLines(Resource.shelterbelt_hardinesszone_lookup);
+                    return SplitFileIntoLines(Resource.Table_15_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone);
 
                 case CsvResourceNames.SlcToHardinessZone:
                     return SplitFileIntoLines(Resource.slc_to_hardiness_zone);

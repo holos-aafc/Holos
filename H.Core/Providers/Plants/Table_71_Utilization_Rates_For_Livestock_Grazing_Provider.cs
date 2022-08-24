@@ -15,7 +15,7 @@ namespace H.Core.Providers.Plants
     /// A revised utilization rate table for grazed systems, where the utilization rate depends on the type of grazed perennial
     /// forage (rather than the grazing regime or stocking density), and this in turn can be used to back-calculate aboveground pasture biomass.
     /// </summary>
-    public class Table_67_Conversion_Factors_Atomic_To_Molecular_Weight_Provider
+    public class Table_71_Utilization_Rates_For_Livestock_Grazing_Provider
     {
         public double GetUtilizationRate(CropType cropType)
         {

@@ -69,8 +69,7 @@ namespace H.Core.Services.Animals
              */
 
             // Equation 4.1.1-3
-            dailyEmissions.FecalCarbonExcretionRate =
-                base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
+            dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
                     manureExcretionRate: managementPeriod.ManureDetails.ManureExcretionRate,
                     carbonFractionOfManure: managementPeriod.ManureDetails.FractionOfCarbonInManure);
 
@@ -300,17 +299,24 @@ namespace H.Core.Services.Animals
                 volatilizationRate: dailyEmissions.ManureVolatilizationRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.5-1
+            // Equation 4.3.6-1
             dailyEmissions.ManureNitrogenLeachingRate = base.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                 emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial);
 
-            // Equation 4.3.5-2
+            // Equation 4.3.6-2
             dailyEmissions.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                 leachingNitrogenEmissionRate: dailyEmissions.ManureNitrogenLeachingRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.6-3
+            dailyEmissions.ManureNitrateLeachingEmission = base.CalculateNitrateLeaching(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
 
             // Equation 4.3.6-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -322,7 +328,7 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            // Equation 4.3.4-7
+            // Equation 4.3.5-7
             dailyEmissions.AdjustedAmmoniaFromHousing = this.CalculateAdjustedAmmoniaFromHousing(dailyEmissions, managementPeriod);
 
             // Equation 4.3.4-11
@@ -442,30 +448,6 @@ namespace H.Core.Services.Animals
             var ammoniaEmissionsFromLandAppliedManure = dailyEmissions.AmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
 
             return ammoniaEmissionsFromLandAppliedManure;
-        }
-
-        public double CalculateAdjustedAmmoniaFromStorage(GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
-        {
-            var a = base.CalculateVolatalizationFractionForStorage(
-                dailyAmmoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
-                amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
-
-            var b = base.CalculateAmmoniaVolatilizationFromStorage(
-                amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
-                amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                volatilizationFractionFromStorage: a,
-                emissionFactorForVolatilization: managementPeriod.ManureDetails.EmissionFactorVolatilization);
-
-            var c = base.CalculateAmmoniaStorageAdjustment(
-                ammoniaFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                ammoniaVolatilizedDuringStorage: b);
-
-
-            var d = base.CalculateAmmoniaEmissionsFromStorage(
-                ammoniaFromStorageAdjustment: c);
-
-            return d;
         }
 
         protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)

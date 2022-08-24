@@ -85,7 +85,7 @@ namespace H.Core.Services.LandManagement
                 viewItem.TillageType = TillageType.NoTill;
                 viewItem.PastTillageType = TillageType.NoTill;
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                viewItem.ForageUtilizationRate = _conversionFactorsAtomicToMolecularWeightProvider.GetUtilizationRate(viewItem.CropType);
+                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
             }
         }

@@ -628,9 +628,9 @@ namespace H.Core.Providers.Animals
                     AnimalType = animalType,
                     ManureStateType = manureStateType,
                     MoistureContent = moistureContent,
-                    NitrogenFraction = nfraction,
-                    CarbonFraction = cfraction,
-                    PhosphorusFraction = pfraction,
+                    NitrogenFraction = nfraction,   // Note this value is a percentage in the file
+                    CarbonFraction = cfraction,     // Note this value is a percentage in the file
+                    PhosphorusFraction = pfraction, // Note this value is a percentage in the file
                     CarbonToNitrogenRatio = cToNRatio,
                 });
             }

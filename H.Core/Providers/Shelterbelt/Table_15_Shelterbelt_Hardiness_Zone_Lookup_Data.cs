@@ -2,7 +2,7 @@
 
 namespace H.Core.Providers.Shelterbelt
 {
-    public class ShelterbeltHardinessZoneLookupData
+    public class Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data
     {
         public TreeSpecies TreeSpecies { get; set; }
         public HardinessZone HardinessZone { get; set; } = HardinessZone.NotAvailable;
