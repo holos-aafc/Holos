@@ -10,7 +10,7 @@ using H.Infrastructure;
 namespace H.Core.Providers.Plants
 {
     /// <summary>
-    /// Table 67
+    /// Table 71: Utilization rate lookup table for livestock grazing.
     /// 
     /// A revised utilization rate table for grazed systems, where the utilization rate depends on the type of grazed perennial
     /// forage (rather than the grazing regime or stocking density), and this in turn can be used to back-calculate aboveground pasture biomass.
