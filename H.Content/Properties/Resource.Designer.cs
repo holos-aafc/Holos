@@ -1422,62 +1422,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ProvinceID,EcodistrictTextureID,RFTexture
-        ///Alberta,Fine,1
-        ///Alberta,Medium,1
-        ///Alberta,Coarse,1
-        ///British Columbia,Fine,1
-        ///British Columbia,Medium,1
-        ///British Columbia,Coarse,1
-        ///Manitoba,Fine,1
-        ///Manitoba,Medium,1
-        ///Manitoba,Coarse,1
-        ///New Brunswick,Fine,1.2
-        ///New Brunswick,Medium,0.8
-        ///New Brunswick,Coarse,0.8
-        ///Newfoundland and Labrador,Fine,1.2
-        ///Newfoundland and Labrador,Medium,0.8
-        ///Newfoundland and Labrador,Coarse,0.8
-        ///Nova Scotia,Fine,1.2
-        ///Nova Scotia,Medium,0.8
-        ///Nova Scotia,Coarse,0.8
-        ///Ontario,Fine,1.2
-        ///Ontario [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_15_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture {
-            get {
-                return ResourceManager.GetString("Table_15_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ProvinceID,PresentTillage,RFTill
-        ///Alberta,No-till,0.8
-        ///Alberta,Reduced,0.8
-        ///Alberta,Intensive,1
-        ///British Columbia,No-till,1
-        ///British Columbia,Reduced,1
-        ///British Columbia,Intensive,1
-        ///Manitoba,No-till,0.8
-        ///Manitoba,Reduced,0.8
-        ///Manitoba,Intensive,1
-        ///New Brunswick,No-till,1.1
-        ///New Brunswick,Reduced,1.1
-        ///New Brunswick,Intensive,1
-        ///Newfoundland and Labrador,No-till,1.1
-        ///Newfoundland and Labrador,Reduced,1.1
-        ///Newfoundland and Labrador,Intensive,1
-        ///Nova Scotia,No-till,1.1
-        ///Nova Scotia,Reduced,1.1
-        ///Nova Scotia,Int [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_15_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice {
-            get {
-                return ResourceManager.GetString("Table_15_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Time frame simulated,Climate normals (period),
         ///,Startyear,Endyear
         ///1980 – 1990,1981,2000
@@ -1976,6 +1920,62 @@ namespace H.Content.Properties {
         public static string Table_9_Manure_Types_And_Default_Composition {
             get {
                 return ResourceManager.GetString("Table_9_Manure_Types_And_Default_Composition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ProvinceID,EcodistrictTextureID,RFTexture
+        ///Alberta,Fine,1
+        ///Alberta,Medium,1
+        ///Alberta,Coarse,1
+        ///British Columbia,Fine,1
+        ///British Columbia,Medium,1
+        ///British Columbia,Coarse,1
+        ///Manitoba,Fine,1
+        ///Manitoba,Medium,1
+        ///Manitoba,Coarse,1
+        ///New Brunswick,Fine,1.2
+        ///New Brunswick,Medium,0.8
+        ///New Brunswick,Coarse,0.8
+        ///Newfoundland and Labrador,Fine,1.2
+        ///Newfoundland and Labrador,Medium,0.8
+        ///Newfoundland and Labrador,Coarse,0.8
+        ///Nova Scotia,Fine,1.2
+        ///Nova Scotia,Medium,0.8
+        ///Nova Scotia,Coarse,0.8
+        ///Ontario,Fine,1.2
+        ///Ontario [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture {
+            get {
+                return ResourceManager.GetString("Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ProvinceID,PresentTillage,RFTill
+        ///Alberta,No-till,0.8
+        ///Alberta,Reduced,0.8
+        ///Alberta,Intensive,1
+        ///British Columbia,No-till,1
+        ///British Columbia,Reduced,1
+        ///British Columbia,Intensive,1
+        ///Manitoba,No-till,0.8
+        ///Manitoba,Reduced,0.8
+        ///Manitoba,Intensive,1
+        ///New Brunswick,No-till,1.1
+        ///New Brunswick,Reduced,1.1
+        ///New Brunswick,Intensive,1
+        ///Newfoundland and Labrador,No-till,1.1
+        ///Newfoundland and Labrador,Reduced,1.1
+        ///Newfoundland and Labrador,Intensive,1
+        ///Nova Scotia,No-till,1.1
+        ///Nova Scotia,Reduced,1.1
+        ///Nova Scotia,Int [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice {
+            get {
+                return ResourceManager.GetString("Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice", resourceCulture);
             }
         }
         
