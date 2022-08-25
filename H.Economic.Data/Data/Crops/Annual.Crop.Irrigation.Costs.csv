@@ -1,0 +1,101 @@
+Crop,Crop Type,Tillage,Fixed cost ($/Ha) ,Labour cost ($/Ha) , Variable cost ($/Ha) 
+Barley,Annual,Conventional,112,17,161
+Barley,Annual,Minimum,110,17,156
+Barley,Annual,Zero,97,12,141
+Barley,Annual,Irrigation,63,70,10
+Barley silage,Annual,Conventional,144,27,180
+Barley silage,Annual,Minimum,137,25,170
+Barley silage,Annual,Zero,135,22,166
+Barley silage,Annual,Irrigation,67,70,10
+Buckwheat,Annual,Conventional,112,17,162
+Buckwheat,Annual,Minimum,110,17,157
+Buckwheat,Annual,Zero,97,12,143
+Buckwheat,Annual,Irrigation,86,70,13
+Canary seed,Annual,Conventional,112,17,177
+Canary seed,Annual,Minimum,110,17,172
+Canary seed,Annual,Zero,97,12,157
+Canary seed,Annual,Irrigation,86,70,13
+Canola,Annual,Conventional,112,17,317
+Canola,Annual,Minimum,110,17,312
+Canola,Annual,Zero,97,12,297
+Canola,Annual,Irrigation,93,70,14
+Chickpea (Desi),Annual,Conventional,98,15,248
+Chickpea (Desi),Annual,Minimum,90,12,236
+Chickpea (Desi),Annual,Zero,88,12,236
+Chickpea (Desi),Annual,Irrigation,59,70,9
+"Coloured, white, faba",Annual,Conventional,102,15,377
+"Coloured, white, faba",Annual,Minimum,95,12,365
+"Coloured, white, faba",Annual,Zero,93,12,365
+"Coloured, white, faba",Annual,Irrigation,59,70,9
+Corn,Annual,Conventional,112,17,345
+Corn,Annual,Minimum,102,15,338
+Corn,Annual,Zero,95,12,323
+Corn,Annual,Irrigation,66,70,10
+Corn Silage,Annual,Conventional,216,42,419
+Corn Silage,Annual,Minimum,206,15,417
+Corn Silage,Annual,Zero,95,35,395
+Corn Silage,Annual,Irrigation,86,70,13
+Dry Peas,Annual,Conventional,102,15,214
+Dry Peas,Annual,Minimum,95,12,202
+Dry Peas,Annual,Zero,93,12,202
+Dry Peas,Annual,Irrigation,69,70,11
+Durum,Annual,Conventional,112,17,196
+Durum,Annual,Minimum,110,17,191
+Durum,Annual,Zero,97,12,176
+Durum,Annual,Irrigation,88,70,13
+Flaxseed,Annual,Conventional,112,17,169
+Flaxseed,Annual,Minimum,100,17,164
+Flaxseed,Annual,Zero,107,17,159
+Flaxseed,Annual,Irrigation,88,70,13
+Lentils,Annual,Conventional,102,15,227
+Lentils,Annual,Minimum,83,12,214
+Lentils,Annual,Zero,93,12,227
+Lentils,Annual,Irrigation,59,70,9
+Mixed  grains,Annual,Conventional,112,17,151
+Mixed  grains,Annual,Minimum,110,17,146
+Mixed  grains,Annual,Zero,97,12,131
+Mixed  grains,Annual,Irrigation,86,70,13
+Mustard Seed,Annual,Conventional,107,17,193
+Mustard Seed,Annual,Minimum,105,17,188
+Mustard Seed,Annual,Zero,93,12,173
+Mustard Seed,Annual,Irrigation,93,70,14
+Oats,Annual,Conventional,112,17,164
+Oats,Annual,Minimum,110,17,159
+Oats,Annual,Zero,97,12,144
+Oats,Annual,Irrigation,63,70,10
+Potatoes ,Annual,Conventional,498,109,1201
+Potatoes ,Annual,Minimum,453,96,1157
+Potatoes ,Annual,Zero,NA,NA,NA
+Potatoes ,Annual,Irrigation,110,70,17
+Rye,Annual,Conventional,112,17,166
+Rye,Annual,Minimum,110,17,161
+Rye,Annual,Zero,97,12,147
+Rye,Annual,Irrigation,63,70,10
+Safflower,Annual,Conventional,112,17,169
+Safflower,Annual,Minimum,110,17,164
+Safflower,Annual,Zero,107,17,159
+Safflower,Annual,Irrigation,66,70,10
+Soybeans,Annual,Conventional,112,17,391
+Soybeans,Annual,Minimum,105,15,383
+Soybeans,Annual,Zero,95,12,368
+Soybeans,Annual,Irrigation,59,70,9
+Spring Wheat,Annual,Conventional,112,17,165
+Spring Wheat,Annual,Minimum,110,17,161
+Spring Wheat,Annual,Zero,97,12,146
+Spring Wheat,Annual,Irrigation,86,70,13
+Sunflower Seed,Annual,Conventional,112,17,229
+Sunflower Seed,Annual,Minimum,110,17,224
+Sunflower Seed,Annual,Zero,107,17,219
+Sunflower Seed,Annual,Irrigation,104,70,16
+Triticale,Annual,Conventional,112,17,190
+Triticale,Annual,Minimum,110,17,185
+Triticale,Annual,Zero,97,12,171
+Triticale,Annual,Irrigation,63,70,10
+Winter Wheat,Annual,Conventional,112,17,184
+Winter Wheat,Annual,Minimum,110,17,179
+Winter Wheat,Annual,Zero,97,12,164
+Winter Wheat,Annual,Irrigation,67,70,10
+Fallow,Annual,Conventional,60,10,50
+Fallow,Annual,Minimum,55,17,46
+Fallow,Annual,Zero,43,2,28
+Fallow,Annual,Irrigation,0,0,0
