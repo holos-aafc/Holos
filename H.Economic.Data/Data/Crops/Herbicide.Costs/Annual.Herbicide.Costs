@@ -1,0 +1,76 @@
+Crop,Crop Type,Tillage ,Variable cost - herbicide ($ ha-1),Number of sprayer passes
+Barley,Annual,Conventional,23,1
+Barley,Annual,Minimum,47,2
+Barley,Annual,Zero,72,3
+Barley silage,Annual,Conventional,23,1
+Barley silage,Annual,Minimum,47,2
+Barley silage,Annual,Zero,72,3
+Buckwheat,Annual,Conventional,23,1
+Buckwheat,Annual,Minimum,47,2
+Buckwheat,Annual,Zero,72,3
+Canary seed,Annual,Conventional,23,1
+Canary seed,Annual,Minimum,47,2
+Canary seed,Annual,Zero,72,3
+Canola,Annual,Conventional,16,1
+Canola,Annual,Minimum,53,2
+Canola,Annual,Zero,70,3
+Chickpea (Desi),Annual,Conventional,57,2
+Chickpea (Desi),Annual,Minimum,102,2
+Chickpea (Desi),Annual,Zero,110,3
+"Coloured, white, faba",Annual,Conventional,57,2
+"Coloured, white, faba",Annual,Minimum,102,2
+"Coloured, white, faba",Annual,Zero,110,3
+Corn,Annual,Conventional,23,2
+Corn,Annual,Minimum,47,2
+Corn,Annual,Zero,72,3
+Corn Silage,Annual,Conventional,23,1
+Corn Silage,Annual,Minimum,47,2
+Corn Silage,Annual,Zero,72,3
+Dry Peas,Annual,Conventional,57,1
+Dry Peas,Annual,Minimum,102,2
+Dry Peas,Annual,Zero,110,3
+Durum,Annual,Conventional,23,1
+Durum,Annual,Minimum,47,1
+Durum,Annual,Zero,72,1
+Flaxseed,Annual,Conventional,57,1
+Flaxseed,Annual,Minimum,102,1
+Flaxseed,Annual,Zero,119,2
+Lentils,Annual,Conventional,42,2
+Lentils,Annual,Minimum,87,2
+Lentils,Annual,Zero,95,3
+Mixed  grains,Annual,Conventional,23,1
+Mixed  grains,Annual,Minimum,47,2
+Mixed  grains,Annual,Zero,72,3
+Mustard Seed,Annual,Conventional,57,1
+Mustard Seed,Annual,Minimum,119,2
+Mustard Seed,Annual,Zero,110,3
+Oats,Annual,Conventional,23,1
+Oats,Annual,Minimum,47,2
+Oats,Annual,Zero,72,3
+Potatoes ,Annual,Conventional,113,4
+Potatoes ,Annual,Minimum,174,5
+Potatoes ,Annual,Zero,Na,Na
+Rye,Annual,Conventional,23,1
+Rye,Annual,Minimum,47,2
+Rye,Annual,Zero,72,3
+Safflower,Annual,Conventional,56,1
+Safflower,Annual,Minimum,117,2
+Safflower,Annual,Zero,162,3
+Soybeans,Annual,Conventional,57,1
+Soybeans,Annual,Minimum,102,2
+Soybeans,Annual,Zero,110,2
+Spring Wheat,Annual,Conventional,23,1
+Spring Wheat,Annual,Minimum,47,2
+Spring Wheat,Annual,Zero,72,3
+Sunflower Seed,Annual,Conventional,56,1
+Sunflower Seed,Annual,Minimum,117,2
+Sunflower Seed,Annual,Zero,162,3
+Triticale,Annual,Conventional,23,1
+Triticale,Annual,Minimum,47,2
+Triticale,Annual,Zero,72,3
+Winter Wheat,Annual,Conventional,23,1
+Winter Wheat,Annual,Minimum,47,2
+Winter Wheat,Annual,Zero,72,3
+Fallow,Annual,Conventional,22,0
+Fallow,Annual,Minimum,30,2
+Fallow,Annual,Zero,42,5
