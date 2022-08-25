@@ -74,8 +74,8 @@ namespace H.Core.Services.LandManagement
 
             var soilData = farm.GeographicData.DefaultSoilData;
             var ecozone = _ecodistrictDefaultsProvider.GetEcozone(soilData.EcodistrictId);
-            var lumCMaxForTillage = _lumCMaxAndKValuesForTillagePracticeChangeProviderTable1.GetLumCMax(ecozone, soilData.SoilTexture, tillageChangeType);
-            var kValueForTillage = _lumCMaxAndKValuesForTillagePracticeChangeProviderTable1.GetKValue(ecozone, soilData.SoilTexture, tillageChangeType);
+            var lumCMaxForTillage = _lumCMaxKValuesTillagePracticeChangeProvider.GetLumCMax(ecozone, soilData.SoilTexture, tillageChangeType);
+            var kValueForTillage = _lumCMaxKValuesTillagePracticeChangeProvider.GetKValue(ecozone, soilData.SoilTexture, tillageChangeType);
             var carbonChangeRateForTillage = _soilEmissionsCalculator.CalculateCarbonChangeRate(lumCMaxForTillage, kValueForTillage, yearsSinceTillageChange);
             var carbonChangeForTillage = _soilEmissionsCalculator.CalculateCarbonChange(carbonChangeRateForTillage, viewItem.Area);
             var carbonDioxideFromTillage = _soilEmissionsCalculator.CalculateCarbonDioxideChange(carbonChangeForTillage);

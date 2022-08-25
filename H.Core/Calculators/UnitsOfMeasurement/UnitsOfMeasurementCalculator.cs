@@ -576,6 +576,12 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case MetricUnitsOfMeasurement.AmmoniaPerCubicMeterPerDay:
                     return value * CubicMetersToCubicYardsFactor;
 
+                case MetricUnitsOfMeasurement.DollarsPerTonne:
+                    return value * TonneToShortTonFactor;
+
+                case MetricUnitsOfMeasurement.DollarsPerKilogram:
+                    // returns DollarPerLB
+                    return value * KgToLbsFactor;
                 default:
                     //days, months, years, percentages, Co2Equivalents, perday unit
                     return value;
@@ -747,6 +753,14 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case ImperialUnitsOfMeasurement.AmmoniaPerCubicYardPerDay:
                     // Return AmmoniaPerCubicMeterPerDay
                     return value / CubicMetersToCubicYardsFactor;
+
+                case ImperialUnitsOfMeasurement.DollarsPerTon:
+                    // returns DollarsPerTonne
+                    return value / TonneToShortTonFactor;
+
+                case ImperialUnitsOfMeasurement.DollarsPerPound:
+                    // returns DollarPerKG
+                    return value / KgToLbsFactor;
 
                 default:
                     //days, months, years, percentages, Co2Equivalents, perday unit

@@ -31,5 +31,14 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("Sawdust", typeof(Resources))]
         Sawdust,
+
+        [LocalizedDescription("PaperProducts", typeof(Resources))]
+        PaperProducts,
+
+        [LocalizedDescription("Peat", typeof(Resources))]
+        Peat,
+
+        [LocalizedDescription("Hemp", typeof(Resources))]
+        Hemp,
     }
 }

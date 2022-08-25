@@ -71,8 +71,20 @@ namespace H.Core.Services.Animals
                 currentDate: dailyEmissions.DateTime);
 
             // Equation 3.1.2-2
+            var nemf = 0d;
+            if (managementPeriod.SelectedDiet.DietaryNetEnergyConcentration == 0)
+            {
+                // Default/system diets will have a predefined (lookup table) NEmf value
+                nemf = managementPeriod.SelectedDiet.CalculateNemf();
+            }
+            else
+            {
+                // Custom diets will not have a predefined value and must therefore be calculated
+                nemf = managementPeriod.SelectedDiet.DietaryNetEnergyConcentration;
+            }
+
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
-                dietaryNetEnergyConcentration: managementPeriod.SelectedDiet.DietaryNetEnergyConcentration,
+                dietaryNetEnergyConcentration: nemf,
                 weight: dailyEmissions.AnimalWeight);
 
             dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
@@ -244,57 +256,68 @@ namespace H.Core.Services.Animals
             // Equation 4.3.1-4
             dailyEmissions.TanExcretion = base.CalculateTANExcretion(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
-                numberOfCattle: managementPeriod.NumberOfAnimals);
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.3.1-5
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                fractionOfNitrogenExcretedInUrine: dailyEmissions.TanExcretionRate);
+                tanExcretionRate: dailyEmissions.TanExcretionRate);
 
             // Equation 4.3.1-6
             dailyEmissions.FecalNitrogenExcretion = base.CalculateFecalNitrogenExcretion(
-                fecalNitrogenRate: dailyEmissions.FecalNitrogenExcretionRate,
-                numberOfCattle: managementPeriod.NumberOfAnimals);
+                fecalNitrogenExcretionRate: dailyEmissions.FecalNitrogenExcretionRate,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.3.1-7
             dailyEmissions.OrganicNitrogenInStoredManure = base.CalculateOrganicNitrogenInStoredManure(
                 totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
+            /*
+             * Ammonia (NH3) from housing
+             */
+
             if (managementPeriod.HousingDetails.HousingType.IsIndoorHousing())
             {
-                // Equation 4.3.1-11
+                // Equation 4.3.1-13
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentAddTwo(
                     averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
             }
             else
             {
-                // Equation 4.3.1-6
+                // Equation 4.3.1-8
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustment(
                     averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
             }
 
-            var ammoniaEmissionFactorForHousingType = defaultAmmoniaEmissionFactorProvider.GetEmissionFactorByHousing(
+            var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
                 housingType: managementPeriod.HousingDetails.HousingType);
 
-            // Equation 4.3.1-7
+            // Equation 4.3.1-9
             dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = CalculateAdjustedEmissionFactorHousing(
                 emissionFactor: ammoniaEmissionFactorForHousingType,
                 temperatureAdjustment: dailyEmissions.AmbientAirTemperatureAdjustmentForHousing);
 
-            // Equation 4.3.1-8
+            // Equation 4.3.1-10
             dailyEmissions.AmmoniaEmissionRateFromHousing = CalculateAmmoniaEmissionRateFromHousing(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
                 adjustedEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
 
-            // Equation 4.3.1-9
+            // Equation 4.3.1-11
             dailyEmissions.AmmoniaConcentrationInHousing = CalculateAmmoniaConcentrationInHousing(
                 emissionRate: dailyEmissions.AmmoniaEmissionRateFromHousing,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.1-10
+            // Equation 4.3.1-12
             dailyEmissions.AmmoniaEmissionsFromHousingSystem = CalculateTotalAmmoniaEmissionsFromHousing(
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing);
+
+            // Equation 4.3.5-7
+            dailyEmissions.AdjustedAmmoniaFromHousing = this.CalculateAdjustedAmmoniaFromHousing(dailyEmissions, managementPeriod);
+
+            /*
+             * Ammonia from storage
+             */
 
             // Equation 4.3.2-1
             dailyEmissions.TanEnteringStorageSystem = CalculateTanStorage(
@@ -322,12 +345,15 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.2-7
             dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
-                adjustedAmountOfTanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
+                tanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
                 ammoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
             // Equation 4.3.2-8
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = CalculateAmmoniaEmissionsFromStoredManure(
                 ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+
+            // Equation 4.3.5-11
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
             {
@@ -335,7 +361,7 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 4.3.4-1
+                // Equation 4.3.5-1
                 dailyEmissions.FractionOfManureVolatilized = this.CalculateFractionOfManureVolatilized(
                     ammoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
@@ -355,16 +381,24 @@ namespace H.Core.Services.Animals
                 volatilizationRate: dailyEmissions.ManureVolatilizationRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.4-1
+            // Equation 4.3.6-1
             dailyEmissions.ManureNitrogenLeachingRate = this.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
-                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
+                amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            // Equation 4.3.4-2
+            // Equation 4.3.6-2
             dailyEmissions.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                 leachingNitrogenEmissionRate: dailyEmissions.ManureNitrogenLeachingRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.6-3
+            dailyEmissions.ManureNitrateLeachingEmission = base.CalculateNitrateLeaching(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
 
             // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -510,6 +544,10 @@ namespace H.Core.Services.Animals
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
             }        
 
+            /*
+             * Equation 3.1.1-7 at beginning of this method
+             */
+
             // Equation 3.1.1-8
             dailyEmissions.NetEnergyForGain = base.CalculateNetEnergyForGain(
                 weight: dailyEmissions.AnimalWeight,
@@ -648,8 +686,8 @@ namespace H.Core.Services.Animals
             // Equation 4.1.1-5
             dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding, 
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.1.1-6
             dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
@@ -749,8 +787,8 @@ namespace H.Core.Services.Animals
             // Equation 4.2.1-30
             dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial = base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding, 
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.2.1-31
             dailyEmissions.AmountOfNitrogenAddedFromBedding = base.CalculateAmountOfNitrogenAddedFromBeddingMaterial(
@@ -783,57 +821,68 @@ namespace H.Core.Services.Animals
             // Equation 4.3.1-4
             dailyEmissions.TanExcretion = base.CalculateTANExcretion(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
-                numberOfCattle: managementPeriod.NumberOfAnimals);
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.3.1-5
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                fractionOfNitrogenExcretedInUrine: dailyEmissions.TanExcretionRate);
+                tanExcretionRate: dailyEmissions.TanExcretionRate);
 
             // Equation 4.3.1-6
             dailyEmissions.FecalNitrogenExcretion = base.CalculateFecalNitrogenExcretion(
-                fecalNitrogenRate: dailyEmissions.FecalNitrogenExcretionRate,
-                numberOfCattle: managementPeriod.NumberOfAnimals);
+                fecalNitrogenExcretionRate: dailyEmissions.FecalNitrogenExcretionRate,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.1-5 (duplicate equation number)
+            // Equation 4.3.1-7
             dailyEmissions.OrganicNitrogenInStoredManure = base.CalculateOrganicNitrogenInStoredManure(
                 totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
+            /*
+             * Ammonia (NH3) from housing
+             */
+
             if (managementPeriod.HousingDetails.HousingType.IsIndoorHousing())
             {
-                // Equation 4.3.1-11
+                // Equation 4.3.1-13
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentAddTwo(
                     averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
             }
             else
             {
-                // Equation 4.3.1-6
+                // Equation 4.3.1-8
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustment(
                     averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
             }
 
-            var ammoniaEmissionFactorForHousingType = defaultAmmoniaEmissionFactorProvider.GetEmissionFactorByHousing(
+            var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
                 housingType: managementPeriod.HousingDetails.HousingType);
 
-            // Equation 4.3.1-7
+            // Equation 4.3.1-9, 4.3.1-14
             dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = CalculateAdjustedEmissionFactorHousing(
                 emissionFactor: ammoniaEmissionFactorForHousingType,
                 temperatureAdjustment: dailyEmissions.AmbientAirTemperatureAdjustmentForHousing);
 
-            // Equation 4.3.1-8
+            // Equation 4.3.1-10, 4.3.1-15
             dailyEmissions.AmmoniaEmissionRateFromHousing = CalculateAmmoniaEmissionRateFromHousing(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
                 adjustedEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
 
-            // Equation 4.3.1-9
+            // Equation 4.3.1-11
             dailyEmissions.AmmoniaConcentrationInHousing = CalculateAmmoniaConcentrationInHousing(
                 emissionRate: dailyEmissions.AmmoniaEmissionRateFromHousing,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.1-10
+            // Equation 4.3.1-12
             dailyEmissions.AmmoniaEmissionsFromHousingSystem = CalculateTotalAmmoniaEmissionsFromHousing(
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing);
+
+            // Equation 4.3.5-7
+            dailyEmissions.AdjustedAmmoniaFromHousing = this.CalculateAdjustedAmmoniaFromHousing(dailyEmissions, managementPeriod);
+
+            /*
+             * Ammonia (NH3) from storage
+             */
 
             // Equation 4.3.2-1
             dailyEmissions.TanEnteringStorageSystem = CalculateTanStorage(
@@ -861,12 +910,15 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.2-7
             dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
-                adjustedAmountOfTanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
+                tanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
                 ammoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
             // Equation 4.3.2-8
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = CalculateAmmoniaEmissionsFromStoredManure(
                 ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+
+            // Equation 4.3.5-11
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
             {
@@ -874,7 +926,7 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 4.3.3-1
+                // Equation 4.3.5-1
                 dailyEmissions.FractionOfManureVolatilized = this.CalculateFractionOfManureVolatilized(
                     ammoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
@@ -894,16 +946,24 @@ namespace H.Core.Services.Animals
                 volatilizationRate: dailyEmissions.ManureVolatilizationRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.3.4-1
+            // Equation 4.3.6-1
             dailyEmissions.ManureNitrogenLeachingRate = this.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
-                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
+                amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            // Equation 4.3.4-2
+            // Equation 4.3.6-2
             dailyEmissions.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                 leachingNitrogenEmissionRate: dailyEmissions.ManureNitrogenLeachingRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.6-3
+            dailyEmissions.ManureNitrateLeachingEmission = base.CalculateNitrateLeaching(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
 
             // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -914,6 +974,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.ManureN2ONEmission = base.CalculateManureNitrogenEmission(
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
+
+            // Equation 4.3.5-7
+            dailyEmissions.AdjustedAmmoniaFromHousing = this.CalculateAdjustedAmmoniaFromHousing(dailyEmissions, managementPeriod);
 
             // Equation 4.5.2-1
             dailyEmissions.TanAvailableForLandApplication = base.CalculateMonthlyTanAvailableForLandApplication(
@@ -1291,53 +1354,6 @@ namespace H.Core.Services.Animals
         #endregion
 
         #region Public Methods
-
-        
-        /// <summary>
-        /// -- there will be one of these values for each day, in the view model, get the largest value and show this to user so that the optimal TDN value is for all days over management period...
-        /// </summary>
-        public double CalculateRequiredTdnSoThatMaxDmiIsNotExceeded(
-            double netEnergyForMaintenance,
-            double netEnergyForActivity,
-            double netEnergyForLactation,
-            double netEnergyForPregnancy,
-            double netEnergyForGain,
-            double ratioOfEnergyForMaintenance,
-            double ratioOfEnergyForGain,
-            double currentTdn,
-            double currentDmiMax)
-        {
-            var result = 0.0;
-
-            var tdnStep = 0.01;
-            var targetTdnFound = false;
-            for (double tdn = currentTdn; tdn <= 100 && targetTdnFound == false; tdn += tdnStep)
-            {
-                // Keep calculating a new GEI until the DMI is brought down to a level that is lower than the DMI_max
-                var grossEnergyIntake = this.CalculateGrossEnergyIntake(
-                    netEnergyForMaintenance: netEnergyForMaintenance,
-                    netEnergyForActivity: netEnergyForActivity,
-                    netEnergyForLactation: netEnergyForLactation,
-                    netEnergyForPregnancy: netEnergyForPregnancy,
-                    netEnergyForGain: netEnergyForGain,
-                    ratioOfEnergyAvailableForMaintenance: ratioOfEnergyForMaintenance,
-                    ratioOfEnergyAvailableForGain: ratioOfEnergyForGain,
-                    percentTotalDigestibleNutrientsInFeed: tdn);
-
-                var dmiAtThisTdn = base.CalculateDryMatterIntake(
-                    grossEnergyIntake: grossEnergyIntake);
-
-                // Check if this new dmi is less than dmi max
-                var isLessThanDmiMax = dmiAtThisTdn < currentDmiMax;
-                if (isLessThanDmiMax)
-                {
-                    targetTdnFound = true;
-                    result = tdn;
-                }
-            }
-
-            return result;
-        }
 
         #endregion
     }

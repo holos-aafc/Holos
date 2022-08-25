@@ -109,5 +109,11 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("None", typeof(Resources))]
         None,
+
+        [LocalizedDescription("All", typeof(Resources))]
+        All,
+
+        [LocalizedDescription("Forage", typeof(Resources))]
+        Forage,
     }
 }

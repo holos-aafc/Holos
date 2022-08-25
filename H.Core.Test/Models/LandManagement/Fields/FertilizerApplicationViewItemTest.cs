@@ -14,7 +14,7 @@ namespace H.Core.Test.Models.LandManagement.Fields
             var viewItem = new FertilizerApplicationViewItem()
             {
                 AmountOfBlendedProductApplied = 100,
-                FertilizerBlendData = new FertilizerBlendData()
+                FertilizerBlendData = new Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data()
                 {
                     PercentageNitrogen = 20,
                 }

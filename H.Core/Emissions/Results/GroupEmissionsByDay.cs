@@ -82,6 +82,7 @@ namespace H.Core.Emissions.Results
         private double _manureVolatilizationN2ONEmission;
         private double _manureNitrogenLeachingRate;
         private double _manureN2ONLeachingEmission;
+        private double _manureNitrateLeachingEmission;
         private double _manureIndirectN2ONEmission;
         private double _manureN2ONEmission;
         private double _tanAvailableForLandApplication;
@@ -114,6 +115,7 @@ namespace H.Core.Emissions.Results
         private double _lambEweRatio;
         private double _proteinRetainedByPiglets;
         private double _optimumTdn;
+        private double _flowOfSubstrateEnteringDigestor;
         private double _totalMassEnteringDigesterFromFreshManure;
         private double _totalMassEnteringDigesterFromStoredManure;
         private double _flowOfTotalSolidsEnteringDigesterFromFreshManure;
@@ -125,9 +127,50 @@ namespace H.Core.Emissions.Results
         private double _flowOfTanEnteringDigesterFromFreshManure;
         private double _flowOfTanEnteringDigesterFromStoredManure;
         private double _flowOfCarbonEnteringDigesterFromFreshManure;
+        private double _flowOfCarbonEnteringDigesterFromStoredManure;
         private double _flowRateOfNitrogenEnteringDigesterFromStoredManure;
         private double _flowOfVolatileSolidsEnteringDigesterFromStoredManure;
+        private double _flowOfBiodegradableVolatileSolids;
         private double _temperature;
+        private double _methaneProducedByAnaerobicDigester;
+        private double _flowRateOfDegradedVolatileSolidsDuringDigestion;
+        private double _biogasProductionOfSubstrate;
+        private double _carbonDioxideProducedByAnaerobicDigester;
+        private double _recoverableMethane;
+        private double _primaryEnergyProduced;
+        private double _electricityProducedFromAnaerobicDigestion;
+        private double _heatProducedFromAnaerobicDigestion;
+        private double _potentialMethaneInjectionIntoGridFromAnaerobicDigestion;
+        private double _flowRateOfTotalMassOfDigestate;
+        private double _flowRateOfTotalSolidsInDigestate;
+        private double _flowRateOfVolatileSolidsInDigestate;
+        private double _flowRateOfNitrogenInDigestate;
+        private double _flowRateOfTanInDigestate;
+        private double _totalNitrogenContentOfSubstrateInDigestate;
+        private double _organicNitrogenFlowInDigestate;
+        private double _flowRateOfCarbonInDigestate;
+        private double _flowRateOfLiquidFractionOfDigestate;
+        private double _flowRateOfSolidFractionOfDigestate;
+        private double _flowRateOfTotalSolidsInLiquidFractionOfDigestate;
+        private double _flowRateOfTotalSolidsInSolidFractionOfDigestate;
+        private double _flowRateOfVolatileSolidsInLiquidFractionOfDigestate;
+        private double _flowRateOfVolatileSolidsInSolidFractionOfDigestate;
+        private double _flowRateOfNitrogenInLiquidFractionOfDigestate;
+        private double _flowRateOfNitrogenInSolidFractionOfDigestate;
+        private double _flowRateOfTanInLiquidFractionOfDigestate;
+        private double _flowRateOfTanInSolidFractionOfDigestate;
+        private double _flowRateOfOrganicNitrogenInLiquidFractionOfDigestate;
+        private double _flowRateOfOrganicInSolidFractionOfDigestate;
+        private double _methaneEmissionsDuringDigestateStorage;
+        private double _nitrousOxideEmissionsDuringDigestateStorage;
+        private double _ammoniaEmissionsDuringDigestateStorage;
+        private double _adjustedAmmoniaFromHousing;
+        private double _adjustedAmmoniaFromStorage;
+        private double _ammoniaEmissionsFromHousingAndStorage;
+        private double _totalNitrogenLossesFromHousingAndStorage;
+        private double _ammoniaEmissionRateFromHousingAndStorage;
+        private double _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
+        private double _adjustedAmmoniaEmissionsFromHousingAndStorage;
 
         #endregion
 
@@ -1126,8 +1169,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.6.1-4
-        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
+
+        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+
+        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure
@@ -1378,6 +1431,316 @@ namespace H.Core.Emissions.Results
         {
             get => _temperature;
             set => SetProperty(ref _temperature, value);
+        }
+
+        public double FlowOfCarbonEnteringDigesterFromStoredManure
+        {
+            get => _flowOfCarbonEnteringDigesterFromStoredManure;
+            set => SetProperty(ref _flowOfCarbonEnteringDigesterFromStoredManure, value);
+        }
+
+        public double FlowOfBiodegradableVolatileSolids
+        {
+            get => _flowOfBiodegradableVolatileSolids;
+            set => SetProperty(ref _flowOfBiodegradableVolatileSolids, value);
+        }
+
+        public double MethaneProducedByAnaerobicDigester
+        {
+            get => _methaneProducedByAnaerobicDigester;
+            set => SetProperty(ref _methaneProducedByAnaerobicDigester, value);
+        }
+
+        public double FlowRateOfDegradedVolatileSolidsDuringDigestion
+        {
+            get => _flowRateOfDegradedVolatileSolidsDuringDigestion;
+            set => SetProperty(ref _flowRateOfDegradedVolatileSolidsDuringDigestion, value);
+        }
+
+        public double BiogasProductionOfSubstrate
+        {
+            get => _biogasProductionOfSubstrate;
+            set => SetProperty(ref _biogasProductionOfSubstrate, value);
+        }
+
+        public double CarbonDioxideProducedByAnaerobicDigester
+        {
+            get => _carbonDioxideProducedByAnaerobicDigester;
+            set => SetProperty(ref _carbonDioxideProducedByAnaerobicDigester, value);
+        }
+
+        public double RecoverableMethane
+        {
+            get => _recoverableMethane;
+            set => SetProperty(ref _recoverableMethane, value);
+        }
+
+        public double PrimaryEnergyProduced
+        {
+            get => _primaryEnergyProduced;
+            set => SetProperty(ref  _primaryEnergyProduced, value);
+        }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double ElectricityProducedFromAnaerobicDigestion
+        {
+            get => _electricityProducedFromAnaerobicDigestion;
+            set => SetProperty(ref _electricityProducedFromAnaerobicDigestion, value);
+        }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double HeatProducedFromAnaerobicDigestion
+        {
+            get => _heatProducedFromAnaerobicDigestion;
+            set => SetProperty(ref _heatProducedFromAnaerobicDigestion, value);
+        }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double PotentialMethaneInjectionIntoGridFromAnaerobicDigestion
+        {
+            get => _potentialMethaneInjectionIntoGridFromAnaerobicDigestion;
+            set => SetProperty(ref _potentialMethaneInjectionIntoGridFromAnaerobicDigestion, value);
+        }
+
+        public double FlowRateOfTotalMassOfDigestate
+        {
+            get => _flowRateOfTotalMassOfDigestate;
+            set => SetProperty(ref _flowRateOfTotalMassOfDigestate, value);
+        }
+
+        public double FlowOfSubstrateEnteringDigestor
+        {
+            get => _flowOfSubstrateEnteringDigestor;
+            set => SetProperty(ref _flowOfSubstrateEnteringDigestor, value);
+        }
+
+        public double FlowRateOfTotalSolidsInDigestate
+        {
+            get => _flowRateOfTotalSolidsInDigestate;
+            set => SetProperty(ref _flowRateOfTotalSolidsInDigestate, value);
+        }
+
+        public double FlowRateOfVolatileSolidsInDigestate
+        {
+            get => _flowRateOfVolatileSolidsInDigestate;
+            set => SetProperty(ref _flowRateOfVolatileSolidsInDigestate, value);
+        }
+
+        public double FlowRateOfNitrogenInDigestate
+        {
+            get => _flowRateOfNitrogenInDigestate;
+            set => SetProperty(ref _flowRateOfNitrogenInDigestate, value);
+        }
+
+        public double FlowRateOfTanInDigestate
+        {
+            get => _flowRateOfTanInDigestate;
+            set => SetProperty(ref _flowRateOfTanInDigestate, value);
+        }
+
+        public double TotalNitrogenContentOfSubstrateInDigestate
+        {
+            get => _totalNitrogenContentOfSubstrateInDigestate;
+            set => SetProperty(ref _totalNitrogenContentOfSubstrateInDigestate, value);
+        }
+
+        public double OrganicNitrogenFlowInDigestate
+        {
+            get => _organicNitrogenFlowInDigestate;
+            set => SetProperty(ref _organicNitrogenFlowInDigestate, value);
+        }
+
+        public double FlowRateOfCarbonInDigestate
+        {
+            get => _flowRateOfCarbonInDigestate;
+            set => SetProperty(ref _flowRateOfCarbonInDigestate, value);
+        }
+
+        public double FlowRateOfLiquidFractionOfDigestate
+        {
+            get => _flowRateOfLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfSolidFractionOfDigestate
+        {
+            get => _flowRateOfSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfSolidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfTotalSolidsInLiquidFractionOfDigestate
+        {
+            get => _flowRateOfTotalSolidsInLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfTotalSolidsInLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfTotalSolidsInSolidFractionOfDigestate
+        {
+            get => _flowRateOfTotalSolidsInSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfTotalSolidsInSolidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfVolatileSolidsInLiquidFractionOfDigestate
+        {
+            get => _flowRateOfVolatileSolidsInLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfVolatileSolidsInLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfVolatileSolidsInSolidFractionOfDigestate
+        {
+            get => _flowRateOfVolatileSolidsInSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfVolatileSolidsInSolidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfNitrogenInLiquidFractionOfDigestate
+        {
+            get => _flowRateOfNitrogenInLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfNitrogenInLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfNitrogenInSolidFractionOfDigestate
+        {
+            get => _flowRateOfNitrogenInSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfNitrogenInSolidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfTanInLiquidFractionOfDigestate
+        {
+            get => _flowRateOfTanInLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfTanInLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfTanInSolidFractionOfDigestate
+        {
+            get => _flowRateOfTanInSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfTanInSolidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfOrganicNitrogenInLiquidFractionOfDigestate
+        {
+            get => _flowRateOfOrganicNitrogenInLiquidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfOrganicNitrogenInLiquidFractionOfDigestate, value);
+        }
+
+        public double FlowRateOfOrganicInSolidFractionOfDigestate
+        {
+            get => _flowRateOfOrganicInSolidFractionOfDigestate;
+            set => SetProperty(ref _flowRateOfOrganicInSolidFractionOfDigestate, value);
+        }
+
+        public double MethaneEmissionsDuringDigestateStorage
+        {
+            get => _methaneEmissionsDuringDigestateStorage;
+            set => SetProperty(ref _methaneEmissionsDuringDigestateStorage, value);
+        }
+
+        public double NitrousOxideEmissionsDuringDigestateStorage
+        {
+            get => _nitrousOxideEmissionsDuringDigestateStorage;
+            set => SetProperty(ref _nitrousOxideEmissionsDuringDigestateStorage, value);
+        }
+
+        public double AmmoniaEmissionsDuringDigestateStorage
+        {
+            get => _ammoniaEmissionsDuringDigestateStorage;
+            set => SetProperty(ref _ammoniaEmissionsDuringDigestateStorage, value);
+        }
+
+        public double AdjustedAmmoniaFromHousing
+        {
+            get => _adjustedAmmoniaFromHousing;
+            set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
+        }
+
+        public double AdjustedAmmoniaFromStorage
+        {
+            get => _adjustedAmmoniaFromStorage;
+            set => SetProperty(ref _adjustedAmmoniaFromStorage, value);
+        }
+
+        public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
+        public double TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication { get; set; }
+        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplication { get; set; }
+        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplication { get; set; }
+        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplication { get; set; }
+
+        public double TotalAmountRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
+        public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
+        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromLiquidFraction { get; set; }
+        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
+        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
+
+        public double TotalAmountRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
+        public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
+        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromSolidFraction { get; set; }
+        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
+        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
+
+        public double TotalAmountOfStoredDigestateAvailableForLandApplication { get; set; }
+        public double TotalAmountOfStoredDigestateAvailableForLandApplicationLiquidFraction { get; set; }
+        public double TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction { get; set; }
+
+        public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
+        public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3)
+        /// </summary>
+        public double AmmoniaEmissionsFromHousingAndStorage
+        {
+            get => _ammoniaEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionsFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg N)
+        /// </summary>
+        public double TotalNitrogenLossesFromHousingAndStorage
+        {
+            get => _totalNitrogenLossesFromHousingAndStorage;
+            set => SetProperty(ref _totalNitrogenLossesFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniaEmissionRateFromHousingAndStorage
+        {
+            get => _ammoniaEmissionRateFromHousingAndStorage;
+            set => SetProperty(ref _ammoniaEmissionRateFromHousingAndStorage, value);
+        }
+
+        public double AdjustedTotalNitrogenEmissionsFromHousingAndStorage
+        {
+            get => _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _adjustedTotalNitrogenEmissionsFromHousingAndStorage, value);
+        }
+
+        public double AdjustedAmmoniaEmissionsFromHousingAndStorage
+        {
+            get => _adjustedAmmoniaEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _adjustedAmmoniaEmissionsFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// (kg NO3-N)
+        /// </summary>
+        public double ManureNitrateLeachingEmission
+        {
+            get => _manureNitrateLeachingEmission;
+            set => SetProperty(ref _manureNitrateLeachingEmission, value);
         }
 
         #endregion

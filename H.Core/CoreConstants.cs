@@ -26,6 +26,13 @@ namespace H.Core
 
         #region Properties
 
+
+        public static int GrowingSeasonJulianStartDay { get; } = 121;
+
+        public static int GrowingSeasonJulianEndDayOctober { get; } = 305;
+
+        public static int GrowingSeasonJulianEndDaySeptember { get; } = 273;
+
         public static double EntericManureCH4UncertaintyEstimate = 1;
         public static double ManureCH4UncertaintyEstimate = 1;
         public static double DirectN2OUncertaintyEstimate = 2;

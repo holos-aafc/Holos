@@ -12,7 +12,7 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Fields
 
-        private readonly SoilNitrousOxideEmissionFactorProvider_Table_15 _soilNitrousOxideEmissionFactorProvider = new SoilNitrousOxideEmissionFactorProvider_Table_15();
+        private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace H.Core.Calculators.Nitrogen
             Region region, 
             double fractionOfThisTexture)
         {
-            var textureFactor = _soilNitrousOxideEmissionFactorProvider.GetFactorForSoilTexture(
+            var textureFactor = _soilN2OEmissionFactorsProvider.GetFactorForSoilTexture(
                 soilTexture: soilTexture,
                 region: region);
 
@@ -136,7 +136,9 @@ namespace H.Core.Calculators.Nitrogen
                     fractionOfThisTexture: 1
                 );
 
-            var result = topographyEmission * textureModifier * (1.0 / 0.634);
+            const double winterCorrection = (1.0 / 0.645);
+
+            var result = topographyEmission * textureModifier * winterCorrection;
 
             return result;
         }
@@ -168,29 +170,30 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="nitrogenContentOfExtrarootReturnedToSoil">Nitrogen content of the extraroot returned to the soil (kg N ha^-1)</param>
         /// <param name="fertilizerEfficiencyFraction">Fertilizer use efficiency (fraction)</param>
         /// <param name="soilTestN">User defined value for existing Soil N supply for which fertilization rate was adapted</param>
-        /// <param name="fixation">Amount of N supplied to the crop through biological N fixation (kg N ha^-1)</param>
         /// <param name="isNitrogenFixingCrop">Indicates if the type of crop is nitrogen fixing.</param>
         /// <param name="nitrogenFixationAmount">The amount of nitrogen fixation by the crop (fraction)</param>
+        /// <param name="atmosphericNitrogenDeposition">N deposition on a specific field n (kg ha^-1) </param>
         /// <returns>N fertilizer applied (kg ha^-1)</returns>
         public double CalculateSyntheticFertilizerApplied(double nitrogenContentOfGrainReturnedToSoil,
-                                                          double nitrogenContentOfStrawReturnedToSoil,
-                                                          double nitrogenContentOfRootReturnedToSoil,
-                                                          double nitrogenContentOfExtrarootReturnedToSoil,
-                                                          double fertilizerEfficiencyFraction,
-                                                          double soilTestN,
-                                                          bool isNitrogenFixingCrop,
-                                                          double nitrogenFixationAmount)
+            double nitrogenContentOfStrawReturnedToSoil,
+            double nitrogenContentOfRootReturnedToSoil,
+            double nitrogenContentOfExtrarootReturnedToSoil,
+            double fertilizerEfficiencyFraction,
+            double soilTestN,
+            bool isNitrogenFixingCrop,
+            double nitrogenFixationAmount, 
+            double atmosphericNitrogenDeposition)
         {
             var totalNitrogenContent = (nitrogenContentOfGrainReturnedToSoil + nitrogenContentOfStrawReturnedToSoil + nitrogenContentOfRootReturnedToSoil + nitrogenContentOfExtrarootReturnedToSoil);
 
             var result = 0d;
             if (isNitrogenFixingCrop)
             {
-                result = (((totalNitrogenContent) - soilTestN) * (1 - fertilizerEfficiencyFraction));
+                result = (totalNitrogenContent * (1 - nitrogenFixationAmount) - soilTestN - atmosphericNitrogenDeposition) / fertilizerEfficiencyFraction;
             }
             else
             {
-                result = (totalNitrogenContent * (1 - nitrogenFixationAmount)) * (1 - fertilizerEfficiencyFraction);
+                result = (totalNitrogenContent - soilTestN - atmosphericNitrogenDeposition) / fertilizerEfficiencyFraction;
             }
 
             // Suggested amount can never be less than zero
@@ -246,6 +249,17 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
+        /// <summary>
+        /// Equation 2.5.2-13
+        /// </summary>
+        public double CalculateGrainNitrogenTotal(
+            double carbonInputFromAgriculturalProduct,
+            double nitrogenConcentrationInProduct)
+        {
+            var result = (carbonInputFromAgriculturalProduct / 0.45) * nitrogenConcentrationInProduct;
+
+            return result;
+        }
 
         /// <summary>
         /// Equation 2.5.2-10
@@ -429,20 +443,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-24
-        /// Equation 2.5.4-3
-        /// </summary>
-        /// <param name="totalLandAppliedManureNitrogen">Total N inputs from all manure created from the animals (kg).</param>
-        /// <param name="weightedEcodistrictEmissionFactorForManureNitrogen">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping system and moisture management (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
-        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from manure application</returns>
-        public double CalculateNitrogenEmissionsDueToLandAppliedManureNitrogen(
-            double totalLandAppliedManureNitrogen, 
-            double weightedEcodistrictEmissionFactorForManureNitrogen)
-        {
-            return totalLandAppliedManureNitrogen * weightedEcodistrictEmissionFactorForManureNitrogen;
-        }
-
-        /// <summary>
         /// Equation 2.5.3-1
         /// </summary>
         /// <param name="growingSeasonPrecipitation">Growing season precipitation, by ecodistrict (May – October)</param>
@@ -555,15 +555,16 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.5.4-1
         /// </summary>
         /// <param name="emissionsFromSyntheticFertilizer">N emissions from cropland due to synthetic fertilizer inputs (kg N2O-N)</param>
-        /// <param name="emissionsFromResidues">N emissions from cropland due to crop residues(kg N2O-N)</param>
-        /// <param name="emissionsFromOrganicFertilizer"></param>
+        /// <param name="emissionsFromResidues">N emissions from cropland due to crop residues (kg N2O-N)</param>
+        /// <param name="emissionsFromOrganicFertilizer">N emissions from cropland due to crop residues (kg N2O-N)</param>
+        /// <param name="emissionsFromLandAppliedManure">N emissions from cropland due to crop residues (kg N2O-N)</param>
         /// <returns>Total direct N emissions from cropland (kg N2O-N year-1)</returns>
-        public double CalculateTotalDirectEmissionsForCrop(
-            double emissionsFromSyntheticFertilizer,
-            double emissionsFromResidues, 
-            double emissionsFromOrganicFertilizer)
+        public double CalculateTotalDirectEmissionsForCrop(double emissionsFromSyntheticFertilizer,
+            double emissionsFromResidues,
+            double emissionsFromOrganicFertilizer, 
+            double emissionsFromLandAppliedManure)
         {
-            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer;
+            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer + emissionsFromLandAppliedManure;
         }
 
         /// <summary>

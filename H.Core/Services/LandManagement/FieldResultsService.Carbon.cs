@@ -318,8 +318,8 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // At this point, the detail view items have had their C inputs calculated
-                equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.CarbonInputFromProduct) + viewItemsInRotation.Average(x => x.CarbonInputFromStraw);
-                equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.CarbonInputFromRoots) + viewItemsInRotation.Average(x => x.CarbonInputFromExtraroots);
+                equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.AboveGroundCarbonInput);
+                equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.BelowGroundCarbonInput);
                 equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInput);
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
+using H.Content;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -168,6 +170,80 @@ namespace H.Core.Test.Providers.Climate
             }
 
             File.WriteAllText("Nasa_Daily_Climate_Swift_Current_Year_2000.csv", stringBuilder.ToString());
+        }
+
+        [TestMethod]
+        public void GetClimateData()
+        {
+            var lines = CsvResourceReader.SplitFileIntoLinesUsingRegex(File.ReadAllText("Climate\\Missing Climate Data_perennials.csv"));
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.Append("Sub_location");
+            stringBuilder.Append(",");
+            stringBuilder.Append("Latitude (decimal degrees)");
+            stringBuilder.Append(",");
+            stringBuilder.Append("Longitude (decimal degrees)");
+            stringBuilder.Append(",");
+            stringBuilder.Append("Date(s) of study/measurement");
+            stringBuilder.Append(",");
+            stringBuilder.Append("PPT (mm)");
+            stringBuilder.Append(",");
+            stringBuilder.Append("PET (mm)");
+            stringBuilder.Append(",");
+            stringBuilder.Append("MAY_SEP (PPT (mm))");
+            stringBuilder.Append(",");
+            stringBuilder.AppendLine();
+
+            foreach (var line in lines.Skip(2))
+            {
+                var city = line[0];
+                if (string.IsNullOrWhiteSpace(city))
+                {
+                    stringBuilder.AppendLine();
+                    continue;
+                }
+
+                city = city.Replace(",", " ");
+
+                var latitude = double.Parse(line[1]);
+                var longitude = double.Parse(line[2]);
+                var year = int.Parse(line[3]);
+
+                var data = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
+                var dataForYear = data.Where(x => x.Year == year);
+
+                double totalAnnualPrecipitation = 0;
+                double totalAnnualEvapotranspiration = 0;
+                double totalGrowingSeasonPrecipitation = 0;
+                if (dataForYear.Any())
+                {
+                    totalAnnualPrecipitation = dataForYear.Sum(x => x.MeanDailyPrecipitation);
+                    totalAnnualEvapotranspiration = dataForYear.Sum(x => x.MeanDailyPET);
+
+                    var growingSeasonDays = dataForYear.Where(x => x.JulianDay >= CoreConstants.GrowingSeasonJulianStartDay && x.JulianDay <= CoreConstants.GrowingSeasonJulianEndDaySeptember);
+
+                    totalGrowingSeasonPrecipitation = growingSeasonDays.Sum(x => x.MeanDailyPrecipitation);
+                }
+
+                stringBuilder.Append(city);
+                stringBuilder.Append(",");
+                stringBuilder.Append(latitude);
+                stringBuilder.Append(",");
+                stringBuilder.Append(longitude);
+                stringBuilder.Append(",");
+                stringBuilder.Append(year);
+                stringBuilder.Append(",");
+                stringBuilder.Append(totalAnnualPrecipitation);
+                stringBuilder.Append(",");
+                stringBuilder.Append(totalAnnualEvapotranspiration);
+                stringBuilder.Append(",");
+                stringBuilder.Append(totalGrowingSeasonPrecipitation);
+                stringBuilder.Append(",");
+                stringBuilder.AppendLine();
+            }
+
+            File.WriteAllText($"Climate\\Output.csv", stringBuilder.ToString());
         }
     }
 }

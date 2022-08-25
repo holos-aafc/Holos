@@ -88,7 +88,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                 carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.1.1-6
             if (animalGroup.GroupType == AnimalType.SwinePiglets)
@@ -278,7 +278,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial = base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                 nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
-                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType);
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             // Equation 4.2.1-31
             if (animalGroup.GroupType == AnimalType.SwinePiglets)
@@ -303,15 +303,34 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             /*
+             * Ammonia emissions
+             */
+
+            // Equation 4.3.3-1
+            dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
+
+            // Equation 4.3.4-6
+            dailyEmissions.AmmoniaEmissionRateFromHousingAndStorage = base.CalculateAmmoniaEmissionRateFromHousingAndStorage(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                rateOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                volatilizationFraction: dailyEmissions.FractionOfManureVolatilized);
+
+            // Equation 4.3.4-7
+            dailyEmissions.TotalNitrogenLossesFromHousingAndStorage = base.CalculateTotalNitrogenLossFromHousingAndStorage(
+                ammoniaEmissionRate: dailyEmissions.AmmoniaEmissionRateFromHousingAndStorage,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.4-8
+            dailyEmissions.AmmoniaEmissionsFromHousingAndStorage = base.CalculateAmmoniaLossFromHousingAndStorage(
+                totalNitrogenLossFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage);
+
+            /*
              * Indirect manure N2O
              */
 
             /*
              * Volatilization
              */
-
-            // Equation 4.3.3-1
-            dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
 
             // Equation 4.3.3-3
             dailyEmissions.ManureVolatilizationRate = base.CalculateManureVolatilizationEmissionRate(
@@ -326,19 +345,40 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             /*
+             * Adjusted ammonia emissions
+             */
+
+            // Equation 4.3.5-12
+            dailyEmissions.AdjustedTotalNitrogenEmissionsFromHousingAndStorage = base.CalculateAmmoniaAdjustmentFromHousingAndStorage(
+                totalAmmoniaLossFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
+                manureVolatilizationEmissions: dailyEmissions.ManureVolatilizationN2ONEmission);
+
+            // Equation 4.3.5-13
+            dailyEmissions.AdjustedAmmoniaEmissionsFromHousingAndStorage = base.CalculateTotalAdjustedAmmoniaFromHousingAndStorage(
+                adjustedTotalNitrogenEmissionsFromStorageAndHousing: dailyEmissions.AdjustedTotalNitrogenEmissionsFromHousingAndStorage);
+
+            /*
              * Leaching
              */
 
-            // Equation 4.3.4-1
+            // Equation 4.3.6-1
             dailyEmissions.ManureNitrogenLeachingRate = base.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
-                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
+                amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            // Equation 4.3.4-2
+            // Equation 4.3.6-2
             dailyEmissions.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                 leachingNitrogenEmissionRate: dailyEmissions.ManureNitrogenLeachingRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.6-3
+            dailyEmissions.ManureNitrateLeachingEmission = base.CalculateNitrateLeaching(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
 
             // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -427,7 +467,7 @@ namespace H.Core.Services.Animals
             double fertilityRateOfSows,
             double liveWeightChangeOfSowsDuringGestation)
         {
-            return 0.025 * fertilityRateOfSows * liveWeightChangeOfSowsDuringGestation;
+            return (0.025 * fertilityRateOfSows * liveWeightChangeOfSowsDuringGestation) / 350.0;
         }
 
         /// <summary>
@@ -444,7 +484,7 @@ namespace H.Core.Services.Animals
             double liveWeightOfPigletAtBirth,
             double liveWeightOfPigletAtWeaningAge)
         {
-            return 0.025 * numberOfAnimals * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98);
+            return (0.025 * numberOfAnimals * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98)) / 350.0;
         }
 
         /// <summary>
@@ -461,6 +501,7 @@ namespace H.Core.Services.Animals
             double nitrogenRequiredForGain, 
             double numberOfDays)
         {
+            // Nitrogen required for gain is multiplied by 6.25 to get protein required for gain (PR_gain = N_gain * 6.25)
             return ((finalBodyWeight - initialBodyWeight) * (nitrogenRequiredForGain * 6.25) / numberOfDays);
         }
 
@@ -487,7 +528,7 @@ namespace H.Core.Services.Animals
         public double CalculateCarbonExcretionRate(
             double dailyDryMatterIntakeOfFeed)
         {
-            const double CarbonDigestibility = 0;
+            const double CarbonDigestibility = 0.88;
 
             return dailyDryMatterIntakeOfFeed * 0.45 * (1 - CarbonDigestibility);
         }

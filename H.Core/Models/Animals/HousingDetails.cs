@@ -30,6 +30,7 @@ namespace H.Core.Models.Animals
         private double _totalCarbonKilogramsDryMatterForBedding;
         private double _totalPhosphorusKilogramsDryMatterForBedding;
         private double _carbonToNitrogenRatioOfBeddingMaterial;
+        private double _moistureContentOfBeddingMaterial;
 
         private string _nameOfPastureLocation;
 
@@ -206,6 +207,15 @@ namespace H.Core.Models.Animals
         {
             get => _ammoniaEmissionFactorForHousing;
             set => SetProperty(ref _ammoniaEmissionFactorForHousing, value);
+        }
+
+        /// <summary>
+        /// (%)
+        /// </summary>
+        public double MoistureContentOfBeddingMaterial
+        {
+            get => _moistureContentOfBeddingMaterial;
+            set => SetProperty(ref _moistureContentOfBeddingMaterial, value);
         }
 
         #endregion

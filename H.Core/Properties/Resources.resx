@@ -1163,7 +1163,7 @@
     <value>ac</value>
   </data>
   <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
-    <value>Upstream CO2</value>
+    <value>Upstream CO₂</value>
   </data>
   <data name="LabelBirthWeight" xml:space="preserve">
     <value>Birth weight</value>
@@ -1553,7 +1553,7 @@
     <value>Mills et al. (2013) Eq. NL2</value>
   </data>
   <data name="LabelLandUseChangeCO2" xml:space="preserve">
-    <value>Land Use Change CO2</value>
+    <value>Land Use Change CO₂</value>
   </data>
   <data name="LabelEnergyCO2" xml:space="preserve">
     <value>Energy CO2</value>
@@ -2099,6 +2099,9 @@
   </data>
   <data name="LabelBelowGroundCarbonInput" xml:space="preserve">
     <value>Below Ground Carbon Input (i_bg)</value>
+  </data>
+  <data name="LabelManureCarbonInput" xml:space="preserve">
+    <value>Manure Carbon Input (i_m)</value>
   </data>
   <data name="LabelBelowGroundResiduePool_BGresidueN" xml:space="preserve">
     <value>Below Ground Residue Pool (BGresidueN_Field)</value>
@@ -4463,8 +4466,20 @@
   <data name="LabelEmissionFactorForLeaching" xml:space="preserve">
     <value>Emission factor for leaching</value>
   </data>
+  <data name="LabelLeachingFraction" xml:space="preserve">
+    <value>Leaching fraction</value>
+  </data>
   <data name="LabelFractionOfCarbonInManure" xml:space="preserve">
     <value>Fraction of carbon in manure</value>
+  </data>
+  <data name="LabelCarbonContentOfManure" xml:space="preserve">
+    <value>Carbon content of manure</value>
+  </data>
+  <data name="LabelNitrogenContentOfManure" xml:space="preserve">
+    <value>Nitrogen content of manure</value>
+  </data>
+  <data name="LabelPhosphorusContentOfManure" xml:space="preserve">
+    <value>Phosphorus content of manure</value>
   </data>
   <data name="LabelFractionOfNitrogenInManure" xml:space="preserve">
     <value>Fraction of nitrogen in manure</value>
@@ -4829,6 +4844,9 @@
   <data name="KilogramsCarbonPerTreeType" xml:space="preserve">
     <value>kg C tree type^-1</value>
   </data>
+  <data name="FractionString" xml:space="preserve">
+    <value>fraction</value>
+  </data>
   <data name="PoundsCarbonPerTreeType" xml:space="preserve">
     <value>lb C tree type^-1</value>
   </data>
@@ -5140,5 +5158,59 @@
   </data>
   <data name="MessageIncorrectHarvestMethodSelected" xml:space="preserve">
     <value>'{0}' is currently set to grow an annual cash crop. If you would like to graze an annual crop, please switch the harvest method to {1} instead and choose the silage version of the same (or similar) crop, or grow a perennial crop instead ('{0}' is currently growing {2} in {3}). Holos will allow animals to graze on cover crops in a future update of the model.</value>
+  </data>
+  <data name="LabelManureNotAppliedToAnyField" xml:space="preserve">
+    <value>Manure not applied to field(s)</value>
+  </data>
+  <data name="EnumControlledRelease" xml:space="preserve">
+    <value>Controlled release</value>
+  </data>
+  <data name="EnumNitrificationAndUreaseInhibitor" xml:space="preserve">
+    <value>Nitrification and Urease inhibitor</value>
+  </data>
+  <data name="EnumNitrificationInhibitor" xml:space="preserve">
+    <value>Nitrification inhibitor</value>
+  </data>
+  <data name="EnumUreaseInhibitor" xml:space="preserve">
+    <value>Urease inhibitor</value>
+  </data>
+  <data name="DollarsPerDayPerAnimal" xml:space="preserve">
+    <value>$ day^-1 animal^-1</value>
+  </data>
+  <data name="DollarsPerTonne" xml:space="preserve">
+    <value>$ tonne^-1</value>
+  </data>
+  <data name="DollarsPerPound" xml:space="preserve">
+    <value>$ lb^-1</value>
+  </data>
+  <data name="DollarsPerTon" xml:space="preserve">
+    <value>$ ton^-1</value>
+  </data>
+  <data name="PastureGrassHigh" xml:space="preserve">
+    <value>Pasture grass, high quality</value>
+  </data>
+  <data name="PastureGrassLow" xml:space="preserve">
+    <value>Pasture grass, low quality</value>
+  </data>
+  <data name="PastureGrassMedium" xml:space="preserve">
+    <value>Pasture grass, medium quality</value>
+  </data>
+  <data name="EnumNonFossilCH4" xml:space="preserve">
+    <value>CH4 (non-fossil)</value>
+  </data>
+  <data name="EnumLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="KilogramsNPerKilogramNitrogenString" xml:space="preserve">
+    <value>kg N (kg N)^-1</value>
+  </data>
+  <data name="Hemp" xml:space="preserve">
+    <value>Hemp</value>
+  </data>
+  <data name="PaperProducts" xml:space="preserve">
+    <value>Paper products</value>
+  </data>
+  <data name="Peat" xml:space="preserve">
+    <value>Peat</value>
   </data>
 </root>

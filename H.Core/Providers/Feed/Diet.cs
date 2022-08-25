@@ -430,6 +430,10 @@ namespace H.Core.Providers.Feed
             this.TotalDigestibleNutrient = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.TotalDigestibleNutrient);
             this.CrudeProtein = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeProtein);
             this.Forage = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Forage);
+            if (this.DietType == DietType.MediumEnergyAndProtein)
+            {
+                var animal = this.AnimalType;
+            }
             this.Starch = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Starch);
             this.Fat = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Fat);
 
@@ -477,7 +481,7 @@ namespace H.Core.Providers.Feed
             var copiedDiet = new Diet();
             
 
-            // This needs to be new'd up here, for some reason setting this property to be ignored in the mapper configuration doesn't acutally ignore it. Instead, auto mapper
+            // This needs to be new'd up here, for some reason setting this property to be ignored in the mapper configuration doesn't actually ignore it. Instead, auto mapper
             // will just use the same reference to the Ingredients property and the result will be that ingredients get duplicated back into the dietToCopy variable. This is not
             // what is wanted as we just want to copy ingredients to the copiedDiet property.
             copiedDiet.Ingredients = new ObservableCollection<FeedIngredient>();
@@ -584,6 +588,11 @@ namespace H.Core.Providers.Feed
             }
         }
 
+        public double CalculateNemf()
+        {
+            return this.Ingredients.WeightedAverage(x => x.Nemf, x => x.PercentageInDiet);
+        }
+
         #endregion
 
         #region Private Methods
@@ -592,7 +601,6 @@ namespace H.Core.Providers.Feed
         {
             // Assign a default ym so that if there are no cases that cover the diet below, there will be a value assigned
             this.MethaneConversionFactor = 0.04;
-
 
             if (this.AnimalType == AnimalType.DairyLactatingCow ||
                 this.AnimalType == AnimalType.DairyDryCow ||

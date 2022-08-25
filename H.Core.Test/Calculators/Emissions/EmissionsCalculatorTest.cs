@@ -64,21 +64,7 @@ namespace H.Core.Test.Calculators.Emissions
         {
             var result = calc.CalculateNitrogenInputsFromMineralizationOfNativeSoilOrganicMatter(1115);
             Assert.AreEqual(111.5, result);
-        }    
-
-        /// <summary>
-        /// Equation 2.5.2-11
-        /// </summary>
-        [TestMethod]
-        public void CalculateNitrogenEmissionsDueToLandAppliedManureNitrogenReturnsCorrectValue()
-        {
-            var totalLandAppliedManureNitrogen = 234.98;
-            var ecodistricEmissionFactor = 3.45;
-            var result =
-                calc.CalculateNitrogenEmissionsDueToLandAppliedManureNitrogen(totalLandAppliedManureNitrogen,
-                                                                              ecodistricEmissionFactor);
-            Assert.AreEqual(810.681, result);
-        }          
+        }
 
         /// <summary>
         ///    Equation 2.5.3-1
@@ -89,8 +75,10 @@ namespace H.Core.Test.Calculators.Emissions
             var growingSeasonPrecipitation = 34.2;
             var growingSeasonEvapotranspiration = 0.65;
             var result =
-                calc.CalculateFractionOfNitrogenLostByLeachingAndRunoff(growingSeasonPrecipitation,
-                                                                        growingSeasonEvapotranspiration);
+                calc.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
+                    growingSeasonPrecipitation, 
+                    growingSeasonEvapotranspiration);
+
             Assert.AreEqual(0.3, result);
         }
         

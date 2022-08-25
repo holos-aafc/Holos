@@ -12,13 +12,16 @@ namespace H.Core.Models
 
         private AnimalType _animalType;
 
+        private double _volumeOfManureAvailableForLandApplication;
         private double _volumeRemainingInTank;
         private double _totalOrganicNitrogenAvailableForLandApplication;
         private double _totalTanAvailableForLandApplication;
         private double _totalAmountOfCarbonInStoredManure;
         private double _totalAvailableManureNitrogenAvailableForLandApplication;
         private double _totalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications;
+
         private double _nitrogenSumOfAllManureApplicationsMade;
+        private double _volumeSumOfAllManureApplicationsMade;
 
         #endregion
 
@@ -82,13 +85,30 @@ namespace H.Core.Models
             set => SetProperty(ref _nitrogenSumOfAllManureApplicationsMade, value, OnSumOfAllManureApplicationsMade);
         }
 
+        public double VolumeSumOfAllManureApplicationsMade
+        {
+            get => _volumeSumOfAllManureApplicationsMade;
+            set => SetProperty(ref _volumeSumOfAllManureApplicationsMade, value, OnVolumeSumOfAllManureApplicationsMade);
+        }
+
+        public double VolumeOfManureAvailableForLandApplication
+        {
+            get => _volumeOfManureAvailableForLandApplication;
+            set => SetProperty(ref _volumeOfManureAvailableForLandApplication, value);
+        }
+
         #endregion
 
         #region Event Handlers
 
         private void OnSumOfAllManureApplicationsMade()
         {
-            this.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = this.TotalAvailableManureNitrogenAvailableForLandApplication - this.NitrogenSumOfAllManureApplicationsMade;           
+            this.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = this.TotalAvailableManureNitrogenAvailableForLandApplication - this.NitrogenSumOfAllManureApplicationsMade;
+        }
+
+        private void OnVolumeSumOfAllManureApplicationsMade()
+        {
+            this.VolumeRemainingInTank = this.VolumeOfManureAvailableForLandApplication - this.VolumeSumOfAllManureApplicationsMade;
         }
 
         #endregion

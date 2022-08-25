@@ -62,7 +62,11 @@ namespace H.Core.Models.Infrastructure
         private double _ammoniaEmissionFactorForDigestateStorage;
 
         private double _proportionTotalManureAddedToAD;
+        private double _volumeOfDigestateEnteringStorage;
 
+        private int _numberOfReactors;
+        private bool _isCentrifugeType;
+        private bool _isLiquidSolidSeparated;
 
         #endregion
 
@@ -73,12 +77,14 @@ namespace H.Core.Models.Infrastructure
             this.ComponentDescriptionString = Properties.Resources.ToolTipAnaerobicDigestionComponent;
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
+
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
         }
         #endregion
 
         #region Properties
+
 
         public AnaerobicDigestionViewItem AnaerobicDigestionViewItem
         {
@@ -278,9 +284,49 @@ namespace H.Core.Models.Infrastructure
             set { this.SetProperty(ref _proportionTotalManureAddedToAD, value); }
         }
 
+        public int NumberOfReactors
+        {
+            get => _numberOfReactors;
+            set => SetProperty(ref _numberOfReactors, value);
+        }
+
+        /// <summary>
+        /// If false, digester is a belt press type
+        /// </summary>
+        public bool IsCentrifugeType
+        {
+            get => _isCentrifugeType;
+            set => SetProperty(ref _isCentrifugeType, value);
+        }
+
+        public bool IsLiquidSolidSeparated
+        {
+            get => _isLiquidSolidSeparated;
+            set => SetProperty(ref _isLiquidSolidSeparated, value);
+        }
+
+        public double VolumeOfDigestateEnteringStorage
+        {
+            get => _volumeOfDigestateEnteringStorage;
+            set => SetProperty(ref _volumeOfDigestateEnteringStorage, value);
+        }
+
         #endregion
 
         #region Public Methods
+
+        public int GetHydrolicRetentionTime()
+        {
+            if (this.NumberOfReactors == 1)
+            {
+                return 25;
+            }
+            else
+            {
+                return 60;
+            }
+        }
+
         #endregion
 
         #region Private Methods

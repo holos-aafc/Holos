@@ -1,0 +1,18 @@
+﻿Farm operation,,Emission type,,,,,,
+,,Enteric CH4,Manure CH4,N2O direct,N2O indirect,Energy CO2,CO2,Upstream CO2
+Land management,Field,-,-,monthly,monthly,monthly,annual,monthly
+,Crop rotation,-,-,monthly,monthly,monthly,annual,monthly
+,Shelterbelts,-,-,-,-,-,annual,-
+Livestock – by animal group ,Beef ,daily,daily,daily,monthly,monthly,-,monthly
+,Dairy,daily,daily,daily,monthly,monthly,-,monthly
+,Sheep,daily,daily,daily,monthly,monthly,-,monthly
+,Swine,daily,daily,daily,monthly,monthly,-,monthly
+,Poultry,daily,daily,daily,monthly,monthly,-,monthly
+,Other,daily,daily,monthly,monthly,-,-,-
+Infrastructure,Anaerobic digestion,-,daily,daily,monthly,Annual (credit),-,-
+,,,,,,,,
+,,,,,,,,
+"All emissions (CO2e) are totalled by month and year, and detailed by land mgmt unit (i.e., field) and livestock animal group.",,,,,,,,
+,,,,,,,,
+Daily calculated emissions are summed to monthly and annual emissions. Annual emissions reported on the basis of allocation (Table 17) ,,,,,,,,
+"are highlighted green, while all other annual values are prorated by month or day (i.e., Emissionmonth = Emissionannual/12) are highlighted in red.",,,,,,,,

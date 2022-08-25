@@ -16,7 +16,7 @@ namespace H.Core.Calculators.Climate
     {
         #region Fields
 
-        private readonly GrowingDegreeCoefficientsProvider_Table_1 _growingDegreeCoefficientsProviderTable1;
+        private readonly Table_1_Growing_Degree_Crop_Coefficients_Provider _growingDegreeCropCoefficientsProvider;
         private readonly EvapotranspirationCalculator _evapotranspirationCalculator;
 
         #endregion
@@ -25,7 +25,7 @@ namespace H.Core.Calculators.Climate
 
         public ClimateParameterCalculator()
         {
-            _growingDegreeCoefficientsProviderTable1 = new GrowingDegreeCoefficientsProvider_Table_1();
+            _growingDegreeCropCoefficientsProvider = new Table_1_Growing_Degree_Crop_Coefficients_Provider();
             _evapotranspirationCalculator = new EvapotranspirationCalculator();
         }
 
@@ -279,7 +279,7 @@ namespace H.Core.Calculators.Climate
         /// <returns>Crop Coefficient</returns>
         public double CalculateCropCoefficient(double maxTemperature, double minTemperature, CropType cropType)
         {
-            var cropCoefficient = _growingDegreeCoefficientsProviderTable1.GetByCropType(cropType);
+            var cropCoefficient = _growingDegreeCropCoefficientsProvider.GetByCropType(cropType);
 
             var a = cropCoefficient.A;
             var b = cropCoefficient.B;

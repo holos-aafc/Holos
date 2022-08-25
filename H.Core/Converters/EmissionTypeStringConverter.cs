@@ -49,6 +49,9 @@ namespace H.Core.Converters
                 case "ammonia":
                 case "nh3":
                     return EmissionTypes.NH3;
+
+                case "ch4nonfossil":
+                    return EmissionTypes.NonFossilCH4;
                 default:
                 {
                     Trace.TraceError($"{nameof(EmissionTypeStringConverter)}.{nameof(EmissionTypeStringConverter.Convert)}: unknown emissions type: {input} returning {EmissionTypes.EntericMethane}");

@@ -265,5 +265,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumCattle", typeof(Resources))]
         Cattle,
+
+        [LocalizedDescription("EnumLayers", typeof(Resources))]
+        Layers,
     }
 }

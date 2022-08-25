@@ -248,6 +248,15 @@ namespace H.Core.Enumerations
         [LocalizedDescription("PerDay", typeof(Resources))]
         PerDay,
 
+        [LocalizedDescription("DollarsPerTonne", typeof(Resources))]
+        DollarsPerTonne,
+
+        [LocalizedDescription("DollarsPerDayPerAnimal", typeof(Resources))]
+        DollarsPerDayPerAnimal,
+
+        [LocalizedDescription("DollarsPerKilogram", typeof(Resources))]
+        DollarsPerKilogram,
+
         None,
     }
 }

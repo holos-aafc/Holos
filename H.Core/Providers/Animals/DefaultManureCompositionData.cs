@@ -14,6 +14,11 @@ namespace H.Core.Providers.Animals
         private double _nitrogenFraction;
         private double _carbonFraction;
         private double _phosphorusFraction;
+
+        private double _nitrogenContent;
+        private double _carbonContent;
+        private double _phosphorusContent;
+
         private double _moistureContent;
         private double _carbonToNitrogenRatio;
         private double _nitrogenConcentrationOfManure;
@@ -27,91 +32,91 @@ namespace H.Core.Providers.Animals
 
         public ManureStateType ManureStateType
         {
-            get
-            {
-                return _manureStateType;
-            }
-            set
-            {
-                SetProperty(ref _manureStateType, value);
-            }
+            get => _manureStateType;
+            set => SetProperty(ref _manureStateType, value);
         }
 
-        public string ManureStateTypeString
-        {
-            get { return this.ManureStateType.GetDescription(); }
-        }
+        public string ManureStateTypeString => this.ManureStateType.GetDescription();
 
         /// <summary>
         /// %
         /// </summary>
         public double MoistureContent 
         {
-            get
-            {
-                return _moistureContent;
-            }
-            set
-            {
-                SetProperty(ref _moistureContent, value);
-            }
+            get => _moistureContent;
+            set => SetProperty(ref _moistureContent, value);
         }
 
         /// <summary>
-        /// (% fraction wet weight)
+        /// (% wet weight)
+        ///
+        /// Expressed as a percentage
+        ///
+        /// TODO: rename this to NitrogenPercentage
         /// </summary>
         public double NitrogenFraction 
         {
-            get
-            {
-                return _nitrogenFraction;
-            }
-            set
-            {
-                SetProperty(ref _nitrogenFraction, value);
-            }
+            get => _nitrogenFraction;
+            set => SetProperty(ref _nitrogenFraction, value, () => { this.NitrogenContent = value / 100.0;});
         }
 
         /// <summary>
-        /// (% fraction wet weight)
+        /// Proportion of N in manure (fraction)
+        /// </summary>
+        public double NitrogenContent
+        {
+            get => _nitrogenContent;
+            set => SetProperty(ref _nitrogenContent, value);
+        }
+
+        /// <summary>
+        /// (% wet weight)
+        ///
+        /// Expressed as a percentage
+        ///
+        /// TODO: rename this to CarbonPercentage
         /// </summary>
         public double CarbonFraction 
         {
-            get
-            {
-                return _carbonFraction;
-            }
-            set
-            {
-                SetProperty(ref _carbonFraction, value);
-            }
+            get => _carbonFraction;
+            set => SetProperty(ref _carbonFraction, value, () => { this.CarbonContent = value / 100.0;});
         }
 
         /// <summary>
-        /// (% fraction wet weight)
+        /// Proportion of C in manure (fraction)
+        /// </summary>
+        public double CarbonContent
+        {
+            get => _carbonContent;
+            set => SetProperty(ref _carbonContent, value);
+        }
+
+        /// <summary>
+        /// (% wet weight)
+        ///
+        /// Expressed as a percentage
+        ///
+        /// TODO: rename this to PhosphorusPercentage
         /// </summary>
         public double PhosphorusFraction 
         {
-            get
-            {
-                return _phosphorusFraction;
-            }
-            set
-            {
-                SetProperty(ref _phosphorusFraction, value);
-            }
+            get => _phosphorusFraction;
+            set => SetProperty(ref _phosphorusFraction, value, () => { this.PhosphorusContent = value / 100.0;});
+        }
+
+        /// <summary>
+        /// Proportion of P in manure (fraction)
+        /// </summary>
+        public double PhosphorusContent
+        {
+            get => _phosphorusContent;
+            set => SetProperty(ref _phosphorusContent, value);
         }
 
         public double CarbonToNitrogenRatio
         {
-            get
-            {
-                return _carbonToNitrogenRatio;
-            }
-            set
-            {
-                SetProperty(ref _carbonToNitrogenRatio, value);
-            }
+            get => _carbonToNitrogenRatio;
+            set => SetProperty(ref _carbonToNitrogenRatio, value);
         }
 
         /// <summary>
@@ -120,14 +125,9 @@ namespace H.Core.Providers.Animals
         /// (kg N (1000 L)^-1)
         /// </summary>
         public double NitrogenConcentrationOfManure {
-            get
-            {
-                return _nitrogenConcentrationOfManure;
-            }
-            set
-            {
-                SetProperty(ref _nitrogenConcentrationOfManure, value);
-            } }
+            get => _nitrogenConcentrationOfManure;
+            set => SetProperty(ref _nitrogenConcentrationOfManure, value);
+        }
 
         public AnimalType AnimalType
         {

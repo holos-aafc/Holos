@@ -17,8 +17,8 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        private readonly NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12 _slopeProvider = new NitrogenLigninInCropsForSteadyStateMethodProvider_Table_12();
-        private readonly GloballyCalibratedModelParametersProvider _globallyCalibratedModelParametersProvider = new GloballyCalibratedModelParametersProvider();        
+        private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
+        private readonly Table_11_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider = new Table_11_Globally_Calibrated_Model_Parameters_Provider();        
 
         #endregion
 
@@ -137,15 +137,9 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = totalBelowGroundCarbonInputsForField / viewItem.Area;
 
-            // TODO: get all manure applications and calculate manure inputs
-
             // Equation 2.2.3-5
-            viewItem.TotalCarbonInputs = this.CalculateTotalCarbonInputs(
-                aboveGroundInputs: totalAboveGroundCarbonInputsForField,
-                belowGroundInputs: totalBelowGroundCarbonInputsForField,
-                manureInputs: 0);            
+            viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare;  
         }
-
 
         /// <summary>
         /// The run in period is the 'year' that is the averages carbon inputs, climate effects etc. and is used as the 'year 0' item when
@@ -410,6 +404,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="slope">(unitless)</param>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="intercept">(unitless)</param>
+        /// <param name="moistureContentAsPercentage">The moisture content of the yield (%)</param>
         /// <returns>The harvest ratio</returns>
         public double CalculateHarvestRatio(
             double slope,
@@ -425,12 +420,18 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="harvestRatio">The harvest ratio (kg ha^-1)</param>
+        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
         public double CalculateAboveGroundResidueDryMatter(
             double freshWeightOfYield,
             double harvestRatio,
             double moistureContentOfCropAsPercentage)
         {
+            if (harvestRatio <= 0)
+            {
+                return 0;
+            }
+
             return (freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100) ) / harvestRatio;
         }
 
@@ -470,24 +471,6 @@ namespace H.Core.Calculators.Carbon
             double fractionRenewed)
         {
             return aboveGroundResideDryMatterForCrop * shootToRootRatio * area * fractionRenewed;
-        }
-
-        /// <summary>
-        /// Equation 2.2.3-5
-        /// </summary>
-        /// <param name="aboveGroundInputs">Annual total amount of above-ground residue (kg year^-1)</param>
-        /// <param name="belowGroundInputs">Annual total amount of below-ground residue (kg year^-1)</param>
-        /// <param name="manureInputs">Annual amount of manure applied to crop (kg N year^-1)</param>
-        /// <returns>Total carbon inputs (tonnes C ha^-1)</returns>
-        public double CalculateTotalCarbonInputs(
-            double aboveGroundInputs,
-            double belowGroundInputs,
-            double manureInputs)
-        {
-            // Note that at this point, the above ground residue (as well as below ground residues) has been multiplied by the C content
-            var result = aboveGroundInputs + belowGroundInputs + (manureInputs / 1000);
-
-            return result;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
 
@@ -51,6 +52,7 @@ namespace H.Core.Models
         private string _kilogramsNitrogenPerMonthPerAnimalString;
         private string _kilogramsNH3NString;
         private string _kilogramsNH3NPerKilogramNitrogenString;
+        private string _kilogramsNPerKilogramNitrogenString;
         private string _kilogramsNH3String;
         private string _kilogramsCarbonString;
         private string _kilogramsCarbonPerYearString;
@@ -105,6 +107,7 @@ namespace H.Core.Models
         private string _bushelString;
         private string _kilogramsPerGroupPerTimePeriodString;
         private string _kilogramsCarbonPerTreeTypeString;
+        private string _fractionString;
 
         #endregion
 
@@ -708,6 +711,18 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsCarbonPerTreeTypeString, value); 
         }
 
+        public string FractionString
+        {
+            get => _fractionString;
+            set => SetProperty(ref _fractionString, value);
+        }
+
+        public string KilogramsNPerKilogramNitrogenString
+        {
+            get => _kilogramsNPerKilogramNitrogenString;
+            set => SetProperty(ref _kilogramsNPerKilogramNitrogenString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -823,6 +838,8 @@ namespace H.Core.Models
                 KilogramsMethanePerHeadPerDayString = WrapString(Resources.KilogramsMethanePerHeadPerDay);
                 KilogramsPerGroupPerTimePeriodString = WrapString(Resources.KilogramsPerGroupPerTimePeriod);
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.KilogramsCarbonPerTreeType);
+                FractionString = WrapString(Resources.FractionString);
+                KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
             }
             else
             {
@@ -925,6 +942,8 @@ namespace H.Core.Models
                 KilogramsMethanePerHeadPerDayString = WrapString(Resources.PoundsMethanePerHeadPerDay);
                 KilogramsPerGroupPerTimePeriodString = WrapString(Resources.PoundsPerGroupPerTimePeriod);
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.PoundsCarbonPerTreeType);
+                FractionString = WrapString(Resources.FractionString);
+                KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
             }
         }
 

@@ -1143,6 +1143,9 @@
   <data name="EnumLargeKabuliChickpea" xml:space="preserve">
     <value>gros pois chiches kabuli</value>
   </data>
+  <data name="EnumLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
   <data name="EnumLayersDryPoultry" xml:space="preserve">
     <value>pondeuses (fumier sec)</value>
   </data>
@@ -2395,6 +2398,9 @@
   <data name="KilogramsNPer1000Litres" xml:space="preserve">
     <value>kg N 1000 litres^1</value>
   </data>
+  <data name="KilogramsNPerKilogramNitrogenString" xml:space="preserve">
+    <value>kg N (kg N)^-1</value>
+  </data>
   <data name="KilogramsPerDay" xml:space="preserve">
     <value>kg jour^-1</value>
   </data>
@@ -2721,6 +2727,9 @@
   </data>
   <data name="LabelCalvesAreMilkFedOnly" xml:space="preserve">
     <value>les veaux sont nourris au lait seulement</value>
+  </data>
+  <data name="LabelCarbonContentOfManure" xml:space="preserve">
+    <value>Carbon content of manure</value>
   </data>
   <data name="LabelCarbonInputFromExtraroots" xml:space="preserve">
     <value>Apport de carbone du matériel extraracinaire (C_e)</value>
@@ -3073,6 +3082,12 @@
   <data name="LabelLactationDiet" xml:space="preserve">
     <value>lactation</value>
   </data>
+  <data name="LabelLandUseChangeCO2" xml:space="preserve">
+    <value>Land Use Change CO₂</value>
+  </data>
+  <data name="LabelLeachingFraction" xml:space="preserve">
+    <value>Leaching fraction</value>
+  </data>
   <data name="LabelLegumeForageBasedDiet" xml:space="preserve">
     <value>ration à base de fourrage de légumineuses</value>
   </data>
@@ -3105,6 +3120,9 @@
   </data>
   <data name="LabelManganese" xml:space="preserve">
     <value>manganèse</value>
+  </data>
+  <data name="LabelManureCarbonInput" xml:space="preserve">
+    <value>Manure Carbon Input (i_m)</value>
   </data>
   <data name="LabelManureResiduePool_ManureN" xml:space="preserve">
     <value>réservoir de résidus de fumier (fumierN)</value>
@@ -3187,6 +3205,9 @@
   <data name="LabelNitrogenApplicationMethod" xml:space="preserve">
     <value>méthode d’épandage de l’azote</value>
   </data>
+  <data name="LabelNitrogenContentOfManure" xml:space="preserve">
+    <value>Nitrogen content of manure</value>
+  </data>
   <data name="LabelNitrogenFertilizerType" xml:space="preserve">
     <value>engrais azotés</value>
   </data>
@@ -3237,6 +3258,9 @@
   </data>
   <data name="LabelPhosphorus" xml:space="preserve">
     <value>phosphore</value>
+  </data>
+  <data name="LabelPhosphorusContentOfManure" xml:space="preserve">
+    <value>Phosphorus content of manure</value>
   </data>
   <data name="LabelPhysicalEffectivenessFactor" xml:space="preserve">
     <value>Physical Effectiveness Factor</value>
@@ -3509,6 +3533,9 @@
   <data name="LabelUndersown" xml:space="preserve">
     <value>sous-semis</value>
   </data>
+  <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
+    <value>Upstream CO₂</value>
+  </data>
   <data name="LabelUseCustomVolatilizationFraction" xml:space="preserve">
     <value>utilisez un facteur de conversion du méthane personnalisé</value>
   </data>
@@ -3754,6 +3781,9 @@
   </data>
   <data name="MessagePerennialsGeneralTab" xml:space="preserve">
     <value>Pour les vivaces, les quantités d’irrigation et de pesticides utilisés peuvent être entrés dans cet onglet. les détails du rendement et de la récolte peuvent être saisis dans l’onglet « récolte ».</value>
+  </data>
+  <data name="MessageReviewDietInformationOverMaxDmi" xml:space="preserve">
+    <value>Veuillez examiner les informations sélectionnées sur le régime alimentaire, le poids corporel et le gain quotidien pour vous assurer que les animaux répondent à leurs besoins énergétiques quotidiens.</value>
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
     <value>on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte, puis 100 % lors de la récolte des plantes vivaces. ces données peuvent être modifées à l’onglet « résidus ». </value>

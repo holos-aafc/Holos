@@ -85,7 +85,7 @@ namespace H.Core.Services.LandManagement
                 viewItem.TillageType = TillageType.NoTill;
                 viewItem.PastTillageType = TillageType.NoTill;
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                viewItem.ForageUtilizationRate = _forageUtilizationRateProvider.GetUtilizationRate(viewItem.CropType);
+                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
             }
         }
@@ -308,7 +308,7 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            var data = _fertilizerBlendProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+            var data = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
             if (data != null)
             {
                 /*
@@ -346,15 +346,15 @@ namespace H.Core.Services.LandManagement
                     changeType = PerennialCroppingChangeType.DecreaseInPerennialCroppingArea;
                 }
 
-                lumCMax = _lumCMaxAndkValueForPerennialsAndGrasslandProviderTable3.GetLumCMax(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
-                kValue = _lumCMaxAndkValueForPerennialsAndGrasslandProviderTable3.GetKValue(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
+                lumCMax = _lumCMaxKValuesPerennialCroppingChangeProvider.GetLumCMax(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
+                kValue = _lumCMaxKValuesPerennialCroppingChangeProvider.GetKValue(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
             }
             else if (cropViewItem.CropType.IsFallow())
             {
                 var changeType = _landManagementChangeHelper.GetFallowPracticeChangeType(cropViewItem.PastFallowArea, cropViewItem.Area);
 
-                lumCMax = _lumCMaxAndKValuesForFallowPracticeChangeProviderTable2.GetLumCMax(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
-                kValue = _lumCMaxAndKValuesForFallowPracticeChangeProviderTable2.GetKValue(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
+                lumCMax = _lumCMaxKValuesFallowPracticeChangeProvider.GetLumCMax(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
+                kValue = _lumCMaxKValuesFallowPracticeChangeProvider.GetKValue(ecozone, farm.GeographicData.DefaultSoilData.SoilTexture, changeType);
             }
 
             cropViewItem.LumCMax = lumCMax;
@@ -604,11 +604,11 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultLigninContent(CropViewItem cropViewItem, Farm farm)
         {
-            Providers.Carbon.ResidueData residueData = this.GetResidueData(cropViewItem, farm);
+            Providers.Carbon.Table_10_Relative_Biomass_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
             
-            if (residueData != null)
+            if (table10RelativeBiomassData != null)
             {
-                cropViewItem.LigninContent = residueData.LigninContent;
+                cropViewItem.LigninContent = table10RelativeBiomassData.LigninContent;
             }
             else
             {

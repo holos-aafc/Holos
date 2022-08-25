@@ -21,6 +21,7 @@ using H.Core.Tools;
 namespace H.Core.Providers
 {
     /// <summary>
+    /// Provides soil data for a given location within Canada
     /// </summary>
     public class GeographicDataProvider : GeographicDataProviderBase, IGeographicDataProvider
     {

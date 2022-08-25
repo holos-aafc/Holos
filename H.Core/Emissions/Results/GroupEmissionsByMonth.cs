@@ -1143,6 +1143,30 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double MonthlyElectricityProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.ElectricityProducedFromAnaerobicDigestion);
+            }
+        }
+
+        public double MonthlyHeatProducedFromAnaerobicDigestion
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.HeatProducedFromAnaerobicDigestion);
+            }
+        }
+
+        public double MonthlyMethaneInjectionIntoGrid
+        {
+            get
+            {
+                return _dailyEmissions.Sum(x => x.PotentialMethaneInjectionIntoGridFromAnaerobicDigestion);
+            }
+        }
+
         /// <summary>
         /// (kg)
         /// </summary>
@@ -1165,7 +1189,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyLambProduced { get; set; }
 
-        public DefaultsCompositionOfBeddingMaterialsData BeddingMaterialComposition { get; set; }
+        public Table_33_Default_Bedding_Material_Composition_Data BeddingMaterialComposition { get; set; }
 
         /// <summary>
         /// Total carbon dioxide emissions associated with this <see cref="AnimalGroup"/>.

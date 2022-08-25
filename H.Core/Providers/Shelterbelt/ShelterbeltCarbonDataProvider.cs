@@ -136,7 +136,7 @@ namespace H.Core.Providers.Shelterbelt
         /// <summary>
         /// If we are in Saskatchewan, we can do lookups for biomass directly by using the cluster id.
         ///
-        /// If we are not in Saskatchewan, we use <see cref="ShelterbeltHardinessZoneLookupProvider.GetLookupValue"/> instead.
+        /// If we are not in Saskatchewan, we use <see cref="Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue"/> instead.
         /// </summary>
         public static double GetLookupValue(TreeSpecies treeSpecies,
                                             int ecodistrictId,
