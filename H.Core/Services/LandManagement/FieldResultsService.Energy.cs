@@ -97,7 +97,7 @@ namespace H.Core.Services.LandManagement
             {
                 results.EnergyCarbonDioxideFromIrrigation = this.CalculateTotalCarbonDioxideEmissionsFromIrrigation(
                     areaOfCropIrrigated: fieldSystemComponent.FieldArea,
-                    irrigationConversion: IrrigationConversion,
+                    amountOfIrrigation: viewItem.AmountOfIrrigation,
                     pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
             }
 
@@ -115,7 +115,7 @@ namespace H.Core.Services.LandManagement
         /// Equation 4.1.1-2
         /// </summary>
         /// <param name="energyFromFuelUse">Energy from fuel use (GJ ha^1)</param>
-        /// <param name="area">Area (ha))</param>
+        /// <param name="area">Area (ha)</param>
         /// <param name="dieselConversion">Conversion of GJ of diesel to kg CO2 (kg CO2 GJ^-1)</param>
         /// <returns>CO2 emissions from cropping fuel use (kg CO2 year^-1)</returns>
         public double CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
@@ -259,14 +259,15 @@ namespace H.Core.Services.LandManagement
         /// Equation 6.1.4-1
         /// </summary>
         /// <param name="areaOfCropIrrigated">area of crop irrigated (ha)</param>
-        /// <param name="irrigationConversion">Conversion of area irrigated to kg CO2 (kg CO2 ha^1)</param>
+        /// <param name="amountOfIrrigation">Amount of irrigation (mm ha^-1 yr^-1)</param>
+        /// <param name="pumpEmissionsFactor">For electric pump = 0.266 kg CO2 mm^-1, for natural gas pump = 1.145 kg CO2 mm^-1</param>
         /// <returns>Total CO2 emissions from irrigation (kg CO2 year^-1)</returns>
         public double CalculateTotalCarbonDioxideEmissionsFromIrrigation(
                double areaOfCropIrrigated, 
-               double irrigationConversion,
+               double amountOfIrrigation,
                double pumpEmissionsFactor)
         {
-            return areaOfCropIrrigated * irrigationConversion * pumpEmissionsFactor;
+            return areaOfCropIrrigated * amountOfIrrigation * pumpEmissionsFactor;
         }
 
         /// <summary>

@@ -18,8 +18,11 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Prism.Events;
@@ -78,24 +81,47 @@ namespace H.Core.Services
                 throw new ArgumentNullException(nameof(eventAggregator));
             }
 
+            #region Farm Mapping
+
             var farmMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<Farm, Farm>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore())
-                 .ForMember(y => y.Defaults, z => z.Ignore())
-                 .ForMember(y => y.StageStates, z => z.Ignore())
-                 .ForMember(y => y.ClimateData, z => z.Ignore())
-                 .ForMember(y => y.GeographicData, z => z.Ignore())
-                 .ForMember(y => y.Components, z => z.Ignore());
+                    .ForMember(y => y.Name, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore())
+                    .ForMember(y => y.Defaults, z => z.Ignore())
+                    .ForMember(y => y.StageStates, z => z.Ignore())
+                    .ForMember(y => y.ClimateData, z => z.Ignore())
+                    .ForMember(y => y.GeographicData, z => z.Ignore())
+                    .ForMember(y => y.Components, z => z.Ignore());
 
+                x.CreateMap<Table_18_Default_Soil_N2O_Emission_BreakDown_Provider,
+                    Table_18_Default_Soil_N2O_Emission_BreakDown_Provider>();
+                x.CreateMap<Table_33_Default_Bedding_Material_Composition_Data,
+                    Table_33_Default_Bedding_Material_Composition_Data>();
+                x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
+
+                x.CreateMap<Diet, Diet>();
             });
 
             _farmMapper = farmMapperConfiguration.CreateMapper();
 
+            #endregion
+
+            #region Defaults
+
+            
+
             var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
 
             _defaultsMapper = defaultMapperConfiguration.CreateMapper();
+
+
+
+            #endregion
+
+            #region Details Screen
+
+            
 
             var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
                 {
@@ -104,12 +130,20 @@ namespace H.Core.Services
 
             _detailsScreenCropViewItemMapper = detailsScreenCropViewItemMapperConfiguration.CreateMapper();
 
+
+
+            #endregion
+
             #region Climate Mappers
 
             var climateDataMapper = new MapperConfiguration(x =>
             {
+                x.CreateMap<PrecipitationData, PrecipitationData>();
+                x.CreateMap<TemperatureData, TemperatureData>();
+                x.CreateMap<EvapotranspirationData, EvapotranspirationData>();
                 x.CreateMap<ClimateData, ClimateData>()
-                            .ForMember(y => y.DailyClimateData, z => z.Ignore());
+                    .ForMember(y => y.DailyClimateData, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
             });
             _climateDataMapper = climateDataMapper.CreateMapper();
 
@@ -126,9 +160,10 @@ namespace H.Core.Services
             var geographicDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<GeographicData, GeographicData>()
-                            .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
-                            .ForMember(y => y.DefaultSoilData, z => z.Ignore())
-                            .ForMember(y => y.CustomYieldData, z => z.Ignore());
+                    .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
+                    .ForMember(y => y.DefaultSoilData, z => z.Ignore())
+                    .ForMember(y => y.CustomYieldData, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
             });
             _geographicDataMapper = geographicDataMapper.CreateMapper();
 
