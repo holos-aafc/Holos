@@ -546,7 +546,7 @@
     <Compile Include="Providers\Plants\Duplicate_EnergyRequirementsForCropsProvider.cs" />
     <Compile Include="Providers\Plants\FertilizerApplicationRatesData.cs" />
     <Compile Include="Providers\Plants\FertilizerApplicationRatesProvider.cs" />
-    <Compile Include="Providers\Plants\Table_67_Conversion_Factors_Atomic_To_Molecular_Weight_Provider.cs" />
+    <Compile Include="Providers\Plants\Table_71_Utilization_Rates_For_Livestock_Grazing_Provider.cs" />
     <Compile Include="Providers\Plants\Table_4_LumCMax_KValues_Fallow_Practice_Change_Data.cs" />
     <Compile Include="Providers\Plants\Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider.cs" />
     <Compile Include="Providers\Plants\Table_5_LumCMax_KValues_Perennial_Cropping_Change_Data.cs" />
@@ -580,8 +580,8 @@
     <Compile Include="Providers\Shelterbelt\ShelterbeltEcodistrictLookupTableData.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltEcodistrictLookupTableProvider.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltEcodistrictToClusterLookupProvider.cs" />
-    <Compile Include="Providers\Shelterbelt\ShelterbeltHardinessZoneLookupData.cs" />
-    <Compile Include="Providers\Shelterbelt\ShelterbeltHardinessZoneLookupProvider.cs" />
+    <Compile Include="Providers\Shelterbelt\Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data.cs" />
+    <Compile Include="Providers\Shelterbelt\Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltRatioTableData.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltAgTRatioProvider.cs" />
     <Compile Include="Providers\Shelterbelt\SlcToHardinessZoneData.cs" />
@@ -611,7 +611,7 @@
     <Compile Include="Providers\Soil\SoilGreatGroupData.cs" />
     <Compile Include="Providers\Soil\SoilLayerTableData.cs" />
     <Compile Include="Providers\Soil\SoilNameTableData.cs" />
-    <Compile Include="Providers\Soil\Table_15_16_Soil_N2O_Emission_Factors_Provider.cs" />
+    <Compile Include="Providers\Soil\Table_16_Soil_N2O_Emission_Factors_Provider.cs" />
     <Compile Include="Providers\Precipitation\PrecipitationData.cs" />
     <Compile Include="Providers\Temperature\TemperatureData.cs" />
     <Compile Include="Providers\YearlyAverageCalculator.cs" />

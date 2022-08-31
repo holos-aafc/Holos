@@ -82,6 +82,7 @@ namespace H.Core.Emissions.Results
         private double _manureVolatilizationN2ONEmission;
         private double _manureNitrogenLeachingRate;
         private double _manureN2ONLeachingEmission;
+        private double _manureNitrateLeachingEmission;
         private double _manureIndirectN2ONEmission;
         private double _manureN2ONEmission;
         private double _tanAvailableForLandApplication;
@@ -168,6 +169,8 @@ namespace H.Core.Emissions.Results
         private double _ammoniaEmissionsFromHousingAndStorage;
         private double _totalNitrogenLossesFromHousingAndStorage;
         private double _ammoniaEmissionRateFromHousingAndStorage;
+        private double _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
+        private double _adjustedAmmoniaEmissionsFromHousingAndStorage;
 
         #endregion
 
@@ -1717,6 +1720,27 @@ namespace H.Core.Emissions.Results
         {
             get => _ammoniaEmissionRateFromHousingAndStorage;
             set => SetProperty(ref _ammoniaEmissionRateFromHousingAndStorage, value);
+        }
+
+        public double AdjustedTotalNitrogenEmissionsFromHousingAndStorage
+        {
+            get => _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _adjustedTotalNitrogenEmissionsFromHousingAndStorage, value);
+        }
+
+        public double AdjustedAmmoniaEmissionsFromHousingAndStorage
+        {
+            get => _adjustedAmmoniaEmissionsFromHousingAndStorage;
+            set => SetProperty(ref _adjustedAmmoniaEmissionsFromHousingAndStorage, value);
+        }
+
+        /// <summary>
+        /// (kg NO3-N)
+        /// </summary>
+        public double ManureNitrateLeachingEmission
+        {
+            get => _manureNitrateLeachingEmission;
+            set => SetProperty(ref _manureNitrateLeachingEmission, value);
         }
 
         #endregion

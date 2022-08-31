@@ -187,7 +187,7 @@
     <Compile Include="Providers\Plants\Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider_Test.cs" />
     <Compile Include="Providers\Plants\Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider_Test.cs" />
     <Compile Include="Providers\Plants\Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider_Test.cs" />
-    <Compile Include="Providers\Soil\Table_15_16_Soil_N2O_Emission_Factors_Provider_Test.cs" />
+    <Compile Include="Providers\Soil\Table_16_Soil_N2O_Emission_Factors_Provider_Test.cs" />
     <Compile Include="Providers\Plants\Table_12_Nitrogen_Lignin_Content_In_Crops_Provider_Test.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltEcodistrictToClusterLookupProviderTest.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltProvidersTest.cs" />

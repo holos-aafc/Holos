@@ -110,10 +110,10 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.CropFactors);
                     
                 case CsvResourceNames.SoilN2OEmissionFactorsInfluencedByTillPractice:
-                    return SplitFileIntoLines(Resource.Table_15_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice);
+                    return SplitFileIntoLines(Resource.Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice);
 
                 case CsvResourceNames.SoilN2OEmissionFactorsInfluencedBySoilTexture:
-                    return SplitFileIntoLines(Resource.Table_15_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture);
+                    return SplitFileIntoLines(Resource.Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture);
 
                 case CsvResourceNames.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops:
                     return SplitFileIntoLines(Resource.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops);
@@ -170,7 +170,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.shelterbelt_ecodistrict_lookup_table);
 
                 case CsvResourceNames.ShelterbeltHardinessZoneLookup:
-                    return SplitFileIntoLines(Resource.shelterbelt_hardinesszone_lookup);
+                    return SplitFileIntoLines(Resource.Table_15_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone);
 
                 case CsvResourceNames.SlcToHardinessZone:
                     return SplitFileIntoLines(Resource.slc_to_hardiness_zone);

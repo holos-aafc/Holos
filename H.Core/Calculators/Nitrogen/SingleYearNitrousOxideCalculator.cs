@@ -12,7 +12,7 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Fields
 
-        private readonly Table_15_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_15_16_Soil_N2O_Emission_Factors_Provider();
+        private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
 
         #endregion
 

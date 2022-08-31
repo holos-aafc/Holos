@@ -347,6 +347,10 @@ namespace H.Core.Services
             return replicatedFarm;
         }       
 
+        /// <summary>
+        /// Updates the amounts of manure (and associated information) whenever a user adds, removes, or edits a manure application.
+        /// </summary>
+        /// <param name="farmEmissionResults"></param>
         public void UpdateManureTanksFromUserDefinedManureApplications(FarmEmissionResults farmEmissionResults)
         {
             var farm = farmEmissionResults.Farm;
@@ -372,8 +376,16 @@ namespace H.Core.Services
 
                         var totalNitrogenApplied = amountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-                        // Subtract the amount that was applied
+                        // Sum the amount that was applied
                         tank.NitrogenSumOfAllManureApplicationsMade += totalNitrogenApplied;
+
+                        // Get the amount/volume of manure applied
+                        var amountOfManureApplied = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
+
+                        var totalVolumeApplied = amountOfManureApplied * viewItem.Area;
+
+                        // Sum the amount that was applied
+                        tank.VolumeSumOfAllManureApplicationsMade = totalVolumeApplied;
                     }
                 }
             }
@@ -443,6 +455,7 @@ namespace H.Core.Services
         {
             manureTank.NitrogenSumOfAllManureApplicationsMade = 0;
 
+            var manureAvailableForLandApplication = 0.0;
             var totalOrganicNitrogenAvailableForLandApplication = 0.0;
             var totalTanAvailableForLandApplication = 0.0;
             var totalAmountOfCarbonInStoredManure = 0.0;
@@ -460,6 +473,7 @@ namespace H.Core.Services
                         totalTanAvailableForLandApplication += groupEmissionsByMonth.MonthlyTanAvailableForLandApplication;
                         totalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManure;
                         totalAvailableManureNitrogenInStoredManureAvailableForLandApplication += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
+                        manureAvailableForLandApplication += groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication * 1000;
                     }
                 }
             }
@@ -471,6 +485,9 @@ namespace H.Core.Services
             // Before considering any manure applications, these values are the same
             manureTank.TotalAvailableManureNitrogenAvailableForLandApplication = totalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
             manureTank.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = totalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
+
+            manureTank.VolumeOfManureAvailableForLandApplication = manureAvailableForLandApplication;
+            manureTank.VolumeRemainingInTank = manureAvailableForLandApplication;
         }
 
         #endregion

@@ -2728,6 +2728,9 @@
   <data name="LabelCalvesAreMilkFedOnly" xml:space="preserve">
     <value>les veaux sont nourris au lait seulement</value>
   </data>
+  <data name="LabelCarbonContentOfManure" xml:space="preserve">
+    <value>Carbon content of manure</value>
+  </data>
   <data name="LabelCarbonInputFromExtraroots" xml:space="preserve">
     <value>Apport de carbone du matériel extraracinaire (C_e)</value>
   </data>
@@ -3202,6 +3205,9 @@
   <data name="LabelNitrogenApplicationMethod" xml:space="preserve">
     <value>méthode d’épandage de l’azote</value>
   </data>
+  <data name="LabelNitrogenContentOfManure" xml:space="preserve">
+    <value>Nitrogen content of manure</value>
+  </data>
   <data name="LabelNitrogenFertilizerType" xml:space="preserve">
     <value>engrais azotés</value>
   </data>
@@ -3252,6 +3258,9 @@
   </data>
   <data name="LabelPhosphorus" xml:space="preserve">
     <value>phosphore</value>
+  </data>
+  <data name="LabelPhosphorusContentOfManure" xml:space="preserve">
+    <value>Phosphorus content of manure</value>
   </data>
   <data name="LabelPhysicalEffectivenessFactor" xml:space="preserve">
     <value>Physical Effectiveness Factor</value>

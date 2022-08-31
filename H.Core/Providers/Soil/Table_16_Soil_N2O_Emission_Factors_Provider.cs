@@ -12,7 +12,7 @@ namespace H.Core.Providers.Soil
     /// <para>Table 16: Soil nitrous oxide emission factors (N2O EF) as influenced by source of nitrogen, soil texture, tillage practice and crop type in Canada (adapted from Liang et al., 2020)</para>
     /// <para>Provider contains values for RF_NS, RF_TX, RF_TILL, TF_CS and RF_AM</para>
     /// </summary>
-    public class Table_15_16_Soil_N2O_Emission_Factors_Provider
+    public class Table_16_Soil_N2O_Emission_Factors_Provider
     {
         #region Inner Classes
 
@@ -31,7 +31,7 @@ namespace H.Core.Providers.Soil
 
         #region Constructors
 
-        public Table_15_16_Soil_N2O_Emission_Factors_Provider()
+        public Table_16_Soil_N2O_Emission_Factors_Provider()
         {
             HTraceListener.AddTraceListener();
         }
@@ -66,7 +66,7 @@ namespace H.Core.Providers.Soil
                     {
                         const double defaultValue = 1;
 
-                        Trace.TraceError($"{nameof(Table_15_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(nitrogenSourceType)}: {nitrogenSourceType}. Returning {defaultValue}");
+                        Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(nitrogenSourceType)}: {nitrogenSourceType}. Returning {defaultValue}");
                         return 1;
                     }
             }
@@ -122,7 +122,7 @@ namespace H.Core.Providers.Soil
 
             const double defaultValue = 1;
 
-            Trace.TraceError($"{nameof(Table_15_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(soilTexture)}: {soilTexture}, and {nameof(region)}: {region}. Returning {defaultValue}");
+            Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(soilTexture)}: {soilTexture}, and {nameof(region)}: {region}. Returning {defaultValue}");
 
             return defaultValue;
         }
@@ -180,14 +180,14 @@ namespace H.Core.Providers.Soil
 
             const double defaultValue = 1;
 
-            Trace.TraceError($"{nameof(Table_15_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForTillagePractice)}: unknown {nameof(region)}: {region}. Returning {defaultValue}");
+            Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForTillagePractice)}: unknown {nameof(region)}: {region}. Returning {defaultValue}");
 
             return defaultValue;
         }
 
 
         /// <summary>
-        /// Table 15: Lookup function for N2O Reduction factor values = RF_AM
+        /// Table 16: Lookup function for N2O Reduction factor values = RF_AM
         /// </summary>
         /// <param name="soilReductionFactors"></param>
         /// <returns></returns>
@@ -209,7 +209,7 @@ namespace H.Core.Providers.Soil
                     return 0.94;
 
                 default:
-                    Trace.TraceError($"{nameof(Table_15_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetReductionFactorBasedOnApplicationMethod)} " +
+                    Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetReductionFactorBasedOnApplicationMethod)} " +
                                      $":unknown Soil Reduction Factor: {nameof(soilReductionFactors)}, returning {defaultValue}");
                     return defaultValue;
             }

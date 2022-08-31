@@ -4472,6 +4472,15 @@
   <data name="LabelFractionOfCarbonInManure" xml:space="preserve">
     <value>Fraction of carbon in manure</value>
   </data>
+  <data name="LabelCarbonContentOfManure" xml:space="preserve">
+    <value>Carbon content of manure</value>
+  </data>
+  <data name="LabelNitrogenContentOfManure" xml:space="preserve">
+    <value>Nitrogen content of manure</value>
+  </data>
+  <data name="LabelPhosphorusContentOfManure" xml:space="preserve">
+    <value>Phosphorus content of manure</value>
+  </data>
   <data name="LabelFractionOfNitrogenInManure" xml:space="preserve">
     <value>Fraction of nitrogen in manure</value>
   </data>

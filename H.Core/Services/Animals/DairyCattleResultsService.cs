@@ -872,6 +872,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.AmmoniaEmissionsFromHousingSystem = base.CalculateTotalAmmoniaEmissionsFromHousing(
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
+            // Equation 4.3.5-7
+            dailyEmissions.AdjustedAmmoniaFromHousing = this.CalculateAdjustedAmmoniaFromHousing(dailyEmissions, managementPeriod);
+
             /*
              * Ammonia (NH3) from storage
              */
@@ -918,6 +921,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = base.CalculateAmmoniaEmissionsFromStoredManure(
                 ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
 
+            // Equation 4.3.5-11
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
+
             /*
              * Volatilization
              */
@@ -928,7 +934,7 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 4.3.3-1
+                // Equation 4.3.5-1
                 dailyEmissions.FractionOfManureVolatilized = this.CalculateFractionOfManureVolatilized(
                     ammoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
@@ -952,17 +958,24 @@ namespace H.Core.Services.Animals
              * Leaching
              */
 
-            // Equation 4.3.4-1
+            // Equation 4.3.6-1
             dailyEmissions.ManureNitrogenLeachingRate = base.CalculateManureLeachingNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                 emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching, 
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            // Equation 4.3.4-2
+            // Equation 4.3.6-2
             dailyEmissions.ManureN2ONLeachingEmission = base.CalculateManureLeachingNitrogenEmission(
                 leachingNitrogenEmissionRate: dailyEmissions.ManureNitrogenLeachingRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.3.6-3
+            dailyEmissions.ManureNitrateLeachingEmission = base.CalculateNitrateLeaching(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
+                emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
         }
 
         /// <summary>

@@ -196,7 +196,7 @@ namespace H.Core.Calculators.Shelterbelt
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    biomasCarbonPerKilometerMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                    biomasCarbonPerKilometerMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         hardinessZone: trannumData.HardinessZone,
                         percentMortality: trannumData.PercentMortality,
@@ -703,7 +703,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                deadOrganicMatterMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                deadOrganicMatterMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,
@@ -740,7 +740,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                totalEcosystemCarbonMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                totalEcosystemCarbonMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,
@@ -778,7 +778,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                totalLivingBiomassMegagrams = ShelterbeltHardinessZoneLookupProvider.GetLookupValue(
+                totalLivingBiomassMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,

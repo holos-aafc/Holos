@@ -12,26 +12,26 @@ namespace H.Core.Providers.Shelterbelt
     /// <summary>
     /// Allows for the lookup of total ecosystem carbon, living biomass carbon, and dead organic matter carbon values by hardiness zone.
     /// </summary>
-    public static class ShelterbeltHardinessZoneLookupProvider
+    public static class Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider
     {
-        private static List<ShelterbeltHardinessZoneLookupData> _table;
+        private static List<Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data> _table;
 
-        static ShelterbeltHardinessZoneLookupProvider()
+        static Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider()
         {
             _table = CacheTable();
         }
       
-        private static List<ShelterbeltHardinessZoneLookupData> CacheTable()
+        private static List<Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data> CacheTable()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var filename = CsvResourceNames.ShelterbeltHardinessZoneLookup;
             var filelines = CsvResourceReader.GetFileLines(filename);
-            var result = new List<ShelterbeltHardinessZoneLookupData>();
+            var result = new List<Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data>();
             TreeSpeciesStringConverter speciesConverter = new TreeSpeciesStringConverter();
             HardinessZoneStringConverter hardinessConverter = new HardinessZoneStringConverter();
             foreach (var line in filelines.Skip(1))
             {
-                var entry = new ShelterbeltHardinessZoneLookupData();
+                var entry = new Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data();
                 entry.HardinessZone = hardinessConverter.Convert(line[0]);
                 entry.TreeSpecies = speciesConverter.Convert(line[1]);
                 entry.PercentMortality = double.Parse(line[2], cultureInfo);
@@ -45,7 +45,7 @@ namespace H.Core.Providers.Shelterbelt
              return result;
         }
 
-        public static List<ShelterbeltHardinessZoneLookupData> GetShelterbeltHardinessZoneLookup()
+        public static List<Table_15_Shelterbelt_Hardiness_Zone_Lookup_Data> GetShelterbeltHardinessZoneLookup()
         {
             return _table;
         }

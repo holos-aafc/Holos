@@ -1228,8 +1228,7 @@ namespace H.Core.Models.LandManagement.Fields
 
             foreach (var manureApplication in manureApplicationViewItems)
             {
-                // Value will be a percentage so divide to use fraction
-                var carbonFraction = manureApplication.DefaultManureCompositionData.CarbonFraction / 100;
+                var carbonFraction = manureApplication.DefaultManureCompositionData.CarbonContent;
                 var volumeOfManure = manureApplication.AmountOfManureAppliedPerHectare;
                 var area = this.Area;
 
