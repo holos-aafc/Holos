@@ -126,9 +126,6 @@ namespace H.Core.Services
              */
             fieldSystemComponent.IsInitialized = true;
 
-            // When comparing farms, these two values have to be the same otherwise details stage state items won't match up to an existing field component
-            fieldSystemComponent.Guid = component.Guid;
-
             return fieldSystemComponent;
         }
 
