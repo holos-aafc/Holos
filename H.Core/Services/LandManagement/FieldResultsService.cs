@@ -42,6 +42,13 @@ namespace H.Core.Services.LandManagement
 
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
+        private readonly BeefCattleResultsService _beefCattleResultsService = new BeefCattleResultsService();
+        private readonly DairyCattleResultsService _dairyCattleResultsService = new DairyCattleResultsService();
+        private readonly SwineResultsService _swineResultsService = new SwineResultsService();
+        private readonly PoultryResultsService _poultryResultsService = new PoultryResultsService();
+        private readonly SheepResultsService _sheepResultsService = new SheepResultsService();
+        private readonly OtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
+
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
         private readonly SoilEmissionsCalculator _soilEmissionsCalculator = new SoilEmissionsCalculator();
         private readonly IICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();

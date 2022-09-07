@@ -3319,6 +3319,9 @@
   <data name="LabelRumenUndegradableProtein" xml:space="preserve">
     <value>Rumen Undegradable Protein</value>
   </data>
+  <data name="LabelRunInPeriod" xml:space="preserve">
+    <value>Run in period</value>
+  </data>
   <data name="LabelSaturatedFattyAcid" xml:space="preserve">
     <value>acide gras saturé</value>
   </data>

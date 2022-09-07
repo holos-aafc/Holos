@@ -313,6 +313,21 @@ namespace H.Core.Models.LandManagement.Fields
             return mostRecentViewItem;
         }
 
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var viewItem in this.CropViewItems)
+            {
+                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems.Where(x => x.AnimalType.GetCategory() == animalType.GetCategory()))
+                {
+                    result.Add(manureApplicationViewItem);
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Returns the size of first rotation for a field system component. If there are any historical components associated with this component,
         /// the number of crops in the earliest (first) historical system will be returned. If there are no historical components, then the number

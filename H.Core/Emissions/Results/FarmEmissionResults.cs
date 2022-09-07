@@ -159,13 +159,6 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        /// <summary>
-        /// Equation 4.5.2-3
-        /// 
-        /// Total N available for land application considers organic N and TAN as an input and the losses due to mineralization during NH3 emission and N loss as direct N2O.
-        /// 
-        /// (kg N)
-        /// </summary>
         public double TotalOrganicNitrogenAvailableForLandApplication
         {
             get
@@ -695,6 +688,24 @@ namespace H.Core.Emissions.Results
             }
 
             return tank;
+        }
+
+        public List<GroupEmissionsByDay> GetDailyEmissions(ComponentCategory componentCategory)
+        {
+            var result = new List<GroupEmissionsByDay>();
+
+            foreach (var componentResults in this.AnimalComponentEmissionsResults.Where(x => x.Component.ComponentCategory == componentCategory))
+            {
+                foreach (var groupResults in componentResults.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    foreach (var groupEmissionsByMonth in groupResults.GroupEmissionsByMonths)
+                    {
+                        result.AddRange(groupEmissionsByMonth.DailyEmissions);
+                    }
+                }
+            }
+
+            return result;
         }
 
         public override string ToString()

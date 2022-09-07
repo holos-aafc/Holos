@@ -677,7 +677,22 @@ namespace H.Core.Emissions.Results
 
         #endregion
 
-        #region Methods        
+        #region Methods
+
+        public List<GroupEmissionsByDay> GetDailyEmissions()
+        {
+            var result = new List<GroupEmissionsByDay>();
+
+            foreach (var emissionResultsForAnimalComponent in EmissionResultsForAllAnimalGroupsInComponent)
+            {
+                foreach (var groupEmissionsByMonth in emissionResultsForAnimalComponent.GroupEmissionsByMonths)
+                {
+                    result.AddRange(groupEmissionsByMonth.DailyEmissions);
+                }
+            }
+
+            return result;
+        }
 
         #endregion
     }

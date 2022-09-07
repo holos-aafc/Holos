@@ -1,6 +1,7 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Tools;
 using System.Diagnostics;
+using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
@@ -109,6 +110,18 @@ namespace H.Core.Providers.Animals
                 Trace.TraceError($"{nameof(Table_46_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_46_Beef_Dairy_Default_Emission_Factors_Provider.GetByManureStorageType)}" +
                                  $" unable to get data for storage type: {storageType}.");
                 return 0;
+            }
+        }
+
+        public double GetEmissionFactorForLandAppliedManure(ManureApplicationViewItem manureApplicationViewItem, CropViewItem viewItem)
+        {
+            if (manureApplicationViewItem.ManureStateType.IsLiquidManure())
+            {
+                return this.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationViewItem.ManureApplicationMethod);
+            }
+            else
+            {
+                return this.GetAmmoniaEmissionFactorForSolidAppliedManure(viewItem.TillageType);
             }
         }
 

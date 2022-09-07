@@ -668,6 +668,51 @@ namespace H.Core.Models
             }
         }
 
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                result.AddRange(fieldSystemComponent.GetManureApplicationViewItems(animalType));
+            }
+
+            return result;
+        }
+
+        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsByAnimalType(AnimalType animalType)
+        {
+            var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                {
+                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                    {
+                        if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
+                        {
+                            result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(cropViewItem, manureApplicationViewItem));
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(List<AnimalType> animalTypes)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var animalType in animalTypes)
+            {
+                result.AddRange(this.GetManureApplicationViewItems(animalType));
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Returns the total volume of all manure applications made on a particular date using a particular type of manure (beef, dairy, etc.)
         /// </summary>
@@ -684,7 +729,7 @@ namespace H.Core.Models
 
                 foreach (var manureApplicationViewItem in manureApplications)
                 {
-                    // get volume multiplied by field area
+                    // Get volume multiplied by field area
                     var amount = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
                     var totalVolumeOfApplication = amount * viewItem.Area;
 
@@ -887,8 +932,6 @@ namespace H.Core.Models
 
             return totalArea;
         }
-
-
 
         /// <summary>
         /// Returns all manure application made on this farm

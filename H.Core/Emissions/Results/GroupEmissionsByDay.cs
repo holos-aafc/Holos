@@ -176,6 +176,33 @@ namespace H.Core.Emissions.Results
 
         #region Properties
 
+        public double NumberOfAnimals { get; set; }
+
+        /// <summary>
+        /// Emission factor for volatilization
+        /// 
+        /// EF_volatilization
+        ///
+        /// [kg N2O-N (kg N)^-1]
+        /// </summary>
+        public double EmissionFactorForVolatilization { get; set; }
+
+        /// <summary>
+        /// Emission factor for leaching
+        /// 
+        /// EF_leach
+        ///
+        /// [kg N2O-N (kg N)^-1]
+        /// </summary>
+        public double EmissionFactorForLeaching { get; set; }
+
+        /// <summary>
+        /// Frac_leach
+        ///
+        /// (unitless)
+        /// </summary>
+        public double LeachingFraction { get; set; }
+
         public DateTime DateTime
         {
             get => _dateTime;
@@ -1169,18 +1196,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg NH3-N)
-        /// </summary>
-        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
-
-        /// <summary>
-        /// (kg N2O-N)
-        /// </summary>
-        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
-
-        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
-
-        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure
@@ -1742,6 +1757,22 @@ namespace H.Core.Emissions.Results
             get => _manureNitrateLeachingEmission;
             set => SetProperty(ref _manureNitrateLeachingEmission, value);
         }
+
+        public double LeachingEmissionsFromLandAppliedManure { get; set; }
+
+        public double TotalIndirectN2OFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
+
+        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
 
         #endregion
     }

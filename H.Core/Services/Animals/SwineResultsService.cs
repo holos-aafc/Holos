@@ -10,6 +10,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Swine;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
 #endregion
 
@@ -52,7 +53,10 @@ namespace H.Core.Services.Animals
             Farm farm)
         {
             var dailyEmissions = new GroupEmissionsByDay();
+
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
             // Swine piglets do not have a diet as they are still suckling. They still need to be assigned a SelectedDiet
             // otherwise any calls to SelectedDiet throws an exception as managementPeriod.SelectedDiet will be null.
@@ -390,12 +394,13 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            // Equation 4.5.2-6
-            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManureForSheepSwinePoultryAndOtherLivestock(
+            // Equation 4.5.2-13
+            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
                 nitrogenExcretion: dailyEmissions.AmountOfNitrogenExcreted,
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
-                indirectN2ONEmission: dailyEmissions.ManureIndirectN2ONEmission);
+                ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
+                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission);
 
             // Equation 4.5.3-1
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
@@ -405,16 +410,9 @@ namespace H.Core.Services.Animals
             // Equation 4.5.3-2
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
-                nitrogenFractionOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
+                nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            // Equation 4.6.1-4
-            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = base.CalculateTotalAmmoniaEmissionsFromLandAppliedManure(
-                farm: farm,
-                dateTime: dateTime,
-                dailyEmissions: dailyEmissions,
-                animalType: animalGroup.GroupType,
-                temperature: temperature,
-                managementPeriod: managementPeriod);
+            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             // Equation 5.2.5-8
             dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = 0; // No methodology for grazing swine (manure management types for swine do no include pasture)

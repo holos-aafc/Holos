@@ -10015,6 +10015,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run in period.
+        /// </summary>
+        public static string LabelRunInPeriod {
+            get {
+                return ResourceManager.GetString("LabelRunInPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturated Fatty Acid.
         /// </summary>
         public static string LabelSaturatedFattyAcid {

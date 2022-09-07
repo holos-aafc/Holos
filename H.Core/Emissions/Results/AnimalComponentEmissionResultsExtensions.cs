@@ -203,7 +203,7 @@ namespace H.Core.Emissions.Results
 
 
         /// <summary>
-        /// Equation 4.5.2-4
+        /// Equation 4.5.2-10
         /// 
         /// (kg N)
         /// </summary>

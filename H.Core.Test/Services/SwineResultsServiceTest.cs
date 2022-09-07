@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -317,6 +324,80 @@ namespace H.Core.Test.Services
                 numberOfDaysInMonth,
                 electricityConversion);
             Assert.AreEqual(numberOfPigs * numberOfDaysInMonth * (1.06 / 365) * electricityConversion, result, 2);
+        }
+
+        [TestMethod]
+        public void CalculateAmmoniaEmissionsFromLandAppliedManure()
+        {
+            var componentCategory = ComponentCategory.Swine;
+            var animalType = AnimalType.Swine;
+
+            var climateData = new ClimateData()
+            {
+                PrecipitationData = new PrecipitationData()
+                {
+                    January = 20,
+                },
+
+                TemperatureData = new TemperatureData()
+                {
+                    January = -10,
+                },
+
+                EvapotranspirationData = new EvapotranspirationData()
+                {
+                    January = 5,
+                }
+            };
+
+            var farm = new Farm()
+            {
+                ClimateData = climateData,
+            };
+
+            var date = DateTime.Now;
+
+            var manureApplicationViewItem = new ManureApplicationViewItem()
+            {
+                DateOfApplication = date,
+                ManureStateType = ManureStateType.Liquid,
+                ManureApplicationMethod = ManureApplicationTypes.ShallowInjection,
+                AmountOfManureAppliedPerHectare = 200,
+                AnimalType = animalType,
+            };
+
+            var cropViewItem = new CropViewItem()
+            {
+                Area = 5,
+            };
+
+            cropViewItem.ManureApplicationViewItems.Add(manureApplicationViewItem);
+
+            var field = new FieldSystemComponent();
+            field.CropViewItems.Add(cropViewItem);
+
+            farm.Components.Add(field);
+
+            var dailyEmissions = new List<GroupEmissionsByDay>()
+            {
+                new GroupEmissionsByDay()
+                {
+                    DateTime = date,
+                    TotalVolumeOfManureAvailableForLandApplication = 100,
+                    TanAvailableForLandApplication = 20,
+                    NitrogenAvailableForLandApplication = 10,
+                    LeachingFraction = 0.5,
+                    EmissionFactorForLeaching = 0.25,
+                },
+            };
+
+            _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
+                farm: farm,
+                dailyEmissions: dailyEmissions,
+                componentCategory,
+                animalType);
+
+            Assert.AreEqual(dailyEmissions[0].TotalIndirectN2OFromLandAppliedManure, 2.0104857142857142);
         }
 
         #endregion

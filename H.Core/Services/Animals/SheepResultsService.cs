@@ -56,6 +56,8 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
 
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+
             // Weaning lambs don't produce any emissions.
             if (managementPeriod.ProductionStage == ProductionStages.Weaning)
             {
@@ -430,12 +432,13 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            // Equation 4.5.2-6
-            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManureForSheepSwinePoultryAndOtherLivestock(
+            // Equation 4.5.2-13
+            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
                 nitrogenExcretion: dailyEmissions.AmountOfNitrogenExcreted,
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
-                indirectN2ONEmission: dailyEmissions.ManureIndirectN2ONEmission);
+                directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission, 
+                ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage, 
+                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission);
 
             // Equation 4.5.3-1
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
@@ -445,18 +448,11 @@ namespace H.Core.Services.Animals
             // Equation 4.5.3-2
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
-                nitrogenFractionOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
+                nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
 
-            // Equation 4.6.1-4
-            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = base.CalculateTotalAmmoniaEmissionsFromLandAppliedManure(
-                farm: farm,
-                dateTime: dateTime,
-                dailyEmissions: dailyEmissions,
-                animalType: animalGroup.GroupType,
-                temperature: temperature,
-                managementPeriod: managementPeriod);
+            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             // Equation 5.2.5-8
             dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = base.GetAmmoniaEmissionsFromGrazingSheepSwinePoultryAndOtherLiveStock(

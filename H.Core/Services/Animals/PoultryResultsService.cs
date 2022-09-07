@@ -16,8 +16,6 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        //Referenced in  Eqn. 3.5.3-4
-        private const double FractionLeaching = 0;
         private Table_44_Poultry_NExcretionRate_Parameter_Values_Provider _poultryNExcretionRateValuesProvider = new Table_44_Poultry_NExcretionRate_Parameter_Values_Provider();
         private readonly DefaultDailyTanExcretionRatesForPoultry _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
 
@@ -48,6 +46,8 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
             if (animalGroup.GroupType.IsNewlyHatchedEggs() || animalGroup.GroupType.IsEggs())
             {
@@ -356,98 +356,72 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication =
                 base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                     totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
-                    nitrogenFractionOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
-
-            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = this.CalculateAmmoniaEmissionsFromLandAppliedManure(
-                farm: farm,
-                dailyEmissions: dailyEmissions,
-                managementPeriod: managementPeriod,
-                dateTime: dateTime);
-
-            dailyEmissions.NitrogenEmissionsFromVolatilizedLandManureApplication = this.CalculateVolatilizationFromLandAppliedManure(
-                dailyEmissions: dailyEmissions,
-                managementPeriod: managementPeriod);
-
-            // Equation 4.6.3-4
-            var adjustedAmmoniacalNitrogenFromLandAppliedManure = dailyEmissions.AmmoniacalNitrogenFromLandAppliedManure - dailyEmissions.NitrogenEmissionsFromVolatilizedLandManureApplication;
-
-            // Equation 4.6.3-5
-            var adjustedAmmoniaEmissionsFromLandApplication = adjustedAmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
+                    nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             return dailyEmissions;
         }
 
-        public double CalculateVolatilizationFromLandAppliedManure(GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
+        public void CalculateAmmoniaEmissionsFromLandAppliedManure(
+            Farm farm,
+            List<GroupEmissionsByDay> dailyEmissions)
         {
-            // Equation 4.6.3-1
-            var volatilizationFractionFromLandApplication = dailyEmissions.AmmoniacalNitrogenFromLandAppliedManure / dailyEmissions.NitrogenAvailableForLandApplication;
-
-            // Equation 4.6.3-2
-            var volatilizationRateFromLandApplication = dailyEmissions.NitrogenAvailableForLandApplication * volatilizationFractionFromLandApplication * managementPeriod.ManureDetails.EmissionFactorVolatilization;
-
-            // Equation 4.6.3-3
-            var totalManureVolatilizationFromLandApplication = volatilizationRateFromLandApplication * managementPeriod.NumberOfAnimals;
-
-            return totalManureVolatilizationFromLandApplication;
-        }
-
-        /// <summary>
-        /// Calculate total ammonia emissions from land applied manure on a specified date
-        /// </summary>
-        public double CalculateAmmoniaEmissionsFromLandAppliedManure(
-            Farm farm, 
-            GroupEmissionsByDay dailyEmissions, 
-            ManagementPeriod managementPeriod,
-            DateTime dateTime)
-        {
-            var totalAmmoniacalNitrogenLost = 0d;
-
-            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            var indirectDto = base.GetIndirectInputFromLandApplicationDto(farm, dailyEmissions, AnimalType.Poultry);
+            foreach (var intersectingDate in indirectDto.IntersectingDates)
             {
-                var singleYearViewItem = fieldSystemComponent.GetSingleYearViewItem();
-                if (singleYearViewItem == null)
+                var emissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
+                var totalManureProducedOnDate = emissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+
+                var tuplesOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date)).ToList();
+                var requstedVolume = tuplesOnDate.Sum(x => (x.Item2.AmountOfManureAppliedPerHectare * x.Item1.Area));
+                var fractionOfManureUsed = requstedVolume / totalManureProducedOnDate;
+
+                // Can't apply more manure than was created by the animals on this date
+                if (fractionOfManureUsed > 1)
                 {
-                    continue;
+                    // Use 100% in this case
+                    fractionOfManureUsed = 1.0;
                 }
 
-                var manureApplications = singleYearViewItem.GetManureApplicationsFromLivestock(
-                    animalType: managementPeriod.AnimalType,
-                    dateOfManureApplication: dateTime);
-
-                var totalManureAppliedOnDate = manureApplications.Sum(manureApplication => manureApplication.AmountOfManureAppliedPerHectare);
-                var fractionOfManureUsed = totalManureAppliedOnDate / dailyEmissions.TotalVolumeOfManureAvailableForLandApplication;
-
-                var emissionFactor = 0d;
-                var t = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
-                if (t >= 15)
+                var emissionFraction = 0d;
+                var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(intersectingDate.Month);
+                if (temperature >= 15)
                 {
-                    emissionFactor = 0.85;
+                    emissionFraction = 0.85;
                 }
-                else if (t >= 10 && t < 15)
+                else if (temperature >= 10 && temperature < 15)
                 {
-                    emissionFactor = 0.73;
+                    emissionFraction = 0.73;
                 }
-                else if (t >= 5 && t < 10)
+                else if (temperature >= 5 && temperature < 10)
                 {
-                    emissionFactor = 0.35;
+                    emissionFraction = 0.35;
                 }
                 else
                 {
-                    emissionFactor = 0.25;
+                    emissionFraction = 0.25;
                 }
 
-                var lossFromLandApplication = fractionOfManureUsed * dailyEmissions.TanAvailableForLandApplication * emissionFactor;
+                var totalTan = emissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
 
-                totalAmmoniacalNitrogenLost += lossFromLandApplication;
+                // Equation 4.6.2-5
+                var ammoniacalLossFromLandApplication = fractionOfManureUsed * emissionFraction * totalTan;
+
+                // Equation 4.6.2-6
+                var ammoniaLossFromLandApplication = ammoniacalLossFromLandApplication * CoreConstants.ConvertNH3NToNH3;
+
+                var totalNitrogenAvailableForLandApplication = emissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
+
+                // Equation 4.6.3-1
+                var volatilizationFraction = ammoniaLossFromLandApplication / totalNitrogenAvailableForLandApplication;
+
+                var averageEmissionFactorForVolatilization = emissionsOnDate.Average(x => x.EmissionFactorForVolatilization);
+
+                this.AssignIndirectN2OFromLandAppliedManure(
+                    volatilizationFraction,
+                    averageEmissionFactorForVolatilization,
+                    ammoniacalLossFromLandApplication,
+                    emissionsOnDate);
             }
-
-            // Equation 4.6.2-5
-            dailyEmissions.AmmoniacalNitrogenFromLandAppliedManure = totalAmmoniacalNitrogenLost;
-
-            // Equation 4.6.2-6
-            var ammoniaEmissionsFromLandAppliedManure = dailyEmissions.AmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
-
-            return ammoniaEmissionsFromLandAppliedManure;
         }
 
         protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)

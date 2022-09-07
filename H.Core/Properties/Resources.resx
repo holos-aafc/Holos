@@ -3119,6 +3119,9 @@
   <data name="LabelEmissionFactorForLeachingAndRunoff" xml:space="preserve">
     <value>Emission factor for leaching and runoff</value>
   </data>
+  <data name="LabelRunInPeriod" xml:space="preserve">
+    <value>Run in period</value>
+  </data>
   <data name="Bushel" xml:space="preserve">
     <value>bu</value>
   </data>

@@ -250,7 +250,8 @@ namespace H.Core.Models
             this.SolidManureBeefConcentrationEnergy = 10;
             this.SolidManureSheepConcentrationEnergy = 10;
 
-            this.DefaultRunInPeriod = 5;
+            // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
+            this.DefaultRunInPeriod = 15;
 
             this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
 
@@ -289,7 +290,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// The period of time in which climate normals are caclulated from a set of daily climate data values
+        /// The period of time in which climate normals are calculated from a set of daily climate data values
         /// </summary>
         public TimeFrame TimeFrame
         {

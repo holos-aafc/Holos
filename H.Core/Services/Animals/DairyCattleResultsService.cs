@@ -80,6 +80,8 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+
             /*
              * Enteric methane (CH4)
              */
@@ -308,16 +310,9 @@ namespace H.Core.Services.Animals
             // Equation 4.5.3-2
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
-                nitrogenFractionOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
+                nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            // Equation 4.6.1-4
-            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = base.CalculateTotalAmmoniaEmissionsFromLandAppliedManure(
-                farm: farm,
-                dateTime: dateTime,
-                dailyEmissions: dailyEmissions,
-                animalType: animalGroup.GroupType,
-                temperature: temperature,
-                managementPeriod: managementPeriod);
+            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,
@@ -338,6 +333,8 @@ namespace H.Core.Services.Animals
             var dailyEmissions = new GroupEmissionsByDay();
 
             dailyEmissions.DateTime = dateTime;
+
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
 
@@ -746,16 +743,9 @@ namespace H.Core.Services.Animals
             // Equation 4.5.3-2
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
-                nitrogenFractionOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
+                nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            // Equation 4.6.1-4
-            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = base.CalculateTotalAmmoniaEmissionsFromLandAppliedManure(
-                farm: farm,
-                dateTime: dateTime,
-                dailyEmissions: dailyEmissions,
-                animalType: animalGroup.GroupType,
-                temperature: temperature, 
-                managementPeriod: managementPeriod);
+            dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             base.GetEmissionsFromBeefAndDairyGrazingAnimals(
                 managementPeriod: managementPeriod,

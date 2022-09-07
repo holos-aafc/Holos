@@ -1,14 +1,21 @@
 ﻿#region Imports
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -546,13 +553,81 @@ namespace H.Core.Test.Services
             Assert.AreEqual(310, result);
         }
 
-        [TestMethod]
-        public void CalculateRequiredTdnSoThatMaxDmiIsNotExceeded()
-        {
-
-        }
-
         #endregion
+
+        [TestMethod]
+        public void CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle()
+        {
+            var climateData = new ClimateData()
+            {
+                PrecipitationData = new PrecipitationData()
+                {
+                    January = 20,
+                },
+
+                TemperatureData = new TemperatureData()
+                {
+                    January = -10,
+                },
+
+                EvapotranspirationData = new EvapotranspirationData()
+                {
+                    January = 5,
+                }
+            };
+
+            var farm = new Farm()
+            {
+                ClimateData = climateData,
+            };
+
+            var componentCategory = ComponentCategory.BeefProduction;
+            var animalType = AnimalType.Beef;
+
+            var date = DateTime.Now;
+
+            var manureApplicationViewItem = new ManureApplicationViewItem()
+            {
+                DateOfApplication = date,
+                ManureStateType = ManureStateType.Liquid,
+                ManureApplicationMethod = ManureApplicationTypes.ShallowInjection,
+                AmountOfManureAppliedPerHectare = 200,
+                AnimalType = AnimalType.Beef,
+            };
+
+            var cropViewItem = new CropViewItem()
+            {
+                Area = 5,
+            };
+
+            cropViewItem.ManureApplicationViewItems.Add(manureApplicationViewItem);
+
+            var field = new FieldSystemComponent();
+            field.CropViewItems.Add(cropViewItem);
+
+            farm.Components.Add(field);
+
+            var dailyEmissions = new List<GroupEmissionsByDay>()
+            {
+                new GroupEmissionsByDay()
+                {
+                    DateTime = date,
+                    TotalVolumeOfManureAvailableForLandApplication = 100,
+                    TanAvailableForLandApplication = 20,
+                    NitrogenAvailableForLandApplication = 10,
+                    LeachingFraction = 0.5,
+                    EmissionFactorForLeaching = 0.25,
+                },
+            };
+
+            _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
+                farm: farm,
+                dailyEmissions: dailyEmissions,
+                componentCategory: componentCategory,
+                animalType: animalType);
+
+            Assert.AreEqual(dailyEmissions[0].TotalIndirectN2OFromLandAppliedManure, 1.9734377142857142);
+        }
 
         #endregion
     }

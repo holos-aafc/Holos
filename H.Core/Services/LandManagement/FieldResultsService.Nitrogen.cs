@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -14,46 +15,25 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-
-        public double CalculateAmmoniaEmissionsFromLandAppliedManure(
-            CropViewItem cropViewItem,
-            Farm farm,
-            AnimalComponentEmissionsResults animalComponentEmissionsResults)
+        public void CalculateIndirectEmissionResultsFromLandAppliedManure(FarmEmissionResults farmEmissionResults)
         {
-            var result = 0.0;
+            var beefCattleEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.BeefProduction);
+            _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farmEmissionResults.Farm, beefCattleEmissions, ComponentCategory.BeefProduction, AnimalType.Beef);
 
-            foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
-            {
-                var dateOfManureApplication = manureApplicationViewItem.DateOfApplication;
-                var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateOfManureApplication.Month);
+            var dairyCattleEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Dairy);
+            _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farmEmissionResults.Farm, dairyCattleEmissions, ComponentCategory.Dairy, AnimalType.Dairy);
 
-                //// Equation 4.6.1-1
-                //var ambientTemperatureAdjustmentForLandApplication = this.CalculateAmbientTemperatureAdjustmentForLandApplication(
-                //    temperature: temperature);
+            var poultryEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Poultry);
+            _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farmEmissionResults.Farm, poultryEmissions);
 
-                //// Emission factor will depend on the type of manure being applied (solid/liquid)
-                //var emissionFactorForApplicationType = 0.0;
-                //if (manureApplicationViewItem.ManureStateType.IsLiquidManure())
-                //{
-                //    emissionFactorForApplicationType = _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
-                //        manureApplicationType: manureApplicationViewItem.ManureApplicationMethod);
-                //}
-                //else
-                //{
-                //    emissionFactorForApplicationType = _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
-                //        tillageType: cropViewItem.TillageType);
-                //}
+            var swineEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Swine);
+            _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
 
-                //// Equation 4.6.1-2
-                //var adjustedEmissionFactor = this.CalculateAdjustedAmmoniaEmissionFactor(
-                //    emissionFactorForLandApplication: emissionFactorForApplicationType,
-                //    ambientTemperatureAdjustment: ambientTemperatureAdjustmentForLandApplication);
+            var sheepEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Sheep);
+            _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
 
-                //// Check how much manure was produced on the date of application
-
-            }
-
-            return result;
+            var otherLivestockEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.OtherLivestock);
+            _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
         }
 
         /// <summary>
@@ -86,8 +66,8 @@ namespace H.Core.Services.LandManagement
         /// Determines the amount of N fertilizer required for the specified crop type and yield
         /// </summary>
         public double CalculateRequiredNitrogenFertilizer(
-            Farm farm, 
-            CropViewItem viewItem, 
+            Farm farm,
+            CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var defaults = farm.Defaults;
@@ -124,7 +104,7 @@ namespace H.Core.Services.LandManagement
                 fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
                 soilTestN: viewItem.SoilTestNitrogen,
                 isNitrogenFixingCrop: isLeguminousCrop,
-                nitrogenFixationAmount: viewItem.NitrogenFixation, 
+                nitrogenFixationAmount: viewItem.NitrogenFixation,
                 atmosphericNitrogenDeposition: viewItem.NitrogenDepositionAmount);
 
             return syntheticFertilizerApplied;
@@ -138,13 +118,13 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         /// <returns>The amount of product required (kg product ha^-1)</returns>
         public double CalculateAmountOfProductRequired(
-            Farm farm, 
-            CropViewItem viewItem, 
+            Farm farm,
+            CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var requiredNitrogen = CalculateRequiredNitrogenFertilizer(
-                farm: farm, 
-                viewItem: viewItem, 
+                farm: farm,
+                viewItem: viewItem,
                 fertilizerApplicationViewItem: fertilizerApplicationViewItem);
 
             // If blend is custom, default N value will be zero and so we can't calculate the amount of product required
@@ -154,7 +134,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // Need to convert to amount of fertilizer product from required nitrogen
-            var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen/100));
+            var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100));
 
             return requiredAmountOfProduct;
         }
@@ -237,8 +217,8 @@ namespace H.Core.Services.LandManagement
         /// Equation 4.6.1-4
         /// </summary>
         public double CalculateTotalNitrogenFromLandManureRemaining(
-            double totalManureAvailableForLandApplication, 
-            double totalManureAlreadyAppliedToFields, 
+            double totalManureAvailableForLandApplication,
+            double totalManureAlreadyAppliedToFields,
             double totalManureExported)
         {
             return totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
@@ -248,7 +228,7 @@ namespace H.Core.Services.LandManagement
         /// Equation 4.6.1-5
         /// </summary>
         public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
-            double weightedEmissionFactor, 
+            double weightedEmissionFactor,
             double totalNitrogenFromLandManureRemaining)
         {
 
@@ -260,7 +240,7 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Equation 4.6.1-6
         /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults, 
+        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults,
             double totalExportedManure)
         {
             var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
@@ -303,7 +283,7 @@ namespace H.Core.Services.LandManagement
                 totalManureAlreadyAppliedToFields: totalManureNitrogenAppliedToFields,
                 totalManureExported: 0);
 
-            // Equation 
+            // Equation 4.6.1-5
             var directEmissionsFromManureApplication = this.CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
                 weightedEmissionFactor: weightedEmissionFactor,
                 totalNitrogenFromLandManureRemaining: remainingManure);
@@ -441,7 +421,7 @@ namespace H.Core.Services.LandManagement
         }
 
         public SoilN2OEmissionsResults CalculateCropN2OEmissions(
-            FieldSystemComponent fieldSystemComponent, 
+            FieldSystemComponent fieldSystemComponent,
             Farm farm)
         {
             var result = new SoilN2OEmissionsResults()
@@ -533,16 +513,16 @@ namespace H.Core.Services.LandManagement
 
             // Equation 2.6.6-2
             var aboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(
-                previousYearViewItem: null, 
-                currentYearViewItem: viewItem, 
+                previousYearViewItem: null,
+                currentYearViewItem: viewItem,
                 farm: farm);
 
             result.AboveGroundResidueNitrogen = aboveGroundResidueNitrogen;
 
             // Equation 2.6.6-5
             var belowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(
-                previousYearViewItem: null, 
-                currentYearViewItem: viewItem, 
+                previousYearViewItem: null,
+                currentYearViewItem: viewItem,
                 farm: farm);
 
             result.BelowGroundResidueNitrogen = belowGroundResidueNitrogen;
@@ -564,7 +544,7 @@ namespace H.Core.Services.LandManagement
 
             // Equation 2.5.3-1
             var fractionLeach = _singleYearNitrogenEmissionsCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
-                growingSeasonPrecipitation: farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation, 
+                growingSeasonPrecipitation: farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
                 growingSeasonEvapotranspiration: farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
 
             // Equation 2.5.3-2
@@ -587,8 +567,8 @@ namespace H.Core.Services.LandManagement
             // Equation 2.5.4-1
             var directEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalDirectEmissionsForCrop(
                 emissionsFromSyntheticFertilizer: emissionsFromSyntheticFertilizer,
-                emissionsFromResidues: emissionsFromResidues, 
-                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer, 
+                emissionsFromResidues: emissionsFromResidues,
+                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer,
                 emissionsFromLandAppliedManure: result.FieldSpecificDirectEmissionsFromManureApplication);
 
             // Equation 2.5.4-4
@@ -622,8 +602,8 @@ namespace H.Core.Services.LandManagement
         ///
         /// <para>Implements: Table 17. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
         /// </summary>
-        public double  CalculateFractionOfNitrogenLostByVolatilization(
-            CropViewItem cropViewItem, 
+        public double CalculateFractionOfNitrogenLostByVolatilization(
+            CropViewItem cropViewItem,
             Farm farm)
         {
             var cropTypeFactor = 0.0;
@@ -1743,7 +1723,7 @@ namespace H.Core.Services.LandManagement
                 region: farm.DefaultSoilData.Province.GetRegion());
 
             return baseEcodistrictFactor;
-        } 
+        }
 
         #endregion
     }

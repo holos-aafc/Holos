@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -430,6 +431,18 @@ namespace H.Core.Services.LandManagement
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
+                foreach (var runInPeriodItem in fieldSystemComponent.RunInPeriodItems)
+                {
+                    if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
+                    {
+                        _tier2SoilCarbonCalculator.CalculateInputs(runInPeriodItem);
+                    }
+                    else
+                    {
+                        _icbmSoilCarbonCalculator.SetCarbonInputs(null, runInPeriodItem, null, farm);
+                    }
+                }
+
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,
                     viewItemsByField: viewItemsForField,

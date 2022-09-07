@@ -153,12 +153,12 @@ namespace H.Core.Providers.Climate
         }
 
         /// <summary>
-        /// Get a correct api url depending on the user's locale.  French users need to tweak the url from using ',' to '.' 
+        /// Get a correct api url depending on the user's locale. French users need to tweak the url from using ',' to '.' 
         /// in the coordinate strings to make NASA accept the GET request
         /// </summary>
         /// <param name="latitude">the farm latitude</param>
         /// <param name="longitude">the farm longitude</param>
-        /// <returns>a url with English number formating</returns>
+        /// <returns>a url with English number formatting</returns>
         public string GetCorrectApiUrl(double latitude, double longitude)
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
