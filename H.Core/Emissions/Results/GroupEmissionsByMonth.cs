@@ -1168,6 +1168,61 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalIndirectN2OFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalIndirectN2OFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double TotalAmmoniacalNitrogenFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniacalNitrogenFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double TotalAmmoniaFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniaFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalMonthlyLeachingEmissionsFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.N2ONLeachingEmissionsFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalMonthlyN2OLeachingEmissionsFromLandAppliedManureFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.N2OLeachingEmissionsFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
         /// (kg)
         /// </summary>
         public double MonthlyMilkProduction { get; set; }

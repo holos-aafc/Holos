@@ -1758,14 +1758,42 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _manureNitrateLeachingEmission, value);
         }
 
-        public double LeachingEmissionsFromLandAppliedManure { get; set; }
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double N2ONLeachingEmissionsFromLandAppliedManure { get; set; }
 
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double N2OLeachingEmissionsFromLandAppliedManure 
+        {
+            get
+            {
+                return this.N2ONLeachingEmissionsFromLandAppliedManure * CoreConstants.ConvertN2ONToN2O;
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
         public double TotalIndirectN2OFromLandAppliedManure { get; set; }
 
         /// <summary>
         /// (kg NH3-N)
         /// </summary>
         public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double AmmoniaFromLandAppliedManure
+        {
+            get
+            {
+                return this.AmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
+            }
+        }
 
         /// <summary>
         /// (kg N2O-N)

@@ -2090,7 +2090,7 @@ namespace H.Core.Services.Animals
         #endregion
 
         /// <summary>
-        /// -- there will be one of these values for each day, in the view model, get the largest value and show this to user so that the optimal TDN value is for all days over management period...
+        /// There will be one of these values for each day, in the view model, get the largest value and show this to user so that the optimal TDN value is for all days over management period...
         /// </summary>
         public double CalculateRequiredTdnSoThatMaxDmiIsNotExceeded(
             double netEnergyForMaintenance,
@@ -2225,6 +2225,8 @@ namespace H.Core.Services.Animals
             // Split emissions evenly over the daily emissions
             foreach (var groupEmissionsByDay in allDailyEmissionsOnSameDate)
             {
+                groupEmissionsByDay.N2ONLeachingEmissionsFromLandAppliedManure = n2ONEmissionsFromLeachingAndRunoff / (double) allDailyEmissionsOnSameDate.Count;
+                groupEmissionsByDay.AmmoniacalNitrogenFromLandAppliedManure = ammoniacalLossFromLandApplication / (double) allDailyEmissionsOnSameDate.Count;
                 groupEmissionsByDay.TotalIndirectN2OFromLandAppliedManure = totalIndirectN2O / (double) allDailyEmissionsOnSameDate.Count;
             }
         }
