@@ -1,5 +1,5 @@
 ﻿Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
-Beef cattle,Pasture,50 (1),0.625 (1),??,0.159 (1),??
+Beef cattle,Pasture,86 (1),0.290 (1),6.180 (1),0.047 (1),21.02
 Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
 Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
 Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
@@ -48,7 +48,7 @@ Swine,Liquid No Crust,95.16,0.325,1.29,0.118,3.25
 ,,,,,,
 "Data on manure composition were organized from multiple publications based on Canadian studies (extension documents, reports, journal publications). Where data from Canada were not available, data were sourced from outside Canada – any non-Canadian data used is indicated in the relevant notes below.",,,,,,
 N concentration values for all liquid manures from: Agricultural Operation Practices Act (2001) as cited in Ormann 2005 & Tri-Provincial Manure Application and Use Guidelines 2004. All values for solid manures from Agricultural Operation Practices Act (2001) as cited in Ormann 2005.,,,,,,
-"1 Moisture content  derived from Government of Alberta (2021), Table 2 for beef cows with calves and cows/bulls; the median moisture content (%) value was used; Nfraction is the average of values derived from ECCC (2021) and Hofmann and Beaulieu (2006); Pfraction is the average of values derived from Hofmann and Beaulieu (2006);",,,,,,
+"1 Moisture content and N, C and P content for beef cattle manure deposited on pasture were derived from unpublished data (provided by X. Hao, AAFC).",,,,,,
 "2 Default values for moisture content and N, C and P fractions for deep bedding manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1994); Hao et al. (2001,2004,2009,2014); Whalen et al. (2002); Miller et al. (2003,2004,2009); Helgason et al. (2005); Larney and Olson (2006); Larney et al. (2006);Zvomuya et al. (2006);  Stefankiw (2012). These values were also used for deep bedding for dairy cattle.",,,,,,
 "3 Default values for moisture content and C, N and P fractions for solid storage (stockpiled) manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1993); Olson and Papworth (2002); Sommer et al. (2004); Loro (2005); Pattey et al. (2005); Larney et al. (2006); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a,b); Government of Manitoba (2009); Brown (2013).",,,,,,
 "4 Default values for moisture content and C, N and P fractions for composted passive manure for beef cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1989,1993,1994); Pattey et al. (2005); Larney and Olson (2006); Larney et al. (2006).",,,,,,
