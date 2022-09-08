@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using H.Core.Emissions.Results;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 
@@ -8,12 +9,12 @@ namespace H.Core.Services.Animals
 {
     public class AnimalResultsService
     {
-        private readonly IOtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
-        private readonly ISwineResultsService _swineResultsService = new SwineResultsService();
-        private readonly IPoultryResultsService _poultryResultsService = new PoultryResultsService();
-        private readonly IBeefCattleResultsService _beefCattleResultsService = new BeefCattleResultsService();
-        private readonly IDairyResultsService _dairyCattleResultsService = new DairyCattleResultsService();
-        private readonly ISheepResultsService _sheepResultsService = new SheepResultsService();
+        private readonly OtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
+        private readonly SwineResultsService _swineResultsService = new SwineResultsService();
+        private readonly PoultryResultsService _poultryResultsService = new PoultryResultsService();
+        private readonly BeefCattleResultsService _beefCattleResultsService = new BeefCattleResultsService();
+        private readonly DairyCattleResultsService _dairyCattleResultsService = new DairyCattleResultsService();
+        private readonly SheepResultsService _sheepResultsService = new SheepResultsService();
 
         public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm)
         {

@@ -55,7 +55,7 @@ namespace H.Core.Services.LandManagement
         Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
         FieldComponentEmissionResults CalculateResultsForFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm);
-        CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem);
+        CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         List<EstimatesOfProductionResultsViewItem> CalculateHarvestForField(FieldSystemComponent fieldSystemComponent, Farm farm);
 
         /// <summary>
@@ -87,5 +87,6 @@ namespace H.Core.Services.LandManagement
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
         void AssignHarvestMethod(CropViewItem viewItem, Farm farm);
+        void CalculateIndirectEmissionResultsFromLandAppliedManure(FarmEmissionResults farmEmissionResults);
     }
 }

@@ -88,7 +88,9 @@ namespace H.CLI.Processors
 
             // This method is called when encountering a field from a single-year mode farm so there will only be one view item. Create a list of containing only one item and 
             // call the overload of this method
-            var detailViewItem = _fieldResultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(fieldSystemComponent.GetSingleYearViewItem());
+            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+
+            var detailViewItem = _fieldResultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(viewItem, viewItem.Year);
 
             detailsScreenViewCropViewItems.Add(detailViewItem);
 
