@@ -37,6 +37,7 @@ namespace H.Core.Models
         private string _kilogramsN20PerYearString;
         private string _kilogramsMethanePerHeadPerDayString;
         private string _kilogramsN20NString;
+        private string _kilogramsN20String;
         private string _kilogramsN2OPerHectareString;
         private string _kilogramsNONPerHectareString;
         private string _kilogramsNO3NPerHectareString;
@@ -723,6 +724,12 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsNPerKilogramNitrogenString, value);
         }
 
+        public string KilogramsN20String
+        {
+            get => _kilogramsN20String;
+            set => SetProperty(ref _kilogramsN20String, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -840,6 +847,7 @@ namespace H.Core.Models
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.KilogramsCarbonPerTreeType);
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
+                KilogramsN20String = WrapString(Resources.KilogramsN2O);
             }
             else
             {
@@ -944,6 +952,7 @@ namespace H.Core.Models
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.PoundsCarbonPerTreeType);
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
+                KilogramsN20String = WrapString(Resources.PoundsN2O);
             }
         }
 

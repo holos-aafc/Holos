@@ -837,7 +837,7 @@ namespace H.Core.Test.Calculators.Carbon
             };
 
             _sut.CalculateInputs(
-                viewItem: viewItem);
+                viewItem: viewItem, farm: new Farm());
 
             Assert.AreEqual(4751, viewItem.AboveGroundCarbonInput, 1);
             Assert.AreEqual(997, viewItem.BelowGroundCarbonInput, 1);
@@ -875,7 +875,7 @@ namespace H.Core.Test.Calculators.Carbon
 
             foreach (var viewItem in viewItems)
             {
-                _sut.CalculateInputs(viewItem);
+                _sut.CalculateInputs(viewItem, new Farm());
             }
 
             fieldSystemComponent.RunInPeriodItems.Add(new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 });

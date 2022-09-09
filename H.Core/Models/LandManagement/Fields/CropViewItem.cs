@@ -130,6 +130,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _tillageFactor;
         private double _managementFactor;
         private double _manureCarbonInput;
+        private double _manureCarbonPerHectare;
         private double _ligninContent;
 
         private string _timePeriodCategoryString;
@@ -983,7 +984,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double ManureCarbonInputsPerHectare
         {
-            get { return this.GetTotalCarbonFromAppliedManure() / this.Area; }
+            get { return _manureCarbonPerHectare; }
+            set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
         public double TillageFactor
@@ -1112,14 +1114,6 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Public Methods
-
-        /// <summary>
-        /// Gets total carbon inputs from residues, manure, etc.
-        /// </summary>
-        public double GetTotalCarbonInputs()
-        {
-            return this.AboveGroundCarbonInput + this.BelowGroundCarbonInput + this.ManureCarbonInput;
-        }
 
         public void CalculateDryYield()
         {

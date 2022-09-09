@@ -10,10 +10,11 @@ using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
+using Telerik.Windows.Documents.Fixed.Model.Objects;
 
 namespace H.Core.Calculators.Carbon
 {
-    public class IPCCTier2SoilCarbonCalculator
+    public class IPCCTier2SoilCarbonCalculator : CarbonCalculatorBase
     {
         #region Fields
 
@@ -83,7 +84,7 @@ namespace H.Core.Calculators.Carbon
             return slope.SlopeValue > 0;
         }
 
-        public void CalculateInputs(CropViewItem viewItem)
+        public void CalculateInputs(CropViewItem viewItem, Farm farm)
         {
             var cropData = _slopeProvider.GetDataByCropType(viewItem.CropType);
 
@@ -136,6 +137,8 @@ namespace H.Core.Calculators.Carbon
 
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = totalBelowGroundCarbonInputsForField / viewItem.Area;
+
+            viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
 
             // Equation 2.2.3-5
             viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare;  

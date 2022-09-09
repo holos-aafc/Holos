@@ -103,7 +103,7 @@ namespace H.Core.Services.LandManagement
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
-                        viewItem: currentYearViewItem);
+                        viewItem: currentYearViewItem, farm: farm);
                 }
                 else
                 {
@@ -132,7 +132,7 @@ namespace H.Core.Services.LandManagement
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
-                        viewItem: secondaryCrop);
+                        viewItem: secondaryCrop, farm: farm);
                 }
                 else
                 {
@@ -194,7 +194,7 @@ namespace H.Core.Services.LandManagement
 
             currentYearResults.YoungPoolManureCarbon = _icbmSoilCarbonCalculator.CalculateYoungPoolManureCarbonAtInterval(
                 youngPoolManureCarbonAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
-                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInput,
+                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInputsPerHectare,
                 youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                 climateParameter: climateParameterOrManagementFactor);
 
@@ -211,7 +211,7 @@ namespace H.Core.Services.LandManagement
                 climateParameter: climateParameterOrManagementFactor,
                 youngPoolManureAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
                 manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure,
-                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInput);
+                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInputsPerHectare);
 
             currentYearResults.SoilCarbon = _icbmSoilCarbonCalculator.CalculateSoilCarbonAtInterval(
                 youngPoolSoilCarbonAboveGroundAtInterval: currentYearResults.YoungPoolSoilCarbonAboveGround,
@@ -321,7 +321,7 @@ namespace H.Core.Services.LandManagement
                 // At this point, the detail view items have had their C inputs calculated
                 equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.AboveGroundCarbonInput);
                 equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.BelowGroundCarbonInput);
-                equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInput);
+                equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInputsPerHectare);
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
             }
@@ -331,7 +331,7 @@ namespace H.Core.Services.LandManagement
 
             result.AboveGroundCarbonInput = equilibriumAboveGroundInput;
             result.BelowGroundCarbonInput = equilibriumBelowGroundInput;
-            result.ManureCarbonInput = equilibriumManureInput;
+            result.ManureCarbonInputsPerHectare = equilibriumManureInput;
             result.ClimateParameter = equilibriumClimateParameter;
             result.ManagementFactor = equilibriumManagementFactor;
 
@@ -384,7 +384,7 @@ namespace H.Core.Services.LandManagement
             }
 
             result.YoungPoolManureCarbon = _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateManure(
-                averageManureCarbonInput: result.ManureCarbonInput,
+                averageManureCarbonInput: result.ManureCarbonInputsPerHectare,
                 youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                 climateParameter: climateOrManagementFactor);
 
@@ -401,7 +401,7 @@ namespace H.Core.Services.LandManagement
                     aboveGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonAboveGround,
                     belowGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonBelowGround,
                     manureYoungPoolSteadyState: result.YoungPoolSteadyStateManure,
-                    averageManureCarbonInputOfRotation: result.ManureCarbonInput,
+                    averageManureCarbonInputOfRotation: result.ManureCarbonInputsPerHectare,
                     manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure);
             }
             else
@@ -435,7 +435,7 @@ namespace H.Core.Services.LandManagement
                 {
                     if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
                     {
-                        _tier2SoilCarbonCalculator.CalculateInputs(runInPeriodItem);
+                        _tier2SoilCarbonCalculator.CalculateInputs(runInPeriodItem, farm);
                     }
                     else
                     {

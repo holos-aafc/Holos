@@ -15,6 +15,120 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
+        #region Land Applied Manure
+
+        /// <summary>
+        /// Equation 4.6.1-1
+        /// 
+        /// Calculates direct emissions from the manure specifically applied to the field (kg N2O-N (kg N)^-1).
+        /// </summary>
+        public double CalculateDirectEmissionsFromFieldSpecificManureSpreading(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateManureApplicationEmissionFactor(
+                viewItem: viewItem,
+                farm: farm);
+
+            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+            var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-2
+        ///
+        /// (kg N)
+        /// </summary>
+        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults)
+        {
+            var result = 0d;
+
+            foreach (var fieldComponentEmissionResult in farmEmissionResults.FieldComponentEmissionResults)
+            {
+                var viewItem = fieldComponentEmissionResult.FieldSystemComponent.GetSingleYearViewItem();
+                var appliedNitrogenFromManure = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+                result += appliedNitrogenFromManure;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-3
+        ///
+        /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
+        /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
+        /// from land applied manure.
+        /// </summary>
+        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults)
+        {
+            var fieldComponentEmissionResults = farmEmissionResults.FieldComponentEmissionResults;
+            if (fieldComponentEmissionResults.Any() == false)
+            {
+                return 0;
+            }
+
+            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
+
+            foreach (var emissionResults in fieldComponentEmissionResults)
+            {
+                var emissionFactor = this.CalculateManureApplicationEmissionFactor(
+                    viewItem: emissionResults.FieldSystemComponent.GetSingleYearViewItem(),
+                    farm: farmEmissionResults.Farm);
+
+                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
+                {
+                    Value = emissionFactor,
+                    Weight = emissionResults.FieldSystemComponent.FieldArea,
+                });
+            }
+
+            var weightedEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
+
+            return weightedEmissionFactor;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-4
+        /// </summary>
+        public double CalculateTotalNitrogenFromLandManureRemaining(
+            double totalManureAvailableForLandApplication,
+            double totalManureAlreadyAppliedToFields,
+            double totalManureExported)
+        {
+            return totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-5
+        /// </summary>
+        public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
+            double weightedEmissionFactor,
+            double totalNitrogenFromLandManureRemaining)
+        {
+
+            var result = totalNitrogenFromLandManureRemaining * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-6
+        /// </summary>
+        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults,
+            double totalExportedManure)
+        {
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
+
+            var result = totalExportedManure * weightedEmissionFactor;
+
+            return result;
+        }
+
         public void CalculateIndirectEmissionResultsFromLandAppliedManure(FarmEmissionResults farmEmissionResults)
         {
             var beefCattleEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.BeefProduction);
@@ -35,6 +149,8 @@ namespace H.Core.Services.LandManagement
             var otherLivestockEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.OtherLivestock);
             _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
         }
+
+        #endregion
 
         /// <summary>
         /// Calculate amount of nitrogen input from all manure applications in a year
@@ -139,116 +255,7 @@ namespace H.Core.Services.LandManagement
             return requiredAmountOfProduct;
         }
 
-        /// <summary>
-        /// Equation 4.6.1-1
-        /// 
-        /// Calculates emissions from the manure specifically applied to the field (kg N2O-N (kg N)^-1).
-        /// </summary>
-        public double CalculateDirectEmissionsFromFieldSpecificManureSpreading(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateManureApplicationEmissionFactor(
-                viewItem: viewItem,
-                farm: farm);
 
-            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
-
-            var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-2
-        ///
-        /// (kg N)
-        /// </summary>
-        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults)
-        {
-            var result = 0d;
-
-            foreach (var fieldComponentEmissionResult in farmEmissionResults.FieldComponentEmissionResults)
-            {
-                var viewItem = fieldComponentEmissionResult.FieldSystemComponent.GetSingleYearViewItem();
-                var appliedNitrogenFromManure = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
-
-                result += appliedNitrogenFromManure;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-3
-        ///
-        /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
-        /// we take the weight average of these fields when calculating the EF for organic nitrogen(ON)
-        /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults)
-        {
-            var fieldComponentEmissionResults = farmEmissionResults.FieldComponentEmissionResults;
-            if (fieldComponentEmissionResults.Any() == false)
-            {
-                return 0;
-            }
-
-            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
-
-            foreach (var emissionResults in fieldComponentEmissionResults)
-            {
-                var emissionFactor = this.CalculateManureApplicationEmissionFactor(
-                    viewItem: emissionResults.FieldSystemComponent.GetSingleYearViewItem(),
-                    farm: farmEmissionResults.Farm);
-
-                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
-                {
-                    Value = emissionFactor,
-                    Weight = emissionResults.FieldSystemComponent.FieldArea,
-                });
-            }
-
-            var weightedEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
-
-            return weightedEmissionFactor;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-4
-        /// </summary>
-        public double CalculateTotalNitrogenFromLandManureRemaining(
-            double totalManureAvailableForLandApplication,
-            double totalManureAlreadyAppliedToFields,
-            double totalManureExported)
-        {
-            return totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-5
-        /// </summary>
-        public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
-            double weightedEmissionFactor,
-            double totalNitrogenFromLandManureRemaining)
-        {
-
-            var result = totalNitrogenFromLandManureRemaining * weightedEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-6
-        /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults,
-            double totalExportedManure)
-        {
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
-
-            var result = totalExportedManure * weightedEmissionFactor;
-
-            return result;
-        }
 
         /// <summary>
         /// Calculates emissions from all manure that is created by all animal components on the farm (not for a single field). This uses all manure produced
@@ -510,6 +517,8 @@ namespace H.Core.Services.LandManagement
                 factor: emissionFactorForOrganicFertilizer);
 
             result.FieldSpecificDirectEmissionsFromManureApplication = CalculateDirectEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
+
+            // Need to get field specific indirect emissiosn for this field. Animal results will need to store reference to view item where the manure was applied.
 
             // Equation 2.6.6-2
             var aboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(
@@ -1225,7 +1234,7 @@ namespace H.Core.Services.LandManagement
                 youngPoolSoilOrganicCarbonManureAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
                 aboveGroundResidueCarbonInputAtPreviousInterval: previousYearResults.AboveGroundCarbonInput,
                 belowGroundResidueCarbonInputAtPreviousInterval: previousYearResults.BelowGroundCarbonInput,
-                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInput,
+                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInputsPerHectare,
                 oldCarbonN: farm.Defaults.OldPoolCarbonN,
                 climateParameter: climateParameterOrManagementFactor);
 

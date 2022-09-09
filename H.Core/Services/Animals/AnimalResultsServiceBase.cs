@@ -2254,11 +2254,16 @@ namespace H.Core.Services.Animals
             var indirectDto = this.GetIndirectInputFromLandApplicationDto(farm, dailyEmissions, animalType);
             foreach (var intersectingDate in indirectDto.IntersectingDates)
             {
+                var tuplesOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date)).ToList();
+
+                // If there are two land applications here, need to determine how to assign indirect emissions proportionately to each field----
+
                 var emissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
                 var totalManureProducedOnDate = emissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
 
-                var tuplesOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date)).ToList();
                 var requstedVolume = tuplesOnDate.Sum(x => (x.Item2.AmountOfManureAppliedPerHectare * x.Item1.Area));
+
+                // This fraction calculation cannot use the total of all application on one day, has to be for each individual application
                 var fractionOfManureUsed = requstedVolume / totalManureProducedOnDate;
 
                 var totalNitrogenAvailable = emissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
@@ -2272,6 +2277,8 @@ namespace H.Core.Services.Animals
                     ammoniacalLossFromLandApplication,
                     emissionsOnDate);
             }
+
+            // Return a list of new DTOs so can sum up when adding to direct emissions (this dto will contain crop ID)??
         }
 
         public void CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(

@@ -180,12 +180,12 @@ namespace H.Core.Services.LandManagement
                 {
                     coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
                     coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
-                    coverCropManureInput += cropViewItem.ManureCarbonInput;
+                    coverCropManureInput += cropViewItem.ManureCarbonInputsPerHectare;
                 }
 
                 mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
                 mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
-                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInput + coverCropManureInput;
+                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInputsPerHectare + coverCropManureInput;
 
                 mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput;
             }

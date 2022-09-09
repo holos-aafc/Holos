@@ -6955,6 +6955,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg N2O.
+        /// </summary>
+        public static string KilogramsN2O {
+            get {
+                return ResourceManager.GetString("KilogramsN2O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg N₂O-N.
         /// </summary>
         public static string KilogramsN2ON {
@@ -12486,6 +12495,15 @@ namespace H.Core.Properties {
         public static string PoundsN2NPerAcreString {
             get {
                 return ResourceManager.GetString("PoundsN2NPerAcreString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lb N2O.
+        /// </summary>
+        public static string PoundsN2O {
+            get {
+                return ResourceManager.GetString("PoundsN2O", resourceCulture);
             }
         }
         

@@ -161,7 +161,7 @@ namespace H.Core.Services.Animals
 
                 dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
-                    crudeProtein: poultryDietData.CrudeProtein);
+                    crudeProtein: poultryDietData.CrudeProtein );// Value in table is percentage - convert to fraction
 
                 if (managementPeriod.AnimalType == AnimalType.ChickenHens)
                 {
@@ -481,7 +481,7 @@ namespace H.Core.Services.Animals
             double dryMatterIntake,
             double crudeProtein)
         {
-            return dryMatterIntake * crudeProtein;
+            return dryMatterIntake * (crudeProtein / 100.0);
         }
 
         /// <summary>

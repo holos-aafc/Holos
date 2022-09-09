@@ -42,6 +42,7 @@ namespace H.Core.Models
         private bool _monthlyOrganicNitrogenAvailableForLandApplication;
         private bool _totalAvailableManureNitrogenInStoredManure;
         private bool _totalVolumeOfManure;
+        private bool _totalIndirectEmissionsFromLandAppliedManure;
 
         #endregion
 
@@ -229,6 +230,12 @@ namespace H.Core.Models
         {
             get { return _totalVolumeOfManure; }
             set { SetProperty(ref _totalVolumeOfManure, value); }
+        }
+
+        public bool TotalIndirectEmissionsFromLandAppliedManure
+        {
+            get => _totalIndirectEmissionsFromLandAppliedManure;
+            set => SetProperty(ref _totalIndirectEmissionsFromLandAppliedManure, value);
         }
 
         #endregion

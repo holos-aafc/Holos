@@ -258,5 +258,8 @@ namespace H.Core.Enumerations
         DollarsPerKilogram,
 
         None,
+
+        [LocalizedDescription("KilogramsN2O", typeof(Resources))]
+        KilogramsN2O,
     }
 }

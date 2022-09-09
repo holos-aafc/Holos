@@ -17,7 +17,7 @@ namespace H.Core.Calculators.Carbon
 {
     /// <summary>
     /// </summary>
-    public class ICBMSoilCarbonCalculator : IICBMSoilCarbonCalculator
+    public class ICBMSoilCarbonCalculator : CarbonCalculatorBase, IICBMSoilCarbonCalculator
     {
         #region Fields
 
@@ -101,7 +101,7 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.ManureCarbonInput = this.CalculateManureCarbonInput(currentYearViewItem, farm);
+            currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem, farm);
 
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare;            
 
@@ -720,19 +720,6 @@ namespace H.Core.Calculators.Carbon
             var greenManureResult = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / combinedBiomassCoefficientOfProduct);
 
             return greenManureResult;
-        }
-
-        /// <summary>
-        /// Equation 2.2.2-26
-        /// 
-        /// Calculate amount of carbon input from all manure applications in a year.
-        /// </summary>
-        /// <returns>The amount of carbon input during the year (kg C)</returns>
-        public double CalculateManureCarbonInput(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            return viewItem.GetTotalCarbonFromAppliedManure();
         }
 
         /// <summary>

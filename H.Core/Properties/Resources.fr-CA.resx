@@ -2341,6 +2341,9 @@
   <data name="KilogramsN2NPerHectareString" xml:space="preserve">
     <value>kg N2-N (ha)^-1</value>
   </data>
+  <data name="KilogramsN2O" xml:space="preserve">
+    <value>kg N2O</value>
+  </data>
   <data name="KilogramsN2ON" xml:space="preserve">
     <value>kg N₂O-N</value>
   </data>
@@ -4090,6 +4093,9 @@
   </data>
   <data name="PoundsN2NPerAcreString" xml:space="preserve">
     <value>lb n-n2 ac^-1</value>
+  </data>
+  <data name="PoundsN2O" xml:space="preserve">
+    <value>lb N2O</value>
   </data>
   <data name="PoundsN2ONPerAcre" xml:space="preserve">
     <value>lb n-n2o ac^-1</value>
