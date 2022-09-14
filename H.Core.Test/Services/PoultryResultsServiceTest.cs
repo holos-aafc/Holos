@@ -170,11 +170,11 @@ namespace H.Core.Test.Services
                 },
             };
 
-            _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
+            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
                 farm: farm,
                 dailyEmissions: dailyEmissions);
 
-            Assert.AreEqual(dailyEmissions[0].TotalIndirectN2OFromLandAppliedManure, 1.9642857142857142);
+            Assert.AreEqual(0.330237285714286, results.First().TotalIndirectEmissions, 0.0001);
         }
 
         #endregion

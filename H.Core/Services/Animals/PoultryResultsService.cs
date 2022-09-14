@@ -216,6 +216,9 @@ namespace H.Core.Services.Animals
                 tanExcretionRate: managementPeriod.ManureDetails.DailyTanExcretion,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
+            // TAN excretion rate is from lookup table and not calculated
+            dailyEmissions.TanExcretionRate = managementPeriod.ManureDetails.DailyTanExcretion;
+
             // Equation 4.3.3-2
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
@@ -266,7 +269,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.3-11
             dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
-                tanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
+                tanInStoredManure: dailyEmissions.TanEnteringStorageSystem,
                 ammoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
             // Equation 4.3.3-12
@@ -361,67 +364,121 @@ namespace H.Core.Services.Animals
             return dailyEmissions;
         }
 
-        public void CalculateAmmoniaEmissionsFromLandAppliedManure(
+        public List<landApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
             Farm farm,
             List<GroupEmissionsByDay> dailyEmissions)
         {
+            var results = new List<landApplicationEmissionResult>();
+
+            var precipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
+            var meanAnnualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
+            var meanAnnualEvapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
+
+            var emissionFactor = _livestockEmissionConversionFactorsProvider.GetFactors(
+                manureStateType: ManureStateType.Pasture,
+                componentCategory: ComponentCategory.Poultry,
+                meanAnnualPrecipitation: precipitation,
+                meanAnnualTemperature: meanAnnualTemperature,
+                meanAnnualEvapotranspiration: meanAnnualEvapotranspiration,
+                beddingRate: 0,
+                animalType: AnimalType.Poultry,
+                farm: farm);
+
             var indirectDto = base.GetIndirectInputFromLandApplicationDto(farm, dailyEmissions, AnimalType.Poultry);
             foreach (var intersectingDate in indirectDto.IntersectingDates)
             {
-                var emissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
-                var totalManureProducedOnDate = emissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
+                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                var totalNitrogenAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
+                var totalTanAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
 
-                var tuplesOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date)).ToList();
-                var requstedVolume = tuplesOnDate.Sum(x => (x.Item2.AmountOfManureAppliedPerHectare * x.Item1.Area));
-                var fractionOfManureUsed = requstedVolume / totalManureProducedOnDate;
+                var manureApplicationAndCropPairsOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date));
 
-                // Can't apply more manure than was created by the animals on this date
-                if (fractionOfManureUsed > 1)
+                // There could be multiple manure applications on the same date, iterate over all manure application for this date
+                foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
-                    // Use 100% in this case
-                    fractionOfManureUsed = 1.0;
+                    var landApplicationEmissionResult = new landApplicationEmissionResult();
+
+                    var cropViewItem = manureApplicationAndCropPair.Item1;
+                    var manureApplication = manureApplicationAndCropPair.Item2;
+
+                    var totalAmountOfManureApplied = manureApplication.AmountOfManureAppliedPerHectare * cropViewItem.Area;
+                    var fractionOfManureUsed = totalAmountOfManureApplied / totalManureProducedByAnimalsOnDate;
+
+                    // Can't apply more manure than was created by the animals on this date
+                    if (fractionOfManureUsed > 1)
+                    {
+                        // Use 100% in this case
+                        fractionOfManureUsed = 1.0;
+                    }
+
+                    var emissionFraction = 0d;
+                    var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(intersectingDate.Month);
+                    if (temperature >= 15)
+                    {
+                        emissionFraction = 0.85;
+                    }
+                    else if (temperature >= 10 && temperature < 15)
+                    {
+                        emissionFraction = 0.73;
+                    }
+                    else if (temperature >= 5 && temperature < 10)
+                    {
+                        emissionFraction = 0.35;
+                    }
+                    else
+                    {
+                        emissionFraction = 0.25;
+                    }
+
+                    // Equation 4.6.2-5
+                    var ammoniacalLossFromLandApplication = fractionOfManureUsed * emissionFraction * totalTanAvailableForLandApplicationOnDate;
+
+                    // Equation 4.6.2-6
+                    var ammoniaLossFromLandApplication = ammoniacalLossFromLandApplication * CoreConstants.ConvertNH3NToNH3;
+
+                    // Equation 4.6.3-1
+                    var volatilizationFraction = ammoniacalLossFromLandApplication / totalNitrogenAvailableForLandApplicationOnDate;
+
+                    // Equation 4.6.3-2
+                    var manureVolatilization = totalNitrogenAvailableForLandApplicationOnDate * volatilizationFraction * emissionFactor.EmissionFactorVolatilization;
+
+                    // Equation 4.6.3-3
+                    var manureVolatilizationEmissions = manureVolatilization * CoreConstants.ConvertN2ONToN2O;
+
+                    // Equation 4.6.3-4
+                    var adjustedAmmoniacalEmissions = ammoniacalLossFromLandApplication - manureVolatilization;
+
+                    // Equation 4.6.3-5
+                    var adjustedAmmoniaEmissions = adjustedAmmoniacalEmissions * CoreConstants.ConvertNH3NToNH3;
+
+                    var leachingFraction = this.CalculateLeachingFraction(precipitation, meanAnnualEvapotranspiration);
+
+                    // Equation 4.6.4-1
+                    var n2ONEmissionsFromLeachingAndRunoff = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * emissionFactor.EmissionFactorLeach;
+
+                    // Equation 4.6.4-4
+                    var nitrateLeached = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * (1 - emissionFactor.EmissionFactorLeach);
+
+                    // Equation 4.6.5-1
+                    var totalIndirectN2ON = manureVolatilization + n2ONEmissionsFromLeachingAndRunoff;
+
+                    // Equation 4.6.5-2
+                    var totalIndirectN2O = totalIndirectN2ON * CoreConstants.ConvertN2ONToN2O;
+
+                    landApplicationEmissionResult.CropViewItem = cropViewItem;
+                    landApplicationEmissionResult.TotalIndirectEmissions = totalIndirectN2O;
+
+                    results.Add(landApplicationEmissionResult);
                 }
 
-                var emissionFraction = 0d;
-                var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(intersectingDate.Month);
-                if (temperature >= 15)
-                {
-                    emissionFraction = 0.85;
-                }
-                else if (temperature >= 10 && temperature < 15)
-                {
-                    emissionFraction = 0.73;
-                }
-                else if (temperature >= 5 && temperature < 10)
-                {
-                    emissionFraction = 0.35;
-                }
-                else
-                {
-                    emissionFraction = 0.25;
-                }
-
-                var totalTan = emissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
-
-                // Equation 4.6.2-5
-                var ammoniacalLossFromLandApplication = fractionOfManureUsed * emissionFraction * totalTan;
-
-                // Equation 4.6.2-6
-                var ammoniaLossFromLandApplication = ammoniacalLossFromLandApplication * CoreConstants.ConvertNH3NToNH3;
-
-                var totalNitrogenAvailableForLandApplication = emissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
-
-                // Equation 4.6.3-1
-                var volatilizationFraction = ammoniaLossFromLandApplication / totalNitrogenAvailableForLandApplication;
-
-                var averageEmissionFactorForVolatilization = emissionsOnDate.Average(x => x.EmissionFactorForVolatilization);
-
-                this.AssignIndirectN2OFromLandAppliedManure(
-                    volatilizationFraction,
-                    averageEmissionFactorForVolatilization,
-                    ammoniacalLossFromLandApplication,
-                    emissionsOnDate);
+                /*
+                 * Indirect emissions cannot be attributed back to specific animal groups because manure tanks that are used when create manure applications cannot trace back
+                 * to a single GroupEmissionsByDay/AnimalGroup. Indirect emissions from land application are therefore attributed to the specific field only.
+                 */
             }
+
+            return results;
         }
 
         protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
@@ -546,7 +603,18 @@ namespace H.Core.Services.Animals
         public double CalculateAmbientTemperatureAdjustmentForStorage(
             double temperature)
         {
-            return 1 - 0.058 - (17 - temperature);
+            var result = 1 - 0.058 * (17 - temperature);
+            if (result > 1)
+            {
+                return 1;
+            }
+
+            if (result < 0)
+            {
+                return 0;
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -680,7 +680,7 @@ namespace H.Core.Models
             return result;
         }
 
-        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsByAnimalType(AnimalType animalType)
+        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsAndAssociatedCropByAnimalType(AnimalType animalType)
         {
             var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
 

@@ -562,13 +562,13 @@ namespace H.Core.Test.Services
                 },
             };
 
-            _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
+            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
                 farm: farm,
                 dailyEmissions: dailyEmissions,
                 componentCategory,
                 animalType);
 
-            Assert.AreEqual(dailyEmissions[0].TotalIndirectN2OFromLandAppliedManure, 2.0104857142857142);
+            Assert.AreEqual(0.266437285714286, results.First().TotalIndirectEmissions, 0.0001);
         }
 
         #endregion

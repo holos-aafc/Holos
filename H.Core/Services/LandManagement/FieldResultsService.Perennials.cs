@@ -56,8 +56,6 @@ namespace H.Core.Services.LandManagement
 
                             continue;
                         }
-
-
                     }
                     else
                     {

@@ -289,6 +289,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// Total area of crop, fallow area, grassland, etc.
+        ///
+        /// (ha)
         /// </summary>
         public double Area
         {

@@ -628,13 +628,13 @@ namespace H.Core.Test.Services
                 },
             };
 
-            _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
+            var results = _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
                 farm: farm,
                 dailyEmissions: dailyEmissions,
                 componentCategory: componentCategory,
                 animalType: animalType);
 
-            Assert.AreEqual(dailyEmissions[0].TotalIndirectN2OFromLandAppliedManure, 1.9734377142857142);
+            Assert.AreEqual(0.229389285714286, results.First().TotalIndirectEmissions, 0.0001);
         }
 
         #endregion
