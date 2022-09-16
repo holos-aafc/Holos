@@ -22,7 +22,7 @@ using Telerik.Windows.Documents.Fixed.Model.Objects;
 
 namespace H.Core.Services.Animals
 {
-    public abstract class AnimalResultsServiceBase : IAnimalResultsService
+    public abstract partial class AnimalResultsServiceBase : IAnimalResultsService
     {
         #region Fields
 
@@ -2227,13 +2227,13 @@ namespace H.Core.Services.Animals
             };
         }
 
-        public List<landApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
+        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
                 Farm farm,
                 List<GroupEmissionsByDay> dailyEmissions,
                 ComponentCategory componentCategory,
                 AnimalType animalType)
         {
-            var results = new List<landApplicationEmissionResult>();
+            var results = new List<LandApplicationEmissionResult>();
 
             var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
             var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
@@ -2245,7 +2245,7 @@ namespace H.Core.Services.Animals
             {
                 var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
 
-                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication) * 1000; // Daily volume calculated as 1000's of kg/L
                 var totalNitrogenAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
 
                 var manureApplicationAndCropPairsOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date));
@@ -2253,7 +2253,7 @@ namespace H.Core.Services.Animals
                 // There could be multiple manure applications on the same date, iterate over all manure application for this date
                 foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
-                    var applicationEmissionResult = new landApplicationEmissionResult();
+                    var applicationEmissionResult = new LandApplicationEmissionResult();
                     var cropViewItem = manureApplicationAndCropPair.Item1;
                     
                     var fractionOfManureUsed = manureApplicationAndCropPair.Item2.AmountOfManureAppliedPerHectare * cropViewItem.Area / totalManureProducedByAnimalsOnDate;
@@ -2290,7 +2290,8 @@ namespace H.Core.Services.Animals
                     var indirectN2O = indirectN2ON * CoreConstants.ConvertN2ONToN2O;
 
                     applicationEmissionResult.CropViewItem = cropViewItem;
-                    applicationEmissionResult.TotalIndirectEmissions = indirectN2O;
+                    applicationEmissionResult.TotalIndirectN2OEmissions = indirectN2O;
+                    applicationEmissionResult.TotalIndirectN2ONEmissions = indirectN2ON;
 
                     results.Add(applicationEmissionResult);
                 }
@@ -2304,13 +2305,13 @@ namespace H.Core.Services.Animals
             return results;
         }
 
-        public List<landApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
+        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
                 Farm farm,
                 List<GroupEmissionsByDay> dailyEmissions,
                 ComponentCategory componentCategory,
                 AnimalType animalType)
         {
-            var results = new List<landApplicationEmissionResult>();
+            var results = new List<LandApplicationEmissionResult>();
             var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
             var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
             var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
@@ -2321,7 +2322,7 @@ namespace H.Core.Services.Animals
             {
                 var intersectingDate = intersectingDate1;
                 var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
-                var totalManureProducedByAnimalsOnDate  = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                var totalManureProducedByAnimalsOnDate  = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication) * 1000; // Daily volume calculated as 1000's of kg/L
                 var totalTanProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
                 var totalNitrogenAvailalbeForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
 
@@ -2331,7 +2332,7 @@ namespace H.Core.Services.Animals
                 // There could be multiple manure applications on the same date, iterate over all manure application for this date
                 foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
-                    var applicationEmissionResult = new landApplicationEmissionResult();
+                    var applicationEmissionResult = new LandApplicationEmissionResult();
                     var cropViewItem = manureApplicationAndCropPair.Item1;
                     var manureApplicationViewItem = manureApplicationAndCropPair.Item2;
 
@@ -2380,7 +2381,9 @@ namespace H.Core.Services.Animals
                     var totalIndirectN2O = totalIndirectN2ON * CoreConstants.ConvertN2ONToN2O;
 
                     applicationEmissionResult.CropViewItem = cropViewItem;
-                    applicationEmissionResult.TotalIndirectEmissions = totalIndirectN2O;
+                    applicationEmissionResult.TotalIndirectN2OEmissions = totalIndirectN2O;
+                    applicationEmissionResult.TotalIndirectN2ONEmissions = totalIndirectN2ON;
+
                     results.Add(applicationEmissionResult);
                 }
             }
@@ -2415,16 +2418,6 @@ namespace H.Core.Services.Animals
                 managementPeriod.ManureDetails.EmissionFactorVolatilization;
             dailyEmissions.EmissionFactorForLeaching = managementPeriod.ManureDetails.EmissionFactorLeaching;
             dailyEmissions.LeachingFraction = managementPeriod.ManureDetails.LeachingFraction;
-        }
-
-        public class landApplicationEmissionResult
-        {
-            public CropViewItem CropViewItem { get; set; }
-
-            /// <summary>
-            /// (kg N2O)
-            /// </summary>
-            public double TotalIndirectEmissions { get; set; }
         }
     }
 

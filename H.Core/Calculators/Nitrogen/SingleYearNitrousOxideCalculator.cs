@@ -557,14 +557,12 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="emissionsFromSyntheticFertilizer">N emissions from cropland due to synthetic fertilizer inputs (kg N2O-N)</param>
         /// <param name="emissionsFromResidues">N emissions from cropland due to crop residues (kg N2O-N)</param>
         /// <param name="emissionsFromOrganicFertilizer">N emissions from cropland due to crop residues (kg N2O-N)</param>
-        /// <param name="emissionsFromLandAppliedManure">N emissions from cropland due to crop residues (kg N2O-N)</param>
         /// <returns>Total direct N emissions from cropland (kg N2O-N year-1)</returns>
         public double CalculateTotalDirectEmissionsForCrop(double emissionsFromSyntheticFertilizer,
             double emissionsFromResidues,
-            double emissionsFromOrganicFertilizer, 
-            double emissionsFromLandAppliedManure)
+            double emissionsFromOrganicFertilizer)
         {
-            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer + emissionsFromLandAppliedManure;
+            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer;
         }
 
         /// <summary>
@@ -573,8 +571,9 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="emissionsDueToLeachingAndRunoff">N emissions due to leaching and runoff (kg N2O-N)</param>
         /// <param name="emissionsDueToVolatilization">N emissions due to volatilization (kg N2O-N)</param>
         /// <returns>Total indirect N emissions – for each N2O-Ncropindirect, N2O-NminNindirect, N2O-NmanureNindirect (kg N2O-N year-1)</returns>
-        public double CalculateTotalIndirectNitrogenEmissions(double emissionsDueToLeachingAndRunoff,
-                                                              double emissionsDueToVolatilization)
+        public double CalculateTotalIndirectNitrogenEmissions(
+            double emissionsDueToLeachingAndRunoff, 
+            double emissionsDueToVolatilization)
         {
             return emissionsDueToLeachingAndRunoff + emissionsDueToVolatilization;
         }        

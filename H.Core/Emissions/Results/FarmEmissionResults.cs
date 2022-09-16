@@ -112,6 +112,9 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _mineralN2OEmissionsResults, value);
         }
 
+        /// <summary>
+        /// Results calculated as if all manure was applied to field
+        /// </summary>
         public SoilN2OEmissionsResults ManureN2OEmissionResults
         {
             get => _manureN2OEmissionResults;

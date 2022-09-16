@@ -87,6 +87,6 @@ namespace H.Core.Services.LandManagement
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
         void AssignHarvestMethod(CropViewItem viewItem, Farm farm);
-        void CalculateIndirectEmissionResultsFromLandAppliedManure(FarmEmissionResults farmEmissionResults);
+        
     }
 }

@@ -634,7 +634,7 @@ namespace H.Core.Test.Services
                 componentCategory: componentCategory,
                 animalType: animalType);
 
-            Assert.AreEqual(0.229389285714286, results.First().TotalIndirectEmissions, 0.0001);
+            Assert.AreEqual(0.14020924, results.First().TotalIndirectN2ONEmissions, 0.0001);
         }
 
         #endregion

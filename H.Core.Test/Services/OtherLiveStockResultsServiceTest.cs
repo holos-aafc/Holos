@@ -260,7 +260,7 @@ namespace H.Core.Test.Services
                 componentCategory,
                 animalType);
 
-            Assert.AreEqual(0.266437285714286, results.First().TotalIndirectEmissions, 0.0001);
+            Assert.AreEqual(0.266437285714286, results.First().TotalIndirectN2OEmissions, 0.0001);
         }
 
         #endregion

@@ -5222,4 +5222,7 @@
   <data name="PoundsN2O" xml:space="preserve">
     <value>lb N2O</value>
   </data>
+  <data name="LabelLandAppliedManure" xml:space="preserve">
+    <value>Land applied manure</value>
+  </data>
 </root>

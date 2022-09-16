@@ -3085,6 +3085,9 @@
   <data name="LabelLactationDiet" xml:space="preserve">
     <value>lactation</value>
   </data>
+  <data name="LabelLandAppliedManure" xml:space="preserve">
+    <value>Land applied manure</value>
+  </data>
   <data name="LabelLandUseChangeCO2" xml:space="preserve">
     <value>Land Use Change CO₂</value>
   </data>

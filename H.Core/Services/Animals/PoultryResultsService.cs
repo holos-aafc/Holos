@@ -45,6 +45,8 @@ namespace H.Core.Services.Animals
             Farm farm)
         {
             var dailyEmissions = new GroupEmissionsByDay();
+            dailyEmissions.DateTime = dateTime;
+
             var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
@@ -364,11 +366,11 @@ namespace H.Core.Services.Animals
             return dailyEmissions;
         }
 
-        public List<landApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
+        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
             Farm farm,
             List<GroupEmissionsByDay> dailyEmissions)
         {
-            var results = new List<landApplicationEmissionResult>();
+            var results = new List<LandApplicationEmissionResult>();
 
             var precipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
             var meanAnnualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
@@ -388,7 +390,7 @@ namespace H.Core.Services.Animals
             foreach (var intersectingDate in indirectDto.IntersectingDates)
             {
                 var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
-                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication) * 1000; // Daily volume calculated as 1000's of kg/L
                 var totalNitrogenAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
                 var totalTanAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
 
@@ -397,7 +399,7 @@ namespace H.Core.Services.Animals
                 // There could be multiple manure applications on the same date, iterate over all manure application for this date
                 foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
-                    var landApplicationEmissionResult = new landApplicationEmissionResult();
+                    var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
                     var cropViewItem = manureApplicationAndCropPair.Item1;
                     var manureApplication = manureApplicationAndCropPair.Item2;
@@ -467,7 +469,9 @@ namespace H.Core.Services.Animals
                     var totalIndirectN2O = totalIndirectN2ON * CoreConstants.ConvertN2ONToN2O;
 
                     landApplicationEmissionResult.CropViewItem = cropViewItem;
-                    landApplicationEmissionResult.TotalIndirectEmissions = totalIndirectN2O;
+
+                    landApplicationEmissionResult.TotalIndirectN2OEmissions = totalIndirectN2O;
+                    landApplicationEmissionResult.TotalIndirectN2ONEmissions = totalIndirectN2ON;
 
                     results.Add(landApplicationEmissionResult);
                 }

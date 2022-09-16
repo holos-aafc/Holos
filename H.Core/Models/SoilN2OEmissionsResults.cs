@@ -30,7 +30,11 @@ namespace H.Core.Models
             }
         }
 
+        /// <summary>
+        /// (kg N2O-N (kg N)^-1)
+        /// </summary>
         public double FieldSpecificDirectEmissionsFromManureApplication { get; set; }
+        public double FieldSpecificIndirectEmissionsFromManureApplication { get; set; }
 
         /// <summary>
         /// A ratio

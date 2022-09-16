@@ -190,6 +190,8 @@ namespace H.Core.Services.LandManagement
             results.LandUseChangeResults = this.CalculateLandUseChangeResults(fieldSystemComponent, farm);
             results.CropEnergyResults = this.CalculateCropEnergyResults(fieldSystemComponent, farm);
             results.CropN2OEmissionsResults = this.CalculateCropN2OEmissions(fieldSystemComponent, farm);
+            results.LandAppliedManureResults = this.CalculateManureN2OResults(fieldSystemComponent, farm);
+
             results.HarvestViewItems.AddRange(this.CalculateHarvestForField(fieldSystemComponent, farm));
 
             results.FieldSystemComponent = fieldSystemComponent;

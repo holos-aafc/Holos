@@ -174,7 +174,7 @@ namespace H.Core.Test.Services
                 farm: farm,
                 dailyEmissions: dailyEmissions);
 
-            Assert.AreEqual(0.330237285714286, results.First().TotalIndirectEmissions, 0.0001);
+            Assert.AreEqual(0.140851, results.First().TotalIndirectN2ONEmissions, 0.0001);
         }
 
         #endregion

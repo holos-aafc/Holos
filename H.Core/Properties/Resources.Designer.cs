@@ -9286,6 +9286,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Land applied manure.
+        /// </summary>
+        public static string LabelLandAppliedManure {
+            get {
+                return ResourceManager.GetString("LabelLandAppliedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Land Use Change CO₂.
         /// </summary>
         public static string LabelLandUseChangeCO2 {

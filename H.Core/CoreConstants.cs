@@ -86,7 +86,7 @@ namespace H.Core
         /// <summary>
         /// Converts N2O to CO2e
         /// </summary>
-        public static double N2OToCO2eConversionFactor = 265;        
+        public static double N2OToCO2eConversionFactor = 273;        
 
         /// <summary>
         /// Converts from NH3-N to NH3

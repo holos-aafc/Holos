@@ -230,8 +230,6 @@ namespace H.Core.Services
             farmResults.FieldComponentEmissionResults.AddRange(_fieldResultsService.CalculateResultsForFieldComponent(farm));
             farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
 
-            _fieldResultsService.CalculateIndirectEmissionResultsFromLandAppliedManure(farmResults);
-
             // N20 emissions
             farmResults.MineralN2OEmissionsResults = _fieldResultsService.CalculateMineralN2OEmissionsForFarm(farmResults);
             farmResults.ManureN2OEmissionResults = _fieldResultsService.CalculateManureN2OEmissionsForFarm(farmResults);

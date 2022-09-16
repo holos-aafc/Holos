@@ -280,41 +280,7 @@ namespace H.Core.Services.LandManagement
             var strategy = farm.Defaults.EquilibriumCalculationStrategy;
             if (strategy == EquilibriumCalculationStrategies.CarMultipleYearAverage)
             {
-                throw new NotImplementedException();
 
-                var aboveGroundInputs = new List<double>();
-                var belowGroundInputs = new List<double>();
-
-                //var numberOfYearsToAverage = farm.Defaults.NumberOfYearsInCarRegionAverage;
-
-                //// Don't have CAR yields prior to 1985, take average from yields forward of 1985
-                //var startYear = farm.CarbonModellingEquilibriumYear;
-                //for (int i = 0; i < numberOfYearsToAverage; i++)
-                //{
-                //    var indexYear = startYear + i;
-                //    var carId = _canadianAgriculturalRegionIdToSlcIdProvider.GetCarId(farm.PolygonId);
-                //    var viewItem = detailViewItems.ElementAtOrDefault(i);
-                //    if (viewItem == null)
-                //    {
-                //        continue;
-                //    }
-
-                //    var yieldDataForYear = _defaultYieldProvider.GetRowByCarIdYearAndCropType(carId, indexYear, viewItem.CropType);
-                //    var carYield = yieldDataForYear.EYield;
-
-                //    // There is no previous year, or next year, so we pass in null
-                //    _multiYearSoilCarbonCalculator.SetCarbonInputs(
-                //        previousYearViewItem: null,
-                //        currentYearViewItem: viewItem,
-                //        nextYearViewItem: null,
-                //        farm: farm);
-
-                //    aboveGroundInputs.Add(viewItem.AboveGroundCarbonInput);
-                //    belowGroundInputs.Add(viewItem.BelowGroundCarbonInput);
-                //}
-
-                equilibriumAboveGroundInput = aboveGroundInputs.Average();
-                equilibriumBelowGroundInput = belowGroundInputs.Average();
             }
             else
             {

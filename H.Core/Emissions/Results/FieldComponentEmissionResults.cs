@@ -30,6 +30,7 @@ namespace H.Core.Emissions.Results
             this.CropEnergyResults = new CropEnergyResults();
             this.LandUseChangeResults = new LandUseChangeResults();
             this.CropN2OEmissionsResults = new SoilN2OEmissionsResults();
+            this.LandAppliedManureResults = new SoilN2OEmissionsResults();
 
             this.HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>();
         }
@@ -86,7 +87,7 @@ namespace H.Core.Emissions.Results
             set => SetProperty( ref _fieldSystemComponent, value);
         }
 
-
+        public SoilN2OEmissionsResults LandAppliedManureResults { get; set; }
 
         #endregion
     }

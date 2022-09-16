@@ -7,6 +7,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
+using H.Core.Services.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Services.LandManagement
@@ -18,11 +19,32 @@ namespace H.Core.Services.LandManagement
         #region Land Applied Manure
 
         /// <summary>
+        /// Calculate total indirect N2O-N from all land applied manure to the crop.
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateIndirectN2ONEmissionsFromFieldSpecificManureSpreading(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var result = 0d;
+
+            var indirectEmissionsForAllFields = this.CalculateIndirectEmissionResultsFromLandAppliedManure(farm);
+            var indirectEmissionsForField = indirectEmissionsForAllFields.Where(x => x.CropViewItem.Guid.Equals(viewItem.Guid));
+            foreach (var landApplicationEmissionResult in indirectEmissionsForField)
+            {
+                result += landApplicationEmissionResult.TotalIndirectN2ONEmissions;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 4.6.1-1
         /// 
         /// Calculates direct emissions from the manure specifically applied to the field (kg N2O-N (kg N)^-1).
         /// </summary>
-        public double CalculateDirectEmissionsFromFieldSpecificManureSpreading(
+        public double CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(
             CropViewItem viewItem,
             Farm farm)
         {
@@ -129,25 +151,42 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        public void CalculateIndirectEmissionResultsFromLandAppliedManure(FarmEmissionResults farmEmissionResults)
+        public List<LandApplicationEmissionResult> CalculateIndirectEmissionResultsFromLandAppliedManure(Farm farm)
         {
-            var beefCattleEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.BeefProduction);
-            _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farmEmissionResults.Farm, beefCattleEmissions, ComponentCategory.BeefProduction, AnimalType.Beef);
+            var result = new List<LandApplicationEmissionResult>();
+            var animalResults = _animalResultsService.GetAnimalResults(farm);
 
-            var dairyCattleEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Dairy);
-            _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farmEmissionResults.Farm, dairyCattleEmissions, ComponentCategory.Dairy, AnimalType.Dairy);
+            var beefCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.BeefProduction);
+            var beefCattleGroupEmissionsByDay = beefCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var beefCattleIndirectEmissions = _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farm, beefCattleGroupEmissionsByDay, ComponentCategory.BeefProduction, AnimalType.Beef);
+            result.AddRange(beefCattleIndirectEmissions);
 
-            var poultryEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Poultry);
-            _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farmEmissionResults.Farm, poultryEmissions);
+            var dairyCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Dairy);
+            var dairyCattleEmissionsByDay = dairyCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var dairyCattleIndirectEmissions =  _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farm, dairyCattleEmissionsByDay, ComponentCategory.Dairy, AnimalType.Dairy);
+            result.AddRange(dairyCattleIndirectEmissions);
 
-            var swineEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Swine);
-            _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
+            var poultryResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Poultry);
+            var poultryEmissions = poultryResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var poultryIndirectEmissions = _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, poultryEmissions);
+            result.AddRange(poultryIndirectEmissions);
 
-            var sheepEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.Sheep);
-            _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
+            var swineResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Swine);
+            var swineEmissions = swineResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var swineIndirectEmissions = _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
+            result.AddRange(swineIndirectEmissions);
 
-            var otherLivestockEmissions = farmEmissionResults.GetDailyEmissions(ComponentCategory.OtherLivestock);
-            _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farmEmissionResults.Farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
+            var sheepResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Sheep);
+            var sheepEmissions = sheepResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var sheepIndirectEmissions =  _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
+            result.AddRange(sheepIndirectEmissions);
+
+            var otherLivestockResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.OtherLivestock);
+            var otherLivestockEmissions = otherLivestockResults.SelectMany(x => x.GetDailyEmissions()).ToList();
+            var otherLivestockIndirectEmissions = _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
+            result.AddRange(otherLivestockIndirectEmissions);
+
+            return result;
         }
 
         #endregion
@@ -255,7 +294,45 @@ namespace H.Core.Services.LandManagement
             return requiredAmountOfProduct;
         }
 
+        /// <summary>
+        /// Calculate N2O from land applied manure only.
+        /// </summary>
+        /// <returns></returns>
+        public SoilN2OEmissionsResults CalculateManureN2OResults(
+            FieldSystemComponent fieldSystemComponent,
+            Farm farm)
+        {
+            var result = new SoilN2OEmissionsResults()
+            {
+                LandEmissionSource = LandEmissionSourceType.Manure,
+                Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString,
+                FieldSystemComponent = fieldSystemComponent,
+            };
 
+            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+            if (viewItem == null)
+            {
+                return result;
+            }
+
+            var directN2ON = CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
+            result.DirectN2OEmissions = directN2ON * CoreConstants.ConvertN2ONToN2O;
+
+            var indirectN2ON = CalculateIndirectN2ONEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
+            result.IndirectN2OEmissions = indirectN2ON * CoreConstants.ConvertN2ONToN2O;
+
+            /*
+             * Total emissions for each field are summed up in the report views
+             */
+
+            // Equation 4.6.6-1
+            var totalN2ON = directN2ON + indirectN2ON;
+
+            // Equation 4.6.6-2
+            var totalN2O = totalN2ON * CoreConstants.ConvertN2ONToN2O;
+
+            return result;
+        }
 
         /// <summary>
         /// Calculates emissions from all manure that is created by all animal components on the farm (not for a single field). This uses all manure produced
@@ -263,6 +340,8 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults)
         {
+            // Here - redo
+
             var result = new SoilN2OEmissionsResults()
             {
                 LandEmissionSource = LandEmissionSourceType.Manure,
@@ -427,6 +506,9 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
+        /// <summary>
+        /// Calculate N2O from crop residues and synthetic fertilizer only. Mineralized nitrogen emissions and land applied manure emissions are not calculated here.
+        /// </summary>
         public SoilN2OEmissionsResults CalculateCropN2OEmissions(
             FieldSystemComponent fieldSystemComponent,
             Farm farm)
@@ -506,6 +588,12 @@ namespace H.Core.Services.LandManagement
 
             result.EmissionsFromSyntheticFertilizer = emissionsFromSyntheticFertilizer;
 
+            /*
+             * Note that the next calculations are for organic fertilizer applications made and not manure applications that were made.
+             *
+             * One being applied from the fertilizer application interface and the other being applied from the manure application interface
+             */
+
             var totalOrganicNitrogenInputs = 0d;
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.CustomOrganic))
             {
@@ -515,10 +603,6 @@ namespace H.Core.Services.LandManagement
             var emissionsFromOrganicFertilizer = _singleYearNitrogenEmissionsCalculator.CalculateEmissionsFromOrganicFetilizer(
                 inputsFromOrganicFertilizer: totalOrganicNitrogenInputs,
                 factor: emissionFactorForOrganicFertilizer);
-
-            result.FieldSpecificDirectEmissionsFromManureApplication = CalculateDirectEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
-
-            // Need to get field specific indirect emissiosn for this field. Animal results will need to store reference to view item where the manure was applied.
 
             // Equation 2.6.6-2
             var aboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(
@@ -577,8 +661,7 @@ namespace H.Core.Services.LandManagement
             var directEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalDirectEmissionsForCrop(
                 emissionsFromSyntheticFertilizer: emissionsFromSyntheticFertilizer,
                 emissionsFromResidues: emissionsFromResidues,
-                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer,
-                emissionsFromLandAppliedManure: result.FieldSpecificDirectEmissionsFromManureApplication);
+                emissionsFromOrganicFertilizer: emissionsFromOrganicFertilizer);
 
             // Equation 2.5.4-4
             var indirectEmissionsFromCrops = _singleYearNitrogenEmissionsCalculator.CalculateTotalIndirectNitrogenEmissions(
