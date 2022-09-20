@@ -30,6 +30,40 @@ namespace H.Core.Calculators.Carbon
 
         #region Methods
 
+        /// <summary>
+        /// Allow the user to specify a custom starting carbon value for the simulation.
+        /// </summary>
+        public void AssignCustomStartPoint(CropViewItem equilibriumYear, Farm farm, CropViewItem currentYearViewItem)
+        {
+            var soc = equilibriumYear.SoilCarbon;
+
+            // Active pool fraction
+            var activePool = equilibriumYear.ActivePool;
+            var activePoolFraction = activePool / soc;
+
+            // Passive pool fraction
+            var passivePool = equilibriumYear.PassivePool;
+            var passivePoolFraction = passivePool / soc;
+
+            // Slow pool fraction
+            var slowPool = equilibriumYear.SlowPool;
+            var slowPoolFraction = slowPool / soc;
+
+            var customStartingActivePool = activePoolFraction * farm.StartingSoilOrganicCarbon;
+            var customStartingPassivePool = passivePoolFraction * farm.StartingSoilOrganicCarbon;
+            var customStartingSlowPool = slowPoolFraction * farm.StartingSoilOrganicCarbon;
+
+            equilibriumYear.ActivePool = customStartingActivePool;
+            equilibriumYear.PassivePool = customStartingPassivePool;
+            equilibriumYear.SlowPool = customStartingSlowPool;
+
+            currentYearViewItem.ActivePool = equilibriumYear.ActivePool;
+            currentYearViewItem.PassivePool = equilibriumYear.PassivePool;
+            currentYearViewItem.SlowPool = equilibriumYear.SlowPool;
+
+            currentYearViewItem.SoilCarbon = farm.StartingSoilOrganicCarbon;
+        }
+
         public void CalculateResults(
             Farm farm, 
             List<CropViewItem> viewItemsByField, 
@@ -70,6 +104,14 @@ namespace H.Core.Calculators.Carbon
                     currentYearViewItem: currentYearViewItem,
                     previousYearViewItem: previousYearViewItem,
                     farm: farm) ;
+
+                if (i == 0 && farm.UseCustomStartingSoilOrganicCarbon)
+                {
+                    // Override the calculated starting points with custom user defined fractions of each the pools
+                    AssignCustomStartPoint(runInPeriod, farm, currentYearViewItem);
+
+
+                }
             }
         }
 

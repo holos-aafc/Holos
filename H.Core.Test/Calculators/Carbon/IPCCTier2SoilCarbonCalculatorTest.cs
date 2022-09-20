@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -918,6 +919,72 @@ namespace H.Core.Test.Calculators.Carbon
             var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.TameMixed });
 
             Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void UseCustomStartingPoint()
+        {
+            var runInPeriodItems = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.Wheat, TotalCarbonInputs = 1000,},
+                new CropViewItem() {CropType = CropType.Oats, TotalCarbonInputs = 5000,},
+                new CropViewItem() {CropType = CropType.Barley, TotalCarbonInputs = 200,}
+            };
+
+            var farm = new Farm()
+            {
+                StartingSoilOrganicCarbon = 30000,
+                UseCustomStartingSoilOrganicCarbon = true,
+            };
+
+            // Run spin up method once and get the starting points for each pool
+            var equilibriumYear = _sut.CalculateRunInPeriod(farm, runInPeriodItems);
+
+            // Total SOC for starting point
+            var soc = equilibriumYear.SoilCarbon;
+
+            // Get ratio of each pool to starting point
+
+            // Active pool fraction
+            var activePool = equilibriumYear.ActivePool;
+            var activePoolFraction = activePool / soc;
+
+            // Passive pool fraction
+            var passivePool = equilibriumYear.PassivePool;
+            var passivePoolFraction = passivePool / soc;
+
+            // Slow pool fraction
+            var slowPool = equilibriumYear.SlowPool;
+            var slowPoolFraction = slowPool / soc;
+
+            Assert.AreEqual(1.0, slowPoolFraction + passivePoolFraction + activePoolFraction);
+
+            // Use these fraction to create starting pool values
+            var customStartingActivePool = activePoolFraction * farm.StartingSoilOrganicCarbon;
+            var customStartingPassivePool = passivePoolFraction * farm.StartingSoilOrganicCarbon;
+            var customStartingSlowPool = slowPoolFraction * farm.StartingSoilOrganicCarbon;
+
+            Assert.AreEqual(farm.StartingSoilOrganicCarbon, customStartingActivePool + customStartingPassivePool + customStartingSlowPool);
+
+            // Inject these starting points into the first year item
+
+            var firstYear = new CropViewItem();
+
+            // Begin non-run in period simulation
+            _sut.CalculatePools(firstYear,equilibriumYear, farm);
+
+            var viewItemsByField = new List<CropViewItem>()
+            {
+                new CropViewItem() {Year = 1985,},
+                new CropViewItem() {Year = 1986},
+            };
+
+            var fieldSystemComponent = new FieldSystemComponent();
+            fieldSystemComponent.RunInPeriodItems = new ObservableCollection<CropViewItem>(runInPeriodItems);
+
+            _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent);
+
+            Assert.AreEqual(viewItemsByField.First().SoilCarbon, farm.StartingSoilOrganicCarbon);
         }
 
         #endregion
