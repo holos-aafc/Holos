@@ -4,6 +4,7 @@ namespace H.Core.Services.Animals
 {
     public class LandApplicationEmissionResult
     {
+        
         public CropViewItem CropViewItem { get; set; }
 
         /// <summary>
@@ -12,8 +13,28 @@ namespace H.Core.Services.Animals
         public double TotalIndirectN2OEmissions { get; set; }
 
         /// <summary>
-        /// (kg N2O)
+        /// (kg N2O-N)
         /// </summary>
         public double TotalIndirectN2ONEmissions { get; set; }
+
+        /// <summary>
+        /// (kg NO3)
+        /// </summary>
+        public double TotalNitrateLeached { get; set; }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double AdjustedAmmoniacalLoss { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalN2ONFromManureVolatilized;
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalN2ONFromManureLeaching;
     }
 }

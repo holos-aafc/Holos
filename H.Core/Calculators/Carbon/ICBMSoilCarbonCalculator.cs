@@ -17,7 +17,7 @@ namespace H.Core.Calculators.Carbon
 {
     /// <summary>
     /// </summary>
-    public class ICBMSoilCarbonCalculator : CarbonCalculatorBase, IICBMSoilCarbonCalculator
+    public partial class ICBMSoilCarbonCalculator : CarbonCalculatorBase, IICBMSoilCarbonCalculator
     {
         #region Fields
 

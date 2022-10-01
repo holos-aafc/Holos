@@ -319,7 +319,7 @@ namespace H.Core.Test.Calculators.Carbon
             foreach (var year in _annualCarbonData)
             {
                 var calculatedValue = _sut.CalculateAmountToDeadMatterComponent(
-                    totalCarbonInput: year.TotalCarbonInputs,
+                    totalInputs: year.TotalCarbonInputs,
                     nitrogenFraction: year.NitrogenContent,
                     ligninContent: year.LigninContent);
 
@@ -333,7 +333,7 @@ namespace H.Core.Test.Calculators.Carbon
             foreach (var year in _annualCarbonData)
             {
                 var beta = _sut.CalculateAmountToDeadMatterComponent(
-                    totalCarbonInput: year.TotalCarbonInputs,
+                    totalInputs: year.TotalCarbonInputs,
                     nitrogenFraction: year.NitrogenContent,
                     ligninContent: year.LigninContent);
 
@@ -351,7 +351,7 @@ namespace H.Core.Test.Calculators.Carbon
                     f6: _f6,
                     f7: _f7,
                     f8: _f8,
-                    totalCarbon: year.TotalCarbonInputs,
+                    totalInputs: year.TotalCarbonInputs,
                     ligninContent: year.LigninContent);
 
                 Assert.AreEqual(year.Alpha, calculatedValue, 0.1);
@@ -387,7 +387,7 @@ namespace H.Core.Test.Calculators.Carbon
                   tillageFactor: _tillageFactor);
 
                 var calculateValue = _sut.CalculateSteadyStateActivePool(
-                    carbonInputToActiveSubPool: year.Alpha,
+                    inputsToActiveSubPool: year.Alpha,
                     decayRateForActivePool: decayRate);
 
                 Assert.AreEqual(year.ActivePoolSteadyState, calculateValue, 0.01);
@@ -463,7 +463,7 @@ namespace H.Core.Test.Calculators.Carbon
                     sand: year.Sand);
 
                 var calculateValue = _sut.CalculateSteadyStateSlowPool(
-                    carbonInput: year.TotalCarbonInputs,
+                    totalInputs: year.TotalCarbonInputs,
                     ligninContent: year.LigninContent,
                     f3: _f3,
                     steadyStateActivePool: year.ActivePoolSteadyState,
@@ -602,7 +602,7 @@ namespace H.Core.Test.Calculators.Carbon
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
                 
-                var calculatedValue = _sut.CalculateSoc(
+                var calculatedValue = _sut.CalculateTotalStocks(
                     activePool: carbonDataAtYear.ActivePool,
                     passivePool: carbonDataAtYear.PassivePool,
                     slowPool: carbonDataAtYear.SlowPool);                
@@ -621,7 +621,7 @@ namespace H.Core.Test.Calculators.Carbon
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
                 var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.Soc : calclatedResults.ElementAt(i - 1);
                 
-                var calculateValue = _sut.CalculateSocChange(
+                var calculateValue = _sut.CalculateStockChange(
                     socAtYear: carbonDataAtYear.Soc,
                     socAtPreviousYear: previousYearResults);
 

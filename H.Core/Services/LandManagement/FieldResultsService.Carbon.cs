@@ -27,8 +27,8 @@ namespace H.Core.Services.LandManagement
         /// For annuals, there is no need to get the previous/next years but for consistency, this method is called for annual crops regardless.
         /// </summary>
         public AdjoiningYears GetAdjoiningYears(
-            IEnumerable<CropViewItem> viewItems, 
-            int year, 
+            IEnumerable<CropViewItem> viewItems,
+            int year,
             FieldSystemComponent fieldSystemComponent)
         {
             var previousYear = year - 1;
@@ -47,7 +47,7 @@ namespace H.Core.Services.LandManagement
 
                 return new AdjoiningYears()
                 {
-                    PreviousYearViewItem = previousItemInStand, 
+                    PreviousYearViewItem = previousItemInStand,
                     CurrentYearViewItem = mainCropForCurrentYear,
                     NextYearViewItem = nextItemInStand
                 };
@@ -68,8 +68,8 @@ namespace H.Core.Services.LandManagement
         /// hay applications, etc. Then we can proceed to the actual carbon change calculations.
         /// </summary>
         public void AssignCarbonInputs(
-            IEnumerable<CropViewItem> viewItems, 
-            Farm farm, 
+            IEnumerable<CropViewItem> viewItems,
+            Farm farm,
             FieldSystemComponent fieldSystemComponent)
         {
             // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
@@ -98,7 +98,7 @@ namespace H.Core.Services.LandManagement
                  * Assign carbon inputs based on selected strategy
                  */
 
-                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
+                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 &&
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(currentYearViewItem))
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
@@ -127,7 +127,7 @@ namespace H.Core.Services.LandManagement
             var secondaryCrops = viewItems.OrderBy(x => x.Year).Where(x => x.IsSecondaryCrop).ToList();
             foreach (var secondaryCrop in secondaryCrops)
             {
-                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
+                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 &&
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(secondaryCrop))
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
@@ -145,7 +145,7 @@ namespace H.Core.Services.LandManagement
                         farm: farm);
                 }
             }
-        }       
+        }
 
         /// <summary>
         /// If there is a year where a perennial crop has a 0 yield, it means it wasn't harvested that year. Therefore, when a perennial year has a 0 yield,
@@ -172,9 +172,9 @@ namespace H.Core.Services.LandManagement
         #region Private Methods
 
         private void CalculateCarbonAtInterval(
-            CropViewItem previousYearResults, 
-            CropViewItem currentYearResults, 
-            Farm farm, 
+            CropViewItem previousYearResults,
+            CropViewItem currentYearResults,
+            Farm farm,
             FieldSystemComponent fieldSystemComponent)
         {
             // The user can choose to use either the climate parameter or the management factor in the calculations
@@ -413,8 +413,6 @@ namespace H.Core.Services.LandManagement
                     farm: farm,
                     viewItemsByField: viewItemsForField,
                     fieldSystemComponent: fieldSystemComponent);
-
-                // Note: N budget calculations are not being performed when user selects Tier 2. Methodology has to be completed for this scenario
             }
             else
             {
@@ -435,7 +433,7 @@ namespace H.Core.Services.LandManagement
                         farm: farm,
                         fieldSystemComponent: fieldSystemComponent);
 
-                    this.CalculateNitrogenAtInterval(
+                     _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,
                         nextYearResults: null,

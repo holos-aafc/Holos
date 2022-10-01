@@ -110,6 +110,8 @@ namespace H.Core.Models
             this.AverageSoilCarbonAcrossAllFieldsInFarm = true;
             this.SoilCarbon = true;
             this.ChangeInCarbon = true;
+
+            this.SyntheticInputsBeforeAdjustment = true;
         }
         #endregion
 
@@ -224,6 +226,7 @@ namespace H.Core.Models
             get { return _ChangeInCarbon; }
             set { SetProperty(ref _ChangeInCarbon, value); }
         }
+
         public bool SyntheticInputsBeforeAdjustment
         {
             get { return _syntheticInputsBeforeAdjustment; }

@@ -119,8 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
+    <Compile Include="Calculators\Carbon\CarbonCalculatorBase.Nitrogen.cs" />
     <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculator.cs" />
+    <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculator.Nitrogen.cs" />
     <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculator.cs" />
+    <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculator.Nitrogen.cs" />
     <Compile Include="Calculators\Climate\ClimateNormalCalculator.cs" />
     <Compile Include="Calculators\Climate\ClimateParameterCalculator.cs" />
     <Compile Include="Calculators\Carbon\IICBMSoilCarbonCalculator.cs" />
@@ -129,7 +132,7 @@
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
-    <Compile Include="Calculators\Nitrogen\MultiYearNitrousOxideCalculator.cs" />
+    <Compile Include="Calculators\NitrousOxideCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />

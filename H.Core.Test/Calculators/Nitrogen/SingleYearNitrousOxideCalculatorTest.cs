@@ -1,11 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Enumerations;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Models;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class SingleYearNitrousOxideCalculateTest
+    public class SingleYearNitrousOxideCalculatorTest
     {
         #region Fields
 
@@ -38,6 +41,8 @@ namespace H.Core.Test.Calculators.Nitrogen
 
         #endregion
 
+        #region Tests
+
         [TestMethod]
         public void CalculateTopographyEmissionsReturnsZeroWhenNoClimateDataAvailable()
         {
@@ -60,7 +65,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 fertilizerEfficiencyFraction: 0.5,
                 soilTestN: 10,
                 isNitrogenFixingCrop: false,
-                nitrogenFixationAmount: 0, 
+                nitrogenFixationAmount: 0,
                 atmosphericNitrogenDeposition: 0);
 
             Assert.AreEqual(1580, firstRate);
@@ -74,10 +79,41 @@ namespace H.Core.Test.Calculators.Nitrogen
                 fertilizerEfficiencyFraction: 0.75,
                 soilTestN: 10,
                 isNitrogenFixingCrop: false,
-                nitrogenFixationAmount: 0, 
+                nitrogenFixationAmount: 0,
                 atmosphericNitrogenDeposition: 0);
 
             Assert.IsTrue(secondRate < firstRate);
         }
+
+        #region CalculateFractionOfNitrogenLostByVolatilization Tests
+
+        [TestMethod]
+        public void CalculateFractionOfNitrogenLostByVolatilization()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                NitrogenFertilizerType = NitrogenFertilizerType.Urea,
+                FertilizerApplicationMethodology = FertilizerApplicationMethodologies.FullyInjected,
+            };
+            var farm = new Farm()
+            {
+                DefaultSoilData =
+                {
+                    SoilPh = 6,
+                    SoilCec = 122,
+                }
+            };
+
+            var result = _calculator.CalculateFractionOfNitrogenLostByVolatilization(
+                cropViewItem: currentYearViewItem,
+                farm: farm);
+
+            Assert.IsTrue(result > 0);
+        }
+
+        #endregion 
+
+        #endregion
     }
 }

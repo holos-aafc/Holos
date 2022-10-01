@@ -124,5 +124,12 @@ namespace H.Core.Calculators.Carbon
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             Farm farm);
+
+        void CalculateNitrogenAtInterval(
+            CropViewItem previousYearResults,
+            CropViewItem currentYearResults,
+            CropViewItem nextYearResults,
+            Farm farm,
+            int yearIndex);
     }
 }

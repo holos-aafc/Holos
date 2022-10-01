@@ -2254,8 +2254,10 @@ namespace H.Core.Services.Animals
                 foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
                     var applicationEmissionResult = new LandApplicationEmissionResult();
+
                     var cropViewItem = manureApplicationAndCropPair.Item1;
-                    
+                    applicationEmissionResult.CropViewItem = cropViewItem;
+
                     var fractionOfManureUsed = manureApplicationAndCropPair.Item2.AmountOfManureAppliedPerHectare * cropViewItem.Area / totalManureProducedByAnimalsOnDate;
                     if (fractionOfManureUsed > 1.0)
                         fractionOfManureUsed = 1.0;
@@ -2264,34 +2266,31 @@ namespace H.Core.Services.Animals
                     var ammoniacalLoss = fractionOfManureUsed * totalNitrogenAvailableForLandApplicationOnDate * emissionFactorData.VolatilizationFraction;
 
                     // Equation 4.6.3-2
-                    var n2ONVolatilization = totalNitrogenAvailableForLandApplicationOnDate * emissionFactorData.VolatilizationFraction * emissionFactorData.EmissionFactorVolatilization;
+                    applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailableForLandApplicationOnDate * emissionFactorData.VolatilizationFraction * emissionFactorData.EmissionFactorVolatilization;
 
                     // Equation 4.6.3-2
-                    var n2OVolatilization = n2ONVolatilization * CoreConstants.ConvertN2ONToN2O;
+                    var n2OVolatilization = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
 
                     // Equation 4.6.3-4
-                    var adjustedAmmoniacalLoss = ammoniacalLoss - n2ONVolatilization;
+                    applicationEmissionResult.AdjustedAmmoniacalLoss = ammoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
 
                     // Equation 4.6.3-5
-                    var adjustedAmmoniaLoss = adjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+                    var adjustedAmmoniaLoss = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
 
                     var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
 
                     // Equation 4.6.4-1
-                    var n2ONLeaching = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
+                    applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
 
                     // Equation 4.6.4-4
-                    var nitrateLeached = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
+                    applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
 
                     // Equation 4.6.5-1
-                    var indirectN2ON = n2ONVolatilization + n2ONLeaching;
+                    applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
 
                     // Equation 4.6.5-2
-                    var indirectN2O = indirectN2ON * CoreConstants.ConvertN2ONToN2O;
+                    applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
 
-                    applicationEmissionResult.CropViewItem = cropViewItem;
-                    applicationEmissionResult.TotalIndirectN2OEmissions = indirectN2O;
-                    applicationEmissionResult.TotalIndirectN2ONEmissions = indirectN2ON;
 
                     results.Add(applicationEmissionResult);
                 }
@@ -2333,7 +2332,10 @@ namespace H.Core.Services.Animals
                 foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
                 {
                     var applicationEmissionResult = new LandApplicationEmissionResult();
+
                     var cropViewItem = manureApplicationAndCropPair.Item1;
+                    applicationEmissionResult.CropViewItem = cropViewItem;
+
                     var manureApplicationViewItem = manureApplicationAndCropPair.Item2;
 
                     var fractionOfManureUsed = manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area / totalManureProducedByAnimalsOnDate;
@@ -2355,34 +2357,30 @@ namespace H.Core.Services.Animals
                     var fractionVolatilized = ammoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
 
                     // Equation 4.6.3-2
-                    var n2ONVolatilized = totalNitrogenAvailalbeForLandApplicationOnDate * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
+                    applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailalbeForLandApplicationOnDate * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
 
                     // Equation 4.6.3-3
-                    var n2OVolatilized = n2ONVolatilized * CoreConstants.ConvertN2ONToN2O;
+                    var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
 
                     // Equation 4.6.3-4
-                    var adjustedAmmoniacalEmissions = ammoniacalLoss - n2ONVolatilized;
+                    applicationEmissionResult.AdjustedAmmoniacalLoss = ammoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
 
                     // Equation 4.6.3-5
-                    var adjustedAmmoniaEmissions = adjustedAmmoniacalEmissions * CoreConstants.ConvertNH3NToNH3;
+                    var adjustedAmmoniaEmissions = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
 
                     var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
 
                     // Equation 4.6.4-1
-                    var n2ONLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
+                    applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
 
                     // Equation 4.6.4-4
-                    var nitrateLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
+                    applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
 
                     // Equation 4.6.5-1
-                    var totalIndirectN2ON = n2ONVolatilized + n2ONLeached;
+                    applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
 
                     // Equation 4.6.5-2
-                    var totalIndirectN2O = totalIndirectN2ON * CoreConstants.ConvertN2ONToN2O;
-
-                    applicationEmissionResult.CropViewItem = cropViewItem;
-                    applicationEmissionResult.TotalIndirectN2OEmissions = totalIndirectN2O;
-                    applicationEmissionResult.TotalIndirectN2ONEmissions = totalIndirectN2ON;
+                    applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
 
                     results.Add(applicationEmissionResult);
                 }

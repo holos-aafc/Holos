@@ -1156,6 +1156,34 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// This is the total amount of both organic fertilizer nitrogen and manure nitrogen.
+        /// </summary>
+        public double GetTotalOrganicAndManureNitrogenInYear()
+        {
+            var result = this.GetTotalOrganicNitrogenInYear() + this.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+            return result;
+        }
+
+        /// <summary>
+        /// This is not manure, but organic fertilizers.
+        ///
+        /// (kg N)
+        /// </summary>
+        /// <returns></returns>
+        public double GetTotalOrganicNitrogenInYear()
+        {
+            var totalNitrogen = 0d;
+
+            foreach (var fertilizerApplicationViewItem in this.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.CustomOrganic))
+            {
+                totalNitrogen += fertilizerApplicationViewItem.AmountOfNitrogenApplied * this.Area;
+            }
+
+            return totalNitrogen;
+        }
+
+        /// <summary>
         /// (kg N)
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockInYear()

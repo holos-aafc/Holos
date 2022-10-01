@@ -304,6 +304,9 @@ namespace H.Core.Models
             set { SetProperty(ref _useClimateParameterInsteadOfManagementFactor, value); }
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double CarbonConcentration
         {
             get { return _carbonConcentration; }

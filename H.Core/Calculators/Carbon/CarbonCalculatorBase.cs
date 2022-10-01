@@ -3,7 +3,7 @@ using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Calculators.Carbon
 {
-    public abstract class CarbonCalculatorBase
+    public abstract partial class CarbonCalculatorBase
     {
         /// <summary>
         /// Equation 2.2.2-26
