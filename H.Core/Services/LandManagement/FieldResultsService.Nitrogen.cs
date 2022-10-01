@@ -9,7 +9,6 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Infrastructure;
-using Telerik.Windows.Documents.Fixed.Model.Objects;
 
 namespace H.Core.Services.LandManagement
 {

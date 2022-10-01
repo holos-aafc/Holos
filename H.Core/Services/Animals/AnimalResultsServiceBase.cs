@@ -18,7 +18,6 @@ using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Energy;
 using H.Core.Tools;
-using Telerik.Windows.Documents.Fixed.Model.Objects;
 
 namespace H.Core.Services.Animals
 {

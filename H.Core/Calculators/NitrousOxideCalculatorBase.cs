@@ -6,7 +6,6 @@ using System.Security.Permissions;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Animals;
-using Telerik.Windows.Documents.Fixed.Model.Objects;
 
 namespace H.Core.Calculators
 {

@@ -8,7 +8,6 @@ using H.Core.Enumerations;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Plants;
 using H.Infrastructure;
-using Telerik.Windows.Documents.Model;
 
 namespace H.Core.Providers.Animals
 {
