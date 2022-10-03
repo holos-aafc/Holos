@@ -3701,8 +3701,162 @@ Please do not modify the headers in any of the component data input Excel files.
 <br>
 <br>
 
-# Chapter 11 Common Questions & Toubleshooting
+<!---
+This is the start of section that needs to be translated
+-->
+[Translation Begin - Section 1]: <> (Translation Begin - Section 1)
 
+
+# Chapter 11 Appendix - Additional Information, Common Questions & Toubleshooting
+
+
+### Holos Backup System
+
+Holos contains a backup system that automatically creates backups of user data in a folder alongside the saved user data files. This folder is located inside the Holos data folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
+
+Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any given time. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-21.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-21 - The holos data folder that contains the backup files
+	</em>
+</p>
+<br>
+
+
+
+There are some important things to note regarding the backup files created by Holos:
+
+1. Holos creates a backup of your data every time the application is started.
+
+2. A backup is only created when data is successfully loaded by Holos.
+
+3. A maximum of **5** backups are maintained of user data and are created on a rolling basis. This means that if there are 5 backups already created, instead of creating a 6th one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
+
+	3.1. If you would like to maintain or save a particular backup, it is recommended to keep that backup file in a separate location on your computer.
+
+4. Backup files are named in the following manner: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time of when that backup was created.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-22.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-22 - Up to five backups are stored inside the backups folder.
+	</em>
+</p>
+<br>
+
+<br>
+
+
+#### Restoring backups in case of data corruption
+
+In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to automatically load backup data. If multiple backups are available, Holos loads the most recently created backup file. **When a backup file is restored, a message is displayed after the first loading page**. This message contains information regarding which backup was restored:
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-23.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-23 - A message during startup indicating that a data backup was restored.
+	</em>
+</p>
+<br>
+
+
+If you would like to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**, otherwise holos will not be able to read this data file.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-24.gif" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-24 - Manually restoring a backup data file.
+	</em>
+</p>
+<br>
+
+
+#### Data crash file
+
+As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new session of the program. In these situations, Holos will also create a crash file that contains the data that the program was unable to read.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-25.png" alt="" width="650"/>
+    <br>
+    <em>
+		Figure 11-25 - A crash file is created when data cannot be loaded.
+	</em>
+</p>
+<br>
+
+If you don't have any backups available to restore previous data, this crash file can be sent to the Holos developers to help restore data and troubleshoot problems with the program. To learn how to submit this file, read the[ how to report an error message section.](#how-to-report-an-error-message-and-create-a-bug-report)
+
+<br>
+<br>
+
+
+### How to find the Holos Program data file(s).
+
+The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
+
+
+- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
+    <br>
+    <em>
+		Figure 11-5 - Type run in windows search.
+	</em>
+</p>
+<br>
+
+
+- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%\HOLOS_4** and then **press enter again** or click on the **OK button**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
+    <br>
+    <em>
+		Figure 11-6 - Opening the Holos folder inside the Appdata folder.
+	</em>
+</p>
+<br>
+
+
+- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Holos user data folder on your PC. 
+
+
+- Inside the HOLOS_4 folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
+	</em>
+</p>
+<br>
+
+
+
+-	If you are trying to troubleshoot Holos, please create a new issue in Holos' github repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
+
+- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on github. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
+
+<br>
+<br>
 
 ### How do I enable Advanced Mode:
 
@@ -3714,7 +3868,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure4-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure11-1" width="650"/>
     <br>
     <em>
 		Figure 11-1 - Advanced mode can be selected from the farm defaults/details setting.
@@ -3753,95 +3907,6 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 	</em>
 </p>
 <br>
-
-
-### How do I add a new farm to my current farms CLI folder:
-
-
-##### Method 1: Copying an existing empty farm folder.
-
-1. In your current 'Farms" folder, create a new folder for your new farm with an appropriate name.
-2. Copy all files from an existing farm and paste them into this new folder that you have just created.
-3. Modify the data input files as needed.
-
-##### Method 2: Running the CLI again.
-
-1. Start the Holos CLI.
-2. You will be prompted to use the previously used Farms folder. Select**yes**.
-3. Select the appropriate units of measurement in the next prompt.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
-    <br>
-    <em>
-		Figure 11-4 - Using the Holos CLI to create a new farms folder.
-	</em>
-</p>
-<br>
-
-
-
-### How to find the Holos Program data file(s).
-
-The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
-
-
-- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
-    <br>
-    <em>
-		Figure 11-5 - Type run in windows search.
-	</em>
-</p>
-<br>
-
-
-- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%** and then **press enter again** or click on the **OK button**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
-    <br>
-    <em>
-		Figure 11-6 - Opening the local folder inside the Appdata folder.
-	</em>
-</p>
-<br>
-
-
-- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Appdata folder on your PC. In this new window, find a folder called **HOLOS_4**. You might have to scroll down and look for the folders starting with the letter **H**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-7.png" alt="Figure11-7" width="950"/>
-    <br>
-    <em>
-		Figure 11-7 - Locate the folder called HOLOS_4
-	</em>
-</p>
-<br>
-
-- Open the folder called HOLOS_4 and inside this folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
-    <br>
-    <em>
-		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
-	</em>
-</p>
-<br>
-
-
--	If you are trying to troubleshoot Holos, please add all these files to a zip archive and send that .zip file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
-
-
-
 <br>
 
 
@@ -3950,11 +4015,13 @@ The message that Holos displays includes information about what the error was an
 
 
 
-### How to report an Error Message.
+### How to report an error message and create a bug report.
 
-Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error to the developers, follow these steps:
+Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. 
 
--	Click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
+When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error (and other issues) to the developers, follow these steps:
+
+**Note:**	If you get an error as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
 
 *Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers. It simply copies information to your computer's clipboard.*
 
@@ -3970,6 +4037,7 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
 
 -	To send this information to the Holos developers, you will have to create a new issue in the official Github repository for Holos. You can click [here](https://github.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
 
+**Note:** You will need to create a free github account to create and report issues.
 
 -	After going to the issue reporting page, click on "**New Issue**".
 
@@ -4035,6 +4103,39 @@ The version number of your current Holos installation is displayed when you firs
     <br>
     <em>
 		Figure 11-20 - Version number of the Holos installation.
+	</em>
+</p>
+<br>
+
+
+<!---
+This is the end of section that needs to be translated
+-->
+[Translation End - Section 1]: <> (Translation End - Section 1)
+
+
+
+### How do I add a new farm to my current farm's CLI folder:
+
+
+##### Method 1: Copying an existing empty farm folder.
+
+1. In your current 'Farms" folder, create a new folder for your new farm with an appropriate name.
+2. Copy all files from an existing farm and paste them into this new folder that you have just created.
+3. Modify the data input files as needed.
+
+##### Method 2: Running the CLI again.
+
+1. Start the Holos CLI.
+2. You will be prompted to use the previously used Farms folder. Select **yes**.
+3. Select the appropriate units of measurement in the next prompt.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
+    <br>
+    <em>
+		Figure 11-4 - Using the Holos CLI to create a new farms folder.
 	</em>
 </p>
 <br>

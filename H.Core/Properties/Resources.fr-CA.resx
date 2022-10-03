@@ -2345,7 +2345,10 @@
     <value>kg N2O</value>
   </data>
   <data name="KilogramsN2ON" xml:space="preserve">
-    <value>kg N₂O-N</value>
+    <value>kg N2O-N</value>
+  </data>
+  <data name="KilogramsN2ONPerField" xml:space="preserve">
+    <value>kg N2O-N field^-1</value>
   </data>
   <data name="KilogramsN2ONPerHectare" xml:space="preserve">
     <value>kg N2O-N ha^-1</value>
@@ -2358,6 +2361,12 @@
   </data>
   <data name="KilogramsN2ONPerYear" xml:space="preserve">
     <value>kg N₂O-N année^-1</value>
+  </data>
+  <data name="KilogramsN2OPerField" xml:space="preserve">
+    <value>kg N2O field^-1</value>
+  </data>
+  <data name="KilogramsN2OPerHectareString" xml:space="preserve">
+    <value>kg N2O (ha)^-1</value>
   </data>
   <data name="KilogramsN2OPerYear" xml:space="preserve">
     <value>kg N₂O année^-1</value>
@@ -2391,6 +2400,12 @@
   </data>
   <data name="KilogramsNO3NPerHectareString" xml:space="preserve">
     <value>kg NO3-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsNON" xml:space="preserve">
+    <value>Kg NO-N</value>
+  </data>
+  <data name="KilogramsNONPerField" xml:space="preserve">
+    <value>kg NO-N field^-1</value>
   </data>
   <data name="KilogramsNONPerHectare" xml:space="preserve">
     <value>kg NO-N ha^-1</value>
@@ -4106,11 +4121,20 @@
   <data name="PoundsN2ONPerAcreString" xml:space="preserve">
     <value>lb n-n2o ac^-1</value>
   </data>
+  <data name="PoundsN2ONPerField" xml:space="preserve">
+    <value>lb N2O-N field^-1</value>
+  </data>
   <data name="PoundsN2ONPerPoundN" xml:space="preserve">
     <value>lb N₂O-N (lb N)^-1</value>
   </data>
   <data name="PoundsN2ONPerYear" xml:space="preserve">
     <value>lb N₂O-N année^-1</value>
+  </data>
+  <data name="PoundsN2OPerAcreString" xml:space="preserve">
+    <value>lb N2O ac^-1</value>
+  </data>
+  <data name="PoundsN2OPerField" xml:space="preserve">
+    <value>lb N2O field^-1</value>
   </data>
   <data name="PoundsN2OPerYear" xml:space="preserve">
     <value>lb N₂O année^-1</value>
@@ -4160,11 +4184,17 @@
   <data name="PoundsNO3NPerAcreString" xml:space="preserve">
     <value>lb n-no3 ac^-1</value>
   </data>
+  <data name="PoundsNON" xml:space="preserve">
+    <value>lb NO-N</value>
+  </data>
   <data name="PoundsNONPerAcre" xml:space="preserve">
     <value>lb n-no ac^-1</value>
   </data>
   <data name="PoundsNONPerAcreString" xml:space="preserve">
     <value>lb n-no ac^-1</value>
+  </data>
+  <data name="PoundsNONPerField" xml:space="preserve">
+    <value>lb NO-N field^-1</value>
   </data>
   <data name="PoundsPerAcre" xml:space="preserve">
     <value>lb a^-1</value>

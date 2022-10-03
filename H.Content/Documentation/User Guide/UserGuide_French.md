@@ -3163,8 +3163,417 @@ valeur de données dans le format suivant : « H(0-9)(a-b) ». Cela signifie 
 <br>
 
 
-# Chapitre 11 Questions courantes
+<!---
+This is the start of section that needs to be translated
+-->
+[Translation Begin - Section 1]: <> (Translation Begin - Section 1)
 
+
+# Chapter 11 Appendix - Additional Information, Common Questions & Toubleshooting
+
+
+### Holos Backup System
+
+Holos contains a backup system that automatically creates backups of user data in a folder alongside the saved user data files. This folder is located inside the Holos data folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
+
+Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any given time. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-21.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-21 - The holos data folder that contains the backup files
+	</em>
+</p>
+<br>
+
+
+
+There are some important things to note regarding the backup files created by Holos:
+
+1. Holos creates a backup of your data every time the application is started.
+
+2. A backup is only created when data is successfully loaded by Holos.
+
+3. A maximum of **5** backups are maintained of user data and are created on a rolling basis. This means that if there are 5 backups already created, instead of creating a 6th one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
+
+	3.1. If you would like to maintain or save a particular backup, it is recommended to keep that backup file in a separate location on your computer.
+
+4. Backup files are named in the following manner: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time of when that backup was created.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-22.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-22 - Up to five backups are stored inside the backups folder.
+	</em>
+</p>
+<br>
+
+<br>
+
+
+#### Restoring backups in case of data corruption
+
+In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to automatically load backup data. If multiple backups are available, Holos loads the most recently created backup file. **When a backup file is restored, a message is displayed after the first loading page**. This message contains information regarding which backup was restored:
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-23.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-23 - A message during startup indicating that a data backup was restored.
+	</em>
+</p>
+<br>
+
+
+If you would like to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**, otherwise holos will not be able to read this data file.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-24.gif" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-24 - Manually restoring a backup data file.
+	</em>
+</p>
+<br>
+
+
+#### Data crash file
+
+As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new session of the program. In these situations, Holos will also create a crash file that contains the data that the program was unable to read.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-25.png" alt="" width="650"/>
+    <br>
+    <em>
+		Figure 11-25 - A crash file is created when data cannot be loaded.
+	</em>
+</p>
+<br>
+
+If you don't have any backups available to restore previous data, this crash file can be sent to the Holos developers to help restore data and troubleshoot problems with the program. To learn how to submit this file, read the[ how to report an error message section.](#how-to-report-an-error-message-and-create-a-bug-report)
+
+<br>
+<br>
+
+
+### How to find the Holos Program data file(s).
+
+The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
+
+
+- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
+    <br>
+    <em>
+		Figure 11-5 - Type run in windows search.
+	</em>
+</p>
+<br>
+
+
+- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%\HOLOS_4** and then **press enter again** or click on the **OK button**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
+    <br>
+    <em>
+		Figure 11-6 - Opening the Holos folder inside the Appdata folder.
+	</em>
+</p>
+<br>
+
+
+- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Holos user data folder on your PC. 
+
+
+- Inside the HOLOS_4 folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
+	</em>
+</p>
+<br>
+
+
+
+-	If you are trying to troubleshoot Holos, please create a new issue in Holos' github repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
+
+- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on github. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
+
+<br>
+<br>
+
+### How do I enable Advanced Mode:
+
+If you have started the farm in Basic mode and want to switch to Advanced mode, the process is extremely simple.
+
+1. Click on **Settings** in the top menu bar.
+2. Select **"Farm Defaults"**.
+3. Select "Advanced Mode" under the "**Farm**" tab.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure11-1" width="650"/>
+    <br>
+    <em>
+		Figure 11-1 - Advanced mode can be selected from the farm defaults/details setting.
+	</em>
+</p>
+<br>
+
+### How do I enable Multi Year Mode
+
+Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
+    <br>
+    <em>
+		Figure 11-2 - Click the Toggle to Switch between Basic and Advanced Mode.
+	</em>
+</p>
+<br>
+
+### How to switch between IPCC Tier 2 & ICBM Carbon models
+
+Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch to and from the ICBM carbon model. To switch between the models:
+
+1. Click on "**Settings**" in the top menu bar.
+2. Select "**User Settings**".
+3. In the "**Carbon Modelling Strategy**" drop-down, select the carbon model you want to use in your calculations.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
+    <br>
+    <em>
+		Figure 11-3 - Switching between carbon models that are used in Holos.
+	</em>
+</p>
+<br>
+<br>
+
+
+### How to create a .zip archive file
+
+
+#### Instructions for Windows 11 based systems
+
+Please follow these steps for Windows 11 based systems. In this example we will work with the **HOLOS_4** folder mentioned in the [how to find the holos data files section.](#how-to-find-the-holos-program-data-files)
+
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-9.gif" alt="Figure11-9" width="650"/>
+    <br>
+    <em>
+		Figure 11-9 - Highlight all the files you want to add to the archive.
+	</em>
+</p>
+<br>
+
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. Selecting this option will open a pop-up with a progress bar showing your files being compressed. This process will create a single .zip file containing all the files you selected in **Step 1.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-10.gif" alt="Figure11-10" width="650"/>
+    <br>
+    <em>
+		Figure 11-10 - Adding files to a .zip archive.
+	</em>
+</p>
+<br>
+
+3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can then send this compressed/zipped file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zipped archive file will contain all the files that you selected in step 1.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-11.gif" alt="Figure11-11" width="650"/>
+    <br>
+    <em>
+		Figure 11-11 - Renaming the new folder to holos-data-files.
+	</em>
+</p>
+<br>
+
+#### Instructions for Windows 10 based systems
+
+Please follow these steps for Windows 10 based systems. In this example we will work with the HOLOS_4 folder mentioned in the [how to find the holos data files section](#how-to-find-the-holos-program-data-files)
+
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-12.gif" alt="Figure11-12" width="650"/>
+    <br>
+    <em>
+		Figure 11-12 - Highlight all the files you want to add to the archive.
+	</em>
+</p>
+<br>
+
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, go to **Send to** and select “**Compressed (zipped) folder**”. Selecting this will create a single new .zip file containing all the files you selected/highlighted in **Step 1.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-13.gif" alt="Figure11-13" width="650"/>
+    <br>
+    <em>
+		Figure 11-13 - Adding files to a .zip archive.
+	</em>
+</p>
+<br>
+
+3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then send this compressed (zipped) file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zip file will contain all the files that you selected in step 1.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-14.gif" alt="Figure11-14" width="650"/>
+    <br>
+    <em>
+		Figure 11-14 - Renaming the new folder to holos-data-files.
+	</em>
+</p>
+<br>
+
+
+<br>
+
+
+### Holos Error Messages
+
+Error messages can appear when Holos encounters an internal error and is unable to resolve the issue. When Holos encounters an internal error, it displays a message in the program informing the user that an error has occurred. Below is an example of a similar error.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-15.png" alt="Figure11-15" width="750"/>
+    <br>
+    <em>
+		Figure 11-15 - Error message screen.
+	</em>
+</p>
+<br>
+
+The message that Holos displays includes information about what the error was and how to report this error to the Holos developers. The next section describes the process of reporting this error to the Holos team.
+
+
+
+### How to report an error message and create a bug report.
+
+Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. 
+
+When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error (and other issues) to the developers, follow these steps:
+
+**Note:**	If you get an error as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
+
+*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers. It simply copies information to your computer's clipboard.*
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-16.png" alt="Figure11-16" width="750"/>
+    <br>
+    <em>
+		Figure 11-16 - Click copy to clipboard to copy information related to the error.
+	</em>
+</p>
+<br>
+
+-	To send this information to the Holos developers, you will have to create a new issue in the official Github repository for Holos. You can click [here](https://github.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
+
+**Note:** You will need to create a free github account to create and report issues.
+
+-	After going to the issue reporting page, click on "**New Issue**".
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
+    <br>
+    <em>
+		Figure 11-17 - The new issue button on the Holos Github repository.
+	</em>
+</p>
+<br>
+
+- On this page, you will click on "**Get Started**" opposite the "**Bug / Issue Report**" category.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
+    <br>
+    <em>
+		Figure 11-18 - The new issue button on the Holos Github repository.
+	</em>
+</p>
+<br>
+
+
+- You will be presented with a new page where you can post details about the issue and provide additional information. This information includes:
+  - **Title of issue**
+  - **Contact details** (in case we need to contact you outside of Github)
+  - **Expected Behaviour** when using Holos.
+  - **Actual Behaviour** displayed by Holos resulting in the bug/issue.
+  - **Details of issue including steps to reproduce the issue**.
+  - **Error message.**
+  - **Holos version number.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-19.png" alt="Figure11-19" width="750"/>
+    <br>
+    <em>
+		Figure 11-19 - The Bug/Issue reporting category.
+	</em>
+</p>
+<br>
+
+
+- Paste the information you [copied earlier to your clipboard](#how-to-report-an-error-message), in the section titled "**Error Message**" and fill the other information as directed.
+
+
+- Click on "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
+
+- A new issue will now be created with the included information.
+
+<br>
+
+### Finding the Holos Software version number
+
+The version number of your current Holos installation is displayed when you first launch the program. After starting the program, look for the version number in the small window that pops up where you're able to select your language.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-20.png" alt="Figure11-20" width="650"/>
+    <br>
+    <em>
+		Figure 11-20 - Version number of the Holos installation.
+	</em>
+</p>
+<br>
+
+
+<!---
+This is the end of section that needs to be translated
+-->
+[Translation End - Section 1]: <> (Translation End - Section 1)
 
 ## Comment puis-je activer le mode avance
 
