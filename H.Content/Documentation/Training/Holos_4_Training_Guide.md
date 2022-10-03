@@ -286,7 +286,7 @@ Following the annual feeding cycle, the beef farm we are working with is **divid
 
 2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
 
-3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’ (120 days). Note that the ‘Number of days’ being shown will be inclusive of the start and end dates.
+3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
@@ -467,7 +467,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’ (110 days).
+    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’.
 
 
     * **General Tab:**

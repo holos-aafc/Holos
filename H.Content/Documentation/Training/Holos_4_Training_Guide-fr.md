@@ -281,7 +281,7 @@ Après le cycle annuel d’alimentation, la ferme bovine avec laquelle nous trav
 
 2. Cliquez sur la période de gestion intitulée « **Alimentation hivernale** » **à l’étape 2** pour activer cette période de gestion.
 
-3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** » [121 jours]. Veuillez noter que le nombre de jours qui s’affiche comprend les dates de début et de fin.
+3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** ».
 
 
 Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration.
@@ -336,7 +336,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 **b) Notre deuxième période de gestion portera sur le broutage en pâturage pendant les mois d’été.**
 
 1. Cliquez sur la période de gestion intitulée « **Pâturage d’été** ».
-2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale (184 jours).
+2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale.
 3. Cliquez sur l’onglet « **Général** » pour confirmer que nous avons 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines à haute énergie** » comme ration par défaut sous l’onglet « **Ration** ».
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le champ (« Prairie indigène ») sur lequel les animaux brouteront à partir de la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Pâturage de masse/continu** » comme type de pâturage. Holos ajustera les apports de carbone des pâturages en fonction du système de pâturage sélectionné.
@@ -346,7 +346,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 **c) Notre troisième période de gestion portera sur le broutage prolongé à l’automne.**
 1. Sélectionnez la période de gestion appelée « **Broutage d’automne prolongé** ».
-2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période (61 jours).
+2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période.
 3. Cliquez sur l’onglet « **Général** » et entrez 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines d’énergie moyenne** » comme ration par défaut.
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le pâturage sur lequel les animaux broutent **(« prairies indigènes »)** dans la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Broutage alterné** » comme type de broutage.
@@ -387,7 +387,7 @@ Les veaux de notre ferme naissent le 1er mars et sont sevrés le 30 septembre à
 
 Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 1** » pour activer le groupe de veaux.
 
-- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 » (61 jours)**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
+- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
 - Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2020** » **au** « **30 septembre 2020** ». Nous renommerons cette période de gestion « **Broutage** ».
 - À l’onglet « **Général** », changez le nombre d’animaux à 110.
 - Les veaux consommeront des « **protéines à haute énergie** ».
