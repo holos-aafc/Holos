@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 
 namespace H.Infrastructure
@@ -25,6 +26,22 @@ namespace H.Infrastructure
             }
 
             return text;
+        }
+
+        /// <summary>
+        /// Cleans a file name string by replacing various special characters with the underscore character _
+        /// </summary>
+        /// <param name="fileName">The name of the file that needs to be cleaned.</param>
+        /// <returns></returns>
+        public static string CleanFileNameString(this string fileName)
+        {
+            StringBuilder sb = new StringBuilder(fileName);
+
+            sb.Replace(':', '_');
+            sb.Replace('/', '_');
+            sb.Replace(' ', '_');
+
+            return sb.ToString();
         }
     }
 }

@@ -184,6 +184,34 @@ namespace H.Core.Calculators.Carbon
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Equation 2.6.8-12
+        /// Equation 2.7.7-12
+        /// </summary>
+        public double CalculateCropNitrogenDemand(
+            double carbonInputFromProduct,
+            double carbonInputFromStraw,
+            double carbonInputFromRoots,
+            double carbonInputFromExtraroots,
+            double moistureContentOfCropFraction,
+            double nitrogenConcentrationInTheProduct,
+            double nitrogenConcentrationInTheStraw,
+            double nitrogenConcentrationInTheRoots,
+            double nitrogenConcentrationInExtraroots,
+            double nitrogenFixation,
+            double carbonConcentration)
+        {
+            return ((carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheProduct +
+                    (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheStraw +
+                    (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheRoots +
+
+                    (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInExtraroots) - (1 - nitrogenFixation);
+        }
+
+        #endregion
+
         #region Protected Methods
 
         protected void SetSyntheticNStartState(CropViewItem currentYearResults)
@@ -226,6 +254,15 @@ namespace H.Core.Calculators.Carbon
 
         protected void SetPoolStartStates(Farm farm)
         {
+            if (this.YearIndex == 0)
+            {
+                this.SyntheticNitrogenPool = 0d;
+                this.CropResiduePool = 0d;
+                this.MineralPool = 0d;
+                this.OrganicPool = 0d;
+                this.MicrobePool = 0d;
+            }
+
             this.SetSyntheticNStartState(this.CurrentYearResults);
             this.SetAvailabilityOfMineralNState(this.PreviousYearResults);
             this.SetMicrobePoolStartingState(this.PreviousYearResults, this.YearIndex);
@@ -471,12 +508,14 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.7-20
             this.AvailabilityOfMineralN += this.MicrobeDeathPool;
 
-            // TODO: what is this summation?
-            // Equation 2.6.8-21
-            // Equation 2.7.7-21
-            this.N2Loss = this.AvailabilityOfMineralN - 0;
-
-            if (this.AvailabilityOfMineralN <= 0)
+            if (this.AvailabilityOfMineralN > 0)
+            {
+                // TODO: what is this summation?
+                // Equation 2.6.8-21
+                // Equation 2.7.7-21
+                //this.N2Loss = this.AvailabilityOfMineralN - 0;
+            }
+            else
             {
                 // Equation 2.6.8-22
                 // Equation 2.7.7-22

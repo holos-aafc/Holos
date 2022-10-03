@@ -271,11 +271,16 @@ namespace H.Core.Services.LandManagement
              * Use a specified strategy to calculate these starting values
              */
 
-            double equilibriumAboveGroundInput = 0;
-            double equilibriumBelowGroundInput = 0;
-            double equilibriumManureInput = 0;
-            double equilibriumClimateParameter = 0;
-            double equilibriumManagementFactor = 0;
+            var equilibriumAboveGroundInput = 0d;
+            var equilibriumBelowGroundInput = 0d;
+            var equilibriumManureInput = 0d;
+            var equilibriumClimateParameter = 0d;
+            var equilibriumManagementFactor = 0d;
+
+            var equilibriumCarbonInputFromProduct = 0d;
+            var equilibriumCarbonInputFromStraw = 0d;
+            var equilibriumCarbonInputFromRoots = 0d;
+            var equilibriumCarbonInputFromExtraroots = 0d;
 
             var strategy = farm.Defaults.EquilibriumCalculationStrategy;
             if (strategy == EquilibriumCalculationStrategies.CarMultipleYearAverage)
@@ -290,6 +295,12 @@ namespace H.Core.Services.LandManagement
                 equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInputsPerHectare);
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
+
+                
+                equilibriumCarbonInputFromProduct = viewItemsInRotation.Average(x => x.CarbonInputFromProduct);
+                equilibriumCarbonInputFromStraw = viewItemsInRotation.Average(x => x.CarbonInputFromStraw);
+                equilibriumCarbonInputFromRoots = viewItemsInRotation.Average(x => x.CarbonInputFromRoots);
+                equilibriumCarbonInputFromExtraroots = viewItemsInRotation.Average(x => x.CarbonInputFromExtraroots);
             }
 
             // This is the equilibrium year result
@@ -310,6 +321,11 @@ namespace H.Core.Services.LandManagement
             result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
             result.NitrogenContentInRoots = averageNitrogenConcentrationInRoots;
             result.NitrogenContentInExtraroot = averageNitrogenConcentrationInExtraroots;
+
+            result.CarbonInputFromProduct = equilibriumCarbonInputFromProduct;
+            result.CarbonInputFromStraw = equilibriumCarbonInputFromStraw;
+            result.CarbonInputFromRoots = equilibriumCarbonInputFromRoots;
+            result.CarbonInputFromExtraroots = equilibriumCarbonInputFromExtraroots;
 
             /*
              * Carbon

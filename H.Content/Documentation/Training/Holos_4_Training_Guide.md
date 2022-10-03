@@ -187,13 +187,13 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <div style="page-break-after: always"></div>
 
-## Pasture (native) / Grasslands Information
+## Native Grasslands Information
 
 The cow-calf operation (defined later on) relies on native pasture for the summer months (May through October).
 
 1. Drag a new “**Field**” tab component to your list of components. Enter the name “**Native Grassland**” in the ‘Field name’ input box.
 2. Enter "**100**" as the total area of the field.
-3. Select "**Seeded Grassland**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the '**Winter/Cover/Undersown Crop**' area when a perennial crop is selected.
+3. Select "**Rangeland (Native)**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the '**Winter/Cover/Undersown Crop**' area when a perennial crop is selected.
 4. Keep '**0**' as the amount of irrigation and pesticide passes.
 5. No fertilizer is used for this crop.
 

@@ -5225,4 +5225,7 @@
   <data name="LabelLandAppliedManure" xml:space="preserve">
     <value>Land applied manure</value>
   </data>
+  <data name="MessageBackupRestored" xml:space="preserve">
+    <value>Holos was not shutdown properly during the last session. A backup created on {0} at {1} has been restored. Please verify your data for consistency.</value>
+  </data>
 </root>

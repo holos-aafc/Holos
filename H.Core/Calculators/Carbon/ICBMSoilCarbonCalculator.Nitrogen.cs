@@ -45,9 +45,7 @@ namespace H.Core.Calculators.Carbon
                 oldCarbonNitrogen: farm.Defaults.OldPoolCarbonN);
 
             base.TotalInputsBeforeReductions();
-
-            base.CalculateNitrousOxide(base.CurrentYearResults, farm);
-            base.CalculateNitricOxide(farm.Defaults.NORatio);
+            base.CalculateDirectEmissions(farm, currentYearResults);
             base.CalculateIndirectEmissions(farm, currentYearResults);
             base.AdjustPools();
             base.CloseNitrogenBudget(currentYearResults);
@@ -79,7 +77,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.7-12
             base.CropNitrogenDemand = this.CalculateCropNitrogenDemand(
-                carbonInputFromProduct: currentYearResults.CarbonInputFromProduct,
+                carbonInputFromProduct: currentYearResults.PlantCarbonInAgriculturalProduct,
                 carbonInputFromStraw: currentYearResults.CarbonInputFromStraw,
                 carbonInputFromRoots: currentYearResults.CarbonInputFromRoots,
                 carbonInputFromExtraroots: currentYearResults.CarbonInputFromExtraroots,
@@ -322,28 +320,6 @@ namespace H.Core.Calculators.Carbon
             var result = (firstCombinedTerm + fourthTerm + fifthTerm + sixthTerm) * oldCarbonN;
 
             return result;
-        }
-
-        /// <summary>
-        /// Equation 2.6.8-12
-        /// </summary>
-        public double CalculateCropNitrogenDemand(double carbonInputFromProduct,
-            double carbonInputFromStraw,
-            double carbonInputFromRoots,
-            double carbonInputFromExtraroots,
-            double moistureContentOfCropFraction,
-            double nitrogenConcentrationInTheProduct,
-            double nitrogenConcentrationInTheStraw,
-            double nitrogenConcentrationInTheRoots,
-            double nitrogenConcentrationInExtraroots,
-            double nitrogenFixation,
-            double carbonConcentration)
-        {
-            return (carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheProduct +
-                   (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheStraw +
-                   (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheRoots +
-
-                   (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInExtraroots - (1 - nitrogenFixation);
         }
 
         #region Overrides

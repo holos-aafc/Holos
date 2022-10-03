@@ -1405,7 +1405,9 @@ namespace H.Core.Providers.Soil
                     Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with agricultural soil profile. Searching for native soil profiles.");
                 }
 
-                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
+                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile) &&
+                                                                                x.IsValidSoilLayerTableData);
+                
                 if (nativeProfileEntries.Any())
                 {
                     var layer = this.GetAppropriateLayer(nativeProfileEntries);

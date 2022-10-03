@@ -120,12 +120,6 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults = currentYearResults;
             this.PreviousYearResults = previousYearResults;
 
-            base.SyntheticNitrogenPool = 0d;
-            base.CropResiduePool = 0d;
-            base.MineralPool = 0d;
-            base.OrganicPool = 0d;
-            base.MicrobePool = 0d;
-
             base.SetPoolStartStates(farm);
 
             // Set this before calculating pools
@@ -134,14 +128,14 @@ namespace H.Core.Calculators.Carbon
             this.CalculatePools(currentYearResults, previousYearResults, farm);
 
             // Equation 2.7.3-9
-            base.MineralPool = previousYearResults.ActivePool * currentYearResults.ActivePoolDecayRate +
-                               previousYearResults.SlowPool * currentYearResults.SlowPoolDecayRate +
-                               previousYearResults.PassivePool * currentYearResults.PassivePoolDecayRate;
+            base.MineralPool = previousYearResults.ActivePool * previousYearResults.ActivePoolDecayRate +
+                               previousYearResults.SlowPool * previousYearResults.SlowPoolDecayRate +
+                               previousYearResults.PassivePool * previousYearResults.PassivePoolDecayRate;
 
             // Equation 2.7.3-10
-            this.SocNRequirement = previousYearResults.ActivePoolSteadyState * currentYearResults.ActivePoolDecayRate +
-                                   previousYearResults.SlowPoolSteadyState * currentYearResults.SlowPoolDecayRate +
-                                   previousYearResults.PassivePoolSteadyState * currentYearResults.PassivePoolDecayRate;
+            this.SocNRequirement = previousYearResults.ActivePoolSteadyState * previousYearResults.ActivePoolDecayRate +
+                                   previousYearResults.SlowPoolSteadyState * previousYearResults.SlowPoolDecayRate +
+                                   previousYearResults.PassivePoolSteadyState * previousYearResults.PassivePoolDecayRate;
 
             // Equation 2.7.3-14 is calculated when calling CalculatePools()
             // Equation 2.7.3-15 is calculated when calling CalculatePools()
@@ -152,44 +146,37 @@ namespace H.Core.Calculators.Carbon
             this.AdjustPools();
             base.CloseNitrogenBudget(currentYearResults);
 
-            base.SyntheticNitrogenPool = 0;
-            base.MineralPool = 0;
-            base.CropResiduePool = 0;
-            base.OrganicPool = 0;
-
             base.CalculatePoolRatio();
 
             /*
              * Calculate the N demand from carbon pools
              */
 
-            if (base.AvailabilityOfMineralN > base.MicrobePool)
-            {
-                // Equation 2.7.7-8
-                base.AvailabilityOfMineralN -= this.SocNRequirement * (1 - base.PoolRatio);
+            base.AdjustPoolsAfterDemandCalculation(this.SocNRequirement);
 
-                // Equation 2.7.7-9
-                base.MicrobePool -= this.SocNRequirement * base.PoolRatio;
-            }
+            this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
-            if (base.MicrobePool > base.AvailabilityOfMineralN)
-            {
-                // Equation 2.7.7-10
-                base.AvailabilityOfMineralN -= this.SocNRequirement * base.PoolRatio;
-
-                // Equation 2.7.7-11
-                base.MicrobePool -= this.SocNRequirement * (1 - base.PoolRatio);
-            }
-
-            var productTerm = ((currentYearResults.PlantCarbonInAgriculturalProduct / farm.Defaults.CarbonConcentration) * (1 - currentYearResults.MoistureContentOfCrop)) * currentYearResults.NitrogenContentInProduct;
-            var strawTerm = ((currentYearResults.CarbonInputFromStraw / farm.Defaults.CarbonConcentration) * (1 - currentYearResults.MoistureContentOfCrop)) * currentYearResults.NitrogenContentInStraw;
-            var rootsTerm = ((currentYearResults.CarbonInputFromRoots / farm.Defaults.CarbonConcentration) * (1 - currentYearResults.MoistureContentOfCrop)) * currentYearResults.NitrogenContentInRoots;
-            var extrarootsTerm = ((currentYearResults.CarbonInputFromExtraroots / farm.Defaults.CarbonConcentration) * (1 - currentYearResults.MoistureContentOfCrop)) * currentYearResults.NitrogenContentInExtraroot;
+            base.CropNitrogenDemand = (this.CurrentYearResults.AboveGroundCarbonInput + this.CurrentYearResults.BelowGroundCarbonInput + this.CurrentYearResults.ManureCarbonInputsPerHectare) *
+                    this.CurrentYearResults.NitrogenContent;
 
             // Equation 2.7.7-12
-            base.CropNitrogenDemand = (productTerm + strawTerm + rootsTerm + extrarootsTerm) * (1 - currentYearResults.NitrogenFixation);
+            //base.CropNitrogenDemand = this.CalculateCropNitrogenDemand(
+            //    carbonInputFromProduct: currentYearResults.PlantCarbonInAgriculturalProduct,
+            //    carbonInputFromStraw: currentYearResults.CarbonInputFromStraw,
+            //    carbonInputFromRoots: currentYearResults.CarbonInputFromRoots,
+            //    carbonInputFromExtraroots: currentYearResults.CarbonInputFromExtraroots,
+            //    moistureContentOfCropFraction: currentYearResults.MoistureContentOfCrop,
+            //    nitrogenConcentrationInTheProduct: currentYearResults.NitrogenContentInProduct,
+            //    nitrogenConcentrationInTheStraw: currentYearResults.NitrogenContentInStraw,
+            //    nitrogenConcentrationInTheRoots: currentYearResults.NitrogenContentInRoots,
+            //    nitrogenConcentrationInExtraroots: currentYearResults.NitrogenContentInExtraroot,
+            //    nitrogenFixation: farm.Defaults.DefaultNitrogenFixation,
+            //    carbonConcentration: farm.Defaults.CarbonConcentration);
 
             base.AdjustPoolsAfterDemandCalculation(this.CropNitrogenDemand);
+
+            base.CurrentYearResults.MicrobialPoolAfterCropDemandAdjustment = base.MicrobePool;
+
             base.BalancePools(farm.Defaults.MicrobeDeath);
 
             // Equation 2.7.8-32

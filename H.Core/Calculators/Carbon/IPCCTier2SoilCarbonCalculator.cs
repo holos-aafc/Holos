@@ -126,6 +126,12 @@ namespace H.Core.Calculators.Carbon
                     // Override the calculated starting points with custom user defined fractions of each the pools
                     AssignCustomStartPoint(runInPeriod, farm, currentYearViewItem);
                 }
+
+                this.CalculationMode = CalculationModes.Nitrogen;
+                this.CalculateNitrogenAtInterval(previousYearViewItem, currentYearViewItem, null, farm, i);
+
+                // Change back to C for next iteration
+                this.CalculationMode = CalculationModes.Carbon;
             }
         }
 
@@ -154,7 +160,7 @@ namespace H.Core.Calculators.Carbon
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            // Equation 2.2.2-2
+            // Equation 2.2.3-2
             var aboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
                 harvestRatio: harvestRatio,
@@ -243,9 +249,14 @@ namespace H.Core.Calculators.Carbon
             result.WFac = runInPeriodItems.Average(x => x.WFac);
             result.TFac = runInPeriodItems.Average(x => x.TFac);
             result.TotalCarbonInputs = runInPeriodItems.Average(y => y.TotalCarbonInputs);
+            result.TotalNitrogenInputsForIpccTier2 = runInPeriodItems.Average(x => x.TotalNitrogenInputsForIpccTier2);
             result.Sand = runInPeriodItems.Average(x => x.Sand);
             result.LigninContent = runInPeriodItems.Average(x => x.LigninContent);
             result.NitrogenContent = runInPeriodItems.Average(x => x.NitrogenContent);
+
+            // Need average of above ground residue dry matter... etc.
+            result.AboveGroundResidueDryMatter = runInPeriodItems.Average(x => x.AboveGroundResidueDryMatter);
+            result.BelowGroundResidueDryMatter = runInPeriodItems.Average(x => x.BelowGroundResidueDryMatter);
 
             return result;
         }

@@ -11374,6 +11374,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Holos was not shutdown properly during the last session. A backup created on {0} at {1} has been restored. Please verify your data for consistency..
+        /// </summary>
+        public static string MessageBackupRestored {
+            get {
+                return ResourceManager.GetString("MessageBackupRestored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Carbon storage and/or loss calculations will not be made for years prior to 1910.
         /// </summary>
         public static string MessageCarbonCalculationsWillNotBeMadeBefore1910 {
