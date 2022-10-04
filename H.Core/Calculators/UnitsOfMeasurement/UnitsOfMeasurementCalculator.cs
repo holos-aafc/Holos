@@ -461,6 +461,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return value * KgToLbsFactor;
 
                 case MetricUnitsOfMeasurement.KilogramsN2ON:
+                case MetricUnitsOfMeasurement.KilogramsNON:
                 case MetricUnitsOfMeasurement.KilogramsN2O:
                     return value * KgToLbsFactor;
 
@@ -670,6 +671,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return value / KgToLbsFactor;
 
                 case ImperialUnitsOfMeasurement.PoundsN2ON:
+                case ImperialUnitsOfMeasurement.PoundsNON:
                 case ImperialUnitsOfMeasurement.PoundsN2O:
                     return value / KgToLbsFactor;
 

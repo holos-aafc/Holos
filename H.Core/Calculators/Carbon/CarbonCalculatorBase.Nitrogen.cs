@@ -665,6 +665,8 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.DirectNitrousOxideEmissionsFromCropResiduesForArea = this.N2O_NFromResidues * area;
             this.CurrentYearResults.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea = this.N2O_NFromMineralization * area;
             this.CurrentYearResults.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea = this.N2O_NFromOrganicNitrogen * area;
+
+            this.CurrentYearResults.TotalDirectNitrousOxidePerHectare = totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
             this.CurrentYearResults.TotalDirectNitrousOxideForArea = totalDirectNitrousOxide * area;
 
             this.CurrentYearResults.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea = this.N2O_NFromSyntheticFertilizerLeaching * area;
@@ -673,6 +675,8 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea = this.N2O_NFromOrganicNitrogenLeaching * area;
             this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea = this.N2O_NSyntheticNitrogenVolatilization * area;
             this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea = this.N2O_NOrganicNitrogenVolatilization * area;
+
+            this.CurrentYearResults.TotalIndirectNitrousOxidePerHectare = totalIndirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
             this.CurrentYearResults.TotalIndirectNitrousOxideForArea = totalIndirectNitrousOxide * area;
         }
 

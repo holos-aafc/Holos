@@ -481,6 +481,16 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double BelowGroundResidueDryMatter { get; set; }
 
+        /// <summary>
+        /// (kg N2O ha^-1)
+        /// </summary>
+        public double TotalDirectNitrousOxidePerHectare { get; set; }
+
+        /// <summary>
+        /// (kg N2O ha^-1)
+        /// </summary>
+        public double TotalIndirectNitrousOxidePerHectare { get; set; }
+
         #endregion
     }
 }

@@ -39,6 +39,9 @@ namespace H.Core.Models
         private string _kilogramsN20NString;
         private string _kilogramsN20String;
         private string _kilogramsN2OPerHectareString;
+        private string _kilogramsN2OPerFieldString;
+        private string _kilogramsN2ONPerFieldString;
+        private string _kilogramsNONPerFieldString;
         private string _kilogramsNONPerHectareString;
         private string _kilogramsNO3NPerHectareString;
         private string _kilogramsNH4NPerHectareString;
@@ -730,6 +733,24 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsN20String, value);
         }
 
+        public string KilogramsN2OPerFieldString
+        {
+            get => _kilogramsN2OPerFieldString;
+            set => SetProperty(ref _kilogramsN2OPerFieldString, value);
+        }
+
+        public string KilogramsN2OnPerFieldString
+        {
+            get => _kilogramsN2ONPerFieldString;
+            set => SetProperty(ref _kilogramsN2ONPerFieldString, value);
+        }
+
+        public string KilogramsNONPerFieldString
+        {
+            get => _kilogramsNONPerFieldString;
+            set => SetProperty(ref _kilogramsNONPerFieldString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -770,7 +791,7 @@ namespace H.Core.Models
                 KilogramPerHeadPerYearString = WrapString(Resources.KilogramPerHeadPerYear);
                 KilogramPerHeadPerDayString = WrapString(Resources.KilogramPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.KilogramsN2ONPerKilogramN);
-                KilogramsN2OPerHectareString = WrapString(Resources.KilogramsN2ONPerHectareString);
+                KilogramsN2OPerHectareString = WrapString(Resources.KilogramsN2OPerHectareString);
                 KilogramsNONPerHectareString = WrapString(Resources.KilogramsNONPerHectareString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.KilogramsNO3NPerHectareString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.KilogramsNH4NPerHectareString);
@@ -848,6 +869,9 @@ namespace H.Core.Models
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
                 KilogramsN20String = WrapString(Resources.KilogramsN2O);
+                KilogramsN2OPerFieldString = WrapString(Resources.KilogramsN2OPerField);
+                KilogramsN2OnPerFieldString = WrapString(Resources.KilogramsN2ONPerField);
+                KilogramsN2OnPerFieldString = WrapString(Resources.KilogramsNONPerField);
             }
             else
             {
@@ -875,7 +899,7 @@ namespace H.Core.Models
                 KilogramPerHeadPerYearString = WrapString(Resources.PoundPerHeadPerYear);
                 KilogramPerHeadPerDayString = WrapString(Resources.PoundPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.PoundsN2ONPerPoundN);
-                KilogramsN2OPerHectareString = WrapString(Resources.PoundsN2ONPerAcreString);
+                KilogramsN2OPerHectareString = WrapString(Resources.PoundsN2OPerAcreString);
                 KilogramsNONPerHectareString = WrapString(Resources.PoundsNONPerAcreString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.PoundsNO3NPerAcreString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.PoundsNH4NPerAcreString);
@@ -953,6 +977,9 @@ namespace H.Core.Models
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
                 KilogramsN20String = WrapString(Resources.PoundsN2O);
+                KilogramsN2OPerFieldString = WrapString(Resources.PoundsN2OPerField);
+                KilogramsN2OnPerFieldString = WrapString(Resources.PoundsN2ONPerField);
+                KilogramsNONPerFieldString = WrapString(Resources.PoundsNONPerField);
             }
         }
 

@@ -261,5 +261,9 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("KilogramsN2O", typeof(Resources))]
         KilogramsN2O,
+
+        [LocalizedDescription("KilogramsNON", typeof(Resources))]
+        KilogramsNON,
+
     }
 }

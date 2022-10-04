@@ -1634,7 +1634,7 @@
     <value>kg CH₄  year^-1</value>
   </data>
   <data name="KilogramsN2ON" xml:space="preserve">
-    <value>kg N₂O-N</value>
+    <value>kg N2O-N</value>
   </data>
   <data name="KilogramsN2ONPerYear" xml:space="preserve">
     <value>kg N₂O-N year^-1</value>
@@ -2044,6 +2044,9 @@
   <data name="KilogramsN2ONPerHectareString" xml:space="preserve">
     <value>kg N2O-N (ha)^-1</value>
   </data>
+  <data name="KilogramsN2OPerHectareString" xml:space="preserve">
+    <value>kg N2O (ha)^-1</value>
+  </data>
   <data name="KilogramsNONPerHectareString" xml:space="preserve">
     <value>kg NO-N (ha)^-1</value>
   </data>
@@ -2322,6 +2325,12 @@
   </data>
   <data name="LabelTotalIndirectNitrousOxide" xml:space="preserve">
     <value>N2O-N_indirect</value>
+  </data>
+  <data name="LabelTotalIndirectN2O" xml:space="preserve">
+    <value>N2O Indirect</value>
+  </data>
+  <data name="LabelTotalDirectN2O" xml:space="preserve">
+    <value>N2O Direct</value>
   </data>
   <data name="LabelTotalNitrateLeachingForArea" xml:space="preserve">
     <value>NO3-N_totalLeach</value>
@@ -3445,6 +3454,9 @@
   </data>
   <data name="PoundsN2ONPerAcreString" xml:space="preserve">
     <value>lb N2O-N ac^-1</value>
+  </data>
+  <data name="PoundsN2OPerAcreString" xml:space="preserve">
+    <value>lb N2O ac^-1</value>
   </data>
   <data name="PoundsDryMatterPerAcreString" xml:space="preserve">
     <value>lb DM ac^-1</value>
@@ -5219,6 +5231,24 @@
   <data name="KilogramsN2O" xml:space="preserve">
     <value>kg N2O</value>
   </data>
+  <data name="KilogramsN2OPerField" xml:space="preserve">
+    <value>kg N2O field^-1</value>
+  </data>
+  <data name="KilogramsN2ONPerField" xml:space="preserve">
+    <value>kg N2O-N field^-1</value>
+  </data>
+  <data name="KilogramsNONPerField" xml:space="preserve">
+    <value>kg NO-N field^-1</value>
+  </data>
+  <data name="PoundsN2OPerField" xml:space="preserve">
+    <value>lb N2O field^-1</value>
+  </data>
+  <data name="PoundsN2ONPerField" xml:space="preserve">
+    <value>lb N2O-N field^-1</value>
+  </data>
+  <data name="PoundsNONPerField" xml:space="preserve">
+    <value>lb NO-N field^-1</value>
+  </data>
   <data name="PoundsN2O" xml:space="preserve">
     <value>lb N2O</value>
   </data>
@@ -5227,5 +5257,11 @@
   </data>
   <data name="MessageBackupRestored" xml:space="preserve">
     <value>Holos was not shutdown properly during the last session. A backup created on {0} at {1} has been restored. Please verify your data for consistency.</value>
+  </data>
+  <data name="KilogramsNON" xml:space="preserve">
+    <value>Kg NO-N</value>
+  </data>
+  <data name="PoundsNON" xml:space="preserve">
+    <value>lb NO-N</value>
   </data>
 </root>

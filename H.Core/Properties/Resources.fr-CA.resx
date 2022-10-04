@@ -3509,8 +3509,14 @@
   <data name="LabelTotalDietaryFiber" xml:space="preserve">
     <value>fibres alimentaires totales</value>
   </data>
+  <data name="LabelTotalDirectN2O" xml:space="preserve">
+    <value>N2O Direct</value>
+  </data>
   <data name="LabelTotalDirectNitrousOxide" xml:space="preserve">
     <value>N2O-N_direct</value>
+  </data>
+  <data name="LabelTotalIndirectN2O" xml:space="preserve">
+    <value>N2O Indirect</value>
   </data>
   <data name="LabelTotalIndirectNitrousOxide" xml:space="preserve">
     <value>N2O-N_indirect</value>

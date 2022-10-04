@@ -117,7 +117,6 @@
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
-    <Compile Include="Calculators\NitrousOxideCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />
