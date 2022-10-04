@@ -392,10 +392,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.5-12
             this.N2O_NSyntheticNitrogenVolatilization = this.SyntheticNitrogenPool * volatilizationFraction * volatilizationEmissionFactor;
 
-            // TODO: is this an accumulation?
             // Equation 2.6.6-13
             // Equation 2.7.5-13
-            this.N2O_NOrganicNitrogenVolatilization += (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) + totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureVolatilized;
+            this.N2O_NOrganicNitrogenVolatilization = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) + totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureVolatilized;
         }
 
         protected void CalculateActualVolatilization(
