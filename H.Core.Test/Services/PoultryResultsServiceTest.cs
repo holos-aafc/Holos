@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -170,11 +171,15 @@ namespace H.Core.Test.Services
                 },
             };
 
+            farm.StageStates.Add(new FieldSystemDetailsStageState() { DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>() { cropViewItem } });
+
             var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
                 farm: farm,
-                dailyEmissions: dailyEmissions);
+                dailyEmissions: dailyEmissions,
+                ComponentCategory.Poultry,
+                AnimalType.Poultry);
 
-            Assert.AreEqual(0.140851, results.First().TotalIndirectN2ONEmissions, 0.0001);
+            Assert.AreEqual(3.640151, results.First().TotalIndirectN2ONEmissions, 0.0001);
         }
 
         #endregion

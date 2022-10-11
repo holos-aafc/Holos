@@ -11,7 +11,7 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        private readonly SingleYearNitrousOxideCalculator _singleYearNitrousOxideCalculator = new SingleYearNitrousOxideCalculator();
+        protected readonly SingleYearNitrousOxideCalculator _singleYearNitrousOxideCalculator = new SingleYearNitrousOxideCalculator();
 
         #endregion
 
@@ -24,6 +24,10 @@ namespace H.Core.Calculators.Carbon
 
         public double AboveGroundResidueN { get; set; }
         public double BelowGroundResidueN { get; set; }
+
+        /// <summary>
+        /// N_m
+        /// </summary>
         public double ManurePool { get; set; }
 
         /// <summary>
@@ -246,12 +250,6 @@ namespace H.Core.Calculators.Carbon
             }
         }
 
-        protected void SetOrganicFertilizerStartState(CropViewItem currentYearResults)
-        {
-            // Equation 2.7.1-3 - this does not include manure
-            this.OrganicPool = (currentYearResults.GetTotalOrganicNitrogenInYear() / currentYearResults.Area);
-        }
-
         protected void SetPoolStartStates(Farm farm)
         {
             if (this.YearIndex == 0)
@@ -266,10 +264,10 @@ namespace H.Core.Calculators.Carbon
             this.SetSyntheticNStartState(this.CurrentYearResults);
             this.SetAvailabilityOfMineralNState(this.PreviousYearResults);
             this.SetMicrobePoolStartingState(this.PreviousYearResults, this.YearIndex);
-            this.SetOrganicFertilizerStartState(this.CurrentYearResults);
 
-            // Manure pool must be set before crop residue calculations
+            // Manure pool must be set before crop residue, and organic nitrogen pool initializations
             this.SetManurePoolStartState(farm);
+            this.SetOrganicNitrogenPoolStartState();
             this.SetCropResiduesStartState(farm);
         }
 
@@ -609,6 +607,13 @@ namespace H.Core.Calculators.Carbon
             this.MicrobePool += this.OrganicPool;
 
             currentYearResults.MicrobialPoolAfterCloseOfBudget = this.MicrobePool;
+
+            // See section 2.6.8.1
+            this.SyntheticNitrogenPool = 0;
+            this.CropResiduePool = 0;
+            this.MineralPool = 0;
+            this.OrganicPool = 0;
+            this.ManurePool = 0;
         }
 
         protected void CalculatePoolRatio()
@@ -782,12 +787,61 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.Overflow = this.AvailabilityOfMineralN + this.MicrobePool - this.N2Loss;
         }
 
+        /// <summary>
+        /// Equation 4.7.2-1
+        /// </summary>
+        /// <param name="totalNitrogenAvailableForLandApplication"></param>
+        /// <param name="totalDirectN2ON"></param>
+        /// <param name="totalAmmoniaFromLandapplication"></param>
+        /// <param name="totalN2ONFromLeaching"></param>
+        /// <param name="totalVolumeOfManure">(kg N 1000 kg^-1 wet weight)</param>
+        /// <returns>Fraction of N in field-applied manure (kg N 1000 kg^-1 wet weight)</returns>
+        protected double CalculateFractionOfNitrogenAppliedToSoil(
+            double totalNitrogenAvailableForLandApplication,
+            double totalDirectN2ON,
+            double totalAmmoniaFromLandapplication,
+            double totalN2ONFromLeaching,
+            double totalVolumeOfManure)
+        {
+            if (totalVolumeOfManure == 0)
+            {
+                return 0;
+            }
+
+            var result = (totalNitrogenAvailableForLandApplication - (totalDirectN2ON + totalAmmoniaFromLandapplication + totalN2ONFromLeaching)) / totalVolumeOfManure;
+
+            return result;
+        }
+
+        protected double GetManureNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
+        {
+            var totalDirectN2ONFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(cropViewItem, farm);
+            var totalIndirectEmissionsFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(cropViewItem, farm);
+
+            var totalManureLeachingN2ON = totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching;
+            var ammoniacalLoss = totalIndirectEmissionsFromLandAppliedManure.AmmoniacalLoss;
+            var totalNitrogenAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure.ActualAmountOfNitrogenAppliedFromLandApplication;
+            var totalVolumeOfManureAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure.TotalVolumeOfManureUsedDuringApplication;
+
+            var fractionOfNitrogenAppliedToSoil = CalculateFractionOfNitrogenAppliedToSoil(
+                totalAmmoniaFromLandapplication: ammoniacalLoss,
+                totalNitrogenAvailableForLandApplication: totalNitrogenAvailableForLandApplication,
+                totalDirectN2ON: totalDirectN2ONFromLandAppliedManure,
+                totalN2ONFromLeaching: totalManureLeachingN2ON,
+                totalVolumeOfManure: totalVolumeOfManureAvailableForLandApplication);
+
+            var result = fractionOfNitrogenAppliedToSoil / cropViewItem.Area;
+
+            return result;
+        }
+
         #endregion
 
         #region Abstract Methods
 
         protected abstract void SetCropResiduesStartState(Farm farm);
         protected abstract void SetManurePoolStartState(Farm farm);
+        protected abstract void SetOrganicNitrogenPoolStartState();
 
         #endregion
     }

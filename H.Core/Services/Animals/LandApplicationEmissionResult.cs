@@ -36,5 +36,22 @@ namespace H.Core.Services.Animals
         /// (kg N2O-N)
         /// </summary>
         public double TotalN2ONFromManureLeaching;
+
+        /// <summary>
+        /// (kg / L)
+        /// </summary>
+        public double TotalVolumeOfManureUsedDuringApplication { get; set; }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalLoss { get; set; }
+
+        /// <summary>
+        /// The actual amount of N that was applied from the manure application
+        /// 
+        /// (kg N)
+        /// </summary>
+        public double ActualAmountOfNitrogenAppliedFromLandApplication { get; set; }
     }
 }

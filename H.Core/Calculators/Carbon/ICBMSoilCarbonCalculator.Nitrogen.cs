@@ -19,6 +19,26 @@ namespace H.Core.Calculators.Carbon
 
         #endregion
 
+        #region Overrides
+
+        protected override void SetOrganicNitrogenPoolStartState()
+        {
+            // Equation 2.6.1-3
+            this.OrganicPool += (this.CurrentYearResults.GetTotalOrganicNitrogenInYear() / this.CurrentYearResults.Area);
+
+            if (YearIndex == 0)
+            {
+                this.OrganicPool += this.ManurePool;
+            }
+            else
+            {
+                // Equation 2.6.4-3
+                this.OrganicPool += (this.PreviousYearResults.ManureResiduePool_ManureN - this.ManurePool);
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         public void CalculateNitrogenAtInterval(
@@ -37,7 +57,6 @@ namespace H.Core.Calculators.Carbon
 
             base.SetPoolStartStates(farm);
 
-            // Equation 2.6.3-5
             base.MineralPool = this.CalculateMineralizedNitrogenFromDecompositionOfOldCarbon(
                 oldPoolSoilCarbonAtPreviousInterval: previousYearResults.OldPoolSoilCarbon,
                 oldPoolDecompositionRate: farm.Defaults.DecompositionRateConstantOldPool,
@@ -166,20 +185,6 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.3-1
-        /// Equation 2.6.3-2
-        /// </summary>
-        public double CalculateManureResidueNitrogenPool(double manureResidueNitrogenPoolAtPreviousInterval,
-                                                         double amountOfManureAppliedAtPreviousInterval,
-                                                         double decompositionRateYoungPool,
-                                                         double climateParameter)
-        {
-            var result = (manureResidueNitrogenPoolAtPreviousInterval + amountOfManureAppliedAtPreviousInterval) * Math.Exp((-1) * decompositionRateYoungPool * climateParameter);
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 2.6.4-1
         /// </summary>
         public double CalculateCropResiduesAtStartingPoint(
@@ -212,28 +217,27 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.3-3
+        /// Equation 2.6.3-1
         /// </summary>
         public double CalculateAvailabilityOfNitrogenFromManureDecompositionAtStartingPoint(
             double manureResiduePoolAtEquilibrium,
             double decompositionRateConstantYoungPool,
             double climateParameter)
-        {
-            // TODO: double check that ManureN_crop is the same as ManureN_field at this stage
-            var result = manureResiduePoolAtEquilibrium - (manureResiduePoolAtEquilibrium * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
+        { 
+            var result = (manureResiduePoolAtEquilibrium * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
 
             return result;
         }
 
         /// <summary>
-        /// Equation 2.6.3-4
+        /// Equation 2.6.3-2
         /// </summary>
-        public double CalculateAvailabilityOfNitrogenFromManureDecompositionAtInterval(
-            double manureResiduePoolAtPreviousInterval,
-            double manureResiduePoolAtCurrentInterval,
-            double amountOfManureAppliedAtPreviousInterval)
+        public double CalculateAvailabilityOfNitrogenFromManureDecompositionAfterStartingPoint(double manureResidueNitrogenPoolAtPreviousInterval,
+            double amountOfManureAppliedAtPreviousInterval,
+            double decompositionRateYoungPool,
+            double climateParameter)
         {
-            var result = (manureResiduePoolAtPreviousInterval + amountOfManureAppliedAtPreviousInterval) - manureResiduePoolAtCurrentInterval;
+            var result = (manureResidueNitrogenPoolAtPreviousInterval + amountOfManureAppliedAtPreviousInterval) * Math.Exp((-1) * decompositionRateYoungPool * climateParameter);
 
             return result;
         }
@@ -420,28 +424,29 @@ namespace H.Core.Calculators.Carbon
         {
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? this.CurrentYearResults.ClimateParameter : this.CurrentYearResults.ManagementFactor;
 
-            base.ManurePool = this.CalculateManureResidueNitrogenPool(
-                manureResidueNitrogenPoolAtPreviousInterval: base.PreviousYearResults.ManureResiduePool_ManureN,
-                amountOfManureAppliedAtPreviousInterval: base.PreviousYearResults.AmountOfManureApplied,
-                decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
-                climateParameter: climateParameterOrManagementFactor);
-
-            if (this.YearIndex == 0)
+            if (this.YearIndex == 0) 
             {
-                var organicNitrogenPool_N_ON = this.CalculateAvailabilityOfNitrogenFromManureDecompositionAtStartingPoint(
-                    manureResiduePoolAtEquilibrium: base.ManurePool,
+                // N_ICBM_(t)
+                var manureResidueInputsForCurrentYear = base.GetManureNitrogenResiduesForYear(farm, this.CurrentYearResults);
+
+                // N_m
+                this.ManurePool = this.CalculateAvailabilityOfNitrogenFromManureDecompositionAtStartingPoint(
+                    manureResiduePoolAtEquilibrium: manureResidueInputsForCurrentYear,
                     decompositionRateConstantYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
                     climateParameter: climateParameterOrManagementFactor);
             }
             else
             {
-                var organicNitrogenPool_N_ON = this.CalculateAvailabilityOfNitrogenFromManureDecompositionAtInterval(
-                    manureResiduePoolAtPreviousInterval: base.PreviousYearResults.ManureResiduePool_ManureN,
-                    manureResiduePoolAtCurrentInterval: base.ManurePool,
-                    amountOfManureAppliedAtPreviousInterval: base.PreviousYearResults.AmountOfManureApplied);
-            }
+                // N_ICBM_(t-1)
+                var manureResidueInputsForPreviousYear = base.GetManureNitrogenResiduesForYear(farm, this.PreviousYearResults);
 
-            base.CurrentYearResults.OrganicNitrogenResiduesBeforeAdjustment = base.ManurePool;
+                // N_m
+                this.ManurePool = this.CalculateAvailabilityOfNitrogenFromManureDecompositionAfterStartingPoint(
+                    manureResidueNitrogenPoolAtPreviousInterval: base.PreviousYearResults.ManureResiduePool_ManureN,
+                    amountOfManureAppliedAtPreviousInterval: manureResidueInputsForPreviousYear,
+                    decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
+            }
         }
 
         protected override void AssignFinalValues()

@@ -684,16 +684,13 @@ namespace H.Core.Models
         {
             var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
 
-            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            foreach (var viewItem in this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems)
             {
-                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
                 {
-                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                    if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
                     {
-                        if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
-                        {
-                            result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(cropViewItem, manureApplicationViewItem));
-                        }
+                        result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(viewItem, manureApplicationViewItem));
                     }
                 }
             }

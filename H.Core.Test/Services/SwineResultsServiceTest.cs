@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -391,7 +392,9 @@ namespace H.Core.Test.Services
                 },
             };
 
-            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
+            farm.StageStates.Add(new FieldSystemDetailsStageState() { DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>() { cropViewItem } });
+
+            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
                 farm: farm,
                 dailyEmissions: dailyEmissions,
                 componentCategory,

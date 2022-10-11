@@ -1196,6 +1196,15 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kg)
+        /// </summary>
+        public double TotalVolumeOfManureAvailableForLandApplicationInKilograms {
+            get
+            {
+                return this.TotalVolumeOfManureAvailableForLandApplication * 1000;
+            } }
+
+        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure

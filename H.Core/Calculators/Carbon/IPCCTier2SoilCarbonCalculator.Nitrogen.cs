@@ -21,10 +21,15 @@ namespace H.Core.Calculators.Carbon
 
         #region Overrides
 
+        protected override void SetOrganicNitrogenPoolStartState()
+        {
+            // Equation 2.7.1-3 - this does not include manure
+            this.OrganicPool = (this.CurrentYearResults.GetTotalOrganicNitrogenInYear() / this.CurrentYearResults.Area);
+        }
+
         protected override void SetManurePoolStartState(Farm farm)
         {
-            // TODO: get this input
-            // Equation 2.7.2-11
+            // In the IPCC Tier 2 there is no separate manure pool and so we just set it to zero here. Manure nitrogen is considered when it is added to the crop residues in 2.7.2-12
             base.ManurePool = 0;
         }
 
@@ -48,7 +53,11 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = base.AboveGroundResidueN;
             this.CurrentYearResults.BelowGroundResidueNitrogenForCrop = base.BelowGroundResidueN;
 
-            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN + base.ManurePool; // Note: this is in kg N/ha but algorithm document converts to t N/ha
+            var manureResidues = base.GetManureNitrogenResiduesForYear(farm, this.CurrentYearResults);
+
+            // 2.7.2-12
+            // Manure inputs are spread across the pools - as opposed to the ICBM approach where manure is added the dedicated manure pool
+            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN + manureResidues; // Note: this is in kg N/ha but algorithm document converts to t N/ha
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;
         }
 
@@ -156,8 +165,10 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
-            base.CropNitrogenDemand = (this.CurrentYearResults.AboveGroundCarbonInput + this.CurrentYearResults.BelowGroundCarbonInput + this.CurrentYearResults.ManureCarbonInputsPerHectare) *
-                    this.CurrentYearResults.NitrogenContent;
+            base.CropNitrogenDemand = (this.CurrentYearResults.AboveGroundCarbonInput + 
+                                       this.CurrentYearResults.BelowGroundCarbonInput + 
+                                       this.CurrentYearResults.ManureCarbonInputsPerHectare) * 
+                                      this.CurrentYearResults.NitrogenContent;
 
             // Equation 2.7.7-12
             //base.CropNitrogenDemand = this.CalculateCropNitrogenDemand(

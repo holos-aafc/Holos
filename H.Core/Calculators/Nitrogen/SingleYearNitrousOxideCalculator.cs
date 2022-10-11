@@ -39,32 +39,32 @@ namespace H.Core.Calculators.Nitrogen
 
             var beefCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.BeefProduction);
             var beefCattleGroupEmissionsByDay = beefCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var beefCattleIndirectEmissions = _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farm, beefCattleGroupEmissionsByDay, ComponentCategory.BeefProduction, AnimalType.Beef);
+            var beefCattleIndirectEmissions = _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, beefCattleGroupEmissionsByDay, ComponentCategory.BeefProduction, AnimalType.Beef);
             result.AddRange(beefCattleIndirectEmissions);
 
             var dairyCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Dairy);
             var dairyCattleEmissionsByDay = dairyCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var dairyCattleIndirectEmissions = _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(farm, dairyCattleEmissionsByDay, ComponentCategory.Dairy, AnimalType.Dairy);
+            var dairyCattleIndirectEmissions = _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, dairyCattleEmissionsByDay, ComponentCategory.Dairy, AnimalType.Dairy);
             result.AddRange(dairyCattleIndirectEmissions);
 
             var poultryResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Poultry);
             var poultryEmissions = poultryResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var poultryIndirectEmissions = _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, poultryEmissions);
+            var poultryIndirectEmissions = _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, poultryEmissions, ComponentCategory.Poultry, AnimalType.Poultry);
             result.AddRange(poultryIndirectEmissions);
 
             var swineResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Swine);
             var swineEmissions = swineResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var swineIndirectEmissions = _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
+            var swineIndirectEmissions = _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
             result.AddRange(swineIndirectEmissions);
 
             var sheepResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Sheep);
             var sheepEmissions = sheepResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var sheepIndirectEmissions = _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
+            var sheepIndirectEmissions = _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
             result.AddRange(sheepIndirectEmissions);
 
             var otherLivestockResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.OtherLivestock);
             var otherLivestockEmissions = otherLivestockResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var otherLivestockIndirectEmissions = _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
+            var otherLivestockIndirectEmissions = _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
             result.AddRange(otherLivestockIndirectEmissions);
 
             return result;
@@ -78,15 +78,23 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm)
         {
             var result = new LandApplicationEmissionResult();
-
             var indirectEmissionsForAllFields = this.CalculateIndirectEmissionResultsFromLandAppliedManure(farm);
-            var indirectEmissionsForField = indirectEmissionsForAllFields.Where(x => x.CropViewItem.Guid.Equals(viewItem.Guid));
-            foreach (var landApplicationEmissionResult in indirectEmissionsForField)
+
+            // This will be a list of all indirect emissions for land applied manure for each year of history for this field
+            var indirectEmissionsForField = indirectEmissionsForAllFields.Where(x => x.CropViewItem.FieldSystemComponentGuid.Equals(viewItem.FieldSystemComponentGuid));
+
+            // Filter by year
+            var byYear = indirectEmissionsForField.Where(x => x.CropViewItem.Year.Equals(viewItem.Year));
+
+            foreach (var landApplicationEmissionResult in byYear)
             {
                 result.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching;
                 result.TotalIndirectN2ONEmissions += landApplicationEmissionResult.TotalIndirectN2ONEmissions;
                 result.TotalNitrateLeached += landApplicationEmissionResult.TotalNitrateLeached;
                 result.TotalN2ONFromManureVolatilized += landApplicationEmissionResult.TotalN2ONFromManureVolatilized;
+                result.TotalVolumeOfManureUsedDuringApplication  += landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication;
+                result.AmmoniacalLoss += landApplicationEmissionResult.AmmoniacalLoss;
+                result.ActualAmountOfNitrogenAppliedFromLandApplication += landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
             }
 
             return result;

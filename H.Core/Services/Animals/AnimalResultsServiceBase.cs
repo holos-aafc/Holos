@@ -2199,190 +2199,118 @@ namespace H.Core.Services.Animals
             return totalAdjustedAmmoniaLossesFromStorage;
         }
 
-        protected IndirectInputFromLandApplicationDto GetIndirectInputFromLandApplicationDto(
+        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
             Farm farm,
             List<GroupEmissionsByDay> dailyEmissions,
+            ComponentCategory componentCategory,
             AnimalType animalType)
         {
-            var cropByAnimalType =
-                farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
-            var source =
-                cropByAnimalType.Select(
-                    x => x.Item2);
-            var second = source
-                .Select(
-                    x => x.DateOfApplication.Date).Distinct();
-            var first = dailyEmissions
-                .Select(x => x.DateTime.Date)
-                .Distinct();
-            var dateTimes = first.Intersect(second);
-            return new IndirectInputFromLandApplicationDto()
-            {
-                Tuples = cropByAnimalType,
-                ManureApplications = source,
-                DatesOfApplications = second,
-                DatesOfEmissions = first,
-                IntersectingDates = dateTimes
-            };
-        }
-
-        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureSheepSwineOtherLivestock(
-                Farm farm,
-                List<GroupEmissionsByDay> dailyEmissions,
-                ComponentCategory componentCategory,
-                AnimalType animalType)
-        {
-            var results = new List<LandApplicationEmissionResult>();
-
-            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
-            var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
-            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
-            var emissionFactorData = _livestockEmissionConversionFactorsProvider.GetFactors(ManureStateType.Pasture, componentCategory, annualPrecipitation, annualTemperature, evapotranspiration, 0.0, animalType, farm);
-            
-            var indirectDto = GetIndirectInputFromLandApplicationDto(farm, dailyEmissions, animalType);
-            foreach (var intersectingDate in indirectDto.IntersectingDates)
-            {
-                var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
-
-                var totalManureProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication) * 1000; // Daily volume calculated as 1000's of kg/L
-                var totalNitrogenAvailableForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
-
-                var manureApplicationAndCropPairsOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date));
-
-                // There could be multiple manure applications on the same date, iterate over all manure application for this date
-                foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
-                {
-                    var applicationEmissionResult = new LandApplicationEmissionResult();
-
-                    var cropViewItem = manureApplicationAndCropPair.Item1;
-                    applicationEmissionResult.CropViewItem = cropViewItem;
-
-                    var fractionOfManureUsed = manureApplicationAndCropPair.Item2.AmountOfManureAppliedPerHectare * cropViewItem.Area / totalManureProducedByAnimalsOnDate;
-                    if (fractionOfManureUsed > 1.0)
-                        fractionOfManureUsed = 1.0;
-
-                    // Equation 4.6.2-7
-                    var ammoniacalLoss = fractionOfManureUsed * totalNitrogenAvailableForLandApplicationOnDate * emissionFactorData.VolatilizationFraction;
-
-                    // Equation 4.6.3-2
-                    applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailableForLandApplicationOnDate * emissionFactorData.VolatilizationFraction * emissionFactorData.EmissionFactorVolatilization;
-
-                    // Equation 4.6.3-2
-                    var n2OVolatilization = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
-
-                    // Equation 4.6.3-4
-                    applicationEmissionResult.AdjustedAmmoniacalLoss = ammoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
-
-                    // Equation 4.6.3-5
-                    var adjustedAmmoniaLoss = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
-                    var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
-
-                    // Equation 4.6.4-1
-                    applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
-
-                    // Equation 4.6.4-4
-                    applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailableForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
-
-                    // Equation 4.6.5-1
-                    applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
-
-                    // Equation 4.6.5-2
-                    applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
-
-
-                    results.Add(applicationEmissionResult);
-                }
-
-                /*
-                 * Indirect emissions cannot be attributed back to specific animal groups because manure tanks that are used when create manure applications cannot trace back
-                 * to a single GroupEmissionsByDay/AnimalGroup. Indirect emissions from land application are therefore attributed to the specific field only.
-                 */
-            }
-
-            return results;
-        }
-
-        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
-                Farm farm,
-                List<GroupEmissionsByDay> dailyEmissions,
-                ComponentCategory componentCategory,
-                AnimalType animalType)
-        {
+            var totalManureProducedByAnimals = dailyEmissions.Sum(x => x.TotalVolumeOfManureAvailableForLandApplicationInKilograms);
+            var totalNitrogenAvailalbeForLandApplicationOnDate = dailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
+            var totalTanForLandApplicationOnDate = dailyEmissions.Sum(x => x.TanAvailableForLandApplication);
+            var applicationsAndCropByAnimalType = farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
             var results = new List<LandApplicationEmissionResult>();
             var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
             var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
             var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
 
             var emissionFactorData = _livestockEmissionConversionFactorsProvider.GetFactors(ManureStateType.Pasture, componentCategory, annualPrecipitation, annualTemperature, evapotranspiration, 0.0, animalType, farm);
-            var indirectDto = GetIndirectInputFromLandApplicationDto(farm, dailyEmissions, animalType);
-            foreach (var intersectingDate1 in indirectDto.IntersectingDates)
+            foreach (var tuple in applicationsAndCropByAnimalType)
             {
-                var intersectingDate = intersectingDate1;
-                var groupEmissionsOnDate = dailyEmissions.Where(x => x.DateTime.Date.Equals(intersectingDate.Date)).ToList();
-                var totalManureProducedByAnimalsOnDate  = groupEmissionsOnDate.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication) * 1000; // Daily volume calculated as 1000's of kg/L
-                var totalTanProducedByAnimalsOnDate = groupEmissionsOnDate.Sum(x => x.TanAvailableForLandApplication);
-                var totalNitrogenAvailalbeForLandApplicationOnDate = groupEmissionsOnDate.Sum(x => x.NitrogenAvailableForLandApplication);
+                var applicationEmissionResult = new LandApplicationEmissionResult();
 
-                var manureApplicationAndCropPairsOnDate = indirectDto.Tuples.Where(x => x.Item2.DateOfApplication.Date.Equals(intersectingDate.Date));
-                var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(intersectingDate.Month);
+                var crop = tuple.Item1;
+                var manureApplication = tuple.Item2;
+                var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(manureApplication.DateOfApplication.Month);
 
-                // There could be multiple manure applications on the same date, iterate over all manure application for this date
-                foreach (var manureApplicationAndCropPair in manureApplicationAndCropPairsOnDate)
+                var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
+                if (fractionOfManureUsed > 1.0)
+                    fractionOfManureUsed = 1.0;
+
+                applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = fractionOfManureUsed * totalNitrogenAvailalbeForLandApplicationOnDate;
+
+                applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = fractionOfManureUsed * totalManureProducedByAnimals;
+
+                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
+
+                var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(crop, manureApplication);
+                var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
+
+                var fractionVolatilized = 0d;
+                if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
                 {
-                    var applicationEmissionResult = new LandApplicationEmissionResult();
-
-                    var cropViewItem = manureApplicationAndCropPair.Item1;
-                    applicationEmissionResult.CropViewItem = cropViewItem;
-
-                    var manureApplicationViewItem = manureApplicationAndCropPair.Item2;
-
-                    var fractionOfManureUsed = manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area / totalManureProducedByAnimalsOnDate;
-                    if (fractionOfManureUsed > 1.0)
-                        fractionOfManureUsed = 1.0;
-                    
-                    var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
-
-                    var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(cropViewItem, manureApplicationViewItem);
-                    var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
-
                     // Equation 4.6.2-3
-                    var ammoniacalLoss = fractionOfManureUsed * totalTanProducedByAnimalsOnDate * adjustedAmmoniaEmissionFactor;
-
-                    // Equation 4.6.2-4
-                    var ammoniaLoss = ammoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalTanForLandApplicationOnDate * adjustedAmmoniaEmissionFactor;
 
                     // Equation 4.6.3-1
-                    var fractionVolatilized = ammoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
+                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
+                }
+                else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
+                {
+                    // Equation 4.6.2-7
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalNitrogenAvailalbeForLandApplicationOnDate * emissionFactorData.VolatilizationFraction;
 
                     // Equation 4.6.3-2
-                    applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailalbeForLandApplicationOnDate * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
-
-                    // Equation 4.6.3-3
-                    var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
-
-                    // Equation 4.6.3-4
-                    applicationEmissionResult.AdjustedAmmoniacalLoss = ammoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
-
-                    // Equation 4.6.3-5
-                    var adjustedAmmoniaEmissions = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
-                    var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
-
-                    // Equation 4.6.4-1
-                    applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
-
-                    // Equation 4.6.4-4
-                    applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
-
-                    // Equation 4.6.5-1
-                    applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
-
-                    // Equation 4.6.5-2
-                    applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
-
-                    results.Add(applicationEmissionResult);
+                    fractionVolatilized = emissionFactorData.VolatilizationFraction;
                 }
+                else
+                {
+                    var emissionFraction = 0d;
+                    if (temperatureForMonth >= 15)
+                    {
+                        emissionFraction = 0.85;
+                    }
+                    else if (temperatureForMonth >= 10 && temperatureForMonth < 15)
+                    {
+                        emissionFraction = 0.73;
+                    }
+                    else if (temperatureForMonth >= 5 && temperatureForMonth < 10)
+                    {
+                        emissionFraction = 0.35;
+                    }
+                    else
+                    {
+                        emissionFraction = 0.25;
+                    }
+
+                    // Equation 4.6.2-5
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalManureProducedByAnimals * emissionFraction;
+
+                    // Equation 4.6.3-1
+                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
+                }
+
+                // Equation 4.6.2-4
+                // Equation 4.6.2-6
+                var ammoniaLoss = applicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+
+                // Equation 4.6.3-2
+                applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailalbeForLandApplicationOnDate * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
+
+                // Equation 4.6.3-3
+                var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
+
+                // Equation 4.6.3-4
+                applicationEmissionResult.AdjustedAmmoniacalLoss = applicationEmissionResult.AmmoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
+
+                // Equation 4.6.3-5
+                var adjustedAmmoniaEmissions = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+
+                var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
+
+                // Equation 4.6.4-1
+                applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
+
+                // Equation 4.6.4-4
+                applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
+
+                // Equation 4.6.5-1
+                applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
+
+                // Equation 4.6.5-2
+                applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
+
+                results.Add(applicationEmissionResult);
             }
 
             return results;
@@ -2416,14 +2344,5 @@ namespace H.Core.Services.Animals
             dailyEmissions.EmissionFactorForLeaching = managementPeriod.ManureDetails.EmissionFactorLeaching;
             dailyEmissions.LeachingFraction = managementPeriod.ManureDetails.LeachingFraction;
         }
-    }
-
-    public class IndirectInputFromLandApplicationDto
-    {
-        public List<Tuple<CropViewItem, ManureApplicationViewItem>> Tuples { get; set; }
-        public IEnumerable<ManureApplicationViewItem> ManureApplications { get; set; }
-        public IEnumerable<DateTime> DatesOfApplications { get; set; }
-        public IEnumerable<DateTime> DatesOfEmissions { get; set; }
-        public IEnumerable<DateTime> IntersectingDates { get; set; }
     }
 }

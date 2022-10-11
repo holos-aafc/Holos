@@ -15,19 +15,19 @@ namespace H.Core.Providers.Animals
 
         public IFeedingActivityCoeffientData GetByHousing(HousingType housingType)
         {
-            if (housingType.IsFreeStall() || housingType == HousingType.Confined)
-            {
-                return new Table_20_Cattle_Feeding_Activity_Coefficient_Data()
-                {
-                    FeedingActivityCoefficient = 0,
-                };
-            }
-            else
+            if (housingType.IsPasture())
             {
                 // Pasture
                 return new Table_20_Cattle_Feeding_Activity_Coefficient_Data()
                 {
                     FeedingActivityCoefficient = 0.17,
+                };
+            }
+            else
+            {
+                return new Table_20_Cattle_Feeding_Activity_Coefficient_Data()
+                {
+                    FeedingActivityCoefficient = 0,
                 };
             }
         }

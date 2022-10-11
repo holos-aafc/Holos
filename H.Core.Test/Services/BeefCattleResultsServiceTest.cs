@@ -620,7 +620,9 @@ namespace H.Core.Test.Services
                 },
             };
 
-            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
+            farm.StageStates.Add(new FieldSystemDetailsStageState() {DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>(){cropViewItem}});
+
+            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
                 farm: farm,
                 dailyEmissions: dailyEmissions,
                 componentCategory: componentCategory,
@@ -714,7 +716,7 @@ namespace H.Core.Test.Services
                 },
             };
 
-            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManureFromBeefAndDairyCattle(
+            var results = _resultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(
                 farm: farm,
                 dailyEmissions: dailyEmissions,
                 componentCategory: componentCategory,
