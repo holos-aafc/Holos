@@ -58,13 +58,18 @@ namespace H.Core.Models.LandManagement.Fields
          */
 
         public double SyntheticNitrogenPool_N_SN { get; set; }
+
         /// <summary>
         /// kg N ha^-1
         /// </summary>
         public double MineralNitrogenPool_N_mineralN { get; set; }
+
         public double ManureResiduePool_ManureN { get; set; }
+
         public double CropResidueNitrogenPool_N_CropResidues { get; set; }
+
         public double OrganicNitrogenPool_N_ON { get; set; }
+
         /// <summary>
         /// kg N ha^-1
         /// </summary>
@@ -84,6 +89,13 @@ namespace H.Core.Models.LandManagement.Fields
         /// kg N ha^-1
         /// </summary>
         public double BelowGroundResiduePool_BGresidueN { get; set; }
+
+        /// <summary>
+        /// Manure N inputs from field applied manure
+        /// 
+        /// (kg N ha^-1)
+        /// </summary>
+        public double ManureResidueN { get; set; }
 
         /// <summary>
         /// (kg N2O-N field^-1)

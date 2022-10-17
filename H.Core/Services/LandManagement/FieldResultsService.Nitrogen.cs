@@ -451,7 +451,6 @@ namespace H.Core.Services.LandManagement
 
             result.AboveGroundResidueNitrogen = aboveGroundResidueNitrogen;
 
-            // Equation 2.6.6-5
             var belowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(
                 previousYearViewItem: null,
                 currentYearViewItem: viewItem,
