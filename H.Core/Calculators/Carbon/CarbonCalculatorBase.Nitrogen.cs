@@ -22,7 +22,18 @@ namespace H.Core.Calculators.Carbon
         public int YearIndex { get; set; }
         public int Year { get; set; }
 
+        /// <summary>
+        /// AG_N
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
         public double AboveGroundResidueN { get; set; }
+
+        /// <summary>
+        /// BGR_N
+        /// 
+        /// (kg N ha^-1)
+        /// </summary>
         public double BelowGroundResidueN { get; set; }
 
         /// <summary>
@@ -507,10 +518,18 @@ namespace H.Core.Calculators.Carbon
 
             if (this.AvailabilityOfMineralN > 0)
             {
-                // TODO: what is this summation?
                 // Equation 2.6.8-21
                 // Equation 2.7.7-21
-                //this.N2Loss = this.AvailabilityOfMineralN - 0;
+                this.N2Loss = this.AvailabilityOfMineralN - ((this.N2O_NFromSyntheticFertilizer + 
+                                                             N2O_NFromResidues + 
+                                                             N2O_NFromMineralization + 
+                                                             N2O_NFromOrganicNitrogen + 
+                                                             N2O_NFromSyntheticFertilizerLeaching + 
+                                                             N2O_NFromResiduesLeaching + 
+                                                             N2O_NFromMineralizationLeaching + 
+                                                             N2O_NFromOrganicNitrogenLeaching + 
+                                                             N2O_NSyntheticNitrogenVolatilization + 
+                                                             N2O_NOrganicNitrogenVolatilization) * (0.92 / 0.08));
             }
             else
             {
@@ -613,23 +632,25 @@ namespace H.Core.Calculators.Carbon
             this.CropResiduePool = 0;
             this.MineralPool = 0;
             this.OrganicPool = 0;
-            this.ManurePool = 0;
         }
 
         protected void CalculatePoolRatio()
         {
-            if (this.AvailabilityOfMineralN > this.MicrobePool)
+            var absoluteMineralN = Math.Abs(this.AvailabilityOfMineralN);
+            var absoluteMicrobeN = Math.Abs(this.MicrobePool);
+
+            if (absoluteMineralN > absoluteMicrobeN)
             {
                 // Equation 2.6.8-5
                 // Equation 2.7.7-5
-                this.PoolRatio = Math.Abs(1.0 / (this.AvailabilityOfMineralN / this.MicrobePool));
+                this.PoolRatio = Math.Abs(1.0 / (absoluteMineralN / absoluteMicrobeN));
             }
 
-            if (this.MicrobePool > this.AvailabilityOfMineralN)
+            if (absoluteMicrobeN > absoluteMineralN)
             {
                 // Equation 2.6.8-6
                 // Equation 2.7.7-6
-                this.PoolRatio = Math.Abs(this.AvailabilityOfMineralN / this.MicrobePool);
+                this.PoolRatio = Math.Abs(absoluteMineralN / absoluteMicrobeN);
             }
 
             this.CurrentYearResults.Ratio = this.PoolRatio;
@@ -790,25 +811,17 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 4.7.2-1
         /// </summary>
-        /// <param name="totalNitrogenAvailableForLandApplication"></param>
+        /// <param name="totalNitrogenAppliedToField"></param>
         /// <param name="totalDirectN2ON"></param>
-        /// <param name="totalAmmoniaFromLandapplication"></param>
+        /// <param name="totalAmmoniaLossFromLandapplication"></param>
         /// <param name="totalN2ONFromLeaching"></param>
-        /// <param name="totalVolumeOfManure">(kg N 1000 kg^-1 wet weight)</param>
         /// <returns>Fraction of N in field-applied manure (kg N 1000 kg^-1 wet weight)</returns>
-        protected double CalculateFractionOfNitrogenAppliedToSoil(
-            double totalNitrogenAvailableForLandApplication,
+        protected double CalculateAmountOfNitrogenAppliedToSoilAfterLosses(double totalNitrogenAppliedToField,
             double totalDirectN2ON,
-            double totalAmmoniaFromLandapplication,
-            double totalN2ONFromLeaching,
-            double totalVolumeOfManure)
+            double totalAmmoniaLossFromLandapplication,
+            double totalN2ONFromLeaching)
         {
-            if (totalVolumeOfManure == 0)
-            {
-                return 0;
-            }
-
-            var result = (totalNitrogenAvailableForLandApplication - (totalDirectN2ON + totalAmmoniaFromLandapplication + totalN2ONFromLeaching)) / totalVolumeOfManure;
+            var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandapplication + totalN2ONFromLeaching);
 
             return result;
         }
@@ -821,14 +834,11 @@ namespace H.Core.Calculators.Carbon
             var totalManureLeachingN2ON = totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching;
             var ammoniacalLoss = totalIndirectEmissionsFromLandAppliedManure.AmmoniacalLoss;
             var totalNitrogenAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure.ActualAmountOfNitrogenAppliedFromLandApplication;
-            var totalVolumeOfManureAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure.TotalVolumeOfManureUsedDuringApplication;
 
-            var fractionOfNitrogenAppliedToSoil = CalculateFractionOfNitrogenAppliedToSoil(
-                totalAmmoniaFromLandapplication: ammoniacalLoss,
-                totalNitrogenAvailableForLandApplication: totalNitrogenAvailableForLandApplication,
+            var fractionOfNitrogenAppliedToSoil = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(totalNitrogenAppliedToField: totalNitrogenAvailableForLandApplication,
                 totalDirectN2ON: totalDirectN2ONFromLandAppliedManure,
-                totalN2ONFromLeaching: totalManureLeachingN2ON,
-                totalVolumeOfManure: totalVolumeOfManureAvailableForLandApplication);
+                totalAmmoniaLossFromLandapplication: ammoniacalLoss,
+                totalN2ONFromLeaching: totalManureLeachingN2ON);
 
             var result = fractionOfNitrogenAppliedToSoil / cropViewItem.Area;
 

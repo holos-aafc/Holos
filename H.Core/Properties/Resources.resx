@@ -5264,4 +5264,10 @@
   <data name="PoundsNON" xml:space="preserve">
     <value>lb NO-N</value>
   </data>
+  <data name="MessageUserRemovingLastDairyCalvesGroup" xml:space="preserve">
+    <value>You are removing the last group of dairy calves. Net energy for lactation will not be calculated for the lactating cow group(s).</value>
+  </data>
+  <data name="MessageNoDairyCalvesGroup" xml:space="preserve">
+    <value>You have no dairy calves group added. Net energy for lactation will not be calculated for this group of lactating cows.</value>
+  </data>
 </root>

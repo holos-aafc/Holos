@@ -242,7 +242,12 @@ namespace H.Core.Enumerations
                 return AnimalType.Dairy;
             }
 
-            return AnimalType.Beef;
+            if (animalType.IsBeefCattleType())
+            {
+                return AnimalType.Beef;
+            }
+
+            return AnimalType.NotSelected;
         }
 
         public static ComponentCategory GetComponentCategoryFromAnimalType(this AnimalType animalType)

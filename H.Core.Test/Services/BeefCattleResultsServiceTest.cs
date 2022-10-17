@@ -592,6 +592,7 @@ namespace H.Core.Test.Services
                 ManureStateType = ManureStateType.Liquid,
                 ManureApplicationMethod = ManureApplicationTypes.ShallowInjection,
                 AmountOfManureAppliedPerHectare = 200,
+                AmountOfNitrogenAppliedPerHectare = 1,
                 AnimalType = AnimalType.Beef,
             };
 
@@ -628,7 +629,7 @@ namespace H.Core.Test.Services
                 componentCategory: componentCategory,
                 animalType: animalType);
 
-            Assert.AreEqual(0.14020924, results.First().TotalIndirectN2ONEmissions, 0.0001);
+            Assert.AreEqual(0.07013374, results.First().TotalIndirectN2ONEmissions, 0.0001);
         }
 
         [TestMethod]

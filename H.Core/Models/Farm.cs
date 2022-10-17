@@ -112,7 +112,8 @@ namespace H.Core.Models
 
             this.ShowAvailableComponentsList = true;
             this.ShowSimplifiedResults = false;
-            this.IsBasicMode = true;
+            this.IsBasicMode = false;
+            this.EnableCarbonModelling = true;
 
             this.StageStates = new List<StageStateBase>();
             this.Components.CollectionChanged += ComponentsOnCollectionChanged;
@@ -122,6 +123,8 @@ namespace H.Core.Models
             this.ClimateData = new ClimateData();
             this.GeographicData = new GeographicData();
             this.AnnualSoilN2OBreakdown = new Table_18_Default_Soil_N2O_Emission_BreakDown_Provider();
+
+            
         }
 
         /// <summary>

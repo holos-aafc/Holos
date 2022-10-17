@@ -224,6 +224,7 @@ namespace H.Core.Test.Services
             var manureApplicationViewItem = new ManureApplicationViewItem()
             {
                 DateOfApplication = date,
+                AmountOfNitrogenAppliedPerHectare = 1,
                 ManureStateType = ManureStateType.Liquid,
                 ManureApplicationMethod = ManureApplicationTypes.ShallowInjection,
                 AmountOfManureAppliedPerHectare = 200,
@@ -263,7 +264,7 @@ namespace H.Core.Test.Services
                 componentCategory,
                 animalType);
 
-            Assert.AreEqual(0.266437285714286, results.First().TotalIndirectN2OEmissions, 0.0001);
+            Assert.AreEqual(0.133218642857143, results.First().TotalIndirectN2OEmissions, 0.0001);
         }
 
         #endregion

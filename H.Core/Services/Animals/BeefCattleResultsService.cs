@@ -523,6 +523,9 @@ namespace H.Core.Services.Animals
             var isLactatingAnimalGroup = totalNumberOfYoungAnimalsOnDate > 0;
             if (isLactatingAnimalGroup)
             {
+                // Beef cattle lactating cows stop lactating if there are no associated young animals - this differs from lactating dairy cows who are always lactating regardless of the fact
+                // that there may or may not be any associated calf groups.
+
                 // Equation 3.1.1-5
                 dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                     milkProduction: managementPeriod.MilkProduction,

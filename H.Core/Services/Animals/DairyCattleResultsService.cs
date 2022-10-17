@@ -372,14 +372,11 @@ namespace H.Core.Services.Animals
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
 
-            var totalNumberOfYoungAnimalsOnDate = dairyComponent.GetTotalNumberOfYoungAnimalsByDate(
-                dateTime: dateTime,
-                parentGroup: animalGroup,
-                childGroupType: AnimalType.DairyCalves);
-
-            var isLactatingAnimalGroup = totalNumberOfYoungAnimalsOnDate > 0;
-            if (isLactatingAnimalGroup)
+            if (managementPeriod.AnimalType.IsLactatingType())
             {
+                // Lactating dairy cows are always lactating - even if they are separated from the calves. This means the lactation calculations are always used regardless any
+                // associated groups of calves. This differs from beef cattle cows/calves where if the calves are removed then the lactation stops.
+
                 // Equation 3.2.1-4
                 dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                     milkProduction: managementPeriod.MilkProduction,
@@ -631,8 +628,13 @@ namespace H.Core.Services.Animals
                 dailyEmissions.ProteinRetainedForPregnancy = base.CalculateProteinRetainedForPregnancy();
             }
 
-            if (isLactatingAnimalGroup)
+            if (managementPeriod.AnimalType.IsLactatingType())
             {
+                var totalNumberOfYoungAnimalsOnDate = dairyComponent.GetTotalNumberOfYoungAnimalsByDate(
+                    dateTime: dateTime,
+                    parentGroup: animalGroup,
+                    childGroupType: AnimalType.DairyCalves);
+
                 // Equation 4.2.1-3
                 dailyEmissions.ProteinRetainedForLactation = base.CalculateProteinRetainedForLactation(
                     milkProduction: managementPeriod.MilkProduction,
@@ -1101,6 +1103,38 @@ namespace H.Core.Services.Animals
             var emissionRate = (76 + 13.5 * dryMatterIntake - 9.55 * etherExtract + 2.24 * dietaryNeutralDetergentFiber) * (1.0 / 1000.0);
 
             return emissionRate * numberOfAnimals;
+        }
+
+        /// <summary>
+        /// Equation 4.2.1-3
+        ///
+        /// Overriden since diary lactating cows always lactate even if there are no associated calves.
+        /// </summary>
+        /// <param name="milkProduction">Milk production (kg head^-1 day^-1)</param>
+        /// <param name="proteinContentOfMilk">Protein content of milk (kg kg⁻¹)</param>
+        /// <param name="numberOfYoungAnimals">Number of calves</param>
+        /// <param name="numberOfAnimals">Number of cows</param>
+        /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
+        public override double CalculateProteinRetainedForLactation(
+            double milkProduction,
+            double proteinContentOfMilk,
+            double numberOfYoungAnimals,
+            double numberOfAnimals)
+        {
+            if (Math.Abs(numberOfAnimals) < Double.Epsilon)
+            {
+                return 0;
+            }
+
+            if (Math.Abs(numberOfYoungAnimals) < Double.Epsilon)
+            {
+                // Dairy animals always have lactation calculations performed. If there are no associated calf groups, multiply by 1 instead.
+                return milkProduction * proteinContentOfMilk * 1;
+            }
+            else
+            {
+                return milkProduction * proteinContentOfMilk * numberOfYoungAnimals / numberOfAnimals;
+            }
         }
 
         /// <summary>

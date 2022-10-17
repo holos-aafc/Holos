@@ -161,40 +161,26 @@ namespace H.Core.Calculators.Carbon
              * Calculate the N demand from carbon pools
              */
 
+
             base.AdjustPoolsAfterDemandCalculation(this.SocNRequirement);
 
             this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
-            base.CropNitrogenDemand = (this.CurrentYearResults.AboveGroundCarbonInput + 
-                                       this.CurrentYearResults.BelowGroundCarbonInput + 
-                                       this.CurrentYearResults.ManureCarbonInputsPerHectare) * 
-                                      this.CurrentYearResults.NitrogenContent;
-
-            // Equation 2.7.7-12
-            //base.CropNitrogenDemand = this.CalculateCropNitrogenDemand(
-            //    carbonInputFromProduct: currentYearResults.PlantCarbonInAgriculturalProduct,
-            //    carbonInputFromStraw: currentYearResults.CarbonInputFromStraw,
-            //    carbonInputFromRoots: currentYearResults.CarbonInputFromRoots,
-            //    carbonInputFromExtraroots: currentYearResults.CarbonInputFromExtraroots,
-            //    moistureContentOfCropFraction: currentYearResults.MoistureContentOfCrop,
-            //    nitrogenConcentrationInTheProduct: currentYearResults.NitrogenContentInProduct,
-            //    nitrogenConcentrationInTheStraw: currentYearResults.NitrogenContentInStraw,
-            //    nitrogenConcentrationInTheRoots: currentYearResults.NitrogenContentInRoots,
-            //    nitrogenConcentrationInExtraroots: currentYearResults.NitrogenContentInExtraroot,
-            //    nitrogenFixation: farm.Defaults.DefaultNitrogenFixation,
-            //    carbonConcentration: farm.Defaults.CarbonConcentration);
+            // Equation 2.7.7-11
+            base.CropNitrogenDemand = (this.AboveGroundResidueN + this.BelowGroundResidueN) * (1 - this.CurrentYearResults.NitrogenFixation);
 
             base.AdjustPoolsAfterDemandCalculation(this.CropNitrogenDemand);
 
             base.CurrentYearResults.MicrobialPoolAfterCropDemandAdjustment = base.MicrobePool;
+
+            // Summation of emission must occur before balancing pools so nitrification can be calculated using total N2O-N emissions
+            base.SumEmissions();
 
             base.BalancePools(farm.Defaults.MicrobeDeath);
 
             // Equation 2.7.8-32
             base.CurrentYearResults.TotalUptake = base.CropNitrogenDemand + this.SocNRequirement;
             base.AssignFinalValues();
-
-            base.SumEmissions();
         }
 
         #endregion

@@ -601,6 +601,7 @@ namespace H.Core.Test.Services
                 ManureApplicationMethod = ManureApplicationTypes.ShallowInjection,
                 AmountOfManureAppliedPerHectare = 200,
                 AnimalType = AnimalType.Dairy,
+                AmountOfNitrogenAppliedPerHectare = 1,
             };
 
             var cropViewItem = new CropViewItem()
@@ -636,7 +637,7 @@ namespace H.Core.Test.Services
                 componentCategory: componentCategory,
                 animalType: animalType);
 
-            Assert.AreEqual(0.14020924, results.First().TotalIndirectN2ONEmissions, 0.0001);
+            Assert.AreEqual(0.07013374, results.First().TotalIndirectN2ONEmissions, 0.0001);
         }
 
         #endregion

@@ -819,7 +819,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Used to determine how much N fertilizer is required for a given user specified yield
         /// 
-        /// (kg N ha^-1 year^-1)
+        /// (fraction)
         /// </summary>
         public double NitrogenFixation
         {

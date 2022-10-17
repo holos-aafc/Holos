@@ -26,12 +26,10 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.1-3
             this.OrganicPool += (this.CurrentYearResults.GetTotalOrganicNitrogenInYear() / this.CurrentYearResults.Area);
 
-            if (YearIndex == 0)
+            if (YearIndex > 0)
             {
-                this.OrganicPool += this.ManurePool;
-            }
-            else
-            {
+                // No manure is added to N_ON in year 0.
+
                 // Equation 2.6.4-3
                 this.OrganicPool += (this.PreviousYearResults.ManureResiduePool_ManureN - this.ManurePool);
             }
@@ -113,13 +111,14 @@ namespace H.Core.Calculators.Carbon
 
             base.CurrentYearResults.MicrobialPoolAfterCropDemandAdjustment = base.MicrobePool;
 
+            // Summation of emission must occur before balancing pools so nitrification can be calculated using total N2O-N emissions
+            base.SumEmissions();
+
             base.BalancePools(farm.Defaults.MicrobeDeath);
 
             // Equation 2.6.9-30
             base.CurrentYearResults.TotalUptake = base.CropNitrogenDemand + this.OldPoolNitrogenRequirement;
             this.AssignFinalValues();
-
-            base.SumEmissions();
         }
 
         /// <summary>
@@ -220,11 +219,11 @@ namespace H.Core.Calculators.Carbon
         /// Equation 2.6.3-1
         /// </summary>
         public double CalculateAvailabilityOfNitrogenFromManureDecompositionAtStartingPoint(
-            double manureResiduePoolAtEquilibrium,
+            double manureInputsForCurrentYear,
             double decompositionRateConstantYoungPool,
             double climateParameter)
         { 
-            var result = (manureResiduePoolAtEquilibrium * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
+            var result = (manureInputsForCurrentYear * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
 
             return result;
         }
@@ -431,7 +430,7 @@ namespace H.Core.Calculators.Carbon
 
                 // N_m
                 this.ManurePool = this.CalculateAvailabilityOfNitrogenFromManureDecompositionAtStartingPoint(
-                    manureResiduePoolAtEquilibrium: manureResidueInputsForCurrentYear,
+                    manureInputsForCurrentYear: manureResidueInputsForCurrentYear,
                     decompositionRateConstantYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
                     climateParameter: climateParameterOrManagementFactor);
             }

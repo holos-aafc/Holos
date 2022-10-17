@@ -811,7 +811,7 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfYoungAnimals">Number of calves</param>
         /// <param name="numberOfAnimals">Number of cows</param>
         /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
-        public double CalculateProteinRetainedForLactation(
+        public virtual double CalculateProteinRetainedForLactation(
             double milkProduction,
             double proteinContentOfMilk,
             double numberOfYoungAnimals,
@@ -2206,7 +2206,6 @@ namespace H.Core.Services.Animals
             AnimalType animalType)
         {
             var totalManureProducedByAnimals = dailyEmissions.Sum(x => x.TotalVolumeOfManureAvailableForLandApplicationInKilograms);
-            var totalNitrogenAvailalbeForLandApplicationOnDate = dailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
             var totalTanForLandApplicationOnDate = dailyEmissions.Sum(x => x.TanAvailableForLandApplication);
             var applicationsAndCropByAnimalType = farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
             var results = new List<LandApplicationEmissionResult>();
@@ -2220,16 +2219,19 @@ namespace H.Core.Services.Animals
                 var applicationEmissionResult = new LandApplicationEmissionResult();
 
                 var crop = tuple.Item1;
+                applicationEmissionResult.CropViewItem = crop;
+
                 var manureApplication = tuple.Item2;
+
                 var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(manureApplication.DateOfApplication.Month);
 
                 var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
                 if (fractionOfManureUsed > 1.0)
                     fractionOfManureUsed = 1.0;
 
-                applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = fractionOfManureUsed * totalNitrogenAvailalbeForLandApplicationOnDate;
+                applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplication.AmountOfNitrogenAppliedPerHectare * crop.Area;
 
-                applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = fractionOfManureUsed * totalManureProducedByAnimals;
+                applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * crop.Area;
 
                 var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
 
@@ -2243,12 +2245,12 @@ namespace H.Core.Services.Animals
                     applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalTanForLandApplicationOnDate * adjustedAmmoniaEmissionFactor;
 
                     // Equation 4.6.3-1
-                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
+                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
                 }
                 else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
                 {
                     // Equation 4.6.2-7
-                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalNitrogenAvailalbeForLandApplicationOnDate * emissionFactorData.VolatilizationFraction;
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * emissionFactorData.VolatilizationFraction;
 
                     // Equation 4.6.3-2
                     fractionVolatilized = emissionFactorData.VolatilizationFraction;
@@ -2277,7 +2279,7 @@ namespace H.Core.Services.Animals
                     applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalManureProducedByAnimals * emissionFraction;
 
                     // Equation 4.6.3-1
-                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / totalNitrogenAvailalbeForLandApplicationOnDate;
+                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
                 }
 
                 // Equation 4.6.2-4
@@ -2285,7 +2287,7 @@ namespace H.Core.Services.Animals
                 var ammoniaLoss = applicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
 
                 // Equation 4.6.3-2
-                applicationEmissionResult.TotalN2ONFromManureVolatilized = totalNitrogenAvailalbeForLandApplicationOnDate * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
+                applicationEmissionResult.TotalN2ONFromManureVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
 
                 // Equation 4.6.3-3
                 var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
@@ -2299,10 +2301,10 @@ namespace H.Core.Services.Animals
                 var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
 
                 // Equation 4.6.4-1
-                applicationEmissionResult.TotalN2ONFromManureLeaching = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * emissionFactorData.EmissionFactorLeach;
+                applicationEmissionResult.TotalN2ONFromManureLeaching = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * emissionFactorData.EmissionFactorLeach;
 
                 // Equation 4.6.4-4
-                applicationEmissionResult.TotalNitrateLeached = totalNitrogenAvailalbeForLandApplicationOnDate * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
+                applicationEmissionResult.TotalNitrateLeached = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
 
                 // Equation 4.6.5-1
                 applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;

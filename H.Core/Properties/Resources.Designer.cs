@@ -11572,6 +11572,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have no dairy calves group added. Net energy for lactation will not be calculated for this group of lactating cows..
+        /// </summary>
+        public static string MessageNoDairyCalvesGroup {
+            get {
+                return ResourceManager.GetString("MessageNoDairyCalvesGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Past fallow area must be less than the current fallow area. Past fallow area has been reset to 0..
         /// </summary>
         public static string MessagePastFallowAreaMustBeLessThanCurrentFallowArea {
@@ -11676,6 +11685,15 @@ namespace H.Core.Properties {
         public static string MessageUpdatingSecondaryCropInPreviousYear {
             get {
                 return ResourceManager.GetString("MessageUpdatingSecondaryCropInPreviousYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are removing the last group of dairy calves. Net energy for lactation will not be calculated for the lactating cow group(s)..
+        /// </summary>
+        public static string MessageUserRemovingLastDairyCalvesGroup {
+            get {
+                return ResourceManager.GetString("MessageUserRemovingLastDairyCalvesGroup", resourceCulture);
             }
         }
         
