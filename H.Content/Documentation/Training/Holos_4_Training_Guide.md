@@ -401,7 +401,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="850"/>
+    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Copying data from another animal group</em>
 </p> 
@@ -488,7 +488,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="800"/>
+    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="950"/>
     <br>
     <em>Figure 18: Beef stocker & backgrounder operation</em>
 </p> 
