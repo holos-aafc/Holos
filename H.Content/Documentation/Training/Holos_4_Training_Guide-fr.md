@@ -135,9 +135,6 @@ Le modèle est conçu pour définir la gestion des terres avant le bétail. C’
 
 ## Culture et production de foin
 
-*Pour calculer la variation du carbone dans le sol pour les rotations des champs et des cultures, cliquez sur le menu « Paramètres » et sélectionnez l’option « Pluriannuel ».*
-
-
 Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 9). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
 
 <br>
