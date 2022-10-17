@@ -23,8 +23,8 @@ Aux fins de cette formation, nous allons créer une ferme avec un système annue
 
 Lancez Holos en double-cliquant sur l’icône Holos qui se trouve sur le bureau. S’il n’y a pas de fermes sauvegardées dans le système, Holos créera une nouvelle ferme et demandera à l’utilisateur un nom de ferme et un commentaire facultatif. S’il y a déjà une ferme enregistrée dans le système, Holos demandera à l’utilisateur d’ouvrir la ferme existante ou de créer une nouvelle ferme.
 
-Entrez « Holos 2022 » comme nom de ferme et « **version de formation** » comme « commentaire ». Assurez-vous de cliquer sur le bouton « **Mode avancé** » pour que d’autres fonctions et fonctionnalités soient disponibles. Cliquez sur « Ok » pour passer à l’étape suivante.
-Assurez-vous de sélectionner « Mesure » comme unité de type de mesure, puis cliquez sur le bouton « Suivant » au bas de l’écran.
+Entrez "Holos 2022" comme nom de ferme et "**version de formation**" comme "**commentaire**". Cliquez sur "OK" pour passer à l'écran suivant
+Assurez-vous de sélectionner « Métrique » comme unité de type de mesure, puis cliquez sur le bouton « Suivant » au bas de l’écran.
 
 <br>
 <p align="center">
