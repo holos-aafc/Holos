@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. If there are no saved farms in the system, Holos will create a new farm and ask the user for a farm name and an optional comment (Figure 1). If there is already a saved farm in the system, Holos will ask the user to open the existing farm or to create a new farm (Figure 2). 
 
-Enter “**Holos 2022**” as a farm name and “**training version**” as the “**comment**”. Ensure to click the “**Advanced Mode**” button so that additional features and functionality will be available. Click “**Ok**” to proceed to the next screen
+Enter “**Holos 2022**” as a farm name and “**training version**” as the “**comment**”.  Click “**Ok**” to proceed to the next screen
 
 Ensure “**Metric**” is selected as the unit of measurement type and then click the “**Next**” button at the bottom of the screen (Figure 3). 
 
@@ -82,7 +82,7 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 </p>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure6.png" alt="Figure 6" width="950"/>
+    <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="950"/>
     <br>
     <em>Figure 6: Specifying a polygon ID using the option button.</em>
 </p>  
@@ -134,7 +134,7 @@ Now we can add our first component to the farm. Drag a “Field” component fro
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
+    <img src="../../Images/Training/en/figure9.gif" alt="Figure 9" width="950"/>
     <br>
     <em>Figure 9: Adding a component to the farm.</em>
 </p> 
@@ -170,7 +170,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure11.png" alt="Figure 11" width="950"/>
+    <img src="../../Images/Training/en/figure11.gif" alt="Figure 11" width="950"/>
     <br>
     <em>Figure 11: Adding fertilizer to a field.</em>
 </p> 
@@ -197,7 +197,7 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
+    <img src="../../Images/Training/en/figure12.gif" alt="Figure 12" width="950"/>
     <br>
     <em>Figure 12: Native Grasslands information.</em>
 </p> 
@@ -401,7 +401,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.png" alt="Figure 17" width="950"/>
+    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Copying data from another animal group</em>
 </p> 
