@@ -130,8 +130,6 @@ The Holos model is designed to define the land management before livestock. This
 
 ## Crop and Hay Production
 
-Note: In order to calculate soil carbon change for fields and crop rotations, click on the “Settings” menu and select the “Multi-year” option (default is Single-Year).
-
 Now we can add our first component to the farm. Drag a “Field” component from the left side of the screen and drop it on the “My Farm” on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as “Field #1”. At this point, we can now enter production information related to the crop being grown on this field.  
 
 
@@ -312,7 +310,6 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
     * Click the “**Add Custom Diet**” button in the “**Step 1**” section of the screen to create a new custom diet.
     * Rename this diet to “**My Custom Cow Diet**” then press the Enter key to save the name.
-    * Under step 1, ensure that you have the **Animal Type** set to **Beef Cow**.
     * To add ingredients to our new diet, select “**Alfalfa hay**” from the ingredient list, and then click the “**Add Selected Ingredient to Diet**” button.
     * We will add one more ingredient to our diet. Select ‘**Barley Hay**’ from the ingredient list, and then click the “**Add Selected Ingredient to Diet**” button.
     * Enter **50%** for ‘**Barley Hay**’ and **50%** for ‘**Alfalfa Hay**’ in “**Step 3**”. Note that Holos now reports the diet being complete since all ingredients total up to 100%.
@@ -588,9 +585,9 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
-    - **Brooding Stage:** Start January 1st, 2022 - End January 22nd, 2022. 
-    - **Rearing Stage:** Start January 23rd, 2022 - End June 26th, 2022.
-    - **Rearing Stage:** Start June 27th, 2022 - End November 28th, 2022.
+    - **Brooding Stage:** Start: January 1st, 2022 - End: January 22nd, 2022. 
+    - **Rearing Stage:** Start: January 23rd, 2022 - End: June 26th, 2022.
+    - **Rearing Stage:** Start: June 27th, 2022 - End: November 28th, 2022.
 3. For each management period, set number of animals to **400**.
 4. Leave the entries in Housing and Manure as default.
 
@@ -615,7 +612,7 @@ The **Add Historical Production System** button enables the user to add a differ
 
 We will assume that the barley grain and mixed hay rotation fields were previously in a continuous wheat cropping system between **1985 and 2000.**
 
-1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of “**Crop rotation #1 [Field #1]**”)
+1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of “**Crop rotation #1 [Field #1] - Barley**”)
 
 2. Click on the **Add Historical Production System** button which will add a new row to the table under the “**Step 1**” section in the upper left section of the screen. Notice that this new entry has the words “**Historical management practice**” added.
 
@@ -625,7 +622,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 5. Click on the “**Barley**” crop under the “**Step 2**” section. Change the crop type to ‘**Wheat**’ and on the ‘**General**’ tab change the yield to **3,500** kg/ha. We will keep the other settings unchanged.
 
-6. We also need to remove the “**Hay mixed**” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Hay mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
+6. We also need to remove the “**Tame mixed**” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Tame mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
 
 7. Click “**Ok**” to save adjustments we just made to this field.
 
