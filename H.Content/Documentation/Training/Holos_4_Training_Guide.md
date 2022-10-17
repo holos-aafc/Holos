@@ -76,13 +76,13 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure5.png" alt="Figure 5" width="850"/>
+    <img src="../../Images/Training/en/figure5.png" alt="Figure 5" width="950"/>
     <br>
     <em>Figure 5: Map of the Manitoba province showing the different selectable polygons.</em>
 </p>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="850"/>
+    <img src="../../Images/Training/en/figure6.png" alt="Figure 6" width="950"/>
     <br>
     <em>Figure 6: Specifying a polygon ID using the option button.</em>
 </p>  
@@ -95,7 +95,7 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="850"/>
+    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="950"/>
     <br>
     <em>Figure 7: Multiple soil types might be available for a given region.</em>
 </p>  
@@ -118,7 +118,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure8.png" alt="Figure 8" width="850"/>
+    <img src="../../Images/Training/en/figure8.png" alt="Figure 8" width="950"/>
     <br>
     <em>Figure 8: The available components screen. Specific components can be chosen here to include in the farm.</em>
 </p> 
@@ -134,7 +134,7 @@ Now we can add our first component to the farm. Drag a “Field” component fro
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure9.gif" alt="Figure 9" width="850"/>
+    <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
     <br>
     <em>Figure 9: Adding a component to the farm.</em>
 </p> 
@@ -159,7 +159,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure10.png" alt="Figure 10" width="850"/>
+    <img src="../../Images/Training/en/figure10.png" alt="Figure 10" width="950"/>
     <br>
     <em>Figure 10: Field Component of the farm.</em>
 </p> 
@@ -170,7 +170,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure11.gif" alt="Figure 11" width="850"/>
+    <img src="../../Images/Training/en/figure11.png" alt="Figure 11" width="950"/>
     <br>
     <em>Figure 11: Adding fertilizer to a field.</em>
 </p> 
@@ -267,7 +267,7 @@ Adding animal components follows the exact same approach that was used for land 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="950"/>
     <br>
     <em>Figure 14: The Beef Cow-Calf Component.</em>
 </p> 
@@ -401,7 +401,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="950"/>
+    <img src="../../Images/Training/en/figure17.png" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Copying data from another animal group</em>
 </p> 
