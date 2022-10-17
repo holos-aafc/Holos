@@ -79,16 +79,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.6.6-6
-        /// </summary>
-        [TestMethod]
-        public void CalculateNRequirementForCarbonTransitionFromYoungToOldPool()
-        {
-            var result = _calculator.CalculateNitrogenRequirementForCarbonTransitionFromYoungToOldPool(1, 2, 8, 9, 3, 4, 5, 6, 7, 10, 11, 12, 13);                                                                    
-            Assert.AreEqual(-4.9067E-48, result, 4);
-        }
-
-        /// <summary>
         /// Equation 2.6.6-9
         /// </summary>
         [TestMethod]

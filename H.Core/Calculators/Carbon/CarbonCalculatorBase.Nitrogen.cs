@@ -296,7 +296,7 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.TotalNitrogenInputs += this.MineralPool;
             this.CurrentYearResults.TotalNitrogenInputs += this.OrganicPool;
 
-            // Display the pools before it is adjusted
+            // Display the pools before they are adjusted
             this.CurrentYearResults.SyntheticInputsBeforeAdjustment = this.SyntheticNitrogenPool;
             this.CurrentYearResults.CropResiduesBeforeAdjustment = this.CropResiduePool;
             this.CurrentYearResults.OrganicNitrogenResiduesBeforeAdjustment = this.OrganicPool;
@@ -459,12 +459,15 @@ namespace H.Core.Calculators.Carbon
 
         protected void AdjustOrganicPool()
         {
+            // Equation 2.6.7-8
             // Equation 2.7.6-8
             this.OrganicPool -= (this.N2O_NFromOrganicNitrogen + this.NO_NFromOrganicNitrogen);
 
+            // Equation 2.6.7-9
             // Equation 2.7.6-9
             this.OrganicPool -= (this.N2O_NFromOrganicNitrogenLeaching + this.NO3FromOrganicNitrogenLeaching);
 
+            // Equation 2.6.7-10
             // Equation 2.7.6-10
             this.OrganicPool -= (this.N2O_NOrganicNitrogenVolatilization + this.NH4FromOrganicNitogenVolatilized);
         }
