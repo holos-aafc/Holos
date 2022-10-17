@@ -197,7 +197,7 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure12.gif" alt="Figure 12" width="950"/>
+    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
     <br>
     <em>Figure 12: Native Grasslands information.</em>
 </p> 
