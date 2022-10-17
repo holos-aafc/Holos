@@ -631,7 +631,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="850"/>
+    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="950"/>
     <br>
     <em>Figure 21: Customized Timeline Screen</em>
 </p> 
@@ -712,14 +712,14 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="850"/>
+    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="950"/>
     <br>
     <em>Figure 25: Detailed emissions report.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="950"/>
     <br>
     <em>Figure 26: Estimates of production report.</em>
 </p> 
@@ -727,7 +727,7 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="850"/>
+    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="950"/>
     <br>
     <em>Figure 27: Feed estimate report.</em>
 </p> 
@@ -748,7 +748,7 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure28.png" alt="Figure 28" width="850"/>
+    <img src="../../Images/Training/en/figure28.png" alt="Figure 28" width="950"/>
     <br>
     <em>Figure 28: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
