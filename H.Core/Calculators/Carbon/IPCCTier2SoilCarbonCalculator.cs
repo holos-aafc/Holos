@@ -49,33 +49,33 @@ namespace H.Core.Calculators.Carbon
             var soc = equilibriumYear.SoilCarbon;
 
             // Active pool fraction
-            var activePool = equilibriumYear.ActivePool;
+            var activePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
             var activePoolFraction = activePool / soc;
 
             // Passive pool fraction
-            var passivePool = equilibriumYear.PassivePool;
+            var passivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
             var passivePoolFraction = passivePool / soc;
 
             // Slow pool fraction
-            var slowPool = equilibriumYear.SlowPool;
+            var slowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
             var slowPoolFraction = slowPool / soc;
 
             var customStartingActivePool = activePoolFraction * farm.StartingSoilOrganicCarbon;
             var customStartingPassivePool = passivePoolFraction * farm.StartingSoilOrganicCarbon;
             var customStartingSlowPool = slowPoolFraction * farm.StartingSoilOrganicCarbon;
 
-            equilibriumYear.ActivePool = customStartingActivePool;
-            equilibriumYear.PassivePool = customStartingPassivePool;
-            equilibriumYear.SlowPool = customStartingSlowPool;
+            equilibriumYear.IpccTier2CarbonResults.ActivePool = customStartingActivePool;
+            equilibriumYear.IpccTier2CarbonResults.PassivePool = customStartingPassivePool;
+            equilibriumYear.IpccTier2CarbonResults.SlowPool = customStartingSlowPool;
 
             // Equation 2.2.2-28
-            currentYearViewItem.ActivePool = equilibriumYear.ActivePool;
+            currentYearViewItem.IpccTier2CarbonResults.ActivePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
 
             // Equation 2.2.2-29
-            currentYearViewItem.SlowPool = equilibriumYear.SlowPool;
+            currentYearViewItem.IpccTier2CarbonResults.SlowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
 
             // Equation 2.2.2-30
-            currentYearViewItem.PassivePool = equilibriumYear.PassivePool;
+            currentYearViewItem.IpccTier2CarbonResults.PassivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
 
             currentYearViewItem.SoilCarbon = farm.StartingSoilOrganicCarbon;
         }
@@ -233,7 +233,8 @@ namespace H.Core.Calculators.Carbon
             this.CalculatePools(
                 currentYearViewItem: result,    // Use the run-in period item
                 previousYearViewItem: null,     // There is no previous year
-                farm: farm);
+                farm: farm,
+                isEquilibriumYear: true);
 
             return result;
         }
@@ -305,16 +306,34 @@ namespace H.Core.Calculators.Carbon
         public void CalculatePools(
             CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem,
-            Farm farm)
+            Farm farm,
+            bool isEquilibriumYear = false)
         {
+            IPCCTier2Results currentYearIpccTier2Results = new IPCCTier2Results();
+            IPCCTier2Results previousYearIpccTier2Results = new IPCCTier2Results();
+
             var inputs = 0d;
             if (this.CalculationMode == CalculationModes.Carbon)
             {
                 inputs = currentYearViewItem.TotalCarbonInputs;
+                currentYearIpccTier2Results = currentYearViewItem.IpccTier2CarbonResults;
             }
             else
             {
                 inputs = currentYearViewItem.TotalNitrogenInputsForIpccTier2;
+                currentYearIpccTier2Results = currentYearViewItem.IpccTier2NitrogenResults;
+            }
+
+            if (isEquilibriumYear == false)
+            {
+                if (this.CalculationMode == CalculationModes.Carbon)
+                {
+                    previousYearIpccTier2Results = previousYearViewItem.IpccTier2CarbonResults;
+                }
+                else
+                {
+                    previousYearIpccTier2Results = previousYearViewItem.IpccTier2NitrogenResults;
+                }
             }
 
             var f1 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionMetabolicDMActivePool, currentYearViewItem.TillageType).Value;
@@ -325,20 +344,17 @@ namespace H.Core.Calculators.Carbon
             var f7 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionSlowDecayToActive, currentYearViewItem.TillageType).Value;
             var f8 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionPassiveDecayToActive, currentYearViewItem.TillageType).Value;
 
-            // Equation 2.2.2-16
             var f4 = this.CalculateAmountToSlowPool(
                 fractionDecayActivePoolToPassivePool: f5,
                 sand: currentYearViewItem.Sand);
 
-            // Equation 2.2.2-17
-            currentYearViewItem.Beta = this.CalculateAmountToDeadMatterComponent(
+            currentYearIpccTier2Results.Beta = this.CalculateAmountToDeadMatterComponent(
                 totalInputs: inputs,
                 nitrogenFraction: currentYearViewItem.NitrogenContent,
                 ligninContent: currentYearViewItem.LigninContent);
 
-            // Equation 2.2.2-18
-            currentYearViewItem.Alpha = this.CalculateAmountToActivePool(
-                inputToDeadMatter: currentYearViewItem.Beta,
+            currentYearIpccTier2Results.Alpha = this.CalculateAmountToActivePool(
+                inputToDeadMatter: currentYearIpccTier2Results.Beta,
                 f1: f1,
                 f2: f2,
                 f3: f3,
@@ -353,8 +369,7 @@ namespace H.Core.Calculators.Carbon
             var activePoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRateActive, currentYearViewItem.TillageType).Value;
             var tillageFactor = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.TillageModifier, currentYearViewItem.TillageType).Value;
 
-            // Equation 2.2.2-19
-            currentYearViewItem.ActivePoolDecayRate = this.CalculateActivePoolDecayRate(
+            currentYearIpccTier2Results.ActivePoolDecayRate = this.CalculateActivePoolDecayRate(
                 activePoolDecayRateConstant: activePoolDecayRateConstant,
                 temperatureFactor: currentYearViewItem.TFac,
                 waterFactor: currentYearViewItem.WFac,
@@ -363,8 +378,7 @@ namespace H.Core.Calculators.Carbon
 
             var slowPoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRateSlow, currentYearViewItem.TillageType).Value;
 
-            // Equation 2.2.2-20
-            currentYearViewItem.SlowPoolDecayRate = this.CalculateSlowPoolDecayRate(
+            currentYearIpccTier2Results.SlowPoolDecayRate = this.CalculateSlowPoolDecayRate(
                 slowPoolDecayRateConstant: slowPoolDecayRateConstant,
                 temperatureFactor: currentYearViewItem.TFac,
                 waterFactor: currentYearViewItem.WFac,
@@ -372,98 +386,97 @@ namespace H.Core.Calculators.Carbon
 
             var passivePoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRatePassive, currentYearViewItem.TillageType).Value;
 
-            // Equation 2.2.2-21
-            currentYearViewItem.PassivePoolDecayRate = this.CalculatePassivePoolDecayRate(
+            currentYearIpccTier2Results.PassivePoolDecayRate = this.CalculatePassivePoolDecayRate(
                 passivePoolDecayRateConstant: passivePoolDecayRateConstant,
                 temperatureFactor: currentYearViewItem.TFac,
                 waterFactor: currentYearViewItem.WFac);
 
-            currentYearViewItem.ActivePoolSteadyState = this.CalculateSteadyStateActivePool(
-                inputsToActiveSubPool: currentYearViewItem.Alpha,
-                decayRateForActivePool: currentYearViewItem.ActivePoolDecayRate);
+            currentYearIpccTier2Results.ActivePoolSteadyState = this.CalculateSteadyStateActivePool(
+                inputsToActiveSubPool: currentYearIpccTier2Results.Alpha,
+                decayRateForActivePool: currentYearIpccTier2Results.ActivePoolDecayRate);
 
-            if (previousYearViewItem != null)
+            if (isEquilibriumYear == false)
             {
-                currentYearViewItem.ActivePool = this.CalculateActivePoolAtCurrentInterval(
-                    activePoolAtPreviousInterval: previousYearViewItem.ActivePool,
-                    activePoolSteadyState: currentYearViewItem.ActivePoolSteadyState,
-                    decayRateForActivePool: currentYearViewItem.ActivePoolDecayRate);
+                currentYearIpccTier2Results.ActivePool = this.CalculateActivePoolAtCurrentInterval(
+                    activePoolAtPreviousInterval: previousYearIpccTier2Results.ActivePool,
+                    activePoolSteadyState: currentYearIpccTier2Results.ActivePoolSteadyState,
+                    decayRateForActivePool: currentYearIpccTier2Results.ActivePoolDecayRate);
             }
             else
             {
                 // When calculating run-in period, steady state and pool are equal
-                currentYearViewItem.ActivePool = currentYearViewItem.ActivePoolSteadyState;
+                currentYearIpccTier2Results.ActivePool = currentYearIpccTier2Results.ActivePoolSteadyState;
             }
 
-            currentYearViewItem.SlowPoolSteadyState = this.CalculateSteadyStateSlowPool(
+            currentYearIpccTier2Results.SlowPoolSteadyState = this.CalculateSteadyStateSlowPool(
                 totalInputs: inputs,
                 ligninContent: currentYearViewItem.LigninContent,
                 f3: f3,
-                steadyStateActivePool: currentYearViewItem.ActivePoolSteadyState,
-                activePoolDecayRate: currentYearViewItem.ActivePoolDecayRate,
+                steadyStateActivePool: currentYearIpccTier2Results.ActivePoolSteadyState,
+                activePoolDecayRate: currentYearIpccTier2Results.ActivePoolDecayRate,
                 f4: f4,
-                decayRateSlowPool: currentYearViewItem.SlowPoolDecayRate);
+                decayRateSlowPool: currentYearIpccTier2Results.SlowPoolDecayRate);
 
-            if (previousYearViewItem != null)
+            if (isEquilibriumYear == false)
             {
-                currentYearViewItem.SlowPool = this.CalculateSlowPoolAtInterval(
-                    slowPoolAtPreviousInterval: previousYearViewItem.SlowPool,
-                    slowPoolSteadyState: currentYearViewItem.SlowPoolSteadyState,
-                    slowPoolDecayRate: currentYearViewItem.SlowPoolDecayRate);
+                currentYearIpccTier2Results.SlowPool = this.CalculateSlowPoolAtInterval(
+                    slowPoolAtPreviousInterval: previousYearIpccTier2Results.SlowPool,
+                    slowPoolSteadyState: currentYearIpccTier2Results.SlowPoolSteadyState,
+                    slowPoolDecayRate: currentYearIpccTier2Results.SlowPoolDecayRate);
             }
             else
             {
                 // When calculating run-in period, steady state and pool are equal
-                currentYearViewItem.SlowPool = currentYearViewItem.SlowPoolSteadyState;
+                currentYearIpccTier2Results.SlowPool = currentYearIpccTier2Results.SlowPoolSteadyState;
             }
 
-            currentYearViewItem.PassivePoolSteadyState = this.CalculatePassivePoolSteadyState(
-                activePoolSteadyState: currentYearViewItem.ActivePoolSteadyState,
-                activePoolDecayRate: currentYearViewItem.ActivePoolDecayRate,
+            currentYearIpccTier2Results.PassivePoolSteadyState = this.CalculatePassivePoolSteadyState(
+                activePoolSteadyState: currentYearIpccTier2Results.ActivePoolSteadyState,
+                activePoolDecayRate: currentYearIpccTier2Results.ActivePoolDecayRate,
                 f5: f5,
-                slowPoolSteadyState: currentYearViewItem.SlowPoolSteadyState,
-                slowPoolDecayRate: currentYearViewItem.SlowPoolDecayRate,
+                slowPoolSteadyState: currentYearIpccTier2Results.SlowPoolSteadyState,
+                slowPoolDecayRate: currentYearIpccTier2Results.SlowPoolDecayRate,
                 f6: f6,
-                passivePoolDecayRate: currentYearViewItem.PassivePoolDecayRate);
+                passivePoolDecayRate: currentYearIpccTier2Results.PassivePoolDecayRate);
 
-            if (previousYearViewItem != null)
+            if (isEquilibriumYear == false)
             {
-                currentYearViewItem.PassivePool = this.CalculatePassivePoolAtInterval(
-                    passivePoolAtPreviousInterval: previousYearViewItem.PassivePool,
-                    passivePoolSteadyState: currentYearViewItem.PassivePoolSteadyState,
-                    passivePoolDecayRate: currentYearViewItem.PassivePoolDecayRate);
+                currentYearIpccTier2Results.PassivePool = this.CalculatePassivePoolAtInterval(
+                    passivePoolAtPreviousInterval: previousYearIpccTier2Results.PassivePool,
+                    passivePoolSteadyState: currentYearIpccTier2Results.PassivePoolSteadyState,
+                    passivePoolDecayRate: currentYearIpccTier2Results.PassivePoolDecayRate);
             }
             else
             {
                 // When calculating run-in period, steady state and pool are equal
-                currentYearViewItem.PassivePool = currentYearViewItem.PassivePoolSteadyState;
+                currentYearIpccTier2Results.PassivePool = currentYearIpccTier2Results.PassivePoolSteadyState;
             }
 
-            if (previousYearViewItem != null)
+            if (isEquilibriumYear == false)
             {
-                currentYearViewItem.ActivePoolDiff = this.CalculateStockChange(
-                    socAtYear: currentYearViewItem.ActivePool,
-                    socAtPreviousYear: previousYearViewItem.ActivePool);
+                currentYearIpccTier2Results.ActivePoolDiff = this.CalculateStockChange(
+                    socAtYear: currentYearIpccTier2Results.ActivePool,
+                    socAtPreviousYear: previousYearIpccTier2Results.ActivePool);
 
-                currentYearViewItem.SlowPoolDiff = this.CalculateStockChange(
-                    socAtYear: currentYearViewItem.SlowPool,
-                    socAtPreviousYear: previousYearViewItem.SlowPool);
+                currentYearIpccTier2Results.SlowPoolDiff = this.CalculateStockChange(
+                    socAtYear: currentYearIpccTier2Results.SlowPool,
+                    socAtPreviousYear: previousYearIpccTier2Results.SlowPool);
 
-                currentYearViewItem.PassivePoolDiff = this.CalculateStockChange(
-                    socAtYear: currentYearViewItem.PassivePool,
-                    socAtPreviousYear: previousYearViewItem.PassivePool);
+                currentYearIpccTier2Results.PassivePoolDiff = this.CalculateStockChange(
+                    socAtYear: currentYearIpccTier2Results.PassivePool,
+                    socAtPreviousYear: previousYearIpccTier2Results.PassivePool);
             }
             else
             {
-                currentYearViewItem.ActivePoolDiff = 0;
-                currentYearViewItem.SlowPoolDiff = 0;
-                currentYearViewItem.PassivePoolDiff = 0;
+                currentYearIpccTier2Results.ActivePoolDiff = 0;
+                currentYearIpccTier2Results.SlowPoolDiff = 0;
+                currentYearIpccTier2Results.PassivePoolDiff = 0;
             }
 
             var totalStock  = this.CalculateTotalStocks(
-                activePool: currentYearViewItem.ActivePool,
-                passivePool: currentYearViewItem.PassivePool,
-                slowPool: currentYearViewItem.SlowPool);
+                activePool: currentYearIpccTier2Results.ActivePool,
+                passivePool: currentYearIpccTier2Results.PassivePool,
+                slowPool: currentYearIpccTier2Results.SlowPool);
 
             if (this.CalculationMode == CalculationModes.Carbon)
             {

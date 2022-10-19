@@ -148,23 +148,23 @@ namespace H.Core.Test.Calculators.Carbon
                 carbonTestData.Sand = double.Parse(columns[5]);
                 carbonTestData.LigninContent = double.Parse(columns[6]);
                 carbonTestData.NitrogenContent = double.Parse(columns[7]);
-                carbonTestData.Beta = double.Parse(columns[8]);
-                carbonTestData.Alpha = double.Parse(columns[9]);
+                carbonTestData.IpccTier2CarbonResults.Beta = double.Parse(columns[8]);
+                carbonTestData.IpccTier2CarbonResults.Alpha = double.Parse(columns[9]);
 
-                carbonTestData.ActivePoolDecayRate = double.Parse(columns[10]);
-                carbonTestData.ActivePoolSteadyState = double.Parse(columns[11]);
-                carbonTestData.ActivePool = double.Parse(columns[12]);
-                carbonTestData.ActivePoolDiff = double.Parse(columns[13]);
+                carbonTestData.IpccTier2CarbonResults.ActivePoolDecayRate = double.Parse(columns[10]);
+                carbonTestData.IpccTier2CarbonResults.ActivePoolSteadyState = double.Parse(columns[11]);
+                carbonTestData.IpccTier2CarbonResults.ActivePool = double.Parse(columns[12]);
+                carbonTestData.IpccTier2CarbonResults.ActivePoolDiff = double.Parse(columns[13]);
 
-                carbonTestData.SlowPoolDecayRate = double.Parse(columns[14]);
-                carbonTestData.SlowPoolSteadyState = double.Parse(columns[15]);
-                carbonTestData.SlowPool = double.Parse(columns[16]);
-                carbonTestData.SlowPoolDiff = double.Parse(columns[17]);
+                carbonTestData.IpccTier2CarbonResults.SlowPoolDecayRate = double.Parse(columns[14]);
+                carbonTestData.IpccTier2CarbonResults.SlowPoolSteadyState = double.Parse(columns[15]);
+                carbonTestData.IpccTier2CarbonResults.SlowPool = double.Parse(columns[16]);
+                carbonTestData.IpccTier2CarbonResults.SlowPoolDiff = double.Parse(columns[17]);
 
-                carbonTestData.PassivePoolDecayRate = double.Parse(columns[18]);
-                carbonTestData.PassivePoolSteadyState = double.Parse(columns[19]);
-                carbonTestData.PassivePool = double.Parse(columns[20]);
-                carbonTestData.PassivePoolDiff = double.Parse(columns[21]);
+                carbonTestData.IpccTier2CarbonResults.PassivePoolDecayRate = double.Parse(columns[18]);
+                carbonTestData.IpccTier2CarbonResults.PassivePoolSteadyState = double.Parse(columns[19]);
+                carbonTestData.IpccTier2CarbonResults.PassivePool = double.Parse(columns[20]);
+                carbonTestData.IpccTier2CarbonResults.PassivePoolDiff = double.Parse(columns[21]);
 
                 carbonTestData.Soc = double.Parse(columns[22]);
                 carbonTestData.SocDiff = double.Parse(columns[23]);
@@ -175,11 +175,12 @@ namespace H.Core.Test.Calculators.Carbon
             // These are the starting values using for t-1 when starting the simulation at t
             _averageRunInValuesAndInitialStocks = new CropViewItem()
             {
-                ActivePool = 0.34,
-                PassivePool = 58.80,
-                SlowPool = 3.6,
-                Soc = 62.75,
             };
+
+            _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.ActivePool = 0.34;
+            _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.PassivePool = 58.80;
+            _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.SlowPool = 3.6;
+            _averageRunInValuesAndInitialStocks.Soc = 62.75;
         }
 
         [ClassCleanup]
@@ -323,7 +324,7 @@ namespace H.Core.Test.Calculators.Carbon
                     nitrogenFraction: year.NitrogenContent,
                     ligninContent: year.LigninContent);
 
-                Assert.AreEqual(_annualCarbonData.Single(x => x.Year == year.Year).Beta, calculatedValue, 0.01);
+                Assert.AreEqual(_annualCarbonData.Single(x => x.Year == year.Year).IpccTier2CarbonResults.Beta, calculatedValue, 0.01);
             }
         }
 
@@ -354,7 +355,7 @@ namespace H.Core.Test.Calculators.Carbon
                     totalInputs: year.TotalCarbonInputs,
                     ligninContent: year.LigninContent);
 
-                Assert.AreEqual(year.Alpha, calculatedValue, 0.1);
+                Assert.AreEqual(year.IpccTier2CarbonResults.Alpha, calculatedValue, 0.1);
             }
         }
 
@@ -370,7 +371,7 @@ namespace H.Core.Test.Calculators.Carbon
                     sand: year.Sand,
                     tillageFactor: _tillageFactor);
 
-                Assert.AreEqual(year.ActivePoolDecayRate, calculateValue, 0.015);
+                Assert.AreEqual(year.IpccTier2CarbonResults.ActivePoolDecayRate, calculateValue, 0.015);
             }
         }
 
@@ -387,10 +388,10 @@ namespace H.Core.Test.Calculators.Carbon
                   tillageFactor: _tillageFactor);
 
                 var calculateValue = _sut.CalculateSteadyStateActivePool(
-                    inputsToActiveSubPool: year.Alpha,
+                    inputsToActiveSubPool: year.IpccTier2CarbonResults.Alpha,
                     decayRateForActivePool: decayRate);
 
-                Assert.AreEqual(year.ActivePoolSteadyState, calculateValue, 0.01);
+                Assert.AreEqual(year.IpccTier2CarbonResults.ActivePoolSteadyState, calculateValue, 0.01);
             }
         }
 
@@ -402,16 +403,16 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.ActivePool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.ActivePool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculateActivePoolAtCurrentInterval(
                     activePoolAtPreviousInterval: previousYearResults,
-                    activePoolSteadyState: carbonDataAtYear.ActivePoolSteadyState,
-                    decayRateForActivePool: carbonDataAtYear.ActivePoolDecayRate);
+                    activePoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.ActivePoolSteadyState,
+                    decayRateForActivePool: carbonDataAtYear.IpccTier2CarbonResults.ActivePoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
-                Assert.AreEqual(carbonDataAtYear.ActivePool, calculateValue);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.ActivePool, calculateValue);
             }
         }
 
@@ -423,18 +424,18 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.ActivePool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.ActivePool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculateActivePoolAtCurrentInterval(
                     activePoolAtPreviousInterval: previousYearResults,
-                    activePoolSteadyState: carbonDataAtYear.ActivePoolSteadyState,
-                    decayRateForActivePool: carbonDataAtYear.ActivePoolDecayRate);
+                    activePoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.ActivePoolSteadyState,
+                    decayRateForActivePool: carbonDataAtYear.IpccTier2CarbonResults.ActivePoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
                 var diff = calculateValue - previousYearResults;
 
-                Assert.AreEqual(carbonDataAtYear.ActivePoolDiff, diff, 0.015);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.ActivePoolDiff, diff, 0.015);
             }
         }
 
@@ -449,7 +450,7 @@ namespace H.Core.Test.Calculators.Carbon
                     waterFactor: year.WFac,
                     tillageFactor: _tillageFactor);
 
-                Assert.AreEqual(year.SlowPoolDecayRate, calculateValue, 0.001);
+                Assert.AreEqual(year.IpccTier2CarbonResults.SlowPoolDecayRate, calculateValue, 0.001);
             }
         }
 
@@ -466,12 +467,12 @@ namespace H.Core.Test.Calculators.Carbon
                     totalInputs: year.TotalCarbonInputs,
                     ligninContent: year.LigninContent,
                     f3: _f3,
-                    steadyStateActivePool: year.ActivePoolSteadyState,
-                    activePoolDecayRate: year.ActivePoolDecayRate,
+                    steadyStateActivePool: year.IpccTier2CarbonResults.ActivePoolSteadyState,
+                    activePoolDecayRate: year.IpccTier2CarbonResults.ActivePoolDecayRate,
                     f4: f4,
-                    decayRateSlowPool: year.SlowPoolDecayRate);
+                    decayRateSlowPool: year.IpccTier2CarbonResults.SlowPoolDecayRate);
 
-                Assert.AreEqual(year.SlowPoolSteadyState, calculateValue, 0.1);
+                Assert.AreEqual(year.IpccTier2CarbonResults.SlowPoolSteadyState, calculateValue, 0.1);
             }
         }
 
@@ -483,16 +484,16 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.SlowPool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.SlowPool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculateSlowPoolAtInterval(
                     slowPoolAtPreviousInterval: previousYearResults,
-                    slowPoolSteadyState: carbonDataAtYear.SlowPoolSteadyState,
-                    slowPoolDecayRate: carbonDataAtYear.SlowPoolDecayRate);
+                    slowPoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.SlowPoolSteadyState,
+                    slowPoolDecayRate: carbonDataAtYear.IpccTier2CarbonResults.SlowPoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
-                Assert.AreEqual(carbonDataAtYear.SlowPool, calculateValue, 0.2);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.SlowPool, calculateValue, 0.2);
             }
         }
 
@@ -504,18 +505,18 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.SlowPool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.SlowPool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculateSlowPoolAtInterval(
                     slowPoolAtPreviousInterval: previousYearResults,
-                    slowPoolSteadyState: carbonDataAtYear.SlowPoolSteadyState,
-                    slowPoolDecayRate: carbonDataAtYear.SlowPoolDecayRate);
+                    slowPoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.SlowPoolSteadyState,
+                    slowPoolDecayRate: carbonDataAtYear.IpccTier2CarbonResults.SlowPoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
                 var diff = calculateValue - previousYearResults;
 
-                Assert.AreEqual(carbonDataAtYear.SlowPoolDiff, diff, 0.01);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.SlowPoolDiff, diff, 0.01);
             }
         }
 
@@ -529,7 +530,7 @@ namespace H.Core.Test.Calculators.Carbon
                     temperatureFactor: year.TFac,
                     waterFactor: year.WFac);
 
-                Assert.AreEqual(year.PassivePoolDecayRate, calculateValue, 0.0001);
+                Assert.AreEqual(year.IpccTier2CarbonResults.PassivePoolDecayRate, calculateValue, 0.0001);
             }
         }
 
@@ -539,15 +540,15 @@ namespace H.Core.Test.Calculators.Carbon
             foreach (var year in _annualCarbonData)
             {
                 var calculateValue = _sut.CalculatePassivePoolSteadyState(
-                    activePoolSteadyState: year.ActivePoolSteadyState,
-                    activePoolDecayRate: year.ActivePoolDecayRate,
+                    activePoolSteadyState: year.IpccTier2CarbonResults.ActivePoolSteadyState,
+                    activePoolDecayRate: year.IpccTier2CarbonResults.ActivePoolDecayRate,
                     f5: _f5,
-                    slowPoolSteadyState: year.SlowPoolSteadyState,
-                    slowPoolDecayRate: year.SlowPoolDecayRate,
+                    slowPoolSteadyState: year.IpccTier2CarbonResults.SlowPoolSteadyState,
+                    slowPoolDecayRate: year.IpccTier2CarbonResults.SlowPoolDecayRate,
                     f6: _f6,
-                    passivePoolDecayRate: year.PassivePoolDecayRate);
+                    passivePoolDecayRate: year.IpccTier2CarbonResults.PassivePoolDecayRate);
 
-                Assert.AreEqual(year.PassivePoolSteadyState, calculateValue, 1.5);
+                Assert.AreEqual(year.IpccTier2CarbonResults.PassivePoolSteadyState, calculateValue, 1.5);
             }
         }
 
@@ -559,16 +560,16 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.PassivePool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.PassivePool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculatePassivePoolAtInterval(
                     passivePoolAtPreviousInterval: previousYearResults,
-                    passivePoolSteadyState: carbonDataAtYear.PassivePoolSteadyState,
-                    passivePoolDecayRate: carbonDataAtYear.PassivePoolDecayRate);
+                    passivePoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.PassivePoolSteadyState,
+                    passivePoolDecayRate: carbonDataAtYear.IpccTier2CarbonResults.PassivePoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
-                Assert.AreEqual(carbonDataAtYear.PassivePool, calculateValue, 0.01);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.PassivePool, calculateValue, 0.01);
             }
         }
 
@@ -580,18 +581,18 @@ namespace H.Core.Test.Calculators.Carbon
             for (int i = 0; i < _annualCarbonData.Count; i++)
             {
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
-                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.PassivePool : calclatedResults.ElementAt(i - 1);
+                var previousYearResults = i == 0 ? _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.PassivePool : calclatedResults.ElementAt(i - 1);
 
                 var calculateValue = _sut.CalculatePassivePoolAtInterval(
                    passivePoolAtPreviousInterval: previousYearResults,
-                   passivePoolSteadyState: carbonDataAtYear.PassivePoolSteadyState,
-                   passivePoolDecayRate: carbonDataAtYear.PassivePoolDecayRate);
+                   passivePoolSteadyState: carbonDataAtYear.IpccTier2CarbonResults.PassivePoolSteadyState,
+                   passivePoolDecayRate: carbonDataAtYear.IpccTier2CarbonResults.PassivePoolDecayRate);
 
                 calclatedResults.Add(calculateValue);
 
                 var diff = calculateValue - previousYearResults;
 
-                Assert.AreEqual(carbonDataAtYear.PassivePoolDiff, diff, 0.01);
+                Assert.AreEqual(carbonDataAtYear.IpccTier2CarbonResults.PassivePoolDiff, diff, 0.01);
             }
         }
 
@@ -603,9 +604,9 @@ namespace H.Core.Test.Calculators.Carbon
                 var carbonDataAtYear = _annualCarbonData.ElementAt(i);
                 
                 var calculatedValue = _sut.CalculateTotalStocks(
-                    activePool: carbonDataAtYear.ActivePool,
-                    passivePool: carbonDataAtYear.PassivePool,
-                    slowPool: carbonDataAtYear.SlowPool);                
+                    activePool: carbonDataAtYear.IpccTier2CarbonResults.ActivePool,
+                    passivePool: carbonDataAtYear.IpccTier2CarbonResults.PassivePool,
+                    slowPool: carbonDataAtYear.IpccTier2CarbonResults.SlowPool);                
                
                 Assert.AreEqual(carbonDataAtYear.Soc, calculatedValue, 0.02);
             }
@@ -809,22 +810,23 @@ namespace H.Core.Test.Calculators.Carbon
             _sut.CalculatePools(
                 runInPeriodYear,
                 null,
-                farm);            
+                farm,
+                true);            
 
-            Assert.AreEqual(2.606, runInPeriodYear.Beta, 0.001);
-            Assert.AreEqual(1.74, runInPeriodYear.Alpha, 0.01);
+            Assert.AreEqual(2.606, runInPeriodYear.IpccTier2CarbonResults.Beta, 0.001);
+            Assert.AreEqual(1.74, runInPeriodYear.IpccTier2CarbonResults.Alpha, 0.01);
 
-            Assert.AreEqual(2.751, runInPeriodYear.ActivePoolDecayRate, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.ActivePoolSteadyState, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.ActivePool, 0.01);
+            Assert.AreEqual(2.751, runInPeriodYear.IpccTier2CarbonResults.ActivePoolDecayRate, 0.01);
+            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePoolSteadyState, 0.01);
+            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePool, 0.01);
 
-            Assert.AreEqual(0.178, runInPeriodYear.SlowPoolDecayRate, 0.01);
-            Assert.AreEqual(6.62, runInPeriodYear.SlowPoolSteadyState, 0.01);
-            Assert.AreEqual(6.62, runInPeriodYear.SlowPool, 0.01);
+            Assert.AreEqual(0.178, runInPeriodYear.IpccTier2CarbonResults.SlowPoolDecayRate, 0.01);
+            Assert.AreEqual(6.62, runInPeriodYear.IpccTier2CarbonResults.SlowPoolSteadyState, 0.01);
+            Assert.AreEqual(6.62, runInPeriodYear.IpccTier2CarbonResults.SlowPool, 0.01);
 
-            Assert.AreEqual(0.0019, runInPeriodYear.PassivePoolDecayRate, 0.0001);
-            Assert.AreEqual(108, runInPeriodYear.PassivePoolSteadyState, 1);
-            Assert.AreEqual(108, runInPeriodYear.PassivePool, 1);
+            Assert.AreEqual(0.0019, runInPeriodYear.IpccTier2CarbonResults.PassivePoolDecayRate, 0.0001);
+            Assert.AreEqual(108, runInPeriodYear.IpccTier2CarbonResults.PassivePoolSteadyState, 1);
+            Assert.AreEqual(108, runInPeriodYear.IpccTier2CarbonResults.PassivePool, 1);
         }
 
         [TestMethod]
@@ -891,20 +893,20 @@ namespace H.Core.Test.Calculators.Carbon
             // The non-run in period items (only 1 in this case) should have calculate values for all pools
             var firstItemInSimulation = viewItems.Single(x => x.Year == 1987);
 
-            Assert.IsTrue(firstItemInSimulation.ActivePoolDecayRate > 0);
-            Assert.IsTrue(firstItemInSimulation.ActivePoolSteadyState > 0);
-            Assert.IsTrue(firstItemInSimulation.ActivePool > 0);
-            Assert.IsTrue(firstItemInSimulation.ActivePoolDiff != 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.ActivePoolDecayRate > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.ActivePoolSteadyState > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.ActivePool > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.ActivePoolDiff != 0);
 
-            Assert.IsTrue(firstItemInSimulation.PassivePoolDecayRate > 0);
-            Assert.IsTrue(firstItemInSimulation.PassivePoolSteadyState > 0);
-            Assert.IsTrue(firstItemInSimulation.PassivePool > 0);
-            Assert.IsTrue(firstItemInSimulation.PassivePoolDiff != 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.PassivePoolDecayRate > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.PassivePoolSteadyState > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.PassivePool > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.PassivePoolDiff != 0);
 
-            Assert.IsTrue(firstItemInSimulation.SlowPoolDecayRate > 0);
-            Assert.IsTrue(firstItemInSimulation.SlowPoolSteadyState > 0);
-            Assert.IsTrue(firstItemInSimulation.SlowPool > 0);
-            Assert.IsTrue(firstItemInSimulation.SlowPoolDiff != 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPoolDecayRate > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPoolSteadyState > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPool > 0);
+            Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPoolDiff != 0);
         }
 
         [TestMethod]
@@ -948,15 +950,15 @@ namespace H.Core.Test.Calculators.Carbon
             // Get ratio of each pool to starting point
 
             // Active pool fraction
-            var activePool = equilibriumYear.ActivePool;
+            var activePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
             var activePoolFraction = activePool / soc;
 
             // Passive pool fraction
-            var passivePool = equilibriumYear.PassivePool;
+            var passivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
             var passivePoolFraction = passivePool / soc;
 
             // Slow pool fraction
-            var slowPool = equilibriumYear.SlowPool;
+            var slowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
             var slowPoolFraction = slowPool / soc;
 
             Assert.AreEqual(1.0, slowPoolFraction + passivePoolFraction + activePoolFraction);

@@ -517,8 +517,6 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        
-
         #endregion
 
         #region Private Methods

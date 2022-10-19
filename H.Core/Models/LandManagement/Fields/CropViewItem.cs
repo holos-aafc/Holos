@@ -175,6 +175,8 @@ namespace H.Core.Models.LandManagement.Fields
             this.CarbonConcentration = CoreConstants.CarbonConcentration;
 
             this.CropEconomicData = new CropEconomicData();
+            this.IpccTier2NitrogenResults = new IPCCTier2Results();
+            this.IpccTier2CarbonResults = new IPCCTier2Results();
 
             this.IsPesticideUsed = Response.No;
             this.PerennialStandLength = DefaultPerennialStandLength;

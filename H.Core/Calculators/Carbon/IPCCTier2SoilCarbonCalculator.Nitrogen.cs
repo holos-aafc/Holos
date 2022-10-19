@@ -137,14 +137,14 @@ namespace H.Core.Calculators.Carbon
             this.CalculatePools(currentYearResults, previousYearResults, farm);
 
             // Equation 2.7.3-9
-            base.MineralPool = this.PreviousYearResults.ActivePool * this.CurrentYearResults.ActivePoolDecayRate +
-                               this.PreviousYearResults.SlowPool * this.CurrentYearResults.SlowPoolDecayRate +
-                               this.PreviousYearResults.PassivePool * this.CurrentYearResults.PassivePoolDecayRate;
+            base.MineralPool = this.PreviousYearResults.IpccTier2NitrogenResults.ActivePool * this.CurrentYearResults.IpccTier2NitrogenResults.ActivePoolDecayRate +
+                               this.PreviousYearResults.IpccTier2NitrogenResults.SlowPool * this.CurrentYearResults.IpccTier2NitrogenResults.SlowPoolDecayRate +
+                               this.PreviousYearResults.IpccTier2NitrogenResults.PassivePool * this.CurrentYearResults.IpccTier2NitrogenResults.PassivePoolDecayRate;
 
             // Equation 2.7.3-10
-            this.SocNRequirement = this.PreviousYearResults.ActivePoolSteadyState * this.CurrentYearResults.ActivePoolDecayRate +
-                                   this.PreviousYearResults.SlowPoolSteadyState * this.CurrentYearResults.SlowPoolDecayRate +
-                                   this.PreviousYearResults.PassivePoolSteadyState * this.CurrentYearResults.PassivePoolDecayRate;
+            this.SocNRequirement = this.PreviousYearResults.IpccTier2NitrogenResults.ActivePoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.ActivePoolDecayRate +
+                                   this.PreviousYearResults.IpccTier2NitrogenResults.SlowPoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.SlowPoolDecayRate +
+                                   this.PreviousYearResults.IpccTier2NitrogenResults.PassivePoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.PassivePoolDecayRate;
 
             // Equation 2.7.3-14 is calculated when calling CalculatePools()
             // Equation 2.7.3-15 is calculated when calling CalculatePools()

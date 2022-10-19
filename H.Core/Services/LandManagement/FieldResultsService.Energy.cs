@@ -24,6 +24,32 @@ namespace H.Core.Services.LandManagement
         #region Public Methods
 
         public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var result = new List<MonthlyManureSpreadingResults>();
+
+            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            {
+                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
+                var month = manureApplicationViewItem.DateOfApplication.Month;
+                var year = manureApplicationViewItem.DateOfApplication.Year;
+
+                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
+                    volumeOfLandAppliedManure: totalVolume);
+
+                var resultItem = new MonthlyManureSpreadingResults();
+                resultItem.Year = year;
+                resultItem.Month = month;
+                resultItem.TotalEmissions = totalEnergyEmissions;
+
+                result.Add(resultItem);
+            }
+
+            return result;
+        }
+
+        public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
             FieldSystemComponent fieldSystemComponent,
             Farm farm)
         {
@@ -50,15 +76,10 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        /// <summary>
-        /// Calculates emissions from energy usage for fuel use, herbicide, N and P fertilizer, and irrigation.
-        ///
-        /// <remarks>Both upstream and on-farm emissions are calculated here.</remarks>
-        /// </summary>
-        public CropEnergyResults CalculateCropEnergyResults(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public CropEnergyResults CalculateCropEnergyResults(CropViewItem viewItem, Farm farm)
         {
             var results = new CropEnergyResults();
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+
             if (viewItem == null)
             {
                 return results;
@@ -96,18 +117,35 @@ namespace H.Core.Services.LandManagement
             if (viewItem.AmountOfIrrigation > 0)
             {
                 results.EnergyCarbonDioxideFromIrrigation = this.CalculateTotalCarbonDioxideEmissionsFromIrrigation(
-                    areaOfCropIrrigated: fieldSystemComponent.FieldArea,
+                    areaOfCropIrrigated: viewItem.Area,
                     amountOfIrrigation: viewItem.AmountOfIrrigation,
                     pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
             }
 
             var manureSpreadingResults = this.GetManureSpreadingResults(
-                fieldSystemComponent: fieldSystemComponent,
+                viewItem: viewItem,
                 farm: farm);
 
             results.ManureSpreadingResults.AddRange(manureSpreadingResults);
 
             return results;
+        }
+
+        /// <summary>
+        /// Calculates emissions from energy usage for fuel use, herbicide, N and P fertilizer, and irrigation.
+        ///
+        /// <remarks>Both upstream and on-farm emissions are calculated here.</remarks>
+        /// </summary>
+        public CropEnergyResults CalculateCropEnergyResults(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            var results = new CropEnergyResults();
+            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+            if (viewItem == null)
+            {
+                return results;
+            }
+
+            return this.CalculateCropEnergyResults(viewItem, farm);
         }
 
         /// <summary>

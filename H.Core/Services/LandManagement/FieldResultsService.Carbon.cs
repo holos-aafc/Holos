@@ -457,6 +457,12 @@ namespace H.Core.Services.LandManagement
                         yearIndex: i);
                 }
             }
+
+            //foreach (var cropViewItem in viewItemsForField)
+            //{
+            //    var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
+            //    cropViewItem.CropEnergyResults = energyResults;
+            //}
         }
 
         /// <summary>

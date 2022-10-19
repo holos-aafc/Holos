@@ -1,4 +1,5 @@
 ﻿using System;
+using H.Core.Emissions.Results;
 
 namespace H.Core.Models.LandManagement.Fields
 {
@@ -334,6 +335,9 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
+        public IPCCTier2Results IpccTier2CarbonResults { get; set; }
+        public IPCCTier2Results IpccTier2NitrogenResults { get; set; }
+
         #region IPCC Tier 2
 
         /// <summary>
@@ -363,104 +367,6 @@ namespace H.Core.Models.LandManagement.Fields
         /// (unitless)
         /// </summary>
         public double NitrogenContent { get; set; }
-
-        /// <summary>
-        /// Carbon or nitrogen input to the metabolic dead organic matter carbon component 
-        /// 
-        /// (kg C ha^-1 year^-1 or kg N ha^-1 year^-1)
-        /// </summary>
-        public double Beta { get; set; }
-
-        /// <summary>
-        /// Carbon input to the active soil carbon sub-pool 
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double Alpha { get; set; }
-
-        /// <summary>
-        /// Decay rate for active SOC sub-pool 
-        /// 
-        /// (year^-1)
-        /// </summary>
-        public double ActivePoolDecayRate { get; set; }
-
-        /// <summary>
-        /// Steady state active sub-pool SOC stock given conditions in year y
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double ActivePoolSteadyState { get; set; }
-
-        /// <summary>
-        /// Active sub-pool SOC stock in year y
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double ActivePool { get; set; }
-
-        /// <summary>
-        /// Annual change in active sub-pool
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double ActivePoolDiff { get; set; }
-
-        /// <summary>
-        /// Decay rate for passive SOC sub-pool
-        /// 
-        /// (year^-1)
-        /// </summary>
-        public double PassivePoolDecayRate { get; set; }
-
-        /// <summary>
-        /// Steady state passive sub-pool SOC given conditions in year y
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double PassivePoolSteadyState { get; set; }
-
-        /// <summary>
-        /// Passive sub-pool SOC stock in year y 
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double PassivePool { get; set; }
-
-        /// <summary>
-        /// Annual change in passive sub-pool
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double PassivePoolDiff { get; set; }
-
-        /// <summary>
-        /// Decay rate for slow SOC sub-pool
-        /// 
-        /// (year^-1)
-        /// </summary>
-        public double SlowPoolDecayRate { get; set; }
-
-        /// <summary>
-        /// Steady state slow sub-pool SOC given conditions in year y
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double SlowPoolSteadyState { get; set; }
-
-        /// <summary>
-        /// Slow sub-pool SOC stock in year y 
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double SlowPool { get; set; }
-
-        /// <summary>
-        /// Annual change in slow sub-pool
-        /// 
-        /// (tonnes C ha^-1)
-        /// </summary>
-        public double SlowPoolDiff { get; set; }
 
         /// <summary>
         /// SOC stock at the end of the current year y for grid cell or region
@@ -502,6 +408,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// (kg N2O ha^-1)
         /// </summary>
         public double TotalIndirectNitrousOxidePerHectare { get; set; }
+
+        public CropEnergyResults CropEnergyResults { get; set; }
 
         #endregion
     }
