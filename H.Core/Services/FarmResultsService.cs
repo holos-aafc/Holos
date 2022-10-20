@@ -228,6 +228,9 @@ namespace H.Core.Services
 
             // Components
             farmResults.FieldComponentEmissionResults.AddRange(_fieldResultsService.CalculateResultsForFieldComponent(farm));
+
+            // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
+            farm.ResetAnimalResults();
             farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
 
             // N20 emissions
