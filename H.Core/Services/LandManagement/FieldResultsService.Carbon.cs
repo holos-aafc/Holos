@@ -388,6 +388,7 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
+                // Equation 2.1.3-10
                 result.OldPoolSoilCarbon = farm.StartingSoilOrganicCarbon - (result.YoungPoolSoilCarbonAboveGround + result.YoungPoolSoilCarbonBelowGround);
             }
 
@@ -458,11 +459,11 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            //foreach (var cropViewItem in viewItemsForField)
-            //{
-            //    var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
-            //    cropViewItem.CropEnergyResults = energyResults;
-            //}
+            foreach (var cropViewItem in viewItemsForField)
+            {
+                var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
+                cropViewItem.CropEnergyResults = energyResults;
+            }
         }
 
         /// <summary>

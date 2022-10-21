@@ -753,7 +753,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-1
+        /// Equation 2.1.3-1
         /// </summary>
         public double CalculateAverageAboveGroundResidueCarbonInput(
             double carbonInputFromProductOfEachRotationPhase, 
@@ -763,7 +763,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-2
+        /// Equation 2.1.3-2
         /// </summary>
         public double CalculateAverageBelowGroundResidueCarbonInput(
             double carbonInputFromRootsOfEachRotationPhase, 
@@ -773,7 +773,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-3
+        /// Equation 2.1.3-3
         /// </summary>
         public double CalculateAverageManureCarbonInput(double carbonInputsFromManureInputsOfEachRotationPhase)
         {
@@ -781,7 +781,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-4
+        /// Equation 2.1.3-4
         /// </summary>
         public double CalculateYoungPoolSteadyStateAboveGround(
             double averageAboveGroundCarbonInput, 
@@ -797,7 +797,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-5
+        /// Equation 2.1.3-5
         /// </summary>
         public double CalculateYoungPoolSteadyStateBelowGround(
             double averageBelowGroundCarbonInput, 
@@ -813,7 +813,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-6
+        /// Equation 2.1.3-6
         /// </summary>
         public double CalculateYoungPoolSteadyStateManure(
             double averageManureCarbonInput, 
@@ -829,7 +829,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-7
+        /// Equation 2.1.3-7
         /// </summary>
         public double CalculateOldPoolSteadyState(
             double youngPoolDecompositionRate, 
@@ -870,7 +870,7 @@ namespace H.Core.Calculators.Carbon
 
 
         /// <summary>
-        /// Equation 2.2.4-1
+        /// Equation 2.1.3-11
         /// </summary>
         public double CalculateYoungPoolAboveGroundCarbonAtInterval(
             double youngPoolAboveGroundCarbonAtPreviousInterval, 
@@ -887,7 +887,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-2
+        /// Equation 2.1.3-12
         /// </summary>
         public double CalculateYoungPoolBelowGroundCarbonAtInterval(
             double youngPoolBelowGroundCarbonAtPreviousInterval, 
@@ -904,7 +904,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-3
+        /// Equation 2.1.3-13
         /// </summary>
         public double CalculateYoungPoolManureCarbonAtInterval(
             double youngPoolManureCarbonAtPreviousInterval, 
@@ -921,7 +921,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-4
+        /// Equation 2.1.3-14
         /// </summary>
         /// <returns></returns>
         public double CalculateOldPoolSoilCarbonAtInterval(
@@ -971,7 +971,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-5
+        /// Equation 2.1.3-15
         /// </summary>
         public double CalculateSoilCarbonAtInterval(
             double youngPoolSoilCarbonAboveGroundAtInterval, 
@@ -983,7 +983,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-6
+        /// Equation 2.1.3-16
         /// </summary>
         public double CalculateChangeInSoilCarbonAtInterval(
             double soilOrganicCarbonAtInterval, 
@@ -993,7 +993,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-7
+        /// Equation 2.1.3-17
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFieldAtInterval(
             double changeInSoilOrganicCarbonAtInterval, 
@@ -1003,7 +1003,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-8
+        /// Equation 2.1.3-18
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFarmAtInterval(
             IEnumerable<double> changeInSoilOrganicCarbonForFields)

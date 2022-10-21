@@ -62,13 +62,6 @@ namespace H.Core.Services.LandManagement
         /// Calculates results for a <see cref="FieldSystemComponent"/> and then sets the <see cref="ComponentBase.ResultsCalculated"/> value to true.
         /// </summary>
         List<FieldComponentEmissionResults> CalculateResultsForFieldComponent(Farm farm);
-
-
-        /// <summary>
-        /// Calculates C/CO2 changes based on land use changes for single year fields.
-        /// </summary>
-        LandUseChangeResults CalculateLandUseChangeResults(FieldSystemComponent fieldSystemComponent, Farm farm);
-
         void InitializeStageState(Farm farm);
         void AssignDefaultMoistureContent(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm);

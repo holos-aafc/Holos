@@ -86,7 +86,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // No fuel is used on grasslands/pasture
-            if (viewItem.CropType == CropType.SeededGrassland == false)
+            if (viewItem.CropType.IsPerennial() == false)
             {
                 results.EnergyCarbonDioxideFromFuelUse = this.CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
                     energyFromFuelUse: viewItem.FuelEnergy,

@@ -1035,6 +1035,21 @@ namespace H.Core.Models
             }
         }
 
+        /// <summary>
+        /// Return a list 
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetListOfActiveYears()
+        {
+            var result = new List<int>();
+
+            var stageState = this.GetFieldSystemDetailsStageState();
+            var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct().ToList();
+            result.AddRange(distinctYears);
+
+            return result;
+        }
+
         #endregion
 
         #region Event Handlers

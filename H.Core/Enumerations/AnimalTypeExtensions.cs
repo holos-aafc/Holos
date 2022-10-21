@@ -206,6 +206,7 @@ namespace H.Core.Enumerations
             switch (animalType)
             {
                 case AnimalType.BeefCow:
+                case AnimalType.BeefCowLactating:
                 case AnimalType.DairyLactatingCow:
                 case AnimalType.Ewes:
                     return true;

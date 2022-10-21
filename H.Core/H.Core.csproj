@@ -650,7 +650,6 @@
     <Compile Include="Services\IFieldComponentHelper.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Carbon.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Initialization.cs" />
-    <Compile Include="Services\LandManagement\FieldResultsService.LandUseChange.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Energy.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.EstimatesOfProduction.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Perennials.cs" />
