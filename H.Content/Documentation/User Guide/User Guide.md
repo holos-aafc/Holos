@@ -31,10 +31,10 @@ Once the install is complete Holos should begin immediately, greeting you with a
 </p>
 
 
-You can access Holos from the Windows start menu. Open the start menu, Holos should be found under in a folder labeled AAFC-AAC.
+You can access Holos from the Windows start menu by searching for "Holos 4". Open the start menu or click the search bar and search for "Holos 4"
 
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-4.png" alt="Figure 1-4" width="650"/>
     <br>
     <em>Figure 1.4: Holos in the start menu.</em>
 </p>
@@ -51,6 +51,8 @@ For a quick demonstration of how to install Holos from start to finish you can a
 # Chapter 2 -  Starting Holos
 
 Holos operates in one of two modes called “Basic” and “Advanced”.  As their names imply, they tailor the Holos experience for different needs.  If you do not need all the functionality that Holos offers and would rather get a summary of your farm’s emissions, then it is recommended to use the “Basic” mode.  If you want to get the most out of Holos with detailed results, then the “Advanced” mode is for you. 
+
+By default, Holos starts with "Advanced Mode" enabled. However, you can easily switch to basic mode using the settings menu. To learn how to switch between each mode, [click here](#how-do-i-switch-between-advanced-and-simple-mode).
 
 Holos can handle multiple farms created by the user, each representing different farming scenarios for example.  The user can experiment with what management practices do well together or determine what crops to grow together based on their potential yield and green-house emissions. 
 
@@ -73,16 +75,16 @@ Holos can handle multiple farms created by the user, each representing different
 <br>
 
 
-2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. Once you have named your farm you must specify what mode you would like to operate Holos under, either “Basic” or “Advanced” mode.  When you are finished, click the “OK” button to proceed.
+2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. When you are finished, click the “OK” button to proceed.
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter2/figure2-2.png" alt="Figure 2-2" width="650"/>
     <br>
-    <em> Figure 2.2 Entering name, comments, and selecting operating mode.</em>
+    <em> Figure 2.2 Enter a name for your farm and any comments.</em>
 </p>
 
 
-3. If you chose “Advanced Mode” you can choose “Metric” or “Imperial” from the drop-down list (“Basic Mode” will skip this step and set your units to “Metric” for you). After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
+3. You can also choose between “Metric” or “Imperial” from the drop-down list in the next screen. After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter2/figure2-3.png" alt="Figure 2-3" width="650"/>
@@ -539,8 +541,6 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 		A: A list of options available to set the defaults for your operations.
 		<br>
 		B: Allows the user to set custom default values for individual crops.
-		<br>
-		C: Option to show results in single or multi-year format.
 	</em>
 </p>
 <br>
@@ -648,54 +648,6 @@ The default data for this screen is based on information found in the algorithm 
 </p>
 <br>
 
-
-## Single and Multi-Year Model
-
--	Holos works with a farm under two modes, **Single Year** and **Multi-Year.**  Basic Mode is just **Single Year** with some buttons and menus hidden for simplicity.  Holos starts any farm in **Single Year Mode (SYM)** by default.  As the name suggests **SYM** only gives data for a single year.  **Multi-Year Mode (MYM)** enables an **advanced carbon modelling system** over a period from 1985 to present.  
--	**SYM** is the simplest mode to use Holos, simply add components to your farm and press “Next” to load the results. This is the default mode when a new farm is created in Holos.
--	MYM changes the interface of certain components (see figure 4.6). 
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
-    <br>
-    <em>
-		Figure 4.7: - A field component properties in single year mode.
- 	</em>
-</p>
-
-<br>
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
-    <br>
-    <em>
-		Figure 4.8: - A field component properties in multi year mode.
- 	</em>
-</p>
-<br>
-
--	**MYM** will change the flow of Holos,  instead of the normal steps taken by **SYM**, in **MYM** you must add components to your farm and then navigate to the timeline screen. From that screen, depending on the settings, then go through the details screen and finally arrive at the results section.
--	You can toggle SYM or MYM in “**Settings**” or by clicking “**Yes**” beside “**Enable Multi-Year Mode**” in the component selection screen.
-The bottom of Holos will display the current working mode either SYM or MYM.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
-    <br>
-    <em>
-		Figure 4.9 - The current year mode is displayed in the bottom right corner.
-	 	<br>
-		A: The year mode change toggle.
-		<br>
-		B: The current year mode.
- 	</em>
-</p>
-
-<br>
-<br>
 
 # Chapter 5 - Tools
 
@@ -1093,36 +1045,6 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 <br>
 
 
-
-
-
-##### Shelterbelt Details
-
--	You can select the shelterbelt component you would like to view the results for at the top of the page if your farm has multiple shelterbelts beside the “**Shelterbelt Selector**” tab as shown in figure 6.14 section A.
--	**To get to the details page**, at the bottom of the timeline page is “**Next**”, click here to get to the details page.
--	The details page will **display a list of data for each shelterbelt row and their corresponding tree types**, starting from the plant year up until the cut year that you have inputted on the shelterbelt timeline page (figure 6.14, section C).
--	The details page will also output additional calculations such as Percent Mortality Category (0/15/30/50), Above Ground Carbon (kg C per Tree) and Below Ground Carbon (kg C per Tree).
--	**If you modify any values on the previous pages, click “Rebuild Datacolumns”** to refresh the data shown in the table (Figure 6.14, Section B)
--	If you would like to see the Calculator columns (for Average Circumference) click “Show Calculator Columns” at the top right of the Shelterbelt Details page and a Calculator Column will appear. If you do not know what the Average Circumference Calculator is please click here: [How To Use Average Circumference Calculator](#average-circumference-calculator)
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
-    <br>
-    <em>
-		Figure 6.14 – Shelterbelt Details
-		<br>
-		A: The Shelterbelts in your Farm.
-		<br>
-		B: If you have modified any data on the previous pages, please click here to rebuild the data columns.
-		<br>
-		C: The data associated with each Shelterbelt Row and their corresponding Tree Type(s) from Plant Year up Until The Cut Year.
-		<br>
-		D:If you have sorted the data and want to reset back to the default, click here.
-	</em>
-</p>
-<br>
-
 ##### Shelterbelt Results
 
 1.	**To get to the results**, at the bottom of every component page is a button called “**Results**”, click that button to go to the results page.
@@ -1435,7 +1357,6 @@ The Dairy category contains the following components:
 The Dairy cattle component has the following animal groups:
 
 - Dairy heifers
-- Dairy dry
 - Dairy calves
 - Dairy lactating
 
@@ -1689,8 +1610,6 @@ The Chicken Multiplier Breeder component has the following animal groups:
 
 - Pullets
 - Cockerels
-- Roosters
-- Hens
 
 This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
 
@@ -1741,10 +1660,10 @@ This component contains similar additional tabs as the [Pullet farm component](#
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
     <br>
     <em>
-		Figure 6.39 - Turkey Multiplier Breeder.
+		Figure 6.61 - Turkey Multiplier Breeder.
 	</em>
 </p>
 <br>
@@ -1792,9 +1711,7 @@ This component contains similar additional tabs as the [Pullet farm component](#
 
 The Chicken Multiplier Hatchery component has the following animal groups:
 
-- Chicken eggs
 - Chicks
-- Turkey eggs
 - Poults
 
 This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
@@ -2076,9 +1993,8 @@ This category contains components related to the infrastructure of the farm.
 # Chapter 7 - Timeline
 
 
-To view the Timeline, your farm must be in Advanced mode and enable Multi-Year Mode in the Component Selection Screen
-- [Learn how to switch between Basic and Advanced modes](#how-do-i-enable-advanced-mode).
-- [Learn how to enable Multi Year Mode](#how-do-i-enable-multi-year-mode)
+To view the Timeline, your farm must be in **Advanced mode**.
+- [Learn how to switch between Basic and Advanced modes by clicking here](#how-do-i-switch-between-advanced-and-simple-mode).
 
 The timeline screen allows you to see your farm over a period from 1985 to present day. The timeline screen is used for the following components:
 
@@ -2088,7 +2004,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 
 ## Farm crop system timeline:
 
-The farm crop system timeline is displayed when the farm is set to 'Multi-Year Mode'. The crop system timeline shows an overview of the crop(s) grown on the farm and allows the user to add historical and future projections to a particular field and its crop systems.
+The crop system timeline shows an overview of the crop(s) grown on the farm and allows the user to add historical and future projections to a particular field and its crop systems.
 
 -	To **add a historical or projected production system** click on the field in the list of production systems under “**Step 1**” or by selecting the system in the timeline region.  
 -	Once clicked the system is now active, click either “**Add Historical Production System**” or “**Add Projected Production System**”.
@@ -2146,7 +2062,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 
 ## Overview
 
--	To view this screen, ensure that you **enable Multi-Year Mode** while in **Advanced Mode** and **disable simplified results** in the toolbar.
+-	To view this screen, ensure that you are in **Advanced Mode**.
 -	This screen offers a detailed grid related to your farm’s fields like **carbon input**, **yield**, and **other factors** for each year of your production systems you created in the **timeline**.  
 -	If you don’t know how to create a production system you can learn how by reading Timeline: Setup a Production System
 -	We are first introduced to the “**data tray**” (see figure 8.1) on the left of the cropping system grid.  
@@ -2208,11 +2124,9 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 # Chapter 9 - Results
 
 
-Results are available in a simplified or detailed form.  The detailed results are the default when you click “**Results**” while in “**Advanced Mode**”.  To enable simplified results, click “**View**” in the toolbar and click “**Enable Simplified Results**”.
-
 ## Simplified Results
 
-- While in "Basic Mode" , the results page will display a basic set of results.
+- While in "**Simple Mode**" , the results page will display a basic set of results.
 - This page shows a broad summary of the emissions of the farm and how much the farm produced for each component in the farm. 
 -  The page also shows a graph displaying overall emission for each farm component.
 
@@ -2230,7 +2144,7 @@ Results are available in a simplified or detailed form.  The detailed results ar
 <br>
 
 ## Detailed Results
-- While in "Advanced Mode" , the results page will display an Advanced set of results. These results are split into multiple tabs with each tab displaying with each component displaying information regarding a specific aspect of the farm results.
+- While in "**Advanced Mode**" , the results page will display an Advanced set of results. These results are split into multiple tabs with each tab displaying with each component displaying information regarding a specific aspect of the farm results.
 
 
 ### Estimates of Production
@@ -2429,7 +2343,7 @@ Displayed only when an animal component is added to a farm. Holos will display h
 
 ### Multiyear Carbon Modelling
 
-Displayed only when 'Multi-Year Mode' is selected.  
+Displayed only when **Advanced mode** is selected.  
 
 Displays a graph showing the Soil Organic Carbon (SOC) for the fields in the farm over a given period (default is 1985 – present).  You can view the “Fields” tab as a graph or a table displaying various data regarding climate, carbon, nitrogen, etc.  Like the “Details” screen and “Manure Management” tab we also have access to the data tray to toggle appropriate data columns
 
@@ -3858,7 +3772,7 @@ The Holos program data files contain useful information that can help the Holos 
 <br>
 <br>
 
-### How do I enable Advanced Mode:
+### How do I switch between advanced and simple mode:
 
 If you have started the farm in Basic mode and want to switch to Advanced mode, the process is extremely simple.
 
@@ -3876,19 +3790,6 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 </p>
 <br>
 
-### How do I enable Multi Year Mode
-
-Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
-    <br>
-    <em>
-		Figure 11-2 - Click the Toggle to Switch between Basic and Advanced Mode.
-	</em>
-</p>
-<br>
 
 ### How to switch between IPCC Tier 2 & ICBM Carbon models
 
