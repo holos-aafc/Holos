@@ -1837,7 +1837,7 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
     <br>
     <em>
-		Figure 6.48 - Rams Hatchery component.
+		Figure 6.48 - Rams component.
 	</em>
 </p>
 <br>
