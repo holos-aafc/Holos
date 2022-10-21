@@ -42,7 +42,7 @@ Vous pouvez accéder à Holos à partir du menu de démarrage de Windows. Ouvrez
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
+ <img src="../../Images/UserGuide/fr/chapter1/figure1-4.png" alt="Figure 1-4" width="650"/>
     <br>
     <em>Figure 1.4 Holos dans le menu de démarrage.</em>
 </p>
@@ -135,7 +135,7 @@ Holos peut gérer plusieurs fermes créées par l’utilisateur, chacune représ
 </p>
 <br>
 
-2.	Lorsque vous aurez cliqué sur l’une des régions, Holos téléchargera les données climatiques directement de la NASA. Une barre de progression affiche l’avancement du téléchargement des données. Cela ne devrait prendre que quelques secondes. Les détails sur cette région s’affichent à droite de l’écran (pour afficher uniquement le mode avancé, voir la figure 2.6). Vous verrez les détails de l’emplacement, le sol et les zones de rusticité, ainsi que les détails sur les conditions climatiques à l’emplacement que vous avez choisi.
+2.	Lorsque vous aurez cliqué sur l’une des régions, Holos téléchargera les données climatiques directement de la NASA. Une barre de progression affiche l’avancement du téléchargement des données. Cela ne devrait prendre que quelques secondes. Les détails sur cette région s’affichent à droite de l’écran. Vous verrez les détails de l’emplacement, le sol et les zones de rusticité, ainsi que les détails sur les conditions climatiques à l’emplacement que vous avez choisi.
 
 <p align="center">
      <img src="../../Images/UserGuide/fr/chapter2/figure2-6.png" alt="Figure 2-6" width="950"/>
@@ -198,7 +198,7 @@ Holos peut gérer plusieurs fermes créées par l’utilisateur, chacune représ
 </p>
 <br>
 
-6. Lorsque vous avez fini vos choix du type de sol, de la zone de rusticité et des données climatiques, cliquez sur Suivant.
+1. Lorsque vous avez fini vos choix du type de sol, de la zone de rusticité et des données climatiques, cliquez sur Suivant.
 
 
 <br>
@@ -245,8 +245,8 @@ L’onglet **Fichier** offre plusieurs options pour gérer les fichiers de ferme
 
 #### Création d’une nouvelle ferme
 
-* Pour créer un nouveau fichier de ferme, cliquez sur **Nouveau** sous l’onglet Fichier. Vous pourrez alors créer une nouvelle ferme en suivant les étapes des sections **Créer une nouvelle ferme et Sélectionner un emplacement de ferme.**
-* Si vous ne savez pas comment créer une nouvelle ferme, cliquez ici : **Comment créer une nouvelle ferme**
+* Pour créer un nouveau fichier de ferme, cliquez sur **Nouveau** sous l’onglet Fichier. Vous pourrez alors créer une nouvelle ferme en suivant les étapes des sections **Créer une nouvelle ferme et [Sélectionner un emplacement de ferme](#sélection-de-lemplacement-de-la-ferme).**
+* Si vous ne savez pas comment créer une nouvelle ferme, cliquez ici : [Comment créer une nouvelle ferme](#créer-une-nouvelle-ferme)
 * Si vous ne savez pas comment ouvrir une ferme existante, suivez les instructions sous **Ouvrir/fermer des dossiers**.
 
 <br>
@@ -555,8 +555,6 @@ Sous l’en-tête Valeurs par défaut, trois options sont offertes : Renseigneme
 		A: Une liste des options disponibles pour définir les valeurs par défaut pour vos opérations.
 		<br>
 		B: Permet à l’utilisateur de définir des valeurs par défaut personnalisées pour des cultures individuelles. 
-		<br>
-		C: Option d’affichage des résultats en format annuel ou pluriannuel.
 	</em>
 </p>
 <br>
@@ -668,61 +666,6 @@ Les données par défaut pour cet écran sont basées sur les informations conte
 </p>
 <br>
    
-   
-   
-
-## Modèle annuel et pluriannuel
-
-*	Holos travaille avec une ferme selon deux modes, **Annuel** et **Pluriannuel**. Le mode de base est le mode **annuel**, certains boutons et menus étant masqués pour plus de simplicité. Holos démarre par défaut toute ferme en mode **Annuel**. Comme son nom l’indique, le mode **Annuel** ne fournit des données que pour une seule année. Le mode Pluriannuel permet de mettre en place un **système avancé de modélisation du carbone** sur une période allant de 1985 à nos jours.
-
-*	Le mode **Annuel** est le plus simple pour utiliser Holos; il suffit d’ajouter des composantes à votre ferme et d’appuyer sur **Suivant** pour charger les résultats. Il s’agit du mode par défaut pour créer une nouvelle ferme dans Holos.
-*	Le mode Pluriannuel modifie l’interface de certaines composantes (voir la figure 4.6).
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
-    <br>
-    <em>
-		Figure 4.7 – Propriétés d’une composante sur le terrain en mode Annuel 
- 	</em>
-</p>
-
-<br>
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
-    <br>
-    <em>
-		Figure 4.8 – Propriétés d’une composante sur le terrain en mode Pluriannuel.
- 	</em>
-</p>
-<br>
-
-
-
- 
-
-
-*	Le mode **Pluriannuel** modifiera le flux de Holos, au lieu des étapes normales suivies par le mode **Annuel**, dans le mode **Pluriannuel**, vous devez ajouter des composantes à votre ferme, puis naviguer jusqu’à l’écran Calendrier. À partir de cet écran, selon les paramètres, passez à l’écran Détails et arrivez finalement à la section des résultats.
-
-*	Vous pouvez basculer entre les modes Annuel ou Pluriannuel dans **Paramètres** ou cliquer sur **Oui** à côté de **Activer le mode Pluriannuel** dans l’écran de sélection des composantes. Dans le bas du Holos apparaît le mode de travail sélectionné, soit Annuel ou Pluriannuel.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
-    <br>
-    <em>
-		Figure 4.9 – Le mode de l’année en cours est affiché dans le coin inférieur droit
-		<br>
-		A : Le bouton à bascule de changement de mode d’année.
-		<br>
-		B : Le mode de l’année en cours. 
- 	</em>
-</p>
-<br>
-<br>
 
 
 # Chapitre 5 – Outils
@@ -1009,6 +952,7 @@ Dans cette section, l'utilisateur peut indiquer la quantité de carbone et d'azo
 
 <br>
 <p align="center">
+<img src="../../Images/UserGuide/fr/chapter6/figure6-8.png" 
  <img src="" alt="Figure6-8"  width="650"/>
     <br>
     <em>
@@ -1153,297 +1097,961 @@ Pour chaque type d'arbre dans vos rangées de brise-vent, il faut remplir un ens
 <br>
 
 
-   
-
-##### Détails sur les brise-vent
-
--   Si votre ferme compte plusieurs brise-vent à côté de l'onglet **Sélecteur de brise‑vent**, vous pouvez sélectionner en haut de la page la composante des brise‑vent pour laquelle vous souhaitez voir les résultats, comme le montre la figure 6.14, section A.
-
--   Pour accéder à la page des détails, cliquez sur **Suivant** au bas de la page du calendrier.
-
--   La page des détails **affichera une liste de données pour chaque rangée de brise-vent et leurs types d'arbres**, à partir de l'année de la plantation jusqu'à l'année de coupe que vous avez inscrite sur la page du calendrier des brise-vent (figure 6.14, section C).
-
--   La page des détails produira également des calculs supplémentaires comme la catégorie de mortalité en pourcentage (0/15/30/50), le carbone de surface (kg C par arbre) et le carbone souterrain (kg C
-par arbre).
-
--   Si vous modifiez des valeurs dans les pages précédentes, cliquez sur **Reconstruire les colonnes de données** pour actualiser les données du tableau (Figure 6.14, section B).
-
--   Si vous souhaitez voir les colonnes de la calculatrice (pour la circonférence moyenne), cliquez sur **Afficher les colonnes de la calculatrice** dans le coin supérieur droit de la page Détails du brise-vent, et une colonne de la calculatrice s'affichera. Si vous ne savez pas ce qu'est la calculatrice de circonférence moyenne, cliquez ici : [Comment utiliser la calculatrice de circonférence moyenne](#calculatrice-de-circonférence-moyenne)
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
-    <br>
-    <em>
-		Figure 6.14 -- Détails du brise-vent.
-		<br>
-		A : Les brise-vent de votre ferme.
-		<br>
-		B : Si vous avez modifié des données dans les pages précédentes, veuillez cliquer ici pour reconstruire les colonnes de données.
-		<br>
-		C : Les données associées à chaque rangée de brise-vent et à leur type d'arbre correspondant de l'année de plantation jusqu'à l'année de coupe.
-		<br>
-		D : Si vous avez trié les données et souhaitez revenir à l'année par défaut, cliquez ici.
-	</em>
-</p>
-<br>
-
- 
-  
-
 ##### Résultats du brise-vent
 
 1.  **Pour obtenir les résultats**, cliquez sur le bouton **Résultats** au bas de chaque page des composantes.
 2.  La page des résultats affichera l'empreinte des émissions du brise-vent sélectionné en fournissant des données sur les émissions de gaz à effet de serre calculées à partir des données entrées dans les pages précédentes.
 
-## Composantes animales
-
--   Les composantes animales sont réparties dans les catégories suivantes : **Production de bœuf, Produits laitiers, Porcs, Volaille, Moutons et Autres animaux d'élevage.**
-
--   Tous les résultats pour chaque composante animale seront affichés sur une **seule page de résultats.**
-
--   Par contre, chaque composante animale doit avoir son propre ensemble d'entrées de données!
-
--   Dans cette section, nous verrons comment entrer les données pour chaque catégorie de composantes.
-
-### Configuration des composantes animales
-
--   Les composantes animales sont très semblables en ce qui concerne la structure et les données requises pour créer les composantes.
-
--   Chaque composante animale comprend **un ou plusieurs groupes d'animaux (p. ex., génisses par opposition à bouvillons)**, parmi lesquels **chaque groupe fait l'objet d'une ou de plusieurs périodes
-de gestion.**
-
--   La **période de gestion** est divisée en catégories et permet à l'utilisateur d'entrer des données sur les détails concernant les **Renseignements généraux, Ration, Logement et Fumier** pour chaque **groupe d'animaux.**
 
 
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-15.png" alt="Figure6-15" width="650"/>
-    <br>
-    <em>
-		Figure 6.15 -- Présentation des Bovins de long engraissement et semi-finis présentant une composante animale.
-		<br>
-		A : Une liste des groupes d'animaux qui ont été ajoutés à la composante animale.
-		<br>
-		 B : Une liste des périodes de gestion pour un groupe d'animaux sélectionnés.
-		<br>
-		C : Les détails de la période de gestion sélectionnée
-	</em>
-</p>
-<br>
 
-  
 
-#### Groupes
 
--   **Chaque** composante animale peut comprendre **un ou plusieurs groupes d'animaux**.
--   La **principale considération est que chaque groupe d'animaux** a un type particulier ou différent d'intrants et de pratiques de gestion qui y sont associés, p. ex., logement, ration, gestion du fumier, etc.
--   Pour **ajouter un groupe** à votre composante animale, vous pouvez utiliser les boutons situés en haut à droite de la section des groupes d'animaux.
--   Le groupe ajouté s'affichera sous **Étape 1**.
--   Vous pouvez **supprimer un groupe d'animaux** en cliquant sur le **X** à côté du groupe d'animaux que vous souhaitez supprimer.
--   Vous pouvez **également trier les groupes par ordre alphabétique** en cliquant sur l'en-tête **Nom du groupe**\".
--   Si vous voulez voir les détails sur un groupe d'animaux, veuillez le sélectionner en cliquant n'importe où dans la section des groupes. Le groupe d'animaux sélectionné sera indiqué par un symbole « \> » dans la colonne de gauche.
--   Vous pouvez **modifier le nom de chacun de vos groupes d'animaux** en cliquant sur le nom que vous souhaitez modifier et en y inscrivant votre nom personnalisé.
+
+<!---
+This is the start of section that needs to be translated
+-->
+[Translation Section 2]: <> (Section 2 Begin)
+
+
+
+
+
+
+### Crop Rotation Component
+
+A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. If a farm contains multiple field components that are added to represent the rotation of crops on a field over the years, a crop rotation component can represent the same information through a single entry. This allows for easier and more manageable representation of fields and crops on the farm.
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-16.png" alt="Figure6-16"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
     <br>
     <em>
-		Figure 6.16 -- Groupes d'animaux.
-		<br>
-		A : Tous les groupes d'animaux actuellement ajoutés. Chaque ligne contient un seul groupe.
-		<br>
-		B : Un groupe animal particulier -- bouvillons.
-		<br>
-		C : Pour trier les noms, cliquez sur l'en-tête **Nom du groupe**.
-		<br>
-		D : Boutons pour ajouter un groupe d'animaux.
-	</em>
-</p>
-<br>
-
-    
-
-#### Période de gestion
-
--   Une période de gestion est une période pendant laquelle il est possible de saisir les détails relatifs à un groupe d'animaux, en fonction des opérations effectuées pendant cette période.
--   Chaque **groupe d'animaux** peut faire l'objet d'**une ou plusieurs** périodes de gestion.
--   Pour voir la ou les périodes de gestion d'un groupe d'animaux, veuillez **sélectionner le groupe sous Étape 1**.
--   Vous pouvez modifier le **nom, la date de début** et le **nombre de jours** pour chaque période de gestion.
--   Pour ajouter une nouvelle période de gestion à votre groupe d'animaux sélectionné, veuillez cliquer sur le bouton **Ajouter une période de gestion** sous **Étape 2**.
--   Pour **supprimer une période de gestion**, cliquez sur le bouton **X** à côté de la période que vous souhaitez supprimer.
--   Les données sur une période de gestion peuvent être réparties en quatre catégories : **Renseignements généraux, Ration, Logement et Fumier**.
--   Pour voir les données sur une période de gestion, veuillez cliquer sur celle que vous souhaitez consulter.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-17.png" alt="Figure6-17" width="450"/>
-    <br>
-    <em>
-		Figure 6.17 -- Périodes de gestion pour le groupe d'animaux.
-		<br>
-		A : Le groupe d'animaux sélectionné.
-		<br>
-		B : Périodes de gestion pour le groupe d'animaux sélectionné.
-		<br>
-		C : Cliquez ici pour ajouter une nouvelle périodede gestion pour votre groupe d'animaux
-	</em>
-</p>
-
-   
-
--   Pour voir les renseignements supplémentaires pour chaque section, cliquez sur **Oui** à côté de l'en-tête Afficher les renseignements supplémentaires.
-
-<br>
-
-##### Renseignements généraux
-
--   La section des renseignements généraux contient des données simples sur le groupe animal, comme le **nombre d'animaux** et le taux quotidien moyen des **coefficients de gain**.
--   Vous pouvez également inscrire les poids de **départ** et de **fin** pour votre groupe d'animaux.
--   Certains groupes d'animaux comportent des champs de données supplémentaires propres à ce groupe.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
-    <br>
-    <em>
-		Figure 6.18 -- Onglet général Périodes de gestion.
-		<br>
-		A : Le bouton à bascule **Afficher les renseignements supplémentaires** vous permet de consulter des renseignements supplémentaires dans un onglet.
-		<br>
-		B : Renseignements supplémentaires concernant une section d'onglet.
-	</em>
-</p>
-<br>
-
-  
-
-##### Rations
-
--   La section sur le régime alimentaire contient des renseignements sur les rations de votre groupe d'animaux au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner l'une des **rations par défaut**, par exemple : **faible, moyen ou élevé** en protéines.
--   Si vous avez sélectionné **Renseignements supplémentaires**, vous pouvez ajouter des précisions sur la ration, comme le fourrage, les   protéines brutes, les matières grasses, etc.
--   Si vous voulez créer votre propre **ration personnalisée**, il y a un bouton **Créateur de ration personnalisée** au bas de la section sur le régime alimentaire. Si vous ne savez pas comment créer une ration personnalisée, cliquez ici : [Comment créer une ration personnalisée](#créer-une-ration-personnalisée).
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
-    <br>
-    <em>
-		Figure 6.19 -- Périodes de gestion -- onglet Ration
+		Figure 6.58 - Crop Rotation Component
 	</em>
 </p>
 <br>
 
 
-
-
-##### Logement
-
--   La section sur le logement contient des renseignements sur la situation du logement pour le groupe d'animaux que vous avez choisi au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner des types de logements par défaut, comme : enclos sans étable, enclos, pâturage fermé, etc.
-
+The crop rotation component allows to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-20.png" alt="Figure6-20" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
     <br>
     <em>
-		Figure 6.20 -- Périodes de gestion -- Onglet Logement.
-	</em>
-</p>
-
-
-
-
--   Si vous sélectionnez **Pâturage fermé**, vous verrez un champ de données supplémentaire pour **Emplacement du pâturage**.
-
-##### Fumier
-
--   La section sur le fumier contient des détails sur les utilisations de fumier pour le groupe d'animaux que vous avez sélectionné au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner des types de gestion du fumier par défaut, comme : Litière profonde, stockage solide, etc.
--   Si vous avez choisi de voir des renseignements supplémentaires, vous pouvez fournir des données d'entrée pour obtenir des précisions sur le fumier.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-21.png" alt="Figure6-21" width="750"/>
-    <br>
-    <em>
-		Figure 6.21 -- Périodes de gestion -- Onglet Fumier.
+		Figure 6.59 – Crop Rotation - Setting up the crops
+		<br>
+		A: The year and crop information.
+		<br>
+		B: Arrow buttons allow adjustment of the crops in the rotation.
+		<br>
+		C: The current rotation for each field.
 	</em>
 </p>
 <br>
 
+Most of the remaining settings in the crop rotation component are similar to the [field component mentioned earlier](#field-component).
+
+An additional settings tab is present in the crop rotation component that is missing from the field component, i.e., 'Winter & Cover Crops'. This tab provides options to manage and change settings related to the cover crop for each field.
+
+Adding a winter/cover/undersown crop to any specific crop will enable this tab for that particular crop.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
+    <br>
+    <em>
+		Figure 6.60 - Winter & Cover Crops settings
+	</em>
+</p>
+<br>
+<br>
 
 
+## Animal Components
 
-### Production bovine
-
-La catégorie de production bovine comprend les composantes animales suivantes :
-
--   Boeufs -- Vaches/veaux
--   Bovins de long engraissement et semi-finis
--   Finition des bovins
+-	The animal components are separated into the following component categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
+-	All the results for each animal component will be displayed on a **single results page.** 
+-	However, each animal component requires their own set of data inputs!
+-	In this section, we will go through how to enter data for each component category.
 
 <br>
 
-### Produits laitiers
+### Setting Up Animal Components
 
-La catégorie des produits laitiers comprend la composante animale suivante : 
-- Bovins laitiers.
+-	The animal component is very similar in terms of the structure and data required to create the components.
+-	Each **animal component** consists of **one or more animal groups (e.g. heifers vs steers)**, where **each animal group has one or more management periods.**
+- The **management period** is separated into categories and allows the user to enter data for **General, Diet, Housing and Manure** details for each **animal group.**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
+    <br>
+    <em>
+		Figure 6.15 - Beef Stockers & Backgrounders Layout showcasing an animal component.
+		<br>
+		A: A list of animal groups that have been added to the animal component.
+		<br>
+		B: A list of management periods for a selected animal group.
+		<br>
+		C: The details for the selected management period.
+	</em>
+</p>
+<br>
+
+#### Groups
+
+-	**Each** animal component can have **one or more animal groups**.
+-	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it e.g. different housing, diet, manure management, etc.
+-	To **add a group** for your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
+-	The added group will appear in under “**Step 1**”
+-	You can **remove an animal group** by clicking on the “**X**” beside the animal group you would like to remove
+-	You can **also sort the groups alphabetically** by clicking on the “**Group name**” header.
+-	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. the selected animal group will be indicated by a “>” symbol in the left column.
+-	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-16.png" alt="Figure6-16"/>
+    <br>
+    <em>
+		Figure 6.16 - Animal Groups
+		<br>
+		A: All the animal groups currently added. Each row contains a single group.
+		<br>
+		B: A specific animal group - Steers
+		<br>
+		C: Click the **Group name** heading to sort the names.
+		<br>
+		D: Buttons to add an animal group
+	</em>
+</p>
+<br>
+
+
+#### Management Period
+
+-	A management period is a period of time for an animal group where details for that animal group are able to be entered specific to the operations during that time period.
+-	Each **animal group** can have **one or more** management periods.
+-	To view the management period(s) for an animal group, please **select the group under “Step 1”**.
+-	You can adjust the **name, start date** and the **number of days** for each management period.
+-	To **add a new management period** to your selected animal group, please click the “**Add Management Period**” button below “**Step 2**”.
+-	To **remove a management period**, click the **X** button beside the period you would like to remove.
+-	The details for a management period can be split into four categories: **General, Diet, Housing and Manure**.
+-	To see the details for a management period, please click on the period you would like to view.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
+    <br>
+    <em>
+		Figure 6.17 - Management Periods for Animal Group
+		<br>
+		A: The selected animal group
+		<br>
+		B: Managements periods for the selected animal group
+		<br>
+		C: Click here to add a new management period for your animal group
+	</em>
+</p>
+
+-	To see additional information for each section, click “Yes” beside the “Show Additional Information” header.
+
+<br>
+<br>
+
+
+### Beef Production
+
+The beef production category contains the following animal components: 
 
 <br>
 
-### Porcs
+#### Beef Cow-Calf
 
-La catégorie des porcs comprend les composantes animales suivantes : 
-- Porcs d'engraissement et porcs de finition
-- De la naissance au sevrage 
-- Sevrage en isolement
-- De la naissance à la finition.
+The Beef Cow-Calf component contains the following groups:
+
+* Bulls
+* Replacement heifers
+* Cows
+* Calves
+
+Holos allows the user to add additional groups and create copies of a group if required. A group can be added/copied by clicking the "**Add Group**" button in Step 1.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
+    <br>
+    <em>
+		Figure 6.18 - Beef Cow-Calf Component
+	</em>
+</p>
+<br>
+
+
+
+Each animal group has the following sections that can be further edited and configured. 
+
+##### General
+
+-	The general section contains simple information for the animal group such as the **number of animals** and average daily rate of **gain coefficients**.
+-	You can also enter the **start** and **end** weights for your animal group.
+-	Some animal groups will have additional data fields specific to that group.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
+    <br>
+    <em>
+		Figure 6.19 - Management Periods General Tab
+		<br>
+		A: The 'Show Additional Information' toggle allows you to see additional information in a tab.
+		<br>
+		B: Additional information regarding a tab section.
+	</em>
+</p>
+<br>
+
+##### Diet
+
+-	The Diet section contains information pertaining to the diet for your animal group in the selected management period.
+-	You can select one of the **default diets** such as: **low, medium, or high** energy protein.
+-	If you have selected to see **additional information**, you are able to adjust more specific details for the diet such as: forage, crude protein, fat etc.
+- If you want to create your own **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you do not know how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
+    <br>
+    <em>
+		Figure 6.20 - Management Periods - Diet Tab.
+	</em>
+</p>
+<br>
+
+##### Housing
+
+-	The housing section contains details pertaining to the housing situation for your selected animal group in the selected management period.
+-	You can select default housing types such as: confined no barn, confined, enclosed pasture, etc.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
+    <br>
+    <em>
+		Figure 6.21 - Management Periods - Housing Tab.
+	</em>
+</p>
+
+- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location**"
 
 <br>
 
-### Volaille
+##### Manure
 
-La catégorie de la volaille comprend les composantes animales suivantes :
-- Ferme de poulettes 
-- Éleveur-multiplicateur de poulets 
-- Production de viande de poulet 
-- Éleveur-multiplicateur de dindons 
-- Production de viande de dinde 
-- Production d'œufs de poulet 
-- Couvoir multiplicateur de poulets.
+- 	The manure section contains details pertaining to the manure operations for your selected animal group in the selected management period.
+- 	You can select default manure management types such as:  Deep Bedding, Solid Storage, etc.
+- 	If you have selected to see additional information, you are able to provide data inputs for more specific manure details.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
+    <br>
+    <em>
+		Figure 6.22 - Management Periods - Manure Tab.
+	</em>
+</p>
+<br>
+<br>
+
+
+
+#### Beef Stockers & Backgrounders
+
+The Beef Stockers and Backgrounders component has the following animal groups:
+
+- Heifers
+- Steers
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
+    <br>
+    <em>
+		Figure 6.23 - Beef Stockers and Backgrounders component.
+	</em>
+</p>
+<br>
+<br>
+
+#### Beef Finishers
+
+The Beef Finisher component has the following animal groups:
+
+- Heifers
+- Steers
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
+    <br>
+    <em>
+		Figure 6.24 - Beef Finisher component.
+	</em>
+</p>
+<br>
+<br>
+
+
+### Dairy
+
+The Dairy category contains the following components:
+
+#### Dairy cattle
+
+The Dairy cattle component has the following animal groups:
+
+- Dairy heifers
+- Dairy calves
+- Dairy lactating
+
+This component contains similar additional tabs as the [Beef Cow-Calf component](#general) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
+    <br>
+    <em>
+		Figure 6.25 - Dairy cattle component.
+	</em>
+</p>
+<br>
+<br>
+
+
+### Swine
+
+The swine category contains the following animal components:
+
+
+#### Grower-to-Finish
+
+The Grower-to-Finish component has the following animal groups:
+
+- Hogs
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
+    <br>
+    <em>
+		Figure 6.26 - Grower-to-Finish component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
 
 <br>
 
-### Moutons
+##### General - Swine Component
 
-La catégorie des moutons comprend les composantes animales suivantes :
+The general tab allows editing the following information:
 
-- Parc d'engraissement de moutons 
-- Béliers 
-- Agneaux et brebis.
+- The **production stage** of the animal group.
+- The **number of animals** on the farm.
+- The **daily weight gain** of the animals in the selected animal group.
+- The **start and end weight** of the animals in the selected animal group.
+- Additional general information regarding the animal group (after selecting "S
+- how Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
+    <br>
+    <em>
+		Figure 6.27 - Swine component - General tab.
+	</em>
+</p>
+<br>
+
+##### Diet - Swine Component
+
+The diet tab allows editing the following information:
+
+- The **type of diet** of the animal group.
+- The **custom diet creator** to create a custom diet for the selected animal group.
+- Additional diet information regarding the animal group (after selecting "Show Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
+    <br>
+    <em>
+		Figure 6.28 - Swine component - Diet tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Swine Component
+
+The manure tab allows editing the following information:
+
+- The **manure handling system** for the animal group.
+- Additional manure information regarding the animal group (after selecting "Show Additional Information").
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
+    <br>
+    <em>
+		Figure 6.29 - Swine component - Diet tab.
+	</em>
+</p>
+<br>
+
+
+#### Farrow-to-Wean
+
+The Farrow-to-Wean component has the following animal groups:
+
+- Gilts
+- Soars
+- Boars
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
+    <br>
+    <em>
+		Figure 6.30 - Farrow-to-Wean component.
+	</em>
+</p>
+<br>
+
+
+#### Iso-Wean
+
+The Iso-Wean component has the following animal groups:
+
+- Piglets
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
+    <br>
+    <em>
+		Figure 6.31 - Iso-Wean component.
+	</em>
+</p>
+<br>
+
+#### Farrow-to-Finish
+
+The Farrow-to-Finish component has the following animal groups:
+
+- Gilts
+- Sows
+- Boars
+- Piglets
+
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
+    <br>
+    <em>
+		Figure 6.32 - Farrow-to-Finish component.
+	</em>
+</p>
+<br>
 
 <br>
 
-### Autres animaux d'élevage
+### Poultry
+The poultry category contains the following animal components:
+<br>
 
-La catégorie des autres animaux d'élevage comprend les composantes animales suivantes : 
-- Chèvres 
-- Chevreuils 
-- Chevaux 
-- Mules
-- Bisons 
-- Lamas.
+#### Pullet Farm
+
+The Pullet Farm component has the following animal groups:
+
+- Pullets
+
 
 <br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
+    <br>
+    <em>
+		Figure 6.34 - Pullet Farm component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
+
+
+##### General - Poultry Component
+
+The general tab allows editing the following information:
+
+- The **number of animals** on the farm.
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
+    <br>
+    <em>
+		Figure 6.35 - Poultry component - General tab.
+	</em>
+</p>
+<br>
+
+
+##### Housing - Poultry Component
+
+The housing tab allows editing the following information:
+
+- The **housing type** for the animals in the selected animal group.
+- Additional housing information regarding the animal group (after selecting "Show Additional Information").
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
+    <br>
+    <em>
+		Figure 6.36 - Poultry component - Housing tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Poultry Component
+
+The manure tab allows editing the following information:
+
+- The **manure handling system** for the animals in the selected animal group.
+- Additional manure information regarding the animal group (after selecting "Show Additional Information").
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
+    <br>
+    <em>
+		Figure 6.37 - Poultry component - Manure tab.
+	</em>
+</p>
+<br>
+
+
+<br>
+
+#### Chicken Multiplier Breeder
+
+The Chicken Multiplier Breeder component has the following animal groups:
+
+- Pullets
+- Cockerels
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
+    <br>
+    <em>
+		Figure 6.38 - Chicken Multiplier Breeder component.
+	</em>
+</p>
+<br>
+
+<br>
+
+#### Chicken Meat Production
+
+The Chicken Meat Production component has the following animal groups:
+
+- Pullets
+- Cockerels
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+    <br>
+    <em>
+		Figure 6.39 - Chicken Meat Production component.
+	</em>
+</p>
+<br>
+
+#### Turkey Multiplier Breeder
+
+The Turkey Multiplier Breeder component has the following animal groups:
+
+- Young toms
+- Toms
+- Young turkey hens
+- Turkey hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
+    <br>
+    <em>
+		Figure 6.61 - Turkey Multiplier Breeder.
+	</em>
+</p>
+<br>
+
+#### Turkey Meat Production
+
+The Turkey Meat Production component has the following animal groups:
+
+- Young toms
+- Young turkey hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
+    <br>
+    <em>
+		Figure 6.40 - Turkey Meat Production component.
+	</em>
+</p>
+<br>
+
+#### Chicken Egg Production
+
+The Chicken Egg Production component has the following animal groups:
+
+- Hens
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
+    <br>
+    <em>
+		Figure 6.41 - Chicken Egg Production component.
+	</em>
+</p>
+<br>
+
+#### Chicken Multiplier Hatchery
+
+The Chicken Multiplier Hatchery component has the following animal groups:
+
+- Chicks
+- Poults
+
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
+    <br>
+    <em>
+		Figure 6.42 - Chicken Multiplier Hatchery component.
+	</em>
+</p>
+<br>
+
+<br>
+
+### Sheep
+
+The sheep category contains the following animal components:
+<br>
+
+#### Sheep Feedlot
+
+The Sheep Feedlot component has the following animal groups:
+
+- Sheep feedlot
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
+    <br>
+    <em>
+		Figure 6.43 - Sheep Feedlot component.
+	</em>
+</p>
+<br>
+<br>
+
+This component contains the following tabs which allow further information to be entered regarding each group.
+
+
+##### General - Sheep Component
+
+The general tab in this category allows changing the following information regarding each animal group:
+
+- Number of animals
+- Daily gain
+- Start and end weight
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
+    <br>
+    <em>
+		Figure 6.44 - Sheep Category - General tab.
+	</em>
+</p>
+<br>
+
+##### Diet - Sheep Component
+
+The diet tab in this category allows changing the following information regarding each animal group:
+
+- Diet type
+- Open the custom diet creator.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
+    <br>
+    <em>
+		Figure 6.45 - Sheep Category - Diet tab.
+	</em>
+</p>
+<br>
+
+##### Housing - Sheep Component
+
+The housing tab in this category allows changing the following information regarding each animal group:
+
+- Housing type
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
+    <br>
+    <em>
+		Figure 6.46 - Sheep Category - Housing tab.
+	</em>
+</p>
+<br>
+
+##### Manure - Sheep Component
+
+The manure tab in this category allows changing the following information regarding each animal group:
+
+- Manure handling system
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
+    <br>
+    <em>
+		Figure 6.47 - Sheep Category - manure tab.
+	</em>
+</p>
+<br>
+
+
+####	Rams
+
+The Rams component has the following animal groups:
+
+- Rams
+
+This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
+    <br>
+    <em>
+		Figure 6.48 - Rams component.
+	</em>
+</p>
+<br>
+
+####	Lambs & Ewes
+
+The Lambs & Ewes component has the following animal groups:
+
+- Lambs
+- Ewes
+
+This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
+    <br>
+    <em>
+		Figure 6.49 - Lambs & Ewes component.
+	</em>
+</p>
+<br>
+<br>
+
+### Other Livestock
+
+The other livestock category contains various other livestock that is currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
+
+#### General - Other Livestock
+
+The general tab in this category allows changing the following information regarding the animal:
+
+- Number of animals
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
+    <br>
+    <em>
+		Figure 6.50 - Other Livestock - General tab.
+	</em>
+</p>
+<br>
+
+
+#### Manure - Other Livestock
+
+The manure tab in this category allows changing the following information regarding the animal:
+
+- Manure handling system
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
+    <br>
+    <em>
+		Figure 6.51 - Other Livestock - Manure tab.
+	</em>
+</p>
+<br>
+
+The other livestock category contains the following animal components:
+
+#### Goats
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
+    <br>
+    <em>
+		Figure 6.52 - Goats component.
+	</em>
+</p>
+<br>
+
+#### Deer
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
+    <br>
+    <em>
+		Figure 6.53 - Deer component.
+	</em>
+</p>
+<br>
+
+#### Horses
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
+    <br>
+    <em>
+		Figure 6.54 - Horses component.
+	</em>
+</p>
+<br>
+
+#### Mules
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
+    <br>
+    <em>
+		Figure 6.55 - Mules component.
+	</em>
+</p>
+<br>
+
+#### Bison
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
+    <br>
+    <em>
+		Figure 6.56 - Bison component.
+	</em>
+</p>
+<br>
+
+
+#### Llamas
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
+    <br>
+    <em>
+		Figure 6.57 - Llams component.
+	</em>
+</p>
+<br>
+
+<br>
+
+
+
+
+<!---
+This is the End of section that needs to be translated
+-->
+[Translation Section 2]: <> (Section 2 End)
+
+
+
+
 
 ## Composantes de l'infrastructure
 
@@ -1464,11 +2072,10 @@ ferme.
 
 # Chapitre 7 - Calendrier
 
-Pour afficher le CALENDRIER, votre ferme doit être en mode avancé et activez le mode pluriannuel dans l’écran de sélection des composantes
+Pour afficher le CALENDRIER, votre ferme doit être en mode avancé.
 
 - [Apprendre comment passer du mode de base au mode avancé.](#comment-puis-je-activer-le-mode-avance)
 
-- [Découvrez comment activer le mode pluriannuel.](#comment-puis-je-activer-le-mode-pluriannuel)
 
 L’écran Calendrier vous permet de voir votre ferme sur une période allant de 1985 à aujourd’hui.
 
@@ -1505,11 +2112,75 @@ L’écran Calendrier vous permet de voir votre ferme sur une période allant de
 <br>
 <br>
 
+
+
+
+
+
+
+
+<!---
+This is the End of section that needs to be translated
+-->
+[Translation Section 3]: <> (Section 3 Begin)
+
+
+
+
+
+
+
+
+
+## Shelterbelt Timeline
+
+The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year. In the shelterbelt timeline you can adjust:
+
+- The year the tree was planted.
+- The cut-off year of the timeline.
+- The year of observation.
+- Number of trees alive today (from drop down named 'Mortality').
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter7/figure7-2.png" alt="Figure7-2" width="750"/>
+    <br>
+    <em>
+		Figure 7.2 – Shelterbelt timeline
+		<br>
+		A: Switch between crop timeline and shelterbelt timeline.
+		<br>
+		B: The timeline for a specific tree added to the shelterbelt.
+		<br>
+	</em>
+</p>
+
+
+
+
+
+
+
+<!---
+This is the End of section that needs to be translated
+-->
+[Translation Section 3]: <> (Section 3 End)
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+
 # Chapitre 8 - Détails
 
 ## Survol
-
--   Pour afficher cet écran, assurez-vous d'**activer le mode pluriannuel** en **mode avancé** et de **désactiver les résultats simplifiés** dans la barre d'outils.
 
 -   Cet écran présente une grille détaillée liée aux champs de votre ferme, comme l'**apport en carbone**, le **rendement** et d'**autres facteurs** pour chaque année de vos systèmes de production que vous avez créés dans le **calendrier**.
 
@@ -1738,6 +2409,82 @@ la comparaison dans le tableau.
 <br>
 
 
+
+
+<!---
+This is the Start of section that needs to be translated
+-->
+[Translation Section 4]: <> (Section 4 Start)
+
+
+
+#### Comparing Emissions of Farms
+
+The detailed emission report tab allows emissions to be compared between different farms added to Holos by the user. If more than one farm is present, the "Compare Multiple Farms" option becomes available.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.1.png" alt="Figure9-7.1" width="850"/>
+    <br>
+    <em>
+		Figure 9-7.1 - Compare multiple farms option
+	</em>
+</p>
+<br>
+
+After clicking on 'yes', a new menu will show up which provides further options.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.2.png" alt="Figure9-7.2" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.2 - Select farms to compare settings
+		<br>
+		A: Tabs in the top bar present different options to the user.
+		<br>
+		B: The current farms added to Holos by the user. Click the farms that need to be compared.
+		<br>
+		C: Click here to compare the farms.
+		<br>
+		D: Options that allow the user to select all available farms, clear the current selection and close the select farm setting menu.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.3.png" alt="Figure9-7.3" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.3 - Default settings for the farms.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.4.png" alt="Figure9-7.4" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.4 - Animal settings for the farm. Each setting and be included and excluded from the comparison.
+	</em>
+</p>
+<br>
+<br> 
+
+
+
+
+
+<!---
+This is the End of section that needs to be translated
+-->
+[Translation Section 4]: <> (Section 4 End)
+
+
+
+
    
 
 ### Rapport d'estimation des aliments
@@ -1775,11 +2522,9 @@ Affichée seulement lorsqu'une composante animale est ajoutée à une ferme. Hol
 
 ### Modélisation pluriannuelle du carbone
 
-S'affiche uniquement lorsque le mode pluriannuel est sélectionné.
+Affiche un graphique montrant le carbone organique du sol (COS) pour les champs de la ferme sur une période donnée (la valeur par défaut est 1985 -- présent). Vous pouvez voir l'onglet « Champs » sous forme de graphique ou de tableau affichant diverses données concernant le climat, le carbone, l'azote, etc. Comme avec l'écran **« Détails »** et l'onglet « **Gestion du fumier** », nous avons également accès au plateau de données pour basculer entre les colonnes de données appropriées.
 
-Affiche un graphique montrant le carbone organique du sol (COS) pour les champs de la ferme sur une période donnée (la valeur par défaut est 1985 -- présent). Vous pouvez voir l'onglet « Champs » sous forme de graphique ou de tableau affichant diverses données concernant le climat, le carbone, l'azote, etc. Comme avec l'écran « Détails » et l'onglet « Gestion du fumier », nous avons également accès au plateau de données pour basculer entre les colonnes de données appropriées.
-
-Cliquez sur le bouton à bascule « Grille » ou « Graphique » pour afficher les résultats dans le format correspondant.
+Cliquez sur le bouton à bascule « **Grille** » ou « **Graphique** » pour afficher les résultats dans le format correspondant.
 
 **Dans la vue Graphique**, **lorsque vous passez la souris** sur des points de données d'une année donnée, vous obtenez des renseignements de base sur ce point. L'utilisateur peut également cliquer sur un lien dans chaque fenêtre contextuelle pour afficher de plus amples renseignements sur les données de cette année dans la vue « Grille ».
 
@@ -3166,7 +3911,7 @@ valeur de données dans le format suivant : « H(0-9)(a-b) ». Cela signifie 
 <!---
 This is the start of section that needs to be translated
 -->
-[Translation Begin - Section 1]: <> (Translation Begin - Section 1)
+[Translation Section 1]: <> (Section 1 Begin)
 
 
 # Chapter 11 Appendix - Additional Information, Common Questions & Toubleshooting
@@ -3317,57 +4062,6 @@ The Holos program data files contain useful information that can help the Holos 
 
 - To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on github. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
 
-<br>
-<br>
-
-### How do I enable Advanced Mode:
-
-If you have started the farm in Basic mode and want to switch to Advanced mode, the process is extremely simple.
-
-1. Click on **Settings** in the top menu bar.
-2. Select **"Farm Defaults"**.
-3. Select "Advanced Mode" under the "**Farm**" tab.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure11-1" width="650"/>
-    <br>
-    <em>
-		Figure 11-1 - Advanced mode can be selected from the farm defaults/details setting.
-	</em>
-</p>
-<br>
-
-### How do I enable Multi Year Mode
-
-Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
-    <br>
-    <em>
-		Figure 11-2 - Click the Toggle to Switch between Basic and Advanced Mode.
-	</em>
-</p>
-<br>
-
-### How to switch between IPCC Tier 2 & ICBM Carbon models
-
-Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch to and from the ICBM carbon model. To switch between the models:
-
-1. Click on "**Settings**" in the top menu bar.
-2. Select "**User Settings**".
-3. In the "**Carbon Modelling Strategy**" drop-down, select the carbon model you want to use in your calculations.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-3.png" alt="Figure11-3" width="450"/>
-    <br>
-    <em>
-		Figure 11-3 - Switching between carbon models that are used in Holos.
-	</em>
-</p>
 <br>
 <br>
 
@@ -3573,7 +4267,7 @@ The version number of your current Holos installation is displayed when you firs
 <!---
 This is the end of section that needs to be translated
 -->
-[Translation End - Section 1]: <> (Translation End - Section 1)
+[Translation Section 1]: <> (Section 1 End)
 
 ## Comment puis-je activer le mode avance
 
@@ -3594,21 +4288,6 @@ Si vous avez démarré la ferme en mode de base et que vous souhaitez passer au 
 </p>
 <br> 
 
-
-## Comment puis-je activer le mode pluriannuel
-
-Le mode pluriannuel n’est disponible que si vous êtes actuellement en mode avancé. Si vous êtes actuellement en mode de base, passez au mode avancé. Ensuite, cherchez un bouton à bascule dans le coin supérieur droit du programme Holos. Vous pouvez utiliser ce bouton pour passer d’un mode à l’autre.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
-    <br>
-    <em>
-		Figure 11-2 - Cliquez sur le bouton à bascule pour passer du mode de base au mode avancé. 
-	</em>
-</p>
-<br>
 
 
 ## Comment basculer entre les modèles de carbone de niveau 2 du GIEC et MIBC
