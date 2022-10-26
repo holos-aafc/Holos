@@ -30,7 +30,6 @@ namespace H.Core.Emissions.Results
             this.CropEnergyResults = new CropEnergyResults();
             this.LandUseChangeResults = new LandUseChangeResults();
             this.CropN2OEmissionsResults = new SoilN2OEmissionsResults();
-            this.LandAppliedManureResults = new SoilN2OEmissionsResults();
 
             this.HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>();
         }

@@ -175,7 +175,6 @@ namespace H.Core.Services.LandManagement
 
             results.CropEnergyResults = this.CalculateCropEnergyResults(fieldSystemComponent, farm);
             results.CropN2OEmissionsResults = this.CalculateCropN2OEmissions(fieldSystemComponent, farm);
-            results.LandAppliedManureResults = this.CalculateManureN2OResults(fieldSystemComponent, farm);
 
             results.FieldSystemComponent = fieldSystemComponent;
             results.Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString;

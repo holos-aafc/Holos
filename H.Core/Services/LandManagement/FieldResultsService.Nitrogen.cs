@@ -168,46 +168,6 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Calculate N2O from land applied manure only.
-        /// </summary>
-        /// <returns></returns>
-        public SoilN2OEmissionsResults CalculateManureN2OResults(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm)
-        {
-            var result = new SoilN2OEmissionsResults()
-            {
-                LandEmissionSource = LandEmissionSourceType.Manure,
-                Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString,
-                FieldSystemComponent = fieldSystemComponent,
-            };
-
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-            if (viewItem == null)
-            {
-                return result;
-            }
-
-            var directN2ON = _singleYearNitrogenEmissionsCalculator. CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
-            result.DirectN2OEmissions = directN2ON * CoreConstants.ConvertN2ONToN2O;
-
-            var indirectEmissionsFromManureSpreading = _singleYearNitrogenEmissionsCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(viewItem, farm);
-            result.IndirectN2OEmissions = indirectEmissionsFromManureSpreading.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
-
-            /*
-             * Total emissions for each field are summed up in the report views
-             */
-
-            // Equation 4.6.6-1
-            var totalN2ON = directN2ON + result.IndirectN2OEmissions;
-
-            // Equation 4.6.6-2
-            var totalN2O = totalN2ON * CoreConstants.ConvertN2ONToN2O;
-
-            return result;
-        }
-
-        /// <summary>
         /// Calculates emissions from all manure that remains after all field applications have been considered.
         /// </summary>
         public SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults)
