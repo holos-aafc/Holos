@@ -37,7 +37,7 @@ Une fois l’installation terminée, Holos doit se mettre en marche immédiateme
 </p>
 <br>
 
-Vous pouvez accéder à Holos à partir du menu de démarrage de Windows. Ouvrez le menu de démarrage; Holos devrait se trouver dans un dossier intitulé AAFC-AAC.
+Vous pouvez accéder à Holos à partir du menu de démarrage de Windows en recherchant « Holos 4 ». Ouvrez le menu Démarrer ou cliquez sur la barre de recherche et recherchez « Holos 4 »
 
 
 <br>

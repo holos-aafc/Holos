@@ -241,12 +241,6 @@ namespace H.Core.Test.Services
 
             _mockFieldResultsService.Setup(x => x.CalculateFinalResults(It.IsAny<Farm>())).Returns(new List<CropViewItem>());
 
-            _mockFieldResultsService.Setup(x => x.CalculateMineralN2OEmissionsForFarm(It.IsAny<FarmEmissionResults>())).Returns(new SoilN2OEmissionsResults()
-            {
-                AboveGroundResidueNitrogen = 12,
-                BelowGroundResidueNitrogen = 15,
-            });
-
             _mockFieldResultsService.Setup(x => x.CalculateManureN2OEmissionsForFarm(It.IsAny<FarmEmissionResults>())).Returns(new SoilN2OEmissionsResults()
             {
                 AboveGroundResidueNitrogen = 123,
