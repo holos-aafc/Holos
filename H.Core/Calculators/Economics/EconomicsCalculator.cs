@@ -181,7 +181,7 @@ namespace H.Core.Calculators.Economics
                 resultsViewItem.Name = emissionResults.FieldSystemComponent.Name + " (" + singleYearViewItem.CropTypeString + ")";
                 resultsViewItem.Component = emissionResults.FieldSystemComponent;
                 resultsViewItem.GroupingString = Properties.Resources.TitleCrops;
-                resultsViewItem.Harvest = emissionResults.SingleYearHarvest;
+                resultsViewItem.Harvest = singleYearViewItem.HasHarvestViewItems ? singleYearViewItem.HarvestViewItems.Sum(x => x.AboveGroundBiomass) : singleYearViewItem.Yield;
                 resultsViewItem.Area = emissionResults.FieldSystemComponent.FieldArea;
 
                 this.CalculateRevenues(resultsViewItem);

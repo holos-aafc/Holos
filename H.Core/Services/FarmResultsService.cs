@@ -406,8 +406,12 @@ namespace H.Core.Services
                             continue;
                         }
 
-                        // Get the correct manure tank based on the animal type of manure that was applied
-                        var tank = farmEmissionResults.GetManureTankByAnimalType(manureApplicationViewItem.AnimalType, viewItem.Year);
+                        /*
+                         * Get the correct manure tank based on the animal type of manure that was applied. Get the manure for the year that the application was made (this could be different
+                         * than the year of the field that is selected)
+                         */
+
+                        var tank = farmEmissionResults.GetManureTankByAnimalType(manureApplicationViewItem.AnimalType, manureApplicationViewItem.DateOfApplication.Year);
 
                         // Get the amount of nitrogen applied
                         var amountOfNitrogenAppliedPerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
@@ -452,20 +456,29 @@ namespace H.Core.Services
                 ComponentCategory.OtherLivestock
             };
 
+            var years = new List<int>();
+
             /*
              * Set the state of the tanks as if there had been no field applications made
+             *
+             * The year of each manure tank needs to be associated with management periods of animals, not years of the field.
              */
 
-            var years = new List<int>();
-            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
+            foreach (var animalComponent in farm.AnimalComponents.Cast<AnimalComponentBase>())
             {
-                foreach (var viewItems in farmFieldSystemComponent.CropViewItems)
+                foreach (var animalComponentGroup in animalComponent.Groups)
                 {
-                    years.Add(viewItems.Year);
+                    foreach (var managementPeriod in animalComponentGroup.ManagementPeriods)
+                    {
+                        years.Add(managementPeriod.Start.Year);
+                    }
                 }
             }
 
+            // This is a list of all the years in which animals are producing manure.
             var distinctYears = years.Distinct();
+
+            // Loop over all the years in which there are animals producing manure and set the amounts of manure (N) that are available during that particular year.
             foreach (var distinctYear in distinctYears)
             {
                 foreach (var componentCategory in animalComponentCategories)
@@ -505,6 +518,7 @@ namespace H.Core.Services
             {
                 foreach (var allGroupResults in componentResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
+                    // Note: we only use the animal emission results (manure amounts) where the year of the management period matches with the year of the manure tank
                     foreach (var groupEmissionsByMonth in allGroupResults.GroupEmissionsByMonths.Where(x => x.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType != HousingType.Pasture && x.MonthsAndDaysData.Year == yearOfTank))
                     {
                         totalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyOrganicNitrogenAvailableForLandApplication;

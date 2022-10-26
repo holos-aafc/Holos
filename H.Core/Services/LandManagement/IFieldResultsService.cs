@@ -56,7 +56,6 @@ namespace H.Core.Services.LandManagement
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
         FieldComponentEmissionResults CalculateResultsForFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
-        List<EstimatesOfProductionResultsViewItem> CalculateHarvestForField(FieldSystemComponent fieldSystemComponent, Farm farm);
 
         /// <summary>
         /// Calculates results for a <see cref="FieldSystemComponent"/> and then sets the <see cref="ComponentBase.ResultsCalculated"/> value to true.

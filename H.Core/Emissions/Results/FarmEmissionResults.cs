@@ -685,30 +685,13 @@ namespace H.Core.Emissions.Results
             var tank = this.ManureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year);
             if (tank == null)
             {
+                // If no tank exists for this year, create one now
                 tank = new ManureTank() {AnimalType = animalType, Year = year};
 
                 this.ManureTanks.Add(tank);
             }
 
             return tank;
-        }
-
-        public List<GroupEmissionsByDay> GetDailyEmissions(ComponentCategory componentCategory)
-        {
-            var result = new List<GroupEmissionsByDay>();
-
-            foreach (var componentResults in this.AnimalComponentEmissionsResults.Where(x => x.Component.ComponentCategory == componentCategory))
-            {
-                foreach (var groupResults in componentResults.EmissionResultsForAllAnimalGroupsInComponent)
-                {
-                    foreach (var groupEmissionsByMonth in groupResults.GroupEmissionsByMonths)
-                    {
-                        result.AddRange(groupEmissionsByMonth.DailyEmissions);
-                    }
-                }
-            }
-
-            return result;
         }
 
         public override string ToString()

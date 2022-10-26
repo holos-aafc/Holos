@@ -18,10 +18,6 @@ namespace H.Core.Services.LandManagement
 
         #region Land Applied Manure
 
-
-
-
-
         /// <summary>
         /// Equation 4.6.1-2
         ///
@@ -41,8 +37,6 @@ namespace H.Core.Services.LandManagement
 
             return result;
         }
-
-
 
         /// <summary>
         /// Equation 4.6.1-4
@@ -67,10 +61,6 @@ namespace H.Core.Services.LandManagement
 
             return result;
         }
-
-
-
-
 
         #endregion
 

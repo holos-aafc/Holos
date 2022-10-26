@@ -3331,6 +3331,9 @@
   <data name="LabelRelativeCAllocationCoefficientStraw" xml:space="preserve">
     <value>coefficient relatif d’allocation du C relatif de la paille</value>
   </data>
+  <data name="LabelReportYear" xml:space="preserve">
+    <value>Report year</value>
+  </data>
   <data name="LabelResetToDefaults" xml:space="preserve">
     <value>réinitialiser par défaut</value>
   </data>

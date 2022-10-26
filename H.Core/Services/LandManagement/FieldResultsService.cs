@@ -177,8 +177,6 @@ namespace H.Core.Services.LandManagement
             results.CropN2OEmissionsResults = this.CalculateCropN2OEmissions(fieldSystemComponent, farm);
             results.LandAppliedManureResults = this.CalculateManureN2OResults(fieldSystemComponent, farm);
 
-            results.HarvestViewItems.AddRange(this.CalculateHarvestForField(fieldSystemComponent, farm));
-
             results.FieldSystemComponent = fieldSystemComponent;
             results.Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString;
 

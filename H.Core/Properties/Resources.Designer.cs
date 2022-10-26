@@ -10051,6 +10051,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report year.
+        /// </summary>
+        public static string LabelReportYear {
+            get {
+                return ResourceManager.GetString("LabelReportYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset to Defaults.
         /// </summary>
         public static string LabelResetToDefaults {
@@ -11572,11 +11581,11 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have no dairy calves group added. Net energy for lactation will not be calculated for this group of lactating cows..
+        ///   Looks up a localized string similar to You have no calves group added. Net energy for lactation will not be calculated for this group of cows..
         /// </summary>
-        public static string MessageNoDairyCalvesGroup {
+        public static string MessageNoBeefCalvesGroup {
             get {
-                return ResourceManager.GetString("MessageNoDairyCalvesGroup", resourceCulture);
+                return ResourceManager.GetString("MessageNoBeefCalvesGroup", resourceCulture);
             }
         }
         
@@ -11689,11 +11698,11 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are removing the last group of dairy calves. Net energy for lactation will not be calculated for the lactating cow group(s)..
+        ///   Looks up a localized string similar to You are removing the last group of calves. Net energy for lactation will not be calculated for the cows group(s)..
         /// </summary>
-        public static string MessageUserRemovingLastDairyCalvesGroup {
+        public static string MessageUserRemovingLastBeefCalvesGroup {
             get {
-                return ResourceManager.GetString("MessageUserRemovingLastDairyCalvesGroup", resourceCulture);
+                return ResourceManager.GetString("MessageUserRemovingLastBeefCalvesGroup", resourceCulture);
             }
         }
         

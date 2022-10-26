@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Media.Animation;
 using H.Core.Enumerations;
+using H.Core.Models.Results;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Economics;
 using H.Infrastructure;
@@ -184,6 +185,7 @@ namespace H.Core.Models.LandManagement.Fields
             this.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
 
             this.GrazingViewItems = new ObservableCollection<GrazingViewItem>();
+
 
             this.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>();
             this.FertilizerApplicationViewItems.CollectionChanged += FertilizerApplicationViewItemsOnCollectionChanged;

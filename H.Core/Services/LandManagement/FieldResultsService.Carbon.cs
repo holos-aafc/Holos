@@ -463,6 +463,8 @@ namespace H.Core.Services.LandManagement
             {
                 var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
                 cropViewItem.CropEnergyResults = energyResults;
+
+                cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
 
