@@ -167,7 +167,6 @@
     <Compile Include="Emissions\Results\FarmEmissionResultsExtensions.cs" />
     <Compile Include="Emissions\Results\FarmEnergyResults.cs" />
     <Compile Include="Emissions\Results\FieldComponentEmissionResults.cs" />
-    <Compile Include="Emissions\Results\FieldComponentResultsExtensions.cs" />
     <Compile Include="Emissions\Results\GroupEmissionsByDay.cs" />
     <Compile Include="Emissions\Results\GroupEmissionsByMonthExtensions.cs" />
     <Compile Include="Emissions\Results\LandUseChangeResults.cs" />

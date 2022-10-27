@@ -173,8 +173,6 @@ namespace H.Core.Services.LandManagement
 
             Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(FieldResultsService.CalculateResultsForFieldComponent)}: calculating results for field: '{fieldSystemComponent.Name}'");
 
-            results.CropEnergyResults = this.CalculateCropEnergyResults(fieldSystemComponent, farm);
-
             results.FieldSystemComponent = fieldSystemComponent;
             results.Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString;
 

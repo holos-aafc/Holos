@@ -132,23 +132,6 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Calculates emissions from energy usage for fuel use, herbicide, N and P fertilizer, and irrigation.
-        ///
-        /// <remarks>Both upstream and on-farm emissions are calculated here.</remarks>
-        /// </summary>
-        public CropEnergyResults CalculateCropEnergyResults(FieldSystemComponent fieldSystemComponent, Farm farm)
-        {
-            var results = new CropEnergyResults();
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-            if (viewItem == null)
-            {
-                return results;
-            }
-
-            return this.CalculateCropEnergyResults(viewItem, farm);
-        }
-
-        /// <summary>
         /// Equation 4.1.1-1
         /// Equation 4.1.1-2
         /// </summary>
