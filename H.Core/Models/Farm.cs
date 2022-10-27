@@ -22,6 +22,7 @@ using System.Security.Permissions;
 using System.Windows.Navigation;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Models.Animals;
+using H.Core.Converters;
 
 #endregion
 
@@ -93,6 +94,8 @@ namespace H.Core.Models
 
         private List<TimeFrame> _availableTimeFrame;
 
+        private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
+
         #endregion
 
         #region Constructors
@@ -123,8 +126,6 @@ namespace H.Core.Models
             this.ClimateData = new ClimateData();
             this.GeographicData = new GeographicData();
             this.AnnualSoilN2OBreakdown = new Table_18_Default_Soil_N2O_Emission_BreakDown_Provider();
-
-            
         }
 
         /// <summary>
@@ -351,6 +352,16 @@ namespace H.Core.Models
             set => SetProperty(ref _showAdditionalInformationInADView, value);
         }
 
+        /// <summary>
+        /// Checks if hardiness zone data exists for the selected farm. The shelterbelt component is
+        /// only available if we have hardiness zone data available for the selected location.
+        /// Returns True if data is available.
+        /// Return False otherwise.
+        /// </summary>
+        public bool IsShelterbeltComponentAvailable
+        {
+            get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
+        }
         public IEnumerable<ComponentBase> AnimalComponents
         {
             get

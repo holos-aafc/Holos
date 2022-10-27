@@ -31,45 +31,6 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// (kg N2O-N (kg N)^-1)
-        /// </summary>
-        public double FieldSpecificDirectEmissionsFromManureApplication { get; set; }
-        public double FieldSpecificIndirectEmissionsFromManureApplication { get; set; }
-
-        /// <summary>
-        /// (kg N2O-N ha^-1)
-        /// </summary>
-        public double EmissionsFromSyntheticFertilizer { get; set; }
-
-        /// <summary>
-        /// (kg N2O-N ha^-1)
-        /// </summary>
-        public double EmissionsFromOrganicFertilizer { get; set; }
-
-        /// <summary>
-        /// 
-        /// NRes from v.3 (kg N)
-        /// </summary>
-        public double InputFromResiduesReturned { get; set; }
-
-        /// <summary>
-        /// (kg N2O-N ha^-1)
-        /// </summary>
-        public double EmissionsFromInputsFromResidues { get; set; }
-
-        /// <summary>
-        /// 
-        /// AGResidueN from v.3 (kg N ha^-1)
-        /// </summary>
-        public double AboveGroundResidueNitrogen { get; set; }
-
-        /// <summary>
-        ///
-        /// BGResidueN from v.3 (kg N ha^-1)
-        /// </summary>
-        public double BelowGroundResidueNitrogen { get; set; }
-
-        /// <summary>
         /// Direct N20 emissions
         ///
         /// (kg N20)

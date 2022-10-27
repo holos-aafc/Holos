@@ -1,4 +1,8 @@
-﻿namespace H.Core.Emissions.Results
+﻿using System;
+using System.Text.RegularExpressions;
+using H.Core.Models;
+
+namespace H.Core.Emissions.Results
 {
     public class FarmResultsByYear
     {
@@ -6,12 +10,26 @@
 
         public FarmResultsByYear()
         {
-            this.FarmEnergyResults = new FarmEnergyResults();
         }
 
         #endregion
 
+        #region Properties
+        
         public int Year { get; set; }
-        public FarmEnergyResults FarmEnergyResults { get; set; }
+
+        /// <summary>
+        /// (kg CO2e)
+        /// </summary>
+        public double TotalEmissions { get; set; }
+
+        public double TotalNitrousOxideEmissionsFromLandManagement { get; set; }
+
+        /// <summary>
+        /// (kg CO2)
+        /// </summary>
+        public double TotalEnergyCarbonDioxideFromManureSpreading { get; set; }
+
+        #endregion
     }
 }

@@ -287,12 +287,12 @@ namespace H.CLI.Results
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, _farmEmissionResults.TotalDirectNitrousOxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, _farmEmissionResults.TotalIndirectNitrousOxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalEnergyCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
-                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                //stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
 
                 // Output subtotals for this component
                 if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                 {
-                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, _farmEmissionResults.TotalCarbonDioxideEquivalentsForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                    //stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, _farmEmissionResults.TotalCarbonDioxideEquivalentsForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 }
                 else
                 {

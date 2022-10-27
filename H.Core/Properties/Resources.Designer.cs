@@ -11392,6 +11392,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Animal component results are for a single production cycle only. To get the annual emissions value, multiply the results with the number of production cycles in a single year ..
+        /// </summary>
+        public static string MessageAnimalComponentEmissionsSingleProductionCycle {
+            get {
+                return ResourceManager.GetString("MessageAnimalComponentEmissionsSingleProductionCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Animal feed quality details can be adjusted here. Holos provides a set of default (predefined) diets that can be selected..
         /// </summary>
         public static string MessageAnimalDietTab {
@@ -11649,6 +11658,15 @@ namespace H.Core.Properties {
         public static string MessageRootTurnOverPerennials {
             get {
                 return ResourceManager.GetString("MessageRootTurnOverPerennials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plant hardiness zone data is not available for this polygon. Therefore, the shelterbelt farm component will not be available. Plant hardiness zones outside the range 2A – 4B cannot be modelled until more data becomes available..
+        /// </summary>
+        public static string MessageShelterbeltComponentNotAvailable {
+            get {
+                return ResourceManager.GetString("MessageShelterbeltComponentNotAvailable", resourceCulture);
             }
         }
         
