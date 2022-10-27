@@ -30,9 +30,6 @@ namespace H.Core.Services.LandManagement
                                             bool exportedFromGui,
                                             Farm farm);
 
-        SoilN2OEmissionsResults CalculateCropN2OEmissions(FieldSystemComponent fieldSystemComponent,
-                                                          Farm farm);
-
         SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults);
         double CalculateHarvest(CropViewItem viewItem);
         void AssignYieldToYear(Farm farm, CropViewItem viewItem);

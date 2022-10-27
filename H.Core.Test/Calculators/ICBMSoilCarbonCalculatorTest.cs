@@ -6,11 +6,13 @@ using H.Core.Calculators.Carbon;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
+using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -1541,6 +1543,87 @@ namespace H.Core.Test.Calculators
             // = 156.196
 
             Assert.AreEqual(156.196, currentYearViewItem.BelowGroundCarbonInput, 3);
+        }
+
+        /// <summary>
+        /// The results from this test match closely with a farm set up in v3 that uses the same growing season precipitation, yield, and soil data
+        ///
+        /// See excel sheet to verify
+        /// </summary>
+        [TestMethod]
+        public void CalculateCropN2OEmissions()
+        {
+            var fieldSystemComponent = new FieldSystemComponent();
+            var cropViewItem = new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                TillageType = TillageType.Intensive,
+                Area = 1,
+                NitrogenFertilizerRate = 100, // There has to be an amount of fertilizer applied for the direct N emission to be larger than the indirect N emissions. If this is 0 then the direct and indirect will be almost equal
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+
+                // From residue table
+                BiomassCoefficientProduct = 0.451,
+                BiomassCoefficientStraw = 0.4,
+                BiomassCoefficientRoots = 0.09,
+                BiomassCoefficientExtraroot = 0.059,
+
+                PercentageOfProductYieldReturnedToSoil = 2,
+                PercentageOfStrawReturnedToSoil = 0,
+                PercentageOfRootsReturnedToSoil = 100,
+
+                AmountOfIrrigation = 0,
+                MoistureContentOfCrop = 0.12,
+
+                NitrogenContentInProduct = 0.019,
+                NitrogenContentInStraw = 0.007,
+                NitrogenContentInRoots = 0.01,
+                NitrogenContentInExtraroot = 0.01,
+
+                IrrigationType = IrrigationType.RainFed,
+                HarvestMethod = HarvestMethods.CashCrop,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(cropViewItem);
+
+            var farm = new Farm()
+            {
+                Province = Province.Alberta,
+            };
+
+            var soilData = new SoilData()
+            {
+                EcodistrictId = 812,
+                SoilTexture = SoilTexture.Fine,
+                SoilFunctionalCategory = SoilFunctionalCategory.Black,
+            };
+
+            var geographicData = new GeographicData()
+            {
+                DefaultSoilData = soilData,
+            };
+
+            var climateData = new ClimateData();
+            climateData.PrecipitationData.GrowingSeasonPrecipitation = 332.87;
+            climateData.EvapotranspirationData.GrowingSeasonEvapotranspiration = 499.65;
+
+            farm.GeographicData = geographicData;
+            farm.ClimateData = climateData;
+
+            cropViewItem.ClimateParameter = 1;
+            cropViewItem.ManagementFactor = 1;
+
+            _sut.SetCarbonInputs(null, cropViewItem, null, farm);
+
+            // ICBM uses the previous year's inputs for residue calculations so we use the view item for both the current year and the previous year
+            _sut.CalculateNitrogenAtInterval(cropViewItem, cropViewItem, null, farm, 0);
+
+            var directN2OAsCO2 = cropViewItem.TotalDirectNitrousOxidePerHectare * cropViewItem.Area * CoreConstants.N2OToCO2eConversionFactor;
+            var indirectN2OAsCO2 = cropViewItem.TotalIndirectNitrousOxidePerHectare * cropViewItem.Area * CoreConstants.N2OToCO2eConversionFactor;
+
+            Assert.AreEqual(258.1501, directN2OAsCO2, 4);
+            Assert.AreEqual(126.0155, indirectN2OAsCO2, 4);
         }
 
         #endregion
