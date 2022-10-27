@@ -50,13 +50,7 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultBiomassCoefficients(CropViewItem viewItem, Farm farm);
         Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
-        FieldComponentEmissionResults CalculateResultsForFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
-
-        /// <summary>
-        /// Calculates results for a <see cref="FieldSystemComponent"/> and then sets the <see cref="ComponentBase.ResultsCalculated"/> value to true.
-        /// </summary>
-        List<FieldComponentEmissionResults> CalculateResultsForFieldComponent(Farm farm);
         void InitializeStageState(Farm farm);
         void AssignDefaultMoistureContent(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm);

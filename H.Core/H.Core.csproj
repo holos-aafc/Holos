@@ -170,7 +170,6 @@
     <Compile Include="Emissions\Results\GroupEmissionsByDay.cs" />
     <Compile Include="Emissions\Results\GroupEmissionsByMonthExtensions.cs" />
     <Compile Include="Emissions\Results\LandUseChangeResults.cs" />
-    <Compile Include="Emissions\SoilEmissionsCalculator.cs" />
     <Compile Include="Emissions\SummationsCalculator.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Converters\ProvinceStringConverter.cs" />

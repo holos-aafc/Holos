@@ -69,15 +69,17 @@ namespace H.Core.Calculators.Economics
         /// <param name="path">path of the file to write to</param>
         /// <param name="exportFromGui"></param>
         /// <param name="applicationData"></param>
+        /// <param name="farmEmissionResults"></param>
         /// <param name="languageAddon"></param>
         public bool ExportEconomicsDataToFile(Farm farm, string path, bool exportFromGui,
-                                              ApplicationData applicationData,
-                                              string languageAddon = null)
+            ApplicationData applicationData,
+            FarmEmissionResults farmEmissionResults,
+            string languageAddon = null)
         {
             this.MeasurementSystem = farm.MeasurementSystemType;
 
             var strBuilder = new StringBuilder();
-            this.BuildFileContents(farm, strBuilder, applicationData);
+            this.BuildFileContents(farm, strBuilder, applicationData, farmEmissionResults);
 
             if (!exportFromGui)
             {
@@ -137,52 +139,53 @@ namespace H.Core.Calculators.Economics
         /// <summary>
         /// Calculate the results to display in the economics view
         /// </summary>
-        /// <param name="fieldResultsService">the <see cref="IFieldResultsService"/> to get the emission results</param>
-        /// <param name="farm">the current farm</param>
+        /// <param name="farmEmissionResults"></param>
         /// <returns>list of <see cref="EconomicsResultsViewItem"/></returns>
-        public List<EconomicsResultsViewItem> CalculateCropResults(IFieldResultsService fieldResultsService, Farm farm)
+        public List<EconomicsResultsViewItem> CalculateCropResults(FarmEmissionResults farmEmissionResults)
         {
             var result = new List<EconomicsResultsViewItem>();
+            var farm = farmEmissionResults.Farm;
 
-            var fieldComponentEmissionResults = fieldResultsService.CalculateResultsForFieldComponent(farm);
-
-            foreach (var emissionResults in fieldComponentEmissionResults)
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
-                var singleYearViewItem = emissionResults.FieldSystemComponent.GetSingleYearViewItem();
-                if (singleYearViewItem == null) // Will be null when component has no view items (e.g. user removed all items)
+                var resultsForField = farmEmissionResults.FinalFieldResultViewItems.Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid)).ToList();
+                var orderedByYear = resultsForField.OrderBy(x => x.Year).ToList();
+                if (orderedByYear.Any() == false)
                 {
                     continue;
                 }
 
-                if (singleYearViewItem.CropEconomicData == null)
+                var viewItem = orderedByYear.Last();
+
+                if (viewItem.CropEconomicData == null)
                 {
-                    Trace.TraceError($"{nameof(EconomicsCalculator)}.{nameof(CalculateCropResults)}: {nameof(CropEconomicData)} is null for {singleYearViewItem.CropType.GetDescription()}");
+                    Trace.TraceError($"{nameof(EconomicsCalculator)}.{nameof(CalculateCropResults)}: {nameof(CropEconomicData)} is null for {viewItem.CropType.GetDescription()}");
                     continue;
                 }
 
-                if (singleYearViewItem.CropEconomicData.IsUserDefined)
+                if (viewItem.CropEconomicData.IsUserDefined)
                 {
-                    singleYearViewItem.CropEconomicData.SetUserDefinedVariableCostPerUnit();
+                    viewItem.CropEconomicData.SetUserDefinedVariableCostPerUnit();
 
                     //set only once
-                    if (!singleYearViewItem.CropEconomicData.FixedCostHandled)
+                    if (!viewItem.CropEconomicData.FixedCostHandled)
                     {
-                        singleYearViewItem.CropEconomicData.SoilFunctionalCategory = farm.DefaultSoilData
+                        viewItem.CropEconomicData.SoilFunctionalCategory = farm.DefaultSoilData
                             .SoilFunctionalCategory.GetBaseSoilFunctionalCategory();
-                        singleYearViewItem.CropEconomicData.SetUserDefinedFixedCostPerUnit(farm.MeasurementSystemType);
-                        singleYearViewItem.CropEconomicData.FixedCostHandled = true;
+                        viewItem.CropEconomicData.SetUserDefinedFixedCostPerUnit(farm.MeasurementSystemType);
+                        viewItem.CropEconomicData.FixedCostHandled = true;
                     }
                 }
 
                 var resultsViewItem = new EconomicsResultsViewItem();
-                resultsViewItem.CropEconomicData = singleYearViewItem.CropEconomicData;
+                resultsViewItem.CropEconomicData = viewItem.CropEconomicData;
                 resultsViewItem.Farm = farm;
-                resultsViewItem.CropViewItem = singleYearViewItem;
-                resultsViewItem.Name = emissionResults.FieldSystemComponent.Name + " (" + singleYearViewItem.CropTypeString + ")";
-                resultsViewItem.Component = emissionResults.FieldSystemComponent;
+                resultsViewItem.CropViewItem = viewItem;
+                resultsViewItem.Name = fieldSystemComponent.Name + " (" + viewItem.CropTypeString + ")";
+                resultsViewItem.Component = fieldSystemComponent;
                 resultsViewItem.GroupingString = Properties.Resources.TitleCrops;
-                resultsViewItem.Harvest = singleYearViewItem.HasHarvestViewItems ? singleYearViewItem.HarvestViewItems.Sum(x => x.AboveGroundBiomass) : singleYearViewItem.Yield;
-                resultsViewItem.Area = emissionResults.FieldSystemComponent.FieldArea;
+                resultsViewItem.Harvest = viewItem.HasHarvestViewItems ? viewItem.HarvestViewItems.Sum(x => x.AboveGroundBiomass) : viewItem.Yield;
+                resultsViewItem.Area = fieldSystemComponent.FieldArea;
 
                 this.CalculateRevenues(resultsViewItem);
                 this.CalculateFieldComponentsProfit(resultsViewItem, farm.MeasurementSystemType);
@@ -194,6 +197,7 @@ namespace H.Core.Calculators.Economics
             }
 
             this.EconomicViewItems = result;
+
             return result;
         }
 
@@ -438,8 +442,9 @@ namespace H.Core.Calculators.Economics
         #region Private Methods
 
         private void BuildFileContents(Farm farm,
-                                       StringBuilder strBuilder,
-                                       ApplicationData applicationData)
+            StringBuilder strBuilder,
+            ApplicationData applicationData, 
+            FarmEmissionResults farmEmissionResults)
         {
             this.BuildHeaderRow(strBuilder, farm.MeasurementSystemType, applicationData);
             if (!this.EconomicDataExistsForProvinceOrCrop(farm))
@@ -447,7 +452,7 @@ namespace H.Core.Calculators.Economics
                 return;
             }
 
-            var resultViewItems = this.CalculateCropResults(_fieldResultsService, farm);
+            var resultViewItems = this.CalculateCropResults(farmEmissionResults);
             foreach (var resultViewItem in resultViewItems)
             {
                 strBuilder.AppendLine($"{farm.Name}, " +

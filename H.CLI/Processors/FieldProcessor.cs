@@ -69,10 +69,10 @@ namespace H.CLI.Processors
                 farm: farm);
 
             //write econ data to file
-            _economicsCalculator.ExportEconomicsDataToFile(
-                farm: farm,
-                path: filePath,
-                exportFromGui: false, applicationData: applicationData, languageAddon: CLILanguageConstants.OutputLanguageAddOn);
+            //_economicsCalculator.ExportEconomicsDataToFile(
+            //    farm: farm,
+            //    path: filePath,
+            //    exportFromGui: false, applicationData: applicationData, farmEmissionResults: TODO, languageAddon: CLILanguageConstants.OutputLanguageAddOn);
         }
 
         /// <summary>

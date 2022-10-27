@@ -226,9 +226,6 @@ namespace H.Core.Services
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
 
-            // Components
-            farmResults.FieldComponentEmissionResults.AddRange(_fieldResultsService.CalculateResultsForFieldComponent(farm));
-
             // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
             farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
@@ -243,7 +240,7 @@ namespace H.Core.Services
             this.UpdateStorageTanks(farmResults);
 
             // Economics
-            farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(_fieldResultsService, farm));
+            farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);
 
             _farmEmissionResultsCache[farm] = farmResults;

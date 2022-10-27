@@ -43,7 +43,6 @@ namespace H.Core.Services.LandManagement
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
-        private readonly SoilEmissionsCalculator _soilEmissionsCalculator = new SoilEmissionsCalculator();
         private readonly IICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
         private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator();
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
@@ -72,8 +71,6 @@ namespace H.Core.Services.LandManagement
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly Table_10_Relative_Biomass_Provider _relativeBiomassProvider = new Table_10_Relative_Biomass_Provider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();
-
-        private readonly Dictionary<FieldSystemComponent, FieldComponentEmissionResults> _fieldComponentEmissionResultsCache = new Dictionary<FieldSystemComponent, FieldComponentEmissionResults>();
 
         #endregion
 
@@ -131,57 +128,6 @@ namespace H.Core.Services.LandManagement
         #endregion
 
         #region Public Methods
-
-        /// <summary>
-        /// Calculate final results for all fields on the farm
-        /// </summary>
-        public List<FieldComponentEmissionResults> CalculateResultsForFieldComponent(Farm farm)
-        {
-            var result = new List<FieldComponentEmissionResults>();
-
-            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
-            {
-                var emissions = this.CalculateResultsForFieldComponent(farmFieldSystemComponent, farm);
-                result.Add(emissions);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculate final results for one field
-        /// </summary>
-        public FieldComponentEmissionResults CalculateResultsForFieldComponent(
-            FieldSystemComponent fieldSystemComponent, 
-            Farm farm)
-        {
-            var results = new FieldComponentEmissionResults();
-
-            // Check if the results have been calculated for this field already
-            if (fieldSystemComponent.ResultsCalculated)
-            {
-                // Check if we cached the results already
-                if (_fieldComponentEmissionResultsCache.ContainsKey(fieldSystemComponent))
-                {
-                    Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(FieldResultsService.CalculateResultsForFieldComponent)}: results already calculated for {fieldSystemComponent.Name}, returning cached results.");
-
-                    return _fieldComponentEmissionResultsCache[fieldSystemComponent];
-                }
-
-                // Results are calculated but not cached yet (system boot), calculate results for this field now
-            }
-
-            Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(FieldResultsService.CalculateResultsForFieldComponent)}: calculating results for field: '{fieldSystemComponent.Name}'");
-
-            results.FieldSystemComponent = fieldSystemComponent;
-            results.Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString;
-
-            fieldSystemComponent.ResultsCalculated = true;
-
-            _fieldComponentEmissionResultsCache[fieldSystemComponent] = results;
-
-            return results;
-        }
 
         /// <summary>
         /// Calculates final multiyear C and N2O results for a collection of farms
