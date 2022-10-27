@@ -1253,10 +1253,6 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyEnergyCarbonDioxide { get; set; }
 
-        /// <summary>
-        /// Carbon dioxide emissions from manure spreading/application (kg CO₂)
-        /// </summary>
-        public double MonthlyCarbonDioxideFromManureSpreading { get; set; }
 
         #endregion
 

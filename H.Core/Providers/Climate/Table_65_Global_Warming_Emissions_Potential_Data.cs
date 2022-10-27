@@ -15,7 +15,7 @@ namespace H.Core.Providers.Climate
         public int Year { get; set; }
 
         /// <summary>
-        /// The emission type whose value is reuquired
+        /// The emission type whose value is required
         /// </summary>
         public EmissionTypes EmissionType { get; set; }
 

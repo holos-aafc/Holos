@@ -242,10 +242,6 @@ namespace H.Core.Services
             // Manure calculations - must be calculated after both field and animal results have been calculated.
             this.UpdateStorageTanks(farmResults);
 
-            // Energy
-            farmResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication = farmResults.AnimalComponentEmissionsResults.TotalCarbonDioxideEmissionsFromManureSpreading();
-            farmResults.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm = farmResults.FieldComponentEmissionResults.TotalOnFarmCroppingEnergyEmissions();
-
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(_fieldResultsService, farm));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);

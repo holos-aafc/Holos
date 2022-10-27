@@ -8,12 +8,15 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Emissions.Results
 {
     public class FarmEmissionResults : ResultsViewItemBase
     {
         #region Fields
+
+        private Table_65_Global_Warming_Emissions_Potential_Provider _globalWarmingEmissionsPotentialProvider = new Table_65_Global_Warming_Emissions_Potential_Provider();
 
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
 
@@ -605,6 +608,21 @@ namespace H.Core.Emissions.Results
         #endregion
 
         #region Public Methods
+
+        public FarmResultsByYear GetResultsByYear(int year)
+        {
+            var result = new FarmResultsByYear()
+            {
+                Year = year,
+            };
+
+            var cropResultsByYear = this.FinalFieldResultViewItems.Where(x => x.Year == year);
+
+            result.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm = cropResultsByYear.Sum(x => x.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
+            result.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication = cropResultsByYear.Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
+
+            return result;
+        }
 
         public ManureTank GetManureTankByAnimalType(AnimalType animalType, int year)
         {

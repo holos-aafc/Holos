@@ -22,14 +22,6 @@ namespace H.Core.Emissions.Results
             return results.Sum(result => result.TotalEntericAndManureMethane);
         }
 
-        /// <summary>
-        /// (CO2)
-        /// </summary>
-        public static double TotalCarbonDioxideEmissionsFromManureSpreading(this IEnumerable<AnimalComponentEmissionsResults> results)
-        {
-            return results.Sum(result => result.TotalCarbonDioxideEmissionsFromManureApplication);
-        }
-
         public static double TotalMilkProduced(this IEnumerable<AnimalComponentEmissionsResults> results)
         {
             return results.Sum(result => result.TotalMilkProduced);

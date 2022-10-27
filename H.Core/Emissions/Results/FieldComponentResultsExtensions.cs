@@ -13,13 +13,5 @@ namespace H.Core.Emissions.Results
         {
             return results.Sum(result => result.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
         }
-
-        /*
-         * No equation number
-         */
-        public static double TotalUpstreamCroppingEnergyEmissions(this IEnumerable<FieldComponentEmissionResults> results)
-        {
-            return results.Sum(result => result.CropEnergyResults.TotalUpstreamCroppingEnergyEmissions);
-        }
     }
 }

@@ -366,24 +366,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Total CO2 emissions from manure spreading from all animal groups in the component over all months
-        /// </summary>
-        public double TotalCarbonDioxideEmissionsFromManureApplication
-        {
-            get
-            {
-                var result = 0d;
-
-                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
-                {
-                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(emissionResults => emissionResults.MonthlyCarbonDioxideFromManureSpreading);
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
         /// Total CO2 emissions from all animal groups in the component over all months. Note: for animals, the total CO2 is equal to the total energy CO2
         ///
         /// (kg CO2)
