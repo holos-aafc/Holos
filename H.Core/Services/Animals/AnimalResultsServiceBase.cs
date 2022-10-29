@@ -2245,7 +2245,7 @@ namespace H.Core.Services.Animals
                     applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalTanForLandApplicationOnDate * adjustedAmmoniaEmissionFactor;
 
                     // Equation 4.6.3-1
-                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
+                    fractionVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0 ? applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication : 0;
                 }
                 else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
                 {

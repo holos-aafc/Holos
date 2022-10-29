@@ -2,6 +2,7 @@
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using System;
+using H.Core.Enumerations;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -286,7 +287,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.2-5
             var belowGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogen(
                 nitrogenContentOfRootReturned: rootNitrogen,
-                nitrogenContentOfExtrarootReturned: extrarootNitrogen);
+                nitrogenContentOfExtrarootReturned: extrarootNitrogen, 
+                isPerennial: this.PreviousYearResults.CropType.IsPerennial(), 
+                perennialStandLength: this.PreviousYearResults.PerennialStandLength);
 
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
             this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = aboveGroundResidueNitrogenForCropAtPreviousInterval;

@@ -198,45 +198,6 @@ namespace H.Core.Calculators.Nitrogen
             return emissionFactorForCropResidues;
         }
 
-        public double CalculateNitrogenMineralizationEmissionFactor(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm)
-        {
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-            if (viewItem == null)
-            {
-                return 0;
-            }
-
-            return this.CalculateNitrogenMineralizationEmissionFactor(viewItem, farm);
-        }
-
-
-        public double CalculateNitrogenMineralizationEmissionFactor(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
-
-            var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
-                cropType: viewItem.CropType);
-
-            var tillageModifier = _soilN2OEmissionFactorsProvider.GetFactorForTillagePractice(
-                region: farm.DefaultSoilData.Province.GetRegion(),
-                cropViewItem: viewItem);
-
-            var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
-
-            var ecodistrictMineralEmissionFactor = this.CalculateEmissionFactor(
-                baseEcodistictEmissionFactor: baseEcodistrictFactor,
-                croppingSystemModifier: croppingSystemModifier,
-                tillageModifier: tillageModifier,
-                nitrogenSourceModifier: nitrogenSourceModifier);
-
-            return ecodistrictMineralEmissionFactor;
-        }
-
         /// <summary>
         /// Equation 4.6.1-1
         /// 
@@ -264,26 +225,21 @@ namespace H.Core.Calculators.Nitrogen
         /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
         /// from land applied manure.
         /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults)
+        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults,
+            List<CropViewItem> itemsByYear)
         {
-            var fieldComponentEmissionResults = farmEmissionResults.FieldComponentEmissionResults;
-            if (fieldComponentEmissionResults.Any() == false)
-            {
-                return 0;
-            }
-
             var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
 
-            foreach (var emissionResults in fieldComponentEmissionResults)
+            foreach (var cropViewItem in itemsByYear)
             {
                 var emissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
-                    viewItem: emissionResults.FieldSystemComponent.GetSingleYearViewItem(),
+                    viewItem: cropViewItem,
                     farm: farmEmissionResults.Farm);
 
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {
                     Value = emissionFactor,
-                    Weight = emissionResults.FieldSystemComponent.FieldArea,
+                    Weight = cropViewItem.Area,
                 });
             }
 
@@ -377,10 +333,12 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.1-6
         /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(FarmEmissionResults farmEmissionResults,
-            double totalExportedManure)
+        public double CalculateTotalEmissionsFromExportedManure(
+            FarmEmissionResults farmEmissionResults,
+            double totalExportedManure,
+            List<CropViewItem> itemsByYear)
         {
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults, itemsByYear);
 
             var result = totalExportedManure * weightedEmissionFactor;
 
@@ -394,8 +352,9 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="precipitation">Growing season precipitation, by ecodistrict (May – October)</param>
         /// <param name="potentialEvapotranspiration">Growing season potential evapotranspiration, by ecodistrict (May – October)</param>
         /// <returns>Ecodistrict emission factor [kg N2O-N (kg N)-1]</returns>
-        public double CalculateEcodistrictEmissionFactor(double precipitation,
-                                                         double potentialEvapotranspiration)
+        public double CalculateEcodistrictEmissionFactor(
+            double precipitation, 
+            double potentialEvapotranspiration)
         {
             if (precipitation > potentialEvapotranspiration)
             {
@@ -576,51 +535,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-2
-        /// </summary>
-        /// <param name="fertilizerApplied">N fertilizer applied (kg ha^-1)</param>
-        /// <param name="area">Area of crop (ha)</param>
-        /// <returns>N inputs from synthetic fertilizer (kg N)</returns>
-        public double CalculateNitrogenInputsFromSyntheticFertilizer(double fertilizerApplied, 
-                                                                     double area)
-        {
-            var result = fertilizerApplied * area;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-11
-        /// Equation 2.7.4-1
-        /// </summary>
-        /// <param name="inputsFromSyntheticFertilizer">N inputs from synthetic fertilizer (kg N)</param>
-        /// <param name="factor">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
-        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from fertilizer application</returns>
-        public double CalculateEmissionsFromSyntheticFetilizer(
-            double inputsFromSyntheticFertilizer, 
-            double factor)
-        {
-            var result = inputsFromSyntheticFertilizer * factor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-12
-        /// </summary>
-        /// <param name="inputsFromOrganicFertilizer">N inputs from organic fertilizer (kg N)</param>
-        /// <param name="factor">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
-        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from organic fertilizer application</returns>
-        public double CalculateEmissionsFromOrganicFetilizer(
-            double inputsFromOrganicFertilizer,
-            double factor)
-        {
-            var result = inputsFromOrganicFertilizer * factor;
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 2.5.2-13
         /// </summary>
         public double CalculateGrainNitrogenTotal(
@@ -707,101 +621,26 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 2.5.2-15
         /// Equation 2.6.2-2
+        /// Equation 2.6.2-5
         /// </summary>
         /// <param name="nitrogenContentOfRootReturned">Nitrogen content of the root returned to the soil (kg N ha^-1)</param>
         /// <param name="nitrogenContentOfExtrarootReturned">Nitrogen content of the exudates returned to the soil (kg N ha^-1)</param>
+        /// <param name="isPerennial"></param>
+        /// <param name="perennialStandLength"></param>
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
         public double CalculateBelowGroundResidueNitrogen(
             double nitrogenContentOfRootReturned,
-            double nitrogenContentOfExtrarootReturned)
+            double nitrogenContentOfExtrarootReturned, 
+            bool isPerennial, 
+            int perennialStandLength)
         {
             var result = nitrogenContentOfRootReturned + nitrogenContentOfExtrarootReturned;
 
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-16
-        /// </summary>
-        /// <param name="nitrogenContentOfRootReturned">Nitrogen content of the root returned to the soil (kg N ha^-1)</param>
-        /// <param name="nitrogenContentOfExtrarootReturned">Nitrogen content of the exudates returned to the soil (kg N ha^-1)</param>
-        /// <param name="perennialStandLength">Length of perennial stand (years)</param>
-        /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateBelowGroundResidueNitrogenForPerennialForage(
-            double nitrogenContentOfRootReturned,
-            double nitrogenContentOfExtrarootReturned,
-            int perennialStandLength)
-        {
-            if (perennialStandLength <= 0)
+            if (isPerennial)
             {
-                perennialStandLength = 1;
+                // Use the stand length as determined by the sequence of perennial crops entered by the user (Hay-Hay-Hay-Wheat = 3 year stand)
+                result /= perennialStandLength;
             }
-
-            var result = (1.0 / perennialStandLength) * (nitrogenContentOfRootReturned + nitrogenContentOfExtrarootReturned);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-17
-        /// </summary>
-        /// <param name="aboveGroundResidue">Above ground residue N (kg N ha^-1)</param>
-        /// <param name="belowGroundResidue">Below ground residue N (kg N ha^-1)</param>
-        /// <param name="area">Area of crop (ha)</param>
-        /// <returns>N inputs from crop residue returned to soil (kg N)</returns>
-        public double CalculateInputsFromResidueReturned(double aboveGroundResidue,
-                                                         double belowGroundResidue,
-                                                         double area)
-        {
-            var result = (aboveGroundResidue + belowGroundResidue) * area;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-18
-        /// Equation 2.7.4-2
-        /// </summary>
-        /// <param name="inputFromResidueReturnedToSoil">N inputs from crop residue returned to soil (kg N)</param>
-        /// <param name="emissionFactor">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N sourcve type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
-        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from crop residues and N mineralization</returns>
-        public double CalculateEmissionsFromResidues(
-            double inputFromResidueReturnedToSoil, 
-            double emissionFactor)
-        {
-            var result = inputFromResidueReturnedToSoil * emissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-19
-        ///
-        /// N_min
-        /// </summary>
-        /// <param name="carbonChangeInSoil">C change (kg)</param>
-        /// <returns>N inputs from mineralization of native soil organic matter (kg N). This value can only be positive. </returns>
-        public double CalculateNitrogenInputsFromMineralizationOfNativeSoilOrganicMatter(double carbonChangeInSoil)
-        {
-            var nitrogenMineralization = carbonChangeInSoil / 10;
-            if (nitrogenMineralization < 0)
-            {
-                return 0;
-            }
-
-            return nitrogenMineralization;
-        }
-
-        /// <summary>
-        /// Equation 2.5.2-15
-        /// </summary>
-        /// <param name="inputsFromMineralization">N inputs from mineralization of native soil organic matter (kg N). This value can only be positive.</param>
-        /// <param name="weightedEcodistrictEmissionFactorForMineralizedNitrogen">The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N sourcve type, tillage, cropping sytem and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</param>
-        /// <returns>N2O emissions (kg N2O-N kg-1 N) resulting from crop residues and N mineralization</returns>
-        public double CalculateEmissionsFromMineralizedNitrogen(double inputsFromMineralization, 
-                                                                double weightedEcodistrictEmissionFactorForMineralizedNitrogen)
-        {
-            var result = inputsFromMineralization * weightedEcodistrictEmissionFactorForMineralizedNitrogen;
 
             return result;
         }
@@ -840,189 +679,12 @@ namespace H.Core.Calculators.Nitrogen
             return fractionOfNitrogenLostByLeachingAndRunoff;
         }
 
-        /// <summary>
-        /// Equation 2.5.3-2
-        /// </summary>
-        /// <param name="inputsFromSyntheticFertilizer">N inputs from synthetic fertilizer (kg N)</param>
-        /// <param name="inputsFromResidueReturned">N inputs from crop residue (kg N)</param>
-        /// <param name="factionLeach">Fraction of N lost by leaching and runoff  (kg N (kg N)-1)</param>
-        /// <param name="emissionFactorLeachingRunoff">Emission factor for leaching and runoff [kg N2O-N (kg N)-1]</param>
-        /// <returns>N emissions due to leaching and runoff from cropland (kg N2O-N)</returns>
-        public double CalculateCropLeach(double inputsFromSyntheticFertilizer, 
-                                         double inputsFromResidueReturned,
-                                         double factionLeach, 
-                                         double emissionFactorLeachingRunoff)
-        {
-            var result = (inputsFromSyntheticFertilizer + inputsFromResidueReturned) * factionLeach * emissionFactorLeachingRunoff;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.3-3
-        ///
-        /// N2O_CRNminleach
-        /// </summary>
-        /// <param name="nitrogenInputsFromMineralizationOfNativeSoilOrganicMatter">N inputs from mineralization of native soil organic matter (kg N). This value can only be positive. If the result is negative, then N_min is equal to zero.</param>
-        /// <param name="fractionOfNitrogenLostByLeachingAndRunoff">Fraction of N lost by leaching and runoff  (kg N (kg N)-1)</param>
-        /// <param name="emissionsFactorForLeachingAndRunoff">Emission factor for leaching and runoff [kg N2O-N (kg N)-1]</param>
-        /// <returns>N emissions due to leaching and runoff from mineralized N (kg N2O-N)</returns>
-        public double CalculateNitrogenEmissionsDueToLeachingAndRunoffFromMineralizedNitrogen(
-            double nitrogenInputsFromMineralizationOfNativeSoilOrganicMatter, 
-            double fractionOfNitrogenLostByLeachingAndRunoff, 
-            double emissionsFactorForLeachingAndRunoff)
-        {
-            return nitrogenInputsFromMineralizationOfNativeSoilOrganicMatter *
-                   fractionOfNitrogenLostByLeachingAndRunoff *
-                   emissionsFactorForLeachingAndRunoff;
-        }
-
-        /// <summary>
-        /// Equation 2.5.3-4
-        /// </summary>
-        /// <param name="totalNitrogenInputsFromLandAppliedManureNitrogen">Total N inputs from all land applied manure N (kg - includes on farm produced manure from all livestock scenarios)</param>
-        /// <param name="fractionOfNitrogenLostByLeachingAndRunoff">Fraction of N lost by leaching and runoff  (kg N (kg N)-1)</param>
-        /// <param name="emissionsFactorForLeachingAndRunoff">Emission factor for leaching and runoff [kg N2O-N (kg N)-1]</param>
-        /// <returns>N emissions due to leaching and runoff from all land applied manure N (kg N2O-N)</returns>
-        public double CalculateNitrogenEmissionsDueToLeachingAndRunoffFromAllLandAppliedManure(double totalNitrogenInputsFromLandAppliedManureNitrogen,
-                                                                                               double fractionOfNitrogenLostByLeachingAndRunoff,
-                                                                                               double emissionsFactorForLeachingAndRunoff)
-        {
-            return totalNitrogenInputsFromLandAppliedManureNitrogen *
-                   fractionOfNitrogenLostByLeachingAndRunoff *
-                   emissionsFactorForLeachingAndRunoff;
-        }
-
-        /// <summary>
-        /// Equation 2.5.3-5
-        /// </summary>
-        /// <param name="nitrogenInputsFromSyntheticFertilizer">N inputs from synthetic fertilizer (kg N)</param>
-        /// <param name="fractionOfNitrogenLostByVolatilization">Fraction of N lost by volatilization</param>
-        /// <param name="emissionFactorForVolatilization">Emission factor for volatilization [kg N2O-N (kg N)-1]</param>
-        /// <returns>N emissions due to volatilization from cropland (kg N2O-N)</returns>
-        public double CalculateNitrogenEmissionsDueToVolatizationFromCropland(double nitrogenInputsFromSyntheticFertilizer,
-                                                                              double fractionOfNitrogenLostByVolatilization,
-                                                                              double emissionFactorForVolatilization)
-        {
-            return nitrogenInputsFromSyntheticFertilizer *
-                   fractionOfNitrogenLostByVolatilization *
-                   emissionFactorForVolatilization;
-        }
-
-        /// <summary>
-        /// Equation 2.5.3-7
-        /// </summary>
-        /// <param name="totalNitrogenInputsFromManure">Total N inputs from all land applied manure N (kg - includes on farm produced manure from all livestock scenarios)</param>
-        /// <param name="fractionOfNitrogenLostByVolatilization">Fraction of N lost by volatilization</param>
-        /// <param name="emissionFactorForVolatilization">Emission factor for volatilization [kg N2O-N (kg N)-1]</param>
-        /// <returns>N emissions due to volatilization from all land applied manure N (kg N2O-N)</returns>
-        public double CalculateNitrogenEmissionsDueToVolatilizationOfAllLandAppliedManure(double totalNitrogenInputsFromManure,
-                                                                                          double fractionOfNitrogenLostByVolatilization,
-                                                                                          double emissionFactorForVolatilization)
-        {
-            return totalNitrogenInputsFromManure *
-                   fractionOfNitrogenLostByVolatilization *
-                   emissionFactorForVolatilization;
-        }
-
-        /// <summary>
-        /// Equation 2.5.4-1
-        /// </summary>
-        /// <param name="emissionsFromSyntheticFertilizer">N emissions from cropland due to synthetic fertilizer inputs (kg N2O-N)</param>
-        /// <param name="emissionsFromResidues">N emissions from cropland due to crop residues (kg N2O-N)</param>
-        /// <param name="emissionsFromOrganicFertilizer">N emissions from cropland due to crop residues (kg N2O-N)</param>
-        /// <returns>Total direct N emissions from cropland (kg N2O-N year-1)</returns>
-        public double CalculateTotalDirectEmissionsForCrop(double emissionsFromSyntheticFertilizer,
-            double emissionsFromResidues,
-            double emissionsFromOrganicFertilizer)
-        {
-            return emissionsFromSyntheticFertilizer + emissionsFromResidues + emissionsFromOrganicFertilizer;
-        }
-
-        /// <summary>
-        /// Equation 2.5.4-4
-        /// </summary>
-        /// <param name="emissionsDueToLeachingAndRunoff">N emissions due to leaching and runoff (kg N2O-N)</param>
-        /// <param name="emissionsDueToVolatilization">N emissions due to volatilization (kg N2O-N)</param>
-        /// <returns>Total indirect N emissions – for each N2O-Ncropindirect, N2O-NminNindirect, N2O-NmanureNindirect (kg N2O-N year-1)</returns>
-        public double CalculateTotalIndirectNitrogenEmissions(
-            double emissionsDueToLeachingAndRunoff, 
-            double emissionsDueToVolatilization)
-        {
-            return emissionsDueToLeachingAndRunoff + emissionsDueToVolatilization;
-        }        
-
-        /// <summary>
-        /// Equation 2.5.4-5
-        /// </summary>
-        /// <param name="totalDirectNitrogenEmissions"></param>
-        /// <param name="totalIndirectNitrogenEmissions"></param>
-        /// <returns>Total N emissions – for each N2O-Ncropsoils, N2O-NminNsoils, N2O-NmanureNsoils (kg N2O-N year-1)</returns>
-        public double CalculateTotalNitrogenEmissions(
-            double totalDirectNitrogenEmissions, 
-            double totalIndirectNitrogenEmissions)
-        {
-            return totalDirectNitrogenEmissions + totalIndirectNitrogenEmissions;
-        }
-
-        /// <summary>
-        /// Equation 2.5.5-1
-        /// Equation 2.5.5-2
-        /// Equation 2.5.5-3
-        /// 
-        /// Converts N2O-N to N2O
-        /// </summary>
-        /// <param name="n2ONEmissions">Total N2O emissions (kg N2O-N year-1)</param>
-        /// <returns>Direct N2O emissions from soils – for each N2Ocropdirect, N2O minNdirect, N2OmanureNdirect (kg N2O year-1)</returns>
-        public double ConvertN2ONToN2O(double n2ONEmissions)
-        {
-            return n2ONEmissions * CoreConstants.ConvertN2ONToN2O;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-1
-        /// </summary>
-        /// <param name="directNitrousOxideEmissionsFromSoils">Direct N2O emissions from soils (kg N2O year-1) </param>
-        /// <param name="percentageOfAnnualEmissionsAllocatedToMonth">Percentage of annual emissions allocated to month (defaults in Table 12)</param>
-        /// <returns>Direct N2O emissions from soils (kg N2O month-1) – by month – for each N2Ocropdirect, N2O minNdirect, N2OmanureNdirect</returns>
-        public double CalculateDirectNitrousOxideEmissionsFromSoilsByMonth(double directNitrousOxideEmissionsFromSoils,
-                                                                           double percentageOfAnnualEmissionsAllocatedToMonth)
-        {
-            return directNitrousOxideEmissionsFromSoils * percentageOfAnnualEmissionsAllocatedToMonth / 100.0;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-2
-        /// </summary>
-        /// <param name="indirectNitrousOxideEmissionsFromSoils">Indirect N2O emissions from soils (kg N2O year-1) </param>
-        /// <param name="percentageOfAnnualEmissionsAllocatedToMonth">Percentage of annual emissions allocated to month (defaults in Table 12)</param>
-        /// <returns>Indirect N2O emissions from soils (kg N2O month-1) – by month – for each N2Ocropindirect, N2O minNindirect, N2OmanureNindirct</returns>
-        public double CalculateIndirectNitrousOxideEmissionsFromSoilsByMonth(double indirectNitrousOxideEmissionsFromSoils,
-                                                                             double percentageOfAnnualEmissionsAllocatedToMonth)
-        {
-            return indirectNitrousOxideEmissionsFromSoils * percentageOfAnnualEmissionsAllocatedToMonth / 100.0;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-3
-        /// </summary>
-        /// <param name="totalNitrousOxideEmissionsFromSoils">Total N2O emissions from soils (kg N2O year-1) </param>
-        /// <param name="percentageOfAnnualEmissionsAllocatedToMonth">Percentage of annual emissions allocated to month (defaults in Table 12)</param>
-        /// <returns>Total N2O emissions from soils (kg N2O month-1) – by month – for each N2Ocropsoils, N2OminNsoils, N2OmanureNsoils</returns>
-        public double CalculateTotalNitrousOxideEmissionsFromSoilsByMonth(double totalNitrousOxideEmissionsFromSoils,
-                                                                          double percentageOfAnnualEmissionsAllocatedToMonth)
-        {
-            return totalNitrousOxideEmissionsFromSoils * percentageOfAnnualEmissionsAllocatedToMonth / 100.0;
-        }
-
         #endregion
 
         #region Private Methods
 
         /// <summary>
         /// Equation 2.5.1-1
-        ///
-        /// Note that we do NOT multiple this result by 100 as was previously thought (4/20/2021)
         /// </summary>
         private double CalculateEmissionFactorUsingPrecipitation(double precipitation)
         {
@@ -1031,8 +693,6 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 2.5.1-2
-        ///
-        /// Note that we do NOT multiple this result by 100 as was previously thought (4/20/2021)
         /// </summary>
         private double CalculateEmissionFactorUsingPotentialEvapotranspiration(double potentialEvapotranspiration)
         {

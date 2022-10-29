@@ -29,8 +29,6 @@ namespace H.Core.Services.LandManagement
                                             string languageAddOn,
                                             bool exportedFromGui,
                                             Farm farm);
-
-        SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults);
         double CalculateHarvest(CropViewItem viewItem);
         void AssignYieldToYear(Farm farm, CropViewItem viewItem);
         void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm);

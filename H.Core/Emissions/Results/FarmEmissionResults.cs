@@ -16,19 +16,11 @@ namespace H.Core.Emissions.Results
     {
         #region Fields
 
-        private Table_65_Global_Warming_Emissions_Potential_Provider _globalWarmingEmissionsPotentialProvider = new Table_65_Global_Warming_Emissions_Potential_Provider();
-
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
 
         private Farm _farm;
 
-        private SoilN2OEmissionsResults _mineralN2OEmissionsResults;
-        private SoilN2OEmissionsResults _manureN2OEmissionResults;
-
-        private ObservableCollection<FieldComponentEmissionResults> _fieldComponentEmissionResults;
         private ObservableCollection<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
-
-        private FarmEnergyResults _farmEnergyResults;
 
         private ObservableCollection<EconomicsResultsViewItem> _economicsResultsViewItems;
         private ObservableCollection<CropViewItem> _finalFieldResultViewItems;
@@ -43,11 +35,6 @@ namespace H.Core.Emissions.Results
 
         public FarmEmissionResults()
         {
-            this.ManureN2OEmissionResults = new SoilN2OEmissionsResults();
-            this.MineralN2OEmissionsResults = new SoilN2OEmissionsResults();
-            this.FarmEnergyResults = new FarmEnergyResults();
-
-            this.FieldComponentEmissionResults = new ObservableCollection<FieldComponentEmissionResults>();
             this.AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>();
             this.EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
             this.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
@@ -66,6 +53,8 @@ namespace H.Core.Emissions.Results
         #endregion
 
         #region Properties
+
+        public int Year { get; set; }
 
         /// <summary>
         /// A collection of manure tanks where manure from each type of animal is stored. Each tank is then used for land applications.
@@ -94,12 +83,6 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _finalFieldResultViewItems, value);
         }
 
-        public ObservableCollection<FieldComponentEmissionResults> FieldComponentEmissionResults
-        {
-            get => _fieldComponentEmissionResults;
-            set => SetProperty(ref _fieldComponentEmissionResults, value);
-        }
-
         /// <summary>
         /// Emission results from all animal components on the farm
         /// </summary>
@@ -107,27 +90,6 @@ namespace H.Core.Emissions.Results
         {
             get => _animalComponentEmissionsResults;
             set => SetProperty(ref _animalComponentEmissionsResults, value);
-        }
-
-        public SoilN2OEmissionsResults MineralN2OEmissionsResults
-        {
-            get => _mineralN2OEmissionsResults;
-            set => SetProperty(ref _mineralN2OEmissionsResults, value);
-        }
-
-        /// <summary>
-        /// Results calculated as if all manure was applied to field
-        /// </summary>
-        public SoilN2OEmissionsResults ManureN2OEmissionResults
-        {
-            get => _manureN2OEmissionResults;
-            set => SetProperty(ref _manureN2OEmissionResults, value);
-        }
-
-        public FarmEnergyResults FarmEnergyResults
-        {
-            get => _farmEnergyResults;
-            set => SetProperty(ref _farmEnergyResults, value);
         }
 
         public Farm Farm
@@ -147,14 +109,6 @@ namespace H.Core.Emissions.Results
             get
             {
                 return this.TotalCarbonDioxideEquivalentsFromLandManagementForFarm + this.TotalCarbonDioxideEquivalentsFromAnimalsForFarm;
-            }
-        }
-
-        public double TotalEnergyEmissionsAsCarbonDioxideEquivalents
-        {
-            get
-            {
-                return this.FarmEnergyResults.TotalCroppingEnergyEmissionsForFarmAsCarbonDioxideEquivalents;
             }
         }
 
@@ -218,13 +172,13 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        public double TotalCombinedCarbonDioxideFromFarm
+        public double TotalCombinedCO2FromFarm
         {
             get
             {
                 return this.TotalCarbonDioxideFromAnimals +
-                       this.TotalCarbonDioxideFromFarm +
-                       this.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication;
+                       this.TotalCO2FromFarm +
+                       this.TotalEnergyCarbonDioxideFromManureSpreading;
             }
         }
         /// <summary>
@@ -238,8 +192,8 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                var result = this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm * CoreConstants.CO2ToCO2eConversionFactor +
-                             this.TotalNitrousOxideEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
+                var result = this.TotalOnFarmCO2FromLandManagement * CoreConstants.CO2ToCO2eConversionFactor +
+                             this.TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
 
                 return result;
             }
@@ -266,7 +220,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.FieldComponentEmissionResults.Sum(results => results.FieldSystemComponent.FieldArea);
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.Area);
             }
         }
 
@@ -276,34 +230,10 @@ namespace H.Core.Emissions.Results
             {
                 var result = 0.0;
 
-                foreach (var fieldComponentEmissionResult in this.FieldComponentEmissionResults)
+                foreach (var cropViewItem in this.GetAllCropResultsByYear(this.Year))
                 {
-                    foreach (var estimatesOfProductionResultsViewItem in fieldComponentEmissionResult.HarvestViewItems)
-                    {
-                        result += estimatesOfProductionResultsViewItem.Harvest;
-                    }
+                    result += cropViewItem.EstimatesOfProductionResultsViewItem.Harvest;
                 }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 2.5 Single-year calculation of nitrous oxide
-        /// </summary>
-        public List<SoilN2OEmissionsResults> LandManagementN2OEmissionResults
-        {
-            get
-            {
-                var result = new List<SoilN2OEmissionsResults>();
-
-                foreach (var fieldComponentEmissionResult in this.FieldComponentEmissionResults)
-                {
-                    result.Add(fieldComponentEmissionResult.CropN2OEmissionsResults);
-                }
-
-                result.Add(this.ManureN2OEmissionResults);
-                result.Add(this.MineralN2OEmissionsResults);
 
                 return result;
             }
@@ -311,12 +241,14 @@ namespace H.Core.Emissions.Results
 
         /// <summary>
         /// Returns the sum of direct and indirect N2O emissions for the farm.
+        ///
+        /// (kg N2O)
         /// </summary>
-        public double TotalNitrousOxideEmissionsFromLandManagement
+        public double TotalN2OEmissionsFromLandManagement
         {
             get
             {
-                return this.TotalDirectNitrousOxideEmissionsFromLandManagement + this.TotalIndirectNitrousOxideEmissionsFromLandManagement;
+                return this.TotalDirectN2OEmissionsFromLandManagement + this.TotalIndirectN2OEmissionsFromLandManagement;
             }
         }
 
@@ -324,15 +256,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.TotalNitrousOxideEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
-            }
-        }
-
-        public double TotalDirectNitrousOxideEmissionsFromLandManagement
-        {
-            get
-            {
-                return this.LandManagementN2OEmissionResults.Sum(emissions => emissions.DirectN2OEmissions);
+                return this.TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
             }
         }
 
@@ -343,7 +267,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.TotalDirectNitrousOxideEmissionsFromLandManagement + this.TotalDirectNitrousOxideFromAnimals;
+                return this.TotalDirectN2OEmissionsFromLandManagement + this.TotalDirectNitrousOxideFromAnimals;
             }
         }
 
@@ -354,17 +278,17 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.TotalIndirectNitrousOxideEmissionsFromLandManagement + this.TotalIndirectNitrousOxideFromAnimals;
+                return this.TotalIndirectN2OEmissionsFromLandManagement + this.TotalIndirectNitrousOxideFromAnimals;
             }
         }
         /// <summary>
         /// (kg CO2)
         /// </summary>
-        public double TotalCarbonDioxideFromFarm
+        public double TotalCO2FromFarm
         {
             get
             {
-                return this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm;
+                return this.TotalOnFarmCO2FromLandManagement;
                 // Animal CO2 total is output under the Energy CO2 column (in the GUI and CLI reports) so don't include it here)
                 //this.TotalCarbonDioxideFromAnimals;
             }
@@ -377,7 +301,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm +
+                return this.TotalOnFarmCO2FromLandManagement +
                        this.TotalCarbonDioxideFromAnimals;
             }
         }
@@ -391,9 +315,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                var result = this.AnimalComponentEmissionsResults.TotalCarbonDioxide();
-
-                return result;
+                return this.AnimalComponentEmissionsResults.TotalCarbonDioxide();
             }
         }
 
@@ -404,9 +326,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                var result = this.AnimalComponentEmissionsResults.TotalDirectNitrousOxide();
-
-                return result;
+                return this.AnimalComponentEmissionsResults.TotalDirectNitrousOxide();
             }
         }
 
@@ -417,46 +337,58 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                var result = this.AnimalComponentEmissionsResults.TotalIndirectNitrousOxide();
+                return this.AnimalComponentEmissionsResults.TotalIndirectNitrousOxide();
 
-                return result;
             }
         }
 
-        public double TotalIndirectNitrousOxideEmissionsFromLandManagement
+        /// <summary>
+        /// (kg CO2)
+        /// </summary>
+        public double TotalOnFarmCO2FromLandManagement
         {
             get
             {
-                return this.LandManagementN2OEmissionResults.Sum(emissions => emissions.IndirectN2OEmissions);
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalDirectN2OEmissionsFromLandManagement
+        {
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.TotalDirectNitrousOxidePerHectare * x.Area);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalIndirectN2OEmissionsFromLandManagement
+        {
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.TotalIndirectNitrousOxidePerHectare * x.Area);
+            }
+        }
+
+        /// <summary>
+        /// (kg CO2)
+        /// </summary>
+        public double TotalEnergyCarbonDioxideFromManureSpreading
+        {
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
             }
         }
 
         #endregion
 
         #region Public Methods
-
-        public FarmResultsByYear GetResultsByYear(int year)
-        {
-            var co2ToCo2eConversionByYear = _globalWarmingEmissionsPotentialProvider.GetGlobalWarmingEmissionsInstance(year, EmissionTypes.CO2);
-            var co2ToCo2eConversion = co2ToCo2eConversionByYear.GlobalWarmingPotentialValue;
-
-            var result = new FarmResultsByYear()
-            {
-                Year = year,
-            };
-
-            var cropResultsByYear = this.GetAllCropResultsByYear(year);
-
-            var totalOnFarmCO2FromEnergyEmissions = cropResultsByYear.Sum(x => x.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
-            var totalDirectN2OFromCrops = cropResultsByYear.Sum(x => x.TotalDirectNitrousOxidePerHectare * x.Area);
-            var totalIndirectN2OFromCrops = cropResultsByYear.Sum(x => x.TotalIndirectNitrousOxidePerHectare * x.Area);
-
-            result.TotalEnergyCarbonDioxideFromManureSpreading = cropResultsByYear.Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
-
-            result.TotalEmissions = totalOnFarmCO2FromEnergyEmissions * co2ToCo2eConversion;
-
-            return result;
-        }
 
         public ManureTank GetManureTankByAnimalType(AnimalType animalType, int year)
         {
@@ -470,6 +402,11 @@ namespace H.Core.Emissions.Results
             }
 
             return tank;
+        }
+
+        public List<CropViewItem> GetCropResultsByField(FieldSystemComponent fieldSystemComponent)
+        {
+            return this.FinalFieldResultViewItems.Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid)).ToList();
         }
 
         #endregion

@@ -16,21 +16,19 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-        #region Land Applied Manure
-
         /// <summary>
         /// Equation 4.6.1-2
         ///
         /// (kg N)
         /// </summary>
-        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults)
+        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults,
+            List<CropViewItem> itemsInYear)
         {
             var result = 0d;
 
-            foreach (var fieldComponentEmissionResult in farmEmissionResults.FieldComponentEmissionResults)
+            foreach (var cropViewItem in itemsInYear)
             {
-                var viewItem = fieldComponentEmissionResult.FieldSystemComponent.GetSingleYearViewItem();
-                var appliedNitrogenFromManure = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+                var appliedNitrogenFromManure = cropViewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
 
                 result += appliedNitrogenFromManure;
             }
@@ -61,8 +59,6 @@ namespace H.Core.Services.LandManagement
 
             return result;
         }
-
-        #endregion
 
         /// <summary>
         /// Calculate amount of nitrogen input from all manure applications in a year
@@ -98,8 +94,6 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            var defaults = farm.Defaults;
-
             _icbmSoilCarbonCalculator.SetCarbonInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: viewItem,
@@ -167,167 +161,9 @@ namespace H.Core.Services.LandManagement
             return requiredAmountOfProduct;
         }
 
-        /// <summary>
-        /// Calculates emissions from all manure that remains after all field applications have been considered.
-        /// </summary>
-        public SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults)
-        {
-            var result = new SoilN2OEmissionsResults()
-            {
-                LandEmissionSource = LandEmissionSourceType.Manure,
-                DirectN2OEmissions = 0,
-                IndirectN2OEmissions = 0,
-                Name = LandEmissionSourceType.Manure.GetDescription(),
-            };
-
-            // Equation 4.6.1-3
-            var weightedEmissionFactor = _singleYearNitrogenEmissionsCalculator.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults);
-
-            /*
-             * Direct emissions from manure nitrogen inputs from all fields on the farm.
-             */
-
-            var totalManureNitrogenAppliedToFields = this.CalculateTotalManureNitrogenAppliedToAllFields(farmEmissionResults);
-
-            /*
-             * All manure nitrogen applied to fields will need to be subtracted from the total amount of manure produced on farm. Any remaining amount is still associated with
-             * the farm and must be accounted for in the 'left over' manure.
-             */
-
-            var remainingManure = this.CalculateTotalNitrogenFromLandManureRemaining(
-                totalManureAvailableForLandApplication: farmEmissionResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication,
-                totalManureAlreadyAppliedToFields: totalManureNitrogenAppliedToFields,
-                totalManureExported: 0);
-
-            // Equation 4.6.1-5
-            var directEmissionsFromManureApplication = this.CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
-                weightedEmissionFactor: weightedEmissionFactor,
-                totalNitrogenFromLandManureRemaining: remainingManure);
-
-            // Equation 2.5.3-1
-            var fractionLeach = _singleYearNitrogenEmissionsCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
-                growingSeasonPrecipitation: farmEmissionResults.Farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
-                growingSeasonEvapotranspiration: farmEmissionResults.Farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
-
-            // Equation 2.5.3-4
-            var emissionsFromLeachingAndRunoff = _singleYearNitrogenEmissionsCalculator.CalculateNitrogenEmissionsDueToLeachingAndRunoffFromAllLandAppliedManure(
-                totalNitrogenInputsFromLandAppliedManureNitrogen: farmEmissionResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication,
-                fractionOfNitrogenLostByLeachingAndRunoff: fractionLeach,
-                emissionsFactorForLeachingAndRunoff: farmEmissionResults.Farm.Defaults.EmissionFactorForLeachingAndRunoff);
-
-            // Equation 2.5.3-7
-            var emissionsFromVolatilization = _singleYearNitrogenEmissionsCalculator.CalculateNitrogenEmissionsDueToVolatilizationOfAllLandAppliedManure(
-                totalNitrogenInputsFromManure: farmEmissionResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication,
-                fractionOfNitrogenLostByVolatilization: farmEmissionResults.Farm.Defaults.FractionOfNLostByVolatilization,
-                emissionFactorForVolatilization: farmEmissionResults.Farm.Defaults.EmissionFactorForVolatilization);
-
-            // Equation 2.5.4-4
-            var indirectEmissionsFromManureApplication = _singleYearNitrogenEmissionsCalculator.CalculateTotalIndirectNitrogenEmissions(
-                emissionsDueToLeachingAndRunoff: emissionsFromLeachingAndRunoff,
-                emissionsDueToVolatilization: emissionsFromVolatilization);
-
-            // Equation 2.5.4-5
-            var totalNEmissions = _singleYearNitrogenEmissionsCalculator.CalculateTotalNitrogenEmissions(
-                totalDirectNitrogenEmissions: directEmissionsFromManureApplication,
-                totalIndirectNitrogenEmissions: indirectEmissionsFromManureApplication);
-
-            var convertedDirectEmissions = _singleYearNitrogenEmissionsCalculator.ConvertN2ONToN2O(
-                n2ONEmissions: directEmissionsFromManureApplication);
-
-            var convertedIndirectEmissions = _singleYearNitrogenEmissionsCalculator.ConvertN2ONToN2O(
-                n2ONEmissions: indirectEmissionsFromManureApplication);
-
-            result.DirectN2OEmissions = convertedDirectEmissions;
-            result.IndirectN2OEmissions = convertedIndirectEmissions;
-
-            return result;
-        }
-
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Equation 2.6.2-2
-        /// </summary>
-        private double CalculateAboveGroundResidueNitrogen(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            _icbmSoilCarbonCalculator.SetCarbonInputs(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                nextYearViewItem: null,
-                farm: farm);
-
-            var nitrogenContentOfGrainReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
-                carbonInputFromProduct: currentYearViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: currentYearViewItem.NitrogenContentInProduct);
-
-            var nitrogenContentOfStrawReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
-                carbonInputFromStraw: currentYearViewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: currentYearViewItem.NitrogenContentInStraw);
-
-            var aboveGroundNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateAboveGroundResidueNitrogen(
-                nitrogenContentOfGrainReturned: nitrogenContentOfGrainReturnedToSoil,
-                nitrogenContentOfStrawReturned: nitrogenContentOfStrawReturnedToSoil);
-
-            return aboveGroundNitrogen;
-        }
-
-        /// <summary>
-        /// Equation 2.6.2-5
-        /// </summary>
-        private double CalculateBelowGroundResidueNitrogen(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            _icbmSoilCarbonCalculator.SetCarbonInputs(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                nextYearViewItem: null,
-                farm: farm);
-
-            var nitrogenContentOfRootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
-                carbonInputFromRoots: currentYearViewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: currentYearViewItem.NitrogenContentInRoots);
-
-            var nitrogenContentOfExtrarootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
-                carbonInputFromExtraroots: currentYearViewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: currentYearViewItem.NitrogenContentInExtraroot);
-
-            var belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogen(
-                nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
-                nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil);
-
-            if (currentYearViewItem.CropType.IsPerennial())
-            {
-                if (farm.EnableCarbonModelling)
-                {
-                    // Use the stand length as determined by the sequence of perennial crops entered by the user (Hay-Hay-Hay-Wheat = 3 year stand)
-                    belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator
-                        .CalculateBelowGroundResidueNitrogenForPerennialForage(
-                            nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
-                            nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil,
-                            perennialStandLength: currentYearViewItem.PerennialStandLength);
-                }
-                else
-                {
-                    // Use the input that specifies when the perennial was first seeded
-                    belowGroundNitrogen = _singleYearNitrogenEmissionsCalculator
-                        .CalculateBelowGroundResidueNitrogenForPerennialForage(
-                            nitrogenContentOfRootReturned: nitrogenContentOfRootReturnedToSoil,
-                            nitrogenContentOfExtrarootReturned: nitrogenContentOfExtrarootReturnedToSoil,
-                            perennialStandLength: currentYearViewItem.YearsSinceYearOfConversion);
-                };
-            }
-
-            return belowGroundNitrogen;
-        }
-
-
 
         #endregion
     }
