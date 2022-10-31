@@ -240,7 +240,9 @@ namespace H.Core.Services.LandManagement
             }
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
-            this.CalculateCarbonLostByGrazingAnimals(fieldSystemComponent, farm);
+            this.CalculateCarbonLostByGrazingAnimals(
+                fieldSystemComponent: fieldSystemComponent,
+                results: this.AnimalResults);
 
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
             //this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);

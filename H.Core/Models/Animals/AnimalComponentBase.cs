@@ -84,19 +84,6 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// We don't recalculate results if these properties change
-        /// </summary>
-        public static bool IsAnimalComponentPropertyRelatedToCalculations(string propertyName)
-        {
-            if (propertyName.Equals(nameof(FieldSystemComponent.ResultsCalculated)))  // Prevent loop
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Searches through the component's group of animals looking for the group of animals that has the same pairing number as that of the given young animal group.
         /// </summary>
         /// <param name="youngAnimalGroup">The group of young animals that belong the a parent group.</param>

@@ -3,7 +3,11 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Services.Animals;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
+using H.Core.Providers.Animals;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -12,6 +16,7 @@ namespace H.Core.Calculators.Carbon
         #region Fields
 
         protected readonly SingleYearNitrousOxideCalculator _singleYearNitrousOxideCalculator = new SingleYearNitrousOxideCalculator();
+        
 
         #endregion
 
@@ -74,6 +79,7 @@ namespace H.Core.Calculators.Carbon
         /// (unitless)
         /// </summary>
         public double PoolRatio { get; set; }
+
         public double CropNitrogenDemand { get; set; }
 
         /// <summary>
@@ -218,11 +224,15 @@ namespace H.Core.Calculators.Carbon
             double nitrogenFixation,
             double carbonConcentration)
         {
-            return ((carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheProduct +
-                    (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheStraw +
-                    (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInTheRoots +
+            return ((carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                    nitrogenConcentrationInTheProduct +
+                    (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                    nitrogenConcentrationInTheStraw +
+                    (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                    nitrogenConcentrationInTheRoots +
 
-                    (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) * nitrogenConcentrationInExtraroots) - (1 - nitrogenFixation);
+                    (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                    nitrogenConcentrationInExtraroots) - (1 - nitrogenFixation);
         }
 
         #endregion
@@ -305,10 +315,15 @@ namespace H.Core.Calculators.Carbon
 
         protected void CalculateNitrousOxide(CropViewItem currentYearResults, Farm farm)
         {
-            var emissionFactorForSyntheticFertilizer = _singleYearNitrousOxideCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
-            var emissionFactorForCropResidues = _singleYearNitrousOxideCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
-            var emissionFactorForOrganicNitrogen = _singleYearNitrousOxideCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
-            var directN2ONFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(currentYearResults, farm);
+            var emissionFactorForSyntheticFertilizer =
+                _singleYearNitrousOxideCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
+            var emissionFactorForCropResidues =
+                _singleYearNitrousOxideCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
+            var emissionFactorForOrganicNitrogen =
+                _singleYearNitrousOxideCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
+            var directN2ONFromLandAppliedManure =
+                _singleYearNitrousOxideCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(
+                    currentYearResults, farm);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -326,7 +341,8 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.5-5
             // Equation 2.7.4-5
-            this.N2O_NFromOrganicNitrogen = (this.OrganicPool * emissionFactorForOrganicNitrogen) + directN2ONFromLandAppliedManure;
+            this.N2O_NFromOrganicNitrogen =
+                (this.OrganicPool * emissionFactorForOrganicNitrogen) + directN2ONFromLandAppliedManure;
         }
 
         protected void CalculateNitricOxide(double nORatio)
@@ -355,7 +371,8 @@ namespace H.Core.Calculators.Carbon
         {
             // Equation 2.6.6-3
             // Equation 2.7.5-3
-            this.N2O_NFromSyntheticFertilizerLeaching = this.SyntheticNitrogenPool * fractionLeach * emissionFactorLeaching;
+            this.N2O_NFromSyntheticFertilizerLeaching =
+                this.SyntheticNitrogenPool * fractionLeach * emissionFactorLeaching;
 
             // Equation 2.6.6-4
             // Equation 2.7.5-4
@@ -367,7 +384,8 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-6
             // Equation 2.7.5-6
-            this.N2O_NFromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * emissionFactorLeaching) + indirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching;
+            this.N2O_NFromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * emissionFactorLeaching) +
+                                                    indirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching;
         }
 
         protected void CalculateActualAmountsLeached(
@@ -377,7 +395,8 @@ namespace H.Core.Calculators.Carbon
         {
             // Equation 2.6.6-7
             // Equation 2.7.5-7
-            this.NO3FromSyntheticFertilizerLeaching = this.SyntheticNitrogenPool * fractionLeach * (1 - emissionFactorLeaching);
+            this.NO3FromSyntheticFertilizerLeaching =
+                this.SyntheticNitrogenPool * fractionLeach * (1 - emissionFactorLeaching);
 
             // Equation 2.6.6-8
             // Equation 2.7.5-8
@@ -389,7 +408,8 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-10
             // Equation 2.7.5-10
-            this.NO3FromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * (1 - emissionFactorLeaching)) + indirectEmissionsFromLandAppliedManure.TotalNitrateLeached;
+            this.NO3FromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * (1 - emissionFactorLeaching)) +
+                                                  indirectEmissionsFromLandAppliedManure.TotalNitrateLeached;
         }
 
         protected void CalculateVolatilization(
@@ -399,11 +419,14 @@ namespace H.Core.Calculators.Carbon
         {
             // Equation 2.6.6-12
             // Equation 2.7.5-12
-            this.N2O_NSyntheticNitrogenVolatilization = this.SyntheticNitrogenPool * volatilizationFraction * volatilizationEmissionFactor;
+            this.N2O_NSyntheticNitrogenVolatilization =
+                this.SyntheticNitrogenPool * volatilizationFraction * volatilizationEmissionFactor;
 
             // Equation 2.6.6-13
             // Equation 2.7.5-13
-            this.N2O_NOrganicNitrogenVolatilization = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) + totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureVolatilized;
+            this.N2O_NOrganicNitrogenVolatilization =
+                (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
+                totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureVolatilized;
         }
 
         protected void CalculateActualVolatilization(
@@ -413,11 +436,14 @@ namespace H.Core.Calculators.Carbon
         {
             // Equation 2.6.6-14
             // Equation 2.7.5-14
-            this.NH4FromSyntheticNitogenVolatilized = this.SyntheticNitrogenPool * volatilizationFraction * (1 - volatilizationEmissionFactor);
+            this.NH4FromSyntheticNitogenVolatilized = this.SyntheticNitrogenPool * volatilizationFraction *
+                                                      (1 - volatilizationEmissionFactor);
 
             // Equation 2.6.6-15
             // Equation 2.7.5-15
-            this.NH4FromOrganicNitogenVolatilized = (this.OrganicPool * volatilizationFraction * (1 - volatilizationEmissionFactor)) + totalIndirectEmissionsFromLandAppliedManure.AdjustedAmmoniacalLoss;
+            this.NH4FromOrganicNitogenVolatilized =
+                (this.OrganicPool * volatilizationFraction * (1 - volatilizationEmissionFactor)) +
+                totalIndirectEmissionsFromLandAppliedManure.AdjustedAmmoniacalLoss;
         }
 
         protected void AdjustSyntheticNitrogenPool()
@@ -428,11 +454,13 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-2
             // Equation 2.7.6-2
-            this.SyntheticNitrogenPool -= (this.N2O_NFromSyntheticFertilizerLeaching + NO3FromSyntheticFertilizerLeaching);
+            this.SyntheticNitrogenPool -=
+                (this.N2O_NFromSyntheticFertilizerLeaching + NO3FromSyntheticFertilizerLeaching);
 
             // Equation 2.6.6-3
             // Equation 2.7.6-3
-            this.SyntheticNitrogenPool -= (this.N2O_NSyntheticNitrogenVolatilization + this.NH4FromSyntheticNitogenVolatilized);
+            this.SyntheticNitrogenPool -=
+                (this.N2O_NSyntheticNitrogenVolatilization + this.NH4FromSyntheticNitogenVolatilized);
         }
 
         protected void AdjustResiduePool()
@@ -474,7 +502,8 @@ namespace H.Core.Calculators.Carbon
 
         public void AdjustPoolsAfterDemandCalculation(double nitrogenDemand)
         {
-            if ((Math.Abs(this.AvailabilityOfMineralN) < double.Epsilon) || this.MicrobePool > this.AvailabilityOfMineralN)
+            if ((Math.Abs(this.AvailabilityOfMineralN) < double.Epsilon) ||
+                this.MicrobePool > this.AvailabilityOfMineralN)
             {
                 // Equation 2.6.8-10
                 // Equation 2.7.7-15
@@ -523,16 +552,16 @@ namespace H.Core.Calculators.Carbon
             {
                 // Equation 2.6.8-21
                 // Equation 2.7.7-21
-                this.N2Loss = this.AvailabilityOfMineralN - ((this.N2O_NFromSyntheticFertilizer + 
-                                                             N2O_NFromResidues + 
-                                                             N2O_NFromMineralization + 
-                                                             N2O_NFromOrganicNitrogen + 
-                                                             N2O_NFromSyntheticFertilizerLeaching + 
-                                                             N2O_NFromResiduesLeaching + 
-                                                             N2O_NFromMineralizationLeaching + 
-                                                             N2O_NFromOrganicNitrogenLeaching + 
-                                                             N2O_NSyntheticNitrogenVolatilization + 
-                                                             N2O_NOrganicNitrogenVolatilization) * (0.92 / 0.08));
+                this.N2Loss = this.AvailabilityOfMineralN - ((this.N2O_NFromSyntheticFertilizer +
+                                                              N2O_NFromResidues +
+                                                              N2O_NFromMineralization +
+                                                              N2O_NFromOrganicNitrogen +
+                                                              N2O_NFromSyntheticFertilizerLeaching +
+                                                              N2O_NFromResiduesLeaching +
+                                                              N2O_NFromMineralizationLeaching +
+                                                              N2O_NFromOrganicNitrogenLeaching +
+                                                              N2O_NSyntheticNitrogenVolatilization +
+                                                              N2O_NOrganicNitrogenVolatilization) * (0.92 / 0.08));
             }
             else
             {
@@ -559,7 +588,8 @@ namespace H.Core.Calculators.Carbon
             {
                 // Equation 2.6.8-26
                 // Equation 2.7.7-26
-                this.MineralNBalance = this.AvailabilityOfMineralN - this.PreviousYearResults.MineralNitrogenPool_N_mineralN;
+                this.MineralNBalance =
+                    this.AvailabilityOfMineralN - this.PreviousYearResults.MineralNitrogenPool_N_mineralN;
 
                 // Equation 2.6.8-27
                 // Equation 2.7.7-27
@@ -584,17 +614,23 @@ namespace H.Core.Calculators.Carbon
                 farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
                 farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
 
-            var totalIndirectEmissionsFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(currentYearResults, farm);
-            var emissionFactorLeaching = farm.Defaults.EmissionFactorForLeachingAndRunoff;
+            var totalIndirectEmissionsFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(this.CurrentYearResults, this.AnimalComponentEmissionsResults, farm);
+                    var emissionFactorLeaching = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
-            this.CalculateLeachingEmissions(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching);
-            this.CalculateActualAmountsLeached(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching);
+            this.CalculateLeachingEmissions(fractionLeach, totalIndirectEmissionsFromLandAppliedManure,
+                emissionFactorLeaching);
+            this.CalculateActualAmountsLeached(fractionLeach, totalIndirectEmissionsFromLandAppliedManure,
+                emissionFactorLeaching);
 
-            var volatilizationFractionSoil = _singleYearNitrousOxideCalculator.CalculateFractionOfNitrogenLostByVolatilization(currentYearResults, farm);
+            var volatilizationFractionSoil =
+                _singleYearNitrousOxideCalculator.CalculateFractionOfNitrogenLostByVolatilization(currentYearResults,
+                    farm);
             var emissionFactorForVolatilization = farm.Province.GetRegion() == Region.WesternCanada ? 0.005 : 0.014;
 
-            this.CalculateVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, totalIndirectEmissionsFromLandAppliedManure);
-            this.CalculateActualVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, totalIndirectEmissionsFromLandAppliedManure);
+            this.CalculateVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization,
+                totalIndirectEmissionsFromLandAppliedManure);
+            this.CalculateActualVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization,
+                totalIndirectEmissionsFromLandAppliedManure);
         }
 
         protected void CalculateDirectEmissions(Farm farm, CropViewItem currentYearResults)
@@ -610,6 +646,7 @@ namespace H.Core.Calculators.Carbon
             this.AdjustMineralizedNitrogenPool();
             this.AdjustOrganicPool();
         }
+
         protected void CloseNitrogenBudget(CropViewItem currentYearResults)
         {
             // Equation 2.6.8-1
@@ -689,22 +726,33 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-4
             this.CurrentYearResults.TotalNitrousOxideForArea = this.CurrentYearResults.TotalNitrogenEmissions * area;
 
-            this.CurrentYearResults.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea = this.N2O_NFromSyntheticFertilizer * area;
+            this.CurrentYearResults.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea =
+                this.N2O_NFromSyntheticFertilizer * area;
             this.CurrentYearResults.DirectNitrousOxideEmissionsFromCropResiduesForArea = this.N2O_NFromResidues * area;
-            this.CurrentYearResults.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea = this.N2O_NFromMineralization * area;
-            this.CurrentYearResults.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea = this.N2O_NFromOrganicNitrogen * area;
+            this.CurrentYearResults.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea =
+                this.N2O_NFromMineralization * area;
+            this.CurrentYearResults.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea =
+                this.N2O_NFromOrganicNitrogen * area;
 
-            this.CurrentYearResults.TotalDirectNitrousOxidePerHectare = totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+            this.CurrentYearResults.TotalDirectNitrousOxidePerHectare =
+                totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
             this.CurrentYearResults.TotalDirectNitrousOxideForArea = totalDirectNitrousOxide * area;
 
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea = this.N2O_NFromSyntheticFertilizerLeaching * area;
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromCropResiduesForArea = this.N2O_NFromResiduesLeaching * area;
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea = this.N2O_NFromMineralizationLeaching * area;
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea = this.N2O_NFromOrganicNitrogenLeaching * area;
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea = this.N2O_NSyntheticNitrogenVolatilization * area;
-            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea = this.N2O_NOrganicNitrogenVolatilization * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea =
+                this.N2O_NFromSyntheticFertilizerLeaching * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromCropResiduesForArea =
+                this.N2O_NFromResiduesLeaching * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea =
+                this.N2O_NFromMineralizationLeaching * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea =
+                this.N2O_NFromOrganicNitrogenLeaching * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea =
+                this.N2O_NSyntheticNitrogenVolatilization * area;
+            this.CurrentYearResults.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea =
+                this.N2O_NOrganicNitrogenVolatilization * area;
 
-            this.CurrentYearResults.TotalIndirectNitrousOxidePerHectare = totalIndirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+            this.CurrentYearResults.TotalIndirectNitrousOxidePerHectare =
+                totalIndirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
             this.CurrentYearResults.TotalIndirectNitrousOxideForArea = totalIndirectNitrousOxide * area;
         }
 
@@ -725,10 +773,13 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-6
             this.CurrentYearResults.TotalNitricOxideForArea = totalNitricOxide * area;
 
-            this.CurrentYearResults.DirectNitricOxideEmissionsFromSyntheticNitrogenForArea = this.NO_NFromSyntheticFertilizer * area;
+            this.CurrentYearResults.DirectNitricOxideEmissionsFromSyntheticNitrogenForArea =
+                this.NO_NFromSyntheticFertilizer * area;
             this.CurrentYearResults.DirectNitricOxideEmissionsFromCropResiduesForArea = this.NO_NFromResidues * area;
-            this.CurrentYearResults.DirectNitricOxideEmissionsFromMineralizedNitrogenForArea = this.NO_NFromMineralization * area;
-            this.CurrentYearResults.DirectNitricOxideEmissionsFromOrganicNitrogenForArea = this.NO_NFromOrganicNitrogen * area;
+            this.CurrentYearResults.DirectNitricOxideEmissionsFromMineralizedNitrogenForArea =
+                this.NO_NFromMineralization * area;
+            this.CurrentYearResults.DirectNitricOxideEmissionsFromOrganicNitrogenForArea =
+                this.NO_NFromOrganicNitrogen * area;
         }
 
         protected void SumNitrateLeaching()
@@ -748,10 +799,13 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-8
             this.CurrentYearResults.TotalNitrateLeachingForArea = totalNitrateLeaching * area;
 
-            this.CurrentYearResults.IndirectNitrateFromSyntheticNitrogenForArea = this.NO3FromSyntheticFertilizerLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromSyntheticNitrogenForArea =
+                this.NO3FromSyntheticFertilizerLeaching * area;
             this.CurrentYearResults.IndirectNitrateFromCropResiduesForArea = this.NO3FromResiduesLeaching * area;
-            this.CurrentYearResults.IndirectNitrateFromMineralizedNitrogenForArea = this.NO3FromMineralizationLeaching * area;
-            this.CurrentYearResults.IndirectNitrateFromOrganicNitrogenForArea = this.NO3FromOrganicNitrogenLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromMineralizedNitrogenForArea =
+                this.NO3FromMineralizationLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromOrganicNitrogenForArea =
+                this.NO3FromOrganicNitrogenLeaching * area;
         }
 
         protected void SumAmmoniaVolatilization()
@@ -768,8 +822,10 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-10
             this.CurrentYearResults.TotalAmmoniaForArea = totalAmmoniaVolatilization * area;
 
-            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfSyntheticNitrogenForArea = this.NH4FromSyntheticNitogenVolatilized * area;
-            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfOrganicNitrogenForArea = this.NH4FromOrganicNitogenVolatilized * area;
+            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfSyntheticNitrogenForArea =
+                this.NH4FromSyntheticNitogenVolatilized * area;
+            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfOrganicNitrogenForArea =
+                this.NH4FromOrganicNitogenVolatilized * area;
         }
 
         protected void SumEmissions()
@@ -803,8 +859,10 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.9-31
             // Equation 2.7.8-33
-            this.CurrentYearResults.TotalNitrogenOutputs = this.CurrentYearResults.TotalUptake + this.CurrentYearResults.TotalNitrogenEmissions;
-            this.CurrentYearResults.DifferenceBetweenInputsAndOutputs = this.CurrentYearResults.TotalNitrogenInputs - this.CurrentYearResults.TotalNitrogenOutputs;
+            this.CurrentYearResults.TotalNitrogenOutputs = this.CurrentYearResults.TotalUptake +
+                                                           this.CurrentYearResults.TotalNitrogenEmissions;
+            this.CurrentYearResults.DifferenceBetweenInputsAndOutputs = this.CurrentYearResults.TotalNitrogenInputs -
+                                                                        this.CurrentYearResults.TotalNitrogenOutputs;
 
             // Equation 2.6.9-32
             // Equation 2.7.8-34
@@ -824,21 +882,27 @@ namespace H.Core.Calculators.Carbon
             double totalAmmoniaLossFromLandapplication,
             double totalN2ONFromLeaching)
         {
-            var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandapplication + totalN2ONFromLeaching);
+            var result = totalNitrogenAppliedToField -
+                         (totalDirectN2ON + totalAmmoniaLossFromLandapplication + totalN2ONFromLeaching);
 
             return result;
         }
 
         protected double GetManureNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
         {
-            var totalDirectN2ONFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(cropViewItem, farm);
-            var totalIndirectEmissionsFromLandAppliedManure = _singleYearNitrousOxideCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(cropViewItem, farm);
+            var totalDirectN2ONFromLandAppliedManure =
+                _singleYearNitrousOxideCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(
+                    cropViewItem, farm);
+            var totalIndirectEmissionsFromLandAppliedManure =
+                _singleYearNitrousOxideCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(cropViewItem, this.AnimalComponentEmissionsResults, farm);
 
             var totalManureLeachingN2ON = totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching;
             var ammoniacalLoss = totalIndirectEmissionsFromLandAppliedManure.AmmoniacalLoss;
-            var totalNitrogenAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure.ActualAmountOfNitrogenAppliedFromLandApplication;
+            var totalNitrogenAvailableForLandApplication = totalIndirectEmissionsFromLandAppliedManure
+                .ActualAmountOfNitrogenAppliedFromLandApplication;
 
-            var fractionOfNitrogenAppliedToSoil = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(totalNitrogenAppliedToField: totalNitrogenAvailableForLandApplication,
+            var fractionOfNitrogenAppliedToSoil = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
+                totalNitrogenAppliedToField: totalNitrogenAvailableForLandApplication,
                 totalDirectN2ON: totalDirectN2ONFromLandAppliedManure,
                 totalAmmoniaLossFromLandapplication: ammoniacalLoss,
                 totalN2ONFromLeaching: totalManureLeachingN2ON);
@@ -855,6 +919,10 @@ namespace H.Core.Calculators.Carbon
         protected abstract void SetCropResiduesStartState(Farm farm);
         protected abstract void SetManurePoolStartState(Farm farm);
         protected abstract void SetOrganicNitrogenPoolStartState();
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
     }

@@ -267,36 +267,6 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Public Methods
 
-        /// <summary>
-        /// We don't recalculate results if these properties change
-        /// </summary>
-        public static bool IsFieldComponentPropertyRelatedToCalculations(string propertyName)
-        {
-            if (propertyName.Equals(nameof(FieldSystemComponent.ResultsCalculated)) || // Prevent loop
-                propertyName.Equals(nameof(FieldSystemComponent.Name)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropStringWithYears)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropViewItemsMaxThree)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.ComponentDescriptionString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.GroupPath)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.TimelineInformationString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropStringWithYearsMaxThreeItems)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Duration)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Start)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.End)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsAnnual)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsPerennial)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsGrassland)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsFallow)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.NumberOfDays)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Description)))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public List<CropViewItem> GetAllItemsInPerennialStand(Guid groupGuid)
         {
             return this.CropViewItems.Where(x => x.PerennialStandGroupId == groupGuid).OrderBy(x => x.YearInPerennialStand).ToList();

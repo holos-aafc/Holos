@@ -362,7 +362,7 @@ namespace H.Core.Models
         {
             get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
         }
-        public IEnumerable<ComponentBase> AnimalComponents
+        public IEnumerable<AnimalComponentBase> AnimalComponents
         {
             get
             {
@@ -370,7 +370,7 @@ namespace H.Core.Models
                                            .Concat(this.SwineComponents)
                                            .Concat(this.SheepComponents)
                                            .Concat(this.PoultryComponents)
-                                           .Concat(this.OtherLivestockComponents);
+                                           .Concat(this.OtherLivestockComponents).Cast<AnimalComponentBase>();
             }
         }
 

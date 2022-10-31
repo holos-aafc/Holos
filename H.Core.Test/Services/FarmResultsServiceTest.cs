@@ -47,9 +47,9 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _mockFieldResultsService = new Mock<IFieldResultsService>();
+            
 
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _mockFieldResultsService.Object);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), new FieldResultsService());
         }
 
         [TestCleanup]
@@ -197,136 +197,6 @@ namespace H.Core.Test.Services
             var replicateGroups = replicateComponent.Groups;
             Assert.AreEqual(farmGroups.Count, replicateGroups.Count);
         }
-
-        [TestMethod]
-        public void TestUpdateManureTanks()
-        {
-            var farm = new Farm();
-            var field = new FieldSystemComponent();
-
-            var cropViewItem = new CropViewItem();
-            var manureApplication = new ManureApplicationViewItem();
-            manureApplication.AnimalType = AnimalType.Beef;
-            manureApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
-            manureApplication.AmountOfNitrogenAppliedPerHectare = 50;
-
-            cropViewItem.ManureApplicationViewItems.Add(manureApplication);
-
-            field.CropViewItems.Add(cropViewItem);
-
-            farm.Components.Add(field);
-
-            var animalComponentResults = new AnimalComponentEmissionsResults()
-            {
-                EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
-                {
-                    new AnimalGroupEmissionResults()
-                    {
-                        GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
-                        {
-                            new GroupEmissionsByMonth(new MonthsAndDaysData()
-                            {
-                                ManagementPeriod = new ManagementPeriod()
-                                {
-                                    HousingDetails = new HousingDetails(),
-
-                                }
-                            }, new List<GroupEmissionsByDay>() {new GroupEmissionsByDay() {OrganicNitrogenAvailableForLandApplication = 100}})
-                            {
-                            }
-                        }
-                    }
-                }
-            };
-            animalComponentResults.Component = new CowCalfComponent();
-
-            var farmResults = new FarmEmissionResults();
-            farmResults.Farm = farm;
-            farmResults.AnimalComponentEmissionsResults.Add(animalComponentResults);
-
-            _farmResultsService.UpdateStorageTanks(farmResults);
-        }
-
-        [TestMethod]
-        public void SetStartingStateOfManureTankDoesNotAddManureToTankWhenManureIsFromAnimalsOnPasture()
-        {
-            var manureTank = new ManureTank();
-            var animalComponentEmissionResults = new List<AnimalComponentEmissionsResults>()
-            {
-                new AnimalComponentEmissionsResults()
-                {
-                    EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
-                    {
-                        new AnimalGroupEmissionResults()
-                        {
-                            GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
-                            {
-                                // Animals housed in barn for month #1
-                                new GroupEmissionsByMonth(new MonthsAndDaysData()
-                                {
-                                    ManagementPeriod = new ManagementPeriod()
-                                    {
-                                        HousingDetails = new HousingDetails()
-                                        {
-                                            HousingType = HousingType.Confined,
-                                        }
-                                    }
-                                }, new List<GroupEmissionsByDay>() 
-                                { 
-                                    new GroupEmissionsByDay()
-                                    {
-                                        NitrogenAvailableForLandApplication  = 50,
-                                    }
-                                }),
-
-                                // Animals housed in barn for month #2
-                                new GroupEmissionsByMonth(new MonthsAndDaysData()
-                                {
-                                    ManagementPeriod = new ManagementPeriod()
-                                    {
-                                        HousingDetails = new HousingDetails()
-                                        {
-                                            HousingType = HousingType.Confined,
-                                        }
-                                    }
-                                }, new List<GroupEmissionsByDay>()
-                                {
-                                    new GroupEmissionsByDay()
-                                    {
-                                        NitrogenAvailableForLandApplication  = 250,
-                                    }
-                                }),
-
-                                // Animals housed on pasture
-                                new GroupEmissionsByMonth(new MonthsAndDaysData()
-                                {
-                                    ManagementPeriod = new ManagementPeriod()
-                                    {
-                                        HousingDetails = new HousingDetails()
-                                        {
-                                            HousingType = HousingType.Pasture,
-                                        }
-                                    }
-                                }, new List<GroupEmissionsByDay>()
-                                {
-                                    new GroupEmissionsByDay()
-                                    {
-                                        NitrogenAvailableForLandApplication  = 150,
-                                    }
-                                }),
-                            }
-                        }
-                    }
-                }
-            };
-
-            _farmResultsService.SetStartingStateOfManureTank(manureTank, animalComponentEmissionResults);
-
-            Assert.AreEqual(300, manureTank.TotalAvailableManureNitrogenAvailableForLandApplication);
-        }
-
-
-
 
         #endregion
     }

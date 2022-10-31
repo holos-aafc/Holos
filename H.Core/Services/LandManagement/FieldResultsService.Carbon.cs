@@ -409,11 +409,15 @@ namespace H.Core.Services.LandManagement
             Farm farm,
             Guid fieldSystemGuid)
         {
+            
+
             var fieldSystemComponent = farm.GetFieldSystemComponent(fieldSystemGuid);
 
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
+                _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+
                 foreach (var runInPeriodItem in fieldSystemComponent.RunInPeriodItems)
                 {
                     if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
@@ -433,6 +437,8 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
+                _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
 
@@ -463,7 +469,6 @@ namespace H.Core.Services.LandManagement
             {
                 var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
                 cropViewItem.CropEnergyResults = energyResults;
-
                 cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
@@ -538,18 +543,6 @@ namespace H.Core.Services.LandManagement
             var result = totalCarbonInExprtedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
 
             return result;
-        }
-
-        /// <summary>
-        /// Calculates how much carbon was lost due to animals grazing on the field.
-        /// </summary>
-        public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
-        {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
-
-            this.CalculateCarbonLostByGrazingAnimals(
-                fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
         }
 
         /// <summary>

@@ -43,7 +43,7 @@ namespace H.Core.Services.LandManagement
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
-        private readonly IICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
+        private readonly ICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
         private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator();
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
@@ -123,7 +123,15 @@ namespace H.Core.Services.LandManagement
             _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
 
             _smallAreaYieldProvider.InitializeAsync();
+
+            this.AnimalResults = new List<AnimalComponentEmissionsResults>();
         }
+
+        #endregion
+
+        #region Properties
+
+        public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
 
         #endregion
 

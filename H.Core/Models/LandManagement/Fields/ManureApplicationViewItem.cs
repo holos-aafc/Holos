@@ -200,6 +200,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Methods
 
+        public bool IsImportedManure()
+        {
+            return this.ManureLocationSourceType == ManureLocationSourceType.Imported || this.AnimalType == AnimalType.NotSelected;
+        }
+
         #endregion
 
         #region Private Methods    

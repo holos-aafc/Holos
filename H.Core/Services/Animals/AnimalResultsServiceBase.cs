@@ -28,8 +28,7 @@ namespace H.Core.Services.Animals
         protected readonly Table_52_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
             new Table_52_Electricity_Conversion_Defaults_Provider();
 
-        protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider
-            _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
+        protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
 
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider =
             new Table_22_Additive_Reduction_Factors_Provider();
@@ -78,89 +77,73 @@ namespace H.Core.Services.Animals
             return animalComponentEmissionResults;
         }
 
+        public virtual AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
+        {
+            var animalGroupEmissionResult = new AnimalGroupEmissionResults();
+            animalGroupEmissionResult.AnimalGroup = animalGroup;
+
+            foreach (var managementPeriod in animalGroup.ManagementPeriods)
+            {
+                var monthlyBreakdownForManagementPeriod = AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
+                foreach (var month in monthlyBreakdownForManagementPeriod)
+                {
+                    month.AnimalGroup = animalGroup;
+                    month.ManagementPeriod = managementPeriod;
+
+                    Trace.TraceInformation($"{nameof(AnimalResultsServiceBase)} calculating emissions for {month}.");
+
+                    var dailyEmissionsForMonth = new List<GroupEmissionsByDay>();
+
+                    var startDate = month.StartDate;
+                    var endDate = month.EndDate;
+
+                    for (var currentDate = startDate;
+                         currentDate <= endDate;
+                         currentDate = currentDate.AddDays(1))
+                    {
+                        var previousDate = currentDate.AddDays(-1);
+                        var groupEmissionsForPreviousDay =
+                            dailyEmissionsForMonth.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
+
+                        var groupEmissionsForDay = CalculateDailyEmissions(
+                            animalComponentBase: animalComponent,
+                            managementPeriod: managementPeriod,
+                            dateTime: currentDate,
+                            previousDaysEmissions: groupEmissionsForPreviousDay,
+                            animalGroup: animalGroup,
+                            farm: farm);
+
+                        dailyEmissionsForMonth.Add(groupEmissionsForDay);
+                    }
+
+                    var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
+
+                    CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                    CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
+
+                    animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
+                }
+            }
+
+            return animalGroupEmissionResult;
+        }
+
         public virtual IList<AnimalGroupEmissionResults> CalculateResultsForComponent(
             AnimalComponentBase animalComponent,
             Farm farm)
         {
-            // Don't calculate results for a component that has not been initialized yet since calculations are expensive and should only be done once all properties on a component have been set (i.e. has been initialized)
-            if (animalComponent.IsInitialized == false)
-            {
-                return new List<AnimalGroupEmissionResults>();
-            }
-
-            // Results for this component have been calculated already, return cached results
-            if (animalComponent.ResultsCalculated == true && _cachedComponentListResults.ContainsKey(animalComponent))
-            {
-                Trace.TraceInformation(
-                    $"{nameof(BeefCattleResultsService)}.{nameof(CalculateResultsForComponent)}: results already calculated for {animalComponent.Name}, returning cached results.");
-
-                return _cachedComponentListResults[animalComponent];
-            }
-
-            Trace.TraceInformation(
-                $"{nameof(BeefCattleResultsService)}.{nameof(CalculateResultsForComponent)}: calculating emissions for {animalComponent.Name}.");
+            Trace.TraceInformation($"{nameof(BeefCattleResultsService)}.{nameof(CalculateResultsForComponent)}: calculating emissions for {animalComponent.Name}.");
 
             var animalGroupEmissionResults = new List<AnimalGroupEmissionResults>();
 
             // Loop over all the animal groups in this animal component
             foreach (var animalGroup in animalComponent.Groups)
             {
-                var animalGroupEmissionResult = new AnimalGroupEmissionResults();
-                animalGroupEmissionResult.AnimalGroup = animalGroup;
 
-                foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                {
-                    var monthlyBreakdownForManagementPeriod =
-                        AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
-                    foreach (var month in monthlyBreakdownForManagementPeriod)
-                    {
-                        month.AnimalGroup = animalGroup;
-                        month.ManagementPeriod = managementPeriod;
-
-                        Trace.TraceInformation(
-                            $"{nameof(AnimalResultsServiceBase)} calculating emissions for {month}.");
-
-                        var dailyEmissionsForMonth = new List<GroupEmissionsByDay>();
-
-                        var startDate = month.StartDate;
-                        var endDate = month.EndDate;
-
-                        for (var currentDate = startDate;
-                             currentDate <= endDate;
-                             currentDate = currentDate.AddDays(1))
-                        {
-                            var previousDate = currentDate.AddDays(-1);
-                            var groupEmissionsForPreviousDay =
-                                dailyEmissionsForMonth.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
-
-                            var groupEmissionsForDay = CalculateDailyEmissions(
-                                animalComponentBase: animalComponent,
-                                managementPeriod: managementPeriod,
-                                dateTime: currentDate,
-                                previousDaysEmissions: groupEmissionsForPreviousDay,
-                                animalGroup: animalGroup,
-                                farm: farm);
-
-                            dailyEmissionsForMonth.Add(groupEmissionsForDay);
-                        }
-
-                        var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
-
-                        CalculateEnergyEmissions(groupEmissionsByMonth, farm);
-                        CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
-
-                        animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
-                    }
-                }
+                var animalGroupEmissionResult = this.GetResultsForGroup(animalGroup, farm, animalComponent);
 
                 animalGroupEmissionResults.Add(animalGroupEmissionResult);
             }
-
-            // Cache the calculations for this animal component
-            _cachedComponentListResults[animalComponent] = animalGroupEmissionResults;
-
-            // Results for this component have been calculated and should be reused if there are no changes made to the component
-            animalComponent.ResultsCalculated = true;
 
             return animalGroupEmissionResults;
         }
@@ -1531,42 +1514,6 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.6.2-1
-        /// </summary>
-        /// <param name="temperature">The temperature (degrees C) when manure is applied.</param>
-        /// <returns>Ambient temperature-based adjustment</returns>
-        public double CalculateAmbientTemperatureAdjustmentForLandApplication(double temperature)
-        {
-            var result = 1 - (0.058 * (15 - temperature));
-
-            if (result > 1)
-            {
-                return 1;
-            }
-            else if (result < 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Equation 4.6.2-2
-        /// </summary>
-        /// <param name="emissionFactorForLandApplication">Default NH3 emission factor for land application</param>
-        /// <param name="ambientTemperatureAdjustment">Ambient temperature based adjustment</param>
-        /// <returns></returns>
-        public double CalculateAdjustedAmmoniaEmissionFactor(
-            double emissionFactorForLandApplication,
-            double ambientTemperatureAdjustment)
-        {
-            return emissionFactorForLandApplication * ambientTemperatureAdjustment;
-        }
-
-        /// <summary>
         /// Checks if dairy or beef cattle animals are grazing during the <see cref="ManagementPeriod"/> and calculates manure direct/indirect emissions.
         /// </summary>
         public void GetEmissionsFromBeefAndDairyGrazingAnimals(
@@ -2197,143 +2144,6 @@ namespace H.Core.Services.Animals
                 ammoniaFromStorageAdjustment: adjustedAmmoniaLossFromStorage);
 
             return totalAdjustedAmmoniaLossesFromStorage;
-        }
-
-        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
-            Farm farm,
-            List<GroupEmissionsByDay> dailyEmissions,
-            ComponentCategory componentCategory,
-            AnimalType animalType)
-        {
-            var totalManureProducedByAnimals = dailyEmissions.Sum(x => x.TotalVolumeOfManureAvailableForLandApplicationInKilograms);
-            var totalTanForLandApplicationOnDate = dailyEmissions.Sum(x => x.TanAvailableForLandApplication);
-            var applicationsAndCropByAnimalType = farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
-            var results = new List<LandApplicationEmissionResult>();
-            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
-            var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
-            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
-
-            var emissionFactorData = _livestockEmissionConversionFactorsProvider.GetFactors(ManureStateType.Pasture, componentCategory, annualPrecipitation, annualTemperature, evapotranspiration, 0.0, animalType, farm);
-            foreach (var tuple in applicationsAndCropByAnimalType)
-            {
-                var applicationEmissionResult = new LandApplicationEmissionResult();
-
-                var crop = tuple.Item1;
-                applicationEmissionResult.CropViewItem = crop;
-
-                var manureApplication = tuple.Item2;
-
-                var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(manureApplication.DateOfApplication.Month);
-
-                var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
-                if (fractionOfManureUsed > 1.0)
-                    fractionOfManureUsed = 1.0;
-
-                applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplication.AmountOfNitrogenAppliedPerHectare * crop.Area;
-
-                applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * crop.Area;
-
-                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
-
-                var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(crop, manureApplication);
-                var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
-
-                var fractionVolatilized = 0d;
-                if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
-                {
-                    // Equation 4.6.2-3
-                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalTanForLandApplicationOnDate * adjustedAmmoniaEmissionFactor;
-
-                    // Equation 4.6.3-1
-                    fractionVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0 ? applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication : 0;
-                }
-                else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
-                {
-                    // Equation 4.6.2-7
-                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * emissionFactorData.VolatilizationFraction;
-
-                    // Equation 4.6.3-2
-                    fractionVolatilized = emissionFactorData.VolatilizationFraction;
-                }
-                else
-                {
-                    var emissionFraction = 0d;
-                    if (temperatureForMonth >= 15)
-                    {
-                        emissionFraction = 0.85;
-                    }
-                    else if (temperatureForMonth >= 10 && temperatureForMonth < 15)
-                    {
-                        emissionFraction = 0.73;
-                    }
-                    else if (temperatureForMonth >= 5 && temperatureForMonth < 10)
-                    {
-                        emissionFraction = 0.35;
-                    }
-                    else
-                    {
-                        emissionFraction = 0.25;
-                    }
-
-                    // Equation 4.6.2-5
-                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalManureProducedByAnimals * emissionFraction;
-
-                    // Equation 4.6.3-1
-                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
-                }
-
-                // Equation 4.6.2-4
-                // Equation 4.6.2-6
-                var ammoniaLoss = applicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
-                // Equation 4.6.3-2
-                applicationEmissionResult.TotalN2ONFromManureVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
-
-                // Equation 4.6.3-3
-                var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
-
-                // Equation 4.6.3-4
-                applicationEmissionResult.AdjustedAmmoniacalLoss = applicationEmissionResult.AmmoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
-
-                // Equation 4.6.3-5
-                var adjustedAmmoniaEmissions = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
-                var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
-
-                // Equation 4.6.4-1
-                applicationEmissionResult.TotalN2ONFromManureLeaching = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * emissionFactorData.EmissionFactorLeach;
-
-                // Equation 4.6.4-4
-                applicationEmissionResult.TotalNitrateLeached = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
-
-                // Equation 4.6.5-1
-                applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
-
-                // Equation 4.6.5-2
-                applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
-
-                results.Add(applicationEmissionResult);
-            }
-
-            return results;
-        }
-
-        public double CalculateLeachingFraction(
-            double precipitation,
-            double potentialEvapotranspiration)
-        {
-            return 0.3247 * (precipitation / potentialEvapotranspiration) - 0.0247;
-        }
-
-        protected double GetEmissionFactorForLandApplication(
-            CropViewItem cropViewItem,
-            ManureApplicationViewItem manureApplicationViewItem)
-        {
-            return !manureApplicationViewItem.ManureStateType.IsLiquidManure()
-                ? _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
-                    cropViewItem.TillageType)
-                : _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
-                    manureApplicationViewItem.ManureApplicationMethod);
         }
 
         protected void InitializeDailyEmissions(

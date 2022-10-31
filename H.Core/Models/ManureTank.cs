@@ -99,6 +99,23 @@ namespace H.Core.Models
 
         #endregion
 
+        #region Public Methods
+
+        public void ResetTank()
+        {
+            this.VolumeRemainingInTank = 0;
+            this.TotalOrganicNitrogenAvailableForLandApplication = 0;
+            this.TotalTanAvailableForLandApplication = 0;
+            this.TotalAmountOfCarbonInStoredManure = 0;
+            this.TotalAvailableManureNitrogenAvailableForLandApplication = 0;
+            this.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = 0;
+            this.NitrogenSumOfAllManureApplicationsMade = 0;
+            this.VolumeSumOfAllManureApplicationsMade = 0;
+            this.VolumeOfManureAvailableForLandApplication = 0;
+        }
+
+        #endregion
+
         #region Event Handlers
 
         private void OnSumOfAllManureApplicationsMade()

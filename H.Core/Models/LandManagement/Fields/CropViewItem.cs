@@ -456,7 +456,7 @@ namespace H.Core.Models.LandManagement.Fields
         public int Year
         {
             get { return _year; }
-            set { this.SetProperty(ref _year, value, () => { this.CropTypeStringWithYear = $"[{this.Year}] - {this.CropTypeString}"; }); }
+            set { this.SetProperty(ref _year, value, () => { _cropTypeStringWithYear = $"[{_year}] - {_cropTypeString}"; }); }
         }
 
         public int YearInPerennialStand
@@ -1128,35 +1128,7 @@ namespace H.Core.Models.LandManagement.Fields
 
         public void CalculateWetWeightYield()
         {
-            this.Yield = this.DryYield  /  (1 - this.MoistureContentOfCrop);
-        }
-
-        /// <summary>
-        /// We don't recalculate results if any of these properties change
-        /// </summary>
-        public static bool IsPropertyRelatedToCalculations(string propertyName)
-        {
-            if (propertyName.Equals(nameof(CropViewItem.CropTypeString)) ||
-                propertyName.Equals(nameof(CropViewItem.CropTypeStringWithYear)) ||
-                propertyName.Equals(nameof(CropViewItem.Description)) ||
-                propertyName.Equals(nameof(CropViewItem.Year)) ||
-                propertyName.Equals(nameof(CropViewItem.PlantCarbonInAgriculturalProduct)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromProduct)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromStraw)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromRoots)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromExtraroots)) ||
-                propertyName.Equals(nameof(CropViewItem.HasHarvestViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.HasHayImportViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.HasGrazingViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.ItemCanBeMovedDown)) ||
-                propertyName.Equals(nameof(CropViewItem.ItemCanBeMovedUp)) ||
-                propertyName.Equals(nameof(CropViewItem.AboveGroundCarbonInput)) ||
-                propertyName.Equals(nameof(CropViewItem.BelowGroundCarbonInput)))
-            {
-                return false;
-            }
-
-            return true;
+            this.Yield = this.DryYield / (1 - this.MoistureContentOfCrop);
         }
 
         /// <summary>

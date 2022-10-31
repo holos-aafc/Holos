@@ -6,6 +6,7 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Infrastructure;
@@ -16,6 +17,8 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Fields
 
+        protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
+        protected readonly Table_39_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider = new Table_39_Livestock_Emission_Conversion_Factors_Provider();
         private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
 
@@ -32,42 +35,178 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Public Methods
 
-        public List<LandApplicationEmissionResult> CalculateIndirectEmissionResultsFromLandAppliedManure(Farm farm)
+        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedManure(
+            Farm farm,
+            AnimalComponentEmissionsResults animalComponentEmissionsResults)
         {
-            var result = new List<LandApplicationEmissionResult>();
-            var animalResults = _animalResultsService.GetAnimalResults(farm);
+            var componentCategory = animalComponentEmissionsResults.Component.ComponentCategory;
+            var animalType = componentCategory.GetAnimalTypeFromComponentCategory();
+            var totalManureProducedByAnimals = animalComponentEmissionsResults.TotalVolumeOfManureAvailableForLandApplication * 1000;
+            var totalTanForLandApplicationOnDate = animalComponentEmissionsResults.TotalTANAvailableForLandApplication;
+            var applicationsAndCropByAnimalType = farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
+            var results = new List<LandApplicationEmissionResult>();
+            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
+            var annualTemperature = farm.ClimateData.TemperatureData.GetMeanAnnualTemperature();
+            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
 
-            var beefCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.BeefProduction);
-            var beefCattleGroupEmissionsByDay = beefCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var beefCattleIndirectEmissions = _beefCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, beefCattleGroupEmissionsByDay, ComponentCategory.BeefProduction, AnimalType.Beef);
-            result.AddRange(beefCattleIndirectEmissions);
+            var emissionFactorData = _livestockEmissionConversionFactorsProvider.GetFactors(ManureStateType.Pasture, componentCategory, annualPrecipitation, annualTemperature, evapotranspiration, 0.0, animalType, farm);
+            foreach (var tuple in applicationsAndCropByAnimalType)
+            {
+                var applicationEmissionResult = new LandApplicationEmissionResult();
 
-            var dairyCattleResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Dairy);
-            var dairyCattleEmissionsByDay = dairyCattleResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var dairyCattleIndirectEmissions = _dairyCattleResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, dairyCattleEmissionsByDay, ComponentCategory.Dairy, AnimalType.Dairy);
-            result.AddRange(dairyCattleIndirectEmissions);
+                var crop = tuple.Item1;
+                applicationEmissionResult.CropViewItem = crop;
 
-            var poultryResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Poultry);
-            var poultryEmissions = poultryResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var poultryIndirectEmissions = _poultryResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, poultryEmissions, ComponentCategory.Poultry, AnimalType.Poultry);
-            result.AddRange(poultryIndirectEmissions);
+                var manureApplication = tuple.Item2;
 
-            var swineResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Swine);
-            var swineEmissions = swineResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var swineIndirectEmissions = _swineResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, swineEmissions, ComponentCategory.Swine, AnimalType.Swine);
-            result.AddRange(swineIndirectEmissions);
+                var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(manureApplication.DateOfApplication.Month);
 
-            var sheepResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.Sheep);
-            var sheepEmissions = sheepResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var sheepIndirectEmissions = _sheepResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, sheepEmissions, ComponentCategory.Sheep, AnimalType.Sheep);
-            result.AddRange(sheepIndirectEmissions);
+                var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
+                if (fractionOfManureUsed > 1.0)
+                    fractionOfManureUsed = 1.0;
 
-            var otherLivestockResults = animalResults.Where(x => x.Component.ComponentCategory == ComponentCategory.OtherLivestock);
-            var otherLivestockEmissions = otherLivestockResults.SelectMany(x => x.GetDailyEmissions()).ToList();
-            var otherLivestockIndirectEmissions = _otherLivestockResultsService.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, otherLivestockEmissions, ComponentCategory.OtherLivestock, AnimalType.OtherLivestock);
-            result.AddRange(otherLivestockIndirectEmissions);
+                applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplication.AmountOfNitrogenAppliedPerHectare * crop.Area;
 
-            return result;
+                applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * crop.Area;
+
+                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
+
+                var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(crop, manureApplication);
+                var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
+
+                var fractionVolatilized = 0d;
+                if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
+                {
+                    // Equation 4.6.2-3
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalTanForLandApplicationOnDate * adjustedAmmoniaEmissionFactor;
+
+                    // Equation 4.6.3-1
+                    fractionVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0 ? applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication : 0;
+                }
+                else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
+                {
+                    // Equation 4.6.2-7
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * emissionFactorData.VolatilizationFraction;
+
+                    // Equation 4.6.3-2
+                    fractionVolatilized = emissionFactorData.VolatilizationFraction;
+                }
+                else
+                {
+                    var emissionFraction = 0d;
+                    if (temperatureForMonth >= 15)
+                    {
+                        emissionFraction = 0.85;
+                    }
+                    else if (temperatureForMonth >= 10 && temperatureForMonth < 15)
+                    {
+                        emissionFraction = 0.73;
+                    }
+                    else if (temperatureForMonth >= 5 && temperatureForMonth < 10)
+                    {
+                        emissionFraction = 0.35;
+                    }
+                    else
+                    {
+                        emissionFraction = 0.25;
+                    }
+
+                    // Equation 4.6.2-5
+                    applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * totalManureProducedByAnimals * emissionFraction;
+
+                    // Equation 4.6.3-1
+                    fractionVolatilized = applicationEmissionResult.AmmoniacalLoss / applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
+                }
+
+                // Equation 4.6.2-4
+                // Equation 4.6.2-6
+                var ammoniaLoss = applicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+
+                // Equation 4.6.3-2
+                applicationEmissionResult.TotalN2ONFromManureVolatilized = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * fractionVolatilized * emissionFactorData.EmissionFactorVolatilization;
+
+                // Equation 4.6.3-3
+                var n2OVolatilized = applicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
+
+                // Equation 4.6.3-4
+                applicationEmissionResult.AdjustedAmmoniacalLoss = applicationEmissionResult.AmmoniacalLoss - applicationEmissionResult.TotalN2ONFromManureVolatilized;
+
+                // Equation 4.6.3-5
+                var adjustedAmmoniaEmissions = applicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+
+                var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
+
+                // Equation 4.6.4-1
+                applicationEmissionResult.TotalN2ONFromManureLeaching = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * emissionFactorData.EmissionFactorLeach;
+
+                // Equation 4.6.4-4
+                applicationEmissionResult.TotalNitrateLeached = applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * (1.0 - emissionFactorData.EmissionFactorLeach);
+
+                // Equation 4.6.5-1
+                applicationEmissionResult.TotalIndirectN2ONEmissions = applicationEmissionResult.TotalN2ONFromManureVolatilized + applicationEmissionResult.TotalN2ONFromManureLeaching;
+
+                // Equation 4.6.5-2
+                applicationEmissionResult.TotalIndirectN2OEmissions = applicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
+
+                results.Add(applicationEmissionResult);
+            }
+
+            return results;
+        }
+
+        protected double GetEmissionFactorForLandApplication(
+            CropViewItem cropViewItem,
+            ManureApplicationViewItem manureApplicationViewItem)
+        {
+            return !manureApplicationViewItem.ManureStateType.IsLiquidManure()
+                ? _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
+                    cropViewItem.TillageType)
+                : _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
+                    manureApplicationViewItem.ManureApplicationMethod);
+        }
+
+        private double CalculateLeachingFraction(
+            double precipitation,
+            double potentialEvapotranspiration)
+        {
+            return 0.3247 * (precipitation / potentialEvapotranspiration) - 0.0247;
+        }
+
+        /// <summary>
+        /// Equation 4.6.2-1
+        /// </summary>
+        /// <param name="temperature">The temperature (degrees C) when manure is applied.</param>
+        /// <returns>Ambient temperature-based adjustment</returns>
+        public double CalculateAmbientTemperatureAdjustmentForLandApplication(double temperature)
+        {
+            var result = 1 - (0.058 * (15 - temperature));
+
+            if (result > 1)
+            {
+                return 1;
+            }
+            else if (result < 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+
+        /// <summary>
+        /// Equation 4.6.2-2
+        /// </summary>
+        /// <param name="emissionFactorForLandApplication">Default NH3 emission factor for land application</param>
+        /// <param name="ambientTemperatureAdjustment">Ambient temperature based adjustment</param>
+        /// <returns></returns>
+        public double CalculateAdjustedAmmoniaEmissionFactor(
+            double emissionFactorForLandApplication,
+            double ambientTemperatureAdjustment)
+        {
+            return emissionFactorForLandApplication * ambientTemperatureAdjustment;
         }
 
         /// <summary>
@@ -75,10 +214,15 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public LandApplicationEmissionResult CalculateTotalIndirectEmissionsFromFieldSpecificManureSpreading(
             CropViewItem viewItem,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
             Farm farm)
         {
             var result = new LandApplicationEmissionResult();
-            var indirectEmissionsForAllFields = this.CalculateIndirectEmissionResultsFromLandAppliedManure(farm);
+            var indirectEmissionsForAllFields = new List<LandApplicationEmissionResult>();
+            foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
+            {
+                indirectEmissionsForAllFields.AddRange(this.CalculateAmmoniaEmissionsFromLandAppliedManure(farm, animalComponentEmissionsResult));
+            }
 
             // This will be a list of all indirect emissions for land applied manure for each year of history for this field
             var indirectEmissionsForField = indirectEmissionsForAllFields.Where(x => x.CropViewItem.FieldSystemComponentGuid.Equals(viewItem.FieldSystemComponentGuid));
