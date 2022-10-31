@@ -21,7 +21,7 @@ namespace H.Core.Services.Animals
 
         #endregion
 
-        #region MyRegion
+        #region Public Methods
         
         public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm)
         {
@@ -71,33 +71,33 @@ namespace H.Core.Services.Animals
 
         #endregion
 
-        public AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup selectedAnimalGroup, Farm farm, AnimalComponentBase animalComponentBase)
+        public AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
-            var animalType = selectedAnimalGroup.GroupType;
+            var animalType = animalGroup.GroupType;
             
             if (animalType.GetCategory() == AnimalType.Beef)
             {
-                return _beefCattleResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+                return _beefCattleResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
             }
             else if (animalType.GetCategory() == AnimalType.OtherLivestock)
             {
-                return _otherLivestockResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+                return _otherLivestockResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
             }
             else if (animalType.GetCategory() == AnimalType.Swine)
             {
-                return _swineResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+                return _swineResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
             }
             else if (animalType.GetCategory() == AnimalType.Poultry)
             {
-                return _poultryResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+                return _poultryResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
             }
             else if (animalType.GetCategory() == AnimalType.Sheep)
             {
-                return _sheepResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+                return _sheepResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
             }
 
             // Dairy
-            return _dairyCattleResultsService.GetResultsForGroup(selectedAnimalGroup, farm, animalComponentBase);
+            return _dairyCattleResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
         }
     }
 }

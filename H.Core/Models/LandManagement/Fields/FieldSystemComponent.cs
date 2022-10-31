@@ -397,17 +397,6 @@ namespace H.Core.Models.LandManagement.Fields
                 {
                     this.UpdateTimelineInformationString();
                 }
-
-                // Update the area of all crop view items associated with this field
-                if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.FieldArea)))
-                {
-                    Trace.TraceInformation($"{nameof(FieldSystemComponent)}.{nameof(OnPropertyChanged)}: field area changed, updating area of associated crop view items");
-
-                    foreach (var viewItem in this.CropViewItems)
-                    {
-                        viewItem.Area = fieldSystemComponent.FieldArea;
-                    }
-                }
             }
         }
 
