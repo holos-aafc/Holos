@@ -178,12 +178,6 @@ namespace H.Core.Services.Animals
              * Direct manure N2O
              */
 
-            // BUG: When animals are milk fed the PI is set to 0, but this results in NaN calculations for indirect emissions. Need to fix this
-            // Equation 4.2.1-9
-            //dailyEmissions.ProteinIntakeFromSolidFood = managementPeriod.AnimalsAreMilkFedOnly ? 0 : this.CalculateCalfProteinIntakeFromSolidFood(
-            //    dryMatterIntake: dailyEmissions.DryMatterIntake,
-            //    crudeProteinContent: managementPeriod.SelectedDiet.CrudeProteinContent);
-
             dailyEmissions.ProteinIntakeFromSolidFood = this.CalculateCalfProteinIntakeFromSolidFood(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 crudeProteinContent: managementPeriod.SelectedDiet.CrudeProteinContent);
