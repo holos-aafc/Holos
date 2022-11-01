@@ -428,17 +428,6 @@ namespace H.Core.Calculators.Climate
             var climateFactor = this.CalculateClimateFactor(moistureResponseFactor, temperatureResponseFactor);
             dailyClimateParameterResult.ClimateParameter = climateFactor;
 
-            // This was used to provide Roland with a comparison run using differing values of inputs. Keep this here for future use
-            //var path = @"C:\Temp\re_crop_output.txt";
-            //File.AppendAllText(path, $"{julianDay}," +
-            //                         $"{volumetricSoilWaterContent.ToString("0.#####")}," +
-            //                         $"{_soilTemperatureCurrent.ToString("0.#####")}," +
-            //                         $"{moistureResponseFactor.ToString("0.#####")}," +
-            //                         $"{temperatureResponseFactor.ToString("0.#####")}," +
-            //                         $"{greenAreaIndex.ToString("0.#####")}," +
-            //                         $"{climateFactor.ToString("0.#####")}" +
-            //                         $"{Environment.NewLine}");
-
             soilTemperaturePrevious = soilTemperatureCurrent;
             waterTemperaturePrevious = currentWaterStorage;
 
