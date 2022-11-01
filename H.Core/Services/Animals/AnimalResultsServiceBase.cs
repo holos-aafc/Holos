@@ -77,6 +77,55 @@ namespace H.Core.Services.Animals
             return animalComponentEmissionResults;
         }
 
+        public virtual AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, ManagementPeriod managementPeriod, AnimalComponentBase animalComponent, Farm farm)
+        {
+            var animalGroupEmissionResult = new AnimalGroupEmissionResults();
+            animalGroupEmissionResult.AnimalGroup = animalGroup;
+
+            var monthlyBreakdownForManagementPeriod = AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
+            foreach (var month in monthlyBreakdownForManagementPeriod)
+            {
+
+                month.AnimalGroup = animalGroup;
+                month.ManagementPeriod = managementPeriod;
+
+                Trace.TraceInformation($"{nameof(AnimalResultsServiceBase)} calculating emissions for {month}.");
+
+                var dailyEmissionsForMonth = new List<GroupEmissionsByDay>();
+
+                var startDate = month.StartDate;
+                var endDate = month.EndDate;
+
+                for (var currentDate = startDate;
+                     currentDate <= endDate;
+                     currentDate = currentDate.AddDays(1))
+                {
+                    var previousDate = currentDate.AddDays(-1);
+                    var groupEmissionsForPreviousDay =
+                        dailyEmissionsForMonth.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
+
+                    var groupEmissionsForDay = CalculateDailyEmissions(
+                        animalComponentBase: animalComponent,
+                        managementPeriod: managementPeriod,
+                        dateTime: currentDate,
+                        previousDaysEmissions: groupEmissionsForPreviousDay,
+                        animalGroup: animalGroup,
+                        farm: farm);
+
+                    dailyEmissionsForMonth.Add(groupEmissionsForDay);
+                }
+
+                var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
+
+                CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
+
+                animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
+            }
+
+            return animalGroupEmissionResult;
+        }
+
         public virtual AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();

@@ -99,5 +99,34 @@ namespace H.Core.Services.Animals
             // Dairy
             return _dairyCattleResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
         }
+
+        public AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent, ManagementPeriod managementPeriod)
+        {
+            var animalType = animalGroup.GroupType;
+
+            if (animalType.GetCategory() == AnimalType.Beef)
+            {
+                return _beefCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+            else if (animalType.GetCategory() == AnimalType.OtherLivestock)
+            {
+                return _otherLivestockResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+            else if (animalType.GetCategory() == AnimalType.Swine)
+            {
+                return _swineResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+            else if (animalType.GetCategory() == AnimalType.Poultry)
+            {
+                return _poultryResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+            else if (animalType.GetCategory() == AnimalType.Sheep)
+            {
+                return _sheepResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+
+            // Dairy
+            return _dairyCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+        }
     }
 }
