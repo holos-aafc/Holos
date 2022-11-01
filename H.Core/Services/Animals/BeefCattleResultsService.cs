@@ -49,6 +49,8 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+
             /*
              * Enteric methane (CH4)
              */
@@ -280,17 +282,18 @@ namespace H.Core.Services.Animals
              * Ammonia (NH3) from housing
              */
 
+
             if (managementPeriod.HousingDetails.HousingType.IsIndoorHousing())
             {
                 // Equation 4.3.1-13
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentAddTwo(
-                    averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    averageMonthlyTemperature: temperature);
             }
             else
             {
                 // Equation 4.3.1-8
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustment(
-                    averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    averageMonthlyTemperature: temperature);
             }
 
             var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
@@ -339,7 +342,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.2-3
             dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = base.CalculateAmbientTemperatureAdjustmentForStoredManure(
-                averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                averageMonthlyTemperature: temperature);
 
             // Equation 4.3.2-6
             dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(
@@ -441,8 +444,6 @@ namespace H.Core.Services.Animals
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
-
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
@@ -492,7 +493,7 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
             if (temperature > 20 || managementPeriod.HousingDetails.HousingType == HousingType.HousedInBarn)
             {
                 temperature = 20;
@@ -843,13 +844,13 @@ namespace H.Core.Services.Animals
             {
                 // Equation 4.3.1-13
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentAddTwo(
-                    averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    averageMonthlyTemperature: temperature);
             }
             else
             {
                 // Equation 4.3.1-8
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustment(
-                    averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    averageMonthlyTemperature: temperature);
             }
 
             var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
@@ -898,7 +899,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.2-3
             dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = base.CalculateAmbientTemperatureAdjustmentForStoredManure(
-                averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                averageMonthlyTemperature: temperature);
 
             // Equation 4.3.2-6
             dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(

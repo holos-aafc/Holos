@@ -66,6 +66,8 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+
             /*
              * Enteric methane (CH4)
              */
@@ -449,8 +451,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
-
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 

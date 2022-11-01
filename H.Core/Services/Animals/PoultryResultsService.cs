@@ -47,7 +47,7 @@ namespace H.Core.Services.Animals
             var dailyEmissions = new GroupEmissionsByDay();
             dailyEmissions.DateTime = dateTime;
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
@@ -260,7 +260,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.3-9
             dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateAmbientTemperatureAdjustmentForStorage(
-                temperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                temperature: temperature);
 
             var emissionFactorForStorage = _defaultDailyTanExcretionRatesForPoultry.GetEmissionFactorForStorage(managementPeriod.AnimalType);
 

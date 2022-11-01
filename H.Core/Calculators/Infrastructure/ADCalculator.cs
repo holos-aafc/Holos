@@ -368,7 +368,7 @@ namespace H.Core.Calculators.Infrastructure
             var carbonLiquidFraction = (1 - carbonCoefficient) * carbonFlowInDigestate;
             var carbonSolidFraction = carbonCoefficient * carbonFlowInDigestate;
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dailyEmissions.DateTime.Month);
+                        var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dailyEmissions.DateTime.Year, (Months)dailyEmissions.DateTime.Month);
             var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
 
             // Equation 4.8.5-1

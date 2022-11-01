@@ -78,7 +78,6 @@ namespace H.Core.Test.Services
             var cowCalfComponent = new CowCalfComponent()
             {
                 IsInitialized = true,
-                ResultsCalculated = false,
                 Groups = new ObservableCollection<AnimalGroup>() {cowGroup}
             };
 
@@ -108,7 +107,6 @@ namespace H.Core.Test.Services
             var cowCalfComponent = new CowCalfComponent()
             {
                 IsInitialized = true,
-                ResultsCalculated = false,
                 Groups = new ObservableCollection<AnimalGroup>() { cowGroup }
             };
 

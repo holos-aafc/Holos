@@ -59,7 +59,8 @@ namespace H.Core.Calculators.Nitrogen
 
                 var manureApplication = tuple.Item2;
 
-                var temperatureForMonth = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(manureApplication.DateOfApplication.Month);
+                var date = manureApplication.DateOfApplication;
+                var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(date.Year, (Months)date.Month);
 
                 var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
                 if (fractionOfManureUsed > 1.0)
@@ -69,7 +70,7 @@ namespace H.Core.Calculators.Nitrogen
 
                 applicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * crop.Area;
 
-                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperatureForMonth);
+                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperature);
 
                 var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(crop, manureApplication);
                 var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
@@ -94,15 +95,15 @@ namespace H.Core.Calculators.Nitrogen
                 else
                 {
                     var emissionFraction = 0d;
-                    if (temperatureForMonth >= 15)
+                    if (temperature >= 15)
                     {
                         emissionFraction = 0.85;
                     }
-                    else if (temperatureForMonth >= 10 && temperatureForMonth < 15)
+                    else if (temperature >= 10 && temperature < 15)
                     {
                         emissionFraction = 0.73;
                     }
-                    else if (temperatureForMonth >= 5 && temperatureForMonth < 10)
+                    else if (temperature >= 5 && temperature < 10)
                     {
                         emissionFraction = 0.35;
                     }

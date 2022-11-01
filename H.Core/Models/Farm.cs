@@ -1036,17 +1036,6 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Sets the <see cref="ComponentBase.ResultsCalculated"/> property to false for all components in the <see cref="Farm"/>.
-        /// </summary>
-        public void ResetResultsCalculatedState()
-        {
-            foreach (var component in this.Components)
-            {
-                component.ResultsCalculated = false;
-            }
-        }
-
-        /// <summary>
         /// Return a list 
         /// </summary>
         /// <returns></returns>

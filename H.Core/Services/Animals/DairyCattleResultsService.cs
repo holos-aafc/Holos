@@ -158,7 +158,7 @@ namespace H.Core.Services.Animals
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
              */
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure())
             {
@@ -272,7 +272,8 @@ namespace H.Core.Services.Animals
                 animalGroup: animalGroup,
                 farm: farm,
                 dateTime: dateTime,
-                previousDaysEmissions: previousDaysEmissions);
+                previousDaysEmissions: previousDaysEmissions, 
+                temperature: temperature);
 
             // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -336,7 +337,7 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
-            var temperature = farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month);
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
 
             /*
              * Enteric methane (CH4)
@@ -707,7 +708,8 @@ namespace H.Core.Services.Animals
                 animalGroup: animalGroup,
                 farm: farm,
                 dateTime: dateTime,
-                previousDaysEmissions: previousDaysEmissions);
+                previousDaysEmissions: previousDaysEmissions, 
+                temperature: temperature);
 
             // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
@@ -795,14 +797,15 @@ namespace H.Core.Services.Animals
 
         #region Equations
 
-        private void CalculateIndirectManureNitrousOxide(
-            GroupEmissionsByDay dailyEmissions, 
-            ManagementPeriod managementPeriod, 
-            AnimalGroup animalGroup, 
-            Farm farm, 
-            DateTime dateTime, 
-            GroupEmissionsByDay previousDaysEmissions)
+        private void CalculateIndirectManureNitrousOxide(GroupEmissionsByDay dailyEmissions,
+            ManagementPeriod managementPeriod,
+            AnimalGroup animalGroup,
+            Farm farm,
+            DateTime dateTime,
+            GroupEmissionsByDay previousDaysEmissions, double temperature)
         {
+
+
             // Equation 4.3.1-1
             // Equation 4.3.1-2
             dailyEmissions.FractionOfNitrogenExcretedInUrine = this.GetFractionOfNitrogenExcretedInUrineForDairy(
@@ -840,7 +843,7 @@ namespace H.Core.Services.Animals
 
             // Equation 4.3.1-8
             dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = base.CalculateAmbientTemperatureAdjustment(
-                averageMonthlyTemperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                averageMonthlyTemperature: temperature);
 
             var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
                 housingType: managementPeriod.HousingDetails.HousingType);
@@ -890,13 +893,13 @@ namespace H.Core.Services.Animals
             {
                 // Equation 4.3.2-4
                 dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateStorageTemperatureAdjustmentForSolidManure(
-                    temperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    temperature: temperature);
             }
             else
             {
                 // Equation 4.3.2-5
                 dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateStorageTemperatureAdjustmentForLiquidManure(
-                    temperature: farm.ClimateData.TemperatureData.GetMeanTemperatureForMonth(dateTime.Month));
+                    temperature: temperature);
             }
 
             // Equation 4.3.2-6
