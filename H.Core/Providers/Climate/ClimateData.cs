@@ -141,16 +141,16 @@ namespace H.Core.Providers.Climate
         public double GetTotalPrecipitationForYear(int year)
         {
             var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-            if (dailyClimateDataForYear.Any())
+            if (dailyClimateDataForYear.Count == 365)
             {
-                // We have daily data for this year
+                // We have a full years' worth daily data for this year
                 var totalPrecipitation = dailyClimateDataForYear.Sum(x => x.MeanDailyPrecipitation);
 
                 return totalPrecipitation;
             }
             else
             {
-                // Don't have daily data, return total using SLC normals
+                // Don't have enough daily data, return total using SLC normals
                 return this.PrecipitationData.GetTotalAnnualPrecipitation();
             }
         }
@@ -158,16 +158,17 @@ namespace H.Core.Providers.Climate
         public double GetTotalEvapotranspirationForYear(int year)
         {
             var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-            if (dailyClimateDataForYear.Any())
+
+            if (dailyClimateDataForYear.Count == 365)
             {
-                // We have daily data for this year
+                // We have a full years' worth daily data for this year
                 var totalEvapotranspiration = dailyClimateDataForYear.Sum(x => x.MeanDailyPET);
 
                 return totalEvapotranspiration;
             }
             else
             {
-                // Don't have daily data, return total using SLC normals
+                // Don't have enough daily data, return total using SLC normals
                 return this.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
             }
         }

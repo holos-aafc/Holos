@@ -11626,6 +11626,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To calculate enteric methane emissions for calves who are not being milk-fed, custom values need to be specified for NEga and NEma..
+        /// </summary>
+        public static string MessageProvideCustomNeValuesForBeefCalvesDietIngredient {
+            get {
+                return ResourceManager.GetString("MessageProvideCustomNeValuesForBeefCalvesDietIngredient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removing undersown status for the crop grown in {0}.
         /// </summary>
         public static string MessageRemovingUndersownStatus {

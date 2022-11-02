@@ -656,6 +656,7 @@
     <Compile Include="Services\LandManagement\IFieldResultsService.cs" />
     <Compile Include="Services\IShelterbeltComponentHelper.cs" />
     <Compile Include="Services\ITimePeriodHelper.cs" />
+    <Compile Include="Services\LandManagement\IrrigationService.cs" />
     <Compile Include="Services\LandManagement\MonthlyManureSpreadingResults.cs" />
     <Compile Include="Converters\PropertyConverter.cs" />
     <Compile Include="Services\RotationComponentHelper.cs" />

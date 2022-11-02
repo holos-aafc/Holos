@@ -212,6 +212,7 @@
     <Compile Include="Services\FieldResultsServiceTest.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
+    <Compile Include="Services\LandManagement\IrrigationServiceTest.cs" />
     <Compile Include="Services\ManureServiceTest.cs" />
     <Compile Include="Services\OCR\OcrServiceTests.cs" />
     <Compile Include="Services\OtherLiveStockResultsServiceTest.cs" />

@@ -26,6 +26,7 @@ namespace H.Core.Services.LandManagement
 
             viewItem.NitrogenFixation = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation;
             viewItem.CarbonConcentration = defaults.CarbonConcentration;
+            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
 
             this.AssignDefaultBiomassCoefficients(viewItem, farm);
             this.AssignDefaultNitrogenContentValues(viewItem, farm);

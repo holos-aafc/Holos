@@ -509,7 +509,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.4.1-5
+        /// Equation 3.3.1-5
         /// </summary>
         /// <param name="dailyWeightGainOfLambs">Daily weight gain of lamb(s) </param>
         /// <param name="energyRequiredToProduceAKilogramOfMilk">Energy required to produce 1 kg of milk (MJ kg^-1)</param>
@@ -518,7 +518,7 @@ namespace H.Core.Services.Animals
             double dailyWeightGainOfLambs,
             double energyRequiredToProduceAKilogramOfMilk)
         {
-            return 5.0 / CoreConstants.DaysInYear * dailyWeightGainOfLambs * energyRequiredToProduceAKilogramOfMilk;
+            return 5.0 * dailyWeightGainOfLambs * energyRequiredToProduceAKilogramOfMilk;
         }
 
         /// <summary>

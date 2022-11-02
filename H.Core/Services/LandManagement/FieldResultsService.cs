@@ -41,6 +41,7 @@ namespace H.Core.Services.LandManagement
         private const int DefaultNumberOfDecimalPlaces = 3;
 
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
+        private readonly IrrigationService _irrigationService = new IrrigationService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
         private readonly ICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();

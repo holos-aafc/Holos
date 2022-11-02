@@ -7,18 +7,6 @@ namespace H.Core.Test.Providers.Climate
     [TestClass]
     public class ClimateDataTest
     {
-        [TestMethod]
-        public void GetTotalPrecipitationForYearReturnsTotalOfDailyPrecipitationValues()
-        {
-            var climateData = new ClimateData();
-            climateData.DailyClimateData.Add(new DailyClimateData() {MeanDailyPrecipitation = 10, Year = 2020});
-            climateData.DailyClimateData.Add(new DailyClimateData() { MeanDailyPrecipitation = 20 , Year = 2020});
-            climateData.DailyClimateData.Add(new DailyClimateData() { MeanDailyPrecipitation = 50, Year = 2021 });
-
-            var result = climateData.GetTotalPrecipitationForYear(2020);
-
-            Assert.AreEqual(30, result);
-        }
 
         [TestMethod]
         public void GetTotalPrecipitationForYearReturnsTotalOfNormalsWhenNoDailyDataExists()
@@ -30,19 +18,6 @@ namespace H.Core.Test.Providers.Climate
             var result = climateData.GetTotalPrecipitationForYear(2020);
 
             Assert.AreEqual(50, result);
-        }
-
-        [TestMethod]
-        public void GetTotalEvapotranspirationForYearReturnsTotalOfDailyEvapotranspirationValues()
-        {
-            var climateData = new ClimateData();
-            climateData.DailyClimateData.Add(new DailyClimateData() { MeanDailyPET = 10, Year = 2020 });
-            climateData.DailyClimateData.Add(new DailyClimateData() { MeanDailyPET = 20, Year = 2020 });
-            climateData.DailyClimateData.Add(new DailyClimateData() { MeanDailyPET = 50, Year = 2021 });
-
-            var result = climateData.GetTotalEvapotranspirationForYear(2020);
-
-            Assert.AreEqual(30, result);
         }
 
         [TestMethod]

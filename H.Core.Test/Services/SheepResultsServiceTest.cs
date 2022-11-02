@@ -102,7 +102,7 @@ namespace H.Core.Test.Services
             var energyRequiredToProduceAKilogramOfMilk = 184.125;
             var result =
                 _resultsService.CalculateNetEnergyForLactation(dailyWeightGainOfLambs, energyRequiredToProduceAKilogramOfMilk);
-            Assert.AreEqual(568.45440924657534246575342465753, result);
+            Assert.AreEqual(207485.859375, result);
         }
 
 

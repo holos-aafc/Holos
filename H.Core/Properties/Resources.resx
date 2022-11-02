@@ -5279,4 +5279,7 @@
   <data name="MessageAnimalComponentEmissionsSingleProductionCycle" xml:space="preserve">
     <value>Animal component results are for a single production cycle only. To get the annual emissions value, multiply the results with the number of production cycles in a single year .</value>
   </data>
+  <data name="MessageProvideCustomNeValuesForBeefCalvesDietIngredient" xml:space="preserve">
+    <value>To calculate enteric methane emissions for calves who are not being milk-fed, custom values need to be specified for NEga and NEma.</value>
+  </data>
 </root>
