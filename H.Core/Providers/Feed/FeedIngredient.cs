@@ -1316,9 +1316,6 @@ namespace H.Core.Providers.Feed
 
         #region Calculated Properties
 
-        /// <summary>
-        /// Calculation from personal email with Aklilu Alemu 6/1/22
-        /// </summary>
         public double Nemf
         {
             get
