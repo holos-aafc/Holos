@@ -91,12 +91,7 @@ La ferme bovine de cet exemple est située entre Winnipeg et Portage la Prairie 
     <em>Figure 5: Polygones de PPC et emplacement de la ferme</em>
 </p>
 
-<p align="center">
-    <img src="../../Images/Training/fr/figure6.gif" alt="Figure 6" width="850"/>
-    <br>
-    <em>Figure 6: Entrer l’ID du polygone</em>
-</p>  
-<br>
+
 
 Une fois l’emplacement de la ferme choisi, les renseignements sur le sol (texture, proportions de sable et d’argile) pour les types de sols trouvés dans cette région sont affichés du côté droit de l’écran. Il est possible que plus d’un type de sol par région soit trouvé et que l’utilisateur choisisse son type de sol dans cette liste ou utilise la sélection par défaut.
 
@@ -104,9 +99,9 @@ Conservez le premier type de sol sélectionné et la « zone de rusticité » pa
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure7.png" alt="Figure 7" width="850"/>
+    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="850"/>
     <br>
-    <em>Figure 7: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
+    <em>Figure 6: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
 </p>  
 <br>
 
@@ -123,9 +118,9 @@ Maintenant que l’emplacement de la ferme a été sélectionné, nous passons �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure8.png" alt="Figure 8" width="850"/>
+    <img src="../../Images/Training/fr/figure7.png" alt="Figure 7" width="850"/>
     <br>
-    <em>Figure 8: L'écran des composants disponibles </em>
+    <em>Figure 7: L'écran des composants disponibles </em>
 </p> 
 <br>
 
@@ -135,13 +130,13 @@ Le modèle est conçu pour définir la gestion des terres avant le bétail. C’
 
 ## Culture et production de foin
 
-Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 9). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
+Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 8). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure9.gif" alt="Figure 9" width="950"/>
+    <img src="../../Images/Training/fr/figure8.png" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 9: Ajouter un composant à la ferme.</em>
+    <em>Figure 8: Ajouter un composant à la ferme.</em>
 </p> 
 <br>
 
@@ -158,9 +153,9 @@ Entrez un rendement de **3 000 kg/ha** (poids humide),assurez-vous que la « **c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure10.png" alt="Figure 10" width="950"/>
+    <img src="../../Images/Training/fr/figure9.png" alt="Figure 9" width="950"/>
     <br>
-    <em>Figure 10: Composant de champ.</em>
+    <em>Figure 9: Composant de champ.</em>
 </p> 
 <br> 
 
@@ -170,9 +165,9 @@ Entrez un rendement de **3 000 kg/ha** (poids humide),assurez-vous que la « **c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure11.gif" alt="Figure 11" width="950"/>
+    <img src="../../Images/Training/fr/figure10.png" alt="Figure 10" width="950"/>
     <br>
-    <em>Figure 11: Ajouter l’épandage d’un engrais.</em>
+    <em>Figure 10: Ajouter l’épandage d’un engrais.</em>
 </p> 
 <br> 
 
@@ -199,9 +194,9 @@ L’exploitation de naissage (définie plus loin) dépend des pâturages indigè
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure12.png" alt="Figure 12" width="970"/>
+    <img src="../../Images/Training/fr/figure11.png" alt="Figure 11" width="970"/>
     <br>
-    <em>Figure 12: Informations sur les pâturages/prairies .</em>
+    <em>Figure 11: Informations sur les pâturages/prairies .</em>
 </p> 
 <br>
 
@@ -213,7 +208,7 @@ Pour démontrer la composante de rotation des cultures (plutôt que d’utiliser
 
 Lorsqu’on utilise la composante « rotation de cultures », toute séquence de cultures entrée dans cette composante sera appliquée à chaque champ individuel qui fait partie de la configuration de rotation. Cela signifie qu’un champ est ajouté pour chaque phase de rotation et que la rotation se décale de manière à ce que chaque phase de rotation soit présente dans un champ. Étant donné que chaque champ peut avoir une gestion historique différente, des algorithmes de carbone du sol seront appliqués pour chaque champ.
 
-Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 13]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
+Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 12]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
 
 
 Pour configurer la rotation :
@@ -229,9 +224,9 @@ Holos copiera ensuite les renseignements sur la phase et remplira automatiquemen
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure13.png" alt="Figure 13" width="950"/>
+    <img src="../../Images/Training/fr/figure12.png" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 13: Un exemple de rotation de trois cultures.</em>
+    <em>Figure 12: Un exemple de rotation de trois cultures.</em>
 </p> 
 <br>
 
@@ -255,9 +250,9 @@ L’ajout de composantes animales suit exactement l’approche utilisée pour le
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/Training/fr/figure13.png" alt="Figure 13" width="850"/>
     <br>
-    <em>Figure 14 - Composant vache-veau</em>
+    <em>Figure 13 - Composant vache-veau</em>
 </p> 
 <br>
 
@@ -316,9 +311,9 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/Training/fr/figure14.png" alt="Figure 14" width="850"/>
     <br>
-    <em>Figure 15 - Créateur de ration personnalisée</em>
+    <em>Figure 14 - Créateur de ration personnalisée</em>
 </p> 
 <br>
 
@@ -352,9 +347,9 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/Training/fr/figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 16 - Volet vache-veau - Section vaches</em>
+    <em>Figure 15 - Volet vache-veau - Section vaches</em>
 </p> 
 <br> 
 
@@ -371,9 +366,9 @@ Cliquez sur la ligne « **Taureaux** » dans la section du groupe d’animaux à
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure17.gif" alt="Figure 17" width="950"/>
+    <img src="../../Images/Training/fr/figure16.png" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 17 - Copier la section des vaches </em>
+    <em>Figure 16 - Copier la section des vaches </em>
 </p> 
 <br> 
 
@@ -393,9 +388,9 @@ Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/Training/fr/figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 18 - Veaux de boucherie
+    <em>Figure 17 - Veaux de boucherie
  </em>
 </p> 
 <br> 
@@ -416,9 +411,9 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 19 - Élevage de bovins de long engraissement et semi-finis</em>
+    <em>Figure 18 - Élevage de bovins de long engraissement et semi-finis</em>
 </p> 
 <br>
 
@@ -439,9 +434,9 @@ Cliquez sur le groupe « **Bouvillons** » pour l’activer. Les données de ges
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 20 - Exploitation d’un parc de finition</em>
+    <em>Figure 19 - Exploitation d’un parc de finition</em>
 </p> 
 <br>
 
@@ -474,9 +469,9 @@ Nous pouvons également ajouter du foin et du fourrage pour les animaux qui brou
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 21 - Ajout de foin/fourrage supplémentaire pour les animaux au pacage</em>
+    <em>Figure 20 - Ajout de foin/fourrage supplémentaire pour les animaux au pacage</em>
 </p> 
 <br>
 <br>
@@ -523,25 +518,25 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 22 - Écran Calendrier personnalisé </em>
+    <em>Figure 21 - Écran Calendrier personnalisé </em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="650"/>
+    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="650"/>
     <br>
-    <em>Figure 23 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
+    <em>Figure 22 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="650
+    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="650
     "/>
     <br>
-    <em>Figure 24 - Modification des cultures au cours d’une période historique de rotation</em>
+    <em>Figure 23 - Modification des cultures au cours d’une période historique de rotation</em>
 </p> 
 <br>
 
@@ -575,9 +570,9 @@ Nous ajusterons cette grille afin de pouvoir voir les intrants de carbone en sur
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="950"/>
+    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="950"/>
     <br>
-    <em>Figure 25 - Écran Détails</em>
+    <em>Figure 24 - Écran Détails</em>
 </p> 
 <br>
 
@@ -610,17 +605,17 @@ Le rapport « **Estimations sur l’alimentation** » fournit une estimation de 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="850"/>
     <br>
-    <em>Figure 26 - Rapport détaillé sur les émissions</em>
+    <em>Figure 25 - Rapport détaillé sur les émissions</em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure27.png" alt="Figure 27" width="850"/>
+    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
     <br>
-    <em>Figure 27 - Rapport d’estimation des aliments du bétail</em>
+    <em>Figure 26 - Rapport d’estimation des aliments du bétail</em>
 </p> 
 <br>
 
@@ -636,9 +631,9 @@ Si vous cliquez sur l’un de ces points, vous pouvez alors voir une répartitio
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure28.png" alt="Figure 28" width="850"/>
+    <img src="../../Images/Training/fr/figure27.png" alt="Figure 27" width="850"/>
     <br>
-    <em>Figure 28 - Modification du format du rapport en mode pluriannuel.</em>
+    <em>Figure 27 - Modification du format du rapport en mode pluriannuel.</em>
 </p> 
 <br>
 

@@ -66,7 +66,7 @@ The map contains red colored polygons that can be selected by moving the cursor 
 The beef farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
 
 
-1. Find and right-click on this polygon to select it on the map. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). You can also select a specific polygon by clicking the "Enter a Polygon" button (Figure 6).
+1. Find and right-click on this polygon to select it on the map. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
 <br>
 
@@ -81,12 +81,6 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
     <em>Figure 5: Map of the Manitoba province showing the different selectable polygons.</em>
 </p>
 
-<p align="center">
-    <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="950"/>
-    <br>
-    <em>Figure 6: Specifying a polygon ID using the option button.</em>
-</p>  
-<br>
 
 Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 7)
 
@@ -95,9 +89,9 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="950"/>
+    <img src="../../Images/Training/en/figure6.png" alt="Figure 6" width="950"/>
     <br>
-    <em>Figure 7: Multiple soil types might be available for a given region.</em>
+    <em>Figure 6: Multiple soil types might be available for a given region.</em>
 </p>  
 
 <br>
@@ -118,9 +112,9 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure8.png" alt="Figure 8" width="950"/>
+    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="950"/>
     <br>
-    <em>Figure 8: The available components screen. Specific components can be chosen here to include in the farm.</em>
+    <em>Figure 7: The available components screen. Specific components can be chosen here to include in the farm.</em>
 </p> 
 <br>
 
@@ -134,9 +128,9 @@ Now we can add our first component to the farm. Drag a “Field” component fro
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure9.gif" alt="Figure 9" width="950"/>
+    <img src="../../Images/Training/en/figure8.gif" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 9: Adding a component to the farm.</em>
+    <em>Figure 8: Adding a component to the farm.</em>
 </p> 
 <br>
 
@@ -159,9 +153,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure10.png" alt="Figure 10" width="950"/>
+    <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
     <br>
-    <em>Figure 10: Field Component of the farm.</em>
+    <em>Figure 9: Field Component of the farm.</em>
 </p> 
 <br> 
 
@@ -170,9 +164,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure11.gif" alt="Figure 11" width="950"/>
+    <img src="../../Images/Training/en/figure10.gif" alt="Figure 10" width="950"/>
     <br>
-    <em>Figure 11: Adding fertilizer to a field.</em>
+    <em>Figure 10: Adding fertilizer to a field.</em>
 </p> 
 <br>
 
@@ -197,9 +191,9 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
+    <img src="../../Images/Training/en/figure11.png" alt="Figure 11" width="950"/>
     <br>
-    <em>Figure 12: Native Grasslands information.</em>
+    <em>Figure 11: Native Grasslands information.</em>
 </p> 
 <br>
 
@@ -237,9 +231,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure13.png" alt="Figure 13" width="950"/>
+    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 13: An example of a crop rotation of three crops.</em>
+    <em>Figure 12: An example of a crop rotation of three crops.</em>
 </p> 
 <br>
 
@@ -267,9 +261,9 @@ Adding animal components follows the exact same approach that was used for land 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="950"/>
+    <img src="../../Images/Training/en/figure13.png" alt="Figure 13" width="950"/>
     <br>
-    <em>Figure 14: The Beef Cow-Calf Component.</em>
+    <em>Figure 13: The Beef Cow-Calf Component.</em>
 </p> 
 <br>
 
@@ -325,9 +319,9 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="850"/>
     <br>
-    <em>Figure 15: Custom diet creator for Cows animal group.</em>
+    <em>Figure 14: Custom diet creator for Cows animal group.</em>
 </p> 
 <br>
 
@@ -385,9 +379,9 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 16: Beef Cow-Calf, Cow group</em>
+    <em>Figure 15: Beef Cow-Calf, Cow group</em>
 </p> 
 <br> 
 
@@ -401,9 +395,9 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="950"/>
+    <img src="../../Images/Training/en/figure16.gif" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 17: Copying data from another animal group</em>
+    <em>Figure 16: Copying data from another animal group</em>
 </p> 
 <br>
 
@@ -488,9 +482,9 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/Training/en/figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 18: Beef stocker & backgrounder operation</em>
+    <em>Figure 17: Beef stocker & backgrounder operation</em>
 </p> 
 <br> 
 
@@ -530,9 +524,9 @@ We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 19: Beef Finisher component</em>
+    <em>Figure 18: Beef Finisher component</em>
 </p>
 <br> 
 
@@ -569,9 +563,9 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/Training/en/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 20 - Adding supplemental hay/forage for grazing animals.</em>
+    <em>Figure 19 - Adding supplemental hay/forage for grazing animals.</em>
 </p>
 <br> 
 <br>
@@ -631,24 +625,24 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 21: Customized Timeline Screen</em>
+    <em>Figure 20: Customized Timeline Screen</em>
 </p> 
 <br>  
 
 <p align="center">
-    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="550"/>
+    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="550"/>
     <br>
-    <em>Figure 22: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 21: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 <br> 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="650"/>
+    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="650"/>
     <br>
-    <em>Figure 23: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 22: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -679,9 +673,9 @@ We will adjust this grid so that we can view the above ground and below ground c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="950"/>
     <br>
-    <em>Figure 24: Details screen</em>
+    <em>Figure 23: Details screen</em>
 </p> 
 <br>
 <br>
@@ -712,24 +706,24 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="950"/>
+    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
     <br>
-    <em>Figure 25: Detailed emissions report.</em>
+    <em>Figure 24: Detailed emissions report.</em>
 </p> 
 <br>
 
+<p align="center">
+    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="950"/>
+    <br>
+    <em>Figure 25: Estimates of production report.</em>
+</p> 
+<br>
+
+<br>
 <p align="center">
     <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="950"/>
     <br>
-    <em>Figure 26: Estimates of production report.</em>
-</p> 
-<br>
-
-<br>
-<p align="center">
-    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="950"/>
-    <br>
-    <em>Figure 27: Feed estimate report.</em>
+    <em>Figure 26: Feed estimate report.</em>
 </p> 
 <br>
 
@@ -748,9 +742,9 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure28.png" alt="Figure 28" width="950"/>
+    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="950"/>
     <br>
-    <em>Figure 28: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 27: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 <br>
 
