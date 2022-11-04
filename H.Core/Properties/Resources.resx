@@ -5282,4 +5282,10 @@
   <data name="MessageProvideCustomNeValuesForBeefCalvesDietIngredient" xml:space="preserve">
     <value>To calculate enteric methane emissions for calves who are not being milk-fed, custom values need to be specified for NEga and NEma.</value>
   </data>
+  <data name="InchesPerAcre" xml:space="preserve">
+    <value>in ac^-1</value>
+  </data>
+  <data name="MillimetersPerHectare" xml:space="preserve">
+    <value>mm ha^-1</value>
+  </data>
 </root>

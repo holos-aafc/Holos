@@ -18,6 +18,7 @@ namespace H.Core.Models
         private string _dollars;
         private string _dollarsPerHectare;
         private string _millimetersString;
+        private string _millimetersPerHectareString;
         private string _milliEquivalentsPer100g;
         private string _millimetersPerYearString;
         private string _percentageString;
@@ -751,6 +752,12 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsNONPerFieldString, value);
         }
 
+        public string MillimetersPerHectareString
+        {
+            get => _millimetersPerHectareString;
+            set => SetProperty(ref _millimetersPerHectareString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -872,6 +879,7 @@ namespace H.Core.Models
                 KilogramsN2OPerFieldString = WrapString(Resources.KilogramsN2OPerField);
                 KilogramsN2OnPerFieldString = WrapString(Resources.KilogramsN2ONPerField);
                 KilogramsN2OnPerFieldString = WrapString(Resources.KilogramsNONPerField);
+                MillimetersPerHectareString = WrapString(Resources.MillimetersPerHectare);
             }
             else
             {
@@ -980,6 +988,7 @@ namespace H.Core.Models
                 KilogramsN2OPerFieldString = WrapString(Resources.PoundsN2OPerField);
                 KilogramsN2OnPerFieldString = WrapString(Resources.PoundsN2ONPerField);
                 KilogramsNONPerFieldString = WrapString(Resources.PoundsNONPerField);
+                MillimetersPerHectareString = WrapString(Resources.InchesPerAcre);
             }
         }
 

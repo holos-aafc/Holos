@@ -2224,6 +2224,9 @@
   <data name="Inches" xml:space="preserve">
     <value>po</value>
   </data>
+  <data name="InchesPerAcre" xml:space="preserve">
+    <value>in ac^-1</value>
+  </data>
   <data name="InchesPerYear" xml:space="preserve">
     <value>po année^-1</value>
   </data>
@@ -3865,6 +3868,9 @@
   </data>
   <data name="Millimeters" xml:space="preserve">
     <value>mm</value>
+  </data>
+  <data name="MillimetersPerHectare" xml:space="preserve">
+    <value>mm ha^-1</value>
   </data>
   <data name="MillimetersPerYear" xml:space="preserve">
     <value>mm année^-1</value>

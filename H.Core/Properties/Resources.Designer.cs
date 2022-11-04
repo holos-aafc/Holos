@@ -6586,6 +6586,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in ac^-1.
+        /// </summary>
+        public static string InchesPerAcre {
+            get {
+                return ResourceManager.GetString("InchesPerAcre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to in. year^-1.
         /// </summary>
         public static string InchesPerYear {
@@ -11820,6 +11829,15 @@ namespace H.Core.Properties {
         public static string Millimeters {
             get {
                 return ResourceManager.GetString("Millimeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mm ha^-1.
+        /// </summary>
+        public static string MillimetersPerHectare {
+            get {
+                return ResourceManager.GetString("MillimetersPerHectare", resourceCulture);
             }
         }
         
