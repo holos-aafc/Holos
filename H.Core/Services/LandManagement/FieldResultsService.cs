@@ -221,8 +221,11 @@ namespace H.Core.Services.LandManagement
                 if (climateDataForYear != null)
                 {
                     // Use daily climate data
-
                     var precipitationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPrecipitation).ToList();
+
+                    // Add irrigation amounts to daily precipitations
+                    var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(precipitationList, farm, viewItem);
+
                     var temperatureList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyAirTemperature).ToList();
                     var evapotranspirationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPET).ToList();
 
@@ -230,18 +233,21 @@ namespace H.Core.Services.LandManagement
                         farm: farm,
                         cropViewItem: viewItem,
                         evapotranspirations: evapotranspirationList,
-                        precipitations: precipitationList,
+                        precipitations: totalPrecipitationList,
                         temperatures: temperatureList);
                 }
                 else
                 {
                     // If user has entered custom climate data but their input file has no data for a particular year, then use normals for that particular year
+                    
+                    // Add irrigation amounts to daily precipitations
+                    var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(), farm, viewItem);
 
                     climateParameter = _climateParameterCalculator.CalculateClimateParameterForYear(
                         farm: farm,
                         cropViewItem: viewItem,
                         evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
-                        precipitations: farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(),
+                        precipitations: totalPrecipitationList,
                         temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
                 }
 
@@ -249,15 +255,17 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                // Use SLC normals when there is no custom user climate data
+                // Add irrigation amounts to daily precipitations
+                var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(), farm, viewItem);
 
+                // Use SLC normals when there is no custom user climate data
                 Trace.TraceWarning($"{nameof(FieldResultsService)}: No custom daily climate data exists for this farm. Defaulting to SLC climate normals (and averaged daily values)");
 
                 var result = _climateParameterCalculator.CalculateClimateParameterForYear(
                     farm: farm,
                     cropViewItem: viewItem,
                     evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
-                    precipitations: farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(),
+                    precipitations: totalPrecipitationList,
                     temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
 
                 return Math.Round(result, DefaultNumberOfDecimalPlaces);

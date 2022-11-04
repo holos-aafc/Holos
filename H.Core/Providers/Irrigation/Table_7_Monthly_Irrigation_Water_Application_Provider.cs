@@ -63,9 +63,9 @@ namespace H.Core.Providers.Irrigation
             
             else
             {
-                Trace.TraceError($"{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
-                                 $" unable to find Month: {month} in the available month data." +
-                                 $" Returning null.");
+                //Trace.TraceError($"{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
+                //                 $" unable to find Month: {month} in the available month data." +
+                //                 $" Returning null.");
                 return null;
             }
         }

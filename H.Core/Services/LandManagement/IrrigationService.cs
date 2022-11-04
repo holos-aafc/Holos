@@ -13,7 +13,7 @@ namespace H.Core.Services.LandManagement
     {
         #region Fields
 
-        private Table_7_Monthly_Irrigation_Water_Application_Provider _irrigationProvider = new Table_7_Monthly_Irrigation_Water_Application_Provider();
+        private readonly Table_7_Monthly_Irrigation_Water_Application_Provider _irrigationProvider = new Table_7_Monthly_Irrigation_Water_Application_Provider();
         
 
         #endregion
@@ -93,11 +93,7 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private Months GetMonthFromJulianDay(int julianDay)
+        public Months GetMonthFromJulianDay(int julianDay)
         {
             if (julianDay >= 1 && julianDay <= 31)
             {
@@ -143,7 +139,7 @@ namespace H.Core.Services.LandManagement
             {
                 return Months.November;
             }
-            else if(julianDay >= 335 && julianDay <= 365)
+            else if (julianDay >= 335 && julianDay <= 366) // Include 366 to account for leap years
             {
                 return Months.December;
             }
@@ -152,6 +148,10 @@ namespace H.Core.Services.LandManagement
                 throw new Exception($"Julian day out of range: {julianDay}");
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
     }
