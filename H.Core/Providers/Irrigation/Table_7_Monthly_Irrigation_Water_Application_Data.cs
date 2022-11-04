@@ -21,6 +21,8 @@ namespace H.Core.Providers.Irrigation
 
         /// <summary>
         /// The irrigation volume given a month and province.
+        ///
+        /// (%)
         /// </summary>
         public double IrrigationVolume { get; set; }
 
