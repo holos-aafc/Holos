@@ -290,8 +290,14 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // At this point, the detail view items have had their C inputs calculated
+
+                // Equation 2.1.3-1
                 equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.AboveGroundCarbonInput);
+
+                // Equation 2.1.3-2
                 equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.BelowGroundCarbonInput);
+
+                // Equation 2.1.3-3
                 equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInputsPerHectare);
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
@@ -343,8 +349,9 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                var youngPoolAboveGround = result.AboveGroundCarbonInput /
-                                (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
+
+                // Equation 2.1.3-8
+                var youngPoolAboveGround = result.AboveGroundCarbonInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
 
 
 
@@ -360,6 +367,7 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
+                // Equation 2.1.3-9
                 var youngPoolBelowGround = result.BelowGroundCarbonInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
 
                 result.YoungPoolSoilCarbonBelowGround = youngPoolBelowGround;
