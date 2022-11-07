@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -150,36 +151,6 @@ namespace H.Core.Calculators.Carbon
             else
             {
                 result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop))* currentYearViewItem.CarbonConcentration;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Rotz and Muck (1994 - Changes in Forage Quality During Harvest and Storage. Forage Quality, Evaluation, and Utilization, Chapter 20. https://doi.org/10.2134/1994.foragequality.c20)
-        /// </summary>
-        public double CalculateInputsFromSupplementalHayFedToGrazingAnimals(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItems,
-            Farm farm)
-        {
-            var result = 0.0;
-
-            // Get total amount of supplemental hay added
-            var hayImportViewItems = currentYearViewItem.HayImportViewItems;
-            foreach (var hayImportViewItem in hayImportViewItems)
-            {
-                // Total dry matter weight
-                var totalDryMatterWeight = hayImportViewItem.GetTotalDryMatterWeightOfAllBales();
-
-                // Amount lost during feeding
-                var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
-
-                // Total additional carbon that must be added to above ground inputs for the field
-                var totalCarbon = totalDryMatterWeight * loss * currentYearViewItem.CarbonConcentration;
-
-                result += totalCarbon;
             }
 
             return result;
@@ -663,7 +634,6 @@ namespace H.Core.Calculators.Carbon
                 annualPrecipitation: totalPrecipitationForTheYear,
                 annualPotentialEvapotranspiration: totalEvapotranspirationForTheYear,
                 proportionOfPrecipitationMayThroughSeptember: proportionOfPrecipitationMayThroughSeptember,
-                moistureContentAsPercentage: moistureContentAsPercentage,
                 carbonConcentration: carbonConcentration);
 
             return result;
@@ -673,14 +643,15 @@ namespace H.Core.Calculators.Carbon
         /// Equation 2.1.2-22
         /// Equation 2.1.2-26
         /// </summary>
-        public double CalculateProductivity(
-            double annualPrecipitation,
+        public double CalculateProductivity(double annualPrecipitation,
             double annualPotentialEvapotranspiration,
             double proportionOfPrecipitationMayThroughSeptember,
-            double moistureContentAsPercentage,
             double carbonConcentration)
         {
-            var result = ((-3004 + (4.72 * annualPrecipitation) + (-0.98 * annualPotentialEvapotranspiration) + (5316 * proportionOfPrecipitationMayThroughSeptember)) * (1 - (moistureContentAsPercentage / 100))) *carbonConcentration;
+            var production = (2.973 + (0.00453 * annualPrecipitation) + (-0.00259 * annualPotentialEvapotranspiration) + (6.187 * proportionOfPrecipitationMayThroughSeptember));
+            var dryMatter = Math.Pow(Math.E, production);
+
+            var result = dryMatter * carbonConcentration;
 
             return result;
         }

@@ -131,10 +131,9 @@ namespace H.Core.Test.Calculators
                 annualPrecipitation: annualPrecipitation,
                 annualPotentialEvapotranspiration: annualPotentialEvapotranspiration,
                 proportionOfPrecipitationMayThroughSeptember: proportionOfPrecipitationMayToSeptember,
-                moistureContentAsPercentage: moistureContent,
                 carbonConcentration: carbonConcentration);
 
-            Assert.AreEqual(158.47, result, 2);
+            Assert.AreEqual(87.578217100325958, result, 2);
         }
 
         /// <summary>
@@ -446,10 +445,10 @@ namespace H.Core.Test.Calculators
                 farm: farm);
 
             // = [(10 * 500) * (1 - 12/100) * (1 - 20/100)] * 0.45
-            // = (5000 * 0.88 * 0.2) * 0.45
-            // = 396
+            // = (5000 * 0.88 * 0.8) * 0.45
+            // = 1584
 
-            Assert.AreEqual(396, result);
+            Assert.AreEqual(1584, result);
         }
 
         #endregion
@@ -890,14 +889,7 @@ namespace H.Core.Test.Calculators
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            // Estimated plant C in next year: 425.30400000000003
-
-            // Cag = Cptosoil
-            // = (Cp * EstablishmentGrowthFactor * %yieldReturned / 100) 
-            // = (425.30400000000003 * 0.5 * 0.1) 
-            // = 21.2652000000000015 
-
-            Assert.AreEqual(21.265, currentYearViewItem.AboveGroundCarbonInput, 3);
+            Assert.AreEqual(10.293, currentYearViewItem.AboveGroundCarbonInput, 3);
         }
 
         [TestMethod]
@@ -978,8 +970,8 @@ namespace H.Core.Test.Calculators
                 BiomassCoefficientProduct = 0.5,
                 BiomassCoefficientRoots = 0.4,
                 BiomassCoefficientExtraroot = 0.3,
-                CarbonInputFromRoots = 1000,        // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
-                CarbonInputFromExtraroots = 800,    // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
+                CarbonInputFromRoots = 1800,        // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
+                CarbonInputFromExtraroots = 1400,    // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
             };
 
             var currentYearViewItem = new CropViewItem()

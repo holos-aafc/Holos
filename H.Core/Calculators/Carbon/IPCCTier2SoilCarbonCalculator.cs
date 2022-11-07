@@ -187,6 +187,14 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.AboveGroundCarbonInput = totalAboveGroundCarbonInputsForField / viewItem.Area;
 
+            var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
+                previousYearViewItem: null,
+                currentYearViewItem: viewItem,
+                nextYearViewItems: null,
+                farm: farm);
+
+            viewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
+
             var rootToShoot = cropData.RSTRatio;
             
             // Equation 2.2.2-4

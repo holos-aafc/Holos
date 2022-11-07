@@ -52,7 +52,7 @@ namespace H.Core.Services.LandManagement
                 var copiedHayImportViewItem = _hayImportViewItemMapper.Map<HayImportViewItem, HayImportViewItem>(hayImportViewItem);
 
                 // We need to update the year so that the current years' hay import items are copied back in time
-                copiedHayImportViewItem.DateCreated = new DateTime(year, copiedHayImportViewItem.DateCreated.Month, copiedHayImportViewItem.DateCreated.Day);
+                copiedHayImportViewItem.Date = new DateTime(year, copiedHayImportViewItem.DateCreated.Month, copiedHayImportViewItem.DateCreated.Day);
 
                 result.HayImportViewItems.Add(copiedHayImportViewItem);
             }
