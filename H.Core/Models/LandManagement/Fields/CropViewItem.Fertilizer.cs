@@ -17,11 +17,20 @@ namespace H.Core.Models.LandManagement.Fields
         private double _potassiumFertilizerRate;
         private double _sulphurFertilizerRate;
 
+        private SoilReductionFactors _soilReductionFactor;
+
         private ObservableCollection<FertilizerApplicationViewItem> _fertilizerApplicationViewItems;
 
         #endregion
 
         #region Properties
+
+
+        public SoilReductionFactors SoilReductionFactor
+        {
+            get => _soilReductionFactor;
+            set => SetProperty(ref _soilReductionFactor, value);
+        }
 
         public bool HasFertilizerApplicationViewItems => this.FertilizerApplicationViewItems.Count > 0;
 

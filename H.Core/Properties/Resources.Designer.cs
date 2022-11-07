@@ -8818,6 +8818,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additive.
+        /// </summary>
+        public static string LabelFertilizerAdditive {
+            get {
+                return ResourceManager.GetString("LabelFertilizerAdditive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application rate.
         /// </summary>
         public static string LabelFertilizerApplicationRate {
@@ -11685,6 +11694,15 @@ namespace H.Core.Properties {
         public static string MessageShelterbeltComponentNotAvailable {
             get {
                 return ResourceManager.GetString("MessageShelterbeltComponentNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soil reduction factors are preliminary and may be updated in a future release.
+        /// </summary>
+        public static string MessageSoilReductionFactorsExperimental {
+            get {
+                return ResourceManager.GetString("MessageSoilReductionFactorsExperimental", resourceCulture);
             }
         }
         

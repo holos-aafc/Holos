@@ -185,7 +185,6 @@ namespace H.Core.Providers.Soil
             return defaultValue;
         }
 
-
         /// <summary>
         /// Table 16: Lookup function for N2O Reduction factor values = RF_AM
         /// </summary>
@@ -207,6 +206,9 @@ namespace H.Core.Providers.Soil
 
                 case SoilReductionFactors.NitrificationAndUreaseInhibitor:
                     return 0.94;
+
+                case SoilReductionFactors.None:
+                    return 0;
 
                 default:
                     Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetReductionFactorBasedOnApplicationMethod)} " +

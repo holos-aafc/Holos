@@ -5288,4 +5288,10 @@
   <data name="MillimetersPerHectare" xml:space="preserve">
     <value>mm ha^-1</value>
   </data>
+  <data name="LabelFertilizerAdditive" xml:space="preserve">
+    <value>Additive</value>
+  </data>
+  <data name="MessageSoilReductionFactorsExperimental" xml:space="preserve">
+    <value>Soil reduction factors are preliminary and may be updated in a future release</value>
+  </data>
 </root>

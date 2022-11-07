@@ -15,6 +15,7 @@ namespace H.Core.Models.LandManagement.Fields
         private Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data _carbonFootprintForFertilizerBlendsData;
         private Seasons _seasonOfApplication;
 
+
         private double _amountOfBlendedProductApplied;
         private double _amountOfNitrogenApplied;
         private double _amountOfPhosphorusApplied;

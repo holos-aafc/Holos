@@ -162,6 +162,7 @@ namespace H.Core.Models.LandManagement.Fields
 
             this.HarvestMethod = HarvestMethods.CashCrop;
             this.MoistureContentOfCropPercentage = 12;
+            this.SoilReductionFactor = SoilReductionFactors.None;
 
             this.CoverCropTerminationType = CoverCropTerminationType.Natural;
 

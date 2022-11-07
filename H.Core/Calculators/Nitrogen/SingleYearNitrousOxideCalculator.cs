@@ -22,15 +22,6 @@ namespace H.Core.Calculators.Nitrogen
         private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
 
-        private readonly BeefCattleResultsService _beefCattleResultsService = new BeefCattleResultsService();
-        private readonly DairyCattleResultsService _dairyCattleResultsService = new DairyCattleResultsService();
-        private readonly SwineResultsService _swineResultsService = new SwineResultsService();
-        private readonly PoultryResultsService _poultryResultsService = new PoultryResultsService();
-        private readonly SheepResultsService _sheepResultsService = new SheepResultsService();
-        private readonly OtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
-
-        private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
-
         #endregion
 
         #region Public Methods
@@ -280,11 +271,25 @@ namespace H.Core.Calculators.Nitrogen
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
                 nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
+            var soilReductionFactor = _soilN2OEmissionFactorsProvider.GetReductionFactorBasedOnApplicationMethod(viewItem.SoilReductionFactor);
+
             var syntheticNitrogenEmissionFactor = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
                 croppingSystemModifier: croppingSystemModifier,
                 tillageModifier: tillageModifier,
                 nitrogenSourceModifier: nitrogenSourceModifier);
+
+
+            /*
+             * Equation 2.5.1-8
+             *
+             * Soil reduction factor only considered when calculating emission factor for synthetic nitrogen
+             */
+
+            if (viewItem.SoilReductionFactor != SoilReductionFactors.None)
+            {
+                syntheticNitrogenEmissionFactor *= soilReductionFactor;
+            }
 
             return syntheticNitrogenEmissionFactor;
         }

@@ -21,5 +21,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumNitrificationAndUreaseInhibitor", typeof(Resources))]
         NitrificationAndUreaseInhibitor,
+
+        [LocalizedDescription("EnumNone", typeof(Resources))]
+        None,
     }
 }

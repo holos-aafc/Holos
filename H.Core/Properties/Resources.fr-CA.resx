@@ -2938,6 +2938,9 @@
   <data name="LabelFertilityRate" xml:space="preserve">
     <value>taux de fécondité</value>
   </data>
+  <data name="LabelFertilizerAdditive" xml:space="preserve">
+    <value>Additive</value>
+  </data>
   <data name="LabelFertilizerApplicationRate" xml:space="preserve">
     <value>dose d'application</value>
   </data>
@@ -3823,6 +3826,9 @@
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
     <value>on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte, puis 100 % lors de la récolte des plantes vivaces. ces données peuvent être modifées à l’onglet « résidus ». </value>
+  </data>
+  <data name="MessageSoilReductionFactorsExperimental" xml:space="preserve">
+    <value>Soil reduction factors are preliminary and may be updated in a future release</value>
   </data>
   <data name="MessageSuggestedFertilizerRate" xml:space="preserve">
     <value>une dose d'application d’engrais suggérée de {0} {1} pour {2} avec un rendement de {3} {4} a été établie. cette valeur peut être ajustée au besoin.</value>
