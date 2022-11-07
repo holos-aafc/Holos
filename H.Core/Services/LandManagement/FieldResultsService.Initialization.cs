@@ -136,17 +136,6 @@ namespace H.Core.Services.LandManagement
             mapper.Map(cropDefaults, viewItem);
         }
 
-        /// <summary>
-        /// Assigns percentage of product returned to soil, etc. values to a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        public void AssignDefaultPercentageReturns(List<CropViewItem> viewItems, Defaults defaults)
-        {
-            foreach (var cropViewItem in viewItems)
-            {
-                this.AssignDefaultPercentageReturns(cropViewItem, defaults);
-            }
-        }
-
         public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
         {
             var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
@@ -202,9 +191,16 @@ namespace H.Core.Services.LandManagement
                 viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
             }
 
+            if (viewItem.CropType.IsCoverCrop())
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
+                viewItem.PercentageOfStrawReturnedToSoil = 100;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
+            }
+
             if (viewItem.HarvestMethod == HarvestMethods.Silage || viewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 35;
+                viewItem.PercentageOfProductYieldReturnedToSoil = 2;
                 viewItem.PercentageOfStrawReturnedToSoil = 0;
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
@@ -212,13 +208,6 @@ namespace H.Core.Services.LandManagement
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 100;
                 viewItem.PercentageOfStrawReturnedToSoil = 100;
-            }
-
-            if (viewItem.CropType.IsCoverCrop())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 100;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
         }
 

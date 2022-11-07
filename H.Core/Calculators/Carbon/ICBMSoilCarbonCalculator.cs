@@ -190,8 +190,8 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_ag
         /// 
-        /// Equation 2.2.2-2
-        /// Equation 2.2.2-4
+        /// Equation 2.1.2-2
+        /// Equation 2.1.2-4
         /// </summary>
         /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
@@ -221,8 +221,8 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_bg
         ///
-        /// Equation 2.2.2-3
-        /// Equation 2.2.2-5
+        /// Equation 2.1.2-3
+        /// Equation 2.1.2-5
         /// </summary>
         /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
@@ -246,12 +246,12 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_ptoSoil
         /// 
-        /// Equation 2.2.2-6
-        /// Equation 2.2.2-10
-        /// Equation 2.2.2-13
-        /// Equation 2.2.2-17
-        /// Equation 2.2.2-20
-        /// Equation 2.2.2-23
+        /// Equation 2.1.2-6
+        /// Equation 2.1.2-10
+        /// Equation 2.1.2-14
+        /// Equation 2.1.2-17
+        /// Equation 2.1.2-20
+        /// Equation 2.1.2-23
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -283,9 +283,8 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_s
         ///
-        /// Equation 2.2.2-7
-        /// Equation 2.2.2-14
-        /// Equation 2.2.2-18
+        /// Equation 2.1.2-7
+        /// Equation 2.1.2-18
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -320,11 +319,11 @@ namespace H.Core.Calculators.Carbon
         ///
         /// C_r
         /// 
-        /// Equation 2.2.2-8
-        /// Equation 2.2.2-11
-        /// Equation 2.2.2-15
-        /// Equation 2.2.2-21
-        /// Equation 2.2.2-24
+        /// Equation 2.1.2-8
+        /// Equation 2.1.2-11
+        /// Equation 2.1.2-15
+        /// Equation 2.1.2-21
+        /// Equation 2.1.2-24
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -374,12 +373,12 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_e
         /// 
-        /// Equation 2.2.2-9
-        /// Equation 2.2.2-12
-        /// Equation 2.2.2-16
-        /// Equation 2.2.2-19
-        /// Equation 2.2.2-22
-        /// Equation 2.2.2-25
+        /// Equation 2.1.2-9
+        /// Equation 2.1.2-12
+        /// Equation 2.1.2-16
+        /// Equation 2.1.2-19
+        /// Equation 2.1.2-22
+        /// Equation 2.1.2-25
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -444,7 +443,7 @@ namespace H.Core.Calculators.Carbon
             Farm farm)
         {
             // Estimate the value using the productivity calculation
-            var estimatedPlantCarbonInAgriculturalProduct = this.EstimatePlantCarbonInAgriculturalProductForNextYear(
+            var estimatedPlantCarbonInAgriculturalProductInNextYear = this.EstimatePlantCarbonInAgriculturalProductForNextYear(
                 nextYearViewItem: currentYearViewItem,
                 farm: farm);
             
@@ -458,7 +457,8 @@ namespace H.Core.Calculators.Carbon
 
                 if (currentYearViewItem.PlantCarbonInAgriculturalProduct > 0)
                 {
-                    /*
+                    /* Equation 2.1.2-20
+                     *
                      * Situation when C_p for current year (first year in this condition) is known
                      */
 
@@ -466,7 +466,8 @@ namespace H.Core.Calculators.Carbon
                 }
                 else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
                 {
-                    /*
+                    /* Equation 2.1.2-21
+                     *
                      * Situation when C_p for the current year (first year in this condition) is not known, but yield or C_p for subsequent year (second year in this condition)
                      * is known.
                      *
@@ -476,7 +477,7 @@ namespace H.Core.Calculators.Carbon
                     var plantCarbonInAgriculturalProductForNextYear = 0.0;
                     if (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0)
                     {
-                        // We will already have a calculate C_p value for the next year when the previous year set it for us (down below)
+                        // We will already have a calculated C_p value for the next year when the previous year set it for us (down below)
                         plantCarbonInAgriculturalProductForNextYear = nextYearViewItem.PlantCarbonInAgriculturalProduct;
                     }
                     else
@@ -488,8 +489,11 @@ namespace H.Core.Calculators.Carbon
                     }
 
                     // This year's C_p will be a fraction of next year's C_p
+                    
+                    // Equation 2.1.2-23
                     var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = plantCarbonInAgriculturalProductForNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
 
+                    // Equation 2.1.2-24
                     carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
                     // Since this year doesn't have any C_p, we assign the value now so that when we calculate C_r and C_e for this year, we will have a C_p value to work with
@@ -503,7 +507,7 @@ namespace H.Core.Calculators.Carbon
                      */
 
                     // This year's C_p will be a fraction of the estimated value for next year's C_p 
-                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = (estimatedPlantCarbonInAgriculturalProduct * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials);
+                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = (estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials);
 
                     carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
@@ -512,8 +516,11 @@ namespace H.Core.Calculators.Carbon
 
                     if (nextYearViewItem != null)
                     {
-                        // Set the the C_p for next year to be the calculated value
-                        nextYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantCarbonInAgriculturalProduct;
+                        /* Equation 2.1.2-25 
+                         *
+                         * Set the the C_p for next year to be the calculated value
+                         */
+                        nextYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantCarbonInAgriculturalProductInNextYear;
 
                         // Since we are assigning a calculated value to the next year's C_p value, we need to set a flag so that it doesn't get overwritten when we calculate C_p on the next iteration
                         nextYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
@@ -522,7 +529,8 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                /*
+                /* Equation 2.1.2-27
+                 *  
                  * Consider any year other than the first
                  */
 
@@ -540,7 +548,7 @@ namespace H.Core.Calculators.Carbon
                      * Situation when C_p for the current year is not known. Have to use estimated value
                      */
 
-                    var estimatedPlantC = estimatedPlantCarbonInAgriculturalProduct * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
+                    var estimatedPlantC = estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
 
                     carbonInputFromProduct = (estimatedPlantC)* (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
@@ -575,11 +583,15 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100);
+
+            // Equation 2.1.2-28
+            // Equation 2.1.2-30
+            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
             
             // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
             if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromRoots < previousYearViewItem.CarbonInputFromRoots)
             {
+                // Equation 2.1.2-32
                 carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
             }
 
@@ -608,11 +620,14 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
+            // Equation 2.1.2-29
+            // Equation 2.1.2-31
             var carbonInputFromExtraroots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
 
             // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
             if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
             {
+                // Equation 2.1.2-33
                 carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
             }
 
@@ -654,6 +669,10 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
+        /// <summary>
+        /// Equation 2.1.2-22
+        /// Equation 2.1.2-26
+        /// </summary>
         public double CalculateProductivity(
             double annualPrecipitation,
             double annualPotentialEvapotranspiration,

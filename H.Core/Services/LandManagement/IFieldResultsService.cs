@@ -36,8 +36,6 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultPercentageReturns(
             CropViewItem viewItem,
             Defaults defaults);
-
-        void AssignDefaultPercentageReturns(List<CropViewItem> viewItems, Defaults defaults);
         FieldSystemDetailsStageState GetStageState(Farm farm);
         void AssignDefaultLumCMaxValues(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultNitrogenFertilizerRate(CropViewItem viewItem, Farm farm,
