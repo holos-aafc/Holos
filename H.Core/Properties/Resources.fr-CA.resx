@@ -4313,6 +4313,9 @@
   <data name="Saskatchewan" xml:space="preserve">
     <value>Saskatchewan</value>
   </data>
+  <data name="SavingDataMessage" xml:space="preserve">
+    <value>Enregistrement des données, veuillez patienter.</value>
+  </data>
   <data name="Sawdust" xml:space="preserve">
     <value>sciure de bois</value>
   </data>

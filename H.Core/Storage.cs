@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Remoting.Messaging;
+using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
@@ -74,10 +75,14 @@ namespace H.Core
         public bool WasBackupRestored { get; set; } = false;
 
         /// <summary>
-        /// Returns the time a a particular backup was created
+        /// Returns the time a particular backup was created
         /// </summary>
         public DateTime BackupCreationTime { get; set; }
 
+        /// <summary>
+        /// Determines if a save has been successfully completed.
+        /// </summary>
+        public bool HasSaveCompleted { get; set; }
 
         #endregion
 
@@ -96,8 +101,26 @@ namespace H.Core
 
                 // Save to alternate file instead during exception
 
-                var path = DateTime.Now.ToString() + "_" + GetFullPathToStorageFile();
+                var path = GetFullPathToStorageFile().Replace(".json", "_" + DateTime.Now.ToString(_backupDateFormat) + ".json");
                 this.SaveInternal(path);
+            }
+        }
+
+        /// <summary>
+        /// Saves the user data asynchronously by calling the <see cref="SaveInternalAsync"/> method.
+        /// </summary>
+        /// <returns></returns>
+        public async Task SaveAsync()
+        {
+            try
+            {
+                var path = GetFullPathToStorageFile();
+                await SaveInternalAsync(path);
+            }
+            catch (Exception)
+            {
+                var path = GetFullPathToStorageFile().Replace(".json", "_" + DateTime.Now.ToString(_backupDateFormat) + ".json"); 
+                await SaveInternalAsync(path);
             }
         }
 
@@ -138,9 +161,13 @@ namespace H.Core
             return pathToBackupFile;
         }
 
+        /// <summary>
+        /// Writes user data to a file synchronously. Uses streams instead of JsonConvert.SerializeObject to write user data
+        /// prevent OutOfMemoryExceptions.
+        /// </summary>
+        /// <param name="path"></param>
         private void SaveInternal(string path)
         {
-            // Use streams instead of JsonConvert.SerializeObject to prevent OutOfMemoryExceptions
             using (StreamWriter fileStream = File.CreateText(path))
             {
                 JsonSerializer serializer = new JsonSerializer();
@@ -150,6 +177,30 @@ namespace H.Core
 
                 serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
             }
+        }
+
+
+        /// <summary>
+        /// Runs a task that serializes the user data asynchronously />
+        /// </summary>
+        /// <param name="path">The path to the file that needs to be serialized</param>
+        /// <returns></returns>
+        private async Task SaveInternalAsync(string path)
+        {
+            await Task.Run(() =>
+            {
+                using (StreamWriter fileStream = File.CreateText(path))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+
+                    // Serializer and deserializer must both have this set to Auto
+                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                    serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
+                    Trace.TraceInformation($"{nameof(Storage)}.{nameof(SaveInternalAsync)}: data serialization completed.");
+                    HasSaveCompleted = true;
+                }
+            });
         }
 
 

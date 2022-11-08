@@ -6460,6 +6460,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Holos 4.
+        /// </summary>
+        public static string HolosName {
+            get {
+                return ResourceManager.GetString("HolosName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Housed ewes.
         /// </summary>
         public static string HousedEwes {
@@ -13215,6 +13224,15 @@ namespace H.Core.Properties {
         public static string Saskatchewan {
             get {
                 return ResourceManager.GetString("Saskatchewan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving data, please wait..
+        /// </summary>
+        public static string SavingDataMessage {
+            get {
+                return ResourceManager.GetString("SavingDataMessage", resourceCulture);
             }
         }
         

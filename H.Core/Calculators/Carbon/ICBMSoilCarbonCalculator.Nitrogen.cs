@@ -10,7 +10,7 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        private readonly SingleYearNitrousOxideCalculator _singleYearNitrogenEmissionsCalculator = new SingleYearNitrousOxideCalculator();
+        private readonly N2OEmissionFactorCalculator _singleYearNitrogenEmissionsCalculator = new N2OEmissionFactorCalculator();
 
         #endregion
 

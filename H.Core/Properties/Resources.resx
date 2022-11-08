@@ -5294,4 +5294,10 @@
   <data name="MessageSoilReductionFactorsExperimental" xml:space="preserve">
     <value>Soil reduction factors are preliminary and may be updated in a future release</value>
   </data>
+  <data name="HolosName" xml:space="preserve">
+    <value>Holos 4</value>
+  </data>
+  <data name="SavingDataMessage" xml:space="preserve">
+    <value>Saving data, please wait.</value>
+  </data>
 </root>

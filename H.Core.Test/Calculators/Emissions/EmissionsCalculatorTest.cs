@@ -10,7 +10,7 @@ namespace H.Core.Test.Calculators.Emissions
     [TestClass]
     public class NitrogenEmissionsCalculatorTest
     {
-        private SingleYearNitrousOxideCalculator calc;
+        private N2OEmissionFactorCalculator calc;
 
         /// <summary>
         /// Gets or sets the test context which provides
@@ -21,7 +21,7 @@ namespace H.Core.Test.Calculators.Emissions
         [TestInitialize]
         public void testInitialize()
         {
-            calc = new SingleYearNitrousOxideCalculator();
+            calc = new N2OEmissionFactorCalculator();
         }
 
         /// <summary>

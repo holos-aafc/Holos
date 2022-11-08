@@ -97,7 +97,7 @@
     <Compile Include="Calculators\Emissions\LiquidManureMethaneEquationsCalculatorTest.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\MultiYearNitrousOxideCalculatorTest.cs" />
-    <Compile Include="Calculators\Nitrogen\SingleYearNitrousOxideCalculatorTest.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\Tier2NitrousOxideCalculatorTest.cs" />
     <Compile Include="Calculators\TillageFactorCalculatorTest.cs" />
     <Compile Include="Calculators\ShelterbeltCalculatorTest.cs" />

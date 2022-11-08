@@ -13,7 +13,7 @@ using H.Infrastructure;
 
 namespace H.Core.Calculators.Nitrogen
 {
-    public class SingleYearNitrousOxideCalculator
+    public class N2OEmissionFactorCalculator
     {
         #region Fields
 

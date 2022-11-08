@@ -153,7 +153,7 @@
     <Compile Include="Converters\UserTreeSpeciesStringConverter.cs" />
     <Compile Include="CoreConstants.cs" />
     <Compile Include="CoreModule.cs" />
-    <Compile Include="Calculators\Nitrogen\SingleYearNitrousOxideCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.cs" />
     <Compile Include="CustomAttributes\UnitsAttribute.cs" />
     <Compile Include="Emissions\EnergyCarbonDioxideEmissionsCalculator.cs" />
     <Compile Include="Emissions\Table_68_69_Expression_Of_Uncertainty_Calculator.cs" />

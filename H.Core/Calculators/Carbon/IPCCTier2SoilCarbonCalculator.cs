@@ -154,7 +154,7 @@ namespace H.Core.Calculators.Carbon
             var slope = cropData.SlopeValue;
             var intercept = cropData.InterceptValue;            
 
-            // Note that the yield must be converted to tons here since the curve expects a yield in tons when multiplying by slope
+            // Note that the yield must be converted to tons here since the curve equation expects a yield in tons when multiplying by slope
             var harvestRatio = this.CalculateHarvestRatio(
                 slope: slope,
                 freshWeightOfYield: viewItem.Yield,
@@ -169,7 +169,7 @@ namespace H.Core.Calculators.Carbon
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
             var finalAboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
-                aboveGroundResidueForCrop: viewItem.AboveGroundResidueDryMatter,
+                aboveGroundResidueDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
                 area: viewItem.Area,
                 fractionRenewed: fractionRenewed,
                 fractionBurned: 0, 
@@ -544,7 +544,7 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.2.2-3
         /// </summary>
-        /// <param name="aboveGroundResidueForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
+        /// <param name="aboveGroundResidueDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
         /// <param name="area">Area of field (ha)</param>
         /// <param name="fractionRenewed">(unitless)</param>
         /// <param name="fractionBurned">(unitless)</param>
@@ -552,14 +552,15 @@ namespace H.Core.Calculators.Carbon
         /// <param name="combustionFactor">(unitless)</param>
         /// <returns>Annual total amount of above-ground residue (kg year^-1)</returns>
         public double CalculateAnnualAboveGroundResidue(
-            double aboveGroundResidueForCrop,
+            double aboveGroundResidueDryMatterForCrop,
             double area,
             double fractionRenewed,
             double fractionBurned,
-            double fractionRemoved, double combustionFactor)
+            double fractionRemoved, 
+            double combustionFactor)
         {
             // Not considering burned residues right now
-            return aboveGroundResidueForCrop * area * fractionRenewed * (1 - fractionRemoved - (fractionBurned * combustionFactor));
+            return aboveGroundResidueDryMatterForCrop * area * fractionRenewed * (1 - fractionRemoved - (fractionBurned * combustionFactor));
         }
 
         /// <summary>

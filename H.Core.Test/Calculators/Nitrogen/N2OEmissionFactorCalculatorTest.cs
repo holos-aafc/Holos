@@ -8,11 +8,11 @@ using H.Core.Models;
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class SingleYearNitrousOxideCalculatorTest
+    public class N2OEmissionFactorCalculatorTest
     {
         #region Fields
 
-        private SingleYearNitrousOxideCalculator _calculator;
+        private N2OEmissionFactorCalculator _calculator;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestInitialize]
         public void TestInitialize()
         {
-            _calculator = new SingleYearNitrousOxideCalculator();
+            _calculator = new N2OEmissionFactorCalculator();
         }
 
         [TestCleanup]
