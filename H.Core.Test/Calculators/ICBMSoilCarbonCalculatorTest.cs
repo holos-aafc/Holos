@@ -379,7 +379,6 @@ namespace H.Core.Test.Calculators
 
         /// <summary>
         /// Equation 2.2.2-6
-        /// Equation 2.2.2-10
         /// Equation 2.2.2-13
         /// Equation 2.2.2-17
         /// Equation 2.2.2-20

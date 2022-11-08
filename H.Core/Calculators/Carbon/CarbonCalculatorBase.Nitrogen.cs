@@ -928,6 +928,8 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.1.2-34
+        ///
+        /// (kg C ha^-1)
         /// </summary>
         public double CalculateInputsFromSupplementalHayFedToGrazingAnimals(
             CropViewItem previousYearViewItem,
@@ -948,13 +950,13 @@ namespace H.Core.Calculators.Carbon
                 var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
 
                 // Total additional carbon that must be added to above ground inputs for the field - NOTE: moisture content is already considered in the above method call and so it
-                // is not included here as it is in the equation from the algorithm docuemtn
+                // is not included here as it is in the equation from the algorithm document
                 var totalCarbon = (totalDryMatterWeight * (1 - loss)) * currentYearViewItem.CarbonConcentration;
 
                 result += totalCarbon;
             }
 
-            return result;
+            return (result / currentYearViewItem.Area);
         }
     }
 }

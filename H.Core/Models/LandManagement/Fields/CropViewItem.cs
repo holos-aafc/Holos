@@ -1233,7 +1233,7 @@ namespace H.Core.Models.LandManagement.Fields
                 var volumeOfManure = manureApplication.AmountOfManureAppliedPerHectare;
                 var area = this.Area;
 
-                result += carbonFraction * volumeOfManure * area;
+                result += (carbonFraction * volumeOfManure * area);
             }
 
             return result;

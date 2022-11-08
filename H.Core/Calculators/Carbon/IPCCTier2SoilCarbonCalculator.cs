@@ -61,21 +61,21 @@ namespace H.Core.Calculators.Carbon
             var slowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
             var slowPoolFraction = slowPool / soc;
 
-            var customStartingActivePool = activePoolFraction * farm.StartingSoilOrganicCarbon;
-            var customStartingPassivePool = passivePoolFraction * farm.StartingSoilOrganicCarbon;
-            var customStartingSlowPool = slowPoolFraction * farm.StartingSoilOrganicCarbon;
+            // Equation 2.2.10-1
+            var customStartingActivePool = farm.StartingSoilOrganicCarbon * activePoolFraction;
+
+            // Equation 2.2.10-2
+            var customStartingPassivePool = farm.StartingSoilOrganicCarbon * passivePoolFraction;
+
+            // Equation 2.2.10-3
+            var customStartingSlowPool = farm.StartingSoilOrganicCarbon * slowPoolFraction;
 
             equilibriumYear.IpccTier2CarbonResults.ActivePool = customStartingActivePool;
             equilibriumYear.IpccTier2CarbonResults.PassivePool = customStartingPassivePool;
             equilibriumYear.IpccTier2CarbonResults.SlowPool = customStartingSlowPool;
 
-            // Equation 2.2.2-28
             currentYearViewItem.IpccTier2CarbonResults.ActivePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
-
-            // Equation 2.2.2-29
             currentYearViewItem.IpccTier2CarbonResults.SlowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
-
-            // Equation 2.2.2-30
             currentYearViewItem.IpccTier2CarbonResults.PassivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
 
             currentYearViewItem.SoilCarbon = farm.StartingSoilOrganicCarbon;
@@ -154,26 +154,22 @@ namespace H.Core.Calculators.Carbon
             var slope = cropData.SlopeValue;
             var intercept = cropData.InterceptValue;            
 
-            // Equation 2.2.3-1
+            // Note that the yield must be converted to tons here since the curve expects a yield in tons when multiplying by slope
             var harvestRatio = this.CalculateHarvestRatio(
                 slope: slope,
                 freshWeightOfYield: viewItem.Yield,
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            // Equation 2.2.3-2
-            var aboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
+            viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
                 harvestRatio: harvestRatio,
                 moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            viewItem.AboveGroundResidueDryMatter = aboveGroundResidueDryMatter;
-
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
-            // Equation 2.2.3-3
-            var aboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
-                aboveGroundResidueForCrop: aboveGroundResidueDryMatter,
+            var finalAboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
+                aboveGroundResidueForCrop: viewItem.AboveGroundResidueDryMatter,
                 area: viewItem.Area,
                 fractionRenewed: fractionRenewed,
                 fractionBurned: 0, 
@@ -182,10 +178,8 @@ namespace H.Core.Calculators.Carbon
 
             const double AboveGroundCarbonContent = 0.42;
 
-            var totalAboveGroundCarbonInputsForField = aboveGroundResidue * AboveGroundCarbonContent;
-
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
-            viewItem.AboveGroundCarbonInput = totalAboveGroundCarbonInputsForField / viewItem.Area;
+            viewItem.AboveGroundCarbonInput = (finalAboveGroundResidue * AboveGroundCarbonContent) / viewItem.Area;
 
             var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
                 previousYearViewItem: null,
@@ -195,27 +189,26 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
 
-            var rootToShoot = cropData.RSTRatio;
-            
-            // Equation 2.2.2-4
-            var belowGroundResidue = this.CalculateAnnualBelowGroundResidue(
-                aboveGroundResideDryMatterForCrop: aboveGroundResidueDryMatter,
-                shootToRootRatio: rootToShoot,
+            viewItem.BelowGroundResidueDryMatter = this.CalculateBelowGroundResidueDryMatter(
+                aboveGroundResideDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
+                shootToRootRatio: cropData.RSTRatio,
                 area: viewItem.Area,
                 fractionRenewed: fractionRenewed);
 
-            viewItem.BelowGroundResidueDryMatter = belowGroundResidue;
-
             const double BelowGroundCarbonContent = 0.42;
 
-            var totalBelowGroundCarbonInputsForField = belowGroundResidue * BelowGroundCarbonContent;
-
-            // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
-            viewItem.BelowGroundCarbonInput = totalBelowGroundCarbonInputsForField / viewItem.Area;
+            // Note that eq. 2.2.3-4 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
+            viewItem.BelowGroundCarbonInput = (viewItem.BelowGroundResidueDryMatter * BelowGroundCarbonContent) / viewItem.Area;
 
             viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
 
-            // Equation 2.2.3-5
+            /*
+             * Equation 2.2.2-10 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C
+             * here. We report results in kg C on graphs so the conversion to tons is not performed here.
+             *
+             * Since we report ICBM in kg C (not tons), we do not convert to tons here so output of pool calculations on chart can be compared to ICBM chart on same scale (i.e. kg C and not T C).
+             */
+
             viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare;  
         }
 
@@ -295,7 +288,6 @@ namespace H.Core.Calculators.Carbon
             var temperaturesForYear = climateData.GetMonthlyTemperaturesForYear(
                 year: currentYearViewItem.Year).Select(x => x.Value).ToList();
 
-            // Equation 2.2.2-12            
             currentYearViewItem.TFac = this.CalculateAverageAnnualTemperatureFactor(
                 monthlyAverageTemperatures: temperaturesForYear,
                 maximumTemperatureForDecomposition: maximumTemperature.Value,
@@ -305,7 +297,6 @@ namespace H.Core.Calculators.Carbon
                 parameter: ModelParameters.SlopeParameter,
                 tillageType: currentYearViewItem.TillageType);
 
-            // Equation 2.2.2-15            
             currentYearViewItem.WFac = this.CalculateAnnualWaterFactor(
                 monthlyTotalPrecipitations: precipitationsForYear,
                 monthlyTotalEvapotranspirations: evapotranspirationsForYear,
@@ -514,7 +505,7 @@ namespace H.Core.Calculators.Carbon
         #region Equations
 
         /// <summary>
-        /// Equation 2.2.3-1
+        /// Equation 2.2.2-1
         /// </summary>
         /// <param name="slope">(unitless)</param>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
@@ -527,7 +518,7 @@ namespace H.Core.Calculators.Carbon
             double intercept,
             double moistureContentAsPercentage)
         {
-            return slope * ((freshWeightOfYield / 1000) * (1 - moistureContentAsPercentage / 100)) + intercept;
+            return slope * ((freshWeightOfYield / 1000) * (1 - (moistureContentAsPercentage / 100.0))) + intercept;
         }
 
         /// <summary>
@@ -547,7 +538,7 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            return (freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100) ) / harvestRatio;
+            return (freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestRatio;
         }
 
         /// <summary>
@@ -579,7 +570,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="area">Area of field (ha)</param>
         /// <param name="fractionRenewed">(unitless)</param>
         /// <returns>Annual total amount of below-ground residue (kg year^-1)</returns>
-        public double CalculateAnnualBelowGroundResidue(
+        public double CalculateBelowGroundResidueDryMatter(
             double aboveGroundResideDryMatterForCrop,
             double shootToRootRatio,
             double area,
@@ -589,7 +580,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-11
+        /// Equation 2.2.3-1
         /// </summary>
         /// <param name="maximumMonthlyTemperatureForDecomposition">Maximum monthly air temperature for decomposition (degrees C)</param>
         /// <param name="monthlyTemperature">Average temperature for the month (degrees C)</param>
@@ -611,7 +602,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-12
+        /// Equation 2.2.3-2
         /// </summary>
         /// <param name="monthlyAverageTemperatures">Average temperatures for each month (degrees C)</param>
         /// <param name="maximumTemperatureForDecomposition">Maximum temperature for decomposition (degrees C)</param>
@@ -647,15 +638,15 @@ namespace H.Core.Calculators.Carbon
                         
             var sum = monthlyValues.Sum();
 
-            // There might be an imcomplete year where there isn't 12 values for temperature
+            // There might be an incomplete year where there isn't 12 values for temperature
             var annualTemperatureFactor = sum / numberOfMonths;
 
             return annualTemperatureFactor;
         }
 
         /// <summary>
-        /// Equation 2.2.2-13
-        /// Equation 2.2.2-14
+        /// Equation 2.2.3-3
+        /// Equation 2.2.3-4
         /// </summary>
         /// <param name="monthlyTotalPrecipitation">Total precipitation for month (mm)</param>
         /// <param name="monthlyTotalEvapotranspiration">Total evapotranspiration for month (mm)</param>
@@ -679,7 +670,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-15
+        /// Equation 2.2.3-5
         /// </summary>
         /// <param name="monthlyTotalPrecipitations">Total precipitation for each month (mm)</param>
         /// <param name="monthlyTotalEvapotranspirations">Total evapotranspiration for each month (mm)</param>
@@ -719,8 +710,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-16
-        /// Equation 2.2.2-39
+        /// Equation 2.2.3-6
         /// </summary>
         /// <param name="fractionDecayActivePoolToPassivePool">Fraction of active sub-pool decay products transferred to the slow sub-pool (proportion)</param>
         /// <param name="sand">Fraction of 0-30 cm soil mass that is sand (0.05 - 2 mm particles) (proportion)</param>
@@ -735,13 +725,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-17
-        /// Equation 2.2.2-28
+        /// Equation 2.2.3-7
         /// </summary>
-        /// <param name="totalCarbon">Total carbon input (tonnes C ha^-1 year^-1)</param>
+        /// <param name="totalInputs">Total carbon input (kg C ha^-1 year^-1)</param>
         /// <param name="nitrogenFraction">Nitrogen fraction of the carbon input, (unitless)</param>
         /// <param name="ligninContent">Lignin content of carbon input, (unitless)</param>
-        /// <returns>Carbon input to the metabolic dead organic matter carbon component (tonnes C ha^-1 year^-1)</returns>
+        /// <returns>Carbon input to the metabolic dead organic matter carbon component (kg C ha^-1 year^-1)</returns>
         public double CalculateAmountToDeadMatterComponent(
             double totalInputs,
             double nitrogenFraction,
@@ -761,10 +750,9 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-18
-        /// Equation 2.2.2-29
+        /// Equation 2.2.3-8
         /// </summary>
-        /// <param name="inputToDeadMatter">Caron input to the metabolic dead organic matter component (tonnes C ha^-1 year^-1)</param>
+        /// <param name="inputToDeadMatter">Carbon input to the metabolic dead organic matter component (kg C ha^-1 year^-1)</param>
         /// <param name="f1">Fraction of metabolic dead organic matter decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f2">Fraction of structural dead organic matter decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f3">Fraction of structural dead organic matter decay products transferred to the slow sub-pool (unitless)</param>
@@ -773,9 +761,9 @@ namespace H.Core.Calculators.Carbon
         /// <param name="f6">Fraction of slow sub-pool decay products transferred to the passive sub-pool (unitless)</param>
         /// <param name="f7">Fraction of slow sub-pool decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f8">Fraction of passive sub-pool decay products transferred to the active sub-pool (unitless)</param>
-        /// <param name="totalInputs">Total carbon input (tonnes C ha^-1 year^-1)</param>
+        /// <param name="totalInputs">Total carbon input (kg C ha^-1 year^-1)</param>
         /// <param name="ligninContent">Lignin content of carbon input (unitless)</param>
-        /// <returns>Carbon input to the active soil carbon sub-pool (tonnes C ha^-1)</returns>
+        /// <returns>Carbon input to the active soil carbon sub-pool (kg C ha^-1)</returns>
         public double CalculateAmountToActivePool(
             double inputToDeadMatter,
             double f1,
@@ -800,8 +788,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-19
-        /// Equation 2.2.2-42
+        /// Equation 2.2.3-9
         /// </summary>
         /// <param name="activePoolDecayRateConstant">Decay rate constant under optimal conditions for decomposition of the active SOC sub-pool (unitless)</param>
         /// <param name="temperatureFactor">Temperature effect on decomposition (unitless)</param>
@@ -822,8 +809,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-20
-        /// Equation 2.2.2-38
+        /// Equation 2.2.3-10
         /// </summary>
         /// <param name="slowPoolDecayRateConstant">Decay rate constant under optimal condition for decomposition of the slow carbon sub-pool, (year^-1)</param>
         /// <param name="temperatureFactor">Temperature effect on decomposition (unitless)</param>
@@ -842,8 +828,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-21
-        /// Equation 2.2.2-35
+        /// Equation 2.2.3-11
         /// </summary>
         /// <param name="passivePoolDecayRateConstant">Decay rate constant under optimal conditions for decomposition of the slow carbon sub-pool, (year^1)</param>
         /// <param name="temperatureFactor">Temperature effect on decomposition, (unitless)</param>
@@ -860,13 +845,11 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-22
-        /// Equation 2.2.2-43
-        /// Equation 2.7.3-3
+        /// Equation 2.2.3-12
         /// </summary>
-        /// <param name="inputsToActiveSubPool">Carbon input to the active SOC sub-pool, (tonnes C ha^-1 year^-1)</param>
+        /// <param name="inputsToActiveSubPool">Carbon input to the active SOC sub-pool, (kg C ha^-1 year^-1)</param>
         /// <param name="decayRateForActivePool">Decay rate for active SOC sub-pool (unitless)</param>
-        /// <returns>Steady state active sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</returns>
+        /// <returns>Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</returns>
         public double CalculateSteadyStateActivePool(
             double inputsToActiveSubPool,
             double decayRateForActivePool)
@@ -882,14 +865,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-23
-        /// Equation 2.2.2-44
-        /// Equation 2.7.3-4
+        /// Equation 2.2.3-13
         /// </summary>
-        /// <param name="activePoolAtPreviousInterval">Active sub-pool SOC stock in previous year, (tonnes C ha^-1)</param>
-        /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="activePoolAtPreviousInterval">Active sub-pool SOC stock in previous year, (kg C ha^-1)</param>
+        /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="decayRateForActivePool">decay rate for active SOC sub-pool, (year^-1)</param>
-        /// <returns>Active sub-pool SOC stock in year y, (tonnes C ha^-1)</returns>
+        /// <returns>Active sub-pool SOC stock in year y, (kg C ha^-1)</returns>
         public double CalculateActivePoolAtCurrentInterval(
             double activePoolAtPreviousInterval,
             double activePoolSteadyState,
@@ -906,18 +887,16 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-24
-        /// Equation 2.2.2-40
-        /// Equation 2.7.3-5
+        /// Equation 2.2.3-14
         /// </summary>
-        /// <param name="totalInputs">Total carbon input, (tonnes C ha^-1)</param>
+        /// <param name="totalInputs">Total carbon input, (kg C ha^-1)</param>
         /// <param name="ligninContent">Lignin content of carbon input, (unitless)</param>
         /// <param name="f3">Fraction of structural dead organic matter decay products transferred to the slow sub-pool (unitless)</param>
-        /// <param name="steadyStateActivePool">Steady state active sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="steadyStateActivePool">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="activePoolDecayRate">Decay rate for active carbon sub-pool in the soil, (year^-1)</param>
         /// <param name="f4">Fraction of active sub-pool decay products transferred to the slow sub-pool (unitless)</param>
         /// <param name="decayRateSlowPool">Decay rate for slow SOC sub-pool, (year^-1)</param>
-        /// <returns>Steady state slow sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</returns>
+        /// <returns>Steady state slow sub-pool SOC stock given conditions in year y, (kg C ha^-1)</returns>
         public double CalculateSteadyStateSlowPool(
             double totalInputs,
             double ligninContent,
@@ -936,14 +915,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-25
-        /// Equation 2.2.2-41
-        /// Equation 2.7.3-6
+        /// Equation 2.2.3-15
         /// </summary>
-        /// <param name="slowPoolAtPreviousInterval">Slow sub-pool SOC stock in previous year, (tonnes C ha^-1)</param>
-        /// <param name="slowPoolSteadyState">Steady state slow sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="slowPoolAtPreviousInterval">Slow sub-pool SOC stock in previous year, (kg C ha^-1)</param>
+        /// <param name="slowPoolSteadyState">Steady state slow sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="slowPoolDecayRate">Decay rate for slow SOC sub-pool, (year^-1)</param>
-        /// <returns>Slow sub-pool SOC stock in y, (tonnes C ha^-1)</returns>
+        /// <returns>Slow sub-pool SOC stock in y, (kg C ha^-1)</returns>
         public double CalculateSlowPoolAtInterval(
             double slowPoolAtPreviousInterval,
             double slowPoolSteadyState,
@@ -960,18 +937,16 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-26
-        /// Equation 2.2.2-36
-        /// Equation 2.7.3-7
+        /// Equation 2.2.3-16
         /// </summary>
-        /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="activePoolDecayRate">Decay rate for active carbon sub-pool in the soil, (year^-1)</param>
         /// <param name="f5">Fraction of active sub-pool decay products transferred to the slow sub-pool, (unitless)</param>
-        /// <param name="slowPoolSteadyState">Steady state slow sub-pool SOC stock given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="slowPoolSteadyState">Steady state slow sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="slowPoolDecayRate">Decay rate for slow SOC sub-pool, (year^-1)</param>
         /// <param name="f6">Fraction of slow sub-pool decay products transferred to the passive sub-pool, (unitless)</param>
         /// <param name="passivePoolDecayRate">Decay rate for passive SOC sub-pool, (year^-1)(</param>
-        /// <returns>Steady state passive sub-pool SOC given conditions in year y, (tonnes C ha^-1)</returns>
+        /// <returns>Steady state passive sub-pool SOC given conditions in year y, (kg C ha^-1)</returns>
         public double CalculatePassivePoolSteadyState(
             double activePoolSteadyState,
             double activePoolDecayRate,
@@ -995,14 +970,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-27
-        /// Equation 2.2.2-37
-        /// Equation 2.7.3-8
+        /// Equation 2.2.3-17
         /// </summary>
-        /// <param name="passivePoolAtPreviousInterval">Passive sub-pool SOC stock in previous year, (tonnes C ha^-1)</param>
-        /// <param name="passivePoolSteadyState">Steady state passive sub-pool SOC given conditions in year y, (tonnes C ha^-1)</param>
+        /// <param name="passivePoolAtPreviousInterval">Passive sub-pool SOC stock in previous year, (kg C ha^-1)</param>
+        /// <param name="passivePoolSteadyState">Steady state passive sub-pool SOC given conditions in year y, (kg C ha^-1)</param>
         /// <param name="passivePoolDecayRate">Decay rate for passive SOC sub-pool, (year^-1)</param>
-        /// <returns>Passive sub-pool SOC stock in year y, (tonnes C ha^-1)</returns>
+        /// <returns>Passive sub-pool SOC stock in year y, (kg C ha^-1)</returns>
         public double CalculatePassivePoolAtInterval(
             double passivePoolAtPreviousInterval,
             double passivePoolSteadyState,
@@ -1019,13 +992,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-45
-        /// Equation 2.7.3-14
+        /// Equation 2.2.10-4
         /// </summary>
-        /// <param name="activePool">Active sub-pool SOC stock in year y for grid cell or region, (tonnes C ha^-1)</param>
-        /// <param name="passivePool">Passive sub-pool SOC stock in year y for grid cell or region, (tonnes C ha^-1)</param>
-        /// <param name="slowPool">Slow sub-pool SOC stock in year y for grid cell or region, (tonnes C ha^-1)</param>
-        /// <returns>SOC stock at the end of the current year y for grid cell or region , (tonnes C ha^-1)</returns>
+        /// <param name="activePool">Active sub-pool SOC stock in year y for grid cell or region, (kg C ha^-1)</param>
+        /// <param name="passivePool">Passive sub-pool SOC stock in year y for grid cell or region, (kg C ha^-1)</param>
+        /// <param name="slowPool">Slow sub-pool SOC stock in year y for grid cell or region, (kg C ha^-1)</param>
+        /// <returns>SOC stock at the end of the current year y for grid cell or region , (kg C ha^-1)</returns>
         public double CalculateTotalStocks(
             double activePool,
             double passivePool,
@@ -1035,12 +1007,11 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2.46
-        /// Equation 2.7.3-15
+        /// Equation 2.2.10-5
         /// </summary>
-        /// <param name="socAtYear">SOC stock at the end of the current year y for grid cell or region, (tonnes C ha^-1)</param>
-        /// <param name="socAtPreviousYear">SOC stock at the end of the previous year for grid cell or region, (tonnes C ha^-1)</param>
-        /// <returns>Annual stock change factor for mineral soils in grid cell or region i, (tonnes C ha^-1)</returns>
+        /// <param name="socAtYear">SOC stock at the end of the current year y for grid cell or region, (kg C ha^-1)</param>
+        /// <param name="socAtPreviousYear">SOC stock at the end of the previous year for grid cell or region, (kg C ha^-1)</param>
+        /// <returns>Annual stock change factor for mineral soils in grid cell or region i, (kg C ha^-1)</returns>
         public double CalculateStockChange(
             double socAtYear,
             double socAtPreviousYear)

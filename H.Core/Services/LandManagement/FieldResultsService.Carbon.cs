@@ -299,10 +299,10 @@ namespace H.Core.Services.LandManagement
 
                 // Equation 2.1.3-3
                 equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInputsPerHectare);
+
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
 
-                
                 equilibriumCarbonInputFromProduct = viewItemsInRotation.Average(x => x.CarbonInputFromProduct);
                 equilibriumCarbonInputFromStraw = viewItemsInRotation.Average(x => x.CarbonInputFromStraw);
                 equilibriumCarbonInputFromRoots = viewItemsInRotation.Average(x => x.CarbonInputFromRoots);
@@ -352,8 +352,6 @@ namespace H.Core.Services.LandManagement
 
                 // Equation 2.1.3-8
                 var youngPoolAboveGround = result.AboveGroundCarbonInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
-
-
 
                 result.YoungPoolSoilCarbonAboveGround = youngPoolAboveGround;
             }
