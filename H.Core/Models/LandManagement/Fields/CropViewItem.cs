@@ -1161,6 +1161,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// Equation 4.6.1-2
+        /// 
         /// (kg N)
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockInYear()

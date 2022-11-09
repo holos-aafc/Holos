@@ -315,15 +315,14 @@ namespace H.Core.Calculators.Carbon
 
         protected void CalculateNitrousOxide(CropViewItem currentYearResults, Farm farm)
         {
-            var emissionFactorForSyntheticFertilizer =
-                N2OEmissionFactorCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
-            var emissionFactorForCropResidues =
-                N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
-            var emissionFactorForOrganicNitrogen =
-                N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
-            var directN2ONFromLandAppliedManure =
-                N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(
-                    currentYearResults, farm);
+            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(currentYearResults.Year);
+
+            var emissionFactorForSyntheticFertilizer = N2OEmissionFactorCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
+            var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
+            var emissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
+            var weightedEmissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsForYear, farm);
+            var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(currentYearResults, farm);
+            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverEmissionsForField(this.AnimalComponentEmissionsResults, farm, currentYearResults, weightedEmissionFactorForOrganicNitrogen);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -341,8 +340,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.5-5
             // Equation 2.7.4-5
-            this.N2O_NFromOrganicNitrogen =
-                (this.OrganicPool * emissionFactorForOrganicNitrogen) + directN2ONFromLandAppliedManure;
+            this.N2O_NFromOrganicNitrogen = (this.OrganicPool * emissionFactorForOrganicNitrogen) + directN2ONFromLandAppliedManure + directN2ONFromLandAppliedManureNotAppliedToAnyField;
         }
 
         protected void CalculateNitricOxide(double nORatio)
@@ -888,6 +886,10 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
+        /// <summary>
+        /// Calculates the amount of N from manure added to the field after losses from emissions have been calculated on a per hectare basis
+        /// </summary>
+        /// <returns>Amount of N from manure (kg N ha^-1)</returns>
         protected double GetManureNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
         {
             var totalDirectN2ONFromLandAppliedManure =

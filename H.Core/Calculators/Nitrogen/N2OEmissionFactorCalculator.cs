@@ -187,7 +187,6 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
-
         /// <summary>
         /// Equation 4.6.2-2
         /// </summary>
@@ -277,19 +276,8 @@ namespace H.Core.Calculators.Nitrogen
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
                 croppingSystemModifier: croppingSystemModifier,
                 tillageModifier: tillageModifier,
-                nitrogenSourceModifier: nitrogenSourceModifier);
-
-
-            /*
-             * Equation 2.5.1-8
-             *
-             * Soil reduction factor only considered when calculating emission factor for synthetic nitrogen
-             */
-
-            if (viewItem.SoilReductionFactor != SoilReductionFactors.None)
-            {
-                syntheticNitrogenEmissionFactor *= soilReductionFactor;
-            }
+                nitrogenSourceModifier: nitrogenSourceModifier, 
+                applicationMethodReductionFactor: soilReductionFactor);
 
             return syntheticNitrogenEmissionFactor;
         }
@@ -338,7 +326,6 @@ namespace H.Core.Calculators.Nitrogen
             var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
                 nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
-            // Equation 2.5.1-8
             var emissionFactorForCropResidues = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
                 croppingSystemModifier: croppingSystemModifier,
@@ -375,8 +362,7 @@ namespace H.Core.Calculators.Nitrogen
         /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
         /// from land applied manure.
         /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(FarmEmissionResults farmEmissionResults,
-            List<CropViewItem> itemsByYear)
+        public double CalculateWeightedOrganicNitrogenEmissionFactor(List<CropViewItem> itemsByYear, Farm farm)
         {
             var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
 
@@ -384,7 +370,7 @@ namespace H.Core.Calculators.Nitrogen
             {
                 var emissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
                     viewItem: cropViewItem,
-                    farm: farmEmissionResults.Farm);
+                    farm: farm);
 
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {
@@ -396,6 +382,90 @@ namespace H.Core.Calculators.Nitrogen
             var weightedEmissionFactor = this.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
 
             return weightedEmissionFactor;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-4
+        /// </summary>
+        public double CalculateTotalNitrogenFromLandManureRemaining(
+            double totalManureAvailableForLandApplication,
+            double totalManureAlreadyAppliedToFields,
+            double totalManureExported)
+        {
+            var result = totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
+            if (result < 0)
+            {
+                // Can't have a negative value of manure remaining
+                result = 0;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-5
+        /// </summary>
+        public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
+            double weightedEmissionFactor,
+            double totalNitrogenFromLandManureRemaining)
+        {
+
+            var result = totalNitrogenFromLandManureRemaining * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-6
+        /// </summary>
+        public double CalculateLeftOverEmissionsForField(
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
+            Farm farm,
+            CropViewItem viewItem,
+            double weightedEmissionFactor)
+        {
+            // Get all fields that exist in the same year
+            var itemsInYear = farm.GetCropDetailViewItems().Where(x => x.Year == viewItem.Year).ToList();
+
+            // This is the total amount of N from all animals that is available for land application
+            var totalNitrogenAvailableForLandApplication = animalComponentEmissionsResults.TotalNitrogenAvailableForLandApplication();
+
+            // This is the total amount of N that the user has specified is applied to all fields
+            var totalManureNitrogenAppliedToAllFields = itemsInYear.Sum(x => x.GetTotalManureNitrogenAppliedFromLivestockInYear());
+
+            // The total N after all applications and exports have been subtracted
+            var totalNitrogenRemaining = this.CalculateTotalNitrogenFromLandManureRemaining(
+                totalNitrogenAvailableForLandApplication, 
+                totalManureNitrogenAppliedToAllFields, 
+                0);
+
+            // The total N2O-N from the remaining N
+            var emissionsFromNitrogenRemaining = this.CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
+                weightedEmissionFactor: weightedEmissionFactor,
+                totalNitrogenFromLandManureRemaining: totalNitrogenRemaining);
+
+            var totalAreaOfAllFields = itemsInYear.Sum(x => x.Area);
+            var areaOfField = viewItem.Area;
+
+            // The total N2O-N that is left over and must be applied to this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
+            var result = emissionsFromNitrogenRemaining * (areaOfField / (double) totalAreaOfAllFields);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-7
+        /// </summary>
+        public double CalculateTotalEmissionsFromExportedManure(
+            Farm farm,
+            double totalExportedManure,
+            List<CropViewItem> itemsByYear)
+        {
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
+
+            var result = totalExportedManure * weightedEmissionFactor;
+
+            return result;
         }
 
         /// <summary>
@@ -476,21 +546,6 @@ namespace H.Core.Calculators.Nitrogen
             const double temperatureFactor = -0.402;
 
             var result = (100 * Math.Exp(cropTypeFactor + fertilizerTypeFactor + methodOfApplicationFactor + soilPhFactor + soilCecFactor + temperatureFactor)) / 100;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-6
-        /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(
-            FarmEmissionResults farmEmissionResults,
-            double totalExportedManure,
-            List<CropViewItem> itemsByYear)
-        {
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(farmEmissionResults, itemsByYear);
-
-            var result = totalExportedManure * weightedEmissionFactor;
 
             return result;
         }
@@ -628,14 +683,15 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="croppingSystemModifier">Cropping system modifier (Ann = Annual, Per = Perennial)</param>
         /// <param name="tillageModifier">tillage modifier RF_Till (Conservation or Conventional Tillage)</param>
         /// <param name="nitrogenSourceModifier">N source modifier RF_NSk (SN = Synthetic Nitrogen; ON = Organic Nitrogen; CRN = Crop Residue Nitrogen)</param>
+        /// <param name="applicationMethodReductionFactor">Reduction factor based on application method, only applicable to calculations of EF specific for SN</param>
         /// <returns>The EF considering the impact of the N source on the cropping system and site dependent factors associated with rainfall, topography, soil texture, N source type, tillage, cropping system and moisture managment (kg N2O-N kg-1 N) for ecodistrict ‘‘i’’.</returns>
-        public double CalculateEmissionFactor(
-            double baseEcodistictEmissionFactor, 
-            double croppingSystemModifier, 
-            double tillageModifier, 
-            double nitrogenSourceModifier)
+        public double CalculateEmissionFactor(double baseEcodistictEmissionFactor,
+            double croppingSystemModifier,
+            double tillageModifier,
+            double nitrogenSourceModifier, 
+            double applicationMethodReductionFactor = 1.0)
         {
-            var result = baseEcodistictEmissionFactor * croppingSystemModifier * tillageModifier * nitrogenSourceModifier;
+            var result = baseEcodistictEmissionFactor * croppingSystemModifier * tillageModifier * nitrogenSourceModifier * applicationMethodReductionFactor;
 
             return result;
         }

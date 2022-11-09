@@ -557,7 +557,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg N)
         /// </summary>
-        public double TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication
+        public double TotalAvailableManureNitrogenAvailableForLandApplication
         {
             get
             {

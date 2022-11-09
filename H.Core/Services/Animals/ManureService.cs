@@ -125,7 +125,7 @@ namespace H.Core.Services.Animals
                 {
                     foreach (var managementPeriod in animalComponentGroup.ManagementPeriods)
                     {
-                        for (int i = managementPeriod.Start.Year; i < managementPeriod.End.Year; i++)
+                        for (int i = managementPeriod.Start.Year; i <= managementPeriod.End.Year; i++)
                         {
                             years.Add(i);
                         }

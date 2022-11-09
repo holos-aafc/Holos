@@ -1583,6 +1583,8 @@ namespace H.Core.Test.Calculators
                 Province = Province.Alberta,
             };
 
+            farm.StageStates.Add(new FieldSystemDetailsStageState() {DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>() {cropViewItem}});
+
             var soilData = new SoilData()
             {
                 EcodistrictId = 812,

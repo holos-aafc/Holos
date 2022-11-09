@@ -16,49 +16,7 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-        /// <summary>
-        /// Equation 4.6.1-2
-        ///
-        /// (kg N)
-        /// </summary>
-        public double CalculateTotalManureNitrogenAppliedToAllFields(FarmEmissionResults farmEmissionResults,
-            List<CropViewItem> itemsInYear)
-        {
-            var result = 0d;
 
-            foreach (var cropViewItem in itemsInYear)
-            {
-                var appliedNitrogenFromManure = cropViewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
-
-                result += appliedNitrogenFromManure;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-4
-        /// </summary>
-        public double CalculateTotalNitrogenFromLandManureRemaining(
-            double totalManureAvailableForLandApplication,
-            double totalManureAlreadyAppliedToFields,
-            double totalManureExported)
-        {
-            return totalManureAvailableForLandApplication - totalManureAlreadyAppliedToFields - totalManureExported;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-5
-        /// </summary>
-        public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
-            double weightedEmissionFactor,
-            double totalNitrogenFromLandManureRemaining)
-        {
-
-            var result = totalNitrogenFromLandManureRemaining * weightedEmissionFactor;
-
-            return result;
-        }
 
         /// <summary>
         /// Calculate amount of nitrogen input from all manure applications in a year

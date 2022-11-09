@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
@@ -112,7 +114,54 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.IsTrue(result > 0);
         }
 
-        #endregion 
+        #endregion
+
+        [TestMethod]
+        public void CalculateLeftOverEmissionsForField()
+        {
+            var farm = new Farm();
+            var stageState = new FieldSystemDetailsStageState();
+            farm.StageStates.Add(stageState);
+
+            var viewItem1 = new CropViewItem() {Year = 2021};
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem1);
+
+            var viewItem2 = new CropViewItem() { Year = 2021 };
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem2);
+
+            var manureApplication = new ManureApplicationViewItem()
+            {
+                DateOfApplication = new DateTime(2021, 1, 1),
+                ManureLocationSourceType = ManureLocationSourceType.Livestock,
+                AmountOfNitrogenAppliedPerHectare = 50
+            };
+
+            viewItem1.ManureApplicationViewItems.Add(manureApplication);
+
+            var groupEmissionsByDay = new GroupEmissionsByDay() {NitrogenAvailableForLandApplication = 100};
+            var animalResults = new AnimalComponentEmissionsResults()
+            {
+                EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
+                {
+                    new AnimalGroupEmissionResults()
+                    {
+                        GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
+                        {
+                            new GroupEmissionsByMonth(new MonthsAndDaysData(),
+                                new List<GroupEmissionsByDay>() {groupEmissionsByDay})
+                        }
+                    }
+                }
+            };
+
+            var result = _calculator.CalculateLeftOverEmissionsForField(
+                new List<AnimalComponentEmissionsResults>() {animalResults}, 
+                farm, 
+                viewItem1,
+                0.25);
+
+            Assert.AreEqual(6.25, result);
+        }
 
         #endregion
     }

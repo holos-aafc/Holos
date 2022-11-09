@@ -192,7 +192,7 @@ namespace H.Core.Providers.Soil
         /// <returns></returns>
         public double GetReductionFactorBasedOnApplicationMethod(SoilReductionFactors soilReductionFactors)
         {
-            var defaultValue = 0d;
+            var defaultValue = 1d;
             switch (soilReductionFactors)
             {
                 case SoilReductionFactors.ControlledRelease:
@@ -208,7 +208,7 @@ namespace H.Core.Providers.Soil
                     return 0.94;
 
                 case SoilReductionFactors.None:
-                    return 0;
+                    return 1;
 
                 default:
                     Trace.TraceError($"{nameof(Table_16_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetReductionFactorBasedOnApplicationMethod)} " +

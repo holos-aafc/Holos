@@ -211,7 +211,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public static double TotalNitrogenAvailableForLandApplication(this IEnumerable<AnimalComponentEmissionsResults> results)
         {
-            return results.Sum(result => result.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication);
+            return results.Sum(result => result.TotalAvailableManureNitrogenAvailableForLandApplication);
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace H.Core.Emissions.Results
 
             foreach (var result in results)
             {
-                total += result.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
+                total += result.TotalAvailableManureNitrogenAvailableForLandApplication;
             }
 
             return total;

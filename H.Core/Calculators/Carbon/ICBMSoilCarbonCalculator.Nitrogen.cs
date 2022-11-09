@@ -173,6 +173,40 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
+        /// Equation 2.6.3-1
+        ///
+        /// The amount of manure N in the pool after decomposition has occurred.
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        public double CalculateManureResiduePoolAtStartingPoint(
+            double manureInputs,
+            double decompositionRateConstantYoungPool,
+            double climateParameter)
+        { 
+            var result = (manureInputs * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 2.6.3-2
+        ///
+        /// The amount of manure N in the pool after decomposition has occurred.
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        public double CalculateManureResiduePoolAtInterval(double manureResidueNitrogenPoolAtPreviousInterval,
+            double manureInputsAtPreviousInterval,
+            double decompositionRateYoungPool,
+            double climateParameter)
+        {
+            var result = (manureResidueNitrogenPoolAtPreviousInterval + manureInputsAtPreviousInterval) * Math.Exp((-1) * decompositionRateYoungPool * climateParameter);
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 2.6.4-1
         /// </summary>
         public double CalculateCropResiduesAtStartingPoint(
@@ -200,32 +234,6 @@ namespace H.Core.Calculators.Carbon
         {
             var result = ((aboveGroundResidueNitrogenForFieldAtPreviousInterval + aboveGroundResidueNitrogenForCropAtPreviousInterval) - aboveGroundResidueNitrogenForFieldAtCurrentInterval) +
                          ((belowGroundResidueNitrogenForFieldAtPreviousInterval + belowGroundResidueNitrogenForCropAtPreviousInterval) - belowGroundResidueNitrogenForFieldAtCurrentInterval);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.6.3-1
-        /// </summary>
-        public double CalculateManureResiduePoolAtStartingPoint(
-            double manureInputs,
-            double decompositionRateConstantYoungPool,
-            double climateParameter)
-        { 
-            var result = (manureInputs * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.6.3-2
-        /// </summary>
-        public double CalculateManureResiduePoolAtInterval(double manureResidueNitrogenPoolAtPreviousInterval,
-            double manureInputsAtPreviousInterval,
-            double decompositionRateYoungPool,
-            double climateParameter)
-        {
-            var result = (manureResidueNitrogenPoolAtPreviousInterval + manureInputsAtPreviousInterval) * Math.Exp((-1) * decompositionRateYoungPool * climateParameter);
 
             return result;
         }
@@ -357,10 +365,8 @@ namespace H.Core.Calculators.Carbon
 
             if (this.YearIndex == 0) 
             {
-                // N_ICBM_(t)
                 this.CurrentYearResults.ManureResidueN = base.GetManureNitrogenResiduesForYear(farm, this.CurrentYearResults);
 
-                // N_m
                 this.ManurePool = this.CalculateManureResiduePoolAtStartingPoint(
                     manureInputs: this.CurrentYearResults.ManureResidueN,
                     decompositionRateConstantYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
@@ -368,10 +374,8 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                // N_ICBM_(t-1)
                 this.CurrentYearResults.ManureResidueN = base.GetManureNitrogenResiduesForYear(farm, this.PreviousYearResults);
 
-                // N_m
                 this.ManurePool = this.CalculateManureResiduePoolAtInterval(
                     manureResidueNitrogenPoolAtPreviousInterval: base.PreviousYearResults.ManureResiduePool_ManureN,
                     manureInputsAtPreviousInterval: this.CurrentYearResults.ManureResidueN,

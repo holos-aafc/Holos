@@ -1035,6 +1035,11 @@ namespace H.Core.Models
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
         }
 
+        public List<CropViewItem> GetCropDetailViewItemsByYear(int year)
+        {
+            return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+        }
+
         /// <summary>
         /// Return a list 
         /// </summary>
