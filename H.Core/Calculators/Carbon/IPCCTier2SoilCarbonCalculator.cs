@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Windows;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -43,40 +44,42 @@ namespace H.Core.Calculators.Carbon
         #region Methods
 
         /// <summary>
-        /// Allow the user to specify a custom starting carbon value for the simulation.
+        /// Allow the user to specify a custom starting (measured) carbon value for the simulation. When specifying a custom starting point, a run-in period
+        /// calculation will have been made and used to determine what fraction of the stocks goes to the active, passive, and slow pools. These fractions
+        /// are then used to determine what fractions of the user-defined starting (measured) stocks are distributed to the active, passive, and slow pools.
         /// </summary>
-        public void AssignCustomStartPoint(CropViewItem equilibriumYear, Farm farm, CropViewItem currentYearViewItem)
+        public void AssignCustomStartPoint(CropViewItem runInPeriodResults, Farm farm, CropViewItem currentYearViewItem)
         {
-            var soc = equilibriumYear.SoilCarbon;
+            // Active pool fraction as determined by the run-in period
+            var activePoolFraction = runInPeriodResults.IpccTier2CarbonResults.ActivePool / runInPeriodResults.SoilCarbon;
 
-            // Active pool fraction
-            var activePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
-            var activePoolFraction = activePool / soc;
+            // Passive pool fraction as determined by the run-in period
+            var passivePoolFraction = runInPeriodResults.IpccTier2CarbonResults.PassivePool / runInPeriodResults.SoilCarbon;
 
-            // Passive pool fraction
-            var passivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
-            var passivePoolFraction = passivePool / soc;
+            // Slow pool fraction as determined by the run-in period
+            var slowPoolFraction = runInPeriodResults.IpccTier2CarbonResults.SlowPool / runInPeriodResults.SoilCarbon;
 
-            // Slow pool fraction
-            var slowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
-            var slowPoolFraction = slowPool / soc;
+            runInPeriodResults.IpccTier2CarbonResults.ActivePool = farm.StartingSoilOrganicCarbon * activePoolFraction;
+            runInPeriodResults.IpccTier2CarbonResults.PassivePool = farm.StartingSoilOrganicCarbon * passivePoolFraction;
+            runInPeriodResults.IpccTier2CarbonResults.SlowPool = farm.StartingSoilOrganicCarbon * slowPoolFraction;
 
             // Equation 2.2.10-1
-            var customStartingActivePool = farm.StartingSoilOrganicCarbon * activePoolFraction;
+            currentYearViewItem.IpccTier2CarbonResults.ActivePool = farm.StartingSoilOrganicCarbon * activePoolFraction;
 
             // Equation 2.2.10-2
-            var customStartingPassivePool = farm.StartingSoilOrganicCarbon * passivePoolFraction;
+            currentYearViewItem.IpccTier2CarbonResults.SlowPool = farm.StartingSoilOrganicCarbon * slowPoolFraction;
 
             // Equation 2.2.10-3
-            var customStartingSlowPool = farm.StartingSoilOrganicCarbon * slowPoolFraction;
+            currentYearViewItem.IpccTier2CarbonResults.PassivePool = farm.StartingSoilOrganicCarbon * passivePoolFraction;
 
-            equilibriumYear.IpccTier2CarbonResults.ActivePool = customStartingActivePool;
-            equilibriumYear.IpccTier2CarbonResults.PassivePool = customStartingPassivePool;
-            equilibriumYear.IpccTier2CarbonResults.SlowPool = customStartingSlowPool;
+            // Equation 2.7.3-11
+            currentYearViewItem.IpccTier2NitrogenResults.ActivePool = activePoolFraction * farm.StartingSoilOrganicCarbon * farm.Defaults.ActiveCarbonN;
 
-            currentYearViewItem.IpccTier2CarbonResults.ActivePool = equilibriumYear.IpccTier2CarbonResults.ActivePool;
-            currentYearViewItem.IpccTier2CarbonResults.SlowPool = equilibriumYear.IpccTier2CarbonResults.SlowPool;
-            currentYearViewItem.IpccTier2CarbonResults.PassivePool = equilibriumYear.IpccTier2CarbonResults.PassivePool;
+            // Equation 2.7.3-12
+            currentYearViewItem.IpccTier2NitrogenResults.SlowPool = activePoolFraction * farm.StartingSoilOrganicCarbon * farm.Defaults.SlowCarbonN;
+
+            // Equation 2.7.3-13
+            currentYearViewItem.IpccTier2NitrogenResults.PassivePool = activePoolFraction * farm.StartingSoilOrganicCarbon * farm.Defaults.OldPoolCarbonN;
 
             currentYearViewItem.SoilCarbon = farm.StartingSoilOrganicCarbon;
         }
@@ -101,22 +104,27 @@ namespace H.Core.Calculators.Carbon
 
             for (int i = 0; i < nonRunInPeriodItems.Count; i++)
             {
+                // The first year of the simulation (i.e. the first year of user-specified field history)
                 CropViewItem currentYearViewItem = nonRunInPeriodItems.ElementAt(i);
                 CropViewItem previousYearViewItem;
 
                 if (i > 0)
                 {
+                    // If we are not considering the first year of the simulation, we can get the previous year of the user-specified field history
                     previousYearViewItem = nonRunInPeriodItems.ElementAt(i - 1);
                 }
                 else
                 {
+                    // We are considering the first year of the field history, we need to use the run-in period as a 'stand-in' for the previous year
                     previousYearViewItem = runInPeriod;
                 }
 
+                // Calculate climate adjustments for current year. Climate adjustments are already performed for the run-in period if we are at the start year
                 this.CalculateClimateAdjustments(
                     currentYearViewItem: currentYearViewItem,
                     farm: farm);
 
+                // Calculate carbon stocks for this year
                 this.CalculatePools(
                     currentYearViewItem: currentYearViewItem,
                     previousYearViewItem: previousYearViewItem,
@@ -124,14 +132,20 @@ namespace H.Core.Calculators.Carbon
 
                 if (i == 0 && farm.UseCustomStartingSoilOrganicCarbon)
                 {
-                    // Override the calculated starting points with custom user defined fractions of each the pools
+                    /*
+                     * Overwrite the calculated starting points with calculated fractions of each of the pools. To calculate the fractions to the active, passive, and slow pools, we
+                     * need the results from the run-in period.
+                     */
+
                     AssignCustomStartPoint(runInPeriod, farm, currentYearViewItem);
                 }
 
                 this.CalculationMode = CalculationModes.Nitrogen;
+
+                // Calculate nitrogen stocks for this year
                 this.CalculateNitrogenAtInterval(previousYearViewItem, currentYearViewItem, null, farm, i);
 
-                // Change back to C for next iteration
+                // Change back to C mode for next iteration 
                 this.CalculationMode = CalculationModes.Carbon;
             }
         }

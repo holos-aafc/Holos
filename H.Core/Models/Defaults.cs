@@ -209,7 +209,9 @@ namespace H.Core.Models
             this.DecompositionRateConstantYoungPool = 0.8;
             this.DecompositionRateConstantOldPool = 0.00605;
 
-            this.OldPoolCarbonN = 0.1;
+            this.OldPoolCarbonN = 0.1;      // 1/10
+            this.SlowCarbonN = 0.05;        // 1/20
+            this.ActiveCarbonN = 0.025;     // 1/40
             this.NORatio = 0.1;
             this.EmissionFactorForLeachingAndRunoff = 0.011; // Updated to IPCC 2019 value
             this.EmissionFactorForVolatilization = 0.01;
@@ -261,6 +263,7 @@ namespace H.Core.Models
             this.DefaultBiodegradableFractionSwineManure = 0.024;
             this.DefaultBiodegradableFractionOtherManure = 0.550;
         }
+
 
         #endregion
 
@@ -878,6 +881,10 @@ namespace H.Core.Models
                 return _pumpEmissionsFactor;
             }
         }
+
+        public double ActiveCarbonN { get; set; }
+
+        public double SlowCarbonN { get; set; }
 
         #endregion
 

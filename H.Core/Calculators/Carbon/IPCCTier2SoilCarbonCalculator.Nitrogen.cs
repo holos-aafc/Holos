@@ -33,6 +33,18 @@ namespace H.Core.Calculators.Carbon
             base.ManurePool = 0;
         }
 
+        protected override void AdjustOrganicPool()
+        {
+            // Equation 2.7.6-8
+            this.OrganicPool -= (this.N2O_NFromOrganicNitrogen + this.NO_NFromOrganicNitrogen);
+
+            // Equation 2.7.6-9
+            this.OrganicPool -= (this.N2O_NFromOrganicNitrogenLeaching + this.NO3FromOrganicNitrogenLeaching);
+
+            // Equation 2.7.6-10
+            this.OrganicPool -= (this.N2O_NOrganicNitrogenVolatilization + this.NH4FromOrganicNitogenVolatilized);
+        }
+
         protected override void SetCropResiduesStartState(Farm farm)
         {
             if (this.CanCalculateInputsForCrop(this.CurrentYearResults))
@@ -160,7 +172,6 @@ namespace H.Core.Calculators.Carbon
             /*
              * Calculate the N demand from carbon pools
              */
-
 
             base.AdjustPoolsAfterDemandCalculation(this.SocNRequirement);
 

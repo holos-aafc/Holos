@@ -36,7 +36,6 @@ namespace H.Core.Providers.Animals
                 case DietAdditiveType.FourPercentFat:
                     return 20;
 
-                
                 case DietAdditiveType.Inonophore: // Footnote 2
                     return 20 * 30 / numberOfDays;
 
