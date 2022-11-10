@@ -25,17 +25,7 @@ namespace H.Core.Calculators.Carbon
         protected override void SetOrganicNitrogenPoolStartState()
         {
             // Equation 2.6.1-3
-            this.OrganicPool += ((this.CurrentYearResults.GetTotalOrganicNitrogenInYear() / this.CurrentYearResults.Area) );
-
-            if (YearIndex == 0)
-            {
-                this.OrganicPool += this.ManurePool;
-            }
-            if (YearIndex > 0)
-            {
-                // Equation 2.6.4-3
-                this.OrganicPool += (this.PreviousYearResults.ManureResiduePool_ManureN - this.ManurePool);
-            }
+            this.OrganicPool += ((this.CurrentYearResults.GetTotalOrganicNitrogenInYear() / this.CurrentYearResults.Area));
         }
 
         #endregion
@@ -183,7 +173,7 @@ namespace H.Core.Calculators.Carbon
             double manureInputs,
             double decompositionRateConstantYoungPool,
             double climateParameter)
-        { 
+        {
             var result = (manureInputs * Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter)) / (1 - Math.Exp(-1 * decompositionRateConstantYoungPool * climateParameter));
 
             return result;
@@ -239,7 +229,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.4-4
+        /// Equation 2.6.4-3
         /// </summary>
         public double CalculateMineralizedNitrogenFromDecompositionOfOldCarbon(
             double oldPoolSoilCarbonAtPreviousInterval,
@@ -295,8 +285,8 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.2-5
             var belowGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogen(
                 nitrogenContentOfRootReturned: rootNitrogen,
-                nitrogenContentOfExtrarootReturned: extrarootNitrogen, 
-                isPerennial: this.PreviousYearResults.CropType.IsPerennial(), 
+                nitrogenContentOfExtrarootReturned: extrarootNitrogen,
+                isPerennial: this.PreviousYearResults.CropType.IsPerennial(),
                 perennialStandLength: this.PreviousYearResults.PerennialStandLength);
 
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
@@ -363,7 +353,7 @@ namespace H.Core.Calculators.Carbon
         {
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? this.CurrentYearResults.ClimateParameter : this.CurrentYearResults.ManagementFactor;
 
-            if (this.YearIndex == 0) 
+            if (this.YearIndex == 0)
             {
                 this.CurrentYearResults.ManureResidueN = base.GetManureNitrogenResiduesForYear(farm, this.CurrentYearResults);
 
@@ -382,6 +372,29 @@ namespace H.Core.Calculators.Carbon
                     decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
                     climateParameter: climateParameterOrManagementFactor);
             }
+        }
+
+        protected override void AdjustOrganicPool()
+        {
+            // Add in the manure N after all emissions (direct + indirect) have been calculated (and not before). This will avoid double counting emissions from manure N
+            if (YearIndex == 0)
+            {
+                this.OrganicPool += this.ManurePool;
+            }
+            if (YearIndex > 0)
+            {
+                // Equation 2.6.7-8
+                this.OrganicPool += (this.PreviousYearResults.ManureResiduePool_ManureN - this.ManurePool);
+            }
+
+            // Equation 2.6.7-9
+            this.OrganicPool -= (this.N2O_NFromOrganicNitrogen + this.NO_NFromOrganicNitrogen);
+
+            // Equation 2.6.7-10
+            this.OrganicPool -= (this.N2O_NFromOrganicNitrogenLeaching + this.NO3FromOrganicNitrogenLeaching);
+
+            // Equation 2.6.7-11
+            this.OrganicPool -= (this.N2O_NOrganicNitrogenVolatilization + this.NH4FromOrganicNitogenVolatilized);
         }
 
         protected override void AssignFinalValues()

@@ -452,13 +452,11 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-2
             // Equation 2.7.6-2
-            this.SyntheticNitrogenPool -=
-                (this.N2O_NFromSyntheticFertilizerLeaching + NO3FromSyntheticFertilizerLeaching);
+            this.SyntheticNitrogenPool -= (this.N2O_NFromSyntheticFertilizerLeaching + NO3FromSyntheticFertilizerLeaching);
 
             // Equation 2.6.6-3
             // Equation 2.7.6-3
-            this.SyntheticNitrogenPool -=
-                (this.N2O_NSyntheticNitrogenVolatilization + this.NH4FromSyntheticNitogenVolatilized);
+            this.SyntheticNitrogenPool -= (this.N2O_NSyntheticNitrogenVolatilization + this.NH4FromSyntheticNitogenVolatilized);
         }
 
         protected void AdjustResiduePool()
@@ -481,21 +479,6 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.7-7
             // Equation 2.7.6-7
             this.MineralPool -= (N2O_NFromMineralizationLeaching + NO3FromMineralizationLeaching);
-        }
-
-        protected void AdjustOrganicPool()
-        {
-            // Equation 2.6.7-8
-            // Equation 2.7.6-8
-            this.OrganicPool -= (this.N2O_NFromOrganicNitrogen + this.NO_NFromOrganicNitrogen);
-
-            // Equation 2.6.7-9
-            // Equation 2.7.6-9
-            this.OrganicPool -= (this.N2O_NFromOrganicNitrogenLeaching + this.NO3FromOrganicNitrogenLeaching);
-
-            // Equation 2.6.7-10
-            // Equation 2.7.6-10
-            this.OrganicPool -= (this.N2O_NOrganicNitrogenVolatilization + this.NH4FromOrganicNitogenVolatilized);
         }
 
         public void AdjustPoolsAfterDemandCalculation(double nitrogenDemand)
@@ -921,6 +904,7 @@ namespace H.Core.Calculators.Carbon
         protected abstract void SetCropResiduesStartState(Farm farm);
         protected abstract void SetManurePoolStartState(Farm farm);
         protected abstract void SetOrganicNitrogenPoolStartState();
+        protected abstract void AdjustOrganicPool();
 
         #endregion
 
