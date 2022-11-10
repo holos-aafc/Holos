@@ -167,7 +167,6 @@
     <None Include="Resources\NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops.csv" />
     <None Include="Resources\Table_20_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients.csv" />
     <None Include="Resources\Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep.csv" />
-    <None Include="Resources\Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle.csv" />
     <None Include="Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv" />
     <None Include="Resources\Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change.csv" />
     <None Include="Resources\SwineVolatileExcretion_34.csv" />

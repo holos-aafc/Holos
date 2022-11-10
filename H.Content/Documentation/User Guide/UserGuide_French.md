@@ -1115,12 +1115,9 @@ This is the start of section that needs to be translated
 
 
 
-
-
-
 ### Crop Rotation Component
 
-A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. If a farm contains multiple field components that are added to represent the rotation of crops on a field over the years, a crop rotation component can represent the same information through a single entry. This allows for easier and more manageable representation of fields and crops on the farm.
+A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. For example, suppose a farm contains multiple field components that are added to represent the rotation of crops on a field over the years. In that case, a crop rotation component can represent the same information through a single entry. This allows for an easier and more manageable representation of fields and crops on the farm.
 
 
 <br>
@@ -1134,7 +1131,7 @@ A crop rotation component is similar to a field component and allows the represe
 <br>
 
 
-The crop rotation component allows to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
+The crop rotation component allows one to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
 
 <br>
 <p align="center">
@@ -1172,10 +1169,10 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 
 ## Animal Components
 
--	The animal components are separated into the following component categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
+-	The animal components are separated into the following categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
 -	All the results for each animal component will be displayed on a **single results page.** 
--	However, each animal component requires their own set of data inputs!
--	In this section, we will go through how to enter data for each component category.
+-	However, each animal component requires their own set of data inputs.
+-	This section will go through how to enter data for each component category.
 
 <br>
 
@@ -1204,13 +1201,13 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 #### Groups
 
 -	**Each** animal component can have **one or more animal groups**.
--	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it e.g. different housing, diet, manure management, etc.
--	To **add a group** for your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
+-	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it, e.g. different housing, diet, manure management, etc.
+-	To **add a group** to your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
 -	The added group will appear in under “**Step 1**”
 -	You can **remove an animal group** by clicking on the “**X**” beside the animal group you would like to remove
 -	You can **also sort the groups alphabetically** by clicking on the “**Group name**” header.
--	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. the selected animal group will be indicated by a “>” symbol in the left column.
--	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name
+-	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. The selected animal group will be indicated by a “>” symbol in the left column.
+-	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name.
 
 <br>
 <p align="center">
@@ -1233,14 +1230,14 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 
 #### Management Period
 
--	A management period is a period of time for an animal group where details for that animal group are able to be entered specific to the operations during that time period.
+-	A management period is a time duration for an animal group where operation and management details specific to that group can be entered and managed.
 -	Each **animal group** can have **one or more** management periods.
--	To view the management period(s) for an animal group, please **select the group under “Step 1”**.
+-	To view an animal group's management period(s),** please select the group under "Step 1"**.
 -	You can adjust the **name, start date** and the **number of days** for each management period.
--	To **add a new management period** to your selected animal group, please click the “**Add Management Period**” button below “**Step 2**”.
+-	Please click the "**Add Management Period**" button below "**Step 2**" to add a new management period to your selected animal group.
 -	To **remove a management period**, click the **X** button beside the period you would like to remove.
 -	The details for a management period can be split into four categories: **General, Diet, Housing and Manure**.
--	To see the details for a management period, please click on the period you would like to view.
+-	Please click on the period you would like to view to see the details for that management period.
 
 <br>
 <p align="center">
@@ -1297,7 +1294,7 @@ Each animal group has the following sections that can be further edited and conf
 
 ##### General
 
--	The general section contains simple information for the animal group such as the **number of animals** and average daily rate of **gain coefficients**.
+-	The general section contains simple information for the animal group, such as the **number of animals** and the average daily rate of **gain coefficients**.
 -	You can also enter the **start** and **end** weights for your animal group.
 -	Some animal groups will have additional data fields specific to that group.
 
@@ -1317,10 +1314,10 @@ Each animal group has the following sections that can be further edited and conf
 
 ##### Diet
 
--	The Diet section contains information pertaining to the diet for your animal group in the selected management period.
--	You can select one of the **default diets** such as: **low, medium, or high** energy protein.
--	If you have selected to see **additional information**, you are able to adjust more specific details for the diet such as: forage, crude protein, fat etc.
-- If you want to create your own **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you do not know how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
+-	The Diet section contains information about the diet of your animal group in the selected management period.
+-	You can select one of the **default diets**: **low, medium, or high** energy protein.
+-	If you have selected to see **additional information**, you can adjust more specific details for the diet such as: forage, crude protein, fat etc.
+- If you want to create your **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you need to learn how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
 
 <br>
 <p align="center">
@@ -1346,15 +1343,15 @@ Each animal group has the following sections that can be further edited and conf
 	</em>
 </p>
 
-- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location**"
+- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location.**"
 
 <br>
 
 ##### Manure
 
-- 	The manure section contains details pertaining to the manure operations for your selected animal group in the selected management period.
-- 	You can select default manure management types such as:  Deep Bedding, Solid Storage, etc.
-- 	If you have selected to see additional information, you are able to provide data inputs for more specific manure details.
+- 	The manure section contains details about the manure operations for your selected animal group in the selected management period.
+- 	You can select default manure management types such as Deep Bedding, Solid Storage, etc.
+- 	If you have selected to see additional information, you can provide data inputs for more specific manure details.
 
 <br>
 <p align="center">
@@ -1492,7 +1489,7 @@ The general tab allows editing the following information:
 The diet tab allows editing the following information:
 
 - The **type of diet** of the animal group.
-- The **custom diet creator** to create a custom diet for the selected animal group.
+- The **custom diet creator** creates a custom diet for the selected animal group.
 - Additional diet information regarding the animal group (after selecting "Show Additional Information").
 
 <br>
@@ -1531,7 +1528,7 @@ The Farrow-to-Wean component has the following animal groups:
 - Soars
 - Boars
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1551,7 +1548,7 @@ The Iso-Wean component has the following animal groups:
 
 - Piglets
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1573,7 +1570,7 @@ The Farrow-to-Finish component has the following animal groups:
 - Boars
 - Piglets
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1675,7 +1672,7 @@ The Chicken Multiplier Breeder component has the following animal groups:
 - Pullets
 - Cockerels
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1697,7 +1694,7 @@ The Chicken Meat Production component has the following animal groups:
 - Pullets
 - Cockerels
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1719,7 +1716,7 @@ The Turkey Multiplier Breeder component has the following animal groups:
 - Young turkey hens
 - Turkey hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1739,7 +1736,7 @@ The Turkey Meat Production component has the following animal groups:
 - Young toms
 - Young turkey hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1758,7 +1755,7 @@ The Chicken Egg Production component has the following animal groups:
 
 - Hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1778,7 +1775,7 @@ The Chicken Multiplier Hatchery component has the following animal groups:
 - Chicks
 - Poults
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1929,7 +1926,7 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
 
 ### Other Livestock
 
-The other livestock category contains various other livestock that is currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
+The other livestock category contains various other livestock that are currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
 
 #### General - Other Livestock
 
@@ -2134,7 +2131,7 @@ This is the End of section that needs to be translated
 
 ## Shelterbelt Timeline
 
-The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year. In the shelterbelt timeline you can adjust:
+The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year.  In the shelterbelt timeline, you can adjust the following:
 
 - The year the tree was planted.
 - The cut-off year of the timeline.
@@ -3914,14 +3911,15 @@ This is the start of section that needs to be translated
 [Translation Section 1]: <> (Section 1 Begin)
 
 
-# Chapter 11 Appendix - Additional Information, Common Questions & Toubleshooting
+
+# Chapter 11 Appendix - Additional Information, Common Questions & Troubleshooting
 
 
 ### Holos Backup System
 
 Holos contains a backup system that automatically creates backups of user data in a folder alongside the saved user data files. This folder is located inside the Holos data folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
 
-Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any given time. 
+Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any time.
 
 <br>
 <p align="center">
@@ -3939,13 +3937,13 @@ There are some important things to note regarding the backup files created by Ho
 
 1. Holos creates a backup of your data every time the application is started.
 
-2. A backup is only created when data is successfully loaded by Holos.
+2. A backup is only created when Holos successfully loads data.
 
-3. A maximum of **5** backups are maintained of user data and are created on a rolling basis. This means that if there are 5 backups already created, instead of creating a 6th one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
+3. A maximum of **5** user data backups are maintained and are created on a rolling basis. This means that if there are five backups already created, instead of creating a sixth one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
 
-	3.1. If you would like to maintain or save a particular backup, it is recommended to keep that backup file in a separate location on your computer.
+	3.1. If you would like to maintain or save a particular backup, it is strongly recommended to **keep that backup file in a separate location on your computer**.
 
-4. Backup files are named in the following manner: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time of when that backup was created.
+4. Backup files are named/created in the following format: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time that the backup was created..
 
 
 <br>
@@ -3963,7 +3961,7 @@ There are some important things to note regarding the backup files created by Ho
 
 #### Restoring backups in case of data corruption
 
-In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to automatically load backup data. If multiple backups are available, Holos loads the most recently created backup file. **When a backup file is restored, a message is displayed after the first loading page**. This message contains information regarding which backup was restored:
+In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to load backup data automatically. Holos loads the most recently created backup file if multiple backups are available. **A message is displayed after the first loading page when a backup file is restored**. This message contains information regarding which backup was restored:
 
 
 <br>
@@ -3977,7 +3975,7 @@ In situations where saved data cannot be loaded due to data corruption or an imp
 <br>
 
 
-If you would like to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**, otherwise holos will not be able to read this data file.
+If you want to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**; otherwise, holos will not be able to read this data file.
 
 <br>
 <p align="center">
@@ -3992,7 +3990,7 @@ If you would like to manually restore one of the five backups in the backup fold
 
 #### Data crash file
 
-As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new session of the program. In these situations, Holos will also create a crash file that contains the data that the program was unable to read.
+As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new program session. In these situations, Holos will also create a crash file containing the data the program could not read.
 
 <br>
 <p align="center">
@@ -4012,10 +4010,10 @@ If you don't have any backups available to restore previous data, this crash fil
 
 ### How to find the Holos Program data file(s).
 
-The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
+The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system running the Holos software and are based on your usage of the program. You can find these files by following these steps:
 
 
-- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
+- On your windows computer, **press the start button**. The start button is the icon on the bottom left corner of your screen (on the taskbar) that looks like a windows icon; after pressing this button type **run** and press **enter**.
 
 <br>
 <p align="center">
@@ -4058,13 +4056,12 @@ The Holos program data files contain useful information that can help the Holos 
 
 
 
--	If you are trying to troubleshoot Holos, please create a new issue in Holos' github repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
+-	If you are trying to troubleshoot Holos, please create a new issue in Holos' GitHub repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
 
-- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on github. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
+- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on GitHub. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
 
 <br>
 <br>
-
 
 ### How to create a .zip archive file
 
@@ -4085,7 +4082,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 </p>
 <br>
 
-2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. Selecting this option will open a pop-up with a progress bar showing your files being compressed. This process will create a single .zip file containing all the files you selected in **Step 1.**
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. This option will open a pop-up with a progress bar showing your compressed files. This process will create a single .zip file containing your selected files in **Step 1**.
 
 <br>
 <p align="center">
@@ -4097,7 +4094,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 </p>
 <br>
 
-3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can then send this compressed/zipped file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zipped archive file will contain all the files that you selected in step 1.
+3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can send this compressed/zipped file to the holos developers by [creating a new issue on the GitHub repository](#how-to-report-an-error-message-and-create-a-bug-report). This zipped archive file will contain all the files you selected in step 1.
 
 <br>
 <p align="center">
@@ -4137,7 +4134,7 @@ Please follow these steps for Windows 10 based systems. In this example we will 
 </p>
 <br>
 
-3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then send this compressed (zipped) file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zip file will contain all the files that you selected in step 1.
+3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then create a new issue on Github and attachment this file within the issue report for troubleshooting purposes. This zip file will contain all the files that you selected in step 1. To learn how to submit an issue report on GitHub, [click here](#how-to-report-an-error-message-and-create-a-bug-report).
 
 <br>
 <p align="center">
@@ -4177,9 +4174,9 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
 
 When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error (and other issues) to the developers, follow these steps:
 
-**Note:**	If you get an error as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
+**Note:**	If you get an error, as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. In addition, clicking this button allows you to paste this information into a different program or to include it in your communication with the Holos developers.
 
-*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers. It simply copies information to your computer's clipboard.*
+*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers.Instead, it simply copies information to your computer's clipboard.*
 
 <br>
 <p align="center">
@@ -4191,9 +4188,9 @@ When an internal error occurs, the software displays an error message (see Figur
 </p>
 <br>
 
--	To send this information to the Holos developers, you will have to create a new issue in the official Github repository for Holos. You can click [here](https://github.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
+-	To send this information to the Holos developers, you will have to create a new issue in the official GitHub repository for Holos. You can click [here](https://GitHub.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
 
-**Note:** You will need to create a free github account to create and report issues.
+**Note:** You will need to create a free GitHub account to create and report issues.
 
 -	After going to the issue reporting page, click on "**New Issue**".
 
@@ -4202,19 +4199,19 @@ When an internal error occurs, the software displays an error message (see Figur
  <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
     <br>
     <em>
-		Figure 11-17 - The new issue button on the Holos Github repository.
+		Figure 11-17 - The new issue button on the Holos GitHub repository.
 	</em>
 </p>
 <br>
 
-- On this page, you will click on "**Get Started**" opposite the "**Bug / Issue Report**" category.
+- Please click on "Get Started" opposite the "Bug / Issue Report" category on this page.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
     <br>
     <em>
-		Figure 11-18 - The new issue button on the Holos Github repository.
+		Figure 11-18 - The new issue button on the Holos GitHub repository.
 	</em>
 </p>
 <br>
@@ -4222,10 +4219,10 @@ When an internal error occurs, the software displays an error message (see Figur
 
 - You will be presented with a new page where you can post details about the issue and provide additional information. This information includes:
   - **Title of issue**
-  - **Contact details** (in case we need to contact you outside of Github)
+  - **Contact details** (in case we need to contact you outside of GitHub)
   - **Expected Behaviour** when using Holos.
-  - **Actual Behaviour** displayed by Holos resulting in the bug/issue.
-  - **Details of issue including steps to reproduce the issue**.
+  - **The Actual Behaviour** displayed by Holos resulted in the bug/issue.
+  - **Details of the issue, including steps to reproduce the issue**.
   - **Error message.**
   - **Holos version number.**
 
@@ -4239,11 +4236,10 @@ When an internal error occurs, the software displays an error message (see Figur
 </p>
 <br>
 
+- Paste the information [copied earlier to your clipboard](#how-to-report-an-error-message) in the **Error Message **section, and fill in the other information as directed.
 
-- Paste the information you [copied earlier to your clipboard](#how-to-report-an-error-message), in the section titled "**Error Message**" and fill the other information as directed.
 
-
-- Click on "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
+- Click on the "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
 
 - A new issue will now be created with the included information.
 
@@ -4268,6 +4264,9 @@ The version number of your current Holos installation is displayed when you firs
 This is the end of section that needs to be translated
 -->
 [Translation Section 1]: <> (Section 1 End)
+
+
+
 
 ## Comment puis-je activer le mode avance
 

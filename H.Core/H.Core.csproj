@@ -415,7 +415,6 @@
     <Compile Include="Providers\AnaerobicDigestion\Table_48_Parameter_Adjustments_For_Manure_Provider.cs" />
     <Compile Include="Providers\AnaerobicDigestion\SolidLiquidSeparationCoefficientsData.cs" />
     <Compile Include="Providers\AnaerobicDigestion\Table_50_Solid_Liquid_Separation_Coefficients_Provider.cs" />
-    <Compile Include="Providers\Animals\Table_22_Additive_Reduction_Factors_Data.cs" />
     <Compile Include="Providers\Animals\Table_22_Additive_Reduction_Factors_Provider.cs" />
     <Compile Include="Providers\Animals\AmmoniaEmissionFactorData.cs" />
     <Compile Include="Providers\Animals\AnimalCoefficientData.cs" />

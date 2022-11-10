@@ -11419,7 +11419,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Animal component results are for a single production cycle only. To get the annual emissions value, multiply the results with the number of production cycles in a single year ..
+        ///   Looks up a localized string similar to Animal component results are for a single production cycle only. Therefore, to get the annual emissions value, multiply the results by the number of production cycles in a single year..
         /// </summary>
         public static string MessageAnimalComponentEmissionsSingleProductionCycle {
             get {
@@ -11617,15 +11617,6 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have no calves group added. Net energy for lactation will not be calculated for this group of cows..
-        /// </summary>
-        public static string MessageNoBeefCalvesGroup {
-            get {
-                return ResourceManager.GetString("MessageNoBeefCalvesGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Past fallow area must be less than the current fallow area. Past fallow area has been reset to 0..
         /// </summary>
         public static string MessagePastFallowAreaMustBeLessThanCurrentFallowArea {
@@ -11757,15 +11748,6 @@ namespace H.Core.Properties {
         public static string MessageUpdatingSecondaryCropInPreviousYear {
             get {
                 return ResourceManager.GetString("MessageUpdatingSecondaryCropInPreviousYear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are removing the last group of calves. Net energy for lactation will not be calculated for the cows group(s)..
-        /// </summary>
-        public static string MessageUserRemovingLastBeefCalvesGroup {
-            get {
-                return ResourceManager.GetString("MessageUserRemovingLastBeefCalvesGroup", resourceCulture);
             }
         }
         
@@ -14110,7 +14092,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The alpaca component allows the creation and maintenance of management periods and other information related to alpacas, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipAlpacaComponent {
             get {
@@ -14119,7 +14101,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. Anaerobic digestion produces two valuable outputs: biogas and digestate..
+        ///   Looks up a localized string similar to Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. As a result, anaerobic digestion produces two valuable outputs: biogas and digestate..
         /// </summary>
         public static string ToolTipAnaerobicDigestionComponent {
             get {
@@ -14137,7 +14119,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The gain coefficient.
+        ///   Looks up a localized string similar to Bulls gain coefficient.
         /// </summary>
         public static string ToolTipBeefCowGeneralGainCoefficientOfBullsInfo {
             get {
@@ -14146,7 +14128,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The bison component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        ///   Looks up a localized string similar to The bison component allows the creation and maintenance of management periods and other information related to bison, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipBisonComponent {
             get {
@@ -14155,7 +14137,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Once pullets reach approximately 18-20 weeks of age they are transferred from either separate pullet operations or pullet barns on an egg production operation to egg-laying barns. These hens will produce eggs for up to 71 weeks of age.
+        ///   Looks up a localized string similar to A component for pullets that reach approximately 18-20 weeks of age and are transferred from either separate pullet operations or pullet barns on an egg production operation to egg-laying barns. These hens will produce eggs for up to 71 weeks of age.
         ///.
         /// </summary>
         public static string ToolTipChickenEggProduction {
@@ -14204,7 +14186,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group including weight, diet, housing and manure handling information..
+        ///   Looks up a localized string similar to This component includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group, including weight, diet, housing and manure handling information..
         /// </summary>
         public static string ToolTipCowCalfComponent {
             get {
@@ -14231,7 +14213,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The deer component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        ///   Looks up a localized string similar to The deer component allows the creation and maintenance of management periods and other information related to deer, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipDeerComponent {
             get {
@@ -14240,7 +14222,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The elk component allows the creation and maintenance of management periods and other information related to elk, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipElkComponent {
             get {
@@ -14367,7 +14349,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The goats component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        ///   Looks up a localized string similar to The goats component allows the creation and maintenance of management periods and other information related to goats, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipGoatsComponent {
             get {
@@ -14863,7 +14845,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Llamas component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        ///   Looks up a localized string similar to The Llamas component allows the creation and maintenance of management periods and other information related to llams, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipLlamasComponent {
             get {
@@ -14881,7 +14863,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The mules component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information..
+        ///   Looks up a localized string similar to The mules component allows the creation and maintenance of management periods and other information related to mules, like the number of animals and manure handling information..
         /// </summary>
         public static string ToolTipMulesComponent {
             get {
@@ -15180,7 +15162,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shelterbelts are linear plantings of trees and/or shrubs that form part of an agriculture production system. A Shelterbelt component consists of rows of trees where each row contains various tree types such as Caragana, Green Ash, Hybrid Polar etc..
+        ///   Looks up a localized string similar to Shelterbelts are linear plantings of trees and/or shrubs that form part of an agricultural production system. A Shelterbelt component consists of rows of trees containing various tree types such as Caragana, Green Ash, Hybrid Polar etc..
         /// </summary>
         public static string ToolTipShelterbeltComponent {
             get {

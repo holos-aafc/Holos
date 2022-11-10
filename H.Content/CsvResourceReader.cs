@@ -137,9 +137,6 @@ namespace H.Content
                 case CsvResourceNames.DietCoefficientsForDairyBeefSheep:
                     return SplitFileIntoLines(Resource.Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep);
 
-                case CsvResourceNames.AdditiveReductionFactorsForAllCattle:
-                    return SplitFileIntoLines(Resource.Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle);
-
                 // Provider not being used. Duplicate
                 case CsvResourceNames.MethaneConversionFactorsAndNitrogenOxideEmissionsForBeefDairySwine:
                     return SplitFileIntoLines(Resource.MCFAndNitrogenOxideEmissionsForBeefDairySwine);

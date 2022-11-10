@@ -1490,20 +1490,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Additive,YMDeductionPercentage
-        ///None,0
-        ///2% Fat,10
-        ///4% Fat,20
-        ///Custom,0
-        ///.
-        /// </summary>
-        public static string Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle {
-            get {
-                return ResourceManager.GetString("Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Year,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
         ///1990,24.3,23.2,22.2,22.1,21.7,20.3,20.8,21,21,20.9
         ///1995,26.8,25.5,24.2,24.2,24,22.2,23,23.2,23.1,23.1
@@ -1909,13 +1895,13 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
-        ///Beef cattle,Pasture,50 (1),0.625 (1),??,0.159 (1),??
+        ///Beef cattle,Pasture,86 (1),0.290 (1),6.180 (1),0.047 (1),21.02
         ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
         ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
         ///Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
         ///Beef cattle,Composted intensive (5),37.42,1.041,14.48,0.398,13.91
         ///Dairy cattle,Pasture,50 (6),1 (6),??,0.118 (6),??
-        ///Dairy cattle,Deep bedding (2),60.08 (2),0.715  [rest of string was truncated]&quot;;.
+        ///Dairy cattle,Deep bedding (2),60.08  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_9_Manure_Types_And_Default_Composition {
             get {

@@ -295,9 +295,6 @@
   <data name="Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_22_Additive_Reduction_Factors_For_Beef_Dairy_Cattle.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="MCFAndNitrogenOxideEmissionsForBeefDairySwine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
