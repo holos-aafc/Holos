@@ -559,10 +559,6 @@
     <Compile Include="Providers\Plants\ShelterbeltCarbonAccumulationCoefficientsProvider.cs" />
     <Compile Include="Providers\Plants\SoilCarbonEmissionsData.cs" />
     <Compile Include="Providers\Plants\SoilCarbonEmissionsProvider.cs" />
-    <Compile Include="Providers\Plants\DUPLICATE_Table_15_Soil_N2O_Emission_Factors_Soil_Texture_Data.cs" />
-    <Compile Include="Providers\Plants\DUPLICATE_Table_15_Soil_N2O_Emission_Factors_Soil_Texture_Provider.cs" />
-    <Compile Include="Providers\Plants\DUPLICATE_Table_15_Soil_N2O_Emission_Factors_Tillage_Practice_Data.cs" />
-    <Compile Include="Providers\Plants\DUPLICATE_Table_15_Soil_N2O_Emission_Factors_Tillage_Practice_Provider.cs" />
     <Compile Include="Providers\Polygon\IHolosMapPolygonIdListProvider.cs" />
     <Compile Include="Providers\ProviderBase.cs" />
     <Compile Include="Providers\Shelterbelt\ShelterbeltCarbonDataProvider.cs" />
