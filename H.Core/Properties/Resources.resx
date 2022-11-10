@@ -2056,8 +2056,17 @@
   <data name="KilogramsNH4NPerHectareString" xml:space="preserve">
     <value>kg NH4-N (ha)^-1</value>
   </data>
+  <data name="KilogramsNH4NPerFieldString" xml:space="preserve">
+    <value>kg NH4-N field^-1</value>
+  </data>
+  <data name="PoundsNH4NPerFieldString" xml:space="preserve">
+    <value>lb NH4-N field^-1</value>
+  </data>
   <data name="KilogramsN2NPerHectareString" xml:space="preserve">
     <value>kg N2-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsN2NPerFieldString" xml:space="preserve">
+    <value>kg N2-N field^-1</value>
   </data>
   <data name="KilogramsN2ONPerHectare" xml:space="preserve">
     <value>kg N2O-N ha^-1</value>
@@ -2067,6 +2076,9 @@
   </data>
   <data name="KilogramsNO3NPerHectare" xml:space="preserve">
     <value>kg NO3-N ha^-1</value>
+  </data>
+  <data name="KilogramsNO3NPerField" xml:space="preserve">
+    <value>kg NO3-N field^-1</value>
   </data>
   <data name="KilogramsNONPerHectare" xml:space="preserve">
     <value>kg NO-N ha^-1</value>
@@ -3451,6 +3463,9 @@
   </data>
   <data name="PoundsN2NPerAcreString" xml:space="preserve">
     <value>lb N2-N ac^-1</value>
+  </data>
+  <data name="PoundsN2NPerFieldString" xml:space="preserve">
+    <value>lb N2-N field^-1</value>
   </data>
   <data name="PoundsN2ONPerAcreString" xml:space="preserve">
     <value>lb N2O-N ac^-1</value>
@@ -5248,6 +5263,9 @@
   </data>
   <data name="PoundsNONPerField" xml:space="preserve">
     <value>lb NO-N field^-1</value>
+  </data>
+  <data name="PoundsNO3NPerField" xml:space="preserve">
+    <value>lb NO3-N field^-1</value>
   </data>
   <data name="PoundsN2O" xml:space="preserve">
     <value>lb N2O</value>

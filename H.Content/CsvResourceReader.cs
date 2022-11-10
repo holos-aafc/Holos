@@ -108,13 +108,7 @@ namespace H.Content
 
                 case CsvResourceNames.CropFactors:
                     return SplitFileIntoLines(Resource.CropFactors);
-                    
-                case CsvResourceNames.SoilN2OEmissionFactorsInfluencedByTillPractice:
-                    return SplitFileIntoLines(Resource.Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice);
-
-                case CsvResourceNames.SoilN2OEmissionFactorsInfluencedBySoilTexture:
-                    return SplitFileIntoLines(Resource.Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture);
-
+                
                 case CsvResourceNames.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops:
                     return SplitFileIntoLines(Resource.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops);
 

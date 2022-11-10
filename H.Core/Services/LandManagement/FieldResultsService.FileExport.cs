@@ -175,27 +175,19 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelOverflow + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
                 Properties.Resources.LabelRatio + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
 
-                Properties.Resources.LabelTotalDirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2O) + "," +
-                Properties.Resources.LabelTotalDirectNitrousOxide + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelDirectNitrousOxideEmissionsFromSyntheticN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelDirectNitrousOxideEmissionsFromCropResidues + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelDirectNitrousOxideEmissionsFromNMinealization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelDirectNitrousOxideEmissionsFromOrganicNitrogen + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
+                Properties.Resources.LabelTotalDirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
+                Properties.Resources.LabelDirectNitrousOxideEmissionsFromSyntheticN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelDirectNitrousOxideEmissionsFromCropResidues + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelDirectNitrousOxideEmissionsFromNMinealization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelDirectNitrousOxideEmissionsFromOrganicNitrogen + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
 
-                Properties.Resources.LabelTotalIndirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2O) + "," +
-                Properties.Resources.LabelTotalIndirectNitrousOxide + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNitrogenLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromCropResidueLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromMineralLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromOrganicNLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNVolatilization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-
-                Properties.Resources.LabelTotalNitricOxide + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNON) + "," +
-                Properties.Resources.LabelTotalNitrateLeachingForArea + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNO3NPerHectare) + "," +
-                Properties.Resources.LabelTotalAmmoniaForArea + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNH4NPerHectare) + "," +
-
-                Properties.Resources.LabelDenitrificationForArea + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2NPerHectare)
-                );
+                Properties.Resources.LabelTotalIndirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNitrogenLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromCropResidueLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromMineralLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromOrganicNLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNVolatilization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," 
+            );
         }
 
         /// <summary>
@@ -296,26 +288,18 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, viewItem.Overflow, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, viewItem.Ratio, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2O, viewItem.TotalDirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.TotalDirectNitrousOxideForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.DirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalDirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2O, viewItem.TotalIndirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.TotalIndirectNitrousOxideForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.IndirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNONPerHectare, viewItem.TotalNitricOxideForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNO3NPerHectare, viewItem.TotalNitrateLeachingForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNH4NPerHectare, viewItem.TotalAmmoniaForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2NPerHectare, viewItem.DenitrificationForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalIndirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.AppendLine();
             #endregion

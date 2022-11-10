@@ -6955,6 +6955,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg N2-N field^-1.
+        /// </summary>
+        public static string KilogramsN2NPerFieldString {
+            get {
+                return ResourceManager.GetString("KilogramsN2NPerFieldString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg N2-N ha^-1.
         /// </summary>
         public static string KilogramsN2NPerHectare {
@@ -7072,6 +7081,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg NH4-N field^-1.
+        /// </summary>
+        public static string KilogramsNH4NPerFieldString {
+            get {
+                return ResourceManager.GetString("KilogramsNH4NPerFieldString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg NH4-N ha^-1.
         /// </summary>
         public static string KilogramsNH4NPerHectare {
@@ -7140,6 +7158,15 @@ namespace H.Core.Properties {
         public static string KilogramsNitrousOxideString {
             get {
                 return ResourceManager.GetString("KilogramsNitrousOxideString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kg NO3-N field^-1.
+        /// </summary>
+        public static string KilogramsNO3NPerField {
+            get {
+                return ResourceManager.GetString("KilogramsNO3NPerField", resourceCulture);
             }
         }
         
@@ -12661,6 +12688,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lb N2-N field^-1.
+        /// </summary>
+        public static string PoundsN2NPerFieldString {
+            get {
+                return ResourceManager.GetString("PoundsN2NPerFieldString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to lb N2O.
         /// </summary>
         public static string PoundsN2O {
@@ -12778,6 +12814,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lb NH4-N field^-1.
+        /// </summary>
+        public static string PoundsNH4NPerFieldString {
+            get {
+                return ResourceManager.GetString("PoundsNH4NPerFieldString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to lb N.
         /// </summary>
         public static string PoundsNitrogen {
@@ -12873,6 +12918,15 @@ namespace H.Core.Properties {
         public static string PoundsNO3NPerAcreString {
             get {
                 return ResourceManager.GetString("PoundsNO3NPerAcreString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lb NO3-N field^-1.
+        /// </summary>
+        public static string PoundsNO3NPerField {
+            get {
+                return ResourceManager.GetString("PoundsNO3NPerField", resourceCulture);
             }
         }
         

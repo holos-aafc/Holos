@@ -180,8 +180,6 @@
     <None Include="Resources\FertilizerApplicationRates.csv" />
     <None Include="Resources\CropFactors.csv" />
     <None Include="Resources\SoilCarbonEmissions.csv" />
-    <None Include="Resources\Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Tillage_Practice.csv" />
-    <None Include="Resources\Table_NN_Soil_N2O_Emission_Factors_Influenced_By_Soil_Texture.csv" />
     <None Include="Resources\Table_8_Carbon_Input_Residue_Allocation_By_Crop_Type.csv" />
     <None Include="Resources\Table_9_Manure_Types_And_Default_Composition.csv" />
     <None Include="Resources\white_spruce__31_allclusters_future.csv" />

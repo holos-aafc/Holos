@@ -2338,6 +2338,9 @@
   <data name="KilogramsMethanePerYear" xml:space="preserve">
     <value>kg CH₄ année^-1</value>
   </data>
+  <data name="KilogramsN2NPerFieldString" xml:space="preserve">
+    <value>kg N2-N field^-1</value>
+  </data>
   <data name="KilogramsN2NPerHectare" xml:space="preserve">
     <value>kg N2-N ha^-1</value>
   </data>
@@ -2377,6 +2380,9 @@
   <data name="KilogramsNH3NPerKilogramN" xml:space="preserve">
     <value>kg n-nh3 (kg n)^-1</value>
   </data>
+  <data name="KilogramsNH4NPerFieldString" xml:space="preserve">
+    <value>kg NH4-N field^-1</value>
+  </data>
   <data name="KilogramsNH4NPerHectare" xml:space="preserve">
     <value>kg NH4-N ha^-1</value>
   </data>
@@ -2397,6 +2403,9 @@
   </data>
   <data name="KilogramsNitrogenPerKilogramDryMatter" xml:space="preserve">
     <value>kg N (kg MS)^1</value>
+  </data>
+  <data name="KilogramsNO3NPerField" xml:space="preserve">
+    <value>kg NO3-N field^-1</value>
   </data>
   <data name="KilogramsNO3NPerHectare" xml:space="preserve">
     <value>kg NO3-N ha^-1</value>
@@ -4133,6 +4142,9 @@
   <data name="PoundsN2NPerAcreString" xml:space="preserve">
     <value>lb n-n2 ac^-1</value>
   </data>
+  <data name="PoundsN2NPerFieldString" xml:space="preserve">
+    <value>lb N2-N field^-1</value>
+  </data>
   <data name="PoundsN2O" xml:space="preserve">
     <value>lb N2O</value>
   </data>
@@ -4172,6 +4184,9 @@
   <data name="PoundsNH4NPerAcreString" xml:space="preserve">
     <value>lb n-nh4 ac^-1</value>
   </data>
+  <data name="PoundsNH4NPerFieldString" xml:space="preserve">
+    <value>lb NH4-N field^-1</value>
+  </data>
   <data name="PoundsNitrogen" xml:space="preserve">
     <value>lb N</value>
   </data>
@@ -4204,6 +4219,9 @@
   </data>
   <data name="PoundsNO3NPerAcreString" xml:space="preserve">
     <value>lb n-no3 ac^-1</value>
+  </data>
+  <data name="PoundsNO3NPerField" xml:space="preserve">
+    <value>lb NO3-N field^-1</value>
   </data>
   <data name="PoundsNON" xml:space="preserve">
     <value>lb NO-N</value>

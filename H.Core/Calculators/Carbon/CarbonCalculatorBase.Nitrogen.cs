@@ -717,6 +717,7 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.TotalDirectNitrousOxidePerHectare =
                 totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+
             this.CurrentYearResults.TotalDirectNitrousOxideForArea = totalDirectNitrousOxide * area;
 
             this.CurrentYearResults.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea =
@@ -780,13 +781,10 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-8
             this.CurrentYearResults.TotalNitrateLeachingForArea = totalNitrateLeaching * area;
 
-            this.CurrentYearResults.IndirectNitrateFromSyntheticNitrogenForArea =
-                this.NO3FromSyntheticFertilizerLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromSyntheticNitrogenForArea = this.NO3FromSyntheticFertilizerLeaching * area;
             this.CurrentYearResults.IndirectNitrateFromCropResiduesForArea = this.NO3FromResiduesLeaching * area;
-            this.CurrentYearResults.IndirectNitrateFromMineralizedNitrogenForArea =
-                this.NO3FromMineralizationLeaching * area;
-            this.CurrentYearResults.IndirectNitrateFromOrganicNitrogenForArea =
-                this.NO3FromOrganicNitrogenLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromMineralizedNitrogenForArea = this.NO3FromMineralizationLeaching * area;
+            this.CurrentYearResults.IndirectNitrateFromOrganicNitrogenForArea = this.NO3FromOrganicNitrogenLeaching * area;
         }
 
         protected void SumAmmoniaVolatilization()
