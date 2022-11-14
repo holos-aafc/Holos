@@ -250,7 +250,7 @@ namespace H.Core.Test.Services
             var percentTotalDigestibleNutrientsInFeed = 200.500;
             var ashContentOfFeed = 15.375;
             var result = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTotalDigestibleNutrientsInFeed,
-                                                      ashContentOfFeed);
+                                                      ashContentOfFeed, 50);
             Assert.AreEqual(-5.5603957063008123, result);
         }
 

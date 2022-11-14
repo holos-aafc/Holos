@@ -23,7 +23,6 @@ namespace H.Core.Providers.Animals
         {
             // Read Footnote 1 for data source information.
 
-
             if (animalType == AnimalType.ChickenPullets || animalType == AnimalType.ChickenCockerels)
             {
                 // Used for pullets from algorithm document

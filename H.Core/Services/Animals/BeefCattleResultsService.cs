@@ -125,11 +125,10 @@ namespace H.Core.Services.Animals
              * Manure carbon (C) and methane (CH4)
              */
 
-            // Equation 4.1.1-1
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake, 
+                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
 
-            // Equation 4.1.1-4
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -146,7 +145,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
-                ashContentOfFeed: managementPeriod.SelectedDiet.Ash);
+                ashContentOfFeed: managementPeriod.SelectedDiet.Ash, 
+                percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
 
             // Equation 4.1.2-4
             dailyEmissions.ManureMethaneEmissionRate = base.CalculateManureMethaneEmissionRate(
@@ -468,14 +468,12 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.1.1-7
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.1.1-1
             dailyEmissions.AnimalWeight = base.GetCurrentAnimalWeight(
                 startWeight: managementPeriod.StartWeight,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
@@ -490,17 +488,14 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.Temperature = temperature;
 
-            // Equation 3.1.1-2
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
                 averageMonthlyTemperature: temperature);
 
-            // Equation 3.1.1-3
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: dailyEmissions.AdjustedMaintenanceCoefficient,
                 weight: dailyEmissions.AnimalWeight);
 
-            // Equation 3.1.1-4
             dailyEmissions.NetEnergyForActivity = base.CalculateNetEnergyForActivity(
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
@@ -516,7 +511,6 @@ namespace H.Core.Services.Animals
                 // Beef cattle lactating cows stop lactating if there are no associated young animals - this differs from lactating dairy cows who are always lactating regardless of the fact
                 // that there may or may not be any associated calf groups.
 
-                // Equation 3.1.1-5
                 dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                     milkProduction: managementPeriod.MilkProduction,
                     fatContent: managementPeriod.MilkFatContent,
@@ -530,7 +524,6 @@ namespace H.Core.Services.Animals
                  * Cows are always pregnant during the entire year
                  */
 
-                // Equation 3.1.1-6
                 dailyEmissions.NetEnergyForPregnancy = base.CalculateNetEnergyForPregnancy(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
             }
@@ -539,22 +532,18 @@ namespace H.Core.Services.Animals
              * Equation 3.1.1-7 at beginning of this method
              */
 
-            // Equation 3.1.1-8
             dailyEmissions.NetEnergyForGain = base.CalculateNetEnergyForGain(
                 weight: dailyEmissions.AnimalWeight,
                 gainCoefficient: managementPeriod.GainCoefficient,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 finalWeight: managementPeriod.EndWeight);
 
-            // Equation 3.1.1-9
             dailyEmissions.RatioOfEnergyAvailableForMaintenance = base.CalculateRatioOfNetEnergyAvailableInDietForMaintenanceToDigestibleEnergy(
                 totalDigestibleNutrient: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.1.1-10
             dailyEmissions.RatioOfEnergyAvailableForGain = base.CalculateRatioOfNetEnergyAvailableInDietForGainToDigestibleEnergyConsumed(
                 totalDigestibleNutrient: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.1.1-11
             dailyEmissions.GrossEnergyIntake = base.CalculateGrossEnergyIntake(
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                 netEnergyForActivity: dailyEmissions.NetEnergyForActivity,
@@ -570,18 +559,15 @@ namespace H.Core.Services.Animals
                 numberOfDays: managementPeriod.Duration.TotalDays,
                 fat: managementPeriod.SelectedDiet.Fat);
 
-            // Equation 3.1.1-12
             dailyEmissions.EntericMethaneEmissionRate = base.CalculateEntericMethaneEmissionRate(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 methaneConversionFactor: managementPeriod.SelectedDiet.MethaneConversionFactor,
                 additiveReductionFactor: dailyEmissions.AdditiveReductionFactor);
 
-            // Equation 3.1.1-13
             dailyEmissions.EntericMethaneEmission = base.CalculateEntericMethaneEmissions(
                 entericMethaneEmissionRate: dailyEmissions.EntericMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 12.3.1-1
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
@@ -592,7 +578,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
-            // Equation 12.3.1-5
             dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(
                 animalType: animalGroup.GroupType,
                 finalWeightOfAnimal: managementPeriod.EndWeight);
@@ -665,44 +650,38 @@ namespace H.Core.Services.Animals
              * Manure carbon (C) and methane (CH4)
              */
 
-            // Equation 4.1.1-1
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
+                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
 
-            // Equation 4.1.1-4
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.1.1-5
             dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
                 beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
                 carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
                 moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
-            // Equation 4.1.1-6
             dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
                 rateOfCarbonAddedFromBedding: dailyEmissions.RateOfCarbonAddedFromBeddingMaterial,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.1.1-7
             dailyEmissions.CarbonFromManureAndBedding = base.CalculateAmountOfCarbonFromManureAndBedding(
                 carbonExcreted: dailyEmissions.FecalCarbonExcretion,
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
 
-            // Equation 4.1.2-1
             dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
-                ashContentOfFeed: managementPeriod.SelectedDiet.Ash);
+                ashContentOfFeed: managementPeriod.SelectedDiet.Ash,
+                percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
 
-            // Equation 4.1.2-4
             dailyEmissions.ManureMethaneEmissionRate = base.CalculateManureMethaneEmissionRate(
                 volatileSolids: dailyEmissions.VolatileSolids,
                 methaneProducingCapacity: managementPeriod.ManureDetails.MethaneProducingCapacityOfManure,
                 methaneConversionFactor: managementPeriod.ManureDetails.MethaneConversionFactor);
 
-            // Equation 4.1.2-5
             dailyEmissions.ManureMethaneEmission = base.CalculateManureMethane(
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);

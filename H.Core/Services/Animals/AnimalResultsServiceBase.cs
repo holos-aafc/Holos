@@ -553,11 +553,14 @@ namespace H.Core.Services.Animals
         /// Equation 4.1.1-1
         /// </summary>
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
+        /// <param name="housedOnPasture"></param>
         /// <returns>Rate of C excreted through feces (kg head^-1 day^-1)</returns>
-        public double CalculateFecalCarbonExcretionRate(
-            double grossEnergyIntake)
+        public double CalculateFecalCarbonExcretionRate(double grossEnergyIntake, 
+            bool housedOnPasture)
         {
-            var result = (grossEnergyIntake / 18.45) * 0.45 * (1 - 0.61);
+            var factor = housedOnPasture ? 0.45 : 0.61;
+
+            var result = (grossEnergyIntake / 18.45) * 0.45 * (1 - factor);
 
             return result;
         }
@@ -578,7 +581,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.1.1-4
+        /// Equation 4.1.1-3
         /// </summary>
         /// <param name="excretionRate">Rate of C excreted through feces (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
@@ -591,7 +594,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.1.1-5
+        /// Equation 4.1.1-4
         /// </summary>
         /// <param name="beddingRate">Rate of bedding material added (kg head^-1 day^-1)</param>
         /// <param name="carbonConcentrationOfBeddingMaterial">Carbon concentration of bedding material (kg C kg^-1 DM)</param>
@@ -606,7 +609,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.1.1-6
+        /// Equation 4.1.1-5
         /// </summary>
         /// <param name="rateOfCarbonAddedFromBedding">Rate of carbon added from bedding material (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -618,9 +621,8 @@ namespace H.Core.Services.Animals
             return rateOfCarbonAddedFromBedding * numberOfAnimals;
         }
 
-
         /// <summary>
-        /// Equation 4.1.1-7
+        /// Equation 4.1.1-6
         /// </summary>
         /// <param name="carbonExcreted">Carbon excreted by animals (kg C)</param>
         /// <param name="carbonFromBedding">Carbon added from bedding (kg C)</param>
@@ -638,14 +640,29 @@ namespace H.Core.Services.Animals
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
         /// <param name="percentTotalDigestibleNutrientsInFeed">Percent total digestible nutrients in feed (%)</param>
         /// <param name="ashContentOfFeed">Ash content of feed (%)</param>
+        /// <param name="percentageForageInDiet">Percentage of forage in diet (% DM). Will be used to determine the grain content of the diet.</param>
         /// <returns>Volatile solids (kg head^-1 day^-1)</returns>
-        public double CalculateVolatileSolids(double grossEnergyIntake,
+        public double CalculateVolatileSolids(
+            double grossEnergyIntake,
             double percentTotalDigestibleNutrientsInFeed,
-            double ashContentOfFeed)
+            double ashContentOfFeed, 
+            double percentageForageInDiet)
         {
+            double totalGrainInDiet = 100 - percentageForageInDiet;
+            if (totalGrainInDiet < 0)
+            {
+                totalGrainInDiet = 0;
+            }
+
+            double urinaryEnergy = 0.04;
+            if (totalGrainInDiet >= 85)
+            {
+                urinaryEnergy = 0.02;
+            }
+
             var a = grossEnergyIntake * (1.0 - percentTotalDigestibleNutrientsInFeed / 100.0) +
-                    0.04 * grossEnergyIntake;
-            var b = 1.0 - ashContentOfFeed / 100.0;
+                    urinaryEnergy * grossEnergyIntake;
+            var b = 1.0 - (ashContentOfFeed / 100.0);
             var c = 1.0 / 18.45;
 
             return a * b * c;
@@ -676,6 +693,82 @@ namespace H.Core.Services.Animals
             double numberOfAnimals)
         {
             return emissionRate * numberOfAnimals;
+        }
+
+        public void CalculateManureMethaneFromLiquidSystems(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions,
+            ManagementPeriod managementPeriod,
+            double temperature)
+        {
+            dailyEmissions.KelvinAirTemperature = this.CalculateDegreeKelvin(temperature);
+
+            dailyEmissions.ClimateFactor = this.CalculateClimateFactor(
+                kelvinAirTemperature: dailyEmissions.KelvinAirTemperature);
+
+            dailyEmissions.VolatileSolidsProduced = this.CalculateVolatileSolidsProduced(
+                volatileSolids: dailyEmissions.VolatileSolids,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
+                volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
+
+            dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
+                volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
+                volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
+                volatileSolidsConsumedFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsConsumed);
+
+            dailyEmissions.VolatileSolidsConsumed = this.CalculateVolatileSolidsConsumed(
+                climateFactor: dailyEmissions.ClimateFactor,
+                volatileSolidsAvailable: dailyEmissions.VolatileSolidsAvailable);
+
+            dailyEmissions.ManureMethaneEmission = this.CalculateLiquidManureMethane(
+                volatileSolidsConsumed: dailyEmissions.VolatileSolidsConsumed,
+                methaneProducingCapacityOfManure: managementPeriod.ManureDetails.MethaneProducingCapacityOfManure);
+
+            if (managementPeriod.ManureDetails.StateType.IsCoveredSystem())
+            {
+                var reductionFactor = 0d;
+                if (managementPeriod.ManureDetails.StateType == ManureStateType.LiquidWithNaturalCrust)
+                {
+                    reductionFactor = 0.4;
+                }
+                else
+                {
+                    reductionFactor = 0.25;
+                }
+
+                dailyEmissions.ManureMethaneEmission = this.CalculateLiquidManureMethaneForCoveredSystem(
+                    manureMethane: dailyEmissions.ManureMethaneEmission,
+                    emissionReductionFactor: reductionFactor);
+            }
+        }
+
+        /// <summary>
+        /// Equation 4.1.3-1
+        /// </summary>
+        /// <param name="degreesCelsius">Air temperature (degrees Celsius)</param>
+        /// <returns>Air temperature (degrees Kelvin)</returns>
+        public double CalculateDegreeKelvin(
+            double degreesCelsius)
+        {
+            return degreesCelsius + 273.15;
+        }
+
+        /// <summary>
+        /// Equation 4.1.3-2
+        /// </summary>
+        /// <param name="kelvinAirTemperature">Air temperature (degrees Kelvin)</param>
+        /// <returns>Air temperature (degrees Kelvin)</returns>
+        public double CalculateClimateFactor(
+            double kelvinAirTemperature)
+        {
+            const double t1 = 303.16;
+
+            var numerator = 15175 * (kelvinAirTemperature - t1);
+            var denominator = 1.987 * kelvinAirTemperature * t1;
+
+            return Math.Exp(numerator / denominator);
         }
 
         /// <summary>
@@ -733,29 +826,32 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.1.3-8
+        ///
+        /// Calculates the manure methane produced from non-covered manure handling systems.
         /// </summary>
-        /// <param name="degreesCelsius">Air temperature (degrees Celsius)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateDegreeKelvin(
-            double degreesCelsius)
+        /// <param name="volatileSolidsConsumed">Daily volatile solids consumed (kg day^-1)(</param>
+        /// <param name="methaneProducingCapacityOfManure">Methane producing capacity of manure (unitless)</param>
+        /// <returns>Daily methane emission (kg CH4)</returns>
+        public double CalculateLiquidManureMethane(
+            double volatileSolidsConsumed,
+            double methaneProducingCapacityOfManure)
         {
-            return degreesCelsius + 273.15;
+            return volatileSolidsConsumed * methaneProducingCapacityOfManure * 0.67;
         }
 
         /// <summary>
         /// Equation 4.1.3-9
+        ///
+        /// Calculates the manure methane produced from covered manure handling systems.
         /// </summary>
-        /// <param name="kelvinAirTemperature">Air temperature (degrees Kelvin)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateClimateFactor(
-            double kelvinAirTemperature)
+        /// <param name="manureMethane">Daily manure methane emission (kg CH4)</param>
+        /// <param name="emissionReductionFactor">Reduction in CH4 emissions from liquid systems due to cover.</param>
+        /// <returns></returns>
+        public double CalculateLiquidManureMethaneForCoveredSystem(
+            double manureMethane,
+            double emissionReductionFactor)
         {
-            const double t1 = 303.16;
-
-            var numerator = 15175 * (kelvinAirTemperature - t1);
-            var denominator = 1.987 * kelvinAirTemperature * t1;
-
-            return Math.Exp(numerator / denominator);
+            return manureMethane * (1 - emissionReductionFactor);
         }
 
         /// <summary>
@@ -1901,36 +1997,6 @@ namespace H.Core.Services.Animals
             double numberOfAnimals)
         {
             return (entericMethaneEmissionRate / 365) * numberOfAnimals;
-        }
-
-        /// <summary>
-        /// Equation 4.1.3-8
-        ///
-        /// Calculates the manure methane produced from non-covered manure handling systems.
-        /// </summary>
-        /// <param name="volatileSolidsConsumed">Daily volatile solids consumed (kg day^-1)(</param>
-        /// <param name="methaneProducingCapacityOfManure">Methane producing capacity of manure (unitless)</param>
-        /// <returns>Daily methane emission (kg CH4)</returns>
-        public double CalculateLiquidManureMethane(
-            double volatileSolidsConsumed,
-            double methaneProducingCapacityOfManure)
-        {
-            return volatileSolidsConsumed * methaneProducingCapacityOfManure * 0.67;
-        }
-
-        /// <summary>
-        /// Equation 4.1.3-9
-        ///
-        /// Calculates the manure methane produced from covered manure handling systems.
-        /// </summary>
-        /// <param name="manureMethane">Daily manure methane emission (kg CH4)</param>
-        /// <param name="emissionReductionFactor">Reduction in CH4 emissions from liquid systems due to cover.</param>
-        /// <returns></returns>
-        public double CalculateLiquidManureMethaneForCoveredSystem(
-            double manureMethane,
-            double emissionReductionFactor)
-        {
-            return manureMethane * (1 - emissionReductionFactor);
         }
 
         /// <summary>

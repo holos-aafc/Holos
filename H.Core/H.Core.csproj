@@ -157,7 +157,6 @@
     <Compile Include="CustomAttributes\UnitsAttribute.cs" />
     <Compile Include="Emissions\EnergyCarbonDioxideEmissionsCalculator.cs" />
     <Compile Include="Emissions\Table_68_69_Expression_Of_Uncertainty_Calculator.cs" />
-    <Compile Include="Emissions\LiquidManureMethaneEquationsCalculator.cs" />
     <Compile Include="Emissions\Results\AnimalComponentEmissionResultsExtensions.cs" />
     <Compile Include="Emissions\Results\AnimalComponentEmissionsResults.cs" />
     <Compile Include="Emissions\Results\AnimalGroupEmissionResults.cs" />

@@ -79,7 +79,6 @@ namespace H.Core.Services.Animals
              * Manure carbon (C) and methane (CH4)
              */
 
-            // Equation 4.1.1-2
             dailyEmissions.FecalCarbonExcretionRate = this.CalculateCarbonExcretionRate(
                 dailyDryMatterIntakeOfFeed: managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed);
 
@@ -143,56 +142,11 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 4.1.3-8
-                dailyEmissions.KelvinAirTemperature = base.CalculateDegreeKelvin(
-                    degreesCelsius: temperature);
-
-                // Equation 4.1.3-9
-                dailyEmissions.ClimateFactor = base.CalculateClimateFactor(
-                    kelvinAirTemperature: dailyEmissions.KelvinAirTemperature);
-
-                // Equation 4.1.3-3
-                dailyEmissions.VolatileSolidsProduced = base.CalculateVolatileSolidsProduced(
-                    volatileSolids: dailyEmissions.VolatileSolids,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals);
-
-                // Equation 4.1.3-4
-                dailyEmissions.VolatileSolidsLoaded = base.CalculateVolatileSolidsLoaded(
-                    volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
-
-                // Equation 4.1.3-5
-                dailyEmissions.VolatileSolidsAvailable = base.CalculateVolatileSolidsAvailable(
-                    volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
-                    volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
-                    volatileSolidsConsumedFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsConsumed);
-
-                // Equation 4.1.3-7
-                dailyEmissions.VolatileSolidsConsumed = base.CalculateVolatileSolidsConsumed(
-                    climateFactor: dailyEmissions.ClimateFactor,
-                    volatileSolidsAvailable: dailyEmissions.VolatileSolidsAvailable);
-
-                // Equation 4.1.3-8
-                dailyEmissions.ManureMethaneEmission = base.CalculateLiquidManureMethane(
-                    volatileSolidsConsumed: dailyEmissions.VolatileSolidsConsumed,
-                    methaneProducingCapacityOfManure: managementPeriod.ManureDetails.MethaneProducingCapacityOfManure);
-
-                if (managementPeriod.ManureDetails.StateType.IsCoveredSystem())
-                {
-                    if (managementPeriod.ManureDetails.StateType == ManureStateType.LiquidWithNaturalCrust)
-                    {
-                        // Equation 4.1.3-9
-                        dailyEmissions.ManureMethaneEmission = this.CalculateLiquidManureMethaneForCoveredSystem(
-                            manureMethane: dailyEmissions.ManureMethaneEmission,
-                            emissionReductionFactor: 0.4);
-                    }
-                    else
-                    {
-                        // Equation 4.1.3-9
-                        dailyEmissions.ManureMethaneEmission = this.CalculateLiquidManureMethaneForCoveredSystem(
-                            manureMethane: dailyEmissions.ManureMethaneEmission,
-                            emissionReductionFactor: 0.5); // Not finalized at this time so going with 0.5 (range is 25-50%)
-                    }
-                }
+                base.CalculateManureMethaneFromLiquidSystems(
+                    dailyEmissions, 
+                    previousDaysEmissions, 
+                    managementPeriod,
+                    temperature);
             }
 
             // Equation 4.1.3-13

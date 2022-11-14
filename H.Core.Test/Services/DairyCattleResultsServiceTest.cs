@@ -275,7 +275,7 @@ namespace H.Core.Test.Services
             var percentDigestibleEnergyInFeed = 2000.0625;
             var ashContentOfFeed = 349.0625;
             var result =
-                _dairyCattleResultsService.CalculateVolatileSolids(grossEnergyIntake, percentDigestibleEnergyInFeed, ashContentOfFeed);
+                _dairyCattleResultsService.CalculateVolatileSolids(grossEnergyIntake, percentDigestibleEnergyInFeed, ashContentOfFeed, 50);
             Assert.AreEqual(2745.9235805769927, result);
         }
 

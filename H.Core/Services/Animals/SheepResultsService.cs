@@ -228,7 +228,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
-                ashContentOfFeed: managementPeriod.SelectedDiet.Ash);
+                ashContentOfFeed: managementPeriod.SelectedDiet.Ash,
+                percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
 
             // Equation 4.1.2-4
             dailyEmissions.ManureMethaneEmissionRate = base.CalculateManureMethaneEmissionRate(
