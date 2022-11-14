@@ -92,21 +92,18 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.1.1-7
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.1.1-1
             dailyEmissions.AnimalWeight = base.GetCurrentAnimalWeight(
                 startWeight: managementPeriod.StartWeight,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            // Equation 3.1.2-2
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
                 dietaryNetEnergyConcentration: 6,
                 weight: dailyEmissions.AnimalWeight);
@@ -118,7 +115,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
-            // Equation 3.1.2-3
             dailyEmissions.GrossEnergyIntake = base.CalculateGrossEnergyIntakeForCalves(
                 dryMatterIntake: dailyEmissions.DryMatterIntake);
 
@@ -349,26 +345,22 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.1.1-7
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.2.1-1
             dailyEmissions.AnimalWeight = base.GetCurrentAnimalWeight(
                 startWeight: managementPeriod.StartWeight,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            // Equation 3.2.1-2
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
                 weight: dailyEmissions.AnimalWeight);
 
-            // Equation 3.1.1-3
             dailyEmissions.NetEnergyForActivity = base.CalculateNetEnergyForActivity(
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
@@ -378,7 +370,6 @@ namespace H.Core.Services.Animals
                 // Lactating dairy cows are always lactating - even if they are separated from the calves. This means the lactation calculations are always used regardless any
                 // associated groups of calves. This differs from beef cattle cows/calves where if the calves are removed then the lactation stops.
 
-                // Equation 3.2.1-4
                 dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                     milkProduction: managementPeriod.MilkProduction,
                     fatContent: managementPeriod.MilkFatContent);
@@ -386,27 +377,22 @@ namespace H.Core.Services.Animals
 
             if (animalGroup.GroupType.IsPregnantType())
             {
-                // Equation 3.2.1-5
                 dailyEmissions.NetEnergyForPregnancy = base.CalculateNetEnergyForPregnancy(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
             }
 
-            // Equation 3.2.1-7
             dailyEmissions.NetEnergyForGain = base.CalculateNetEnergyForGain(
                 weight: dailyEmissions.AnimalWeight,
                 gainCoefficient: managementPeriod.GainCoefficient,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 finalWeight: managementPeriod.EndWeight);
 
-            // Equation 3.2.1-8
             dailyEmissions.RatioOfEnergyAvailableForMaintenance = base.CalculateRatioOfNetEnergyAvailableInDietForMaintenanceToDigestibleEnergy(
                 totalDigestibleNutrient: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.2.1-9
             dailyEmissions.RatioOfEnergyAvailableForGain = base.CalculateRatioOfNetEnergyAvailableInDietForGainToDigestibleEnergyConsumed(
                 totalDigestibleNutrient: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.2.1-10
             dailyEmissions.GrossEnergyIntake = base.CalculateGrossEnergyIntake(
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                 netEnergyForActivity: dailyEmissions.NetEnergyForActivity,
@@ -422,14 +408,11 @@ namespace H.Core.Services.Animals
                 numberOfDays: managementPeriod.Duration.TotalDays,
                 fat: managementPeriod.SelectedDiet.Fat);
 
-
-            // Equation 3.2.1-11
             dailyEmissions.EntericMethaneEmissionRate = base.CalculateEntericMethaneEmissionRate(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 methaneConversionFactor: managementPeriod.SelectedDiet.MethaneConversionFactor,
                 additiveReductionFactor: dailyEmissions.AdditiveReductionFactor);
 
-            // Equation 3.2.1-12
             dailyEmissions.EntericMethaneEmission = base.CalculateEntericMethaneEmissions(
                 entericMethaneEmissionRate: dailyEmissions.EntericMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -469,24 +452,20 @@ namespace H.Core.Services.Animals
             dailyEmissions.NeutralDetergentFiberIntake = dailyEmissions.DryMatterIntake * managementPeriod.SelectedDiet.NdfContent;
             dailyEmissions.AcidDetergentFiberIntake = dailyEmissions.DryMatterIntake * managementPeriod.SelectedDiet.AdfContent;
 
-            // Equation 3.2.1-13
             dailyEmissions.EntericMethaneRaminHuhtanenDairy = this.CalculateEntericMethaneEmissionsUsingRaminHuhtanenMethod(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 3.2.1-14
             dailyEmissions.EntericMethaneMillsEtAlDairy = this.CalculateEntericMethaneEmissionUsingMillsEtAl(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 3.2.1-15
             dailyEmissions.EntericMethaneEllisEtAlDairy = this.CalculateEntericMethaneEmissionUsingEllisEtAl(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 acidDetergentFiberIntake: dailyEmissions.AcidDetergentFiberIntake,
                 neutralDetergentFiberIntake: dailyEmissions.NeutralDetergentFiberIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 3.2.1-16
             dailyEmissions.EntericMethaneNuiEtAlDairy = this.CalculateEntericMethaneEmissionUsingNuiEtAl(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 etherExtract: managementPeriod.SelectedDiet.Ee,

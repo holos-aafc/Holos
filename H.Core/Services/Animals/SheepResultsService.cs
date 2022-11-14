@@ -78,14 +78,12 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.1.1-7
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.3.1-1
             dailyEmissions.AnimalWeight = base.GetCurrentAnimalWeight(
                 startWeight: managementPeriod.StartWeight,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
@@ -99,18 +97,15 @@ namespace H.Core.Services.Animals
 
             if (animalGroup.GroupType == AnimalType.Ewes)
             {
-                // Equation 3.3.1-2
                 dailyEmissions.LambEweRatio = this.CalculateLambRatio(
                     numberOfLambs: totalNumberOfYoungAnimalsOnDate,
                     numberOfEwes: managementPeriod.NumberOfAnimals);
             }
 
-            // Equation 3.3.1-3
             dailyEmissions.NetEnergyForMaintenance = this.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
                 weight: dailyEmissions.AnimalWeight);
 
-            // Equation 3.3.1-4
             dailyEmissions.NetEnergyForActivity = this.CalculateNetEnergyForActivity(
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 weight: dailyEmissions.AnimalWeight);
@@ -123,32 +118,28 @@ namespace H.Core.Services.Animals
 
                 if (managementPeriod.UseCustomMilkProductionValue == false)
                 {
-                    // Equation 3.3.1-5
                     dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                         dailyWeightGainOfLambs: dailyGainForLambs,
                         energyRequiredToProduceAKilogramOfMilk: managementPeriod.EnergyRequiredForMilk);
                 }
                 else
                 {
-                    // Equation 3.3.1-6
                     dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactationUsingMilkProduction(
                         milkProduction: managementPeriod.MilkProduction,
                         energyRequiredToProduceAKilogramOfMilk: managementPeriod.EnergyRequiredForMilk);
                 }
             }
 
-            if (animalGroup.GroupType.IsPregnantType())
+            if (animalGroup.GroupType.IsPregnantType() && managementPeriod.ProductionStage == ProductionStages.Gestating)
             {
                 var pregnancyCoefficient = _pregnancyCoefficientProvider.GetPregnancyCoefficient(
                     lambRatio: dailyEmissions.LambEweRatio);
 
-                // Equation 3.3.1-6
                 dailyEmissions.NetEnergyForPregnancy = this.CalculateNetEnergyForPregnancy(
                     pregnancyCoefficient: pregnancyCoefficient,
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
             }
 
-            // Equation 3.3.1-7
             dailyEmissions.NetEnergyForWoolProduction = this.CalculateNetEnergyForWoolProduction(
                 energyValueOfAKilogramOfWool: managementPeriod.EnergyRequiredForWool,
                 woolProduction: managementPeriod.WoolProduction);
@@ -159,29 +150,24 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.3.1-8
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.3.1-9
             dailyEmissions.NetEnergyForGain = this.CalculateNetEnergyForGain(
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 weight: dailyEmissions.AnimalWeight,
                 coefficientA: managementPeriod.GainCoefficientA,
                 coefficientB: managementPeriod.GainCoefficientB);
 
-            // Equation 3.3.1-10
             dailyEmissions.RatioOfEnergyAvailableForMaintenance = this.CalculateRatioOfEnergyAvailableForMaintenance(
                 percentTotalDigestibleEnergyInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.3.1-11
             dailyEmissions.RatioOfEnergyAvailableForGain = this.CalculateRatioEnergyAvailableForGain(
                 percentTotalDigestibleEnergyInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.3.1-12
             dailyEmissions.GrossEnergyIntake = this.CalculateGrossEnergyIntake(
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                 netEnergyForActivity: dailyEmissions.NetEnergyForActivity,
@@ -193,12 +179,10 @@ namespace H.Core.Services.Animals
                 ratioOfNetEnergyAvailableInDietForGainToDigestibleEnergyConsumed: dailyEmissions.RatioOfEnergyAvailableForGain,
                 percentTotalDigestibleEnergyInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient);
 
-            // Equation 3.3.1-13
             dailyEmissions.EntericMethaneEmissionRate = this.CalculateEntericMethaneEmissionRateForSheep(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 methaneConversionFactor: managementPeriod.SelectedDiet.MethaneConversionFactor);
 
-            // Equation 3.3.1-14
             dailyEmissions.EntericMethaneEmission = this.CalculateEntericMethaneEmissions(
                 entericMethaneEmissionRate: dailyEmissions.EntericMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -480,7 +464,7 @@ namespace H.Core.Services.Animals
         #region Equations
 
         /// <summary>
-        /// Equation 3.3.1-3
+        /// Equation 3.3.1-2
         /// </summary>
         /// <param name="numberOfLambs">Number of lambs</param>
         /// <param name="numberOfEwes">Number of ewes</param>
@@ -522,7 +506,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.4.1-6
+        /// Equation 3.3.1-6
         /// </summary>
         /// <param name="milkProduction">Amount of milk produced (kg milk head^-1 day^-1)</param>
         /// <param name="energyRequiredToProduceAKilogramOfMilk">Energy required to produce 1 kg of milk (MJ kg^-1)</param>
@@ -535,7 +519,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-6
+        /// Equation 3.3.1-7
         /// </summary>
         /// <param name="pregnancyCoefficient">Pregnancy constant</param>
         /// <param name="netEnergyForMaintenance">Net energy for maintenance (MJ head^-1 day^-1)</param>
@@ -546,7 +530,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-7
+        /// Equation 3.3.1-8
         /// </summary>
         /// <param name="energyValueOfAKilogramOfWool">Energy value of 1 kg of wool (MJ kg^-1)</param>
         /// <param name="woolProduction">Wool production (kg year^-1)</param>
@@ -557,7 +541,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-9
+        /// Equation 3.3.1-10
         /// </summary>
         /// <param name="averageDailyGain">Average daily gain (kg head^-1 day^-1)</param>
         /// <param name="weight">Weight (kg head^-1)</param>
@@ -574,7 +558,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-10
+        /// Equation 3.3.1-11
         /// </summary>
         /// <param name="percentTotalDigestibleEnergyInFeed">Percent digestible energy in feed</param>
         /// <returns>Ratio of net energy available in diet for maintenance to digestible energy consumed (unitless)</returns>
@@ -591,7 +575,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.4.1-11
+        /// Equation 3.3.1-112
         /// </summary>
         /// <param name="percentTotalDigestibleEnergyInFeed">Percent digestible energy in feed</param>
         /// <returns>Ratio of net energy available in diet for gain to digestible energy consumed (unitless)</returns>
@@ -608,7 +592,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-12
+        /// Equation 3.3.1-13
         /// </summary>
         /// <param name="netEnergyForMaintenance">Net energy for maintenance (MJ head^-1 day^-1)</param>
         /// <param name="netEnergyForActivity">Net energy for activity (MJ head^-1 day^-1)</param>
@@ -635,7 +619,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-13
+        /// Equation 3.3.1-14
         /// </summary>
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
         /// <param name="methaneConversionFactor">Methane conversion factor</param>

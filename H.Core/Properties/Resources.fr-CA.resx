@@ -3112,6 +3112,9 @@
   <data name="LabelKilogramsNitrogenPerYear" xml:space="preserve">
     <value>kg N année^-1</value>
   </data>
+  <data name="LabelLactating" xml:space="preserve">
+    <value>Lactating</value>
+  </data>
   <data name="LabelLactationDiet" xml:space="preserve">
     <value>lactation</value>
   </data>
@@ -3318,6 +3321,9 @@
   </data>
   <data name="LabelPotassium" xml:space="preserve">
     <value>potassium</value>
+  </data>
+  <data name="LabelPregnancy" xml:space="preserve">
+    <value>Pregnancy</value>
   </data>
   <data name="LabelProductionStage" xml:space="preserve">
     <value>stade de production</value>

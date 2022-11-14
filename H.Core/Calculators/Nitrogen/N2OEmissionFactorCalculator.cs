@@ -80,7 +80,6 @@ namespace H.Core.Calculators.Nitrogen
                     // Equation 4.6.2-7
                     applicationEmissionResult.AmmoniacalLoss = fractionOfManureUsed * applicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * emissionFactorData.VolatilizationFraction;
 
-                    // Equation 4.6.3-2
                     fractionVolatilized = emissionFactorData.VolatilizationFraction;
                 }
                 else

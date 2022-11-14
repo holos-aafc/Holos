@@ -61,21 +61,18 @@ namespace H.Core.Services.Animals
             }
             else
             {
-                // Equation 3.1.1-7
                 dailyEmissions.AverageDailyGain = base.CalculateAverageDailyWeightGain(
                     initialWeight: managementPeriod.StartWeight,
                     finalWeight: managementPeriod.EndWeight,
                     numberOfDays: managementPeriod.Duration.TotalDays);
             }
 
-            // Equation 3.1.2-1
             dailyEmissions.AnimalWeight = base.GetCurrentAnimalWeight(
                 startWeight: managementPeriod.StartWeight,
                 averageDailyGain: dailyEmissions.AverageDailyGain,
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            // Equation 3.1.2-2
             var nemf = 0d;
             if (managementPeriod.SelectedDiet.DietaryNetEnergyConcentration == 0)
             {
@@ -99,7 +96,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
-            // Equation 3.1.2-3
             dailyEmissions.GrossEnergyIntake = CalculateGrossEnergyIntakeForCalves(
                 dryMatterIntake: dailyEmissions.DryMatterIntake);
 
@@ -108,7 +104,6 @@ namespace H.Core.Services.Animals
                 numberOfDays: managementPeriod.Duration.TotalDays,
                 fat: managementPeriod.SelectedDiet.Fat);
 
-            // Equation 3.1.1-12
             dailyEmissions.EntericMethaneEmissionRate = base.CalculateEntericMethaneEmissionRate(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 methaneConversionFactor: managementPeriod.SelectedDiet.MethaneConversionFactor,
@@ -531,6 +526,10 @@ namespace H.Core.Services.Animals
 
             if (animalGroup.GroupType.IsPregnantType())
             {
+                /*
+                 * Cows are always pregnant during the entire year
+                 */
+
                 // Equation 3.1.1-6
                 dailyEmissions.NetEnergyForPregnancy = base.CalculateNetEnergyForPregnancy(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);

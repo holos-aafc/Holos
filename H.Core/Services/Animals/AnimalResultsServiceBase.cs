@@ -313,6 +313,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 3.1.1-3
         /// Equation 3.2.1-2
+        /// Equation 3.3.1-3
         /// </summary>
         /// <param name="maintenanceCoefficient">Maintenance coefficient – adjusted for temperature (MJ day^-1 kg⁻¹)</param>
         /// <param name="weight">Average weight (kg head^-1)</param>
@@ -353,6 +354,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 3.1.1-7
         /// Equation 3.2.1-6
+        /// Equation 3.3.1-9
         /// </summary>
         /// <param name="initialWeight">Initial weight (kg head^-1)</param>
         /// <param name="finalWeight">Final weight (kg head^-1)</param>
@@ -1952,8 +1954,9 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.2.1-1
         /// Equation 3.1.2-1
+        /// Equation 3.2.1-1
+        /// Equation 3.3.1-1
         /// </summary>
         public double GetCurrentAnimalWeight(
             double startWeight,

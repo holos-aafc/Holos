@@ -5312,4 +5312,10 @@
   <data name="SavingDataMessage" xml:space="preserve">
     <value>Saving data, please wait.</value>
   </data>
+  <data name="LabelLactating" xml:space="preserve">
+    <value>Lactating</value>
+  </data>
+  <data name="LabelPregnancy" xml:space="preserve">
+    <value>Pregnancy</value>
+  </data>
 </root>

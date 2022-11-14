@@ -9376,6 +9376,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lactating.
+        /// </summary>
+        public static string LabelLactating {
+            get {
+                return ResourceManager.GetString("LabelLactating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lactation.
         /// </summary>
         public static string LabelLactationDiet {
@@ -10020,6 +10029,15 @@ namespace H.Core.Properties {
         public static string LabelPotassium {
             get {
                 return ResourceManager.GetString("LabelPotassium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pregnancy.
+        /// </summary>
+        public static string LabelPregnancy {
+            get {
+                return ResourceManager.GetString("LabelPregnancy", resourceCulture);
             }
         }
         

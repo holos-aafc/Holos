@@ -278,6 +278,19 @@ namespace H.Core.Providers.Climate
             return monthlyTotals;
         }
 
+        public double GetTemperatureForDay(DateTime dateTime)
+        {
+            var dailyResult = this.DailyClimateData.SingleOrDefault(x => x.Date.Equals(dateTime));
+            if (dailyResult != null)
+            {
+                return dailyResult.MeanDailyAirTemperature;
+            }
+            else
+            {
+                return this.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months) dateTime.Month);
+            }
+        }
+
         #endregion
     }
 }
