@@ -19,9 +19,9 @@ DairyHeifers (5),High fiber,87.6,13.3,0.07,0,0.45,0.246,70,0,2.4,1.51
 DairyHeifers (5),Low fiber,63,12.63,0.063,0,0.336,0.187,75,0,2.96,1.65
 DairyBulls,Low Energy,0,0.14,0.065,0,0,0,63,0,0,0
 DairyBulls,Medium Energy,0,0.18,0.065,0,0,0,68,0,0,0
-Sheep (6),High Energy/ptn,0,0.18,0.065,0,0,0,65,0,0,0
-Sheep (6),Medium Energy/ptn,0,0.12,0.065,0,0,0,55,0,0,0
-Sheep (6),Low Energy/ptn,0,0.08,0.065,0,0,0,45,0,0,0
+Sheep (6),High Energy/ptn,0,0.177,0.067,0,0,0,60,0,0,0
+Sheep (6),Medium Energy/ptn,0,0.124,0.067,0,0,0,55,0,0,0
+Sheep (6),Low Energy/ptn,0,0.057,0.067,0,0,0,48,0,0,0
 ,,,,,,,,,,,
 ,,,,,,,,,,,
 1 Values for beef cattle were obtained using feed information included in NASEM (2016). Ym values for beef cattle from IPCC (2019).,,,,,,,,,,,

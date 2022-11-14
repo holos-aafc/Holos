@@ -741,10 +741,10 @@ namespace H.Core.Providers.Feed
                 Name = Core.Properties.Resources.GoodQualityForage,
                 DietType = DietType.GoodQualityForage,
                 AnimalType = AnimalType.Sheep,
-                TotalDigestibleNutrient = 65,
-                CrudeProtein = 18,
+                TotalDigestibleNutrient = 60,
+                CrudeProtein = 17.7,
                 Ash = 8,
-                MethaneConversionFactor = 0.058,
+                MethaneConversionFactor = 0.067,
             });
 
             diets.Add(new Diet()
@@ -754,7 +754,7 @@ namespace H.Core.Providers.Feed
                 AnimalType = AnimalType.Sheep,
                 DietType = DietType.AverageQualityForage,
                 TotalDigestibleNutrient = 55,
-                CrudeProtein = 12,
+                CrudeProtein = 12.4,
                 Ash = 8,
                 MethaneConversionFactor = 0.067,
             });
@@ -765,10 +765,10 @@ namespace H.Core.Providers.Feed
                 Name = Core.Properties.Resources.PoorQualityForage,
                 DietType = DietType.PoorQualityForage,
                 AnimalType = AnimalType.Sheep,
-                TotalDigestibleNutrient = 45,
-                CrudeProtein = 6,
+                TotalDigestibleNutrient = 48,
+                CrudeProtein = 5.7,
                 Ash = 8,
-                MethaneConversionFactor = 0.074,
+                MethaneConversionFactor = 0.067,
             });
 
             return diets;
