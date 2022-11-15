@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
@@ -33,6 +34,8 @@ namespace H.Core
         private string _dataBackupFileName = $"{_backupNamePrefix}{DateTime.Now.ToString(_backupDateFormat)}.json";
 
         private const int MaxNumberOfBackups = 5;
+
+        private readonly SemaphoreSlim _asyncSaveSemaphore = new SemaphoreSlim(1, 1);
 
 
         /// <summary>
@@ -84,6 +87,11 @@ namespace H.Core
         /// </summary>
         public bool HasSaveCompleted { get; set; }
 
+        /// <summary>
+        /// A task that handles the async save process.
+        /// </summary>
+        public Task SaveTask { get; set; }
+
         #endregion
 
         #region Public Methods
@@ -112,15 +120,21 @@ namespace H.Core
         /// <returns></returns>
         public async Task SaveAsync()
         {
+            await _asyncSaveSemaphore.WaitAsync();
             try
+            {
+                var path = GetFullPathToStorageFile();
+                SaveTask = SaveInternalAsync(path);
+                await SaveTask;
+            }
+            catch (Exception)
             {
                 var path = GetFullPathToStorageFile();
                 await SaveInternalAsync(path);
             }
-            catch (Exception)
+            finally
             {
-                var path = GetFullPathToStorageFile().Replace(".json", "_" + DateTime.Now.ToString(_backupDateFormat) + ".json"); 
-                await SaveInternalAsync(path);
+                _asyncSaveSemaphore.Release();
             }
         }
 
@@ -185,9 +199,9 @@ namespace H.Core
         /// </summary>
         /// <param name="path">The path to the file that needs to be serialized</param>
         /// <returns></returns>
-        private async Task SaveInternalAsync(string path)
+        private Task SaveInternalAsync(string path)
         {
-            await Task.Run(() =>
+            return Task.Run(() =>
             {
                 using (StreamWriter fileStream = File.CreateText(path))
                 {

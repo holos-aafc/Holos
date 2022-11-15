@@ -174,8 +174,7 @@ namespace H.Core.Services.LandManagement
         private void CalculateCarbonAtInterval(
             CropViewItem previousYearResults,
             CropViewItem currentYearResults,
-            Farm farm,
-            FieldSystemComponent fieldSystemComponent)
+            Farm farm)
         {
             // The user can choose to use either the climate parameter or the management factor in the calculations
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? currentYearResults.ClimateParameter : currentYearResults.ManagementFactor;
@@ -222,6 +221,17 @@ namespace H.Core.Services.LandManagement
             currentYearResults.ChangeInCarbon = _icbmSoilCarbonCalculator.CalculateChangeInSoilCarbonAtInterval(
                 soilOrganicCarbonAtInterval: currentYearResults.SoilCarbon,
                 soilOrganicCarbonAtPreviousInterval: previousYearResults.SoilCarbon);
+
+            // If there is a measured value, then use the calculated Y_ag, Y_bg, and O pool values for the current year (using 2.1.3-8, 2.1.3-9, and 2.1.3-10)
+            if (previousYearResults.Year == 0 && farm.UseCustomStartingSoilOrganicCarbon)
+            {
+                currentYearResults.YoungPoolSoilCarbonAboveGround = previousYearResults.YoungPoolSoilCarbonAboveGround;
+                currentYearResults.YoungPoolSoilCarbonBelowGround = previousYearResults.YoungPoolSoilCarbonBelowGround;
+                currentYearResults.YoungPoolManureCarbon = previousYearResults.YoungPoolManureCarbon;
+                currentYearResults.OldPoolSoilCarbon = previousYearResults.OldPoolSoilCarbon;
+                currentYearResults.SoilCarbon = farm.StartingSoilOrganicCarbon;
+                currentYearResults.ChangeInCarbon = 0;
+            }
         }
 
         /// <summary>
@@ -459,8 +469,7 @@ namespace H.Core.Services.LandManagement
                     this.CalculateCarbonAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,
-                        farm: farm,
-                        fieldSystemComponent: fieldSystemComponent);
+                        farm: farm);
 
                      _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
                         previousYearResults: previousYearResults,
