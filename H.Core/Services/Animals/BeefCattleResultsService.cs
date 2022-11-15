@@ -159,15 +159,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.1.3-13
-            dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = base.CalculateCarbonLostAsMethaneDuringManagement(
-                monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
-
-            // Equation 4.1.3-14
-            dailyEmissions.AmountOfCarbonInStoredManure = base.CalculateAmountOfCarbonInStoredManure(
-                monthlyFecalCarbonExcretion: dailyEmissions.FecalCarbonExcretion,
-                monthlyAmountOfCarbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial,
-                monthlyAmountOfCarbonLostAsMethaneDuringManagement: dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
 
             /*
              * Direct manure N2O
@@ -686,15 +678,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 4.1.3-13
-            dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = base.CalculateCarbonLostAsMethaneDuringManagement(
-                monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
-
-            // Equation 4.1.3-14
-            dailyEmissions.AmountOfCarbonInStoredManure = base.CalculateAmountOfCarbonInStoredManure(
-                monthlyFecalCarbonExcretion: dailyEmissions.FecalCarbonExcretion,
-                monthlyAmountOfCarbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial,
-                monthlyAmountOfCarbonLostAsMethaneDuringManagement: dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
 
             /*
              * Direct manure N2O

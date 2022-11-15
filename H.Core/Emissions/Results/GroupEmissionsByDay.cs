@@ -592,8 +592,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.3-13
-        ///
+        /// Total C lost as methane during manure management (kg C day^-1)
+        /// 
         /// (kg C)
         /// </summary>
         public double AmountOfCarbonLostAsMethaneDuringManagement
@@ -603,9 +603,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.3-14
-        ///
-        /// (kg C)
+        /// Total amount of C flowing into storage each day
+        /// 
+        /// (kg C day^-1)
         /// </summary>
         public double AmountOfCarbonInStoredManure
         {
@@ -614,9 +614,13 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.2.1-1
-        /// Equation 4.2.1-11
-        /// 
+        /// Amount of C in stored manure on the current day
+        ///
+        /// (kg C)
+        /// </summary>
+        public double AmountOfCarbonInStoredManureOnDay { get; set; }
+
+        /// <summary>
         /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinIntake
