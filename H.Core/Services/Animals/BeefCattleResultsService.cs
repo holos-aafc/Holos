@@ -684,80 +684,12 @@ namespace H.Core.Services.Animals
              * Direct manure N2O
              */
 
-            // Equation 4.2.1-1
-            dailyEmissions.ProteinIntake = base.CalculateProteinIntake(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                crudeProtein: managementPeriod.SelectedDiet.CrudeProteinContent);
-
-            if (animalGroup.GroupType.IsPregnantType())
-            {
-                // Equation 4.2.1-2
-                dailyEmissions.ProteinRetainedForPregnancy = base.CalculateProteinRetainedForPregnancy();
-            }
-
-            if (isLactatingAnimalGroup)
-            {
-                // Equation 4.2.1-3
-                dailyEmissions.ProteinRetainedForLactation = base.CalculateProteinRetainedForLactation(
-                    milkProduction: managementPeriod.MilkProduction,
-                    proteinContentOfMilk: managementPeriod.MilkProteinContent,
-                    numberOfYoungAnimals: totalNumberOfYoungAnimalsOnDate,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals);
-            }
-
-            if (managementPeriod.HasGrowingAnimals)
-            {
-                // Equation 4.2.1-4
-                dailyEmissions.EmptyBodyWeight = base.CalculateEmptyBodyWeight(
-                    weight: dailyEmissions.AnimalWeight);
-
-                // Equation 4.2.1-5
-                dailyEmissions.EmptyBodyGain = base.CalculateEmptyBodyGain(
-                    averageDailyGain: dailyEmissions.AverageDailyGain);
-
-                // Equation 4.2.1-6
-                dailyEmissions.RetainedEnergy = base.CalculateRetainedEnergy(
-                    emptyBodyWeight: dailyEmissions.EmptyBodyWeight,
-                    emptyBodyGain: dailyEmissions.EmptyBodyGain);
-
-                // Equation 4.2.1-7
-                dailyEmissions.ProteinRetainedForGain = base.CalculateProteinRetainedForGain(
-                    averageDailyGain: dailyEmissions.AverageDailyGain,
-                    retainedEnergy: dailyEmissions.RetainedEnergy);
-            }
-
-            // Equation 4.2.1-8
-            dailyEmissions.NitrogenExcretionRate = base.CalculateNitrogenExcretionRate(
-                proteinIntake: dailyEmissions.ProteinIntake,
-                proteinRetainedForPregnancy: dailyEmissions.ProteinRetainedForPregnancy,
-                proteinRetainedForLactation: dailyEmissions.ProteinRetainedForLactation,
-                proteinRetainedForGain: dailyEmissions.ProteinRetainedForGain);
-
-            // Equation 4.2.1-29 (used in volatilization calculation)
-            dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
-                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
-
-            // Equation 4.2.1-30
-            dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial = base.CalculateRateOfNitrogenAddedFromBeddingMaterial(
-                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
-                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
-
-            // Equation 4.2.1-31
-            dailyEmissions.AmountOfNitrogenAddedFromBedding = base.CalculateAmountOfNitrogenAddedFromBeddingMaterial(
-                rateOfNitrogenAddedFromBedding: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
-
-            // Equation 4.2.2-1
-            dailyEmissions.ManureDirectN2ONEmissionRate = base.CalculateManureDirectNitrogenEmissionRate(
-                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                emissionFactor: managementPeriod.ManureDetails.N2ODirectEmissionFactor);
-
-            // Equation 4.2.2-2
-            dailyEmissions.ManureDirectN2ONEmission = base.CalculateManureDirectNitrogenEmission(
-                manureDirectNitrogenEmissionRate: dailyEmissions.ManureDirectN2ONEmissionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
+            base.CalculateDirectN2OFromBeefAndDairy(
+                dailyEmissions,
+                managementPeriod,
+                animalGroup,
+                isLactatingAnimalGroup,
+                totalNumberOfYoungAnimalsOnDate);
 
             /*
              * Indirect manure N2O

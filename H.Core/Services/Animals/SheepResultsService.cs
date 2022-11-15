@@ -248,7 +248,6 @@ namespace H.Core.Services.Animals
              * Direct manure N2O
              */
 
-            // Equation 4.2.1-16
             dailyEmissions.ProteinIntake = base.CalculateProteinIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
                 crudeProtein: managementPeriod.SelectedDiet.CrudeProteinContent);

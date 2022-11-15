@@ -942,9 +942,95 @@ namespace H.Core.Services.Animals
             return rateOfNitrogenAddedFromBedding * numberOfAnimals;
         }
 
+        public void CalculateDirectN2OFromBeefAndDairy(
+            GroupEmissionsByDay dailyEmissions, 
+            ManagementPeriod managementPeriod, 
+            AnimalGroup animalGroup,
+            bool isLactatingAnimalGroup,
+            double totalNumberOfYoungAnimalsOnDate)
+        {
+            // Equation 4.2.1-1
+            dailyEmissions.ProteinIntake = this.CalculateProteinIntake(
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
+                crudeProtein: managementPeriod.SelectedDiet.CrudeProteinContent);
+
+            if (animalGroup.GroupType.IsPregnantType())
+            {
+                // Equation 4.2.1-2
+                dailyEmissions.ProteinRetainedForPregnancy = this.CalculateProteinRetainedForPregnancy();
+            }
+
+            if (isLactatingAnimalGroup)
+            {
+                // Dairy lactating cows are always lactating - beef lactating cows only lactate when calves are present
+                var animalsAreAlwaysLactating = animalGroup.GroupType == AnimalType.DairyLactatingCow;
+
+                // Equation 4.2.1-3
+                dailyEmissions.ProteinRetainedForLactation = this.CalculateProteinRetainedForLactation(
+                    milkProduction: managementPeriod.MilkProduction,
+                    proteinContentOfMilk: managementPeriod.MilkProteinContent,
+                    numberOfYoungAnimals: totalNumberOfYoungAnimalsOnDate,
+                    numberOfAnimals: managementPeriod.NumberOfAnimals, 
+                    animalsAreAlwaysLactating: animalsAreAlwaysLactating);
+            }
+
+            if (managementPeriod.HasGrowingAnimals)
+            {
+                // Equation 4.2.1-4
+                dailyEmissions.EmptyBodyWeight = this.CalculateEmptyBodyWeight(
+                    weight: dailyEmissions.AnimalWeight);
+
+                // Equation 4.2.1-5
+                dailyEmissions.EmptyBodyGain = this.CalculateEmptyBodyGain(
+                    averageDailyGain: dailyEmissions.AverageDailyGain);
+
+                // Equation 4.2.1-6
+                dailyEmissions.RetainedEnergy = this.CalculateRetainedEnergy(
+                    emptyBodyWeight: dailyEmissions.EmptyBodyWeight,
+                    emptyBodyGain: dailyEmissions.EmptyBodyGain);
+
+                // Equation 4.2.1-7
+                dailyEmissions.ProteinRetainedForGain = this.CalculateProteinRetainedForGain(
+                    averageDailyGain: dailyEmissions.AverageDailyGain,
+                    retainedEnergy: dailyEmissions.RetainedEnergy);
+            }
+
+            // Equation 4.2.1-8
+            dailyEmissions.NitrogenExcretionRate = this.CalculateNitrogenExcretionRate(
+                proteinIntake: dailyEmissions.ProteinIntake,
+                proteinRetainedForPregnancy: dailyEmissions.ProteinRetainedForPregnancy,
+                proteinRetainedForLactation: dailyEmissions.ProteinRetainedForLactation,
+                proteinRetainedForGain: dailyEmissions.ProteinRetainedForGain);
+
+            // Equation 4.2.1-29 (used in volatilization calculation)
+            dailyEmissions.AmountOfNitrogenExcreted = this.CalculateAmountOfNitrogenExcreted(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.2.1-30
+            dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial = this.CalculateRateOfNitrogenAddedFromBeddingMaterial(
+                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
+
+            // Equation 4.2.1-31
+            dailyEmissions.AmountOfNitrogenAddedFromBedding = this.CalculateAmountOfNitrogenAddedFromBeddingMaterial(
+                rateOfNitrogenAddedFromBedding: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            // Equation 4.2.2-1
+            dailyEmissions.ManureDirectN2ONEmissionRate = this.CalculateManureDirectNitrogenEmissionRate(
+                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
+                emissionFactor: managementPeriod.ManureDetails.N2ODirectEmissionFactor);
+
+            // Equation 4.2.2-2
+            dailyEmissions.ManureDirectN2ONEmission = this.CalculateManureDirectNitrogenEmission(
+                manureDirectNitrogenEmissionRate: dailyEmissions.ManureDirectN2ONEmissionRate,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+        }
+
         /// <summary>
         /// Equation 4.2.1-1
-        /// Equation 4.2.1-16
         /// </summary>
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
         /// <param name="crudeProtein">Crude protein content (kg kg⁻¹)</param>
@@ -970,12 +1056,13 @@ namespace H.Core.Services.Animals
         /// <param name="proteinContentOfMilk">Protein content of milk (kg kg⁻¹)</param>
         /// <param name="numberOfYoungAnimals">Number of calves</param>
         /// <param name="numberOfAnimals">Number of cows</param>
+        /// <param name="animalsAreAlwaysLactating"></param>
         /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
-        public virtual double CalculateProteinRetainedForLactation(
-            double milkProduction,
+        public virtual double CalculateProteinRetainedForLactation(double milkProduction,
             double proteinContentOfMilk,
             double numberOfYoungAnimals,
-            double numberOfAnimals)
+            double numberOfAnimals, 
+            bool animalsAreAlwaysLactating)
         {
             if (Math.Abs(numberOfAnimals) < Double.Epsilon)
             {
