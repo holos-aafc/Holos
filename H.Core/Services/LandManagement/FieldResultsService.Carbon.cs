@@ -462,7 +462,7 @@ namespace H.Core.Services.LandManagement
                 {
                     var currentYearResults = viewItemsForField.ElementAt(i);
 
-                    // Get previous year results, if there is no previous year (i.e. t = 0), then use equilibrium year values
+                    // Get previous year results, if there is no previous year (i.e. t = 0), then use equilibrium (or custom measured) values for the pools
                     var previousYearResults = i == 0 ? equilibriumYearResults : viewItemsForField.ElementAt(i - 1);
 
                     // Carbon must be calculated before nitrogen

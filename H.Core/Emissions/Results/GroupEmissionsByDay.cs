@@ -1680,12 +1680,18 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _ammoniaEmissionsDuringDigestateStorage, value);
         }
 
+        /// <summary>
+        /// (kg NH-3)
+        /// </summary>
         public double AdjustedAmmoniaFromHousing
         {
             get => _adjustedAmmoniaFromHousing;
             set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
         }
 
+        /// <summary>
+        /// (kg NH-3)
+        /// </summary>
         public double AdjustedAmmoniaFromStorage
         {
             get => _adjustedAmmoniaFromStorage;
@@ -1814,6 +1820,11 @@ namespace H.Core.Emissions.Results
         public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
 
         public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+
+        /// <summary>
+        /// (kg TAN)
+        /// </summary>
+        public double TanInStorageOnDay { get; set; }
 
         #endregion
     }
