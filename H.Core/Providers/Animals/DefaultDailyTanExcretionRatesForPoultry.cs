@@ -31,7 +31,7 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        public double GetEmissionFactorForHousing(AnimalType animalType)
+        public double GetAmmoniaEmissionFactorForHousing(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {
@@ -51,7 +51,7 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        public double GetEmissionFactorForStorage(AnimalType animalType)
+        public double GetAmmoniaEmissionFactorForStorage(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {

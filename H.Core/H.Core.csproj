@@ -438,7 +438,6 @@
     <Compile Include="Providers\Animals\Table_30_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider.cs" />
     <Compile Include="Providers\Animals\Table_45_Poultry_OtherLivestock_Default_NExcretionRates_Provider.cs" />
     <Compile Include="Providers\Animals\Table_43_Swine_Default_PrGain_Values_Provider.cs" />
-    <Compile Include="Providers\Animals\DefaultTanEmissionFactorsForHousedPoultry.cs" />
     <Compile Include="Providers\Animals\Duplicate_Table_46_Beef_Dairy_Default_Emission_Factors_Provider.cs" />
     <Compile Include="Providers\Animals\Table_37_Livestock_Daily_Volatile_Excretion_Factors_Provider.cs" />
     <Compile Include="Providers\Animals\DefaultDailyTanExcretionRatesForPoultry.cs" />
