@@ -1011,7 +1011,16 @@ namespace H.Core.Models
 
         public Diet GetDietByName(DietType dietType)
         {
-            return this.Diets.FirstOrDefault(x => x.DietType == dietType);
+            var result = this.Diets.FirstOrDefault(x => x.DietType == dietType);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                // Old farms will not have newly added diets - return a catch-all diet in this case
+                return this.Diets.FirstOrDefault(x => x.AnimalType == AnimalType.NotSelected);
+            }
         }
 
         /// <summary>

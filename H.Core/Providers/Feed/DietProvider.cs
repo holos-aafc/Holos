@@ -783,6 +783,7 @@ namespace H.Core.Providers.Feed
             {
                 Name = Resources.None,
                 IsCustomPlaceholderDiet = true,
+                DietType = DietType.None,
                 AnimalType = AnimalType.NotSelected,
             };
         }

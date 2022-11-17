@@ -58,13 +58,12 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
-            // Swine piglets do not have a diet as they are still suckling. They still need to be assigned a SelectedDiet
-            // otherwise any calls to SelectedDiet throws an exception as managementPeriod.SelectedDiet will be null.
-            if (managementPeriod.AnimalType == AnimalType.SwinePiglets)
+            if (managementPeriod.ProductionStage == ProductionStages.Weaning)
             {
-               managementPeriod.SelectedDiet = farm.Diets.SingleOrDefault(x => x.IsCustomPlaceholderDiet);
+                // No emissions from piglets who are still nursing
+                return dailyEmissions;
             }
-            
+
             /*
              * Enteric methane (CH4)
              */

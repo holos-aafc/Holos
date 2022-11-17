@@ -338,6 +338,17 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg NH3)
         /// </summary>
+        public double TotalAmmoniaEmissionsFromHousingAndStorageSystem
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniaEmissionsFromHousingAndStorage);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
         public double MonthlyTotalAmmoniaEmissions
         {
             get
