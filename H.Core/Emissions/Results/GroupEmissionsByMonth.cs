@@ -347,6 +347,17 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double TotalNitrogenLossesFromHousingAndStorage
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalNitrogenLossesFromHousingAndStorage);
+            }
+        }
+
+        /// <summary>
         /// (kg NH3)
         /// </summary>
         public double MonthlyTotalAmmoniaEmissions

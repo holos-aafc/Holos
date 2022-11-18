@@ -50,10 +50,11 @@ namespace H.Core.Calculators.Carbon
             if (this.CanCalculateInputsForCrop(this.CurrentYearResults))
             {
                 // Equation 2.7.2-1
-                base.AboveGroundResidueN = this.CurrentYearResults.AboveGroundResidueDryMatter * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInStraw;
+                base.AboveGroundResidueN = (this.CurrentYearResults.AboveGroundResidueDryMatter) * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInStraw;
 
                 // Equation 2.7.2-2
-                base.BelowGroundResidueN = this.CurrentYearResults.BelowGroundResidueDryMatter * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInRoots;
+                // Below ground dry matter is for the entire field so adjust for area here.
+                base.BelowGroundResidueN = (this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInRoots;
             }
             else
             {
