@@ -340,7 +340,9 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.5-5
             // Equation 2.7.4-5
-            this.N2O_NFromOrganicNitrogen = (this.OrganicPool * emissionFactorForOrganicNitrogen) + directN2ONFromLandAppliedManure + directN2ONFromLandAppliedManureNotAppliedToAnyField;
+            this.N2O_NFromOrganicNitrogen =
+                (this.OrganicPool *
+                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedManureNotAppliedToAnyField) / this.CurrentYearResults.Area);
         }
 
         protected void CalculateNitricOxide(double nORatio)
@@ -685,8 +687,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-1
             var totalDirectNitrousOxide = this.N2O_NFromSyntheticFertilizer +
                                           this.N2O_NFromResidues +
-                                          this.N2O_NFromMineralization +
-                                          this.N2O_NFromOrganicNitrogen;
+                                          this.N2O_NFromMineralization + this.N2O_NFromOrganicNitrogen;
 
             // Equation 2.6.9-2
             // Equation 2.7.8-2
