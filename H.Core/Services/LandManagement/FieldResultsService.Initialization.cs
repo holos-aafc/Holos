@@ -639,7 +639,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 2.2.1-60
+        /// Equation 2.1.2-30
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>

@@ -83,8 +83,16 @@ namespace H.Core.Services.LandManagement
 
                     if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
                     {
-                        // Last year of stand is when 100% of roots are returned
-                        cropViewItem.PercentageOfRootsReturnedToSoil = 100;
+                        if (cropViewItem.CropType == CropType.RangelandNative)
+                        {
+                            // Rangelands are never harvested and so we continue with 30% root turnover
+                            cropViewItem.PercentageOfRootsReturnedToSoil = 30;
+                        }
+                        else
+                        {
+                            // Last year of stand is when 100% of roots are returned
+                            cropViewItem.PercentageOfRootsReturnedToSoil = 100;
+                        }
                     }
                     else
                     {
@@ -177,7 +185,15 @@ namespace H.Core.Services.LandManagement
                 {
                     if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
                     {
-                        cropViewItem.TillageType = TillageType.Reduced;
+                        if (cropViewItem.CropType == CropType.RangelandNative)
+                        {
+                            // Rangelands are never tilled
+                            cropViewItem.TillageType = TillageType.NoTill;
+                        }
+                        else
+                        {
+                            cropViewItem.TillageType = TillageType.Reduced;
+                        }
                     }
                     else
                     {
