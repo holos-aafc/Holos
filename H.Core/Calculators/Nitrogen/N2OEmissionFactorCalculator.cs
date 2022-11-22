@@ -222,13 +222,32 @@ namespace H.Core.Calculators.Nitrogen
 
             foreach (var landApplicationEmissionResult in byYear)
             {
-                result.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching;
-                result.TotalIndirectN2ONEmissions += landApplicationEmissionResult.TotalIndirectN2ONEmissions;
-                result.TotalNitrateLeached += landApplicationEmissionResult.TotalNitrateLeached;
-                result.TotalN2ONFromManureVolatilized += landApplicationEmissionResult.TotalN2ONFromManureVolatilized;
-                result.TotalVolumeOfManureUsedDuringApplication  += landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication;
-                result.AmmoniacalLoss += landApplicationEmissionResult.AmmoniacalLoss;
-                result.ActualAmountOfNitrogenAppliedFromLandApplication += landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication;
+                result.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureLeaching / viewItem.Area
+                    : 0;
+
+                result.TotalIndirectN2ONEmissions += landApplicationEmissionResult.TotalIndirectN2ONEmissions > 0
+                    ? landApplicationEmissionResult.TotalIndirectN2ONEmissions / viewItem.Area
+                    : 0;
+
+                result.TotalNitrateLeached += landApplicationEmissionResult.TotalNitrateLeached > 0
+                    ? landApplicationEmissionResult.TotalNitrateLeached / viewItem.Area
+                    : 0;
+
+                result.TotalN2ONFromManureVolatilized += landApplicationEmissionResult.TotalN2ONFromManureVolatilized > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureVolatilized / viewItem.Area
+                    : 0;
+
+                result.TotalVolumeOfManureUsedDuringApplication  += landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication > 0
+                    ? landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication / viewItem.Area
+                    : 0;
+
+                result.AmmoniacalLoss += landApplicationEmissionResult.AmmoniacalLoss > 0
+                    ? landApplicationEmissionResult.AmmoniacalLoss / viewItem.Area
+                    : 0;
+                result.ActualAmountOfNitrogenAppliedFromLandApplication += landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0
+                    ? landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication / viewItem.Area
+                    : 0;
             }
 
             return result;

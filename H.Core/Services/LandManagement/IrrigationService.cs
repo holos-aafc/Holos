@@ -67,6 +67,27 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
+        public double GetIrrigationForDay(int julianDay, Province province, int year, double annualIrrigation)
+        {
+            var month = this.GetMonthFromJulianDay(julianDay);
+
+            double irrigationPercentage = 0;
+            var data = _irrigationProvider.GetMonthlyAverageIrrigationDataInstance(month, province);
+            if (data != null)
+            {
+                irrigationPercentage = data.IrrigationVolume;
+            }
+
+            // Lookup value will be null for January, February, March, November, and December
+
+            var fraction = irrigationPercentage / 100.0;
+            double daysInMonth = DateTime.DaysInMonth(year, (int)month);
+
+            var result =  ((annualIrrigation * fraction) / daysInMonth);
+
+            return result;
+        }
+
         public List<double> AddIrrigationToDailyPrecipitations(
             List<double> dailyPrecipitationList, 
             Farm farm,

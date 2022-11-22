@@ -639,7 +639,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 2.1.2-30
+        /// Equation 2.1.2-13
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
@@ -648,7 +648,7 @@ namespace H.Core.Services.LandManagement
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
         {
             var yield = (((grainCropViewItem.PlantCarbonInAgriculturalProduct + (grainCropViewItem.PlantCarbonInAgriculturalProduct * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct))) *
-                          silageCropViewItem.PercentageOfProductYieldReturnedToSoil / 100) / silageCropViewItem.CarbonConcentration) / silageCropViewItem.MoistureContentOfCrop;
+                          silageCropViewItem.PercentageOfProductYieldReturnedToSoil / 100) / silageCropViewItem.CarbonConcentration) / silageCropViewItem.MoistureContentOfCropPercentage;
 
             return yield;
         }
