@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Plants
 {
     [TestClass]
-    public class Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider_Test
+    public class LumCMax_KValues_Perennial_Cropping_Change_Provider_Test
     {
-        private Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider _forPerennialsAndGrasslandProvider;
+        private LumCMax_KValues_Perennial_Cropping_Change_Provider _forPerennialsAndGrasslandProvider;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _forPerennialsAndGrasslandProvider = new Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider();
+            _forPerennialsAndGrasslandProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
         }
 
         [TestMethod]

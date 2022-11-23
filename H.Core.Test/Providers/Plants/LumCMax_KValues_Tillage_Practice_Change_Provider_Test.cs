@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Plants
 {
     [TestClass]
-    public class Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider_Test
+    public class LumCMax_KValues_Tillage_Practice_Change_Provider_Test
     {
-        private Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider _provider;
+        private LumCMax_KValues_Tillage_Practice_Change_Provider _provider;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider();
+            _provider = new LumCMax_KValues_Tillage_Practice_Change_Provider();
         }
 
         [TestMethod]

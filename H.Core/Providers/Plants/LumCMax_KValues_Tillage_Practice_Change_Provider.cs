@@ -13,7 +13,7 @@ namespace H.Core.Providers.Plants
     /// <summary>
     /// Table 3. LumCmax and k values for tillage practice change.
     /// </summary>
-    public class Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider
+    public class LumCMax_KValues_Tillage_Practice_Change_Provider
     {
         #region Fields
 
@@ -25,7 +25,7 @@ namespace H.Core.Providers.Plants
 
         #region Constructors
 
-        public Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider()
+        public LumCMax_KValues_Tillage_Practice_Change_Provider()
         {
             HTraceListener.AddTraceListener();
             this.Data = this.ReadData();
@@ -35,7 +35,7 @@ namespace H.Core.Providers.Plants
 
         #region Properties
 
-        private List<Table_3_LumCMax_KValues_Tillage_Practice_Change_Data> Data { get; set; }
+        private List<LumCMax_KValues_Tillage_Practice_Change_Data> Data { get; set; }
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace H.Core.Providers.Plants
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider.GetLumCMax)} unable to get value for {ecozone.GetDescription()}, {soilTexture.GetDescription()}, and {tillagePracticeChangeType.GetDescription()}. Returning default value of {defaultValue}.");
+                Trace.TraceError($"{nameof(LumCMax_KValues_Tillage_Practice_Change_Provider.GetLumCMax)} unable to get value for {ecozone.GetDescription()}, {soilTexture.GetDescription()}, and {tillagePracticeChangeType.GetDescription()}. Returning default value of {defaultValue}.");
 
                 return defaultValue;
             }
@@ -67,7 +67,7 @@ namespace H.Core.Providers.Plants
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider.GetKValue)} unable to get value for {ecozone.GetDescription()}, {soilTexture.GetDescription()}, and {tillagePracticeChangeType.GetDescription()}. Returning default value of {defaultValue}.");
+                Trace.TraceError($"{nameof(LumCMax_KValues_Tillage_Practice_Change_Provider.GetKValue)} unable to get value for {ecozone.GetDescription()}, {soilTexture.GetDescription()}, and {tillagePracticeChangeType.GetDescription()}. Returning default value of {defaultValue}.");
 
                 return defaultValue;
             }
@@ -77,12 +77,12 @@ namespace H.Core.Providers.Plants
 
         #region Private Methods
 
-        private List<Table_3_LumCMax_KValues_Tillage_Practice_Change_Data> ReadData()
+        private List<LumCMax_KValues_Tillage_Practice_Change_Data> ReadData()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var filename = CsvResourceNames.LumCMaxAndKValuesForTillagePracticeChange;
             var filelines = CsvResourceReader.GetFileLines(filename);
-            var result = new List<Table_3_LumCMax_KValues_Tillage_Practice_Change_Data>();
+            var result = new List<LumCMax_KValues_Tillage_Practice_Change_Data>();
 
             foreach (var line in filelines.Skip(1))
             {
@@ -91,7 +91,7 @@ namespace H.Core.Providers.Plants
                     break;
                 }
 
-                var entry = new Table_3_LumCMax_KValues_Tillage_Practice_Change_Data();
+                var entry = new LumCMax_KValues_Tillage_Practice_Change_Data();
                 var ecozone = _ecozoneStringConverter.Convert(line[0]);
                 var soilTexture = _soilTextureStringConverter.Convert(line[1]);
                 var tillagePracticeChangeType = _tillagePracticeChangeTypeStringConverter.Convert(line[2]);

@@ -283,8 +283,8 @@
   <data name="sn_sk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sn_sk.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LumCMax_And_KValues_For_Tillage_Practice_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LumCMax_And_KValues_For_Tillage_Practice_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -298,8 +298,8 @@
   <data name="MCFAndNitrogenOxideEmissionsForBeefDairySwine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LumCMax_And_KValues_For_Fallow_Practice_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LumCMax_And_KValues_For_Fallow_Practice_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="SwineVolatileExcretion_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SwineVolatileExcretion_34.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -310,8 +310,8 @@
   <data name="Table_36_Daily_Feed_Intake_For_Swine_Groups" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_36_Daily_Feed_Intake_For_Swine_Groups.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LumCMax_And_KValues_For_Perennial_Cropping_Change" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LumCMax_And_KValues_For_Perennial_Cropping_Change.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Table_25_Livestock_Coefficients_For_Sheep" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_25_Livestock_Coefficients_For_Sheep.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

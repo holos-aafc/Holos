@@ -2,7 +2,7 @@
 
 namespace H.Core.Providers.Plants
 {
-    public class Table_5_LumCMax_KValues_Perennial_Cropping_Change_Data
+    public class LumCMax_KValues_Perennial_Cropping_Change_Data
     {
         #region Properties
 

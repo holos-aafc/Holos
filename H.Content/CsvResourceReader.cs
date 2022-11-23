@@ -113,13 +113,13 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops);
 
                 case CsvResourceNames.LumCMaxAndKValuesForTillagePracticeChange:
-                    return SplitFileIntoLines(Resource.Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change);
+                    return SplitFileIntoLines(Resource.LumCMax_And_KValues_For_Tillage_Practice_Change);
 
                 case CsvResourceNames.LumCMaxAndKValuesForFallowPracticeChange:
-                    return SplitFileIntoLines(Resource.Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change);
+                    return SplitFileIntoLines(Resource.LumCMax_And_KValues_For_Fallow_Practice_Change);
 
                 case CsvResourceNames.LumCMaxAndKValuesForPerennialCroppingChange:
-                    return SplitFileIntoLines(Resource.Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change);
+                    return SplitFileIntoLines(Resource.LumCMax_And_KValues_For_Perennial_Cropping_Change);
 
                 case CsvResourceNames.SoilCarbonEmissions:
                     return SplitFileIntoLines(Resource.SoilCarbonEmissions);

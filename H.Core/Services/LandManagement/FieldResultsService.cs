@@ -57,12 +57,13 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _manureApplicationViewItemMapper;
         private readonly IMapper _harvestViewItemMapper;
         private readonly IMapper _hayImportViewItemMapper;
+        private readonly IMapper _fertilizerViewItemMapper;
 
         private readonly Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider();
         private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
-        private readonly Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider();
-        private readonly Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider();
-        private readonly Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider();
+        private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
+        private readonly LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new LumCMax_KValues_Tillage_Practice_Change_Provider();
+        private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
         private readonly Table_53_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_53_Fuel_Energy_Estimates_Provider();
         private readonly Table_54_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider = new Table_54_Herbicide_Energy_Estimates_Provider();
@@ -92,6 +93,7 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore())
                     .ForMember(property => property.HarvestViewItems, options => options.Ignore())
                     .ForMember(property => property.GrazingViewItems, options => options.Ignore())
+                    .ForMember(property => property.FertilizerApplicationViewItems, options => options.Ignore())
                     .ForMember(property => property.HayImportViewItems, options => options.Ignore())
                     .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore());
             });
@@ -119,9 +121,17 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
+            var fertilizerViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
             _manureApplicationViewItemMapper = manureApplicationViewItemConfiguration.CreateMapper();
             _hayImportViewItemMapper = hayImportViewItemMapperConfiguration.CreateMapper();
             _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
+            _fertilizerViewItemMapper = fertilizerViewItemMapperConfiguration.CreateMapper();
 
             _smallAreaYieldProvider.InitializeAsync();
 

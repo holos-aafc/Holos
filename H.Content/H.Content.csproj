@@ -163,16 +163,16 @@
     <None Include="Resources\SP_31_allclusters_past_CBM.csv" />
     <None Include="Resources\SP__31_allclusters_future_DOM.csv" />
     <None Include="Resources\Swine_Feed_Ingredient_List.csv" />
-    <None Include="Resources\Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Tillage_Practice_Change.csv" />
     <None Include="Resources\NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops.csv" />
     <None Include="Resources\Table_20_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients.csv" />
     <None Include="Resources\Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep.csv" />
     <None Include="Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv" />
-    <None Include="Resources\Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Fallow_Practice_Change.csv" />
     <None Include="Resources\SwineVolatileExcretion_34.csv" />
     <None Include="Resources\Table_35_VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group.csv" />
     <None Include="Resources\Table_36_Daily_Feed_Intake_For_Swine_Groups.csv" />
-    <None Include="Resources\Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Perennial_Cropping_Change.csv" />
     <None Include="Resources\Table_25_Livestock_Coefficients_For_Sheep.csv" />
     <None Include="Resources\ShelterbeltCarbonAccumulationCoefficients.csv" />
     <None Include="Resources\EnergyRequirementsForCrops.csv" />
@@ -195,8 +195,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -634,6 +634,57 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ecozone,Texture,FallowPracticeChange,LumCMax,k
+        ///Boreal Shield West,Coarse,FallowCroppingToContinous,1314,0.0305
+        ///Boreal Shield West,Coarse,ContinousToFallowCropping,-1314,0.0305
+        ///Boreal Shield West,Medium,FallowCroppingToContinous,1314,0.0305
+        ///Boreal Shield West,Medium,ContinousToFallowCropping,-1314,0.0305
+        ///Boreal Shield West,Fine,FallowCroppingToContinous,1314,0.0305
+        ///Boreal Shield West,Fine,ContinousToFallowCropping,-1314,0.0305
+        ///Atlantic Maritimes,Coarse,FallowCroppingToContinous,1314,0.0305
+        ///Atlantic M [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LumCMax_And_KValues_For_Fallow_Practice_Change {
+            get {
+                return ResourceManager.GetString("LumCMax_And_KValues_For_Fallow_Practice_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ecozone,Texture,PerennialCroppingChange,LumCMax,k
+        ///Boreal Shield West,Coarse,IncreaseInPerennialCroppingArea,1942,0.035
+        ///Boreal Shield West,Coarse,DecreaseInPerennialCroppingArea,-1942,0.035
+        ///Boreal Shield West,Medium,IncreaseInPerennialCroppingArea,2757,0.0253
+        ///Boreal Shield West,Medium,DecreaseInPerennialCroppingArea,-2757,0.0253
+        ///Boreal Shield West,Fine,IncreaseInPerennialCroppingArea,3532,0.0218
+        ///Boreal Shield West,Fine,DecreaseInPerennialCroppingArea,-3532,0.0218
+        ///Atlantic Maritimes,Coarse,IncreaseInPe [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LumCMax_And_KValues_For_Perennial_Cropping_Change {
+            get {
+                return ResourceManager.GetString("LumCMax_And_KValues_For_Perennial_Cropping_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ecozone,Texture,TillagePracticeChange,k,LumCKMax
+        ///Boreal Shield West,Coarse,IntenseToReduced,0.0262,143
+        ///Boreal Shield West,Coarse,ReducedToNone,0.0284,441
+        ///Boreal Shield West,Coarse,IntenseToNone,0.0306,584
+        ///Boreal Shield West,Coarse,ReducedToIntense,0.0262,-143
+        ///Boreal Shield West,Coarse,NoneToReduced,0.0284,-441
+        ///Boreal Shield West,Coarse,NoneToIntense,0.0306,-584
+        ///Boreal Shield West,Medium,IntenseToReduced,0.0253,217
+        ///Boreal Shield West,Medium,ReducedToNone,0.0282,478
+        ///Boreal Shield West,Medium,IntenseT [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LumCMax_And_KValues_For_Tillage_Practice_Change {
+            get {
+                return ResourceManager.GetString("LumCMax_And_KValues_For_Tillage_Practice_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,0,2016,1,791,0.03929482,0,0.000632111,4.747211014,2373.605507,0.000105325,0.002380612,0.000105325,4.73963E-05
         ///BLK_,BLK_1,0,2017,2,791,0.063703857,0.339404494,0.001581441,3.941596728,1970.798364,0.000317364,0.005934413,0.001278753,0.000575439
@@ -1526,24 +1577,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ecozone,Texture,TillagePracticeChange,k,LumCKMax
-        ///Boreal Shield West,Coarse,IntenseToReduced,0.0262,143
-        ///Boreal Shield West,Coarse,ReducedToNone,0.0284,441
-        ///Boreal Shield West,Coarse,IntenseToNone,0.0306,584
-        ///Boreal Shield West,Coarse,ReducedToIntense,0.0262,-143
-        ///Boreal Shield West,Coarse,NoneToReduced,0.0284,-441
-        ///Boreal Shield West,Coarse,NoneToIntense,0.0306,-584
-        ///Boreal Shield West,Medium,IntenseToReduced,0.0253,217
-        ///Boreal Shield West,Medium,ReducedToNone,0.0282,478
-        ///Boreal Shield West,Medium,IntenseT [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change {
-            get {
-                return ResourceManager.GetString("Table_3_LumCMax_And_KValues_For_Tillage_Practice_Change", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Animal group,Liquid systems,Solid storage and drylot,&quot;Pasture, range and paddock&quot;,Other systems
         ///Non-dairy cattle,5.3,45,45,4.2
         ///Dairy cattle,64,18,16,2.9
@@ -1607,23 +1640,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ecozone,Texture,FallowPracticeChange,LumCMax,k
-        ///Boreal Shield West,Coarse,FallowCroppingToContinous,1314,0.0305
-        ///Boreal Shield West,Coarse,ContinousToFallowCropping,-1314,0.0305
-        ///Boreal Shield West,Medium,FallowCroppingToContinous,1314,0.0305
-        ///Boreal Shield West,Medium,ContinousToFallowCropping,-1314,0.0305
-        ///Boreal Shield West,Fine,FallowCroppingToContinous,1314,0.0305
-        ///Boreal Shield West,Fine,ContinousToFallowCropping,-1314,0.0305
-        ///Atlantic Maritimes,Coarse,FallowCroppingToContinous,1314,0.0305
-        ///Atlantic M [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change {
-            get {
-                return ResourceManager.GetString("Table_4_LumCMax_And_KValues_For_Fallow_Practice_Change", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Group,Daily mean intake (kg DM head-1 day-1),&quot;Crude protein content (CP, % of DM)&quot;,PRlw (average protein content in live weight (kg kg-1 live weight),&quot;WG (weight gain, kg head-1 day-1)&quot;,PRegg average protein content of eggs (kg protein kg-1 egg),EGG (g egg head-1 day-1),BWfinal (kg),BWinitial (kg),production_period (days)
         ///Pullets,0.0447 (1),18.2 (4),0,0,0,0,1.37 (11),0.043 (11),133 (14)
         ///Broilers,0.095 (2),19 (5),0,0,0,0,2 (12),0.043 (11),42 (15)
@@ -1655,22 +1671,6 @@ namespace H.Content.Properties {
         public static string Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
             get {
                 return ResourceManager.GetString("Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ecozone,Texture,PerennialCroppingChange,LumCMax,k
-        ///Boreal Shield West,Coarse,IncreaseInPerennialCroppingArea,1942,0.035
-        ///Boreal Shield West,Coarse,DecreaseInPerennialCroppingArea,-1942,0.035
-        ///Boreal Shield West,Medium,IncreaseInPerennialCroppingArea,2757,0.0253
-        ///Boreal Shield West,Medium,DecreaseInPerennialCroppingArea,-2757,0.0253
-        ///Boreal Shield West,Fine,IncreaseInPerennialCroppingArea,3532,0.0218
-        ///Boreal Shield West,Fine,DecreaseInPerennialCroppingArea,-3532,0.0218
-        ///Atlantic Maritimes,Coarse,IncreaseInPe [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change {
-            get {
-                return ResourceManager.GetString("Table_5_LumCMax_And_KValues_For_Perennial_Cropping_Change", resourceCulture);
             }
         }
         
