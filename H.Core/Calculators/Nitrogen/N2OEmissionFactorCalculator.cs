@@ -222,6 +222,10 @@ namespace H.Core.Calculators.Nitrogen
 
             foreach (var landApplicationEmissionResult in byYear)
             {
+                /*
+                 * Emissions are for the entire field. Convert to per hectare when adding to other N2O emissions.
+                 */
+
                 result.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching > 0
                     ? landApplicationEmissionResult.TotalN2ONFromManureLeaching / viewItem.Area
                     : 0;
