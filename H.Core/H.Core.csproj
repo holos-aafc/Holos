@@ -528,8 +528,8 @@
     <Compile Include="Providers\GeographicDataProvider.cs" />
     <Compile Include="Providers\IGeographicDataProvider.cs" />
     <Compile Include="Providers\IProvider.cs" />
-    <Compile Include="Providers\Irrigation\Table_7_Monthly_Irrigation_Water_Application_Data.cs" />
-    <Compile Include="Providers\Irrigation\Table_7_Monthly_Irrigation_Water_Application_Provider.cs" />
+    <Compile Include="Providers\Irrigation\Table_4_Monthly_Irrigation_Water_Application_Data.cs" />
+    <Compile Include="Providers\Irrigation\Table_4_Monthly_Irrigation_Water_Application_Provider.cs" />
     <Compile Include="Providers\Nitrogen\NitogenFixationProvider.cs" />
     <Compile Include="Providers\Nitrogen\NitrogenFixationResult.cs" />
     <Compile Include="Providers\Plants\CropFactorsData.cs" />

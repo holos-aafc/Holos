@@ -230,7 +230,7 @@ namespace H.Content
                     return SplitFileIntoLinesUsingRegex(Resource.Swine_Feed_Ingredient_List);
 
                 case CsvResourceNames.IrrigationByMonth:
-                    return SplitFileIntoLines(Resource.Table_7_Percentage_Total_Annual_Irrigation_Water_Applied);
+                    return SplitFileIntoLines(Resource.Table_4_Percentage_Total_Annual_Irrigation_Water_Applied);
 
                 case CsvResourceNames.GrowingDegreeCoefficients:
                     return SplitFileIntoLines(Resource.Table_1_Growing_Degree_Crop_Coefficients);

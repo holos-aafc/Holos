@@ -57,6 +57,15 @@ namespace H.Core.Services.LandManagement
                 result.HayImportViewItems.Add(copiedHayImportViewItem);
             }
 
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
+            {
+                var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map<FertilizerApplicationViewItem, FertilizerApplicationViewItem>(fertilizerApplicationViewItem);
+
+                copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
+
+                result.FertilizerApplicationViewItems.Add(fertilizerApplicationViewItem);
+            }
+
             return result;
         }
 

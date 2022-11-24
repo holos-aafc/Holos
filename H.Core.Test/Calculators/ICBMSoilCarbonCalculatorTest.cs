@@ -1616,7 +1616,7 @@ namespace H.Core.Test.Calculators
             var indirectN2OAsCO2 = cropViewItem.TotalIndirectNitrousOxidePerHectare * cropViewItem.Area * CoreConstants.N2OToCO2eConversionFactor;
 
             Assert.AreEqual(258.1501, directN2OAsCO2, 4);
-            Assert.AreEqual(126.0155, indirectN2OAsCO2, 4);
+            Assert.AreEqual(152.337506663593, indirectN2OAsCO2, 4);
         }
 
         #endregion

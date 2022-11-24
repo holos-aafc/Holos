@@ -16,8 +16,6 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-
-
         /// <summary>
         /// Calculate amount of nitrogen input from all manure applications in a year
         /// </summary>

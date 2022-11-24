@@ -10,16 +10,16 @@ using System.Diagnostics;
 namespace H.Core.Providers.Irrigation
 {
     /// <summary>
-    /// Table 7. Percentage of total annual irrigation water applied by month for each province/region in Canada (average values across 2010 and 2012).
+    /// Table 4. Percentage of total annual irrigation water applied by month for each province/region in Canada (average values across 2010 and 2012).
     /// </summary>
-    public class Table_7_Monthly_Irrigation_Water_Application_Provider
+    public class Table_4_Monthly_Irrigation_Water_Application_Provider
     {
         #region Fields
         private readonly ProvinceStringConverter _provinceStringConverter;
         #endregion
 
         #region Constructors
-        public Table_7_Monthly_Irrigation_Water_Application_Provider()
+        public Table_4_Monthly_Irrigation_Water_Application_Provider()
         {
             _provinceStringConverter = new ProvinceStringConverter();
 
@@ -29,7 +29,7 @@ namespace H.Core.Providers.Irrigation
 
         #region Properties
 
-        private List<Table_7_Monthly_Irrigation_Water_Application_Data> Data { get; set; }
+        private List<Table_4_Monthly_Irrigation_Water_Application_Data> Data { get; set; }
 
         #endregion
 
@@ -41,9 +41,9 @@ namespace H.Core.Providers.Irrigation
         /// <param name="month">The month for which we need the data instance</param>
         /// <param name="province">The year for which we need the data instance</param>
         /// <returns>Returns the data instance based on the month and year. Returns null when nothing is found</returns>
-        public Table_7_Monthly_Irrigation_Water_Application_Data GetMonthlyAverageIrrigationDataInstance(Months month, Province province)
+        public Table_4_Monthly_Irrigation_Water_Application_Data GetMonthlyAverageIrrigationDataInstance(Months month, Province province)
         {
-            Table_7_Monthly_Irrigation_Water_Application_Data irrigationWaterApplicationData = this.Data.Find(x => (x.Month == month) && (x.Province == province));
+            Table_4_Monthly_Irrigation_Water_Application_Data irrigationWaterApplicationData = this.Data.Find(x => (x.Month == month) && (x.Province == province));
             
             if (irrigationWaterApplicationData != null)
             {
@@ -54,7 +54,7 @@ namespace H.Core.Providers.Irrigation
 
             if (irrigationWaterApplicationData != null)
             {
-                Trace.TraceError($"{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
+                Trace.TraceError($"{nameof(Table_4_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_4_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
                                  $" unable to find Province: {province} in the available province data." +
                                  $" Returning null.");
 
@@ -63,7 +63,7 @@ namespace H.Core.Providers.Irrigation
             
             else
             {
-                //Trace.TraceError($"{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_7_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
+                //Trace.TraceError($"{nameof(Table_4_Monthly_Irrigation_Water_Application_Provider)}.{nameof(Table_4_Monthly_Irrigation_Water_Application_Provider.GetMonthlyAverageIrrigationDataInstance)}" +
                 //                 $" unable to find Month: {month} in the available month data." +
                 //                 $" Returning null.");
                 return null;
@@ -78,12 +78,12 @@ namespace H.Core.Providers.Irrigation
         /// Reads the file containing the average monthly irrigation data and stores the results in a list of objects.
         /// </summary>
         /// <returns>Returns a list of Table_52_Electricity_Conversion_Defaults_Data objects based on the data read from the file</returns>
-        private List<Table_7_Monthly_Irrigation_Water_Application_Data> ReadFile()
+        private List<Table_4_Monthly_Irrigation_Water_Application_Data> ReadFile()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.IrrigationByMonth);
 
-            var results = new List<Table_7_Monthly_Irrigation_Water_Application_Data>();
+            var results = new List<Table_4_Monthly_Irrigation_Water_Application_Data>();
 
             // Store location of data into a dictionary based on column number.
             // Key = Name of Province
@@ -98,7 +98,7 @@ namespace H.Core.Providers.Irrigation
                     Province currentProvince = province.Key;
                     var irrigationVolume = double.Parse(line[province.Value], cultureInfo);
 
-                    results.Add(new Table_7_Monthly_Irrigation_Water_Application_Data
+                    results.Add(new Table_4_Monthly_Irrigation_Water_Application_Data
                     {
                         Month = month,
                         Province = currentProvince,

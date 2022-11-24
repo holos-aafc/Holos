@@ -13,7 +13,7 @@ namespace H.Core.Services.LandManagement
     {
         #region Fields
 
-        private readonly Table_7_Monthly_Irrigation_Water_Application_Provider _irrigationProvider = new Table_7_Monthly_Irrigation_Water_Application_Provider();
+        private readonly Table_4_Monthly_Irrigation_Water_Application_Provider _irrigationProvider = new Table_4_Monthly_Irrigation_Water_Application_Provider();
         
 
         #endregion

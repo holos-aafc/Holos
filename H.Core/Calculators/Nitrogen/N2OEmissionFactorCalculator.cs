@@ -491,8 +491,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.3-5
-        /// Equation 2.7.5-11
+        /// Equation 2.6.6-11
         /// 
         /// Frac_volatilizationSoil
         ///
@@ -515,35 +514,52 @@ namespace H.Core.Calculators.Nitrogen
                 cropTypeFactor = -0.045;
             }
 
+            // Take average of coefficients if there is more than one application
             var fertilizerTypeFactor = 0.0;
-            if (cropViewItem.NitrogenFertilizerType == NitrogenFertilizerType.Urea)
+            var fertlizerTypeFactors = new List<double>();
+            foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
             {
-                fertilizerTypeFactor = 0.666;
-            }
-            else if (cropViewItem.NitrogenFertilizerType == NitrogenFertilizerType.UreaAmmoniumNitrate)
-            {
-                fertilizerTypeFactor = 0.282;
-            }
-            else if (cropViewItem.NitrogenFertilizerType == NitrogenFertilizerType.AnhydrousAmmonia)
-            {
-                fertilizerTypeFactor = -1.151;
-            }
-            else
-            {
-                // Other
-                fertilizerTypeFactor = -0.238;
+                if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.Urea)
+                {
+                    fertilizerTypeFactor = 0.666;
+                }
+                if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.UreaAmmoniumNitrate)
+                {
+                    fertilizerTypeFactor = 0.282;
+                }
+                if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.AmmoniumSulphate)
+                {
+                    fertilizerTypeFactor = -1.151;
+                }
+                else
+                {
+                    // Other
+                    fertilizerTypeFactor = -0.238;
+                }
+
+                fertlizerTypeFactors.Add(fertilizerTypeFactor);
             }
 
+            fertilizerTypeFactor = fertlizerTypeFactors.Any() ? fertlizerTypeFactors.Average() : 0;
+
             var methodOfApplicationFactor = 0.0;
-            // Footnote 1: Broadcast application of fertilizer is assumed for perennials
-            if (cropViewItem.FertilizerApplicationMethodology == FertilizerApplicationMethodologies.Broadcast)
+            var methodOfApplicationFactors = new List<double>();
+            foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
             {
-                methodOfApplicationFactor = -1.305;
+                // Footnote 1: Broadcast application of fertilizer is assumed for perennials
+                if (fertilizerApplicationViewItem.FertilizerApplicationMethodology == FertilizerApplicationMethodologies.Broadcast)
+                {
+                    methodOfApplicationFactor = -1.305;
+                }
+                else
+                {
+                    methodOfApplicationFactor = -1.895;
+                }
+
+                methodOfApplicationFactors.Add(methodOfApplicationFactor);
             }
-            else
-            {
-                methodOfApplicationFactor = -1.895;
-            }
+
+            methodOfApplicationFactor = methodOfApplicationFactors.Any() ? methodOfApplicationFactors.Average() : 0;
 
             var soilPhFactor = 0.0;
             if (farm.DefaultSoilData.SoilPh < 7.25)

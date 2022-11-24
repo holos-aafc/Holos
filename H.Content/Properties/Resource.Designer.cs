@@ -1640,6 +1640,23 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month of irrigation,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
+        ///April,8,3.06,15.08,0.22,3.81,10.54,7.3,7.3,7.3,7.3
+        ///May,8,3.06,15.08,0.22,3.81,10.54,7.3,7.3,7.3,7.3
+        ///June,19.54,13.92,14.8,11.3,18.35,19.54,10.62,10.62,10.62,10.62
+        ///July,27.77,42.65,29.58,48.15,41.46,32.24,27.97,27.97,27.97,27.97
+        ///August,25.66,28.04,19.4,34.88,26.74,25.97,34.06,34.06,34.06,34.06
+        ///September,5.51,4.63,3.03,2.61,2.91,2.71,5.63,5.63,5.63,5.63
+        ///October,5.51,4.63,3.03,2.61,2.91,2.71,5.63,5.63,5.63,5.63
+        ///.
+        /// </summary>
+        public static string Table_4_Percentage_Total_Annual_Irrigation_Water_Applied {
+            get {
+                return ResourceManager.GetString("Table_4_Percentage_Total_Annual_Irrigation_Water_Applied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group,Daily mean intake (kg DM head-1 day-1),&quot;Crude protein content (CP, % of DM)&quot;,PRlw (average protein content in live weight (kg kg-1 live weight),&quot;WG (weight gain, kg head-1 day-1)&quot;,PRegg average protein content of eggs (kg protein kg-1 egg),EGG (g egg head-1 day-1),BWfinal (kg),BWinitial (kg),production_period (days)
         ///Pullets,0.0447 (1),18.2 (4),0,0,0,0,1.37 (11),0.043 (11),133 (14)
         ///Broilers,0.095 (2),19 (5),0,0,0,0,2 (12),0.043 (11),42 (15)
@@ -1671,6 +1688,20 @@ namespace H.Content.Properties {
         public static string Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
             get {
                 return ResourceManager.GetString("Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ,CptoSoil,Cs,Cr,Ce
+        ///Annual crops,Above-ground residue,Above-ground residue,Below-ground residue,Below-ground residue
+        ///Perennial crops,Above-ground residue,n.a.,Below-ground residue,Below-ground residue
+        ///Fodder corn,Above-ground residue,n.a.,Below-ground residue,Below-ground residue
+        ///Root crops,Below-ground residue,Above-ground residue,n.a.,Below-ground residue
+        ///.
+        /// </summary>
+        public static string Table_5_Carbon_Input_Residue_Allocation_By_Crop_Type {
+            get {
+                return ResourceManager.GetString("Table_5_Carbon_Input_Residue_Allocation_By_Crop_Type", resourceCulture);
             }
         }
         
@@ -1845,23 +1876,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Month of irrigation,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
-        ///April,8,3.06,15.08,0.22,3.81,10.54,7.3,7.3,7.3,7.3
-        ///May,8,3.06,15.08,0.22,3.81,10.54,7.3,7.3,7.3,7.3
-        ///June,19.54,13.92,14.8,11.3,18.35,19.54,10.62,10.62,10.62,10.62
-        ///July,27.77,42.65,29.58,48.15,41.46,32.24,27.97,27.97,27.97,27.97
-        ///August,25.66,28.04,19.4,34.88,26.74,25.97,34.06,34.06,34.06,34.06
-        ///September,5.51,4.63,3.03,2.61,2.91,2.71,5.63,5.63,5.63,5.63
-        ///October,5.51,4.63,3.03,2.61,2.91,2.71,5.63,5.63,5.63,5.63
-        ///.
-        /// </summary>
-        public static string Table_7_Percentage_Total_Annual_Irrigation_Water_Applied {
-            get {
-                return ResourceManager.GetString("Table_7_Percentage_Total_Annual_Irrigation_Water_Applied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Farm operation,,Emission type,,,,,,
         ///,,Enteric CH4,Manure CH4,N2O direct,N2O indirect,Energy CO2,CO2,Upstream CO2
         ///Land management,Field,-,-,monthly,monthly,monthly,annual,monthly
@@ -1876,20 +1890,6 @@ namespace H.Content.Properties {
         public static string Table_70_Output_For_Report {
             get {
                 return ResourceManager.GetString("Table_70_Output_For_Report", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ,CptoSoil,Cs,Cr,Ce
-        ///Annual crops,Above-ground residue,Above-ground residue,Below-ground residue,Below-ground residue
-        ///Perennial crops,Above-ground residue,n.a.,Below-ground residue,Below-ground residue
-        ///Fodder corn,Above-ground residue,n.a.,Below-ground residue,Below-ground residue
-        ///Root crops,Below-ground residue,Above-ground residue,n.a.,Below-ground residue
-        ///.
-        /// </summary>
-        public static string Table_8_Carbon_Input_Residue_Allocation_By_Crop_Type {
-            get {
-                return ResourceManager.GetString("Table_8_Carbon_Input_Residue_Allocation_By_Crop_Type", resourceCulture);
             }
         }
         

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace H.Core.Providers.Irrigation
 {
-    public class Table_7_Monthly_Irrigation_Water_Application_Data
+    public class Table_4_Monthly_Irrigation_Water_Application_Data
     {
         /// <summary>
         /// The month for the average irrigation data.

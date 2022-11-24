@@ -179,7 +179,7 @@
     <Compile Include="Providers\Feed\DietProviderTest.cs" />
     <Compile Include="Providers\Feed\FeedDataProviderTest.cs" />
     <Compile Include="Providers\Fertilizer\Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider_Test.cs" />
-    <Compile Include="Providers\Irrigation\Table_7_Monthly_Irrigation_Water_Application_Provider_Test.cs" />
+    <Compile Include="Providers\Irrigation\Table_4_Monthly_Irrigation_Water_Application_Provider_Test.cs" />
     <Compile Include="Providers\Climate\SlcClimateNormalsDataProviderTest.cs" />
     <Compile Include="Providers\Plants\Duplicate_EnergyRequirementsForCropsProvider_Test.cs" />
     <Compile Include="Providers\Plants\Table_13_Default_Values_For_Steady_State_Method_Provider_Test.cs" />
