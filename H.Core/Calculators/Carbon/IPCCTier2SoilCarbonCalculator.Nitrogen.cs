@@ -47,20 +47,8 @@ namespace H.Core.Calculators.Carbon
 
         protected override void SetCropResiduesStartState(Farm farm)
         {
-            if (this.CanCalculateInputsForCrop(this.CurrentYearResults))
-            {
-                // Equation 2.7.2-1
-                base.AboveGroundResidueN = (this.CurrentYearResults.AboveGroundResidueDryMatter) * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInStraw;
-
-                // Equation 2.7.2-2
-                // Below ground dry matter is for the entire field so adjust for area here.
-                base.BelowGroundResidueN = (this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) * farm.Defaults.CarbonConcentration * this.CurrentYearResults.NitrogenContentInRoots;
-            }
-            else
-            {
-                base.AboveGroundResidueN = this.CalculateAboveGroundResidueNitrogen(this.CurrentYearResults, farm);
-                base.BelowGroundResidueN = this.CalculateBelowGroundResidueNitrogen(this.CurrentYearResults, farm);
-            }
+            base.AboveGroundResidueN = this.CurrentYearResults.CombinedAboveGroundResidueNitrogen;
+            base.BelowGroundResidueN = this.CurrentYearResults.CombinedBelowGroundResidueNitrogen;
 
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
             this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = base.AboveGroundResidueN;
@@ -77,58 +65,6 @@ namespace H.Core.Calculators.Carbon
         #endregion
 
         #region Public Methods
-
-        public double CalculateAboveGroundResidueNitrogen(CropViewItem currentYearViewItem, Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsAnnual() || currentYearViewItem.CropType.IsPerennial())
-            {
-                // Equation 2.7.2-3
-                return (currentYearViewItem.CarbonInputFromProduct / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInProduct +
-                       (currentYearViewItem.CarbonInputFromStraw / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInStraw;
-            }
-
-            if (currentYearViewItem.CropType.IsRootCrop())
-            {
-                // Equation 2.7.2-5
-                return (currentYearViewItem.CarbonInputFromStraw / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInStraw;
-            }
-
-            if (currentYearViewItem.CropType.IsSilageCrop() || currentYearViewItem.CropType.IsCoverCrop())
-            {
-                // Equation 2.7.2-7
-                return (currentYearViewItem.CarbonInputFromProduct / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInProduct;
-            }
-
-            // Equation 2.7.2-9
-            return 0;
-        }
-
-        public double CalculateBelowGroundResidueNitrogen(CropViewItem currentYearViewItem, Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsAnnual() || currentYearViewItem.CropType.IsPerennial())
-            {
-                // Equation 2.7.2-4
-                return (currentYearViewItem.CarbonInputFromRoots / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInRoots +
-                       (currentYearViewItem.CarbonInputFromExtraroots / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInExtraroot;
-            }
-
-            if (currentYearViewItem.CropType.IsRootCrop())
-            {
-                // Equation 2.7.2-6
-                return (currentYearViewItem.CarbonInputFromProduct / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInProduct +
-                       (currentYearViewItem.CarbonInputFromExtraroots / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInExtraroot;
-            }
-
-            if (currentYearViewItem.CropType.IsSilageCrop() || currentYearViewItem.CropType.IsCoverCrop())
-            {
-                // Equation 2.7.2-8
-                return (currentYearViewItem.CarbonInputFromRoots / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInRoots +
-                       (currentYearViewItem.CarbonInputFromExtraroots / farm.Defaults.CarbonConcentration) * currentYearViewItem.NitrogenContentInExtraroot;
-            }
-
-            // Equation 2.7.2-10
-            return 0;
-        }
 
         public void CalculateNitrogenAtInterval(
             CropViewItem previousYearResults,

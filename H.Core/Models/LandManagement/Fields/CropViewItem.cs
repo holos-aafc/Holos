@@ -1121,6 +1121,8 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedStrawNitrogen { get; set; }
         public double CombinedRootNitrogen { get; set; }
         public double CombinedExtrarootNitrogen { get; set; }
+        public double CombinedAboveGroundResidueNitrogen { get; set; }
+        public double CombinedBelowGroundResidueNitrogen { get; set; }
 
         #endregion
 

@@ -56,25 +56,25 @@ namespace H.Core.Services.LandManagement
                 nextYearViewItem: null,
                 farm: farm);
 
-            var nitrogenContentOfGrainReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogenTotal(
+            var nitrogenContentOfGrainReturnedToSoil = _n2OEmissionFactorCalculator.CalculateGrainNitrogenTotal(
                 carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
+            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateStrawNitrogen(
                 carbonInputFromStraw: viewItem.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
 
-            var nitrogenContentOfRootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
+            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateRootNitrogen(
                 carbonInputFromRoots: viewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
 
-            var nitrogenContentOfExtrarootReturnedToSoil = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
+            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateExtrarootNitrogen(
                 carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
 
             var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
 
-            var syntheticFertilizerApplied = _singleYearNitrogenEmissionsCalculator.CalculateSyntheticFertilizerApplied(
+            var syntheticFertilizerApplied = _n2OEmissionFactorCalculator.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: nitrogenContentOfGrainReturnedToSoil,
                 nitrogenContentOfStrawReturnedToSoil: nitrogenContentOfStrawReturnedToSoil,
                 nitrogenContentOfRootReturnedToSoil: nitrogenContentOfRootReturnedToSoil,

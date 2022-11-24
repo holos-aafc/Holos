@@ -48,7 +48,7 @@ namespace H.Core.Services.LandManagement
         private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator();
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
-        private readonly N2OEmissionFactorCalculator _singleYearNitrogenEmissionsCalculator = new N2OEmissionFactorCalculator();
+        private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator();
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();

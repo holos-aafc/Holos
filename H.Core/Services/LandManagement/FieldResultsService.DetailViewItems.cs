@@ -189,6 +189,8 @@ namespace H.Core.Services.LandManagement
                 var totalCoverCropStrawNitrogen = 0d;
                 var totalCoverCropRootNitrogen = 0d;
                 var totalCoverCropExtrarootNitrogen = 0d;
+                var totalCoverCropAboveGroundResidueNitrogen = 0d;
+                var totalCoverCropBelowGroundResidueNitrogen = 0d;
 
                 var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCrop});
                 foreach (var cropViewItem in cropsOtherThanMainCrop)
@@ -205,26 +207,56 @@ namespace H.Core.Services.LandManagement
                      * Calculate nitrogen totals
                      */
 
-                    var coverCropGraiNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
+                    var coverCropGraiNitrogen = _n2OEmissionFactorCalculator.CalculateGrainNitrogen(
                         carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
                         nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
 
-                    var coverCropStrawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
+                    var coverCropStrawNitrogen = _n2OEmissionFactorCalculator.CalculateStrawNitrogen(
                         carbonInputFromStraw: cropViewItem.CarbonInputFromStraw,
                         nitrogenConcentrationInStraw: cropViewItem.NitrogenContentInStraw);
 
-                    var coverCropRootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
+                    var coverCropRootNitrogen = _n2OEmissionFactorCalculator.CalculateRootNitrogen(
                         carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
                         nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
 
-                    var coverCropExtrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
+                    var coverCropExtrarootNitrogen = _n2OEmissionFactorCalculator.CalculateExtrarootNitrogen(
                         carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
                         nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
+
+                    var coverCropAboveGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
+                        nitrogenContentOfGrainReturned: coverCropGraiNitrogen,
+                        nitrogenContentOfStrawReturned: coverCropStrawNitrogen, 
+                        cropType: cropViewItem.CropType);
+
+                    var coverCropBelowGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+                        nitrogenContentOfGrain: coverCropGraiNitrogen,
+                        nitrogenContentOfRootReturned: coverCropRootNitrogen,
+                        nitrogenContentOfExtrarootReturned: coverCropExtrarootNitrogen, 
+                        cropType: cropViewItem.CropType);
+
+                    if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
+                    {
+                        // Overwrite if we can use IPCC Tier 2 method
+
+                        coverCropAboveGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
+                            aboveGroundResidueDryMatter: cropViewItem.AboveGroundResidueDryMatter,
+                            cropViewItem.CarbonConcentration,
+                            nitrogenContentInStraw: cropViewItem.NitrogenContentInStraw);
+
+                        coverCropBelowGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+                            belowGroundResidueDryMatter: cropViewItem.BelowGroundResidueDryMatter,
+                            carbonConcentration: cropViewItem.CarbonConcentration,
+                            nitrogenContentInRoots: cropViewItem.NitrogenContentInRoots,
+                            area: cropViewItem.Area);
+                    }
 
                     totalCoverCropGrainNitrogen += coverCropGraiNitrogen;
                     totalCoverCropStrawNitrogen += coverCropStrawNitrogen;
                     totalCoverCropRootNitrogen += coverCropRootNitrogen;
                     totalCoverCropExtrarootNitrogen += coverCropExtrarootNitrogen;
+
+                    totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
+                    totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
                 }
 
                 /*
@@ -240,26 +272,56 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropGrainNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
+                var mainCropGrainNitrogen = _n2OEmissionFactorCalculator.CalculateGrainNitrogen(
                     carbonInputFromProduct: mainCrop.CarbonInputFromProduct,
                     nitrogenConcentrationInProduct: mainCrop.NitrogenContentInProduct);
 
-                var mainCropStrawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
+                var mainCropStrawNitrogen = _n2OEmissionFactorCalculator.CalculateStrawNitrogen(
                     carbonInputFromStraw: mainCrop.CarbonInputFromStraw,
                     nitrogenConcentrationInStraw: mainCrop.NitrogenContentInStraw);
 
-                var mainCropRootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
+                var mainCropRootNitrogen = _n2OEmissionFactorCalculator.CalculateRootNitrogen(
                     carbonInputFromRoots: mainCrop.CarbonInputFromRoots,
                     nitrogenConcentrationInRoots: mainCrop.NitrogenContentInRoots);
 
-                var mainCropExtrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
+                var mainCropExtrarootNitrogen = _n2OEmissionFactorCalculator.CalculateExtrarootNitrogen(
                     carbonInputFromExtraroots: mainCrop.CarbonInputFromExtraroots,
                     nitrogenConcentrationInExtraroots: mainCrop.NitrogenContentInExtraroot);
+
+                var mainCropAboveGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
+                    nitrogenContentOfGrainReturned: mainCropGrainNitrogen,
+                    nitrogenContentOfStrawReturned: mainCropStrawNitrogen, 
+                    cropType: mainCrop.CropType);
+
+                var mainCropBelowGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+                    nitrogenContentOfGrain: mainCropGrainNitrogen,
+                    nitrogenContentOfRootReturned: mainCropRootNitrogen, 
+                    nitrogenContentOfExtrarootReturned: mainCropExtrarootNitrogen, 
+                    cropType: mainCrop.CropType);
+
+                if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(mainCrop))
+                {
+                    // Overwrite if we can use IPCC Tier 2 method
+
+                    mainCropAboveGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
+                        aboveGroundResidueDryMatter: mainCrop.AboveGroundResidueDryMatter,
+                        mainCrop.CarbonConcentration,
+                        nitrogenContentInStraw: mainCrop.NitrogenContentInStraw);
+
+                    mainCropBelowGroundResidueNitrogen = _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+                        belowGroundResidueDryMatter: mainCrop.BelowGroundResidueDryMatter,
+                        carbonConcentration: mainCrop.CarbonConcentration,
+                        nitrogenContentInRoots: mainCrop.NitrogenContentInRoots,
+                        area: mainCrop.Area);
+                }
 
                 mainCrop.CombinedGrainNitrogen = mainCropGrainNitrogen + totalCoverCropGrainNitrogen;
                 mainCrop.CombinedStrawNitrogen = mainCropStrawNitrogen + totalCoverCropStrawNitrogen;
                 mainCrop.CombinedRootNitrogen = mainCropRootNitrogen + totalCoverCropRootNitrogen;
                 mainCrop.CombinedExtrarootNitrogen = mainCropExtrarootNitrogen + totalCoverCropExtrarootNitrogen;
+
+                mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
+                mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
             }
         }
 

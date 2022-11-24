@@ -847,46 +847,100 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-14
         /// Equation 2.6.2-2
+        /// Equation 2.7.2-3
+        /// Equation 2.7.2-5
+        /// Equation 2.7.2-7
+        /// Equation 2.7.2-9
         /// </summary>
         /// <param name="nitrogenContentOfGrainReturned">Nitrogen content of the grain returned to the soil (kg N ha^-1)</param>
         /// <param name="nitrogenContentOfStrawReturned">Nitrogen content of the straw returned to the soil (kg N ha^-1)</param>
+        /// <param name="cropType"></param>
         /// <returns>Above ground residue N (kg N ha^-1)</returns>
-        public double CalculateAboveGroundResidueNitrogen(
+        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
             double nitrogenContentOfGrainReturned,
-            double nitrogenContentOfStrawReturned)
+            double nitrogenContentOfStrawReturned, 
+            CropType cropType)
         {
-            var result = nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned;
+            if (cropType.IsAnnual() || cropType.IsPerennial())
+            {
+                return nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned;
+            }
 
-            return result;
+            if (cropType.IsRootCrop())
+            {
+                return nitrogenContentOfStrawReturned;
+            }
+
+            if (cropType.IsCoverCrop() || cropType.IsSilageCrop())
+            {
+                return nitrogenContentOfGrainReturned;
+            }
+
+            // Fallow
+            return 0;
         }
 
         /// <summary>
-        /// Equation 2.5.2-15
-        /// Equation 2.6.2-2
-        /// Equation 2.6.2-5
+        /// Equation 2.7.2-1
         /// </summary>
+        /// <returns></returns>
+        public double CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
+            double aboveGroundResidueDryMatter,
+            double carbonConcentration,
+            double nitrogenContentInStraw)
+        {
+            return aboveGroundResidueDryMatter * carbonConcentration * nitrogenContentInStraw;
+        }
+
+        /// <summary>
+        /// Equation 2.7.2-2
+        /// </summary>
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+            double belowGroundResidueDryMatter,
+            double carbonConcentration,
+            double nitrogenContentInRoots,
+            double area)
+        {
+            // When using below ground residue dry matter as calculated by IPCC, the reside will be for the entire field
+
+            return (belowGroundResidueDryMatter / area)* carbonConcentration * nitrogenContentInRoots;
+        }
+
+        /// <summary>
+        /// Equation 2.6.2-5
+        /// Equation 2.7.2-4
+        /// Equation 2.7.2-6
+        /// Equation 2.7.2-8
+        /// Equation 2.7.2-10
+        /// </summary>
+        /// <param name="nitrogenContentOfGrain">Nitrogen content of the grain returned to the soil (kg N ha^-1)</param>
         /// <param name="nitrogenContentOfRootReturned">Nitrogen content of the root returned to the soil (kg N ha^-1)</param>
         /// <param name="nitrogenContentOfExtrarootReturned">Nitrogen content of the exudates returned to the soil (kg N ha^-1)</param>
-        /// <param name="isPerennial"></param>
-        /// <param name="perennialStandLength"></param>
+        /// <param name="cropType"></param>
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateBelowGroundResidueNitrogen(
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+            double nitrogenContentOfGrain,
             double nitrogenContentOfRootReturned,
-            double nitrogenContentOfExtrarootReturned, 
-            bool isPerennial, 
-            int perennialStandLength)
+            double nitrogenContentOfExtrarootReturned,
+            CropType cropType)
         {
-            var result = nitrogenContentOfRootReturned + nitrogenContentOfExtrarootReturned;
-
-            if (isPerennial)
+            if (cropType.IsAnnual() || cropType.IsPerennial())
             {
-                // Use the stand length as determined by the sequence of perennial crops entered by the user (Hay-Hay-Hay-Wheat = 3 year stand)
-                result /= perennialStandLength;
+                return nitrogenContentOfRootReturned + nitrogenContentOfExtrarootReturned;
             }
 
-            return result;
+            if (cropType.IsRootCrop())
+            {
+                return nitrogenContentOfGrain + nitrogenContentOfExtrarootReturned;
+            }
+
+            if (cropType.IsSilageCrop() || cropType.IsCoverCrop())
+            {
+                return nitrogenContentOfRootReturned + nitrogenContentOfExtrarootReturned;
+            }
+
+            return 0;
         }
 
         /// <summary>

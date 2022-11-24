@@ -10,7 +10,7 @@ using H.Core.Calculators.Carbon;
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class MultiYearNitrousOxideCalculatorTest
+    public class ICBMNitrousOxideCalculatorTest
     {
         #region Fields
 
@@ -44,28 +44,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         #endregion
 
         #region Tests
-
-        /// <summary>
-        /// Equation 2.6.2-1
-        /// </summary>
-        [TestMethod]
-        public void CalculateAboveGroundResidueNAtEquilibrium()
-        {
-            var result = _calculator.CalculateAboveGroundResidueNitrogenAtEquilibrium(10, 5, 2, 7, 8, 3, 0.45);
-
-            Assert.AreEqual(5.3690802409551844E-09, result);
-        }
-
-        /// <summary>
-        /// Equation 2.6.2-4
-        /// </summary>
-        [TestMethod]
-        public void CalculateBelowGroundResidueNAtEquilibrium()
-        {
-            var result = _calculator.CalculateBelowGroundResidueNitrogenAtEquilibrium(10, 5, 2, 7, 8, 3, 0.45);
-
-            Assert.AreEqual(5.3690802409551844E-09, result);
-        }     
 
         /// <summary>
         /// Equation 2.6.3-1

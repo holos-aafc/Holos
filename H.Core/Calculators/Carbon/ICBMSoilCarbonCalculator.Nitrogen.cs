@@ -102,18 +102,17 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.6.2-1
+        ///
+        /// Modified to to accept the total above ground residue nitrogen instead of calculating the above ground residue nitrogen in place here
         /// </summary>
-        public double CalculateAboveGroundResidueNitrogenAtEquilibrium(double carbonInputFromProduct,
-            double nitrogenConcentrationInProduct,
-            double carbonInputFromStraw,
-            double nitrogenConcentrationInStraw,
+        public double CalculateAboveGroundResidueNitrogenAtEquilibrium(
             double climateFactor,
-            double youngPoolDecompositionRate, double carbonConcentration)
+            double youngPoolDecompositionRate,
+            double totalAboveGroundResidueNitrogen)
         {
-            return ((carbonInputFromProduct / carbonConcentration * nitrogenConcentrationInProduct +
-                    carbonInputFromStraw / carbonConcentration * nitrogenConcentrationInStraw) *
-                   Math.Exp(-1 * youngPoolDecompositionRate * climateFactor)) /
-                   (1 - Math.Exp(-1 * youngPoolDecompositionRate * climateFactor));
+            var result = (totalAboveGroundResidueNitrogen * Math.Exp(-1 * youngPoolDecompositionRate * climateFactor)) / (1 - Math.Exp(-1 * youngPoolDecompositionRate * climateFactor));
+
+            return result;
         }
 
         /// <summary>
@@ -132,20 +131,16 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.6.2-4
+        ///
+        /// Modified to to accept the total below ground residue nitrogen instead of calculating the below ground residue nitrogen in place here
         /// </summary>
-        public double CalculateBelowGroundResidueNitrogenAtEquilibrium(double carbonInputFromRoots,
-            double nitrogenConcentrationInRoots,
-            double carbonInputFromExtraroots,
-            double nitrogenConcentrationInExtraroots,
-            double youngPoolDecompositionRate,
+        public double CalculateBelowGroundResidueNitrogenAtEquilibrium(double youngPoolDecompositionRate,
             double climateFactor,
-            double carbonConcentration)
+            double totalBelowGroundResidueNitrogen)
         {
-            return ((carbonInputFromRoots / carbonConcentration * nitrogenConcentrationInRoots +
-                    carbonInputFromExtraroots / carbonConcentration * nitrogenConcentrationInExtraroots) *
-                   Math.Exp(-1 * youngPoolDecompositionRate * climateFactor)) /
+            var result = (totalBelowGroundResidueNitrogen * Math.Exp(-1 * youngPoolDecompositionRate * climateFactor)) / (1 - Math.Exp(-1 * youngPoolDecompositionRate * climateFactor));
 
-                   (1 - Math.Exp(-1 * youngPoolDecompositionRate * climateFactor));
+            return result;
         }
 
         /// <summary>
@@ -257,35 +252,9 @@ namespace H.Core.Calculators.Carbon
 
         protected override void SetCropResiduesStartState(Farm farm)
         {
-            var grainNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
-                carbonInputFromProduct: this.PreviousYearResults.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: this.PreviousYearResults.NitrogenContentInProduct);
-
-            var strawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
-                carbonInputFromStraw: this.PreviousYearResults.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: this.PreviousYearResults.NitrogenContentInStraw);
-
-            var rootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
-                carbonInputFromRoots: this.PreviousYearResults.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: this.PreviousYearResults.NitrogenContentInRoots);
-
-            var extrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
-                carbonInputFromExtraroots: this.PreviousYearResults.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: this.PreviousYearResults.NitrogenContentInExtraroot);
-
-            var aboveGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateAboveGroundResidueNitrogen(
-                nitrogenContentOfGrainReturned: grainNitrogen,
-                nitrogenContentOfStrawReturned: strawNitrogen);
-
-            var belowGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogen(
-                nitrogenContentOfRootReturned: rootNitrogen,
-                nitrogenContentOfExtrarootReturned: extrarootNitrogen,
-                isPerennial: this.PreviousYearResults.CropType.IsPerennial(),
-                perennialStandLength: this.PreviousYearResults.PerennialStandLength);
-
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
-            this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = aboveGroundResidueNitrogenForCropAtPreviousInterval;
-            this.CurrentYearResults.BelowGroundResidueNitrogenForCrop = belowGroundResidueNitrogenForCropAtPreviousInterval;
+            this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = this.PreviousYearResults.CombinedAboveGroundResidueNitrogen;
+            this.CurrentYearResults.BelowGroundResidueNitrogenForCrop = this.PreviousYearResults.CombinedBelowGroundResidueNitrogen;
 
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? this.CurrentYearResults.ClimateParameter : this.CurrentYearResults.ManagementFactor;
 
@@ -293,26 +262,18 @@ namespace H.Core.Calculators.Carbon
             {
                 // Calculate the above and below ground starting crop residue pools for the field (t = 0)
                 this.AboveGroundResidueN = this.CalculateAboveGroundResidueNitrogenAtEquilibrium(
-                    carbonInputFromProduct: this.PreviousYearResults.CarbonInputFromProduct,
-                    nitrogenConcentrationInProduct: this.PreviousYearResults.NitrogenContentInProduct,
-                    carbonInputFromStraw: this.PreviousYearResults.CarbonInputFromStraw,
-                    nitrogenConcentrationInStraw: this.PreviousYearResults.NitrogenContentInStraw,
                     climateFactor: climateParameterOrManagementFactor,
-                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                    carbonConcentration: farm.Defaults.CarbonConcentration);
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool, 
+                    totalAboveGroundResidueNitrogen: this.PreviousYearResults.CombinedAboveGroundResidueNitrogen);
 
                 this.BelowGroundResidueN = this.CalculateBelowGroundResidueNitrogenAtEquilibrium(
-                    carbonInputFromRoots: this.PreviousYearResults.CarbonInputFromRoots,
-                    nitrogenConcentrationInRoots: this.PreviousYearResults.NitrogenContentInRoots,
-                    carbonInputFromExtraroots: this.PreviousYearResults.CarbonInputFromExtraroots,
-                    nitrogenConcentrationInExtraroots: this.PreviousYearResults.NitrogenContentInExtraroot,
                     youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                     climateFactor: climateParameterOrManagementFactor,
-                    carbonConcentration: farm.Defaults.CarbonConcentration);
+                    totalBelowGroundResidueNitrogen: this.PreviousYearResults.CombinedBelowGroundResidueNitrogen);
 
                 base.CropResiduePool = this.CalculateCropResiduesAtStartingPoint(
-                    aboveGroundResidueNitrogenForCropAtStartingPoint: aboveGroundResidueNitrogenForCropAtPreviousInterval,
-                    belowGroundResidueNitrogenForCropAtStartingPoint: belowGroundResidueNitrogenForCropAtPreviousInterval,
+                    aboveGroundResidueNitrogenForCropAtStartingPoint: this.PreviousYearResults.CombinedAboveGroundResidueNitrogen,
+                    belowGroundResidueNitrogenForCropAtStartingPoint: this.PreviousYearResults.CombinedBelowGroundResidueNitrogen,
                     decompositionRateConstantYoungPool: farm.Defaults.DecompositionRateConstantYoungPool,
                     climateParameter: climateParameterOrManagementFactor);
             }
@@ -321,13 +282,13 @@ namespace H.Core.Calculators.Carbon
                 // Calculate the above and below ground crop residue pools for the field on subsequent years (t > 0)
                 base.AboveGroundResidueN = this.CalculateAboveGroundResidueNitrogenForFieldAtInterval(
                     aboveGroundResidueNitrogenForFieldAtPreviousInterval: this.PreviousYearResults.AboveGroundResiduePool_AGresidueN,
-                    aboveGroundResidueNitrogenForCropAtPreviousInterval: aboveGroundResidueNitrogenForCropAtPreviousInterval,
+                    aboveGroundResidueNitrogenForCropAtPreviousInterval: this.PreviousYearResults.CombinedAboveGroundResidueNitrogen,
                     climateManagementFactor: climateParameterOrManagementFactor,
                     decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool);
 
                 base.BelowGroundResidueN = this.CalculateBelowGroundResidueNitrogenForFieldAtInterval(
                     belowGroundResidueNitrogenForFieldAtPreviousInterval: this.PreviousYearResults.BelowGroundResiduePool_BGresidueN,
-                    belowGroundResidueNitrogenForCropAtPreviousInterval: belowGroundResidueNitrogenForCropAtPreviousInterval,
+                    belowGroundResidueNitrogenForCropAtPreviousInterval: this.PreviousYearResults.CombinedBelowGroundResidueNitrogen,
                     climateManagementFactor: climateParameterOrManagementFactor,
                     decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool);
 
