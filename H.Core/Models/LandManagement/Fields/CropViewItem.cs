@@ -1117,6 +1117,10 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedAboveGroundInput { get; set; }
         public double CombinedBelowGroundInput { get; set; }
         public double CombinedManureInput { get; set; }
+        public double CombinedGrainNitrogen { get; set; }
+        public double CombinedStrawNitrogen { get; set; }
+        public double CombinedRootNitrogen { get; set; }
+        public double CombinedExtrarootNitrogen { get; set; }
 
         #endregion
 

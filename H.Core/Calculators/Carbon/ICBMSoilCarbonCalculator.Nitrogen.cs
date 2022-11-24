@@ -257,32 +257,26 @@ namespace H.Core.Calculators.Carbon
 
         protected override void SetCropResiduesStartState(Farm farm)
         {
-            // Equation 2.5.2-4
             var grainNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
                 carbonInputFromProduct: this.PreviousYearResults.CarbonInputFromProduct,
                 nitrogenConcentrationInProduct: this.PreviousYearResults.NitrogenContentInProduct);
 
-            // Equation 2.5.2-5
             var strawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
                 carbonInputFromStraw: this.PreviousYearResults.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: this.PreviousYearResults.NitrogenContentInStraw);
 
-            // Equation 2.5.2-6
             var rootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
                 carbonInputFromRoots: this.PreviousYearResults.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: this.PreviousYearResults.NitrogenContentInRoots);
 
-            // Equation 2.5.2-7
             var extrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
                 carbonInputFromExtraroots: this.PreviousYearResults.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: this.PreviousYearResults.NitrogenContentInExtraroot);
 
-            // Equation 2.6.2-2
             var aboveGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateAboveGroundResidueNitrogen(
                 nitrogenContentOfGrainReturned: grainNitrogen,
                 nitrogenContentOfStrawReturned: strawNitrogen);
 
-            // Equation 2.6.2-5
             var belowGroundResidueNitrogenForCropAtPreviousInterval = _singleYearNitrogenEmissionsCalculator.CalculateBelowGroundResidueNitrogen(
                 nitrogenContentOfRootReturned: rootNitrogen,
                 nitrogenContentOfExtrarootReturned: extrarootNitrogen,

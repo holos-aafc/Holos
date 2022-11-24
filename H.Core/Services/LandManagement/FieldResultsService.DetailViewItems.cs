@@ -162,7 +162,7 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Combines input for a particular year. This would combine the inputs from the main crop grown that year plus the cover crop (if specified by user). This must be called
         /// after all inputs from crops, manure, etc. have been calculated for each detail view item since we simply add up the total above and below ground inputs for each
-        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM calculations
+        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM/IPCC Tier 2 calculations
         /// </summary>
         public void CombineInputsForAllCropsInSameYear(
             IEnumerable<CropViewItem> viewItems, 
@@ -184,27 +184,91 @@ namespace H.Core.Services.LandManagement
                 var coverCropAboveGroundInput = 0d;
                 var coverCropBelowGroundInput = 0d;
                 var coverCropManureInput = 0d;
+
+                var totalCoverCropGrainNitrogen = 0d;
+                var totalCoverCropStrawNitrogen = 0d;
+                var totalCoverCropRootNitrogen = 0d;
+                var totalCoverCropExtrarootNitrogen = 0d;
+
                 var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCrop});
                 foreach (var cropViewItem in cropsOtherThanMainCrop)
                 {
+                    /*
+                     * Carbon will already have been calculated using IPCC Tier 2/ICBM methods
+                     */
+
                     coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
                     coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
                     coverCropManureInput += cropViewItem.ManureCarbonInputsPerHectare;
+
+                    /*
+                     * Calculate nitrogen totals
+                     */
+
+                    var coverCropGraiNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
+                        carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
+                        nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
+
+                    var coverCropStrawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
+                        carbonInputFromStraw: cropViewItem.CarbonInputFromStraw,
+                        nitrogenConcentrationInStraw: cropViewItem.NitrogenContentInStraw);
+
+                    var coverCropRootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
+                        carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
+                        nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
+
+                    var coverCropExtrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
+                        carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
+                        nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
+
+                    totalCoverCropGrainNitrogen += coverCropGraiNitrogen;
+                    totalCoverCropStrawNitrogen += coverCropStrawNitrogen;
+                    totalCoverCropRootNitrogen += coverCropRootNitrogen;
+                    totalCoverCropExtrarootNitrogen += coverCropExtrarootNitrogen;
                 }
+
+                /*
+                 * Sum up the main crop and cover crop carbon inputs
+                 */
 
                 mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
                 mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
                 mainCrop.CombinedManureInput = mainCrop.ManureCarbonInputsPerHectare + coverCropManureInput;
-
                 mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput;
+
+                /*
+                 * Sum up the main crop and cover crop nitrogen inputs
+                 */
+
+                var mainCropGrainNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateGrainNitrogen(
+                    carbonInputFromProduct: mainCrop.CarbonInputFromProduct,
+                    nitrogenConcentrationInProduct: mainCrop.NitrogenContentInProduct);
+
+                var mainCropStrawNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateStrawNitrogen(
+                    carbonInputFromStraw: mainCrop.CarbonInputFromStraw,
+                    nitrogenConcentrationInStraw: mainCrop.NitrogenContentInStraw);
+
+                var mainCropRootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateRootNitrogen(
+                    carbonInputFromRoots: mainCrop.CarbonInputFromRoots,
+                    nitrogenConcentrationInRoots: mainCrop.NitrogenContentInRoots);
+
+                var mainCropExtrarootNitrogen = _singleYearNitrogenEmissionsCalculator.CalculateExtrarootNitrogen(
+                    carbonInputFromExtraroots: mainCrop.CarbonInputFromExtraroots,
+                    nitrogenConcentrationInExtraroots: mainCrop.NitrogenContentInExtraroot);
+
+                mainCrop.CombinedGrainNitrogen = mainCropGrainNitrogen + totalCoverCropGrainNitrogen;
+                mainCrop.CombinedStrawNitrogen = mainCropStrawNitrogen + totalCoverCropStrawNitrogen;
+                mainCrop.CombinedRootNitrogen = mainCropRootNitrogen + totalCoverCropRootNitrogen;
+                mainCrop.CombinedExtrarootNitrogen = mainCropExtrarootNitrogen + totalCoverCropExtrarootNitrogen;
             }
         }
 
         /// <summary>
         /// Combine multiple view items for same year back into a single view item for that same year so ICBM works with one view item per year as expected.
         /// </summary>
-        public List<CropViewItem> MergeDetailViewItems(IEnumerable<CropViewItem> viewItems,
-                                             FieldSystemComponent fieldSystemComponent)
+        public List<CropViewItem> MergeDetailViewItems(
+            IEnumerable<CropViewItem> viewItems, 
+            FieldSystemComponent fieldSystemComponent)
         {
             var result = new List<CropViewItem>();
 

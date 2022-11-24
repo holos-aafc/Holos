@@ -35,7 +35,7 @@ namespace H.Core.Calculators.Carbon
             Farm farm)
         {
             return viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
-        } 
+        }
 
         #endregion
     }
