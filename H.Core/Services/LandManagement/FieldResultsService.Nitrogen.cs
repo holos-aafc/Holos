@@ -132,7 +132,7 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
                     cropViewItem: cropViewItem);
             }
         }
