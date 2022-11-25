@@ -121,6 +121,38 @@ namespace H.Core.Services.LandManagement
 
         #region Private Methods
 
+        private double CalculateAboveGroundResidueNitrogen(CropViewItem cropViewItem)
+        {
+            if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
+            {
+                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
+                    aboveGroundResidueDryMatter: cropViewItem.AboveGroundResidueDryMatter,
+                    cropViewItem.CarbonConcentration,
+                    nitrogenContentInStraw: cropViewItem.NitrogenContentInStraw);
+            }
+            else
+            {
+                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+                    cropViewItem: cropViewItem);
+            }
+        }
+
+        private double CalculateBelowGroundResidueNitrogen(CropViewItem cropViewItem)
+        {
+            if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
+            {
+                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
+                    aboveGroundResidueDryMatter: cropViewItem.AboveGroundResidueDryMatter,
+                    cropViewItem.CarbonConcentration,
+                    nitrogenContentInStraw: cropViewItem.NitrogenContentInStraw);
+            }
+            else
+            {
+                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+                    cropViewItem: cropViewItem);
+            }
+        }
+
         #endregion
     }
 }
