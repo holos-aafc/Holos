@@ -1712,7 +1712,7 @@ namespace H.Core.Services.Animals
         /// <param name="fractionOfMineralizedNitrogen">Fraction of organic N (fecal and bedding N) that is mineralized as TAN during manure storage, dimensionless</param>
         /// <param name="directManureEmissions">Manure  N loss as direct N2O-N (kg N)</param>
         /// <param name="leachingEmissions">Manure  N loss as direct N2O-N (kg N)</param>
-        /// <returns>Organic nitrogen available for land application (kg N)</returns>
+        /// <returns>Amount of organic N entering the pool of available manure organic N each day for each animal group and management system (kg N day^-1)</returns>
         public double CalculateMonthlyOrganicNitrogenAvailableForLandApplication(
             double fecalNitrogenExcretion,
             double beddingNitrogen,
@@ -1741,12 +1741,12 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.5.2-13
+        /// Equation 4.5.2-21
         /// </summary>
         /// <param name="nitrogenExcretion">Amount of total N excreted (kg N)</param>
         /// <param name="nitrogenFromBedding">Amount of N from bedding (kg N)</param>
         /// <param name="directN2ONEmission">Manure N loss as direct N2O-N (kg N)</param>
-        /// <param name="ammoniaLostFromHousingAndStorage"></param>
+        /// <param name="ammoniaLostFromHousingAndStorage">Manure N loss as NH3-N (kg N) (volatilization and leaching/runoff)</param>
         /// <param name="leachingN2ONEmission"></param>
         /// <returns></returns>
         public double CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(

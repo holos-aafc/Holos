@@ -891,6 +891,7 @@ namespace H.Core.Calculators.Carbon
                 totalAmmoniaLossFromLandapplication: ammoniacalLoss,
                 totalN2ONFromLeaching: totalManureLeachingN2ON);
 
+            // Equation 2.7.2-11
             var result = fractionOfNitrogenAppliedToSoil / cropViewItem.Area;
 
             return result;

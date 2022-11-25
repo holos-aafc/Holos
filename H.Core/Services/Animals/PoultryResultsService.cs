@@ -278,7 +278,7 @@ namespace H.Core.Services.Animals
             // Equation 4.5.2-7
             dailyEmissions.TanAvailableForLandApplication = dailyEmissions.TanEnteringStorageSystem - dailyEmissions.AmmoniaLostFromStorage;
 
-            // Equation 4.5.2-11
+            // Equation 4.5.2-15
             dailyEmissions.NitrogenAvailableForLandApplication =
                 (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding)
                 - (dailyEmissions.ManureDirectN2ONEmission + dailyEmissions.AmmoniaConcentrationInHousing +
@@ -288,12 +288,10 @@ namespace H.Core.Services.Animals
             dailyEmissions.OrganicNitrogenAvailableForLandApplication =
                 dailyEmissions.NitrogenAvailableForLandApplication - dailyEmissions.TanAvailableForLandApplication;
 
-            // Equation 4.5.3-1
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.NitrogenAvailableForLandApplication);
 
-            // Equation 4.5.3-2
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication =
                 base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                     totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
