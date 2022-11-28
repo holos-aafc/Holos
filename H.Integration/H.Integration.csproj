@@ -100,6 +100,7 @@
     <Compile Include="ShelterbeltComponentIntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwineComponentIntegrationTest.cs" />
+    <Compile Include="N2O.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

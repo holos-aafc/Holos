@@ -102,7 +102,9 @@ namespace H.Core.Calculators.Infrastructure
 
                 foreach (var viewItem in residueGroup)
                 {
+                    // Equation 4.8.1-2
                     var flow = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
+
                     var totalSolidsFlow = flow * viewItem.TotalSolids;
                     var volatileSolidsFlow = dailyEmissions.VolatileSolids * managementPeriod.NumberOfAnimals * component.ProportionTotalManureAddedToAD;
                     var nitrogenFlow = (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding) * component.ProportionTotalManureAddedToAD;
