@@ -1045,8 +1045,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-3
-        ///
         /// (kg N)
         /// </summary>
         public double OrganicNitrogenAvailableForLandApplication
@@ -1056,9 +1054,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-5
-        /// Equation 4.5.2-6
-        ///
         /// (kg N)
         /// </summary>
         public double NitrogenAvailableForLandApplication

@@ -260,7 +260,6 @@ namespace H.Core.Services.Animals
                 directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
                 leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
 
-            // Equation 4.5.2-5
             dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManure(
                 tanAvailableForLandApplication: dailyEmissions.TanAvailableForLandApplication,
                 organicNitrogenAvailableForLandApplication: dailyEmissions.OrganicNitrogenAvailableForLandApplication);
@@ -572,7 +571,6 @@ namespace H.Core.Services.Animals
                 directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
                 leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
 
-            // Equation 4.5.2-5
             dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManure(
                 tanAvailableForLandApplication: dailyEmissions.TanAvailableForLandApplication,
                 organicNitrogenAvailableForLandApplication: dailyEmissions.OrganicNitrogenAvailableForLandApplication);

@@ -41,11 +41,12 @@ namespace H.Core.Calculators.Infrastructure
             foreach (var residueGroup in manureViewItems)
             {
                 var substrateFlowRate = new SubstrateFlowInformation();
-                substrateFlowRate.SubstrateType = SubstrateType.FreshManure;
+                substrateFlowRate.SubstrateType = SubstrateType.StoredManure;
                 substrateFlowRate.AnimalType = residueGroup.Key;
 
                 foreach (var viewItem in residueGroup)
                 {
+                    // Equation 4.8.1-16
                     var flow = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
 
                     substrateFlowRate.TotalMassFlow += flow;
@@ -53,28 +54,41 @@ namespace H.Core.Calculators.Infrastructure
 
                     if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
                     {
+                        // Equation 4.8.1-18
                         // TODO: this needs to be the sum of the daily vs_loaded and daily vs_consumed
                         substrateFlowRate.VolatileSolidsFlow += (dailyEmissions.VolatileSolidsLoaded - dailyEmissions.VolatileSolidsConsumed) * component.ProportionTotalManureAddedToAD;
                     }
                     else
                     {
+                        // Equation 4.8.1-19
                         substrateFlowRate.VolatileSolidsFlow += (1 - reductionFactor.VolatileSolidsReductionFactor) * managementPeriod.NumberOfAnimals * component.ProportionTotalManureAddedToAD;
                     }
 
+                    // Equation 4.8.1-20
                     substrateFlowRate.NitrogenFlow += dailyEmissions.NitrogenAvailableForLandApplication + component.ProportionTotalManureAddedToAD;
 
                     if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
                     {
-                        substrateFlowRate.TotalAmmonicalNitrogenFlow += dailyEmissions.TanAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
+                        // Equation 4.8.1-22
                         substrateFlowRate.OrganicNitrogenFlow += dailyEmissions.OrganicNitrogenAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
+
+                        // Equation 4.8.1-23
+                        substrateFlowRate.TotalAmmonicalNitrogenFlow += dailyEmissions.TanAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
                     }
                     else
                     {
-                        // TODO: poultry section has been updated with new ammonia from housing/storage that will be used here
-                        //flowRates.TotalAmmonicalNitrogenFlowByType[residueType] += (dailyEmissions.TanExcretionRate * managementPeriod.NumberOfAnimals - (dailyEmissions.ammoni))
-                        //flowRates.OrganicNitrogenFlowByType[residueType] += ()
+                        /*
+                         * Poultry
+                         */
+
+                        // Equation 4.8.1-22
+                        substrateFlowRate.OrganicNitrogenFlow += (substrateFlowRate.NitrogenFlow - substrateFlowRate.TotalAmmonicalNitrogenFlow);
+
+                        // Equation 4.8.1-24
+                        substrateFlowRate.TotalAmmonicalNitrogenFlow += (dailyEmissions.TanExcretion - (dailyEmissions.AmmoniaConcentrationInHousing + dailyEmissions.AmmoniaLostFromStorage)) * component.ProportionTotalManureAddedToAD;
                     }
 
+                    // Equation 4.8.1-25
                     substrateFlowRate.CarbonFlow += dailyEmissions.AmountOfCarbonInStoredManure * component.ProportionTotalManureAddedToAD;
                 }
 
@@ -106,21 +120,31 @@ namespace H.Core.Calculators.Infrastructure
                     var flow = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
 
                     var totalSolidsFlow = flow * viewItem.TotalSolids;
+
+                    // Equation 4.8.1-4
                     var volatileSolidsFlow = dailyEmissions.VolatileSolids * managementPeriod.NumberOfAnimals * component.ProportionTotalManureAddedToAD;
+
+                    // Equation 4.8.1-5
                     var nitrogenFlow = (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding) * component.ProportionTotalManureAddedToAD;
 
                     var organicNitrogenFlow = 0d;
-                    if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+                    if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType() || managementPeriod.AnimalType.IsSheepType())
                     {
+                        // Equation 4.8.1-6
                         organicNitrogenFlow = dailyEmissions.OrganicNitrogenInStoredManure * component.ProportionTotalManureAddedToAD;
                     }
                     else
                     {
+                        // Equation 4.8.1-7
                         organicNitrogenFlow = (dailyEmissions.AmountOfNitrogenExcreted - (managementPeriod.ManureDetails.DailyTanExcretion * managementPeriod.NumberOfAnimals)) * component.ProportionTotalManureAddedToAD;
                     }
 
+                    // Equation 4.8.1-8
                     var tanFlow = dailyEmissions.TanExcretion * component.ProportionTotalManureAddedToAD;
+
+                    // Equation 4.8.1-9
                     var carbonFlow = dailyEmissions.CarbonFromManureAndBedding * component.ProportionTotalManureAddedToAD;
+
                     var biodegradableSolids = volatileSolidsFlow * biodegradableFraction;
                     var methaneProduction = biodegradableSolids * viewItem.BiomethanePotential;
 
@@ -183,10 +207,19 @@ namespace H.Core.Calculators.Infrastructure
 
                 foreach (var viewItem in residueGroup)
                 {
+                    // Equation 4.8.1-10
                     var flow = viewItem.FlowRate;
+
+                    // Equation 4.8.1-11
                     var totalSolidsFlow = flow * viewItem.TotalSolids;
+
+                    // Equation 4.8.1-12
                     var volatileSolidsFlow = flow * viewItem.VolatileSolids;
+
+                    // Equation 4.8.1-13
                     var nitrogenFlow = flow * viewItem.TotalNitrogen;
+
+                    // Equation 4.8.1-14
                     var carbonFlow = flow * viewItem.TotalCarbon;
                     var biodegradableSolids = volatileSolidsFlow * biodegradableFraction;
                     var methaneProduction = biodegradableSolids * viewItem.BiomethanePotential;
@@ -659,7 +692,7 @@ namespace H.Core.Calculators.Infrastructure
         #region 4.8.2.4 Reactor Dimensioning
 
         /// <summary>
-        /// Equation 4.8.2-8
+        /// Equation 4.8.2-9
         /// </summary>
         /// <param name="totalFlowRateSubstrate">Total flow rate of substrate entering the digester (m3 day^-1)</param>
         /// <param name="hydraulicRetentionDays">Hydraulic retention time (days)</param>

@@ -31,7 +31,7 @@ namespace H.Core.Services.Animals
         protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
 
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider =
-            new Table_22_Additive_Reduction_Factors_Provider();
+            new Table_19_Additive_Reduction_Factors_Provider();
 
         protected readonly Table_39_Livestock_Emission_Conversion_Factors_Provider
             _livestockEmissionConversionFactorsProvider = new Table_39_Livestock_Emission_Conversion_Factors_Provider();
@@ -1728,7 +1728,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.5.2-5
+        /// Equation 4.5.2-6
         /// </summary>
         /// <param name="tanAvailableForLandApplication">Total ammonical nitrogen (TAN)/inorganic nitrogen in stored beef manure from different housing and storage systems (kg TAN)</param>
         /// <param name="organicNitrogenAvailableForLandApplication">Total organic nitrogen in stored beef manure from different housing and storage systems (kg N)</param>
