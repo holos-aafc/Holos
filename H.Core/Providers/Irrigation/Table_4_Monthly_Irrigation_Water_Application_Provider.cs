@@ -77,7 +77,7 @@ namespace H.Core.Providers.Irrigation
         /// <summary>
         /// Reads the file containing the average monthly irrigation data and stores the results in a list of objects.
         /// </summary>
-        /// <returns>Returns a list of Table_52_Electricity_Conversion_Defaults_Data objects based on the data read from the file</returns>
+        /// <returns>Returns a list of Table_49_Electricity_Conversion_Defaults_Data objects based on the data read from the file</returns>
         private List<Table_4_Monthly_Irrigation_Water_Application_Data> ReadFile()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;

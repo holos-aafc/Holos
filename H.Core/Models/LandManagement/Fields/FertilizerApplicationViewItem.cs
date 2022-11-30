@@ -12,7 +12,7 @@ namespace H.Core.Models.LandManagement.Fields
         #region Fields
 
         private FertilizerApplicationMethodologies _fertilizerApplicationMethodology;
-        private Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data _carbonFootprintForFertilizerBlendsData;
+        private Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data _carbonFootprintForFertilizerBlendsData;
         private Seasons _seasonOfApplication;
 
 
@@ -32,7 +32,7 @@ namespace H.Core.Models.LandManagement.Fields
         {
             this.FertilizerEfficiencyPercentage = 75;
 
-            this.FertilizerBlendData = new Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data();
+            this.FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data();
             this.FertilizerBlendData.PropertyChanged += FertilizerBlendDataOnPropertyChanged;
             this.PropertyChanged += OnPropertyChanged;
         }
@@ -47,7 +47,7 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _fertilizerApplicationMethodology, value);
         }
 
-        public Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data FertilizerBlendData
+        public Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data FertilizerBlendData
         {
             get => _carbonFootprintForFertilizerBlendsData;
             set => SetProperty(ref _carbonFootprintForFertilizerBlendsData, value);
@@ -162,7 +162,7 @@ namespace H.Core.Models.LandManagement.Fields
 
         private void FertilizerBlendDataOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data fertilizerBlendData)
+            if (sender is Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data fertilizerBlendData)
             {
                 if (e.PropertyName.Equals(nameof(FertilizerBlendData.PercentageNitrogen)))
                 {

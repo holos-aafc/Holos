@@ -1266,7 +1266,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyLambProduced { get; set; }
 
-        public Table_33_Default_Bedding_Material_Composition_Data BeddingMaterialComposition { get; set; }
+        public Table_30_Default_Bedding_Material_Composition_Data BeddingMaterialComposition { get; set; }
 
         /// <summary>
         /// Total carbon dioxide emissions associated with this <see cref="AnimalGroup"/>.

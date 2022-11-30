@@ -89,7 +89,7 @@ namespace H.Core.Models
         private MeasurementSystemType _measurementSystemType;
 
         private ChosenClimateAcquisition _climateAcquisition;
-        private Table_18_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
+        private Table_15_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
         private YieldAssignmentMethod _yieldAssignmentMethod;        
 
         private List<TimeFrame> _availableTimeFrame;
@@ -107,7 +107,7 @@ namespace H.Core.Models
             this.Defaults = new Defaults();
             this.Diets = new ObservableCollection<Diet>();
             this.DefaultManureCompositionData = new ObservableCollection<DefaultManureCompositionData>();
-            this.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_33_Default_Bedding_Material_Composition_Data>();
+            this.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>();
             this.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
             this.CarbonModellingEquilibriumYear = CoreConstants.IcbmEquilibriumYear;
             this.CarbonModellingEquilibriumStartDate = new DateTime(this.CarbonModellingEquilibriumYear, 1, 1);
@@ -125,7 +125,7 @@ namespace H.Core.Models
 
             this.ClimateData = new ClimateData();
             this.GeographicData = new GeographicData();
-            this.AnnualSoilN2OBreakdown = new Table_18_Default_Soil_N2O_Emission_BreakDown_Provider();
+            this.AnnualSoilN2OBreakdown = new Table_15_Default_Soil_N2O_Emission_BreakDown_Provider();
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace H.Core.Models
             set;
         }
 
-        public ObservableCollection<Table_33_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
+        public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
 
         public int PolygonId
         {
@@ -260,7 +260,7 @@ namespace H.Core.Models
         /// <summary>
         /// The default allocation of total N2O emissions within the year
         /// </summary>
-        public Table_18_Default_Soil_N2O_Emission_BreakDown_Provider AnnualSoilN2OBreakdown
+        public Table_15_Default_Soil_N2O_Emission_BreakDown_Provider AnnualSoilN2OBreakdown
         {
             get
             {
@@ -785,11 +785,11 @@ namespace H.Core.Models
         /// When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish. This data is therefore held here in the farm object since it is specific
         /// to this farm instance and lookups should be made here and not from the provider class since this method will persist changes.
         /// </summary>
-        public Table_33_Default_Bedding_Material_Composition_Data GetBeddingMaterialComposition(
+        public Table_30_Default_Bedding_Material_Composition_Data GetBeddingMaterialComposition(
             BeddingMaterialType beddingMaterialType,
             AnimalType animalType)
         {
-            var result = new Table_33_Default_Bedding_Material_Composition_Data();
+            var result = new Table_30_Default_Bedding_Material_Composition_Data();
 
             AnimalType animalLookupType;
             if (animalType.IsBeefCattleType())
@@ -827,7 +827,7 @@ namespace H.Core.Models
             {
                 Trace.TraceError($"{nameof(Farm)}.{nameof(GetBeddingMaterialComposition)}: unable to return bedding material data for {animalType.GetDescription()}, and {beddingMaterialType.GetHashCode()}. Returning default value of 1.");
 
-                return new Table_33_Default_Bedding_Material_Composition_Data();
+                return new Table_30_Default_Bedding_Material_Composition_Data();
             }
         }
 

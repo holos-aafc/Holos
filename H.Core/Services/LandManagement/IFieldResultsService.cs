@@ -44,7 +44,7 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm);
         void AssignDefaultNitrogenContentValues(CropViewItem viewItem, Farm farm);
         void AssignDefaultBiomassCoefficients(CropViewItem viewItem, Farm farm);
-        Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
+        Table_7_Relative_Biomass_Information_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);

@@ -247,7 +247,7 @@ namespace H.CLI.Test.Results
             Assert.AreEqual(Math.Round(totals.AllFarmsFatAndProteinCorrectedMilkProduction, roundingDigits), 0);
 
             ///////////////Totals For Farm 1////////////////////////
-            var _uncertaintyCalculator = new Table_68_69_Expression_Of_Uncertainty_Calculator();
+            var _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();
             var allGroupedComponentsByFarm = results._animalEmissionResultsForAllFarms.GroupBy(x => x.Key).ToList();
             var groupedComponentsForAFarm = allGroupedComponentsByFarm[0];
             var filteredFarmComponents = groupedComponentsForAFarm.SelectMany(x => x.Value.Where(y => y.Component.ComponentType != ComponentType.Rams &&

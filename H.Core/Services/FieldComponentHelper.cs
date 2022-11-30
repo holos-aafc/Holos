@@ -68,7 +68,7 @@ namespace H.Core.Services
 
             var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
             {
-                x.CreateMap<Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_51_Carbon_Footprint_For_Fertilizer_Blends_Data>();
+                x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
                 
             });

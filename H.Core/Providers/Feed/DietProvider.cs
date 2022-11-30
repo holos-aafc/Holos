@@ -20,7 +20,7 @@ namespace H.Core.Providers.Feed
     {
         #region Fields
 
-        private Table_42_Crude_Protein_Content_Swine_Feed_Provider _swineCrudeProteinProvider;
+        private Table_39_Crude_Protein_Content_Swine_Feed_Provider _swineCrudeProteinProvider;
         private readonly IFeedIngredientProvider _feedIngredientProvider;
 
         #endregion
@@ -30,7 +30,7 @@ namespace H.Core.Providers.Feed
         public DietProvider()
         {
             _feedIngredientProvider = new FeedIngredientProvider();
-            _swineCrudeProteinProvider = new Table_42_Crude_Protein_Content_Swine_Feed_Provider();
+            _swineCrudeProteinProvider = new Table_39_Crude_Protein_Content_Swine_Feed_Provider();
         }
 
         #endregion
@@ -425,7 +425,7 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// Implements: Table 23. Examples of NEmf content of typical diets fed to cattle for estimation of dry matter intake (IPCC, 2019, Table 10.8a).
+        /// Implements: Table 20. Examples of NEmf content of typical diets fed to cattle for estimation of dry matter intake (IPCC, 2019, Table 10.8a).
         /// </summary>
         /// <returns></returns>
         private IEnumerable<Diet> CreateBeefCowDiets()

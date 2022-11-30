@@ -43,8 +43,8 @@ namespace H.Core.Services
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
 
         private readonly IDietProvider _dietProvider = new DietProvider();
-        private readonly Table_9_ManureTypes_Default_Composition_Provider _defaultManureCompositionProvider = new Table_9_ManureTypes_Default_Composition_Provider();
-        private readonly Table_33_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_33_Default_Bedding_Material_Composition_Provider();
+        private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
+        private readonly Table_30_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
 
         private readonly IMapper _farmMapper;
         private readonly IMapper _defaultsMapper;
@@ -97,10 +97,10 @@ namespace H.Core.Services
                     .ForMember(y => y.GeographicData, z => z.Ignore())
                     .ForMember(y => y.Components, z => z.Ignore());
 
-                x.CreateMap<Table_18_Default_Soil_N2O_Emission_BreakDown_Provider,
-                    Table_18_Default_Soil_N2O_Emission_BreakDown_Provider>();
-                x.CreateMap<Table_33_Default_Bedding_Material_Composition_Data,
-                    Table_33_Default_Bedding_Material_Composition_Data>();
+                x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
+                    Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();
+                x.CreateMap<Table_30_Default_Bedding_Material_Composition_Data,
+                    Table_30_Default_Bedding_Material_Composition_Data>();
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
 
                 x.CreateMap<Diet, Diet>();

@@ -25,16 +25,16 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        protected readonly Table_52_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
-            new Table_52_Electricity_Conversion_Defaults_Provider();
+        protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
+            new Table_49_Electricity_Conversion_Defaults_Provider();
 
-        protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
+        protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
 
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider =
             new Table_19_Additive_Reduction_Factors_Provider();
 
-        protected readonly Table_39_Livestock_Emission_Conversion_Factors_Provider
-            _livestockEmissionConversionFactorsProvider = new Table_39_Livestock_Emission_Conversion_Factors_Provider();
+        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider
+            _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
 
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 

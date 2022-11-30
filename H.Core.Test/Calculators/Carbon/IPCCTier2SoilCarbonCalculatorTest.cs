@@ -58,7 +58,7 @@ namespace H.Core.Test.Calculators.Carbon
         private static readonly ClimateProvider _climateProvider = new ClimateProvider();
         private static  ClimateData climateData;
 
-        private Table_11_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider;
+        private Table_8_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider;
         private static TillageType _tillageType;
 
         private double _f1;
@@ -193,7 +193,7 @@ namespace H.Core.Test.Calculators.Carbon
         public void TestInitialize()
         {
             _sut = new IPCCTier2SoilCarbonCalculator();
-            _globallyCalibratedModelParametersProvider = new Table_11_Globally_Calibrated_Model_Parameters_Provider();
+            _globallyCalibratedModelParametersProvider = new Table_8_Globally_Calibrated_Model_Parameters_Provider();
 
             _f1 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionMetabolicDMActivePool, _tillageType).Value;
             _f2 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionStructuralDMActivePool, _tillageType).Value;

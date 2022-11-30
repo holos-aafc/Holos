@@ -594,7 +594,7 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultLigninContent(CropViewItem cropViewItem, Farm farm)
         {
-            Providers.Carbon.Table_10_Relative_Biomass_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
+            Providers.Carbon.Table_7_Relative_Biomass_Information_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
             
             if (table10RelativeBiomassData != null)
             {

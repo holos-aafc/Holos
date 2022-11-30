@@ -1381,51 +1381,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Group,Crop,Growing season precip + irrigation (mm),Moisture content of product (% w/w),&quot;Soil Organic C
-        ///(SOC)&quot;,SOC units,&quot;Bulk density
-        ///(BD)&quot;,BD units,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,,References,,Fertilization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Tillage ,,,,,,,,,,,Irrigation ,,,,,,,,,,,Pesticide ,,,,,,,,,,Lignin Content
-        ///,,,,,,,,,,,,,,,,,,,,Nitrogen rates (kg ha-1) calculate as Fert amount = cropNuptake / FertUseEfficiency (0.5) - SoilNsupply (if user indicates use of Soil [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_10_A_B_Relative_Biomass_Information {
-            get {
-                return ResourceManager.GetString("Table_10_A_B_Relative_Biomass_Information", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameter,Practice,Value,Min,Max,Standard Deviation,Description
-        ///TillFac,Conventional,3.036,1.4,4,0.579,Tillage disturbance modifier for decay rates
-        ///TillFac,Reduced,2.075,1,3,0.569,Tillage disturbance modifier for decay rates
-        ///TillFac,No-till,1,0,0,0,Tillage disturbance modifier for decay rates
-        ///Ws,Conventional,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
-        ///Ws,Reduced,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
-        ///Ws,No-till,1.331,0.8,2,0.386,Slope parameter for  [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_11_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes {
-            get {
-                return ResourceManager.GetString("Table_11_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %
-        ///Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12
-        ///Buckwheat,0.344,0.015,0.229,0.007,0.053,12
-        ///Canola,0.18 (3),0.046 (3),0.375,0.0083,0.073,9
-        ///CEREALS,0.38,0.015,0.248,0.0083,0.073,12
-        ///CHICKPEA,0.301 (3),0.063 (3),0.219,0.008,0.075,13
-        ///GrainCorn,0.369 (3),0.015 (3),0.25,0.0063,0.11,15
-        ///CORNSiLaGe,0.369 (3),0.015 (3),0.25,0.0063,0.11,70
-        ///DryFieldBeaNS,0.2,0.099,0.224,0.008,0.085,13
-        ///DryFieldPEAS,0.163 (3),0.07 [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_12_Default_Values_For_Nitrogen_Lignin_In_Crops {
-            get {
-                return ResourceManager.GetString("Table_12_Default_Values_For_Nitrogen_Lignin_In_Crops", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Livestock Manure Type,C to N ratio of manure ,N content of manure (% dry basis),Lignin content of manure (% dry basis)
         ///Dairy,16,2.9,13
         ///Beef,19 (1),2.3 (1),9 (1)
@@ -1439,9 +1394,9 @@ namespace H.Content.Properties {
         ///,,,
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_13_Default_Values_For_Steady_State_Method {
+        public static string Table_10_Default_Values_For_Steady_State_Method {
             get {
-                return ResourceManager.GetString("Table_13_Default_Values_For_Steady_State_Method", resourceCulture);
+                return ResourceManager.GetString("Table_10_Default_Values_For_Steady_State_Method", resourceCulture);
             }
         }
         
@@ -1456,9 +1411,9 @@ namespace H.Content.Properties {
         ///,,,,,,,,,,,,
         ///,,,,,,, [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_14_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees {
+        public static string Table_11_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees {
             get {
-                return ResourceManager.GetString("Table_14_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees", resourceCulture);
+                return ResourceManager.GetString("Table_11_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees", resourceCulture);
             }
         }
         
@@ -1466,9 +1421,47 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Hardiness,Species,Mortality_pct,Age,TEC_MgCkmyr_min,TEC_MgCkmyr_max,TEC_MgCkmyr_wavg,TEC_MgCkm_min,TEC_MgCkm_max,TEC_MgCkm_wavg,Biom_MgCkmyr_min,Biom_MgCkmyr_max,Biom_MgCkmyr_wavg,Biom_MgCkm_min,Biom_MgCkm_max,Biom_MgCkm_wavg,DOM_MgCkmyr_min,DOM_MgCkmyr_max,DOM_MgCkmyr_wavg,DOM_MgCkm_min,DOM_MgCkm_max,DOM_MgCkm_wavg,Stems_min,Stems_max,Stems_wavg,km_per_ha_min,km_per_ha_max,km_per_ha_wavg,Stems_tosum1ha_min,Stems_tosum1ha_max,Stems_tosum1ha_wavg
         ///2A,Caragana,0,1,,,,59.07855988,107.8836899,64.48021885,,,,0,0 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_15_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone {
+        public static string Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone {
             get {
-                return ResourceManager.GetString("Table_15_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone", resourceCulture);
+                return ResourceManager.GetString("Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AnimalType,Housing,CA
+        ///Beef,Confined No Barn,0
+        ///Beef,Housed In Barn,0
+        ///Beef,Enclosed Pasture,0.17
+        ///Beef,Open Range Or Hills,0.36
+        ///Dairy,Tie-Stall,0
+        ///Dairy,Small Free-Stall,0
+        ///Dairy,Large Free-Stall,0
+        ///Dairy,Drylot,0
+        ///Dairy,Grazing &lt; 3km/d,0.17
+        ///Dairy,Grazing &gt; 3km/d,0.3
+        ///Sheep,Confined,0.0067
+        ///Sheep,Flat Pasture,0.0107
+        ///Sheep,Hilly Pasture / Open Range,0.024
+        ///.
+        /// </summary>
+        public static string Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients {
+            get {
+                return ResourceManager.GetString("Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AnimalType,DietType,Forage (%DM),CP (kg kg^-1),YM,Starch (kg kg^-1),NDF  (kg kg^-1,ADF (kg kg^-1,TDN (%),ME (Mcal kg^-1),EE (%),NEL-3x  (Mcal kg-1)
+        ///CowCalf,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
+        ///CowCalf,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
+        ///CowCalf,High Energy/ptn,85,0.177,0.07,0.099,0.451,0,60,2.14,0,0
+        ///Stockers,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
+        ///Stockers,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
+        ///Stockers,High Energy/ptn [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_18_26_Diet_Coefficients_For_Beef_Dairy_Sheep {
+            get {
+                return ResourceManager.GetString("Table_18_26_Diet_Coefficients_For_Beef_Dairy_Sheep", resourceCulture);
             }
         }
         
@@ -1503,44 +1496,6 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AnimalType,Housing,CA
-        ///Beef,Confined No Barn,0
-        ///Beef,Housed In Barn,0
-        ///Beef,Enclosed Pasture,0.17
-        ///Beef,Open Range Or Hills,0.36
-        ///Dairy,Tie-Stall,0
-        ///Dairy,Small Free-Stall,0
-        ///Dairy,Large Free-Stall,0
-        ///Dairy,Drylot,0
-        ///Dairy,Grazing &lt; 3km/d,0.17
-        ///Dairy,Grazing &gt; 3km/d,0.3
-        ///Sheep,Confined,0.0067
-        ///Sheep,Flat Pasture,0.0107
-        ///Sheep,Hilly Pasture / Open Range,0.024
-        ///.
-        /// </summary>
-        public static string Table_20_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients {
-            get {
-                return ResourceManager.GetString("Table_20_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AnimalType,DietType,Forage (%DM),CP (kg kg^-1),YM,Starch (kg kg^-1),NDF  (kg kg^-1,ADF (kg kg^-1,TDN (%),ME (Mcal kg^-1),EE (%),NEL-3x  (Mcal kg-1)
-        ///CowCalf,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
-        ///CowCalf,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
-        ///CowCalf,High Energy/ptn,85,0.177,0.07,0.099,0.451,0,60,2.14,0,0
-        ///Stockers,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
-        ///Stockers,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
-        ///Stockers,High Energy/ptn [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep {
-            get {
-                return ResourceManager.GetString("Table_21_29_Diet_Coefficients_For_Beef_Dairy_Sheep", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Year,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
         ///1990,24.3,23.2,22.2,22.1,21.7,20.3,20.8,21,21,20.9
         ///1995,26.8,25.5,24.2,24.2,24,22.2,23,23.2,23.1,23.1
@@ -1552,9 +1507,9 @@ namespace H.Content.Properties {
         ///2013,32.7,32.8,32,30.7,30.2,28.7,28.5,29.1,29.6,29.7
         ///2014,32.6,33,32.9,29.8,29.5,28.8,27.6,28.4,30 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_24_Average_Milk_Production_For_Dairy_Cows_By_Province {
+        public static string Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province {
             get {
-                return ResourceManager.GetString("Table_24_Average_Milk_Production_For_Dairy_Cows_By_Province", resourceCulture);
+                return ResourceManager.GetString("Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province", resourceCulture);
             }
         }
         
@@ -1570,9 +1525,9 @@ namespace H.Content.Properties {
         ///4 Helgason et al. (2005),,,,,,
         ///.
         /// </summary>
-        public static string Table_25_Livestock_Coefficients_For_Sheep {
+        public static string Table_22_Livestock_Coefficients_For_Sheep {
             get {
-                return ResourceManager.GetString("Table_25_Livestock_Coefficients_For_Sheep", resourceCulture);
+                return ResourceManager.GetString("Table_22_Livestock_Coefficients_For_Sheep", resourceCulture);
             }
         }
         
@@ -1597,22 +1552,9 @@ namespace H.Content.Properties {
         ///&quot;Source: ECCC (2021), Table A3.4-18.&quot;,,,,
         ///1 Assumes that manure handled by animal waste  [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_31_Percentage_Total_Manure_Produced_In_Systems {
+        public static string Table_29_Percentage_Total_Manure_Produced_In_Systems {
             get {
-                return ResourceManager.GetString("Table_31_Percentage_Total_Manure_Produced_In_Systems", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Diet,VS Adjustment (kg kg-1),N Excreted Adjustment (kg kg-1)
-        ///Standard,1,1
-        ///Reduced Protein,0.99,0.7
-        ///Highly Digestible Feed,0.95,0.95
-        ///.
-        /// </summary>
-        public static string Table_35_VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group {
-            get {
-                return ResourceManager.GetString("Table_35_VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group", resourceCulture);
+                return ResourceManager.GetString("Table_29_Percentage_Total_Manure_Produced_In_Systems", resourceCulture);
             }
         }
         
@@ -1633,9 +1575,9 @@ namespace H.Content.Properties {
         ///Boar,Manitoba,0.145,2.55
         ///Dry S [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_36_Daily_Feed_Intake_For_Swine_Groups {
+        public static string Table_33_Daily_Feed_Intake_For_Swine_Groups {
             get {
-                return ResourceManager.GetString("Table_36_Daily_Feed_Intake_For_Swine_Groups", resourceCulture);
+                return ResourceManager.GetString("Table_33_Daily_Feed_Intake_For_Swine_Groups", resourceCulture);
             }
         }
         
@@ -1663,9 +1605,9 @@ namespace H.Content.Properties {
         ///Cockerels,0.095,19,0,0,0,0,2,0.043,42
         ///Roasters,0.095 (2),1 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_44_Poultry_N_Excretion_Rate_Parameter_Values {
+        public static string Table_41_Poultry_N_Excretion_Rate_Parameter_Values {
             get {
-                return ResourceManager.GetString("Table_44_Poultry_N_Excretion_Rate_Parameter_Values", resourceCulture);
+                return ResourceManager.GetString("Table_41_Poultry_N_Excretion_Rate_Parameter_Values", resourceCulture);
             }
         }
         
@@ -1685,9 +1627,46 @@ namespace H.Content.Properties {
         ///Corn silage,,304,0.45,95,640,13
         ///Corn stover,,427,0.54,88,850,5 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
+        public static string Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
             get {
-                return ResourceManager.GetString("Table_49_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System", resourceCulture);
+                return ResourceManager.GetString("Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ,,,,,,CFP at plant gate ,,
+        ///,,,,,,Production (US numbers),Application,
+        ///Fert product,Abbrev.,%N,%P,%K,%S,kg CO2 eq. kg product -1,,
+        ///Urea,Urea,46,0,0,0,1.18,0.73,Brentrup et al. 2016.
+        ///Ammonia,NH3,82,0,0,0,1.07,,
+        ///Urea ammonium nitrate,UAN,28,0,0,0,1.5,0.25,Brentrup et al. 2016.
+        ///Ammonium nitrate,AN,34,0,0,0,2.52,,Brentrup et al. 2016.
+        ///Calcium ammonium nitrate,CAN,27,0,0,0,2.08,,Brentrup et al. 2016.
+        ///Ammonium sulphate,AS,20.5,0,0,24,0.69,,Brentrup et al. 2016.
+        ///MES,,13,33,0,15,,,
+        ///Monoammonium phosphate,M [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
+            get {
+                return ResourceManager.GetString("Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
+        ///1990,0.017,0.95,0.8,0.026,0.2,0.013,0.37,0.72,0.045,1.3
+        ///1991,0.01,1,0.8,0.02,0.2,0.004,0.35,0.773,0.035,1.268
+        ///1992,0.02,1,0.88,0.01,0.2,0.007,0.391,0.785,0.041,1.471
+        ///1993,0.04,1,0.83,0.01,0.13,0.002,0.346,0.776,0.033,1.186
+        ///1994,0.04,0.98,0.88,0.01,0.1,0.003,0.392,0.754,0.019,1.5
+        ///1995,0.05,0.97,0.86,0.01,0.12,0.002,0.55,0.75,0.03,1.73
+        ///1996,0.01,0.99,0.86,0.01,0.13,0.002,0.393,0.723,0.032,2.222
+        ///1997,0.01,0.99,0.9,0.01,0.17,0.002,0.513,0.74,0.03,1.429
+        ///1998,0.03,0. [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_49_Electricity_Conversion_Values_By_Province {
+            get {
+                return ResourceManager.GetString("Table_49_Electricity_Conversion_Values_By_Province", resourceCulture);
             }
         }
         
@@ -1706,51 +1685,14 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ,,,,,,CFP at plant gate ,,
-        ///,,,,,,Production (US numbers),Application,
-        ///Fert product,Abbrev.,%N,%P,%K,%S,kg CO2 eq. kg product -1,,
-        ///Urea,Urea,46,0,0,0,1.18,0.73,Brentrup et al. 2016.
-        ///Ammonia,NH3,82,0,0,0,1.07,,
-        ///Urea ammonium nitrate,UAN,28,0,0,0,1.5,0.25,Brentrup et al. 2016.
-        ///Ammonium nitrate,AN,34,0,0,0,2.52,,Brentrup et al. 2016.
-        ///Calcium ammonium nitrate,CAN,27,0,0,0,2.08,,Brentrup et al. 2016.
-        ///Ammonium sulphate,AS,20.5,0,0,24,0.69,,Brentrup et al. 2016.
-        ///MES,,13,33,0,15,,,
-        ///Monoammonium phosphate,M [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_51_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
-            get {
-                return ResourceManager.GetString("Table_51_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Year,BC,AB,SK,MB,ON,QC,NB,NS,NFLD,PEI
-        ///1990,0.017,0.95,0.8,0.026,0.2,0.013,0.37,0.72,0.045,1.3
-        ///1991,0.01,1,0.8,0.02,0.2,0.004,0.35,0.773,0.035,1.268
-        ///1992,0.02,1,0.88,0.01,0.2,0.007,0.391,0.785,0.041,1.471
-        ///1993,0.04,1,0.83,0.01,0.13,0.002,0.346,0.776,0.033,1.186
-        ///1994,0.04,0.98,0.88,0.01,0.1,0.003,0.392,0.754,0.019,1.5
-        ///1995,0.05,0.97,0.86,0.01,0.12,0.002,0.55,0.75,0.03,1.73
-        ///1996,0.01,0.99,0.86,0.01,0.13,0.002,0.393,0.723,0.032,2.222
-        ///1997,0.01,0.99,0.9,0.01,0.17,0.002,0.513,0.74,0.03,1.429
-        ///1998,0.03,0. [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Table_52_Electricity_Conversion_Values_By_Province {
-            get {
-                return ResourceManager.GetString("Table_52_Electricity_Conversion_Values_By_Province", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ,AB,AB,AB,AB,AB,AB,SK,SK,SK,SK,SK,SK,MB,MB,MB,MB,MB,MB,ON,ON,ON,QC,QC,QC,NB,NB,NB,NS,NS,NS,NFLD,NFLD,NFLD,PEI,PEI,PEI,BC,BC,BC,BC,BC,BC
         ///,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,Black,Black,Black,Brown,Brown,Brown
         ///CROP,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT
         ///Fallow, [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_53_Fuel_Energy_Requirement_Estimates_By_Region {
+        public static string Table_50_Fuel_Energy_Requirement_Estimates_By_Region {
             get {
-                return ResourceManager.GetString("Table_53_Fuel_Energy_Requirement_Estimates_By_Region", resourceCulture);
+                return ResourceManager.GetString("Table_50_Fuel_Energy_Requirement_Estimates_By_Region", resourceCulture);
             }
         }
         
@@ -1760,9 +1702,9 @@ namespace H.Content.Properties {
         ///,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT
         ///Fallow,0.06 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_54_Herbicide_Energy_Requirement_Estimates_By_Region {
+        public static string Table_51_Herbicide_Energy_Requirement_Estimates_By_Region {
             get {
-                return ResourceManager.GetString("Table_54_Herbicide_Energy_Requirement_Estimates_By_Region", resourceCulture);
+                return ResourceManager.GetString("Table_51_Herbicide_Energy_Requirement_Estimates_By_Region", resourceCulture);
             }
         }
         
@@ -1776,9 +1718,9 @@ namespace H.Content.Properties {
         ///Bull,All,calculated,1.19,0.31,0.57
         ///.
         /// </summary>
-        public static string Table_61_Beef_Cattle_Fed_Winter_Feed_Cost {
+        public static string Table_58_Beef_Cattle_Fed_Winter_Feed_Cost {
             get {
-                return ResourceManager.GetString("Table_61_Beef_Cattle_Fed_Winter_Feed_Cost", resourceCulture);
+                return ResourceManager.GetString("Table_58_Beef_Cattle_Fed_Winter_Feed_Cost", resourceCulture);
             }
         }
         
@@ -1793,9 +1735,25 @@ namespace H.Content.Properties {
         ///Corn based,0.198
         ///.
         /// </summary>
-        public static string Table_62_Feed_Costs_For_Beef {
+        public static string Table_59_Feed_Costs_For_Beef {
             get {
-                return ResourceManager.GetString("Table_62_Feed_Costs_For_Beef", resourceCulture);
+                return ResourceManager.GetString("Table_59_Feed_Costs_For_Beef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
+        ///Beef cattle,Pasture,86 (1),0.290 (1),6.180 (1),0.047 (1),21.02
+        ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
+        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
+        ///Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
+        ///Beef cattle,Composted intensive (5),37.42,1.041,14.48,0.398,13.91
+        ///Dairy cattle,Pasture,50 (6),1 (6),??,0.118 (6),??
+        ///Dairy cattle,Deep bedding (2),60.08  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_6_Manure_Types_And_Default_Composition {
+            get {
+                return ResourceManager.GetString("Table_6_Manure_Types_And_Default_Composition", resourceCulture);
             }
         }
         
@@ -1807,9 +1765,9 @@ namespace H.Content.Properties {
         ///Stockers,High energy/protein ,Pasture Grass/High quality,0.9,8.31,0.08,0.02
         ///Stockers,Medium en [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_63_Beef_Cattle_Pasture_Summer_Feed_Cost {
+        public static string Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost {
             get {
-                return ResourceManager.GetString("Table_63_Beef_Cattle_Pasture_Summer_Feed_Cost", resourceCulture);
+                return ResourceManager.GetString("Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost", resourceCulture);
             }
         }
         
@@ -1825,9 +1783,9 @@ namespace H.Content.Properties {
         ///These conversion factors are the Direct Global Warming Potentials (mass basis) relative to carbon dioxide (for gases for which the lifetimes have been adequately characterised). The time horizon is 100 years (IPCC 2006).,,,,,
         ///.
         /// </summary>
-        public static string Table_65_Global_Warming_Potential_Of_Emissions {
+        public static string Table_62_Global_Warming_Potential_Of_Emissions {
             get {
-                return ResourceManager.GetString("Table_65_Global_Warming_Potential_Of_Emissions", resourceCulture);
+                return ResourceManager.GetString("Table_62_Global_Warming_Potential_Of_Emissions", resourceCulture);
             }
         }
         
@@ -1855,9 +1813,9 @@ namespace H.Content.Properties {
         ///1998,1.465,0.478,0.145
         ///1999,1.495,0.481,0.1 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_66_Global_Radiative_Forcing {
+        public static string Table_63_Global_Radiative_Forcing {
             get {
-                return ResourceManager.GetString("Table_66_Global_Radiative_Forcing", resourceCulture);
+                return ResourceManager.GetString("Table_63_Global_Radiative_Forcing", resourceCulture);
             }
         }
         
@@ -1869,9 +1827,9 @@ namespace H.Content.Properties {
         ///These conversions were done in earlier equations.,,
         ///.
         /// </summary>
-        public static string Table_67_Conversion_Factors_Atomic_To_Molecular_Weight {
+        public static string Table_64_Conversion_Factors_Atomic_To_Molecular_Weight {
             get {
-                return ResourceManager.GetString("Table_67_Conversion_Factors_Atomic_To_Molecular_Weight", resourceCulture);
+                return ResourceManager.GetString("Table_64_Conversion_Factors_Atomic_To_Molecular_Weight", resourceCulture);
             }
         }
         
@@ -1887,25 +1845,67 @@ namespace H.Content.Properties {
         ///,Swine,daily,daily,daily,monthly,monthly,-,monthly
         ///,P [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_70_Output_For_Report {
+        public static string Table_67_Output_For_Report {
             get {
-                return ResourceManager.GetString("Table_70_Output_For_Report", resourceCulture);
+                return ResourceManager.GetString("Table_67_Output_For_Report", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
-        ///Beef cattle,Pasture,86 (1),0.290 (1),6.180 (1),0.047 (1),21.02
-        ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
-        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
-        ///Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
-        ///Beef cattle,Composted intensive (5),37.42,1.041,14.48,0.398,13.91
-        ///Dairy cattle,Pasture,50 (6),1 (6),??,0.118 (6),??
-        ///Dairy cattle,Deep bedding (2),60.08  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Group,Crop,Growing season precip + irrigation (mm),Moisture content of product (% w/w),&quot;Soil Organic C
+        ///(SOC)&quot;,SOC units,&quot;Bulk density
+        ///(BD)&quot;,BD units,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,,References,,Fertilization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Tillage ,,,,,,,,,,,Irrigation ,,,,,,,,,,,Pesticide ,,,,,,,,,,Lignin Content
+        ///,,,,,,,,,,,,,,,,,,,,Nitrogen rates (kg ha-1) calculate as Fert amount = cropNuptake / FertUseEfficiency (0.5) - SoilNsupply (if user indicates use of Soil [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Table_9_Manure_Types_And_Default_Composition {
+        public static string Table_7_Relative_Biomass_Information {
             get {
-                return ResourceManager.GetString("Table_9_Manure_Types_And_Default_Composition", resourceCulture);
+                return ResourceManager.GetString("Table_7_Relative_Biomass_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter,Practice,Value,Min,Max,Standard Deviation,Description
+        ///TillFac,Conventional,3.036,1.4,4,0.579,Tillage disturbance modifier for decay rates
+        ///TillFac,Reduced,2.075,1,3,0.569,Tillage disturbance modifier for decay rates
+        ///TillFac,No-till,1,0,0,0,Tillage disturbance modifier for decay rates
+        ///Ws,Conventional,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
+        ///Ws,Reduced,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
+        ///Ws,No-till,1.331,0.8,2,0.386,Slope parameter for  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes {
+            get {
+                return ResourceManager.GetString("Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %
+        ///Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12
+        ///Buckwheat,0.344,0.015,0.229,0.007,0.053,12
+        ///Canola,0.18 (3),0.046 (3),0.375,0.0083,0.073,9
+        ///CEREALS,0.38,0.015,0.248,0.0083,0.073,12
+        ///CHICKPEA,0.301 (3),0.063 (3),0.219,0.008,0.075,13
+        ///GrainCorn,0.369 (3),0.015 (3),0.25,0.0063,0.11,15
+        ///CORNSiLaGe,0.369 (3),0.015 (3),0.25,0.0063,0.11,70
+        ///DryFieldBeaNS,0.2,0.099,0.224,0.008,0.085,13
+        ///DryFieldPEAS,0.163 (3),0.07 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops {
+            get {
+                return ResourceManager.GetString("Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diet,VS Adjustment (kg kg-1),N Excreted Adjustment (kg kg-1)
+        ///Standard,1,1
+        ///Reduced Protein,0.99,0.7
+        ///Highly Digestible Feed,0.95,0.95
+        ///.
+        /// </summary>
+        public static string VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group {
+            get {
+                return ResourceManager.GetString("VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group", resourceCulture);
             }
         }
         

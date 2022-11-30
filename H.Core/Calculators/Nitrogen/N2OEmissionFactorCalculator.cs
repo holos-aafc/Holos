@@ -17,9 +17,9 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Fields
 
-        protected readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
-        protected readonly Table_39_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider = new Table_39_Livestock_Emission_Conversion_Factors_Provider();
-        private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
+        protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
+        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
+        private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
 
         #endregion
@@ -290,7 +290,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
             var soilReductionFactor = _soilN2OEmissionFactorsProvider.GetReductionFactorBasedOnApplicationMethod(viewItem.SoilReductionFactor);
 
@@ -323,7 +323,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
 
             var ecodistrictManureEmissionFactor = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -346,7 +346,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_16_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
 
             var emissionFactorForCropResidues = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -497,7 +497,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// <para>This value used to be a constant (0.1) but is now calculated according to crop type, fertilizer type, etc.</para>
         ///
-        /// <para>Implements: Table 17. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
+        /// <para>Implements: Table 14. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
         /// </summary>
         public double CalculateFractionOfNitrogenLostByVolatilization(
             CropViewItem cropViewItem,

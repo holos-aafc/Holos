@@ -196,7 +196,7 @@ namespace H.Core.Calculators.Shelterbelt
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    biomasCarbonPerKilometerMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                    biomasCarbonPerKilometerMegagrams = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         hardinessZone: trannumData.HardinessZone,
                         percentMortality: trannumData.PercentMortality,
@@ -703,7 +703,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                deadOrganicMatterMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                deadOrganicMatterMegagrams = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,
@@ -740,7 +740,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                totalEcosystemCarbonMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                totalEcosystemCarbonMegagrams = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,
@@ -778,7 +778,7 @@ namespace H.Core.Calculators.Shelterbelt
             else
             {
                 // We need to lookup values by hardiness zone
-                totalLivingBiomassMegagrams = Table_15_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                totalLivingBiomassMegagrams = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                     treeSpecies: trannumData.TreeSpecies,
                     hardinessZone: trannumData.HardinessZone,
                     percentMortality: trannumData.PercentMortality,

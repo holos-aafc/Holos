@@ -25,8 +25,8 @@ namespace H.Core.Calculators.Carbon
 
         #region Fields
 
-        private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
-        private readonly Table_11_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider = new Table_11_Globally_Calibrated_Model_Parameters_Provider();        
+        private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
+        private readonly Table_8_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider = new Table_8_Globally_Calibrated_Model_Parameters_Provider();        
 
         #endregion
 

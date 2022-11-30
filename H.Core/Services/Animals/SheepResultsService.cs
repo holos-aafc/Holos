@@ -18,8 +18,8 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        private readonly Table_27_Lamb_Daily_Weight_Gain_Provider _lambDailyWeightGainProvider;
-        private readonly Table_28_Pregnancy_Coefficients_For_Sheep_Provider _pregnancyCoefficientProvider;
+        private readonly Table_24_Lamb_Daily_Weight_Gain_Provider _lambDailyWeightGainProvider;
+        private readonly Table_25_Pregnancy_Coefficients_For_Sheep_Provider _pregnancyCoefficientProvider;
 
         #endregion
 
@@ -27,8 +27,8 @@ namespace H.Core.Services.Animals
 
         public SheepResultsService() : base()
         {
-            _pregnancyCoefficientProvider = new Table_28_Pregnancy_Coefficients_For_Sheep_Provider();
-            _lambDailyWeightGainProvider = new Table_27_Lamb_Daily_Weight_Gain_Provider();
+            _pregnancyCoefficientProvider = new Table_25_Pregnancy_Coefficients_For_Sheep_Provider();
+            _lambDailyWeightGainProvider = new Table_24_Lamb_Daily_Weight_Gain_Provider();
 
             _animalComponentCategory = ComponentCategory.Sheep;
         }
