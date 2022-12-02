@@ -166,16 +166,12 @@ namespace H.Core.Providers.Animals
 
             /*
              * Footnote 1: Mineralization of organic N (fecal N and bedding N)
-             * Footnote 2: Solid manure composted for ≥ 10 months; data from Chai et al. (2014)
-             * Footnote 3: Solid manure stockpiled for ≥ 4 months; data from Chai et al. (2014)
+             * Footnote 2: Solid manure composted for ≥ 10 months; data from Chai et al. (2014); these values are used for compost passive and compost intensive beef and dairy cattle manure
+             * Footnote 3: Solid manure stockpiled for ≥ 4 months; data from Chai et al. (2014); these values are also used for deep bedding beef and dairy cattle manure
              * Footnote 4: FracurinaryN is the fraction of TAN in the liquid manure storage system
-             * Footnote 5: Nitrification of TAN in liquid manure with natural crust (formed from manure, bedding, or waste forage) was
-                considered since the natural crust can be assumed as similar to solid manure (stockpile) in terms of being aerobic. 
-                The N2O-N emission factor for liquid manure with a natural crust is 0.005 of total N IPCC (2006), which can be expressed as 
-                the TAN based EFs knowing the TAN fraction of stored manure.
+             * Footnote 5: Nitrification of TAN in liquid manure with natural crust (formed from manure, bedding, or waste forage) was considered since the natural crust can be assumed as similar to solid manure (stockpile) in terms of being aerobic. The N2O-N emission factor for liquid manure with a natural crust is 0.005 of total N IPCC (2006), which can be expressed as the TAN based EFs knowing the TAN fraction of stored manure. Values for liquid manure with a natural crust are also used for liquid manure with a solid cover and deep pit manure
              * Footnote 6: Nitrification of TAN in liquid manure with no natural crust is assumed to be zero because of anaerobic conditions
              * Footnote 7: All nitrified TAN (nitrate-N) was assumed to be denitrified (no leaching, runoff) in liquid systems.
-
              */
 
             #endregion

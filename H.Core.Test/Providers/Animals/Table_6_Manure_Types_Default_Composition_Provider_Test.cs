@@ -43,27 +43,27 @@ namespace H.Core.Test.Providers.Animals
         }
 
         [TestMethod]
-        public void TestSheepCattleData()
+        public void TestSheepData()
         {
             var data = _provider.GetManureCompositionDataByType(AnimalType.Sheep, ManureStateType.Pasture);
 
             Assert.AreEqual(75,data.MoistureContent);
             Assert.AreEqual(0.765, data.NitrogenFraction);
             Assert.AreEqual(0.211, data.PhosphorusFraction);
-            Assert.AreEqual(CoreConstants.ValueNotDetermined, data.CarbonFraction);
-            Assert.AreEqual(CoreConstants.ValueNotDetermined, data.CarbonToNitrogenRatio);
+            Assert.AreEqual(6.182, data.CarbonFraction);
+            Assert.AreEqual(8.08, data.CarbonToNitrogenRatio);
         }
 
         [TestMethod]
         public void TestPoultryData()
         {
-            var data = _provider.GetManureCompositionDataByType(AnimalType.Poultry, ManureStateType.Slurry);
+            var data = _provider.GetManureCompositionDataByType(AnimalType.Poultry, ManureStateType.SolidStorage);
 
-            Assert.AreEqual(89.510, data.MoistureContent);
-            Assert.AreEqual(0.836, data.NitrogenFraction);
-            Assert.AreEqual(2.92, data.CarbonFraction);
-            Assert.AreEqual(0.268, data.PhosphorusFraction);
-            Assert.AreEqual(3.49, data.CarbonToNitrogenRatio);
+            Assert.AreEqual(44.83, data.MoistureContent);
+            Assert.AreEqual(2.427, data.NitrogenFraction);
+            Assert.AreEqual(10.12, data.CarbonFraction);
+            Assert.AreEqual(1.06, data.PhosphorusFraction);
+            Assert.AreEqual(4.17, data.CarbonToNitrogenRatio);
         }
 
         [TestMethod]
@@ -74,7 +74,8 @@ namespace H.Core.Test.Providers.Animals
             Assert.AreEqual(95.16, data.MoistureContent);
             Assert.AreEqual(0.325, data.NitrogenFraction);
             Assert.AreEqual(1.29, data.CarbonFraction);
-            Assert.AreEqual(3.25, data.CarbonToNitrogenRatio);
+            Assert.AreEqual(0.118, data.PhosphorusFraction);
+            Assert.AreEqual(3.97, data.CarbonToNitrogenRatio);
         }
 
         [TestMethod]
@@ -87,7 +88,7 @@ namespace H.Core.Test.Providers.Animals
             Assert.AreEqual(0.325, data.NitrogenFraction);
             Assert.AreEqual(1.29, data.CarbonFraction);
             Assert.AreEqual(0.118, data.PhosphorusFraction);
-            Assert.AreEqual(3.25, data.CarbonToNitrogenRatio);
+            Assert.AreEqual(3.97, data.CarbonToNitrogenRatio);
         }
 
 
