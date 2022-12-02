@@ -1180,10 +1180,10 @@
     <value>liquide séparé</value>
   </data>
   <data name="EnumLiquidWithNaturalCrust" xml:space="preserve">
-    <value>liquide avec croûte naturelle</value>
+    <value>Liquid/Slurry with natural crust</value>
   </data>
   <data name="EnumLiquidWithSolidCover" xml:space="preserve">
-    <value>liquide avec couvercle solide</value>
+    <value>Liquid/Slurry with solid cover</value>
   </data>
   <data name="EnumLivestock" xml:space="preserve">
     <value>bétail</value>
@@ -3684,7 +3684,7 @@
     <value>liquide avec croûte</value>
   </data>
   <data name="LiquidNoCrustHandlingSystemName" xml:space="preserve">
-    <value>liquide sans croûte</value>
+    <value>Liquid/Slurry with no natural crust</value>
   </data>
   <data name="LowEnergyAndProteinDietType" xml:space="preserve">
     <value>ration à teneur faible en énergie et en protéine</value>

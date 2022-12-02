@@ -13,6 +13,7 @@ namespace H.Core.Models.Infrastructure
         private AnimalType _animalType;
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
+        private bool _isFreshManure;
 
         public AnimalType AnimalType
         {
@@ -30,6 +31,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _dailyManureAddedToDigester;
             set => this.SetProperty(ref _dailyManureAddedToDigester, value);
+        }
+
+        public bool IsFreshManure
+        {
+            get => _isFreshManure;
+            set => SetProperty(ref _isFreshManure, value);
         }
     }
 }

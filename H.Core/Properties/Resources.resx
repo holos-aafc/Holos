@@ -629,7 +629,7 @@
     <value>Liquid crust</value>
   </data>
   <data name="LiquidNoCrustHandlingSystemName" xml:space="preserve">
-    <value>Liquid no crust</value>
+    <value>Liquid/Slurry with no natural crust</value>
   </data>
   <data name="LowEnergyAndProteinDietType" xml:space="preserve">
     <value>Low energy &amp; protein diet</value>
@@ -4425,10 +4425,10 @@
     <value>Free stall barn (solid litter)</value>
   </data>
   <data name="EnumLiquidWithNaturalCrust" xml:space="preserve">
-    <value>Liquid with natural crust</value>
+    <value>Liquid/Slurry with natural crust</value>
   </data>
   <data name="EnumLiquidWithSolidCover" xml:space="preserve">
-    <value>Liquid with solid cover</value>
+    <value>Liquid/Slurry with solid cover</value>
   </data>
   <data name="EnumPitLagoonNoCover" xml:space="preserve">
     <value>Pit/lagoon (no cover)</value>

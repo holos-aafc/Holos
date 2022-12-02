@@ -38,6 +38,9 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumLiquidSeparated", typeof(Resources))]
         LiquidSeparated,
 
+        /// <summary>
+        /// Liquid/Slurry with no natural crust
+        /// </summary>
         [LocalizedDescription("LiquidNoCrustHandlingSystemName", typeof(Resources))]
         LiquidNoCrust,
 
@@ -74,9 +77,15 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumPitLagoonNoCover", typeof(Resources))]
         PitLagoonNoCover,
 
+        /// <summary>
+        /// Liquid/Slurry with natural crust
+        /// </summary>
         [LocalizedDescription("EnumLiquidWithNaturalCrust", typeof(Resources))]
         LiquidWithNaturalCrust,
 
+        /// <summary>
+        /// Liquid/Slurry with solid cover
+        /// </summary>
         [LocalizedDescription("EnumLiquidWithSolidCover", typeof(Resources))]
         LiquidWithSolidCover,
     }

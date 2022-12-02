@@ -11,7 +11,7 @@ namespace H.Core.Converters
             {
                 case "pasture":
                     return ManureStateType.Pasture;
-
+                    
                 case "deepbedding":
                     return ManureStateType.DeepBedding;
 
@@ -47,15 +47,21 @@ namespace H.Core.Converters
 
                 case "liquidsolidcover":
                 case "liquidwithsolidcover":
+                case "liquidslurrywithsolidcover":
                     return ManureStateType.LiquidWithSolidCover;
 
                 case "liquidnaturalcrust":
                 case "liquidwithnaturalcrust":
+                case "liquidslurrywithnaturalcrust":
                     return ManureStateType.LiquidWithNaturalCrust;
 
                 case "liquidnocrust":
                 case "liquidwithnocrust":
+                case "liquidslurrywithnonaturalcrust":
                     return ManureStateType.LiquidNoCrust;
+
+                case "dailyspread":
+                    return ManureStateType.DailySpread;
 
                 default:
                     Trace.TraceError($"{nameof(ManureStateTypeStringConverter)}.{nameof(Convert)} was not able to convert" +

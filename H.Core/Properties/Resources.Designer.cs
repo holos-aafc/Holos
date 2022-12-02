@@ -3391,7 +3391,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Liquid with natural crust.
+        ///   Looks up a localized string similar to Liquid/Slurry with natural crust.
         /// </summary>
         public static string EnumLiquidWithNaturalCrust {
             get {
@@ -3400,7 +3400,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Liquid with solid cover.
+        ///   Looks up a localized string similar to Liquid/Slurry with solid cover.
         /// </summary>
         public static string EnumLiquidWithSolidCover {
             get {
@@ -11194,7 +11194,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Liquid no crust.
+        ///   Looks up a localized string similar to Liquid/Slurry with no natural crust.
         /// </summary>
         public static string LiquidNoCrustHandlingSystemName {
             get {
