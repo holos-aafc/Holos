@@ -24,15 +24,9 @@ namespace H.Core.Enumerations
         /// <returns>True if the storage type is for liquid manure, false otherwise</returns>
         public static bool IsLiquidManure(this ManureStateType manureStateType)
         {
-            return manureStateType == ManureStateType.Liquid ||
-                   manureStateType == ManureStateType.LiquidCrust ||
-                   manureStateType == ManureStateType.LiquidNoCrust ||
+            return manureStateType == ManureStateType.LiquidNoCrust ||
                    manureStateType == ManureStateType.LiquidWithNaturalCrust ||
-                   manureStateType == ManureStateType.Slurry ||
-                   manureStateType == ManureStateType.SlurryWithNaturalCrust ||
-                   manureStateType == ManureStateType.SlurryWithoutNaturalCrust ||
-                   manureStateType == ManureStateType.LiquidWithSolidCover ||
-                   manureStateType == ManureStateType.LiquidSeparated;
+                   manureStateType == ManureStateType.LiquidWithSolidCover;
         }
 
         public static bool IsCompost(this ManureStateType manureStateType)

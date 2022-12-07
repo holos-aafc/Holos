@@ -57,7 +57,7 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void TestPoultryData()
         {
-            var data = _provider.GetManureCompositionDataByType(AnimalType.Poultry, ManureStateType.SolidStorage);
+            var data = _provider.GetManureCompositionDataByType(AnimalType.Poultry, ManureStateType.SolidStorageWithOrWithoutLitter);
 
             Assert.AreEqual(44.83, data.MoistureContent);
             Assert.AreEqual(2.427, data.NitrogenFraction);
@@ -95,9 +95,11 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void TestIncorrectAnimalType()
         {
-            var data = _provider.GetManureCompositionDataByType(AnimalType.Cattle, ManureStateType.Pasture);
+            var data = _provider.GetManureCompositionDataByType(AnimalType.Cattle, ManureStateType.AnaerobicDigester);
 
-            Assert.IsNull(data);
+            Assert.AreEqual(0, data.CarbonContent);
+            Assert.AreEqual(0, data.NitrogenContent);
+            Assert.AreEqual(0, data.PhosphorusContent);
         }
 
         [TestMethod]
@@ -105,7 +107,9 @@ namespace H.Core.Test.Providers.Animals
         {
             var data = _provider.GetManureCompositionDataByType(AnimalType.Poultry, ManureStateType.DeepBedding);
 
-            Assert.IsNull(data);
+            Assert.AreEqual(0, data.CarbonContent);
+            Assert.AreEqual(0, data.NitrogenContent);
+            Assert.AreEqual(0, data.PhosphorusContent);
         }
     }
 }

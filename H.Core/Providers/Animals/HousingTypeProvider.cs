@@ -21,7 +21,6 @@ namespace H.Core.Providers.Animals
                 return new List<HousingType>()
                 {
                     HousingType.HousedInBarn,
-                    HousingType.ConfinedNoBarn,
                     HousingType.Pasture,
                 };
             }
@@ -50,13 +49,14 @@ namespace H.Core.Providers.Animals
             {
                 return new List<HousingType>()
                 {
-                    HousingType.TieStallSolidLitter,
-                    HousingType.TieStallSlurry,
-
                     HousingType.FreeStallBarnSolidLitter,
                     HousingType.FreeStallBarnSlurryScraping,
                     HousingType.FreeStallBarnFlushing,
+
                     HousingType.FreeStallBarnMilkParlourSlurryFlushing,
+
+                    HousingType.TieStallSolidLitter,
+                    HousingType.TieStallSlurry,
 
                     HousingType.DryLot,
                     HousingType.Pasture,
@@ -69,7 +69,6 @@ namespace H.Core.Providers.Animals
                 {
                     HousingType.ConfinedNoBarn,
                     HousingType.HousedInBarnSolid,
-                    HousingType.HousedInBarnSlurry,
                     HousingType.Pasture,
                 };
             }

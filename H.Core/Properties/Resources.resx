@@ -202,7 +202,7 @@
     <value>Ontario</value>
   </data>
   <data name="Pasture" xml:space="preserve">
-    <value>Pasture</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="PrinceEdwardIsland" xml:space="preserve">
     <value>Prince Edward Island</value>
@@ -523,10 +523,10 @@
     <value>Confined</value>
   </data>
   <data name="ConfinedNoBarn" xml:space="preserve">
-    <value>Confined no barn</value>
+    <value>Confined no barn (feedlot)</value>
   </data>
   <data name="Drylot" xml:space="preserve">
-    <value>Drylot</value>
+    <value>Drylot (standing or exercise yard)</value>
   </data>
   <data name="EnclosedPasture" xml:space="preserve">
     <value>Enclosed pasture</value>
@@ -574,10 +574,10 @@
     <value>Close up diet</value>
   </data>
   <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
-    <value>Compost intensive</value>
+    <value>Compost - intensive windrow</value>
   </data>
   <data name="CompostPassiveHandlingSystemName" xml:space="preserve">
-    <value>Compost passive</value>
+    <value>Compost - passive windrow</value>
   </data>
   <data name="CornDietType" xml:space="preserve">
     <value>Corn diet</value>
@@ -605,7 +605,7 @@
     <value>Deep bedding</value>
   </data>
   <data name="DeepPitHandlingSystemName" xml:space="preserve">
-    <value>Deep pit</value>
+    <value>Deep pit under barn</value>
   </data>
   <data name="ExceptionUnknownDietType" xml:space="preserve">
     <value>Unknown diet type '{0}'</value>
@@ -653,7 +653,7 @@
     <value>Slow growth diet</value>
   </data>
   <data name="SolidStorageHandlingSystemName" xml:space="preserve">
-    <value>Solid storage</value>
+    <value>Solid storage (stockpiled)</value>
   </data>
   <data name="Stockers" xml:space="preserve">
     <value>Stockers</value>
@@ -4416,7 +4416,7 @@
     <value>Free stall barn (flushing)</value>
   </data>
   <data name="EnumFreeStallBarnMilkParlourSlurryFlushing" xml:space="preserve">
-    <value>Free stall barn (milk parlour - slurry flushing)</value>
+    <value>Milking parlour (slurry - flushing)</value>
   </data>
   <data name="EnumFreeStallBarnSlurryScraping" xml:space="preserve">
     <value>Free stall barn (slurry scraping)</value>
@@ -4440,10 +4440,10 @@
     <value>Slurry broadcasting</value>
   </data>
   <data name="EnumTilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (tilled land)</value>
+    <value>Solid spread (intensive tillage)</value>
   </data>
   <data name="EnumUntilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (untilled land)</value>
+    <value>Solid spread (no tillage or reduced tillage)</value>
   </data>
   <data name="TieStallSlurry" xml:space="preserve">
     <value>Tie stall (slurry)</value>
@@ -5317,5 +5317,11 @@
   </data>
   <data name="LabelPregnancy" xml:space="preserve">
     <value>Pregnancy</value>
+  </data>
+  <data name="EnumCompostedInVessel" xml:space="preserve">
+    <value>Composted in-vessel</value>
+  </data>
+  <data name="EnumSolidStorageWithOrWithoutLitter" xml:space="preserve">
+    <value>Solid storage (with or without litter)</value>
   </data>
 </root>

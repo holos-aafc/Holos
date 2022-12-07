@@ -38,17 +38,13 @@ namespace H.Core.Providers.Animals
             {
                 return 0.21;
             }
-            else if (housingType == HousingType.HousedInBarnSlurry)
-            {
-                return 0.32;
-            }
             else if (housingType.IsPasture())
             {
                 return 0.10;
             }
             else if (housingType == HousingType.FreeStallBarnSolidLitter)
             {
-                return 0.21;
+                return 0.22;
             }
             else if (housingType == HousingType.FreeStallBarnSlurryScraping)
             {
@@ -92,7 +88,7 @@ namespace H.Core.Providers.Animals
         {
             // Footnote 1: Read for data reference information.
 
-            if (storageType.IsLiquidManure())
+            if (storageType.IsLiquidManure() || storageType == ManureStateType.DeepPit)
             {
                 return 0.13;
             }
@@ -100,8 +96,7 @@ namespace H.Core.Providers.Animals
             {
                 return 0.7;
             }
-            else if (storageType == ManureStateType.SolidStorage ||
-                     storageType == ManureStateType.DeepBedding)
+            else if (storageType == ManureStateType.SolidStorage || storageType == ManureStateType.DeepBedding)
             {
                 return 0.35;
             }

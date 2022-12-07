@@ -39,12 +39,11 @@ namespace H.Core.Providers.Animals
                     // Footnote 2
                     case ManureStateType.CompostIntensive:
                     case ManureStateType.CompostPassive:
-                    case ManureStateType.Composted:
                         return new FractionOfOrganicNitrogenMineralizedData()
                         {
                             FractionImmobilized = 0,
                             FractionMineralized = 0.46,
-                            FractionNitrified = 0.25,
+                            FractionNitrified = 0,
                             FractionDenitrified = 0,
 
                             N2O_N = 0.033,
@@ -55,14 +54,13 @@ namespace H.Core.Providers.Animals
 
                     // Solid-stockpiled - beef
                     // Footnote 3
-                    case ManureStateType.Solid:
                     case ManureStateType.DeepBedding:
                     case ManureStateType.SolidStorage:
                         return new FractionOfOrganicNitrogenMineralizedData()
                         {
                             FractionImmobilized = 0,
                             FractionMineralized = 0.28,
-                            FractionNitrified = 0.125,
+                            FractionNitrified = 0,
                             FractionDenitrified = 0,
 
                             N2O_N = 0.033,
@@ -80,7 +78,6 @@ namespace H.Core.Providers.Animals
                     // Footnote 2
                     case ManureStateType.CompostIntensive:
                     case ManureStateType.CompostPassive:
-                    case ManureStateType.Composted:
                         return new FractionOfOrganicNitrogenMineralizedData()
                         {
                             FractionImmobilized = 0,
@@ -96,7 +93,6 @@ namespace H.Core.Providers.Animals
 
                     // Solid-stockpiled - dairy
                     // Footnote 3
-                    case ManureStateType.Solid:
                     case ManureStateType.DeepBedding:
                     case ManureStateType.SolidStorage:
                         return new FractionOfOrganicNitrogenMineralizedData()
@@ -119,11 +115,9 @@ namespace H.Core.Providers.Animals
             {
                 // Liquid with natural crust
                 // Footnote 5, 7
-                case ManureStateType.LiquidCrust:
-                case ManureStateType.SlurryWithNaturalCrust:
                 case ManureStateType.LiquidWithNaturalCrust:
-                case ManureStateType.PitLagoonNoCover:
                 case ManureStateType.LiquidWithSolidCover:
+                case ManureStateType.DeepPit:
                     return new FractionOfOrganicNitrogenMineralizedData()
                     {
                         FractionImmobilized = 0,
@@ -140,9 +134,6 @@ namespace H.Core.Providers.Animals
                 // Liquid without natural crust
                 // Footnote 6, 7
                 case ManureStateType.LiquidNoCrust:
-                case ManureStateType.LiquidSeparated:
-                case ManureStateType.SlurryWithoutNaturalCrust:
-                case ManureStateType.Slurry:
                     return new FractionOfOrganicNitrogenMineralizedData()
                     {
                         FractionImmobilized = 0,
@@ -161,15 +152,14 @@ namespace H.Core.Providers.Animals
 
             return new FractionOfOrganicNitrogenMineralizedData();
 
-
             #region Footnotes
 
             /*
              * Footnote 1: Mineralization of organic N (fecal N and bedding N)
              * Footnote 2: Solid manure composted for ≥ 10 months; data from Chai et al. (2014); these values are used for compost passive and compost intensive beef and dairy cattle manure
              * Footnote 3: Solid manure stockpiled for ≥ 4 months; data from Chai et al. (2014); these values are also used for deep bedding beef and dairy cattle manure
-             * Footnote 4: FracurinaryN is the fraction of TAN in the liquid manure storage system
-             * Footnote 5: Nitrification of TAN in liquid manure with natural crust (formed from manure, bedding, or waste forage) was considered since the natural crust can be assumed as similar to solid manure (stockpile) in terms of being aerobic. The N2O-N emission factor for liquid manure with a natural crust is 0.005 of total N IPCC (2006), which can be expressed as the TAN based EFs knowing the TAN fraction of stored manure. Values for liquid manure with a natural crust are also used for liquid manure with a solid cover and deep pit manure
+             * Footnote 4: FracurinaryN is the fraction of TAN in the liquid manure storage system (includes liquid/slurry with natural crust, liquid/slurry with no natural crust, liquid/slurry with solid cover and deep pit under barn).
+             * Footnote 5: Nitrification of TAN in liquid manure with natural crust (formed from manure, bedding, or waste forage) was considered since the natural crust can be assumed as similar to solid manure (stockpile) in terms of being aerobic. The N2O-N emission factor for liquid manure with a natural crust is 0.005 of total N IPCC (2006), which can be expressed as the TAN based EFs 
              * Footnote 6: Nitrification of TAN in liquid manure with no natural crust is assumed to be zero because of anaerobic conditions
              * Footnote 7: All nitrified TAN (nitrate-N) was assumed to be denitrified (no leaching, runoff) in liquid systems.
              */

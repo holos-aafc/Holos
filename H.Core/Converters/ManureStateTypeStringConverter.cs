@@ -10,39 +10,41 @@ namespace H.Core.Converters
             switch (GetLettersAsLowerCase(input))
             {
                 case "pasture":
+                case "pasturerangepaddock":
                     return ManureStateType.Pasture;
                     
                 case "deepbedding":
                     return ManureStateType.DeepBedding;
 
                 case "solidstorage":
+                case "solidstoragestockpiled":
                     return ManureStateType.SolidStorage;
+
+                case "solidstoragewithorwithoutlitter":
+                    return ManureStateType.SolidStorageWithOrWithoutLitter;
 
                 case "compostedpassive":
                 case "compostpassive":
+                case "compostpassivewindrow":
                     return ManureStateType.CompostPassive;
 
                 case "compostedintensive":
                 case "compostintensive":
+                case "compostintensivewindrow":
                     return ManureStateType.CompostIntensive;
+
+                case "compostedinvessel":
+                    return ManureStateType.CompostedInVessel;
 
                 case "composted":
                     return ManureStateType.Composted;
-
-                case "liquid":
-                    return ManureStateType.Liquid;
-
-                case "slurry":
-                    return ManureStateType.Slurry;
-
-                case "liquidseparated":
-                    return ManureStateType.LiquidSeparated;
 
                 case "anaerobicdigestion":
                 case "anaerobicdigestor":
                     return ManureStateType.AnaerobicDigester;
 
                 case "deeppit":
+                case "deeppitunderbarn":
                     return ManureStateType.DeepPit;
 
                 case "liquidsolidcover":

@@ -226,7 +226,7 @@ namespace H.Core.Providers.Animals
                                     EmissionFactorLeach = 0.011,
                                 };
 
-                            case ManureStateType.LiquidCrust:
+                            case ManureStateType.LiquidWithNaturalCrust:
                                 return new Table_36_Livestock_Emission_Conversion_Factors_Data()
                                 {
                                     N20DirectEmissionFactor = 0.005,
@@ -256,16 +256,6 @@ namespace H.Core.Providers.Animals
                                     EmissionFactorLeach = 0.011,
                                 };
 
-                            case ManureStateType.AnaerobicDigester:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = 0.01, // Footnote 4
-                                    N20DirectEmissionFactor = 0.0006,
-                                    VolatilizationFraction = 0.1,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    EmissionFactorLeach = 0.011,
-                                };
-
                             case ManureStateType.DeepPit:
                                 return new Table_36_Livestock_Emission_Conversion_Factors_Data()
                                 {
@@ -274,6 +264,16 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.28,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0,
+                                    EmissionFactorLeach = 0.011,
+                                };
+
+                            case ManureStateType.AnaerobicDigester:
+                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
+                                {
+                                    MethaneConversionFactor = 0.01, // Footnote 4
+                                    N20DirectEmissionFactor = 0.0006,
+                                    VolatilizationFraction = 0.1,
+                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     EmissionFactorLeach = 0.011,
                                 };
 
@@ -290,14 +290,14 @@ namespace H.Core.Providers.Animals
                     {
                         switch (manureStateType)
                         {
-                            case ManureStateType.SolidStorage:
+                            case ManureStateType.CompostedInVessel:
                                 return new Table_36_Livestock_Emission_Conversion_Factors_Data()
                                 {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.01,
-                                    VolatilizationFraction = 0.45,
+                                    MethaneConversionFactor = 0.005,
+                                    N20DirectEmissionFactor = 0.006,
+                                    VolatilizationFraction = 0.6,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.02,
+                                    LeachingFraction = 0,
                                     EmissionFactorLeach = 0.011,
                                 };
 
@@ -334,25 +334,13 @@ namespace H.Core.Providers.Animals
                                     EmissionFactorLeach = 0.011,
                                 };
 
-                            case ManureStateType.CompostIntensive:
+                            case ManureStateType.DeepPit:
                                 return new Table_36_Livestock_Emission_Conversion_Factors_Data()
                                 {
                                     MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.005,
-                                    VolatilizationFraction = 0.5,
+                                    N20DirectEmissionFactor = 0.002,
+                                    VolatilizationFraction = 0.25,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.06,
-                                    EmissionFactorLeach = 0.011,
-                                };
-
-                            case ManureStateType.CompostPassive:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.005,
-                                    VolatilizationFraction = 0.45,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.04,
                                     EmissionFactorLeach = 0.011,
                                 };
 
@@ -362,16 +350,6 @@ namespace H.Core.Providers.Animals
                                     MethaneConversionFactor = 0.01, // Footnote 4
                                     N20DirectEmissionFactor = 0.0006,
                                     VolatilizationFraction = 0.1, // Footnote 5
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    EmissionFactorLeach = 0.011,
-                                };
-
-                            case ManureStateType.DeepPit:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.002,
-                                    VolatilizationFraction = 0.25,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     EmissionFactorLeach = 0.011,
                                 };
@@ -400,49 +378,6 @@ namespace H.Core.Providers.Animals
                                     EmissionFactorLeach = 0.011
                                 };
 
-                            case ManureStateType.CompostIntensive:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.005,
-                                    VolatilizationFraction = 0.20,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.06,
-                                    EmissionFactorLeach = 0.011
-                                };
-
-                            case ManureStateType.CompostPassive:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.005,
-                                    VolatilizationFraction = 0.18,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.04,
-                                    EmissionFactorLeach = 0.011
-                                };
-
-                            case ManureStateType.DeepBedding:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = climateDependentMethaneConversionFactor,
-                                    N20DirectEmissionFactor = 0.01,
-                                    VolatilizationFraction = 0.4,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0.035,
-                                    EmissionFactorLeach = 0.011
-                                };
-                            case ManureStateType.AnaerobicDigester:
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = 0.01, // Footnote 4
-                                    N20DirectEmissionFactor = 0.0006,
-                                    VolatilizationFraction = 0.1, // Footnote 5
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0,
-                                    EmissionFactorLeach = 0.011
-                                };
-
                             default:
                                 System.Diagnostics.Trace.TraceError(
                                     $"{nameof(Table_36_Livestock_Emission_Conversion_Factors_Provider)}.{nameof(Table_36_Livestock_Emission_Conversion_Factors_Provider.GetFactors)}" +
@@ -467,34 +402,18 @@ namespace H.Core.Providers.Animals
                             };
                         }
 
-                        if (manureStateType == ManureStateType.SolidStorage)
+                        if (manureStateType == ManureStateType.SolidStorageWithOrWithoutLitter)
                         {
-                            if (beddingRate > 0)
+                            // Bedding with litter
+                            return new Table_36_Livestock_Emission_Conversion_Factors_Data()
                             {
-                                // Bedding with litter
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = 0.015, // Footnote 7
-                                    N20DirectEmissionFactor = 0.001, // Footnote 7
-                                    VolatilizationFraction = 0.4,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0,
-                                    EmissionFactorLeach = 0.011,
-                                };
-                            }
-                            else
-                            {
-                                // Bedding without litter
-                                return new Table_36_Livestock_Emission_Conversion_Factors_Data()
-                                {
-                                    MethaneConversionFactor = 0.015, // Footnote 7
-                                    N20DirectEmissionFactor = 0.001, // Footnote 7
-                                    VolatilizationFraction = 0.48,
-                                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                                    LeachingFraction = 0,
-                                    EmissionFactorLeach = 0.011,
-                                };
-                            }
+                                MethaneConversionFactor = 0.015, // Footnote 7
+                                N20DirectEmissionFactor = 0.001, // Footnote 7
+                                VolatilizationFraction = 0.4,
+                                EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
+                                LeachingFraction = 0,
+                                EmissionFactorLeach = 0.011,
+                            };
                         }
 
                         System.Diagnostics.Trace.TraceError(

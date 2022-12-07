@@ -628,7 +628,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compost intensive.
+        ///   Looks up a localized string similar to Compost - intensive windrow.
         /// </summary>
         public static string CompostIntensiveHandlingSystemName {
             get {
@@ -637,7 +637,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compost passive.
+        ///   Looks up a localized string similar to Compost - passive windrow.
         /// </summary>
         public static string CompostPassiveHandlingSystemName {
             get {
@@ -655,7 +655,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confined no barn.
+        ///   Looks up a localized string similar to Confined no barn (feedlot).
         /// </summary>
         public static string ConfinedNoBarn {
             get {
@@ -844,7 +844,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deep pit.
+        ///   Looks up a localized string similar to Deep pit under barn.
         /// </summary>
         public static string DeepPitHandlingSystemName {
             get {
@@ -970,7 +970,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Drylot.
+        ///   Looks up a localized string similar to Drylot (standing or exercise yard).
         /// </summary>
         public static string Drylot {
             get {
@@ -1803,6 +1803,15 @@ namespace H.Core.Properties {
         public static string EnumComposted {
             get {
                 return ResourceManager.GetString("EnumComposted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Composted in-vessel.
+        /// </summary>
+        public static string EnumCompostedInVessel {
+            get {
+                return ResourceManager.GetString("EnumCompostedInVessel", resourceCulture);
             }
         }
         
@@ -2662,7 +2671,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free stall barn (milk parlour - slurry flushing).
+        ///   Looks up a localized string similar to Milking parlour (slurry - flushing).
         /// </summary>
         public static string EnumFreeStallBarnMilkParlourSlurryFlushing {
             get {
@@ -4660,6 +4669,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Solid storage (with or without litter).
+        /// </summary>
+        public static string EnumSolidStorageWithOrWithoutLitter {
+            get {
+                return ResourceManager.GetString("EnumSolidStorageWithOrWithoutLitter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorghum.
         /// </summary>
         public static string EnumSorghum {
@@ -5128,7 +5146,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Solid spread (tilled land).
+        ///   Looks up a localized string similar to Solid spread (intensive tillage).
         /// </summary>
         public static string EnumTilledLandSolidSpread {
             get {
@@ -5299,7 +5317,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Solid spread (untilled land).
+        ///   Looks up a localized string similar to Solid spread (no tillage or reduced tillage).
         /// </summary>
         public static string EnumUntilledLandSolidSpread {
             get {
@@ -12310,7 +12328,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pasture.
+        ///   Looks up a localized string similar to Pasture/range/paddock.
         /// </summary>
         public static string Pasture {
             get {
@@ -13462,7 +13480,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Solid storage.
+        ///   Looks up a localized string similar to Solid storage (stockpiled).
         /// </summary>
         public static string SolidStorageHandlingSystemName {
             get {

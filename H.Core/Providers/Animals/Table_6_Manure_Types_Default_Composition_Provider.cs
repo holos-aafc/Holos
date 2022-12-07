@@ -583,15 +583,15 @@ namespace H.Core.Providers.Animals
             if (data != null)
             {
                 Trace.TraceError($"{nameof(Table_6_Manure_Types_Default_Composition_Provider)}.{nameof(GetManureCompositionDataByType)} " +
-                                 $"could not find ManureStateType: {manureStateType} for AnimalType: {animalType} in the csv file. Returning null.");
+                                 $"could not find ManureStateType: {manureStateType} for AnimalType: {animalType} in the csv file. Returning 0 for all values.");
             }
             else
             {
                 Trace.TraceError($"{nameof(Table_6_Manure_Types_Default_Composition_Provider)}.{nameof(GetManureCompositionDataByType)} " +
-                                 $"could not find AnimalType: {animalType} in the csv file. Returning null.");
+                                 $"could not find AnimalType: {animalType} in the csv file. Returning 0 for all values.");
             }
 
-            return null;
+            return new DefaultManureCompositionData();
         }
 
         #endregion

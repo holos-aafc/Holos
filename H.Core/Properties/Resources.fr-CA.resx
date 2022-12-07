@@ -298,16 +298,16 @@
     <value>Afficher les renseignements additionnels</value>
   </data>
   <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
-    <value>compost intensif</value>
+    <value>Compost - intensive windrow</value>
   </data>
   <data name="CompostPassiveHandlingSystemName" xml:space="preserve">
-    <value>compost passif</value>
+    <value>Compost - passive windrow</value>
   </data>
   <data name="Confined" xml:space="preserve">
     <value>confiné</value>
   </data>
   <data name="ConfinedNoBarn" xml:space="preserve">
-    <value>confiné ailleurs que dans une étable</value>
+    <value>Confined no barn (feedlot)</value>
   </data>
   <data name="ContinousCroppingToFallow" xml:space="preserve">
     <value>transition de cultures en continu à jachère</value>
@@ -367,7 +367,7 @@
     <value>litière accumulée</value>
   </data>
   <data name="DeepPitHandlingSystemName" xml:space="preserve">
-    <value>fosse profonde</value>
+    <value>Deep pit under barn</value>
   </data>
   <data name="DegreesCelsius" xml:space="preserve">
     <value>° C</value>
@@ -394,7 +394,7 @@
     <value>haricot sec</value>
   </data>
   <data name="Drylot" xml:space="preserve">
-    <value>parc d'élevage</value>
+    <value>Drylot (standing or exercise yard)</value>
   </data>
   <data name="DryPeas" xml:space="preserve">
     <value>pois secs</value>
@@ -668,6 +668,9 @@
   </data>
   <data name="EnumComposted" xml:space="preserve">
     <value>composté</value>
+  </data>
+  <data name="EnumCompostedInVessel" xml:space="preserve">
+    <value>Composted in-vessel</value>
   </data>
   <data name="EnumConc" xml:space="preserve">
     <value>conc </value>
@@ -946,7 +949,7 @@
     <value>étable à stabulation libre en logettes (rinçage)</value>
   </data>
   <data name="EnumFreeStallBarnMilkParlourSlurryFlushing" xml:space="preserve">
-    <value>étable à stabulation libre en logettes (salle de traite - rinçage du lisier)</value>
+    <value>Milking parlour (slurry - flushing)</value>
   </data>
   <data name="EnumFreeStallBarnSlurryScraping" xml:space="preserve">
     <value>étable à stabulation libre en logettes (grattage du lisier)</value>
@@ -1597,6 +1600,9 @@
   <data name="EnumSolid" xml:space="preserve">
     <value>solide</value>
   </data>
+  <data name="EnumSolidStorageWithOrWithoutLitter" xml:space="preserve">
+    <value>Solid storage (with or without litter)</value>
+  </data>
   <data name="EnumSorghum" xml:space="preserve">
     <value>sorgho</value>
   </data>
@@ -1751,7 +1757,7 @@
     <value>modificateur du travail du sol</value>
   </data>
   <data name="EnumTilledLandSolidSpread" xml:space="preserve">
-    <value>épandage de solides (terre labourée)</value>
+    <value>Solid spread (intensive tillage)</value>
   </data>
   <data name="EnumTobacco" xml:space="preserve">
     <value>tabac</value>
@@ -1808,7 +1814,7 @@
     <value>de 2000 à aujourd'hui</value>
   </data>
   <data name="EnumUntilledLandSolidSpread" xml:space="preserve">
-    <value>épandage de solides (terre non labourée)</value>
+    <value>Solid spread (no tillage or reduced tillage)</value>
   </data>
   <data name="EnumUrea" xml:space="preserve">
     <value>urée</value>
@@ -4029,7 +4035,7 @@
     <value>ppm</value>
   </data>
   <data name="Pasture" xml:space="preserve">
-    <value>pâturage</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="PastureHandlingSystemName" xml:space="preserve">
     <value>pâturage</value>
@@ -4398,7 +4404,7 @@
     <value>texture du sol</value>
   </data>
   <data name="SolidStorageHandlingSystemName" xml:space="preserve">
-    <value>entreposage solide</value>
+    <value>Solid storage (stockpiled)</value>
   </data>
   <data name="Solod" xml:space="preserve">
     <value>solod</value>

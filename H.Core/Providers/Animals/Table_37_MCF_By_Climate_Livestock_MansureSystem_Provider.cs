@@ -173,20 +173,17 @@ namespace H.Core.Providers.Animals
             return 0;
         }
 
-
-
         #region Footnotes
 
         /*
-        * Footnote 1 : For the determination of the MCF value, IPCC (2019) defines the different climate zones as follows:
-        * Warm temperate moist: mean annual temperature (MAT) >10 °C, P:PE >1; Warm temperate dry: MAT >10 °C, P:PE < 1;
-        * Cool temperate moist: MAT > 0 °C, P:PE >1; Cool temperate dry: MAT > 0 °C, P:PE <1;
-        * Boreal moist: MAT < 0 °C but some monthly temperatures > 10 °C, P:PE >1; Boreal dry:
-        * MAT < 0 °C but some monthly temperatures > 10 °C, P:PE <1. The MAT for cool temperate moist, cool temperate dry,
-        * warm temperate moist and warm temperate dry were 4.6, 5.8, 13.9, 14.0, respectively.
-        */
+         * Footnote 1 : 1 For the determination of the MCF value, IPCC (2019) defines the different climate zones as follows: Warm temperate moist:
+         * mean annual temperature (MAT) >10 °C, P:PE >1; Warm temperate dry: MAT >10 °C, P:PE < 1; Cool temperate moist: MAT > 0 °C, P:PE >1;
+         * Cool temperate dry: MAT > 0 °C, P:PE <1; Boreal moist: MAT < 0 °C but some monthly temperatures > 10 °C, P:PE >1; Boreal dry: MAT < 0 °C
+         * but some monthly temperatures > 10 °C, P:PE <1. The MAT for cool temperate moist, cool temperate dry, warm temperate moist and warm
+         * temperate dry were 4.6, 5.8, 13.9, 14.0, respectively. For deep pit manure storage systems for dairy cattle and swine, an average storage
+         * duration of 1 month was assumed. Source: IPCC (2019), Table 10.17
+         */
 
         #endregion
-
     }
 }
