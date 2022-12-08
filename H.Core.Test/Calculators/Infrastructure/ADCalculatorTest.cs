@@ -52,7 +52,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             var residuesSubstrateViewItem = new FarmResiduesSubstrateViewItem() {FarmResidueType = FarmResidueType.BarleyStraw};
             residuesSubstrateViewItem.FlowRate = 0.5;
             residuesSubstrateViewItem.TotalSolids = 0.5;
-            residuesSubstrateViewItem.VolatileSolids = 0.5;
+            residuesSubstrateViewItem.VolatileSolids = 0.1;
             residuesSubstrateViewItem.TotalNitrogen = 0.5;
             residuesSubstrateViewItem.TotalCarbon = 0.5;
             residuesSubstrateViewItem.BiomethanePotential = 0.5;
@@ -61,7 +61,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             var manureSubstrateViewItem = new ManureSubstrateViewItem() {AnimalType = AnimalType.Beef, IsFreshManure = true};
             manureSubstrateViewItem.FlowRate = 1.25;
             manureSubstrateViewItem.TotalSolids = 0.75;
-            manureSubstrateViewItem.VolatileSolids = 0.99;
+            manureSubstrateViewItem.VolatileSolids = 0.1;
             manureSubstrateViewItem.TotalNitrogen = 0.33;
             manureSubstrateViewItem.TotalCarbon = 0.11;
             manureSubstrateViewItem.BiomethanePotential = 0.22;
@@ -79,7 +79,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var groupEmissionsByDay = new GroupEmissionsByDay();
             groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 100;
-            groupEmissionsByDay.VolatileSolids = 50;
+            groupEmissionsByDay.VolatileSolids = 0.01;
             groupEmissionsByDay.AmountOfNitrogenExcreted = 10;
             groupEmissionsByDay.AmountOfNitrogenAddedFromBedding = 10;
             groupEmissionsByDay.OrganicNitrogenInStoredManure = 20;

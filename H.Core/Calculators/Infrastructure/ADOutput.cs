@@ -24,7 +24,14 @@
         public double TotalAmountOfStoredDigestateAvailableForLandApplicationLiquidFraction { get; set; }
         public double TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction { get; set; }
 
+        /// <summary>
+        /// (kg N day^-1)
+        /// </summary>
         public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
+
+        /// <summary>
+        /// (kg C day^-1)
+        /// </summary>
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
     }
 }
