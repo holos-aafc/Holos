@@ -58,6 +58,7 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _harvestViewItemMapper;
         private readonly IMapper _hayImportViewItemMapper;
         private readonly IMapper _fertilizerViewItemMapper;
+        private readonly IMapper _digestateViewItemMapper;
 
         private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
@@ -128,10 +129,18 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
+            var digestateViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
             _manureApplicationViewItemMapper = manureApplicationViewItemConfiguration.CreateMapper();
             _hayImportViewItemMapper = hayImportViewItemMapperConfiguration.CreateMapper();
             _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
             _fertilizerViewItemMapper = fertilizerViewItemMapperConfiguration.CreateMapper();
+            _digestateViewItemMapper = digestateViewItemMapperConfiguration.CreateMapper();
 
             _smallAreaYieldProvider.InitializeAsync();
 

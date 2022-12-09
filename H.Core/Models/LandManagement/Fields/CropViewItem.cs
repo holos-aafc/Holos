@@ -187,9 +187,10 @@ namespace H.Core.Models.LandManagement.Fields
 
             this.GrazingViewItems = new ObservableCollection<GrazingViewItem>();
 
-
             this.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>();
             this.FertilizerApplicationViewItems.CollectionChanged += FertilizerApplicationViewItemsOnCollectionChanged;
+
+            this.DigestateApplicationViewItems = new ObservableCollection<DigestateApplicationViewItem>();
 
             this.HarvestViewItems.CollectionChanged += HarvestViewItemsOnCollectionChanged;
             this.HayImportViewItems.CollectionChanged += HayImportViewItemsOnCollectionChanged;

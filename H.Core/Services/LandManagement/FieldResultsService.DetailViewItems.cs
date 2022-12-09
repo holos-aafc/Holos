@@ -61,9 +61,20 @@ namespace H.Core.Services.LandManagement
             {
                 var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map<FertilizerApplicationViewItem, FertilizerApplicationViewItem>(fertilizerApplicationViewItem);
 
+                // We need to update the year so that the current years' fertilizer applications are copied back in time
                 copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
 
                 result.FertilizerApplicationViewItems.Add(fertilizerApplicationViewItem);
+            }
+
+            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
+            {
+                var copiedDigestateViewItem = _digestateViewItemMapper.Map<DigestateApplicationViewItem, DigestateApplicationViewItem>(digestateApplicationViewItem);
+
+                // We need to update the year so that the current years' digestate applications are copied back in time
+                copiedDigestateViewItem.DateCreated = new DateTime(year, digestateApplicationViewItem.DateCreated.Month, digestateApplicationViewItem.DateCreated.Day);
+
+                result.DigestateApplicationViewItems.Add(digestateApplicationViewItem);
             }
 
             return result;
