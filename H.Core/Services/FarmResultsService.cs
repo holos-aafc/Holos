@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -41,6 +42,7 @@ namespace H.Core.Services
 
         private readonly FieldResultsService _fieldResultsService;
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
+        private readonly ADCalculator _adCalculator = new ADCalculator();
 
         private readonly IDietProvider _dietProvider = new DietProvider();
         private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
@@ -55,7 +57,6 @@ namespace H.Core.Services
         private readonly IMapper _climateDataMapper;
         private readonly IMapper _geographicDataMapper;
 
-        private readonly Dictionary<Farm, FarmEmissionResults> _farmEmissionResultsCache = new Dictionary<Farm, FarmEmissionResults>();
         private readonly IEventAggregator _eventAggregator;
 
         private readonly EconomicsCalculator _economicsCalculator;
@@ -240,6 +241,11 @@ namespace H.Core.Services
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
 
             return finalFieldResults;
+        }
+
+        public void CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+            _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
         }
 
         /// <summary>

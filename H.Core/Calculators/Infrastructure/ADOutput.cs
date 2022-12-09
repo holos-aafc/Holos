@@ -2,7 +2,120 @@
 {
     public class ADOutput
     {
+        /*
+         * Flows
+         */
+
+        /// <summary>
+        /// (kg VS day^-1)
+        /// </summary>
+        public double TotalFlowOfDegradedVolatileSolids { get; set; }
+
+        public double FlowRateOfAllSubstrates { get; set; }
+
+        public double FlowOfTotalSolids { get; set; }
+
+        public double FlowOfVolatileSolids { get; set; }
+
+        public double FlowRateOfTotalNitrogenInDigestate { get; set; }
+
+        public double TanFlowInDigestate { get; set; }
+
+        public double OrganicNitrogenFlowInDigestate { get; set; }
+
+        public double CarbonFlowInDigestate { get; set; }
+
+
+        /*
+         * Liquid/solid separation
+         */
+
+        public double FlowRateLiquidFraction { get; set; }
+
+        public double FlowRateSolidFraction { get; set; }
+
+        public double FlowOfTotalSolidsInLiquidFraction { get; set; }
+
+        public double FlowOfTotalSolidsInSolidFraction { get; set; }
+
+        public double TotalVolatileSolidsLiquidFraction { get; set; }
+
+        public double TotalVolatileSolidsSolidFraction { get; set; }
+
+        public double TotalTanLiquidFraction { get; set; }
+
+        public double TotalTanSolidFraction { get; set; }
+
+        public double OrganicNLiquidFraction { get; set; }
+
+        public double OrganicNSolidFraction { get; set; }
+
+        public double TotalNitrogenLiquidFraction { get; set; }
+
+        public double TotalNitrogenSolidFraction { get; set; }
+
+        public double CarbonLiquidFraction { get; set; }
+
+        public double CarbonSolidFraction { get; set; }
+
+        /*
+         * Biogas production
+         */
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
+        public double TotalMethaneProduction { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
+        public double TotalBiogasProduction { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
+        public double TotalCarbonDioxideProduction { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
+        public double TotalRecoverableMethane { get; set; }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double TotalPrimaryEnergyProduction { get; set; }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double ElectricityProduction { get; set; }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double HeatProduced { get; set; }
+
+        /// <summary>
+        /// (kWh day^-1)
+        /// </summary>
+        public double MethaneToGrid { get; set; }
+
+        /*
+         * Storage emissions
+         */
+
+        public double MethaneEmissionsDuringStorage { get; set; }
+        public double N2OEmissionsDuringStorage { get; set; }
+        public double AmmoniaEmissionsDuringStorage { get; set; }
+
+        /*
+         * Land application
+         */
+
         public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
+
         public double TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication { get; set; }
         public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplication { get; set; }
         public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplication { get; set; }

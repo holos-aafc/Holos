@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using H.Core.Models.Animals;
 using H.Core.Providers.AnaerobicDigestion;
+using System.ComponentModel;
 
 namespace H.Core.Calculators.Infrastructure
 {
@@ -263,18 +264,226 @@ namespace H.Core.Calculators.Infrastructure
             return result;
         }
 
-        public void CalculateResults(Farm farm, GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
+        public void CalculateDigestateStorageEmissions(Farm farm, DateTime dateTime, AnaerobicDigestionComponent component, ADOutput adOutput)
         {
-            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
-            if (component == null)
-            {
-                return;
-            }
+            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+            var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
 
-            var cropResidueFlows = this.GetFarmResidueFlowRates(component);
-            var freshManureFlows = this.GetFreshManureFlowRates(component, dailyEmissions, managementPeriod);
-            var storedManureFlows = this.GetStoredManureFlowRates(component, dailyEmissions, managementPeriod);
+            // Equation 4.8.5-1
+            adOutput.MethaneEmissionsDuringStorage = methaneEmissionFactorDuringStorage * component.VolumeOfDigestateEnteringStorage;
 
+            // Equation 4.8.5-2
+            adOutput.N2OEmissionsDuringStorage = 0.0652 * component.VolumeOfDigestateEnteringStorage;
+
+            // Equation 4.8.5-3
+            adOutput.AmmoniaEmissionsDuringStorage = 3.495 * component.VolumeOfDigestateEnteringStorage;
+        }
+
+        public void CalculateLiquidSolidSeparation(ADOutput adOutput, AnaerobicDigestionComponent component)
+        {
+            var rawMaterialCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.RawMaterial);
+            var rawMaterialCoefficient = component.IsCentrifugeType ? rawMaterialCoefficients.Centrifuge : rawMaterialCoefficients.BeltPress;
+
+            // Equation 4.8.4-1
+            adOutput.FlowRateLiquidFraction = (1 - rawMaterialCoefficient) * adOutput.FlowRateOfAllSubstrates;
+
+            // Equation 4.8.4-2
+            adOutput.FlowRateSolidFraction = rawMaterialCoefficient * adOutput.FlowRateOfAllSubstrates;
+
+            var totalSolidsCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalSolids);
+            var totalSolidsCoefficient = component.IsCentrifugeType ? totalSolidsCoefficients.Centrifuge : totalSolidsCoefficients.BeltPress;
+
+            // Equation 4.8.4-3
+            adOutput.FlowOfTotalSolidsInLiquidFraction = (1 - totalSolidsCoefficient) * adOutput.FlowOfTotalSolids;
+
+            // Equation 4.8.4-4
+            adOutput.FlowOfTotalSolidsInSolidFraction = totalSolidsCoefficient * adOutput.FlowOfTotalSolids;
+
+            var volatileSolidsCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.VolatileSolids);
+            var volatileSolidsCoefficient = component.IsCentrifugeType ? volatileSolidsCoefficients.Centrifuge : volatileSolidsCoefficients.BeltPress;
+
+            // Equation 4.8.4-5
+            adOutput.TotalVolatileSolidsLiquidFraction = (1 - volatileSolidsCoefficient) * adOutput.FlowOfVolatileSolids;
+
+            // Equation 4.8.4-6
+            adOutput.TotalVolatileSolidsSolidFraction = volatileSolidsCoefficient * adOutput.FlowOfVolatileSolids;
+
+            var tanCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalAmmoniaNitrogen);
+            var tanCoefficient = component.IsCentrifugeType ? tanCoefficients.Centrifuge : tanCoefficients.BeltPress;
+
+            // Equation 4.8.4-9
+            adOutput.TotalTanLiquidFraction = (1 - tanCoefficient) * adOutput.TanFlowInDigestate;
+
+            // Equation 4.8.4-10
+            adOutput.TotalTanSolidFraction = tanCoefficient * adOutput.TanFlowInDigestate;
+
+            var organicNCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.OrganicNitrogen);
+            var organicNCoefficient = component.IsCentrifugeType ? organicNCoefficients.Centrifuge : organicNCoefficients.BeltPress;
+
+            // Equation 4.8.4-11
+            adOutput.OrganicNLiquidFraction = (1 - organicNCoefficient) * adOutput.OrganicNitrogenFlowInDigestate;
+
+            // Equation 4.8.4-12
+            adOutput.OrganicNSolidFraction = organicNCoefficient * adOutput.OrganicNitrogenFlowInDigestate;
+
+            // Equation 4.8.4-7
+            adOutput.TotalNitrogenLiquidFraction = adOutput.TotalTanLiquidFraction + adOutput.OrganicNLiquidFraction;
+
+            // Equation 4.8.4-8
+            adOutput.TotalNitrogenSolidFraction = adOutput.TotalTanSolidFraction + adOutput.OrganicNSolidFraction;
+
+            var carbonCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalCarbon);
+            var carbonCoefficient = component.IsCentrifugeType ? carbonCoefficients.Centrifuge : carbonCoefficients.BeltPress;
+
+            // Equation 4.8.4-13
+            adOutput.CarbonLiquidFraction = (1 - carbonCoefficient) * adOutput.CarbonFlowInDigestate;
+
+            // Equation 4.8.4-14
+            adOutput.CarbonSolidFraction = carbonCoefficient * adOutput.CarbonFlowInDigestate;
+        }
+
+        /// <summary>
+        /// Calculates fresh and stored digestate available for land application
+        /// </summary>
+        public void CalculateAmountsForLandApplication(ADOutput adOutput)
+        {
+            /*
+             * Digestate that has not been liquid/solid separated
+             */
+
+            // Equation 4.8.3-1
+            adOutput.TotalAmountRawDigestateAvailableForLandApplication = adOutput.FlowRateOfAllSubstrates;
+
+            // Equation 4.8.3-4
+            adOutput.TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = adOutput.FlowRateOfTotalNitrogenInDigestate;
+
+            // Equation 4.8.3-5
+            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplication = adOutput.TanFlowInDigestate;
+
+            // Equation 4.8.3-7
+            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplication = adOutput.OrganicNitrogenFlowInDigestate;
+
+            // Equation 4.8.3-8
+            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = adOutput.CarbonFlowInDigestate;
+
+            /*
+             * Solid fractions of liquid/solid separated digestate
+             */
+
+            // Equation 4.8.4-1
+            adOutput.TotalAmountRawDigestateAvailableForLandApplicationFromLiquidFraction = adOutput.FlowRateLiquidFraction;
+
+            // Equation 4.8.4-7
+            adOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = adOutput.TotalNitrogenLiquidFraction;
+
+            // Equation 4.8.4-9
+            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromLiquidFraction = adOutput.TotalTanLiquidFraction;
+
+            // Equation 4.8.4-11
+            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = adOutput.OrganicNLiquidFraction;
+
+            // Equation 4.8.4-13
+            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = adOutput.CarbonLiquidFraction;
+
+            /*
+             * Liquid fractions of liquid/solid separated digestate
+             */
+
+            // Equation 4.8.4-2
+            adOutput.TotalAmountRawDigestateAvailableForLandApplicationFromSolidFraction = adOutput.FlowRateSolidFraction;
+
+            // Equation 4.8.4-8
+            adOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = adOutput.TotalNitrogenSolidFraction;
+
+            // Equation 4.8.4-10
+            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromSolidFraction = adOutput.TotalTanSolidFraction;
+
+            // Equation 4.8.4-12
+            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = adOutput.OrganicNSolidFraction;
+
+            // Equation 4.8.4-14
+            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = adOutput.CarbonSolidFraction;
+
+            /*
+             * Stored digestate (liquid and solid fractions)
+             */
+
+            // Equation 4.8.3-1
+            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplication = adOutput.FlowRateOfAllSubstrates;
+
+            // Equation 4.8.4-1
+            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplicationLiquidFraction = adOutput.FlowRateLiquidFraction;
+
+            // Equation 4.8.4-2
+            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction = adOutput.FlowRateSolidFraction;
+        }
+
+        public void CalculateFlows(
+            ADOutput adOutput, 
+            List<SubstrateFlowInformation> flowInformationForAllSubstrates)
+        {
+            // Equation 4.8.3-1
+            adOutput.FlowRateOfAllSubstrates = flowInformationForAllSubstrates.Sum(x => x.TotalMassFlow);
+
+            // Equation 4.8.3-2
+            adOutput.FlowOfTotalSolids = flowInformationForAllSubstrates.Sum(x => x.TotalSolidsFlow) - flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+
+            // Equation 4.8.3-3
+            adOutput.FlowOfVolatileSolids = flowInformationForAllSubstrates.Sum(x => x.VolatileSolidsFlow) - flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+
+            // Equation 4.8.3-4
+            adOutput.FlowRateOfTotalNitrogenInDigestate = flowInformationForAllSubstrates.Sum(x => x.NitrogenFlow);
+
+            // Equation 4.8.3-5
+            adOutput.TanFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.TanFlowInDigestate);
+
+            // Equation 4.8.3-7
+            adOutput.OrganicNitrogenFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.OrganicNitrogenFlowInDigestate);
+
+            // Equation 4.8.3-8
+            adOutput.CarbonFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
+        }
+
+        public void CalculateBiogassProduction(
+            ADOutput adOutput, 
+            List<SubstrateFlowInformation> flowInformationForAllSubstrates)
+        {
+            // Equation 4.8.2-2
+            adOutput.TotalMethaneProduction = flowInformationForAllSubstrates.Sum(x => x.MethaneProduction);
+
+            // Equation 4.8.2-4
+            adOutput.TotalFlowOfDegradedVolatileSolids = flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+
+            // Equation 4.8.2-6
+            adOutput.TotalBiogasProduction = flowInformationForAllSubstrates.Sum(x => x.BiogasProduction);
+
+            // Equation 4.8.2-8
+            adOutput.TotalCarbonDioxideProduction = adOutput.TotalBiogasProduction - adOutput.TotalMethaneProduction;
+
+            // Equation 4.8.2-11
+            adOutput.TotalRecoverableMethane = adOutput.TotalMethaneProduction * (1 - 0.03);
+
+            // Equation 4.8.2-12
+            adOutput.TotalPrimaryEnergyProduction = adOutput.TotalMethaneProduction * (35.17 / 3.6);
+
+            // Equation 4.8.2-13
+            adOutput.ElectricityProduction = adOutput.TotalPrimaryEnergyProduction * 0.4;
+
+            // Equation 4.8.2-14
+            adOutput.HeatProduced = adOutput.TotalPrimaryEnergyProduction * 0.5;
+
+            // Equation 4.8.2-15
+            adOutput.MethaneToGrid = adOutput.TotalRecoverableMethane * 0.0081;
+
+        }
+
+        public void CalculateResultsInternal(
+            List<SubstrateFlowInformation> cropResidueFlows,
+            List<SubstrateFlowInformation> freshManureFlows, 
+            List<SubstrateFlowInformation> storedManureFlows,
+            AnaerobicDigestionComponent component,
+            Farm farm)
+        {
             // All flows
             var flowInformationForAllSubstrates = new List<SubstrateFlowInformation>();
 
@@ -287,6 +496,8 @@ namespace H.Core.Calculators.Infrastructure
             // Add flows for all stored manure
             flowInformationForAllSubstrates.AddRange(storedManureFlows);
 
+            var adOutput = new ADOutput();
+
             /*
              * Totals of all flows in digester
              */
@@ -294,221 +505,49 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.2-1
             var flowOfBiodegradableSolids = flowInformationForAllSubstrates.Sum(x => x.BiodegradableSolidsFlow);
 
-            // Equation 4.8.2-2
-            var totalMethaneProduction = flowInformationForAllSubstrates.Sum(x => x.MethaneProduction);
-
-            // Equation 4.8.2-4
-            var flowOfDegradedVolatileSolids = flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
-
-            // Equation 4.8.2-6
-            var totalBiogasProduction = flowInformationForAllSubstrates.Sum(x => x.BiogasProduction);
-
-            // Equation 4.8.2-8
-            var carbonDioxideProduction = totalBiogasProduction - totalMethaneProduction;
-
-            // Equation 4.8.2-11
-            var recoverableMethane = totalMethaneProduction * (1 - 0.03);
-
-            // Equation 4.8.2-12
-            var primaryEnergyProduction = totalMethaneProduction * (35.17 / 3.6);
-
-            // Equation 4.8.2-13
-            var electricityProducedFromAnaerobicDigestion = primaryEnergyProduction * 0.4;
-
-            // Equation 4.8.2-14
-            var heatProducedFromAnaerobicDigestion = primaryEnergyProduction * 0.5;
-
-            // Equation 4.8.2-15
-            var potentialMethaneInjectionIntoGridFromAnaerobicDigestion = recoverableMethane * 0.0081;
+            this.CalculateBiogassProduction(adOutput, flowInformationForAllSubstrates);
 
             /*
              * Production of digestate and its composition
              */
 
-            // Equation 4.8.3-1
-            var flowRateOfAllSubstrates = flowInformationForAllSubstrates.Sum(x => x.TotalMassFlow);
+            this.CalculateFlows(adOutput, flowInformationForAllSubstrates);
 
-            // Equation 4.8.3-2
-            var flowOfTotalSolids = flowInformationForAllSubstrates.Sum(x => x.TotalSolidsFlow) - flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+            this.CalculateLiquidSolidSeparation(adOutput, component);
 
-            // Equation 4.8.3-3
-            var flowOfVolatileSolids = flowInformationForAllSubstrates.Sum(x => x.VolatileSolidsFlow) - flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+            this.CalculateAmountsForLandApplication(adOutput);
 
-            // Equation 4.8.3-4
-            var flowRateOfTotalNitrogenInDigestate = flowInformationForAllSubstrates.Sum(x => x.NitrogenFlow);
-
-            // Equation 4.8.3-5
-            var tanFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.TanFlowInDigestate);
-
-            // Equation 4.8.3-7
-            var organicNitrogenFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.OrganicNitrogenFlowInDigestate);
-
-            // Equation 4.8.3-8
-            var carbonFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
-
-            // Equation 4.8.3-2
-            var flowOfTotalSolidsInDigestate = flowOfTotalSolids - flowOfDegradedVolatileSolids;
-
-            // Equation 4.8.3-3
-            var flowOfVolatileSolidsInDigestate = flowOfVolatileSolids - flowOfDegradedVolatileSolids;
-
-            var rawMaterialCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.RawMaterial);
-            var rawMaterialCoefficient = component.IsCentrifugeType ? rawMaterialCoefficients.Centrifuge : rawMaterialCoefficients.BeltPress;
-
-            // Equation 4.8.4-1
-            var flowRateLiquidFraction = (1 - rawMaterialCoefficient) * flowRateOfAllSubstrates;
-
-            // Equation 4.8.4-2
-            var flowRateSolidFraction = rawMaterialCoefficient * flowRateOfAllSubstrates;
-
-            var totalSolidsCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalSolids);
-            var totalSolidsCoefficient = component.IsCentrifugeType ? totalSolidsCoefficients.Centrifuge : totalSolidsCoefficients.BeltPress;
-
-            // Equation 4.8.4-3
-            var totalSolidsInLiquidFraction = (1 - totalSolidsCoefficient) * flowOfTotalSolidsInDigestate;
-
-            // Equation 4.8.4-4
-            var totalSolidsInSolidFraction = totalSolidsCoefficient * flowOfTotalSolidsInDigestate;
-
-            var volatileSolidsCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.VolatileSolids);
-            var volatileSolidsCoefficient = component.IsCentrifugeType ? volatileSolidsCoefficients.Centrifuge : volatileSolidsCoefficients.BeltPress;
-
-            // Equation 4.8.4-5
-            var totalVolatileSolidsLiquidFraction = (1 - volatileSolidsCoefficient) * flowOfVolatileSolidsInDigestate;
-
-            // Equation 4.8.4-6
-            var totalVolatileSolidsSolidFraction = volatileSolidsCoefficient * flowOfVolatileSolidsInDigestate;
-
-            var tanCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalAmmoniaNitrogen);
-            var tanCoefficient = component.IsCentrifugeType ? tanCoefficients.Centrifuge : tanCoefficients.BeltPress;
-
-            // Equation 4.8.4-9
-            var totalTanLiquidFraction = (1 - tanCoefficient) * tanFlowInDigestate;
-
-            // Equation 4.8.4-10
-            var totalTanSolidFraction = tanCoefficient * tanFlowInDigestate;
-
-            var organicNCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.OrganicNitrogen);
-            var organicNCoefficient = component.IsCentrifugeType ? organicNCoefficients.Centrifuge : organicNCoefficients.BeltPress;
-
-            // Equation 4.8.4-11
-            var organicNLiquidFraction = (1 - organicNCoefficient) * organicNitrogenFlowInDigestate;
-
-            // Equation 4.8.4-12
-            var organicNSolidFraction = organicNCoefficient * organicNitrogenFlowInDigestate;
-
-            // Equation 4.8.4-7
-            var totalNitrogenLiquidFraction = totalTanLiquidFraction + organicNLiquidFraction;
-
-            // Equation 4.8.4-8
-            var totalNitrogenSolidFraction = totalTanSolidFraction + organicNSolidFraction;
-
-            var carbonCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalCarbon);
-            var carbonCoefficient = component.IsCentrifugeType ? carbonCoefficients.Centrifuge : carbonCoefficients.BeltPress;
-
-            // Equation 4.8.4-13
-            var carbonLiquidFraction = (1 - carbonCoefficient) * carbonFlowInDigestate;
-
-            // Equation 4.8.4-14
-            var carbonSolidFraction = carbonCoefficient * carbonFlowInDigestate;
-            
-            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dailyEmissions.DateTime.Year, (Months)dailyEmissions.DateTime.Month);
-            var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
-
-            // Equation 4.8.5-1
-            var methaneEmissionsDuringStorage = methaneEmissionFactorDuringStorage * component.VolumeOfDigestateEnteringStorage;
-
-            // Equation 4.8.5-2
-            var n2OEmissionsDuringStorage = 0.0652 * component.VolumeOfDigestateEnteringStorage;
-
-            // Equation 4.8.5-3
-            var ammoniaEmissionsDuringStorage = 3.495 * component.VolumeOfDigestateEnteringStorage;
-
-            /*
-             * Fresh and stored digestate available for land application
-             */
-
-            var adOutput = new ADOutput();
-
-            /*
-             * Digestate that has not been liquid/solid separated
-             */
-
-            // Equation 4.8.3-1
-            adOutput.TotalAmountRawDigestateAvailableForLandApplication = flowRateOfAllSubstrates;
-
-            // Equation 4.8.3-4
-            adOutput.TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = flowRateOfTotalNitrogenInDigestate;
-
-            // Equation 4.8.3-5
-            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplication = tanFlowInDigestate;
-
-            // Equation 4.8.3-7
-            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplication = organicNitrogenFlowInDigestate;
-
-            // Equation 4.8.3-8
-            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = carbonFlowInDigestate;
-
-            /*
-             * Solid fractions of liquid/solid separated digestate
-             */
-
-            // Equation 4.8.4-1
-            adOutput.TotalAmountRawDigestateAvailableForLandApplicationFromLiquidFraction = flowRateLiquidFraction;
-
-            // Equation 4.8.4-7
-            adOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = totalNitrogenLiquidFraction;
-
-            // Equation 4.8.4-9
-            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromLiquidFraction = totalTanLiquidFraction;
-
-            // Equation 4.8.4-11
-            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = organicNLiquidFraction;
-
-            // Equation 4.8.4-13
-            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = carbonLiquidFraction;
-
-            /*
-             * Liquid fractions of liquid/solid separated digestate
-             */
-
-            // Equation 4.8.4-2
-            adOutput.TotalAmountRawDigestateAvailableForLandApplicationFromSolidFraction = flowRateSolidFraction;
-
-            // Equation 4.8.4-8
-            adOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = totalNitrogenSolidFraction;
-
-            // Equation 4.8.4-10
-            adOutput.TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromSolidFraction = totalTanSolidFraction;
-
-            // Equation 4.8.4-12
-            adOutput.TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = organicNSolidFraction;
-
-            // Equation 4.8.4-14
-            adOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = carbonSolidFraction;
-
-            /*
-             * Stored digestate (liquid and solid fractions)
-             */
-
-            // Equation 4.8.3-1
-            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplication = flowRateOfAllSubstrates;
-
-            // Equation 4.8.4-1
-            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplicationLiquidFraction = flowRateLiquidFraction;
-
-            // Equation 4.8.4-2
-            adOutput.TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction = flowRateSolidFraction;
+            this.CalculateDigestateStorageEmissions(farm, DateTime.Now, component, adOutput);
 
             /*
              * Total nitrogen available for land application
              */
 
             // Equation 4.8.6-1
-            adOutput.TotalNitrogenInDigestateAvailableForLandApplication = flowRateOfTotalNitrogenInDigestate - (n2OEmissionsDuringStorage + ammoniaEmissionsDuringStorage);
+            adOutput.TotalNitrogenInDigestateAvailableForLandApplication = adOutput.FlowRateOfTotalNitrogenInDigestate - (adOutput.N2OEmissionsDuringStorage + adOutput.AmmoniaEmissionsDuringStorage);
 
             // Equation 4.8.6-2
-            adOutput.TotalCarbonInDigestateAvailableForLandApplication = carbonFlowInDigestate - methaneEmissionsDuringStorage;
+            adOutput.TotalCarbonInDigestateAvailableForLandApplication = adOutput.CarbonFlowInDigestate - adOutput.MethaneEmissionsDuringStorage;
+        }
+
+        public void CalculateResults(Farm farm, GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
+        {
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                return;
+            }
+
+            var cropResidueFlows = this.GetFarmResidueFlowRates(component);
+            var freshManureFlows = this.GetFreshManureFlowRates(component, dailyEmissions, managementPeriod);
+            var storedManureFlows = this.GetStoredManureFlowRates(component, dailyEmissions, managementPeriod);
+
+            //this.CalculateResultsInternal(cropResidueFlows, freshManureFlows, storedManureFlows, component);
+        }
+
+        public void CalculateResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+
         }
 
         /// <summary>
