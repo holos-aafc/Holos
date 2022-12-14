@@ -196,6 +196,7 @@ namespace H.Core.Models.LandManagement.Fields
             this.HayImportViewItems.CollectionChanged += HayImportViewItemsOnCollectionChanged;
             this.GrazingViewItems.CollectionChanged += GrazingViewItemsOnCollectionChanged;
             this.ManureApplicationViewItems.CollectionChanged += ManureApplicationViewItemsOnCollectionChanged;
+            this.DigestateApplicationViewItems.CollectionChanged += DigestateApplicationViewItemsOnCollectionChanged;
         }
 
         #endregion

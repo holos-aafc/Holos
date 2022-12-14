@@ -204,6 +204,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="ResultConversionClassTests.cs" />
+    <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\BeefCattleResultsServiceTest.cs" />
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />

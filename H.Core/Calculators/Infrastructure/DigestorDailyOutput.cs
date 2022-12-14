@@ -1,6 +1,6 @@
 ﻿namespace H.Core.Calculators.Infrastructure
 {
-    public class ADOutput
+    public class DigestorDailyOutput
     {
         /*
          * Flows

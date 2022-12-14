@@ -1179,6 +1179,9 @@
   <data name="EnumLiquid" xml:space="preserve">
     <value>liquide</value>
   </data>
+  <data name="EnumLiquidPhase" xml:space="preserve">
+    <value>Liquid digestate (separated)</value>
+  </data>
   <data name="EnumLiquidSeparated" xml:space="preserve">
     <value>liquide séparé</value>
   </data>
@@ -1504,6 +1507,9 @@
   <data name="EnumRapidlyDrained" xml:space="preserve">
     <value>rapidement drainé</value>
   </data>
+  <data name="EnumRaw" xml:space="preserve">
+    <value>Raw digestate (not separated)</value>
+  </data>
   <data name="EnumRawMaterial" xml:space="preserve">
     <value>matières premières</value>
   </data>
@@ -1599,6 +1605,9 @@
   </data>
   <data name="EnumSolid" xml:space="preserve">
     <value>solide</value>
+  </data>
+  <data name="EnumSolidPhase" xml:space="preserve">
+    <value>Solid digestate (separated)</value>
   </data>
   <data name="EnumSolidStorageWithOrWithoutLitter" xml:space="preserve">
     <value>Solid storage (with or without litter)</value>
@@ -2569,6 +2578,9 @@
   <data name="LabelAllAnimalsGrazingOnThisPastureDisplayedInThisGrid" xml:space="preserve">
     <value>Tous les groupes d’animaux qui broutent dans ce pâturage sont indiqués ci-dessous. les dates des périodes de pâturage peuvent être modifiées en ajustant la période de gestion des groupes d’animaux.</value>
   </data>
+  <data name="LabelAmountOfDigestate" xml:space="preserve">
+    <value>Amount of digestate</value>
+  </data>
   <data name="LabelAmountOfExtrarootsReturnedToSoil" xml:space="preserve">
     <value>organes souterrains retournés au sol</value>
   </data>
@@ -3142,6 +3154,9 @@
   <data name="LabelLigninContent" xml:space="preserve">
     <value>teneur en lignine</value>
   </data>
+  <data name="LabelLiquidSolidSeparation" xml:space="preserve">
+    <value>Liquid-solid separation</value>
+  </data>
   <data name="LabelLitterSize" xml:space="preserve">
     <value>taille de la portée</value>
   </data>
@@ -3598,6 +3613,9 @@
   </data>
   <data name="LabelUseCustomVolatilizationFraction" xml:space="preserve">
     <value>utilisez un facteur de conversion du méthane personnalisé</value>
+  </data>
+  <data name="LabelUseLiquidSolidSeparation" xml:space="preserve">
+    <value>Apply liquid/solid separation to the digestate</value>
   </data>
   <data name="LabelValine" xml:space="preserve">
     <value>valine</value>
@@ -4525,6 +4543,9 @@
   </data>
   <data name="TitleDefaultManureComposition" xml:space="preserve">
     <value>composition du fumier par défaut</value>
+  </data>
+  <data name="TitleDigestate" xml:space="preserve">
+    <value>Digestate</value>
   </data>
   <data name="TitleEconomics" xml:space="preserve">
     <value>économie</value>

@@ -9,6 +9,8 @@ namespace H.Core.Models.LandManagement.Fields
     {
         #region Fields
 
+        private DigestateState _digestateState;
+
         private double _amountAppliedPerHectare;
 
         #endregion
@@ -18,6 +20,7 @@ namespace H.Core.Models.LandManagement.Fields
         public DigestateApplicationViewItem()
         {
             base.DateCreated = DateTime.Now;
+            this.DigestateState = DigestateState.Raw;
         }
 
         #endregion
@@ -34,7 +37,13 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _amountAppliedPerHectare;
             set => SetProperty(ref _amountAppliedPerHectare, value);
-        } 
+        }
+
+        public DigestateState DigestateState
+        {
+            get => _digestateState;
+            set => SetProperty(ref _digestateState, value);
+        }
 
         #endregion
     }

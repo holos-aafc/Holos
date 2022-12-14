@@ -117,7 +117,7 @@
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
-    <Compile Include="Calculators\Infrastructure\ADOutput.cs" />
+    <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />
@@ -309,9 +309,11 @@
     <Compile Include="Models\Animals\Swine\SwineComponentBase.cs" />
     <Compile Include="Models\Animals\Swine\SwineFinishersComponent.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToWeanComponent.cs" />
+    <Compile Include="Models\DigestateTank.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
+    <Compile Include="Models\StorageTankBase.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Data.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider.cs" />
@@ -610,6 +612,7 @@
     <Compile Include="Services\Animals\BeefAndDairyResultsServiceBase.cs" />
     <Compile Include="Services\Animals\BeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\DairyCattleResultsService.cs" />
+    <Compile Include="Services\Animals\DigestateService.cs" />
     <Compile Include="Services\Animals\IAnimalResultsService.cs" />
     <Compile Include="Services\Animals\IBeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\IDairyResultsService.cs" />

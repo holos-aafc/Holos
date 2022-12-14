@@ -27,6 +27,5 @@ namespace H.Core.Enumerations
         /// </summary>
         [LocalizedDescription("EnumSolidPhase", typeof(Resources))]
         SolidPhase,
-        
     }
 }

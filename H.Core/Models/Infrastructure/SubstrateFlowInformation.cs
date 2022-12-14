@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
@@ -14,7 +15,7 @@ namespace H.Core.Models.Infrastructure
         FarmResidues
     }
 
-    public class SubstrateFlowInformation
+    public class SubstrateFlowInformation : ModelBase
     {
         public AnimalType AnimalType { get; set; }
         public FarmResidueType FarmResidueType { get; set; }

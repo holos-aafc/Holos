@@ -3391,6 +3391,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liquid digestate (separated).
+        /// </summary>
+        public static string EnumLiquidPhase {
+            get {
+                return ResourceManager.GetString("EnumLiquidPhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liquid separated.
         /// </summary>
         public static string EnumLiquidSeparated {
@@ -4381,6 +4390,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raw digestate (not separated).
+        /// </summary>
+        public static string EnumRaw {
+            get {
+                return ResourceManager.GetString("EnumRaw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raw material.
         /// </summary>
         public static string EnumRawMaterial {
@@ -4665,6 +4683,15 @@ namespace H.Core.Properties {
         public static string EnumSolid {
             get {
                 return ResourceManager.GetString("EnumSolid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solid digestate (separated).
+        /// </summary>
+        public static string EnumSolidPhase {
+            get {
+                return ResourceManager.GetString("EnumSolidPhase", resourceCulture);
             }
         }
         
@@ -7693,6 +7720,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount of digestate.
+        /// </summary>
+        public static string LabelAmountOfDigestate {
+            get {
+                return ResourceManager.GetString("LabelAmountOfDigestate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Extraroot returned to soil.
         /// </summary>
         public static string LabelAmountOfExtrarootsReturnedToSoil {
@@ -9466,6 +9502,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liquid-solid separation.
+        /// </summary>
+        public static string LabelLiquidSolidSeparation {
+            get {
+                return ResourceManager.GetString("LabelLiquidSolidSeparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Litter size.
         /// </summary>
         public static string LabelLitterSize {
@@ -10929,6 +10974,15 @@ namespace H.Core.Properties {
         public static string LabelUseCustomVolatilizationFraction {
             get {
                 return ResourceManager.GetString("LabelUseCustomVolatilizationFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply liquid/solid separation to the digestate.
+        /// </summary>
+        public static string LabelUseLiquidSolidSeparation {
+            get {
+                return ResourceManager.GetString("LabelUseLiquidSolidSeparation", resourceCulture);
             }
         }
         
@@ -13872,6 +13926,15 @@ namespace H.Core.Properties {
         public static string TitleDefaultManureComposition {
             get {
                 return ResourceManager.GetString("TitleDefaultManureComposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digestate.
+        /// </summary>
+        public static string TitleDigestate {
+            get {
+                return ResourceManager.GetString("TitleDigestate", resourceCulture);
             }
         }
         
