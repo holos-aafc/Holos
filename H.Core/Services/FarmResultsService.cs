@@ -216,8 +216,13 @@ namespace H.Core.Services
 
             // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
-            farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
-            _fieldResultsService.AnimalResults = farmResults.AnimalComponentEmissionsResults.ToList();
+
+            var animalResults = _animalResultsService.GetAnimalResults(farm);
+
+            farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
+            _fieldResultsService.AnimalResults = animalResults;
+
+            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
 
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
@@ -243,9 +248,9 @@ namespace H.Core.Services
             return finalFieldResults;
         }
 
-        public void CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
-            _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
+            return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
         }
 
         /// <summary>

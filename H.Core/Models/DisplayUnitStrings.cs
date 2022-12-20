@@ -115,7 +115,10 @@ namespace H.Core.Models
         private string _bushelString;
         private string _kilogramsPerGroupPerTimePeriodString;
         private string _kilogramsCarbonPerTreeTypeString;
+        private string _cubicMetersPerDayString;
         private string _fractionString;
+        private string _cubicNormalMetersPerDayString;
+        private string _kilowattHoursPerDayString;
 
         #endregion
 
@@ -779,6 +782,24 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsN2NPerFieldString, value);
         }
 
+        public string CubicMetersPerDayString
+        {
+            get => _cubicMetersPerDayString;
+            set => SetProperty(ref _cubicMetersPerDayString, value);
+        }
+
+        public string CubicNormalMetersPerDayString
+        {
+            get => _cubicNormalMetersPerDayString;
+            set => SetProperty(ref _cubicNormalMetersPerDayString, value);
+        }
+
+        public string KilowattHoursPerDayString
+        {
+            get => _kilowattHoursPerDayString;
+            set => SetProperty(ref _kilowattHoursPerDayString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -904,6 +925,9 @@ namespace H.Core.Models
                 KilogramsNONPerFieldString = WrapString(Resources.KilogramsNONPerField);
                 MillimetersPerHectareString = WrapString(Resources.MillimetersPerHectare);
                 KilogramsNO3PerFieldString = WrapString(Resources.KilogramsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
             }
             else
             {
@@ -1016,6 +1040,9 @@ namespace H.Core.Models
                 KilogramsNONPerFieldString = WrapString(Resources.PoundsNONPerField);
                 MillimetersPerHectareString = WrapString(Resources.InchesPerAcre);
                 KilogramsNO3PerFieldString = WrapString(Resources.PoundsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
             }
         }
 

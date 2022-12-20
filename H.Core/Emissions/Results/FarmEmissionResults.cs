@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -21,9 +22,9 @@ namespace H.Core.Emissions.Results
         private Farm _farm;
 
         private ObservableCollection<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
-
         private ObservableCollection<EconomicsResultsViewItem> _economicsResultsViewItems;
         private ObservableCollection<CropViewItem> _finalFieldResultViewItems;
+        private ObservableCollection<DigestorDailyOutput> _anaerobicDigestorResults;
 
         private double _economicsProfit;
 
@@ -36,6 +37,7 @@ namespace H.Core.Emissions.Results
             this.AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>();
             this.EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
             this.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
+            this.AnaerobicDigestorResults = new ObservableCollection<DigestorDailyOutput>();
         }
 
         #endregion
@@ -363,6 +365,12 @@ namespace H.Core.Emissions.Results
             {
                 return this.GetAllCropResultsByYear(this.Year).Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
             }
+        }
+
+        public ObservableCollection<DigestorDailyOutput> AnaerobicDigestorResults
+        {
+            get => _anaerobicDigestorResults;
+            set => SetProperty(ref _anaerobicDigestorResults, value);
         }
 
         #endregion

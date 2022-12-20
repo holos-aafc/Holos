@@ -62,6 +62,7 @@ namespace H.Core.Models.Infrastructure
         private double _ammoniaEmissionFactorForDigestateStorage;
 
         private double _proportionTotalManureAddedToAD;
+        private double _proportionAsPercentageTotalManureAddedToAD;
         private double _volumeOfDigestateEnteringStorage;
 
         private int _numberOfReactors;
@@ -277,11 +278,15 @@ namespace H.Core.Models.Infrastructure
             set { this.SetProperty(ref _ammoniaEmissionFactorForDigestateStorage, value); }
         }
 
-
         public double ProportionTotalManureAddedToAD
         {
-            get { return _proportionTotalManureAddedToAD; }
-            set { this.SetProperty(ref _proportionTotalManureAddedToAD, value); }
+            get { return this.ProportionAsPercentageTotalManureAddedToAd / 100.0; }
+        }
+
+        public double ProportionAsPercentageTotalManureAddedToAd
+        {
+            get => _proportionAsPercentageTotalManureAddedToAD;
+            set => SetProperty(ref _proportionAsPercentageTotalManureAddedToAD, value);
         }
 
         public int NumberOfReactors

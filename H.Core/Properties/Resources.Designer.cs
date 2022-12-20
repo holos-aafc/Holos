@@ -745,6 +745,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to m^3 day^-1.
+        /// </summary>
+        public static string CubicMetersPerDay {
+            get {
+                return ResourceManager.GetString("CubicMetersPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nm³ day⁻¹.
+        /// </summary>
+        public static string CubicNormalMetersPerDay {
+            get {
+                return ResourceManager.GetString("CubicNormalMetersPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (lb ton^-1)^3.
         /// </summary>
         public static string CubicPoundsPerTon {
@@ -7288,7 +7306,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to kg day^-1.
+        ///   Looks up a localized string similar to kg day⁻¹.
         /// </summary>
         public static string KilogramsPerDay {
             get {
@@ -7410,6 +7428,15 @@ namespace H.Core.Properties {
         public static string KilogramVolatileSolidsPerCubicMeterPerDay {
             get {
                 return ResourceManager.GetString("KilogramVolatileSolidsPerCubicMeterPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kWh day⁻¹.
+        /// </summary>
+        public static string KilowattHoursPerDay {
+            get {
+                return ResourceManager.GetString("KilowattHoursPerDay", resourceCulture);
             }
         }
         
@@ -8962,6 +8989,69 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flow rate (all substrates).
+        /// </summary>
+        public static string LabelFlowRateAllSubstrates {
+            get {
+                return ResourceManager.GetString("LabelFlowRateAllSubstrates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate (C).
+        /// </summary>
+        public static string LabelFlowRateC {
+            get {
+                return ResourceManager.GetString("LabelFlowRateC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate (N).
+        /// </summary>
+        public static string LabelFlowRateNitrogen {
+            get {
+                return ResourceManager.GetString("LabelFlowRateNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate (ON).
+        /// </summary>
+        public static string LabelFlowRateON {
+            get {
+                return ResourceManager.GetString("LabelFlowRateON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fow rate (TAN).
+        /// </summary>
+        public static string LabelFlowRateTAN {
+            get {
+                return ResourceManager.GetString("LabelFlowRateTAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate (total solids).
+        /// </summary>
+        public static string LabelFlowRateTotalSolids {
+            get {
+                return ResourceManager.GetString("LabelFlowRateTotalSolids", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate (volatile solids).
+        /// </summary>
+        public static string LabelFlowRateVolatileSolids {
+            get {
+                return ResourceManager.GetString("LabelFlowRateVolatileSolids", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraction of carbon in manure.
         /// </summary>
         public static string LabelFractionOfCarbonInManure {
@@ -10123,6 +10213,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Proportion of daily manure added to digestor.
+        /// </summary>
+        public static string LabelProportionOfManureAddedToDigestor {
+            get {
+                return ResourceManager.GetString("LabelProportionOfManureAddedToDigestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pump type.
         /// </summary>
         public static string LabelPumpType {
@@ -11046,6 +11145,15 @@ namespace H.Core.Properties {
         public static string LabelVolatileSolidsPercentage {
             get {
                 return ResourceManager.GetString("LabelVolatileSolidsPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume of digestate entering storage.
+        /// </summary>
+        public static string LabelVolumeOfDigestateEnteringStorage {
+            get {
+                return ResourceManager.GetString("LabelVolumeOfDigestateEnteringStorage", resourceCulture);
             }
         }
         
@@ -15412,6 +15520,105 @@ namespace H.Core.Properties {
         public static string TopLayerThickness {
             get {
                 return ResourceManager.GetString("TopLayerThickness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total NH₃.
+        /// </summary>
+        public static string TotalAmmonia {
+            get {
+                return ResourceManager.GetString("TotalAmmonia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total biogas production.
+        /// </summary>
+        public static string TotalBiogasProduction {
+            get {
+                return ResourceManager.GetString("TotalBiogasProduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total CO₂ production.
+        /// </summary>
+        public static string TotalCO2Production {
+            get {
+                return ResourceManager.GetString("TotalCO2Production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total electricity production.
+        /// </summary>
+        public static string TotalElectricityProduction {
+            get {
+                return ResourceManager.GetString("TotalElectricityProduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total heat produced.
+        /// </summary>
+        public static string TotalHeatProduced {
+            get {
+                return ResourceManager.GetString("TotalHeatProduced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total CH₄.
+        /// </summary>
+        public static string TotalMethane {
+            get {
+                return ResourceManager.GetString("TotalMethane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total CH₄ to gas grid.
+        /// </summary>
+        public static string TotalMethaneInjectionToGasGrid {
+            get {
+                return ResourceManager.GetString("TotalMethaneInjectionToGasGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total CH₄ production.
+        /// </summary>
+        public static string TotalMethaneProduction {
+            get {
+                return ResourceManager.GetString("TotalMethaneProduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total N₂O.
+        /// </summary>
+        public static string TotalN2O {
+            get {
+                return ResourceManager.GetString("TotalN2O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total primary energy production.
+        /// </summary>
+        public static string TotalPrimaryEnergyProductionPotential {
+            get {
+                return ResourceManager.GetString("TotalPrimaryEnergyProductionPotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total recoverable CH₄.
+        /// </summary>
+        public static string TotalRecoverableMethane {
+            get {
+                return ResourceManager.GetString("TotalRecoverableMethane", resourceCulture);
             }
         }
         

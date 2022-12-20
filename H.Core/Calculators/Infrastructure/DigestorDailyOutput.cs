@@ -1,7 +1,14 @@
-﻿namespace H.Core.Calculators.Infrastructure
+﻿using System;
+using H.Core.Emissions.Results;
+
+namespace H.Core.Calculators.Infrastructure
 {
     public class DigestorDailyOutput
     {
+        public DateTime Date { get; set; }
+
+        public GroupEmissionsByDay GroupEmissionsByDay { get; set; }
+
         /*
          * Flows
          */
@@ -24,7 +31,6 @@
         public double OrganicNitrogenFlowInDigestate { get; set; }
 
         public double CarbonFlowInDigestate { get; set; }
-
 
         /*
          * Liquid/solid separation
@@ -106,8 +112,19 @@
          * Storage emissions
          */
 
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double MethaneEmissionsDuringStorage { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double N2OEmissionsDuringStorage { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double AmmoniaEmissionsDuringStorage { get; set; }
 
         /*

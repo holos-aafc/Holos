@@ -254,6 +254,7 @@
     <Compile Include="Calculators\Climate\IClimateParameterCalculator.cs" />
     <Compile Include="Enumerations\TimeFrame.cs" />
     <Compile Include="Enumerations\TimePeriodCategory.cs" />
+    <Compile Include="Enumerations\Timestep.cs" />
     <Compile Include="Enumerations\TreeSpecies.cs" />
     <Compile Include="Enumerations\Response.cs" />
     <Compile Include="Enumerations\UserFriendlySoilTextures.cs" />

@@ -66,7 +66,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             _component = new AnaerobicDigestionComponent();
             _component.HydraulicRetentionTimeInDays = 30;
-            _component.ProportionTotalManureAddedToAD = 0.5;
+            _component.ProportionAsPercentageTotalManureAddedToAd = 0.5;
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(residuesSubstrateViewItem);
             _component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.Add(manureSubstrateViewItem);
 
@@ -165,7 +165,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             var results = _calculator.GetFreshManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod);
 
-            Assert.AreEqual(3.3734693877551019, results.CarbonFlowInDigestate);
+            Assert.AreEqual(0.033734693877551, results.CarbonFlowInDigestate, 0.00001);
         }
 
         [TestMethod]
@@ -174,7 +174,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             // here 
             var results = _calculator.GetStoredManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod);
 
-            Assert.AreEqual(4.3775510204081636, results.DegradedVolatileSolids);
+            Assert.AreEqual(0.0437755102040816, results.DegradedVolatileSolids,0.00001);
         }
 
         #endregion

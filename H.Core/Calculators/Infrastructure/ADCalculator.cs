@@ -112,7 +112,8 @@ namespace H.Core.Calculators.Infrastructure
             var substrateFlowRate = new SubstrateFlowInformation
             {
                 SubstrateType = SubstrateType.StoredManure,
-                AnimalType = managementPeriod.AnimalType
+                AnimalType = managementPeriod.AnimalType,
+                DateCreated = dailyEmissions.DateTime,
             };
 
             // Equation 4.8.1-16
@@ -643,26 +644,29 @@ namespace H.Core.Calculators.Infrastructure
 
         }
 
-        public DigestorDailyOutput CalculateResultsInternal(
-            List<SubstrateFlowInformation> cropResidueFlows,
-            List<SubstrateFlowInformation> freshManureFlows, 
-            List<SubstrateFlowInformation> storedManureFlows,
+        public DigestorDailyOutput CalculateResultsInternal(SubstrateFlowInformation cropResidueFlows,
+            SubstrateFlowInformation freshManureFlows,
+            SubstrateFlowInformation storedManureFlows,
             AnaerobicDigestionComponent component,
-            Farm farm)
+            Farm farm, 
+            DateTime dateTime)
         {
             // All flows
             var flowInformationForAllSubstrates = new List<SubstrateFlowInformation>();
 
             // Add flows for all farm residues
-            flowInformationForAllSubstrates.AddRange(cropResidueFlows);
+            flowInformationForAllSubstrates.Add(cropResidueFlows);
 
             // Add flows for all fresh manure
-            flowInformationForAllSubstrates.AddRange(freshManureFlows);
+            flowInformationForAllSubstrates.Add(freshManureFlows);
 
             // Add flows for all stored manure
-            flowInformationForAllSubstrates.AddRange(storedManureFlows);
+            flowInformationForAllSubstrates.Add(storedManureFlows);
 
-            var adOutput = new DigestorDailyOutput();
+            var adOutput = new DigestorDailyOutput()
+            {
+                Date = dateTime,
+            };
 
             /*
              * Totals of all flows in digester
@@ -706,11 +710,11 @@ namespace H.Core.Calculators.Infrastructure
                 return new DigestorDailyOutput();
             }
 
-            var cropResidueFlows = this.GetFarmResidueFlowRates(component);
-            var freshManureFlows = this.GetFreshManureFlowRates(component, dailyEmissions, managementPeriod);
-            var storedManureFlows = this.GetStoredManureFlowRates(component, dailyEmissions, managementPeriod);
+            //var cropResidueFlows = this.GetFarmResidueFlowRates(component);
+            var freshManureFlows = this.GetFreshManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
+            var storedManureFlows = this.GetStoredManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
 
-            var dailyResults =  this.CalculateResultsInternal(cropResidueFlows, freshManureFlows, storedManureFlows, component, farm);
+            var dailyResults =  this.CalculateResultsInternal(new SubstrateFlowInformation(), freshManureFlows, storedManureFlows, component, farm, dailyEmissions.DateTime);
 
             return dailyResults;
         }

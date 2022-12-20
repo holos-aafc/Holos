@@ -1325,7 +1325,7 @@
     <value>kg N kg^-1</value>
   </data>
   <data name="KilogramsPerDay" xml:space="preserve">
-    <value>kg day^-1</value>
+    <value>kg day⁻¹</value>
   </data>
   <data name="KilogramsPerHectare" xml:space="preserve">
     <value>kg ha^-1</value>
@@ -5344,5 +5344,74 @@
   </data>
   <data name="LabelUseLiquidSolidSeparation" xml:space="preserve">
     <value>Apply liquid/solid separation to the digestate</value>
+  </data>
+  <data name="LabelProportionOfManureAddedToDigestor" xml:space="preserve">
+    <value>Proportion of daily manure added to digestor</value>
+  </data>
+  <data name="CubicMetersPerDay" xml:space="preserve">
+    <value>m^3 day^-1</value>
+  </data>
+  <data name="LabelVolumeOfDigestateEnteringStorage" xml:space="preserve">
+    <value>Volume of digestate entering storage</value>
+  </data>
+  <data name="CubicNormalMetersPerDay" xml:space="preserve">
+    <value>Nm³ day⁻¹</value>
+  </data>
+  <data name="LabelFlowRateAllSubstrates" xml:space="preserve">
+    <value>Flow rate (all substrates)</value>
+  </data>
+  <data name="LabelFlowRateC" xml:space="preserve">
+    <value>Flow rate (C)</value>
+  </data>
+  <data name="LabelFlowRateNitrogen" xml:space="preserve">
+    <value>Flow rate (N)</value>
+  </data>
+  <data name="LabelFlowRateON" xml:space="preserve">
+    <value>Flow rate (ON)</value>
+  </data>
+  <data name="LabelFlowRateTAN" xml:space="preserve">
+    <value>Fow rate (TAN)</value>
+  </data>
+  <data name="LabelFlowRateTotalSolids" xml:space="preserve">
+    <value>Flow rate (total solids)</value>
+  </data>
+  <data name="LabelFlowRateVolatileSolids" xml:space="preserve">
+    <value>Flow rate (volatile solids)</value>
+  </data>
+  <data name="KilowattHoursPerDay" xml:space="preserve">
+    <value>kWh day⁻¹</value>
+  </data>
+  <data name="TotalBiogasProduction" xml:space="preserve">
+    <value>Total biogas production</value>
+  </data>
+  <data name="TotalCO2Production" xml:space="preserve">
+    <value>Total CO₂ production</value>
+  </data>
+  <data name="TotalMethaneProduction" xml:space="preserve">
+    <value>Total CH₄ production</value>
+  </data>
+  <data name="TotalPrimaryEnergyProductionPotential" xml:space="preserve">
+    <value>Total primary energy production</value>
+  </data>
+  <data name="TotalRecoverableMethane" xml:space="preserve">
+    <value>Total recoverable CH₄</value>
+  </data>
+  <data name="TotalElectricityProduction" xml:space="preserve">
+    <value>Total electricity production</value>
+  </data>
+  <data name="TotalAmmonia" xml:space="preserve">
+    <value>Total NH₃</value>
+  </data>
+  <data name="TotalHeatProduced" xml:space="preserve">
+    <value>Total heat produced</value>
+  </data>
+  <data name="TotalMethane" xml:space="preserve">
+    <value>Total CH₄</value>
+  </data>
+  <data name="TotalMethaneInjectionToGasGrid" xml:space="preserve">
+    <value>Total CH₄ to gas grid</value>
+  </data>
+  <data name="TotalN2O" xml:space="preserve">
+    <value>Total N₂O</value>
   </data>
 </root>
