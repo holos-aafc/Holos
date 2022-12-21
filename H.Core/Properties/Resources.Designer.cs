@@ -763,6 +763,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nm³ month⁻¹.
+        /// </summary>
+        public static string CubicNormalMetersPerMonth {
+            get {
+                return ResourceManager.GetString("CubicNormalMetersPerMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nm³ year⁻¹.
+        /// </summary>
+        public static string CubicNormalMetersPerYear {
+            get {
+                return ResourceManager.GetString("CubicNormalMetersPerYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (lb ton^-1)^3.
         /// </summary>
         public static string CubicPoundsPerTon {
@@ -7351,6 +7369,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg month⁻¹.
+        /// </summary>
+        public static string KilogramsPerMonth {
+            get {
+                return ResourceManager.GetString("KilogramsPerMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg year^-1.
         /// </summary>
         public static string KilogramsPerYear {
@@ -7437,6 +7464,24 @@ namespace H.Core.Properties {
         public static string KilowattHoursPerDay {
             get {
                 return ResourceManager.GetString("KilowattHoursPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kWh month⁻¹.
+        /// </summary>
+        public static string KilowattHoursPerMonth {
+            get {
+                return ResourceManager.GetString("KilowattHoursPerMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kWh year⁻¹.
+        /// </summary>
+        public static string KilowattHoursPerYear {
+            get {
+                return ResourceManager.GetString("KilowattHoursPerYear", resourceCulture);
             }
         }
         

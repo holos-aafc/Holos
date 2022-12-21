@@ -5414,4 +5414,19 @@
   <data name="TotalN2O" xml:space="preserve">
     <value>Total N₂O</value>
   </data>
+  <data name="CubicNormalMetersPerMonth" xml:space="preserve">
+    <value>Nm³ month⁻¹</value>
+  </data>
+  <data name="CubicNormalMetersPerYear" xml:space="preserve">
+    <value>Nm³ year⁻¹</value>
+  </data>
+  <data name="KilogramsPerMonth" xml:space="preserve">
+    <value>kg month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerMonth" xml:space="preserve">
+    <value>kWh month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerYear" xml:space="preserve">
+    <value>kWh year⁻¹</value>
+  </data>
 </root>
