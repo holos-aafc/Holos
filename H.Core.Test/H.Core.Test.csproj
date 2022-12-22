@@ -106,7 +106,6 @@
     <Compile Include="Converters\CropTypeStringConverterTest.cs" />
     <Compile Include="Converters\DietTypeStringConverterTest.cs" />
     <Compile Include="Converters\EcozoneStringConverterTest.cs" />
-    <Compile Include="Converters\HandlingSystemNameStringConverterTest.cs" />
     <Compile Include="Converters\HousingStringConverterTest.cs" />
     <Compile Include="Converters\PropertyConverterTest.cs" />
     <Compile Include="Converters\ProvinceStringConverterTest.cs" />
@@ -205,6 +204,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="ResultConversionClassTests.cs" />
+    <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\BeefCattleResultsServiceTest.cs" />
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />

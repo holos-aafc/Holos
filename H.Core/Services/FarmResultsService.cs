@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -41,6 +42,7 @@ namespace H.Core.Services
 
         private readonly FieldResultsService _fieldResultsService;
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
+        private readonly ADCalculator _adCalculator = new ADCalculator();
 
         private readonly IDietProvider _dietProvider = new DietProvider();
         private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
@@ -55,7 +57,6 @@ namespace H.Core.Services
         private readonly IMapper _climateDataMapper;
         private readonly IMapper _geographicDataMapper;
 
-        private readonly Dictionary<Farm, FarmEmissionResults> _farmEmissionResultsCache = new Dictionary<Farm, FarmEmissionResults>();
         private readonly IEventAggregator _eventAggregator;
 
         private readonly EconomicsCalculator _economicsCalculator;
@@ -215,8 +216,13 @@ namespace H.Core.Services
 
             // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
-            farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
-            _fieldResultsService.AnimalResults = farmResults.AnimalComponentEmissionsResults.ToList();
+
+            var animalResults = _animalResultsService.GetAnimalResults(farm);
+
+            farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
+            _fieldResultsService.AnimalResults = animalResults;
+
+            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
 
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
@@ -240,6 +246,11 @@ namespace H.Core.Services
             var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
 
             return finalFieldResults;
+        }
+
+        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+            return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
         }
 
         /// <summary>

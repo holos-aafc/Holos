@@ -43,7 +43,7 @@
       <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -117,6 +117,7 @@
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
+    <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />
@@ -137,7 +138,6 @@
     <Compile Include="Converters\FarmResidueTypeStringConverter.cs" />
     <Compile Include="Converters\FeedIngredientStringConverter.cs" />
     <Compile Include="Converters\FertilizerBlendConverter.cs" />
-    <Compile Include="Converters\HandlingSystemNameStringConverter.cs" />
     <Compile Include="Converters\HardinessZoneFromSlcIDConverter.cs" />
     <Compile Include="Converters\HardinessZoneStringConverter.cs" />
     <Compile Include="Converters\HousingStringConverter.cs" />
@@ -254,6 +254,7 @@
     <Compile Include="Calculators\Climate\IClimateParameterCalculator.cs" />
     <Compile Include="Enumerations\TimeFrame.cs" />
     <Compile Include="Enumerations\TimePeriodCategory.cs" />
+    <Compile Include="Enumerations\Timestep.cs" />
     <Compile Include="Enumerations\TreeSpecies.cs" />
     <Compile Include="Enumerations\Response.cs" />
     <Compile Include="Enumerations\UserFriendlySoilTextures.cs" />
@@ -309,7 +310,11 @@
     <Compile Include="Models\Animals\Swine\SwineComponentBase.cs" />
     <Compile Include="Models\Animals\Swine\SwineFinishersComponent.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToWeanComponent.cs" />
+    <Compile Include="Models\DigestateTank.cs" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
+    <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
+    <Compile Include="Models\StorageTankBase.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Data.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider.cs" />
@@ -608,6 +613,7 @@
     <Compile Include="Services\Animals\BeefAndDairyResultsServiceBase.cs" />
     <Compile Include="Services\Animals\BeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\DairyCattleResultsService.cs" />
+    <Compile Include="Services\Animals\DigestateService.cs" />
     <Compile Include="Services\Animals\IAnimalResultsService.cs" />
     <Compile Include="Services\Animals\IBeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\IDairyResultsService.cs" />

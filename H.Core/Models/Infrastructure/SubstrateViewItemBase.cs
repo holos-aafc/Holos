@@ -14,6 +14,9 @@ namespace H.Core.Models.Infrastructure
         private double _organicNitrogenConcentration;
         private double _tan;
 
+        /// <summary>
+        /// (Nm^3 kg VS^-1)
+        /// </summary>
         public double BiomethanePotential
         {
             get => _biomethanePotential;
@@ -26,24 +29,36 @@ namespace H.Core.Models.Infrastructure
             set => this.SetProperty(ref _methaneFraction, value);
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double VolatileSolids
         {
             get => _volatileSolids;
             set => this.SetProperty(ref _volatileSolids, value);
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double TotalSolids
         {
             get => _totalSolids;
             set => this.SetProperty(ref _totalSolids, value);
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double TotalNitrogen
         {
             get => _totalNitrogen;
             set => this.SetProperty(ref _totalNitrogen, value);
         }
 
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double FlowRate 
         { 
             get => _flowRate; 
@@ -62,6 +77,9 @@ namespace H.Core.Models.Infrastructure
             set => SetProperty(ref _tan, value); 
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double TotalCarbon 
         { 
             get => _totalCarbon; 

@@ -55,24 +55,50 @@ namespace H.Core.Providers.Climate
         /// <returns>Returns a single instance of <see cref="BiogasAndMethaneProductionParametersData"/> based on the parameters specified.</returns>
         public BiogasAndMethaneProductionParametersData GetBiogasMethaneProductionInstance(AnimalType animalType, BeddingMaterialType beddingMaterial)
         {
-            BiogasAndMethaneProductionParametersData data = this.ManureData.Find(x => (x.AnimalType == animalType) && (x.BeddingType == beddingMaterial));
+            AnimalType lookupAnimalType;
+            if (animalType.IsBeefCattleType())
+            {
+                lookupAnimalType = AnimalType.Beef;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                lookupAnimalType = AnimalType.Dairy;
+            }
+            else if (animalType.IsSwineType())
+            {
+                lookupAnimalType = AnimalType.Swine;
+            }
+            else if (animalType.IsChickenType())
+            {
+                lookupAnimalType = AnimalType.Chicken;
+            }
+            else if (animalType.IsTurkeyType())
+            {
+                lookupAnimalType = AnimalType.Turkeys;
+            }
+            else
+            {
+                // Horses, and goats are only other values in table
+                lookupAnimalType = animalType;
+            }
+
+            BiogasAndMethaneProductionParametersData data = this.ManureData.Find(x => (x.AnimalType == lookupAnimalType) && (x.BeddingType == beddingMaterial));
 
             if (data != null)
             {
                 return data;
             }
 
-            data = this.ManureData.Find(x => x.AnimalType == animalType);
+            data = this.ManureData.Find(x => x.AnimalType == lookupAnimalType);
 
             if (data != null)
             {
-                Trace.TraceError($"{nameof(Table_46_Biogas_Methane_Production_Parameters_Provider)}.{nameof(Table_46_Biogas_Methane_Production_Parameters_Provider.GetBiogasMethaneProductionInstance)}" +
-                    $" does not contain BeddingMaterialType of {beddingMaterial}. Returning an empty instance of {nameof(Table_46_Biogas_Methane_Production_Parameters_Provider)}");
+                return data;
             }
             else
             {
                 Trace.TraceError($"{nameof(Table_46_Biogas_Methane_Production_Parameters_Provider)}.{nameof(Table_46_Biogas_Methane_Production_Parameters_Provider.GetBiogasMethaneProductionInstance)}" +
-                    $" does not contain AnimalType of {animalType}. Returning an empty instance of {nameof(Table_46_Biogas_Methane_Production_Parameters_Provider)}");
+                    $" does not contain AnimalType of {lookupAnimalType}. Returning an empty instance of {nameof(Table_46_Biogas_Methane_Production_Parameters_Provider)}");
             }
 
             return new BiogasAndMethaneProductionParametersData();

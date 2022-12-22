@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -21,11 +22,9 @@ namespace H.Core.Emissions.Results
         private Farm _farm;
 
         private ObservableCollection<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
-
         private ObservableCollection<EconomicsResultsViewItem> _economicsResultsViewItems;
         private ObservableCollection<CropViewItem> _finalFieldResultViewItems;
-
-        private ObservableCollection<ManureTank> _manureTanks;
+        private ObservableCollection<DigestorDailyOutput> _anaerobicDigestorResults;
 
         private double _economicsProfit;
 
@@ -38,16 +37,7 @@ namespace H.Core.Emissions.Results
             this.AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>();
             this.EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
             this.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
-
-            this.ManureTanks = new ObservableCollection<ManureTank>()
-            {
-                new ManureTank() {AnimalType = AnimalType.Beef , Year = DateTime.Now.Year},
-                new ManureTank() {AnimalType = AnimalType.Dairy  , Year = DateTime.Now.Year},
-                new ManureTank() {AnimalType = AnimalType.Swine , Year = DateTime.Now.Year},
-                new ManureTank() {AnimalType = AnimalType.Sheep , Year = DateTime.Now.Year},
-                new ManureTank() {AnimalType = AnimalType.Poultry , Year = DateTime.Now.Year},
-                new ManureTank() {AnimalType = AnimalType.OtherLivestock , Year = DateTime.Now.Year},
-            };
+            this.AnaerobicDigestorResults = new ObservableCollection<DigestorDailyOutput>();
         }
 
         #endregion
@@ -55,15 +45,6 @@ namespace H.Core.Emissions.Results
         #region Properties
 
         public int Year { get; set; }
-
-        /// <summary>
-        /// A collection of manure tanks where manure from each type of animal is stored. Each tank is then used for land applications.
-        /// </summary>
-        public ObservableCollection<ManureTank> ManureTanks
-        {
-            get => _manureTanks;
-            set => SetProperty(ref _manureTanks, value);
-        }
 
         public double EconomicsProfit
         {
@@ -386,23 +367,15 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public ObservableCollection<DigestorDailyOutput> AnaerobicDigestorResults
+        {
+            get => _anaerobicDigestorResults;
+            set => SetProperty(ref _anaerobicDigestorResults, value);
+        }
+
         #endregion
 
         #region Public Methods
-
-        public ManureTank GetManureTankByAnimalType(AnimalType animalType, int year)
-        {
-            var tank = this.ManureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year);
-            if (tank == null)
-            {
-                // If no tank exists for this year, create one now
-                tank = new ManureTank() {AnimalType = animalType, Year = year};
-
-                this.ManureTanks.Add(tank);
-            }
-
-            return tank;
-        }
 
         public List<CropViewItem> GetCropResultsByField(FieldSystemComponent fieldSystemComponent)
         {

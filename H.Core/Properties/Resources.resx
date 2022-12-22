@@ -202,7 +202,7 @@
     <value>Ontario</value>
   </data>
   <data name="Pasture" xml:space="preserve">
-    <value>Pasture</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="PrinceEdwardIsland" xml:space="preserve">
     <value>Prince Edward Island</value>
@@ -523,10 +523,10 @@
     <value>Confined</value>
   </data>
   <data name="ConfinedNoBarn" xml:space="preserve">
-    <value>Confined no barn</value>
+    <value>Confined no barn (feedlot)</value>
   </data>
   <data name="Drylot" xml:space="preserve">
-    <value>Drylot</value>
+    <value>Drylot (standing or exercise yard)</value>
   </data>
   <data name="EnclosedPasture" xml:space="preserve">
     <value>Enclosed pasture</value>
@@ -574,10 +574,10 @@
     <value>Close up diet</value>
   </data>
   <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
-    <value>Compost intensive</value>
+    <value>Compost - intensive windrow</value>
   </data>
   <data name="CompostPassiveHandlingSystemName" xml:space="preserve">
-    <value>Compost passive</value>
+    <value>Compost - passive windrow</value>
   </data>
   <data name="CornDietType" xml:space="preserve">
     <value>Corn diet</value>
@@ -605,7 +605,7 @@
     <value>Deep bedding</value>
   </data>
   <data name="DeepPitHandlingSystemName" xml:space="preserve">
-    <value>Deep pit</value>
+    <value>Deep pit under barn</value>
   </data>
   <data name="ExceptionUnknownDietType" xml:space="preserve">
     <value>Unknown diet type '{0}'</value>
@@ -629,7 +629,7 @@
     <value>Liquid crust</value>
   </data>
   <data name="LiquidNoCrustHandlingSystemName" xml:space="preserve">
-    <value>Liquid no crust</value>
+    <value>Liquid/Slurry with no natural crust</value>
   </data>
   <data name="LowEnergyAndProteinDietType" xml:space="preserve">
     <value>Low energy &amp; protein diet</value>
@@ -653,7 +653,7 @@
     <value>Slow growth diet</value>
   </data>
   <data name="SolidStorageHandlingSystemName" xml:space="preserve">
-    <value>Solid storage</value>
+    <value>Solid storage (stockpiled)</value>
   </data>
   <data name="Stockers" xml:space="preserve">
     <value>Stockers</value>
@@ -1325,7 +1325,7 @@
     <value>kg N kg^-1</value>
   </data>
   <data name="KilogramsPerDay" xml:space="preserve">
-    <value>kg day^-1</value>
+    <value>kg day⁻¹</value>
   </data>
   <data name="KilogramsPerHectare" xml:space="preserve">
     <value>kg ha^-1</value>
@@ -4416,7 +4416,7 @@
     <value>Free stall barn (flushing)</value>
   </data>
   <data name="EnumFreeStallBarnMilkParlourSlurryFlushing" xml:space="preserve">
-    <value>Free stall barn (milk parlour - slurry flushing)</value>
+    <value>Milking parlour (slurry - flushing)</value>
   </data>
   <data name="EnumFreeStallBarnSlurryScraping" xml:space="preserve">
     <value>Free stall barn (slurry scraping)</value>
@@ -4425,10 +4425,10 @@
     <value>Free stall barn (solid litter)</value>
   </data>
   <data name="EnumLiquidWithNaturalCrust" xml:space="preserve">
-    <value>Liquid with natural crust</value>
+    <value>Liquid/Slurry with natural crust</value>
   </data>
   <data name="EnumLiquidWithSolidCover" xml:space="preserve">
-    <value>Liquid with solid cover</value>
+    <value>Liquid/Slurry with solid cover</value>
   </data>
   <data name="EnumPitLagoonNoCover" xml:space="preserve">
     <value>Pit/lagoon (no cover)</value>
@@ -4440,10 +4440,10 @@
     <value>Slurry broadcasting</value>
   </data>
   <data name="EnumTilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (tilled land)</value>
+    <value>Solid spread (intensive tillage)</value>
   </data>
   <data name="EnumUntilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (untilled land)</value>
+    <value>Solid spread (no tillage or reduced tillage)</value>
   </data>
   <data name="TieStallSlurry" xml:space="preserve">
     <value>Tie stall (slurry)</value>
@@ -5317,5 +5317,116 @@
   </data>
   <data name="LabelPregnancy" xml:space="preserve">
     <value>Pregnancy</value>
+  </data>
+  <data name="EnumCompostedInVessel" xml:space="preserve">
+    <value>Composted in-vessel</value>
+  </data>
+  <data name="EnumSolidStorageWithOrWithoutLitter" xml:space="preserve">
+    <value>Solid storage (with or without litter)</value>
+  </data>
+  <data name="TitleDigestate" xml:space="preserve">
+    <value>Digestate</value>
+  </data>
+  <data name="LabelAmountOfDigestate" xml:space="preserve">
+    <value>Amount of digestate</value>
+  </data>
+  <data name="EnumLiquidPhase" xml:space="preserve">
+    <value>Liquid digestate (separated)</value>
+  </data>
+  <data name="EnumRaw" xml:space="preserve">
+    <value>Raw digestate (not separated)</value>
+  </data>
+  <data name="EnumSolidPhase" xml:space="preserve">
+    <value>Solid digestate (separated)</value>
+  </data>
+  <data name="LabelLiquidSolidSeparation" xml:space="preserve">
+    <value>Liquid-solid separation</value>
+  </data>
+  <data name="LabelUseLiquidSolidSeparation" xml:space="preserve">
+    <value>Apply liquid/solid separation to the digestate</value>
+  </data>
+  <data name="LabelProportionOfManureAddedToDigestor" xml:space="preserve">
+    <value>Proportion of daily manure added to digestor</value>
+  </data>
+  <data name="CubicMetersPerDay" xml:space="preserve">
+    <value>m^3 day^-1</value>
+  </data>
+  <data name="LabelVolumeOfDigestateEnteringStorage" xml:space="preserve">
+    <value>Volume of digestate entering storage</value>
+  </data>
+  <data name="CubicNormalMetersPerDay" xml:space="preserve">
+    <value>Nm³ day⁻¹</value>
+  </data>
+  <data name="LabelFlowRateAllSubstrates" xml:space="preserve">
+    <value>Flow rate (all substrates)</value>
+  </data>
+  <data name="LabelFlowRateC" xml:space="preserve">
+    <value>Flow rate (C)</value>
+  </data>
+  <data name="LabelFlowRateNitrogen" xml:space="preserve">
+    <value>Flow rate (N)</value>
+  </data>
+  <data name="LabelFlowRateON" xml:space="preserve">
+    <value>Flow rate (ON)</value>
+  </data>
+  <data name="LabelFlowRateTAN" xml:space="preserve">
+    <value>Fow rate (TAN)</value>
+  </data>
+  <data name="LabelFlowRateTotalSolids" xml:space="preserve">
+    <value>Flow rate (total solids)</value>
+  </data>
+  <data name="LabelFlowRateVolatileSolids" xml:space="preserve">
+    <value>Flow rate (volatile solids)</value>
+  </data>
+  <data name="KilowattHoursPerDay" xml:space="preserve">
+    <value>kWh day⁻¹</value>
+  </data>
+  <data name="TotalBiogasProduction" xml:space="preserve">
+    <value>Total biogas production</value>
+  </data>
+  <data name="TotalCO2Production" xml:space="preserve">
+    <value>Total CO₂ production</value>
+  </data>
+  <data name="TotalMethaneProduction" xml:space="preserve">
+    <value>Total CH₄ production</value>
+  </data>
+  <data name="TotalPrimaryEnergyProductionPotential" xml:space="preserve">
+    <value>Total primary energy production</value>
+  </data>
+  <data name="TotalRecoverableMethane" xml:space="preserve">
+    <value>Total recoverable CH₄</value>
+  </data>
+  <data name="TotalElectricityProduction" xml:space="preserve">
+    <value>Total electricity production</value>
+  </data>
+  <data name="TotalAmmonia" xml:space="preserve">
+    <value>Total NH₃</value>
+  </data>
+  <data name="TotalHeatProduced" xml:space="preserve">
+    <value>Total heat produced</value>
+  </data>
+  <data name="TotalMethane" xml:space="preserve">
+    <value>Total CH₄</value>
+  </data>
+  <data name="TotalMethaneInjectionToGasGrid" xml:space="preserve">
+    <value>Total CH₄ to gas grid</value>
+  </data>
+  <data name="TotalN2O" xml:space="preserve">
+    <value>Total N₂O</value>
+  </data>
+  <data name="CubicNormalMetersPerMonth" xml:space="preserve">
+    <value>Nm³ month⁻¹</value>
+  </data>
+  <data name="CubicNormalMetersPerYear" xml:space="preserve">
+    <value>Nm³ year⁻¹</value>
+  </data>
+  <data name="KilogramsPerMonth" xml:space="preserve">
+    <value>kg month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerMonth" xml:space="preserve">
+    <value>kWh month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerYear" xml:space="preserve">
+    <value>kWh year⁻¹</value>
   </data>
 </root>

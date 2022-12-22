@@ -47,8 +47,6 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            
-
             _farmResultsService = new FarmResultsService(new EventAggregator(), new FieldResultsService());
         }
 
@@ -196,6 +194,12 @@ namespace H.Core.Test.Services
             var replicateComponent = (DairyComponent)replicateFarm.Components[0];
             var replicateGroups = replicateComponent.Groups;
             Assert.AreEqual(farmGroups.Count, replicateGroups.Count);
+        }
+
+        [TestMethod]
+        public void TestCalculateAdResults()
+        {
+            //_farmResultsService.CalculateAdResults();
         }
 
         #endregion

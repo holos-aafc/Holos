@@ -37,7 +37,7 @@ namespace H.Core.Services.Animals
             foreach (var manureTank in _manureTanks)
             {
                 this.ResetTank(manureTank, farm);
-                this.SubtractFieldAppliedManureFromTank(manureTank, farm);
+                this.UpdateAmountsUsed(manureTank, farm);
             }
         }
 
@@ -45,7 +45,7 @@ namespace H.Core.Services.Animals
         {
             var tank = this.GetManureTankInternal(animalType, year);
             this.ResetTank(tank, farm);
-            this.SubtractFieldAppliedManureFromTank(tank, farm);
+            this.UpdateAmountsUsed(tank, farm);
 
             return tank;
         }
@@ -59,7 +59,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="manureTank">The <see cref="ManureTank"/> that will have volume and nitrogen amounts subtracted from</param>
         /// <param name="farm">The <see cref="Farm"/> where the application was made</param>
-        private void SubtractFieldAppliedManureFromTank(ManureTank manureTank, Farm farm)
+        private void UpdateAmountsUsed(ManureTank manureTank, Farm farm)
         {
             // Iterate over each field and total the land applied manure
             foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)

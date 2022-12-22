@@ -19,6 +19,8 @@ namespace H.Core.Services
         private readonly IMapper _harvestPeriodMapper;
         private readonly IMapper _manureApplicationViewItemMapper;
         private readonly IMapper _fertilizerApplicationViewItemMapper;
+        private readonly IMapper _hayImportViewItemMapper;
+        private readonly IMapper _digestateViewItemMapper;
 
         #endregion
 
@@ -66,11 +68,25 @@ namespace H.Core.Services
 
             _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
 
+            var hayImportViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<HayImportViewItem, HayImportViewItem>();
+            });
+
+            _hayImportViewItemMapper = hayImportViewItemMapper.CreateMapper();
+
+            var digestateViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>();
+            });
+
+            _digestateViewItemMapper = digestateViewItemMapper.CreateMapper();
+
+
             var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
-                
             });
             
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
@@ -148,6 +164,14 @@ namespace H.Core.Services
 
                 to.CropViewItems.Add(copiedViewItem);
 
+                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                {
+                    var copiedManureApplicationViewItem = new ManureApplicationViewItem();
+
+                    _manureApplicationViewItemMapper.Map(manureApplicationViewItem, copiedManureApplicationViewItem);
+                    copiedViewItem.ManureApplicationViewItems.Add(copiedManureApplicationViewItem);
+                }
+
                 foreach (var harvestViewItem in cropViewItem.HarvestViewItems)
                 {
                     var copiedHarvestViewItem = new HarvestViewItem();
@@ -156,20 +180,19 @@ namespace H.Core.Services
                     copiedViewItem.HarvestViewItems.Add(copiedHarvestViewItem);
                 }
 
+                foreach (var hayImportViewItem in cropViewItem.HayImportViewItems)
+                {
+                    var copiedHayImportItem = new HayImportViewItem();
+
+
+                }
+
                 foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
                 {
                     var copiedGrazingViewItem = new GrazingViewItem();
 
                     _grazingPeriodMapper.Map(grazingViewItem, copiedGrazingViewItem);
                     copiedViewItem.GrazingViewItems.Add(copiedGrazingViewItem);
-                }
-
-                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
-                {
-                    var copiedManureApplicationViewItem = new ManureApplicationViewItem();
-
-                    _manureApplicationViewItemMapper.Map(manureApplicationViewItem, copiedManureApplicationViewItem);
-                    copiedViewItem.ManureApplicationViewItems.Add(copiedManureApplicationViewItem);
                 }
 
                 foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)

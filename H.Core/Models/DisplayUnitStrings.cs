@@ -115,7 +115,16 @@ namespace H.Core.Models
         private string _bushelString;
         private string _kilogramsPerGroupPerTimePeriodString;
         private string _kilogramsCarbonPerTreeTypeString;
+        private string _cubicMetersPerDayString;
         private string _fractionString;
+        private string _cubicNormalMetersPerDayString;
+        private string _cubicNormalMetersPerMonthString;
+        private string _cubicNormalMetersPerYearString;
+        private string _kilowattHoursPerDayString;
+        private string _kilogramsPerMonthString;
+        private string _kilowattHoursPerMonthString;
+        private string _kilowattHoursPerYearString;
+
 
         #endregion
 
@@ -779,6 +788,54 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsN2NPerFieldString, value);
         }
 
+        public string CubicMetersPerDayString
+        {
+            get => _cubicMetersPerDayString;
+            set => SetProperty(ref _cubicMetersPerDayString, value);
+        }
+
+        public string CubicNormalMetersPerDayString
+        {
+            get => _cubicNormalMetersPerDayString;
+            set => SetProperty(ref _cubicNormalMetersPerDayString, value);
+        }
+
+        public string KilowattHoursPerDayString
+        {
+            get => _kilowattHoursPerDayString;
+            set => SetProperty(ref _kilowattHoursPerDayString, value);
+        }
+
+        public string KilogramsPerMonthString
+        {
+            get => _kilogramsPerMonthString;
+            set => SetProperty(ref _kilogramsPerMonthString, value);
+        }
+
+        public string CubicNormalMetersPerMonthString
+        {
+            get => _cubicNormalMetersPerMonthString;
+            set => SetProperty(ref _cubicNormalMetersPerMonthString, value);
+        }
+
+        public string KilowattHoursPerMonthString
+        {
+            get => _kilowattHoursPerMonthString;
+            set => SetProperty(ref _kilowattHoursPerMonthString, value);
+        }
+
+        public string CubicNormalMetersPerYearString
+        {
+            get => _cubicNormalMetersPerYearString;
+            set => SetProperty(ref _cubicNormalMetersPerYearString, value);
+        }
+
+        public string KilowattHoursPerYearString
+        {
+            get => _kilowattHoursPerYearString;
+            set => SetProperty(ref _kilowattHoursPerYearString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -904,6 +961,14 @@ namespace H.Core.Models
                 KilogramsNONPerFieldString = WrapString(Resources.KilogramsNONPerField);
                 MillimetersPerHectareString = WrapString(Resources.MillimetersPerHectare);
                 KilogramsNO3PerFieldString = WrapString(Resources.KilogramsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
+                KilogramsPerMonthString = WrapString(Resources.KilogramsPerMonth);
+                CubicNormalMetersPerMonthString = WrapString(Resources.CubicNormalMetersPerMonth);
+                KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
+                CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
+                KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
             }
             else
             {
@@ -1016,6 +1081,14 @@ namespace H.Core.Models
                 KilogramsNONPerFieldString = WrapString(Resources.PoundsNONPerField);
                 MillimetersPerHectareString = WrapString(Resources.InchesPerAcre);
                 KilogramsNO3PerFieldString = WrapString(Resources.PoundsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
+                KilogramsPerMonthString = WrapString(Resources.KilogramsPerMonth);
+                CubicNormalMetersPerMonthString = WrapString(Resources.CubicNormalMetersPerMonth);
+                KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
+                CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
+                KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
             }
         }
 

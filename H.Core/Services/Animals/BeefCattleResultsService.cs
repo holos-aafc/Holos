@@ -239,7 +239,6 @@ namespace H.Core.Services.Animals
                 previousDaysEmissions: previousDaysEmissions,
                 temperature: temperature);
 
-            // Equation 4.3.5-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
                 manureLeachingNitrogenEmission: dailyEmissions.ManureN2ONLeachingEmission);

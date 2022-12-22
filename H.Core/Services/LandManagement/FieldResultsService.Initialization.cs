@@ -288,7 +288,6 @@ namespace H.Core.Services.LandManagement
             {
                 viewItem.Yield = smallAreaYield.Yield;
                 viewItem.CalculateDryYield();
-
             }
             else
             {
