@@ -77,6 +77,9 @@ namespace H.Core.Services.LandManagement
                 cropViewItems: viewItems,
                 farm: farm);
 
+            // Assign yields to run in period items
+            this.AssignYieldToAllYears(fieldSystemComponent.RunInPeriodItems, farm);
+
             // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
             this.UpdatePercentageReturnsForPerennials(
                 viewItems: viewItems);
@@ -425,8 +428,6 @@ namespace H.Core.Services.LandManagement
             Farm farm,
             Guid fieldSystemGuid)
         {
-            
-
             var fieldSystemComponent = farm.GetFieldSystemComponent(fieldSystemGuid);
 
             // Check if user specified ICBM or Tier 2 carbon modelling

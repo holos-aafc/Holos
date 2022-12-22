@@ -116,6 +116,11 @@ namespace H.Core.Calculators.Infrastructure
                 DateCreated = dailyEmissions.DateTime,
             };
 
+            if (managementPeriod.ManureDetails.StateType != ManureStateType.AnaerobicDigester)
+            {
+                return substrateFlowRate;
+            }
+
             // Equation 4.8.1-16
             substrateFlowRate.TotalMassFlow = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
 
@@ -163,7 +168,7 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.1-25
             substrateFlowRate.CarbonFlow = dailyEmissions.AmountOfCarbonInStoredManure * component.ProportionTotalManureAddedToAD;
 
-            this.CalculateBiogassProduction(substrateFlowRate, biogasData, component);
+            this.CalculateBiogasProduction(substrateFlowRate, biogasData, component);
 
             return substrateFlowRate;
         }
@@ -182,6 +187,11 @@ namespace H.Core.Calculators.Infrastructure
                 SubstrateType = SubstrateType.FreshManure,
                 AnimalType = managementPeriod.AnimalType,
             };
+
+            if (managementPeriod.ManureDetails.StateType != ManureStateType.AnaerobicDigester)
+            {
+                return substrateFlowRate;
+            }
 
             // Equation 4.8.1-2
             substrateFlowRate.TotalMassFlow = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
@@ -214,7 +224,7 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.1-9
             substrateFlowRate.CarbonFlow = dailyEmissions.CarbonFromManureAndBedding * component.ProportionTotalManureAddedToAD;
 
-            this.CalculateBiogassProduction(substrateFlowRate, biogasData, component);
+            this.CalculateBiogasProduction(substrateFlowRate, biogasData, component);
 
             return substrateFlowRate;
         }
@@ -549,7 +559,7 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction = digestorDailyOutput.FlowRateSolidFraction;
         }
 
-        public void CalculateFlows(
+        public void CalculateTotalFlows(
             DigestorDailyOutput digestorDailyOutput, 
             List<SubstrateFlowInformation> flowInformationForAllSubstrates)
         {
@@ -575,7 +585,7 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.CarbonFlowInDigestate = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
         }
 
-        public void CalculateBiogassProduction(
+        public void CalculateBiogasProduction(
             SubstrateFlowInformation substrateFlowRate,
             BiogasAndMethaneProductionParametersData biogasData, 
             AnaerobicDigestionComponent component)
@@ -641,7 +651,6 @@ namespace H.Core.Calculators.Infrastructure
 
             // Equation 4.8.2-15
             digestorDailyOutput.MethaneToGrid = digestorDailyOutput.TotalRecoverableMethane * 0.0081;
-
         }
 
         public DigestorDailyOutput CalculateResultsInternal(SubstrateFlowInformation cropResidueFlows,
@@ -675,13 +684,13 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.2-1
             var flowOfBiodegradableSolids = flowInformationForAllSubstrates.Sum(x => x.BiodegradableSolidsFlow);
 
+            this.CalculateTotalFlows(adOutput, flowInformationForAllSubstrates);
+
             this.CalculateTotalBiogassProduction(adOutput, flowInformationForAllSubstrates);
 
             /*
              * Production of digestate and its composition
              */
-
-            this.CalculateFlows(adOutput, flowInformationForAllSubstrates);
 
             this.CalculateLiquidSolidSeparation(adOutput, component);
 
@@ -711,10 +720,10 @@ namespace H.Core.Calculators.Infrastructure
             }
 
             //var cropResidueFlows = this.GetFarmResidueFlowRates(component);
-            var freshManureFlows = this.GetFreshManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
-            var storedManureFlows = this.GetStoredManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
+            var freshManureFlow = this.GetFreshManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
+            var storedManureFlow = this.GetStoredManureFlowRateFromAnimals(component, dailyEmissions, managementPeriod);
 
-            var dailyResults =  this.CalculateResultsInternal(new SubstrateFlowInformation(), freshManureFlows, storedManureFlows, component, farm, dailyEmissions.DateTime);
+            var dailyResults =  this.CalculateResultsInternal(new SubstrateFlowInformation(), freshManureFlow, storedManureFlow, component, farm, dailyEmissions.DateTime);
 
             return dailyResults;
         }
@@ -739,7 +748,86 @@ namespace H.Core.Calculators.Infrastructure
                 }
             }
 
+            // Calculate flows for each day
+            // Get list of all flows
+            // Sum up all flows for each day
+            // Get final results
+
             return results;
+        }
+
+        public List<DigestorDailyOutput> CalculateResults_NEW(
+            Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+            var results = new List<DigestorDailyOutput>();
+
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                return results;
+            }
+
+            var flows = this.GetFlowsFromDailyResults(farm, animalComponentEmissionsResults, component);
+
+            // Sum flows that occur on same day.
+            this.CombineSubstrateFlowsOfSameTypeOnSameDay(flows);
+
+            // Calculate final results
+            
+
+            return results;
+        }
+
+        public List<SubstrateFlowInformation> GetFlowsFromDailyResults(
+            Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
+            AnaerobicDigestionComponent component)
+        {
+            var flows = new List<SubstrateFlowInformation>();
+
+            foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
+            {
+                foreach (var animalGroupResults in animalComponentEmissionsResult.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
+                    {
+                        foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
+                        {
+                            var freshManureFlow = this.GetFreshManureFlowRateFromAnimals(component, groupEmissionsByDay, groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod);
+                            flows.Add(freshManureFlow);
+                        }
+                    }
+                }
+            }
+
+            return flows;
+        }
+
+        /// <summary>
+        /// We take all flows and combine any flows that occur on the same day and that are of the same type of substrate. For example,
+        /// if there are two flows of dairy manure, we combine them together into a single flow. If the substrate are not of the same type
+        /// we do not combine them and return two separate items.
+        /// </summary>
+        public List<DigestorDailyOutput> CombineSubstrateFlowsOfSameTypeOnSameDay(List<SubstrateFlowInformation> substrateFlows)
+        {
+            var result = new List<DigestorDailyOutput>();
+
+            // Sum flows that occur on same day.
+            var flowsGroupedByDay = substrateFlows.GroupBy(x => x.DateCreated.Date);
+            foreach (var byDayGroup in flowsGroupedByDay)
+            {
+                // Here, all the flows are for the same day
+
+                var dailyOutput = new DigestorDailyOutput();
+                var flowsForDate = byDayGroup.Where(x => x.DateCreated.Date == byDayGroup.Key).ToList();
+
+                this.CalculateTotalFlows(dailyOutput, flowsForDate);
+
+                result.Add(dailyOutput);
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -406,7 +406,7 @@ namespace H.Core.Services.LandManagement
                     farm: farm,
                     viewItemsForRotation: viewItems,
                     startYearOfField: startYear,
-                    viewItemsForField: result);
+                    viewItemsForField: result, fieldComponent: fieldSystemComponent);
 
                 fieldSystemComponent.RunInPeriodItems.Clear();
                 fieldSystemComponent.RunInPeriodItems.AddRange(runInPeriodItems);
@@ -422,12 +422,12 @@ namespace H.Core.Services.LandManagement
         /// <param name="viewItemsForRotation">The crops that define a rotation</param>
         /// <param name="startYearOfField"></param>
         /// <param name="viewItemsForField">The view items for the entire field history</param>
+        /// <param name="fieldComponent"></param>
         /// <returns>A collection of run in period items</returns>
-        public List<CropViewItem> GetRunInPeriodItems(
-            Farm farm, 
-            IEnumerable<CropViewItem> viewItemsForRotation, 
+        public List<CropViewItem> GetRunInPeriodItems(Farm farm,
+            IEnumerable<CropViewItem> viewItemsForRotation,
             int startYearOfField,
-            IEnumerable<CropViewItem> viewItemsForField)
+            IEnumerable<CropViewItem> viewItemsForField, FieldSystemComponent fieldComponent)
         {
             var moduloCounter = 0;
             var runInPeriodItems = new List<CropViewItem>();
@@ -454,6 +454,7 @@ namespace H.Core.Services.LandManagement
                 var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(itemAtYear, indexYear);
                 createdViewItem.Year = indexYear;
                 createdViewItem.DetailViewItemToComponentSelectionViewItemMap = itemAtYear.Guid;
+                createdViewItem.FieldSystemComponentGuid = fieldComponent.Guid;
 
                 // Add to list of run in period items
                 runInPeriodItems.Add(createdViewItem);
