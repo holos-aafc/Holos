@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Core.Models.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
@@ -20,33 +21,35 @@ namespace H.Core.Models.Infrastructure
         public AnimalType AnimalType { get; set; }
         public FarmResidueType FarmResidueType { get; set; }
         public SubstrateType SubstrateType { get; set; }
+        public ManagementPeriod ManagementPeriod { get; set; }
+        public AnaerobicDigestionComponent Component { get; set; }
 
         /// <summary>
         /// (kg day^-1)
         /// </summary>
-        public double TotalMassFlow { get; set; }
+        public double TotalMassFlowOfSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)
         /// </summary>
-        public double VolatileSolidsFlow { get; set; }
+        public double VolatileSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)
         /// </summary>
-        public double TotalSolidsFlow { get; set; }
+        public double TotalSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)
         /// </summary>
-        public double NitrogenFlow { get; set; }
+        public double NitrogenFlowOfSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)
         /// </summary>
-        public double CarbonFlow { get; set; }
-        public double OrganicNitrogenFlow { get; set; }
-        public double TotalAmmonicalNitrogenFlow { get; set; }
+        public double CarbonFlowOfSubstrate { get; set; }
+        public double OrganicNitrogenFlowOfSubstrate { get; set; }
+        public double TanFlowOfSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)

@@ -1186,6 +1186,18 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
+        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear()
+        {
+            var totalNitrogen = 0d;
+
+            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year))
+            {
+                totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
+            }
+
+            return totalNitrogen;
+        }
+
         /// <summary>
         /// Get all manure applications made on all fields on this date using the specified type of manure
         /// </summary>

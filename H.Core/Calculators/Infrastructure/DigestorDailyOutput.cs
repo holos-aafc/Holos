@@ -18,19 +18,19 @@ namespace H.Core.Calculators.Infrastructure
         /// </summary>
         public double TotalFlowOfDegradedVolatileSolids { get; set; }
 
-        public double FlowRateOfAllSubstrates { get; set; }
+        public double FlowRateOfAllSubstratesInDigestate { get; set; }
 
-        public double FlowOfTotalSolids { get; set; }
+        public double FlowRateOfAllTotalSolidsInDigestate { get; set; }
 
-        public double FlowOfVolatileSolids { get; set; }
+        public double FlowRateOfAllVolatileSolidsInDigestate { get; set; }
 
         public double FlowRateOfTotalNitrogenInDigestate { get; set; }
 
-        public double TanFlowInDigestate { get; set; }
+        public double FlowOfAllTanInDigestate { get; set; }
 
-        public double OrganicNitrogenFlowInDigestate { get; set; }
+        public double FlowRateOfAllOrganicNitrogenInDigestate { get; set; }
 
-        public double CarbonFlowInDigestate { get; set; }
+        public double FlowOfAllCarbon { get; set; }
 
         /*
          * Liquid/solid separation

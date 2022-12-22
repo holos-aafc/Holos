@@ -144,8 +144,7 @@
     <Compile Include="Providers\Animals\Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_36_Livestock_Emission_Conversion_Factors_Provider_Test.cs" />
-    <Compile Include="Providers\Animals\Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider_Test.cs" />
-    <Compile Include="Providers\Animals\Table_17_Dairy_Cattle_Feeding_Activity_Coefficient_Provider_Test.cs" />
+    <Compile Include="Providers\Animals\Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_41_Poultry_NExcretionRate_Parameter_Values_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_43_Beef_Dairy_Default_Emission_Factors_Provider_Test.cs" />

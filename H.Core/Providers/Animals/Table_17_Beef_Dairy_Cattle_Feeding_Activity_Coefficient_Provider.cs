@@ -8,12 +8,12 @@ using H.Core.Tools;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 20. Feeding activity coefficients (Ca) for beef cattle
+    /// Table 17. Feeding activity coefficients (Ca) for beef cattle
     /// Source: IPCC (2019, Table 10.5).
     /// </summary>
-    public class Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider : IFeedingActivityCoefficientProvider
+    public class Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider : IFeedingActivityCoefficientProvider
     {
-        public Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider()
+        public Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider()
         {
             HTraceListener.AddTraceListener();
         }
@@ -54,7 +54,7 @@ namespace H.Core.Providers.Animals
                     {
                         FeedingActivityCoefficient = 0,
                     };
-                    System.Diagnostics.Trace.TraceError($"{nameof(Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider)}.{nameof(Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider.GetByHousing)}" +
+                    System.Diagnostics.Trace.TraceError($"{nameof(Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider)}.{nameof(Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider.GetByHousing)}" +
                         $" unable to get data for housing type: {housingType}." +
                         $" Returning default value of {defaultValue}.");
                     return defaultValue;

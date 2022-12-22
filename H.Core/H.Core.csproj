@@ -425,7 +425,6 @@
     <Compile Include="Providers\Animals\Table_21_Average_Milk_Production_Dairy_Cows_Data.cs" />
     <Compile Include="Providers\Animals\Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs" />
     <Compile Include="Providers\Animals\Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider.cs" />
-    <Compile Include="Providers\Animals\Table_17_Dairy_Cattle_Feeding_Activity_Coefficient_Provider.cs" />
     <Compile Include="Providers\Animals\DefaultAmmoniaEmissionFactorForPoultryLandAppliedManureProvider.cs" />
     <Compile Include="Providers\Animals\DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider.cs" />
     <Compile Include="Providers\Animals\Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data.cs" />
@@ -474,7 +473,7 @@
     <Compile Include="Providers\Animals\Table_32_Swine_VS_Nitrogen_Excretion_Factors_Provider.cs" />
     <Compile Include="Providers\Animals\Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data.cs" />
     <Compile Include="Providers\Animals\Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider.cs" />
-    <Compile Include="Providers\Animals\Table_17_Beef_Cattle_Feeding_Activity_Coefficient_Provider.cs" />
+    <Compile Include="Providers\Animals\Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider.cs" />
     <Compile Include="Providers\Animals\Table_17_Cattle_Feeding_Activity_Coefficient_Data.cs" />
     <Compile Include="Providers\Animals\Table_33_Daily_Feed_Intake_Swine_Data.cs" />
     <Compile Include="Providers\Animals\Table_33_Daily_Feed_Intake_Swine_Provider.cs" />

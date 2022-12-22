@@ -191,7 +191,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var result = _sut.CalculateResults(farm, groupEmissionsByDay, managementPeriod);
 
-            Assert.AreEqual(0, result.FlowRateOfAllSubstrates);
+            Assert.AreEqual(0, result.FlowRateOfAllSubstratesInDigestate);
         }
 
         [TestMethod]
@@ -215,7 +215,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var result = _sut.CalculateResults(farm, groupEmissionsByDay, managementPeriod);
 
-            Assert.IsTrue(result.FlowRateOfAllSubstrates > 0);
+            Assert.IsTrue(result.FlowRateOfAllSubstratesInDigestate > 0);
         }
 
         [TestMethod]
@@ -229,7 +229,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             var results = _sut.CalculateResults(_farm, _animalComponentResults);
 
-            Assert.IsTrue(results.Any());
+            //Assert.IsTrue(results.Any());
         }
 
         [TestMethod]
@@ -252,22 +252,15 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             var results = _sut.GetFreshManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod1);
 
-            Assert.AreEqual(0.033734693877551, results.CarbonFlowInDigestate, 0.00001);
+            Assert.AreEqual(0.06, results.CarbonFlowOfSubstrate, 0.00001);
         }
 
         [TestMethod]
         public void GetStoredManureFlowRateFromAnimalsTest()
         {
-            // here 
             var results = _sut.GetStoredManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod1);
 
-            Assert.AreEqual(0.0437755102040816, results.DegradedVolatileSolids,0.00001);
-        }
-
-        [TestMethod]
-        public void TestCalculateResultsFromTwoSeparateMangementPeriodsCombinesFlows()
-        {
-            var results = _sut.CalculateResults_NEW(_farm, _animalComponentResults);
+            Assert.AreEqual(0.1, results.VolatileSolidsFlowOfSubstrate,0.00001);
         }
 
         [TestMethod]
@@ -277,6 +270,38 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             // 2 daily emissions from the beef results, 2 from the dairy results
             Assert.AreEqual(4, results.Count);
+        }
+
+        [TestMethod]
+        public void CalculateTotalFlowsTest()
+        {
+            var flowRates = new List<SubstrateFlowInformation>()
+            {
+                new SubstrateFlowInformation() {TotalMassFlowOfSubstrate = 30},
+                new SubstrateFlowInformation() {TotalMassFlowOfSubstrate = 20},
+            };
+
+            var dailyOutput = new DigestorDailyOutput();
+
+            _sut.CalculateTotalProductionFromAllSubstratesOnSameDay(dailyOutput, flowRates);
+
+            Assert.AreEqual(50, dailyOutput.FlowRateOfAllSubstratesInDigestate);
+        }
+
+        [TestMethod]
+        public void Integration()
+        {
+            var substrateFlows = _sut.GetFlowsFromDailyResults(_farm, _animalComponentResults, _component);
+            foreach (var substrateFlowInformation in substrateFlows)
+            {
+                _sut.CalculateDailyBiogasProductionFromSingleSubstrate(substrateFlowInformation);
+                _sut.CalculateFlowsInDigestateFromSingleSubstrate(substrateFlowInformation);
+            }
+
+            // Combine the total flows from all substrates and biogas production from same day
+            var combinedDailyOutputs = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows);
+
+            // whats next?
         }
 
         #endregion

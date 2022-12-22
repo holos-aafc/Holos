@@ -370,7 +370,7 @@ namespace H.Core.Calculators.Nitrogen
                 viewItem: viewItem,
                 farm: farm);
 
-            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockInYear();
+            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear();
 
             var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
 
@@ -453,7 +453,7 @@ namespace H.Core.Calculators.Nitrogen
             var totalNitrogenAvailableForLandApplication = animalComponentEmissionsResults.TotalNitrogenAvailableForLandApplication();
 
             // This is the total amount of N that the user has specified is applied to all fields
-            var totalManureNitrogenAppliedToAllFields = itemsInYear.Sum(x => x.GetTotalManureNitrogenAppliedFromLivestockInYear());
+            var totalManureNitrogenAppliedToAllFields = itemsInYear.Sum(x => x.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear());
 
             // The total N after all applications and exports have been subtracted
             var totalNitrogenRemaining = this.CalculateTotalNitrogenFromLandManureRemaining(

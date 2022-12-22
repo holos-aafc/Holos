@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Animals
 {
     [TestClass]
-    public class Table_17_Dairy_Cattle_Feeding_Activity_Coefficient_Provider_Test
+    public class Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider_Test
     {
-        private Table_17_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _provider;
+        private Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _provider;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new Table_17_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
+            _provider = new Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
         }
 
         [TestMethod]

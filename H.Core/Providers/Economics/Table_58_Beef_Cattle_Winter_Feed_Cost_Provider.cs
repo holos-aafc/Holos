@@ -13,7 +13,7 @@ using H.Infrastructure;
 namespace H.Core.Providers.Economics
 {
     /// <summary>
-    /// Table 61. Beef cattle – Fed/Winter feed
+    /// Table 58. Beef cattle – Fed/Winter feed
     /// </summary>
     public class Table_58_Beef_Cattle_Winter_Feed_Cost_Provider
     {
