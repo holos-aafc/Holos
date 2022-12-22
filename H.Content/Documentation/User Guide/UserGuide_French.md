@@ -871,7 +871,7 @@ Chaque composante est classée par type et comprend ce qui suit : **Gestion des 
 
 ## Composantes de la gestion des terres
  
-### Composante sur le terrain
+### Composant de champ
 
 * Une composante sur le terrain contient des données comme les semis, la superficie des terres et le travail du sol (voir la figure 6.4). Les cultures sont classées selon leur type de croissance (c.-à-d. annuelle, vivace, etc.)
 * Pour entrer des données précises sur le champ, vous devez accéder à l’Affichage de l’onglet contenant les propriétés **Renseignements généraux, Fumier et Résidus** pour le champ.
@@ -1095,7 +1095,7 @@ Pour chaque type d'arbre dans vos rangées de brise-vent, il faut remplir un ens
 	</em>
 </p>
 <br>
-
+<br>
 
 ##### Résultats du brise-vent
 
@@ -1104,20 +1104,9 @@ Pour chaque type d'arbre dans vos rangées de brise-vent, il faut remplir un ens
 
 
 
+### Composante Crop Rotation (rotation des cultures)
 
-
-
-
-<!---
-This is the start of section that needs to be translated
--->
-[Translation Section 2]: <> (Section 2 Begin)
-
-
-
-### Crop Rotation Component
-
-A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. For example, suppose a farm contains multiple field components that are added to represent the rotation of crops on a field over the years. In that case, a crop rotation component can represent the same information through a single entry. This allows for an easier and more manageable representation of fields and crops on the farm.
+La composante Crop Rotation (rotation des cultures) est similaire à la composante Field (champ), et elle permet la représentation de plusieurs composantes Field (champs) pour une même exploitation.  Supposons par exemple qu’une exploitation contienne plusieurs composantes Field (champ), qui, ensemble, représentent la rotation des cultures sur plusieurs années dans un même champ.  Dans un tel cas, une composante Crop Rotation (rotation des cultures) peut comporter une même donnée qui aura été entrée une seule fois.  Cela rend la représentation des champs et des cultures de l’exploitation plus conviviale et plus facile à gérer. 
 
 
 <br>
@@ -1125,157 +1114,160 @@ A crop rotation component is similar to a field component and allows the represe
  <img src="../../Images/UserGuide/en/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
     <br>
     <em>
-		Figure 6.58 - Crop Rotation Component
+		Figure 6.58 - Composante Crop Rotation (rotation des cultures)  
 	</em>
 </p>
 <br>
 
 
-The crop rotation component allows one to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
+La composante Crop Rotation (rotation des cultures) vous permet de déterminer aisément la croissance d’une culture lors d’une année particulière, ce qui détermine automatiquement la rotation d’après le nombre de cultures choisi. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
     <br>
     <em>
-		Figure 6.59 – Crop Rotation - Setting up the crops
+		Figure 6.59 – Crop rotation (rotation des cultures) – Détermination des cultures
 		<br>
-		A: The year and crop information.
+		A: Année et données sur les cultures
 		<br>
-		B: Arrow buttons allow adjustment of the crops in the rotation.
+		B: Les boutons à flèche permettent l’ajustement des cultures dans la rotation.
 		<br>
-		C: The current rotation for each field.
+		C: Rotation en cours pour chaque champ.  
 	</em>
 </p>
 <br>
 
-Most of the remaining settings in the crop rotation component are similar to the [field component mentioned earlier](#field-component).
+La plupart des autres paramètres dans la composante Crop Rotation (rotation des cultures) sont similaires à ceux de la [composante Field (champ) décrite plus haut](#composant-de-champ).
 
-An additional settings tab is present in the crop rotation component that is missing from the field component, i.e., 'Winter & Cover Crops'. This tab provides options to manage and change settings related to the cover crop for each field.
+La composante Crop Rotation (rotation des cultures) comporte toutefois un onglet additionnel, l’onglet Winter & Cover Crops (cultures d’hiver et de couverture).  La page d’onglet correspondante offre des options pour gérer et modifier les paramètres liés à la culture de couverture de chaque champ. 
 
-Adding a winter/cover/undersown crop to any specific crop will enable this tab for that particular crop.
+L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe quelle culture précise active cette page d’onglet pour la culture visée. 
+
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
     <br>
     <em>
-		Figure 6.60 - Winter & Cover Crops settings
+		Figure 6.60 - aramètres des cultures d’hiver et de couverture  
 	</em>
 </p>
 <br>
 <br>
 
 
-## Animal Components
+## Composantes pour les animaux
 
--	The animal components are separated into the following categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
--	All the results for each animal component will be displayed on a **single results page.** 
--	However, each animal component requires their own set of data inputs.
--	This section will go through how to enter data for each component category.
+-	Les composantes pour les animaux sont réparties selon les catégories suivantes :  **Beef Production (production bovine), Dairy (production laitière), Swine (porcs), Poultry (volaille), Sheep (moutons) et Other Livestock (autres animaux d’élevage)**. 
+- Tous les résultats de toutes les composantes pour les animaux sont affichés dans une **unique page de résultats**.
+- Cependant, chaque composante pour les animaux exige l’entrée de son propre ensemble de données. 
+- La présente section indique comment entrer les données pour chacune des différentes composantes pour les animaux. 
+
 
 <br>
 
-### Setting Up Animal Components
+### Paramétrage des composantes pour les animaux 
 
--	The animal component is very similar in terms of the structure and data required to create the components.
--	Each **animal component** consists of **one or more animal groups (e.g. heifers vs steers)**, where **each animal group has one or more management periods.**
-- The **management period** is separated into categories and allows the user to enter data for **General, Diet, Housing and Manure** details for each **animal group.**
+-	La structure et les données d’une composante pour les animaux ressemblent beaucoup à celles des autres composantes. 
+-	Chaque **composante pour un animal** concerne un ou plusieurs groupes d’animaux (p. ex. génisses vs bouvillons); **chaque groupe d’animaux a une ou plusieurs périodes de gestion. **
+-	La **période de gestion** est divisée en catégories et permet à l’utilisateur d’entrer des **données générales** et des **données sur l’alimentation, les bâtiments d’élevage et le fumier** pour chaque groupe d’animaux. 
+
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
     <br>
     <em>
-		Figure 6.15 - Beef Stockers & Backgrounders Layout showcasing an animal component.
+		Figure 6.15 - Composante pour les animaux Beef Stockers & Backgrounders 
 		<br>
-		A: A list of animal groups that have been added to the animal component.
+		A: Liste des groupes d’animaux ayant été ajoutés à une composante pour les animaux.
 		<br>
-		B: A list of management periods for a selected animal group.
+		B : Liste des périodes de gestion pour un groupe d’animaux sélectionnés.    
 		<br>
-		C: The details for the selected management period.
+		C : Détails pour la période de gestion sélectionnée.   
 	</em>
 </p>
 <br>
 
-#### Groups
+#### Groupes 
 
--	**Each** animal component can have **one or more animal groups**.
--	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it, e.g. different housing, diet, manure management, etc.
--	To **add a group** to your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
--	The added group will appear in under “**Step 1**”
--	You can **remove an animal group** by clicking on the “**X**” beside the animal group you would like to remove
--	You can **also sort the groups alphabetically** by clicking on the “**Group name**” header.
--	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. The selected animal group will be indicated by a “>” symbol in the left column.
--	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name.
+- **Chaque** composante pour les animaux peut comporter **un ou plusieurs groupes d’animaux**. 
+- Le fait que **chaque groupe d’animaux** soit associé à des intrants et des pratiques précis ou différents, p. ex. un bâtiment d’élevage, une ration ou une gestion du fumier différents est une **considération clé**. 
+- Pour **ajouter un groupe** à votre composante pour les animaux, utilisez le bouton dans le coin supérieur droit de la section des groupes d’animaux. 
+- Le groupe ajouté apparaît sous la mention **Step 1 (étape 1)**. 
+- Vous pouvez **supprimer un groupe d’animaux** en cliquant sur le « **X** » sous le groupe visé. 
+- Vous pouvez **également trier les groupes en ordre alphabétique** en cliquant sur l’en-tête **Group name (nom du groupe)**. 
+- Si vous voulez visualiser les détails pour un groupe d’animaux, sélectionnez le groupe en cliquant n’importe où dans la section des groupes.  Le groupe d’animaux sélectionné sera indiqué par un symbole « > » dans la colonne de gauche. 
+- Vous pouvez **ajuster le nom de chacun de vos groupes d’animaux** en cliquant sur le nom à modifier, puis en entrant votre nom personnalisé. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-16.png" alt="Figure6-16"/>
     <br>
     <em>
-		Figure 6.16 - Animal Groups
+		Figure 6.16 - Groupes d’animaux.
 		<br>
-		A: All the animal groups currently added. Each row contains a single group.
+		A: Tous les groupes d’animaux actuellement ajoutés.  Chaque ligne contient un seul groupe.
 		<br>
-		B: A specific animal group - Steers
+		B: Groupe d’animaux précis – Bouvillons.
 		<br>
-		C: Click the **Group name** heading to sort the names.
+		C: Cliquer sur l’en-tête Group name (nom du groupe) pour trier les noms.
 		<br>
-		D: Buttons to add an animal group
+		D: Boutons pour ajouter un groupe d’animaux.
 	</em>
 </p>
 <br>
 
 
-#### Management Period
+#### *Période de gestion* 
 
--	A management period is a time duration for an animal group where operation and management details specific to that group can be entered and managed.
--	Each **animal group** can have **one or more** management periods.
--	To view an animal group's management period(s),** please select the group under "Step 1"**.
--	You can adjust the **name, start date** and the **number of days** for each management period.
--	Please click the "**Add Management Period**" button below "**Step 2**" to add a new management period to your selected animal group.
--	To **remove a management period**, click the **X** button beside the period you would like to remove.
--	The details for a management period can be split into four categories: **General, Diet, Housing and Manure**.
--	Please click on the period you would like to view to see the details for that management period.
+-	Une période de gestion est une période associée à un groupe d’animaux et pour laquelle des détails sur l’exploitation et la gestion du groupe peuvent être entrés et gérés. 
+- Chaque **groupe d'animaux** peut être associé **à une ou à plusieurs** périodes de gestion.
+- Pour visualiser les périodes de gestion associées à un groupe d'animaux, sélectionnez le groupe voulu sous la mention Step 1 (étape 1).
+- Vous pouvez ajuster le **nom** , la **date de début** et le **nombre de jours** pour chaque période de gestion.
+- Cliquez sur le bouton **Add Management Period (ajouter une période de gestion)**, sous la mention **Add Management Period (ajouter une période de gestion)**, pour ajouter une nouvelle période de gestion au groupe d'animaux sélectionné.
+- Pour **supprimer une période de gestion** , cliquez sur le bouton **X** à côté de la période voulue.
+- On peut classer les détails d'une période de gestion en quatre catégories : **General (général), Diet (ration), Housing (bâtiments d'élevage)** et **Manure (fumier)**.
+- Cliquez sur la période voulue pour visualiser les détails de cette période de gestion.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
     <br>
     <em>
-		Figure 6.17 - Management Periods for Animal Group
+		Figure 6.17 - Périodes de gestion pour le groupe d'animaux. 
 		<br>
-		A: The selected animal group
+		A: Groupe d'animaux sélectionné. 
 		<br>
-		B: Managements periods for the selected animal group
+		B : Périodes de gestion pour le groupe d'animaux sélectionné.
 		<br>
-		C: Click here to add a new management period for your animal group
+		C : Cliquer ici pour ajouter une nouvelle période de gestion du groupe d'animaux voulu.
 	</em>
 </p>
 
--	To see additional information for each section, click “Yes” beside the “Show Additional Information” header.
+-	Pour visualiser des renseignements additionnels sur chaque section, cliquez sur Yes (oui), à côté de l'en-tête Show Additional Information (visualiser des données additionnelles).
 
 <br>
 <br>
 
 
-### Beef Production
+### Production bovine
 
-The beef production category contains the following animal components: 
+La catégorie de la production bovine contient les composantes pour les animaux suivantes :
 
 <br>
 
-#### Beef Cow-Calf
+#### Beef Cow-Calf (vaches et veaux de boucherie)
 
-The Beef Cow-Calf component contains the following groups:
+La composante Beef Cow-Calf (vaches et veaux de boucherie) contient les groupes suivants :
 
-* Bulls
-* Replacement heifers
-* Cows
-* Calves
+- Bulls (taureaux)
+- Replacement heifers (génisses de remplacement)
+- Cows (vaches)
+- Calves (veaux)
 
-Holos allows the user to add additional groups and create copies of a group if required. A group can be added/copied by clicking the "**Add Group**" button in Step 1.
+Holos permet à l'utilisateur d'ajouter des groupes et de créer des copies d'un groupe, lorsque c'est nécessaire. On peut ajouter/copier un groupe en cliquant sur le bouton Add Group (ajouter un groupe) à l'étape 1.
 
 
 <br>
@@ -1283,82 +1275,82 @@ Holos allows the user to add additional groups and create copies of a group if r
  <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
     <br>
     <em>
-		Figure 6.18 - Beef Cow-Calf Component
+		Figure 6.18 - Composante Beef Cow-Calf (vaches et veaux de boucherie)
 	</em>
 </p>
 <br>
 
 
 
-Each animal group has the following sections that can be further edited and configured. 
+Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modifiées et configurées.
 
-##### General
+##### General (général)
 
--	The general section contains simple information for the animal group, such as the **number of animals** and the average daily rate of **gain coefficients**.
--	You can also enter the **start** and **end** weights for your animal group.
--	Some animal groups will have additional data fields specific to that group.
+- La section General contient des données de base sur le groupe d'animaux, par exemple le **nombre d'animaux** et le taux quotidien moyen des **coefficients de gain**.
+- Vous pouvez également y entrer les poids de **départ** et de **fin** de votre groupe d'animaux.
+- Pour certains groupes d'animaux, il y aura des champs additionnels propres au groupe.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
-		Figure 6.19 - Management Periods General Tab
+		Figure 6.19 - Page d'onglet General des périodes de gestion.
 		<br>
-		A: The 'Show Additional Information' toggle allows you to see additional information in a tab.
+		A: Le commutateur Show Additional Information (visualiser des données additionnelles) vous permet de visualiser des données additionnelles dans une page d'onglet.
 		<br>
-		B: Additional information regarding a tab section.
+		B: Données additionnelles pour une section de page d'onglet.
 	</em>
 </p>
 <br>
 
-##### Diet
+##### Diet (ration)
 
--	The Diet section contains information about the diet of your animal group in the selected management period.
--	You can select one of the **default diets**: **low, medium, or high** energy protein.
--	If you have selected to see **additional information**, you can adjust more specific details for the diet such as: forage, crude protein, fat etc.
-- If you want to create your **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you need to learn how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
+-	 La section Diet (ration) contient des données sur la ration du groupe d'animaux au cours de la période de gestion sélectionnée.
+- Vous pouvez sélectionner l'une des **rations par défaut**  : **low, medium, or high** energy protein (protéines à énergie **faible** , **moyenne** ou **élevée** ).
+- Si vous avez choisi de visualiser des données additionnelles, vous pouvez sélectionner des détails plus précis sur le fourrage, les protéines crues et les lipides, entre autres.
+- Si vous voulez créer votre **ration personnalisée** , utilisez le bouton **Custom Diet Creator (créateur de ration personnalisée)**, dans le bas de la section Diet Management (gestion de la ration). Si vous devez apprendre comment créer une ration personnalisée, cliquez sur le lien suivant : [Comment créer une ration personnalisée](#créer-une-ration-personnalisée)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
     <br>
     <em>
-		Figure 6.20 - Management Periods - Diet Tab.
+		Figure 6.20 - Périodes de gestion – Page d'onglet Diet (ration).
 	</em>
 </p>
 <br>
 
-##### Housing
+##### Bâtiment d'élevage
 
--	The housing section contains details pertaining to the housing situation for your selected animal group in the selected management period.
--	You can select default housing types such as: confined no barn, confined, enclosed pasture, etc.
+- La section Housing (bâtiments d'élevage) contient des détails sur les bâtiments d'élevage pour le groupe d'animaux sélectionné dans la période de gestion sélectionnée.
+- Vous pouvez sélectionner des types de bâtiment par défaut, par exemple les types confiné sans étable, confiné ou pâturage clôturé.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
     <br>
     <em>
-		Figure 6.21 - Management Periods - Housing Tab.
+		Figure 6.21 - Périodes de gestion – Page d'onglet Housing (bâtiments d'élevage).
 	</em>
 </p>
 
-- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location.**"
+- Si vous sélectionnez l'option « **Enclosed Pasture (pâturage clôturé)** », le champ additionnel **Pasture Location (emplacement du pâturage)** apparaît.
 
 <br>
 
-##### Manure
+##### Manure (fumier)
 
-- 	The manure section contains details about the manure operations for your selected animal group in the selected management period.
-- 	You can select default manure management types such as Deep Bedding, Solid Storage, etc.
-- 	If you have selected to see additional information, you can provide data inputs for more specific manure details.
+- La page d'onglet Manure (fumier) contient des détails sur les opérations de fumier pour le groupe d'animaux sélectionné dans la période de gestion sélectionnée.
+- Vous pouvez sélectionner des types de gestion du fumier, par exemple le type litière profonde ou le type entreposage solide.
+- Si vous avez choisi de visualiser des données additionnelles, vous pouvez entrer des données plus précises concernant le fumier.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
     <br>
     <em>
-		Figure 6.22 - Management Periods - Manure Tab.
+		Figure 6.22 - Périodes de gestion – Page d'onglet Manure (fumier).
 	</em>
 </p>
 <br>
@@ -1366,14 +1358,14 @@ Each animal group has the following sections that can be further edited and conf
 
 
 
-#### Beef Stockers & Backgrounders
+#### Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis)
 
-The Beef Stockers and Backgrounders component has the following animal groups:
+La composante Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis) comporte les groupes d'animaux suivants :
 
-- Heifers
-- Steers
+- Heifers (génisses)
+- Steers (bouvillons)
 
-This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+Cette composante contient des pages d'onglet similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général).
 
 
 <br>
@@ -1381,20 +1373,20 @@ This component contains similar additional tabs as the [Beef Cow-Calf component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
     <br>
     <em>
-		Figure 6.23 - Beef Stockers and Backgrounders component.
+		Figure 6.23 - Composante Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis)
 	</em>
 </p>
 <br>
 <br>
 
-#### Beef Finishers
+#### Beef Finishers (bovins de finition)
 
-The Beef Finisher component has the following animal groups:
+La composante Beef Finishers (bovins de finition) comporte les groupes d'animaux suivants :
 
-- Heifers
-- Steers
+- Heifers (génisses)
+- Steers (bouvillons)
 
-This component contains similar additional tabs as the [Beef Cow-Calf component](#general).
+Cette composante contient des pages d'onglet similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général).
 
 
 <br>
@@ -1402,26 +1394,26 @@ This component contains similar additional tabs as the [Beef Cow-Calf component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
     <br>
     <em>
-		Figure 6.24 - Beef Finisher component.
+		Figure 6.24 - Composante Beef Finishers (bovins de finition)
 	</em>
 </p>
 <br>
 <br>
 
 
-### Dairy
+### Produits laitiers
 
-The Dairy category contains the following components:
+La catégorie des produits laitiers contient les composantes suivantes :
 
-#### Dairy cattle
+#### Dairy Cattle (bovins laitiers)
 
-The Dairy cattle component has the following animal groups:
+La composante Dairy Cattle (bovins laitiers) comporte les groupes d'animaux suivants :
 
-- Dairy heifers
-- Dairy calves
-- Dairy lactating
+- Dairy heifers (génisses laitières)
+- Dairy calves (veaux laitiers)
+- Dairy lactating (veaux en lactation)
 
-This component contains similar additional tabs as the [Beef Cow-Calf component](#general) which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1429,23 +1421,23 @@ This component contains similar additional tabs as the [Beef Cow-Calf component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
     <br>
     <em>
-		Figure 6.25 - Dairy cattle component.
+		Figure 6.25 - Composante Dairy cattle (bovins laitiers)
 	</em>
 </p>
 <br>
 <br>
 
 
-### Swine
+### Swine (porcs)
 
-The swine category contains the following animal components:
+La catégorie des porcs contient les composantes pour les animaux suivantes :
 
 
-#### Grower-to-Finish
+#### Grower-to-Finish (engraissement à finition)
 
-The Grower-to-Finish component has the following animal groups:
+La composante Grower-to-Finish (engraissement à finition) comporte le groupe d'animaux suivant :
 
-- Hogs
+- Hogs (porcs)
 
 
 <br>
@@ -1453,102 +1445,100 @@ The Grower-to-Finish component has the following animal groups:
  <img src="../../Images/UserGuide/en/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
     <br>
     <em>
-		Figure 6.26 - Grower-to-Finish component.
+		Figure 6.26 - Composante Grower-to-Finish (engraissement à finition)
 	</em>
 </p>
 <br>
 <br>
 
-This component contains the following tabs which allow further information to be entered regarding each group.
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
 
 <br>
 
-##### General - Swine Component
+##### General (général) – Composante Swine (porcs)
 
 The general tab allows editing the following information:
 
-- The **production stage** of the animal group.
-- The **number of animals** on the farm.
-- The **daily weight gain** of the animals in the selected animal group.
-- The **start and end weight** of the animals in the selected animal group.
-- Additional general information regarding the animal group (after selecting "S
-- how Additional Information").
+- **Étape de la production** pour le groupe d'animaux
+- **Nombre d'animaux** dans l'exploitation
+- **Gain de poids quotidien** des animaux du groupe sélectionné
+- **Poids initial et poids final** des animaux du groupe sélectionné
+- Renseignements généraux additionnels sur le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information (visualiser des données additionnelles)).
+
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
     <br>
     <em>
-		Figure 6.27 - Swine component - General tab.
+		Figure 6.27 - Composante Swine (porcs) – Page d'onglet General (général)
 	</em>
 </p>
 <br>
 
-##### Diet - Swine Component
+##### Diet (ration) – Composante Swine (porcs)
 
-The diet tab allows editing the following information:
+Dans la page d'onglet Diet (ration), vous pouvez modifier les données suivantes :
 
-- The **type of diet** of the animal group.
-- The **custom diet creator** creates a custom diet for the selected animal group.
-- Additional diet information regarding the animal group (after selecting "Show Additional Information").
+- **Type de ration** du groupe d'animaux
+- **Ration personnalisée** pour le groupe d'animaux sélectionné (à l'aide du bouton **Custom Diet Creator** [**créateur de ration personnalisée**])
+- Renseignements additionnels sur la ration pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
     <br>
     <em>
-		Figure 6.28 - Swine component - Diet tab.
+		Figure 6.28 - Composante Swine (porcs) – Page d'onglet Diet (ration)
 	</em>
 </p>
 <br>
 
-##### Manure - Swine Component
+##### Manure (Fumier) – Composante Swine (porcs)
 
-The manure tab allows editing the following information:
+Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivantes :
 
-- The **manure handling system** for the animal group.
-- Additional manure information regarding the animal group (after selecting "Show Additional Information").
+- **Système de manutention du fumier** pour le groupe d'animaux
+- Renseignements additionnels sur le fumier pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
     <br>
     <em>
-		Figure 6.29 - Swine component - Diet tab.
+		Figure 6.29 - Composante Swine (porcs) – Page d'onglet Diet (ration)
 	</em>
 </p>
 <br>
 
 
-#### Farrow-to-Wean
+#### Farrow-to-Wean (naissance au sevrage)
 
-The Farrow-to-Wean component has the following animal groups:
+La composante Farrow-to-Wean (naissance au sevrage) comporte les groupes d'animaux suivants :
 
-- Gilts
-- Soars
-- Boars
-
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
-
+- Gilts (cochettes)
+- Sows (truies)
+- Boars (verrats)
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
     <br>
     <em>
-		Figure 6.30 - Farrow-to-Wean component.
+		Figure 6.30 - Composante Farrow-to-Wean (naissance au sevrage)
 	</em>
 </p>
 <br>
 
 
-#### Iso-Wean
+#### Iso-Wean (porcelets sevrés)
 
-The Iso-Wean component has the following animal groups:
+La composante Iso-Wean (porcelets sevrés) comporte le groupe d'animaux suivant :
 
-- Piglets
+- Piglets (porcelets)
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1556,21 +1546,21 @@ This component contains similar additional tabs as the [Grower-to-Finish compone
  <img src="../../Images/UserGuide/en/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
     <br>
     <em>
-		Figure 6.31 - Iso-Wean component.
+		Figure 6.31 - Composante Iso-Wean (porcelets sevrés)
 	</em>
 </p>
 <br>
 
-#### Farrow-to-Finish
+#### Farrow-to-Finish (naissance à la finition)
 
-The Farrow-to-Finish component has the following animal groups:
+La composante Farrow-to-Finish (naissance à la finition) comporte les groupes d'animaux suivants :
 
-- Gilts
-- Sows
-- Boars
-- Piglets
+- Gilts (cochettes)
+- Sows (truies)
+- Boars (verrats)
+- Piglets (porcelets)
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1578,22 +1568,22 @@ This component contains similar additional tabs as the [Grower-to-Finish compone
  <img src="../../Images/UserGuide/en/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
     <br>
     <em>
-		Figure 6.32 - Farrow-to-Finish component.
+		Figure 6.32 - Composante Farrow-to-Finish (naissance à la finition)
 	</em>
 </p>
 <br>
 
 <br>
 
-### Poultry
-The poultry category contains the following animal components:
+### Poultry (volaille)
+La catégorie de la volaille contient les composantes pour les animaux suivantes :
 <br>
 
-#### Pullet Farm
+#### Pullet Farm (exploitations de poulettes)
 
-The Pullet Farm component has the following animal groups:
+La composante Pullet Farm (exploitations de poulettes) comporte le groupe d'animaux suivant :
 
-- Pullets
+- Pullets (poulettes)
 
 
 <br>
@@ -1601,37 +1591,39 @@ The Pullet Farm component has the following animal groups:
  <img src="../../Images/UserGuide/en/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
     <br>
     <em>
-		Figure 6.34 - Pullet Farm component.
+		Figure 6.34 - Composante Pullet Farm (exploitations de poulettes)
 	</em>
 </p>
 <br>
 <br>
 
-This component contains the following tabs which allow further information to be entered regarding each group.
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
 
 
-##### General - Poultry Component
+##### General (général) – Composante Poultry (volaille)
 
-The general tab allows editing the following information:
+Dans la page d'onglet General (général), vous pouvez modifier les données suivantes :
 
-- The **number of animals** on the farm.
+- **Nombre d'animaux** dans l'exploitation
+
+
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
     <br>
     <em>
-		Figure 6.35 - Poultry component - General tab.
+		Figure 6.35 - Composante Poultry (volaille) – Page d'onglet General (général)
 	</em>
 </p>
 <br>
 
 
-##### Housing - Poultry Component
+##### Housing (bâtiments d'élevage) – Composante Poultry (volaille)
 
-The housing tab allows editing the following information:
+Dans la page d'onglet Housing (bâtiments d'élevage), vous pouvez modifier les données suivantes :
 
-- The **housing type** for the animals in the selected animal group.
-- Additional housing information regarding the animal group (after selecting "Show Additional Information").
+- **Type de bâtiment** pour les animaux du groupe sélectionné
+- Renseignements additionnels sur les bâtiments d'élevage pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
 
 
 <br>
@@ -1639,25 +1631,24 @@ The housing tab allows editing the following information:
  <img src="../../Images/UserGuide/en/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
     <br>
     <em>
-		Figure 6.36 - Poultry component - Housing tab.
+		Figure 6.36 - Composante Poultry (volaille) – Page d'onglet Housing (bâtiments d'élevage)
 	</em>
 </p>
 <br>
 
-##### Manure - Poultry Component
+##### Manure (fumier) – Composante Poultry (volaille)
 
-The manure tab allows editing the following information:
+Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivantes :
 
-- The **manure handling system** for the animals in the selected animal group.
-- Additional manure information regarding the animal group (after selecting "Show Additional Information").
-
+- **Système de manutention du fumier** pour les animaux du groupe sélectionné
+- Renseignements additionnels sur le fumier pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
     <br>
     <em>
-		Figure 6.37 - Poultry component - Manure tab.
+		Figure 6.37 - Composante Poultry (volaille) – Page d'onglet Manure (fumier)
 	</em>
 </p>
 <br>
@@ -1665,14 +1656,14 @@ The manure tab allows editing the following information:
 
 <br>
 
-#### Chicken Multiplier Breeder
+#### Chicken Multiplier Breeder (reproduction-multiplication des poulets)
 
-The Chicken Multiplier Breeder component has the following animal groups:
+La composante Chicken Multiplier Breeder (reproduction-multiplication des poulets) comporte les groupes d'animaux suivants :
 
-- Pullets
-- Cockerels
+- Pullets (poulettes)
+- Cockerels (coquelets)
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1680,21 +1671,21 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
     <br>
     <em>
-		Figure 6.38 - Chicken Multiplier Breeder component.
+		Figure 6.38 - Composante Chicken Multiplier Breeder (reproduction-multiplication des poulets)
 	</em>
 </p>
 <br>
 
 <br>
 
-#### Chicken Meat Production
+#### Chicken Meat Production (production de viande de poulet)
 
-The Chicken Meat Production component has the following animal groups:
+La composante Chicken Meat Production (production de viande de poulet) comporte les groupes d'animaux suivants :
 
-- Pullets
-- Cockerels
+- Pullets (poulettes)
+- Cockerels (coquelets)
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1702,21 +1693,21 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
     <br>
     <em>
-		Figure 6.39 - Chicken Meat Production component.
+		Figure 6.39 - Composante Chicken Meat Production (production de viande de poulet)
 	</em>
 </p>
 <br>
 
-#### Turkey Multiplier Breeder
+#### Turkey Multiplier Breeder (reproduction-multiplication de dindes)
 
-The Turkey Multiplier Breeder component has the following animal groups:
+La composante Turkey Multiplier Breeder (reproduction-multiplication de dindes) comporte les groupes d'animaux suivants :
 
-- Young toms
-- Toms
-- Young turkey hens
-- Turkey hens
+- Young toms (jeunes dindons)
+- Toms (dindons)
+- Young turkey hens (jeunes dindes)
+- Turkey hens (dindes)
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1724,19 +1715,19 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
     <br>
     <em>
-		Figure 6.61 - Turkey Multiplier Breeder.
+		Figure 6.61 - Composante Turkey Multiplier Breeder (reproduction-multiplication de dindes)
 	</em>
 </p>
 <br>
 
-#### Turkey Meat Production
+#### Turkey Meat Productio (production de viande de dindon)
 
-The Turkey Meat Production component has the following animal groups:
+La composante Turkey Meat Productio (production de viande de dindon) comporte les groupes d'animaux suivants :
 
-- Young toms
-- Young turkey hens
+- Young toms (jeunes dindons)
+- Young turkey hens (jeunes dindes)
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1744,18 +1735,18 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
     <br>
     <em>
-		Figure 6.40 - Turkey Meat Production component.
+		Figure 6.40 - Composante Turkey Meat Productio (production de viande de dindon)
 	</em>
 </p>
 <br>
 
-#### Chicken Egg Production
+#### Chicken Egg Production (production d'œufs de poules)
 
-The Chicken Egg Production component has the following animal groups:
+La composante Chicken Egg Production (production d'œufs de poules) comporte le groupe d'animaux suivant :
 
-- Hens
+- Hens (poules)
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1763,19 +1754,19 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
     <br>
     <em>
-		Figure 6.41 - Chicken Egg Production component.
+		Figure 6.41 - Composante Chicken Egg Production (production d'œufs de poules)
 	</em>
 </p>
 <br>
 
-#### Chicken Multiplier Hatchery
+#### Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets)
 
-The Chicken Multiplier Hatchery component has the following animal groups:
+La composante Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets) comporte les groupes d'animaux suivants :
 
-- Chicks
-- Poults
+- Poussins
+- Dindonneaux
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1783,23 +1774,22 @@ This component contains similar additional tabs as the [Pullet farm component](#
  <img src="../../Images/UserGuide/en/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
     <br>
     <em>
-		Figure 6.42 - Chicken Multiplier Hatchery component.
+		Figure 6.42 - Composante Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets)
 	</em>
 </p>
 <br>
 
 <br>
 
-### Sheep
+### Sheep (mouton)
 
-The sheep category contains the following animal components:
-<br>
+La catégorie Sheep (mouton) contient la composante pour les animaux suivante :
 
-#### Sheep Feedlot
+#### Sheep Feedlot (parc d'engraissement de moutons)
 
-The Sheep Feedlot component has the following animal groups:
+La composante Sheep Feedlot (parc d'engraissement des moutons) comporte le groupe d'animaux suivant :
 
-- Sheep feedlot
+- Sheep Feedlot (parc d'engraissement de moutons)
 
 
 <br>
@@ -1807,90 +1797,91 @@ The Sheep Feedlot component has the following animal groups:
  <img src="../../Images/UserGuide/en/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
     <br>
     <em>
-		Figure 6.43 - Sheep Feedlot component.
+		Figure 6.43 - Composante Sheep Feedlot (parc d'engraissement de moutons)
 	</em>
 </p>
 <br>
 <br>
 
-This component contains the following tabs which allow further information to be entered regarding each group.
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
 
 
-##### General - Sheep Component
+##### General (général) – Composante Sheep (volaille)
 
-The general tab in this category allows changing the following information regarding each animal group:
+Dans la page d'onglet General (général) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Number of animals
-- Daily gain
-- Start and end weight
+- Number of animals (nombre d'animaux)
+- Daily gain (gain quotidien)
+- Start weight et End weight (Poids initial et Poids final)
+
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
     <br>
     <em>
-		Figure 6.44 - Sheep Category - General tab.
+		Figure 6.44 - Catégorie Sheep (moutons) – Page d'onglet General (général)
 	</em>
 </p>
 <br>
 
-##### Diet - Sheep Component
+##### Diet (ration) – Composante Sheep (moutons)
 
-The diet tab in this category allows changing the following information regarding each animal group:
+Dans la page d'onglet Diet (ration) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Diet type
-- Open the custom diet creator.
+- Diet type (type de ration)
+- Ration personnalisée (à l'aide du bouton Custom diet creator [créateur de ration personnalisée])
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
     <br>
     <em>
-		Figure 6.45 - Sheep Category - Diet tab.
+		Figure 6.45 - Catégorie Sheep (moutons) – Page d'onglet Diet (ration)
 	</em>
 </p>
 <br>
 
-##### Housing - Sheep Component
+##### Housing (bâtiments d'élevage) – Composante Sheep (moutons)
 
-The housing tab in this category allows changing the following information regarding each animal group:
+Dans la page d'onglet Housing (bâtiments d'élevage) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Housing type
+- Housing type (type de bâtiment)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
     <br>
     <em>
-		Figure 6.46 - Sheep Category - Housing tab.
+		Figure 6.46 - Catégorie Sheep (moutons) – Page d'onglet Housing (bâtiments d'élevage)
 	</em>
 </p>
 <br>
 
-##### Manure - Sheep Component
+##### Manure (fumier) – Composante Sheep (moutons)
 
-The manure tab in this category allows changing the following information regarding each animal group:
+Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Manure handling system
+- Manure handling system (système de manutention du fumier)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
     <br>
     <em>
-		Figure 6.47 - Sheep Category - manure tab.
+		Figure 6.47 - Catégorie Sheep (moutons) – Page d'onglet Manure (fumier)
 	</em>
 </p>
 <br>
 
 
-####	Rams
+#### Rams (béliers)
 
-The Rams component has the following animal groups:
+La composante Rams (béliers) comporte le groupe d'animaux suivant :
 
-- Rams
+- Rams (béliers)
 
-This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Sheep Feedlot (parcs d'engraissement des moutons)](#general-général-composante-sheep-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1898,19 +1889,19 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
     <br>
     <em>
-		Figure 6.48 - Rams component.
+		Figure 6.48 - Composante Rams (béliers)
 	</em>
 </p>
 <br>
 
-####	Lambs & Ewes
+#### Lambs & Ewes (agneaux et brebis)
 
-The Lambs & Ewes component has the following animal groups:
+La composante Lambs & Ewes (agneaux et brebis) comporte les groupes d'animaux suivants :
 
-- Lambs
-- Ewes
+- Lambs (agneaux)
+- Ewes (brebis)
 
-This component contains similar additional tabs as the [Sheep Feedlot Component](#general-sheep-component), which allows further information to be entered regarding each group.
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Sheep Feedlot (parcs d'engraissement des moutons)](#general-général-composante-sheep-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
 
 
 <br>
@@ -1918,136 +1909,125 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
     <br>
     <em>
-		Figure 6.49 - Lambs & Ewes component.
+		Figure 6.49 - Composante Lambs & Ewes (agneaux et brebis)
 	</em>
 </p>
 <br>
 <br>
 
-### Other Livestock
+### Other Livestock (autres animaux d'élevage)
 
-The other livestock category contains various other livestock that are currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
+La catégorie Other Livestock (autres animaux d'élevage) contient divers autres animaux actuellement pris en considération par Holos et pouvant être ajoutés à une exploitation. Dans cette catégorie, chaque composante représente un seul type d'animaux et comporte les pages d'onglet suivantes :
 
-#### General - Other Livestock
+#### General (général) – Other Livestock (autres animaux d'élevage)
 
-The general tab in this category allows changing the following information regarding the animal:
+Dans la page d'onglet General (général) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Number of animals
+- Number of animals (nombre d'animaux)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
     <br>
     <em>
-		Figure 6.50 - Other Livestock - General tab.
+		Figure 6.50 - Other Livestock (autres animaux d'élevage) – Page d'onglet General (général)
 	</em>
 </p>
 <br>
 
 
-#### Manure - Other Livestock
+#### Manure (fumier) – Other Livestock (autres animaux d'élevage)
 
-The manure tab in this category allows changing the following information regarding the animal:
+Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
 
-- Manure handling system
+- Manure handling system (système de manutention du fumier)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
     <br>
     <em>
-		Figure 6.51 - Other Livestock - Manure tab.
+		Figure 6.51 - Other Livestock (autres animaux d'élevage) – Page d'onglet Manure (fumier)
 	</em>
 </p>
 <br>
 
-The other livestock category contains the following animal components:
+La catégorie des autres animaux d'élevage contient les composantes pour les animaux suivants :
 
-#### Goats
+#### Goats (chèvres)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
     <br>
     <em>
-		Figure 6.52 - Goats component.
+		Figure 6.52 - Composante Goats (chèvres)
 	</em>
 </p>
 <br>
 
-#### Deer
+#### Deer (cerfs)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
     <br>
     <em>
-		Figure 6.53 - Deer component.
+		Figure 6.53 - Composante Deer (cerfs)
 	</em>
 </p>
 <br>
 
-#### Horses
+#### Horses (chevaux)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
     <br>
     <em>
-		Figure 6.54 - Horses component.
+		Figure 6.54 - Composante Horses (chevaux)
 	</em>
 </p>
 <br>
 
-#### Mules
+#### Mules (mules)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
     <br>
     <em>
-		Figure 6.55 - Mules component.
+		Figure 6.55 - Composante Mules (mules)
 	</em>
 </p>
 <br>
 
-#### Bison
+#### Bison (bisons)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
     <br>
     <em>
-		Figure 6.56 - Bison component.
+		Figure 6.56 - Composante Bison (bisons)
 	</em>
 </p>
 <br>
 
 
-#### Llamas
+#### Llamas (lamas)
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
     <br>
     <em>
-		Figure 6.57 - Llams component.
+		Figure 6.57 - Composante Llams (lamas)
 	</em>
 </p>
 <br>
 
 <br>
-
-
-
-
-<!---
-This is the End of section that needs to be translated
--->
-[Translation Section 2]: <> (Section 2 End)
-
-
-
 
 
 ## Composantes de l'infrastructure
@@ -2110,67 +2090,28 @@ L’écran Calendrier vous permet de voir votre ferme sur une période allant de
 <br>
 
 
+## Calendrier pour les brise-vent
 
+Le calendrier pour les brise-vent fonctionne de la même façon que le calendrier pour les cultures de l'exploitation. Il présente le type d'arbre, l'année de la plantation et l'année de la coupe. Les chiffres dans le haut du calendrier correspondent à l'année. Dans ce calendrier, vous pouvez ajuster les valeurs suivantes :
 
-
-
-
-
-<!---
-This is the End of section that needs to be translated
--->
-[Translation Section 3]: <> (Section 3 Begin)
-
-
-
-
-
-
-
-
-
-## Shelterbelt Timeline
-
-The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year.  In the shelterbelt timeline, you can adjust the following:
-
-- The year the tree was planted.
-- The cut-off year of the timeline.
-- The year of observation.
-- Number of trees alive today (from drop down named 'Mortality').
+- Année de plantation
+- Année de coupe
+- Année d'observation
+- Nombre d'arbres vivants aujourd'hui (dans le menu déroulant Mortality [mortalité])
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter7/figure7-2.png" alt="Figure7-2" width="750"/>
     <br>
     <em>
-		Figure 7.2 – Shelterbelt timeline
+		Figure 7.2 – Calendrier pour les brise-vent.
 		<br>
-		A: Switch between crop timeline and shelterbelt timeline.
+		A: Bascule entre le calendrier des cultures et le calendrier des brise-vent.
 		<br>
-		B: The timeline for a specific tree added to the shelterbelt.
+		B: Calendrier pour un arbre précis ajouté au brise-vent.
 		<br>
 	</em>
 </p>
-
-
-
-
-
-
-
-<!---
-This is the End of section that needs to be translated
--->
-[Translation Section 3]: <> (Section 3 End)
-
-
-
-
-
-
-
-
-
 
 <br>
 <br>
@@ -2407,44 +2348,36 @@ la comparaison dans le tableau.
 
 
 
+#### Comparaison des émissions des fermes
 
-<!---
-This is the Start of section that needs to be translated
--->
-[Translation Section 4]: <> (Section 4 Start)
-
-
-
-#### Comparing Emissions of Farms
-
-The detailed emission report tab allows emissions to be compared between different farms added to Holos by the user. If more than one farm is present, the "Compare Multiple Farms" option becomes available.
+L'onglet de rapport d'émission détaillé permet de comparer les émissions entre différentes fermes ajoutées à Holos par l'utilisateur. Si plusieurs fermes sont présentes, l'option "Comparer plusieurs fermes" devient disponible.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter9/figure9-7.1.png" alt="Figure9-7.1" width="850"/>
     <br>
     <em>
-		Figure 9-7.1 - Compare multiple farms option
+		Figure 9-7.1 - Option de comparaison de plusieurs fermes
 	</em>
 </p>
 <br>
 
-After clicking on 'yes', a new menu will show up which provides further options.
+Après avoir cliqué sur 'oui', un nouveau menu s'affichera et proposera d'autres options.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter9/figure9-7.2.png" alt="Figure9-7.2" width="650"/>
     <br>
     <em>
-		Figure 9-7.2 - Select farms to compare settings
+		Figure 9-7.2 - Sélectionner les fermes pour comparer les paramètres
 		<br>
-		A: Tabs in the top bar present different options to the user.
+		R : Les onglets de la barre supérieure présentent différentes options à l'utilisateur.
 		<br>
-		B: The current farms added to Holos by the user. Click the farms that need to be compared.
+		B : Les fermes actuelles ajoutées à Holos par l'utilisateur. Cliquez sur les fermes qui doivent être comparées.
 		<br>
-		C: Click here to compare the farms.
+		C : Cliquez ici pour comparer les fermes.
 		<br>
-		D: Options that allow the user to select all available farms, clear the current selection and close the select farm setting menu.
+		D : Options permettant à l'utilisateur de sélectionner toutes les fermes disponibles, d'effacer la sélection actuelle et de fermer le menu de sélection de ferme.
 	</em>
 </p>
 <br>
@@ -2454,7 +2387,7 @@ After clicking on 'yes', a new menu will show up which provides further options.
  <img src="../../Images/UserGuide/en/chapter9/figure9-7.3.png" alt="Figure9-7.3" width="650"/>
     <br>
     <em>
-		Figure 9-7.3 - Default settings for the farms.
+		Figure 9-7.3 - Paramètres par défaut des fermes.
 	</em>
 </p>
 <br>
@@ -2464,25 +2397,13 @@ After clicking on 'yes', a new menu will show up which provides further options.
  <img src="../../Images/UserGuide/en/chapter9/figure9-7.4.png" alt="Figure9-7.4" width="650"/>
     <br>
     <em>
-		Figure 9-7.4 - Animal settings for the farm. Each setting and be included and excluded from the comparison.
+		Figure 9-7.4 - Réglages des animaux pour la ferme. Chaque réglage et être inclus et exclu de la comparaison.
 	</em>
 </p>
 <br>
 <br> 
 
 
-
-
-
-<!---
-This is the End of section that needs to be translated
--->
-[Translation Section 4]: <> (Section 4 End)
-
-
-
-
-   
 
 ### Rapport d'estimation des aliments
 
@@ -3904,54 +3825,46 @@ valeur de données dans le format suivant : « H(0-9)(a-b) ». Cela signifie 
 </p>
 <br>
 
-
-<!---
-This is the start of section that needs to be translated
--->
-[Translation Section 1]: <> (Section 1 Begin)
+# Annexe au chapitre 11 – Renseignements additionnels, questions courantes et dépannage 
 
 
+### Système de sauvegarde Holos 
 
-# Chapter 11 Appendix - Additional Information, Common Questions & Troubleshooting
+Holos contient un système qui crée automatiquement, avec les fichiers de données enregistrées par l’utilisateur, des copies de sauvegarde de ses données dans le dossier des données Holos.  Pour obtenir des instructions concernant la façon d’accéder au  [dossier de données Holos, cliquez ici.](#comment-trouver-les-fichiers-du-programme-holos).
 
-
-### Holos Backup System
-
-Holos contains a backup system that automatically creates backups of user data in a folder alongside the saved user data files. This folder is located inside the Holos data folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
-
-Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any time.
+À l’intérieur de ce dossier, vous trouverez un autre dossier intitulé backups. Le dossier backups contient en tout temps jusqu’à 5 copies de sauvegarde de vos données. 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-21.png" alt="" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-8.png" alt="" width="750"/>
     <br>
     <em>
-		Figure 11-21 - The holos data folder that contains the backup files
+		Figure 11-21 – Dossier de données Holos contenant les fichiers de sauvegarde
 	</em>
 </p>
 <br>
 
 
 
-There are some important things to note regarding the backup files created by Holos:
+Concernant les fichiers de sauvegarde créés par Holos, il faut noter ce qui suit :
 
-1. Holos creates a backup of your data every time the application is started.
+1. Holos crée une copie de sauvegarde de vos données chaque fois que l’application est lancée. 
 
-2. A backup is only created when Holos successfully loads data.
+2. Une copie de sauvegarde n’est créée que lorsque Holos charge des données avec succès. 
 
-3. A maximum of **5** user data backups are maintained and are created on a rolling basis. This means that if there are five backups already created, instead of creating a sixth one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
+3. Un maximum de **5** copies de sauvegarde des données de l’utilisateur est conservé et les copies sont créées sur une base continue.  Cela signifie que si 5 copies de sauvegarde sont déjà créées, plutôt que d’un créer une sixième, Holos supprime la plus ancienne dans le dossier des copies de sauvegarde et la remplace par une nouvelle copie. 
 
-	3.1. If you would like to maintain or save a particular backup, it is strongly recommended to **keep that backup file in a separate location on your computer**.
+	3.1. Si vous voulez conserver ou enregistrer une copie de sauvegarde en particulier, il vous est fortement recommandé de **conserver le fichier de cette copie à un emplacement distinct de votre ordinateur.**
 
-4. Backup files are named/created in the following format: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time that the backup was created..
+4. Les fichiers de sauvegarde sont nommés/créés selon le format suivant : `holos-backup-{date}-{heure}.json`. Par exemple, `holos-backup-2022-09-29_04_17_02_PM.json`. Ainsi, tous les fichiers de sauvegarde contiennent la date et l’heure à laquelle ils ont été créés. 
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-22.png" alt="" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-22.png" alt="" width="750"/>
     <br>
     <em>
-		Figure 11-22 - Up to five backups are stored inside the backups folder.
+		Figure 11-22 - Jusqu’à 5 copies de sauvegarde sont conservées dans le dossier backups.  
 	</em>
 </p>
 <br>
@@ -3959,30 +3872,30 @@ There are some important things to note regarding the backup files created by Ho
 <br>
 
 
-#### Restoring backups in case of data corruption
+#### Restauration des copies de sauvegarde en cas de corruption des données 
 
-In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to load backup data automatically. Holos loads the most recently created backup file if multiple backups are available. **A message is displayed after the first loading page when a backup file is restored**. This message contains information regarding which backup was restored:
+Lorsque des données enregistrées ne peuvent pas être chargées parce qu’elles sont corrompues ou qu’elles n’ont pas été enregistrées correctement au cours de la session précédente, si elles sont disponibles, Holos essaie automatiquement de charger les données sauvegardées.  Si plusieurs fichiers de sauvegarde sont disponibles, Holos charge le plus récent.  **Un message est alors affiché après le chargement de la première page**.  Il indique des renseignements sur le fichier restauré : 
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-23.png" alt="" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-23.png" alt="" width="750"/>
     <br>
     <em>
-		Figure 11-23 - A message during startup indicating that a data backup was restored.
+		Figure 11-23 - Lors du démarrage, un message indique qu’un fichier de sauvegarde des données a été restauré. 
 	</em>
 </p>
 <br>
 
 
-If you want to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**; otherwise, holos will not be able to read this data file.
+Si vous voulez restaurer manuellement l’un des 5 fichiers de sauvegarde dans le dossier de sauvegarde, veuillez supprimer le fichier **json-data.json** dans le dossier **HOLOS_4** et remplacez-le par le fichier de sauvegarde que vous avez choisi.  N’oubliez pas de changer le nom du fichier de sauvegarde pour le nom **json-data**; si vous ne le faites pas, Holos ne pourra pas le lire. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-24.gif" alt="" width="750"/>
     <br>
     <em>
-		Figure 11-24 - Manually restoring a backup data file.
+		Figure 11-24 - Restauration manuelle d’un fichier de données de sauvegarde  
 	</em>
 </p>
 <br>
@@ -3990,158 +3903,155 @@ If you want to manually restore one of the five backups in the backup folder, pl
 
 #### Data crash file
 
-As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new program session. In these situations, Holos will also create a crash file containing the data the program could not read.
+Comme nous l’avons mentionné plus haut, Holos essaie automatiquement de charger l’un des fichiers de sauvegarde disponibles si le fichier de données original ne peut pas être chargé.  Si aucun des fichiers de sauvegarde ne peut être chargé ou si aucun fichier de sauvegarde n’est disponible, Holos lance une nouvelle session du programme.  Si c’est le cas, Holos crée également un fichier d’incident contenant les données qu’il n’a pas été en mesure de lire. 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-25.png" alt="" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-25.png" alt="" width="650"/>
     <br>
     <em>
-		Figure 11-25 - A crash file is created when data cannot be loaded.
+		Figure 11-25 - Un fichier d’incident est créé lorsque les données ne peuvent pas être chargées.  
 	</em>
 </p>
 <br>
 
-If you don't have any backups available to restore previous data, this crash file can be sent to the Holos developers to help restore data and troubleshoot problems with the program. To learn how to submit this file, read the[ how to report an error message section.](#how-to-report-an-error-message-and-create-a-bug-report)
+Si aucun fichier de sauvegarde n’est disponible pour restaurer les données précédentes, le fichier d’incident peut être envoyé aux développeurs Holos, qui tenteront de restaurer les données qu’il contient et de solutionner le problème rencontré par le programme.  Pour savoir comment transmettre le fichier d’incident à Holos, reportez-vous à la [section sur la façon de signaler un message d’erreur](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue). 
 
 <br>
 <br>
 
 
-### How to find the Holos Program data file(s).
+### Comment trouver les fichiers du programme Holos 
 
-The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system running the Holos software and are based on your usage of the program. You can find these files by following these steps:
-
-
-- On your windows computer, **press the start button**. The start button is the icon on the bottom left corner of your screen (on the taskbar) that looks like a windows icon; after pressing this button type **run** and press **enter**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
-    <br>
-    <em>
-		Figure 11-5 - Type run in windows search.
-	</em>
-</p>
-<br>
+Les fichiers de données du programme Holos contiennent des renseignements utiles pouvant aider les développeurs Holos à résoudre les pannes du programme et les autres problèmes que vous pouvez rencontrer. Ces fichiers sont uniques à chaque système exécutant le logiciel Holos, et ils sont fondés sur l’utilisation du programme.  Vous pouvez les trouver en suivant les étapes suivantes : 
 
 
-- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%\HOLOS_4** and then **press enter again** or click on the **OK button**.
+- Dans votre système Windows, **cliquez sur le bouton Démarrer** (icône représentant une fenêtre et située dans le coin inférieur gauche de votre écran, dans votre barre d’outils); après avoir cliqué sur ce bouton, entrez la valeur « **run** », puis appuyez sur la touche **Entrée**. 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
     <br>
     <em>
-		Figure 11-6 - Opening the Holos folder inside the Appdata folder.
+		Figure 11-5 - Entrez la valeur « run » dans la fenêtre de recherche.  
 	</em>
 </p>
 <br>
 
 
-- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Holos user data folder on your PC. 
-
-
-- Inside the HOLOS_4 folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
+- Une fois que vous avez appuyé sur la touche Entrée, une nouvelle fenêtre s’affiche.  Dans cette fenêtre, entrez la valeur `%LocalAppData%\Holos_4`, puis appuyez de **nouveau sur la touche Entrée**, ou encore cliquez sur le bouton **OK**.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-6.PNG" alt="Figure11-6" width="550"/>
     <br>
     <em>
-		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
+		Figure 11-6 - Ouverture du dossier Holos à l’intérieur du dossier Appdata.  
+	</em>
+</p>
+<br>
+
+
+- Une fois que vous avez appuyé sur la touche Entrée, une autre fenêtre s’affiche.  La fenêtre vous présente le contenu du dossier des données de l’utilisateur Holos dans votre ordinateur. 
+
+
+- Dans le dossier HOLOS_4, vous trouverez les fichiers liés à la configuration et aux paramètres du programme Holos.  Par exemple, l’un de ces fichiers est le fichier **json-data**. C’est le fichier des données du projet Holos, qui contient des données sur votre exploitation et vos paramètres.  Selon la façon dont vous utilisez Holos, ce dossier peut contenir d’autres fichiers que le fichier **json-data**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - Fichier json-data contenant des données sur votre exploitation et vos paramètres   
 	</em>
 </p>
 <br>
 
 
 
--	If you are trying to troubleshoot Holos, please create a new issue in Holos' GitHub repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
-
-- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on GitHub. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
-
+- Si vous essayez de résoudre un problème concernant Holos, veuillez créer un nouvel incident dans le référentiel GitHub de Holos.  La [section sur le signalement d’un message d’erreur](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) explique le processus de transmission d’un rapport d’erreur.
+- Pour faciliter la résolution du problème, veuillez intégrer tous les fichiers de données/d’incident à un fichier d’archives ZIP que vous joindrez ensuite à l’incident créé dans GitHub.  Reportez-vous à la section suivante sur la [façon de créer un fichier d’archives ZIP.](#comment-créer-un-fichier-darchives-zip)
 <br>
 <br>
 
-### How to create a .zip archive file
+### Comment créer un fichier d’archives ZIP
 
 
-#### Instructions for Windows 11 based systems
+#### Instructions pour l’environnement Windows 11 
+Veuillez suivre les étapes suivantes si vous êtes dans l’environnement Windows 11.  Dans notre exemple, nous travaillerons avec le dossier **HOLOS_4** mentionné dans la [section indiquant comment trouver les fichiers de données Holos.](#comment-trouver-les-fichiers-du-programme-holos)
 
-Please follow these steps for Windows 11 based systems. In this example we will work with the **HOLOS_4** folder mentioned in the [how to find the holos data files section.](#how-to-find-the-holos-program-data-files)
-
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
+1.	Maintenez le bouton gauche de votre souris enfoncé pour sélectionner les fichiers que vous voulez ajouter à votre fichier d’archives ZIP.  Nous inclurons ici tous les fichiers du dossier HOLOS_4.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-9.gif" alt="Figure11-9" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-9.png" alt="Figure11-9" width="650"/>
     <br>
     <em>
-		Figure 11-9 - Highlight all the files you want to add to the archive.
+		Figure 11-9 - Mise en évidence de tous les fichiers à ajouter au fichier d’archives  
 	</em>
 </p>
 <br>
 
-2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. This option will open a pop-up with a progress bar showing your compressed files. This process will create a single .zip file containing your selected files in **Step 1**.
+2.	Après avoir sélectionné tous les fichiers, cliquez avec le bouton droit de la souris sur l’un des fichiers mis en évidence pour accéder à un nouveau menu contextuel.  Sélectionnez l’option de menu « **Compresser dans le fichier ZIP** » dans le nouveau menu contextuel qui vient de s’ouvrir.  Une fenêtre surgissante contenant une barre indiquant l’état de progression de vos fichiers compressés s’affiche. Un fichier ZIP contenant les fichiers que vous avez sélectionnés à l’**étape 1** est créé. 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-10.gif" alt="Figure11-10" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-10.png" alt="Figure11-10" width="650"/>
     <br>
     <em>
-		Figure 11-10 - Adding files to a .zip archive.
+		Figure 11-10 - Ajout de fichiers à un fichier d’archives ZIP  
 	</em>
 </p>
 <br>
 
-3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can send this compressed/zipped file to the holos developers by [creating a new issue on the GitHub repository](#how-to-report-an-error-message-and-create-a-bug-report). This zipped archive file will contain all the files you selected in step 1.
+3.	3.	Une fois ce processus terminé, un nouveau fichier est créé dans le même dossier (dossier HOLOS_4).  Windows vous permet alors de renommer le fichier ZIP. Donnez à votre fichier le nom « **holos-data-files** ». Vous pouvez envoyer le fichier compressé aux développeurs Holos en [créant un nouvel incident dans le référentiel GitHub](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) Ce fichier d’archives compressé contient tous les fichiers que vous avez sélectionnés à l’étape 1. 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-11.gif" alt="Figure11-11" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-11.png" alt="Figure11-11" width="650"/>
     <br>
     <em>
-		Figure 11-11 - Renaming the new folder to holos-data-files.
+		Figure 11-11 - Donner au nouveau dossier le nom « holos-data-files ». 
 	</em>
 </p>
 <br>
 
-#### Instructions for Windows 10 based systems
+#### Instructions pour l’environnement Windows 10
 
-Please follow these steps for Windows 10 based systems. In this example we will work with the HOLOS_4 folder mentioned in the [how to find the holos data files section](#how-to-find-the-holos-program-data-files)
+Veuillez suivre les étapes suivantes si vous êtes dans l’environnement Windows 10. Dans notre exemple, nous travaillerons avec le dossier HOLOS_4 mentionné dans la [section indiquant comment trouver les fichiers de données Holos](#comment-trouver-les-fichiers-du-programme-holos)
 
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
+1.	Maintenez le bouton gauche de votre souris enfoncé pour sélectionner les fichiers que vous voulez ajouter à votre fichier d’archives ZIP. Nous inclurons ici tous les fichiers du dossier HOLOS_4.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-12.gif" alt="Figure11-12" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-12.png" alt="Figure11-12" width="650"/>
     <br>
     <em>
-		Figure 11-12 - Highlight all the files you want to add to the archive.
+		Figure 11-12 - Mise en évidence de tous les fichiers à ajouter au fichier d’archives. 
 	</em>
 </p>
 <br>
 
-2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, go to **Send to** and select “**Compressed (zipped) folder**”. Selecting this will create a single new .zip file containing all the files you selected/highlighted in **Step 1.**
+2.	2.	Après avoir sélectionné tous les fichiers, cliquez avec le bouton droit de la souris sur l’un des fichiers mis en évidence. Dans le menu contextuel qui s’affiche, sélectionnez l’option **Envoyer vers**, puis l’option **Dossier compressé**. Un nouveau fichier ZIP unique contenant tous les fichiers que vous avez sélectionnés/mis en évidence à l’**étape 1** est alors créé.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-13.gif" alt="Figure11-13" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-13.png" alt="Figure11-13" width="650"/>
     <br>
     <em>
-		Figure 11-13 - Adding files to a .zip archive.
+		Figure 11-13 - Ajout de fichiers à un fichier d’archives ZIP 
 	</em>
 </p>
 <br>
 
-3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then create a new issue on Github and attachment this file within the issue report for troubleshooting purposes. This zip file will contain all the files that you selected in step 1. To learn how to submit an issue report on GitHub, [click here](#how-to-report-an-error-message-and-create-a-bug-report).
+3.	3.	Une fois la compression terminée, un nouveau fichier est créé dans le même dossier (dossier HOLOS_4). Windows vous permet alors de renommer le fichier. Donnez à votre nouveau fichier le nom « **holos-data-files** ». Vous pouvez aussi créer un nouvel incident dans GitHub, puis joindre le fichier au rapport d’incident, aux fins de dépannage.  Le fichier compressé contient tous les fichiers que vous avez sélectionnés à l’étape 1. Pour apprendre comment soumettre un rapport d’incident dans GitHub, [cliquez ici](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue).
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-14.gif" alt="Figure11-14" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-14.png" alt="Figure11-14" width="650"/>
     <br>
     <em>
-		Figure 11-14 - Renaming the new folder to holos-data-files.
+		Figure 11-14 - Donner au nouveau dossier le nom « holos-data-files ». 
 	</em>
 </p>
 <br>
@@ -4150,122 +4060,114 @@ Please follow these steps for Windows 10 based systems. In this example we will 
 <br>
 
 
-### Holos Error Messages
+### Message d’erreur Holos 
 
-Error messages can appear when Holos encounters an internal error and is unable to resolve the issue. When Holos encounters an internal error, it displays a message in the program informing the user that an error has occurred. Below is an example of a similar error.
+Des messages d’erreur peuvent apparaître lorsqu’une erreur interne survient dans Holos et que le système ne peut pas la résoudre.  Si une erreur interne survient dans Holos, le système affiche un message indiquant à l’utilisateur qu’une erreur est survenue.  Voici un exemple d’erreur similaire. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-15.png" alt="Figure11-15" width="750"/>
     <br>
     <em>
-		Figure 11-15 - Error message screen.
+		Figure 11-15 - Message d’erreur 
 	</em>
 </p>
 <br>
 
-The message that Holos displays includes information about what the error was and how to report this error to the Holos developers. The next section describes the process of reporting this error to the Holos team.
+Le message affiché par Holos inclut des renseignements sur l’erreur et sur la façon de signaler cette erreur aux développeurs Holos.  La prochaine section décrit le processus de signalement de l’erreur à l’équipe Holos. 
 
 
 
-### How to report an error message and create a bug report.
+### Comment signaler un message d’erreur et créer un rapport de bogue 
 
-Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. 
+Signaler un message d’erreur aux développeurs Holos permet à ces derniers de régler le problème encouru et de résoudre d’éventuels conflits. 
+Lorsqu’une erreur interne survient, le logiciel affiche un message d’erreur (figure 11-16). Pour signaler cette erreur (et d’autres incidents) aux développeurs, suivez ces étapes : 
 
-When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error (and other issues) to the developers, follow these steps:
 
-**Note:**	If you get an error, as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. In addition, clicking this button allows you to paste this information into a different program or to include it in your communication with the Holos developers.
+**Note** : Si le système vous signale une erreur, comme dans l’image ci-dessous, cliquez sur le bouton **Copy to Clipboard (copier dans le presse-papiers)**. Le message d’erreur et d’autres renseignements pertinents sont ainsi copiés dans le presse-papiers de votre ordinateur.  Cliquer sur ce bouton vous permet aussi de coller l’information dans un programme différent ou de l’inclure dans votre communication avec les développeurs Holos. 
 
-*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers.Instead, it simply copies information to your computer's clipboard.*
+*Veuillez noter que le fait de cliquer sur le bouton Copy to Clipboard (copier dans le presse-papiers) ne transmet pas d’information aux développeurs Holos. Cela ne fait que copier l’information dans le presse-papiers de votre ordinateur.*
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-16.png" alt="Figure11-16" width="750"/>
     <br>
     <em>
-		Figure 11-16 - Click copy to clipboard to copy information related to the error.
+		Figure 11-16 - Cliquer sur le bouton Copy to Clipboard (copier dans le presse-papiers) pour copier l’information liée à l’erreur. 
 	</em>
 </p>
 <br>
 
--	To send this information to the Holos developers, you will have to create a new issue in the official GitHub repository for Holos. You can click [here](https://GitHub.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
+- Pour transmettre l’information aux développeurs Holos, vous devez créer un nouvel incident dans le référentiel GitHub officiel pour Holos.  Vous pouvez cliquer [ici](https://GitHub.com/holos-aafc/Holos/issues) pour accéder à la page de signalement des incidents.
 
-**Note:** You will need to create a free GitHub account to create and report issues.
+**Note:** Vous devez créer un compte GitHub gratuit pour créer et signaler des incidents. 
 
--	After going to the issue reporting page, click on "**New Issue**".
+-	•	Une fois dans la page de signalement des incidents, cliquez sur le bouton **New Issue (nouvel incident)**.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
     <br>
     <em>
-		Figure 11-17 - The new issue button on the Holos GitHub repository.
+		Figure 11-17 - Bouton New Issue (nouvel incident) dans le référentiel GitHub  
 	</em>
 </p>
 <br>
 
-- Please click on "Get Started" opposite the "Bug / Issue Report" category on this page.
+- •	Cliquez sur le bouton Get Started (pour commencer) correspondant à la catégorie Bug/Issue Report (rapport de bogue/d’incident) dans la page affichée.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
     <br>
     <em>
-		Figure 11-18 - The new issue button on the Holos GitHub repository.
+		Figure 11-18 – Bouton New Issue (nouvel incident) dans le référentiel GitHub de Holos  
 	</em>
 </p>
 <br>
 
 
-- You will be presented with a new page where you can post details about the issue and provide additional information. This information includes:
-  - **Title of issue**
-  - **Contact details** (in case we need to contact you outside of GitHub)
-  - **Expected Behaviour** when using Holos.
-  - **The Actual Behaviour** displayed by Holos resulted in the bug/issue.
-  - **Details of the issue, including steps to reproduce the issue**.
-  - **Error message.**
-  - **Holos version number.**
+- •	Une nouvelle page, dans laquelle vous pouvez publier des détails sur l’incident rencontré et fournir des renseignements additionnels s’affiche.  Les renseignements comprennent les suivants :
+–	**Titre de l’incident**
+–	**Coordonnées** (au cas où nous devrions vous contacter en dehors de GitHub)
+–	**Comportement attendu lors de l’utilisation de Holos**
+–	**Comportement entraîné par le bogue/l’incident**
+–	**Détails sur l’incident, notamment les étapes à suivre pour le reproduire** 
+–	**Message d’erreur**
+–	**Numéro de la version de Holos**
+
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-19.png" alt="Figure11-19" width="750"/>
     <br>
     <em>
-		Figure 11-19 - The Bug/Issue reporting category.
+		Figure 11-19 - Catégorie de signalement du bogue/de l’incident 
 	</em>
 </p>
 <br>
 
-- Paste the information [copied earlier to your clipboard](#how-to-report-an-error-message) in the **Error Message **section, and fill in the other information as directed.
+- Collez l’information [copiée plus tôt dans votre presse-papiers](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) dans la section **Error Message (message d’erreur)**, puis remplissez les autres champs selon les directives qui leur sont associées
 
+- Cliquez sur le bouton **Submit new issue (transmettre un nouvel incident)**, dans le bas de l’écran Bug/Issue Report (rapport de bogue/de l’incident).
 
-- Click on the "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
-
-- A new issue will now be created with the included information.
+- Un nouvel incident est maintenant créé avec les renseignements inclus
 
 <br>
 
-### Finding the Holos Software version number
+### Comment trouver le numéro de version du logiciel Holos 
 
-The version number of your current Holos installation is displayed when you first launch the program. After starting the program, look for the version number in the small window that pops up where you're able to select your language.
+Le numéro de version de votre logiciel Holos s’affiche lorsque vous lancez le programme.  Lorsque le programme a déjà été lancé, vous trouvez ce numéro dans la petite fenêtre qui surgit à l’endroit où vous pouvez sélectionner la langue dans laquelle vous voulez travailler. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-20.png" alt="Figure11-20" width="650"/>
     <br>
     <em>
-		Figure 11-20 - Version number of the Holos installation.
+		Figure 11-20 - numéro de version du logiciel Holos
 	</em>
 </p>
 <br>
-
-
-<!---
-This is the end of section that needs to be translated
--->
-[Translation Section 1]: <> (Section 1 End)
-
-
 
 
 ## Comment puis-je activer le mode avance
