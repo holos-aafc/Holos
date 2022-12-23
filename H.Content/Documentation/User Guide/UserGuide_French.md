@@ -1111,7 +1111,7 @@ La composante Crop Rotation (rotation des cultures) est similaire à la composan
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
     <br>
     <em>
 		Figure 6.58 - Composante Crop Rotation (rotation des cultures)  
@@ -1124,7 +1124,7 @@ La composante Crop Rotation (rotation des cultures) vous permet de déterminer a
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
     <br>
     <em>
 		Figure 6.59 – Crop rotation (rotation des cultures) – Détermination des cultures
@@ -1147,7 +1147,7 @@ L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe q
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
     <br>
     <em>
 		Figure 6.60 - aramètres des cultures d’hiver et de couverture  
@@ -1176,7 +1176,7 @@ L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe q
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
     <br>
     <em>
 		Figure 6.15 - Composante pour les animaux Beef Stockers & Backgrounders 
@@ -1203,7 +1203,7 @@ L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe q
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-16.png" alt="Figure6-16"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-16.png" alt="Figure6-16"/>
     <br>
     <em>
 		Figure 6.16 - Groupes d’animaux.
@@ -1233,7 +1233,7 @@ L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe q
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
     <br>
     <em>
 		Figure 6.17 - Périodes de gestion pour le groupe d'animaux. 
@@ -1272,7 +1272,7 @@ Holos permet à l'utilisateur d'ajouter des groupes et de créer des copies d'un
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
     <br>
     <em>
 		Figure 6.18 - Composante Beef Cow-Calf (vaches et veaux de boucherie)
@@ -1292,7 +1292,7 @@ Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
 		Figure 6.19 - Page d'onglet General des périodes de gestion.
@@ -1313,7 +1313,7 @@ Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
     <br>
     <em>
 		Figure 6.20 - Périodes de gestion – Page d'onglet Diet (ration).
@@ -1328,7 +1328,7 @@ Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
     <br>
     <em>
 		Figure 6.21 - Périodes de gestion – Page d'onglet Housing (bâtiments d'élevage).
@@ -1347,7 +1347,7 @@ Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
     <br>
     <em>
 		Figure 6.22 - Périodes de gestion – Page d'onglet Manure (fumier).
@@ -1370,7 +1370,7 @@ Cette composante contient des pages d'onglet similaires à celles de la [composa
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
     <br>
     <em>
 		Figure 6.23 - Composante Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis)
@@ -1391,7 +1391,7 @@ Cette composante contient des pages d'onglet similaires à celles de la [composa
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
     <br>
     <em>
 		Figure 6.24 - Composante Beef Finishers (bovins de finition)
@@ -1418,7 +1418,7 @@ Cette composante comporte des pages d'onglets similaires à celles de la [compos
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
     <br>
     <em>
 		Figure 6.25 - Composante Dairy cattle (bovins laitiers)
@@ -1442,7 +1442,7 @@ La composante Grower-to-Finish (engraissement à finition) comporte le groupe d'
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
     <br>
     <em>
 		Figure 6.26 - Composante Grower-to-Finish (engraissement à finition)
@@ -1468,7 +1468,7 @@ The general tab allows editing the following information:
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
     <br>
     <em>
 		Figure 6.27 - Composante Swine (porcs) – Page d'onglet General (général)
@@ -1486,7 +1486,7 @@ Dans la page d'onglet Diet (ration), vous pouvez modifier les données suivantes
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
     <br>
     <em>
 		Figure 6.28 - Composante Swine (porcs) – Page d'onglet Diet (ration)
@@ -1503,7 +1503,7 @@ Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivant
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
     <br>
     <em>
 		Figure 6.29 - Composante Swine (porcs) – Page d'onglet Diet (ration)
@@ -1523,7 +1523,7 @@ Cette composante comporte des pages d'onglets similaires à celles de la [compos
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
     <br>
     <em>
 		Figure 6.30 - Composante Farrow-to-Wean (naissance au sevrage)
@@ -1543,7 +1543,7 @@ Cette composante comporte des pages d'onglets similaires à celles de la [compos
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
     <br>
     <em>
 		Figure 6.31 - Composante Iso-Wean (porcelets sevrés)
@@ -1565,7 +1565,7 @@ Cette composante comporte des pages d'onglets similaires à celles de la [compos
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
     <br>
     <em>
 		Figure 6.32 - Composante Farrow-to-Finish (naissance à la finition)
@@ -1588,7 +1588,7 @@ La composante Pullet Farm (exploitations de poulettes) comporte le groupe d'anim
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
     <br>
     <em>
 		Figure 6.34 - Composante Pullet Farm (exploitations de poulettes)
@@ -1609,7 +1609,7 @@ Dans la page d'onglet General (général), vous pouvez modifier les données sui
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
     <br>
     <em>
 		Figure 6.35 - Composante Poultry (volaille) – Page d'onglet General (général)
@@ -1628,7 +1628,7 @@ Dans la page d'onglet Housing (bâtiments d'élevage), vous pouvez modifier les 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
     <br>
     <em>
 		Figure 6.36 - Composante Poultry (volaille) – Page d'onglet Housing (bâtiments d'élevage)
@@ -1645,7 +1645,7 @@ Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivant
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
     <br>
     <em>
 		Figure 6.37 - Composante Poultry (volaille) – Page d'onglet Manure (fumier)
@@ -1668,7 +1668,7 @@ Cette composante comporte des pages d'onglets similaires à celles de la [compos
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
     <br>
     <em>
 		Figure 6.38 - Composante Chicken Multiplier Breeder (reproduction-multiplication des poulets)
@@ -1690,7 +1690,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
     <br>
     <em>
 		Figure 6.39 - Composante Chicken Meat Production (production de viande de poulet)
@@ -1712,7 +1712,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
     <br>
     <em>
 		Figure 6.61 - Composante Turkey Multiplier Breeder (reproduction-multiplication de dindes)
@@ -1732,7 +1732,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
     <br>
     <em>
 		Figure 6.40 - Composante Turkey Meat Productio (production de viande de dindon)
@@ -1751,7 +1751,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
     <br>
     <em>
 		Figure 6.41 - Composante Chicken Egg Production (production d'œufs de poules)
@@ -1771,7 +1771,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
     <br>
     <em>
 		Figure 6.42 - Composante Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets)
@@ -1794,7 +1794,7 @@ La composante Sheep Feedlot (parc d'engraissement des moutons) comporte le group
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
     <br>
     <em>
 		Figure 6.43 - Composante Sheep Feedlot (parc d'engraissement de moutons)
@@ -1817,7 +1817,7 @@ Dans la page d'onglet General (général) de cette catégorie, vous pouvez modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
     <br>
     <em>
 		Figure 6.44 - Catégorie Sheep (moutons) – Page d'onglet General (général)
@@ -1834,7 +1834,7 @@ Dans la page d'onglet Diet (ration) de cette catégorie, vous pouvez modifier le
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
     <br>
     <em>
 		Figure 6.45 - Catégorie Sheep (moutons) – Page d'onglet Diet (ration)
@@ -1850,7 +1850,7 @@ Dans la page d'onglet Housing (bâtiments d'élevage) de cette catégorie, vous 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
     <br>
     <em>
 		Figure 6.46 - Catégorie Sheep (moutons) – Page d'onglet Housing (bâtiments d'élevage)
@@ -1866,7 +1866,7 @@ Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
     <br>
     <em>
 		Figure 6.47 - Catégorie Sheep (moutons) – Page d'onglet Manure (fumier)
@@ -1886,7 +1886,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
     <br>
     <em>
 		Figure 6.48 - Composante Rams (béliers)
@@ -1906,7 +1906,7 @@ Cette composante comporte des pages d'onglets additionnelles similaires à celle
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
     <br>
     <em>
 		Figure 6.49 - Composante Lambs & Ewes (agneaux et brebis)
@@ -1927,7 +1927,7 @@ Dans la page d'onglet General (général) de cette catégorie, vous pouvez modif
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
     <br>
     <em>
 		Figure 6.50 - Other Livestock (autres animaux d'élevage) – Page d'onglet General (général)
@@ -1944,7 +1944,7 @@ Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
     <br>
     <em>
 		Figure 6.51 - Other Livestock (autres animaux d'élevage) – Page d'onglet Manure (fumier)
@@ -1958,7 +1958,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
     <br>
     <em>
 		Figure 6.52 - Composante Goats (chèvres)
@@ -1970,7 +1970,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
     <br>
     <em>
 		Figure 6.53 - Composante Deer (cerfs)
@@ -1982,7 +1982,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
     <br>
     <em>
 		Figure 6.54 - Composante Horses (chevaux)
@@ -1994,7 +1994,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
     <br>
     <em>
 		Figure 6.55 - Composante Mules (mules)
@@ -2006,7 +2006,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
     <br>
     <em>
 		Figure 6.56 - Composante Bison (bisons)
@@ -2019,7 +2019,7 @@ La catégorie des autres animaux d'élevage contient les composantes pour les an
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
     <br>
     <em>
 		Figure 6.57 - Composante Llams (lamas)
