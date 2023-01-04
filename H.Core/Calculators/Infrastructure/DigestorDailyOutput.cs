@@ -26,6 +26,9 @@ namespace H.Core.Calculators.Infrastructure
 
         public double FlowRateOfTotalNitrogenInDigestate { get; set; }
 
+        /// <summary>
+        /// The total TAN from all substrates
+        /// </summary>
         public double FlowOfAllTanInDigestate { get; set; }
 
         public double FlowRateOfAllOrganicNitrogenInDigestate { get; set; }

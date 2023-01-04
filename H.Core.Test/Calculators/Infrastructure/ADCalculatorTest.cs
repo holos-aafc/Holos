@@ -25,6 +25,8 @@ namespace H.Core.Test.Calculators.Infrastructure
         private AnaerobicDigestionComponent _component;
         private ManagementPeriod _managementPeriod1;
         private ManagementPeriod _managementPeriod2;
+        private FarmResiduesSubstrateViewItem _farmResidue1;
+        private FarmResiduesSubstrateViewItem _farmResidue2;
 
         #endregion
 
@@ -56,7 +58,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             residuesSubstrateViewItem.BiomethanePotential = 0.5;
             residuesSubstrateViewItem.MethaneFraction = 0.5;
 
-            var manureSubstrateViewItem = new ManureSubstrateViewItem() { AnimalType = AnimalType.Beef, IsFreshManure = true };
+            var manureSubstrateViewItem = new ManureSubstrateViewItem() { AnimalType = AnimalType.Beef, ManureSubstrateState = ManureSubstrateState.Fresh };
             manureSubstrateViewItem.FlowRate = 1.25;
             manureSubstrateViewItem.TotalSolids = 0.75;
             manureSubstrateViewItem.VolatileSolids = 0.1;
@@ -65,9 +67,12 @@ namespace H.Core.Test.Calculators.Infrastructure
             manureSubstrateViewItem.BiomethanePotential = 0.22;
             manureSubstrateViewItem.MethaneFraction = 2;
 
+            _farmResidue1 = new FarmResiduesSubstrateViewItem() { FarmResidueType = FarmResidueType.BarleyStraw };
+            _farmResidue2 = new FarmResiduesSubstrateViewItem() { FarmResidueType = FarmResidueType.GrassClippings };
+
             _component = new AnaerobicDigestionComponent();
             _component.HydraulicRetentionTimeInDays = 30;
-            _component.ProportionAsPercentageTotalManureAddedToAd = 0.5;
+            _component.ProportionAsPercentageTotalManureAddedToAD = 0.5;
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(residuesSubstrateViewItem);
             _component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.Add(manureSubstrateViewItem);
 
@@ -86,6 +91,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             };
 
             _day1Emissions = new GroupEmissionsByDay();
+            _day1Emissions.DateTime = DateTime.Now;
             _day1Emissions.TotalVolumeOfManureAvailableForLandApplication = 100;
             _day1Emissions.VolatileSolids = 0.01;
             _day1Emissions.AmountOfNitrogenExcreted = 10;
@@ -95,6 +101,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _day1Emissions.CarbonFromManureAndBedding = 12;
 
             _day2Emissions = new GroupEmissionsByDay();
+            _day1Emissions.DateTime = DateTime.Now.AddDays(-20);
             _day2Emissions.TotalVolumeOfManureAvailableForLandApplication = 50;
             _day2Emissions.VolatileSolids = 0.02;
             _day2Emissions.AmountOfNitrogenExcreted = 20;
@@ -148,88 +155,29 @@ namespace H.Core.Test.Calculators.Infrastructure
         #endregion
 
         #region Tests
-        
-        [TestMethod]
-        public void TestMethod1()
-        {
-            var farm = new Farm();
-            farm.Components.Add(_component);
-
-            var groupEmissionsByDay = new GroupEmissionsByDay();
-            groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 100;
-            groupEmissionsByDay.VolatileSolids = 0.01;
-            groupEmissionsByDay.AmountOfNitrogenExcreted = 10;
-            groupEmissionsByDay.AmountOfNitrogenAddedFromBedding = 10;
-            groupEmissionsByDay.OrganicNitrogenInStoredManure = 20;
-            groupEmissionsByDay.TanExcretion = 10;
-            groupEmissionsByDay.CarbonFromManureAndBedding = 12;
-
-            var managementPeriod = new ManagementPeriod();
-            managementPeriod.ManureDetails.DailyTanExcretion = 0.25;
-
-            _sut.CalculateResults(farm, groupEmissionsByDay, managementPeriod);
-        }
 
         [TestMethod]
         public void CalculateResultsDoesNotCalculateResultsWhenManureHandlingSystemIsNotSetToAD()
         {
-            var farm = new Farm();
-            farm.Components.Add(_component);
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
 
-            var groupEmissionsByDay = new GroupEmissionsByDay();
-            groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 100;
-            groupEmissionsByDay.VolatileSolids = 0.01;
-            groupEmissionsByDay.AmountOfNitrogenExcreted = 10;
-            groupEmissionsByDay.AmountOfNitrogenAddedFromBedding = 10;
-            groupEmissionsByDay.OrganicNitrogenInStoredManure = 20;
-            groupEmissionsByDay.TanExcretion = 10;
-            groupEmissionsByDay.CarbonFromManureAndBedding = 12;
+            _managementPeriod1.ManureDetails.StateType = ManureStateType.DeepPit;
+            _managementPeriod2.ManureDetails.StateType = ManureStateType.CompostIntensive;
 
-            var managementPeriod = new ManagementPeriod();
-            managementPeriod.ManureDetails.DailyTanExcretion = 0.25;
-            managementPeriod.ManureDetails.StateType = ManureStateType.DeepPit;
+            var result = _sut.CalculateResults(_farm, _animalComponentResults);
 
-            var result = _sut.CalculateResults(farm, groupEmissionsByDay, managementPeriod);
-
-            Assert.AreEqual(0, result.FlowRateOfAllSubstratesInDigestate);
+            Assert.IsTrue(result.All(x => x.FlowRateOfAllSubstratesInDigestate == 0));
         }
 
         [TestMethod]
         public void CalculateResultsWhenManureHandlingSystemIsADCalculatesFlow()
         {
-            var farm = new Farm();
-            farm.Components.Add(_component);
+            _managementPeriod1.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            _managementPeriod2.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
 
-            var groupEmissionsByDay = new GroupEmissionsByDay();
-            groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 100;
-            groupEmissionsByDay.VolatileSolids = 0.01;
-            groupEmissionsByDay.AmountOfNitrogenExcreted = 10;
-            groupEmissionsByDay.AmountOfNitrogenAddedFromBedding = 10;
-            groupEmissionsByDay.OrganicNitrogenInStoredManure = 20;
-            groupEmissionsByDay.TanExcretion = 10;
-            groupEmissionsByDay.CarbonFromManureAndBedding = 12;
+            var result = _sut.CalculateResults(_farm, _animalComponentResults);
 
-            var managementPeriod = new ManagementPeriod();
-            managementPeriod.ManureDetails.DailyTanExcretion = 0.25;
-            managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
-
-            var result = _sut.CalculateResults(farm, groupEmissionsByDay, managementPeriod);
-
-            Assert.IsTrue(result.FlowRateOfAllSubstratesInDigestate > 0);
-        }
-
-        [TestMethod]
-        public void CalculateResultsTestTotalsOutputsForAllDays()
-        {
-            var results = _sut.CalculateResults(_farm, _animalComponentResults);
-        }
-
-        [TestMethod]
-        public void TestCalculateResults()
-        {
-            var results = _sut.CalculateResults(_farm, _animalComponentResults);
-
-            //Assert.IsTrue(results.Any());
+            Assert.IsTrue(result.All(x => x.FlowRateOfAllSubstratesInDigestate > 0));
         }
 
         [TestMethod]
@@ -242,7 +190,7 @@ namespace H.Core.Test.Calculators.Infrastructure
                 new SubstrateFlowInformation() {DateCreated = DateTime.Now.AddDays(23)},
             };
 
-            var result = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows);
+            var result = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows, _component, _farm);
 
             Assert.AreEqual(2, result.Count);
         }
@@ -250,15 +198,15 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFreshManureFlowRatesFromAnimals()
         {
-            var results = _sut.GetFreshManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod1);
+            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, _managementPeriod1, new ManureSubstrateViewItem());
 
             Assert.AreEqual(0.06, results.CarbonFlowOfSubstrate, 0.00001);
         }
 
         [TestMethod]
-        public void GetStoredManureFlowRateFromAnimalsTest()
+        public void GetStoredManureFlowRateTest()
         {
-            var results = _sut.GetStoredManureFlowRateFromAnimals(_component, _day1Emissions, _managementPeriod1);
+            var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, _managementPeriod1, new ManureSubstrateViewItem());
 
             Assert.AreEqual(0.1, results.VolatileSolidsFlowOfSubstrate,0.00001);
         }
@@ -266,10 +214,24 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFlowsFromDailyResultsReturnsCorrectNumberOfItems()
         {
-            var results = _sut.GetFlowsFromDailyResults(_farm, _animalComponentResults, _component);
+            var results = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
 
             // 2 daily emissions from the beef results, 2 from the dairy results
-            Assert.AreEqual(4, results.Count);
+            Assert.AreEqual(2, results.Count);
+        }
+
+        [TestMethod]
+        public void GetDailyFarmResidueFlowRatesReturnsCorrectNumberOfItemsForFarmResidues()
+        {
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
+            _component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.Clear();
+
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
+
+            var results = _sut.GetDailyFarmResidueFlowRates( _component);
+
+            // 1 result for each day of year
+            Assert.AreEqual(365, results.Count);
         }
 
         [TestMethod]
@@ -289,9 +251,26 @@ namespace H.Core.Test.Calculators.Infrastructure
         }
 
         [TestMethod]
+        public void CombineSubstrateFlowsOfSameTypeOnSameDaySetsCorrectDate()
+        {
+            var flow1 = new SubstrateFlowInformation() {DateCreated = DateTime.Now};
+            var flow2 = new SubstrateFlowInformation() {DateCreated = DateTime.Now.AddDays(30)};
+
+            var flowRates = new List<SubstrateFlowInformation>()
+            {
+                flow1, flow2,
+            };
+
+            var result = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(flowRates, _component, _farm);
+
+            Assert.IsTrue(result.Any(x => x.Date.Date.Equals(flow1.DateCreated.Date)));
+            Assert.IsTrue(result.Any(x => x.Date.Date.Equals(flow2.DateCreated.Date)));
+        }
+
+        [TestMethod]
         public void Integration()
         {
-            var substrateFlows = _sut.GetFlowsFromDailyResults(_farm, _animalComponentResults, _component);
+            var substrateFlows = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
             foreach (var substrateFlowInformation in substrateFlows)
             {
                 _sut.CalculateDailyBiogasProductionFromSingleSubstrate(substrateFlowInformation);
@@ -299,9 +278,51 @@ namespace H.Core.Test.Calculators.Infrastructure
             }
 
             // Combine the total flows from all substrates and biogas production from same day
-            var combinedDailyOutputs = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows);
+            var combinedDailyOutputs = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows, _component, _farm);
+        }
 
-            // whats next?
+        [TestMethod]
+        public void GetFarmResidueFlowRatesReturnsCorrectNumberOfFlows()
+        {
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
+
+            var flows = _sut.GetFarmResidueFlowRates(_component);
+
+            Assert.AreEqual(2, flows.Count);
+        }
+
+        [TestMethod]
+        public void GetFarmResidueFlowRatesReturnsCalculatedValues()
+        {
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
+
+            _farmResidue1.FlowRate = 5;
+            _farmResidue1.TotalSolids = 10;
+            _farmResidue1.VolatileSolids = 14;
+            _farmResidue1.TotalNitrogen = 10;
+            _farmResidue1.TotalCarbon = 0.5;
+            _farmResidue1.MethaneFraction = 0.1;
+            _farmResidue1.BiomethanePotential = 0.22;
+
+            _farmResidue2.FlowRate = 20;
+            _farmResidue2.TotalSolids = 30;
+            _farmResidue2.VolatileSolids = 7;
+            _farmResidue2.TotalNitrogen = 5;
+            _farmResidue2.TotalCarbon = 0.25;
+            _farmResidue2.MethaneFraction = 0.05;
+            _farmResidue2.BiomethanePotential = 0.11;
+
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
+            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
+
+            var flows = _sut.GetFarmResidueFlowRates(_component);
+
+            Assert.AreEqual(2, flows.Count);
+
+            Assert.AreEqual(1.68, flows[0].BiodegradableSolidsFlow);
+            Assert.AreEqual(3.36, flows[1].BiodegradableSolidsFlow);
         }
 
         #endregion

@@ -222,6 +222,7 @@
     <Compile Include="Enumerations\IrrigationType.cs" />
     <Compile Include="Enumerations\ManureLocationSourceType.cs" />
     <Compile Include="Enumerations\ManureAnimalSourceTypes.cs" />
+    <Compile Include="Enumerations\ManureSubstrateState.cs" />
     <Compile Include="Enumerations\MetricUnitsOfMeasurement.cs" />
     <Compile Include="Enumerations\ModelParameters.cs" />
     <Compile Include="Enumerations\MonthlyNormalTypes.cs" />

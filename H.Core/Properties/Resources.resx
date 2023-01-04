@@ -4593,7 +4593,7 @@
     <value>Sunflower Residues</value>
   </data>
   <data name="EnumSweageSludge" xml:space="preserve">
-    <value>Sweage Sludge</value>
+    <value>Sewage sludge</value>
   </data>
   <data name="EnumTriticaleStraw" xml:space="preserve">
     <value>Triticale Straw</value>
@@ -5428,5 +5428,23 @@
   </data>
   <data name="KilowattHoursPerYear" xml:space="preserve">
     <value>kWh year⁻¹</value>
+  </data>
+  <data name="FlowRate" xml:space="preserve">
+    <value>Flow rate</value>
+  </data>
+  <data name="LabelTotalCarbon" xml:space="preserve">
+    <value>Total carbon</value>
+  </data>
+  <data name="LabelHydraulicRetentionTime" xml:space="preserve">
+    <value>Hydraulic retention time</value>
+  </data>
+  <data name="LabelNumberOfReactors" xml:space="preserve">
+    <value>Number of reactors</value>
+  </data>
+  <data name="EnumFreshManure" xml:space="preserve">
+    <value>Fresh manure</value>
+  </data>
+  <data name="EnumStoredManure" xml:space="preserve">
+    <value>Stored manure</value>
   </data>
 </root>

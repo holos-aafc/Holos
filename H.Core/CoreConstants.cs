@@ -38,6 +38,10 @@ namespace H.Core
         public static double DirectN2OUncertaintyEstimate = 2;
         public static double IndirectN2OUncertaintyEstimate = 4;
         public static double EnergyCO2UncertaintyEstimate = 2;
+
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public static double CarbonConcentration = 0.45;
 
         /// <summary>

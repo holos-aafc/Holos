@@ -2743,6 +2743,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fresh manure.
+        /// </summary>
+        public static string EnumFreshManure {
+            get {
+                return ResourceManager.GetString("EnumFreshManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fully injected.
         /// </summary>
         public static string EnumFullyInjected {
@@ -4849,6 +4858,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stored manure.
+        /// </summary>
+        public static string EnumStoredManure {
+            get {
+                return ResourceManager.GetString("EnumStoredManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Straw.
         /// </summary>
         public static string EnumStraw {
@@ -4975,7 +4993,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sweage Sludge.
+        ///   Looks up a localized string similar to Sewage sludge.
         /// </summary>
         public static string EnumSweageSludge {
             get {
@@ -5970,6 +5988,15 @@ namespace H.Core.Properties {
         public static string FlaxSeed {
             get {
                 return ResourceManager.GetString("FlaxSeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow rate.
+        /// </summary>
+        public static string FlowRate {
+            get {
+                return ResourceManager.GetString("FlowRate", resourceCulture);
             }
         }
         
@@ -9331,6 +9358,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hydraulic retention time.
+        /// </summary>
+        public static string LabelHydraulicRetentionTime {
+            get {
+                return ResourceManager.GetString("LabelHydraulicRetentionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incubation.
         /// </summary>
         public static string LabelIncubation {
@@ -10047,6 +10083,15 @@ namespace H.Core.Properties {
         public static string LabelNumberOfBalesAvailableForSupplementalFeeding {
             get {
                 return ResourceManager.GetString("LabelNumberOfBalesAvailableForSupplementalFeeding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of reactors.
+        /// </summary>
+        public static string LabelNumberOfReactors {
+            get {
+                return ResourceManager.GetString("LabelNumberOfReactors", resourceCulture);
             }
         }
         
@@ -10866,6 +10911,15 @@ namespace H.Core.Properties {
         public static string LabelTotalAverageFeedIntake {
             get {
                 return ResourceManager.GetString("LabelTotalAverageFeedIntake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total carbon.
+        /// </summary>
+        public static string LabelTotalCarbon {
+            get {
+                return ResourceManager.GetString("LabelTotalCarbon", resourceCulture);
             }
         }
         

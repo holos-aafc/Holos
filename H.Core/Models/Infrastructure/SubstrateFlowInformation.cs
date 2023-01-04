@@ -23,6 +23,7 @@ namespace H.Core.Models.Infrastructure
         public SubstrateType SubstrateType { get; set; }
         public ManagementPeriod ManagementPeriod { get; set; }
         public AnaerobicDigestionComponent Component { get; set; }
+        public SubstrateViewItemBase SubstrateViewItemBase { get; set; }
 
         /// <summary>
         /// (kg day^-1)
@@ -49,7 +50,11 @@ namespace H.Core.Models.Infrastructure
         /// </summary>
         public double CarbonFlowOfSubstrate { get; set; }
         public double OrganicNitrogenFlowOfSubstrate { get; set; }
-        public double TanFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// This is the TAN in substrate only
+        /// </summary>
+        public double ExcretedTanInSubstrate { get; set; }
 
         /// <summary>
         /// (kg day^-1)
@@ -75,7 +80,12 @@ namespace H.Core.Models.Infrastructure
         /// (Nm^3 day^-1)
         /// </summary>
         public double CarbonDioxideProduction { get; set; }
+
+        /// <summary>
+        /// The TAN from excretion plus the added nitrogen from degraded volatile solids
+        /// </summary>
         public double TanFlowInDigestate { get; set; }
+
         public double OrganicNitrogenFlowInDigestate { get; set; }
         public double CarbonFlowInDigestate { get; set; }
     }

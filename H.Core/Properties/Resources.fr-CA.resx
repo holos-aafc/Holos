@@ -1017,6 +1017,9 @@
   <data name="EnumFrench" xml:space="preserve">
     <value>Français/French</value>
   </data>
+  <data name="EnumFreshManure" xml:space="preserve">
+    <value>Fresh manure</value>
+  </data>
   <data name="EnumFullyInjected" xml:space="preserve">
     <value>entièrement injecté</value>
   </data>
@@ -1720,6 +1723,9 @@
   <data name="EnumStockingDensityNotSelected" xml:space="preserve">
     <value>cliquez pour sélectionner une densité de peuplement</value>
   </data>
+  <data name="EnumStoredManure" xml:space="preserve">
+    <value>Stored manure</value>
+  </data>
   <data name="EnumStraw" xml:space="preserve">
     <value>paille</value>
   </data>
@@ -1769,7 +1775,7 @@
     <value>aindainage</value>
   </data>
   <data name="EnumSweageSludge" xml:space="preserve">
-    <value>Sweage Sludge</value>
+    <value>Sewage sludge</value>
   </data>
   <data name="EnumSweetCloverMelilotusOfficianalis" xml:space="preserve">
     <value>mélilot jaune (Melilotus officianalis)</value>
@@ -2097,6 +2103,9 @@
   </data>
   <data name="FlaxSeed" xml:space="preserve">
     <value>graines de lin</value>
+  </data>
+  <data name="FlowRate" xml:space="preserve">
+    <value>Flow rate</value>
   </data>
   <data name="FodderCorn" xml:space="preserve">
     <value>maïs fourrager</value>
@@ -3199,6 +3208,9 @@
   <data name="LabelHolosOnlySupportsCertainHardinessZones" xml:space="preserve">
     <value>Veuillez noter que Holos ne prend en compte que les zones de rusticité entre 2A et 4B.  Les zones de rusticité en dehors de cette plage seront prises en compte lorsqu’un plus grand nombre de données sera disponible.</value>
   </data>
+  <data name="LabelHydraulicRetentionTime" xml:space="preserve">
+    <value>Hydraulic retention time</value>
+  </data>
   <data name="LabelIdoine" xml:space="preserve">
     <value>iode</value>
   </data>
@@ -3438,6 +3450,9 @@
   </data>
   <data name="LabelNumberOfBalesAvailableForSupplementalFeeding" xml:space="preserve">
     <value>{0} bottes récoltées dans le champ ‘{1}’ disponibles comme supplément alimentaire</value>
+  </data>
+  <data name="LabelNumberOfReactors" xml:space="preserve">
+    <value>Number of reactors</value>
   </data>
   <data name="LabelNurseryWeanersStarterDiet1" xml:space="preserve">
     <value>porcelets sevrés (ration de démarrage no 1)</value>
@@ -3712,6 +3727,9 @@
   </data>
   <data name="LabelTotalAverageFeedIntake" xml:space="preserve">
     <value>prise alimentaire totale moyenne </value>
+  </data>
+  <data name="LabelTotalCarbon" xml:space="preserve">
+    <value>Total carbon</value>
   </data>
   <data name="LabelTotalCarbonDioxide" xml:space="preserve">
     <value>CO2 total</value>

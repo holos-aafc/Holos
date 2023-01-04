@@ -28,6 +28,9 @@ namespace H.Core.Services
             component.BiodegradableFractionOfVSForSwineManure = activeFarm.Defaults.DefaultBiodegradableFractionSwineManure;
             component.BiodegradableFractionOfVSForOtherManure = activeFarm.Defaults.DefaultBiodegradableFractionOtherManure;
             component.BiodegradableFractionOfVSForGreenWaste = activeFarm.Defaults.DefaultBiodegradableFractionGreenWaste;
+
+            component.NumberOfReactors = 1;
+            component.HydraulicRetentionTimeInDays = 25;
         }
 
         /// <summary>
