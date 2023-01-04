@@ -185,12 +185,17 @@ namespace H.Core.Providers.Climate
             // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
             if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
-                return _dataByYearAndMonth[key].Sum(x => x.MeanDailyPrecipitation);
+                var data = _dataByYearAndMonth[key];
+                if ((data.Any(x => Math.Abs(x.MeanDailyPrecipitation - (-999)) < double.Epsilon)) == false)
+                {
+                    // NASA will return -999 for any unknown values
+                    return data.Sum(x => x.MeanDailyPrecipitation);
+                }
+
+                
             }
-            else
-            {
-                return this.PrecipitationData.GetValueByMonth(month);
-            }            
+
+            return this.PrecipitationData.GetValueByMonth(month);
         }
 
         public Dictionary<Months, double> GetMonthlyPrecipitationsForYear(int year)
@@ -221,12 +226,15 @@ namespace H.Core.Providers.Climate
             // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
             if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
-                return _dataByYearAndMonth[key].Average(x => x.MeanDailyAirTemperature);
+                var data = _dataByYearAndMonth[key];
+                if ((data.Any(x => Math.Abs(x.MeanDailyAirTemperature - (-999)) < double.Epsilon)) == false)
+                {
+                    // NASA will return -999 for any unknown values
+                    return data.Average(x => x.MeanDailyAirTemperature);
+                }
             }
-            else
-            {
-                return this.TemperatureData.GetValueByMonth(month);
-            }
+
+            return this.TemperatureData.GetValueByMonth(month);
         }
 
         public Dictionary<Months, double> GetMonthlyTemperaturesForYear(int year)

@@ -79,6 +79,8 @@ namespace H.Core.Models.Infrastructure
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
 
+            this.ProportionAsPercentageTotalManureAddedToAD = 50;
+
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
         }
@@ -278,17 +280,6 @@ namespace H.Core.Models.Infrastructure
             set { this.SetProperty(ref _ammoniaEmissionFactorForDigestateStorage, value); }
         }
 
-        public double ProportionTotalManureAddedToAD
-        {
-            get { return this.ProportionAsPercentageTotalManureAddedToAd / 100.0; }
-        }
-
-        public double ProportionAsPercentageTotalManureAddedToAd
-        {
-            get => _proportionAsPercentageTotalManureAddedToAD;
-            set => SetProperty(ref _proportionAsPercentageTotalManureAddedToAD, value);
-        }
-
         public int NumberOfReactors
         {
             get => _numberOfReactors;
@@ -314,6 +305,17 @@ namespace H.Core.Models.Infrastructure
         {
             get => _volumeOfDigestateEnteringStorage;
             set => SetProperty(ref _volumeOfDigestateEnteringStorage, value);
+        }
+
+        public double ProportionTotalManureAddedToAD
+        {
+            get { return this.ProportionAsPercentageTotalManureAddedToAD / 100.0; }
+        }
+
+        public double ProportionAsPercentageTotalManureAddedToAD
+        {
+            get => _proportionAsPercentageTotalManureAddedToAD;
+            set => SetProperty(ref _proportionAsPercentageTotalManureAddedToAD, value);
         }
 
         #endregion

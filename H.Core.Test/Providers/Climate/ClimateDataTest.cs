@@ -84,6 +84,32 @@ namespace H.Core.Test.Providers.Climate
         }
 
         [TestMethod]
+        public void GetAverageTemperatureForMonthAndYearReturnsNormalsWhenNasaDataReturns999Values()
+        {
+            var climateData = new ClimateData();
+
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 1), Year = 2020, MeanDailyAirTemperature = -999, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 2, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 3, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 4, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 5, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 6, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 7, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 8, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 9, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 10, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 11, 2), Year = 2020, MeanDailyAirTemperature = 20, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 12, 2), Year = 2020, MeanDailyAirTemperature = 20 });
+
+            climateData.TemperatureData.January = 50;
+
+            var result = climateData.GetAverageTemperatureForMonthAndYear(2020, Enumerations.Months.January);
+
+            Assert.AreEqual(50, result);
+        }
+
+        [TestMethod]
         public void GetMonthlyTemperaturesForYear()
         {
             var climateData = new ClimateData();
@@ -111,6 +137,24 @@ namespace H.Core.Test.Providers.Climate
             var result = climateData.GetTotalPrecipitationForMonthAndYear(2020, Enumerations.Months.January);
 
             Assert.AreEqual(10 + 20, result);
+        }
+
+        [TestMethod]
+        public void GetTotalPrecipitationForMonthAndYearReturnsNormalsWhenNasaReturnsNegative999()
+        {
+            var climateData = new ClimateData();
+
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 1), Year = 2020, MeanDailyPrecipitation = -999, });
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 2), Year = 2020, MeanDailyPrecipitation = 20, });
+
+            // Has a different month and so should not be included in total
+            climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 2, 1), Year = 2020, MeanDailyPrecipitation = 30 });
+
+            climateData.PrecipitationData.January = 777;
+
+            var result = climateData.GetTotalPrecipitationForMonthAndYear(2020, Enumerations.Months.January);
+
+            Assert.AreEqual(777, result);
         }
 
         [TestMethod]

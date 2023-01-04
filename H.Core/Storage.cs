@@ -193,7 +193,6 @@ namespace H.Core
             }
         }
 
-
         /// <summary>
         /// Runs a task that serializes the user data asynchronously />
         /// </summary>
@@ -225,6 +224,13 @@ namespace H.Core
         /// <returns>Returns an instance of Application Data after deserializing the local .json data file.</returns>
         private ApplicationData ReadDataFile(string pathToStorageFile)
         {
+            long fileLength = new FileInfo(pathToStorageFile).Length;
+            if (fileLength == 0)
+            {
+                throw new Exception($"File size is 0. Verify size of data file: {pathToStorageFile}");
+            }
+
+
             // Use streams instead of File.ReadAllText() to prevent OutOfMemoryExceptions when reading large files
             using (StreamReader r = new StreamReader(pathToStorageFile))
             {
