@@ -214,9 +214,9 @@ Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’or
 Pour configurer la rotation :
 1. Ajoutez une composante « rotation de cultures » à notre ferme.
 2. Cliquez sur le menu « **Visualiser** » et sélectionnez « **Cacher la liste des composantes disponibles** » pour réduire la quantité de défilement horizontal nécessaire lors de la saisie des données.
-3. La rotation pour ce champ a commencé en **1985 et se termine en 2022**. Assurez-vous de ces deux valeurs pour l’année de début et l’année finale à **l’étape 1**.
+3. La rotation pour ce champ a commencé en **1985 et se termine en 2023**. Assurez-vous de ces deux valeurs pour l’année de début et l’année finale à **l’étape 1**.
 4. Entrez 70 ha dans « Superficie totale de ce champ ».
-5. Sous « **Étape 2** », sous « Culture » entrez « **Orge** » dans la première ligne [2021].
+5. Sous « **Étape 2** », sous « Culture » entrez « **Orge** » dans la première ligne [2022].
 6. La ferme pratique le travail réduit du sol dans le champ d’orge. Changez le type de travail du sol à « Travail réduit du sol ».
 7. Entrez un rendement de **3 000 kg/ha** [poids humide] pour la récolte d’orge. Il n’y a pas d’irrigation et nous ajouterons un épandage d’engrais d’urée à cette culture [utilisez le taux d’épandage suggéré].
 8. Cliquez sur le bouton « **Ajouter une culture** » sous « **Étape 2** » pour ajouter une deuxième culture à la rotation. Notez que Holos fixe l’année de cette nouvelle récolte à 2020. Holos s’attend donc à ce que l’utilisateur entre les cultures en ordre inverse depuis 1985. Il est à noter qu’il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985 ; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour décrire une seule phase de la rotation.   
