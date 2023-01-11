@@ -273,7 +273,7 @@ Après le cycle annuel d’alimentation, la ferme bovine avec laquelle nous trav
 
 2. Cliquez sur la période de gestion intitulée « **Alimentation hivernale** » **à l’étape 2** pour activer cette période de gestion.
 
-3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** ».
+3. Assurez-vous que la « date de début » est le « **1er janvier 2022** » et que la « date finale » est le « **30 avril 2022** ».
 
 
 Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration.
