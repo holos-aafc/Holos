@@ -238,9 +238,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 <br>
 
 
-9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2021) and then:
+9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2022) and then:
     * Go under the **Harvest Tab** and click **Add Harvest Date** button to create a new harvest.
-    * Select a Harvest date of "August 31, 2021", assuming the harvest is done on the same day every year.
+    * Select a Harvest date of "August 31, 2022", assuming the harvest is done on the same day every year.
     * Select **Mid** for **Forage growth stage**.
     * Enter **5** as the total number of bales.
     * Enter **500** as the **Wet bale weight**.
