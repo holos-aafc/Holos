@@ -379,8 +379,8 @@ Les veaux de notre ferme naissent le 1er mars et sont sevrés le 30 septembre à
 
 Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 1** » pour activer le groupe de veaux.
 
-- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
-- Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2020** » **au** « **30 septembre 2020** ». Nous renommerons cette période de gestion « **Broutage** ».
+- La première période de gestion s’étendra du **« 1er mars 2022 » au « 30 avril 2022 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
+- Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2022** » **au** « **30 septembre 2022** ». Nous renommerons cette période de gestion « **Broutage** ».
 - À l’onglet « **Général** », changez le nombre d’animaux à 110.
 - Les veaux consommeront des « **protéines à haute énergie** ».
 - Remplacer le logement par « **Pâturage** » où les animaux brouteront dans la « **Prairie indigène** ». Le type de broutage sera « **Pâturage de masse/continu** ».
