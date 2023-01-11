@@ -647,7 +647,7 @@
     <value>Medium growth diet</value>
   </data>
   <data name="PastureHandlingSystemName" xml:space="preserve">
-    <value>Pasture</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="SlowGrowthDietType" xml:space="preserve">
     <value>Slow growth diet</value>
@@ -5446,5 +5446,26 @@
   </data>
   <data name="EnumStoredManure" xml:space="preserve">
     <value>Stored manure</value>
+  </data>
+  <data name="LabelAvailableCarbon" xml:space="preserve">
+    <value>Available C</value>
+  </data>
+  <data name="LabelAvailableNitrogen" xml:space="preserve">
+    <value>Available N</value>
+  </data>
+  <data name="TitleBiogasAndMethanePotential" xml:space="preserve">
+    <value>Biogas &amp; Methane Potential</value>
+  </data>
+  <data name="TitleDigestateFlows" xml:space="preserve">
+    <value>Digestate Flows</value>
+  </data>
+  <data name="TitleLandApplication" xml:space="preserve">
+    <value>Land Application</value>
+  </data>
+  <data name="TitleStorageEmissions" xml:space="preserve">
+    <value>Storage Emissions</value>
+  </data>
+  <data name="EnumFractionCarbon" xml:space="preserve">
+    <value>Fraction total carbon</value>
   </data>
 </root>

@@ -156,19 +156,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
         #region Tests
 
-        [TestMethod]
-        public void CalculateResultsDoesNotCalculateResultsWhenManureHandlingSystemIsNotSetToAD()
-        {
-            _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
-
-            _managementPeriod1.ManureDetails.StateType = ManureStateType.DeepPit;
-            _managementPeriod2.ManureDetails.StateType = ManureStateType.CompostIntensive;
-
-            var result = _sut.CalculateResults(_farm, _animalComponentResults);
-
-            Assert.IsTrue(result.All(x => x.FlowRateOfAllSubstratesInDigestate == 0));
-        }
-
+        
         [TestMethod]
         public void CalculateResultsWhenManureHandlingSystemIsADCalculatesFlow()
         {
@@ -206,9 +194,11 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetStoredManureFlowRateTest()
         {
+            _managementPeriod1.ManureDetails.StateType = ManureStateType.DeepBedding;
+
             var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, _managementPeriod1, new ManureSubstrateViewItem());
 
-            Assert.AreEqual(0.1, results.VolatileSolidsFlowOfSubstrate,0.00001);
+            Assert.AreEqual(0.00035, results.VolatileSolidsFlowOfSubstrate,0.00001);
         }
 
         [TestMethod]
@@ -321,8 +311,8 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             Assert.AreEqual(2, flows.Count);
 
-            Assert.AreEqual(1.68, flows[0].BiodegradableSolidsFlow);
-            Assert.AreEqual(3.36, flows[1].BiodegradableSolidsFlow);
+            Assert.AreEqual(2.5, flows[0].CarbonFlowOfSubstrate);
+            Assert.AreEqual(100, flows[1].NitrogenFlowOfSubstrate);
         }
 
         #endregion

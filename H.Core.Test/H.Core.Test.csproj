@@ -123,6 +123,7 @@
     <Compile Include="Models\Animals\Swine\FarrowToFinishViewModelTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropEconomicDataTest.cs" />
+    <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\FertilizerApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\HarvestViewItemTest.cs" />

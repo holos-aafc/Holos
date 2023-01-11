@@ -12,6 +12,10 @@ namespace H.Core.Models.LandManagement.Fields
         private DigestateState _digestateState;
 
         private double _amountAppliedPerHectare;
+        private double _amountOfNitrogenAppliedPerHectare;
+        private double _amountOfCarbonAppliedPerHectare;
+
+        private bool _attempToGoOverMaximum;
 
         #endregion
 
@@ -27,6 +31,14 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        public DigestateState DigestateState
+        {
+            get => _digestateState;
+            set => SetProperty(ref _digestateState, value);
+        }
+
+        public double MaximumAmountOfDigestateAvailable { get; set; }
+
         /// <summary>
         /// Amount of digestate applied
         ///
@@ -36,14 +48,61 @@ namespace H.Core.Models.LandManagement.Fields
         public double AmountAppliedPerHectare
         {
             get => _amountAppliedPerHectare;
-            set => SetProperty(ref _amountAppliedPerHectare, value);
+            set
+            {
+                this.AttemptedToGoOverMaximum = false;
+
+                if (value > this.MaximumAmountOfDigestateAvailable)
+                {
+                    this.AttemptedToGoOverMaximum = true;
+                    SetProperty(ref _amountAppliedPerHectare, this.MaximumAmountOfDigestateAvailable);
+
+                    return;
+                }
+
+                SetProperty(ref _amountAppliedPerHectare, value);
+            } 
         }
 
-        public DigestateState DigestateState
+        /// <summary>
+        /// Amount of N applied
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        public double AmountOfNitrogenAppliedPerHectare
         {
-            get => _digestateState;
-            set => SetProperty(ref _digestateState, value);
+            get => _amountOfNitrogenAppliedPerHectare;
+            set
+            {
+                SetProperty(ref _amountOfNitrogenAppliedPerHectare, value);
+            }
         }
+
+        /// <summary>
+        /// Amount of C applied
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
+        public double AmountOfCarbonAppliedPerHectare
+        {
+            get => _amountOfCarbonAppliedPerHectare;
+            set
+            {
+                SetProperty(ref _amountOfCarbonAppliedPerHectare, value);
+            } 
+        }
+
+        public bool AttemptedToGoOverMaximum
+        {
+            get => _attempToGoOverMaximum;
+            set => SetProperty(ref _attempToGoOverMaximum, value);
+        }
+
+        #endregion
+
+        #region Public Method
+
+        
 
         #endregion
     }

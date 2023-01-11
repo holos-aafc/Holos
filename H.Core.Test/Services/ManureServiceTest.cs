@@ -5,6 +5,7 @@ using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace H.Core.Test.Services
 {
@@ -32,7 +33,7 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new ManureService();
+            _sut = new ManureService(new Mock<IAnimalService>().Object);
         }
 
         [TestCleanup]

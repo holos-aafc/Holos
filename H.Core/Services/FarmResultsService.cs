@@ -35,14 +35,14 @@ namespace H.Core.Services
     {
         #region Fields
 
-        private ManureService _manureService = new ManureService();
+        private readonly IManureService _manureService;
 
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
 
         private readonly FieldResultsService _fieldResultsService;
-        private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
-        private readonly ADCalculator _adCalculator = new ADCalculator();
+        private readonly IAnimalService _animalResultsService;
+        private readonly IADCalculator _adCalculator;
 
         private readonly IDietProvider _dietProvider = new DietProvider();
         private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
@@ -61,11 +61,39 @@ namespace H.Core.Services
 
         private readonly EconomicsCalculator _economicsCalculator;
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
+
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, FieldResultsService fieldResultsService)
+        public FarmResultsService(IEventAggregator eventAggregator, FieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
         {
+            if (animalService != null)
+            {
+                _animalResultsService = animalService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(animalService));
+            }
+
+            if (manureService != null)
+            {
+                _manureService = manureService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(manureService));
+            }
+
+            if (adCalculator != null)
+            {
+                _adCalculator = adCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(adCalculator));
+            }
+
             if (fieldResultsService != null)
             {
                 _fieldResultsService = fieldResultsService;

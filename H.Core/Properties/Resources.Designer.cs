@@ -2599,6 +2599,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fraction total carbon.
+        /// </summary>
+        public static string EnumFractionCarbon {
+            get {
+                return ResourceManager.GetString("EnumFractionCarbon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraction metabolic dead matter active pool.
         /// </summary>
         public static string EnumFractionMetabolicDMActivePool {
@@ -8008,6 +8017,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available C.
+        /// </summary>
+        public static string LabelAvailableCarbon {
+            get {
+                return ResourceManager.GetString("LabelAvailableCarbon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available N.
+        /// </summary>
+        public static string LabelAvailableNitrogen {
+            get {
+                return ResourceManager.GetString("LabelAvailableNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Availability of N from manure decomposition.
         /// </summary>
         public static string LabelAvailalabilityOfNFromManureDecomposition {
@@ -12625,7 +12652,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pasture.
+        ///   Looks up a localized string similar to Pasture/range/paddock.
         /// </summary>
         public static string PastureHandlingSystemName {
             get {
@@ -14065,6 +14092,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Biogas &amp; Methane Potential.
+        /// </summary>
+        public static string TitleBiogasAndMethanePotential {
+            get {
+                return ResourceManager.GetString("TitleBiogasAndMethanePotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C:N.
         /// </summary>
         public static string TitleCNRatio {
@@ -14142,6 +14178,15 @@ namespace H.Core.Properties {
         public static string TitleDigestate {
             get {
                 return ResourceManager.GetString("TitleDigestate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digestate Flows.
+        /// </summary>
+        public static string TitleDigestateFlows {
+            get {
+                return ResourceManager.GetString("TitleDigestateFlows", resourceCulture);
             }
         }
         
@@ -14281,6 +14326,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Land Application.
+        /// </summary>
+        public static string TitleLandApplication {
+            get {
+                return ResourceManager.GetString("TitleLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiyear Carbon Modelling.
         /// </summary>
         public static string TitleMultiYearCarbonModelling {
@@ -14322,6 +14376,15 @@ namespace H.Core.Properties {
         public static string TitleSheepComponentDisplayString {
             get {
                 return ResourceManager.GetString("TitleSheepComponentDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage Emissions.
+        /// </summary>
+        public static string TitleStorageEmissions {
+            get {
+                return ResourceManager.GetString("TitleStorageEmissions", resourceCulture);
             }
         }
         

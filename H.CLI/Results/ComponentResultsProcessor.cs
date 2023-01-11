@@ -16,7 +16,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using H.Core;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Converters;
+using H.Core.Services.Animals;
 
 
 namespace H.CLI.Results
@@ -60,7 +62,10 @@ namespace H.CLI.Results
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
             _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();
 
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService);
+            var animalService = new AnimalResultsService();
+            var manureService = new ManureService(animalService);
+
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
             _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);
         }
 
