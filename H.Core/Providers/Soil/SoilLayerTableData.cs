@@ -41,5 +41,24 @@ namespace H.Core.Providers.Soil
         public int VonPost { get; set; }
         public int WoodyMaterial { get; set; }
         public Province Province { get; set; }
+
+        public bool IsValidSoilLayerTableData
+        {
+            get
+            {
+                if (VeryFineSand >= 0 &&
+                    TotalSand > 0 &&
+                    TotalSilt > 0 &&
+                    TotalClay > 0 &&
+                    OrganicCarbon >= 0 &&
+                    PHInCalciumChloride > 0 &&
+                    PHAsPerProjectReport > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }

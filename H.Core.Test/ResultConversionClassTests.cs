@@ -10,38 +10,30 @@ namespace H.Core.Test
     [TestClass()]
     public class ResultConversionClassTests
     {
-        private FarmEmissionResults _farmEmissionResults;
-
         [TestInitialize]
         public void TestInitialize()
         {
-            _farmEmissionResults = new FarmEmissionResults()
-            {
-                FarmEnergyResults = new FarmEnergyResults()
-                {
-                    EnergyCarbonDioxideFromManureApplication = 14
-                }
-            };
-
         }
 
         [TestMethod()]
         public void ConvertTest()
         {
-            var metricResult = _farmEmissionResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication.Convert(
+            const double energyCO2 = 14;
+
+            var metricResult = energyCO2.Convert(
                 MeasurementSystemType.Metric, MetricUnitsOfMeasurement.Kilograms,
                 EmissionDisplayUnits.KilogramsC02e);
             Assert.AreEqual(14, metricResult);
 
             //should be the same result as above since we want to see in kg CO2e
-            var imperialResult = _farmEmissionResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication.Convert(
+            var imperialResult = energyCO2.Convert(
                 MeasurementSystemType.Imperial, MetricUnitsOfMeasurement.Kilograms,
                 EmissionDisplayUnits.KilogramsC02e);
             Assert.AreEqual(14, imperialResult);
 
             //should be different b/c now we are interested in lb GHGs
             //14 kg * 2.205lb/kg
-            var imperialPoundsResult = _farmEmissionResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication.Convert(
+            var imperialPoundsResult = energyCO2.Convert(
                 MeasurementSystemType.Imperial, MetricUnitsOfMeasurement.Kilograms,
                 EmissionDisplayUnits.PoundsGhgs);
             var expected = Math.Round(14 * 2.205, 2);

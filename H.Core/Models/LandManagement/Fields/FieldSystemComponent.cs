@@ -267,36 +267,6 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Public Methods
 
-        /// <summary>
-        /// We don't recalculate results if these properties change
-        /// </summary>
-        public static bool IsFieldComponentPropertyRelatedToCalculations(string propertyName)
-        {
-            if (propertyName.Equals(nameof(FieldSystemComponent.ResultsCalculated)) || // Prevent loop
-                propertyName.Equals(nameof(FieldSystemComponent.Name)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropStringWithYears)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropViewItemsMaxThree)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.ComponentDescriptionString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.GroupPath)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.TimelineInformationString)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.CropStringWithYearsMaxThreeItems)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Duration)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Start)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.End)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsAnnual)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsPerennial)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsGrassland)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.IsFallow)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.NumberOfDays)) ||
-                propertyName.Equals(nameof(FieldSystemComponent.Description)))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public List<CropViewItem> GetAllItemsInPerennialStand(Guid groupGuid)
         {
             return this.CropViewItems.Where(x => x.PerennialStandGroupId == groupGuid).OrderBy(x => x.YearInPerennialStand).ToList();
@@ -311,6 +281,21 @@ namespace H.Core.Models.LandManagement.Fields
             var mostRecentViewItem = this.CropViewItems.OrderByDescending(viewItem => viewItem.Year).FirstOrDefault();
 
             return mostRecentViewItem;
+        }
+
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var viewItem in this.CropViewItems)
+            {
+                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems.Where(x => x.AnimalType.GetCategory() == animalType.GetCategory()))
+                {
+                    result.Add(manureApplicationViewItem);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -411,17 +396,6 @@ namespace H.Core.Models.LandManagement.Fields
                 if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.CropString)))
                 {
                     this.UpdateTimelineInformationString();
-                }
-
-                // Update the area of all crop view items associated with this field
-                if (propertyChangedEventArgs.PropertyName.Equals(nameof(this.FieldArea)))
-                {
-                    Trace.TraceInformation($"{nameof(FieldSystemComponent)}.{nameof(OnPropertyChanged)}: field area changed, updating area of associated crop view items");
-
-                    foreach (var viewItem in this.CropViewItems)
-                    {
-                        viewItem.Area = fieldSystemComponent.FieldArea;
-                    }
                 }
             }
         }

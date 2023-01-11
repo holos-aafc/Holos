@@ -11,7 +11,8 @@ using H.Core.Tools;
 namespace H.Core.Calculators.Tillage
 {
     /// <summary>
-    /// Calculates the tillage factor for various types. Implements Table 6. rc factor from the algorithm document.
+    /// Calculates the tillage factor for various types.
+    /// Table 3 -  rc factor – Alberta, Saskatchewan, Manitoba only.
     /// </summary>
     public class TillageFactorCalculator : ITillageFactorCalculator
     {

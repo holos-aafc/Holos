@@ -31,10 +31,10 @@ Once the install is complete Holos should begin immediately, greeting you with a
 </p>
 
 
-You can access Holos from the Windows start menu. Open the start menu, Holos should be found under in a folder labeled AAFC-AAC.
+You can access Holos from the Windows start menu by searching for "Holos 4". Open the start menu or click the search bar and search for "Holos 4"
 
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
+ <img src="../../Images/UserGuide/en/chapter1/figure1-4.png" alt="Figure 1-4" width="650"/>
     <br>
     <em>Figure 1.4: Holos in the start menu.</em>
 </p>
@@ -51,6 +51,8 @@ For a quick demonstration of how to install Holos from start to finish you can a
 # Chapter 2 -  Starting Holos
 
 Holos operates in one of two modes called “Basic” and “Advanced”.  As their names imply, they tailor the Holos experience for different needs.  If you do not need all the functionality that Holos offers and would rather get a summary of your farm’s emissions, then it is recommended to use the “Basic” mode.  If you want to get the most out of Holos with detailed results, then the “Advanced” mode is for you. 
+
+By default, Holos starts with "Advanced Mode" enabled. However, you can easily switch to basic mode using the settings menu. To learn how to switch between each mode, [click here](#how-do-i-switch-between-advanced-and-simple-mode).
 
 Holos can handle multiple farms created by the user, each representing different farming scenarios for example.  The user can experiment with what management practices do well together or determine what crops to grow together based on their potential yield and green-house emissions. 
 
@@ -73,16 +75,16 @@ Holos can handle multiple farms created by the user, each representing different
 <br>
 
 
-2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. Once you have named your farm you must specify what mode you would like to operate Holos under, either “Basic” or “Advanced” mode.  When you are finished, click the “OK” button to proceed.
+2. Please enter a name for the farm you would like to create in the “Name” section and add any additional comments in the “Comments” section. When you are finished, click the “OK” button to proceed.
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter2/figure2-2.png" alt="Figure 2-2" width="650"/>
     <br>
-    <em> Figure 2.2 Entering name, comments, and selecting operating mode.</em>
+    <em> Figure 2.2 Enter a name for your farm and any comments.</em>
 </p>
 
 
-3. If you chose “Advanced Mode” you can choose “Metric” or “Imperial” from the drop-down list (“Basic Mode” will skip this step and set your units to “Metric” for you). After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
+3. You can also choose between “Metric” or “Imperial” from the drop-down list in the next screen. After you have chosen your unit of measurement, click the “Next” button on the bottom of the screen to proceed (figure 2.3).
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter2/figure2-3.png" alt="Figure 2-3" width="650"/>
@@ -539,8 +541,6 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 		A: A list of options available to set the defaults for your operations.
 		<br>
 		B: Allows the user to set custom default values for individual crops.
-		<br>
-		C: Option to show results in single or multi-year format.
 	</em>
 </p>
 <br>
@@ -648,54 +648,6 @@ The default data for this screen is based on information found in the algorithm 
 </p>
 <br>
 
-
-## Single and Multi-Year Model
-
--	Holos works with a farm under two modes, **Single Year** and **Multi-Year.**  Basic Mode is just **Single Year** with some buttons and menus hidden for simplicity.  Holos starts any farm in **Single Year Mode (SYM)** by default.  As the name suggests **SYM** only gives data for a single year.  **Multi-Year Mode (MYM)** enables an **advanced carbon modelling system** over a period from 1985 to present.  
--	**SYM** is the simplest mode to use Holos, simply add components to your farm and press “Next” to load the results. This is the default mode when a new farm is created in Holos.
--	MYM changes the interface of certain components (see figure 4.6). 
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
-    <br>
-    <em>
-		Figure 4.7: - A field component properties in single year mode.
- 	</em>
-</p>
-
-<br>
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
-    <br>
-    <em>
-		Figure 4.8: - A field component properties in multi year mode.
- 	</em>
-</p>
-<br>
-
--	**MYM** will change the flow of Holos,  instead of the normal steps taken by **SYM**, in **MYM** you must add components to your farm and then navigate to the timeline screen. From that screen, depending on the settings, then go through the details screen and finally arrive at the results section.
--	You can toggle SYM or MYM in “**Settings**” or by clicking “**Yes**” beside “**Enable Multi-Year Mode**” in the component selection screen.
-The bottom of Holos will display the current working mode either SYM or MYM.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
-    <br>
-    <em>
-		Figure 4.9 - The current year mode is displayed in the bottom right corner.
-	 	<br>
-		A: The year mode change toggle.
-		<br>
-		B: The current year mode.
- 	</em>
-</p>
-
-<br>
-<br>
 
 # Chapter 5 - Tools
 
@@ -1093,36 +1045,6 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 <br>
 
 
-
-
-
-##### Shelterbelt Details
-
--	You can select the shelterbelt component you would like to view the results for at the top of the page if your farm has multiple shelterbelts beside the “**Shelterbelt Selector**” tab as shown in figure 6.14 section A.
--	**To get to the details page**, at the bottom of the timeline page is “**Next**”, click here to get to the details page.
--	The details page will **display a list of data for each shelterbelt row and their corresponding tree types**, starting from the plant year up until the cut year that you have inputted on the shelterbelt timeline page (figure 6.14, section C).
--	The details page will also output additional calculations such as Percent Mortality Category (0/15/30/50), Above Ground Carbon (kg C per Tree) and Below Ground Carbon (kg C per Tree).
--	**If you modify any values on the previous pages, click “Rebuild Datacolumns”** to refresh the data shown in the table (Figure 6.14, Section B)
--	If you would like to see the Calculator columns (for Average Circumference) click “Show Calculator Columns” at the top right of the Shelterbelt Details page and a Calculator Column will appear. If you do not know what the Average Circumference Calculator is please click here: [How To Use Average Circumference Calculator](#average-circumference-calculator)
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
-    <br>
-    <em>
-		Figure 6.14 – Shelterbelt Details
-		<br>
-		A: The Shelterbelts in your Farm.
-		<br>
-		B: If you have modified any data on the previous pages, please click here to rebuild the data columns.
-		<br>
-		C: The data associated with each Shelterbelt Row and their corresponding Tree Type(s) from Plant Year up Until The Cut Year.
-		<br>
-		D:If you have sorted the data and want to reset back to the default, click here.
-	</em>
-</p>
-<br>
-
 ##### Shelterbelt Results
 
 1.	**To get to the results**, at the bottom of every component page is a button called “**Results**”, click that button to go to the results page.
@@ -1134,7 +1056,7 @@ For each tree type in your shelterbelt row(s), there is a set of data fields tha
 
 ### Crop Rotation Component
 
-A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. If a farm contains multiple field components that are added to represent the rotation of crops on a field over the years, a crop rotation component can represent the same information through a single entry. This allows for easier and more manageable representation of fields and crops on the farm.
+A crop rotation component is similar to a field component and allows the representation of multiple field components on the farm. For example, suppose a farm contains multiple field components that are added to represent the rotation of crops on a field over the years. In that case, a crop rotation component can represent the same information through a single entry. This allows for an easier and more manageable representation of fields and crops on the farm.
 
 
 <br>
@@ -1148,7 +1070,7 @@ A crop rotation component is similar to a field component and allows the represe
 <br>
 
 
-The crop rotation component allows to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
+The crop rotation component allows one to easily set the crop grown in a specific year and automatically sets the rotation based on the number of crops chosen.
 
 <br>
 <p align="center">
@@ -1186,10 +1108,10 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 
 ## Animal Components
 
--	The animal components are separated into the following component categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
+-	The animal components are separated into the following categories: **Beef Production, Dairy, Swine, Poultry, Sheep, and Other Livestock.**
 -	All the results for each animal component will be displayed on a **single results page.** 
--	However, each animal component requires their own set of data inputs!
--	In this section, we will go through how to enter data for each component category.
+-	However, each animal component requires their own set of data inputs.
+-	This section will go through how to enter data for each component category.
 
 <br>
 
@@ -1218,13 +1140,13 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 #### Groups
 
 -	**Each** animal component can have **one or more animal groups**.
--	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it e.g. different housing, diet, manure management, etc.
--	To **add a group** for your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
+-	The **key consideration is each animal group** has a specific or different type of management inputs & practices associated with it, e.g. different housing, diet, manure management, etc.
+-	To **add a group** to your animal component, there are buttons at the top right of the animal groups section that will allow you to add another animal group.
 -	The added group will appear in under “**Step 1**”
 -	You can **remove an animal group** by clicking on the “**X**” beside the animal group you would like to remove
 -	You can **also sort the groups alphabetically** by clicking on the “**Group name**” header.
--	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. the selected animal group will be indicated by a “>” symbol in the left column.
--	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name
+-	If you want to see the details for an animal group, please select the group by clicking anywhere on the groups section. The selected animal group will be indicated by a “>” symbol in the left column.
+-	You can **adjust the names of each of your animal groups** by clicking the name you would like to change and entering your custom name.
 
 <br>
 <p align="center">
@@ -1247,14 +1169,14 @@ Adding a winter/cover/undersown crop to any specific crop will enable this tab f
 
 #### Management Period
 
--	A management period is a period of time for an animal group where details for that animal group are able to be entered specific to the operations during that time period.
+-	A management period is a time duration for an animal group where operation and management details specific to that group can be entered and managed.
 -	Each **animal group** can have **one or more** management periods.
--	To view the management period(s) for an animal group, please **select the group under “Step 1”**.
+-	To view an animal group's management period(s),** please select the group under "Step 1"**.
 -	You can adjust the **name, start date** and the **number of days** for each management period.
--	To **add a new management period** to your selected animal group, please click the “**Add Management Period**” button below “**Step 2**”.
+-	Please click the "**Add Management Period**" button below "**Step 2**" to add a new management period to your selected animal group.
 -	To **remove a management period**, click the **X** button beside the period you would like to remove.
 -	The details for a management period can be split into four categories: **General, Diet, Housing and Manure**.
--	To see the details for a management period, please click on the period you would like to view.
+-	Please click on the period you would like to view to see the details for that management period.
 
 <br>
 <p align="center">
@@ -1311,7 +1233,7 @@ Each animal group has the following sections that can be further edited and conf
 
 ##### General
 
--	The general section contains simple information for the animal group such as the **number of animals** and average daily rate of **gain coefficients**.
+-	The general section contains simple information for the animal group, such as the **number of animals** and the average daily rate of **gain coefficients**.
 -	You can also enter the **start** and **end** weights for your animal group.
 -	Some animal groups will have additional data fields specific to that group.
 
@@ -1331,10 +1253,10 @@ Each animal group has the following sections that can be further edited and conf
 
 ##### Diet
 
--	The Diet section contains information pertaining to the diet for your animal group in the selected management period.
--	You can select one of the **default diets** such as: **low, medium, or high** energy protein.
--	If you have selected to see **additional information**, you are able to adjust more specific details for the diet such as: forage, crude protein, fat etc.
-- If you want to create your own **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you do not know how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
+-	The Diet section contains information about the diet of your animal group in the selected management period.
+-	You can select one of the **default diets**: **low, medium, or high** energy protein.
+-	If you have selected to see **additional information**, you can adjust more specific details for the diet such as: forage, crude protein, fat etc.
+- If you want to create your **custom diet**, there is a “**Custom Diet Creator**” button at the bottom of the diet section. If you need to learn how to create a custom diet, click here: [How to Create A Custom Diet](#creating-a-custom-diet).
 
 <br>
 <p align="center">
@@ -1360,15 +1282,15 @@ Each animal group has the following sections that can be further edited and conf
 	</em>
 </p>
 
-- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location**"
+- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location.**"
 
 <br>
 
 ##### Manure
 
-- 	The manure section contains details pertaining to the manure operations for your selected animal group in the selected management period.
-- 	You can select default manure management types such as:  Deep Bedding, Solid Storage, etc.
-- 	If you have selected to see additional information, you are able to provide data inputs for more specific manure details.
+- 	The manure section contains details about the manure operations for your selected animal group in the selected management period.
+- 	You can select default manure management types such as Deep Bedding, Solid Storage, etc.
+- 	If you have selected to see additional information, you can provide data inputs for more specific manure details.
 
 <br>
 <p align="center">
@@ -1435,7 +1357,6 @@ The Dairy category contains the following components:
 The Dairy cattle component has the following animal groups:
 
 - Dairy heifers
-- Dairy dry
 - Dairy calves
 - Dairy lactating
 
@@ -1507,7 +1428,7 @@ The general tab allows editing the following information:
 The diet tab allows editing the following information:
 
 - The **type of diet** of the animal group.
-- The **custom diet creator** to create a custom diet for the selected animal group.
+- The **custom diet creator** creates a custom diet for the selected animal group.
 - Additional diet information regarding the animal group (after selecting "Show Additional Information").
 
 <br>
@@ -1546,7 +1467,7 @@ The Farrow-to-Wean component has the following animal groups:
 - Soars
 - Boars
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1566,7 +1487,7 @@ The Iso-Wean component has the following animal groups:
 
 - Piglets
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1588,7 +1509,7 @@ The Farrow-to-Finish component has the following animal groups:
 - Boars
 - Piglets
 
-This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Grower-to-Finish component](#general-swine-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1689,10 +1610,8 @@ The Chicken Multiplier Breeder component has the following animal groups:
 
 - Pullets
 - Cockerels
-- Roosters
-- Hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1714,7 +1633,7 @@ The Chicken Meat Production component has the following animal groups:
 - Pullets
 - Cockerels
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1736,15 +1655,15 @@ The Turkey Multiplier Breeder component has the following animal groups:
 - Young turkey hens
 - Turkey hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
     <br>
     <em>
-		Figure 6.39 - Turkey Multiplier Breeder.
+		Figure 6.61 - Turkey Multiplier Breeder.
 	</em>
 </p>
 <br>
@@ -1756,7 +1675,7 @@ The Turkey Meat Production component has the following animal groups:
 - Young toms
 - Young turkey hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1775,7 +1694,7 @@ The Chicken Egg Production component has the following animal groups:
 
 - Hens
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1792,12 +1711,10 @@ This component contains similar additional tabs as the [Pullet farm component](#
 
 The Chicken Multiplier Hatchery component has the following animal groups:
 
-- Chicken eggs
 - Chicks
-- Turkey eggs
 - Poults
 
-This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component) which allows further information to be entered regarding each group.
+This component contains similar additional tabs as the [Pullet farm component](#general-poultry-component), which allows further information to be entered regarding each group.
 
 
 <br>
@@ -1920,7 +1837,7 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
  <img src="../../Images/UserGuide/en/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
     <br>
     <em>
-		Figure 6.48 - Rams Hatchery component.
+		Figure 6.48 - Rams component.
 	</em>
 </p>
 <br>
@@ -1948,7 +1865,7 @@ This component contains similar additional tabs as the [Sheep Feedlot Component]
 
 ### Other Livestock
 
-The other livestock category contains various other livestock that is currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
+The other livestock category contains various other livestock that are currently supported by Holos which can be added to a farm. Each component in this category represents a single animal type. Each component contains the following settings tabs:
 
 #### General - Other Livestock
 
@@ -2076,9 +1993,8 @@ This category contains components related to the infrastructure of the farm.
 # Chapter 7 - Timeline
 
 
-To view the Timeline, your farm must be in Advanced mode and enable Multi-Year Mode in the Component Selection Screen
-- [Learn how to switch between Basic and Advanced modes](#how-do-i-enable-advanced-mode).
-- [Learn how to enable Multi Year Mode](#how-do-i-enable-multi-year-mode)
+To view the Timeline, your farm must be in **Advanced mode**.
+- [Learn how to switch between Basic and Advanced modes by clicking here](#how-do-i-switch-between-advanced-and-simple-mode).
 
 The timeline screen allows you to see your farm over a period from 1985 to present day. The timeline screen is used for the following components:
 
@@ -2088,7 +2004,7 @@ The timeline screen allows you to see your farm over a period from 1985 to prese
 
 ## Farm crop system timeline:
 
-The farm crop system timeline is displayed when the farm is set to 'Multi-Year Mode'. The crop system timeline shows an overview of the crop(s) grown on the farm and allows the user to add historical and future projections to a particular field and its crop systems.
+The crop system timeline shows an overview of the crop(s) grown on the farm and allows the user to add historical and future projections to a particular field and its crop systems.
 
 -	To **add a historical or projected production system** click on the field in the list of production systems under “**Step 1**” or by selecting the system in the timeline region.  
 -	Once clicked the system is now active, click either “**Add Historical Production System**” or “**Add Projected Production System**”.
@@ -2118,7 +2034,7 @@ The farm crop system timeline is displayed when the farm is set to 'Multi-Year M
 
 ## Shelterbelt Timeline
 
-The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year. In the shelterbelt timeline you can adjust:
+The shelterbelt timeline works similarly to the farm crop timeline. The timeline shows the type of tree, the year it was planted and the cut-off year. The numbers at the top of the timeline signify the year.  In the shelterbelt timeline, you can adjust the following:
 
 - The year the tree was planted.
 - The cut-off year of the timeline.
@@ -2146,7 +2062,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 
 ## Overview
 
--	To view this screen, ensure that you **enable Multi-Year Mode** while in **Advanced Mode** and **disable simplified results** in the toolbar.
+-	To view this screen, ensure that you are in **Advanced Mode**.
 -	This screen offers a detailed grid related to your farm’s fields like **carbon input**, **yield**, and **other factors** for each year of your production systems you created in the **timeline**.  
 -	If you don’t know how to create a production system you can learn how by reading Timeline: Setup a Production System
 -	We are first introduced to the “**data tray**” (see figure 8.1) on the left of the cropping system grid.  
@@ -2208,11 +2124,9 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 # Chapter 9 - Results
 
 
-Results are available in a simplified or detailed form.  The detailed results are the default when you click “**Results**” while in “**Advanced Mode**”.  To enable simplified results, click “**View**” in the toolbar and click “**Enable Simplified Results**”.
-
 ## Simplified Results
 
-- While in "Basic Mode" , the results page will display a basic set of results.
+- While in "**Simple Mode**" , the results page will display a basic set of results.
 - This page shows a broad summary of the emissions of the farm and how much the farm produced for each component in the farm. 
 -  The page also shows a graph displaying overall emission for each farm component.
 
@@ -2230,7 +2144,7 @@ Results are available in a simplified or detailed form.  The detailed results ar
 <br>
 
 ## Detailed Results
-- While in "Advanced Mode" , the results page will display an Advanced set of results. These results are split into multiple tabs with each tab displaying with each component displaying information regarding a specific aspect of the farm results.
+- While in "**Advanced Mode**" , the results page will display an Advanced set of results. These results are split into multiple tabs with each tab displaying with each component displaying information regarding a specific aspect of the farm results.
 
 
 ### Estimates of Production
@@ -2429,7 +2343,7 @@ Displayed only when an animal component is added to a farm. Holos will display h
 
 ### Multiyear Carbon Modelling
 
-Displayed only when 'Multi-Year Mode' is selected.  
+Displayed only when **Advanced mode** is selected.  
 
 Displays a graph showing the Soil Organic Carbon (SOC) for the fields in the farm over a given period (default is 1985 – present).  You can view the “Fields” tab as a graph or a table displaying various data regarding climate, carbon, nitrogen, etc.  Like the “Details” screen and “Manure Management” tab we also have access to the data tray to toggle appropriate data columns
 
@@ -3701,10 +3615,159 @@ Please do not modify the headers in any of the component data input Excel files.
 <br>
 <br>
 
-# Chapter 11 Common Questions & Toubleshooting
+
+# Chapter 11 Appendix - Additional Information, Common Questions & Troubleshooting
 
 
-### How do I enable Advanced Mode:
+### Holos Backup System
+
+Holos contains a backup system that automatically creates backups of user data in a folder alongside the saved user data files. This folder is located inside the Holos data folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
+
+Inside the Holos data folder, you will find another folder called **backups**. This backups folder contains up to **5** backups of your data at any time.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-21.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-21 - The holos data folder that contains the backup files
+	</em>
+</p>
+<br>
+
+
+
+There are some important things to note regarding the backup files created by Holos:
+
+1. Holos creates a backup of your data every time the application is started.
+
+2. A backup is only created when Holos successfully loads data.
+
+3. A maximum of **5** user data backups are maintained and are created on a rolling basis. This means that if there are five backups already created, instead of creating a sixth one, Holos deletes the oldest backup in the backup folder and replaces it with a new backup.
+
+	3.1. If you would like to maintain or save a particular backup, it is strongly recommended to **keep that backup file in a separate location on your computer**.
+
+4. Backup files are named/created in the following format: `holos-backup-{date}-{time}.json`. For example `holos-backup-2022-09-29_04_17_02_PM.json`. Therefore, all backup files contain the date and time that the backup was created..
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-22.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-22 - Up to five backups are stored inside the backups folder.
+	</em>
+</p>
+<br>
+
+<br>
+
+
+#### Restoring backups in case of data corruption
+
+In situations where saved data cannot be loaded due to data corruption or an improper save during the previous program session, if available, Holos tries to load backup data automatically. Holos loads the most recently created backup file if multiple backups are available. **A message is displayed after the first loading page when a backup file is restored**. This message contains information regarding which backup was restored:
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-23.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-23 - A message during startup indicating that a data backup was restored.
+	</em>
+</p>
+<br>
+
+
+If you want to manually restore one of the five backups in the backup folder, please delete the **json-data.json** file in the **HOLOS_4** folder and replace it with your chosen backup. Please remember to change the name of the backup file to **json-data**; otherwise, holos will not be able to read this data file.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-24.gif" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-24 - Manually restoring a backup data file.
+	</em>
+</p>
+<br>
+
+
+#### Data crash file
+
+As mentioned previously, Holos automatically tries to load one of the available backups in the backup folder if the original data file cannot be loaded. In a situation where none of the backup files can be loaded or if no backups are available, Holos will start a new program session. In these situations, Holos will also create a crash file containing the data the program could not read.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-25.png" alt="" width="650"/>
+    <br>
+    <em>
+		Figure 11-25 - A crash file is created when data cannot be loaded.
+	</em>
+</p>
+<br>
+
+If you don't have any backups available to restore previous data, this crash file can be sent to the Holos developers to help restore data and troubleshoot problems with the program. To learn how to submit this file, read the[ how to report an error message section.](#how-to-report-an-error-message-and-create-a-bug-report)
+
+<br>
+<br>
+
+
+### How to find the Holos Program data file(s).
+
+The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system running the Holos software and are based on your usage of the program. You can find these files by following these steps:
+
+
+- On your windows computer, **press the start button**. The start button is the icon on the bottom left corner of your screen (on the taskbar) that looks like a windows icon; after pressing this button type **run** and press **enter**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
+    <br>
+    <em>
+		Figure 11-5 - Type run in windows search.
+	</em>
+</p>
+<br>
+
+
+- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%\HOLOS_4** and then **press enter again** or click on the **OK button**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
+    <br>
+    <em>
+		Figure 11-6 - Opening the Holos folder inside the Appdata folder.
+	</em>
+</p>
+<br>
+
+
+- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Holos user data folder on your PC. 
+
+
+- Inside the HOLOS_4 folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
+	</em>
+</p>
+<br>
+
+
+
+-	If you are trying to troubleshoot Holos, please create a new issue in Holos' GitHub repository. The [how to report an error message section](#how-to-report-an-error-message-and-create-a-bug-report) explains the process of submitting an error report. 
+
+- To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on GitHub. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
+
+<br>
+<br>
+
+### How do I switch between advanced and simple mode:
 
 If you have started the farm in Basic mode and want to switch to Advanced mode, the process is extremely simple.
 
@@ -3714,7 +3777,7 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure4-2" width="650"/>
+ <img src="../../Images/UserGuide/en/chapter11/figure11-1.png" alt="Figure11-1" width="650"/>
     <br>
     <em>
 		Figure 11-1 - Advanced mode can be selected from the farm defaults/details setting.
@@ -3722,19 +3785,6 @@ If you have started the farm in Basic mode and want to switch to Advanced mode, 
 </p>
 <br>
 
-### How do I enable Multi Year Mode
-
-Multi-year mode is only available if you are currently in Advanced Mode. If you are currently in Basic Mode, please [switch over to Advanced Mode](#how-do-i-enable-advanced-mode). After doing that look for a toggle at the top-right of the Holos program. You can use this toggle to switch between either mode.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
-    <br>
-    <em>
-		Figure 11-2 - Click the Toggle to Switch between Basic and Advanced Mode.
-	</em>
-</p>
-<br>
 
 ### How to switch between IPCC Tier 2 & ICBM Carbon models
 
@@ -3753,95 +3803,6 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 	</em>
 </p>
 <br>
-
-
-### How do I add a new farm to my current farms CLI folder:
-
-
-##### Method 1: Copying an existing empty farm folder.
-
-1. In your current 'Farms" folder, create a new folder for your new farm with an appropriate name.
-2. Copy all files from an existing farm and paste them into this new folder that you have just created.
-3. Modify the data input files as needed.
-
-##### Method 2: Running the CLI again.
-
-1. Start the Holos CLI.
-2. You will be prompted to use the previously used Farms folder. Select**yes**.
-3. Select the appropriate units of measurement in the next prompt.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
-    <br>
-    <em>
-		Figure 11-4 - Using the Holos CLI to create a new farms folder.
-	</em>
-</p>
-<br>
-
-
-
-### How to find the Holos Program data file(s).
-
-The Holos program data files contain useful information that can help the Holos developers troubleshoot program crashes and other issues you might notice in the program. The Holos data files are unique to each system that in running the Holos software and is based on your usage of the program. You can find these files by following these steps:
-
-
-- On your windows computer, **press the start button**. This is the button on the bottom left corner of your screen that looks like a windows icon. After pressing this button type **run** and press **enter**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
-    <br>
-    <em>
-		Figure 11-5 - Type run in windows search.
-	</em>
-</p>
-<br>
-
-
-- When you press enter, a new window will pop-up on the screen. In this window, type **%LocalAppData%** and then **press enter again** or click on the **OK button**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-6.PNG" alt="Figure11-6" width=""/>
-    <br>
-    <em>
-		Figure 11-6 - Opening the local folder inside the Appdata folder.
-	</em>
-</p>
-<br>
-
-
-- After pressing enter, another window will now appear on your screen. This window will show you the contents of the Appdata folder on your PC. In this new window, find a folder called **HOLOS_4**. You might have to scroll down and look for the folders starting with the letter **H**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-7.png" alt="Figure11-7" width="950"/>
-    <br>
-    <em>
-		Figure 11-7 - Locate the folder called HOLOS_4
-	</em>
-</p>
-<br>
-
-- Open the folder called HOLOS_4 and inside this folder, you will find files related to the configuration and settings of the Holos program. For example, one of these files is named **json-data**. This file is the Holos project data file and includes data and information regarding your farms and settings. Depending on how you use Holos, there might be multiple files in this folder in addition to **json-data**.
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/en/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
-    <br>
-    <em>
-		Figure 11-8 - json-data file stores information regarding your farm(s) and settings.
-	</em>
-</p>
-<br>
-
-
--	If you are trying to troubleshoot Holos, please add all these files to a zip archive and send that .zip file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
-
-
-
 <br>
 
 
@@ -3864,7 +3825,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 </p>
 <br>
 
-2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. Selecting this option will open a pop-up with a progress bar showing your files being compressed. This process will create a single .zip file containing all the files you selected in **Step 1.**
+2.	After selecting all the files. Right click using your mouse’s right button on any of the highlighted files to open a new menu. In this new menu, select “**Compress to ZIP file**”. This option will open a pop-up with a progress bar showing your compressed files. This process will create a single .zip file containing your selected files in **Step 1**.
 
 <br>
 <p align="center">
@@ -3876,7 +3837,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 </p>
 <br>
 
-3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can then send this compressed/zipped file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zipped archive file will contain all the files that you selected in step 1.
+3.	After the process is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this zipped file. Change the name of this file to **holos-data-files**. You can send this compressed/zipped file to the holos developers by [creating a new issue on the GitHub repository](#how-to-report-an-error-message-and-create-a-bug-report). This zipped archive file will contain all the files you selected in step 1.
 
 <br>
 <p align="center">
@@ -3916,7 +3877,7 @@ Please follow these steps for Windows 10 based systems. In this example we will 
 </p>
 <br>
 
-3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then send this compressed (zipped) file to [aafc.holos.acc@canada.ca](mailto:aafc.holos.acc@canada.ca) as an attachment for troubleshooting purposes. This zip file will contain all the files that you selected in step 1.
+3.	After the compression is finished, a new file will be created in the same folder (HOLOS_4). Windows will then allow you to rename this file. Change the name of this file to **holos-data-files**. You can then create a new issue on Github and attachment this file within the issue report for troubleshooting purposes. This zip file will contain all the files that you selected in step 1. To learn how to submit an issue report on GitHub, [click here](#how-to-report-an-error-message-and-create-a-bug-report).
 
 <br>
 <p align="center">
@@ -3950,13 +3911,15 @@ The message that Holos displays includes information about what the error was an
 
 
 
-### How to report an Error Message.
+### How to report an error message and create a bug report.
 
-Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error to the developers, follow these steps:
+Reporting an error message to the Holos developers can allow them to troubleshoot the issue and help resolve any possible conflicts. 
 
--	Click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. Clicking this button allows you to paste this information in a different program or to include in your communication with the Holos developers. 
+When an internal error occurs, the software displays an error message (see Figure 11-16). To report this error (and other issues) to the developers, follow these steps:
 
-*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers. It simply copies information to your computer's clipboard.*
+**Note:**	If you get an error, as shown in the image below, click the button that says **Copy to Clipboard**. This will copy the error message and other relevant information to your computer’s clipboard. In addition, clicking this button allows you to paste this information into a different program or to include it in your communication with the Holos developers.
+
+*Please note that clicking the "Copy to Clipboard" button doesn't submit any information to the Holos developers.Instead, it simply copies information to your computer's clipboard.*
 
 <br>
 <p align="center">
@@ -3968,8 +3931,9 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
 </p>
 <br>
 
--	To send this information to the Holos developers, you will have to create a new issue in the official Github repository for Holos. You can click [here](https://github.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
+-	To send this information to the Holos developers, you will have to create a new issue in the official GitHub repository for Holos. You can click [here](https://GitHub.com/holos-aafc/Holos/issues) to go to the issue reporting page. 
 
+**Note:** You will need to create a free GitHub account to create and report issues.
 
 -	After going to the issue reporting page, click on "**New Issue**".
 
@@ -3978,19 +3942,19 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
  <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
     <br>
     <em>
-		Figure 11-17 - The new issue button on the Holos Github repository.
+		Figure 11-17 - The new issue button on the Holos GitHub repository.
 	</em>
 </p>
 <br>
 
-- On this page, you will click on "**Get Started**" opposite the "**Bug / Issue Report**" category.
+- Please click on "Get Started" opposite the "Bug / Issue Report" category on this page.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
     <br>
     <em>
-		Figure 11-18 - The new issue button on the Holos Github repository.
+		Figure 11-18 - The new issue button on the Holos GitHub repository.
 	</em>
 </p>
 <br>
@@ -3998,10 +3962,10 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
 
 - You will be presented with a new page where you can post details about the issue and provide additional information. This information includes:
   - **Title of issue**
-  - **Contact details** (in case we need to contact you outside of Github)
+  - **Contact details** (in case we need to contact you outside of GitHub)
   - **Expected Behaviour** when using Holos.
-  - **Actual Behaviour** displayed by Holos resulting in the bug/issue.
-  - **Details of issue including steps to reproduce the issue**.
+  - **The Actual Behaviour** displayed by Holos resulted in the bug/issue.
+  - **Details of the issue, including steps to reproduce the issue**.
   - **Error message.**
   - **Holos version number.**
 
@@ -4015,11 +3979,10 @@ Reporting an error message to the Holos developers can allow them to troubleshoo
 </p>
 <br>
 
+- Paste the information [copied earlier to your clipboard](#how-to-report-an-error-message) in the **Error Message **section, and fill in the other information as directed.
 
-- Paste the information you [copied earlier to your clipboard](#how-to-report-an-error-message), in the section titled "**Error Message**" and fill the other information as directed.
 
-
-- Click on "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
+- Click on the "**Submit new issue**" button at the bottom of the Bug/Issue report screen.
 
 - A new issue will now be created with the included information.
 
@@ -4035,6 +3998,33 @@ The version number of your current Holos installation is displayed when you firs
     <br>
     <em>
 		Figure 11-20 - Version number of the Holos installation.
+	</em>
+</p>
+<br>
+
+
+
+### How do I add a new farm to my current farm's CLI folder:
+
+
+##### Method 1: Copying an existing empty farm folder.
+
+1. In your current 'Farms" folder, create a new folder for your new farm with an appropriate name.
+2. Copy all files from an existing farm and paste them into this new folder that you have just created.
+3. Modify the data input files as needed.
+
+##### Method 2: Running the CLI again.
+
+1. Start the Holos CLI.
+2. You will be prompted to use the previously used Farms folder. Select **yes**.
+3. Select the appropriate units of measurement in the next prompt.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-4.png" alt="Figure11-4" width="650"/>
+    <br>
+    <em>
+		Figure 11-4 - Using the Holos CLI to create a new farms folder.
 	</em>
 </p>
 <br>

@@ -22,14 +22,6 @@ namespace H.Core.Emissions.Results
             return results.Sum(result => result.TotalEntericAndManureMethane);
         }
 
-        /// <summary>
-        /// (CO2)
-        /// </summary>
-        public static double TotalCarbonDioxideEmissionsFromManureSpreading(this IEnumerable<AnimalComponentEmissionsResults> results)
-        {
-            return results.Sum(result => result.TotalCarbonDioxideEmissionsFromManureApplication);
-        }
-
         public static double TotalMilkProduced(this IEnumerable<AnimalComponentEmissionsResults> results)
         {
             return results.Sum(result => result.TotalMilkProduced);
@@ -203,7 +195,7 @@ namespace H.Core.Emissions.Results
 
 
         /// <summary>
-        /// Equation 4.5.2-4
+        /// Equation 4.5.2-10
         /// 
         /// (kg N)
         /// </summary>
@@ -219,7 +211,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public static double TotalNitrogenAvailableForLandApplication(this IEnumerable<AnimalComponentEmissionsResults> results)
         {
-            return results.Sum(result => result.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication);
+            return results.Sum(result => result.TotalAvailableManureNitrogenAvailableForLandApplication);
         }
 
         /// <summary>
@@ -293,7 +285,7 @@ namespace H.Core.Emissions.Results
 
             foreach (var result in results)
             {
-                total += result.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
+                total += result.TotalAvailableManureNitrogenAvailableForLandApplication;
             }
 
             return total;

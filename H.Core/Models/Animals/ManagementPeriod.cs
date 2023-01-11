@@ -81,6 +81,8 @@ namespace H.Core.Models.Animals
             this.MilkProduction = 8;
             this.MilkFatContent = 4;
             this.MilkProteinContentAsPercentage = 3.5;
+
+            this.SelectedDiet = new Diet();
         }
 
         #endregion

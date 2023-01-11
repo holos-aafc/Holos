@@ -202,7 +202,7 @@
     <value>Ontario</value>
   </data>
   <data name="Pasture" xml:space="preserve">
-    <value>Pasture</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="PrinceEdwardIsland" xml:space="preserve">
     <value>Prince Edward Island</value>
@@ -523,10 +523,10 @@
     <value>Confined</value>
   </data>
   <data name="ConfinedNoBarn" xml:space="preserve">
-    <value>Confined no barn</value>
+    <value>Confined no barn (feedlot)</value>
   </data>
   <data name="Drylot" xml:space="preserve">
-    <value>Drylot</value>
+    <value>Drylot (standing or exercise yard)</value>
   </data>
   <data name="EnclosedPasture" xml:space="preserve">
     <value>Enclosed pasture</value>
@@ -574,10 +574,10 @@
     <value>Close up diet</value>
   </data>
   <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
-    <value>Compost intensive</value>
+    <value>Compost - intensive windrow</value>
   </data>
   <data name="CompostPassiveHandlingSystemName" xml:space="preserve">
-    <value>Compost passive</value>
+    <value>Compost - passive windrow</value>
   </data>
   <data name="CornDietType" xml:space="preserve">
     <value>Corn diet</value>
@@ -605,7 +605,7 @@
     <value>Deep bedding</value>
   </data>
   <data name="DeepPitHandlingSystemName" xml:space="preserve">
-    <value>Deep pit</value>
+    <value>Deep pit under barn</value>
   </data>
   <data name="ExceptionUnknownDietType" xml:space="preserve">
     <value>Unknown diet type '{0}'</value>
@@ -629,7 +629,7 @@
     <value>Liquid crust</value>
   </data>
   <data name="LiquidNoCrustHandlingSystemName" xml:space="preserve">
-    <value>Liquid no crust</value>
+    <value>Liquid/Slurry with no natural crust</value>
   </data>
   <data name="LowEnergyAndProteinDietType" xml:space="preserve">
     <value>Low energy &amp; protein diet</value>
@@ -653,7 +653,7 @@
     <value>Slow growth diet</value>
   </data>
   <data name="SolidStorageHandlingSystemName" xml:space="preserve">
-    <value>Solid storage</value>
+    <value>Solid storage (stockpiled)</value>
   </data>
   <data name="Stockers" xml:space="preserve">
     <value>Stockers</value>
@@ -1325,7 +1325,7 @@
     <value>kg N kg^-1</value>
   </data>
   <data name="KilogramsPerDay" xml:space="preserve">
-    <value>kg day^-1</value>
+    <value>kg day⁻¹</value>
   </data>
   <data name="KilogramsPerHectare" xml:space="preserve">
     <value>kg ha^-1</value>
@@ -1634,7 +1634,7 @@
     <value>kg CH₄  year^-1</value>
   </data>
   <data name="KilogramsN2ON" xml:space="preserve">
-    <value>kg N₂O-N</value>
+    <value>kg N2O-N</value>
   </data>
   <data name="KilogramsN2ONPerYear" xml:space="preserve">
     <value>kg N₂O-N year^-1</value>
@@ -2044,6 +2044,9 @@
   <data name="KilogramsN2ONPerHectareString" xml:space="preserve">
     <value>kg N2O-N (ha)^-1</value>
   </data>
+  <data name="KilogramsN2OPerHectareString" xml:space="preserve">
+    <value>kg N2O (ha)^-1</value>
+  </data>
   <data name="KilogramsNONPerHectareString" xml:space="preserve">
     <value>kg NO-N (ha)^-1</value>
   </data>
@@ -2053,8 +2056,17 @@
   <data name="KilogramsNH4NPerHectareString" xml:space="preserve">
     <value>kg NH4-N (ha)^-1</value>
   </data>
+  <data name="KilogramsNH4NPerFieldString" xml:space="preserve">
+    <value>kg NH4-N field^-1</value>
+  </data>
+  <data name="PoundsNH4NPerFieldString" xml:space="preserve">
+    <value>lb NH4-N field^-1</value>
+  </data>
   <data name="KilogramsN2NPerHectareString" xml:space="preserve">
     <value>kg N2-N (ha)^-1</value>
+  </data>
+  <data name="KilogramsN2NPerFieldString" xml:space="preserve">
+    <value>kg N2-N field^-1</value>
   </data>
   <data name="KilogramsN2ONPerHectare" xml:space="preserve">
     <value>kg N2O-N ha^-1</value>
@@ -2064,6 +2076,9 @@
   </data>
   <data name="KilogramsNO3NPerHectare" xml:space="preserve">
     <value>kg NO3-N ha^-1</value>
+  </data>
+  <data name="KilogramsNO3NPerField" xml:space="preserve">
+    <value>kg NO3-N field^-1</value>
   </data>
   <data name="KilogramsNONPerHectare" xml:space="preserve">
     <value>kg NO-N ha^-1</value>
@@ -2323,6 +2338,12 @@
   <data name="LabelTotalIndirectNitrousOxide" xml:space="preserve">
     <value>N2O-N_indirect</value>
   </data>
+  <data name="LabelTotalIndirectN2O" xml:space="preserve">
+    <value>N2O Indirect</value>
+  </data>
+  <data name="LabelTotalDirectN2O" xml:space="preserve">
+    <value>N2O Direct</value>
+  </data>
   <data name="LabelTotalNitrateLeachingForArea" xml:space="preserve">
     <value>NO3-N_totalLeach</value>
   </data>
@@ -2575,7 +2596,7 @@
 </value>
   </data>
   <data name="ToolTipChickenEggProduction" xml:space="preserve">
-    <value>Once pullets reach approximately 18-20 weeks of age they are transferred from either separate pullet operations or pullet barns on an egg production operation to egg-laying barns. These hens will produce eggs for up to 71 weeks of age.
+    <value>A component for pullets that reach approximately 18-20 weeks of age and are transferred from either separate pullet operations or pullet barns on an egg production operation to egg-laying barns. These hens will produce eggs for up to 71 weeks of age.
 </value>
   </data>
   <data name="ToolTipTurkeyMultiplierBreeder" xml:space="preserve">
@@ -3119,6 +3140,9 @@
   <data name="LabelEmissionFactorForLeachingAndRunoff" xml:space="preserve">
     <value>Emission factor for leaching and runoff</value>
   </data>
+  <data name="LabelRunInPeriod" xml:space="preserve">
+    <value>Run in period</value>
+  </data>
   <data name="Bushel" xml:space="preserve">
     <value>bu</value>
   </data>
@@ -3440,8 +3464,14 @@
   <data name="PoundsN2NPerAcreString" xml:space="preserve">
     <value>lb N2-N ac^-1</value>
   </data>
+  <data name="PoundsN2NPerFieldString" xml:space="preserve">
+    <value>lb N2-N field^-1</value>
+  </data>
   <data name="PoundsN2ONPerAcreString" xml:space="preserve">
     <value>lb N2O-N ac^-1</value>
+  </data>
+  <data name="PoundsN2OPerAcreString" xml:space="preserve">
+    <value>lb N2O ac^-1</value>
   </data>
   <data name="PoundsDryMatterPerAcreString" xml:space="preserve">
     <value>lb DM ac^-1</value>
@@ -3837,7 +3867,7 @@
     <value>Select the method of manure application to this field</value>
   </data>
   <data name="ToolTipBeefCowGeneralGainCoefficientOfBullsInfo" xml:space="preserve">
-    <value>The gain coefficient</value>
+    <value>Bulls gain coefficient</value>
   </data>
   <data name="ToolTipLandManureTableAmountOfManureInfo" xml:space="preserve">
     <value>The amount of manure applied</value>
@@ -4386,7 +4416,7 @@
     <value>Free stall barn (flushing)</value>
   </data>
   <data name="EnumFreeStallBarnMilkParlourSlurryFlushing" xml:space="preserve">
-    <value>Free stall barn (milk parlour - slurry flushing)</value>
+    <value>Milking parlour (slurry - flushing)</value>
   </data>
   <data name="EnumFreeStallBarnSlurryScraping" xml:space="preserve">
     <value>Free stall barn (slurry scraping)</value>
@@ -4395,10 +4425,10 @@
     <value>Free stall barn (solid litter)</value>
   </data>
   <data name="EnumLiquidWithNaturalCrust" xml:space="preserve">
-    <value>Liquid with natural crust</value>
+    <value>Liquid/Slurry with natural crust</value>
   </data>
   <data name="EnumLiquidWithSolidCover" xml:space="preserve">
-    <value>Liquid with solid cover</value>
+    <value>Liquid/Slurry with solid cover</value>
   </data>
   <data name="EnumPitLagoonNoCover" xml:space="preserve">
     <value>Pit/lagoon (no cover)</value>
@@ -4410,10 +4440,10 @@
     <value>Slurry broadcasting</value>
   </data>
   <data name="EnumTilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (tilled land)</value>
+    <value>Solid spread (intensive tillage)</value>
   </data>
   <data name="EnumUntilledLandSolidSpread" xml:space="preserve">
-    <value>Solid spread (untilled land)</value>
+    <value>Solid spread (no tillage or reduced tillage)</value>
   </data>
   <data name="TieStallSlurry" xml:space="preserve">
     <value>Tie stall (slurry)</value>
@@ -4563,7 +4593,7 @@
     <value>Sunflower Residues</value>
   </data>
   <data name="EnumSweageSludge" xml:space="preserve">
-    <value>Sweage Sludge</value>
+    <value>Sewage sludge</value>
   </data>
   <data name="EnumTriticaleStraw" xml:space="preserve">
     <value>Triticale Straw</value>
@@ -5043,28 +5073,28 @@
     <value>Detailed Entry</value>
   </data>
   <data name="ToolTipAlpacaComponent" xml:space="preserve">
-    <value />
+    <value>The alpaca component allows the creation and maintenance of management periods and other information related to alpacas, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipAnaerobicDigestionComponent" xml:space="preserve">
-    <value>Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. Anaerobic digestion produces two valuable outputs: biogas and digestate.</value>
+    <value>Anaerobic digestion is a process through which bacteria break down organic matter—such as animal manure, wastewater biosolids, and food wastes—in the absence of oxygen. As a result, anaerobic digestion produces two valuable outputs: biogas and digestate.</value>
   </data>
   <data name="ToolTipBackgroundingComponent" xml:space="preserve">
     <value>Backgrounder/Stocker operations take weaned calves and provide them feed to add weight before being sent to a feed yard for finishing. The beef stockers and backgrounders component include Heifers and Steers groups.</value>
   </data>
   <data name="ToolTipBisonComponent" xml:space="preserve">
-    <value>The bison component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+    <value>The bison component allows the creation and maintenance of management periods and other information related to bison, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipCowCalfComponent" xml:space="preserve">
-    <value>Includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group including weight, diet, housing and manure handling information.</value>
+    <value>This component includes the Bulls, Replacement heifers, Cows and Calves groups. This component allows the creation and maintenance of management periods and other information related to each animal group, including weight, diet, housing and manure handling information.</value>
   </data>
   <data name="ToolTipDairyComponent" xml:space="preserve">
     <value>Dairy cattle or cows are cattle bred for the ability to produce milk, from which dairy products are made. The dairy cattle component includes the Dairy heifers, Dairy dry, Dairy Calves and Dairy lactating groups.</value>
   </data>
   <data name="ToolTipDeerComponent" xml:space="preserve">
-    <value>The deer component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+    <value>The deer component allows the creation and maintenance of management periods and other information related to deer, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipElkComponent" xml:space="preserve">
-    <value />
+    <value>The elk component allows the creation and maintenance of management periods and other information related to elk, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipEwesAndLambsComponent" xml:space="preserve">
     <value>The lambs and ewes component allows the creation and maintenance of management periods and other information related to each animal group including animal  weight, diet, housing and manure handling information</value>
@@ -5076,16 +5106,16 @@
     <value>The finishing period is when beef animals are fed an energy-dense diet so that they will grow rapidly and add muscle to their frame. The beef finisher component includes the Heifers and Steers groups</value>
   </data>
   <data name="ToolTipGoatsComponent" xml:space="preserve">
-    <value>The goats component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+    <value>The goats component allows the creation and maintenance of management periods and other information related to goats, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipHorsesComponent" xml:space="preserve">
     <value>The horse component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipLlamasComponent" xml:space="preserve">
-    <value>The Llamas component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+    <value>The Llamas component allows the creation and maintenance of management periods and other information related to llams, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipMulesComponent" xml:space="preserve">
-    <value>The mules component allows the creation and maintenance of management periods and other information related to rams like number of animals and manure handling information.</value>
+    <value>The mules component allows the creation and maintenance of management periods and other information related to mules, like the number of animals and manure handling information.</value>
   </data>
   <data name="ToolTipRamsComponent" xml:space="preserve">
     <value>The rams component allows the creation and maintenance of management periods and other information related to rams including animal weight, diet, housing and manure handling information.</value>
@@ -5094,7 +5124,7 @@
     <value>The sheep feedlot component allows the creation and maintenance of management periods and other information related to sheep feedlots including animal weight, diet, housing and manure handling information.</value>
   </data>
   <data name="ToolTipShelterbeltComponent" xml:space="preserve">
-    <value>Shelterbelts are linear plantings of trees and/or shrubs that form part of an agriculture production system. A Shelterbelt component consists of rows of trees where each row contains various tree types such as Caragana, Green Ash, Hybrid Polar etc.</value>
+    <value>Shelterbelts are linear plantings of trees and/or shrubs that form part of an agricultural production system. A Shelterbelt component consists of rows of trees containing various tree types such as Caragana, Green Ash, Hybrid Polar etc.</value>
   </data>
   <data name="LabelCB2ID" xml:space="preserve">
     <value>CB2ID</value>
@@ -5212,5 +5242,209 @@
   </data>
   <data name="Peat" xml:space="preserve">
     <value>Peat</value>
+  </data>
+  <data name="KilogramsN2O" xml:space="preserve">
+    <value>kg N2O</value>
+  </data>
+  <data name="KilogramsN2OPerField" xml:space="preserve">
+    <value>kg N2O field^-1</value>
+  </data>
+  <data name="KilogramsN2ONPerField" xml:space="preserve">
+    <value>kg N2O-N field^-1</value>
+  </data>
+  <data name="KilogramsNONPerField" xml:space="preserve">
+    <value>kg NO-N field^-1</value>
+  </data>
+  <data name="PoundsN2OPerField" xml:space="preserve">
+    <value>lb N2O field^-1</value>
+  </data>
+  <data name="PoundsN2ONPerField" xml:space="preserve">
+    <value>lb N2O-N field^-1</value>
+  </data>
+  <data name="PoundsNONPerField" xml:space="preserve">
+    <value>lb NO-N field^-1</value>
+  </data>
+  <data name="PoundsNO3NPerField" xml:space="preserve">
+    <value>lb NO3-N field^-1</value>
+  </data>
+  <data name="PoundsN2O" xml:space="preserve">
+    <value>lb N2O</value>
+  </data>
+  <data name="LabelLandAppliedManure" xml:space="preserve">
+    <value>Land applied manure</value>
+  </data>
+  <data name="MessageBackupRestored" xml:space="preserve">
+    <value>Holos was not shutdown properly during the last session. A backup created on {0} at {1} has been restored. Please verify your data for consistency.</value>
+  </data>
+  <data name="KilogramsNON" xml:space="preserve">
+    <value>Kg NO-N</value>
+  </data>
+  <data name="PoundsNON" xml:space="preserve">
+    <value>lb NO-N</value>
+  </data>
+  <data name="LabelReportYear" xml:space="preserve">
+    <value>Report year</value>
+  </data>
+  <data name="MessageShelterbeltComponentNotAvailable" xml:space="preserve">
+    <value>Plant hardiness zone data is not available for this polygon. Therefore, the shelterbelt farm component will not be available. Plant hardiness zones outside the range 2A – 4B cannot be modelled until more data becomes available.</value>
+  </data>
+  <data name="MessageAnimalComponentEmissionsSingleProductionCycle" xml:space="preserve">
+    <value>Animal component results are for a single production cycle only. Therefore, to get the annual emissions value, multiply the results by the number of production cycles in a single year.</value>
+  </data>
+  <data name="MessageProvideCustomNeValuesForBeefCalvesDietIngredient" xml:space="preserve">
+    <value>To calculate enteric methane emissions for calves who are not being milk-fed, custom values need to be specified for NEga and NEma.</value>
+  </data>
+  <data name="InchesPerAcre" xml:space="preserve">
+    <value>in ac^-1</value>
+  </data>
+  <data name="MillimetersPerHectare" xml:space="preserve">
+    <value>mm ha^-1</value>
+  </data>
+  <data name="LabelFertilizerAdditive" xml:space="preserve">
+    <value>Additive</value>
+  </data>
+  <data name="MessageSoilReductionFactorsExperimental" xml:space="preserve">
+    <value>Soil reduction factors are preliminary and may be updated in a future release</value>
+  </data>
+  <data name="HolosName" xml:space="preserve">
+    <value>Holos 4</value>
+  </data>
+  <data name="SavingDataMessage" xml:space="preserve">
+    <value>Saving data, please wait.</value>
+  </data>
+  <data name="LabelLactating" xml:space="preserve">
+    <value>Lactating</value>
+  </data>
+  <data name="LabelPregnancy" xml:space="preserve">
+    <value>Pregnancy</value>
+  </data>
+  <data name="EnumCompostedInVessel" xml:space="preserve">
+    <value>Composted in-vessel</value>
+  </data>
+  <data name="EnumSolidStorageWithOrWithoutLitter" xml:space="preserve">
+    <value>Solid storage (with or without litter)</value>
+  </data>
+  <data name="TitleDigestate" xml:space="preserve">
+    <value>Digestate</value>
+  </data>
+  <data name="LabelAmountOfDigestate" xml:space="preserve">
+    <value>Amount of digestate</value>
+  </data>
+  <data name="EnumLiquidPhase" xml:space="preserve">
+    <value>Liquid digestate (separated)</value>
+  </data>
+  <data name="EnumRaw" xml:space="preserve">
+    <value>Raw digestate (not separated)</value>
+  </data>
+  <data name="EnumSolidPhase" xml:space="preserve">
+    <value>Solid digestate (separated)</value>
+  </data>
+  <data name="LabelLiquidSolidSeparation" xml:space="preserve">
+    <value>Liquid-solid separation</value>
+  </data>
+  <data name="LabelUseLiquidSolidSeparation" xml:space="preserve">
+    <value>Apply liquid/solid separation to the digestate</value>
+  </data>
+  <data name="LabelProportionOfManureAddedToDigestor" xml:space="preserve">
+    <value>Proportion of daily manure added to digestor</value>
+  </data>
+  <data name="CubicMetersPerDay" xml:space="preserve">
+    <value>m^3 day^-1</value>
+  </data>
+  <data name="LabelVolumeOfDigestateEnteringStorage" xml:space="preserve">
+    <value>Volume of digestate entering storage</value>
+  </data>
+  <data name="CubicNormalMetersPerDay" xml:space="preserve">
+    <value>Nm³ day⁻¹</value>
+  </data>
+  <data name="LabelFlowRateAllSubstrates" xml:space="preserve">
+    <value>Flow rate (all substrates)</value>
+  </data>
+  <data name="LabelFlowRateC" xml:space="preserve">
+    <value>Flow rate (C)</value>
+  </data>
+  <data name="LabelFlowRateNitrogen" xml:space="preserve">
+    <value>Flow rate (N)</value>
+  </data>
+  <data name="LabelFlowRateON" xml:space="preserve">
+    <value>Flow rate (ON)</value>
+  </data>
+  <data name="LabelFlowRateTAN" xml:space="preserve">
+    <value>Fow rate (TAN)</value>
+  </data>
+  <data name="LabelFlowRateTotalSolids" xml:space="preserve">
+    <value>Flow rate (total solids)</value>
+  </data>
+  <data name="LabelFlowRateVolatileSolids" xml:space="preserve">
+    <value>Flow rate (volatile solids)</value>
+  </data>
+  <data name="KilowattHoursPerDay" xml:space="preserve">
+    <value>kWh day⁻¹</value>
+  </data>
+  <data name="TotalBiogasProduction" xml:space="preserve">
+    <value>Total biogas production</value>
+  </data>
+  <data name="TotalCO2Production" xml:space="preserve">
+    <value>Total CO₂ production</value>
+  </data>
+  <data name="TotalMethaneProduction" xml:space="preserve">
+    <value>Total CH₄ production</value>
+  </data>
+  <data name="TotalPrimaryEnergyProductionPotential" xml:space="preserve">
+    <value>Total primary energy production</value>
+  </data>
+  <data name="TotalRecoverableMethane" xml:space="preserve">
+    <value>Total recoverable CH₄</value>
+  </data>
+  <data name="TotalElectricityProduction" xml:space="preserve">
+    <value>Total electricity production</value>
+  </data>
+  <data name="TotalAmmonia" xml:space="preserve">
+    <value>Total NH₃</value>
+  </data>
+  <data name="TotalHeatProduced" xml:space="preserve">
+    <value>Total heat produced</value>
+  </data>
+  <data name="TotalMethane" xml:space="preserve">
+    <value>Total CH₄</value>
+  </data>
+  <data name="TotalMethaneInjectionToGasGrid" xml:space="preserve">
+    <value>Total CH₄ to gas grid</value>
+  </data>
+  <data name="TotalN2O" xml:space="preserve">
+    <value>Total N₂O</value>
+  </data>
+  <data name="CubicNormalMetersPerMonth" xml:space="preserve">
+    <value>Nm³ month⁻¹</value>
+  </data>
+  <data name="CubicNormalMetersPerYear" xml:space="preserve">
+    <value>Nm³ year⁻¹</value>
+  </data>
+  <data name="KilogramsPerMonth" xml:space="preserve">
+    <value>kg month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerMonth" xml:space="preserve">
+    <value>kWh month⁻¹</value>
+  </data>
+  <data name="KilowattHoursPerYear" xml:space="preserve">
+    <value>kWh year⁻¹</value>
+  </data>
+  <data name="FlowRate" xml:space="preserve">
+    <value>Flow rate</value>
+  </data>
+  <data name="LabelTotalCarbon" xml:space="preserve">
+    <value>Total carbon</value>
+  </data>
+  <data name="LabelHydraulicRetentionTime" xml:space="preserve">
+    <value>Hydraulic retention time</value>
+  </data>
+  <data name="LabelNumberOfReactors" xml:space="preserve">
+    <value>Number of reactors</value>
+  </data>
+  <data name="EnumFreshManure" xml:space="preserve">
+    <value>Fresh manure</value>
+  </data>
+  <data name="EnumStoredManure" xml:space="preserve">
+    <value>Stored manure</value>
   </data>
 </root>

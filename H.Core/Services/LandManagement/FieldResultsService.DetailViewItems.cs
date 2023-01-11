@@ -19,7 +19,10 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Map properties from the component selection screen view item to the detail screen view item.
         /// </summary>
-        public CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem)
+        /// <param name="viewItem">The <see cref="CropViewItem"/> to copy from.</param>
+        /// <param name="year">When creating historical view items, this value will be used to set the year of any associated <see cref="ManureApplicationViewItem"/>s etc.</param>
+        /// <returns>A duplicated <see cref="CropViewItem"/></returns>
+        public CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year)
         {
             var result = _detailViewItemMapper.Map<CropViewItem, CropViewItem>(viewItem);
 
@@ -27,19 +30,51 @@ namespace H.Core.Services.LandManagement
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
             {
                 var copiedManureApplicationViewItem = _manureApplicationViewItemMapper.Map<ManureApplicationViewItem, ManureApplicationViewItem>(manureApplicationViewItem);
+
+                // We need to update the year so that the current years' manure applications are copied back in time
+                copiedManureApplicationViewItem.DateOfApplication = new DateTime(year, manureApplicationViewItem.DateOfApplication.Month, manureApplicationViewItem.DateOfApplication.Day);
+
                 result.ManureApplicationViewItems.Add(copiedManureApplicationViewItem);
             }
 
             foreach (var harvestViewItem in viewItem.HarvestViewItems)
             {
                 var copiedHarvestViewItem = _harvestViewItemMapper.Map<HarvestViewItem, HarvestViewItem>(harvestViewItem);
+
+                // We need to update the year so that the current years' harvest items are copied back in time
+                copiedHarvestViewItem.DateCreated = new DateTime(year, harvestViewItem.DateCreated.Month, harvestViewItem.DateCreated.Day);
+
                 result.HarvestViewItems.Add(copiedHarvestViewItem);
             }
 
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
             {
                 var copiedHayImportViewItem = _hayImportViewItemMapper.Map<HayImportViewItem, HayImportViewItem>(hayImportViewItem);
+
+                // We need to update the year so that the current years' hay import items are copied back in time
+                copiedHayImportViewItem.Date = new DateTime(year, copiedHayImportViewItem.DateCreated.Month, copiedHayImportViewItem.DateCreated.Day);
+
                 result.HayImportViewItems.Add(copiedHayImportViewItem);
+            }
+
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
+            {
+                var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map<FertilizerApplicationViewItem, FertilizerApplicationViewItem>(fertilizerApplicationViewItem);
+
+                // We need to update the year so that the current years' fertilizer applications are copied back in time
+                copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
+
+                result.FertilizerApplicationViewItems.Add(fertilizerApplicationViewItem);
+            }
+
+            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
+            {
+                var copiedDigestateViewItem = _digestateViewItemMapper.Map<DigestateApplicationViewItem, DigestateApplicationViewItem>(digestateApplicationViewItem);
+
+                // We need to update the year so that the current years' digestate applications are copied back in time
+                copiedDigestateViewItem.DateCreated = new DateTime(year, digestateApplicationViewItem.DateCreated.Month, digestateApplicationViewItem.DateCreated.Day);
+
+                result.DigestateApplicationViewItems.Add(digestateApplicationViewItem);
             }
 
             return result;
@@ -138,7 +173,7 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Combines input for a particular year. This would combine the inputs from the main crop grown that year plus the cover crop (if specified by user). This must be called
         /// after all inputs from crops, manure, etc. have been calculated for each detail view item since we simply add up the total above and below ground inputs for each
-        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM calculations
+        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM/IPCC Tier 2 calculations
         /// </summary>
         public void CombineInputsForAllCropsInSameYear(
             IEnumerable<CropViewItem> viewItems, 
@@ -160,27 +195,59 @@ namespace H.Core.Services.LandManagement
                 var coverCropAboveGroundInput = 0d;
                 var coverCropBelowGroundInput = 0d;
                 var coverCropManureInput = 0d;
+
+                var totalCoverCropAboveGroundResidueNitrogen = 0d;
+                var totalCoverCropBelowGroundResidueNitrogen = 0d;
+
                 var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCrop});
                 foreach (var cropViewItem in cropsOtherThanMainCrop)
                 {
+                    /*
+                     * Carbon will already have been calculated using IPCC Tier 2/ICBM methods
+                     */
+
                     coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
                     coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
-                    coverCropManureInput += cropViewItem.ManureCarbonInput;
+                    coverCropManureInput += cropViewItem.ManureCarbonInputsPerHectare;
+
+                    /*
+                     * Calculate nitrogen totals
+                     */
+
+                    var coverCropAboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(cropViewItem);
+                    var coverCropBelowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(cropViewItem);
+
+                    totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
+                    totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
                 }
+
+                /*
+                 * Sum up the main crop and cover crop carbon inputs
+                 */
 
                 mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
                 mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
-                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInput + coverCropManureInput;
-
+                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInputsPerHectare + coverCropManureInput;
                 mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput;
+
+                /*
+                 * Sum up the main crop and cover crop nitrogen inputs
+                 */
+
+                var mainCropAboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropBelowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
+
+                mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
+                mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
             }
         }
 
         /// <summary>
         /// Combine multiple view items for same year back into a single view item for that same year so ICBM works with one view item per year as expected.
         /// </summary>
-        public List<CropViewItem> MergeDetailViewItems(IEnumerable<CropViewItem> viewItems,
-                                             FieldSystemComponent fieldSystemComponent)
+        public List<CropViewItem> MergeDetailViewItems(
+            IEnumerable<CropViewItem> viewItems, 
+            FieldSystemComponent fieldSystemComponent)
         {
             var result = new List<CropViewItem>();
 
@@ -193,7 +260,7 @@ namespace H.Core.Services.LandManagement
                 var mainCropForYear = this.GetMainCropForYear(itemsForYear, year, fieldSystemComponent);
 
                 // Copy the item
-                var copiedItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropForYear);
+                var copiedItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropForYear, year);
                 copiedItem.Name = mainCropForYear.Name;
 
                 result.Add(copiedItem);
@@ -225,7 +292,9 @@ namespace H.Core.Services.LandManagement
             }
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
-            this.CalculateCarbonLostByGrazingAnimals(fieldSystemComponent, farm);
+            this.CalculateCarbonLostByGrazingAnimals(
+                fieldSystemComponent: fieldSystemComponent,
+                results: this.AnimalResults);
 
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
             //this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
@@ -297,14 +366,14 @@ namespace H.Core.Services.LandManagement
                 var firstEnteredYear = orderedYears.ElementAt(0);
 
                 // If user specifies an ordering from the starting year of the field, create items working toward the end year of the field
-                for (int i = startYear; i <= endYear; i++, moduloIndex++)
+                for (int indexYear = startYear; indexYear <= endYear; indexYear++, moduloIndex++)
                 {
                     var moduloYear = firstEnteredYear + (moduloIndex % distinctYears);
                     var itemsAtModuloYear = viewItems.Where(x => x.Year == moduloYear);
                     foreach (var cropViewItem in itemsAtModuloYear)
                     {
-                        var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem);
-                        createdViewItem.Year = i;
+                        var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem, indexYear);
+                        createdViewItem.Year = indexYear;
                         createdViewItem.DetailViewItemToComponentSelectionViewItemMap = cropViewItem.Guid;
 
                         result.Add(createdViewItem);
@@ -317,14 +386,14 @@ namespace H.Core.Services.LandManagement
                 var lastEnteredYear = orderedYears.Last();
 
                 // If user specifies an ordering starting from the last year of the field, create items working back to the starting year of the field
-                for (int i = endYear; i >= startYear; i--, moduloIndex++)
+                for (int indexYear = endYear; indexYear >= startYear; indexYear--, moduloIndex++)
                 {
                     var moduloYear = lastEnteredYear - (moduloIndex % distinctYears);
                     var itemsAtYear = viewItems.Where(x => x.Year == moduloYear);
                     foreach (var cropViewItem in itemsAtYear)
                     {
-                        var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem);
-                        createdViewItem.Year = i;
+                        var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem, indexYear);
+                        createdViewItem.Year = indexYear;
                         createdViewItem.DetailViewItemToComponentSelectionViewItemMap = cropViewItem.Guid;
                         result.Add(createdViewItem);
                     }
@@ -337,7 +406,7 @@ namespace H.Core.Services.LandManagement
                     farm: farm,
                     viewItemsForRotation: viewItems,
                     startYearOfField: startYear,
-                    viewItemsForField: result);
+                    viewItemsForField: result, fieldComponent: fieldSystemComponent);
 
                 fieldSystemComponent.RunInPeriodItems.Clear();
                 fieldSystemComponent.RunInPeriodItems.AddRange(runInPeriodItems);
@@ -353,12 +422,12 @@ namespace H.Core.Services.LandManagement
         /// <param name="viewItemsForRotation">The crops that define a rotation</param>
         /// <param name="startYearOfField"></param>
         /// <param name="viewItemsForField">The view items for the entire field history</param>
+        /// <param name="fieldComponent"></param>
         /// <returns>A collection of run in period items</returns>
-        public List<CropViewItem> GetRunInPeriodItems(
-            Farm farm, 
-            IEnumerable<CropViewItem> viewItemsForRotation, 
+        public List<CropViewItem> GetRunInPeriodItems(Farm farm,
+            IEnumerable<CropViewItem> viewItemsForRotation,
             int startYearOfField,
-            IEnumerable<CropViewItem> viewItemsForField)
+            IEnumerable<CropViewItem> viewItemsForField, FieldSystemComponent fieldComponent)
         {
             var moduloCounter = 0;
             var runInPeriodItems = new List<CropViewItem>();
@@ -375,16 +444,17 @@ namespace H.Core.Services.LandManagement
             items.Reverse();
 
             // Start at the year before the user-defined start year and work backwards towards the start year of the run in period
-            for (int i = startYearOfField - 1; i >= runInPeriodStartYear; i--, moduloCounter++)
+            for (int indexYear = startYearOfField - 1; indexYear >= runInPeriodStartYear; indexYear--, moduloCounter++)
             {
                 var moduloIndex = moduloCounter % viewItemsForRotation.Count();
                 var itemAtYear = items.ElementAt(moduloIndex);
 
                 // Need to get all items at year, not just main crop?
 
-                var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(itemAtYear);
-                createdViewItem.Year = i;
+                var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(itemAtYear, indexYear);
+                createdViewItem.Year = indexYear;
                 createdViewItem.DetailViewItemToComponentSelectionViewItemMap = itemAtYear.Guid;
+                createdViewItem.FieldSystemComponentGuid = fieldComponent.Guid;
 
                 // Add to list of run in period items
                 runInPeriodItems.Add(createdViewItem);
@@ -419,7 +489,7 @@ namespace H.Core.Services.LandManagement
             foreach (var cropViewItem in secondaryCrops)
             {
                 // Add in an extra view item for the secondary crop
-                var secondaryCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem);
+                var secondaryCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem, cropViewItem.Year);
 
                 secondaryCrop.IsSecondaryCrop = true;
 

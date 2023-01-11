@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -94,7 +102,7 @@ namespace H.Core.Test.Services
             var energyRequiredToProduceAKilogramOfMilk = 184.125;
             var result =
                 _resultsService.CalculateNetEnergyForLactation(dailyWeightGainOfLambs, energyRequiredToProduceAKilogramOfMilk);
-            Assert.AreEqual(568.45440924657534246575342465753, result);
+            Assert.AreEqual(207485.859375, result);
         }
 
 
@@ -242,7 +250,7 @@ namespace H.Core.Test.Services
             var percentTotalDigestibleNutrientsInFeed = 200.500;
             var ashContentOfFeed = 15.375;
             var result = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTotalDigestibleNutrientsInFeed,
-                                                      ashContentOfFeed);
+                                                      ashContentOfFeed, 50);
             Assert.AreEqual(-5.5603957063008123, result);
         }
 
@@ -490,7 +498,8 @@ namespace H.Core.Test.Services
             Assert.AreEqual(2.9669376693766937669376693766938, result);
         }
 
-        #endregion
+       
 
+        #endregion
     }
 }

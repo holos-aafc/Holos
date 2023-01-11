@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -26,8 +27,8 @@ namespace H.Core.Services.LandManagement
         /// For annuals, there is no need to get the previous/next years but for consistency, this method is called for annual crops regardless.
         /// </summary>
         public AdjoiningYears GetAdjoiningYears(
-            IEnumerable<CropViewItem> viewItems, 
-            int year, 
+            IEnumerable<CropViewItem> viewItems,
+            int year,
             FieldSystemComponent fieldSystemComponent)
         {
             var previousYear = year - 1;
@@ -46,7 +47,7 @@ namespace H.Core.Services.LandManagement
 
                 return new AdjoiningYears()
                 {
-                    PreviousYearViewItem = previousItemInStand, 
+                    PreviousYearViewItem = previousItemInStand,
                     CurrentYearViewItem = mainCropForCurrentYear,
                     NextYearViewItem = nextItemInStand
                 };
@@ -67,14 +68,17 @@ namespace H.Core.Services.LandManagement
         /// hay applications, etc. Then we can proceed to the actual carbon change calculations.
         /// </summary>
         public void AssignCarbonInputs(
-            IEnumerable<CropViewItem> viewItems, 
-            Farm farm, 
+            IEnumerable<CropViewItem> viewItems,
+            Farm farm,
             FieldSystemComponent fieldSystemComponent)
         {
             // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
             this.AssignYieldToAllYears(
                 cropViewItems: viewItems,
                 farm: farm);
+
+            // Assign yields to run in period items
+            this.AssignYieldToAllYears(fieldSystemComponent.RunInPeriodItems, farm);
 
             // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
             this.UpdatePercentageReturnsForPerennials(
@@ -97,12 +101,12 @@ namespace H.Core.Services.LandManagement
                  * Assign carbon inputs based on selected strategy
                  */
 
-                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
+                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 &&
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(currentYearViewItem))
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
-                        viewItem: currentYearViewItem);
+                        viewItem: currentYearViewItem, farm: farm);
                 }
                 else
                 {
@@ -126,12 +130,12 @@ namespace H.Core.Services.LandManagement
             var secondaryCrops = viewItems.OrderBy(x => x.Year).Where(x => x.IsSecondaryCrop).ToList();
             foreach (var secondaryCrop in secondaryCrops)
             {
-                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
+                if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 &&
                     _tier2SoilCarbonCalculator.CanCalculateInputsForCrop(secondaryCrop))
                 {
                     // If IPCC Tier 2 is the selected strategy and we can calculate inputs for the specified crop, then use the IPCC methodology for calculating inputs
                     _tier2SoilCarbonCalculator.CalculateInputs(
-                        viewItem: secondaryCrop);
+                        viewItem: secondaryCrop, farm: farm);
                 }
                 else
                 {
@@ -144,7 +148,7 @@ namespace H.Core.Services.LandManagement
                         farm: farm);
                 }
             }
-        }       
+        }
 
         /// <summary>
         /// If there is a year where a perennial crop has a 0 yield, it means it wasn't harvested that year. Therefore, when a perennial year has a 0 yield,
@@ -171,10 +175,9 @@ namespace H.Core.Services.LandManagement
         #region Private Methods
 
         private void CalculateCarbonAtInterval(
-            CropViewItem previousYearResults, 
-            CropViewItem currentYearResults, 
-            Farm farm, 
-            FieldSystemComponent fieldSystemComponent)
+            CropViewItem previousYearResults,
+            CropViewItem currentYearResults,
+            Farm farm)
         {
             // The user can choose to use either the climate parameter or the management factor in the calculations
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? currentYearResults.ClimateParameter : currentYearResults.ManagementFactor;
@@ -193,7 +196,7 @@ namespace H.Core.Services.LandManagement
 
             currentYearResults.YoungPoolManureCarbon = _icbmSoilCarbonCalculator.CalculateYoungPoolManureCarbonAtInterval(
                 youngPoolManureCarbonAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
-                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInput,
+                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInputsPerHectare,
                 youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                 climateParameter: climateParameterOrManagementFactor);
 
@@ -210,7 +213,7 @@ namespace H.Core.Services.LandManagement
                 climateParameter: climateParameterOrManagementFactor,
                 youngPoolManureAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
                 manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure,
-                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInput);
+                manureCarbonInputAtPreviousInterval: previousYearResults.ManureCarbonInputsPerHectare);
 
             currentYearResults.SoilCarbon = _icbmSoilCarbonCalculator.CalculateSoilCarbonAtInterval(
                 youngPoolSoilCarbonAboveGroundAtInterval: currentYearResults.YoungPoolSoilCarbonAboveGround,
@@ -221,6 +224,17 @@ namespace H.Core.Services.LandManagement
             currentYearResults.ChangeInCarbon = _icbmSoilCarbonCalculator.CalculateChangeInSoilCarbonAtInterval(
                 soilOrganicCarbonAtInterval: currentYearResults.SoilCarbon,
                 soilOrganicCarbonAtPreviousInterval: previousYearResults.SoilCarbon);
+
+            // If there is a measured value, then use the calculated Y_ag, Y_bg, and O pool values for the current year (using 2.1.3-8, 2.1.3-9, and 2.1.3-10)
+            if (previousYearResults.Year == 0 && farm.UseCustomStartingSoilOrganicCarbon)
+            {
+                currentYearResults.YoungPoolSoilCarbonAboveGround = previousYearResults.YoungPoolSoilCarbonAboveGround;
+                currentYearResults.YoungPoolSoilCarbonBelowGround = previousYearResults.YoungPoolSoilCarbonBelowGround;
+                currentYearResults.YoungPoolManureCarbon = previousYearResults.YoungPoolManureCarbon;
+                currentYearResults.OldPoolSoilCarbon = previousYearResults.OldPoolSoilCarbon;
+                currentYearResults.SoilCarbon = farm.StartingSoilOrganicCarbon;
+                currentYearResults.ChangeInCarbon = 0;
+            }
         }
 
         /// <summary>
@@ -270,59 +284,42 @@ namespace H.Core.Services.LandManagement
              * Use a specified strategy to calculate these starting values
              */
 
-            double equilibriumAboveGroundInput = 0;
-            double equilibriumBelowGroundInput = 0;
-            double equilibriumManureInput = 0;
-            double equilibriumClimateParameter = 0;
-            double equilibriumManagementFactor = 0;
+            var equilibriumAboveGroundInput = 0d;
+            var equilibriumBelowGroundInput = 0d;
+            var equilibriumManureInput = 0d;
+            var equilibriumClimateParameter = 0d;
+            var equilibriumManagementFactor = 0d;
+
+            var equilibriumCarbonInputFromProduct = 0d;
+            var equilibriumCarbonInputFromStraw = 0d;
+            var equilibriumCarbonInputFromRoots = 0d;
+            var equilibriumCarbonInputFromExtraroots = 0d;
 
             var strategy = farm.Defaults.EquilibriumCalculationStrategy;
             if (strategy == EquilibriumCalculationStrategies.CarMultipleYearAverage)
             {
-                throw new NotImplementedException();
 
-                var aboveGroundInputs = new List<double>();
-                var belowGroundInputs = new List<double>();
-
-                //var numberOfYearsToAverage = farm.Defaults.NumberOfYearsInCarRegionAverage;
-
-                //// Don't have CAR yields prior to 1985, take average from yields forward of 1985
-                //var startYear = farm.CarbonModellingEquilibriumYear;
-                //for (int i = 0; i < numberOfYearsToAverage; i++)
-                //{
-                //    var indexYear = startYear + i;
-                //    var carId = _canadianAgriculturalRegionIdToSlcIdProvider.GetCarId(farm.PolygonId);
-                //    var viewItem = detailViewItems.ElementAtOrDefault(i);
-                //    if (viewItem == null)
-                //    {
-                //        continue;
-                //    }
-
-                //    var yieldDataForYear = _defaultYieldProvider.GetRowByCarIdYearAndCropType(carId, indexYear, viewItem.CropType);
-                //    var carYield = yieldDataForYear.EYield;
-
-                //    // There is no previous year, or next year, so we pass in null
-                //    _multiYearSoilCarbonCalculator.SetCarbonInputs(
-                //        previousYearViewItem: null,
-                //        currentYearViewItem: viewItem,
-                //        nextYearViewItem: null,
-                //        farm: farm);
-
-                //    aboveGroundInputs.Add(viewItem.AboveGroundCarbonInput);
-                //    belowGroundInputs.Add(viewItem.BelowGroundCarbonInput);
-                //}
-
-                equilibriumAboveGroundInput = aboveGroundInputs.Average();
-                equilibriumBelowGroundInput = belowGroundInputs.Average();
             }
             else
             {
                 // At this point, the detail view items have had their C inputs calculated
+
+                // Equation 2.1.3-1
                 equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.AboveGroundCarbonInput);
+
+                // Equation 2.1.3-2
                 equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.BelowGroundCarbonInput);
-                equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInput);
+
+                // Equation 2.1.3-3
+                equilibriumManureInput = viewItemsInRotation.Average(x => x.ManureCarbonInputsPerHectare);
+
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
+
+                equilibriumCarbonInputFromProduct = viewItemsInRotation.Average(x => x.CarbonInputFromProduct);
+                equilibriumCarbonInputFromStraw = viewItemsInRotation.Average(x => x.CarbonInputFromStraw);
+                equilibriumCarbonInputFromRoots = viewItemsInRotation.Average(x => x.CarbonInputFromRoots);
+                equilibriumCarbonInputFromExtraroots = viewItemsInRotation.Average(x => x.CarbonInputFromExtraroots);
             }
 
             // This is the equilibrium year result
@@ -330,7 +327,7 @@ namespace H.Core.Services.LandManagement
 
             result.AboveGroundCarbonInput = equilibriumAboveGroundInput;
             result.BelowGroundCarbonInput = equilibriumBelowGroundInput;
-            result.ManureCarbonInput = equilibriumManureInput;
+            result.ManureCarbonInputsPerHectare = equilibriumManureInput;
             result.ClimateParameter = equilibriumClimateParameter;
             result.ManagementFactor = equilibriumManagementFactor;
 
@@ -343,6 +340,11 @@ namespace H.Core.Services.LandManagement
             result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
             result.NitrogenContentInRoots = averageNitrogenConcentrationInRoots;
             result.NitrogenContentInExtraroot = averageNitrogenConcentrationInExtraroots;
+
+            result.CarbonInputFromProduct = equilibriumCarbonInputFromProduct;
+            result.CarbonInputFromStraw = equilibriumCarbonInputFromStraw;
+            result.CarbonInputFromRoots = equilibriumCarbonInputFromRoots;
+            result.CarbonInputFromExtraroots = equilibriumCarbonInputFromExtraroots;
 
             /*
              * Carbon
@@ -360,10 +362,9 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                var youngPoolAboveGround = result.AboveGroundCarbonInput /
-                                (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
 
-
+                // Equation 2.1.3-8
+                var youngPoolAboveGround = result.AboveGroundCarbonInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
 
                 result.YoungPoolSoilCarbonAboveGround = youngPoolAboveGround;
             }
@@ -377,13 +378,14 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
+                // Equation 2.1.3-9
                 var youngPoolBelowGround = result.BelowGroundCarbonInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
 
                 result.YoungPoolSoilCarbonBelowGround = youngPoolBelowGround;
             }
 
             result.YoungPoolManureCarbon = _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateManure(
-                averageManureCarbonInput: result.ManureCarbonInput,
+                averageManureCarbonInput: result.ManureCarbonInputsPerHectare,
                 youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                 climateParameter: climateOrManagementFactor);
 
@@ -400,11 +402,12 @@ namespace H.Core.Services.LandManagement
                     aboveGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonAboveGround,
                     belowGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonBelowGround,
                     manureYoungPoolSteadyState: result.YoungPoolSteadyStateManure,
-                    averageManureCarbonInputOfRotation: result.ManureCarbonInput,
+                    averageManureCarbonInputOfRotation: result.ManureCarbonInputsPerHectare,
                     manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure);
             }
             else
             {
+                // Equation 2.1.3-10
                 result.OldPoolSoilCarbon = farm.StartingSoilOrganicCarbon - (result.YoungPoolSoilCarbonAboveGround + result.YoungPoolSoilCarbonBelowGround);
             }
 
@@ -430,15 +433,29 @@ namespace H.Core.Services.LandManagement
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
+                _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+
+                foreach (var runInPeriodItem in fieldSystemComponent.RunInPeriodItems)
+                {
+                    if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
+                    {
+                        _tier2SoilCarbonCalculator.CalculateInputs(runInPeriodItem, farm);
+                    }
+                    else
+                    {
+                        _icbmSoilCarbonCalculator.SetCarbonInputs(null, runInPeriodItem, null, farm);
+                    }
+                }
+
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,
                     viewItemsByField: viewItemsForField,
                     fieldSystemComponent: fieldSystemComponent);
-
-                // Note: N budget calculations are not being performed when user selects Tier 2. Methodology has to be completed for this scenario
             }
             else
             {
+                _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
 
@@ -446,23 +463,29 @@ namespace H.Core.Services.LandManagement
                 {
                     var currentYearResults = viewItemsForField.ElementAt(i);
 
-                    // Get previous year results, if there is no previous year (i.e. t = 0), then use equilibrium year values
+                    // Get previous year results, if there is no previous year (i.e. t = 0), then use equilibrium (or custom measured) values for the pools
                     var previousYearResults = i == 0 ? equilibriumYearResults : viewItemsForField.ElementAt(i - 1);
 
                     // Carbon must be calculated before nitrogen
                     this.CalculateCarbonAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,
-                        farm: farm,
-                        fieldSystemComponent: fieldSystemComponent);
+                        farm: farm);
 
-                    this.CalculateNitrogenAtInterval(
+                     _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,
                         nextYearResults: null,
                         farm: farm,
                         yearIndex: i);
                 }
+            }
+
+            foreach (var cropViewItem in viewItemsForField)
+            {
+                var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
+                cropViewItem.CropEnergyResults = energyResults;
+                cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
 
@@ -536,18 +559,6 @@ namespace H.Core.Services.LandManagement
             var result = totalCarbonInExprtedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
 
             return result;
-        }
-
-        /// <summary>
-        /// Calculates how much carbon was lost due to animals grazing on the field.
-        /// </summary>
-        public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
-        {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
-
-            this.CalculateCarbonLostByGrazingAnimals(
-                fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
         }
 
         /// <summary>

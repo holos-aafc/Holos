@@ -37,12 +37,12 @@ Une fois l’installation terminée, Holos doit se mettre en marche immédiateme
 </p>
 <br>
 
-Vous pouvez accéder à Holos à partir du menu de démarrage de Windows. Ouvrez le menu de démarrage; Holos devrait se trouver dans un dossier intitulé AAFC-AAC.
+Vous pouvez accéder à Holos à partir du menu de démarrage de Windows en recherchant « Holos 4 ». Ouvrez le menu Démarrer ou cliquez sur la barre de recherche et recherchez « Holos 4 »
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter1/figure1-4.png" alt="Figure 1-4" width="350"/>
+ <img src="../../Images/UserGuide/fr/chapter1/figure1-4.png" alt="Figure 1-4" width="650"/>
     <br>
     <em>Figure 1.4 Holos dans le menu de démarrage.</em>
 </p>
@@ -135,7 +135,7 @@ Holos peut gérer plusieurs fermes créées par l’utilisateur, chacune représ
 </p>
 <br>
 
-2.	Lorsque vous aurez cliqué sur l’une des régions, Holos téléchargera les données climatiques directement de la NASA. Une barre de progression affiche l’avancement du téléchargement des données. Cela ne devrait prendre que quelques secondes. Les détails sur cette région s’affichent à droite de l’écran (pour afficher uniquement le mode avancé, voir la figure 2.6). Vous verrez les détails de l’emplacement, le sol et les zones de rusticité, ainsi que les détails sur les conditions climatiques à l’emplacement que vous avez choisi.
+2.	Lorsque vous aurez cliqué sur l’une des régions, Holos téléchargera les données climatiques directement de la NASA. Une barre de progression affiche l’avancement du téléchargement des données. Cela ne devrait prendre que quelques secondes. Les détails sur cette région s’affichent à droite de l’écran. Vous verrez les détails de l’emplacement, le sol et les zones de rusticité, ainsi que les détails sur les conditions climatiques à l’emplacement que vous avez choisi.
 
 <p align="center">
      <img src="../../Images/UserGuide/fr/chapter2/figure2-6.png" alt="Figure 2-6" width="950"/>
@@ -198,7 +198,7 @@ Holos peut gérer plusieurs fermes créées par l’utilisateur, chacune représ
 </p>
 <br>
 
-6. Lorsque vous avez fini vos choix du type de sol, de la zone de rusticité et des données climatiques, cliquez sur Suivant.
+1. Lorsque vous avez fini vos choix du type de sol, de la zone de rusticité et des données climatiques, cliquez sur Suivant.
 
 
 <br>
@@ -245,8 +245,8 @@ L’onglet **Fichier** offre plusieurs options pour gérer les fichiers de ferme
 
 #### Création d’une nouvelle ferme
 
-* Pour créer un nouveau fichier de ferme, cliquez sur **Nouveau** sous l’onglet Fichier. Vous pourrez alors créer une nouvelle ferme en suivant les étapes des sections **Créer une nouvelle ferme et Sélectionner un emplacement de ferme.**
-* Si vous ne savez pas comment créer une nouvelle ferme, cliquez ici : **Comment créer une nouvelle ferme**
+* Pour créer un nouveau fichier de ferme, cliquez sur **Nouveau** sous l’onglet Fichier. Vous pourrez alors créer une nouvelle ferme en suivant les étapes des sections **Créer une nouvelle ferme et [Sélectionner un emplacement de ferme](#sélection-de-lemplacement-de-la-ferme).**
+* Si vous ne savez pas comment créer une nouvelle ferme, cliquez ici : [Comment créer une nouvelle ferme](#créer-une-nouvelle-ferme)
 * Si vous ne savez pas comment ouvrir une ferme existante, suivez les instructions sous **Ouvrir/fermer des dossiers**.
 
 <br>
@@ -555,8 +555,6 @@ Sous l’en-tête Valeurs par défaut, trois options sont offertes : Renseigneme
 		A: Une liste des options disponibles pour définir les valeurs par défaut pour vos opérations.
 		<br>
 		B: Permet à l’utilisateur de définir des valeurs par défaut personnalisées pour des cultures individuelles. 
-		<br>
-		C: Option d’affichage des résultats en format annuel ou pluriannuel.
 	</em>
 </p>
 <br>
@@ -668,61 +666,6 @@ Les données par défaut pour cet écran sont basées sur les informations conte
 </p>
 <br>
    
-   
-   
-
-## Modèle annuel et pluriannuel
-
-*	Holos travaille avec une ferme selon deux modes, **Annuel** et **Pluriannuel**. Le mode de base est le mode **annuel**, certains boutons et menus étant masqués pour plus de simplicité. Holos démarre par défaut toute ferme en mode **Annuel**. Comme son nom l’indique, le mode **Annuel** ne fournit des données que pour une seule année. Le mode Pluriannuel permet de mettre en place un **système avancé de modélisation du carbone** sur une période allant de 1985 à nos jours.
-
-*	Le mode **Annuel** est le plus simple pour utiliser Holos; il suffit d’ajouter des composantes à votre ferme et d’appuyer sur **Suivant** pour charger les résultats. Il s’agit du mode par défaut pour créer une nouvelle ferme dans Holos.
-*	Le mode Pluriannuel modifie l’interface de certaines composantes (voir la figure 4.6).
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-7.png" alt="Figure4-7" width="850"/>
-    <br>
-    <em>
-		Figure 4.7 – Propriétés d’une composante sur le terrain en mode Annuel 
- 	</em>
-</p>
-
-<br>
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-8.png" alt="Figure4-8" width="750"/>
-    <br>
-    <em>
-		Figure 4.8 – Propriétés d’une composante sur le terrain en mode Pluriannuel.
- 	</em>
-</p>
-<br>
-
-
-
- 
-
-
-*	Le mode **Pluriannuel** modifiera le flux de Holos, au lieu des étapes normales suivies par le mode **Annuel**, dans le mode **Pluriannuel**, vous devez ajouter des composantes à votre ferme, puis naviguer jusqu’à l’écran Calendrier. À partir de cet écran, selon les paramètres, passez à l’écran Détails et arrivez finalement à la section des résultats.
-
-*	Vous pouvez basculer entre les modes Annuel ou Pluriannuel dans **Paramètres** ou cliquer sur **Oui** à côté de **Activer le mode Pluriannuel** dans l’écran de sélection des composantes. Dans le bas du Holos apparaît le mode de travail sélectionné, soit Annuel ou Pluriannuel.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter4/figure4-9.png" alt="Figure4-9" width="850"/>
-    <br>
-    <em>
-		Figure 4.9 – Le mode de l’année en cours est affiché dans le coin inférieur droit
-		<br>
-		A : Le bouton à bascule de changement de mode d’année.
-		<br>
-		B : Le mode de l’année en cours. 
- 	</em>
-</p>
-<br>
-<br>
 
 
 # Chapitre 5 – Outils
@@ -928,7 +871,7 @@ Chaque composante est classée par type et comprend ce qui suit : **Gestion des 
 
 ## Composantes de la gestion des terres
  
-### Composante sur le terrain
+### Composant de champ
 
 * Une composante sur le terrain contient des données comme les semis, la superficie des terres et le travail du sol (voir la figure 6.4). Les cultures sont classées selon leur type de croissance (c.-à-d. annuelle, vivace, etc.)
 * Pour entrer des données précises sur le champ, vous devez accéder à l’Affichage de l’onglet contenant les propriétés **Renseignements généraux, Fumier et Résidus** pour le champ.
@@ -1009,6 +952,7 @@ Dans cette section, l'utilisateur peut indiquer la quantité de carbone et d'azo
 
 <br>
 <p align="center">
+<img src="../../Images/UserGuide/fr/chapter6/figure6-8.png" 
  <img src="" alt="Figure6-8"  width="650"/>
     <br>
     <em>
@@ -1151,299 +1095,940 @@ Pour chaque type d'arbre dans vos rangées de brise-vent, il faut remplir un ens
 	</em>
 </p>
 <br>
-
-
-   
-
-##### Détails sur les brise-vent
-
--   Si votre ferme compte plusieurs brise-vent à côté de l'onglet **Sélecteur de brise‑vent**, vous pouvez sélectionner en haut de la page la composante des brise‑vent pour laquelle vous souhaitez voir les résultats, comme le montre la figure 6.14, section A.
-
--   Pour accéder à la page des détails, cliquez sur **Suivant** au bas de la page du calendrier.
-
--   La page des détails **affichera une liste de données pour chaque rangée de brise-vent et leurs types d'arbres**, à partir de l'année de la plantation jusqu'à l'année de coupe que vous avez inscrite sur la page du calendrier des brise-vent (figure 6.14, section C).
-
--   La page des détails produira également des calculs supplémentaires comme la catégorie de mortalité en pourcentage (0/15/30/50), le carbone de surface (kg C par arbre) et le carbone souterrain (kg C
-par arbre).
-
--   Si vous modifiez des valeurs dans les pages précédentes, cliquez sur **Reconstruire les colonnes de données** pour actualiser les données du tableau (Figure 6.14, section B).
-
--   Si vous souhaitez voir les colonnes de la calculatrice (pour la circonférence moyenne), cliquez sur **Afficher les colonnes de la calculatrice** dans le coin supérieur droit de la page Détails du brise-vent, et une colonne de la calculatrice s'affichera. Si vous ne savez pas ce qu'est la calculatrice de circonférence moyenne, cliquez ici : [Comment utiliser la calculatrice de circonférence moyenne](#calculatrice-de-circonférence-moyenne)
-
-
 <br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-14.png" alt="Figure6-14" width="750"/>
-    <br>
-    <em>
-		Figure 6.14 -- Détails du brise-vent.
-		<br>
-		A : Les brise-vent de votre ferme.
-		<br>
-		B : Si vous avez modifié des données dans les pages précédentes, veuillez cliquer ici pour reconstruire les colonnes de données.
-		<br>
-		C : Les données associées à chaque rangée de brise-vent et à leur type d'arbre correspondant de l'année de plantation jusqu'à l'année de coupe.
-		<br>
-		D : Si vous avez trié les données et souhaitez revenir à l'année par défaut, cliquez ici.
-	</em>
-</p>
-<br>
-
- 
-  
 
 ##### Résultats du brise-vent
 
 1.  **Pour obtenir les résultats**, cliquez sur le bouton **Résultats** au bas de chaque page des composantes.
 2.  La page des résultats affichera l'empreinte des émissions du brise-vent sélectionné en fournissant des données sur les émissions de gaz à effet de serre calculées à partir des données entrées dans les pages précédentes.
 
-## Composantes animales
 
--   Les composantes animales sont réparties dans les catégories suivantes : **Production de bœuf, Produits laitiers, Porcs, Volaille, Moutons et Autres animaux d'élevage.**
 
--   Tous les résultats pour chaque composante animale seront affichés sur une **seule page de résultats.**
+### Composante Crop Rotation (rotation des cultures)
 
--   Par contre, chaque composante animale doit avoir son propre ensemble d'entrées de données!
-
--   Dans cette section, nous verrons comment entrer les données pour chaque catégorie de composantes.
-
-### Configuration des composantes animales
-
--   Les composantes animales sont très semblables en ce qui concerne la structure et les données requises pour créer les composantes.
-
--   Chaque composante animale comprend **un ou plusieurs groupes d'animaux (p. ex., génisses par opposition à bouvillons)**, parmi lesquels **chaque groupe fait l'objet d'une ou de plusieurs périodes
-de gestion.**
-
--   La **période de gestion** est divisée en catégories et permet à l'utilisateur d'entrer des données sur les détails concernant les **Renseignements généraux, Ration, Logement et Fumier** pour chaque **groupe d'animaux.**
+La composante Crop Rotation (rotation des cultures) est similaire à la composante Field (champ), et elle permet la représentation de plusieurs composantes Field (champs) pour une même exploitation.  Supposons par exemple qu’une exploitation contienne plusieurs composantes Field (champ), qui, ensemble, représentent la rotation des cultures sur plusieurs années dans un même champ.  Dans un tel cas, une composante Crop Rotation (rotation des cultures) peut comporter une même donnée qui aura été entrée une seule fois.  Cela rend la représentation des champs et des cultures de l’exploitation plus conviviale et plus facile à gérer. 
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-15.png" alt="Figure6-15" width="650"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-58.png" alt="Figure6-58" width="850"/>
     <br>
     <em>
-		Figure 6.15 -- Présentation des Bovins de long engraissement et semi-finis présentant une composante animale.
-		<br>
-		A : Une liste des groupes d'animaux qui ont été ajoutés à la composante animale.
-		<br>
-		 B : Une liste des périodes de gestion pour un groupe d'animaux sélectionnés.
-		<br>
-		C : Les détails de la période de gestion sélectionnée
+		Figure 6.58 - Composante Crop Rotation (rotation des cultures)  
 	</em>
 </p>
 <br>
 
-  
 
-#### Groupes
+La composante Crop Rotation (rotation des cultures) vous permet de déterminer aisément la croissance d’une culture lors d’une année particulière, ce qui détermine automatiquement la rotation d’après le nombre de cultures choisi. 
 
--   **Chaque** composante animale peut comprendre **un ou plusieurs groupes d'animaux**.
--   La **principale considération est que chaque groupe d'animaux** a un type particulier ou différent d'intrants et de pratiques de gestion qui y sont associés, p. ex., logement, ration, gestion du fumier, etc.
--   Pour **ajouter un groupe** à votre composante animale, vous pouvez utiliser les boutons situés en haut à droite de la section des groupes d'animaux.
--   Le groupe ajouté s'affichera sous **Étape 1**.
--   Vous pouvez **supprimer un groupe d'animaux** en cliquant sur le **X** à côté du groupe d'animaux que vous souhaitez supprimer.
--   Vous pouvez **également trier les groupes par ordre alphabétique** en cliquant sur l'en-tête **Nom du groupe**\".
--   Si vous voulez voir les détails sur un groupe d'animaux, veuillez le sélectionner en cliquant n'importe où dans la section des groupes. Le groupe d'animaux sélectionné sera indiqué par un symbole « \> » dans la colonne de gauche.
--   Vous pouvez **modifier le nom de chacun de vos groupes d'animaux** en cliquant sur le nom que vous souhaitez modifier et en y inscrivant votre nom personnalisé.
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-59.png" alt="Figure6-59" width="650"/>
+    <br>
+    <em>
+		Figure 6.59 – Crop rotation (rotation des cultures) – Détermination des cultures
+		<br>
+		A: Année et données sur les cultures
+		<br>
+		B: Les boutons à flèche permettent l’ajustement des cultures dans la rotation.
+		<br>
+		C: Rotation en cours pour chaque champ.  
+	</em>
+</p>
+<br>
 
+La plupart des autres paramètres dans la composante Crop Rotation (rotation des cultures) sont similaires à ceux de la [composante Field (champ) décrite plus haut](#composant-de-champ).
+
+La composante Crop Rotation (rotation des cultures) comporte toutefois un onglet additionnel, l’onglet Winter & Cover Crops (cultures d’hiver et de couverture).  La page d’onglet correspondante offre des options pour gérer et modifier les paramètres liés à la culture de couverture de chaque champ. 
+
+L’ajout d’une culture d’hiver/de couverture/en sous-semis à n’importe quelle culture précise active cette page d’onglet pour la culture visée. 
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-60.png" alt="Figure6-60" width="650"/>
+    <br>
+    <em>
+		Figure 6.60 - aramètres des cultures d’hiver et de couverture  
+	</em>
+</p>
+<br>
+<br>
+
+
+## Composantes pour les animaux
+
+-	Les composantes pour les animaux sont réparties selon les catégories suivantes :  **Beef Production (production bovine), Dairy (production laitière), Swine (porcs), Poultry (volaille), Sheep (moutons) et Other Livestock (autres animaux d’élevage)**. 
+- Tous les résultats de toutes les composantes pour les animaux sont affichés dans une **unique page de résultats**.
+- Cependant, chaque composante pour les animaux exige l’entrée de son propre ensemble de données. 
+- La présente section indique comment entrer les données pour chacune des différentes composantes pour les animaux. 
+
+
+<br>
+
+### Paramétrage des composantes pour les animaux 
+
+-	La structure et les données d’une composante pour les animaux ressemblent beaucoup à celles des autres composantes. 
+-	Chaque **composante pour un animal** concerne un ou plusieurs groupes d’animaux (p. ex. génisses vs bouvillons); **chaque groupe d’animaux a une ou plusieurs périodes de gestion. **
+-	La **période de gestion** est divisée en catégories et permet à l’utilisateur d’entrer des **données générales** et des **données sur l’alimentation, les bâtiments d’élevage et le fumier** pour chaque groupe d’animaux. 
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-15.png" alt="Figure6-15" width="750"/>
+    <br>
+    <em>
+		Figure 6.15 - Composante pour les animaux Beef Stockers & Backgrounders 
+		<br>
+		A: Liste des groupes d’animaux ayant été ajoutés à une composante pour les animaux.
+		<br>
+		B : Liste des périodes de gestion pour un groupe d’animaux sélectionnés.    
+		<br>
+		C : Détails pour la période de gestion sélectionnée.   
+	</em>
+</p>
+<br>
+
+#### Groupes 
+
+- **Chaque** composante pour les animaux peut comporter **un ou plusieurs groupes d’animaux**. 
+- Le fait que **chaque groupe d’animaux** soit associé à des intrants et des pratiques précis ou différents, p. ex. un bâtiment d’élevage, une ration ou une gestion du fumier différents est une **considération clé**. 
+- Pour **ajouter un groupe** à votre composante pour les animaux, utilisez le bouton dans le coin supérieur droit de la section des groupes d’animaux. 
+- Le groupe ajouté apparaît sous la mention **Step 1 (étape 1)**. 
+- Vous pouvez **supprimer un groupe d’animaux** en cliquant sur le « **X** » sous le groupe visé. 
+- Vous pouvez **également trier les groupes en ordre alphabétique** en cliquant sur l’en-tête **Group name (nom du groupe)**. 
+- Si vous voulez visualiser les détails pour un groupe d’animaux, sélectionnez le groupe en cliquant n’importe où dans la section des groupes.  Le groupe d’animaux sélectionné sera indiqué par un symbole « > » dans la colonne de gauche. 
+- Vous pouvez **ajuster le nom de chacun de vos groupes d’animaux** en cliquant sur le nom à modifier, puis en entrant votre nom personnalisé. 
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/fr/chapter6/figure6-16.png" alt="Figure6-16"/>
     <br>
     <em>
-		Figure 6.16 -- Groupes d'animaux.
+		Figure 6.16 - Groupes d’animaux.
 		<br>
-		A : Tous les groupes d'animaux actuellement ajoutés. Chaque ligne contient un seul groupe.
+		A: Tous les groupes d’animaux actuellement ajoutés.  Chaque ligne contient un seul groupe.
 		<br>
-		B : Un groupe animal particulier -- bouvillons.
+		B: Groupe d’animaux précis – Bouvillons.
 		<br>
-		C : Pour trier les noms, cliquez sur l'en-tête **Nom du groupe**.
+		C: Cliquer sur l’en-tête Group name (nom du groupe) pour trier les noms.
 		<br>
-		D : Boutons pour ajouter un groupe d'animaux.
+		D: Boutons pour ajouter un groupe d’animaux.
 	</em>
 </p>
 <br>
 
-    
 
-#### Période de gestion
+#### *Période de gestion* 
 
--   Une période de gestion est une période pendant laquelle il est possible de saisir les détails relatifs à un groupe d'animaux, en fonction des opérations effectuées pendant cette période.
--   Chaque **groupe d'animaux** peut faire l'objet d'**une ou plusieurs** périodes de gestion.
--   Pour voir la ou les périodes de gestion d'un groupe d'animaux, veuillez **sélectionner le groupe sous Étape 1**.
--   Vous pouvez modifier le **nom, la date de début** et le **nombre de jours** pour chaque période de gestion.
--   Pour ajouter une nouvelle période de gestion à votre groupe d'animaux sélectionné, veuillez cliquer sur le bouton **Ajouter une période de gestion** sous **Étape 2**.
--   Pour **supprimer une période de gestion**, cliquez sur le bouton **X** à côté de la période que vous souhaitez supprimer.
--   Les données sur une période de gestion peuvent être réparties en quatre catégories : **Renseignements généraux, Ration, Logement et Fumier**.
--   Pour voir les données sur une période de gestion, veuillez cliquer sur celle que vous souhaitez consulter.
+-	Une période de gestion est une période associée à un groupe d’animaux et pour laquelle des détails sur l’exploitation et la gestion du groupe peuvent être entrés et gérés. 
+- Chaque **groupe d'animaux** peut être associé **à une ou à plusieurs** périodes de gestion.
+- Pour visualiser les périodes de gestion associées à un groupe d'animaux, sélectionnez le groupe voulu sous la mention Step 1 (étape 1).
+- Vous pouvez ajuster le **nom** , la **date de début** et le **nombre de jours** pour chaque période de gestion.
+- Cliquez sur le bouton **Add Management Period (ajouter une période de gestion)**, sous la mention **Add Management Period (ajouter une période de gestion)**, pour ajouter une nouvelle période de gestion au groupe d'animaux sélectionné.
+- Pour **supprimer une période de gestion** , cliquez sur le bouton **X** à côté de la période voulue.
+- On peut classer les détails d'une période de gestion en quatre catégories : **General (général), Diet (ration), Housing (bâtiments d'élevage)** et **Manure (fumier)**.
+- Cliquez sur la période voulue pour visualiser les détails de cette période de gestion.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-17.png" alt="Figure6-17" width=""/>
+    <br>
+    <em>
+		Figure 6.17 - Périodes de gestion pour le groupe d'animaux. 
+		<br>
+		A: Groupe d'animaux sélectionné. 
+		<br>
+		B : Périodes de gestion pour le groupe d'animaux sélectionné.
+		<br>
+		C : Cliquer ici pour ajouter une nouvelle période de gestion du groupe d'animaux voulu.
+	</em>
+</p>
+
+-	Pour visualiser des renseignements additionnels sur chaque section, cliquez sur Yes (oui), à côté de l'en-tête Show Additional Information (visualiser des données additionnelles).
+
+<br>
+<br>
+
+
+### Production bovine
+
+La catégorie de la production bovine contient les composantes pour les animaux suivantes :
+
+<br>
+
+#### Beef Cow-Calf (vaches et veaux de boucherie)
+
+La composante Beef Cow-Calf (vaches et veaux de boucherie) contient les groupes suivants :
+
+- Bulls (taureaux)
+- Replacement heifers (génisses de remplacement)
+- Cows (vaches)
+- Calves (veaux)
+
+Holos permet à l'utilisateur d'ajouter des groupes et de créer des copies d'un groupe, lorsque c'est nécessaire. On peut ajouter/copier un groupe en cliquant sur le bouton Add Group (ajouter un groupe) à l'étape 1.
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-17.png" alt="Figure6-17" width="450"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-18.png" alt="Figure6-18" width="850"/>
     <br>
     <em>
-		Figure 6.17 -- Périodes de gestion pour le groupe d'animaux.
-		<br>
-		A : Le groupe d'animaux sélectionné.
-		<br>
-		B : Périodes de gestion pour le groupe d'animaux sélectionné.
-		<br>
-		C : Cliquez ici pour ajouter une nouvelle périodede gestion pour votre groupe d'animaux
-	</em>
-</p>
-
-   
-
--   Pour voir les renseignements supplémentaires pour chaque section, cliquez sur **Oui** à côté de l'en-tête Afficher les renseignements supplémentaires.
-
-<br>
-
-##### Renseignements généraux
-
--   La section des renseignements généraux contient des données simples sur le groupe animal, comme le **nombre d'animaux** et le taux quotidien moyen des **coefficients de gain**.
--   Vous pouvez également inscrire les poids de **départ** et de **fin** pour votre groupe d'animaux.
--   Certains groupes d'animaux comportent des champs de données supplémentaires propres à ce groupe.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-18.png" alt="Figure6-18" width="650"/>
-    <br>
-    <em>
-		Figure 6.18 -- Onglet général Périodes de gestion.
-		<br>
-		A : Le bouton à bascule **Afficher les renseignements supplémentaires** vous permet de consulter des renseignements supplémentaires dans un onglet.
-		<br>
-		B : Renseignements supplémentaires concernant une section d'onglet.
+		Figure 6.18 - Composante Beef Cow-Calf (vaches et veaux de boucherie)
 	</em>
 </p>
 <br>
 
-  
 
-##### Rations
 
--   La section sur le régime alimentaire contient des renseignements sur les rations de votre groupe d'animaux au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner l'une des **rations par défaut**, par exemple : **faible, moyen ou élevé** en protéines.
--   Si vous avez sélectionné **Renseignements supplémentaires**, vous pouvez ajouter des précisions sur la ration, comme le fourrage, les   protéines brutes, les matières grasses, etc.
--   Si vous voulez créer votre propre **ration personnalisée**, il y a un bouton **Créateur de ration personnalisée** au bas de la section sur le régime alimentaire. Si vous ne savez pas comment créer une ration personnalisée, cliquez ici : [Comment créer une ration personnalisée](#créer-une-ration-personnalisée).
+Chaque groupe d'animaux comporte les sections suivantes, qui peuvent être modifiées et configurées.
 
+##### General (général)
+
+- La section General contient des données de base sur le groupe d'animaux, par exemple le **nombre d'animaux** et le taux quotidien moyen des **coefficients de gain**.
+- Vous pouvez également y entrer les poids de **départ** et de **fin** de votre groupe d'animaux.
+- Pour certains groupes d'animaux, il y aura des champs additionnels propres au groupe.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/fr/chapter6/figure6-19.png" alt="Figure6-19" width="650"/>
     <br>
     <em>
-		Figure 6.19 -- Périodes de gestion -- onglet Ration
+		Figure 6.19 - Page d'onglet General des périodes de gestion.
+		<br>
+		A: Le commutateur Show Additional Information (visualiser des données additionnelles) vous permet de visualiser des données additionnelles dans une page d'onglet.
+		<br>
+		B: Données additionnelles pour une section de page d'onglet.
 	</em>
 </p>
 <br>
 
+##### Diet (ration)
+
+-	 La section Diet (ration) contient des données sur la ration du groupe d'animaux au cours de la période de gestion sélectionnée.
+- Vous pouvez sélectionner l'une des **rations par défaut**  : **low, medium, or high** energy protein (protéines à énergie **faible** , **moyenne** ou **élevée** ).
+- Si vous avez choisi de visualiser des données additionnelles, vous pouvez sélectionner des détails plus précis sur le fourrage, les protéines crues et les lipides, entre autres.
+- Si vous voulez créer votre **ration personnalisée** , utilisez le bouton **Custom Diet Creator (créateur de ration personnalisée)**, dans le bas de la section Diet Management (gestion de la ration). Si vous devez apprendre comment créer une ration personnalisée, cliquez sur le lien suivant : [Comment créer une ration personnalisée](#créer-une-ration-personnalisée)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-20.png" alt="Figure6-20" width="650"/>
+    <br>
+    <em>
+		Figure 6.20 - Périodes de gestion – Page d'onglet Diet (ration).
+	</em>
+</p>
+<br>
+
+##### Bâtiment d'élevage
+
+- La section Housing (bâtiments d'élevage) contient des détails sur les bâtiments d'élevage pour le groupe d'animaux sélectionné dans la période de gestion sélectionnée.
+- Vous pouvez sélectionner des types de bâtiment par défaut, par exemple les types confiné sans étable, confiné ou pâturage clôturé.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-21.png" alt="Figure6-21" width="650"/>
+    <br>
+    <em>
+		Figure 6.21 - Périodes de gestion – Page d'onglet Housing (bâtiments d'élevage).
+	</em>
+</p>
+
+- Si vous sélectionnez l'option « **Enclosed Pasture (pâturage clôturé)** », le champ additionnel **Pasture Location (emplacement du pâturage)** apparaît.
+
+<br>
+
+##### Manure (fumier)
+
+- La page d'onglet Manure (fumier) contient des détails sur les opérations de fumier pour le groupe d'animaux sélectionné dans la période de gestion sélectionnée.
+- Vous pouvez sélectionner des types de gestion du fumier, par exemple le type litière profonde ou le type entreposage solide.
+- Si vous avez choisi de visualiser des données additionnelles, vous pouvez entrer des données plus précises concernant le fumier.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-22.png" alt="Figure6-22" width="650"/>
+    <br>
+    <em>
+		Figure 6.22 - Périodes de gestion – Page d'onglet Manure (fumier).
+	</em>
+</p>
+<br>
+<br>
 
 
 
-##### Logement
+#### Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis)
 
--   La section sur le logement contient des renseignements sur la situation du logement pour le groupe d'animaux que vous avez choisi au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner des types de logements par défaut, comme : enclos sans étable, enclos, pâturage fermé, etc.
+La composante Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis) comporte les groupes d'animaux suivants :
+
+- Heifers (génisses)
+- Steers (bouvillons)
+
+Cette composante contient des pages d'onglet similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général).
 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-20.png" alt="Figure6-20" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-23.png" alt="Figure6-23" width="850"/>
     <br>
     <em>
-		Figure 6.20 -- Périodes de gestion -- Onglet Logement.
+		Figure 6.23 - Composante Beef Stockers & Backgrounders (bovins de long engraissement et semi-finis)
 	</em>
 </p>
+<br>
+<br>
 
+#### Beef Finishers (bovins de finition)
 
+La composante Beef Finishers (bovins de finition) comporte les groupes d'animaux suivants :
 
+- Heifers (génisses)
+- Steers (bouvillons)
 
--   Si vous sélectionnez **Pâturage fermé**, vous verrez un champ de données supplémentaire pour **Emplacement du pâturage**.
+Cette composante contient des pages d'onglet similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général).
 
-##### Fumier
-
--   La section sur le fumier contient des détails sur les utilisations de fumier pour le groupe d'animaux que vous avez sélectionné au cours de la période de gestion sélectionnée.
--   Vous pouvez sélectionner des types de gestion du fumier par défaut, comme : Litière profonde, stockage solide, etc.
--   Si vous avez choisi de voir des renseignements supplémentaires, vous pouvez fournir des données d'entrée pour obtenir des précisions sur le fumier.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/fr/chapter6/figure6-21.png" alt="Figure6-21" width="750"/>
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-24.png" alt="Figure6-24" width="850"/>
     <br>
     <em>
-		Figure 6.21 -- Périodes de gestion -- Onglet Fumier.
+		Figure 6.24 - Composante Beef Finishers (bovins de finition)
 	</em>
 </p>
 <br>
-
-
-
-
-### Production bovine
-
-La catégorie de production bovine comprend les composantes animales suivantes :
-
--   Boeufs -- Vaches/veaux
--   Bovins de long engraissement et semi-finis
--   Finition des bovins
-
 <br>
+
 
 ### Produits laitiers
 
-La catégorie des produits laitiers comprend la composante animale suivante : 
-- Bovins laitiers.
+La catégorie des produits laitiers contient les composantes suivantes :
+
+#### Dairy Cattle (bovins laitiers)
+
+La composante Dairy Cattle (bovins laitiers) comporte les groupes d'animaux suivants :
+
+- Dairy heifers (génisses laitières)
+- Dairy calves (veaux laitiers)
+- Dairy lactating (veaux en lactation)
+
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Beef Cow-Calf (vaches et veaux de boucherie)](#general-général), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-25.png" alt="Figure6-25" width="850"/>
+    <br>
+    <em>
+		Figure 6.25 - Composante Dairy cattle (bovins laitiers)
+	</em>
+</p>
+<br>
+<br>
+
+
+### Swine (porcs)
+
+La catégorie des porcs contient les composantes pour les animaux suivantes :
+
+
+#### Grower-to-Finish (engraissement à finition)
+
+La composante Grower-to-Finish (engraissement à finition) comporte le groupe d'animaux suivant :
+
+- Hogs (porcs)
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-26.png" alt="Figure6-26" width="850"/>
+    <br>
+    <em>
+		Figure 6.26 - Composante Grower-to-Finish (engraissement à finition)
+	</em>
+</p>
+<br>
+<br>
+
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
 
 <br>
 
-### Porcs
+##### General (général) – Composante Swine (porcs)
 
-La catégorie des porcs comprend les composantes animales suivantes : 
-- Porcs d'engraissement et porcs de finition
-- De la naissance au sevrage 
-- Sevrage en isolement
-- De la naissance à la finition.
+The general tab allows editing the following information:
+
+- **Étape de la production** pour le groupe d'animaux
+- **Nombre d'animaux** dans l'exploitation
+- **Gain de poids quotidien** des animaux du groupe sélectionné
+- **Poids initial et poids final** des animaux du groupe sélectionné
+- Renseignements généraux additionnels sur le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information (visualiser des données additionnelles)).
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-27.png" alt="Figure6-27" width="750"/>
+    <br>
+    <em>
+		Figure 6.27 - Composante Swine (porcs) – Page d'onglet General (général)
+	</em>
+</p>
+<br>
+
+##### Diet (ration) – Composante Swine (porcs)
+
+Dans la page d'onglet Diet (ration), vous pouvez modifier les données suivantes :
+
+- **Type de ration** du groupe d'animaux
+- **Ration personnalisée** pour le groupe d'animaux sélectionné (à l'aide du bouton **Custom Diet Creator** [**créateur de ration personnalisée**])
+- Renseignements additionnels sur la ration pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-28.png" alt="Figure6-28" width="750"/>
+    <br>
+    <em>
+		Figure 6.28 - Composante Swine (porcs) – Page d'onglet Diet (ration)
+	</em>
+</p>
+<br>
+
+##### Manure (Fumier) – Composante Swine (porcs)
+
+Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivantes :
+
+- **Système de manutention du fumier** pour le groupe d'animaux
+- Renseignements additionnels sur le fumier pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
+    <br>
+    <em>
+		Figure 6.29 - Composante Swine (porcs) – Page d'onglet Diet (ration)
+	</em>
+</p>
+<br>
+
+
+#### Farrow-to-Wean (naissance au sevrage)
+
+La composante Farrow-to-Wean (naissance au sevrage) comporte les groupes d'animaux suivants :
+
+- Gilts (cochettes)
+- Sows (truies)
+- Boars (verrats)
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-30.png" alt="Figure6-30" width="850"/>
+    <br>
+    <em>
+		Figure 6.30 - Composante Farrow-to-Wean (naissance au sevrage)
+	</em>
+</p>
+<br>
+
+
+#### Iso-Wean (porcelets sevrés)
+
+La composante Iso-Wean (porcelets sevrés) comporte le groupe d'animaux suivant :
+
+- Piglets (porcelets)
+
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-31.png" alt="Figure6-31" width="850"/>
+    <br>
+    <em>
+		Figure 6.31 - Composante Iso-Wean (porcelets sevrés)
+	</em>
+</p>
+<br>
+
+#### Farrow-to-Finish (naissance à la finition)
+
+La composante Farrow-to-Finish (naissance à la finition) comporte les groupes d'animaux suivants :
+
+- Gilts (cochettes)
+- Sows (truies)
+- Boars (verrats)
+- Piglets (porcelets)
+
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Grower-to-Finish (engraissement à la finition)](#general-général-composante-swine-porcs), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-32.png" alt="Figure6-32" width="850"/>
+    <br>
+    <em>
+		Figure 6.32 - Composante Farrow-to-Finish (naissance à la finition)
+	</em>
+</p>
+<br>
 
 <br>
 
-### Volaille
+### Poultry (volaille)
+La catégorie de la volaille contient les composantes pour les animaux suivantes :
+<br>
 
-La catégorie de la volaille comprend les composantes animales suivantes :
-- Ferme de poulettes 
-- Éleveur-multiplicateur de poulets 
-- Production de viande de poulet 
-- Éleveur-multiplicateur de dindons 
-- Production de viande de dinde 
-- Production d'œufs de poulet 
-- Couvoir multiplicateur de poulets.
+#### Pullet Farm (exploitations de poulettes)
+
+La composante Pullet Farm (exploitations de poulettes) comporte le groupe d'animaux suivant :
+
+- Pullets (poulettes)
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-34.png" alt="Figure6-34" width="850"/>
+    <br>
+    <em>
+		Figure 6.34 - Composante Pullet Farm (exploitations de poulettes)
+	</em>
+</p>
+<br>
+<br>
+
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
+
+
+##### General (général) – Composante Poultry (volaille)
+
+Dans la page d'onglet General (général), vous pouvez modifier les données suivantes :
+
+- **Nombre d'animaux** dans l'exploitation
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-35.png" alt="Figure6-35" width="750"/>
+    <br>
+    <em>
+		Figure 6.35 - Composante Poultry (volaille) – Page d'onglet General (général)
+	</em>
+</p>
+<br>
+
+
+##### Housing (bâtiments d'élevage) – Composante Poultry (volaille)
+
+Dans la page d'onglet Housing (bâtiments d'élevage), vous pouvez modifier les données suivantes :
+
+- **Type de bâtiment** pour les animaux du groupe sélectionné
+- Renseignements additionnels sur les bâtiments d'élevage pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-36.png" alt="Figure6-36" width="750"/>
+    <br>
+    <em>
+		Figure 6.36 - Composante Poultry (volaille) – Page d'onglet Housing (bâtiments d'élevage)
+	</em>
+</p>
+<br>
+
+##### Manure (fumier) – Composante Poultry (volaille)
+
+Dans la page d'onglet Manure (Fumier), vous pouvez modifier les données suivantes :
+
+- **Système de manutention du fumier** pour les animaux du groupe sélectionné
+- Renseignements additionnels sur le fumier pour le groupe d'animaux (après avoir sélectionné l'option Show Additionnel Information [visualiser des données additionnelles])
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-37.png" alt="Figure6-37" width="750"/>
+    <br>
+    <em>
+		Figure 6.37 - Composante Poultry (volaille) – Page d'onglet Manure (fumier)
+	</em>
+</p>
+<br>
+
 
 <br>
 
-### Moutons
+#### Chicken Multiplier Breeder (reproduction-multiplication des poulets)
 
-La catégorie des moutons comprend les composantes animales suivantes :
+La composante Chicken Multiplier Breeder (reproduction-multiplication des poulets) comporte les groupes d'animaux suivants :
 
-- Parc d'engraissement de moutons 
-- Béliers 
-- Agneaux et brebis.
+- Pullets (poulettes)
+- Cockerels (coquelets)
+
+Cette composante comporte des pages d'onglets similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-38.png" alt="Figure6-38" width="850"/>
+    <br>
+    <em>
+		Figure 6.38 - Composante Chicken Multiplier Breeder (reproduction-multiplication des poulets)
+	</em>
+</p>
+<br>
 
 <br>
 
-### Autres animaux d'élevage
+#### Chicken Meat Production (production de viande de poulet)
 
-La catégorie des autres animaux d'élevage comprend les composantes animales suivantes : 
-- Chèvres 
-- Chevreuils 
-- Chevaux 
-- Mules
-- Bisons 
-- Lamas.
+La composante Chicken Meat Production (production de viande de poulet) comporte les groupes d'animaux suivants :
+
+- Pullets (poulettes)
+- Cockerels (coquelets)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
 
 <br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-39.png" alt="Figure6-39" width="850"/>
+    <br>
+    <em>
+		Figure 6.39 - Composante Chicken Meat Production (production de viande de poulet)
+	</em>
+</p>
+<br>
+
+#### Turkey Multiplier Breeder (reproduction-multiplication de dindes)
+
+La composante Turkey Multiplier Breeder (reproduction-multiplication de dindes) comporte les groupes d'animaux suivants :
+
+- Young toms (jeunes dindons)
+- Toms (dindons)
+- Young turkey hens (jeunes dindes)
+- Turkey hens (dindes)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-61.png" alt="Figure6-61" width="850"/>
+    <br>
+    <em>
+		Figure 6.61 - Composante Turkey Multiplier Breeder (reproduction-multiplication de dindes)
+	</em>
+</p>
+<br>
+
+#### Turkey Meat Productio (production de viande de dindon)
+
+La composante Turkey Meat Productio (production de viande de dindon) comporte les groupes d'animaux suivants :
+
+- Young toms (jeunes dindons)
+- Young turkey hens (jeunes dindes)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-40.png" alt="Figure6-40" width="850"/>
+    <br>
+    <em>
+		Figure 6.40 - Composante Turkey Meat Productio (production de viande de dindon)
+	</em>
+</p>
+<br>
+
+#### Chicken Egg Production (production d'œufs de poules)
+
+La composante Chicken Egg Production (production d'œufs de poules) comporte le groupe d'animaux suivant :
+
+- Hens (poules)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-41.png" alt="Figure6-41" width="850"/>
+    <br>
+    <em>
+		Figure 6.41 - Composante Chicken Egg Production (production d'œufs de poules)
+	</em>
+</p>
+<br>
+
+#### Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets)
+
+La composante Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets) comporte les groupes d'animaux suivants :
+
+- Poussins
+- Dindonneaux
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Pullet Farm (exploitations de poulettes)](#general-général-composante-poultry-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-42.png" alt="Figure6-42" width="850"/>
+    <br>
+    <em>
+		Figure 6.42 - Composante Chicken Multiplier Hatchery (couvoirs multiplicateurs de poulets)
+	</em>
+</p>
+<br>
+
+<br>
+
+### Sheep (mouton)
+
+La catégorie Sheep (mouton) contient la composante pour les animaux suivante :
+
+#### Sheep Feedlot (parc d'engraissement de moutons)
+
+La composante Sheep Feedlot (parc d'engraissement des moutons) comporte le groupe d'animaux suivant :
+
+- Sheep Feedlot (parc d'engraissement de moutons)
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-43.png" alt="Figure6-43" width="850"/>
+    <br>
+    <em>
+		Figure 6.43 - Composante Sheep Feedlot (parc d'engraissement de moutons)
+	</em>
+</p>
+<br>
+<br>
+
+Cette composante comporte les pages d'onglet suivantes, dans lesquelles vous pouvez entrer des détails additionnels sur chaque groupe.
+
+
+##### General (général) – Composante Sheep (volaille)
+
+Dans la page d'onglet General (général) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Number of animals (nombre d'animaux)
+- Daily gain (gain quotidien)
+- Start weight et End weight (Poids initial et Poids final)
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-44.png" alt="Figure6-44" width="650"/>
+    <br>
+    <em>
+		Figure 6.44 - Catégorie Sheep (moutons) – Page d'onglet General (général)
+	</em>
+</p>
+<br>
+
+##### Diet (ration) – Composante Sheep (moutons)
+
+Dans la page d'onglet Diet (ration) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Diet type (type de ration)
+- Ration personnalisée (à l'aide du bouton Custom diet creator [créateur de ration personnalisée])
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-45.png" alt="Figure6-45" width="650"/>
+    <br>
+    <em>
+		Figure 6.45 - Catégorie Sheep (moutons) – Page d'onglet Diet (ration)
+	</em>
+</p>
+<br>
+
+##### Housing (bâtiments d'élevage) – Composante Sheep (moutons)
+
+Dans la page d'onglet Housing (bâtiments d'élevage) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Housing type (type de bâtiment)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-46.png" alt="Figure6-46" width="650"/>
+    <br>
+    <em>
+		Figure 6.46 - Catégorie Sheep (moutons) – Page d'onglet Housing (bâtiments d'élevage)
+	</em>
+</p>
+<br>
+
+##### Manure (fumier) – Composante Sheep (moutons)
+
+Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Manure handling system (système de manutention du fumier)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-47.png" alt="Figure6-47" width="650"/>
+    <br>
+    <em>
+		Figure 6.47 - Catégorie Sheep (moutons) – Page d'onglet Manure (fumier)
+	</em>
+</p>
+<br>
+
+
+#### Rams (béliers)
+
+La composante Rams (béliers) comporte le groupe d'animaux suivant :
+
+- Rams (béliers)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Sheep Feedlot (parcs d'engraissement des moutons)](#general-général-composante-sheep-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-48.png" alt="Figure6-48" width="850"/>
+    <br>
+    <em>
+		Figure 6.48 - Composante Rams (béliers)
+	</em>
+</p>
+<br>
+
+#### Lambs & Ewes (agneaux et brebis)
+
+La composante Lambs & Ewes (agneaux et brebis) comporte les groupes d'animaux suivants :
+
+- Lambs (agneaux)
+- Ewes (brebis)
+
+Cette composante comporte des pages d'onglets additionnelles similaires à celles de la [composante Sheep Feedlot (parcs d'engraissement des moutons)](#general-général-composante-sheep-volaille), dans lesquelles vous pouvez entrer des données additionnelles sur chaque groupe.
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-49.png" alt="Figure6-49" width="850"/>
+    <br>
+    <em>
+		Figure 6.49 - Composante Lambs & Ewes (agneaux et brebis)
+	</em>
+</p>
+<br>
+<br>
+
+### Other Livestock (autres animaux d'élevage)
+
+La catégorie Other Livestock (autres animaux d'élevage) contient divers autres animaux actuellement pris en considération par Holos et pouvant être ajoutés à une exploitation. Dans cette catégorie, chaque composante représente un seul type d'animaux et comporte les pages d'onglet suivantes :
+
+#### General (général) – Other Livestock (autres animaux d'élevage)
+
+Dans la page d'onglet General (général) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Number of animals (nombre d'animaux)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-50.png" alt="Figure6-50" width="650"/>
+    <br>
+    <em>
+		Figure 6.50 - Other Livestock (autres animaux d'élevage) – Page d'onglet General (général)
+	</em>
+</p>
+<br>
+
+
+#### Manure (fumier) – Other Livestock (autres animaux d'élevage)
+
+Dans la page d'onglet Manure (fumier) de cette catégorie, vous pouvez modifier les données suivantes pour chaque groupe d'animaux :
+
+- Manure handling system (système de manutention du fumier)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-51.png" alt="Figure6-51" width="650"/>
+    <br>
+    <em>
+		Figure 6.51 - Other Livestock (autres animaux d'élevage) – Page d'onglet Manure (fumier)
+	</em>
+</p>
+<br>
+
+La catégorie des autres animaux d'élevage contient les composantes pour les animaux suivants :
+
+#### Goats (chèvres)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-52.png" alt="Figure6-52" width="850"/>
+    <br>
+    <em>
+		Figure 6.52 - Composante Goats (chèvres)
+	</em>
+</p>
+<br>
+
+#### Deer (cerfs)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-53.png" alt="Figure6-53" width="850"/>
+    <br>
+    <em>
+		Figure 6.53 - Composante Deer (cerfs)
+	</em>
+</p>
+<br>
+
+#### Horses (chevaux)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-54.png" alt="Figure6-54" width="850"/>
+    <br>
+    <em>
+		Figure 6.54 - Composante Horses (chevaux)
+	</em>
+</p>
+<br>
+
+#### Mules (mules)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-55.png" alt="Figure6-55" width="850"/>
+    <br>
+    <em>
+		Figure 6.55 - Composante Mules (mules)
+	</em>
+</p>
+<br>
+
+#### Bison (bisons)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-56.png" alt="Figure6-56" width="850"/>
+    <br>
+    <em>
+		Figure 6.56 - Composante Bison (bisons)
+	</em>
+</p>
+<br>
+
+
+#### Llamas (lamas)
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
+    <br>
+    <em>
+		Figure 6.57 - Composante Llams (lamas)
+	</em>
+</p>
+<br>
+
+<br>
+
 
 ## Composantes de l'infrastructure
 
@@ -1464,11 +2049,10 @@ ferme.
 
 # Chapitre 7 - Calendrier
 
-Pour afficher le CALENDRIER, votre ferme doit être en mode avancé et activez le mode pluriannuel dans l’écran de sélection des composantes
+Pour afficher le CALENDRIER, votre ferme doit être en mode avancé.
 
 - [Apprendre comment passer du mode de base au mode avancé.](#comment-puis-je-activer-le-mode-avance)
 
-- [Découvrez comment activer le mode pluriannuel.](#comment-puis-je-activer-le-mode-pluriannuel)
 
 L’écran Calendrier vous permet de voir votre ferme sur une période allant de 1985 à aujourd’hui.
 
@@ -1505,11 +2089,36 @@ L’écran Calendrier vous permet de voir votre ferme sur une période allant de
 <br>
 <br>
 
+
+## Calendrier pour les brise-vent
+
+Le calendrier pour les brise-vent fonctionne de la même façon que le calendrier pour les cultures de l'exploitation. Il présente le type d'arbre, l'année de la plantation et l'année de la coupe. Les chiffres dans le haut du calendrier correspondent à l'année. Dans ce calendrier, vous pouvez ajuster les valeurs suivantes :
+
+- Année de plantation
+- Année de coupe
+- Année d'observation
+- Nombre d'arbres vivants aujourd'hui (dans le menu déroulant Mortality [mortalité])
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter7/figure7-2.png" alt="Figure7-2" width="750"/>
+    <br>
+    <em>
+		Figure 7.2 – Calendrier pour les brise-vent.
+		<br>
+		A: Bascule entre le calendrier des cultures et le calendrier des brise-vent.
+		<br>
+		B: Calendrier pour un arbre précis ajouté au brise-vent.
+		<br>
+	</em>
+</p>
+
+<br>
+<br>
+
 # Chapitre 8 - Détails
 
 ## Survol
-
--   Pour afficher cet écran, assurez-vous d'**activer le mode pluriannuel** en **mode avancé** et de **désactiver les résultats simplifiés** dans la barre d'outils.
 
 -   Cet écran présente une grille détaillée liée aux champs de votre ferme, comme l'**apport en carbone**, le **rendement** et d'**autres facteurs** pour chaque année de vos systèmes de production que vous avez créés dans le **calendrier**.
 
@@ -1738,7 +2347,63 @@ la comparaison dans le tableau.
 <br>
 
 
-   
+
+#### Comparaison des émissions des fermes
+
+L'onglet de rapport d'émission détaillé permet de comparer les émissions entre différentes fermes ajoutées à Holos par l'utilisateur. Si plusieurs fermes sont présentes, l'option "Comparer plusieurs fermes" devient disponible.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.1.png" alt="Figure9-7.1" width="850"/>
+    <br>
+    <em>
+		Figure 9-7.1 - Option de comparaison de plusieurs fermes
+	</em>
+</p>
+<br>
+
+Après avoir cliqué sur 'oui', un nouveau menu s'affichera et proposera d'autres options.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.2.png" alt="Figure9-7.2" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.2 - Sélectionner les fermes pour comparer les paramètres
+		<br>
+		R : Les onglets de la barre supérieure présentent différentes options à l'utilisateur.
+		<br>
+		B : Les fermes actuelles ajoutées à Holos par l'utilisateur. Cliquez sur les fermes qui doivent être comparées.
+		<br>
+		C : Cliquez ici pour comparer les fermes.
+		<br>
+		D : Options permettant à l'utilisateur de sélectionner toutes les fermes disponibles, d'effacer la sélection actuelle et de fermer le menu de sélection de ferme.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.3.png" alt="Figure9-7.3" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.3 - Paramètres par défaut des fermes.
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter9/figure9-7.4.png" alt="Figure9-7.4" width="650"/>
+    <br>
+    <em>
+		Figure 9-7.4 - Réglages des animaux pour la ferme. Chaque réglage et être inclus et exclu de la comparaison.
+	</em>
+</p>
+<br>
+<br> 
+
+
 
 ### Rapport d'estimation des aliments
 
@@ -1775,11 +2440,9 @@ Affichée seulement lorsqu'une composante animale est ajoutée à une ferme. Hol
 
 ### Modélisation pluriannuelle du carbone
 
-S'affiche uniquement lorsque le mode pluriannuel est sélectionné.
+Affiche un graphique montrant le carbone organique du sol (COS) pour les champs de la ferme sur une période donnée (la valeur par défaut est 1985 -- présent). Vous pouvez voir l'onglet « Champs » sous forme de graphique ou de tableau affichant diverses données concernant le climat, le carbone, l'azote, etc. Comme avec l'écran **« Détails »** et l'onglet « **Gestion du fumier** », nous avons également accès au plateau de données pour basculer entre les colonnes de données appropriées.
 
-Affiche un graphique montrant le carbone organique du sol (COS) pour les champs de la ferme sur une période donnée (la valeur par défaut est 1985 -- présent). Vous pouvez voir l'onglet « Champs » sous forme de graphique ou de tableau affichant diverses données concernant le climat, le carbone, l'azote, etc. Comme avec l'écran « Détails » et l'onglet « Gestion du fumier », nous avons également accès au plateau de données pour basculer entre les colonnes de données appropriées.
-
-Cliquez sur le bouton à bascule « Grille » ou « Graphique » pour afficher les résultats dans le format correspondant.
+Cliquez sur le bouton à bascule « **Grille** » ou « **Graphique** » pour afficher les résultats dans le format correspondant.
 
 **Dans la vue Graphique**, **lorsque vous passez la souris** sur des points de données d'une année donnée, vous obtenez des renseignements de base sur ce point. L'utilisateur peut également cliquer sur un lien dans chaque fenêtre contextuelle pour afficher de plus amples renseignements sur les données de cette année dans la vue « Grille ».
 
@@ -3162,8 +3825,349 @@ valeur de données dans le format suivant : « H(0-9)(a-b) ». Cela signifie 
 </p>
 <br>
 
+# Annexe au chapitre 11 – Renseignements additionnels, questions courantes et dépannage 
 
-# Chapitre 11 Questions courantes
+
+### Système de sauvegarde Holos 
+
+Holos contient un système qui crée automatiquement, avec les fichiers de données enregistrées par l’utilisateur, des copies de sauvegarde de ses données dans le dossier des données Holos.  Pour obtenir des instructions concernant la façon d’accéder au  [dossier de données Holos, cliquez ici.](#comment-trouver-les-fichiers-du-programme-holos).
+
+À l’intérieur de ce dossier, vous trouverez un autre dossier intitulé backups. Le dossier backups contient en tout temps jusqu’à 5 copies de sauvegarde de vos données. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-8.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-21 – Dossier de données Holos contenant les fichiers de sauvegarde
+	</em>
+</p>
+<br>
+
+
+
+Concernant les fichiers de sauvegarde créés par Holos, il faut noter ce qui suit :
+
+1. Holos crée une copie de sauvegarde de vos données chaque fois que l’application est lancée. 
+
+2. Une copie de sauvegarde n’est créée que lorsque Holos charge des données avec succès. 
+
+3. Un maximum de **5** copies de sauvegarde des données de l’utilisateur est conservé et les copies sont créées sur une base continue.  Cela signifie que si 5 copies de sauvegarde sont déjà créées, plutôt que d’un créer une sixième, Holos supprime la plus ancienne dans le dossier des copies de sauvegarde et la remplace par une nouvelle copie. 
+
+	3.1. Si vous voulez conserver ou enregistrer une copie de sauvegarde en particulier, il vous est fortement recommandé de **conserver le fichier de cette copie à un emplacement distinct de votre ordinateur.**
+
+4. Les fichiers de sauvegarde sont nommés/créés selon le format suivant : `holos-backup-{date}-{heure}.json`. Par exemple, `holos-backup-2022-09-29_04_17_02_PM.json`. Ainsi, tous les fichiers de sauvegarde contiennent la date et l’heure à laquelle ils ont été créés. 
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-22.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-22 - Jusqu’à 5 copies de sauvegarde sont conservées dans le dossier backups.  
+	</em>
+</p>
+<br>
+
+<br>
+
+
+#### Restauration des copies de sauvegarde en cas de corruption des données 
+
+Lorsque des données enregistrées ne peuvent pas être chargées parce qu’elles sont corrompues ou qu’elles n’ont pas été enregistrées correctement au cours de la session précédente, si elles sont disponibles, Holos essaie automatiquement de charger les données sauvegardées.  Si plusieurs fichiers de sauvegarde sont disponibles, Holos charge le plus récent.  **Un message est alors affiché après le chargement de la première page**.  Il indique des renseignements sur le fichier restauré : 
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-23.png" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-23 - Lors du démarrage, un message indique qu’un fichier de sauvegarde des données a été restauré. 
+	</em>
+</p>
+<br>
+
+
+Si vous voulez restaurer manuellement l’un des 5 fichiers de sauvegarde dans le dossier de sauvegarde, veuillez supprimer le fichier **json-data.json** dans le dossier **HOLOS_4** et remplacez-le par le fichier de sauvegarde que vous avez choisi.  N’oubliez pas de changer le nom du fichier de sauvegarde pour le nom **json-data**; si vous ne le faites pas, Holos ne pourra pas le lire. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-24.gif" alt="" width="750"/>
+    <br>
+    <em>
+		Figure 11-24 - Restauration manuelle d’un fichier de données de sauvegarde  
+	</em>
+</p>
+<br>
+
+
+#### Data crash file
+
+Comme nous l’avons mentionné plus haut, Holos essaie automatiquement de charger l’un des fichiers de sauvegarde disponibles si le fichier de données original ne peut pas être chargé.  Si aucun des fichiers de sauvegarde ne peut être chargé ou si aucun fichier de sauvegarde n’est disponible, Holos lance une nouvelle session du programme.  Si c’est le cas, Holos crée également un fichier d’incident contenant les données qu’il n’a pas été en mesure de lire. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-25.png" alt="" width="650"/>
+    <br>
+    <em>
+		Figure 11-25 - Un fichier d’incident est créé lorsque les données ne peuvent pas être chargées.  
+	</em>
+</p>
+<br>
+
+Si aucun fichier de sauvegarde n’est disponible pour restaurer les données précédentes, le fichier d’incident peut être envoyé aux développeurs Holos, qui tenteront de restaurer les données qu’il contient et de solutionner le problème rencontré par le programme.  Pour savoir comment transmettre le fichier d’incident à Holos, reportez-vous à la [section sur la façon de signaler un message d’erreur](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue). 
+
+<br>
+<br>
+
+
+### Comment trouver les fichiers du programme Holos 
+
+Les fichiers de données du programme Holos contiennent des renseignements utiles pouvant aider les développeurs Holos à résoudre les pannes du programme et les autres problèmes que vous pouvez rencontrer. Ces fichiers sont uniques à chaque système exécutant le logiciel Holos, et ils sont fondés sur l’utilisation du programme.  Vous pouvez les trouver en suivant les étapes suivantes : 
+
+
+- Dans votre système Windows, **cliquez sur le bouton Démarrer** (icône représentant une fenêtre et située dans le coin inférieur gauche de votre écran, dans votre barre d’outils); après avoir cliqué sur ce bouton, entrez la valeur « **run** », puis appuyez sur la touche **Entrée**. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-5.png" alt="Figure11-5" width="650"/>
+    <br>
+    <em>
+		Figure 11-5 - Entrez la valeur « run » dans la fenêtre de recherche.  
+	</em>
+</p>
+<br>
+
+
+- Une fois que vous avez appuyé sur la touche Entrée, une nouvelle fenêtre s’affiche.  Dans cette fenêtre, entrez la valeur `%LocalAppData%\Holos_4`, puis appuyez de **nouveau sur la touche Entrée**, ou encore cliquez sur le bouton **OK**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-6.PNG" alt="Figure11-6" width="550"/>
+    <br>
+    <em>
+		Figure 11-6 - Ouverture du dossier Holos à l’intérieur du dossier Appdata.  
+	</em>
+</p>
+<br>
+
+
+- Une fois que vous avez appuyé sur la touche Entrée, une autre fenêtre s’affiche.  La fenêtre vous présente le contenu du dossier des données de l’utilisateur Holos dans votre ordinateur. 
+
+
+- Dans le dossier HOLOS_4, vous trouverez les fichiers liés à la configuration et aux paramètres du programme Holos.  Par exemple, l’un de ces fichiers est le fichier **json-data**. C’est le fichier des données du projet Holos, qui contient des données sur votre exploitation et vos paramètres.  Selon la façon dont vous utilisez Holos, ce dossier peut contenir d’autres fichiers que le fichier **json-data**
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-8.png" alt="Figure11-8" width="950"/>
+    <br>
+    <em>
+		Figure 11-8 - Fichier json-data contenant des données sur votre exploitation et vos paramètres   
+	</em>
+</p>
+<br>
+
+
+
+- Si vous essayez de résoudre un problème concernant Holos, veuillez créer un nouvel incident dans le référentiel GitHub de Holos.  La [section sur le signalement d’un message d’erreur](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) explique le processus de transmission d’un rapport d’erreur.
+- Pour faciliter la résolution du problème, veuillez intégrer tous les fichiers de données/d’incident à un fichier d’archives ZIP que vous joindrez ensuite à l’incident créé dans GitHub.  Reportez-vous à la section suivante sur la [façon de créer un fichier d’archives ZIP.](#comment-créer-un-fichier-darchives-zip)
+<br>
+<br>
+
+### Comment créer un fichier d’archives ZIP
+
+
+#### Instructions pour l’environnement Windows 11 
+Veuillez suivre les étapes suivantes si vous êtes dans l’environnement Windows 11.  Dans notre exemple, nous travaillerons avec le dossier **HOLOS_4** mentionné dans la [section indiquant comment trouver les fichiers de données Holos.](#comment-trouver-les-fichiers-du-programme-holos)
+
+1.	Maintenez le bouton gauche de votre souris enfoncé pour sélectionner les fichiers que vous voulez ajouter à votre fichier d’archives ZIP.  Nous inclurons ici tous les fichiers du dossier HOLOS_4.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-9.png" alt="Figure11-9" width="650"/>
+    <br>
+    <em>
+		Figure 11-9 - Mise en évidence de tous les fichiers à ajouter au fichier d’archives  
+	</em>
+</p>
+<br>
+
+2.	Après avoir sélectionné tous les fichiers, cliquez avec le bouton droit de la souris sur l’un des fichiers mis en évidence pour accéder à un nouveau menu contextuel.  Sélectionnez l’option de menu « **Compresser dans le fichier ZIP** » dans le nouveau menu contextuel qui vient de s’ouvrir.  Une fenêtre surgissante contenant une barre indiquant l’état de progression de vos fichiers compressés s’affiche. Un fichier ZIP contenant les fichiers que vous avez sélectionnés à l’**étape 1** est créé. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-10.png" alt="Figure11-10" width="650"/>
+    <br>
+    <em>
+		Figure 11-10 - Ajout de fichiers à un fichier d’archives ZIP  
+	</em>
+</p>
+<br>
+
+3.	3.	Une fois ce processus terminé, un nouveau fichier est créé dans le même dossier (dossier HOLOS_4).  Windows vous permet alors de renommer le fichier ZIP. Donnez à votre fichier le nom « **holos-data-files** ». Vous pouvez envoyer le fichier compressé aux développeurs Holos en [créant un nouvel incident dans le référentiel GitHub](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) Ce fichier d’archives compressé contient tous les fichiers que vous avez sélectionnés à l’étape 1. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-11.png" alt="Figure11-11" width="650"/>
+    <br>
+    <em>
+		Figure 11-11 - Donner au nouveau dossier le nom « holos-data-files ». 
+	</em>
+</p>
+<br>
+
+#### Instructions pour l’environnement Windows 10
+
+Veuillez suivre les étapes suivantes si vous êtes dans l’environnement Windows 10. Dans notre exemple, nous travaillerons avec le dossier HOLOS_4 mentionné dans la [section indiquant comment trouver les fichiers de données Holos](#comment-trouver-les-fichiers-du-programme-holos)
+
+1.	Maintenez le bouton gauche de votre souris enfoncé pour sélectionner les fichiers que vous voulez ajouter à votre fichier d’archives ZIP. Nous inclurons ici tous les fichiers du dossier HOLOS_4.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-12.png" alt="Figure11-12" width="650"/>
+    <br>
+    <em>
+		Figure 11-12 - Mise en évidence de tous les fichiers à ajouter au fichier d’archives. 
+	</em>
+</p>
+<br>
+
+2.	2.	Après avoir sélectionné tous les fichiers, cliquez avec le bouton droit de la souris sur l’un des fichiers mis en évidence. Dans le menu contextuel qui s’affiche, sélectionnez l’option **Envoyer vers**, puis l’option **Dossier compressé**. Un nouveau fichier ZIP unique contenant tous les fichiers que vous avez sélectionnés/mis en évidence à l’**étape 1** est alors créé.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-13.png" alt="Figure11-13" width="650"/>
+    <br>
+    <em>
+		Figure 11-13 - Ajout de fichiers à un fichier d’archives ZIP 
+	</em>
+</p>
+<br>
+
+3.	3.	Une fois la compression terminée, un nouveau fichier est créé dans le même dossier (dossier HOLOS_4). Windows vous permet alors de renommer le fichier. Donnez à votre nouveau fichier le nom « **holos-data-files** ». Vous pouvez aussi créer un nouvel incident dans GitHub, puis joindre le fichier au rapport d’incident, aux fins de dépannage.  Le fichier compressé contient tous les fichiers que vous avez sélectionnés à l’étape 1. Pour apprendre comment soumettre un rapport d’incident dans GitHub, [cliquez ici](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue).
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-14.png" alt="Figure11-14" width="650"/>
+    <br>
+    <em>
+		Figure 11-14 - Donner au nouveau dossier le nom « holos-data-files ». 
+	</em>
+</p>
+<br>
+
+
+<br>
+
+
+### Message d’erreur Holos 
+
+Des messages d’erreur peuvent apparaître lorsqu’une erreur interne survient dans Holos et que le système ne peut pas la résoudre.  Si une erreur interne survient dans Holos, le système affiche un message indiquant à l’utilisateur qu’une erreur est survenue.  Voici un exemple d’erreur similaire. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-15.png" alt="Figure11-15" width="750"/>
+    <br>
+    <em>
+		Figure 11-15 - Message d’erreur 
+	</em>
+</p>
+<br>
+
+Le message affiché par Holos inclut des renseignements sur l’erreur et sur la façon de signaler cette erreur aux développeurs Holos.  La prochaine section décrit le processus de signalement de l’erreur à l’équipe Holos. 
+
+
+
+### Comment signaler un message d’erreur et créer un rapport de bogue 
+
+Signaler un message d’erreur aux développeurs Holos permet à ces derniers de régler le problème encouru et de résoudre d’éventuels conflits. 
+Lorsqu’une erreur interne survient, le logiciel affiche un message d’erreur (figure 11-16). Pour signaler cette erreur (et d’autres incidents) aux développeurs, suivez ces étapes : 
+
+
+**Note** : Si le système vous signale une erreur, comme dans l’image ci-dessous, cliquez sur le bouton **Copy to Clipboard (copier dans le presse-papiers)**. Le message d’erreur et d’autres renseignements pertinents sont ainsi copiés dans le presse-papiers de votre ordinateur.  Cliquer sur ce bouton vous permet aussi de coller l’information dans un programme différent ou de l’inclure dans votre communication avec les développeurs Holos. 
+
+*Veuillez noter que le fait de cliquer sur le bouton Copy to Clipboard (copier dans le presse-papiers) ne transmet pas d’information aux développeurs Holos. Cela ne fait que copier l’information dans le presse-papiers de votre ordinateur.*
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-16.png" alt="Figure11-16" width="750"/>
+    <br>
+    <em>
+		Figure 11-16 - Cliquer sur le bouton Copy to Clipboard (copier dans le presse-papiers) pour copier l’information liée à l’erreur. 
+	</em>
+</p>
+<br>
+
+- Pour transmettre l’information aux développeurs Holos, vous devez créer un nouvel incident dans le référentiel GitHub officiel pour Holos.  Vous pouvez cliquer [ici](https://GitHub.com/holos-aafc/Holos/issues) pour accéder à la page de signalement des incidents.
+
+**Note:** Vous devez créer un compte GitHub gratuit pour créer et signaler des incidents. 
+
+-	•	Une fois dans la page de signalement des incidents, cliquez sur le bouton **New Issue (nouvel incident)**.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-17.png" alt="Figure11-17" width="750"/>
+    <br>
+    <em>
+		Figure 11-17 - Bouton New Issue (nouvel incident) dans le référentiel GitHub  
+	</em>
+</p>
+<br>
+
+- •	Cliquez sur le bouton Get Started (pour commencer) correspondant à la catégorie Bug/Issue Report (rapport de bogue/d’incident) dans la page affichée.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-18.png" alt="Figure11-18" width="750"/>
+    <br>
+    <em>
+		Figure 11-18 – Bouton New Issue (nouvel incident) dans le référentiel GitHub de Holos  
+	</em>
+</p>
+<br>
+
+
+- •	Une nouvelle page, dans laquelle vous pouvez publier des détails sur l’incident rencontré et fournir des renseignements additionnels s’affiche.  Les renseignements comprennent les suivants :
+–	**Titre de l’incident**
+–	**Coordonnées** (au cas où nous devrions vous contacter en dehors de GitHub)
+–	**Comportement attendu lors de l’utilisation de Holos**
+–	**Comportement entraîné par le bogue/l’incident**
+–	**Détails sur l’incident, notamment les étapes à suivre pour le reproduire** 
+–	**Message d’erreur**
+–	**Numéro de la version de Holos**
+
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-19.png" alt="Figure11-19" width="750"/>
+    <br>
+    <em>
+		Figure 11-19 - Catégorie de signalement du bogue/de l’incident 
+	</em>
+</p>
+<br>
+
+- Collez l’information [copiée plus tôt dans votre presse-papiers](#comment-signaler-un-message-derreur-et-créer-un-rapport-de-bogue) dans la section **Error Message (message d’erreur)**, puis remplissez les autres champs selon les directives qui leur sont associées
+
+- Cliquez sur le bouton **Submit new issue (transmettre un nouvel incident)**, dans le bas de l’écran Bug/Issue Report (rapport de bogue/de l’incident).
+
+- Un nouvel incident est maintenant créé avec les renseignements inclus
+
+<br>
+
+### Comment trouver le numéro de version du logiciel Holos 
+
+Le numéro de version de votre logiciel Holos s’affiche lorsque vous lancez le programme.  Lorsque le programme a déjà été lancé, vous trouvez ce numéro dans la petite fenêtre qui surgit à l’endroit où vous pouvez sélectionner la langue dans laquelle vous voulez travailler. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-20.png" alt="Figure11-20" width="650"/>
+    <br>
+    <em>
+		Figure 11-20 - numéro de version du logiciel Holos
+	</em>
+</p>
+<br>
 
 
 ## Comment puis-je activer le mode avance
@@ -3185,21 +4189,6 @@ Si vous avez démarré la ferme en mode de base et que vous souhaitez passer au 
 </p>
 <br> 
 
-
-## Comment puis-je activer le mode pluriannuel
-
-Le mode pluriannuel n’est disponible que si vous êtes actuellement en mode avancé. Si vous êtes actuellement en mode de base, passez au mode avancé. Ensuite, cherchez un bouton à bascule dans le coin supérieur droit du programme Holos. Vous pouvez utiliser ce bouton pour passer d’un mode à l’autre.
-
-
-<br>
-<p align="center">
- <img src="../../Images/UserGuide/fr/chapter11/figure11-2.png" alt="Figure11-2" width="950"/>
-    <br>
-    <em>
-		Figure 11-2 - Cliquez sur le bouton à bascule pour passer du mode de base au mode avancé. 
-	</em>
-</p>
-<br>
 
 
 ## Comment basculer entre les modèles de carbone de niveau 2 du GIEC et MIBC

@@ -29,12 +29,6 @@ namespace H.Core.Services.LandManagement
                                             string languageAddOn,
                                             bool exportedFromGui,
                                             Farm farm);
-
-        SoilN2OEmissionsResults CalculateCropN2OEmissions(FieldSystemComponent fieldSystemComponent,
-                                                          Farm farm);
-
-        SoilN2OEmissionsResults CalculateManureN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults);
-        SoilN2OEmissionsResults CalculateMineralN2OEmissionsForFarm(FarmEmissionResults farmEmissionResults);
         double CalculateHarvest(CropViewItem viewItem);
         void AssignYieldToYear(Farm farm, CropViewItem viewItem);
         void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm);
@@ -42,8 +36,6 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultPercentageReturns(
             CropViewItem viewItem,
             Defaults defaults);
-
-        void AssignDefaultPercentageReturns(List<CropViewItem> viewItems, Defaults defaults);
         FieldSystemDetailsStageState GetStageState(Farm farm);
         void AssignDefaultLumCMaxValues(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultNitrogenFertilizerRate(CropViewItem viewItem, Farm farm,
@@ -52,23 +44,9 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm);
         void AssignDefaultNitrogenContentValues(CropViewItem viewItem, Farm farm);
         void AssignDefaultBiomassCoefficients(CropViewItem viewItem, Farm farm);
-        Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
+        Table_7_Relative_Biomass_Information_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
-        FieldComponentEmissionResults CalculateResultsForFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm);
-        CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem);
-        List<EstimatesOfProductionResultsViewItem> CalculateHarvestForField(FieldSystemComponent fieldSystemComponent, Farm farm);
-
-        /// <summary>
-        /// Calculates results for a <see cref="FieldSystemComponent"/> and then sets the <see cref="ComponentBase.ResultsCalculated"/> value to true.
-        /// </summary>
-        List<FieldComponentEmissionResults> CalculateResultsForFieldComponent(Farm farm);
-
-
-        /// <summary>
-        /// Calculates C/CO2 changes based on land use changes for single year fields.
-        /// </summary>
-        LandUseChangeResults CalculateLandUseChangeResults(FieldSystemComponent fieldSystemComponent, Farm farm);
-
+        CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);
         void AssignDefaultMoistureContent(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm);
@@ -87,5 +65,6 @@ namespace H.Core.Services.LandManagement
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
         void AssignHarvestMethod(CropViewItem viewItem, Farm farm);
+        
     }
 }

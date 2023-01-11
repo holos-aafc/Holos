@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. If there are no saved farms in the system, Holos will create a new farm and ask the user for a farm name and an optional comment (Figure 1). If there is already a saved farm in the system, Holos will ask the user to open the existing farm or to create a new farm (Figure 2). 
 
-Enter “**Holos 2022**” as a farm name and “**training version**” as the “**comment**”. Ensure to click the “**Advanced Mode**” button so that additional features and functionality will be available. Click “**Ok**” to proceed to the next screen
+Enter “**Holos 2022**” as a farm name and “**training version**” as the “**comment**”.  Click “**Ok**” to proceed to the next screen.
 
 Ensure “**Metric**” is selected as the unit of measurement type and then click the “**Next**” button at the bottom of the screen (Figure 3). 
 
@@ -66,7 +66,7 @@ The map contains red colored polygons that can be selected by moving the cursor 
 The beef farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
 
 
-1. Find and right-click on this polygon to select it on the map. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). You can also select a specific polygon by clicking the "Enter a Polygon" button (Figure 6).
+1. Find and right-click on this polygon to select it on the map. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
 <br>
 
@@ -76,17 +76,11 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure5.png" alt="Figure 5" width="850"/>
+    <img src="../../Images/Training/en/figure5.png" alt="Figure 5" width="950"/>
     <br>
     <em>Figure 5: Map of the Manitoba province showing the different selectable polygons.</em>
 </p>
 
-<p align="center">
-    <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="850"/>
-    <br>
-    <em>Figure 6: Specifying a polygon ID using the option button.</em>
-</p>  
-<br>
 
 Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 7)
 
@@ -95,9 +89,9 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="850"/>
+    <img src="../../Images/Training/en/figure6.png" alt="Figure 6" width="950"/>
     <br>
-    <em>Figure 7: Multiple soil types might be available for a given region.</em>
+    <em>Figure 6: Multiple soil types might be available for a given region.</em>
 </p>  
 
 <br>
@@ -118,9 +112,9 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure8.png" alt="Figure 8" width="850"/>
+    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="950"/>
     <br>
-    <em>Figure 8: The available components screen. Specific components can be chosen here to include in the farm.</em>
+    <em>Figure 7: The available components screen. Specific components can be chosen here to include in the farm.</em>
 </p> 
 <br>
 
@@ -130,15 +124,13 @@ The Holos model is designed to define the land management before livestock. This
 
 ## Crop and Hay Production
 
-Note: In order to calculate soil carbon change for fields and crop rotations, click on the “Settings” menu and select the “Multi-year” option (default is Single-Year).
-
 Now we can add our first component to the farm. Drag a “Field” component from the left side of the screen and drop it on the “My Farm” on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as “Field #1”. At this point, we can now enter production information related to the crop being grown on this field.  
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure9.gif" alt="Figure 9" width="850"/>
+    <img src="../../Images/Training/en/figure8.gif" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 9: Adding a component to the farm.</em>
+    <em>Figure 8: Adding a component to the farm.</em>
 </p> 
 <br>
 
@@ -161,9 +153,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure10.png" alt="Figure 10" width="850"/>
+    <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
     <br>
-    <em>Figure 10: Field Component of the farm.</em>
+    <em>Figure 9: Field Component of the farm.</em>
 </p> 
 <br> 
 
@@ -172,9 +164,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure11.gif" alt="Figure 11" width="850"/>
+    <img src="../../Images/Training/en/figure10.gif" alt="Figure 10" width="950"/>
     <br>
-    <em>Figure 11: Adding fertilizer to a field.</em>
+    <em>Figure 10: Adding fertilizer to a field.</em>
 </p> 
 <br>
 
@@ -187,21 +179,21 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <div style="page-break-after: always"></div>
 
-## Pasture (native) / Grasslands Information
+## Native Grasslands Information
 
 The cow-calf operation (defined later on) relies on native pasture for the summer months (May through October).
 
 1. Drag a new “**Field**” tab component to your list of components. Enter the name “**Native Grassland**” in the ‘Field name’ input box.
 2. Enter "**100**" as the total area of the field.
-3. Select "**Seeded Grassland**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the '**Winter/Cover/Undersown Crop**' area when a perennial crop is selected.
+3. Select "**Rangeland (Native)**" from the crop list under '**Crop**' column **(step 2)**. Please note that Holos auto populates the '**Winter/Cover/Undersown Crop**' area when a perennial crop is selected.
 4. Keep '**0**' as the amount of irrigation and pesticide passes.
 5. No fertilizer is used for this crop.
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
+    <img src="../../Images/Training/en/figure11.png" alt="Figure 11" width="950"/>
     <br>
-    <em>Figure 12: Native Grasslands information.</em>
+    <em>Figure 11: Native Grasslands information.</em>
 </p> 
 <br>
 
@@ -239,9 +231,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure13.png" alt="Figure 13" width="950"/>
+    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 13: An example of a crop rotation of three crops.</em>
+    <em>Figure 12: An example of a crop rotation of three crops.</em>
 </p> 
 <br>
 
@@ -269,9 +261,9 @@ Adding animal components follows the exact same approach that was used for land 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/Training/en/figure13.png" alt="Figure 13" width="950"/>
     <br>
-    <em>Figure 14: The Beef Cow-Calf Component.</em>
+    <em>Figure 13: The Beef Cow-Calf Component.</em>
 </p> 
 <br>
 
@@ -286,7 +278,7 @@ Following the annual feeding cycle, the beef farm we are working with is **divid
 
 2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
 
-3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’ (120 days). Note that the ‘Number of days’ being shown will be inclusive of the start and end dates.
+3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
@@ -312,7 +304,6 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
     * Click the “**Add Custom Diet**” button in the “**Step 1**” section of the screen to create a new custom diet.
     * Rename this diet to “**My Custom Cow Diet**” then press the Enter key to save the name.
-    * Under step 1, ensure that you have the **Animal Type** set to **Beef Cow**.
     * To add ingredients to our new diet, select “**Alfalfa hay**” from the ingredient list, and then click the “**Add Selected Ingredient to Diet**” button.
     * We will add one more ingredient to our diet. Select ‘**Barley Hay**’ from the ingredient list, and then click the “**Add Selected Ingredient to Diet**” button.
     * Enter **50%** for ‘**Barley Hay**’ and **50%** for ‘**Alfalfa Hay**’ in “**Step 3**”. Note that Holos now reports the diet being complete since all ingredients total up to 100%.
@@ -328,9 +319,9 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="850"/>
     <br>
-    <em>Figure 15: Custom diet creator for Cows animal group.</em>
+    <em>Figure 14: Custom diet creator for Cows animal group.</em>
 </p> 
 <br>
 
@@ -388,9 +379,9 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 16: Beef Cow-Calf, Cow group</em>
+    <em>Figure 15: Beef Cow-Calf, Cow group</em>
 </p> 
 <br> 
 
@@ -404,9 +395,9 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="850"/>
+    <img src="../../Images/Training/en/figure16.gif" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 17: Copying data from another animal group</em>
+    <em>Figure 16: Copying data from another animal group</em>
 </p> 
 <br>
 
@@ -467,7 +458,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’ (110 days).
+    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’.
 
 
     * **General Tab:**
@@ -491,9 +482,9 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="800"/>
+    <img src="../../Images/Training/en/figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 18: Beef stocker & backgrounder operation</em>
+    <em>Figure 17: Beef stocker & backgrounder operation</em>
 </p> 
 <br> 
 
@@ -533,9 +524,9 @@ We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 19: Beef Finisher component</em>
+    <em>Figure 18: Beef Finisher component</em>
 </p>
 <br> 
 
@@ -572,9 +563,9 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/Training/en/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 20 - Adding supplemental hay/forage for grazing animals.</em>
+    <em>Figure 19 - Adding supplemental hay/forage for grazing animals.</em>
 </p>
 <br> 
 <br>
@@ -588,9 +579,9 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
-    - **Brooding Stage:** Start January 1st, 2022 - End January 22nd, 2022. 
-    - **Rearing Stage:** Start January 23rd, 2022 - End June 26th, 2022.
-    - **Rearing Stage:** Start June 27th, 2022 - End November 28th, 2022.
+    - **Brooding Stage:** Start: January 1st, 2022 - End: January 22nd, 2022. 
+    - **Rearing Stage:** Start: January 23rd, 2022 - End: June 26th, 2022.
+    - **Rearing Stage:** Start: June 27th, 2022 - End: November 28th, 2022.
 3. For each management period, set number of animals to **400**.
 4. Leave the entries in Housing and Manure as default.
 
@@ -615,7 +606,7 @@ The **Add Historical Production System** button enables the user to add a differ
 
 We will assume that the barley grain and mixed hay rotation fields were previously in a continuous wheat cropping system between **1985 and 2000.**
 
-1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of “**Crop rotation #1 [Field #1]**”)
+1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of “**Crop rotation #1 [Field #1] - Barley**”)
 
 2. Click on the **Add Historical Production System** button which will add a new row to the table under the “**Step 1**” section in the upper left section of the screen. Notice that this new entry has the words “**Historical management practice**” added.
 
@@ -625,7 +616,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 5. Click on the “**Barley**” crop under the “**Step 2**” section. Change the crop type to ‘**Wheat**’ and on the ‘**General**’ tab change the yield to **3,500** kg/ha. We will keep the other settings unchanged.
 
-6. We also need to remove the “**Hay mixed**” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Hay mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
+6. We also need to remove the “**Tame mixed**” crops from this historical period. Click the ‘**x**’ icon beside each of the “**Tame mixed**” crops under the “**Step 2**” section. Clicking the ‘**x**’ icon will remove these crops from the rotation for this period of time.
 
 7. Click “**Ok**” to save adjustments we just made to this field.
 
@@ -634,24 +625,24 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="850"/>
+    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 21: Customized Timeline Screen</em>
+    <em>Figure 20: Customized Timeline Screen</em>
 </p> 
 <br>  
 
 <p align="center">
-    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="550"/>
+    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="550"/>
     <br>
-    <em>Figure 22: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 21: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 <br> 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="650"/>
+    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="650"/>
     <br>
-    <em>Figure 23: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 22: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -682,9 +673,9 @@ We will adjust this grid so that we can view the above ground and below ground c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="950"/>
     <br>
-    <em>Figure 24: Details screen</em>
+    <em>Figure 23: Details screen</em>
 </p> 
 <br>
 <br>
@@ -715,24 +706,24 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="850"/>
+    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
     <br>
-    <em>Figure 25: Detailed emissions report.</em>
+    <em>Figure 24: Detailed emissions report.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="950"/>
     <br>
-    <em>Figure 26: Estimates of production report.</em>
+    <em>Figure 25: Estimates of production report.</em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="850"/>
+    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="950"/>
     <br>
-    <em>Figure 27: Feed estimate report.</em>
+    <em>Figure 26: Feed estimate report.</em>
 </p> 
 <br>
 
@@ -751,9 +742,9 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure28.png" alt="Figure 28" width="850"/>
+    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="950"/>
     <br>
-    <em>Figure 28: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 27: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 <br>
 

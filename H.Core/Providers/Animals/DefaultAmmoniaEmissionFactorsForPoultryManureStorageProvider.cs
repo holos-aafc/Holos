@@ -4,7 +4,7 @@ namespace H.Core.Providers.Animals
 {
     public class DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider
     {
-        public double GetDefaultAmmoniaEmissionFactorForStorage(AnimalType animalType)
+        public double GetAmmoniaEmissionFactorForStorage(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {

@@ -141,16 +141,16 @@ namespace H.Core.Providers.Climate
         public double GetTotalPrecipitationForYear(int year)
         {
             var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-            if (dailyClimateDataForYear.Any())
+            if (dailyClimateDataForYear.Count == 365)
             {
-                // We have daily data for this year
+                // We have a full years' worth daily data for this year
                 var totalPrecipitation = dailyClimateDataForYear.Sum(x => x.MeanDailyPrecipitation);
 
                 return totalPrecipitation;
             }
             else
             {
-                // Don't have daily data, return total using SLC normals
+                // Don't have enough daily data, return total using SLC normals
                 return this.PrecipitationData.GetTotalAnnualPrecipitation();
             }
         }
@@ -158,16 +158,17 @@ namespace H.Core.Providers.Climate
         public double GetTotalEvapotranspirationForYear(int year)
         {
             var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-            if (dailyClimateDataForYear.Any())
+
+            if (dailyClimateDataForYear.Count == 365)
             {
-                // We have daily data for this year
+                // We have a full years' worth daily data for this year
                 var totalEvapotranspiration = dailyClimateDataForYear.Sum(x => x.MeanDailyPET);
 
                 return totalEvapotranspiration;
             }
             else
             {
-                // Don't have daily data, return total using SLC normals
+                // Don't have enough daily data, return total using SLC normals
                 return this.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
             }
         }
@@ -184,12 +185,17 @@ namespace H.Core.Providers.Climate
             // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
             if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
-                return _dataByYearAndMonth[key].Sum(x => x.MeanDailyPrecipitation);
+                var data = _dataByYearAndMonth[key];
+                if ((data.Any(x => Math.Abs(x.MeanDailyPrecipitation - (-999)) < double.Epsilon)) == false)
+                {
+                    // NASA will return -999 for any unknown values
+                    return data.Sum(x => x.MeanDailyPrecipitation);
+                }
+
+                
             }
-            else
-            {
-                return this.PrecipitationData.GetValueByMonth(month);
-            }            
+
+            return this.PrecipitationData.GetValueByMonth(month);
         }
 
         public Dictionary<Months, double> GetMonthlyPrecipitationsForYear(int year)
@@ -220,12 +226,15 @@ namespace H.Core.Providers.Climate
             // We won't have a full years worth of data if we are looking up values for the current (now) year and so use monthly normals instead
             if (_dataByYearAndMonth.ContainsKey(key) && DateTime.Now.Year != year)
             {
-                return _dataByYearAndMonth[key].Average(x => x.MeanDailyAirTemperature);
+                var data = _dataByYearAndMonth[key];
+                if ((data.Any(x => Math.Abs(x.MeanDailyAirTemperature - (-999)) < double.Epsilon)) == false)
+                {
+                    // NASA will return -999 for any unknown values
+                    return data.Average(x => x.MeanDailyAirTemperature);
+                }
             }
-            else
-            {
-                return this.TemperatureData.GetValueByMonth(month);
-            }
+
+            return this.TemperatureData.GetValueByMonth(month);
         }
 
         public Dictionary<Months, double> GetMonthlyTemperaturesForYear(int year)
@@ -275,6 +284,19 @@ namespace H.Core.Providers.Climate
             }
 
             return monthlyTotals;
+        }
+
+        public double GetTemperatureForDay(DateTime dateTime)
+        {
+            var dailyResult = this.DailyClimateData.SingleOrDefault(x => x.Date.Equals(dateTime));
+            if (dailyResult != null)
+            {
+                return dailyResult.MeanDailyAirTemperature;
+            }
+            else
+            {
+                return this.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months) dateTime.Month);
+            }
         }
 
         #endregion

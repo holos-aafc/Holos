@@ -17,11 +17,11 @@ namespace H.Core.Providers.Animals
             {
                 if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
                 {
-                    return 0.0007;
+                    return 0.0011;
                 }
                 else
                 {
-                    return 0.0011;
+                    return 0.0007;
                 }
             }
             else
@@ -31,17 +31,17 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        public double GetEmissionFactorForHousing(AnimalType animalType)
+        public double GetAmmoniaEmissionFactorForHousing(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {
                 if (animalType == AnimalType.ChickenHens || animalType == AnimalType.Layers)
                 {
-                    return 0.26;
+                    return 0.25;
                 }
                 else
                 {
-                    return 0.25;
+                    return 0.26;
                 }
             }
             else
@@ -51,7 +51,7 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        public double GetEmissionFactorForStorage(AnimalType animalType)
+        public double GetAmmoniaEmissionFactorForStorage(AnimalType animalType)
         {
             if (animalType.IsChickenType())
             {

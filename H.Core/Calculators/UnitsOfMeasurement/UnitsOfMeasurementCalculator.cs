@@ -460,10 +460,14 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case MetricUnitsOfMeasurement.KilogramsN2OPerYear:
                     return value * KgToLbsFactor;
 
+                case MetricUnitsOfMeasurement.KilogramsN2ONPerField:
                 case MetricUnitsOfMeasurement.KilogramsN2ON:
+                case MetricUnitsOfMeasurement.KilogramsNON:
+                case MetricUnitsOfMeasurement.KilogramsN2O:
                     return value * KgToLbsFactor;
 
                 case MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare:
+                case MetricUnitsOfMeasurement.KilogramsN2OPerHectare:
                     return value * KgToLbsFactor / HectaresToAcresFactor;
 
                 case MetricUnitsOfMeasurement.KilogramsPhosphorousPerHectare:
@@ -668,10 +672,14 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case ImperialUnitsOfMeasurement.PoundsN2OPerYear:
                     return value / KgToLbsFactor;
 
+                case ImperialUnitsOfMeasurement.PoundsN2ONPerField:
                 case ImperialUnitsOfMeasurement.PoundsN2ON:
+                case ImperialUnitsOfMeasurement.PoundsNON:
+                case ImperialUnitsOfMeasurement.PoundsN2O:
                     return value / KgToLbsFactor;
 
                 case ImperialUnitsOfMeasurement.PoundsNitrogenPerAcre:
+                case ImperialUnitsOfMeasurement.PoundsN2OPerAcre:
                     return value / KgToLbsFactor * HectaresToAcresFactor;
 
                 case ImperialUnitsOfMeasurement.PoundsPhosphorousPerAcre:
@@ -841,6 +849,9 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
                 case MetricUnitsOfMeasurement.KilogramsN2ON:
                     return ImperialUnitsOfMeasurement.PoundsN2ON;
+
+                case MetricUnitsOfMeasurement.KilogramsN2O:
+                    return ImperialUnitsOfMeasurement.PoundsN2O;
 
                 case MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare:
                     return ImperialUnitsOfMeasurement.PoundsNitrogenPerAcre;
@@ -1052,6 +1063,9 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
                 case ImperialUnitsOfMeasurement.PoundsN2ON:
                     return MetricUnitsOfMeasurement.KilogramsN2ON;
+
+                case ImperialUnitsOfMeasurement.PoundsN2O:
+                    return MetricUnitsOfMeasurement.KilogramsN2O;
 
                 case ImperialUnitsOfMeasurement.PoundsNitrogenPerAcre:
                     return MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare;

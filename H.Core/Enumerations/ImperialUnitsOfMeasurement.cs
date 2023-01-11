@@ -232,5 +232,17 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("DollarsPerPound", typeof(Resources))]
         DollarsPerPound,
+
+        [LocalizedDescription("PoundsN2O", typeof(Resources))]
+        PoundsN2O,
+
+        [LocalizedDescription("PoundsNON", typeof(Resources))]
+        PoundsNON,
+
+        [LocalizedDescription("PoundsN2OPerAcreString", typeof(Resources))]
+        PoundsN2OPerAcre,
+
+        [LocalizedDescription("PoundsN2ONPerField", typeof(Resources))]
+        PoundsN2ONPerField,
     }
 }

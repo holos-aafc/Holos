@@ -21,11 +21,6 @@ namespace H.Core.Emissions.Results
         private readonly ITimePeriodHelper _timePeriodHelper = new TimePeriodHelper();
         private readonly EmissionTypeConverter _emissionsConverter;
 
-        /// <summary>
-        /// Emissions are calculated daily but some reports are by month or by year and so daily emissions are summed up per month in this class
-        /// </summary>
-        private readonly List<GroupEmissionsByDay> _dailyEmissions;
-
         #endregion
 
         #region Constructors
@@ -34,7 +29,7 @@ namespace H.Core.Emissions.Results
         private GroupEmissionsByMonth()
         {
             _emissionsConverter = new EmissionTypeConverter();
-            _dailyEmissions = new List<GroupEmissionsByDay>();
+            DailyEmissions = new List<GroupEmissionsByDay>();
         }
 
         public GroupEmissionsByMonth(MonthsAndDaysData monthsAndDaysData) : this()
@@ -44,12 +39,17 @@ namespace H.Core.Emissions.Results
 
         public GroupEmissionsByMonth(MonthsAndDaysData monthsAndDaysData, IList<GroupEmissionsByDay> dailyEmissionsForMonth) : this(monthsAndDaysData)
         {
-            _dailyEmissions.AddRange(dailyEmissionsForMonth);
+            DailyEmissions.AddRange(dailyEmissionsForMonth);
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Emissions are calculated daily but some reports are by month or by year and so daily emissions are summed up per month in this class
+        /// </summary>
+        public List<GroupEmissionsByDay> DailyEmissions { get; }
 
         public MonthsAndDaysData MonthsAndDaysData { get; set; }
 
@@ -95,7 +95,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneRaminHuhtanenDairy);
+                return DailyEmissions.Sum(x => x.EntericMethaneRaminHuhtanenDairy);
             }
         }
 
@@ -106,7 +106,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneMillsEtAlDairy);
+                return DailyEmissions.Sum(x => x.EntericMethaneMillsEtAlDairy);
             }
         }
 
@@ -117,7 +117,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneEllisEtAlDairy);
+                return DailyEmissions.Sum(x => x.EntericMethaneEllisEtAlDairy);
             }
         }
 
@@ -128,7 +128,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneNuiEtAlDairy);
+                return DailyEmissions.Sum(x => x.EntericMethaneNuiEtAlDairy);
             }
         }
 
@@ -139,7 +139,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneEscobarEtAlAlOrBeef);
+                return DailyEmissions.Sum(x => x.EntericMethaneEscobarEtAlAlOrBeef);
             }
         }
 
@@ -150,7 +150,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneLingenEtAlBeef);
+                return DailyEmissions.Sum(x => x.EntericMethaneLingenEtAlBeef);
             }
         }
 
@@ -161,7 +161,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneEscobarEtAlLfMcBeef);
+                return DailyEmissions.Sum(x => x.EntericMethaneEscobarEtAlLfMcBeef);
             }
         }
 
@@ -172,7 +172,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneEllisEtAlBeef);
+                return DailyEmissions.Sum(x => x.EntericMethaneEllisEtAlBeef);
             }
         }
 
@@ -183,7 +183,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.EntericMethaneEmission);
+                return DailyEmissions.Sum(x => x.EntericMethaneEmission);
             }
         }
 
@@ -194,7 +194,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureMethaneEmission);
+                return DailyEmissions.Sum(x => x.ManureMethaneEmission);
             }
         }
 
@@ -205,7 +205,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureDirectN2ONEmission);
+                return DailyEmissions.Sum(x => x.ManureDirectN2ONEmission);
             }
         }
 
@@ -235,7 +235,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureIndirectN2ONEmission);
+                return DailyEmissions.Sum(x => x.ManureIndirectN2ONEmission);
             }
         }
 
@@ -265,7 +265,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureVolatilizationN2ONEmission);
+                return DailyEmissions.Sum(x => x.ManureVolatilizationN2ONEmission);
             }
         }
 
@@ -287,7 +287,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureN2ONLeachingEmission);
+                return DailyEmissions.Sum(x => x.ManureN2ONLeachingEmission);
             }
         }
 
@@ -309,7 +309,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ManureN2ONEmission);
+                return DailyEmissions.Sum(x => x.ManureN2ONEmission);
             }
         }
 
@@ -320,7 +320,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmmoniaEmissionsFromHousingSystem);
+                return DailyEmissions.Sum(x => x.AmmoniaEmissionsFromHousingSystem);
             }
         }
 
@@ -331,7 +331,29 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmmoniaEmissionsFromStorageSystem);
+                return DailyEmissions.Sum(x => x.AmmoniaEmissionsFromStorageSystem);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double TotalAmmoniaEmissionsFromHousingAndStorageSystem
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniaEmissionsFromHousingAndStorage);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double TotalNitrogenLossesFromHousingAndStorage
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalNitrogenLossesFromHousingAndStorage);
             }
         }
 
@@ -353,7 +375,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmountOfCarbonInStoredManure);
+                return DailyEmissions.Sum(x => x.AmountOfCarbonInStoredManure);
             }
         }
 
@@ -364,7 +386,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.DryMatterIntake);
+                return DailyEmissions.Average(x => x.DryMatterIntake);
             }
         }
 
@@ -377,7 +399,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.TotalCarbonUptakeForGroup);
+                return DailyEmissions.Sum(x => x.TotalCarbonUptakeForGroup);
             }
         }
 
@@ -388,7 +410,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.OrganicNitrogenInStoredManure);
+                return DailyEmissions.Sum(x => x.OrganicNitrogenInStoredManure);
             }
         }
 
@@ -401,7 +423,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.FractionOfManureVolatilized);
+                return DailyEmissions.Average(x => x.FractionOfManureVolatilized);
             }
 
         }
@@ -413,7 +435,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
             }
         }
 
@@ -424,7 +446,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.TotalVolumeOfManureAvailableForLandApplication);
             }
         }
 
@@ -435,7 +457,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.TanExcretion);
+                return DailyEmissions.Sum(x => x.TanExcretion);
             }
         }
 
@@ -446,7 +468,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.FecalNitrogenExcretion);
+                return DailyEmissions.Sum(x => x.FecalNitrogenExcretion);
             }
         }
 
@@ -457,7 +479,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmmoniaConcentrationInHousing);
+                return DailyEmissions.Sum(x => x.AmmoniaConcentrationInHousing);
             }
         }
 
@@ -468,7 +490,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManure);
+                return DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManure);
             }
         }
 
@@ -481,7 +503,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AmbientAirTemperatureAdjustmentForHousing);
+                return DailyEmissions.Average(x => x.AmbientAirTemperatureAdjustmentForHousing);
             }
         }
 
@@ -492,7 +514,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmmoniaLostFromStorage);
+                return DailyEmissions.Sum(x => x.AmmoniaLostFromStorage);
             }
         }
 
@@ -505,7 +527,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AmbientAirTemperatureAdjustmentForStorage);
+                return DailyEmissions.Average(x => x.AmbientAirTemperatureAdjustmentForStorage);
             }
         }
 
@@ -518,7 +540,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AdjustedAmmoniaEmissionFactorForHousing);
+                return DailyEmissions.Average(x => x.AdjustedAmmoniaEmissionFactorForHousing);
             }
         }
 
@@ -531,7 +553,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AdjustedAmmoniaEmissionFactorForStorage);
+                return DailyEmissions.Average(x => x.AdjustedAmmoniaEmissionFactorForStorage);
             }
         }
 
@@ -542,7 +564,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmountOfNitrogenExcreted);
+                return DailyEmissions.Sum(x => x.AmountOfNitrogenExcreted);
             }
         }
 
@@ -553,7 +575,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.TanEnteringStorageSystem);
+                return DailyEmissions.Sum(x => x.TanEnteringStorageSystem);
             }
         }
 
@@ -566,7 +588,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ManureCarbonNitrogenRatio);
+                return DailyEmissions.Average(x => x.ManureCarbonNitrogenRatio);
             }
         }
 
@@ -577,7 +599,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.FecalCarbonExcretion);
+                return DailyEmissions.Sum(x => x.FecalCarbonExcretion);
             }
         }
 
@@ -588,7 +610,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.CarbonAddedFromBeddingMaterial);
+                return DailyEmissions.Sum(x => x.CarbonAddedFromBeddingMaterial);
             }
         }
 
@@ -599,7 +621,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmountOfNitrogenAddedFromBedding);
+                return DailyEmissions.Sum(x => x.AmountOfNitrogenAddedFromBedding);
             }
         }
 
@@ -612,7 +634,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinIntake);
+                return DailyEmissions.Average(x => x.ProteinIntake);
             }
         }
 
@@ -625,7 +647,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NitrogenExcretionRate);
+                return DailyEmissions.Average(x => x.NitrogenExcretionRate);
             }
         }
 
@@ -638,7 +660,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ManureDirectN2ONEmissionRate);
+                return DailyEmissions.Average(x => x.ManureDirectN2ONEmissionRate);
             }
         }
 
@@ -651,7 +673,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.RateOfNitrogenAddedFromBeddingMaterial);
+                return DailyEmissions.Average(x => x.RateOfNitrogenAddedFromBeddingMaterial);
             }
         }
 
@@ -664,7 +686,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.TanExcretion);
+                return DailyEmissions.Average(x => x.TanExcretion);
             }
         }
 
@@ -677,7 +699,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.GrossEnergyIntake);
+                return DailyEmissions.Average(x => x.GrossEnergyIntake);
             }
         }
 
@@ -690,7 +712,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AverageDailyGain);
+                return DailyEmissions.Average(x => x.AverageDailyGain);
             }
         }
 
@@ -703,7 +725,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AnimalWeight);
+                return DailyEmissions.Average(x => x.AnimalWeight);
             }
         }
 
@@ -716,7 +738,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AdjustedMaintenanceCoefficient);
+                return DailyEmissions.Average(x => x.AdjustedMaintenanceCoefficient);
             }
         }
 
@@ -729,7 +751,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForMaintenance);
+                return DailyEmissions.Average(x => x.NetEnergyForMaintenance);
             }
         }
 
@@ -742,7 +764,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForActivity);
+                return DailyEmissions.Average(x => x.NetEnergyForActivity);
             }
         }
 
@@ -755,7 +777,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForLactation);
+                return DailyEmissions.Average(x => x.NetEnergyForLactation);
             }
         }
 
@@ -768,7 +790,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForPregnancy);
+                return DailyEmissions.Average(x => x.NetEnergyForPregnancy);
             }
         }
 
@@ -781,7 +803,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForGain);
+                return DailyEmissions.Average(x => x.NetEnergyForGain);
             }
         }
 
@@ -794,7 +816,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.NetEnergyForWoolProduction);
+                return DailyEmissions.Average(x => x.NetEnergyForWoolProduction);
             }
         }
 
@@ -807,7 +829,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.RatioOfEnergyAvailableForMaintenance);
+                return DailyEmissions.Average(x => x.RatioOfEnergyAvailableForMaintenance);
             }
         }
 
@@ -820,7 +842,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.RatioOfEnergyAvailableForGain);
+                return DailyEmissions.Average(x => x.RatioOfEnergyAvailableForGain);
             }
         }
 
@@ -833,7 +855,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.AdditiveReductionFactor);
+                return DailyEmissions.Average(x => x.AdditiveReductionFactor);
             }
         }
 
@@ -846,7 +868,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.FecalCarbonExcretionRate);
+                return DailyEmissions.Average(x => x.FecalCarbonExcretionRate);
             }
         }
 
@@ -859,7 +881,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.RateOfCarbonAddedFromBeddingMaterial);
+                return DailyEmissions.Average(x => x.RateOfCarbonAddedFromBeddingMaterial);
             }
         }
 
@@ -870,7 +892,7 @@ namespace H.Core.Emissions.Results
         { 
             get
             {
-                return _dailyEmissions.Sum(x => x.VolatileSolids);
+                return DailyEmissions.Sum(x => x.VolatileSolids);
             }
         }
 
@@ -883,7 +905,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ManureMethaneEmissionRate);
+                return DailyEmissions.Average(x => x.ManureMethaneEmissionRate);
             }
         }
 
@@ -894,7 +916,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.AmountOfCarbonLostAsMethaneDuringManagement);
+                return DailyEmissions.Sum(x => x.AmountOfCarbonLostAsMethaneDuringManagement);
             }
         }
 
@@ -907,7 +929,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetainedForPregnancy);
+                return DailyEmissions.Average(x => x.ProteinRetainedForPregnancy);
             }
         }
 
@@ -920,7 +942,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetainedForLactation);
+                return DailyEmissions.Average(x => x.ProteinRetainedForLactation);
             }
         }
 
@@ -933,7 +955,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.EmptyBodyWeight);
+                return DailyEmissions.Average(x => x.EmptyBodyWeight);
             }
         }
 
@@ -946,7 +968,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.EntericMethaneEmissionRate);
+                return DailyEmissions.Average(x => x.EntericMethaneEmissionRate);
             }
         }
 
@@ -959,7 +981,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.EmptyBodyGain);
+                return DailyEmissions.Average(x => x.EmptyBodyGain);
             }
         }
 
@@ -972,7 +994,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.RetainedEnergy);
+                return DailyEmissions.Average(x => x.RetainedEnergy);
             }
         }
 
@@ -983,7 +1005,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetainedForGain);
+                return DailyEmissions.Average(x => x.ProteinRetainedForGain);
             }
         }
 
@@ -996,7 +1018,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.FecalNitrogenExcretionRate);
+                return DailyEmissions.Average(x => x.FecalNitrogenExcretionRate);
             }
         }
 
@@ -1009,7 +1031,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ManureVolatilizationRate);
+                return DailyEmissions.Average(x => x.ManureVolatilizationRate);
             }
         }
 
@@ -1022,7 +1044,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ManureNitrogenLeachingRate);
+                return DailyEmissions.Average(x => x.ManureNitrogenLeachingRate);
             }
         }
 
@@ -1035,7 +1057,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinIntakeFromSolidFood);
+                return DailyEmissions.Average(x => x.ProteinIntakeFromSolidFood);
             }
         }
 
@@ -1048,7 +1070,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinIntakeFromMilk);
+                return DailyEmissions.Average(x => x.ProteinIntakeFromMilk);
             }
         }
 
@@ -1061,7 +1083,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetained);
+                return DailyEmissions.Average(x => x.ProteinRetained);
             }
         }
 
@@ -1074,7 +1096,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetainedFromMilk);
+                return DailyEmissions.Average(x => x.ProteinRetainedFromMilk);
             }
         }
 
@@ -1087,7 +1109,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.ProteinRetainedFromSolidFood);
+                return DailyEmissions.Average(x => x.ProteinRetainedFromSolidFood);
             }
         }
 
@@ -1098,7 +1120,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.FractionOfNitrogenExcretedInUrine);
+                return DailyEmissions.Average(x => x.FractionOfNitrogenExcretedInUrine);
             }
         }
 
@@ -1109,7 +1131,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.TanAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.TanAvailableForLandApplication);
             }
         }
 
@@ -1120,7 +1142,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.OrganicNitrogenAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.OrganicNitrogenAvailableForLandApplication);
             }
         }
 
@@ -1131,7 +1153,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
             }
         }
 
@@ -1139,7 +1161,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Average(x => x.Temperature);
+                return DailyEmissions.Average(x => x.Temperature);
             }
         }
 
@@ -1147,7 +1169,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.ElectricityProducedFromAnaerobicDigestion);
+                return DailyEmissions.Sum(x => x.ElectricityProducedFromAnaerobicDigestion);
             }
         }
 
@@ -1155,7 +1177,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.HeatProducedFromAnaerobicDigestion);
+                return DailyEmissions.Sum(x => x.HeatProducedFromAnaerobicDigestion);
             }
         }
 
@@ -1163,7 +1185,62 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return _dailyEmissions.Sum(x => x.PotentialMethaneInjectionIntoGridFromAnaerobicDigestion);
+                return DailyEmissions.Sum(x => x.PotentialMethaneInjectionIntoGridFromAnaerobicDigestion);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalIndirectN2OFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalIndirectN2OFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double TotalAmmoniacalNitrogenFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniacalNitrogenFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double TotalAmmoniaFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmmoniaFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalMonthlyLeachingEmissionsFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.N2ONLeachingEmissionsFromLandAppliedManure);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalMonthlyN2OLeachingEmissionsFromLandAppliedManureFromLandAppliedManure
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.N2OLeachingEmissionsFromLandAppliedManure);
             }
         }
 
@@ -1189,7 +1266,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyLambProduced { get; set; }
 
-        public Table_33_Default_Bedding_Material_Composition_Data BeddingMaterialComposition { get; set; }
+        public Table_30_Default_Bedding_Material_Composition_Data BeddingMaterialComposition { get; set; }
 
         /// <summary>
         /// Total carbon dioxide emissions associated with this <see cref="AnimalGroup"/>.
@@ -1198,10 +1275,6 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyEnergyCarbonDioxide { get; set; }
 
-        /// <summary>
-        /// Carbon dioxide emissions from manure spreading/application (kg CO₂)
-        /// </summary>
-        public double MonthlyCarbonDioxideFromManureSpreading { get; set; }
 
         #endregion
 
@@ -1209,7 +1282,7 @@ namespace H.Core.Emissions.Results
 
         public List<DateTime> GetDatesWhereDmiIsGreaterThanDmiMax()
         {
-            var result = _dailyEmissions.Where(x => x.DryMatterIntake > x.DryMatterIntakeMax).Select(x => x.DateTime).ToList();
+            var result = DailyEmissions.Where(x => x.DryMatterIntake > x.DryMatterIntakeMax).Select(x => x.DateTime).ToList();
 
             return result;
         }

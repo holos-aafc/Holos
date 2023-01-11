@@ -41,16 +41,14 @@ namespace H.Core.Services.LandManagement
         private const int DefaultNumberOfDecimalPlaces = 3;
 
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
+        private readonly IrrigationService _irrigationService = new IrrigationService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
-        private readonly SoilEmissionsCalculator _soilEmissionsCalculator = new SoilEmissionsCalculator();
-        private readonly IICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
+        private readonly ICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
         private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator();
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
-        private readonly EnergyCarbonDioxideEmissionsCalculator _energyCarbonDioxideEmissionsCalculator = new EnergyCarbonDioxideEmissionsCalculator();
-        private readonly MultiYearNitrousOxideCalculator _multiYearNitrousOxideCalculator = new MultiYearNitrousOxideCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
-        private readonly SingleYearNitrousOxideCalculator _singleYearNitrogenEmissionsCalculator = new SingleYearNitrousOxideCalculator();
+        private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator();
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();
@@ -59,28 +57,23 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _manureApplicationViewItemMapper;
         private readonly IMapper _harvestViewItemMapper;
         private readonly IMapper _hayImportViewItemMapper;
+        private readonly IMapper _fertilizerViewItemMapper;
+        private readonly IMapper _digestateViewItemMapper;
 
-        private readonly Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_51_Carbon_Footprint_For_Fertilizer_Blends_Provider();
-        private readonly Table_12_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_12_Nitrogen_Lignin_Content_In_Crops_Provider();
-        private readonly Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new Table_5_LumCMax_KValues_Perennial_Cropping_Change_Provider();
-        private readonly Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new Table_3_LumCMax_KValues_Tillage_Practice_Change_Provider();
-        private readonly Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new Table_4_LumCMax_KValues_Fallow_Practice_Change_Provider();
-        private readonly Table_16_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_16_Soil_N2O_Emission_Factors_Provider();
-        private readonly Table_9_ManureTypes_Default_Composition_Provider _defaultManureCompositionProvider = new Table_9_ManureTypes_Default_Composition_Provider();
-        private readonly CanadianAgriculturalRegionIdToSlcIdProvider _canadianAgriculturalRegionIdToSlcIdProvider = new CanadianAgriculturalRegionIdToSlcIdProvider();
+        private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
+        private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
+        private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
+        private readonly LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new LumCMax_KValues_Tillage_Practice_Change_Provider();
+        private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
-        private readonly Duplicate_EnergyRequirementsForCropsProvider _duplicateEnergyRequirementsForCropsProviderTable38 = new Duplicate_EnergyRequirementsForCropsProvider();
-        private readonly Table_53_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_53_Fuel_Energy_Estimates_Provider();
-        private readonly Table_54_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider = new Table_54_Herbicide_Energy_Estimates_Provider();
-        private readonly Table_46_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_46_Beef_Dairy_Default_Emission_Factors_Provider();
+        private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
+        private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly NitogenFixationProvider _nitrogenFixationProvider = new NitogenFixationProvider();
-        private readonly Table_71_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider = new Table_71_Utilization_Rates_For_Livestock_Grazing_Provider();
+        private readonly Table_68_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider = new Table_68_Utilization_Rates_For_Livestock_Grazing_Provider();
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
-        private readonly Table_10_Relative_Biomass_Provider _relativeBiomassProvider = new Table_10_Relative_Biomass_Provider();
+        private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();
-
-        private readonly Dictionary<FieldSystemComponent, FieldComponentEmissionResults> _fieldComponentEmissionResultsCache = new Dictionary<FieldSystemComponent, FieldComponentEmissionResults>();
 
         #endregion
 
@@ -101,6 +94,7 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore())
                     .ForMember(property => property.HarvestViewItems, options => options.Ignore())
                     .ForMember(property => property.GrazingViewItems, options => options.Ignore())
+                    .ForMember(property => property.FertilizerApplicationViewItems, options => options.Ignore())
                     .ForMember(property => property.HayImportViewItems, options => options.Ignore())
                     .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore());
             });
@@ -128,72 +122,40 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
+            var fertilizerViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
+            var digestateViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>()
+                    .ForMember(property => property.Name, options => options.Ignore())
+                    .ForMember(property => property.Guid, options => options.Ignore());
+            });
+
             _manureApplicationViewItemMapper = manureApplicationViewItemConfiguration.CreateMapper();
             _hayImportViewItemMapper = hayImportViewItemMapperConfiguration.CreateMapper();
             _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
+            _fertilizerViewItemMapper = fertilizerViewItemMapperConfiguration.CreateMapper();
+            _digestateViewItemMapper = digestateViewItemMapperConfiguration.CreateMapper();
 
             _smallAreaYieldProvider.InitializeAsync();
+
+            this.AnimalResults = new List<AnimalComponentEmissionsResults>();
         }
 
         #endregion
 
+        #region Properties
+
+        public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+
+        #endregion
+
         #region Public Methods
-
-        /// <summary>
-        /// Calculate final results for all fields on the farm
-        /// </summary>
-        public List<FieldComponentEmissionResults> CalculateResultsForFieldComponent(Farm farm)
-        {
-            var result = new List<FieldComponentEmissionResults>();
-
-            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
-            {
-                var emissions = this.CalculateResultsForFieldComponent(farmFieldSystemComponent, farm);
-                result.Add(emissions);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculate final results for one field
-        /// </summary>
-        public FieldComponentEmissionResults CalculateResultsForFieldComponent(
-            FieldSystemComponent fieldSystemComponent, 
-            Farm farm)
-        {
-            var results = new FieldComponentEmissionResults();
-
-            // Check if the results have been calculated for this field already
-            if (fieldSystemComponent.ResultsCalculated)
-            {
-                // Check if we cached the results already
-                if (_fieldComponentEmissionResultsCache.ContainsKey(fieldSystemComponent))
-                {
-                    Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(FieldResultsService.CalculateResultsForFieldComponent)}: results already calculated for {fieldSystemComponent.Name}, returning cached results.");
-
-                    return _fieldComponentEmissionResultsCache[fieldSystemComponent];
-                }
-
-                // Results are calculated but not cached yet (system boot), calculate results for this field now
-            }
-
-            Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(FieldResultsService.CalculateResultsForFieldComponent)}: calculating results for field: '{fieldSystemComponent.Name}'");
-
-            results.LandUseChangeResults = this.CalculateLandUseChangeResults(fieldSystemComponent, farm);
-            results.CropEnergyResults = this.CalculateCropEnergyResults(fieldSystemComponent, farm);
-            results.CropN2OEmissionsResults = this.CalculateCropN2OEmissions(fieldSystemComponent, farm);
-            results.HarvestViewItems.AddRange(this.CalculateHarvestForField(fieldSystemComponent, farm));
-
-            results.FieldSystemComponent = fieldSystemComponent;
-            results.Name = fieldSystemComponent.Name + " - " + fieldSystemComponent.CropString;
-
-            fieldSystemComponent.ResultsCalculated = true;
-
-            _fieldComponentEmissionResultsCache[fieldSystemComponent] = results;
-
-            return results;
-        }
 
         /// <summary>
         /// Calculates final multiyear C and N2O results for a collection of farms
@@ -278,8 +240,11 @@ namespace H.Core.Services.LandManagement
                 if (climateDataForYear != null)
                 {
                     // Use daily climate data
-
                     var precipitationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPrecipitation).ToList();
+
+                    // Add irrigation amounts to daily precipitations
+                    var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(precipitationList, farm, viewItem);
+
                     var temperatureList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyAirTemperature).ToList();
                     var evapotranspirationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPET).ToList();
 
@@ -287,18 +252,21 @@ namespace H.Core.Services.LandManagement
                         farm: farm,
                         cropViewItem: viewItem,
                         evapotranspirations: evapotranspirationList,
-                        precipitations: precipitationList,
+                        precipitations: totalPrecipitationList,
                         temperatures: temperatureList);
                 }
                 else
                 {
                     // If user has entered custom climate data but their input file has no data for a particular year, then use normals for that particular year
+                    
+                    // Add irrigation amounts to daily precipitations
+                    var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(), farm, viewItem);
 
                     climateParameter = _climateParameterCalculator.CalculateClimateParameterForYear(
                         farm: farm,
                         cropViewItem: viewItem,
                         evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
-                        precipitations: farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(),
+                        precipitations: totalPrecipitationList,
                         temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
                 }
 
@@ -306,15 +274,17 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                // Use SLC normals when there is no custom user climate data
+                // Add irrigation amounts to daily precipitations
+                var totalPrecipitationList = _irrigationService.AddIrrigationToDailyPrecipitations(farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(), farm, viewItem);
 
+                // Use SLC normals when there is no custom user climate data
                 Trace.TraceWarning($"{nameof(FieldResultsService)}: No custom daily climate data exists for this farm. Defaulting to SLC climate normals (and averaged daily values)");
 
                 var result = _climateParameterCalculator.CalculateClimateParameterForYear(
                     farm: farm,
                     cropViewItem: viewItem,
                     evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
-                    precipitations: farm.ClimateData.PrecipitationData.GetAveragedYearlyValues(),
+                    precipitations: totalPrecipitationList,
                     temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
 
                 return Math.Round(result, DefaultNumberOfDecimalPlaces);
@@ -340,17 +310,17 @@ namespace H.Core.Services.LandManagement
             return Math.Round(result, DefaultNumberOfDecimalPlaces);
         }
 
-        public Table_10_Relative_Biomass_Data GetResidueData(CropViewItem cropViewItem, Farm farm)
+        public Table_7_Relative_Biomass_Information_Data GetResidueData(CropViewItem cropViewItem, Farm farm)
         {
             var province = farm.DefaultSoilData.Province;
             var geographicData = farm.GeographicData;
             var soilData = geographicData.DefaultSoilData;
             if (soilData == null)
             {
-                return new Table_10_Relative_Biomass_Data();
+                return new Table_7_Relative_Biomass_Information_Data();
             }
 
-            var residueData = _relativeBiomassProvider.GetResidueData(
+            var residueData = _relativeBiomassInformationProvider.GetResidueData(
                 irrigationType: cropViewItem.IrrigationType,
                 irrigationAmount: cropViewItem.AmountOfIrrigation,
                 cropType: cropViewItem.CropType,

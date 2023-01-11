@@ -49,7 +49,7 @@ namespace H.Core
 
             containerRegistry.RegisterSingleton<ICustomFileClimateDataProvider, CustomFileClimateDataProvider>();
             containerRegistry.RegisterSingleton<IDietProvider, DietProvider>();
-            containerRegistry.RegisterSingleton<IResidueDataProvider, Table_10_Relative_Biomass_Provider>();
+            containerRegistry.RegisterSingleton<IResidueDataProvider, Table_7_Relative_Biomass_Information_Provider>();
             containerRegistry.RegisterSingleton<ISoilDataProvider, NationalSoilDataBaseProvider>();
             containerRegistry.RegisterSingleton<IGeographicDataProvider, GeographicDataProvider>();
             containerRegistry.RegisterSingleton<IFeedIngredientProvider, FeedIngredientProvider>();

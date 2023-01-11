@@ -20,7 +20,7 @@ namespace H.Core.Providers.Feed
     {
         #region Fields
 
-        private Table_42_Crude_Protein_Content_Swine_Feed_Provider _swineCrudeProteinProvider;
+        private Table_39_Crude_Protein_Content_Swine_Feed_Provider _swineCrudeProteinProvider;
         private readonly IFeedIngredientProvider _feedIngredientProvider;
 
         #endregion
@@ -30,7 +30,7 @@ namespace H.Core.Providers.Feed
         public DietProvider()
         {
             _feedIngredientProvider = new FeedIngredientProvider();
-            _swineCrudeProteinProvider = new Table_42_Crude_Protein_Content_Swine_Feed_Provider();
+            _swineCrudeProteinProvider = new Table_39_Crude_Protein_Content_Swine_Feed_Provider();
         }
 
         #endregion
@@ -92,24 +92,17 @@ namespace H.Core.Providers.Feed
             var diets = new List<Diet>();
 
             /*
-             * Cow-calf diets
+             * Beef cattle diets
+             *
+             * Animals from the cow-calf component (bulls, cows, calves) have the same set (and composition) of diets as the stocker diets from the algorithm document and so we do not
+             * create a separate collection of diets just for stockers.
              */
             diets.AddRange(this.CreateBeefCowDiets());
-            diets.AddRange(this.CreateBeefBullDiets());
-
-            /*
-             * Backgrounding diets
-             */
             diets.AddRange(this.CreateBeefBackgroundingDiets());
-            diets.AddRange(this.CreateBeefStockerDiets());
-
-            /*
-             * Finishing diets
-             */
             diets.AddRange(this.CreateBeefFinishingDiets());
 
             /*
-             * Dairy diets
+             * Dairy cattle diets
              */
 
             diets.AddRange(this.CreateDairyLactatingCowDiets());
@@ -432,7 +425,7 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// Implements: Table 23. Examples of NEmf content of typical diets fed to cattle for estimation of dry matter intake (IPCC, 2019, Table 10.8a).
+        /// Implements: Table 20. Examples of NEmf content of typical diets fed to cattle for estimation of dry matter intake (IPCC, 2019, Table 10.8a).
         /// </summary>
         /// <returns></returns>
         private IEnumerable<Diet> CreateBeefCowDiets()
@@ -525,179 +518,6 @@ namespace H.Core.Providers.Feed
 
                 MethaneConversionFactor = 0.070,
                 DietaryNetEnergyConcentration = 7.0,
-            });
-
-            return diets;
-        }
-
-        private IEnumerable<Diet> CreateBeefStockerDiets()
-        {
-            var beefIngredients = _feedIngredientProvider.GetBeefFeedIngredients().ToList();
-
-            var diets = new List<Diet>();
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LowEnergyProtein,
-                DietType = DietType.LowEnergyAndProtein,
-                AnimalType = AnimalType.Stockers,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 47,
-                //CrudeProtein = 6,
-                //Forage = 100,
-                //Starch = 5.5,
-                //Fat = 1.4,
-                //MetabolizableEnergy = 1.73,
-                //Ndf = 71.4,                
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.NativePrairieHay), 100),
-                },
-
-                MethaneConversionFactor = 0.07,
-            });
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LabelMediumEnergyProteinDiet,
-                DietType = DietType.MediumEnergyAndProtein,
-                AnimalType = AnimalType.Stockers,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 54.6,
-                //CrudeProtein = 12.4,
-                //Forage = 97,
-                //Starch = 7.1,
-                //Fat = 1.8,
-                //MetabolizableEnergy = 1.98,
-                //Ndf = 53.5,                
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.AlfalfaHay), 32),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.MeadowHay), 65),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
-                },
-
-                MethaneConversionFactor = 0.07,
-            });
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LabelHighEnergyProteinDiet,
-                DietType = DietType.HighEnergyAndProtein,
-                AnimalType = AnimalType.Stockers,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 62.8,
-                //CrudeProtein = 17.7,
-                //Forage = 85,
-                //Starch = 9.9,
-                //Fat = 2.2,
-                //MetabolizableEnergy = 2.14,
-                //Ndf = 45.1,                
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.OrchardgrassHay), 60),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.AlfalfaHay), 20),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
-                },
-
-                MethaneConversionFactor = 0.07,
-            });
-
-            return diets;
-        }
-
-        private IEnumerable<Diet> CreateBeefBullDiets()
-        {
-            var beefIngredients = _feedIngredientProvider.GetBeefFeedIngredients().ToList();
-
-            var diets = new List<Diet>();
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LowEnergyProtein,
-                DietType = DietType.LowEnergyAndProtein,
-                AnimalType = AnimalType.BeefBulls,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 47,
-                //CrudeProtein = 6,
-                //Forage = 100,
-                //Starch = 5.5,
-                //Fat = 1.4,
-                //MetabolizableEnergy = 1.73,
-                //Ndf = 71.4,
-                //MethaneConversionFactor = 0.07,
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.NativePrairieHay), 100),
-                },
-
-                MethaneConversionFactor = 0.07,
-            });
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LabelMediumEnergyProteinDiet,
-                DietType = DietType.MediumEnergyAndProtein,
-                AnimalType = AnimalType.BeefBulls,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 54.6,
-                //CrudeProtein = 12.4,
-                //Forage = 97,
-                //Starch = 7.1,
-                //Fat = 1.8,
-                //MetabolizableEnergy = 1.98,
-                //Ndf = 53.5,
-                //MethaneConversionFactor = 0.065,
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.AlfalfaHay), 32),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.MeadowHay), 65),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 3)
-                },
-
-                MethaneConversionFactor = 0.065,
-            });
-
-            diets.Add(new Diet
-            {
-                IsDefaultDiet = true,
-                Name = Resources.LabelHighEnergyProteinDiet,
-                DietType = DietType.HighEnergyAndProtein,
-                AnimalType = AnimalType.BeefBulls,
-
-                // This is the breakdown of the diet if ingredients are not added.
-                //TotalDigestibleNutrient = 62.8,
-                //CrudeProtein = 17.7,
-                //Forage = 85,
-                //Starch = 9.9,
-                //Fat = 2.2,
-                //MetabolizableEnergy = 2.14,
-                //Ndf = 45.1,
-                //MethaneConversionFactor = 0.065,
-
-                Ingredients = new ObservableCollection<FeedIngredient>()
-                {
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.OrchardgrassHay), 60),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.AlfalfaHay), 20),
-                    _feedIngredientProvider.CopyIngredient(beefIngredients.Single(x => x.IngredientType == IngredientType.BarleyGrain), 20),
-                },
-
-                MethaneConversionFactor = 0.065,
             });
 
             return diets;
@@ -921,10 +741,10 @@ namespace H.Core.Providers.Feed
                 Name = Core.Properties.Resources.GoodQualityForage,
                 DietType = DietType.GoodQualityForage,
                 AnimalType = AnimalType.Sheep,
-                TotalDigestibleNutrient = 65,
-                CrudeProtein = 18,
+                TotalDigestibleNutrient = 60,
+                CrudeProtein = 17.7,
                 Ash = 8,
-                MethaneConversionFactor = 0.058,
+                MethaneConversionFactor = 0.067,
             });
 
             diets.Add(new Diet()
@@ -934,7 +754,7 @@ namespace H.Core.Providers.Feed
                 AnimalType = AnimalType.Sheep,
                 DietType = DietType.AverageQualityForage,
                 TotalDigestibleNutrient = 55,
-                CrudeProtein = 12,
+                CrudeProtein = 12.4,
                 Ash = 8,
                 MethaneConversionFactor = 0.067,
             });
@@ -945,10 +765,10 @@ namespace H.Core.Providers.Feed
                 Name = Core.Properties.Resources.PoorQualityForage,
                 DietType = DietType.PoorQualityForage,
                 AnimalType = AnimalType.Sheep,
-                TotalDigestibleNutrient = 45,
-                CrudeProtein = 6,
+                TotalDigestibleNutrient = 48,
+                CrudeProtein = 5.7,
                 Ash = 8,
-                MethaneConversionFactor = 0.074,
+                MethaneConversionFactor = 0.067,
             });
 
             return diets;
@@ -963,6 +783,7 @@ namespace H.Core.Providers.Feed
             {
                 Name = Resources.None,
                 IsCustomPlaceholderDiet = true,
+                DietType = DietType.None,
                 AnimalType = AnimalType.NotSelected,
             };
         }

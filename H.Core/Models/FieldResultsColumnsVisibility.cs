@@ -74,6 +74,9 @@ namespace H.Core.Models
         private bool _totalAmmoniaForArea;
         private bool _denitrificationForArea;
 
+        private bool _totalDirectNitrousOxidePerHectare;
+        private bool _totalIndirectNitrousOxidePerHectare;
+
         #endregion
 
         #region Constructors
@@ -91,25 +94,16 @@ namespace H.Core.Models
             base.SetAllColumnsInvisible();
 
             this.Name = true;
-            this.TimePeriod = true;
             this.Year = true;
             this.CropType = true;
-            this.ClimateParameter = true;
-            this.TillageFactor = true;
-            this.ManagementFactor = true;
-            this.PlantCarbonInAgriculturalProduct = true;
-            this.CarbonInputFromProduct = true;
-            this.CarbonInputFromRoots = true;
-            this.CarbonInputFromStraw = true;
-            this.CarbonInputFromExtraRoots = true;
             this.AboveGroundCarbonInput = true;
             this.BelowGrounCarbonInput = true;
-            this.YoungPoolSoilCarbonAboveGround = true;
-            this.YoungPoolSoilCarbonBelowGround = true;
-            this.YoungPoolManureCarbon = true;
-            this.AverageSoilCarbonAcrossAllFieldsInFarm = true;
+            this.ManureCarbonInput = true;
             this.SoilCarbon = true;
             this.ChangeInCarbon = true;
+
+            this.TotalDirectNitrousOxidePerHectare = true;
+            this.TotalIndirectNitrousOxidePerHectare = true;
         }
         #endregion
 
@@ -224,6 +218,7 @@ namespace H.Core.Models
             get { return _ChangeInCarbon; }
             set { SetProperty(ref _ChangeInCarbon, value); }
         }
+
         public bool SyntheticInputsBeforeAdjustment
         {
             get { return _syntheticInputsBeforeAdjustment; }
@@ -446,6 +441,18 @@ namespace H.Core.Models
         {
             get => _percentageOfRootsReturned;
             set => SetProperty(ref _percentageOfRootsReturned, value);
+        }
+
+        public bool TotalDirectNitrousOxidePerHectare
+        {
+            get => _totalDirectNitrousOxidePerHectare;
+            set => SetProperty(ref _totalDirectNitrousOxidePerHectare, value);
+        }
+
+        public bool TotalIndirectNitrousOxidePerHectare
+        {
+            get => _totalIndirectNitrousOxidePerHectare;
+            set => SetProperty(ref _totalIndirectNitrousOxidePerHectare, value);
         }
 
         #endregion

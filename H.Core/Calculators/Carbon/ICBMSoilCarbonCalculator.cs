@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -17,7 +18,7 @@ namespace H.Core.Calculators.Carbon
 {
     /// <summary>
     /// </summary>
-    public class ICBMSoilCarbonCalculator : IICBMSoilCarbonCalculator
+    public partial class ICBMSoilCarbonCalculator : CarbonCalculatorBase, IICBMSoilCarbonCalculator
     {
         #region Fields
 
@@ -101,7 +102,7 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.ManureCarbonInput = this.CalculateManureCarbonInput(currentYearViewItem, farm);
+            currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem, farm);
 
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare;            
 
@@ -156,42 +157,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Rotz and Muck (1994 - Changes in Forage Quality During Harvest and Storage. Forage Quality, Evaluation, and Utilization, Chapter 20. https://doi.org/10.2134/1994.foragequality.c20)
-        /// </summary>
-        public double CalculateInputsFromSupplementalHayFedToGrazingAnimals(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItems,
-            Farm farm)
-        {
-            var result = 0.0;
-
-            // Get total amount of supplemental hay added
-            var hayImportViewItems = currentYearViewItem.HayImportViewItems;
-            foreach (var hayImportViewItem in hayImportViewItems)
-            {
-                // Total dry matter weight
-                var totalDryMatterWeight = hayImportViewItem.GetTotalDryMatterWeightOfAllBales();
-
-                // Amount lost during feeding
-                var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
-
-                // Total additional carbon that must be added to above ground inputs for the field
-                var totalCarbon = totalDryMatterWeight * loss * currentYearViewItem.CarbonConcentration;
-
-                result += totalCarbon;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Calculates the total above ground carbon input for the given species grown in the given year.
         /// 
         /// C_ag
         /// 
-        /// Equation 2.2.2-2
-        /// Equation 2.2.2-4
+        /// Equation 2.1.2-2
+        /// Equation 2.1.2-4
         /// </summary>
         /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
@@ -221,8 +192,8 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_bg
         ///
-        /// Equation 2.2.2-3
-        /// Equation 2.2.2-5
+        /// Equation 2.1.2-3
+        /// Equation 2.1.2-5
         /// </summary>
         /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
@@ -246,12 +217,12 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_ptoSoil
         /// 
-        /// Equation 2.2.2-6
-        /// Equation 2.2.2-10
-        /// Equation 2.2.2-13
-        /// Equation 2.2.2-17
-        /// Equation 2.2.2-20
-        /// Equation 2.2.2-23
+        /// Equation 2.1.2-6
+        /// Equation 2.1.2-10
+        /// Equation 2.1.2-14
+        /// Equation 2.1.2-17
+        /// Equation 2.1.2-20
+        /// Equation 2.1.2-23
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -283,9 +254,8 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_s
         ///
-        /// Equation 2.2.2-7
-        /// Equation 2.2.2-14
-        /// Equation 2.2.2-18
+        /// Equation 2.1.2-7
+        /// Equation 2.1.2-18
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -320,11 +290,11 @@ namespace H.Core.Calculators.Carbon
         ///
         /// C_r
         /// 
-        /// Equation 2.2.2-8
-        /// Equation 2.2.2-11
-        /// Equation 2.2.2-15
-        /// Equation 2.2.2-21
-        /// Equation 2.2.2-24
+        /// Equation 2.1.2-8
+        /// Equation 2.1.2-11
+        /// Equation 2.1.2-15
+        /// Equation 2.1.2-21
+        /// Equation 2.1.2-24
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -374,12 +344,12 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_e
         /// 
-        /// Equation 2.2.2-9
-        /// Equation 2.2.2-12
-        /// Equation 2.2.2-16
-        /// Equation 2.2.2-19
-        /// Equation 2.2.2-22
-        /// Equation 2.2.2-25
+        /// Equation 2.1.2-9
+        /// Equation 2.1.2-12
+        /// Equation 2.1.2-16
+        /// Equation 2.1.2-19
+        /// Equation 2.1.2-22
+        /// Equation 2.1.2-25
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -444,7 +414,7 @@ namespace H.Core.Calculators.Carbon
             Farm farm)
         {
             // Estimate the value using the productivity calculation
-            var estimatedPlantCarbonInAgriculturalProduct = this.EstimatePlantCarbonInAgriculturalProductForNextYear(
+            var estimatedPlantCarbonInAgriculturalProductInNextYear = this.EstimatePlantCarbonInAgriculturalProductForNextYear(
                 nextYearViewItem: currentYearViewItem,
                 farm: farm);
             
@@ -458,7 +428,8 @@ namespace H.Core.Calculators.Carbon
 
                 if (currentYearViewItem.PlantCarbonInAgriculturalProduct > 0)
                 {
-                    /*
+                    /* Equation 2.1.2-20
+                     *
                      * Situation when C_p for current year (first year in this condition) is known
                      */
 
@@ -466,7 +437,8 @@ namespace H.Core.Calculators.Carbon
                 }
                 else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
                 {
-                    /*
+                    /* Equation 2.1.2-21
+                     *
                      * Situation when C_p for the current year (first year in this condition) is not known, but yield or C_p for subsequent year (second year in this condition)
                      * is known.
                      *
@@ -476,7 +448,7 @@ namespace H.Core.Calculators.Carbon
                     var plantCarbonInAgriculturalProductForNextYear = 0.0;
                     if (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0)
                     {
-                        // We will already have a calculate C_p value for the next year when the previous year set it for us (down below)
+                        // We will already have a calculated C_p value for the next year when the previous year set it for us (down below)
                         plantCarbonInAgriculturalProductForNextYear = nextYearViewItem.PlantCarbonInAgriculturalProduct;
                     }
                     else
@@ -488,8 +460,11 @@ namespace H.Core.Calculators.Carbon
                     }
 
                     // This year's C_p will be a fraction of next year's C_p
+                    
+                    // Equation 2.1.2-23
                     var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = plantCarbonInAgriculturalProductForNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
 
+                    // Equation 2.1.2-24
                     carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
                     // Since this year doesn't have any C_p, we assign the value now so that when we calculate C_r and C_e for this year, we will have a C_p value to work with
@@ -503,7 +478,7 @@ namespace H.Core.Calculators.Carbon
                      */
 
                     // This year's C_p will be a fraction of the estimated value for next year's C_p 
-                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = (estimatedPlantCarbonInAgriculturalProduct * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials);
+                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = (estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials);
 
                     carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
@@ -512,8 +487,11 @@ namespace H.Core.Calculators.Carbon
 
                     if (nextYearViewItem != null)
                     {
-                        // Set the the C_p for next year to be the calculated value
-                        nextYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantCarbonInAgriculturalProduct;
+                        /* Equation 2.1.2-25 
+                         *
+                         * Set the the C_p for next year to be the calculated value
+                         */
+                        nextYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantCarbonInAgriculturalProductInNextYear;
 
                         // Since we are assigning a calculated value to the next year's C_p value, we need to set a flag so that it doesn't get overwritten when we calculate C_p on the next iteration
                         nextYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
@@ -522,7 +500,8 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                /*
+                /* Equation 2.1.2-27
+                 *  
                  * Consider any year other than the first
                  */
 
@@ -540,7 +519,7 @@ namespace H.Core.Calculators.Carbon
                      * Situation when C_p for the current year is not known. Have to use estimated value
                      */
 
-                    var estimatedPlantC = estimatedPlantCarbonInAgriculturalProduct * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
+                    var estimatedPlantC = estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
 
                     carbonInputFromProduct = (estimatedPlantC)* (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
@@ -575,11 +554,15 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100);
+
+            // Equation 2.1.2-28
+            // Equation 2.1.2-30
+            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
             
             // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
             if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromRoots < previousYearViewItem.CarbonInputFromRoots)
             {
+                // Equation 2.1.2-32
                 carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
             }
 
@@ -608,11 +591,14 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
+            // Equation 2.1.2-29
+            // Equation 2.1.2-31
             var carbonInputFromExtraroots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
 
             // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
             if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
             {
+                // Equation 2.1.2-33
                 carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
             }
 
@@ -648,20 +634,24 @@ namespace H.Core.Calculators.Carbon
                 annualPrecipitation: totalPrecipitationForTheYear,
                 annualPotentialEvapotranspiration: totalEvapotranspirationForTheYear,
                 proportionOfPrecipitationMayThroughSeptember: proportionOfPrecipitationMayThroughSeptember,
-                moistureContentAsPercentage: moistureContentAsPercentage,
                 carbonConcentration: carbonConcentration);
 
             return result;
         }
 
-        public double CalculateProductivity(
-            double annualPrecipitation,
+        /// <summary>
+        /// Equation 2.1.2-22
+        /// Equation 2.1.2-26
+        /// </summary>
+        public double CalculateProductivity(double annualPrecipitation,
             double annualPotentialEvapotranspiration,
             double proportionOfPrecipitationMayThroughSeptember,
-            double moistureContentAsPercentage,
             double carbonConcentration)
         {
-            var result = ((-3004 + (4.72 * annualPrecipitation) + (-0.98 * annualPotentialEvapotranspiration) + (5316 * proportionOfPrecipitationMayThroughSeptember)) * (1 - (moistureContentAsPercentage / 100))) *carbonConcentration;
+            var production = (2.973 + (0.00453 * annualPrecipitation) + (-0.00259 * annualPotentialEvapotranspiration) + (6.187 * proportionOfPrecipitationMayThroughSeptember));
+            var dryMatter = Math.Pow(Math.E, production);
+
+            var result = dryMatter * carbonConcentration;
 
             return result;
         }
@@ -723,19 +713,6 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-26
-        /// 
-        /// Calculate amount of carbon input from all manure applications in a year.
-        /// </summary>
-        /// <returns>The amount of carbon input during the year (kg C)</returns>
-        public double CalculateManureCarbonInput(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            return viewItem.GetTotalCarbonFromAppliedManure();
-        }
-
-        /// <summary>
         /// Equation 2.2.2-27
         /// </summary>
         public double CalculateAmountOfNitrogenAppliedFromManure(
@@ -766,7 +743,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-1
+        /// Equation 2.1.3-1
         /// </summary>
         public double CalculateAverageAboveGroundResidueCarbonInput(
             double carbonInputFromProductOfEachRotationPhase, 
@@ -776,7 +753,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-2
+        /// Equation 2.1.3-2
         /// </summary>
         public double CalculateAverageBelowGroundResidueCarbonInput(
             double carbonInputFromRootsOfEachRotationPhase, 
@@ -786,7 +763,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-3
+        /// Equation 2.1.3-3
         /// </summary>
         public double CalculateAverageManureCarbonInput(double carbonInputsFromManureInputsOfEachRotationPhase)
         {
@@ -794,7 +771,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-4
+        /// Equation 2.1.3-4
         /// </summary>
         public double CalculateYoungPoolSteadyStateAboveGround(
             double averageAboveGroundCarbonInput, 
@@ -810,7 +787,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-5
+        /// Equation 2.1.3-5
         /// </summary>
         public double CalculateYoungPoolSteadyStateBelowGround(
             double averageBelowGroundCarbonInput, 
@@ -826,7 +803,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-6
+        /// Equation 2.1.3-6
         /// </summary>
         public double CalculateYoungPoolSteadyStateManure(
             double averageManureCarbonInput, 
@@ -842,7 +819,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-7
+        /// Equation 2.1.3-7
         /// </summary>
         public double CalculateOldPoolSteadyState(
             double youngPoolDecompositionRate, 
@@ -883,7 +860,7 @@ namespace H.Core.Calculators.Carbon
 
 
         /// <summary>
-        /// Equation 2.2.4-1
+        /// Equation 2.1.3-11
         /// </summary>
         public double CalculateYoungPoolAboveGroundCarbonAtInterval(
             double youngPoolAboveGroundCarbonAtPreviousInterval, 
@@ -900,7 +877,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-2
+        /// Equation 2.1.3-12
         /// </summary>
         public double CalculateYoungPoolBelowGroundCarbonAtInterval(
             double youngPoolBelowGroundCarbonAtPreviousInterval, 
@@ -917,7 +894,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-3
+        /// Equation 2.1.3-13
         /// </summary>
         public double CalculateYoungPoolManureCarbonAtInterval(
             double youngPoolManureCarbonAtPreviousInterval, 
@@ -934,7 +911,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-4
+        /// Equation 2.1.3-14
         /// </summary>
         /// <returns></returns>
         public double CalculateOldPoolSoilCarbonAtInterval(
@@ -984,7 +961,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-5
+        /// Equation 2.1.3-15
         /// </summary>
         public double CalculateSoilCarbonAtInterval(
             double youngPoolSoilCarbonAboveGroundAtInterval, 
@@ -996,7 +973,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-6
+        /// Equation 2.1.3-16
         /// </summary>
         public double CalculateChangeInSoilCarbonAtInterval(
             double soilOrganicCarbonAtInterval, 
@@ -1006,7 +983,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-7
+        /// Equation 2.1.3-17
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFieldAtInterval(
             double changeInSoilOrganicCarbonAtInterval, 
@@ -1016,7 +993,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.4-8
+        /// Equation 2.1.3-18
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFarmAtInterval(
             IEnumerable<double> changeInSoilOrganicCarbonForFields)

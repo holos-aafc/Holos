@@ -10,9 +10,24 @@ namespace H.Core.Models.Infrastructure
 {
     public class ManureSubstrateViewItem : SubstrateViewItemBase
     {
+        #region Fields
+        
         private AnimalType _animalType;
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
+        private ManureSubstrateState _manureSubstrateState;
+
+        #endregion
+
+        #region Constructors
+
+        public ManureSubstrateViewItem()
+        {
+        }
+
+        #endregion
+
+        #region Properties
 
         public AnimalType AnimalType
         {
@@ -31,5 +46,13 @@ namespace H.Core.Models.Infrastructure
             get => _dailyManureAddedToDigester;
             set => this.SetProperty(ref _dailyManureAddedToDigester, value);
         }
+
+        public ManureSubstrateState ManureSubstrateState
+        {
+            get => _manureSubstrateState;
+            set => SetProperty(ref _manureSubstrateState, value);
+        }
+
+        #endregion
     }
 }

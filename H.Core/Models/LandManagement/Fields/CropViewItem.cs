@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Media.Animation;
 using H.Core.Enumerations;
+using H.Core.Models.Results;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Economics;
 using H.Infrastructure;
@@ -130,6 +131,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _tillageFactor;
         private double _managementFactor;
         private double _manureCarbonInput;
+        private double _manureCarbonPerHectare;
         private double _ligninContent;
 
         private string _timePeriodCategoryString;
@@ -160,6 +162,7 @@ namespace H.Core.Models.LandManagement.Fields
 
             this.HarvestMethod = HarvestMethods.CashCrop;
             this.MoistureContentOfCropPercentage = 12;
+            this.SoilReductionFactor = SoilReductionFactors.None;
 
             this.CoverCropTerminationType = CoverCropTerminationType.Natural;
 
@@ -174,6 +177,8 @@ namespace H.Core.Models.LandManagement.Fields
             this.CarbonConcentration = CoreConstants.CarbonConcentration;
 
             this.CropEconomicData = new CropEconomicData();
+            this.IpccTier2NitrogenResults = new IPCCTier2Results();
+            this.IpccTier2CarbonResults = new IPCCTier2Results();
 
             this.IsPesticideUsed = Response.No;
             this.PerennialStandLength = DefaultPerennialStandLength;
@@ -185,10 +190,13 @@ namespace H.Core.Models.LandManagement.Fields
             this.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>();
             this.FertilizerApplicationViewItems.CollectionChanged += FertilizerApplicationViewItemsOnCollectionChanged;
 
+            this.DigestateApplicationViewItems = new ObservableCollection<DigestateApplicationViewItem>();
+
             this.HarvestViewItems.CollectionChanged += HarvestViewItemsOnCollectionChanged;
             this.HayImportViewItems.CollectionChanged += HayImportViewItemsOnCollectionChanged;
             this.GrazingViewItems.CollectionChanged += GrazingViewItemsOnCollectionChanged;
             this.ManureApplicationViewItems.CollectionChanged += ManureApplicationViewItemsOnCollectionChanged;
+            this.DigestateApplicationViewItems.CollectionChanged += DigestateApplicationViewItemsOnCollectionChanged;
         }
 
         #endregion
@@ -288,6 +296,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// Total area of crop, fallow area, grassland, etc.
+        ///
+        /// (ha)
         /// </summary>
         public double Area
         {
@@ -449,7 +459,7 @@ namespace H.Core.Models.LandManagement.Fields
         public int Year
         {
             get { return _year; }
-            set { this.SetProperty(ref _year, value, () => { this.CropTypeStringWithYear = $"[{this.Year}] - {this.CropTypeString}"; }); }
+            set { this.SetProperty(ref _year, value, () => { _cropTypeStringWithYear = $"[{_year}] - {_cropTypeString}"; }); }
         }
 
         public int YearInPerennialStand
@@ -816,7 +826,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Used to determine how much N fertilizer is required for a given user specified yield
         /// 
-        /// (kg N ha^-1 year^-1)
+        /// (fraction)
         /// </summary>
         public double NitrogenFixation
         {
@@ -983,7 +993,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double ManureCarbonInputsPerHectare
         {
-            get { return this.GetTotalCarbonFromAppliedManure() / this.Area; }
+            get { return _manureCarbonPerHectare; }
+            set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
         public double TillageFactor
@@ -1108,18 +1119,16 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedAboveGroundInput { get; set; }
         public double CombinedBelowGroundInput { get; set; }
         public double CombinedManureInput { get; set; }
+        public double CombinedGrainNitrogen { get; set; }
+        public double CombinedStrawNitrogen { get; set; }
+        public double CombinedRootNitrogen { get; set; }
+        public double CombinedExtrarootNitrogen { get; set; }
+        public double CombinedAboveGroundResidueNitrogen { get; set; }
+        public double CombinedBelowGroundResidueNitrogen { get; set; }
 
         #endregion
 
         #region Public Methods
-
-        /// <summary>
-        /// Gets total carbon inputs from residues, manure, etc.
-        /// </summary>
-        public double GetTotalCarbonInputs()
-        {
-            return this.AboveGroundCarbonInput + this.BelowGroundCarbonInput + this.ManureCarbonInput;
-        }
 
         public void CalculateDryYield()
         {
@@ -1128,38 +1137,40 @@ namespace H.Core.Models.LandManagement.Fields
 
         public void CalculateWetWeightYield()
         {
-            this.Yield = this.DryYield  /  (1 - this.MoistureContentOfCrop);
+            this.Yield = this.DryYield / (1 - this.MoistureContentOfCrop);
         }
 
         /// <summary>
-        /// We don't recalculate results if any of these properties change
+        /// This is the total amount of both organic fertilizer nitrogen and manure nitrogen.
         /// </summary>
-        public static bool IsPropertyRelatedToCalculations(string propertyName)
+        public double GetTotalOrganicAndManureNitrogenInYear()
         {
-            if (propertyName.Equals(nameof(CropViewItem.CropTypeString)) ||
-                propertyName.Equals(nameof(CropViewItem.CropTypeStringWithYear)) ||
-                propertyName.Equals(nameof(CropViewItem.Description)) ||
-                propertyName.Equals(nameof(CropViewItem.Year)) ||
-                propertyName.Equals(nameof(CropViewItem.PlantCarbonInAgriculturalProduct)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromProduct)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromStraw)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromRoots)) ||
-                propertyName.Equals(nameof(CropViewItem.CarbonInputFromExtraroots)) ||
-                propertyName.Equals(nameof(CropViewItem.HasHarvestViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.HasHayImportViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.HasGrazingViewItems)) ||
-                propertyName.Equals(nameof(CropViewItem.ItemCanBeMovedDown)) ||
-                propertyName.Equals(nameof(CropViewItem.ItemCanBeMovedUp)) ||
-                propertyName.Equals(nameof(CropViewItem.AboveGroundCarbonInput)) ||
-                propertyName.Equals(nameof(CropViewItem.BelowGroundCarbonInput)))
+            var result = this.GetTotalOrganicNitrogenInYear() + this.GetTotalManureNitrogenAppliedFromLivestockInYear();
+
+            return result;
+        }
+
+        /// <summary>
+        /// This is not manure, but organic fertilizers.
+        ///
+        /// (kg N)
+        /// </summary>
+        /// <returns></returns>
+        public double GetTotalOrganicNitrogenInYear()
+        {
+            var totalNitrogen = 0d;
+
+            foreach (var fertilizerApplicationViewItem in this.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.CustomOrganic))
             {
-                return false;
+                totalNitrogen += fertilizerApplicationViewItem.AmountOfNitrogenApplied * this.Area;
             }
 
-            return true;
+            return totalNitrogen;
         }
 
         /// <summary>
+        /// Equation 4.6.1-2
+        /// 
         /// (kg N)
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockInYear()
@@ -1168,6 +1179,18 @@ namespace H.Core.Models.LandManagement.Fields
 
             foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year &&
                          manureViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock))
+            {
+                totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
+            }
+
+            return totalNitrogen;
+        }
+
+        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear()
+        {
+            var totalNitrogen = 0d;
+
+            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year))
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
             }
@@ -1232,7 +1255,7 @@ namespace H.Core.Models.LandManagement.Fields
                 var volumeOfManure = manureApplication.AmountOfManureAppliedPerHectare;
                 var area = this.Area;
 
-                result += carbonFraction * volumeOfManure * area;
+                result += (carbonFraction * volumeOfManure * area);
             }
 
             return result;

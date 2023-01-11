@@ -202,6 +202,7 @@ namespace H.Core.Providers.Soil
                 var soilData = new SoilData
                 {
                     PolygonId = polygonId,
+                    SoilName = this.GetSoilName(polygonId),
                     ComponentId = componentTableData.PolygonComponentId,
                     BulkDensity = this.GetBulkDensityByComponent(componentTableData),
                     ProportionOfClayInSoil = this.GetProportionOfClayInSoilByComponent(componentTableData),
@@ -216,7 +217,6 @@ namespace H.Core.Providers.Soil
                     Province = this.GetProvinceByComponent(componentTableData),
                     ParentMaterialTextureString = this.GetParentMaterialTextureTypeByComponent(componentTableData),
                     SoilTexture = this.GetSoilTextureByComponent(componentTableData),
-                    SoilName = this.GetSoilName(polygonId),
                     EcodistrictName = this.GetEcodistrictName(polygonId),
                     EcodistrictId = this.GetEcodistrictId(polygonId),
                     Ecozone = this.GetEcozone(polygonId),
@@ -1405,7 +1405,9 @@ namespace H.Core.Providers.Soil
                     Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with agricultural soil profile. Searching for native soil profiles.");
                 }
 
-                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
+                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile) &&
+                                                                                x.IsValidSoilLayerTableData);
+                
                 if (nativeProfileEntries.Any())
                 {
                     var layer = this.GetAppropriateLayer(nativeProfileEntries);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Transactions;
+using H.Core.Enumerations;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
 
@@ -165,6 +166,15 @@ namespace H.Core.Emissions.Results
         {
             get => _upstreamEnergyFromNitrogenFertilizer;
             set => SetProperty(ref _upstreamEnergyFromNitrogenFertilizer, value);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public double TotalManureSpreadingEmissionsForMonth(Months month)
+        {
+            return this.ManureSpreadingResults.Where(x => x.Month == (int) month).Sum(y => y.TotalEmissions);
         }
 
         #endregion

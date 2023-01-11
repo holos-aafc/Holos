@@ -38,6 +38,10 @@ namespace H.Core
         public static double DirectN2OUncertaintyEstimate = 2;
         public static double IndirectN2OUncertaintyEstimate = 4;
         public static double EnergyCO2UncertaintyEstimate = 2;
+
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public static double CarbonConcentration = 0.45;
 
         /// <summary>
@@ -86,7 +90,7 @@ namespace H.Core
         /// <summary>
         /// Converts N2O to CO2e
         /// </summary>
-        public static double N2OToCO2eConversionFactor = 265;        
+        public static double N2OToCO2eConversionFactor = 273;        
 
         /// <summary>
         /// Converts from NH3-N to NH3

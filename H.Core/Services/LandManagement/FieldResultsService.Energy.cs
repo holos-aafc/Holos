@@ -24,6 +24,32 @@ namespace H.Core.Services.LandManagement
         #region Public Methods
 
         public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var result = new List<MonthlyManureSpreadingResults>();
+
+            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            {
+                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
+                var month = manureApplicationViewItem.DateOfApplication.Month;
+                var year = manureApplicationViewItem.DateOfApplication.Year;
+
+                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
+                    volumeOfLandAppliedManure: totalVolume);
+
+                var resultItem = new MonthlyManureSpreadingResults();
+                resultItem.Year = year;
+                resultItem.Month = month;
+                resultItem.TotalEmissions = totalEnergyEmissions;
+
+                result.Add(resultItem);
+            }
+
+            return result;
+        }
+
+        public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
             FieldSystemComponent fieldSystemComponent,
             Farm farm)
         {
@@ -50,22 +76,17 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        /// <summary>
-        /// Calculates emissions from energy usage for fuel use, herbicide, N and P fertilizer, and irrigation.
-        ///
-        /// <remarks>Both upstream and on-farm emissions are calculated here.</remarks>
-        /// </summary>
-        public CropEnergyResults CalculateCropEnergyResults(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public CropEnergyResults CalculateCropEnergyResults(CropViewItem viewItem, Farm farm)
         {
             var results = new CropEnergyResults();
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
+
             if (viewItem == null)
             {
                 return results;
             }
 
             // No fuel is used on grasslands/pasture
-            if (viewItem.CropType == CropType.SeededGrassland == false)
+            if (viewItem.CropType.IsPerennial() == false)
             {
                 results.EnergyCarbonDioxideFromFuelUse = this.CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
                     energyFromFuelUse: viewItem.FuelEnergy,
@@ -96,13 +117,13 @@ namespace H.Core.Services.LandManagement
             if (viewItem.AmountOfIrrigation > 0)
             {
                 results.EnergyCarbonDioxideFromIrrigation = this.CalculateTotalCarbonDioxideEmissionsFromIrrigation(
-                    areaOfCropIrrigated: fieldSystemComponent.FieldArea,
-                    irrigationConversion: IrrigationConversion,
+                    areaOfCropIrrigated: viewItem.Area,
+                    amountOfIrrigation: viewItem.AmountOfIrrigation,
                     pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
             }
 
             var manureSpreadingResults = this.GetManureSpreadingResults(
-                fieldSystemComponent: fieldSystemComponent,
+                viewItem: viewItem,
                 farm: farm);
 
             results.ManureSpreadingResults.AddRange(manureSpreadingResults);
@@ -115,7 +136,7 @@ namespace H.Core.Services.LandManagement
         /// Equation 4.1.1-2
         /// </summary>
         /// <param name="energyFromFuelUse">Energy from fuel use (GJ ha^1)</param>
-        /// <param name="area">Area (ha))</param>
+        /// <param name="area">Area (ha)</param>
         /// <param name="dieselConversion">Conversion of GJ of diesel to kg CO2 (kg CO2 GJ^-1)</param>
         /// <returns>CO2 emissions from cropping fuel use (kg CO2 year^-1)</returns>
         public double CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
@@ -259,14 +280,15 @@ namespace H.Core.Services.LandManagement
         /// Equation 6.1.4-1
         /// </summary>
         /// <param name="areaOfCropIrrigated">area of crop irrigated (ha)</param>
-        /// <param name="irrigationConversion">Conversion of area irrigated to kg CO2 (kg CO2 ha^1)</param>
+        /// <param name="amountOfIrrigation">Amount of irrigation (mm ha^-1 yr^-1)</param>
+        /// <param name="pumpEmissionsFactor">For electric pump = 0.266 kg CO2 mm^-1, for natural gas pump = 1.145 kg CO2 mm^-1</param>
         /// <returns>Total CO2 emissions from irrigation (kg CO2 year^-1)</returns>
         public double CalculateTotalCarbonDioxideEmissionsFromIrrigation(
                double areaOfCropIrrigated, 
-               double irrigationConversion,
+               double amountOfIrrigation,
                double pumpEmissionsFactor)
         {
-            return areaOfCropIrrigated * irrigationConversion * pumpEmissionsFactor;
+            return areaOfCropIrrigated * amountOfIrrigation * pumpEmissionsFactor;
         }
 
         /// <summary>

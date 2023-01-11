@@ -206,6 +206,7 @@ namespace H.Core.Enumerations
             switch (animalType)
             {
                 case AnimalType.BeefCow:
+                case AnimalType.BeefCowLactating:
                 case AnimalType.DairyLactatingCow:
                 case AnimalType.Ewes:
                     return true;
@@ -242,7 +243,12 @@ namespace H.Core.Enumerations
                 return AnimalType.Dairy;
             }
 
-            return AnimalType.Beef;
+            if (animalType.IsBeefCattleType())
+            {
+                return AnimalType.Beef;
+            }
+
+            return AnimalType.NotSelected;
         }
 
         public static ComponentCategory GetComponentCategoryFromAnimalType(this AnimalType animalType)

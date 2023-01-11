@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -318,6 +326,8 @@ namespace H.Core.Test.Services
                 electricityConversion);
             Assert.AreEqual(numberOfPigs * numberOfDaysInMonth * (1.06 / 365) * electricityConversion, result, 2);
         }
+
+       
 
         #endregion
     }

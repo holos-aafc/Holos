@@ -209,7 +209,9 @@ namespace H.Core.Models
             this.DecompositionRateConstantYoungPool = 0.8;
             this.DecompositionRateConstantOldPool = 0.00605;
 
-            this.OldPoolCarbonN = 0.1;
+            this.OldPoolCarbonN = 0.1;      // 1/10
+            this.SlowCarbonN = 0.05;        // 1/20
+            this.ActiveCarbonN = 0.025;     // 1/40
             this.NORatio = 0.1;
             this.EmissionFactorForLeachingAndRunoff = 0.011; // Updated to IPCC 2019 value
             this.EmissionFactorForVolatilization = 0.01;
@@ -250,7 +252,8 @@ namespace H.Core.Models
             this.SolidManureBeefConcentrationEnergy = 10;
             this.SolidManureSheepConcentrationEnergy = 10;
 
-            this.DefaultRunInPeriod = 5;
+            // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
+            this.DefaultRunInPeriod = 15;
 
             this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
 
@@ -260,6 +263,7 @@ namespace H.Core.Models
             this.DefaultBiodegradableFractionSwineManure = 0.024;
             this.DefaultBiodegradableFractionOtherManure = 0.550;
         }
+
 
         #endregion
 
@@ -289,7 +293,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// The period of time in which climate normals are caclulated from a set of daily climate data values
+        /// The period of time in which climate normals are calculated from a set of daily climate data values
         /// </summary>
         public TimeFrame TimeFrame
         {
@@ -303,6 +307,9 @@ namespace H.Core.Models
             set { SetProperty(ref _useClimateParameterInsteadOfManagementFactor, value); }
         }
 
+        /// <summary>
+        /// (kg kg^-1)
+        /// </summary>
         public double CarbonConcentration
         {
             get { return _carbonConcentration; }
@@ -874,6 +881,10 @@ namespace H.Core.Models
                 return _pumpEmissionsFactor;
             }
         }
+
+        public double ActiveCarbonN { get; set; }
+
+        public double SlowCarbonN { get; set; }
 
         #endregion
 

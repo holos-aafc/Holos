@@ -73,26 +73,12 @@ namespace H.Core.Providers.Economics
         public CropEconomicData()
         {
             this.FixedCostHandled = false;
-            this.VariableProperties = new List<string>()
-            {
-                nameof(SeedCleaningAndTreatment),
-                nameof(Fertilizer),
-                nameof(Chemical),
-                nameof(HailCropInsurance),
-                nameof(TruckingMarketing),
-                nameof(FuelOilLube),
-                nameof(MachineryRepairs),
-                nameof(BuildingRepairs),
-                nameof(CustomWork),
-                nameof(Labour),
-                nameof(Utilities),
-                nameof(OperatingInterest),
-            };
 
-            this.PropertiesUserCanUpdate = new List<string>()
-            {
-                nameof(ExpectedMarketPrice),
-            }.Concat(this.VariableProperties).ToList();
+
+            //this.PropertiesUserCanUpdate = new List<string>()
+            //{
+            //    nameof(ExpectedMarketPrice),
+            //}.Concat(this.VariableProperties).ToList();
 
             this.PropertyChanged -= OnPropertyChanged;
             this.PropertyChanged += OnPropertyChanged;
@@ -318,7 +304,7 @@ namespace H.Core.Providers.Economics
 
         public List<string> PropertiesUserCanUpdate { get; }
 
-        public List<string> VariableProperties { get; }
+        
 
         public bool IsUserDefined
         {
@@ -332,7 +318,23 @@ namespace H.Core.Providers.Economics
 
         public void SetUserDefinedVariableCostPerUnit()
         {
-            var props = GetType().GetProperties().Where(propInfo => this.VariableProperties.Contains(propInfo.Name));
+            var variableProperties = new List<string>()
+            {
+                nameof(SeedCleaningAndTreatment),
+                nameof(Fertilizer),
+                nameof(Chemical),
+                nameof(HailCropInsurance),
+                nameof(TruckingMarketing),
+                nameof(FuelOilLube),
+                nameof(MachineryRepairs),
+                nameof(BuildingRepairs),
+                nameof(CustomWork),
+                nameof(Labour),
+                nameof(Utilities),
+                nameof(OperatingInterest),
+            };
+
+            var props = GetType().GetProperties().Where(propInfo => variableProperties.Contains(propInfo.Name));
             var numbers = props.Select(prop => (double)prop.GetValue(this));
             var sum = numbers.Sum();
             this.TotalVariableCostPerUnit = sum;

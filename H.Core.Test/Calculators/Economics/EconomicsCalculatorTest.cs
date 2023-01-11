@@ -92,28 +92,20 @@ namespace H.Core.Test.Calculators.Economics
         [TestMethod]
         public void ExportEconDataTest()
         {
-            _mockFieldResultsService.Setup(service => service.CalculateResultsForFieldComponent(It.IsAny<Farm>())).Returns(new List<FieldComponentEmissionResults>()
-            {
-                new FieldComponentEmissionResults()
-                {
-                    FieldSystemComponent = new FieldSystemComponent()
-                    {
-                        CropViewItems = new ObservableCollection<CropViewItem>()
-                        {
-                            new CropViewItem()
-                            {
-                                CropType = CropType.Barley,
-                                CropEconomicData = new CropEconomicData(),
-                            }
-                        }
-                    },
+            var fieldSystemComponent = new FieldSystemComponent();
 
-                    HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>()
-                    {
-                        new EstimatesOfProductionResultsViewItem(),
-                    }
-                }
+            var farmEmissionResults = new FarmEmissionResults();
+            farmEmissionResults.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
+            farmEmissionResults.FinalFieldResultViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                CropEconomicData = new CropEconomicData(),
+                FieldSystemComponentGuid = fieldSystemComponent.Guid,
             });
+
+            farmEmissionResults.Farm = _barleyFarm;
+
+            _barleyFarm.Components.Add(fieldSystemComponent);
 
             #region Barley
             var barleyField = new FieldSystemComponent();
@@ -135,82 +127,13 @@ namespace H.Core.Test.Calculators.Economics
             applicationData.DisplayUnitStrings = new DisplayUnitStrings();
             applicationData.DisplayUnitStrings.SetStrings(MeasurementSystemType.Metric);
 
+            
+
             var metricPath = Path.Combine(path, barleyMetricFile);
-            _calculator.ExportEconomicsDataToFile(_barleyFarm, metricPath, true, applicationData);
+            _calculator.ExportEconomicsDataToFile(_barleyFarm, metricPath, true, applicationData, farmEmissionResults);
             var metricLines = File.ReadLines(metricPath).ToList();
             //this should be 4: 1 line for the header, 1 line for the data row, 1 line empty, 1 line for the total revenue
             Assert.AreEqual(4, metricLines.Count);
-        }
-
-        [TestMethod]
-        public void CalculateCropResultsTest()
-        {
-            var field1 = new FieldSystemComponent { Name = "Field #1", FieldArea = 100 };
-            var cropViewItem = new CropViewItem() { CropType = CropType.Barley, };
-
-
-            var field2 = new FieldSystemComponent { Name = "Field #2", FieldArea = 100 };
-            var cropViewItem2 = new CropViewItem() { CropType = CropType.Barley, };
-
-            var econData = _econProvider.Get(CropType.Barley, SoilFunctionalCategory.Brown, Province.Alberta);
-
-            var noEconDataFarm = new Farm() { Name = "No Econ Farm", MeasurementSystemType = MeasurementSystemType.Metric };
-            var noEconField = new FieldSystemComponent() { Name = "No econ field", FieldArea = 1 };
-            var noEconViewItem = new CropViewItem() { CropType = CropType.Barley };
-
-
-            cropViewItem.CropEconomicData = econData;
-            cropViewItem2.CropEconomicData = econData;
-
-            //for old farms that don't have econ data
-            noEconViewItem.CropEconomicData = null;
-
-            field1.CropViewItems.Add(cropViewItem);
-            field2.CropViewItems.Add(cropViewItem2);
-            noEconField.CropViewItems.Add(noEconViewItem);
-
-            _barleyFarm.Components.Add(field1);
-            _barleyFarm.Components.Add(field2);
-
-            noEconDataFarm.Components.Add(noEconField);
-
-            var fieldComponentEmissionResults = new List<FieldComponentEmissionResults>()
-            {
-                new FieldComponentEmissionResults()
-                {
-                    FieldSystemComponent = field1,
-
-                    HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>()
-                    {
-                        new EstimatesOfProductionResultsViewItem(),
-                    },
-                },
-            };
-
-            var noEconFieldComponentEmissionResults = new List<FieldComponentEmissionResults>()
-            {
-                new FieldComponentEmissionResults()
-                {
-                    FieldSystemComponent = noEconField,
-
-                    HarvestViewItems = new ObservableCollection<EstimatesOfProductionResultsViewItem>()
-                    {
-                        new EstimatesOfProductionResultsViewItem(),
-                    },
-                },
-            };
-
-
-            _mockFieldResultsService.Setup(service => service.CalculateResultsForFieldComponent(It.IsAny<Farm>())).Returns(fieldComponentEmissionResults);
-
-            var result = _calculator.CalculateCropResults(_mockFieldResultsService.Object, _barleyFarm);
-
-            _mockFieldResultsService.Setup(service => service.CalculateResultsForFieldComponent(It.IsAny<Farm>())).Returns(noEconFieldComponentEmissionResults);
-            //old farms with no econ data should have any info
-            var noEconResult = _calculator.CalculateCropResults(_mockFieldResultsService.Object, noEconDataFarm);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(0, noEconResult.Count);
         }
 
         [TestMethod]

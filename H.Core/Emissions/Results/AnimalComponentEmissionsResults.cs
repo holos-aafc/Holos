@@ -366,24 +366,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Total CO2 emissions from manure spreading from all animal groups in the component over all months
-        /// </summary>
-        public double TotalCarbonDioxideEmissionsFromManureApplication
-        {
-            get
-            {
-                var result = 0d;
-
-                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
-                {
-                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(emissionResults => emissionResults.MonthlyCarbonDioxideFromManureSpreading);
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
         /// Total CO2 emissions from all animal groups in the component over all months. Note: for animals, the total CO2 is equal to the total energy CO2
         ///
         /// (kg CO2)
@@ -575,7 +557,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg N)
         /// </summary>
-        public double TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication
+        public double TotalAvailableManureNitrogenAvailableForLandApplication
         {
             get
             {
@@ -661,6 +643,86 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.6.2-8
+        /// 
+        /// (kg NH3-N)
+        /// </summary>
+        public double TotalAmmoniacalNitrogenFromLandAppliedManureForComponent
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalAmmoniacalNitrogenFromLandAppliedManure);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Equation 4.6.2-9
+        /// 
+        /// (kg NH3)
+        /// </summary>
+        public double TotalAmmoniaFromLandAppliedManureForComponent
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalAmmoniaFromLandAppliedManure);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Equation 4.6.4-2
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalN2ONLeachingEmissionsFromLandAppliedManureForComponent
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalMonthlyLeachingEmissionsFromLandAppliedManure);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Equation 4.6.4-3
+        /// 
+        /// (kg N2O)
+        /// </summary>
+        public double TotalN2OLeachingEmissionsFromLandAppliedManureForComponent
+        {
+            get
+            {
+                var result = 0d;
+
+                foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalMonthlyN2OLeachingEmissionsFromLandAppliedManureFromLandAppliedManure);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// The farm which created the emissions.
         /// </summary>
         public Farm Farm { get; set; }
@@ -677,7 +739,22 @@ namespace H.Core.Emissions.Results
 
         #endregion
 
-        #region Methods        
+        #region Methods
+
+        public List<GroupEmissionsByDay> GetDailyEmissions()
+        {
+            var result = new List<GroupEmissionsByDay>();
+
+            foreach (var emissionResultsForAnimalComponent in EmissionResultsForAllAnimalGroupsInComponent)
+            {
+                foreach (var groupEmissionsByMonth in emissionResultsForAnimalComponent.GroupEmissionsByMonths)
+                {
+                    result.AddRange(groupEmissionsByMonth.DailyEmissions);
+                }
+            }
+
+            return result;
+        }
 
         #endregion
     }

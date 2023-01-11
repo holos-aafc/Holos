@@ -26,6 +26,7 @@ namespace H.Core.Services.LandManagement
 
             viewItem.NitrogenFixation = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation;
             viewItem.CarbonConcentration = defaults.CarbonConcentration;
+            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
 
             this.AssignDefaultBiomassCoefficients(viewItem, farm);
             this.AssignDefaultNitrogenContentValues(viewItem, farm);
@@ -135,17 +136,6 @@ namespace H.Core.Services.LandManagement
             mapper.Map(cropDefaults, viewItem);
         }
 
-        /// <summary>
-        /// Assigns percentage of product returned to soil, etc. values to a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        public void AssignDefaultPercentageReturns(List<CropViewItem> viewItems, Defaults defaults)
-        {
-            foreach (var cropViewItem in viewItems)
-            {
-                this.AssignDefaultPercentageReturns(cropViewItem, defaults);
-            }
-        }
-
         public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
         {
             var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
@@ -201,9 +191,16 @@ namespace H.Core.Services.LandManagement
                 viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
             }
 
+            if (viewItem.CropType.IsCoverCrop())
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
+                viewItem.PercentageOfStrawReturnedToSoil = 100;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
+            }
+
             if (viewItem.HarvestMethod == HarvestMethods.Silage || viewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 35;
+                viewItem.PercentageOfProductYieldReturnedToSoil = 2;
                 viewItem.PercentageOfStrawReturnedToSoil = 0;
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
@@ -211,13 +208,6 @@ namespace H.Core.Services.LandManagement
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 100;
                 viewItem.PercentageOfStrawReturnedToSoil = 100;
-            }
-
-            if (viewItem.CropType.IsCoverCrop())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 100;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
         }
 
@@ -298,7 +288,6 @@ namespace H.Core.Services.LandManagement
             {
                 viewItem.Yield = smallAreaYield.Yield;
                 viewItem.CalculateDryYield();
-
             }
             else
             {
@@ -604,7 +593,7 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultLigninContent(CropViewItem cropViewItem, Farm farm)
         {
-            Providers.Carbon.Table_10_Relative_Biomass_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
+            Providers.Carbon.Table_7_Relative_Biomass_Information_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
             
             if (table10RelativeBiomassData != null)
             {
@@ -614,7 +603,6 @@ namespace H.Core.Services.LandManagement
             {
                 cropViewItem.LigninContent = 0.0;
             }
-
         }
 
         /// <summary>
@@ -642,25 +630,26 @@ namespace H.Core.Services.LandManagement
             // We specifically find the PlantCarbonInAgriculturalProduct of the grain crop as that is needed in the yield calculation.
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmSoilCarbonCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem:null, currentYearViewItem:grainCropViewItem, farm:farm);
 
-
             // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.Yield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem:silageCropViewItem);
-            silageCropViewItem.CalculateDryYield();
+            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem:silageCropViewItem);
+            silageCropViewItem.CalculateWetWeightYield();
         }
 
         /// <summary>
-        /// Equation 2.2.1-60
+        /// Equation 2.1.2-13
+        /// 
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
         /// <param name="silageCropViewItem">The <see cref="CropViewItem"/> for the silage crop.</param>
-        /// <returns></returns>
+        /// <returns>The estimated yield (dry matter) for a silage crop</returns>
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
         {
-            var yield = (((grainCropViewItem.PlantCarbonInAgriculturalProduct + (grainCropViewItem.PlantCarbonInAgriculturalProduct * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct))) *
-                          silageCropViewItem.PercentageOfProductYieldReturnedToSoil / 100) / silageCropViewItem.CarbonConcentration) / silageCropViewItem.MoistureContentOfCrop;
+            var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
+            var term2 = term1 * (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil/100.0));
+            var result = term2 * (1 - grainCropViewItem.MoistureContentOfCrop);
 
-            return yield;
+            return result;
         }
     }
 }

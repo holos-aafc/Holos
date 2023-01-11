@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows.Navigation;
 using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -18,8 +20,11 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Prism.Events;
@@ -30,15 +35,18 @@ namespace H.Core.Services
     {
         #region Fields
 
+        private ManureService _manureService = new ManureService();
+
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
 
-        private readonly IFieldResultsService _fieldResultsService;
+        private readonly FieldResultsService _fieldResultsService;
         private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
+        private readonly ADCalculator _adCalculator = new ADCalculator();
 
         private readonly IDietProvider _dietProvider = new DietProvider();
-        private readonly Table_9_ManureTypes_Default_Composition_Provider _defaultManureCompositionProvider = new Table_9_ManureTypes_Default_Composition_Provider();
-        private readonly Table_33_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_33_Default_Bedding_Material_Composition_Provider();
+        private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
+        private readonly Table_30_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
 
         private readonly IMapper _farmMapper;
         private readonly IMapper _defaultsMapper;
@@ -49,7 +57,6 @@ namespace H.Core.Services
         private readonly IMapper _climateDataMapper;
         private readonly IMapper _geographicDataMapper;
 
-        private readonly Dictionary<Farm, FarmEmissionResults> _farmEmissionResultsCache = new Dictionary<Farm, FarmEmissionResults>();
         private readonly IEventAggregator _eventAggregator;
 
         private readonly EconomicsCalculator _economicsCalculator;
@@ -57,7 +64,7 @@ namespace H.Core.Services
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService)
+        public FarmResultsService(IEventAggregator eventAggregator, FieldResultsService fieldResultsService)
         {
             if (fieldResultsService != null)
             {
@@ -78,24 +85,41 @@ namespace H.Core.Services
                 throw new ArgumentNullException(nameof(eventAggregator));
             }
 
+            #region Farm Mapping
+
             var farmMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<Farm, Farm>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore())
-                 .ForMember(y => y.Defaults, z => z.Ignore())
-                 .ForMember(y => y.StageStates, z => z.Ignore())
-                 .ForMember(y => y.ClimateData, z => z.Ignore())
-                 .ForMember(y => y.GeographicData, z => z.Ignore())
-                 .ForMember(y => y.Components, z => z.Ignore());
+                    .ForMember(y => y.Name, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore())
+                    .ForMember(y => y.Defaults, z => z.Ignore())
+                    .ForMember(y => y.StageStates, z => z.Ignore())
+                    .ForMember(y => y.ClimateData, z => z.Ignore())
+                    .ForMember(y => y.GeographicData, z => z.Ignore())
+                    .ForMember(y => y.Components, z => z.Ignore());
 
+                x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
+                    Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();
+                x.CreateMap<Table_30_Default_Bedding_Material_Composition_Data,
+                    Table_30_Default_Bedding_Material_Composition_Data>();
+                x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
+
+                x.CreateMap<Diet, Diet>();
             });
 
             _farmMapper = farmMapperConfiguration.CreateMapper();
 
+            #endregion
+
+            #region Defaults
+
             var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
 
             _defaultsMapper = defaultMapperConfiguration.CreateMapper();
+
+            #endregion
+
+            #region Details Screen
 
             var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
                 {
@@ -104,19 +128,27 @@ namespace H.Core.Services
 
             _detailsScreenCropViewItemMapper = detailsScreenCropViewItemMapperConfiguration.CreateMapper();
 
+            #endregion
+
             #region Climate Mappers
 
             var climateDataMapper = new MapperConfiguration(x =>
             {
+                x.CreateMap<PrecipitationData, PrecipitationData>();
+                x.CreateMap<TemperatureData, TemperatureData>();
+                x.CreateMap<EvapotranspirationData, EvapotranspirationData>();
                 x.CreateMap<ClimateData, ClimateData>()
-                            .ForMember(y => y.DailyClimateData, z => z.Ignore());
+                    .ForMember(y => y.DailyClimateData, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
             });
+
             _climateDataMapper = climateDataMapper.CreateMapper();
 
             var dailyclimateDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<DailyClimateData, DailyClimateData>();
             });
+
             _dailyClimateDataMapper = dailyclimateDataMapper.CreateMapper();
 
             #endregion
@@ -126,22 +158,26 @@ namespace H.Core.Services
             var geographicDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<GeographicData, GeographicData>()
-                            .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
-                            .ForMember(y => y.DefaultSoilData, z => z.Ignore())
-                            .ForMember(y => y.CustomYieldData, z => z.Ignore());
+                    .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
+                    .ForMember(y => y.DefaultSoilData, z => z.Ignore())
+                    .ForMember(y => y.CustomYieldData, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
             });
+
             _geographicDataMapper = geographicDataMapper.CreateMapper();
 
             var soilDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
             });
+
             _soilDataMapper = soilDataMapper.CreateMapper();
 
             var customYieldMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<CustomUserYieldData, CustomUserYieldData>();
             });
+
             _customYieldDataMapper = customYieldMapper.CreateMapper();
 
             #endregion
@@ -171,19 +207,6 @@ namespace H.Core.Services
                 return farmResults;
             }
 
-            if (farm.ResultsCalculated)
-            {
-                if (_farmEmissionResultsCache.ContainsKey(farm))
-                {
-                    Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results already calculated for farm '{farm.Name}'. Returning cached results");
-
-                    // Return cached results is calculations have already been made and no properties on any of the farm's components have changed
-                    return _farmEmissionResultsCache[farm];
-                }
-
-                // Farm has results calculated flag set to true but no cached results (because system just started). Recalculate results now
-            }
-
             Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: calculating results for farm: '{farm.Name}'");
 
             if (farm.Components.Any() == false)
@@ -191,36 +214,43 @@ namespace H.Core.Services
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
 
-            // Components
-            farmResults.FieldComponentEmissionResults.AddRange(_fieldResultsService.CalculateResultsForFieldComponent(farm));
-            farmResults.AnimalComponentEmissionsResults.AddRange(_animalResultsService.GetAnimalResults(farm));
+            // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
+            farm.ResetAnimalResults();
 
-            // N20 emissions
-            farmResults.MineralN2OEmissionsResults = _fieldResultsService.CalculateMineralN2OEmissionsForFarm(farmResults);
-            farmResults.ManureN2OEmissionResults = _fieldResultsService.CalculateManureN2OEmissionsForFarm(farmResults);
+            var animalResults = _animalResultsService.GetAnimalResults(farm);
 
-            // Field results
-            var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
-            farmResults.FinalFieldResultViewItems.AddRange(finalFieldResults);
+            farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
+            _fieldResultsService.AnimalResults = animalResults;
+
+            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
+
+            farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
             // Manure calculations - must be calculated after both field and animal results have been calculated.
-            this.UpdateStorageTanks(farmResults);
-
-            // Energy
-            farmResults.FarmEnergyResults.EnergyCarbonDioxideFromManureApplication = farmResults.AnimalComponentEmissionsResults.TotalCarbonDioxideEmissionsFromManureSpreading();
-            farmResults.FarmEnergyResults.TotalOnFarmCroppingEnergyEmissionsForFarm = farmResults.FieldComponentEmissionResults.TotalOnFarmCroppingEnergyEmissions();
+            _manureService.CalculateResults(farm);
 
             // Economics
-            farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(_fieldResultsService, farm));
+            farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);
-
-            _farmEmissionResultsCache[farm] = farmResults;
 
             _eventAggregator.GetEvent<FarmResultsCalculatedEvent>().Publish(new FarmResultsCalculatedEventArgs() { FarmEmissionResults = farmResults });
 
             Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results for farm: '{farm.Name}' calculated. {farmResults.ToString()}");
 
             return farmResults;
+        }
+
+        public List<CropViewItem> CalculateFieldResults(Farm farm)
+        {
+            // Field results
+            var finalFieldResults = _fieldResultsService.CalculateFinalResults(farm);
+
+            return finalFieldResults;
+        }
+
+        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        {
+            return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
         }
 
         /// <summary>
@@ -345,149 +375,6 @@ namespace H.Core.Services
             #endregion
 
             return replicatedFarm;
-        }       
-
-        /// <summary>
-        /// Updates the amounts of manure (and associated information) whenever a user adds, removes, or edits a manure application.
-        /// </summary>
-        /// <param name="farmEmissionResults"></param>
-        public void UpdateManureTanksFromUserDefinedManureApplications(FarmEmissionResults farmEmissionResults)
-        {
-            var farm = farmEmissionResults.Farm;
-
-            // Go over each field on the farm and subtract any field application made with the manure
-            foreach (var fieldComponent in farm.FieldSystemComponents)
-            {
-                foreach (var viewItem in fieldComponent.CropViewItems)
-                {
-                    foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-                    {
-                        // If manure was imported, don't update local manure storage tanks
-                        if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported || manureApplicationViewItem.AnimalType == AnimalType.NotSelected)
-                        {
-                            continue;
-                        }
-
-                        // Get the correct manure tank based on the animal type of manure that was applied
-                        var tank = farmEmissionResults.GetManureTankByAnimalType(manureApplicationViewItem.AnimalType, viewItem.Year);
-
-                        // Get the amount of nitrogen applied
-                        var amountOfNitrogenAppliedPerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
-
-                        var totalNitrogenApplied = amountOfNitrogenAppliedPerHectare * viewItem.Area;
-
-                        // Sum the amount that was applied
-                        tank.NitrogenSumOfAllManureApplicationsMade += totalNitrogenApplied;
-
-                        // Get the amount/volume of manure applied
-                        var amountOfManureApplied = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
-
-                        var totalVolumeApplied = amountOfManureApplied * viewItem.Area;
-
-                        // Sum the amount that was applied
-                        tank.VolumeSumOfAllManureApplicationsMade = totalVolumeApplied;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Updates manure storage tank accounting based on amount of manure applied during field application(s) and grazing animals.
-        /// </summary>
-        public void UpdateStorageTanks(FarmEmissionResults farmEmissionResults)
-        {
-            this.InitializeAllManureTanks(farmEmissionResults);            
-            this.UpdateManureTanksFromUserDefinedManureApplications(farmEmissionResults);            
-        }
-
-        private void InitializeAllManureTanks(FarmEmissionResults farmEmissionResults)
-        {
-            var farm = farmEmissionResults.Farm;
-
-            var animalComponentCategories = new List<ComponentCategory>()
-            {
-                ComponentCategory.BeefProduction,
-                ComponentCategory.Dairy,
-                ComponentCategory.Swine,
-                ComponentCategory.Sheep,
-                ComponentCategory.Poultry,
-                ComponentCategory.OtherLivestock
-            };
-
-            /*
-             * Set the state of the tanks as if there had been no field applications made
-             */
-
-            var years = new List<int>();
-            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
-            {
-                foreach (var viewItems in farmFieldSystemComponent.CropViewItems)
-                {
-                    years.Add(viewItems.Year);
-                }
-            }
-
-            var distinctYears = years.Distinct();
-            foreach (var distinctYear in distinctYears)
-            {
-                foreach (var componentCategory in animalComponentCategories)
-                {
-                    // Get the animal component results for a particular category of animal components
-                    var animalComponentResultsByCategory = farmEmissionResults.AnimalComponentEmissionsResults.Where(x => x.Component.ComponentCategory == componentCategory).ToList();
-
-                    // Get the manure tank associated with the animal category
-                    var tank = farmEmissionResults.GetManureTankByAnimalType(componentCategory.GetAnimalTypeFromComponentCategory(), distinctYear);
-
-                    // Set the state of the tank as if no manure applications had been made
-                    this.SetStartingStateOfManureTank(
-                        manureTank: tank,
-                        animalComponentResults: animalComponentResultsByCategory);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set the state of the tanks as if there had been no field applications made.
-        /// </summary>
-        public void SetStartingStateOfManureTank(
-            ManureTank manureTank,
-            IList<AnimalComponentEmissionsResults> animalComponentResults)
-        {
-            manureTank.NitrogenSumOfAllManureApplicationsMade = 0;
-
-            var manureAvailableForLandApplication = 0.0;
-            var totalOrganicNitrogenAvailableForLandApplication = 0.0;
-            var totalTanAvailableForLandApplication = 0.0;
-            var totalAmountOfCarbonInStoredManure = 0.0;
-            var totalAvailableManureNitrogenInStoredManureAvailableForLandApplication = 0.0;
-            var yearOfTank = manureTank.Year;
-
-            // Don't include manure that is on pasture in the total amounts available
-            foreach (var componentResults in animalComponentResults)
-            {
-                foreach (var allGroupResults in componentResults.EmissionResultsForAllAnimalGroupsInComponent)
-                {
-                    foreach (var groupEmissionsByMonth in allGroupResults.GroupEmissionsByMonths.Where(x => x.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType != HousingType.Pasture && x.MonthsAndDaysData.Year == yearOfTank))
-                    {
-                        totalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyOrganicNitrogenAvailableForLandApplication;
-                        totalTanAvailableForLandApplication += groupEmissionsByMonth.MonthlyTanAvailableForLandApplication;
-                        totalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManure;
-                        totalAvailableManureNitrogenInStoredManureAvailableForLandApplication += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
-                        manureAvailableForLandApplication += groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication * 1000;
-                    }
-                }
-            }
-
-            manureTank.TotalOrganicNitrogenAvailableForLandApplication = totalOrganicNitrogenAvailableForLandApplication;
-            manureTank.TotalTanAvailableForLandApplication = totalTanAvailableForLandApplication;
-            manureTank.TotalAmountOfCarbonInStoredManure = totalAmountOfCarbonInStoredManure;
-
-            // Before considering any manure applications, these values are the same
-            manureTank.TotalAvailableManureNitrogenAvailableForLandApplication = totalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
-            manureTank.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = totalAvailableManureNitrogenInStoredManureAvailableForLandApplication;
-
-            manureTank.VolumeOfManureAvailableForLandApplication = manureAvailableForLandApplication;
-            manureTank.VolumeRemainingInTank = manureAvailableForLandApplication;
         }
 
         #endregion

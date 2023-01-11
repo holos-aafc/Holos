@@ -116,7 +116,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// Volatilization fraction
         ///
-        /// Some animal types do not have a methodology for calculating this fraction and so default values are used in those situations (e.g. other animals category)
+        /// Some animal types do not have a methodology for calculating this fraction and so default values are used in those situations (e.g. sheep, swine, other animals category)
         ///
         /// [kg NH3-N (kg N)^-1]
         /// </summary>

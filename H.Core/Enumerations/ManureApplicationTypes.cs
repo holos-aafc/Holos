@@ -20,9 +20,15 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumOptionC", typeof(Resources))]
         OptionC,
 
+        /// <summary>
+        /// Also known as 'Solid spread (intensive tillage)'
+        /// </summary>
         [LocalizedDescription("EnumTilledLandSolidSpread", typeof(Resources))]
         TilledLandSolidSpread,
 
+        /// <summary>
+        /// Also known as 'Solid spread (no tillage or reduced tillage)'
+        /// </summary>
         [LocalizedDescription("EnumUntilledLandSolidSpread", typeof(Resources))]
         UntilledLandSolidSpread,
 

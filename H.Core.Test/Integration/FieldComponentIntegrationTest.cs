@@ -7,6 +7,7 @@ using System.Linq;
 using H.CLI.UserInput;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals.Sheep;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers;
@@ -47,7 +48,7 @@ namespace H.Core.Test.Integration
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void CarbonModellingIntegrationTest()
         {
             /*
              * Note: The Visual Studio output window will display logging information from the various method calls and the associated successes/failures of those calls
@@ -57,6 +58,13 @@ namespace H.Core.Test.Integration
             var farm = new Farm();
 
             farm.Name = "My Test Farm";
+
+            // Choose the carbon model
+            farm.Defaults = new Defaults()
+            {
+                CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2,
+                //CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+            };
 
             // Add location information for the farm
             farm.Province = Province.Alberta;

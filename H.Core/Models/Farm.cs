@@ -22,6 +22,7 @@ using System.Security.Permissions;
 using System.Windows.Navigation;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Models.Animals;
+using H.Core.Converters;
 
 #endregion
 
@@ -88,10 +89,12 @@ namespace H.Core.Models
         private MeasurementSystemType _measurementSystemType;
 
         private ChosenClimateAcquisition _climateAcquisition;
-        private Table_18_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
+        private Table_15_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
         private YieldAssignmentMethod _yieldAssignmentMethod;        
 
         private List<TimeFrame> _availableTimeFrame;
+
+        private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
 
         #endregion
 
@@ -104,7 +107,7 @@ namespace H.Core.Models
             this.Defaults = new Defaults();
             this.Diets = new ObservableCollection<Diet>();
             this.DefaultManureCompositionData = new ObservableCollection<DefaultManureCompositionData>();
-            this.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_33_Default_Bedding_Material_Composition_Data>();
+            this.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>();
             this.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
             this.CarbonModellingEquilibriumYear = CoreConstants.IcbmEquilibriumYear;
             this.CarbonModellingEquilibriumStartDate = new DateTime(this.CarbonModellingEquilibriumYear, 1, 1);
@@ -112,7 +115,8 @@ namespace H.Core.Models
 
             this.ShowAvailableComponentsList = true;
             this.ShowSimplifiedResults = false;
-            this.IsBasicMode = true;
+            this.IsBasicMode = false;
+            this.EnableCarbonModelling = true;
 
             this.StageStates = new List<StageStateBase>();
             this.Components.CollectionChanged += ComponentsOnCollectionChanged;
@@ -121,7 +125,7 @@ namespace H.Core.Models
 
             this.ClimateData = new ClimateData();
             this.GeographicData = new GeographicData();
-            this.AnnualSoilN2OBreakdown = new Table_18_Default_Soil_N2O_Emission_BreakDown_Provider();
+            this.AnnualSoilN2OBreakdown = new Table_15_Default_Soil_N2O_Emission_BreakDown_Provider();
         }
 
         /// <summary>
@@ -226,7 +230,7 @@ namespace H.Core.Models
             set;
         }
 
-        public ObservableCollection<Table_33_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
+        public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
 
         public int PolygonId
         {
@@ -256,7 +260,7 @@ namespace H.Core.Models
         /// <summary>
         /// The default allocation of total N2O emissions within the year
         /// </summary>
-        public Table_18_Default_Soil_N2O_Emission_BreakDown_Provider AnnualSoilN2OBreakdown
+        public Table_15_Default_Soil_N2O_Emission_BreakDown_Provider AnnualSoilN2OBreakdown
         {
             get
             {
@@ -348,7 +352,17 @@ namespace H.Core.Models
             set => SetProperty(ref _showAdditionalInformationInADView, value);
         }
 
-        public IEnumerable<ComponentBase> AnimalComponents
+        /// <summary>
+        /// Checks if hardiness zone data exists for the selected farm. The shelterbelt component is
+        /// only available if we have hardiness zone data available for the selected location.
+        /// Returns True if data is available.
+        /// Return False otherwise.
+        /// </summary>
+        public bool IsShelterbeltComponentAvailable
+        {
+            get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
+        }
+        public IEnumerable<AnimalComponentBase> AnimalComponents
         {
             get
             {
@@ -356,7 +370,7 @@ namespace H.Core.Models
                                            .Concat(this.SwineComponents)
                                            .Concat(this.SheepComponents)
                                            .Concat(this.PoultryComponents)
-                                           .Concat(this.OtherLivestockComponents);
+                                           .Concat(this.OtherLivestockComponents).Cast<AnimalComponentBase>();
             }
         }
 
@@ -668,6 +682,48 @@ namespace H.Core.Models
             }
         }
 
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                result.AddRange(fieldSystemComponent.GetManureApplicationViewItems(animalType));
+            }
+
+            return result;
+        }
+
+        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsAndAssociatedCropByAnimalType(AnimalType animalType)
+        {
+            var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
+
+            foreach (var viewItem in this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems)
+            {
+                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+                {
+                    if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
+                    {
+                        result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(viewItem, manureApplicationViewItem));
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public List<ManureApplicationViewItem> GetManureApplicationViewItems(List<AnimalType> animalTypes)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var animalType in animalTypes)
+            {
+                result.AddRange(this.GetManureApplicationViewItems(animalType));
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Returns the total volume of all manure applications made on a particular date using a particular type of manure (beef, dairy, etc.)
         /// </summary>
@@ -684,7 +740,7 @@ namespace H.Core.Models
 
                 foreach (var manureApplicationViewItem in manureApplications)
                 {
-                    // get volume multiplied by field area
+                    // Get volume multiplied by field area
                     var amount = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
                     var totalVolumeOfApplication = amount * viewItem.Area;
 
@@ -729,11 +785,11 @@ namespace H.Core.Models
         /// When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish. This data is therefore held here in the farm object since it is specific
         /// to this farm instance and lookups should be made here and not from the provider class since this method will persist changes.
         /// </summary>
-        public Table_33_Default_Bedding_Material_Composition_Data GetBeddingMaterialComposition(
+        public Table_30_Default_Bedding_Material_Composition_Data GetBeddingMaterialComposition(
             BeddingMaterialType beddingMaterialType,
             AnimalType animalType)
         {
-            var result = new Table_33_Default_Bedding_Material_Composition_Data();
+            var result = new Table_30_Default_Bedding_Material_Composition_Data();
 
             AnimalType animalLookupType;
             if (animalType.IsBeefCattleType())
@@ -771,7 +827,7 @@ namespace H.Core.Models
             {
                 Trace.TraceError($"{nameof(Farm)}.{nameof(GetBeddingMaterialComposition)}: unable to return bedding material data for {animalType.GetDescription()}, and {beddingMaterialType.GetHashCode()}. Returning default value of 1.");
 
-                return new Table_33_Default_Bedding_Material_Composition_Data();
+                return new Table_30_Default_Bedding_Material_Composition_Data();
             }
         }
 
@@ -888,8 +944,6 @@ namespace H.Core.Models
             return totalArea;
         }
 
-
-
         /// <summary>
         /// Returns all manure application made on this farm
         /// </summary>
@@ -957,7 +1011,16 @@ namespace H.Core.Models
 
         public Diet GetDietByName(DietType dietType)
         {
-            return this.Diets.FirstOrDefault(x => x.DietType == dietType);
+            var result = this.Diets.FirstOrDefault(x => x.DietType == dietType);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                // Old farms will not have newly added diets - return a catch-all diet in this case
+                return this.Diets.FirstOrDefault(x => x.AnimalType == AnimalType.NotSelected);
+            }
         }
 
         /// <summary>
@@ -981,15 +1044,24 @@ namespace H.Core.Models
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
         }
 
-        /// <summary>
-        /// Sets the <see cref="ComponentBase.ResultsCalculated"/> property to false for all components in the <see cref="Farm"/>.
-        /// </summary>
-        public void ResetResultsCalculatedState()
+        public List<CropViewItem> GetCropDetailViewItemsByYear(int year)
         {
-            foreach (var component in this.Components)
-            {
-                component.ResultsCalculated = false;
-            }
+            return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+        }
+
+        /// <summary>
+        /// Return a list 
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetListOfActiveYears()
+        {
+            var result = new List<int>();
+
+            var stageState = this.GetFieldSystemDetailsStageState();
+            var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct().ToList();
+            result.AddRange(distinctYears);
+
+            return result;
         }
 
         #endregion

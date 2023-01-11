@@ -16,10 +16,10 @@ namespace H.Core.Providers.Animals
                 return new List<ManureStateType>()
                 {
                     ManureStateType.Pasture,
+                    ManureStateType.DeepBedding,
                     ManureStateType.SolidStorage,
                     ManureStateType.CompostPassive,
                     ManureStateType.CompostIntensive,
-                    ManureStateType.DeepBedding,
                     ManureStateType.AnaerobicDigester,
                 };
             }
@@ -28,15 +28,30 @@ namespace H.Core.Providers.Animals
             {
                 return new List<ManureStateType>()
                 {
+                    /*
+                     * Solid
+                     */
+
                     ManureStateType.Pasture,
+                    ManureStateType.DeepBedding,
                     ManureStateType.SolidStorage,
-                    ManureStateType.DailySpread,
                     ManureStateType.CompostIntensive,
                     ManureStateType.CompostPassive,
-                    ManureStateType.DeepBedding,
+
+                    /*
+                     * Liquid
+                     */
+
+                    ManureStateType.DailySpread,
                     ManureStateType.LiquidWithNaturalCrust,
                     ManureStateType.LiquidNoCrust,
                     ManureStateType.LiquidWithSolidCover,
+                    ManureStateType.DeepPit,
+
+                    /*
+                     * Digestate
+                     */
+
                     ManureStateType.AnaerobicDigester,
                 };
             }
@@ -45,12 +60,17 @@ namespace H.Core.Providers.Animals
             {
                 return new List<ManureStateType>()
                 {
-                    ManureStateType.SolidStorage,
+                    ManureStateType.CompostedInVessel,
+
+                    /*
+                     * Liquid
+                     */
+
                     ManureStateType.LiquidWithNaturalCrust,
                     ManureStateType.LiquidNoCrust,
                     ManureStateType.LiquidWithSolidCover,
-                    ManureStateType.AnaerobicDigester,
                     ManureStateType.DeepPit,
+                    ManureStateType.AnaerobicDigester,
                 };
             }
 
@@ -60,10 +80,6 @@ namespace H.Core.Providers.Animals
                 {
                     ManureStateType.Pasture,
                     ManureStateType.SolidStorage,
-                    ManureStateType.CompostIntensive,
-                    ManureStateType.CompostPassive,
-                    ManureStateType.DeepBedding,
-                    ManureStateType.AnaerobicDigester,
                 };
             }
 
@@ -71,8 +87,7 @@ namespace H.Core.Providers.Animals
             {
                 return new List<ManureStateType>()
                 {
-                    ManureStateType.SolidStorage,
-                    ManureStateType.AnaerobicDigester,
+                    ManureStateType.SolidStorageWithOrWithoutLitter,
                 };
             }
 

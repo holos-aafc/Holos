@@ -28,7 +28,7 @@ namespace H.CLI.Results
         private readonly Storage _storage;
         public List<KeyValuePair<string, List<AnimalComponentEmissionsResults>>> _animalEmissionResultsForAllFarms { get; set; } = new List<KeyValuePair<string, List<AnimalComponentEmissionsResults>>>();
         private readonly EnergyCarbonDioxideEmissionsCalculator _energyCalculator;
-        private readonly Table_68_69_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator;
+        private readonly Table_65_66_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator;
         private readonly SummationsCalculator _summationsCalculator = new SummationsCalculator();
         private readonly KeyConverter.KeyConverter _keyConverter = new KeyConverter.KeyConverter();
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
@@ -58,7 +58,7 @@ namespace H.CLI.Results
             _storage = storage;
 
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
-            _uncertaintyCalculator = new Table_68_69_Expression_Of_Uncertainty_Calculator();
+            _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();
 
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService);
             _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);
@@ -255,7 +255,7 @@ namespace H.CLI.Results
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, farmEmissionResult.TotalDirectNitrousOxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, farmEmissionResult.TotalIndirectNitrousOxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalEnergyCarbonDioxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
-                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalCarbonDioxideFromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalCO2FromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
 
                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                     {
@@ -287,12 +287,12 @@ namespace H.CLI.Results
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, _farmEmissionResults.TotalDirectNitrousOxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, _farmEmissionResults.TotalIndirectNitrousOxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalEnergyCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
-                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                //stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, _farmEmissionResults.TotalCarbonDioxideForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
 
                 // Output subtotals for this component
                 if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                 {
-                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, _farmEmissionResults.TotalCarbonDioxideEquivalentsForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                    //stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, _farmEmissionResults.TotalCarbonDioxideEquivalentsForAllFarms()), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                 }
                 else
                 {
@@ -489,7 +489,7 @@ namespace H.CLI.Results
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, farmEmissionResult.TotalDirectNitrousOxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, outputType, farmEmissionResult.TotalIndirectNitrousOxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalEnergyCarbonDioxideFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
-                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalCarbonDioxideFromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, outputType, farmEmissionResult.TotalCO2FromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
 
                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                     {

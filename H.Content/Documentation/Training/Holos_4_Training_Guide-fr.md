@@ -23,8 +23,8 @@ Aux fins de cette formation, nous allons créer une ferme avec un système annue
 
 Lancez Holos en double-cliquant sur l’icône Holos qui se trouve sur le bureau. S’il n’y a pas de fermes sauvegardées dans le système, Holos créera une nouvelle ferme et demandera à l’utilisateur un nom de ferme et un commentaire facultatif. S’il y a déjà une ferme enregistrée dans le système, Holos demandera à l’utilisateur d’ouvrir la ferme existante ou de créer une nouvelle ferme.
 
-Entrez « Holos 2022 » comme nom de ferme et « **version de formation** » comme « commentaire ». Assurez-vous de cliquer sur le bouton « **Mode avancé** » pour que d’autres fonctions et fonctionnalités soient disponibles. Cliquez sur « Ok » pour passer à l’étape suivante.
-Assurez-vous de sélectionner « Mesure » comme unité de type de mesure, puis cliquez sur le bouton « Suivant » au bas de l’écran.
+Entrez "**Holos 2022**" comme nom de ferme et "**version de formation**" comme "commentaire". Cliquez sur "OK" pour passer à l'écran suivant
+Assurez-vous de sélectionner « **Métrique** » comme unité de type de mesure, puis cliquez sur le bouton « Suivant » au bas de l’écran.
 
 <br>
 <p align="center">
@@ -91,12 +91,7 @@ La ferme bovine de cet exemple est située entre Winnipeg et Portage la Prairie 
     <em>Figure 5: Polygones de PPC et emplacement de la ferme</em>
 </p>
 
-<p align="center">
-    <img src="../../Images/Training/fr/figure6.gif" alt="Figure 6" width="850"/>
-    <br>
-    <em>Figure 6: Entrer l’ID du polygone</em>
-</p>  
-<br>
+
 
 Une fois l’emplacement de la ferme choisi, les renseignements sur le sol (texture, proportions de sable et d’argile) pour les types de sols trouvés dans cette région sont affichés du côté droit de l’écran. Il est possible que plus d’un type de sol par région soit trouvé et que l’utilisateur choisisse son type de sol dans cette liste ou utilise la sélection par défaut.
 
@@ -104,9 +99,9 @@ Conservez le premier type de sol sélectionné et la « zone de rusticité » pa
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure7.png" alt="Figure 7" width="850"/>
+    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="850"/>
     <br>
-    <em>Figure 7: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
+    <em>Figure 6: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
 </p>  
 <br>
 
@@ -123,9 +118,9 @@ Maintenant que l’emplacement de la ferme a été sélectionné, nous passons �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure8.png" alt="Figure 8" width="850"/>
+    <img src="../../Images/Training/fr/figure7.png" alt="Figure 7" width="850"/>
     <br>
-    <em>Figure 8: L'écran des composants disponibles </em>
+    <em>Figure 7: L'écran des composants disponibles </em>
 </p> 
 <br>
 
@@ -135,16 +130,13 @@ Le modèle est conçu pour définir la gestion des terres avant le bétail. C’
 
 ## Culture et production de foin
 
-*Pour calculer la variation du carbone dans le sol pour les rotations des champs et des cultures, cliquez sur le menu « Paramètres » et sélectionnez l’option « Pluriannuel ».*
-
-
-Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 9). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
+Nous pouvons maintenant ajouter notre première composante à la ferme. Faites glisser une composante « Champ » du côté gauche de l’écran et déposez-la dans la zone « Mes composantes » du côté droit (Figure 8). L’écran se met maintenant à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme « Champ 1 ». À ce stade, nous pouvons maintenant entrer les renseignements sur la production liés à la culture de ce champ.
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure9.gif" alt="Figure 9" width="950"/>
+    <img src="../../Images/Training/fr/figure8.png" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 9: Ajouter un composant à la ferme.</em>
+    <em>Figure 8: Ajouter un composant à la ferme.</em>
 </p> 
 <br>
 
@@ -161,9 +153,9 @@ Entrez un rendement de **3 000 kg/ha** (poids humide),assurez-vous que la « **c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure10.png" alt="Figure 10" width="950"/>
+    <img src="../../Images/Training/fr/figure9.png" alt="Figure 9" width="950"/>
     <br>
-    <em>Figure 10: Composant de champ.</em>
+    <em>Figure 9: Composant de champ.</em>
 </p> 
 <br> 
 
@@ -173,9 +165,9 @@ Entrez un rendement de **3 000 kg/ha** (poids humide),assurez-vous que la « **c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure11.gif" alt="Figure 11" width="950"/>
+    <img src="../../Images/Training/fr/figure10.png" alt="Figure 10" width="950"/>
     <br>
-    <em>Figure 11: Ajouter l’épandage d’un engrais.</em>
+    <em>Figure 10: Ajouter l’épandage d’un engrais.</em>
 </p> 
 <br> 
 
@@ -202,9 +194,9 @@ L’exploitation de naissage (définie plus loin) dépend des pâturages indigè
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure12.png" alt="Figure 12" width="970"/>
+    <img src="../../Images/Training/fr/figure11.png" alt="Figure 11" width="970"/>
     <br>
-    <em>Figure 12: Informations sur les pâturages/prairies .</em>
+    <em>Figure 11: Informations sur les pâturages/prairies .</em>
 </p> 
 <br>
 
@@ -216,7 +208,7 @@ Pour démontrer la composante de rotation des cultures (plutôt que d’utiliser
 
 Lorsqu’on utilise la composante « rotation de cultures », toute séquence de cultures entrée dans cette composante sera appliquée à chaque champ individuel qui fait partie de la configuration de rotation. Cela signifie qu’un champ est ajouté pour chaque phase de rotation et que la rotation se décale de manière à ce que chaque phase de rotation soit présente dans un champ. Étant donné que chaque champ peut avoir une gestion historique différente, des algorithmes de carbone du sol seront appliqués pour chaque champ.
 
-Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 13]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
+Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’orge et de mélange de foin, qui sont cultivés en rotation. Nous devrons établir trois champs où le grain d’orge fait l’objet d’une rotation dans chaque champ tous les deux ans [Figure 12]. Lorsqu’on utilise la composante de rotation des cultures, l’intrant de gestion des cultures d’une culture particulière est répété dans chaque champ de la rotation où le produit végétal est cultivé.
 
 
 Pour configurer la rotation :
@@ -232,9 +224,9 @@ Holos copiera ensuite les renseignements sur la phase et remplira automatiquemen
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure13.png" alt="Figure 13" width="950"/>
+    <img src="../../Images/Training/fr/figure12.png" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 13: Un exemple de rotation de trois cultures.</em>
+    <em>Figure 12: Un exemple de rotation de trois cultures.</em>
 </p> 
 <br>
 
@@ -258,9 +250,9 @@ L’ajout de composantes animales suit exactement l’approche utilisée pour le
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/Training/fr/figure13.png" alt="Figure 13" width="850"/>
     <br>
-    <em>Figure 14 - Composant vache-veau</em>
+    <em>Figure 13 - Composant vache-veau</em>
 </p> 
 <br>
 
@@ -281,7 +273,7 @@ Après le cycle annuel d’alimentation, la ferme bovine avec laquelle nous trav
 
 2. Cliquez sur la période de gestion intitulée « **Alimentation hivernale** » **à l’étape 2** pour activer cette période de gestion.
 
-3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** » [121 jours]. Veuillez noter que le nombre de jours qui s’affiche comprend les dates de début et de fin.
+3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** ».
 
 
 Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration.
@@ -319,9 +311,9 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/Training/fr/figure14.png" alt="Figure 14" width="850"/>
     <br>
-    <em>Figure 15 - Créateur de ration personnalisée</em>
+    <em>Figure 14 - Créateur de ration personnalisée</em>
 </p> 
 <br>
 
@@ -336,7 +328,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 **b) Notre deuxième période de gestion portera sur le broutage en pâturage pendant les mois d’été.**
 
 1. Cliquez sur la période de gestion intitulée « **Pâturage d’été** ».
-2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale (184 jours).
+2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale.
 3. Cliquez sur l’onglet « **Général** » pour confirmer que nous avons 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines à haute énergie** » comme ration par défaut sous l’onglet « **Ration** ».
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le champ (« Prairie indigène ») sur lequel les animaux brouteront à partir de la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Pâturage de masse/continu** » comme type de pâturage. Holos ajustera les apports de carbone des pâturages en fonction du système de pâturage sélectionné.
@@ -346,7 +338,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 **c) Notre troisième période de gestion portera sur le broutage prolongé à l’automne.**
 1. Sélectionnez la période de gestion appelée « **Broutage d’automne prolongé** ».
-2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période (61 jours).
+2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période.
 3. Cliquez sur l’onglet « **Général** » et entrez 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines d’énergie moyenne** » comme ration par défaut.
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le pâturage sur lequel les animaux broutent **(« prairies indigènes »)** dans la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Broutage alterné** » comme type de broutage.
@@ -355,9 +347,9 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/Training/fr/figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 16 - Volet vache-veau - Section vaches</em>
+    <em>Figure 15 - Volet vache-veau - Section vaches</em>
 </p> 
 <br> 
 
@@ -374,9 +366,9 @@ Cliquez sur la ligne « **Taureaux** » dans la section du groupe d’animaux à
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure17.gif" alt="Figure 17" width="950"/>
+    <img src="../../Images/Training/fr/figure16.png" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 17 - Copier la section des vaches </em>
+    <em>Figure 16 - Copier la section des vaches </em>
 </p> 
 <br> 
 
@@ -387,7 +379,7 @@ Les veaux de notre ferme naissent le 1er mars et sont sevrés le 30 septembre à
 
 Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 1** » pour activer le groupe de veaux.
 
-- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 » (61 jours)**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
+- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
 - Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2020** » **au** « **30 septembre 2020** ». Nous renommerons cette période de gestion « **Broutage** ».
 - À l’onglet « **Général** », changez le nombre d’animaux à 110.
 - Les veaux consommeront des « **protéines à haute énergie** ».
@@ -396,9 +388,9 @@ Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/Training/fr/figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 18 - Veaux de boucherie
+    <em>Figure 17 - Veaux de boucherie
  </em>
 </p> 
 <br> 
@@ -419,9 +411,9 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/Training/fr/figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 19 - Élevage de bovins de long engraissement et semi-finis</em>
+    <em>Figure 18 - Élevage de bovins de long engraissement et semi-finis</em>
 </p> 
 <br>
 
@@ -442,9 +434,9 @@ Cliquez sur le groupe « **Bouvillons** » pour l’activer. Les données de ges
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/Training/fr/figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 20 - Exploitation d’un parc de finition</em>
+    <em>Figure 19 - Exploitation d’un parc de finition</em>
 </p> 
 <br>
 
@@ -477,9 +469,9 @@ Nous pouvons également ajouter du foin et du fourrage pour les animaux qui brou
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/Training/fr/figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 21 - Ajout de foin/fourrage supplémentaire pour les animaux au pacage</em>
+    <em>Figure 20 - Ajout de foin/fourrage supplémentaire pour les animaux au pacage</em>
 </p> 
 <br>
 <br>
@@ -526,25 +518,25 @@ Nous supposerons que les champs de rotation de l’orge et du mélange de foin �
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/Training/fr/figure21.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 22 - Écran Calendrier personnalisé </em>
+    <em>Figure 21 - Écran Calendrier personnalisé </em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="650"/>
+    <img src="../../Images/Training/fr/figure22.png" alt="Figure 22" width="650"/>
     <br>
-    <em>Figure 23 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
+    <em>Figure 22 - Définir l’année de début et de fin pour les systèmes de production dans l’écran Calendrier.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="650
+    <img src="../../Images/Training/fr/figure23.png" alt="Figure 23" width="650
     "/>
     <br>
-    <em>Figure 24 - Modification des cultures au cours d’une période historique de rotation</em>
+    <em>Figure 23 - Modification des cultures au cours d’une période historique de rotation</em>
 </p> 
 <br>
 
@@ -578,9 +570,9 @@ Nous ajusterons cette grille afin de pouvoir voir les intrants de carbone en sur
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="950"/>
+    <img src="../../Images/Training/fr/figure24.png" alt="Figure 24" width="950"/>
     <br>
-    <em>Figure 25 - Écran Détails</em>
+    <em>Figure 24 - Écran Détails</em>
 </p> 
 <br>
 
@@ -613,17 +605,17 @@ Le rapport « **Estimations sur l’alimentation** » fournit une estimation de 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
+    <img src="../../Images/Training/fr/figure25.png" alt="Figure 25" width="850"/>
     <br>
-    <em>Figure 26 - Rapport détaillé sur les émissions</em>
+    <em>Figure 25 - Rapport détaillé sur les émissions</em>
 </p> 
 <br>
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure27.png" alt="Figure 27" width="850"/>
+    <img src="../../Images/Training/fr/figure26.png" alt="Figure 26" width="850"/>
     <br>
-    <em>Figure 27 - Rapport d’estimation des aliments du bétail</em>
+    <em>Figure 26 - Rapport d’estimation des aliments du bétail</em>
 </p> 
 <br>
 
@@ -639,9 +631,9 @@ Si vous cliquez sur l’un de ces points, vous pouvez alors voir une répartitio
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure28.png" alt="Figure 28" width="850"/>
+    <img src="../../Images/Training/fr/figure27.png" alt="Figure 27" width="850"/>
     <br>
-    <em>Figure 28 - Modification du format du rapport en mode pluriannuel.</em>
+    <em>Figure 27 - Modification du format du rapport en mode pluriannuel.</em>
 </p> 
 <br>
 

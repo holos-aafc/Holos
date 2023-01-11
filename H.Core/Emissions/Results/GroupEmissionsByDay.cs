@@ -176,6 +176,33 @@ namespace H.Core.Emissions.Results
 
         #region Properties
 
+        public double NumberOfAnimals { get; set; }
+
+        /// <summary>
+        /// Emission factor for volatilization
+        /// 
+        /// EF_volatilization
+        ///
+        /// [kg N2O-N (kg N)^-1]
+        /// </summary>
+        public double EmissionFactorForVolatilization { get; set; }
+
+        /// <summary>
+        /// Emission factor for leaching
+        /// 
+        /// EF_leach
+        ///
+        /// [kg N2O-N (kg N)^-1]
+        /// </summary>
+        public double EmissionFactorForLeaching { get; set; }
+
+        /// <summary>
+        /// Frac_leach
+        ///
+        /// (unitless)
+        /// </summary>
+        public double LeachingFraction { get; set; }
+
         public DateTime DateTime
         {
             get => _dateTime;
@@ -565,8 +592,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.3-13
-        ///
+        /// Total C lost as methane during manure management (kg C day^-1)
+        /// 
         /// (kg C)
         /// </summary>
         public double AmountOfCarbonLostAsMethaneDuringManagement
@@ -576,9 +603,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.3-14
-        ///
-        /// (kg C)
+        /// Total amount of C flowing into storage each day
+        /// 
+        /// (kg C day^-1)
         /// </summary>
         public double AmountOfCarbonInStoredManure
         {
@@ -587,9 +614,13 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.2.1-1
-        /// Equation 4.2.1-11
-        /// 
+        /// Amount of C in stored manure on the current day
+        ///
+        /// (kg C)
+        /// </summary>
+        public double AmountOfCarbonInStoredManureOnDay { get; set; }
+
+        /// <summary>
         /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinIntake
@@ -1014,8 +1045,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-3
-        ///
         /// (kg N)
         /// </summary>
         public double OrganicNitrogenAvailableForLandApplication
@@ -1025,9 +1054,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-5
-        /// Equation 4.5.2-6
-        ///
         /// (kg N)
         /// </summary>
         public double NitrogenAvailableForLandApplication
@@ -1169,16 +1195,13 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg NH3-N)
+        /// (kg)
         /// </summary>
-        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
-
-        /// <summary>
-        /// (kg N2O-N)
-        /// </summary>
-        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
-
-        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+        public double TotalVolumeOfManureAvailableForLandApplicationInKilograms {
+            get
+            {
+                return this.TotalVolumeOfManureAvailableForLandApplication * 1000;
+            } }
 
         /// <summary>
         /// (kg NH3)
@@ -1652,42 +1675,25 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _ammoniaEmissionsDuringDigestateStorage, value);
         }
 
+        /// <summary>
+        /// (kg NH-3)
+        /// </summary>
         public double AdjustedAmmoniaFromHousing
         {
             get => _adjustedAmmoniaFromHousing;
             set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
         }
 
+        /// <summary>
+        /// (kg NH-3)
+        /// </summary>
         public double AdjustedAmmoniaFromStorage
         {
             get => _adjustedAmmoniaFromStorage;
             set => SetProperty(ref _adjustedAmmoniaFromStorage, value);
         }
 
-        public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
-        public double TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication { get; set; }
-        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplication { get; set; }
-        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplication { get; set; }
-        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplication { get; set; }
 
-        public double TotalAmountRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
-        public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
-        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromLiquidFraction { get; set; }
-        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
-        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
-
-        public double TotalAmountRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
-        public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
-        public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromSolidFraction { get; set; }
-        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
-        public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
-
-        public double TotalAmountOfStoredDigestateAvailableForLandApplication { get; set; }
-        public double TotalAmountOfStoredDigestateAvailableForLandApplicationLiquidFraction { get; set; }
-        public double TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction { get; set; }
-
-        public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
-        public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
 
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
@@ -1742,6 +1748,55 @@ namespace H.Core.Emissions.Results
             get => _manureNitrateLeachingEmission;
             set => SetProperty(ref _manureNitrateLeachingEmission, value);
         }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double N2ONLeachingEmissionsFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double N2OLeachingEmissionsFromLandAppliedManure 
+        {
+            get
+            {
+                return this.N2ONLeachingEmissionsFromLandAppliedManure * CoreConstants.ConvertN2ONToN2O;
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O)
+        /// </summary>
+        public double TotalIndirectN2OFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
+        public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
+
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double AmmoniaFromLandAppliedManure
+        {
+            get
+            {
+                return this.AmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
+
+        public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
+
+        /// <summary>
+        /// (kg TAN)
+        /// </summary>
+        public double TanInStorageOnDay { get; set; }
 
         #endregion
     }

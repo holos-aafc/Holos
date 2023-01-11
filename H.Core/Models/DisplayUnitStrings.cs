@@ -18,6 +18,7 @@ namespace H.Core.Models
         private string _dollars;
         private string _dollarsPerHectare;
         private string _millimetersString;
+        private string _millimetersPerHectareString;
         private string _milliEquivalentsPer100g;
         private string _millimetersPerYearString;
         private string _percentageString;
@@ -37,11 +38,18 @@ namespace H.Core.Models
         private string _kilogramsN20PerYearString;
         private string _kilogramsMethanePerHeadPerDayString;
         private string _kilogramsN20NString;
+        private string _kilogramsN20String;
         private string _kilogramsN2OPerHectareString;
+        private string _kilogramsN2OPerFieldString;
+        private string _kilogramsN2ONPerFieldString;
+        private string _kilogramsNONPerFieldString;
+        private string _kilogramsNO3PerFieldString;
         private string _kilogramsNONPerHectareString;
         private string _kilogramsNO3NPerHectareString;
         private string _kilogramsNH4NPerHectareString;
+        private string _kilogramsNH4NPerFieldString;
         private string _kilogramsN2NPerHectareString;
+        private string _kilogramsN2NPerFieldString;
         private string _daysString;
         private string _cO2Equivalents;
         private string _megagramsCo2E;
@@ -107,7 +115,16 @@ namespace H.Core.Models
         private string _bushelString;
         private string _kilogramsPerGroupPerTimePeriodString;
         private string _kilogramsCarbonPerTreeTypeString;
+        private string _cubicMetersPerDayString;
         private string _fractionString;
+        private string _cubicNormalMetersPerDayString;
+        private string _cubicNormalMetersPerMonthString;
+        private string _cubicNormalMetersPerYearString;
+        private string _kilowattHoursPerDayString;
+        private string _kilogramsPerMonthString;
+        private string _kilowattHoursPerMonthString;
+        private string _kilowattHoursPerYearString;
+
 
         #endregion
 
@@ -723,6 +740,102 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsNPerKilogramNitrogenString, value);
         }
 
+        public string KilogramsN20String
+        {
+            get => _kilogramsN20String;
+            set => SetProperty(ref _kilogramsN20String, value);
+        }
+
+        public string KilogramsN2OPerFieldString
+        {
+            get => _kilogramsN2OPerFieldString;
+            set => SetProperty(ref _kilogramsN2OPerFieldString, value);
+        }
+
+        public string KilogramsN2OnPerFieldString
+        {
+            get => _kilogramsN2ONPerFieldString;
+            set => SetProperty(ref _kilogramsN2ONPerFieldString, value);
+        }
+
+        public string KilogramsNONPerFieldString
+        {
+            get => _kilogramsNONPerFieldString;
+            set => SetProperty(ref _kilogramsNONPerFieldString, value);
+        }
+
+        public string MillimetersPerHectareString
+        {
+            get => _millimetersPerHectareString;
+            set => SetProperty(ref _millimetersPerHectareString, value);
+        }
+
+        public string KilogramsNO3PerFieldString
+        {
+            get => _kilogramsNO3PerFieldString;
+            set => SetProperty(ref _kilogramsNO3PerFieldString, value);
+        }
+
+        public string KilogramsNH4NPerFieldString
+        {
+            get => _kilogramsNH4NPerFieldString;
+            set => SetProperty(ref _kilogramsNH4NPerFieldString, value);
+        }
+
+        public string KilogramsN2NPerFieldString
+        {
+            get => _kilogramsN2NPerFieldString;
+            set => SetProperty(ref _kilogramsN2NPerFieldString, value);
+        }
+
+        public string CubicMetersPerDayString
+        {
+            get => _cubicMetersPerDayString;
+            set => SetProperty(ref _cubicMetersPerDayString, value);
+        }
+
+        public string CubicNormalMetersPerDayString
+        {
+            get => _cubicNormalMetersPerDayString;
+            set => SetProperty(ref _cubicNormalMetersPerDayString, value);
+        }
+
+        public string KilowattHoursPerDayString
+        {
+            get => _kilowattHoursPerDayString;
+            set => SetProperty(ref _kilowattHoursPerDayString, value);
+        }
+
+        public string KilogramsPerMonthString
+        {
+            get => _kilogramsPerMonthString;
+            set => SetProperty(ref _kilogramsPerMonthString, value);
+        }
+
+        public string CubicNormalMetersPerMonthString
+        {
+            get => _cubicNormalMetersPerMonthString;
+            set => SetProperty(ref _cubicNormalMetersPerMonthString, value);
+        }
+
+        public string KilowattHoursPerMonthString
+        {
+            get => _kilowattHoursPerMonthString;
+            set => SetProperty(ref _kilowattHoursPerMonthString, value);
+        }
+
+        public string CubicNormalMetersPerYearString
+        {
+            get => _cubicNormalMetersPerYearString;
+            set => SetProperty(ref _cubicNormalMetersPerYearString, value);
+        }
+
+        public string KilowattHoursPerYearString
+        {
+            get => _kilowattHoursPerYearString;
+            set => SetProperty(ref _kilowattHoursPerYearString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -763,11 +876,13 @@ namespace H.Core.Models
                 KilogramPerHeadPerYearString = WrapString(Resources.KilogramPerHeadPerYear);
                 KilogramPerHeadPerDayString = WrapString(Resources.KilogramPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.KilogramsN2ONPerKilogramN);
-                KilogramsN2OPerHectareString = WrapString(Resources.KilogramsN2ONPerHectareString);
+                KilogramsN2OPerHectareString = WrapString(Resources.KilogramsN2OPerHectareString);
                 KilogramsNONPerHectareString = WrapString(Resources.KilogramsNONPerHectareString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.KilogramsNO3NPerHectareString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.KilogramsNH4NPerHectareString);
+                KilogramsNH4NPerFieldString = WrapString(Resources.KilogramsNH4NPerFieldString);
                 KilogramsN2NPerHectareString = WrapString(Resources.KilogramsN2NPerHectareString);
+                KilogramsN2NPerFieldString = WrapString(Resources.KilogramsN2NPerFieldString);
                 KilogramsCO2Equivalents = WrapString(Resources.KilogramsCO2Equivalents);
                 MegagramsCO2e = WrapString(Resources.EnumMgC02e);
                 KilogramsGhgs = WrapString(Resources.EnumKgGhg);
@@ -840,6 +955,20 @@ namespace H.Core.Models
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.KilogramsCarbonPerTreeType);
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
+                KilogramsN20String = WrapString(Resources.KilogramsN2O);
+                KilogramsN2OPerFieldString = WrapString(Resources.KilogramsN2OPerField);
+                KilogramsN2OnPerFieldString = WrapString(Resources.KilogramsN2ONPerField);
+                KilogramsNONPerFieldString = WrapString(Resources.KilogramsNONPerField);
+                MillimetersPerHectareString = WrapString(Resources.MillimetersPerHectare);
+                KilogramsNO3PerFieldString = WrapString(Resources.KilogramsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
+                KilogramsPerMonthString = WrapString(Resources.KilogramsPerMonth);
+                CubicNormalMetersPerMonthString = WrapString(Resources.CubicNormalMetersPerMonth);
+                KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
+                CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
+                KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
             }
             else
             {
@@ -867,11 +996,13 @@ namespace H.Core.Models
                 KilogramPerHeadPerYearString = WrapString(Resources.PoundPerHeadPerYear);
                 KilogramPerHeadPerDayString = WrapString(Resources.PoundPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.PoundsN2ONPerPoundN);
-                KilogramsN2OPerHectareString = WrapString(Resources.PoundsN2ONPerAcreString);
+                KilogramsN2OPerHectareString = WrapString(Resources.PoundsN2OPerAcreString);
                 KilogramsNONPerHectareString = WrapString(Resources.PoundsNONPerAcreString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.PoundsNO3NPerAcreString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.PoundsNH4NPerAcreString);
-                KilogramsN2NPerHectareString = WrapString(Resources.PoundsN2NPerAcreString);
+                KilogramsNH4NPerFieldString = WrapString(Resources.KilogramsNH4NPerFieldString);
+                KilogramsN2NPerHectareString = WrapString(Resources.PoundsN2NPerFieldString);
+                KilogramsN2NPerFieldString = WrapString(Resources.KilogramsN2NPerFieldString);
                 KilogramsCO2Equivalents = WrapString(Resources.KilogramsCO2Equivalents);
                 KilogramsNitrogenPerHectareString = WrapString(Resources.PoundsNitrogenPerAcre);
                 KilogramsNitrogenPerHectarePerYearString = WrapString(Resources.PoundsNitrogenPerAcrePerYear);
@@ -944,6 +1075,20 @@ namespace H.Core.Models
                 KilogramsCarbonPerTreeTypeString = WrapString(Resources.PoundsCarbonPerTreeType);
                 FractionString = WrapString(Resources.FractionString);
                 KilogramsNPerKilogramNitrogenString = WrapString(Resources.KilogramsNPerKilogramNitrogenString);
+                KilogramsN20String = WrapString(Resources.PoundsN2O);
+                KilogramsN2OPerFieldString = WrapString(Resources.PoundsN2OPerField);
+                KilogramsN2OnPerFieldString = WrapString(Resources.PoundsN2ONPerField);
+                KilogramsNONPerFieldString = WrapString(Resources.PoundsNONPerField);
+                MillimetersPerHectareString = WrapString(Resources.InchesPerAcre);
+                KilogramsNO3PerFieldString = WrapString(Resources.PoundsNO3NPerField);
+                CubicMetersPerDayString = WrapString(Resources.CubicMetersPerDay);
+                CubicNormalMetersPerDayString = WrapString(Resources.CubicNormalMetersPerDay);
+                KilowattHoursPerDayString = WrapString(Resources.KilowattHoursPerDay);
+                KilogramsPerMonthString = WrapString(Resources.KilogramsPerMonth);
+                CubicNormalMetersPerMonthString = WrapString(Resources.CubicNormalMetersPerMonth);
+                KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
+                CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
+                KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
             }
         }
 

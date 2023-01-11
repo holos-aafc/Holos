@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Dairy;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -268,7 +275,7 @@ namespace H.Core.Test.Services
             var percentDigestibleEnergyInFeed = 2000.0625;
             var ashContentOfFeed = 349.0625;
             var result =
-                _dairyCattleResultsService.CalculateVolatileSolids(grossEnergyIntake, percentDigestibleEnergyInFeed, ashContentOfFeed);
+                _dairyCattleResultsService.CalculateVolatileSolids(grossEnergyIntake, percentDigestibleEnergyInFeed, ashContentOfFeed, 50);
             Assert.AreEqual(2745.9235805769927, result);
         }
 
@@ -555,6 +562,8 @@ namespace H.Core.Test.Services
                 numberOfDaysInMonth, electricityConversion);
             Assert.AreEqual(numberOfLactatingDairyCows * (dairyCowConversion / CoreConstants.DaysInYear) * numberOfDaysInMonth * electricityConversion, result);
         }
+
+      
 
         #endregion
     }

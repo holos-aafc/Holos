@@ -1,14 +1,21 @@
 ﻿#region Imports
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
+using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -71,7 +78,6 @@ namespace H.Core.Test.Services
             var cowCalfComponent = new CowCalfComponent()
             {
                 IsInitialized = true,
-                ResultsCalculated = false,
                 Groups = new ObservableCollection<AnimalGroup>() {cowGroup}
             };
 
@@ -101,7 +107,6 @@ namespace H.Core.Test.Services
             var cowCalfComponent = new CowCalfComponent()
             {
                 IsInitialized = true,
-                ResultsCalculated = false,
                 Groups = new ObservableCollection<AnimalGroup>() { cowGroup }
             };
 
@@ -544,12 +549,6 @@ namespace H.Core.Test.Services
                 currentDate: currentDate);
 
             Assert.AreEqual(310, result);
-        }
-
-        [TestMethod]
-        public void CalculateRequiredTdnSoThatMaxDmiIsNotExceeded()
-        {
-
         }
 
         #endregion

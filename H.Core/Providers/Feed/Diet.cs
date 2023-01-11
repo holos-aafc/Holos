@@ -98,6 +98,14 @@ namespace H.Core.Providers.Feed
 
         #region Properties
 
+        public string SystemName
+        {
+            get
+            {
+                return this.Name + " - (" + this.AnimalTypeString + ")";
+            }
+        }
+
         public DietType DietType { get; set; }
 
         /// <summary>

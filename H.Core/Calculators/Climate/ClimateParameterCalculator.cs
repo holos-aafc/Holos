@@ -55,6 +55,8 @@ namespace H.Core.Calculators.Climate
                 dailyPrecipitation: precipitations,
                 dailyTemperature: temperatures);
 
+            // Adjust precip values so that the irrigation is included
+
             var climateParameter = dailyResults.Average(dailyResult => dailyResult.ClimateParameter);
 
             return climateParameter;
@@ -261,7 +263,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-45
+        /// Equation 2.1.1-47
         /// </summary>
         public double CalculateClimateManagementFactor(double climateParameter, double tillageFactor)
         {
@@ -428,17 +430,6 @@ namespace H.Core.Calculators.Climate
             var climateFactor = this.CalculateClimateFactor(moistureResponseFactor, temperatureResponseFactor);
             dailyClimateParameterResult.ClimateParameter = climateFactor;
 
-            // This was used to provide Roland with a comparison run using differing values of inputs. Keep this here for future use
-            //var path = @"C:\Temp\re_crop_output.txt";
-            //File.AppendAllText(path, $"{julianDay}," +
-            //                         $"{volumetricSoilWaterContent.ToString("0.#####")}," +
-            //                         $"{_soilTemperatureCurrent.ToString("0.#####")}," +
-            //                         $"{moistureResponseFactor.ToString("0.#####")}," +
-            //                         $"{temperatureResponseFactor.ToString("0.#####")}," +
-            //                         $"{greenAreaIndex.ToString("0.#####")}," +
-            //                         $"{climateFactor.ToString("0.#####")}" +
-            //                         $"{Environment.NewLine}");
-
             soilTemperaturePrevious = soilTemperatureCurrent;
             waterTemperaturePrevious = currentWaterStorage;
 
@@ -446,7 +437,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-1
+        /// Equation 2.1.1-1
         /// </summary>
         private double CalculateGreenAreaIndexMax(double yield)
         {
@@ -456,7 +447,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-2
+        /// Equation 2.1.1-2
         /// </summary>
         private double CalculateMidSeason(int emergenceDay, int ripeningDay)
         {
@@ -466,7 +457,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-3
+        /// Equation 2.1.1-3
         /// </summary>
         private double CalculateGreenAreaIndex(double greenAreaIndexMax, int julianDay, double midSeason,
                                                double variance)
@@ -477,7 +468,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-4
+        /// Equation 2.1.1-4
         /// </summary>
         private double CalculateOrganicCarbonFactor(double organicCarbon)
         {
@@ -487,7 +478,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-5
+        /// Equation 2.1.1-5
         /// </summary>
         private double CalculateClayFactor(double clay)
         {
@@ -497,7 +488,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-6
+        /// Equation 2.1.1-6
         /// </summary>
         private double CalculateSandFactor(double sand)
         {
@@ -507,7 +498,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-7
+        /// Equation 2.1.1-7
         /// </summary>
         private double CalculateWiltingPointPercent(double organicCarbon, double clayFactor, double sandFactor)
         {
@@ -536,7 +527,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-8
+        /// Equation 2.1.1-8
         /// </summary>
         private double CalculateWiltingPoint(double wiltingPointPercent)
         {
@@ -546,7 +537,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-9
+        /// Equation 2.1.1-9
         /// </summary>
         private double CalculateFieldCapacityPercent(double organicCarbonFactor, double clayFactor, double sandFactor)
         {
@@ -574,7 +565,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-10
+        /// Equation 2.1.1-10
         /// </summary>
         private double CalculateFieldCapacity(double fieldCapacityPercent)
         {
@@ -584,7 +575,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-11
+        /// Equation 2.1.1-11
         /// </summary>
         private double CalculateSoilMeanDepth(double layerThickness)
         {
@@ -594,7 +585,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-12
+        /// Equation 2.1.1-12
         /// </summary>
         private double CalculateLeafAreaIndex(double greenAreaIndex)
         {
@@ -604,8 +595,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-13
-        /// Equation 2.2.1-14
+        /// Equation 2.1.1-13
+        /// Equation 2.1.1-14
         /// </summary>
         private double CalculateSurfaceTemperature(double temperature, double leafAreaIndex)
         {
@@ -623,8 +614,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-15
-        /// Equation 2.2.1-16
+        /// Equation 2.1.1-15
+        /// Equation 2.1.1-16
         /// </summary>
         private double CalculateSoilTemperatures(
             int julianDay,
@@ -649,7 +640,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-17
+        /// Equation 2.1.1-19
         /// </summary>
         private double CalculateCropCoefficient(double greenAreaIndex)
         {
@@ -659,7 +650,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-18
+        /// Equation 2.1.1-20
         /// </summary>
         private double CalculateCropEvapotranspiration(double evapotranspiration, double cropCoefficient)
         {
@@ -669,19 +660,19 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-19
-        /// Equation 2.2.1-20
-        /// Equation 2.2.1-21
+        /// Equation 2.1.1-21
+        /// Equation 2.1.1-22
+        /// Equation 2.1.1-23
         /// </summary>
         private double CalculateCropInterception(
-            double precipitation,
+            double totalDailyPrecipitation,
             double greenAreaIndex,
             double cropEvapotranspiration)
         {
             var cropInterception = 0d;
-            if (precipitation < 0.2 * greenAreaIndex)
+            if (totalDailyPrecipitation < 0.2 * greenAreaIndex)
             {
-                cropInterception = precipitation;
+                cropInterception = totalDailyPrecipitation;
             }
             else
             {
@@ -697,25 +688,26 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-22
+        /// Equation 2.1.1-24
         /// </summary>
-        private double CalculateSoilAvailableWater(double precipitation,
-                                                   double greenAreaIndex,
-                                                   double cropEvapotranspiration)
+        private double CalculateSoilAvailableWater(
+            double totalDailyPrecipitation, 
+            double greenAreaIndex, 
+            double cropEvapotranspiration)
         {
             var cropInterception = this.CalculateCropInterception(
-                precipitation: precipitation,
+                totalDailyPrecipitation: totalDailyPrecipitation,
                 greenAreaIndex: greenAreaIndex,
                 cropEvapotranspiration: cropEvapotranspiration);
 
-            var soilAvailableWater = precipitation - cropInterception;
+            var soilAvailableWater = totalDailyPrecipitation - cropInterception;
 
             return soilAvailableWater;
         }
 
         /// <summary>
-        /// Equation 2.2.1-23
-        /// Equation 2.2.1-24
+        /// Equation 2.1.1-25
+        /// Equation 2.1.1-26
         /// </summary>
         private double CalculateVolumetricSoilWaterContent(ref double waterStoragePrevious,
                                                            double layerThickness,
@@ -732,9 +724,9 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-25
-        /// Equation 2.2.1-26
-        /// Equation 2.2.1-27
+        /// Equation 2.1.1-27
+        /// Equation 2.1.1-28
+        /// Equation 2.1.1-29
         /// </summary>
         private double CalculateSoilCoefficient(
             double fieldCapacity,
@@ -764,7 +756,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-28
+        /// Equation 2.1.1-30
         /// </summary>
         private double CalculateActualEvapotranspiration(double cropEvapotranspiration, double soilCoefficient)
         {
@@ -774,8 +766,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-31
-        /// Equation 2.2.1-32
+        /// Equation 2.1.1-33
+        /// Equation 2.1.1-34
         /// </summary>
         private double CalculateDeepPercolation(
             double fieldCapacity,
@@ -796,9 +788,9 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-29
-        /// Equation 2.2.1-30
-        /// Equation 2.2.1-33
+        /// Equation 2.1.1-31
+        /// Equation 2.1.1-32
+        /// Equation 2.1.1-35
         /// </summary>
         private double CalculateJulianDayWaterStorage(
             double fieldCapacity,
@@ -827,8 +819,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-34
-        /// Equation 2.2.1-35
+        /// Equation 2.1.1-36
+        /// Equation 2.1.1-37
         /// </summary>
         private double CalculateTemperatureResponseFactor(
             ref double soilTemperaturePrevious,
@@ -848,12 +840,12 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-36
-        /// Equation 2.2.1-37
-        /// Equation 2.2.1-38
-        /// Equation 2.2.1-39
-        /// Equation 2.2.1-40
-        /// Equation 2.2.1-41
+        /// Equation 2.1.1-38
+        /// Equation 2.1.1-39
+        /// Equation 2.1.1-40
+        /// Equation 2.1.1-41
+        /// Equation 2.1.1-42
+        /// Equation 2.1.1-43
         /// </summary>
         private double CalculateMoistureResponseFactor(
             double volumetricWaterContent,
@@ -901,9 +893,9 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        /// Equation 2.2.1-42
-        /// Equation 2.2.1-43
-        /// Equation 2.2.1-44
+        /// Equation 2.1.1-44
+        /// Equation 2.1.1-45
+        /// Equation 2.1.1-46
         /// </summary>
         private double CalculateClimateFactor(double moistureResponseFactor, double temperatureResponseFactor)
         {

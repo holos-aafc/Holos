@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Core.Models.Animals;
+using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
@@ -14,25 +16,76 @@ namespace H.Core.Models.Infrastructure
         FarmResidues
     }
 
-    public class SubstrateFlowInformation
+    public class SubstrateFlowInformation : ModelBase
     {
         public AnimalType AnimalType { get; set; }
         public FarmResidueType FarmResidueType { get; set; }
         public SubstrateType SubstrateType { get; set; }
+        public ManagementPeriod ManagementPeriod { get; set; }
+        public AnaerobicDigestionComponent Component { get; set; }
+        public SubstrateViewItemBase SubstrateViewItemBase { get; set; }
 
-        public double TotalMassFlow { get; set; }
-        public double VolatileSolidsFlow { get; set; }
-        public double TotalSolidsFlow { get; set; }
-        public double NitrogenFlow { get; set; }
-        public double CarbonFlow { get; set; }
-        public double OrganicNitrogenFlow { get; set; }
-        public double TotalAmmonicalNitrogenFlow { get; set; }
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
+        public double TotalMassFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
+        public double VolatileSolidsFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
+        public double TotalSolidsFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
+        public double NitrogenFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
+        public double CarbonFlowOfSubstrate { get; set; }
+        public double OrganicNitrogenFlowOfSubstrate { get; set; }
+
+        /// <summary>
+        /// This is the TAN in substrate only
+        /// </summary>
+        public double ExcretedTanInSubstrate { get; set; }
+
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double BiodegradableSolidsFlow { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
         public double MethaneProduction { get; set; }
+
+        /// <summary>
+        /// (kg VS day^-1)
+        /// </summary>
         public double DegradedVolatileSolids { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
         public double BiogasProduction { get; set; }
+
+        /// <summary>
+        /// (Nm^3 day^-1)
+        /// </summary>
         public double CarbonDioxideProduction { get; set; }
+
+        /// <summary>
+        /// The TAN from excretion plus the added nitrogen from degraded volatile solids
+        /// </summary>
         public double TanFlowInDigestate { get; set; }
+
         public double OrganicNitrogenFlowInDigestate { get; set; }
         public double CarbonFlowInDigestate { get; set; }
     }
