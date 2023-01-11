@@ -403,7 +403,7 @@ Pour entrer de l’information sur les bovins de long engraissement et semi-fini
 1. Glissez et déposez une nouvelle composante « **Bovins de long engraissement et semi-finis** ».
 La ferme bovine gère **200 bovins semi-finis (100 bouvillons et 100 génisses)**.
 1. Cliquez sur le groupe « **Génisses** » pour l’activer et entrer les données de gestion pour ce groupe.
-2. Pour la « **période de gestion no 1** », entrez « **1er octobre 2021** » comme « **date de début** » et « **18 janvier 2022** » comme « **date finale** » (110 jours).
+2. Pour la « **période de gestion no 1** », entrez « **1er octobre 2022** » comme « **date de début** » et « **18 janvier 2023** » comme « **date finale** » (110 jours).
 3. Cliquez sur l’onglet « **Général** » et entrez 100 pour le nombre d’animaux, **1,1 kg/jour pour le gain quotidien, 240 pour le poids de départ.**
 4. Les 100 génisses sont nourries selon une ration à « **croissance moyenne** » et gérées dans un type de logement « **sans étable confiné** » avec un système de manutention du fumier « **à litière profonde** ».
 Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » pour activer le menu de contexte. Dans le menu qui s’affiche, **sélectionnez « Copier la gestion de » -> « Génisses »**.
@@ -424,7 +424,7 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 Nous allons maintenant répéter les étapes utilisées pour « Bovins de long engraissement et semi-finis » pour entrer les données de gestion du parc de finition. Glissez une nouvelle composante « Bovin de finition » de « Toutes les composantes » dans votre liste de composantes.
 La ferme bovine gère 200 animaux d’engraissement (100 bouvillons et 100 génisses) dans un parc de finition pendant **170 jours**.
 1. Sélectionnez le groupe « **Génisses** ».
-2. Pour la « **période de gestion no 1** », entrez « **19 janvier 2021** » comme « **date de début** » et « **7 juillet 2021** » comme « **date finale** ».
+2. Pour la « **période de gestion no 1** », entrez « **19 janvier 2022** » comme « **date de début** » et « **7 juillet 2022** » comme « **date finale** ».
 3. Entrez **100** pour le nombre d’animaux, un gain quotidien moyen de **1,2 kg/jour et 350 kg comme poids de départ**.
 4. Les animaux en parcs d’engraissement sont nourris de « Rations à base de céréales d’orge », le type de logement sera « **Confiné sans étable** ».
 5. Le système de gestion du fumier sera « **Litière profonde** ».
