@@ -338,7 +338,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 #### Beef Cows - Summer Grazing
 
-Click on the management period named **Summer Grazing**. Ensure that the start date is set to May 1st, 2021 and the end date is set to October 31st, 2021.
+Click on the management period named **Summer Grazing**. Ensure that the start date is set to May 1st, 2022 and the end date is set to October 31st, 2022.
 
 
 * **General Tab:**
@@ -358,7 +358,7 @@ Click on the management period named **Summer Grazing**. Ensure that the start d
 
 #### Beef Cows - Extended Fall Grazing
 
-Click on the management period named **Extended Fall Grazing**. Ensure that the start date is set to November 1st, 2021 and the end date is set to December 31st, 2021.
+Click on the management period named **Extended Fall Grazing**. Ensure that the start date is set to November 1st, 2022 and the end date is set to December 31st, 2022.
 
 
 * **General Tab:**
