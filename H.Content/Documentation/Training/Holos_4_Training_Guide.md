@@ -406,7 +406,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 Calves on our farm are born on March 1 and weaned on September 30 at the age of seven months. Using a final weaning rate of 85%, we will have 110 calves from March to September. Following the cows, calves will be in confinement for the months of March and April and will be grazing on pasture from May to September. This will result in two separate management periods.
 
-Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 30, 2021** and the second management period will span from **May 1, 2021 to September 30, 2021**.
+Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2022 to April 30, 2022** and the second management period will span from **May 1, 2022 to September 30, 2022**.
 
 
 **Management Period # 1:**
