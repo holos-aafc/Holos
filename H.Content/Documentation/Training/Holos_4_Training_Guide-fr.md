@@ -328,7 +328,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 **b) Notre deuxième période de gestion portera sur le broutage en pâturage pendant les mois d’été.**
 
 1. Cliquez sur la période de gestion intitulée « **Pâturage d’été** ».
-2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale.
+2. Assurez-vous que le « **1er mai 2022** » correspond à la date de début et que le « **31 octobre 2022** » correspond à la date finale.
 3. Cliquez sur l’onglet « **Général** » pour confirmer que nous avons 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines à haute énergie** » comme ration par défaut sous l’onglet « **Ration** ».
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le champ (« Prairie indigène ») sur lequel les animaux brouteront à partir de la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Pâturage de masse/continu** » comme type de pâturage. Holos ajustera les apports de carbone des pâturages en fonction du système de pâturage sélectionné.
@@ -338,7 +338,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 **c) Notre troisième période de gestion portera sur le broutage prolongé à l’automne.**
 1. Sélectionnez la période de gestion appelée « **Broutage d’automne prolongé** ».
-2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période.
+2. Sélectionnez le « **1er novembre 2022** » comme date de début et le « **31 décembre 2022** » comme date finale pour la période.
 3. Cliquez sur l’onglet « **Général** » et entrez 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines d’énergie moyenne** » comme ration par défaut.
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le pâturage sur lequel les animaux broutent **(« prairies indigènes »)** dans la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Broutage alterné** » comme type de broutage.
