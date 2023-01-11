@@ -579,9 +579,9 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
-    - **Brooding Stage:** Start: January 1st, 2022 - End: January 22nd, 2022. 
-    - **Rearing Stage:** Start: January 23rd, 2022 - End: June 26th, 2022.
-    - **Rearing Stage:** Start: June 27th, 2022 - End: November 28th, 2022.
+    - **Brooding Stage:** Start: January 1st, 2023 - End: January 22nd, 2023. 
+    - **Rearing Stage:** Start: January 23rd, 2023 - End: June 26th, 2023.
+    - **Rearing Stage:** Start: June 27th, 2023 - End: November 28th, 2023.
 3. For each management period, set number of animals to **400**.
 4. Leave the entries in Housing and Manure as default.
 
