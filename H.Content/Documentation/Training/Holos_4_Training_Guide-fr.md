@@ -23,7 +23,7 @@ Aux fins de cette formation, nous allons créer une ferme avec un système annue
 
 Lancez Holos en double-cliquant sur l’icône Holos qui se trouve sur le bureau. S’il n’y a pas de fermes sauvegardées dans le système, Holos créera une nouvelle ferme et demandera à l’utilisateur un nom de ferme et un commentaire facultatif. S’il y a déjà une ferme enregistrée dans le système, Holos demandera à l’utilisateur d’ouvrir la ferme existante ou de créer une nouvelle ferme.
 
-Entrez "**Holos 2022**" comme nom de ferme et "**version de formation**" comme "commentaire". Cliquez sur "OK" pour passer à l'écran suivant
+Entrez "**Holos 2023**" comme nom de ferme et "**version de formation**" comme "commentaire". Cliquez sur "OK" pour passer à l'écran suivant
 Assurez-vous de sélectionner « **Métrique** » comme unité de type de mesure, puis cliquez sur le bouton « Suivant » au bas de l’écran.
 
 <br>
@@ -214,12 +214,12 @@ Pour cet exemple, nous supposons que la ferme a besoin de 70 ha de grains d’or
 Pour configurer la rotation :
 1. Ajoutez une composante « rotation de cultures » à notre ferme.
 2. Cliquez sur le menu « **Visualiser** » et sélectionnez « **Cacher la liste des composantes disponibles** » pour réduire la quantité de défilement horizontal nécessaire lors de la saisie des données.
-3. La rotation pour ce champ a commencé en **1985 et se termine en 2022**. Assurez-vous de ces deux valeurs pour l’année de début et l’année finale à **l’étape 1**.
+3. La rotation pour ce champ a commencé en **1985 et se termine en 2023**. Assurez-vous de ces deux valeurs pour l’année de début et l’année finale à **l’étape 1**.
 4. Entrez 70 ha dans « Superficie totale de ce champ ».
-5. Sous « **Étape 2** », sous « Culture » entrez « **Orge** » dans la première ligne [2021].
+5. Sous « **Étape 2** », sous « Culture » entrez « **Orge** » dans la première ligne 2023.
 6. La ferme pratique le travail réduit du sol dans le champ d’orge. Changez le type de travail du sol à « Travail réduit du sol ».
 7. Entrez un rendement de **3 000 kg/ha** [poids humide] pour la récolte d’orge. Il n’y a pas d’irrigation et nous ajouterons un épandage d’engrais d’urée à cette culture [utilisez le taux d’épandage suggéré].
-8. Cliquez sur le bouton « **Ajouter une culture** » sous « **Étape 2** » pour ajouter une deuxième culture à la rotation. Notez que Holos fixe l’année de cette nouvelle récolte à 2020. Holos s’attend donc à ce que l’utilisateur entre les cultures en ordre inverse depuis 1985. Il est à noter qu’il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985 ; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour décrire une seule phase de la rotation.   
+8. Cliquez sur le bouton « **Ajouter une culture** » sous « **Étape 2** » pour ajouter une deuxième culture à la rotation. Notez que Holos fixe l’année de cette nouvelle récolte à 2022. Holos s’attend donc à ce que l’utilisateur entre les cultures en ordre inverse depuis 1985. Il est à noter qu’il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985 ; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour décrire une seule phase de la rotation.   
 Holos copiera ensuite les renseignements sur la phase et remplira automatiquement l’historique des champs [p. ex., Holos copiera la rotation en 1985 pour l’utilisateur].
 
 <br>
@@ -231,12 +231,12 @@ Holos copiera ensuite les renseignements sur la phase et remplira automatiquemen
 <br>
 
 
-9. Dans la colonne « Culture » pour cette deuxième culture [en 2020], sélectionnez « **Mélange de foin** » comme type de culture.
+9. Dans la colonne « Culture » pour cette deuxième culture [en 2022], sélectionnez « **Mélange de foin** » comme type de culture.
 10. Cliquez sur le bouton « **Ajouter une culture** » une dernière fois pour ajouter un autre champ et sélectionnez « **Mélange de foin** » comme auparavant.
 11. Pour ajouter des données de récolte pour les deux champs de mélange de foin :
-    * Sélectionnez la ligne mélange de foin 2021.
-    * Sous l’onglet « Récolte », cliquez sur le bouton « Ajouter une date de récolte » pour créer une nouvelle récolte, sélectionnez une date de récolte du « **31 août 2021** » [en supposant que la récolte est effectuée le même jour chaque année], sélectionnez « **Moyen** » pour « Étape de croissance du fourrage ». Cette récolte a donné cinq balles totales d’un poids de 500 kg par balle.
-    * Répétez les deux dernières étapes ci-dessus pour l’autre récolte de mélange de foin cultivée en 2019.
+    * Sélectionnez la ligne mélange de foin 2022.
+    * Sous l’onglet « Récolte », cliquez sur le bouton « Ajouter une date de récolte » pour créer une nouvelle récolte, sélectionnez une date de récolte du « **31 août 2022** » [en supposant que la récolte est effectuée le même jour chaque année], sélectionnez « **Moyen** » pour « Étape de croissance du fourrage ». Cette récolte a donné cinq balles totales d’un poids de 500 kg par balle.
+    * Répétez les deux dernières étapes ci-dessus pour l’autre récolte de mélange de foin cultivée en 2021.
     
 S’il y a plus d’une récolte sur la prairie de fauche, le bouton « Ajouter une date de récolte/broutage » peut être utilisé pour ajouter des récoltes subséquentes.
 
@@ -273,7 +273,7 @@ Après le cycle annuel d’alimentation, la ferme bovine avec laquelle nous trav
 
 2. Cliquez sur la période de gestion intitulée « **Alimentation hivernale** » **à l’étape 2** pour activer cette période de gestion.
 
-3. Assurez-vous que la « date de début » est le « **1er janvier 2021** » et que la « date finale » est le « **30 avril 2021** ».
+3. Assurez-vous que la « date de début » est le « **1er janvier 2022** » et que la « date finale » est le « **30 avril 2022** ».
 
 
 Ensuite, nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration.
@@ -328,7 +328,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 **b) Notre deuxième période de gestion portera sur le broutage en pâturage pendant les mois d’été.**
 
 1. Cliquez sur la période de gestion intitulée « **Pâturage d’été** ».
-2. Assurez-vous que le « **1er mai 2021** » correspond à la date de début et que le « **31 octobre 2021** » correspond à la date finale.
+2. Assurez-vous que le « **1er mai 2022** » correspond à la date de début et que le « **31 octobre 2022** » correspond à la date finale.
 3. Cliquez sur l’onglet « **Général** » pour confirmer que nous avons 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines à haute énergie** » comme ration par défaut sous l’onglet « **Ration** ».
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le champ (« Prairie indigène ») sur lequel les animaux brouteront à partir de la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Pâturage de masse/continu** » comme type de pâturage. Holos ajustera les apports de carbone des pâturages en fonction du système de pâturage sélectionné.
@@ -338,7 +338,7 @@ Cliquez sur l’onglet « Général » et entrez **150** pour le « Nombre d’a
 
 **c) Notre troisième période de gestion portera sur le broutage prolongé à l’automne.**
 1. Sélectionnez la période de gestion appelée « **Broutage d’automne prolongé** ».
-2. Sélectionnez le « **1er novembre 2021** » comme date de début et le « **31 décembre 2021** » comme date finale pour la période.
+2. Sélectionnez le « **1er novembre 2022** » comme date de début et le « **31 décembre 2022** » comme date finale pour la période.
 3. Cliquez sur l’onglet « **Général** » et entrez 150 animaux pendant cette période.
 4. Sélectionnez « **Protéines d’énergie moyenne** » comme ration par défaut.
 5. Sélectionnez « **Pâturage** » comme type de logement sous l’onglet « **Logement** », puis repérez le pâturage sur lequel les animaux broutent **(« prairies indigènes »)** dans la case de saisie « **Emplacement du pâturage** ». Sélectionnez « **Broutage alterné** » comme type de broutage.
@@ -379,8 +379,8 @@ Les veaux de notre ferme naissent le 1er mars et sont sevrés le 30 septembre à
 
 Cliquez sur « **Veaux** » dans la section du groupe animal à l’« **Étape 1** » pour activer le groupe de veaux.
 
-- La première période de gestion s’étendra du **« 1er mars 2021 » au « 30 avril 2021 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
-- Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2020** » **au** « **30 septembre 2020** ». Nous renommerons cette période de gestion « **Broutage** ».
+- La première période de gestion s’étendra du **« 1er mars 2022 » au « 30 avril 2022 »**, il y aura un total de 110 animaux, les veaux seront nourris de « **protéines d’énergie moyenne** », dans un type de logement « **confiné sans étable** » avec un système de manutention du fumier à « **Litière profonde** ». Nous renommerons cette période de gestion comme suit : « **Confinement** »
+- Le broutage au cours de cette deuxième période de gestion s’étendra du « **1er mai 2022** » **au** « **30 septembre 2022** ». Nous renommerons cette période de gestion « **Broutage** ».
 - À l’onglet « **Général** », changez le nombre d’animaux à 110.
 - Les veaux consommeront des « **protéines à haute énergie** ».
 - Remplacer le logement par « **Pâturage** » où les animaux brouteront dans la « **Prairie indigène** ». Le type de broutage sera « **Pâturage de masse/continu** ».
@@ -403,7 +403,7 @@ Pour entrer de l’information sur les bovins de long engraissement et semi-fini
 1. Glissez et déposez une nouvelle composante « **Bovins de long engraissement et semi-finis** ».
 La ferme bovine gère **200 bovins semi-finis (100 bouvillons et 100 génisses)**.
 1. Cliquez sur le groupe « **Génisses** » pour l’activer et entrer les données de gestion pour ce groupe.
-2. Pour la « **période de gestion no 1** », entrez « **1er octobre 2021** » comme « **date de début** » et « **18 janvier 2022** » comme « **date finale** » (110 jours).
+2. Pour la « **période de gestion no 1** », entrez « **1er octobre 2022** » comme « **date de début** » et « **18 janvier 2023** » comme « **date finale** » (110 jours).
 3. Cliquez sur l’onglet « **Général** » et entrez 100 pour le nombre d’animaux, **1,1 kg/jour pour le gain quotidien, 240 pour le poids de départ.**
 4. Les 100 génisses sont nourries selon une ration à « **croissance moyenne** » et gérées dans un type de logement « **sans étable confiné** » avec un système de manutention du fumier « **à litière profonde** ».
 Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » pour activer le menu de contexte. Dans le menu qui s’affiche, **sélectionnez « Copier la gestion de » -> « Génisses »**.
@@ -424,7 +424,7 @@ Avec le bouton droit de la souris, cliquez sur le groupe « **Bouvillons** » po
 Nous allons maintenant répéter les étapes utilisées pour « Bovins de long engraissement et semi-finis » pour entrer les données de gestion du parc de finition. Glissez une nouvelle composante « Bovin de finition » de « Toutes les composantes » dans votre liste de composantes.
 La ferme bovine gère 200 animaux d’engraissement (100 bouvillons et 100 génisses) dans un parc de finition pendant **170 jours**.
 1. Sélectionnez le groupe « **Génisses** ».
-2. Pour la « **période de gestion no 1** », entrez « **19 janvier 2021** » comme « **date de début** » et « **7 juillet 2021** » comme « **date finale** ».
+2. Pour la « **période de gestion no 1** », entrez « **19 janvier 2022** » comme « **date de début** » et « **7 juillet 2022** » comme « **date finale** ».
 3. Entrez **100** pour le nombre d’animaux, un gain quotidien moyen de **1,2 kg/jour et 350 kg comme poids de départ**.
 4. Les animaux en parcs d’engraissement sont nourris de « Rations à base de céréales d’orge », le type de logement sera « **Confiné sans étable** ».
 5. Le système de gestion du fumier sera « **Litière profonde** ».
