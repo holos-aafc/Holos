@@ -278,7 +278,7 @@ Following the annual feeding cycle, the beef farm we are working with is **divid
 
 2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
 
-3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’.
+3. Ensure “**January 1, 2022**” is set as the ‘**Start date**’ and that “**April 30, 2022**” is set as the ‘**End date**’.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
