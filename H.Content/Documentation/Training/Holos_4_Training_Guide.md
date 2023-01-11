@@ -210,9 +210,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 1. Add one "**Crop Rotation**" component from the available components.
 2. To expand the horizontal space available in Holos, click on "**View**" from the top menu bar and select "**Hide List of Available Components**".
-3. The rotation of this field **begins in 1985 and ends in 2022**. Under step 1, please ensure that these two values are set as the start and end year respectively.
+3. The rotation of this field **begins in 1985 and ends in 2023**. Under step 1, please ensure that these two values are set as the start and end year respectively.
 4. Enter "**70**" ha as the **total area** of this field.
-5. Under **Step 2** change the crop to **Barley**. The **year** for this crop should be 2022.
+5. Under **Step 2** change the crop to **Barley**. The **year** for this crop should be 2023.
     * Under the **General Tab** enter **3000** kg/ha (wet weight) as the **yield** for this crop.
     * Change the **tillage type** to **Reduced Tillage**.
     * Keep **0** as the amount of irrigation and number of pesticide passes.
