@@ -458,7 +458,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’.
+    * For “Management period #1”, enter “**October 1, 2022**” as the ‘**Start date**’ and “**January 18, 2023**” as the ‘**End date**’.
 
 
     * **General Tab:**
@@ -499,7 +499,7 @@ We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**January 19, 2022**” as the **Start date** and “**July 7th, 2022**” as the **End date**.
+    * For “Management period #1”, enter “**January 19, 2023**” as the **Start date** and “**July 7th, 2023**” as the **End date**.
 
 
     * **General Tab:**
