@@ -216,7 +216,7 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
     * Under the **General Tab** enter **3000** kg/ha (wet weight) as the **yield** for this crop.
     * Change the **tillage type** to **Reduced Tillage**.
     * Keep **0** as the amount of irrigation and number of pesticide passes.
-6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. Note that Holos sets the year for this new crop to 2021 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985. 
+6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. Note that Holos sets the year for this new crop to 2022 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985. 
 
 
 <br>
