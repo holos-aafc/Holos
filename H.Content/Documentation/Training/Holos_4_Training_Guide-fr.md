@@ -219,7 +219,7 @@ Pour configurer la rotation :
 5. Sous « **Étape 2** », sous « Culture » entrez « **Orge** » dans la première ligne 2023.
 6. La ferme pratique le travail réduit du sol dans le champ d’orge. Changez le type de travail du sol à « Travail réduit du sol ».
 7. Entrez un rendement de **3 000 kg/ha** [poids humide] pour la récolte d’orge. Il n’y a pas d’irrigation et nous ajouterons un épandage d’engrais d’urée à cette culture [utilisez le taux d’épandage suggéré].
-8. Cliquez sur le bouton « **Ajouter une culture** » sous « **Étape 2** » pour ajouter une deuxième culture à la rotation. Notez que Holos fixe l’année de cette nouvelle récolte à 2020. Holos s’attend donc à ce que l’utilisateur entre les cultures en ordre inverse depuis 1985. Il est à noter qu’il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985 ; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour décrire une seule phase de la rotation.   
+8. Cliquez sur le bouton « **Ajouter une culture** » sous « **Étape 2** » pour ajouter une deuxième culture à la rotation. Notez que Holos fixe l’année de cette nouvelle récolte à 2022. Holos s’attend donc à ce que l’utilisateur entre les cultures en ordre inverse depuis 1985. Il est à noter qu’il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985 ; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour décrire une seule phase de la rotation.   
 Holos copiera ensuite les renseignements sur la phase et remplira automatiquement l’historique des champs [p. ex., Holos copiera la rotation en 1985 pour l’utilisateur].
 
 <br>
@@ -231,12 +231,12 @@ Holos copiera ensuite les renseignements sur la phase et remplira automatiquemen
 <br>
 
 
-9. Dans la colonne « Culture » pour cette deuxième culture [en 2020], sélectionnez « **Mélange de foin** » comme type de culture.
+9. Dans la colonne « Culture » pour cette deuxième culture [en 2022], sélectionnez « **Mélange de foin** » comme type de culture.
 10. Cliquez sur le bouton « **Ajouter une culture** » une dernière fois pour ajouter un autre champ et sélectionnez « **Mélange de foin** » comme auparavant.
 11. Pour ajouter des données de récolte pour les deux champs de mélange de foin :
-    * Sélectionnez la ligne mélange de foin 2021.
-    * Sous l’onglet « Récolte », cliquez sur le bouton « Ajouter une date de récolte » pour créer une nouvelle récolte, sélectionnez une date de récolte du « **31 août 2021** » [en supposant que la récolte est effectuée le même jour chaque année], sélectionnez « **Moyen** » pour « Étape de croissance du fourrage ». Cette récolte a donné cinq balles totales d’un poids de 500 kg par balle.
-    * Répétez les deux dernières étapes ci-dessus pour l’autre récolte de mélange de foin cultivée en 2019.
+    * Sélectionnez la ligne mélange de foin 2022.
+    * Sous l’onglet « Récolte », cliquez sur le bouton « Ajouter une date de récolte » pour créer une nouvelle récolte, sélectionnez une date de récolte du « **31 août 2022** » [en supposant que la récolte est effectuée le même jour chaque année], sélectionnez « **Moyen** » pour « Étape de croissance du fourrage ». Cette récolte a donné cinq balles totales d’un poids de 500 kg par balle.
+    * Répétez les deux dernières étapes ci-dessus pour l’autre récolte de mélange de foin cultivée en 2021.
     
 S’il y a plus d’une récolte sur la prairie de fauche, le bouton « Ajouter une date de récolte/broutage » peut être utilisé pour ajouter des récoltes subséquentes.
 
