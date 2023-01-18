@@ -102,7 +102,7 @@ namespace H.Core.Test.Services.Animals
                 .Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>()))
                 .Returns(new List<DigestorDailyOutput>());
 
-            _sut.ResetAllTanks( _farm);
+            _sut.ResetAllTanks( _farm, DateTime.Now);
         }
 
         [TestMethod]
@@ -118,12 +118,11 @@ namespace H.Core.Test.Services.Animals
         public void SetStartingStateOfTankTest()
         {
             var tank = new DigestateTank();
-            var adResults = new List<DigestorDailyOutput>() {new DigestorDailyOutput() {TotalNitrogenInDigestateAvailableForLandApplication = 100, TotalCarbonInDigestateAvailableForLandApplication = 200}};
+            var adResults = new List<DigestorDailyOutput>() {new DigestorDailyOutput() { Date = DateTime.Now.AddDays(-1), FlowRateOfAllSubstratesInDigestate = 200}};
 
-            _sut.SetStartingStateOfTank(tank, adResults, new Farm());
+            _sut.SetStartingStateOfTank(tank, adResults, new Farm(), DateTime.Now);
 
-            Assert.AreEqual(200, tank.TotalAmountOfCarbonInStoredManure);
-            Assert.AreEqual(100, tank.TotalNitrogenAvailableForLandApplication);
+            Assert.AreEqual(200, tank.TotalDigestateAfterAllApplication);
         }
 
         [TestMethod]
@@ -136,7 +135,7 @@ namespace H.Core.Test.Services.Animals
             var digestateTank = new DigestateTank();
 
             crop.Area = 10;
-            digestateApplication.MaximumAmountOfDigestateAvailable = 1000;
+            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 1000;
             digestateApplication.AmountAppliedPerHectare = 100;
 
             farm.Components.Add(field);
@@ -191,31 +190,30 @@ namespace H.Core.Test.Services.Animals
             var digestateApplication = new DigestateApplicationViewItem();
             crop.DigestateApplicationViewItems.Add(digestateApplication);
 
-            digestateApplication.AmountOfNitrogenAppliedPerHectare = 75;
-            digestateApplication.AmountOfCarbonAppliedPerHectare =175;
+            digestateApplication.DigestateState = DigestateState.SolidPhase;
+            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
+            digestateApplication.AmountAppliedPerHectare = 75;
 
             farm.Components.Add(fieldComponent);
 
             var digestateTank = new DigestateTank();
-            digestateTank.TotalNitrogenAvailableForLandApplication = 100;
-            digestateTank.TotalAmountOfCarbonInStoredManure = 300;
+            digestateTank.TotalSolidDigestateAfterAllApplications = 100;
 
             _sut.ReduceTankByDigestateApplications(farm, digestateTank);
 
-            Assert.AreEqual(25, digestateTank.TotalNitrogenAvailableForLandApplication);
-            Assert.AreEqual(125, digestateTank.TotalAmountOfCarbonInStoredManure);
+            Assert.AreEqual(25, digestateTank.TotalSolidDigestateAfterAllApplications);
         }
 
         [TestMethod]
         public void MaximumAmountOfDigestateAvailablePerDayTest()
         {
             var dailyResults = new List<DigestorDailyOutput>();
-            dailyResults.Add(new DigestorDailyOutput() {Date = DateTime.Now.Subtract(TimeSpan.FromDays(2)), TotalNitrogenInDigestateAvailableForLandApplication = 100});
-            dailyResults.Add(new DigestorDailyOutput() { Date = DateTime.Now.Subtract(TimeSpan.FromDays(3)), TotalNitrogenInDigestateAvailableForLandApplication = 200});
+            dailyResults.Add(new DigestorDailyOutput() {Date = DateTime.Now.Subtract(TimeSpan.FromDays(2)), FlowRateOfAllSubstratesInDigestate = 100});
+            dailyResults.Add(new DigestorDailyOutput() { Date = DateTime.Now.Subtract(TimeSpan.FromDays(3)), FlowRateOfAllSubstratesInDigestate = 200});
 
-            var result = _sut.MaximumAmountOfNitrogenAvailablePerDay(DateTime.Now, dailyResults);
+            var result = _sut.MaximumAmountOfDigestateAvailableForLandApplication(DateTime.Now, dailyResults);
 
-            Assert.AreEqual(150, result);
+            Assert.AreEqual(300, result);
         }
 
         [TestMethod]

@@ -37,7 +37,7 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _digestateState, value);
         }
 
-        public double MaximumAmountOfDigestateAvailable { get; set; }
+        public double MaximumAmountOfDigestateAvailablePerHectare { get; set; }
 
         /// <summary>
         /// Amount of digestate applied
@@ -52,10 +52,10 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 this.AttemptedToGoOverMaximum = false;
 
-                if (value > this.MaximumAmountOfDigestateAvailable)
+                if (value > this.MaximumAmountOfDigestateAvailablePerHectare)
                 {
                     this.AttemptedToGoOverMaximum = true;
-                    SetProperty(ref _amountAppliedPerHectare, this.MaximumAmountOfDigestateAvailable);
+                    SetProperty(ref _amountAppliedPerHectare, this.MaximumAmountOfDigestateAvailablePerHectare);
 
                     return;
                 }

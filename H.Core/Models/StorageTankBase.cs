@@ -1,10 +1,13 @@
-﻿using H.Infrastructure;
+﻿using System;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
     public abstract class StorageTankBase : ModelBase
     {
         #region Fields
+
+        private DateTime _asOfDate;
         
         private double _volumeRemainingInTank;
         private double _volumeOfManureAvailableForLandApplication;
@@ -17,6 +20,13 @@ namespace H.Core.Models
         private double _volumeSumOfAllManureApplicationsMade;
 
         #endregion
+
+        protected StorageTankBase()
+        {
+
+            // This needs to be added to the tank view
+            this.AsOfDate = DateTime.Now;
+        }
 
         #region Properties
 
@@ -90,11 +100,17 @@ namespace H.Core.Models
             set => SetProperty(ref _volumeOfManureAvailableForLandApplication, value);
         }
 
+        public DateTime AsOfDate
+        {
+            get => _asOfDate;
+            set => SetProperty(ref _asOfDate, value);
+        }
+
         #endregion
 
         #region Public Methods
 
-        public void ResetTank()
+        public virtual void ResetTank()
         {
             this.VolumeRemainingInTank = 0;
             this.TotalOrganicNitrogenAvailableForLandApplication = 0;

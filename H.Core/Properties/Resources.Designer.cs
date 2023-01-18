@@ -11968,6 +11968,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough digestate has been created by the anaerobic digestor for this field application. This value has been set to the maximum available amount of {0} {1}. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field..
+        /// </summary>
+        public static string MessageNotEnoughDigestateForLandApplication {
+            get {
+                return ResourceManager.GetString("MessageNotEnoughDigestateForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Past fallow area must be less than the current fallow area. Past fallow area has been reset to 0..
         /// </summary>
         public static string MessagePastFallowAreaMustBeLessThanCurrentFallowArea {

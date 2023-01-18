@@ -18,6 +18,9 @@ namespace H.Core.Calculators.Infrastructure
         /// </summary>
         public double TotalFlowOfDegradedVolatileSolids { get; set; }
 
+        /// <summary>
+        /// (t day^-1)
+        /// </summary>
         public double FlowRateOfAllSubstratesInDigestate { get; set; }
 
         public double FlowRateOfAllTotalSolidsInDigestate { get; set; }
@@ -39,8 +42,14 @@ namespace H.Core.Calculators.Infrastructure
          * Liquid/solid separation
          */
 
+        /// <summary>
+        /// (t day^-1)
+        /// </summary>
         public double FlowRateLiquidFraction { get; set; }
 
+        /// <summary>
+        /// (t day^-1)
+        /// </summary>
         public double FlowRateSolidFraction { get; set; }
 
         public double FlowOfTotalSolidsInLiquidFraction { get; set; }
