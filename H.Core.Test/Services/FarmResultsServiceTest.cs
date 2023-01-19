@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -15,6 +16,7 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Feed;
 using H.Core.Providers.Soil;
 using H.Core.Services;
+using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -47,7 +49,7 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _farmResultsService = new FarmResultsService(new EventAggregator(), new FieldResultsService());
+            _farmResultsService = new FarmResultsService(new EventAggregator(), new FieldResultsService(), new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object);
         }
 
         [TestCleanup]

@@ -44,5 +44,8 @@ namespace H.Core.Enumerations
         /// </summary>
         [LocalizedDescription("EnumFractionOrganicNitrogen", typeof(Resources))]
         OrganicNitrogen,
+
+        [LocalizedDescription("EnumFractionCarbon", typeof(Resources))]
+        FractionCarbon,
     }
 }

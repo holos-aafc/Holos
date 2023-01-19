@@ -1,22 +1,32 @@
-﻿using H.Infrastructure;
+﻿using System;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
     public abstract class StorageTankBase : ModelBase
     {
         #region Fields
+
+        private DateTime _asOfDate;
         
         private double _volumeRemainingInTank;
         private double _volumeOfManureAvailableForLandApplication;
         private double _totalOrganicNitrogenAvailableForLandApplication;
         private double _totalTanAvailableForLandApplication;
         private double _totalAmountOfCarbonInStoredManure;
-        private double _totalAvailableManureNitrogenAvailableForLandApplication;
-        private double _totalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications;
+        private double _totalNitrogenAvailableForLandApplication;
+        private double _totalNitrogenAvailableAfterAllLandApplications;
         private double _nitrogenSumOfAllManureApplicationsMade;
         private double _volumeSumOfAllManureApplicationsMade;
 
         #endregion
+
+        protected StorageTankBase()
+        {
+
+            // This needs to be added to the tank view
+            this.AsOfDate = DateTime.Now;
+        }
 
         #region Properties
 
@@ -54,22 +64,28 @@ namespace H.Core.Models
             set => SetProperty(ref _totalAmountOfCarbonInStoredManure, value);
         }
 
-        public double TotalAvailableManureNitrogenAvailableForLandApplication
+        public double TotalNitrogenAvailableForLandApplication
         {
-            get => _totalAvailableManureNitrogenAvailableForLandApplication;
-            set => SetProperty(ref _totalAvailableManureNitrogenAvailableForLandApplication, value);
+            get => _totalNitrogenAvailableForLandApplication;
+            set => SetProperty(ref _totalNitrogenAvailableForLandApplication, value);
         }
 
-        public double TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications
+        public double TotalNitrogenAvailableAfterAllLandApplications
         {
-            get => _totalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications;
-            set => SetProperty(ref _totalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications, value);
+            get => _totalNitrogenAvailableAfterAllLandApplications;
+            set => SetProperty(ref _totalNitrogenAvailableAfterAllLandApplications, value);
         }
 
         public double NitrogenSumOfAllManureApplicationsMade
         {
             get => _nitrogenSumOfAllManureApplicationsMade;
-            set => SetProperty(ref _nitrogenSumOfAllManureApplicationsMade, value, OnSumOfAllManureApplicationsMade);
+            set
+            {
+                SetProperty(ref _nitrogenSumOfAllManureApplicationsMade, value);
+
+                // This needs to be called if the value is changed or not and keep the call outside of SetProperty()
+                OnSumOfAllManureApplicationsMade();
+            }
         }
 
         public double VolumeSumOfAllManureApplicationsMade
@@ -84,18 +100,24 @@ namespace H.Core.Models
             set => SetProperty(ref _volumeOfManureAvailableForLandApplication, value);
         }
 
+        public DateTime AsOfDate
+        {
+            get => _asOfDate;
+            set => SetProperty(ref _asOfDate, value);
+        }
+
         #endregion
 
         #region Public Methods
 
-        public void ResetTank()
+        public virtual void ResetTank()
         {
             this.VolumeRemainingInTank = 0;
             this.TotalOrganicNitrogenAvailableForLandApplication = 0;
             this.TotalTanAvailableForLandApplication = 0;
             this.TotalAmountOfCarbonInStoredManure = 0;
-            this.TotalAvailableManureNitrogenAvailableForLandApplication = 0;
-            this.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = 0;
+            this.TotalNitrogenAvailableForLandApplication = 0;
+            this.TotalNitrogenAvailableAfterAllLandApplications = 0;
             this.NitrogenSumOfAllManureApplicationsMade = 0;
             this.VolumeSumOfAllManureApplicationsMade = 0;
             this.VolumeOfManureAvailableForLandApplication = 0;
@@ -107,7 +129,7 @@ namespace H.Core.Models
         
         private void OnSumOfAllManureApplicationsMade()
         {
-            this.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications = this.TotalAvailableManureNitrogenAvailableForLandApplication - this.NitrogenSumOfAllManureApplicationsMade;
+            this.TotalNitrogenAvailableAfterAllLandApplications = this.TotalNitrogenAvailableForLandApplication - this.NitrogenSumOfAllManureApplicationsMade;
         }
 
         private void OnVolumeSumOfAllManureApplicationsMade()

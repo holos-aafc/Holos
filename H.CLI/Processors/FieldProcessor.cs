@@ -15,6 +15,7 @@ using H.Core.Providers.Climate;
 using H.Core.Services;
 using H.Core.Services.LandManagement;
 using H.Core.Calculators.Economics;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
 
 namespace H.CLI.Processors
@@ -33,8 +34,11 @@ namespace H.CLI.Processors
 
         public FieldProcessor()
         {
+            var animalService = new AnimalResultsService();
+            var manureService = new ManureService(animalService);
+
             _fieldResultsService = new FieldResultsService();
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
             _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
         }
 

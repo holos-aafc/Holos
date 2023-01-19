@@ -11,20 +11,28 @@ namespace H.Core.Services.Animals
     /// <summary>
     /// Keep manure calculations separate from <see cref="FarmResultsService"/>
     /// </summary>
-    public class ManureService
+    public class ManureService : IManureService
     {
         #region Fields
 
-        private readonly AnimalResultsService _animalResultsService;
+        private readonly IAnimalService _animalService;
         private readonly List<ManureTank> _manureTanks;
 
         #endregion
 
         #region Constructors
 
-        public ManureService()
+        public ManureService(IAnimalService animalService)
         {
-            _animalResultsService = new AnimalResultsService();
+            if (animalService != null)
+            {
+                _animalService = animalService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(animalService));
+            }
+
             _manureTanks = new List<ManureTank>();
         }
 
@@ -107,8 +115,8 @@ namespace H.Core.Services.Animals
                 manureTank.TotalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManure;
 
                 // Before any nitrogen from any manure applications have been subtracted from the tank, these two values will be the same
-                manureTank.TotalAvailableManureNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
-                manureTank.TotalAvailableManureNitrogenAvailableForLandApplicationAfterAllLandApplications += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
+                manureTank.TotalNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
+                manureTank.TotalNitrogenAvailableAfterAllLandApplications += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
 
                 // Before any volume of manure from field applications have been subtracted from the tank, these two values will be the same
                 manureTank.VolumeOfManureAvailableForLandApplication += groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication * 1000;
@@ -136,7 +144,7 @@ namespace H.Core.Services.Animals
             var animalType = manureTank.AnimalType;
             var distinctYears = years.Distinct().ToList();
 
-            var resultsForType = _animalResultsService.GetAnimalResults(animalType, farm);
+            var resultsForType = _animalService.GetAnimalResults(animalType, farm);
 
             foreach (var year in distinctYears)
             {

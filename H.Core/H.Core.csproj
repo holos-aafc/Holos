@@ -118,6 +118,7 @@
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
     <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
+    <Compile Include="Calculators\Infrastructure\IADCalculator.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />
@@ -615,8 +616,11 @@
     <Compile Include="Services\Animals\DairyCattleResultsService.cs" />
     <Compile Include="Services\Animals\DigestateService.cs" />
     <Compile Include="Services\Animals\IAnimalResultsService.cs" />
+    <Compile Include="Services\Animals\IAnimalService.cs" />
     <Compile Include="Services\Animals\IBeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\IDairyResultsService.cs" />
+    <Compile Include="Services\Animals\IDigestateService.cs" />
+    <Compile Include="Services\Animals\IManureService.cs" />
     <Compile Include="Services\Animals\IOtherLivestockResultsService.cs" />
     <Compile Include="Services\Animals\IPoultryResultsService.cs" />
     <Compile Include="Services\Animals\ISheepResultsService.cs" />

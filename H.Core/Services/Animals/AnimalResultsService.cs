@@ -8,7 +8,7 @@ using H.Core.Models.Animals;
 
 namespace H.Core.Services.Animals
 {
-    public class AnimalResultsService
+    public class AnimalResultsService : IAnimalService
     {
         #region Fields
         

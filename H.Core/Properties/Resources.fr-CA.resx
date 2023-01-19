@@ -969,6 +969,9 @@
   <data name="EnumFractionActiveDecayToPassive" xml:space="preserve">
     <value>fraction de dégradation des sous-bassins actifs en sous-bassins passifs</value>
   </data>
+  <data name="EnumFractionCarbon" xml:space="preserve">
+    <value>Fraction total carbon</value>
+  </data>
   <data name="EnumFractionMetabolicDMActivePool" xml:space="preserve">
     <value>Fraction metabolic dead matter active pool</value>
   </data>
@@ -2761,6 +2764,12 @@
   <data name="LabelATTDPhosphorus" xml:space="preserve">
     <value>digestibilité totale apparente du phosphore dans l'ensemble du tube digestif.</value>
   </data>
+  <data name="LabelAvailableCarbon" xml:space="preserve">
+    <value>Available C</value>
+  </data>
+  <data name="LabelAvailableNitrogen" xml:space="preserve">
+    <value>Available N</value>
+  </data>
   <data name="LabelAvailalabilityOfNFromManureDecomposition" xml:space="preserve">
     <value>Disponibilité de N issu de la décomposition du fumier</value>
   </data>
@@ -4058,6 +4067,9 @@
   <data name="MessageNoAnimalsGrazingOnThisField" xml:space="preserve">
     <value>Il n’y a pas de groupes d’animaux qui broutent dans ce champ. les groupes d’animaux qui ont un type de logement de « pâturage » seront affichés ici.</value>
   </data>
+  <data name="MessageNotEnoughDigestateForLandApplication" xml:space="preserve">
+    <value>Not enough digestate has been created by the anaerobic digestor for this field application. This value has been set to the maximum available amount of {0} {1}. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field.</value>
+  </data>
   <data name="MessagePastFallowAreaMustBeLessThanCurrentFallowArea" xml:space="preserve">
     <value>La dernière superficie en jachère doit être inférieure à la superficie en jachère actuelle. la dernière superficie en jachère a été remise à 0.</value>
   </data>
@@ -4287,7 +4299,7 @@
     <value>Graminées pour pâturage, qualité moyenne</value>
   </data>
   <data name="PastureHandlingSystemName" xml:space="preserve">
-    <value>pâturage</value>
+    <value>Pasture/range/paddock</value>
   </data>
   <data name="Peas" xml:space="preserve">
     <value>pois </value>
@@ -4763,6 +4775,9 @@
   <data name="TitleBackgroundingComponentDisplayString" xml:space="preserve">
     <value>bovins de long engraissement et semi-finis</value>
   </data>
+  <data name="TitleBiogasAndMethanePotential" xml:space="preserve">
+    <value>Biogas &amp; Methane Potential</value>
+  </data>
   <data name="TitleCNRatio" xml:space="preserve">
     <value>C:N</value>
   </data>
@@ -4786,6 +4801,9 @@
   </data>
   <data name="TitleDigestate" xml:space="preserve">
     <value>Digestate</value>
+  </data>
+  <data name="TitleDigestateFlows" xml:space="preserve">
+    <value>Digestate Flows</value>
   </data>
   <data name="TitleDirectCosts" xml:space="preserve">
     <value>Coûts directs</value>
@@ -4841,6 +4859,9 @@
   <data name="TitleIsoWean" xml:space="preserve">
     <value>sevrage en isolement</value>
   </data>
+  <data name="TitleLandApplication" xml:space="preserve">
+    <value>Land Application</value>
+  </data>
   <data name="TitleMultiYearCarbonModelling" xml:space="preserve">
     <value>modélisation pluriannuelle du carbone</value>
   </data>
@@ -4861,6 +4882,9 @@
   </data>
   <data name="TitleSheepComponentDisplayString" xml:space="preserve">
     <value>mouton</value>
+  </data>
+  <data name="TitleStorageEmissions" xml:space="preserve">
+    <value>Storage Emissions</value>
   </data>
   <data name="TitleTotalNumberOfBalesRemainingOnFarm" xml:space="preserve">
     <value>nombre total de balles restant à la ferme</value>

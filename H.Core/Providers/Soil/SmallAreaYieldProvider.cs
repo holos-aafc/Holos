@@ -58,6 +58,16 @@ namespace H.Core.Providers.Soil
                 lookupCropType = CropType.TamePasture;
             }
 
+            if (cropType == CropType.Flax)
+            {
+                lookupCropType = CropType.FlaxSeed;
+            }
+
+            if (cropType == CropType.FieldPeas)
+            {
+                lookupCropType = CropType.DryPeas;
+            }
+
             if (_cache.ContainsKey((year: year, polygon: polygon, cropType: lookupCropType, province: province)))
             {
                 return _cache[(year: year, polygon: polygon, cropType: lookupCropType, province: province)];

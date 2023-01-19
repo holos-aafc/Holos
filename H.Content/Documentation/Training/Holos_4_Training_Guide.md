@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. If there are no saved farms in the system, Holos will create a new farm and ask the user for a farm name and an optional comment (Figure 1). If there is already a saved farm in the system, Holos will ask the user to open the existing farm or to create a new farm (Figure 2). 
 
-Enter “**Holos 2022**” as a farm name and “**training version**” as the “**comment**”.  Click “**Ok**” to proceed to the next screen.
+Enter “**Holos 2023**” as a farm name and “**training version**” as the “**comment**”.  Click “**Ok**” to proceed to the next screen.
 
 Ensure “**Metric**” is selected as the unit of measurement type and then click the “**Next**” button at the bottom of the screen (Figure 3). 
 
@@ -210,13 +210,13 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 1. Add one "**Crop Rotation**" component from the available components.
 2. To expand the horizontal space available in Holos, click on "**View**" from the top menu bar and select "**Hide List of Available Components**".
-3. The rotation of this field **begins in 1985 and ends in 2022**. Under step 1, please ensure that these two values are set as the start and end year respectively.
+3. The rotation of this field **begins in 1985 and ends in 2023**. Under step 1, please ensure that these two values are set as the start and end year respectively.
 4. Enter "**70**" ha as the **total area** of this field.
-5. Under **Step 2** change the crop to **Barley**. The **year** for this crop should be 2022.
+5. Under **Step 2** change the crop to **Barley**. The **year** for this crop should be 2023.
     * Under the **General Tab** enter **3000** kg/ha (wet weight) as the **yield** for this crop.
     * Change the **tillage type** to **Reduced Tillage**.
     * Keep **0** as the amount of irrigation and number of pesticide passes.
-6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. Note that Holos sets the year for this new crop to 2021 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985. 
+6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. Note that Holos sets the year for this new crop to 2022 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985. 
 
 
 <br>
@@ -238,9 +238,9 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 <br>
 
 
-9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2021) and then:
+9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2022) and then:
     * Go under the **Harvest Tab** and click **Add Harvest Date** button to create a new harvest.
-    * Select a Harvest date of "August 31, 2021", assuming the harvest is done on the same day every year.
+    * Select a Harvest date of "August 31, 2022", assuming the harvest is done on the same day every year.
     * Select **Mid** for **Forage growth stage**.
     * Enter **5** as the total number of bales.
     * Enter **500** as the **Wet bale weight**.
@@ -278,7 +278,7 @@ Following the annual feeding cycle, the beef farm we are working with is **divid
 
 2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
 
-3. Ensure “**January 1, 2021**” is set as the ‘**Start date**’ and that “**April 30, 2021**” is set as the ‘**End date**’.
+3. Ensure “**January 1, 2022**” is set as the ‘**Start date**’ and that “**April 30, 2022**” is set as the ‘**End date**’.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
@@ -338,7 +338,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 #### Beef Cows - Summer Grazing
 
-Click on the management period named **Summer Grazing**. Ensure that the start date is set to May 1st, 2021 and the end date is set to October 31st, 2021.
+Click on the management period named **Summer Grazing**. Ensure that the start date is set to May 1st, 2022 and the end date is set to October 31st, 2022.
 
 
 * **General Tab:**
@@ -358,7 +358,7 @@ Click on the management period named **Summer Grazing**. Ensure that the start d
 
 #### Beef Cows - Extended Fall Grazing
 
-Click on the management period named **Extended Fall Grazing**. Ensure that the start date is set to November 1st, 2021 and the end date is set to December 31st, 2021.
+Click on the management period named **Extended Fall Grazing**. Ensure that the start date is set to November 1st, 2022 and the end date is set to December 31st, 2022.
 
 
 * **General Tab:**
@@ -406,7 +406,7 @@ Click on the **Bulls** row in the animal group section **Step 1**. Information r
 
 Calves on our farm are born on March 1 and weaned on September 30 at the age of seven months. Using a final weaning rate of 85%, we will have 110 calves from March to September. Following the cows, calves will be in confinement for the months of March and April and will be grazing on pasture from May to September. This will result in two separate management periods.
 
-Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2021 to April 30, 2021** and the second management period will span from **May 1, 2021 to September 30, 2021**.
+Click on the **Calves** row in the animal group section **Step 1** to activate the calf group. The first management period will span from **March 1, 2022 to April 30, 2022** and the second management period will span from **May 1, 2022 to September 30, 2022**.
 
 
 **Management Period # 1:**
@@ -458,7 +458,7 @@ To enter information on backgrounder and stocker animals, we will add a new “*
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**October 1, 2021**” as the ‘**Start date**’ and “**January 18, 2022**” as the ‘**End date**’.
+    * For “Management period #1”, enter “**October 1, 2022**” as the ‘**Start date**’ and “**January 18, 2023**” as the ‘**End date**’.
 
 
     * **General Tab:**
@@ -499,7 +499,7 @@ We will now **repeat the steps used for Beef Stockers & Backgrounders** to enter
 
 - Click on the **Heifers** group to activate it and to enter management data for this group.
 
-    * For “Management period #1”, enter “**January 19, 2022**” as the **Start date** and “**July 7th, 2022**” as the **End date**.
+    * For “Management period #1”, enter “**January 19, 2023**” as the **Start date** and “**July 7th, 2023**” as the **End date**.
 
 
     * **General Tab:**
@@ -579,9 +579,9 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
 2. Select the **Pullets** group. The start and end dates for each management period will be:
-    - **Brooding Stage:** Start: January 1st, 2022 - End: January 22nd, 2022. 
-    - **Rearing Stage:** Start: January 23rd, 2022 - End: June 26th, 2022.
-    - **Rearing Stage:** Start: June 27th, 2022 - End: November 28th, 2022.
+    - **Brooding Stage:** Start: January 1st, 2023 - End: January 22nd, 2023. 
+    - **Rearing Stage:** Start: January 23rd, 2023 - End: June 26th, 2023.
+    - **Rearing Stage:** Start: June 27th, 2023 - End: November 28th, 2023.
 3. For each management period, set number of animals to **400**.
 4. Leave the entries in Housing and Manure as default.
 

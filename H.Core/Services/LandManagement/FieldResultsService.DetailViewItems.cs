@@ -438,26 +438,38 @@ namespace H.Core.Services.LandManagement
 
             // Take the first phase of the rotation from the view items and use that as the basis for the run in period since these items will differ depending on
             // which field is being considered in the rotation.
-            var items = viewItemsForField.OrderBy(x => x.Year).Take(viewItemsForRotation.Count()).ToList();
+            var mainCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == false).Take(viewItemsForRotation.Count()).ToList();
+            var coverCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == true).Take(viewItemsForRotation.Count()).ToList();
 
             // Reverse items so we can use indexes from the beginning of collection
-            items.Reverse();
+            mainCrops.Reverse();
+            coverCrops.Reverse();
 
             // Start at the year before the user-defined start year and work backwards towards the start year of the run in period
             for (int indexYear = startYearOfField - 1; indexYear >= runInPeriodStartYear; indexYear--, moduloCounter++)
             {
                 var moduloIndex = moduloCounter % viewItemsForRotation.Count();
-                var itemAtYear = items.ElementAt(moduloIndex);
+                var mainCropAtYear = mainCrops.ElementAt(moduloIndex);
 
-                // Need to get all items at year, not just main crop?
+                var createdMainCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropAtYear, indexYear);
+                createdMainCrop.Year = indexYear;
+                createdMainCrop.DetailViewItemToComponentSelectionViewItemMap = mainCropAtYear.Guid;
+                createdMainCrop.FieldSystemComponentGuid = fieldComponent.Guid;
 
-                var createdViewItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(itemAtYear, indexYear);
-                createdViewItem.Year = indexYear;
-                createdViewItem.DetailViewItemToComponentSelectionViewItemMap = itemAtYear.Guid;
-                createdViewItem.FieldSystemComponentGuid = fieldComponent.Guid;
+                // Add to list of run in period items;
+                runInPeriodItems.Add(createdMainCrop);
 
-                // Add to list of run in period items
-                runInPeriodItems.Add(createdViewItem);
+                var coverCropAtYear = coverCrops.ElementAtOrDefault(moduloIndex);
+                if (coverCropAtYear != null)
+                {
+                    var createdCoverCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(coverCropAtYear, indexYear);
+                    createdCoverCrop.Year = indexYear;
+                    createdCoverCrop.DetailViewItemToComponentSelectionViewItemMap = coverCropAtYear.Guid;
+                    createdCoverCrop.FieldSystemComponentGuid = fieldComponent.Guid;
+
+                    // Add to list of run in period items;
+                    runInPeriodItems.Add(createdCoverCrop);
+                }
             }
 
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
