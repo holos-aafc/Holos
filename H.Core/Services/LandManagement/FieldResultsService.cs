@@ -52,6 +52,7 @@ namespace H.Core.Services.LandManagement
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();
+        private readonly FieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
 
         private readonly IMapper _detailViewItemMapper;
         private readonly IMapper _manureApplicationViewItemMapper;

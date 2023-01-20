@@ -400,7 +400,10 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
+            // Only add run-in period items if the filed being considered here is the earliest out of all historical, current, projected components. We don't want run in period items
+            // for any other component that isn't the earliest
+            if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
+                _fieldComponentHelper.IsEarliestManagementPeriodForField(farm, fieldSystemComponent))
             {
                 var runInPeriodItems = this.GetRunInPeriodItems(
                     farm: farm,
