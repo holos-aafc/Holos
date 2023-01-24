@@ -1,9 +1,3 @@
-<style>
-div {
-    margin-left: 1.5em;
-}
-</style>
-
 <p align="center">
 <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
 <br>
@@ -17,7 +11,7 @@ The purpose of this document is to allow for users to find answers to their ques
 ## General FAQ
 
 #### 1. I do not know how to use the Holos program.
-<div>
+<div style="margin-left: 1.5em">
 <p>The training guide is available. Following step by steps would help you to learn how to use the program. The links are below:
 
 <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md">Training Guide [ENG]</a>
@@ -29,7 +23,7 @@ The purpose of this document is to allow for users to find answers to their ques
 ---
 
 #### 2. How do I add/edit this FAQ?
-<div>
+<div style="margin-left: 1.5em">
 <p> Users can add and edit this FAQ. Note that this page uses markdown. Here is the link to the FAQ markdown website: 
 
 <a href="">To add or edit FAQ</a>
@@ -39,7 +33,7 @@ The purpose of this document is to allow for users to find answers to their ques
 ---
 
 #### 3. Are there any videos I can watch?
-<div>
+<div style="margin-left: 1.5em">
 <p> Yes, there is a Youtube channel for Holos 4 that offers tutorials to get the new user up and running. The link is below:
 
 <a href="https://www.youtube.com/channel/UCHDORmZ73VICHzqm_yVpM_Q">Tutorial Video</a>
@@ -51,7 +45,7 @@ The purpose of this document is to allow for users to find answers to their ques
 ## Cropping FAQ
 
 #### 1. Where is my crop?
-<div>
+<div style="margin-left: 1.5em">
 We do not have all crops. Find similar one.
 </div>
 
