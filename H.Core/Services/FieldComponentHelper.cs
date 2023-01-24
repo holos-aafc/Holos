@@ -168,9 +168,7 @@ namespace H.Core.Services
                 return true;
             }
 
-
             // Is a projected period
-
             return false;
         }
 
