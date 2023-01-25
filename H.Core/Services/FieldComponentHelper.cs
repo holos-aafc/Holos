@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Economics;
@@ -143,6 +144,32 @@ namespace H.Core.Services
             fieldSystemComponent.IsInitialized = true;
 
             return fieldSystemComponent;
+        }
+
+        public bool IsEarliestManagementPeriodForField(Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            var currentPeriodComponent = farm.FieldSystemComponents.SingleOrDefault(x => x.Guid.Equals(fieldSystemComponent.CurrentPeriodComponentGuid));
+            if (currentPeriodComponent == null)
+            {
+                currentPeriodComponent = fieldSystemComponent;
+            }
+
+            var historicalComponents = currentPeriodComponent.HistoricalComponents.ToList();
+            if (historicalComponents.Any())
+            {
+                var first = historicalComponents.OrderBy(x => x.StartYear).First();
+
+                // Does the guid of the component being passed in have the same id as the earliest period component? If yes, then return true
+                return first.Guid == fieldSystemComponent.Guid;
+            }
+
+            if (fieldSystemComponent.TimePeriodCategoryIsCurrent)
+            {
+                return true;
+            }
+
+            // Is a projected period
+            return false;
         }
 
         public void Replicate(ComponentBase copyFrom, ComponentBase copyTo)

@@ -34,6 +34,7 @@ namespace H.Core.Providers.Climate
 
         // Timeout is in seconds. 60s = 1 minute.
         private const int Timeout = 60;
+        private const int DataUndefined = -999;
 
         #endregion
 
@@ -143,6 +144,22 @@ namespace H.Core.Providers.Climate
                 data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the Evapotranspiration calculator expects. No conversion is needed here
                 data.MeanDailyPET = _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(data.MeanDailyAirTemperature, data.SolarRadiation, data.RelativeHumidity);
                 data.JulianDay = julian++;
+
+                // Nasa will return -999 for unknown data values, replace with 0 for now until better solution is found
+                if (Math.Abs(data.MeanDailyAirTemperature - DataUndefined) < double.Epsilon)
+                {
+                    data.MeanDailyAirTemperature = 0;
+                }
+
+                if (Math.Abs(data.MeanDailyPrecipitation - DataUndefined) < double.Epsilon)
+                {
+                    data.MeanDailyPrecipitation = 0;
+                }
+
+                if (Math.Abs(data.RelativeHumidity - DataUndefined) < double.Epsilon)
+                {
+                    data.RelativeHumidity = 0;
+                }
 
                 data.Date = new DateTime(data.Year, 1, 1).AddDays(data.JulianDay - 1);
 

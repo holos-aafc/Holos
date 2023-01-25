@@ -621,6 +621,8 @@ namespace H.Core.Models
             set => SetProperty(ref _farmHasBales, value);
         }
 
+        public int MapZoomLevel { get; set; }
+
         #endregion
 
         #region Public Methods

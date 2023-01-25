@@ -216,7 +216,6 @@ namespace H.Core
             });
         }
 
-
         /// <summary>
         /// Uses <see cref="JsonReader"/> and <see cref="StreamReader"/> to read a .json file that contains user's saved data.
         /// </summary>
