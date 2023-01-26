@@ -39,10 +39,15 @@ namespace H.Core.Providers.Animals
                
             if (animalType == AnimalType.SwineGilts) // Footnote 1
             {
-                return 1.5;
+                return 2.42;
             }
                 
-            if (animalType == AnimalType.SwineGrower || animalType == AnimalType.SwineFinisher) // Footnote 1
+            if (animalType == AnimalType.SwineGrower) // Footnote 1
+            {
+                return 0.7;
+            }
+            
+            if (animalType == AnimalType.SwineFinisher) // Footnote 1
             {
                 return 1.5;
             }
