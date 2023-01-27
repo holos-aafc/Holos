@@ -66,7 +66,7 @@ The map contains red colored polygons that can be selected by moving the cursor 
 The beef farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
 
 
-1. Find and right-click on this polygon to select it on the map. You will see a pin marker on the region where you has clicked. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
+1. Find and right-click on this polygon to select it on the map. You will see a pin marker on the region where you have clicked. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
 <br>
 
