@@ -130,7 +130,7 @@ Holos can handle multiple farms created by the user, each representing different
 	<em>
 		Figure: 2.6 Farm Location Selection Screen. 
 		<br>
-		A: Select the location of your farm in this section.
+		A: Select the location of your farm in this section. You will see a pin marker on the region where you has clicked.
 		<br>
 		B: The progress bar for downloading climate data from NASA.
 		<br>

@@ -137,7 +137,7 @@ Holos peut gérer plusieurs fermes créées par l’utilisateur, chacune représ
     	<em>
     		Figure 2.6: Écran de sélection de l’emplacement de la ferme. 
     		<br>
-    		A : Sélectionnez l’emplacement de votre ferme dans cette section. 
+    		A : Sélectionnez l’emplacement de votre ferme dans cette section. You will see a pin marker on the region where you has clicked.
     		<br>
     		B : Barre de progression pour télécharger des données climatiques de la NASA.  
     		<br>
