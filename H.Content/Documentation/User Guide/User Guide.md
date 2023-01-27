@@ -125,7 +125,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter2/figure2-6.png" alt="Figure 2-6" width="550"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-6.png" alt="Figure 2-6" width="750"/>
     <br>
 	<em>
 		Figure: 2.6 Farm Location Selection Screen. 
