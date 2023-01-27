@@ -99,7 +99,7 @@ Conservez le premier type de sol sélectionné et la « zone de rusticité » pa
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="850"/>
+    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="950"/>
     <br>
     <em>Figure 6: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
 </p>  
