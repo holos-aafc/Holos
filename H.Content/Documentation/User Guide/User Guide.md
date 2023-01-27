@@ -145,7 +145,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter2/figure2-7.PNG" alt="Figure 2-7" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-7.png" alt="Figure 2-7" width="450"/>
     <br>
     <em>Figure: 2.7 Soil Zone Selection.</em>
 </p>
@@ -155,7 +155,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter2/figure2-8.PNG" alt="Figure 2-8" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-8.png" alt="Figure 2-8" width="450"/>
     <br>
 	<em>
 		Figure: 2.8 Hardiness Zone Selection. 
@@ -171,7 +171,7 @@ Holos can handle multiple farms created by the user, each representing different
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter2/figure2-9.PNG" alt="Figure 2-9" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-9.png" alt="Figure 2-9" width="750"/>
     <br>
 	<em>
 		Figure: 2.9 Climate Data Tab. 
