@@ -208,9 +208,6 @@ namespace H.Core.Services.LandManagement
                      */
                     this.CombineInputsForAllCropsInSameYear(detailViewItems, fieldSystemComponent);
 
-                    // Combine inputs for run in period
-                    this.CombineInputsForAllCropsInSameYear(fieldSystemComponent.RunInPeriodItems, fieldSystemComponent);
-
                     // Merge multiple items with the same year into a single year view items so that no two view items have the same year when calculating ICBM results (ICBM calculations
                     // require exactly one item per year (with combined inputs when there is a secondary crop grown)
                     var mergedItems = this.MergeDetailViewItems(detailViewItems, fieldSystemComponent);

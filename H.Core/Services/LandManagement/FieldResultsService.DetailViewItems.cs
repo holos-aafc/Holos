@@ -400,21 +400,6 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            // Only add run-in period items if the filed being considered here is the earliest out of all historical, current, projected components. We don't want run in period items
-            // for any other component that isn't the earliest
-            if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && 
-                _fieldComponentHelper.IsEarliestManagementPeriodForField(farm, fieldSystemComponent))
-            {
-                var runInPeriodItems = this.GetRunInPeriodItems(
-                    farm: farm,
-                    viewItemsForRotation: viewItems,
-                    startYearOfField: startYear,
-                    viewItemsForField: result, fieldComponent: fieldSystemComponent);
-
-                fieldSystemComponent.RunInPeriodItems.Clear();
-                fieldSystemComponent.RunInPeriodItems.AddRange(runInPeriodItems);
-            }
-
             return result.OrderBy(x => x.Year).ThenByDescending(x => x.CropType.IsAnnual()).ThenByDescending(x => x.CropType.IsCoverCrop()).ThenByDescending(x => x.CropType.IsPerennial());
         }
 
@@ -430,7 +415,8 @@ namespace H.Core.Services.LandManagement
         public List<CropViewItem> GetRunInPeriodItems(Farm farm,
             IEnumerable<CropViewItem> viewItemsForRotation,
             int startYearOfField,
-            IEnumerable<CropViewItem> viewItemsForField, FieldSystemComponent fieldComponent)
+            IEnumerable<CropViewItem> viewItemsForField, 
+            FieldSystemComponent fieldComponent)
         {
             var moduloCounter = 0;
             var runInPeriodItems = new List<CropViewItem>();

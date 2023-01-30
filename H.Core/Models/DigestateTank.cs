@@ -11,7 +11,7 @@ namespace H.Core.Models
 
         private DigestateState _digestateState;
 
-        private double _totalDigestateAfterAllApplication;
+        private double _totalDigestateAfterAllApplications;
         private double _totalSolidDigestateAfterAllApplications;
         private double _totalLiquidDigestateAfterAllApplications;
         private double _volumeOfAllDigestateApplications;
@@ -31,10 +31,10 @@ namespace H.Core.Models
             set => SetProperty(ref _digestateState, value);
         }
 
-        public double TotalDigestateAfterAllApplication
+        public double TotalDigestateAfterAllApplications
         {
-            get => _totalDigestateAfterAllApplication;
-            set => SetProperty(ref _totalDigestateAfterAllApplication, value);
+            get => _totalDigestateAfterAllApplications;
+            set => SetProperty(ref _totalDigestateAfterAllApplications, value);
         }
 
         public double TotalSolidDigestateAfterAllApplications
@@ -65,11 +65,16 @@ namespace H.Core.Models
 
         #region Public Methods
 
+        public double TotalDigestateAvailablePerHectare(double area)
+        {
+            return this.TotalDigestateAfterAllApplications / area;
+        }
+
         public override void ResetTank()
         {
             base.ResetTank();
 
-            this.TotalDigestateAfterAllApplication = 0;
+            this.TotalDigestateAfterAllApplications = 0;
             this.TotalLiquidDigestateAfterAllApplications = 0;
             this.TotalSolidDigestateAfterAllApplications = 0;
         }

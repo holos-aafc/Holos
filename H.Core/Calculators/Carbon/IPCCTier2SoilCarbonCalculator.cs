@@ -85,17 +85,11 @@ namespace H.Core.Calculators.Carbon
         }
 
         public void CalculateResults(
-            Farm farm, 
-            List<CropViewItem> viewItemsByField, 
-            FieldSystemComponent fieldSystemComponent)
+            Farm farm,
+            List<CropViewItem> viewItemsByField,
+            FieldSystemComponent fieldSystemComponent, 
+            List<CropViewItem> runInPeriodItems)
         {
-            var runInPeriodItems = fieldSystemComponent.RunInPeriodItems.ToList();
-            if (runInPeriodItems.Any() == false)
-            {
-                // Will occur with some old farms. User will have to rebuild detail view items
-                return;
-            }
-
             var runInPeriod = this.CalculateRunInPeriod(
                 farm: farm,
                 runInPeriodItems: runInPeriodItems);

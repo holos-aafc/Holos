@@ -76,10 +76,7 @@ namespace H.Core.Services.LandManagement
             // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
             this.AssignYieldToAllYears(
                 cropViewItems: viewItems,
-                farm: farm);
-
-            // Assign yields to run in period items
-            this.AssignYieldToAllYears(fieldSystemComponent.RunInPeriodItems, farm);
+                farm: farm, fieldSystemComponent: fieldSystemComponent);
 
             // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
             this.UpdatePercentageReturnsForPerennials(
@@ -406,6 +403,29 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
+        private FieldSystemComponent GetLeftMostComponent(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            var currentFieldComponent = new FieldSystemComponent();
+            var currentComponentId = fieldSystemComponent.CurrentPeriodComponentGuid;
+            if (currentComponentId.Equals(Guid.Empty))
+            {
+                currentFieldComponent = fieldSystemComponent;
+            }
+            else
+            {
+                currentFieldComponent = farm.GetFieldSystemComponent(currentComponentId);
+            }
+
+            if (currentFieldComponent.HistoricalComponents.Any())
+            {
+                return currentFieldComponent.HistoricalComponents.Cast<FieldSystemComponent>().OrderBy(x => x.StartYear).First();
+            }
+            else
+            {
+                return currentFieldComponent;
+            }
+        }
+
         /// <summary>
         /// Calculates final results for one field. Results will be assigned to view items
         /// </summary>
@@ -416,12 +436,20 @@ namespace H.Core.Services.LandManagement
         {
             var fieldSystemComponent = farm.GetFieldSystemComponent(fieldSystemGuid);
 
+            // Need to get leftmost component here
+            var leftMost = this.GetLeftMostComponent(fieldSystemComponent, farm);
+
+            // Create run in period items
+            var runinPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear, viewItemsForField, leftMost);
+
+            this.AssignYieldToAllYears(runinPeriodItems, farm, leftMost);
+
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
-                foreach (var runInPeriodItem in fieldSystemComponent.RunInPeriodItems)
+                foreach (var runInPeriodItem in runinPeriodItems)
                 {
                     if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
                     {
@@ -434,19 +462,19 @@ namespace H.Core.Services.LandManagement
                 }
 
                 // Combine inputs now that we have C set on cover crops
-                this.CombineInputsForAllCropsInSameYear(fieldSystemComponent.RunInPeriodItems, fieldSystemComponent);
+                this.CombineInputsForAllCropsInSameYear(runinPeriodItems, leftMost);
 
                 // Merge all run in period items
-                var mergedItems =
-                    this.MergeDetailViewItems(fieldSystemComponent.RunInPeriodItems, fieldSystemComponent);
+                var mergedRunInItems = this.MergeDetailViewItems(runinPeriodItems, leftMost);
 
-                fieldSystemComponent.RunInPeriodItems.Clear();
-                fieldSystemComponent.RunInPeriodItems.AddRange(mergedItems);
+                // Combine inputs for run in period
+                this.CombineInputsForAllCropsInSameYear(mergedRunInItems, leftMost);
 
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,
                     viewItemsByField: viewItemsForField,
-                    fieldSystemComponent: fieldSystemComponent);
+                    fieldSystemComponent: leftMost, 
+                    runInPeriodItems: mergedRunInItems);
             }
             else
             {

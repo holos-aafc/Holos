@@ -30,8 +30,9 @@ namespace H.Core.Services.LandManagement
                                             bool exportedFromGui,
                                             Farm farm);
         double CalculateHarvest(CropViewItem viewItem);
-        void AssignYieldToYear(Farm farm, CropViewItem viewItem);
-        void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm);
+        void AssignYieldToYear(Farm farm, CropViewItem viewItem, FieldSystemComponent fieldSystemComponent);
+        void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
+            FieldSystemComponent fieldSystemComponent);
 
         void AssignDefaultPercentageReturns(
             CropViewItem viewItem,

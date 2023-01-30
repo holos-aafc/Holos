@@ -884,14 +884,13 @@ namespace H.Core.Test.Calculators.Carbon
                 _sut.CalculateInputs(viewItem, new Farm());
             }
 
-            fieldSystemComponent.RunInPeriodItems.Add(new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3});
-
             _sut.CropResiduePool = 100;
 
             _sut.CalculateResults(
                 farm: farm, 
                 viewItemsByField: viewItems, 
-                fieldSystemComponent: fieldSystemComponent);
+                fieldSystemComponent: fieldSystemComponent, 
+                runInPeriodItems: new List<CropViewItem>() {new CropViewItem()});
 
             // The non-run in period items (only 1 in this case) should have calculate values for all pools
             var firstItemInSimulation = viewItems.Single(x => x.Year == 1987);
@@ -987,9 +986,8 @@ namespace H.Core.Test.Calculators.Carbon
             };
 
             var fieldSystemComponent = new FieldSystemComponent();
-            fieldSystemComponent.RunInPeriodItems = new ObservableCollection<CropViewItem>(runInPeriodItems);
 
-            _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent);
+            _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent, new List<CropViewItem>() {new CropViewItem()});
 
             Assert.AreEqual(viewItemsByField.First().SoilCarbon, farm.StartingSoilOrganicCarbon);
         }

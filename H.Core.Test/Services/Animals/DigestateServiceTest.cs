@@ -122,7 +122,7 @@ namespace H.Core.Test.Services.Animals
 
             _sut.SetStartingStateOfTank(tank, adResults, new Farm(), DateTime.Now);
 
-            Assert.AreEqual(200, tank.TotalDigestateAfterAllApplication);
+            Assert.AreEqual(200, tank.TotalDigestateAfterAllApplications);
         }
 
         [TestMethod]

@@ -148,7 +148,7 @@ namespace H.Core.Services.Animals
                 }
             }
 
-            tank.TotalDigestateAfterAllApplication -= totalNonSeparatedDigestate;
+            tank.TotalDigestateAfterAllApplications -= totalNonSeparatedDigestate;
             tank.TotalLiquidDigestateAfterAllApplications -= totalLiquidSeparatedDigestate;
             tank.TotalSolidDigestateAfterAllApplications -= totalSolidSeparatedDigestate;
         }
@@ -158,6 +158,7 @@ namespace H.Core.Services.Animals
             var adResults = this.GetDailyResults(farm);
 
             var tank = this.GetDigestateTankInternal(dateTime.Year, state);
+            tank.AsOfDate = dateTime;
 
             this.SetStartingStateOfTank(tank, adResults, farm, dateTime);
             this.ReduceTankByDigestateApplications(farm, tank);
@@ -169,7 +170,7 @@ namespace H.Core.Services.Animals
         {
             var tank = this.GetTank(farm, dateTime, state);
 
-            return tank.TotalDigestateAfterAllApplication;
+            return tank.TotalDigestateAfterAllApplications;
         }
 
         public double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, List<DigestorDailyOutput> digestorDailyOutputs)
@@ -192,12 +193,12 @@ namespace H.Core.Services.Animals
 
             var targetDateResults = results.Where(x => x.Date.Date <= dateTime.Date);
 
-            tank.TotalDigestateAfterAllApplication = targetDateResults.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
+            tank.TotalDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
             tank.TotalLiquidDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateLiquidFraction);
             tank.TotalSolidDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateSolidFraction);
 
             // This property to the gauge view now (maximum value of gauge) // Before digestate applications have been considered, these two will be equal
-            tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplication;
+            tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplications;
         }
 
         #endregion

@@ -146,32 +146,6 @@ namespace H.Core.Services
             return fieldSystemComponent;
         }
 
-        public bool IsEarliestManagementPeriodForField(Farm farm, FieldSystemComponent fieldSystemComponent)
-        {
-            var currentPeriodComponent = farm.FieldSystemComponents.SingleOrDefault(x => x.Guid.Equals(fieldSystemComponent.CurrentPeriodComponentGuid));
-            if (currentPeriodComponent == null)
-            {
-                currentPeriodComponent = fieldSystemComponent;
-            }
-
-            var historicalComponents = currentPeriodComponent.HistoricalComponents.ToList();
-            if (historicalComponents.Any())
-            {
-                var first = historicalComponents.OrderBy(x => x.StartYear).First();
-
-                // Does the guid of the component being passed in have the same id as the earliest period component? If yes, then return true
-                return first.Guid == fieldSystemComponent.Guid;
-            }
-
-            if (fieldSystemComponent.TimePeriodCategoryIsCurrent)
-            {
-                return true;
-            }
-
-            // Is a projected period
-            return false;
-        }
-
         public void Replicate(ComponentBase copyFrom, ComponentBase copyTo)
         {
             var to = copyTo as FieldSystemComponent;

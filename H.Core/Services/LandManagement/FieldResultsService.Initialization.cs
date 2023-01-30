@@ -350,29 +350,21 @@ namespace H.Core.Services.LandManagement
             cropViewItem.KValue = kValue;
         }
 
-        public void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm)
+        public void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
+            FieldSystemComponent fieldSystemComponent)
         {
             foreach (var viewItem in cropViewItems)
             {
-                this.AssignYieldToYear(farm, viewItem);
+                this.AssignYieldToYear(farm, viewItem, fieldSystemComponent);
             }
         }
 
         /// <summary>
         /// Assigns a yield to one view item for a field
         /// </summary>
-        public void AssignYieldToYear(
-            Farm farm, 
-            CropViewItem viewItem)
+        public void AssignYieldToYear(Farm farm,
+            CropViewItem viewItem, FieldSystemComponent fieldSystemComponent)
         {
-            var fieldComponent = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (fieldComponent == null)
-            {
-                Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: unable to find the associated field component with GUID: '{viewItem.FieldSystemComponentGuid}' for view item: '{viewItem}'");
-
-                return;
-            }
-
             var farmYieldAssignmentMethod = farm.YieldAssignmentMethod;
 
             if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
@@ -398,7 +390,7 @@ namespace H.Core.Services.LandManagement
             if (farmYieldAssignmentMethod == YieldAssignmentMethod.Average)
             {
                 // Create an average from the crops that define the rotation
-                var average = fieldComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
+                var average = fieldSystemComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
 
                 viewItem.Yield = average;
 
@@ -427,10 +419,10 @@ namespace H.Core.Services.LandManagement
 
             if (farmYieldAssignmentMethod == YieldAssignmentMethod.InputFile)
             {
-                //this line has been updated to work with Sarah's new file format,  It is ASSUMED that the rotation name is identical/substring of the farm name
+                //Assumed that the rotation name is identical/substring of the farm name
                 var yieldDataRow = farm.GeographicData.CustomYieldData.SingleOrDefault(
                     x => x.Year == viewItem.Year && 
-                         fieldComponent.Name.IndexOf(x.FieldName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0 && 
+                         fieldSystemComponent.Name.IndexOf(x.FieldName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0 && 
                          farm.Name.IndexOf(x.RotationName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0);
 
                 if (yieldDataRow != null)
@@ -439,7 +431,7 @@ namespace H.Core.Services.LandManagement
                 }
                 else
                 {
-                    Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no custom yield data for {viewItem.Year} and {fieldComponent.Name} was found in custom yield file. Attempting to assign a default yield for this year from the default yield provider.");
+                    Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no custom yield data for {viewItem.Year} and {fieldSystemComponent.Name} was found in custom yield file. Attempting to assign a default yield for this year from the default yield provider.");
 
                     // With the Tier 2 model, we need to have yields for the run-in years. If the user loads a custom yield file, they might not have yields for this period. In this case,
                     // we check if we can get yields for these years by checking the small area data table.
@@ -449,7 +441,7 @@ namespace H.Core.Services.LandManagement
 
                     if (viewItem.Yield == 0)
                     {
-                        Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no yield data for {viewItem.Year} and {fieldComponent.Name} was found.");
+                        Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no yield data for {viewItem.Year} and {fieldSystemComponent.Name} was found.");
                     }                    
                 }
 
