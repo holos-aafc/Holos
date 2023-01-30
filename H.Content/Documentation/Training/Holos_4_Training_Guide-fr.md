@@ -75,7 +75,7 @@ La carte contient des polygones de couleur rouge qui peuvent être sélectionné
 La ferme bovine de cet exemple est située entre Winnipeg et Portage la Prairie (Portage) avec le numéro de polygone **851003** de PPC.
 
 
-1. Trouvez ce polygone et cliquez avec le bouton droit de la souris pour le sélectionner sur la carte. Notez qu’à ce stade, les données climatiques quotidiennes seront téléchargées à partir du site de la [NASA](https://power.larc.nasa.gov/data-access-viewer/).
+1. Trouvez ce polygone et cliquez avec le bouton droit de la souris pour le sélectionner sur la carte. You will see a pin marker on the region where you have clicked. Notez qu’à ce stade, les données climatiques quotidiennes seront téléchargées à partir du site de la [NASA](https://power.larc.nasa.gov/data-access-viewer/).
 
 <br>
 
@@ -99,7 +99,7 @@ Conservez le premier type de sol sélectionné et la « zone de rusticité » pa
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="850"/>
+    <img src="../../Images/Training/fr/figure6.png" alt="Figure 6" width="950"/>
     <br>
     <em>Figure 6: Plusieurs types de sols seront affichés pour la région sélectionnée.</em>
 </p>  
