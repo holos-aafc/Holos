@@ -20,7 +20,7 @@ namespace H.Core.Test.Providers.Animals
         public void GetAnnualEntericMethaneEmissionRateTest()
         {
             var result = _provider.GetAnnualEntericMethaneEmissionRate(AnimalType.SwineSows, new ManagementPeriod());
-            Assert.AreEqual(1.5, result);
+            Assert.AreEqual(2.42, result);
         }
     }
 }

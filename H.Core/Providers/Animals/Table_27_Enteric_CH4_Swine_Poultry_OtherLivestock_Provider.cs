@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Tools;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +28,8 @@ namespace H.Core.Providers.Animals
 
         public double GetAnnualEntericMethaneEmissionRate(AnimalType animalType, ManagementPeriod managementPeriod)
         {
+            var weightMidPoint = (managementPeriod.EndWeight + managementPeriod.StartWeight) / 2.0;
+
             
             if (animalType == AnimalType.SwineSows || animalType == AnimalType.SwineLactatingSow || animalType == AnimalType.SwineDrySow) // Footnote 1
             {
@@ -45,7 +48,14 @@ namespace H.Core.Providers.Animals
                 
             if (animalType == AnimalType.SwineGrower) // Footnote 1
             {
-                return 0.7;
+                if (weightMidPoint <= 65)
+                {
+                    return 0.7;
+                }
+                else
+                {
+                    return 1.5;
+                }
             }
             
             if (animalType == AnimalType.SwineFinisher) // Footnote 1
@@ -53,7 +63,7 @@ namespace H.Core.Providers.Animals
                 return 1.5;
             }
             
-            if (animalType == AnimalType.SwineStarter) // Footnote 1
+            if (animalType == AnimalType.SwineStarter || animalType == AnimalType.SwinePiglets) // Footnote 1
             {
                 return 0.23;
             }
