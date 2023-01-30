@@ -1,9 +1,3 @@
-<style>
-div {
-    margin-left: 1.5em;
-}
-</style>
-
 <p align="center">
 <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
 <br>
