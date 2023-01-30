@@ -251,6 +251,10 @@
       <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
       <Name>H.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H\H.csproj">
+      <Project>{9bc7ff04-2b6c-4f86-8fb8-4ee1184be83b}</Project>
+      <Name>H</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

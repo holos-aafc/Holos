@@ -3,6 +3,7 @@ using H.Core.Tools;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.Models.Animals;
 
 namespace H.Core.Providers.Animals
 {
@@ -24,7 +25,7 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
-        public double GetAnnualEntericMethaneEmissionRate(AnimalType animalType)
+        public double GetAnnualEntericMethaneEmissionRate(AnimalType animalType, ManagementPeriod managementPeriod)
         {
             
             if (animalType == AnimalType.SwineSows || animalType == AnimalType.SwineLactatingSow || animalType == AnimalType.SwineDrySow) // Footnote 1
@@ -52,7 +53,7 @@ namespace H.Core.Providers.Animals
                 return 1.5;
             }
             
-            if (animalType == AnimalType.Starter) // Footnote 1
+            if (animalType == AnimalType.SwineStarter) // Footnote 1
             {
                 return 0.23;
             }

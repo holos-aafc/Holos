@@ -135,6 +135,10 @@
       <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
       <Name>H.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H\H.csproj">
+      <Project>{9BC7FF04-2B6C-4F86-8FB8-4EE1184BE83B}</Project>
+      <Name>H</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

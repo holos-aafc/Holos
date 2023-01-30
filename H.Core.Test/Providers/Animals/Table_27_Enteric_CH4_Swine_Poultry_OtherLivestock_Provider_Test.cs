@@ -1,4 +1,5 @@
 ﻿using H.Core.Enumerations;
+using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,7 +19,7 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void GetAnnualEntericMethaneEmissionRateTest()
         {
-            var result = _provider.GetAnnualEntericMethaneEmissionRate(AnimalType.SwineSows);
+            var result = _provider.GetAnnualEntericMethaneEmissionRate(AnimalType.SwineSows, new ManagementPeriod());
             Assert.AreEqual(1.5, result);
         }
     }
