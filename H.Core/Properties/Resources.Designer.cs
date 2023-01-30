@@ -11968,7 +11968,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not enough digestate has been created by the anaerobic digestor for this field application. This value has been set to the maximum available amount of {0} {1}. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field..
+        ///   Looks up a localized string similar to Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field..
         /// </summary>
         public static string MessageNotEnoughDigestateForLandApplication {
             get {

@@ -55,10 +55,11 @@ namespace H.Core.Models.LandManagement.Fields
                 var totalAdditionalRequested = value - _amountAppliedPerHectare;
                 var overLimit = totalAdditionalRequested > this.MaximumAmountOfDigestateAvailablePerHectare;
 
-                if (this.MaximumAmountOfDigestateAvailablePerHectare < 0)
+                if (overLimit)
                 {
                     this.AttemptedToGoOverMaximum = true;
-                    SetProperty(ref _amountAppliedPerHectare, this.MaximumAmountOfDigestateAvailablePerHectare);
+
+                    SetProperty(ref _amountAppliedPerHectare, _amountAppliedPerHectare);
 
                     return;
                 }
