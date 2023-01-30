@@ -10,7 +10,7 @@ namespace H.Core.Providers.Animals
 {
     /// <summary>
     /// Table 32. Volatile solid and nitrogen excretion adjustment factors for swine, by diet.
-    /// <para>Greenhouse Gas System Pork Protocol 2006</para>
+    /// <para>Greenhouse Gas System Pork Protocol 2006. Note: the VS and N adjustment factors used in Holos for all diets are currently set to 1, as we work to update the linkages between these factors and the Holos default swine diets</para>
     /// </summary>
     public class Table_32_Swine_VS_Nitrogen_Excretion_Factors_Provider
     {
