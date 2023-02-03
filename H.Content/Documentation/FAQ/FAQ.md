@@ -1,5 +1,5 @@
 <p align="center">
-<img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
+<img src="../../Images/logo.png" alt="Holos Logo" width="350" height="350"/>
 <br>
 </p>
 
@@ -32,7 +32,7 @@ Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VI
 #### 3. How can I participate in the Holos discussion forum?
 <p>  Holos has a discussion board that users can leave feedback and ask questions. To begin using the discussion forum, a GitHub account needs to be created. After signing up for the GitHub account, you can start to chat in the forum. There are step by step guides for how to sign up for a GitHub account and how to create a simple post in the discussion forum:        
 
-<a href="">Holos Discussion Forum</a>
+<a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>
 
 <a href="">How to sign up for a Github account</a>
 
