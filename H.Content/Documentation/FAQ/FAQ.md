@@ -34,9 +34,9 @@ Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VI
 
 <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>
 
-<a href="">How to sign up for a Github account</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/GitHub%20account.md#how-to-create-a-github-account">How to sign up for a Github account</a>
 
-<a href="">How to create a simple post in the discussion forum</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/GitHub%20account.md#how-to-write-a-post-in-the-discussion-forum">How to create a simple post in the discussion forum</a>
 </p>
 
 ---
