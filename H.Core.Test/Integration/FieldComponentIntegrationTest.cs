@@ -29,6 +29,7 @@ namespace H.Core.Test.Integration
         private FieldResultsService _fieldResultsService;
         private GlobalSettings _globalSettings;
         private RotationComponentHelper _rotationComponentHelper;
+        private ApplicationData _applicationData;
 
         [TestInitialize]
         public void TestInitialize()
@@ -48,6 +49,8 @@ namespace H.Core.Test.Integration
 
             // This class will create a rotation on our farm
             _rotationComponentHelper = new RotationComponentHelper();
+
+            _applicationData = new ApplicationData();
         }
 
         [TestMethod]
@@ -139,14 +142,13 @@ namespace H.Core.Test.Integration
         [TestMethod]
         public void FCC()
         {
-            var _applicationData = new ApplicationData();
-
             var farm = new Farm();
 
-            // Changed to 20 years (default is 15). 20 years matches what Shakila had
-            farm.Defaults.DefaultRunInPeriod = 20;
+
 
             // import data using Field API Client
+
+
 
             farm.Name = "test";
             farm.Province = Province.Saskatchewan;
@@ -155,6 +157,9 @@ namespace H.Core.Test.Integration
             farm.Longitude = -103.867;
             farm.Latitude = 50.254;
             farm.ClimateData = _climateProvider.Get(50.254, -103.867, TimeFrame.TwoThousandToCurrent);
+            farm.Defaults.DefaultRunInPeriod = 20;
+
+
 
             var fieldComponent = new FieldSystemComponent()
             {
@@ -165,9 +170,13 @@ namespace H.Core.Test.Integration
                 EndYear = 2022,
             };
 
+
+
             var cvi1 = new CropViewItem();
             cvi1.CropType = CropType.Barley;
             _fieldResultsService.AssignSystemDefaults(cvi1, farm, _applicationData.GlobalSettings);  // moisture content will be set here
+
+
 
             cvi1.Area = 54.78;
             cvi1.FieldName = "Tony - East of Lane";
@@ -175,10 +184,11 @@ namespace H.Core.Test.Integration
             cvi1.TillageType = TillageType.NoTill;
             cvi1.HarvestMethod = HarvestMethods.CashCrop;
             cvi1.NumberOfPesticidePasses = 3;
-            cvi1.Yield = 5380;
-            cvi1.MoistureContentOfCrop = 12;
-            // get from agexper;
-                                                         // Need cover crop, if applicable
+            cvi1.Yield = 5380;                           // get from agexpert
+            cvi1.MoistureContentOfCropPercentage = 12;
+            // Need cover crop, if applicable
+
+
 
             // Need manure application, if applicable
             // This record doesn't have any manure, but commented code below shows how to add some
@@ -192,37 +202,45 @@ namespace H.Core.Test.Integration
             //    }
             //}
             cvi1.FertilizerApplicationViewItems = new System.Collections.ObjectModel.ObservableCollection<FertilizerApplicationViewItem>()
-            {
-                new FertilizerApplicationViewItem()
-                {
-                    SeasonOfApplication = Seasons.Spring,
-                    FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                    {
-                        FertilizerBlend = FertilizerBlends.Custom,
-                        PercentagePhosphorus = 0,
-                        PercentageNitrogen = 0,
-                        PercentagePotassium = 0,
-                        PercentageSulphur = 0,
-                    },
-                    AmountOfNitrogenApplied = 0,
-                    AmountOfPhosphorusApplied = 0,
-                    AmountOfPotassiumApplied = 0,
-                    AmountOfSulphurApplied = 0,
-                    FertilizerEfficiencyPercentage = 75,
-                    FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
-                    AmountOfBlendedProductApplied = 0
-                }
-            };
+           {
+               new FertilizerApplicationViewItem()
+               {
+                   SeasonOfApplication = Seasons.Spring,
+                   FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                   {
+                       FertilizerBlend = FertilizerBlends.Custom,
+                       PercentagePhosphorus = 0,
+                       PercentageNitrogen = 0,
+                       PercentagePotassium = 0,
+                       PercentageSulphur = 0,
+                   },
+                   AmountOfNitrogenApplied = 0,
+                   AmountOfPhosphorusApplied = 0,
+                   AmountOfPotassiumApplied = 0,
+                   AmountOfSulphurApplied = 0,
+                   FertilizerEfficiencyPercentage = 75,
+                   FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
+                   AmountOfBlendedProductApplied = 0
+               }
+           };
             // Not needed for carbon model
             cvi1.NitrogenDepositionAmount = 5;
             cvi1.NitrogenFixation = 0;
 
-            // Will calculate dry weigh from wet weight
+
+
+            cvi1.CalculateDryYield();                                                                // Will calculate dry weigh from wet weight
+
+
 
             var cvi2 = new CropViewItem();
 
+
+
             cvi2.CropType = CropType.Canola;
             _fieldResultsService.AssignSystemDefaults(cvi2, farm, _applicationData.GlobalSettings);
+
+
 
             cvi2.Area = 54.78;
             cvi2.FieldName = "Tony - East of Lane";
@@ -230,39 +248,51 @@ namespace H.Core.Test.Integration
             cvi2.TillageType = TillageType.NoTill;
             cvi2.HarvestMethod = HarvestMethods.CashCrop;
             cvi2.Yield = 3295.25;
+            cvi2.MoistureContentOfCropPercentage = 9;
             cvi2.NumberOfPesticidePasses = 3;
             cvi2.NitrogenDepositionAmount = 5;
             cvi2.NitrogenFixation = 0;
-            cvi2.MoistureContentOfCrop = 9;
+
+
 
             cvi2.FertilizerApplicationViewItems = new System.Collections.ObjectModel.ObservableCollection<FertilizerApplicationViewItem>()
-                {
-                    new FertilizerApplicationViewItem()
-                    {
-                        SeasonOfApplication = Seasons.Spring,
-                        FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                        {
-                            FertilizerBlend = FertilizerBlends.Urea,
-                            PercentagePhosphorus = 0,
-                            PercentageNitrogen = 0,
-                            PercentagePotassium = 0,
-                            PercentageSulphur = 0,
-                        },
-                        AmountOfNitrogenApplied = 136.6,
-                        AmountOfPhosphorusApplied = 0,
-                        AmountOfPotassiumApplied = 0,
-                        AmountOfSulphurApplied = 0,
-                        FertilizerEfficiencyPercentage = 75,
-                        FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
-                        AmountOfBlendedProductApplied = 297
-                    }
-                };
+               {
+                   new FertilizerApplicationViewItem()
+                   {
+                       SeasonOfApplication = Seasons.Spring,
+                       FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                       {
+                           FertilizerBlend = FertilizerBlends.Urea,
+                           PercentagePhosphorus = 0,
+                           PercentageNitrogen = 0,
+                           PercentagePotassium = 0,
+                           PercentageSulphur = 0,
+                       },
+                       AmountOfNitrogenApplied = 136.6,
+                       AmountOfPhosphorusApplied = 0,
+                       AmountOfPotassiumApplied = 0,
+                       AmountOfSulphurApplied = 0,
+                       FertilizerEfficiencyPercentage = 75,
+                       FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
+                       AmountOfBlendedProductApplied = 297
+                   }
+               };
+
+
+
+
+            cvi2.CalculateDryYield();
+
 
 
             var cvi3 = new CropViewItem();
 
+
+
             cvi3.CropType = CropType.FieldPeas;
             _fieldResultsService.AssignSystemDefaults(cvi3, farm, _applicationData.GlobalSettings);
+
+
 
             cvi3.Area = 54.78;
             cvi3.FieldName = "Tony - East of Lane";
@@ -270,38 +300,47 @@ namespace H.Core.Test.Integration
             cvi3.TillageType = TillageType.NoTill;
             cvi3.HarvestMethod = HarvestMethods.CashCrop;
             cvi3.Yield = 2353.75;
+            cvi3.MoistureContentOfCropPercentage = 13;
             cvi3.NumberOfPesticidePasses = 5;
             cvi3.NitrogenDepositionAmount = 5;
             cvi3.NitrogenFixation = 0.7;
-            cvi3.MoistureContentOfCrop = 13;
             cvi3.FertilizerApplicationViewItems = new System.Collections.ObjectModel.ObservableCollection<FertilizerApplicationViewItem>()
-            {
-                new FertilizerApplicationViewItem()
-                {
-                    SeasonOfApplication = Seasons.Spring,
-                    FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                    {
-                        FertilizerBlend = FertilizerBlends.Custom,
-                        PercentagePhosphorus = 0,
-                        PercentageNitrogen = 0,
-                        PercentagePotassium = 0,
-                        PercentageSulphur = 0,
-                    },
-                    AmountOfNitrogenApplied = 0,
-                    AmountOfPhosphorusApplied = 0,
-                    AmountOfPotassiumApplied = 0,
-                    AmountOfSulphurApplied = 0,
-                    FertilizerEfficiencyPercentage = 75,
-                    FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
-                    AmountOfBlendedProductApplied = 61.7
-                }
-            };
+           {
+               new FertilizerApplicationViewItem()
+               {
+                   SeasonOfApplication = Seasons.Spring,
+                   FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                   {
+                       FertilizerBlend = FertilizerBlends.Custom,
+                       PercentagePhosphorus = 0,
+                       PercentageNitrogen = 0,
+                       PercentagePotassium = 0,
+                       PercentageSulphur = 0,
+                   },
+                   AmountOfNitrogenApplied = 0,
+                   AmountOfPhosphorusApplied = 0,
+                   AmountOfPotassiumApplied = 0,
+                   AmountOfSulphurApplied = 0,
+                   FertilizerEfficiencyPercentage = 75,
+                   FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
+                   AmountOfBlendedProductApplied = 61.7
+               }
+           };
+
+
+
+            cvi3.CalculateDryYield();
+
 
 
             var cvi4 = new CropViewItem();
 
+
+
             cvi4.CropType = CropType.Wheat;
             _fieldResultsService.AssignSystemDefaults(cvi4, farm, _applicationData.GlobalSettings);
+
+
 
             cvi4.Area = 54.78;
             cvi4.FieldName = "Tony - East of Lane";
@@ -309,54 +348,62 @@ namespace H.Core.Test.Integration
             cvi4.TillageType = TillageType.NoTill;
             cvi4.HarvestMethod = HarvestMethods.CashCrop;
             cvi4.Yield = 4035;
+            cvi4.MoistureContentOfCropPercentage = 12;
             cvi4.NumberOfPesticidePasses = 6;
             cvi4.NitrogenDepositionAmount = 5;
             cvi4.NitrogenFixation = 0;
-            cvi3.MoistureContentOfCrop = 12;
             cvi4.FertilizerApplicationViewItems = new System.Collections.ObjectModel.ObservableCollection<FertilizerApplicationViewItem>()
-            {
-                new FertilizerApplicationViewItem()
-                {
-                    SeasonOfApplication = Seasons.Spring,
+           {
+               new FertilizerApplicationViewItem()
+               {
+                   SeasonOfApplication = Seasons.Spring,
 
-                    FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                    {
-                        FertilizerBlend = FertilizerBlends.Urea,
-                        PercentagePhosphorus = 0,
-                        PercentageNitrogen = 0,
-                        PercentagePotassium = 0,
-                        PercentageSulphur = 0,
-                    },
-                    AmountOfNitrogenApplied = 0,
-                    AmountOfPhosphorusApplied = 0,
-                    AmountOfPotassiumApplied = 0,
-                    AmountOfSulphurApplied = 0,
-                    FertilizerEfficiencyPercentage = 75,
-                    FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
-                    AmountOfBlendedProductApplied = 280.3
-                }
-            };
 
-            cvi1.CalculateDryYield();
-            cvi2.CalculateDryYield();
-            cvi3.CalculateDryYield();
+
+                   FertilizerBlendData = new H.Core.Providers.Fertilizer.Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                   {
+                       FertilizerBlend = FertilizerBlends.Urea,
+                       PercentagePhosphorus = 0,
+                       PercentageNitrogen = 0,
+                       PercentagePotassium = 0,
+                       PercentageSulphur = 0,
+                   },
+                   AmountOfNitrogenApplied = 0,
+                   AmountOfPhosphorusApplied = 0,
+                   AmountOfPotassiumApplied = 0,
+                   AmountOfSulphurApplied = 0,
+                   FertilizerEfficiencyPercentage = 75,
+                   FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected,
+                   AmountOfBlendedProductApplied = 280.3
+               }
+           };
+
+
+
             cvi4.CalculateDryYield();
+
+
 
             fieldComponent.CropViewItems.Add(cvi1);
             fieldComponent.CropViewItems.Add(cvi2);
             fieldComponent.CropViewItems.Add(cvi3);
             fieldComponent.CropViewItems.Add(cvi4);
 
+
+
             farm.Components.Add(fieldComponent);
             farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+
 
             farm.StageStates.Add(new FieldSystemDetailsStageState());
             _fieldResultsService.CreateDetailViewItems(farm);
 
-            var foobar = _fieldResultsService.CalculateFinalResults(farm);
 
-            var resultsFor1985Peas = foobar.Single(x => x.Year == 1985);
-            var carbon = resultsFor1985Peas.SoilCarbon; // 44366
+
+            var results = _fieldResultsService.CalculateFinalResults(farm);
+            var soilC1985FieldPeas = results[0].SoilCarbon; // 36258
+
         }
     }
 }

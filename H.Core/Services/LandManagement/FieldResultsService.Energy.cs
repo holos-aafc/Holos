@@ -184,9 +184,11 @@ namespace H.Core.Services.LandManagement
             // There are no upstream emissions associated with organic fertilizer applications
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic))
             {
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
                 var area = viewItem.Area;
-                var gateEmissions = fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate;
+                var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
 
                 upstreamEmissions += amountOfNitrogenApplied * area * gateEmissions;
             }
@@ -205,9 +207,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
                 var area = viewItem.Area;
-                var applicationEmissions = fertilizerApplicationViewItem.FertilizerBlendData.ApplicationEmissions;
+                var applicationEmissions = blendEmissions.ApplicationEmissions;
 
                 onFarmEmissions += amountOfNitrogenApplied * area * applicationEmissions;
             }
@@ -226,9 +230,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+
                 var amountOfPhosphorusApplied = fertilizerApplicationViewItem.AmountOfPhosphorusApplied;
                 var area = viewItem.Area;
-                var gateEmissions = fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate;
+                var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
 
                 result += amountOfPhosphorusApplied * area * gateEmissions;
             }
@@ -247,9 +253,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+
                 var amountOfPotassiumApplied = fertilizerApplicationViewItem.AmountOfPotassiumApplied;
                 var area = viewItem.Area;
-                var gateEmissions = fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate;
+                var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
 
                 result += amountOfPotassiumApplied * area * gateEmissions;
             }
