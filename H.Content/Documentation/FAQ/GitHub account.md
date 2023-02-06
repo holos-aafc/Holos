@@ -1,7 +1,8 @@
 # Holos Discussion Forum
 In <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>, you can share your idea, give some feedback about the program, and ask questions. To begin using the discussion forum, a GitHub account needs to be created. If you don’t already have a GitHub account, follow the steps below.
-
+<img src="../../Images/FAQ/figure11.png" alt="Figure 11" width="650"/>
  
+<br>
 
 # How to create a GitHub account
 1. Open https://github.com in a web browser, and then select **Sign up**.
@@ -36,7 +37,7 @@ In <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Fo
 
 <img src="../../Images/FAQ/figure6.png" alt="Figure 6" width="650"/>
  
-
+<br>
 
 # How to write a post in the discussion forum
 1. Click the link to access <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>. 
@@ -54,5 +55,3 @@ In <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Fo
 4. Your post is successfully created. If you want to edit your post, right click on **...** and select **edit**.
 
 <img src="../../Images/FAQ/figure10.png" alt="Figure 10" width="650"/>
-
-<img src="../../Images/FAQ/figure11.png" alt="Figure 11" width="650"/>
