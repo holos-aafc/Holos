@@ -20,7 +20,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure1.png" alt="Figure 1" width="650"/>
+    <img src="../../Images/SwineGuide/Figure1.png" alt="Figure 1" width="750"/>
     <br>
     <em>Figure 1: Entering a name for the new farm.</em>
 </p>
@@ -28,7 +28,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure2.png" alt="Figure 2" width="750"/>
+    <img src="../../Images/SwineGuide/Figure2.png" alt="Figure 2" width="850"/>
     <br>
     <em>Figure 2: If a farm has been previously saved, Holos will prompt to re-open that farm.</em>
 </p>
@@ -36,7 +36,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure3.png" alt="Figure 3" width="550"/>
+    <img src="../../Images/SwineGuide/Figure3.png" alt="Figure 3" width="650"/>
     <br>
     <em>Figure 3: Select metric as the unit of measurement.</em>
 </p>
@@ -51,7 +51,7 @@ The swine farm that we will create for this exercise is located in the province 
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure4.png" alt="Figure 4" width="550"/>
+    <img src="../../Images/SwineGuide/Figure4.png" alt="Figure 4" width="650"/>
     <br>
     <em>Figure 4: Select Manitoba as the province.</em>
 </p>
@@ -338,7 +338,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure14.jpg" alt="Figure 14" width="850"/>
+    <img src="../../Images/SwineGuide/Figure14.jpg" alt="Figure 14" width="950"/>
     <br>
     <em>Figure 14: Custom diet creator for Swine animal group.</em>
 </p> 
@@ -513,7 +513,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 <br>  
 
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure20.png" alt="Figure 20" width="550"/>
+    <img src="../../Images/SwineGuide/Figure20.png" alt="Figure 20" width="650"/>
     <br>
     <em>Figure 20: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
@@ -521,7 +521,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure21.jpg" alt="Figure 21" width="650"/>
+    <img src="../../Images/SwineGuide/Figure21.jpg" alt="Figure 21" width="950"/>
     <br>
     <em>Figure 21: Editing crops in a historical period of the rotation. </em>
 </p> 
