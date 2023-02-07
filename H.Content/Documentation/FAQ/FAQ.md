@@ -1,13 +1,14 @@
 <p align="center">
-<img src="../../Images/logo.png" alt="Holos Logo" width="350" height="350"/>
+<img src="../../Images/logo.png" alt="Holos Logo" width="650" />
 <br>
 </p>
 
 # Frequently Asked Questions
 
 The purpose of this document is to allow for users to find answers to their questions in one place. 
-<br><br>
 
+<br>
+<br>
 
 ## General FAQ
 

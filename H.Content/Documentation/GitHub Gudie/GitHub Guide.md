@@ -5,7 +5,7 @@
 </p>
 In Holos Discussion Forum, you can share your idea, give some feedback about the program, and ask questions. To begin using the discussion forum, a GitHub account needs to be created. If you don’t already have a GitHub account, follow the steps below.
 
-
+<br>
 <br>
 
 
@@ -162,3 +162,94 @@ If you already have a GitHub account, sign in your account.
 
 <br>
 <br>
+
+5. If you want to edit your post, right click on **...** and select **edit**.
+
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure11.png" alt="Figure 11" width="650"/>
+    <br>
+    <em>Figure 11: Click edit button to edit your post.</em>
+</p>
+
+<br>
+<br>
+
+
+# Fork/Copy a repository to your account
+
+Github does not allow direct contributions to a repository unless changes are made by a repository
+maintainer. Therefore, to contribute changes to any project, we must **Fork** (or copy) the original
+repository to our account. We will then make changes to this **Fork** in our account and submit these
+changes to the original repository as a **pull request**.
+
+The purpose of a **pull request** is to create a formal process with which changes are accepted to a
+repository. It allows maintainers of a repository to review incoming requests, suggest changes and
+collaborate with people submitting these changes. **Pull requests** also ensure that only approved
+changes are included in the original repository.
+
+Therefore, the first step in contributing changes to a repository is to create a personal **Fork**.
+
+1. Go to the original repository. The Holos repository's URL is,
+
+**https://github.com/holos-aafc/Holos**
+
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure12.png" alt="Figure 12" width="650"/>
+    <br>
+    <em>Figure 11: The Holos repoistory
+    <br>
+Note: The above image is of the actual Holos repository page. This example will use a demo
+repository for the rest of the guide.</em>
+</p>
+
+<br>
+<br>
+
+1. In the top right corner of the Holos repository, click **Fork**.
+
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure13.png" alt="Figure 13" width="650"/>
+    <br>
+    <em>Click the fork button on the repository you want to copy.</em>
+</p>
+
+<br>
+<br>
+
+
+3. A new page will load, asking you to provide a name and description for your personal copy of the original repository. The name can be anything and does not need to mirror the original repository.
+<br>
+**3.1.** Please make sure you keep **copy the main branch only** selected as this ensures you're not copying any unnecessary information to your account.
+<br>
+**3.2.** Click **Create fork** when done.
+
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure14.png" alt="Figure 14" width="650"/>
+    <br>
+    <em>Set a name for your copied repository.</em>
+</p>
+
+<br>
+<br>
+
+
+4. Your personal repository should look like this:
+
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure15.png" alt="Figure 15" width="650"/>
+    <br>
+    <em>Your personal repository copy.</em>
+</p>
+
+<br>
+<br>
+
+
+You can confirm that you are looking at your own repository by looking at the top left corner of your
+Github page. The top left corner shows your account name and the name of the current repository.
+The format here is **Account_Name / Repository_Name**.
