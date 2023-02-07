@@ -20,7 +20,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure1.png" alt="Figure 1" width="650"/>
+    <img src="../../Images/SwineGuide/Figure1.png" alt="Figure 1" width="650"/>
     <br>
     <em>Figure 1: Entering a name for the new farm.</em>
 </p>
@@ -28,7 +28,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="750"/>
+    <img src="../../Images/SwineGuide/Figure2.png" alt="Figure 2" width="750"/>
     <br>
     <em>Figure 2: If a farm has been previously saved, Holos will prompt to re-open that farm.</em>
 </p>
@@ -36,7 +36,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure3.png" alt="Figure 3" width="550"/>
+    <img src="../../Images/SwineGuide/Figure3.png" alt="Figure 3" width="550"/>
     <br>
     <em>Figure 3: Select metric as the unit of measurement.</em>
 </p>
@@ -51,7 +51,7 @@ The swine farm that we will create for this exercise is located in the province 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure4.png" alt="Figure 4" width="550"/>
+    <img src="../../Images/SwineGuide/Figure4.png" alt="Figure 4" width="550"/>
     <br>
     <em>Figure 4: Select Manitoba as the province.</em>
 </p>
@@ -76,7 +76,7 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure5.png" alt="Figure 5" width="950"/>
+    <img src="../../Images/SwineGuide/Figure5.png" alt="Figure 5" width="950"/>
     <br>
     <em>Figure 5: Map of the Manitoba province showing the different selectable polygons.</em>
 </p>
@@ -88,7 +88,7 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="950"/>
+    <img src="../../Images/SwineGuide/Figure6.gif" alt="Figure 6" width="950"/>
     <br>
     <em>Figure 6: Multiple soil types might be available for a given region.</em>
 </p>  
@@ -114,7 +114,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure7.png" alt="Figure 7" width="950"/>
+    <img src="../../Images/SwineGuide/Figure7.png" alt="Figure 7" width="950"/>
     <br>
     <em>Figure 7: The available components screen. Specific components can be chosen here to include in the farm.</em>
 </p> 
@@ -131,7 +131,7 @@ Now we can add our first component to the farm. Drag a “Field” component fro
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure8.gif" alt="Figure 8" width="950"/>
+    <img src="../../Images/SwineGuide/Figure8.gif" alt="Figure 8" width="950"/>
     <br>
     <em>Figure 8: Adding a component to the farm.</em>
 </p> 
@@ -155,7 +155,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
     
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
+    <img src="../../Images/SwineGuide/Figure9.png" alt="Figure 9" width="950"/>
     <br>
     <em>Figure 9: Field Component of the farm.</em>
 </p> 
@@ -166,7 +166,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure10.gif" alt="Figure 10" width="950"/>
+    <img src="../../Images/SwineGuide/Figure10.gif" alt="Figure 10" width="950"/>
     <br>
     <em>Figure 10: Adding fertilizer to a field.</em>
 </p> 
@@ -194,7 +194,7 @@ The swine operation (defined later on) relies on native pasture for the summer m
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure11.png" alt="Figure 11" width="950"/>
+    <img src="../../Images/SwineGuide/Figure11.png" alt="Figure 11" width="950"/>
     <br>
     <em>Figure 11: Native Grasslands information.</em>
 </p> 
@@ -233,7 +233,7 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure12.png" alt="Figure 12" width="950"/>
+    <img src="../../Images/SwineGuide/Figure12.png" alt="Figure 12" width="950"/>
     <br>
     <em>Figure 12: An example of a crop rotation of three crops.</em>
 </p> 
@@ -264,7 +264,7 @@ Adding animal components follows the exact same approach that was used for land 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure13.gif" alt="Figure 13" width="950"/>
+    <img src="../../Images/SwineGuide/Figure13.gif" alt="Figure 13" width="950"/>
     <br>
     <em>Figure 13: The Swine Farm Components.</em>
 </p> 
@@ -338,7 +338,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/SwineGuide/Figure14.png" alt="Figure 14" width="850"/>
     <br>
     <em>Figure 14: Custom diet creator for Swine animal group.</em>
 </p> 
@@ -399,7 +399,7 @@ Click on the management period named **Stage #4**. Ensure that the start date is
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/SwineGuide/Figure15.png" alt="Figure 15" width="950"/>
     <br>
     <em>Figure 15: Grower-to-finish, Hogs group</em>
 </p> 
@@ -420,7 +420,7 @@ Click on the **Piglets** row in the animal group section **Step 1**. Information
     
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/SwineGuide/Figure16.png" alt="Figure 16" width="950"/>
     <br>
     <em>Figure 16: Iso-Wean - Piglet group</em>
 </p> 
@@ -442,7 +442,7 @@ Holos has the ability to add manure applications from manure that is sourced fro
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure17.gif" alt="Figure 17" width="950"/>
+    <img src="../../Images/SwineGuide/Figure17.gif" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Adding a manure application to the Wheat & Hairy Vetch component</em>
 </p>
@@ -467,7 +467,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/SwineGuide/Figure18.png" alt="Figure 18" width="950"/>
     <br>
     <em>Figure 18: Adding supplemental hay/forage for grazing animals.</em>
 </p>
@@ -506,14 +506,14 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/SwineGuide/Figure19.png" alt="Figure 19" width="950"/>
     <br>
     <em>Figure 19: Customized Timeline Screen</em>
 </p> 
 <br>  
 
 <p align="center">
-    <img src="../../Images/Training/en/figure20.png" alt="Figure 20" width="550"/>
+    <img src="../../Images/SwineGuide/Figure20.png" alt="Figure 20" width="550"/>
     <br>
     <em>Figure 20: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
@@ -521,7 +521,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure21.png" alt="Figure 21" width="650"/>
+    <img src="../../Images/SwineGuide/Figure21.png" alt="Figure 21" width="650"/>
     <br>
     <em>Figure 21: Editing crops in a historical period of the rotation. </em>
 </p> 
@@ -556,7 +556,7 @@ We will adjust this grid so that we can view the above ground and below ground c
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure22.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/SwineGuide/Figure22.png" alt="Figure 22" width="950"/>
     <br>
     <em>Figure 22: Details screen</em>
 </p> 
@@ -589,14 +589,14 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 
 <p align="center">
-    <img src="../../Images/Training/en/figure23.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/Figure23.png" alt="Figure 23" width="950"/>
     <br>
     <em>Figure 23: Detailed emissions report.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/Training/en/figure24.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/SwineGuide/Figure24.png" alt="Figure 24" width="950"/>
     <br>
     <em>Figure 24: Estimates of production report.</em>
 </p> 
@@ -604,7 +604,7 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure25.png" alt="Figure 25" width="950"/>
+    <img src="../../Images/SwineGuide/Figure25.png" alt="Figure 25" width="950"/>
     <br>
     <em>Figure 25: Feed estimate report.</em>
 </p> 
@@ -625,12 +625,12 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure26.png" alt="Figure 26" width="950"/>
+    <img src="../../Images/SwineGuide/Figure26.png" alt="Figure 26" width="950"/>
     <br>
     <br>
     <em>Figure 26: Carbon report section. Allows switching between graph shown here and table format shown below.</em>
 <p align="center">
-    <img src="../../Images/Training/en/figure27.png" alt="Figure 27" width="950"/>
+    <img src="../../Images/SwineGuide/Figure27.png" alt="Figure 27" width="950"/>
     <br>
     <em>Figure 27: Carbon report section. The table format.</em>
 </p> 
