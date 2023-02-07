@@ -338,7 +338,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure14.png" alt="Figure 14" width="850"/>
+    <img src="../../Images/SwineGuide/Figure14.jpg" alt="Figure 14" width="850"/>
     <br>
     <em>Figure 14: Custom diet creator for Swine animal group.</em>
 </p> 
@@ -399,7 +399,7 @@ Click on the management period named **Stage #4**. Ensure that the start date is
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/SwineGuide/Figure15.jpg" alt="Figure 15" width="950"/>
     <br>
     <em>Figure 15: Grower-to-finish, Hogs group</em>
 </p> 
@@ -420,7 +420,7 @@ Click on the **Piglets** row in the animal group section **Step 1**. Information
     
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/SwineGuide/Figure16.jpg" alt="Figure 16" width="950"/>
     <br>
     <em>Figure 16: Iso-Wean - Piglet group</em>
 </p> 
@@ -467,7 +467,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure18.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/SwineGuide/Figure18.jpg" alt="Figure 18" width="950"/>
     <br>
     <em>Figure 18: Adding supplemental hay/forage for grazing animals.</em>
 </p>
@@ -506,7 +506,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/SwineGuide/Figure19.jpg" alt="Figure 19" width="950"/>
     <br>
     <em>Figure 19: Customized Timeline Screen</em>
 </p> 
@@ -521,7 +521,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure21.png" alt="Figure 21" width="650"/>
+    <img src="../../Images/SwineGuide/Figure21.jpg" alt="Figure 21" width="650"/>
     <br>
     <em>Figure 21: Editing crops in a historical period of the rotation. </em>
 </p> 
@@ -556,7 +556,7 @@ We will adjust this grid so that we can view the above ground and below ground c
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure22.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/SwineGuide/Figure22.jpg" alt="Figure 22" width="950"/>
     <br>
     <em>Figure 22: Details screen</em>
 </p> 
@@ -589,14 +589,14 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure23.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/Figure23.jpg" alt="Figure 23" width="950"/>
     <br>
     <em>Figure 23: Detailed emissions report.</em>
 </p> 
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure24.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/SwineGuide/Figure24.jpg" alt="Figure 24" width="950"/>
     <br>
     <em>Figure 24: Estimates of production report.</em>
 </p> 
@@ -604,7 +604,7 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure25.png" alt="Figure 25" width="950"/>
+    <img src="../../Images/SwineGuide/Figure25.jpg" alt="Figure 25" width="950"/>
     <br>
     <em>Figure 25: Feed estimate report.</em>
 </p> 
@@ -625,12 +625,12 @@ If we click on one of these points, we can then view a more detailed breakdown o
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure26.png" alt="Figure 26" width="950"/>
+    <img src="../../Images/SwineGuide/Figure26.jpg" alt="Figure 26" width="950"/>
     <br>
     <br>
     <em>Figure 26: Carbon report section. Allows switching between graph shown here and table format shown below.</em>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure27.png" alt="Figure 27" width="950"/>
+    <img src="../../Images/SwineGuide/Figure27.jpg" alt="Figure 27" width="950"/>
     <br>
     <em>Figure 27: Carbon report section. The table format.</em>
 </p> 
