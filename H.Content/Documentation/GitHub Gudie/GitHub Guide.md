@@ -222,9 +222,7 @@ repository for the rest of the guide.</em>
 
 
 3. A new page will load, asking you to provide a name and description for your personal copy of the original repository. The name can be anything and does not need to mirror the original repository.
-<br>
 **3.1.** Please make sure you keep **copy the main branch only** selected as this ensures you're not copying any unnecessary information to your account.
-<br>
 **3.2.** Click **Create fork** when done.
 
 <br>

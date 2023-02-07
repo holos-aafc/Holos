@@ -87,11 +87,9 @@ Once the farm location is selected, soil information (texture, sand, and clay pr
 For this tutorial, keep the default first selected soil type, and keep the default “Hardiness zone”.  
 
 <br>
-
 <p align="center">
     <img src="../../Images/Training/en/figure6.gif" alt="Figure 6" width="950"/>
     <br>
-    
     <em>Figure 6: Multiple soil types might be available for a given region.</em>
 </p>  
 
@@ -104,6 +102,9 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 Click the “Next” button to proceed to the next step.
 
 <div style="page-break-after: always"></div>
+
+<br>
+<br>
 
 # Selecting Farm Components
 
@@ -123,11 +124,14 @@ The Holos model is designed to define the land management before livestock. This
 
 <div style="page-break-after: always"></div>
 
+<br>
+<br>
+
 ## Crop and Hay Production
 
 Now we can add our first component to the farm. Drag a “Field” component from the left side of the screen and drop it on the “My Farm” on the right side (Figure 8). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as “Field #1”. At this point, we can now enter production information related to the crop being grown on this field.  
 
-
+<br>
 <p align="center">
     <img src="../../Images/Training/en/figure8.gif" alt="Figure 8" width="950"/>
     <br>
@@ -152,7 +156,6 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
     * Leave Harvest method as default selection.
     
 <br>
-
 <p align="center">
     <img src="../../Images/Training/en/figure9.png" alt="Figure 9" width="950"/>
     <br>
@@ -180,6 +183,9 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <div style="page-break-after: always"></div>
 
+<br>
+<br>
+
 ## Native Grasslands Information
 
 The swine operation (defined later on) relies on native pasture for the summer months (May through October) as a supplement to feed.
@@ -197,7 +203,7 @@ The swine operation (defined later on) relies on native pasture for the summer m
     <em>Figure 11: Native Grasslands information.</em>
 </p> 
 <br>
-
+<br>
 
 ## Barley Grain and Mixed Hay Rotation
 
@@ -252,6 +258,8 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 If the tame mixed field is harvested more than once, the “Add Harvest Date” button can be used to add subsequent harvests.
 
 <div style="page-break-after: always"></div>
+<br>
+<br>
 
 ## Swine Operation
 
@@ -267,7 +275,6 @@ Adding animal components follows the exact same approach that was used for land 
     <em>Figure 13: The Swine Farm Components.</em>
 </p> 
 <br>
-
 
 ### Entering Animal Group information into the Three Swine Components on "My Farm".
 
@@ -471,8 +478,6 @@ We can also add additional hay/forage for animals that are grazing on a particul
     <br>
     <em>Figure 18: Adding supplemental hay/forage for grazing animals.</em>
 </p>
-
-
 <br>
 <br>
 
@@ -530,6 +535,8 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <div style="page-break-after: always"></div>
 
+<br>
+<br>
 
 # Details Screen
 
@@ -637,6 +644,8 @@ If we click on one of these points, we can then view a more detailed breakdown o
 <br>
 
 <div style="page-break-after: always"></div>
+<br>
+<br>
 
 # Finally...
 
