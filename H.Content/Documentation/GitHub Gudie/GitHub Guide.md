@@ -107,21 +107,58 @@ the Github homepage
 <br>
 
 
+
 # How to write a post in the discussion forum
+
 1. Click the link to access <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>. 
 If you don't have a GiHub account, follow instructions from Ho <a href="hthttps://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/GitHub%20account.md#how-to-create-a-github-account">HolHow to create a GitHub account</a>
 If you already have a GitHub account, sign in your account. 
 
-<img src="../../Images/GitHubGuide/Figure7.png" alt="Figure 7" width="650"/>
+<br>
+<p align="center">
+    <img src="../../Images/GitHubGuide/Figure7.png" alt="Figure 7" width="650"/>
+    <br>
+    <em>Figure 7: Holos Dicsussion Forum.</em>
+</p>
+
+<br>
+<br>
+
 
 2. Select one of the categories you want to write. In this example, 'General' is selected.
 
-<img src="../../Images/GitHubGuide/Figure8.png" alt="Figure 8" width="650"/>
- 
+<br>
+<p align="center">
+    <img src="../../Images/GitHubGuide/Figure8.png" alt="Figure 8" width="650"/>
+    <br>
+    <em>Figure 8: Select 'General'.</em>
+</p>
+
+<br>
+<br>
+
+
 3. After you Write discussion title and the details, select **Start discussion**.
 
-<img src="../../Images/GitHubGuide/Figure9.png" alt="Figure 9" width="650"/>
- 
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure9.png" alt="Figure 9" width="650"/>
+    <br>
+    <em>Figure 9: Select 'General'.</em>
+</p>
+
+<br>
+<br>
+
+
 4. Your post is successfully created. If you want to edit your post, right click on **...** and select **edit**.
 
-<img src="../../Images/GitHubGuide/Figure10.png" alt="Figure 10" width="650"/>
+<br>
+<p align="center">
+   <img src="../../Images/GitHubGuide/Figure10.png" alt="Figure 10" width="650"/>
+    <br>
+    <em>Figure 10: The page shown after account creating a post.</em>
+</p>
+
+<br>
+<br>
