@@ -65,7 +65,7 @@
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
     <None Include="Documentation\Doxyfile" />
-    <None Include="Documentation\FAQ\GitHub account.md" />
+    <None Include="Documentation\GitHub Gudie\GitHub Guide.md" />
     <None Include="Documentation\FAQ\FAQ.md" />
     <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
     <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
@@ -214,7 +214,7 @@
     <None Include="Resources\Settings_50_px.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\FAQ\" />
+    <Folder Include="Images\GitHubGuide\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -98,8 +98,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void ResetTankTest()
         {
-            _mockAdCalculator
-                .Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>()))
+            _mockAdCalculator.Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>()))
                 .Returns(new List<DigestorDailyOutput>());
 
             _sut.ResetAllTanks( _farm, DateTime.Now);
@@ -163,7 +162,6 @@ namespace H.Core.Test.Services.Animals
 
             farm.Components.Add(fieldComponent);
             
-
             var year = 2022;
 
             var targetDate = new DateTime(year, 3, 1);
@@ -197,11 +195,12 @@ namespace H.Core.Test.Services.Animals
             farm.Components.Add(fieldComponent);
 
             var digestateTank = new DigestateTank();
-            digestateTank.TotalSolidDigestateAfterAllApplications = 100;
+            digestateTank.DigestateState = DigestateState.SolidPhase;
+            digestateTank.TotalDigestateAfterAllApplications = 100;
 
             _sut.ReduceTankByDigestateApplications(farm, digestateTank);
 
-            Assert.AreEqual(25, digestateTank.TotalSolidDigestateAfterAllApplications);
+            Assert.AreEqual(25, digestateTank.TotalDigestateAfterAllApplications);
         }
 
         [TestMethod]

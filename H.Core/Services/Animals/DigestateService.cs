@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -91,7 +92,7 @@ namespace H.Core.Services.Animals
 
             foreach (var distinctYear in distinctYears)
             {
-                foreach (var digestateState in new List<DigestateState>() {DigestateState.LiquidPhase, DigestateState.Raw, DigestateState.SolidPhase})
+                foreach (var digestateState in new List<DigestateState>() { DigestateState.LiquidPhase, DigestateState.Raw, DigestateState.SolidPhase })
                 {
                     var digestateTank = this.GetDigestateTankInternal(distinctYear, digestateState);
                     this.SetStartingStateOfTank(digestateTank, adResults, farm, dateTime);
@@ -105,7 +106,7 @@ namespace H.Core.Services.Animals
             if (tank == null)
             {
                 // If no tank exists for this year, create one now
-                tank = new DigestateTank() {Year = year, DigestateState = state};
+                tank = new DigestateTank() { Year = year, DigestateState = state };
 
                 _digestateTanks.Add(tank);
             }
@@ -114,43 +115,25 @@ namespace H.Core.Services.Animals
         }
 
         public void ReduceTankByDigestateApplications(
-            Farm farm, 
+            Farm farm,
             DigestateTank tank)
         {
-            var totalNonSeparatedDigestate = 0d;
-            var totalLiquidSeparatedDigestate = 0d;
-            var totalSolidSeparatedDigestate = 0d;
+            var totalAmountUsedFromAllApplications = 0d;
 
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
                 foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
                 {
-                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems.Where(x => x.DigestateState == tank.DigestateState))
                     {
                         var totalAmount = digestateApplicationViewItem.AmountAppliedPerHectare * cropViewItem.Area;
 
-                        switch (digestateApplicationViewItem.DigestateState)
-                        {
-                            case DigestateState.LiquidPhase:
-                                totalLiquidSeparatedDigestate += totalAmount;
-                                break;
-
-                            case DigestateState.SolidPhase:
-                                totalSolidSeparatedDigestate += totalAmount;
-                                break;
-
-                            // Raw (unseparated)
-                            default:
-                                totalNonSeparatedDigestate += totalAmount;
-                                break;
-                        }
+                        totalAmountUsedFromAllApplications += totalAmount;
                     }
                 }
             }
 
-            tank.TotalDigestateAfterAllApplications -= totalNonSeparatedDigestate;
-            tank.TotalLiquidDigestateAfterAllApplications -= totalLiquidSeparatedDigestate;
-            tank.TotalSolidDigestateAfterAllApplications -= totalSolidSeparatedDigestate;
+            tank.TotalDigestateAfterAllApplications -= totalAmountUsedFromAllApplications;
         }
 
         public DigestateTank GetTank(Farm farm, DateTime dateTime, DigestateState state)
@@ -185,7 +168,7 @@ namespace H.Core.Services.Animals
 
         public void SetStartingStateOfTank(
             DigestateTank tank,
-            List<DigestorDailyOutput> results, 
+            List<DigestorDailyOutput> results,
             Farm farm,
             DateTime dateTime)
         {
@@ -193,9 +176,30 @@ namespace H.Core.Services.Animals
 
             var targetDateResults = results.Where(x => x.Date.Date <= dateTime.Date);
 
-            tank.TotalDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
-            tank.TotalLiquidDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateLiquidFraction);
-            tank.TotalSolidDigestateAfterAllApplications = targetDateResults.Sum(x => x.FlowRateSolidFraction);
+            var flowRateOfAllSubstrates = targetDateResults.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
+            var flowRateOfLiquidFraction = targetDateResults.Sum(x => x.FlowRateLiquidFraction);
+            var flowRateOfSolidFraction = targetDateResults.Sum(x => x.FlowRateSolidFraction);
+
+            switch (tank.DigestateState)
+            {
+                case DigestateState.SolidPhase:
+                    {
+                        tank.TotalDigestateAfterAllApplications = flowRateOfSolidFraction;
+                    }
+                    break;
+
+                case DigestateState.LiquidPhase:
+                    {
+                        tank.TotalDigestateAfterAllApplications = flowRateOfLiquidFraction;
+                    }
+                    break;
+
+                default:
+                    {
+                        tank.TotalDigestateAfterAllApplications = flowRateOfAllSubstrates;
+                    }
+                    break;
+            }
 
             // This property to the gauge view now (maximum value of gauge) // Before digestate applications have been considered, these two will be equal
             tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplications;
