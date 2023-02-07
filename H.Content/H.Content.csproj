@@ -214,7 +214,9 @@
     <None Include="Resources\Settings_50_px.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Documentation\Swine Training Guide\" />
     <Folder Include="Images\GitHubGuide\" />
+    <Folder Include="Images\SwineGuide\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
