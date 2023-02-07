@@ -80,7 +80,7 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
     <br>
     <em>Figure 5: Map of the Manitoba province showing the different selectable polygons.</em>
 </p>
-
+<br>
 
 Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 6)
 
@@ -123,8 +123,6 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific Pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
 
 <div style="page-break-after: always"></div>
-
-<br>
 <br>
 
 ## Crop and Hay Production
@@ -182,8 +180,6 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
 
 <div style="page-break-after: always"></div>
-
-<br>
 <br>
 
 ## Native Grasslands Information
@@ -202,7 +198,6 @@ The swine operation (defined later on) relies on native pasture for the summer m
     <br>
     <em>Figure 11: Native Grasslands information.</em>
 </p> 
-<br>
 <br>
 
 ## Barley Grain and Mixed Hay Rotation
@@ -258,7 +253,6 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 If the tame mixed field is harvested more than once, the “Add Harvest Date” button can be used to add subsequent harvests.
 
 <div style="page-break-after: always"></div>
-<br>
 <br>
 
 ## Swine Operation
@@ -357,8 +351,7 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 * Manure Tab:
     * Select **Liquid/Slurry with natural crust** as the manure handling system.
-    
-
+   
 <br>
 
 #### Grower-to-Finish component
@@ -380,6 +373,7 @@ Click on the management period named **Hogs**. Ensure that the start date is set
     * Select **Liquid/Slurry with natural crust** as the manure handling system.
     
 Follow the same steps for Stages #2 and #3, entering the same information and ensuring the diets correspond with the stage. 
+
 <br>
 
 #### Hogs - On Pasture
@@ -430,7 +424,6 @@ Click on the **Piglets** row in the animal group section **Step 1**. Information
     <br>
     <em>Figure 16: Iso-Wean - Piglet group</em>
 </p> 
-
 <br>
 
 
@@ -644,7 +637,6 @@ If we click on one of these points, we can then view a more detailed breakdown o
 <br>
 
 <div style="page-break-after: always"></div>
-<br>
 <br>
 
 # Finally...
