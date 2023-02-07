@@ -138,26 +138,26 @@ If you already have a GitHub account, sign in your account.
 <br>
 
 
-3. After you Write discussion title and the details, select **Start discussion**.
+3. After you write a title and details, select **Start discussion**.
 
 <br>
 <p align="center">
    <img src="../../Images/GitHubGuide/Figure9.png" alt="Figure 9" width="650"/>
     <br>
-    <em>Figure 9: Select 'General'.</em>
+    <em>Figure 9: Fill the blank.</em>
 </p>
 
 <br>
 <br>
 
 
-4. Your post is successfully created. If you want to edit your post, right click on **...** and select **edit**.
+4. Your post is successfully created. 
 
 <br>
 <p align="center">
    <img src="../../Images/GitHubGuide/Figure10.png" alt="Figure 10" width="650"/>
     <br>
-    <em>Figure 10: The page shown after account creating a post.</em>
+    <em>Figure 10: The page shown after creating a post.</em>
 </p>
 
 <br>
