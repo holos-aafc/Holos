@@ -35,20 +35,19 @@ Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VI
 
 <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>
 
-<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/GitHub%20account.md#how-to-create-a-github-account">How to sign up for a Github account</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md#creating-an-account">How to sign up for a Github account</a>
 
-<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/GitHub%20account.md#how-to-write-a-post-in-the-discussion-forum">How to create a simple post in the discussion forum</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md#how-to-write-a-post-in-the-discussion-forum">How to create a simple post in the discussion forum</a>
 </p>
 
 ---
 
 #### 4. How do I add/edit this FAQ?
-<p> Users can add and edit the FAQ. Note that this page uses markdown. To add and edit the FAQ, two steps are required: 1. Sign up for a GitHub account 2.   
-Request access permissions to Holos repository. Note that access permission is not required if you just want to read FAQ. Access permission is necessary if you want to contribute to the FAQ page. 
+<p> Users can add and edit the FAQ. Note that this page uses markdown. To add and edit the FAQ, two steps are required: 1. Sign up for a GitHub account 2. Pull request to Holos repository. Once the admin of Holos repository appoves your pull request, the changes you made would apply to the FAQ page.
 
-<a href="">How to sign up for a Github account</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md#creating-an-account">How to sign up for a Github account</a>
 
-<a href="">How to request access permissions</a>
+<a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md#contributing-changes-to-the-original-repository">How to make a pull request to Holos repository</a>
 </p>
 
 ---
