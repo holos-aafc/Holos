@@ -283,9 +283,7 @@ message to explain the change.
 <br>
 <br>
 
-Please also go throughthe structure of CSV files sectionbefore editing tables in the repository.
-
-After editing the table, please write a commit message and an optional description explaining the
+After editing the content, please write a commit message and an optional description explaining the
 change and its purpose. Then, click commit message to save your changes.
 
 <br>
