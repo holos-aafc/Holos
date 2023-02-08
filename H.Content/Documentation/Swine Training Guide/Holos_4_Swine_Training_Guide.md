@@ -98,7 +98,7 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure6-2.gif" alt="Figure 6-2" width="950"/>
+    <img src="../../Images/SwineGuide/Figure6-2.png" alt="Figure 6-2" width="950"/>
     <br>
     <em>Figure 6-2: Multiple soil types will be displayed for the selected regions.</em>
 </p>  
