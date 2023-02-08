@@ -82,15 +82,25 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 </p>
 <br>
 
-Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 6)
+Once the farm location is selected (Figure 6-1), soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 6-2)
 
 For this tutorial, keep the default first selected soil type, and keep the default “Hardiness zone”.  
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure6.gif" alt="Figure 6" width="950"/>
+    <img src="../../Images/SwineGuide/Figure6-1.gif" alt="Figure 6-1" width="950"/>
     <br>
-    <em>Figure 6: Multiple soil types might be available for a given region.</em>
+    <em>Figure 6-1: Entering the polygon ID for the farm location.</em>
+</p>  
+
+<br>
+
+
+<br>
+<p align="center">
+    <img src="../../Images/SwineGuide/Figure6-2.gif" alt="Figure 6-2" width="950"/>
+    <br>
+    <em>Figure 6-2: Multiple soil types will be displayed for the selected regions.</em>
 </p>  
 
 <br>
