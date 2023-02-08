@@ -20,7 +20,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/Figure1.png" alt="Figure 1" width="750"/>
+    <img src="../../Images/SwineGuide/Figure1-1.png" alt="Figure 1-1" width="750"/>
     <br>
     <em>Figure 1: Entering a name for the new farm.</em>
 </p>
