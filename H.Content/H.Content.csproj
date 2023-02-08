@@ -65,7 +65,7 @@
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
     <None Include="Documentation\Doxyfile" />
-    <None Include="Documentation\GitHub Gudie\GitHub Guide.md" />
+    <None Include="Documentation\GitHub Guide\GitHub Guide.md" />
     <None Include="Documentation\FAQ\FAQ.md" />
     <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
     <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
