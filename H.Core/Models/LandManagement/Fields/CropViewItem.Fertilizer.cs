@@ -16,6 +16,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _phosphorusFertilizerRate;
         private double _potassiumFertilizerRate;
         private double _sulphurFertilizerRate;
+        private double _customReductionFactor;
 
         private SoilReductionFactors _soilReductionFactor;
 
@@ -89,6 +90,12 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _sulphurFertilizerRate;
             set => SetProperty(ref _sulphurFertilizerRate, value);
+        }
+
+        public double CustomReductionFactor
+        {
+            get => _customReductionFactor;
+            set => SetProperty(ref _customReductionFactor, value);
         }
 
         #endregion

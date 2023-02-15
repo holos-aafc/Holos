@@ -293,6 +293,10 @@ namespace H.Core.Calculators.Nitrogen
                 nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
 
             var soilReductionFactor = _soilN2OEmissionFactorsProvider.GetReductionFactorBasedOnApplicationMethod(viewItem.SoilReductionFactor);
+            if (viewItem.SoilReductionFactor == SoilReductionFactors.Custom)
+            {
+                soilReductionFactor = viewItem.CustomReductionFactor;
+            }
 
             var syntheticNitrogenEmissionFactor = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,

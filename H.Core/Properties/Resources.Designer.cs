@@ -151,6 +151,33 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the &quot;No&quot; option below.
+        /// </summary>
+        public static string AnaerobicDigestionStepOneText {
+            get {
+                return ResourceManager.GetString("AnaerobicDigestionStepOneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farm residues can be added to the anaerobic digestor by clicking the &apos;Add Farm Residue Type&apos; button.
+        /// </summary>
+        public static string AnaerobicDigestionStepThreeText {
+            get {
+                return ResourceManager.GetString("AnaerobicDigestionStepThreeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the proportion of all animal manure produced on the farm that will be added to the anaerobic digestor on a daily basis. At least one animal component must be added to the farm before adding this type of substrate. Alternatively, animal manure produced on the farm can be added to the anaerobic digestor by clicking the &apos;Add Manure Substrate Type&apos; button..
+        /// </summary>
+        public static string AnaerobicDigestionStepTwoText {
+            get {
+                return ResourceManager.GetString("AnaerobicDigestionStepTwoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
         public static string April {
@@ -7027,6 +7054,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg CO2 (kg K2O)^-1.
+        /// </summary>
+        public static string KilogramsCo2PerKilogramK2O {
+            get {
+                return ResourceManager.GetString("KilogramsCo2PerKilogramK2O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg DM ha^1.
         /// </summary>
         public static string KilogramsDryMatterPerHectareString {
@@ -9700,6 +9736,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total liquid digestate produced.
+        /// </summary>
+        public static string LabelLiquidFraction {
+            get {
+                return ResourceManager.GetString("LabelLiquidFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liquid-solid separation.
         /// </summary>
         public static string LabelLiquidSolidSeparation {
@@ -10744,6 +10789,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total solid digestate produced.
+        /// </summary>
+        public static string LabelSolidFraction {
+            get {
+                return ResourceManager.GetString("LabelSolidFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soluble Dietary Fiber.
         /// </summary>
         public static string LabelSolubleDietryFiber {
@@ -11032,6 +11086,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total liquid digestate remaining after all field applications.
+        /// </summary>
+        public static string LabelTotalLiquidDigestateRemainingAfterAllFieldApplications {
+            get {
+                return ResourceManager.GetString("LabelTotalLiquidDigestateRemainingAfterAllFieldApplications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NO3-N_totalLeach.
         /// </summary>
         public static string LabelTotalNitrateLeachingForArea {
@@ -11100,6 +11163,15 @@ namespace H.Core.Properties {
         public static string LabelTotalSequestration {
             get {
                 return ResourceManager.GetString("LabelTotalSequestration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total solid digestate remaining after all field applications.
+        /// </summary>
+        public static string LabelTotalSolidDigestateRemainingAfterAllFieldApplications {
+            get {
+                return ResourceManager.GetString("LabelTotalSolidDigestateRemainingAfterAllFieldApplications", resourceCulture);
             }
         }
         
@@ -15781,6 +15853,15 @@ namespace H.Core.Properties {
         public static string TotalPrimaryEnergyProductionPotential {
             get {
                 return ResourceManager.GetString("TotalPrimaryEnergyProductionPotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total raw digestate remaining after all field applications.
+        /// </summary>
+        public static string TotalRawDigestateRemainingAfterAllFieldApplications {
+            get {
+                return ResourceManager.GetString("TotalRawDigestateRemainingAfterAllFieldApplications", resourceCulture);
             }
         }
         

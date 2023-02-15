@@ -264,6 +264,7 @@ namespace H.Core.Models.Animals
         /// (kg head^-1 day^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.Kilograms)]
+        [Obsolete("Use DailyDryMatterFeedIntakeOfFeed on Diet property")]
         public double FeedIntakeAmount
         {
             get { return _feedIntakeAmount; }

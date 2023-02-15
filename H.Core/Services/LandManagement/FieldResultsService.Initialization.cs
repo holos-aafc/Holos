@@ -6,6 +6,7 @@ using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Soil;
 using H.Infrastructure;
 
 namespace H.Core.Services.LandManagement
@@ -419,11 +420,31 @@ namespace H.Core.Services.LandManagement
 
             if (farmYieldAssignmentMethod == YieldAssignmentMethod.InputFile)
             {
-                //Assumed that the rotation name is identical/substring of the farm name
-                var yieldDataRow = farm.GeographicData.CustomYieldData.SingleOrDefault(
-                    x => x.Year == viewItem.Year && 
-                         fieldSystemComponent.Name.IndexOf(x.FieldName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0 && 
-                         farm.Name.IndexOf(x.RotationName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0);
+                var results = new List<CustomUserYieldData>();
+
+                foreach (var customYieldItem in farm.GeographicData.CustomYieldData)
+                {
+                    var yearMatch = customYieldItem.Year == viewItem.Year;
+                    var fieldNameMatch = fieldSystemComponent.Name.IndexOf(customYieldItem.FieldName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0;
+                    var farmNameMatch = farm.Name.IndexOf(customYieldItem.RotationName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0;
+
+
+                    // Don't assign main year yields to a cover crop yield (for now)
+                    if (yearMatch && fieldNameMatch && farmNameMatch && viewItem.IsSecondaryCrop == false)
+                    {
+                        results.Add(customYieldItem);
+                    }
+                }
+
+                CustomUserYieldData yieldDataRow = null;
+                if (results.Count > 1)
+                {
+                    yieldDataRow = results.FirstOrDefault(x => x.FieldName.Trim().Equals(fieldSystemComponent.Name.Trim(), StringComparison.InvariantCultureIgnoreCase));
+                }
+                else if (results.Count == 1)
+                {
+                    yieldDataRow = results.Single();
+                }
 
                 if (yieldDataRow != null)
                 {

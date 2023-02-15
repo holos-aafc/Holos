@@ -22,6 +22,8 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
+        private readonly Table_40_Swine_Default_PrGain_Values_Provider _swineDefaultPrGainValuesProvider = new Table_40_Swine_Default_PrGain_Values_Provider();
+
         #endregion
 
         #region Constructors
@@ -76,8 +78,11 @@ namespace H.Core.Services.Animals
              * Manure carbon (C) and methane (CH4)
              */
 
+            // Old farms had the DMI/Intake associated with the management period and not the diet
+            var feedIntake = managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed > 0 ? managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed : managementPeriod.FeedIntakeAmount;
+
             dailyEmissions.FecalCarbonExcretionRate = this.CalculateCarbonExcretionRate(
-                dailyDryMatterIntakeOfFeed: managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed);
+                dailyDryMatterIntakeOfFeed: feedIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -109,7 +114,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.VolatileSolids = this.CalculateVolatileSolids(
                 volatileSolidAdjusted: dailyEmissions.VolatileSolidsAdjusted,
-                feedIntake: managementPeriod.FeedIntakeAmount);
+                feedIntake: feedIntake);
 
             /*
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
@@ -145,7 +150,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.ProteinIntake = this.CalculateProteinIntake(
-                feedIntake: managementPeriod.FeedIntakeAmount,
+                feedIntake: feedIntake,
                 crudeProteinIntake: managementPeriod.SelectedDiet.CrudeProteinContent);
 
             // Protein retained calculations for breeding sows only apply to the farrow to finish and farrow to wean components where the protein retained from weaned piglets must be considered
@@ -190,10 +195,13 @@ namespace H.Core.Services.Animals
             }
             else
             {
+                var medianWeight = (managementPeriod.StartWeight + managementPeriod.EndWeight) / 2.0;
+                var nitrogenRequiredForGain = _swineDefaultPrGainValuesProvider.GetNitrogenRequiredForGain(medianWeight);
+
                 dailyEmissions.ProteinRetained = this.CalculateProteinRetainedForGrowingPigs(
                     initialBodyWeight: managementPeriod.StartWeight,
                     finalBodyWeight: managementPeriod.EndWeight,
-                    nitrogenRequiredForGain: managementPeriod.NitrogenRequiredForGain, 
+                    nitrogenRequiredForGain: nitrogenRequiredForGain, 
                     numberOfDays: managementPeriod.NumberOfDays);
             }
 

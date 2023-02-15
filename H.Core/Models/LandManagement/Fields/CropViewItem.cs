@@ -175,6 +175,7 @@ namespace H.Core.Models.LandManagement.Fields
             this.YearOfConversion = CoreConstants.IcbmEquilibriumYear;
 
             this.CarbonConcentration = CoreConstants.CarbonConcentration;
+            this.CustomReductionFactor = 1;
 
             this.CropEconomicData = new CropEconomicData();
             this.IpccTier2NitrogenResults = new IPCCTier2Results();

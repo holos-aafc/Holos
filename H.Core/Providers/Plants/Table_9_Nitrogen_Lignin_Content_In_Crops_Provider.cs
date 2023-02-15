@@ -60,7 +60,19 @@ namespace H.Core.Providers.Plants
                 return new Table_9_Nitrogen_Lignin_Content_In_Crops_Data();
             }
 
-            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = this.Data.Find(x => x.CropType == cropType);
+            var lookupType = cropType;
+
+            if (cropType == CropType.Flax)
+            {
+                lookupType = CropType.FlaxSeed;
+            }
+
+            if (cropType == CropType.FieldPeas)
+            {
+                lookupType = CropType.DryFieldPeas;
+            }
+
+            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = this.Data.Find(x => x.CropType == lookupType);
 
             if (data != null)
             {

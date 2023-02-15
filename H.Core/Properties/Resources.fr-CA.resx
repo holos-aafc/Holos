@@ -162,6 +162,15 @@
   <data name="AnaerobicDigestionStepOneInfo" xml:space="preserve">
     <value>les paramètres par défaut du biogaz et du méthane peuvent être modifiés dans cette section. pour ce faire, cliquez sur le bouton ci-dessous, sélectionnez un type de substrat et précisez les valeurs par défaut, au besoin.</value>
   </data>
+  <data name="AnaerobicDigestionStepOneText" xml:space="preserve">
+    <value>All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the "No" option below</value>
+  </data>
+  <data name="AnaerobicDigestionStepThreeText" xml:space="preserve">
+    <value>Farm residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' button</value>
+  </data>
+  <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
+    <value>Specify the proportion of all animal manure produced on the farm that will be added to the anaerobic digestor on a daily basis. At least one animal component must be added to the farm before adding this type of substrate. Alternatively, animal manure produced on the farm can be added to the anaerobic digestor by clicking the 'Add Manure Substrate Type' button.</value>
+  </data>
   <data name="April" xml:space="preserve">
     <value>avril</value>
   </data>
@@ -3325,6 +3334,9 @@
   <data name="LabelLigninContent" xml:space="preserve">
     <value>teneur en lignine</value>
   </data>
+  <data name="LabelLiquidFraction" xml:space="preserve">
+    <value>Total liquid digestate produced</value>
+  </data>
   <data name="LabelLiquidSolidSeparation" xml:space="preserve">
     <value>Liquid-solid separation</value>
   </data>
@@ -3670,6 +3682,9 @@
   <data name="LabelSoilCEC" xml:space="preserve">
     <value>capacité d’échange cationique du sol</value>
   </data>
+  <data name="LabelSolidFraction" xml:space="preserve">
+    <value>Total solid digestate produced</value>
+  </data>
   <data name="LabelSolubleDietryFiber" xml:space="preserve">
     <value>fibres alimentaires solubles
 </value>
@@ -3767,6 +3782,9 @@
   <data name="LabelTotalIndirectNitrousOxide" xml:space="preserve">
     <value>N2O-N_indirect</value>
   </data>
+  <data name="LabelTotalLiquidDigestateRemainingAfterAllFieldApplications" xml:space="preserve">
+    <value>Total liquid digestate remaining after all field applications</value>
+  </data>
   <data name="LabelTotalNitrateLeachingForArea" xml:space="preserve">
     <value>NO3-N_lessivageTotal</value>
   </data>
@@ -3790,6 +3808,9 @@
   </data>
   <data name="LabelTotalSequestration" xml:space="preserve">
     <value>séquestration totale</value>
+  </data>
+  <data name="LabelTotalSolidDigestateRemainingAfterAllFieldApplications" xml:space="preserve">
+    <value>Total solid digestate remaining after all field applications</value>
   </data>
   <data name="LabelTotalSolids" xml:space="preserve">
     <value>matières solides totales</value>
@@ -5344,6 +5365,9 @@
   </data>
   <data name="TotalPrimaryEnergyProductionPotential" xml:space="preserve">
     <value>Total primary energy production</value>
+  </data>
+  <data name="TotalRawDigestateRemainingAfterAllFieldApplications" xml:space="preserve">
+    <value>Total raw digestate remaining after all field applications</value>
   </data>
   <data name="TotalRecoverableMethane" xml:space="preserve">
     <value>Total recoverable CH₄</value>

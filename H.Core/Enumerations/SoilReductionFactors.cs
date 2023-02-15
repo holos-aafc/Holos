@@ -24,5 +24,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumNone", typeof(Resources))]
         None,
+
+        [LocalizedDescription("EnumCustom", typeof(Resources))]
+        Custom,
     }
 }

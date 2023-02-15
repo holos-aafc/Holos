@@ -25,6 +25,7 @@
             {
                 // Nursery
                 return 0.031;
+
             }
             else if (averageWeightOfAnimal >= 7 && averageWeightOfAnimal < 20)
             {
