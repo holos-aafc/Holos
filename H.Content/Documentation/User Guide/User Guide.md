@@ -2101,18 +2101,18 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 -	You will be shown a file explorer. Navigate to your input file.
 -	The input file must be a **Comma Separated Value (CSV)** file.
 -	The format of the file should be as follows:
-	-	A column for the year, and as many columns as you have rotations.
-	-	You can have as many years and rotations as you like in the file if they conform to the above format.
-	- Note that you must separate the field name and rotation name by a hyphen for Holos to correctly associate the yield value with the appropriate field and rotation.
+	-	A column for the year, and many fields as you have.
+	-	You can have as many years and farm names as you like in the file if they conform to the above format.
+	- Note that you must separate the field name and farm name by a hyphen for Holos to correctly associate the yield value with the appropriate field and farm.
 
 
 <div align="center">
 
-| Year  | Field # 1 - Rotation #1 | Field #1 - Rotation #2 | ... |
-| ----- | :---------------------: | :--------------------: | :-: |
-| 1990  |          1065           |         1378           | ... |
-| 1991  |          1020           |         1223           | ... |
-| ...   |          ...            |          ...           | ... |
+| Year  | Field # 1 - Farm Name #1 | Field #1 - Farm Name #2 | ... |
+| ----- | :---------------------:  | :--------------------:  | :-: |
+| 1990  |          1065            |         1378            | ... |
+| 1991  |          1020            |         1223            | ... |
+| ...   |          ...             |          ...            | ... |
 
 </div>
 

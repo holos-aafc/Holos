@@ -105,6 +105,7 @@ namespace H.Core.Models
         private double _conversionOfGJForHerbicideProduction;
         private double _conversionOfNFertilizer;
         private double _conversionOfPFertilizer;
+        private double _conversionOfPotassium;
         private double _conversionOfAreaIrrigated;
         private double _electricityHousedBeef;
         private double _electricityDairy;
@@ -687,6 +688,16 @@ namespace H.Core.Models
             get { return _conversionOfPFertilizer; }
             set { SetProperty(ref _conversionOfPFertilizer, value); }
         }
+
+        /// <summary>
+        /// (kg CO2 (kg P2O5)^-1)
+        /// </summary>
+        public double ConversionOfPotassium
+        {
+            get { return _conversionOfPotassium; }
+            set { SetProperty(ref _conversionOfPotassium, value); }
+        }
+
 
         /// <summary>
         /// (kg CO2 ha^-1)

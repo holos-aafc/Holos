@@ -103,6 +103,7 @@ namespace H.Core.Models
         private string _kilogramsCO2PerGJ;
         private string _kilogramsCO2PerKilogramN;
         private string _kilogramsCO2PerKilogramP2O5;
+        private string _kilogramsCO2PerKilogramK2O;
         private string _kilogramsCO2PerHectare;
         private string _kilowattHourPerAnimal;
         private string _kilowattHourPerPoultryPlacement;
@@ -597,6 +598,12 @@ namespace H.Core.Models
             set { SetProperty(ref _kilogramsCO2PerKilogramP2O5, value); }
         }
 
+        public string KilogramsCo2PerKilogramK2O
+        {
+            get { return _kilogramsCO2PerKilogramK2O; }
+            set { SetProperty(ref _kilogramsCO2PerKilogramK2O, value); }
+        }
+
         public string KilogramsCo2PerHectare
         {
             get { return _kilogramsCO2PerHectare; }
@@ -933,6 +940,7 @@ namespace H.Core.Models
                 KilogramsCo2PerGj = WrapString(Resources.KilogramCO2PerGJ);
                 KilogramsCo2PerKilogramN = WrapString(Resources.KilogramCO2PerKilogramsN);
                 KilogramsCo2PerKilogramP2O5 = WrapString(Resources.KilogramCO2PerKilogramsP2O5);
+                KilogramsCo2PerKilogramK2O = WrapString(Resources.KilogramsCo2PerKilogramK2O);
                 KilogramsCo2PerHectare = WrapString(Resources.KilogramCO2PerHectare);
                 KilowattHourPerAnimal = WrapString(Resources.KilowattPerAnimal);
                 KilowattHourPerPoultryPlacement = WrapString(Resources.KilowattPerPoultryPlacement);
@@ -1052,6 +1060,7 @@ namespace H.Core.Models
                 KilogramsCo2PerGj = WrapString(Resources.PoundsCO2PerBTU);
                 KilogramsCo2PerKilogramN = WrapString(Resources.PoundsCO2PerPoundN);
                 KilogramsCo2PerKilogramP2O5 = WrapString(Resources.PoundCO2PerPoundP2O5);
+                KilogramsCo2PerKilogramK2O = WrapString(Resources.KilogramsCo2PerKilogramK2O);
                 KilogramsCo2PerHectare = WrapString(Resources.PoundCO2PerAcre);
                 KilowattHourPerAnimal = WrapString(Resources.BTUPerAnimal);
                 KilowattHourPerPoultryPlacement = WrapString(Resources.BTUPerPoultryPlacement);

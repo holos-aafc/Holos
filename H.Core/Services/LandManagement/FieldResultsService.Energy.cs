@@ -17,6 +17,7 @@ namespace H.Core.Services.LandManagement
         private const double HerbicideConversion = 5.8;
         private const double NitrogenFertilizerConversion = 3.59;
         private const double PhosphorusFertilizerConversion = 0.5699;
+        private const double PotassiumConversion = 1.0;  // We do not have data for potassium conversion value yet, so temporarily use 1.0 for now.
         private const double IrrigationConversion = 367;
 
         #endregion
@@ -247,7 +248,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from K fertilizer production (kg CO2 year^-1)</returns>
-        private double CalculateEnergyEmissionsFromPotassiumFertilizer(CropViewItem viewItem)
+        public double CalculateEnergyEmissionsFromPotassiumFertilizer(CropViewItem viewItem)
         {
             var result = 0.0;
 
@@ -306,16 +307,19 @@ namespace H.Core.Services.LandManagement
         /// <param name="carbonDioxideEmissionsFromCroppingHerbicideProduction">CO2emissions from cropping/fallow herbicide production (kg CO2year^-1)</param>
         /// <param name="NFertilizerProduction">CO2emissions from N fertilizer production (kg CO2year^-1)</param>
         /// <param name="phosphorusPentoxideFertilizerProduction">CO2emissions from P2O5 fertilizer production (kg CO2year^-1)</param>
+        /// <param name="potassiumProduction">CO2emissions from K2O fertilizer production (kg CO2year^-1)</param>
         /// <returns>CO2 emissions from cropping energy use (kg CO2year^-1)</returns>
         public double CalculateCarbonDioxideEmissionsFromCroppingEnergyUse(
             double carbonDioxideEmissionsFromCroppingFuelUse,
             double carbonDioxideEmissionsFromCroppingHerbicideProduction,
             double NFertilizerProduction,
+            double potassiumProduction,
             double phosphorusPentoxideFertilizerProduction)
         {
             return carbonDioxideEmissionsFromCroppingFuelUse +
                    carbonDioxideEmissionsFromCroppingHerbicideProduction +
                    NFertilizerProduction +
+                   potassiumProduction +
                    phosphorusPentoxideFertilizerProduction;
         }
 
@@ -327,6 +331,7 @@ namespace H.Core.Services.LandManagement
         /// <param name="totalCarbonDioxideEmissionsFromFallowHerbicideProduction"></param>
         /// <param name="totalCarbonDioxideEmissionsFromNitrogenFertilizerProduction"></param>
         /// <param name="totalCarbonDioxideEmissionsFromP2O5FertilizerProduction"></param>
+        /// <param name="totalCarbonDioxideEmissionsFromPotassiumProduction"></param>
         /// <param name="totalCarbonDioxideEmissionsFromIrrigation"></param>
         /// <returns></returns>
         public double CalculateTotalCarbonDioxideEmissionsFromCroppingEnergyUse(double totalCarbonDioxideEmissionsFromFallowingFuelUse,
@@ -334,6 +339,7 @@ namespace H.Core.Services.LandManagement
             double totalCarbonDioxideEmissionsFromFallowHerbicideProduction,
             double totalCarbonDioxideEmissionsFromNitrogenFertilizerProduction,
             double totalCarbonDioxideEmissionsFromP2O5FertilizerProduction,
+            double totalCarbonDioxideEmissionsFromPotassiumProduction,
             double totalCarbonDioxideEmissionsFromIrrigation)
         {
             return totalCarbonDioxideEmissionsFromFallowingFuelUse +
@@ -341,6 +347,7 @@ namespace H.Core.Services.LandManagement
                    totalCarbonDioxideEmissionsFromFallowHerbicideProduction +
                    totalCarbonDioxideEmissionsFromNitrogenFertilizerProduction +
                    totalCarbonDioxideEmissionsFromP2O5FertilizerProduction +
+                   totalCarbonDioxideEmissionsFromPotassiumProduction +
                    totalCarbonDioxideEmissionsFromIrrigation;
         } 
 
