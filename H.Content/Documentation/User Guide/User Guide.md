@@ -2096,7 +2096,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 
 ## Load an Input File
 
--	To assign load a file with custom yields in the results view of Holos, select the drop-down menu beside “**Yield Assignment Method**” and choose “**input file**”.
+-	To assign load a file with custom yields in the results view of Holos, select the drop-down menu beside “**Yield Assignment Method**” and choose “**Input file**”.
 -	Click on the button that appears, labeled “**Load Custom Yield Data**”.
 -	You will be shown a file explorer. Navigate to your input file.
 -	The input file must be a **Comma Separated Value (CSV)** file.
