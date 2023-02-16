@@ -9,7 +9,7 @@ The purpose of this document is to allow for users to find answers to their ques
 
 <br>
 
-## General FAQ
+# General FAQ
 
 #### 1. I do not know how to use the Holos program.
 <p>The training guide is available. Following step by steps would help you to learn how to use the program. The links are below:
@@ -20,14 +20,14 @@ The purpose of this document is to allow for users to find answers to their ques
 </P>
 
 
-#### 2. Are there any videos I can watch?
+### 2. Are there any videos I can watch?
 <p> Yes, Holos has a Youtube channel that offers tutorials to new users.
 
 Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VICHzqm_yVpM_Q">Tutorial Videos</a>
 </p>
 
 
-#### 3. How can I participate in the Holos discussion forum?
+### 3. How can I participate in the Holos discussion forum?
 <p>  Holos has a discussion board that users can leave feedback and ask questions. To begin using the discussion forum, a GitHub account needs to be created. After signing up for the GitHub account, you can start to chat in the forum. There are step by step guides for how to sign up for a GitHub account and how to create a simple post in the discussion forum:        
 
 <a href="https://github.com/holos-aafc/Holos/discussions">Holos Discussion Forum</a>
@@ -38,7 +38,7 @@ Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VI
 </p>
 
 
-#### 4. How do I add/edit this FAQ?
+### 4. How do I add/edit this FAQ?
 <p> Users can add and edit the FAQ. Note that this page uses markdown. To add and edit the FAQ, two steps are required: 1. Sign up for a GitHub account 2. Pull request to Holos repository. Once the admin of Holos repository appoves your pull request, the changes you made would apply to the FAQ page.
 
 <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md#creating-an-account">How to sign up for a Github account</a>
@@ -48,21 +48,21 @@ Click the link:&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCHDORmZ73VI
 
 ---
 
-## Cropping FAQ
+# Cropping FAQ
 
-#### 1. Where is my crop?
+### 1. Where is my crop?
 We do not have all crops.
 
 ---
 
-## Livestock FAQ
+# Livestock FAQ
 
-#### 1.	I cannot find options to input my grazing systems, how do I represent grazing system X in Holos?
-<p> Currently Holos does not offer the option to simulate different grazing systems, as there still is a lack of scientific clarity on what the exact effects of such systems are. Furthermore, there is also some confusion related to terminology. Our team is involved in several projects that attempt to provide more clarity and future updates to the model are intended to provide appropriate options. In the meantime, using Holos, the model user can place animal groups on specific pasture fields. In this way, multiple fields could be created to represent different paddocks for a rotational grazing system, with the management history for each field detailed. However, for grazed fields/paddocks, Holos estimates the aboveground biomass productivity based on the animal vegetation biomass consumption in combination with estimates of biomass utilization (grazing efficiency), thus more efficient grazing systems could be represented using a single pasture, rather than subdividing it into parcels. **Please note:**  more intensive grazing systems have been shown to improve the feed quality, but this must be specified for each animal group grazing on a specific pasture and for each relevant management period, using the Diet tab for that animal group/management period, e.g., by creating a custom pasture diet using the ‘Custom Diet Creator’ tool.
+### 1.	I cannot find options to input my grazing systems, how do I represent grazing system X in Holos?
+<p> Currently Holos does not offer the option to simulate different grazing systems, as there still is a lack of scientific clarity on what the exact effects of such systems are. Furthermore, there is also some confusion related to terminology. Our team is involved in several projects that attempt to provide more clarity and future updates to the model are intended to provide appropriate options. In the meantime, using Holos, the model user can place animal groups on specific pasture fields. In this way, multiple fields could be created to represent different paddocks for a rotational grazing system, with the management history for each field detailed. However, for grazed fields/paddocks, Holos estimates the aboveground biomass productivity based on the animal vegetation biomass consumption in combination with estimates of biomass utilization (grazing efficiency), thus more efficient grazing systems could be represented using a single pasture, rather than subdividing it into parcels. **Please note:** more intensive grazing systems have been shown to improve the feed quality, but this must be specified for each animal group grazing on a specific pasture and for each relevant management period, using the Diet tab for that animal group/management period, e.g., by creating a custom pasture diet using the ‘Custom Diet Creator’ tool.
 </p>
 
 
-#### 2.	I want to compare livestock management options, how can I do that in Holos?
+### 2.	I want to compare livestock management options, how can I do that in Holos?
 <p> There are three options to do this:
 	-	Set up two different farms
 	-	Set up two livestock components within a single farm
