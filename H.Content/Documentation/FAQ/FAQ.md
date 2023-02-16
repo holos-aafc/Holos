@@ -82,9 +82,9 @@ Currently, the model user must locate their farm within a single SLC polygon. If
 
 ### 1. Where is crop X, I cannot find it on the list?
 If a crop is not on the list, this means that we could not find (published Canadian) data for it. Three options are available to rectify the issue (if you do have the necessary data):
-	- Single instance: Choose an existing crop from the list and adjust the Carbon (C) coefficient values (which describe the proportion of total plant biomass or carbon contained in the different plant parts) and their nitrogen (N) concentrations and lignin contents – this can be done using the Residue tab for the field or crop rotation in question;
-	- Continuous setting: On the component selection screen, go to Settings > Crop Defaults, where you can overwrite the default settings for individual crops. Once you do this, these new settings/default values will then  appear whenever the crop is chosen;
-	- Permanent addition: Add a new crop to the Holos lookup table, with the associated required data (i.e., C coefficients, N concentrations, lignin contents, moisture content) [(Table 9)](https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops.csv). 
+	* Single instance: Choose an existing crop from the list and adjust the Carbon (C) coefficient values (which describe the proportion of total plant biomass or carbon contained in the different plant parts) and their nitrogen (N) concentrations and lignin contents – this can be done using the Residue tab for the field or crop rotation in question;
+	* Continuous setting: On the component selection screen, go to Settings > Crop Defaults, where you can overwrite the default settings for individual crops. Once you do this, these new settings/default values will then  appear whenever the crop is chosen;
+	* Permanent addition: Add a new crop to the Holos lookup table, with the associated required data (i.e., C coefficients, N concentrations, lignin contents, moisture content) [(Table 9)](https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops.csv). 
 >*Please note: for permanent crop additions, peer-reviewed publications need to be provided as a reference and those publications should refer to Canadian studies.*
 
 
@@ -145,9 +145,9 @@ Currently Holos does not offer the option to simulate different grazing systems,
 
 ### 2. I want to compare livestock management options, how can I do that in Holos?
 There are three options to do this:
-	- Set up two different farms
-	- Set up two livestock components within a single farm
-	- Set up two livestock groups within a single livestock component on a single farm
+	* Set up two different farms
+	* Set up two livestock components within a single farm
+	* Set up two livestock groups within a single livestock component on a single farm
 Each of these allows the model user to compare model outputs for the different management options. 
 >*Please note: if the model user sets up two (or more) different farms, they can compare the model outputs for these farms by selecting ‘Yes’ for ‘Compare Multiple Farms’ on the Results screen and selecting the farms they wish to compare from the list available.*
 
