@@ -9,7 +9,7 @@ The purpose of this document is to allow for users to find answers to their ques
 
 <br>
 
-## General FAQ
+# General FAQ
 
 ### 1. I do not know how to use the Holos program.
 The training guide is available. Following step by steps would help you to learn how to use the program. The links are below:
@@ -42,7 +42,7 @@ Users can add and edit the FAQ. Note that this page uses markdown. To add and ed
 
 ---
 
-## Model Setup FAQ
+# Model Setup FAQ
 
 ### 1. Why is there (currently) no imperial option for the units of measurement?
 Holos was developed to offer both the metric and imperial measurement system for inputs. However, when deploying updates to the model, the imperial option may be temporarily disabled. The team is working hard to ensure that the imperial option becomes available again as soon as possible.
@@ -78,7 +78,7 @@ Currently, the model user must locate their farm within a single SLC polygon. If
 
 ---
 
-## Crop FAQ
+# Crop FAQ
 
 ### 1. Where is crop X, I cannot find it on the list?
 If a crop is not on the list, this means that we could not find (published Canadian) data for it. Three options are available to rectify the issue (if you do have the necessary data):
@@ -121,7 +121,7 @@ Following the National GHG Inventory methodology, we do not yet know how to acco
 
 ---
 
-## Carbon FAQ
+# Carbon FAQ
 
 ### 1. What are the inputs *Start* year and *End* year doing?
 Start and End year determine the length of the soil carbon model simulation. This will largely depend on the historic farm activity data that are available, but we recommend that the user starts the simulation as close to the year 1985 as possible. This is because carbon change is a long-term process, with soil scientists frequently stating that soil carbon changes related to the implementation of a particular management practice (or bundle of practices) can be measured at the earliest after 10 years after the implementation of the management change. When defining the management history for a field or crop rotation component, Holos primarily needs the cropping sequence and approximate fertilizer/ manure / residue management data. Crop yield data are also important – as a default, Holos uploads annual crop-specific yield data at the Small Area Data Region scale from a database, but the user can override these default yields under the General tab on the Component selection screen and/or on the Details screen.
@@ -136,7 +136,7 @@ Carbon models with annual time steps (such as those utilized in Holos) provide a
 
 ---
 
-## Livestock FAQ
+# Livestock FAQ
 
 ### 1. I cannot find options to input my grazing systems, how do I represent grazing system X in Holos?
 Currently Holos does not offer the option to simulate different grazing systems, as there still is a lack of scientific clarity on what the exact effects of such systems are. Furthermore, there is also some confusion related to terminology. Our team is involved in several projects that attempt to provide more clarity and future updates to the model are intended to provide appropriate options. In the meantime, using Holos, the model user can place animal groups on specific pasture fields. In this way, multiple fields could be created to represent different paddocks for a rotational grazing system, with the management history for each field detailed. However, for grazed fields/paddocks, Holos estimates the aboveground biomass productivity based on the animal vegetation biomass consumption in combination with estimates of biomass utilization (grazing efficiency), thus more efficient grazing systems could be represented using a single pasture, rather than subdividing it into parcels. 
