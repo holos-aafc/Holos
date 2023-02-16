@@ -5,6 +5,7 @@
 The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. the optional inputs. We are going to create a farm that has a dairy production system, and a feed crop production system. The farm is located in Manitoba near Portage La Prairie.
 
 <br>
+<br>
 
 # Launch Holos
 
@@ -95,6 +96,7 @@ For this tutorial, keep the default first selected soil type, and keep the defau
 Click the **Next** button to proceed to the next step.
 
 <div style="page-break-after: always"></div>
+<br>
 
 # Selecting Farm Components
 
@@ -347,7 +349,7 @@ Click the **Next** button to move to the final results, past the **Timeline** an
 
 <br>
 <p align="center">
-    <img src="../../Images/DairyGuide/Figure17.png" alt="Figure 17" width="850"/>
+    <img src="../../Images/DairyGuide/Figure17.png" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Detailed Emissions Report.</em>
 </p> 
