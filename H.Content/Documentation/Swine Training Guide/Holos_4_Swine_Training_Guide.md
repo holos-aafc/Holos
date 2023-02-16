@@ -40,8 +40,6 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
     <br>
     <em>Figure 3: Select metric as the unit of measurement.</em>
 </p>
-
-<br>
 <br>
 
 
@@ -92,7 +90,6 @@ For this tutorial, keep the default first selected soil type, and keep the defau
     <br>
     <em>Figure 6-1: Entering the polygon ID for the farm location.</em>
 </p>  
-
 <br>
 
 
@@ -102,7 +99,6 @@ For this tutorial, keep the default first selected soil type, and keep the defau
     <br>
     <em>Figure 6-2: Multiple soil types will be displayed for the selected regions.</em>
 </p>  
-
 <br>
 
 *Note: Soil data obtained from the user’s selected location will be used in the calculation of location-specific N2O emission factors. Properties such as soil texture, top layer thickness, and soil pH are required for these calculations, and can be overwritten.*
@@ -113,8 +109,6 @@ Click the “Next” button to proceed to the next step.
 
 <div style="page-break-after: always"></div>
 
-<br>
-<br>
 
 # Selecting Farm Components
 
@@ -133,7 +127,7 @@ If we click on the drop downdrop-down button next to a categories' name, we can 
 The Holos model is designed to define the land management before livestock. This is because we are allowing livestock to be placed onto a specific Pasture (field) for grazing, and that is easier done when a pasture field has been defined already (otherwise the user would have to interrupt the livestock setup to setup a field).
 
 <div style="page-break-after: always"></div>
-<br>
+
 
 ## Crop and Hay Production
 
@@ -404,8 +398,6 @@ Click on the management period named **Stage #4**. Ensure that the start date is
 * Manure Tab:
     * Select **Pasture** as the manure handling system.
 
-<br>
-
 
 <br>
 <p align="center">
@@ -456,7 +448,6 @@ Holos has the ability to add manure applications from manure that is sourced fro
     <br>
     <em>Figure 17: Adding a manure application to the Wheat & Hairy Vetch component</em>
 </p>
-
 <br>
 
 
@@ -482,7 +473,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
     <em>Figure 18: Adding supplemental hay/forage for grazing animals.</em>
 </p>
 <br>
-<br>
+
 
 # Timeline Screen
 
@@ -538,8 +529,6 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 <div style="page-break-after: always"></div>
 
-<br>
-<br>
 
 # Details Screen
 
@@ -571,7 +560,7 @@ We will adjust this grid so that we can view the above ground and below ground c
     <em>Figure 22: Details screen</em>
 </p> 
 <br>
-<br>
+
 
 #  Discover results
 
@@ -621,7 +610,6 @@ The **Feed Estimate** report provides an estimate of dry matter intake based on 
 <br>
 
 
-
 ## Soil carbon modeling results
 
 
@@ -630,7 +618,6 @@ On the results screen we can see the change in soil carbon over time by clicking
 For each field on the graph, you can hover your mouse over the series to get more information for each historical year of the field.
 
 If we click on one of these points, we can then view a more detailed breakdown of these results. We can also export this data by clicking the “Export to Excel” button.
-
 
 
 <br>
@@ -647,7 +634,7 @@ If we click on one of these points, we can then view a more detailed breakdown o
 <br>
 
 <div style="page-break-after: always"></div>
-<br>
+
 
 # Finally...
 
