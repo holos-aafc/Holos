@@ -24,9 +24,11 @@ There is a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Docu
 
 There is also a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md" target="_blank">Holos 4 User Guide</a> available. This guide can be used as a more in-depth manual on how to use the various features of Holos.
 
-*Note that the Holos 4 GUI is not open source at this time.*
+# Download
 
-The GUI for Holos 4 is available to download and use from the <a href="https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program"> Agriculture and Agri-Food Canada webpage</a>.
+The GUI for Holos 4 is freely available to download and use from the <a href="https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program"> Agriculture and Agri-Food Canada webpage</a>.
+
+*Note that the Holos 4 GUI is not open source at this time.*
 
 # License
 
