@@ -5,7 +5,7 @@
 
 # Chapitre 1 Introduction
 
-Pour installer Holos, rendez-vous  [ici](https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program) sur le Web. Cliquez sur le fichier zip indiqué pour le télécharger. Une fois le téléchargement effectué, accédez au dossier de téléchargement et double-cliquez sur le programme **Installation**. Si vous souhaitez installer l’application, cliquez sur **Installer**.
+Pour installer Holos, rendez-vous  [ici](https://agriculture.canada.ca/fr/production-agricole/holos) sur le Web. Cliquez sur le fichier zip indiqué pour le télécharger. Une fois le téléchargement effectué, accédez au dossier de téléchargement et double-cliquez sur le programme **Installation**. Si vous souhaitez installer l’application, cliquez sur **Installer**.
 
 <br>
 <p align="center">
