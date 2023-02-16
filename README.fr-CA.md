@@ -19,11 +19,17 @@ Voir <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.fr-CA.m
 
 # Guide de formation
 
-Il existe un <a href="https://github.com/holos-aafc/Holos/tree/main/H.Content/Documentation/Training/Holos_4_Training_Guide_French.pdf" target="_blank">guide de formation Holos 4</a> pour l'interface utilisateur graphique (GUI) disponible. Ce guide peut être utilisé comme un didacticiel étape par étape sur la façon de configurer une batterie de serveurs et de calculer les émissions dans l'interface graphique.
+Il existe un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide-fr.md" target="_blank">guide de formation Holos 4</a> pour l'interface utilisateur graphique (GUI) disponible. Ce guide peut être utilisé comme un didacticiel étape par étape sur la façon de configurer une batterie de serveurs et de calculer les émissions dans l'interface graphique.
 
-*Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
+# Guide de l’utilisateur
+
+Un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/UserGuide_French.md" target="_blank">guide de l’utilisateur Holos 4</a> est également disponible. Ce guide peut être utilisé comme un manuel plus approfondi sur la façon d’utiliser les différentes fonctionnalités de Holos.
+
+# Télécharger
 
 L'interface graphique de Holos 4 peut être téléchargée et utilisée à partir du <a href="https://agriculture.canada.ca/fr/sciences-agricoles-innovation/resultats-recherches-agriculture/holos" > Page Web d'Agriculture et Agroalimentaire Canada</a>.
+
+*Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
 
 # License
 
