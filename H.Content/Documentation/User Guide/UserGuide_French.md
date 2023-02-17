@@ -2040,28 +2040,25 @@ Le calendrier pour les brise-vent fonctionne de la même façon que le calendrie
 </p>
 <br>
 
-## Charger un fichier d'entrée
+## Load an Input File
 
-- Pour attribuer un fichier avec des rendements personnalisés dans l'affichage des résultats de Holos, sélectionnez le menu déroulant à côté de « **Méthode d'attribution du rendement** » et choisissez « **fichier d'entrée** ».
+-	To assign load a file with custom yields in the results view of Holos, select the drop-down menu beside “**Yield Assignment Method**” and choose “**Input file**”.
+-	Click on the button that appears, labeled “**Load Custom Yield Data**”.
+-	You will be shown a file explorer. Navigate to your input file.
+-	The input file must be a **Comma Separated Value (CSV)** file.
+-	The format of the file should be as follows:
+	-	A column for the year, and as many fields as you have.
+	-	You can have as many years and farm names as you like in the file if they conform to the above format.
+	- Note that you must separate the field name and farm name by a hyphen for Holos to correctly associate the yield value with the appropriate field and farm.
 
-- Cliquez sur le bouton qui s'affiche, intitulé « **Charger les données sur le rendement personnalisé** ».
-
-- Un explorateur de fichiers s'affiche. Accédez à votre fichier d'entrée.
-
-- Le fichier d'entrée doit être un fichier de **valeurs séparées par des virgules (CSV)**.
-
-- Le format du fichier doit être comme suit :
-  - Une colonne pour l'année et autant de colonnes que vous avez de rotations.
-  - Vous pouvez avoir autant d'années et de rotations que vous le souhaitez dans le fichier si elles sont conformes au format ci-dessus.
-  - Veuillez noter que vous devez séparer le nom du champ et le nom de la rotation par un trait d'union pour que Holos associe correctement la valeur du rendement au champ et à la rotation appropriés.
 
 <div align="center">
 
-| Année | Champ no 1 - Rotation no 1 | Champ no 1 - Rotation no 2 | ... |
-| ----- | :------------------------: | :------------------------: | :-: |
-| 1990  |            1065            |            1378            | ... |
-| 1991  |            1020            |            1223            | ... |
-| ...   |            ...             |            ...             | ... |
+| Year  | Field #1 - Farm Name #1 | Field #1 - Farm Name #2 | ... |
+| ----- | :---------------------: | :--------------------:  | :-: |
+| 1990  |          1065           |         1378            | ... |
+| 1991  |          1020           |         1223            | ... |
+| ...   |          ...            |          ...            | ... |
 
 </div>
 
