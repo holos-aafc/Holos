@@ -106,12 +106,11 @@ namespace H.Core.Services.LandManagement
 
             // Upstream emissions
             results.UpstreamEnergyFromNitrogenFertilizer = this.CalculateUpstreamEnergyEmissionsFromSyntheticNitrogenFertilizer(viewItem);
+            results.UpstreamEnergyFromPhosphorusFertilizer = this.CalculateUpstreamEnergyEmissionsFromPhosphorusFertilizer(viewItem);
+            results.UpstreamEnergyFromPotassiumFertilizer = this.CalculateUpstreamEnergyEmissionsFromPotassiumFertilizer(viewItem);
 
             // Application (on-farm) emissions
             results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(viewItem);
-
-            results.EnergyCarbonDioxideFromPhosphorusFertilizer = this.CalculateEnergyEmissionsFromPhosphorusFertilizer(viewItem);
-            results.EnergyCarbonDioxideFromPotassiumFertilizer = this.CalculateEnergyEmissionsFromPotassiumFertilizer(viewItem);
             results.EnergyCarbonDioxideFromSulphurFertilizer = 0;// No methodology yet but we have amounts from currently available fertilizer blends
             results.EnergyCarbonDioxideFromLimeUse = this.CalculateEnergyEmissionsFromLimeFertilizer(viewItem);
 
@@ -225,7 +224,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from P fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateEnergyEmissionsFromPhosphorusFertilizer(CropViewItem viewItem)
+        public double CalculateUpstreamEnergyEmissionsFromPhosphorusFertilizer(CropViewItem viewItem)
         {
             var result = 0.0;
 
@@ -248,7 +247,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <returns>CO2 emissions from K fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateEnergyEmissionsFromPotassiumFertilizer(CropViewItem viewItem)
+        public double CalculateUpstreamEnergyEmissionsFromPotassiumFertilizer(CropViewItem viewItem)
         {
             var result = 0.0;
 

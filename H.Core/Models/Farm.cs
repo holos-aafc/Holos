@@ -1051,10 +1051,6 @@ namespace H.Core.Models
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
         }
 
-        /// <summary>
-        /// Return a list 
-        /// </summary>
-        /// <returns></returns>
         public List<int> GetListOfActiveYears()
         {
             var result = new List<int>();
@@ -1062,6 +1058,24 @@ namespace H.Core.Models
             var stageState = this.GetFieldSystemDetailsStageState();
             var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct().ToList();
             result.AddRange(distinctYears);
+
+            return result;
+        }
+
+        public List<ManagementPeriod> GetAllManagementPeriods()
+        {
+            var result = new List<ManagementPeriod>();
+
+            foreach (var animalComponentBase in this.AnimalComponents)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        result.Add(managementPeriod);
+                    }
+                }
+            }
 
             return result;
         }

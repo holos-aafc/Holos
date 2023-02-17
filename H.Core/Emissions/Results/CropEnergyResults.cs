@@ -21,6 +21,8 @@ namespace H.Core.Emissions.Results
 
         private double _upstreamEnergyCarbonDioxideFromHerbicideUse;
         private double _upstreamEnergyFromNitrogenFertilizer;
+        private double _upstreamEnergyFromPhosphorusFertilizer;
+        private double _upstreamEnergyFromPotassiumFertilizer;
 
         private ObservableCollection<MonthlyManureSpreadingResults> _manureSpreadingResults;
 
@@ -67,7 +69,9 @@ namespace H.Core.Emissions.Results
             get
             {
                 return this.UpstreamEnergyCarbonDioxideFromHerbicideUse +
-                       this.UpstreamEnergyFromNitrogenFertilizer;
+                       this.UpstreamEnergyFromNitrogenFertilizer +
+                       this.UpstreamEnergyFromPhosphorusFertilizer +
+                       this.UpstreamEnergyFromPotassiumFertilizer;
             }
         }
 
@@ -166,6 +170,18 @@ namespace H.Core.Emissions.Results
         {
             get => _upstreamEnergyFromNitrogenFertilizer;
             set => SetProperty(ref _upstreamEnergyFromNitrogenFertilizer, value);
+        }
+
+        public double UpstreamEnergyFromPotassiumFertilizer
+        {
+            get => _upstreamEnergyFromPotassiumFertilizer;
+            set => SetProperty(ref _upstreamEnergyFromPotassiumFertilizer, value);
+        }
+
+        public double UpstreamEnergyFromPhosphorusFertilizer
+        {
+            get => _upstreamEnergyFromPhosphorusFertilizer;
+            set => SetProperty(ref _upstreamEnergyFromPhosphorusFertilizer, value);
         }
 
         #endregion
