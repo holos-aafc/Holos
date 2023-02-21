@@ -97,7 +97,6 @@ namespace H.Core.Test
                     File.WriteAllLines(outPutDirectory + $"\\{customTimeFrameStart}-{customTimeFrameEnd}\\normalized_{polygonId}{fileExtension}", lines);
                 }
             }
-
         }
 
         private List<DailyClimateData> MakeDailyClimateData(string[] fileLines)

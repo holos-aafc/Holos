@@ -14,7 +14,6 @@ namespace H.Core.Test.Providers.Climate
     [TestClass]
     public class NasaClimateProviderTest
     {
-
         #region Fields
 
         private NasaClimateProvider _nasaClimateProvider;
@@ -141,8 +140,6 @@ namespace H.Core.Test.Providers.Climate
             Assert.IsTrue(westResult85 > 500);
             Assert.IsTrue(centralResult85 > 450);
             Assert.IsTrue(average85 > 450);
-
-
         }
 
         /// <summary>
@@ -171,6 +168,8 @@ namespace H.Core.Test.Providers.Climate
 
             File.WriteAllText("Nasa_Daily_Climate_Swift_Current_Year_2000.csv", stringBuilder.ToString());
         }
+
+
 
         [TestMethod]
         public void GetClimateData()
