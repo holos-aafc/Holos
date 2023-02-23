@@ -100,23 +100,28 @@ At the moment, there is no way to deal with this automatically in Holos, but the
 As for different field configurations over time, changes in field size over time cannot be dealt with automatically in Holos. If field size changes over the timeframe of the simulation, the user can address this by sub-dividing the field(s) into different field components that remain consistent over the simulation period, each of which has their own individual field history. This is because, in Holos, the carbon models estimate carbon change on a per land area basis, and this area is assumed to remain stable over time.
 
 
-### 5. I am applying a fertilizer that is not on the drop-down list, what can I do?
+### 5. How do I know the area of land required to grow enough feed for the animals on my farm - does Holos calculate this automatically?
+Holos does not automatically calculate the area of each crop required to feed the animals on the simulated farm. The user can either calculate this area outside of Holos, using information on the amount of each feed type required, crop yields and harvest/feeding losses, etc., or they can enter area values for actual fields used to grow feed for the animals included on the farm (e.g., if the user is simulating an actual agricultural operation).
+
+
+
+### 6. I am applying a fertilizer that is not on the drop-down list, what can I do?
 The fertilizer tab of the field or crop rotation component provides the option to add custom synthetic and organic fertilizers. The choice of fertilizer will influence the fraction of nitrous oxide (N2O) that will be emitted. When choosing what type of custom fertilizer to add, we recommend that fertilizers containing a lot of reactive N be input as custom synthetic fertilizer, while for fertilizers where N is bound up in the biomass and released through decomposition (i.e., compost) the custom organic option is appropriate. Slow-release fertilizers are still deemed synthetic as they release reactive N over time. Measurements of N/C/P and moisture content of the custom fertilizer are required.
 
 
-### 6. I am importing manure / organic fertilizers onto the farm, don’t the emissions Holos reports belong to the source/origin of these fertilizers?
+### 7. I am importing manure / organic fertilizers onto the farm, don’t the emissions Holos reports belong to the source/origin of these fertilizers?
 When importing manure/organic fertilizers from other farms, the farmer gains the benefit of adding carbon to the soil. However, when applying these organic materials, emissions will take place. As it is the farmer’s choice to apply the materials, and the emissions take place on the farm to which they were imported/applied, Holos does report the related emissions (for the purpose of the whole-farm GHG budget). If the purpose of the simulation is a life-cycle analysis approach (to calculate the GHG efficiency/intensity of a product), emission allocation may have to be employed.
 
 
-### 7. How do I add a field where I grow cover crop mixes?
+### 8. How do I add a field where I grow cover crop mixes?
 At this time, Holos does not offer an option to input cover crop mixes. The future development and addition of such functionality is planned. At this current time, a single cover crop can be selected from the list of available options, and the carbon coefficients and N concentrations can be adjusted to better reflect the desired mix, e.g., by using average values for the mix).
 
 
-### 8. How do I add a field with inter-cropping?
+### 9. How do I add a field with inter-cropping?
 At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, two separate field components for each crop can be used.
 
 
-### 9. How can I explore the effects of 4R nutrient management in Holos?
+### 10. How can I explore the effects of 4R nutrient management in Holos?
 Following the National GHG Inventory methodology, we do not yet know how to account for 4R nutrient management effects. However, we do have preliminary factors for some practices – you can see these by selecting ‘Yes’ for the ‘Show Additional Information’ option in the Fertilizer tab and choose the desired ‘Additive’). A ‘Custom‘ additive option has been added to the model to permit the testing of the preliminary results of other practice applications.
 
 ---
