@@ -42,7 +42,7 @@ namespace H.Core.Services.Animals
 
         public void CalculateResults(Farm farm)
         {
-            foreach (var manureTank in _manureTanks)
+            foreach (var manureTank in _manureTanks.ToList())
             {
                 this.ResetTank(manureTank, farm);
                 this.UpdateAmountsUsed(manureTank, farm);

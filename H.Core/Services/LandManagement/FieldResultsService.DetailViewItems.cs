@@ -421,6 +421,11 @@ namespace H.Core.Services.LandManagement
             var moduloCounter = 0;
             var runInPeriodItems = new List<CropViewItem>();
 
+            if (viewItemsForRotation.Count() > viewItemsForField.Count())
+            {
+                return new List<CropViewItem>(viewItemsForRotation);
+            }
+
             // Add in additional years for the run-in period. The additional years should not be displayed to the user as they are just for internal calculations                
             var runInPeriod = farm.Defaults.DefaultRunInPeriod;
             var runInPeriodStartYear = startYearOfField - runInPeriod;

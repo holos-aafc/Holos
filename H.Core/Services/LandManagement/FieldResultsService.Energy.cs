@@ -105,9 +105,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // Upstream emissions
-            results.UpstreamEnergyFromNitrogenFertilizer = this.CalculateUpstreamEnergyEmissionsFromSyntheticNitrogenFertilizer(viewItem);
-            results.UpstreamEnergyFromPhosphorusFertilizer = this.CalculateUpstreamEnergyEmissionsFromPhosphorusFertilizer(viewItem);
-            results.UpstreamEnergyFromPotassiumFertilizer = this.CalculateUpstreamEnergyEmissionsFromPotassiumFertilizer(viewItem);
+            results.UpstreamEnergyFromFertilizerProduction = this.CalculateUpstreamEnergyEmissionsFromFertilizer(viewItem);
 
             // Application (on-farm) emissions
             results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(viewItem);
@@ -174,10 +172,12 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Equation 6.1.3-1
+        /// Equation 6.1.3-3
+        /// Equation 6.1.3-4
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
-        /// <returns>CO2 emissions from N fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateUpstreamEnergyEmissionsFromSyntheticNitrogenFertilizer(CropViewItem viewItem)
+        /// <returns>CO2 emissions from fertilizer production (kg CO2 year^-1)</returns>
+        public double CalculateUpstreamEnergyEmissionsFromFertilizer(CropViewItem viewItem)
         {
             var upstreamEmissions = 0.0;
 
@@ -186,11 +186,11 @@ namespace H.Core.Services.LandManagement
             {
                 var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
 
-                var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
+                var amountOfProduct = fertilizerApplicationViewItem.AmountOfBlendedProductApplied;
                 var area = viewItem.Area;
                 var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
 
-                upstreamEmissions += amountOfNitrogenApplied * area * gateEmissions;
+                upstreamEmissions += amountOfProduct * area * gateEmissions;
             }
 
             return upstreamEmissions;
@@ -209,7 +209,7 @@ namespace H.Core.Services.LandManagement
             {
                 var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
 
-                var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfNitrogenApplied;
+                var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfBlendedProductApplied;
                 var area = viewItem.Area;
                 var applicationEmissions = blendEmissions.ApplicationEmissions;
 
@@ -217,52 +217,6 @@ namespace H.Core.Services.LandManagement
             }
 
             return onFarmEmissions;
-        }
-
-        /// <summary>
-        /// Equation 6.1.3-3
-        /// </summary>
-        /// <param name="viewItem">The crop details for the year</param>
-        /// <returns>CO2 emissions from P fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateUpstreamEnergyEmissionsFromPhosphorusFertilizer(CropViewItem viewItem)
-        {
-            var result = 0.0;
-
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
-            {
-                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
-
-                var amountOfPhosphorusApplied = fertilizerApplicationViewItem.AmountOfPhosphorusApplied;
-                var area = viewItem.Area;
-                var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
-
-                result += amountOfPhosphorusApplied * area * gateEmissions;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 6.1.3-4
-        /// </summary>
-        /// <param name="viewItem">The crop details for the year</param>
-        /// <returns>CO2 emissions from K fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateUpstreamEnergyEmissionsFromPotassiumFertilizer(CropViewItem viewItem)
-        {
-            var result = 0.0;
-
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
-            {
-                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
-
-                var amountOfPotassiumApplied = fertilizerApplicationViewItem.AmountOfPotassiumApplied;
-                var area = viewItem.Area;
-                var gateEmissions = blendEmissions.CarbonDioxideEmissionsAtTheGate;
-
-                result += amountOfPotassiumApplied * area * gateEmissions;
-            }
-
-            return result;
         }
 
         /// <summary>
