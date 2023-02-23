@@ -124,6 +124,10 @@ namespace H.Core.Models
         private double _solidManureBeefConcentrationEnergy;
         private double _solidManureSheepConcentrationEnergy;
 
+        private bool _useCustomNFertilizerConversionFactor;
+        private bool _useCustomPFertilizerConversionFactor;
+        private bool _useCustomPotassiumConversionFactor;
+
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
 
@@ -697,6 +701,34 @@ namespace H.Core.Models
             get { return _conversionOfPotassium; }
             set { SetProperty(ref _conversionOfPotassium, value); }
         }
+
+        /// <summary>
+        /// User can indicate if a custom nitrogen fertilizer conversion factor should be used.
+        /// </summary>
+        public bool UseCustomNFertilizerConversionFactor
+        {
+            get => _useCustomNFertilizerConversionFactor;
+            set => SetProperty(ref _useCustomNFertilizerConversionFactor, value);
+        }
+
+        /// <summary>
+        /// User can indicate if a custom phosphorus fertilizer conversion factor should be used.
+        /// </summary>
+        public bool UseCustomPFertilizerConversionFactor
+        {
+            get => _useCustomPFertilizerConversionFactor;
+            set => SetProperty(ref _useCustomPFertilizerConversionFactor, value);
+        }
+
+        /// <summary>
+        /// User can indicate if a custom potassium conversion factor should be used.
+        /// </summary>
+        public bool UseCustomPotassiumConversionFactor
+        {
+            get => _useCustomPotassiumConversionFactor;
+            set => SetProperty(ref _useCustomPotassiumConversionFactor, value);
+        }
+
 
 
         /// <summary>

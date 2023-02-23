@@ -3164,6 +3164,15 @@
   <data name="LabelUseCustomMethaneConversionFactor" xml:space="preserve">
     <value>Use custom methane conversion factor</value>
   </data>
+  <data name="LabelUseCustomNFertilizerConversionFactor" xml:space="preserve">
+    <value>Use custom nitrogen fertilizer conversion factor</value>
+  </data>
+  <data name="LabelUseCustomPFertilizerConversionFactor" xml:space="preserve">
+    <value>Use custom phosphorus fertilizer conversion factor</value>
+  </data>
+  <data name="LabelUseCustomPotassiumConversionFactor" xml:space="preserve">
+    <value>Use custom potassium conversion factor</value>
+  </data>
   <data name="LabelCalvesAreMilkFedOnly" xml:space="preserve">
     <value>Calves are milk-fed only</value>
   </data>

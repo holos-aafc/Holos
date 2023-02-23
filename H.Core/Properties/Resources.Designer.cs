@@ -11266,6 +11266,33 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use custom nitrogen fertilizer conversion factor.
+        /// </summary>
+        public static string LabelUseCustomNFertilizerConversionFactor {
+            get {
+                return ResourceManager.GetString("LabelUseCustomNFertilizerConversionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use custom phosphorus fertilizer conversion factor.
+        /// </summary>
+        public static string LabelUseCustomPFertilizerConversionFactor {
+            get {
+                return ResourceManager.GetString("LabelUseCustomPFertilizerConversionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use custom potassium conversion factor.
+        /// </summary>
+        public static string LabelUseCustomPotassiumConversionFactor {
+            get {
+                return ResourceManager.GetString("LabelUseCustomPotassiumConversionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use custom volatilization fraction.
         /// </summary>
         public static string LabelUseCustomVolatilizationFraction {
