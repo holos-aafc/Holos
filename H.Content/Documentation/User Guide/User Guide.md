@@ -703,6 +703,33 @@ Under the “**Tools**” header, you can create a custom diet for your chosen l
 
 <br>
 
+
+### Modifying the default diet
+
+To modify one of the default diets in Holos for a specific animal group and management period (e.g., by changing the default Feed intake or Crude protein content), it is best to make a copy of the default diet and then alter the values for the copy. 
+
+1. Open the Custom Diet Creator and Click on “**Yes**” beside the “**Show Default Diets**” section. 
+2. In the list of default diets below, right-click on the diet of interest and click “**Create a Copy**”.
+3. You can change the name of the copy diet, if needed. 
+4. Click ‘OK’ to return to the main Diet tab and select the copied diet from the drop-down Diet menu. 
+5. You can now change the values for this diet under the 'Additional Information section'. 
+
+Please note: if the user selects the same diet (either the original default diet or a copy) for more than one management period, any changes made to the diet (e.g., Feed intake, etc.) in one management period will automatically be replicated in for any other management periods using the same diet. Therefore, if the user needs to make different modifications to an existing diet for multiple animal groups/management periods, it is recommended that a copy be created for each management period, and then modified accordingly. Alternatively, the user can create an entirely new diet for each management period using the Custom Diet Creator.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width=""/>
+    <br>
+    <em>
+		Figure 5.7 - Copying A Default Diet.
+	</em>
+</p>
+
+
+<br>
+
+
+
 ### Adding Feed Ingredients
 
 1.	**Select the diet** you would like to add a feed ingredient to or select  “**Add Custom Diet**” to add a new diet.
@@ -714,7 +741,7 @@ You can click on “Yes” beside “Show Additional Columns” to see additiona
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-4.png" alt="Figure5-4" width="750"/>
     <br>
     <em>
 		Figure 5.3 - Adding a feed ingredient to a diet.
@@ -731,7 +758,7 @@ You can click on “Yes” beside “Show Additional Columns” to see additiona
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-4.png" alt="Figure5-4" width="750"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5" width="750"/>
     <br>
     <em>
 		Figure 5.4 - Creating a custom feed ingredient.
@@ -748,7 +775,7 @@ Tooltips are initiated when the mouse cursor (or pointer) is placed on top of a 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-6.png" alt="Figure5-6"/>
     <br>
     <em>
 		Figure 5.5 - A tooltip for a field in the program.
@@ -765,7 +792,7 @@ Tooltips are also available for abbreviated terms found in various parts of the 
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-6.png" alt="Figure5-6">
+ <img src="../../Images/UserGuide/en/chapter5/figure5-7.png" alt="Figure5-7">
     <br>
     <em>
 		Figure 5.6 - Tooltip for a abbreviated table heading.
