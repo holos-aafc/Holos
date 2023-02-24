@@ -711,14 +711,14 @@ To modify one of the default diets in Holos for a specific animal group and mana
 1. Open the Custom Diet Creator and Click on “**Yes**” beside the “**Show Default Diets**” section. 
 2. In the list of default diets below, right-click on the diet of interest and click “**Create a Copy**”.
 3. You can change the name of the copy diet, if needed. 
-4. Click ‘OK’ to return to the main Diet tab and select the copied diet from the drop-down Diet menu. 
-5. You can now change the values for this diet under the 'Additional Information section'. 
+4. Click "**OK**" to return to the main Diet tab and select the copied diet from the drop-down Diet menu. 
+5. You can now change the values for this diet under the "**Additional Information section**". 
 
 Please note: if the user selects the same diet (either the original default diet or a copy) for more than one management period, any changes made to the diet (e.g., Feed intake, etc.) in one management period will automatically be replicated in for any other management periods using the same diet. Therefore, if the user needs to make different modifications to an existing diet for multiple animal groups/management periods, it is recommended that a copy be created for each management period, and then modified accordingly. Alternatively, the user can create an entirely new diet for each management period using the Custom Diet Creator.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width=""/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width="750"/>
     <br>
     <em>
 		Figure 5.7 - Copying A Default Diet.
