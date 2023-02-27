@@ -16,7 +16,7 @@ We welcome feedback from researchers, farmers and industry to help us improve th
 
 See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a>
 
-# Frequent Asked Questions
+# Frequently Asked Questions
 
 To see answers to the most frequently asked questions about Holos (both the software and model), visit the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ here.</a>
 
