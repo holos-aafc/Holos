@@ -16,6 +16,11 @@ We welcome feedback from researchers, farmers and industry to help us improve th
 
 See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a>
 
+# Frequent Asked Questions
+
+To see answers to the most frequently asked questions about Holos (both the software and model), visit the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ here.</a>
+
+
 # Training Guide
 
 There is a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md" target="_blank">Holos 4 Training Guide</a> for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
