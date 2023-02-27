@@ -19,7 +19,7 @@ Voir <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.fr-CA.m
 
 # Foire aux questions
 
-Pour voir les réponses aux questions les plus fréquemment posées sur Holos (à la fois le logiciel et le modèle), visitez le <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ ici.</a>
+Pour voir les réponses aux questions les plus fréquemment posées sur Holos (à la fois le logiciel et le modèle), visitez le <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ_French.md" target="_blank">FAQ ici.</a>
 
 # Guide de formation
 
