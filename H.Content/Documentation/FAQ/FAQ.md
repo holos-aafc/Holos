@@ -52,28 +52,25 @@ Holos was developed to offer both the metric and imperial measurement system for
 In relation to the default soil types that will appear on the right-hand side of the screen when you locate your farm within an SLC polygon, the precise location of the farm within the polygon does not make a difference (i.e., the same options for soils data will appear regardless of where the farm is located within the polygon). The precise location of the farm within a polygon also does not affect the default hardiness zones. However, the default daily climate data used within the model are uploaded automatically from NASA – these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.
 
 
-### 3. On the Farm Location screen, there appears to be an issue with the map, how can I rectify this ?
-
-
-### 4. When I right-click to select my farm location on the map, I get an error message saying that Holos cannot download the daily climate data from NASA. What happens now?
+### 3. When I right-click to select my farm location on the map, I get an error message saying that Holos cannot download the daily climate data from NASA. What happens now?
 The download of the daily climate data from the NASA website requires a stable internet connection. Occasionally, if there is an issue with the model user’s internet connection or with the NASA website itself, the data will not download. In these instances, the model will default to using an in-built 30-year climate normals dataset (1981-2010 normals), available at the SLC polygon scale.
 
 
-### 5. How can I upload my own climate data?
+### 4. How can I upload my own climate data?
 In the map selection screen, once a location is chosen, an information panel appears on the right-hand side of the screen that displays the available soil types for the selected Soil Landscape of Canada (SLC) polygon. This panel has two other tabs, including one for Climate Data. As a default, when the model user selects heir farm location, Holos automatically downloads climate data from NASA (10 km grid daily weather data). However, on the Climate Data tab, the user has the option to override the default climate data by uploading their own custom data (this is typically measured local data). 
 >*Please note: a complete climate dataset for the entire simulation period is required – (i.e., no gaps or missing data as Holos does not check for completeness and will attempt to work with the data as it is provided); the data must also be in the prescribed format [(see here)](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#formatting-the-custom-climate-data-file).*
 
 
-### 6. The default options for soils data for my chosen farm location do not exactly match the conditions on my operation. How can I rectify this?
+### 5. The default options for soils data for my chosen farm location do not exactly match the conditions on my operation. How can I rectify this?
 After you have chosen your farm location, select the default soil type that most closely matches the soil type/soil characteristics on your farm. Click ‘Next’. On the Component Selection screen, go to Settings > Farm Defaults > Soil. On this tab, you can modify some of the soil type characteristics to more closely resemble the soil conditions on your operation. 
 >*Please note: you cannot change the soil functional category or great group. Once you are finished, click ‘Close’ and your changes will be saved automatically.*
 
 
-### 7. Can I select a different soil type for the different fields on my farm?
+### 6. Can I select a different soil type for the different fields on my farm?
 Currently, it is not possible to select a different soil type for individual fields on the simulated farm. Once the soil type is selected on the Component Selection screen, the soils data is applied to all fields added to the farm. If you have more than one soil type on your farm, you could account for this be setting up multiple farms (one for each soil type), including in each farm the relevant fields. The model outputs for the different farms could then be summed to obtain an overall emissions estimate for the entire operation. 
 
 
-### 8. What do I do if my farm extends over multiple SLC (Soil Landscapes of Canada) polygons?
+### 7. What do I do if my farm extends over multiple SLC (Soil Landscapes of Canada) polygons?
 Currently, the model user must locate their farm within a single SLC polygon. If the user wishes to model separately those parts of the farm that fall within different SLC polygons, they can follow the approach outlined in the response to Q4 above.
 
 ---
@@ -118,7 +115,7 @@ At this time, Holos does not offer an option to input cover crop mixes. The futu
 
 
 ### 9. How do I add a field with inter-cropping?
-At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, two separate field components for each crop can be used.
+At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, separate field components for each crop can be used.
 
 
 ### 10. How can I explore the effects of 4R nutrient management in Holos?
@@ -175,6 +172,12 @@ Once you are finished, click ‘OK’ and your changes will be saved automatically.
 
 ### 5. Where can I see the full details of the default diets built into Holos?
 Some of the data for the selected diet is visible when you select ‘Show Additional Information’ on the Diet tab, however you can see the full details for this diet if you open the Custom Diet Creator. Once open, select ‘Yes’ for ‘Show Default Diets’ under Step 1 – you will now see data related to the nutritional content of each default diet available for the relevant livestock type in this section, as well as data related to the percentage of the total dietary DM that is composed of the different diet ingredients (under Step 3). 
+
+
+### 6. How can I modify one of the default diets in Holos or create a new diet based on a default diet?
+To modify one of the default diets in Holos for a specific animal group and management period, make a copy of the default diet and then alter the data inputs for the copy. To make a copy of a default diet, open the Custom Diet Creator and under Step 1, click ‘Yes’ for ‘Show Default Diets’. In the list of default diets below, right-click on the diet of interest and click ‘Create a Copy’. You can change the name of the copy diet, if needed. Under Step 3, you can alter the % of the different ingredients in the diet or delete specific ingredients, and under Step 2 you can add ingredients. Once you have finished modifying the diet, click ‘OK’ to return to the main Diet tab and select the copied diet from the drop-down Diet menu. 
+>*Please note: if the user selects the same diet (either the original default diet or a copy) for more than one management period, any changes made to the diet in one management period will automatically be replicated for any other management periods using the same diet. Therefore, if the user needs to make different modifications to an existing diet for multiple animal groups/management periods, it is recommended that a copy be created for each management period, and then modified accordingly. Alternatively, the user can create an entirely new diet for each management period using the Custom Diet Creator.*
+
 
 ---
 
