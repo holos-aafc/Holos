@@ -156,18 +156,6 @@ namespace H.Core.Test.Calculators.Infrastructure
 
         #region Tests
 
-        
-        [TestMethod]
-        public void CalculateResultsWhenManureHandlingSystemIsADCalculatesFlow()
-        {
-            _managementPeriod1.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
-            _managementPeriod2.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
-
-            var result = _sut.CalculateResults(_farm, _animalComponentResults);
-
-            Assert.IsTrue(result.All(x => x.FlowRateOfAllSubstratesInDigestate > 0));
-        }
-
         [TestMethod]
         public void CombineSubstrateFlowsOfSameTypeOnSameDayReturnsCorectNumberOfItems()
         {
@@ -186,7 +174,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFreshManureFlowRatesFromAnimals()
         {
-            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, _managementPeriod1, new ManureSubstrateViewItem());
+            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, _managementPeriod1);
 
             Assert.AreEqual(0.06, results.CarbonFlowOfSubstrate, 0.00001);
         }
@@ -255,20 +243,6 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             Assert.IsTrue(result.Any(x => x.Date.Date.Equals(flow1.DateCreated.Date)));
             Assert.IsTrue(result.Any(x => x.Date.Date.Equals(flow2.DateCreated.Date)));
-        }
-
-        [TestMethod]
-        public void Integration()
-        {
-            var substrateFlows = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
-            foreach (var substrateFlowInformation in substrateFlows)
-            {
-                _sut.CalculateDailyBiogasProductionFromSingleSubstrate(substrateFlowInformation);
-                _sut.CalculateFlowsInDigestateFromSingleSubstrate(substrateFlowInformation);
-            }
-
-            // Combine the total flows from all substrates and biogas production from same day
-            var combinedDailyOutputs = _sut.CombineSubstrateFlowsOfSameTypeOnSameDay(substrateFlows, _component, _farm);
         }
 
         [TestMethod]

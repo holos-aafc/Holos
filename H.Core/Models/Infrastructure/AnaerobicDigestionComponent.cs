@@ -69,6 +69,8 @@ namespace H.Core.Models.Infrastructure
         private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
 
+        private List<ADManagementPeriodViewItem> _managementPeriodViewItems;
+
         #endregion
 
         #region Constructors
@@ -82,6 +84,8 @@ namespace H.Core.Models.Infrastructure
             this.ProportionAsPercentageTotalManureAddedToAD = 50;
 
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
+
+            ManagementPeriodViewItems = new List<ADManagementPeriodViewItem>();
 
         }
         #endregion
@@ -316,6 +320,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _proportionAsPercentageTotalManureAddedToAD;
             set => SetProperty(ref _proportionAsPercentageTotalManureAddedToAD, value);
+        }
+
+        public List<ADManagementPeriodViewItem> ManagementPeriodViewItems
+        {
+            get => _managementPeriodViewItems;
+            set => SetProperty(ref _managementPeriodViewItems, value);
         }
 
         #endregion
