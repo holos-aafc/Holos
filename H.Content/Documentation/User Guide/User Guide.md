@@ -730,7 +730,7 @@ Please note: if the user selects the same diet (either the original default diet
 		<br>
 		C: Add/delete specific ingredients or alter the % of the different ingredients.
 	</em>
-
+	<br>
 
 <img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5" width="450"/>
     <br>
