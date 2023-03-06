@@ -66,7 +66,7 @@ The map contains red colored polygons that can be selected by moving the cursor 
 The beef farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
 
 
-1. Find and right-click on this polygon to select it on the map. You will see a pin marker on the region where you have clicked. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
+Find and right-click on this polygon to select it on the map. You will see a pin marker on the region where you have clicked. Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
 <br>
 
@@ -82,7 +82,7 @@ The beef farm for this example is located between Winnipeg and Portage la Prairi
 </p>
 
 
-Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 7)
+Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this region are displayed on the right side of the screen. It’s possible that more than one soil type per region will be found and the user is expected to select their soil type from this list or use the default selection. (Figure 6)
 
 For this tutorial, keep the default first selected soil type, and keep the default “Hardiness zone”.  
 
@@ -106,7 +106,7 @@ Click the “Next” button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
+Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 7). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
 
 If we click on the drop downdrop-down button next to a categories' name, we can then see the available components in that category.  For this portion of the  training section, we will be are working with the “Land management” and “Beef production” categories. 
 
@@ -204,7 +204,7 @@ To demonstrate the crop rotation component (as opposed to using individual field
 
 When using the “Crop Rotation” component, any sequence of crops that are input into this components will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different historical management, soil carbon algorithms will run for each field.
 
-For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to setup three fields where barley grain is rotated in each field every two years (Figure 13). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
+For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to setup three fields where barley grain is rotated in each field every two years (Figure 12). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
 
 **To setup the rotation:** 
 
@@ -416,9 +416,6 @@ Rename this period from Management Period # 1 to **Confinement**.
 * **General Tab:**
     * Enter **110** as the number of animals.
     * All other options as default.
-
-* **Diet Tab:**
-    * Select **Medium energy protein** as the diet type.
 
 * **Housing Tab:**
     * Select **Confined no barn** as the housing type.
