@@ -420,7 +420,7 @@ Rename this period from Management Period # 1 to **Confinement**.
 * **Housing Tab:**
     * Select **Confined no barn** as the housing type.
  
-* Manure Tab:
+* **Manure Tab:
     * Select **Deep bedding** as the manure handling system.
 
 <br>
@@ -439,7 +439,7 @@ Rename this period from Management Period # 2 to **Grazing**.
     * Select **Pasture** as the housing type.
     * Select **Native Grassland** as the pasture location.
  
-* Manure Tab:
+* **Manure Tab:
     * Select **Pasture** as the manure handling system.
 
 <br>
