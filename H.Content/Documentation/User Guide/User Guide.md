@@ -718,27 +718,27 @@ Please note: if the user selects the same diet (either the original default diet
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width="450"/>
+ <img src="../../Images/UserGuide/en/chapter5/figure5-3.png" alt="Figure5-3" width="650"/>
      <br>
     <em>
 		Figure 5.3 - Copying a Default Diet.
 		<br>
 		A: Yes for Show Default Diets
 		<br>
-		B: right-click on the diet of interest and click 'Create a Copy'.
+		B: Right-click on the diet of interest and click 'Create a Copy'.
 	</em>
 	<br>
 	<br>
-  <img src="../../Images/UserGuide/en/chapter5/figure5-4.png" alt="Figure5-4" width="450"/>
+  <img src="../../Images/UserGuide/en/chapter5/figure5-4.png" alt="Figure5-4" width="650"/>
     <br>
     <em>
 		Figure 5.4 - Altering the Copied Diet.
 		<br>
-		C: Add/delete specific ingredients or alter the % of the different ingredients.
+		C: Delete specific ingredients or alter the % of the different ingredients.
 	</em>
 	<br>
 	<br>
-<img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5" width="450"/>
+<img src="../../Images/UserGuide/en/chapter5/figure5-5.png" alt="Figure5-5" width="650"/>
     <br>
     <em>
 		Figure 5.5 - Use of the copied diet.
