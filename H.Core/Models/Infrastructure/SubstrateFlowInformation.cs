@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
+using H.Core.Providers.Climate;
 using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
@@ -23,7 +24,7 @@ namespace H.Core.Models.Infrastructure
         public SubstrateType SubstrateType { get; set; }
         public ManagementPeriod ManagementPeriod { get; set; }
         public AnaerobicDigestionComponent Component { get; set; }
-        public SubstrateViewItemBase SubstrateViewItemBase { get; set; }
+        public BiogasAndMethaneProductionParametersData BiogasAndMethaneProductionParametersData { get; set; }
 
         /// <summary>
         /// (kg day^-1)

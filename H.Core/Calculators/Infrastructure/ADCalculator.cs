@@ -52,10 +52,14 @@ namespace H.Core.Calculators.Infrastructure
 
         #region Public Methods
 
-        public SubstrateFlowInformation GetFreshManureFlowRate(AnaerobicDigestionComponent component,
+        public SubstrateFlowInformation GetFreshManureFlowRate(
+            AnaerobicDigestionComponent component,
             GroupEmissionsByDay dailyEmissions,
-            ManagementPeriod managementPeriod)
+            BiogasAndMethaneProductionParametersData biogasData, 
+            ADManagementPeriodViewItem adManagementPeriod)
         {
+            var managementPeriod = adManagementPeriod.ManagementPeriod;
+
             var substrateFlowRate = new SubstrateFlowInformation()
             {
                 DateCreated = dailyEmissions.DateTime,
@@ -65,43 +69,44 @@ namespace H.Core.Calculators.Infrastructure
                 Component = component,
             };
 
-            var biogasMethaneDataInstance = _biogasMethaneProductionParametersProvider.GetBiogasMethaneProductionInstance(managementPeriod.AnimalType, managementPeriod.HousingDetails.BeddingMaterialType);
+            var fractionAdded = adManagementPeriod.DailyFractionOfManureAdded;
 
             // Equation 4.8.1-2
-            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
+            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * fractionAdded;
 
             // Equation 4.8.1-3
-            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * biogasMethaneDataInstance.TotalSolids;
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * biogasData.TotalSolids;
 
             // Equation 4.8.1-4
-            substrateFlowRate.VolatileSolidsFlowOfSubstrate = dailyEmissions.VolatileSolids * managementPeriod.NumberOfAnimals * component.ProportionTotalManureAddedToAD;
+            substrateFlowRate.VolatileSolidsFlowOfSubstrate = dailyEmissions.VolatileSolids * managementPeriod.NumberOfAnimals * fractionAdded;
 
             // Equation 4.8.1-5
-            substrateFlowRate.NitrogenFlowOfSubstrate = (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding) * component.ProportionTotalManureAddedToAD;
+            substrateFlowRate.NitrogenFlowOfSubstrate = (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding) * fractionAdded;
 
             if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType() || managementPeriod.AnimalType.IsSheepType())
             {
                 // Equation 4.8.1-6
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.OrganicNitrogenInStoredManure * component.ProportionTotalManureAddedToAD;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.OrganicNitrogenInStoredManure * fractionAdded;
             }
             else
             {
                 // Equation 4.8.1-7
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = (dailyEmissions.AmountOfNitrogenExcreted - (managementPeriod.ManureDetails.DailyTanExcretion * managementPeriod.NumberOfAnimals)) * component.ProportionTotalManureAddedToAD;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = (dailyEmissions.AmountOfNitrogenExcreted - (managementPeriod.ManureDetails.DailyTanExcretion * managementPeriod.NumberOfAnimals)) * fractionAdded;
             }
 
             // Equation 4.8.1-8
-            substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.TanExcretion * component.ProportionTotalManureAddedToAD;
+            substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.TanExcretion * fractionAdded;
 
             // Equation 4.8.1-9
-            substrateFlowRate.CarbonFlowOfSubstrate = dailyEmissions.CarbonFromManureAndBedding * component.ProportionTotalManureAddedToAD;
+            substrateFlowRate.CarbonFlowOfSubstrate = dailyEmissions.CarbonFromManureAndBedding * fractionAdded;
 
             return substrateFlowRate;
         }
 
         public SubstrateFlowInformation GetStoredManureFlowRate(AnaerobicDigestionComponent component,
             GroupEmissionsByDay dailyEmissions,
-            ManagementPeriod managementPeriod, ManureSubstrateViewItem manureSubstrateViewItem)
+            ManagementPeriod managementPeriod, 
+            BiogasAndMethaneProductionParametersData biogasAndMethaneProductionParametersData)
         {
             var substrateFlowRate = new SubstrateFlowInformation
             {
@@ -110,14 +115,13 @@ namespace H.Core.Calculators.Infrastructure
                 DateCreated = dailyEmissions.DateTime,
                 ManagementPeriod = managementPeriod,
                 Component = component,
-                SubstrateViewItemBase = manureSubstrateViewItem,
             };
 
             // Equation 4.8.1-16
             substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * component.ProportionTotalManureAddedToAD;
 
             // Equation 4.8.1-17
-            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate + substrateFlowRate.SubstrateViewItemBase.TotalSolids;
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate +  biogasAndMethaneProductionParametersData.TotalSolids;
 
             var reductionFactor = _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
@@ -181,8 +185,6 @@ namespace H.Core.Calculators.Infrastructure
 
                 foreach (var viewItem in residueGroup)
                 {
-                    substrateFlowRate.SubstrateViewItemBase = viewItem;
-
                     // Equation 4.8.1-10
                     var flow = viewItem.FlowRate;
 
@@ -236,13 +238,13 @@ namespace H.Core.Calculators.Infrastructure
             substrateFlowRate.BiodegradableSolidsFlow = substrateFlowRate.VolatileSolidsFlowOfSubstrate * biodegradableFraction;
 
             // Equation 4.8.2-2 (inner term)
-            substrateFlowRate.MethaneProduction = substrateFlowRate.BiodegradableSolidsFlow * substrateFlowRate.SubstrateViewItemBase.BiomethanePotential;
+            substrateFlowRate.MethaneProduction = substrateFlowRate.BiodegradableSolidsFlow * substrateFlowRate.BiogasAndMethaneProductionParametersData.BioMethanePotential;
 
             // Equation 4.8.2-3
             substrateFlowRate.DegradedVolatileSolids = substrateFlowRate.BiodegradableSolidsFlow - (substrateFlowRate.BiodegradableSolidsFlow / (1 + hydrolosisRate * substrateFlowRate.Component.HydraulicRetentionTimeInDays));
 
             // Equation 4.8.2-5
-            substrateFlowRate.BiogasProduction = substrateFlowRate.MethaneProduction / substrateFlowRate.SubstrateViewItemBase.MethaneFraction;
+            substrateFlowRate.BiogasProduction = substrateFlowRate.MethaneProduction / substrateFlowRate.BiogasAndMethaneProductionParametersData.MethaneFraction;
 
             // Equation 4.8.2-7
             substrateFlowRate.CarbonDioxideProduction = substrateFlowRate.BiogasProduction - substrateFlowRate.MethaneProduction;
@@ -555,35 +557,6 @@ namespace H.Core.Calculators.Infrastructure
             return flows;
         }
 
-        public List<SubstrateFlowInformation> GetDailyManureFlowRates_NEW(
-            Farm farm,
-            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
-            AnaerobicDigestionComponent component)
-        {
-            foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
-            {
-                foreach (var animalGroupResults in animalComponentEmissionsResult
-                             .EmissionResultsForAllAnimalGroupsInComponent)
-                {
-                    foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
-                    {
-                        if (component.ManagementPeriodViewItems.Select(x => x.ManagementPeriod).Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
-                        {
-                            foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
-                            {
-                                var freshManureFlow = this.GetFreshManureFlowRate(
-                                    component,
-                                    groupEmissionsByDay,
-                                    groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod);
-                            }
-                        }
-                    }
-                }
-            }
-
-            throw new NotImplementedException();
-        }
-
         public List<SubstrateFlowInformation> GetDailyManureFlowRates(
             Farm farm,
             List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
@@ -591,40 +564,30 @@ namespace H.Core.Calculators.Infrastructure
         {
             var flows = new List<SubstrateFlowInformation>();
 
-            var manureViewItems = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.ToList();
-            var freshManureViewItems = manureViewItems.Where(x => x.ManureSubstrateState == ManureSubstrateState.Fresh).ToList();
-            var storedManureViewItems = manureViewItems.Where(x => x.ManureSubstrateState == ManureSubstrateState.Stored);
-
             foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
             {
                 foreach (var animalGroupResults in animalComponentEmissionsResult.EmissionResultsForAllAnimalGroupsInComponent)
                 {
                     foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
                     {
-                        foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
+                        if (component.ManagementPeriodViewItems.Select(x => x.ManagementPeriod).Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
                         {
-                            // Check if there are any view items that have specified this type of animal manure. If so, check if fresh or stored calculations need to be used.
+                            var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                            var adManagementPeriod = component.ManagementPeriodViewItems.Single(x => x.ManagementPeriod.Equals(managementPeriod));
 
-                            // Check for fresh flows
-                            foreach (var manureSubstrateViewItem in freshManureViewItems)
-                            {
-                                if (manureSubstrateViewItem.AnimalType.GetCategory() == groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.GetCategory())
-                                {
-                                    // Fresh manure flows
-                                    var freshManureFlow = this.GetFreshManureFlowRate(component, groupEmissionsByDay, groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod);
-                                    flows.Add(freshManureFlow);
-                                }
-                            }
+                            var biogasMethaneDataInstance = _biogasMethaneProductionParametersProvider.GetBiogasMethaneProductionInstance(managementPeriod.AnimalType, managementPeriod.HousingDetails.BeddingMaterialType);
 
-                            // Check for stored manure flow
-                            foreach (var manureSubstrateViewItem in storedManureViewItems)
+                            foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
                             {
-                                if (manureSubstrateViewItem.AnimalType.GetCategory() == groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.GetCategory())
-                                {
-                                    // Stored manure flows
-                                    var storedManureFlow = this.GetStoredManureFlowRate(component, groupEmissionsByDay, groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod, manureSubstrateViewItem);
-                                    flows.Add(storedManureFlow);
-                                }
+                                var freshManureFlow = this.GetFreshManureFlowRate(
+                                    component,
+                                    groupEmissionsByDay,
+                                    biogasMethaneDataInstance, 
+                                    adManagementPeriod);
+
+                                freshManureFlow.BiogasAndMethaneProductionParametersData = biogasMethaneDataInstance;
+
+                                flows.Add(freshManureFlow);
                             }
                         }
                     }
@@ -633,6 +596,56 @@ namespace H.Core.Calculators.Infrastructure
 
             return flows;
         }
+
+        //public List<SubstrateFlowInformation> GetDailyManureFlowRates_(
+        //    Farm farm,
+        //    List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
+        //    AnaerobicDigestionComponent component)
+        //{
+        //    var flows = new List<SubstrateFlowInformation>();
+
+        //    var manureViewItems = component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.ToList();
+        //    var freshManureViewItems = manureViewItems.Where(x => x.ManureSubstrateState == ManureSubstrateState.Fresh).ToList();
+        //    var storedManureViewItems = manureViewItems.Where(x => x.ManureSubstrateState == ManureSubstrateState.Stored);
+
+        //    foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
+        //    {
+        //        foreach (var animalGroupResults in animalComponentEmissionsResult.EmissionResultsForAllAnimalGroupsInComponent)
+        //        {
+        //            foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
+        //            {
+        //                foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
+        //                {
+        //                    // Check if there are any view items that have specified this type of animal manure. If so, check if fresh or stored calculations need to be used.
+
+        //                    // Check for fresh flows
+        //                    foreach (var manureSubstrateViewItem in freshManureViewItems)
+        //                    {
+        //                        if (manureSubstrateViewItem.AnimalType.GetCategory() == groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.GetCategory())
+        //                        {
+        //                            // Fresh manure flows
+        //                            var freshManureFlow = this.GetFreshManureFlowRate(component, groupEmissionsByDay, groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod);
+        //                            flows.Add(freshManureFlow);
+        //                        }
+        //                    }
+
+        //                    // Check for stored manure flow
+        //                    foreach (var manureSubstrateViewItem in storedManureViewItems)
+        //                    {
+        //                        if (manureSubstrateViewItem.AnimalType.GetCategory() == groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.GetCategory())
+        //                        {
+        //                            // Stored manure flows
+        //                            var storedManureFlow = this.GetStoredManureFlowRate(component, groupEmissionsByDay, groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod, manureSubstrateViewItem);
+        //                            flows.Add(storedManureFlow);
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return flows;
+        //}
 
         /// <summary>
         /// We take all flows and combine any flows that occur on the same day and that are of the same type of substrate. For example,

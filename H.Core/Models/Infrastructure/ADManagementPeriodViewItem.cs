@@ -15,7 +15,7 @@ namespace H.Core.Models.Infrastructure
 
         public ADManagementPeriodViewItem()
         {
-            this.DailyPercentage = 100;
+            this.DailyPercentageOfManureAdded = 100;
         }
 
         #endregion
@@ -36,7 +36,21 @@ namespace H.Core.Models.Infrastructure
             set { SetProperty(ref _isSelected, value); }
         }
 
-        public double DailyPercentage { get; set; }
+        /// <summary>
+        /// Percentage
+        /// </summary>
+        public double DailyPercentageOfManureAdded { get; set; }
+
+        /// <summary>
+        /// Percentage
+        /// </summary>
+        public double DailyFractionOfManureAdded 
+        {
+            get
+            {
+                return this.DailyPercentageOfManureAdded / 100.0;
+            }
+        }
 
         #endregion
     }

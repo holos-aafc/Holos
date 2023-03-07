@@ -839,6 +839,7 @@ namespace H.Core.Test.Calculators.Carbon
             {
                 CropType = CropType.Barley,
                 Yield = 7018,
+                PercentageOfStrawReturnedToSoil = 100,
                 MoistureContentOfCrop = 0.12,
             };
 
@@ -872,9 +873,9 @@ namespace H.Core.Test.Calculators.Carbon
             
             var viewItems = new List<CropViewItem>()
             {                
-                new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7},
-                new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7},
-                new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7},
+                new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
+                new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
+                new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
             };
 
             var fieldSystemComponent = new FieldSystemComponent();

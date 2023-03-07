@@ -212,9 +212,11 @@ namespace H.Core.Services.Animals
         private List<DigestorDailyOutput> GetDailyResults(Farm farm)
         {
             var animalComponentResults = _animalResultsService.GetAnimalResults(farm);
-            var adResults = _adCalculator.CalculateResults(farm, animalComponentResults);
+            //var adResults = _adCalculator.CalculateResults(farm, animalComponentResults);
 
-            return adResults;
+
+
+            return new List<DigestorDailyOutput>();
         }
 
         #endregion

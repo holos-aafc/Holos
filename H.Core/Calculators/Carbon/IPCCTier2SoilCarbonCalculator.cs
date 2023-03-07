@@ -172,7 +172,8 @@ namespace H.Core.Calculators.Carbon
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
                 harvestRatio: harvestRatio,
-                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage);
+                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage, 
+                percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
@@ -201,7 +202,10 @@ namespace H.Core.Calculators.Carbon
                 aboveGroundResideDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
                 shootToRootRatio: cropData.RSTRatio,
                 area: viewItem.Area,
-                fractionRenewed: fractionRenewed);
+                fractionRenewed: fractionRenewed, 
+                freshWeightOfYield: viewItem.Yield, 
+                moistureContentOfCropPercentage: viewItem.MoistureContentOfCropPercentage, 
+                harvestRatio: harvestRatio);
 
             const double BelowGroundCarbonContent = 0.42;
 
@@ -535,18 +539,19 @@ namespace H.Core.Calculators.Carbon
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="harvestRatio">The harvest ratio (kg ha^-1)</param>
         /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
+        /// <param name="percentageOfStrawReturned"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
-        public double CalculateAboveGroundResidueDryMatter(
-            double freshWeightOfYield,
+        public double CalculateAboveGroundResidueDryMatter(double freshWeightOfYield,
             double harvestRatio,
-            double moistureContentOfCropAsPercentage)
+            double moistureContentOfCropAsPercentage, 
+            double percentageOfStrawReturned)
         {
             if (harvestRatio <= 0)
             {
                 return 0;
             }
 
-            return (freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestRatio;
+            return ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestRatio) * (percentageOfStrawReturned / 100.0);
         }
 
         /// <summary>
@@ -573,19 +578,25 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.2.2-4
-        /// </summary>        
+        /// </summary>
         /// <param name="aboveGroundResideDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
         /// <param name="shootToRootRatio">Ratio of below-ground root biomass to above-ground shoot biomass (kg dm ha^-1 (kg dm ha^-1)^-1)</param>
         /// <param name="area">Area of field (ha)</param>
         /// <param name="fractionRenewed">(unitless)</param>
+        /// <param name="freshWeightOfYield"></param>
+        /// <param name="moistureContentOfCropPercentage"></param>
+        /// <param name="harvestRatio"></param>
         /// <returns>Annual total amount of below-ground residue (kg year^-1)</returns>
         public double CalculateBelowGroundResidueDryMatter(
             double aboveGroundResideDryMatterForCrop,
             double shootToRootRatio,
             double area,
-            double fractionRenewed)
+            double fractionRenewed, 
+            double freshWeightOfYield, 
+            double moistureContentOfCropPercentage,
+            double harvestRatio)
         {
-            return aboveGroundResideDryMatterForCrop * shootToRootRatio * area * fractionRenewed;
+            return ((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestRatio) * shootToRootRatio * area * fractionRenewed;
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Test.Calculators.Infrastructure
 {
@@ -27,6 +28,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         private ManagementPeriod _managementPeriod2;
         private FarmResiduesSubstrateViewItem _farmResidue1;
         private FarmResiduesSubstrateViewItem _farmResidue2;
+        private BiogasAndMethaneProductionParametersData _biogasData;
 
         #endregion
 
@@ -66,6 +68,15 @@ namespace H.Core.Test.Calculators.Infrastructure
             manureSubstrateViewItem.TotalCarbon = 0.11;
             manureSubstrateViewItem.BiomethanePotential = 0.22;
             manureSubstrateViewItem.MethaneFraction = 2;
+
+            _biogasData = new BiogasAndMethaneProductionParametersData()
+            {
+                TotalSolids = 0.75,
+                VolatileSolids = 0.1,
+                TotalNitrogen = 0.33,
+                BioMethanePotential = 0.22,
+                MethaneFraction = 2,
+            };
 
             _farmResidue1 = new FarmResiduesSubstrateViewItem() { FarmResidueType = FarmResidueType.BarleyStraw };
             _farmResidue2 = new FarmResiduesSubstrateViewItem() { FarmResidueType = FarmResidueType.GrassClippings };
@@ -174,9 +185,9 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFreshManureFlowRatesFromAnimals()
         {
-            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, _managementPeriod1);
+            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, _biogasData, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
 
-            Assert.AreEqual(0.06, results.CarbonFlowOfSubstrate, 0.00001);
+            Assert.AreEqual(12, results.CarbonFlowOfSubstrate, 0.00001);
         }
 
         [TestMethod]
@@ -184,7 +195,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             _managementPeriod1.ManureDetails.StateType = ManureStateType.DeepBedding;
 
-            var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, _managementPeriod1, new ManureSubstrateViewItem());
+            var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, _managementPeriod1, _biogasData);
 
             Assert.AreEqual(0.00035, results.VolatileSolidsFlowOfSubstrate,0.00001);
         }
@@ -192,10 +203,13 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFlowsFromDailyResultsReturnsCorrectNumberOfItems()
         {
+            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
+            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() { ManagementPeriod = _managementPeriod2 });
+
             var results = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
 
             // 2 daily emissions from the beef results, 2 from the dairy results
-            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual(4, results.Count);
         }
 
         [TestMethod]
