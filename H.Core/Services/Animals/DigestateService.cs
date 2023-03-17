@@ -134,6 +134,7 @@ namespace H.Core.Services.Animals
             }
 
             tank.TotalDigestateAfterAllApplications -= totalAmountUsedFromAllApplications;
+            // set date of digestate application to maximum by default
         }
 
         public DigestateTank GetTank(Farm farm, DateTime dateTime, DigestateState state)
@@ -205,6 +206,26 @@ namespace H.Core.Services.Animals
             tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplications;
         }
 
+        public DateTime GetDateOfMaximumAvailableDigestate(Farm farm)
+        {
+            var results = this.GetDailyResults(farm);
+
+            var maximum = 0d;
+            DateTime maximumDate = DateTime.Now;
+            
+            foreach (var digestorDailyOutput in results)
+            {
+                var tankOnDay = this.GetTank(farm, digestorDailyOutput.Date, DigestateState.Raw);
+                if (tankOnDay.TotalDigestateProducedBySystem > maximum)
+                {
+                    maximum = tankOnDay.TotalDigestateProducedBySystem;
+                    maximumDate = digestorDailyOutput.Date;
+                }
+            }
+
+            return maximumDate;
+        }
+
         #endregion
 
         #region Private Methods
@@ -212,11 +233,9 @@ namespace H.Core.Services.Animals
         private List<DigestorDailyOutput> GetDailyResults(Farm farm)
         {
             var animalComponentResults = _animalResultsService.GetAnimalResults(farm);
-            //var adResults = _adCalculator.CalculateResults(farm, animalComponentResults);
+            var adResults = _adCalculator.CalculateResults(farm, animalComponentResults);
 
-
-
-            return new List<DigestorDailyOutput>();
+            return adResults;
         }
 
         #endregion

@@ -105,11 +105,10 @@ namespace H.Core.Services.LandManagement
             }
 
             // Upstream emissions
-            results.UpstreamEnergyFromFertilizerProduction = this.CalculateUpstreamEnergyEmissionsFromFertilizer(viewItem);
+            results.UpstreamEnergyFromFertilizerProduction = this.CalculateUpstreamEnergyEmissionsFromFertilizer(viewItem, farm);
 
             // Application (on-farm) emissions
-            results.EnergyCarbonDioxideFromNitrogenFertilizer = this.CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(viewItem);
-            results.EnergyCarbonDioxideFromSulphurFertilizer = 0;// No methodology yet but we have amounts from currently available fertilizer blends
+            results.EnergyCarbonDioxideFromFertilizerUse = this.CalculateOnFarmEnergyEmissionsFromFertilizerUse(viewItem, farm);
             results.EnergyCarbonDioxideFromLimeUse = this.CalculateEnergyEmissionsFromLimeFertilizer(viewItem);
 
             if (viewItem.AmountOfIrrigation > 0)
@@ -176,8 +175,9 @@ namespace H.Core.Services.LandManagement
         /// Equation 6.1.3-4
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
+        /// <param name="farm"></param>
         /// <returns>CO2 emissions from fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateUpstreamEnergyEmissionsFromFertilizer(CropViewItem viewItem)
+        public double CalculateUpstreamEnergyEmissionsFromFertilizer(CropViewItem viewItem, Farm farm)
         {
             var upstreamEmissions = 0.0;
 
@@ -200,20 +200,36 @@ namespace H.Core.Services.LandManagement
         /// Equation 6.1.3-2
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
-        /// <returns>CO2 emissions from N fertilizer production (kg CO2 year^-1)</returns>
-        public double CalculateOnFarmEnergyEmissionsFromNitrogenFertilizer(CropViewItem viewItem)
+        /// <param name="farm"></param>
+        /// <returns>CO2 emissions from fertilizer production (kg CO2 year^-1)</returns>
+        public double CalculateOnFarmEnergyEmissionsFromFertilizerUse(
+            CropViewItem viewItem, 
+            Farm farm)
         {
             var onFarmEmissions = 0.0;
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic && x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime))
             {
-                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
-
+                var blend = fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend;
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfBlendedProductApplied;
                 var area = viewItem.Area;
-                var applicationEmissions = blendEmissions.ApplicationEmissions;
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(blend);
 
-                onFarmEmissions += amountOfNitrogenApplied * area * applicationEmissions;
+                var emissionFactor = blendEmissions.ApplicationEmissions;
+                if (blend.IsNitrogenFertilizer() && farm.Defaults.UseCustomNitrogenFertilizerConversionFactor)
+                {
+                    emissionFactor = farm.Defaults.NitrogenFertilizerConversionFactor;
+                }
+                else if (blend.IsPhosphorusFertilizer() && farm.Defaults.UseCustomPhosphorusFertilizerConversionFactor)
+                {
+                    emissionFactor = farm.Defaults.PhosphorusFertilizerConversionFactor;
+                }
+                else if (blend.IsPotassiumFertilizer() && farm.Defaults.UseCustomPotassiumConversionFactor)
+                {
+                    emissionFactor = farm.Defaults.PotassiumConversionFactor;
+                }
+
+                onFarmEmissions += amountOfNitrogenApplied * area * emissionFactor;
             }
 
             return onFarmEmissions;

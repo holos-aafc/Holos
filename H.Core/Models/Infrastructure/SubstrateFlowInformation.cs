@@ -17,14 +17,12 @@ namespace H.Core.Models.Infrastructure
         FarmResidues
     }
 
-    public class SubstrateFlowInformation : ModelBase
+    public class SubstrateFlowInformation : SubstrateViewItemBase
     {
         public AnimalType AnimalType { get; set; }
-        public FarmResidueType FarmResidueType { get; set; }
         public SubstrateType SubstrateType { get; set; }
         public ManagementPeriod ManagementPeriod { get; set; }
         public AnaerobicDigestionComponent Component { get; set; }
-        public BiogasAndMethaneProductionParametersData BiogasAndMethaneProductionParametersData { get; set; }
 
         /// <summary>
         /// (kg day^-1)

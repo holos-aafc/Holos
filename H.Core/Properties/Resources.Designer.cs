@@ -88,6 +88,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the target output for the anaerbic digestor component.
+        /// </summary>
+        public static string ADStepFourText {
+            get {
+                return ResourceManager.GetString("ADStepFourText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alberta.
         /// </summary>
         public static string Alberta {
@@ -169,7 +178,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify the proportion of all animal manure produced on the farm that will be added to the anaerobic digestor on a daily basis. At least one animal component must be added to the farm before adding this type of substrate. Alternatively, animal manure produced on the farm can be added to the anaerobic digestor by clicking the &apos;Add Manure Substrate Type&apos; button..
+        ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column..
         /// </summary>
         public static string AnaerobicDigestionStepTwoText {
             get {
@@ -2266,6 +2275,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Electricity production.
+        /// </summary>
+        public static string EnumElectricity {
+            get {
+                return ResourceManager.GetString("EnumElectricity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Electric pump.
         /// </summary>
         public static string EnumElectricPump {
@@ -3031,6 +3049,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Heat production.
+        /// </summary>
+        public static string EnumHeat {
+            get {
+                return ResourceManager.GetString("EnumHeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heavy stocking density.
         /// </summary>
         public static string EnumHeavy {
@@ -3639,6 +3666,15 @@ namespace H.Core.Properties {
         public static string EnumMesS15 {
             get {
                 return ResourceManager.GetString("EnumMesS15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Methane injection to gas grid.
+        /// </summary>
+        public static string EnumMethaneToGrid {
+            get {
+                return ResourceManager.GetString("EnumMethaneToGrid", resourceCulture);
             }
         }
         
@@ -8737,6 +8773,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily proportion of manure added (%).
+        /// </summary>
+        public static string LabelDailyPercentageOfManureAddedToAd {
+            get {
+                return ResourceManager.GetString("LabelDailyPercentageOfManureAddedToAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Supplemental feeding loss.
         /// </summary>
         public static string LabelDefaultLossForSupplementalFeeding {
@@ -10353,6 +10398,15 @@ namespace H.Core.Properties {
         public static string LabelPregnancy {
             get {
                 return ResourceManager.GetString("LabelPregnancy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target digestor output.
+        /// </summary>
+        public static string LabelPrimaryADOutput {
+            get {
+                return ResourceManager.GetString("LabelPrimaryADOutput", resourceCulture);
             }
         }
         
@@ -13989,6 +14043,15 @@ namespace H.Core.Properties {
         public static string StaticCryosol {
             get {
                 return ResourceManager.GetString("StaticCryosol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 4.
+        /// </summary>
+        public static string StepFourText {
+            get {
+                return ResourceManager.GetString("StepFourText", resourceCulture);
             }
         }
         

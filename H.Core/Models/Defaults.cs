@@ -103,9 +103,9 @@ namespace H.Core.Models
         private double _conversionOfElectricityToCO2;
         private double _conversionOfGJOfDieselToCO2;
         private double _conversionOfGJForHerbicideProduction;
-        private double _conversionOfNFertilizer;
-        private double _conversionOfPFertilizer;
-        private double _conversionOfPotassium;
+        private double _nitrogenFertilizerConversionFactor;
+        private double _phosphorusFertilizerConversionFactor;
+        private double _potassiumConversionFactor;
         private double _conversionOfAreaIrrigated;
         private double _electricityHousedBeef;
         private double _electricityDairy;
@@ -124,8 +124,8 @@ namespace H.Core.Models
         private double _solidManureBeefConcentrationEnergy;
         private double _solidManureSheepConcentrationEnergy;
 
-        private bool _useCustomNFertilizerConversionFactor;
-        private bool _useCustomPFertilizerConversionFactor;
+        private bool _useCustomNitrogenFertilizerConversionFactor;
+        private bool _useCustomPhosphorusFertilizerConversionFactor;
         private bool _useCustomPotassiumConversionFactor;
 
         // IPCC Tier 2 Carbon
@@ -237,8 +237,8 @@ namespace H.Core.Models
             this.ConversionOfElectricityToCo2 = 0.2;
             this.ConversionOfGjOfDieselToCo2 = 70;
             this.ConversionOfGjForHerbicideProduction = 5.8;
-            this.ConversionOfNFertilizer = 3.59;
-            this.ConversionOfPFertilizer = 0.5699;
+            this.NitrogenFertilizerConversionFactor = 3.59;
+            this.PhosphorusFertilizerConversionFactor = 0.5699;
             this.ConversionOfAreaIrrigated = 367;
             this.ElectricityHousedBeef = 65.7;
             this.ElectricityDairy = 968;
@@ -678,46 +678,46 @@ namespace H.Core.Models
         /// <summary>
         /// (kg CO2 (kg N)^-1)
         /// </summary>
-        public double ConversionOfNFertilizer
+        public double NitrogenFertilizerConversionFactor
         {
-            get { return _conversionOfNFertilizer; }
-            set { SetProperty(ref _conversionOfNFertilizer, value); }
+            get { return _nitrogenFertilizerConversionFactor; }
+            set { SetProperty(ref _nitrogenFertilizerConversionFactor, value); }
         }
 
         /// <summary>
         /// (kg CO2 (kg P2O5)^-1)
         /// </summary>
-        public double ConversionOfPFertilizer
+        public double PhosphorusFertilizerConversionFactor
         {
-            get { return _conversionOfPFertilizer; }
-            set { SetProperty(ref _conversionOfPFertilizer, value); }
+            get { return _phosphorusFertilizerConversionFactor; }
+            set { SetProperty(ref _phosphorusFertilizerConversionFactor, value); }
         }
 
         /// <summary>
         /// (kg CO2 (kg P2O5)^-1)
         /// </summary>
-        public double ConversionOfPotassium
+        public double PotassiumConversionFactor
         {
-            get { return _conversionOfPotassium; }
-            set { SetProperty(ref _conversionOfPotassium, value); }
+            get { return _potassiumConversionFactor; }
+            set { SetProperty(ref _potassiumConversionFactor, value); }
         }
 
         /// <summary>
         /// User can indicate if a custom nitrogen fertilizer conversion factor should be used.
         /// </summary>
-        public bool UseCustomNFertilizerConversionFactor
+        public bool UseCustomNitrogenFertilizerConversionFactor
         {
-            get => _useCustomNFertilizerConversionFactor;
-            set => SetProperty(ref _useCustomNFertilizerConversionFactor, value);
+            get => _useCustomNitrogenFertilizerConversionFactor;
+            set => SetProperty(ref _useCustomNitrogenFertilizerConversionFactor, value);
         }
 
         /// <summary>
         /// User can indicate if a custom phosphorus fertilizer conversion factor should be used.
         /// </summary>
-        public bool UseCustomPFertilizerConversionFactor
+        public bool UseCustomPhosphorusFertilizerConversionFactor
         {
-            get => _useCustomPFertilizerConversionFactor;
-            set => SetProperty(ref _useCustomPFertilizerConversionFactor, value);
+            get => _useCustomPhosphorusFertilizerConversionFactor;
+            set => SetProperty(ref _useCustomPhosphorusFertilizerConversionFactor, value);
         }
 
         /// <summary>

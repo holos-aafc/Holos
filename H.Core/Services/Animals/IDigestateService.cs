@@ -9,5 +9,6 @@ namespace H.Core.Services.Animals
         void Initialize(Farm farm);
         double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, Farm farm, DigestateState digestateState);
         DigestateTank GetTank(Farm farm, DateTime dateTime, DigestateState state);
+        DateTime GetDateOfMaximumAvailableDigestate(Farm farm);
     }
 }

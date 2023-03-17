@@ -12,7 +12,7 @@ namespace H.Core.Emissions.Results
         #region Fields
 
         private double _energyCarbonDioxideFromFuelUse;
-        private double _energyCarbonDioxideFromNitrogenFertilizer;
+        private double _energyCarbonDioxideFromFertilizerUse;
         private double _energyCarbonDioxideFromPhosphorusFertilizer;
         private double _energyCarbonDioxideFromPotassiumFertilizer;
         private double _energyCarbonDioxideFromSulphurFertilizer;
@@ -47,7 +47,7 @@ namespace H.Core.Emissions.Results
             get
             {
                 return this.EnergyCarbonDioxideFromFuelUse +
-                       this.EnergyCarbonDioxideFromNitrogenFertilizer +
+                       this.EnergyCarbonDioxideFromFertilizerUse +
                        this.EnergyCarbonDioxideFromPhosphorusFertilizer +
                        this.EnergyCarbonDioxideFromPotassiumFertilizer +
                        this.EnergyCarbonDioxideFromSulphurFertilizer +
@@ -100,10 +100,10 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg CO2)
         /// </summary>
-        public double EnergyCarbonDioxideFromNitrogenFertilizer
+        public double EnergyCarbonDioxideFromFertilizerUse
         {
-            get => _energyCarbonDioxideFromNitrogenFertilizer;
-            set => SetProperty(ref _energyCarbonDioxideFromNitrogenFertilizer, value);
+            get => _energyCarbonDioxideFromFertilizerUse;
+            set => SetProperty(ref _energyCarbonDioxideFromFertilizerUse, value);
         }
 
         /// <summary>

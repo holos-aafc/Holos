@@ -3,7 +3,7 @@ using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
-    public class ADManagementPeriodViewItem : ModelBase
+    public class ADManagementPeriodViewItem : SubstrateViewItemBase
     {
         #region Fields
 

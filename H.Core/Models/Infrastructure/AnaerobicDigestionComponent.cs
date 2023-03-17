@@ -61,8 +61,6 @@ namespace H.Core.Models.Infrastructure
         // Ammonia emissions upon storage of digestate
         private double _ammoniaEmissionFactorForDigestateStorage;
 
-        private double _proportionTotalManureAddedToAD;
-        private double _proportionAsPercentageTotalManureAddedToAD;
         private double _volumeOfDigestateEnteringStorage;
 
         private int _numberOfReactors;
@@ -74,6 +72,7 @@ namespace H.Core.Models.Infrastructure
         #endregion
 
         #region Constructors
+
         public AnaerobicDigestionComponent()
         {
             this.ComponentNameDisplayString = Properties.Resources.TitleAnaerobicDigestionComponent;
@@ -81,17 +80,18 @@ namespace H.Core.Models.Infrastructure
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
 
-            this.ProportionAsPercentageTotalManureAddedToAD = 50;
-
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
             ManagementPeriodViewItems = new List<ADManagementPeriodViewItem>();
 
+            this.IsLiquidSolidSeparated = true;
         }
+
         #endregion
 
         #region Properties
 
+        public AnaerobicDigestorOutputTypes SelectedOutputType { get; set; }
 
         public AnaerobicDigestionViewItem AnaerobicDigestionViewItem
         {
@@ -309,17 +309,6 @@ namespace H.Core.Models.Infrastructure
         {
             get => _volumeOfDigestateEnteringStorage;
             set => SetProperty(ref _volumeOfDigestateEnteringStorage, value);
-        }
-
-        public double ProportionTotalManureAddedToAD
-        {
-            get { return this.ProportionAsPercentageTotalManureAddedToAD / 100.0; }
-        }
-
-        public double ProportionAsPercentageTotalManureAddedToAD
-        {
-            get => _proportionAsPercentageTotalManureAddedToAD;
-            set => SetProperty(ref _proportionAsPercentageTotalManureAddedToAD, value);
         }
 
         public List<ADManagementPeriodViewItem> ManagementPeriodViewItems

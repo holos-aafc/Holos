@@ -172,6 +172,7 @@
     <Compile Include="Converters\ProvinceStringConverter.cs" />
     <Compile Include="Converters\SoilTextureStringConverter.cs" />
     <Compile Include="Converters\TillageTypeStringConverter.cs" />
+    <Compile Include="Enumerations\AnaerobicDigestorOutputTypes.cs" />
     <Compile Include="Enumerations\AnimalGender.cs" />
     <Compile Include="Enumerations\AnimalType.cs" />
     <Compile Include="Enumerations\AnimalTypeExtensions.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Enumerations\FallowPracticeChangeType.cs" />
     <Compile Include="Enumerations\FarmResidueType.cs" />
     <Compile Include="Enumerations\FertilizerApplicationMethodologies.cs" />
+    <Compile Include="Enumerations\FertilizerBlendExtensions.cs" />
     <Compile Include="Enumerations\FertilizerBlends.cs" />
     <Compile Include="Enumerations\ForageActivities.cs" />
     <Compile Include="Enumerations\ForageGrowthStages.cs" />

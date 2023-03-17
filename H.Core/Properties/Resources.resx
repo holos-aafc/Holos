@@ -5502,9 +5502,30 @@
     <value>All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the "No" option below</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
-    <value>Specify the proportion of all animal manure produced on the farm that will be added to the anaerobic digestor on a daily basis. At least one animal component must be added to the farm before adding this type of substrate. Alternatively, animal manure produced on the farm can be added to the anaerobic digestor by clicking the 'Add Manure Substrate Type' button.</value>
+    <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.</value>
   </data>
   <data name="AnaerobicDigestionStepThreeText" xml:space="preserve">
     <value>Farm residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' button</value>
+  </data>
+  <data name="EnumElectricity" xml:space="preserve">
+    <value>Electricity production</value>
+  </data>
+  <data name="EnumHeat" xml:space="preserve">
+    <value>Heat production</value>
+  </data>
+  <data name="EnumMethaneToGrid" xml:space="preserve">
+    <value>Methane injection to gas grid</value>
+  </data>
+  <data name="ADStepFourText" xml:space="preserve">
+    <value>Select the target output for the anaerbic digestor component</value>
+  </data>
+  <data name="LabelPrimaryADOutput" xml:space="preserve">
+    <value>Target digestor output</value>
+  </data>
+  <data name="StepFourText" xml:space="preserve">
+    <value>Step 4</value>
+  </data>
+  <data name="LabelDailyPercentageOfManureAddedToAd" xml:space="preserve">
+    <value>Daily proportion of manure added (%)</value>
   </data>
 </root>
