@@ -187,6 +187,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To add animal manure to the anaerobic digestor, at least one animal component must be added to the farm. Once an animal component has been added to the farm, the option to add animal manure will be available.
+        /// </summary>
+        public static string AnaerobicDigestionStepTwoTextNoAnimalComponents {
+            get {
+                return ResourceManager.GetString("AnaerobicDigestionStepTwoTextNoAnimalComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
         public static string April {

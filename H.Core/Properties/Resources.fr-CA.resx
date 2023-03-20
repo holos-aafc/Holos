@@ -174,6 +174,9 @@
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
     <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.</value>
   </data>
+  <data name="AnaerobicDigestionStepTwoTextNoAnimalComponents" xml:space="preserve">
+    <value>To add animal manure to the anaerobic digestor, at least one animal component must be added to the farm. Once an animal component has been added to the farm, the option to add animal manure will be available</value>
+  </data>
   <data name="April" xml:space="preserve">
     <value>avril</value>
   </data>

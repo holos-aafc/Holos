@@ -17,12 +17,6 @@ namespace H.Core.Models.Infrastructure
 
         private AnaerobicDigestionViewItem _anaerobicDigestionViewItem;
 
-        // Flow of biodegradable volatile solids
-        private double _biodegradableFractionOfVSForDairyManure;
-        private double _biodegradableFractionOfVSForSwineManure;
-        private double _biodegradableFractionOfVSForGreenWaste;
-        private double _biodegradableFractionOfVSForSOtherManure;
-
         // Methane potential based on hydraulic retention time and kinetic hydrolysis rate
         private double _hydrolysisRateOfManureDuringDigestion;
         private double _hydrolysisRateOfGreenWastesDuringDigestion;
@@ -61,8 +55,6 @@ namespace H.Core.Models.Infrastructure
         // Ammonia emissions upon storage of digestate
         private double _ammoniaEmissionFactorForDigestateStorage;
 
-        private double _volumeOfDigestateEnteringStorage;
-
         private int _numberOfReactors;
         private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
@@ -97,30 +89,6 @@ namespace H.Core.Models.Infrastructure
         {
             get => _anaerobicDigestionViewItem;
             set => this.SetProperty(ref _anaerobicDigestionViewItem, value);
-        }
-
-        public double BiodegradableFractionOfVSForDairyManure
-        {
-            get { return _biodegradableFractionOfVSForDairyManure; }
-            set { this.SetProperty(ref _biodegradableFractionOfVSForDairyManure, value); }
-        }
-
-        public double BiodegradableFractionOfVSForSwineManure
-        {
-            get { return _biodegradableFractionOfVSForSwineManure; }
-            set { this.SetProperty(ref _biodegradableFractionOfVSForSwineManure, value); }
-        }
-
-        public double BiodegradableFractionOfVSForGreenWaste
-        {
-            get { return _biodegradableFractionOfVSForGreenWaste; }
-            set { this.SetProperty(ref _biodegradableFractionOfVSForGreenWaste, value); }
-        }
-
-        public double BiodegradableFractionOfVSForOtherManure
-        {
-            get { return _biodegradableFractionOfVSForSOtherManure; }
-            set { this.SetProperty(ref _biodegradableFractionOfVSForSOtherManure, value); }
         }
 
         /// <summary>
@@ -305,11 +273,7 @@ namespace H.Core.Models.Infrastructure
             set => SetProperty(ref _isLiquidSolidSeparated, value);
         }
 
-        public double VolumeOfDigestateEnteringStorage
-        {
-            get => _volumeOfDigestateEnteringStorage;
-            set => SetProperty(ref _volumeOfDigestateEnteringStorage, value);
-        }
+        public double VolumeOfDigestateEnteringStorage { get; set; }
 
         public List<ADManagementPeriodViewItem> ManagementPeriodViewItems
         {

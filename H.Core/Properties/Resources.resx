@@ -5528,4 +5528,7 @@
   <data name="LabelDailyPercentageOfManureAddedToAd" xml:space="preserve">
     <value>Daily proportion of manure added (%)</value>
   </data>
+  <data name="AnaerobicDigestionStepTwoTextNoAnimalComponents" xml:space="preserve">
+    <value>To add animal manure to the anaerobic digestor, at least one animal component must be added to the farm. Once an animal component has been added to the farm, the option to add animal manure will be available</value>
+  </data>
 </root>

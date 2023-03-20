@@ -2017,7 +2017,7 @@ The other livestock category contains the following animal components:
  <img src="../../Images/UserGuide/en/chapter6/figure6-57.png" alt="Figure6-57" width="850"/>
     <br>
     <em>
-		Figure 6.57 - Llams component.
+		Figure 6.57 - Llamas component.
 	</em>
 </p>
 <br>
@@ -2030,8 +2030,29 @@ This category contains components related to the infrastructure of the farm.
 
 ### Anaerobic Digestion Component:
 
-#### Component is Work in Progress.
+A single anaerobic digestor component may be added to the farm. The anaerobic digestor component has the following assumptions when used:
+- The system is a wet anaerobic continuously stirred tank reactor (CSTR)
+- The primary feedstock is livestock manure with an optional co-feedstock of crop residues
+- Biogas valorisation: combined heat and power (CHP) or direct injection to the gas grid
+- Digestate treatment: solid-liquid separation
 
+There are four steps that must be followed to configure the anaerobic digestor component.
+
+1. In the first step, the user must choose to have all digestate produced by the system separated in to liquid and solid fractions, or, to have all digestate output in a raw (unseparated) form. By default, the anaerobic digestor will perform liquid and solid separation of digestate. 
+
+2. In the second step, the user can configure the amounts of manure that are input as feedstock into the system. In order to add manure, there must be at least one animal component added to the farm. Once there is at least one animal component added to the farm, the user must then select which management periods will be used as the basis for manure feedstock into the system. By default, no management periods are selected. To select a management period, the user can click the checkbox under the **Add** column. Once a management period has been selected, 100% of the daily manure produced during that time period will be used as feedstock entering the digestor. The user can then modify this daily amount by adjusting the value under the **Daily proportion of manure added (%)** column.
+
+3. An optional co-feedstock may be added in step three. This co-feedstock can be a crop residue, food waste, or sewage sludge. To add a co-feedstock, press the **Add Farm Residue Substrate Type** button. The user can then select the type of farm residue that will be used, the flow rate, and the start and end dates that indicate when substrate will beging being added to the digestor and when the substrate will stop being added to the digestor.
+
+4. In step four, the user must select the target output of the digestor. The current options available are **electricity production**, **heat production**, or **methane injection to the gas grid**.
+
+The user may choose to view additional information and adjust optional setting for the anaerobic digestor by clicking the **Yes** button beside the **Show Additional Information** option in the upper right corner of the screen.
+
+At the top of the additional information section, Holos will display the amount of digestate remaining after all field applications have been considered. The amounts will be displayed in a gauge/dial to indicate that the digestate is being stored in a "tanks" that are used internally by Holos. The amounts shown in the gauges will show the total amount of digestate produced by the system minus any amounts applied to a field. If the user has selected to apply liquid and solid separation to the digestate then there will be two gauges displayed. If the user has chosen not to apply liquid solid separation, then only one gauge will be show. If the user has not made any field applications, no gauges will be shown here.
+
+The section below the gauge display area is the total amounts of digestate produced by the system. These amounts do not consider any field applications of digestate.
+
+The final section in the under the additional information are allows the user to adjust the number of reactors used by the anaerobic digestor and the hydraulic retention time. By default, Holos will use one reactor and a corresponding hydraulic retention time of 25 days. If the number of reactors is changed to 2 (maximum number of reactors allowed is 2), then Holos will change the hydraulic retention time to 60 days. The hydraulic retention time will be used to calculate the flow rate of degraded volatile solids during digestion.
 
 <br>
 <br>

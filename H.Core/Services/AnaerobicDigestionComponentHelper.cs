@@ -23,12 +23,6 @@ namespace H.Core.Services
             component.Name = GetUniqueAnaerobicDigestionName(activeFarm.AnaerobicDigestionComponents);
             component.IsInitialized = true;
 
-            // Set default biodegradeable fractions from user-defined defaults
-            component.BiodegradableFractionOfVSForDairyManure = activeFarm.Defaults.DefaultBiodegradableFractionDairyManure;
-            component.BiodegradableFractionOfVSForSwineManure = activeFarm.Defaults.DefaultBiodegradableFractionSwineManure;
-            component.BiodegradableFractionOfVSForOtherManure = activeFarm.Defaults.DefaultBiodegradableFractionOtherManure;
-            component.BiodegradableFractionOfVSForGreenWaste = activeFarm.Defaults.DefaultBiodegradableFractionGreenWaste;
-
             component.NumberOfReactors = 1;
             component.HydraulicRetentionTimeInDays = 25;
         }

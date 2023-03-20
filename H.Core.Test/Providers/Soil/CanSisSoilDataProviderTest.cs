@@ -1,5 +1,6 @@
 ﻿#region Imports
 
+using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Providers.Polygon;
 using H.Core.Providers.Soil;
@@ -60,7 +61,24 @@ namespace H.Core.Test.Providers.Soil
             Assert.AreEqual(0.42, result.ProportionOfSandInSoil);
             Assert.AreEqual(0.20, result.ProportionOfClayInSoil);
             Assert.AreEqual(200, result.TopLayerThickness);
-        }       
+        }
+
+        [TestMethod]
+        public void GetPolygons()
+        {
+            var soils = new List<SoilData>();
+            var result = _sut.GetPolygonIdList();
+            foreach (var i in result)
+            {
+                var a = _sut.GetPredominantSoilDataByPolygonId(i);
+                if (a != null)
+                {
+                    soils.Add(a);
+                }
+            }
+
+            Assert.IsTrue(soils.Count > 2000);
+        }
     }
 
     #endregion

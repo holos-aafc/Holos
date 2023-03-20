@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Shapes;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -123,14 +124,7 @@ namespace H.Core.Providers.Soil
         /// </summary>
         public IEnumerable<int> GetPolygonIdList()
         {
-            if (_polygonAttributeTableDataList.Any())
-            {
-                return _polygonAttributeTableDataList.Select(x => x.Key);
-            }
-            else
-            {
-                return this.GetPolygonAttributeTable().Select(x => x.Key);
-            }
+            return _componentTableDataList.Select(x => x.PolygonId).Distinct().ToList();
         }
 
         public SoilData GetPredominantSoilDataByPolygonId(int polygonId)
@@ -543,6 +537,10 @@ namespace H.Core.Providers.Soil
         private string GetParentMaterialTexture(int polygonId)
         {
             var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
 
             return soilNameTableData.FirstParentMaterialTexture;
         }
@@ -557,6 +555,11 @@ namespace H.Core.Providers.Soil
         private SoilDrainageClasses GetDrainage(int polygonId)
         {
             var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return SoilDrainageClasses.NotApplicable;
+            }
+
             var drainageString = soilNameTableData.SoilDrainageClass;
 
             if (string.IsNullOrWhiteSpace(drainageString) == false)
@@ -636,6 +639,11 @@ namespace H.Core.Providers.Soil
         private SoilGreatGroupType GetSoilGreatGroup(int polygonId)
         {
             var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return SoilGreatGroupType.Unknown;
+            }
+
             var soilGreatGroupCode = soilNameTableData.SoilGreatGroupThirdEdition;
             var result = this.ConvertSoilGreatGroupCode(soilGreatGroupCode);
 
@@ -645,6 +653,11 @@ namespace H.Core.Providers.Soil
         private string GetSubGroup(int polygonId)
         {
             var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
+
             var result = soilNameTableData.SoilSubgroupThirdEdition;
 
             return result;
@@ -670,6 +683,11 @@ namespace H.Core.Providers.Soil
         private string GetSoilName(int polygonId)
         {
             var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
+
             var soilName = soilNameTableData.SoilName;
 
             return soilName;
