@@ -120,9 +120,9 @@ namespace H.Core.Providers.Soil
         }
 
         /// <summary>
-        /// Reads the polygon attribute table (pat.csv) to see if table has an entry for the polygon id.
+        /// Reads the polygon component table (cmp.csv) to see if table has an entry for the polygon id.
         /// </summary>
-        public IEnumerable<int> GetPolygonIdList()
+        public List<int> GetPolygonIdList()
         {
             return _componentTableDataList.Select(x => x.PolygonId).Distinct().ToList();
         }
@@ -666,6 +666,11 @@ namespace H.Core.Providers.Soil
         private SoilGreatGroupType GetSoilGreatGroupByComponent(ComponentTableData componentTableData)
         {
             var soilNameTableData = this.GetSoilNameTableData(componentTableData);
+            if (soilNameTableData == null)
+            {
+                return SoilGreatGroupType.Unknown;
+            }
+
             var soilGreatGroupCode = soilNameTableData.SoilGreatGroupThirdEdition;
             var result = this.ConvertSoilGreatGroupCode(soilGreatGroupCode);
 

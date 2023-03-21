@@ -2033,7 +2033,7 @@ This category contains components related to the infrastructure of the farm.
 A single anaerobic digestor component may be added to the farm. The anaerobic digestor component has the following assumptions when used:
 - The system is a wet anaerobic continuously stirred tank reactor (CSTR)
 - The primary feedstock is livestock manure with an optional co-feedstock of crop residues
-- Biogas valorisation: combined heat and power (CHP) or direct injection to the gas grid
+- Biogas valorisation: heat, power, or direct injection to the gas grid
 - Digestate treatment: solid-liquid separation
 
 There are four steps that must be followed to configure the anaerobic digestor component.

@@ -11,6 +11,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Polygon;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
@@ -23,7 +24,7 @@ namespace H.Core.Providers
     /// <summary>
     /// Provides soil data for a given location within Canada
     /// </summary>
-    public class GeographicDataProvider : GeographicDataProviderBase, IGeographicDataProvider
+    public class GeographicDataProvider : GeographicDataProviderBase, IGeographicDataProvider, IHolosMapPolygonIdListProvider
     {
         #region Fields
 
@@ -68,7 +69,7 @@ namespace H.Core.Providers
             return _soilDataProvider.GetAllSoilDataForAllComponentsWithinPolygon(polygonId);
         }
 
-        public IEnumerable<int> GetPolygonIdList()
+        public List<int> GetPolygonIdList()
         {
             return _soilDataProvider.GetPolygonIdList();
         }

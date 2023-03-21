@@ -7,7 +7,7 @@ namespace H.Core.Providers.Soil
         void Initialize();
         SoilData GetPredominantSoilDataByPolygonId(int polygonId);
         IEnumerable<SoilData> GetAllSoilDataForAllComponentsWithinPolygon(int polygonId);
-        IEnumerable<int> GetPolygonIdList();
+        List<int> GetPolygonIdList();
         string GetEcodistrictName(int polygonId);
         bool DataExistsForPolygon(int polygonId);
     }
