@@ -175,5 +175,14 @@ namespace H.Core.Calculators.Infrastructure
         /// (kg C day^-1)
         /// </summary>
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
+
+        #region Public Methods
+
+        public override string ToString()
+        {
+            return $"{nameof(Date)}: {Date}";
+        }
+
+        #endregion
     }
 }

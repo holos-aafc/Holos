@@ -94,15 +94,6 @@ namespace H.Core.Test.Services.Animals
         #endregion
 
         #region Tests
-        
-        [TestMethod]
-        public void ResetTankTest()
-        {
-            _mockAdCalculator.Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>()))
-                .Returns(new List<DigestorDailyOutput>());
-
-            _sut.ResetAllTanks( _farm, DateTime.Now);
-        }
 
         [TestMethod]
         public void GetDigestateTankInternalTest()
@@ -117,11 +108,30 @@ namespace H.Core.Test.Services.Animals
         public void SetStartingStateOfTankTest()
         {
             var tank = new DigestateTank();
-            var adResults = new List<DigestorDailyOutput>() {new DigestorDailyOutput() { Date = DateTime.Now.AddDays(-1), FlowRateOfAllSubstratesInDigestate = 200}};
+            tank.Year = DateTime.Now.Year;
 
-            _sut.SetStartingStateOfTank(tank, adResults, new Farm(), DateTime.Now);
+            var adResults = new List<DigestorDailyOutput>()
+            {
+                new DigestorDailyOutput()
+                {
+                    Date = DateTime.Now.AddDays(-1), FlowRateOfAllSubstratesInDigestate = 200
+                },
 
-            Assert.AreEqual(200, tank.TotalDigestateAfterAllApplications);
+                // This item should not be included in the totals since it won't have the same year as the target date
+                new DigestorDailyOutput()
+                {
+                    Date = DateTime.Now.AddYears(-1), FlowRateOfAllSubstratesInDigestate = 600
+                },
+
+                new DigestorDailyOutput()
+                {
+                    Date = DateTime.Now.AddDays(5), FlowRateOfAllSubstratesInDigestate = 100
+                },
+            };
+
+            _sut.SetStartingStateOfTank(tank, adResults, new Farm());
+
+            Assert.AreEqual(300, tank.TotalDigestateAfterAllApplications);
         }
 
         [TestMethod]
@@ -170,7 +180,7 @@ namespace H.Core.Test.Services.Animals
                 .Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>()))
                 .Returns(new List<DigestorDailyOutput>());
 
-            var tank = _sut.GetTank(farm, targetDate, DigestateState.Raw);
+            var tank = _sut.GetTank(farm, targetDate.Year, DigestateState.Raw, new List<DigestorDailyOutput>());
 
             Assert.IsNotNull(tank);
             Assert.AreEqual(2022, tank.Year);
@@ -201,18 +211,6 @@ namespace H.Core.Test.Services.Animals
             _sut.ReduceTankByDigestateApplications(farm, digestateTank);
 
             Assert.AreEqual(25, digestateTank.TotalDigestateAfterAllApplications);
-        }
-
-        [TestMethod]
-        public void MaximumAmountOfDigestateAvailablePerDayTest()
-        {
-            var dailyResults = new List<DigestorDailyOutput>();
-            dailyResults.Add(new DigestorDailyOutput() {Date = DateTime.Now.Subtract(TimeSpan.FromDays(2)), FlowRateOfAllSubstratesInDigestate = 100});
-            dailyResults.Add(new DigestorDailyOutput() { Date = DateTime.Now.Subtract(TimeSpan.FromDays(3)), FlowRateOfAllSubstratesInDigestate = 200});
-
-            var result = _sut.MaximumAmountOfDigestateAvailableForLandApplication(DateTime.Now, dailyResults);
-
-            Assert.AreEqual(300, result);
         }
 
         [TestMethod]

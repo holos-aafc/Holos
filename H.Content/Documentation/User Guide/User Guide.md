@@ -955,6 +955,16 @@ A summary of all manure applications to a farm can be seen in the [Farm Details]
 </p>
 <br>
 
+##### Digestate
+
+The digestate tab allows the user to apply digestate that is produced by the anaerobic digestor component. In order to apply digestate, the user must have added an anaerobic digestor component to the farm and configured the digestor so that either animal manure and/or co-feedstocks are being added to the digestor. **If an anaerobic digestor component has not been added to the farm, the digestate tab will not be visible**.
+
+A field can have one or many applications of digestate. To add a digestate application to the selected field, click the **Add Digestate Application** button. Once an application has been added to the field, the user can adjust the details of the field application.
+
+- **Liquid-solid separation**: When the anaerobic digestor has been configured to produce separated liquid and solid fractions, the option to select the digestate type will be available. If there is no liquid-solid separation, the only option available will raw digestate (not separated).
+
+- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered.
+
 ##### Residue
 
 This section lets the user specify how much carbon and nitrogen are in your crops.  They can also specify how much of the crop remains above or below the ground after harvest. 

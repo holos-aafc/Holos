@@ -69,37 +69,6 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public void ResetAllTanks(Farm farm, DateTime dateTime)
-        {
-            var years = new List<int>();
-
-            foreach (var animalComponent in farm.AnimalComponents)
-            {
-                foreach (var animalGroup in animalComponent.Groups)
-                {
-                    foreach (var managementPeriod in animalGroup.ManagementPeriods.Where(x => x.ManureDetails.StateType == ManureStateType.AnaerobicDigester))
-                    {
-                        for (int i = managementPeriod.Start.Year; i < managementPeriod.End.Year; i++)
-                        {
-                            years.Add(i);
-                        }
-                    }
-                }
-            }
-
-            var distinctYears = years.Distinct().ToList();
-            var adResults = this.GetDailyResults(farm);
-
-            foreach (var distinctYear in distinctYears)
-            {
-                foreach (var digestateState in new List<DigestateState>() { DigestateState.LiquidPhase, DigestateState.Raw, DigestateState.SolidPhase })
-                {
-                    var digestateTank = this.GetDigestateTankInternal(distinctYear, digestateState);
-                    this.SetStartingStateOfTank(digestateTank, adResults, farm, dateTime);
-                }
-            }
-        }
-
         public DigestateTank GetDigestateTankInternal(int year, DigestateState state)
         {
             var tank = _digestateTanks.SingleOrDefault(x => x.Year == year && x.DigestateState == state);
@@ -124,6 +93,11 @@ namespace H.Core.Services.Animals
             {
                 foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
                 {
+                    if (cropViewItem.Year != tank.Year)
+                    {
+                        continue;
+                    }
+
                     foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems.Where(x => x.DigestateState == tank.DigestateState))
                     {
                         var totalAmount = digestateApplicationViewItem.AmountAppliedPerHectare * cropViewItem.Area;
@@ -137,14 +111,15 @@ namespace H.Core.Services.Animals
             // set date of digestate application to maximum by default
         }
 
-        public DigestateTank GetTank(Farm farm, DateTime dateTime, DigestateState state)
+        public DigestateTank GetTank(
+            Farm farm, 
+            int year, 
+            DigestateState state,
+            List<DigestorDailyOutput> dailyDigestorResults)
         {
-            var adResults = this.GetDailyResults(farm);
+            var tank = this.GetDigestateTankInternal(year, state);
 
-            var tank = this.GetDigestateTankInternal(dateTime.Year, state);
-            tank.AsOfDate = dateTime;
-
-            this.SetStartingStateOfTank(tank, adResults, farm, dateTime);
+            this.SetStartingStateOfTank(tank, dailyDigestorResults, farm);
             this.ReduceTankByDigestateApplications(farm, tank);
 
             return tank;
@@ -152,34 +127,31 @@ namespace H.Core.Services.Animals
 
         public double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, Farm farm, DigestateState state)
         {
-            var tank = this.GetTank(farm, dateTime, state);
+            var dailyResults = this.GetDailyResults(farm);
+            var tank = this.GetTank(farm, dateTime.Year, state, dailyResults);
 
             return tank.TotalDigestateAfterAllApplications;
         }
 
-        public double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, List<DigestorDailyOutput> digestorDailyOutputs)
-        {
-            var resultsUpToThisDay = digestorDailyOutputs.Where(x => x.Date.Year == dateTime.Year && x.Date.Date < dateTime.Date).ToList();
-
-            // This is the average amount of digestate produced by the digestor per day.
-            var result = resultsUpToThisDay.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
-
-            return result;
-        }
-
+        /// <summary>
+        /// Set the state of all results of the digestate tank to 0 and recalculates the results again. This method does not consider any field applications of digestate
+        /// made by the user.
+        /// </summary>
+        /// <param name="tank">The <see cref="DigestateTank"/> that will be reset.</param>
+        /// <param name="results">The daily results from anaerobic digestor.</param>
+        /// <param name="farm">The farm containing the <see cref="H.Core.Models.Infrastructure.AnaerobicDigestionComponent"/></param>
         public void SetStartingStateOfTank(
             DigestateTank tank,
             List<DigestorDailyOutput> results,
-            Farm farm,
-            DateTime dateTime)
+            Farm farm)
         {
             tank.ResetTank();
 
-            var targetDateResults = results.Where(x => x.Date.Date <= dateTime.Date);
+            var resultsByYear = results.Where(x => x.Date.Year == tank.Year);
 
-            var flowRateOfAllSubstrates = targetDateResults.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
-            var flowRateOfLiquidFraction = targetDateResults.Sum(x => x.FlowRateLiquidFraction);
-            var flowRateOfSolidFraction = targetDateResults.Sum(x => x.FlowRateSolidFraction);
+            var flowRateOfAllSubstrates = resultsByYear.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
+            var flowRateOfLiquidFraction = results.Sum(x => x.FlowRateLiquidFraction);
+            var flowRateOfSolidFraction = results.Sum(x => x.FlowRateSolidFraction);
 
             switch (tank.DigestateState)
             {
@@ -206,37 +178,17 @@ namespace H.Core.Services.Animals
             tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplications;
         }
 
-        public DateTime GetDateOfMaximumAvailableDigestate(Farm farm)
-        {
-            var results = this.GetDailyResults(farm);
-
-            var maximum = 0d;
-            DateTime maximumDate = DateTime.Now;
-            
-            foreach (var digestorDailyOutput in results)
-            {
-                var tankOnDay = this.GetTank(farm, digestorDailyOutput.Date, DigestateState.Raw);
-                if (tankOnDay.TotalDigestateProducedBySystem > maximum)
-                {
-                    maximum = tankOnDay.TotalDigestateProducedBySystem;
-                    maximumDate = digestorDailyOutput.Date;
-                }
-            }
-
-            return maximumDate;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private List<DigestorDailyOutput> GetDailyResults(Farm farm)
+        public List<DigestorDailyOutput> GetDailyResults(Farm farm)
         {
             var animalComponentResults = _animalResultsService.GetAnimalResults(farm);
             var adResults = _adCalculator.CalculateResults(farm, animalComponentResults);
 
             return adResults;
         }
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
     }
