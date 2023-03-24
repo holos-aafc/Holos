@@ -11,15 +11,21 @@ namespace H.Core.Models
 
         private DigestateState _digestateState;
 
-        private double _totalDigestateAfterAllApplications;
-        private double _volumeOfAllDigestateApplications;
+        // Amounts available after all field applications
+        private double _totalRawDigestateAvailable;
+        private double _totalSolidDigestateAvailable;
+        private double _totalLiquidDigestateAvailable;
 
-        private double _totalDigestateProducedBySystem;
+        // Amount produced by system (not reduced by field applications)
+        private double _totalRawDigestateProduced;
+        private double _totalSolidDigestateProduced;
+        private double _totalLiquidDigestateProduced;
+
 
         #endregion
 
         #region Properties
-        
+
         /// <summary>
         /// A tank of digestate can store whole (raw) digestate or separated digestate
         /// </summary>
@@ -29,39 +35,54 @@ namespace H.Core.Models
             set => SetProperty(ref _digestateState, value);
         }
 
-        public double TotalDigestateAfterAllApplications
+        /// <summary>
+        /// (kg)
+        /// </summary>
+        public double TotalRawDigestateAvailable
         {
-            get => _totalDigestateAfterAllApplications;
-            set => SetProperty(ref _totalDigestateAfterAllApplications, value);
+            get => _totalRawDigestateAvailable;
+            set => SetProperty(ref _totalRawDigestateAvailable, value);
         }
 
-        public double VolumeOfAllDigestateApplications
+        /// <summary>
+        /// (kg)
+        /// </summary>
+        public double TotalSolidDigestateAvailable
         {
-            get => _volumeOfAllDigestateApplications;
-            set => SetProperty(ref _volumeOfAllDigestateApplications, value);
+            get => _totalSolidDigestateAvailable;
+            set => SetProperty(ref _totalSolidDigestateAvailable, value);
         }
 
-        public double TotalDigestateProducedBySystem
+        /// <summary>
+        /// (kg)
+        /// </summary>
+        public double TotalLiquidDigestateAvailable
         {
-            get => _totalDigestateProducedBySystem;
-            set => SetProperty(ref  _totalDigestateProducedBySystem, value);
+            get => _totalLiquidDigestateAvailable;
+            set => SetProperty(ref _totalLiquidDigestateAvailable, value);
+        }
+
+        public double TotalRawDigestateProduced
+        {
+            get => _totalRawDigestateProduced;
+            set => SetProperty(ref _totalRawDigestateProduced, value);
+        }
+
+        public double TotalSolidDigestateProduced
+        {
+            get => _totalSolidDigestateProduced;
+            set => SetProperty(ref _totalSolidDigestateProduced, value);
+        }
+
+        public double TotalLiquidDigestateProduced
+        {
+            get => _totalLiquidDigestateProduced;
+            set => SetProperty(ref _totalLiquidDigestateProduced, value);
         }
 
         #endregion
 
         #region Public Methods
-
-        public double TotalDigestateAvailablePerHectare(double area)
-        {
-            return this.TotalDigestateAfterAllApplications / area;
-        }
-
-        public override void ResetTank()
-        {
-            base.ResetTank();
-
-            this.TotalDigestateAfterAllApplications = 0;
-        }
 
         #endregion
     }

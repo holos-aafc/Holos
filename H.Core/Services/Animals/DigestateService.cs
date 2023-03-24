@@ -7,6 +7,9 @@ using H.Core.Calculators.Infrastructure;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals.Sheep;
+using H.Core.Models.Infrastructure;
+using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.Animals
 {
@@ -53,129 +56,20 @@ namespace H.Core.Services.Animals
         {
         }
 
-        public void UpdateAmountsUsed(DigestateTank tank, Farm farm)
+        public DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year)
         {
-            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            var tankStates = this.GetTankStates(farm);
+            switch (state)
             {
-                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
-                {
-                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
-                    {
-                        var amountAppliedPerHectare = digestateApplicationViewItem.AmountAppliedPerHectare;
-                        var totalVolume = amountAppliedPerHectare * cropViewItem.Area;
-                        tank.VolumeSumOfAllManureApplicationsMade += totalVolume;
-                    }
-                }
-            }
-        }
-
-        public DigestateTank GetDigestateTankInternal(int year, DigestateState state)
-        {
-            var tank = _digestateTanks.SingleOrDefault(x => x.Year == year && x.DigestateState == state);
-            if (tank == null)
-            {
-                // If no tank exists for this year, create one now
-                tank = new DigestateTank() { Year = year, DigestateState = state };
-
-                _digestateTanks.Add(tank);
-            }
-
-            return tank;
-        }
-
-        public void ReduceTankByDigestateApplications(
-            Farm farm,
-            DigestateTank tank)
-        {
-            var totalAmountUsedFromAllApplications = 0d;
-
-            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
-            {
-                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
-                {
-                    if (cropViewItem.Year != tank.Year)
-                    {
-                        continue;
-                    }
-
-                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems.Where(x => x.DigestateState == tank.DigestateState))
-                    {
-                        var totalAmount = digestateApplicationViewItem.AmountAppliedPerHectare * cropViewItem.Area;
-
-                        totalAmountUsedFromAllApplications += totalAmount;
-                    }
-                }
-            }
-
-            tank.TotalDigestateAfterAllApplications -= totalAmountUsedFromAllApplications;
-            // set date of digestate application to maximum by default
-        }
-
-        public DigestateTank GetTank(
-            Farm farm, 
-            int year, 
-            DigestateState state,
-            List<DigestorDailyOutput> dailyDigestorResults)
-        {
-            var tank = this.GetDigestateTankInternal(year, state);
-
-            this.SetStartingStateOfTank(tank, dailyDigestorResults, farm);
-            this.ReduceTankByDigestateApplications(farm, tank);
-
-            return tank;
-        }
-
-        public double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, Farm farm, DigestateState state)
-        {
-            var dailyResults = this.GetDailyResults(farm);
-            var tank = this.GetTank(farm, dateTime.Year, state, dailyResults);
-
-            return tank.TotalDigestateAfterAllApplications;
-        }
-
-        /// <summary>
-        /// Set the state of all results of the digestate tank to 0 and recalculates the results again. This method does not consider any field applications of digestate
-        /// made by the user.
-        /// </summary>
-        /// <param name="tank">The <see cref="DigestateTank"/> that will be reset.</param>
-        /// <param name="results">The daily results from anaerobic digestor.</param>
-        /// <param name="farm">The farm containing the <see cref="H.Core.Models.Infrastructure.AnaerobicDigestionComponent"/></param>
-        public void SetStartingStateOfTank(
-            DigestateTank tank,
-            List<DigestorDailyOutput> results,
-            Farm farm)
-        {
-            tank.ResetTank();
-
-            var resultsByYear = results.Where(x => x.Date.Year == tank.Year);
-
-            var flowRateOfAllSubstrates = resultsByYear.Sum(x => x.FlowRateOfAllSubstratesInDigestate);
-            var flowRateOfLiquidFraction = results.Sum(x => x.FlowRateLiquidFraction);
-            var flowRateOfSolidFraction = results.Sum(x => x.FlowRateSolidFraction);
-
-            switch (tank.DigestateState)
-            {
-                case DigestateState.SolidPhase:
-                    {
-                        tank.TotalDigestateAfterAllApplications = flowRateOfSolidFraction;
-                    }
-                    break;
+                case DigestateState.Raw:
+                    return tankStates.Where(x => x.AsOfDate.Year == year).OrderBy(x => x.TotalRawDigestateAvailable).Last().AsOfDate;
 
                 case DigestateState.LiquidPhase:
-                    {
-                        tank.TotalDigestateAfterAllApplications = flowRateOfLiquidFraction;
-                    }
-                    break;
+                    return tankStates.Where(x => x.AsOfDate.Year == year).OrderBy(x => x.TotalLiquidDigestateAvailable).Last().AsOfDate;
 
                 default:
-                    {
-                        tank.TotalDigestateAfterAllApplications = flowRateOfAllSubstrates;
-                    }
-                    break;
+                    return tankStates.Where(x => x.AsOfDate.Year == year).OrderBy(x => x.TotalSolidDigestateAvailable).Last().AsOfDate;
             }
-
-            // This property to the gauge view now (maximum value of gauge) // Before digestate applications have been considered, these two will be equal
-            tank.TotalDigestateProducedBySystem = tank.TotalDigestateAfterAllApplications;
         }
 
         public List<DigestorDailyOutput> GetDailyResults(Farm farm)
@@ -186,9 +80,115 @@ namespace H.Core.Services.Animals
             return adResults;
         }
 
+        public List<DigestateTank> GetTankStates(Farm farm)
+        {
+            var dailyOutputs = this.GetDailyResults(farm);
+
+            var component = farm.AnaerobicDigestionComponents.SingleOrDefault();
+            if (component == null)
+            {
+                return new List<DigestateTank>();
+            }
+
+            return this.GetTankStates(dailyOutputs, farm, component);
+        }
+
+        public DigestateTank GetTank(Farm farm, DateTime targetDate)
+        {
+            var tanks = this.GetTankStates(farm);
+
+            return tanks.SingleOrDefault(x =>  x.AsOfDate.Date.Equals(targetDate.Date));
+        }
+
+        public List<DigestateTank> GetTankStates(
+            List<DigestorDailyOutput> digestorDailyOutputs, 
+            Farm farm, 
+            AnaerobicDigestionComponent component)
+        {
+            var result = new List<DigestateTank>();
+
+            for (int i = 0; i < digestorDailyOutputs.Count; i++)
+            {
+                var outputs = digestorDailyOutputs.ElementAt(i);
+                var outputDate = outputs.Date;
+
+                var tank = new DigestateTank
+                {
+                    AsOfDate = outputDate,
+                };
+
+                result.Add(tank);
+
+                /*
+                 * Calculate raw amount available
+                 */
+
+                var totalRawDigestateOnThisDay = outputs.FlowRateOfAllSubstratesInDigestate;
+                var totalRawDigesteUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.Raw);
+                var totalRawDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalRawDigestateAvailable;
+                var totalRawProduced = totalRawDigestateOnThisDay + totalRawDigestateFromPreviousDay;
+                var totalRawDigestateAvailableAfterFieldApplications = totalRawProduced - totalRawDigesteUsedForFieldApplications;
+
+                // There should only be raw amounts if there is no separation performed
+                tank.TotalRawDigestateAvailable = component.IsLiquidSolidSeparated == false ? totalRawDigestateAvailableAfterFieldApplications : 0;
+                tank.TotalRawDigestateProduced = component.IsLiquidSolidSeparated == false ? totalRawProduced : 0;
+
+                /*
+                 * Calculate liquid fraction amount available
+                 */
+
+                var totalLiquidFractionOnThisDay = outputs.FlowRateLiquidFraction;
+                var totalLiquidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.LiquidPhase);
+                var totalLiquidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalLiquidDigestateAvailable;
+                var totalLiquidProduced = totalLiquidFractionOnThisDay + totalLiquidDigestateFromPreviousDay;
+                var totalLiquidDigestateAvailalbleAfterFieldApplications = totalLiquidProduced - totalLiquidDigestateUsedForFieldApplications;
+
+                // There should only be liquid amounts if separation is performed
+                tank.TotalLiquidDigestateAvailable = component.IsLiquidSolidSeparated ? totalLiquidDigestateAvailalbleAfterFieldApplications : 0;
+                tank.TotalLiquidDigestateProduced = component.IsLiquidSolidSeparated ? totalLiquidProduced : 0;
+
+                /*
+                 * Calculate solid fraction amount available
+                 */
+
+                var totalSolidFractionOnThisDay = outputs.FlowRateSolidFraction;
+                var totalSolidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.SolidPhase);
+                var totalSolidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalSolidDigestateAvailable;
+                var totalSolidProduced = totalSolidFractionOnThisDay + totalSolidDigestateFromPreviousDay;
+                var totalSolidDigestateAvailalbleAfterFieldApplications = totalSolidProduced - totalSolidDigestateUsedForFieldApplications;
+
+                // There should only be liquid amounts if separation is performed
+                tank.TotalSolidDigestateAvailable = component.IsLiquidSolidSeparated ? totalSolidDigestateAvailalbleAfterFieldApplications : 0;
+                tank.TotalSolidDigestateProduced = component.IsLiquidSolidSeparated ? totalSolidProduced : 0;
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Private Methods
+
+        private double GetTotalAmountOfDigesateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state)
+        {
+            var result = 0d;
+
+            foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in farmFieldSystemComponent.CropViewItems)
+                {
+                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                    {
+                        if (digestateApplicationViewItem.DateCreated.Date == dateTime.Date && digestateApplicationViewItem.DigestateState == state)
+                        {
+                            result += digestateApplicationViewItem.AmountAppliedPerHectare * cropViewItem.Area;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
 
         #endregion
     }

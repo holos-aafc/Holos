@@ -7,16 +7,10 @@ using H.Core.Models;
 namespace H.Core.Services.Animals
 {
     public interface IDigestateService
-    {
+    { 
         void Initialize(Farm farm);
-        double MaximumAmountOfDigestateAvailableForLandApplication(DateTime dateTime, Farm farm, DigestateState digestateState);
-
-        DigestateTank GetTank(
-            Farm farm,
-            int year, 
-            DigestateState state,
-            List<DigestorDailyOutput> dailyDigestorResults);
-
+        DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year);
         List<DigestorDailyOutput> GetDailyResults(Farm farm);
+        DigestateTank GetTank(Farm farm, DateTime targetDate);
     }
 }

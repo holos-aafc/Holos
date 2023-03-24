@@ -5481,7 +5481,7 @@
     <value>Fraction total carbon</value>
   </data>
   <data name="MessageNotEnoughDigestateForLandApplication" xml:space="preserve">
-    <value>Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field. A maxiumum amount of  {0} {1} can be used for this digestate application.</value>
+    <value>Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field.</value>
   </data>
   <data name="LabelLiquidFraction" xml:space="preserve">
     <value>Total liquid digestate produced</value>
