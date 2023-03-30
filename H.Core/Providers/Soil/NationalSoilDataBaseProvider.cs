@@ -548,7 +548,10 @@ namespace H.Core.Providers.Soil
         private string GetParentMaterialTextureByComponent(ComponentTableData componentTableData)
         {
             var soilNameTableData = this.GetSoilNameTableData(componentTableData);
-
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
             return soilNameTableData.FirstParentMaterialTexture;
         }
 

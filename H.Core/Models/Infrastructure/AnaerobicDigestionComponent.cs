@@ -59,7 +59,7 @@ namespace H.Core.Models.Infrastructure
         private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
 
-        private List<ADManagementPeriodViewItem> _managementPeriodViewItems;
+        private ObservableCollection<ADManagementPeriodViewItem> _managementPeriodViewItems;
 
         #endregion
 
@@ -74,7 +74,7 @@ namespace H.Core.Models.Infrastructure
 
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
-            ManagementPeriodViewItems = new List<ADManagementPeriodViewItem>();
+            ManagementPeriodViewItems = new ObservableCollection<ADManagementPeriodViewItem>();
 
             this.IsLiquidSolidSeparated = true;
         }
@@ -275,7 +275,7 @@ namespace H.Core.Models.Infrastructure
 
         public double VolumeOfDigestateEnteringStorage { get; set; }
 
-        public List<ADManagementPeriodViewItem> ManagementPeriodViewItems
+        public ObservableCollection<ADManagementPeriodViewItem> ManagementPeriodViewItems
         {
             get => _managementPeriodViewItems;
             set => SetProperty(ref _managementPeriodViewItems, value);

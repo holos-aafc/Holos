@@ -998,6 +998,13 @@ namespace H.Core.Models.LandManagement.Fields
             set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total digestate C from all digestate applications
+        /// </summary>
+        public double DigestateCarbonInputsPerHectare { get; set; }
+
         public double TillageFactor
         {
             get { return _tillageFactor; }
@@ -1120,6 +1127,17 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedAboveGroundInput { get; set; }
         public double CombinedBelowGroundInput { get; set; }
         public double CombinedManureInput { get; set; }
+        public double CombinedDigestateInput { get; set; }
+
+        /// <summary>
+        /// ICBM uses the same humification coefficient for manure and digestate so inputs are combined and added to the
+        /// manure pool
+        /// </summary>
+        public double CombinedManureAndDigestateInput
+        {
+            get { return this.CombinedManureInput + CombinedDigestateInput; }
+        }
+
         public double CombinedGrainNitrogen { get; set; }
         public double CombinedStrawNitrogen { get; set; }
         public double CombinedRootNitrogen { get; set; }

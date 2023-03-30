@@ -202,8 +202,8 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFlowsFromDailyResultsReturnsCorrectNumberOfItems()
         {
-            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
-            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() { ManagementPeriod = _managementPeriod2 });
+            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1, IsSelected = true});
+            _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem() { ManagementPeriod = _managementPeriod2, IsSelected = true});
 
             var results = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
 
@@ -312,6 +312,12 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             Assert.AreEqual(0.5, flows[0].CarbonFlowOfSubstrate);
             Assert.AreEqual(5, flows[1].NitrogenFlowOfSubstrate);
+        }
+
+        [TestMethod]
+        public void GetAmountOfNitrogenInFieldApplicationTest()
+        {
+
         }
 
         #endregion

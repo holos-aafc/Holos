@@ -23,6 +23,7 @@ namespace H.Core.Models
         private bool _carbonInputFromRoots;
         private bool _carbonInputFromExtraRoots;
         private bool _manureCarbonInput;
+        private bool _digestateCarbonInput;
         private bool _aboveGroundCarbonInput;
         private bool _belowGroundCarbonInput;
         private bool _youngPoolSoilCarbonAboveGround;
@@ -99,6 +100,7 @@ namespace H.Core.Models
             this.AboveGroundCarbonInput = true;
             this.BelowGrounCarbonInput = true;
             this.ManureCarbonInput = true;
+            this.DigestateCarbonInput = true;
             this.SoilCarbon = true;
             this.ChangeInCarbon = true;
 
@@ -453,6 +455,12 @@ namespace H.Core.Models
         {
             get => _totalIndirectNitrousOxidePerHectare;
             set => SetProperty(ref _totalIndirectNitrousOxidePerHectare, value);
+        }
+
+        public bool DigestateCarbonInput
+        {
+            get => _digestateCarbonInput;
+            set => SetProperty(ref _digestateCarbonInput, value);
         }
 
         #endregion

@@ -17,32 +17,6 @@ namespace H.Core.Services.LandManagement
         #region Public Methods
 
         /// <summary>
-        /// Calculate amount of nitrogen input from all manure applications in a year
-        /// </summary>
-        /// <returns>The amount of nitrogen input during the year (kg N)</returns>
-        public double CalculateManureNitrogenInput(
-            CropViewItem cropViewItem,
-            Farm farm)
-        {
-            var result = 0.0;
-
-            foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
-            {
-                var manureCompositionData = manureApplicationViewItem.DefaultManureCompositionData;
-
-                var fractionOfNitrogen = manureCompositionData.NitrogenContent;
-
-                var amountOfNitrogen = _icbmSoilCarbonCalculator.CalculateAmountOfNitrogenAppliedFromManure(
-                    manureAmount: manureApplicationViewItem.AmountOfManureAppliedPerHectare,
-                    fractionOfNitrogen);
-
-                result += amountOfNitrogen;
-            }
-
-            return Math.Round(result, DefaultNumberOfDecimalPlaces);
-        }
-
-        /// <summary>
         /// Determines the amount of N fertilizer required for the specified crop type and yield
         /// </summary>
         public double CalculateRequiredNitrogenFertilizer(

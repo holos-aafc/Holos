@@ -18,6 +18,7 @@ namespace H.Core.Models
         private bool _aboveGroundCarbonInput;
         private bool _belowGroundCarbonInput;
         private bool _manureCarbonInput;
+        private bool _digestateCarbonInput;
         private bool _climateParameter;
         private bool _tillageFactor;
         private bool _managementFactor;
@@ -93,11 +94,13 @@ namespace H.Core.Models
             get { return _belowGroundCarbonInput; }
             set { SetProperty(ref _belowGroundCarbonInput, value); }
         }
+
         public bool ManureCarbonInput
         {
             get { return _manureCarbonInput; }
             set { SetProperty(ref _manureCarbonInput, value); }
         }
+
         public bool ClimateParameter
         {
             get { return _climateParameter; }
@@ -141,6 +144,12 @@ namespace H.Core.Models
         {
             get => _description;
             set => SetProperty(ref  _description, value);
+        }
+
+        public bool DigestateCarbonInput
+        {
+            get => _digestateCarbonInput;
+            set => SetProperty(ref _digestateCarbonInput, value);
         }
     }
 }

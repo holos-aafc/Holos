@@ -117,6 +117,7 @@
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
+    <Compile Include="Calculators\Infrastructure\ADCalculator.FieldApplications.cs" />
     <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Infrastructure\IADCalculator.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />

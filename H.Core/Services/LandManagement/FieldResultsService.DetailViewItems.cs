@@ -195,6 +195,7 @@ namespace H.Core.Services.LandManagement
                 var coverCropAboveGroundInput = 0d;
                 var coverCropBelowGroundInput = 0d;
                 var coverCropManureInput = 0d;
+                var coverCropDigestateInput = 0d;
 
                 var totalCoverCropAboveGroundResidueNitrogen = 0d;
                 var totalCoverCropBelowGroundResidueNitrogen = 0d;
@@ -209,6 +210,7 @@ namespace H.Core.Services.LandManagement
                     coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
                     coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
                     coverCropManureInput += cropViewItem.ManureCarbonInputsPerHectare;
+                    coverCropDigestateInput += cropViewItem.DigestateCarbonInputsPerHectare;
 
                     /*
                      * Calculate nitrogen totals
@@ -228,7 +230,8 @@ namespace H.Core.Services.LandManagement
                 mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
                 mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
                 mainCrop.CombinedManureInput = mainCrop.ManureCarbonInputsPerHectare + coverCropManureInput;
-                mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput;
+                mainCrop.CombinedDigestateInput = mainCrop.DigestateCarbonInputsPerHectare + coverCropDigestateInput;
+                mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput + mainCrop.CombinedDigestateInput;
 
                 /*
                  * Sum up the main crop and cover crop nitrogen inputs

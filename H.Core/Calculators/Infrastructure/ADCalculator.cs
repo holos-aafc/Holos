@@ -17,7 +17,7 @@ using H.Core.Services.Animals;
 
 namespace H.Core.Calculators.Infrastructure
 {
-    public class ADCalculator : IADCalculator
+    public partial class ADCalculator : IADCalculator
     {
         #region Fields
 
@@ -73,7 +73,7 @@ namespace H.Core.Calculators.Infrastructure
             var fractionAdded = adManagementPeriod.DailyFractionOfManureAdded;
 
             // Equation 4.8.1-2
-            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * fractionAdded;
+            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms * fractionAdded;
 
             // Equation 4.8.1-3
             substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * adManagementPeriod.TotalSolids;
@@ -122,7 +122,7 @@ namespace H.Core.Calculators.Infrastructure
             var fractionUsed = adManagementPeriodViewItem.DailyFractionOfManureAdded;
 
             // Equation 4.8.1-16
-            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * fractionUsed;
+            substrateFlowRate.TotalMassFlowOfSubstrate = dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms * fractionUsed;
 
             // Equation 4.8.1-17
             substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate *  adManagementPeriodViewItem.FlowRate;
@@ -336,7 +336,7 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = digestorDailyOutput.FlowOfAllCarbon;
 
             /*
-             * Solid fractions of liquid/solid separated digestate
+             * Liquid fractions of liquid/solid separated digestate
              */
 
             // Equation 4.8.4-1
@@ -355,7 +355,7 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = digestorDailyOutput.CarbonLiquidFraction;
 
             /*
-             * Liquid fractions of liquid/solid separated digestate
+             * Solid fractions of liquid/solid separated digestate
              */
 
             // Equation 4.8.4-2
@@ -484,7 +484,7 @@ namespace H.Core.Calculators.Infrastructure
 
             results.AddRange(combinedDailyResults);
 
-            return results;
+            return results.OrderBy(x => x.Date).ToList();
         }
 
         public List<SubstrateFlowInformation> GetDailyFarmResidueFlowRates_NEW(AnaerobicDigestionComponent component)
@@ -537,6 +537,7 @@ namespace H.Core.Calculators.Infrastructure
             AnaerobicDigestionComponent component)
         {
             var flows = new List<SubstrateFlowInformation>();
+            var selectedManagementPeriods = component.ManagementPeriodViewItems.Where(x => x.IsSelected);
 
             foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
             {
@@ -544,10 +545,10 @@ namespace H.Core.Calculators.Infrastructure
                 {
                     foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
                     {
-                        if (component.ManagementPeriodViewItems.Select(x => x.ManagementPeriod).Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
+                        if (selectedManagementPeriods.Select(x => x.ManagementPeriod).Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
                         {
                             var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                            var adManagementPeriod = component.ManagementPeriodViewItems.Single(x => x.ManagementPeriod.Equals(managementPeriod));
+                            var adManagementPeriod = selectedManagementPeriods.Single(x => x.ManagementPeriod.Equals(managementPeriod));
 
                             foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
                             {

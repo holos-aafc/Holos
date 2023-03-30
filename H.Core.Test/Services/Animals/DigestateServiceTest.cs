@@ -45,7 +45,7 @@ namespace H.Core.Test.Services.Animals
             _mockAdCalculator = new Mock<IADCalculator>();
             _mockAnimalService = new Mock<IAnimalService>();
 
-            _sut = new DigestateService(_mockAdCalculator.Object, _mockAnimalService.Object);
+            _sut = new DigestateService();
 
             var managementPeriod = new ManagementPeriod()
             {

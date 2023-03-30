@@ -68,6 +68,7 @@ namespace H.Core.Models.LandManagement.Fields
             } 
         }
 
+        // Need to set this somehow so it can be used in direct N2O calculations
         /// <summary>
         /// Amount of N applied
         ///

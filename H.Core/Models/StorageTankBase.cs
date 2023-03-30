@@ -7,8 +7,6 @@ namespace H.Core.Models
     {
         #region Fields
 
-        private DateTime _asOfDate;
-        
         private double _volumeRemainingInTank;
         private double _volumeOfManureAvailableForLandApplication;
         private double _totalOrganicNitrogenAvailableForLandApplication;
@@ -23,9 +21,6 @@ namespace H.Core.Models
 
         protected StorageTankBase()
         {
-
-            // This needs to be added to the tank view
-            this.AsOfDate = DateTime.Now;
         }
 
         #region Properties
@@ -98,12 +93,6 @@ namespace H.Core.Models
         {
             get => _volumeOfManureAvailableForLandApplication;
             set => SetProperty(ref _volumeOfManureAvailableForLandApplication, value);
-        }
-
-        public DateTime AsOfDate
-        {
-            get => _asOfDate;
-            set => SetProperty(ref _asOfDate, value);
         }
 
         #endregion

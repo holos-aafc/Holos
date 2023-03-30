@@ -8908,6 +8908,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Digestate carbon input.
+        /// </summary>
+        public static string LabelDigestateCarbonInput {
+            get {
+                return ResourceManager.GetString("LabelDigestateCarbonInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N2O-N From Crop Residues (N2O-N_CRNdirect).
         /// </summary>
         public static string LabelDirectNitrousOxideEmissionsFromCropResidues {
@@ -12130,7 +12139,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field..
+        ///   Looks up a localized string similar to Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field. A maxiumum amount of  {0} {1} can be used for this digestate application..
         /// </summary>
         public static string MessageNotEnoughDigestateForLandApplication {
             get {

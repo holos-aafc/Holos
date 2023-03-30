@@ -11,6 +11,7 @@ using AutoMapper;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
 using H.Core.Calculators.Economics;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Calculators.Tillage;
 using H.Core.Calculators.UnitsOfMeasurement;
@@ -49,6 +50,7 @@ namespace H.Core.Services.LandManagement
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
         private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator();
+        private readonly DigestateService _digestateService = new DigestateService();
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();

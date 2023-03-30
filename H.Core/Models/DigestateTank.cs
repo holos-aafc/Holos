@@ -11,16 +11,24 @@ namespace H.Core.Models
 
         private DigestateState _digestateState;
 
-        // Amounts available after all field applications
+        // Amount of digestate available after all field applications
         private double _totalRawDigestateAvailable;
         private double _totalSolidDigestateAvailable;
         private double _totalLiquidDigestateAvailable;
 
-        // Amount produced by system (not reduced by field applications)
+        // Amount of digestate produced by system (not reduced by field applications)
         private double _totalRawDigestateProduced;
         private double _totalSolidDigestateProduced;
         private double _totalLiquidDigestateProduced;
 
+        // Nitrogen available for land application
+        public double NitrogenFromRawDigestate { get; set; }
+        public double NitrogenFromSolidDigestate { get; set; }
+        public double NitrogenFromLiquidDigestate  { get; set; }
+
+        public double CarbonFromRawDigestate { get; set; }
+        public double CarbonFromSolidDigestate { get; set; }
+        public double CarbonFromLiquidDigestate { get; set; }
 
         #endregion
 

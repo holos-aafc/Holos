@@ -3055,6 +3055,9 @@
   <data name="LabelDifferenceBetweenInputsAndOutputs" xml:space="preserve">
     <value>différence de N total</value>
   </data>
+  <data name="LabelDigestateCarbonInput" xml:space="preserve">
+    <value>Digestate carbon input</value>
+  </data>
   <data name="LabelDirectNitrousOxideEmissionsFromCropResidues" xml:space="preserve">
     <value>N2O-N des résidus de culture (N2O-N_NRCdirect)</value>
   </data>
@@ -4110,7 +4113,7 @@
     <value>Il n’y a pas de groupes d’animaux qui broutent dans ce champ. les groupes d’animaux qui ont un type de logement de « pâturage » seront affichés ici.</value>
   </data>
   <data name="MessageNotEnoughDigestateForLandApplication" xml:space="preserve">
-    <value>Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field.</value>
+    <value>Not enough digestate has been created by the anaerobic digestor for this field application. Adjust amounts of other digestate applications or increase digestate production to apply a higher amount of digestate to the field. A maxiumum amount of  {0} {1} can be used for this digestate application.</value>
   </data>
   <data name="MessagePastFallowAreaMustBeLessThanCurrentFallowArea" xml:space="preserve">
     <value>La dernière superficie en jachère doit être inférieure à la superficie en jachère actuelle. la dernière superficie en jachère a été remise à 0.</value>
