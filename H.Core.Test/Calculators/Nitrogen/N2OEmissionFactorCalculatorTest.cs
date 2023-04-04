@@ -154,7 +154,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 }
             };
 
-            var result = _calculator.CalculateLeftOverEmissionsForField(
+            var result = _calculator.CalculateLeftOverLandAppliedManureEmissionsForField(
                 new List<AnimalComponentEmissionsResults>() {animalResults}, 
                 farm, 
                 viewItem1,

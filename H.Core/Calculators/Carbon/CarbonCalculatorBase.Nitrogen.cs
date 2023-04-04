@@ -321,8 +321,14 @@ namespace H.Core.Calculators.Carbon
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
             var emissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
             var weightedEmissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsForYear, farm);
+            
+            // Emissions from land applied manure
             var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(currentYearResults, farm);
-            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverEmissionsForField(this.AnimalComponentEmissionsResults, farm, currentYearResults, weightedEmissionFactorForOrganicNitrogen);
+            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverLandAppliedManureEmissionsForField(this.AnimalComponentEmissionsResults, farm, currentYearResults, weightedEmissionFactorForOrganicNitrogen);
+
+            // Emissions from land applied digestate
+            var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(currentYearResults, farm);
+            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverLandAppliedDigestateEmissionsForField(currentYearResults, farm, weightedEmissionFactorForOrganicNitrogen);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -342,7 +348,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-5
             this.N2O_NFromOrganicNitrogen =
                 (this.OrganicPool *
-                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedManureNotAppliedToAnyField) / this.CurrentYearResults.Area);
+                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromLandAppliedManureNotAppliedToAnyField + directN2ONFromLandAppliedDigestateNotAppliedToAnyField) / this.CurrentYearResults.Area);
         }
 
         protected void CalculateNitricOxide(double nORatio)

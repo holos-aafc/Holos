@@ -13,7 +13,7 @@ using H.Infrastructure;
 
 namespace H.Core.Calculators.Nitrogen
 {
-    public class N2OEmissionFactorCalculator
+    public partial class N2OEmissionFactorCalculator
     {
         #region Fields
 
@@ -446,14 +446,14 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.1-6
         /// </summary>
-        public double CalculateLeftOverEmissionsForField(
+        public double CalculateLeftOverLandAppliedManureEmissionsForField(
             List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
             Farm farm,
             CropViewItem viewItem,
             double weightedEmissionFactor)
         {
             // Get all fields that exist in the same year
-            var itemsInYear = farm.GetCropDetailViewItems().Where(x => x.Year == viewItem.Year).ToList();
+            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year);
 
             // This is the total amount of N from all animals that is available for land application
             var totalNitrogenAvailableForLandApplication = animalComponentEmissionsResults.TotalNitrogenAvailableForLandApplication();
@@ -473,10 +473,10 @@ namespace H.Core.Calculators.Nitrogen
                 totalNitrogenFromLandManureRemaining: totalNitrogenRemaining);
 
             var totalAreaOfAllFields = itemsInYear.Sum(x => x.Area);
-            var areaOfField = viewItem.Area;
+            var areaOfThisField = viewItem.Area;
 
-            // The total N2O-N that is left over and must be applied to this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
-            var result = emissionsFromNitrogenRemaining * (areaOfField / (double) totalAreaOfAllFields);
+            // The total N2O-N that is left over and must be associated with this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
+            var result = emissionsFromNitrogenRemaining * (areaOfThisField / totalAreaOfAllFields);
 
             return result;
         }

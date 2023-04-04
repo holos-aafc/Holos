@@ -120,6 +120,8 @@
     <Compile Include="Calculators\Infrastructure\ADCalculator.FieldApplications.cs" />
     <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Infrastructure\IADCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Manure.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Digestate.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
     <Compile Include="Calculators\UnitsOfMeasurement\IUnitsOfMeasurementCalculator.cs" />

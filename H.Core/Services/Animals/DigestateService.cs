@@ -34,7 +34,7 @@ namespace H.Core.Services.Animals
 
         public DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year, List<DigestorDailyOutput> digestorDailyOutputs)
         {
-            var tankStates = this.GetTankStates(farm, digestorDailyOutputs);
+            var tankStates = this.GetDailyTankStates(farm, digestorDailyOutputs);
             if (tankStates.Any() == false)
             {
                 // No management periods selected for input into AD system
@@ -54,7 +54,7 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public List<DigestateTank> GetTankStates(Farm farm, List<DigestorDailyOutput> dailyOutputs)
+        public List<DigestateTank> GetDailyTankStates(Farm farm, List<DigestorDailyOutput> dailyOutputs)
         {
             var component = farm.AnaerobicDigestionComponents.SingleOrDefault();
             if (component == null)
@@ -62,12 +62,12 @@ namespace H.Core.Services.Animals
                 return new List<DigestateTank>();
             }
 
-            return this.GetTankStates(dailyOutputs, farm, component);
+            return this.GetDailyTankStates(dailyOutputs, farm, component);
         }
 
         public DigestateTank GetTank(Farm farm, DateTime targetDate, List<DigestorDailyOutput> dailyOutputs)
         {
-            var tanks = this.GetTankStates(farm, dailyOutputs);
+            var tanks = this.GetDailyTankStates(farm, dailyOutputs);
             var result = tanks.SingleOrDefault(x => x.DateCreated.Date.Equals(targetDate.Date));
             if (result != null)
             {
@@ -82,7 +82,7 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public List<DigestateTank> GetTankStates(
+        public List<DigestateTank> GetDailyTankStates(
             List<DigestorDailyOutput> digestorDailyOutputs, 
             Farm farm, 
             AnaerobicDigestionComponent component)
@@ -267,6 +267,31 @@ namespace H.Core.Services.Animals
             var amountOfCarbon = fraction * totalCarbonAvailableOnDay;
 
             return amountOfCarbon;
+        }
+
+        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component)
+        {
+            var dailyResults = this.GetDailyResults(farm);
+            if (dailyResults.Any() == false)
+            {
+                return 0;
+            }
+
+            var dateOfLastOutput = dailyResults.Max(x => x.Date);
+            var tank = this.GetTank(farm, dateOfLastOutput, dailyResults);
+
+            var totalNitrogen = 0d;
+            if (component.IsLiquidSolidSeparated)
+            {
+                // Total remaining N from liquid and solid fractions
+                totalNitrogen = tank.NitrogenFromLiquidDigestate + tank.NitrogenFromSolidDigestate;
+            }
+            else
+            {
+                totalNitrogen = tank.NitrogenFromRawDigestate;
+            }
+
+            return totalNitrogen;
         }
 
         #endregion
