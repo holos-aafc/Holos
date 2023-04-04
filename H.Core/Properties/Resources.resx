@@ -3287,6 +3287,12 @@
   <data name="TitleFertilizerManagement" xml:space="preserve">
     <value>Fertilizer Management</value>
   </data>
+  <data name="TitleSoilManagement" xml:space="preserve">
+    <value>Soil Management</value>
+  </data>
+  <data name="TitleSoilProperties" xml:space="preserve">
+    <value>Soil Properties</value>
+  </data>
   <data name="LabelSoilCEC" xml:space="preserve">
     <value>Soil cation exchange capacity</value>
   </data>
@@ -4933,6 +4939,9 @@
   </data>
   <data name="TitleEconomics" xml:space="preserve">
     <value>Economics</value>
+  </data>
+  <data name="LabelCustomMode" xml:space="preserve">
+    <value>Custom Mode</value>
   </data>
   <data name="LabelAdvancedMode" xml:space="preserve">
     <value>Advanced Mode</value>

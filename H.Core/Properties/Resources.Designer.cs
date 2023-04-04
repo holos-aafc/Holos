@@ -8764,6 +8764,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Mode.
+        /// </summary>
+        public static string LabelCustomMode {
+            get {
+                return ResourceManager.GetString("LabelCustomMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cysteine.
         /// </summary>
         public static string LabelCysteine {
@@ -14565,6 +14574,24 @@ namespace H.Core.Properties {
         public static string TitleSheepComponentDisplayString {
             get {
                 return ResourceManager.GetString("TitleSheepComponentDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soil Management.
+        /// </summary>
+        public static string TitleSoilManagement {
+            get {
+                return ResourceManager.GetString("TitleSoilManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soil Properties.
+        /// </summary>
+        public static string TitleSoilProperties {
+            get {
+                return ResourceManager.GetString("TitleSoilProperties", resourceCulture);
             }
         }
         
