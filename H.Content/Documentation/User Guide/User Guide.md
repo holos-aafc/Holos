@@ -969,6 +969,31 @@ A field can have one or many applications of digestate. To add a digestate appli
 
 - **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is avaialable, a warning message will be shown to indicate this situation.
 
+
+##### Soil
+
+The soil tab allows the user to change the soil type for the specific field. The table shows the list of all soil types available for the selected polygon. If a soil type is to be set on the specific field, select one from the list. To customize the soil, click "Custom Mode" and edit the individual soil properties for the field only.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-62.png" alt="Figure6-62"  width="650"/>
+    <br>
+    <em>
+		Figure 6.62 – Soil tab for a field component. 
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter6/figure6-63.png" alt="Figure6-63"  width="650"/>
+    <br>
+    <em>
+		Figure 6.63 – Customize a soiSl for a field. 
+	</em>
+</p>
+<br>
+
 ##### Residue
 
 This section lets the user specify how much carbon and nitrogen are in your crops.  They can also specify how much of the crop remains above or below the ground after harvest. 
