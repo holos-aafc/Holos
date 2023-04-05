@@ -44,13 +44,13 @@ namespace H.Core.Services.Animals
             switch (state)
             {
                 case DigestateState.Raw:
-                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateAvailable).Last().DateCreated;
+                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateProduced).Last().DateCreated;
 
                 case DigestateState.LiquidPhase:
-                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateAvailable).Last().DateCreated;
+                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateProduced).Last().DateCreated;
 
                 default:
-                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateAvailable).Last().DateCreated;
+                    return tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateProduced).Last().DateCreated;
             }
         }
 
@@ -194,6 +194,8 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Returns the total amount of N applied (to the entire field) from a digestate field application.
+        /// 
         /// (kg N)
         /// </summary>
         public double CalculateTotalNitrogenFromDigestateApplication(

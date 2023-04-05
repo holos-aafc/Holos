@@ -45,6 +45,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
+        /// Equation 4.9.5-1
+        /// 
         /// Calculate amount of carbon input from all digestate applications in a year.
         /// </summary>
         /// <returns>The amount of carbon input during the year (kg C ha^-1)</returns>
@@ -54,16 +56,12 @@ namespace H.Core.Calculators.Carbon
         {
             var result = 0d;
 
-            var dailyResults = _digestateService.GetDailyResults(farm);
-
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
             {
-                var tank = _digestateService.GetTank(farm, digestateApplicationViewItem.DateCreated, dailyResults);
-
-                result += _digestateService.CalculateTotalCarbonFromDigestateApplication(viewItem, digestateApplicationViewItem, tank);
+                result += digestateApplicationViewItem.AmountOfCarbonAppliedPerHectare;
             }
 
-            return result / viewItem.Area;
+            return result;
         }
 
         #endregion

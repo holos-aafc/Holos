@@ -4,7 +4,6 @@ namespace H.Core.Services.Animals
 {
     public class LandApplicationEmissionResult
     {
-        
         public CropViewItem CropViewItem { get; set; }
 
         /// <summary>
@@ -35,7 +34,17 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// (kg N2O-N)
         /// </summary>
+        public double TotalN2ONFromDigestateVolatilized;
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
         public double TotalN2ONFromManureLeaching;
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
+        public double TotalN2ONFromDigestateLeaching;
 
         /// <summary>
         /// (kg / L)

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
 
@@ -272,6 +274,38 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
+        public void ProcessDigestateViewItems(
+            Farm farm, 
+            FieldSystemComponent fieldSystemComponent)
+        {
+            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            if (component == null)
+            {
+                return;
+            }
+
+            var distinctYears = fieldSystemComponent.CropViewItems.SelectMany(x => x.DigestateApplicationViewItems).Select(x => x.DateCreated.Year).Distinct();
+            if (distinctYears.Any() == false)
+            {
+                return;
+            }
+
+            var table = new Dictionary<int, double>();
+            foreach (var distinctYear in distinctYears)
+            {
+                var reminaing = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm, component);
+                table.Add(distinctYear, reminaing);
+            }
+
+            foreach (var viewItem in fieldSystemComponent.CropViewItems)
+            {
+                foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
+                {
+                    digestateApplicationViewItem.AmountOfNitrogenRemainingAtEndOfYear = table[digestateApplicationViewItem.DateCreated.Year];
+                }
+            }
+        }
+
         public void CreateDetailViewItems(
             FieldSystemComponent fieldSystemComponent, 
             Farm farm)
@@ -293,6 +327,8 @@ namespace H.Core.Services.LandManagement
                     farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
                 }
             }
+
+            this.ProcessDigestateViewItems(farm, fieldSystemComponent);
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             this.CalculateCarbonLostByGrazingAnimals(

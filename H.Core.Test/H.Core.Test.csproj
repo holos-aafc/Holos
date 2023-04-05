@@ -90,7 +90,6 @@
     <Compile Include="Calculators\Climate\EvapotranspirationCalculatorTest.cs" />
     <Compile Include="Calculators\Economics\EconomicsCalculatorTest.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelperTests.cs" />
-    <Compile Include="Calculators\Emissions\EmissionsCalculatorTest.cs" />
     <Compile Include="Calculators\Emissions\EnergyCarbonDioxideEmissionsCalculatorTest.cs" />
     <Compile Include="Calculators\Emissions\Table_65_66_Expression_Of_Uncertainty_Calculator_Test.cs" />
     <Compile Include="Calculators\Emissions\SummationsCalculatorTest.cs" />

@@ -31,6 +31,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double AmountOfNitrogenRemainingAtEndOfYear { get; set; }
+
         public DigestateState DigestateState
         {
             get => _digestateState;

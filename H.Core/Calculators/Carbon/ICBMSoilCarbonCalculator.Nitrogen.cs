@@ -308,7 +308,7 @@ namespace H.Core.Calculators.Carbon
 
             if (this.YearIndex == 0)
             {
-                this.CurrentYearResults.ManureResidueN = base.GetManureNitrogenResiduesForYear(farm, this.CurrentYearResults);
+                this.CurrentYearResults.ManureResidueN = base.GetManureAndDigestateNitrogenResiduesForYear(farm, this.CurrentYearResults);
 
                 this.ManurePool = this.CalculateManureResiduePoolAtStartingPoint(
                     manureInputs: this.CurrentYearResults.ManureResidueN,
@@ -317,7 +317,7 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                this.CurrentYearResults.ManureResidueN = base.GetManureNitrogenResiduesForYear(farm, this.PreviousYearResults);
+                this.CurrentYearResults.ManureResidueN = base.GetManureAndDigestateNitrogenResiduesForYear(farm, this.PreviousYearResults);
 
                 this.ManurePool = this.CalculateManureResiduePoolAtInterval(
                     manureResidueNitrogenPoolAtPreviousInterval: base.PreviousYearResults.ManureResiduePool_ManureN,

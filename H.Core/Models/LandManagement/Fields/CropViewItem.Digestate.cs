@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace H.Core.Models.LandManagement.Fields
 {
@@ -21,6 +22,27 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         public bool HasDigestateApplications { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        public double GetRemainingNitrogenFromDigestateAtEndOfYear()
+        {
+            var itemsByYear = this.DigestateApplicationViewItems.Where(x => x.DateCreated.Year == this.Year);
+            if (itemsByYear.Any())
+            {
+                // All digestate view items have the amount of digestate remaining at end of year when detail view items are created. Since all items from
+                // the same year will have the same value for amount remaining, we return the amount from the first item.
+                var firstItem = itemsByYear.First();
+
+                return firstItem.AmountOfNitrogenRemainingAtEndOfYear;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         #endregion
 

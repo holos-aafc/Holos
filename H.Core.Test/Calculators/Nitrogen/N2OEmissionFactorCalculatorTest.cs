@@ -14,7 +14,7 @@ namespace H.Core.Test.Calculators.Nitrogen
     {
         #region Fields
 
-        private N2OEmissionFactorCalculator _calculator;
+        private N2OEmissionFactorCalculator _sut;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestInitialize]
         public void TestInitialize()
         {
-            _calculator = new N2OEmissionFactorCalculator();
+            _sut = new N2OEmissionFactorCalculator();
         }
 
         [TestCleanup]
@@ -46,9 +46,54 @@ namespace H.Core.Test.Calculators.Nitrogen
         #region Tests
 
         [TestMethod]
+        public void CalculateAmmoniaEmissionsFromLandAppliedDigestateTest()
+        {
+            var viewItem = new CropViewItem();
+            var farm = new Farm();
+
+            var result = _sut.CalculateAmmoniaEmissionsFromLandAppliedDigestate(
+                viewItem: viewItem,
+                farm: farm);
+        }
+
+        /// <summary>
+        /// Equation 2.5.1-1
+        /// </summary>
+        [TestMethod]
+        public void CalculatedEmissionFactorReturnsCorrectValue()
+        {
+            var result = _sut.CalculateEcodistrictEmissionFactor(500.0, 600.0);
+            Assert.AreEqual(0.012881024751743584, result);
+        }
+
+        /// <summary>
+        /// Equation 2.5.2-1
+        /// </summary>
+        [TestMethod]
+        public void CalculateNitrogenInputsFromFertilizerAppliedReturnsCorrectValue()
+        {
+        }
+
+        /// <summary>
+        ///    Equation 2.5.3-1
+        /// </summary>
+        [TestMethod]
+        public void CalculateFractionOfNitrogenLostByLeachingAndRunoffReturnsCorrectValue()
+        {
+            var growingSeasonPrecipitation = 34.2;
+            var growingSeasonEvapotranspiration = 0.65;
+            var result =
+                _sut.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
+                    growingSeasonPrecipitation,
+                    growingSeasonEvapotranspiration);
+
+            Assert.AreEqual(0.3, result);
+        }
+
+        [TestMethod]
         public void CalculateTopographyEmissionsReturnsZeroWhenNoClimateDataAvailable()
         {
-            var result = _calculator.CalculateTopographyEmissions(
+            var result = _sut.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: 0.1,
                 growingSeasonPrecipitation: 0,
                 growingSeasonEvapotranspiration: 0);
@@ -59,7 +104,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestMethod]
         public void CalculateSyntheticFertilizerApplied()
         {
-            var firstRate = _calculator.CalculateSyntheticFertilizerApplied(
+            var firstRate = _sut.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: 100,
                 nitrogenContentOfStrawReturnedToSoil: 200,
                 nitrogenContentOfRootReturnedToSoil: 300,
@@ -73,7 +118,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(1580, firstRate);
 
             // Increasing efficiency should reduce the required amount of fertilizer
-            var secondRate = _calculator.CalculateSyntheticFertilizerApplied(
+            var secondRate = _sut.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: 100,
                 nitrogenContentOfStrawReturnedToSoil: 200,
                 nitrogenContentOfRootReturnedToSoil: 300,
@@ -107,7 +152,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 }
             };
 
-            var result = _calculator.CalculateFractionOfNitrogenLostByVolatilization(
+            var result = _sut.CalculateFractionOfNitrogenLostByVolatilization(
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
@@ -154,7 +199,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 }
             };
 
-            var result = _calculator.CalculateLeftOverLandAppliedManureEmissionsForField(
+            var result = _sut.CalculateLeftOverLandAppliedManureEmissionsForField(
                 new List<AnimalComponentEmissionsResults>() {animalResults}, 
                 farm, 
                 viewItem1,

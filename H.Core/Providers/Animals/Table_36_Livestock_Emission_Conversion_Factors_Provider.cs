@@ -30,13 +30,65 @@ namespace H.Core.Providers.Animals
 
         #region Public Methods
 
-        public IEmissionData GetFactors(ManureStateType manureStateType,
+        public IEmissionData GetLandApplicationFactors(
+            Farm farm,
+            double meanAnnualPrecipitation,
+            double meanAnnualEvapotranspiration)
+        {
+            var climateDependentEmissionFactorForVolatilization = this.GetEmissionFactorForVolatilizationBasedOnClimate(
+                precipitation: meanAnnualPrecipitation,
+                evapotranspiration: meanAnnualEvapotranspiration);
+
+            var climateDependentDirectEmissionFactor = this.GetDirectEmissionFactorBasedOnClimate(
+                precipitation: meanAnnualPrecipitation,
+                evapotranspiration: meanAnnualEvapotranspiration);
+
+            var region = farm.Province.GetRegion();
+            var soilTexture = farm.DefaultSoilData.SoilTexture;
+
+            var factors = new Table_36_Livestock_Emission_Conversion_Factors_Data
+            {
+                MethaneConversionFactor = 0.0047,
+                N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
+                VolatilizationFraction = 0.21,
+                EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
+                EmissionFactorLeach = 0.011
+            };
+
+            if (region == Region.WesternCanada)
+            {
+                factors.N20DirectEmissionFactor = 0.0006;
+            }
+            else
+            {
+                if (soilTexture == SoilTexture.Fine)
+                {
+                    factors.N20DirectEmissionFactor = 0.0078;
+                }
+                else if (soilTexture == SoilTexture.Medium)
+                {
+                    factors.N20DirectEmissionFactor = 0.0062;
+                }
+                else
+                {
+                    // SoilTexture = Coarse
+                    // Footnote 1
+                    factors.N20DirectEmissionFactor = 0.0047;
+                }
+            }
+
+            return factors;
+        }
+
+        public IEmissionData GetFactors(
+            ManureStateType manureStateType,
             ComponentCategory componentCategory,
             double meanAnnualPrecipitation,
             double meanAnnualTemperature,
             double meanAnnualEvapotranspiration,
             double beddingRate,
-            AnimalType animalType, Farm farm)
+            AnimalType animalType,
+            Farm farm)
         {
             var climateDependentMethaneConversionFactor = _mcfByClimateZoneLivestockManureSystemProvider.GetByClimateAndHandlingSystem(
                 manureStateType: manureStateType,
@@ -59,42 +111,11 @@ namespace H.Core.Providers.Animals
              * All factors are the same when considering any manure on pasture
              */
 
-            if (manureStateType == ManureStateType.Pasture || 
-                manureStateType == ManureStateType.Paddock || 
+            if (manureStateType == ManureStateType.Pasture ||
+                manureStateType == ManureStateType.Paddock ||
                 manureStateType == ManureStateType.Range)
             {
-                var factors = new Table_36_Livestock_Emission_Conversion_Factors_Data
-                {
-                    MethaneConversionFactor = 0.0047,
-                    N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
-                    VolatilizationFraction = 0.21,
-                    EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                    EmissionFactorLeach = 0.011
-                };
-
-                if (region == Region.WesternCanada)
-                {
-                    factors.N20DirectEmissionFactor = 0.0006;
-                }
-                else
-                {
-                    if (soilTexture == SoilTexture.Fine)
-                    {
-                        factors.N20DirectEmissionFactor = 0.0078;
-                    }
-                    else if (soilTexture == SoilTexture.Medium)
-                    {
-                        factors.N20DirectEmissionFactor = 0.0062;
-                    }
-                    else
-                    {
-                        // SoilTexture = Coarse
-                        // Footnote 1
-                        factors.N20DirectEmissionFactor = 0.0047;
-                    }
-                }
-
-                return factors;
+                return this.GetLandApplicationFactors(farm, meanAnnualPrecipitation, meanAnnualEvapotranspiration);
             }
 
             switch (componentCategory)
