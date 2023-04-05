@@ -7909,6 +7909,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount of C from applied digestate.
+        /// </summary>
+        public static string LabelAmountOfCFromDigestate {
+            get {
+                return ResourceManager.GetString("LabelAmountOfCFromDigestate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of digestate.
         /// </summary>
         public static string LabelAmountOfDigestate {
@@ -7950,6 +7959,15 @@ namespace H.Core.Properties {
         public static string LabelAmountOfNFromAppliedManure {
             get {
                 return ResourceManager.GetString("LabelAmountOfNFromAppliedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount of N from applied digestate.
+        /// </summary>
+        public static string LabelAmountOfNFromDigestate {
+            get {
+                return ResourceManager.GetString("LabelAmountOfNFromDigestate", resourceCulture);
             }
         }
         

@@ -2725,6 +2725,9 @@
   <data name="LabelAllAnimalsGrazingOnThisPastureDisplayedInThisGrid" xml:space="preserve">
     <value>Tous les groupes d’animaux qui broutent dans ce pâturage sont indiqués ci-dessous. les dates des périodes de pâturage peuvent être modifiées en ajustant la période de gestion des groupes d’animaux.</value>
   </data>
+  <data name="LabelAmountOfCFromDigestate" xml:space="preserve">
+    <value>Amount of C from applied digestate</value>
+  </data>
   <data name="LabelAmountOfDigestate" xml:space="preserve">
     <value>Amount of digestate</value>
   </data>
@@ -2739,6 +2742,9 @@
   </data>
   <data name="LabelAmountOfNFromAppliedManure" xml:space="preserve">
     <value>quantité d’azote provenant du fumier épandu (kg n ha^-1)</value>
+  </data>
+  <data name="LabelAmountOfNFromDigestate" xml:space="preserve">
+    <value>Amount of N from applied digestate</value>
   </data>
   <data name="LabelAmountOfNitrogenFromAppliedManure" xml:space="preserve">
     <value>quantité d’azote provenant du fumier épandu</value>

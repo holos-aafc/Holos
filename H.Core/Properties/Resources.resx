@@ -5543,4 +5543,10 @@
   <data name="LabelDigestateCarbonInput" xml:space="preserve">
     <value>Digestate carbon input</value>
   </data>
+  <data name="LabelAmountOfCFromDigestate" xml:space="preserve">
+    <value>Amount of C from applied digestate</value>
+  </data>
+  <data name="LabelAmountOfNFromDigestate" xml:space="preserve">
+    <value>Amount of N from applied digestate</value>
+  </data>
 </root>
