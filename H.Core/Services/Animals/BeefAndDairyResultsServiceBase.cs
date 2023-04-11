@@ -64,7 +64,7 @@ namespace H.Core.Services.Animals
                     averageMonthlyTemperature: temperature);
             }
 
-            var ammoniaEmissionFactorForHousingType = _beefDairyDefaultEmissionFactorsProvider.GetEmissionFactorByHousing(
+            var ammoniaEmissionFactorForHousingType = _defaultEmissionFactorsProvider.GetEmissionFactorByHousing(
                 housingType: managementPeriod.HousingDetails.HousingType);
 
             dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = CalculateAdjustedEmissionFactorHousing(

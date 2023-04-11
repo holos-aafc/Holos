@@ -247,7 +247,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
-            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);
@@ -542,7 +542,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
-            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);

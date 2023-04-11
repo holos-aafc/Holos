@@ -266,8 +266,10 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
-            // Equation 5.2.5-8
-            dailyEmissions.AmmoniaEmissionsFromGrazingAnimals = 0; // No methodology for grazing swine (manure management types for swine do no include pasture)
+            // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
+            base.GetEmissionsFromGrazingSheepSwineAndOtherLiveStock(
+                managementPeriod: managementPeriod,
+                groupEmissionsByDay: dailyEmissions);
 
             return dailyEmissions;
         }

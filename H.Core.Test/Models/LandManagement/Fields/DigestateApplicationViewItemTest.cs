@@ -45,24 +45,6 @@ namespace H.Core.Test.Models.LandManagement.Fields
 
         #region Tests
 
-        [TestMethod]
-        public void AttemptedToGoOverMaximumReturnsFalse()
-        {
-            _sut.MaximumAmountOfDigestateAvailablePerHectare = 100;
-            _sut.AmountAppliedPerHectare = 50;
-
-            Assert.IsFalse(_sut.AttemptedToGoOverMaximum);
-        }
-
-        [TestMethod]
-        public void AttemptedToGoOverMaximumReturnsTrue()
-        {
-            //_sut.MaximumAmountOfDigestateAvailablePerHectare = 100;
-            //_sut.AmountAppliedPerHectare = 500;
-
-            //Assert.IsTrue(_sut.AttemptedToGoOverMaximum);
-        }
-
         #endregion
     }
 }

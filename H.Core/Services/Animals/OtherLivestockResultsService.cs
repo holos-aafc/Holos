@@ -158,6 +158,11 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
+            // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
+            base.GetEmissionsFromGrazingSheepSwineAndOtherLiveStock(
+                managementPeriod: managementPeriod,
+                groupEmissionsByDay: dailyEmissions);
+
             return dailyEmissions;
         }
 

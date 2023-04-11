@@ -274,7 +274,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
-            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);
@@ -583,7 +583,7 @@ namespace H.Core.Services.Animals
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
-            base.GetEmissionsFromBeefAndDairyGrazingAnimals(
+            base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
                 temperature: temperature,
                 groupEmissionsByDay: dailyEmissions);

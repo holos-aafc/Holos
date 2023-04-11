@@ -103,7 +103,7 @@ namespace H.Core.Emissions.Results
         private double _manureCarbonNitrogenRatio;
         private double _totalVolumeOfManureAvailableForLandApplication;
         private double _ammoniaEmissionsFromLandAppliedManure;
-        private double _ammoniaEmissionsFromGrazingAnimals;
+        private double _nH3FromGrazingAnimals;
         private double _proteinIntakeFromMilk;
         private double _proteinIntakeFromSolidFood;
         private double _proteinRetainedFromSolidFood;
@@ -164,7 +164,7 @@ namespace H.Core.Emissions.Results
         private double _methaneEmissionsDuringDigestateStorage;
         private double _nitrousOxideEmissionsDuringDigestateStorage;
         private double _ammoniaEmissionsDuringDigestateStorage;
-        private double _adjustedAmmoniaFromHousing;
+        private double _adjustedNH3NFromHousing;
         private double _adjustedAmmoniaFromStorage;
         private double _ammoniaEmissionsFromHousingAndStorage;
         private double _totalNitrogenLossesFromHousingAndStorage;
@@ -696,11 +696,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.2.1-8
-        /// Equation 4.2.1-15
-        /// Equation 4.2.1-17
-        /// Equation 4.2.1-23
-        /// 
         /// (kg head^-1 day^-1)
         /// </summary>
         public double NitrogenExcretionRate
@@ -979,8 +974,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.3-4
-        ///
         /// (kg N2O-N)
         /// </summary>
         public double ManureVolatilizationN2ONEmission
@@ -1213,14 +1206,12 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 5.2.5-5
-        ///
         /// (kg NH3)
         /// </summary>
-        public double AmmoniaEmissionsFromGrazingAnimals
+        public double NH3FromGrazingAnimals
         {
-            get => _ammoniaEmissionsFromGrazingAnimals;
-            set => SetProperty(ref _ammoniaEmissionsFromGrazingAnimals, value);
+            get => _nH3FromGrazingAnimals;
+            set => SetProperty(ref _nH3FromGrazingAnimals, value);
         }
 
         /// <summary>
@@ -1676,24 +1667,22 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg NH-3)
+        /// (kg NH3-N)
         /// </summary>
-        public double AdjustedAmmoniaFromHousing
+        public double AdjustedNH3NFromHousing
         {
-            get => _adjustedAmmoniaFromHousing;
-            set => SetProperty(ref _adjustedAmmoniaFromHousing, value);
+            get => _adjustedNH3NFromHousing;
+            set => SetProperty(ref _adjustedNH3NFromHousing, value);
         }
 
         /// <summary>
-        /// (kg NH-3)
+        /// (kg NH3-N)
         /// </summary>
         public double AdjustedAmmoniaFromStorage
         {
             get => _adjustedAmmoniaFromStorage;
             set => SetProperty(ref _adjustedAmmoniaFromStorage, value);
         }
-
-
 
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)

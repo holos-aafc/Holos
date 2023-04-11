@@ -53,24 +53,7 @@ namespace H.Core.Models.LandManagement.Fields
         public double AmountAppliedPerHectare
         {
             get => _amountAppliedPerHectare;
-            set
-            {
-                this.AttemptedToGoOverMaximum = false;
-
-                var totalAdditionalRequested = value - _amountAppliedPerHectare;
-                var overLimit = totalAdditionalRequested > this.MaximumAmountOfDigestateAvailablePerHectare;
-
-                if (overLimit)
-                {
-                    this.AttemptedToGoOverMaximum = true;
-
-                    SetProperty(ref _amountAppliedPerHectare, _amountAppliedPerHectare);
-
-                    return;
-                }
-
-                SetProperty(ref _amountAppliedPerHectare, value);
-            } 
+            set => SetProperty(ref _amountAppliedPerHectare, value);
         }
 
         // Need to set this somehow so it can be used in direct N2O calculations
