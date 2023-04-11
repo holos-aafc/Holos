@@ -183,15 +183,15 @@ namespace H.Core.Services.Animals
                         });
                 }
 
-                dailyEmissions.ProteinRetainedByPiglets = this.CalculateProteinRetainedForWeanedPiglets(
-                    numberOfAnimals: litterSize,
+                dailyEmissions.ProteinRetainedByPiglets = this.CalculateProteinRetainedForNursingPiglets(
+                    litterSize: litterSize,
                     fertilityRateOfSows: fertilityRate,
                     liveWeightOfPigletAtBirth: animalGroup.WeightOfPigletsAtBirth,
                     liveWeightOfPigletAtWeaningAge: animalGroup.WeightOfWeanedAnimals);
 
                 dailyEmissions.ProteinRetained = this.CalculateProteinRetainedForBreedingSows(
                     proteinRetainedForGainForBreedingSows: dailyEmissions.ProteinRetainedForGain,
-                    proteinRetainedForWeanedPiglets: dailyEmissions.ProteinRetainedByPiglets);
+                    proteinRetainedForNursingPiglets: dailyEmissions.ProteinRetainedByPiglets);
             }
             else
             {
@@ -300,13 +300,13 @@ namespace H.Core.Services.Animals
         /// Equation 4.2.1-20
         /// </summary>
         /// <param name="proteinRetainedForGainForBreedingSows">Protein retained for gain for breeding sows (kg head^-1 day^-1)</param>
-        /// <param name="proteinRetainedForWeanedPiglets">Protein retained of weaned piglets (kg head^-1 day^-1)</param>
+        /// <param name="proteinRetainedForNursingPiglets">Protein retained of weaned piglets (kg head^-1 day^-1)</param>
         /// <returns>Protein retained for breeding sows (kg head^-1 day^-1)</returns>
         public double CalculateProteinRetainedForBreedingSows(
             double proteinRetainedForGainForBreedingSows,
-            double proteinRetainedForWeanedPiglets)
+            double proteinRetainedForNursingPiglets)
         {
-            return (proteinRetainedForGainForBreedingSows + proteinRetainedForWeanedPiglets) / 365;
+            return proteinRetainedForGainForBreedingSows + proteinRetainedForNursingPiglets;
         }
 
         /// <summary>
@@ -325,18 +325,18 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.2.1-22
         /// </summary>
-        /// <param name="numberOfAnimals">Total number of weaned piglets</param>
+        /// <param name="litterSize">Total number of weaned piglets</param>
         /// <param name="fertilityRateOfSows">Fertility rate of sows (litter year^-1)</param>
         /// <param name="liveWeightOfPigletAtBirth">Live weight of a piglet at birth (kg head^-1)</param>
         /// <param name="liveWeightOfPigletAtWeaningAge">Live weight of a piglet at weaning age (kg head^-1)</param>
         /// <returns>Protein retained of weaned piglets (kg head^-1 day^-1)</returns>
-        public double CalculateProteinRetainedForWeanedPiglets(
-            double numberOfAnimals,
+        public double CalculateProteinRetainedForNursingPiglets(
+            double litterSize,
             double fertilityRateOfSows,
             double liveWeightOfPigletAtBirth,
             double liveWeightOfPigletAtWeaningAge)
         {
-            return (0.025 * numberOfAnimals * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98)) / 350.0;
+            return (0.025 * litterSize * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98)) / 350.0;
         }
 
         /// <summary>

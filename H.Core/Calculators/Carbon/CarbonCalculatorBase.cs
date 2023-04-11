@@ -1,4 +1,5 @@
-﻿using H.Core.Emissions.Results;
+﻿using System;
+using H.Core.Emissions.Results;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System.Collections.Generic;
@@ -62,6 +63,19 @@ namespace H.Core.Calculators.Carbon
             }
 
             return result;
+        }
+
+        public double CalculateGrazingAnimalsManureCarbonInput()
+        {
+            var totalCarbonFromGrazingAnimals = 0d;
+
+            // Get all emissions from when animals on pasture
+            foreach (var animalComponentEmissionsResult in this.AnimalComponentEmissionsResults)
+            {
+                
+            }
+
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -336,7 +336,7 @@ namespace H.Core.Services.LandManagement
                 results: this.AnimalResults);
 
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            //this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
+            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
 
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);

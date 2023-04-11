@@ -174,16 +174,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.1-1
-        /// 
-        /// (kg C)
-        /// </summary>
-        public static double TotalAmountOfCarbonInStoredManure(this IEnumerable<AnimalComponentEmissionsResults> results)
-        {
-            return results.Sum(result => result.TotalAmountOfCarbonInStoredManure);
-        }
-
-        /// <summary>
         /// Equation 4.5.2-2
         /// 
         /// (kg TAN)

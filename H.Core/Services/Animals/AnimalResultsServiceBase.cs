@@ -581,7 +581,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.1.1-3
+        /// Equation 4.1.1-4
         /// </summary>
         /// <param name="excretionRate">Rate of C excreted through feces (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
@@ -862,9 +862,9 @@ namespace H.Core.Services.Animals
                 monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
 
             dailyEmissions.AmountOfCarbonInStoredManure = this.CalculateAmountOfCarbonInStoredManure(
-                monthlyFecalCarbonExcretion: dailyEmissions.FecalCarbonExcretion,
-                monthlyAmountOfCarbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial,
-                monthlyAmountOfCarbonLostAsMethaneDuringManagement: dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement);
+                dailyFecalCarbonExcretion: dailyEmissions.FecalCarbonExcretion,
+                dailyAmountOfCarbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial,
+                dailyAmountOfCarbonLostAsMethaneDuringManagement: dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement);
 
             dailyEmissions.AmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
                 amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AmountOfCarbonInStoredManureOnDay,
@@ -885,17 +885,16 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.1.3-14
         /// </summary>
-        /// <param name="monthlyFecalCarbonExcretion">Amount of C excreted (kg C day^-1)</param>
-        /// <param name="monthlyAmountOfCarbonFromBedding">Amount of carbon added from bedding materials (kg C day^-1)</param>
-        /// <param name="monthlyAmountOfCarbonLostAsMethaneDuringManagement">Carbon lost as methane during manure management (kg C day^-1)</param>
+        /// <param name="dailyFecalCarbonExcretion">Amount of C excreted (kg C day^-1)</param>
+        /// <param name="dailyAmountOfCarbonFromBedding">Amount of carbon added from bedding materials (kg C day^-1)</param>
+        /// <param name="dailyAmountOfCarbonLostAsMethaneDuringManagement">Carbon lost as methane during manure management (kg C day^-1)</param>
         /// <returns>Total amount of C flowing into storage each day (minus housing emissions) (kg C day^-1)</returns>
         public double CalculateAmountOfCarbonInStoredManure(
-            double monthlyFecalCarbonExcretion,
-            double monthlyAmountOfCarbonFromBedding,
-            double monthlyAmountOfCarbonLostAsMethaneDuringManagement)
+            double dailyFecalCarbonExcretion,
+            double dailyAmountOfCarbonFromBedding,
+            double dailyAmountOfCarbonLostAsMethaneDuringManagement)
         {
-            var result = (monthlyFecalCarbonExcretion + monthlyAmountOfCarbonFromBedding) -
-                         monthlyAmountOfCarbonLostAsMethaneDuringManagement;
+            var result = (dailyFecalCarbonExcretion + dailyAmountOfCarbonFromBedding) - dailyAmountOfCarbonLostAsMethaneDuringManagement;
 
             return result;
         }

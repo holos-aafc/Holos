@@ -173,7 +173,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg N)
+        /// (kg C)
         /// </summary>
         public double TotalCarbonExcreted
         {

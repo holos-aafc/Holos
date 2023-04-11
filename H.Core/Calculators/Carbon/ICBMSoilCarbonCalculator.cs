@@ -90,8 +90,6 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItems: nextYearViewItem,
                 farm: farm);
 
-            //var carbonInputsFromGrazingAnimalManure = currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
-
             // Add in any supplemental feeding amounts that were given to grazing animals
             currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
 
@@ -103,6 +101,8 @@ namespace H.Core.Calculators.Carbon
                 farm: farm);
 
             currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem, farm);
+            currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+
             currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
 
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare + currentYearViewItem.DigestateCarbonInputsPerHectare;            
