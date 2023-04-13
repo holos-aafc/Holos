@@ -401,6 +401,19 @@ namespace H.Content
             }
         }
 
+        /// <summary>
+        /// Use this method when CSV has nested ',' characters. This method is slower than non-regex method.
+        /// </summary>
+        public static IEnumerable<string[]> SplitFileIntoLinesUsingRegex(Stream fileContents)
+        {
+            // CsvReader uses a regex internally.
+            var reader = new CsvReader(fileContents);
+            foreach (var row in reader.RowEnumerator)
+            {
+                yield return (string[])row;
+            }
+        }
+
         #endregion
 
         #region Event Handlers

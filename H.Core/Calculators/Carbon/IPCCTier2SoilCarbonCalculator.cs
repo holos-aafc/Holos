@@ -599,7 +599,7 @@ namespace H.Core.Calculators.Carbon
             double moistureContentOfCropPercentage,
             double harvestIndex)
         {
-            return ((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestIndex) * shootToRootRatio * area * fractionRenewed;
+            return (((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestIndex) - (freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0))) * shootToRootRatio * area * fractionRenewed;
         }
 
         /// <summary>

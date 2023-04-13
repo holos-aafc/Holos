@@ -136,4 +136,7 @@
   <data name="siberian_elm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\siberian_elm.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="table_3_polygons" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table_3_polygons.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

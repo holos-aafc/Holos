@@ -19,7 +19,7 @@ namespace H.Integration.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -245,6 +245,28 @@ namespace H.Integration.Properties {
         internal static string siberian_elm {
             get {
                 return ResourceManager.GetString("siberian_elm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table 3. SLC polygons to be modelled in the Holos V4 simulations,,,
+        ///SLC polygon #,Ecodistrict #,SLC polygon area (ha),Ecodistrict area (ha)
+        ///187006,187,&quot;1,773,162&quot;,&quot;10,744,579&quot;
+        ///244003,244,&quot;34,915&quot;,&quot;4,151,599&quot;
+        ///244007,244,&quot;103,901&quot;,&quot;4,151,599&quot;
+        ///244010,244,&quot;373,550&quot;,&quot;4,151,599&quot;
+        ///244014,244,&quot;14,536&quot;,&quot;4,151,599&quot;
+        ///244025,244,&quot;8,218&quot;,&quot;4,151,599&quot;
+        ///244028,244,&quot;123,530&quot;,&quot;4,151,599&quot;
+        ///244035,244,&quot;87,220&quot;,&quot;4,151,599&quot;
+        ///244061,244,&quot;346,272&quot;,&quot;4,151,599&quot;
+        ///244070,244,&quot;73,011&quot;,&quot;4,151,599&quot;
+        ///252017,252,&quot;38,413&quot;,&quot;2,405,439&quot;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string table_3_polygons {
+            get {
+                return ResourceManager.GetString("table_3_polygons", resourceCulture);
             }
         }
     }

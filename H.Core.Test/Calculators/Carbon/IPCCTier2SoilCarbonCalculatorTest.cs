@@ -847,8 +847,8 @@ namespace H.Core.Test.Calculators.Carbon
                 viewItem: viewItem, farm: new Farm());
 
             Assert.AreEqual(2157, viewItem.AboveGroundCarbonInput, 1);
-            Assert.AreEqual(997, viewItem.BelowGroundCarbonInput, 1);
-            Assert.AreEqual(3155, viewItem.TotalCarbonInputs, 1);
+            Assert.AreEqual(453, viewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(2610, viewItem.TotalCarbonInputs, 1);
         }
 
         [TestMethod]
