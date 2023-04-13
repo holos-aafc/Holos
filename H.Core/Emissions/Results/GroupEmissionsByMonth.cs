@@ -569,6 +569,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (kg NH3)
+        /// </summary>
+        public double MontlyNH3FromGrazingAnimals
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.NH3FromGrazingAnimals);
+            }
+        }
+
+
+        /// <summary>
         /// (kg TAN)
         /// </summary>
         public double MonthlyTanEnteringStorageSystem
@@ -1045,6 +1057,17 @@ namespace H.Core.Emissions.Results
             get
             {
                 return DailyEmissions.Average(x => x.ManureNitrogenLeachingRate);
+            }
+        }
+
+        /// <summary>
+        /// (kg N2O-N day^-1)
+        /// </summary>
+        public double ManureNitrogenLeaching
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.ManureN2ONLeachingEmission);
             }
         }
 

@@ -31,7 +31,15 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _totalCarbonLossesFromGrazingAnimals, value);
         }
 
+        /// <summary>
+        /// (kg C ha^-1)
+        /// </summary>
         public double TotalCarbonInputFromManureFromAnimalsGrazingOnPasture { get; set; }
+
+        /// <summary>
+        /// (kg N ha^-1)
+        /// </summary>
+        public double TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture { get; set; }
 
         #endregion
     }

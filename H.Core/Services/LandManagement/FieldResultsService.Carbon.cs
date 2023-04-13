@@ -622,24 +622,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
             {
-                // Get all animal components that have been placed on this field for grazing.
-                var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-                if (animalComponentEmissionsResults != null)
+                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
+                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
                 {
-                    //Get all animal groups that have been placed on this field for grazing.
-                    var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-                    if (groupEmissionResults != null)
-                    {
-                        // Get emissions from the group when they are placed on pasture (housing type is pasture)
-                        foreach (var groupEmissionsByMonth in groupEmissionResults.GroupEmissionsByMonths)
-                        {
-                            if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture())
-                            {
-                                totalCarbonExcretedByAnimals += groupEmissionsByMonth.MonthlyFecalCarbonExcretion;
-                                manureMethaneEmissions += groupEmissionsByMonth.MonthlyManureMethaneEmission;
-                            }
-                        }
-                    }
+                    totalCarbonExcretedByAnimals += groupEmissionsByMonth.MonthlyFecalCarbonExcretion;
+                    manureMethaneEmissions += groupEmissionsByMonth.MonthlyManureMethaneEmission;
                 }
             }
 

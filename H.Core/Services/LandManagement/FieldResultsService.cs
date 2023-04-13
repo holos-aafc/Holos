@@ -333,9 +333,38 @@ namespace H.Core.Services.LandManagement
             return residueData;
         }
 
+        public List<GroupEmissionsByMonth> GetGroupEmissionsFromGrazingAnimals(
+            List<AnimalComponentEmissionsResults> results,
+            GrazingViewItem grazingViewItem)
+        {
+            var result = new List<GroupEmissionsByMonth>();
+
+            // Get all animal components that have been placed on this field for grazing.
+            var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+            if (animalComponentEmissionsResults != null)
+            {
+                //Get all animal groups that have been placed on this field for grazing.
+                var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                if (groupEmissionResults != null)
+                {
+                    // Get emissions from the group when they are placed on pasture (housing type is pasture)
+                    foreach (var groupEmissionsByMonth in groupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture())
+                        {
+                            result.Add(groupEmissionsByMonth);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Private Methods
+
         #endregion
     }
 }

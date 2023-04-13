@@ -857,14 +857,14 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 4.7.2-1
         /// </summary>
-        /// <returns>Fraction of N in field-applied manure (kg N 1000 kg^-1 wet weight)</returns>
+        /// <returns>Amount of N added to soil</returns>
         protected double CalculateAmountOfNitrogenAppliedToSoilAfterLosses(double totalNitrogenAppliedToField,
             double totalDirectN2ON,
             double totalAmmoniaLossFromLandapplication,
             double totalN2ONFromLeaching)
         {
-            // Note we don't divide by the total volume of all manure produced here (as specified in 4.7.2-1) since the manure and/or digestate application(s) already consider the
-            // the fraction being used compared to total volume of manure/digestate produced
+            // Note we don't divide by the total volume of all manure produced here (as specified in 4.7.2-1) since the manure and/or digestate application(s) already consider
+            // the fraction being used as compared to the total volume of manure/digestate produced
 
             var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandapplication + totalN2ONFromLeaching);
 
@@ -872,7 +872,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Calculates the amount of N from manure and/or digestate added to the field after losses from emissions have been calculated on a per hectare basis
+        /// Calculates the amount of N from manure (field applications and/or from grazing animals) and/or digestate added to the field after losses from emissions have been calculated on a per hectare basis
         /// </summary>
         /// <returns>Amount of N from manure and/or digestate (kg N ha^-1)</returns>
         protected double GetManureAndDigestateNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
@@ -902,6 +902,9 @@ namespace H.Core.Calculators.Carbon
                 totalDirectN2ON: combinedDirectN2ON,
                 totalAmmoniaLossFromLandapplication: combinedAmmoniaclLoss,
                 totalN2ONFromLeaching: combinedLeachingLoss);
+
+            // Inputs from grazing animals will already have emission subtracted and so we are adding the remaining N from grazing animals here.
+            nitrogenAppliedToSoilAfterLosses += cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture;
 
             return nitrogenAppliedToSoilAfterLosses;
         }

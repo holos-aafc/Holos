@@ -91,6 +91,53 @@ namespace H.Core.Services.LandManagement
             return requiredAmountOfProduct;
         }
 
+        /// <summary>
+        /// Calculates how much nitrogen added from manure of animals grazing on the field.
+        /// </summary>
+        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
+
+            this.CalculateManureNitrogenInputByGrazingAnimals(
+                fieldSystemComponent: fieldSystemComponent,
+                results: animalComponentEmissionResults);
+        }
+
+        /// <summary>
+        /// Equation 5.6.2-1
+        /// </summary>
+        public double CalculateManureNitrogenInputsFromGrazingAnimals(
+            CropViewItem cropViewItem,
+            List<AnimalComponentEmissionsResults> results)
+        {
+            var totalNitrogenExcretedByAnimals = 0d;
+            var totalAmmoniaEmissions = 0d;
+            var totalLeaching = 0d;
+
+            foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+            {
+                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
+                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
+                {
+                    totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
+                    totalAmmoniaEmissions += groupEmissionsByMonth.MontlyNH3FromGrazingAnimals;
+                    totalLeaching += groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
+                }
+            }
+
+            var result = (totalNitrogenExcretedByAnimals - (totalAmmoniaEmissions * (14.0 / 17.0) + totalLeaching)) / cropViewItem.Area;
+
+            return result < 0 ? 0 : result;
+        }
+
+        public void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        {
+            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            {
+                cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(cropViewItem, results.ToList());
+            }
+        }
+
         #endregion
 
         #region Private Methods
