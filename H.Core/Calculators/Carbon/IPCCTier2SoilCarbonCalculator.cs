@@ -163,7 +163,7 @@ namespace H.Core.Calculators.Carbon
             var intercept = cropData.InterceptValue;            
 
             // Note that the yield must be converted to tons here since the curve equation expects a yield in tons when multiplying by slope
-            var harvestRatio = this.CalculateHarvestIndex(
+            var harvestIndex = this.CalculateHarvestIndex(
                 slope: slope,
                 freshWeightOfYield: viewItem.Yield,
                 intercept: intercept,
@@ -171,7 +171,7 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
-                harvestIndex: harvestRatio,
+                harvestIndex: harvestIndex,
                 moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage, 
                 percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
@@ -205,7 +205,7 @@ namespace H.Core.Calculators.Carbon
                 fractionRenewed: fractionRenewed, 
                 freshWeightOfYield: viewItem.Yield, 
                 moistureContentOfCropPercentage: viewItem.MoistureContentOfCropPercentage, 
-                harvestRatio: harvestRatio);
+                harvestIndex: harvestIndex);
 
             const double BelowGroundCarbonContent = 0.42;
 
@@ -588,7 +588,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="fractionRenewed">(unitless)</param>
         /// <param name="freshWeightOfYield"></param>
         /// <param name="moistureContentOfCropPercentage"></param>
-        /// <param name="harvestRatio"></param>
+        /// <param name="harvestIndex"></param>
         /// <returns>Annual total amount of below-ground residue (kg year^-1)</returns>
         public double CalculateBelowGroundResidueDryMatter(
             double aboveGroundResideDryMatterForCrop,
@@ -597,9 +597,9 @@ namespace H.Core.Calculators.Carbon
             double fractionRenewed, 
             double freshWeightOfYield, 
             double moistureContentOfCropPercentage,
-            double harvestRatio)
+            double harvestIndex)
         {
-            return ((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestRatio) * shootToRootRatio * area * fractionRenewed;
+            return ((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestIndex) * shootToRootRatio * area * fractionRenewed;
         }
 
         /// <summary>
