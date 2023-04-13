@@ -163,7 +163,7 @@ namespace H.Core.Calculators.Carbon
             var intercept = cropData.InterceptValue;            
 
             // Note that the yield must be converted to tons here since the curve equation expects a yield in tons when multiplying by slope
-            var harvestRatio = this.CalculateHarvestRatio(
+            var harvestRatio = this.CalculateHarvestIndex(
                 slope: slope,
                 freshWeightOfYield: viewItem.Yield,
                 intercept: intercept,
@@ -171,7 +171,7 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
-                harvestRatio: harvestRatio,
+                harvestIndex: harvestRatio,
                 moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage, 
                 percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
@@ -526,8 +526,8 @@ namespace H.Core.Calculators.Carbon
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="intercept">(unitless)</param>
         /// <param name="moistureContentAsPercentage">The moisture content of the yield (%)</param>
-        /// <returns>The harvest ratio</returns>
-        public double CalculateHarvestRatio(
+        /// <returns>The harvest index</returns>
+        public double CalculateHarvestIndex(
             double slope,
             double freshWeightOfYield,
             double intercept,
@@ -540,21 +540,21 @@ namespace H.Core.Calculators.Carbon
         /// Equation 2.2.2-2
         /// </summary>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
-        /// <param name="harvestRatio">The harvest ratio (kg ha^-1)</param>
+        /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
         /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
         /// <param name="percentageOfStrawReturned"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
         public double CalculateAboveGroundResidueDryMatter(double freshWeightOfYield,
-            double harvestRatio,
+            double harvestIndex,
             double moistureContentOfCropAsPercentage, 
             double percentageOfStrawReturned)
         {
-            if (harvestRatio <= 0)
+            if (harvestIndex <= 0)
             {
                 return 0;
             }
 
-            return ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestRatio) * (percentageOfStrawReturned / 100.0);
+            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0))))* (percentageOfStrawReturned / 100.0);
         }
 
         /// <summary>
