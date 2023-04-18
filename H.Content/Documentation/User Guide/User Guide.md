@@ -967,8 +967,6 @@ A field can have one or many applications of digestate. To add a digestate appli
 
 - **Liquid-solid separation**: When the anaerobic digestor has been configured to produce separated liquid and solid fractions, the option to select the digestate type will be available. If there is no liquid-solid separation, the only option available will raw digestate (not separated).
 
-- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is avaialable, a warning message will be shown to indicate this situation.
-
 
 ##### Soil
 
