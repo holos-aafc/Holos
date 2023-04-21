@@ -10,6 +10,7 @@ using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -683,6 +684,11 @@ namespace H.Core.Providers.Soil
         private string GetSoilSubGroup(ComponentTableData componentTableData)
         {
             var soilNameTableData = this.GetSoilNameTableData(componentTableData);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
+
             var result = soilNameTableData.SoilSubgroupThirdEdition;
 
             return result;
@@ -1359,18 +1365,16 @@ namespace H.Core.Providers.Soil
         /// </summary>
         private SoilLayerTableData GetFirstNonLitterLayer(int polygonId)
         {
-            var largestComponentWithinPolygon = this.GetLargestComponentWithinPolygon(polygonId);
-            if (largestComponentWithinPolygon == null)
+            var components = this.GetAllSoilComponents(polygonId);
+            foreach (var component in components)
             {
-                return null;
-            }
+                var soilNameIdentifier = component.SoilNameIdentifier;
 
-            var soilNameIdentifier = largestComponentWithinPolygon.SoilNameIdentifier;
-
-            var firstNonLitterLayer = this.GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
-            if (firstNonLitterLayer != null)
-            {
-                return firstNonLitterLayer;
+                var firstNonLitterLayer = this.GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
+                if (firstNonLitterLayer != null)
+                {
+                    return firstNonLitterLayer;
+                }
             }
 
             Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} first non-litter layer not found for polygon '{polygonId}'. Returning null.");
@@ -1431,8 +1435,7 @@ namespace H.Core.Providers.Soil
                     Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with agricultural soil profile. Searching for native soil profiles.");
                 }
 
-                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile) &&
-                                                                                x.IsValidSoilLayerTableData);
+                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
                 
                 if (nativeProfileEntries.Any())
                 {
@@ -1457,14 +1460,47 @@ namespace H.Core.Providers.Soil
             return null;
         }
 
+        /// <summary>
+        /// Get all components. There will not always be a soil name table entry for the first/largest component in the polygon
+        /// </summary>
+        /// <param name="polygonId"></param>
+        /// <returns></returns>
+        private List<ComponentTableData> GetAllSoilComponents(int polygonId)
+        {
+            var result = new List<ComponentTableData>();
+
+            var componentTableDataWithCommonPolygonId = _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
+            if (componentTableDataWithCommonPolygonId.Any())
+            {
+                var agriculturalComponents = componentTableDataWithCommonPolygonId
+                    .Where(x => x.TypeOfSoilProfile.Equals("A"))
+                    .OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent);
+
+                result.AddRange(agriculturalComponents);
+
+                var nativeSoilProfiles = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("N")).OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent);
+
+                result.AddRange(nativeSoilProfiles);
+            }
+
+            return result;
+        }
+
         private ComponentTableData GetLargestComponentWithinPolygon(int polygonId)
         {
             var componentTableDataWithCommonPolygonId = _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
             if (componentTableDataWithCommonPolygonId.Any())
             {
-                var largestComponent = componentTableDataWithCommonPolygonId.OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
+                var largestAgriculturalComponent = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("A")).OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
+                if (largestAgriculturalComponent != null)
+                {
+                    return largestAgriculturalComponent;
+                }
 
-                return largestComponent;
+                var nativeSoilProfiles = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("N"));
+                var largestNativeSoilComponent = nativeSoilProfiles.OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
+
+                return largestNativeSoilComponent;
             }
             else
             {
@@ -1483,10 +1519,20 @@ namespace H.Core.Providers.Soil
 
         private SoilNameTableData GetSoilNameTableData(int polygonId)
         {
-            var largestComponentWithinPolygon = this.GetLargestComponentWithinPolygon(polygonId);
-            var soilNameIdentifier = largestComponentWithinPolygon.SoilNameIdentifier;
+            var largestComponentWithinPolygon = this.GetAllSoilComponents(polygonId);
+            foreach (var data in largestComponentWithinPolygon)
+            {
+                var soilNameIdentifier = data.SoilNameIdentifier;
 
-            return this.GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
+                var result = this.GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+
+            return null;
         }
 
         private SoilNameTableData GetSoilNameTableDataBySoilNameIdentifier(string soilNameIdentifier)

@@ -406,12 +406,18 @@ namespace H.Content
         /// </summary>
         public static IEnumerable<string[]> SplitFileIntoLinesUsingRegex(Stream fileContents)
         {
+            var result = new List<string[]>();
+
             // CsvReader uses a regex internally.
             var reader = new CsvReader(fileContents);
             foreach (var row in reader.RowEnumerator)
             {
-                yield return (string[])row;
+                result.Add((string[])row);
             }
+
+            reader.Dispose();
+
+            return result;
         }
 
         #endregion

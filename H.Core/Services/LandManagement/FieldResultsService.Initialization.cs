@@ -25,26 +25,17 @@ namespace H.Core.Services.LandManagement
 
             var defaults = farm.Defaults;
 
-            viewItem.NitrogenFixation = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation;
-            viewItem.CarbonConcentration = defaults.CarbonConcentration;
-            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
-
+            this.AssignNitrogenFixation(viewItem);
+            this.AssignCarbonConcentration(viewItem, defaults);
+            this.AssignIrrigation(farm, viewItem);
             this.AssignDefaultBiomassCoefficients(viewItem, farm);
             this.AssignDefaultNitrogenContentValues(viewItem, farm);
             this.AssignSoilProperties(viewItem, farm);
             this.AssignDefaultPercentageReturns(viewItem, farm.Defaults);
             this.AssignDefaultMoistureContent(viewItem, farm);
             this.AssignDefaultTillageTypeForSelectedProvince(viewItem, farm);
-            if (viewItem.CropType.IsSilageCropWithoutDefaults())
-            {
-                AssignDefaultSilageCropYield(viewItem, farm);
-            }
-            else
-            {
-                this.AssignDefaultYield(viewItem, farm);
-            }
+            this.AssignYield(viewItem, farm);
             this.AssignDefaultEnergyRequirements(viewItem, farm);
-            this.AssignDefaultLumCMaxValues(viewItem, farm);
             this.AssignFallowDefaultsIfApplicable(viewItem, farm);
             this.AssignPerennialDefaultsIfApplicable(viewItem, farm);
             this.AssignHarvestMethod(viewItem, farm);
@@ -66,6 +57,33 @@ namespace H.Core.Services.LandManagement
 
             viewItem.IsInitialized = true;
             viewItem.CropEconomicData.IsInitialized = true;
+        }
+
+        public void AssignYield(CropViewItem viewItem, Farm farm)
+        {
+            if (viewItem.CropType.IsSilageCropWithoutDefaults())
+            {
+                AssignDefaultSilageCropYield(viewItem, farm);
+            }
+            else
+            {
+                this.AssignDefaultYield(viewItem, farm);
+            }
+        }
+
+        public void AssignIrrigation(Farm farm, CropViewItem viewItem)
+        {
+            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
+        }
+
+        public void AssignCarbonConcentration(CropViewItem viewItem, Defaults defaults)
+        {
+            viewItem.CarbonConcentration = defaults.CarbonConcentration;
+        }
+
+        public void AssignNitrogenFixation(CropViewItem viewItem)
+        {
+            viewItem.NitrogenFixation = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation;
         }
 
         public void AssignHarvestMethod(CropViewItem viewItem, Farm farm)

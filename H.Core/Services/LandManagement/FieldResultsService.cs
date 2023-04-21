@@ -184,7 +184,7 @@ namespace H.Core.Services.LandManagement
             var result = new List<CropViewItem>();
 
             // Get all of the detail view items for all fields for this farm
-            var detailsStageState = this.GetStageState(farm);
+             var detailsStageState = this.GetStageState(farm);
             if (detailsStageState != null)
             {
                 /*

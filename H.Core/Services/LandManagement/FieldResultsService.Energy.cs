@@ -36,6 +36,21 @@ namespace H.Core.Services.LandManagement
                 var month = manureApplicationViewItem.DateOfApplication.Month;
                 var year = manureApplicationViewItem.DateOfApplication.Year;
 
+                // When volume is 0, only the amount of N may have been entered. Calculate volume now.
+                if (totalVolume == 0)
+                {
+                    var calculatedVolumePerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
+                    if (manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent > 0)
+                    {
+                        totalVolume = calculatedVolumePerHectare /
+                                      manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+
                 var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
                     volumeOfLandAppliedManure: totalVolume);
 

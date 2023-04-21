@@ -105,7 +105,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Sums up the total individual fertilizer component (N-P-K-S) application rates for the entire year.
         /// </summary>
-        private void UpdateApplicationRateTotals()
+        public void UpdateApplicationRateTotals()
         {
             // Update total N fertilizer rate from all fertilizer applications
             this.NitrogenFertilizerRate = this.FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfNitrogenApplied);

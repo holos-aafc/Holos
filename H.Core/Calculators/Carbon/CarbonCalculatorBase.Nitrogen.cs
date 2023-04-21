@@ -203,6 +203,11 @@ namespace H.Core.Calculators.Carbon
         public double NH4FromSyntheticNitogenVolatilized { get; set; }
         public double NH4FromOrganicNitogenVolatilized { get; set; }
 
+        /// <summary>
+        /// (kg NH3-N ha^-1)
+        /// </summary>
+        public double AdjustedAmmoniacalLossFromLandAppliedManure { get; set; }
+
         #endregion
 
         #region Public Methods
@@ -448,11 +453,13 @@ namespace H.Core.Calculators.Carbon
             this.NH4FromSyntheticNitogenVolatilized = this.SyntheticNitrogenPool * volatilizationFraction *
                                                       (1 - volatilizationEmissionFactor);
 
+            this.AdjustedAmmoniacalLossFromLandAppliedManure = totalIndirectEmissionsFromLandAppliedDigestate.AdjustedAmmoniacalLoss;
+
             // Equation 2.6.6-15
             // Equation 2.7.5-15
             this.NH4FromOrganicNitogenVolatilized =
                 (this.OrganicPool * volatilizationFraction * (1 - volatilizationEmissionFactor)) +
-                totalIndirectEmissionsFromLandAppliedManure.AdjustedAmmoniacalLoss;
+                this.AdjustedAmmoniacalLossFromLandAppliedManure;
         }
 
         protected void AdjustSyntheticNitrogenPool()
@@ -723,6 +730,8 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.TotalDirectNitrousOxidePerHectare =
                 totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+
+            this.CurrentYearResults.AdjustedAmmoniacalLossFromLandAppliedManurePerHectare = this.AdjustedAmmoniacalLossFromLandAppliedManure;
 
             this.CurrentYearResults.TotalDirectNitrousOxideForArea = totalDirectNitrousOxide * area;
 

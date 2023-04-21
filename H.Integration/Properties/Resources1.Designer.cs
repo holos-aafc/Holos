@@ -249,20 +249,48 @@ namespace H.Integration.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table 3. SLC polygons to be modelled in the Holos V4 simulations,,,
-        ///SLC polygon #,Ecodistrict #,SLC polygon area (ha),Ecodistrict area (ha)
-        ///187006,187,&quot;1,773,162&quot;,&quot;10,744,579&quot;
-        ///244003,244,&quot;34,915&quot;,&quot;4,151,599&quot;
-        ///244007,244,&quot;103,901&quot;,&quot;4,151,599&quot;
-        ///244010,244,&quot;373,550&quot;,&quot;4,151,599&quot;
-        ///244014,244,&quot;14,536&quot;,&quot;4,151,599&quot;
-        ///244025,244,&quot;8,218&quot;,&quot;4,151,599&quot;
-        ///244028,244,&quot;123,530&quot;,&quot;4,151,599&quot;
-        ///244035,244,&quot;87,220&quot;,&quot;4,151,599&quot;
-        ///244061,244,&quot;346,272&quot;,&quot;4,151,599&quot;
-        ///244070,244,&quot;73,011&quot;,&quot;4,151,599&quot;
-        ///252017,252,&quot;38,413&quot;,&quot;2,405,439&quot;
-        /// [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &quot;Table 1. Per hectare fertilizer product application rates, by province&quot;,,,,,,,
+        ///,Canada,BC,AB,SK,MB,ON,QC
+        ///Estimated per ha fertilizer product application rates:,kg product applied per ha,,,,,,
+        ///Ammonia,6.73,1.13,5.03,2.31,10.89,3.77,3.88
+        ///Urea,29.78,42.86,31.72,9.51,20.1,33.71,46.29
+        ///Urea ammonium nitrate,12.68,0,2.11,4.2,13,50.9,41.08
+        ///Ammonium nitrate,1.27,0,0,0,0,2.43,26.83
+        ///Ammonium sulphate,8.95,12.76,7.66,3.25,7.85,5.62,8.79
+        ///Monoammonium phosphate,15.13,17.02,12.61,4.33,15.77,34.07,7.51
+        ///Diammonium [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string table_1_fertilizer {
+            get {
+                return ResourceManager.GetString("table_1_fertilizer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ,,BC,AB,SK,MB,ON,QC
+        ///Beef cattle,Liquid systems,,,,,,
+        ///,Jan,0.10302466,0.039979165,0.007540075,0.008783668,0.036735774,0.115030024
+        ///,Feb,0.120052721,0.039979165,0.007540075,0.008783668,0.036735774,0.115030024
+        ///,Mar,0.201426339,0.040099664,0.007562801,0.008959227,0.038500636,0.120612867
+        ///,Apr,0.158089603,0.043823059,0.008265033,0.009901048,0.046737867,0.182053778
+        ///,May,0.152891475,0.042126694,0.007945099,0.010882543,0.097599782,0.651475731
+        ///,Jun,0.143710351,0.041156409,0.007762103,0.010454548,0.104473732,0.4 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string table_2_manure_rates {
+            get {
+                return ResourceManager.GetString("table_2_manure_rates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table 3. SLC polygons to be modelled in the Holos V4 simulations,,,,Polygon centroid coordinates,
+        ///SLC polygon #,Ecodistrict #,SLC polygon area (ha),Ecodistrict area (ha),Latitude,Longitude
+        ///187006,187,&quot;1,773,162&quot;,&quot;10,744,579&quot;,58.961092,-77.833703
+        ///244003,244,&quot;34,915&quot;,&quot;4,151,599&quot;,59.202385,-122.951792
+        ///244007,244,&quot;103,901&quot;,&quot;4,151,599&quot;,58.98355,-123.3002
+        ///244010,244,&quot;373,550&quot;,&quot;4,151,599&quot;,58.738711,-121.961827
+        ///244014,244,&quot;14,536&quot;,&quot;4,151,599&quot;,58.879558,-122.624096
+        ///244025,244,&quot;8,218&quot;,&quot;4,151,599&quot;,58.652616,-12 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string table_3_polygons {
             get {

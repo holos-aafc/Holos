@@ -38,10 +38,22 @@ namespace H.Core.Providers.Climate
 
         #endregion
 
+        #region Constructors
+        
         public NasaClimateProvider()
         {
             HTraceListener.AddTraceListener();
         }
+
+        #endregion
+
+        #region Properties
+
+        public TimeSpan Expiry { get; set; } = TimeSpan.FromMinutes(60);
+        public DateTime StartDate { get; set; } = new DateTime(1981, 1, 1);
+        public DateTime EndDate { get; set; } = DateTime.Now;
+
+        #endregion
 
         #region Public Methods        
 
@@ -179,8 +191,8 @@ namespace H.Core.Providers.Climate
         public string GetCorrectApiUrl(double latitude, double longitude)
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
-            var startDate = "19810101";
-            var endDate = DateTime.Today.ToString("yyyyMMdd");
+            var startDate = this.StartDate.ToString("yyyyMMdd");
+            var endDate = this.EndDate.ToString("yyyyMMdd");
             var format = "JSON";
             var baseUrl = @"https://power.larc.nasa.gov";
             var basePath = @"/api/temporal/daily/point?";
@@ -215,9 +227,8 @@ namespace H.Core.Providers.Climate
 
             if (File.Exists(path))
             {
-                const int expiryMinutes = 60;
                 var fileInfo = new FileInfo(path);
-                var expired = DateTime.Now.Subtract(fileInfo.LastAccessTime) > TimeSpan.FromMinutes(expiryMinutes);
+                var expired = DateTime.Now.Subtract(fileInfo.LastAccessTime) > Expiry;
                 if (expired)
                 {
                     return string.Empty;

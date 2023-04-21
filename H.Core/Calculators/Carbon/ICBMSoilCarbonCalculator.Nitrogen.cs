@@ -43,6 +43,12 @@ namespace H.Core.Calculators.Carbon
             this.Year = this.YearIndex + farm.CarbonModellingEquilibriumYear;
 
             var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? currentYearResults.ClimateParameter : currentYearResults.ManagementFactor;
+            if (climateParameterOrManagementFactor == 0)
+            {
+                // Some polygons won't have data for percentage sand, clay, etc. In these cases the re_crop calculations cannot be performed and so the climate/management factor will be 0 in these cases
+                // However, the above/below ground resiude N calculations need a value greater than zero to calculate the N. Assume 1.0 in these situations.
+                climateParameterOrManagementFactor = 1;
+            }
 
             base.SetPoolStartStates(farm);
 
@@ -293,10 +299,10 @@ namespace H.Core.Calculators.Carbon
                 base.CropResiduePool = this.CalculateCropResiduesAtInterval(
                     aboveGroundResidueNitrogenForFieldAtCurrentInterval: base.CurrentYearResults.AboveGroundResiduePool_AGresidueN,
                     aboveGroundResidueNitrogenForFieldAtPreviousInterval: base.PreviousYearResults.AboveGroundResiduePool_AGresidueN,
-                    aboveGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.AboveGroundNitrogenResidueForCrop,
+                    aboveGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.CombinedAboveGroundResidueNitrogen,
                     belowGroundResidueNitrogenForFieldAtCurrentInterval: base.CurrentYearResults.BelowGroundResiduePool_BGresidueN,
                     belowGroundResidueNitrogenForFieldAtPreviousInterval: base.PreviousYearResults.BelowGroundResiduePool_BGresidueN,
-                    belowGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.BelowGroundResidueNitrogenForCrop);
+                    belowGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.CombinedBelowGroundResidueNitrogen);
             }
 
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;

@@ -411,6 +411,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         public CropEnergyResults CropEnergyResults { get; set; }
 
+        /// <summary>
+        /// (kg NH3-N ha^-1)
+        /// </summary>
+        public double AdjustedAmmoniacalLossFromLandAppliedManurePerHectare { get; set; }
+
         #endregion
     }
 }
