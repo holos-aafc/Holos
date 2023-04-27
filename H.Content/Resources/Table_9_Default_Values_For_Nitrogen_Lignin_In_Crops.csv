@@ -58,10 +58,10 @@ Grass-clover mixtures (6),0,0,0,0.0178,0.061,0
 Non-legume hay,0,0,0,0.0134,0.057,0
 ,,,,,,
 ,,,,,,
-"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a.",,,,,,
-"2 Values for the lignin content of residues from IPCC (2019), Table 5.5B. Winter wheat, spring wheat, barley, oats, millet, beans and pulses, soybeans, peanuts, values from Equi-Analytical Laboratories (2018); maize, rice, and sorghum from Cornell University (2017); and potatoes and tubers from Zereu et al. (2014).",,,,,,
-3 Thiagarajan et al. (2018),,,,,,
-4 Simple average of nitrogen content of aboveground and belowground. ,,,,,,
-5 Nitrogen content of aboveground assumed to represent all residue.,,,,,,
-6 Value is an average of N fixing and non-N fixing grasses. ,,,,,,
-"Notes: Uncertainty is assumed to be ±75% for the N content estimates and ±50% for the lignin content estimates, expressed as 95% confidence intervals.",,,,,,
+,,,,,,"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a."
+,,,,,,"2 Values for the lignin content of residues from IPCC (2019), Table 5.5B. Winter wheat, spring wheat, barley, oats, millet, beans and pulses, soybeans, peanuts, values from Equi-Analytical Laboratories (2018); maize, rice, and sorghum from Cornell University (2017); and potatoes and tubers from Zereu et al. (2014)."
+,,,,,,3 Thiagarajan et al. (2018)
+,,,,,,4 Simple average of nitrogen content of aboveground and belowground. 
+,,,,,,5 Nitrogen content of aboveground assumed to represent all residue.
+,,,,,,6 Value is an average of N fixing and non-N fixing grasses. 
+,,,,,,"Notes: Uncertainty is assumed to be Â±75% for the N content estimates and Â±50% for the lignin content estimates, expressed as 95% confidence intervals."
