@@ -195,16 +195,16 @@ namespace H.Core.Providers.Soil
             switch (soilReductionFactors)
             {
                 case SoilReductionFactors.ControlledRelease:
-                    return 0.87;
+                    return 0.86;
 
                 case SoilReductionFactors.NitrificationInhibitor:
-                    return 0.90;
+                    return 0.72;
 
                 case SoilReductionFactors.UreaseInhibitor:
-                    return 1.14;
+                    return 1.04;
 
                 case SoilReductionFactors.NitrificationAndUreaseInhibitor:
-                    return 0.94;
+                    return 0.69;
 
                 case SoilReductionFactors.None:
                     return 1;
