@@ -207,7 +207,7 @@ namespace H.Core.Providers.Soil
                     return 0.69;
 
                 case SoilReductionFactors.None:
-                    return 1;
+                    return defaultValue;
 
                 default:
                     Trace.TraceError($"{nameof(Table_13_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetReductionFactorBasedOnApplicationMethod)} " +

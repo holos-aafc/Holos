@@ -391,7 +391,10 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-4
             // Equation 2.7.5-4
-            this.N2O_NFromResiduesLeaching = this.CropResiduePool * fractionLeach * emissionFactorLeaching;
+            //
+            // Removed on 4-28-2023 until further discussion on crop residue contributions to leaching
+            // this.N2O_NFromResiduesLeaching = this.CropResiduePool * fractionLeach * emissionFactorLeaching;
+            this.N2O_NFromResiduesLeaching = 0;
 
             // Equation 2.6.6-5
             // Equation 2.7.5-5
@@ -422,7 +425,10 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-8
             // Equation 2.7.5-8
-            this.NO3FromResiduesLeaching = this.CropResiduePool * fractionLeach * (1 - emissionFactorLeaching);
+            //
+            // Removed on 4-28-2023 until further discussion on crop residue contributions to leaching
+            // this.NO3FromResiduesLeaching = this.CropResiduePool * fractionLeach * (1 - emissionFactorLeaching);
+            this.NO3FromResiduesLeaching = 0;
 
             this.CurrentYearResults.NO3NFromResiduesLeaching = this.NO3FromResiduesLeaching;
 
