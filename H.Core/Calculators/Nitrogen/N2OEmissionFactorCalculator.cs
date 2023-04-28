@@ -110,6 +110,16 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             Farm farm)
         {
+            if (viewItem == null)
+            {
+                return 0;
+            }
+
+            if (farm.Defaults.UseCustomN2OEmissionFactor)
+            {
+                return farm.Defaults.CustomN2OEmissionFactor;
+            }
+
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
@@ -120,7 +130,8 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, 
+                cropViewItem: viewItem);
 
             var soilReductionFactor = _soilN2OEmissionFactorsProvider.GetReductionFactorBasedOnApplicationMethod(viewItem.SoilReductionFactor);
             if (viewItem.SoilReductionFactor == SoilReductionFactors.Custom)
@@ -147,6 +158,11 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
+            if (farm.Defaults.UseCustomN2OEmissionFactor)
+            {
+                return farm.Defaults.CustomN2OEmissionFactor;
+            }
+
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
@@ -157,7 +173,8 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, 
+                cropViewItem: viewItem);
 
             var ecodistrictManureEmissionFactor = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
@@ -170,6 +187,16 @@ namespace H.Core.Calculators.Nitrogen
 
         public double GetEmissionFactorForCropResidues(CropViewItem viewItem, Farm farm)
         {
+            if (viewItem == null)
+            {
+                return 0;
+            }
+
+            if (farm.Defaults.UseCustomN2OEmissionFactor)
+            {
+                return farm.Defaults.CustomN2OEmissionFactor;
+            }
+
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
@@ -180,7 +207,8 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, cropViewItem: viewItem);
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, 
+                cropViewItem: viewItem);
 
             var emissionFactorForCropResidues = this.CalculateEmissionFactor(
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,

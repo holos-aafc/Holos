@@ -96,8 +96,10 @@ namespace H.Core.Models
         private double _emissionFactorForLeachingAndRunoff;
         private double _emissionFactorForVolatilization;
         private double _fractionOfNLostByVolatilization;
-        private double _useCustomN2OEmissionFactor;
+        private double _customN2OEmissionFactor;
 
+        private bool _useCustomN2OEmissionFactor;
+        
         private EquilibriumCalculationStrategies _equilibriumCalculationStrategy;
 
         // Energy
@@ -221,6 +223,7 @@ namespace H.Core.Models
             this.NORatio = 0.1;
             this.EmissionFactorForLeachingAndRunoff = 0.011; // Updated to IPCC 2019 value
             this.EmissionFactorForVolatilization = 0.01;
+            this.CustomN2OEmissionFactor = 0.003;
 
             this.FractionOfNLostByVolatilization = 0.21;
             this.OtherAnimalsVolitilizationFraction = 0.2;
@@ -730,7 +733,25 @@ namespace H.Core.Models
             set => SetProperty(ref _useCustomPotassiumConversionFactor, value);
         }
 
+        /// <summary>
+        /// Allow the user to set a custom N2O emission factor instead of calculated value (Eq. 2.5.1-8)
+        /// </summary>
+        public bool UseCustomN2OEmissionFactor
+        {
+            get => _useCustomN2OEmissionFactor;
+            set => SetProperty(ref _useCustomN2OEmissionFactor, value);
+        }
 
+        /// <summary>
+        /// Custom user-specified N2O emission factor. Overrides calculated value from Eq. 2.5.1-8
+        /// 
+        /// (kg N2O-N kg^-1 N)
+        /// </summary>
+        public double CustomN2OEmissionFactor
+        {
+            get => _customN2OEmissionFactor;
+            set => SetProperty(ref _customN2OEmissionFactor, value);
+        }
 
         /// <summary>
         /// (kg CO2 ha^-1)
@@ -943,34 +964,25 @@ namespace H.Core.Models
         public double DefaultBiodegradableFractionSwineManure 
         { 
             get => _defaultBiodegradableFractionSwineManure; 
-            set => _defaultBiodegradableFractionSwineManure = value; 
+            set => SetProperty(ref _defaultBiodegradableFractionSwineManure, value); 
         }
 
         public double DefaultBiodegradableFractionOtherManure 
         { 
             get => _defaultBiodegradableFractionOtherManure; 
-            set => _defaultBiodegradableFractionOtherManure = value; 
+            set => SetProperty(ref _defaultBiodegradableFractionOtherManure, value); 
         }
 
         public double DefaultBiodegradableFractionGreenWaste 
         { 
             get => _defaultBiodegradableFractionGreenWaste; 
-            set => _defaultBiodegradableFractionGreenWaste = value; 
+            set => SetProperty(ref _defaultBiodegradableFractionGreenWaste, value); 
         }
 
         public double DefaultNitrogenFixation
         {
             get => _defaultNitrogenFixation;
             set => SetProperty(ref _defaultNitrogenFixation, value);
-        }
-
-        /// <summary>
-        /// Allow the user to set a custom N2O emission factor instead of calculated value (Eq. 2.5.1-8)
-        /// </summary>
-        public double UseCustomN2OEmissionFactor
-        {
-            get => _useCustomN2OEmissionFactor;
-            set => SetProperty(ref _useCustomN2OEmissionFactor, value);
         }
 
         #endregion

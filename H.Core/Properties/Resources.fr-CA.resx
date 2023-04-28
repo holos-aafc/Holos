@@ -3463,6 +3463,9 @@
   <data name="LabelMultipleHarvestsCanBeMadeToThisField" xml:space="preserve">
     <value>De multiples récoltes peuvent être faites dans ce champ tout au long de l’année. pour ajouter une récolte, cliquez sur « ajouter une date de récolte » pour préciser les détails. le foin récolté peut être utilisé comme aliment supplémentaire pour les animaux de pâturage. allez à l’onglet « broutage » pour ajouter ce supplément. le poids des balles est en poids humide.</value>
   </data>
+  <data name="LabelN2OEmissionFactor" xml:space="preserve">
+    <value>N₂O emission factor</value>
+  </data>
   <data name="LabelNetEnergy" xml:space="preserve">
     <value>énergie nette</value>
   </data>
@@ -3865,6 +3868,9 @@
   </data>
   <data name="LabelUseCustomMilkProductionForEwes" xml:space="preserve">
     <value>Utiliser une valeur de production laitière personnalisée pour les brebis</value>
+  </data>
+  <data name="LabelUseCustomN2OEmissionFactor" xml:space="preserve">
+    <value>Use custom N₂O emission factor</value>
   </data>
   <data name="LabelUseCustomVolatilizationFraction" xml:space="preserve">
     <value>utilisez un facteur de conversion du méthane personnalisé</value>

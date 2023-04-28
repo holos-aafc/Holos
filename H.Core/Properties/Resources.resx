@@ -5549,4 +5549,10 @@
   <data name="LabelAmountOfNFromDigestate" xml:space="preserve">
     <value>Amount of N from applied digestate</value>
   </data>
+  <data name="LabelUseCustomN2OEmissionFactor" xml:space="preserve">
+    <value>Use custom N₂O emission factor</value>
+  </data>
+  <data name="LabelN2OEmissionFactor" xml:space="preserve">
+    <value>N₂O emission factor</value>
+  </data>
 </root>

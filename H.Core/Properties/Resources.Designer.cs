@@ -10141,6 +10141,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N₂O emission factor.
+        /// </summary>
+        public static string LabelN2OEmissionFactor {
+            get {
+                return ResourceManager.GetString("LabelN2OEmissionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Net Energy.
         /// </summary>
         public static string LabelNetEnergy {
@@ -11361,6 +11370,15 @@ namespace H.Core.Properties {
         public static string LabelUseCustomMilkProductionForEwes {
             get {
                 return ResourceManager.GetString("LabelUseCustomMilkProductionForEwes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use custom N₂O emission factor.
+        /// </summary>
+        public static string LabelUseCustomN2OEmissionFactor {
+            get {
+                return ResourceManager.GetString("LabelUseCustomN2OEmissionFactor", resourceCulture);
             }
         }
         
