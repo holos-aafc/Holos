@@ -74,6 +74,7 @@ namespace H.Core.Services.LandManagement
         public void AssignIrrigation(Farm farm, CropViewItem viewItem)
         {
             viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
+            viewItem.GrowingSeasonIrrigation = _irrigationService.GetGrowingSeasonIrrigation(farm, viewItem);
         }
 
         public void AssignCarbonConcentration(CropViewItem viewItem, Defaults defaults)
@@ -619,6 +620,12 @@ namespace H.Core.Services.LandManagement
                     viewItem.TillageType = tillageTypeForProvince;
                     viewItem.PastTillageType = tillageTypeForProvince;
                 }
+            }
+
+            if (viewItem.CropType.IsPerennial())
+            {
+                viewItem.TillageType = TillageType.NoTill;
+                viewItem.PastTillageType = TillageType.NoTill;
             }
         }
 

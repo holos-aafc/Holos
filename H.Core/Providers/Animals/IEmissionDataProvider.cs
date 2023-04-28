@@ -9,5 +9,10 @@ namespace H.Core.Providers.Animals
             double meanAnnualPrecipitation, double meanAnnualTemperature,
             double meanAnnualEvapotranspiration, double beddingRate,
             AnimalType animalType, Farm farm);
+
+        IEmissionData GetLandApplicationFactorsForImportedManure(Farm farm,
+            double meanAnnualPrecipitation,
+            double meanAnnualEvapotranspiration,
+            AnimalType animalType);
     }
 }

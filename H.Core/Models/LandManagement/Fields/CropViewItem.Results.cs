@@ -5,6 +5,11 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public partial class CropViewItem
     {
+        public double NO3NFromSyntheticFertilizerLeaching;
+        public double NO3NFromResiduesLeaching;
+        public double NO3NFromManureAndDigestateLeaching;
+        public double TotalN2ONFromManureAndDigestateLeaching;
+
         #region Fields
 
         #endregion

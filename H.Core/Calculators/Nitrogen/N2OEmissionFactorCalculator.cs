@@ -28,11 +28,27 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Public Methods
 
+        /// <summary>
+        /// Equation 2.6.6-1
+        /// Equation 2.6.6-2
+        /// </summary>
         private double CalculateLeachingFraction(
             double precipitation,
             double potentialEvapotranspiration)
         {
-            return 0.3247 * (precipitation / potentialEvapotranspiration) - 0.0247;
+            var result = 0.3247 * (precipitation / potentialEvapotranspiration) - 0.0247;
+            if (result <= 0.05)
+            {
+                return 0.05;
+            }
+            else if (result >= 0.3)
+            {
+                return 0.3;
+            }
+            else
+            {
+                return result;
+            }
         }
 
         /// <summary>
@@ -312,7 +328,7 @@ namespace H.Core.Calculators.Nitrogen
 
             const double temperatureFactor = -0.402;
 
-            var result = (100 * Math.Exp(cropTypeFactor + fertilizerTypeFactor + methodOfApplicationFactor + soilPhFactor + soilCecFactor + temperatureFactor)) / 100;
+            var result = Math.Exp(cropTypeFactor + fertilizerTypeFactor + methodOfApplicationFactor + soilPhFactor + soilCecFactor + temperatureFactor);
 
             return result;
         }

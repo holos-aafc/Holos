@@ -35,6 +35,22 @@ namespace H.Core.Providers.Irrigation
 
         #region Public Methods
 
+        public double GetTotalGrowingSeasonIrrigation(Province province)
+        {
+            var months = new List<Months>() {Months.May, Months.June, Months.July, Months.August, Months.September, Months.October};
+            var result = 0d;
+
+            foreach (var month in months)
+            {
+                var irrigationForMonth = this.GetMonthlyAverageIrrigationDataInstance(month, province);
+                var amount = irrigationForMonth.IrrigationVolume;
+
+                result += amount;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Takes a month and province and finds the corresponding monthly average data instance specific to that input.
         /// </summary>

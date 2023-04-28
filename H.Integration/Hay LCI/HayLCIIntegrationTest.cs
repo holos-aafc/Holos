@@ -7,14 +7,6 @@ using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using H.Core.Services;
 using H.Core;
-using H.Helpers;
-using H.Views.ComponentViews.Beef.Backgrounders;
-using H.Views.ComponentViews.Beef.CowCalf;
-using H.Views.ComponentViews.Beef.Finishers;
-using H.Views.DetailViews.Animals.BeefCattle.CowCalf;
-using H.Views.ResultViews.DetailedEmissionReport;
-using H.Views.SupportingViews.Menu;
-using H.Views.TimelineViews.Animals.BeefCattle;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Prism.Events;
@@ -37,7 +29,6 @@ using System.Diagnostics;
 using CsvHelper;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
-using H.Views.ResultViews.ComponentEmissionsChart;
 
 namespace H.Integration.Hay_LCI
 {
@@ -102,12 +93,10 @@ namespace H.Integration.Hay_LCI
         public static void ClassInitialize(TestContext testContext)
         {
             _defaults = new Defaults();
-            _defaults.DefaultRunInPeriod = 0;// Using ICBM
+            _defaults.DefaultRunInPeriod = 1;
 
-            // We don't have slope, intercept, etc. for perennials in the Tier 2 N lignin table
-            _defaults.CarbonModellingStrategy = CarbonModellingStrategies.ICBM;
+            _defaults.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
             
-
             _globalSettings = new GlobalSettings();
 
             _climateNormalCalculator = new ClimateNormalCalculator();
@@ -152,7 +141,7 @@ namespace H.Integration.Hay_LCI
             // Read in data from files
             _fertilizerRates = this.GetFertilizerRates();
             _manureRates = this.GetManureRates();
-            _slcList = this.ReadSlcs().ToList();
+            _slcList = this.ReadSlcs().Where(x => x.Polygon == 825012).ToList();
 
             this.RunSimulations();
         }
@@ -228,6 +217,17 @@ namespace H.Integration.Hay_LCI
                     var energyCarbonDioxideFromManureSpreadingKgCO2 = 0d;
                     var adjustedAmmoniacalLossFromLandAppliedManure = 0d;
 
+                    var nO3NFromSyntheticFertilizerLeaching = 0d;
+                    var nO3NFromResiduesLeaching = 0d;
+                    var nO3NFromMineralizationLeaching = 0d;
+                    var nO3NFromManureAndDigestateLeaching = 0d;
+                    var totalN2ONFromManureAndDigestateLeachingN2ONField = 0d;
+
+                    var soilCarbonKgCHa = 0d;
+                    var changeInCarbonKgCHa = 0d;
+
+                    var nH4FromSyntheticNitogenVolatilized = 0d;
+
                     foreach (var keyValuePair in grouping)
                     {
                         var farm = keyValuePair.Key;
@@ -253,6 +253,17 @@ namespace H.Integration.Hay_LCI
                         totalOnFarmCroppingEnergyEmissionsKgCO2 += farmEmissionsFor2018.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions;
                         totalUpstreamCroppingEnergyEmissionsKgCO2 += farmEmissionsFor2018.CropEnergyResults.TotalUpstreamCroppingEnergyEmissions;
                         energyCarbonDioxideFromManureSpreadingKgCO2 += farmEmissionsFor2018.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading;
+
+                        nO3NFromSyntheticFertilizerLeaching += farmEmissionsFor2018.NO3NFromSyntheticFertilizerLeaching;
+                        nO3NFromResiduesLeaching += farmEmissionsFor2018.NO3NFromResiduesLeaching;
+                        nO3NFromMineralizationLeaching += farmEmissionsFor2018.NO3NFromMineralizationLeaching;
+                        nO3NFromManureAndDigestateLeaching += farmEmissionsFor2018.NO3NFromManureAndDigestateLeaching;
+                        totalN2ONFromManureAndDigestateLeachingN2ONField += farmEmissionsFor2018.TotalN2ONFromManureAndDigestateLeaching;
+
+                        nH4FromSyntheticNitogenVolatilized += farmEmissionsFor2018.NH4FromSyntheticNitogenVolatilized;
+
+                        soilCarbonKgCHa += farmEmissionsFor2018.SoilCarbon;
+                        changeInCarbonKgCHa += farmEmissionsFor2018.ChangeInCarbon;
                     }
 
                     var farmCount = grouping.Count();
@@ -290,7 +301,18 @@ namespace H.Integration.Hay_LCI
                     AvgTotalOnFarmCroppingEnergyEmissionsKgCO2 = totalOnFarmCroppingEnergyEmissionsKgCO2 /farmCount,
                         AvgTotalUpstreamCroppingEnergyEmissionsKgCO2 = totalUpstreamCroppingEnergyEmissionsKgCO2 / farmCount,
                         AvgEnergyCarbonDioxideFromManureSpreadingKgCO2 = energyCarbonDioxideFromManureSpreadingKgCO2 / farmCount,
-                    };
+
+                        AvgNO3NFromSyntheticFertilizerLeaching = nO3NFromSyntheticFertilizerLeaching / farmCount,
+                        AvgNO3NFromResiduesLeaching = nO3NFromResiduesLeaching / farmCount,
+                        AvgNO3NFromMineralizationLeaching = nO3NFromMineralizationLeaching /farmCount,
+                        AvgNO3NFromManureAndDigestateLeaching = nO3NFromManureAndDigestateLeaching / farmCount,
+                        AvgTotalN2ONFromManureAndDigestateLeachingN2ONField = totalN2ONFromManureAndDigestateLeachingN2ONField / farmCount,
+
+                        AvgTotalNH4FromSyntheticNitogenVolatilizedKgNH3N = nH4FromSyntheticNitogenVolatilized / farmCount,
+
+                        AvgSoilCarbonKgCHa = soilCarbonKgCHa / farmCount,
+                        AvgChangeInCarbonKgCHa = changeInCarbonKgCHa / farmCount,
+                };
 
                     csv.WriteRecords(new[] {record});
                 }
@@ -303,6 +325,8 @@ namespace H.Integration.Hay_LCI
             Directory.CreateDirectory(outputDirectory);
             var path =outputDirectory + Path.DirectorySeparatorChar + "PerPolygonResults.csv";
 
+            
+
             using (var writer = new StreamWriter(path))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
@@ -310,6 +334,7 @@ namespace H.Integration.Hay_LCI
                 {
                     var farm = farmResults.Key;
                     var viewItem = farmResults.Value.Single(x => x.Year == 2018);
+
                     var record = new
                     {
                         FarmName = farm.Name,
@@ -345,14 +370,23 @@ namespace H.Integration.Hay_LCI
                         IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaKgN2ONField = viewItem.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea,
                         IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForAreaKgN2ONField = viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea,
                         TotalNitricOxideForAreaKgNONField = viewItem.TotalNitricOxideForArea,
-                        TotalNitrateLeachingForAreaKgNO3NField = viewItem.TotalNitrateLeachingForArea ,
-                        TotalAmmoniaForAreaKgNH4NField = viewItem.TotalAmmoniaForArea ,
+                        TotalNitrateLeachingForAreaKgNO3NField = viewItem.TotalNitrateLeachingForArea,
+                        TotalAmmoniaForAreaKgNH4NField = viewItem.TotalAmmoniaForArea,
                         AdjustedAmmoniacalLossFromLandAppliedManure = viewItem.AdjustedAmmoniacalLossFromLandAppliedManurePerHectare,
+                        NO3NFromSyntheticFertilizerLeaching = viewItem.NO3NFromSyntheticFertilizerLeaching,
+                        NO3NFromResiduesLeaching = viewItem.NO3NFromResiduesLeaching,
+                        NO3NFromMineralizationLeaching = viewItem.NO3NFromMineralizationLeaching,
+                        NO3NFromManureAndDigestateLeaching = viewItem.NO3NFromManureAndDigestateLeaching,
+                        TotalN2ONFromManureAndDigestateLeachingN2ONField = viewItem.TotalN2ONFromManureAndDigestateLeaching,
+                        NH4FromSyntheticNitogenVolatilized = viewItem.NH4FromSyntheticNitogenVolatilized,
+                        SoilCarbonKgCHa = viewItem.SoilCarbon,
+                        ChangeInCarbonKgCHa = viewItem.ChangeInCarbon,
                     };
 
-                    var results = new[] {record};
+                    var results = new List<object>() { record };
 
                     csv.WriteRecords(results);
+
                 }
             }
         }
@@ -369,13 +403,13 @@ namespace H.Integration.Hay_LCI
                 {
                     _irrigatedResultsByFarm.Add(farm, finalResults);
 
-                    _fieldResultsService.ExportResultsToFile(finalResults, _baseOutputDirectory + Path.DirectorySeparatorChar, InfrastructureConstants.EnglishCultureInfo, MeasurementSystemType.Metric, string.Empty, false, farm);
+                    //_fieldResultsService.ExportResultsToFile(finalResults, _baseOutputDirectory + Path.DirectorySeparatorChar, InfrastructureConstants.EnglishCultureInfo, MeasurementSystemType.Metric, string.Empty, false, farm);
                 }
                 else
                 {
                     _nonIrrigatedResultsByFarm.Add(farm, finalResults);
 
-                    _fieldResultsService.ExportResultsToFile(finalResults, _baseOutputDirectory + Path.DirectorySeparatorChar, InfrastructureConstants.EnglishCultureInfo, MeasurementSystemType.Metric, string.Empty, false, farm);
+                    //_fieldResultsService.ExportResultsToFile(finalResults, _baseOutputDirectory + Path.DirectorySeparatorChar, InfrastructureConstants.EnglishCultureInfo, MeasurementSystemType.Metric, string.Empty, false, farm);
                 }
             }
         }
@@ -397,28 +431,21 @@ namespace H.Integration.Hay_LCI
             foreach (var farm in farms)
             {
                 var field = new FieldSystemComponent();
-                field.StartYear = SimulationEndYear;
+                field.StartYear = SimulationEndYear - 1;
                 field.EndYear = SimulationEndYear;
 
                 var yield = _slcList.Single(x => x.Polygon == farm.PolygonId).Yield;
 
-                var crop = new CropViewItem();
-                crop.CropType = CropType.TameMixed;
-                crop.Area = 1;
-                crop.FieldSystemComponentGuid = field.Guid;
-                crop.Year = SimulationEndYear - 1;
+                for (int i = SimulationEndYear - 1; i <= SimulationEndYear; i++)
+                {
+                    var crop = new CropViewItem();
+                    crop.CropType = CropType.TameMixed;
+                    crop.Area = 1;
+                    crop.FieldSystemComponentGuid = field.Guid;
+                    crop.Year = i;
 
-                field.CropViewItems.Add(crop);
-
-
-                // N2O needs a minimum of two years to calculate N2O
-                var crop2 = new CropViewItem();
-                crop2.CropType = CropType.TameMixed;
-                crop2.Area = 1;
-                crop2.FieldSystemComponentGuid = field.Guid;
-                crop2.Year = SimulationEndYear;
-
-                field.CropViewItems.Add(crop2);
+                    field.CropViewItems.Add(crop);
+                }
 
                 farm.Components.Add(field);
 
@@ -435,14 +462,10 @@ namespace H.Integration.Hay_LCI
                     }
 
                     cropViewItem.Yield = yield;
-
-                    if (cropViewItem.Year != SimulationEndYear)
-                    {
-                        cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                    }
+                    cropViewItem.PercentageOfRootsReturnedToSoil = 30;
                 }
 
-                _fieldResultsService.AssignCarbonInputs(new List<CropViewItem>() {crop, crop2}, farm, field);
+                _fieldResultsService.AssignCarbonInputs(new List<CropViewItem>(field.CropViewItems) {}, farm, field);
 
                 currentCount++;
 
@@ -510,9 +533,9 @@ namespace H.Integration.Hay_LCI
                 _fieldResultsService.AssignDefaultBlendData(fertilizerApplication);
 
                 viewItem.FertilizerApplicationViewItems.Add(fertilizerApplication);
-            }
 
-            viewItem.UpdateApplicationRateTotals();
+                viewItem.UpdateApplicationRateTotals();
+            }
         }
 
         private List<Table3Item> ReadSlcs()
@@ -658,19 +681,19 @@ namespace H.Integration.Hay_LCI
 
             var lines = this.GetLines("H.Integration.Resources.table_2_manure_rates.csv");
 
-            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(2).Take(12), ComponentCategory.BeefProduction, ManureStateType.LiquidNoCrust));
+            //result.AddRange(this.ParseMonthlyManureRates(lines.Skip(2).Take(12), ComponentCategory.BeefProduction, ManureStateType.LiquidNoCrust));
             result.AddRange(this.ParseMonthlyManureRates(lines.Skip(15).Take(12), ComponentCategory.BeefProduction, ManureStateType.SolidStorage));
 
             result.AddRange(this.ParseMonthlyManureRates(lines.Skip(29).Take(12), ComponentCategory.Dairy, ManureStateType.LiquidNoCrust));
             result.AddRange(this.ParseMonthlyManureRates(lines.Skip(42).Take(12), ComponentCategory.Dairy, ManureStateType.SolidStorage));
 
             result.AddRange(this.ParseMonthlyManureRates(lines.Skip(56).Take(12), ComponentCategory.Swine, ManureStateType.LiquidNoCrust));
-            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(69).Take(12), ComponentCategory.Swine, ManureStateType.SolidStorage));
+            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(69).Take(12), ComponentCategory.Swine, ManureStateType.CompostedInVessel));
 
             result.AddRange(this.ParseMonthlyManureRates(lines.Skip(83).Take(12), ComponentCategory.Sheep, ManureStateType.SolidStorage));
 
-            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(97).Take(12), ComponentCategory.Poultry, ManureStateType.LiquidNoCrust));
-            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(110).Take(12), ComponentCategory.Poultry, ManureStateType.SolidStorage));
+            //result.AddRange(this.ParseMonthlyManureRates(lines.Skip(97).Take(12), ComponentCategory.Poultry, ManureStateType.LiquidNoCrust));
+            result.AddRange(this.ParseMonthlyManureRates(lines.Skip(110).Take(12), ComponentCategory.Poultry, ManureStateType.SolidStorageWithOrWithoutLitter));
 
             return result;
         }

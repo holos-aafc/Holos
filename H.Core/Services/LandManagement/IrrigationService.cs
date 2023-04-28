@@ -43,6 +43,11 @@ namespace H.Core.Services.LandManagement
             }
         }
 
+        public double GetGrowingSeasonIrrigation(Farm farm, CropViewItem cropViewItem)
+        {
+            return _irrigationProvider.GetTotalGrowingSeasonIrrigation(farm.Province);
+        }
+
         /// <summary>
         /// Equation 2.1.1-18
         /// </summary>

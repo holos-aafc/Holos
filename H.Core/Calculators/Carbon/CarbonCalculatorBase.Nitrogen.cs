@@ -200,6 +200,9 @@ namespace H.Core.Calculators.Carbon
         public double N2O_NSyntheticNitrogenVolatilization { get; set; }
         public double N2O_NOrganicNitrogenVolatilization { get; set; }
 
+        /// <summary>
+        /// (kg NH4-N ha^-1)
+        /// </summary>
         public double NH4FromSyntheticNitogenVolatilized { get; set; }
         public double NH4FromOrganicNitogenVolatilized { get; set; }
 
@@ -394,6 +397,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.5-5
             this.N2O_NFromMineralizationLeaching = this.MineralPool * fractionLeach * emissionFactorLeaching;
 
+            this.CurrentYearResults.TotalN2ONFromManureAndDigestateLeaching = indirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching +
+                                                                  indirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
+
             // Equation 2.6.6-6
             // Equation 2.7.5-6
             this.N2O_NFromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * emissionFactorLeaching) +
@@ -401,28 +407,39 @@ namespace H.Core.Calculators.Carbon
                                                     indirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
         }
 
-        protected void CalculateActualAmountsLeached(double fractionLeach,
+        protected void CalculateActualAmountsLeached(
+            double fractionLeach,
             LandApplicationEmissionResult indirectEmissionsFromLandAppliedManure,
-            double emissionFactorLeaching, LandApplicationEmissionResult indirectEmissionsFromDigestateApplication)
+            double emissionFactorLeaching, 
+            LandApplicationEmissionResult indirectEmissionsFromDigestateApplication)
         {
             // Equation 2.6.6-7
             // Equation 2.7.5-7
             this.NO3FromSyntheticFertilizerLeaching =
                 this.SyntheticNitrogenPool * fractionLeach * (1 - emissionFactorLeaching);
 
+            this.CurrentYearResults.NO3NFromSyntheticFertilizerLeaching = this.NO3FromSyntheticFertilizerLeaching;
+
             // Equation 2.6.6-8
             // Equation 2.7.5-8
             this.NO3FromResiduesLeaching = this.CropResiduePool * fractionLeach * (1 - emissionFactorLeaching);
 
+            this.CurrentYearResults.NO3NFromResiduesLeaching = this.NO3FromResiduesLeaching;
+
             // Equation 2.6.6-9
             // Equation 2.7.5-9
             this.NO3FromMineralizationLeaching = this.MineralPool * fractionLeach * (1 - emissionFactorLeaching);
+
+            this.CurrentYearResults.NO3NFromMineralizationLeaching = NO3FromMineralizationLeaching;
 
             // Equation 2.6.6-10
             // Equation 2.7.5-10
             this.NO3FromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * (1 - emissionFactorLeaching)) +
                                                   indirectEmissionsFromLandAppliedManure.TotalNitrateLeached +
                                                   indirectEmissionsFromDigestateApplication.TotalNitrateLeached;
+
+            this.CurrentYearResults.NO3NFromManureAndDigestateLeaching = indirectEmissionsFromLandAppliedManure.TotalNitrateLeached +
+                                                                        indirectEmissionsFromDigestateApplication.TotalNitrateLeached;
         }
 
         protected void CalculateVolatilization(double volatilizationFraction,
@@ -453,7 +470,9 @@ namespace H.Core.Calculators.Carbon
             this.NH4FromSyntheticNitogenVolatilized = this.SyntheticNitrogenPool * volatilizationFraction *
                                                       (1 - volatilizationEmissionFactor);
 
-            this.AdjustedAmmoniacalLossFromLandAppliedManure = totalIndirectEmissionsFromLandAppliedDigestate.AdjustedAmmoniacalLoss;
+            this.CurrentYearResults.NH4FromSyntheticNitogenVolatilized = NH4FromSyntheticNitogenVolatilized;
+
+            this.AdjustedAmmoniacalLossFromLandAppliedManure = totalIndirectEmissionsFromLandAppliedDigestate.AdjustedAmmoniacalLoss + totalIndirectEmissionsFromLandAppliedManure.AdjustedAmmoniacalLoss;
 
             // Equation 2.6.6-15
             // Equation 2.7.5-15

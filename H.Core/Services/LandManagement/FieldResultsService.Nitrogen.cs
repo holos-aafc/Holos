@@ -162,10 +162,11 @@ namespace H.Core.Services.LandManagement
         {
             if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
             {
-                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-                    aboveGroundResidueDryMatter: cropViewItem.AboveGroundResidueDryMatter,
-                    cropViewItem.CarbonConcentration,
-                    nitrogenContentInStraw: cropViewItem.NitrogenContentInStraw);
+                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+                    belowGroundResidueDryMatter: cropViewItem.BelowGroundResidueDryMatter,
+                    carbonConcentration: cropViewItem.CarbonConcentration,
+                    nitrogenContentInRoots: cropViewItem.NitrogenContentInRoots,
+                    area: cropViewItem.Area);
             }
             else
             {

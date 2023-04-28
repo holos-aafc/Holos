@@ -21,6 +21,8 @@ namespace H.Core.Models.LandManagement.Fields
         private SoilReductionFactors _soilReductionFactor;
 
         private ObservableCollection<FertilizerApplicationViewItem> _fertilizerApplicationViewItems;
+        public double NO3NFromMineralizationLeaching;
+        public double NH4FromSyntheticNitogenVolatilized;
 
         #endregion
 

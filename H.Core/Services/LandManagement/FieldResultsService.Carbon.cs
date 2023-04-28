@@ -289,6 +289,9 @@ namespace H.Core.Services.LandManagement
             var equilibriumManagementFactor = 0d;
             var equilibriumDigestateInput = 0d;
 
+            var equilibriumAboveGroundNitrogen = 0d;
+            var equilibriumBelowGroundNitrogen = 0d;
+
             var strategy = farm.Defaults.EquilibriumCalculationStrategy;
             if (strategy == EquilibriumCalculationStrategies.CarMultipleYearAverage)
             {
@@ -310,6 +313,9 @@ namespace H.Core.Services.LandManagement
 
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
+
+                equilibriumAboveGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedAboveGroundResidueNitrogen); 
+                equilibriumBelowGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedBelowGroundResidueNitrogen);
             }
 
             // This is the equilibrium year result
@@ -317,6 +323,9 @@ namespace H.Core.Services.LandManagement
 
             result.CombinedAboveGroundInput = equilibriumAboveGroundInput;
             result.CombinedBelowGroundInput = equilibriumBelowGroundInput;
+
+            result.CombinedAboveGroundResidueNitrogen = equilibriumAboveGroundNitrogen;
+            result.CombinedBelowGroundResidueNitrogen = equilibriumBelowGroundNitrogen;
 
             result.CombinedManureInput = equilibriumManureInput;
             result.CombinedDigestateInput = equilibriumDigestateInput;

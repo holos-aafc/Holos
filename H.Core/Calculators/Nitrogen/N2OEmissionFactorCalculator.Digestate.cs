@@ -67,11 +67,17 @@ namespace H.Core.Calculators.Nitrogen
             var results = new List<LandApplicationEmissionResult>();
 
             var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
+            var growingSeasonPrecipitation = farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation;
+
             var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
-            var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration);
+            var growingSeasonEvapotranspiration = farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration;
+
+            var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
             {
+                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration);
+
                 var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
                 landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = digestateApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
@@ -93,8 +99,6 @@ namespace H.Core.Calculators.Nitrogen
 
                 // Equation 4.9.3-4
                 var adjustedAmmoniaEmissions = landApplicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
-                var leachingFraction = CalculateLeachingFraction(annualPrecipitation, evapotranspiration);
 
                 // Equation 4.9.4-1
                 landApplicationEmissionResult.TotalN2ONFromDigestateLeaching = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * landApplicationFactors.EmissionFactorLeach;

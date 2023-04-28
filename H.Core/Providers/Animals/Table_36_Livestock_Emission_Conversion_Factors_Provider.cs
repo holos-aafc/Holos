@@ -30,8 +30,86 @@ namespace H.Core.Providers.Animals
 
         #region Public Methods
 
-        public IEmissionData GetLandApplicationFactors(
-            Farm farm,
+        // Temporary solution until table 69, 70 are implemented
+        public IEmissionData GetLandApplicationFactorsForImportedManure(Farm farm,
+            double meanAnnualPrecipitation,
+            double meanAnnualEvapotranspiration,
+            AnimalType animalType)
+        {
+            var landFactors = this.GetLandApplicationFactors(farm, meanAnnualPrecipitation, meanAnnualEvapotranspiration);
+            var province = farm.DefaultSoilData.Province;
+
+            var volatilizationFraction = 0d;
+            if (animalType.IsDairyCattleType())
+            {
+                switch (province)
+                {
+                    case Province.BritishColumbia:
+                        volatilizationFraction = 0.09;
+                        break;
+
+                    case Province.Alberta:
+                        volatilizationFraction = 0.11;
+                        break;
+
+                    case Province.Saskatchewan:
+                        volatilizationFraction = 0.12;
+                        break;
+
+                    case Province.Manitoba:
+                        volatilizationFraction = 0.13;
+                        break;
+
+                    case Province.Ontario:
+                        volatilizationFraction = 0.16;
+                        break;
+
+                    // Quebec, etc.
+                    default:
+                        volatilizationFraction = 0.15;
+                        break;
+                }
+
+                landFactors.VolatilizationFraction = volatilizationFraction;
+            }
+
+            if (animalType.IsSwineType())
+            {
+                switch (province)
+                {
+                    case Province.BritishColumbia:
+                        volatilizationFraction = 0.21;
+                        break;
+
+                    case Province.Alberta:
+                        volatilizationFraction = 0.128;
+                        break;
+
+                    case Province.Saskatchewan:
+                        volatilizationFraction = 0.12;
+                        break;
+
+                    case Province.Manitoba:
+                        volatilizationFraction = 0.11;
+                        break;
+
+                    case Province.Ontario:
+                        volatilizationFraction = 0.2;
+                        break;
+
+                    // Quebec, etc.
+                    default:
+                        volatilizationFraction = 0.24;
+                        break;
+                }
+
+                landFactors.VolatilizationFraction = volatilizationFraction;
+            }
+
+            return landFactors;
+        }
+
+        public IEmissionData GetLandApplicationFactors(Farm farm,
             double meanAnnualPrecipitation,
             double meanAnnualEvapotranspiration)
         {

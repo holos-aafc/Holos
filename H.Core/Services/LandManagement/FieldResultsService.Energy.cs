@@ -51,6 +51,8 @@ namespace H.Core.Services.LandManagement
                     }
                 }
 
+                totalVolume /= 1000; // This needs to be per 1000 kg/l since manure spreading energy emissions use factors that are in GJ / 1000 kg/l
+
                 var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
                     volumeOfLandAppliedManure: totalVolume);
 
@@ -102,7 +104,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // No fuel is used on grasslands/pasture
-            if (viewItem.CropType.IsPerennial() == false)
+            if (viewItem.CropType.IsNativeGrassland() == false)
             {
                 results.EnergyCarbonDioxideFromFuelUse = this.CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
                     energyFromFuelUse: viewItem.FuelEnergy,

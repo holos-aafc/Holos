@@ -228,6 +228,8 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
+        
+
         /// <summary>
         /// Calculate climate parameter. Will use custom climate data if it exists for the farm, otherwise will use SLC normals
         /// for climate data.

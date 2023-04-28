@@ -779,17 +779,6 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Improved grassland/pasture is pasture that is fertilized and/or irrigated.
-        /// </summary>
-        public bool IsImprovedGrassland
-        {
-            get
-            {
-                return this.CropType.IsPerennial() && (this.AmountOfIrrigation > 0 || this.NitrogenFertilizerRate > 0 || this.PhosphorusFertilizerRate > 0);
-            }
-        }
-
-        /// <summary>
         /// Expressed as a ratio (fraction)
         /// </summary>
         public double NitrogenFertilizerEfficiency
@@ -1144,6 +1133,7 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedExtrarootNitrogen { get; set; }
         public double CombinedAboveGroundResidueNitrogen { get; set; }
         public double CombinedBelowGroundResidueNitrogen { get; set; }
+        public double GrowingSeasonIrrigation { get; set; }
 
         #endregion
 

@@ -17,7 +17,7 @@ namespace H.Core.Services.Animals
         public double TotalIndirectN2ONEmissions { get; set; }
 
         /// <summary>
-        /// (kg NO3)
+        /// (kg NO3-N)
         /// </summary>
         public double TotalNitrateLeached { get; set; }
 
