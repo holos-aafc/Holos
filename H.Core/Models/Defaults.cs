@@ -96,6 +96,7 @@ namespace H.Core.Models
         private double _emissionFactorForLeachingAndRunoff;
         private double _emissionFactorForVolatilization;
         private double _fractionOfNLostByVolatilization;
+        private double _useCustomN2OEmissionFactor;
 
         private EquilibriumCalculationStrategies _equilibriumCalculationStrategy;
 
@@ -961,6 +962,15 @@ namespace H.Core.Models
         {
             get => _defaultNitrogenFixation;
             set => SetProperty(ref _defaultNitrogenFixation, value);
+        }
+
+        /// <summary>
+        /// Allow the user to set a custom N2O emission factor instead of calculated value (Eq. 2.5.1-8)
+        /// </summary>
+        public double UseCustomN2OEmissionFactor
+        {
+            get => _useCustomN2OEmissionFactor;
+            set => SetProperty(ref _useCustomN2OEmissionFactor, value);
         }
 
         #endregion

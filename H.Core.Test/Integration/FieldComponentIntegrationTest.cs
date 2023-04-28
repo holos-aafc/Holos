@@ -30,6 +30,7 @@ namespace H.Core.Test.Integration
         private GlobalSettings _globalSettings;
         private RotationComponentHelper _rotationComponentHelper;
         private ApplicationData _applicationData;
+        private NasaClimateProvider _nasaClimateProvider;
 
         [TestInitialize]
         public void TestInitialize()
@@ -51,6 +52,8 @@ namespace H.Core.Test.Integration
             _rotationComponentHelper = new RotationComponentHelper();
 
             _applicationData = new ApplicationData();
+
+            _nasaClimateProvider = new NasaClimateProvider();
         }
 
         [TestMethod]
@@ -156,9 +159,11 @@ namespace H.Core.Test.Integration
             farm.GeographicData = _geographicDataProvider.GetGeographicalData(farm.PolygonId);
             farm.Longitude = -103.867;
             farm.Latitude = 50.254;
-            farm.ClimateData = _climateProvider.Get(50.254, -103.867, TimeFrame.TwoThousandToCurrent);
-            farm.Defaults.DefaultRunInPeriod = 20;
 
+            _nasaClimateProvider.EndDate = new DateTime(2022, 8, 18);
+            var nasaClimateForDate = _nasaClimateProvider.GetCustomClimateData(50.254, -103.867);
+            farm.ClimateData = _climateProvider.Get(nasaClimateForDate, TimeFrame.TwoThousandToCurrent);
+            farm.Defaults.DefaultRunInPeriod = 20;
 
 
             var fieldComponent = new FieldSystemComponent()

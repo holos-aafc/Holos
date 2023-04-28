@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Resources;
+using System.Threading;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Tools;
@@ -43,6 +45,26 @@ namespace H.Core.Providers.Climate
             return _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
         }
 
+        public ClimateData Get(List<DailyClimateData> dailyClimateData, TimeFrame timeFrame)
+        {
+            if (dailyClimateData.Any() == false)
+            {
+                return null;
+            }
+
+            var temperatureNormals = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, timeFrame);
+            var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, timeFrame);
+            var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, timeFrame);
+
+            return new ClimateData()
+            {
+                DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData),
+                TemperatureData = temperatureNormals,
+                PrecipitationData = precipitationNormals,
+                EvapotranspirationData = evapotranspirationNormals,
+            };
+        }
+
         public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame)
         {
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
@@ -52,17 +74,7 @@ namespace H.Core.Providers.Climate
                 return null;
             }
 
-            var temperatureNormals = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, climateNormalTimeFrame);
-            var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, climateNormalTimeFrame);
-            var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, climateNormalTimeFrame);
-
-            return new ClimateData()
-            {
-                DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData),
-                TemperatureData = temperatureNormals,
-                PrecipitationData = precipitationNormals,
-                EvapotranspirationData = evapotranspirationNormals,
-            };
+            return this.Get(dailyClimateData, climateNormalTimeFrame);
         }
 
         public ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame)
