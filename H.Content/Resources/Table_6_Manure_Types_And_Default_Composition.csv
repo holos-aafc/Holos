@@ -21,14 +21,14 @@ Goats,Pasture/range/paddock,75 (13),1.096 (14),6.182 (1),0.271 (14),5.64
 Horses,Pasture/range/paddock,80.0 (15),0.590 (15),6.182 (1),0.140 (15),10.48
 Mules,Pasture/range/paddock,80.0 (16),0.590 (16),6.182 (1),0.140 (16),10.48
 Bison,Pasture (17),86,0.294,6.182,0.047,21.02
-Llamas,Solid Storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
-Alpacas,Solid Storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
-Deer,Solid Storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
-Elk,Solid Storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
-Goats,Solid Storage,53.58 (20),0.729 (20),8.58 (3),0.280 (20),11.77
-Horses,Solid Storage,56.65 (21),0.864 (21),8.58 (3),0.155 (21),9.93
-Mules,Solid Storage,56.65 (22),0.864 (22),8.58 (3),0.155 (22),9.93
-Bison,Solid Storage,35 (23),0.638 (23),8.58 (3),0.214 (23),13.45
+Llamas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
+Alpacas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
+Deer,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
+Elk,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
+Goats,Solid storage,53.58 (20),0.729 (20),8.58 (3),0.280 (20),11.77
+Horses,Solid storage,56.65 (21),0.864 (21),8.58 (3),0.155 (21),9.93
+Mules,Solid storage,56.65 (22),0.864 (22),8.58 (3),0.155 (22),9.93
+Bison,Solid storage,35 (23),0.638 (23),8.58 (3),0.214 (23),13.45
 Dairy cattle,Daily spread (24),94.41,0.209,2.19,0.06,10.48
 Dairy cattle,Liquid/slurry with natural crust (24),94.41,0.209,2.19,0.06,10.48
 Dairy cattle,Liquid/slurry with no natural crust (24),94.41,0.209,2.19,0.06,10.48
