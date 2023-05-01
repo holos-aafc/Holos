@@ -99,6 +99,7 @@
     <Compile Include="CsvReader.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="MessageBase.cs" />
+    <Compile Include="MultiKeyDictionary.cs" />
     <Compile Include="NetworkHelper.cs" />
     <Compile Include="NotificationInformation.cs" />
     <Compile Include="ObservableCollectionExtensions.cs" />

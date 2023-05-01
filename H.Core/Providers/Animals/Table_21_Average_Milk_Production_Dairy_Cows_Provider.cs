@@ -28,11 +28,9 @@ namespace H.Core.Providers.Animals
 
         public Table_21_Average_Milk_Production_Dairy_Cows_Provider()
         {
-
             _provinceStringConverter = new ProvinceStringConverter();
 
             this.AvgMilkProductionData = this.ReadFile();
-
         }
 
         #endregion

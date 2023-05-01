@@ -1636,15 +1636,15 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ,,,,,,CFP at plant gate ,,
         ///,,,,,,Production (US numbers),Application,
-        ///Fert product,Abbrev.,%N,%P,%K,%S,kg CO2 eq. kg product -1,,
+        ///Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source
         ///Urea,Urea,46,0,0,0,1.18,0.73,Brentrup et al. 2016.
         ///Ammonia,NH3,82,0,0,0,1.07,,
-        ///Urea ammonium nitrate,UAN,28,0,0,0,1.5,0.25,Brentrup et al. 2016.
+        ///Urea ammonium nitrate,UAN,30,0,0,0,1.5,0.25,Brentrup et al. 2016.
         ///Ammonium nitrate,AN,34,0,0,0,2.52,,Brentrup et al. 2016.
         ///Calcium ammonium nitrate,CAN,27,0,0,0,2.08,,Brentrup et al. 2016.
         ///Ammonium sulphate,AS,20.5,0,0,24,0.69,,Brentrup et al. 2016.
         ///MES,,13,33,0,15,,,
-        ///Monoammonium phosphate,M [rest of string was truncated]&quot;;.
+        ///Monoammonium  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
             get {
@@ -1742,14 +1742,13 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N fraction (% wet wt),C fraction (% wet wt),P fraction (% wet wt),C:N ratio
-        ///Beef cattle,Pasture,86 (1),0.290 (1),6.180 (1),0.047 (1),21.02
+        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N content (% wet wt),C content (% wet wt),P content (% wet wt),C:N ratio
+        ///Beef cattle,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02
         ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
-        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.89
-        ///Beef cattle,Composted passive (4),62.35,0.659,9.16,0.255,13.9
-        ///Beef cattle,Composted intensive (5),37.42,1.041,14.48,0.398,13.91
-        ///Dairy cattle,Pasture,50 (6),1 (6),??,0.118 (6),??
-        ///Dairy cattle,Deep bedding (2),60.08  [rest of string was truncated]&quot;;.
+        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88
+        ///Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9
+        ///Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91
+        ///Dairy cattle,Pasture/range/paddock,86 (1),-9 (6),6.182 (1),0.118 (6),-9  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_6_Manure_Types_And_Default_Composition {
             get {
@@ -1848,6 +1847,22 @@ namespace H.Content.Properties {
         public static string Table_67_Output_For_Report {
             get {
                 return ResourceManager.GetString("Table_67_Output_For_Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Table 69. Fractions of dairy cattle N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990–2020, at a provincial scale&quot;,,,,,,,,,,,
+        ///Implied EF (kg NH3-N volatilized kg-1 manure N applied),,,,,,,,,,,
+        ///,,,,,,,,,,,
+        ///Year,BC,AB,SK,MB,ON,QC,NS,NB,NL,PEI,
+        ///1990,0.1,0.13,0.15,0.16,0.18,0.17,0.2,0.2,0.19,0.18,
+        ///1995,0.09,0.13,0.15,0.16,0.18,0.17,0.19,0.19,0.19,0.18,
+        ///2000,0.09,0.12,0.14,0.15,0.17,0.16,0.18,0.18,0.19,0.18,
+        ///2005,0.08,0.11,0.13,0.14,0.17,0.15,0.16,0.1 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_69_Fractions_of_dairy_cattle_N_volatilized {
+            get {
+                return ResourceManager.GetString("Table_69_Fractions_of_dairy_cattle_N_volatilized", resourceCulture);
             }
         }
         

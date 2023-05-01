@@ -323,6 +323,9 @@
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
+    <Compile Include="Providers\Animals\Table 69\ITable_69_Provider.cs" />
+    <Compile Include="Providers\Animals\Table 69\Table_69_Data.cs" />
+    <Compile Include="Providers\Animals\Table 69\Table_69_Provider.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Data.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider.cs" />

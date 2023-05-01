@@ -348,6 +348,9 @@ namespace H.Content
 
                 case CsvResourceNames.PoultryNExcretionParameterValues:
                     return SplitFileIntoLines(Resource.Table_41_Poultry_N_Excretion_Rate_Parameter_Values);
+
+                case CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure:
+                    return SplitFileIntoLines(Resource.Table_69_Fractions_of_dairy_cattle_N_volatilized);
                 default:
                     return null;
             }
