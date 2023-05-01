@@ -39,7 +39,7 @@ Swine,Liquid/slurry with natural crust (26),95.16,0.325,1.29,0.118,3.97
 Swine,Liquid/slurry with no natural crust (26),95.16,0.325,1.29,0.118,3.97
 Swine,Liquid/slurry with solid cover (26),95.16,0.325,1.29,0.118,3.97
 Swine,Deep pit under barn (26),95.16,0.325,1.29,0.118,3.97
-Swine,Anaerobic digestion ,0,0,0,0,0
+Swine,Anaerobic digestion ,-9,-9,-9,-9,-9
 ,,,,,,
 ,,,,,,
 "Data on manure composition were organized from multiple publications based on Canadian studies (extension documents, reports, journal publications). Where data from Canada were not available, data were sourced from outside Canada – any non-Canadian data used is indicated in the relevant notes below.",,,,,,
