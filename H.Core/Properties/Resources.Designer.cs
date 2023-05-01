@@ -14578,7 +14578,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N2O.
+        ///   Looks up a localized string similar to N₂O.
         /// </summary>
         public static string TitleN2O {
             get {
