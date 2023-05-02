@@ -606,7 +606,7 @@ namespace H.Core.Providers.Animals
            Table 11.3 (Fracvolatilization for pasture/range/paddock; EFleach))
          *
          * 1 * Direct N2O EFs for dung and urine deposited on pasture are derived from the National Inventory Report (ECCC, 2022),
-               Table A3.4–33 for all livestock groups. Note: All emissions related to manure deposited by livestock directly on pasture are accounted for in Section 5.
+               Table A3.4–33 for all livestock groups. Note: All emissions related to manure deposited by livestock directly on pasture are accounted for in Section 5
          *
          * 2 * In IPCC (2019), Table 11.3: Disaggregation by climate for EFvolatilization (based on long-term averages): Wet climates 
                occur in temperate and boreal zones where the ratio of annual precipitation (P):potential evapotranspiration (PE) >1; Dry climates occur in temperate and 
