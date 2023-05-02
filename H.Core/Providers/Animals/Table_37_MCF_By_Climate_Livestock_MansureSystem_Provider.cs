@@ -7,7 +7,7 @@ namespace H.Core.Providers.Animals
     /// <summary>
     /// Table 37.
     ///
-    /// Methane conversion factors (MCF) by climate zone, by livestock group and manure handling system
+    /// Methane conversion factors (MCF) by climate zone and manure handling system
     /// </summary>
     public class Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider
     {
@@ -87,6 +87,20 @@ namespace H.Core.Providers.Animals
                         return 0.37;
                     case ClimateZones.WarmTemperateMoist:
                         return 0.41;
+                }
+            }
+
+            if (manureStateType == ManureStateType.CompostInVessel)
+            {
+                switch (climateZone)
+                {
+                    case ClimateZones.CoolTemperateMoist:
+                    case ClimateZones.CoolTemperateDry:
+                    case ClimateZones.BorealDry:
+                    case ClimateZones.BorealMoist:
+                    case ClimateZones.WarmTemperateDry:
+                    case ClimateZones.WarmTemperateMoist:
+                        return 0.005;
                 }
             }
 
