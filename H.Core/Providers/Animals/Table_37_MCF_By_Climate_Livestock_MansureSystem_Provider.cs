@@ -90,7 +90,7 @@ namespace H.Core.Providers.Animals
                 }
             }
 
-            if (manureStateType == ManureStateType.CompostInVessel)
+            if (manureStateType == ManureStateType.CompostedInVessel)
             {
                 switch (climateZone)
                 {

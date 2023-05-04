@@ -59,7 +59,7 @@ namespace H.Core.Test.Providers.Animals
         {
             _dietCoefficientsData = _dietCoefficientsProvider.GetDietCoefficientsDataInstance(AnimalType.DairyDryCow, DietType.CloseUp);
             Assert.AreEqual(_dietCoefficientsData.TotalDigestibleNutrients, 69);
-            Assert.AreEqual(_dietCoefficientsData.CrudeProteinContent, 18.32);
+            Assert.AreEqual(_dietCoefficientsData.CrudeProteinContent, 0.183);
 
             _dietCoefficientsData = _dietCoefficientsProvider.GetDietCoefficientsDataInstance(AnimalType.DairyBulls, DietType.MediumEnergy);
             Assert.AreEqual(_dietCoefficientsData.TotalDigestibleNutrients, 68);
