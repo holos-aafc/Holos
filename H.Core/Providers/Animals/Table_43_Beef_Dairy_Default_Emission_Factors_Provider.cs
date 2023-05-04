@@ -7,7 +7,7 @@ using H.Infrastructure;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 43. Default emission factors (kg NH3-N kg-1 TAN) for housing storage and land application of beef
+    /// Table 43. Default emission factors (kg NH3-N kg-1 TAN) for housing, storage and land application of beef
     /// and dairy cattle manure at the reference temperature of 15 °C (Chai et al., 2014,2016).
     /// </summary>
     public class Table_43_Beef_Dairy_Default_Emission_Factors_Provider
