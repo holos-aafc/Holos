@@ -34,6 +34,7 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
+                case HousingType.Pasture:
                 case HousingType.FlatPasture:
                 {
                     return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()

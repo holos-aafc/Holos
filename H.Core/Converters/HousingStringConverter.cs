@@ -20,6 +20,8 @@ namespace H.Core.Converters
                     return HousingType.OpenRangeOrHills;
                 case "tiestall":
                     return HousingType.TieStall;
+                case "housedewes":
+                    return HousingType.HousedEwes;
                 case "smallfreestall":
                     return HousingType.SmallFreeStall;
                 case "largefreestall":

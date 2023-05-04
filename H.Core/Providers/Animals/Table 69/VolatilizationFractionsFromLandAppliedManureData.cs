@@ -2,7 +2,7 @@
 
 namespace H.Core.Providers.Animals.Table_69
 {
-    public class Table_69_Data
+    public class VolatilizationFractionsFromLandAppliedManureData
     {
         #region Properties
 

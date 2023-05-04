@@ -153,5 +153,6 @@
         PoultryNExcretionParameterValues,
 
         DairyFractionOfNAmmoniaLandAppliedManure,
+        SwineFractionOfNAmmoniaLandAppliedManure,
     }
 }

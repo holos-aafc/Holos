@@ -9,20 +9,20 @@ using H.Infrastructure;
 
 namespace H.Core.Providers.Animals.Table_69
 {
-    public class Table_69_Provider : ITable_69_Provider
+    public class Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider : IVolatilizationFractionsFromLandAppliedManureProvider
     {
         #region Fields
 
-        private readonly MultiKeyDictionary<int, Province, Table_69_Data> _data;
-        private List<Province> _validProvinces;
+        protected readonly MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData> _data;
+        protected readonly List<Province> _validProvinces;
 
         #endregion
 
         #region Constructors
 
-        public Table_69_Provider()
+        public Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider()
         {
-            _data = new MultiKeyDictionary<int, Province, Table_69_Data>();
+            _data = new MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData>();
 
             _validProvinces = new List<Province>()
             {
@@ -45,13 +45,13 @@ namespace H.Core.Providers.Animals.Table_69
 
         #region Public Methods
 
-        public Table_69_Data GetData(AnimalType animalType, Province province, int year)
+        public virtual VolatilizationFractionsFromLandAppliedManureData GetData(AnimalType animalType, Province province, int year)
         {
-            var notFound = new Table_69_Data();
+            var notFound = new VolatilizationFractionsFromLandAppliedManureData();
 
             if (animalType.IsDairyCattleType() == false)
             {
-                Trace.TraceError($"{nameof(Table_69_Provider)}.{nameof(Table_69_Provider.GetData)}" +
+                Trace.TraceError($"{nameof(Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
                                  $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
 
                 return notFound;
@@ -59,7 +59,7 @@ namespace H.Core.Providers.Animals.Table_69
 
             if (_validProvinces.Contains(province) == false)
             {
-                Trace.TraceError($"{nameof(Table_69_Provider)}.{nameof(Table_69_Provider.GetData)}" +
+                Trace.TraceError($"{nameof(Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
                                  $" unable to find province {province} in the available data.");
 
                 return notFound;
@@ -72,11 +72,9 @@ namespace H.Core.Providers.Animals.Table_69
 
         #region Private Methods
 
-        private void ReadFile()
+        protected void ReadLines(List<string[]> lines)
         {
-            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure).ToList();
-
-            foreach (var line in fileLines.Skip(4))
+            foreach (var line in lines.Skip(4))
             {
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
@@ -88,7 +86,7 @@ namespace H.Core.Providers.Animals.Table_69
 
                 foreach (var province in _validProvinces)
                 {
-                    _data[year][province] = new Table_69_Data()
+                    _data[year][province] = new VolatilizationFractionsFromLandAppliedManureData()
                     {
                         Year = year,
                         Province = province,
@@ -98,6 +96,13 @@ namespace H.Core.Providers.Animals.Table_69
                     column++;
                 }
             }
+        }
+
+        private void ReadFile()
+        {
+            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure).ToList();
+
+            this.ReadLines(fileLines);
         }
 
         #endregion

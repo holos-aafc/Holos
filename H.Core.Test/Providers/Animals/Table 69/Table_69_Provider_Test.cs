@@ -30,7 +30,7 @@ namespace H.Core.Test.Providers.Animals.Table_69
     {
         #region Fields
         
-        private ITable_69_Provider _sut; 
+        private IVolatilizationFractionsFromLandAppliedManureProvider _sut; 
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace H.Core.Test.Providers.Animals.Table_69
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new Table_69_Provider();
+            _sut = new Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
         }
 
         [TestCleanup]
