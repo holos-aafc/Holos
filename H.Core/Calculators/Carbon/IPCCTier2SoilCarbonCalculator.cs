@@ -234,10 +234,10 @@ namespace H.Core.Calculators.Carbon
         public CropViewItem CalculateRunInPeriod(
             Farm farm,
             List<CropViewItem> runInPeriodItems)
-        {                        
+        {
             // Calculate TFac, WFac, etc. for each item in the run in period
             foreach (var item in runInPeriodItems)
-            {                
+            {
                 this.CalculateClimateAdjustments(
                     currentYearViewItem: item,
                     farm: farm);
@@ -380,6 +380,8 @@ namespace H.Core.Calculators.Carbon
                 f8: f8,
                 totalInputs: inputs,
                 ligninContent: currentYearViewItem.LigninContent);
+
+            
 
             var activePoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRateActive, currentYearViewItem.TillageType).Value;
             var tillageFactor = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.TillageModifier, currentYearViewItem.TillageType).Value;

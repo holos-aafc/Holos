@@ -240,6 +240,7 @@ namespace H.Core.Enumerations
             {
                 case CropType.BarleySilage:
                 case CropType.OatSilage:
+                case CropType.SilageCorn:
                 case CropType.TriticaleSilage:
                 case CropType.WheatSilage:
                     return true;
@@ -269,7 +270,7 @@ namespace H.Core.Enumerations
                     return CropType.Wheat;
                 case CropType.CornSilage:
                 case CropType.SilageCorn:
-                    return CropType.Corn;
+                    return CropType.GrainCorn;
                 case CropType.CerealSilage:
                     return CropType.Cereals;
                 default:

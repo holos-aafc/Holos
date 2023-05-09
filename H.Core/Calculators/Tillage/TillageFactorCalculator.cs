@@ -110,7 +110,6 @@ namespace H.Core.Calculators.Tillage
             }
 
             var simplifiedSoilCategory = soilFunctionalCategory.GetSimplifiedSoilCategory();
-
             if (cropType.IsPerennial())
             {
                 return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear);
@@ -130,8 +129,9 @@ namespace H.Core.Calculators.Tillage
         /// <summary>
         /// For perennials, the 0.9 value is applied in the first year (year of planting), in the years, after the no-till factor is used.
         /// </summary>
-        private double CalculateTillageFactorForPerennials(SoilFunctionalCategory soilFunctionalCategory,
-                                                           int perennialYear)
+        private double CalculateTillageFactorForPerennials(
+            SoilFunctionalCategory soilFunctionalCategory, 
+            int perennialYear)
         {
             if (perennialYear == 1)
             {
@@ -143,8 +143,9 @@ namespace H.Core.Calculators.Tillage
             }
         }
 
-        private double CalculateCropTillageFactor(SoilFunctionalCategory soilFunctionalCategory,
-                                                  TillageType tillageType)
+        private double CalculateCropTillageFactor(
+            SoilFunctionalCategory soilFunctionalCategory, 
+            TillageType tillageType)
         {
             var result = _tillageFactorTableRows.SingleOrDefault(x => x.SoilFunctionalCategory == soilFunctionalCategory && x.TillageType == tillageType);
             if (result != null)
