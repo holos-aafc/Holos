@@ -26,6 +26,8 @@ namespace H.Core.Providers.Animals
 
         #region Fields
 
+        private List<Table_29_Default_Manure_Excreted_Provider_Data> _excretionRates = new List<Table_29_Default_Manure_Excreted_Provider_Data>();
+
         private readonly List<ManureStateType> _availableStateTypes = new List<ManureStateType>()
         {
             ManureStateType.Liquid,
@@ -49,7 +51,7 @@ namespace H.Core.Providers.Animals
             this.ReadFile();
         }
 
-        public MultiKeyDictionary<AnimalType, ManureStateType, double> Data { get; } = new MultiKeyDictionary<AnimalType, ManureStateType, double>();
+        public MultiKeyDictionary<AnimalType, ManureStateType, double> PercentageTotalManureProducedInSystem { get; } = new MultiKeyDictionary<AnimalType, ManureStateType, double>();
 
         #endregion
 
@@ -70,16 +72,54 @@ namespace H.Core.Providers.Animals
 
                 foreach (var manureStateType in _availableStateTypes)
                 {
-                    this.Data[animalType][manureStateType] = double.Parse(line[column], InfrastructureConstants.EnglishCultureInfo);
+                    this.PercentageTotalManureProducedInSystem[animalType][manureStateType] = double.Parse(line[column], InfrastructureConstants.EnglishCultureInfo);
 
                     column++;
                 }
+
+                var excretionRateForAnimal = double.Parse(line[5].ParseUntilOrDefault(), InfrastructureConstants.EnglishCultureInfo);
+                _excretionRates.Add(new Table_29_Default_Manure_Excreted_Provider_Data() {AnimalType = animalType, ManureExcretionRate = excretionRateForAnimal});
             }
         }
 
         #endregion
 
-        public double GetManureExcretionRate(AnimalType animalType, ManureStateType manureStateType)
+        public double GetManureExcretionRate(AnimalType animalType)
+        {
+            AnimalType animalTypeLookup = animalType;
+            if (animalType.IsBeefCattleType())
+            {
+                animalTypeLookup = AnimalType.Beef;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                animalTypeLookup = AnimalType.Dairy;
+            }
+            else if (animalType.IsSheepType())
+            {
+                animalTypeLookup = AnimalType.Sheep;
+            }
+            else if (animalType.IsSwineType())
+            {
+                animalTypeLookup = AnimalType.Swine;
+            }
+
+            var result = _excretionRates.SingleOrDefault(x => x.AnimalType == animalTypeLookup);
+            if (result != null)
+            {
+                return result.ManureExcretionRate;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(Table_29_Default_Manure_Excreted_Provider)}.{nameof(GetManureExcretionRate)}" +
+                                 $" unable to get data for manure excretion rate for animal type: {animalType}." +
+                                 $" Returning default value of 0.");
+
+                return 0;
+            }
+        }
+
+        public double GetPercentageOfManureProducedInSystem(AnimalType animalType, ManureStateType manureStateType)
         {
             ManureStateType manureStateLookup;
             if (manureStateType.IsGrazingArea())
@@ -117,13 +157,16 @@ namespace H.Core.Providers.Animals
                 animalTypeLookup = AnimalType.Swine;
             }
 
-            return 1;
+            if (this.PercentageTotalManureProducedInSystem.ContainsKey(animalTypeLookup))
+            {
+                if (this.PercentageTotalManureProducedInSystem[animalTypeLookup].ContainsKey(manureStateLookup))
+                {
+                    return this.PercentageTotalManureProducedInSystem[animalTypeLookup][manureStateLookup];
+                }
+            }
 
-            var result = this.Data[animalTypeLookup][manureStateLookup];
-
-
-            Trace.TraceError($"{nameof(Table_29_Default_Manure_Excreted_Provider)}.{nameof(GetManureExcretionRate)}" +
-                             $" unable to get data for manure excretion rate for animal type: {animalType} and manure type: {manureStateType}." +
+            Trace.TraceError($"{nameof(Table_29_Default_Manure_Excreted_Provider)}.{nameof(GetPercentageOfManureProducedInSystem)}" +
+                             $" unable to get data for animal type: {animalType} and manure type: {manureStateType}." +
                              $" Returning default value of 0.");
 
             return 0;
