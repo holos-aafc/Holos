@@ -115,5 +115,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("Forage", typeof(Resources))]
         Forage,
+
+        [LocalizedDescription("EnumBoarsDietType", typeof(Resources))]
+        Boars,
     }
 }

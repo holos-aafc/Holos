@@ -35,34 +35,18 @@ namespace H.Core.Providers.Animals
 
         public Dictionary<DietType, double> GetByProvince(Province province)
         {
-            switch (province)
+            return new Dictionary<DietType, double>
             {
-                
-                case Province.BritishColumbia:
-                case Province.Alberta:
-                case Province.Saskatchewan:
-                case Province.Manitoba:
-                case Province.Ontario:
-                case Province.Quebec:
-                case Province.NewBrunswick:
-                case Province.NovaScotia:
-                case Province.PrinceEdwardIsland:
-                case Province.Newfoundland:
-                    return new Dictionary<DietType, double>
-                    {
-                        {DietType.Gestation, 14.28},
-                        {DietType.Lactation, 19.07},
-                        {DietType.NurseryWeanersStarter1, 23.88},
-                        {DietType.NurseryWeanersStarter2, 21.45},
-                        {DietType.GrowerFinisherDiet1, 20.27},
-                        {DietType.GrowerFinisherDiet2, 19.89},
-                        {DietType.GrowerFinisherDiet3, 19.92},
-                        {DietType.GrowerFinisherDiet4, 19.66},
-                        {DietType.Boar, 20.1}
-                    };
-
-               
-                    }
+                {DietType.Gestation, 14.28},
+                {DietType.Lactation, 19.07},
+                {DietType.NurseryWeanersStarter1, 23.88},
+                {DietType.NurseryWeanersStarter2, 21.45},
+                {DietType.GrowerFinisherDiet1, 20.27},
+                {DietType.GrowerFinisherDiet2, 19.89},
+                {DietType.GrowerFinisherDiet3, 19.92},
+                {DietType.GrowerFinisherDiet4, 19.66},
+                {DietType.Boars, 20.1}
+            };
         }
 
         public double GetCrudeProteinInFeedForSwineGroupByProvince(Province province, DietType dietType)

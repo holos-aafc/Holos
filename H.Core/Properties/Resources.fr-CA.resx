@@ -612,6 +612,9 @@
   <data name="EnumBoar" xml:space="preserve">
     <value>verrats</value>
   </data>
+  <data name="EnumBoarsDietType" xml:space="preserve">
+    <value>Boars</value>
+  </data>
   <data name="EnumBreedingStock" xml:space="preserve">
     <value>reproducteurs</value>
   </data>

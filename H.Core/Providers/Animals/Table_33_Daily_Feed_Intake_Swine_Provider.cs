@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using H.Content;
 using H.Core.Enumerations;
+using H.Core.Providers.Feed;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
@@ -9,6 +10,8 @@ namespace H.Core.Providers.Animals
     /// <summary>
     /// Table 33. Daily feed intake (as fed) for each pig group, by province.
     /// <para>Source: Greenhouse Gas System Pork Protocol (2006)</para>
+    ///
+    /// No longer used, feed intake amounts are now associated with individual diets from the the <see cref="DietProvider"/>.
     /// </summary>
     public class Table_33_Daily_Feed_Intake_Swine_Provider
     {

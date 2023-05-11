@@ -5555,4 +5555,7 @@
   <data name="LabelN2OEmissionFactor" xml:space="preserve">
     <value>N₂O emission factor</value>
   </data>
+  <data name="EnumBoarsDietType" xml:space="preserve">
+    <value>Boars</value>
+  </data>
 </root>

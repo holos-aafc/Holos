@@ -1528,6 +1528,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boars.
+        /// </summary>
+        public static string EnumBoarsDietType {
+            get {
+                return ResourceManager.GetString("EnumBoarsDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breeding stock.
         /// </summary>
         public static string EnumBreedingStock {
