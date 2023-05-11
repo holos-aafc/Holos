@@ -45,6 +45,7 @@ namespace H.Core.Services.Animals
             new Dictionary<AnimalComponentBase, IList<AnimalGroupEmissionResults>>();
 
         protected ComponentCategory _animalComponentCategory;
+        private readonly Table_29_Default_Manure_Excreted_Provider _manureExcretionAmountProvider = new Table_29_Default_Manure_Excreted_Provider();
 
         #endregion
 

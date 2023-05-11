@@ -37,7 +37,6 @@ namespace H.Core.Enumerations
 
         /// <summary>
         /// Use Small Area Data (SAD) yields
-        ///
         /// https://open.canada.ca/data/en/dataset/65f1cde1-95e0-4a1d-9a1a-c45b2f83a351
         /// </summary>
         [LocalizedDescription("EnumSmallAreaData", typeof(Resources))]

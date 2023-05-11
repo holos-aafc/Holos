@@ -351,6 +351,9 @@ namespace H.Content
 
                 case CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure:
                     return SplitFileIntoLines(Resource.Table_69_Fractions_of_dairy_cattle_N_volatilized);
+
+                case CsvResourceNames.PercentageTotalManureProduced:
+                    return SplitFileIntoLines(Resource.Table_29_Percentage_Total_Manure_Produced_In_Systems);
                 default:
                     return null;
             }

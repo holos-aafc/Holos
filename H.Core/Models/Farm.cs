@@ -163,10 +163,6 @@ namespace H.Core.Models
 
         #region Properties
 
-        /// <summary>
-        /// Returns true if all components on the farm have had results calculated. Returns false otherwise. Have to be careful when farm has no components. It could happen that the
-        /// farm results service gets called recursively (stack overflow) in that situation.
-        /// </summary>
         public bool ResultsCalculated
         {
             get
@@ -623,6 +619,8 @@ namespace H.Core.Models
         }
 
         public int MapZoomLevel { get; set; }
+
+        public bool UseFieldLevelYieldAssignement { get; set; }
 
         #endregion
 

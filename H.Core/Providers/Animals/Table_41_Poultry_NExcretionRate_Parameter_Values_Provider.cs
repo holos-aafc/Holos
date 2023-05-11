@@ -73,8 +73,7 @@ namespace H.Core.Providers.Animals
         private List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> ReadFile()
         {
             var fileData = new List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data>();
-            IEnumerable<string[]> fileLines =
-                CsvResourceReader.GetFileLines(CsvResourceNames.PoultryNExcretionParameterValues);
+            IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.PoultryNExcretionParameterValues);
 
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
 

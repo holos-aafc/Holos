@@ -9,23 +9,35 @@ namespace H.Core.Converters
     {
         public AnimalType Convert(string input)
         {
-            switch (this.GetLettersAsLowerCase(input))
+            var cleanedInput = this.GetLettersAsLowerCase(input);
+
+            switch (cleanedInput)
             {
+                /*
+                 * Beef cattle
+                 */
+
                 case "backgrounder":
                     return AnimalType.BeefBackgrounder;
                 case "beef":
+                case "nondairycattle":
                 case "beefcattle":
                     return AnimalType.Beef;
                 case "beeffinisher":
                 case "finisher":
                     return AnimalType.BeefFinisher;
-                case "boar":
-                case "swineboar":
-                    return AnimalType.SwineBoar;
-                case "chicken":
-                    return AnimalType.Chicken;
                 case "cowcalf":
                     return AnimalType.CowCalf;
+                case "stockers":
+                    return AnimalType.Stockers;
+                case "beefcalves":
+                case "beefcalf":
+                    return AnimalType.BeefCalf;
+
+                /*
+                 * Dairy
+                 */
+
                 case "dairy":
                 case "dairycattle":
                     return AnimalType.Dairy;
@@ -38,41 +50,54 @@ namespace H.Core.Converters
                     return AnimalType.DairyHeifers;
                 case "dairylactating":
                     return AnimalType.DairyLactatingCow;
+
+                /*
+                 * Swine
+                 */
+
+                case "boar":
+                case "swineboar":
+                    return AnimalType.SwineBoar;
                 case "drysow":
                     return AnimalType.SwineDrySow;
-                case "ewe":
-                case "ewes":
-                    return AnimalType.Ewes;
                 case "grower":
                 case "swinegrower":
                     return AnimalType.SwineGrower;
                 case "lactatingsow":
                     return AnimalType.SwineLactatingSow;
-                case "ram":
-                    return AnimalType.Ram;
-                case "sheep":
-                    return AnimalType.Sheep;
-                case "stockers":
-                    return AnimalType.Stockers;
                 case "swine":
                     return AnimalType.Swine;
                 case "swinefinisher":
                     return AnimalType.SwineFinisher;
+
+                /*
+                 * Sheep
+                 */
+
+                case "ewe":
+                case "ewes":
+                    return AnimalType.Ewes;
+                case "ram":
+                    return AnimalType.Ram;
+                case "sheep":
+                case "sheepandlambs":
+                    return AnimalType.Sheep;
                 case "weanedlambs":
                     return AnimalType.Lambs;
+
+                /*
+                 * Other livestock
+                 */
+
                 case "horse":
                 case "horses":
                     return AnimalType.Horses;
-                case "turkey":
-                    return AnimalType.Turkeys;
                 case "goat":
                 case "goats":
                     return AnimalType.Goats;
                 case "mules":
                 case "mule":
                     return AnimalType.Mules;
-                case "poultry":
-                    return AnimalType.Poultry;
                 case "bull":
                     return AnimalType.BeefBulls;
                 case "llamas":
@@ -85,26 +110,37 @@ namespace H.Core.Converters
                     return AnimalType.Elk;
                 case "bison":
                     return AnimalType.Bison;
-                case "beefcalves":
-                case "beefcalf":
-                    return AnimalType.BeefCalf;
 
-                case "pullets":
-                    return AnimalType.ChickenPullets;
+                /*
+                 * Poultry
+                 */
+
+                case "poultry":
+                    return AnimalType.Poultry;
+                case "poultrypulletsbroilers":
                 case "broilers":
                     return AnimalType.Broilers;
+                case "pullets":
+                    return AnimalType.ChickenPullets;
+                case "chicken":
+                    return AnimalType.Chicken;
                 case "cockerels":
                     return AnimalType.ChickenCockerels;
                 case "roasters":
                     return AnimalType.ChickenRoosters;
                 case "hens":
                     return AnimalType.ChickenHens;
+                case "poultryturkeys":
+                case "turkey":
+                    return AnimalType.Turkeys;
                 case "layersdry":
                     return AnimalType.LayersDryPoultry;
                 case "layerswet":
                     return AnimalType.LayersWetPoultry;
+                case "poultrylayers":
                 case "layers":
                     return AnimalType.Layers;
+
                 default:
                 {
                     Trace.TraceError($"{nameof(AnimalTypeStringConverter)}.{nameof(AnimalTypeStringConverter.Convert)}: unknown animal type {input}. Returning {AnimalType.BeefBackgrounder}");

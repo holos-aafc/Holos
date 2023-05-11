@@ -176,6 +176,20 @@ namespace H.Core.Enumerations
             }
         }
 
+        public static bool IsLayersType(this AnimalType animalType)
+        {
+            switch (animalType)
+            {
+                case AnimalType.Layers:
+                case AnimalType.LayersDryPoultry:
+                case AnimalType.LayersWetPoultry:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public static bool IsLactatingType(this AnimalType animalType)
         {
             switch (animalType)

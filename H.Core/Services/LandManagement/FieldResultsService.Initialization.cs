@@ -382,11 +382,12 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Assigns a yield to one view item for a field
         /// </summary>
-        public void AssignYieldToYear(Farm farm,
-            CropViewItem viewItem, FieldSystemComponent fieldSystemComponent)
+        public void AssignYieldToYear(
+            Farm farm,
+            CropViewItem viewItem, 
+            FieldSystemComponent fieldSystemComponent)
         {
-            var farmYieldAssignmentMethod = farm.YieldAssignmentMethod;
-
+            var yieldAssignmentMethod = farm.UseFieldLevelYieldAssignement ? fieldSystemComponent.YieldAssignmentMethod : farm.YieldAssignmentMethod;
             if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
             {
                 Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: bad crop type or bad year for view item '{viewItem}'");
@@ -398,7 +399,7 @@ namespace H.Core.Services.LandManagement
              * The user will enter (or has entered) yields for each year manually, do not overwrite the value
              */
 
-            if (farmYieldAssignmentMethod == YieldAssignmentMethod.Custom)
+            if (yieldAssignmentMethod == YieldAssignmentMethod.Custom)
             {
                 return;
             }
@@ -407,7 +408,7 @@ namespace H.Core.Services.LandManagement
              * Use an average of the crops
              */
 
-            if (farmYieldAssignmentMethod == YieldAssignmentMethod.Average)
+            if (yieldAssignmentMethod == YieldAssignmentMethod.Average)
             {
                 // Create an average from the crops that define the rotation
                 var average = fieldSystemComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
@@ -417,8 +418,8 @@ namespace H.Core.Services.LandManagement
                 return;
             }
 
-            if (farmYieldAssignmentMethod == YieldAssignmentMethod.SmallAreaData || 
-                farmYieldAssignmentMethod == YieldAssignmentMethod.CARValue)
+            if (yieldAssignmentMethod == YieldAssignmentMethod.SmallAreaData || 
+                yieldAssignmentMethod == YieldAssignmentMethod.CARValue)
             {
                 // If the cropviewitem is of a silage crop, we assign defaults using a different method.
                 if (viewItem.CropType.IsSilageCropWithoutDefaults())
@@ -437,7 +438,7 @@ namespace H.Core.Services.LandManagement
              * Use values from a custom yield file whose path has been specified by the user
              */
 
-            if (farmYieldAssignmentMethod == YieldAssignmentMethod.InputFile)
+            if (yieldAssignmentMethod == YieldAssignmentMethod.InputFile)
             {
                 var results = new List<CustomUserYieldData>();
 

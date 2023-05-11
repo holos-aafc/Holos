@@ -51,6 +51,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        public YieldAssignmentMethod YieldAssignmentMethod { get; set; }
+
         public ObservableCollection<CropViewItem> CropViewItems { get; set; } = new ObservableCollection<CropViewItem>();
 
         /// <summary>

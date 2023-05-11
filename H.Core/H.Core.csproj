@@ -447,7 +447,7 @@
     <Compile Include="Providers\Animals\Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider.cs" />
     <Compile Include="Providers\Animals\Table_24_Lamb_Daily_Weight_Gain_Provider.cs" />
     <Compile Include="Providers\Animals\DefaultManureCompositionData.cs" />
-    <Compile Include="Providers\Animals\Default_Manure_Excreted_Poultry_OtherLivestock_Provider.cs" />
+    <Compile Include="Providers\Animals\Table_29_Default_Manure_Excreted_Provider.cs" />
     <Compile Include="Providers\Animals\DefaultManureStorageFractionData.cs" />
     <Compile Include="Providers\Animals\DefaultManureStorageFractionProvider_Table_zz.cs" />
     <Compile Include="Providers\Animals\DefaultMethaneAndN2OEmissionRatesForPoultryData.cs" />

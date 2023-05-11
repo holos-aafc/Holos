@@ -159,6 +159,7 @@
     <Compile Include="Providers\Animals\Table_33_Daily_Feed_Intake_Swine_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_31_Swine_VS_Excretion_For_Diets_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_22_Livestock_Coefficients_Sheep_Provider_Test.cs" />
+    <Compile Include="Providers\Animals\Table_29_Default_Manure_Excreted_Provider_Test.cs" />
     <Compile Include="Providers\Carbon\Table_7_Relative_Biomass_Information_Provider_Test.cs" />
     <Compile Include="Providers\Climate\ClimateDataTest.cs" />
     <Compile Include="Providers\Climate\CustomClimateDataProviderTest.cs" />

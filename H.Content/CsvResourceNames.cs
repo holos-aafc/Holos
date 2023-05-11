@@ -154,5 +154,7 @@
 
         DairyFractionOfNAmmoniaLandAppliedManure,
         SwineFractionOfNAmmoniaLandAppliedManure,
+
+        PercentageTotalManureProduced
     }
 }

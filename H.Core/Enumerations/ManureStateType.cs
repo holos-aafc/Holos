@@ -40,7 +40,6 @@ namespace H.Core.Enumerations
         DeepPit,
 
         [LocalizedDescription("EnumLiquid", typeof(Resources))]
-        [Obsolete]
         Liquid,
 
         [LocalizedDescription("LiquidCrustHandlingSystemName", typeof(Resources))]
