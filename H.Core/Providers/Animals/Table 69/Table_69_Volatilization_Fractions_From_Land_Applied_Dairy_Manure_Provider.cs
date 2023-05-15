@@ -38,7 +38,7 @@ namespace H.Core.Providers.Animals.Table_69
                 Province.PrinceEdwardIsland,
             };
 
-            this.ReadFile();
+            this.ReadFile(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure);
         }
 
         #endregion
@@ -98,9 +98,9 @@ namespace H.Core.Providers.Animals.Table_69
             }
         }
 
-        private void ReadFile()
+        protected void ReadFile(CsvResourceNames resourceName)
         {
-            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure).ToList();
+            var fileLines = CsvResourceReader.GetFileLines(resourceName).ToList();
 
             this.ReadLines(fileLines);
         }

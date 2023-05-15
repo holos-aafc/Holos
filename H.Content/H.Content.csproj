@@ -107,6 +107,7 @@
     <None Include="Resources\GA_31_allclusters_past_CBM.csv" />
     <None Include="Resources\GA__31_allclusters_future_DOM.csv" />
     <None Include="Resources\Table_69_Fractions_of_dairy_cattle_N_volatilized.csv" />
+    <None Include="Resources\Table_70_Fractions_of_swine_N_volatilized.csv" />
     <None Include="Resources\Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes.csv" />
     <None Include="Resources\Table_58_Beef_Cattle_Fed_Winter_Feed_Cost.csv" />
     <None Include="Resources\Table_59_Feed_Costs_For_Beef.csv" />

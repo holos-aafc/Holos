@@ -1428,7 +1428,7 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AnimalType,Housing,CA
+        ///   Looks up a localized string similar to AnimalType,Housing,CA (1)
         ///Beef,Confined No Barn,0
         ///Beef,Housed In Barn,0
         ///Beef,Enclosed Pasture,0.17
@@ -1440,8 +1440,12 @@ namespace H.Content.Properties {
         ///Dairy,Grazing &lt; 3km/d,0.17
         ///Dairy,Grazing &gt; 3km/d,0.3
         ///Sheep,Confined,0.0067
+        ///Sheep,Housed ewes,0.0096
         ///Sheep,Flat Pasture,0.0107
         ///Sheep,Hilly Pasture / Open Range,0.024
+        ///,,,,,,,,,,,
+        ///,,,,,,,,,,,
+        ///1 Source: IPCC (2019), Table 10.5
         ///.
         /// </summary>
         public static string Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients {
@@ -1520,7 +1524,7 @@ namespace H.Content.Properties {
         ///Weaned Lambs,0.236 (1),3.25 (2),0.385 (2),30 (4),50 (4),0 (4)
         ///,,,,,,
         ///&quot;1 IPCC (2019), Table 10.4&quot;,,,,,,
-        ///2 Little et al. (2013),,,,,,
+        ///2 IPCC (2019) - Cf for intact males is 15% higher than the value for ewes,,,,,,
         ///&quot;3 IPCC (2019), Table 10.6&quot;,,,,,,
         ///4 Helgason et al. (2005),,,,,,
         ///.
@@ -1532,25 +1536,17 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Animal group,Liquid systems,Solid storage and drylot,&quot;Pasture, range and paddock&quot;,Other systems
-        ///Non-dairy cattle,5.3,45,45,4.2
-        ///Dairy cattle,64,18,16,2.9
-        ///Sheep and lambs,0.1,34,66,0.02
-        ///Swine,97,3,0,0
-        ///Poultry,7,92,0.6,0.6
-        ///Llamas (1),0.03,28,72,0.02
-        ///Alpacas (1),0.03,28,72,0.02
-        ///Deer (2),0,47,50,3.5
-        ///Elk (2),0,47,50,3.5
-        ///Goats,0,42,58,0
-        ///Horses,0,31,68,0.7
-        ///Mules (3),0,32,68,0.7
-        ///Bison,0.2,46,50,4
-        ///,,,,
-        ///,,,,
-        ///,,,,
-        ///&quot;Source: ECCC (2021), Table A3.4-18.&quot;,,,,
-        ///1 Assumes that manure handled by animal waste  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Animal group,Liquid systems (1),Solid storage and drylot (1),&quot;Pasture, range and paddock&quot; (1),Other systems (1),Manureexcreted_rate (kg head-1 day-1)
+        ///Non-dairy cattle,5.3,45,45,4.2,-9
+        ///Dairy cattle,64,18,16,2.9,-9
+        ///Sheep and lambs,0.1,34,66,0.02,1.8 (2)
+        ///Swine,97,3,0,0,-9
+        ///Poultry - pullets/broilers,7,92,0.6,0.6,0.08 (2)
+        ///Poultry - layers,7,92,0.6,0.6,0.12 (2)
+        ///Poultry - turkeys,7,92,0.6,0.6,0.32 (2)
+        ///Poultry - ducks/geese,7,92,0.6,0.6,0.2 (3)(4)
+        ///Llamas (5),0.03,28,72,0.02,1.8
+        ///Alpacas (5),0.03,28,72,0.02 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_29_Percentage_Total_Manure_Produced_In_Systems {
             get {
@@ -1559,21 +1555,20 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Animal Type,Province,Crude Protein (kg Protein kg-1 Feed As Fed),Feed Intake (kg Head -1 Day-1)
-        ///Boar,Alberta,0.145,2.55
-        ///Dry Sow,Alberta,0.145,2.55
-        ///SwineFinisher,Alberta,0.155,3
-        ///Grower,Alberta,0.18,2
-        ///Lactating Sow,Alberta,0.2,6.11
-        ///Starter,Alberta,0.22,0.7
-        ///Boar,British Columbia,0.145,2.55
-        ///Dry Sow,British Columbia,0.145,2.55
-        ///SwineFinisher,British Columbia,0.155,3
-        ///Grower,British Columbia,0.18,2
-        ///Lactating Sow,British Columbia,0.2,6.11
-        ///Starter,British Columbia,0.22,0.7
-        ///Boar,Manitoba,0.145,2.55
-        ///Dry S [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Swine Group,Feed Intake (kg head -1 day-1)
+        ///Dry gilt/sow,2.488
+        ///Lactating gilt/sow,6.590
+        ///Nursery weaners (starter diet 1),0.797
+        ///Nursery weaners (starter diet 2),1.165
+        ///Grower/Finisher diet 1,1.679
+        ///Grower/Finisher diet 2,2.134
+        ///Grower/Finisher diet 3,2.55
+        ///Grower/Finisher diet 4,2.934
+        ///Boar,3.00
+        ///,,,,,,
+        ///,,,,,,
+        ///&quot;Data source: D. Beaulieu, U. of Saskatchewan, pers. comm.&quot;,,,,,,
+        ///.
         /// </summary>
         public static string Table_33_Daily_Feed_Intake_For_Swine_Groups {
             get {
@@ -1875,6 +1870,22 @@ namespace H.Content.Properties {
         public static string Table_7_Relative_Biomass_Information {
             get {
                 return ResourceManager.GetString("Table_7_Relative_Biomass_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Table 70. Fractions of swine N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990–2020, at a provincial scale&quot;,,,,,,,,,,,
+        ///Implied EF (kg NH3-N volatilized kg-1 manure N applied),,,,,,,,,,,
+        ///,,,,,,,,,,,
+        ///Year,BC,AB,SK,MB,ON,QC,NS,NB,NL,PEI,
+        ///1990,0.22,0.14,0.15,0.14,0.21,0.26,0.28,0.28,0.22,0.28,
+        ///1995,0.22,0.13,0.13,0.12,0.21,0.25,0.27,0.27,0.22,0.27,
+        ///2000,0.22,0.13,0.12,0.11,0.2,0.25,0.25,0.25,0.23,0.26,
+        ///2005,0.22,0.12,0.12,0.11,0.2,0.24,0.24,0.25,0.22 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_70_Fractions_of_swine_N_volatilized {
+            get {
+                return ResourceManager.GetString("Table_70_Fractions_of_swine_N_volatilized", resourceCulture);
             }
         }
         
