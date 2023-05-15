@@ -39,7 +39,7 @@ namespace H.Core.Providers.Climate
 
             var resultList = new List<Table_1_Growing_Degree_Crop_Coefficients_Data>();
 
-            foreach (var line in fileLines.Skip(1))
+            foreach (var line in fileLines.Skip(2))
             {
                 var data = new Table_1_Growing_Degree_Crop_Coefficients_Data()
                 {

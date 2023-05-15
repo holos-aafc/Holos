@@ -432,8 +432,6 @@ namespace H.Core.Services.Animals
             return feedIntake * crudeProteinIntake;
         }
 
-
-
         /// <summary>
         /// Equation 3.3.3-3
         /// </summary>
