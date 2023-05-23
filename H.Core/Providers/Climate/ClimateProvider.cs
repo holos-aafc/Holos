@@ -7,11 +7,12 @@ using System.Resources;
 using System.Threading;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Tools;
 
 namespace H.Core.Providers.Climate
 {
-    public class ClimateProvider
+    public class ClimateProvider : IClimateProvider
     {
         #region Fields
 
@@ -112,6 +113,12 @@ namespace H.Core.Providers.Climate
                 EvapotranspirationData = evapotranspirationNormals,
             };
         }
+
+        public void OutputDailyClimateData(Farm farm, string outputPath)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
