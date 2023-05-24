@@ -194,7 +194,7 @@ namespace H.Core.Calculators.Nitrogen
             var applications = viewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure());
             foreach (var manureApplicationViewItem in applications)
             {
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactorsForImportedManure(farm, annualPrecipitation, evapotranspiration, manureApplicationViewItem.AnimalType);
+                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplicationViewItem.AnimalType, viewItem.Year);
 
                 var amountOfN = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
@@ -243,30 +243,31 @@ namespace H.Core.Calculators.Nitrogen
             var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
             var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
 
-            var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration);
             foreach (var tuple in applicationsAndCropByAnimalType)
             {
                 var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
-                var crop = tuple.Item1;
-                landApplicationEmissionResult.CropViewItem = crop;
+                var viewItem = tuple.Item1;
+                landApplicationEmissionResult.CropViewItem = viewItem;
 
                 var manureApplication = tuple.Item2;
+
+                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplication.AnimalType, viewItem.Year);
 
                 var date = manureApplication.DateOfApplication;
                 var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(date.Year, (Months)date.Month);
 
-                var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * crop.Area) / totalManureProducedByAnimals;
+                var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area) / totalManureProducedByAnimals;
                 if (fractionOfManureUsed > 1.0)
                     fractionOfManureUsed = 1.0;
 
-                landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplication.AmountOfNitrogenAppliedPerHectare * crop.Area;
+                landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplication.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-                landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * crop.Area;
+                landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area;
 
                 var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperature);
 
-                var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(crop, manureApplication);
+                var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(viewItem, manureApplication);
                 var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
 
                 var fractionVolatilized = 0d;

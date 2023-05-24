@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Providers.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,7 +26,7 @@ namespace H.Core.Test.Providers.Animals
                 meanAnnualTemperature: 23,
                 meanAnnualEvapotranspiration: 40, 
                 beddingRate: 20, 
-                animalType: AnimalType.Beef, farm: new Farm());
+                animalType: AnimalType.Beef, farm: new Farm(), year: DateTime.Now.Year);
 
             Assert.AreEqual(0.040, result.MethaneConversionFactor);
         }

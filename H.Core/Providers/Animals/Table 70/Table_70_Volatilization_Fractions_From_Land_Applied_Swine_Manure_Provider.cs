@@ -1,6 +1,9 @@
 ﻿using H.Content;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals.Table_69;
+using H.Infrastructure;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Providers.Animals.Table_70
 {
@@ -19,7 +22,27 @@ namespace H.Core.Providers.Animals.Table_70
 
         public override VolatilizationFractionsFromLandAppliedManureData GetData(AnimalType animalType, Province province, int year)
         {
-            return base.GetData(animalType, province, year);
+            var notFound = new VolatilizationFractionsFromLandAppliedManureData();
+
+            if (animalType.IsSwineType() == false)
+            {
+                Trace.TraceError($"{nameof(Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
+                                 $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
+
+                return notFound;
+            }
+
+            if (_validProvinces.Contains(province) == false)
+            {
+                Trace.TraceError($"{nameof(Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
+                                 $" unable to find province {province} in the available data.");
+
+                return notFound;
+            }
+
+            var closestYear = MathHelpers.Closest(_data.Select(x => x.Key).ToArray(), year);
+
+            return _data[closestYear][province];
         }
 
         #endregion

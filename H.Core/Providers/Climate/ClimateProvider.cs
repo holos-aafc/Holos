@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Threading;
+using CsvHelper;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Providers.Precipitation;
 using H.Core.Tools;
 
 namespace H.Core.Providers.Climate
@@ -38,8 +42,6 @@ namespace H.Core.Providers.Climate
         #endregion
 
         #region Public Methods
-
-        
 
         public ClimateData Get(int polygonId, TimeFrame timeFrame)
         {
@@ -116,7 +118,43 @@ namespace H.Core.Providers.Climate
 
         public void OutputDailyClimateData(Farm farm, string outputPath)
         {
-            throw new NotImplementedException();
+            string outputDirectory = outputPath + Path.DirectorySeparatorChar + "ClimateProviderOutput";
+            _ = Directory.CreateDirectory(outputDirectory);
+            var suffix = "Climate Data";
+            var path = outputDirectory + Path.DirectorySeparatorChar + suffix + ".csv";
+
+            using (var writer = new StreamWriter(path))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                var results = farm.ClimateData.DailyClimateData;
+
+                foreach(var data in results)
+                {
+                    var year = data.Year;
+                    var julianDay = data.JulianDay;
+                    var meanDailyAirTemperature = data.MeanDailyAirTemperature;
+                    var meanDailyPrecipitation = data.MeanDailyPrecipitation;
+                    var meanDailyPET = data.MeanDailyPET;
+                    var relativeHumidity = data.RelativeHumidity;
+                    var solarRadiation = data.SolarRadiation;
+                    var date = data.Date;
+
+                    var record = new
+                    {
+                        Year = year,
+                        JulianDay = julianDay,
+                        MeanDailyAirTemperature = meanDailyAirTemperature,
+                        MeanDailyPrecipitation = meanDailyPrecipitation,
+                        MeanDailyPET = meanDailyPET,
+                        RelativeHumidity = relativeHumidity,
+                        SolarRadiation = solarRadiation,
+                        Date = date,
+
+                    };
+                    csv.WriteRecords(new[] { record });
+                }
+            }
+            //throw new NotImplementedException();
         }
 
         #endregion

@@ -8,7 +8,6 @@ namespace H.Core.Providers.Climate
 
         public int Year { get; set; }
 
-
         public int JulianDay { get; set; }
 
         /// <summary>

@@ -65,7 +65,9 @@ namespace H.Core.Providers.Animals.Table_69
                 return notFound;
             }
 
-            return _data[year][province];
+            var closestYear = MathHelpers.Closest(_data.Select(x => x.Key).ToArray(), year);
+
+            return _data[closestYear][province];
         }
 
         #endregion

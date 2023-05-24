@@ -8,11 +8,6 @@ namespace H.Core.Providers.Animals
         IEmissionData GetFactors(ManureStateType manureStateType, ComponentCategory componentCategory,
             double meanAnnualPrecipitation, double meanAnnualTemperature,
             double meanAnnualEvapotranspiration, double beddingRate,
-            AnimalType animalType, Farm farm);
-
-        IEmissionData GetLandApplicationFactorsForImportedManure(Farm farm,
-            double meanAnnualPrecipitation,
-            double meanAnnualEvapotranspiration,
-            AnimalType animalType);
+            AnimalType animalType, Farm farm, int year);
     }
 }

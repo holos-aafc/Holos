@@ -75,8 +75,8 @@ namespace H.Core.Calculators.Nitrogen
             var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
-            {
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration);
+            { 
+                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, AnimalType.NotSelected, viewItem.Year);
 
                 var landApplicationEmissionResult = new LandApplicationEmissionResult();
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using H.Core.Providers.Climate;
@@ -172,6 +173,26 @@ namespace H.Core.Test.Providers.Climate
             Assert.AreNotEqual(climateData.EvapotranspirationData, changedClimateData.EvapotranspirationData);
             Assert.AreNotEqual(climateData.PrecipitationData, changedClimateData.PrecipitationData);
             Assert.AreNotEqual(climateData.TemperatureData, changedClimateData.TemperatureData);
+        }
+
+        [TestMethod]
+        public void TestFileExport()
+        {
+            // Setup
+            var somePath = Directory.GetCurrentDirectory();
+
+            var dailyClimateData = new List<DailyClimateData>(){new DailyClimateData() {Date = DateTime.Now, MeanDailyAirTemperature = 10}};
+            DailyClimateData dailyClimateData2 = new DailyClimateData() { Date = DateTime.Now, MeanDailyAirTemperature = 12, SolarRadiation = 2 };
+            DailyClimateData dailyClimateData3 = new DailyClimateData() { Year = 2023, JulianDay = 5, MeanDailyAirTemperature = 3, MeanDailyPrecipitation = 4,
+            MeanDailyPET = 5, RelativeHumidity = 5, SolarRadiation = 3, Date = DateTime.Now};
+            var farm = new Farm() {ClimateData = new ClimateData() {DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData)}};
+            farm.ClimateData.DailyClimateData.Add(dailyClimateData2);
+            farm.ClimateData.DailyClimateData.Add(dailyClimateData3);
+
+            _climateProvider.OutputDailyClimateData(farm, somePath);
+
+            // Verify
+            File.Exists(somePath);
         }
 
         #endregion

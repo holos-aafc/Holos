@@ -2,6 +2,8 @@
 
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Providers.Animals.Table_69;
+using H.Core.Providers.Animals.Table_70;
 using H.Core.Tools;
 using H.Infrastructure;
 
@@ -19,6 +21,8 @@ namespace H.Core.Providers.Animals
     {
         #region Fields
 
+        private readonly Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider _dairyManureProvider = new Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
+        private readonly Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider _swineManureProvider = new Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
         private readonly Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider _mcfByClimateZoneLivestockManureSystemProvider = new Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider();
 
         #endregion
@@ -30,88 +34,12 @@ namespace H.Core.Providers.Animals
 
         #region Public Methods
 
-        // Temporary solution until table 69, 70 are implemented
-        public IEmissionData GetLandApplicationFactorsForImportedManure(Farm farm,
+        public IEmissionData GetLandApplicationFactors(
+            Farm farm,
             double meanAnnualPrecipitation,
             double meanAnnualEvapotranspiration,
-            AnimalType animalType)
-        {
-            var landFactors = this.GetLandApplicationFactors(farm, meanAnnualPrecipitation, meanAnnualEvapotranspiration);
-            var province = farm.DefaultSoilData.Province;
-
-            var volatilizationFraction = 0d;
-            if (animalType.IsDairyCattleType())
-            {
-                switch (province)
-                {
-                    case Province.BritishColumbia:
-                        volatilizationFraction = 0.09;
-                        break;
-
-                    case Province.Alberta:
-                        volatilizationFraction = 0.11;
-                        break;
-
-                    case Province.Saskatchewan:
-                        volatilizationFraction = 0.12;
-                        break;
-
-                    case Province.Manitoba:
-                        volatilizationFraction = 0.13;
-                        break;
-
-                    case Province.Ontario:
-                        volatilizationFraction = 0.16;
-                        break;
-
-                    // Quebec, etc.
-                    default:
-                        volatilizationFraction = 0.15;
-                        break;
-                }
-
-                landFactors.VolatilizationFraction = volatilizationFraction;
-            }
-
-            if (animalType.IsSwineType())
-            {
-                switch (province)
-                {
-                    case Province.BritishColumbia:
-                        volatilizationFraction = 0.21;
-                        break;
-
-                    case Province.Alberta:
-                        volatilizationFraction = 0.128;
-                        break;
-
-                    case Province.Saskatchewan:
-                        volatilizationFraction = 0.12;
-                        break;
-
-                    case Province.Manitoba:
-                        volatilizationFraction = 0.11;
-                        break;
-
-                    case Province.Ontario:
-                        volatilizationFraction = 0.2;
-                        break;
-
-                    // Quebec, etc.
-                    default:
-                        volatilizationFraction = 0.24;
-                        break;
-                }
-
-                landFactors.VolatilizationFraction = volatilizationFraction;
-            }
-
-            return landFactors;
-        }
-
-        public IEmissionData GetLandApplicationFactors(Farm farm,
-            double meanAnnualPrecipitation,
-            double meanAnnualEvapotranspiration)
+            AnimalType animalType,
+            int year)
         {
             var climateDependentEmissionFactorForVolatilization = this.GetEmissionFactorForVolatilizationBasedOnClimate(
                 precipitation: meanAnnualPrecipitation,
@@ -155,6 +83,20 @@ namespace H.Core.Providers.Animals
                 }
             }
 
+            // Swine and dairy have more accurate volatilization fractions based on province and year
+            if (animalType.IsSwineType())
+            {
+                var volatilizationFraction = _swineManureProvider.GetData(animalType, farm.Province, year);
+
+                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                var volatilizationFraction = _dairyManureProvider.GetData(animalType, farm.Province, year);
+
+                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+            }
+
             return factors;
         }
 
@@ -166,7 +108,8 @@ namespace H.Core.Providers.Animals
             double meanAnnualEvapotranspiration,
             double beddingRate,
             AnimalType animalType,
-            Farm farm)
+            Farm farm, 
+            int year)
         {
             var climateDependentMethaneConversionFactor = _mcfByClimateZoneLivestockManureSystemProvider.GetByClimateAndHandlingSystem(
                 manureStateType: manureStateType,
@@ -178,13 +121,6 @@ namespace H.Core.Providers.Animals
                 precipitation: meanAnnualPrecipitation,
                 evapotranspiration: meanAnnualEvapotranspiration);
 
-            var climateDependentDirectEmissionFactor = this.GetDirectEmissionFactorBasedOnClimate(
-                precipitation: meanAnnualPrecipitation,
-                evapotranspiration: meanAnnualEvapotranspiration);
-
-            var region = farm.Province.GetRegion();
-            var soilTexture = farm.DefaultSoilData.SoilTexture;
-
             /*
              * All factors are the same when considering any manure on pasture
              */
@@ -193,8 +129,12 @@ namespace H.Core.Providers.Animals
                 manureStateType == ManureStateType.Paddock ||
                 manureStateType == ManureStateType.Range)
             {
-                return this.GetLandApplicationFactors(farm, meanAnnualPrecipitation, meanAnnualEvapotranspiration);
+                return this.GetLandApplicationFactors(farm, meanAnnualPrecipitation, meanAnnualEvapotranspiration, animalType, year);
             }
+
+            /*
+             * The following factors are for animals not on pasture.
+             */
 
             switch (componentCategory)
             {
