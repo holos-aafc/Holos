@@ -94,7 +94,6 @@ namespace H.Core.Models
         private YieldAssignmentMethod _yieldAssignmentMethod;        
 
         private List<TimeFrame> _availableTimeFrame;
-
         private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
 
         #endregion
@@ -310,7 +309,8 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// The default soil data selected by the user if there was more than one soil component found within the selected polygon.
+        /// The default soil data selected by the user if there was more than one soil component found within the selected polygon. The user
+        /// has the option to define a field-level soil type as well <see cref="FieldSystemComponent.SoilData"/>.
         /// </summary>
         public SoilData DefaultSoilData
         {
@@ -923,7 +923,9 @@ namespace H.Core.Models
 
         public FieldSystemComponent GetFieldSystemComponent(Guid guid)
         {
-            return this.FieldSystemComponents.SingleOrDefault(x => x.Guid == guid);
+            var result = this.FieldSystemComponents.SingleOrDefault(x => x.Guid == guid);
+
+            return result;
         }
 
         public double GetTotalAreaOfFarmOccupiedByAnnualCrops()
@@ -1077,6 +1079,27 @@ namespace H.Core.Models
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cropViewItem"></param>
+        /// <returns></returns>
+        public SoilData GetPreferredSoilData(CropViewItem cropViewItem)
+        {
+            var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (fieldComponent == null || fieldComponent.SoilData == null || fieldComponent.SoilData.PolygonId == 0)
+            {
+                // Old farms won't have soil data set on fields, use farm level soil data instead
+
+                // Return farm soil type
+                return this.DefaultSoilData;
+            }
+            else
+            {
+                return fieldComponent.SoilData;
+            }
         }
 
         #endregion

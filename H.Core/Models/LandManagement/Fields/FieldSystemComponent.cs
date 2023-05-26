@@ -11,6 +11,7 @@ using H.Core.Enumerations;
 using H.Infrastructure;
 using H.Core;
 using H.Core.Models.LandManagement.Rotation;
+using H.Core.Providers.Soil;
 
 #endregion
 
@@ -26,6 +27,9 @@ namespace H.Core.Models.LandManagement.Fields
         private double _fieldArea;
 
         private bool _beginOrderingAtStartYearOfRotation;
+
+        private SoilData _soilData;
+        private ObservableCollection<SoilData> _soilDataAvailableForField;
 
         #endregion
 
@@ -45,12 +49,52 @@ namespace H.Core.Models.LandManagement.Fields
 
             this.CropViewItems.CollectionChanged -= CropViewItemsOnCollectionChanged;
             this.CropViewItems.CollectionChanged += CropViewItemsOnCollectionChanged;
+
+            // Use farm soil data by default (instead of field specific soil data)
+            this.UseFieldLevelSoilData = false;
+            this.SoilData = new SoilData();
+            this.SoilDataAvailableForField = new ObservableCollection<SoilData>();
         }
 
         #endregion
 
         #region Properties
 
+        public ObservableCollection<SoilData> SoilDataAvailableForField
+        {
+            get
+            {
+                return _soilDataAvailableForField;
+            }
+            set
+            {
+                SetProperty(ref _soilDataAvailableForField, value);
+            }
+        }
+
+        /// <summary>
+        /// By default, <see cref="Providers.Soil.SoilData"/> associated with the farm will be used (across all fields). This flag allows for field-specific <see cref="Providers.Soil.SoilData"/>
+        /// to be used.
+        /// </summary>
+        public bool UseFieldLevelSoilData { get; set; }
+
+        /// <summary>
+        /// Allow for field specific soil data (as opposed to one type of soil being used for all fields on the farm)
+        /// </summary>
+        public SoilData SoilData {
+            get
+            {
+                return _soilData;
+            }
+            set
+            {
+                SetProperty(ref _soilData, value);
+            }
+        }
+
+        /// <summary>
+        /// Allow for field specific yield assignments (as opposed to one type of yield assignment used for all fields on the farm)
+        /// </summary>
         public YieldAssignmentMethod YieldAssignmentMethod { get; set; }
 
         public ObservableCollection<CropViewItem> CropViewItems { get; set; } = new ObservableCollection<CropViewItem>();

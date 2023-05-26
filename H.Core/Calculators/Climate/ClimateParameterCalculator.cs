@@ -73,8 +73,9 @@ namespace H.Core.Calculators.Climate
             List<double> dailyPrecipitation,
             List<double> dailyTemperature)
         {
+            var soilData = farm.GetPreferredSoilData(cropViewItem);
+
             var defaults = farm.Defaults;
-            var geographicData = farm.GeographicData;
             var yield = cropViewItem.Yield;
 
             var ripeningDay = cropViewItem.CropType.IsPerennial() ? defaults.RipeningDayForPerennnials : defaults.RipeningDay;
@@ -85,10 +86,10 @@ namespace H.Core.Calculators.Climate
                     emergenceDay: emergenceDay,
                     ripeningDay: ripeningDay,
                     yield: yield,
-                    clay: geographicData.DefaultSoilData.ProportionOfClayInSoil,
-                    sand: geographicData.DefaultSoilData.ProportionOfSandInSoil,
-                    layerThicknessInMillimeters: geographicData.DefaultSoilData.TopLayerThickness,
-                    percentageSoilOrganicCarbon: geographicData.DefaultSoilData.ProportionOfSoilOrganicCarbon,
+                    clay: soilData.ProportionOfClayInSoil,
+                    sand: soilData.ProportionOfSandInSoil,
+                    layerThicknessInMillimeters: soilData.TopLayerThickness,
+                    percentageSoilOrganicCarbon: soilData.ProportionOfSoilOrganicCarbon,
                     variance: variance,
                     alfa: defaults.Alfa,
                     decompositionMinimumTemperature: defaults.DecompositionMinimumTemperature,

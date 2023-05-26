@@ -158,15 +158,17 @@ namespace H.Core.Services.LandManagement
 
         public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
         {
+            var soilData = farm.GetPreferredSoilData(viewItem);
+
             var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
-                province: farm.DefaultSoilData.Province,
-                soilCategory: farm.DefaultSoilData.SoilFunctionalCategory,
+                province: soilData.Province,
+                soilCategory: soilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
                 cropType: viewItem.CropType);
 
             var herbicideEnergyEstimates = _herbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance(
-                provinceName: farm.DefaultSoilData.Province,
-                soilCategory: farm.DefaultSoilData.SoilFunctionalCategory,
+                provinceName: soilData.Province,
+                soilCategory: soilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
                 cropType: viewItem.CropType);
 
@@ -262,6 +264,8 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem,
             Farm farm)
         {
+            var soilData = farm.GetPreferredSoilData(viewItem);
+
             // No small area data exists for years > 2018, take average of last 10 years as placeholder values when considering these years
             const int NoDataYear = 2018;
             const int NumberOfYearsInAverage = 10;
@@ -275,7 +279,7 @@ namespace H.Core.Services.LandManagement
                         year: year,
                         polygon: farm.PolygonId,
                         cropType: viewItem.CropType,
-                        province: farm.DefaultSoilData.Province);
+                        province: soilData.Province);
 
                     if (smallAreaYieldData != null)
                     {
@@ -302,7 +306,7 @@ namespace H.Core.Services.LandManagement
                 year: viewItem.Year,
                 polygon: farm.PolygonId,
                 cropType: viewItem.CropType,
-                province: farm.DefaultSoilData.Province);
+                province: soilData.Province);
 
             if (smallAreaYield != null)
             {
@@ -545,7 +549,8 @@ namespace H.Core.Services.LandManagement
 
         public void AssignSoilProperties(CropViewItem viewItem, Farm farm)
         {
-            var soilData = farm.DefaultSoilData;
+            var soilData = farm.GetPreferredSoilData(viewItem);
+
             viewItem.Sand = soilData.ProportionOfSandInSoil;
         }
 
@@ -554,8 +559,8 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm)
         {
-            var province = farm.DefaultSoilData.Province;
-            var soilData = farm.DefaultSoilData;
+            var soilData = farm.GetPreferredSoilData(viewItem);
+            var province = soilData.Province;
 
             // Start with a default then get lookup value if one is available
             viewItem.PhosphorusFertilizerRate = 25;
@@ -591,12 +596,14 @@ namespace H.Core.Services.LandManagement
             CropViewItem cropViewItem, 
             Farm farm)
         {
+            var soilData = farm.GetPreferredSoilData(cropViewItem);
+
             cropViewItem.CropEconomicData.IsInitialized = false;
 
             cropViewItem.CropEconomicData = _economicsProvider.Get(
                 cropType: cropViewItem.CropType,
-                soilFunctionalCategory: farm.DefaultSoilData.SoilFunctionalCategory,
-                province: farm.DefaultSoilData.Province);
+                soilFunctionalCategory: soilData.SoilFunctionalCategory,
+                province: soilData.Province);
 
             _economicsHelper.ConvertValuesToMetricIfNecessary(cropViewItem.CropEconomicData, farm);
 
@@ -610,7 +617,9 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem, 
             Farm farm)
         {
-            var province = farm.DefaultSoilData.Province;
+            var soilData = farm.GetPreferredSoilData(viewItem);
+
+            var province = soilData.Province;
             var residueData = this.GetResidueData(viewItem, farm);
             if (residueData != null)
             {

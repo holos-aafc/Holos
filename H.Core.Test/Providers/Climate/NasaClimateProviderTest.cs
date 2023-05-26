@@ -169,8 +169,6 @@ namespace H.Core.Test.Providers.Climate
             File.WriteAllText("Nasa_Daily_Climate_Swift_Current_Year_2000.csv", stringBuilder.ToString());
         }
 
-
-
         [TestMethod]
         public void GetClimateData()
         {

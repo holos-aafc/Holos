@@ -170,8 +170,9 @@ namespace H.Core.Calculators.Economics
                     //set only once
                     if (!viewItem.CropEconomicData.FixedCostHandled)
                     {
-                        viewItem.CropEconomicData.SoilFunctionalCategory = farm.DefaultSoilData
-                            .SoilFunctionalCategory.GetBaseSoilFunctionalCategory();
+                        var soilData = farm.GetPreferredSoilData(viewItem);
+
+                        viewItem.CropEconomicData.SoilFunctionalCategory = soilData.SoilFunctionalCategory.GetBaseSoilFunctionalCategory();
                         viewItem.CropEconomicData.SetUserDefinedFixedCostPerUnit(farm.MeasurementSystemType);
                         viewItem.CropEconomicData.FixedCostHandled = true;
                     }
