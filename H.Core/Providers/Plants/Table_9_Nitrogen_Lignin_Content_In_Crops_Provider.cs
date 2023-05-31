@@ -103,22 +103,20 @@ namespace H.Core.Providers.Plants
 
             IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.NitrogenLinginContentsInSteadyStateMethods);
 
-            foreach (string[] line in fileLines.Skip(1))
+            foreach (string[] line in fileLines.Skip(1).Take(58))
             {
-                if (string.IsNullOrWhiteSpace(line[0]))
+                if (line.All(string.IsNullOrWhiteSpace))
                 {
-                    Trace.Write($"{nameof(Table_9_Nitrogen_Lignin_Content_In_Crops_Provider)}.{nameof(ReadFile)}" +
-                                $" - File: {nameof(CsvResourceNames.NitrogenLinginContentsInSteadyStateMethods)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
-                    break;
+                    continue;
                 }
 
-                CropType cropType = _cropTypeStringConverter.Convert(line[0].ParseUntilOrDefault());
-                var intercept = double.Parse(line[1].ParseUntilOrDefault(), cultureInfo);
-                var slope = double.Parse(line[2].ParseUntilOrDefault(), cultureInfo);
-                var rst = double.Parse(line[3], cultureInfo);
-                var nitrogenContent = double.Parse(line[4], cultureInfo);
-                var ligninContent = double.Parse(line[5], cultureInfo);
-                var moistureContent = double.Parse(line[6], cultureInfo);
+                CropType cropType = _cropTypeStringConverter.Convert(line[1]);
+                var intercept = double.Parse(line[2].ParseUntilOrDefault(), cultureInfo);
+                var slope = double.Parse(line[3].ParseUntilOrDefault(), cultureInfo);
+                var rst = double.Parse(line[4], cultureInfo);
+                var nitrogenContent = double.Parse(line[5], cultureInfo);
+                var ligninContent = double.Parse(line[6], cultureInfo);
+                var moistureContent = double.Parse(line[7], cultureInfo);
 
                 cropInstances.Add(new Table_9_Nitrogen_Lignin_Content_In_Crops_Data 
                 {

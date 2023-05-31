@@ -35,7 +35,7 @@ namespace H.Core.Test.Providers.Plants
         [TestMethod]
         public void GetContentsInstance()
         {
-            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.NFixingForages);
+            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.TameLegume);
             Assert.AreEqual(0.025, data.NitrogenContentResidues);
         }
 
@@ -56,8 +56,8 @@ namespace H.Core.Test.Providers.Plants
         [TestMethod]
         public void CheckLigninContentOfResidues()
         {
-            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.OtherDryFieldBeans);
-            Assert.AreEqual(0.075, data.LigninContentResidues);
+            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.BeansDryField);
+            Assert.AreEqual(0.085, data.LigninContentResidues);
         }
 
         [TestMethod]
@@ -70,8 +70,8 @@ namespace H.Core.Test.Providers.Plants
         [TestMethod]
         public void CheckSlopeValueOfCrop()
         {
-            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.Grains);
-            Assert.AreEqual(0.02, data.SlopeValue);
+            Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.MixedGrains);
+            Assert.AreEqual(0.029, data.SlopeValue);
         }
 
         [TestMethod]
