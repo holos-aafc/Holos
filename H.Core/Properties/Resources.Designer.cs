@@ -11968,6 +11968,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Climate Data.
+        /// </summary>
+        public static string MenuExportClimateData {
+            get {
+                return ResourceManager.GetString("MenuExportClimateData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mesisol.
         /// </summary>
         public static string Mesisol {
@@ -14610,6 +14619,15 @@ namespace H.Core.Properties {
         public static string TitleRevenue {
             get {
                 return ResourceManager.GetString("TitleRevenue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select farms to export climate data.
+        /// </summary>
+        public static string TitleSelectFarmClimateToExport {
+            get {
+                return ResourceManager.GetString("TitleSelectFarmClimateToExport", resourceCulture);
             }
         }
         

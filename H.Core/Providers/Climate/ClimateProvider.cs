@@ -118,10 +118,7 @@ namespace H.Core.Providers.Climate
 
         public void OutputDailyClimateData(Farm farm, string outputPath)
         {
-            string outputDirectory = outputPath + Path.DirectorySeparatorChar + "ClimateProviderOutput";
-            _ = Directory.CreateDirectory(outputDirectory);
-            var suffix = "Climate Data";
-            var path = outputDirectory + Path.DirectorySeparatorChar + suffix + ".csv";
+            var path = outputPath;
 
             using (var writer = new StreamWriter(path))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))

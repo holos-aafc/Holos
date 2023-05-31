@@ -252,13 +252,12 @@ namespace H.Integration.Properties {
         ///   Looks up a localized string similar to &quot;Table 1. Per hectare fertilizer product application rates, by province&quot;,,,,,,,
         ///,Canada,BC,AB,SK,MB,ON,QC
         ///Estimated per ha fertilizer product application rates:,kg product applied per ha,,,,,,
-        ///Ammonia,6.73,1.13,5.03,2.31,10.89,3.77,3.88
-        ///Urea,29.78,42.86,31.72,9.51,20.1,33.71,46.29
-        ///Urea ammonium nitrate,12.68,0,2.11,4.2,13,50.9,41.08
-        ///Ammonium nitrate,1.27,0,0,0,0,2.43,26.83
-        ///Ammonium sulphate,8.95,12.76,7.66,3.25,7.85,5.62,8.79
-        ///Monoammonium phosphate,15.13,17.02,12.61,4.33,15.77,34.07,7.51
-        ///Diammonium [rest of string was truncated]&quot;;.
+        ///Ammonia,6.73,1.13,5.03,2.31,10.89,3.77,5.015784454
+        ///Urea,29.78,42.86,31.72,9.51,20.1,33.71,59.82620147
+        ///Urea ammonium nitrate,12.68,0,2.11,4.2,13,50.9,53.09813198
+        ///Ammonium nitrate,1.27,0,0,0,0,2.43,34.67809597
+        ///Ammonium sulphate,8.95,12.76,7.66,3.25,7.85,5.62,11.35758089
+        ///Monoammonium phosphate,15.13,17.02,12.61,4 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string table_1_fertilizer {
             get {
@@ -283,14 +282,12 @@ namespace H.Integration.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table 3. SLC polygons to be modelled in the Holos V4 simulations,,,,Polygon centroid coordinates,
-        ///SLC polygon #,Ecodistrict #,SLC polygon area (ha),Ecodistrict area (ha),Latitude,Longitude
-        ///187006,187,&quot;1,773,162&quot;,&quot;10,744,579&quot;,58.961092,-77.833703
-        ///244003,244,&quot;34,915&quot;,&quot;4,151,599&quot;,59.202385,-122.951792
-        ///244007,244,&quot;103,901&quot;,&quot;4,151,599&quot;,58.98355,-123.3002
-        ///244010,244,&quot;373,550&quot;,&quot;4,151,599&quot;,58.738711,-121.961827
-        ///244014,244,&quot;14,536&quot;,&quot;4,151,599&quot;,58.879558,-122.624096
-        ///244025,244,&quot;8,218&quot;,&quot;4,151,599&quot;,58.652616,-12 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Table 3. SLC polygons (2011) to be modelled in the Holos V4 simulations,,,,Polygon centroid coordinates,,Final yield (SAD/Interpolated 2009-2018 avg.)
+        ///SLC polygon #,Ecodistrict #,SLC polygon area (ha),Ecodistrict area (ha),Latitude,Longitude,2009-2018  tame hay (mixed) yield (kg/ha)
+        ///244007,244,&quot;103,901&quot;,&quot;4,151,599&quot;,58.98355,-123.3002,4196
+        ///244061,244,&quot;346,272&quot;,&quot;4,151,599&quot;,58.690875,-116.300065,3837
+        ///244070,244,&quot;73,011&quot;,&quot;4,151,599&quot;,57.852879,-118.364436,3837
+        ///375001,375,&quot;72,557&quot;,&quot;552,382&quot;,50.628144,-96.609 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string table_3_polygons {
             get {

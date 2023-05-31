@@ -17,6 +17,7 @@ namespace H.Core.Converters
                  * Beef cattle
                  */
 
+                case "backgrounding":
                 case "backgrounder":
                     return AnimalType.BeefBackgrounder;
                 case "beef":

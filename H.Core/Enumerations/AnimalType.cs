@@ -113,6 +113,9 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumGoats", typeof(Resources))]
         Goats,
 
+        /// <summary>
+        /// Also known as Hogs
+        /// </summary>
         [LocalizedDescription("EnumGrower", typeof(Resources))]
         SwineGrower,
 

@@ -1363,16 +1363,14 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crop,a,b,c,d,e
+        ///   Looks up a localized string similar to &quot;Table 1. Values for the coefficients a, b, c, d, and e required to calculate growing degree day driven crop coefficients (Kc)(from Martel et al. 2021)&quot;
+        ///Crop,a,b,c,d,e
         ///Alfalfa seed,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
         ///Tame legume,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
         ///Barley,4.22E-02,1.51E-03,4.89E-06,-8.69E-09,2.49E-12
         ///Barley silage,4.48E-02,1.44E-03,5.25E-06,-9.33E-09,2.84E-12
         ///Barley silage underseed,4.52E-02,1.44E-03,5.23E-06,-9.26E-09,2.79E-12
-        ///Undersown Barley,4.52E-02,1.44E-03,5.23E-06,-9.26E-09,2.79E-12
-        ///Brome hay,1.01240697,0.004093333,,,
-        ///Canary seed,-1.38E-02,2.50E-03,8.09E-07,-3.44E-09,9.49E-13
-        ///Canola,8.70E-02,7.13E-03,-0. [rest of string was truncated]&quot;;.
+        ///Undersown Barley,4.52E-02,1.44E-03, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_1_Growing_Degree_Crop_Coefficients {
             get {

@@ -66,7 +66,6 @@ namespace H.Core.Providers.Plants
             {
                 lookupType = CropType.FlaxSeed;
             }
-
             if (cropType == CropType.FieldPeas)
             {
                 lookupType = CropType.DryFieldPeas;
@@ -78,7 +77,6 @@ namespace H.Core.Providers.Plants
             {
                 return data;
             }
-            
             else
             {
                 Trace.TraceError($"{nameof(Table_9_Nitrogen_Lignin_Content_In_Crops_Provider)}.{nameof(Table_9_Nitrogen_Lignin_Content_In_Crops_Provider.GetDataByCropType)}" +

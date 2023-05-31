@@ -5558,4 +5558,10 @@
   <data name="EnumBoarsDietType" xml:space="preserve">
     <value>Boars</value>
   </data>
+  <data name="MenuExportClimateData" xml:space="preserve">
+    <value>Export Climate Data</value>
+  </data>
+  <data name="TitleSelectFarmClimateToExport" xml:space="preserve">
+    <value>Select farms to export climate data</value>
+  </data>
 </root>
