@@ -323,7 +323,7 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 <br>
 
-#### Exporting
+### Exporting
 
 1.	To export a file, click on the “**Export**” icon under the “**File**” tab. This will open a window where you can see a list of farms that you can export. 
 2.	You can **add a description** to each farm or modify the name of the farm by clicking on the appropriate box and modifying its contents. 
