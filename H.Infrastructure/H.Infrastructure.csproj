@@ -46,6 +46,9 @@
     <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="SharpKml.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9bb853c026a5c0ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpKml.Core.6.0.0\lib\netstandard2.0\SharpKml.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -99,12 +102,18 @@
     <Compile Include="Csv.cs" />
     <Compile Include="CsvReader.cs" />
     <Compile Include="EnumHelper.cs" />
+    <Compile Include="KmlHelpers.cs" />
     <Compile Include="MathHelpers.cs" />
     <Compile Include="MessageBase.cs" />
     <Compile Include="MultiKeyDictionary.cs" />
     <Compile Include="NetworkHelper.cs" />
     <Compile Include="NotificationInformation.cs" />
     <Compile Include="ObservableCollectionExtensions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="StringHelper.cs" />
     <Compile Include="WeightedAverageInput.cs" />
     <Compile Include="FileSystemHelper.cs" />
@@ -117,7 +126,22 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\Alberta_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\BC_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\MB_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NB_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NFLD_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NS_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\ON_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\PEI_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\QC_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\SK_No_Styles.kml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

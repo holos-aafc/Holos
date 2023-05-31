@@ -50,17 +50,27 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="SharpKml.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9bb853c026a5c0ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpKml.Core.6.0.0\lib\net462\SharpKml.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KmlHelpersTest.cs" />
     <Compile Include="ListExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\H.Core\H.Core.csproj">
+      <Project>{08D833EF-D06E-42F1-B548-89E985DFC26B}</Project>
+      <Name>H.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
       <Project>{0c9d716e-6579-4ee6-aea6-5b019563ad95}</Project>
       <Name>H.Infrastructure</Name>
