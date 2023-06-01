@@ -11,6 +11,7 @@ using CsvHelper;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers.Precipitation;
 using H.Core.Tools;
 
@@ -121,37 +122,36 @@ namespace H.Core.Providers.Climate
             var path = outputPath;
 
             using (var writer = new StreamWriter(path))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 var results = farm.ClimateData.DailyClimateData;
 
-                foreach(var data in results)
+                string[] columnNames = {
+                    Properties.Resources.Year,
+                    Properties.Resources.JulianDay,
+                    Properties.Resources.MeanDailyAirTemperature,
+                    Properties.Resources.MeanDailyPrecipitation,
+                    Properties.Resources.MeanDailyPET,
+                    Properties.Resources.RelativeHumidity,
+                    Properties.Resources.SolarRadiation,
+                    Properties.Resources.Date,
+};
+
+                writer.WriteLine(string.Join(",", columnNames));
+
+                foreach (var data in results)
                 {
-                    var year = data.Year;
-                    var julianDay = data.JulianDay;
-                    var meanDailyAirTemperature = data.MeanDailyAirTemperature;
-                    var meanDailyPrecipitation = data.MeanDailyPrecipitation;
-                    var meanDailyPET = data.MeanDailyPET;
-                    var relativeHumidity = data.RelativeHumidity;
-                    var solarRadiation = data.SolarRadiation;
-                    var date = data.Date;
-
-                    var record = new
-                    {
-                        Year = year,
-                        JulianDay = julianDay,
-                        MeanDailyAirTemperature = meanDailyAirTemperature,
-                        MeanDailyPrecipitation = meanDailyPrecipitation,
-                        MeanDailyPET = meanDailyPET,
-                        RelativeHumidity = relativeHumidity,
-                        SolarRadiation = solarRadiation,
-                        Date = date,
-
-                    };
-                    csv.WriteRecords(new[] { record });
+                    string year = Convert.ToString(data.Year);
+                    string julianDay = Convert.ToString(data.JulianDay);
+                    string meanDailyAirTemperature = Convert.ToString(data.MeanDailyAirTemperature);
+                    string meanDailyPrecipitation = Convert.ToString(data.MeanDailyPrecipitation);
+                    string meanDailyPET = Convert.ToString(data.MeanDailyPET);
+                    string relativeHumidity = Convert.ToString(data.RelativeHumidity);
+                    string solarRadiation = Convert.ToString(data.SolarRadiation);
+                    string date = $"{Convert.ToString(data.Date.Month)}/{Convert.ToString(data.Date.Day)}/{Convert.ToString(data.Date.Year)}";
+                    string[] rowData = { year, julianDay, meanDailyAirTemperature, meanDailyPrecipitation, meanDailyPET, relativeHumidity, solarRadiation, date };
+                    writer.WriteLine(string.Join(",", rowData));
                 }
             }
-            //throw new NotImplementedException();
         }
 
         #endregion
