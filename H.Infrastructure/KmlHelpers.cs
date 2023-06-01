@@ -57,32 +57,33 @@ namespace H.Infrastructure
             foreach (string name in FileNames)
             {
                 var fileName = $@"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.{name}";
-                var items = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-                var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(fileName);
-                if (stream == null) return 0;
-
-                var reader = new StreamReader(stream);
-                var parser = new Parser();
-                // Parse the stream of the kml file
-                parser.ParseString(reader.ReadToEnd(), false);
-                // Get the root element
-                Kml root = (Kml)parser.Root;
-
-                bool inside = false;
-
-                // Loop through all the Placemarks in the KML file
-                foreach (var placemark in root.Flatten().OfType<Placemark>())
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(fileName))
                 {
-                    if (placemark.Geometry is Polygon polygon)
-                    {
-                        inside = IsPointInPolygon(polygon, point);
-                    }
+                    if (stream == null) return 0;
 
-                    if (inside)
+                    using (var reader = new StreamReader(stream))
                     {
-                        return int.Parse(placemark.Name);
+                        var parser = new Parser();
+                        parser.ParseString(reader.ReadToEnd(), false);
+                        Kml root = (Kml)parser.Root;
+
+                        bool inside = false;
+
+                        foreach (var placemark in root.Flatten().OfType<Placemark>())
+                        {
+                            if (placemark.Geometry is Polygon polygon)
+                            {
+                                inside = IsPointInPolygon(polygon, point);
+                            }
+
+                            if (inside)
+                            {
+                                return int.Parse(placemark.Name);
+                            }
+                        }
                     }
                 }
+
             }
 
             return 0;
