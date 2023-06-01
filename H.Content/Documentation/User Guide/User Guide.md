@@ -428,9 +428,10 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 </p>
 <br>
 
-#### Exporting Climate Data Files
+#### Exporting Climate Data
 
 You can export your farms' climate data to a CSV file (file extension ‘. csv’), which can be viewed in software like Excel.  
+The following instructions are similar to those for [exporting](#exporting-farms) a farm:
 
 1.	To export a file, click on the “**Export Climate Data**” icon under the “**File**” tab. This will open a window where you can see a list of farms that you can export. 
 2.	You can **add a description** to each farm or modify the name of the farm by clicking on the appropriate box and modifying its contents. 
@@ -440,15 +441,9 @@ You can export your farms' climate data to a CSV file (file extension ‘. csv�
 6.	You can also **add a new folder** in the current location by **clicking on the “New Folder” button** at the top left of your screen. 
 7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen.
 8. Click “**Save**” to finish once you have selected a location
-
-Note that these instructions are similar to the instructions for [Exporting](#exporting-farms) a farm. This is because the interface for and functionality of these export
-options are nearly identical. 
 <br>
-The main functional difference is exporting multiple farms will result in a single .json file, whereas exporting the climate
-data for multiple farms results in multiple .csv files. 
-<br>
-When exporting the climate data for multiple farms, step 4 in the process outlined above will repeat for the amount of farms you have chosen to export climate data for.
-
+Note that when you export multiple farms' climate data, you will repeat steps 4-8 in the instructions above.
+This is because you will be exporting farms' climate data to multiple .csv files, rather than a single .csv file. 
 
 #### Save As
 
