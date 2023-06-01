@@ -2653,6 +2653,9 @@
   <data name="LabelAcidEtherExtract" xml:space="preserve">
     <value>extrait à l'éther acide</value>
   </data>
+  <data name="LabelActivePool" xml:space="preserve">
+    <value>Active pool</value>
+  </data>
   <data name="LabelAddAtLeastOneHarvestBeforeAddingHayImport" xml:space="preserve">
     <value>Pour ajouter du foin comme supplément alimentaire du champ ‘{0}’, au moins une récolte doit avoir été faite dans ce champ.</value>
   </data>
@@ -3535,6 +3538,9 @@
   <data name="LabelOverflow" xml:space="preserve">
     <value>trop-plein</value>
   </data>
+  <data name="LabelPassivePool" xml:space="preserve">
+    <value>Passive pool</value>
+  </data>
   <data name="LabelPastPerennials" xml:space="preserve">
     <value>vivace passée</value>
   </data>
@@ -3702,6 +3708,9 @@
   </data>
   <data name="LabelSlowGrowthDiet" xml:space="preserve">
     <value>ration pour croissance lente</value>
+  </data>
+  <data name="LabelSlowPool" xml:space="preserve">
+    <value>Slow pool</value>
   </data>
   <data name="LabelSodium" xml:space="preserve">
     <value>sodium</value>

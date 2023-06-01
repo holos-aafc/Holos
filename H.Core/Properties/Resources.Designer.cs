@@ -889,6 +889,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to days.
         /// </summary>
         public static string Days {
@@ -6937,6 +6946,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Julian Day.
+        /// </summary>
+        public static string JulianDay {
+            get {
+                return ResourceManager.GetString("JulianDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to July.
         /// </summary>
         public static string July {
@@ -7689,6 +7707,15 @@ namespace H.Core.Properties {
         public static string LabelAcidEtherExtract {
             get {
                 return ResourceManager.GetString("LabelAcidEtherExtract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active pool.
+        /// </summary>
+        public static string LabelActivePool {
+            get {
+                return ResourceManager.GetString("LabelActivePool", resourceCulture);
             }
         }
         
@@ -10348,6 +10375,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passive pool.
+        /// </summary>
+        public static string LabelPassivePool {
+            get {
+                return ResourceManager.GetString("LabelPassivePool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Past perennial.
         /// </summary>
         public static string LabelPastPerennials {
@@ -10857,6 +10893,15 @@ namespace H.Core.Properties {
         public static string LabelSlowGrowthDiet {
             get {
                 return ResourceManager.GetString("LabelSlowGrowthDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow pool.
+        /// </summary>
+        public static string LabelSlowPool {
+            get {
+                return ResourceManager.GetString("LabelSlowPool", resourceCulture);
             }
         }
         
@@ -11820,6 +11865,33 @@ namespace H.Core.Properties {
         public static string May {
             get {
                 return ResourceManager.GetString("May", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean Daily Air Temperature.
+        /// </summary>
+        public static string MeanDailyAirTemperature {
+            get {
+                return ResourceManager.GetString("MeanDailyAirTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean Daily Pet.
+        /// </summary>
+        public static string MeanDailyPET {
+            get {
+                return ResourceManager.GetString("MeanDailyPET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean Daily Precipitation.
+        /// </summary>
+        public static string MeanDailyPrecipitation {
+            get {
+                return ResourceManager.GetString("MeanDailyPrecipitation", resourceCulture);
             }
         }
         
@@ -13786,6 +13858,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RelativeHumidity.
+        /// </summary>
+        public static string RelativeHumidity {
+            get {
+                return ResourceManager.GetString("RelativeHumidity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Root crop.
         /// </summary>
         public static string RootCropGrowingType {
@@ -14007,6 +14088,15 @@ namespace H.Core.Properties {
         public static string SoilTexture {
             get {
                 return ResourceManager.GetString("SoilTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solar Radiation.
+        /// </summary>
+        public static string SolarRadiation {
+            get {
+                return ResourceManager.GetString("SolarRadiation", resourceCulture);
             }
         }
         
@@ -16321,6 +16411,15 @@ namespace H.Core.Properties {
         public static string Yards {
             get {
                 return ResourceManager.GetString("Yards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
             }
         }
         

@@ -163,8 +163,10 @@ namespace H.Core.Test.Integration
             _nasaClimateProvider.EndDate = new DateTime(2022, 8, 18);
             var nasaClimateForDate = _nasaClimateProvider.GetCustomClimateData(50.254, -103.867);
             farm.ClimateData = _climateProvider.Get(nasaClimateForDate, TimeFrame.TwoThousandToCurrent);
+            farm.ClimateAcquisition = Farm.ChosenClimateAcquisition.Custom;
+            
+            
             farm.Defaults.DefaultRunInPeriod = 20;
-
 
             var fieldComponent = new FieldSystemComponent()
             {

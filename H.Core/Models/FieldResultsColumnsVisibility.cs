@@ -33,6 +33,9 @@ namespace H.Core.Models
         private bool _soilCarbon;
         private bool _oldPoolSoilCarbon;
         private bool _ChangeInCarbon;
+        private bool _activePoolCarbon;
+        private bool _passivePoolCarbon;
+        private bool _slowPoolCarbon;
         private bool _syntheticInputsBeforeAdjustment;
         private bool _aboveGroundNitrogenResidueForCrop;
         private bool _belowGroundResidueNitrogenForCrop;
@@ -461,6 +464,24 @@ namespace H.Core.Models
         {
             get => _digestateCarbonInput;
             set => SetProperty(ref _digestateCarbonInput, value);
+        }
+
+        public bool ActivePoolCarbon
+        {
+            get => _activePoolCarbon;
+            set => SetProperty(ref _activePoolCarbon, value);
+        }
+
+        public bool PassivePoolCarbon
+        {
+            get => _passivePoolCarbon;
+            set => SetProperty(ref _passivePoolCarbon, value);
+        }
+
+        public bool SlowPoolCarbon
+        {
+            get => _slowPoolCarbon;
+            set => SetProperty(ref _slowPoolCarbon, value);
         }
 
         #endregion

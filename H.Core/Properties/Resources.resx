@@ -5564,4 +5564,37 @@
   <data name="TitleSelectFarmClimateToExport" xml:space="preserve">
     <value>Select farms to export climate data</value>
   </data>
+  <data name="LabelActivePool" xml:space="preserve">
+    <value>Active pool</value>
+  </data>
+  <data name="LabelPassivePool" xml:space="preserve">
+    <value>Passive pool</value>
+  </data>
+  <data name="LabelSlowPool" xml:space="preserve">
+    <value>Slow pool</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="JulianDay" xml:space="preserve">
+    <value>Julian Day</value>
+  </data>
+  <data name="MeanDailyAirTemperature" xml:space="preserve">
+    <value>Mean Daily Air Temperature</value>
+  </data>
+  <data name="MeanDailyPET" xml:space="preserve">
+    <value>Mean Daily Pet</value>
+  </data>
+  <data name="MeanDailyPrecipitation" xml:space="preserve">
+    <value>Mean Daily Precipitation</value>
+  </data>
+  <data name="RelativeHumidity" xml:space="preserve">
+    <value>RelativeHumidity</value>
+  </data>
+  <data name="SolarRadiation" xml:space="preserve">
+    <value>Solar Radiation</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
 </root>

@@ -154,6 +154,7 @@ namespace H.Core.Test.Providers.Climate
                 };
                 listOfDailyClimateData.Add(dailyClimateData);
             }
+
             return listOfDailyClimateData;
         }
 
