@@ -441,8 +441,8 @@ The following instructions are similar to those for [exporting](#exporting-farms
 6.	You can also **add a new folder** in the current location by **clicking on the “New Folder” button** at the top left of your screen. 
 7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen.
 8. Click “**Save**” to finish once you have selected a location
-<br>
-Note that when you export multiple farms' climate data, you will repeat steps 4-8 in the instructions above.
+
+Note that when you export multiple farms' climate data, you will repeat steps 4-8 in the instructions above for the amount of farms you have selected.
 This is because you will be exporting farms' climate data to multiple .csv files, rather than a single .csv file. 
 
 #### Save As
