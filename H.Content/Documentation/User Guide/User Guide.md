@@ -367,6 +367,16 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 </p>
 <br>
 
+#### Exporting Climate Data
+
+You can export your farms' climate data to a CSV file (file extension ‘. csv’), which can be viewed in software like Excel.  
+
+1.	To export farm climate data, click on the “**Export Climate Data**” icon under the “**File**” tab. This will open a window where you can see a list of farms that you can export climate data for. 
+2.	You can **add a description** to each farm or modify the name of the farm by clicking on the appropriate box and modifying its contents. 
+3. Click on the **farm**(s) you would like to include and click “**Export**” at the bottom. **The selected farm(s) will appear shaded*.*
+4.	After you have selected your farm(s) and have clicked the “**Export**” button, you will be prompted to **choose a location where you would like the file to be created** one of the farms. 
+5.	Continue with steps 4-8 from [Exporting Farms](#exporting-farms) for the amount of farms you have selected. 
+
 
 #### Importing
 
@@ -427,17 +437,6 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 	</em>
 </p>
 <br>
-
-#### Exporting Climate Data
-
-You can export your farms' climate data to a CSV file (file extension ‘. csv’), which can be viewed in software like Excel.  
-The following instructions are similar to those for [exporting](#exporting-farms) a farm:
-
-1.	To export farm climate data, click on the “**Export Climate Data**” icon under the “**File**” tab. This will open a window where you can see a list of farms that you can export climate data for. 
-2.	You can **add a description** to each farm or modify the name of the farm by clicking on the appropriate box and modifying its contents. 
-3. Click on the **farm**(s) you would like to include and click “**Export**” at the bottom. The selected farm(s) will appear shaded*.*
-4.	After you have selected your farm(s) and have clicked the “**Export**” button, you will be prompted to **choose a location where you would like the file to be created** for each farm. 
-5.	Continue with steps 4-8 from [Exporting Farms](#exporting-farms) for the amount of farms you have selected. 
 
 #### Save As
 
