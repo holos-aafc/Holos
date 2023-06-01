@@ -441,7 +441,7 @@ You can export your farms' climate data to a CSV file (file extension ‘. csv�
 7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen.
 8. Click “**Save**” to finish once you have selected a location
 
-Note that these instructions are similar to the instructions for [Exporting Farms](#exporting) a farm. This is because the interface for and functionality of these export
+Note that these instructions are similar to the instructions for [Exporting](#exporting farms) a farm. This is because the interface for and functionality of these export
 options are nearly identical. 
 <br>
 The main functional difference is exporting multiple farms will result in a single .json file, whereas exporting the climate
