@@ -181,6 +181,7 @@ namespace H.Core.Test.Providers.Climate
         {
             // Setup
             var somePath = Directory.GetCurrentDirectory();
+            somePath = somePath + "test.csv";
 
             var dailyClimateData = new List<DailyClimateData>(){new DailyClimateData() {Date = DateTime.Now, MeanDailyAirTemperature = 10}};
             DailyClimateData dailyClimateData2 = new DailyClimateData() { Date = DateTime.Now, MeanDailyAirTemperature = 12, SolarRadiation = 2 };

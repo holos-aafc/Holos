@@ -71,6 +71,11 @@ namespace H.Core.Providers.Plants
                 lookupType = CropType.DryFieldPeas;
             }
 
+            if (cropType == CropType.Wheat)
+            {
+                lookupType = CropType.Durum;
+            }
+
             Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = this.Data.Find(x => x.CropType == lookupType);
 
             if (data != null)

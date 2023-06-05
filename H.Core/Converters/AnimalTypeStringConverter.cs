@@ -59,9 +59,14 @@ namespace H.Core.Converters
                 case "boar":
                 case "swineboar":
                     return AnimalType.SwineBoar;
+                case "piglets":
+                    return AnimalType.SwinePiglets;
                 case "drysow":
                     return AnimalType.SwineDrySow;
+                case "sow":
+                    return AnimalType.SwineSows;
                 case "grower":
+                case "hogs":
                 case "swinegrower":
                     return AnimalType.SwineGrower;
                 case "lactatingsow":
