@@ -81,7 +81,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Allow for field specific soil data (as opposed to one type of soil being used for all fields on the farm)
         /// </summary>
-        public SoilData SoilData {
+        public SoilData SoilData
+        {
             get
             {
                 return _soilData;

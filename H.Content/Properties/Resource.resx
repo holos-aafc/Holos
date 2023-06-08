@@ -484,4 +484,7 @@
   <data name="Table_70_Fractions_of_swine_N_volatilized" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_70_Fractions_of_swine_N_volatilized.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="Table_28_Average_Number_Of_Production_Days" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_28_Average_Number_Of_Production_Days.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

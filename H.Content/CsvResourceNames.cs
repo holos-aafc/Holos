@@ -155,6 +155,8 @@
         DairyFractionOfNAmmoniaLandAppliedManure,
         SwineFractionOfNAmmoniaLandAppliedManure,
 
-        PercentageTotalManureProduced
+        PercentageTotalManureProduced,
+
+        AnimalSystemProductionDays
     }
 }

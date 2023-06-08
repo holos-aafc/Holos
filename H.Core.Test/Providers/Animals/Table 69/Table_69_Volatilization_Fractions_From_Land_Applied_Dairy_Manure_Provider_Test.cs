@@ -2,7 +2,7 @@
 using H.Core.Providers.Animals.Table_69;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace H.Core.Test.Providers.Animals
+namespace H.Core.Test.Providers.Animals.Table_69
 {
     [TestClass]
     public class Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test

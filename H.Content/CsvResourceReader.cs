@@ -357,6 +357,9 @@ namespace H.Content
 
                 case CsvResourceNames.PercentageTotalManureProduced:
                     return SplitFileIntoLines(Resource.Table_29_Percentage_Total_Manure_Produced_In_Systems);
+
+                case CsvResourceNames.AnimalSystemProductionDays:
+                    return SplitFileIntoLines(Resource.Table_28_Average_Number_Of_Production_Days);
                 default:
                     return null;
             }

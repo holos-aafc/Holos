@@ -96,6 +96,7 @@
     <None Include="Resources\dairy_feed_composition.csv" />
     <None Include="Resources\ecodistrict_to_ecozone_mapping.csv" />
     <None Include="Resources\ednames.csv" />
+    <None Include="Resources\Table_28_Average_Number_Of_Production_Days.csv" />
     <None Include="Resources\Table_2_Climate_Normal_Periods.csv" />
     <None Include="Resources\Table_29_Percentage_Total_Manure_Produced_In_Systems.csv" />
     <None Include="Resources\Table_41_Poultry_N_Excretion_Rate_Parameter_Values.csv" />

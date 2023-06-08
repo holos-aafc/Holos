@@ -20,6 +20,10 @@ namespace H.Core.Converters
                 case "backgrounding":
                 case "backgrounder":
                     return AnimalType.BeefBackgrounder;
+                case "backgroundingsteers":
+                    return AnimalType.BeefBackgrounderSteer;
+                case "backgroundingheifers":
+                    return AnimalType.BeefBackgrounderHeifer;
                 case "beef":
                 case "nondairycattle":
                 case "beefcattle":
@@ -59,11 +63,13 @@ namespace H.Core.Converters
                 case "boar":
                 case "swineboar":
                     return AnimalType.SwineBoar;
+                case "weaners":
                 case "piglets":
                     return AnimalType.SwinePiglets;
                 case "drysow":
                     return AnimalType.SwineDrySow;
                 case "sow":
+                case "sows":
                     return AnimalType.SwineSows;
                 case "grower":
                 case "hogs":
@@ -126,6 +132,7 @@ namespace H.Core.Converters
                 case "poultrypulletsbroilers":
                 case "broilers":
                     return AnimalType.Broilers;
+                case "chickenpullets":
                 case "pullets":
                     return AnimalType.ChickenPullets;
                 case "chicken":

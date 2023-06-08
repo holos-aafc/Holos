@@ -1,0 +1,26 @@
+Livestock type,Component,Production stage,Animal group,Number of days in production cycle,Number of non-production days between cycles,
+,,,,,,
+Beef cattle,Backgrounding,,Backgrounding steers,109,7,
+,Backgrounding,,Backgrounding heifers,109,7,
+,,,,,,
+Swine,Grower to finish,,Hogs,114,7 (1),
+,Isowean,Weaning,Weaners,35,7 (1),
+,Farrow to wean,,Sows (2),140,0,
+,Farrow to wean,Weaned,Piglets,21,119,
+,Farrow to finish,,Sows (2),140,0,
+,Farrow to finish,Weaned,Piglets,21,119 (3),
+,Farrow to finish,Weaning,Weaners,35,105 (3),
+,Farrow to finish,,Hogs,114,26 (3),
+,,,,,,
+Poultry,,,Pullets,133 (4),15 (5),
+,,,Broilers,42 (5),15 (5),
+,,,Roasters,56,15 (5),
+,,,Layers,358 (5),7 (5),
+,,,Turkey,107 (6),15 (6),
+,,,,,,
+,,,,,,"""1 Source: Pers. Comm., D. Beaulieu"""
+,,,,,,"""2 For the farrow-to-wean and farrow-to-finish production systems, the following assumptions have been made: just one group of gilts enters the barn each year as replacement breeding animals for older sows that are to be culled from the breeding stock, so there is just one “Gilt” production cycle per year as following their first litter they are referred to as sows; the entire production cycle for sows equals 140 days (5 days open + 114 gestating + 21 lactating) and that the “open” period is equivalent to a “rest” or “non-production” period; there is just a single management period for boars, which are present in the barn year-round – these animals are used for heat detection as it is assumed that the default farm practises artificial insemination using off-farm boars, which are not considered as a default in the Holos"""
+,,,,,,"""3 The default number of days between production cycles for piglets is based on the duration between the weaning of one litter and the birth of the next; for weaners, it is based on the duration between one group of weaners passing to the grower-finisher stage and the next group of piglets being weaned; for grower-finisher hogs, it is based on the duration between one group of hogs leaving the system for slaughter and the next group exiting the weaner stage"""
+,,,,,,"""4 New-Life Mills (2016)"""
+,,,,,,"""5 Sheppard et al. (2009a) – for pullets and roasters, the reported value for broilers was used"""
+,,,,,,"""6 Average no. days in a turkey production cycle was calculated based on an average of 15 days between cycles and an average of 3 production cycles per year from Sheppard et al. (2009a)"""

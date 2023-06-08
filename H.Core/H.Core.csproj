@@ -144,6 +144,7 @@
     <Compile Include="Calculators\UnitsOfMeasurement\UnitsOfMeasurementCalculator.cs" />
     <Compile Include="Converters\AnimalTypeStringConverter.cs" />
     <Compile Include="Converters\BeddingMaterialTypeStringConverter.cs" />
+    <Compile Include="Converters\ComponentTypeStringConverter.cs" />
     <Compile Include="Converters\CropTypeStringConverter.cs" />
     <Compile Include="Converters\DairyFeedClassTypeConverter.cs" />
     <Compile Include="Converters\DietTypeStringConverter.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Converters\ModelParameterStringConverter.cs" />
     <Compile Include="Converters\PastureTypeStringConverter.cs" />
     <Compile Include="Converters\PerennialCroppingChangeTypeStringConverter.cs" />
+    <Compile Include="Converters\ProductionStageStringConverter.cs" />
     <Compile Include="Converters\ResponseToVisibilityConverter.cs" />
     <Compile Include="Converters\ShelterbeltEnabledFromHardinessZoneConverter.cs" />
     <Compile Include="Converters\SoilFunctionalCategoryStringConverter.cs" />
@@ -337,6 +339,9 @@
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
+    <Compile Include="Providers\Animals\Table 28\ITable_28_Production_Days_Provider.cs" />
+    <Compile Include="Providers\Animals\Table 28\ProductionDaysData.cs" />
+    <Compile Include="Providers\Animals\Table 28\Table_28_Production_Days_Provider.cs" />
     <Compile Include="Providers\Animals\Table 69\IVolatilizationFractionsFromLandAppliedManureProvider.cs" />
     <Compile Include="Providers\Animals\Table 69\VolatilizationFractionsFromLandAppliedManureData.cs" />
     <Compile Include="Providers\Animals\Table 69\Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider.cs" />

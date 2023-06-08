@@ -1534,6 +1534,27 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Livestock type,Component,Animal group,Number of days in production cycle,Number of non-production days between cycles,
+        ///,,,,,
+        ///Beef cattle,Backgrounding,Backgrounding steers,109,7,
+        ///,Backgrounding,Backgrounding heifers,109,7,
+        ///,,,,,
+        ///Swine,Grower to finish,Hogs,114,7 (1),
+        ///,Isowean,Weaners,35,7 (1),
+        ///,Farrow to wean,Sows (2),140,0,
+        ///,Farrow to wean,Piglets,21,119,
+        ///,Farrow to finish,Sows (2),140,0,
+        ///,Farrow to finish,Piglets,21,119 (3),
+        ///,Farrow to finish,Weaners,35,105 (3),
+        ///,Farrow to finish,Hogs,114,26 ( [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_28_Average_Number_Of_Production_Days {
+            get {
+                return ResourceManager.GetString("Table_28_Average_Number_Of_Production_Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Animal group,Liquid systems (1),Solid storage and drylot (1),&quot;Pasture, range and paddock&quot; (1),Other systems (1),Manureexcreted_rate (kg head-1 day-1)
         ///Non-dairy cattle,5.3,45,45,4.2,-9
         ///Dairy cattle,64,18,16,2.9,-9
@@ -1903,16 +1924,17 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %
-        ///Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12
-        ///Buckwheat,0.344,0.015,0.229,0.007,0.053,12
-        ///Canola,0.18 (3),0.046 (3),0.375,0.0083,0.073,9
-        ///CEREALS,0.38,0.015,0.248,0.0083,0.073,12
-        ///CHICKPEA,0.301 (3),0.063 (3),0.219,0.008,0.075,13
-        ///GrainCorn,0.369 (3),0.015 (3),0.25,0.0063,0.11,15
-        ///CORNSiLaGe,0.369 (3),0.015 (3),0.25,0.0063,0.11,70
-        ///DryFieldBeaNS,0.2,0.099,0.224,0.008,0.085,13
-        ///DryFieldPEAS,0.163 (3),0.07 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Group,Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %
+        ///,Summerfallow,0,0,0,0,0,0
+        ///,,,,,,,
+        ///Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12
+        ///,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12
+        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12
+        ///,Oats,0.357 (3),0.029 (3),0.419,0.0073,0.047,12
+        ///,Triticale,0.344,0.015,0.229,0.007,0.053,12
+        ///,Sorghum (4),-9,-9,-9,0.0065,0.06,0
+        ///,Canary Seed,0.171,0.11,0.193,0.008,0.073,8
+        ///,Buckwheat,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops {
             get {
