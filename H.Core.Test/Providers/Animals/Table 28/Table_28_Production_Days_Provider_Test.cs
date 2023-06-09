@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Providers.Animals.Table_28;
 
 namespace H.Core.Test.Providers.Animals.Table_28
@@ -47,7 +48,7 @@ namespace H.Core.Test.Providers.Animals.Table_28
         [TestMethod]
         public void GetBackgroundingDataTest()
         {
-            var result = _sut.GetBackgroundingData();
+            var result = _sut.GetData(new ManagementPeriod() {AnimalType = AnimalType.BeefBackgrounderSteer}, ComponentType.Backgrounding);
 
             Assert.AreEqual(109, result.NumberOfDaysInProductionCycle);
         }
@@ -55,7 +56,7 @@ namespace H.Core.Test.Providers.Animals.Table_28
         [TestMethod]
         public void GetSwineDataTest()
         {
-            var result = _sut.GetSwineData(AnimalType.SwineSows, ComponentType.FarrowToFinish);
+            var result = _sut.GetData(new ManagementPeriod() { AnimalType = AnimalType.SwineSows }, ComponentType.FarrowToFinish);
 
             Assert.AreEqual(140, result.NumberOfDaysInProductionCycle);
         }
@@ -63,7 +64,7 @@ namespace H.Core.Test.Providers.Animals.Table_28
         [TestMethod]
         public void GetSwineWeanerDataTest()
         {
-            var result = _sut.GetSwineData(AnimalType.SwinePiglets, ComponentType.IsoWean, ProductionStages.Weaning);
+            var result = _sut.GetData(new ManagementPeriod() { AnimalType = AnimalType.SwinePiglets, ProductionStage = ProductionStages.Weaning}, ComponentType.IsoWean);
 
             Assert.AreEqual(35, result.NumberOfDaysInProductionCycle);
         }
@@ -71,7 +72,7 @@ namespace H.Core.Test.Providers.Animals.Table_28
         [TestMethod]
         public void GetPoultryDataTest()
         {
-            var result = _sut.GetPoultryData(AnimalType.ChickenPullets);
+            var result = _sut.GetData(new ManagementPeriod() { AnimalType = AnimalType.ChickenPullets });
 
             Assert.AreEqual(133, result.NumberOfDaysInProductionCycle);
         }

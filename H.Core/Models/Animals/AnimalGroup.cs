@@ -48,7 +48,14 @@ namespace H.Core.Models.Animals
 
         #endregion
 
-        #region Properties        
+        #region Properties
+
+        /// <summary>
+        /// The total number of days of rest between animal production system cycles. This is the time needed to clean pens/barns etc. The total number
+        /// of days in the production period (non-rest days) is calculated by totaling the number of days over all the <see cref="ManagementPeriods"/> in
+        /// the production period.
+        /// </summary>
+        public int NumberOfDaysRestBetweenCycles { get; set; }
 
         public ObservableCollection<ManagementPeriod> ManagementPeriods { get; set; } = new ObservableCollection<ManagementPeriod>();
 

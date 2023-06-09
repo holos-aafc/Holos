@@ -13,6 +13,7 @@ namespace H.Core.Providers.Animals.Table_28
         public int NumberOfDaysInProductionCycle { get; set; }
         public int NumberOfNonProductionDaysBetweenCycles { get; set; }
         public ProductionStages? ProductionStage { get; set; }
+        public bool EmissionsShouldBeScaled { get; set; }
 
         #endregion
     }

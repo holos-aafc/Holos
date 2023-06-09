@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using H.Core.Enumerations;
+using H.Infrastructure;
 
 namespace H.Core.Converters
 {
@@ -33,9 +34,11 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError($"{nameof(ProductionStageStringConverter)}.{nameof(ProductionStageStringConverter.Convert)}: unknown production stage '{input}'. Returning {ProductionStages.BreedingStock}");
+                        ProductionStages notFound = ProductionStages.Gestating;
 
-                    return ProductionStages.BreedingStock;
+                    Trace.TraceError($"{nameof(ProductionStageStringConverter)}.{nameof(ProductionStageStringConverter.Convert)}: unknown production stage '{input}'. Returning {notFound.GetDescription()}");
+
+                    return notFound;
                 }
             }
         }
