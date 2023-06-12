@@ -29,6 +29,10 @@ Il existe un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Do
 
 Un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/UserGuide_French.md" target="_blank">guide de l’utilisateur Holos 4</a> est également disponible. Ce guide peut être utilisé comme un manuel plus approfondi sur la façon d’utiliser les différentes fonctionnalités de Holos.
 
+# Exigences d'entrée
+
+Une liste complète de toutes les entrées requises et facultatives requises par le modèle peut être trouvée <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">ici</a>.
+
 # Télécharger
 
 L'interface graphique de Holos 4 peut être téléchargée et utilisée à partir du <a href="https://agriculture.canada.ca/fr/sciences-agricoles-innovation/resultats-recherches-agriculture/holos" > Page Web d'Agriculture et Agroalimentaire Canada</a>.
