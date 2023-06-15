@@ -498,6 +498,9 @@ namespace H.Core.Calculators.Carbon
             if (this.CalculationMode == CalculationModes.Carbon)
             {
                 currentYearViewItem.SoilCarbon = totalStock;
+                currentYearViewItem.ActivePoolCarbon = currentYearIpccTier2Results.ActivePool;
+                currentYearViewItem.SlowPoolCarbon = currentYearIpccTier2Results.SlowPool;
+                currentYearViewItem.PassivePoolCarbon = currentYearIpccTier2Results.PassivePool;
             }
             else
             {

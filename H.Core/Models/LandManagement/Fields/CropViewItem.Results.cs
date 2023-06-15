@@ -340,10 +340,38 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
-        public IPCCTier2Results IpccTier2CarbonResults { get; set; }
-        public IPCCTier2Results IpccTier2NitrogenResults { get; set; }
+        private IPCCTier2Results _carbonResults;
+        private IPCCTier2Results _nitrogenResults;
+
+        public IPCCTier2Results IpccTier2CarbonResults
+        {
+            get
+            {
+                return _carbonResults;
+            }
+            set
+            {
+                SetProperty(ref _carbonResults, value);
+            }
+        }
+
+        public IPCCTier2Results IpccTier2NitrogenResults
+        {
+            get
+            {
+                return _nitrogenResults;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenResults, value);
+            }
+        }
 
         #region IPCC Tier 2
+
+        public double ActivePoolCarbon { get; set; }
+        public double SlowPoolCarbon { get; set; }
+        public double PassivePoolCarbon { get; set; }
 
         /// <summary>
         /// Annual average air temperature effect on decomposition
