@@ -31,6 +31,8 @@ Un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentatio
 
 Un guide de formation spécifique aux porcs peut être trouvé <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Swine%20Training%20Guide/Holos_4_Swine_Training_Guide.md" target="_blank">ici</a>.
 
+Un guide de formation spécifique aux produits laitiers peut être trouvé <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Dairy%20Training%20Guide/Holos_4_Dairy_Training_Guide.md" target="_blank">ici</a>.
+
 # Exigences d'entrée
 
 Une liste complète de toutes les entrées requises et facultatives requises par le modèle peut être trouvée <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">ici</a>. Une version internationale (non canadienne) de ce document est disponible <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4_International.md" target="_blank">ici</a>.

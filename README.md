@@ -27,6 +27,8 @@ There is a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Docu
 
 A swine specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Swine%20Training%20Guide/Holos_4_Swine_Training_Guide.md" target="_blank">here</a>.
 
+A dairy specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Dairy%20Training%20Guide/Holos_4_Dairy_Training_Guide.md" target="_blank">here</a>.
+
 # User Guide
 
 There is also a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md" target="_blank">Holos 4 User Guide</a> available. This guide can be used as a more in-depth manual on how to use the various features of Holos.
