@@ -618,7 +618,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 22.png" alt="Figure 22" width="650"/>
+    <img src="../../Images/SwineGuide/en/Figure 22.jpg" alt="Figure 22" width="650"/>
     <br>
     <em>Figure 22: Editing crops in a historical period of the rotation. </em>
 </p> 
@@ -700,7 +700,7 @@ The **'Feed Estimate'** report provides an estimate of dry matter intake based o
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 26.png" alt="Figure 26" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 26.jpg" alt="Figure 26" width="950"/>
     <br>
     <em>Figure 26: Feed estimate report.</em>
 </p> 
@@ -720,7 +720,7 @@ If you would like to export your entire farm file, from **File** on the main tas
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 27.png" alt="Figure 27" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 27.jpg" alt="Figure 27" width="950"/>
     <br>
     <br>
     <em>Figure 27: Carbon report section. Allows switching between graph shown here and table format shown below.</em>
@@ -729,7 +729,7 @@ If you would like to export your entire farm file, from **File** on the main tas
 <br>
     
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 28.png" alt="Figure 28" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 28.jpg" alt="Figure 28" width="950"/>
     <br>
     <em>Figure 28: Carbon report section. The table format.</em>
 </p>
