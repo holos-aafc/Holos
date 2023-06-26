@@ -31,7 +31,7 @@ There is also a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content
 
 # Input Requirements
 
-A complete list of all required and optional inputs required by the model can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">here</a>.
+A complete list of all required and optional inputs required by the model can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">here</a>. An international version of this document can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4_International.md" target="_blank">here</a>.
 
 # Download
 
