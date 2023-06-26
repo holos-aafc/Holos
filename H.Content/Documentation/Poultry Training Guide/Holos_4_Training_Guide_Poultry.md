@@ -289,7 +289,7 @@ Adding animal components follows the exact same approach that was used for the l
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure14.png" alt="Figure 14" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure14.gif" alt="Figure 14" width="950"/>
     <br>
     <em>Figure 14: The Poultry Components.</em>
 </p>
