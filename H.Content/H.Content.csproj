@@ -62,6 +62,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\SwineGuide\Figure 1.png" />
+    <Content Include="Images\SwineGuide\Figure 10.png" />
+    <Content Include="Images\SwineGuide\Figure 11.gif" />
+    <Content Include="Images\SwineGuide\Figure 12.png" />
+    <Content Include="Images\SwineGuide\Figure 13.png" />
+    <Content Include="Images\SwineGuide\Figure 14.gif" />
+    <Content Include="Images\SwineGuide\Figure 15.png" />
+    <Content Include="Images\SwineGuide\Figure 16.png" />
+    <Content Include="Images\SwineGuide\Figure 17.png" />
+    <Content Include="Images\SwineGuide\Figure 18.gif" />
+    <Content Include="Images\SwineGuide\Figure 19.png" />
+    <Content Include="Images\SwineGuide\Figure 2.png" />
+    <Content Include="Images\SwineGuide\Figure 20.png" />
+    <Content Include="Images\SwineGuide\Figure 21.png" />
+    <Content Include="Images\SwineGuide\Figure 22.jpg" />
+    <Content Include="Images\SwineGuide\Figure 23.jpg" />
+    <Content Include="Images\SwineGuide\Figure 24.png" />
+    <Content Include="Images\SwineGuide\Figure 25.png" />
+    <Content Include="Images\SwineGuide\Figure 26.jpg" />
+    <Content Include="Images\SwineGuide\Figure 27.jpg" />
+    <Content Include="Images\SwineGuide\Figure 28.jpg" />
+    <Content Include="Images\SwineGuide\Figure 3.png" />
+    <Content Include="Images\SwineGuide\Figure 4.png" />
+    <Content Include="Images\SwineGuide\Figure 5.png" />
+    <Content Include="Images\SwineGuide\Figure 6.png" />
+    <Content Include="Images\SwineGuide\Figure 7.png" />
+    <Content Include="Images\SwineGuide\Figure 8.png" />
+    <Content Include="Images\SwineGuide\Figure 9.gif" />
+    <Content Include="Images\SwineGuide\Holos logo.png" />
     <Content Include="Scripts\addCopyright.py" />
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
@@ -72,6 +101,8 @@
     <None Include="Documentation\FAQ\FAQ.md" />
     <None Include="Documentation\Input Requirements\Input_Requirements_v4.md" />
     <None Include="Documentation\Input Requirements\Input_Requirements_v4_International.md" />
+    <None Include="Documentation\Swine Training Guide\Holos_4_Swine_Training_Guide.md" />
+    <None Include="Documentation\Swine Training Guide\Holos_4_Swine_Training_Guide_French.md" />
     <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
     <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
     <None Include="Documentation\User Guide\User Guide.md" />
@@ -223,10 +254,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\Dairy Training Guide\" />
-    <Folder Include="Documentation\Swine Training Guide\" />
     <Folder Include="Images\DairyGuide\" />
     <Folder Include="Images\GitHubGuide\" />
-    <Folder Include="Images\SwineGuide\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
