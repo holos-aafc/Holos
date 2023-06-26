@@ -25,6 +25,8 @@ To see answers to the most frequently asked questions about Holos (both the soft
 
 There is a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md" target="_blank">Holos 4 Training Guide</a> for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
 
+A swine specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Swine_Training_Guide.md" target="_blank">here</a>.
+
 # User Guide
 
 There is also a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md" target="_blank">Holos 4 User Guide</a> available. This guide can be used as a more in-depth manual on how to use the various features of Holos.
