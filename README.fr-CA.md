@@ -31,7 +31,7 @@ Un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentatio
 
 # Exigences d'entrée
 
-Une liste complète de toutes les entrées requises et facultatives requises par le modèle peut être trouvée <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">ici</a>.
+Une liste complète de toutes les entrées requises et facultatives requises par le modèle peut être trouvée <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">ici</a>. Une version internationale (non canadienne) de ce document est disponible <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4_International.md" target="_blank">ici</a>.
 
 # Télécharger
 
