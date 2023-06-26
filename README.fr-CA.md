@@ -29,6 +29,8 @@ Il existe un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Do
 
 Un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/UserGuide_French.md" target="_blank">guide de l’utilisateur Holos 4</a> est également disponible. Ce guide peut être utilisé comme un manuel plus approfondi sur la façon d’utiliser les différentes fonctionnalités de Holos.
 
+Un guide de formation spécifique aux porcs peut être trouvé <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Swine%20Training%20Guide/Holos_4_Swine_Training_Guide.md" target="_blank">ici</a>.
+
 # Exigences d'entrée
 
 Une liste complète de toutes les entrées requises et facultatives requises par le modèle peut être trouvée <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4.md" target="_blank">ici</a>. Une version internationale (non canadienne) de ce document est disponible <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Input%20Requirements/Input_Requirements_v4_International.md" target="_blank">ici</a>.
