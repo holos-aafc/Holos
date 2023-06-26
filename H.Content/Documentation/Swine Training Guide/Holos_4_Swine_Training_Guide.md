@@ -650,7 +650,7 @@ We will adjust this grid so that we can view the above-ground and below-ground c
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 23.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 23.jpg" alt="Figure 23" width="950"/>
     <br>
     <em>Figure 23: Details screen</em>
 </p>
