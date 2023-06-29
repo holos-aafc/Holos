@@ -9160,7 +9160,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FarrowingGilts.
+        ///   Looks up a localized string similar to Farrowing gilts.
         /// </summary>
         public static string LabelFarrowingGilts {
             get {
@@ -10299,6 +10299,15 @@ namespace H.Core.Properties {
         public static string LabelNumberOfReactors {
             get {
                 return ResourceManager.GetString("LabelNumberOfReactors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of rest days between production cycles.
+        /// </summary>
+        public static string LabelNumberOfRestDays {
+            get {
+                return ResourceManager.GetString("LabelNumberOfRestDays", resourceCulture);
             }
         }
         
@@ -12765,6 +12774,15 @@ namespace H.Core.Properties {
         public static string November {
             get {
                 return ResourceManager.GetString("November", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For each animal group, a single default production cycle (composed of one or more management periods) is provided in the table below. A number of rest (non-productive) days between production cycles can be entered if there is more than one production cycle per year..
+        /// </summary>
+        public static string NumberOfRestDaysInCycleDescription {
+            get {
+                return ResourceManager.GetString("NumberOfRestDaysInCycleDescription", resourceCulture);
             }
         }
         
@@ -15705,6 +15723,17 @@ namespace H.Core.Properties {
         public static string ToolTipOtherAnimalsManureYearlyEntericMethaneRateInfo {
             get {
                 return ResourceManager.GetString("ToolTipOtherAnimalsManureYearlyEntericMethaneRateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Canada, some livestock production systems are typically &quot;all in, all out&quot; systems, where all animals enter and leave the barn at the same time with a number of days between production periods to clean the facilities before the next group of animals arrives. 
+        ///
+        ///These systems include feedlot cattle (steers and heifers), swine, and poultry production. Therefore, to calculate total annual emissions from a livestock operation where there are multiple production cycles per year, the number of production days  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string TooltipProductionDays {
+            get {
+                return ResourceManager.GetString("TooltipProductionDays", resourceCulture);
             }
         }
         

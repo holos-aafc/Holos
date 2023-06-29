@@ -3511,6 +3511,9 @@
   <data name="LabelNumberOfReactors" xml:space="preserve">
     <value>Number of reactors</value>
   </data>
+  <data name="LabelNumberOfRestDays" xml:space="preserve">
+    <value>Number of rest days between production cycles</value>
+  </data>
   <data name="LabelNurseryWeanersStarterDiet1" xml:space="preserve">
     <value>porcelets sevrés (ration de démarrage no 1)</value>
   </data>
@@ -4300,6 +4303,9 @@
   </data>
   <data name="November" xml:space="preserve">
     <value>novembre</value>
+  </data>
+  <data name="NumberOfRestDaysInCycleDescription" xml:space="preserve">
+    <value>For each animal group, a single default production cycle (composed of one or more management periods) is provided in the table below. A number of rest (non-productive) days between production cycles can be entered if there is more than one production cycle per year.</value>
   </data>
   <data name="Nunavut" xml:space="preserve">
     <value>Nunavut</value>
@@ -5269,6 +5275,13 @@
   </data>
   <data name="ToolTipOtherAnimalsManureYearlyEntericMethaneRateInfo" xml:space="preserve">
     <value>taux d’émission de méthane provenant de la fermentation entérique</value>
+  </data>
+  <data name="TooltipProductionDays" xml:space="preserve">
+    <value>In Canada, some livestock production systems are typically "all in, all out" systems, where all animals enter and leave the barn at the same time with a number of days between production periods to clean the facilities before the next group of animals arrives. 
+
+These systems include feedlot cattle (steers and heifers), swine, and poultry production. Therefore, to calculate total annual emissions from a livestock operation where there are multiple production cycles per year, the number of production days per year (excluding non-productive days between production cycles) are considered. 
+
+Daily emissions estimates are multipled by the total number of production days in a year.</value>
   </data>
   <data name="ToolTipPulletFarm" xml:space="preserve">
     <value>Les femelles juvéniles (poulettes) sont transportées des couvoirs vers les fermes de poulettes ou les poulaillers de poulettes dans les exploitations de production d’œufs où elles restent jusqu’à ce qu’elles atteignent l’âge de la reproduction (environ 18 à 20 semaines), après quoi elles sont transportées vers les exploitations de ponte ou les poulaillers.</value>

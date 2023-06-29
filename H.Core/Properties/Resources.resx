@@ -2570,7 +2570,7 @@
     <value>Stage</value>
   </data>
   <data name="LabelFarrowingGilts" xml:space="preserve">
-    <value>FarrowingGilts</value>
+    <value>Farrowing gilts</value>
   </data>
   <data name="ToolTipGrowerToFinishProductionSystem" xml:space="preserve">
     <value>Grower-to-finish operations house feeder hogs until they are marketed at ~110-115 kg live weight. These operations do not keep breeding animals but purchase their pigs from weaner operations.</value>
@@ -5596,5 +5596,18 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>
+  </data>
+  <data name="LabelNumberOfRestDays" xml:space="preserve">
+    <value>Number of rest days between production cycles</value>
+  </data>
+  <data name="NumberOfRestDaysInCycleDescription" xml:space="preserve">
+    <value>For each animal group, a single default production cycle (composed of one or more management periods) is provided in the table below. A number of rest (non-productive) days between production cycles can be entered if there is more than one production cycle per year.</value>
+  </data>
+  <data name="TooltipProductionDays" xml:space="preserve">
+    <value>In Canada, some livestock production systems are typically "all in, all out" systems, where all animals enter and leave the barn at the same time with a number of days between production periods to clean the facilities before the next group of animals arrives. 
+
+These systems include feedlot cattle (steers and heifers), swine, and poultry production. Therefore, to calculate total annual emissions from a livestock operation where there are multiple production cycles per year, the number of production days per year (excluding non-productive days between production cycles) are considered. 
+
+Daily emissions estimates are multipled by the total number of production days in a year.</value>
   </data>
 </root>

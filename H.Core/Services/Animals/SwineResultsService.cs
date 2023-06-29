@@ -80,6 +80,7 @@ namespace H.Core.Services.Animals
 
             // Old farms had the DMI/Intake associated with the management period and not the diet
             var feedIntake = managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed > 0 ? managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed : managementPeriod.FeedIntakeAmount;
+                dailyEmissions.DryMatterIntake = feedIntake;
 
             dailyEmissions.FecalCarbonExcretionRate = this.CalculateCarbonExcretionRate(
                 dailyDryMatterIntakeOfFeed: feedIntake);
@@ -153,9 +154,14 @@ namespace H.Core.Services.Animals
                 feedIntake: feedIntake,
                 crudeProteinIntake: managementPeriod.SelectedDiet.CrudeProteinContent);
 
+            var isBreedingProductionStage = managementPeriod.ProductionStage == ProductionStages.Open ||
+                                            managementPeriod.ProductionStage == ProductionStages.Gestating ||
+                                            managementPeriod.ProductionStage == ProductionStages.Lactating;
+
+            var isBreedingSow = animalGroup.GroupType == AnimalType.SwineSows || (animalGroup.GroupType == AnimalType.SwineGilts && isBreedingProductionStage);
+
             // Protein retained calculations for breeding sows only apply to the farrow to finish and farrow to wean components where the protein retained from weaned piglets must be considered
-            if ((animalComponentBase.ComponentType == ComponentType.FarrowToFinish || animalComponentBase.ComponentType == ComponentType.FarrowToWean ) && 
-                animalGroup.GroupType == AnimalType.SwineSows)
+            if (isBreedingSow)
             {
                 var fertilityRate = animalComponentBase.GetFertilityRate(
                     targetAnimalType: animalGroup.GroupType,

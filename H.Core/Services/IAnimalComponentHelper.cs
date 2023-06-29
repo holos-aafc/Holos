@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using H.Core.Models;
 using H.Core.Models.Animals;
 
@@ -51,7 +52,7 @@ namespace H.Core.Services
         /// <summary>
         /// Returns a new name for a group of animals that is unique among a list of existing animal groups.
         /// </summary>
-        string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup);
+        string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup, string suggestedName = null);
 
         /// <summary>
         /// Returns a number that is used to pair a group of calves with a group of cows.

@@ -112,12 +112,12 @@ namespace H.Core.Services
             return result;
         }
         
-        public string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup)
+        public string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup, string suggestedName = null)
         {
             var i = 1;
 
             // Don't add number to group name at first (i.e. just use "Heifers group" and not "Heifer group #1") since it is more cleaner.
-            var proposedName = animalGroup.AnimalTypeString;
+            var proposedName = suggestedName == null ? animalGroup.AnimalTypeString : suggestedName;
             while (animalGroups.Any(group => group.Name == proposedName))
             {
                 proposedName = animalGroup.AnimalTypeString + " " + string.Format(Properties.Resources.InterpolatedGroupNumber, ++i);
