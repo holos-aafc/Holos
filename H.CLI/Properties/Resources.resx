@@ -1227,7 +1227,8 @@
     <value>There are no Farms that can be processed. Please create data input files for your Farms. Please press enter to exit</value>
   </data>
   <data name="PromptUserToUsePreviousDirectory" xml:space="preserve">
-    <value>The previously entered directory containing your farms is: {0}.\n Would you like to continue using this directory?</value>
+    <value>The previously entered directory containing your farms is: {0}
+Would you like to continue using this directory?</value>
   </data>
   <data name="LabelProcessingComplete" xml:space="preserve">
     <value>Processing complete, press enter to exit the application.</value>

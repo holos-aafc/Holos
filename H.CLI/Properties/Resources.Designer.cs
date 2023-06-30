@@ -2275,7 +2275,8 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The previously entered directory containing your farms is: {0}.\n Would you like to continue using this directory?.
+        ///   Looks up a localized string similar to The previously entered directory containing your farms is: {0}
+        ///Would you like to continue using this directory?.
         /// </summary>
         public static string PromptUserToUsePreviousDirectory {
             get {
