@@ -3013,7 +3013,7 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 
 ##### Special Data Input Values for All Animal Components
 
--	The data inputs are **not case-sensitive** but please make sure to **spell them correctly**!.
+-	The data inputs are **not case-sensitive** but please make sure to **spell them correctly**!
 -	These apply to **all animal components**, the only data field that **varies is the group type**.
 -	There are some data fields that **require special inputs for the data to process correctly**. Please look for the headers below and choose from the list accordingly:
 	-	**Group Type: varies** based on the animal component, **described in each section** corresponding to the animal component.
