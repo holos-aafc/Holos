@@ -2926,7 +2926,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 - Untilled Land Solid Spread
 - Slurry Broadcasting
 - Drop Hose Banding
-- SHallow Injection
+- Shallow Injection
 - Deep Injection
 
 **Manure Location Source Type:**  
