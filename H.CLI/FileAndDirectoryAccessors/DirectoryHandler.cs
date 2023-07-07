@@ -243,8 +243,6 @@ namespace H.CLI.FileAndDirectoryAccessors
                     }
 
                 } while (_inputHelper.IsYesResponse(usePreviousDirectory) == false || _inputHelper.IsNoResponse(usePreviousDirectory) == false);
-
-                Console.WriteLine();
             }
 
         }
