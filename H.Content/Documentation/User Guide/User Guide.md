@@ -3590,7 +3590,7 @@ The user must ensure that the references to other components are valid and the c
 
 <br>
 
-### CLI Generated Cmponent Directory Names are not Changed
+### CLI Generated Component Directory Names are not Changed
 
 The user must ensure that they do not change the names of the component directories in each farm.
 
