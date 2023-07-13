@@ -3376,7 +3376,7 @@ Below is an example of a sheep component data file broken into sections
 
 	Refer to [Creating a New Farms Folder](#creating-a-new-farms-folder) for help creating an initial farms folder and learning about subsequent prompts.
 
-3. You will be prompted to select a unit of measurement for the program to run in (Metric = 1, Imperial = 2). Please select an option
+3. You will be prompted to select a unit of measurement for the program to run in (Metric = 1, Imperial = 2). Please select an option.
 
 4. The Command Line Interface will now process each of the farms that you have created and their corresponding component data input files.
 
