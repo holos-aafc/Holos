@@ -3355,13 +3355,13 @@ Below is an example of a sheep component data file broken into sections
 
 -	Another livestock component can refer to the following other livestock animal groups:
 - 	Group type
-	- 	Alpacas
-	- 	Goats
-	- 	Deer
-	- 	Elk
-	- 	Horses
-	- 	Mules
-	- 	Bison
+	- Alpacas
+	- Bison
+	- Deer
+	- Elk
+	- Goats
+ 	- Horses
+	- Mules
 
 
 <br>
