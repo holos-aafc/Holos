@@ -3108,12 +3108,17 @@ Below is an example of a beef component data file broken into sections
 
 -	A beef component can refer to the following beef animal groups: 
 - Group Type: 
-	- Heifer
-	- Seer
-	- Bulls
-	- Replacement Heifers 
-	- Lactating Cows
-	- Calves
+	- Cow Calf
+   	- Beef Backgrounder Heifer
+  	- Beef Backgrounder Steer
+	- Beef Calf
+	- Beef Cow Dry
+	- Beef Bulls
+	- Beef Replacement Heifers
+	- Beef Cow Lactating
+   	- Beef Finisher
+   	- Beef Finishing Heifer
+   	- Beef Finishing Steer
 
 
 <br>
