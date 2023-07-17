@@ -3192,11 +3192,10 @@ Below is an example of a beef component data file broken into sections
 
 -	A dairy component can refer to the following dairy animal groups:
 - Group Type: 
-	- Dairy Lactating 
-	- Dairy Calf 
-	- Dairy Bulls
-	- Dairy Heifers
-	- Dairy Dry
+	- Dairy Lactating Cow
+   	- Dairy Calves
+   	- Dairy Heifers
+   	- Dairy Dry Cow
 
 <br>
 
@@ -3258,9 +3257,13 @@ Below is an example of a sheep component data file broken into sections
 
 - A sheep component can refer to the following sheep animal groups: 
 - Group Type:
-	- Lambs and Ewes 
-	- Ram
-	- Weaned Lamb
+	- Ewes
+ 	- Lambs
+  	- Lambs and Ewes
+  	- Ram
+  	- Sheep
+  	- Sheep Feedlot
+  	- Weaned Lamb
 
 <br>
 
