@@ -3032,13 +3032,13 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 ##### Swine Special Data Input Values
 
 -	A swine component can refer to the following swine animal groups:
--	**Group Type**: 
+- Group Type:
   	- Swine Boar
 	- Swine Dry Sow
  	- Swine Finisher 
   	- Swine Grower
    	- Swine Lactating Sow
-    	- Swine Starter
+   	- Swine Starter
 
 <br>
 
