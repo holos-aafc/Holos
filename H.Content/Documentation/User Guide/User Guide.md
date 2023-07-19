@@ -3032,7 +3032,13 @@ If you need to know more about the Field Component, [Click Here: More Informatio
 ##### Swine Special Data Input Values
 
 -	A swine component can refer to the following swine animal groups:
--	**Group Type**: gilts, sows, boars, piglets, hogs
+-	**Group Type**: 
+  	- Swine Boar
+	- Swine Dry Sow
+ 	- Swine Finisher 
+  	- Swine Grower
+   	- Swine Lactating Sow
+    	- Swine Starter
 
 <br>
 
@@ -3307,12 +3313,12 @@ Below is an example of a sheep component data file broken into sections
 
 - A poultry component can refer to the following poultry animal groups:
 - Group Type 
-	- Turkeys 
-	- Ducks
-	- Layers Dry Poultry 
-	- Layers Wet Poultry
 	- Broilers
-	- Geese
+   	- Ducks
+   	- Geese
+   	- Layers Dry Poultry
+   	- Layers Wet Poultry
+   	- Turkeys
 
 
 
