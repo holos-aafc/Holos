@@ -2921,6 +2921,10 @@ There are two methods to add a new farm to an existing farms folder. [The common
 - Yes
 - No
 
+**Irrigation Type**:
+- Irrigated
+- Rain Fed
+
 **Manure Application Type**:  
 - Tilled Land Solid Spread
 - Untilled Land Solid Spread
