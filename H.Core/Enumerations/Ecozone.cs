@@ -30,6 +30,9 @@ namespace H.Core.Enumerations
         SemiaridPrairies,
 
         [LocalizedDescription("SubhumidPrairies", typeof(Resources))]
-        SubhumidPrairies
+        SubhumidPrairies,
+
+        [LocalizedDescription("Unknown", typeof(Resources))]
+        Unknown,
     }
 }

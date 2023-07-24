@@ -38,6 +38,9 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumSoilFunctionalAll", typeof(Resources))]
         All,
 
+        [LocalizedDescription("Unknown", typeof(Resources))]
+        Unknown,
+
         Grey,
         DarkGrey
     }

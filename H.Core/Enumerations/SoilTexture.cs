@@ -12,6 +12,9 @@ namespace H.Core.Enumerations
         Medium,
 
         [LocalizedDescription("Coarse", typeof(Resources))]
-        Coarse
+        Coarse,
+
+        [LocalizedDescription("Unknown", typeof(Resources))]
+        Unknown,
     }
 }

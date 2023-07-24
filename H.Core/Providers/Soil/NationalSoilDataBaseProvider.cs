@@ -194,20 +194,29 @@ namespace H.Core.Providers.Soil
                     continue;
                 }
 
+                var bulkDensity = GetBulkDensityByComponent(componentTableData);
+                var proportionOfClayInSoil = GetProportionOfClayInSoilByComponent(componentTableData);
+                var proportionOfSandInSoil = GetProportionOfSandInSoilByComponent(componentTableData);
+                var percentageSoilOrganicCarbon = GetPercentageSoilOrganicCarbonByComponent(componentTableData);
+                var topLayerThickness = GetTopLayerThicknessByComponent(componentTableData);
+                var soilPh = GetSoilPhByComponent(componentTableData);
+                var soilCec = GetSoilCecByComponent(componentTableData);
+
+
                 var soilData = new SoilData
                 {
                     PolygonId = polygonId,
                     SoilName = this.GetSoilName(polygonId),
                     ComponentId = componentTableData.PolygonComponentId,
-                    BulkDensity = this.GetBulkDensityByComponent(componentTableData),
-                    ProportionOfClayInSoil = this.GetProportionOfClayInSoilByComponent(componentTableData),
-                    ProportionOfSandInSoil = this.GetProportionOfSandInSoilByComponent(componentTableData),
-                    ProportionOfSoilOrganicCarbon = this.GetPercentageSoilOrganicCarbonByComponent(componentTableData),
+                    BulkDensity = bulkDensity > 0 ? bulkDensity : 0,
+                    ProportionOfClayInSoil = proportionOfClayInSoil > 0 ? proportionOfClayInSoil : 0,
+                    ProportionOfSandInSoil = proportionOfSandInSoil > 0 ? proportionOfSandInSoil : 0,
+                    ProportionOfSoilOrganicCarbon = percentageSoilOrganicCarbon > 0 ? percentageSoilOrganicCarbon : 0,
                     SoilGreatGroup = this.GetSoilGreatGroupByComponent(componentTableData),
                     SoilSubGroup = this.GetSoilSubGroup(componentTableData),
-                    TopLayerThickness = this.GetTopLayerThicknessByComponent(componentTableData),
-                    SoilPh = this.GetSoilPhByComponent(componentTableData),
-                    SoilCec = this.GetSoilCecByComponent(componentTableData),
+                    TopLayerThickness = topLayerThickness > 0 ? topLayerThickness : 0,
+                    SoilPh = soilPh > 0 ? soilPh : 0,
+                    SoilCec = soilCec > 0 ? soilCec : 0,
                     SoilFunctionalCategory = this.GetSoilFunctionalCategoryByComponent(componentTableData),
                     Province = this.GetProvinceByComponent(componentTableData),
                     ParentMaterialTextureString = this.GetParentMaterialTextureTypeByComponent(componentTableData),

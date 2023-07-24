@@ -12373,6 +12373,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soil data is not available for the selected polygon. Soil properties must therefore be provided by the user in order for accurate emission estimates. Entry of the required soil parameters can be done under the Farm Default section of the settings menu or the Soil Tab in the field component..
+        /// </summary>
+        public static string MessageSoilDataMissing {
+            get {
+                return ResourceManager.GetString("MessageSoilDataMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soil reduction factors are preliminary and may be updated in a future release.
         /// </summary>
         public static string MessageSoilReductionFactorsExperimental {
@@ -14160,6 +14169,15 @@ namespace H.Core.Properties {
         public static string SombricBrunisol {
             get {
                 return ResourceManager.GetString("SombricBrunisol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please note that soil data might be missing from certain locations in the map as Holos does not have associated SLC soil data for every location. For locations with missing data, the user may have to provide the necessary soil data for relevant calculations..
+        /// </summary>
+        public static string SomeSoilDataMissingMessage {
+            get {
+                return ResourceManager.GetString("SomeSoilDataMissingMessage", resourceCulture);
             }
         }
         

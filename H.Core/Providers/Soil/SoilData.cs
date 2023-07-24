@@ -37,10 +37,31 @@ namespace H.Core.Providers.Soil
         private Province _province;
         private ParentMaterialTextureType _parentMaterialTextureType;
         private Ecozone _ecozone;
+        private bool _isDefaultSoilData;
 
         #endregion
 
         #region Constructors
+
+        public SoilData()
+        {
+            SoilName = H.Core.Properties.Resources.EnumDefault;
+            BulkDensity = 0;
+            ProportionOfClayInSoil = 0;
+            ProportionOfSandInSoil = 0;
+            ProportionOfSoilOrganicCarbon = 0;
+            SoilGreatGroup = SoilGreatGroupType.Unknown;
+            SoilSubGroup = H.Core.Properties.Resources.Unknown;
+            TopLayerThickness = 0;
+            SoilPh = 0;
+            SoilCec = 0;
+            SoilFunctionalCategory = SoilFunctionalCategory.Unknown;
+            SoilTexture = SoilTexture.Unknown;
+            EcodistrictName = H.Core.Properties.Resources.Unknown;
+            EcodistrictId = 0;
+            Ecozone = Ecozone.Unknown;
+            DrainageClass = SoilDrainageClasses.Unknown;
+        }
 
         #endregion
 
@@ -384,6 +405,12 @@ namespace H.Core.Providers.Soil
         public string EcozoneString
         {
             get { return this.Ecozone.GetDescription(); }
+        }
+
+        public bool IsDefaultSoilData
+        {
+            get => _isDefaultSoilData;
+            set => SetProperty(ref _isDefaultSoilData, value);
         }
 
         #endregion

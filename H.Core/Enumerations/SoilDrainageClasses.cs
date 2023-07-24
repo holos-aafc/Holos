@@ -31,5 +31,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumNotApplicable", typeof(Resources))]
         NotApplicable,
+
+        [LocalizedDescription("Unknown", typeof(Resources))]
+        Unknown,
     }
 }

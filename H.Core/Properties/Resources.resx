@@ -5610,4 +5610,10 @@ These systems include feedlot cattle (steers and heifers), swine, and poultry pr
 
 Daily emissions estimates are multipled by the total number of production days in a year.</value>
   </data>
+  <data name="MessageSoilDataMissing" xml:space="preserve">
+    <value>Soil data is not available for the selected polygon. Soil properties must therefore be provided by the user in order for accurate emission estimates. Entry of the required soil parameters can be done under the Farm Default section of the settings menu or the Soil Tab in the field component.</value>
+  </data>
+  <data name="SomeSoilDataMissingMessage" xml:space="preserve">
+    <value>Please note that soil data might be missing from certain locations in the map as Holos does not have associated SLC soil data for every location. For locations with missing data, the user may have to provide the necessary soil data for relevant calculations.</value>
+  </data>
 </root>
