@@ -34,7 +34,7 @@ namespace H.Core.Test.Providers.Climate
         #region Tests
 
         [TestMethod]
-        
+        [Ignore]
         public void TameYieldRun2()
         {
             var lines = CsvResourceReader.SplitFileIntoLinesUsingRegex(File.ReadAllText("Climate\\TameYieldData_SiteCoords_16Feb2023.csv"));

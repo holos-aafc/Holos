@@ -5616,4 +5616,13 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="SomeSoilDataMissingMessage" xml:space="preserve">
     <value>Please note that soil data might be missing from certain locations in the map as Holos does not have associated SLC soil data for every location. For locations with missing data, the user may have to provide the necessary soil data for relevant calculations.</value>
   </data>
+  <data name="EnumGiltDeveloperDietType" xml:space="preserve">
+    <value>Gilt developer</value>
+  </data>
+  <data name="LabelGiltDeveloperDiet" xml:space="preserve">
+    <value>Gilt developer diet</value>
+  </data>
+  <data name="LabelBoarDiet" xml:space="preserve">
+    <value>Boar diet</value>
+  </data>
 </root>

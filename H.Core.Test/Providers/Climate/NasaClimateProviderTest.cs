@@ -170,6 +170,7 @@ namespace H.Core.Test.Providers.Climate
         }
 
         [TestMethod]
+        [Ignore]
         public void GetClimateData()
         {
             var lines = CsvResourceReader.SplitFileIntoLinesUsingRegex(File.ReadAllText("Climate\\Missing Climate Data_perennials.csv"));

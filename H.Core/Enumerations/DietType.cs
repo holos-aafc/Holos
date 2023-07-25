@@ -118,5 +118,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumBoarsDietType", typeof(Resources))]
         Boars,
+
+        [LocalizedDescription("EnumGiltDeveloperDietType", typeof(Resources))]
+        GiltDeveloperDiet,
     }
 }

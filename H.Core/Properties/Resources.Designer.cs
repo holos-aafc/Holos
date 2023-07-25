@@ -2869,6 +2869,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gilt developer.
+        /// </summary>
+        public static string EnumGiltDeveloperDietType {
+            get {
+                return ResourceManager.GetString("EnumGiltDeveloperDietType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Goats.
         /// </summary>
         public static string EnumGoats {
@@ -8305,6 +8314,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boar diet.
+        /// </summary>
+        public static string LabelBoarDiet {
+            get {
+                return ResourceManager.GetString("LabelBoarDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boar selection.
         /// </summary>
         public static string LabelBoarSelection {
@@ -9345,6 +9363,15 @@ namespace H.Core.Properties {
         public static string LabelGestationDiet {
             get {
                 return ResourceManager.GetString("LabelGestationDiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gilt developer diet.
+        /// </summary>
+        public static string LabelGiltDeveloperDiet {
+            get {
+                return ResourceManager.GetString("LabelGiltDeveloperDiet", resourceCulture);
             }
         }
         

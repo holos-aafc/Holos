@@ -728,6 +728,55 @@ namespace H.Core.Providers.Feed
                 CrudeProtein = 19.66,
             });
 
+            // Diet E - Gilt developer diet
+            diets.Add(new Diet()
+            {
+                IsDefaultDiet = true,
+                Name = Resources.LabelGiltDeveloperDiet,
+                DietType = DietType.GiltDeveloperDiet,
+                AnimalType = AnimalType.Swine,
+                Comments = Resources.LabelGiltDeveloperDiet,
+
+                Ingredients = new ObservableCollection<FeedIngredient>()
+                {
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.WheatBran), 35),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.WheatShorts), 10.1),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.Barley), 20),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil), 12.1),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CanolaMealExpelled), 15),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.FieldPeas), 5),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CanolaFullFat), 0.5),
+                },
+
+                DailyDryMatterFeedIntakeOfFeed = 2.80,
+                CrudeProtein = 17.95,
+            });
+
+            // Diet F - Boar diet
+            diets.Add(new Diet()
+            {
+                IsDefaultDiet = true,
+                Name = Resources.LabelBoarDiet,
+                DietType = DietType.Boars,
+                AnimalType = AnimalType.Swine,
+                Comments = Resources.LabelBoarDiet,
+
+                Ingredients = new ObservableCollection<FeedIngredient>()
+                {
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.WheatBran), 38),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.WheatShorts), 2),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.Barley), 20),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil), 10.6),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.SoybeanMealDehulledExpelled), 7.1),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CanolaMealExpelled), 15),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.FieldPeas), 5),
+                    _feedIngredientProvider.CopyIngredient(swineIngredients.Single(x => x.IngredientType == IngredientType.CanolaFullFat), 0.5),
+                },
+
+                DailyDryMatterFeedIntakeOfFeed = 3,
+                CrudeProtein = 20.1,
+            });
+
             return diets;
         }
 
