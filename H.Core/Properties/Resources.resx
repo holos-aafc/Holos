@@ -5625,4 +5625,10 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelBoarDiet" xml:space="preserve">
     <value>Boar diet</value>
   </data>
+  <data name="LabelHeatDetection" xml:space="preserve">
+    <value>Heat detection</value>
+  </data>
+  <data name="LabelHogs" xml:space="preserve">
+    <value>Hogs</value>
+  </data>
 </root>

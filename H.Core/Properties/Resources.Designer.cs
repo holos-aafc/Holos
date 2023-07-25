@@ -9529,6 +9529,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Heat detection.
+        /// </summary>
+        public static string LabelHeatDetection {
+            get {
+                return ResourceManager.GetString("LabelHeatDetection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heavy turkeys.
         /// </summary>
         public static string LabelHeavyTurkeys {
@@ -9561,6 +9570,15 @@ namespace H.Core.Properties {
         public static string LabelHistidine {
             get {
                 return ResourceManager.GetString("LabelHistidine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hogs.
+        /// </summary>
+        public static string LabelHogs {
+            get {
+                return ResourceManager.GetString("LabelHogs", resourceCulture);
             }
         }
         

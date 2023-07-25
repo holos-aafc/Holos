@@ -3253,6 +3253,9 @@
   <data name="LabelHatching" xml:space="preserve">
     <value>éclosion</value>
   </data>
+  <data name="LabelHeatDetection" xml:space="preserve">
+    <value>Heat detection</value>
+  </data>
   <data name="LabelHeavyTurkeys" xml:space="preserve">
     <value>dindons lourds</value>
   </data>
@@ -3264,6 +3267,9 @@
   </data>
   <data name="LabelHistidine" xml:space="preserve">
     <value>histidine</value>
+  </data>
+  <data name="LabelHogs" xml:space="preserve">
+    <value>Hogs</value>
   </data>
   <data name="LabelHolosOnlySupportsCertainHardinessZones" xml:space="preserve">
     <value>Veuillez noter que Holos ne prend en compte que les zones de rusticité entre 2A et 4B.  Les zones de rusticité en dehors de cette plage seront prises en compte lorsqu’un plus grand nombre de données sera disponible.</value>
