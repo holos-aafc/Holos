@@ -470,19 +470,31 @@ namespace H.Core.Services.LandManagement
             var runInPeriod = farm.Defaults.DefaultRunInPeriod;
             var runInPeriodStartYear = startYearOfField - runInPeriod;
 
+            int rotationSize = 0;
+            if (viewItemsForRotation.Count() == 0)
+            {
+                // No items in collection (component created from CLI), use property for the count
+                rotationSize = viewItemsForField.First().SizeOfFirstRotationForField;
+            }
+            else
+            {
+                // Field component will have crop view items that can be used for the count
+                rotationSize = viewItemsForRotation.Count();
+            }
+
             // Take the first phase of the rotation from the view items and use that as the basis for the run in period since these items will differ depending on
             // which field is being considered in the rotation.
-            var mainCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == false).Take(viewItemsForRotation.Count()).ToList();
-            var coverCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == true).Take(viewItemsForRotation.Count()).ToList();
+            var mainCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == false).Take(rotationSize).ToList();
+            var coverCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == true).Take(rotationSize).ToList();
 
             // Reverse items so we can use indexes from the beginning of collection
             mainCrops.Reverse();
-            coverCrops.Reverse();
+            coverCrops.Reverse();          
 
             // Start at the year before the user-defined start year and work backwards towards the start year of the run in period
             for (int indexYear = startYearOfField - 1; indexYear >= runInPeriodStartYear; indexYear--, moduloCounter++)
             {
-                var moduloIndex = moduloCounter % viewItemsForRotation.Count();
+                var moduloIndex = moduloCounter % rotationSize;
                 var mainCropAtYear = mainCrops.ElementAt(moduloIndex);
 
                 var createdMainCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropAtYear, indexYear);
