@@ -17,6 +17,7 @@ using H.Core.Services.LandManagement;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
+using H.Infrastructure;
 using System.Text.RegularExpressions;
 
 namespace H.CLI.Processors
@@ -126,7 +127,7 @@ namespace H.CLI.Processors
                                                              bool writeToPath = true)
         {
             string columnSeparator = CLILanguageConstants.Delimiter;
-            var fileName = SanitizeName(fieldSystemComponent.Name);
+            var fileName = FileSystemHelper.SanitizeFileName(fieldSystemComponent.Name);
             var filePath = path + @"\" + fileName + CLILanguageConstants.DefaultInputFileExtension;
             var stringBuilder = new StringBuilder();
             foreach (var keyValuePair in componentKeys)
@@ -211,21 +212,6 @@ namespace H.CLI.Processors
             }
 
             return stringBuilder.ToString();
-        }
-
-        #endregion
-
-
-        #region Private Methods
-        /// <summary>
-        /// Sanitizes the the file name so it does not contain any special character. Replaces the special character with a dash(-).
-        /// </summary>
-        private string SanitizeName(string name)
-        {
-            string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
-            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
-
-            return Regex.Replace(name, invalidRegStr, "-");
         }
 
         #endregion

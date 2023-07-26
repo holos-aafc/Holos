@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using System.IO;
-using System;
 
 namespace H.CLI.Test.Processors
 {
