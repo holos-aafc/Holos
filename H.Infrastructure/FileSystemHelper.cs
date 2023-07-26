@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace H.Infrastructure
@@ -86,6 +87,17 @@ namespace H.Infrastructure
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Sanitizes the the file name so it does not contain any special character. Replaces the special character with a dash(-).
+        /// </summary>
+        public static string SanitizeFileName(string name)
+        {
+            string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+
+            return Regex.Replace(name, invalidRegStr, "-");
         }
     }
 }

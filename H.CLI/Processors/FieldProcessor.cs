@@ -17,6 +17,8 @@ using H.Core.Services.LandManagement;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
+using H.Infrastructure;
+using System.Text.RegularExpressions;
 
 namespace H.CLI.Processors
 {
@@ -125,7 +127,8 @@ namespace H.CLI.Processors
                                                              bool writeToPath = true)
         {
             string columnSeparator = CLILanguageConstants.Delimiter;
-            var filePath = path + @"\" + fieldSystemComponent.Name + CLILanguageConstants.DefaultInputFileExtension;
+            var fileName = FileSystemHelper.SanitizeFileName(fieldSystemComponent.Name);
+            var filePath = path + @"\" + fileName + CLILanguageConstants.DefaultInputFileExtension;
             var stringBuilder = new StringBuilder();
             foreach (var keyValuePair in componentKeys)
             {
