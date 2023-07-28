@@ -43,6 +43,11 @@ namespace H.Core.Providers.Soil
             Task.Run(this.ReadFile);
         }
 
+        public void Initialize()
+        {
+            this.ReadFile();
+        }
+
         public IEnumerable<SmallAreaYieldData> GetData()
         {
             return _cache.Values.ToList();

@@ -114,6 +114,12 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 farm.ClimateDataFileName = userSettings[Properties.Resources.Settings_ClimateFilename];
             }
+
+            if (userSettings.ContainsKey(Properties.Resources.Settings_PolygonNumber))
+            {
+                farm.PolygonId = int.Parse(userSettings[Properties.Resources.Settings_PolygonNumber]);
+            }
+
             if (userSettings.ContainsKey(Properties.Resources.Settings_Latitude) && userSettings.ContainsKey(Properties.Resources.Settings_Longitude))
             {
                 farm.Longitude = double.Parse(userSettings[Properties.Resources.Settings_Longitude]);
@@ -174,6 +180,8 @@ namespace H.CLI.FileAndDirectoryAccessors
                     December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_DecemberMeanTemperature]), false),
                 },
             };
+
+            // Add new setting to toggle NASA data on off
 
             farm.ClimateData = climateData;
 

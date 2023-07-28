@@ -145,7 +145,7 @@ namespace H.Core.Services.LandManagement
             _fertilizerViewItemMapper = fertilizerViewItemMapperConfiguration.CreateMapper();
             _digestateViewItemMapper = digestateViewItemMapperConfiguration.CreateMapper();
 
-            _smallAreaYieldProvider.InitializeAsync();
+            _smallAreaYieldProvider.Initialize();
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
         }

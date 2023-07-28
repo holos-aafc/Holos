@@ -461,6 +461,8 @@ namespace H.CLI.TemporaryComponentStorage
         public int SizeOfFirstRotationForField { get; set; }
         public double AboveGroundCarbonInput { get; set; }
         public double BelowGroundCarbonInput { get; set; }
+        public double Lignin { get; set; }
+        public double Sand { get; set;}
 
         #endregion
     }

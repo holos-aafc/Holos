@@ -58,7 +58,7 @@ namespace H.CLI.Processors
             //var pathToCustomClimateData = farm.CliInputPath + @"\" + farm.ClimateDataFileName;
             //_customClimateDataProvider.LoadUserClimateFile(pathToCustomClimateData, farm);
 
-            _fieldResultsService.CalculateFinalResults(farm);
+            var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 
             var farmName = farm.Name + Properties.Resources.Results;
 
@@ -66,7 +66,7 @@ namespace H.CLI.Processors
 
             //write field system data to file
             _fieldResultsService.ExportResultsToFile(
-                results: farm.GetCropDetailViewItems(),
+                results: finalResults,
                 path: filePath,
                 cultureInfo: CLILanguageConstants.culture,
                 measurementSystemType: CLIUnitsOfMeasurementConstants.measurementSystem,
@@ -202,6 +202,8 @@ namespace H.CLI.Processors
                 stringBuilder.Append(fieldSystemComponent.SizeOfFirstRotationInField() + columnSeparator);
                 stringBuilder.Append(viewItem.AboveGroundCarbonInput + columnSeparator);
                 stringBuilder.Append(viewItem.BelowGroundCarbonInput + columnSeparator);
+                stringBuilder.Append(viewItem.Sand + columnSeparator);
+                stringBuilder.Append(viewItem.LigninContent + columnSeparator);
 
                 stringBuilder.Append(Environment.NewLine);
             }

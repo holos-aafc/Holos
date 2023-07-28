@@ -1348,6 +1348,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lignin.
+        /// </summary>
+        public static string Key_Lignin {
+            get {
+                return ResourceManager.GetString("Key_Lignin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management Factor.
         /// </summary>
         public static string Key_ManagementFactor {
@@ -1569,6 +1578,15 @@ namespace H.CLI.Properties {
         public static string Key_PlantCarbonInAgriculturalProduct {
             get {
                 return ResourceManager.GetString("Key_PlantCarbonInAgriculturalProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sand.
+        /// </summary>
+        public static string Key_Sand {
+            get {
+                return ResourceManager.GetString("Key_Sand", resourceCulture);
             }
         }
         
@@ -3091,6 +3109,15 @@ namespace H.CLI.Properties {
         public static string Settings_PercentageOfStrawReturnedToSoilForRootCrops {
             get {
                 return ResourceManager.GetString("Settings_PercentageOfStrawReturnedToSoilForRootCrops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polygon Number.
+        /// </summary>
+        public static string Settings_PolygonNumber {
+            get {
+                return ResourceManager.GetString("Settings_PolygonNumber", resourceCulture);
             }
         }
         

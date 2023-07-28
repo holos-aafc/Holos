@@ -1320,4 +1320,13 @@ Would you like to continue using this directory?</value>
   <data name="String1" xml:space="preserve">
     <value />
   </data>
+  <data name="Key_Lignin" xml:space="preserve">
+    <value>Lignin</value>
+  </data>
+  <data name="Key_Sand" xml:space="preserve">
+    <value>Sand</value>
+  </data>
+  <data name="Settings_PolygonNumber" xml:space="preserve">
+    <value>Polygon Number</value>
+  </data>
 </root>

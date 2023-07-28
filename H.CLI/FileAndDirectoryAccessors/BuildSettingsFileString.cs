@@ -44,6 +44,8 @@ namespace H.CLI.FileAndDirectoryAccessors
             keys = new List<string>()
             {
                 string.Format(Properties.Resources.SettingsFileHeader,farm.PolygonId),
+
+            Properties.Resources.Settings_PolygonNumber + KeyValuePairSeparator + farm.PolygonId.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Latitude + KeyValuePairSeparator + farm.Latitude.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Longitude + KeyValuePairSeparator + farm.Longitude.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_CarbonConcentration + UnitsAndKeySeparator +

@@ -91,19 +91,19 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_SizeOfFirstRotationForField, null },
             {Properties.Resources.Key_AboveGroundCarbonInput, null },
             {Properties.Resources.Key_BelowGroundCarbonInput, null },
+            {Properties.Resources.Key_Sand, null },
+            {Properties.Resources.Key_Lignin, null },
         };
 
-
-        //currently only 2 optional headers in the fieldkeys
+        //  Currently only 2 optional headers in the field keys
         public bool IsHeaderOptional(string s)
         {
             if (s == Properties.Resources.Key_NitrogenFixation) return true;
             else if (s == Properties.Resources.Key_NitrogenDeposit) return true;
             else return false;
         }
-        //populate with all the keys that exist curently and tell if it is missing or not
+        // Populate with all the keys that exist currently and tell if it is missing or not
         public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){
 };
     }
-
 }
