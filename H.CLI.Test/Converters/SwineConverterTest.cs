@@ -15,6 +15,7 @@ using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals.Swine;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Models.Animals.Sheep;
 
 namespace H.CLI.Test.Converters
 {
@@ -36,7 +37,8 @@ namespace H.CLI.Test.Converters
                 Name = "SwineStarterName1",
                 GroupName = "SwineStarter1",
                 GroupType = AnimalType.SwineStarter,
-              
+                ComponentType = typeof(IsoWeanComponent),
+
                 ManagementPeriodName = "Period1ForSwineStarter1",
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -68,7 +70,8 @@ namespace H.CLI.Test.Converters
                 Name = "SwineStarterName1",
                 GroupName = "SwineStarter1",
                 GroupType = AnimalType.SwineStarter,
-         
+                ComponentType = typeof(IsoWeanComponent),
+
                 ManagementPeriodName = "Period2ForSwineStarter1",
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 90,
@@ -101,7 +104,8 @@ namespace H.CLI.Test.Converters
                 Name = "SwineStarterName1",
                 GroupName = "SwineStarter2",
                 GroupType = AnimalType.SwineStarter,
-         
+                ComponentType = typeof(IsoWeanComponent),
+
                 ManagementPeriodName = "Period1ForSwineStarter2",
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 120,
@@ -149,12 +153,12 @@ namespace H.CLI.Test.Converters
 
             var swineListGuidSet = componentConverterHandler.SetComponentListGuid(allSwineStarters);
             var swineComponents = componentConverterHandler.StartComponentConversion("Swine", farm, swineListGuidSet);
-            var castedSwineList = swineComponents.Cast<FarrowToWeanComponent>().ToList();
+            var castedSwineList = swineComponents.Cast<IsoWeanComponent>().ToList();
 
             //SwineStarterComponent
             Assert.AreEqual(castedSwineList[0].Name, "SwineStarterName1");
 
-            //Swine Starter Groups. There shuold be a group for SwineStarter1 and SwineStarter2
+            //Swine Starter Groups. There should be a group for SwineStarter1 and SwineStarter2
             Assert.AreEqual(castedSwineList[0].Groups.Count(), 2);
           
             //Swine Starter Group 1

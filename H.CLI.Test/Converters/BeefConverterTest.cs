@@ -37,6 +37,7 @@ namespace H.CLI.Test.Converters
                 Name = "Beef1",
                 GroupName = "BCG1",
                 GroupType = AnimalType.BeefCowLactating,
+                ComponentType = typeof(CowCalfComponent),
 
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -74,6 +75,7 @@ namespace H.CLI.Test.Converters
                 Name = "Beef1",
                 GroupName = "BCG2",
                 GroupType = AnimalType.BeefCowLactating,
+                ComponentType = typeof(CowCalfComponent),
 
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -112,6 +114,7 @@ namespace H.CLI.Test.Converters
                 Name = "Beef1",
                 GroupName = "BCG3",
                 GroupType = AnimalType.BeefCowLactating,
+                ComponentType = typeof(CowCalfComponent),
 
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,

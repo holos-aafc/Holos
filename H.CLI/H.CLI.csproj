@@ -146,6 +146,7 @@
     <Compile Include="TemporaryComponentStorage\PoultryTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\SheepTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\SwineTemporaryInput.cs" />
+    <Compile Include="TemporaryComponentStorage\TemporaryInputBase.cs" />
     <Compile Include="UserInput\CLILanguageConstants.cs" />
     <Compile Include="ComponentKeys\FieldKeys.cs" />
     <Compile Include="Converters\ComponentConverterHandler.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using H.CLI.Factorys;
 using H.CLI.Handlers;
 using H.CLI.Interfaces;
@@ -71,122 +72,15 @@ namespace H.CLI.Converters
             return tempGUIDList;
         }
         
-        public AnimalComponentBase GetAnimalComponentFromAnimalType(AnimalType animalType)
+        public AnimalComponentBase GetAnimalComponentFromComponentTypeString(string componentTypeString)
         {
-            switch (animalType)
-            {
-                //Swines
-                case AnimalType.SwineStarter:
-                    return new FarrowToWeanComponent();
+            var assembly = Assembly.GetAssembly(typeof(ComponentBase)).FullName.Split(new char[]{','})[0];
 
-                case AnimalType.SwineFinisher:
-                    return new SwineFinishersComponent();
+            var type = Type.GetType($"{componentTypeString}, {assembly}");
 
-                case AnimalType.SwineGrower:
-                    return new GrowerToFinishComponent();
+            var component = (AnimalComponentBase)Activator.CreateInstance(type);
 
-                case AnimalType.SwineDrySow:
-                    return new DrySowsComponent();
-
-                case AnimalType.SwineLactatingSow:
-                    return new LactatingSowsComponent();
-
-                case AnimalType.SwineBoar:
-                   return new BoarComponent();
-
-                //Dairy - all of these animal group types belong to a component (for now). In the future, they may make up a set of differing components
-                case AnimalType.DairyLactatingCow:
-                case AnimalType.DairyCalves:
-                case AnimalType.DairyHeifers:
-                case AnimalType.DairyDryCow:
-                    return new DairyComponent();
-
-                //Beef Production
-                case AnimalType.BeefBackgrounderHeifer:
-                    return new BackgroundingComponent();
-
-                case AnimalType.BeefBackgrounderSteer:
-                    return new BackgroundingComponent();
-
-                case AnimalType.CowCalf:
-                case AnimalType.BeefCalf:
-                case AnimalType.BeefCowDry:
-                case AnimalType.BeefBulls:
-                case AnimalType.BeefReplacementHeifers:
-                case AnimalType.BeefCowLactating:
-                    return new CowCalfComponent();   
-
-                case AnimalType.BeefFinisher:
-                case AnimalType.BeefFinishingHeifer:
-                case AnimalType.BeefFinishingSteer:
-                    return new FinishingComponent();
-
-                //Poultry
-                case AnimalType.Turkeys:
-                    return new PoultryTurkeysComponent();
-
-                case AnimalType.Ducks:
-                    return new PoultryDucksComponent();
-
-                case AnimalType.LayersDryPoultry:
-                    return new PoultryLayersDryComponent();
-
-                case AnimalType.LayersWetPoultry:
-                    return new PoultryLayersWetComponent();
-
-                case AnimalType.Broilers:
-                    return new PoultryBroilersComponent();
-
-                case AnimalType.Geese:
-                    return new PoultryGeeseComponent();
-
-                //Sheep
-                case AnimalType.Sheep:
-                    return new SheepComponent();
-
-                case AnimalType.LambsAndEwes:
-                case AnimalType.Lambs:
-                case AnimalType.Ewes:
-                case AnimalType.WeanedLamb:
-                    return new EwesAndLambsComponent();
-
-                case AnimalType.Ram:
-                    return new RamsComponent(); 
-
-                case AnimalType.SheepFeedlot:
-                    return new SheepFeedlotComponent();
-
-                //Other Livestock
-                case AnimalType.Alpacas:
-                    return new AlpacaComponent();
-
-                case AnimalType.Goats:
-                    return new GoatsComponent();
-
-                case AnimalType.Deer:
-                    return new DeerComponent();
-
-                case AnimalType.Elk:
-                    return new ElkComponent();
-
-                case AnimalType.Horses:
-                    return new HorsesComponent();
-
-                case AnimalType.Mules:
-                    return new MulesComponent();
-
-                case AnimalType.Bison:
-                    return new BisonComponent();
-
-                case AnimalType.Llamas:
-                    return new LlamaComponent();
-
-                default:
-                {
-                    throw new Exception($"{nameof(ComponentConverterHandler)}.{nameof(GetAnimalComponentFromAnimalType)} unknown animal type: '{animalType}', unable to convert to an instance of a component");
-                }
-            }
-
+            return component;
         }
         #endregion
     }

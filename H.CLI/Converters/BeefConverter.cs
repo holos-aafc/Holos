@@ -34,7 +34,8 @@ namespace H.CLI.Converters
             {
                 var animalTypeOfFirstGroup = inputFile.First().GroupType;
                 var componentName = inputFile.First().Name;
-                var component = _componentConverterHandler.GetAnimalComponentFromAnimalType(animalTypeOfFirstGroup);
+                var componentType = inputFile.First().ComponentType.ToString();
+                var component = _componentConverterHandler.GetAnimalComponentFromComponentTypeString(componentType);
 
                 component.Guid = Guid.NewGuid();
                 component.Name = componentName;
@@ -156,6 +157,7 @@ namespace H.CLI.Converters
                     foreach (var managementPeriod in animalGroup.ManagementPeriods)
                     {
                         stringBuilder.Append(component.Name + columnSeparator);
+                        stringBuilder.Append(animalComponent.GetType() + columnSeparator);
                         stringBuilder.Append(animalGroup.Name + columnSeparator);
                         stringBuilder.Append(animalGroup.GroupType + columnSeparator);
                         stringBuilder.Append(componentNumber + columnSeparator);

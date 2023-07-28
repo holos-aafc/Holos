@@ -13,6 +13,7 @@ namespace H.CLI.ComponentKeys
         public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
         {
             {Properties.Resources.Key_Name, null},
+            {H.Core.Properties.Resources.ComponentType, null},
             {Properties.Resources.GroupName, null},
             {Properties.Resources.GroupType, null},            
             {Properties.Resources.ManagementPeriodName, null},

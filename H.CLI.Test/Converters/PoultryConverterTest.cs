@@ -13,6 +13,7 @@ using H.CLI.Interfaces;
 using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals.Poultry;
+using H.Core.Models.Animals.Poultry.Chicken;
 
 namespace H.CLI.Test.Converters
 {
@@ -37,6 +38,7 @@ namespace H.CLI.Test.Converters
                 Name = "Poultry1",
                 GroupName = "LDG1",
                 GroupType = AnimalType.LayersDryPoultry,
+                ComponentType = typeof(ChickenEggProductionComponent),
                 NumberOfAnimals = 60,
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -52,6 +54,7 @@ namespace H.CLI.Test.Converters
                 Name = "Poultry1",
                 GroupName = "LDG1",
                 GroupType = AnimalType.LayersDryPoultry,
+                ComponentType = typeof(ChickenEggProductionComponent),
                 NumberOfAnimals = 60,
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -67,6 +70,7 @@ namespace H.CLI.Test.Converters
                 Name = "Poultry1",
                 GroupName = "LDG2",
                 GroupType = AnimalType.LayersDryPoultry,
+                ComponentType = typeof(ChickenEggProductionComponent),
                 NumberOfAnimals = 60,
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -88,7 +92,7 @@ namespace H.CLI.Test.Converters
             var farm = new Farm();
             var poultryListGuidSet = componentConverterHandler.SetComponentListGuid(allPoultryTemporaryInputs);
             var poultryComponents = componentConverterHandler.StartComponentConversion("Poultry", farm, allPoultryTemporaryInputs);
-            var castedPoultryComponents = poultryComponents.Cast<PoultryLayersDryComponent>().ToList();
+            var castedPoultryComponents = poultryComponents.Cast<ChickenEggProductionComponent>().ToList();
 
             //Poultry
             Assert.AreEqual(castedPoultryComponents[0].Name, "Poultry1");

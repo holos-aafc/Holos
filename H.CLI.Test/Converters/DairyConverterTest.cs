@@ -41,6 +41,7 @@ namespace H.CLI.Test.Converters
                 Name = "ExampleDairyComponentName",
                 GroupName = "DairyHeifers1",
                 GroupType = AnimalType.DairyHeifers,
+                ComponentType = typeof(DairyComponent),
 
                 ManagementPeriodName = "ExampleManagementPeriodName",
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
@@ -81,6 +82,7 @@ namespace H.CLI.Test.Converters
                 Name = "ExampleDairyComponentName",
                 GroupName = "DairyHeifers1",
                 GroupType = AnimalType.DairyHeifers,
+                ComponentType = typeof(DairyComponent),
             
                 ManagementPeriodName = "ExampleManagementPeriodName",
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),

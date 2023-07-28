@@ -901,7 +901,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.1.3-16
+        /// Equation 4.1.3-15
         /// </summary>
         /// <param name="amountOfCarbonInStorageInPreviousDay">Amount of C in stored manure on the previous day for each animal group and manure management system (kg C)</param>
         /// <param name="amountOfCarbonFlowingIntoStorage">Amount of C flowing into storage from manure on the current day for each animal group and manure management system (kg C day^-1)</param>

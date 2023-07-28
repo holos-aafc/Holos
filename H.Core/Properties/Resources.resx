@@ -5631,4 +5631,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelHogs" xml:space="preserve">
     <value>Hogs</value>
   </data>
+  <data name="ComponentType" xml:space="preserve">
+    <value>Component Type</value>
+  </data>
 </root>

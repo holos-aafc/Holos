@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using H.Core.Enumerations;
+using H.Core.Models;
 
 namespace H.CLI.Interfaces
 {
@@ -11,7 +12,8 @@ namespace H.CLI.Interfaces
         string Name { get; set; }
         string GroupName { get; set; }
         Guid Guid { get; set; }
-        AnimalType GroupType { get; set; } 
+        AnimalType GroupType { get; set; }
+        Type ComponentType { get; set; }
         #endregion
 
         #region Methods

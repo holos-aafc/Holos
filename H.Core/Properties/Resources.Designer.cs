@@ -673,6 +673,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Component Type.
+        /// </summary>
+        public static string ComponentType {
+            get {
+                return ResourceManager.GetString("ComponentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compost - intensive windrow.
         /// </summary>
         public static string CompostIntensiveHandlingSystemName {

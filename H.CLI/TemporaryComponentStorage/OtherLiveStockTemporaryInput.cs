@@ -10,10 +10,8 @@ using H.CLI.UserInput;
 
 namespace H.CLI.TemporaryComponentStorage
 {
-    public class OtherLiveStockTemporaryInput : IComponentTemporaryInput
+    public class OtherLiveStockTemporaryInput : TemporaryInputBase, IComponentTemporaryInput
     {
-        private InputHelper _inputHelper = new InputHelper();
-
         public void ConvertToComponentProperties(string key, ImperialUnitsOfMeasurement? units, string value, int row, int col, string filePath)
         {
             Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -32,8 +30,17 @@ namespace H.CLI.TemporaryComponentStorage
             InputDataReflectionHandler(propertyInfo, units, key, value, filePath, col, row);
         }
 
-        public void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string filePath, int col, int row)
+        public override void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string filePath, int col, int row)
         {
+            base.InputDataReflectionHandler(propertyInfo, units, prop, value, filePath, col, row);
+
+            if (propertyInfo.PropertyType == typeof(Type))
+            {
+                base.ParseType(propertyInfo, units, prop, value, filePath, col, row);
+
+                return;
+            }
+
             if (propertyInfo.PropertyType == typeof(AnimalType))
             {
                 try

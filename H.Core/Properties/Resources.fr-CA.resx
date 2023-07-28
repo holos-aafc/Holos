@@ -336,6 +336,9 @@
   <data name="CommandShowAdditionalInformation" xml:space="preserve">
     <value>Afficher les renseignements additionnels</value>
   </data>
+  <data name="ComponentType" xml:space="preserve">
+    <value>Component Type</value>
+  </data>
   <data name="CompostIntensiveHandlingSystemName" xml:space="preserve">
     <value>Compost - intensive windrow</value>
   </data>

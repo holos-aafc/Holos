@@ -38,6 +38,7 @@ namespace H.CLI.Test.Converters
                 Name = "SheepComponent1",
                 GroupName = "WLG1",
                 GroupType = AnimalType.WeanedLamb,
+                ComponentType = typeof(EwesAndLambsComponent),
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
                 NumberOfAnimals = 60,
@@ -78,6 +79,7 @@ namespace H.CLI.Test.Converters
                 Name = "SheepComponent1",
                 GroupName = "WLG2",
                 GroupType = AnimalType.WeanedLamb,
+                ComponentType = typeof(EwesAndLambsComponent),
 
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,
@@ -120,6 +122,7 @@ namespace H.CLI.Test.Converters
                 Name = "SheepComponent1",
                 GroupName = "WLG3",
                 GroupType = AnimalType.WeanedLamb,
+                ComponentType = typeof(EwesAndLambsComponent),
 
                 ManagementPeriodStartDate = Convert.ToDateTime("04/25/1996"),
                 ManagementPeriodDays = 60,

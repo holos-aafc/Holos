@@ -10,7 +10,7 @@ using H.Core.Providers.Nitrogen;
 namespace H.CLI.TemporaryComponentStorage
 {
 
-    public class FieldTemporaryInput : IComponentTemporaryInput
+    public class FieldTemporaryInput : TemporaryInputBase, IComponentTemporaryInput
     {
         #region Fields
 
@@ -48,16 +48,9 @@ namespace H.CLI.TemporaryComponentStorage
         /// Responsible for setting the properties using reflection and checking edge cases (ie, not a valid integer, or not a valid Enum)
         /// Throws the appropriate exception based on the edge case that occurs.
         /// </summary>
-        public void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string fileName, int col, int row)
+        public override void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string fileName, int col, int row)
         {
-            //This exception is only for the Developer, if you add a new property, please make sure it is in the correct format.
-            //The compiler cannot find the property in the list of properties for this class and therefore it is null.
-            if (propertyInfo == null)
-            {
-                throw new InvalidPropertyNameException(String.Format
-                                 (Properties.Resources.InvalidPropertyName,
-                                 row + 1, col + 1, fileName));
-            }
+            base.InputDataReflectionHandler(propertyInfo, units, prop, value, fileName, col, row);
 
             if (propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(double))
             {
