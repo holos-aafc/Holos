@@ -110,6 +110,10 @@ namespace H.CLI.TemporaryComponentStorage
         public double YearlyManureMethaneRate { get; set; }
         public double YearlyNitrogenExcretionRate { get; set; }
         public double YearlyEntericMethaneRate { get; set; }
+        public double DailyManureMethaneEmissionRate { get; set; }
+        public double MethaneProducingCapacityOfManure { get; set; }
+        public double MethaneConversionFactor { get; set; }
+        public double VolatileSolids { get; set; }
         public Guid Guid { get; set; }
         public int GroupId { get; set; }
   

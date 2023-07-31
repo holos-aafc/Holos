@@ -1329,4 +1329,10 @@ Would you like to continue using this directory?</value>
   <data name="Settings_PolygonNumber" xml:space="preserve">
     <value>Polygon Number</value>
   </data>
+  <data name="DailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Daily Manure Methane Emission Rate</value>
+  </data>
+  <data name="VolatileSolids" xml:space="preserve">
+    <value>Volatile Solids</value>
+  </data>
 </root>

@@ -204,6 +204,9 @@
   <data name="CutYear" xml:space="preserve">
     <value>année de coupe</value>
   </data>
+  <data name="DailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Daily Manure Methane Emission Rate</value>
+  </data>
   <data name="DataInputMistakeData" xml:space="preserve">
     <value>Il y a une erreur de saisie de données à la ligne : {0}, colonne : {1} à l’emplacement : {2}.</value>
   </data>
@@ -1262,6 +1265,9 @@
   </data>
   <data name="VolatileSolidAdjusted" xml:space="preserve">
     <value>solides volatils ajustés</value>
+  </data>
+  <data name="VolatileSolids" xml:space="preserve">
+    <value>Volatile Solids</value>
   </data>
   <data name="VolatileSolidsExcretion" xml:space="preserve">
     <value>excrétion de solides volatils</value>

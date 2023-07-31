@@ -322,6 +322,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Manure Methane Emission Rate.
+        /// </summary>
+        public static string DailyManureMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("DailyManureMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is a data input mistake at Row: {0} , Column: {1}. at the location: {2}..
         /// </summary>
         public static string DataInputMistakeData {
@@ -3505,6 +3514,15 @@ namespace H.CLI.Properties {
         public static string VolatileSolidAdjusted {
             get {
                 return ResourceManager.GetString("VolatileSolidAdjusted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volatile Solids.
+        /// </summary>
+        public static string VolatileSolids {
+            get {
+                return ResourceManager.GetString("VolatileSolids", resourceCulture);
             }
         }
         

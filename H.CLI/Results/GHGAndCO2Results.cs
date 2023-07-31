@@ -79,9 +79,10 @@ namespace H.CLI.Results
         public double MonthlyIndirectNitrousOxide { get; set; }
         public double MonthTotal { get; set; }
 
-        #endregion
         //Counter
         public double EmissionFileCounter { get; set; }
+
+        #endregion
 
         #region Calculators
         private readonly Table_65_66_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();

@@ -25,6 +25,10 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.YearlyEntericMethaneRate,  ImperialUnitsOfMeasurement.PoundPerHeadPerYear},
             {Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN},
             {Properties.Resources.VolatilizationFraction, null },
+            {Properties.Resources.DailyManureMethaneEmissionRate, null },
+            {Properties.Resources.MethaneProducingCapacityOfManure, null },
+            {Properties.Resources.MethaneConversionFactor, null },
+            {Properties.Resources.VolatileSolids, null },
         };
 
         public bool IsHeaderOptional(string s)

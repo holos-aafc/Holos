@@ -69,6 +69,10 @@ namespace H.CLI.Converters
                                 YearlyEntericMethaneRate = inputRow.YearlyEntericMethaneRate,
                                 YearlyManureMethaneRate = inputRow.YearlyManureMethaneRate,
                                 NitrogenExretionRate = inputRow.YearlyNitrogenExcretionRate,
+                                DailyManureMethaneEmissionRate = inputRow.DailyManureMethaneEmissionRate,
+                                MethaneProducingCapacityOfManure = inputRow.MethaneProducingCapacityOfManure,
+                                MethaneConversionFactor = inputRow.MethaneConversionFactor,
+                                VolatileSolids = inputRow.VolatileSolids,
                             }
                         };
 
@@ -126,6 +130,11 @@ namespace H.CLI.Converters
                         stringBuilder.Append(managementPeriod.ManureDetails.YearlyEntericMethaneRate + columnSeparator);
                         stringBuilder.Append(managementPeriod.ManureDetails.N2ODirectEmissionFactor + columnSeparator);
                         stringBuilder.Append(managementPeriod.ManureDetails.VolatilizationFraction + columnSeparator);
+
+                        stringBuilder.Append(managementPeriod.ManureDetails.DailyManureMethaneEmissionRate + columnSeparator);
+                        stringBuilder.Append(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure + columnSeparator);
+                        stringBuilder.Append(managementPeriod.ManureDetails.MethaneConversionFactor + columnSeparator);
+                        stringBuilder.Append(managementPeriod.ManureDetails.VolatileSolids + columnSeparator);
 
                         stringBuilder.AppendLine();
                     }
