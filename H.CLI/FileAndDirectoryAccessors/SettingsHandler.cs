@@ -18,6 +18,8 @@ namespace H.CLI.FileAndDirectoryAccessors
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
         private readonly SlcClimateDataProvider _slcClimateDataProvider = new SlcClimateDataProvider();
+        private readonly IClimateProvider _climateProvider = new ClimateProvider();
+
         public List<int> PolygonIDList { get; set; } = new List<int>();
 
         #endregion
@@ -49,41 +51,41 @@ namespace H.CLI.FileAndDirectoryAccessors
             userDefaults.MoistureResponseFunctionAtSaturation = double.Parse(userSettings[Properties.Resources.Settings_MoistureResponseFunctionAtSaturation]);
             userDefaults.MoistureResponseFunctionAtWiltingPoint = double.Parse(userSettings[Properties.Resources.Settings_MoistureResponseFunctionAtWiltingPoint]);
 
-           //Annuals
+            //Annuals
             userDefaults.PercentageOfProductReturnedToSoilForAnnuals = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductReturnedToSoilForAnnuals]);
             userDefaults.PercentageOfStrawReturnedToSoilForAnnuals = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfStrawReturnedToSoilForAnnuals]);
             userDefaults.PercentageOfRootsReturnedToSoilForAnnuals = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForAnnuals]);
 
-           //Silage Crops
+            //Silage Crops
             userDefaults.PercentageOfProductYieldReturnedToSoilForSilageCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductYieldReturnedToSoilForSilageCrops]);
             userDefaults.PercentageOfRootsReturnedToSoilForSilageCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForSilageCrops]);
 
-           //Cover Crops
+            //Cover Crops
             userDefaults.PercentageOfProductYieldReturnedToSoilForCoverCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductYieldReturnedToSoilForCoverCrops]);
             userDefaults.PercentageOfProductYieldReturnedToSoilForCoverCropsForage = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductYieldReturnedToSoilForCoverCropsForage]);
             userDefaults.PercentageOfProductYieldReturnedToSoilForCoverCropsProduce = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductYieldReturnedToSoilForCoverCropsProduce]);
             userDefaults.PercentageOfStrawReturnedToSoilForCoverCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfStrawReturnedToSoilForCoverCrops]);
             userDefaults.PercetageOfRootsReturnedToSoilForCoverCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForCoverCrops]);
 
-           //Root Crops
+            //Root Crops
             userDefaults.PercentageOfProductReturnedToSoilForRootCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductReturnedToSoilForRootCrops]);
             userDefaults.PercentageOfStrawReturnedToSoilForRootCrops = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfStrawReturnedToSoilForRootCrops]);
 
-           //Perennial Crops
+            //Perennial Crops
             userDefaults.PercentageOfProductReturnedToSoilForPerennials = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductReturnedToSoilForPerennials]);
             userDefaults.PercentageOfRootsReturnedToSoilForPerennials = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForPerennials]);
 
-           //Rangeland
-           //PercentageOfProductReturnedToSoilForRangelandDueToGrazingLoss = double.Parse(userSettings["Percentage Of Product Returned To Soil For Rangeland Due To Grazing Loss"]));
+            //Rangeland
+            //PercentageOfProductReturnedToSoilForRangelandDueToGrazingLoss = double.Parse(userSettings["Percentage Of Product Returned To Soil For Rangeland Due To Grazing Loss"]));
 
             userDefaults.PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss]);
             userDefaults.PercentageOfRootsReturnedToSoilForRangeland = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForRangeland]);
 
-           //Fodder Corn
+            //Fodder Corn
             userDefaults.PercentageOfProductReturnedToSoilForFodderCorn = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfProductReturnedToSoilForFodderCorn]);
             userDefaults.PercentageOfRootsReturnedToSoilForFodderCorn = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForFodderCorn]);
 
-           // ICBM
+            // ICBM
             userDefaults.HumificationCoefficientAboveGround = double.Parse(userSettings[Properties.Resources.Settings_HumificationCoefficientAboveGround]);
             userDefaults.HumificationCoefficientBelowGround = double.Parse(userSettings[Properties.Resources.Settings_HumificationCoefficientBelowGround]);
             userDefaults.HumificationCoefficientManure = double.Parse(userSettings[Properties.Resources.Settings_HumificationCoefficientManure]);
@@ -125,65 +127,8 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.Longitude = double.Parse(userSettings[Properties.Resources.Settings_Longitude]);
                 farm.Latitude = double.Parse(userSettings[Properties.Resources.Settings_Latitude]);
             }
-            if (userSettings.ContainsKey(Properties.Resources.Settings_ClimateDataAcquisition))
-            {
-                farm.ClimateAcquisition = farm.ClimateAcquisitionStringToEnum(userSettings[Properties.Resources.Settings_ClimateDataAcquisition]);
-            }
 
-            var climateData = new ClimateData()
-            {
-                PrecipitationData =
-                {
-                    January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_JanuaryPrecipitation]), false),
-                    February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_FebruaryPrecipitation]), false),
-                    March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_MarchPrecipitation]), false),
-                    April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_AprilPrecipitation]), false),
-                    May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_MayPrecipitation]), false),
-                    June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_JunePrecipitation]), false),
-                    July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_JulyPrecipitation]), false),
-                    August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_AugustPrecipitation]), false),
-                    September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_SeptemberPrecipitation]), false),
-                    October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_OctoberPrecipitation]), false),
-                    November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_NovemberPrecipitation]), false),
-                    December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_DecemberPrecipitation]), false),
-                },
-
-                EvapotranspirationData =
-                {
-                    January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_JanuaryPotentialEvapotranspiration]), false),
-                    February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_FebruaryPotentialEvapotranspiration]), false),
-                    March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_MarchPotentialEvapotranspiration]), false),
-                    April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_AprilPotentialEvapotranspiration]), false),
-                    May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_MayPotentialEvapotranspiration]), false),
-                    June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_JunePotentialEvapotranspiration]), false),
-                    July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_JulyPotentialEvapotranspiration]), false),
-                    August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_AugustPotentialEvapotranspiration]), false),
-                    September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_SeptemberPotentialEvapotranspiration]), false),
-                    October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_OctoberPotentialEvapotranspiration]), false),
-                    November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_NovemberPotentialEvapotranspiration]), false),
-                    December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, double.Parse(userSettings[Properties.Resources.Settings_DecemberPotentialEvapotranspiration]), false),
-                },
-
-                TemperatureData =
-                {
-                    January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_JanuaryMeanTemperature]), false),
-                    February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_FebruaryMeanTemperature]), false),
-                    March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_MarchMeanTemperature]), false),
-                    April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_AprilMeanTemperature]), false),
-                    May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_MayMeanTemperature]), false),
-                    June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_JuneMeanTemperature]), false),
-                    July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_JulyMeanTemperature]), false),
-                    August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_AugustMeanTemperature]), false),
-                    September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_SeptemberMeanTemperature]), false),
-                    October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_OctoberMeanTemperature]), false),
-                    November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_NovemberMeanTemperature]), false),
-                    December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius, double.Parse(userSettings[Properties.Resources.Settings_DecemberMeanTemperature]), false),
-                },
-            };
-
-            // Add new setting to toggle NASA data on off
-
-            farm.ClimateData = climateData;
+            this.ApplyClimateData(userSettings, farm);
 
             var userGeographicData = new GeographicData()
             {
@@ -281,6 +226,202 @@ namespace H.CLI.FileAndDirectoryAccessors
                 var climateData = _slcClimateDataProvider.GetClimateData(lethbridgePolygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
 
                 _directoryHandler.GenerateGlobalSettingsFile(farmDirectoryPath, new Farm() { PolygonId = lethbridgePolygonID, GeographicData = lethbridgeGeographicData, ClimateData = climateData });
+            }
+        }
+
+        public void ApplyClimateData(Dictionary<string, string> userSettings, Farm farm)
+        {
+            if (userSettings.ContainsKey(Properties.Resources.Settings_ClimateDataAcquisition))
+            {
+                farm.ClimateAcquisition = farm.ClimateAcquisitionStringToEnum(userSettings[Properties.Resources.Settings_ClimateDataAcquisition]);
+            }
+
+            switch (farm.ClimateAcquisition)
+            {
+                case Farm.ChosenClimateAcquisition.Custom:
+                {
+                    farm.ClimateData = new ClimateData()
+                    {
+                        PrecipitationData =
+                        {
+                            January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_JanuaryPrecipitation]), false),
+                            February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_FebruaryPrecipitation]), false),
+                            March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_MarchPrecipitation]), false),
+                            April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_AprilPrecipitation]), false),
+                            May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_MayPrecipitation]), false),
+                            June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_JunePrecipitation]), false),
+                            July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_JulyPrecipitation]), false),
+                            August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_AugustPrecipitation]), false),
+                            September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_SeptemberPrecipitation]),
+                                false),
+                            October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_OctoberPrecipitation]), false),
+                            November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_NovemberPrecipitation]), false),
+                            December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
+                                double.Parse(userSettings[Properties.Resources.Settings_DecemberPrecipitation]), false),
+                        },
+
+                        EvapotranspirationData =
+                        {
+                            January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_JanuaryPotentialEvapotranspiration]),
+                                false),
+                            February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_FebruaryPotentialEvapotranspiration]),
+                                false),
+                            March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_MarchPotentialEvapotranspiration]),
+                                false),
+                            April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_AprilPotentialEvapotranspiration]),
+                                false),
+                            May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_MayPotentialEvapotranspiration]), false),
+                            June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_JunePotentialEvapotranspiration]),
+                                false),
+                            July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_JulyPotentialEvapotranspiration]),
+                                false),
+                            August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_AugustPotentialEvapotranspiration]),
+                                false),
+                            September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_SeptemberPotentialEvapotranspiration]),
+                                false),
+                            October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_OctoberPotentialEvapotranspiration]),
+                                false),
+                            November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_NovemberPotentialEvapotranspiration]),
+                                false),
+                            December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.MillimetersPerYear,
+                                double.Parse(
+                                    userSettings[Properties.Resources.Settings_DecemberPotentialEvapotranspiration]),
+                                false),
+                        },
+
+                        TemperatureData =
+                        {
+                            January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_JanuaryMeanTemperature]),
+                                false),
+                            February = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_FebruaryMeanTemperature]),
+                                false),
+                            March = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_MarchMeanTemperature]), false),
+                            April = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_AprilMeanTemperature]), false),
+                            May = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_MayMeanTemperature]), false),
+                            June = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_JuneMeanTemperature]), false),
+                            July = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_JulyMeanTemperature]), false),
+                            August = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_AugustMeanTemperature]), false),
+                            September = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_SeptemberMeanTemperature]),
+                                false),
+                            October = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_OctoberMeanTemperature]),
+                                false),
+                            November = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_NovemberMeanTemperature]),
+                                false),
+                            December = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
+                                CLIUnitsOfMeasurementConstants.measurementSystem,
+                                MetricUnitsOfMeasurement.DegreesCelsius,
+                                double.Parse(userSettings[Properties.Resources.Settings_DecemberMeanTemperature]),
+                                false),
+                        },
+                    };
+                        break;
+                }
+
+                default:
+                    farm.ClimateData = _climateProvider.Get(farm.Latitude, farm.Longitude, farm.Defaults.TimeFrame);
+                    break;
             }
         }
 

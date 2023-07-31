@@ -33,14 +33,22 @@ namespace H.Core.Providers.Climate
 
         #region Constructors
 
-        public ClimateData()
+        public ClimateData() : this(new List<DailyClimateData>())
         {
             this.TemperatureData = new TemperatureData();
             this.PrecipitationData = new PrecipitationData();
             this.EvapotranspirationData = new EvapotranspirationData();
+        }
 
+        public ClimateData(List<DailyClimateData> dailyClimate)
+        {
             this.DailyClimateData = new ObservableCollection<DailyClimateData>();
             this.DailyClimateData.CollectionChanged += DailyClimateData_CollectionChanged;
+
+            foreach (var dailyClimateData in dailyClimate)
+            {
+                this.DailyClimateData.Add(dailyClimateData);
+            }
         }
 
         private void DailyClimateData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

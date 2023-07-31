@@ -168,11 +168,13 @@ namespace H.CLI
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
-            } 
-
-            //There is nothing in the Farms Folder, create a Template Farm and instruct user to populate their folders with data files
+            }
             else
             {
+                /*
+                 * There is nothing in the Farms Folder, create a Template Farm and instruct user to populate their folders with data files
+                 */
+
                 templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(String.Format(Properties.Resources.InitialMessageAfterInstallation, farmsFolderPath));

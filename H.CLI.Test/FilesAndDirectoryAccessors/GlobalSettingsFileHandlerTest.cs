@@ -135,48 +135,6 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Assert.AreEqual(farm.Defaults.MicrobeDeath, 0.2);
             Assert.AreEqual(farm.Defaults.Denitrification, 0.5);
 
-            //Precipitation Data
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.January, 13.7223);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.February, 11.9852);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.March, 20.6658);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.April, 27.8472);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.May, 48.1653);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.June, 75.8647);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.July, 36.6482);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.August, 35.9121);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.September, 37.3989);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.October, 17.814);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.November, 15.8361);
-            Assert.AreEqual(farm.ClimateData.PrecipitationData.December, 14.5102);
-            //Evanpotranspiration Data
-
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.January, 4.8688);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.February, 9.8498);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.March, 37.3942);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.April, 74.7692);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.May, 111.9281);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.June, 129.2335);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.July, 135.6777);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.August, 113.1369);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.September, 71.7394);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.October, 38.6017);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.November, 13.2771);
-            Assert.AreEqual(farm.ClimateData.EvapotranspirationData.December, 4.6077);
-
-            //TemperatureData
-            Assert.AreEqual(farm.ClimateData.TemperatureData.January, -6.4094);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.February, -4.3469);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.March, 0.2081);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.April, 6.1523);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.May, 11.4057);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.June, 15.3654);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.July, 18.2907);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.August, 17.7328);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.September, 12.5254);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.October, 6.7026);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.November, -0.9397);
-            Assert.AreEqual(farm.ClimateData.TemperatureData.December, -5.8802);
-
             //DefaultSoilData
             Assert.AreEqual(farm.GeographicData.DefaultSoilData.YearOfObservation, DateTime.Now.Year);
             Assert.AreEqual(farm.GeographicData.DefaultSoilData.EcodistrictId, 793);

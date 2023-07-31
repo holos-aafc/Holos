@@ -60,9 +60,8 @@ namespace H.Core.Providers.Climate
             var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, timeFrame);
             var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, timeFrame);
 
-            return new ClimateData()
+            return new ClimateData(dailyClimateData)
             {
-                DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData),
                 TemperatureData = temperatureNormals,
                 PrecipitationData = precipitationNormals,
                 EvapotranspirationData = evapotranspirationNormals,
