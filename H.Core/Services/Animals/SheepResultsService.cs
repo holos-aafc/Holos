@@ -320,7 +320,7 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
                 nitrogenExcretion: dailyEmissions.AmountOfNitrogenExcreted,
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission, 
@@ -329,10 +329,10 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
-                nitrogenFromManure: dailyEmissions.NitrogenAvailableForLandApplication);
+                nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;

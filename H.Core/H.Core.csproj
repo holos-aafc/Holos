@@ -529,8 +529,8 @@
     <Compile Include="Providers\Climate\DailyClimateData.cs" />
     <Compile Include="Providers\Climate\Table_63_Global_Radiative_Forcing_Data.cs" />
     <Compile Include="Providers\Climate\Table_63_Global_Radiative_Forcing_Provider.cs" />
-    <Compile Include="Providers\Climate\Table_62_Global_Warming_Emissions_Potential_Data.cs" />
-    <Compile Include="Providers\Climate\Table_62_Global_Warming_Emissions_Potential_Provider.cs" />
+    <Compile Include="Providers\Climate\Table_54_Global_Warming_Emissions_Potential_Data.cs" />
+    <Compile Include="Providers\Climate\Table_54_Global_Warming_Emissions_Potential_Provider.cs" />
     <Compile Include="Providers\Climate\Table_1_Growing_Degree_Crop_Coefficients_Data.cs" />
     <Compile Include="Providers\Climate\Table_1_Growing_Degree_Crop_Coefficients_Provider.cs" />
     <Compile Include="Providers\Climate\ICustomFileClimateDataProvider.cs" />

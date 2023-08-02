@@ -110,8 +110,8 @@ namespace H.Core.Services.Animals
             var targetGroupEmissions = this.GetTargetEmissions(animalComponentResults, manureTank.Year);
             foreach (var groupEmissionsByMonth in targetGroupEmissions)
             {
-                manureTank.TotalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyOrganicNitrogenAvailableForLandApplication;
-                manureTank.TotalTanAvailableForLandApplication += groupEmissionsByMonth.MonthlyTanAvailableForLandApplication;
+                manureTank.TotalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.TotalOrganicNitrogenAvailableForLandApplicationAtEndOfMonth;
+                manureTank.TotalTanAvailableForLandApplication += groupEmissionsByMonth.TotalTANAvailableForLandApplicationAtEndOfMonth;
                 manureTank.TotalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManure;
 
                 // Before any nitrogen from any manure applications have been subtracted from the tank, these two values will be the same

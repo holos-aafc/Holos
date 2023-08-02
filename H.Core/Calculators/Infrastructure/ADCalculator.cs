@@ -141,15 +141,15 @@ namespace H.Core.Calculators.Infrastructure
             }
 
             // Equation 4.8.1-20
-            substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NitrogenAvailableForLandApplication + fractionUsed;
+            substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay + fractionUsed;
 
             if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
             {
                 // Equation 4.8.1-22
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.OrganicNitrogenAvailableForLandApplication * fractionUsed;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay * fractionUsed;
 
                 // Equation 4.8.1-23
-                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.TanAvailableForLandApplication * fractionUsed;
+                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay * fractionUsed;
             }
             else
             {

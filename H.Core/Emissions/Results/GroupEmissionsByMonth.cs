@@ -39,7 +39,7 @@ namespace H.Core.Emissions.Results
 
         public GroupEmissionsByMonth(MonthsAndDaysData monthsAndDaysData, IList<GroupEmissionsByDay> dailyEmissionsForMonth) : this(monthsAndDaysData)
         {
-            DailyEmissions.AddRange(dailyEmissionsForMonth);
+            DailyEmissions.AddRange(dailyEmissionsForMonth.OrderBy(x => x.DateTime));
         }
 
         #endregion
@@ -368,16 +368,7 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        /// <summary>
-        /// (kg C)
-        /// </summary>
-        public double TotalAmountOfCarbonInStoredManure
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.AmountOfCarbonInStoredManure);
-            }
-        }
+
 
         /// <summary>
         /// (kg head^-1 day^-1)
@@ -403,16 +394,7 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        /// <summary>
-        /// (kg N)
-        /// </summary>
-        public double MonthlyOrganicNitrogenInStoredManure 
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.OrganicNitrogenInStoredManure);
-            }
-        }
+
 
         /// <summary>
         /// Use an average of the daily values when reporting monthly
@@ -435,7 +417,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return DailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
+                return DailyEmissions.Sum(x => x.AccumulatedNitrogenAvailableForLandApplicationOnDay);
             }
         }
 
@@ -483,6 +465,55 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        #region Organic Nitrogen (ON)
+
+        /*
+         * ON
+         */
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double TotalOrganicNitrogenAvailableForLandApplicationAtEndOfMonth
+        {
+            get
+            {
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Last().AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay;
+            }
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double MonthlyOrganicNitrogenInStoredManure
+        {
+            get
+            {
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Last().OrganicNitrogenInStoredManure;
+            }
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double MonthlyNitrogenAvailableForLandApplication
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+            }
+        }
+
+        #endregion
+
+        #region Total Ammoniacal Nitrogen (TAN)
+
+        /*
+         * TAN
+         */
+
         /// <summary>
         /// (kg TAN)
         /// </summary>
@@ -493,6 +524,31 @@ namespace H.Core.Emissions.Results
                 return DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManure);
             }
         }
+
+        /// <summary>
+        /// (kg TAN)
+        /// </summary>
+        public double MonthlyTanEnteringStorageSystem
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TanEnteringStorageSystem);
+            }
+        }
+
+        /// <summary>
+        /// (kg TAN)
+        /// </summary>
+        public double TotalTANAvailableForLandApplicationAtEndOfMonth
+        {
+            get
+            {
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Last().AccumulatedTANAvailableForLandApplicationOnDay;
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Use an average of the daily values when reporting monthly
@@ -579,17 +635,6 @@ namespace H.Core.Emissions.Results
             }
         }
 
-
-        /// <summary>
-        /// (kg TAN)
-        /// </summary>
-        public double MonthlyTanEnteringStorageSystem
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.TanEnteringStorageSystem);
-            }
-        }
 
         /// <summary>
         /// Use an average of the daily values when reporting monthly
@@ -1147,36 +1192,17 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        /// <summary>
-        /// (kg TAN)
-        /// </summary>
-        public double MonthlyTanAvailableForLandApplication
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.TanAvailableForLandApplication);
-            }
-        }
+
 
         /// <summary>
-        /// (kg N)
+        /// (kg C)
         /// </summary>
-        public double MonthlyOrganicNitrogenAvailableForLandApplication
+        public double TotalAmountOfCarbonInStoredManure
         {
             get
             {
-                return DailyEmissions.Sum(x => x.OrganicNitrogenAvailableForLandApplication);
-            }
-        }
-
-        /// <summary>
-        /// (kg N)
-        /// </summary>
-        public double MonthlyNitrogenAvailableForLandApplication
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.NitrogenAvailableForLandApplication);
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Last().AmountOfCarbonInStoredManureOnDay;
             }
         }
 

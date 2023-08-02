@@ -388,8 +388,8 @@
   <data name="Table_63_Global_Radiative_Forcing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_63_Global_Radiative_Forcing.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_62_Global_Warming_Potential_Of_Emissions" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_62_Global_Warming_Potential_Of_Emissions.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Table_54_Global_Warming_Potential_Of_Emissions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_54_Global_Warming_Potential_Of_Emissions.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

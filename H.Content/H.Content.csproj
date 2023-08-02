@@ -195,7 +195,7 @@
     <None Include="Resources\Table_59_Feed_Costs_For_Beef.csv" />
     <None Include="Resources\Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost.csv" />
     <None Include="Resources\Table_63_Global_Radiative_Forcing.csv" />
-    <None Include="Resources\Table_62_Global_Warming_Potential_Of_Emissions.csv" />
+    <None Include="Resources\Table_54_Global_Warming_Potential_Of_Emissions.csv" />
     <None Include="Resources\green_ash__31_allclusters_future.csv" />
     <None Include="Resources\Table_1_Growing_Degree_Crop_Coefficients.csv" />
     <None Include="Resources\Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv" />

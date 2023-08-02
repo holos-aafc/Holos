@@ -222,27 +222,26 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            dailyEmissions.TanAvailableForLandApplication = base.CalculateMonthlyTanAvailableForLandApplication(
-                monthlyTanEnteringStorageSystem: dailyEmissions.AdjustedAmountOfTanInStoredManure,
-                ammoniaLostFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
+                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AdjustedAmountOfTanInStoredManure);
 
-            dailyEmissions.OrganicNitrogenAvailableForLandApplication = base.CalculateMonthlyOrganicNitrogenAvailableForLandApplication(
+            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = base.CalculateOrganicNitrogenCreatedOnDay(
                 fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
                 directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
                 leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
 
-            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManure(
-                tanAvailableForLandApplication: dailyEmissions.TanAvailableForLandApplication,
-                organicNitrogenAvailableForLandApplication: dailyEmissions.OrganicNitrogenAvailableForLandApplication);
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateTotalAvailableManureNitrogenInStoredManure(
+                tanAvailableForLandApplication: dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay,
+                organicNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
-                nitrogenFromManure: dailyEmissions.NitrogenAvailableForLandApplication);
+                nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
@@ -517,27 +516,26 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            dailyEmissions.TanAvailableForLandApplication = base.CalculateMonthlyTanAvailableForLandApplication(
-                monthlyTanEnteringStorageSystem: dailyEmissions.AdjustedAmountOfTanInStoredManure,
-                ammoniaLostFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
+                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AdjustedAmountOfTanInStoredManure);
 
-            dailyEmissions.OrganicNitrogenAvailableForLandApplication = base.CalculateMonthlyOrganicNitrogenAvailableForLandApplication(
+            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = base.CalculateOrganicNitrogenCreatedOnDay(
                 fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
                 directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
                 leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
 
-            dailyEmissions.NitrogenAvailableForLandApplication = base.CalculateTotalAvailableManureNitrogenInStoredManure(
-                tanAvailableForLandApplication: dailyEmissions.TanAvailableForLandApplication,
-                organicNitrogenAvailableForLandApplication: dailyEmissions.OrganicNitrogenAvailableForLandApplication);
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateTotalAvailableManureNitrogenInStoredManure(
+                tanAvailableForLandApplication: dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay,
+                organicNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
-                nitrogenFromManure: dailyEmissions.NitrogenAvailableForLandApplication);
+                nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;

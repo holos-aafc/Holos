@@ -54,7 +54,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.1-5
+        /// Equation 4.6.2-5
         /// </summary>
         public double CalculateTotalEmissionsFromRemainingManureThatIsAppliedToAllFields(
             double weightedEmissionFactor,
@@ -198,7 +198,7 @@ namespace H.Core.Calculators.Nitrogen
 
                 var amountOfN = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-                // Equation 4.6.2-8
+                // Equation 4.6.2-18
                 var ammoniacalLoss = amountOfN * landApplicationFactors.VolatilizationFraction;
 
                 // Equation 4.6.3-2

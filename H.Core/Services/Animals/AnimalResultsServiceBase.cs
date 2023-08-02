@@ -80,18 +80,20 @@ namespace H.Core.Services.Animals
 
         public virtual AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, ManagementPeriod managementPeriod, AnimalComponentBase animalComponent, Farm farm)
         {
+            // Add daily emissions from start to finish of the management period
+            var allDailyEmissions = new List<GroupEmissionsByDay>();
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();
             animalGroupEmissionResult.AnimalGroup = animalGroup;
 
             var monthlyBreakdownForManagementPeriod = AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
             foreach (var month in monthlyBreakdownForManagementPeriod)
             {
-
                 month.AnimalGroup = animalGroup;
                 month.ManagementPeriod = managementPeriod;
 
                 Trace.TraceInformation($"{nameof(AnimalResultsServiceBase)} calculating emissions for {month}.");
 
+                // Daily emissions for the current month only
                 var dailyEmissionsForMonth = new List<GroupEmissionsByDay>();
 
                 var startDate = month.StartDate;
@@ -103,7 +105,7 @@ namespace H.Core.Services.Animals
                 {
                     var previousDate = currentDate.AddDays(-1);
                     var groupEmissionsForPreviousDay =
-                        dailyEmissionsForMonth.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
+                        allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
 
                     var groupEmissionsForDay = CalculateDailyEmissions(
                         animalComponentBase: animalComponent,
@@ -114,6 +116,8 @@ namespace H.Core.Services.Animals
                         farm: farm);
 
                     dailyEmissionsForMonth.Add(groupEmissionsForDay);
+
+                    allDailyEmissions.Add(groupEmissionsForDay);
                 }
 
                 var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
@@ -129,6 +133,9 @@ namespace H.Core.Services.Animals
 
         public virtual AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
+            // Add daily emissions from start to finish of the management period
+            var allDailyEmissions = new List<GroupEmissionsByDay>();
+
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();
             animalGroupEmissionResult.AnimalGroup = animalGroup;
 
@@ -142,6 +149,7 @@ namespace H.Core.Services.Animals
 
                     Trace.TraceInformation($"{nameof(AnimalResultsServiceBase)} calculating emissions for {month}.");
 
+                    // Daily emissions for the current month only
                     var dailyEmissionsForMonth = new List<GroupEmissionsByDay>();
 
                     var startDate = month.StartDate;
@@ -153,7 +161,7 @@ namespace H.Core.Services.Animals
                     {
                         var previousDate = currentDate.AddDays(-1);
                         var groupEmissionsForPreviousDay =
-                            dailyEmissionsForMonth.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
+                            allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
 
                         var groupEmissionsForDay = CalculateDailyEmissions(
                             animalComponentBase: animalComponent,
@@ -164,6 +172,8 @@ namespace H.Core.Services.Animals
                             farm: farm);
 
                         dailyEmissionsForMonth.Add(groupEmissionsForDay);
+
+                        allDailyEmissions.Add(groupEmissionsForDay);
                     }
 
                     var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
@@ -1487,7 +1497,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-3
+        /// Equation 4.3.2-10
         /// Equation 4.3.3-9
         /// </summary>
         /// <param name="tanInStorageOnPreviousDay">TAN in storage on the previous day for each animal group and manure management system (kg TAN) </param>
@@ -1499,8 +1509,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-8
-        /// Equation 4.3.3-12
+        /// Equation 4.3.2-6
         /// </summary>
         /// <param name="ambientTemperatureAdjustmentStorage">Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</param>
         /// <param name="ammoniaEmissionFactorStorage">Default ammonia emission factor for manure stores (deep bedding, solid storage/stockpile, compost (passive, active))</param>
@@ -1525,8 +1534,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-9
-        /// Equation 4.3.3-13
+        /// Equation 4.3.2-7
         /// </summary>
         /// <param name="tanInStoredManure">Total ammonical nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="adjustedAmmoniaEmissionFactor">Adjusted ammonia emission factor for beef barn (0 ≤ EF≤ 1)</param>
@@ -1539,8 +1547,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-10
-        /// Equation 4.3.3-14
+        /// Equation 4.3.2-8
         /// </summary>
         /// <param name="ammoniaNitrogenLossFromStoredManure">Monthly ammonia nitrogen loss from stored manure (kg NH3-N)</param>
         /// <returns>Ammonia emission from manure storage system (kg NH3)</returns>
@@ -1699,14 +1706,11 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.5.2-1
         /// </summary>
-        /// <param name="monthlyTanEnteringStorageSystem">Adjusted amount of TAN in stored manure (kg TAN)</param>
-        /// <param name="ammoniaLostFromStoredManure">Ammonia nitrogen lost in manure storage system (compost, stockpile, deep bedding, kg NH3-N)</param>
+        /// <param name="accumulatedTANEnteringStorageSystemOnDay">Adjusted amount of TAN in stored manure (kg TAN)</param>
         /// <returns>Monthly TAN available for land application (kg TAN)</returns>
-        public double CalculateMonthlyTanAvailableForLandApplication(
-            double monthlyTanEnteringStorageSystem,
-            double ammoniaLostFromStoredManure)
+        public double CalculateAccumulatedTanAvailableForLandApplication(double accumulatedTANEnteringStorageSystemOnDay)
         {
-            return monthlyTanEnteringStorageSystem - ammoniaLostFromStoredManure;
+            return accumulatedTANEnteringStorageSystemOnDay;
         }
 
         /// <summary>
@@ -1720,18 +1724,27 @@ namespace H.Core.Services.Animals
         /// <param name="directManureEmissions">Manure  N loss as direct N2O-N (kg N)</param>
         /// <param name="leachingEmissions">Manure  N loss as direct N2O-N (kg N)</param>
         /// <returns>Amount of organic N entering the pool of available manure organic N each day for each animal group and management system (kg N day^-1)</returns>
-        public double CalculateMonthlyOrganicNitrogenAvailableForLandApplication(
+        public double CalculateOrganicNitrogenCreatedOnDay(
             double fecalNitrogenExcretion,
             double beddingNitrogen,
             double fractionOfMineralizedNitrogen,
             double directManureEmissions,
             double leachingEmissions)
         {
-            var result = (fecalNitrogenExcretion + beddingNitrogen) -
-                         ((fecalNitrogenExcretion + beddingNitrogen) * (1 - fractionOfMineralizedNitrogen) +
-                          directManureEmissions + leachingEmissions);
+            var result =
+                (fecalNitrogenExcretion + beddingNitrogen) - ((fecalNitrogenExcretion + beddingNitrogen) * (1 - fractionOfMineralizedNitrogen) + directManureEmissions + leachingEmissions);
 
             return result;
+        }
+
+        /// <summary>
+        /// Equation 4.5.2-4 
+        /// </summary>
+        public double CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
+            double organicNitrogenAvailableOnCurrentDay, 
+            double organicNitrogenAvailableFromPreviousDay)
+        {
+            return organicNitrogenAvailableFromPreviousDay + organicNitrogenAvailableOnCurrentDay;
         }
 
         /// <summary>

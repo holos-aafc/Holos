@@ -85,9 +85,9 @@ namespace H.Core.Emissions.Results
         private double _manureNitrateLeachingEmission;
         private double _manureIndirectN2ONEmission;
         private double _manureN2ONEmission;
-        private double _tanAvailableForLandApplication;
-        private double _organicNitrogenAvailableForLandApplication;
-        private double _nitrogenAvailableForLandApplication;
+        private double _accumulatedTanAvailableForLandApplicationOnDay;
+        private double _accumulatedOrganicNitrogenAvailableForLandApplicationOnDay;
+        private double _accumulatedNitrogenAvailableForLandApplicationOnDay;
         private double _entericMethaneRaminHuhtanenDairy;
         private double _entericMethaneMillsEtAlDairy;
         private double _entericMethaneEllisEtAlDairy;
@@ -1031,28 +1031,28 @@ namespace H.Core.Emissions.Results
         ///
         /// (kg TAN)
         /// </summary>
-        public double TanAvailableForLandApplication
+        public double AccumulatedTANAvailableForLandApplicationOnDay
         {
-            get => _tanAvailableForLandApplication;
-            set => SetProperty(ref _tanAvailableForLandApplication, value);
+            get => _accumulatedTanAvailableForLandApplicationOnDay;
+            set => SetProperty(ref _accumulatedTanAvailableForLandApplicationOnDay, value);
         }
 
         /// <summary>
         /// (kg N)
         /// </summary>
-        public double OrganicNitrogenAvailableForLandApplication
+        public double AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay
         {
-            get => _organicNitrogenAvailableForLandApplication;
-            set => SetProperty(ref _organicNitrogenAvailableForLandApplication, value);
+            get => _accumulatedOrganicNitrogenAvailableForLandApplicationOnDay;
+            set => SetProperty(ref _accumulatedOrganicNitrogenAvailableForLandApplicationOnDay, value);
         }
 
         /// <summary>
         /// (kg N)
         /// </summary>
-        public double NitrogenAvailableForLandApplication
+        public double AccumulatedNitrogenAvailableForLandApplicationOnDay
         {
-            get => _nitrogenAvailableForLandApplication;
-            set => SetProperty(ref _nitrogenAvailableForLandApplication, value);
+            get => _accumulatedNitrogenAvailableForLandApplicationOnDay;
+            set => SetProperty(ref _accumulatedNitrogenAvailableForLandApplicationOnDay, value);
         }
 
         /// <summary>

@@ -1534,19 +1534,18 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Livestock type,Component,Animal group,Number of days in production cycle,Number of non-production days between cycles,
-        ///,,,,,
-        ///Beef cattle,Backgrounding,Backgrounding steers,109,7,
-        ///,Backgrounding,Backgrounding heifers,109,7,
-        ///,,,,,
-        ///Swine,Grower to finish,Hogs,114,7 (1),
-        ///,Isowean,Weaners,35,7 (1),
-        ///,Farrow to wean,Sows (2),140,0,
-        ///,Farrow to wean,Piglets,21,119,
-        ///,Farrow to finish,Sows (2),140,0,
-        ///,Farrow to finish,Piglets,21,119 (3),
-        ///,Farrow to finish,Weaners,35,105 (3),
-        ///,Farrow to finish,Hogs,114,26 ( [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Livestock type,Component,Production stage,Animal group,Number of days in production cycle,Number of non-production days between cycles,
+        ///,,,,,,
+        ///Beef cattle,Backgrounding,,Backgrounding steers,109,7,
+        ///,Backgrounding,,Backgrounding heifers,109,7,
+        ///,,,,,,
+        ///Swine,Grower to finish,,Hogs,114,7 (1),
+        ///,Isowean,Weaning,Weaners,35,7 (1),
+        ///,Farrow to wean,,Sows (2),140,0,
+        ///,Farrow to wean,Weaned,Piglets,21,119,
+        ///,Farrow to finish,,Sows (2),140,0,
+        ///,Farrow to finish,Weaned,Piglets,21,119 (3),
+        ///,Farrow to finish,Weanin [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_28_Average_Number_Of_Production_Days {
             get {
@@ -1723,6 +1722,24 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference Year,Source,CO2,CH4,CH4NonFossil,N2O
+        ///1990,IPCC 1st assessment,1,21,21,290
+        ///1995,IPCC 2nd assessment,1,21,21,310
+        ///2001,IPCC 3rd assessment,1,23,23,296
+        ///2005,IPCC 4th assessment,1,25,25,298
+        ///2013,IPCC 5th assessment,1,28,28,265
+        ///2021,IPCC 6th assessment,1,27,30,273
+        ///,,,,,
+        ///These conversion factors are the Direct Global Warming Potentials (mass basis) relative to carbon dioxide (for gases for which the lifetimes have been adequately characterised). The time horizon is 100 years (IPCC 2006).,,,,,
+        ///.
+        /// </summary>
+        public static string Table_54_Global_Warming_Potential_Of_Emissions {
+            get {
+                return ResourceManager.GetString("Table_54_Global_Warming_Potential_Of_Emissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type of Cattle,Diet,Variable cost_feed,Variable cost_other ($ / day / animal),Fixed costs ($ / day / animal),Labour costs ($ / day / animal)
         ///Cow-calf,All,calculated,0.92,0.24,0.44
         ///Backgrounder,Slow growth,calculated,4.05,0.08,0.08
@@ -1781,24 +1798,6 @@ namespace H.Content.Properties {
         public static string Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost {
             get {
                 return ResourceManager.GetString("Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference Year,Source,CO2,CH4,CH4NonFossil,N2O
-        ///1990,IPCC 1st assessment,1,21,21,290
-        ///1995,IPCC 2nd assessment,1,21,21,310
-        ///2001,IPCC 3rd assessment,1,23,23,296
-        ///2005,IPCC 4th assessment,1,25,25,298
-        ///2013,IPCC 5th assessment,1,28,28,265
-        ///2021,IPCC 6th assessment,1,27,30,273
-        ///,,,,,
-        ///These conversion factors are the Direct Global Warming Potentials (mass basis) relative to carbon dioxide (for gases for which the lifetimes have been adequately characterised). The time horizon is 100 years (IPCC 2006).,,,,,
-        ///.
-        /// </summary>
-        public static string Table_62_Global_Warming_Potential_Of_Emissions {
-            get {
-                return ResourceManager.GetString("Table_62_Global_Warming_Potential_Of_Emissions", resourceCulture);
             }
         }
         

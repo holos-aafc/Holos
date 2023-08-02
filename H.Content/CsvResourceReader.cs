@@ -275,7 +275,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_63_Global_Radiative_Forcing);
 
                 case CsvResourceNames.GlobalWarmingPotential:
-                    return SplitFileIntoLines(Resource.Table_62_Global_Warming_Potential_Of_Emissions);
+                    return SplitFileIntoLines(Resource.Table_54_Global_Warming_Potential_Of_Emissions);
 
                 case CsvResourceNames.CalibratedModelParameters:
                     return SplitFileIntoLines(Resource.Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes);

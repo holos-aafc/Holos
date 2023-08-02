@@ -77,21 +77,13 @@ namespace H.Core.Services.Animals
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            dailyEmissions.AdjustedAmountOfTanInStoredManure = CalculateAdjustedAmountOfTanFlowingIntoStorage(
+            var adjustedAmountOfTanFlowingIntoStorage = CalculateAdjustedAmountOfTanFlowingIntoStorage(
                 tanEnteringStorageSystem: dailyEmissions.TanEnteringStorageSystem,
                 fractionOfTanImmoblizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
                 fractionOfTanNitrifiedDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
                 nitrogenExretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding);
-
-            dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
-                tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
-                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManure);
-
-            /*
-             * Ammonia (NH3) from storage
-             */
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure())
             {
@@ -112,7 +104,24 @@ namespace H.Core.Services.Animals
                     temperature: temperature);
             }
 
-            base.CalculateAmmoniaInStorage(dailyEmissions, managementPeriod, dailyEmissions.AmbientAirTemperatureAdjustmentForStorage);
+            dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = base.CalculateAdjustedAmmoniaEmissionFactorStoredManure(
+                ambientTemperatureAdjustmentStorage: dailyEmissions.AmbientAirTemperatureAdjustmentForStorage,
+                ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
+
+            dailyEmissions.AmmoniaLostFromStorage = base.CalculateAmmoniaLossFromStoredManure(
+                adjustedAmountOfTanFlowingIntoStorage,
+                dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
+
+            dailyEmissions.AmmoniaEmissionsFromStorageSystem = CalculateAmmoniaEmissionsFromStoredManure(
+                ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
+
+            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(adjustedAmountOfTanFlowingIntoStorage, dailyEmissions.AmmoniaLostFromStorage);
+
+            dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
+                tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
+                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManure);
 
             /*
              * Volatilization
@@ -176,7 +185,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-5
+        /// Equation 4.3.2-3
         /// </summary>
         /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
         /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</returns>
@@ -186,7 +195,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-6
+        /// Equation 4.3.2-4
         /// </summary>
         /// <param name="temperature">Average daily temperature (degrees Celsius)</param>
         /// <returns>Temperature adjustment for solid manure</returns>
@@ -196,13 +205,23 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-7
+        /// Equation 4.3.2-5
         /// </summary>
         /// <param name="temperature">Average daily temperature (degrees Celsius)</param>
         /// <returns>Temperature adjustment for liquid manure</returns>
         public double CalculateStorageTemperatureAdjustmentForLiquidManure(double temperature)
         {
             return 1 - 0.058 * (15 - temperature);
+        }
+
+        /// <summary>
+        /// Equation 4.3.2-9
+        /// </summary>
+        public double CalculateAdjustedAmountOfTANEnteringStorage(
+            double adjustedAmountOfTanFlowingIntoStorage,
+            double adjustedAmmoniaLossFromStorage)
+        {
+            return adjustedAmountOfTanFlowingIntoStorage - adjustedAmmoniaLossFromStorage;
         }
     }
 }

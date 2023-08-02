@@ -457,7 +457,7 @@ namespace H.Core.Emissions.Results
 
                 foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.MonthlyTanAvailableForLandApplication);
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalTANAvailableForLandApplicationAtEndOfMonth);
                 }
 
                 return result;
@@ -475,7 +475,7 @@ namespace H.Core.Emissions.Results
 
                 foreach (var animalGroupEmissionResult in this.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.MonthlyOrganicNitrogenAvailableForLandApplication);
+                    result += animalGroupEmissionResult.GroupEmissionsByMonths.Sum(x => x.TotalOrganicNitrogenAvailableForLandApplicationAtEndOfMonth);
                 }
 
                 return result;

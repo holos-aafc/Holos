@@ -15,7 +15,7 @@ namespace H.Core.Providers.Climate
     /// <summary>
     /// Table 62. Global warming potential of emissions.
     /// </summary>
-    public class Table_62_Global_Warming_Emissions_Potential_Provider
+    public class Table_54_Global_Warming_Emissions_Potential_Provider
     {
         #region Fields
 
@@ -28,7 +28,7 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// Sets the string converter and reads the CSV file.
         /// </summary>
-        public Table_62_Global_Warming_Emissions_Potential_Provider()
+        public Table_54_Global_Warming_Emissions_Potential_Provider()
         {
             _emissionTypeStringConverter = new EmissionTypeStringConverter();
             this.Data = this.ReadFile();
@@ -41,7 +41,7 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// A list that stores each global radiative forcing value as an instance with a corresonding year and emission type.
         /// </summary>
-        private List<Table_62_Global_Warming_Emissions_Potential_Data> Data { get; set; }
+        private List<Table_54_Global_Warming_Emissions_Potential_Data> Data { get; set; }
 
         #endregion
 
@@ -52,11 +52,11 @@ namespace H.Core.Providers.Climate
         /// </summary>
         /// <param name="year">The year for which we need the global warming emissions value</param>
         /// <param name="emissionType">The emission for which we need the global warming emissions value</param>
-        /// <returns>An instance of Table_62_Global_Warming_Emissions_Potential_Data based on the year and emission type. Returns empty instance of <see cref="Table_62_Global_Warming_Emissions_Potential_Data"/> otherwise.
+        /// <returns>An instance of Table_54_Global_Warming_Emissions_Potential_Data based on the year and emission type. Returns empty instance of <see cref="Table_54_Global_Warming_Emissions_Potential_Data"/> otherwise.
         /// Unit of measurement of instances's values = Global Warming Potential</returns>
-        public Table_62_Global_Warming_Emissions_Potential_Data GetGlobalWarmingEmissionsInstance (int year, EmissionTypes emissionType)
+        public Table_54_Global_Warming_Emissions_Potential_Data GetGlobalWarmingEmissionsInstance (int year, EmissionTypes emissionType)
         {
-            Table_62_Global_Warming_Emissions_Potential_Data data = this.Data.Find(x => (x.Year == year) && (x.EmissionType == emissionType));
+            Table_54_Global_Warming_Emissions_Potential_Data data = this.Data.Find(x => (x.Year == year) && (x.EmissionType == emissionType));
 
             if (data != null)
             {
@@ -67,16 +67,16 @@ namespace H.Core.Providers.Climate
 
             if (data != null)
             {
-                Trace.TraceError($"{nameof(Table_62_Global_Warming_Emissions_Potential_Provider)}.{nameof(Table_62_Global_Warming_Emissions_Potential_Provider.GetGlobalWarmingEmissionsInstance)}" +
+                Trace.TraceError($"{nameof(Table_54_Global_Warming_Emissions_Potential_Provider)}.{nameof(Table_54_Global_Warming_Emissions_Potential_Provider.GetGlobalWarmingEmissionsInstance)}" +
                                  $" the EmissionType: {emissionType} was not found in the available data. Returning null");
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_62_Global_Warming_Emissions_Potential_Provider)}.{nameof(Table_62_Global_Warming_Emissions_Potential_Provider.GetGlobalWarmingEmissionsInstance)} " +
+                Trace.TraceError($"{nameof(Table_54_Global_Warming_Emissions_Potential_Provider)}.{nameof(Table_54_Global_Warming_Emissions_Potential_Provider.GetGlobalWarmingEmissionsInstance)} " +
                                  $"the Year: {year} was not found in the available data. Returning null");
             }
 
-            return new Table_62_Global_Warming_Emissions_Potential_Data();
+            return new Table_54_Global_Warming_Emissions_Potential_Data();
         }
 
         #endregion
@@ -86,10 +86,10 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// Reads the data from the csv file. An instance of every cell is created and stored in the returning list.
         /// </summary>
-        /// <returns>Returns a list of Table_62_Global_Warming_Emissions_Potential_Data instances corresponding to each cell in the csv </returns>
-        private List<Table_62_Global_Warming_Emissions_Potential_Data> ReadFile()
+        /// <returns>Returns a list of Table_54_Global_Warming_Emissions_Potential_Data instances corresponding to each cell in the csv </returns>
+        private List<Table_54_Global_Warming_Emissions_Potential_Data> ReadFile()
         {
-            var results = new List<Table_62_Global_Warming_Emissions_Potential_Data>();
+            var results = new List<Table_54_Global_Warming_Emissions_Potential_Data>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             const int NumberOfHeaders = 1;
 
@@ -104,7 +104,7 @@ namespace H.Core.Providers.Climate
             {
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
-                    Trace.Write($"{nameof(Table_62_Global_Warming_Emissions_Potential_Provider)}.{nameof(ReadFile)}" +
+                    Trace.Write($"{nameof(Table_54_Global_Warming_Emissions_Potential_Provider)}.{nameof(ReadFile)}" +
                                 $" - File: {nameof(CsvResourceNames.GlobalWarmingPotential)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
@@ -116,7 +116,7 @@ namespace H.Core.Providers.Climate
                     // Gets the value from a specific column in the line. Column is based on dictionary key.
                     var globalWarmingPotential = double.Parse(line[item.Key], cultureInfo);
 
-                    results.Add(new Table_62_Global_Warming_Emissions_Potential_Data
+                    results.Add(new Table_54_Global_Warming_Emissions_Potential_Data
                     {
                         Year = year,
                         Source = source,

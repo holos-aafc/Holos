@@ -239,7 +239,6 @@ namespace H.Core.Services.Animals
 
             base.CalculateAmmoniaInStorage(dailyEmissions, managementPeriod, dailyEmissions.AmbientAirTemperatureAdjustmentForStorage);
 
-            // Equation 4.3.4-1
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
             {
                 dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
@@ -276,25 +275,25 @@ namespace H.Core.Services.Animals
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
             // Equation 4.5.2-7
-            dailyEmissions.TanAvailableForLandApplication = dailyEmissions.TanEnteringStorageSystem - dailyEmissions.AmmoniaLostFromStorage;
+            dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = dailyEmissions.TanEnteringStorageSystem - dailyEmissions.AmmoniaLostFromStorage;
 
             // Equation 4.5.2-15
-            dailyEmissions.NitrogenAvailableForLandApplication =
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay =
                 (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding)
                 - (dailyEmissions.ManureDirectN2ONEmission + dailyEmissions.AmmoniaConcentrationInHousing +
                    dailyEmissions.AmmoniaLostFromStorage + dailyEmissions.ManureN2ONLeachingEmission);
 
             // Equation 4.5.2-9
-            dailyEmissions.OrganicNitrogenAvailableForLandApplication =
-                dailyEmissions.NitrogenAvailableForLandApplication - dailyEmissions.TanAvailableForLandApplication;
+            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
+                dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay - dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay;
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
-                nitrogenFromManure: dailyEmissions.NitrogenAvailableForLandApplication);
+                nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication =
                 base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                    totalNitrogenAvailableForLandApplication: dailyEmissions.NitrogenAvailableForLandApplication,
+                    totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
                     nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
