@@ -21,8 +21,8 @@ namespace H.Core.Providers.Animals
     {
         #region Fields
 
-        private readonly Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider _dairyManureProvider = new Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
-        private readonly Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider _swineManureProvider = new Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
+        private readonly Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider _dairyManureProvider = new Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
+        private readonly Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider _swineManureProvider = new Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
         private readonly Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider _mcfByClimateZoneLivestockManureSystemProvider = new Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider();
 
         #endregion

@@ -344,8 +344,8 @@
     <Compile Include="Providers\Animals\Table 28\Table_28_Production_Days_Provider.cs" />
     <Compile Include="Providers\Animals\Table 69\IVolatilizationFractionsFromLandAppliedManureProvider.cs" />
     <Compile Include="Providers\Animals\Table 69\VolatilizationFractionsFromLandAppliedManureData.cs" />
-    <Compile Include="Providers\Animals\Table 69\Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider.cs" />
-    <Compile Include="Providers\Animals\Table 70\Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider.cs" />
+    <Compile Include="Providers\Animals\Table 69\Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider.cs" />
+    <Compile Include="Providers\Animals\Table 70\Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider.cs" />
     <Compile Include="Providers\Climate\IClimateProvider.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Data.cs" />
