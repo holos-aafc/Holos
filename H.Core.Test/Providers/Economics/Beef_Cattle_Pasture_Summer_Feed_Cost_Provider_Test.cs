@@ -10,11 +10,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Economics
 {
     [TestClass]
-    public class Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test
+    public class Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test
     {
         #region Fields
 
-        private static Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider _provider;
+        private static Beef_Cattle_Pasture_Summer_Feed_Cost_Provider _provider;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace H.Core.Test.Providers.Economics
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _provider = new Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider();
+            _provider = new Beef_Cattle_Pasture_Summer_Feed_Cost_Provider();
 
         }
 

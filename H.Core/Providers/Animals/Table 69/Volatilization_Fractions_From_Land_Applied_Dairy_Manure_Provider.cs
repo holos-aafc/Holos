@@ -9,7 +9,7 @@ using H.Infrastructure;
 
 namespace H.Core.Providers.Animals.Table_69
 {
-    public class Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider : IVolatilizationFractionsFromLandAppliedManureProvider
+    public class Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider : IVolatilizationFractionsFromLandAppliedManureProvider
     {
         #region Fields
 
@@ -20,7 +20,7 @@ namespace H.Core.Providers.Animals.Table_69
 
         #region Constructors
 
-        public Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider()
+        public Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider()
         {
             _data = new MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData>();
 
@@ -51,7 +51,7 @@ namespace H.Core.Providers.Animals.Table_69
 
             if (animalType.IsDairyCattleType() == false)
             {
-                Trace.TraceError($"{nameof(Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
+                Trace.TraceError($"{nameof(Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
                                  $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
 
                 return notFound;
@@ -59,7 +59,7 @@ namespace H.Core.Providers.Animals.Table_69
 
             if (_validProvinces.Contains(province) == false)
             {
-                Trace.TraceError($"{nameof(Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
+                Trace.TraceError($"{nameof(Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
                                  $" unable to find province {province} in the available data.");
 
                 return notFound;

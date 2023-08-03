@@ -15,7 +15,7 @@ namespace H.Core.Providers.Economics
     /// <summary>
     /// Table 60: Beef cattle – Pasture/Summer feed costs
     /// </summary>
-    public class Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider
+    public class Beef_Cattle_Pasture_Summer_Feed_Cost_Provider
     {
         #region Fields
 
@@ -31,14 +31,14 @@ namespace H.Core.Providers.Economics
         /// <summary>
         /// A list of all data values from the .csv file. Each entry in the list corresponds to a row in the .csv file.
         /// </summary>
-        public List<Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data> BeefCattlePastureSummerFeedCostData { get; private set; }
+        public List<Beef_Cattle_Pasture_Summer_Feed_Cost_Data> BeefCattlePastureSummerFeedCostData { get; private set; }
 
         #endregion
 
 
         #region Constructors
 
-        public Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider()
+        public Beef_Cattle_Pasture_Summer_Feed_Cost_Provider()
         {
             _animalTypeStringConverter = new AnimalTypeStringConverter();
             _dietTypeStringConverter = new DietTypeStringConverter();
@@ -52,13 +52,13 @@ namespace H.Core.Providers.Economics
         #region Public Methods
 
         /// <summary>
-        /// Finds an instance of <see cref="Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data"/> based on the AnimalType and DietType. Each instance
+        /// Finds an instance of <see cref="Beef_Cattle_Pasture_Summer_Feed_Cost_Data"/> based on the AnimalType and DietType. Each instance
         /// represents a row in the .csv file.
         /// </summary>
         /// <param name="animalType">The animal type for which the cost information is needed</param>
         /// <param name="dietType">The diet type of the animal for which cost information is needed.</param>
-        /// <returns>Returns an instance of <see cref="Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data"/>. If nothing is found, returns null.</returns>
-        public Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data GetBeefCattlePastureSummerFeedCostData(AnimalType animalType, DietType dietType)
+        /// <returns>Returns an instance of <see cref="Beef_Cattle_Pasture_Summer_Feed_Cost_Data"/>. If nothing is found, returns null.</returns>
+        public Beef_Cattle_Pasture_Summer_Feed_Cost_Data GetBeefCattlePastureSummerFeedCostData(AnimalType animalType, DietType dietType)
         {
             var costData = BeefCattlePastureSummerFeedCostData.Find(x =>
                                                                         x.AnimalType == animalType &&
@@ -73,12 +73,12 @@ namespace H.Core.Providers.Economics
 
             if (costData != null)
             {
-                Trace.TraceError($"{nameof(Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data)}.{nameof(BeefCattlePastureSummerFeedCostData)} " +
+                Trace.TraceError($"{nameof(Beef_Cattle_Pasture_Summer_Feed_Cost_Data)}.{nameof(BeefCattlePastureSummerFeedCostData)} " +
                                  $": could not find DietType: {dietType} in the .csv file for the AnimalType:{animalType}, returning null.");
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data)}.{nameof(BeefCattlePastureSummerFeedCostData)} " +
+                Trace.TraceError($"{nameof(Beef_Cattle_Pasture_Summer_Feed_Cost_Data)}.{nameof(BeefCattlePastureSummerFeedCostData)} " +
                                  $": could not find AnimalType: {animalType} in the .csv file, returning null.");
             }
 
@@ -90,9 +90,9 @@ namespace H.Core.Providers.Economics
 
         #region Private Methods
 
-        private List<Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data> ReadFile()
+        private List<Beef_Cattle_Pasture_Summer_Feed_Cost_Data> ReadFile()
         {
-            var fileData = new List<Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data>();
+            var fileData = new List<Beef_Cattle_Pasture_Summer_Feed_Cost_Data>();
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.BeefCattlePastureSummerFeedCost);
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
 
@@ -108,7 +108,7 @@ namespace H.Core.Providers.Economics
                 var labourCosts = double.Parse(line[6], cultureInfo);
 
 
-                fileData.Add(new Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Data
+                fileData.Add(new Beef_Cattle_Pasture_Summer_Feed_Cost_Data
                 {
                     AnimalType = animalType,
                     DietType = dietType,

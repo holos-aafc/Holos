@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Economics
 {
-    public class Table_59_Feed_Costs_For_Beef_Data
+    public class Beef_Cattle_Pasture_Summer_Feed_Cost_Data : BeefCattleFeedCostData
     {
         /// <summary>
-        /// Hay Quality for beef
+        /// The quality of the pasture grass
         /// </summary>
-        public DietType DietType { get; set; }
+        public PastureType PastureType { get; set; }
 
         /// <summary>
-        /// $ / Kg
+        /// Feed related variable cost
         /// </summary>
-        [Units(MetricUnitsOfMeasurement.DollarsPerKilogram)]
-        public double Cost { get; set; }
+        public double VariableCostFeed { get; set; }
     }
 }

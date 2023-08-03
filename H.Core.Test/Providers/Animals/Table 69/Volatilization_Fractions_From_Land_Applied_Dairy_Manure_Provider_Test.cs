@@ -1,17 +1,15 @@
-﻿using H.Core.Providers.Animals.Table_69;
+﻿using H.Core.Enumerations;
+using H.Core.Providers.Animals.Table_69;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Providers.Animals.Table_70;
-using H.Core.Enumerations;
 
-namespace H.Core.Test.Providers.Animals
+namespace H.Core.Test.Providers.Animals.Table_69
 {
     [TestClass]
-    public class Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider_Test
+    public class Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test
     {
         #region Fields
-
-        private IVolatilizationFractionsFromLandAppliedManureProvider _sut;
+        
+        private IVolatilizationFractionsFromLandAppliedManureProvider _sut; 
 
         #endregion
 
@@ -30,7 +28,7 @@ namespace H.Core.Test.Providers.Animals
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
+            _sut = new Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
         }
 
         [TestCleanup]
@@ -41,11 +39,11 @@ namespace H.Core.Test.Providers.Animals
         #endregion
 
         #region Tests
-
+        
         [TestMethod]
         public void GetDataReturnsZeroWhenIncorrectAnimalTypeIsUsed()
         {
-            var result = _sut.GetData(AnimalType.Dairy, Province.Alberta, 2000);
+            var result = _sut.GetData(AnimalType.Swine, Province.Alberta, 2000);
 
             Assert.AreEqual(0, result.ImpliedEmissionFactor);
         }
@@ -53,10 +51,10 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void GetDataReturnsNonZeroWhenForProvinceAndYear()
         {
-            var result = _sut.GetData(AnimalType.Swine, Province.Quebec, 2017);
+            var result = _sut.GetData(AnimalType.Dairy, Province.Quebec, 2017);
 
-            Assert.AreEqual(0.24, result.ImpliedEmissionFactor);
-        }
+            Assert.AreEqual(0.15, result.ImpliedEmissionFactor);
+        } 
 
         #endregion
     }

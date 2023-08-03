@@ -142,7 +142,7 @@
     <Compile Include="Providers\AnaerobicDigestion\EmissionFactorsForDigestateStorageProviderTest.cs" />
     <Compile Include="Providers\Animals\ActivityCoefficientsForDairyBeefSheepProviderTest.cs" />
     <Compile Include="Providers\Animals\Table 28\Table_28_Production_Days_Provider_Test.cs" />
-    <Compile Include="Providers\Animals\Table 69\Table_69_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test.cs" />
+    <Compile Include="Providers\Animals\Table 69\Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_21_Average_Milk_Production_Dairy_Cows_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider_Test.cs" />
@@ -162,11 +162,11 @@
     <Compile Include="Providers\Animals\Table_31_Swine_VS_Excretion_For_Diets_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_22_Livestock_Coefficients_Sheep_Provider_Test.cs" />
     <Compile Include="Providers\Animals\Table_29_Default_Manure_Excreted_Provider_Test.cs" />
-    <Compile Include="Providers\Animals\Table_70_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider_Test.cs" />
+    <Compile Include="Providers\Animals\Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider_Test.cs" />
     <Compile Include="Providers\Carbon\Table_7_Relative_Biomass_Information_Provider_Test.cs" />
     <Compile Include="Providers\Climate\ClimateDataTest.cs" />
     <Compile Include="Providers\Climate\CustomClimateDataProviderTest.cs" />
-    <Compile Include="Providers\Climate\Table_63_Global_Radiative_Forcing_Provider_Test.cs" />
+    <Compile Include="Providers\Climate\Table_55_Global_Radiative_Forcing_Provider_Test.cs" />
     <Compile Include="Providers\Climate\Table_1_Growing_Degree_Crop_Coefficients_Provider_Test.cs" />
     <Compile Include="Providers\Climate\NasaClimateProviderTest.cs" />
     <Compile Include="Providers\Climate\ClimateProviderTest.cs" />
@@ -174,8 +174,8 @@
     <Compile Include="Providers\Climate\Table_46_Biogas_Methane_Production_Parameters_Provider_Test.cs" />
     <Compile Include="Providers\Economics\CropEconomicProviderTest.cs" />
     <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider_Test.cs" />
-    <Compile Include="Providers\Economics\Table_59_Feed_Costs_For_Beef_Provider_Test.cs" />
-    <Compile Include="Providers\Economics\Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test.cs" />
+    <Compile Include="Providers\Economics\Feed_Costs_For_Beef_Provider_Test.cs" />
+    <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_49_Electricity_Conversion_Defaults_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_50_Fuel_Energy_Estimates_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_51_Herbicide_Energy_Estimates_Provider_Test.cs" />

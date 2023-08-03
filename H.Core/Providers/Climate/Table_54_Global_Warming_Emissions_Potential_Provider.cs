@@ -13,7 +13,7 @@ using H.Core.Providers.Energy;
 namespace H.Core.Providers.Climate
 {
     /// <summary>
-    /// Table 62. Global warming potential of emissions.
+    /// Table 54. Global warming potential of emissions.
     /// </summary>
     public class Table_54_Global_Warming_Emissions_Potential_Provider
     {

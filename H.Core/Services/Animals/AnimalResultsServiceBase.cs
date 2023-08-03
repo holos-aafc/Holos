@@ -103,10 +103,7 @@ namespace H.Core.Services.Animals
                      currentDate <= endDate;
                      currentDate = currentDate.AddDays(1))
                 {
-                    var previousDate = currentDate.AddDays(-1);
-                    var groupEmissionsForPreviousDay =
-                        allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
-
+                    var groupEmissionsForPreviousDay = this.GetPreviousDayEmissions(currentDate, allDailyEmissions);
                     var groupEmissionsForDay = CalculateDailyEmissions(
                         animalComponentBase: animalComponent,
                         managementPeriod: managementPeriod,
@@ -129,6 +126,21 @@ namespace H.Core.Services.Animals
             }
 
             return animalGroupEmissionResult;
+        }
+
+        private GroupEmissionsByDay GetPreviousDayEmissions(DateTime currentDate, List<GroupEmissionsByDay> allDailyEmissions)
+        {
+            for (int i = 1; i < allDailyEmissions.Count; i++)
+            {
+                var previousDate = currentDate.AddDays(-i);
+                var previousDayEmissions = allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate));
+                if (previousDayEmissions != null)
+                {
+                    return previousDayEmissions;
+                }
+            }
+
+            return null;
         }
 
         public virtual AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
@@ -159,10 +171,8 @@ namespace H.Core.Services.Animals
                          currentDate <= endDate;
                          currentDate = currentDate.AddDays(1))
                     {
-                        var previousDate = currentDate.AddDays(-1);
-                        var groupEmissionsForPreviousDay =
-                            allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
-
+                        var groupEmissionsForPreviousDay = this.GetPreviousDayEmissions(currentDate, allDailyEmissions);
+                        
                         var groupEmissionsForDay = CalculateDailyEmissions(
                             animalComponentBase: animalComponent,
                             managementPeriod: managementPeriod,
@@ -1745,6 +1755,20 @@ namespace H.Core.Services.Animals
             double organicNitrogenAvailableFromPreviousDay)
         {
             return organicNitrogenAvailableFromPreviousDay + organicNitrogenAvailableOnCurrentDay;
+        }
+
+        public void CalculateOrganicNitrogen(GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod, GroupEmissionsByDay previousDaysEmissions)
+        {
+            var organicNitrogenCreatedToday = this.CalculateOrganicNitrogenCreatedOnDay(
+                fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
+                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
+                directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
+                leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
+
+            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = this.CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
+                organicNitrogenAvailableOnCurrentDay: organicNitrogenCreatedToday,
+                organicNitrogenAvailableFromPreviousDay: (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay));
         }
 
         /// <summary>

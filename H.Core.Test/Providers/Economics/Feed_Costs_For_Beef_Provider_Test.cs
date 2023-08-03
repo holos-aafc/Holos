@@ -5,11 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Economics
 {
     [TestClass]
-    public class Table_59_Feed_Costs_For_Beef_Provider_Test
+    public class Feed_Costs_For_Beef_Provider_Test
     {
         #region Fields
 
-        private Table_59_Feed_Costs_For_Beef_Provider _provider;
+        private Feed_Costs_For_Beef_Provider _provider;
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace H.Core.Test.Providers.Economics
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new Table_59_Feed_Costs_For_Beef_Provider();
+            _provider = new Feed_Costs_For_Beef_Provider();
         }
 
         [TestCleanup]

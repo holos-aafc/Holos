@@ -12,9 +12,9 @@ using H.Content;
 namespace H.Core.Providers.Climate
 {
     /// <summary>
-    /// Table 63. Global radiative forcing (relative to 1750, in W m-2) (https://www.esrl.noaa.gov/gmd/aggi/aggi.html)
+    /// Table 55. Global radiative forcing (relative to 1750, in W m-2) (https://www.esrl.noaa.gov/gmd/aggi/aggi.html)
     /// </summary>
-    public class Table_63_Global_Radiative_Forcing_Provider
+    public class Table_55_Global_Radiative_Forcing_Provider
     {
         #region Fields
         private readonly EmissionTypeStringConverter _emissionTypeStringConverter;
@@ -26,7 +26,7 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// Sets the string converter and reads the CSV file.
         /// </summary>
-        public Table_63_Global_Radiative_Forcing_Provider()
+        public Table_55_Global_Radiative_Forcing_Provider()
         {
             _emissionTypeStringConverter = new EmissionTypeStringConverter();
             this.Data = this.ReadFile();
@@ -39,7 +39,7 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// A list that stores each global radiative forcing value as an instance with a corresonding year and emission type.
         /// </summary>
-        List<Table_63_Global_Radiative_Forcing_Data> Data { get; set; }
+        List<Table_55_Global_Radiative_Forcing_Data> Data { get; set; }
 
         #endregion
 
@@ -50,11 +50,11 @@ namespace H.Core.Providers.Climate
         /// </summary>
         /// <param name="year">The year for which we need the global radiative forcing value</param>
         /// <param name="emissionType">The emission for which we need the global radiative forcing value</param>
-        /// <returns>An instance of Table_63_Global_Radiative_Forcing_Data based on the year and emission type. Returns null if nothing found.
+        /// <returns>An instance of Table_55_Global_Radiative_Forcing_Data based on the year and emission type. Returns null if nothing found.
         ///  Unit of measurement for the global radiative forcing value = W m-2</returns>
-        public Table_63_Global_Radiative_Forcing_Data GetGlobalRadiativeForcingInstance(int year, EmissionTypes emissionType)
+        public Table_55_Global_Radiative_Forcing_Data GetGlobalRadiativeForcingInstance(int year, EmissionTypes emissionType)
         {
-            Table_63_Global_Radiative_Forcing_Data data = this.Data.Find(x => (x.Year == year) && (x.EmissionType == emissionType));
+            Table_55_Global_Radiative_Forcing_Data data = this.Data.Find(x => (x.Year == year) && (x.EmissionType == emissionType));
 
             if (data != null)
             {
@@ -64,12 +64,12 @@ namespace H.Core.Providers.Climate
             data = this.Data.Find(x => (x.Year == year));
             if (data != null)
             {
-                Trace.TraceError($"{nameof(Table_63_Global_Radiative_Forcing_Provider)}.{nameof(Table_63_Global_Radiative_Forcing_Provider.GetGlobalRadiativeForcingInstance)}" +
+                Trace.TraceError($"{nameof(Table_55_Global_Radiative_Forcing_Provider)}.{nameof(Table_55_Global_Radiative_Forcing_Provider.GetGlobalRadiativeForcingInstance)}" +
                                  $" the EmissionType: {emissionType} was not found in the available data. Returning null");
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_63_Global_Radiative_Forcing_Provider)}.{nameof(Table_63_Global_Radiative_Forcing_Provider.GetGlobalRadiativeForcingInstance)} " +
+                Trace.TraceError($"{nameof(Table_55_Global_Radiative_Forcing_Provider)}.{nameof(Table_55_Global_Radiative_Forcing_Provider.GetGlobalRadiativeForcingInstance)} " +
                                  $"the Year: {year} was not found in the available data. Returning null");
             }
 
@@ -83,10 +83,10 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// Reads the data from the csv file. An instance of every cell is created and stored in the returning list.
         /// </summary>
-        /// <returns>Returns a list of Table_63_Global_Radiative_Forcing_Data instances corresponding to each cell in the csv </returns>
-        private List<Table_63_Global_Radiative_Forcing_Data> ReadFile()
+        /// <returns>Returns a list of Table_55_Global_Radiative_Forcing_Data instances corresponding to each cell in the csv </returns>
+        private List<Table_55_Global_Radiative_Forcing_Data> ReadFile()
         {
-            var results = new List<Table_63_Global_Radiative_Forcing_Data>();
+            var results = new List<Table_55_Global_Radiative_Forcing_Data>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             const int NumberOfHeaders = 1;
 
@@ -104,7 +104,7 @@ namespace H.Core.Providers.Climate
                     // Gets the value from a specific column in the line. Column is based on dictionary key.
                     var radiativeForcingValue = double.Parse(line[item.Key], cultureInfo);
 
-                    results.Add(new Table_63_Global_Radiative_Forcing_Data 
+                    results.Add(new Table_55_Global_Radiative_Forcing_Data 
                     {
                         Year = year,
                         EmissionType = item.Value,

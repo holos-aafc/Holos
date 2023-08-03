@@ -7,7 +7,7 @@ using H.Core.Enumerations;
 
 namespace H.Core.Providers.Climate
 {
-    public class Table_63_Global_Radiative_Forcing_Data
+    public class Table_55_Global_Radiative_Forcing_Data
     {
         /// <summary>
         /// The year for the global radiative forcing value

@@ -8,10 +8,10 @@ using H.Core.Enumerations;
 namespace H.Core.Test.Providers.Climate
 {
     [TestClass]
-    public class Table_63_Global_Radiative_Forcing_Provider_Test
+    public class Table_55_Global_Radiative_Forcing_Provider_Test
     {
         #region Fields
-        private static Table_63_Global_Radiative_Forcing_Provider _provider;
+        private static Table_55_Global_Radiative_Forcing_Provider _provider;
         #endregion
 
         #region Initialization
@@ -19,7 +19,7 @@ namespace H.Core.Test.Providers.Climate
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _provider = new Table_63_Global_Radiative_Forcing_Provider();
+            _provider = new Table_55_Global_Radiative_Forcing_Provider();
         }
 
         [ClassCleanup]
@@ -44,28 +44,28 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void GetGlobalRadiativeForcingValue()
         {
-            Table_63_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1983, EmissionTypes.CH4);
+            Table_55_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1983, EmissionTypes.CH4);
             Assert.AreEqual(0.429, data.RadiativeForcingValue);
         }
 
         [TestMethod]
         public void InstanceNotFoundWrongEmission()
         {
-            Table_63_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1995, EmissionTypes.CO2e);
+            Table_55_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1995, EmissionTypes.CO2e);
             Assert.AreEqual(null, data);
         }
 
         [TestMethod]
         public void InstanceNotFoundWrongYear()
         {
-            Table_63_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1950, EmissionTypes.N2O);
+            Table_55_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(1950, EmissionTypes.N2O);
             Assert.AreEqual(null, data);
         }
 
         [TestMethod]
         public void DataInstanceNotFoundAllInputsWrong()
         {
-            Table_63_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(3000, EmissionTypes.CropsDirectN20);
+            Table_55_Global_Radiative_Forcing_Data data = _provider.GetGlobalRadiativeForcingInstance(3000, EmissionTypes.CropsDirectN20);
             Assert.AreEqual(null, data);
         }
 

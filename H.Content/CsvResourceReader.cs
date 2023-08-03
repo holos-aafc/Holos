@@ -272,7 +272,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_51_Herbicide_Energy_Requirement_Estimates_By_Region);
 
                 case CsvResourceNames.GlobalRadiativeForcing:
-                    return SplitFileIntoLines(Resource.Table_63_Global_Radiative_Forcing);
+                    return SplitFileIntoLines(Resource.Table_55_Global_Radiative_Forcing);
 
                 case CsvResourceNames.GlobalWarmingPotential:
                     return SplitFileIntoLines(Resource.Table_54_Global_Warming_Potential_Of_Emissions);
@@ -338,10 +338,10 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_58_Beef_Cattle_Fed_Winter_Feed_Cost);
 
                 case CsvResourceNames.BeefFeedCost:
-                    return SplitFileIntoLines(Resource.Table_59_Feed_Costs_For_Beef);
+                    return SplitFileIntoLines(Resource.Feed_Costs_For_Beef);
 
                 case CsvResourceNames.BeefCattlePastureSummerFeedCost:
-                    return SplitFileIntoLines(Resource.Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost);
+                    return SplitFileIntoLines(Resource.Beef_Cattle_Pasture_Summer_Feed_Cost);
 
                 case CsvResourceNames.ManureTypesDefaultComposition:
                     return SplitFileIntoLines(Resource.Table_6_Manure_Types_And_Default_Composition);
@@ -350,10 +350,10 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_41_Poultry_N_Excretion_Rate_Parameter_Values);
 
                 case CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure:
-                    return SplitFileIntoLines(Resource.Table_69_Fractions_of_dairy_cattle_N_volatilized);
+                    return SplitFileIntoLines(Resource.Table_61_Fractions_of_dairy_cattle_N_volatilized);
 
                 case CsvResourceNames.SwineFractionOfNAmmoniaLandAppliedManure:
-                    return SplitFileIntoLines(Resource.Table_70_Fractions_of_swine_N_volatilized);
+                    return SplitFileIntoLines(Resource.Table_62_Fractions_of_swine_N_volatilized);
 
                 case CsvResourceNames.PercentageTotalManureProduced:
                     return SplitFileIntoLines(Resource.Table_29_Percentage_Total_Manure_Produced_In_Systems);

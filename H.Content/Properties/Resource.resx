@@ -385,8 +385,8 @@
   <data name="Table_51_Herbicide_Energy_Requirement_Estimates_By_Region" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Table_63_Global_Radiative_Forcing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_63_Global_Radiative_Forcing.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Table_55_Global_Radiative_Forcing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_55_Global_Radiative_Forcing.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Table_54_Global_Warming_Potential_Of_Emissions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_54_Global_Warming_Potential_Of_Emissions.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -451,11 +451,11 @@
   <data name="Table_58_Beef_Cattle_Fed_Winter_Feed_Cost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_58_Beef_Cattle_Fed_Winter_Feed_Cost.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Table_59_Feed_Costs_For_Beef" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_59_Feed_Costs_For_Beef.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="Feed_Costs_For_Beef" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Feed_Costs_For_Beef.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_60_Beef_Cattle_Pasture_Summer_Feed_Cost.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="Beef_Cattle_Pasture_Summer_Feed_Cost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beef_Cattle_Pasture_Summer_Feed_Cost.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Table_6_Manure_Types_And_Default_Composition" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_6_Manure_Types_And_Default_Composition.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -469,20 +469,20 @@
   <data name="Table_29_Percentage_Total_Manure_Produced_In_Systems" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_29_Percentage_Total_Manure_Produced_In_Systems.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Table_67_Output_For_Report" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_67_Output_For_Report.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="Table_59_Output_For_Report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_59_Output_For_Report.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Table_5_Carbon_Input_Residue_Allocation_By_Crop_Type" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_5_Carbon_Input_Residue_Allocation_By_Crop_Type.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Table_64_Conversion_Factors_Atomic_To_Molecular_Weight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_64_Conversion_Factors_Atomic_To_Molecular_Weight.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Table_56_Conversion_Factors_Atomic_To_Molecular_Weight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_56_Conversion_Factors_Atomic_To_Molecular_Weight.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Table_69_Fractions_of_dairy_cattle_N_volatilized" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_69_Fractions_of_dairy_cattle_N_volatilized.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Table_61_Fractions_of_dairy_cattle_N_volatilized" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_61_Fractions_of_dairy_cattle_N_volatilized.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Table_70_Fractions_of_swine_N_volatilized" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_70_Fractions_of_swine_N_volatilized.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Table_62_Fractions_of_swine_N_volatilized" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Table_62_Fractions_of_swine_N_volatilized.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Table_28_Average_Number_Of_Production_Days" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_28_Average_Number_Of_Production_Days.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

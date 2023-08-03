@@ -248,14 +248,9 @@ namespace H.Core.Services.Animals
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
-                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AdjustedAmountOfTanInStoredManure);
+                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.TanInStorageOnDay);
 
-            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = base.CalculateOrganicNitrogenCreatedOnDay(
-                fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
-                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
-                directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
-                leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
+            base.CalculateOrganicNitrogen(dailyEmissions, managementPeriod, previousDaysEmissions);
 
             dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateTotalAvailableManureNitrogenInStoredManure(
                 tanAvailableForLandApplication: dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay,
@@ -552,7 +547,6 @@ namespace H.Core.Services.Animals
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
                 manureLeachingNitrogenEmission: dailyEmissions.ManureN2ONLeachingEmission);
 
-            // Equation 4.3.7-1
             dailyEmissions.ManureN2ONEmission = base.CalculateManureNitrogenEmission(
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
@@ -560,16 +554,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
                 accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.TanInStorageOnDay);
 
-            var organicNitrogenCreatedToday = base.CalculateOrganicNitrogenCreatedOnDay(
-                fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
-                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
-                directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
-                leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
-
-            dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = base.CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
-                organicNitrogenAvailableOnCurrentDay: organicNitrogenCreatedToday ,
-                organicNitrogenAvailableFromPreviousDay: (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay));
+            base.CalculateOrganicNitrogen(dailyEmissions, managementPeriod, previousDaysEmissions);
 
             dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateTotalAvailableManureNitrogenInStoredManure(
                 tanAvailableForLandApplication: dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay,
