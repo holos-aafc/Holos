@@ -191,7 +191,7 @@
     <None Include="Resources\Table_61_Fractions_of_dairy_cattle_N_volatilized.csv" />
     <None Include="Resources\Table_62_Fractions_of_swine_N_volatilized.csv" />
     <None Include="Resources\Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes.csv" />
-    <None Include="Resources\Table_58_Beef_Cattle_Fed_Winter_Feed_Cost.csv" />
+    <None Include="Resources\Beef_Cattle_Fed_Winter_Feed_Cost.csv" />
     <None Include="Resources\Feed_Costs_For_Beef.csv" />
     <None Include="Resources\Beef_Cattle_Pasture_Summer_Feed_Cost.csv" />
     <None Include="Resources\Table_55_Global_Radiative_Forcing.csv" />

@@ -121,6 +121,22 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type of Cattle,Diet,Variable cost_feed,Variable cost_other ($ / day / animal),Fixed costs ($ / day / animal),Labour costs ($ / day / animal)
+        ///Cow-calf,All,calculated,0.92,0.24,0.44
+        ///Backgrounder,Slow growth,calculated,4.05,0.08,0.08
+        ///Backgrounder,Medium growth,calculated,5.86,0.11,0.12
+        ///Finisher,Barley based,calculated,5.66,0.1,0.16
+        ///Finisher,Corn based,calculated,5.66,0.1,0.16
+        ///Bull,All,calculated,1.19,0.31,0.57
+        ///.
+        /// </summary>
+        public static string Beef_Cattle_Fed_Winter_Feed_Cost {
+            get {
+                return ResourceManager.GetString("Beef_Cattle_Fed_Winter_Feed_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type of Cattle,Diet,Pasture type,Variable cost - feed ($ / day / animal),Variable cost - other  ($ / day / animal),Fixed costs  ($ / day / animal),Labour costs  ($ / day / animal)
         ///Cow-calf,High energy/protein ,Pasture Grass/High quality,1.09,0.92,0.24,0.44
         ///Cow-calf,Medium energy/protein ,Pasture Grass/Medium quality ,0.92,0.92,0.24,0.44
@@ -1811,22 +1827,6 @@ namespace H.Content.Properties {
         public static string Table_56_Conversion_Factors_Atomic_To_Molecular_Weight {
             get {
                 return ResourceManager.GetString("Table_56_Conversion_Factors_Atomic_To_Molecular_Weight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type of Cattle,Diet,Variable cost_feed,Variable cost_other ($ / day / animal),Fixed costs ($ / day / animal),Labour costs ($ / day / animal)
-        ///Cow-calf,All,calculated,0.92,0.24,0.44
-        ///Backgrounder,Slow growth,calculated,4.05,0.08,0.08
-        ///Backgrounder,Medium growth,calculated,5.86,0.11,0.12
-        ///Finisher,Barley based,calculated,5.66,0.1,0.16
-        ///Finisher,Corn based,calculated,5.66,0.1,0.16
-        ///Bull,All,calculated,1.19,0.31,0.57
-        ///.
-        /// </summary>
-        public static string Table_58_Beef_Cattle_Fed_Winter_Feed_Cost {
-            get {
-                return ResourceManager.GetString("Table_58_Beef_Cattle_Fed_Winter_Feed_Cost", resourceCulture);
             }
         }
         

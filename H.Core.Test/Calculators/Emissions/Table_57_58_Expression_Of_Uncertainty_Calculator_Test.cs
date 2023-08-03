@@ -6,12 +6,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Calculators.Emissions
 {
     /// <summary>
-    /// Summary description for Table_65_66_Expression_Of_Uncertainty_Calculator_Test
+    /// Summary description for Table_57_58_Expression_Of_Uncertainty_Calculator_Test
     /// </summary>
     [TestClass]
-    public class Table_65_66_Expression_Of_Uncertainty_Calculator_Test
+    public class Table_57_58_Expression_Of_Uncertainty_Calculator_Test
     {
-        private Table_65_66_Expression_Of_Uncertainty_Calculator calc;
+        private Table_57_58_Expression_Of_Uncertainty_Calculator calc;
 
         /// <summary>
         /// Gets or sets the test context which provides
@@ -22,7 +22,7 @@ namespace H.Core.Test.Calculators.Emissions
         [TestInitialize]
         public void initializeTests()
         {
-            calc = new Table_65_66_Expression_Of_Uncertainty_Calculator();
+            calc = new Table_57_58_Expression_Of_Uncertainty_Calculator();
         }
 
         /// <summary>

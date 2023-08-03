@@ -92,7 +92,7 @@
     <Compile Include="Calculators\Economics\EconomicsCalculatorTest.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelperTests.cs" />
     <Compile Include="Calculators\Emissions\EnergyCarbonDioxideEmissionsCalculatorTest.cs" />
-    <Compile Include="Calculators\Emissions\Table_65_66_Expression_Of_Uncertainty_Calculator_Test.cs" />
+    <Compile Include="Calculators\Emissions\Table_57_58_Expression_Of_Uncertainty_Calculator_Test.cs" />
     <Compile Include="Calculators\Emissions\SummationsCalculatorTest.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrousOxideCalculatorTest.cs" />
@@ -173,7 +173,7 @@
     <Compile Include="Providers\Climate\Table_54_Global_Warming_Emissions_Potential_Provider_Test.cs" />
     <Compile Include="Providers\Climate\Table_46_Biogas_Methane_Production_Parameters_Provider_Test.cs" />
     <Compile Include="Providers\Economics\CropEconomicProviderTest.cs" />
-    <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider_Test.cs" />
+    <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Provider_Test.cs" />
     <Compile Include="Providers\Economics\Feed_Costs_For_Beef_Provider_Test.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_49_Electricity_Conversion_Defaults_Provider_Test.cs" />

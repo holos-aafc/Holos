@@ -335,7 +335,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_10_Default_Values_For_Steady_State_Method);
 
                 case CsvResourceNames.BeefCattleFedWinterFeedCost:
-                    return SplitFileIntoLines(Resource.Table_58_Beef_Cattle_Fed_Winter_Feed_Cost);
+                    return SplitFileIntoLines(Resource.Beef_Cattle_Fed_Winter_Feed_Cost);
 
                 case CsvResourceNames.BeefFeedCost:
                     return SplitFileIntoLines(Resource.Feed_Costs_For_Beef);

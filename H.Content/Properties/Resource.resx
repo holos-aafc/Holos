@@ -448,8 +448,8 @@
   <data name="Table_10_Default_Values_For_Steady_State_Method" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Table_10_Default_Values_For_Steady_State_Method.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Table_58_Beef_Cattle_Fed_Winter_Feed_Cost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Table_58_Beef_Cattle_Fed_Winter_Feed_Cost.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="Beef_Cattle_Fed_Winter_Feed_Cost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beef_Cattle_Fed_Winter_Feed_Cost.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Feed_Costs_For_Beef" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Feed_Costs_For_Beef.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

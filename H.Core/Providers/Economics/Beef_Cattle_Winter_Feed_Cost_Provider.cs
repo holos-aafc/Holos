@@ -15,7 +15,7 @@ namespace H.Core.Providers.Economics
     /// <summary>
     /// Table 58. Beef cattle – Fed/Winter feed
     /// </summary>
-    public class Table_58_Beef_Cattle_Winter_Feed_Cost_Provider
+    public class Beef_Cattle_Winter_Feed_Cost_Provider
     {
         #region Fields
 
@@ -29,13 +29,13 @@ namespace H.Core.Providers.Economics
         /// <summary>
         /// A list of all data values from the .csv file. Each entry in the list corresponds to a row in the .csv file.
         /// </summary>
-        public List<Table_58_Beef_Cattle_Winter_Feed_Cost_Data> BeefCattleWinterFeedData { get; private set; }
+        public List<Beef_Cattle_Winter_Feed_Cost_Data> BeefCattleWinterFeedData { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public Table_58_Beef_Cattle_Winter_Feed_Cost_Provider()
+        public Beef_Cattle_Winter_Feed_Cost_Provider()
         {
             _dietTypeStringConverter = new DietTypeStringConverter();
             _animalTypeStringConverter = new AnimalTypeStringConverter();
@@ -47,13 +47,13 @@ namespace H.Core.Providers.Economics
         #region Public Methods
 
         /// <summary>
-        /// Finds an instance of <see cref="Table_58_Beef_Cattle_Winter_Feed_Cost_Data"/> based on the AnimalType and DietType. Each instance
+        /// Finds an instance of <see cref="Beef_Cattle_Winter_Feed_Cost_Data"/> based on the AnimalType and DietType. Each instance
         /// represents a row in the .csv file.
         /// </summary>
         /// <param name="animalType">The animal type for which the cost information is needed</param>
         /// <param name="dietType">The diet type of the animal for which cost information is needed.</param>
-        /// <returns>Returns an instance of <see cref="Table_58_Beef_Cattle_Winter_Feed_Cost_Data"/>. If nothing is found, returns null.</returns>
-        public Table_58_Beef_Cattle_Winter_Feed_Cost_Data GetBeefCattleWinterFeedCost(AnimalType animalType,
+        /// <returns>Returns an instance of <see cref="Beef_Cattle_Winter_Feed_Cost_Data"/>. If nothing is found, returns null.</returns>
+        public Beef_Cattle_Winter_Feed_Cost_Data GetBeefCattleWinterFeedCost(AnimalType animalType,
                                                                                       DietType dietType)
         {
             var data = BeefCattleWinterFeedData.Find(x => 
@@ -69,12 +69,12 @@ namespace H.Core.Providers.Economics
 
             if (data != null)
             {
-                Trace.TraceError($"{nameof(Table_58_Beef_Cattle_Winter_Feed_Cost_Provider)}.{nameof(GetBeefCattleWinterFeedCost)} " +
+                Trace.TraceError($"{nameof(Beef_Cattle_Winter_Feed_Cost_Provider)}.{nameof(GetBeefCattleWinterFeedCost)} " +
                                  $": could not find DietType: {dietType} in the .csv file for the AnimalType:{animalType}, returning null.");
             }
             else
             {
-                Trace.TraceError($"{nameof(Table_58_Beef_Cattle_Winter_Feed_Cost_Provider)}.{nameof(GetBeefCattleWinterFeedCost)} " +
+                Trace.TraceError($"{nameof(Beef_Cattle_Winter_Feed_Cost_Provider)}.{nameof(GetBeefCattleWinterFeedCost)} " +
                                  $": could not find AnimalType: {animalType} in the .csv file, returning null.");
             }
 
@@ -85,9 +85,9 @@ namespace H.Core.Providers.Economics
 
         #region Private Methods
 
-        private List<Table_58_Beef_Cattle_Winter_Feed_Cost_Data> ReadFile()
+        private List<Beef_Cattle_Winter_Feed_Cost_Data> ReadFile()
         {
-            var fileData = new List<Table_58_Beef_Cattle_Winter_Feed_Cost_Data>();
+            var fileData = new List<Beef_Cattle_Winter_Feed_Cost_Data>();
             IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.BeefCattleFedWinterFeedCost);
 
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -100,7 +100,7 @@ namespace H.Core.Providers.Economics
                 var fixedCosts = double.Parse(line[4], cultureInfo);
                 var labourCosts = double.Parse(line[5], cultureInfo);
 
-                fileData.Add(new Table_58_Beef_Cattle_Winter_Feed_Cost_Data
+                fileData.Add(new Beef_Cattle_Winter_Feed_Cost_Data
                 {
                     AnimalType = animalType,
                     DietType = dietType,

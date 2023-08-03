@@ -176,7 +176,7 @@
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.cs" />
     <Compile Include="CustomAttributes\UnitsAttribute.cs" />
     <Compile Include="Emissions\EnergyCarbonDioxideEmissionsCalculator.cs" />
-    <Compile Include="Emissions\Table_65_66_Expression_Of_Uncertainty_Calculator.cs" />
+    <Compile Include="Emissions\Table_57_58_Expression_Of_Uncertainty_Calculator.cs" />
     <Compile Include="Emissions\Results\AnimalComponentEmissionResultsExtensions.cs" />
     <Compile Include="Emissions\Results\AnimalComponentEmissionsResults.cs" />
     <Compile Include="Emissions\Results\AnimalGroupEmissionResults.cs" />
@@ -348,8 +348,8 @@
     <Compile Include="Providers\Animals\Table 70\Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider.cs" />
     <Compile Include="Providers\Climate\IClimateProvider.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
-    <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Data.cs" />
-    <Compile Include="Providers\Economics\Table_58_Beef_Cattle_Winter_Feed_Cost_Provider.cs" />
+    <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Data.cs" />
+    <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Provider.cs" />
     <Compile Include="Providers\Economics\Feed_Costs_For_Beef_Data.cs" />
     <Compile Include="Providers\Economics\Feed_Costs_For_Beef_Provider.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Data.cs" />

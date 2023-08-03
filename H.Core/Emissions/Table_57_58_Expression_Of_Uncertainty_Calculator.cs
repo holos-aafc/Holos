@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace H.Core.Emissions
 {
     /// <summary>
-    /// Implements both Table 65 and 66 from the Algorithm Document.
-    /// <para>Table 65. Relative uncertainties for each emission category.</para>
-    /// <para>Table 66. Uncertainty categories and associated estimates.</para>
+    /// Implements both Table 57 and 58 from the Algorithm Document.
+    /// <para>Table 57. Relative uncertainties for each emission category.</para>
+    /// <para>Table 58. Uncertainty categories and associated estimates.</para>
     /// </summary>
-    public class Table_65_66_Expression_Of_Uncertainty_Calculator
+    public class Table_57_58_Expression_Of_Uncertainty_Calculator
     {
         /// <summary>
         /// Equation 9.1.1-1
