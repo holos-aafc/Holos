@@ -13,7 +13,7 @@ namespace H.Core.Providers.Animals
 {
     /// <summary>
     /// Table 36. Default methane conversion factors, direct N2O emission factors, volatilization fractions and
-    /// emission factors and leaching fractions and emission factors, by livestock group and manure handling
+    /// emission factors and leaching fractions and emission factors, by livestock type and manure handling
     /// system. For beef cattle, dairy cattle and broilers, layers and turkeys, the Fracvolatilization values are
     /// estimated by Holos 
     /// </summary>
