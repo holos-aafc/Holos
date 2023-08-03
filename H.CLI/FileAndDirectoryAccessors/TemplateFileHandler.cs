@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.CLI.Interfaces;
-using H.CLI.Factorys;
+using H.CLI.Factories;
 using System.Text.RegularExpressions;
 
 namespace H.CLI.FileAndDirectoryAccessors

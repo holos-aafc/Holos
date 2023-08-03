@@ -85,7 +85,7 @@ namespace H.CLI.Results
         #endregion
 
         #region Calculators
-        private readonly Table_65_66_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();
+        private readonly Table_57_58_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();
         #endregion
 
         #region Constants

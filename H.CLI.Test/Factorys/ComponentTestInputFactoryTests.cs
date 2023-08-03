@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using H.CLI.Factorys;
+using H.CLI.Factories;
 using H.CLI.TemporaryComponentStorage;
 
 namespace H.CLI.Test.Factorys

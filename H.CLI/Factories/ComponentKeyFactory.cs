@@ -1,65 +1,65 @@
 ﻿using System;
+using H.CLI.ComponentKeys;
 using H.CLI.Interfaces;
-using H.CLI.TemporaryComponentStorage;
 
-namespace H.CLI.Factorys
+namespace H.CLI.Factories
 {
-    public class ComponentTemporaryInputFactory
+    public class ComponentKeyFactory
     {
         #region Public Methods
-        /// Based on the type of component, return the appropriate concrete TemporaryInput class. If you are adding a new component,
-        /// please add the appropriate case below. The cases below are strings that should always 
-        /// be based on the list of keys in the DirectoryKeys class
+        /// <summary>
+        /// Based on the type of component, return the appropriate concrete ComponentKeys class. If you are adding a new component,
+        /// please add the appropriate case below. The name of the case should correspond with the spelling in the DirectoryKeys.
+        /// The cases below are strings that shuold always be based on the list of keys in the DirectoryKeys class.
         /// </summary>
-        public IComponentTemporaryInput CreateComponentTemporaryInputs(string component)
+        public IComponentKeys ComponentKeysCreator(string component)
         {
-            
             if (component.ToUpper() == Properties.Resources.DefaultShelterbeltInputFolder.ToUpper())
             {
-                return new ShelterBeltTemporaryInput();
+                return new ShelterBeltKeys();
             }
 
             if (component.ToUpper() == Properties.Resources.DefaultFieldsInputFolder.ToUpper())
             {
-                return new FieldTemporaryInput();
+                return new FieldKeys();
             }
 
             if (component.ToUpper() == Properties.Resources.DefaultSwineInputFolder.ToUpper())
             {
-                return new SwineTemporaryInput();
+                return new SwineKeys();
             }
 
             if (component.ToUpper() == Properties.Resources.DefaultDairyInputFolder.ToUpper())
             {
-                return new DairyTemporaryInput();
+                return new DairyCattleKeys();
             }
 
             if (component.ToUpper() == Properties.Resources.DefaultSheepInputFolder.ToUpper())
             {
-                return new SheepTemporaryInput();
+                return new SheepKeys();
             }
 
 
             if (component.ToUpper() == Properties.Resources.DefaultBeefInputFolder.ToUpper())
             {
-                return new BeefCattleTemporaryInput();
+                return new BeefCattleKeys();
             }
 
             if (component.ToUpper() == Properties.Resources.DefaultPoultryInputFolder.ToUpper())
             {
-                return new PoultryTemporaryInput();
+                return new PoultryKeys();
             }
             if (component.ToUpper() == Properties.Resources.DefaultOtherLivestockInputFolder.ToUpper())
             {
-                return new OtherLiveStockTemporaryInput();
+                return new OtherLiveStockKeys();
             }
 
             else
             {
                 throw new NotImplementedException();
             }
-        }
+           
+        } 
+        #endregion
     }
 }
-        #endregion
-

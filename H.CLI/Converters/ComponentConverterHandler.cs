@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using H.CLI.Factorys;
+using H.CLI.Factories;
 using H.CLI.Handlers;
 using H.CLI.Interfaces;
 using H.Core.Enumerations;

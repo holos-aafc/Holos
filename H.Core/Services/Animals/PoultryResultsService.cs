@@ -61,13 +61,12 @@ namespace H.Core.Services.Animals
              */
 
             // Equation 3.4.1-1
-            dailyEmissions.EntericMethaneEmission =
-                this.CalculateEntericMethaneEmissionForSwinePoultryAndOtherLivestock(
+            dailyEmissions.EntericMethaneEmission = this.CalculateEntericMethaneEmissionForSwinePoultryAndOtherLivestock(
                     entericMethaneEmissionRate: managementPeriod.ManureDetails.YearlyEntericMethaneRate,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             /*
-             * Manure carbon (C) and methane (CH4)
+             * Manure carbon (C)
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
@@ -91,6 +90,10 @@ namespace H.Core.Services.Animals
             dailyEmissions.CarbonFromManureAndBedding = base.CalculateAmountOfCarbonFromManureAndBedding(
                 carbonExcreted: dailyEmissions.FecalCarbonExcretion,
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
+
+            /*
+             * Manure methane (CH4)
+             */
 
             if (animalGroup.GroupType.IsChickenType())
             {

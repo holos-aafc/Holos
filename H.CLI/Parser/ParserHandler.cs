@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using H.CLI.Factorys;
+using H.CLI.Factories;
 using H.CLI.Interfaces;
 
 namespace H.CLI.Parser

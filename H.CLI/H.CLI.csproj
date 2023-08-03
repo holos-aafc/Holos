@@ -124,7 +124,7 @@
     <Compile Include="Converters\PoultryConverter.cs" />
     <Compile Include="Converters\SheepConverter.cs" />
     <Compile Include="Converters\SwineConverter.cs" />
-    <Compile Include="Factorys\ComponentProcessorFactory.cs" />
+    <Compile Include="Factories\ComponentProcessorFactory.cs" />
     <Compile Include="FileAndDirectoryAccessors\ReadSettingsFile.cs" />
     <Compile Include="FileAndDirectoryAccessors\TemplateFarmHandler.cs" />
     <Compile Include="Handlers\ErrorHandler.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="Converters\ComponentConverterHandler.cs" />
     <Compile Include="Converters\ConvertingComponentStrategy.cs" />
     <Compile Include="Converters\FieldSystemInputConverter.cs" />
-    <Compile Include="Factorys\ComponentConverterFactory.cs" />
+    <Compile Include="Factories\ComponentConverterFactory.cs" />
     <Compile Include="FileAndDirectoryAccessors\DirectoryHandler.cs" />
     <Compile Include="FileAndDirectoryAccessors\DirectoryKeys.cs" />
     <Compile Include="FileAndDirectoryAccessors\BuildSettingsFileString.cs" />
@@ -174,8 +174,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.fr-CA.resx</DependentUpon>
     </Compile>
-    <Compile Include="Factorys\ComponentKeyFactory.cs" />
-    <Compile Include="Factorys\ComponentTemporaryInputFactory.cs" />
+    <Compile Include="Factories\ComponentKeyFactory.cs" />
+    <Compile Include="Factories\ComponentTemporaryInputFactory.cs" />
     <Compile Include="FileAndDirectoryAccessors\ExcelInitializer.cs" />
     <Compile Include="Interfaces\IComponentKeys.cs" />
     <Compile Include="Interfaces\IComponentTemporaryInput.cs" />

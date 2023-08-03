@@ -30,7 +30,7 @@ namespace H.CLI.Results
         private readonly Storage _storage;
         public List<KeyValuePair<string, List<AnimalComponentEmissionsResults>>> _animalEmissionResultsForAllFarms { get; set; } = new List<KeyValuePair<string, List<AnimalComponentEmissionsResults>>>();
         private readonly EnergyCarbonDioxideEmissionsCalculator _energyCalculator;
-        private readonly Table_65_66_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator;
+        private readonly Table_57_58_Expression_Of_Uncertainty_Calculator _uncertaintyCalculator;
         private readonly SummationsCalculator _summationsCalculator = new SummationsCalculator();
         private readonly KeyConverter.KeyConverter _keyConverter = new KeyConverter.KeyConverter();
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
@@ -60,7 +60,7 @@ namespace H.CLI.Results
             _storage = storage;
 
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
-            _uncertaintyCalculator = new Table_65_66_Expression_Of_Uncertainty_Calculator();
+            _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();
 
             var animalService = new AnimalResultsService();
             var manureService = new ManureService(animalService);

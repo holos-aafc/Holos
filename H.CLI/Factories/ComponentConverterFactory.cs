@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace H.CLI.Factorys
+namespace H.CLI.Factories
 {
     public class ComponentConverterFactory
     {

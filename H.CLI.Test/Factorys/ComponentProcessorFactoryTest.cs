@@ -1,4 +1,4 @@
-﻿using H.CLI.Factorys;
+﻿using H.CLI.Factories;
 using H.CLI.Processors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
