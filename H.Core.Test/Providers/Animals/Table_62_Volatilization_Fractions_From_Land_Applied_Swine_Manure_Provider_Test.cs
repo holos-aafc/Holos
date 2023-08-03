@@ -7,7 +7,7 @@ using H.Core.Enumerations;
 namespace H.Core.Test.Providers.Animals
 {
     [TestClass]
-    public class Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider_Test
+    public class Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider_Test
     {
         #region Fields
 
@@ -30,7 +30,7 @@ namespace H.Core.Test.Providers.Animals
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
+            _sut = new Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider();
         }
 
         [TestCleanup]

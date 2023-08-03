@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace H.Core.Providers.Animals.Table_70
 {
-    public class Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider : Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider
+    public class Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider : Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider
     {
         #region Constructors
 
-        public Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider() : base()
+        public Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider() : base()
         {
             base.ReadFile(CsvResourceNames.SwineFractionOfNAmmoniaLandAppliedManure);
         }
@@ -26,7 +26,7 @@ namespace H.Core.Providers.Animals.Table_70
 
             if (animalType.IsSwineType() == false)
             {
-                Trace.TraceError($"{nameof(Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
+                Trace.TraceError($"{nameof(Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
                                  $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
 
                 return notFound;
@@ -34,7 +34,7 @@ namespace H.Core.Providers.Animals.Table_70
 
             if (_validProvinces.Contains(province) == false)
             {
-                Trace.TraceError($"{nameof(Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
+                Trace.TraceError($"{nameof(Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider)}.{nameof(GetData)}" +
                                  $" unable to find province {province} in the available data.");
 
                 return notFound;

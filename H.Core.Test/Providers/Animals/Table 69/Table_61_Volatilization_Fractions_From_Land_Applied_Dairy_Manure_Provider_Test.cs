@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace H.Core.Test.Providers.Animals.Table_69
 {
     [TestClass]
-    public class Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test
+    public class Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider_Test
     {
         #region Fields
         
@@ -28,7 +28,7 @@ namespace H.Core.Test.Providers.Animals.Table_69
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
+            _sut = new Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider();
         }
 
         [TestCleanup]
