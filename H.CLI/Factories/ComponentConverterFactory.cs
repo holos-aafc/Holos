@@ -10,7 +10,6 @@ namespace H.CLI.Factories
 {
     public class ComponentConverterFactory
     {
-
         #region Public Methods
         /// <summary>
         /// Based on the type of component, return the appropriate concrete converter. 

@@ -6,14 +6,28 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using H.CLI.Interfaces;
 using H.Core.Models.Animals.Beef;
 
 namespace H.CLI.TemporaryComponentStorage
 {
     public abstract class TemporaryInputBase
     {
+        #region Fields
+        
         protected readonly InputHelper _inputHelper = new InputHelper();
+
+        #endregion
+
+        #region Properties
+        
         public Type ComponentType { get; set; }
+        public string Name { get; set; }
+        public Guid Guid { get; set; }
+
+        #endregion
+
+        #region Public Methods
 
         public virtual void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string filePath, int col, int row)
         {
@@ -58,5 +72,11 @@ namespace H.CLI.TemporaryComponentStorage
                 throw new FormatException(String.Format(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, filePath));
             }
         }
+
+        public void FinalSettings(IComponentKeys componentKeys)
+        {
+        }
+
+        #endregion
     }
 }

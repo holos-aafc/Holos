@@ -10,8 +10,10 @@ using H.Core.Enumerations;
 
 namespace H.CLI.TemporaryComponentStorage
 {
-    public class PoultryTemporaryInput : TemporaryInputBase, IComponentTemporaryInput
+    public class PoultryTemporaryInput : AnimalTemporaryInputBase, IComponentTemporaryInput
     {
+        #region Public Methods
+
         public void ConvertToComponentProperties(string key, ImperialUnitsOfMeasurement? units, string value, int row, int col, string filePath)
         {
             Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -91,27 +93,8 @@ namespace H.CLI.TemporaryComponentStorage
 
             else
                 propertyInfo.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
-        }
+        } 
 
-        public void FinalSettings(IComponentKeys componentKeys)
-        {
-        }
-
-        public string Name { get; set; }
-        public string GroupName { get; set; }
-        public AnimalType GroupType { get; set; }
-        public int NumberOfAnimals { get; set; }
-        public string ManagementPeriodName { get; set; }
-        public DateTime ManagementPeriodStartDate { get; set; }
-        public DateTime ManagementPeriodEndDate { get; set; }
-        public int ManagementPeriodDays { get; set; }
-        public double N2ODirectEmissionFactor { get; set; }
-        public double VolatilizationFraction { get; set; }
-        public double YearlyManureMethaneRate { get; set; }
-        public double YearlyNitrogenExcretionRate { get; set; }
-        public double YearlyEntericMethaneRate { get; set; }
-        public Guid Guid { get; set; }
-        public int GroupId { get; set ; }
-       
+        #endregion
     }
 }

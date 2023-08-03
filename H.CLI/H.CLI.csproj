@@ -139,6 +139,7 @@
     <Compile Include="Results\EstimatesOfProductionResults.cs" />
     <Compile Include="Results\FeedEstimateResults.cs" />
     <Compile Include="Results\GHGAndCO2Results.cs" />
+    <Compile Include="TemporaryComponentStorage\AnimalTemporaryInputBase.cs" />
     <Compile Include="TemporaryComponentStorage\BeefCattleTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\DairyTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\InputHelper.cs" />
