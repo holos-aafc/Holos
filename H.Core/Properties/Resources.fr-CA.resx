@@ -3851,6 +3851,9 @@
   <data name="LabelTotalLiquidDigestateRemainingAfterAllFieldApplications" xml:space="preserve">
     <value>Total liquid digestate remaining after all field applications</value>
   </data>
+  <data name="LabelTotalManureNitrogenAvailableForLandApplication" xml:space="preserve">
+    <value>Total manure N available for land application</value>
+  </data>
   <data name="LabelTotalNitrateLeachingForArea" xml:space="preserve">
     <value>NO3-N_lessivageTotal</value>
   </data>

@@ -5634,4 +5634,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="ComponentType" xml:space="preserve">
     <value>Component Type</value>
   </data>
+  <data name="LabelTotalManureNitrogenAvailableForLandApplication" xml:space="preserve">
+    <value>Total manure N available for land application</value>
+  </data>
 </root>

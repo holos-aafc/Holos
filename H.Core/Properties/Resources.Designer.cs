@@ -11320,6 +11320,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total manure N available for land application.
+        /// </summary>
+        public static string LabelTotalManureNitrogenAvailableForLandApplication {
+            get {
+                return ResourceManager.GetString("LabelTotalManureNitrogenAvailableForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NO3-N_totalLeach.
         /// </summary>
         public static string LabelTotalNitrateLeachingForArea {

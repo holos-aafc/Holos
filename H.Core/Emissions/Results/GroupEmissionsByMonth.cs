@@ -410,16 +410,6 @@ namespace H.Core.Emissions.Results
 
         }
 
-        /// <summary>
-        /// (kg N)
-        /// </summary>
-        public double TotalAvailableManureNitrogenInStoredManure
-        {
-            get
-            {
-                return DailyEmissions.Sum(x => x.AccumulatedNitrogenAvailableForLandApplicationOnDay);
-            }
-        }
 
         /// <summary>
         /// (1000 kg wet weight for solid manure, 1000 L for liquid manure)
@@ -503,6 +493,23 @@ namespace H.Core.Emissions.Results
             get
             {
                 return DailyEmissions.Sum(x => x.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+            }
+        }
+
+        #endregion
+
+        #region Nitrogen
+
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double TotalAvailableManureNitrogenInStoredManure
+        {
+            get
+            {
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Last().AccumulatedNitrogenAvailableForLandApplicationOnDay;
             }
         }
 
