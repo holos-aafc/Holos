@@ -8,33 +8,24 @@ using H.CLI.Interfaces;
 
 namespace H.CLI.ComponentKeys
 {
-    public class OtherLiveStockKeys : IComponentKeys
+    public class OtherLiveStockKeys : AnimalKeyBase, IComponentKeys
     {
-        public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
-        {
-            {Properties.Resources.Key_Name, null },
-            {H.Core.Properties.Resources.ComponentType, null},
-            {Properties.Resources.GroupName, null},
-            {Properties.Resources.GroupType, null},
-            {Properties.Resources.ManagementPeriodName, null},
-            {Properties.Resources.ManagementPeriodStartDate, null},
-            {Properties.Resources.ManagementPeriodDays, null},
-            {Properties.Resources.NumberOfAnimals, null},
-            {Properties.Resources.YearlyManureMethaneRate,  ImperialUnitsOfMeasurement.PoundPerHeadPerYear},
-            {Properties.Resources.YearlyNitrogenExcretionRate,  ImperialUnitsOfMeasurement.PoundPerHeadPerYear},
-            {Properties.Resources.YearlyEntericMethaneRate,  ImperialUnitsOfMeasurement.PoundPerHeadPerYear},
-            {Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN},
-            {Properties.Resources.VolatilizationFraction, null },
-            {Properties.Resources.DailyManureMethaneEmissionRate, null },
-            {Properties.Resources.MethaneProducingCapacityOfManure, null },
-            {Properties.Resources.MethaneConversionFactor, null },
-            {Properties.Resources.VolatileSolids, null },
-        };
+        #region Constructors
 
-        public bool IsHeaderOptional(string s)
+        public OtherLiveStockKeys() : base()
         {
-            return false;
+            // Common keys are added in super class
+            base.Keys.Add(Properties.Resources.YearlyManureMethaneRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
+            base.Keys.Add(Properties.Resources.YearlyNitrogenExcretionRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
+            base.Keys.Add(Properties.Resources.YearlyEntericMethaneRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
+            base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);
+            base.Keys.Add(Properties.Resources.VolatilizationFraction, null);
+            base.Keys.Add(Properties.Resources.DailyManureMethaneEmissionRate, null);
+            base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
+            base.Keys.Add(Properties.Resources.MethaneConversionFactor, null);
+            base.Keys.Add(Properties.Resources.VolatileSolids, null);
         }
-        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>();
+
+        #endregion
     }
 }

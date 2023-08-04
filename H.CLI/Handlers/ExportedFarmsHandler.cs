@@ -112,7 +112,7 @@ namespace H.CLI.Handlers
                         // Single year mode field - create input file based on single year view item
                         inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm,
                             path: pathToFieldComponents,
-                            componentKeys: fieldKeys.keys,
+                            componentKeys: fieldKeys.Keys,
                             fieldSystemComponent: fieldSystemComponent);
                     }
                     else
@@ -131,7 +131,7 @@ namespace H.CLI.Handlers
 
                         inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm, 
                             path: pathToFieldComponents, 
-                            componentKeys: fieldKeys.keys, 
+                            componentKeys: fieldKeys.Keys, 
                             fieldSystemComponent: fieldSystemComponent, 
                             detailsScreenViewCropViewItems: detailViewItemsForField);
                     }
@@ -157,7 +157,7 @@ namespace H.CLI.Handlers
                 {                    
                     var createdInputFile = _beefConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToBeefCattleComponents,
-                        componentKeys: beefCattleKeys.keys,
+                        componentKeys: beefCattleKeys.Keys,
                         component: beefCattleComponent,
                         componentNumber: componentNumber,
                         writeToPath: true);
@@ -184,7 +184,7 @@ namespace H.CLI.Handlers
                 {
                     var createdInputFile = _dairyConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToDairyCattleComponents,
-                        componentKeys: dairyCattleKeys.keys,
+                        componentKeys: dairyCattleKeys.Keys,
                         component: dairyComponent,
                         writeToPath: true);
 
@@ -208,7 +208,7 @@ namespace H.CLI.Handlers
                 {
                     var createdInputFile = _swineConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToSwineComponents,
-                        componentKeys: swineKeys.keys,
+                        componentKeys: swineKeys.Keys,
                         component: swineComponent,
                         writeToPath: true);
 
@@ -232,7 +232,7 @@ namespace H.CLI.Handlers
                 {
                     var createdInputFile = _sheepConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToSheepComponents,
-                        componentKeys: sheepKeys.keys,
+                        componentKeys: sheepKeys.Keys,
                         component: sheepComponent,
                         writeToPath: true);
 
@@ -256,7 +256,7 @@ namespace H.CLI.Handlers
                 {
                     var createdInputFile = _poultryConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToPoultryComponents,
-                        componentKeys: poultryKeys.keys,
+                        componentKeys: poultryKeys.Keys,
                         component: poultryComponent,
                         writeToPath: true);
 
@@ -280,7 +280,7 @@ namespace H.CLI.Handlers
                 {
                     var createdInputFile = _otherLiveStockConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToOtherAnimalComponents,
-                        componentKeys: otherLiveStockKeys.keys,
+                        componentKeys: otherLiveStockKeys.Keys,
                         component: otherLivestockComponent,
                         writeToPath: true);
 

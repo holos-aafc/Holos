@@ -34,7 +34,7 @@ namespace H.CLI.Test.Handlers
                 @"H.CLI.TestFiles\GuidComponentHandlerTest\Shelterbelt1.csv"
             };
 
-            excel.SetTemplateCSVFileForTesting(filePath, shelterBeltkeys.keys);
+            excel.SetTemplateCSVFileForTesting(filePath, shelterBeltkeys.Keys);
 
             var parser = new Parser.Parser();
             parser.ComponentTemporaryInput = new ShelterBeltTemporaryInput();

@@ -21,7 +21,7 @@ namespace H.CLI.ComponentKeys
         /// The order of the keys below is the order in which they will be written when creating the template files for a Shelterbelt
         /// </summary>
 
-        public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
+        public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
         {
             {Properties.Resources.HardinessZone, null},
             {Properties.Resources.EcodistrictId, null },

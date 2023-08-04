@@ -62,7 +62,7 @@ namespace H.CLI.FileAndDirectoryAccessors
                 {
                     var componentType = _directoryKeys.directoryWeights.SingleOrDefault(x => x.Key.ToUpper() == Path.GetFileName(componentDirectoryPath).ToUpper()).Key;  
                     var componentKey = _componentKeyFactory.ComponentKeysCreator(componentType);
-                    _excel.SetTemplateFile(componentDirectoryPath, componentType, componentKey.keys);
+                    _excel.SetTemplateFile(componentDirectoryPath, componentType, componentKey.Keys);
                 }
                 else
                     continue;

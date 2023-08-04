@@ -30,7 +30,7 @@ namespace H.CLI.Test.Parsers
             var shelterBeltKeys = new ShelterBeltKeys();
             var componentDirectoryPath = @"H.CLI.TestFiles\TestParserHandler";
         
-            excel.SetTemplateCSVFileForTesting(componentDirectoryPath, shelterBeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(componentDirectoryPath, shelterBeltKeys.Keys);
    
             parserHandler.InitializeParser("Shelterbelts");
 

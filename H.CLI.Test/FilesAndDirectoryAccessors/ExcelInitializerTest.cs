@@ -28,7 +28,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory("H.CLI.TestFiles");
             Directory.CreateDirectory(@"H.CLI.TestFiles\ExcelInitializerTest\ReadExcelFileTest\Shelterbelts");
             var filePath = @"H.CLI.TestFiles\ExcelInitializerTest\ReadExcelFileTest";
-            excel.SetTemplateCSVFileForTesting(filePath, shelterbeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(filePath, shelterbeltKeys.Keys);
             fileLines = excel.ReadExcelFile(filePath + @"\Shelterbelt1.csv").ToArray();
 
         }
@@ -52,7 +52,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory("H.CLI.TestFiles");
             Directory.CreateDirectory(@"H.CLI.TestFiles\ExcelInitializerTest\Shelterbelts");
             var filePath = @"H.CLI.TestFiles\ExcelInitializerTest\Shelterbelts";
-            excel.SetTemplateFile(filePath, "Shelterbelts", shelterbeltKeys.keys);
+            excel.SetTemplateFile(filePath, "Shelterbelts", shelterbeltKeys.Keys);
             var doesTemplateFileExist = File.Exists(filePath + @"\Shelterbelts_Example-en-CA.csv");
 
             using (File.OpenRead(filePath + @"\Shelterbelts_Example-en-CA.csv"))
@@ -90,7 +90,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory("H.CLI.TestFiles");
             Directory.CreateDirectory(@"H.CLI.TestFiles\ExcelInitializerTest\Shelterbelts");
             var filePath = @"H.CLI.TestFiles\ExcelInitializerTest\Shelterbelts";
-            excel.SetTemplateFile(filePath, "Shelterbelts", shelterbeltKeys.keys);
+            excel.SetTemplateFile(filePath, "Shelterbelts", shelterbeltKeys.Keys);
             var doesTemplateFileExist = File.Exists(filePath + @"\Shelterbelts_Example-en-CA.csv");
 
             using (File.OpenRead(filePath + @"\Shelterbelts_Example-en-CA.csv"))

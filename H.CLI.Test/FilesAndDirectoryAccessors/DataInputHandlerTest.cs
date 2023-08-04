@@ -45,7 +45,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
 
             var dataHandler = new DataInputHandler();
             var excel = new ExcelInitializer();
-            excel.SetTemplateCSVFileForTesting(testFilePath, new ShelterBeltKeys().keys);
+            excel.SetTemplateCSVFileForTesting(testFilePath, new ShelterBeltKeys().Keys);
             var result = dataHandler.ProcessDataInputFiles(farmDirectoryPath);
             Assert.AreEqual(result.Components.Count(), 1);
             Assert.AreEqual(result.Components[0].ComponentType, ComponentType.Shelterbelt);

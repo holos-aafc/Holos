@@ -48,7 +48,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var farmPath = @"H.CLI.TestFiles\TestFarms\Farm1\";
            // directoryHandler.GenerateGlobalSettingsFile(farmPath);
             directoryHandler.InitializeDirectoriesAndFilesForComponents(farmPath);
-            excel.SetTemplateCSVFileForTesting(farmPath + "Shelterbelts", shelterbeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(farmPath + "Shelterbelts", shelterbeltKeys.Keys);
 
             var dataHandler = new DataInputHandler();
             var farm = dataHandler.ProcessDataInputFiles(farmPath);

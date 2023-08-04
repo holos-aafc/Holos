@@ -13,7 +13,7 @@ namespace H.CLI.Interfaces
     /// </summary>
     public interface IComponentKeys
     {   
-        Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; }
+        Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; }
 
         /// <summary>
         /// Adding new header columns to the CSV files means that Holos can't find the data it is looking for in old component files and will crash.

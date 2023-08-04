@@ -71,7 +71,7 @@ namespace H.CLI.Parser
                     {
                         var tempObject = (IComponentTemporaryInput)Activator.CreateInstance(Type.GetType(ComponentTemporaryInput.ToString()));
 
-                        foreach (var keyValuePair in this.ComponentKey.keys)
+                        foreach (var keyValuePair in this.ComponentKey.Keys)
                         {
                             try
                             {

@@ -10,7 +10,7 @@ namespace H.CLI.ComponentKeys
 {
     public class DairyCattleKeys : IComponentKeys
     {
-        public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
+        public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
         {
             {Properties.Resources.Key_Name, null},
             {H.Core.Properties.Resources.ComponentType, null},

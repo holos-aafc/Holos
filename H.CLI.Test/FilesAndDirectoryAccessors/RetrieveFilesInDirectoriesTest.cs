@@ -27,7 +27,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory("H.CLI.TestFiles");
             Directory.CreateDirectory(@"H.CLI.TestFiles\TestRetrieveFilesInDirectory");
             directoryHandler.InitializeDirectoriesAndFilesForComponents(@"H.CLI.TestFiles\TestRetrieveFilesInDirectory");
-            excel.SetTemplateCSVFileForTesting(@"H.CLI.TestFiles\TestRetrieveFilesInDirectory\Shelterbelts", shelterbeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(@"H.CLI.TestFiles\TestRetrieveFilesInDirectory\Shelterbelts", shelterbeltKeys.Keys);
             var testDirectory = new RetrieveFilesInDirectories();
             var result = testDirectory.GetSubDirectoryFiles(@"H.CLI.TestFiles\TestRetrieveFilesInDirectory\Shelterbelts");
             Assert.AreEqual(result.Length, 2);

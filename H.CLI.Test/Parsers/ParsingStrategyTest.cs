@@ -44,7 +44,7 @@ namespace H.CLI.Test.Parsers
             Directory.CreateDirectory("H.CLI.TestFiles");
             Directory.CreateDirectory(@"H.CLI.TestFiles\TestParsingStrategy");
             var filePath = @"H.CLI.TestFiles\TestParsingStrategy";
-            excel.SetTemplateCSVFileForTesting(filePath, shelterbeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(filePath, shelterbeltKeys.Keys);
             var files = Directory.GetFiles(filePath);
 
             var parserStrategy = new ParsingStrategy();

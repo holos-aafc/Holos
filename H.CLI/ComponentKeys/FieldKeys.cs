@@ -28,7 +28,7 @@ namespace H.CLI.ComponentKeys
         {
             this.MissingHeaders.Add(Properties.Resources.Key_NitrogenFixation, false);
         }
-        public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>()
+        public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>()
         {
             // Note the casing must match in the resource files (i.e. it must be Phase Number in the resource file not Phase number). This is because reflection is
             // being used

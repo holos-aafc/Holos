@@ -43,7 +43,7 @@ namespace H.CLI.Test.Parsers
         
             var excel = new ExcelInitializer();
             var shelterbeltKeys = new ShelterBeltKeys();
-            excel.SetTemplateCSVFileForTesting(@"H.CLI.TestFiles\TestParser", shelterbeltKeys.keys);
+            excel.SetTemplateCSVFileForTesting(@"H.CLI.TestFiles\TestParser", shelterbeltKeys.Keys);
 
 
             string[] fileList = new string[]

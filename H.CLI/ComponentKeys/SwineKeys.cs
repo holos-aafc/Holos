@@ -24,7 +24,7 @@ namespace H.CLI.ComponentKeys
        /// In this case, please add a new property in the format: ExampleFormat to the concrete SwineStarterTemporaryInput class.
        /// The order of the keys below is the order in which they will be written when creating the template files for a Shelterbelt
        /// </summary>
-        public Dictionary<string, ImperialUnitsOfMeasurement?> keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>()
+        public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>()
         {
              {Properties.Resources.Key_Name, null },
              {H.Core.Properties.Resources.ComponentType, null},
