@@ -66,7 +66,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
 
             /*
              * Enteric methane (CH4)

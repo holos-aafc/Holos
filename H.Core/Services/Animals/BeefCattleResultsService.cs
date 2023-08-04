@@ -49,7 +49,7 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
-            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
 
             /*
              * Enteric methane (CH4)
@@ -311,7 +311,7 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
             if (temperature > 20 || managementPeriod.HousingDetails.HousingType == HousingType.HousedInBarn)
             {
                 temperature = 20;

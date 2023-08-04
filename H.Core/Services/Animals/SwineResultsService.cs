@@ -56,7 +56,7 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
 
-            var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
+            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
