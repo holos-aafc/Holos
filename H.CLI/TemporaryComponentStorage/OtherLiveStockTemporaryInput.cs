@@ -14,85 +14,9 @@ namespace H.CLI.TemporaryComponentStorage
     {
         #region Public Methods
 
-        public void ConvertToComponentProperties(string key, ImperialUnitsOfMeasurement? units, string value, int row, int col, string filePath)
-        {
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.ForegroundColor = ConsoleColor.White;
-            if (String.IsNullOrEmpty(value))
-            {
-                Console.WriteLine(String.Format(Properties.Resources.EmptyDataInput, row + 1, col + 1, filePath));
-                throw new FormatException(String.Format(Properties.Resources.EmptyDataInput, row + 1, col + 1, filePath));
-            }
-
-            if (value.ToUpper() == "N/A")
-            {
-                return;
-            }
-            var propertyInfo = this.GetType().GetProperty(key);
-            InputDataReflectionHandler(propertyInfo, units, key, value, filePath, col, row);
-        }
-
         public override void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string filePath, int col, int row)
         {
             base.InputDataReflectionHandler(propertyInfo, units, prop, value, filePath, col, row);
-
-            if (propertyInfo.PropertyType == typeof(Type))
-            {
-                base.ParseType(propertyInfo, units, prop, value, filePath, col, row);
-
-                return;
-            }
-
-            if (propertyInfo.PropertyType == typeof(AnimalType))
-            {
-                try
-                {
-                    if (_inputHelper.IsNotApplicableInput(value))
-                    {
-                        this.GroupType = AnimalType.NotSelected;
-                        return;
-                    }
-
-                    this.GroupType = (AnimalType)Enum.Parse(typeof(AnimalType), value, true);
-                    return;
-                }
-
-                catch
-                {
-                    throw new FormatException(String.Format(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, filePath));
-                }
-            }
-            if (propertyInfo.PropertyType == typeof(DateTime))
-            {
-                try
-                {
-                    if (_inputHelper.IsNotApplicableInput(value))
-                    {
-                        this.ManagementPeriodStartDate = DateTime.Now;
-                        this.ManagementPeriodEndDate = DateTime.Now;
-                        return;
-                    }
-
-                    if (prop == nameof(ManagementPeriodStartDate))
-                    {
-                        this.ManagementPeriodStartDate = Convert.ToDateTime(value, CLILanguageConstants.culture);
-                        return;
-                    }
-
-                    else
-                        this.ManagementPeriodEndDate = Convert.ToDateTime(value, CLILanguageConstants.culture);
-                    return;
-                }
-
-                catch (Exception)
-                {
-                    Console.WriteLine(String.Format(Properties.Resources.InvalidDate, value, row + 1, col + 1, filePath));
-                    throw new FormatException(String.Format(Properties.Resources.InvalidDate, value, row + 1, col + 1, filePath));
-                }
-            }
-
-            else
-                propertyInfo.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
         } 
 
         #endregion
