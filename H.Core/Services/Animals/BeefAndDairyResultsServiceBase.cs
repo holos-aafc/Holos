@@ -73,7 +73,7 @@ namespace H.Core.Services.Animals
 
             base.CalculateAmmoniaInHousing(dailyEmissions, managementPeriod, dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
 
-            dailyEmissions.TanEnteringStorageSystem = CalculateTanFlowingIntoStorage(
+            dailyEmissions.TanEnteringStorageSystem = CalculateTanFlowingIntoStorageEachDay(
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
@@ -115,7 +115,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
                 amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
-            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(adjustedAmountOfTanFlowingIntoStorageEachDay, dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(
+                amountOfTANFlowingIntoStorageEachDay: adjustedAmountOfTanFlowingIntoStorageEachDay, 
+                adjustedAmmoniaLossFromStorage: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
                 tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
@@ -212,16 +214,6 @@ namespace H.Core.Services.Animals
         public double CalculateStorageTemperatureAdjustmentForLiquidManure(double temperature)
         {
             return 1 - 0.058 * (15 - temperature);
-        }
-
-        /// <summary>
-        /// Equation 4.3.2-8
-        /// </summary>
-        public double CalculateAdjustedAmountOfTANEnteringStorage(
-            double amountOfTANFlowingIntoStorageEachDay,
-            double adjustedAmmoniaLossFromStorage)
-        {
-            return amountOfTANFlowingIntoStorageEachDay - adjustedAmmoniaLossFromStorage;
         }
     }
 }

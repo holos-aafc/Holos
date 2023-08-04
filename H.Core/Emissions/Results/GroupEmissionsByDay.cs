@@ -794,8 +794,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-5
-        /// 
         /// (kg N head^-1 day^-1)
         /// </summary>
         public double FecalNitrogenExcretionRate
@@ -914,8 +912,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.2-6
-        /// 
         /// kg NH3-N (kg TAN)^-1
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForStorage

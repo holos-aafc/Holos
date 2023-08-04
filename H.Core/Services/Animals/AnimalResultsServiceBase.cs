@@ -1237,7 +1237,6 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-5
         /// Equation 4.3.3-2
         /// Equation 4.3.4-3
         /// </summary>
@@ -1460,12 +1459,12 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-1
-        /// Equation 4.3.3-8
+        /// Equation 4.3.3-7
         /// </summary>
         /// <param name="tanExcretion">TAN excreted by the animals for this period of time (kg TAN)</param>
         /// <param name="ammoniaLostFromHousing">NH3-N lost through NH3 emissions from housing systems (kg NH3-N) </param>
         /// <returns>Amount of TAN entering the storage system (kg TAN day^-1)</returns>
-        public double CalculateTanFlowingIntoStorage(double tanExcretion,
+        public double CalculateTanFlowingIntoStorageEachDay(double tanExcretion,
             double ammoniaLostFromHousing)
         {
             return tanExcretion - ammoniaLostFromHousing;
@@ -1497,6 +1496,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-9
+        /// Equation 4.3.3-12
         /// </summary>
         /// <param name="tanInStorageOnPreviousDay">TAN in storage on the previous day for each animal group and manure management system (kg TAN) </param>
         /// <param name="flowOfTanIntoStorage">Adjusted amount of TAN in stored manure (kg TAN day^-1)</param>
@@ -1508,6 +1508,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-6
+        /// Equation 4.3.3-9
         /// </summary>
         /// <param name="ambientTemperatureAdjustmentStorage">Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</param>
         /// <param name="ammoniaEmissionFactorStorage">Default ammonia emission factor for manure stores (deep bedding, solid storage/stockpile, compost (passive, active))</param>
@@ -1533,6 +1534,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-7
+        /// Equation 4.3.3-10
         /// </summary>
         /// <param name="amountOfTANEnteringStorageDaily">Amount of TAN entering the storage system each day (kg TAN day^-1)</param>
         /// <param name="adjustedAmmoniaEmissionFactor">Adjusted ammonia emission factor for beef barn (0 ≤ EF≤ 1)</param>
@@ -2489,28 +2491,6 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Calculates ammonia in storage for beef, dairy, and poultry.
-        /// </summary>
-        public void CalculateAmmoniaInStorage(
-            GroupEmissionsByDay dailyEmissions, 
-            ManagementPeriod managementPeriod, 
-            double temperatureAdjustment)
-        {
-            dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(
-                ambientTemperatureAdjustmentStorage: temperatureAdjustment,
-                ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
-
-            dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
-                amountOfTANEnteringStorageDaily: dailyEmissions.AdjustedAmountOfTanInStoredManure,
-                adjustedAmmoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
-
-            dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
-                amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
-
-            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
-        }
-
-        /// <summary>
         /// Calculate ammonia emissions from housing/storage for sheep, swine, and other livestock.
         /// </summary>
         public void CalculateIndirectEmissionsFromHousingAndStorage(GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod)
@@ -2608,6 +2588,17 @@ namespace H.Core.Services.Animals
                 managementPeriod.ManureDetails.EmissionFactorVolatilization;
             dailyEmissions.EmissionFactorForLeaching = managementPeriod.ManureDetails.EmissionFactorLeaching;
             dailyEmissions.LeachingFraction = managementPeriod.ManureDetails.LeachingFraction;
+        }
+
+        /// <summary>
+        /// Equation 4.3.2-8
+        /// Equation 4.3.3-11
+        /// </summary>
+        public double CalculateAdjustedAmountOfTANEnteringStorage(
+            double amountOfTANFlowingIntoStorageEachDay,
+            double adjustedAmmoniaLossFromStorage)
+        {
+            return amountOfTANFlowingIntoStorageEachDay - adjustedAmmoniaLossFromStorage;
         }
     }
 }

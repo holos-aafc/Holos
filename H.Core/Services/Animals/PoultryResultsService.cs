@@ -195,9 +195,6 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmissionRate: dailyEmissions.ManureDirectN2ONEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // TAN excretion rate is from lookup table and not calculated
-            dailyEmissions.TanExcretionRate = managementPeriod.ManureDetails.DailyTanExcretion;
-
             /*
              * Ammonia (NH3) from housing
              */
@@ -210,16 +207,40 @@ namespace H.Core.Services.Animals
                 tanExcretionRate: managementPeriod.ManureDetails.DailyTanExcretion,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.TanEnteringStorageSystem = CalculateTanFlowingIntoStorage(
+            dailyEmissions.TanEnteringStorageSystem = CalculateTanFlowingIntoStorageEachDay(
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            // Ammonia calculations use the adjusted amount. Since there is no adjustment for poultry as there is for beef and dairy (i.e. eq. 4.3.2-2), set the adjusted amount here.
-            dailyEmissions.AdjustedAmountOfTanInStoredManure = dailyEmissions.TanEnteringStorageSystem;
+            /*
+             * Ammonia (NH3) from storage
+             */
+
+            dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateAmbientTemperatureAdjustmentForStorage(
+                temperature: temperature);
+
+            dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(
+                ambientTemperatureAdjustmentStorage: dailyEmissions.AmbientAirTemperatureAdjustmentForStorage,
+                ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
+
+            dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
+                amountOfTANEnteringStorageDaily: dailyEmissions.TanEnteringStorageSystem,
+                adjustedAmmoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
+
+            dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
+                amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
+
+            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(
+                amountOfTANFlowingIntoStorageEachDay: dailyEmissions.TanEnteringStorageSystem,
+                adjustedAmmoniaLossFromStorage: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
                 tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
-                flowOfTanIntoStorage: dailyEmissions.TanEnteringStorageSystem);
+                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManure);
+
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
+
+            // TAN excretion rate is from lookup table and not calculated
+            dailyEmissions.TanExcretionRate = managementPeriod.ManureDetails.DailyTanExcretion;
 
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
@@ -233,14 +254,6 @@ namespace H.Core.Services.Animals
                 totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            /*
-             * Ammonia (NH3) from storage
-             */
-
-            dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateAmbientTemperatureAdjustmentForStorage(
-                temperature: temperature);
-
-            base.CalculateAmmoniaInStorage(dailyEmissions, managementPeriod, dailyEmissions.AmbientAirTemperatureAdjustmentForStorage);
 
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
             {
@@ -425,7 +438,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.3-11
+        /// Equation 4.3.3-8
         /// </summary>
         public double CalculateAmbientTemperatureAdjustmentForStorage(
             double temperature)
