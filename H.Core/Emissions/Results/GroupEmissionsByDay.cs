@@ -892,8 +892,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.2-2
-        ///
         /// (kg TAN)
         /// </summary>
         public double AdjustedAmountOfTanInStoredManure
@@ -927,8 +925,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.2-7
-        /// 
         /// (kg NH3-N)
         /// </summary>
         public double AmmoniaLostFromStorage
@@ -938,8 +934,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.2-8
-        /// 
         /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromStorageSystem

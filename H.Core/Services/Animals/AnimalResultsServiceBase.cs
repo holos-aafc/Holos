@@ -1496,8 +1496,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-10
-        /// Equation 4.3.3-9
+        /// Equation 4.3.2-9
         /// </summary>
         /// <param name="tanInStorageOnPreviousDay">TAN in storage on the previous day for each animal group and manure management system (kg TAN) </param>
         /// <param name="flowOfTanIntoStorage">Adjusted amount of TAN in stored manure (kg TAN day^-1)</param>
@@ -1535,25 +1534,20 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.2-7
         /// </summary>
-        /// <param name="tanInStoredManure">Total ammonical nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
+        /// <param name="amountOfTANEnteringStorageDaily">Amount of TAN entering the storage system each day (kg TAN day^-1)</param>
         /// <param name="adjustedAmmoniaEmissionFactor">Adjusted ammonia emission factor for beef barn (0 ≤ EF≤ 1)</param>
         /// <returns>Ammonia nitrogen loss from stored manure (stockpile/deep bedding, compost) (kg NH3-N)</returns>
         public double CalculateAmmoniaLossFromStoredManure(
-            double tanInStoredManure,
+            double amountOfTANEnteringStorageDaily,
             double adjustedAmmoniaEmissionFactor)
         {
-            return tanInStoredManure * adjustedAmmoniaEmissionFactor;
+            return amountOfTANEnteringStorageDaily * adjustedAmmoniaEmissionFactor;
         }
 
-        /// <summary>
-        /// Equation 4.3.2-8
-        /// </summary>
-        /// <param name="ammoniaNitrogenLossFromStoredManure">Monthly ammonia nitrogen loss from stored manure (kg NH3-N)</param>
-        /// <returns>Ammonia emission from manure storage system (kg NH3)</returns>
-        public double CalculateAmmoniaEmissionsFromStoredManure(
-            double ammoniaNitrogenLossFromStoredManure)
+        public double ConvertNH3NToNH3(
+            double amountOfNH3N)
         {
-            return ammoniaNitrogenLossFromStoredManure * CoreConstants.ConvertNH3NToNH3;
+            return amountOfNH3N * CoreConstants.ConvertNH3NToNH3;
         }
 
         /// <summary>
@@ -2507,11 +2501,11 @@ namespace H.Core.Services.Animals
                 ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
 
             dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
-                tanInStoredManure: dailyEmissions.AdjustedAmountOfTanInStoredManure,
+                amountOfTANEnteringStorageDaily: dailyEmissions.AdjustedAmountOfTanInStoredManure,
                 adjustedAmmoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
-            dailyEmissions.AmmoniaEmissionsFromStorageSystem = CalculateAmmoniaEmissionsFromStoredManure(
-                ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
+                amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
         }

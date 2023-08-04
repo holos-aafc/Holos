@@ -77,7 +77,7 @@ namespace H.Core.Services.Animals
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            var adjustedAmountOfTanFlowingIntoStorage = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
+            var adjustedAmountOfTanFlowingIntoStorageEachDay = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
                 tanEnteringStorageSystem: dailyEmissions.TanEnteringStorageSystem,
                 fractionOfTanImmobilizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
                 fractionOfTanNitrifiedDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
@@ -109,19 +109,19 @@ namespace H.Core.Services.Animals
                 ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
 
             dailyEmissions.AmmoniaLostFromStorage = base.CalculateAmmoniaLossFromStoredManure(
-                adjustedAmountOfTanFlowingIntoStorage,
+                adjustedAmountOfTanFlowingIntoStorageEachDay,
                 dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
-            dailyEmissions.AmmoniaEmissionsFromStorageSystem = CalculateAmmoniaEmissionsFromStoredManure(
-                ammoniaNitrogenLossFromStoredManure: dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
+                amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
-            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
-
-            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(adjustedAmountOfTanFlowingIntoStorage, dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(adjustedAmountOfTanFlowingIntoStorageEachDay, dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
                 tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
                 flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManure);
+
+            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
             /*
              * Volatilization
@@ -215,13 +215,13 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-9
+        /// Equation 4.3.2-8
         /// </summary>
         public double CalculateAdjustedAmountOfTANEnteringStorage(
-            double adjustedAmountOfTanFlowingIntoStorage,
+            double amountOfTANFlowingIntoStorageEachDay,
             double adjustedAmmoniaLossFromStorage)
         {
-            return adjustedAmountOfTanFlowingIntoStorage - adjustedAmmoniaLossFromStorage;
+            return amountOfTANFlowingIntoStorageEachDay - adjustedAmmoniaLossFromStorage;
         }
     }
 }
