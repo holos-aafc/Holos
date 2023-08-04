@@ -839,9 +839,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-7
-        /// Equation 4.3.1-12
-        ///
         /// (kg NH3-N (kg TAN)^-1)
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForHousing

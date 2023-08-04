@@ -20,6 +20,8 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.YearlyEntericMethaneRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
             base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);
             base.Keys.Add(Properties.Resources.VolatilizationFraction, null);
+
+            // Add manure excretion rate, fraction of C in manure
         }
 
         #endregion

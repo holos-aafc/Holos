@@ -77,11 +77,11 @@ namespace H.Core.Services.Animals
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            var adjustedAmountOfTanFlowingIntoStorage = CalculateAdjustedAmountOfTanFlowingIntoStorage(
+            var adjustedAmountOfTanFlowingIntoStorage = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
                 tanEnteringStorageSystem: dailyEmissions.TanEnteringStorageSystem,
-                fractionOfTanImmoblizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
+                fractionOfTanImmobilizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
                 fractionOfTanNitrifiedDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
-                nitrogenExretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
+                nitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 

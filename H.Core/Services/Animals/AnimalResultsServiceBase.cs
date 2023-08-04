@@ -1248,7 +1248,7 @@ namespace H.Core.Services.Animals
             double nitrogenExcretionRate,
             double tanExcretionRate)
         {
-            return nitrogenExcretionRate * (1 - tanExcretionRate);
+            return nitrogenExcretionRate - tanExcretionRate;
         }
 
         /// <summary>
@@ -1380,7 +1380,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-13
+        /// Equation 4.3.1-12
         ///
         /// For naturally ventilated enclosures (barn) - assumption is temperature is 2 degrees higher. Dairy enclosed housing types
         /// are climate controlled and so do not use this equation
@@ -1393,11 +1393,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-10
-        /// Equation 4.3.1-15
-        /// Equation 4.3.3-5
-        ///
-        /// Method is used for multiple equation numbers since only the parameter values differs between the equations
+        /// Equation 4.3.1-14
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical Nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="adjustedEmissionFactor">Adjusted ammonia emission factor</param>
@@ -1410,11 +1406,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-11
-        /// Equation 4.3.1-16
-        /// Equation 4.3.3-6
-        ///
-        /// Method is used for multiple equation numbers since only the parameter values differs between the equations
+        /// Equation 4.3.1-15
         /// </summary>
         /// <param name="emissionRate">Ammonia nitrogen emission rate from housing of animals (kg NH3 head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -1442,10 +1434,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-9
-        /// Equation 4.3.1-14
-        /// 
-        /// Method is used for both equation numbers since only the parameter values differs between the two equations
+        /// Equation 4.3.1-13
         /// </summary>
         /// <param name="emissionFactor">Default ammonia emission factor</param>
         /// <param name="temperatureAdjustment">Ambient temperature-based adjustments used to correct default NH3 emission factor (Table 17)</param>
@@ -1485,24 +1474,24 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.2-2
         /// </summary>
-        /// <param name="tanEnteringStorageSystem">Adjusted amount of TAN in stored manure (kg TAN)</param>
-        /// <param name="fractionOfTanImmoblizedToOrganicNitrogen">Fraction of TAN that is immobilized to organic N during manure storage, dimensionless</param>
+        /// <param name="tanEnteringStorageSystem">Amount of TAN entering the storage system each day (kg TAN day^-1)</param>
+        /// <param name="fractionOfTanImmobilizedToOrganicNitrogen">Fraction of TAN that is immobilized to organic N during manure storage, dimensionless</param>
         /// <param name="fractionOfTanNitrifiedDuringManureStorage">Fraction of TAN that is nitrified during storage</param>
-        /// <param name="nitrogenExretedThroughFeces">Nitrogen excreted through feces (kg N)</param>
+        /// <param name="nitrogenExcretedThroughFeces">Nitrogen excreted through feces (kg N)</param>
         /// <param name="fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage">Fraction of organic N that is mineralized as TAN during manure storage, dimensionless </param>
         /// <param name="beddingNitrogen">Bedding nitrogen (kg N)</param>
         /// <returns>Adjusted amount of TAN in stored manure (kg TAN day^-1)</returns>
-        public double CalculateAdjustedAmountOfTanFlowingIntoStorage(
+        public double CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
             double tanEnteringStorageSystem,
-            double fractionOfTanImmoblizedToOrganicNitrogen,
+            double fractionOfTanImmobilizedToOrganicNitrogen,
             double fractionOfTanNitrifiedDuringManureStorage,
-            double nitrogenExretedThroughFeces,
+            double nitrogenExcretedThroughFeces,
             double fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage,
             double beddingNitrogen)
         {
-            return (tanEnteringStorageSystem * (1 - fractionOfTanImmoblizedToOrganicNitrogen) *
+            return (tanEnteringStorageSystem * (1 - fractionOfTanImmobilizedToOrganicNitrogen) *
                     (1 - fractionOfTanNitrifiedDuringManureStorage)) +
-                   ((nitrogenExretedThroughFeces + beddingNitrogen) *
+                   ((nitrogenExcretedThroughFeces + beddingNitrogen) *
                     fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage);
         }
 
@@ -2489,11 +2478,11 @@ namespace H.Core.Services.Animals
         public void CalculateAmmoniaInHousing(
             GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod,
-            double emissionFactorForHousing)
+            double adjustedEmissionFactorForHousing)
         {
             dailyEmissions.AmmoniaEmissionRateFromHousing = CalculateAmmoniaEmissionRateFromHousing(
                 tanExcretionRate: dailyEmissions.TanExcretionRate,
-                adjustedEmissionFactor: emissionFactorForHousing);
+                adjustedEmissionFactor: adjustedEmissionFactorForHousing);
 
             dailyEmissions.AmmoniaConcentrationInHousing = CalculateAmmoniaConcentrationInHousing(
                 emissionRate: dailyEmissions.AmmoniaEmissionRateFromHousing,
