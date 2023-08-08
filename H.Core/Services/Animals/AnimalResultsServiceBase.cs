@@ -1747,9 +1747,9 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.5.2-6
         /// </summary>
-        /// <param name="tanAvailableForLandApplication">Total ammonical nitrogen (TAN)/inorganic nitrogen in stored beef manure from different housing and storage systems (kg TAN)</param>
-        /// <param name="organicNitrogenAvailableForLandApplication">Total organic nitrogen in stored beef manure from different housing and storage systems (kg N)</param>
-        /// <returns>Total available manure nitrogen in stored manure (kg N year^-1)</returns>
+        /// <param name="tanAvailableForLandApplication">Total ammonical nitrogen (TAN)/inorganic nitrogen in stored beef manure from different housing and storage systems (kg TAN day^-1)</param>
+        /// <param name="organicNitrogenAvailableForLandApplication">Total organic nitrogen in stored beef manure from different housing and storage systems (kg N day^-1)</param>
+        /// <returns>Total available manure nitrogen in stored manure (kg N day^-1)</returns>
         public double CalculateTotalAvailableManureNitrogenInStoredManure(
             double tanAvailableForLandApplication,
             double organicNitrogenAvailableForLandApplication)

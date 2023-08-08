@@ -254,7 +254,6 @@ namespace H.Core.Services.Animals
                 totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
                 amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
             {
                 dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
@@ -291,11 +290,13 @@ namespace H.Core.Services.Animals
             // Equation 4.5.2-7
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = dailyEmissions.TanEnteringStorageSystem - dailyEmissions.AmmoniaLostFromStorage;
 
-            // Equation 4.5.2-15
-            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay =
-                (dailyEmissions.AmountOfNitrogenExcreted + dailyEmissions.AmountOfNitrogenAddedFromBedding)
-                - (dailyEmissions.ManureDirectN2ONEmission + dailyEmissions.AmmoniaConcentrationInHousing +
-                   dailyEmissions.AmmoniaLostFromStorage + dailyEmissions.ManureN2ONLeachingEmission);
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = CalculateAccumulatedNitrogenAvailableForLandApplicationOnDay(
+                amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
+                amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                directManureN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
+                ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing,
+                ammoniaLostFromStorage: dailyEmissions.AmmoniaLostFromStorage,
+                manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission);
 
             // Equation 4.5.2-9
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
@@ -453,6 +454,22 @@ namespace H.Core.Services.Animals
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Equation 4.5.2-15
+        /// </summary>
+        private double CalculateAccumulatedNitrogenAvailableForLandApplicationOnDay(
+            double amountOfNitrogenExcreted,
+            double amountOfNitrogenFromBedding,
+            double directManureN2ONEmission,
+            double ammoniaConcentrationInHousing,
+            double ammoniaLostFromStorage,
+            double manureN2ONLeachingEmission)
+        {
+            return (amountOfNitrogenExcreted + amountOfNitrogenFromBedding)
+                   - (directManureN2ONEmission + ammoniaConcentrationInHousing +
+                      ammoniaLostFromStorage + manureN2ONLeachingEmission);
         }
 
         /// <summary>

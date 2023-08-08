@@ -1012,9 +1012,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-1
-        ///
-        /// (kg TAN)
+        /// (kg TAN day^-1)
         /// </summary>
         public double AccumulatedTANAvailableForLandApplicationOnDay
         {
@@ -1023,7 +1021,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg N)
+        /// (kg N day^-1)
         /// </summary>
         public double AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay
         {
@@ -1032,7 +1030,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg N)
+        /// (kg N day^-1)
         /// </summary>
         public double AccumulatedNitrogenAvailableForLandApplicationOnDay
         {
