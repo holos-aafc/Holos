@@ -280,12 +280,10 @@ namespace H.Core.Services.Animals
 
             this.CalculateLeachingEmissions(dailyEmissions, managementPeriod);
 
-            // Equation 4.3.6-1
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
                 manureLeachingNitrogenEmission: dailyEmissions.ManureN2ONLeachingEmission);
 
-            // Equation 4.3.7-1
             dailyEmissions.ManureN2ONEmission = base.CalculateManureNitrogenEmission(
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);

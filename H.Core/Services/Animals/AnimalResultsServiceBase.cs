@@ -128,12 +128,12 @@ namespace H.Core.Services.Animals
             return animalGroupEmissionResult;
         }
 
-        private GroupEmissionsByDay GetPreviousDayEmissions(DateTime currentDate, List<GroupEmissionsByDay> allDailyEmissions)
+        public GroupEmissionsByDay GetPreviousDayEmissions(DateTime currentDate, List<GroupEmissionsByDay> allDailyEmissions)
         {
             for (int i = 1; i < allDailyEmissions.Count; i++)
             {
                 var previousDate = currentDate.AddDays(-i);
-                var previousDayEmissions = allDailyEmissions.SingleOrDefault(x => x.DateTime.Date.Equals(previousDate));
+                var previousDayEmissions = allDailyEmissions.OrderBy(x => x.DateTime.Ticks).FirstOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
                 if (previousDayEmissions != null)
                 {
                     return previousDayEmissions;
@@ -1320,7 +1320,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.5-12
+        /// Equation 4.3.5-10
         /// </summary>
         /// <param name="totalAmmoniaLossFromHousingAndStorage">Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</param>
         /// <param name="manureVolatilizationEmissions">Manure volatilization N emissions during the housing and manure storage stages (kg N2O-N day-1)</param>
@@ -1330,17 +1330,6 @@ namespace H.Core.Services.Animals
             double manureVolatilizationEmissions)
         {
             return totalAmmoniaLossFromHousingAndStorage - manureVolatilizationEmissions;
-        }
-
-        /// <summary>
-        /// Equation 4.3.5-13
-        /// </summary>
-        /// <param name="adjustedTotalNitrogenEmissionsFromStorageAndHousing"></param>
-        /// <returns></returns>
-        public double CalculateTotalAdjustedAmmoniaFromHousingAndStorage(
-            double adjustedTotalNitrogenEmissionsFromStorageAndHousing)
-        {
-            return adjustedTotalNitrogenEmissionsFromStorageAndHousing * CoreConstants.ConvertNH3NToNH3;
         }
 
         /// <summary>
@@ -1614,7 +1603,7 @@ namespace H.Core.Services.Animals
         /// Equation 4.3.6-1
         /// Equation 5.4.4-1
         /// </summary>
-        /// <param name="nitrogenExcretionRate">N excretion rate (kg head^-1 day^-1)</param>
+        /// <param name="nitrogenExcretionRate">N excretion rate (kg N2O-N head^-1 day^-1)</param>
         /// <param name="leachingFraction">Leaching fraction</param>
         /// <param name="emissionFactorForLeaching">Emission factor for leaching [kg N₂O-N (kg N)⁻¹]</param>
         /// <param name="amountOfNitrogenAddedFromBedding"></param>
@@ -1634,7 +1623,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="leachingNitrogenEmissionRate">Manure leaching N emission rate (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
-        /// <returns>Manure leaching N emission (kg N2O-N)</returns>
+        /// <returns>Manure leaching N emission (kg N2O-N day^-1)</returns>
         public double CalculateManureLeachingNitrogenEmission(double leachingNitrogenEmissionRate,
             double numberOfAnimals)
         {
@@ -1673,8 +1662,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.7.1
-        /// Equation 5.4.6-1
+        /// Equation 4.3.8.1
         /// </summary>
         /// <param name="manureDirectNitrogenEmission">Manure direct N emission (kg N₂O-N)</param>
         /// <param name="manureIndirectNitrogenEmission">Manure indirect N emission (kg N₂O-N)</param>
@@ -2276,8 +2264,8 @@ namespace H.Core.Services.Animals
                 ammoniaFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                 ammoniaVolatilizedDuringHousing: volatilizationEmissionsFromHousing);
 
-            var result = CalculateAmmoniaEmissionsFromHousing(
-                ammoniaFromHousingAdjustment: ammoniaHousingAdjustment);
+            var result = ConvertNH3NToNH3(
+                amountOfNH3N: ammoniaHousingAdjustment);
 
             return result;
         }
@@ -2331,17 +2319,6 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.5-7
         /// </summary>
-        /// <param name="ammoniaFromHousingAdjustment">	Adjusted daily NH3 emissions from beef and dairy cattle and broiler, layer and turkey manure during the housing stage (kg NH3)</param>
-        /// <returns>Adjusted daily NH3-N emissions from housing (kg NH3-N day-1)</returns>
-        public double CalculateAmmoniaEmissionsFromHousing(
-            double ammoniaFromHousingAdjustment)
-        {
-            return ammoniaFromHousingAdjustment * CoreConstants.ConvertNH3NToNH3;
-        }
-
-        /// <summary>
-        /// Equation 4.3.5-8
-        /// </summary>
         /// <param name="dailyAmmoniaEmissionsFromStorage">Daily NH3-N emissions during storage of manure (kg NH3-N day^-1)</param>
         /// <param name="amountOfNitrogenExcreted">Total amount of N excreted by beef or dairy cattle or broilers, layers or turkeys (kg N day^-1)</param>
         /// <param name="amountOfNitrogenFromBedding">Total amount of N added from bedding materials (kg N day^-1)</param>
@@ -2355,7 +2332,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.5-9
+        /// Equation 4.3.5-8
         /// </summary>
         /// <param name="amountOfNitrogenExcreted">Total amount of N excreted by beef or dairy cattle or broilers, layers or turkeys (kg N day^-1)</param>
         /// <param name="amountOfNitrogenFromBedding">Total amount of N added from bedding materials (kg N day^-1)</param>
@@ -2373,7 +2350,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.5-10
+        /// Equation 4.3.5-9
         /// </summary>
         /// <param name="ammoniaFromStorage">Daily NH3-N emissions during housing of beef cattle (confined-no barn (feedlot), barn), dairy cattle (tie-stall barns, free-stall barns, milking parlours, yards/exercise lots and pasture), and broilers, layers and turkeys (kg NH3-N day^-1)</param>
         /// <param name="ammoniaVolatilizedDuringStorage">Manure volatilization N emissions during the housing stage (kg N2O-N day^-1)</param>
@@ -2383,17 +2360,6 @@ namespace H.Core.Services.Animals
             double ammoniaVolatilizedDuringStorage)
         {
             return ammoniaFromStorage - ammoniaVolatilizedDuringStorage;
-        }
-
-        /// <summary>
-        /// Equation 4.3.5-11
-        /// </summary>
-        /// <param name="ammoniaFromStorageAdjustment">	Adjusted daily NH3 emissions from beef and dairy cattle and broiler, layer and turkey manure during the housing stage (kg NH3)</param>
-        /// <returns>Adjusted daily NH3-N emissions from housing (kg NH3-N day-1)</returns>
-        public double CalculateAmmoniaEmissionsFromStorage(
-            double ammoniaFromStorageAdjustment)
-        {
-            return ammoniaFromStorageAdjustment * CoreConstants.ConvertNH3NToNH3;
         }
 
         #endregion
@@ -2462,10 +2428,10 @@ namespace H.Core.Services.Animals
                 ammoniaFromStorage: dailyEmissions.AmmoniaLostFromStorage,
                 ammoniaVolatilizedDuringStorage: ammoniaLossFromStorage);
 
-            var totalAdjustedAmmoniaLossesFromStorage = CalculateAmmoniaEmissionsFromStorage(
-                ammoniaFromStorageAdjustment: adjustedAmmoniaLossFromStorage);
+            var totalAdjustedAmmoniaLossesFromStorage = this.ConvertNH3NToNH3(
+                amountOfNH3N: adjustedAmmoniaLossFromStorage);
 
-            return totalAdjustedAmmoniaLossesFromStorage;
+            return adjustedAmmoniaLossFromStorage;
         }
 
         /// <summary>
@@ -2529,8 +2495,8 @@ namespace H.Core.Services.Animals
                 totalAmmoniaLossFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
                 manureVolatilizationEmissions: dailyEmissions.ManureVolatilizationN2ONEmission);
 
-            dailyEmissions.AdjustedAmmoniaEmissionsFromHousingAndStorage = this.CalculateTotalAdjustedAmmoniaFromHousingAndStorage(
-                adjustedTotalNitrogenEmissionsFromStorageAndHousing: dailyEmissions.AdjustedTotalNitrogenEmissionsFromHousingAndStorage);
+            dailyEmissions.AdjustedAmmoniaEmissionsFromHousingAndStorage = this.ConvertNH3NToNH3(
+                amountOfNH3N: dailyEmissions.AdjustedTotalNitrogenEmissionsFromHousingAndStorage);
 
             /*
              * Leaching

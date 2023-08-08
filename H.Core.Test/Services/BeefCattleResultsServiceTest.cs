@@ -553,6 +553,31 @@ namespace H.Core.Test.Services
 
         #endregion
 
+        #region GetPreviousDayEmissions Tests
+        
+        [TestMethod]
+        public void GetPreviousDayEmissions()
+        {
+            var currentDate = DateTime.Now;
+            var previousDate = DateTime.Now.AddDays(-1);
+
+            var day1Emissions = new GroupEmissionsByDay() { DateTime = previousDate };
+            var day2Emissions = new GroupEmissionsByDay() { DateTime = previousDate.AddSeconds(-20) };
+            var day3Emissions = new GroupEmissionsByDay() { DateTime = currentDate };
+
+            var day1Ticks = day1Emissions.DateTime.Ticks;
+            var day2Ticks = day2Emissions.DateTime.Ticks;
+
+            var list = new List<GroupEmissionsByDay>() { day1Emissions, day2Emissions, day3Emissions };
+
+            var result = _resultsService.GetPreviousDayEmissions(currentDate, list);
+
+            Assert.AreEqual(result.DateTime.Ticks, day2Ticks);
+
+        } 
+
+        #endregion
+
         #endregion
     }
 }

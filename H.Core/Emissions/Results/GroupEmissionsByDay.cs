@@ -1003,8 +1003,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.7-1
-        ///
         /// (kg N2O-N)
         /// </summary>
         public double ManureN2ONEmission
@@ -1704,12 +1702,18 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _ammoniaEmissionRateFromHousingAndStorage, value);
         }
 
+        /// <summary>
+        /// (kg NH3-N)
+        /// </summary>
         public double AdjustedTotalNitrogenEmissionsFromHousingAndStorage
         {
             get => _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
             set => SetProperty(ref _adjustedTotalNitrogenEmissionsFromHousingAndStorage, value);
         }
 
+        /// <summary>
+        /// (kg NH3)
+        /// </summary>
         public double AdjustedAmmoniaEmissionsFromHousingAndStorage
         {
             get => _adjustedAmmoniaEmissionsFromHousingAndStorage;

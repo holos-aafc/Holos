@@ -315,7 +315,6 @@ namespace H.Core.Services.Animals
 
             base.CalculateIndirectEmissionsFromHousingAndStorage(dailyEmissions, managementPeriod);
 
-            // Equation 4.3.7-1
             dailyEmissions.ManureN2ONEmission = base.CalculateManureNitrogenEmission(
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
