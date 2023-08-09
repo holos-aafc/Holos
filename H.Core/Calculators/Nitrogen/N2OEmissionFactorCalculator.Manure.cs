@@ -74,8 +74,8 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             double weightedEmissionFactor)
         {
-            // Get all fields that exist in the same year
-            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year);
+            // Get all fields that exist in the same year but (excluding native rangeland since manure is not spread on those fields)
+            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year).Where(x => x.IsNativeGrassland == false);
 
             // This is the total amount of N from all animals that is available for land application
             var totalNitrogenAvailableForLandApplication = animalComponentEmissionsResults.TotalNitrogenAvailableForLandApplication();
