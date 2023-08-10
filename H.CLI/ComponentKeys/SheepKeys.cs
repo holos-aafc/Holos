@@ -56,7 +56,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.VolatilizationFraction, null);
             base.Keys.Add(Properties.Resources.EmissionFactorLeaching, null);
             base.Keys.Add(Properties.Resources.FractionLeaching, null);
-            base.Keys.Add(Properties.Resources.AshContent, null);
+            base.Keys.Add(Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
         } 
 

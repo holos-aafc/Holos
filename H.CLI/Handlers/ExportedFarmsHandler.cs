@@ -179,12 +179,10 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingDairyCattleInputFiles);
 
                 var pathToDairyCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultDairyInputFolder;
-                var dairyCattleKeys = new DairyCattleKeys();
                 foreach (var dairyComponent in farm.DairyComponents)
                 {
                     var createdInputFile = _dairyConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToDairyCattleComponents,
-                        componentKeys: dairyCattleKeys.Keys,
                         component: dairyComponent,
                         writeToPath: true);
 

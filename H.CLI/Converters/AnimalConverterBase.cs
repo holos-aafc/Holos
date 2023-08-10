@@ -17,7 +17,9 @@ namespace H.CLI.Converters
     public abstract class AnimalConverterBase
     {
         #region Fields
-        
+
+        protected const string DoubleFormat = "N2";
+
         protected readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
 
         #endregion
@@ -92,8 +94,12 @@ namespace H.CLI.Converters
                 WoolProduction = inputRow.WoolProduction,
                 EnergyRequiredForWool = inputRow.EnergyRequiredToProduceWool,
                 EnergyRequiredForMilk = inputRow.EnergyRequiredToProduceMilk,
+                GainCoefficient = inputRow.GainCoefficient,
                 GainCoefficientA = inputRow.GainCoefficientA,
                 GainCoefficientB = inputRow.GainCoefficientB,
+                MilkProduction = inputRow.MilkProduction,
+                MilkFatContent = inputRow.MilkFatContent,
+                MilkProteinContentAsPercentage = inputRow.MilkProtein,
             };
 
             return managementPeriod;

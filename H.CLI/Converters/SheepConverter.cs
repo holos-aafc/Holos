@@ -40,8 +40,6 @@ namespace H.CLI.Converters
 
         protected override void PopulateRowData(AnimalComponentBase component, AnimalGroup animalGroup, ManagementPeriod managementPeriod, List<string> row)
         {
-            const string doubleFormat = "N2";
-
             row.Add(component.Name);
             row.Add(component.GetType().ToString());
             row.Add(animalGroup.Name);
@@ -53,39 +51,39 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.NumberOfAnimals.ToString());
 
             row.Add(managementPeriod.NumberOfYoungAnimals.ToString());
-            row.Add(managementPeriod.StartWeight.ToString(doubleFormat));
-            row.Add(managementPeriod.EndWeight.ToString(doubleFormat));
-            row.Add(managementPeriod.PeriodDailyGain.ToString(doubleFormat));
-            row.Add(managementPeriod.EnergyRequiredForWool.ToString(doubleFormat));
-            row.Add(managementPeriod.WoolProduction.ToString(doubleFormat));
-            row.Add(managementPeriod.EnergyRequiredForMilk.ToString(doubleFormat));
+            row.Add(managementPeriod.StartWeight.ToString(DoubleFormat));
+            row.Add(managementPeriod.EndWeight.ToString(DoubleFormat));
+            row.Add(managementPeriod.PeriodDailyGain.ToString(DoubleFormat));
+            row.Add(managementPeriod.EnergyRequiredForWool.ToString(DoubleFormat));
+            row.Add(managementPeriod.WoolProduction.ToString(DoubleFormat));
+            row.Add(managementPeriod.EnergyRequiredForMilk.ToString(DoubleFormat));
 
             row.Add(managementPeriod.DietAdditive.ToString());
-            row.Add(managementPeriod.SelectedDiet.MethaneConversionFactor.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.MethaneConversionFactorAdjustment.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.Forage.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.Starch.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.Fat.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.MetabolizableEnergy.ToString(doubleFormat));
-            row.Add(managementPeriod.SelectedDiet.Ndf.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.MethaneConversionFactor.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.MethaneConversionFactorAdjustment.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Forage.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Starch.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Fat.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.MetabolizableEnergy.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ndf.ToString(DoubleFormat));
 
-            row.Add(managementPeriod.GainCoefficientA.ToString(doubleFormat));
-            row.Add(managementPeriod.GainCoefficientB.ToString(doubleFormat));
+            row.Add(managementPeriod.GainCoefficientA.ToString(DoubleFormat));
+            row.Add(managementPeriod.GainCoefficientB.ToString(DoubleFormat));
 
-            row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(doubleFormat));
-            row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(doubleFormat));
+            row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
 
-            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.EmissionFactorLeaching.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(doubleFormat));
-            row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorLeaching.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(DoubleFormat));
         }
 
         public override AnimalKeyBase GetHeaders()
