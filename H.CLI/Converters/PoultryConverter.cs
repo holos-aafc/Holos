@@ -29,9 +29,9 @@ namespace H.CLI.Converters
 
         #region Public Methods
 
-        public List<ComponentBase> ConvertParsedComponent(List<List<IComponentTemporaryInput>> poultryInputFileList, Farm farm)
+        public List<ComponentBase> ConvertParsedComponent(List<List<IComponentTemporaryInput>> fileList, Farm farm)
         {
-            foreach (var inputFile in poultryInputFileList)
+            foreach (var inputFile in fileList)
             {
                 var component = this.BuildComponent<PoultryTemporaryInput>(inputFile);
 

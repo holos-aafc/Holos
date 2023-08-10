@@ -2131,6 +2131,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number Of Young Animals.
+        /// </summary>
+        public static string NumberOfYoungAnimals {
+            get {
+                return ResourceManager.GetString("NumberOfYoungAnimals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OutputDirectory = C:\\Holos\\HolosCommandLineInterface\\Outputs.
         /// </summary>
         public static string OutputDirectory {

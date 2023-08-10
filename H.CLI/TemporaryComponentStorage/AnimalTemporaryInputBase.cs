@@ -14,6 +14,7 @@ namespace H.CLI.TemporaryComponentStorage
         
         public string GroupName { get; set; }
         public int NumberOfAnimals { get; set; }
+        public int NumberOfYoungAnimals { get; set; }
         public string ManagementPeriodName { get; set; }
         public DateTime ManagementPeriodStartDate { get; set; }
         public DateTime ManagementPeriodEndDate { get; set; }

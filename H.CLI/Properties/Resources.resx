@@ -1335,4 +1335,7 @@ Would you like to continue using this directory?</value>
   <data name="VolatileSolids" xml:space="preserve">
     <value>Volatile Solids</value>
   </data>
+  <data name="NumberOfYoungAnimals" xml:space="preserve">
+    <value>Number Of Young Animals</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.CLI.ComponentKeys;
+using H.Core.Providers.Feed;
 
 namespace H.CLI.Converters
 {
@@ -83,9 +84,31 @@ namespace H.CLI.Converters
                 NumberOfDays = inputRow.ManagementPeriodDays,
                 Duration = TimeSpan.FromDays(inputRow.ManagementPeriodDays),
                 NumberOfAnimals = inputRow.NumberOfAnimals,
+                NumberOfYoungAnimals = inputRow.NumberOfYoungAnimals,
+                StartWeight = inputRow.StartWeight,
+                EndWeight = inputRow.EndWeight,
+                PeriodDailyGain = inputRow.AverageDailyGain,
+                DietAdditive = inputRow.DietAdditiveType,
+                WoolProduction = inputRow.WoolProduction,
+                EnergyRequiredForWool = inputRow.EnergyRequiredToProduceWool,
+                EnergyRequiredForMilk = inputRow.EnergyRequiredToProduceMilk,
+                GainCoefficientA = inputRow.GainCoefficientA,
+                GainCoefficientB = inputRow.GainCoefficientB,
             };
 
             return managementPeriod;
+        }
+
+        protected virtual HousingDetails BuildHousingDetails<T>(T inputRow) where T : AnimalTemporaryInputBase
+        {
+            var housingDetails = new HousingDetails()
+            {
+                HousingType = inputRow.HousingType,
+                ActivityCeofficientOfFeedingSituation = inputRow.ActivityCoefficient,
+                BaselineMaintenanceCoefficient = inputRow.MaintenanceCoefficient,
+            };
+
+            return housingDetails;
         }
 
         protected virtual ManureDetails BuildManureDetails<T>(T inputRow) where T : AnimalTemporaryInputBase
@@ -99,11 +122,34 @@ namespace H.CLI.Converters
                 NitrogenExretionRate = inputRow.YearlyNitrogenExcretionRate,
                 DailyManureMethaneEmissionRate = inputRow.DailyManureMethaneEmissionRate,
                 MethaneProducingCapacityOfManure = inputRow.MethaneProducingCapacityOfManure,
-                MethaneConversionFactor = inputRow.MethaneConversionFactor,
+                MethaneConversionFactor = inputRow.MethaneConversionFactorOfManure,
+                EmissionFactorVolatilization = inputRow.EmissionFactorVolatilization,
+                EmissionFactorLeaching = inputRow.EmissionFactorLeaching,
+                LeachingFraction = inputRow.FractionLeaching,
+                AshContentOfManure = inputRow.AshContent,
                 VolatileSolids = inputRow.VolatileSolids,
             };
 
             return manureDetails;
+        }
+
+        protected virtual Diet BuildDiet<T>(T inputRow) where  T : AnimalTemporaryInputBase
+        {
+            var diet = new Diet()
+            {
+                CrudeProtein = inputRow.CrudeProtein,
+                Forage = inputRow.Forage,
+                TotalDigestibleNutrient = inputRow.TDN,
+                Starch = inputRow.Starch,
+                Fat = inputRow.Fat,
+                DailyDryMatterFeedIntakeOfFeed = inputRow.FeedIntake,
+                MetabolizableEnergy = inputRow.ME,
+                Ndf = inputRow.NDF,
+                MethaneConversionFactor = inputRow.MethaneConversionFactorOfDiet,
+                MethaneConversionFactorAdjustment = inputRow.MethaneConversionFactorAdjusted,
+            };
+
+            return diet;
         }
 
         protected virtual AnimalGroup BuildAnimalGroup<T>(IGrouping<string, T> inputRows) where T : AnimalTemporaryInputBase
@@ -117,6 +163,8 @@ namespace H.CLI.Converters
 
                 var managementPeriod = this.BuildManagementPeriod(animalGroup, inputRow);
                 managementPeriod.ManureDetails = this.BuildManureDetails(inputRow);
+                managementPeriod.SelectedDiet = this.BuildDiet(inputRow);
+                managementPeriod.HousingDetails = this.BuildHousingDetails(inputRow);
 
                 animalGroup.ManagementPeriods.Add(managementPeriod);
             }

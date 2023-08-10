@@ -59,7 +59,7 @@ namespace H.CLI.Handlers
                 return new List<Farm>();
             }
 
-            var farms = this.GetExportedFarmsFromUserSpeciedLocation(pathToExportedFarms);
+            var farms = this.GetExportedFarmsFromUserSpecifiedLocation(pathToExportedFarms);
 
             var inputFilesForAllFarms = new List<string>();
             foreach (var farm in farms)
@@ -227,12 +227,10 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingSheepInputFiles);
 
                 var pathToSheepComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultSheepInputFolder;
-                var sheepKeys = new SheepKeys();
                 foreach (var sheepComponent in farm.SheepComponents)
                 {
                     var createdInputFile = _sheepConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToSheepComponents,
-                        componentKeys: sheepKeys.Keys,
                         component: sheepComponent,
                         writeToPath: true);
 
@@ -311,7 +309,7 @@ namespace H.CLI.Handlers
             }
         }
 
-        public List<Farm> GetExportedFarmsFromUserSpeciedLocation(string path)
+        public List<Farm> GetExportedFarmsFromUserSpecifiedLocation(string path)
         {
             Console.WriteLine();
             Console.WriteLine(Properties.Resources.LabelGettingExportedFarms);

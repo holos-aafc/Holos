@@ -807,6 +807,9 @@
   <data name="NumberOfTrees" xml:space="preserve">
     <value># arbres</value>
   </data>
+  <data name="NumberOfYoungAnimals" xml:space="preserve">
+    <value>Number Of Young Animals</value>
+  </data>
   <data name="OutputDirectory" xml:space="preserve">
     <value>répertoire de sortie = C:\\Holos\\InterfaceDeLigneDeCommandeHolos\\Sorties</value>
   </data>
