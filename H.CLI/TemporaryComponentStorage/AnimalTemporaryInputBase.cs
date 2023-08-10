@@ -60,7 +60,6 @@ namespace H.CLI.TemporaryComponentStorage
         public double FractionLeaching { get; set; }
         public double VolatileSolidAdjusted { get; set; }
         public double NitrogenExcretionAdjusted { get; set; }
-        public double CA { get; set; }
         public double CFTemp { get; set; }
         public double VolatileSolidsExcretion { get; set; }
         public double StartWeight { get; set; }

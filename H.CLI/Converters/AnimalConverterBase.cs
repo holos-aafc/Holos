@@ -77,7 +77,7 @@ namespace H.CLI.Converters
         {
             var managementPeriod = new ManagementPeriod
             {
-                Name = inputRow.Name,
+                Name = inputRow.ManagementPeriodName,
                 AnimalGroupGuid = animalGroup.Guid,
                 AnimalType = animalGroup.GroupType,
                 Start = inputRow.ManagementPeriodStartDate,
@@ -127,6 +127,7 @@ namespace H.CLI.Converters
                 EmissionFactorLeaching = inputRow.EmissionFactorLeaching,
                 LeachingFraction = inputRow.FractionLeaching,
                 AshContentOfManure = inputRow.AshContent,
+                VolatileSolidExcretion = inputRow.VolatileSolidsExcretion,
                 VolatileSolids = inputRow.VolatileSolids,
             };
 
@@ -147,6 +148,8 @@ namespace H.CLI.Converters
                 Ndf = inputRow.NDF,
                 MethaneConversionFactor = inputRow.MethaneConversionFactorOfDiet,
                 MethaneConversionFactorAdjustment = inputRow.MethaneConversionFactorAdjusted,
+                NitrogenExcretionAdjustFactorForDiet = inputRow.NitrogenExcretionAdjusted,
+                VolatileSolidsAdjustmentFactorForDiet = inputRow.VolatileSolidAdjusted,
             };
 
             return diet;

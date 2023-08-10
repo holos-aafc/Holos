@@ -203,12 +203,10 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingSwineInputFiles);
 
                 var pathToSwineComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultSwineInputFolder;
-                var swineKeys = new SwineKeys();
                 foreach (var swineComponent in farm.SwineComponents)
                 {
                     var createdInputFile = _swineConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToSwineComponents,
-                        componentKeys: swineKeys.Keys,
                         component: swineComponent,
                         writeToPath: true);
 

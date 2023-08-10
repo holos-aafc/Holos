@@ -14,14 +14,13 @@ using H.Core.Models.Animals.Swine;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
 using Diet = H.Core.Providers.Feed.Diet;
+using H.CLI.ComponentKeys;
 
 namespace H.CLI.Converters
 {
-    public class SwineConverter : IConverter
+    public class SwineConverter : AnimalConverterBase, IConverter
     {
         #region Properties
-
-        private readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
 
         public List<ComponentBase> SwineComponents { get; set; } = new List<ComponentBase>();
 
@@ -29,173 +28,63 @@ namespace H.CLI.Converters
 
         #region Public Methods
 
-        public List<ComponentBase> ConvertParsedComponent(List<List<IComponentTemporaryInput>> swineInputFileList, Farm farm)
+        public List<ComponentBase> ConvertParsedComponent(List<List<IComponentTemporaryInput>> fileList, Farm farm)
         {
-            // Loop over all of the swine component input files
-            foreach (var inputFile in swineInputFileList)
+            foreach (var inputFile in fileList)
             {
-                var animalTypeOfFirstGroup = inputFile.First().GroupType;
-                var componentName = inputFile.First().Name;
-                var componentType = inputFile.First().ComponentType.ToString();
-                var component = _componentConverterHandler.GetAnimalComponentFromComponentTypeString(componentType);
+                var component = this.BuildComponent<SwineTemporaryInput>(inputFile);
 
-                component.Guid = Guid.NewGuid();
-                component.Name = componentName;
-                component.IsInitialized = true;
-
-                // Need to group input rows (by animal group name) so that all management periods belonging to an animal group get assigned to that same group
-                var inputRowsGroupedByAnimalGroup = inputFile.Cast<SwineTemporaryInput>().GroupBy(inputRow => inputRow.GroupName);
-                foreach (var inputRowGroup in inputRowsGroupedByAnimalGroup)
-                {
-                    var animalGroup = new AnimalGroup();
-
-                    // Each row is a management period belonging the animal group
-                    foreach (var inputRow in inputRowGroup)
-                    {
-                        animalGroup.Name = inputRow.Name;
-                        animalGroup.GroupType = inputRow.GroupType;
-                        animalGroup.Name = inputRow.GroupName;
-
-                        var diet = new Diet()
-                        {
-                            CrudeProtein = inputRow.CrudeProtein,
-                            Forage = inputRow.Forage,
-                            TotalDigestibleNutrient = inputRow.TDN,
-                            Starch = inputRow.Starch,
-                            Fat = inputRow.Fat,
-                            MetabolizableEnergy = inputRow.ME,
-                            Ndf = inputRow.NDF,
-                            NitrogenExcretionAdjustFactorForDiet = inputRow.NitrogenExcretionAdjusted,
-                            VolatileSolidsAdjustmentFactorForDiet = inputRow.VolatileSolidAdjusted,
-                        };
-
-                        var managementPeriod = new ManagementPeriod()
-                        {
-                            Name = inputRow.ManagementPeriodName,
-                            AnimalGroupGuid = animalGroup.Guid,
-                            AnimalType = inputRow.GroupType,
-                            Start = inputRow.ManagementPeriodStartDate,
-                            Duration = TimeSpan.FromDays(inputRow.ManagementPeriodDays),
-                            NumberOfDays = inputRow.ManagementPeriodDays,
-
-                            NumberOfAnimals = inputRow.NumberOfAnimals,
-                            DietAdditive = inputRow.DietAdditiveType,
-
-                            SelectedDiet = diet,
-
-                            FeedIntakeAmount = inputRow.FeedIntake,
-
-                            HousingDetails = new HousingDetails()
-                            {
-                                HousingType = inputRow.HousingType,
-                                ActivityCeofficientOfFeedingSituation = inputRow.CA,
-                                BaselineMaintenanceCoefficient = inputRow.CFTemp,
-                            },
-
-                            ManureDetails = new ManureDetails()
-                            {
-                                N2ODirectEmissionFactor = inputRow.N2ODirectEmissionFactor,
-                                VolatilizationFraction = inputRow.VolatilizationFraction,
-                                AshContentOfManure = inputRow.AshContent,
-                                MethaneConversionFactor = inputRow.MethaneConversionFactor,
-                                VolatileSolidExcretion = inputRow.VolatileSolidsExcretion,
-                                EmissionFactorLeaching = inputRow.EmissionFactorLeaching,
-                                YearlyEntericMethaneRate = inputRow.YearlyEntericMethaneRate,
-                                MethaneProducingCapacityOfManure = inputRow.MethaneProducingCapacityOfManure,
-                                LeachingFraction = inputRow.FractionLeaching,
-                                EmissionFactorVolatilization = inputRow.EmissionFactorVolatilization,
-                            },
-                        };
-
-                        animalGroup.ManagementPeriods.Add(managementPeriod);
-                    }
-
-                    component.Groups.Add(animalGroup);
-                }
-
-                this.SwineComponents.Add(component);
+                this.Components.Add(component);
             }
-            
-            return SwineComponents;
+
+            return Components;
         }
 
-        /// <summary>
-        /// Creates a CLI input file based on the swine components found in an exported GUI farm file
-        /// </summary>
-        public string SetTemplateCSVFileBasedOnExportedFarm(string path,
-                                                            Dictionary<string, ImperialUnitsOfMeasurement?> componentKeys,
-                                                            ComponentBase component,
-                                                            bool writeToPath = true)
+        protected override void PopulateRowData(AnimalComponentBase component, AnimalGroup animalGroup, ManagementPeriod managementPeriod, List<string> row)
         {
-            var columnSeparator = CLILanguageConstants.Delimiter;
-            var filePath = path + @"\" + component.Name + CLILanguageConstants.DefaultInputFileExtension;
-            var stringBuilder = new StringBuilder();
-            foreach (var keyValuePair in componentKeys)
-            {
-                var convertedKey = keyValuePair.Key.Trim();
-                stringBuilder.Append(convertedKey + columnSeparator);
-            }
+            const string doubleFormat = "N2";
 
-            stringBuilder.Append(Environment.NewLine);
+            row.Add(component.Name);
+            row.Add(component.GetType().ToString());
+            row.Add(animalGroup.Name);
+            row.Add(animalGroup.GroupType.ToString());
 
-            if (component is AnimalComponentBase animalComponent)
-            {
-                var animalGroups = animalComponent.Groups;                
+            row.Add(managementPeriod.Name);
+            row.Add(managementPeriod.Start.ToString("d"));
+            row.Add(managementPeriod.Duration.Days.ToString());
+            row.Add(managementPeriod.NumberOfAnimals.ToString());
 
-                foreach (var animalGroup in animalGroups)
-                {
-                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                    {
-                        stringBuilder.Append(component.Name + columnSeparator);
-                        stringBuilder.Append(animalComponent.GetType() + columnSeparator);
-                        stringBuilder.Append(animalGroup.Name + columnSeparator);
-                        stringBuilder.Append(animalGroup.GroupType + columnSeparator);
+            row.Add(managementPeriod.DietAdditive.ToString());
+            row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Forage.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Starch.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Fat.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.MetabolizableEnergy.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ndf.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.VolatileSolidsAdjustmentFactorForDiet.ToString(doubleFormat));
+            row.Add(managementPeriod.SelectedDiet.NitrogenExcretionAdjustFactorForDiet.ToString(doubleFormat));
 
-                        stringBuilder.Append(managementPeriod.Name + columnSeparator);
-                        stringBuilder.Append(managementPeriod.Start.ToString("d") + columnSeparator);
-                        stringBuilder.Append(managementPeriod.Duration.Days + columnSeparator);
-                        stringBuilder.Append(managementPeriod.NumberOfAnimals + columnSeparator);
-                        stringBuilder.Append(managementPeriod.DietAdditive + columnSeparator);
-                        stringBuilder.Append(managementPeriod.FeedIntakeAmount + columnSeparator);
+            row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(doubleFormat));
+            row.Add(managementPeriod.HousingDetails.MaintenanceCoefficientModifiedByTemperature.ToString(doubleFormat));
 
-                        stringBuilder.Append(managementPeriod.SelectedDiet.CrudeProtein + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.Forage + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.TotalDigestibleNutrient + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.Starch + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.Fat + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.MetabolizableEnergy + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.Ndf + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.VolatileSolidsAdjustmentFactorForDiet + columnSeparator);
-                        stringBuilder.Append(managementPeriod.SelectedDiet.NitrogenExcretionAdjustFactorForDiet + columnSeparator);
+            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorLeaching.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.VolatileSolidExcretion.ToString(doubleFormat));
+            row.Add(managementPeriod.ManureDetails.YearlyEntericMethaneRate.ToString(doubleFormat));
+        }
 
-                        stringBuilder.Append(managementPeriod.HousingDetails.NameOfPastureLocation + columnSeparator);
-                        stringBuilder.Append(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation + columnSeparator);
-                        stringBuilder.Append(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient + columnSeparator);
-
-                        stringBuilder.Append(managementPeriod.ManureDetails.MethaneConversionFactor + columnSeparator);
-                        stringBuilder.Append("0" + columnSeparator); // TODO: Methane conversion factor adjusted (should remove this?)
-                        stringBuilder.Append(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.N2ODirectEmissionFactor + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.EmissionFactorVolatilization + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.VolatilizationFraction + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.EmissionFactorLeaching + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.LeachingFraction + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.AshContentOfManure + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.VolatileSolidExcretion + columnSeparator);
-                        stringBuilder.Append(managementPeriod.ManureDetails.YearlyEntericMethaneRate + columnSeparator);
-
-                        stringBuilder.AppendLine();
-                    }
-                }
-            }
-
-            if (writeToPath)
-            {
-                File.WriteAllText(filePath, stringBuilder.ToString(), Encoding.UTF8);
-            }
-
-            return stringBuilder.ToString();
-        } 
+        public override AnimalKeyBase GetHeaders()
+        {
+            return new SwineKeys();
+        }
 
         #endregion
     }    
