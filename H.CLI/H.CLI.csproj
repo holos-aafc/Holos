@@ -119,6 +119,7 @@
     <Compile Include="ComponentKeys\PoultryKeys.cs" />
     <Compile Include="ComponentKeys\SheepKeys.cs" />
     <Compile Include="ComponentKeys\SwineKeys.cs" />
+    <Compile Include="Converters\AnimalConverterBase.cs" />
     <Compile Include="Converters\BeefConverter.cs" />
     <Compile Include="Converters\DairyConverter.cs" />
     <Compile Include="Converters\OtherLiveStockConverter.cs" />

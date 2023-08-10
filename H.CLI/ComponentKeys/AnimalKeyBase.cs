@@ -17,8 +17,6 @@ namespace H.CLI.ComponentKeys
         protected AnimalKeyBase()
         {
             this.Keys = new Dictionary<string, ImperialUnitsOfMeasurement?>();
-
-            AddCommonKeys(Keys);
         }
 
         #endregion
@@ -33,18 +31,6 @@ namespace H.CLI.ComponentKeys
         #endregion
 
         #region Private Methods
-
-        private static void AddCommonKeys(IDictionary<string, ImperialUnitsOfMeasurement?> keys)
-        {
-            keys.Add( Properties.Resources.Key_Name, null );
-            keys.Add(H.Core.Properties.Resources.ComponentType, null);
-            keys.Add(Properties.Resources.GroupName, null);
-            keys.Add(Properties.Resources.GroupType, null);
-            keys.Add(Properties.Resources.ManagementPeriodName, null);
-            keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
-            keys.Add(Properties.Resources.ManagementPeriodDays, null);
-            keys.Add(Properties.Resources.NumberOfAnimals, null);
-        }
 
         #endregion
     }

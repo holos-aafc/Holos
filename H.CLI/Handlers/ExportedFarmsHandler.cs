@@ -251,12 +251,10 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingPoultryInputFiles);
 
                 var pathToPoultryComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultPoultryInputFolder;
-                var poultryKeys = new PoultryKeys();
                 foreach (var poultryComponent in farm.PoultryComponents)
                 {
                     var createdInputFile = _poultryConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToPoultryComponents,
-                        componentKeys: poultryKeys.Keys,
                         component: poultryComponent,
                         writeToPath: true);
 
@@ -275,12 +273,10 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingOtherAnimalsInputFiles);
 
                 var pathToOtherAnimalComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultOtherLivestockInputFolder;
-                var otherLiveStockKeys = new OtherLiveStockKeys();
                 foreach (var otherLivestockComponent in farm.OtherLivestockComponents)
                 {
                     var createdInputFile = _otherLiveStockConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToOtherAnimalComponents,
-                        componentKeys: otherLiveStockKeys.Keys,
                         component: otherLivestockComponent,
                         writeToPath: true);
 
