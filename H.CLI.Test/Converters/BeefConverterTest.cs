@@ -43,8 +43,8 @@ namespace H.CLI.Test.Converters
                 ManagementPeriodDays = 60,
                 NumberOfAnimals = 60,
           
-                InitialWeight = 20,
-                FinalWeight = 30,
+                StartWeight = 20,
+                EndWeight = 30,
                 ADG = 0.8,
         
                 DietAdditiveType = DietAdditiveType.FourPercentFat,
@@ -81,8 +81,8 @@ namespace H.CLI.Test.Converters
                 ManagementPeriodDays = 60,
                 NumberOfAnimals = 60,
 
-                InitialWeight = 20,
-                FinalWeight = 30,
+                StartWeight = 20,
+                EndWeight = 30,
                 ADG = 0.8,
 
 
@@ -120,8 +120,8 @@ namespace H.CLI.Test.Converters
                 ManagementPeriodDays = 60,
                 NumberOfAnimals = 60,
 
-                InitialWeight = 20,
-                FinalWeight = 30,
+                StartWeight = 20,
+                EndWeight = 30,
                 ADG = 0.8,
 
 

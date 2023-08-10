@@ -25,8 +25,8 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
 
             base.Keys.Add(Properties.Resources.NumberOfYoungAnimals, null);
-            base.Keys.Add(Properties.Resources.InitialWeight, ImperialUnitsOfMeasurement.Pounds);
-            base.Keys.Add(Properties.Resources.FinalWeight, ImperialUnitsOfMeasurement.Pounds);
+            base.Keys.Add(Properties.Resources.StartWeight, ImperialUnitsOfMeasurement.Pounds);
+            base.Keys.Add(Properties.Resources.EndWeight, ImperialUnitsOfMeasurement.Pounds);
             base.Keys.Add(Properties.Resources.AverageDailyGain, ImperialUnitsOfMeasurement.Pounds);
             base.Keys.Add(Properties.Resources.EnergyRequiredToProduceWool, ImperialUnitsOfMeasurement.BritishThermalUnitPerPound);
             base.Keys.Add(Properties.Resources.WoolProduction, ImperialUnitsOfMeasurement.PoundsPerYear);

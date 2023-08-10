@@ -79,8 +79,8 @@ namespace H.CLI.Converters
                             NumberOfDays = inputRow.ManagementPeriodDays,
 
                             NumberOfAnimals = inputRow.NumberOfAnimals,
-                            StartWeight = inputRow.InitialWeight,
-                            EndWeight = inputRow.FinalWeight,
+                            StartWeight = inputRow.StartWeight,
+                            EndWeight = inputRow.EndWeight,
                             PeriodDailyGain = inputRow.ADG,
                             DietAdditive = inputRow.DietAdditiveType,
                             SelectedDiet = diet,
