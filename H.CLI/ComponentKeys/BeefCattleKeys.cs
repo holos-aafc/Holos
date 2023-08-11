@@ -8,60 +8,56 @@ using H.CLI.Interfaces;
 
 namespace H.CLI.ComponentKeys
 {
-    public class BeefCattleKeys : IComponentKeys
+    public class BeefCattleKeys : AnimalKeyBase, IComponentKeys
     {
-        public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>
-        {
-            {Properties.Resources.Key_Name, null},
-            {H.Core.Properties.Resources.ComponentType, null},
-            {Properties.Resources.GroupName, null},
-            {Properties.Resources.GroupType, null},
-            {Properties.Resources.GroupId, null},
-            {Properties.Resources.ManagementPeriodName, null},
-            {Properties.Resources.CowCalfPairingNumber, null},
-            {Properties.Resources.ManagementPeriodStartDate, null},
-            {Properties.Resources.ManagementPeriodDays, null},
-            {Properties.Resources.NumberOfAnimals, null},            
-            {Properties.Resources.InitialWeight, ImperialUnitsOfMeasurement.Pounds},
-            {Properties.Resources.FinalWeight, ImperialUnitsOfMeasurement.Pounds},
-            //Steer Or Heifer ADG
-            {Properties.Resources.ADG,ImperialUnitsOfMeasurement.Pounds},
-            {Properties.Resources.MilkProduction, ImperialUnitsOfMeasurement.PoundsPerDay},
-            {Properties.Resources.MilkFatContent, ImperialUnitsOfMeasurement.Percentage},
-            {Properties.Resources.MilkProtein, ImperialUnitsOfMeasurement.Percentage},
- 
-            {Properties.Resources.DietAdditiveType, null},
-            {Properties.Resources.MethaneConversionFactorOfDiet, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane},
-            {Properties.Resources.MethaneConversionFactorAdjusted, ImperialUnitsOfMeasurement.Percentage},
-            {Properties.Resources.FeedIntake, ImperialUnitsOfMeasurement.PoundPerHeadPerDay},
-            {Properties.Resources.CrudeProtein, ImperialUnitsOfMeasurement.PercentageDryMatter},
-            {Properties.Resources.Forage, ImperialUnitsOfMeasurement.PercentageDryMatter},
-            {Properties.Resources.TDN, ImperialUnitsOfMeasurement.PercentageDryMatter},
-            {Properties.Resources.Starch, ImperialUnitsOfMeasurement.PercentageDryMatter},
-            {Properties.Resources.Fat, ImperialUnitsOfMeasurement.PercentageDryMatter},
-            {Properties.Resources.ME, ImperialUnitsOfMeasurement.BritishThermalUnitPerPound},
-            {Properties.Resources.NDF, ImperialUnitsOfMeasurement.PercentageDryMatter},
+        #region Constructors
 
-            {Properties.Resources.HousingType, null},
-            {Properties.Resources.PastureLocation, null},
-            {Properties.Resources.GainCoefficient, null},
-            {Properties.Resources.ActivityCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound},
-            {Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound},
-           
-            {Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane},
-            {Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN},
-            {Properties.Resources.EmissionFactorVolatilization, null},
-            {Properties.Resources.VolatilizationFraction, null},
-            {Properties.Resources.EmissionFactorLeaching, null},
-            {Properties.Resources.FractionLeaching, null},
-            {Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage},
-            {Properties.Resources.MethaneProducingCapacityOfManure, null},
-        };
-
-        public bool IsHeaderOptional(string s)
+        public BeefCattleKeys() : base()
         {
-            return false;
+            base.Keys.Add(Properties.Resources.Key_Name, null);
+            base.Keys.Add(H.Core.Properties.Resources.ComponentType, null);
+            base.Keys.Add(Properties.Resources.GroupName, null);
+            base.Keys.Add(Properties.Resources.GroupType, null);
+
+            base.Keys.Add(Properties.Resources.ManagementPeriodName, null);
+            base.Keys.Add(Properties.Resources.CowCalfPairingNumber, null);
+            base.Keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
+            base.Keys.Add(Properties.Resources.ManagementPeriodDays, null);
+            base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
+            base.Keys.Add(Properties.Resources.StartWeight, ImperialUnitsOfMeasurement.Pounds);
+            base.Keys.Add(Properties.Resources.EndWeight, ImperialUnitsOfMeasurement.Pounds);
+            base.Keys.Add(Properties.Resources.AverageDailyGain, ImperialUnitsOfMeasurement.Pounds);
+            base.Keys.Add(Properties.Resources.MilkProduction, null);
+            base.Keys.Add(Properties.Resources.MilkFatContent, null);
+            base.Keys.Add(Properties.Resources.MilkProtein, null);
+
+            base.Keys.Add(Properties.Resources.DietAdditiveType, null);
+            base.Keys.Add(Properties.Resources.MethaneConversionFactorOfDiet, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
+            base.Keys.Add(Properties.Resources.MethaneConversionFactorAdjusted, ImperialUnitsOfMeasurement.Percentage);
+            base.Keys.Add(Properties.Resources.FeedIntake, ImperialUnitsOfMeasurement.PoundPerHeadPerDay);
+            base.Keys.Add(Properties.Resources.CrudeProtein, ImperialUnitsOfMeasurement.PoundsPerPound);
+            base.Keys.Add(Properties.Resources.Forage, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.TDN, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.Starch, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.Fat, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.ME, ImperialUnitsOfMeasurement.BritishThermalUnitPerPound);
+            base.Keys.Add(Properties.Resources.NDF, ImperialUnitsOfMeasurement.PercentageDryMatter);
+
+            base.Keys.Add(Properties.Resources.HousingType, null);
+            base.Keys.Add(Properties.Resources.GainCoefficient, null);
+            base.Keys.Add(Properties.Resources.ActivityCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+
+            base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
+            base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);
+            base.Keys.Add(Properties.Resources.EmissionFactorVolatilization, null);
+            base.Keys.Add(Properties.Resources.VolatilizationFraction, null);
+            base.Keys.Add(Properties.Resources.EmissionFactorLeaching, null);
+            base.Keys.Add(Properties.Resources.FractionLeaching, null);
+            base.Keys.Add(Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage);
+            base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
         }
-        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>();
+
+        #endregion
     }
 }

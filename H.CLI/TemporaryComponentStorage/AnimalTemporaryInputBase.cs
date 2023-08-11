@@ -31,7 +31,6 @@ namespace H.CLI.TemporaryComponentStorage
         public double MethaneConversionFactor { get; set; }
         public double VolatileSolids { get; set; }
         public int NumberOfLambs { get; set; }
-        public double ADG { get; set; }
         public double EnergyRequiredToProduceWool { get; set; }
         public double EnergyRequiredToProduceMilk { get; set; }
         public double WoolProduction { get; set; }

@@ -18,7 +18,7 @@ namespace H.CLI.Converters
     {
         #region Fields
 
-        protected const string DoubleFormat = "N2";
+        protected const string DoubleFormat = "F2";
 
         protected readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
 
@@ -169,6 +169,7 @@ namespace H.CLI.Converters
             {
                 animalGroup.Name = inputRow.GroupName;
                 animalGroup.GroupType = inputRow.GroupType;
+                animalGroup.GroupPairingNumber = inputRow.CowCalfPairingNumber;
 
                 var managementPeriod = this.BuildManagementPeriod(animalGroup, inputRow);
                 managementPeriod.ManureDetails = this.BuildManureDetails(inputRow);

@@ -45,7 +45,7 @@ namespace H.CLI.Test.Converters
           
                 StartWeight = 20,
                 EndWeight = 30,
-                ADG = 0.8,
+                AverageDailyGain = 0.8,
         
                 DietAdditiveType = DietAdditiveType.FourPercentFat,
                 MethaneConversionFactorOfDiet = 10,
@@ -83,7 +83,7 @@ namespace H.CLI.Test.Converters
 
                 StartWeight = 20,
                 EndWeight = 30,
-                ADG = 0.8,
+                AverageDailyGain = 0.8,
 
 
                 DietAdditiveType = DietAdditiveType.FourPercentFat,
@@ -122,7 +122,7 @@ namespace H.CLI.Test.Converters
 
                 StartWeight = 20,
                 EndWeight = 30,
-                ADG = 0.8,
+                AverageDailyGain = 0.8,
 
 
                 DietAdditiveType = DietAdditiveType.FourPercentFat,
@@ -179,13 +179,13 @@ namespace H.CLI.Test.Converters
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].Start, new DateTime(1996, 4, 25));
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].NumberOfDays, 60);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].PeriodDailyGain, 0.8);
-            Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].FeedIntakeAmount, 10);
 
 
             //Group 1, Management Period 1, Diet Details
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.CrudeProtein, 10);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.Fat, 10);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.Starch, 10);
+            Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.DailyDryMatterFeedIntakeOfFeed, 10);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.TotalDigestibleNutrient, 10);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.Ndf, 10);
             Assert.AreEqual(castedBeefComponents[0].Groups[0].ManagementPeriods[0].SelectedDiet.Forage, 10);

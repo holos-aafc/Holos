@@ -151,20 +151,14 @@ namespace H.CLI.Handlers
                 Console.WriteLine(Properties.Resources.LabelCreatingBeefCattleInputFiles);
 
                 var pathToBeefCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultBeefInputFolder;
-                var beefCattleKeys = new BeefCattleKeys();
-                var componentNumber = 1;
                 foreach (var beefCattleComponent in farm.BeefCattleComponents)
                 {                    
                     var createdInputFile = _beefConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToBeefCattleComponents,
-                        componentKeys: beefCattleKeys.Keys,
                         component: beefCattleComponent,
-                        componentNumber: componentNumber,
                         writeToPath: true);
 
                     createdFiles.Add(createdInputFile);
-
-                    componentNumber++;
 
                     Console.WriteLine($@"{farm.Name}: {beefCattleComponent.Name}");
                 }
