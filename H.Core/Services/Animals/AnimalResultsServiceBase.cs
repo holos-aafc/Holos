@@ -2517,7 +2517,7 @@ namespace H.Core.Services.Animals
         {
             dailyEmissions.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                beddingNitrogen: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
