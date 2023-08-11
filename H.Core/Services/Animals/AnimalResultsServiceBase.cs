@@ -1368,7 +1368,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-12
+        /// Equation 4.3.1-13
         ///
         /// For naturally ventilated enclosures (barn) - assumption is temperature is 2 degrees higher. Dairy enclosed housing types
         /// are climate controlled and so do not use this equation

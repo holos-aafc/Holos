@@ -57,11 +57,14 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.VolatileSolids.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorLeaching.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(CultureInfo.InvariantCulture));
         }
 
         public override AnimalKeyBase GetHeaders()
         {
-            return new OtherLiveStockKeys();
+            return new OtherLivestockKeys();
         }
 
         #endregion

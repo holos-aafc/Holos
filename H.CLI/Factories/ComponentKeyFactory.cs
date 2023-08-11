@@ -51,7 +51,7 @@ namespace H.CLI.Factories
             }
             if (component.ToUpper() == Properties.Resources.DefaultOtherLivestockInputFolder.ToUpper())
             {
-                return new OtherLiveStockKeys();
+                return new OtherLivestockKeys();
             }
 
             else

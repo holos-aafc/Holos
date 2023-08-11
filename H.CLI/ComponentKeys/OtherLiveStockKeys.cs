@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.CLI.Interfaces;
+using H.Core.Models.Animals;
+using System.Globalization;
 
 namespace H.CLI.ComponentKeys
 {
-    public class OtherLiveStockKeys : AnimalKeyBase, IComponentKeys
+    public class OtherLivestockKeys : AnimalKeyBase, IComponentKeys
     {
         #region Constructors
 
-        public OtherLiveStockKeys() : base()
+        public OtherLivestockKeys() : base()
         {
             base.Keys.Add(Properties.Resources.Key_Name, null);
             base.Keys.Add(H.Core.Properties.Resources.ComponentType, null);
@@ -32,8 +34,11 @@ namespace H.CLI.ComponentKeys
 
             base.Keys.Add(Properties.Resources.DailyManureMethaneEmissionRate, null);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
-            base.Keys.Add(Properties.Resources.MethaneConversionFactor, null);
+            base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, null);
             base.Keys.Add(Properties.Resources.VolatileSolids, null);
+            base.Keys.Add(Properties.Resources.EmissionFactorVolatilization, null);
+            base.Keys.Add(Properties.Resources.EmissionFactorLeaching, null);
+            base.Keys.Add(Properties.Resources.FractionLeaching, null);
         }
 
         #endregion

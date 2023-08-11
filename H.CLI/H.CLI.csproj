@@ -115,7 +115,7 @@
     <Compile Include="ComponentKeys\AnimalKeyBase.cs" />
     <Compile Include="ComponentKeys\BeefCattleKeys.cs" />
     <Compile Include="ComponentKeys\DairyCattleKeys.cs" />
-    <Compile Include="ComponentKeys\OtherLiveStockKeys.cs" />
+    <Compile Include="ComponentKeys\OtherLivestockKeys.cs" />
     <Compile Include="ComponentKeys\PoultryKeys.cs" />
     <Compile Include="ComponentKeys\SheepKeys.cs" />
     <Compile Include="ComponentKeys\SwineKeys.cs" />
