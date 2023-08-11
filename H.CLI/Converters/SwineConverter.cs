@@ -22,8 +22,6 @@ namespace H.CLI.Converters
     {
         #region Properties
 
-        public List<ComponentBase> SwineComponents { get; set; } = new List<ComponentBase>();
-
         #endregion
 
         #region Public Methods
@@ -55,6 +53,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.DietAdditive.ToString());
             row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ash.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Forage.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Starch.ToString(DoubleFormat));
