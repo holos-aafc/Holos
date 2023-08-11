@@ -65,6 +65,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Forage.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ash.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Starch.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Fat.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.MetabolizableEnergy.ToString(DoubleFormat));
@@ -84,6 +85,8 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.ManureExcretionRate.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfCarbonInManure.ToString(DoubleFormat));
         }
 
         public override AnimalKeyBase GetHeaders()

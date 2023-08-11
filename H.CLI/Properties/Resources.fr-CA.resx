@@ -123,6 +123,9 @@
   <data name="ActivityCoefficient" xml:space="preserve">
     <value>coefficient d'activité</value>
   </data>
+  <data name="ActivityCoefficientOfFeedingSituation" xml:space="preserve">
+    <value>Activity Coefficient Of Feeding Situation</value>
+  </data>
   <data name="ADG" xml:space="preserve">
     <value>GMQ</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="AshContent" xml:space="preserve">
     <value>teneur en cendres</value>
+  </data>
+  <data name="AshContentOfDiet" xml:space="preserve">
+    <value>Ash Content Of Diet</value>
   </data>
   <data name="AverageCircumference" xml:space="preserve">
     <value>circonférence moyenne</value>
@@ -344,6 +350,9 @@
   </data>
   <data name="FractionLeaching" xml:space="preserve">
     <value>fraction lessivée</value>
+  </data>
+  <data name="FractionOfCarbonInManure" xml:space="preserve">
+    <value>Fraction Of Carbon In Manure</value>
   </data>
   <data name="GainCoefficient" xml:space="preserve">
     <value>coefficient de gain</value>
@@ -728,6 +737,9 @@
   </data>
   <data name="ManureCH4" xml:space="preserve">
     <value>CH4 du fumier {0}</value>
+  </data>
+  <data name="ManureExcretionRate" xml:space="preserve">
+    <value>Manure Excretion Rate</value>
   </data>
   <data name="ManureManagement" xml:space="preserve">
     <value>gestion du fumier</value>

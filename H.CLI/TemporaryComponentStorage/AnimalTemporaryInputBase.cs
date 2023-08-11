@@ -44,10 +44,11 @@ namespace H.CLI.TemporaryComponentStorage
         public double Starch { get; set; }
         public double Fat { get; set; }
         public double ME { get; set; }
+        public double AshContentOfDiet { get; set; }
         public double NDF { get; set; }
         public HousingType HousingType { get; set; }
         public string PastureLocation { get; set; }
-        public double ActivityCoefficient { get; set; }
+        public double ActivityCoefficientOfFeedingSituation { get; set; }
         public double GainCoefficientA { get; set; }
         public double GainCoefficientB { get; set; }
         public double MaintenanceCoefficient { get; set; }
@@ -56,11 +57,13 @@ namespace H.CLI.TemporaryComponentStorage
         public double AshContent { get; set; }
         public double EmissionFactorLeaching { get; set; }
         public double EmissionFactorVolatilization { get; set; }
+        public double FractionOfCarbonInManure { get; set; }
         public double FractionLeaching { get; set; }
         public double VolatileSolidAdjusted { get; set; }
         public double NitrogenExcretionAdjusted { get; set; }
         public double CFTemp { get; set; }
         public double VolatileSolidsExcretion { get; set; }
+        public double ManureExcretionRate { get; set; }
         public double StartWeight { get; set; }
         public double EndWeight { get; set; }
         public double AverageDailyGain { get; set; }

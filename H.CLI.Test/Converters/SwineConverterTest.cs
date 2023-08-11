@@ -54,7 +54,7 @@ namespace H.CLI.Test.Converters
                 VolatileSolidAdjusted = 10,
                 NitrogenExcretionAdjusted = 10,
                 HousingType = HousingType.ConfinedNoBarn,
-                ActivityCoefficient = 10,
+                ActivityCoefficientOfFeedingSituation = 10,
                 MaintenanceCoefficient = 10,
 
                 MethaneConversionFactorOfManure = 10,
@@ -88,7 +88,7 @@ namespace H.CLI.Test.Converters
                 NitrogenExcretionAdjusted = 15,
                 HousingType = HousingType.Pasture,
                 PastureLocation = "ExampleFieldName5",
-                ActivityCoefficient = 15,
+                ActivityCoefficientOfFeedingSituation = 15,
                 MaintenanceCoefficient = 15,
 
                 MethaneConversionFactorOfManure = 15,
@@ -121,7 +121,7 @@ namespace H.CLI.Test.Converters
                 VolatileSolidAdjusted = 20,
                 NitrogenExcretionAdjusted = 20,
                 HousingType = HousingType.ConfinedNoBarn,
-                ActivityCoefficient = 20,
+                ActivityCoefficientOfFeedingSituation = 20,
                 MaintenanceCoefficient = 20,
               
                 MethaneConversionFactorOfManure = 20,

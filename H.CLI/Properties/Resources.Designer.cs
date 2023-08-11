@@ -79,6 +79,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activity Coefficient Of Feeding Situation.
+        /// </summary>
+        public static string ActivityCoefficientOfFeedingSituation {
+            get {
+                return ResourceManager.GetString("ActivityCoefficientOfFeedingSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ADG.
         /// </summary>
         public static string ADG {
@@ -138,6 +147,15 @@ namespace H.CLI.Properties {
         public static string AshContent {
             get {
                 return ResourceManager.GetString("AshContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ash Content Of Diet.
+        /// </summary>
+        public static string AshContentOfDiet {
+            get {
+                return ResourceManager.GetString("AshContentOfDiet", resourceCulture);
             }
         }
         
@@ -741,6 +759,15 @@ namespace H.CLI.Properties {
         public static string FractionLeaching {
             get {
                 return ResourceManager.GetString("FractionLeaching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Carbon In Manure.
+        /// </summary>
+        public static string FractionOfCarbonInManure {
+            get {
+                return ResourceManager.GetString("FractionOfCarbonInManure", resourceCulture);
             }
         }
         
@@ -1893,6 +1920,15 @@ namespace H.CLI.Properties {
         public static string ManureCH4 {
             get {
                 return ResourceManager.GetString("ManureCH4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure Excretion Rate.
+        /// </summary>
+        public static string ManureExcretionRate {
+            get {
+                return ResourceManager.GetString("ManureExcretionRate", resourceCulture);
             }
         }
         

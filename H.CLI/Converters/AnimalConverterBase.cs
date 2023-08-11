@@ -18,7 +18,7 @@ namespace H.CLI.Converters
     {
         #region Fields
 
-        protected const string DoubleFormat = "F2";
+        protected const string DoubleFormat = "F4";
 
         protected readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
 
@@ -110,7 +110,7 @@ namespace H.CLI.Converters
             var housingDetails = new HousingDetails()
             {
                 HousingType = inputRow.HousingType,
-                ActivityCeofficientOfFeedingSituation = inputRow.ActivityCoefficient,
+                ActivityCeofficientOfFeedingSituation = inputRow.ActivityCoefficientOfFeedingSituation,
                 BaselineMaintenanceCoefficient = inputRow.MaintenanceCoefficient,
             };
 
@@ -135,6 +135,8 @@ namespace H.CLI.Converters
                 AshContentOfManure = inputRow.AshContent,
                 VolatileSolidExcretion = inputRow.VolatileSolidsExcretion,
                 VolatileSolids = inputRow.VolatileSolids,
+                ManureExcretionRate = inputRow.ManureExcretionRate,
+                FractionOfCarbonInManure = inputRow.FractionOfCarbonInManure,
             };
 
             return manureDetails;
@@ -150,6 +152,7 @@ namespace H.CLI.Converters
                 Starch = inputRow.Starch,
                 Fat = inputRow.Fat,
                 DailyDryMatterFeedIntakeOfFeed = inputRow.FeedIntake,
+                Ash = inputRow.AshContentOfDiet,
                 MetabolizableEnergy = inputRow.ME,
                 Ndf = inputRow.NDF,
                 MethaneConversionFactor = inputRow.MethaneConversionFactorOfDiet,

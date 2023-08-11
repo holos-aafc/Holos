@@ -39,6 +39,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.CrudeProtein, ImperialUnitsOfMeasurement.PoundsPerPound);
             base.Keys.Add(Properties.Resources.Forage, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.TDN, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.AshContentOfDiet, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.Starch, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.Fat, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.ME, ImperialUnitsOfMeasurement.BritishThermalUnitPerPound);
@@ -47,7 +48,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.GainCoefficientA, null);
             base.Keys.Add(Properties.Resources.GainCoefficientB, null);
 
-            base.Keys.Add(Properties.Resources.ActivityCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
@@ -58,6 +59,8 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.FractionLeaching, null);
             base.Keys.Add(Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
+            base.Keys.Add(Properties.Resources.ManureExcretionRate, null);
+            base.Keys.Add(Properties.Resources.FractionOfCarbonInManure, null);
         } 
 
         #endregion

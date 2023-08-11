@@ -1338,4 +1338,16 @@ Would you like to continue using this directory?</value>
   <data name="NumberOfYoungAnimals" xml:space="preserve">
     <value>Number Of Young Animals</value>
   </data>
+  <data name="FractionOfCarbonInManure" xml:space="preserve">
+    <value>Fraction Of Carbon In Manure</value>
+  </data>
+  <data name="ManureExcretionRate" xml:space="preserve">
+    <value>Manure Excretion Rate</value>
+  </data>
+  <data name="ActivityCoefficientOfFeedingSituation" xml:space="preserve">
+    <value>Activity Coefficient Of Feeding Situation</value>
+  </data>
+  <data name="AshContentOfDiet" xml:space="preserve">
+    <value>Ash Content Of Diet</value>
+  </data>
 </root>

@@ -45,7 +45,7 @@ namespace H.CLI.ComponentKeys
 
             base.Keys.Add(Properties.Resources.HousingType, null);
             base.Keys.Add(Properties.Resources.GainCoefficient, null);
-            base.Keys.Add(Properties.Resources.ActivityCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);

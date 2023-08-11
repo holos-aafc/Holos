@@ -37,7 +37,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.VolatileSolidAdjusted, ImperialUnitsOfMeasurement.PoundsPerPound);
             base.Keys.Add(Properties.Resources.NitrogenExcretionAdjusted, ImperialUnitsOfMeasurement.PoundsPerPound);
 
-            base.Keys.Add(Properties.Resources.ActivityCoefficient, null);
+            base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.CFTemp, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);

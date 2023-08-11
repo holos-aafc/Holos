@@ -60,7 +60,7 @@ namespace H.CLI.Test.Converters
                 NDF = 10,
 
                 HousingType = HousingType.ConfinedNoBarn,
-                ActivityCoefficient = 10,
+                ActivityCoefficientOfFeedingSituation = 10,
                
                 MaintenanceCoefficient = 2,
                 N2ODirectEmissionFactor = 10,
@@ -99,7 +99,7 @@ namespace H.CLI.Test.Converters
                 NDF = 10,
 
                 HousingType = HousingType.ConfinedNoBarn,
-                ActivityCoefficient = 10,
+                ActivityCoefficientOfFeedingSituation = 10,
 
                 MaintenanceCoefficient = 2,
                 N2ODirectEmissionFactor = 10,
@@ -138,7 +138,7 @@ namespace H.CLI.Test.Converters
                 NDF = 10,
 
                 HousingType = HousingType.ConfinedNoBarn,
-                ActivityCoefficient = 10,
+                ActivityCoefficientOfFeedingSituation = 10,
 
                 MaintenanceCoefficient = 2,
                 N2ODirectEmissionFactor = 10,
