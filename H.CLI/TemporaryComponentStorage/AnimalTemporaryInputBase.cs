@@ -4,7 +4,6 @@ using System.Reflection;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models;
-using H.Views.ComponentViews.LandManagement.FieldSystem.Controls;
 
 namespace H.CLI.TemporaryComponentStorage
 {
