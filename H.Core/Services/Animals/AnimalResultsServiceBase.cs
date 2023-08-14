@@ -80,8 +80,7 @@ namespace H.Core.Services.Animals
 
         public virtual AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, ManagementPeriod managementPeriod, AnimalComponentBase animalComponent, Farm farm)
         {
-            // Add daily emissions from start to finish of the management period
-            var allDailyEmissions = new List<GroupEmissionsByDay>();
+            GroupEmissionsByDay previousDaysEmissions = null;
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();
             animalGroupEmissionResult.AnimalGroup = animalGroup;
 
@@ -103,18 +102,17 @@ namespace H.Core.Services.Animals
                      currentDate <= endDate;
                      currentDate = currentDate.AddDays(1))
                 {
-                    var groupEmissionsForPreviousDay = this.GetPreviousDayEmissions(currentDate, allDailyEmissions);
                     var groupEmissionsForDay = CalculateDailyEmissions(
                         animalComponentBase: animalComponent,
                         managementPeriod: managementPeriod,
                         dateTime: currentDate,
-                        previousDaysEmissions: groupEmissionsForPreviousDay,
+                        previousDaysEmissions: previousDaysEmissions,
                         animalGroup: animalGroup,
                         farm: farm);
 
-                    dailyEmissionsForMonth.Add(groupEmissionsForDay);
+                    previousDaysEmissions = groupEmissionsForDay;
 
-                    allDailyEmissions.Add(groupEmissionsForDay);
+                    dailyEmissionsForMonth.Add(groupEmissionsForDay);
                 }
 
                 var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
@@ -128,26 +126,9 @@ namespace H.Core.Services.Animals
             return animalGroupEmissionResult;
         }
 
-        public GroupEmissionsByDay GetPreviousDayEmissions(DateTime currentDate, List<GroupEmissionsByDay> allDailyEmissions)
-        {
-            for (int i = 1; i < allDailyEmissions.Count; i++)
-            {
-                var previousDate = currentDate.AddDays(-i);
-                var previousDayEmissions = allDailyEmissions.OrderBy(x => x.DateTime.Ticks).FirstOrDefault(x => x.DateTime.Date.Equals(previousDate.Date));
-                if (previousDayEmissions != null)
-                {
-                    return previousDayEmissions;
-                }
-            }
-
-            return null;
-        }
-
         public virtual AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
-            // Add daily emissions from start to finish of the management period
-            var allDailyEmissions = new List<GroupEmissionsByDay>();
-
+            GroupEmissionsByDay previousDaysEmissions = null;
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();
             animalGroupEmissionResult.AnimalGroup = animalGroup;
 
@@ -171,19 +152,17 @@ namespace H.Core.Services.Animals
                          currentDate <= endDate;
                          currentDate = currentDate.AddDays(1))
                     {
-                        var groupEmissionsForPreviousDay = this.GetPreviousDayEmissions(currentDate, allDailyEmissions);
-                        
                         var groupEmissionsForDay = CalculateDailyEmissions(
                             animalComponentBase: animalComponent,
                             managementPeriod: managementPeriod,
                             dateTime: currentDate,
-                            previousDaysEmissions: groupEmissionsForPreviousDay,
+                            previousDaysEmissions: previousDaysEmissions,
                             animalGroup: animalGroup,
                             farm: farm);
 
-                        dailyEmissionsForMonth.Add(groupEmissionsForDay);
+                        previousDaysEmissions = groupEmissionsForDay;
 
-                        allDailyEmissions.Add(groupEmissionsForDay);
+                        dailyEmissionsForMonth.Add(groupEmissionsForDay);
                     }
 
                     var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);

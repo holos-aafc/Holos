@@ -1056,9 +1056,25 @@ namespace H.Core.Models
         {
             var result = new List<int>();
 
+            // Fields
             var stageState = this.GetFieldSystemDetailsStageState();
             var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct().ToList();
             result.AddRange(distinctYears);
+
+            // Animals
+            foreach (var animalComponentBase in this.AnimalComponents)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        if (result.Contains(animalGroupManagementPeriod.Start.Year) == false)
+                        {
+                            result.Add(animalGroupManagementPeriod.Start.Year);
+                        }
+                    }
+                }
+            }
 
             return result;
         }
