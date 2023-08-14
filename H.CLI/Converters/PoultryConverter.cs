@@ -58,7 +58,11 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.YearlyEntericMethaneRate.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.VolatileSolids.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.ManureExcretionRate.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.FractionOfCarbonInManure.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(CultureInfo.InvariantCulture));
         }
 
         public override AnimalKeyBase GetHeaders()

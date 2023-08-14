@@ -1497,7 +1497,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-6
-        /// Equation 4.3.3-9
+        /// Equation 4.3.3-10
         /// </summary>
         /// <param name="ambientTemperatureAdjustmentStorage">Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</param>
         /// <param name="ammoniaEmissionFactorStorage">Default ammonia emission factor for manure stores (deep bedding, solid storage/stockpile, compost (passive, active))</param>

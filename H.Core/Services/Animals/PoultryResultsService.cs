@@ -437,22 +437,12 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.3-8
+        /// Equation 4.3.3-9
         /// </summary>
         public double CalculateAmbientTemperatureAdjustmentForStorage(
             double temperature)
         {
             var result = 1 - 0.058 * (17 - temperature);
-            if (result > 1)
-            {
-                return 1;
-            }
-
-            if (result < 0)
-            {
-                return 0;
-            }
-
             return result;
         }
 

@@ -29,7 +29,11 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.YearlyEntericMethaneRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
             base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);
             base.Keys.Add(Properties.Resources.VolatilizationFraction, null);
+            base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
             base.Keys.Add(Properties.Resources.VolatileSolids, null);
+            base.Keys.Add(Properties.Resources.ManureExcretionRate, null);
+            base.Keys.Add(Properties.Resources.FractionOfCarbonInManure, null);
+            base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, null);
         }
 
         #endregion
