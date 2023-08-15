@@ -462,6 +462,8 @@ namespace H.Core.Emissions.Results
          */
 
         /// <summary>
+        /// Accumulated value over all months in management period
+        /// 
         /// (kg N)
         /// </summary>
         public double TotalOrganicNitrogenAvailableForLandApplicationAtEndOfMonth
@@ -470,6 +472,20 @@ namespace H.Core.Emissions.Results
             {
                 // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
                 return DailyEmissions.Last().AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay;
+            }
+        }
+
+        /// <summary>
+        /// Non-accumulated value for one the month
+        /// 
+        /// (kg N)
+        /// </summary>
+        public double TotalOrganicNitrogenAvailableCreatedInMonth
+        {
+            get
+            {
+                // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
+                return DailyEmissions.Sum(x => x.OrganicNitrogenCreatedOnDay);
             }
         }
 
@@ -504,12 +520,28 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg N)
         /// </summary>
-        public double TotalAvailableManureNitrogenInStoredManure
+        public double TotalAvailableManureNitrogenInStoredManureAtEndOfMonth
         {
             get
             {
                 // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
                 return DailyEmissions.Last().AccumulatedNitrogenAvailableForLandApplicationOnDay;
+            }
+        }
+
+        /// <summary>
+        /// This is the total amount available for this month only, not the accumulated amount month-to-month
+        /// 
+        /// (kg TAN)
+        /// </summary>
+        public double TotalAmountOfNitrogenInStoredManureAvailableForMonth
+        {
+            get
+            {
+                var tan = DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManureOnDay);
+                var on = DailyEmissions.Sum(x => x.OrganicNitrogenCreatedOnDay);
+
+                return tan + on;
             }
         }
 
@@ -522,13 +554,15 @@ namespace H.Core.Emissions.Results
          */
 
         /// <summary>
+        /// This is the total amount available for this month only, not the accumulated amount month-to-month
+        /// 
         /// (kg TAN)
         /// </summary>
-        public double AdjustedMonthlyAmountOfTanInStoredManure
+        public double TotalAmountOfTanInStoredManureAvailableForMonth
         {
             get
             {
-                return DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManure);
+                return DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManureOnDay);
             }
         }
 
@@ -552,6 +586,23 @@ namespace H.Core.Emissions.Results
             {
                 // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
                 return DailyEmissions.Last().AccumulatedTANAvailableForLandApplicationOnDay;
+            }
+        }
+
+        #endregion
+
+        #region Carbon (C)
+
+        /// <summary>
+        /// This is the total amount available for this month only, not the accumulated amount month-to-month
+        /// 
+        /// (kg TAN)
+        /// </summary>
+        public double TotalAmountOfCarbonInStoredManureAvailableForMonth
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.AmountOfCarbonInStoredManure);
             }
         }
 
@@ -1204,12 +1255,12 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg C)
         /// </summary>
-        public double TotalAmountOfCarbonInStoredManure
+        public double TotalAmountOfCarbonInStoredManureAtEndOfMonth
         {
             get
             {
                 // Get last daily result for the month and not the total of all days in the month since daily calculation are cumulative
-                return DailyEmissions.Last().AmountOfCarbonInStoredManureOnDay;
+                return DailyEmissions.Last().AccumulatedAmountOfCarbonInStoredManureOnDay;
             }
         }
 

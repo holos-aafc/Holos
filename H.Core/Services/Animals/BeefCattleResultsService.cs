@@ -248,7 +248,7 @@ namespace H.Core.Services.Animals
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
-                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.TanInStorageOnDay);
+                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AccumulatedTanInStorageOnDay);
 
             base.CalculateOrganicNitrogen(dailyEmissions, managementPeriod, previousDaysEmissions);
 
@@ -552,7 +552,7 @@ namespace H.Core.Services.Animals
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
-                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.TanInStorageOnDay);
+                accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AccumulatedTanInStorageOnDay);
 
             base.CalculateOrganicNitrogen(dailyEmissions, managementPeriod, previousDaysEmissions);
 

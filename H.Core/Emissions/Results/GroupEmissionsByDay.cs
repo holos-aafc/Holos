@@ -603,7 +603,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Total amount of C flowing into storage each day
+        /// Total amount of C flowing into storage each day (non-accumulated value)
         /// 
         /// (kg C day^-1)
         /// </summary>
@@ -618,7 +618,7 @@ namespace H.Core.Emissions.Results
         ///
         /// (kg C)
         /// </summary>
-        public double AmountOfCarbonInStoredManureOnDay { get; set; }
+        public double AccumulatedAmountOfCarbonInStoredManureOnDay { get; set; }
 
         /// <summary>
         /// (kg head^-1 day^-1)
@@ -890,9 +890,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// The non-accumulated amount on one day
+        /// 
         /// (kg TAN)
         /// </summary>
-        public double AdjustedAmountOfTanInStoredManure
+        public double AdjustedAmountOfTanInStoredManureOnDay
         {
             get => _adjustedAmountOfTanInStoredManure;
             set => SetProperty(ref _adjustedAmountOfTanInStoredManure, value);
@@ -1774,7 +1776,17 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg TAN)
         /// </summary>
-        public double TanInStorageOnDay { get; set; }
+        public double AccumulatedTanInStorageOnDay { get; set; }
+
+        /// <summary>
+        /// This is the amount created each day (not the accumulated value)
+        /// </summary>
+        public double OrganicNitrogenCreatedOnDay { get; set; }
+
+        /// <summary>
+        /// This is the amount created each day (not the accumulated value)
+        /// </summary>
+        public double NonAccumulatedCarbonCreatedOnDay { get; set; }
 
         #endregion
     }

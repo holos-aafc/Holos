@@ -229,13 +229,13 @@ namespace H.Core.Services.Animals
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
                 amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
-            dailyEmissions.AdjustedAmountOfTanInStoredManure = this.CalculateAdjustedAmountOfTANEnteringStorage(
+            dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = this.CalculateAdjustedAmountOfTANEnteringStorage(
                 amountOfTANFlowingIntoStorageEachDay: dailyEmissions.TanEnteringStorageSystem,
                 adjustedAmmoniaLossFromStorage: dailyEmissions.AmmoniaLostFromStorage);
 
-            dailyEmissions.TanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
-                tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.TanInStorageOnDay,
-                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManure);
+            dailyEmissions.AccumulatedTanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
+                tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedTanInStorageOnDay,
+                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 

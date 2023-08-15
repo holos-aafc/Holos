@@ -866,8 +866,10 @@ namespace H.Core.Services.Animals
                 dailyAmountOfCarbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial,
                 dailyAmountOfCarbonLostAsMethaneDuringManagement: dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement);
 
-            dailyEmissions.AmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
-                amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AmountOfCarbonInStoredManureOnDay,
+            dailyEmissions.NonAccumulatedCarbonCreatedOnDay = dailyEmissions.AmountOfCarbonInStoredManure;
+
+            dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
+                amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 amountOfCarbonFlowingIntoStorage: previousDaysEmissions == null ? 0 : previousDaysEmissions.AmountOfCarbonInStoredManure);
         }
 
@@ -1711,7 +1713,7 @@ namespace H.Core.Services.Animals
 
         public void CalculateOrganicNitrogen(GroupEmissionsByDay dailyEmissions, ManagementPeriod managementPeriod, GroupEmissionsByDay previousDaysEmissions)
         {
-            var organicNitrogenCreatedToday = this.CalculateOrganicNitrogenCreatedOnDay(
+            dailyEmissions.OrganicNitrogenCreatedOnDay = this.CalculateOrganicNitrogenCreatedOnDay(
                 fecalNitrogenExcretion: dailyEmissions.FecalNitrogenExcretion,
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
@@ -1719,7 +1721,7 @@ namespace H.Core.Services.Animals
                 leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission);
 
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = this.CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
-                organicNitrogenAvailableOnCurrentDay: organicNitrogenCreatedToday,
+                organicNitrogenAvailableOnCurrentDay: dailyEmissions.OrganicNitrogenCreatedOnDay,
                 organicNitrogenAvailableFromPreviousDay: (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay));
         }
 

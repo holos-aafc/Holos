@@ -110,13 +110,13 @@ namespace H.Core.Services.Animals
             var targetGroupEmissions = this.GetTargetEmissions(animalComponentResults, manureTank.Year);
             foreach (var groupEmissionsByMonth in targetGroupEmissions)
             {
-                manureTank.TotalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.TotalOrganicNitrogenAvailableForLandApplicationAtEndOfMonth;
-                manureTank.TotalTanAvailableForLandApplication += groupEmissionsByMonth.TotalTANAvailableForLandApplicationAtEndOfMonth;
-                manureTank.TotalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManure;
+                manureTank.TotalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.TotalOrganicNitrogenAvailableCreatedInMonth;
+                manureTank.TotalTanAvailableForLandApplication += groupEmissionsByMonth.TotalAmountOfTanInStoredManureAvailableForMonth;
+                manureTank.TotalAmountOfCarbonInStoredManure += groupEmissionsByMonth.TotalAmountOfCarbonInStoredManureAvailableForMonth;
 
                 // Before any nitrogen from any manure applications have been subtracted from the tank, these two values will be the same
-                manureTank.TotalNitrogenAvailableForLandApplication += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
-                manureTank.TotalNitrogenAvailableAfterAllLandApplications += groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication;
+                manureTank.TotalNitrogenAvailableForLandApplication += groupEmissionsByMonth.TotalAmountOfNitrogenInStoredManureAvailableForMonth;
+                manureTank.TotalNitrogenAvailableAfterAllLandApplications += groupEmissionsByMonth.TotalAmountOfNitrogenInStoredManureAvailableForMonth;
 
                 // Before any volume of manure from field applications have been subtracted from the tank, these two values will be the same
                 manureTank.VolumeOfManureAvailableForLandApplication += groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication * 1000;
