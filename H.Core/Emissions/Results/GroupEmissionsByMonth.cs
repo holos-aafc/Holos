@@ -538,10 +538,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                var tan = DailyEmissions.Sum(x => x.AdjustedAmountOfTanInStoredManureOnDay);
-                var on = DailyEmissions.Sum(x => x.OrganicNitrogenCreatedOnDay);
-
-                return tan + on;
+                return DailyEmissions.Sum(x => x.TotalAmountOfNitrogenInStoredManureAvailableForDay);
             }
         }
 

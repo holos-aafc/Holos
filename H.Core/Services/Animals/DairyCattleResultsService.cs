@@ -234,7 +234,7 @@ namespace H.Core.Services.Animals
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
@@ -521,7 +521,7 @@ namespace H.Core.Services.Animals
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;

@@ -1173,6 +1173,22 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// This is the total amount available for this day only, not the accumulated amount day-to-day
+        /// 
+        /// (kg TAN)
+        /// </summary>
+        public double TotalAmountOfNitrogenInStoredManureAvailableForDay
+        {
+            get
+            {
+                var tan = AdjustedAmountOfTanInStoredManureOnDay;
+                var on = OrganicNitrogenCreatedOnDay;
+
+                return tan + on;
+            }
+        }
+
+        /// <summary>
         /// (kg)
         /// </summary>
         public double TotalVolumeOfManureAvailableForLandApplicationInKilograms {

@@ -308,7 +308,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication =
                 base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                    totalNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay,
+                    totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                     nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
