@@ -32,7 +32,7 @@ body:
     id: problem-description
     attributes:
       label: Describe the Issue & Steps to Reproduce
-      description: Please include detailed information regarding the issue including the steps we can take to reproduce the issue in Holos. You can also export and attach your farm file here. To learn how to export your farm [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exportingimporting-farm-configuration-files). Add the farm file to a .zip archive before attaching it here. To learn how to add files to a .zip archive, [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#how-to-create-a-zip-archive-file)
+      description: Please include detailed information regarding the issue including the steps we can take to reproduce the issue in Holos. You can also export and attach your farm file here. To learn how to export your farm [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exportingimporting-farm-configuration-files). Please add the farm file to a .zip archive/file before attaching it to the issue. To learn how to add files to a .zip archive, [click here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#how-to-create-a-zip-archive-file)
       placeholder: |
         1.
         2.
