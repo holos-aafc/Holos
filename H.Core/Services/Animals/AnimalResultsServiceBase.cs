@@ -1070,7 +1070,14 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            return milkProduction * proteinContentOfMilk * numberOfYoungAnimals / numberOfAnimals;
+            if (animalsAreAlwaysLactating)
+            {
+                return milkProduction * proteinContentOfMilk;
+            }
+            else
+            {
+                return milkProduction * proteinContentOfMilk * numberOfYoungAnimals / numberOfAnimals;
+            }
         }
 
         /// <summary>
@@ -2219,7 +2226,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="totalDailyDryMatterIntakeForGroup">Total dry matter intake for all animals in the group.</param>
         /// <returns>Total carbon uptake by the group of animals (kg C day^-1)</returns>
-        public double CaclulateDailyCarbonUptakeForGroup(
+        public double CalculateDailyCarbonUptakeForGroup(
             double totalDailyDryMatterIntakeForGroup)
         {
             var result = totalDailyDryMatterIntakeForGroup * CoreConstants.CarbonConcentration;

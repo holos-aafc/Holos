@@ -112,7 +112,7 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             dailyEmissions.GrossEnergyIntake = base.CalculateGrossEnergyIntakeForCalves(
@@ -293,7 +293,7 @@ namespace H.Core.Services.Animals
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
 
-            var totalNumberOfYoungAnimalsOnDate = dairyComponent.GetTotalNumberOfYoungAnimalsByDate(
+            managementPeriod.NumberOfYoungAnimals = dairyComponent.GetTotalNumberOfYoungAnimalsByDate(
                 dateTime: dateTime,
                 parentGroup: animalGroup,
                 childGroupType: AnimalType.DairyCalves);
@@ -358,7 +358,7 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             // Equation 12.3.1-5
@@ -484,7 +484,7 @@ namespace H.Core.Services.Animals
                 managementPeriod,
                 animalGroup,
                 isLactatingGroup,
-                totalNumberOfYoungAnimalsOnDate);
+                managementPeriod.NumberOfYoungAnimals);
 
             /*
              * Indirect manure N2O

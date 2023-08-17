@@ -20,7 +20,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.GroupType, null);
 
             base.Keys.Add(Properties.Resources.ManagementPeriodName, null);
-            base.Keys.Add(Properties.Resources.CowCalfPairingNumber, null);
+            base.Keys.Add(Properties.Resources.GroupPairingNumber, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodDays, null);
             base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
@@ -29,7 +29,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.AverageDailyGain, ImperialUnitsOfMeasurement.Pounds);
             base.Keys.Add(Properties.Resources.MilkProduction, null);
             base.Keys.Add(Properties.Resources.MilkFatContent, null);
-            base.Keys.Add(Properties.Resources.MilkProtein, null);
+            base.Keys.Add(Properties.Resources.MilkProteinContentAsPercentage, null);
 
             base.Keys.Add(Properties.Resources.DietAdditiveType, null);
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfDiet, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);

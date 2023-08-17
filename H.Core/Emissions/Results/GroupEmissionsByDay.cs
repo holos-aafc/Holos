@@ -641,8 +641,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.2.1-3
-        /// 
         /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedForLactation

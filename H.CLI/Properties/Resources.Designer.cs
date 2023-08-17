@@ -817,6 +817,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group Pairing Number.
+        /// </summary>
+        public static string GroupPairingNumber {
+            get {
+                return ResourceManager.GetString("GroupPairingNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group Type.
         /// </summary>
         public static string GroupType {
@@ -2028,6 +2037,15 @@ namespace H.CLI.Properties {
         public static string MilkProtein {
             get {
                 return ResourceManager.GetString("MilkProtein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Milk Protein Content As Percentage.
+        /// </summary>
+        public static string MilkProteinContentAsPercentage {
+            get {
+                return ResourceManager.GetString("MilkProteinContentAsPercentage", resourceCulture);
             }
         }
         

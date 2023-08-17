@@ -55,7 +55,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.PeriodDailyGain.ToString(DoubleFormat));
             row.Add(managementPeriod.MilkProduction.ToString(DoubleFormat));
             row.Add(managementPeriod.MilkFatContent.ToString(DoubleFormat));
-            row.Add(managementPeriod.MilkProteinContent.ToString(DoubleFormat));
+            row.Add(managementPeriod.MilkProteinContentAsPercentage.ToString(DoubleFormat));
 
             row.Add(managementPeriod.DietAdditive.ToString());
             row.Add(managementPeriod.SelectedDiet.MethaneConversionFactor.ToString(DoubleFormat));

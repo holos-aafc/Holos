@@ -145,7 +145,7 @@ namespace H.Core.Services.Animals
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-                dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+                dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                     totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
                 dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(

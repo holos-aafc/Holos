@@ -90,7 +90,7 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var totalNumberOfYoungAnimalsOnDate = animalComponentBase.GetTotalNumberOfYoungAnimalsByDate(
+            managementPeriod.NumberOfYoungAnimals = animalComponentBase.GetTotalNumberOfYoungAnimalsByDate(
                 dateTime: dateTime,
                 parentGroup: animalGroup,
                 childGroupType: AnimalType.Lambs);
@@ -98,7 +98,7 @@ namespace H.Core.Services.Animals
             if (animalGroup.GroupType == AnimalType.Ewes)
             {
                 dailyEmissions.LambEweRatio = this.CalculateLambRatio(
-                    numberOfLambs: totalNumberOfYoungAnimalsOnDate,
+                    numberOfLambs: managementPeriod.NumberOfYoungAnimals,
                     numberOfEwes: managementPeriod.NumberOfAnimals);
             }
 
@@ -110,7 +110,7 @@ namespace H.Core.Services.Animals
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 weight: dailyEmissions.AnimalWeight);
 
-            var isLactatingAnimalGroup = totalNumberOfYoungAnimalsOnDate > 0;
+            var isLactatingAnimalGroup = managementPeriod.NumberOfYoungAnimals > 0;
             if (isLactatingAnimalGroup)
             {
                 var dailyGainForLambs = _lambDailyWeightGainProvider.GetDailyWeightGain(

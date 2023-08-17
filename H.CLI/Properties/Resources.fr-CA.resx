@@ -369,6 +369,9 @@
   <data name="GroupName" xml:space="preserve">
     <value>nom du groupe</value>
   </data>
+  <data name="GroupPairingNumber" xml:space="preserve">
+    <value>Group Pairing Number</value>
+  </data>
   <data name="GroupType" xml:space="preserve">
     <value>type de groupe</value>
   </data>
@@ -773,6 +776,9 @@
   </data>
   <data name="MilkProtein" xml:space="preserve">
     <value>protéine laitière</value>
+  </data>
+  <data name="MilkProteinContentAsPercentage" xml:space="preserve">
+    <value>Milk Protein Content As Percentage</value>
   </data>
   <data name="MoistureResponseFunctionAtSaturation" xml:space="preserve">
     <value>Fonction de réponse à l’humidité au point de saturation = {0}</value>

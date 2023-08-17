@@ -1350,4 +1350,10 @@ Would you like to continue using this directory?</value>
   <data name="AshContentOfDiet" xml:space="preserve">
     <value>Ash Content Of Diet</value>
   </data>
+  <data name="GroupPairingNumber" xml:space="preserve">
+    <value>Group Pairing Number</value>
+  </data>
+  <data name="MilkProteinContentAsPercentage" xml:space="preserve">
+    <value>Milk Protein Content As Percentage</value>
+  </data>
 </root>

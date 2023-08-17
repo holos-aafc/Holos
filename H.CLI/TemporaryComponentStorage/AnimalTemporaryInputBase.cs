@@ -69,8 +69,9 @@ namespace H.CLI.TemporaryComponentStorage
         public double MilkProduction { get; set; }
         public double MilkFatContent { get; set; }
         public double MilkProtein { get; set; }
+        public double MilkProteinContentAsPercentage { get; set; }
         public double GainCoefficient { get; set; }
-        public int CowCalfPairingNumber { get; set; }
+        public int GroupPairingNumber { get; set; }
         public int NumberOfCalves { get; set; }
         public double InitialWeightOfCalves { get; set; }
         public double FinalWeightOfCalves{ get; set; }

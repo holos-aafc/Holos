@@ -63,6 +63,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.SelectedDiet.VolatileSolidsAdjustmentFactorForDiet.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.NitrogenExcretionAdjustFactorForDiet.ToString(DoubleFormat));
 
+            row.Add(managementPeriod.HousingDetails.HousingType.ToString());
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.MaintenanceCoefficientModifiedByTemperature.ToString(DoubleFormat));
 

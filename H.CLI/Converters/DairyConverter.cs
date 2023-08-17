@@ -47,19 +47,22 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.Start.ToString("d"));
             row.Add(managementPeriod.Duration.Days.ToString());
             row.Add(managementPeriod.NumberOfAnimals.ToString());
+            row.Add(managementPeriod.NumberOfYoungAnimals.ToString());
+            row.Add(animalGroup.GroupPairingNumber.ToString());
 
             row.Add(managementPeriod.StartWeight.ToString(DoubleFormat));
             row.Add(managementPeriod.EndWeight.ToString(DoubleFormat));
             row.Add(managementPeriod.PeriodDailyGain.ToString(DoubleFormat));
             row.Add(managementPeriod.MilkProduction.ToString(DoubleFormat));
             row.Add(managementPeriod.MilkFatContent.ToString(DoubleFormat));
-            row.Add(managementPeriod.MilkProteinContent.ToString(DoubleFormat));
+            row.Add(managementPeriod.MilkProteinContentAsPercentage.ToString(DoubleFormat));
 
             row.Add(managementPeriod.DietAdditive.ToString());
             row.Add(managementPeriod.SelectedDiet.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.MethaneConversionFactorAdjustment.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ash.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Forage.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Starch.ToString(DoubleFormat));
@@ -73,6 +76,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.GainCoefficientA.ToString(DoubleFormat));
             row.Add(managementPeriod.GainCoefficientB.ToString(DoubleFormat));
 
+            row.Add(managementPeriod.HousingDetails.HousingType.ToString());
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
 

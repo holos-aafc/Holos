@@ -99,7 +99,7 @@ namespace H.CLI.Converters
                 GainCoefficientB = inputRow.GainCoefficientB,
                 MilkProduction = inputRow.MilkProduction,
                 MilkFatContent = inputRow.MilkFatContent,
-                MilkProteinContentAsPercentage = inputRow.MilkProtein,
+                MilkProteinContentAsPercentage = inputRow.MilkProteinContentAsPercentage,
             };
 
             return managementPeriod;
@@ -172,7 +172,7 @@ namespace H.CLI.Converters
             {
                 animalGroup.Name = inputRow.GroupName;
                 animalGroup.GroupType = inputRow.GroupType;
-                animalGroup.GroupPairingNumber = inputRow.CowCalfPairingNumber;
+                animalGroup.GroupPairingNumber = inputRow.GroupPairingNumber;
 
                 var managementPeriod = this.BuildManagementPeriod(animalGroup, inputRow);
                 managementPeriod.ManureDetails = this.BuildManureDetails(inputRow);

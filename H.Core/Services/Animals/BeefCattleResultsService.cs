@@ -93,7 +93,7 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             dailyEmissions.GrossEnergyIntake = CalculateGrossEnergyIntakeForCalves(
@@ -331,12 +331,12 @@ namespace H.Core.Services.Animals
                 feedingActivityCoefficient: managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation,
                 netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
 
-            var totalNumberOfYoungAnimalsOnDate = cowCalfComponent.GetTotalNumberOfYoungAnimalsByDate(
+            managementPeriod.NumberOfYoungAnimals = cowCalfComponent.GetTotalNumberOfYoungAnimalsByDate(
                 dateTime: dateTime,
                 parentGroup: animalGroup,
                 childGroupType: AnimalType.BeefCalf);
 
-            var isLactatingAnimalGroup = totalNumberOfYoungAnimalsOnDate > 0;
+            var isLactatingAnimalGroup = managementPeriod.NumberOfYoungAnimals > 0;
             if (isLactatingAnimalGroup)
             {
                 // Beef cattle lactating cows stop lactating if there are no associated young animals - this differs from lactating dairy cows who are always lactating regardless of the fact
@@ -345,7 +345,7 @@ namespace H.Core.Services.Animals
                 dailyEmissions.NetEnergyForLactation = this.CalculateNetEnergyForLactation(
                     milkProduction: managementPeriod.MilkProduction,
                     fatContent: managementPeriod.MilkFatContent,
-                    numberOfYoungAnimals: totalNumberOfYoungAnimalsOnDate,
+                    numberOfYoungAnimals: managementPeriod.NumberOfYoungAnimals,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
             }
 
@@ -406,7 +406,7 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CaclulateDailyCarbonUptakeForGroup(
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(
@@ -528,7 +528,7 @@ namespace H.Core.Services.Animals
                 managementPeriod,
                 animalGroup,
                 isLactatingAnimalGroup,
-                totalNumberOfYoungAnimalsOnDate);
+                managementPeriod.NumberOfYoungAnimals);
 
             /*
              * Indirect manure N2O
