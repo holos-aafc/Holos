@@ -298,14 +298,14 @@ namespace H.Core.Services.Animals
         /// Equation 3.1.1-2
         /// </summary>
         /// <param name="baselineMaintenanceCoefficient">Baseline maintenance coefficient (MJ day^-1 kg^-1)</param>
-        /// <param name="temperature">Average monthly temperature (upper limit = 20, temperatures above 20ºC or cattle are house in a barn, use 20ºC)</param>
+        /// <param name="dailyTemperature">Daily temperature (upper limit = 20, temperatures above 20ºC or cattle are house in a barn, use 20ºC)</param>
         /// <returns>Maintenance coefficient – adjusted for temperature (MJ day^-1 kg^-1)</returns>
         public double CalculateTemperatureAdjustedMaintenanceCoefficient(
             double baselineMaintenanceCoefficient,
-            double temperature)
+            double dailyTemperature)
         {
             var adjustedMaintenanceCoefficient =
-                baselineMaintenanceCoefficient + 0.0048 * (20 - temperature);
+                baselineMaintenanceCoefficient + 0.0048 * (20 - dailyTemperature);
 
             return adjustedMaintenanceCoefficient;
         }
@@ -539,14 +539,14 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="drymMatterIntakeForGroup"></param>
+        /// <param name="dryMatterIntakeForGroup"></param>
         /// <param name="numberOfDaysInManagementPeriod"></param>
         /// <returns></returns>
         public double CalculateDryMatterIntakeForManagementPeriod(
-            double drymMatterIntakeForGroup,
+            double dryMatterIntakeForGroup,
             double numberOfDaysInManagementPeriod)
         {
-            return drymMatterIntakeForGroup * numberOfDaysInManagementPeriod;
+            return dryMatterIntakeForGroup * numberOfDaysInManagementPeriod;
         }
 
         /// <summary>
@@ -567,6 +567,8 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.1.1-3
+        ///
+        /// Note: C content values for pasture/range/paddock are always used (regardless of manure handling system)
         /// </summary>
         /// <param name="manureExcretionRate">Volume of manure excreted daily (kg head^-1 day^-1)</param>
         /// <param name="carbonFractionOfManure">Fraction of carbon in the manure (% wet weight)</param>

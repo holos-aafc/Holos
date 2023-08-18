@@ -62,10 +62,12 @@ namespace H.Core.Services.Animals
             /*
              * Manure carbon (C) and methane (CH4)
              */
-            
+
+            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.Pasture, AnimalType.Poultry);
+
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
                 manureExcretionRate: managementPeriod.ManureDetails.ManureExcretionRate,
-                carbonFractionOfManure: managementPeriod.ManureDetails.FractionOfCarbonInManure);
+                carbonFractionOfManure: manureCompositionData.CarbonFraction);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,

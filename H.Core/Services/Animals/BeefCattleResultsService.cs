@@ -320,7 +320,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
-                temperature: temperature);
+                dailyTemperature: temperature);
 
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: dailyEmissions.AdjustedMaintenanceCoefficient,
