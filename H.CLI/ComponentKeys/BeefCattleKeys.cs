@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.CLI.Interfaces;
+using H.Core;
+using Microsoft.Office.Core;
 
 namespace H.CLI.ComponentKeys
 {
@@ -24,6 +26,9 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodDays, null);
             base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
+            base.Keys.Add(Properties.Resources.NumberOfYoungAnimals, null);
+            base.Keys.Add(Properties.Resources.AnimalsAreMilkFedOnly, null);
+
             base.Keys.Add(Properties.Resources.StartWeight, ImperialUnitsOfMeasurement.Pounds);
             base.Keys.Add(Properties.Resources.EndWeight, ImperialUnitsOfMeasurement.Pounds);
             base.Keys.Add(Properties.Resources.AverageDailyGain, ImperialUnitsOfMeasurement.Pounds);
@@ -38,13 +43,19 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.CrudeProtein, ImperialUnitsOfMeasurement.PoundsPerPound);
             base.Keys.Add(Properties.Resources.Forage, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.TDN, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.AshContentOfDiet, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.Starch, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.Fat, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.ME, ImperialUnitsOfMeasurement.BritishThermalUnitPerPound);
             base.Keys.Add(Properties.Resources.NDF, ImperialUnitsOfMeasurement.PercentageDryMatter);
+            base.Keys.Add(Properties.Resources.DietaryNetEnergyConcentration, null);
 
             base.Keys.Add(Properties.Resources.HousingType, null);
             base.Keys.Add(Properties.Resources.GainCoefficient, null);
+            base.Keys.Add(Properties.Resources.UserDefinedBeddingRate, null);
+            base.Keys.Add(Properties.Resources.TotalCarbonKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.TotalNitrogenKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.MoistureContentOfBeddingMaterial, null);
             base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
 
@@ -56,6 +67,12 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.FractionLeaching, null);
             base.Keys.Add(Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenImmobilized, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenNitrified, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenMineralized, null);
+            base.Keys.Add(Properties.Resources.Key_ManureStateType, null);
+            base.Keys.Add(Properties.Resources.AmmoniaEmissionFactorForManureStorage, null);
+
         }
 
         #endregion

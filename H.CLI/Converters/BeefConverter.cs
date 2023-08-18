@@ -49,6 +49,8 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.Start.ToString("d"));
             row.Add(managementPeriod.Duration.Days.ToString());
             row.Add(managementPeriod.NumberOfAnimals.ToString());
+            row.Add(managementPeriod.NumberOfYoungAnimals.ToString());
+            row.Add(managementPeriod.AnimalsAreMilkFedOnly.ToString());
 
             row.Add(managementPeriod.StartWeight.ToString(DoubleFormat));
             row.Add(managementPeriod.EndWeight.ToString(DoubleFormat));
@@ -64,13 +66,19 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.SelectedDiet.CrudeProtein.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Forage.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.TotalDigestibleNutrient.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.Ash.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Starch.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Fat.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.MetabolizableEnergy.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.Ndf.ToString(DoubleFormat));
+            row.Add(managementPeriod.SelectedDiet.DietaryNetEnergyConcentration.ToString(DoubleFormat));
 
             row.Add(managementPeriod.HousingDetails.HousingType.ToString());
             row.Add(managementPeriod.GainCoefficient.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.UserDefinedBeddingRate.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
 
@@ -82,6 +90,11 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.StateType.ToString());
+            row.Add(managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage.ToString(DoubleFormat));
         }
 
         public override AnimalKeyBase GetHeaders()

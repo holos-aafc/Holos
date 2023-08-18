@@ -41,6 +41,10 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.HousingType, null);
             base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.CFTemp, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.UserDefinedBeddingRate, null);
+            base.Keys.Add(Properties.Resources.TotalCarbonKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.TotalNitrogenKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.MoistureContentOfBeddingMaterial, null);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);

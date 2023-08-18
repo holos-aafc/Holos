@@ -66,6 +66,10 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.HousingDetails.HousingType.ToString());
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.MaintenanceCoefficientModifiedByTemperature.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.UserDefinedBeddingRate.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial.ToString(DoubleFormat));
 
             row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(DoubleFormat));

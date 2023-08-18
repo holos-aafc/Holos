@@ -88,6 +88,7 @@ namespace H.CLI.Converters
                 NumberOfAnimals = inputRow.NumberOfAnimals,
                 NumberOfYoungAnimals = inputRow.NumberOfYoungAnimals,
                 StartWeight = inputRow.StartWeight,
+                AnimalsAreMilkFedOnly = inputRow.AnimalsAreMilkFedOnly,
                 EndWeight = inputRow.EndWeight,
                 PeriodDailyGain = inputRow.AverageDailyGain,
                 DietAdditive = inputRow.DietAdditiveType,
@@ -102,6 +103,8 @@ namespace H.CLI.Converters
                 MilkProteinContentAsPercentage = inputRow.MilkProteinContentAsPercentage,
             };
 
+            managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.Duration.TotalDays);
+
             return managementPeriod;
         }
 
@@ -112,6 +115,10 @@ namespace H.CLI.Converters
                 HousingType = inputRow.HousingType,
                 ActivityCeofficientOfFeedingSituation = inputRow.ActivityCoefficientOfFeedingSituation,
                 BaselineMaintenanceCoefficient = inputRow.MaintenanceCoefficient,
+                UserDefinedBeddingRate = inputRow.UserDefinedBeddingRate,
+                TotalCarbonKilogramsDryMatterForBedding = inputRow.TotalCarbonKilogramsDryMatterForBedding,
+                MoistureContentOfBeddingMaterial = inputRow.MoistureContentOfBeddingMaterial,
+                TotalNitrogenKilogramsDryMatterForBedding = inputRow.TotalNitrogenKilogramsDryMatterForBedding,
             };
 
             return housingDetails;
@@ -137,6 +144,11 @@ namespace H.CLI.Converters
                 VolatileSolids = inputRow.VolatileSolids,
                 ManureExcretionRate = inputRow.ManureExcretionRate,
                 FractionOfCarbonInManure = inputRow.FractionOfCarbonInManure,
+                FractionOfOrganicNitrogenImmobilized = inputRow.FractionOfOrganicNitrogenImmobilized,
+                FractionOfOrganicNitrogenNitrified = inputRow.FractionOfOrganicNitrogenNitrified,
+                FractionOfOrganicNitrogenMineralized = inputRow.FractionOfOrganicNitrogenMineralized,
+                StateType = inputRow.ManureStateType,
+                AmmoniaEmissionFactorForManureStorage = inputRow.AmmoniaEmissionFactorForManureStorage,
             };
 
             return manureDetails;
@@ -159,6 +171,7 @@ namespace H.CLI.Converters
                 MethaneConversionFactorAdjustment = inputRow.MethaneConversionFactorAdjusted,
                 NitrogenExcretionAdjustFactorForDiet = inputRow.NitrogenExcretionAdjusted,
                 VolatileSolidsAdjustmentFactorForDiet = inputRow.VolatileSolidAdjusted,
+                DietaryNetEnergyConcentration = inputRow.DietaryNetEnergyConcentration,
             };
 
             return diet;

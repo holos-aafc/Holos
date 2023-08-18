@@ -109,7 +109,6 @@ namespace H.Core.Services.Animals
                 methaneConversionFactor: managementPeriod.SelectedDiet.MethaneConversionFactor,
                 additiveReductionFactor: dailyEmissions.AdditiveReductionFactor);
 
-            // Equation 3.1.1-13
             if (managementPeriod.AnimalsAreMilkFedOnly)
             {
                 dailyEmissions.EntericMethaneEmission = 0;
@@ -321,7 +320,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
-                averageMonthlyTemperature: temperature);
+                temperature: temperature);
 
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: dailyEmissions.AdjustedMaintenanceCoefficient,

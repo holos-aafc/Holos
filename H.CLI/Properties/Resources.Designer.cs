@@ -133,6 +133,24 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ammonia Emission Factor For Manure Storage.
+        /// </summary>
+        public static string AmmoniaEmissionFactorForManureStorage {
+            get {
+                return ResourceManager.GetString("AmmoniaEmissionFactorForManureStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Animals Are Milk Fed Only.
+        /// </summary>
+        public static string AnimalsAreMilkFedOnly {
+            get {
+                return ResourceManager.GetString("AnimalsAreMilkFedOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #Annual Crops.
         /// </summary>
         public static string AnnualCrops {
@@ -457,6 +475,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dietary Net Energy Concentration.
+        /// </summary>
+        public static string DietaryNetEnergyConcentration {
+            get {
+                return ResourceManager.GetString("DietaryNetEnergyConcentration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Direct N2O {0}.
         /// </summary>
         public static string DirectN2O {
@@ -768,6 +795,33 @@ namespace H.CLI.Properties {
         public static string FractionOfCarbonInManure {
             get {
                 return ResourceManager.GetString("FractionOfCarbonInManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Organic Nitrogen Immobilized.
+        /// </summary>
+        public static string FractionOfOrganicNitrogenImmobilized {
+            get {
+                return ResourceManager.GetString("FractionOfOrganicNitrogenImmobilized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Organic Nitrogen Mineralized.
+        /// </summary>
+        public static string FractionOfOrganicNitrogenMineralized {
+            get {
+                return ResourceManager.GetString("FractionOfOrganicNitrogenMineralized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Organic Nitrogen Nitrified.
+        /// </summary>
+        public static string FractionOfOrganicNitrogenNitrified {
+            get {
+                return ResourceManager.GetString("FractionOfOrganicNitrogenNitrified", resourceCulture);
             }
         }
         
@@ -2046,6 +2100,15 @@ namespace H.CLI.Properties {
         public static string MilkProteinContentAsPercentage {
             get {
                 return ResourceManager.GetString("MilkProteinContentAsPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moisture Content Of Bedding Material.
+        /// </summary>
+        public static string MoistureContentOfBeddingMaterial {
+            get {
+                return ResourceManager.GetString("MoistureContentOfBeddingMaterial", resourceCulture);
             }
         }
         
@@ -3473,6 +3536,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Carbon Kilograms Dry Matter For Bedding.
+        /// </summary>
+        public static string TotalCarbonKilogramsDryMatterForBedding {
+            get {
+                return ResourceManager.GetString("TotalCarbonKilogramsDryMatterForBedding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total CO2_shelterbelt.
         /// </summary>
         public static string TotalCO2Shelterbelt {
@@ -3487,6 +3559,15 @@ namespace H.CLI.Properties {
         public static string TotalCShelterbelt {
             get {
                 return ResourceManager.GetString("TotalCShelterbelt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Nitrogen Kilograms Dry Matter For Bedding.
+        /// </summary>
+        public static string TotalNitrogenKilogramsDryMatterForBedding {
+            get {
+                return ResourceManager.GetString("TotalNitrogenKilogramsDryMatterForBedding", resourceCulture);
             }
         }
         
@@ -3559,6 +3640,15 @@ namespace H.CLI.Properties {
         public static string Uncertainty {
             get {
                 return ResourceManager.GetString("Uncertainty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Defined Bedding Rate.
+        /// </summary>
+        public static string UserDefinedBeddingRate {
+            get {
+                return ResourceManager.GetString("UserDefinedBeddingRate", resourceCulture);
             }
         }
         

@@ -47,6 +47,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.NDF, ImperialUnitsOfMeasurement.PercentageDryMatter);
             base.Keys.Add(Properties.Resources.VolatileSolidAdjusted, ImperialUnitsOfMeasurement.PoundsPerPound);
             base.Keys.Add(Properties.Resources.NitrogenExcretionAdjusted, ImperialUnitsOfMeasurement.PoundsPerPound);
+            base.Keys.Add(Properties.Resources.DietaryNetEnergyConcentration, null);
 
             base.Keys.Add(Properties.Resources.GainCoefficient, null);
             base.Keys.Add(Properties.Resources.GainCoefficientA, null);
@@ -55,6 +56,10 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.HousingType, null);
             base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.UserDefinedBeddingRate, null);
+            base.Keys.Add(Properties.Resources.TotalCarbonKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.TotalNitrogenKilogramsDryMatterForBedding, null);
+            base.Keys.Add(Properties.Resources.MoistureContentOfBeddingMaterial, null);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
             base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);

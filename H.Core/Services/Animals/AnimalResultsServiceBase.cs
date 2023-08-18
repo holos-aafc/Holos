@@ -298,14 +298,14 @@ namespace H.Core.Services.Animals
         /// Equation 3.1.1-2
         /// </summary>
         /// <param name="baselineMaintenanceCoefficient">Baseline maintenance coefficient (MJ day^-1 kg^-1)</param>
-        /// <param name="averageMonthlyTemperature">Average monthly temperature (upper limit = 20, temperatures above 20ºC or cattle are house in a barn, use 20ºC)</param>
+        /// <param name="temperature">Average monthly temperature (upper limit = 20, temperatures above 20ºC or cattle are house in a barn, use 20ºC)</param>
         /// <returns>Maintenance coefficient – adjusted for temperature (MJ day^-1 kg^-1)</returns>
         public double CalculateTemperatureAdjustedMaintenanceCoefficient(
             double baselineMaintenanceCoefficient,
-            double averageMonthlyTemperature)
+            double temperature)
         {
             var adjustedMaintenanceCoefficient =
-                baselineMaintenanceCoefficient + 0.0048 * (20 - averageMonthlyTemperature);
+                baselineMaintenanceCoefficient + 0.0048 * (20 - temperature);
 
             return adjustedMaintenanceCoefficient;
         }

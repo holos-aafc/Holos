@@ -19,7 +19,9 @@ namespace H.CLI.TemporaryComponentStorage
         public DateTime ManagementPeriodEndDate { get; set; }
         public int ManagementPeriodDays { get; set; }
         public double N2ODirectEmissionFactor { get; set; }
+        public double DietaryNetEnergyConcentration { get; set; }
         public double VolatilizationFraction { get; set; }
+        public bool AnimalsAreMilkFedOnly { get; set; }
         public double YearlyManureMethaneRate { get; set; }
         public double YearlyNitrogenExcretionRate { get; set; }
         public double YearlyEntericMethaneRate { get; set; }
@@ -51,6 +53,10 @@ namespace H.CLI.TemporaryComponentStorage
         public double GainCoefficientA { get; set; }
         public double GainCoefficientB { get; set; }
         public double MaintenanceCoefficient { get; set; }
+        public double UserDefinedBeddingRate { get; set; }
+        public double TotalCarbonKilogramsDryMatterForBedding { get; set; }
+        public double TotalNitrogenKilogramsDryMatterForBedding { get; set; }
+        public double MoistureContentOfBeddingMaterial { get; set; }
         public ManureStateType ManureManagement { get; set; }
         public double MethaneConversionFactorOfManure { get; set; }
         public double AshContent { get; set; }
@@ -75,6 +81,11 @@ namespace H.CLI.TemporaryComponentStorage
         public int NumberOfCalves { get; set; }
         public double InitialWeightOfCalves { get; set; }
         public double FinalWeightOfCalves{ get; set; }
+        public double FractionOfOrganicNitrogenImmobilized { get; set; }
+        public double FractionOfOrganicNitrogenNitrified { get; set; }
+        public double FractionOfOrganicNitrogenMineralized { get; set; }
+        public ManureStateType ManureStateType { get; set; }
+        public double AmmoniaEmissionFactorForManureStorage { get; set; }
 
         #endregion
 
@@ -191,6 +202,27 @@ namespace H.CLI.TemporaryComponentStorage
 
                         break;
                     }
+
+                case Type _ when propertyInfo.PropertyType == typeof(ManureStateType):
+                {
+                    try
+                    {
+                        if (_inputHelper.IsNotApplicableInput(value))
+                        {
+                            this.ManureStateType = ManureStateType.NotSelected;
+                        }
+                        else
+                        {
+                            this.ManureStateType = (ManureStateType)Enum.Parse(typeof(ManureStateType), value, true);
+                        }
+                    }
+                    catch
+                    {
+                        this.ThrowInvalidInput(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, filePath);
+                    }
+
+                    break;
+                }
 
                 case Type _ when propertyInfo.PropertyType == typeof(DateTime):
                     {

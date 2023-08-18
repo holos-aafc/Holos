@@ -141,6 +141,9 @@
   <data name="AllMonths" xml:space="preserve">
     <value>tous les mois</value>
   </data>
+  <data name="AnimalsAreMilkFedOnly" xml:space="preserve">
+    <value>Animals Are Milk Fed Only</value>
+  </data>
   <data name="AnnualCrops" xml:space="preserve">
     <value>#cultures annuelles</value>
   </data>
@@ -801,6 +804,9 @@
   <data name="NegativeInteger" xml:space="preserve">
     <value>{0} n’est pas une donnée valide. L’erreur se trouve à la ligne : {1}, colonne {2} dans {3}.</value>
   </data>
+  <data name="DietaryNetEnergyConcentration" xml:space="preserve">
+    <value>Dietary Net Energy Concentration</value>
+  </data>
   <data name="NitrogenExcretionAdjusted" xml:space="preserve">
     <value>excrétion d'azote ajustée</value>
   </data>
@@ -1316,5 +1322,29 @@
   </data>
   <data name="YearOfObservation" xml:space="preserve">
     <value>année d'observation</value>
+  </data>
+  <data name="MoistureContentOfBeddingMaterial" xml:space="preserve">
+    <value>Moisture Content Of Bedding Material</value>
+  </data>
+  <data name="TotalCarbonKilogramsDryMatterForBedding" xml:space="preserve">
+    <value>Total Carbon Kilograms Dry Matter For Bedding</value>
+  </data>
+  <data name="TotalNitrogenKilogramsDryMatterForBedding" xml:space="preserve">
+    <value>Total Nitrogen Kilograms Dry Matter For Bedding</value>
+  </data>
+  <data name="UserDefinedBeddingRate" xml:space="preserve">
+    <value>User Defined Bedding Rate</value>
+  </data>
+  <data name="FractionOfOrganicNitrogenImmobilized" xml:space="preserve">
+    <value>Fraction Of Organic Nitrogen Immobilized</value>
+  </data>
+  <data name="FractionOfOrganicNitrogenMineralized" xml:space="preserve">
+    <value>Fraction Of Organic Nitrogen Mineralized</value>
+  </data>
+  <data name="FractionOfOrganicNitrogenNitrified" xml:space="preserve">
+    <value>Fraction Of Organic Nitrogen Nitrified</value>
+  </data>
+  <data name="AmmoniaEmissionFactorForManureStorage" xml:space="preserve">
+    <value>Ammonia Emission Factor For Manure Storage</value>
   </data>
 </root>
