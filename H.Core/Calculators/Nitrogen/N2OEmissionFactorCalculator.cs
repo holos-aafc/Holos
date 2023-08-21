@@ -55,11 +55,11 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.2-1
         /// </summary>
-        /// <param name="temperature">The temperature (degrees C) when manure is applied.</param>
+        /// <param name="averageDailyTemperature">The temperature (degrees C) when manure is applied.</param>
         /// <returns>Ambient temperature-based adjustment</returns>
-        public double CalculateAmbientTemperatureAdjustmentForLandApplication(double temperature)
+        public double CalculateAmbientTemperatureAdjustmentForLandApplication(double averageDailyTemperature)
         {
-            var result = 1 - (0.058 * (15 - temperature));
+            var result = 1 - (0.058 * (15 - averageDailyTemperature));
 
             if (result > 1)
             {
@@ -233,13 +233,14 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
         /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
-        /// from land applied manure.
+        /// from land applied manure. Native rangeland is not included.
         /// </summary>
         public double CalculateWeightedOrganicNitrogenEmissionFactor(List<CropViewItem> itemsByYear, Farm farm)
         {
             var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
+            var filteredItems = itemsByYear.Where(x => x.IsNativeGrassland == false);
 
-            foreach (var cropViewItem in itemsByYear)
+            foreach (var cropViewItem in filteredItems)
             {
                 var emissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
                     viewItem: cropViewItem,

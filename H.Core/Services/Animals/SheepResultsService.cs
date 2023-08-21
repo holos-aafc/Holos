@@ -66,7 +66,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             /*
              * Enteric methane (CH4)
@@ -326,7 +326,8 @@ namespace H.Core.Services.Animals
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission, 
                 ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage, 
-                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission);
+                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission, 
+                leachingNO3NEmission: dailyEmissions.ManureNitrateLeachingEmission);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,

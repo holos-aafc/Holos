@@ -154,7 +154,7 @@ namespace H.Core.Services.Animals
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
              */
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure())
             {
@@ -261,7 +261,7 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             /*
              * Enteric methane (CH4)

@@ -49,7 +49,7 @@ namespace H.Core.Services.Animals
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             /*
              * Enteric methane (CH4)
@@ -177,37 +177,31 @@ namespace H.Core.Services.Animals
 
                 if (managementPeriodOfCows != null)
                 {
-                    // Equation 4.2.1-10
                     dailyEmissions.ProteinIntakeFromMilk = base.CalculateCalfProteinIntakeFromMilk(
                         milkProduction: managementPeriodOfCows.MilkProduction,
                         proteinContentOfMilk: managementPeriodOfCows.MilkProteinContent);
                 }
             }
 
-            // Equation 4.2.1-11
             dailyEmissions.ProteinIntake = base.CalculateCalfProteinIntake(
                 calfProteinIntakeFromMilk: dailyEmissions.ProteinIntakeFromMilk,
                 calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
 
-            // Equation 4.2.1-12
             dailyEmissions.ProteinRetainedFromSolidFood = managementPeriod.AnimalsAreMilkFedOnly ? 0 : base.CalculateCalfProteinRetainedFromSolidFeed(
                 calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
 
-            // Equation 4.2.1-13
             dailyEmissions.ProteinRetainedFromMilk = CalculateCalfProteinRetainedFromMilk(
                 calfProteinIntakeFromMilk: dailyEmissions.ProteinIntakeFromMilk);
 
-            // Equation 4.2.1-14
             dailyEmissions.ProteinRetained = CalculateCalfProteinRetained(
                 calfProteinRetainedFromMilk: dailyEmissions.ProteinRetainedFromMilk,
                 calfProteinRetainedFromSolidFeed: dailyEmissions.ProteinRetainedFromSolidFood);
 
-            // Equation 4.2.1-15
             dailyEmissions.NitrogenExcretionRate = CalculateCalfNitrogenExcretionRate(
                 calfProteinIntake: dailyEmissions.ProteinIntake,
                 calfProteinRetained: dailyEmissions.ProteinRetained);
 
-            // Equation 4.2.1-29 (used in volatilization calculation)
+            // used in volatilization calculation
             dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -215,12 +209,10 @@ namespace H.Core.Services.Animals
             // Equation 4.2.1-31
             dailyEmissions.AmountOfNitrogenAddedFromBedding = 0;
 
-            // Equation 4.2.2-1
             dailyEmissions.ManureDirectN2ONEmissionRate = base.CalculateManureDirectNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 emissionFactor: managementPeriod.ManureDetails.N2ODirectEmissionFactor);
 
-            // Equation 4.2.2-2
             dailyEmissions.ManureDirectN2ONEmission = base.CalculateManureDirectNitrogenEmission(
                 manureDirectNitrogenEmissionRate: dailyEmissions.ManureDirectN2ONEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -310,7 +302,7 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
             if (temperature > 20 || managementPeriod.HousingDetails.HousingType == HousingType.HousedInBarn)
             {
                 temperature = 20;

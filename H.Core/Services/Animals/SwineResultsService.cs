@@ -56,7 +56,7 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
@@ -79,11 +79,11 @@ namespace H.Core.Services.Animals
              */
 
             // Old farms had the DMI/Intake associated with the management period and not the diet
-            var feedIntake = managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed > 0 ? managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed : managementPeriod.FeedIntakeAmount;
-                dailyEmissions.DryMatterIntake = feedIntake;
+            var dryMatterIntake = managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed > 0 ? managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed : managementPeriod.FeedIntakeAmount;
+                dailyEmissions.DryMatterIntake = dryMatterIntake;
 
             dailyEmissions.FecalCarbonExcretionRate = this.CalculateCarbonExcretionRate(
-                dailyDryMatterIntakeOfFeed: feedIntake);
+                dailyDryMatterIntakeOfFeed: dryMatterIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -115,7 +115,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.VolatileSolids = this.CalculateVolatileSolids(
                 volatileSolidAdjusted: dailyEmissions.VolatileSolidsAdjusted,
-                feedIntake: feedIntake);
+                feedIntake: dryMatterIntake);
 
             /*
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
@@ -151,7 +151,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.ProteinIntake = this.CalculateProteinIntake(
-                feedIntake: feedIntake,
+                dryMatterIntake: dryMatterIntake,
                 crudeProteinIntake: managementPeriod.SelectedDiet.CrudeProteinContent);
 
             var isBreedingProductionStage = managementPeriod.ProductionStage == ProductionStages.Open ||
@@ -259,7 +259,8 @@ namespace H.Core.Services.Animals
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
                 ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
-                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission);
+                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission,
+                leachingNO3NEmission: dailyEmissions.ManureNitrateLeachingEmission);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
@@ -359,7 +360,7 @@ namespace H.Core.Services.Animals
             double numberOfDays)
         {
             // Nitrogen required for gain is multiplied by 6.25 to get protein required for gain (PR_gain = N_gain * 6.25)
-            return ((finalBodyWeight - initialBodyWeight) * (nitrogenRequiredForGain * 6.25) / numberOfDays);
+            return ((finalBodyWeight - initialBodyWeight) * (nitrogenRequiredForGain * 6.25)) / numberOfDays;
         }
 
         /// <summary>
@@ -429,12 +430,12 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.2.1-19
         /// </summary>
-        /// <param name="feedIntake">Feed intake (kg head^-1 day^-1)</param>
+        /// <param name="dryMatterIntake">Feed intake (kg head^-1 day^-1)</param>
         /// <param name="crudeProteinIntake">Crude protein content (kg kg^-1)</param>
         /// <returns>Protein intake (kg head^-1 day^-1)</returns>
-        public new double CalculateProteinIntake(double feedIntake, double crudeProteinIntake)
+        public new double CalculateProteinIntake(double dryMatterIntake, double crudeProteinIntake)
         {
-            return feedIntake * crudeProteinIntake;
+            return dryMatterIntake * crudeProteinIntake;
         }
 
         /// <summary>

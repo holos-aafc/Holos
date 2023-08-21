@@ -754,7 +754,7 @@ namespace H.Core.Calculators.Carbon
                 this.N2O_NFromOrganicNitrogen * area;
 
             this.CurrentYearResults.TotalDirectNitrousOxidePerHectare =
-                totalDirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+                CoreConstants.ConvertToN2O(totalDirectNitrousOxide);
 
             this.CurrentYearResults.AdjustedAmmoniacalLossFromLandAppliedManurePerHectare = this.AdjustedAmmoniacalLossFromLandAppliedManure;
 
@@ -774,7 +774,7 @@ namespace H.Core.Calculators.Carbon
                 this.N2O_NOrganicNitrogenVolatilization * area;
 
             this.CurrentYearResults.TotalIndirectNitrousOxidePerHectare =
-                totalIndirectNitrousOxide * CoreConstants.ConvertN2ONToN2O;
+                CoreConstants.ConvertToN2O(totalIndirectNitrousOxide);
             this.CurrentYearResults.TotalIndirectNitrousOxideForArea = totalIndirectNitrousOxide * area;
         }
 

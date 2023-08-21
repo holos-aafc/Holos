@@ -118,11 +118,11 @@ namespace H.Core.Providers.Climate
                 return new List<DailyClimateData>();
             }
 
-            //Precipitation and its enumerator to access the next data
+            // Precipitation and its enumerator to access the next data
             var rain = (JObject)featuresValueArray["parameter"]["PRECTOTCORR"];
             var rainE = rain.GetEnumerator();
 
-            //temperature and its enumerator to access the next data
+            // Temperature and its enumerator to access the next data
             var temperature = (JObject)featuresValueArray["parameter"]["T2M"];
             var temperatureE = temperature.GetEnumerator();
 
@@ -134,11 +134,11 @@ namespace H.Core.Providers.Climate
             var solarRadiation = (JObject)featuresValueArray["parameter"]["ALLSKY_SFC_SW_DWN"];
             var solarRadiationE = solarRadiation.GetEnumerator();
 
-            //creating a temp file for the nasa data to live
+            // Creating a temp file for the NASA data
 
             var customClimateData = new List<DailyClimateData>();
 
-            //NOTE: NASA API does not provide evapotranspiration -this needs to be calculated by caller
+            // NOTE: NASA API does not provide evapotranspiration - this needs to be calculated by caller
             int julian = 1;
             while (rainE.MoveNext() && temperatureE.MoveNext() && relativeHumidityE.MoveNext() && solarRadiationE.MoveNext())
             {
@@ -153,7 +153,7 @@ namespace H.Core.Providers.Climate
                 data.MeanDailyAirTemperature = (double)temperatureE.Current.Value;
                 data.MeanDailyPrecipitation = (double)rainE.Current.Value;
                 data.RelativeHumidity = (double)relativeHumidityE.Current.Value;
-                data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the Evapotranspiration calculator expects. No conversion is needed here
+                data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
                 data.MeanDailyPET = _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(data.MeanDailyAirTemperature, data.SolarRadiation, data.RelativeHumidity);
                 data.JulianDay = julian++;
 

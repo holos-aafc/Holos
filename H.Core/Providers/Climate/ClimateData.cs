@@ -294,7 +294,7 @@ namespace H.Core.Providers.Climate
             return monthlyTotals;
         }
 
-        public double GetTemperatureForDay(DateTime dateTime)
+        public double GetMeanTemperatureForDay(DateTime dateTime)
         {
             var dailyResult = this.DailyClimateData.SingleOrDefault(x => x.Date.Equals(dateTime));
             if (dailyResult != null)

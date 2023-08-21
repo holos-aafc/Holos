@@ -1,9 +1,9 @@
 ﻿#region Imports
 
-#endregion
-
 using System;
 using System.Transactions;
+
+#endregion
 
 namespace H.Core
 {
@@ -11,6 +11,25 @@ namespace H.Core
     /// </summary>
     public class CoreConstants
     {
+        #region Constants
+
+        /// <summary>
+        /// Converts from NH3-N to NH3
+        /// </summary>
+        private const double ConvertNH3NToNH3 = 17.0 / 14.0;
+
+        /// <summary>
+        /// Converts from NO3-N to NO3
+        /// </summary>
+        private const double ConvertNO3NToNO3 = 14.0 / 62.0;
+
+        /// <summary>
+        /// Converts from N2O-N to N2O
+        /// </summary>
+        private const double ConvertN2ONToN2O = 44.0 / 28.0;
+
+        #endregion
+
         #region Constructors
 
         static CoreConstants()
@@ -90,17 +109,7 @@ namespace H.Core
         /// <summary>
         /// Converts N2O to CO2e
         /// </summary>
-        public static double N2OToCO2eConversionFactor = 273;        
-
-        /// <summary>
-        /// Converts from NH3-N to NH3
-        /// </summary>
-        public static double ConvertNH3NToNH3 = 17.0 / 14.0;
-
-        /// <summary>
-        /// Converts from N2O-N to N2O
-        /// </summary>
-        public static double ConvertN2ONToN2O = 44.0 / 28.0;
+        public static double N2OToCO2eConversionFactor = 273;
 
         /// <summary>
         /// Converts from C to CO2
@@ -115,6 +124,31 @@ namespace H.Core
         #endregion
 
         #region Public Methods
+
+
+        /// <summary>
+        /// Equation 4.9.6-1
+        /// </summary>
+        public static double ConvertToN2O(double amountOfN2ON)
+        {
+            return amountOfN2ON * ConvertN2ONToN2O;
+        }
+
+        /// <summary>
+        /// Equation 4.9.6-2
+        /// </summary>
+        public static double ConvertToNH3(double amountOfNH3N)
+        {
+            return amountOfNH3N * ConvertNH3NToNH3;
+        }
+
+        /// <summary>
+        /// Equation 4.9.6-3
+        /// </summary>
+        public static double ConvertToNO3(double amountOfNO3N)
+        {
+            return amountOfNO3N * ConvertNO3NToNO3;
+        }
 
         #endregion
 

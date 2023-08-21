@@ -812,8 +812,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-7
-        /// 
         /// (kg N)
         /// </summary>
         public double OrganicNitrogenInStoredManure
@@ -1755,7 +1753,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.N2ONLeachingEmissionsFromLandAppliedManure * CoreConstants.ConvertN2ONToN2O;
+                return CoreConstants.ConvertToN2O(this.N2ONLeachingEmissionsFromLandAppliedManure);
             }
         }
 
@@ -1776,7 +1774,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.AmmoniacalNitrogenFromLandAppliedManure * CoreConstants.ConvertNH3NToNH3;
+                return CoreConstants.ConvertToNH3(this.AmmoniacalNitrogenFromLandAppliedManure);
             }
         }
 

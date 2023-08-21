@@ -47,7 +47,7 @@ namespace H.Core.Services.Animals
             var dailyEmissions = new GroupEmissionsByDay();
             dailyEmissions.DateTime = dateTime;
 
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var dailyAverageOutdoorTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
@@ -152,7 +152,7 @@ namespace H.Core.Services.Animals
 
                 dailyEmissions.ProteinIntake = this.CalculateProteinIntakePoultry(
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
-                    crudeProtein: poultryDietData.CrudeProtein );// Value in table is percentage - convert to fraction
+                    crudeProtein: poultryDietData.CrudeProtein );
 
                 if (managementPeriod.AnimalType == AnimalType.ChickenHens)
                 {
@@ -218,7 +218,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateAmbientTemperatureAdjustmentForStorage(
-                temperature: temperature);
+                dailyAverageOutdoorTemperature: dailyAverageOutdoorTemperature);
 
             dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(
                 ambientTemperatureAdjustmentStorage: dailyEmissions.AmbientAirTemperatureAdjustmentForStorage,
@@ -228,7 +228,7 @@ namespace H.Core.Services.Animals
                 amountOfTANEnteringStorageDaily: dailyEmissions.TanEnteringStorageSystem,
                 adjustedAmmoniaEmissionFactor: dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
-            dailyEmissions.AmmoniaEmissionsFromStorageSystem = ConvertNH3NToNH3(
+            dailyEmissions.AmmoniaEmissionsFromStorageSystem = CoreConstants.ConvertToNH3(
                 amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = this.CalculateAdjustedAmountOfTANEnteringStorage(
@@ -237,7 +237,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AccumulatedTanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
                 tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedTanInStorageOnDay,
-                flowOfTanIntoStorage: dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
+                flowOfTanEnteringStorage: dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
@@ -317,7 +317,7 @@ namespace H.Core.Services.Animals
             base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
                 groupEmissionsByDay: dailyEmissions,
-                temperature: temperature);
+                temperature: dailyAverageOutdoorTemperature);
 
             return dailyEmissions;
         }
@@ -439,12 +439,12 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.3-9
+        /// Equation 4.3.3-8
         /// </summary>
         public double CalculateAmbientTemperatureAdjustmentForStorage(
-            double temperature)
+            double dailyAverageOutdoorTemperature)
         {
-            var result = 1 - 0.058 * (17 - temperature);
+            var result = 1 - 0.058 * (17 - dailyAverageOutdoorTemperature);
             return result;
         }
 

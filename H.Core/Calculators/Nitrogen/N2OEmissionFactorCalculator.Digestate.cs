@@ -86,25 +86,23 @@ namespace H.Core.Calculators.Nitrogen
                 landApplicationEmissionResult.AmmoniacalLoss = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * landApplicationFactors.VolatilizationFraction;
 
                 // Equation 4.9.2-3
-                var ammoniaLoss = landApplicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
-
+                var ammoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AmmoniacalLoss);
                 // Equation 4.9.3-1
                 landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * landApplicationFactors.VolatilizationFraction * landApplicationFactors.EmissionFactorVolatilization;
 
-                // Equation 4.9.3-2
-                var n2OVolatilized = landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized * CoreConstants.ConvertN2ONToN2O;
+                var n2OVolatilized = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized);
 
-                // Equation 4.9.3-3
+                // Equation 4.9.3-2
                 landApplicationEmissionResult.AdjustedAmmoniacalLoss = landApplicationEmissionResult.AmmoniacalLoss - landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized;
 
                 // Equation 4.9.3-4
-                var adjustedAmmoniaEmissions = landApplicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+                var adjustedAmmoniaEmissions = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AdjustedAmmoniacalLoss );
 
                 // Equation 4.9.4-1
                 landApplicationEmissionResult.TotalN2ONFromDigestateLeaching = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * landApplicationFactors.EmissionFactorLeach;
 
                 // Equation 4.9.4-3
-                var n2OLeached = landApplicationEmissionResult.TotalN2ONFromDigestateLeaching * CoreConstants.ConvertN2ONToN2O;
+                var n2OLeached = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalN2ONFromDigestateLeaching);
 
                 // No equation number
                 landApplicationEmissionResult.TotalNitrateLeached = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * (1.0 - landApplicationFactors.EmissionFactorLeach);
