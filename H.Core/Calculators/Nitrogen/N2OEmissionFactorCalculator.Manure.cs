@@ -28,9 +28,9 @@ namespace H.Core.Calculators.Nitrogen
                 viewItem: viewItem,
                 farm: farm);
 
-            var totalNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear();
+            var totalLocalAndImportedNitrogenApplied = viewItem.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear();
 
-            var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
+            var result = totalLocalAndImportedNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
 
             return result;
         }
@@ -254,8 +254,8 @@ namespace H.Core.Calculators.Nitrogen
 
                 var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplication.AnimalType, viewItem.Year);
 
-                var date = manureApplication.DateOfApplication;
-                var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(date.Year, (Months)date.Month);
+                var dateOfApplication = manureApplication.DateOfApplication;
+                var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateOfApplication);
 
                 var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area) / totalManureProducedByAnimals;
                 if (fractionOfManureUsed > 1.0)
@@ -265,7 +265,7 @@ namespace H.Core.Calculators.Nitrogen
 
                 landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication = manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area;
 
-                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(temperature);
+                var adjustedEmissionFactor = CalculateAmbientTemperatureAdjustmentForLandApplication(averageDailyTemperature);
 
                 var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(viewItem, manureApplication);
                 var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(emissionFactorForLandApplication, adjustedEmissionFactor);
@@ -289,15 +289,15 @@ namespace H.Core.Calculators.Nitrogen
                 else
                 {
                     var emissionFraction = 0d;
-                    if (temperature >= 15)
+                    if (averageDailyTemperature >= 15)
                     {
                         emissionFraction = 0.85;
                     }
-                    else if (temperature >= 10 && temperature < 15)
+                    else if (averageDailyTemperature >= 10 && averageDailyTemperature < 15)
                     {
                         emissionFraction = 0.73;
                     }
-                    else if (temperature >= 5 && temperature < 10)
+                    else if (averageDailyTemperature >= 5 && averageDailyTemperature < 10)
                     {
                         emissionFraction = 0.35;
                     }
@@ -315,19 +315,18 @@ namespace H.Core.Calculators.Nitrogen
 
                 // Equation 4.6.2-4
                 // Equation 4.6.2-6
-                var ammoniaLoss = landApplicationEmissionResult.AmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+                var ammoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AmmoniacalLoss);
 
                 // Equation 4.6.3-2
                 landApplicationEmissionResult.TotalN2ONFromManureVolatilized = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * fractionVolatilized * landApplicationFactors.EmissionFactorVolatilization;
 
-                // Equation 4.6.3-3
-                var n2OVolatilized = landApplicationEmissionResult.TotalN2ONFromManureVolatilized * CoreConstants.ConvertN2ONToN2O;
+                var n2OVolatilized = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalN2ONFromManureVolatilized);
 
-                // Equation 4.6.3-4
+                // Equation 4.6.3-3
                 landApplicationEmissionResult.AdjustedAmmoniacalLoss = landApplicationEmissionResult.AmmoniacalLoss - landApplicationEmissionResult.TotalN2ONFromManureVolatilized;
 
                 // Equation 4.6.3-5
-                var adjustedAmmoniaEmissions = landApplicationEmissionResult.AdjustedAmmoniacalLoss * CoreConstants.ConvertNH3NToNH3;
+                var adjustedAmmoniaEmissions = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AdjustedAmmoniacalLoss);
 
                 var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
                 var e = landApplicationFactors.LeachingFraction;
@@ -335,14 +334,14 @@ namespace H.Core.Calculators.Nitrogen
                 // Equation 4.6.4-1
                 landApplicationEmissionResult.TotalN2ONFromManureLeaching = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * landApplicationFactors.EmissionFactorLeach;
 
-                // Equation 4.6.4-4
+                // Equation 4.6.4-3
                 landApplicationEmissionResult.TotalNitrateLeached = landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication * leachingFraction * (1.0 - landApplicationFactors.EmissionFactorLeach);
 
                 // Equation 4.6.5-1
                 landApplicationEmissionResult.TotalIndirectN2ONEmissions = landApplicationEmissionResult.TotalN2ONFromManureVolatilized + landApplicationEmissionResult.TotalN2ONFromManureLeaching;
 
                 // Equation 4.6.5-2
-                landApplicationEmissionResult.TotalIndirectN2OEmissions = landApplicationEmissionResult.TotalIndirectN2ONEmissions * CoreConstants.ConvertN2ONToN2O;
+                landApplicationEmissionResult.TotalIndirectN2OEmissions = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalIndirectN2ONEmissions);
 
                 results.Add(landApplicationEmissionResult);
             }

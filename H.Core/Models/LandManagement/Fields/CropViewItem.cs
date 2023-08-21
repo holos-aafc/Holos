@@ -1177,11 +1177,6 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
-        /// <summary>
-        /// Equation 4.6.1-2
-        /// 
-        /// (kg N)
-        /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockInYear()
         {
             var totalNitrogen = 0d;
@@ -1195,6 +1190,11 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
+        /// <summary>
+        /// Equation 4.6.1-2
+        /// 
+        /// (kg N)
+        /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear()
         {
             var totalNitrogen = 0d;

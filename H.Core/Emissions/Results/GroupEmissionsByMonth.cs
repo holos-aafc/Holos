@@ -214,7 +214,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyManureDirectN2OEmission
         {
-            get { return this.MonthlyManureDirectN2ONEmission * CoreConstants.ConvertN2ONToN2O; }
+            get { return CoreConstants.ConvertToN2O(this.MonthlyManureDirectN2ONEmission); }
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double MonthlyManureIndirectN2OEmission
         {
-            get { return this.MonthlyManureIndirectN2ONEmission * CoreConstants.ConvertN2ONToN2O; }
+            get { return CoreConstants.ConvertToN2O(this.MonthlyManureIndirectN2ONEmission); }
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.MonthlyManureVolatilizationN2ONEmission * CoreConstants.ConvertN2ONToN2O;
+                return CoreConstants.ConvertToN2O(this.MonthlyManureVolatilizationN2ONEmission);
             }
         }
 
@@ -298,7 +298,7 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.MonthlyManureLeachingN2ONEmission * CoreConstants.ConvertN2ONToN2O;
+                return CoreConstants.ConvertToN2O(this.MonthlyManureLeachingN2ONEmission);
             }
         }
 

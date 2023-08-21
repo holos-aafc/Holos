@@ -46,7 +46,7 @@ namespace H.Core.Services.Animals
             Farm farm)
         {
             var dailyEmissions = new GroupEmissionsByDay();
-            var temperature = farm.ClimateData.GetTemperatureForDay(dateTime);
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
             this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
 
@@ -147,7 +147,8 @@ namespace H.Core.Services.Animals
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
                 ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
-                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission);
+                leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission, 
+                leachingNO3NEmission: dailyEmissions.ManureNitrateLeachingEmission);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
