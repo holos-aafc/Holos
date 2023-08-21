@@ -1976,13 +1976,13 @@
     <value>matières solides volatiles</value>
   </data>
   <data name="EnumWeaned" xml:space="preserve">
-    <value>sevré</value>
+    <value>Weaned/nursery</value>
   </data>
   <data name="EnumWeanedLamb" xml:space="preserve">
     <value>agneaux sevrés</value>
   </data>
   <data name="EnumWeaning" xml:space="preserve">
-    <value>en sevrage</value>
+    <value>Nursing piglet</value>
   </data>
   <data name="EnumWellDrained" xml:space="preserve">
     <value>bien drainé</value>

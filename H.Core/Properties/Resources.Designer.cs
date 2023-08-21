@@ -5605,7 +5605,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weaned.
+        ///   Looks up a localized string similar to Weaned/nursery.
         /// </summary>
         public static string EnumWeaned {
             get {
@@ -5623,7 +5623,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weaning.
+        ///   Looks up a localized string similar to Nursing piglet.
         /// </summary>
         public static string EnumWeaning {
             get {
