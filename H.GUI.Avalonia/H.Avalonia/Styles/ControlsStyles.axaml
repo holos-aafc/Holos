@@ -1,0 +1,65 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    
+    <!-- Button Styles -->
+    <Style Selector="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="MediumAquamarine" />
+    </Style>
+    <Style Selector="Button:pointerover.user-prompt-button--confirm /template/ ContentPresenter">
+        <Setter Property="Background" Value="#e34234" />
+    </Style>
+    <Style Selector="Button.user-prompt-button--cancel">
+        <Setter Property="Background" Value="#D3D3D3" />
+    </Style>
+    <Style Selector="DataGridCell Button.row-delete-button">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="Button:pointerover.row-delete-button--pointerOver /template/ ContentPresenter">
+        <Setter Property="Background" Value="#e34234" />
+    </Style>
+    <Style Selector="Button.multiple-row-delete-button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.add-row-datagrid-button">
+        <Setter Property="Margin" Value="20,0,20,0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="MediumAquamarine"/>
+    </Style>
+    <Style Selector="Button.calculate-results-button">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="CornerRadius" Value="15" />
+        <!-- <Setter Property="" Value="" /> -->
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Width" Value="240" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="{DynamicResource RobotoFontFamily}" />
+        <Setter Property="Background" Value="MediumAquamarine"/>
+    </Style>
+    
+    <!-- DataGrid Styles Styles -->
+    <Style Selector="DataGridCell NumericUpDown">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ShowButtonSpinner" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Width" Value="{Binding $parent[DataGridCell].Bounds.Width}"></Setter>
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+    <Style Selector="DataGridCell.numericStyle">
+    </Style>
+</Styles>

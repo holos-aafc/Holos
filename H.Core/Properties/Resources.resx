@@ -5637,4 +5637,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelTotalManureNitrogenAvailableForLandApplication" xml:space="preserve">
     <value>Total manure N available for land application</value>
   </data>
+  <data name="SelectProvince" xml:space="preserve">
+    <value>Select Province</value>
+  </data>
 </root>
