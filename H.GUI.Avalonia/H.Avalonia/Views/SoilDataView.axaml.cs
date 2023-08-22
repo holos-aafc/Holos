@@ -100,9 +100,7 @@ namespace H.Avalonia.Views
                             if (_polygonLayer != null) SoilTabMap.Map.Layers.Remove(_polygonLayer);
                             if (ViewModel.SelectedProvince != Province.SelectProvince)
                             {
-                                var sqlitePersistentCache = new SqlitePersistentCache("polygonsMap");
-                                sqlitePersistentCache.Clear();
-                                _polygonLayer = new RasterizingTileLayer(CreateLayer(ViewModel.SelectedProvince), persistentCache: sqlitePersistentCache, minTiles: 400, maxTiles: 800, renderFormat: RenderFormat.WebP);
+                                _polygonLayer = new RasterizingTileLayer(CreateLayer(ViewModel.SelectedProvince), minTiles: 400, maxTiles: 800, renderFormat: RenderFormat.WebP);
                                 SoilTabMap.Map.Layers.Add(_polygonLayer);
                             }
                         }
