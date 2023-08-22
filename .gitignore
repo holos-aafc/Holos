@@ -400,3 +400,6 @@ FodyWeavers.xsd
 
 # Sync Files
 /*.ffs_db
+
+# rider files
+*.idea
