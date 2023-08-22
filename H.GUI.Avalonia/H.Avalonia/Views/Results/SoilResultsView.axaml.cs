@@ -7,7 +7,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using H.Avalonia.ViewModels.Results;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace H.Avalonia.Views.Results
 {
@@ -54,9 +53,9 @@ namespace H.Avalonia.Views.Results
                 DefaultExtension = "csv",
                 ShowOverwritePrompt = true,
             });
-            if (file is not null && ViewModel.ExportToCSVCommand.CanExecute(file))
+            if (file is not null && ViewModel.ExportToCsvCommand.CanExecute(file))
             {
-                ViewModel.ExportToCSVCommand.Execute(file);
+                ViewModel.ExportToCsvCommand.Execute(file);
             }
         }
     }

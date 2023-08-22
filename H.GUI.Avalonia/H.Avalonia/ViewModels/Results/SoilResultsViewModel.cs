@@ -24,26 +24,10 @@ namespace H.Avalonia.ViewModels.Results
         private readonly ExportHelpers _exportHelpers;
         private readonly KmlHelpers _kmlHelpers;
         private readonly GeographicDataProvider _geographicDataProvider;
-        private bool _isProcessingData;
         private readonly SoilResultsViewItemMap _soilResultsViewItemMap;
         private CancellationTokenSource _cancellationTokenSource;
         private const double DefaultErrorNotificationTime = 10;
-
-        /// <summary>
-        /// The notification manager that handles displaying notifications on the page.
-        /// </summary>
-        public WindowNotificationManager NotificationManager { get; set; }
-
-        /// <summary>
-        /// A command that triggers when a user clicks the back button on the page.
-        /// </summary>
-        public DelegateCommand GoBackCommand { get; }
-
-        /// <summary>
-        /// A command that triggers when a user clicks the export to csv button on the page.
-        /// </summary>
-        public DelegateCommand<object> ExportToCSVCommand { get; }
-
+        
         /// <summary>
         /// A collection of <see cref="SoilResultsViewItem"/> that are attached to the climate results page. Each viewitem denotes a row in the grid. This collection
         /// is populated using the coordinates entered in the multi-coordinate page.
@@ -55,15 +39,7 @@ namespace H.Avalonia.ViewModels.Results
         /// is populated using the coordinates entered in the single-coordinate page.
         /// </summary>
         public ObservableCollection<SoilResultsViewItem> SingleSoilResultsViewItems { get; set; } = new();
-
-        /// <summary>
-        /// A bool that checks if data extraction is currently processing or not. Returns true if data is still processing, return false otherwise.
-        /// </summary>
-        public bool IsProcessingData
-        {
-            get => _isProcessingData;
-            set => SetProperty(ref _isProcessingData, value);
-        }
+        
 
         public SoilResultsViewModel(IRegionManager regionManager, Storage storage, ExportHelpers exportHelpers, KmlHelpers kmlHelpers, GeographicDataProvider geographicDataProvider) : base(regionManager, storage)
         {
@@ -72,7 +48,7 @@ namespace H.Avalonia.ViewModels.Results
             _geographicDataProvider = geographicDataProvider;
             _kmlHelpers = kmlHelpers;
             GoBackCommand = new DelegateCommand(OnGoBack);
-            ExportToCSVCommand = new DelegateCommand<object>(OnExportToCsv);
+            ExportToCsvCommand = new DelegateCommand<object>(OnExportToCsv);
             _soilResultsViewItemMap = new SoilResultsViewItemMap();
         }
 

@@ -5,7 +5,6 @@
              xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
              xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
-             xmlns:infrastructure="clr-namespace:H.Avalonia.Infrastructure"
              xmlns:infrastructure1="clr-namespace:H.Avalonia.Infrastructure;assembly=H.Avalonia.Infrastructure"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="H.Avalonia.Views.Results.SoilResultsView">

@@ -7,11 +7,9 @@ using H.Core.Providers.Climate;
 using Prism.Commands;
 using Prism.Regions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,36 +28,13 @@ namespace H.Avalonia.ViewModels.Results
         private CancellationTokenSource _cancellationTokenSource;
         private const int DefaultErrorNotificationTime = 10;
 
-        private bool _processing;
-
-        /// <summary>
-        /// A command that triggers when a user clicks the back button on the page.
-        /// </summary>
-        public DelegateCommand GoBackCommand { get; }
-
-        /// <summary>
-        /// A command that triggers when a user clicks the export to csv button on the page.
-        /// </summary>
-        public DelegateCommand<object> ExportToCsvCommand { get; }
-
+        
+        
         /// <summary>
         /// A collection of <see cref="ClimateResultsViewItems"/> that are attached to the climate results page. Each viewitem denotes a row in the grid.
         /// </summary>
         public ObservableCollection<ClimateResultsViewItem> ClimateResultsViewItems { get; set; } = new();
-
-        /// <summary>
-        /// The notification manager that handles displaying notifications on the page.
-        /// </summary>
-        public WindowNotificationManager NotificationManager { get; set; }
-
-        /// <summary>
-        /// A bool that checks if data extraction is currently processing or not. Returns true if data is still processing, return false otherwise.
-        /// </summary>
-        public bool IsProcessingData
-        {
-            get => _processing;
-            set => SetProperty(ref _processing, value);
-        }
+        
 
         public ClimateResultsViewModel() { }
 

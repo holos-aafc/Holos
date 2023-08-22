@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 
 namespace H.Avalonia.ViewModels
 {
@@ -39,6 +40,12 @@ namespace H.Avalonia.ViewModels
             get => _storage;
             set => SetProperty(ref _storage, value);
         }
+        
+        /// <summary>
+        /// The notification manager that handles displaying notifications on the page.
+        /// </summary>
+        public WindowNotificationManager NotificationManager { get; set; }
+        
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;

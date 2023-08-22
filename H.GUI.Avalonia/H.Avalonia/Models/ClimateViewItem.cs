@@ -1,11 +1,4 @@
-﻿using SharpKml.Dom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Avalonia.Models
+﻿namespace H.Avalonia.Models
 {
     /// <summary>
     /// Contains properties that are tied to the Grid shown for the climate items in the Climate Data page.
