@@ -236,11 +236,6 @@ namespace H.Avalonia.ViewModels
         public DelegateCommand UpdateInformationFromNavigationPointCommand { get; }
 
         /// <summary>
-        /// Handles displaying of notifications to the user.
-        /// </summary>
-        public WindowNotificationManager NotificationManager { get; set; }
-
-        /// <summary>
         /// Triggered when the <see cref="Storage.SoilViewItems"/> changes. This method raises CanExecuteChanged events for the various
         /// buttons on the page and also attaches/detaches PropertyChanged events to individual properties inside the collection so that
         /// we can be notified when an internal property changes in the collection.

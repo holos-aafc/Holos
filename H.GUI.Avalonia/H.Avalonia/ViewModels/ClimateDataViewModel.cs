@@ -29,12 +29,7 @@ namespace H.Avalonia.ViewModels
         private readonly ImportHelpers _importHelper;
         private readonly ClimateViewItemMap _climateViewItemMap;
         private const int DefaultNotificationTime = 10;
-
-        /// <summary>
-        /// Displays notifications on the current page.
-        /// </summary>
-        public WindowNotificationManager NotificationManager { get; set; }
-
+        
         /// <summary>
         /// Allows navigation from the current view to the <see cref="SoilResultsView"/>.
         /// </summary>
