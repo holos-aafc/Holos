@@ -1,6 +1,6 @@
 using CsvHelper.Configuration;
 using H.Avalonia.Models.Results;
-using H.Avalonia.Infrastructure;
+using H.Infrastructure;
 
 namespace H.Avalonia.Models.ClassMaps
 {
