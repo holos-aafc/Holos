@@ -10,7 +10,6 @@
         private bool _extractMonthlyData;
         private int _julianStartDay;
         private int _julianEndDay;
-        private bool _isSelected;
 
         public ClimateViewItem()
         {
@@ -83,15 +82,6 @@
         {
             get => _extractMonthlyData;
             set => SetProperty(ref _extractMonthlyData, value);
-        }
-
-        /// <summary>
-        /// Checks whether a specific view item is selected by the user.
-        /// </summary>
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set => SetProperty(ref _isSelected, value);
         }
     }
 }

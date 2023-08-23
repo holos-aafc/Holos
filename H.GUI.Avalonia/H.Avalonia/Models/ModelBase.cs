@@ -14,6 +14,7 @@ namespace H.Avalonia.Models
     {
         private double _longitude;
         private double _latitude;
+        private bool _isSelected;
 
         /// <summary>
         /// The latitude value specified by the user.
@@ -39,6 +40,12 @@ namespace H.Avalonia.Models
                 if (value is < -180 or > 180) value = 0;
                 SetProperty(ref _longitude, value);
             }
+        }
+        
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set => SetProperty(ref _isSelected, value);
         }
     }
 }
