@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 
 namespace H.Avalonia.ViewModels
 {
-    public class SoilDataViewModel : ViewModelBase
+    public class SoilDataViewModel : ViewModelBase, IDataGridFeatures
     {
         private readonly IRegionManager _regionManager;
         private IRegionNavigationJournal? _navigationJournal;
@@ -47,13 +47,13 @@ namespace H.Avalonia.ViewModels
         private const int DefaultErrorNotificationTime = 10;
         private const int DefaultInformationNotificationTime = 5;
 
-        private bool _hasSoilViewItems => Storage?.SoilViewItems != null && Storage.SoilViewItems.Any();
+        public bool HasViewItems => Storage?.SoilViewItems != null && Storage.SoilViewItems.Any();
 
-        private bool _anySoilViewItemsSelected => Storage?.SoilViewItems != null &&
-                                                  Storage.SoilViewItems.Any(item => item.IsSelected);
-        private bool _allSoilViewItemsSelected;
+        public bool AnyViewItemsSelected => Storage?.SoilViewItems != null &&
+                                            Storage.SoilViewItems.Any(item => item.IsSelected);
+        public bool AllViewItemsSelected { get; set; }
 
-        public readonly KmlHelpers KmlHelpers;
+        private readonly KmlHelpers _kmlHelpers;
 
         public readonly Dictionary<Province, List<Polygon>> WktPolygonMap = new();
         private bool _isDataProcessing;
@@ -135,24 +135,32 @@ namespace H.Avalonia.ViewModels
         public SoilDataViewModel(IRegionManager regionManager, Storage storage, ImportHelpers importHelper, KmlHelpers kmlHelpers, IDialogService dialogService) : base(regionManager, storage)
         {
             _regionManager = regionManager;
-            _mapHelpers = new MapHelpers();
             _importHelper = importHelper;
             _dialogService = dialogService;
+            _kmlHelpers = kmlHelpers;
+            _mapHelpers = new MapHelpers();
             _soilViewItemMap = new SoilViewItemMap();
-            KmlHelpers = kmlHelpers;
+            InitializeCommands();
+            CreateWktPolygons();
+        }
+
+        /// <summary>
+        /// Initializes the various commands used by the related view.
+        /// </summary>
+        private void InitializeCommands()
+        {
             SwitchToResultsViewFromSingleCoordinateCommand = new DelegateCommand(SwitchToSoilResultsViewFromSingleCoordinate);
             SwitchToResultsViewFromMultiCoordinateCommand =
-                new DelegateCommand(SwitchToSoilResultsViewFromMultiCoordinate).ObservesCanExecute(() => _hasSoilViewItems);
+                new DelegateCommand(SwitchToSoilResultsViewFromMultiCoordinate).ObservesCanExecute(() => HasViewItems);
             ImportFromCsvCommand = new DelegateCommand<object>(OnImportCsv);
-            ToggleSelectAllRowsCommand = new DelegateCommand(OnToggleSelectAllRows).ObservesCanExecute(() => _hasSoilViewItems);
+            ToggleSelectAllRowsCommand = new DelegateCommand(OnToggleSelectAllRows).ObservesCanExecute(() => HasViewItems);
             AddRowCommand = new DelegateCommand(OnAddRow);
             DeleteRowCommand = new DelegateCommand<object>(OnDeleteRow);
-            DeleteSelectedRowsCommand = new DelegateCommand(OnDeleteSelectedRows).ObservesCanExecute(() => _anySoilViewItemsSelected);
+            DeleteSelectedRowsCommand = new DelegateCommand(OnDeleteSelectedRows).ObservesCanExecute(() => AnyViewItemsSelected);
             GetCoordinatesFromAddressCommand = new DelegateCommand(OnGetCoordinates);
             GetAddressFromCoordinateCommand = new DelegateCommand(OnGetAddress);
             UpdateNavigationPointCommand = new DelegateCommand<MPoint>(OnUpdateNavigationPoint);
             UpdateInformationFromNavigationPointCommand = new DelegateCommand(OnUpdateInformationFromNavPoint);
-            CreateWktPolygons();
         }
 
         /// <summary>
@@ -207,7 +215,7 @@ namespace H.Avalonia.ViewModels
         /// Imports inputs from a csv file for which soil data is required. This csv file must have the following headers:
         /// Longitude, Latitude
         /// </summary>
-        public DelegateCommand<object> ImportFromCsvCommand { get; }
+        public DelegateCommand<object> ImportFromCsvCommand { get; set; }
 
         /// <summary>
         /// Deletes a selection of rows that are marked as selected by the user.
@@ -227,13 +235,13 @@ namespace H.Avalonia.ViewModels
         /// <summary>
         /// Updates the point that the user wants to navigate to when the user clicks a specific area on the world map.
         /// </summary>
-        public DelegateCommand<MPoint> UpdateNavigationPointCommand { get; }
+        public DelegateCommand<MPoint> UpdateNavigationPointCommand { get; private set; }
 
         /// <summary>
         /// Updates the <see cref="Latitude"/>, <see cref="Longitude"/> and <see cref="Address"/> fields when the user selects
         /// a new navigation point.
         /// </summary>
-        public DelegateCommand UpdateInformationFromNavigationPointCommand { get; }
+        public DelegateCommand UpdateInformationFromNavigationPointCommand { get; private set; }
 
         /// <summary>
         /// Triggered when the <see cref="Storage.SoilViewItems"/> changes. This method raises CanExecuteChanged events for the various
@@ -254,7 +262,7 @@ namespace H.Avalonia.ViewModels
                     if (item != null)
                         item.PropertyChanged += CollectionItemOnPropertyChanged;
                 }
-                _allSoilViewItemsSelected = false;
+                AllViewItemsSelected = false;
             }
 
             if (e.OldItems == null) return;
@@ -281,7 +289,7 @@ namespace H.Avalonia.ViewModels
                 if (sender is not SoilViewItem viewItem) return;
                 if (!viewItem.IsSelected)
                 {
-                    _allSoilViewItemsSelected = false;
+                    AllViewItemsSelected = false;
                 }
             }
         }
@@ -292,13 +300,13 @@ namespace H.Avalonia.ViewModels
         private void OnToggleSelectAllRows()
         {
             if (Storage?.SoilViewItems == null) return;
-            if (_allSoilViewItemsSelected)
+            if (AllViewItemsSelected)
             {
                 foreach (var item in Storage.SoilViewItems)
                 {
                     item.IsSelected = false;
                 }
-                _allSoilViewItemsSelected = false;
+                AllViewItemsSelected = false;
             }
             else
             {
@@ -306,7 +314,7 @@ namespace H.Avalonia.ViewModels
                 {
                     item.IsSelected = true;
                 }
-                _allSoilViewItemsSelected = true;
+                AllViewItemsSelected = true;
             }
         }
 
@@ -395,9 +403,9 @@ namespace H.Avalonia.ViewModels
                     Storage?.SoilViewItems?.Remove(item);
                 }
 
-                if (!_hasSoilViewItems)
+                if (!HasViewItems)
                 {
-                    _allSoilViewItemsSelected = false;
+                    AllViewItemsSelected = false;
                 }
             });
         }
@@ -529,7 +537,7 @@ namespace H.Avalonia.ViewModels
         private async void CreateWktPolygons()
         {
             IsDataProcessing = true;
-            if (KmlHelpers.LoadPolygonsAsync != null) await KmlHelpers.LoadPolygonsAsync;
+            if (_kmlHelpers.LoadPolygonsAsync != null) await _kmlHelpers.LoadPolygonsAsync;
             await CreateWktPolygonsAsync();
             IsDataProcessing = false;
         }
@@ -541,7 +549,7 @@ namespace H.Avalonia.ViewModels
         {
             await Task.Run(() =>
             {
-                foreach (var (province, polygons) in KmlHelpers.PolygonMap)
+                foreach (var (province, polygons) in _kmlHelpers.PolygonMap)
                 {
                     var result = new List<Polygon>();
                     foreach (var polygonItem in polygons)

@@ -21,7 +21,8 @@ using System.Linq;
 
 namespace H.Avalonia.ViewModels
 {
-    public class ClimateDataViewModel : ViewModelBase
+    public class ClimateDataViewModel : ViewModelBase, IDataGridFeatures
+
     {
         private readonly IRegionManager _regionManager;
         private IRegionNavigationJournal? _navigationJournal;
@@ -29,7 +30,7 @@ namespace H.Avalonia.ViewModels
         private readonly ImportHelpers _importHelper;
         private readonly ClimateViewItemMap _climateViewItemMap;
         private const int DefaultNotificationTime = 10;
-        
+
         /// <summary>
         /// Allows navigation from the current view to the <see cref="SoilResultsView"/>.
         /// </summary>
@@ -54,7 +55,7 @@ namespace H.Avalonia.ViewModels
         /// Import climate data from a csv file. The csv file must have the following columns:
         /// Latitude, Longitude, Start Year, End Year, Julian day start, Julian day end (respectively).
         /// </summary>
-        public DelegateCommand<object> ImportFromCsvCommand { get; }
+        public DelegateCommand<object> ImportFromCsvCommand { get; set; }
 
         /// <summary>
         /// Toggles the select all row command. This command either selects or deselects all the rows currently displayed in the grid.
@@ -64,33 +65,46 @@ namespace H.Avalonia.ViewModels
         /// <summary>
         /// A bool that indicates if all climate data items are selected in the grid. Returns true if all items are selected, returns false otherwise.
         /// </summary>
-        public bool AllClimateViewItemsSelected { get; set; }
+        public bool AllViewItemsSelected { get; set; }
 
         /// <summary>
         /// A bool that indicates if the grid has any climate view items currently added to it. Returns true if Any view items exist, returns false otherwise.
         /// </summary>
-        public bool HasClimateViewItems => Storage?.ClimateViewItems != null && Storage.ClimateViewItems.Any();
+        public bool HasViewItems => Storage?.ClimateViewItems != null && Storage.ClimateViewItems.Any();
 
         /// <summary>
         /// A bool that indicates if any climate view items are selected or not. Returns true if at least one view item is selected, returns false if none are selected.
         /// </summary>
-        public bool AnyClimateViewItemsSelected => Storage?.ClimateViewItems != null &&
+        public bool AnyViewItemsSelected => Storage?.ClimateViewItems != null &&
                                                    Storage.ClimateViewItems.Any(item => item.IsSelected);
 
-        public ClimateDataViewModel() { }
+        public ClimateDataViewModel()
+        {
+        }
 
-        public ClimateDataViewModel(IRegionManager regionManager, Storage storage, ImportHelpers importHelper, IDialogService dialogService) : base(regionManager, storage)
+        public ClimateDataViewModel(IRegionManager regionManager, Storage storage, ImportHelpers importHelper,
+            IDialogService dialogService) : base(regionManager, storage)
         {
             _regionManager = regionManager;
             _importHelper = importHelper;
             _dialogService = dialogService;
-            NavigateToResultsView = new DelegateCommand(SwitchToResultsView).ObservesCanExecute(() => HasClimateViewItems);
+            InitializeCommands();
+            _climateViewItemMap = new ClimateViewItemMap();
+        }
+        
+        /// <summary>
+        /// Initializes the various commands used by the related view.
+        /// </summary>
+        private void InitializeCommands()
+        {
+            NavigateToResultsView = new DelegateCommand(SwitchToResultsView).ObservesCanExecute(() => HasViewItems);
             AddRowCommand = new DelegateCommand(OnAddRow);
             ImportFromCsvCommand = new DelegateCommand<object>(OnImportCsv);
             DeleteRowCommand = new DelegateCommand<object>(OnDeleteRow);
-            DeleteSelectedRowsCommand = new DelegateCommand(OnDeleteSelectedRows).ObservesCanExecute(() => AnyClimateViewItemsSelected);
-            ToggleSelectAllRowsCommand = new DelegateCommand(OnToggleSelectAllRows).ObservesCanExecute(() => HasClimateViewItems);
-            _climateViewItemMap = new ClimateViewItemMap();
+            DeleteSelectedRowsCommand =
+                new DelegateCommand(OnDeleteSelectedRows).ObservesCanExecute(() => AnyViewItemsSelected);
+            ToggleSelectAllRowsCommand =
+                new DelegateCommand(OnToggleSelectAllRows).ObservesCanExecute(() => HasViewItems);
         }
 
         /// <summary>
@@ -112,7 +126,8 @@ namespace H.Avalonia.ViewModels
                     if (item != null)
                         item.PropertyChanged += CollectionItemOnPropertyChanged;
                 }
-                AllClimateViewItemsSelected = false;
+
+                AllViewItemsSelected = false;
             }
 
             if (e.OldItems == null) return;
@@ -139,7 +154,7 @@ namespace H.Avalonia.ViewModels
                 if (sender is not ClimateViewItem viewItem) return;
                 if (!viewItem.IsSelected)
                 {
-                    AllClimateViewItemsSelected = false;
+                    AllViewItemsSelected = false;
                 }
             }
         }
@@ -208,9 +223,9 @@ namespace H.Avalonia.ViewModels
                     Storage?.ClimateViewItems?.Remove(item);
                 }
 
-                if (!HasClimateViewItems)
+                if (!HasViewItems)
                 {
-                    AllClimateViewItemsSelected = false;
+                    AllViewItemsSelected = false;
                 }
             });
         }
@@ -236,17 +251,17 @@ namespace H.Avalonia.ViewModels
             catch (HeaderValidationException e)
             {
                 NotificationManager?.Show(new Notification("Invalid Header",
-                                                e.Message,
-                                                type: NotificationType.Error,
-                                                expiration: TimeSpan.FromSeconds(DefaultNotificationTime))
+                    e.Message,
+                    type: NotificationType.Error,
+                    expiration: TimeSpan.FromSeconds(DefaultNotificationTime))
                 );
             }
             catch (TypeConverterException e)
             {
                 NotificationManager?.Show(new Notification("Invalid CSV Content",
-                                                e.Message,
-                                                type: NotificationType.Error,
-                                                expiration: TimeSpan.FromSeconds(DefaultNotificationTime))
+                    e.Message,
+                    type: NotificationType.Error,
+                    expiration: TimeSpan.FromSeconds(DefaultNotificationTime))
                 );
             }
             catch (IOException e)
@@ -265,13 +280,14 @@ namespace H.Avalonia.ViewModels
         private void OnToggleSelectAllRows()
         {
             if (Storage?.ClimateViewItems == null) return;
-            if (AllClimateViewItemsSelected)
+            if (AllViewItemsSelected)
             {
                 foreach (var item in Storage.ClimateViewItems)
                 {
                     item.IsSelected = false;
                 }
-                AllClimateViewItemsSelected = false;
+
+                AllViewItemsSelected = false;
             }
             else
             {
@@ -279,7 +295,8 @@ namespace H.Avalonia.ViewModels
                 {
                     item.IsSelected = true;
                 }
-                AllClimateViewItemsSelected = true;
+
+                AllViewItemsSelected = true;
             }
         }
     }
