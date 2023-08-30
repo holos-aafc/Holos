@@ -7,12 +7,10 @@ namespace H.Core.Providers.Animals.Table_28
 {
     public interface ITable_28_Production_Days_Provider
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="managementPeriod"></param>
-        /// <param name="componentType"></param>
-        /// <returns></returns>
-        ProductionDaysData GetData(ManagementPeriod managementPeriod, ComponentType? componentType = null);
+        bool HasProductionCycle(AnimalType animalType, ProductionStages productionStage,
+            ComponentType? componentType = null);
+
+        ProductionDaysData GetData(AnimalType animalType,
+            ProductionStages productionStage, ComponentType? componentType = null);
     }
 }

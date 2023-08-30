@@ -17,7 +17,9 @@ namespace H.Core.Providers.Animals
             HTraceListener.AddTraceListener();
         }
 
-        public AnimalCoefficientData GetCoefficientsByAnimalType(AnimalType animalType)
+        public AnimalCoefficientData GetCoefficientsByAnimalType(
+            AnimalType animalType,
+            ProductionStages? productionStage = null)
         {
             switch (animalType)
             {

@@ -653,12 +653,14 @@
     <Compile Include="Services\Animals\IManureService.cs" />
     <Compile Include="Services\Animals\IOtherLivestockResultsService.cs" />
     <Compile Include="Services\Animals\IPoultryResultsService.cs" />
+    <Compile Include="Services\Animals\IScaleUpService.cs" />
     <Compile Include="Services\Animals\ISheepResultsService.cs" />
     <Compile Include="Services\Animals\ISwineResultsService.cs" />
     <Compile Include="Services\Animals\LandApplicationEmissionResult.cs" />
     <Compile Include="Services\Animals\ManureService.cs" />
     <Compile Include="Services\Animals\OtherLivestockResultsService.cs" />
     <Compile Include="Services\Animals\PoultryResultsService.cs" />
+    <Compile Include="Services\Animals\ScaleUpService.cs" />
     <Compile Include="Services\Animals\SheepResultsService.cs" />
     <Compile Include="Services\Animals\SwineResultsService.cs" />
     <Compile Include="Services\FarmResultsService.cs" />

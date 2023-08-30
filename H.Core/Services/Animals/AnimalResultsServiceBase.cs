@@ -1059,7 +1059,7 @@ namespace H.Core.Services.Animals
         /// <param name="proteinContentOfMilk">Protein content of milk (kg kg⁻¹)</param>
         /// <param name="numberOfYoungAnimals">Number of calves</param>
         /// <param name="numberOfAnimals">Number of cows</param>
-        /// <param name="animalsAreAlwaysLactating"></param>
+        /// <param name="animalsAreAlwaysLactating">Indicates if the animal is always lactating regardless of the number of young animals present</param>
         /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
         public virtual double CalculateProteinRetainedForLactation(double milkProduction,
             double proteinContentOfMilk,
@@ -1346,15 +1346,12 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.1-13
-        ///
-        /// For naturally ventilated enclosures (barn) - assumption is temperature is 2 degrees higher. Dairy enclosed housing types
-        /// are climate controlled and so do not use this equation
         /// </summary>
-        /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
-        /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission factors for beef barn</returns>
-        public double CalculateAmbientTemperatureAdjustmentForBarn(double averageMonthlyTemperature)
+        /// <param name="dailyTemperature">Temperature (°C)</param>
+        /// <returns>Temperature-based adjustments used to correct default NH3 emission factors for indoor housing</returns>
+        public double CalculateAmbientTemperatureAdjustmentForIndoorHousing(double dailyTemperature)
         {
-            return Math.Pow(1.041, averageMonthlyTemperature + 2) / Math.Pow(1.041, 15);
+            return Math.Pow(1.041, dailyTemperature + 2) / Math.Pow(1.041, 15);
         }
 
         /// <summary>

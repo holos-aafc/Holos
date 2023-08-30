@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Design;
 using System.Linq;
 using H.Content;
 using H.Core.Enumerations;
@@ -32,21 +33,47 @@ namespace H.Core.Providers.Animals.Table_28
 
         #region Public Methods
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="managementPeriod"></param>
-        /// <param name="componentType"></param>
-        /// <returns></returns>
-        public ProductionDaysData GetData(ManagementPeriod managementPeriod, ComponentType? componentType = null)
+        public bool HasProductionCycle(
+            AnimalType animalType, 
+            ProductionStages productionStage,
+            ComponentType? componentType = null)
         {
-            var result = _data.SingleOrDefault(x => x.AnimalType == managementPeriod.AnimalType &&
-                                                    x.ProductionStage == managementPeriod.ProductionStage &&
+            var result = this.GetData(animalType, productionStage, componentType);
+
+            return result.EmissionsShouldBeScaled == true;
+        }
+
+        public ProductionDaysData GetData(AnimalType animalType,
+            ProductionStages productionStage, ComponentType? componentType = null)
+        {
+            AnimalType lookupType = animalType;
+
+            if (animalType == AnimalType.SwineBoar)
+            {
+                lookupType = AnimalType.SwineGrower;
+            }
+
+            ProductionDaysData result = null;
+            if (lookupType == AnimalType.SwinePiglets)
+            {
+                // We only need the production stage when considering piglet groups
+                result = _data.SingleOrDefault(x => x.AnimalType == lookupType &&
+                                                        x.ProductionStage == productionStage &&
+                                                        x.ComponentType == componentType);
+            }
+            else if (lookupType.IsChickenType())
+            {
+                result = _data.SingleOrDefault(x => x.AnimalType == lookupType);
+            }
+            else
+            {
+                result = _data.SingleOrDefault(x => x.AnimalType == lookupType &&
                                                     x.ComponentType == componentType);
+            }
 
             if (result == null)
             {
-                Trace.TraceError($"{nameof(Table_28_Production_Days_Provider)}.{nameof(GetData)}:" + $" no data found for animal type: '{managementPeriod.AnimalType}, production stage: {managementPeriod.ProductionStage}, component type: {componentType}'");
+                Trace.TraceError($"{nameof(Table_28_Production_Days_Provider)}.{nameof(GetData)}:" + $" no data found for animal type: '{animalType}, production stage: {productionStage}, component type: {componentType}'");
 
                 return new ProductionDaysData();
             }
@@ -72,8 +99,8 @@ namespace H.Core.Providers.Animals.Table_28
 
                 var productionDaysData = new ProductionDaysData();
 
-                var animtype = _animalTypeStringConverter.Convert(animalTypeString.ParseUntilOrDefault());
-                productionDaysData.AnimalType = animtype;
+                var animalType = _animalTypeStringConverter.Convert(animalTypeString.ParseUntilOrDefault());
+                productionDaysData.AnimalType = animalType;
 
                 var componentTypeString = fileLine[1];
                 if (string.IsNullOrWhiteSpace(componentTypeString) == false)

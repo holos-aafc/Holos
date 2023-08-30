@@ -715,27 +715,15 @@ namespace H.Core.Services.Animals
         /// <param name="proteinContentOfMilk">Protein content of milk (kg kg⁻¹)</param>
         /// <param name="numberOfYoungAnimals">Number of calves</param>
         /// <param name="numberOfAnimals">Number of cows</param>
-        /// <param name="animalsAreAlwaysLactating"></param>
+        /// <param name="animalsAreAlwaysLactating">Indicates if the animal is always lactating regardless of the number of young animals present</param>
         /// <returns>Protein retained for lactation (kg head^-1 day^-1)</returns>
         public override double CalculateProteinRetainedForLactation(double milkProduction,
             double proteinContentOfMilk,
             double numberOfYoungAnimals,
-            double numberOfAnimals, bool animalsAreAlwaysLactating)
+            double numberOfAnimals, 
+            bool animalsAreAlwaysLactating)
         {
-            if (Math.Abs(numberOfAnimals) < Double.Epsilon)
-            {
-                return 0;
-            }
-
-            if (Math.Abs(numberOfYoungAnimals) < Double.Epsilon)
-            {
-                // Dairy animals always have lactation calculations performed. If there are no associated calf groups, multiply by 1 instead.
-                return milkProduction * proteinContentOfMilk * 1;
-            }
-            else
-            {
-                return milkProduction * proteinContentOfMilk * numberOfYoungAnimals / numberOfAnimals;
-            }
+            return milkProduction * proteinContentOfMilk;
         }
 
         /// <summary>

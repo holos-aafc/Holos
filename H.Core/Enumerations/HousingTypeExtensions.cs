@@ -67,6 +67,10 @@ namespace H.Core.Enumerations
                 case HousingType.HousedInBarn:
                 case HousingType.HousedInBarnSlurry:
                 case HousingType.HousedInBarnSolid:
+                case HousingType.FreeStallBarnFlushing:
+                case HousingType.FreeStallBarnSolidLitter:
+                case HousingType.FreeStallBarnSlurryScraping:
+                case HousingType.FreeStallBarnMilkParlourSlurryFlushing:
                     return true;
 
                 default:
