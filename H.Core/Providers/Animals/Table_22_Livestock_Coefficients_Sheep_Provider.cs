@@ -35,7 +35,8 @@ namespace H.Core.Providers.Animals
 
         #region Public Methods
 
-        public AnimalCoefficientData GetCoefficientsByAnimalType(AnimalType animalType)
+        public AnimalCoefficientData GetCoefficientsByAnimalType(AnimalType animalType,
+            ProductionStages? productionStage = null)
         {
             var lookupType = animalType;
             if (animalType == AnimalType.SheepFeedlot)

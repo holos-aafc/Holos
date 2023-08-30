@@ -32,6 +32,8 @@ namespace H.Core.Models.Animals
         private double _carbonToNitrogenRatioOfBeddingMaterial;
         private double _moistureContentOfBeddingMaterial;
 
+        private double _indoorHousingTemperature;
+
         private string _nameOfPastureLocation;
 
         private static readonly IMapper _housingDetailsMapper;
@@ -53,7 +55,6 @@ namespace H.Core.Models.Animals
         }
         public HousingDetails()
         {
-            
             this.GrazingSystemType = null; // No grazing by default
 
             this.PropertyChanged -= OnPropertyChanged;
@@ -216,6 +217,15 @@ namespace H.Core.Models.Animals
         {
             get => _moistureContentOfBeddingMaterial;
             set => SetProperty(ref _moistureContentOfBeddingMaterial, value);
+        }
+
+        /// <summary>
+        /// (degrees celsius)
+        /// </summary>
+        public double IndoorHousingTemperature
+        {
+            get => _indoorHousingTemperature;
+            set => SetProperty(ref _indoorHousingTemperature, value);
         }
 
         #endregion

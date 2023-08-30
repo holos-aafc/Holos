@@ -55,8 +55,13 @@ namespace H.Core.Services.Animals
 
             if (managementPeriod.HousingDetails.HousingType.IsIndoorHousing())
             {
-                dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForBarn(
-                    averageMonthlyTemperature: temperature);
+                if (managementPeriod.AnimalType.IsDairyCattleType())
+                {
+                    temperature = managementPeriod.HousingDetails.IndoorHousingTemperature;
+                }
+
+                dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForIndoorHousing(
+                    dailyTemperature: temperature);
             }
             else
             {
