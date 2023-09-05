@@ -3394,13 +3394,18 @@ Below is an example of a sheep component data file broken into sections
 
 	Refer to [Creating a New Farms Folder](#creating-a-new-farms-folder) for help creating an initial farms folder and learning about subsequent prompts.
 
-3. You will be prompted to select a unit of measurement for the program to run in (Metric = 1, Imperial = 2). Please select an option.
+3. You will be asked if you have farms that you would like to import from the Holos GUI (yes/no).
+If you select "yes", you will be prompted to enter the full directory path of your exported farm(s). 
 
-4. The Command Line Interface will now process each of the farms that you have created and their corresponding component data input files.
+	It is advised that you save/move the .json file of the farm you have exported from the GUI to the same location of your "Farms" folder. This is because the imported .json will be converted to a folder containing .csv files corresponding to farm components for the Command Line Interface to process.
+
+4. You will be prompted to select a unit of measurement for the program to run in (Metric = 1, Imperial = 2). Please select an option.
+
+5. The Command Line Interface will now process each of the farms that you have created and their corresponding component data input files.
 
 	When the processing and parsing is finished, you will see a "Conversion Finished" message in the CLI.
 	
-5. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder to be in Step 1. 
+6. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder to be in Step 1. 
 
 <br>
 <p align="center">

@@ -45,6 +45,8 @@ L'interface graphique de Holos 4 peut être téléchargée et utilisée à parti
 
 *Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
 
+Une version d'interface de ligne de commande (CLI) de Holos est disponible <a href="https://agriculture.canada.ca/holos/cli/setup.exe">à ce lien</a>.
+
 # License
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
