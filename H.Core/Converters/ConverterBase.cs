@@ -8,7 +8,8 @@ namespace H.Core.Converters
 		{
 			HTraceListener.AddTraceListener();
 		}
-		//does not deal with removing accents since we will be parsing from the english values of the csv
+
+		// Does not deal with removing accents since we will be parsing from the english values of the csv
 		protected string GetLettersAsLowerCase(string input)
 		{
 			var cleanedInput = "";

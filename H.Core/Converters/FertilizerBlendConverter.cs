@@ -8,8 +8,8 @@ namespace H.Core.Converters
     {
         public FertilizerBlends Convert(string input)
         {
-            var lowerCase = input.ToLowerInvariant();
-            switch (lowerCase)
+            var cleaned = base.GetLettersAsLowerCase(input);
+            switch (cleaned)
             {
                 case "urea":
                     return FertilizerBlends.Urea;
@@ -17,45 +17,59 @@ namespace H.Core.Converters
                 case "ammonia":
                     return FertilizerBlends.Ammonia;
 
-                case "urea ammonium nitrate":
+                case "ureaammoniumnitrate":
                     return FertilizerBlends.UreaAmmoniumNitrate;
 
-                case "ammonium nitrate":
-                    return FertilizerBlends.AmmoniumNitrate;
+                case "ammoniumnitrate":
+                case "ammoniumnitrateprilled":
+                    return FertilizerBlends.AmmoniumNitratePrilled;
 
-                case "calcium ammonium nitrate":
+                case "ammoniumnitrategranulated":
+                    return FertilizerBlends.AmmoniumNitrateGranulated;
+
+                case "calciumammoniumnitrate":
                     return FertilizerBlends.CalciumAmmoniumNitrate;
 
-                case "ammonium sulphate":
+                case "ammoniumsulphate":
                     return FertilizerBlends.AmmoniumSulphate;
 
                 case "mes":
                     return FertilizerBlends.MesS15;
 
-                case "monoammonium phosphate":
+                case "monoammoniumphosphate":
                     return FertilizerBlends.MonoAmmoniumPhosphate;
 
-                case "diammonium phosphate":
+                case "diammoniumphosphate":
                     return FertilizerBlends.DiAmmoniumPhosphate;
 
-                case "triple superphosphate":
+                case "triplesuperphosphate":
                     return FertilizerBlends.TripleSuperPhosphate;
+
+                case "superphosphate":
+                    return FertilizerBlends.SuperPhosphate;
 
                 case "potash":
                     return FertilizerBlends.Potash;
 
-                case "npk":
-                    return FertilizerBlends.Npk;
+                case "potassiumsulphate":
+                    return FertilizerBlends.PotassiumSulphate;
 
-                case "calcium nitrate":
+                case "npk":
+                case "npkmixedacid":
+                    return FertilizerBlends.NpkMixedAcid;
+
+                case "npknitrophosphate":
+                    return FertilizerBlends.NpkNitrophosphate;
+
+                case "calciumnitrate":
                     return FertilizerBlends.CalciumNitrate;
 
-                case "ammonium nitrosulphate":
+                case "ammoniumnitrosulphate":
                     return FertilizerBlends.AmmoniumNitroSulphate;
 
                 default:
                 {
-                    Trace.TraceError($"{nameof(FertilizerBlendConverter)}.{nameof(FertilizerBlendConverter.Convert)}: unknown input '{input}'. Returning default value of {FertilizerBlends.Urea.GetDescription()}");
+                    Trace.TraceError($"{nameof(FertilizerBlendConverter)}.{nameof(FertilizerBlendConverter.Convert)}: unknown input '{cleaned}'. Returning default value of {FertilizerBlends.Urea.GetDescription()}");
 
                     return FertilizerBlends.Urea;
                 }

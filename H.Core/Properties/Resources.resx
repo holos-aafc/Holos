@@ -5637,4 +5637,22 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelTotalManureNitrogenAvailableForLandApplication" xml:space="preserve">
     <value>Total manure N available for land application</value>
   </data>
+  <data name="EnumAmmoniumNitrateGranulated" xml:space="preserve">
+    <value>Ammonium nitrate (granulated)</value>
+  </data>
+  <data name="EnumAmmoniumNitratePrilled" xml:space="preserve">
+    <value>Ammonium nitrate (prilled)</value>
+  </data>
+  <data name="EnumNpkMixedAcid" xml:space="preserve">
+    <value>NPK (mixed-acid)</value>
+  </data>
+  <data name="EnumNpkNitrophosphate" xml:space="preserve">
+    <value>NPK (nitrophosphate)</value>
+  </data>
+  <data name="EnumPotassiumSulphate" xml:space="preserve">
+    <value>Potassium sulphate</value>
+  </data>
+  <data name="EnumSuperPhosphate" xml:space="preserve">
+    <value>Super phosphate</value>
+  </data>
 </root>

@@ -1,23 +1,26 @@
-,,,,,,CFP at plant gate ,,
-,,,,,,Production (US numbers),Application,
-Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source
-Urea,Urea,46,0,0,0,1.18,0.73,Brentrup et al. 2016.
-Ammonia,NH3,82,0,0,0,1.07,,
-Urea ammonium nitrate,UAN,30,0,0,0,1.5,0.25,Brentrup et al. 2016.
-Ammonium nitrate,AN,34,0,0,0,2.52,,Brentrup et al. 2016.
-Calcium ammonium nitrate,CAN,27,0,0,0,2.08,,Brentrup et al. 2016.
-Ammonium sulphate,AS,20.5,0,0,24,0.69,,Brentrup et al. 2016.
-MES,,13,33,0,15,,,
-Monoammonium phosphate,MAP,11,52,0,0,0.46,0,Brentrup et al. 2016.
-Diammonium phosphate,DAP,18,46,0,0,0.73,,Brentrup et al. 2016.
-Triple superphosphate,TSP,0,48,0,0,0.19,,Brentrup et al. 2016.
-Potash,MOP or Potash,0,0,60,0,0.23,,Brentrup et al. 2016.
-NPK,NPK,15,15,15,0,1.27,,Brentrup et al. 2016.
-Calcium nitrate,CN,15.5,0,0,0,1.76,,Brentrup et al. 2016.
-Ammonium nitrosulphate,ANS,26,0,0,14,1.44,,Brentrup et al. 2016.
-,,,,,,,,
-"Brentrup, F., Hoxha, A., Christensen, B., 2016. Carbon footprint analysis of mineral fertilizer production in Europe and other world regions. ",,,,,,,,
-The 10th International Conference on Life Cycle Assessment of Food (LCA Food 2016).,,,,,,,,
-,,,,,,,,
-NRC (Natural Resources Canada) 2008. Canadian ammonia producers : benchmarking energy efficiency and carbon dioxide emissions / prepared for the Canadian Fertilizer Institute ,,,,,,,,
-and Natural Resources Canada. Published by the Canadian Industry Program for Energy Conservation. Cat. No. M144-155/2007E-PDF (Online). ISBN 978-0-662-46150-0,,,,,,,,
+,,,,,,CFP at plant gate ,,,
+,,,,,,Production (US numbers),Application,,
+Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source,
+Urea,Urea,46,0,0,0,1.01,0.73,Brentrup et al. 2018.,
+Ammonia,NH3,82,0,0,0,2.49,,,
+Urea ammonium nitrate,UAN,30,0,0,0,1.33,0.25,Brentrup et al. 2018.,
+Ammonium nitrate (prilled),AN,33.5,0,0,0,2.28,,Brentrup et al. 2018.,
+Ammonium nitrate (granulated),AN,33.5,0,0,0,2.25,,Brentrup et al. 2018.,
+Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al. 2018.,
+Ammonium sulphate,AS,21,0,0,24,0.61,,Brentrup et al. 2018.,
+MES,,13,33,0,15,,,,
+Monoammonium phosphate,MAP,11,52,0,0,0.46,0,Brentrup et al. 2018.,
+Diammonium phosphate,DAP,18,46,0,0,0.67,,Brentrup et al. 2018.,
+Super phosphate,SP,0,18,0,12,0.08,,Brentrup et al. 2018.,
+Triple superphosphate,TSP,0,48,0,0,0.18,,Brentrup et al. 2018.,
+Potash,MOP or Potash,0,0,60,0,0.25,,Brentrup et al. 2018.,
+Potassium sulphate,,0,0,50,18,0.12,,Brentrup et al. 2018.,
+NPK (mixed-acid),NPK,15,15,15,0,1.06,,Brentrup et al. 2018.,
+NPK (nitrophosphate),NPK,15,15,15,0,1.15,,Brentrup et al. 2018.,
+Calcium nitrate,CN,15.5,0,0,0,1.87,,Brentrup et al. 2018.,
+Ammonium nitrosulphate,ANS,26,0,0,14,1.29,,Brentrup et al. 2018.,
+,,,,,,,,,"Frank Brentrup, Joachim Lammel, Tiffanie Stephani, Bjarne Christensen, Updated carbon footprint values for mineral fertilizer from different world regions"
+,,,,,,,,,11th International Conference on Life Cycle Assessment of Food 2018 (LCA Food)
+,,,,,,,,,
+,,,,,,,,,NRC (Natural Resources Canada) 2008. Canadian ammonia producers : benchmarking energy efficiency and carbon dioxide emissions / prepared for the Canadian Fertilizer Institute 
+,,,,,,,,,and Natural Resources Canada. Published by the Canadian Industry Program for Energy Conservation. Cat. No. M144-155/2007E-PDF (Online). ISBN 978-0-662-46150-0

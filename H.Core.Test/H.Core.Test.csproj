@@ -113,6 +113,7 @@
     <Compile Include="Converters\TillageTypeConverterTest.cs" />
     <Compile Include="Converters\TreeSpeciesStringConverterTest.cs" />
     <Compile Include="Converters\EconomicMeasurementStringConverterTest.cs" />
+    <Compile Include="Converters\FertilizerBlendConverterTest.cs" />
     <Compile Include="ConverterTest.cs" />
     <Compile Include="CustomAttributes\ConvertUnitsAttributeTest.cs" />
     <Compile Include="Emissions\GroupEmissionsByMonthTest.cs" />

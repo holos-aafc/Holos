@@ -61,5 +61,23 @@ namespace H.Core.Enumerations
         /// </summary>
         [LocalizedDescription("EnumCustomOrganic", typeof(Resources))]
         CustomOrganic,
+
+        [LocalizedDescription("EnumAmmoniumNitratePrilled", typeof(Resources))]
+        AmmoniumNitratePrilled,
+
+        [LocalizedDescription("EnumAmmoniumNitrateGranulated", typeof(Resources))]
+        AmmoniumNitrateGranulated,
+
+        [LocalizedDescription("EnumSuperPhosphate", typeof(Resources))]
+        SuperPhosphate,
+
+        [LocalizedDescription("EnumNpkMixedAcid", typeof(Resources))]
+        NpkMixedAcid,
+
+        [LocalizedDescription("EnumNpkNitrophosphate", typeof(Resources))]
+        NpkNitrophosphate,
+
+        [LocalizedDescription("EnumPotassiumSulphate", typeof(Resources))]
+        PotassiumSulphate,
     }
 }

@@ -1204,6 +1204,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ammonium nitrate (granulated).
+        /// </summary>
+        public static string EnumAmmoniumNitrateGranulated {
+            get {
+                return ResourceManager.GetString("EnumAmmoniumNitrateGranulated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ammonium nitrate (prilled).
+        /// </summary>
+        public static string EnumAmmoniumNitratePrilled {
+            get {
+                return ResourceManager.GetString("EnumAmmoniumNitratePrilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ammonium nitrosulphate (ANS).
         /// </summary>
         public static string EnumAmmoniumNitroSulphate {
@@ -4084,6 +4102,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NPK (mixed-acid).
+        /// </summary>
+        public static string EnumNpkMixedAcid {
+            get {
+                return ResourceManager.GetString("EnumNpkMixedAcid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NPK (nitrophosphate).
+        /// </summary>
+        public static string EnumNpkNitrophosphate {
+            get {
+                return ResourceManager.GetString("EnumNpkNitrophosphate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Niu et al. (2018) Eq. 5.
         /// </summary>
         public static string EnumNuiEtAl {
@@ -4350,6 +4386,15 @@ namespace H.Core.Properties {
         public static string EnumPotash {
             get {
                 return ResourceManager.GetString("EnumPotash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potassium sulphate.
+        /// </summary>
+        public static string EnumPotassiumSulphate {
+            get {
+                return ResourceManager.GetString("EnumPotassiumSulphate", resourceCulture);
             }
         }
         
@@ -5088,6 +5133,15 @@ namespace H.Core.Properties {
         public static string EnumSunflowerResidues {
             get {
                 return ResourceManager.GetString("EnumSunflowerResidues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super phosphate.
+        /// </summary>
+        public static string EnumSuperPhosphate {
+            get {
+                return ResourceManager.GetString("EnumSuperPhosphate", resourceCulture);
             }
         }
         

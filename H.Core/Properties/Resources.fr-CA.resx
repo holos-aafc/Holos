@@ -504,6 +504,12 @@
   <data name="EnumAmmoniumNitrate" xml:space="preserve">
     <value>nitrate d’ammonium (na)</value>
   </data>
+  <data name="EnumAmmoniumNitrateGranulated" xml:space="preserve">
+    <value>Ammonium nitrate (granulated)</value>
+  </data>
+  <data name="EnumAmmoniumNitratePrilled" xml:space="preserve">
+    <value>Ammonium nitrate (prilled)</value>
+  </data>
   <data name="EnumAmmoniumNitroSulphate" xml:space="preserve">
     <value>nitrosulfate d’ammonium (nsa)</value>
   </data>
@@ -1458,6 +1464,12 @@
   <data name="EnumNpk" xml:space="preserve">
     <value>npk</value>
   </data>
+  <data name="EnumNpkMixedAcid" xml:space="preserve">
+    <value>NPK (mixed-acid)</value>
+  </data>
+  <data name="EnumNpkNitrophosphate" xml:space="preserve">
+    <value>NPK (nitrophosphate)</value>
+  </data>
   <data name="EnumNuiEtAl" xml:space="preserve">
     <value>Niu et al. (2018) Éq. 5</value>
   </data>
@@ -1551,6 +1563,9 @@
   </data>
   <data name="EnumPotash" xml:space="preserve">
     <value>potasse 0-0-60-0</value>
+  </data>
+  <data name="EnumPotassiumSulphate" xml:space="preserve">
+    <value>Potassium sulphate</value>
   </data>
   <data name="EnumPoultry" xml:space="preserve">
     <value>volaille</value>
@@ -1803,6 +1818,9 @@
   </data>
   <data name="EnumSunflowerResidues" xml:space="preserve">
     <value>Sunflower Residues</value>
+  </data>
+  <data name="EnumSuperPhosphate" xml:space="preserve">
+    <value>Super phosphate</value>
   </data>
   <data name="EnumSwath" xml:space="preserve">
     <value>andain</value>

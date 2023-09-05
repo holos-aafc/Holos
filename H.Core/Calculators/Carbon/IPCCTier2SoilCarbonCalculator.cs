@@ -553,7 +553,8 @@ namespace H.Core.Calculators.Carbon
         /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
         /// <param name="percentageOfStrawReturned"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
-        public double CalculateAboveGroundResidueDryMatter(double freshWeightOfYield,
+        public double CalculateAboveGroundResidueDryMatter(
+            double freshWeightOfYield,
             double harvestIndex,
             double moistureContentOfCropAsPercentage, 
             double percentageOfStrawReturned)

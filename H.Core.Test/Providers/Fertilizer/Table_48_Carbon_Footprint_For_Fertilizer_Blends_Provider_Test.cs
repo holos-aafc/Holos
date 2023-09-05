@@ -47,23 +47,23 @@ namespace H.Core.Test.Providers.Fertilizer
         {
             var result = _provider.GetData();
 
-            Assert.AreEqual(15, result.Count());
+            Assert.AreEqual(19, result.Count());
         }
 
         [TestMethod]
         public void GetFertilizerBlendValues()
         {
             var data = _provider.GetData(FertilizerBlends.Ammonia);
-            Assert.AreEqual(1.07, data.CarbonDioxideEmissionsAtTheGate);
+            Assert.AreEqual(2.49, data.CarbonDioxideEmissionsAtTheGate);
             Assert.AreEqual(82, data.PercentageNitrogen);
 
             data = _provider.GetData(FertilizerBlends.CalciumNitrate);
-            Assert.AreEqual(1.76, data.CarbonDioxideEmissionsAtTheGate);
+            Assert.AreEqual(1.87, data.CarbonDioxideEmissionsAtTheGate);
 
             data = _provider.GetData(FertilizerBlends.Urea);
             Assert.AreEqual(0.73, data.ApplicationEmissions);
 
-            data = _provider.GetData(FertilizerBlends.Npk);
+            data = _provider.GetData(FertilizerBlends.NpkMixedAcid);
             Assert.AreEqual(15, data.PercentagePotassium);
         }
 
