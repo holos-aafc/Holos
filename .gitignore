@@ -401,3 +401,4 @@ FodyWeavers.xsd
 # Sync Files
 /*.ffs_db
 /.idea
+H.CLI/sync.ffs_db

@@ -52,7 +52,7 @@ namespace H.CLI.Handlers
         /// <param name="farmsFolderPath">The root directory that will contain all of the farms</param>
         public List<Farm> Initialize(string farmsFolderPath)
         {
-            var pathToExportedFarms = this.PromptUserForLocationOfExportedFarms();
+            var pathToExportedFarms = this.PromptUserForLocationOfExportedFarms(farmsFolderPath);
             if (string.IsNullOrWhiteSpace(pathToExportedFarms))
             {
                 // User specified no farms to import
@@ -73,7 +73,6 @@ namespace H.CLI.Handlers
             Console.WriteLine();
             Console.WriteLine(string.Format(Properties.Resources.InterpolatedTotalFarmsSuccessfullyImported, farms.Count));
             Console.WriteLine(string.Format(Properties.Resources.LabelInputFilesHaveBeenCreatedAndStoredInYourFarmsDirectory, inputFilesForAllFarms.Count));
-            Console.WriteLine();
 
             return farms;
         }
@@ -277,9 +276,10 @@ namespace H.CLI.Handlers
             return createdFiles;
         }
 
-        public string PromptUserForLocationOfExportedFarms()
+        public string PromptUserForLocationOfExportedFarms(string farmsFolderPath)
         {
-            // Ask the user if they have farms that they would like to import from the GUI (they must have already exported the farms to a .json file)            
+            // Ask the user if they have farms that they would like to import from the GUI (they must have already exported the farms to a .json file)
+            Console.WriteLine();
             Console.Write(Properties.Resources.LabelWouldYouLikeToImportFarmsFromTheGui);            
             Console.WriteLine(Properties.Resources.LabelYesNo);
 
@@ -287,6 +287,14 @@ namespace H.CLI.Handlers
             if (_inputHelper.IsYesResponse(response))
             {
                 // Prompt the user for the location of their exported farms
+                Console.WriteLine();
+                Console.Write(Properties.Resources.LabelAreYourExportedFarmsInCurrentFarmDirectory);
+                Console.WriteLine(Properties.Resources.LabelYesNo);
+                var response2 = Console.ReadLine();
+                if (_inputHelper.IsYesResponse(response2))
+                {
+                    return farmsFolderPath;
+                }
                 Console.WriteLine();
                 Console.WriteLine(Properties.Resources.LabelWhatIsThePathToYourExportedFarms);
                 var pathToExportedFarms = Console.ReadLine();

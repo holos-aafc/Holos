@@ -180,6 +180,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             Console.ForegroundColor = ConsoleColor.Green;
             do
             {
+                Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptForFarmsFolderLocation);
                 farmsFolderPath = Console.ReadLine();
             } while (!Directory.Exists(farmsFolderPath));

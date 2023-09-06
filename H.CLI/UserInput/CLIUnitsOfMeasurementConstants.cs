@@ -23,6 +23,7 @@ namespace H.CLI.UserInput
             {
                 userChosenMeasurement = 0;
                 //Need to display this in both French and English at the start because we do not know their preferred language yet
+                Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptUserForUnitsOfMeasurement);
                 Console.WriteLine("Veuillez entrer le nombre correspondant à vos unités de mesure préférées(métrique = 1, impérial = 2");
                 userChosenMeasurementString = Console.ReadLine();

@@ -1753,6 +1753,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are your exported farms in your current farms directory?.
+        /// </summary>
+        public static string LabelAreYourExportedFarmsInCurrentFarmDirectory {
+            get {
+                return ResourceManager.GetString("LabelAreYourExportedFarmsInCurrentFarmDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating beef cattle input files..
         /// </summary>
         public static string LabelCreatingBeefCattleInputFiles {

@@ -137,7 +137,7 @@ namespace H.CLI
                 {
                     storage.ApplicationData = applicationData;
                     //Start Processing Farms
-                    Console.WriteLine(Environment.NewLine);
+                    Console.WriteLine();
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
                     //Overall Results For All the Farms
