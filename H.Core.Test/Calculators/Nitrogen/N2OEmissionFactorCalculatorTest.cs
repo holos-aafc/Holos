@@ -183,7 +183,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             viewItem1.ManureApplicationViewItems.Add(manureApplication);
 
-            var groupEmissionsByDay = new GroupEmissionsByDay() {AccumulatedNitrogenAvailableForLandApplicationOnDay = 100};
+            var groupEmissionsByDay = new GroupEmissionsByDay() { AdjustedAmountOfTanInStoredManureOnDay = 50, OrganicNitrogenCreatedOnDay = 50};
             var animalResults = new AnimalComponentEmissionsResults()
             {
                 EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()

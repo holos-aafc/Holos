@@ -121,7 +121,7 @@ namespace H.Core.Calculators.Carbon
 
             base.CurrentYearResults.MicrobialPoolAfterCropDemandAdjustment = base.MicrobePool;
 
-            // Summation of emission must occur before balancing pools so nitrification can be calculated using total N2O-N emissions
+            // Summation of emissions must occur before balancing pools so nitrification can be calculated using total N2O-N emissions
             base.SumEmissions();
 
             base.BalancePools(farm.Defaults.MicrobeDeath);

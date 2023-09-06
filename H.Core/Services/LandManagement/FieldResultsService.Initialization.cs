@@ -84,7 +84,7 @@ namespace H.Core.Services.LandManagement
 
         public void AssignNitrogenFixation(CropViewItem viewItem)
         {
-            viewItem.NitrogenFixation = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation;
+            viewItem.NitrogenFixationPercentage = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
         }
 
         public void AssignHarvestMethod(CropViewItem viewItem, Farm farm)

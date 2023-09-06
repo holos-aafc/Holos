@@ -50,7 +50,7 @@ namespace H.CLI.Test.Handlers
         [Ignore]
         public void PromptUserForLocationOfExportedFarms()
         {
-            _handler.PromptUserForLocationOfExportedFarms();
+            _handler.PromptUserForLocationOfExportedFarms("");
         }
 
         #endregion

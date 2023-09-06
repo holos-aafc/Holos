@@ -96,6 +96,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _lumCMax;
         private double _kValue;
         private double _nitrogenFixation;
+        private double _nitrogenFixationPercentage;
         private double _forageUtilizationRate;
 
         private Guid _perennialStandGroupId;
@@ -1134,6 +1135,19 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedAboveGroundResidueNitrogen { get; set; }
         public double CombinedBelowGroundResidueNitrogen { get; set; }
         public double GrowingSeasonIrrigation { get; set; }
+
+        public double NitrogenFixationPercentage
+        {
+            get
+            {
+                return _nitrogenFixationPercentage;
+            }
+
+            set
+            {
+                SetProperty(ref _nitrogenFixationPercentage, value, () => this.NitrogenFixation = (value / 100.0));
+            }
+        }
 
         #endregion
 
