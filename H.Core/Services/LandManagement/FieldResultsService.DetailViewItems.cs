@@ -473,8 +473,16 @@ namespace H.Core.Services.LandManagement
             int rotationSize = 0;
             if (viewItemsForRotation.Count() == 0)
             {
-                // No items in collection (component created from CLI), use property for the count
-                rotationSize = viewItemsForField.First().SizeOfFirstRotationForField;
+                var firstViewItem = viewItemsForField.First();
+                if (firstViewItem.SizeOfFirstRotationForField != viewItemsForField.Count())
+                {
+                    // This will occur when the start and end year are the same
+                    rotationSize = viewItemsForField.Count();
+                }
+                else
+                {
+                    rotationSize = viewItemsForField.First().SizeOfFirstRotationForField;
+                }
             }
             else
             {
