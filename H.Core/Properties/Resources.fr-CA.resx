@@ -4133,6 +4133,9 @@
   <data name="MessageBackupRestored" xml:space="preserve">
     <value>Holos n’a pas été fermé correctement lors de la dernière session.  Une copie de sauvegarde sur {0} à {1} a été récupérée. Veuillez vérifier la cohérence de vos données.</value>
   </data>
+  <data name="MessageCalfsAreAssumedToBeUnweaned" xml:space="preserve">
+    <value>Beef calves are assumed to be unweaned animals that are still with the cow and are fed entirely or partially on milk; once weaned any calves kept on the farm are expected to pass into the 'replacement heifers' animal group</value>
+  </data>
   <data name="MessageCarbonCalculationsWillNotBeMadeBefore1910" xml:space="preserve">
     <value>Les calculs de stockage ou de perte de carbone ne seront pas effectués pour les années antérieures à 1910</value>
   </data>

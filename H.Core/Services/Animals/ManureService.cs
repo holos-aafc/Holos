@@ -18,6 +18,24 @@ namespace H.Core.Services.Animals
         private readonly IAnimalService _animalService;
         private readonly List<ManureTank> _manureTanks;
 
+        private readonly List<AnimalType> _validManureTypes = new List<AnimalType>()
+        {
+            AnimalType.NotSelected,
+            AnimalType.Beef,
+            AnimalType.Dairy,
+            AnimalType.Swine,
+            AnimalType.Sheep,
+            AnimalType.Poultry,
+            AnimalType.Llamas,
+            AnimalType.Alpacas,
+            AnimalType.Deer,
+            AnimalType.Elk,
+            AnimalType.Goats,
+            AnimalType.Horses,
+            AnimalType.Mules,
+            AnimalType.Bison,
+        };
+
         #endregion
 
         #region Constructors
@@ -39,6 +57,24 @@ namespace H.Core.Services.Animals
         #endregion
 
         #region Public Methods
+
+        public double GetAmountAvailableForExport(int year, Farm farm)
+        {
+            var amount = 0d;
+
+            foreach (var animalType in _validManureTypes)
+            {
+                var tank = this.GetTank(animalType, year, farm);
+                amount += tank.VolumeRemainingInTank;
+            }
+
+            return amount;
+        }
+
+        public List<AnimalType> GetValidManureTypes()
+        {
+            return _validManureTypes;
+        }
 
         public void CalculateResults(Farm farm)
         {

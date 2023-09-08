@@ -338,6 +338,7 @@
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
+    <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
     <Compile Include="Providers\Animals\Table 28\ITable_28_Production_Days_Provider.cs" />
     <Compile Include="Providers\Animals\Table 28\ProductionDaysData.cs" />

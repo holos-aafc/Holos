@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Castle.Components.DictionaryAdapter;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -10,11 +14,12 @@ using Moq;
 namespace H.Core.Test.Services
 {
     [TestClass]
-    public class ManureServiceTest
+    public class ManureServiceTest : UnitTestBase
     {
         #region Fields
 
         private ManureService _sut;
+        private Mock<IAnimalService> _mockAnimalService;
 
         #endregion
 
@@ -33,7 +38,8 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new ManureService(new Mock<IAnimalService>().Object);
+            _mockAnimalService = new Mock<IAnimalService>();
+            _sut = new ManureService(_mockAnimalService.Object);
         }
 
         [TestCleanup]
@@ -62,6 +68,35 @@ namespace H.Core.Test.Services
 
             var farm = new Farm();
             farm.Components.Add(component);
+        }
+
+        [TestMethod]
+        public void GetAmountAvailableForExportReturnsZeroWhenNoAnimalsPresentTest()
+        {
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, new Farm());
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetAmountAvailableForExportReturnsZeroWhenAnimalsPresentTest()
+        {
+            var farm = base.GetTestFarm();
+
+            var componentResults = base.GetTestAnimalComponentEmissionsResults();
+
+            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() {componentResults});
+
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetValidManureTypesReturnsCorrectCountTest()
+        {
+            var result = _sut.GetValidManureTypes();
+            Assert.AreEqual(14, result.Count);
         }
 
         #endregion

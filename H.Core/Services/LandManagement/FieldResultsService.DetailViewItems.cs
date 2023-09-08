@@ -476,7 +476,7 @@ namespace H.Core.Services.LandManagement
                 var firstViewItem = viewItemsForField.First();
                 if (firstViewItem.SizeOfFirstRotationForField != viewItemsForField.Count())
                 {
-                    // This will occur when the start and end year are the same
+                    // This will occur when the start and end year are the same (i.e. SizeOfFirstRotation could be 3 and count of detail view items would be 1)
                     rotationSize = viewItemsForField.Count();
                 }
                 else

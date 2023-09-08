@@ -12274,6 +12274,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Beef calves are assumed to be unweaned animals that are still with the cow and are fed entirely or partially on milk; once weaned any calves kept on the farm are expected to pass into the &apos;replacement heifers&apos; animal group.
+        /// </summary>
+        public static string MessageCalfsAreAssumedToBeUnweaned {
+            get {
+                return ResourceManager.GetString("MessageCalfsAreAssumedToBeUnweaned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Carbon storage and/or loss calculations will not be made for years prior to 1910.
         /// </summary>
         public static string MessageCarbonCalculationsWillNotBeMadeBefore1910 {

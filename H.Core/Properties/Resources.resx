@@ -5655,4 +5655,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="EnumSuperPhosphate" xml:space="preserve">
     <value>Super phosphate</value>
   </data>
+  <data name="MessageCalfsAreAssumedToBeUnweaned" xml:space="preserve">
+    <value>Beef calves are assumed to be unweaned animals that are still with the cow and are fed entirely or partially on milk; once weaned any calves kept on the farm are expected to pass into the 'replacement heifers' animal group</value>
+  </data>
 </root>
