@@ -2392,6 +2392,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Production Stage.
+        /// </summary>
+        public static string ProductionStage {
+            get {
+                return ResourceManager.GetString("ProductionStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the location of your &quot;Farms&quot; folder to run the Holos Command Line Interface.
         /// </summary>
         public static string PromptForFarmsFolderLocation {
@@ -3289,6 +3298,15 @@ namespace H.CLI.Properties {
         public static string Settings_ProportionOfSoilOrganicCarbon {
             get {
                 return ResourceManager.GetString("Settings_ProportionOfSoilOrganicCarbon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province.
+        /// </summary>
+        public static string Settings_Province {
+            get {
+                return ResourceManager.GetString("Settings_Province", resourceCulture);
             }
         }
         

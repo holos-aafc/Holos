@@ -5,12 +5,16 @@ using System.Linq;
 using H.CLI.Converters;
 using H.CLI.Parser;
 using H.Core.Models;
+using H.Core.Services;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
     public class DataInputHandler
     {
         #region Fields
+
+        private FarmHelper _farmHelper = new FarmHelper();
+
         private ParserHandler parserHandler = new ParserHandler();
         private DirectoryHandler _directoryHandler = new DirectoryHandler();
         private ComponentConverterHandler _componentConverter = new ComponentConverterHandler();
@@ -31,10 +35,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// </summary>
         public Farm ProcessDataInputFiles(string farmDirectoryPath)
         {
-                var farm = new Farm()
-                {
-                    Guid = Guid.NewGuid()
-                };
+            var farm = _farmHelper.Create();
 
                 var componentDirectoryList = Directory.GetDirectories(farmDirectoryPath).ToList();
                 _directoryHandler.checkForInvalidComponentDirectoryNames(componentDirectoryList, farmDirectoryPath);

@@ -51,7 +51,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var filteredGlobalKeys = globalKey.keys.GroupBy(x => x.Split('=')).ToDictionary(x => x.Key[0].Trim(), x => x.Key[1].Trim());
 
             //Metric values.
-            Assert.AreEqual(filteredGlobalKeys.Count(), 93);
+            Assert.AreEqual(filteredGlobalKeys.Count(), 94);
             Assert.AreEqual(filteredGlobalKeys["Alfa"], "0.7");
             Assert.AreEqual(filteredGlobalKeys["Decomposition Minimum Temperature  (°C)"], "-3.78");
         }
@@ -73,7 +73,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var filteredGlobalKeys = globalKey.keys.GroupBy(x => x.Split('=')).ToDictionary(x => x.Key[0].Trim(), x => x.Key[1].Trim());
 
             //Imperial values.  Assert.AreEqual(filteredGlobalKeys[], "");
-            Assert.AreEqual(filteredGlobalKeys.Count(), 93);
+            Assert.AreEqual(filteredGlobalKeys.Count(), 94);
             Assert.AreEqual(filteredGlobalKeys["Alfa"], "0.7");
             Assert.AreEqual(filteredGlobalKeys["Decomposition Minimum Temperature  (°F)"], "25.196");
 
@@ -96,7 +96,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var filteredGlobalKeys = globalKey.keys.GroupBy(x => x.Split('=')).ToDictionary(x => x.Key[0].Trim(), x => x.Key[1].Trim());
 
             //Metric values. French => Commas Instead of Decimal Points
-            Assert.AreEqual(filteredGlobalKeys.Count(), 93);
+            Assert.AreEqual(filteredGlobalKeys.Count(), 94);
             Assert.AreEqual(filteredGlobalKeys["Alfa"], "0,7");
             Assert.AreEqual(filteredGlobalKeys["Decomposition Minimum Temperature  (°C)"], "-3,78");
         }
@@ -117,7 +117,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             globalKey.keys.RemoveAll(x => x.Contains("#"));
 
             var filteredGlobalKeys = globalKey.keys.GroupBy(x => x.Split('=')).ToDictionary(x => x.Key[0].Trim(), x => x.Key[1].Trim());
-            Assert.AreEqual(filteredGlobalKeys.Count(), 93);
+            Assert.AreEqual(filteredGlobalKeys.Count(), 94);
             Assert.AreEqual(filteredGlobalKeys["Alfa"], "0,7");
             Assert.AreEqual(filteredGlobalKeys["Decomposition Minimum Temperature  (°F)"], "25,196");
 

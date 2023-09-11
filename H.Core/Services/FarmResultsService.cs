@@ -296,21 +296,6 @@ namespace H.Core.Services
             return result;
         }
 
-        public Farm Create()
-        {
-            var farm = new Farm();
-            farm.Initialize();
-
-            farm.DateModified = DateTime.Now;
-            farm.DateCreated = DateTime.Now;
-
-            farm.Diets.AddRange(_dietProvider.GetDiets());
-            farm.DefaultManureCompositionData.AddRange(_defaultManureCompositionProvider.ManureCompositionData);
-            farm.DefaultsCompositionOfBeddingMaterials.AddRange(_defaultBeddingMaterialCompositionProvider.Data);
-
-            return farm;
-        }
-
         public List<Farm> ReplicateFarms(IEnumerable<Farm> farms)
         {
             var result = new List<Farm>();

@@ -25,6 +25,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodDays, null);
             base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
+            base.Keys.Add(Properties.Resources.ProductionStage, null);
 
             base.Keys.Add(Properties.Resources.YearlyManureMethaneRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);
             base.Keys.Add(Properties.Resources.YearlyNitrogenExcretionRate, ImperialUnitsOfMeasurement.PoundPerHeadPerYear);

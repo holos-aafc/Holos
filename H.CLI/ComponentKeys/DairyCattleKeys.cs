@@ -22,7 +22,8 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.ManagementPeriodName, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodStartDate, null);
             base.Keys.Add(Properties.Resources.ManagementPeriodDays, null);
-            base.Keys.Add(Properties.Resources.NumberOfAnimals, null); 
+            base.Keys.Add(Properties.Resources.NumberOfAnimals, null);
+            base.Keys.Add(Properties.Resources.ProductionStage, null);
             base.Keys.Add(Properties.Resources.NumberOfYoungAnimals, null);
             base.Keys.Add(Properties.Resources.GroupPairingNumber, null);
 

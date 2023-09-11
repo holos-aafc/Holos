@@ -101,6 +101,7 @@ namespace H.CLI.Converters
                 MilkProduction = inputRow.MilkProduction,
                 MilkFatContent = inputRow.MilkFatContent,
                 MilkProteinContentAsPercentage = inputRow.MilkProteinContentAsPercentage,
+                ProductionStage = inputRow.ProductionStage,
             };
 
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.Duration.TotalDays);

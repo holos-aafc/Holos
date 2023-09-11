@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Models;
+using H.Infrastructure;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
@@ -182,6 +183,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_DecemberMeanTemperature + KeyValuePairSeparator + uCalc.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius,climateData.TemperatureData.December, false).ToString(CLILanguageConstants.culture),
 
             Properties.Resources.SoilData,
+            Properties.Resources.Settings_Province + KeyValuePairSeparator +  geographicData.DefaultSoilData.Province,
             Properties.Resources.Settings_YearOfObservation + KeyValuePairSeparator +  geographicData.DefaultSoilData.YearOfObservation.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_EcodistrictID + KeyValuePairSeparator +  geographicData.DefaultSoilData.EcodistrictId.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_SoilGreatGroup + KeyValuePairSeparator + geographicData.DefaultSoilData.SoilGreatGroup,

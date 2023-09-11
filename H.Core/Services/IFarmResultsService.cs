@@ -9,7 +9,6 @@ namespace H.Core.Services
     {
         Farm ReplicateFarm(Farm farm);
         List<Farm> ReplicateFarms(IEnumerable<Farm> farms);
-        Farm Create();
         FarmEmissionResults CalculateFarmEmissionResults(Farm farm);
         List<FarmEmissionResults> CalculateFarmEmissionResults(IEnumerable<Farm> farms);
 

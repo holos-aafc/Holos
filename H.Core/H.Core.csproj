@@ -664,6 +664,7 @@
     <Compile Include="Services\Animals\ScaleUpService.cs" />
     <Compile Include="Services\Animals\SheepResultsService.cs" />
     <Compile Include="Services\Animals\SwineResultsService.cs" />
+    <Compile Include="Services\FarmHelper.cs" />
     <Compile Include="Services\FarmResultsService.cs" />
     <Compile Include="Services\FieldComponentHelper.cs" />
     <Compile Include="Services\IAnaerobicDigestionComponentHelper.cs" />

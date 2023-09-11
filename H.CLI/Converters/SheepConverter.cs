@@ -46,9 +46,11 @@ namespace H.CLI.Converters
             row.Add(animalGroup.GroupType.ToString());
 
             row.Add(managementPeriod.Name);
+            row.Add(animalGroup.GroupPairingNumber.ToString());
             row.Add(managementPeriod.Start.ToString("d"));
             row.Add(managementPeriod.Duration.Days.ToString());
             row.Add(managementPeriod.NumberOfAnimals.ToString());
+            row.Add(managementPeriod.ProductionStage.ToString());
 
             row.Add(managementPeriod.NumberOfYoungAnimals.ToString());
             row.Add(managementPeriod.StartWeight.ToString(DoubleFormat));

@@ -58,6 +58,7 @@ namespace H.CLI.TemporaryComponentStorage
         public double TotalNitrogenKilogramsDryMatterForBedding { get; set; }
         public double MoistureContentOfBeddingMaterial { get; set; }
         public ManureStateType ManureManagement { get; set; }
+        public ProductionStages ProductionStage { get; set; }
         public double MethaneConversionFactorOfManure { get; set; }
         public double AshContent { get; set; }
         public double EmissionFactorLeaching { get; set; }
@@ -172,6 +173,27 @@ namespace H.CLI.TemporaryComponentStorage
                         else
                         {
                             this.HousingType = (HousingType)Enum.Parse(typeof(HousingType), value, true);
+                        }
+                    }
+                    catch
+                    {
+                        this.ThrowInvalidInput(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, filePath);
+                    }
+
+                    break;
+                }
+
+                case Type _ when propertyInfo.PropertyType == typeof(ProductionStages):
+                {
+                    try
+                    {
+                        if (_inputHelper.IsNotApplicableInput(value))
+                        {
+                            this.ProductionStage = ProductionStages.GrowingAndFinishing;
+                        }
+                        else
+                        {
+                            this.ProductionStage = (ProductionStages)Enum.Parse(typeof(ProductionStages), value, true);
                         }
                     }
                     catch

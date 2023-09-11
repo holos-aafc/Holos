@@ -1389,4 +1389,10 @@ Would you like to continue using this directory?</value>
   <data name="LabelAreYourExportedFarmsInCurrentFarmDirectory" xml:space="preserve">
     <value>Are your exported farms in your current farms directory?</value>
   </data>
+  <data name="Settings_Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="ProductionStage" xml:space="preserve">
+    <value>Production Stage</value>
+  </data>
 </root>

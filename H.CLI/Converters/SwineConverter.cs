@@ -49,6 +49,9 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.Start.ToString("d"));
             row.Add(managementPeriod.Duration.Days.ToString());
             row.Add(managementPeriod.NumberOfAnimals.ToString());
+            row.Add(managementPeriod.ProductionStage.ToString());
+            row.Add(managementPeriod.StartWeight.ToString(DoubleFormat));
+            row.Add(managementPeriod.EndWeight.ToString(DoubleFormat));
 
             row.Add(managementPeriod.DietAdditive.ToString());
             row.Add(managementPeriod.SelectedDiet.DailyDryMatterFeedIntakeOfFeed.ToString(DoubleFormat));
@@ -81,6 +84,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.VolatileSolidExcretion.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.YearlyEntericMethaneRate.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.StateType.ToString());
         }
 
         public override AnimalKeyBase GetHeaders()

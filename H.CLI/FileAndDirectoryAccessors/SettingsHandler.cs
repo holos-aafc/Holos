@@ -134,6 +134,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 DefaultSoilData =
                 {
+                    Province = (Province)Enum.Parse(typeof(Province), userSettings[Properties.Resources.Settings_Province], true),
                    YearOfObservation = int.Parse(userSettings[Properties.Resources.Settings_YearOfObservation]),
                    EcodistrictId = int.Parse(userSettings[Properties.Resources.Settings_EcodistrictID]),
                    SoilGreatGroup =  (SoilGreatGroupType)Enum.Parse(typeof(SoilGreatGroupType), userSettings[Properties.Resources.Settings_SoilGreatGroup], true),
