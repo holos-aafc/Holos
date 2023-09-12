@@ -1353,4 +1353,7 @@
   <data name="ProductionStage" xml:space="preserve">
     <value>Production Stage</value>
   </data>
+  <data name="Settings_CarbonModellingStrategy" xml:space="preserve">
+    <value>Carbon Modelling Strategy</value>
+  </data>
 </root>

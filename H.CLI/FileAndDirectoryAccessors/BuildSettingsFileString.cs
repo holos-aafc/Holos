@@ -128,6 +128,9 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_MicrobeDeath + KeyValuePairSeparator + defaults.MicrobeDeath.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Denitrification + KeyValuePairSeparator + defaults.Denitrification.ToString(CLILanguageConstants.culture),
 
+            // C Model Selection
+            Properties.Resources.Settings_CarbonModellingStrategy + KeyValuePairSeparator + defaults.CarbonModellingStrategy,
+
             // ICBM
             Properties.Resources.ICBMSettingsHeader,
 

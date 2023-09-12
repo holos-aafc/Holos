@@ -1395,4 +1395,7 @@ Would you like to continue using this directory?</value>
   <data name="ProductionStage" xml:space="preserve">
     <value>Production Stage</value>
   </data>
+  <data name="Settings_CarbonModellingStrategy" xml:space="preserve">
+    <value>Carbon modelling strategy</value>
+  </data>
 </root>

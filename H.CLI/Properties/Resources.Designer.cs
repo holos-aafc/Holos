@@ -2654,6 +2654,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Carbon modelling strategy.
+        /// </summary>
+        public static string Settings_CarbonModellingStrategy {
+            get {
+                return ResourceManager.GetString("Settings_CarbonModellingStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Climate Data Acquisition.
         /// </summary>
         public static string Settings_ClimateDataAcquisition {
