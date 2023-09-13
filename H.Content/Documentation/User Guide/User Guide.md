@@ -4178,3 +4178,13 @@ The version number of your current Holos installation is displayed when you firs
 	</em>
 </p>
 <br>
+
+### Template Files
+
+The Holos CLI will [generate template input files](#navigating-through-the-farms-folder) (.csv) for the user to manually enter farm data for processing. You can identify these generated template files by their filename. If the filename ends with "_Example-en-CA.csv" or "_Example-fr-CA.csv", the file will be empty, unless otherwise modified. 
+
+If the Holos CLI finds unmodified template files, it will display a message stating: "The following file does not have any data to parse:" followed by the full directory path to the file. These files will not affect your results, and may be deleted by the user. 
+
+Note that template files will be generated when importing a farm from the Holos GUI. These template files may be deleted by the user as well.
+
+
