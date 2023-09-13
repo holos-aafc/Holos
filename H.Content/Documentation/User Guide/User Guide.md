@@ -4178,3 +4178,7 @@ The version number of your current Holos installation is displayed when you firs
 	</em>
 </p>
 <br>
+
+### Template Files
+
+The Holos CLI will [generate template input files](#navigating-through-the-farms-folder) (.csv) for the user to manually enter farm data for processing.
