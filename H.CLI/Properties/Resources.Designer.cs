@@ -1402,6 +1402,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Digestate Carbon Inputs Per Hectare.
+        /// </summary>
+        public static string Key_DigestateCarbonInputsPerHectare {
+            get {
+                return ResourceManager.GetString("Key_DigestateCarbonInputsPerHectare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field System Component Guid.
         /// </summary>
         public static string Key_FieldSystemComponentGuid {
@@ -1488,6 +1497,15 @@ namespace H.CLI.Properties {
         public static string Key_ManureApplied {
             get {
                 return ResourceManager.GetString("Key_ManureApplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure Carbon Inputs Per Hectare.
+        /// </summary>
+        public static string Key_ManureCarbonInputsPerHectare {
+            get {
+                return ResourceManager.GetString("Key_ManureCarbonInputsPerHectare", resourceCulture);
             }
         }
         

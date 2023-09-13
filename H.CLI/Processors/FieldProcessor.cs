@@ -202,6 +202,8 @@ namespace H.CLI.Processors
                 stringBuilder.Append(fieldSystemComponent.SizeOfFirstRotationInField() + columnSeparator);
                 stringBuilder.Append(viewItem.AboveGroundCarbonInput + columnSeparator);
                 stringBuilder.Append(viewItem.BelowGroundCarbonInput + columnSeparator);
+                stringBuilder.Append(viewItem.ManureCarbonInputsPerHectare + columnSeparator);
+                stringBuilder.Append(viewItem.DigestateCarbonInputsPerHectare + columnSeparator);
                 stringBuilder.Append(viewItem.Sand + columnSeparator);
                 stringBuilder.Append(viewItem.LigninContent + columnSeparator);
 

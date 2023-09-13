@@ -1356,4 +1356,10 @@
   <data name="Settings_CarbonModellingStrategy" xml:space="preserve">
     <value>Carbon Modelling Strategy</value>
   </data>
+  <data name="Key_DigestateCarbonInputsPerHectare" xml:space="preserve">
+    <value>Digestate Carbon Inputs Per Hectare</value>
+  </data>
+  <data name="Key_ManureCarbonInputsPerHectare" xml:space="preserve">
+    <value>Manure Carbon Inputs Per Hectare</value>
+  </data>
 </root>

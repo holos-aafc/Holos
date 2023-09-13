@@ -56,6 +56,5 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Assert.AreEqual(farm.Components.Count, 1);
             Assert.IsInstanceOfType(farm.Components[0], typeof(ShelterbeltComponent));
         }
-   
     }
 }

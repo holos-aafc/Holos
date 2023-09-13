@@ -141,6 +141,8 @@ namespace H.CLI.Converters
                     viewItem.SizeOfFirstRotationForField = rowInput.SizeOfFirstRotationForField;
                     viewItem.AboveGroundCarbonInput = rowInput.AboveGroundCarbonInput;
                     viewItem.BelowGroundCarbonInput = rowInput.BelowGroundCarbonInput;
+                    viewItem.ManureCarbonInputsPerHectare = rowInput.ManureCarbonInputsPerHectare;
+                    viewItem.DigestateCarbonInputsPerHectare = rowInput.DigestateCarbonInputsPerHectare;
                     viewItem.Sand = rowInput.Sand;
                     viewItem.LigninContent = rowInput.Lignin;
 

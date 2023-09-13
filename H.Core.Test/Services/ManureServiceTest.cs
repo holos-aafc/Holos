@@ -83,13 +83,28 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
 
-            var componentResults = base.GetTestAnimalComponentEmissionsResults();
+            var componentResults = base.GetEmptyTestAnimalComponentEmissionsResults();
 
             _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() {componentResults});
 
             var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
 
             Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetAmountAvailableForExportReturnsNonZeroWhenAnimalsArePresentTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.Components.Add(base.GetTestFieldComponent());
+
+            var componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
+
+            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { componentResults });
+
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
+
+            Assert.IsTrue(result > 0);
         }
 
         [TestMethod]

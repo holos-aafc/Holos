@@ -91,6 +91,8 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_SizeOfFirstRotationForField, null },
             {Properties.Resources.Key_AboveGroundCarbonInput, null },
             {Properties.Resources.Key_BelowGroundCarbonInput, null },
+            {Properties.Resources.Key_ManureCarbonInputsPerHectare, null },
+            {Properties.Resources.Key_DigestateCarbonInputsPerHectare, null },
             {Properties.Resources.Key_Sand, null },
             {Properties.Resources.Key_Lignin, null },
         };
