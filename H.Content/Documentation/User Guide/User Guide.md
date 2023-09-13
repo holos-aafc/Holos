@@ -4181,10 +4181,19 @@ The version number of your current Holos installation is displayed when you firs
 
 ### Template Files
 
-The Holos CLI will [generate template input files](#navigating-through-the-farms-folder) (.csv) for the user to manually enter farm data for processing. You can identify these generated template files by their filename. If the filename ends with "_Example-en-CA.csv" or "_Example-fr-CA.csv", the file will be empty, unless otherwise modified. 
+The Holos CLI will [generate template input files](#navigating-through-the-farms-folder) (.csv) for the user to manually enter farm data for processing. You can identify these generated template files by their filename, which will end with "_Example-en-CA.csv" or "_Example-fr-CA.csv". These file will be contain headers for user entered data, but will otherwise be empty. 
 
 If the Holos CLI finds unmodified template files, it will display a message stating: "The following file does not have any data to parse:" followed by the full directory path to the file. These files will not affect your results, and may be deleted by the user. 
 
 Note that template files will be generated when importing a farm from the Holos GUI. These template files may be deleted by the user as well.
 
+### Duplicate Farm Folders for Farms Exported from the GUI
+
+Each time the CLI is ran, Holos will ask if you have farms to import from the GUI. 
+
+If you answer "yes" to this prompt, the CLI will find any .json file within the current farms directory and convert and process it's data, regardless if this procedure has taken place before. 
+
+This may result in duplicate folders for farms exported from the Holos GUI. 
+
+To prevent duplicating folders for farms, answer "Yes" only once to the prompt, and "No" each subsequent time running the CLI. 
 
