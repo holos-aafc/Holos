@@ -4197,3 +4197,23 @@ This may result in duplicate folders for farms exported from the Holos GUI.
 
 To prevent duplicating folders for farms, answer "Yes" only once to the prompt, and "No" each subsequent time running the CLI. 
 
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-26.png" alt="Figure11-26" width="650"/>
+    <br>
+    <em>
+		Figure 11-26 - Import Farms Prompt
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-27.png" alt="Figure11-27"/>
+    <br>
+    <em>
+		Figure 11-27 - Example of unwanted duplicated farm folder
+	</em>
+</p>
+<br>
+
