@@ -39,10 +39,9 @@ namespace H.Core.Providers.Climate
         #endregion
 
         #region Constructors
-        
+
         public NasaClimateProvider()
         {
-            HTraceListener.AddTraceListener();
         }
 
         #endregion
@@ -53,6 +52,7 @@ namespace H.Core.Providers.Climate
         public DateTime StartDate { get; set; } = new DateTime(1981, 1, 1);
         public DateTime EndDate { get; set; } = DateTime.Now;
 
+
         #endregion
 
         #region Public Methods        
@@ -62,6 +62,45 @@ namespace H.Core.Providers.Climate
             var path = this.GetCachedPath(latitude, longitude);
 
             return File.Exists(path);
+        }
+
+        public double GetTotalPET(int year, double latitude, double longitude)
+        {
+            var data =  GetCustomClimateData(latitude, longitude);
+            double totalPET = 0.0;
+            if (data.Count > 0)
+            {
+                totalPET += data.Where(x => x.Year == year)
+                                .Sum(x => x.MeanDailyPET);
+            }
+
+            return totalPET;
+        }
+
+        public double GetTotalPPT(int year, double latitude, double longitude)
+        {
+            var data = GetCustomClimateData(latitude, longitude);
+            double totalPPT= 0.0;
+            if (data.Count > 0)
+            {
+                totalPPT += data.Where(x => x.Year == year)
+                    .Sum(x => x.MeanDailyPrecipitation);
+            }
+
+            return totalPPT;
+        }
+
+        public double GetMonthlyPPT(int year, int startingDay, int endingDay,  double latitude, double longitude)
+        {
+            var data = GetCustomClimateData(latitude, longitude);
+            double totalPPT = 0.0;
+            if (data.Count > 0)
+            {
+                totalPPT += data.Where(x => x.Year == year && x.JulianDay >= startingDay && x.JulianDay <= endingDay)
+                    .Sum(x => x.MeanDailyPrecipitation);
+            }
+
+            return totalPPT;
         }
 
         public List<DailyClimateData> GetCustomClimateData(double latitude, double longitude)
@@ -88,7 +127,7 @@ namespace H.Core.Providers.Climate
                 {
                     Trace.TraceInformation($"NASA API: {e.Message}");
 
-                    
+
                     return new List<DailyClimateData>();
                 }
 
@@ -107,7 +146,7 @@ namespace H.Core.Providers.Climate
             }
 
             Trace.TraceInformation($"{nameof(NasaClimateProvider)}: Content downloaded from NASA successfully");
-
+            
             JObject jObject = JObject.Parse(content);
 
             var featuresValueArray = (JObject)jObject["properties"];
@@ -250,7 +289,9 @@ namespace H.Core.Providers.Climate
 
         private string GetCachedPath(double latitude, double longitude)
         {
-            return Path.GetTempPath() + "\\" + $"nasa_climate_data_lat_{latitude}_long_{longitude}";
+            var path = Path.GetTempPath();
+            var fileName = $"nasa_climate_data_lat_{latitude}_long_{longitude}";
+            return Path.Combine(path, fileName);
         }
 
         private void CacheData(double latitude, double longitude, string content)

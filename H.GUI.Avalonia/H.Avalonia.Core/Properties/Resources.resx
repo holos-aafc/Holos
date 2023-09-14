@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Alberta" xml:space="preserve">
+    <value>Alberta</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Holos Data Extraction Tool</value>
+  </data>
+  <data name="BlackChernozem" xml:space="preserve">
+    <value>Black Chernozem</value>
+  </data>
+  <data name="BritishColumbia" xml:space="preserve">
+    <value>British Columbia</value>
+  </data>
+  <data name="BrownChernozem" xml:space="preserve">
+    <value>Brown Chernozem</value>
+  </data>
+  <data name="ClimateDataExportDefaultName" xml:space="preserve">
+    <value>Climate_Data</value>
+  </data>
+  <data name="Coarse" xml:space="preserve">
+    <value>Coarse</value>
+  </data>
+  <data name="ContributorsList" xml:space="preserve">
+    <value>Aaron McPherson
+Hassan Afzaal</value>
+  </data>
+  <data name="DarkBrownChernozem" xml:space="preserve">
+    <value>Dark Brown Chernozem</value>
+  </data>
+  <data name="DarkGrayChernozem" xml:space="preserve">
+    <value>Dark Gray Chernozem</value>
+  </data>
+  <data name="DystricBrunisol" xml:space="preserve">
+    <value>Dystric Brunisol</value>
+  </data>
+  <data name="EutricBrunisol" xml:space="preserve">
+    <value>Eutric Brunisol</value>
+  </data>
+  <data name="ExceptionUnknownEcozoneString" xml:space="preserve">
+    <value>Unknown ecozone '{0}'</value>
+  </data>
+  <data name="ExceptionUnknownSoilTextureString" xml:space="preserve">
+    <value>Unknown soil type '{0}'</value>
+  </data>
+  <data name="ExportDefaultName" xml:space="preserve">
+    <value>Export File</value>
+  </data>
+  <data name="FerroHumicPodzol" xml:space="preserve">
+    <value>Ferro Humic Podzol</value>
+  </data>
+  <data name="Fibrisol" xml:space="preserve">
+    <value>Fibrisol</value>
+  </data>
+  <data name="Fine" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="Folisol" xml:space="preserve">
+    <value>Folisol</value>
+  </data>
+  <data name="Gleysol" xml:space="preserve">
+    <value>Gleysol</value>
+  </data>
+  <data name="GrayBrownLuvisol" xml:space="preserve">
+    <value>Gray Brown Luvisol</value>
+  </data>
+  <data name="GrayLuvisol" xml:space="preserve">
+    <value>Gray Luvisol</value>
+  </data>
+  <data name="HumicGleysol" xml:space="preserve">
+    <value>Humic Gleysol</value>
+  </data>
+  <data name="HumicPodzol" xml:space="preserve">
+    <value>Humic Podzol</value>
+  </data>
+  <data name="HumicRegosol" xml:space="preserve">
+    <value>Humic Regosol</value>
+  </data>
+  <data name="HumicVertisol" xml:space="preserve">
+    <value>Humic Vertisol</value>
+  </data>
+  <data name="Humisol" xml:space="preserve">
+    <value>Humisol</value>
+  </data>
+  <data name="HumoFerricPodzol" xml:space="preserve">
+    <value>Humo Ferric Podzol</value>
+  </data>
+  <data name="ImportDefaultName" xml:space="preserve">
+    <value>Import File</value>
+  </data>
+  <data name="LabelAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="LabelAboutHolos" xml:space="preserve">
+    <value>About Holos</value>
+  </data>
+  <data name="LabelAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="LabelAddRow" xml:space="preserve">
+    <value>Add row</value>
+  </data>
+  <data name="LabelBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="LabelCalculateMonthlyPPT" xml:space="preserve">
+    <value>Calculate Monthly PPT?</value>
+  </data>
+  <data name="LabelCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LabelClimateData" xml:space="preserve">
+    <value>Climate Data</value>
+  </data>
+  <data name="LabelContributors" xml:space="preserve">
+    <value>Contributors</value>
+  </data>
+  <data name="LabelDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LabelEndYear" xml:space="preserve">
+    <value>End Year</value>
+  </data>
+  <data name="LabelExportToCSV" xml:space="preserve">
+    <value>Export to CSV</value>
+  </data>
+  <data name="LabelFindCoordinate" xml:space="preserve">
+    <value>Find Coordinate</value>
+  </data>
+  <data name="LabelGetClimateData" xml:space="preserve">
+    <value>Get Climate Data</value>
+  </data>
+  <data name="LabelGetSoilData" xml:space="preserve">
+    <value>Get Soil Data</value>
+  </data>
+  <data name="LabelGithub" xml:space="preserve">
+    <value>Github</value>
+  </data>
+  <data name="LabelHolosOfficialPage" xml:space="preserve">
+    <value>Holos official page</value>
+  </data>
+  <data name="LabelImportFromCSV" xml:space="preserve">
+    <value>Import From CSV</value>
+  </data>
+  <data name="LabelJulianEndDay" xml:space="preserve">
+    <value>Julian Day End</value>
+  </data>
+  <data name="LabelJulianStartDay" xml:space="preserve">
+    <value>Julian Day Start</value>
+  </data>
+  <data name="LabelLatitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="LabelLongitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="LabelMonthlyPPT" xml:space="preserve">
+    <value>Monthly PPT</value>
+  </data>
+  <data name="LabelMultipleCoordinates" xml:space="preserve">
+    <value>Multiple Coordinates</value>
+  </data>
+  <data name="LabelOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="LabelOrganicMatterSoil" xml:space="preserve">
+    <value>% Organic Matter in Soil</value>
+  </data>
+  <data name="LabelPercentClayInSoil" xml:space="preserve">
+    <value>% Clay in Soil</value>
+  </data>
+  <data name="LabelProvince" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="LabelSelectAllRows" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="LabelSingleCoordinate" xml:space="preserve">
+    <value>Single Coordinate</value>
+  </data>
+  <data name="LabelSoilData" xml:space="preserve">
+    <value>Soil Data</value>
+  </data>
+  <data name="LabelSoilGreatGroup" xml:space="preserve">
+    <value>Soil Great Group</value>
+  </data>
+  <data name="LabelSoilPh" xml:space="preserve">
+    <value>Soil pH</value>
+  </data>
+  <data name="LabelSoilTexture" xml:space="preserve">
+    <value>Soil Texture</value>
+  </data>
+  <data name="LabelStartYear" xml:space="preserve">
+    <value>Start Year</value>
+  </data>
+  <data name="LabelTotalPET" xml:space="preserve">
+    <value>Total PET</value>
+  </data>
+  <data name="LabelTotalPPT" xml:space="preserve">
+    <value>Total PPT</value>
+  </data>
+  <data name="LabelUsefulLinks" xml:space="preserve">
+    <value>Useful Links</value>
+  </data>
+  <data name="LabelYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="LuvicGleysol" xml:space="preserve">
+    <value>Luvic Gleysol</value>
+  </data>
+  <data name="Manitoba" xml:space="preserve">
+    <value>Manitoba</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="MelanicBrunisol" xml:space="preserve">
+    <value>Melanic Brunisol</value>
+  </data>
+  <data name="Mesisol" xml:space="preserve">
+    <value>Mesisol</value>
+  </data>
+  <data name="MessageEmptyAddress" xml:space="preserve">
+    <value>Address field is empty. Please try again.</value>
+  </data>
+  <data name="MessageIncorrectAddress" xml:space="preserve">
+    <value>The address entered was incorrect. Please try again.</value>
+  </data>
+  <data name="MessageIncorrectLocationSelected" xml:space="preserve">
+    <value>Cannot find the address for this coordinate. Please select a valid location.</value>
+  </data>
+  <data name="MessageInValidCoordinateEntered" xml:space="preserve">
+    <value>An invalid coordinate was entered. Please check the latitude and longitude values and try again.</value>
+  </data>
+  <data name="NewBrunswick" xml:space="preserve">
+    <value>New Brunswick</value>
+  </data>
+  <data name="Newfoundland" xml:space="preserve">
+    <value>Newfoundland</value>
+  </data>
+  <data name="NorthwestTerritories" xml:space="preserve">
+    <value>Northwest Territories</value>
+  </data>
+  <data name="NotApplicable" xml:space="preserve">
+    <value>Not Applicable</value>
+  </data>
+  <data name="NovaScotia" xml:space="preserve">
+    <value>Nova Scotia</value>
+  </data>
+  <data name="Nunavut" xml:space="preserve">
+    <value>Nunavut</value>
+  </data>
+  <data name="Ontario" xml:space="preserve">
+    <value>Ontario</value>
+  </data>
+  <data name="OrganicCryosol" xml:space="preserve">
+    <value>Organic Cryosol</value>
+  </data>
+  <data name="PrinceEdwardIsland" xml:space="preserve">
+    <value>Prince Edward Island</value>
+  </data>
+  <data name="Quebec" xml:space="preserve">
+    <value>Quebec</value>
+  </data>
+  <data name="Regosol" xml:space="preserve">
+    <value>Regosol</value>
+  </data>
+  <data name="RowDeleteMessage" xml:space="preserve">
+    <value>Are you sure you want to delete row(s)?</value>
+  </data>
+  <data name="Saskatchewan" xml:space="preserve">
+    <value>Saskatchewan</value>
+  </data>
+  <data name="SelectProvince" xml:space="preserve">
+    <value>Select Province</value>
+  </data>
+  <data name="SoilDataExportDefaultName" xml:space="preserve">
+    <value>Soil_Data</value>
+  </data>
+  <data name="Solod" xml:space="preserve">
+    <value>Solod</value>
+  </data>
+  <data name="SolodizedSolonetz" xml:space="preserve">
+    <value>Solodized Solonetz</value>
+  </data>
+  <data name="Solonetz" xml:space="preserve">
+    <value>Solonetz</value>
+  </data>
+  <data name="SombricBrunisol" xml:space="preserve">
+    <value>Sombric Brunisol</value>
+  </data>
+  <data name="StaticCryosol" xml:space="preserve">
+    <value>Static Cryosol</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>John Doe</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Another Contributor</value>
+  </data>
+  <data name="TextAboutPage" xml:space="preserve">
+    <value>This application is a tool that provides users with access to climate and soil data for agricultural purposes. It is based on Holos, a tool developed by Agriculture and Agri-Food Canada to estimate greenhouse gas emissions from different farming practices. The application uses the NASA Power API to retrieve climate data for any location and time period, such as daily precipitation and evapotranspiration. The application also allows users to extract soil based data from Holos, such as soil group, soil texture, percent organic matter in soil, etc. The aim of this application is to allow users easy access to various soil and climate data without relying on the full  Holos application.</value>
+  </data>
+  <data name="TitleDeleteRowDialog" xml:space="preserve">
+    <value>Delete Row</value>
+  </data>
+  <data name="TurbicCryosol" xml:space="preserve">
+    <value>Turbic Cryosol</value>
+  </data>
+  <data name="VerticSolonetz" xml:space="preserve">
+    <value>Vertic Solonetz</value>
+  </data>
+  <data name="Vertisol" xml:space="preserve">
+    <value>Vertisol</value>
+  </data>
+  <data name="Yukon" xml:space="preserve">
+    <value>Yukon</value>
+  </data>
+</root>

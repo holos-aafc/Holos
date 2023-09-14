@@ -3,7 +3,7 @@ using H.Infrastructure;
 
 namespace H.Core.Enumerations
 {
-    public enum  SoilGreatGroupType
+    public enum SoilGreatGroupType
     {
         [LocalizedDescription("NotApplicable", typeof(Resources))]
         NotApplicable,

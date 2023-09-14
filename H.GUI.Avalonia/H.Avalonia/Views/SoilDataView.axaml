@@ -1,0 +1,223 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:H.Avalonia.ViewModels"
+             xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:infrastructure1="clr-namespace:H.Avalonia.Infrastructure;assembly=H.Avalonia.Infrastructure"
+             mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="450"
+             x:Class="H.Avalonia.Views.SoilDataView">
+    <Design.DataContext>
+      <viewModels:SoilDataViewModel/>
+    </Design.DataContext>
+    <UserControl.Styles>
+        <Style Selector="TabControl WrapPanel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TabItem">
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </UserControl.Styles>
+    <UserControl.Resources>
+        <DataTemplate x:Key="HeaderTemplate">
+            <TextBlock
+                Text="{Binding}"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                Padding="0,0, 0, 5"
+                Margin="0, 0, -20, 0"/>
+        </DataTemplate>
+        <infrastructure1:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    </UserControl.Resources>
+    
+    <TabControl>
+        <TabItem Name="SingleCoordinateTab"
+                 Header="{x:Static properties:Resources.LabelSingleCoordinate}">
+            <Grid>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <avaloniaProgressRing:ProgressRing Width="30"
+                                                       Height="30"
+                                                       IsActive="{Binding IsDataProcessing}"
+                                                       Foreground="Green"
+                                                       Margin="0,-10,0,20"/>
+                    <TextBlock Text="Loading Data"
+                               IsVisible="{Binding IsDataProcessing}"/>
+                </StackPanel>
+
+                <Grid ColumnDefinitions="*, 2*"
+                      IsVisible="{Binding !IsDataProcessing}">
+                    <StackPanel Grid.Column="0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,10">
+                            <TextBlock Text="Load Polygons"
+                                       Margin="0,5,10,0"/>
+                            <ToggleSwitch x:Name="ShowPolygonsSwitch"
+                                          OnContent=""
+                                          OffContent=""
+                                          HorizontalContentAlignment="Left"
+                                          IsChecked="{Binding ShowPolygonsOnMap}"
+                                          Cursor="Hand"/>
+                        </StackPanel>
+                        
+                        <ComboBox ItemsSource="{Binding Provinces}"
+                                  SelectedItem="{Binding SelectedProvince}"
+                                  IsVisible="{Binding ShowPolygonsOnMap}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Label Content="{x:Static properties:Resources.LabelAddress}"
+                                   FontWeight="Bold"/>
+                            <TextBox Text="{Binding Address}"/>
+                            <Button Content="Get Coordinates"
+                                    Margin="0, 10, 0, 0"
+                                    Command="{Binding GetCoordinatesFromAddressCommand}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,50,0,0">
+                            <Label Content="{x:Static properties:Resources.LabelLatitude}"
+                                   Margin="0, 5, 21, 0"
+                                   FontWeight="Bold"/>
+                            <NumericUpDown Value="{Binding Latitude}"
+                                           Maximum="90"
+                                           Minimum="-90"
+                                           Width="{Binding $parent[4].Bounds.Width}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{x:Static properties:Resources.LabelLongitude}"
+                                   Margin="0, 12, 10, 0"
+                                   FontWeight="Bold"/>
+                            <NumericUpDown Value="{Binding Longitude}"
+                                           Maximum="180"
+                                           Minimum="-180"
+                                           Width="{Binding $parent[4].Bounds.Width}"
+                                           Margin="0,10,0,0"/>
+                        </StackPanel>
+                        <Button Margin="0, 10, 0, 0"
+                                Content="{x:Static properties:Resources.LabelFindCoordinate}"
+                                Command="{Binding GetAddressFromCoordinateCommand}"/>
+                        <Button Classes="calculate-results-button"
+                                HorizontalAlignment="Left"
+                                Margin="0, 50, 0, 0"
+                                Content="{x:Static properties:Resources.LabelGetSoilData}"
+                                Command="{Binding SwitchToResultsViewFromSingleCoordinateCommand}"/>
+                    </StackPanel>
+                    <mapsui:MapControl Name="SoilTabMap"
+                                       PointerPressed="SoilMap_OnPointerPressed"
+                                       Grid.Column="1"
+                                       Margin="10, 10"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Name="MultiCoordinateTab" 
+                 Header="{x:Static properties:Resources.LabelMultipleCoordinates}">
+            <Grid RowDefinitions="Auto, Auto, *, Auto, Auto">
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal">
+                    <Button Name="SelectAllRowsButton"
+                            Content="{x:Static properties:Resources.LabelSelectAllRows}"
+                            Command="{Binding ToggleSelectAllRowsCommand}"
+                            HorizontalAlignment="Left"
+                            Margin="20, 10, 10, 10"/>
+                    <Button Name="ImportDataButton"
+                            Content="{x:Static properties:Resources.LabelImportFromCSV}"
+                            Click="ImportDataButton_OnClick"
+                            HorizontalAlignment="Left"
+                            Margin="10, 10"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <Button Classes="multiple-row-delete-button row-delete-button--pointerOver"
+                            Margin="20, 0,0,0"
+                            Command="{Binding DeleteSelectedRowsCommand}">
+                        <PathIcon Name="DeleteALlIcon"
+                                  Data="{DynamicResource delete_forever_regular}"/>
+                    </Button>
+                    
+                </StackPanel>
+
+                <DataGrid Name="SoilDataGrid"
+                        Grid.Row="2" 
+                        ItemsSource="{Binding Storage.SoilViewItems, Mode=TwoWay}"
+                        CanUserSortColumns="False"
+                        GridLinesVisibility="None"
+                        Margin="20, 10"
+                        CanUserReorderColumns="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Name="RowSelectionCheckbox"
+                                          IsChecked="{Binding IsSelected}"
+                                          Cursor="Hand"
+                                          HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="{x:Static properties:Resources.LabelLatitude}"
+                                            Width="13*"
+                                            HeaderTemplate="{StaticResource HeaderTemplate}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <NumericUpDown Value="{Binding Latitude}"
+                                                 Minimum="-90"
+                                                 Maximum="90"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="{x:Static properties:Resources.LabelLongitude}"
+                                                Width="13*"
+                                                HeaderTemplate="{StaticResource HeaderTemplate}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <NumericUpDown Value="{Binding Longitude}"
+                                                   Minimum="-180"
+                                                   Maximum="180"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!-- Also works
+                                    Command="{Binding $parent[UserControl].DataContext.DeleteRowCommand}"
+                                    Command="{Binding $parent[DataGrid].DataContext.DeleteRowCommand}"
+                                    Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                    -->
+                                    <Button Classes="row-delete-button--pointerOver row-delete-button"
+                                            Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                            CommandParameter="{Binding}">
+                                        <PathIcon Data="{DynamicResource delete_forever_regular}"/>
+                                    </Button>
+                                    
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Classes="add-row-datagrid-button"
+                        Grid.Row="3"
+                        Content="{x:Static properties:Resources.LabelAddRow}"
+                        Command="{Binding AddRowCommand}"/>
+                <Button  Classes="calculate-results-button" 
+                         Grid.Row="4"
+                         Content="{x:Static properties:Resources.LabelGetSoilData}"
+                         Command="{Binding SwitchToResultsViewFromMultiCoordinateCommand}"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>
