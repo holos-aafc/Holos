@@ -10,5 +10,7 @@ namespace H.Core.Services.Animals
         ManureTank GetTank(AnimalType animalType, int year, Farm farm);
         List<AnimalType> GetValidManureTypes();
         double GetAmountAvailableForExport(int year, Farm farm);
+        List<ManureApplicationTypes> GetValidManureApplicationTypes();
+        List<ManureLocationSourceType> GetValidManureLocationSourceTypes();
     }
 }

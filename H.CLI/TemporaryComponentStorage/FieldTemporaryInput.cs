@@ -465,6 +465,14 @@ namespace H.CLI.TemporaryComponentStorage
         public double DigestateCarbonInputsPerHectare { get; set; }
         public double Lignin { get; set; }
         public double Sand { get; set;}
+        public double TotalCarbonInputs { get; set; }
+        public double WFac { get; set; }
+        public double TFac { get; set; }
+        public double TotalNitrogenInputsForIpccTier2 { get; set; }
+        public double NitrogenContent { get; set; }
+        public double AboveGroundResidueDryMatter { get; set; }
+        public double BelowGroundResidueDryMatter { get; set; }
+
 
         #endregion
     }

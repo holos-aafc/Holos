@@ -95,6 +95,11 @@ namespace H.Core.Calculators.Nitrogen
                 totalNitrogenFromLandManureRemaining: totalNitrogenRemaining);
 
             var totalAreaOfAllFields = itemsInYear.Sum(x => x.Area);
+            if (totalAreaOfAllFields == 0)
+            {
+                totalAreaOfAllFields = 1;
+            }
+
             var areaOfThisField = viewItem.Area;
 
             // The total N2O-N that is left over and must be associated with this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)

@@ -95,6 +95,12 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_DigestateCarbonInputsPerHectare, null },
             {Properties.Resources.Key_Sand, null },
             {Properties.Resources.Key_Lignin, null },
+            {Properties.Resources.Key_WFac, null },
+            {Properties.Resources.Key_TFac, null },
+            {Properties.Resources.Key_TotalNitrogenInputsForIpccTier2, null },
+            {Properties.Resources.Key_NitrogenContent, null },
+            {Properties.Resources.Key_AboveGroundResidueDryMatter, null },
+            {Properties.Resources.Key_BelowGroundResidueDryMatter, null },
         };
 
         //  Currently only 2 optional headers in the field keys

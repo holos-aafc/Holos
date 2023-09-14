@@ -36,6 +36,23 @@ namespace H.Core.Services.Animals
             AnimalType.Bison,
         };
 
+        private readonly List<ManureApplicationTypes> _validManureApplicationTypes = new List<ManureApplicationTypes>()
+        {
+            ManureApplicationTypes.TilledLandSolidSpread,
+            ManureApplicationTypes.UntilledLandSolidSpread,
+            ManureApplicationTypes.SlurryBroadcasting,
+            ManureApplicationTypes.DropHoseBanding,
+            ManureApplicationTypes.ShallowInjection,
+            ManureApplicationTypes.DeepInjection,
+        };
+
+        private readonly List<ManureLocationSourceType> _validManureLocationSourceTypes = new List<ManureLocationSourceType>()
+        {
+            ManureLocationSourceType.NotSelected,
+            ManureLocationSourceType.Livestock,
+            ManureLocationSourceType.Imported,
+        };
+
         #endregion
 
         #region Constructors
@@ -58,6 +75,21 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
+        public List<ManureApplicationTypes> GetValidManureApplicationTypes()
+        {
+            return _validManureApplicationTypes;
+        }
+
+        public List<AnimalType> GetValidManureTypes()
+        {
+            return _validManureTypes;
+        }
+
+        public List<ManureLocationSourceType> GetValidManureLocationSourceTypes()
+        {
+            return _validManureLocationSourceTypes;
+        }
+
         public double GetAmountAvailableForExport(int year, Farm farm)
         {
             var amount = 0d;
@@ -69,11 +101,6 @@ namespace H.Core.Services.Animals
             }
 
             return amount;
-        }
-
-        public List<AnimalType> GetValidManureTypes()
-        {
-            return _validManureTypes;
         }
 
         public void CalculateResults(Farm farm)

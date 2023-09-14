@@ -187,8 +187,6 @@ namespace H.Core.Providers.Soil
         /// <summary>
         /// Table 16: Lookup function for N2O Reduction factor values = RF_AM
         /// </summary>
-        /// <param name="soilReductionFactors"></param>
-        /// <returns></returns>
         public double GetReductionFactorBasedOnApplicationMethod(SoilReductionFactors soilReductionFactors)
         {
             var defaultValue = 1d;

@@ -86,6 +86,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             userDefaults.PercentageOfRootsReturnedToSoilForFodderCorn = double.Parse(userSettings[Properties.Resources.Settings_PercentageOfRootsReturnedToSoilForFodderCorn]);
 
             userDefaults.CarbonModellingStrategy = (CarbonModellingStrategies)Enum.Parse(typeof(CarbonModellingStrategies), userSettings[Properties.Resources.Settings_CarbonModellingStrategy], true);
+            userDefaults.DefaultRunInPeriod = int.Parse(userSettings[Properties.Resources.Settings_RunInPeriodYears]);
 
             // ICBM
             userDefaults.HumificationCoefficientAboveGround = double.Parse(userSettings[Properties.Resources.Settings_HumificationCoefficientAboveGround]);

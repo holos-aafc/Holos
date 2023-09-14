@@ -1832,7 +1832,7 @@ namespace H.Core.Services.Animals
                     amountOfNitrogenAddedFromBedding: 0);
 
                 groupEmissionsByDay.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
-                    leachingNitrogenEmissionRate: groupEmissionsByDay.ManureN2ONLeachingEmission,
+                    leachingNitrogenEmissionRate: groupEmissionsByDay.ManureNitrogenLeachingRate,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
 
                 groupEmissionsByDay.ManureIndirectN2ONEmission = this.CalculateManureIndirectNitrogenEmission(
@@ -1895,7 +1895,7 @@ namespace H.Core.Services.Animals
                     amountOfNitrogenAddedFromBedding: 0);
 
                 groupEmissionsByDay.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
-                    leachingNitrogenEmissionRate: groupEmissionsByDay.ManureN2ONLeachingEmission,
+                    leachingNitrogenEmissionRate: groupEmissionsByDay.ManureNitrogenLeachingRate,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
 
                 groupEmissionsByDay.ManureIndirectN2ONEmission = this.CalculateManureIndirectNitrogenEmission(

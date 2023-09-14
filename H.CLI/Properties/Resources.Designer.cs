@@ -1213,6 +1213,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Above Ground Residue Dry Matter.
+        /// </summary>
+        public static string Key_AboveGroundResidueDryMatter {
+            get {
+                return ResourceManager.GetString("Key_AboveGroundResidueDryMatter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount Of Irrigation.
         /// </summary>
         public static string Key_AmountOfIrrigation {
@@ -1245,6 +1254,15 @@ namespace H.CLI.Properties {
         public static string Key_BelowGroundCarbonInput {
             get {
                 return ResourceManager.GetString("Key_BelowGroundCarbonInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Below Ground Residue Dry Matter.
+        /// </summary>
+        public static string Key_BelowGroundResidueDryMatter {
+            get {
+                return ResourceManager.GetString("Key_BelowGroundResidueDryMatter", resourceCulture);
             }
         }
         
@@ -1546,6 +1564,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nitrogen Content.
+        /// </summary>
+        public static string Key_NitrogenContent {
+            get {
+                return ResourceManager.GetString("Key_NitrogenContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nitrogen Content In Extraroot.
         /// </summary>
         public static string Key_NitrogenContentInExtraroot {
@@ -1717,6 +1744,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TFac.
+        /// </summary>
+        public static string Key_TFac {
+            get {
+                return ResourceManager.GetString("Key_TFac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tillage Factor.
         /// </summary>
         public static string Key_TillageFactor {
@@ -1744,11 +1780,38 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Carbon Inputs.
+        /// </summary>
+        public static string Key_TotalCarbonInputs {
+            get {
+                return ResourceManager.GetString("Key_TotalCarbonInputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Nitrogen Inputs For Ipcc Tier 2.
+        /// </summary>
+        public static string Key_TotalNitrogenInputsForIpccTier2 {
+            get {
+                return ResourceManager.GetString("Key_TotalNitrogenInputsForIpccTier2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Under Sown Crops Used.
         /// </summary>
         public static string Key_UnderSownCropsUsed {
             get {
                 return ResourceManager.GetString("Key_UnderSownCropsUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WFac.
+        /// </summary>
+        public static string Key_WFac {
+            get {
+                return ResourceManager.GetString("Key_WFac", resourceCulture);
             }
         }
         
@@ -3343,6 +3406,15 @@ namespace H.CLI.Properties {
         public static string Settings_RipeningDay {
             get {
                 return ResourceManager.GetString("Settings_RipeningDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run In Period Years.
+        /// </summary>
+        public static string Settings_RunInPeriodYears {
+            get {
+                return ResourceManager.GetString("Settings_RunInPeriodYears", resourceCulture);
             }
         }
         

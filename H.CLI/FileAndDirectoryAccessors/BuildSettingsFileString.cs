@@ -130,6 +130,7 @@ namespace H.CLI.FileAndDirectoryAccessors
 
             // C Model Selection
             Properties.Resources.Settings_CarbonModellingStrategy + KeyValuePairSeparator + defaults.CarbonModellingStrategy,
+            Properties.Resources.Settings_RunInPeriodYears + KeyValuePairSeparator + defaults.DefaultRunInPeriod,
 
             // ICBM
             Properties.Resources.ICBMSettingsHeader,

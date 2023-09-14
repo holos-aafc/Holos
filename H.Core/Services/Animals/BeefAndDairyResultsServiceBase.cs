@@ -10,6 +10,7 @@ namespace H.Core.Services.Animals
     {
         protected void CalculateIndirectManureNitrousOxide(GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod,
+
             AnimalGroup animalGroup,
             Farm farm,
             DateTime dateTime,

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.TemporaryComponentStorage;
 using H.Core;
@@ -143,8 +144,16 @@ namespace H.CLI.Converters
                     viewItem.BelowGroundCarbonInput = rowInput.BelowGroundCarbonInput;
                     viewItem.ManureCarbonInputsPerHectare = rowInput.ManureCarbonInputsPerHectare;
                     viewItem.DigestateCarbonInputsPerHectare = rowInput.DigestateCarbonInputsPerHectare;
+                    viewItem.TotalCarbonInputs = rowInput.TotalCarbonInputs;
                     viewItem.Sand = rowInput.Sand;
                     viewItem.LigninContent = rowInput.Lignin;
+
+                    viewItem.WFac = rowInput.WFac;
+                    viewItem.TFac = rowInput.TFac;
+                    viewItem.TotalNitrogenInputsForIpccTier2 = rowInput.TotalNitrogenInputsForIpccTier2;
+                    viewItem.NitrogenContent = rowInput.NitrogenContent;
+                    viewItem.AboveGroundResidueDryMatter = rowInput.AboveGroundResidueDryMatter;
+                    viewItem.BelowGroundResidueDryMatter = rowInput.BelowGroundResidueDryMatter;
 
                     fieldSystemComponent.Guid = viewItem.FieldSystemComponentGuid;
 

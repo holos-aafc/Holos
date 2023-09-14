@@ -1362,4 +1362,30 @@
   <data name="Key_ManureCarbonInputsPerHectare" xml:space="preserve">
     <value>Manure Carbon Inputs Per Hectare</value>
   </data>
+  <data name="Key_TotalCarbonInputs" xml:space="preserve">
+    <value>Total Carbon Inputs</value>
+  </data>
+  <data name="Settings_RunInPeriodYears" xml:space="preserve">
+    <value>Run In Period Years</value>
+  </data>
+  <data name="Key_AboveGroundResidueDryMatter" xml:space="preserve">
+    <value>Above Ground Residue Dry Matter</value>
+  </data>
+  <data name="Key_BelowGroundResidueDryMatter" xml:space="preserve">
+    <value>Below Ground Residue Dry Matter</value>
+  </data>
+  <data name="Key_NitrogenContent" xml:space="preserve">
+    <value>Nitrogen Content</value>
+  </data>
+  <data name="Key_TFac" xml:space="preserve">
+    <value>TFac</value>
+    <comment>IPCC Tier 2 Temperature Factor</comment>
+  </data>
+  <data name="Key_TotalNitrogenInputsForIpccTier2" xml:space="preserve">
+    <value>Total Nitrogen Inputs For Ipcc Tier 2</value>
+  </data>
+  <data name="Key_WFac" xml:space="preserve">
+    <value>WFac</value>
+    <comment>IPCC Tier 2 Water Factor</comment>
+  </data>
 </root>

@@ -204,8 +204,15 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.BelowGroundCarbonInput + columnSeparator);
                 stringBuilder.Append(viewItem.ManureCarbonInputsPerHectare + columnSeparator);
                 stringBuilder.Append(viewItem.DigestateCarbonInputsPerHectare + columnSeparator);
+                stringBuilder.Append(viewItem.TotalCarbonInputs + columnSeparator);
                 stringBuilder.Append(viewItem.Sand + columnSeparator);
                 stringBuilder.Append(viewItem.LigninContent + columnSeparator);
+                stringBuilder.Append(viewItem.WFac + columnSeparator);
+                stringBuilder.Append(viewItem.TFac + columnSeparator);
+                stringBuilder.Append(viewItem.TotalNitrogenInputsForIpccTier2 + columnSeparator);
+                stringBuilder.Append(viewItem.NitrogenContent + columnSeparator);
+                stringBuilder.Append(viewItem.AboveGroundResidueDryMatter + columnSeparator);
+                stringBuilder.Append(viewItem.BelowGroundResidueDryMatter + columnSeparator);
 
                 stringBuilder.Append(Environment.NewLine);
             }
