@@ -1,5 +1,10 @@
-﻿namespace H.Core.Enumerations
+﻿#region Imports
+#endregion
+
+namespace H.Core.Enumerations
 {
+    /// <summary>
+    /// </summary>
     public static class ProvinceExtension
     {
         #region Constructors

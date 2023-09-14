@@ -402,5 +402,3 @@ FodyWeavers.xsd
 /*.ffs_db
 /.idea
 H.CLI/sync.ffs_db
-# rider files
-*.idea

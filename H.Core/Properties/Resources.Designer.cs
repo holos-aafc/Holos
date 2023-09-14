@@ -14101,15 +14101,6 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Province.
-        /// </summary>
-        public static string SelectProvince {
-            get {
-                return ResourceManager.GetString("SelectProvince", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Semiarid Prairies.
         /// </summary>
         public static string SemiaridPrairies {
