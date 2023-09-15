@@ -402,3 +402,6 @@ FodyWeavers.xsd
 /*.ffs_db
 /.idea
 H.CLI/sync.ffs_db
+
+# JetBrains Rider files
+*.idea
