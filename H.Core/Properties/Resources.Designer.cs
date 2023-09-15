@@ -11211,6 +11211,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TFac.
+        /// </summary>
+        public static string LabelTFac {
+            get {
+                return ResourceManager.GetString("LabelTFac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threonine.
         /// </summary>
         public static string LabelThreonine {
@@ -11288,6 +11297,15 @@ namespace H.Core.Properties {
         public static string LabelTotalCarbonDioxide {
             get {
                 return ResourceManager.GetString("LabelTotalCarbonDioxide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total carbon input.
+        /// </summary>
+        public static string LabelTotalCarbonInput {
+            get {
+                return ResourceManager.GetString("LabelTotalCarbonInput", resourceCulture);
             }
         }
         
@@ -11729,6 +11747,15 @@ namespace H.Core.Properties {
         public static string LabelWeightOfWeanedPiglets {
             get {
                 return ResourceManager.GetString("LabelWeightOfWeanedPiglets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WFac.
+        /// </summary>
+        public static string LabelWFac {
+            get {
+                return ResourceManager.GetString("LabelWFac", resourceCulture);
             }
         }
         
