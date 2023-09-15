@@ -417,6 +417,7 @@ namespace H.CLI.TemporaryComponentStorage
         public double Area { get; set; }
         public double Yield { get; set; }
         public double MoistureContentOfCrop { get; set; }
+        public double MoistureContentOfCropPercentage { get; set; }
         public double AmountOfIrrigation { get; set; }
         public double AmountOfManureApplied { get; set; }
         public double NitrogenFertilizerRate { get; set; }

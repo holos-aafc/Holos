@@ -102,7 +102,8 @@ namespace H.CLI.Converters
                     viewItem.ManureAnimalSourceType = rowInput.ManureAnimalSourceType;
                     viewItem.ManureLocationSourceType = rowInput.ManureLocationSourceType;
                     viewItem.ManureStateType = rowInput.ManureStateType;
-                    viewItem.MoistureContentOfCropPercentage = rowInput.MoistureContentOfCrop * 100;
+                    viewItem.MoistureContentOfCrop = rowInput.MoistureContentOfCrop;
+                    viewItem.MoistureContentOfCropPercentage = rowInput.MoistureContentOfCropPercentage;
 
                     viewItem.NitrogenContentInExtraroot = rowInput.NitrogenContentInExtraroot;
                     viewItem.NitrogenContentInProduct = rowInput.NitrogenContentInProduct;

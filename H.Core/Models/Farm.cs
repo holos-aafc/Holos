@@ -79,6 +79,7 @@ namespace H.Core.Models
         private bool _useCustomStartingSoilOrganicCarbon;
         private bool _isBasicMode;
         private bool _showAdditionalInformationInADView;
+        private bool _isCommandLineMode;
 
         private Defaults _defaults;
         private Province _province;
@@ -621,6 +622,12 @@ namespace H.Core.Models
         public int MapZoomLevel { get; set; }
 
         public bool UseFieldLevelYieldAssignement { get; set; }
+
+        public bool IsCommandLineMode
+        {
+            get => _isCommandLineMode;
+            set => SetProperty(ref _isCommandLineMode, value);
+        }
 
         #endregion
 

@@ -97,6 +97,7 @@ namespace H.CLI
 
                             //Parse And Convert Raw Input Files Into Components and add them to a Farm
                             var farm = dataInputHandler.ProcessDataInputFiles(farmDirectoryPath);
+                            farm.IsCommandLineMode = true;
                             farm.CliInputPath = farmDirectoryPath;
                             farm.SettingsFileName = farmSettingsFileName;
                             farm.Name = farmName;

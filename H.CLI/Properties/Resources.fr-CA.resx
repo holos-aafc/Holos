@@ -1388,4 +1388,10 @@
     <value>WFac</value>
     <comment>IPCC Tier 2 Water Factor</comment>
   </data>
+  <data name="Key_MoistureContentOfCropPercentage" xml:space="preserve">
+    <value>Moisture Content Of Crop Percentage</value>
+  </data>
+  <data name="Settings_YieldAssignmentMethod" xml:space="preserve">
+    <value>Yield Assignment Method</value>
+  </data>
 </root>

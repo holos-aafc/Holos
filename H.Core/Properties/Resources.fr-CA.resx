@@ -5448,6 +5448,9 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="TotalBiogasProduction" xml:space="preserve">
     <value>Total biogas production</value>
   </data>
+  <data name="LabelTotalCarbonInput" xml:space="preserve">
+    <value>Total carbon input</value>
+  </data>
   <data name="TotalCO2Production" xml:space="preserve">
     <value>Total CO₂ production</value>
   </data>
@@ -5537,5 +5540,11 @@ Daily emissions estimates are multipled by the total number of production days i
   </data>
   <data name="Yukon" xml:space="preserve">
     <value>Yukon</value>
+  </data>
+  <data name="LabelTFac" xml:space="preserve">
+    <value>TFac</value>
+  </data>
+  <data name="LabelWFac" xml:space="preserve">
+    <value>WFac</value>
   </data>
 </root>

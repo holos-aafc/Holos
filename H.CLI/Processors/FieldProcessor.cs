@@ -176,6 +176,7 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.IrrigationType + columnSeparator);
                 stringBuilder.Append(viewItem.AmountOfIrrigation + columnSeparator);
                 stringBuilder.Append(viewItem.MoistureContentOfCrop + columnSeparator);
+                stringBuilder.Append(viewItem.MoistureContentOfCropPercentage + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfStrawReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfRootsReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfProductYieldReturnedToSoil + columnSeparator);

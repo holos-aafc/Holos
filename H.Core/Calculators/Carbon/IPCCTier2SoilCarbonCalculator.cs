@@ -216,8 +216,15 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-4 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = (viewItem.BelowGroundResidueDryMatter * BelowGroundCarbonContent) / viewItem.Area;
 
-            viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
-            viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+            if (farm.IsCommandLineMode == false)
+            {
+                viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
+                viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+            }
+            else
+            {
+                // User specifies total manure in input file
+            }
 
             viewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(viewItem, farm);
 
@@ -384,8 +391,6 @@ namespace H.Core.Calculators.Carbon
                 f8: f8,
                 totalInputs: inputs,
                 ligninContent: currentYearViewItem.LigninContent);
-
-            
 
             var activePoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRateActive, currentYearViewItem.TillageType).Value;
             var tillageFactor = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.TillageModifier, currentYearViewItem.TillageType).Value;

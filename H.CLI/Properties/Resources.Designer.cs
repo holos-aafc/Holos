@@ -1555,6 +1555,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moisture Content Of Crop Percentage.
+        /// </summary>
+        public static string Key_MoistureContentOfCropPercentage {
+            get {
+                return ResourceManager.GetString("Key_MoistureContentOfCropPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Key_Name {
@@ -3514,6 +3523,15 @@ namespace H.CLI.Properties {
         public static string Settings_YearOfObservation {
             get {
                 return ResourceManager.GetString("Settings_YearOfObservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yield Assignment Method.
+        /// </summary>
+        public static string Settings_YieldAssignmentMethod {
+            get {
+                return ResourceManager.GetString("Settings_YieldAssignmentMethod", resourceCulture);
             }
         }
         

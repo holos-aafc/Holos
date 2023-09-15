@@ -112,6 +112,12 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.EnableCarbonModelling = bool.Parse(userSettings[Properties.Resources.Settings_EnableCarbonModelling]);
             }
 
+            if (userSettings.ContainsKey(Properties.Resources.Settings_YieldAssignmentMethod))
+            {
+                farm.YieldAssignmentMethod = (YieldAssignmentMethod)Enum.Parse(typeof(YieldAssignmentMethod), userSettings[Properties.Resources.Settings_YieldAssignmentMethod], true);
+            }
+
+
             farm.Defaults = userDefaults;
 
             // This setting might not exist in old settings files
