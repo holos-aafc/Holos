@@ -5667,4 +5667,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelWFac" xml:space="preserve">
     <value>WFac</value>
   </data>
+  <data name="SelectProvince" xml:space="preserve">
+    <value>Select Province</value>
+  </data>
 </root>
