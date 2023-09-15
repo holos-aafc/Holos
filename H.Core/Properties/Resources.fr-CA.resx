@@ -5538,4 +5538,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="Yukon" xml:space="preserve">
     <value>Yukon</value>
   </data>
+  <data name="SelectProvince" xml:space="preserve">
+    <value>Select Province</value>
+  </data>
 </root>
