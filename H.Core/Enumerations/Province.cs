@@ -1,10 +1,13 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
+using H.Core.Properties;
 
 namespace H.Core.Enumerations
 {
     public enum Province
     {
+        [LocalizedDescription("SelectProvince", typeof(Resources))]
+        SelectProvince,
+        
         [LocalizedDescription("Alberta", typeof(Resources))]
         Alberta,
 

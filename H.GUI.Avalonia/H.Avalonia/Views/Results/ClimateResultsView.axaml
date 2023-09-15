@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
+             xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+             x:Class="H.Avalonia.Views.Results.ClimateResultsView"
+             xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing">
+    <Design.DataContext>
+        <results:ClimateResultsViewModel/>
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
+        <StackPanel Grid.Row="0" 
+                    Name="GoBackPanel"
+                    PointerPressed="GoBackPanel_OnPointerPressed"
+                    Margin="10, 10, 0, 20"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Cursor="Hand">
+            <PathIcon Data="{StaticResource arrow_left_regular}"/>
+            <Label Content="{x:Static properties:Resources.LabelBack}"/>
+        </StackPanel>
+        <progRing:ProgressRing Grid.Row="1"
+                               Width="30"
+                               Height="30"
+                               IsActive="{Binding IsProcessingData}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Foreground="Green"
+                               Margin="0,-10,0,20"/>
+        <Button Name="ExportDataButton"
+                Grid.Row="2"
+                Content="{x:Static properties:Resources.LabelExportToCSV}"
+                IsEnabled="{Binding !IsProcessingData, Mode=TwoWay}"
+                Click="ExportDataButton_OnClick"
+                HorizontalAlignment="Right"
+                Background="MediumAquamarine"
+                Margin="20, 10"
+                Cursor="Hand"/>
+        <DataGrid Grid.Row="3"
+                  ItemsSource="{Binding ClimateResultsViewItems}"
+                  Margin="20,0,20,20"
+                  IsReadOnly="True"
+                  ColumnHeaderTheme="">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelLatitude}"
+                                    Binding="{Binding Latitude}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelLongitude}"
+                                    Binding="{Binding Longitude}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelYear}"
+                                    Binding="{Binding Year}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelTotalPPT}"
+                                    Binding="{Binding TotalPPT, StringFormat={}{0:0.##}}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelTotalPET}"
+                                    Binding="{Binding TotalPET, StringFormat={}{0:0.##}}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LabelMonthlyPPT}"
+                                    Binding="{Binding MonthlyPPT, StringFormat={}{0:0.##}}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    
+</UserControl>
