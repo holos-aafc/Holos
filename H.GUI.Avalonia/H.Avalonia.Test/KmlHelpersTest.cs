@@ -16,6 +16,9 @@ namespace H.Avalonia.Test
             new Vector(52.30845604, -112.5191813),
             new Vector(55.01, -120.34),
             new Vector(56.564167, 133.901111),
+            new Vector(47.92777748, -64.5832610841),
+            new Vector(47.85204665, -64.64717661),
+            new Vector(47.80778805, -65.10836944)
         };
 
         [ClassInitialize]
