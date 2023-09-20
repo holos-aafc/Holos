@@ -39,7 +39,7 @@ namespace H.CLI.Handlers
         private readonly SheepConverter _sheepConverter = new SheepConverter();
         private readonly PoultryConverter _poultryConverter = new PoultryConverter();
         private readonly OtherLiveStockConverter _otherLiveStockConverter = new OtherLiveStockConverter();
-        
+
         private readonly IFieldResultsService _fieldResultsService = new FieldResultsService();
 
         #endregion
@@ -77,6 +77,24 @@ namespace H.CLI.Handlers
             return farms;
         }
 
+        public void InitializeWithCLArguements(string farmsFolderPath, string[] args)
+        {
+            var files = Directory.GetFiles(farmsFolderPath);
+            string path = string.Empty;
+            foreach (var myFile in files)
+            {
+                if (args[1] == Path.GetFileName(myFile))
+                {
+                    Console.WriteLine($"InitializedWithArguements: {myFile}");
+                    path = myFile;
+                }
+            }
+
+            var farms = _storage.GetFarmsFromExportFile(path);
+            var farmsList = farms.ToList();
+            _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0]);
+        }
+
         /// <summary>
         /// Create a list of input files based on the components that make up the farm.
         /// </summary>
@@ -105,7 +123,7 @@ namespace H.CLI.Handlers
                 {
                     // The input file that gets built based on the field component
                     string inputFile = string.Empty;
-                    
+
                     if (farm.EnableCarbonModelling == false)
                     {
                         // Single year mode field - create input file based on single year view item
@@ -117,7 +135,7 @@ namespace H.CLI.Handlers
                     else
                     {
                         var detailViewItemsForField = new List<CropViewItem>();
-                        
+
                         // Multi-year mode field, create input based on multiple detail view items
                         var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
                         if (stageState == null)
@@ -128,10 +146,10 @@ namespace H.CLI.Handlers
 
                         detailViewItemsForField = stageState.DetailsScreenViewCropViewItems.Where(x => x.FieldSystemComponentGuid == fieldSystemComponent.Guid).ToList();
 
-                        inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm, 
-                            path: pathToFieldComponents, 
-                            componentKeys: fieldKeys.Keys, 
-                            fieldSystemComponent: fieldSystemComponent, 
+                        inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm,
+                            path: pathToFieldComponents,
+                            componentKeys: fieldKeys.Keys,
+                            fieldSystemComponent: fieldSystemComponent,
                             detailsScreenViewCropViewItems: detailViewItemsForField);
                     }
 
@@ -151,7 +169,7 @@ namespace H.CLI.Handlers
 
                 var pathToBeefCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultBeefInputFolder;
                 foreach (var beefCattleComponent in farm.BeefCattleComponents)
-                {                    
+                {
                     var createdInputFile = _beefConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToBeefCattleComponents,
                         component: beefCattleComponent,
@@ -204,7 +222,7 @@ namespace H.CLI.Handlers
                     createdFiles.Add(createdInputFile);
 
                     Console.WriteLine($@"{farm.Name}: {swineComponent.Name}");
-                } 
+                }
             }
 
             /*
@@ -280,7 +298,7 @@ namespace H.CLI.Handlers
         {
             // Ask the user if they have farms that they would like to import from the GUI (they must have already exported the farms to a .json file)
             Console.WriteLine();
-            Console.Write(Properties.Resources.LabelWouldYouLikeToImportFarmsFromTheGui);            
+            Console.Write(Properties.Resources.LabelWouldYouLikeToImportFarmsFromTheGui);
             Console.WriteLine(Properties.Resources.LabelYesNo);
 
             var response = Console.ReadLine();
@@ -307,6 +325,11 @@ namespace H.CLI.Handlers
             }
         }
 
+        public Farm GetExportedFarmFromUserSpecifiedLocation(string path)
+        {
+            return new Farm();
+        }
+
         public List<Farm> GetExportedFarmsFromUserSpecifiedLocation(string path)
         {
             Console.WriteLine();
@@ -323,7 +346,7 @@ namespace H.CLI.Handlers
         #region Private Methods
 
         private void CreateSettingsFileForFarm(string farmDirectoryPath, Farm farm)
-        {            
+        {
             // Create a settings file based on the default object found in the imported farm
             _directoryHandler.GenerateGlobalSettingsFile(farmDirectoryPath, farm);
         }
@@ -335,12 +358,12 @@ namespace H.CLI.Handlers
         /// <param name="farm"></param>
         /// <returns>The full path to the directory created for the farm</returns>
         private string CreateDirectoryStructureForImportedFarm(string pathToFarmsDirectory, Farm farm)
-        {            
+        {
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
 
             // Remove illegal characters from farm name since it will be used to create a folder.
-            var cleanedFarmName = r.Replace(farm.Name, "");            
+            var cleanedFarmName = r.Replace(farm.Name, "");
 
             var farmDirectoryPath = pathToFarmsDirectory + @"\" + cleanedFarmName;
             if (Directory.Exists(farmDirectoryPath))
@@ -350,7 +373,7 @@ namespace H.CLI.Handlers
 
                 farmDirectoryPath += timestamp;
             }
-            
+
             Directory.CreateDirectory(farmDirectoryPath);
             _directoryHandler.ValidateComponentDirectories(farmDirectoryPath);
 

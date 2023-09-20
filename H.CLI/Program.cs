@@ -14,6 +14,7 @@ using H.CLI.Handlers;
 using H.Core;
 using H.Core.Models;
 using H.Core.Services;
+using System.Collections.Generic;
 
 namespace H.CLI
 {
@@ -26,18 +27,24 @@ namespace H.CLI
             var userCulture = CultureInfo.CurrentCulture;
             CLILanguageConstants.SetCulture(userCulture);
 
+            // Farm directory access
             var directoryHandler = new DirectoryHandler();
-            //Farm directory access
             directoryHandler.GetUsersFarmsPath(args);
             var farmsFolderPath = Directory.GetCurrentDirectory();
 
-
+            // Farms exported from GUI access
             var exportedFarmsHandler = new ExportedFarmsHandler();
-            
-            // Ask for files to import
-            var farmsImportedFromGUI = exportedFarmsHandler.Initialize(farmsFolderPath);
+            List<Farm> farmsImportedFromGUI;
+            if (args.Length > 1)
+            {
+                exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, args);
+            }
+            else
+            {
+                farmsImportedFromGUI = exportedFarmsHandler.Initialize(farmsFolderPath);
+            }
 
-            InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);    
+            InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);
 
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement();
 
@@ -62,8 +69,8 @@ namespace H.CLI
                 templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
 
                 var globalSettingsHandler = new SettingsHandler();
-                globalSettingsHandler.InitializePolygonIDList(geographicDataProvider); 
- 
+                globalSettingsHandler.InitializePolygonIDList(geographicDataProvider);
+
                 foreach (var farmDirectoryPath in listOfFarmPaths)
                 {
                     //Are there any settings files?
@@ -72,7 +79,7 @@ namespace H.CLI
                     if (!settingsFilePathsInFarmDirectory.Any())
                     {
                         globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, geographicDataProvider);
-  
+
                         //This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
                         var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
 
@@ -110,10 +117,10 @@ namespace H.CLI
                             Console.WriteLine(Properties.Resources.ReadingSettingsFile);
                             reader.ReadGlobalSettings(settingsFilePath);
                             globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
-  
+
                             //Create a KeyValuePair which takes in the farmDirectoryPath and the Farm itself
                             if (farm.Components.Any())
-                            { 
+                            {
                                 applicationData.Farms.Add(farm);
 
                                 //Set up Output Directories For The Land Management Components In The Farm
@@ -125,7 +132,7 @@ namespace H.CLI
                                 Console.WriteLine(Properties.Resources.FarmDoesNotContainAnyData, farm.Name + "_" + farm.SettingsFileName);
                                 System.Threading.Thread.Sleep(2000);
                             }
-    
+
                         }
                         else
                         {
@@ -182,7 +189,7 @@ namespace H.CLI
                 var a = Console.ReadKey();
                 Environment.Exit(1);
             }
-        }        
+        }
 
         static void ShowBanner()
         {
@@ -193,6 +200,7 @@ namespace H.CLI
         }
     }
 }
+
 
 
 
