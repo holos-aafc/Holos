@@ -1163,7 +1163,7 @@
     <value>ac</value>
   </data>
   <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
-    <value>Upstream CO₂</value>
+    <value>Upstream CO2</value>
   </data>
   <data name="LabelBirthWeight" xml:space="preserve">
     <value>Birth weight</value>
@@ -5526,7 +5526,7 @@
     <value>Methane injection to gas grid</value>
   </data>
   <data name="ADStepFourText" xml:space="preserve">
-    <value>Select the target output for the anaerbic digestor component</value>
+    <value>Select the target output for the anaerobic digestor component</value>
   </data>
   <data name="LabelPrimaryADOutput" xml:space="preserve">
     <value>Target digestor output</value>

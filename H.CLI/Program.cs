@@ -65,7 +65,7 @@ namespace H.CLI
             var geographicDataProvider = new GeographicDataProvider();
             geographicDataProvider.Initialize();
 
-            //If the directory exists and there are directories in the Farms folder - meaning there should be at least one farm folder.
+            // If the directory exists and there are directories in the Farms folder - meaning there should be at least one farm folder.
             if (Directory.Exists(farmsFolderPath) && listOfFarmPaths.Any())
             {
                 //if there is no template farm folder, create one
@@ -82,11 +82,11 @@ namespace H.CLI
                     if (!settingsFilePathsInFarmDirectory.Any())
                     {
                         globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, geographicDataProvider);
-
-                        //This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
+  
+                        // This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
                         var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
 
-                        //We add it to our list of settings files so we can continue processing with the new settings file
+                        // We add it to our list of settings files so we can continue processing with the new settings file
                         settingsFilePathsInFarmDirectory.Add(defaultFarmSettingsFilePath);
                     }
 
@@ -96,7 +96,7 @@ namespace H.CLI
                     {
                         if (File.Exists(settingsFilePath))
                         {
-                            //Initialize And Validate Directories - Make sure all directories are valid (spelled correctly, created if not there, template files made)
+                            // Initialize And Validate Directories - Make sure all directories are valid (spelled correctly, created if not there, template files made)
                             directoryHandler.InitializeDirectoriesAndFilesForComponents(farmDirectoryPath);
 
                             var farmName = Path.GetFileName(farmDirectoryPath);
@@ -105,7 +105,7 @@ namespace H.CLI
                             var dataInputHandler = new DataInputHandler();
                             Console.WriteLine(String.Format(Environment.NewLine + Properties.Resources.StartingConversion, Path.GetFileName(farmDirectoryPath)));
 
-                            //Parse And Convert Raw Input Files Into Components and add them to a Farm
+                            // Parse And Convert Raw Input Files Into Components and add them to a Farm
                             var farm = dataInputHandler.ProcessDataInputFiles(farmDirectoryPath);
                             farm.IsCommandLineMode = true;
                             farm.CliInputPath = farmDirectoryPath;
@@ -115,18 +115,18 @@ namespace H.CLI
                             applicationData.DisplayUnitStrings.SetStrings(farm.MeasurementSystemType);
                             farm.MeasurementSystemSelected = true;
 
-                            //Read Global Settings (ONLY SET ONCE) and other settings (Temperature, Precipitation, Evapotranspiration, Soil) which are specific
-                            //for each Farm and therefore, are set for each farm
+                            // Read Global Settings (ONLY SET ONCE) and other settings (Temperature, Precipitation, Evapotranspiration, Soil) which are specific
+                            // for each Farm and therefore, are set for each farm
                             Console.WriteLine(Properties.Resources.ReadingSettingsFile);
                             reader.ReadGlobalSettings(settingsFilePath);
                             globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
-
-                            //Create a KeyValuePair which takes in the farmDirectoryPath and the Farm itself
+  
+                            // Create a KeyValuePair which takes in the farmDirectoryPath and the Farm itself
                             if (farm.Components.Any())
                             {
                                 applicationData.Farms.Add(farm);
 
-                                //Set up Output Directories For The Land Management Components In The Farm
+                                // Set up Output Directories For The Land Management Components In The Farm
                                 directoryHandler.ValidateAndCreateLandManagementDirectories(InfrastructureConstants.BaseOutputDirectoryPath, farmName);
                             }
                             else
@@ -147,24 +147,24 @@ namespace H.CLI
                 if (applicationData.Farms.Any())
                 {
                     storage.ApplicationData = applicationData;
-                    //Start Processing Farms
+                    // Start Processing Farms
                     Console.WriteLine();
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
-                    //Overall Results For All the Farms
+                    // Overall Results For All the Farms
                     var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper());
 
-                    //Get base directory of user entered path to create Total Results For All Farms folder
+                    // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);
 
-                    //Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
-                    //Slowest section because we initialize view models for every component
+                    // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
+                    // Slowest section because we initialize view models for every component
                     processorHandler.InitializeComponentProcessing(storage.ApplicationData);
 
-                    //Calculate emissions for all farms
+                    // Calculate emissions for all farms
                     componentResults.ProcessFarms(storage);
 
-                    //Output all results files
+                    // Output all results files
                     componentResults.WriteEmissionsToFiles(applicationData);
 
                     Console.ForegroundColor = ConsoleColor.Green;

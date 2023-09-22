@@ -222,9 +222,6 @@
   <data name="DataInputMistakeHeader" xml:space="preserve">
     <value>Il y a une erreur de saisie de l’en-tête à la ligne : {0} dans {1}. L’en-tête doit être : {2}.</value>
   </data>
-  <data name="DataMissingOptionalHeader" xml:space="preserve">
-    <value>Vous n’avez pas d’en-tête « {0} » dans {1}. Holos utilisera une valeur par défaut.</value>
-  </data>
   <data name="DefaultBeefInputFolder" xml:space="preserve">
     <value>bœuf</value>
   </data>
@@ -1393,5 +1390,17 @@
   </data>
   <data name="Settings_YieldAssignmentMethod" xml:space="preserve">
     <value>Yield Assignment Method</value>
+  </data>
+  <data name="Key_FuelEnergy" xml:space="preserve">
+    <value>Fuel Energy</value>
+  </data>
+  <data name="Key_HerbicideEnergy" xml:space="preserve">
+    <value>Herbicide Energy</value>
+  </data>
+  <data name="Key_FertilizerBlend" xml:space="preserve">
+    <value>Fertilizer Blend</value>
+  </data>
+  <data name="DataMissingOptionalHeader" xml:space="preserve">
+    <value>An optional header named "{0}" is missing. Holos will use a default value in {1}</value>
   </data>
 </root>

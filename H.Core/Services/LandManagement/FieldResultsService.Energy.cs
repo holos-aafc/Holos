@@ -53,8 +53,7 @@ namespace H.Core.Services.LandManagement
 
                 totalVolume /= 1000; // This needs to be per 1000 kg/l since manure spreading energy emissions use factors that are in GJ / 1000 kg/l
 
-                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
-                    volumeOfLandAppliedManure: totalVolume);
+                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(volumeOfLandAppliedManure: totalVolume);
 
                 var resultItem = new MonthlyManureSpreadingResults();
                 resultItem.Year = year;
@@ -80,8 +79,7 @@ namespace H.Core.Services.LandManagement
                 var month = manureApplicationViewItem.DateOfApplication.Month;
                 var year = manureApplicationViewItem.DateOfApplication.Year;
 
-                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
-                    volumeOfLandAppliedManure: totalVolume);
+                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(volumeOfLandAppliedManure: totalVolume);
 
                 var resultItem = new MonthlyManureSpreadingResults();
                 resultItem.Year = year;

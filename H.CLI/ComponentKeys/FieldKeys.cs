@@ -103,17 +103,20 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_NitrogenContent, null },
             {Properties.Resources.Key_AboveGroundResidueDryMatter, null },
             {Properties.Resources.Key_BelowGroundResidueDryMatter, null },
+            {Properties.Resources.Key_FuelEnergy, null },
+            {Properties.Resources.Key_HerbicideEnergy, null },
+            {Properties.Resources.Key_FertilizerBlend, null },
         };
 
         //  Currently only 2 optional headers in the field keys
         public bool IsHeaderOptional(string s)
         {
             if (s == Properties.Resources.Key_NitrogenFixation) return true;
+            else if (s == Properties.Resources.Key_FertilizerBlend) return true;
             else if (s == Properties.Resources.Key_NitrogenDeposit) return true;
             else return false;
         }
         // Populate with all the keys that exist currently and tell if it is missing or not
-        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){
-};
+        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){};
     }
 }

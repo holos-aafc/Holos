@@ -1303,7 +1303,7 @@ Would you like to continue using this directory?</value>
     <value>Nitrogen Fixation</value>
   </data>
   <data name="DataMissingOptionalHeader" xml:space="preserve">
-    <value>You are missing the header "{0}" in {1} Holos will use a default value</value>
+    <value>An optional header named "{0}" is missing. Holos will use a default value in {1}</value>
   </data>
   <data name="Settings_Latitude" xml:space="preserve">
     <value>Latitude</value>
@@ -1435,5 +1435,14 @@ Would you like to continue using this directory?</value>
   </data>
   <data name="Settings_YieldAssignmentMethod" xml:space="preserve">
     <value>Yield Assignment Method</value>
+  </data>
+  <data name="Key_FuelEnergy" xml:space="preserve">
+    <value>Fuel Energy</value>
+  </data>
+  <data name="Key_HerbicideEnergy" xml:space="preserve">
+    <value>Herbicide Energy</value>
+  </data>
+  <data name="Key_FertilizerBlend" xml:space="preserve">
+    <value>Fertilizer Blend</value>
   </data>
 </root>

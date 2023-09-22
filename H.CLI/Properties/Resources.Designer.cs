@@ -385,7 +385,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are missing the header &quot;{0}&quot; in {1} Holos will use a default value.
+        ///   Looks up a localized string similar to An optional header named &quot;{0}&quot; is missing. Holos will use a default value in {1}.
         /// </summary>
         public static string DataMissingOptionalHeader {
             get {
@@ -1429,6 +1429,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fertilizer Blend.
+        /// </summary>
+        public static string Key_FertilizerBlend {
+            get {
+                return ResourceManager.GetString("Key_FertilizerBlend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field System Component Guid.
         /// </summary>
         public static string Key_FieldSystemComponentGuid {
@@ -1438,11 +1447,29 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fuel Energy.
+        /// </summary>
+        public static string Key_FuelEnergy {
+            get {
+                return ResourceManager.GetString("Key_FuelEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Harvest Method.
         /// </summary>
         public static string Key_HarvestMethod {
             get {
                 return ResourceManager.GetString("Key_HarvestMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Herbicide Energy.
+        /// </summary>
+        public static string Key_HerbicideEnergy {
+            get {
+                return ResourceManager.GetString("Key_HerbicideEnergy", resourceCulture);
             }
         }
         

@@ -1,6 +1,7 @@
 ﻿using H.CLI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using H.CLI.FileAndDirectoryAccessors;
@@ -9,6 +10,7 @@ using H.Core;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Fertilizer;
 
 namespace H.CLI.Converters
 {
@@ -155,6 +157,19 @@ namespace H.CLI.Converters
                     viewItem.NitrogenContent = rowInput.NitrogenContent;
                     viewItem.AboveGroundResidueDryMatter = rowInput.AboveGroundResidueDryMatter;
                     viewItem.BelowGroundResidueDryMatter = rowInput.BelowGroundResidueDryMatter;
+                    viewItem.FuelEnergy = rowInput.FuelEnergy;
+                    viewItem.HerbicideEnergy = rowInput.HerbicideEnergy;
+                    
+                    // CLI only supports 1 fertilizer application for now
+                    var fertilizerBlend = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data() {FertilizerBlend = rowInput.FertilizerBlend};
+                    viewItem.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>()
+                    {
+                        new FertilizerApplicationViewItem()
+                        {
+                            FertilizerBlendData = fertilizerBlend,
+                            AmountOfBlendedProductApplied = rowInput.NitrogenFertilizerRate
+                        }
+                    };
 
                     fieldSystemComponent.Guid = viewItem.FieldSystemComponentGuid;
 

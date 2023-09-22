@@ -214,6 +214,18 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.NitrogenContent + columnSeparator);
                 stringBuilder.Append(viewItem.AboveGroundResidueDryMatter + columnSeparator);
                 stringBuilder.Append(viewItem.BelowGroundResidueDryMatter + columnSeparator);
+                stringBuilder.Append(viewItem.FuelEnergy + columnSeparator);
+                stringBuilder.Append(viewItem.HerbicideEnergy + columnSeparator);
+
+                var fertilizerApplication = viewItem.FertilizerApplicationViewItems.FirstOrDefault();
+                if (fertilizerApplication != null && fertilizerApplication.FertilizerBlendData != null)
+                {
+                    stringBuilder.Append(fertilizerApplication.FertilizerBlendData.FertilizerBlend + columnSeparator);
+                }
+                else
+                {
+                    stringBuilder.Append(FertilizerBlends.Custom + columnSeparator);
+                }
 
                 stringBuilder.Append(Environment.NewLine);
             }
