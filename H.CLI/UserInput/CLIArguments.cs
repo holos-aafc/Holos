@@ -44,7 +44,7 @@ namespace H.CLI.UserInput
                     FileName = args[i+1];
                     i++;
                 }
-                else if (arg == "-c" && i + 1 < args.Length)
+                else if (arg == "-s" && i + 1 < args.Length)
                 {
                     Settings = args[i+1];
                     i++;
