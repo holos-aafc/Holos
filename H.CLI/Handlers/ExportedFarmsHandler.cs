@@ -11,6 +11,7 @@ using H.CLI.Converters;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Processors;
 using H.CLI.TemporaryComponentStorage;
+using H.CLI.UserInput;
 using H.Core;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
@@ -65,7 +66,7 @@ namespace H.CLI.Handlers
             foreach (var farm in farms)
             {
                 // Create input files for all components in farm
-                var componentFilesForFarm = this.CreateInputFilesForFarm(farmsFolderPath, farm);
+                var componentFilesForFarm = this.CreateInputFilesForFarm(farmsFolderPath, farm, null);
 
                 inputFilesForAllFarms.AddRange(componentFilesForFarm);
             }
@@ -77,28 +78,27 @@ namespace H.CLI.Handlers
             return farms;
         }
 
-        public void InitializeWithCLArguements(string farmsFolderPath, string[] args)
+        public void InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
         {
             var files = Directory.GetFiles(farmsFolderPath);
             string path = string.Empty;
             foreach (var myFile in files)
             {
-                if (args[1] == Path.GetFileName(myFile))
+                if (argValues.FileName == Path.GetFileName(myFile))
                 {
-                    Console.WriteLine($"InitializedWithArguements: {myFile}");
                     path = myFile;
                 }
             }
 
             var farms = _storage.GetFarmsFromExportFile(path);
             var farmsList = farms.ToList();
-            _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0]);
+            _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0], argValues);
         }
 
         /// <summary>
         /// Create a list of input files based on the components that make up the farm.
         /// </summary>
-        public List<string> CreateInputFilesForFarm(string pathToFarmsDirectory, Farm farm)
+        public List<string> CreateInputFilesForFarm(string pathToFarmsDirectory, Farm farm, CLIArguments argValues)
         {
             // A list of all the created input files
             var createdFiles = new List<string>();
@@ -107,7 +107,25 @@ namespace H.CLI.Handlers
             var farmDirectoryPath = this.CreateDirectoryStructureForImportedFarm(pathToFarmsDirectory, farm);
 
             // Create a settings file for this farm
-            this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            if (argValues == null || argValues.Settings == "")
+            {
+                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            }
+            // Move the settings file from pathToFarmsDirectory to the farmDirectoryPath
+            else
+            {
+                var files = Directory.GetFiles(pathToFarmsDirectory);
+                string filePath = string.Empty;
+                foreach (var file in files)
+                {
+                    if (argValues.Settings == Path.GetFileName(file))
+                    {
+                        filePath = file;
+                    }
+                }
+                string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
+                File.Move(filePath, newFilePath);
+            }
 
             /*
              * Field components

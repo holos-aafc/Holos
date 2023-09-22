@@ -24,6 +24,9 @@ namespace H.CLI
         {
             ShowBanner();
 
+            CLIArguments argValues = new CLIArguments();
+            argValues.ParseArgs(args);
+
             var userCulture = CultureInfo.CurrentCulture;
             CLILanguageConstants.SetCulture(userCulture);
 
@@ -35,9 +38,9 @@ namespace H.CLI
             // Farms exported from GUI access
             var exportedFarmsHandler = new ExportedFarmsHandler();
             List<Farm> farmsImportedFromGUI;
-            if (args.Length > 1)
+            if (argValues.FileName != "")
             {
-                exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, args);
+                exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, argValues);
             }
             else
             {
@@ -46,7 +49,7 @@ namespace H.CLI
 
             InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);
 
-            CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement();
+            CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 
             var applicationData = new ApplicationData();
 
@@ -167,12 +170,14 @@ namespace H.CLI
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(Properties.Resources.LabelProcessingComplete);
                     Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
                     Environment.Exit(1);
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Properties.Resources.NoFarmsToProcess);
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.ReadLine();
                     Environment.Exit(1);
                 }

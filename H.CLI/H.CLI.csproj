@@ -32,9 +32,9 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.0.18</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.19</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -153,6 +153,7 @@
     <Compile Include="TemporaryComponentStorage\SheepTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\SwineTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\TemporaryInputBase.cs" />
+    <Compile Include="UserInput\CLIArguments.cs" />
     <Compile Include="UserInput\CLILanguageConstants.cs" />
     <Compile Include="ComponentKeys\FieldKeys.cs" />
     <Compile Include="Converters\ComponentConverterHandler.cs" />

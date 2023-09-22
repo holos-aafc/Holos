@@ -15,8 +15,29 @@ namespace H.CLI.UserInput
     
         #region Public Methods
 
-        public static void PromptUserForUnitsOfMeasurement()
+        public static void PromptUserForUnitsOfMeasurement(string argUnits)
         {
+            if (!string.IsNullOrEmpty(argUnits))
+            {
+                string argUnitsLower = argUnits.ToLower();
+
+                if (argUnitsLower == "metric")
+                {
+                    measurementSystem = MeasurementSystemType.Metric;
+                    return;
+                }
+                else if (argUnitsLower == "imperial") 
+                {
+                    measurementSystem = MeasurementSystemType.Imperial;
+                    return;
+                }
+                else
+                {
+                    // TODO: Error message about invalid units of measurement
+                    
+                }       
+            }
+
             int userChosenMeasurement;
             string userChosenMeasurementString;
             do
