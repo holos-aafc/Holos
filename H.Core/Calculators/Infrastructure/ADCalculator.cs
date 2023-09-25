@@ -494,8 +494,8 @@ namespace H.Core.Calculators.Infrastructure
             // TODO: Unit attributes/comments needed for FarmResidueSubstrateViewItem class.
             foreach (var farmResiduesSubstrateViewItem in component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems)
             {
-                var startDate = farmResiduesSubstrateViewItem.StartDate;
-                var endDate = farmResiduesSubstrateViewItem.EndDate;
+                var startDate = farmResiduesSubstrateViewItem.StartDate.Date;
+                var endDate = farmResiduesSubstrateViewItem.EndDate.Date;
 
                 for (DateTime i = startDate; i < endDate; i += TimeSpan.FromDays(1))
                 {
