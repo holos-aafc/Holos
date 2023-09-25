@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Navigation;
 using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;

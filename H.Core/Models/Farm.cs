@@ -19,7 +19,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Permissions;
-using System.Windows.Navigation;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Models.Animals;
 using H.Core.Converters;

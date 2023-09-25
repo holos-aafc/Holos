@@ -1,4 +1,4 @@
-﻿using System.Windows.Media.TextFormatting;
+﻿
 using H.Core.Properties;
 using H.Infrastructure;
 

@@ -52,6 +52,7 @@ namespace H.Core.Test.Calculators.Economics
             {
                 Name = "Farm #1",
                 MeasurementSystemType = MeasurementSystemType.Metric,
+                DefaultSoilData = { Province = Province.Alberta}
             };
             _calculator = new EconomicsCalculator(_mockFieldResultsService.Object);
         }

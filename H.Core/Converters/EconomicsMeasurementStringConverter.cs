@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using H.Core.Enumerations;
 
 namespace H.Core.Converters

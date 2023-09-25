@@ -7,8 +7,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Documents;
-using System.Windows.Media.Animation;
 using H.Core.Enumerations;
 using H.Core.Models.Results;
 using H.Core.Providers.Animals;

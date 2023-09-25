@@ -2,8 +2,8 @@
 
 using System;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows;
+using Avalonia.Controls;
+using Avalonia.Data.Converters;
 
 #endregion
 
