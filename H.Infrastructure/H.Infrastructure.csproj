@@ -12,4 +12,27 @@
       <PackageReference Include="SharpKml.Core" Version="6.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\BC_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\BC_No_Styles.kml" />
+      <None Remove="Resources\MB_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\MB_No_Styles.kml" />
+      <None Remove="Resources\Alberta_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\Alberta_No_Styles.kml" />
+      <None Remove="Resources\NS_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\NS_No_Styles.kml" />
+      <None Remove="Resources\NFLD_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\NFLD_No_Styles.kml" />
+      <None Remove="Resources\NB_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\NB_No_Styles.kml" />
+      <None Remove="Resources\ON_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\ON_No_Styles.kml" />
+      <None Remove="Resources\PEI_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\PEI_No_Styles.kml" />
+      <None Remove="Resources\QC_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\QC_No_Styles.kml" />
+      <None Remove="Resources\SK_No_Styles.kml" />
+      <EmbeddedResource Include="Resources\SK_No_Styles.kml" />
+    </ItemGroup>
+
 </Project>
