@@ -35,7 +35,7 @@ namespace H.CLI.UserInput
                 {
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{Properties.Resources.InvalidUnitsArgument} {argUnits}" );
+                    Console.WriteLine(Properties.Resources.InvalidUnitsArgument, argUnits);
                     Console.ForegroundColor = ConsoleColor.White;
                 }       
             }

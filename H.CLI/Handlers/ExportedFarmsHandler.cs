@@ -131,12 +131,7 @@ namespace H.CLI.Handlers
 
             // Create a settings file for this farm
             bool isSettingsFileFound = false;
-            if (argValues == null || argValues.Settings == "")
-            {
-                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
-            }
-            // Move the settings file from pathToFarmsDirectory to the farmDirectoryPath
-            else
+            if (argValues != null && argValues.Settings != "")
             {
                 var files = Directory.GetFiles(pathToFarmsDirectory);
                 string filePath = string.Empty;
@@ -158,7 +153,17 @@ namespace H.CLI.Handlers
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Properties.Resources.SettingsFileNotFound, argValues.Settings);
                     Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine();
+                    Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
+                    this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
                 }
+            }
+            // Move the settings file from pathToFarmsDirectory to the farmDirectoryPath
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
+                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
             }
 
             /*

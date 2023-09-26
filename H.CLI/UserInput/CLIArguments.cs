@@ -13,6 +13,7 @@ namespace H.CLI.UserInput
         public static string _fileName;
         public static string _settings;
         public static string _units;
+        public static string _outputPath;
 
         #endregion
 
@@ -20,7 +21,7 @@ namespace H.CLI.UserInput
 
         public CLIArguments ()
         {
-            _fileName = _settings = _units = string.Empty;
+            _fileName = _settings = _units = _outputPath = string.Empty;
         }
 
         #endregion
@@ -30,6 +31,7 @@ namespace H.CLI.UserInput
         public string FileName { get { return _fileName; } set {  _fileName = value; } }
         public string Settings { get { return _settings; } set { _settings = value; } }     
         public string Units { get { return _units; } set { _units = value; } }
+        public string OutputPath { get { return _outputPath; } set { _outputPath = value; } }
 
         #endregion
 
@@ -52,6 +54,11 @@ namespace H.CLI.UserInput
                 else if (arg == "-u" && i + 1 < args.Length)
                 {
                     Units = args[i+1];
+                    i++;
+                }
+                else if (arg == "-o" && i + 1 < args.Length)
+                {
+                    OutputPath = args[i+1];
                     i++;
                 }
             }

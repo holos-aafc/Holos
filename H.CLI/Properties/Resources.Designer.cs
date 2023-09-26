@@ -214,6 +214,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot write files to network drive: {0}.
+        /// </summary>
+        public static string CannotWriteToNetworkDrive {
+            get {
+                return ResourceManager.GetString("CannotWriteToNetworkDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CF Temp.
         /// </summary>
         public static string CFTemp {
@@ -970,7 +979,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: input file {0} not found. .
+        ///   Looks up a localized string similar to Error: input file {0} not found..
         /// </summary>
         public static string InputFileNotFound {
             get {
@@ -1213,7 +1222,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid -u argument: .
+        ///   Looks up a localized string similar to Invalid -u argument: {0}.
         /// </summary>
         public static string InvalidUnitsArgument {
             get {
@@ -1938,6 +1947,15 @@ namespace H.CLI.Properties {
         public static string LabelCreatingPoultryInputFiles {
             get {
                 return ResourceManager.GetString("LabelCreatingPoultryInputFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating .SETTINGS file..
+        /// </summary>
+        public static string LabelCreatingSettingsFile {
+            get {
+                return ResourceManager.GetString("LabelCreatingSettingsFile", resourceCulture);
             }
         }
         
@@ -3590,7 +3608,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: settings file {0} not found. A settings file will be generated. .
+        ///   Looks up a localized string similar to Error: settings file {0} not found..
         /// </summary>
         public static string SettingsFileNotFound {
             get {

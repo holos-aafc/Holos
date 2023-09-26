@@ -37,12 +37,10 @@ namespace H.CLI
 
             // Farms exported from GUI access
             var exportedFarmsHandler = new ExportedFarmsHandler();
-           
-            List<Farm> farmsImportedFromGUI;
-          
-            farmsImportedFromGUI = exportedFarmsHandler.Initialize(farmsFolderPath, argValues);
+            
+            _ = exportedFarmsHandler.Initialize(farmsFolderPath, argValues);
 
-            InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);
+            InfrastructureConstants.CheckOutputDirectoryPath(argValues.OutputPath, farmsFolderPath);
 
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 
@@ -52,7 +50,6 @@ namespace H.CLI
             var templateFarmHandler = new TemplateFarmHandler();
             var processorHandler = new ProcessorHandler();
 
-            InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);
             //Get The Directories in the "Farms" folder
             var listOfFarmPaths = Directory.GetDirectories(farmsFolderPath);
 
@@ -186,7 +183,7 @@ namespace H.CLI
                 templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(String.Format(Properties.Resources.InitialMessageAfterInstallation, farmsFolderPath));
-                var a = Console.ReadKey();
+                _ = Console.ReadKey();
                 Environment.Exit(1);
             }
         }

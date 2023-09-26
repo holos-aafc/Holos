@@ -1445,4 +1445,19 @@ Would you like to continue using this directory?</value>
   <data name="Key_FertilizerBlend" xml:space="preserve">
     <value>Fertilizer Blend</value>
   </data>
+  <data name="InputFileNotFound" xml:space="preserve">
+    <value>Error: input file {0} not found.</value>
+  </data>
+  <data name="InvalidUnitsArgument" xml:space="preserve">
+    <value>Invalid -u argument: {0}</value>
+  </data>
+  <data name="LabelCreatingSettingsFile" xml:space="preserve">
+    <value>Creating .SETTINGS file.</value>
+  </data>
+  <data name="SettingsFileNotFound" xml:space="preserve">
+    <value>Error: settings file {0} not found.</value>
+  </data>
+  <data name="CannotWriteToNetworkDrive" xml:space="preserve">
+    <value>Cannot write files to network drive: {0}</value>
+  </data>
 </root>
