@@ -8,12 +8,12 @@ using H.Core.Providers;
 using H.Core.Services.LandManagement;
 using H.Core.Services;
 using H.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Integration
 {
@@ -59,7 +59,10 @@ namespace H.Integration
             _storage.ApplicationData = new ApplicationData();
             _storage.ApplicationData.GlobalSettings = new GlobalSettings();
 
-            _farm = new Farm();
+            _farm = new Farm
+            {
+                Province = Province.Alberta
+            };
             _farm.Defaults = new Defaults();
 
             _storage.ApplicationData.GlobalSettings.ActiveFarm = _farm;
@@ -86,7 +89,10 @@ namespace H.Integration
             {
                 var polygon = polygons.ElementAt(i);
 
-                _farm = new Farm();
+                _farm = new Farm
+                {
+                    Province = Province.Alberta
+                };;
                 _farm.PolygonId = polygon;
 
                 var geogrphicData = _geographicDataProvider.GetGeographicalData(polygon);
