@@ -37,15 +37,10 @@ namespace H.CLI
 
             // Farms exported from GUI access
             var exportedFarmsHandler = new ExportedFarmsHandler();
+           
             List<Farm> farmsImportedFromGUI;
-            if (argValues.FileName != "")
-            {
-                exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, argValues);
-            }
-            else
-            {
-                farmsImportedFromGUI = exportedFarmsHandler.Initialize(farmsFolderPath);
-            }
+          
+            farmsImportedFromGUI = exportedFarmsHandler.Initialize(farmsFolderPath, argValues);
 
             InfrastructureConstants.BaseOutputDirectoryPath = Path.GetDirectoryName(farmsFolderPath);
 

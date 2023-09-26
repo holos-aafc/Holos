@@ -51,8 +51,24 @@ namespace H.CLI.Handlers
         /// 
         /// </summary>
         /// <param name="farmsFolderPath">The root directory that will contain all of the farms</param>
-        public List<Farm> Initialize(string farmsFolderPath)
+        public List<Farm> Initialize(string farmsFolderPath, CLIArguments argValues)
         {
+            // Check if exported farm is given via command line argument
+            if (argValues.FileName != "")
+            {
+                if (InitializeWithCLArguements(farmsFolderPath, argValues))
+                {
+                    return null;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FileName);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+            }
+            
             var pathToExportedFarms = this.PromptUserForLocationOfExportedFarms(farmsFolderPath);
             if (string.IsNullOrWhiteSpace(pathToExportedFarms))
             {
@@ -78,8 +94,9 @@ namespace H.CLI.Handlers
             return farms;
         }
 
-        public void InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
+        public bool InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
         {
+            bool isExportedFarmFound = false;
             var files = Directory.GetFiles(farmsFolderPath);
             string path = string.Empty;
             foreach (var myFile in files)
@@ -87,12 +104,18 @@ namespace H.CLI.Handlers
                 if (argValues.FileName == Path.GetFileName(myFile))
                 {
                     path = myFile;
+                    isExportedFarmFound = true;
+                    break;
                 }
             }
+            if (isExportedFarmFound)
+            {
+                var farms = _storage.GetFarmsFromExportFile(path);
+                var farmsList = farms.ToList();
+                _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0], argValues);
+            }
 
-            var farms = _storage.GetFarmsFromExportFile(path);
-            var farmsList = farms.ToList();
-            _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0], argValues);
+            return isExportedFarmFound;
         }
 
         /// <summary>
@@ -107,6 +130,7 @@ namespace H.CLI.Handlers
             var farmDirectoryPath = this.CreateDirectoryStructureForImportedFarm(pathToFarmsDirectory, farm);
 
             // Create a settings file for this farm
+            bool isSettingsFileFound = false;
             if (argValues == null || argValues.Settings == "")
             {
                 this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
@@ -121,10 +145,20 @@ namespace H.CLI.Handlers
                     if (argValues.Settings == Path.GetFileName(file))
                     {
                         filePath = file;
+                        isSettingsFileFound = true;
                     }
                 }
-                string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
-                File.Move(filePath, newFilePath);
+                if (isSettingsFileFound)
+                {
+                    string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
+                    File.Move(filePath, newFilePath);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.SettingsFileNotFound, argValues.Settings);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
 
             /*

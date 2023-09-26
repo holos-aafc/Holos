@@ -970,6 +970,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: input file {0} not found. .
+        /// </summary>
+        public static string InputFileNotFound {
+            get {
+                return ResourceManager.GetString("InputFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} total farms imported..
         /// </summary>
         public static string InterpolatedTotalFarmsSuccessfullyImported {
@@ -1200,6 +1209,15 @@ namespace H.CLI.Properties {
         public static string InvalidTreeSpecies {
             get {
                 return ResourceManager.GetString("InvalidTreeSpecies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid -u argument: .
+        /// </summary>
+        public static string InvalidUnitsArgument {
+            get {
+                return ResourceManager.GetString("InvalidUnitsArgument", resourceCulture);
             }
         }
         
@@ -3568,6 +3586,15 @@ namespace H.CLI.Properties {
         public static string SettingsFileHeader {
             get {
                 return ResourceManager.GetString("SettingsFileHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: settings file {0} not found. A settings file will be generated. .
+        /// </summary>
+        public static string SettingsFileNotFound {
+            get {
+                return ResourceManager.GetString("SettingsFileNotFound", resourceCulture);
             }
         }
         

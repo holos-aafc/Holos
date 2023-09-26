@@ -38,6 +38,8 @@ namespace H.Core.Models.Animals
 
         private static readonly IMapper _housingDetailsMapper;
 
+        private bool _useCustomIndoorHousingTemperature;
+
         #endregion
 
         #region Constructors
@@ -56,6 +58,7 @@ namespace H.Core.Models.Animals
         public HousingDetails()
         {
             this.GrazingSystemType = null; // No grazing by default
+            this.UseCustomIndoorHousingTemperature = false;
 
             this.PropertyChanged -= OnPropertyChanged;
             this.PropertyChanged += OnPropertyChanged;
@@ -226,6 +229,12 @@ namespace H.Core.Models.Animals
         {
             get => _indoorHousingTemperature;
             set => SetProperty(ref _indoorHousingTemperature, value);
+        }
+
+        public bool UseCustomIndoorHousingTemperature
+        {
+            get => _useCustomIndoorHousingTemperature;
+            set => SetProperty(ref _useCustomIndoorHousingTemperature, value);
         }
 
         #endregion

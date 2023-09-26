@@ -5550,4 +5550,7 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="SelectProvince" xml:space="preserve">
     <value>Select Province</value>
   </data>
+  <data name="LabelUseConstantIndoorTemperature" xml:space="preserve">
+    <value>Use constant indoor temperature</value>
+  </data>
 </root>

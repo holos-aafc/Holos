@@ -21,20 +21,22 @@ namespace H.CLI.UserInput
             {
                 string argUnitsLower = argUnits.ToLower();
 
-                if (argUnitsLower == "metric")
+                if (argUnitsLower == "metric" || argUnitsLower == "m")
                 {
                     measurementSystem = MeasurementSystemType.Metric;
                     return;
                 }
-                else if (argUnitsLower == "imperial") 
+                else if (argUnitsLower == "imperial" || argUnitsLower == "i") 
                 {
                     measurementSystem = MeasurementSystemType.Imperial;
                     return;
                 }
                 else
                 {
-                    // TODO: Error message about invalid units of measurement
-                    
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{Properties.Resources.InvalidUnitsArgument} {argUnits}" );
+                    Console.ForegroundColor = ConsoleColor.White;
                 }       
             }
 
@@ -46,7 +48,6 @@ namespace H.CLI.UserInput
                 //Need to display this in both French and English at the start because we do not know their preferred language yet
                 Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptUserForUnitsOfMeasurement);
-                Console.WriteLine("Veuillez entrer le nombre correspondant à vos unités de mesure préférées(métrique = 1, impérial = 2");
                 userChosenMeasurementString = Console.ReadLine();
                 int.TryParse(userChosenMeasurementString, out userChosenMeasurement);
 

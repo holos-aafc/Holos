@@ -11554,6 +11554,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use constant indoor temperature.
+        /// </summary>
+        public static string LabelUseConstantIndoorTemperature {
+            get {
+                return ResourceManager.GetString("LabelUseConstantIndoorTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use custom methane conversion factor.
         /// </summary>
         public static string LabelUseCustomMethaneConversionFactor {

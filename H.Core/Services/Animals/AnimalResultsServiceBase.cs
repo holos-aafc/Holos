@@ -25,6 +25,8 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
+        protected readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new IndoorTemperatureProvider();
+
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
             new Table_49_Electricity_Conversion_Defaults_Provider();
 
