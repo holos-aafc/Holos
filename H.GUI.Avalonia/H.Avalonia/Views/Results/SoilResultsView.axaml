@@ -56,7 +56,7 @@
                                     Binding="{Binding Longitude, StringFormat={}{0:0.###}}"
                                     Width="*"/>
                 <DataGridTextColumn Header="{x:Static properties:Resources.LabelProvince}"
-                                    Binding="{Binding Province}"
+                                    Binding="{Binding Province, Converter={StaticResource EnumDescriptionConverter}}"
                                     Width="*"/>
                 <DataGridTextColumn Header="{x:Static properties:Resources.LabelSoilGreatGroup}"
                                     Binding="{Binding SoilGreatGroup, Converter={StaticResource EnumDescriptionConverter}}"
