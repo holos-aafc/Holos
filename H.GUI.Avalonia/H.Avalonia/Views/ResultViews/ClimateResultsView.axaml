@@ -5,7 +5,7 @@
              xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
              xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
-             x:Class="H.Avalonia.Views.Results.ClimateResultsView"
+             x:Class="H.Avalonia.Views.ResultViews.ClimateResultsView"
              xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing">
     <Design.DataContext>
         <results:ClimateResultsViewModel/>

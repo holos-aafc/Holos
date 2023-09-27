@@ -7,7 +7,7 @@
              xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
              xmlns:infrastructure1="clr-namespace:H.Avalonia.Infrastructure;assembly=H.Avalonia.Infrastructure"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="H.Avalonia.Views.Results.SoilResultsView">
+             x:Class="H.Avalonia.Views.ResultViews.SoilResultsView">
     <Design.DataContext>
         <results:SoilResultsViewModel/>
     </Design.DataContext>

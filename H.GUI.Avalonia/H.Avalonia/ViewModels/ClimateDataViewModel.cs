@@ -7,7 +7,6 @@ using H.Avalonia.Infrastructure.Dialogs;
 using H.Avalonia.Models;
 using H.Avalonia.Models.ClassMaps;
 using H.Avalonia.Views;
-using H.Avalonia.Views.Results;
 using Prism.Commands;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -18,6 +17,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using H.Avalonia.Views.ResultViews;
+using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 
 namespace H.Avalonia.ViewModels
 {

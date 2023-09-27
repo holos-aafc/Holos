@@ -9,7 +9,7 @@ using H.Avalonia.Infrastructure.Dialogs;
 using H.Avalonia.Models;
 using H.Avalonia.Models.ClassMaps;
 using H.Avalonia.Views;
-using H.Avalonia.Views.Results;
+using H.Avalonia.Views.ResultViews;
 using H.Core.Enumerations;
 using Mapsui;
 using Mapsui.Extensions;
@@ -29,6 +29,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Avalonia.Views.ResultViews;
+using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
 
 namespace H.Avalonia.ViewModels
 {

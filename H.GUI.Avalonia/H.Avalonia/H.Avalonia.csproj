@@ -45,8 +45,21 @@
     <Compile Update="Views\ClimateDataView.axaml.cs">
       <DependentUpon>ClimateDataView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Results\ClimateResultsView.axaml.cs">
+    <Compile Update="Views\ResultViews\ClimateResultsView.axaml.cs">
       <DependentUpon>ClimateResultsView.axaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ResultViews\SoilResultsView.axaml.cs">
+      <DependentUpon>SoilResultsView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\ComponentViews\" />
+    <Folder Include="Views\DetailViews\" />
+    <Folder Include="Views\Results\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\SupportingViews\" />
   </ItemGroup>
 </Project>

@@ -1,26 +1,29 @@
+﻿using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using H.Avalonia.ViewModels.Results;
-using System;
 
-namespace H.Avalonia.Views.Results
+namespace H.Avalonia.Views.ResultViews
 {
-    public partial class ClimateResultsView : UserControl
+    public partial class SoilResultsView : UserControl
     {
-        public ClimateResultsView()
+        private SoilResultsViewModel? ViewModel => DataContext as SoilResultsViewModel;
+        private TopLevel GetTopLevel() => TopLevel.GetTopLevel(this) ?? throw new NullReferenceException("Invalid Owner");
+
+
+        public SoilResultsView()
         {
             InitializeComponent();
         }
-        TopLevel GetTopLevel() => TopLevel.GetTopLevel(this) ?? throw new NullReferenceException("Invalid Owner");
 
-
-        private ClimateResultsViewModel? ViewModel
+        private void InitializeComponent()
         {
-            get => DataContext as ClimateResultsViewModel;
+            AvaloniaXamlLoader.Load(this);
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -46,7 +49,7 @@ namespace H.Avalonia.Views.Results
             var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
             {
                 Title = Core.Properties.Resources.ExportDefaultName,
-                SuggestedFileName = Core.Properties.Resources.ClimateDataExportDefaultName,
+                SuggestedFileName = Core.Properties.Resources.SoilDataExportDefaultName,
                 DefaultExtension = "csv",
                 ShowOverwritePrompt = true,
             });
