@@ -58,7 +58,6 @@
   <ItemGroup>
     <Folder Include="Views\ComponentViews\" />
     <Folder Include="Views\DetailViews\" />
-    <Folder Include="Views\Results\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\SupportingViews\" />
   </ItemGroup>
