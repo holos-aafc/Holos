@@ -1403,4 +1403,10 @@
   <data name="DataMissingOptionalHeader" xml:space="preserve">
     <value>An optional header named "{0}" is missing. Holos will use a default value in {1}</value>
   </data>
+  <data name="FractionOfNitrogenInManure" xml:space="preserve">
+    <value>Fraction Of Nitrogen In Manure</value>
+  </data>
+  <data name="DailyTanExcretion" xml:space="preserve">
+    <value>Daily Tan Excretion</value>
+  </data>
 </root>

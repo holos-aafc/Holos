@@ -58,7 +58,7 @@ namespace H.Core.Services.Animals
 
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             if (managementPeriod.ProductionStage == ProductionStages.Weaning)
             {

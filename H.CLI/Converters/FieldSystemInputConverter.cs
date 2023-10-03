@@ -161,15 +161,18 @@ namespace H.CLI.Converters
                     viewItem.HerbicideEnergy = rowInput.HerbicideEnergy;
                     
                     // CLI only supports 1 fertilizer application for now
-                    var fertilizerBlend = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data() {FertilizerBlend = rowInput.FertilizerBlend};
-                    viewItem.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>()
+                    if (rowInput.NitrogenFertilizerRate > 0)
                     {
-                        new FertilizerApplicationViewItem()
+                        var fertilizerBlend = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data() { FertilizerBlend = rowInput.FertilizerBlend };
+                        viewItem.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>()
                         {
-                            FertilizerBlendData = fertilizerBlend,
-                            AmountOfBlendedProductApplied = rowInput.NitrogenFertilizerRate
-                        }
-                    };
+                            new FertilizerApplicationViewItem()
+                            {
+                                FertilizerBlendData = fertilizerBlend,
+                                AmountOfBlendedProductApplied = rowInput.NitrogenFertilizerRate
+                            }
+                        };
+                    }
 
                     fieldSystemComponent.Guid = viewItem.FieldSystemComponentGuid;
 

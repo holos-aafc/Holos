@@ -219,12 +219,9 @@ namespace H.Core.Calculators.Carbon
             if (farm.IsCommandLineMode == false)
             {
                 viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
-                viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
             }
-            else
-            {
-                // User specifies total manure in input file
-            }
+
+            viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
             viewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(viewItem, farm);
 

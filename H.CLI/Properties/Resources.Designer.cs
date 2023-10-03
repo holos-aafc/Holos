@@ -133,6 +133,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AmmoniaEmissionFactor {
+            get {
+                return ResourceManager.GetString("AmmoniaEmissionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ammonia Emission Factor For Manure Storage.
         /// </summary>
         public static string AmmoniaEmissionFactorForManureStorage {
@@ -372,6 +381,15 @@ namespace H.CLI.Properties {
         public static string DailyManureMethaneEmissionRate {
             get {
                 return ResourceManager.GetString("DailyManureMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily Tan Excretion.
+        /// </summary>
+        public static string DailyTanExcretion {
+            get {
+                return ResourceManager.GetString("DailyTanExcretion", resourceCulture);
             }
         }
         
@@ -804,6 +822,15 @@ namespace H.CLI.Properties {
         public static string FractionOfCarbonInManure {
             get {
                 return ResourceManager.GetString("FractionOfCarbonInManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Nitrogen In Manure.
+        /// </summary>
+        public static string FractionOfNitrogenInManure {
+            get {
+                return ResourceManager.GetString("FractionOfNitrogenInManure", resourceCulture);
             }
         }
         

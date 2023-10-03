@@ -242,7 +242,7 @@ namespace H.Core.Services
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
 
-            // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
+            // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
             var animalResults = _animalResultsService.GetAnimalResults(farm);

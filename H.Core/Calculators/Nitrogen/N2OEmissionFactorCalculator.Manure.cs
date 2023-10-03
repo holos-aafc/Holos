@@ -128,7 +128,7 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Calculate results for imported manure
-            var indirectedEmissionsFromImportedManureSpreading = this.CalculateAmmoniaFromLandApplicationForImportedManure(viewItem, farm);
+            var indirectEmissionsFromImportedManureSpreading = this.CalculateAmmoniaFromLandApplicationForImportedManure(viewItem, farm);
 
             // This will be a list of all indirect emissions for land applied manure for each year of history for this field
             var indirectEmissionsForField = indirectEmissionsForAllFields.Where(x => x.CropViewItem.FieldSystemComponentGuid.Equals(viewItem.FieldSystemComponentGuid));
@@ -136,7 +136,7 @@ namespace H.Core.Calculators.Nitrogen
             // Filter by year
             var byYear = indirectEmissionsForField.Where(x => x.CropViewItem.Year.Equals(viewItem.Year));
 
-            var combinedResults = byYear.Concat(indirectedEmissionsFromImportedManureSpreading);
+            var combinedResults = byYear.Concat(indirectEmissionsFromImportedManureSpreading);
 
             foreach (var landApplicationEmissionResult in combinedResults)
             {

@@ -29,6 +29,7 @@ namespace H.CLI.Processors
         private readonly FieldResultsService _fieldResultsService;
         private FarmResultsService _farmResultsService;
         private readonly EconomicsCalculator _economicsCalculator;
+        private AnimalResultsService _animalService;
 
         #endregion
 
@@ -36,12 +37,14 @@ namespace H.CLI.Processors
 
         public FieldProcessor()
         {
-            var animalService = new AnimalResultsService();
-            var manureService = new ManureService(animalService);
+            _animalService = new AnimalResultsService();
+            var manureService = new ManureService(_animalService);
 
             _fieldResultsService = new FieldResultsService();
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, _animalService);
             _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
+
+            
         }
 
         #endregion
@@ -57,6 +60,9 @@ namespace H.CLI.Processors
             // Should re_crop be overwritten here if the user specifies a custom climate file?
             //var pathToCustomClimateData = farm.CliInputPath + @"\" + farm.ClimateDataFileName;
             //_customClimateDataProvider.LoadUserClimateFile(pathToCustomClimateData, farm);
+
+            var animalResults = _animalService.GetAnimalResults(farm);
+            _fieldResultsService.AnimalResults = animalResults;
 
             var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 

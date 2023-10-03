@@ -1460,4 +1460,13 @@ Would you like to continue using this directory?</value>
   <data name="CannotWriteToNetworkDrive" xml:space="preserve">
     <value>Cannot write files to network drive: {0}</value>
   </data>
+  <data name="FractionOfNitrogenInManure" xml:space="preserve">
+    <value>Fraction Of Nitrogen In Manure</value>
+  </data>
+  <data name="DailyTanExcretion" xml:space="preserve">
+    <value>Daily Tan Excretion</value>
+  </data>
+  <data name="AmmoniaEmissionFactor" xml:space="preserve">
+    <value />
+  </data>
 </root>

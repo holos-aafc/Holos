@@ -49,7 +49,7 @@ namespace H.Core.Services.Animals
 
             var dailyAverageOutdoorTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             if (animalGroup.GroupType.IsNewlyHatchedEggs() || animalGroup.GroupType.IsEggs())
             {

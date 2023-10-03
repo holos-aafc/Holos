@@ -80,7 +80,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             /*
              * Enteric methane (CH4)
@@ -259,7 +259,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 

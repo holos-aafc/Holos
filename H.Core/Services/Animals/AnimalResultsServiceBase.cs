@@ -2487,10 +2487,14 @@ namespace H.Core.Services.Animals
                 emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
         }
 
-        protected void InitializeDailyEmissions(
-            GroupEmissionsByDay dailyEmissions,
-            ManagementPeriod managementPeriod)
+        protected void InitializeDailyEmissions(GroupEmissionsByDay dailyEmissions,
+            ManagementPeriod managementPeriod, Farm farm, DateTime dateTime)
         {
+            dailyEmissions.DateTime = dateTime;
+
+            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
+            dailyEmissions.Temperature = temperature;
+
             dailyEmissions.NumberOfAnimals = managementPeriod.NumberOfAnimals;
             dailyEmissions.EmissionFactorForVolatilization =
                 managementPeriod.ManureDetails.EmissionFactorVolatilization;

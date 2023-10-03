@@ -647,7 +647,7 @@ namespace H.Core.Calculators.Carbon
             this.CalculateActualAmountsLeached(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching, totalIndirectEmissionsFromLandAppliedDigestate);
 
             var volatilizationFractionSoil = N2OEmissionFactorCalculator.CalculateFractionOfNitrogenLostByVolatilization(currentYearResults, farm);
-            var emissionFactorForVolatilization = farm.Province.GetRegion() == Region.WesternCanada ? 0.005 : 0.014;
+            var emissionFactorForVolatilization = farm.DefaultSoilData.Province.GetRegion() == Region.WesternCanada ? 0.005 : 0.014;
 
             this.CalculateVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, totalIndirectEmissionsFromLandAppliedManure, totalIndirectEmissionsFromLandAppliedDigestate);
             this.CalculateActualVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, totalIndirectEmissionsFromLandAppliedManure, totalIndirectEmissionsFromLandAppliedDigestate);

@@ -56,7 +56,7 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             // Weaning lambs don't produce any emissions.
             if (managementPeriod.ProductionStage == ProductionStages.Weaning)
