@@ -14,14 +14,15 @@ namespace H.CLI
 
         public static void CheckOutputDirectoryPath(string givenPath, string farmsFoldersPath)
         {
-            string rootOfGivenPath = Path.GetPathRoot(givenPath);
-            DriveInfo driveInfo = new DriveInfo(rootOfGivenPath);
-
             if (givenPath == "")
             {
                 BaseOutputDirectoryPath = farmsFoldersPath;
                 return;
             }
+
+            string rootOfGivenPath = Path.GetPathRoot(givenPath);
+            DriveInfo driveInfo = new DriveInfo(rootOfGivenPath);
+
             if (driveInfo.DriveType == DriveType.Network)
             {
                 Console.WriteLine();
