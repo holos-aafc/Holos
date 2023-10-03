@@ -56,9 +56,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\ComponentViewModels\" />
+    <Folder Include="ViewModels\DetailViewModels\" />
+    <Folder Include="ViewModels\SharedViewModels\" />
+    <Folder Include="ViewModels\SupportingViewModels\" />
     <Folder Include="Views\ComponentViews\" />
     <Folder Include="Views\DetailViews\" />
-    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\SharedViews\" />
     <Folder Include="Views\SupportingViews\" />
   </ItemGroup>
 </Project>

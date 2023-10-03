@@ -1,19 +1,19 @@
-﻿using Avalonia.Controls.Notifications;
-using Avalonia.Platform.Storage;
-using H.Avalonia.Models.ClassMaps;
-using H.Avalonia.Models.Results;
-using H.Avalonia.Infrastructure;
-using H.Core.Providers.Climate;
-using Prism.Commands;
-using Prism.Regions;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
+using Avalonia.Platform.Storage;
+using H.Avalonia.Infrastructure;
+using H.Avalonia.Models.ClassMaps;
+using H.Avalonia.Models.Results;
+using H.Core.Providers.Climate;
+using Prism.Commands;
+using Prism.Regions;
 
-namespace H.Avalonia.ViewModels.Results
+namespace H.Avalonia.ViewModels.ResultViewModels
 {
     /// <summary>
     /// A viewmodel for the climate results view.

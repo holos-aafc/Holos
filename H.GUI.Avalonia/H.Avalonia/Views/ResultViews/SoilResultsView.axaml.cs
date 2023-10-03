@@ -6,7 +6,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
-using H.Avalonia.ViewModels.Results;
+using H.Avalonia.ViewModels.ResultViewModels;
 
 namespace H.Avalonia.Views.ResultViews
 {

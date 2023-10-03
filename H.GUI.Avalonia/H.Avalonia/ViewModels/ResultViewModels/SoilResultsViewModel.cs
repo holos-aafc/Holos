@@ -1,21 +1,20 @@
-﻿using Avalonia.Controls.Notifications;
-using Avalonia.Platform.Storage;
-using H.Avalonia.Models;
-using H.Avalonia.Models.ClassMaps;
-using H.Avalonia.Models.Results;
-using H.Avalonia.Infrastructure;
-using H.Core.Providers;
-using Prism.Commands;
-using Prism.Regions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
+using Avalonia.Platform.Storage;
+using H.Avalonia.Infrastructure;
+using H.Avalonia.Models;
+using H.Avalonia.Models.ClassMaps;
+using H.Avalonia.Models.Results;
+using H.Core.Providers;
+using Prism.Commands;
+using Prism.Regions;
 
-namespace H.Avalonia.ViewModels.Results
+namespace H.Avalonia.ViewModels.ResultViewModels
 {
     public class SoilResultsViewModel : ResultsViewModelBase
     {

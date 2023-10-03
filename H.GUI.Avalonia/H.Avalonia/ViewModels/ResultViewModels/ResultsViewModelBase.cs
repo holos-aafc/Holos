@@ -1,7 +1,7 @@
-﻿using Prism.Regions;
-using Prism.Commands;
+﻿using Prism.Commands;
+using Prism.Regions;
 
-namespace H.Avalonia.ViewModels.Results
+namespace H.Avalonia.ViewModels.ResultViewModels
 {
     public class ResultsViewModelBase : ViewModelBase
     {

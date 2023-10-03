@@ -3,7 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using H.Avalonia.Infrastructure.Dialogs;
 using H.Avalonia.ViewModels;
-using H.Avalonia.ViewModels.Results;
 using H.Avalonia.Views;
 using H.Avalonia.Views.ResultViews;
 using H.Avalonia.Infrastructure;
@@ -12,6 +11,7 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
 using System;
+using H.Avalonia.ViewModels.ResultViewModels;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
 
