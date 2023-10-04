@@ -17,6 +17,7 @@ using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Energy;
+using H.Core.Providers.Feed;
 using H.Core.Tools;
 
 namespace H.Core.Services.Animals
@@ -24,6 +25,8 @@ namespace H.Core.Services.Animals
     public abstract partial class AnimalResultsServiceBase : IAnimalResultsService
     {
         #region Fields
+
+        private static readonly DietProvider _dietProvider;
 
         protected readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new IndoorTemperatureProvider();
 
@@ -48,14 +51,22 @@ namespace H.Core.Services.Animals
 
         protected ComponentCategory _animalComponentCategory;
         private readonly Table_29_Default_Manure_Excreted_Provider _manureExcretionAmountProvider = new Table_29_Default_Manure_Excreted_Provider();
+        private static List<Diet> _diets;
 
         #endregion
 
         #region Constructors
 
+        static AnimalResultsServiceBase()
+        {
+            _dietProvider = new DietProvider();
+            _diets = _dietProvider.GetDiets();
+        }
+
         protected AnimalResultsServiceBase()
         {
             HTraceListener.AddTraceListener();
+
         }
 
         #endregion
@@ -85,6 +96,12 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay previousDaysEmissions = null;
             var animalGroupEmissionResult = new AnimalGroupEmissionResults();
             animalGroupEmissionResult.AnimalGroup = animalGroup;
+
+            if (managementPeriod.SelectedDiet == null)
+            {
+                managementPeriod.SelectedDiet = _diets.FirstOrDefault(x =>
+                    x.AnimalType.GetCategory() == managementPeriod.DietGroupType.GetCategory());
+            }
 
             var monthlyBreakdownForManagementPeriod = AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
             foreach (var month in monthlyBreakdownForManagementPeriod)
@@ -136,6 +153,12 @@ namespace H.Core.Services.Animals
 
             foreach (var managementPeriod in animalGroup.ManagementPeriods)
             {
+                if (managementPeriod.SelectedDiet == null)
+                {
+                    managementPeriod.SelectedDiet = _diets.FirstOrDefault(x =>
+                        x.AnimalType.GetCategory() == managementPeriod.DietGroupType.GetCategory());
+                }
+
                 var monthlyBreakdownForManagementPeriod = AnimalComponentHelper.GetMonthlyBreakdownFromManagementPeriod(managementPeriod);
                 foreach (var month in monthlyBreakdownForManagementPeriod)
                 {
@@ -2490,8 +2513,8 @@ namespace H.Core.Services.Animals
         protected void InitializeDailyEmissions(GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod, Farm farm, DateTime dateTime)
         {
+ 
             dailyEmissions.DateTime = dateTime;
-
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
             dailyEmissions.Temperature = temperature;
 
