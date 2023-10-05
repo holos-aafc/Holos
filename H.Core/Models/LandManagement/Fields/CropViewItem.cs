@@ -988,12 +988,7 @@ namespace H.Core.Models.LandManagement.Fields
             set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
-        /// <summary>
-        /// (kg C ha^-1)
-        ///
-        /// Total digestate C from all digestate applications
-        /// </summary>
-        public double DigestateCarbonInputsPerHectare { get; set; }
+
 
         public double TillageFactor
         {

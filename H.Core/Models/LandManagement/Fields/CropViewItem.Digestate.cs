@@ -11,10 +11,23 @@ namespace H.Core.Models.LandManagement.Fields
 
         private ObservableCollection<DigestateApplicationViewItem> _digestateApplicationViewItems;
 
+        private double _digestateCarbonInputsPerHectare;
+
         #endregion
 
         #region Properties
-        
+
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total digestate C from all digestate applications
+        /// </summary>
+        public double DigestateCarbonInputsPerHectare
+        {
+            get { return _digestateCarbonInputsPerHectare;}
+            set { SetProperty(ref _digestateCarbonInputsPerHectare, value); }
+        }
+
         public ObservableCollection<DigestateApplicationViewItem> DigestateApplicationViewItems
         {
             get => _digestateApplicationViewItems;
