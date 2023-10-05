@@ -1,0 +1,40 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:regions="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:H.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="H.Avalonia.Views.ComponentViews.ComponentsView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" MaxWidth="50" MinWidth="50"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Grid.Column="0"
+                        regions:RegionManager.RegionName="{x:Static local:UiRegions.SidebarRegion}"
+                        Background="#5CA156"/>
+        <GridSplitter Grid.Column="1"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Grid.Row="0"
+                            Padding="5"
+                            regions:RegionManager.RegionName="{x:Static local:UiRegions.ToolbarRegion}"
+                            Background="#FBFBF9"/>
+            <ContentControl Grid.Row="1"
+                            regions:RegionManager.RegionName="{x:Static local:UiRegions.ContentRegion}"
+                            Background="#FBFBF9"/>
+            <ContentControl Grid.Row="2"
+                            Padding="5"
+                            regions:RegionManager.RegionName="{x:Static local:UiRegions.FooterRegion}"
+                            Background="#FBFBF9"/>
+        </Grid>
+    </Grid>
+</UserControl>
