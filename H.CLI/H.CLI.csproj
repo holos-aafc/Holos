@@ -129,12 +129,14 @@
     <Compile Include="Converters\PoultryConverter.cs" />
     <Compile Include="Converters\SheepConverter.cs" />
     <Compile Include="Converters\SwineConverter.cs" />
+    <Compile Include="DriveInfoWrapper.cs" />
     <Compile Include="Factories\ComponentProcessorFactory.cs" />
     <Compile Include="FileAndDirectoryAccessors\ReadSettingsFile.cs" />
     <Compile Include="FileAndDirectoryAccessors\TemplateFarmHandler.cs" />
     <Compile Include="Handlers\ErrorHandler.cs" />
     <Compile Include="Handlers\ExportedFarmsHandler.cs" />
     <Compile Include="InfrastructureConstants.cs" />
+    <Compile Include="Interfaces\IDriveInfoWrapper.cs" />
     <Compile Include="Interfaces\IProcessor.cs" />
     <Compile Include="Processors\FieldProcessor.cs" />
     <Compile Include="Processors\ProcessorHandler.cs" />

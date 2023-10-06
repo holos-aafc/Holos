@@ -11,6 +11,7 @@ using H.Core.Providers.Soil;
 using H.CLI.Results;
 using System.Globalization;
 using H.CLI.Handlers;
+using H.CLI.Interfaces;
 using H.Core;
 using H.Core.Models;
 using H.Core.Services;
@@ -40,7 +41,14 @@ namespace H.CLI
             
             _ = exportedFarmsHandler.Initialize(farmsFolderPath, argValues);
 
-            InfrastructureConstants.CheckOutputDirectoryPath(argValues.OutputPath, farmsFolderPath);
+            DriveInfoWrapper givenPathDriveInfoWrapper = null;
+            if (!string.IsNullOrEmpty(argValues.OutputPath))
+            {
+                DriveInfo givenPathDriveInfo = new DriveInfo(argValues.OutputPath);
+                givenPathDriveInfoWrapper = new DriveInfoWrapper(givenPathDriveInfo);
+            }
+
+            InfrastructureConstants.CheckOutputDirectoryPath(argValues.OutputPath, givenPathDriveInfoWrapper, farmsFolderPath);
 
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 

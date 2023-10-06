@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.CLI.Interfaces;
+using H.CLI.Properties; 
 
 namespace H.CLI
 {
@@ -12,28 +14,26 @@ namespace H.CLI
         public static string BaseOutputDirectoryPath { get; set; }
         public static string CommandLinePromptPrefix = "--> ";
 
-        public static void CheckOutputDirectoryPath(string givenPath, string farmsFoldersPath)
+        public static bool CheckOutputDirectoryPath(string givenPath, IDriveInfoWrapper givenPathDriveInfo, string farmsFoldersPath)
         {
-            if (givenPath == "")
+            if (string.IsNullOrEmpty(givenPath))
             {
                 BaseOutputDirectoryPath = farmsFoldersPath;
-                return;
+                return false;
             }
-
-            string rootOfGivenPath = Path.GetPathRoot(givenPath);
-            DriveInfo driveInfo = new DriveInfo(rootOfGivenPath);
-
-            if (driveInfo.DriveType == DriveType.Network)
+            else if (givenPathDriveInfo.DriveType == DriveType.Network)
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(Properties.Resources.CannotWriteToNetworkDrive, rootOfGivenPath);
+                Console.WriteLine(Properties.Resources.CannotWriteToNetworkDrive);
                 Console.ForegroundColor = ConsoleColor.White;
-                return;
+                BaseOutputDirectoryPath = farmsFoldersPath;
+                return false;
             }
-            if (Path.GetPathRoot(givenPath) == Path.GetPathRoot(farmsFoldersPath))
+            else
             {
                 BaseOutputDirectoryPath = givenPath;
+                return true;
             }
         }
     }
