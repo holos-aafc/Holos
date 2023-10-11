@@ -11,35 +11,25 @@
         MinWidth="1024" MinHeight="512"
         x:Class="H.Avalonia.MainWindow"
         Title="{x:Static properties:Resources.ApplicationTitle}">
+
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" MaxWidth="460" MinWidth="180"/>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ContentControl Grid.Column="0"
-                        prism:RegionManager.RegionName="{x:Static local:UiRegions.SidebarRegion}"
-                        Background="#009E60"/>
-        <GridSplitter Grid.Column="1"/>
-        <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <ContentControl Grid.Row="0"
-                                Padding="5"
-                                prism:RegionManager.RegionName="{x:Static local:UiRegions.ToolbarRegion}"
-                                Background="#FBFBF9"/>
-                <ContentControl Grid.Row="1"
-                                prism:RegionManager.RegionName="{x:Static local:UiRegions.ContentRegion}"
-                                Background="#FBFBF9"/>
-                <ContentControl Grid.Row="2"
-                                Padding="5"
-                                prism:RegionManager.RegionName="{x:Static local:UiRegions.FooterRegion}"
-                                Background="#FBFBF9"/>
-            </Grid>
+        <ContentControl Grid.Row="0"
+                        Padding="5"
+                        prism:RegionManager.RegionName="{x:Static local:UiRegions.ToolbarRegion}"
+                        Background="#FBFBF9"/>
+        <ContentControl Grid.Row="1"
+                        prism:RegionManager.RegionName="{x:Static local:UiRegions.ContentRegion}"
+                        Background="#FBFBF9"/>
+        <ContentControl Grid.Row="2"
+                        Padding="5"
+                        prism:RegionManager.RegionName="{x:Static local:UiRegions.FooterRegion}"
+                        Background="#FBFBF9"/>
     </Grid>
 </Window>
