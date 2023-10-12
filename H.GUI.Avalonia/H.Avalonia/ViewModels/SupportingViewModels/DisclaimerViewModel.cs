@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using H.Core.Enumerations;
@@ -22,6 +23,7 @@ public class DisclaimerViewModel : ViewModelBase
         private string _disclaimerRtfString;
         private string _versionString;
         private string _disclaimerWordString;
+        private string _selectLanguageString;
 
         #endregion
 
@@ -79,6 +81,12 @@ public class DisclaimerViewModel : ViewModelBase
             get => _versionString;
             set => _versionString = value;
         }
+
+        public string SelectLanguageString
+        {
+            get => _selectLanguageString;
+            set => SetProperty(ref _selectLanguageString, value);
+        }
         public bool ShowLanguageBox
         {
             get => _showLanguageBox;
@@ -102,24 +110,26 @@ public class DisclaimerViewModel : ViewModelBase
 
         private void UpdateDisplayBasedOnLanguage()
         {
-            if (this.SelectedLanguage == H.Core.Enumerations.Languages.English)
+            CultureInfo cultureInfo;
+            if (SelectedLanguage == H.Core.Enumerations.Languages.English)
             {
-                this.AboutHolosString = "Holos - a tool to estimate and reduce greenhouse gas emissions from farms";
-                this.ToBeKeptInformedString = "To be kept informed about  future versions, please send your contact information (including email address) to holos@canada.ca";
-                this.DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
-
-                this.DisclaimerWordString = "Disclaimer";
-                //Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English.GetDescription();
+                cultureInfo = InfrastructureConstants.EnglishCultureInfo;
+                DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
+                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English.GetDescription();
             }
             else
             {
-                this.AboutHolosString = "Holos - outil d'évaluation et de réduction des émissions de gaz à effet de serre des fermes agricoles";
-                this.ToBeKeptInformedString = "Pour être informé de la publication des prochaines versions du logiciel, faites parvenir vos coordonnées (y compris votre adresse électronique) à holos@canada.ca";
-                this.DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
-                this.DisclaimerWordString = "Avis de non-responsabilité";
-
-                //Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French.GetDescription();
+                cultureInfo = InfrastructureConstants.FrenchCultureInfo;
+                DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
+                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French.GetDescription();
             }
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            
+            SelectLanguageString = Core.Properties.Resources.SelectYourLanguage;
+            AboutHolosString = Core.Properties.Resources.AboutHolosMessage;
+            ToBeKeptInformedString = Core.Properties.Resources.ToBeKeptInformedMessage;
+            DisclaimerWordString = Core.Properties.Resources.LabelDisclaimer;
         }
 
         private void SetHolosLanguageToSystemLanguage()
