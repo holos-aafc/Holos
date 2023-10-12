@@ -17,4 +17,10 @@
     <data name="AboutHolosMessage" xml:space="preserve">
         <value>Holos - outil d'évaluation et de réduction des émissions de gaz à effet de serre des fermes agricoles</value>
     </data>
+    <data name="SelectYourLanguage" xml:space="preserve">
+        <value>Sélectionnez votre langue</value>
+    </data>
+    <data name="LabelDisclaimer" xml:space="preserve">
+        <value>Avis de non-responsabilité</value>
+    </data>
 </root>
