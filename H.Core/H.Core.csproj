@@ -334,6 +334,7 @@
     <Compile Include="Models\Animals\Swine\SwineFinishersComponent.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToWeanComponent.cs" />
     <Compile Include="Models\DigestateTank.cs" />
+    <Compile Include="Models\Farm.Manure.cs" />
     <Compile Include="Models\Infrastructure\ADManagementPeriodViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />

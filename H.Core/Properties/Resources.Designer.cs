@@ -556,6 +556,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Manure Export.
+        /// </summary>
+        public static string ButtonCreateManureExport {
+            get {
+                return ResourceManager.GetString("ButtonCreateManureExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canary seed.
         /// </summary>
         public static string CanarySeed {
@@ -8062,6 +8071,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount of manure available for export.
+        /// </summary>
+        public static string LabelAmountOfManureRemainingForExport {
+            get {
+                return ResourceManager.GetString("LabelAmountOfManureRemainingForExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of N from applied manure (kg N ha^-1).
         /// </summary>
         public static string LabelAmountOfNFromAppliedManure {
@@ -12013,6 +12031,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manure produced by animals on this farm can be exported off-site. To export manure from this farm, click the &apos;Create Manure Export&apos; button and specify the amount exported.
+        /// </summary>
+        public static string ManureExportHeader {
+            get {
+                return ResourceManager.GetString("ManureExportHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to March.
         /// </summary>
         public static string March {
@@ -14763,6 +14790,15 @@ namespace H.Core.Properties {
         public static string TitleExpectedMarketPrice {
             get {
                 return ResourceManager.GetString("TitleExpectedMarketPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Farm Produced Manure.
+        /// </summary>
+        public static string TitleExportManure {
+            get {
+                return ResourceManager.GetString("TitleExportManure", resourceCulture);
             }
         }
         

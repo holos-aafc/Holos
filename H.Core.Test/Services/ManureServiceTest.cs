@@ -40,6 +40,9 @@ namespace H.Core.Test.Services
         {
             _mockAnimalService = new Mock<IAnimalService>();
             _sut = new ManureService(_mockAnimalService.Object);
+
+            var componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
+            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { componentResults });
         }
 
         [TestCleanup]
@@ -79,28 +82,10 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
-        public void GetAmountAvailableForExportReturnsZeroWhenAnimalsPresentTest()
-        {
-            var farm = base.GetTestFarm();
-
-            var componentResults = base.GetEmptyTestAnimalComponentEmissionsResults();
-
-            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() {componentResults});
-
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
-
-            Assert.AreEqual(0, result);
-        }
-
-        [TestMethod]
         public void GetAmountAvailableForExportReturnsNonZeroWhenAnimalsArePresentTest()
         {
             var farm = base.GetTestFarm();
             farm.Components.Add(base.GetTestFieldComponent());
-
-            var componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
-
-            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { componentResults });
 
             var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
 
@@ -112,6 +97,37 @@ namespace H.Core.Test.Services
         {
             var result = _sut.GetValidManureTypes();
             Assert.AreEqual(14, result.Count);
+        }
+
+        [TestMethod]
+        public void GetAmountAvailableForExportReturnsNonZero()
+        {
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(1400000, result);
+        }
+
+        [TestMethod]
+        public void GetTotalAmountOfManureExportedReturnsZeroWhenNoExportsCreated()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var result = _sut.GetTotalAmountOfManureExported(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalAmountOfManureExportedReturnsNonZeroWhenExportsCreated()
+        {
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetTotalAmountOfManureExported(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(3000, result);
         }
 
         #endregion

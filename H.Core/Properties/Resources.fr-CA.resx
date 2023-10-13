@@ -5553,4 +5553,16 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelUseConstantIndoorTemperature" xml:space="preserve">
     <value>Use constant indoor temperature</value>
   </data>
+  <data name="ButtonCreateManureExport" xml:space="preserve">
+    <value>Create Manure Export</value>
+  </data>
+  <data name="ManureExportHeader" xml:space="preserve">
+    <value>Manure produced by animals on this farm can be exported off-site. To export manure from this farm, click the 'Create Manure Export' button and specify the amount exported</value>
+  </data>
+  <data name="TitleExportManure" xml:space="preserve">
+    <value>Export Farm Produced Manure</value>
+  </data>
+  <data name="LabelAmountOfManureRemainingForExport" xml:space="preserve">
+    <value>Amount of manure available for export</value>
+  </data>
 </root>

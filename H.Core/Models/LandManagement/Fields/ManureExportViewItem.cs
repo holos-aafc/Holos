@@ -24,6 +24,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        /// <summary>
+        /// The amount of manure exported
+        ///
+        /// (kg)
+        /// </summary>
         public double Amount
         {
             get => _amount;

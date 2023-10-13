@@ -75,6 +75,15 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
+        public double GetTotalAmountOfManureExported(int year, Farm farm)
+        {
+            var total = 0d;
+
+            total = farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year).Sum(y => y.Amount);
+
+            return total;
+        }
+
         public List<ManureApplicationTypes> GetValidManureApplicationTypes()
         {
             return _validManureApplicationTypes;

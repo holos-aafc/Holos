@@ -11,6 +11,26 @@ namespace H.Core.Test
 {
     public abstract class UnitTestBase
     {
+        #region Fields
+
+        #endregion
+
+        public Storage InitializeStorage()
+        {
+            var storage = new Storage
+            {
+                ApplicationData = new ApplicationData
+                {
+                    GlobalSettings = new GlobalSettings
+                    {
+                        ActiveFarm = new Farm()
+                    }
+                }
+            };
+
+            return storage;
+        }
+
         public Farm GetTestFarm()
         {
             var farm = new Farm();
@@ -24,6 +44,13 @@ namespace H.Core.Test
             component.Groups.Add(group);
 
             group.ManagementPeriods.Add(managementPeriod);
+
+            /*
+             * Manure exports
+             */
+
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() {DateOfExport = DateTime.Now, Amount = 1000});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000 });
 
             return farm;
         }

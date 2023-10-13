@@ -14,6 +14,7 @@ namespace H.CLI.UserInput
         public static string _settings;
         public static string _units;
         public static string _outputPath;
+        public static string _polygonID;
 
         #endregion
 
@@ -21,7 +22,7 @@ namespace H.CLI.UserInput
 
         public CLIArguments ()
         {
-            _fileName = _settings = _units = _outputPath = string.Empty;
+            _fileName = _settings = _units = _outputPath = _polygonID = string.Empty;
         }
 
         #endregion
@@ -32,10 +33,11 @@ namespace H.CLI.UserInput
         public string Settings { get { return _settings; } set { _settings = value; } }     
         public string Units { get { return _units; } set { _units = value; } }
         public string OutputPath { get { return _outputPath; } set { _outputPath = value; } }
+        public string PolygonID { get { return _polygonID; } set { _polygonID = value; } }
 
         #endregion
 
-        #region Public Methods t
+        #region Public Methods
         public void ParseArgs(string[] args)
         {
             for (int i = 1; i < args.Length; i++)
@@ -59,6 +61,11 @@ namespace H.CLI.UserInput
                 else if (arg == "-o" && i + 1 < args.Length)
                 {
                     OutputPath = args[i+1];
+                    i++;
+                }
+                else if (arg == "-p" && i + 1 < args.Length)
+                {
+                    PolygonID = args[i+1];
                     i++;
                 }
             }

@@ -16,8 +16,10 @@ using H.Core;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
 using H.Core.Calculators.Tillage;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers;
 using H.Core.Services.LandManagement;
 
 namespace H.CLI.Handlers
@@ -66,7 +68,6 @@ namespace H.CLI.Handlers
                     Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FileName);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-
             }
             
             var pathToExportedFarms = this.PromptUserForLocationOfExportedFarms(farmsFolderPath);
@@ -112,7 +113,35 @@ namespace H.CLI.Handlers
             {
                 var farms = _storage.GetFarmsFromExportFile(path);
                 var farmsList = farms.ToList();
-                _ = this.CreateInputFilesForFarm(farmsFolderPath, farmsList[0], argValues);
+                var exportedFarm = farmsList[0];
+
+                // PolygonID for climate configuration
+                if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+                {
+                    var polygonID = int.Parse(argValues.PolygonID);
+                    var settingsHandler = new SettingsHandler();
+                    var geographicDataProvider = new GeographicDataProvider();
+                    geographicDataProvider.Initialize();
+                    settingsHandler.InitializePolygonIDList(geographicDataProvider);
+
+                    if (settingsHandler.PolygonIDList.Contains(polygonID))
+                    {
+                        var slcClimateDataProvider = new SlcClimateDataProvider();
+                        exportedFarm.PolygonId = polygonID;
+                        exportedFarm.GeographicData = geographicDataProvider.GetGeographicalData(polygonID);
+                        exportedFarm.ClimateData = slcClimateDataProvider.GetClimateData(polygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(String.Format(Properties.Resources.NotAValidPolygonID, argValues.PolygonID.ToString()));
+                        throw new Exception("Not A Valid Polygon ID");
+                    }
+
+                    Console.ResetColor();
+                }
+
+                _ = this.CreateInputFilesForFarm(farmsFolderPath, exportedFarm, argValues);
             }
 
             return isExportedFarmFound;
@@ -129,7 +158,6 @@ namespace H.CLI.Handlers
             // Create a directory for the farm
             var farmDirectoryPath = this.CreateDirectoryStructureForImportedFarm(pathToFarmsDirectory, farm);
 
-            // Create a settings file for this farm
             bool isSettingsFileFound = false;
             if (argValues != null && argValues.Settings != "")
             {
@@ -158,7 +186,6 @@ namespace H.CLI.Handlers
                     this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
                 }
             }
-            // Move the settings file from pathToFarmsDirectory to the farmDirectoryPath
             else
             {
                 Console.WriteLine();
