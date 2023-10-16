@@ -3420,6 +3420,19 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 <br>
 <br>
 
+## Command Line Arguments and Input Flags
+
+There are a number of useful command line arguments available for the the Holos CLI. 
+
+__The first argument must be the full directory path to your farms folder.__
+
+Following this directory path, and in any order, the following command flags can be used:
+- -i : your input .json file. This is case sensitive and requires the file extension.
+- -s : a configured .settings file within the farms folder. This input flag is only available if the -i flag is also used. This is also case sensitive and requires the file extension.
+- -u : your chosen unit of measurement, "metric" or "imperial". This is not case sensitive.
+- -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file.
+- -o : output directory path for outputs. 
+
 ## Command Line Interface Results
 
 -	The Command Line Interface will output the **results for each farm** you have created and their respective components as well as the **total results for all the farms combined.**
