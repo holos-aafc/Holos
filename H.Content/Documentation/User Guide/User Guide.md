@@ -3433,6 +3433,10 @@ Following this directory path, and in any order, the following command flags can
 - -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file.
 - -o : output directory path for outputs. 
 
+If you have built the solution from source code, the CLI executable will be found with the ..\H\H.CLI\bin\Debug folder of your local repository. 
+
+If you have [installed the CLI](https://github.com/holos-aafc/Holos#download), there are extra steps required to utilize the command line arguments and input flags. Instructions can be found in [Chapter 11.](#using-command-line-arguments-and-input-flags-after-installing-the-holos-cli)
+
 ## Command Line Interface Results
 
 -	The Command Line Interface will output the **results for each farm** you have created and their respective components as well as the **total results for all the farms combined.**
@@ -4230,3 +4234,48 @@ To prevent duplicating folders for farms, answer "Yes" only once to the prompt, 
 </p>
 <br>
 
+### Using command line arguments and input flags after installing the Holos CLI
+
+If you have downloaded and installed the CLI link provided in the README, an application reference icon should appear on your desktop. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-28.png" alt="Figure 11-28" width="450"/>
+    <br>
+    <em>
+		Figure 11-28 - Holos 4 CLI.appref-ms icon
+	</em>
+</p>
+<br>
+
+This icon is not itself an executable, and therefore cannot accept command line arguments. To find the exectuable associated with this icon: 
+1. Run the Holos CLI by double-clicking on the application reference icon.
+2. Open your Windows Task Manager.
+3. Right-click the H.CLI app.
+4. Left-click 'Open file location'.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-29.png" alt="Figure 11-29" height="200"/>
+    <br>
+    <em>
+		Figure 11-29 - Finding H.Cli executable via Task Manager
+	</em>
+</p>
+<br>
+
+Now that you have exposed the file location of the H.CLI, you can create a shortcut, and move the shortcut to a more accessible place within your PC. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-30.png" alt="Figure 11-30" width="500" height ="400"/>
+    <br>
+    <em>
+		Figure 11-30 - Create a shortcut of the H.CLI executable 
+    </em>
+</p>
+<br>
+
+This shortcut will have a .lnk file extension. Here is an example of how to use the shortcut within your command prompt using input flags:
+
+_H.CLI.lnk file_path -i farm.json -u metric -p 793011 -o file_path_out_
