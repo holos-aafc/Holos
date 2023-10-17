@@ -27,16 +27,6 @@ namespace H.Avalonia
             base.Initialize();
         }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = new MainWindow();
-            }
-
-            base.OnFrameworkInitializationCompleted();
-        }
-
         /// <summary>Register Services and Views.</summary>
         /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -66,9 +56,12 @@ namespace H.Avalonia
             containerRegistry.RegisterDialog<DeleteRowDialog, DeleteRowDialogViewModel>();
         }
 
+        /// <summary>User interface entry point, called after Register and ConfigureModules.</summary>
+        /// <returns>Startup View.</returns>
         protected override AvaloniaObject CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+             var mainWindow = Container.Resolve<MainWindow>();
+             return mainWindow;
         }
 
         /// <summary>Called after Initialize.</summary>

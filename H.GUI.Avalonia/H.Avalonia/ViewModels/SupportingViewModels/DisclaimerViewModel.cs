@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using H.Avalonia.Views;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 
@@ -16,6 +18,7 @@ public class DisclaimerViewModel : ViewModelBase
         #region Fields
 
         private Languages _selectedLanguage;
+        private readonly IRegionManager _regionManager = null!;
 
         private bool _showLanguageBox;
         private string _aboutHolosString;
@@ -38,6 +41,8 @@ public class DisclaimerViewModel : ViewModelBase
                                    IEventAggregator eventAggregator,
                                    Storage storage) : base(regionManager, eventAggregator, storage)
         {
+            _regionManager = regionManager;
+            SwitchToLandingPageCommand = new DelegateCommand(OnSwitchToLandingPage);
             this.Construct();
         }
 
@@ -92,6 +97,11 @@ public class DisclaimerViewModel : ViewModelBase
             get => _showLanguageBox;
             set => SetProperty(ref _showLanguageBox, value);
         }
+        
+        /// <summary>
+        /// A command that helps switch view to <see cref="SoilDataView"/>
+        /// </summary>
+        public DelegateCommand SwitchToLandingPageCommand { get; set; } = null!;
 
         #endregion
 
@@ -113,12 +123,14 @@ public class DisclaimerViewModel : ViewModelBase
             CultureInfo cultureInfo;
             if (SelectedLanguage == H.Core.Enumerations.Languages.English)
             {
+                //Core.Properties.Resources.Culture = new CultureInfo("en-ca");
                 cultureInfo = InfrastructureConstants.EnglishCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
                 Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English.GetDescription();
             }
             else
             {
+                //Core.Properties.Resources.Culture = new CultureInfo("fr-ca");
                 cultureInfo = InfrastructureConstants.FrenchCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
                 Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French.GetDescription();
@@ -155,6 +167,11 @@ public class DisclaimerViewModel : ViewModelBase
         private void OnSelectedLanguageChanged()
         {
             this.UpdateDisplayBasedOnLanguage();
+        }
+
+        private void OnSwitchToLandingPage()
+        {
+            _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(AboutPageView));
         }
 
         #endregion

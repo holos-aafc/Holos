@@ -7,6 +7,7 @@
              xmlns:avaloniaCoreProperties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
              xmlns:valueConverters="clr-namespace:H.Infrastructure.Controls.ValueConverters;assembly=H.Infrastructure"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="1280" Height="720"
              x:Class="H.Avalonia.Views.SupportingViews.DisclaimerView">
     <Design.DataContext>
         <viewModels:DisclaimerViewModel/>
@@ -57,11 +58,13 @@
                  IsReadOnly="True" 
                  Text="{Binding Path=DisclaimerRtfString}"/>
 
-        <Button Content="OK"
+        <Button Name="ConfirmationButton"
+                Content="OK"
                 MinWidth="100"
                 Padding="15,5"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center"/>
+                HorizontalContentAlignment="Center"
+                Command="{Binding SwitchToLandingPageCommand}"/>
     </StackPanel>
 </UserControl>
