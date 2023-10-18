@@ -454,4 +454,7 @@ Hassan Afzaal</value>
   <data name="LabelLoadPolygons" xml:space="preserve">
     <value>Load Polygons</value>
   </data>
+  <data name="SelectRegion" xml:space="preserve">
+    <value>Select your region</value>
+  </data>
 </root>

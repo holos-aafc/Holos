@@ -925,6 +925,15 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select your region.
+        /// </summary>
+        public static string SelectRegion {
+            get {
+                return ResourceManager.GetString("SelectRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select your language.
         /// </summary>
         public static string SelectYourLanguage {

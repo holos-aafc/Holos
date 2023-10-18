@@ -86,4 +86,7 @@
     <data name="SelectProvince" xml:space="preserve">
         <value>Sélectionnez une province</value>
     </data>
+    <data name="SelectRegion" xml:space="preserve">
+        <value>Sélectionnez une région</value>
+    </data>
 </root>

@@ -37,6 +37,22 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </Grid>
+        <Grid Margin="0,25,0,0"
+              ColumnDefinitions="2*, *">
+            <Label Grid.Column="0"
+                   Content="{Binding Path=SelectRegionString}"
+                   FontWeight="Bold"/>
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding Path=UserRegions}"
+                      SelectedItem="{Binding Path=SelectedUserRegion}"
+                      Margin="0,-5,0,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
         
         <Label Content="{x:Static avaloniaCoreProperties:Resources.HolosVersionNumber}"
                Margin="0,25,0,0"/>

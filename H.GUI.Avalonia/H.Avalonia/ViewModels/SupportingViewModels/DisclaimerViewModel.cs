@@ -18,6 +18,7 @@ public class DisclaimerViewModel : ViewModelBase
         #region Fields
 
         private Languages _selectedLanguage;
+        private UserRegion _selectedUserRegion;
         private readonly IRegionManager _regionManager = null!;
 
         private bool _showLanguageBox;
@@ -27,6 +28,7 @@ public class DisclaimerViewModel : ViewModelBase
         private string _versionString;
         private string _disclaimerWordString;
         private string _selectLanguageString;
+        private string _selectRegionString;
 
         #endregion
 
@@ -42,6 +44,7 @@ public class DisclaimerViewModel : ViewModelBase
                                    Storage storage) : base(regionManager, eventAggregator, storage)
         {
             SelectedLanguage = Settings.Default.DisplayLanguage;
+            SelectedUserRegion = Settings.Default.UserRegion;
             _regionManager = regionManager;
             SwitchToLandingPageCommand = new DelegateCommand(OnSwitchToLandingPage);
             this.Construct();
@@ -51,12 +54,20 @@ public class DisclaimerViewModel : ViewModelBase
 
         #region Properties
 
-        public ObservableCollection<Languages> Languages { get; set; } = new ObservableCollection<Languages>(Enum.GetValues(typeof(Languages)).Cast<Languages>());
+        public ObservableCollection<Languages> Languages { get; set; } = new (Enum.GetValues(typeof(Languages)).Cast<Languages>());
+
+        public ObservableCollection<UserRegion> UserRegions { get; set; } = new (Enum.GetValues(typeof(UserRegion)).Cast<UserRegion>());
 
         public Languages SelectedLanguage
         {
             get => _selectedLanguage;
             set => SetProperty(ref _selectedLanguage, value, OnSelectedLanguageChanged);
+        }
+
+        public UserRegion SelectedUserRegion
+        {
+            get => _selectedUserRegion;
+            set => SetProperty(ref _selectedUserRegion, value, OnSelectedRegionChanged);
         }
 
         public string AboutHolosString
@@ -93,6 +104,13 @@ public class DisclaimerViewModel : ViewModelBase
             get => _selectLanguageString;
             set => SetProperty(ref _selectLanguageString, value);
         }
+        
+        public string SelectRegionString
+        {
+            get => _selectRegionString;
+            set => SetProperty(ref _selectRegionString, value);
+        }
+        
         public bool ShowLanguageBox
         {
             get => _showLanguageBox;
@@ -126,18 +144,18 @@ public class DisclaimerViewModel : ViewModelBase
             {
                 cultureInfo = InfrastructureConstants.EnglishCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
-                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English;
             }
             else
             {
                 cultureInfo = InfrastructureConstants.FrenchCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
-                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French;
             }
+            Settings.Default.DisplayLanguage = SelectedLanguage;
             Settings.Default.Save();
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            
+
+            SelectRegionString = Core.Properties.Resources.SelectRegion;
             SelectLanguageString = Core.Properties.Resources.SelectYourLanguage;
             AboutHolosString = Core.Properties.Resources.AboutHolosMessage;
             ToBeKeptInformedString = Core.Properties.Resources.ToBeKeptInformedMessage;
@@ -167,6 +185,12 @@ public class DisclaimerViewModel : ViewModelBase
         private void OnSelectedLanguageChanged()
         {
             this.UpdateDisplayBasedOnLanguage();
+        }
+
+        private void OnSelectedRegionChanged()
+        {
+            Settings.Default.UserRegion = SelectedUserRegion;
+            Settings.Default.Save();
         }
 
         private void OnSwitchToLandingPage()
