@@ -448,4 +448,10 @@ Hassan Afzaal</value>
   <data name="LabelDisclaimer" xml:space="preserve">
     <value>Disclaimer</value>
   </data>
+  <data name="LabelGetCoordinates" xml:space="preserve">
+    <value>Get Coordinates</value>
+  </data>
+  <data name="LabelLoadPolygons" xml:space="preserve">
+    <value>Load Polygons</value>
+  </data>
 </root>

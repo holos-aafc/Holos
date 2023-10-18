@@ -123,14 +123,12 @@ public class DisclaimerViewModel : ViewModelBase
             CultureInfo cultureInfo;
             if (SelectedLanguage == H.Core.Enumerations.Languages.English)
             {
-                //Core.Properties.Resources.Culture = new CultureInfo("en-ca");
                 cultureInfo = InfrastructureConstants.EnglishCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
                 Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English.GetDescription();
             }
             else
             {
-                //Core.Properties.Resources.Culture = new CultureInfo("fr-ca");
                 cultureInfo = InfrastructureConstants.FrenchCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
                 Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French.GetDescription();
@@ -171,7 +169,7 @@ public class DisclaimerViewModel : ViewModelBase
 
         private void OnSwitchToLandingPage()
         {
-            _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(AboutPageView));
+            _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(SoilDataView));
             _regionManager.RequestNavigate(UiRegions.ToolbarRegion, nameof(ToolbarView));
         }
 

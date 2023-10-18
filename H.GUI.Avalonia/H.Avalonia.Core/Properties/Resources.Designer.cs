@@ -475,6 +475,15 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get Coordinates.
+        /// </summary>
+        public static string LabelGetCoordinates {
+            get {
+                return ResourceManager.GetString("LabelGetCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get Soil Data.
         /// </summary>
         public static string LabelGetSoilData {
@@ -534,6 +543,15 @@ namespace H.Avalonia.Core.Properties {
         public static string LabelLatitude {
             get {
                 return ResourceManager.GetString("LabelLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Polygons.
+        /// </summary>
+        public static string LabelLoadPolygons {
+            get {
+                return ResourceManager.GetString("LabelLoadPolygons", resourceCulture);
             }
         }
         

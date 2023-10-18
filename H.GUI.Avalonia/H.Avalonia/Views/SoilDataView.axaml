@@ -57,7 +57,7 @@
                                 HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,0,0,10">
-                            <TextBlock Text="Load Polygons"
+                            <TextBlock Text="{x:Static properties:Resources.LabelLoadPolygons}"
                                        Margin="0,5,10,0"/>
                             <ToggleSwitch x:Name="ShowPolygonsSwitch"
                                           OnContent=""
@@ -81,7 +81,7 @@
                             <Label Content="{x:Static properties:Resources.LabelAddress}"
                                    FontWeight="Bold"/>
                             <TextBox Text="{Binding Address}"/>
-                            <Button Content="Get Coordinates"
+                            <Button Content="{x:Static properties:Resources.LabelGetCoordinates}"
                                     Margin="0, 10, 0, 0"
                                     Command="{Binding GetCoordinatesFromAddressCommand}"/>
                         </StackPanel>

@@ -35,4 +35,55 @@
     <data name="LabelUsefulLinks" xml:space="preserve">
         <value>Liens utiles</value>
     </data>
+    <data name="LabelSingleCoordinate" xml:space="preserve">
+        <value>Coordonnée unique</value>
+    </data>
+    <data name="LabelSoilData" xml:space="preserve">
+        <value>Données sur le sol</value>
+    </data>
+    <data name="LabelSelectAllRows" xml:space="preserve">
+        <value>Tout sélectionner</value>
+    </data>
+    <data name="LabelImportFromCSV" xml:space="preserve">
+        <value>Importer depuis CSV</value>
+    </data>
+    <data name="LabelGetSoilData" xml:space="preserve">
+        <value>Obtenez des données sur le sol</value>
+    </data>
+    <data name="LabelYear" xml:space="preserve">
+        <value>Année</value>
+    </data>
+    <data name="LabelAddress" xml:space="preserve">
+        <value>Adresse</value>
+    </data>
+    <data name="LabelAddRow" xml:space="preserve">
+        <value>Ajouter une rangée</value>
+    </data>
+    <data name="LabelBack" xml:space="preserve">
+        <value>Retour</value>
+    </data>
+    <data name="LabelFindCoordinate" xml:space="preserve">
+        <value>Trouver les coordonnées</value>
+    </data>
+    <data name="LabelDelete" xml:space="preserve">
+        <value>Supprimer</value>
+    </data>
+    <data name="LabelExportToCSV" xml:space="preserve">
+        <value>Exporter en CSV</value>
+    </data>
+    <data name="LabelMultipleCoordinates" xml:space="preserve">
+        <value>Coordonnées multiples</value>
+    </data>
+    <data name="LabelGetCoordinates" xml:space="preserve">
+        <value>Obtenir les coordonnées</value>
+    </data>
+    <data name="LabelSoilTexture" xml:space="preserve">
+        <value>Texture du sol</value>
+    </data>
+    <data name="LabelLoadPolygons" xml:space="preserve">
+        <value>Charger des polygones</value>
+    </data>
+    <data name="SelectProvince" xml:space="preserve">
+        <value>Sélectionnez une province</value>
+    </data>
 </root>
