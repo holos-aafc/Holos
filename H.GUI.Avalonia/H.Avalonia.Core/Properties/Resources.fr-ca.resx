@@ -26,4 +26,13 @@
     <data name="TextAboutPage" xml:space="preserve">
         <value>Cette application est un outil qui permet aux utilisateurs d'accéder à des données climatiques et pédologiques à des fins agricoles. Il est basé sur Holos, un outil développé par Agriculture et Agroalimentaire Canada pour estimer les émissions de gaz à effet de serre provenant de différentes pratiques agricoles. L'application utilise l'API NASA Power pour récupérer des données climatiques pour n'importe quel lieu et n'importe quelle période, telles que les précipitations quotidiennes et l'évapotranspiration. L'application permet également aux utilisateurs d'extraire des données pédologiques de Holos, telles que le groupe de sol, la texture du sol, le pourcentage de matière organique dans le sol, etc. L'objectif de cette application est de permettre aux utilisateurs d'accéder facilement à diverses données pédologiques et climatiques sans dépendre du application Holos complète.</value>
     </data>
+    <data name="ApplicationTitle" xml:space="preserve">
+        <value>Outil d'extraction de données Holos</value>
+    </data>
+    <data name="LabelContributors" xml:space="preserve">
+        <value>Contributeurs</value>
+    </data>
+    <data name="LabelUsefulLinks" xml:space="preserve">
+        <value>Liens utiles</value>
+    </data>
 </root>
