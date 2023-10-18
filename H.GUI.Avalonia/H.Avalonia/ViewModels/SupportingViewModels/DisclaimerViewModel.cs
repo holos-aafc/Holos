@@ -41,6 +41,7 @@ public class DisclaimerViewModel : ViewModelBase
                                    IEventAggregator eventAggregator,
                                    Storage storage) : base(regionManager, eventAggregator, storage)
         {
+            SelectedLanguage = Settings.Default.DisplayLanguage;
             _regionManager = regionManager;
             SwitchToLandingPageCommand = new DelegateCommand(OnSwitchToLandingPage);
             this.Construct();
@@ -125,14 +126,15 @@ public class DisclaimerViewModel : ViewModelBase
             {
                 cultureInfo = InfrastructureConstants.EnglishCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
-                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English.GetDescription();
+                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.English;
             }
             else
             {
                 cultureInfo = InfrastructureConstants.FrenchCultureInfo;
                 DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
-                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French.GetDescription();
+                Settings.Default.DisplayLanguage = H.Core.Enumerations.Languages.French;
             }
+            Settings.Default.Save();
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             

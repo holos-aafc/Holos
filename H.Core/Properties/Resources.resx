@@ -5661,4 +5661,10 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="SelectProvince" xml:space="preserve">
     <value>Select Province</value>
   </data>
+  <data name="EnumCanada" xml:space="preserve">
+    <value>Canada</value>
+  </data>
+  <data name="EnumIreland" xml:space="preserve">
+    <value>Ireland</value>
+  </data>
 </root>

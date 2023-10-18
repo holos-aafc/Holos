@@ -24,10 +24,10 @@ namespace H.Avalonia {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DisplayLanguage {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public global::H.Core.Enumerations.Languages DisplayLanguage {
             get {
-                return ((string)(this["DisplayLanguage"]));
+                return ((global::H.Core.Enumerations.Languages)(this["DisplayLanguage"]));
             }
             set {
                 this["DisplayLanguage"] = value;
@@ -36,10 +36,10 @@ namespace H.Avalonia {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserRegion {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public global::H.Core.Enumerations.UserRegion UserRegion {
             get {
-                return ((string)(this["UserRegion"]));
+                return ((global::H.Core.Enumerations.UserRegion)(this["UserRegion"]));
             }
             set {
                 this["UserRegion"] = value;
