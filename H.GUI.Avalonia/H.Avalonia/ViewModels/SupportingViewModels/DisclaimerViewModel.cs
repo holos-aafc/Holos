@@ -172,6 +172,7 @@ public class DisclaimerViewModel : ViewModelBase
         private void OnSwitchToLandingPage()
         {
             _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(AboutPageView));
+            _regionManager.RequestNavigate(UiRegions.ToolbarRegion, nameof(ToolbarView));
         }
 
         #endregion

@@ -69,9 +69,7 @@ namespace H.Avalonia
         {
             // Register Views to the Region it will appear in. Don't register them in the ViewModel.
             var regionManager = Container.Resolve<IRegionManager>();
-
-            regionManager.RegisterViewWithRegion(UiRegions.ToolbarRegion, typeof(ToolbarView));
-            regionManager.RegisterViewWithRegion(UiRegions.SidebarRegion, typeof(SidebarView));
+            
             regionManager.RegisterViewWithRegion(UiRegions.FooterRegion, typeof(FooterView));
             regionManager.RegisterViewWithRegion(UiRegions.ContentRegion, typeof(DisclaimerView));
 

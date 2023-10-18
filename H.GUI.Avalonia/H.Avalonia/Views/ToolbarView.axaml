@@ -8,4 +8,5 @@
     <Design.DataContext>
         <viewmodels:ToolbarViewModel/>
     </Design.DataContext>
+    Toolbar
 </UserControl>
