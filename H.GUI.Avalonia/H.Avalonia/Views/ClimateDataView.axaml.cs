@@ -19,6 +19,20 @@ namespace H.Avalonia.Views
     {
         private ObservableCollection<ClimateViewItem>? ClimateDataGridItems =>
             ClimateDataGrid.ItemsSource as ObservableCollection<ClimateViewItem>;
+        
+        /// <summary>
+        /// The TopLevel act as the visual root, and is the base class for all top level controls, eg. Window.
+        /// It handles scheduling layout, styling and rendering as well as keeping track of the client size.
+        /// Most services are accessed through the TopLevel.
+        /// </summary>
+        /// <returns>The TopLevel of the visual root.</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        TopLevel GetTopLevel() => TopLevel.GetTopLevel(this) ?? throw new NullReferenceException("Invalid Owner");
+
+        /// <summary>
+        /// Get the viewmodel associated with the view.
+        /// </summary>
+        private ClimateDataViewModel? ViewModel => DataContext as ClimateDataViewModel;
 
         public ClimateDataView()
         {
@@ -35,18 +49,6 @@ namespace H.Avalonia.Views
 
             ViewModel.NotificationManager = new WindowNotificationManager(GetTopLevel());
         }
-
-        /// <summary>
-        /// Get the toplevel window of the current window.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        TopLevel GetTopLevel() => TopLevel.GetTopLevel(this) ?? throw new NullReferenceException("Invalid Owner");
-
-        /// <summary>
-        /// Get the viewmodel associated with the view.
-        /// </summary>
-        private ClimateDataViewModel? ViewModel => DataContext as ClimateDataViewModel;
 
         /// <summary>
         /// Calls the appropriate command in the viewmodel when the user clicks the import data button.

@@ -13,6 +13,14 @@ namespace H.Avalonia.Views.ResultViews
     public partial class SoilResultsView : UserControl
     {
         private SoilResultsViewModel? ViewModel => DataContext as SoilResultsViewModel;
+        
+        /// <summary>
+        /// The TopLevel act as the visual root, and is the base class for all top level controls, eg. Window.
+        /// It handles scheduling layout, styling and rendering as well as keeping track of the client size.
+        /// Most services are accessed through the TopLevel.
+        /// </summary>
+        /// <returns>The TopLevel of the visual root.</returns>
+        /// <exception cref="NullReferenceException"></exception>
         private TopLevel GetTopLevel() => TopLevel.GetTopLevel(this) ?? throw new NullReferenceException("Invalid Owner");
 
 
