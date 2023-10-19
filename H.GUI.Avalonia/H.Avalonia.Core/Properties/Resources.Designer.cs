@@ -160,6 +160,15 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Holos - Irish version.
+        /// </summary>
+        public static string Disclaimer_Ireland {
+            get {
+                return ResourceManager.GetString("Disclaimer_Ireland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dystric Brunisol.
         /// </summary>
         public static string DystricBrunisol {
