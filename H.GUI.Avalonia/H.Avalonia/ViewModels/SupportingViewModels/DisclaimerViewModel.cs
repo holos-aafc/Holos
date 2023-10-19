@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using Avalonia.Controls.Notifications;
 using H.Avalonia.Views;
 using H.Core.Enumerations;
 using H.Core.Properties;
@@ -16,8 +17,9 @@ namespace H.Avalonia.ViewModels.SupportingViewModels;
 public class DisclaimerViewModel : ViewModelBase
     {
         #region Fields
-
+        private const int DefaultNotificationTime = 15;
         private Languages _selectedLanguage;
+        private readonly UserRegion _startupRegion;
         private UserRegion _selectedUserRegion;
         private readonly IRegionManager _regionManager = null!;
 
@@ -44,7 +46,7 @@ public class DisclaimerViewModel : ViewModelBase
                                    Storage storage) : base(regionManager, eventAggregator, storage)
         {
             SelectedLanguage = Settings.Default.DisplayLanguage;
-            SelectedUserRegion = Settings.Default.UserRegion;
+            SelectedUserRegion = _startupRegion = Settings.Default.UserRegion;
             _regionManager = regionManager;
             SwitchToLandingPageCommand = new DelegateCommand(OnSwitchToLandingPage);
             this.Construct();
@@ -191,6 +193,16 @@ public class DisclaimerViewModel : ViewModelBase
         {
             Settings.Default.UserRegion = SelectedUserRegion;
             Settings.Default.Save();
+
+            if (SelectedUserRegion != _startupRegion)
+            {
+                NotificationManager?.Show(new Notification(
+                    Core.Properties.Resources.HeadingRestartRequired,
+                    Core.Properties.Resources.MessageRestartRequired,
+                    type: NotificationType.Information,
+                    expiration: TimeSpan.FromSeconds(DefaultNotificationTime))
+                );
+            }
         }
 
         private void OnSwitchToLandingPage()

@@ -268,6 +268,15 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restart Required.
+        /// </summary>
+        public static string HeadingRestartRequired {
+            get {
+                return ResourceManager.GetString("HeadingRestartRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Placeholder version.
         /// </summary>
         public static string HolosVersionNumber {
@@ -795,6 +804,15 @@ namespace H.Avalonia.Core.Properties {
         public static string MessageInValidCoordinateEntered {
             get {
                 return ResourceManager.GetString("MessageInValidCoordinateEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application needs to be restarted for this setting to take effect..
+        /// </summary>
+        public static string MessageRestartRequired {
+            get {
+                return ResourceManager.GetString("MessageRestartRequired", resourceCulture);
             }
         }
         

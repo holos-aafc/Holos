@@ -457,4 +457,10 @@ Hassan Afzaal</value>
   <data name="SelectRegion" xml:space="preserve">
     <value>Select your region</value>
   </data>
+  <data name="HeadingRestartRequired" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="MessageRestartRequired" xml:space="preserve">
+    <value>The application needs to be restarted for this setting to take effect.</value>
+  </data>
 </root>

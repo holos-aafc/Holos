@@ -89,4 +89,10 @@
     <data name="SelectRegion" xml:space="preserve">
         <value>Sélectionnez une région</value>
     </data>
+    <data name="MessageRestartRequired" xml:space="preserve">
+        <value>L'application doit être redémarrée pour que ce paramètre prenne effet.</value>
+    </data>
+    <data name="HeadingRestartRequired" xml:space="preserve">
+        <value>Redémarrage requis</value>
+    </data>
 </root>
