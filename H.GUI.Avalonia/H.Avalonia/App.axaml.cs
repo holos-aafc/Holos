@@ -14,7 +14,9 @@ using System;
 using H.Avalonia.Core.Services;
 using H.Avalonia.ViewModels.ResultViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels;
+using H.Avalonia.ViewModels.SupportingViewModels.Ireland;
 using H.Avalonia.Views.SupportingViews;
+using H.Avalonia.Views.SupportingViews.Ireland;
 using H.Core.Enumerations;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
@@ -37,7 +39,6 @@ namespace H.Avalonia
             containerRegistry.RegisterForNavigation<DisclaimerView, DisclaimerViewModel>();
             containerRegistry.RegisterForNavigation<ToolbarView, ToolbarViewModel>();
             containerRegistry.RegisterForNavigation<SidebarView, SidebarViewModel>();
-            containerRegistry.RegisterForNavigation<FooterView, FooterViewModel>();
             containerRegistry.RegisterForNavigation<ClimateDataView, ClimateDataViewModel>();
             containerRegistry.RegisterForNavigation<SoilDataView, SoilDataViewModel>();
             containerRegistry.RegisterForNavigation<AboutPageView, AboutPageViewModel>();
@@ -59,14 +60,15 @@ namespace H.Avalonia
             // Services
             containerRegistry.RegisterSingleton<IDisclaimerService, DisclaimerService>();
             
-            // Region Based
+            // Geographic region Based container registration
             if (Settings.Default.UserRegion == UserRegion.Canada)
             {
-                
+                // Views - Region Navigation
+                containerRegistry.RegisterForNavigation<FooterView, FooterViewModel>();
             }
             else
             {
-                
+                containerRegistry.RegisterForNavigation<IrishFooterView, IrishFooterViewModel>();
             }
         }
 
@@ -84,6 +86,15 @@ namespace H.Avalonia
             // Register Views to the Region it will appear in. Don't register them in the ViewModel.
             var regionManager = Container.Resolve<IRegionManager>();
             
+            // Register views based on user's region
+            if (Settings.Default.UserRegion == UserRegion.Canada)
+            {
+                regionManager.RegisterViewWithRegion(UiRegions.FooterRegion, typeof(FooterView));
+            }
+            else
+            {
+                regionManager.RegisterViewWithRegion(UiRegions.FooterRegion, typeof(IrishFooterView));
+            }
             regionManager.RegisterViewWithRegion(UiRegions.FooterRegion, typeof(FooterView));
             regionManager.RegisterViewWithRegion(UiRegions.ContentRegion, typeof(DisclaimerView));
 
