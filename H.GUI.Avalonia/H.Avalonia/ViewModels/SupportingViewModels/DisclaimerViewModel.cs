@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Avalonia.Controls.Notifications;
+using H.Avalonia.Core.Services;
 using H.Avalonia.Views;
 using H.Core.Enumerations;
 using H.Core.Properties;
@@ -17,6 +18,9 @@ namespace H.Avalonia.ViewModels.SupportingViewModels;
 public class DisclaimerViewModel : ViewModelBase
     {
         #region Fields
+
+        private readonly IDisclaimerService _disclaimerService;
+        
         private const int DefaultNotificationTime = 15;
         private Languages _selectedLanguage;
         private readonly UserRegion _startupRegion;
@@ -43,8 +47,17 @@ public class DisclaimerViewModel : ViewModelBase
 
         public DisclaimerViewModel(IRegionManager regionManager,
                                    IEventAggregator eventAggregator,
-                                   Storage storage) : base(regionManager, eventAggregator, storage)
+                                   Storage storage,
+                                   IDisclaimerService? disclaimerService) : base(regionManager, eventAggregator, storage)
         {
+            if (disclaimerService != null)
+            {
+                _disclaimerService = disclaimerService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(disclaimerService));
+            }
             SelectedLanguage = Settings.Default.DisplayLanguage;
             SelectedUserRegion = _startupRegion = Settings.Default.UserRegion;
             _regionManager = regionManager;
@@ -141,22 +154,14 @@ public class DisclaimerViewModel : ViewModelBase
 
         private void UpdateDisplayBasedOnLanguage()
         {
-            CultureInfo cultureInfo;
-            if (SelectedLanguage == H.Core.Enumerations.Languages.English)
-            {
-                cultureInfo = InfrastructureConstants.EnglishCultureInfo;
-                DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_English;
-            }
-            else
-            {
-                cultureInfo = InfrastructureConstants.FrenchCultureInfo;
-                DisclaimerRtfString = Core.Properties.FileResources.Disclaimer_French;
-            }
+            CultureInfo cultureInfo = SelectedLanguage == H.Core.Enumerations.Languages.English ? 
+                                                InfrastructureConstants.EnglishCultureInfo : InfrastructureConstants.FrenchCultureInfo;
             Settings.Default.DisplayLanguage = SelectedLanguage;
             Settings.Default.Save();
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 
+            DisclaimerRtfString = _disclaimerService.GetDisclaimer(SelectedUserRegion, SelectedLanguage);
             SelectRegionString = Core.Properties.Resources.SelectRegion;
             SelectLanguageString = Core.Properties.Resources.SelectYourLanguage;
             AboutHolosString = Core.Properties.Resources.AboutHolosMessage;

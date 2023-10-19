@@ -30,4 +30,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\H.Core\H.Core.csproj" />
+  </ItemGroup>
+
 </Project>

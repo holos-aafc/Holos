@@ -11,9 +11,11 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
 using System;
+using H.Avalonia.Core.Services;
 using H.Avalonia.ViewModels.ResultViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels;
 using H.Avalonia.Views.SupportingViews;
+using H.Core.Enumerations;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
 
@@ -41,9 +43,8 @@ namespace H.Avalonia
             containerRegistry.RegisterForNavigation<AboutPageView, AboutPageViewModel>();
             containerRegistry.RegisterForNavigation<ClimateResultsView, ClimateResultsViewModel>();
             containerRegistry.RegisterForNavigation<SoilResultsView, SoilResultsViewModel>();
-
-            // 
-            //containerRegistry.RegisterSingleton<ResultsViewModelBase>();
+            
+            // Miscellaneous
             containerRegistry.RegisterSingleton<Storage>();
 
             // Providers
@@ -54,6 +55,19 @@ namespace H.Avalonia
 
             // Dialogs
             containerRegistry.RegisterDialog<DeleteRowDialog, DeleteRowDialogViewModel>();
+            
+            // Services
+            containerRegistry.RegisterSingleton<IDisclaimerService, DisclaimerService>();
+            
+            // Region Based
+            if (Settings.Default.UserRegion == UserRegion.Canada)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
         /// <summary>User interface entry point, called after Register and ConfigureModules.</summary>
