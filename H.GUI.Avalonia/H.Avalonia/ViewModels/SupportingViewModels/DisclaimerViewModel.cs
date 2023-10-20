@@ -161,7 +161,7 @@ public class DisclaimerViewModel : ViewModelBase
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 
-            DisclaimerRtfString = _disclaimerService.GetDisclaimer(SelectedUserRegion, SelectedLanguage);
+            DisclaimerRtfString = _disclaimerService.GetDisclaimer(SelectedLanguage);
             SelectRegionString = Core.Properties.Resources.SelectRegion;
             SelectLanguageString = Core.Properties.Resources.SelectYourLanguage;
             AboutHolosString = Core.Properties.Resources.AboutHolosMessage;

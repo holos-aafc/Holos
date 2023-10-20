@@ -4,14 +4,12 @@ namespace H.Avalonia.Core.Services;
 
 public class DisclaimerService : IDisclaimerService
 {
-    public string GetDisclaimer(UserRegion userRegion, Languages language)
+    public string GetDisclaimer(Languages language)
     {
-        switch (userRegion)
+        switch (language)
         {
-            case UserRegion.Canada when language == Languages.French:
+            case Languages.French:
                 return Properties.FileResources.Disclaimer_French;
-            case UserRegion.Ireland:
-                return Properties.Resources.Disclaimer_Ireland;
             default:
                 return Properties.FileResources.Disclaimer_English;
         }

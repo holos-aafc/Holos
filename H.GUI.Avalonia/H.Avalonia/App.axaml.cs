@@ -12,6 +12,7 @@ using Prism.Ioc;
 using Prism.Regions;
 using System;
 using H.Avalonia.Core.Services;
+using H.Avalonia.Core.Services.Ireland;
 using H.Avalonia.ViewModels.ResultViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels.Ireland;
@@ -57,18 +58,22 @@ namespace H.Avalonia
             // Dialogs
             containerRegistry.RegisterDialog<DeleteRowDialog, DeleteRowDialogViewModel>();
             
-            // Services
-            containerRegistry.RegisterSingleton<IDisclaimerService, DisclaimerService>();
-            
             // Geographic region Based container registration
             if (Settings.Default.UserRegion == UserRegion.Canada)
             {
                 // Views - Region Navigation
                 containerRegistry.RegisterForNavigation<FooterView, FooterViewModel>();
+                
+                // Services
+                containerRegistry.RegisterSingleton<IDisclaimerService, DisclaimerService>();
             }
             else
             {
+                // Views - Region Navigation
                 containerRegistry.RegisterForNavigation<IrishFooterView, IrishFooterViewModel>();
+                
+                // Services
+                containerRegistry.RegisterSingleton<IDisclaimerService, IrishDisclaimerService>();
             }
         }
 
