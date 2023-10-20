@@ -47,7 +47,7 @@ namespace H.Avalonia
             containerRegistry.RegisterForNavigation<SoilResultsView, SoilResultsViewModel>();
             
             // Miscellaneous
-            containerRegistry.RegisterSingleton<Storage>();
+            containerRegistry.RegisterSingleton<PrototypeStorage>();
 
             // Providers
             containerRegistry.RegisterSingleton<GeographicDataProvider>();

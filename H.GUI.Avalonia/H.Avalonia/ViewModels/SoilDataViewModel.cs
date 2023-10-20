@@ -49,10 +49,10 @@ namespace H.Avalonia.ViewModels
         private const int DefaultErrorNotificationTime = 10;
         private const int DefaultInformationNotificationTime = 5;
 
-        public bool HasViewItems => Storage?.SoilViewItems != null && Storage.SoilViewItems.Any();
+        public bool HasViewItems => PrototypeStorage?.SoilViewItems != null && PrototypeStorage.SoilViewItems.Any();
 
-        public bool AnyViewItemsSelected => Storage?.SoilViewItems != null &&
-                                            Storage.SoilViewItems.Any(item => item.IsSelected);
+        public bool AnyViewItemsSelected => PrototypeStorage?.SoilViewItems != null &&
+                                            PrototypeStorage.SoilViewItems.Any(item => item.IsSelected);
         public bool AllViewItemsSelected { get; set; }
 
         private readonly KmlHelpers _kmlHelpers;
@@ -130,11 +130,11 @@ namespace H.Avalonia.ViewModels
         /// A constructor that uses dependency injection to pass various objects into the class.
         /// </summary>
         /// <param name="regionManager">The region manager object controls the navigation of our view.</param>
-        /// <param name="storage">The storage object contains various items that are passed between different viewmodels</param>
+        /// <param name="prototypeStorage">The storage object contains various items that are passed between different viewmodels</param>
         /// <param name="importHelper">A set of methods that help with importing data from an external file.</param>
         /// <param name="kmlHelpers">A set of methods that help us process .kml files.</param>
         /// <param name="dialogService">An Prism dialogService object that helps us display dialogs to the user.</param>
-        public SoilDataViewModel(IRegionManager regionManager, Storage storage, ImportHelpers importHelper, KmlHelpers kmlHelpers, IDialogService dialogService) : base(regionManager, storage)
+        public SoilDataViewModel(IRegionManager regionManager, PrototypeStorage prototypeStorage, ImportHelpers importHelper, KmlHelpers kmlHelpers, IDialogService dialogService) : base(regionManager, prototypeStorage)
         {
             _regionManager = regionManager;
             _importHelper = importHelper;
@@ -173,9 +173,9 @@ namespace H.Avalonia.ViewModels
         {
             // When we navigate to this view, we instantiate the journal property. This allows us to do navigation through journaling.
             _navigationJournal = navigationContext.NavigationService.Journal;
-            if (Storage?.SoilViewItems != null)
+            if (PrototypeStorage?.SoilViewItems != null)
             {
-                Storage.SoilViewItems.CollectionChanged += OnSoilViewItemsCollectionChanged;
+                PrototypeStorage.SoilViewItems.CollectionChanged += OnSoilViewItemsCollectionChanged;
             }
         }
 
@@ -246,7 +246,7 @@ namespace H.Avalonia.ViewModels
         public DelegateCommand UpdateInformationFromNavigationPointCommand { get; private set; }
 
         /// <summary>
-        /// Triggered when the <see cref="Storage.SoilViewItems"/> changes. This method raises CanExecuteChanged events for the various
+        /// Triggered when the <see cref="PrototypeStorage.SoilViewItems"/> changes. This method raises CanExecuteChanged events for the various
         /// buttons on the page and also attaches/detaches PropertyChanged events to individual properties inside the collection so that
         /// we can be notified when an internal property changes in the collection.
         /// </summary>
@@ -278,7 +278,7 @@ namespace H.Avalonia.ViewModels
         }
 
         /// <summary>
-        /// A property changed event that is attached to each property of the <see cref="Storage.ClimateViewItems"/> collection.
+        /// A property changed event that is attached to each property of the <see cref="PrototypeStorage.ClimateViewItems"/> collection.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event that was triggered.</param>
@@ -301,10 +301,10 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void OnToggleSelectAllRows()
         {
-            if (Storage?.SoilViewItems == null) return;
+            if (PrototypeStorage?.SoilViewItems == null) return;
             if (AllViewItemsSelected)
             {
-                foreach (var item in Storage.SoilViewItems)
+                foreach (var item in PrototypeStorage.SoilViewItems)
                 {
                     item.IsSelected = false;
                 }
@@ -312,7 +312,7 @@ namespace H.Avalonia.ViewModels
             }
             else
             {
-                foreach (var item in Storage.SoilViewItems)
+                foreach (var item in PrototypeStorage.SoilViewItems)
                 {
                     item.IsSelected = true;
                 }
@@ -325,7 +325,7 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void OnAddRow()
         {
-            Storage?.SoilViewItems?.Add(new SoilViewItem());
+            PrototypeStorage?.SoilViewItems?.Add(new SoilViewItem());
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace H.Avalonia.ViewModels
             {
                 if (r.Result == ButtonResult.OK)
                 {
-                    Storage?.SoilViewItems?.Remove(viewItem);
+                    PrototypeStorage?.SoilViewItems?.Remove(viewItem);
                 }
             });
         }
@@ -360,7 +360,7 @@ namespace H.Avalonia.ViewModels
             _importHelper.ImportPath = file.Path.AbsolutePath;
             try
             {
-                Storage?.SoilViewItems.AddRange(_importHelper.ImportFromCsv(_soilViewItemMap));
+                PrototypeStorage?.SoilViewItems.AddRange(_importHelper.ImportFromCsv(_soilViewItemMap));
 
             }
             catch (HeaderValidationException e)
@@ -394,15 +394,15 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void OnDeleteSelectedRows()
         {
-            if (!Storage.SoilViewItems.Any()) return;
+            if (!PrototypeStorage.SoilViewItems.Any()) return;
             var message = Core.Properties.Resources.RowDeleteMessage;
             _dialogService.ShowMessageDialog(nameof(DeleteRowDialog), message, r =>
             {
                 if (r.Result != ButtonResult.OK) return;
-                var currentItems = Storage.SoilViewItems.ToList();
+                var currentItems = PrototypeStorage.SoilViewItems.ToList();
                 foreach (var item in currentItems.Where(item => item.IsSelected))
                 {
-                    Storage?.SoilViewItems?.Remove(item);
+                    PrototypeStorage?.SoilViewItems?.Remove(item);
                 }
 
                 if (!HasViewItems)
@@ -417,10 +417,10 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void SwitchToSoilResultsViewFromSingleCoordinate()
         {
-            Storage.SingleSoilViewItem.Latitude = Latitude;
-            Storage.SingleSoilViewItem.Longitude = Longitude;
-            Storage.ShowSingleCoordinateResults = true;
-            Storage.ShowMultipleCoordinateResults = false;
+            PrototypeStorage.SingleSoilViewItem.Latitude = Latitude;
+            PrototypeStorage.SingleSoilViewItem.Longitude = Longitude;
+            PrototypeStorage.ShowSingleCoordinateResults = true;
+            PrototypeStorage.ShowMultipleCoordinateResults = false;
             _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(SoilResultsView));
         }
 
@@ -429,8 +429,8 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void SwitchToSoilResultsViewFromMultiCoordinate()
         {
-            Storage.ShowMultipleCoordinateResults = true;
-            Storage.ShowSingleCoordinateResults = false;
+            PrototypeStorage.ShowMultipleCoordinateResults = true;
+            PrototypeStorage.ShowSingleCoordinateResults = false;
             _regionManager.RequestNavigate(UiRegions.ContentRegion, nameof(SoilResultsView));
         }
 

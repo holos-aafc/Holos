@@ -47,8 +47,8 @@ public class DisclaimerViewModel : ViewModelBase
 
         public DisclaimerViewModel(IRegionManager regionManager,
                                    IEventAggregator eventAggregator,
-                                   Storage storage,
-                                   IDisclaimerService? disclaimerService) : base(regionManager, eventAggregator, storage)
+                                   PrototypeStorage prototypeStorage,
+                                   IDisclaimerService? disclaimerService) : base(regionManager, eventAggregator, prototypeStorage)
         {
             if (disclaimerService != null)
             {

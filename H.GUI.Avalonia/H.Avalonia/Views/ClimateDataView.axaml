@@ -51,7 +51,7 @@
 
         <DataGrid Name="ClimateDataGrid"
                 Grid.Row="2" 
-                ItemsSource="{Binding Storage.ClimateViewItems, Mode=TwoWay}"
+                ItemsSource="{Binding PrototypeStorage.ClimateViewItems, Mode=TwoWay}"
                 CanUserSortColumns="False"
                 GridLinesVisibility="None"
                 Margin="20, 10"

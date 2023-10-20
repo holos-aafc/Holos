@@ -18,7 +18,7 @@ namespace H.Avalonia.ViewModels
         #region Fields
         private string _title;
         private string _subtitle;
-        private Storage? _storage;
+        private PrototypeStorage? _prototypeStorage;
 
         public IRegionManager RegionManager;
 
@@ -30,9 +30,9 @@ namespace H.Avalonia.ViewModels
         protected ViewModelBase()
         {
         }
-        protected ViewModelBase(Storage storage)
+        protected ViewModelBase(PrototypeStorage prototypeStorage)
         {
-            Storage = storage;
+            PrototypeStorage = prototypeStorage;
         }
 
         protected ViewModelBase(IRegionManager regionManager)
@@ -40,12 +40,12 @@ namespace H.Avalonia.ViewModels
 
         }
 
-        protected ViewModelBase(IRegionManager regionManager, Storage storage)
+        protected ViewModelBase(IRegionManager regionManager, PrototypeStorage prototypeStorage)
         {
-            Storage = storage;
+            PrototypeStorage = prototypeStorage;
         }
         
-        protected ViewModelBase(IRegionManager? regionManager, IEventAggregator? eventAggregator, Storage? storage)
+        protected ViewModelBase(IRegionManager? regionManager, IEventAggregator? eventAggregator, PrototypeStorage? prototypeStorage)
         {
             if (regionManager != null)
             {
@@ -65,14 +65,14 @@ namespace H.Avalonia.ViewModels
                 throw new ArgumentNullException(nameof(eventAggregator));
             }
 
-            if (storage != null)
+            if (prototypeStorage != null)
             {
-                this.Storage = storage;
+                this.PrototypeStorage = prototypeStorage;
                 //this.Storage.ApplicationData.GlobalSettings.PropertyChanged += GlobalSettingsOnPropertyChanged;
             }
             else
             {
-                throw new ArgumentNullException(nameof(storage));
+                throw new ArgumentNullException(nameof(prototypeStorage));
             }
 
             this.Construct();
@@ -84,10 +84,10 @@ namespace H.Avalonia.ViewModels
         /// A storage file that contains various data items that are shored between viewmodels are passed around the system. This storage
         /// item is instantiated using Prism and through Dependency Injection, is passed within the system.
         /// </summary>
-        public Storage? Storage
+        public PrototypeStorage? PrototypeStorage
         {
-            get => _storage;
-            set => SetProperty(ref _storage, value);
+            get => _prototypeStorage;
+            set => SetProperty(ref _prototypeStorage, value);
         }
         
         

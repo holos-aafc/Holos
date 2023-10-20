@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace H.Avalonia
 {
-    public class Storage : BindableBase
+    public class PrototypeStorage : BindableBase
     {
         private bool _showSingleCoordinateResults;
         private bool _showMultipleCoordinateResults;
@@ -48,7 +48,7 @@ namespace H.Avalonia
             set => SetProperty(ref _showMultipleCoordinateResults, value);
         }
 
-        public Storage()
+        public PrototypeStorage()
         {
             ClimateViewItems = new ObservableCollection<ClimateViewItem>();
             SoilViewItems = new ObservableCollection<SoilViewItem>();
