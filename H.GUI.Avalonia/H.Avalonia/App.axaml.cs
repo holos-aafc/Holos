@@ -11,6 +11,7 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
 using System;
+using H.Avalonia.Core;
 using H.Avalonia.Core.Services;
 using H.Avalonia.Core.Services.Ireland;
 using H.Avalonia.ViewModels.ResultViewModels;
@@ -18,7 +19,10 @@ using H.Avalonia.ViewModels.SupportingViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels.Ireland;
 using H.Avalonia.Views.SupportingViews;
 using H.Avalonia.Views.SupportingViews.Ireland;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Enumerations;
+using H.Core.Services;
+using H.Core.Services.Animals;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
 
@@ -48,6 +52,7 @@ namespace H.Avalonia
             
             // Miscellaneous
             containerRegistry.RegisterSingleton<PrototypeStorage>();
+            containerRegistry.RegisterSingleton<Storage>();
 
             // Providers
             containerRegistry.RegisterSingleton<GeographicDataProvider>();
@@ -58,6 +63,13 @@ namespace H.Avalonia
             // Dialogs
             containerRegistry.RegisterDialog<DeleteRowDialog, DeleteRowDialogViewModel>();
             
+            //Services
+            containerRegistry.RegisterSingleton<IFarmResultsService, FarmResultsService>();
+            containerRegistry.RegisterSingleton<IADCalculator, ADCalculator>();
+            containerRegistry.RegisterSingleton<IDigestateService, DigestateService>();
+            containerRegistry.RegisterSingleton<IManureService, ManureService>();
+            containerRegistry.RegisterSingleton<IAnimalService, AnimalResultsService>();
+
             // Geographic region Based container registration
             if (Settings.Default.UserRegion == UserRegion.Canada)
             {

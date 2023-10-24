@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
+using H.Avalonia.Core;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Enumerations;
 using Prism.Commands;
@@ -19,6 +20,7 @@ namespace H.Avalonia.ViewModels
         private string _title;
         private string _subtitle;
         private PrototypeStorage? _prototypeStorage;
+        private Storage? _storage;
 
         public IRegionManager RegionManager;
 
@@ -77,6 +79,39 @@ namespace H.Avalonia.ViewModels
 
             this.Construct();
         }
+        
+        protected ViewModelBase(IRegionManager? regionManager, IEventAggregator? eventAggregator, Storage? storage)
+        {
+            if (regionManager != null)
+            {
+                this.RegionManager = regionManager;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(regionManager));
+            }
+
+            if (eventAggregator != null)
+            {
+                this.EventAggregator = eventAggregator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(eventAggregator));
+            }
+
+            if (storage != null)
+            {
+                this.Storage = storage;
+                //this.Storage.ApplicationData.GlobalSettings.PropertyChanged += GlobalSettingsOnPropertyChanged;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(storage));
+            }
+
+            this.Construct();
+        }
 
         
         #region Properties
@@ -90,6 +125,11 @@ namespace H.Avalonia.ViewModels
             set => SetProperty(ref _prototypeStorage, value);
         }
         
+        public Storage Storage
+        {
+            get { return _storage; }
+            set { SetProperty(ref _storage, value); }
+        }
         
         public IEventAggregator EventAggregator { get; set; }
 

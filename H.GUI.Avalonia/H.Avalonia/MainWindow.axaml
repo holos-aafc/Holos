@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:H.Avalonia"
         xmlns:core="clr-namespace:H.Core;assembly=H.Data.Core"
         xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
+        xmlns:viewModels="clr-namespace:H.Avalonia.ViewModels"
         mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="480"
         Width="1280" Height="768"
         MinWidth="1024" MinHeight="512"
         x:Class="H.Avalonia.MainWindow"
         Title="{x:Static properties:Resources.ApplicationTitle}">
-
     
+    <Design.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Design.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
