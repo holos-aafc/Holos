@@ -1,11 +1,6 @@
 ﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace H.Avalonia.Models
+namespace H.Avalonia.Core.Models
 {
     /// <summary>
     /// The base class for various model classes.

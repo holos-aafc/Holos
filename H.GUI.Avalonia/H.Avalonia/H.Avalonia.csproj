@@ -58,6 +58,10 @@
       <DependentUpon>SoilResultsView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogs\DeleteRowDialog.axaml.cs">
+      <DependentUpon>DeleteRowDialog.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -73,5 +77,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Dialogs\DeleteRowDialog.axaml" />
   </ItemGroup>
 </Project>

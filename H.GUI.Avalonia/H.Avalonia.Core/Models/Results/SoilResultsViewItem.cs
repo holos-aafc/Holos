@@ -1,6 +1,6 @@
 ﻿using H.Core.Enumerations;
 
-namespace H.Avalonia.Models.Results
+namespace H.Avalonia.Core.Models.Results
 {
     /// <summary>
     /// Contains properties that are tied to the Grid shown for the soil results page.

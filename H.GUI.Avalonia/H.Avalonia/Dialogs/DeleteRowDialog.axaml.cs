@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 
-namespace H.Avalonia.Infrastructure.Dialogs
+namespace H.Avalonia.Dialogs
 {
     public partial class DeleteRowDialog : UserControl
     {

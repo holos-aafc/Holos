@@ -3,10 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
-        xmlns:dialogs="clr-namespace:H.Avalonia.Infrastructure.Dialogs;assembly=H.Avalonia.Infrastructure"
+        xmlns:dialogs="clr-namespace:H.Avalonia.Infrastructure.Dialogs"
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="150"
         Width="500" Height="150"
-        x:Class="H.Avalonia.Infrastructure.Dialogs.DeleteRowDialog">
+        x:Class="H.Avalonia.Dialogs.DeleteRowDialog">
     <Design.DataContext>
         <dialogs:DeleteRowDialogViewModel/>
     </Design.DataContext>

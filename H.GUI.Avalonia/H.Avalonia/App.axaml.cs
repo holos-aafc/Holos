@@ -14,6 +14,7 @@ using System;
 using H.Avalonia.Core;
 using H.Avalonia.Core.Services;
 using H.Avalonia.Core.Services.Ireland;
+using H.Avalonia.Dialogs;
 using H.Avalonia.ViewModels.ResultViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels.Ireland;

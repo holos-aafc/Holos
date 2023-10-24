@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\H.Avalonia.Infrastructure\H.Avalonia.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

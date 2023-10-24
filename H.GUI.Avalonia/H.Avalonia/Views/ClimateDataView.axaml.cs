@@ -5,13 +5,13 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
-using H.Avalonia.Models;
 using H.Avalonia.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using H.Avalonia.Core.Models;
 
 namespace H.Avalonia.Views
 {

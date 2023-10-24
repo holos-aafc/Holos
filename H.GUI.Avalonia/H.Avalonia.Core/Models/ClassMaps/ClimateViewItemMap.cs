@@ -1,7 +1,7 @@
 ﻿using CsvHelper.Configuration;
 using H.Avalonia.Infrastructure;
 
-namespace H.Avalonia.Models.ClassMaps
+namespace H.Avalonia.Core.Models.ClassMaps
 {
     /// <summary>
     /// A mapping class for CsvReader extension. The class maps properties in <see cref="ClimateViewItem"/> class

@@ -1,4 +1,4 @@
-﻿namespace H.Avalonia.Models
+﻿namespace H.Avalonia.Core.Models
 {
     public class SoilViewItem : ModelBase
     {

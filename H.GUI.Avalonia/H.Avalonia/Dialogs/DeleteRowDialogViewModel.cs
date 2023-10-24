@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using System;
+using H.Avalonia.Dialogs;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 

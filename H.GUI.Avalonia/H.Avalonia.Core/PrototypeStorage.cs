@@ -1,14 +1,8 @@
-﻿using H.Avalonia.Models;
+﻿using System.Collections.ObjectModel;
+using H.Avalonia.Core.Models;
 using Prism.Mvvm;
-using SharpKml.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace H.Avalonia
+namespace H.Avalonia.Core
 {
     public class PrototypeStorage : BindableBase
     {

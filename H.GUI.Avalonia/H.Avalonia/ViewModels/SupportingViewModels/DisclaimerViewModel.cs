@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Avalonia.Controls.Notifications;
+using H.Avalonia.Core;
 using H.Avalonia.Core.Services;
 using H.Avalonia.Views;
 using H.Core.Enumerations;

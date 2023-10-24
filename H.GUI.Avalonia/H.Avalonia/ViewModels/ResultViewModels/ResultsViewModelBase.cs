@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using H.Avalonia.Core;
+using Prism.Commands;
 using Prism.Regions;
 
 namespace H.Avalonia.ViewModels.ResultViewModels

@@ -1,4 +1,4 @@
-﻿namespace H.Avalonia.Models
+﻿namespace H.Avalonia.Core.Models
 {
     /// <summary>
     /// Contains properties that are tied to the Grid shown for the climate items in the Climate Data page.
