@@ -400,7 +400,7 @@ namespace H.Core
         private string GetUserFolderPath(bool isBackupFolder = false)
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var folderPath = isBackupFolder ? Path.Combine(localAppData, "HOLOS_4\\backups") : Path.Combine(localAppData, "HOLOS_4");
+            var folderPath = isBackupFolder ? Path.Combine(localAppData, "HOLOS_5\\backups") : Path.Combine(localAppData, "HOLOS_5");
             return folderPath;
         }
 

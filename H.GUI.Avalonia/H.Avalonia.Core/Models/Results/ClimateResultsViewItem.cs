@@ -1,4 +1,6 @@
-﻿namespace H.Avalonia.Core.Models.Results
+﻿using H.Common.Models;
+
+namespace H.Avalonia.Core.Models.Results
 {
     /// <summary>
     /// Contains properties that are tied to the Grid shown for the climate results page.

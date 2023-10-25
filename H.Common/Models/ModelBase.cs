@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace H.Avalonia.Core.Models
+namespace H.Common.Models
 {
     /// <summary>
     /// The base class for various model classes.

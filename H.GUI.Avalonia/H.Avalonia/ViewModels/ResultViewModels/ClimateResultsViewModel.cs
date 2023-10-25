@@ -10,6 +10,7 @@ using H.Avalonia.Core;
 using H.Avalonia.Core.Models.ClassMaps;
 using H.Avalonia.Core.Models.Results;
 using H.Avalonia.Infrastructure;
+using H.Core;
 using H.Core.Providers.Climate;
 using Prism.Commands;
 using Prism.Regions;

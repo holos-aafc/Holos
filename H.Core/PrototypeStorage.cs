@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using H.Avalonia.Core.Models;
+using H.Common.Models;
 using Prism.Mvvm;
 
-namespace H.Avalonia.Core
+namespace H.Core
 {
     public class PrototypeStorage : BindableBase
     {

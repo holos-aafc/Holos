@@ -24,11 +24,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using H.Avalonia.Core;
-using H.Avalonia.Core.Models;
 using H.Avalonia.Core.Models.ClassMaps;
 using H.Avalonia.Dialogs;
-using H.Avalonia.Views.ResultViews;
+using H.Common.Models;
+using H.Core;
 using SoilResultsView = H.Avalonia.Views.ResultViews.SoilResultsView;
 
 namespace H.Avalonia.ViewModels

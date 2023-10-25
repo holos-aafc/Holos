@@ -7,6 +7,7 @@ using Avalonia.Controls.Notifications;
 using H.Avalonia.Core;
 using H.Avalonia.Core.Services;
 using H.Avalonia.Views;
+using H.Core;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;

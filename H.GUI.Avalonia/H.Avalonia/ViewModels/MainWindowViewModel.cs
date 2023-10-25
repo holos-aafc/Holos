@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using H.Avalonia.Core;
+using H.Core;
 using H.Core.Services;
 using Prism.Commands;
 using Prism.Events;

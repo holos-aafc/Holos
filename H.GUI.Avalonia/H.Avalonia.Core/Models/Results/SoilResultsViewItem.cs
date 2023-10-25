@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using H.Common.Models;
+using H.Core.Enumerations;
 
 namespace H.Avalonia.Core.Models.Results
 {

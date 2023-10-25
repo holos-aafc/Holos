@@ -19,6 +19,8 @@ using H.Avalonia.Core.Models;
 using H.Avalonia.Core.Models.ClassMaps;
 using H.Avalonia.Dialogs;
 using H.Avalonia.Views.ResultViews;
+using H.Common.Models;
+using H.Core;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 
 namespace H.Avalonia.ViewModels
@@ -39,12 +41,12 @@ namespace H.Avalonia.ViewModels
         public DelegateCommand NavigateToResultsView { get; set; }
 
         /// <summary>
-        /// A command that adds rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="ClimateViewItem"/>.
+        /// A command that adds rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="H.Common.Models.ClimateViewItem"/>.
         /// </summary>
         public DelegateCommand AddRowCommand { get; set; }
 
         /// <summary>
-        /// A command that removes rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="ClimateViewItem"/>.
+        /// A command that removes rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="H.Common.Models.ClimateViewItem"/>.
         /// </summary>
         public DelegateCommand<object> DeleteRowCommand { get; set; }
 
@@ -194,7 +196,7 @@ namespace H.Avalonia.ViewModels
         /// <summary>
         /// Deletes a row from the grid on <see cref="ClimateDataView"/>
         /// </summary>
-        /// <param name="obj">The <see cref="ClimateViewItem"/> that needs to be deleted.</param>
+        /// <param name="obj">The <see cref="H.Common.Models.ClimateViewItem"/> that needs to be deleted.</param>
         private void OnDeleteRow(object obj)
         {
             if (obj is not ClimateViewItem viewItem) return;
@@ -210,7 +212,7 @@ namespace H.Avalonia.ViewModels
         }
 
         /// <summary>
-        /// Deletes a group of <see cref="ClimateViewItem"/> that are selected by the user.
+        /// Deletes a group of <see cref="H.Common.Models.ClimateViewItem"/> that are selected by the user.
         /// </summary>
         private void OnDeleteSelectedRows()
         {

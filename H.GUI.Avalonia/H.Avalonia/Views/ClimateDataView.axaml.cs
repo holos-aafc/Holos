@@ -9,9 +9,7 @@ using H.Avalonia.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using H.Avalonia.Core.Models;
+using H.Common.Models;
 
 namespace H.Avalonia.Views
 {

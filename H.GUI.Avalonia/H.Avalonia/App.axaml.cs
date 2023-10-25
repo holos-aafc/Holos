@@ -20,6 +20,7 @@ using H.Avalonia.ViewModels.SupportingViewModels;
 using H.Avalonia.ViewModels.SupportingViewModels.Ireland;
 using H.Avalonia.Views.SupportingViews;
 using H.Avalonia.Views.SupportingViews.Ireland;
+using H.Core;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Enumerations;
 using H.Core.Services;

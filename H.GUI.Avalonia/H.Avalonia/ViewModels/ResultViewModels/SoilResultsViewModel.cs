@@ -11,6 +11,8 @@ using H.Avalonia.Core.Models;
 using H.Avalonia.Core.Models.ClassMaps;
 using H.Avalonia.Core.Models.Results;
 using H.Avalonia.Infrastructure;
+using H.Common.Models;
+using H.Core;
 using H.Core.Providers;
 using Prism.Commands;
 using Prism.Regions;
