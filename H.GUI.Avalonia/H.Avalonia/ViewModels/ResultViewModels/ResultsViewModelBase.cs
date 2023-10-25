@@ -11,7 +11,7 @@ namespace H.Avalonia.ViewModels.ResultViewModels
         
         protected ResultsViewModelBase() { }
 
-        protected ResultsViewModelBase(IRegionManager regionManager, PrototypeStorage prototypeStorage) : base(regionManager, prototypeStorage)
+        protected ResultsViewModelBase(IRegionManager regionManager, Storage storage) : base(regionManager, storage)
         {
         }
         

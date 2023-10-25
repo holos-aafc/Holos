@@ -152,7 +152,7 @@
 
                 <DataGrid Name="SoilDataGrid"
                         Grid.Row="2" 
-                        ItemsSource="{Binding PrototypeStorage.SoilViewItems, Mode=TwoWay}"
+                        ItemsSource="{Binding Storage.ApplicationData.PrototypeStorage.SoilViewItems, Mode=TwoWay}"
                         CanUserSortColumns="False"
                         GridLinesVisibility="None"
                         Margin="20, 10"

@@ -43,7 +43,7 @@ namespace H.Avalonia.ViewModels.ResultViewModels
         public ObservableCollection<SoilResultsViewItem> SingleSoilResultsViewItems { get; set; } = new();
         
 
-        public SoilResultsViewModel(IRegionManager regionManager, PrototypeStorage prototypeStorage, ExportHelpers exportHelpers, KmlHelpers kmlHelpers, GeographicDataProvider geographicDataProvider) : base(regionManager, prototypeStorage)
+        public SoilResultsViewModel(IRegionManager regionManager, Storage storage, ExportHelpers exportHelpers, KmlHelpers kmlHelpers, GeographicDataProvider geographicDataProvider) : base(regionManager, storage)
         {
             _regionManager = regionManager;
             _exportHelpers = exportHelpers;
@@ -97,7 +97,7 @@ namespace H.Avalonia.ViewModels.ResultViewModels
             try
             {
                 _exportHelpers.ExportPath = file.Path.AbsolutePath;
-                if (PrototypeStorage.ShowSingleCoordinateResults)
+                if (Storage.ApplicationData.PrototypeStorage.ShowSingleCoordinateResults)
                 {
                     _exportHelpers.ExportToCSV(SingleSoilResultsViewItems, _soilResultsViewItemMap);
                 }
@@ -126,17 +126,18 @@ namespace H.Avalonia.ViewModels.ResultViewModels
             var cancellationToken = _cancellationTokenSource.Token;
             try
             {
-                if (PrototypeStorage.ShowSingleCoordinateResults)
+                if (Storage.ApplicationData.PrototypeStorage.ShowSingleCoordinateResults)
                 {
                     var sourceCollection = new ObservableCollection<SoilViewItem>
                 {
-                    PrototypeStorage.SingleSoilViewItem
+                    Storage.ApplicationData.PrototypeStorage.SingleSoilViewItem
                 };
                     await AddViewItemsToCollection(cancellationToken, sourceCollection, SingleSoilResultsViewItems);
                 }
                 else
                 {
-                    await AddViewItemsToCollection(cancellationToken, PrototypeStorage.SoilViewItems, SoilResultsViewItems);
+                    if (Storage.ApplicationData.PrototypeStorage.SoilViewItems != null)
+                        await AddViewItemsToCollection(cancellationToken, Storage.ApplicationData.PrototypeStorage.SoilViewItems, SoilResultsViewItems);
                 }
             }
             catch (TaskCanceledException e)

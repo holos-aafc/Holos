@@ -11,6 +11,7 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
 using System;
+using System.Diagnostics;
 using H.Avalonia.Core;
 using H.Avalonia.Core.Services;
 using H.Avalonia.Core.Services.Ireland;
@@ -32,6 +33,7 @@ namespace H.Avalonia
 {
     public partial class App : PrismApplication
     {
+        private Storage _storage;
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -53,7 +55,6 @@ namespace H.Avalonia
             containerRegistry.RegisterForNavigation<SoilResultsView, SoilResultsViewModel>();
             
             // Miscellaneous
-            containerRegistry.RegisterSingleton<PrototypeStorage>();
             containerRegistry.RegisterSingleton<Storage>();
 
             // Providers
@@ -95,6 +96,12 @@ namespace H.Avalonia
         /// <returns>Startup View.</returns>
         protected override AvaloniaObject CreateShell()
         {
+            Trace.TraceInformation($"{nameof(App)}.{nameof(CreateShell)}: resolving storage");
+            _storage = this.Container.Resolve<Storage>();
+
+            Trace.TraceInformation($"{nameof(App)}.{nameof(CreateShell)}: loading data from storage");
+            _storage.Load();
+            
              var mainWindow = Container.Resolve<MainWindow>();
              return mainWindow;
         }

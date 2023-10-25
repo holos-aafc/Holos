@@ -40,7 +40,7 @@ namespace H.Avalonia.ViewModels.ResultViewModels
 
         public ClimateResultsViewModel() { }
 
-        public ClimateResultsViewModel(IRegionManager regionManager, PrototypeStorage prototypeStorage, ExportHelpers exportHelpers) : base(regionManager, prototypeStorage)
+        public ClimateResultsViewModel(IRegionManager regionManager, Storage storage, ExportHelpers exportHelpers) : base(regionManager, storage)
         {
             _regionManager = regionManager;
             _exportHelpers = exportHelpers;
@@ -95,7 +95,9 @@ namespace H.Avalonia.ViewModels.ResultViewModels
         private async Task AddViewItemsToCollectionAsync(CancellationToken cancellationToken)
         {
             IsProcessingData = true;
-            foreach (var viewItem in PrototypeStorage.ClimateViewItems)
+            if (Storage.ApplicationData.PrototypeStorage.ClimateViewItems is null) return;
+            
+            foreach (var viewItem in Storage.ApplicationData.PrototypeStorage.ClimateViewItems)
             {
                 for (var currentYear = viewItem.StartYear; currentYear <= viewItem.EndYear; currentYear++)
                 {

@@ -434,7 +434,7 @@ namespace H.Core
         public void WriteExceptionToFile(Exception e)
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var userFilePath = Path.Combine(localAppData, "HOLOS_4");
+            var userFilePath = Path.Combine(localAppData, "HOLOS_5");
 
             var fullpath = Path.Combine(userFilePath, "logfile.txt");
 

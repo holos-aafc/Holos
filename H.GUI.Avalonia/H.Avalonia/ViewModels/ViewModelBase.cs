@@ -2,6 +2,7 @@
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Avalonia.Controls.Notifications;
 using H.Core;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Enumerations;
+using H.Core.Models;
 using Prism.Commands;
 using Prism.Events;
 
@@ -19,12 +21,11 @@ namespace H.Avalonia.ViewModels
         #region Fields
         private string _title;
         private string _subtitle;
-        private PrototypeStorage? _prototypeStorage;
-        private Storage? _storage;
+        private Storage _storage;
 
         public IRegionManager RegionManager;
 
-        //private ObservableCollection<Farm> _copiedFarmsUsedForSimulation;
+        private ObservableCollection<Farm> _copiedFarmsUsedForSimulation;
         private EmissionDisplayUnits _selectedEmissionDisplayUnits;
 
         #endregion
@@ -32,9 +33,9 @@ namespace H.Avalonia.ViewModels
         protected ViewModelBase()
         {
         }
-        protected ViewModelBase(PrototypeStorage prototypeStorage)
+        protected ViewModelBase(Storage storage)
         {
-            PrototypeStorage = prototypeStorage;
+            Storage = storage;
         }
 
         protected ViewModelBase(IRegionManager regionManager)
@@ -42,43 +43,11 @@ namespace H.Avalonia.ViewModels
 
         }
 
-        protected ViewModelBase(IRegionManager regionManager, PrototypeStorage prototypeStorage)
+        protected ViewModelBase(IRegionManager regionManager, Storage storage)
         {
-            PrototypeStorage = prototypeStorage;
+            Storage = storage;
         }
-        
-        protected ViewModelBase(IRegionManager? regionManager, IEventAggregator? eventAggregator, PrototypeStorage? prototypeStorage)
-        {
-            if (regionManager != null)
-            {
-                this.RegionManager = regionManager;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(regionManager));
-            }
 
-            if (eventAggregator != null)
-            {
-                this.EventAggregator = eventAggregator;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(eventAggregator));
-            }
-
-            if (prototypeStorage != null)
-            {
-                this.PrototypeStorage = prototypeStorage;
-                //this.Storage.ApplicationData.GlobalSettings.PropertyChanged += GlobalSettingsOnPropertyChanged;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(prototypeStorage));
-            }
-
-            this.Construct();
-        }
         
         protected ViewModelBase(IRegionManager? regionManager, IEventAggregator? eventAggregator, Storage? storage)
         {
@@ -115,20 +84,11 @@ namespace H.Avalonia.ViewModels
 
         
         #region Properties
-        /// <summary>
-        /// A storage file that contains various data items that are shored between viewmodels are passed around the system. This storage
-        /// item is instantiated using Prism and through Dependency Injection, is passed within the system.
-        /// </summary>
-        public PrototypeStorage? PrototypeStorage
-        {
-            get => _prototypeStorage;
-            set => SetProperty(ref _prototypeStorage, value);
-        }
         
         public Storage Storage
         {
-            get { return _storage; }
-            set { SetProperty(ref _storage, value); }
+            get => _storage;
+            set => SetProperty(ref _storage, value);
         }
         
         public IEventAggregator EventAggregator { get; set; }
@@ -164,16 +124,13 @@ namespace H.Avalonia.ViewModels
         // If this isn't readonly, then each view model will get a different instance of this property and the instances will be out of sync when one copy of the active farm is updated.
         // The issue is that an instance of this class 'ViewModelBase' is created for each class that inherits from it which is pretty much all view models - therefore unless this property
         // is readonly (returns same object each time), then all view models will get different copies of the ActiveFarm which is not what we want.
-        // public Farm ActiveFarm
-        // {
-        //     get { return this.Storage.ApplicationData.GlobalSettings.ActiveFarm; }
-        // }
+        public Farm ActiveFarm => Storage.ApplicationData.GlobalSettings.ActiveFarm;
 
-        // public ObservableCollection<Farm> CopiedFarmsUsedForSimulation
-        // {
-        //     get { return _copiedFarmsUsedForSimulation; }
-        //     set { SetProperty(ref _copiedFarmsUsedForSimulation, value); }
-        // }
+        public ObservableCollection<Farm> CopiedFarmsUsedForSimulation
+        {
+            get { return _copiedFarmsUsedForSimulation; }
+            set { SetProperty(ref _copiedFarmsUsedForSimulation, value); }
+        }
 
         public EmissionDisplayUnits SelectedEmissionDisplayUnits
         {
