@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="30.0.1" />
-    <PackageReference Include="Mapsui.Avalonia" Version="4.0.0" />
-    <PackageReference Include="Mapsui.Extensions" Version="4.0.0" />
+    <PackageReference Include="Mapsui.Avalonia" Version="4.1.0" />
+    <PackageReference Include="Mapsui.Extensions" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Prism.Avalonia" Version="8.1.97.11000" />
     <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11000" />
