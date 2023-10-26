@@ -286,6 +286,15 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving Data.
+        /// </summary>
+        public static string HeadingSavingData {
+            get {
+                return ResourceManager.GetString("HeadingSavingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Placeholder version.
         /// </summary>
         public static string HolosVersionNumber {
@@ -822,6 +831,15 @@ namespace H.Avalonia.Core.Properties {
         public static string MessageRestartRequired {
             get {
                 return ResourceManager.GetString("MessageRestartRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving data before closing the application. Please wait..
+        /// </summary>
+        public static string MessageSavingData {
+            get {
+                return ResourceManager.GetString("MessageSavingData", resourceCulture);
             }
         }
         

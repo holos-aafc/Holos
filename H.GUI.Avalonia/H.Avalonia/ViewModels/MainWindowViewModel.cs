@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using H.Avalonia.Core;
 using H.Core;
 using H.Core.Services;
@@ -57,6 +59,12 @@ public class MainWindowViewModel : ViewModelBase
     /// <returns></returns>
     private async Task OnClosingSaveAsync()
     {
+        NotificationManager?.Show(new Notification(
+            title: Core.Properties.Resources.HeadingSavingData,
+            message: Core.Properties.Resources.MessageSavingData,
+            type: NotificationType.Information,
+            expiration: TimeSpan.FromSeconds(15))
+        );
         Trace.TraceInformation($"{nameof(MainWindowViewModel)}.{nameof(OnClosingSaveAsync)}: saving farm to storage");
         await Storage.SaveAsync();
         HasDataSaveCompletedOnQuit = true;

@@ -95,4 +95,10 @@
     <data name="HeadingRestartRequired" xml:space="preserve">
         <value>Redémarrage requis</value>
     </data>
+    <data name="HeadingSavingData" xml:space="preserve">
+        <value>Sauvegarde des données</value>
+    </data>
+    <data name="MessageSavingData" xml:space="preserve">
+        <value>Sauvegarde des données avant de fermer l'application. S'il vous plaît, attendez.</value>
+    </data>
 </root>

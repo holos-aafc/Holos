@@ -466,4 +466,10 @@ Hassan Afzaal</value>
   <data name="Disclaimer_Ireland" xml:space="preserve">
     <value>Holos - Irish version</value>
   </data>
+  <data name="HeadingSavingData" xml:space="preserve">
+    <value>Saving Data</value>
+  </data>
+  <data name="MessageSavingData" xml:space="preserve">
+    <value>Saving data before closing the application. Please wait.</value>
+  </data>
 </root>
