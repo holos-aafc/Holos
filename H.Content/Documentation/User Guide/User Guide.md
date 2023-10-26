@@ -3428,10 +3428,13 @@ __The first argument must be the full directory path to your farms folder.__
 
 Following this directory path, and in any order, the following command flags can be used:
 - -i : your input .json file. This is case sensitive and requires the file extension.
-- -s : a configured .settings file within the farms folder. This input flag is only available if the -i flag is also used. This is also case sensitive and requires the file extension.
+- -f : a folder of .json files for importing multiple farms. This is case sensitive. 
+- -s : a configured .settings file within the farms folder. This input flag is only available if the -i and/or -f flag is also used. This is also case sensitive and requires the file extension.
 - -u : your chosen unit of measurement, "metric" or "imperial". This is not case sensitive.
 - -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file.
-- -o : output directory path for outputs. 
+- -o : output directory path for outputs.
+
+Input .json files, input folders, and .SETTINGS files must be in the given farms folder.
 
 If you have built the solution from source code, the CLI executable will be found with the ..\H\H.CLI\bin\Debug folder of your local repository. 
 
