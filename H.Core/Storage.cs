@@ -181,15 +181,13 @@ namespace H.Core
         /// <param name="path"></param>
         private void SaveInternal(string path)
         {
-            using (StreamWriter fileStream = File.CreateText(path))
-            {
-                JsonSerializer serializer = new JsonSerializer();
+            using StreamWriter fileStream = File.CreateText(path);
+            JsonSerializer serializer = new JsonSerializer();
 
-                // Serializer and deserializer must both have this set to Auto
-                serializer.TypeNameHandling = TypeNameHandling.Auto;
+            // Serializer and deserializer must both have this set to Auto
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
-            }
+            serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
         }
 
         /// <summary>
@@ -201,17 +199,15 @@ namespace H.Core
         {
             return Task.Run(() =>
             {
-                using (StreamWriter fileStream = File.CreateText(path))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
+                using StreamWriter fileStream = File.CreateText(path);
+                JsonSerializer serializer = new JsonSerializer();
 
-                    // Serializer and deserializer must both have this set to Auto
-                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+                // Serializer and deserializer must both have this set to Auto
+                serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                    serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
-                    Trace.TraceInformation($"{nameof(Storage)}.{nameof(SaveInternalAsync)}: data serialization completed.");
-                    HasSaveCompleted = true;
-                }
+                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
+                Trace.TraceInformation($"{nameof(Storage)}.{nameof(SaveInternalAsync)}: data serialization completed.");
+                HasSaveCompleted = true;
             });
         }
 
@@ -230,18 +226,14 @@ namespace H.Core
 
 
             // Use streams instead of File.ReadAllText() to prevent OutOfMemoryExceptions when reading large files
-            using (StreamReader r = new StreamReader(pathToStorageFile))
-            {
-                using (JsonReader reader = new JsonTextReader(r))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
+            using StreamReader r = new StreamReader(pathToStorageFile);
+            using JsonReader reader = new JsonTextReader(r);
+            JsonSerializer serializer = new JsonSerializer();
 
-                    // Serializer and deserializer must both have this set to Auto
-                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+            // Serializer and deserializer must both have this set to Auto
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                    return serializer.Deserialize<ApplicationData>(reader);
-                }
-            }
+            return serializer.Deserialize<ApplicationData>(reader);
         }
 
         /// <summary>
@@ -440,17 +432,13 @@ namespace H.Core
 
             if (!File.Exists(fullpath))
             {
-                using (StreamWriter sw = File.CreateText(fullpath))
-                {
-                    sw.WriteLine(e.ToString());
-                }
+                using StreamWriter sw = File.CreateText(fullpath);
+                sw.WriteLine(e.ToString());
             }
             else
             {
-                using (StreamWriter sw = File.AppendText(fullpath))
-                {
-                    sw.WriteLine(e.ToString());
-                }
+                using StreamWriter sw = File.AppendText(fullpath);
+                sw.WriteLine(e.ToString());
             }
         }
 
