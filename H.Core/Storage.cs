@@ -168,7 +168,7 @@ namespace H.Core
         /// <returns>The full path to the backup file.</returns>
         private string GetFullPathToBackupFile(int backupNumber, out string backupFileName)
         {
-            backupFileName = _backupFilesInDirectory.ElementAt(backupNumber).ToString();
+            backupFileName = _backupFilesInDirectory.ElementAt(backupNumber).Name;
             string pathToBackupFile = CreateFileLocationPath(backupFileName, isBackupPath: true);
 
             return pathToBackupFile;
