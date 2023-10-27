@@ -14,6 +14,7 @@ using H.Infrastructure;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
+using H.Avalonia.Views.SupportingViews;
 
 namespace H.Avalonia.ViewModels.SupportingViewModels;
 
@@ -28,7 +29,6 @@ public class DisclaimerViewModel : ViewModelBase
         private readonly UserRegion _startupRegion;
         private UserRegion _selectedUserRegion;
         private readonly IRegionManager _regionManager = null!;
-
         private bool _showLanguageBox;
         private string _aboutHolosString;
         private string _toBeKeptInformedString;

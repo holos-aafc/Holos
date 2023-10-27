@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="clr-namespace:H.Avalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="120"
-             x:Class="H.Avalonia.Views.ToolbarView">
+             x:Class="H.Avalonia.Views.SupportingViews.ToolbarView">
     <Design.DataContext>
         <viewmodels:ToolbarViewModel/>
     </Design.DataContext>

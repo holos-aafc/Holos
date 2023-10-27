@@ -62,6 +62,10 @@
       <DependentUpon>DeleteRowDialog.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SupportingViews\ToolbarView.axaml.cs">
+      <DependentUpon>ToolbarView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
