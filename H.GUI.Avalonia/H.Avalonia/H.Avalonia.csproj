@@ -66,6 +66,10 @@
       <DependentUpon>ToolbarView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SupportingViews\FooterView.axaml.cs">
+      <DependentUpon>FooterView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

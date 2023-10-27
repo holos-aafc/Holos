@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodels="clr-namespace:H.Avalonia.ViewModels"
+             xmlns:supportingViewModels="clr-namespace:H.Avalonia.ViewModels.SupportingViewModels"
              mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="60"
-             x:Class="H.Avalonia.Views.FooterView">
+             x:Class="H.Avalonia.Views.SupportingViews.FooterView">
     <Design.DataContext>
-        <viewmodels:FooterViewModel/>
+        <supportingViewModels:FooterViewModel/>
     </Design.DataContext>
     <Image Width="70" 
            Source="{StaticResource CanadaLogo}"
