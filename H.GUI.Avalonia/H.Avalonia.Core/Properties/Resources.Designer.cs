@@ -835,11 +835,20 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving data before closing the application. Please wait..
+        ///   Looks up a localized string similar to Application data is being saved..
         /// </summary>
         public static string MessageSavingData {
             get {
                 return ResourceManager.GetString("MessageSavingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving data before closing the application. Please wait..
+        /// </summary>
+        public static string MessageSavingDataOnExit {
+            get {
+                return ResourceManager.GetString("MessageSavingDataOnExit", resourceCulture);
             }
         }
         

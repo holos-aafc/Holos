@@ -6,7 +6,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.VisualTree;
 using H.Core;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Enumerations;
@@ -179,6 +181,14 @@ namespace H.Avalonia.ViewModels
             //this.ResultsCommand = new DelegateCommand(this.OnResults);
 
             this.UnitCalculator = new UnitsOfMeasurementCalculator();
+        }
+
+        protected void CloseNotification(Notification notification)
+        {
+            var cards = NotificationManager.GetVisualChildren().FirstOrDefault() is ReversibleStackPanel panel ?
+                panel.Children.OfType<NotificationCard>() : Array.Empty<NotificationCard>();
+            
+            cards.First(x => x.Content == notification).Close();
         }
         
         #endregion

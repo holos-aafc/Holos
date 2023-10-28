@@ -469,7 +469,10 @@ Hassan Afzaal</value>
   <data name="HeadingSavingData" xml:space="preserve">
     <value>Saving Data</value>
   </data>
-  <data name="MessageSavingData" xml:space="preserve">
+  <data name="MessageSavingDataOnExit" xml:space="preserve">
     <value>Saving data before closing the application. Please wait.</value>
+  </data>
+  <data name="MessageSavingData" xml:space="preserve">
+    <value>Application data is being saved.</value>
   </data>
 </root>

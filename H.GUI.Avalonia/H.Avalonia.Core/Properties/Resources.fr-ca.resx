@@ -98,7 +98,10 @@
     <data name="HeadingSavingData" xml:space="preserve">
         <value>Sauvegarde des données</value>
     </data>
-    <data name="MessageSavingData" xml:space="preserve">
+    <data name="MessageSavingDataOnExit" xml:space="preserve">
         <value>Sauvegarde des données avant de fermer l'application. S'il vous plaît, attendez.</value>
+    </data>
+    <data name="MessageSavingData" xml:space="preserve">
+        <value>Les données de l'application sont en cours d'enregistrement.</value>
     </data>
 </root>

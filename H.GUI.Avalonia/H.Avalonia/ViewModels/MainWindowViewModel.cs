@@ -61,7 +61,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         NotificationManager?.Show(new Notification(
             title: Core.Properties.Resources.HeadingSavingData,
-            message: Core.Properties.Resources.MessageSavingData,
+            message: Core.Properties.Resources.MessageSavingDataOnExit,
             type: NotificationType.Information,
             expiration: TimeSpan.FromSeconds(15))
         );

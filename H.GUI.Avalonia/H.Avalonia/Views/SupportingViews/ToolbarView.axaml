@@ -8,5 +8,18 @@
     <Design.DataContext>
         <supportingViewModels:ToolbarViewModel/>
     </Design.DataContext>
-    Toolbar
+    <Grid ColumnDefinitions="*">
+        <Menu  Grid.Column="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save"
+                          Width="200"
+                          Padding="30,5,0,5"
+                          Command="{Binding SaveCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Settings"/>
+            <MenuItem Header="Tools"/>
+            <MenuItem Header="About"/>
+        </Menu>
+    </Grid>
+    
 </UserControl>
