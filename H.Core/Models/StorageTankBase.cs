@@ -127,5 +127,10 @@ namespace H.Core.Models
         } 
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Year)}: {Year}";
+        }
     }
 }

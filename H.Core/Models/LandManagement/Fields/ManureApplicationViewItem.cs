@@ -28,7 +28,6 @@ namespace H.Core.Models.LandManagement.Fields
         private double _amountOfNitrogenAppliedPerHectare;
 
         private ManureAnimalSourceTypes _manureAnimalSourceType;
-        private DefaultManureCompositionData _defaultManureCompositionData;
         private ManureApplicationTypes _manureApplicationTypes;
 
         private ObservableCollection<ManureApplicationTypes> _availableManureApplicationTypes;
@@ -129,19 +128,6 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _amountOfNitrogenAppliedPerHectare, value);
         }
 
-        public DefaultManureCompositionData DefaultManureCompositionData
-        {
-            get => _defaultManureCompositionData;
-            set => SetProperty(ref _defaultManureCompositionData, value, () =>
-            {
-                if (this.DefaultManureCompositionData != null)
-                {
-                    this.DefaultManureCompositionData.PropertyChanged -= DefaultManureCompositionDataOnPropertyChanged;
-                    this.DefaultManureCompositionData.PropertyChanged += DefaultManureCompositionDataOnPropertyChanged;
-                }
-            });
-        }
-
         /// <summary>
         /// Indicates the method that was used to apply the manure to the land
         /// </summary>
@@ -170,10 +156,6 @@ namespace H.Core.Models.LandManagement.Fields
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {                     
-        }
-
-        private void DefaultManureCompositionDataOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {           
         }
 
         #endregion

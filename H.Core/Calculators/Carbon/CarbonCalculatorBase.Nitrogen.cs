@@ -177,6 +177,8 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public double N2O_NFromOrganicNitrogenLeaching { get; set; }
 
+        public double N2O_NFromOrganicNitrogenLeachingExported { get; set; }
+
         /// <summary>
         /// (kg NO3-N ha^-1)
         /// </summary>
@@ -408,6 +410,9 @@ namespace H.Core.Calculators.Carbon
             this.N2O_NFromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * emissionFactorLeaching) +
                                                     indirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching + 
                                                     indirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
+
+            // Equation 2.6.6-7
+            //this.N2O_NFromOrganicNitrogenLeachingExported = 
         }
 
         protected void CalculateActualAmountsLeached(
@@ -880,6 +885,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-33
             this.CurrentYearResults.TotalNitrogenOutputs = this.CurrentYearResults.TotalUptake +
                                                            this.CurrentYearResults.TotalNitrogenEmissions;
+
             this.CurrentYearResults.DifferenceBetweenInputsAndOutputs = this.CurrentYearResults.TotalNitrogenInputs -
                                                                         this.CurrentYearResults.TotalNitrogenOutputs;
 

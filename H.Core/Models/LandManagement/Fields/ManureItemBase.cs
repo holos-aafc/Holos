@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using H.Core.Enumerations;
+using H.Core.Providers.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
@@ -12,6 +14,7 @@ namespace H.Core.Models.LandManagement.Fields
         private ManureStateType _manureStateType;
         private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ManureLocationSourceType manureLocationSourceType;
+        private DefaultManureCompositionData _defaultManureCompositionData;
 
         #endregion
 
@@ -64,6 +67,27 @@ namespace H.Core.Models.LandManagement.Fields
             get => manureLocationSourceType; 
             set => SetProperty(ref manureLocationSourceType, value); 
         }
+
+        public DefaultManureCompositionData DefaultManureCompositionData
+        {
+            get => _defaultManureCompositionData;
+            set => SetProperty(ref _defaultManureCompositionData, value, () =>
+            {
+                if (this.DefaultManureCompositionData != null)
+                {
+                    this.DefaultManureCompositionData.PropertyChanged -= DefaultManureCompositionDataOnPropertyChanged;
+                    this.DefaultManureCompositionData.PropertyChanged += DefaultManureCompositionDataOnPropertyChanged;
+                }
+            });
+        }
+
+        #endregion
+
+        #region Event Handlers
+        
+        private void DefaultManureCompositionDataOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+        } 
 
         #endregion
     }

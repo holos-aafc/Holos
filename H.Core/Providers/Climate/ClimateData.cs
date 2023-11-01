@@ -28,6 +28,7 @@ namespace H.Core.Providers.Climate
         /// Use a dictionary to lookup daily values since using a list with so many items is expensive
         /// </summary>
         private Dictionary<Tuple<int, int>, List<DailyClimateData>> _dataByYearAndMonth = new Dictionary<Tuple<int, int>, List< DailyClimateData>>();
+        private Dictionary<Tuple<int, int, int>, DailyClimateData> _dataByDate = new Dictionary<Tuple<int, int, int>, DailyClimateData>();
 
         #endregion
 
@@ -57,11 +58,21 @@ namespace H.Core.Providers.Climate
             {
                 var addedItem = e.NewItems[0] as DailyClimateData;
 
-                var key = new Tuple<int, int>(addedItem.Year, addedItem.Date.Month);
+                var monthAndYearKey = new Tuple<int, int>(addedItem.Year, addedItem.Date.Month);
+                var monthYearAndDayKey = new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day);
 
-                if (_dataByYearAndMonth.ContainsKey(key))
+                if (_dataByDate.ContainsKey(monthYearAndDayKey))
                 {
-                    _dataByYearAndMonth[key].Add(addedItem);
+                    _dataByDate[monthYearAndDayKey] = addedItem;
+                }
+                else
+                {
+                    _dataByDate.Add(new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day), addedItem);
+                }
+
+                if (_dataByYearAndMonth.ContainsKey(monthAndYearKey))
+                {
+                    _dataByYearAndMonth[monthAndYearKey].Add(addedItem);
                 }
                 else
                 {
@@ -296,14 +307,14 @@ namespace H.Core.Providers.Climate
 
         public double GetMeanTemperatureForDay(DateTime dateTime)
         {
-            var dailyResult = this.DailyClimateData.SingleOrDefault(x => x.Date.Equals(dateTime));
-            if (dailyResult != null)
+            var key = new Tuple<int, int, int>(dateTime.Year, dateTime.Date.Month, dateTime.Date.Day);
+            if (_dataByDate.ContainsKey(key))
             {
-                return dailyResult.MeanDailyAirTemperature;
+                return _dataByDate[key].MeanDailyAirTemperature;
             }
             else
             {
-                return this.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months) dateTime.Month);
+                return this.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
             }
         }
 

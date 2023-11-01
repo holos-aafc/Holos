@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
+using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Test
@@ -34,14 +35,25 @@ namespace H.Core.Test
         public Farm GetTestFarm()
         {
             var farm = new Farm();
-            var component = new BackgroundingComponent();
+            var backgroundingComponent = new BackgroundingComponent();
             var group = new AnimalGroup();
+            @group.GroupType = AnimalType.BeefBackgrounderHeifer;
+
+            var dairyComponent = new DairyComponent();
+            var cowsGroup = new AnimalGroup();
+            cowsGroup.GroupType = AnimalType.DairyLactatingCow;
+
             var managementPeriod = new ManagementPeriod();
             managementPeriod.Start = DateTime.Now;
             managementPeriod.End = managementPeriod.Start.AddDays(30 * 2);
 
-            farm.Components.Add(component);
-            component.Groups.Add(group);
+            managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+
+            farm.Components.Add(backgroundingComponent);
+            farm.Components.Add(dairyComponent);
+
+            backgroundingComponent.Groups.Add(group);
+            dairyComponent.Groups.Add(cowsGroup);
 
             group.ManagementPeriods.Add(managementPeriod);
 
@@ -49,8 +61,8 @@ namespace H.Core.Test
              * Manure exports
              */
 
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() {DateOfExport = DateTime.Now, Amount = 1000});
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000 });
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() {DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy });
 
             return farm;
         }

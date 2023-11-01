@@ -26,6 +26,11 @@ namespace H.Core.Models
 
         #region Public Methods
 
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(AnimalType)}: {AnimalType}";
+        }
+
         #endregion
 
         #region Event Handlers

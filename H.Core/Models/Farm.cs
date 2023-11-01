@@ -633,6 +633,35 @@ namespace H.Core.Models
 
         #region Public Methods
 
+        public List<int> GetYearsWithAnimals()
+        {
+            var years  = new List<int>();
+
+            foreach (var animalComponentBase in this.AnimalComponents)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var startYear = animalGroupManagementPeriod.Start.Year;
+                        var endYear = animalGroupManagementPeriod.End.Year;
+
+                        if (years.Contains(startYear) == false)
+                        {
+                            years.Add(startYear);
+                        }
+
+                        if (years.Contains(endYear) == false)
+                        {
+                            years.Add(endYear);
+                        }
+                    }
+                }
+            }
+
+            return years;
+        }
+
         public List<ManureStateType> GetManureStateTypesInUseOnFarm(AnimalType animalType)
         {
             var componentCategory = animalType.GetComponentCategoryFromAnimalType();

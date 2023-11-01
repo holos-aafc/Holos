@@ -19,7 +19,7 @@ namespace H.Core.Calculators.Infrastructure
         public double TotalFlowOfDegradedVolatileSolids { get; set; }
 
         /// <summary>
-        /// (t day^-1)
+        /// (kg day^-1)
         /// </summary>
         public double FlowRateOfAllSubstratesInDigestate { get; set; }
 

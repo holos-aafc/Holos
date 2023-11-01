@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
+using H.Infrastructure;
 
 namespace H.Core.Services.Animals
 {
@@ -14,6 +18,8 @@ namespace H.Core.Services.Animals
     public class ManureService : IManureService
     {
         #region Fields
+
+        private readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
 
         private readonly IAnimalService _animalService;
         private readonly List<ManureTank> _manureTanks;
@@ -53,6 +59,8 @@ namespace H.Core.Services.Animals
             ManureLocationSourceType.Imported,
         };
 
+        private IMapper _manureCompositionMapper;
+
         #endregion
 
         #region Constructors
@@ -69,11 +77,28 @@ namespace H.Core.Services.Animals
             }
 
             _manureTanks = new List<ManureTank>();
+
+            var manureCompositionMapperConfiguration = new MapperConfiguration(x =>
+            {
+                x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>()
+                    .ForMember(y => y.Guid, z => z.Ignore());
+            });
+
+            _manureCompositionMapper = manureCompositionMapperConfiguration.CreateMapper();
         }
 
         #endregion
 
         #region Public Methods
+
+        public double GetTotalAmountOfManureExported(int year, Farm farm, AnimalType animalType)
+        {
+            var total = 0d;
+
+            total = farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year && x.AnimalType == animalType).Sum(y => y.Amount);
+
+            return total;
+        }
 
         public double GetTotalAmountOfManureExported(int year, Farm farm)
         {
@@ -94,19 +119,126 @@ namespace H.Core.Services.Animals
             return _validManureTypes;
         }
 
+        public List<AnimalType> GetManureTypesProducedOnFarm(Farm farm)
+        {
+            var animalTypes = new List<AnimalType>();
+
+            foreach (var animalComponent in farm.AnimalComponents)
+            {
+                foreach (var animalComponentGroup in animalComponent.Groups)
+                {
+                    var groupType = animalComponentGroup.GroupType;
+                    var category = groupType.GetCategory();
+
+                    if (animalTypes.Contains(category) == false && groupType != AnimalType.NotSelected)
+                    {
+                        animalTypes.Add(category);
+                    }
+                }
+            }
+
+            return animalTypes;
+        }
+
+
         public List<ManureLocationSourceType> GetValidManureLocationSourceTypes()
         {
             return _validManureLocationSourceTypes;
+        }
+
+        public List<ManureStateType> GetValidManureStateTypes(
+            Farm farm, 
+            ManureLocationSourceType locationSourceType,
+            AnimalType animalType)
+        {
+            var result = new List<ManureStateType>();
+
+            if (farm == null)
+            {
+                return result;
+            }
+
+            // If manure is imported, all options should be made available to the user
+            if (locationSourceType == ManureLocationSourceType.Imported)
+            {
+                var typesForAnimal = _manureHandlingSystemProvider.GetValidManureStateTypesByAnimalCategory(animalType).Where(x => x != ManureStateType.Pasture);
+                result.AddRange(typesForAnimal);
+            }
+            else
+            {
+                var typesForExistingSystems = farm.GetManureStateTypesInUseOnFarm(animalType);
+                result.AddRange(typesForExistingSystems);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// When a user adds a manure application, the choices available for the handling system will vary depending in the animal type (beef, dairy, etc.)
+        /// </summary>
+        public void SetValidManureStateTypes(ManureItemBase manureItemBase, Farm farm)
+        {
+            var types = this.GetValidManureStateTypes(farm, manureItemBase.ManureLocationSourceType, manureItemBase.AnimalType);
+            manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.UpdateItems(types);
+
+            // Set the selected item to the first item in the updated list
+            manureItemBase.ManureStateType = manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
         }
 
         public double GetAmountAvailableForExport(int year, Farm farm)
         {
             var amount = 0d;
 
-            foreach (var animalType in _validManureTypes)
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
             {
-                var tank = this.GetTank(animalType, year, farm);
-                amount += tank.VolumeRemainingInTank;
+                amount += manureTank.VolumeRemainingInTank;
+            }
+
+            return amount;
+        }
+
+        public int GetYearHighestVolumeRemaining()
+        {
+            var tanksOrderedByAvailableManure = _manureTanks.OrderByDescending(x => x.VolumeRemainingInTank).ToList();
+
+            if (tanksOrderedByAvailableManure.Any())
+            {
+                return tanksOrderedByAvailableManure.First().Year;
+            }
+            else
+            {
+                return DateTime.Now.Year;
+            }
+        }
+
+        public DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm)
+        {
+            if (manureItemBase != null && farm != null)
+            {
+                var manureComposition = farm.GetManureCompositionData(
+                    manureStateType: manureItemBase.ManureStateType,
+                    animalType: manureItemBase.AnimalType);
+
+                // Make a copy
+                var mappedItem = _manureCompositionMapper.Map<DefaultManureCompositionData>(manureComposition);
+
+                return mappedItem;
+            }
+            else
+            {
+                return new DefaultManureCompositionData();
+            }
+        }
+
+        public double GetAmountAvailableForExport(int year, Farm farm, AnimalType animalType)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.SingleOrDefault(x => x.AnimalType == animalType && x.Year == year);
+            if (tank != null)
+            {
+                amount = tank.VolumeRemainingInTank;
             }
 
             return amount;
@@ -114,10 +246,18 @@ namespace H.Core.Services.Animals
 
         public void CalculateResults(Farm farm)
         {
-            foreach (var manureTank in _manureTanks.ToList())
+            // Clear tanks since animal management may have changed
+            _manureTanks.Clear();
+
+            var animalTypes = this.GetManureTypesProducedOnFarm(farm);
+            var years = farm.GetYearsWithAnimals();
+
+            foreach (var year in years)
             {
-                this.ResetTank(manureTank, farm);
-                this.UpdateAmountsUsed(manureTank, farm);
+                foreach (var animalType in animalTypes)
+                {
+                    this.GetTank(animalType, year, farm);
+                }
             }
         }
 

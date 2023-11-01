@@ -12,8 +12,7 @@ using H.CLI.ComponentKeys;
 using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
+
 using IConverter = H.CLI.Interfaces.IConverter;
 using System.Data;
 using System.Globalization;
