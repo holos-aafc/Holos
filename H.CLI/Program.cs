@@ -25,9 +25,11 @@ namespace H.CLI
         {
             ShowBanner();
 
+            // CLI arguments access 
             CLIArguments argValues = new CLIArguments();
             argValues.ParseArgs(args);
 
+            // CLI Language 
             var userCulture = CultureInfo.CurrentCulture;
             CLILanguageConstants.SetCulture(userCulture);
 
@@ -38,30 +40,39 @@ namespace H.CLI
 
             // Farms exported from GUI access
             var exportedFarmsHandler = new ExportedFarmsHandler();
-            
-            _ = exportedFarmsHandler.Initialize(farmsFolderPath, argValues);
+            List<string> generatedFarmFolders = new List<string>();
 
+            // Separate initialize functions with and without CLI arguments
+            if (argValues.FileName != string.Empty || argValues.FolderName != string.Empty)
+            {
+                generatedFarmFolders = exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, argValues);
+            }
+            else
+            {
+                _ = exportedFarmsHandler.Initialize(farmsFolderPath);
+            }
+
+            // Ensure output directory is not a network drive 
             DriveInfoWrapper givenPathDriveInfoWrapper = null;
             if (!string.IsNullOrEmpty(argValues.OutputPath))
             {
                 DriveInfo givenPathDriveInfo = new DriveInfo(argValues.OutputPath);
                 givenPathDriveInfoWrapper = new DriveInfoWrapper(givenPathDriveInfo);
             }
-
             InfrastructureConstants.CheckOutputDirectoryPath(argValues.OutputPath, givenPathDriveInfoWrapper, farmsFolderPath);
 
+            // Units of measurement access
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 
             var applicationData = new ApplicationData();
-
             var storage = new Storage();
             var templateFarmHandler = new TemplateFarmHandler();
             var processorHandler = new ProcessorHandler();
 
-            //Get The Directories in the "Farms" folder
-            var listOfFarmPaths = Directory.GetDirectories(farmsFolderPath);
+            // Get The Directories in the "Farms" folder
+            var listOfFarmPaths = directoryHandler.getListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
-            //Set up the geographic data provider only once to speed up processing.
+            // Set up the geographic data provider only once to speed up processing.
             var geographicDataProvider = new GeographicDataProvider();
             geographicDataProvider.Initialize();
 

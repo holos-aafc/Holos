@@ -4,7 +4,7 @@ using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
-    public class ManureExportViewItem : ModelBase
+    public class ManureExportViewItem : ManureItemBase
     {
         #region Fields
 

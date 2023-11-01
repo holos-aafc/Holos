@@ -3053,7 +3053,7 @@
     <value>Fumier quotidien ajouté au digesteur</value>
   </data>
   <data name="LabelDailyPercentageOfManureAddedToAd" xml:space="preserve">
-    <value>Daily proportion of manure added (%)</value>
+    <value>Daily percentage of manure added (%)</value>
   </data>
   <data name="LabelDefaultLossForSupplementalFeeding" xml:space="preserve">
     <value>perte d’alimentation supplémentaire</value>
@@ -5564,5 +5564,14 @@ Daily emissions estimates are multipled by the total number of production days i
   </data>
   <data name="LabelAmountOfManureRemainingForExport" xml:space="preserve">
     <value>Amount of manure available for export</value>
+  </data>
+  <data name="LabelTotalManureExported" xml:space="preserve">
+    <value>Total manure exported</value>
+  </data>
+  <data name="LabelTotalManureProducedOnFarm" xml:space="preserve">
+    <value>Total manure produced on farm</value>
+  </data>
+  <data name="TitleManureExportDetails" xml:space="preserve">
+    <value>Manure Export Details</value>
   </data>
 </root>

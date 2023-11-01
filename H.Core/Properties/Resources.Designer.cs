@@ -8944,7 +8944,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily proportion of manure added (%).
+        ///   Looks up a localized string similar to Daily percentage of manure added (%).
         /// </summary>
         public static string LabelDailyPercentageOfManureAddedToAd {
             get {
@@ -11410,11 +11410,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total manure exported.
+        /// </summary>
+        public static string LabelTotalManureExported {
+            get {
+                return ResourceManager.GetString("LabelTotalManureExported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total manure N available for land application.
         /// </summary>
         public static string LabelTotalManureNitrogenAvailableForLandApplication {
             get {
                 return ResourceManager.GetString("LabelTotalManureNitrogenAvailableForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total manure produced on farm.
+        /// </summary>
+        public static string LabelTotalManureProducedOnFarm {
+            get {
+                return ResourceManager.GetString("LabelTotalManureProducedOnFarm", resourceCulture);
             }
         }
         
@@ -14916,6 +14934,15 @@ namespace H.Core.Properties {
         public static string TitleLandApplication {
             get {
                 return ResourceManager.GetString("TitleLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure Export Details.
+        /// </summary>
+        public static string TitleManureExportDetails {
+            get {
+                return ResourceManager.GetString("TitleManureExportDetails", resourceCulture);
             }
         }
         

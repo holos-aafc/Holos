@@ -11,10 +11,13 @@ namespace H.CLI.UserInput
         #region Fields
 
         public static string _fileName;
+        public bool _isFileNameFound; 
         public static string _settings;
         public static string _units;
         public static string _outputPath;
         public static string _polygonID;
+        public static string _folderName;
+        public bool _isFolderNameFound;
 
         #endregion
 
@@ -22,7 +25,8 @@ namespace H.CLI.UserInput
 
         public CLIArguments ()
         {
-            _fileName = _settings = _units = _outputPath = _polygonID = string.Empty;
+            _fileName = _settings = _units = _outputPath = _polygonID = _folderName = string.Empty;
+            _isFileNameFound = _isFolderNameFound = false;
         }
 
         #endregion
@@ -34,6 +38,9 @@ namespace H.CLI.UserInput
         public string Units { get { return _units; } set { _units = value; } }
         public string OutputPath { get { return _outputPath; } set { _outputPath = value; } }
         public string PolygonID { get { return _polygonID; } set { _polygonID = value; } }
+        public string FolderName { get { return _folderName;} set { _folderName = value; } }
+        public bool IsFileNameFound {  get { return _isFileNameFound; } set { _isFileNameFound = value; } }
+        public bool IsFolderNameFound { get { return _isFolderNameFound; } set { _isFolderNameFound = value; } }
 
         #endregion
 
@@ -66,6 +73,11 @@ namespace H.CLI.UserInput
                 else if (arg == "-p" && i + 1 < args.Length)
                 {
                     PolygonID = args[i+1];
+                    i++;
+                }
+                else if (arg == "-f" && i + 1 < args.Length)
+                {
+                    FolderName = args[i+1];
                     i++;
                 }
             }

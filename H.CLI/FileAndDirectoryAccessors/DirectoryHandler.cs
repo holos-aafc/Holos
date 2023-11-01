@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using H.CLI.TemporaryComponentStorage;
+using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Providers;
 
@@ -246,6 +247,30 @@ namespace H.CLI.FileAndDirectoryAccessors
                 } while (_inputHelper.IsYesResponse(usePreviousDirectory) == false || _inputHelper.IsNoResponse(usePreviousDirectory) == false);
             }
 
+        }
+
+        public string[] getListOfFarms(string farmsFolderPath, CLIArguments argvalues, string pathToExportedFarm, List<string> generatedFarmFolders)
+        {
+            if (!argvalues.IsFileNameFound && !argvalues.IsFolderNameFound)
+            {
+                return Directory.GetDirectories(farmsFolderPath); 
+            }
+
+            List<string> listOfFarms = new List<string>();
+           
+            if (argvalues.IsFileNameFound)
+            {
+                listOfFarms.Add(pathToExportedFarm);
+            }
+            if (argvalues.IsFolderNameFound)
+            {
+                foreach (var farmFolder in generatedFarmFolders)
+                {
+                    listOfFarms.Add(farmFolder);
+                }
+            }
+
+            return listOfFarms.ToArray();
         }
         #endregion
     }
