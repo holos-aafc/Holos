@@ -45,6 +45,8 @@ namespace H.CLI.Handlers
 
         private readonly IFieldResultsService _fieldResultsService = new FieldResultsService();
 
+        public string pathToExportedFarm = string.Empty; 
+
         #endregion
 
         #region Public Methods
@@ -53,23 +55,8 @@ namespace H.CLI.Handlers
         /// 
         /// </summary>
         /// <param name="farmsFolderPath">The root directory that will contain all of the farms</param>
-        public List<Farm> Initialize(string farmsFolderPath, CLIArguments argValues)
+        public List<Farm> Initialize(string farmsFolderPath)
         {
-            // Check if exported farm is given via command line argument
-            if (argValues.FileName != "")
-            {
-                if (InitializeWithCLArguements(farmsFolderPath, argValues))
-                {
-                    return null;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FileName);
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-            }
-            
             var pathToExportedFarms = this.PromptUserForLocationOfExportedFarms(farmsFolderPath);
             if (string.IsNullOrWhiteSpace(pathToExportedFarms))
             {
@@ -95,56 +82,107 @@ namespace H.CLI.Handlers
             return farms;
         }
 
-        public bool InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
+        public List<string> InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
         {
-            bool isExportedFarmFound = false;
             var files = Directory.GetFiles(farmsFolderPath);
+            var directories = Directory.GetDirectories(farmsFolderPath);
+            List<string> generatedFarmFolders = new List<string>();
             string path = string.Empty;
-            foreach (var myFile in files)
+
+            // If using input folder
+            if (argValues.FolderName != string.Empty)
             {
-                if (argValues.FileName == Path.GetFileName(myFile))
+                foreach (var directory in directories)
                 {
-                    path = myFile;
-                    isExportedFarmFound = true;
-                    break;
+                    if (argValues.FolderName == Path.GetFileName(directory))
+                    {
+                        path = directory;
+                        argValues.IsFolderNameFound = true;
+                        break;
+                    }
+                }
+                if (argValues.IsFolderNameFound)
+                {
+                    var farms = GetExportedFarmsFromUserSpecifiedLocation(path);
+
+                    foreach (var farm in farms)
+                    {
+                        if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+                        {
+                            ChangePolygonID(argValues, farm);
+                        }
+
+                        _ = this.CreateInputFilesForFarm(farmsFolderPath, farm, argValues);
+                        generatedFarmFolders.Add(farmsFolderPath + @"\" + farm.Name);
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FolderName);
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
-            if (isExportedFarmFound)
-            {
-                var farms = _storage.GetFarmsFromExportFile(path);
-                var farmsList = farms.ToList();
-                var exportedFarm = farmsList[0];
 
-                // PolygonID for climate configuration
-                if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+            // If using input file
+            if (argValues.FileName != string.Empty) {
+            // Check files for input farm
+                foreach (var file in files)
                 {
-                    var polygonID = int.Parse(argValues.PolygonID);
-                    var settingsHandler = new SettingsHandler();
-                    var geographicDataProvider = new GeographicDataProvider();
-                    geographicDataProvider.Initialize();
-                    settingsHandler.InitializePolygonIDList(geographicDataProvider);
-
-                    if (settingsHandler.PolygonIDList.Contains(polygonID))
+                    if (argValues.FileName == Path.GetFileName(file))
                     {
-                        var slcClimateDataProvider = new SlcClimateDataProvider();
-                        exportedFarm.PolygonId = polygonID;
-                        exportedFarm.GeographicData = geographicDataProvider.GetGeographicalData(polygonID);
-                        exportedFarm.ClimateData = slcClimateDataProvider.GetClimateData(polygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
+                        path = file;
+                        argValues.IsFileNameFound = true;
+                        break;
                     }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(String.Format(Properties.Resources.NotAValidPolygonID, argValues.PolygonID.ToString()));
-                        throw new Exception("Not A Valid Polygon ID");
-                    }
-
-                    Console.ResetColor();
                 }
+                if (argValues.IsFileNameFound)
+                {
+                    var farms = _storage.GetFarmsFromExportFile(path);
+                    var farmsList = farms.ToList();
+                    var exportedFarm = farmsList[0];
 
-                _ = this.CreateInputFilesForFarm(farmsFolderPath, exportedFarm, argValues);
+                    // PolygonID for climate configuration
+                    if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+                    {
+                        ChangePolygonID(argValues, exportedFarm);
+                    }
+
+                    _ = this.CreateInputFilesForFarm(farmsFolderPath, exportedFarm, argValues);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FileName);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
 
-            return isExportedFarmFound;
+            return generatedFarmFolders;
+        }
+
+        public void ChangePolygonID(CLIArguments argValues, Farm exportedFarm)
+        {
+            var polygonID = int.Parse(argValues.PolygonID);
+            var settingsHandler = new SettingsHandler();
+            var geographicDataProvider = new GeographicDataProvider();
+            geographicDataProvider.Initialize();
+            settingsHandler.InitializePolygonIDList(geographicDataProvider);
+
+            if (settingsHandler.PolygonIDList.Contains(polygonID))
+            {
+                var slcClimateDataProvider = new SlcClimateDataProvider();
+                exportedFarm.PolygonId = polygonID;
+                exportedFarm.GeographicData = geographicDataProvider.GetGeographicalData(polygonID);
+                exportedFarm.ClimateData = slcClimateDataProvider.GetClimateData(polygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(String.Format(Properties.Resources.NotAValidPolygonID, argValues.PolygonID.ToString()));
+                throw new Exception("Not A Valid Polygon ID");
+            }
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -157,38 +195,15 @@ namespace H.CLI.Handlers
 
             // Create a directory for the farm
             var farmDirectoryPath = this.CreateDirectoryStructureForImportedFarm(pathToFarmsDirectory, farm);
+            pathToExportedFarm = farmDirectoryPath;
 
-            bool isSettingsFileFound = false;
+            Console.WriteLine();
             if (argValues != null && argValues.Settings != "")
             {
-                var files = Directory.GetFiles(pathToFarmsDirectory);
-                string filePath = string.Empty;
-                foreach (var file in files)
-                {
-                    if (argValues.Settings == Path.GetFileName(file))
-                    {
-                        filePath = file;
-                        isSettingsFileFound = true;
-                    }
-                }
-                if (isSettingsFileFound)
-                {
-                    string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
-                    File.Move(filePath, newFilePath);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(Properties.Resources.SettingsFileNotFound, argValues.Settings);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine();
-                    Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
-                    this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
-                }
+                CopyUserSettingsFile(pathToFarmsDirectory, argValues, farmDirectoryPath, farm);
             }
             else
             {
-                Console.WriteLine();
                 Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
                 this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
             }
@@ -376,6 +391,35 @@ namespace H.CLI.Handlers
             }
 
             return createdFiles;
+        }
+
+        public void CopyUserSettingsFile(string pathToFarmsDirectory, CLIArguments argValues,  string farmDirectoryPath, Farm farm)
+        {
+            bool isSettingsFileFound = false;
+            var files = Directory.GetFiles(pathToFarmsDirectory);
+            string filePath = string.Empty;
+            foreach (var file in files)
+            {
+                if (argValues.Settings == Path.GetFileName(file))
+                {
+                    filePath = file;
+                    isSettingsFileFound = true;
+                }
+            }
+            if (isSettingsFileFound)
+            {
+                string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
+                File.Copy(filePath, newFilePath);
+                Console.WriteLine($"Copying {argValues.Settings} to {farmDirectoryPath}");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(Properties.Resources.SettingsFileNotFound, argValues.Settings);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
+                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            }
         }
 
         public string PromptUserForLocationOfExportedFarms(string farmsFolderPath)

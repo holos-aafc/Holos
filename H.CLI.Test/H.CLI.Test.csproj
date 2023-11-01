@@ -106,6 +106,7 @@
     <Compile Include="InfrastructureConstantsTest.cs" />
     <Compile Include="Processors\FieldProcessorTest.cs" />
     <Compile Include="ResourceManagerHelperTest.cs" />
+    <Compile Include="UserInput\CLIArgumentsTest.cs" />
     <Compile Include="UserInput\CLILanguageConstantsTest.cs" />
     <Compile Include="ComponentTemporaryInputs\ShelterbeltFrenchTemporaryInputTest.cs" />
     <Compile Include="Converters\ComponentConverterHandlerTest.cs" />

@@ -16,7 +16,7 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// A class to specify the details of one application of manure to a field.
     /// </summary>
-    public class ManureApplicationViewItem : ModelBase
+    public class ManureApplicationViewItem : ManureItemBase
     {
         #region Fields
 
@@ -28,13 +28,9 @@ namespace H.Core.Models.LandManagement.Fields
         private double _amountOfNitrogenAppliedPerHectare;
 
         private ManureAnimalSourceTypes _manureAnimalSourceType;
-        private ManureLocationSourceType manureLocationSourceType;
-        private ManureStateType _manureStateType;
         private DefaultManureCompositionData _defaultManureCompositionData;
         private ManureApplicationTypes _manureApplicationTypes;
-        private AnimalType _animalType;
 
-        private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ObservableCollection<ManureApplicationTypes> _availableManureApplicationTypes;
 
         #endregion
@@ -46,11 +42,6 @@ namespace H.Core.Models.LandManagement.Fields
             this.DateOfApplication = DateTime.Now;
             this.DefaultManureCompositionData = new DefaultManureCompositionData();
 
-            this.ValidManureStateTypesForSelectedTypeOfAnimalManure = new ObservableCollection<ManureStateType>()
-            {
-                ManureStateType.NotSelected,
-            };
-
             this.AvailableManureApplicationTypes = new ObservableCollection<ManureApplicationTypes>();
 
             this.PropertyChanged += OnPropertyChanged;
@@ -60,28 +51,10 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
-        /// <summary>
-        /// Each view item must have its own collection of valid state types so the table rows presented to the user will have their own distinct collection
-        /// </summary>
-        public ObservableCollection<ManureStateType> ValidManureStateTypesForSelectedTypeOfAnimalManure
-        {
-            get => _validManureStateTypesForSelectedTypeOfAnimalManure;
-            set => SetProperty(ref _validManureStateTypesForSelectedTypeOfAnimalManure, value);
-        }
-
         public ObservableCollection<ManureApplicationTypes> AvailableManureApplicationTypes
         {
             get => _availableManureApplicationTypes;
             set => SetProperty(ref _availableManureApplicationTypes, value);
-        }
-
-        /// <summary>
-        /// This must be entered by user so we can look up N, C, and P fractions for the applied manure
-        /// </summary>
-        public ManureStateType ManureStateType
-        {
-            get => _manureStateType;
-            set => SetProperty(ref _manureStateType, value);
         }
 
         /// <summary>
@@ -102,15 +75,6 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 return this.ManureApplicationMethod.GetDescription();
             }
-        }
-        
-        /// <summary>
-        /// Indicates if the manure was from livestock on farm or imported from off-farm.
-        /// </summary>
-        public ManureLocationSourceType ManureLocationSourceType 
-        { 
-            get => manureLocationSourceType; 
-            set => SetProperty(ref manureLocationSourceType, value); 
         }
 
         public DateTime DateOfApplication 
@@ -176,15 +140,6 @@ namespace H.Core.Models.LandManagement.Fields
                     this.DefaultManureCompositionData.PropertyChanged += DefaultManureCompositionDataOnPropertyChanged;
                 }
             });
-        }
-
-        /// <summary>
-        /// Animal type is required for lookups into default manure composition table since 'other animals' requires the specific animal group for lookups
-        /// </summary>
-        public AnimalType AnimalType
-        {
-            get => _animalType;
-            set => SetProperty(ref _animalType, value);
         }
 
         /// <summary>

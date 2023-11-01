@@ -195,6 +195,7 @@ namespace H.Core.Test.Providers.Climate
 
             // Verify
             File.Exists(somePath);
+            File.Delete(somePath); // Delete file test
         }
 
         #endregion
