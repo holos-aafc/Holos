@@ -80,6 +80,25 @@ namespace H.Core.Models
             return manureCompositionData;
         }
 
+        public double GetTotalNitrogenFromExportedManure()
+        {
+            var result = 0d;
+
+            foreach (var manureExportViewItem in this.ManureExportViewItems)
+            {
+                var nitrogenContent = 0d;
+                var amountOfManure = manureExportViewItem.Amount;
+                if (manureExportViewItem.DefaultManureCompositionData != null)
+                {
+                    nitrogenContent = manureExportViewItem.DefaultManureCompositionData.NitrogenContent;
+                }
+
+                result += (amountOfManure * nitrogenContent);
+            }
+
+            return result;
+        }
+
         #endregion
     }
 }

@@ -3,11 +3,12 @@ using System;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 
 namespace H.Core.Test.Models
 {
     [TestClass]
-    public class FarmTest
+    public class FarmTest : UnitTestBase
     {
         #region Tests
         
@@ -68,6 +69,55 @@ namespace H.Core.Test.Models
             var result = farm.GetTotalVolumeAppliedOfManureAppliedForMonth(monthsAndDaysData, AnimalType.Beef);
 
             Assert.AreEqual(500, result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsZeroTest()
+        {
+            var farm = base.GetTestFarm();
+
+            Assert.AreEqual(0, farm.GetTotalNitrogenFromExportedManure());
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() {NitrogenContent = 0.5}
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+
+            Assert.AreEqual(50, farm.GetTotalNitrogenFromExportedManure());
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroForMultipleExportsTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
+            };
+
+            var manureExport2 = new ManureExportViewItem()
+            {
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.25 }
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+            farm.ManureExportViewItems.Add(manureExport2);
+
+            Assert.AreEqual(75, farm.GetTotalNitrogenFromExportedManure());
         }
 
         #endregion

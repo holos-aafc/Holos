@@ -380,11 +380,10 @@ namespace H.Core.Calculators.Carbon
             this.NO_NFromOrganicNitrogen = this.N2O_NFromOrganicNitrogen * nORatio;
         }
 
-        protected void CalculateLeachingEmissions(
-            double fractionLeach,
+        protected void CalculateLeachingEmissions(double fractionLeach,
             LandApplicationEmissionResult indirectEmissionsFromLandAppliedManure,
-            double emissionFactorLeaching, 
-            LandApplicationEmissionResult indirectEmissionsFromLandAppliedDigestate)
+            double emissionFactorLeaching,
+            LandApplicationEmissionResult indirectEmissionsFromLandAppliedDigestate, Farm farm)
         {
             // Equation 2.6.6-3
             // Equation 2.7.5-3
@@ -412,7 +411,8 @@ namespace H.Core.Calculators.Carbon
                                                     indirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
 
             // Equation 2.6.6-7
-            //this.N2O_NFromOrganicNitrogenLeachingExported = 
+            //var totalExportedNitrogen = farm.GetTotalNitrogenFromExportedManure();
+            //this.N2O_NFromOrganicNitrogenLeachingExported = totalExportedNitrogen * fractionLeach * emissionFactorLeaching;
         }
 
         protected void CalculateActualAmountsLeached(
@@ -648,7 +648,7 @@ namespace H.Core.Calculators.Carbon
 
             var emissionFactorLeaching = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
-            this.CalculateLeachingEmissions(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching, totalIndirectEmissionsFromLandAppliedDigestate);
+            this.CalculateLeachingEmissions(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching, totalIndirectEmissionsFromLandAppliedDigestate, farm);
             this.CalculateActualAmountsLeached(fractionLeach, totalIndirectEmissionsFromLandAppliedManure, emissionFactorLeaching, totalIndirectEmissionsFromLandAppliedDigestate);
 
             var volatilizationFractionSoil = N2OEmissionFactorCalculator.CalculateFractionOfNitrogenLostByVolatilization(currentYearResults, farm);

@@ -1603,7 +1603,8 @@ namespace H.Core.Services.Animals
         /// <param name="leachingNitrogenEmissionRate">Manure leaching N emission rate (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
         /// <returns>Manure leaching N emission (kg N2O-N day^-1)</returns>
-        public double CalculateManureLeachingNitrogenEmission(double leachingNitrogenEmissionRate,
+        public double CalculateManureLeachingNitrogenEmission(
+            double leachingNitrogenEmissionRate,
             double numberOfAnimals)
         {
             return leachingNitrogenEmissionRate * numberOfAnimals;

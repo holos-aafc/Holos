@@ -168,7 +168,7 @@ namespace H.Core.Test.Services
             var farm = base.GetTestFarm();
             _sut.CalculateResults(farm);
 
-            var result = _sut.GetYearHighestVolumeRemaining();
+            var result = _sut.GetYearHighestVolumeRemaining(AnimalType.Dairy);
 
             Assert.AreEqual(2023, result);
         }

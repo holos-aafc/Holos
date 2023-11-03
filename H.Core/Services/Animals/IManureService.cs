@@ -20,7 +20,7 @@ namespace H.Core.Services.Animals
         List<ManureStateType> GetValidManureStateTypes(Farm farm, ManureLocationSourceType locationSourceType, AnimalType animalType);
         void SetValidManureStateTypes(ManureItemBase manureItemBase, Farm farm);
         double GetTotalAmountOfManureExported(int year, Farm farm);
-        int GetYearHighestVolumeRemaining();
+        int GetYearHighestVolumeRemaining(AnimalType animalType);
         DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm);
     }
 }

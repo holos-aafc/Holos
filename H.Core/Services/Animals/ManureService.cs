@@ -178,7 +178,8 @@ namespace H.Core.Services.Animals
         /// </summary>
         public void SetValidManureStateTypes(ManureItemBase manureItemBase, Farm farm)
         {
-            var types = this.GetValidManureStateTypes(farm, manureItemBase.ManureLocationSourceType, manureItemBase.AnimalType);
+            // Can't collect manure from a field and apply to another field or export it
+            var types = this.GetValidManureStateTypes(farm, manureItemBase.ManureLocationSourceType, manureItemBase.AnimalType).Where(x => x != ManureStateType.Pasture);
             manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.UpdateItems(types);
 
             // Set the selected item to the first item in the updated list
@@ -198,9 +199,10 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
-        public int GetYearHighestVolumeRemaining()
+        public int GetYearHighestVolumeRemaining(AnimalType animalType)
         {
-            var tanksOrderedByAvailableManure = _manureTanks.OrderByDescending(x => x.VolumeRemainingInTank).ToList();
+            var category = animalType.GetCategory();
+            var tanksOrderedByAvailableManure = _manureTanks.Where(y => y.AnimalType.GetCategory() == category).OrderByDescending(x => x.VolumeRemainingInTank).ToList();
 
             if (tanksOrderedByAvailableManure.Any())
             {
