@@ -184,6 +184,11 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Private Methods
 
+        private double CalculateEmissionsFromExportedManure()
+        {
+            throw new NotImplementedException();
+        }
+
         private List<LandApplicationEmissionResult>  CalculateAmmoniaFromLandApplicationForImportedManure(CropViewItem viewItem, Farm farm)
         {
             var results = new List<LandApplicationEmissionResult>();

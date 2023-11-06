@@ -10,7 +10,7 @@ using H.Core.Models;
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class N2OEmissionFactorCalculatorTest
+    public class N2OEmissionFactorCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -63,6 +63,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void CalculatedEmissionFactorReturnsCorrectValue()
         {
             var result = _sut.CalculateEcodistrictEmissionFactor(500.0, 600.0);
+
             Assert.AreEqual(0.012881024751743584, result);
         }
 
@@ -206,6 +207,17 @@ namespace H.Core.Test.Calculators.Nitrogen
                 0.25);
 
             Assert.AreEqual(6.25, result);
+        }
+
+        [TestMethod]
+        public void CalculateTotalN2ONFromExportedManure()
+        {
+            var farm = base.GetTestFarm();
+            farm.StageStates.Add(base.GetFieldStageState());
+
+            var result = _sut.CalculateTotalN2ONFromExportedManure(100, 0.5);
+
+            Assert.AreEqual(result, 50);
         }
 
         #endregion

@@ -3,6 +3,7 @@ using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Dairy;
@@ -65,6 +66,21 @@ namespace H.Core.Test
             farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy });
 
             return farm;
+        }
+
+        public FieldSystemDetailsStageState GetFieldStageState()
+        {
+            var stageState = new FieldSystemDetailsStageState();
+
+            stageState.DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
+            {
+                new CropViewItem()
+                {
+                    Year = 2023,
+                }
+            };
+
+            return stageState;
         }
 
         public AnimalComponentEmissionsResults GetEmptyTestAnimalComponentEmissionsResults()

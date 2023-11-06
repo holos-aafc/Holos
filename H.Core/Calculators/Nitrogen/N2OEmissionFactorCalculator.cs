@@ -88,7 +88,9 @@ namespace H.Core.Calculators.Nitrogen
             return emissionFactorForLandApplication * ambientTemperatureAdjustment;
         }
 
-        public double CalculateBaseEcodistrictFactor(Farm farm, CropViewItem viewItem)
+        public double CalculateBaseEcodistrictFactor(
+            Farm farm, 
+            CropViewItem viewItem)
         {
             var soilData = farm.GetPreferredSoilData(viewItem);
 
@@ -192,7 +194,9 @@ namespace H.Core.Calculators.Nitrogen
             return ecodistrictManureEmissionFactor;
         }
 
-        public double GetEmissionFactorForCropResidues(CropViewItem viewItem, Farm farm)
+        public double GetEmissionFactorForCropResidues(
+            CropViewItem viewItem, 
+            Farm farm)
         {
             if (viewItem == null)
             {
@@ -235,7 +239,9 @@ namespace H.Core.Calculators.Nitrogen
         /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
         /// from land applied manure. Native rangeland is not included.
         /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(List<CropViewItem> itemsByYear, Farm farm)
+        public double CalculateWeightedOrganicNitrogenEmissionFactor(
+            List<CropViewItem> itemsByYear, 
+            Farm farm)
         {
             var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
             var filteredItems = itemsByYear.Where(x => x.IsNativeGrassland == false);
@@ -259,16 +265,24 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.1-7
+        /// Equation 4.6.1-9
         /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(
+        public double CalculateTotalN2ONFromExportedManure(
             Farm farm,
-            double totalExportedManure,
             List<CropViewItem> itemsByYear)
         {
             var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
+            var totalExportedManureNitrogen = farm.GetTotalNitrogenFromExportedManure();
 
-            var result = totalExportedManure * weightedEmissionFactor;
+            return this.CalculateTotalN2ONFromExportedManure(totalExportedManureNitrogen, weightedEmissionFactor);
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-9
+        /// </summary>
+        public double CalculateTotalN2ONFromExportedManure(double totalExportedManureNitrogen, double weightedEmissionFactor)
+        {
+            var result = totalExportedManureNitrogen * weightedEmissionFactor;
 
             return result;
         }

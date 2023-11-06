@@ -411,8 +411,13 @@ namespace H.Core.Calculators.Carbon
                                                     indirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
 
             // Equation 2.6.6-7
-            //var totalExportedNitrogen = farm.GetTotalNitrogenFromExportedManure();
-            //this.N2O_NFromOrganicNitrogenLeachingExported = totalExportedNitrogen * fractionLeach * emissionFactorLeaching;
+            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(this.Year);
+            var totalAreaByYear = viewItemsByYear.Sum(x => x.Area);
+            totalAreaByYear = totalAreaByYear > 0 ? totalAreaByYear : 1;
+            var totalEmissionsFromExportedManure = N2OEmissionFactorCalculator.CalculateTotalN2ONFromExportedManure(farm, viewItemsByYear);
+
+            // TODO: add in exported organic fertilizer N
+            this.N2O_NFromOrganicNitrogenLeachingExported = totalEmissionsFromExportedManure / totalAreaByYear;
         }
 
         protected void CalculateActualAmountsLeached(
