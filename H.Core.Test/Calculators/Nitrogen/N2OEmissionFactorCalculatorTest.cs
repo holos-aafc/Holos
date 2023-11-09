@@ -6,6 +6,7 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Providers.Animals;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
@@ -200,7 +201,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 }
             };
 
-            var result = _sut.CalculateLeftOverLandAppliedManureEmissionsForField(
+            var result = _sut.CalculateDirectN2ONFromLeftOverManure(
                 new List<AnimalComponentEmissionsResults>() {animalResults}, 
                 farm, 
                 viewItem1,
@@ -215,9 +216,78 @@ namespace H.Core.Test.Calculators.Nitrogen
             var farm = base.GetTestFarm();
             farm.StageStates.Add(base.GetFieldStageState());
 
-            var result = _sut.CalculateTotalN2ONFromExportedManure(100, 0.5);
+            var result = _sut.CalculateTotalDirectN2ONFromExportedManure(100, 0.5);
 
             Assert.AreEqual(result, 50);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsZeroTest()
+        {
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(50, result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroForMultipleExportsTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
+            };
+
+            var manureExport2 = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.25 }
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+            farm.ManureExportViewItems.Add(manureExport2);
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(75, result);
+        }
+
+        [TestMethod]
+        public void CalculateAmountOfTANFromExportedManureTest()
+        {
+            var farm = base.GetTestFarm();
+            var animalResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
+
+            var result = _sut.CalculateAmountOfTANFromExportedManure(farm, new List<AnimalComponentEmissionsResults>() {animalResults}, DateTime.Now.Year);
+
+            Assert.AreEqual(100.03, result);
         }
 
         #endregion

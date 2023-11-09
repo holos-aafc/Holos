@@ -1199,16 +1199,11 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
-        /// <summary>
-        /// Equation 4.6.1-2
-        /// 
-        /// (kg N)
-        /// </summary>
-        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear()
+        public double GetTotalNitrogenFromImportedManure()
         {
             var totalNitrogen = 0d;
 
-            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year))
+            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year && manureViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported))
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
             }

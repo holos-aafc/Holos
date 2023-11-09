@@ -38,13 +38,11 @@ namespace H.CLI.Processors
         public FieldProcessor()
         {
             _animalService = new AnimalResultsService();
-            var manureService = new ManureService(_animalService);
+            var manureService = new ManureService();
 
             _fieldResultsService = new FieldResultsService();
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, _animalService);
             _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
-
-            
         }
 
         #endregion

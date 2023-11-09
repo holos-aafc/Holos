@@ -24,6 +24,7 @@ namespace H.Core.Calculators.Nitrogen
         private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly DigestateService _digestateService = new DigestateService();
+        private readonly IManureService _manureService = new ManureService();
 
         #endregion
 
@@ -73,19 +74,6 @@ namespace H.Core.Calculators.Nitrogen
             {
                 return result;
             }
-        }
-
-        /// <summary>
-        /// Equation 4.6.2-2
-        /// </summary>
-        /// <param name="emissionFactorForLandApplication">Default NH3 emission factor for land application</param>
-        /// <param name="ambientTemperatureAdjustment">Ambient temperature based adjustment</param>
-        /// <returns></returns>
-        public double CalculateAdjustedAmmoniaEmissionFactor(
-            double emissionFactorForLandApplication,
-            double ambientTemperatureAdjustment)
-        {
-            return emissionFactorForLandApplication * ambientTemperatureAdjustment;
         }
 
         public double CalculateBaseEcodistrictFactor(
@@ -230,61 +218,6 @@ namespace H.Core.Calculators.Nitrogen
                 nitrogenSourceModifier: cropResidueModifier);
 
             return emissionFactorForCropResidues;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-3
-        ///
-        /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
-        /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
-        /// from land applied manure. Native rangeland is not included.
-        /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(
-            List<CropViewItem> itemsByYear, 
-            Farm farm)
-        {
-            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
-            var filteredItems = itemsByYear.Where(x => x.IsNativeGrassland == false);
-
-            foreach (var cropViewItem in filteredItems)
-            {
-                var emissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
-                    viewItem: cropViewItem,
-                    farm: farm);
-
-                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
-                {
-                    Value = emissionFactor,
-                    Weight = cropViewItem.Area,
-                });
-            }
-
-            var weightedEmissionFactor = this.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
-
-            return weightedEmissionFactor;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-9
-        /// </summary>
-        public double CalculateTotalN2ONFromExportedManure(
-            Farm farm,
-            List<CropViewItem> itemsByYear)
-        {
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
-            var totalExportedManureNitrogen = farm.GetTotalNitrogenFromExportedManure();
-
-            return this.CalculateTotalN2ONFromExportedManure(totalExportedManureNitrogen, weightedEmissionFactor);
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-9
-        /// </summary>
-        public double CalculateTotalN2ONFromExportedManure(double totalExportedManureNitrogen, double weightedEmissionFactor)
-        {
-            var result = totalExportedManureNitrogen * weightedEmissionFactor;
-
-            return result;
         }
 
         /// <summary>

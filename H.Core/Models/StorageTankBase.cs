@@ -47,6 +47,9 @@ namespace H.Core.Models
             set => SetProperty(ref _totalOrganicNitrogenAvailableForLandApplication, value);
         }
 
+        /// <summary>
+        /// (kg)
+        /// </summary>
         public double TotalTanAvailableForLandApplication
         {
             get => _totalTanAvailableForLandApplication;
@@ -89,6 +92,9 @@ namespace H.Core.Models
             set => SetProperty(ref _volumeSumOfAllManureApplicationsMade, value, OnVolumeSumOfAllManureApplicationsMade);
         }
 
+        /// <summary>
+        /// (kg)
+        /// </summary>
         public double VolumeOfManureAvailableForLandApplication
         {
             get => _volumeOfManureAvailableForLandApplication;

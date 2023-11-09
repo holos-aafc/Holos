@@ -21,6 +21,7 @@ namespace H.Core.Test.Services
 
         private ManureService _sut;
         private Mock<IAnimalService> _mockAnimalService;
+        private AnimalComponentEmissionsResults _componentResults;
 
         #endregion
 
@@ -40,10 +41,10 @@ namespace H.Core.Test.Services
         public void TestInitialize()
         {
             _mockAnimalService = new Mock<IAnimalService>();
-            _sut = new ManureService(_mockAnimalService.Object);
+            _sut = new ManureService();
 
-            var componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
-            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { componentResults });
+            _componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
+            _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { _componentResults });
         }
 
         [TestCleanup]
@@ -77,7 +78,7 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void GetAmountAvailableForExportReturnsZeroWhenNoAnimalsPresentTest()
         {
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, new Farm());
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
 
             Assert.AreEqual(0, result);
         }
@@ -87,9 +88,9 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
             farm.Components.Add(base.GetTestFieldComponent());
-            _sut.CalculateResults(farm);
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {_componentResults});
 
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
 
             Assert.IsTrue(result > 0);
         }
@@ -105,11 +106,11 @@ namespace H.Core.Test.Services
         public void GetAmountAvailableForExportReturnsNonZero()
         {
             var farm = base.GetTestFarm();
-            _sut.CalculateResults(farm);
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
 
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year, farm);
+            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
 
-            Assert.AreEqual(200000, result);
+            Assert.AreEqual(100000, result);
         }
 
         [TestMethod]
@@ -118,7 +119,7 @@ namespace H.Core.Test.Services
             var farm = base.GetTestFarm();
             farm.ManureExportViewItems.Clear();
 
-            var result = _sut.GetTotalAmountOfManureExported(DateTime.Now.Year, farm, AnimalType.Beef);
+            var result = _sut.GetTotalVolumeOfManureExported(DateTime.Now.Year, farm, AnimalType.Beef);
 
             Assert.AreEqual(0, result);
         }
@@ -128,7 +129,7 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
 
-            var result = _sut.GetTotalAmountOfManureExported(DateTime.Now.Year, farm, AnimalType.Dairy);
+            var result = _sut.GetTotalVolumeOfManureExported(DateTime.Now.Year, farm, AnimalType.Dairy);
 
             Assert.AreEqual(3000, result);
         }
@@ -166,7 +167,7 @@ namespace H.Core.Test.Services
         public void GetYearWithMostManureProducedTest()
         {
             var farm = base.GetTestFarm();
-            _sut.CalculateResults(farm);
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
 
             var result = _sut.GetYearHighestVolumeRemaining(AnimalType.Dairy);
 

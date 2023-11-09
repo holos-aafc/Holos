@@ -20,10 +20,7 @@ namespace H.Core.Services.Animals
         #region Fields
 
         private readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
-
-        private readonly IAnimalService _animalService;
         private readonly List<ManureTank> _manureTanks;
-
         private readonly List<AnimalType> _validManureTypes = new List<AnimalType>()
         {
             AnimalType.NotSelected,
@@ -59,23 +56,15 @@ namespace H.Core.Services.Animals
             ManureLocationSourceType.Imported,
         };
 
-        private IMapper _manureCompositionMapper;
+        private readonly IMapper _manureCompositionMapper;
+        private List<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
 
         #endregion
 
         #region Constructors
 
-        public ManureService(IAnimalService animalService)
+        public ManureService()
         {
-            if (animalService != null)
-            {
-                _animalService = animalService;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(animalService));
-            }
-
             _manureTanks = new List<ManureTank>();
 
             var manureCompositionMapperConfiguration = new MapperConfiguration(x =>
@@ -91,7 +80,7 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
-        public double GetTotalAmountOfManureExported(int year, Farm farm, AnimalType animalType)
+        public double GetTotalVolumeOfManureExported(int year, Farm farm, AnimalType animalType)
         {
             var total = 0d;
 
@@ -100,7 +89,7 @@ namespace H.Core.Services.Animals
             return total;
         }
 
-        public double GetTotalAmountOfManureExported(int year, Farm farm)
+        public double GetTotalVolumeOfManureExported(int year, Farm farm)
         {
             var total = 0d;
 
@@ -139,7 +128,6 @@ namespace H.Core.Services.Animals
 
             return animalTypes;
         }
-
 
         public List<ManureLocationSourceType> GetValidManureLocationSourceTypes()
         {
@@ -186,7 +174,7 @@ namespace H.Core.Services.Animals
             manureItemBase.ManureStateType = manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
         }
 
-        public double GetAmountAvailableForExport(int year, Farm farm)
+        public double GetAmountAvailableForExport(int year)
         {
             var amount = 0d;
 
@@ -194,6 +182,32 @@ namespace H.Core.Services.Animals
             foreach (var manureTank in tank)
             {
                 amount += manureTank.VolumeRemainingInTank;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalTANCreated(int year)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.TotalTanAvailableForLandApplication;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalVolumeCreated(int year)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.VolumeOfManureAvailableForLandApplication;
             }
 
             return amount;
@@ -246,10 +260,12 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
-        public void CalculateResults(Farm farm)
+        public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissions)
         {
             // Clear tanks since animal management may have changed
             _manureTanks.Clear();
+
+            _animalComponentEmissionsResults = animalComponentEmissions;
 
             var animalTypes = this.GetManureTypesProducedOnFarm(farm);
             var years = farm.GetYearsWithAnimals();
@@ -358,7 +374,8 @@ namespace H.Core.Services.Animals
             var animalType = manureTank.AnimalType;
             var distinctYears = years.Distinct().ToList();
 
-            var resultsForType = _animalService.GetAnimalResults(animalType, farm);
+            var category = animalType.GetComponentCategoryFromAnimalType();
+            var resultsForType = _animalComponentEmissionsResults.GetByCategory(category);
 
             foreach (var year in distinctYears)
             {

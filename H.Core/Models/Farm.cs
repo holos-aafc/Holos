@@ -633,6 +633,30 @@ namespace H.Core.Models
 
         #region Public Methods
 
+        public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
+        {
+            IEnumerable<CropViewItem> items;
+            if (includeNativeGrasslands)
+            {
+                items = this.GetCropDetailViewItemsByYear(year);
+            }
+            else
+            {
+                items = this.GetCropDetailViewItemsByYear(year).Where(x => x.IsNativeGrassland == false);
+            }
+
+
+            var area = items.Sum(x => x.Area);
+            if (area > 0)
+            {
+                return area;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
         public List<int> GetYearsWithAnimals()
         {
             var years  = new List<int>();

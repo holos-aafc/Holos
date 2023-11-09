@@ -63,7 +63,7 @@ namespace H.CLI.Results
             _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();
 
             var animalService = new AnimalResultsService();
-            var manureService = new ManureService(animalService);
+            var manureService = new ManureService();
 
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
             _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);

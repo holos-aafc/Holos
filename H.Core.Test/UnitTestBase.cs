@@ -8,12 +8,27 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Services;
+using Moq;
 
 namespace H.Core.Test
 {
     public abstract class UnitTestBase
     {
         #region Fields
+
+        protected Mock<IFarmResultsService> _mockFarmResultService;
+        protected IFarmResultsService _mockFarmResultServiceObject;
+
+        #endregion
+
+        #region Constructors
+
+        protected UnitTestBase()
+        {
+            _mockFarmResultService = new Mock<IFarmResultsService>();
+            _mockFarmResultServiceObject = _mockFarmResultService.Object;
+        }
 
         #endregion
 
@@ -108,6 +123,7 @@ namespace H.Core.Test
         public AnimalComponentEmissionsResults GetNonEmptyTestAnimalComponentEmissionsResults()
         {
             var results = new AnimalComponentEmissionsResults();
+            results.Component = new BackgroundingComponent();
 
             var monthsAndDaysData = new MonthsAndDaysData();
             monthsAndDaysData.Year = DateTime.Now.Year;

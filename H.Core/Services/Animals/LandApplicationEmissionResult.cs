@@ -57,6 +57,11 @@ namespace H.Core.Services.Animals
         public double AmmoniacalLoss { get; set; }
 
         /// <summary>
+        /// (kg)
+        /// </summary>
+        public double TotalTANApplied { get; set; }
+
+        /// <summary>
         /// The actual amount of N that was applied from the manure application
         /// 
         /// (kg N)

@@ -255,7 +255,7 @@ namespace H.Core.Services
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
             // Manure calculations - must be calculated after both field and animal results have been calculated.
-            _manureService.CalculateResults(farm);
+            _manureService.Initialize(farm, animalResults);
 
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
