@@ -74,6 +74,9 @@ namespace H.Core.Models
             set => SetProperty(ref _totalNitrogenAvailableAfterAllLandApplications, value);
         }
 
+        /// <summary>
+        /// Total amount of nitrogen applied to fields from manure produced on farm (does not include imports)
+        /// </summary>
         public double NitrogenSumOfAllManureApplicationsMade
         {
             get => _nitrogenSumOfAllManureApplicationsMade;

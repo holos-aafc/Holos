@@ -200,6 +200,19 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
+        public double GetTotalNitrogenCreated(int year)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.TotalNitrogenAvailableForLandApplication;
+            }
+
+            return amount;
+        }
+
         public double GetTotalVolumeCreated(int year)
         {
             var amount = 0d;
@@ -211,6 +224,48 @@ namespace H.Core.Services.Animals
             }
 
             return amount;
+        }
+
+        public double GetTotalNitrogenAppliedToAllFields(int year)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.NitrogenSumOfAllManureApplicationsMade;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalNitrogenRemaining(int year)
+        {
+            var totalAvailable = this.GetTotalVolumeCreated(year);
+            var totalApplied = this.GetTotalNitrogenAppliedToAllFields(year);
+            //var totalExported = this.getexp
+
+            throw new NotImplementedException();
+        }
+
+
+        public double GetTotalNitrogenFromExportedManure(int year, Farm farm)
+        {
+            var result = 0d;
+
+            foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                var nitrogenContent = 0d;
+                var amountOfManure = manureExportViewItem.Amount;
+                if (manureExportViewItem.DefaultManureCompositionData != null)
+                {
+                    nitrogenContent = manureExportViewItem.DefaultManureCompositionData.NitrogenContent;
+                }
+
+                result += (amountOfManure * nitrogenContent);
+            }
+
+            return result;
         }
 
         public int GetYearHighestVolumeRemaining(AnimalType animalType)

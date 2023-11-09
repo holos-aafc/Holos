@@ -40,6 +40,36 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// (kg)
         /// </summary>
+        double GetTotalNitrogenCreated(int year);
+
+        /// <summary>
+        /// (kg)
+        /// </summary>
         double GetTotalVolumeCreated(int year);
+
+        /// <summary>
+        /// Equation 4.6.1-8
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenFromExportedManure(int year, Farm farm);
+
+        /// <summary>
+        /// Equation 4.6.2-13
+        /// 
+        /// Nitrogen sum of all manure applications made to all fields from manure produced on the farm (does not include imported manure)
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenAppliedToAllFields(int year);
+
+        /// <summary>
+        /// Equation 4.6.2-14
+        /// 
+        /// Stored nitrogen available for application to land minus manure applied to fields or exported
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenRemaining(int year);
     }
 }

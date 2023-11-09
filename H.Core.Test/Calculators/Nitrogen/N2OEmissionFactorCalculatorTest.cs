@@ -222,64 +222,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         [TestMethod]
-        public void GetTotalNitrogenFromExportedManureReturnsZeroTest()
-        {
-            var farm = base.GetTestFarm();
-
-            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
-
-            Assert.AreEqual(0, result);
-        }
-
-        [TestMethod]
-        public void GetTotalNitrogenFromExportedManureReturnsNonZeroTest()
-        {
-            var farm = base.GetTestFarm();
-            farm.ManureExportViewItems.Clear();
-
-            var manureExport = new ManureExportViewItem()
-            {
-                DateOfExport = DateTime.Now,
-                Amount = 100,
-                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
-            };
-
-            farm.ManureExportViewItems.Add(manureExport);
-
-            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
-
-            Assert.AreEqual(50, result);
-        }
-
-        [TestMethod]
-        public void GetTotalNitrogenFromExportedManureReturnsNonZeroForMultipleExportsTest()
-        {
-            var farm = base.GetTestFarm();
-            farm.ManureExportViewItems.Clear();
-
-            var manureExport = new ManureExportViewItem()
-            {
-                DateOfExport = DateTime.Now,
-                Amount = 100,
-                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
-            };
-
-            var manureExport2 = new ManureExportViewItem()
-            {
-                DateOfExport = DateTime.Now,
-                Amount = 100,
-                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.25 }
-            };
-
-            farm.ManureExportViewItems.Add(manureExport);
-            farm.ManureExportViewItems.Add(manureExport2);
-
-            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
-
-            Assert.AreEqual(75, result);
-        }
-
-        [TestMethod]
         public void CalculateAmountOfTANFromExportedManureTest()
         {
             var farm = base.GetTestFarm();

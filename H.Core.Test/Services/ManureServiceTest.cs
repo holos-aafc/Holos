@@ -8,6 +8,7 @@ using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -188,6 +189,64 @@ namespace H.Core.Test.Services
             var result = _sut.GetManureCompositionData(null, null);
 
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsZeroTest()
+        {
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(50, result);
+        }
+
+        [TestMethod]
+        public void GetTotalNitrogenFromExportedManureReturnsNonZeroForMultipleExportsTest()
+        {
+            var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+
+            var manureExport = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 }
+            };
+
+            var manureExport2 = new ManureExportViewItem()
+            {
+                DateOfExport = DateTime.Now,
+                Amount = 100,
+                DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.25 }
+            };
+
+            farm.ManureExportViewItems.Add(manureExport);
+            farm.ManureExportViewItems.Add(manureExport2);
+
+            var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
+
+            Assert.AreEqual(75, result);
         }
 
         #endregion
