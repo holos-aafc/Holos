@@ -27,8 +27,11 @@ namespace H.Core.Providers.Climate
         /// <summary>
         /// Use a dictionary to lookup daily values since using a list with so many items is expensive
         /// </summary>
-        private Dictionary<Tuple<int, int>, List<DailyClimateData>> _dataByYearAndMonth = new Dictionary<Tuple<int, int>, List< DailyClimateData>>();
-        private Dictionary<Tuple<int, int, int>, DailyClimateData> _dataByDate = new Dictionary<Tuple<int, int, int>, DailyClimateData>();
+        private readonly Dictionary<Tuple<int, int>, List<DailyClimateData>> _dataByYearAndMonth = new Dictionary<Tuple<int, int>, List< DailyClimateData>>();
+        private readonly Dictionary<Tuple<int, int, int>, DailyClimateData> _dataByDate = new Dictionary<Tuple<int, int, int>, DailyClimateData>();
+        private readonly Dictionary<int, List<DailyClimateData>> _dataClimateByYear = new Dictionary<int, List<DailyClimateData>>();
+        private readonly Dictionary<int, double> _evapotranspirationByYear = new Dictionary<int, double>();
+        private readonly Dictionary<int, double> _precipitationByYear = new Dictionary<int, double>();
 
         #endregion
 
@@ -77,7 +80,16 @@ namespace H.Core.Providers.Climate
                 else
                 {
                     _dataByYearAndMonth.Add(new Tuple<int, int>(addedItem.Year, addedItem.Date.Month), new List<DailyClimateData>() { addedItem });
-                }    
+                }
+
+                if (_dataClimateByYear.ContainsKey(addedItem.Year))
+                {
+                    _dataClimateByYear[addedItem.Year].Add(addedItem);
+                }
+                else
+                {
+                    _dataClimateByYear.Add(addedItem.Year, new List<DailyClimateData>());
+                }
             }
         }
 
@@ -159,37 +171,48 @@ namespace H.Core.Providers.Climate
         /// </summary>
         public double GetTotalPrecipitationForYear(int year)
         {
-            var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-            if (dailyClimateDataForYear.Count == 365)
+            if (_precipitationByYear.ContainsKey(year))
             {
-                // We have a full years' worth daily data for this year
-                var totalPrecipitation = dailyClimateDataForYear.Sum(x => x.MeanDailyPrecipitation);
+                return _precipitationByYear[year];
+            }
 
-                return totalPrecipitation;
-            }
-            else
+            if (_dataClimateByYear.ContainsKey(year))
             {
-                // Don't have enough daily data, return total using SLC normals
-                return this.PrecipitationData.GetTotalAnnualPrecipitation();
+                var dailyDataForYear = _dataClimateByYear[year];
+                if (dailyDataForYear.Count == 365)
+                {
+                    var totalPrecipitationForYear = dailyDataForYear.Sum(x => x.MeanDailyPrecipitation);
+                    _precipitationByYear[year] = totalPrecipitationForYear;
+
+                    return totalPrecipitationForYear;
+                }
             }
+
+            // Don't have enough daily data, return total using SLC normals
+            return this.PrecipitationData.GetTotalAnnualPrecipitation();
         }
 
         public double GetTotalEvapotranspirationForYear(int year)
         {
-            var dailyClimateDataForYear = this.DailyClimateData.Where(x => x.Year == year).ToList();
-
-            if (dailyClimateDataForYear.Count == 365)
+            if (_evapotranspirationByYear.ContainsKey(year))
             {
-                // We have a full years' worth daily data for this year
-                var totalEvapotranspiration = dailyClimateDataForYear.Sum(x => x.MeanDailyPET);
+                return _evapotranspirationByYear[year];
+            }
 
-                return totalEvapotranspiration;
-            }
-            else
+            if (_dataClimateByYear.ContainsKey(year))
             {
-                // Don't have enough daily data, return total using SLC normals
-                return this.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
+                var dailyDataForYear = _dataClimateByYear[year];
+                if (dailyDataForYear.Count == 365)
+                {
+                    var totalEvapotranspiration = dailyDataForYear.Sum(x => x.MeanDailyPET);
+                    _evapotranspirationByYear[year] = totalEvapotranspiration;
+
+                    return totalEvapotranspiration;
+                }
             }
+
+            // Don't have enough daily data, return total using SLC normals
+            return this.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
         }
 
         /// <summary>
@@ -210,8 +233,6 @@ namespace H.Core.Providers.Climate
                     // NASA will return -999 for any unknown values
                     return data.Sum(x => x.MeanDailyPrecipitation);
                 }
-
-                
             }
 
             return this.PrecipitationData.GetValueByMonth(month);

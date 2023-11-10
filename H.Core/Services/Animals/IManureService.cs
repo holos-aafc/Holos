@@ -13,8 +13,8 @@ namespace H.Core.Services.Animals
         ManureTank GetTank(AnimalType animalType, int year, Farm farm);
         List<AnimalType> GetValidManureTypes();
         List<AnimalType> GetManureTypesProducedOnFarm(Farm farm);
-        double GetAmountAvailableForExport(int year);
-        double GetAmountAvailableForExport(int year, Farm farm, AnimalType animalType);
+        double GetVolumeAvailableForExport(int year);
+        double GetVolumeAvailableForExport(int year, Farm farm, AnimalType animalType);
         List<ManureApplicationTypes> GetValidManureApplicationTypes();
         List<ManureLocationSourceType> GetValidManureLocationSourceTypes();
         List<ManureStateType> GetValidManureStateTypes(Farm farm, ManureLocationSourceType locationSourceType, AnimalType animalType);
@@ -49,10 +49,14 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.6.1-8
+        /// Equation 4.6.2-17
+        /// Equation 4.6.2-18
         ///
         /// (kg N)
         /// </summary>
         double GetTotalNitrogenFromExportedManure(int year, Farm farm);
+
+        double GetTotalNitrogenFromExportedManure(int year, Farm farm, AnimalType animalType);
 
         /// <summary>
         /// Equation 4.6.2-13
@@ -70,6 +74,8 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemaining(int year);
+        double GetTotalNitrogenRemaining(int year, Farm farm);
+
+        List<AnimalType> GetManureTypesExported(Farm farm, int year);
     }
 }

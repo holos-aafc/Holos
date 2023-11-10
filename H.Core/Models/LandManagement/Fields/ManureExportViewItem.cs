@@ -25,7 +25,7 @@ namespace H.Core.Models.LandManagement.Fields
         #region Properties
 
         /// <summary>
-        /// The amount of manure exported
+        /// The amount/volume of manure exported
         ///
         /// (kg)
         /// </summary>

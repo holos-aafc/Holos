@@ -954,6 +954,16 @@ namespace H.Core.Models
             return totalArea;
         }
 
+        public double GetAnnualPrecipitation(int year)
+        {
+            return this.ClimateData.GetTotalPrecipitationForYear(year);
+        }
+
+        public double GetAnnualEvapotranspiration(int year)
+        {
+            return ClimateData.GetTotalEvapotranspirationForYear(year);
+        }
+
         /// <summary>
         /// Returns all manure application made on this farm
         /// </summary>

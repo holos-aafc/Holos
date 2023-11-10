@@ -129,6 +129,22 @@ namespace H.Core.Services.Animals
             return animalTypes;
         }
 
+        public List<AnimalType> GetManureTypesExported(Farm farm, int year)
+        {
+            var animalTypes = new List<AnimalType>();
+
+            foreach (var farmManureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                var category = farmManureExportViewItem.AnimalType.GetCategory();
+                if (animalTypes.Contains(category) == false)
+                {
+                    animalTypes.Add(category);
+                }
+            }
+
+            return animalTypes;
+        }
+
         public List<ManureLocationSourceType> GetValidManureLocationSourceTypes()
         {
             return _validManureLocationSourceTypes;
@@ -174,7 +190,7 @@ namespace H.Core.Services.Animals
             manureItemBase.ManureStateType = manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
         }
 
-        public double GetAmountAvailableForExport(int year)
+        public double GetVolumeAvailableForExport(int year)
         {
             var amount = 0d;
 
@@ -239,21 +255,39 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
-        public double GetTotalNitrogenRemaining(int year)
+        public double GetTotalNitrogenRemaining(int year, Farm farm)
         {
             var totalAvailable = this.GetTotalVolumeCreated(year);
             var totalApplied = this.GetTotalNitrogenAppliedToAllFields(year);
-            //var totalExported = this.getexp
+            var totalExported = this.GetTotalNitrogenFromExportedManure(year, farm);
 
-            throw new NotImplementedException();
+            return totalAvailable - totalApplied - totalExported;
         }
-
 
         public double GetTotalNitrogenFromExportedManure(int year, Farm farm)
         {
             var result = 0d;
 
             foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                var nitrogenContent = 0d;
+                var amountOfManure = manureExportViewItem.Amount;
+                if (manureExportViewItem.DefaultManureCompositionData != null)
+                {
+                    nitrogenContent = manureExportViewItem.DefaultManureCompositionData.NitrogenContent;
+                }
+
+                result += (amountOfManure * nitrogenContent);
+            }
+
+            return result;
+        }
+
+        public double GetTotalNitrogenFromExportedManure(int year, Farm farm, AnimalType animalType)
+        {
+            var result = 0d;
+
+            foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.DateOfExport.Year == year))
             {
                 var nitrogenContent = 0d;
                 var amountOfManure = manureExportViewItem.Amount;
@@ -302,7 +336,7 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public double GetAmountAvailableForExport(int year, Farm farm, AnimalType animalType)
+        public double GetVolumeAvailableForExport(int year, Farm farm, AnimalType animalType)
         {
             var amount = 0d;
 

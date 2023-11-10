@@ -79,7 +79,7 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void GetAmountAvailableForExportReturnsZeroWhenNoAnimalsPresentTest()
         {
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
+            var result = _sut.GetVolumeAvailableForExport(DateTime.Now.Year);
 
             Assert.AreEqual(0, result);
         }
@@ -91,7 +91,7 @@ namespace H.Core.Test.Services
             farm.Components.Add(base.GetTestFieldComponent());
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {_componentResults});
 
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
+            var result = _sut.GetVolumeAvailableForExport(DateTime.Now.Year);
 
             Assert.IsTrue(result > 0);
         }
@@ -109,7 +109,7 @@ namespace H.Core.Test.Services
             var farm = base.GetTestFarm();
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
 
-            var result = _sut.GetAmountAvailableForExport(DateTime.Now.Year);
+            var result = _sut.GetVolumeAvailableForExport(DateTime.Now.Year);
 
             Assert.AreEqual(100000, result);
         }

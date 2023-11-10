@@ -88,6 +88,109 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.1-4
+        ///
+        /// (kg N)
+        /// </summary>
+        public double CalculateTotalManureNitrogenRemaining(
+            double totalManureNitrogenAvailableForLandApplication,
+            double totalManureNitrogenAlreadyAppliedToFields,
+            double totalManureNitrogenExported,
+            double totalImportedNitrogen)
+        {
+            var result = totalManureNitrogenAvailableForLandApplication - (totalManureNitrogenAlreadyAppliedToFields - totalImportedNitrogen) - totalManureNitrogenExported;
+            if (result < 0)
+            {
+                // Can't have a negative value of manure remaining
+                result = 0;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-5
+        ///
+        /// Calculates the total N2O-N from the remaining manure N not applied to any field
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalDirectN2ONFromRemainingManureNitrogen(
+            double weightedEmissionFactor,
+            double totalManureNitrogenRemaining)
+        {
+            var result = totalManureNitrogenRemaining * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-6
+        /// </summary>
+        public double CalculateDirectN2ONFromLeftOverManure(
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
+            Farm farm,
+            CropViewItem viewItem,
+            double weightedEmissionFactor)
+        {
+            // The total N after all applications and exports have been subtracted
+            var totalNitrogenRemaining = this.CalculateTotalManureNitrogenRemaining(
+                animalComponentEmissionsResults,
+                farm,
+                viewItem);
+
+            var emissionsFromNitrogenRemaining = this.CalculateTotalDirectN2ONFromRemainingManureNitrogen(
+                weightedEmissionFactor: weightedEmissionFactor,
+                totalManureNitrogenRemaining: totalNitrogenRemaining);
+
+            var totalAreaOfAllFields = farm.GetTotalAreaOfFarm(false, viewItem.Year);
+            if (totalAreaOfAllFields == 0)
+            {
+                totalAreaOfAllFields = 1;
+            }
+
+            var areaOfThisField = viewItem.Area;
+
+            // The total N2O-N that is left over and must be associated with this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
+            var result = emissionsFromNitrogenRemaining * (areaOfThisField / totalAreaOfAllFields);
+
+            return result;
+        }
+
+
+
+        /// <summary>
+        /// Equation 4.6.1-9
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalDirectN2ONFromExportedManure(Farm farm, int year)
+        {
+            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year);
+
+            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsByYear, farm);
+            var totalExportedManureNitrogen = _manureService.GetTotalNitrogenFromExportedManure(year, farm);
+
+            var emissions = this.CalculateTotalDirectN2ONFromExportedManure(totalExportedManureNitrogen, weightedEmissionFactor);
+
+            return emissions;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-9
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalDirectN2ONFromExportedManure(
+            double totalExportedManureNitrogen,
+            double weightedEmissionFactor)
+        {
+            var result = totalExportedManureNitrogen * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 4.6.2-2
         /// </summary>
         /// <param name="emissionFactorForLandApplication">Default NH3 emission factor for land application</param>
@@ -202,109 +305,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.1-4
-        ///
-        /// (kg N)
-        /// </summary>
-        public double CalculateTotalManureNitrogenRemaining(
-            double totalManureNitrogenAvailableForLandApplication,
-            double totalManureNitrogenAlreadyAppliedToFields,
-            double totalManureNitrogenExported,
-            double totalImportedNitrogen)
-        {
-            var result = totalManureNitrogenAvailableForLandApplication - (totalManureNitrogenAlreadyAppliedToFields - totalImportedNitrogen) - totalManureNitrogenExported;
-            if (result < 0)
-            {
-                // Can't have a negative value of manure remaining
-                result = 0;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-5
-        ///
-        /// Calculates the total N2O-N from the remaining manure N not applied to any field
-        ///
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateTotalDirectN2ONFromRemainingManureNitrogen(
-            double weightedEmissionFactor,
-            double totalManureNitrogenRemaining)
-        {
-            var result = totalManureNitrogenRemaining * weightedEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-6
-        /// </summary>
-        public double CalculateDirectN2ONFromLeftOverManure(
-            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
-            Farm farm,
-            CropViewItem viewItem,
-            double weightedEmissionFactor)
-        {
-            // The total N after all applications and exports have been subtracted
-            var totalNitrogenRemaining = this.CalculateTotalManureNitrogenRemaining(
-                animalComponentEmissionsResults,
-                farm,
-                viewItem);
-
-            var emissionsFromNitrogenRemaining = this.CalculateTotalDirectN2ONFromRemainingManureNitrogen(
-                weightedEmissionFactor: weightedEmissionFactor,
-                totalManureNitrogenRemaining: totalNitrogenRemaining);
-
-            var totalAreaOfAllFields = farm.GetTotalAreaOfFarm(false, viewItem.Year);
-            if (totalAreaOfAllFields == 0)
-            {
-                totalAreaOfAllFields = 1;
-            }
-
-            var areaOfThisField = viewItem.Area;
-
-            // The total N2O-N that is left over and must be associated with this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
-            var result = emissionsFromNitrogenRemaining * (areaOfThisField / totalAreaOfAllFields);
-
-            return result;
-        }
-
-
-
-        /// <summary>
-        /// Equation 4.6.1-9
-        ///
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateTotalDirectN2ONFromExportedManure(Farm farm, int year)
-        {
-            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year);
-
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsByYear, farm);
-            var totalExportedManureNitrogen = _manureService.GetTotalNitrogenFromExportedManure(year, farm);
-
-            var emissions = this.CalculateTotalDirectN2ONFromExportedManure(totalExportedManureNitrogen, weightedEmissionFactor);
-
-            return emissions;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-9
-        ///
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateTotalDirectN2ONFromExportedManure(
-            double totalExportedManureNitrogen, 
-            double weightedEmissionFactor)
-        {
-            var result = totalExportedManureNitrogen * weightedEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 4.6.2-9
         /// Equation 4.6.2-10
         /// </summary>
@@ -335,6 +335,70 @@ namespace H.Core.Calculators.Nitrogen
             double weightEmissionFactor)
         {
             return totalTANExported * weightEmissionFactor;
+        }
+
+        /// <summary>
+        /// Equation 4.6.2-15
+        /// </summary>
+        public double CalculateAmmoniaEmissionsFromLeftOverManure(
+            double nitrogenRemaining,
+            double volatilizationFractionForLandApplication)
+        {
+            var result = nitrogenRemaining * volatilizationFractionForLandApplication;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.2-16
+        /// </summary>
+        public double CalculateAmmoniaEmissionsFromLeftOverManureForField(
+            double ammoniaEmissionsFromLeftOverManure,
+            CropViewItem cropViewItem,
+            Farm farm)
+        {
+            var result = 0d;
+
+            var areaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, cropViewItem.Year);
+            var areaOfField = cropViewItem.Area;
+
+            result = ammoniaEmissionsFromLeftOverManure * (areaOfField / areaOfFarm);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.2-19
+        /// </summary>
+        public double CalculateAmmoniaEmissionsFromExportedManure(
+            Farm farm,
+            int year)
+        {
+            var result = 0d;
+
+            var exportTypes = _manureService.GetManureTypesExported(
+                farm: farm,
+                year: year);
+
+            var precipitation = farm.GetAnnualPrecipitation(year);
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(year);
+
+            foreach (var exportType in exportTypes)
+            {
+                var totalNitrogenExported = _manureService.GetTotalNitrogenFromExportedManure(
+                    year: year,
+                    farm: farm,
+                    animalType: exportType);
+
+
+
+                //var volatilizationFraction = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(
+                //    farm: farm,
+                //    meanAnnualPrecipitation: precipitation,
+                //    )
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -492,10 +556,10 @@ namespace H.Core.Calculators.Nitrogen
         {
             var results = new List<LandApplicationEmissionResult>();
 
-            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
+            var annualPrecipitation = farm.GetAnnualPrecipitation(viewItem.Year);
             var growingSeasonPrecipitation = farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation;
 
-            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(viewItem.Year);
             var growingSeasonEvapotranspiration = farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration;
 
             var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
@@ -550,21 +614,23 @@ namespace H.Core.Calculators.Nitrogen
             var totalNitrogenProduced = animalComponentEmissionsResults.TotalOrganicNitrogenAvailableForLandApplication;
             var applicationsAndCropByAnimalType = farm.GetManureApplicationsAndAssociatedCropByAnimalType(animalType);
             var results = new List<LandApplicationEmissionResult>();
-            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
-            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
 
             foreach (var tuple in applicationsAndCropByAnimalType)
             {
                 var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
                 var viewItem = tuple.Item1;
+                var manureApplication = tuple.Item2;
+
+                var dateOfApplication = manureApplication.DateOfApplication;
+
                 landApplicationEmissionResult.CropViewItem = viewItem;
 
-                var manureApplication = tuple.Item2;
+                var annualPrecipitation = farm.GetAnnualPrecipitation(dateOfApplication.Year);
+                var evapotranspiration = farm.GetAnnualEvapotranspiration(dateOfApplication.Year);
 
                 var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplication.AnimalType, viewItem.Year);
 
-                var dateOfApplication = manureApplication.DateOfApplication;
                 var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateOfApplication);
 
                 var fractionOfManureUsed = (manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area) / totalManureProducedByAnimals;
