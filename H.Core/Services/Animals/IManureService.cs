@@ -40,12 +40,27 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// (kg)
         /// </summary>
+        double GetTotalTANCreated(int year, AnimalType animalType);
+
+        /// <summary>
+        /// (kg)
+        /// </summary>
         double GetTotalNitrogenCreated(int year);
 
         /// <summary>
         /// (kg)
         /// </summary>
+        double GetTotalNitrogenCreated(int year, AnimalType animalType);
+
+        /// <summary>
+        /// (kg)
+        /// </summary>
         double GetTotalVolumeCreated(int year);
+
+        /// <summary>
+        /// (kg)
+        /// </summary>
+        double GetTotalVolumeCreated(int year, AnimalType animalType);
 
         /// <summary>
         /// Equation 4.6.1-8
@@ -57,6 +72,7 @@ namespace H.Core.Services.Animals
         double GetTotalNitrogenFromExportedManure(int year, Farm farm);
 
         double GetTotalNitrogenFromExportedManure(int year, Farm farm, AnimalType animalType);
+        double GetTotalNitrogenFromManureImports(int year, Farm farm, AnimalType animalType);
 
         /// <summary>
         /// Equation 4.6.2-13
@@ -77,5 +93,6 @@ namespace H.Core.Services.Animals
         double GetTotalNitrogenRemaining(int year, Farm farm);
 
         List<AnimalType> GetManureTypesExported(Farm farm, int year);
+        List<AnimalType> GetManureTypesImported(Farm farm, int year);
     }
 }

@@ -107,7 +107,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Amount of manure applied per hectare (wet weight)
+        /// Amount (volume) of manure applied per hectare (wet weight)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPerHectare)]
         public double AmountOfManureAppliedPerHectare

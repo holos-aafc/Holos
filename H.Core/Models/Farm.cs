@@ -961,7 +961,17 @@ namespace H.Core.Models
 
         public double GetAnnualEvapotranspiration(int year)
         {
-            return ClimateData.GetTotalEvapotranspirationForYear(year);
+            return this.ClimateData.GetTotalEvapotranspirationForYear(year);
+        }
+
+        public double GetGrowingSeasonPrecipitation(int year)
+        {
+            return this.ClimateData.GetGrowingSeasonPrecipitation(year);
+        }
+
+        public double GetGrowingSeasonEvapotranspiration(int year)
+        {
+            return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
         }
 
         /// <summary>

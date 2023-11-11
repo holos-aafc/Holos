@@ -305,7 +305,7 @@ namespace H.Core.Calculators.Carbon
             var precipitationsForYear = climateData.GetMonthlyPrecipitationsForYear(
                 year: currentYearViewItem.Year).Select(x => x.Value).ToList();
 
-            var evapotranspirationsForYear = climateData.GetMonthlyEvapotranspirationsForYear(
+            var evapotranspirationsForYear = climateData.GetMonthlyEvapotranspirationForYear(
                 year: currentYearViewItem.Year).Select(x => x.Value).ToList();
 
             var temperaturesForYear = climateData.GetMonthlyTemperaturesForYear(

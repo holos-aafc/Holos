@@ -129,6 +129,26 @@ namespace H.Core.Services.Animals
             return animalTypes;
         }
 
+        public List<AnimalType> GetManureTypesImported(Farm farm, int year)
+        {
+            var animalTypes = new List<AnimalType>();
+
+            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(year);
+            foreach (var cropViewItem in viewItemsForYear)
+            {
+                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() && x.DateOfApplication.Year == year))
+                {
+                    var category = manureApplicationViewItem.AnimalType.GetCategory();
+                    if (animalTypes.Contains(category) == false)
+                    {
+                        animalTypes.Add(category);
+                    }
+                }
+            }
+
+            return animalTypes;
+        }
+
         public List<AnimalType> GetManureTypesExported(Farm farm, int year)
         {
             var animalTypes = new List<AnimalType>();
@@ -203,6 +223,19 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
+        public double GetTotalVolumeCreated(int year, AnimalType animalType)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.VolumeOfManureAvailableForLandApplication;
+            }
+
+            return amount;
+        }
+
         public double GetTotalTANCreated(int year)
         {
             var amount = 0d;
@@ -216,11 +249,37 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
+        public double GetTotalTANCreated(int year, AnimalType animalType)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.TotalTanAvailableForLandApplication;
+            }
+
+            return amount;
+        }
+
         public double GetTotalNitrogenCreated(int year)
         {
             var amount = 0d;
 
             var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.TotalNitrogenAvailableForLandApplication;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalNitrogenCreated(int year, AnimalType animalType)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalNitrogenAvailableForLandApplication;
@@ -300,6 +359,23 @@ namespace H.Core.Services.Animals
             }
 
             return result;
+        }
+
+        public double GetTotalNitrogenFromManureImports(int year, Farm farm, AnimalType animalType)
+        {
+            var totalNitrogen = 0d;
+
+            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year);
+            foreach (var cropViewItem in viewItemsByYear)
+            {
+                var manureImports = cropViewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() && x.AnimalType.GetCategory() == animalType.GetCategory() && x.DateOfApplication.Year == year);
+                foreach (var manureApplicationViewItem in manureImports)
+                {
+                    totalNitrogen += (manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * cropViewItem.Area);
+                }
+            }
+
+            return totalNitrogen;
         }
 
         public int GetYearHighestVolumeRemaining(AnimalType animalType)

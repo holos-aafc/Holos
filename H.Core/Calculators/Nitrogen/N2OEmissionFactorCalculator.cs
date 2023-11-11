@@ -88,8 +88,8 @@ namespace H.Core.Calculators.Nitrogen
 
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
-                growingSeasonPrecipitation: farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
-                growingSeasonEvapotranspiration: farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
+                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(viewItem.Year),
+                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(viewItem.Year));
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,

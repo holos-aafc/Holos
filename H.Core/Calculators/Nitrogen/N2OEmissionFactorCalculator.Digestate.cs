@@ -66,11 +66,11 @@ namespace H.Core.Calculators.Nitrogen
         {
             var results = new List<LandApplicationEmissionResult>();
 
-            var annualPrecipitation = farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation();
-            var growingSeasonPrecipitation = farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation;
+            var annualPrecipitation = farm.GetAnnualPrecipitation(viewItem.Year);
+            var growingSeasonPrecipitation = farm.GetGrowingSeasonPrecipitation(viewItem.Year);
 
-            var evapotranspiration = farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration();
-            var growingSeasonEvapotranspiration = farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration;
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(viewItem.Year);
+            var growingSeasonEvapotranspiration = farm.GetGrowingSeasonEvapotranspiration(viewItem.Year);
 
             var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
 

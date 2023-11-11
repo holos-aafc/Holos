@@ -649,8 +649,8 @@ namespace H.Core.Calculators.Carbon
         protected void CalculateIndirectEmissions(Farm farm, CropViewItem currentYearResults)
         {
             var fractionLeach = N2OEmissionFactorCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
-                farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
-                farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
+                farm.GetGrowingSeasonPrecipitation(currentYearResults.Year),
+                farm.GetGrowingSeasonEvapotranspiration(currentYearResults.Year));
 
             var totalIndirectEmissionsFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificManureApplications(this.CurrentYearResults, this.AnimalComponentEmissionsResults, farm);
             var totalIndirectEmissionsFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateTotalIndirectEmissionsFromFieldSpecificDigestateApplications(this.CurrentYearResults, farm);
