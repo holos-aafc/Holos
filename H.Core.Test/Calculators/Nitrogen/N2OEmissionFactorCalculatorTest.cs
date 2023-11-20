@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using H.CLI.TemporaryComponentStorage;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Providers.Animals;
+using Moq;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
@@ -35,6 +37,10 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void TestInitialize()
         {
             _sut = new N2OEmissionFactorCalculator();
+            _sut.ManureService = base._mockManureServiceObject;
+            _sut.ClimateProvider = base._mockClimateProviderObject;
+            _sut.LivestockEmissionConversionFactorsProvider = base._mockEmissionDataProviderObject;
+            _sut.AnimalAmmoniaEmissionFactorProvider = base._mockAnimalAmmoniaEmissionFactorProviderObject;
         }
 
         [TestCleanup]
@@ -227,9 +233,64 @@ namespace H.Core.Test.Calculators.Nitrogen
             var farm = base.GetTestFarm();
             var animalResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
 
+            _sut = new N2OEmissionFactorCalculator();
+
             var result = _sut.CalculateAmountOfTANFromExportedManure(farm, new List<AnimalComponentEmissionsResults>() {animalResults}, DateTime.Now.Year);
 
             Assert.AreEqual(100.03, result);
+        }
+
+        [TestMethod]
+        public void CalculateIndirectEmissionsFromFieldAppliedManure()
+        {
+            var farm = base.GetTestFarm();
+            var viewItem = base.GetTestCropViewItem();
+            var animalResults = new List<AnimalComponentEmissionsResults>(){base.GetNonEmptyTestAnimalComponentEmissionsResults()};
+
+            _mockManureService.Setup(x => x.GetTotalVolumeCreated(It.IsAny<int>(), It.IsAny<AnimalType>())).Returns(100);
+            _mockManureService.Setup(x => x.GetTotalTANCreated(It.IsAny<int>(), It.IsAny<AnimalType>())).Returns(50);
+            _mockManureService.Setup(x => x.GetTotalNitrogenCreated(It.IsAny<int>(), It.IsAny<AnimalType>())).Returns(75);
+
+            _mockClimateProvider.Setup(x => x.GetMeanTemperatureForDay(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(19);
+            _mockClimateProvider.Setup(x => x.GetAnnualPrecipitation(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(12);
+            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(8);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(2);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(3);
+
+            var emissionFactors = new Table_36_Livestock_Emission_Conversion_Factors_Data()
+            {
+                VolatilizationFraction = 0.10,
+                EmissionFactorVolatilization = 0.2,
+                EmissionFactorLeach = 0.5,
+            };
+
+            _mockEmissionDataProvider
+                .Setup(x => x.GetLandApplicationFactors(It.IsAny<Farm>(), It.IsAny<double>(), It.IsAny<double>(),
+                    It.IsAny<AnimalType>(), It.IsAny<int>()))
+                .Returns(emissionFactors);
+
+            _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForSolidAppliedManure(It.IsAny<TillageType>())).Returns(1);
+            _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForLiquidAppliedManure(It.IsAny<ManureApplicationTypes>())).Returns(1);
+
+            var result = _sut.CalculateIndirectEmissionsFromFieldAppliedManure(
+                viewItem: viewItem,
+                animalComponentEmissionsResults: animalResults,
+                farm: farm);
+
+            var firstItem = result[0];
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(37.5, firstItem.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(29.44, firstItem.AdjustedAmmoniaLoss, 2);
+            Assert.AreEqual(24.25, firstItem.AdjustedAmmoniacalLoss, 2);
+            Assert.AreEqual(30.35, firstItem.AmmoniaLoss, 2);
+            Assert.AreEqual(25, firstItem.AmmoniacalLoss, 2);
+            Assert.AreEqual(10.01, firstItem.TotalIndirectN2OEmissions, 2);
+            Assert.AreEqual(6.37, firstItem.TotalIndirectN2ONEmissions, 2);
+            Assert.AreEqual(1.17, firstItem.TotalN2OFromManureVolatilized, 2);
+            Assert.AreEqual(5.62, firstItem.TotalN2ONFromManureLeaching, 2);
+            Assert.AreEqual(0.75, firstItem.TotalN2ONFromManureVolatilized, 2);
+            Assert.AreEqual(5.62, firstItem.TotalNitrateLeached, 2);
         }
 
         #endregion

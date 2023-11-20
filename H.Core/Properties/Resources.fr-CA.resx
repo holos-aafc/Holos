@@ -5574,4 +5574,13 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="TitleManureExportDetails" xml:space="preserve">
     <value>Manure Export Details</value>
   </data>
+  <data name="MessageExportingDataWarning" xml:space="preserve">
+    <value>Exporting farms. Please do not close this window while data is being exported.</value>
+  </data>
+  <data name="MessageImportFarmWarning" xml:space="preserve">
+    <value>Importing farms. Please do not close this window while data is processing.</value>
+  </data>
+  <data name="LabelImportData" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
 </root>

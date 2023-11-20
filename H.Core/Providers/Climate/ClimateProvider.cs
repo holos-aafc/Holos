@@ -80,6 +80,31 @@ namespace H.Core.Providers.Climate
             return this.Get(dailyClimateData, climateNormalTimeFrame);
         }
 
+        public double GetMeanTemperatureForDay(Farm farm, DateTime dateTime)
+        {
+            return farm.ClimateData.GetMeanTemperatureForDay(dateTime);
+        }
+
+        public double GetAnnualPrecipitation(Farm farm, DateTime dateTime)
+        {
+            return farm.GetAnnualPrecipitation(dateTime.Year);
+        }
+
+        public double GetGrowingSeasonPrecipitation(Farm farm, DateTime dateTime)
+        {
+            return farm.GetGrowingSeasonPrecipitation(dateTime.Year);
+        }
+
+        public double GetGrowingSeasonEvapotranspiration(Farm farm, DateTime dateTime)
+        {
+            return farm.GetGrowingSeasonEvapotranspiration(dateTime.Year);
+        }
+
+        public double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime)
+        {
+            return farm.GetAnnualEvapotranspiration(dateTime.Year);
+        }
+
         public ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame)
         {
             var dailyClimateData = _customFileClimateDataProvider.GetDailyClimateData(filepath);

@@ -167,7 +167,7 @@ namespace H.Core.Calculators.Nitrogen
             var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year);
 
             var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsByYear, farm);
-            var totalExportedManureNitrogen = _manureService.GetTotalNitrogenFromExportedManure(year, farm);
+            var totalExportedManureNitrogen = this.ManureService.GetTotalNitrogenFromExportedManure(year, farm);
 
             var emissions = this.CalculateTotalDirectN2ONFromExportedManure(totalExportedManureNitrogen, weightedEmissionFactor);
 
@@ -313,11 +313,11 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            _manureService.Initialize(farm, animalComponentEmissionsResults);
+            this.ManureService.Initialize(farm, animalComponentEmissionsResults);
 
-            var totalTANCreated = _manureService.GetTotalTANCreated(year);
-            var totalVolumeCreated = _manureService.GetTotalVolumeCreated(year);
-            var totalVolumeExported = _manureService.GetTotalVolumeOfManureExported(year, farm);
+            var totalTANCreated = this.ManureService.GetTotalTANCreated(year);
+            var totalVolumeCreated = this.ManureService.GetTotalVolumeCreated(year);
+            var totalVolumeExported = this.ManureService.GetTotalVolumeOfManureExported(year, farm);
 
             // Note volume is already converted so division by 1000 is not performed here
             result = totalTANCreated + (totalVolumeExported / totalVolumeCreated);
@@ -374,7 +374,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            var exportTypes = _manureService.GetManureTypesExported(
+            var exportTypes = this.ManureService.GetManureTypesExported(
                 farm: farm,
                 year: year);
 
@@ -383,12 +383,12 @@ namespace H.Core.Calculators.Nitrogen
 
             foreach (var exportType in exportTypes)
             {
-                var totalNitrogenExported = _manureService.GetTotalNitrogenFromExportedManure(
+                var totalNitrogenExported = this.ManureService.GetTotalNitrogenFromExportedManure(
                     year: year,
                     farm: farm,
                     animalType: exportType);
 
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(
+                var landApplicationFactors = LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(
                     farm: farm,
                     meanAnnualPrecipitation: precipitation,
                     meanAnnualEvapotranspiration: evapotranspiration,
@@ -410,7 +410,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            var typesImported = _manureService.GetManureTypesImported(
+            var typesImported = this.ManureService.GetManureTypesImported(
                 farm: farm,
                 year: year);
 
@@ -419,12 +419,12 @@ namespace H.Core.Calculators.Nitrogen
 
             foreach (var animalType in typesImported)
             {
-                var nitrogenFromManureImports = _manureService.GetTotalNitrogenFromManureImports(
+                var nitrogenFromManureImports = this.ManureService.GetTotalNitrogenFromManureImports(
                     year: year,
                     farm: farm,
                     animalType: animalType);
 
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(
+                var landApplicationFactors = LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(
                     farm: farm,
                     meanAnnualPrecipitation: precipitation,
                     meanAnnualEvapotranspiration: evapotranspiration,
@@ -442,41 +442,39 @@ namespace H.Core.Calculators.Nitrogen
             List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
             Farm farm)
         {
-            // Here
-
-            _manureService.Initialize(farm, animalComponentEmissionsResults);
+            this.ManureService.Initialize(farm, animalComponentEmissionsResults);
 
             var results = new List<LandApplicationEmissionResult>();
             foreach (var animalComponentEmissionsResult in animalComponentEmissionsResults)
             {
                 var componentCategory = animalComponentEmissionsResult.Component.ComponentCategory;
                 var animalType = componentCategory.GetAnimalTypeFromComponentCategory();
-                var animalCategory = animalType.GetCategory();
+                var animalCategory = animalType.GetComponentCategoryFromAnimalType();
 
-                var totalManureProducedByAnimalCategory = _manureService.GetTotalVolumeCreated(
+                var totalManureProducedByAnimalCategory = this.ManureService.GetTotalVolumeCreated(
                     year: viewItem.Year,
                     animalType: animalType);
 
-                var totalTANCreatedByAnimalCategory = _manureService.GetTotalTANCreated(
+                var totalTANCreatedByAnimalCategory = this.ManureService.GetTotalTANCreated(
                     year: viewItem.Year,
                     animalType: animalType);
 
-                var totalNitrogenCreatedByAnimalCategory = _manureService.GetTotalNitrogenCreated(
+                var totalNitrogenCreatedByAnimalCategory = this.ManureService.GetTotalNitrogenCreated(
                     year: viewItem.Year,
                     animalType: animalType);
 
                 // Get all manure applications that have the same manure type as the animal emission results being passed in
-                var manureApplicationsOfSameCategory = viewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() == false && x.AnimalType.GetCategory() == animalCategory);
+                var manureApplicationsOfSameCategory = viewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() == false && x.AnimalType.GetComponentCategoryFromAnimalType() == animalCategory);
                 foreach (var manureApplicationViewItem in manureApplicationsOfSameCategory)
                 {
                     var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
-                    var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplicationViewItem.DateOfApplication);
-                    var annualPrecipitation = farm.GetAnnualPrecipitation(manureApplicationViewItem.DateOfApplication.Year);
-                    var evapotranspiration = farm.GetAnnualEvapotranspiration(manureApplicationViewItem.DateOfApplication.Year);
-                    var growingSeasonPrecipitation = farm.GetGrowingSeasonPrecipitation(manureApplicationViewItem.DateOfApplication.Year);
-                    var growingSeasonEvapotranspiration = farm.GetGrowingSeasonEvapotranspiration(manureApplicationViewItem.DateOfApplication.Year);
-                    var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, animalType, viewItem.Year);
+                    var averageDailyTemperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
+                    var annualPrecipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, manureApplicationViewItem.DateOfApplication);
+                    var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, manureApplicationViewItem.DateOfApplication);
+                    var growingSeasonPrecipitation = this.ClimateProvider.GetGrowingSeasonPrecipitation(farm, manureApplicationViewItem.DateOfApplication);
+                    var growingSeasonEvapotranspiration = this.ClimateProvider.GetGrowingSeasonEvapotranspiration(farm, manureApplicationViewItem.DateOfApplication);
+                    var landApplicationFactors = this.LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, animalType, viewItem.Year);
                     var leachingFraction = CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
                     var volatilizationFraction = landApplicationFactors.VolatilizationFraction;
                     var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(viewItem, manureApplicationViewItem, averageDailyTemperature);
@@ -637,7 +635,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalNitrogenFromImportedManure = itemsInYear.Sum(x => x.GetTotalNitrogenFromImportedManure());
 
-            var exportedNitrogen = _manureService.GetTotalNitrogenFromExportedManure(viewItem.Year, farm);
+            var exportedNitrogen = this.ManureService.GetTotalNitrogenFromExportedManure(viewItem.Year, farm);
 
             // The total N after all applications and exports have been subtracted
             var totalNitrogenRemaining = this.CalculateTotalManureNitrogenRemaining(
@@ -660,7 +658,7 @@ namespace H.Core.Calculators.Nitrogen
             double leachingFraction,
             double emissionFactorForLeaching)
         {
-            var exportedNitrogen = _manureService.GetTotalNitrogenFromExportedManure(year, farm);
+            var exportedNitrogen = this.ManureService.GetTotalNitrogenFromExportedManure(year, farm);
 
             return exportedNitrogen * leachingFraction * emissionFactorForLeaching;
         }
@@ -684,7 +682,7 @@ namespace H.Core.Calculators.Nitrogen
             var applications = viewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure());
             foreach (var manureApplicationViewItem in applications)
             {
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplicationViewItem.AnimalType, viewItem.Year);
+                var landApplicationFactors = LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplicationViewItem.AnimalType, viewItem.Year);
 
                 var amountOfN = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
@@ -752,7 +750,7 @@ namespace H.Core.Calculators.Nitrogen
                 var annualPrecipitation = farm.GetAnnualPrecipitation(dateOfApplication.Year);
                 var evapotranspiration = farm.GetAnnualEvapotranspiration(dateOfApplication.Year);
 
-                var landApplicationFactors = _livestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplication.AnimalType, viewItem.Year);
+                var landApplicationFactors = LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, manureApplication.AnimalType, viewItem.Year);
 
                 var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateOfApplication);
 
@@ -815,11 +813,12 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem cropViewItem,
             ManureApplicationViewItem manureApplicationViewItem)
         {
-            return !manureApplicationViewItem.ManureStateType.IsLiquidManure()
-                ? _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(
-                    cropViewItem.TillageType)
-                : _beefDairyDefaultEmissionFactorsProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(
-                    manureApplicationViewItem.ManureApplicationMethod);
+
+            var tillageType = cropViewItem.TillageType;
+            var manureStateType = manureApplicationViewItem.ManureStateType;
+            var manureApplicationMethod = manureApplicationViewItem.ManureApplicationMethod;
+
+            return !manureStateType.IsLiquidManure() ? this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(tillageType) : this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationMethod);
         }
 
         #endregion

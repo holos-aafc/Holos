@@ -17,7 +17,7 @@ namespace H.Core.Providers.Animals
     /// system. For beef cattle, dairy cattle and broilers, layers and turkeys, the Fracvolatilization values are
     /// estimated by Holos 
     /// </summary>
-    public class Table_36_Livestock_Emission_Conversion_Factors_Provider : IEmissionDataProvider
+    public class Table_36_Livestock_Emission_Conversion_Factors_Provider : IAnimalEmissionFactorsProvider
     {
         #region Fields
 

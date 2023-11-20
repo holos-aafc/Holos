@@ -342,6 +342,7 @@
     <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureItemBase.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
+    <Compile Include="Providers\Animals\IAnimalAmmoniaEmissionFactorProvider.cs" />
     <Compile Include="Providers\Animals\Table 28\ITable_28_Production_Days_Provider.cs" />
     <Compile Include="Providers\Animals\Table 28\ProductionDaysData.cs" />
     <Compile Include="Providers\Animals\Table 28\Table_28_Production_Days_Provider.cs" />
@@ -499,7 +500,7 @@
     <Compile Include="Providers\Animals\NitrogenConcentrationOfSolidManureProvider.cs" />
     <Compile Include="Providers\Animals\NitrogenConcentrationOfSolidManureTableData.cs" />
     <Compile Include="Providers\Animals\IEmissionData.cs" />
-    <Compile Include="Providers\Animals\IEmissionDataProvider.cs" />
+    <Compile Include="Providers\Animals\IAnimalEmissionFactorsProvider.cs" />
     <Compile Include="Providers\Animals\Table_41_Poultry_NExcretionRate_Parameter_Values_Data.cs" />
     <Compile Include="Providers\Animals\Table_41_Poultry_NExcretionRate_Parameter_Values_Provider.cs" />
     <Compile Include="Providers\Animals\Table_23_Feeding_Activity_Coefficient_Sheep_Provider.cs" />

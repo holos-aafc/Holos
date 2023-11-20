@@ -462,48 +462,66 @@ namespace H.Core
                 return Enumerable.Empty<Farm>();
             }
 
-            var jsonData = string.Empty;
-            var success = true;
+            try
+            {
+                using (StreamReader r = new StreamReader(fileName))
+                {
+                    using (JsonReader reader = new JsonTextReader(r))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+
+                        // Serializer and deserializer must both have this set to Auto
+                        serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                       return serializer.Deserialize<List<Farm>>(reader);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError($"{e.Message}");
+                if (e.InnerException != null)
+                {
+                    Trace.TraceError($"{e.InnerException.ToString()}");
+                }
+                return Enumerable.Empty<Farm>();
+            }
+        }
+
+        public async Task<IEnumerable<Farm>> GetFarmsFromExportFileAsync(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return Enumerable.Empty<Farm>();
+            }
 
             try
             {
-                jsonData = File.ReadAllText(fileName);
-            }
-            catch (FileNotFoundException)
-            {
-                success = false;
-            }
-
-            if (success)
-            {
-                ObservableCollection<Farm> farms = new ObservableCollection<Farm>();
-
-                try
+                return await Task.Run(() =>
                 {
-                    /*
-                     * Replace namespaces in old farm files so deserialization succeeds (some classes were moved from H project to H.Core so any old farm files will not deserialize without
-                     * these adjustments.
-                     */
-
-                    jsonData = jsonData.Replace(@"H.Views.DetailViews.LandManagement.FieldSystem.FieldSystemDetailsStageState, H", "H.Core.Models.LandManagement.Fields.FieldSystemDetailsStageState, H.Core");
-                    jsonData = jsonData.Replace(@"H.Models.LandManagement.Fields.FieldSystemComponent, H", "H.Core.Models.LandManagement.Fields.FieldSystemComponent, H.Core");
-                    jsonData = jsonData.Replace(@"H.Models.LandManagement.Rotation.RotationComponent, H", "H.Core.Models.LandManagement.Rotation.RotationComponent, H.Core");
-
-                    farms = JsonConvert.DeserializeObject<ObservableCollection<Farm>>(jsonData, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-                }
-                catch (Exception e)
-                {
-                    Trace.TraceError($"{e.Message}");
-                    if (e.InnerException != null)
+                    using (StreamReader r = new StreamReader(fileName))
                     {
-                        Trace.TraceError($"{e.InnerException.ToString()}");
+                        using (JsonReader reader = new JsonTextReader(r))
+                        {
+                            JsonSerializer serializer = new JsonSerializer();
+
+                            // Serializer and deserializer must both have this set to Auto
+                            serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                            return serializer.Deserialize<List<Farm>>(reader);
+                        }
                     }
-                }
-
-                return farms;
+                });
             }
-
-            return Enumerable.Empty<Farm>();
+            catch (Exception e)
+            {
+                Trace.TraceError($"{e.Message}");
+                if (e.InnerException != null)
+                {
+                    Trace.TraceError($"{e.InnerException.ToString()}");
+                }
+                return Enumerable.Empty<Farm>();
+            }
         }
 
         /// <summary>

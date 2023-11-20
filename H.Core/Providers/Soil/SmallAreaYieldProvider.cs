@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Providers.AnaerobicDigestion;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Soil
@@ -15,9 +16,13 @@ namespace H.Core.Providers.Soil
         #region Fields
 
         private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
+        private readonly CropTypeStringConverter _cropStringConverter = new CropTypeStringConverter();
 
         // Use a dictionary since there are > 1M records in the file
         private readonly Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData> _cache = new Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData>();
+
+        private readonly Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData> _updatedYields = new Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData>();
+
 
         #endregion
 
@@ -37,10 +42,11 @@ namespace H.Core.Providers.Soil
 
         #region Public Methods
 
-        public void InitializeAsync()
+        public async Task InitializeAsync()
         {
             // Read the file async since this is a large file
-            Task.Run(this.ReadFile);
+            await Task.Run(this.ReadFile);
+            await Task.Run(ReadUpdatedYields);
         }
 
         public void Initialize()
@@ -76,6 +82,18 @@ namespace H.Core.Providers.Soil
             if (_cache.ContainsKey((year: year, polygon: polygon, cropType: lookupCropType, province: province)))
             {
                 return _cache[(year: year, polygon: polygon, cropType: lookupCropType, province: province)];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public SmallAreaYieldData GetUpdatedData(int year, int polygon, CropType cropType, Province province)
+        {
+            if (_updatedYields.ContainsKey((year: year, polygon: polygon, cropType: cropType, province: province)))
+            {
+                return _updatedYields[(year: year, polygon: polygon, cropType: cropType, province: province)];
             }
             else
             {
@@ -393,6 +411,43 @@ namespace H.Core.Providers.Soil
             this.FinishedReadingFile?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Reads the csv file containing data for emission factors.
+        /// </summary>
+        private void ReadUpdatedYields()
+        {
+            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.UpdatedSmallAreaYields).ToList();
+
+            var crops = fileLines.ElementAt(0).Skip(5).ToList();
+
+            foreach (string[] line in fileLines.Skip(1))
+            {
+                var id = int.Parse(line[0]);
+                var year = int.Parse(line[1]);
+                Province province = _provinceStringConverter.Convert(line[2]);
+                var polygon = int.Parse(line[3]);
+
+                var yieldLocationInFile = 5;
+                foreach (var entry in crops)
+                {
+                    var cropType = _cropStringConverter.Convert(entry);
+                    var yield = string.IsNullOrWhiteSpace(line[yieldLocationInFile])
+                        ? 0
+                        : int.Parse(line[yieldLocationInFile]);
+
+                    _updatedYields.Add((year, polygon, cropType, province), new SmallAreaYieldData()
+                    {
+                        Id = id,
+                        Polygon = polygon,
+                        Province = province,
+                        CropType = cropType,
+                        Year = year,
+                        Yield = yield,
+                    });
+                    yieldLocationInFile++;
+                }
+            }
+        }
         #endregion
     }
 }

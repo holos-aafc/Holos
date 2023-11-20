@@ -157,6 +157,7 @@
     <None Include="Resources\ab_car_to_slc.csv" />
     <None Include="Resources\ab_default_yields.csv" />
     <None Include="Resources\Agt_Ratios.csv" />
+    <None Include="Resources\small_area_yields_updated_data.csv" />
     <None Include="Resources\Table_10_Default_Values_For_Steady_State_Method.csv" />
     <None Include="Resources\Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv" />
     <None Include="Resources\bc_default_yields.csv" />

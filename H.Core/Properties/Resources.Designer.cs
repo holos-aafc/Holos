@@ -9682,6 +9682,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import Data.
+        /// </summary>
+        public static string LabelImportData {
+            get {
+                return ResourceManager.GetString("LabelImportData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incubation.
         /// </summary>
         public static string LabelIncubation {
@@ -12400,6 +12409,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exporting farms. Please wait and do not close this window while data is being exported..
+        /// </summary>
+        public static string MessageExportingDataWarning {
+            get {
+                return ResourceManager.GetString("MessageExportingDataWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type of fallow can be entered on this tab. Additional information for fallow land can be entered by clicking on the &apos;Show Additional Information&apos; button..
         /// </summary>
         public static string MessageFallowGeneralTab {
@@ -12414,6 +12432,15 @@ namespace H.Core.Properties {
         public static string MessageFertilizerTab {
             get {
                 return ResourceManager.GetString("MessageFertilizerTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing farms. Please wait and do not close this window while data is being imported..
+        /// </summary>
+        public static string MessageImportFarmWarning {
+            get {
+                return ResourceManager.GetString("MessageImportFarmWarning", resourceCulture);
             }
         }
         

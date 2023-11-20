@@ -8,6 +8,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Infrastructure;
@@ -18,13 +19,32 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Fields
 
-        protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
-        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
-        
         private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly DigestateService _digestateService = new DigestateService();
-        private readonly IManureService _manureService = new ManureService();
+
+        #endregion
+
+        #region Properties
+        
+        public IManureService ManureService { get; set; }
+
+        public IClimateProvider ClimateProvider { get; set; }
+
+        public IAnimalEmissionFactorsProvider LivestockEmissionConversionFactorsProvider { get; set; }
+        public IAnimalAmmoniaEmissionFactorProvider AnimalAmmoniaEmissionFactorProvider { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public N2OEmissionFactorCalculator()
+        {
+            this.ManureService = new ManureService();
+            this.ClimateProvider = new ClimateProvider();
+            this.LivestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
+            this.AnimalAmmoniaEmissionFactorProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
+        }
 
         #endregion
 

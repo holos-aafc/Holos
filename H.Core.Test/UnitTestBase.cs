@@ -8,7 +8,10 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 using H.Core.Services;
+using H.Core.Services.Animals;
 using Moq;
 
 namespace H.Core.Test
@@ -19,6 +22,14 @@ namespace H.Core.Test
 
         protected Mock<IFarmResultsService> _mockFarmResultService;
         protected IFarmResultsService _mockFarmResultServiceObject;
+        protected Mock<IManureService> _mockManureService;
+        protected IManureService _mockManureServiceObject;
+        protected Mock<IClimateProvider> _mockClimateProvider;
+        protected IClimateProvider _mockClimateProviderObject;
+        protected Mock<IAnimalEmissionFactorsProvider> _mockEmissionDataProvider;
+        protected IAnimalEmissionFactorsProvider _mockEmissionDataProviderObject;
+        protected Mock<IAnimalAmmoniaEmissionFactorProvider> _mockAnimalAmmoniaEmissionFactorProvider;
+        protected IAnimalAmmoniaEmissionFactorProvider _mockAnimalAmmoniaEmissionFactorProviderObject;
 
         #endregion
 
@@ -28,10 +39,23 @@ namespace H.Core.Test
         {
             _mockFarmResultService = new Mock<IFarmResultsService>();
             _mockFarmResultServiceObject = _mockFarmResultService.Object;
+
+            _mockManureService = new Mock<IManureService>();
+            _mockManureServiceObject = _mockManureService.Object;
+
+            _mockClimateProvider = new Mock<IClimateProvider>();
+            _mockClimateProviderObject = _mockClimateProvider.Object;
+
+            _mockEmissionDataProvider = new Mock<IAnimalEmissionFactorsProvider>();
+            _mockEmissionDataProviderObject = _mockEmissionDataProvider.Object;
+
+            _mockAnimalAmmoniaEmissionFactorProvider = new Mock<IAnimalAmmoniaEmissionFactorProvider>();
+            _mockAnimalAmmoniaEmissionFactorProviderObject = _mockAnimalAmmoniaEmissionFactorProvider.Object;
         }
 
         #endregion
 
+        #region Public Methods
         public Storage InitializeStorage()
         {
             var storage = new Storage
@@ -77,7 +101,7 @@ namespace H.Core.Test
              * Manure exports
              */
 
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() {DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy });
             farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy });
 
             return farm;
@@ -113,9 +137,9 @@ namespace H.Core.Test
             var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { groupEmissionsByDay });
 
             var animalGroupResults = new AnimalGroupEmissionResults();
-            animalGroupResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>() {groupEmissionsByMonth};
+            animalGroupResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>() { groupEmissionsByMonth };
 
-            results.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() {animalGroupResults};
+            results.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() { animalGroupResults };
 
             return results;
         }
@@ -161,5 +185,24 @@ namespace H.Core.Test
 
             return component;
         }
+
+        public CropViewItem GetTestCropViewItem()
+        {
+            var cropViewItem = new CropViewItem();
+            cropViewItem.Area = 1;
+
+            cropViewItem.ManureApplicationViewItems = new ObservableCollection<ManureApplicationViewItem>();
+
+            var manureApplicationViewItem = new ManureApplicationViewItem();
+            manureApplicationViewItem.ManureLocationSourceType = ManureLocationSourceType.Livestock;
+            manureApplicationViewItem.AnimalType = AnimalType.BeefBackgrounderHeifer;
+            manureApplicationViewItem.AmountOfManureAppliedPerHectare = 50;
+
+            cropViewItem.ManureApplicationViewItems.Add(manureApplicationViewItem);
+
+            return cropViewItem;
+        }
+
+        #endregion
     }
 }

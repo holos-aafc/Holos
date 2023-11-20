@@ -1207,6 +1207,18 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OBJECTID,Year,Province,POLY_ID,POLYID_YEAR,BARLEY,CANARYSEED,CANOLA,CHICKPEAS,GRAINCORN,DRYPEAS,DURUMWHEAT,FALLRYE,FLAXSEED,LENTILS,MUSTARDSEED,OATS,RYE,SOYBEANS,SPRINGRYE,SPRINGWHEAT,SUNFLOWERSEED,TRITICALE,WHEAT,WINTERWHEAT
+        ///1,1976,AB,,Small Area Data Region 10 - Alberta,2300,,,,,,1900,,1000,,,1900,,,,1900,,,1900,2300
+        ///2,1977,AB,,Small Area Data Region 10 - Alberta,1700,,,,,,1100,,800,,,1000,,,,1100,,,1100,1600
+        ///3,1978,AB,,Small Area Data Region 10 - Alberta,2100,,900,,,,1700,,1300,,,1400,,,,1600,,,1600,2 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string small_area_yields_updated_data {
+            get {
+                return ResourceManager.GetString("small_area_yields_updated_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,SOILNAME,KIND,WATERTBL,ROOTRESTRI,RESTR_TYPE,DRAINAGE,PMTEX1,PMTEX2,PMTEX3,PMCHEM1,PMCHEM2,PMCHEM3,MDEP1,MDEP2,MDEP3,ORDER2,G_GROUP2,S_GROUP2,ORDER3,G_GROUP3,S_GROUP3
         ///ABABCgl~~~N,AB,ABC,gl~~~,N,ATHABASCA,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
         ///ABABCst~~~A,AB,ABC,st~~~,A,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
@@ -1589,10 +1601,10 @@ namespace H.Content.Properties {
         ///Swine,Grower to finish,,Hogs,114,7 (1),
         ///,Isowean,Weaning,Weaners,35,7 (1),
         ///,Farrow to wean,,Sows (2),140,0,
-        ///,Farrow to wean,Weaned,Piglets,21,119,
+        ///,Farrow to wean,Weaning,Piglets,21,119,
         ///,Farrow to finish,,Sows (2),140,0,
         ///,Farrow to finish,Weaned,Piglets,21,119 (3),
-        ///,Farrow to finish,Weanin [rest of string was truncated]&quot;;.
+        ///,Farrow to finish,Weani [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_28_Average_Number_Of_Production_Days {
             get {
@@ -1694,17 +1706,16 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ,,,,,,CFP at plant gate ,,
-        ///,,,,,,Production (US numbers),Application,
-        ///Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source
-        ///Urea,Urea,46,0,0,0,1.18,0.73,Brentrup et al. 2016.
-        ///Ammonia,NH3,82,0,0,0,1.07,,
-        ///Urea ammonium nitrate,UAN,30,0,0,0,1.5,0.25,Brentrup et al. 2016.
-        ///Ammonium nitrate,AN,34,0,0,0,2.52,,Brentrup et al. 2016.
-        ///Calcium ammonium nitrate,CAN,27,0,0,0,2.08,,Brentrup et al. 2016.
-        ///Ammonium sulphate,AS,20.5,0,0,24,0.69,,Brentrup et al. 2016.
-        ///MES,,13,33,0,15,,,
-        ///Monoammonium  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to ,,,,,,CFP at plant gate ,,,
+        ///,,,,,,Production (US numbers),Application,,
+        ///Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source,
+        ///Urea,Urea,46,0,0,0,1.01,0.73,Brentrup et al. 2018.,
+        ///Ammonia,NH3,82,0,0,0,2.49,,,
+        ///Urea ammonium nitrate,UAN,30,0,0,0,1.33,0.25,Brentrup et al. 2018.,
+        ///Ammonium nitrate (prilled),AN,33.5,0,0,0,2.28,,Brentrup et al. 2018.,
+        ///Ammonium nitrate (granulated),AN,33.5,0,0,0,2.25,,Brentrup et al. 2018.,
+        ///Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al. 2018.,
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
             get {
@@ -1864,14 +1875,14 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Table 69. Fractions of dairy cattle N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990–2020, at a provincial scale&quot;,,,,,,,,,,,
+        ///   Looks up a localized string similar to &quot;Table 61. Fractions of dairy cattle N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990â€“2020, at a provincial scale&quot;,,,,,,,,,,,
         ///Implied EF (kg NH3-N volatilized kg-1 manure N applied),,,,,,,,,,,
         ///,,,,,,,,,,,
         ///Year,BC,AB,SK,MB,ON,QC,NS,NB,NL,PEI,
         ///1990,0.1,0.13,0.15,0.16,0.18,0.17,0.2,0.2,0.19,0.18,
         ///1995,0.09,0.13,0.15,0.16,0.18,0.17,0.19,0.19,0.19,0.18,
         ///2000,0.09,0.12,0.14,0.15,0.17,0.16,0.18,0.18,0.19,0.18,
-        ///2005,0.08,0.11,0.13,0.14,0.17,0.15,0.16,0.1 [rest of string was truncated]&quot;;.
+        ///2005,0.08,0.11,0.13,0.14,0.17,0.15,0.16,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_61_Fractions_of_dairy_cattle_N_volatilized {
             get {
@@ -1880,14 +1891,14 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Table 70. Fractions of swine N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990–2020, at a provincial scale&quot;,,,,,,,,,,,
+        ///   Looks up a localized string similar to &quot;Table 62. Fractions of swine N volatilized as ammonia resulting from the application of manure N fertilizer, from select years, 1990â€“2020, at a provincial scale&quot;,,,,,,,,,,,
         ///Implied EF (kg NH3-N volatilized kg-1 manure N applied),,,,,,,,,,,
         ///,,,,,,,,,,,
         ///Year,BC,AB,SK,MB,ON,QC,NS,NB,NL,PEI,
         ///1990,0.22,0.14,0.15,0.14,0.21,0.26,0.28,0.28,0.22,0.28,
         ///1995,0.22,0.13,0.13,0.12,0.21,0.25,0.27,0.27,0.22,0.27,
         ///2000,0.22,0.13,0.12,0.11,0.2,0.25,0.25,0.25,0.23,0.26,
-        ///2005,0.22,0.12,0.12,0.11,0.2,0.24,0.24,0.25,0.22 [rest of string was truncated]&quot;;.
+        ///2005,0.22,0.12,0.12,0.11,0.2,0.24,0.24,0.25,0. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_62_Fractions_of_swine_N_volatilized {
             get {
