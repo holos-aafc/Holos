@@ -4,8 +4,6 @@ namespace H.Core.Services.Animals
 {
     public class LandApplicationEmissionResult
     {
-        public CropViewItem CropViewItem { get; set; }
-
         /// <summary>
         /// (kg N2O)
         /// </summary>

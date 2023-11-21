@@ -13,5 +13,9 @@ namespace H.Core.Providers.Climate
         double GetAnnualPrecipitation(Farm farm, DateTime dateTime);
         double GetGrowingSeasonPrecipitation(Farm farm, DateTime dateTime);
         double GetGrowingSeasonEvapotranspiration(Farm farm, DateTime dateTime);
+        double GetAnnualPrecipitation(Farm farm, int year);
+        double GetAnnualEvapotranspiration(Farm farm, int year);
+        double GetGrowingSeasonPrecipitation(Farm farm, int year);
+        double GetGrowingSeasonEvapotranspiration(Farm farm, int year);
     }
 }

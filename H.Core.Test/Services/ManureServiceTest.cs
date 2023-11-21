@@ -44,7 +44,7 @@ namespace H.Core.Test.Services
             _mockAnimalService = new Mock<IAnimalService>();
             _sut = new ManureService();
 
-            _componentResults = base.GetNonEmptyTestAnimalComponentEmissionsResults();
+            _componentResults = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
             _mockAnimalService.Setup(x => x.GetAnimalResults(It.IsAny<AnimalType>(), It.IsAny<Farm>())).Returns(new List<AnimalComponentEmissionsResults>() { _componentResults });
         }
 

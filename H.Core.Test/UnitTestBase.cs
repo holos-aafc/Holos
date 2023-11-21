@@ -144,7 +144,7 @@ namespace H.Core.Test
             return results;
         }
 
-        public AnimalComponentEmissionsResults GetNonEmptyTestAnimalComponentEmissionsResults()
+        public AnimalComponentEmissionsResults GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults()
         {
             var results = new AnimalComponentEmissionsResults();
             results.Component = new BackgroundingComponent();
@@ -161,6 +161,35 @@ namespace H.Core.Test
                 AdjustedAmountOfTanInStoredManureOnDay = 100,
                 OrganicNitrogenCreatedOnDay = 50,
                 TotalVolumeOfManureAvailableForLandApplication = 100,
+            };
+
+            var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { groupEmissionsByDay });
+
+            var animalGroupResults = new AnimalGroupEmissionResults();
+            animalGroupResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>() { groupEmissionsByMonth };
+
+            results.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() { animalGroupResults };
+
+            return results;
+        }
+
+        public AnimalComponentEmissionsResults GetNonEmptyTestDairyCattleAnimalComponentEmissionsResults()
+        {
+            var results = new AnimalComponentEmissionsResults();
+            results.Component = new DairyComponent();
+
+            var monthsAndDaysData = new MonthsAndDaysData();
+            monthsAndDaysData.Year = DateTime.Now.Year;
+
+            var managementPeriod = new ManagementPeriod();
+            managementPeriod.HousingDetails = new HousingDetails();
+            monthsAndDaysData.ManagementPeriod = managementPeriod;
+
+            var groupEmissionsByDay = new GroupEmissionsByDay()
+            {
+                AdjustedAmountOfTanInStoredManureOnDay = 200,
+                OrganicNitrogenCreatedOnDay = 60,
+                TotalVolumeOfManureAvailableForLandApplication = 500,
             };
 
             var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { groupEmissionsByDay });
@@ -192,15 +221,39 @@ namespace H.Core.Test
             cropViewItem.Area = 1;
 
             cropViewItem.ManureApplicationViewItems = new ObservableCollection<ManureApplicationViewItem>();
+            cropViewItem.ManureApplicationViewItems.Add(this.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
 
+            return cropViewItem;
+        }
+
+        public ManureApplicationViewItem GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure()
+        {
             var manureApplicationViewItem = new ManureApplicationViewItem();
             manureApplicationViewItem.ManureLocationSourceType = ManureLocationSourceType.Livestock;
             manureApplicationViewItem.AnimalType = AnimalType.BeefBackgrounderHeifer;
             manureApplicationViewItem.AmountOfManureAppliedPerHectare = 50;
 
-            cropViewItem.ManureApplicationViewItems.Add(manureApplicationViewItem);
+            return manureApplicationViewItem;
+        }
 
-            return cropViewItem;
+        public ManureApplicationViewItem GetTestBeefCattleManureApplicationViewItemUsingImportedManure()
+        {
+            var manureApplicationViewItem = new ManureApplicationViewItem();
+            manureApplicationViewItem.ManureLocationSourceType = ManureLocationSourceType.Imported;
+            manureApplicationViewItem.AnimalType = AnimalType.BeefBackgrounderHeifer;
+            manureApplicationViewItem.AmountOfManureAppliedPerHectare = 50;
+
+            return manureApplicationViewItem;
+        }
+
+        public ManureApplicationViewItem GetTestDairyCattleManureApplicationViewItemUsingImportedManure()
+        {
+            var manureApplicationViewItem = new ManureApplicationViewItem();
+            manureApplicationViewItem.ManureLocationSourceType = ManureLocationSourceType.Imported;
+            manureApplicationViewItem.AnimalType = AnimalType.DairyHeifers;
+            manureApplicationViewItem.AmountOfManureAppliedPerHectare = 333;
+
+            return manureApplicationViewItem;
         }
 
         #endregion

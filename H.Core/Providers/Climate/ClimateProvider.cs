@@ -87,7 +87,12 @@ namespace H.Core.Providers.Climate
 
         public double GetAnnualPrecipitation(Farm farm, DateTime dateTime)
         {
-            return farm.GetAnnualPrecipitation(dateTime.Year);
+            return this.GetAnnualPrecipitation(farm, dateTime.Year);
+        }
+
+        public double GetAnnualPrecipitation(Farm farm, int year)
+        {
+            return farm.GetAnnualPrecipitation(year);
         }
 
         public double GetGrowingSeasonPrecipitation(Farm farm, DateTime dateTime)
@@ -95,14 +100,29 @@ namespace H.Core.Providers.Climate
             return farm.GetGrowingSeasonPrecipitation(dateTime.Year);
         }
 
+        public double GetGrowingSeasonPrecipitation(Farm farm, int year)
+        {
+            return farm.GetGrowingSeasonPrecipitation(year);
+        }
+
         public double GetGrowingSeasonEvapotranspiration(Farm farm, DateTime dateTime)
         {
-            return farm.GetGrowingSeasonEvapotranspiration(dateTime.Year);
+            return this.GetGrowingSeasonEvapotranspiration(farm, dateTime.Year);
+        }
+
+        public double GetGrowingSeasonEvapotranspiration(Farm farm, int year)
+        {
+            return farm.GetGrowingSeasonEvapotranspiration(year);
         }
 
         public double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime)
         {
-            return farm.GetAnnualEvapotranspiration(dateTime.Year);
+            return this.GetAnnualEvapotranspiration(farm, dateTime.Year);
+        }
+
+        public double GetAnnualEvapotranspiration(Farm farm, int year)
+        {
+            return farm.GetAnnualEvapotranspiration(year);
         }
 
         public ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame)
@@ -111,14 +131,14 @@ namespace H.Core.Providers.Climate
 
             var temperatureNormals = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
             var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
-            var evapotranpirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
+            var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
 
             return new ClimateData()
             {
                 DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData),
                 TemperatureData = temperatureNormals,
                 PrecipitationData = precipitationNormals,
-                EvapotranspirationData = evapotranpirationNormals,
+                EvapotranspirationData = evapotranspirationNormals,
             };
         }
 

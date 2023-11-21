@@ -743,48 +743,6 @@ namespace H.Core.Models
             }
         }
 
-        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var fieldSystemComponent in this.FieldSystemComponents)
-            {
-                result.AddRange(fieldSystemComponent.GetManureApplicationViewItems(animalType));
-            }
-
-            return result;
-        }
-
-        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsAndAssociatedCropByAnimalType(AnimalType animalType)
-        {
-            var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
-
-            foreach (var viewItem in this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems)
-            {
-                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-                {
-                    if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
-                    {
-                        result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(viewItem, manureApplicationViewItem));
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public List<ManureApplicationViewItem> GetManureApplicationViewItems(List<AnimalType> animalTypes)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var animalType in animalTypes)
-            {
-                result.AddRange(this.GetManureApplicationViewItems(animalType));
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Returns the total volume of all manure applications made on a particular date using a particular type of manure (beef, dairy, etc.)
         /// </summary>
