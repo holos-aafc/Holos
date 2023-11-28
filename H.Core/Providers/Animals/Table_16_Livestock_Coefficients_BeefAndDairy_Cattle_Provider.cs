@@ -66,7 +66,6 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
-
                 case AnimalType.BeefBulls:
                 {
                     return new AnimalCoefficientData()

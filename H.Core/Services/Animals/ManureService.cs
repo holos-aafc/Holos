@@ -80,6 +80,82 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
+        public double GetFractionOfTotalManureUsedFromLandApplication(CropViewItem cropViewItem, ManureApplicationViewItem manureApplicationViewItem)
+        {
+            var result = 0d;
+
+            var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(manureApplicationViewItem.DateOfApplication.Year, manureApplicationViewItem.AnimalType);
+            var totalVolumeFromApplication = manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
+
+            result = totalVolumeFromApplication / totalVolumeOfManureCreated;
+
+            return result;
+        }
+
+        public double GetFractionOfTotalManureUsedFromExports(ManureExportViewItem manureExport)
+        {
+            var result = 0d;
+
+            var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(manureExport.DateOfExport.Year, manureExport.AnimalType);
+            var totalVolumeFromApplication = manureExport.Amount;
+
+            result = totalVolumeFromApplication / totalVolumeOfManureCreated;
+
+            return result;
+        }
+
+        public double GetAmountOfTanUsedDuringLandApplication(CropViewItem cropViewItem, ManureApplicationViewItem manualApplicationViewItem)
+        {
+            var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manualApplicationViewItem);
+            var totalTANCreated = this.GetTotalTANCreated(manualApplicationViewItem.DateOfApplication.Year, manualApplicationViewItem.AnimalType);
+
+            return fractionUsed * totalTANCreated;
+        }
+
+        public double GetAmountOfTanUsedDuringLandApplications(CropViewItem cropViewItem)
+        {
+            var result = 0d;
+
+            foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+            {
+                result += this.GetAmountOfTanUsedDuringLandApplication(cropViewItem, manureApplicationViewItem);
+            }
+
+            return result;
+        }
+
+        public double GetAmountOfTanExported(Farm farm, int year)
+        {
+            var result = 0d;
+
+            foreach (var farmManureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                result += this.GetAmountOfTanExported(farmManureExportViewItem, year);
+            }
+
+            return result;
+        }
+
+        public List<int> GetYearsWithManureApplied(Farm farm)
+        {
+            var s = farm.GetFieldSystemDetailsStageState();
+
+            throw new NotImplementedException();
+        }
+
+        public double GetAmountOfTanExported(ManureExportViewItem manureExportViewItem, int year)
+        {
+            var result = 0d;
+
+            var fractionUsed = this.GetFractionOfTotalManureUsedFromExports(manureExportViewItem);
+            var totalTanCreated = this.GetTotalTANCreated(manureExportViewItem.DateOfExport.Year, manureExportViewItem.AnimalType);
+
+            result = fractionUsed * totalTanCreated;
+
+            return result;
+            
+        }
+
         public double GetTotalVolumeOfManureExported(int year, Farm farm, AnimalType animalType)
         {
             var total = 0d;
@@ -314,13 +390,62 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
+        public double GetTotalNitrogenAppliedToAllFields(int year, AnimalType animalType)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.NitrogenSumOfAllManureApplicationsMade;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalTanAppliedToField(int year, CropViewItem cropViewItem)
+        {
+            var amount = 0d;
+
+            foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+            {
+                var totalTANCreated = this.GetTotalTANCreated(year, manureApplicationViewItem.AnimalType);
+                var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manureApplicationViewItem);
+
+                amount += totalTANCreated * fractionUsed;
+            }
+
+            return amount;
+        }
+        public double GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems)
+        {
+            var result = 0d;
+
+            foreach (var cropViewItem in viewItems)
+            {
+                var amount = this.GetTotalTanAppliedToField(year, cropViewItem);
+                result += amount;
+            }
+
+            return result;
+        }
+
         public double GetTotalNitrogenRemaining(int year, Farm farm)
         {
-            var totalAvailable = this.GetTotalVolumeCreated(year);
-            var totalApplied = this.GetTotalNitrogenAppliedToAllFields(year);
-            var totalExported = this.GetTotalNitrogenFromExportedManure(year, farm);
+            var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
+            var totalAppliedNitrogen = this.GetTotalNitrogenAppliedToAllFields(year);
+            var totalExportedNitrogen = this.GetTotalNitrogenFromExportedManure(year, farm);
 
-            return totalAvailable - totalApplied - totalExported;
+            return totalAvailableNitrogen - totalAppliedNitrogen - totalExportedNitrogen;
+        }
+
+        public double GetTotalNitrogenRemaining(int year, Farm farm, AnimalType animalType)
+        {
+            var totalNitrogenCreated = this.GetTotalNitrogenCreated(year, animalType);
+            var totalNitrogenApplied = this.GetTotalNitrogenAppliedToAllFields(year, animalType);
+            var totalNitrogenExported = this.GetTotalNitrogenFromExportedManure(year, farm, animalType);
+
+            return totalNitrogenCreated - totalNitrogenApplied - totalNitrogenExported;
         }
 
         public double GetTotalNitrogenFromExportedManure(int year, Farm farm)
@@ -486,6 +611,8 @@ namespace H.Core.Services.Animals
                         var amountOfManureAppliedPerHectare = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
                         var totalVolume = amountOfManureAppliedPerHectare * cropViewItem.Area;
                         manureTank.VolumeSumOfAllManureApplicationsMade += totalVolume;
+
+                        // Account for the total TAN that was applied and removed from the tank
                     }
                 }
             }

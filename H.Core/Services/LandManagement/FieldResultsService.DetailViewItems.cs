@@ -313,7 +313,7 @@ namespace H.Core.Services.LandManagement
             Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(CreateItems)}: creating details view items for field: '{fieldSystemComponent.Name}' and farm: '{farm.Name}'");
 
             // When called from the CLI, and the user specifies a path to a custom yield file, read in data now and assign yield data to the farm
-            if (farm.YieldAssignmentMethod == YieldAssignmentMethod.InputFile)
+            if (farm.IsCommandLineMode && farm.YieldAssignmentMethod == YieldAssignmentMethod.InputFile)
             {
                 if (_customFileYieldProvider.HasExpectedInputFormat(farm.PathToYieldInputFile))
                 {

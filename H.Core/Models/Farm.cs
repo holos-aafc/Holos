@@ -976,6 +976,19 @@ namespace H.Core.Models
             return result;
         }
 
+        public FieldSystemDetailsStageState GetFieldSystemDetailsStageState()
+        {
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
+            {
+                return stageState;
+            }
+            else
+            {
+                return new FieldSystemDetailsStageState();
+            }
+        }
+
         public ObservableCollection<ErrorInformation> GetErrors()
         {
             // Iterate over each component (Farm.Components) in the farm and (create this method first) call GetErrors() from each component. 
@@ -1145,18 +1158,7 @@ namespace H.Core.Models
 
         #region Private Methods
 
-        private FieldSystemDetailsStageState GetFieldSystemDetailsStageState()
-        {
-            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
-            if (stageState != null)
-            {
-                return stageState;
-            }
-            else
-            {
-                return new FieldSystemDetailsStageState();
-            }
-        }
+
 
         #endregion
     }

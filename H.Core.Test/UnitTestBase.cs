@@ -252,6 +252,7 @@ namespace H.Core.Test
             manureApplicationViewItem.ManureLocationSourceType = ManureLocationSourceType.Imported;
             manureApplicationViewItem.AnimalType = AnimalType.DairyHeifers;
             manureApplicationViewItem.AmountOfManureAppliedPerHectare = 333;
+            manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare = 50;
 
             return manureApplicationViewItem;
         }

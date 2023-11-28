@@ -249,6 +249,55 @@ namespace H.Core.Test.Services
             Assert.AreEqual(75, result);
         }
 
+        [TestMethod]
+        public void GetFractionOfTotalManureUsed()
+        {
+            var manureApplication = base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure();
+            var farm = base.GetTestFarm();
+            var cropViewItem = base.GetTestCropViewItem();
+            var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {emissions});
+
+            var result = _sut.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manureApplication);
+
+            Assert.AreEqual(0.0005, result);
+        }
+
+        [TestMethod]
+        public void GetAmountOfTanUsedDuringLandApplication()
+        {
+            var manureApplication = base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure();
+            var farm = base.GetTestFarm();
+            var cropViewItem = base.GetTestCropViewItem();
+            var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { emissions });
+
+            var result = _sut.GetAmountOfTanUsedDuringLandApplication(cropViewItem, manureApplication);
+
+            Assert.AreEqual(0.05, result);
+        }
+
+        [TestMethod]
+        public void GetAmountOfTanUsedDuringLandApplications()
+        {
+            var manureApplication = base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure();
+            var farm = base.GetTestFarm();
+            var cropViewItem = base.GetTestCropViewItem();
+            cropViewItem.ManureApplicationViewItems.Clear();
+            cropViewItem.ManureApplicationViewItems.Add(base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
+            cropViewItem.ManureApplicationViewItems.Add(base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
+
+            var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { emissions });
+
+            var result = _sut.GetAmountOfTanUsedDuringLandApplications(cropViewItem);
+
+            Assert.AreEqual(0.05 + 0.05, result);
+        }
+
         #endregion
     }
 }

@@ -33,6 +33,8 @@ namespace H.Core.Services.Animals
         DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm);
 
         /// <summary>
+        /// Returns total TAN created by all animals on farm in specified year
+        /// 
         /// (kg)
         /// </summary>
         double GetTotalTANCreated(int year);
@@ -47,10 +49,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalNitrogenCreated(int year);
 
-        /// <summary>
-        /// (kg)
-        /// </summary>
-        double GetTotalNitrogenCreated(int year, AnimalType animalType);
+        
 
         /// <summary>
         /// (kg)
@@ -92,7 +91,30 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalNitrogenRemaining(int year, Farm farm);
 
+        /// <summary>
+        /// Equation 4.6.2-14
+        /// 
+        /// Stored nitrogen (by animal manure type) available for application to land minus manure applied to fields or exported
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenRemaining(int year, Farm farm, AnimalType animalType);
+
+        /// <summary>
+        /// (kg)
+        /// </summary>
+        double GetTotalNitrogenCreated(int year, AnimalType animalType);
+
         List<AnimalType> GetManureTypesExported(Farm farm, int year);
         List<AnimalType> GetManureTypesImported(Farm farm, int year);
+        double GetFractionOfTotalManureUsedFromLandApplication(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem);
+        double GetAmountOfTanUsedDuringLandApplication(CropViewItem cropViewItem, ManureApplicationViewItem manureApplicationViewItem);
+        double GetAmountOfTanUsedDuringLandApplications(CropViewItem cropViewItem);
+        double GetAmountOfTanExported(ManureExportViewItem manureExportViewItem, int year);
+        double GetFractionOfTotalManureUsedFromExports(ManureExportViewItem manureExport);
+        double GetAmountOfTanExported(Farm farm, int year);
+        List<int> GetYearsWithManureApplied(Farm farm);
+        double GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems);
+        double GetTotalTanAppliedToField(int year, CropViewItem cropViewItem);
     }
 }
