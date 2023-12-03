@@ -144,7 +144,7 @@ namespace H.Core.Services.Animals
                     temperature);
             }
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O

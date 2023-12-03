@@ -58,8 +58,9 @@ namespace H.Core.Providers.Animals
                 N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
                 VolatilizationFraction = 0.21,
                 EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                EmissionFactorLeach = 0.011
             };
+
+            factors.EmissionFactorLeach = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
             if (region == Region.WesternCanada)
             {
@@ -83,21 +84,30 @@ namespace H.Core.Providers.Animals
                 }
             }
 
+            factors.VolatilizationFraction = this.GetVolatilizationFractionForLandApplication(animalType, farm.Province, year);
+
+            return factors;
+        }
+
+        public double GetVolatilizationFractionForLandApplication(AnimalType animalType, Province province, int year)
+        {
             // Swine and dairy have more accurate volatilization fractions based on province and year
             if (animalType.IsSwineType())
             {
-                var volatilizationFraction = _swineManureProvider.GetData(animalType, farm.Province, year);
+                var volatilizationFraction = _swineManureProvider.GetData(animalType, province, year);
 
-                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+                return volatilizationFraction.ImpliedEmissionFactor;
             }
             else if (animalType.IsDairyCattleType())
             {
-                var volatilizationFraction = _dairyManureProvider.GetData(animalType, farm.Province, year);
+                var volatilizationFraction = _dairyManureProvider.GetData(animalType, province, year);
 
-                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+                return volatilizationFraction.ImpliedEmissionFactor;
             }
-
-            return factors;
+            else
+            {
+                return 0.21;
+            }
         }
 
         public IEmissionData GetFactors(
@@ -498,11 +508,7 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration)
+        public double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration)
         {
             if (precipitation > evapotranspiration)
             {
@@ -516,6 +522,10 @@ namespace H.Core.Providers.Animals
                 return 0.005;
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private double GetDirectEmissionFactorBasedOnClimate(
             double precipitation,
@@ -532,9 +542,6 @@ namespace H.Core.Providers.Animals
                 return 0.002;
             }
         }
-
-
-
 
         #endregion
 

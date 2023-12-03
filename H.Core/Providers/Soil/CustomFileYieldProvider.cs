@@ -79,7 +79,7 @@ namespace H.Core.Providers.Soil
         {
             var customUserYieldData = new List<CustomUserYieldData>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
-
+            
             // Determine how many columns we have.
             var firstLine = lines.ElementAt(0);
 

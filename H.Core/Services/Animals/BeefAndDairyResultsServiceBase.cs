@@ -138,6 +138,18 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.TanEnteringStorageSystem = 0;
+                dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = 0;
+                dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = 0;
+                dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = 0;
+                dailyEmissions.AmmoniaEmissionsFromStorageSystem = 0;
+                dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = 0;
+                dailyEmissions.AccumulatedTanInStorageOnDay = 0;
+                dailyEmissions.AdjustedAmmoniaFromStorage = 0;
+            }
+
             /*
              * Volatilization
              */
@@ -153,6 +165,11 @@ namespace H.Core.Services.Animals
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
                     amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                     amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
+            }
+
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.FractionOfManureVolatilized = 0;
             }
 
             base.CalculateVolatilizationEmissions(dailyEmissions, managementPeriod);

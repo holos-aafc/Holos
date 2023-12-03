@@ -15,6 +15,18 @@ namespace H.Core.Models.LandManagement.Fields
             return new List<ManureApplicationViewItem>(imports);
         }
 
+        public List<ManureApplicationViewItem> GetLocalSourcedApplications(int year)
+        {
+            var imports = this.ManureApplicationViewItems.Where(x => x.IsImportedManure() == false && x.DateOfApplication.Year == this.Year).ToList();
+
+            return new List<ManureApplicationViewItem>(imports);
+        }
+
+        public double GetSumOfManureNitrogenApplied()
+        {
+            return this.ManureApplicationViewItems.Sum(x => x.AmountOfManureAppliedPerHectare) * this.Area;
+        }
+
         #endregion
 	}
 }

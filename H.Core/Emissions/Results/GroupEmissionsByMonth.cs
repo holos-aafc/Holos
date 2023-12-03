@@ -593,7 +593,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// This is the total amount available for this month only, not the accumulated amount month-to-month
         /// 
-        /// (kg TAN)
+        /// (kg C)
         /// </summary>
         public double TotalAmountOfCarbonInStoredManureAvailableForMonth
         {

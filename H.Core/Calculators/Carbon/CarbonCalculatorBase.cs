@@ -39,8 +39,7 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         /// <returns>The amount of carbon input during the year (kg C ha^-1)</returns>
         public double CalculateManureCarbonInputPerHectare(
-            CropViewItem viewItem,
-            Farm farm)
+            CropViewItem viewItem)
         {
             return viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
         }

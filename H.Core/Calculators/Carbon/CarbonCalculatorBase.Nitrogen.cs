@@ -325,20 +325,19 @@ namespace H.Core.Calculators.Carbon
 
         protected void CalculateNitrousOxide(CropViewItem currentYearResults, Farm farm)
         {
-            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(currentYearResults.Year);
+            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(currentYearResults.Year, false);
 
             var emissionFactorForSyntheticFertilizer = N2OEmissionFactorCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
             var emissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
-            var weightedEmissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsForYear, farm);
-            
+
             // Emissions from land applied manure
-            var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(currentYearResults, farm);
-            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromLeftOverManure(this.AnimalComponentEmissionsResults, farm, currentYearResults, weightedEmissionFactorForOrganicNitrogen);
+            var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(currentYearResults, farm);
+            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromLeftOverManureForField( farm, currentYearResults);
 
             // Emissions from land applied digestate
             var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(currentYearResults, farm);
-            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverLandAppliedDigestateEmissionsForField(currentYearResults, farm, weightedEmissionFactorForOrganicNitrogen);
+            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateLeftOverLandAppliedDigestateEmissionsForField(currentYearResults, farm);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -407,17 +406,16 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-6
             // Equation 2.7.5-6
-            var remainingManureLeachingEmissions = N2OEmissionFactorCalculator.CalculateLeachingEmissionsFromLeftOverManure(this.AnimalComponentEmissionsResults, farm, this.CurrentYearResults, fractionLeach, emissionFactorLeaching);
-            var remainingManureLeachingEmissionsPerHectare = remainingManureLeachingEmissions / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, this.Year);
+            var remainingManureLeachingEmissions = N2OEmissionFactorCalculator.CalculateLeachingEmissionsFromLeftOverManureForField(farm, this.Year, this.CurrentYearResults);
 
             this.N2O_NFromOrganicNitrogenLeaching = (this.OrganicPool * fractionLeach * emissionFactorLeaching) +
                                                     indirectEmissionsPerHectareFromLandAppliedManure.TotalN2ONFromManureLeaching + 
                                                     indirectEmissionsPerHectareFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching +
-                                                    remainingManureLeachingEmissionsPerHectare;
+                                                    remainingManureLeachingEmissions;
 
             // Equation 2.6.6-7
             // Equation 2.7.5-7
-            var leachingEmissionsFromExportedManure = N2OEmissionFactorCalculator.CalculateLeachingEmissionsFromExportedManure(farm, this.Year, fractionLeach, emissionFactorLeaching);
+            var leachingEmissionsFromExportedManure = N2OEmissionFactorCalculator.CalculateTotalLeachingN2ONFromExportedManure(farm, this.Year);
             // TODO: add in exported organic fertilizer N (v5)
             var totalLeachingEmissionsFromExportedManure = leachingEmissionsFromExportedManure / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, this.Year);
 
@@ -927,7 +925,7 @@ namespace H.Core.Calculators.Carbon
         protected double GetManureAndDigestateNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
         {
             // These will totals for entire field
-            var totalDirectN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreading(cropViewItem, farm);
+            var totalDirectN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(cropViewItem, farm);
             var totalDirectN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(cropViewItem, farm);
 
             // Convert to amount per hecate

@@ -218,7 +218,7 @@ namespace H.Core.Calculators.Carbon
 
             if (farm.IsCommandLineMode == false)
             {
-                viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem, farm);
+                viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem);
             }
 
             viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
@@ -570,7 +570,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-3
+        /// Equation 2.2.2-4
         /// </summary>
         /// <param name="aboveGroundResidueDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
         /// <param name="area">Area of field (ha)</param>
@@ -592,7 +592,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.2-4
+        /// Equation 2.2.2-5
         /// </summary>
         /// <param name="aboveGroundResideDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
         /// <param name="shootToRootRatio">Ratio of below-ground root biomass to above-ground shoot biomass (kg dm ha^-1 (kg dm ha^-1)^-1)</param>

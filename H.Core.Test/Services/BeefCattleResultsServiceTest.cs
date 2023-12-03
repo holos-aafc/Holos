@@ -233,9 +233,8 @@ namespace H.Core.Test.Services
             var averageMonthlyTemperature = 899.5000;
             var result =
                 _resultsService.CalculateTemperatureAdjustedMaintenanceCoefficient(baselineMaintenanceCoefficient, averageMonthlyTemperature);
-            Assert.AreEqual(626.3409, result);
+            Assert.AreEqual(630.5625, result);
         }
-
 
         /// <summary>
         /// Equation 3.1.1-3
@@ -430,10 +429,10 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void CalculateCalfProteinIntakeReturnsCorrectValue()
         {
-            var calfProteinIntakeFromMilk = -8.5625;
+            var calfProteinIntakeFromMilk = 8.5625;
             var calfProteinIntakeFromSolidFood = 1799.3125;
-            var result = _resultsService.CalculateCalfProteinIntake(calfProteinIntakeFromMilk, calfProteinIntakeFromSolidFood);
-            Assert.AreEqual(1790.75, result);
+            var result = _resultsService.CalculateCalfProteinIntake(calfProteinIntakeFromMilk, calfProteinIntakeFromSolidFood, true);
+            Assert.AreEqual(8.5625, result);
         }
 
 

@@ -69,7 +69,7 @@ namespace H.Core.Services.Animals
              * Manure carbon (C)
              */
 
-            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.Pasture, AnimalType.Poultry);
+            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.SolidStorageWithOrWithoutLitter, AnimalType.Poultry);
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
                     manureExcretionRate: managementPeriod.ManureDetails.ManureExcretionRate,
@@ -118,7 +118,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O

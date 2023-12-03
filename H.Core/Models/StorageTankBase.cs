@@ -56,6 +56,9 @@ namespace H.Core.Models
             set => SetProperty(ref _totalTanAvailableForLandApplication, value);
         }
 
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double TotalAmountOfCarbonInStoredManure
         {
             get => _totalAmountOfCarbonInStoredManure;

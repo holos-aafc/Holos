@@ -100,7 +100,7 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem, farm);
+            currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem);
             currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
             currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
@@ -115,7 +115,7 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_p
         ///
-        /// Equation 2.2.2-1
+        /// Equation 2.1.2-1
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
@@ -349,7 +349,6 @@ namespace H.Core.Calculators.Carbon
         /// Equation 2.1.2-12
         /// Equation 2.1.2-16
         /// Equation 2.1.2-19
-        /// Equation 2.1.2-22
         /// Equation 2.1.2-25
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
@@ -1003,7 +1002,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.5-1
+        /// Equation 2.1.4-1
         /// </summary>
         public double CalculateCarbonDioxideEquivalentsForSoil(double soilOrganicCarbonAtInterval)
         {
@@ -1012,7 +1011,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.5-2
+        /// Equation 2.1.4-2
         /// </summary>
         public double CalculateChangeInCarbonDioxideEquivalentsForSoil(double changeInSoilOrganicCarbonAtInterval)
         {
@@ -1021,7 +1020,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.5-3
+        /// Equation 2.1.4-3
         /// </summary>
         public double CalculateCarbonDioxideChangeForSoilsByMonth(double changeInCarbonDioxideEquivalentsForSoil)
         {

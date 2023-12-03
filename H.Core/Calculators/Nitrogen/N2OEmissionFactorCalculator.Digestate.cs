@@ -147,9 +147,11 @@ namespace H.Core.Calculators.Nitrogen
 
         public double CalculateLeftOverLandAppliedDigestateEmissionsForField(
             CropViewItem viewItem,
-            Farm farm,
-            double weightedEmissionFactor)
+            Farm farm)
         {
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
+            var weightedEmissionFactorForOrganicNitrogen = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
+
             var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
             if (component == null)
             {
@@ -157,14 +159,14 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Get all fields that exist in the same year
-            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year);
+            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
 
             // This is the total N remaining after all field applications have been considered
             var nitrogenRemainingAtEndOfYear = viewItem.GetRemainingNitrogenFromDigestateAtEndOfYear();
 
             // The total N2O-N from the remaining N
             var emissionsFromNitrogenRemaining = this.CalculateTotalEmissionsFromRemainingDigestateThatIsAppliedToAllFields(
-                    weightedEmissionFactor: weightedEmissionFactor,
+                    weightedEmissionFactor: weightedEmissionFactorForOrganicNitrogen,
                     totalNitrogenFromRemainingDigestate: nitrogenRemainingAtEndOfYear);
 
             var totalAreaOfAllFields = itemsInYear.Sum(x => x.Area);

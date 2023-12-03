@@ -159,7 +159,7 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
 
-            var result = _sut.GetManureTypesProducedOnFarm(farm);
+            var result = _sut.GetManureCategoriesProducedOnFarm(farm);
 
             Assert.AreEqual(2, result.Count);
         }

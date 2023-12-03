@@ -1249,7 +1249,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double GetTotalCarbonFromAppliedManure()
         {
-            return this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock) + this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            return this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock) + 
+                   this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
         }
 
         /// <summary>
@@ -1269,6 +1270,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// Equation 4.7.1-1
+        /// Equation 4.7.1-2
+        /// 
         /// (kg C year^-1)
         /// </summary>
         public double CalculateTotalCarbonFromManureApplications(IEnumerable<ManureApplicationViewItem> manureApplicationViewItems)

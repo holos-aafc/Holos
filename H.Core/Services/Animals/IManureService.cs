@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -12,7 +13,7 @@ namespace H.Core.Services.Animals
         void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults);
         ManureTank GetTank(AnimalType animalType, int year, Farm farm);
         List<AnimalType> GetValidManureTypes();
-        List<AnimalType> GetManureTypesProducedOnFarm(Farm farm);
+        List<AnimalType> GetManureCategoriesProducedOnFarm(Farm farm);
         double GetVolumeAvailableForExport(int year);
         double GetVolumeAvailableForExport(int year, Farm farm, AnimalType animalType);
         List<ManureApplicationTypes> GetValidManureApplicationTypes();
@@ -111,10 +112,59 @@ namespace H.Core.Services.Animals
         double GetAmountOfTanUsedDuringLandApplication(CropViewItem cropViewItem, ManureApplicationViewItem manureApplicationViewItem);
         double GetAmountOfTanUsedDuringLandApplications(CropViewItem cropViewItem);
         double GetAmountOfTanExported(ManureExportViewItem manureExportViewItem, int year);
-        double GetFractionOfTotalManureUsedFromExports(ManureExportViewItem manureExport);
-        double GetAmountOfTanExported(Farm farm, int year);
+        List<Tuple<double, AnimalType>> GetTANExportedForFarm(Farm farm, int year);
         List<int> GetYearsWithManureApplied(Farm farm);
-        double GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems);
-        double GetTotalTanAppliedToField(int year, CropViewItem cropViewItem);
+
+        /// <summary>
+        /// Returns the total amount of TAN used (by animal/manure type) from all field applications on the farm
+        /// </summary>
+        List<Tuple<double, AnimalType>> GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems);
+
+        /// <summary>
+        /// Returns the total amount of TAN used (by animal/manure type) from all field applications on the field
+        /// </summary>
+        List<Tuple<double, AnimalType>> GetTotalTanAppliedToField(int year, CropViewItem cropViewItem);
+
+        double GetTotalTANExportedByAnimalType(
+            AnimalType animalType,
+            Farm farm,
+            int year);
+
+        /// <summary>
+        /// Equation 4.1.3-16
+        ///
+        /// Total_C_storage
+        ///  
+        /// (kg C)
+        /// </summary>
+        double GetTotalCarbonCreated(int year);
+
+        /// <summary>
+        /// (kg C) 
+        /// </summary>
+        double GetTotalCarbonFromImportedManure(Farm farm, int year);
+
+        /// <summary>
+        /// Equation 4.7.1-3
+        ///
+        /// (kg C)
+        /// </summary>
+        double GetTotalCarbonRemainingForFarm(Farm farm, int year);
+
+        /// <summary>
+        /// Equation 4.7.1-4
+        ///
+        /// (kg C)
+        /// </summary>
+        double GetTotalCarbonRemainingForField(Farm farm, int year, CropViewItem viewItem);
+
+        /// <summary>
+        /// Equation 4.7.1-5
+        /// </summary>
+        double GetTotalCarbonFromExportedManure(int year, Farm farm);
+
+        double GetTotalCarbonInputsFromLivestockManureApplications(Farm farm, int year);
+
+        double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
     }
 }

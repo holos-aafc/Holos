@@ -103,7 +103,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O

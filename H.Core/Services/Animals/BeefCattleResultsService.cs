@@ -125,8 +125,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake, 
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -158,7 +157,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -185,7 +184,8 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.ProteinIntake = base.CalculateCalfProteinIntake(
                 calfProteinIntakeFromMilk: dailyEmissions.ProteinIntakeFromMilk,
-                calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
+                calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood, 
+                areMilkFedOnly: managementPeriod.AnimalsAreMilkFedOnly);
 
             dailyEmissions.ProteinRetainedFromSolidFood = managementPeriod.AnimalsAreMilkFedOnly ? 0 : base.CalculateCalfProteinRetainedFromSolidFeed(
                 calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
@@ -201,7 +201,7 @@ namespace H.Core.Services.Animals
                 calfProteinIntake: dailyEmissions.ProteinIntake,
                 calfProteinRetained: dailyEmissions.ProteinRetained);
 
-            // used in volatilization calculation
+            // Used in volatilization calculation
             dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -302,17 +302,9 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
-            if (temperature > 20 || managementPeriod.HousingDetails.HousingType == HousingType.HousedInBarn)
-            {
-                temperature = 20;
-            }
-
-            dailyEmissions.Temperature = temperature;
-
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
-                dailyTemperature: temperature);
+                dailyTemperature: dailyEmissions.Temperature);
 
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: dailyEmissions.AdjustedMaintenanceCoefficient,
@@ -473,8 +465,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -508,7 +499,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -532,7 +523,7 @@ namespace H.Core.Services.Animals
                 farm: farm,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions,
-                temperature: temperature);
+                temperature: dailyEmissions.Temperature);
 
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
@@ -559,10 +550,17 @@ namespace H.Core.Services.Animals
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = 0;
+                dailyEmissions.ManureCarbonNitrogenRatio = 0;
+                dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = 0;
+            }
+
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
             base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
-                temperature: temperature,
+                temperature: dailyEmissions.Temperature,
                 groupEmissionsByDay: dailyEmissions);
 
             return dailyEmissions;

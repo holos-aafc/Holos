@@ -22,5 +22,8 @@ namespace H.Core.Providers.Animals
             double meanAnnualEvapotranspiration,
             AnimalType animalType,
             int year);
+
+        double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration);
+        double GetVolatilizationFractionForLandApplication(AnimalType animalType, Province province, int year);
     }
 }

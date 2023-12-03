@@ -131,8 +131,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             // Equation 4.1.1-4
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
@@ -176,7 +175,7 @@ namespace H.Core.Services.Animals
                     temperature);
             }
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -412,8 +411,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             // Equation 4.1.1-4
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
@@ -471,7 +469,7 @@ namespace H.Core.Services.Animals
                     temperature);
             }
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O

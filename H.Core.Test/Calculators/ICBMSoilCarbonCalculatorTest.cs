@@ -69,7 +69,7 @@ namespace H.Core.Test.Calculators
                 }
             };
 
-            var result = _sut.CalculateManureCarbonInputPerHectare(cropViewItem, new Farm());
+            var result = _sut.CalculateManureCarbonInputPerHectare(cropViewItem);
 
             Assert.AreEqual(0, result);
         }
@@ -111,7 +111,7 @@ namespace H.Core.Test.Calculators
                 }
             };
 
-            var result = _sut.CalculateManureCarbonInputPerHectare(cropViewItem, farm);
+            var result = _sut.CalculateManureCarbonInputPerHectare(cropViewItem);
 
             Assert.AreEqual(25, result);
         }

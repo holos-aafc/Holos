@@ -92,14 +92,13 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double GetFractionOfTotalManureUsedFromExports(ManureExportViewItem manureExport)
+        public double GetFractionOfTotalManureUsedFromExports(double amountExported, AnimalType animalType, int year)
         {
             var result = 0d;
 
-            var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(manureExport.DateOfExport.Year, manureExport.AnimalType);
-            var totalVolumeFromApplication = manureExport.Amount;
+            var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(year, animalType);
 
-            result = totalVolumeFromApplication / totalVolumeOfManureCreated;
+            result = amountExported / totalVolumeOfManureCreated;
 
             return result;
         }
@@ -124,13 +123,40 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double GetAmountOfTanExported(Farm farm, int year)
+        public double GetTotalTANExportedByAnimalType(
+            AnimalType animalType,
+            Farm farm,
+            int year)
         {
-            var result = 0d;
-
-            foreach (var farmManureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            var tanExportedByFarm = this.GetTANExportedForFarm(farm, year);
+            var tanByAnimalType = tanExportedByFarm.SingleOrDefault(x => x.Item2.GetCategory() == animalType.GetCategory());
+            if (tanByAnimalType != null)
             {
-                result += this.GetAmountOfTanExported(farmManureExportViewItem, year);
+                return tanByAnimalType.Item1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public List<Tuple<double, AnimalType>> GetTANExportedForFarm(
+            Farm farm,
+            int year)
+        {
+            var result = new List<Tuple<double, AnimalType>>();
+
+            var typesOfManureExported = this.GetManureTypesExported(farm, year);
+            foreach (var typeExported in typesOfManureExported)
+            {
+                var tanByType = 0d;
+                var exportsByType = farm.ManureExportViewItems.Where(x => x.AnimalType.GetCategory() == typeExported);
+                foreach (var manureExportViewItem in exportsByType)
+                {
+                    tanByType += this.GetAmountOfTanExported(manureExportViewItem, year);
+                }
+
+                result.Add(new Tuple<double, AnimalType>(tanByType, typeExported));
             }
 
             return result;
@@ -147,13 +173,12 @@ namespace H.Core.Services.Animals
         {
             var result = 0d;
 
-            var fractionUsed = this.GetFractionOfTotalManureUsedFromExports(manureExportViewItem);
+            var fractionUsed = this.GetFractionOfTotalManureUsedFromExports(manureExportViewItem.Amount, manureExportViewItem.AnimalType, year);
             var totalTanCreated = this.GetTotalTANCreated(manureExportViewItem.DateOfExport.Year, manureExportViewItem.AnimalType);
 
             result = fractionUsed * totalTanCreated;
 
             return result;
-            
         }
 
         public double GetTotalVolumeOfManureExported(int year, Farm farm, AnimalType animalType)
@@ -184,7 +209,7 @@ namespace H.Core.Services.Animals
             return _validManureTypes;
         }
 
-        public List<AnimalType> GetManureTypesProducedOnFarm(Farm farm)
+        public List<AnimalType> GetManureCategoriesProducedOnFarm(Farm farm)
         {
             var animalTypes = new List<AnimalType>();
 
@@ -209,7 +234,7 @@ namespace H.Core.Services.Animals
         {
             var animalTypes = new List<AnimalType>();
 
-            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(year);
+            var viewItemsForYear = farm.GetCropDetailViewItemsByYear(year, false);
             foreach (var cropViewItem in viewItemsForYear)
             {
                 foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() && x.DateOfApplication.Year == year))
@@ -351,6 +376,87 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
+        public double GetTotalCarbonCreated(int year)
+        {
+            var amount = 0d;
+
+            var tank = _manureTanks.Where(x => x.Year == year);
+            foreach (var manureTank in tank)
+            {
+                amount += manureTank.TotalAmountOfCarbonInStoredManure;
+            }
+
+            return amount;
+        }
+
+        public double GetTotalCarbonFromImportedManure(Farm farm, int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var cropViewItem in itemsByYear)
+            {
+                result += cropViewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            }
+
+            return result;
+        }
+
+        public double GetTotalCarbonInputsFromLivestockManureApplications(Farm farm, int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var cropViewItem in itemsByYear)
+            {
+                result += cropViewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+            }
+
+            return result;
+        }
+
+        public double GetTotalCarbonRemainingForFarm(Farm farm, int year)
+        {
+            var result = 0d;
+
+            var totalCarbonCreated = this.GetTotalCarbonCreated(year);
+            var totalCarbonImported = this.GetTotalCarbonFromImportedManure(farm, year);
+            var totalCarbonExported = this.GetTotalCarbonFromExportedManure(year, farm);
+            var totalCarbonApplied = this.GetTotalCarbonInputsFromLivestockManureApplications(farm, year);
+
+            result = totalCarbonCreated + totalCarbonImported - totalCarbonApplied - totalCarbonExported;
+            if (result < 0)
+            {
+                return 0;
+            }
+
+            return result;
+        }
+
+        public double GetTotalCarbonRemainingForField(Farm farm, int year, CropViewItem viewItem)
+        {
+            var totalRemainingForFarm = this.GetTotalCarbonRemainingForFarm(farm, year);
+
+            var totalArea = farm.GetTotalAreaOfFarm(false, year);
+
+            var result = totalRemainingForFarm * (viewItem.Area / totalArea);
+
+            return result;
+        }
+
+
+        public double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem)
+        {
+            var inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+            var inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+
+            var remaining = this.GetTotalCarbonRemainingForField(farm, year, viewItem);
+
+            var result = remaining + inputsFromImportedManure + inputsFromLocalManure;
+
+            return result;
+        }
+
         public double GetTotalNitrogenCreated(int year, AnimalType animalType)
         {
             var amount = 0d;
@@ -403,28 +509,38 @@ namespace H.Core.Services.Animals
             return amount;
         }
 
-        public double GetTotalTanAppliedToField(int year, CropViewItem cropViewItem)
+        public List<Tuple<double, AnimalType>> GetTotalTanAppliedToField(int year, CropViewItem cropViewItem)
         {
-            var amount = 0d;
+            var results = new List<Tuple<double, AnimalType>>();
 
-            foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+            var typesOfManureAppliedToThisField = cropViewItem.ManureApplicationViewItems.Select(x => x.AnimalType);
+            foreach (var animalType in typesOfManureAppliedToThisField)
             {
-                var totalTANCreated = this.GetTotalTANCreated(year, manureApplicationViewItem.AnimalType);
-                var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manureApplicationViewItem);
+                var totalByAnimalType = 0d;
 
-                amount += totalTANCreated * fractionUsed;
+                var manureApplicationsByType = cropViewItem.ManureApplicationViewItems.Where(x => x.AnimalType == animalType);
+                foreach (var manureApplicationViewItem in manureApplicationsByType)
+                {
+                    var totalTANCreated = this.GetTotalTANCreated(year, manureApplicationViewItem.AnimalType);
+                    var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manureApplicationViewItem);
+
+                    totalByAnimalType += totalTANCreated * fractionUsed;
+                }
+
+                results.Add(new Tuple<double, AnimalType>(totalByAnimalType, animalType));
             }
 
-            return amount;
+            return results;
         }
-        public double GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems)
+
+        public List<Tuple<double, AnimalType>> GetTotalTanAppliedToAllFields(int year, List<CropViewItem> viewItems)
         {
-            var result = 0d;
+            var result = new List<Tuple<double, AnimalType>>();
 
             foreach (var cropViewItem in viewItems)
             {
-                var amount = this.GetTotalTanAppliedToField(year, cropViewItem);
-                result += amount;
+                var resultsForField  = this.GetTotalTanAppliedToField(year, cropViewItem);
+                result.AddRange(resultsForField);
             }
 
             return result;
@@ -467,6 +583,26 @@ namespace H.Core.Services.Animals
             return result;
         }
 
+        public double GetTotalCarbonFromExportedManure(int year, Farm farm)
+        {
+            var result = 0d;
+
+            foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                var carbonContent = 0d;
+                var amountOfManure = manureExportViewItem.Amount;
+                if (manureExportViewItem.DefaultManureCompositionData != null)
+                {
+                    carbonContent = manureExportViewItem.DefaultManureCompositionData.CarbonContent;
+                }
+
+                result += (amountOfManure * carbonContent);
+            }
+
+            return result;
+        }
+
+
         public double GetTotalNitrogenFromExportedManure(int year, Farm farm, AnimalType animalType)
         {
             var result = 0d;
@@ -490,7 +626,7 @@ namespace H.Core.Services.Animals
         {
             var totalNitrogen = 0d;
 
-            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year);
+            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             foreach (var cropViewItem in viewItemsByYear)
             {
                 var manureImports = cropViewItem.ManureApplicationViewItems.Where(x => x.IsImportedManure() && x.AnimalType.GetCategory() == animalType.GetCategory() && x.DateOfApplication.Year == year);
@@ -557,7 +693,7 @@ namespace H.Core.Services.Animals
 
             _animalComponentEmissionsResults = animalComponentEmissions;
 
-            var animalTypes = this.GetManureTypesProducedOnFarm(farm);
+            var animalTypes = this.GetManureCategoriesProducedOnFarm(farm);
             var years = farm.GetYearsWithAnimals();
 
             foreach (var year in years)

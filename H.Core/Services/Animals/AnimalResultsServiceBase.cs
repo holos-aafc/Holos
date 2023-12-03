@@ -329,6 +329,11 @@ namespace H.Core.Services.Animals
             double baselineMaintenanceCoefficient,
             double dailyTemperature)
         {
+            if (dailyTemperature > 20)
+            {
+                dailyTemperature = 20;
+            }
+
             var adjustedMaintenanceCoefficient =
                 baselineMaintenanceCoefficient + 0.0048 * (20 - dailyTemperature);
 
@@ -578,14 +583,10 @@ namespace H.Core.Services.Animals
         /// Equation 4.1.1-1
         /// </summary>
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
-        /// <param name="housedOnPasture"></param>
         /// <returns>Rate of C excreted through feces (kg head^-1 day^-1)</returns>
-        public double CalculateFecalCarbonExcretionRate(double grossEnergyIntake, 
-            bool housedOnPasture)
+        public double CalculateFecalCarbonExcretionRate(double grossEnergyIntake)
         {
-            var factor = housedOnPasture ? 0.45 : 0.61;
-
-            var result = (grossEnergyIntake / 18.45) * 0.45 * (1 - factor);
+            var result = (grossEnergyIntake / 18.45) * 0.45 * (1 - 0.61);
 
             return result;
         }
@@ -881,9 +882,8 @@ namespace H.Core.Services.Animals
             return manureMethane * (1 - emissionReductionFactor);
         }
 
-        public void CalculateCarbonInStorage(
-            GroupEmissionsByDay dailyEmissions,
-            GroupEmissionsByDay previousDaysEmissions)
+        public void CalculateCarbonInStorage(GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions, ManagementPeriod managementPeriod)
         {
             dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = this.CalculateCarbonLostAsMethaneDuringManagement(
                 monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
@@ -898,6 +898,14 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
                 amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 amountOfCarbonFlowingIntoStorage: previousDaysEmissions == null ? 0 : previousDaysEmissions.AmountOfCarbonInStoredManure);
+
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = 0;
+                dailyEmissions.AmountOfCarbonInStoredManure = 0;
+                dailyEmissions.NonAccumulatedCarbonCreatedOnDay = 0;
+                dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay = 0;
+            }
         }
 
         /// <summary>
@@ -1722,6 +1730,12 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = this.CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
                 organicNitrogenAvailableOnCurrentDay: dailyEmissions.OrganicNitrogenCreatedOnDay,
                 organicNitrogenAvailableFromPreviousDay: (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay));
+
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.OrganicNitrogenCreatedOnDay = 0;
+                dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = 0;
+            }
         }
 
         /// <summary>
@@ -2087,12 +2101,19 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="calfProteinIntakeFromMilk">Calf protein intake from milk (kg head^-1 day^-1)</param>
         /// <param name="calfProteinIntakeFromSolidFood">Calf protein intake from solid food (kg head^-1 day^-1)</param>
+        /// <param name="areMilkFedOnly"></param>
         /// <returns>Calf protein intake (kg head^-1 day^-1)</returns>
-        public double CalculateCalfProteinIntake(
-            double calfProteinIntakeFromMilk,
-            double calfProteinIntakeFromSolidFood)
+        public double CalculateCalfProteinIntake(double calfProteinIntakeFromMilk,
+            double calfProteinIntakeFromSolidFood, bool areMilkFedOnly)
         {
-            return calfProteinIntakeFromMilk + calfProteinIntakeFromSolidFood;
+            if (areMilkFedOnly)
+            {
+                return calfProteinIntakeFromMilk;
+            }
+            else
+            {
+                return calfProteinIntakeFromMilk + calfProteinIntakeFromSolidFood;
+            }
         }
 
         /// <summary>

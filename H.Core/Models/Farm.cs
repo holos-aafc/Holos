@@ -635,17 +635,7 @@ namespace H.Core.Models
 
         public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
         {
-            IEnumerable<CropViewItem> items;
-            if (includeNativeGrasslands)
-            {
-                items = this.GetCropDetailViewItemsByYear(year);
-            }
-            else
-            {
-                items = this.GetCropDetailViewItemsByYear(year).Where(x => x.IsNativeGrassland == false);
-            }
-
-
+            IEnumerable<CropViewItem> items = this.GetCropDetailViewItemsByYear(year, includeNativeGrasslands);
             var area = items.Sum(x => x.Area);
             if (area > 0)
             {
@@ -1045,9 +1035,16 @@ namespace H.Core.Models
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
         }
 
-        public List<CropViewItem> GetCropDetailViewItemsByYear(int year)
+        public List<CropViewItem> GetCropDetailViewItemsByYear(int year, bool includeRangeland)
         {
-            return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+            if (includeRangeland)
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+            }
+            else
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsNativeGrassland == false).ToList();
+            }
         }
 
         public List<int> GetListOfActiveYears()
