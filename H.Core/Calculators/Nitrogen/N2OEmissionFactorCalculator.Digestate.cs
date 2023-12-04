@@ -145,6 +145,9 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
         public double CalculateLeftOverLandAppliedDigestateEmissionsForField(
             CropViewItem viewItem,
             Farm farm)

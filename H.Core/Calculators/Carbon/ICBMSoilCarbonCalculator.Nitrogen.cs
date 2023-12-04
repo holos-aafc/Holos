@@ -99,7 +99,8 @@ namespace H.Core.Calculators.Carbon
 
             base.BalancePools(farm.Defaults.MicrobeDeath);
 
-            // Equation 2.6.9-30
+            // Equation 2.6.9-35
+            // Equation 2.7.8-30
             base.CurrentYearResults.TotalUptake = base.CropNitrogenDemand + this.OldPoolNitrogenRequirement;
             this.AssignFinalValues();
         }

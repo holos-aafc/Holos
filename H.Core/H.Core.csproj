@@ -647,6 +647,7 @@
     <Compile Include="Services\AnimalComponentHelper.cs" />
     <Compile Include="Services\Animals\AnimalResultsService.cs" />
     <Compile Include="Services\Animals\AnimalResultsServiceBase.cs" />
+    <Compile Include="Services\Animals\AnimalResultsServiceBase.Grazing.cs" />
     <Compile Include="Services\Animals\BeefAndDairyResultsServiceBase.cs" />
     <Compile Include="Services\Animals\BeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\DairyCattleResultsService.cs" />

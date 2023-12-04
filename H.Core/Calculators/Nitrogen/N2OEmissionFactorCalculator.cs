@@ -241,7 +241,8 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.6.6-11
+        /// Equation 2.6.6-13
+        /// Equation 2.7.5-13
         /// 
         /// Frac_volatilizationSoil
         ///
@@ -531,7 +532,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-13
+        /// Equation 2.5.6-1
         /// </summary>
         public double CalculateGrainNitrogenTotal(
             double carbonInputFromAgriculturalProduct,
@@ -543,7 +544,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-10
+        /// Equation 2.5.6-2
         /// </summary>
         /// <param name="carbonInputFromProduct">Carbon input from product (kg ha^-1) </param>
         /// <param name="nitrogenConcentrationInProduct">N concentration in the product (kg kg-1) </param>
@@ -557,7 +558,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-11
+        /// Equation 2.5.6-3
         /// </summary>
         /// <param name="carbonInputFromStraw">Carbon input from straw (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInStraw"></param>
@@ -571,7 +572,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-12
+        /// Equation 2.5.6-4
         /// </summary>
         /// <param name="carbonInputFromRoots">Carbon input from roots (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInRoots">N concentration in the roots (kg kg-1) </param>
@@ -585,7 +586,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-13
+        /// Equation 2.5.6-5
         /// </summary>
         /// <param name="carbonInputFromExtraroots">Carbon input from extra-root material (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInExtraroots">N concentration in the extra root (kg kg-1) (until known from literature, the same N concentration used for roots will be utilized)</param>
@@ -646,7 +647,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
         public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
         {
-            var graiNitrogen = this.CalculateGrainNitrogen(
+            var grainNitrogen = this.CalculateGrainNitrogen(
                 carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
                 nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
 
@@ -665,7 +666,7 @@ namespace H.Core.Calculators.Nitrogen
 
             if (cropViewItem.CropType.IsRootCrop())
             {
-                return graiNitrogen + extrarootNitrogen;
+                return grainNitrogen + extrarootNitrogen;
             }
 
             if (cropViewItem.CropType.IsSilageCrop() || cropViewItem.CropType.IsCoverCrop())

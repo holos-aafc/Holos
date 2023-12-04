@@ -208,57 +208,12 @@ namespace H.Core.Test.Calculators.Nitrogen
         #endregion
 
         [TestMethod]
-        public void CalculateLeftOverEmissionsForField()
-        {
-            var farm = new Farm();
-            var stageState = new FieldSystemDetailsStageState();
-            farm.StageStates.Add(stageState);
-
-            var viewItem1 = new CropViewItem() {Year = 2021};
-            stageState.DetailsScreenViewCropViewItems.Add(viewItem1);
-
-            var viewItem2 = new CropViewItem() { Year = 2021 };
-            stageState.DetailsScreenViewCropViewItems.Add(viewItem2);
-
-            var manureApplication = new ManureApplicationViewItem()
-            {
-                DateOfApplication = new DateTime(2021, 1, 1),
-                ManureLocationSourceType = ManureLocationSourceType.Livestock,
-                AmountOfNitrogenAppliedPerHectare = 50
-            };
-
-            viewItem1.ManureApplicationViewItems.Add(manureApplication);
-
-            var groupEmissionsByDay = new GroupEmissionsByDay() { AdjustedAmountOfTanInStoredManureOnDay = 50, OrganicNitrogenCreatedOnDay = 50};
-            var animalResults = new AnimalComponentEmissionsResults()
-            {
-                EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
-                {
-                    new AnimalGroupEmissionResults()
-                    {
-                        GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
-                        {
-                            new GroupEmissionsByMonth(new MonthsAndDaysData(),
-                                new List<GroupEmissionsByDay>() {groupEmissionsByDay})
-                        }
-                    }
-                }
-            };
-
-            var result = _sut.CalculateDirectN2ONFromLeftOverManureForField( 
-                farm, 
-                viewItem1);
-
-            Assert.AreEqual(9.375, result);
-        }
-
-        [TestMethod]
         public void CalculateTotalN2ONFromExportedManure()
         {
             var farm = base.GetTestFarm();
             farm.StageStates.Add(base.GetFieldStageState());
 
-            var result = _sut.CalculateTotalDirectN2ONFromExportedManure(100, 0.5);
+            var result = _sut.CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(100, 0.5);
 
             Assert.AreEqual(result, 50);
         }

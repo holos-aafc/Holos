@@ -943,94 +943,17 @@ namespace H.Core.Test.Calculators
             // = 316.8 + 237.6
             // = 554.4
 
-            Assert.AreEqual(554.4, currentYearViewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(687.6, currentYearViewItem.BelowGroundCarbonInput, 1);
         }
 
-        /// <summary>
-        /// The current year's below ground inputs can't be greater than the previous year's inputs for perennials
-        /// </summary>
-        [TestMethod]
-        public void CalculateBelowGroundCarbonInputForPerennialsWhenBelowGroundCarbonInputIsLessThanPreviousYear()
-        {
-            var perennialGroupId = Guid.NewGuid();
-
-            var previousYearViewItem = new CropViewItem()
-            {
-                CropType = CropType.TameMixed,
-                PerennialStandGroupId = perennialGroupId,
-                Yield = 1000,
-                PercentageOfRootsReturnedToSoil = 100,
-                CarbonConcentration = 0.45,
-                PercentageOfProductYieldReturnedToSoil = 2,
-                IrrigationType = IrrigationType.RainFed,
-                AmountOfIrrigation = 0,
-                MoistureContentOfCrop = 0.12,
-                HarvestMethod = HarvestMethods.CashCrop,
-                BiomassCoefficientProduct = 0.5,
-                BiomassCoefficientRoots = 0.4,
-                BiomassCoefficientExtraroot = 0.3,
-                CarbonInputFromRoots = 1800,        // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
-                CarbonInputFromExtraroots = 1400,    // The current year's below ground inputs should be the sum of the C_r + C_e in the previous year if the current year's inputs are greater than the previous year
-            };
-
-            var currentYearViewItem = new CropViewItem()
-            {
-                CropType = CropType.TameMixed,
-                PerennialStandGroupId = perennialGroupId,
-                Yield = 0,                          // Set yield to 0 so we can simulate the situation where the current year's below ground inputs are less than the previous year's inputs
-                PercentageOfRootsReturnedToSoil = 100,
-                CarbonConcentration = 0.45,
-                PercentageOfProductYieldReturnedToSoil = 2,
-                IrrigationType = IrrigationType.RainFed,
-                AmountOfIrrigation = 0,
-                MoistureContentOfCrop = 0.12,
-                HarvestMethod = HarvestMethods.CashCrop,
-                BiomassCoefficientProduct = 0.5,
-                BiomassCoefficientRoots = 0.4,
-                BiomassCoefficientExtraroot = 0.3,
-            };
-
-            var farm = new Farm()
-            {
-                Province = Province.Manitoba,
-                ClimateData =
-                {
-                    PrecipitationData =
-                    {
-                        May = 10,
-                        June = 20,
-                    },
-
-                    EvapotranspirationData =
-                    {
-                        May = 15,
-                        June = 21,
-                    }
-                },
-
-                DefaultSoilData =
-                {
-                    SoilFunctionalCategory = SoilFunctionalCategory.Black,
-                }
-            };
-
-            var expected = previousYearViewItem.CarbonInputFromRoots + previousYearViewItem.CarbonInputFromExtraroots;
-
-            _sut.SetCarbonInputs(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                nextYearViewItem: null,
-                farm: farm);
-
-            Assert.AreEqual(expected, currentYearViewItem.BelowGroundCarbonInput, 1);
-        }
+       
 
         [TestMethod]
         public void CalculateCarbonInputFromRootsForPerennialsWhenCurrentYearInputsIsGreaterThanPreviousYearInputs()
         {
             var previousYearViewItem = new CropViewItem()
             {
-                CarbonInputFromRoots = 10,
+                CarbonInputFromRoots = 5000,
             };
 
             var currentYearViewItem = new CropViewItem()
@@ -1048,7 +971,7 @@ namespace H.Core.Test.Calculators
                 currentYearViewItem: currentYearViewItem,
                 farm);
 
-            Assert.AreEqual(26.7, result, 1);
+            Assert.AreEqual(5967.5, result, 1);
         }
 
         [TestMethod]
@@ -1075,7 +998,7 @@ namespace H.Core.Test.Calculators
                 farm);
 
             // For perennials, the C input from roots in the current year cannot be less than the carbon input from roots in the previous year
-            Assert.AreEqual(50, result);
+            Assert.AreEqual(59.675, result);
         }
 
         [TestMethod]

@@ -679,7 +679,7 @@ namespace H.Core.Services.LandManagement
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmSoilCarbonCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem:null, currentYearViewItem:grainCropViewItem, farm:farm);
 
             // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem:silageCropViewItem);
+            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem);
             silageCropViewItem.CalculateWetWeightYield();
         }
 
@@ -689,9 +689,8 @@ namespace H.Core.Services.LandManagement
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
-        /// <param name="silageCropViewItem">The <see cref="CropViewItem"/> for the silage crop.</param>
         /// <returns>The estimated yield (dry matter) for a silage crop</returns>
-        public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
+        public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
         {
             var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
             var term2 = term1 * (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil/100.0));

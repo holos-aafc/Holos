@@ -1169,7 +1169,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// This is not manure, but organic fertilizers.
+        /// This is not manure or digestate, but organic fertilizers.
         ///
         /// (kg N)
         /// </summary>

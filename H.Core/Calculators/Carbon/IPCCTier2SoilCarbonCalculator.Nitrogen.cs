@@ -56,7 +56,7 @@ namespace H.Core.Calculators.Carbon
 
             var manureAndDigestateResidues = base.GetManureAndDigestateNitrogenResiduesForYear(farm, this.CurrentYearResults);
 
-            // 2.7.2-12
+            // 2.7.2-13
             // Manure inputs are spread across the pools - as opposed to the ICBM approach where manure is added the dedicated manure pool
             base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN + manureAndDigestateResidues; // Note: this is in kg N/ha but algorithm document converts to t N/ha
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;

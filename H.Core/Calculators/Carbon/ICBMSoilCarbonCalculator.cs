@@ -554,16 +554,28 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-
             // Equation 2.1.2-28
-            // Equation 2.1.2-30
             var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
-            
-            // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromRoots < previousYearViewItem.CarbonInputFromRoots)
+            if (carbonInputFromRoots < 450)
             {
-                // Equation 2.1.2-32
-                carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
+                carbonInputFromRoots = 450;
+            }
+
+            if (currentYearViewItem.YearInPerennialStand == 1)
+            {
+                return carbonInputFromRoots;
+            }
+
+            // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
+            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)))
+            {
+                // Equation 2.1.2-30
+                carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots + (previousYearViewItem.CarbonInputFromRoots * (19.35 / 100.0));
+
+                if (currentYearViewItem.YearInPerennialStand > 5)
+                {
+                    carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
+                }
             }
 
             return carbonInputFromRoots;

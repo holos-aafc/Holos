@@ -298,7 +298,8 @@ namespace H.Core.Services.Animals
                 directManureN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                 ammoniaLostFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission);
+                manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission,
+                 dailyEmissions.ManureNitrateLeachingEmission);
 
             // Equation 4.5.2-9
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
@@ -457,11 +458,12 @@ namespace H.Core.Services.Animals
             double directManureN2ONEmission,
             double ammoniaConcentrationInHousing,
             double ammoniaLostFromStorage,
-            double manureN2ONLeachingEmission)
+            double manureN2ONLeachingEmission,
+            double nitrateLeachingEmission)
         {
             return (amountOfNitrogenExcreted + amountOfNitrogenFromBedding)
                    - (directManureN2ONEmission + ammoniaConcentrationInHousing +
-                      ammoniaLostFromStorage + manureN2ONLeachingEmission);
+                      ammoniaLostFromStorage + manureN2ONLeachingEmission + nitrateLeachingEmission);
         }
 
         /// <summary>
