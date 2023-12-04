@@ -125,6 +125,10 @@ At this time, Holos does not offer an option to input inter-cropping systems. Th
 ### 10. How can I explore the effects of 4R nutrient management in Holos?
 Following the National GHG Inventory methodology, we do not yet know how to account for 4R nutrient management effects. However, we do have preliminary factors for some practices – you can see these by selecting ‘Yes’ for the ‘Show Additional Information’ option in the Fertilizer tab and choose the desired ‘Additive’). A ‘Custom‘ additive option has been added to the model to permit the testing of the preliminary results of other practice applications.
 
+
+### 11. When I add a fall/winter crop in Holos, what crop should I specify for that field in spring of the following year when that crop will be harvested?
+Currently, in Holos V4, when the user ‘grows’ a crop such as fall rye or winter wheat (via the winter/cover crop section), residues from the winter/cover crop are added to the main crop in the planting year (year t) – this is the default approach. If there is no harvest of the winter crop in year t, the model user must enter 0 for the winter crop yield for this year, and then add a non-zero yield in year t+1. The model user can also omit the winter/cover crop in year t, and specify it in year t+1 with a non-zero yield and the effect on the Holos estimates will be the same in both scenarios. 
+
 ---
 
 # Carbon FAQ
