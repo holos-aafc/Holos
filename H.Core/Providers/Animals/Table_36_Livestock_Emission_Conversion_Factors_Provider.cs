@@ -64,7 +64,7 @@ namespace H.Core.Providers.Animals
 
             if (region == Region.WesternCanada)
             {
-                factors.N20DirectEmissionFactor = 0.0006;
+                factors.N20DirectEmissionFactor = 0.00043;
             }
             else
             {
