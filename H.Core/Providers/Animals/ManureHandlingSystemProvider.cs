@@ -20,7 +20,6 @@ namespace H.Core.Providers.Animals
                     ManureStateType.SolidStorage,
                     ManureStateType.CompostPassive,
                     ManureStateType.CompostIntensive,
-                    ManureStateType.AnaerobicDigester,
                 };
             }
 
@@ -47,12 +46,6 @@ namespace H.Core.Providers.Animals
                     ManureStateType.LiquidNoCrust,
                     ManureStateType.LiquidWithSolidCover,
                     ManureStateType.DeepPit,
-
-                    /*
-                     * Digestate
-                     */
-
-                    ManureStateType.AnaerobicDigester,
                 };
             }
 
@@ -70,7 +63,6 @@ namespace H.Core.Providers.Animals
                     ManureStateType.LiquidNoCrust,
                     ManureStateType.LiquidWithSolidCover,
                     ManureStateType.DeepPit,
-                    ManureStateType.AnaerobicDigester,
                 };
             }
 

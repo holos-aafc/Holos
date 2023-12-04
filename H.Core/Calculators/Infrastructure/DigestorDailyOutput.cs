@@ -43,12 +43,12 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (t day^-1)
+        /// (kg day^-1)
         /// </summary>
         public double FlowRateLiquidFraction { get; set; }
 
         /// <summary>
-        /// (t day^-1)
+        /// (kg day^-1)
         /// </summary>
         public double FlowRateSolidFraction { get; set; }
 
@@ -143,6 +143,9 @@ namespace H.Core.Calculators.Infrastructure
          * Land application
          */
 
+        /// <summary>
+        /// (kg day^-1)
+        /// </summary>
         public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
 
         public double TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication { get; set; }

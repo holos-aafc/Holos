@@ -1288,7 +1288,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.2.1-32
+        /// Equation 4.3.1-7
         ///
         /// Total amount of N added from feces, urine, and bedding material
         /// </summary>
@@ -1681,7 +1681,7 @@ namespace H.Core.Services.Animals
         /// Equation 4.5.2-1
         /// </summary>
         /// <param name="accumulatedTANEnteringStorageSystemOnDay">Adjusted amount of TAN in stored manure (kg TAN)</param>
-        /// <returns>Monthly TAN available for land application (kg TAN)</returns>
+        /// <returns>TAN available for land application (kg TAN)</returns>
         public double CalculateAccumulatedTanAvailableForLandApplication(double accumulatedTANEnteringStorageSystemOnDay)
         {
             return accumulatedTANEnteringStorageSystemOnDay;
@@ -2401,7 +2401,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.DateTime = dateTime;
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
             dailyEmissions.Temperature = temperature;
-
             dailyEmissions.NumberOfAnimals = managementPeriod.NumberOfAnimals;
             dailyEmissions.EmissionFactorForVolatilization =
                 managementPeriod.ManureDetails.EmissionFactorVolatilization;

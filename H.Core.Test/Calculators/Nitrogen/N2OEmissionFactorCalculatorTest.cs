@@ -295,7 +295,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var firstItem = result[0];
 
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(50, firstItem.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(100, firstItem.ActualAmountOfNitrogenAppliedFromLandApplication);
             Assert.AreEqual(24.28, firstItem.AdjustedAmmoniaLoss, 2);
             Assert.AreEqual(20, firstItem.AdjustedAmmoniacalLoss, 2);
             Assert.AreEqual(30.35, firstItem.AmmoniaLoss, 2);
@@ -325,7 +325,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 animalComponentEmissionsResults: animalResults,
                 farm: farm);
 
-            Assert.AreEqual(50, result.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(100, result.ActualAmountOfNitrogenAppliedFromLandApplication);
             Assert.AreEqual(24.28, result.AdjustedAmmoniaLoss, 2);
             Assert.AreEqual(20, result.AdjustedAmmoniacalLoss, 2);
             Assert.AreEqual(30.35, result.AmmoniaLoss, 2);
@@ -364,7 +364,7 @@ namespace H.Core.Test.Calculators.Nitrogen
                 farm: farm);
 
             // Results should be sum from both manure applications
-            Assert.AreEqual(6050, result.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(200, result.ActualAmountOfNitrogenAppliedFromLandApplication);
             Assert.AreEqual(48.57, result.AdjustedAmmoniaLoss, 2);
             Assert.AreEqual(40, result.AdjustedAmmoniacalLoss, 2);
             Assert.AreEqual(60.71, result.AmmoniaLoss, 2);
@@ -423,7 +423,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var importedManureResults = _sut.CalculateIndirectEmissionsFromFieldAppliedManure(viewItem, animalResults, farm);
             var totalResultsForField = _sut.ConvertPerFieldEmissionsToPerHectare(importedManureResults, viewItem);
 
-            Assert.AreEqual(383, totalResultsForField.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(100, totalResultsForField.ActualAmountOfNitrogenAppliedFromLandApplication);
             Assert.AreEqual(37.2, totalResultsForField.AdjustedAmmoniaLoss, 2);
             Assert.AreEqual(30.64, totalResultsForField.AdjustedAmmoniacalLoss, 2);
             Assert.AreEqual(46.5, totalResultsForField.AmmoniaLoss, 2);

@@ -429,7 +429,6 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.5-7
             var leachingEmissionsFromExportedManure = N2OEmissionFactorCalculator.CalculateTotalLeachingN2ONFromExportedManure(farm, this.Year);
             this.N2O_NFromOrganicNitrogenLeachingExported = leachingEmissionsFromExportedManure / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, this.Year);
-
         }
 
         protected void CalculateActualAmountsLeached(double fractionLeach,
@@ -507,7 +506,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.6-17
             // Equation 2.7.5-17
-            this.NH4FromSyntheticNitogenVolatilized = this.SyntheticNitrogenPool * volatilizationFraction * (1 - volatilizationEmissionFactor);
+            this.NH4FromSyntheticNitogenVolatilized = farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.ICBM ? this.SyntheticNitrogenPool * volatilizationFraction * (1 - volatilizationEmissionFactor) : this.SyntheticNitrogenPool * volatilizationFraction * (volatilizationEmissionFactor);
 
             this.CurrentYearResults.NH4FromSyntheticNitogenVolatilized = NH4FromSyntheticNitogenVolatilized;
 

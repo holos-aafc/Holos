@@ -82,14 +82,17 @@ namespace H.Core.Services.Animals
 
         public double GetFractionOfTotalManureUsedFromLandApplication(CropViewItem cropViewItem, ManureApplicationViewItem manureApplicationViewItem)
         {
-            var result = 0d;
-
             var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(manureApplicationViewItem.DateOfApplication.Year, manureApplicationViewItem.AnimalType);
             var totalVolumeFromApplication = manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
 
-            result = totalVolumeFromApplication / totalVolumeOfManureCreated;
-
-            return result;
+            if (totalVolumeOfManureCreated == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return totalVolumeFromApplication / totalVolumeOfManureCreated;
+            }
         }
 
         public double GetFractionOfTotalManureUsedFromExports(double amountExported, AnimalType animalType, int year)
@@ -747,8 +750,6 @@ namespace H.Core.Services.Animals
                         var amountOfManureAppliedPerHectare = manureApplicationViewItem.AmountOfManureAppliedPerHectare;
                         var totalVolume = amountOfManureAppliedPerHectare * cropViewItem.Area;
                         manureTank.VolumeSumOfAllManureApplicationsMade += totalVolume;
-
-                        // Account for the total TAN that was applied and removed from the tank
                     }
                 }
             }

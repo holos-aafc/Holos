@@ -244,9 +244,17 @@ namespace H.Core.Models.LandManagement.Fields
         public double AboveGroundNitrogenResidueForCrop { get; set; }
 
         /// <summary>
+        /// (kg N ha^-1)
+        /// </summary>
+        public double ExportedNitrogenResidueForCrop { get; set; }
+
+        /// <summary>
         /// kg N ha^-1
         /// </summary>
         public double BelowGroundResidueNitrogenForCrop { get; set; }
+
+        
+
         /// <summary>
         /// kg N
         /// </summary>
@@ -426,6 +434,11 @@ namespace H.Core.Models.LandManagement.Fields
         /// (kg ha^-1)
         /// </summary>
         public double AboveGroundResidueDryMatter { get; set; }
+
+        /// <summary>
+        /// (kg ha^-1)
+        /// </summary>
+        public double AboveGroundResidueDryMatterExported { get; set; }
 
         /// <summary>
         /// (kg ha^-1)

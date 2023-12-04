@@ -140,7 +140,7 @@ namespace H.Core.Test.Services
         {
             var result = _sut.GetValidManureStateTypes(new Farm(), ManureLocationSourceType.Imported, AnimalType.Beef);
 
-            Assert.AreEqual(5, result.Count);
+            Assert.AreEqual(4, result.Count);
         }
 
         [TestMethod]

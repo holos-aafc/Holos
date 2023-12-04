@@ -179,6 +179,13 @@ namespace H.Core.Calculators.Carbon
                 moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage, 
                 percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
+
+            viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
+                freshWeightOfYield: viewItem.Yield,
+                harvestIndex: harvestIndex,
+                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
+                percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
+
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
             var finalAboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
@@ -567,6 +574,28 @@ namespace H.Core.Calculators.Carbon
             }
 
             return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0))))* (percentageOfStrawReturned / 100.0);
+        }
+
+        /// <summary>
+        /// Equation 2.2.2-3
+        /// </summary>
+        /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
+        /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
+        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
+        /// <param name="percentageOfStrawReturned"></param>
+        /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
+        public double CalculateAboveGroundResidueDryMatterExported(
+            double freshWeightOfYield,
+            double harvestIndex,
+            double moistureContentOfCropAsPercentage,
+            double percentageOfStrawReturned)
+        {
+            if (harvestIndex <= 0)
+            {
+                return 0;
+            }
+
+            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (1 - (percentageOfStrawReturned / 100.0));
         }
 
         /// <summary>

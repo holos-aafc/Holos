@@ -106,6 +106,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _day1Emissions.VolatileSolids = 0.01;
             _day1Emissions.AmountOfNitrogenExcreted = 10;
             _day1Emissions.AmountOfNitrogenAddedFromBedding = 10;
+            _day1Emissions.AmountOfCarbonInStoredManure = 10;
             _day1Emissions.OrganicNitrogenInStoredManure = 20;
             _day1Emissions.TanExcretion = 10;
             _day1Emissions.CarbonFromManureAndBedding = 12;
@@ -117,6 +118,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _day2Emissions.AmountOfNitrogenExcreted = 20;
             _day2Emissions.AmountOfNitrogenAddedFromBedding = 20;
             _day2Emissions.OrganicNitrogenInStoredManure = 30;
+            _day1Emissions.AmountOfCarbonInStoredManure = 10;
             _day2Emissions.TanExcretion = 20;
             _day2Emissions.CarbonFromManureAndBedding = 16;
 
@@ -184,9 +186,9 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFreshManureFlowRatesFromAnimals()
         {
-            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
+            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1}, new Farm());
 
-            Assert.AreEqual(12, results.CarbonFlowOfSubstrate, 0.00001);
+            Assert.AreEqual(10, results.CarbonFlowOfSubstrate, 0.00001);
         }
 
         [TestMethod]
@@ -311,7 +313,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             Assert.AreEqual(2, flows.Count);
 
             Assert.AreEqual(0.5, flows[0].CarbonFlowOfSubstrate);
-            Assert.AreEqual(5, flows[1].NitrogenFlowOfSubstrate);
+            Assert.AreEqual(0.005, flows[1].NitrogenFlowOfSubstrate);
         }
 
         [TestMethod]

@@ -107,7 +107,7 @@ namespace H.Core.Services.Animals
 
                 // Raw digestate
                 var totalRawDigestateOnThisDay = outputs.FlowRateOfAllSubstratesInDigestate;
-                var totalRawDigesteUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.Raw);
+                var totalRawDigesteUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw);
                 var totalRawDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalRawDigestateAvailable;
                 var totalRawProduced = totalRawDigestateOnThisDay + totalRawDigestateFromPreviousDay;
                 var totalRawDigestateAvailableAfterFieldApplications = totalRawProduced - totalRawDigesteUsedForFieldApplications;
@@ -136,7 +136,7 @@ namespace H.Core.Services.Animals
                  */
 
                 var totalLiquidFractionOnThisDay = outputs.FlowRateLiquidFraction;
-                var totalLiquidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.LiquidPhase);
+                var totalLiquidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.LiquidPhase);
                 var totalLiquidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalLiquidDigestateAvailable;
                 var totalLiquidProduced = totalLiquidFractionOnThisDay + totalLiquidDigestateFromPreviousDay;
                 var totalLiquidDigestateAvailalbleAfterFieldApplications = totalLiquidProduced - totalLiquidDigestateUsedForFieldApplications;
@@ -165,7 +165,7 @@ namespace H.Core.Services.Animals
                  */
 
                 var totalSolidFractionOnThisDay = outputs.FlowRateSolidFraction;
-                var totalSolidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigesateAppliedOnDay(outputDate, farm, DigestateState.SolidPhase);
+                var totalSolidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.SolidPhase);
                 var totalSolidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).TotalSolidDigestateAvailable;
                 var totalSolidProduced = totalSolidFractionOnThisDay + totalSolidDigestateFromPreviousDay;
                 var totalSolidDigestateAvailalbleAfterFieldApplications = totalSolidProduced - totalSolidDigestateUsedForFieldApplications;
@@ -300,7 +300,7 @@ namespace H.Core.Services.Animals
 
         #region Private Methods
 
-        private double GetTotalAmountOfDigesateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state)
+        private double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state)
         {
             var result = 0d;
 

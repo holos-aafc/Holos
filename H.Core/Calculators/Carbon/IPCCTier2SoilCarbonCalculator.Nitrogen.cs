@@ -49,6 +49,8 @@ namespace H.Core.Calculators.Carbon
         {
             base.AboveGroundResidueN = this.CurrentYearResults.CombinedAboveGroundResidueNitrogen;
             base.BelowGroundResidueN = this.CurrentYearResults.CombinedBelowGroundResidueNitrogen;
+            
+            this.CurrentYearResults.ExportedNitrogenResidueForCrop = this.CurrentYearResults.AboveGroundResidueDryMatterExported * this.CurrentYearResults.NitrogenContent;
 
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
             this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = base.AboveGroundResidueN;

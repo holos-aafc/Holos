@@ -40,7 +40,7 @@ namespace H.Core.Calculators.Nitrogen
             {
                 var landApplicationEmissionResult = new LandApplicationEmissionResult();
 
-                landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
+                landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
                 landApplicationEmissionResult.AmmoniacalLoss = this.CalculateNH3NLossFromLandAppliedManure(farm, viewItem, manureApplicationViewItem);
                 landApplicationEmissionResult.AmmoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AmmoniacalLoss);
                 landApplicationEmissionResult.TotalN2ONFromManureVolatilized = this.CalculateTotalN2ONFromManureVolatilized(farm, viewItem, manureApplicationViewItem);
