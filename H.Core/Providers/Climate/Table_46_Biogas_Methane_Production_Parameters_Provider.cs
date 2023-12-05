@@ -132,7 +132,7 @@ namespace H.Core.Providers.Climate
         #region Private Methods
 
         /// <summary>
-        /// Reads the csv file and stores data into two lists. Each list corresponds to Manure Type and Farm Residue Type substrates enteries in the csv respectively.
+        /// Reads the csv file and stores data into two lists. Each list corresponds to Manure Type and Farm Residue Type substrates entries in the csv respectively.
         /// </summary>
         private void ReadFile()
         {
@@ -176,7 +176,7 @@ namespace H.Core.Providers.Climate
 
             // We're skipping 11 lines as the farm residue entries in the csv start at row 11.
             // Store the second half of the file into a farm residue type data list.
-            foreach (string[] line in fileLines.Skip(11))
+            foreach (string[] line in fileLines.Skip(11).Take(19))
             {
                 FarmResidueType residueType = _farmResidueTypeStringConverter.Convert(line[0]);
                 biomethanePotential = double.Parse(line[2], cultureInfo);

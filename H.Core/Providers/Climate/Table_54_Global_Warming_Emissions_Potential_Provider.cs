@@ -39,7 +39,7 @@ namespace H.Core.Providers.Climate
         #region Properties
 
         /// <summary>
-        /// A list that stores each global radiative forcing value as an instance with a corresonding year and emission type.
+        /// A list that stores each global radiative forcing value as an instance with a corresponding year and emission type.
         /// </summary>
         private List<Table_54_Global_Warming_Emissions_Potential_Data> Data { get; set; }
 
