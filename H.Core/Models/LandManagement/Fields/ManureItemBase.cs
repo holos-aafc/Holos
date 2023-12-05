@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals;
 using H.Infrastructure;
@@ -15,6 +16,7 @@ namespace H.Core.Models.LandManagement.Fields
         private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ManureLocationSourceType manureLocationSourceType;
         private DefaultManureCompositionData _defaultManureCompositionData;
+        protected double _amountOfNitrogenAppliedPerHectare;
 
         #endregion
 
@@ -79,6 +81,21 @@ namespace H.Core.Models.LandManagement.Fields
                     this.DefaultManureCompositionData.PropertyChanged += DefaultManureCompositionDataOnPropertyChanged;
                 }
             });
+        }
+
+        /// <summary>
+        /// Amount of N applied
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        [Units(MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare)]
+        public double AmountOfNitrogenAppliedPerHectare
+        {
+            get => _amountOfNitrogenAppliedPerHectare;
+            set
+            {
+                SetProperty(ref _amountOfNitrogenAppliedPerHectare, value);
+            }
         }
 
         #endregion

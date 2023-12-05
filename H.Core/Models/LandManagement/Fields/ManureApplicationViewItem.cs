@@ -25,7 +25,6 @@ namespace H.Core.Models.LandManagement.Fields
         private double _amount;
         private double _amountOfNitrogenInManureApplied;
         private double _amountOfManureAppliedPerHectare;
-        private double _amountOfNitrogenAppliedPerHectare;
 
         private ManureAnimalSourceTypes _manureAnimalSourceType;
         private ManureApplicationTypes _manureApplicationTypes;
@@ -114,18 +113,6 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _amountOfManureAppliedPerHectare;
             set => SetProperty(ref _amountOfManureAppliedPerHectare, value);
-        }
-
-        /// <summary>
-        /// Amount of nitrogen applied per hectare from the amount of manure applied
-        ///
-        /// (kg N ha^-1)
-        /// </summary>
-        [Units(MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare)]
-        public double AmountOfNitrogenAppliedPerHectare
-        {
-            get => _amountOfNitrogenAppliedPerHectare;
-            set => SetProperty(ref _amountOfNitrogenAppliedPerHectare, value);
         }
 
         /// <summary>

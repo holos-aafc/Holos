@@ -25,7 +25,7 @@ namespace H.Core.Services.Animals
                 managementPeriod.HousingDetails.PastureLocation != null)
             {
                 // Equation 5.3.1-1
-                groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.TanExcretionRate *
+                groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.NitrogenExcretionRate *
                                                                    managementPeriod.ManureDetails
                                                                        .N2ODirectEmissionFactor;
 
@@ -111,7 +111,6 @@ namespace H.Core.Services.Animals
             {
                 // Equation 5.3.1-2
                 groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.NitrogenExcretionRate *
-                                                                   0.75 *
                                                                    managementPeriod.ManureDetails.N2ODirectEmissionFactor;
 
                 groupEmissionsByDay.ManureDirectN2ONEmission = this.CalculateManureDirectNitrogenEmission(

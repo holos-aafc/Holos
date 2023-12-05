@@ -737,6 +737,82 @@ namespace H.Core.Calculators.Nitrogen
             return fractionOfNitrogenLostByLeachingAndRunoff;
         }
 
+
+        /// <summary>
+        /// Combines total emissions for entire area of a field from each manure/digestate application into per hectare emissions
+        /// </summary>
+        /// <param name="results">The emissions for each field</param>
+        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be used to calculate per hectare emissions</param>
+        /// <returns></returns>
+        public LandApplicationEmissionResult ConvertPerFieldEmissionsToPerHectare(
+            List<LandApplicationEmissionResult> results,
+            CropViewItem viewItem)
+        {
+            var totalAmountsPerHectareFromManureApplications = new LandApplicationEmissionResult();
+
+            foreach (var landApplicationEmissionResult in results)
+            {
+                /*
+                 * Totals are for the entire field. Convert to per hectare below.
+                 */
+
+                totalAmountsPerHectareFromManureApplications.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureLeaching / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalIndirectN2ONEmissions += landApplicationEmissionResult.TotalIndirectN2ONEmissions > 0
+                    ? landApplicationEmissionResult.TotalIndirectN2ONEmissions / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalNitrateLeached += landApplicationEmissionResult.TotalNitrateLeached > 0
+                    ? landApplicationEmissionResult.TotalNitrateLeached / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalIndirectN2OEmissions += landApplicationEmissionResult.TotalIndirectN2OEmissions > 0
+                    ? landApplicationEmissionResult.TotalIndirectN2OEmissions / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalN2OFromManureVolatilized += landApplicationEmissionResult.TotalN2OFromManureVolatilized > 0
+                    ? landApplicationEmissionResult.TotalN2OFromManureVolatilized / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalN2ONFromManureVolatilized += landApplicationEmissionResult.TotalN2ONFromManureVolatilized > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureVolatilized / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalVolumeOfManureUsedDuringApplication += landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication > 0
+                    ? landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AmmoniacalLoss += landApplicationEmissionResult.AmmoniacalLoss > 0
+                    ? landApplicationEmissionResult.AmmoniacalLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AdjustedAmmoniaLoss += landApplicationEmissionResult.AdjustedAmmoniaLoss > 0
+                    ? landApplicationEmissionResult.AdjustedAmmoniaLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AdjustedAmmoniacalLoss += landApplicationEmissionResult.AdjustedAmmoniacalLoss > 0
+                    ? landApplicationEmissionResult.AdjustedAmmoniacalLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AmmoniaLoss += landApplicationEmissionResult.AmmoniaLoss > 0
+                    ? landApplicationEmissionResult.AmmoniaLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.ActualAmountOfNitrogenAppliedFromLandApplication += landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0
+                    ? landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication / viewItem.Area
+                    : 0;
+
+                // Equation 4.6.2-4
+                totalAmountsPerHectareFromManureApplications.TotalTANApplied += landApplicationEmissionResult.TotalTANApplied > 0
+                    ? landApplicationEmissionResult.TotalTANApplied / viewItem.Area
+                    : 0;
+            }
+
+            return totalAmountsPerHectareFromManureApplications;
+        }
+
         #endregion
 
         #region Private Methods
@@ -756,6 +832,12 @@ namespace H.Core.Calculators.Nitrogen
         {
             return Math.Exp((0.00558 * potentialEvapotranspiration) - 7.7);
         }
+
+        private double GetAmountOfNitrogenUsed(CropViewItem viewItem, ManureItemBase manureItemBase)
+        {
+            return viewItem.Area * manureItemBase.AmountOfNitrogenAppliedPerHectare;
+        }
+
 
         #endregion
     }

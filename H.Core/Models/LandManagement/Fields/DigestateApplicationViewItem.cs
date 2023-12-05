@@ -5,17 +5,16 @@ using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
-    public class DigestateApplicationViewItem : ModelBase
+    public class DigestateApplicationViewItem : ManureItemBase
     {
         #region Fields
 
         private DigestateState _digestateState;
 
         private double _amountAppliedPerHectare;
-        private double _amountOfNitrogenAppliedPerHectare;
         private double _amountOfCarbonAppliedPerHectare;
 
-        private bool _attempToGoOverMaximum;
+        private bool _attemptToGoOverMaximum;
 
         #endregion
 
@@ -56,21 +55,6 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _amountAppliedPerHectare, value);
         }
 
-        // Need to set this somehow so it can be used in direct N2O calculations
-        /// <summary>
-        /// Amount of N applied
-        ///
-        /// (kg N ha^-1)
-        /// </summary>
-        public double AmountOfNitrogenAppliedPerHectare
-        {
-            get => _amountOfNitrogenAppliedPerHectare;
-            set
-            {
-                SetProperty(ref _amountOfNitrogenAppliedPerHectare, value);
-            }
-        }
-
         /// <summary>
         /// Amount of C applied
         ///
@@ -87,15 +71,13 @@ namespace H.Core.Models.LandManagement.Fields
 
         public bool AttemptedToGoOverMaximum
         {
-            get => _attempToGoOverMaximum;
-            set => SetProperty(ref _attempToGoOverMaximum, value);
+            get => _attemptToGoOverMaximum;
+            set => SetProperty(ref _attemptToGoOverMaximum, value);
         }
 
         #endregion
 
         #region Public Method
-
-        
 
         #endregion
     }

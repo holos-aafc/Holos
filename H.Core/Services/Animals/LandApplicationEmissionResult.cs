@@ -47,6 +47,11 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// (kg N2O-N)
         /// </summary>
+        public double TotalN2OFromDigestateVolatilized { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N)
+        /// </summary>
         public double TotalN2ONFromManureLeaching;
 
         /// <summary>

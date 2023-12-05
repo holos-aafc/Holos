@@ -235,13 +235,13 @@ namespace H.Core.Calculators.Infrastructure
             var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
 
             // Equation 4.8.5-1
-            digestorDailyOutput.MethaneEmissionsDuringStorage = methaneEmissionFactorDuringStorage * component.VolumeOfDigestateEnteringStorage;
+            digestorDailyOutput.MethaneEmissionsDuringStorage = methaneEmissionFactorDuringStorage * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
             // Equation 4.8.5-2
-            digestorDailyOutput.N2OEmissionsDuringStorage = 0.0652 * component.VolumeOfDigestateEnteringStorage;
+            digestorDailyOutput.N2OEmissionsDuringStorage = 0.0652 * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
             // Equation 4.8.5-3
-            digestorDailyOutput.AmmoniaEmissionsDuringStorage = 3.495 * component.VolumeOfDigestateEnteringStorage;
+            digestorDailyOutput.AmmoniaEmissionsDuringStorage = 3.495 * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
         }
 
         public void CalculateLiquidSolidSeparation(
