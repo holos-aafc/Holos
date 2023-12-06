@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Dairy;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
@@ -70,6 +71,25 @@ namespace H.Core.Test
             };
 
             return storage;
+        }
+
+        public DigestateApplicationViewItem GetTestDigestateApplicationViewItem()
+        {
+            var digestateApplication = new DigestateApplicationViewItem();
+
+            digestateApplication.DateCreated = DateTime.Now.AddDays(1);
+            digestateApplication.DigestateState = DigestateState.Raw;
+            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
+            digestateApplication.AmountAppliedPerHectare = 50;
+
+            return digestateApplication;
+        }
+
+        public AnaerobicDigestionComponent GetTestAnaerobicDigestionComponent()
+        {
+            var component = new AnaerobicDigestionComponent();
+
+            return component;
         }
 
         public Farm GetTestFarm()

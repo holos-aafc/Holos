@@ -425,16 +425,16 @@ namespace H.Core.Test.Calculators.Nitrogen
             var totalResultsForField = _sut.ConvertPerFieldEmissionsToPerHectare(importedManureResults, viewItem);
 
             Assert.AreEqual(100, totalResultsForField.ActualAmountOfNitrogenAppliedFromLandApplication);
-            Assert.AreEqual(37.2, totalResultsForField.AdjustedAmmoniaLoss, 2);
-            Assert.AreEqual(30.64, totalResultsForField.AdjustedAmmoniacalLoss, 2);
-            Assert.AreEqual(46.5, totalResultsForField.AmmoniaLoss, 2);
-            Assert.AreEqual(38.3, totalResultsForField.AmmoniacalLoss, 2);
-            Assert.AreEqual(12.55, totalResultsForField.TotalIndirectN2OEmissions, 2);
-            Assert.AreEqual(7.99, totalResultsForField.TotalIndirectN2ONEmissions, 2);
-            Assert.AreEqual(12.03, totalResultsForField.TotalN2OFromManureVolatilized, 2);
-            Assert.AreEqual(0.33, totalResultsForField.TotalN2ONFromManureLeaching, 2);
-            Assert.AreEqual(7.66, totalResultsForField.TotalN2ONFromManureVolatilized, 2);
-            Assert.AreEqual(29.67, totalResultsForField.TotalNitrateLeached, 2);
+            Assert.AreEqual(9.71, totalResultsForField.AdjustedAmmoniaLoss, 2);
+            Assert.AreEqual(8, totalResultsForField.AdjustedAmmoniacalLoss, 2);
+            Assert.AreEqual(12.14, totalResultsForField.AmmoniaLoss, 2);
+            Assert.AreEqual(10, totalResultsForField.AmmoniacalLoss, 2);
+            Assert.AreEqual(3.66, totalResultsForField.TotalIndirectN2OEmissions, 2);
+            Assert.AreEqual(2.33, totalResultsForField.TotalIndirectN2ONEmissions, 2);
+            Assert.AreEqual(2, totalResultsForField.TotalN2OFromManureVolatilized, 2);
+            Assert.AreEqual(0.32, totalResultsForField.TotalN2ONFromManureLeaching, 2);
+            Assert.AreEqual(2, totalResultsForField.TotalN2ONFromManureVolatilized, 2);
+            Assert.AreEqual(29.66, totalResultsForField.TotalNitrateLeached, 2);
         }
 
         [TestMethod]

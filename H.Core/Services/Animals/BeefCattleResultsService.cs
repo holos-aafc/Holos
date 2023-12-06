@@ -139,12 +139,19 @@ namespace H.Core.Services.Animals
                 carbonExcreted: dailyEmissions.FecalCarbonExcretion,
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
 
-            // Equation 4.1.2-1
-            dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
-                ashContentOfFeed: managementPeriod.SelectedDiet.Ash, 
-                percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
+            if (managementPeriod.AnimalsAreMilkFedOnly)
+            {
+                dailyEmissions.VolatileSolids = (7.6 / 1000.0) * dailyEmissions.AnimalWeight;
+            }
+            else
+            {
+                // Equation 4.1.2-1
+                dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
+                    grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
+                    percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
+                    ashContentOfFeed: managementPeriod.SelectedDiet.Ash,
+                    percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
+            }
 
             // Equation 4.1.2-4
             dailyEmissions.ManureMethaneEmissionRate = base.CalculateManureMethaneEmissionRate(

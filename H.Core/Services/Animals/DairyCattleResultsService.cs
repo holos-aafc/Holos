@@ -147,7 +147,7 @@ namespace H.Core.Services.Animals
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
 
             // Equation 4.1.2-1
-            dailyEmissions.VolatileSolids = 1.42;
+            dailyEmissions.VolatileSolids = (9.3 / 1000.0) * dailyEmissions.AnimalWeight;
 
             /*
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid

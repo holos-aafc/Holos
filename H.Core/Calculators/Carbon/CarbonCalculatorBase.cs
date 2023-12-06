@@ -45,7 +45,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 4.9.5-1
+        /// Equation 4.9.7-1
+        /// Equation 4.9.7-2
         /// 
         /// Calculate amount of carbon input from all digestate applications in a year.
         /// </summary>

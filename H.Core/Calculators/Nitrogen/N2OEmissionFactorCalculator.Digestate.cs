@@ -51,6 +51,8 @@ namespace H.Core.Calculators.Nitrogen
                 landApplicationEmissionResult.AdjustedAmmoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AdjustedAmmoniacalLoss);
                 landApplicationEmissionResult.TotalN2ONFromDigestateLeaching = this.CalculateTotalN2ONFromLeachingForField(farm, viewItem, digestateApplicationViewItem);
                 landApplicationEmissionResult.TotalNitrateLeached = this.CalculateTotalNitrateLeached(farm, viewItem, digestateApplicationViewItem);
+
+                // Equation 4.9.5-1
                 landApplicationEmissionResult.TotalIndirectN2ONEmissions = landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized + landApplicationEmissionResult.TotalN2ONFromDigestateLeaching;
                 landApplicationEmissionResult.TotalIndirectN2OEmissions = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalIndirectN2ONEmissions);
 

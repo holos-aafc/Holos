@@ -290,7 +290,7 @@ namespace H.Core.Calculators.Nitrogen
             if (manureApplicationViewItem.IsImportedManure()) 
             {
                 var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem);
-                var nitrogenUsed = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
+                var nitrogenUsed = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
                 result = nitrogenUsed * landApplicationFactors.VolatilizationFraction;
 
@@ -410,19 +410,18 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.2-7
         /// </summary>
-        public List<Tuple<double, AnimalType>> CalculateAmmoniaFromLeftOverManureForFarm(
+        public List<Tuple<double, AnimalType>> CalculateAmmoniaFromLeftOverBeefAndDairyManureForFarm(
             int year,
             Farm farm)
         {
             var results = new List<Tuple<double, AnimalType>>();
 
-            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             var weightedEmissionFactor = this.CalculateWeightedLandApplicationEmissionFactor(
                 year: year,
                 farm: farm);
 
             var tanRemainingForAllAnimalTypes = this.CalculateTANRemainingForAllManureTypes(farm, year);
-            foreach (var tanRemainingForAllAnimalType in tanRemainingForAllAnimalTypes)
+            foreach (var tanRemainingForAllAnimalType in tanRemainingForAllAnimalTypes.Where(x => x.Item2.IsBeefCattleType() || x.Item2.IsDairyCattleType()))
             {
                 var tan = tanRemainingForAllAnimalType.Item1;
                 var ammonia = tan * weightedEmissionFactor;
@@ -435,15 +434,15 @@ namespace H.Core.Calculators.Nitrogen
             return results;
         }
 
-        ///// <summary>
-        ///// Equation 4.6.2-8
-        ///// </summary>
-        public double CalculateAmmoniacalLossFromLeftOverManure(int year, Farm farm, CropViewItem cropViewItem)
+        /// <summary>
+        /// Equation 4.6.2-8
+        /// </summary>
+        public double CalculateAmmoniacalLossFromLeftOverBeefAndDairyManure(int year, Farm farm, CropViewItem cropViewItem)
         {
             var totalArea = farm.GetTotalAreaOfFarm(false, year);
             var areaOfField = cropViewItem.Area;
 
-            var ammoniaFromLeftOverManureForFarm = CalculateAmmoniaFromLeftOverManureForFarm(year, farm).Sum(x => x.Item1);
+            var ammoniaFromLeftOverManureForFarm = CalculateAmmoniaFromLeftOverBeefAndDairyManureForFarm(year, farm).Sum(x => x.Item1);
             var result = ammoniaFromLeftOverManureForFarm * (areaOfField / totalArea);
 
             return result;
@@ -552,14 +551,14 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.2-15
         /// </summary>
-        public Dictionary<AnimalType, double> CalculateAmmoniaEmissionsFromLeftOverManureForFarm(
+        public Dictionary<AnimalType, double> CalculateAmmoniaEmissionsFromLeftOverSheepSwineAndOtherManureForFarm(
             Farm farm,
             int year)
         {
             var dictionary = new Dictionary<AnimalType, double>();
 
-            // Get left over manure by type
-            var typesOfManureUsed = this.ManureService.GetManureCategoriesProducedOnFarm(farm);
+            // Get left over manure by type - need to get only poultry, etc. types as beef dairy calculated using TAN
+            var typesOfManureUsed = this.ManureService.GetManureCategoriesProducedOnFarm(farm).Where(x => x.IsSheepType() || x.IsSwineType() || x.IsOtherAnimalType());
             foreach (var animalType in typesOfManureUsed)
             {
                 var volatilizationFractionForLandApplication = this.LivestockEmissionConversionFactorsProvider.GetVolatilizationFractionForLandApplication(animalType, farm.DefaultSoilData.Province, year);
@@ -585,43 +584,21 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm)
         {
             var result = 0d;
-            var totalAmmoniaLeftOver = 0d;
+            var totalAmmoniaLeftOverForSheepSwineAndOtherAnimals = 0d;
 
-            var ammoniaEmissionsFromLeftOverManureByType = this.CalculateAmmoniaEmissionsFromLeftOverManureForFarm(farm, year);
+            // Get ammonia from sheep, swine, and other animals
+            var ammoniaEmissionsFromLeftOverManureByType = this.CalculateAmmoniaEmissionsFromLeftOverSheepSwineAndOtherManureForFarm(farm, year);
             if (ammoniaEmissionsFromLeftOverManureByType.Any())
             {
-                totalAmmoniaLeftOver = ammoniaEmissionsFromLeftOverManureByType.Sum(x => x.Value);
+                totalAmmoniaLeftOverForSheepSwineAndOtherAnimals = ammoniaEmissionsFromLeftOverManureByType.Sum(x => x.Value);
             }
+
+            var totalAmmoniaFromBeefAndDairyLeftOverManure = CalculateAmmoniacalLossFromLeftOverBeefAndDairyManure(year, farm, cropViewItem);
 
             var areaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, cropViewItem.Year);
             var areaOfField = cropViewItem.Area;
 
-            result = totalAmmoniaLeftOver * (areaOfField / areaOfFarm);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.2-16
-        /// </summary>
-        public double CalculateVolatilizationEmissionsFromLeftOverManureForField(
-            CropViewItem cropViewItem,
-            int year,
-            Farm farm)
-        {
-            var result = 0d;
-            var totalAmmoniaLeftOver = 0d;
-
-            var ammoniaEmissionsFromLeftOverManureByType = this.CalculateAmmoniaEmissionsFromLeftOverManureForFarm(farm, year);
-            if (ammoniaEmissionsFromLeftOverManureByType.Any())
-            {
-                totalAmmoniaLeftOver = ammoniaEmissionsFromLeftOverManureByType.Sum(x => x.Value);
-            }
-
-            var areaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, cropViewItem.Year);
-            var areaOfField = cropViewItem.Area;
-
-            result = totalAmmoniaLeftOver * (areaOfField / areaOfFarm);
+            result = (totalAmmoniaFromBeefAndDairyLeftOverManure + totalAmmoniaLeftOverForSheepSwineAndOtherAnimals) * (areaOfField / areaOfFarm);
 
             return result;
         }
@@ -758,7 +735,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var ammoniaFromApplications = this.CalculateNH3NLossFromFarmSourcedLandAppliedManureForField(farm, cropViewItem, year);
 
-            var ammoniaEmissionsFromLeftOver = this.CalculateAmmoniaEmissionsFromLeftOverManureForFarm(farm, year);
+            var ammoniaEmissionsFromLeftOver = this.CalculateAmmoniaEmissionsFromLeftOverSheepSwineAndOtherManureForFarm(farm, year);
             var totalAmmoniaFromLeftOverManure = ammoniaEmissionsFromLeftOver.Sum(x => x.Value);
 
             var ammoniaEmissionsFromImportedManure = this.CalculateAmmoniaEmissionsFromImportedManureForField(farm, cropViewItem, year);
@@ -799,7 +776,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var ammoniaEmissionsFromLandAppliedManureForFarmAndYear = CalculateTotalAmmoniaEmissionsFromLandAppliedManureForFarmAndYear(farm, itemsByYear, year); ;
             var ammoniaEmissionsFromExportsForFarmAndYear = this.CalculateAmmoniaEmissionsFromExportedManureForFarmAndYear(farm, year).Sum(x => x.Value);
-            var ammoniaEmissionsFromLeftOverManure = this.CalculateAmmoniaEmissionsFromLeftOverManureForFarm(farm, year).Sum(x => x.Value);
+            var ammoniaEmissionsFromLeftOverManure = this.CalculateAmmoniaEmissionsFromLeftOverSheepSwineAndOtherManureForFarm(farm, year).Sum(x => x.Value);
             var ammoniaEmissionsFromImportedManure = this.CalculateAmmoniaEmissionsFromImportedManureForFarmAndYear(farm, year);
 
             result = ammoniaEmissionsFromImportedManure + ammoniaEmissionsFromLeftOverManure + ammoniaEmissionsFromExportsForFarmAndYear + ammoniaEmissionsFromLandAppliedManureForFarmAndYear;
