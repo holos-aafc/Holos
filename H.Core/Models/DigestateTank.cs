@@ -21,13 +21,42 @@ namespace H.Core.Models
         private double _totalSolidDigestateProduced;
         private double _totalLiquidDigestateProduced;
 
-        // Nitrogen available for land application
+        /*
+         * Nitrogen available for land application
+         */
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromRawDigestate { get; set; }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromSolidDigestate { get; set; }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromLiquidDigestate  { get; set; }
 
+        /*
+         * Carbon available for land application
+         */
+
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double CarbonFromRawDigestate { get; set; }
+
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double CarbonFromSolidDigestate { get; set; }
+
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double CarbonFromLiquidDigestate { get; set; }
 
         #endregion

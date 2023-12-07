@@ -33,7 +33,16 @@ namespace H.Core.Services.Animals
             DigestateTank tank);
 
         double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
+
+        /// <summary>
+        /// Equation 4.9.7-3
+        /// </summary>
         double GetTotalCarbonRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
         double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state);
+
+        /// <summary>
+        /// Equation 4.9.7-5
+        /// </summary>
+        double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
     }
 }

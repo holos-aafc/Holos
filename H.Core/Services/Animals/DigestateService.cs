@@ -24,6 +24,7 @@ namespace H.Core.Services.Animals
 
         public IADCalculator ADCalculator { get; set; }
         public IAnimalService AnimalService { get; set; }
+        public bool SubtractAmountsFromLandApplications { get; set; }
 
         #endregion
 
@@ -33,6 +34,8 @@ namespace H.Core.Services.Animals
         {
             this.ADCalculator = new ADCalculator();
             this.AnimalService = new AnimalResultsService();
+
+            this.SubtractAmountsFromLandApplications = true;
         }
 
         #endregion
@@ -98,9 +101,11 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public List<DigestateTank> GetDailyTankStates(
-            List<DigestorDailyOutput> digestorDailyOutputs, 
-            Farm farm, 
+        /// <summary>
+        /// Equation 4.9.7-2
+        /// </summary>
+        public List<DigestateTank> GetDailyTankStates(List<DigestorDailyOutput> digestorDailyOutputs,
+            Farm farm,
             AnaerobicDigestionComponent component)
         {
             var result = new List<DigestateTank>();
@@ -147,6 +152,16 @@ namespace H.Core.Services.Animals
                     tank.TotalRawDigestateProduced = totalRawProduced;
                     tank.NitrogenFromRawDigestate = totalNitrogenFromRawDigestateAvailable;
                     tank.CarbonFromRawDigestate = totalCarbonFromRawDigestateAvailable;
+
+                    var totalFractionOfRawDigestateUsedFromLandApplications = totalRawDigestateUsedForFieldApplications / totalRawProduced;
+                    var totalCarbonUsed = totalFractionOfRawDigestateUsedFromLandApplications * totalCarbonFromRawDigestateAvailable;
+                    var totalNitrogenUsed = totalFractionOfRawDigestateUsedFromLandApplications * totalNitrogenFromRawDigestateAvailable;
+
+                    if (this.SubtractAmountsFromLandApplications)
+                    {
+                        tank.CarbonFromRawDigestate -= totalCarbonUsed;
+                        tank.NitrogenFromRawDigestate -= totalNitrogenUsed; 
+                    }
                 }
 
                 /*
@@ -169,13 +184,22 @@ namespace H.Core.Services.Animals
                 var totalCarbonFromLiquidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).CarbonFromLiquidDigestate;
                 var totalCarbonFromLiquidDigestateAvailable = totalCarbonFromLiquidDigestateOnThisDay + totalCarbonFromLiquidDigestateFromPreviousDay;
 
-                // There should only be liquid amounts if separation is performed
                 if (component.IsLiquidSolidSeparated)
                 {
                     tank.TotalLiquidDigestateAvailable = totalLiquidDigestateAvailableAfterFieldApplications;
                     tank.TotalLiquidDigestateProduced = totalLiquidProduced;
                     tank.NitrogenFromLiquidDigestate = totalNitrogenFromLiquidDigestateAvailable;
                     tank.CarbonFromLiquidDigestate = totalCarbonFromLiquidDigestateAvailable;
+
+                    var totalFractionOfLiquidDigestateUsedFromLandApplications = totalLiquidDigestateUsedForFieldApplications / totalLiquidProduced;
+                    var totalCarbonUsed = totalFractionOfLiquidDigestateUsedFromLandApplications * totalCarbonFromLiquidDigestateAvailable;
+                    var totalNitrogenUsed = totalFractionOfLiquidDigestateUsedFromLandApplications * totalNitrogenFromLiquidDigestateAvailable;
+
+                    if (this.SubtractAmountsFromLandApplications)
+                    {
+                        tank.CarbonFromLiquidDigestate -= totalCarbonUsed;
+                        tank.NitrogenFromLiquidDigestate -= totalNitrogenUsed;
+                    }
                 }
 
                 /*
@@ -198,13 +222,22 @@ namespace H.Core.Services.Animals
                 var totalCarbonFromSolidDigestateFromPreviousDay = i == 0 ? 0 : result.ElementAt(i - 1).CarbonFromSolidDigestate;
                 var totalCarbonFromSolidDigestateAvailable = totalCarbonFromSolidDigestateOnThisDay + totalCarbonFromSolidDigestateFromPreviousDay;
 
-                // There should only be liquid amounts if separation is performed
                 if (component.IsLiquidSolidSeparated)
                 {
                     tank.TotalSolidDigestateAvailable = totalSolidDigestateAvailableAfterFieldApplications;
                     tank.TotalSolidDigestateProduced = totalSolidProduced;
                     tank.NitrogenFromSolidDigestate = totalNitrogenFromSolidDigestateAvailable;
                     tank.CarbonFromSolidDigestate = totalCarbonFromSolidDigestateAvailable;
+
+                    var totalFractionOfSolidDigestateUsedFromLandApplications = totalSolidDigestateUsedForFieldApplications / totalSolidProduced;
+                    var totalCarbonUsed = totalFractionOfSolidDigestateUsedFromLandApplications * totalCarbonFromSolidDigestateAvailable;
+                    var totalNitrogenUsed = totalFractionOfSolidDigestateUsedFromLandApplications * totalNitrogenFromSolidDigestateAvailable;
+
+                    if (this.SubtractAmountsFromLandApplications)
+                    {
+                        tank.CarbonFromSolidDigestate -= totalCarbonUsed;
+                        tank.NitrogenFromSolidDigestate -= totalNitrogenUsed;
+                    }
                 }
             }
 
@@ -355,6 +388,55 @@ namespace H.Core.Services.Animals
                     }
                 }
             }
+
+            return result;
+        }
+
+        public double GetTotalCarbonAppliedToField(CropViewItem cropViewItem, int year)
+        {
+            var result = 0d;
+
+            foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems.Where(x => x.DateCreated.Year == year))
+            {
+                result += digestateApplicationViewItem.AmountOfCarbonAppliedPerHectare * cropViewItem.Area;
+            }
+
+            return result;
+        }
+
+        public double GetTotalCarbonRemainingForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component)
+        {
+            var dailyResults = this.GetDailyResults(farm);
+            if (dailyResults.Any() == false)
+            {
+                return 0;
+            }
+
+            var dateOfLastOutput = dailyResults.Max(x => x.Date);
+            var tank = this.GetTank(farm, dateOfLastOutput, dailyResults);
+
+            var totalCarbonRemaining = 0d;
+            if (component.IsLiquidSolidSeparated)
+            {
+                // Total remaining C from liquid and solid fractions
+                totalCarbonRemaining = tank.CarbonFromLiquidDigestate + tank.CarbonFromSolidDigestate;
+            }
+            else
+            {
+                totalCarbonRemaining = tank.CarbonFromRawDigestate;
+            }
+
+            var result = totalCarbonRemaining * (cropViewItem.Area / farm.GetTotalAreaOfFarm(false, year));
+
+            return result;
+        }
+
+        public double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component)
+        {
+            var totalAppliedToField = this.GetTotalCarbonAppliedToField(cropViewItem, year);
+            var totalCarbonRemainingForField = this.GetTotalCarbonRemainingForField(cropViewItem, year, farm, component);
+
+            var result = totalAppliedToField + totalCarbonRemainingForField;
 
             return result;
         }

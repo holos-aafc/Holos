@@ -930,15 +930,16 @@ namespace H.Core.Calculators.Carbon
         /// Equation 4.7.2-1
         /// </summary>
         /// <returns>Amount of N added to soil</returns>
-        protected double CalculateAmountOfNitrogenAppliedToSoilAfterLosses(double totalNitrogenAppliedToField,
+        protected double CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
+            double totalNitrogenAppliedToField,
             double totalDirectN2ON,
-            double totalAmmoniaLossFromLandapplication,
+            double totalAmmoniaLossFromLandApplication,
             double totalN2ONFromLeaching)
         {
             // Note we don't divide by the total volume of all manure produced here (as specified in 4.7.2-1) since the manure and/or digestate application(s) already consider
             // the fraction being used as compared to the total volume of manure/digestate produced
 
-            var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandapplication + totalN2ONFromLeaching);
+            var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandApplication + totalN2ONFromLeaching);
 
             return result;
         }
@@ -974,7 +975,7 @@ namespace H.Core.Calculators.Carbon
             var nitrogenAppliedToSoilAfterLosses = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
                 totalNitrogenAppliedToField: combinedNitrogenApplied,
                 totalDirectN2ON: combinedDirectN2ON,
-                totalAmmoniaLossFromLandapplication: combinedAmmoniacalLoss,
+                totalAmmoniaLossFromLandApplication: combinedAmmoniacalLoss,
                 totalN2ONFromLeaching: combinedLeachingLoss);
 
             // Inputs from grazing animals will already have emission subtracted and so we are adding the remaining N from grazing animals here.

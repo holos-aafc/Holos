@@ -22,11 +22,16 @@ namespace H.Core.Test.Services.Animals
         #region Fields
 
         private DigestateService _sut;
-        private Farm _farm;
-        private List<AnimalComponentEmissionsResults> _animalComponentResults;
         private Mock<IADCalculator> _mockAdCalculator;
         private Mock<IAnimalService> _mockAnimalService;
         private List<DigestorDailyOutput> _dailyResults;
+        private DigestateState _state;
+        private DateTime _date;
+        private Farm _farm;
+        private AnaerobicDigestionComponent _adComponent;
+        private DigestateApplicationViewItem _digestateApplication;
+        private FieldSystemComponent _fieldSystemComponent;
+        private CropViewItem _cropViewItem;
 
         #endregion
 
@@ -70,6 +75,24 @@ namespace H.Core.Test.Services.Animals
 
             _sut.ADCalculator = _mockAdCalculator.Object;
             _sut.AnimalService = _mockAnimalService.Object;
+
+            _date = DateTime.Now;
+            _state = DigestateState.LiquidPhase;
+
+            _farm = base.GetTestFarm();
+            var fieldComponent = base.GetTestFieldComponent();
+            _cropViewItem = base.GetTestCropViewItem();
+            _digestateApplication = base.GetTestDigestateApplicationViewItem();
+            _digestateApplication.DateCreated = _date;
+            _digestateApplication.DigestateState = _state;
+
+            _cropViewItem.DigestateApplicationViewItems.Add(_digestateApplication);
+            _fieldSystemComponent = fieldComponent;
+            _fieldSystemComponent.CropViewItems.Add(_cropViewItem);
+
+            _adComponent = base.GetTestAnaerobicDigestionComponent();
+            _farm.Components.Add(_adComponent);
+            _farm.Components.Add(_fieldSystemComponent);
         }
 
         [TestCleanup]
@@ -84,22 +107,11 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTankStatesReturnsReducedAmountsConsideringFieldApplications()
         {
-            var farm = base.GetTestFarm();
+            _adComponent.IsLiquidSolidSeparated = false;
+            _digestateApplication.DateCreated = _dailyResults[1].Date;
+            _digestateApplication.DigestateState = DigestateState.Raw;
 
-            var field = base.GetTestFieldComponent();
-            farm.Components.Add(field);
-
-            var crop = base.GetTestCropViewItem();
-            field.CropViewItems.Add(crop);
-
-            crop.DigestateApplicationViewItems.Add(base.GetTestDigestateApplicationViewItem());
-
-            var digestor = new AnaerobicDigestionComponent();
-            farm.Components.Add(digestor);
-
-            digestor.IsLiquidSolidSeparated = false;
-
-            var result = _sut.GetDailyTankStates(farm, _dailyResults);
+            var result = _sut.GetDailyTankStates(_farm, _dailyResults);
 
             // 100 kg is produced on 1st day
             Assert.AreEqual(100, result.ElementAt(0).TotalRawDigestateAvailable);
@@ -111,34 +123,34 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalCarbonRemainingAtEndOfYear()
         {
-            var farm = base.GetTestFarm();
-            var adComponent = base.GetTestAnaerobicDigestionComponent();
-            farm.Components.Add(adComponent);
-            adComponent.IsLiquidSolidSeparated = false;
+            _adComponent.IsLiquidSolidSeparated = false;
 
-            var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year,farm, adComponent);
+            var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year,_farm, _adComponent);
 
             Assert.AreEqual(40, totalCarbon);
         }
 
         [TestMethod]
+        public void CalculateAmountOfDigestateRemaining()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _digestateApplication.DigestateState = DigestateState.Raw;
+            var year = DateTime.Now.Year;
+
+            // Total carbon created is 40 over both days (10 kg on day 1, 30 on day 2)
+
+            // Raw digestate applied on first day using 50% of available digestate. 0.5 * 10 kg on day 1 = 5
+            // Total over 2 days is 5 + 30 = 35
+
+            var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
+
+            Assert.AreEqual(35, result);
+        }
+
+        [TestMethod]
         public void GetTotalAmountOfDigestateAppliedOnDay()
         {
-            var date = DateTime.Now;
-            var state = DigestateState.LiquidPhase;
-
-            var farm = base.GetTestFarm();
-            var fieldComponent = base.GetTestFieldComponent();
-            var cropViewItem = base.GetTestCropViewItem();
-            var digestateApplication = base.GetTestDigestateApplicationViewItem();
-            digestateApplication.DateCreated = date;
-            digestateApplication.DigestateState = state;
-
-            cropViewItem.DigestateApplicationViewItems.Add(digestateApplication);
-            fieldComponent.CropViewItems.Add(cropViewItem);
-            farm.Components.Add(fieldComponent);
-
-            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(date, farm, state);
+            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_date, _farm, _state);
 
             Assert.AreEqual(50, result);
         }
