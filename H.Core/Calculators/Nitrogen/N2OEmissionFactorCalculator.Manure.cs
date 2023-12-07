@@ -1313,6 +1313,17 @@ namespace H.Core.Calculators.Nitrogen
             return indirect + direct;
         }
 
+        /// <summary>
+        /// Remaining nitrogen is spread evenly across all fields
+        /// </summary>
+        public double GetNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
+        {
+            var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
+            var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemaining(viewItem.Year, farm);
+
+            return fractionUsed * manureNitrogenRemaining;
+        }
+
         #endregion
 
         #region Private Methods
@@ -1370,17 +1381,6 @@ namespace H.Core.Calculators.Nitrogen
             var leachingFraction = this.CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
 
             return leachingFraction;
-        }
-
-        /// <summary>
-        /// Remaining nitrogen is spread evenly across all fields
-        /// </summary>
-        private double GetNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
-        {
-            var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
-            var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemaining(viewItem.Year, farm);
-
-            return fractionUsed * manureNitrogenRemaining;
         }
 
         #endregion

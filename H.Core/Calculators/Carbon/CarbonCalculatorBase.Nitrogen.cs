@@ -934,12 +934,14 @@ namespace H.Core.Calculators.Carbon
             double totalNitrogenAppliedToField,
             double totalDirectN2ON,
             double totalAmmoniaLossFromLandApplication,
-            double totalN2ONFromLeaching)
+            double totalN2ONFromLeaching,
+            double totalNitrogenRemainingForField, 
+            double totalNO3NFromLeaching)
         {
             // Note we don't divide by the total volume of all manure produced here (as specified in 4.7.2-1) since the manure and/or digestate application(s) already consider
             // the fraction being used as compared to the total volume of manure/digestate produced
 
-            var result = totalNitrogenAppliedToField - (totalDirectN2ON + totalAmmoniaLossFromLandApplication + totalN2ONFromLeaching);
+            var result = (totalNitrogenAppliedToField + totalNitrogenRemainingForField) - (totalDirectN2ON + totalAmmoniaLossFromLandApplication + totalN2ONFromLeaching + totalNO3NFromLeaching);
 
             return result;
         }
@@ -950,9 +952,11 @@ namespace H.Core.Calculators.Carbon
         /// Calculates the amount of N from manure (field applications and/or from grazing animals) and/or digestate added to the field after losses from emissions have been calculated on a per hectare basis
         /// </summary>
         /// <returns>Amount of N from manure and/or digestate (kg N ha^-1)</returns>
-        protected double GetManureAndDigestateNitrogenResiduesForYear(Farm farm, CropViewItem cropViewItem)
+        protected double GetManureAndDigestateNitrogenResiduesForYear(
+            Farm farm, 
+            CropViewItem cropViewItem)
         {
-            // These will totals for entire field
+            // These will be the totals for the entire field
             var totalDirectN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(cropViewItem, farm);
             var totalDirectN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(cropViewItem, farm);
 
@@ -972,11 +976,18 @@ namespace H.Core.Calculators.Carbon
             var combinedLeachingLoss = totalIndirectEmissionsFromLandAppliedManure.TotalN2ONFromManureLeaching +
                                        totalIndirectEmissionsFromLandAppliedDigestate.TotalN2ONFromDigestateLeaching;
 
+            var combinedNO3NLeachingLoss = totalIndirectEmissionsFromLandAppliedManure.TotalNitrateLeached +
+                                       totalIndirectEmissionsFromLandAppliedDigestate.TotalNitrateLeached;
+
+            var manureRemaining = this.N2OEmissionFactorCalculator.GetNitrogenRemainingForField(cropViewItem, farm);
+
             var nitrogenAppliedToSoilAfterLosses = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
                 totalNitrogenAppliedToField: combinedNitrogenApplied,
                 totalDirectN2ON: combinedDirectN2ON,
                 totalAmmoniaLossFromLandApplication: combinedAmmoniacalLoss,
-                totalN2ONFromLeaching: combinedLeachingLoss);
+                totalN2ONFromLeaching: combinedLeachingLoss, 
+                totalNitrogenRemainingForField: manureRemaining, 
+                totalNO3NFromLeaching: combinedNO3NLeachingLoss);
 
             // Inputs from grazing animals will already have emission subtracted and so we are adding the remaining N from grazing animals here.
             nitrogenAppliedToSoilAfterLosses += cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture;
