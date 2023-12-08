@@ -160,7 +160,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.45,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.CompostIntensive:
@@ -171,7 +171,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.65,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.06,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.CompostPassive:
@@ -182,7 +182,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.60,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.04,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.DeepBedding:
@@ -193,7 +193,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.25,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.035,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.AnaerobicDigester:
@@ -204,7 +204,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.1,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.0,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             default:
@@ -485,7 +485,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.12,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             default:

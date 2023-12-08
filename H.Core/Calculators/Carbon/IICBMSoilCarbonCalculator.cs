@@ -114,7 +114,6 @@ namespace H.Core.Calculators.Carbon
         /// 
         /// C_p
         ///
-        /// Equation 2.2.2-1
         /// </summary>
         /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>

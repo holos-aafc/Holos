@@ -471,9 +471,9 @@ namespace H.Core.Calculators.Climate
         /// <summary>
         /// Equation 2.1.1-4
         /// </summary>
-        private double CalculateOrganicCarbonFactor(double organicCarbon)
+        private double CalculateOrganicCarbonFactor(double percentOrganicCarbon)
         {
-            var organicCarbonFactor = -0.837531 + 0.430183 * organicCarbon;
+            var organicCarbonFactor = -0.837531 + 0.430183 * percentOrganicCarbon;
 
             return organicCarbonFactor;
         }

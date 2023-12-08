@@ -36,6 +36,7 @@ namespace H.Core
         private const int MaxNumberOfBackups = 5;
 
         private readonly SemaphoreSlim _asyncSaveSemaphore = new SemaphoreSlim(1, 1);
+        private string _bulkImportProgressMessage;
 
 
         /// <summary>
@@ -91,6 +92,12 @@ namespace H.Core
         /// A task that handles the async save process.
         /// </summary>
         public Task SaveTask { get; set; }
+
+        public string BulkImportProgressMessage
+        {
+            get => _bulkImportProgressMessage;
+            set => SetProperty(ref _bulkImportProgressMessage, value);
+        }
 
         #endregion
 
@@ -542,6 +549,33 @@ namespace H.Core
             {
                 var farmsFromFile = this.GetFarmsFromExportFile(file);
                 result.AddRange(farmsFromFile);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Async
+        /// </summary>
+        public async Task<IEnumerable<Farm>> GetExportedFarmsFromDirectoryRecursivelyAsync(string path)
+        {
+            var result = new List<Farm>();
+
+            var stringCollection = new StringCollection();
+            var files = FileSystemHelper.ListAllFiles(stringCollection, path, $"*{exportedFileExtension}", isRecursiveScan: true);
+            if (files == null)
+            {
+                return result;
+            }
+
+            var farmNumber = 1;
+            var totalFarms = files.Count;
+            foreach (var file in files)
+            {
+                BulkImportProgressMessage = string.Format(H.Core.Properties.Resources.MessageBulkImportProgress, farmNumber, totalFarms);
+                var farmsFromFile = await GetFarmsFromExportFileAsync(file);
+                result.AddRange(farmsFromFile);
+                farmNumber++;
             }
 
             return result;

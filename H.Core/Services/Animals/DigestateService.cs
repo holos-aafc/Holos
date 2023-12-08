@@ -44,6 +44,11 @@ namespace H.Core.Services.Animals
 
         public List<DigestorDailyOutput> GetDailyResults(Farm farm)
         {
+            if (farm.AnaerobicDigestionComponents.Any() == false)
+            {
+                return new List<DigestorDailyOutput>();
+            }
+
             var animalResults = AnimalService.GetAnimalResults(farm);
             var dailyResults = ADCalculator.CalculateResults(farm, animalResults);
 

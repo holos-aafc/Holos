@@ -34,15 +34,15 @@ namespace H.Core.Services.LandManagement
                 carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateStrawNitrogen(
+            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentStrawReturnedToSoil(
                 carbonInputFromStraw: viewItem.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
 
-            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateRootNitrogen(
+            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentRootReturnedToSoil(
                 carbonInputFromRoots: viewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
 
-            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateExtrarootNitrogen(
+            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentExaduatesReturnedToSoil(
                 carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
 
@@ -63,7 +63,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 2.5.2-6
+        /// Equation 2.5.5-7
         ///
         /// Calculates the amount of the fertilizer blend needed to support the yield that was input.This considers the amount of nitrogen uptake by the plant and then
         /// converts that value into an amount of fertilizer blend/product

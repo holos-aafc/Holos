@@ -281,7 +281,10 @@ namespace H.Core.Calculators.Shelterbelt
 
             var livingBiomass = totalEcosystemCarbon - deadOrganicMatter;
 
+            // Equation 2.3.4-2
             var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
+
+            // Equation 2.3.3-6
             var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
@@ -313,7 +316,7 @@ namespace H.Core.Calculators.Shelterbelt
 
                     resultViewItem.ShelterbeltComponent = component;
                     resultViewItem.Year = (int)year;
-
+                    // Equation 2.3.3-7
                     resultViewItem.TotalLivingBiomassCarbon = this.CalculateTotalShelterbeltBiomassCarbon(viewItemsForYear) / 1000; // Convert to Mg
                     resultViewItem.TotalDeadOrganicMatterCarbon = this.CalculateTotalDeadOrganicMatter(viewItemsForYear) / 1000; // Convert to Mg
                     resultViewItem.TotalEcosystemCarbon = this.CalculateTotalEcosystemCarbon(
@@ -428,29 +431,12 @@ namespace H.Core.Calculators.Shelterbelt
         #region Algorithms
 
         /// <summary>
-        /// Equation 2.1.6-10 
-        ///
-        /// Calculates the ratio of user specified growth (biomass carbon) over ideal tree growth (biomass carbon). User specified growth is based on measure circumference/diameter and compared
-        /// to lookup tables of ideal tree biomass carbon values.
-        /// </summary>
-        public double CalculateRealGrowthRatio(
-            double calculatedTotalLivingCarbonKilogramPerStandardLength,
-            double lookupTotalLivingCarbonKilogramsPerStandardLength)
-        {
-            if (lookupTotalLivingCarbonKilogramsPerStandardLength == 0)
-            {
-                // Assume value is not available and return 1 to indicate we are assuming an ideal tree for this year
-                return 1;
-            }
-
-            return calculatedTotalLivingCarbonKilogramPerStandardLength / lookupTotalLivingCarbonKilogramsPerStandardLength;
-        }
-
-        /// <summary>
-        /// Equation 2.1.6-11
-        ///
+        /// Equation 2.3.1-1
         /// Calculates the mortality of a row of trees given the total live count and the total planted count.
         /// </summary>
+        /// <param name="plantedTreeCountAllSpecies">Number of trees originally planted into the linear planting </param>
+        /// <param name="liveTreeCountAllSpecies">Number of trees alive for all species in a linear planting </param>
+        /// <returns>Percent mortality of an entire linear planting (i.e. row). </returns>
         public double CalculatePercentMortalityOfALinearPlanting(
             List<double> plantedTreeCountAllSpecies,
             List<double> liveTreeCountAllSpecies)
@@ -466,10 +452,12 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-12
+        /// Equation 2.3.1-2
         ///
         /// There are only 3 lookup values in the table for mortality. Convert user defined mortality to one of these lookup values.
         /// </summary>
+        /// <param name="percentMortalityOfALinearPlanting">Percent mortality of an entire linear planting (i.e. row). </param>
+        /// <returns>Percent mortality used for looking up values in Table 12. Represents the lesser value used in linear interpolation.</returns>
         public int CalculateMortalityLow(double percentMortalityOfALinearPlanting)
         {
             if (percentMortalityOfALinearPlanting >= 30.0)
@@ -481,13 +469,16 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-13
+        /// Equation 2.3.1-3
         ///
         /// There are only 3 lookup values in the table for mortality. Use one level up from the mortality low value.
         /// </summary>
-        public int CalculateMortalityHigh(int mortalityLow)
+        /// <param name="aboveMortalityLow">Above level of mortality low value.</param>
+        /// <returns>Percent mortality used for looking up values in Table 12. Represents the greater value used in linear interpolation.</returns>
+        /// <exception cref="Exception"></exception>
+        public int CalculateMortalityHigh(int aboveMortalityLow)
         {
-            switch (mortalityLow)
+            switch (aboveMortalityLow)
             {
                 case 0:
                     return 15;
@@ -497,13 +488,16 @@ namespace H.Core.Calculators.Shelterbelt
                     return 50;
                 default:
                     throw new Exception(nameof(ShelterbeltCalculator) + "." + nameof(CalculateMortalityHigh) + "(int " +
-                                        nameof(mortalityLow) + ") must only receive the following values: 0, 15 or 30");
+                                        nameof(aboveMortalityLow) + ") must only receive the following values: 0, 15 or 30");
             }
         }
 
         /// <summary>
-        /// Equation 2.1.6-2
+        /// Equation 2.3.2-1
         /// </summary>
+        /// <param name="circumference">Average of the following property over one or more trees: cumulative tree stem circumference (cm) at 1.3 m height along the individual stem (breast height) (outside bark) </param>
+        /// <param name="coefficientA">Coefficient a from Table 11</param>
+        /// <param name="coefficientB">Coefficient b from Table 11</param>
         /// <returns>Aboveground biomass per tree (kg tree^-1)</returns>
         public double CalculateAboveGroundBiomassPerTree(
             double circumference,
@@ -516,24 +510,37 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-3
+        /// Equation 2.3.2-2
         /// </summary>
+        /// <param name="diameter">Diameter of a circle (cm)</param>
+        /// <returns>Circumference of a circle (cm)</returns>
         public double CalculateCircumferenceFromDiameter(double diameter)
         {
             return 3.14159 * diameter;
         }
 
         /// <summary>
-        /// Equation 2.1.6-3 (b)
+        /// Equation 2.3.2-3
         /// </summary>
-        public double CalculateDiameterFromCircumference(double circumference)
+        /// <param name="circumferences">Circumferences at breast height of an individual stem (cm)</param>
+        /// <returns>Cumulative tree stem circumference (cm) at 1.3m height along the individual stem (breast height) (outside bark).</returns>
+        public double CalculateTreeCircumference(List<double> circumferences)
         {
-            return circumference / 3.14159;
+            var treeCircumference = 0.0;
+            foreach (var circumference in circumferences)
+            {
+                treeCircumference += circumference * circumference;
+            }
+
+            treeCircumference = Math.Sqrt(treeCircumference);
+            return treeCircumference;
         }
 
         /// <summary>
-        /// Equation 2.1.6-6
+        /// Equation 2.3.2-4
         /// </summary>
+        /// <param name="treeCircumferences">List of all the tree circumferences. Helps us calculate number of trees sampled</param>
+        /// <returns>Average circumference per tree.</returns>
         public double CalculateAverageCircumference(List<double> treeCircumferences)
         {
             var averageCircumference = 0.0;
@@ -547,11 +554,12 @@ namespace H.Core.Calculators.Shelterbelt
             return averageCircumference;
         }
 
+        
         /// <summary>
-        /// Equation 2.1.6-1
+        /// Equation 2.3.2-5
         /// </summary>
         /// <param name="aboveGroundBiomassOfTree">Above ground biomass of tree (kg tree^-1)</param>
-        /// <param name="aboveGroundBiomassRatio">Fraction of aboveground over total biomass (aboveground + belowground)</param>
+        /// <param name="aboveGroundBiomassRatio">Fraction of aboveground over total biomass (total biomass = aboveground + belowground), derived from Table 12, specific to the user-provided age and mortality of the shelterbelt (%/100)</param>
         /// <returns>Total tree biomass (aboveground + belowground) (kg tree^-1)</returns>
         public double CalculateTotalBiomassOfTree(
             double aboveGroundBiomassOfTree,
@@ -561,8 +569,20 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-7
+        /// Equation 2.1.6-3 (b)
         /// </summary>
+        public double CalculateDiameterFromCircumference(double circumference)
+        {
+            return circumference / 3.14159;
+        }
+
+        /// <summary>
+        /// Equation 2.3.3-1
+        /// </summary>
+        /// <param name="rowLength">Length of a given linear planting.</param>
+        /// <param name="treeSpacing">Space between one tree of a given kind and the next within a given linear planting.</param>
+        /// <param name="percentMortality">Percent dead trees over planted trees</param>
+        /// <returns>Number of live trees of a particular species/taxon within a given linear planting.</returns>
         public double CalculateTreeCount(
             double rowLength,
             double treeSpacing,
@@ -572,7 +592,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-9
+        /// Equation 2.3.3-2
         /// </summary>
         /// <param name="biomassPerTree">Total tree biomass (aboveground + belowground) (kg tree^-1)</param>
         /// <param name="treeCount">Total number of trees (of same type) within the row</param>
@@ -585,7 +605,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-10
+        /// Equation 2.3.3-3
         /// </summary>
         /// <param name="biomassOfAllTrees">Biomassof trees of the same species within a linear planting (kg planting-1)</param>
         /// <param name="rowLength">Length of the </param>
@@ -598,7 +618,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-10
+        /// Equation 2.3.3-4
         /// </summary>
         /// <param name="biomassPerKilometer">Biomass (kg km^-1)</param>
         /// <returns>Total carbon in the living biomass per standard length linear planting (kg C km^-1)</returns>
@@ -609,19 +629,29 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.3.1-4
+        /// Equation 2.3.3-5
+        ///
+        /// Calculates the ratio of user specified growth (biomass carbon) over ideal tree growth (biomass carbon). User specified growth is based on measure circumference/diameter and compared
+        /// to lookup tables of ideal tree biomass carbon values.
         /// </summary>
-        public double CalculateTreeCircumference(List<double> circumferences)
+        /// <param name="calculatedTotalLivingCarbonKilogramPerStandardLength">Total C stocks in the living biomass per standard length linear planting (kg C km-1)</param>
+        /// <param name="lookupTotalLivingCarbonKilogramsPerStandardLength">Total C stocks per average (ideal) tree recorded for an area of similar geographical location (Saskatchewan)
+        /// or ecological condition (plant hardiness zone outside SK) (kg C km-1)</param>
+        /// <returns>Ratio of user specified over average (ideal) tree growth</returns>
+        public double CalculateRealGrowthRatio(
+            double calculatedTotalLivingCarbonKilogramPerStandardLength,
+            double lookupTotalLivingCarbonKilogramsPerStandardLength)
         {
-            var treeCircumference = 0.0;
-            foreach (var circumference in circumferences)
+            if (lookupTotalLivingCarbonKilogramsPerStandardLength == 0)
             {
-                treeCircumference += circumference * circumference;
+                // Assume value is not available and return 1 to indicate we are assuming an ideal tree for this year
+                return 1;
             }
 
-            treeCircumference = Math.Sqrt(treeCircumference);
-            return treeCircumference;
+            return calculatedTotalLivingCarbonKilogramPerStandardLength / lookupTotalLivingCarbonKilogramsPerStandardLength;
         }
+
+
 
         /// <summary>
         /// Equation 2.3.1-7
@@ -674,8 +704,10 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        ///  Equation 2.3.4-1
+        ///  Equation 2.3.5-1
         /// </summary>
+        /// <param name="totalAboveGroundCarbonForShelterbelt">Annual C accumulation in tree plantings/shelterbelt (kg C shelterbelt-1 yr-1)</param>
+        /// <returns>Annual CO2 sequestration from tree plantings/shelterbelt (kg CO2 shelterbelt-1 yr-1)</returns>
         public double CalculateCarbonDioxideSequesteredInShelterbelt(double totalAboveGroundCarbonForShelterbelt)
         {
             return totalAboveGroundCarbonForShelterbelt * CoreConstants.ConvertFromCToCO2 * -1.0;
@@ -684,7 +716,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.1.6-26
         /// </summary>
-        /// <returns>The total dead organic matter carbon (kg C km^-1)</returns>
+        /// <returns>The total dead organic matter carbon  (kg C km^-1)</returns>
         private double GetIdealDeadOrganicMatter(TrannumData trannumData)
         {
             var deadOrganicMatterMegagrams = 0d;
