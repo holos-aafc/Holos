@@ -5583,4 +5583,13 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelImportData" xml:space="preserve">
     <value>Import Data</value>
   </data>
+  <data name="MessageBulkImportProgress" xml:space="preserve">
+    <value>Importing file {0} of {1}. Please do not close this window while data is being imported.</value>
+  </data>
+  <data name="LabelK2O" xml:space="preserve">
+    <value>K2O</value>
+  </data>
+  <data name="LabelP2O5" xml:space="preserve">
+    <value>P2O5</value>
+  </data>
 </root>

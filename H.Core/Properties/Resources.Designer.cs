@@ -9835,6 +9835,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to K2O.
+        /// </summary>
+        public static string LabelK2O {
+            get {
+                return ResourceManager.GetString("LabelK2O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Digestion rate of Starch.
         /// </summary>
         public static string LabelKDCB1 {
@@ -10515,6 +10524,15 @@ namespace H.Core.Properties {
         public static string LabelOverflow {
             get {
                 return ResourceManager.GetString("LabelOverflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to P2O5.
+        /// </summary>
+        public static string LabelP2O5 {
+            get {
+                return ResourceManager.GetString("LabelP2O5", resourceCulture);
             }
         }
         
@@ -12360,6 +12378,15 @@ namespace H.Core.Properties {
         public static string MessageBackupRestored {
             get {
                 return ResourceManager.GetString("MessageBackupRestored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing file {0} of {1}. Please do not close this window while data is being imported..
+        /// </summary>
+        public static string MessageBulkImportProgress {
+            get {
+                return ResourceManager.GetString("MessageBulkImportProgress", resourceCulture);
             }
         }
         

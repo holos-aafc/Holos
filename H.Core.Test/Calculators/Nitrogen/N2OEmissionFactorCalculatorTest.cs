@@ -405,6 +405,30 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         [TestMethod]
+        public void CalculateAmmoniaFromLandApplicationForDigestate()
+        {
+            var farm = base.GetTestFarm();
+            var viewItem = base.GetTestCropViewItem();
+            viewItem.DigestateApplicationViewItems.Clear();
+            viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
+
+            var results = _sut.CalculateAmmoniaEmissionsFromLandAppliedDigestate(viewItem , farm);
+            var firstItem = results[0];
+
+            Assert.AreEqual(50, firstItem.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(8.28, firstItem.AdjustedAmmoniaLoss, 2);
+            Assert.AreEqual(6.82, firstItem.AdjustedAmmoniacalLoss, 2);
+            Assert.AreEqual(10.35, firstItem.AmmoniaLoss, 2);
+            Assert.AreEqual(8.52, firstItem.AmmoniacalLoss, 2);
+            Assert.AreEqual(2.93, firstItem.TotalIndirectN2OEmissions, 2);
+            Assert.AreEqual(1.87, firstItem.TotalIndirectN2ONEmissions, 2);
+            Assert.AreEqual(2.67, firstItem.TotalN2OFromDigestateVolatilized, 2);
+            Assert.AreEqual(1.7, firstItem.TotalN2ONFromDigestateVolatilized, 2);
+            Assert.AreEqual(0.164, firstItem.TotalN2ONFromDigestateLeaching, 2);
+            Assert.AreEqual(14.83, firstItem.TotalNitrateLeached, 2);
+        }
+
+        [TestMethod]
         public void CalculateAmmoniaFromLandApplicationForMultipleImportedManureApplications()
         {
             var farm = base.GetTestFarm();
@@ -435,6 +459,31 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(0.32, totalResultsForField.TotalN2ONFromManureLeaching, 2);
             Assert.AreEqual(2, totalResultsForField.TotalN2ONFromManureVolatilized, 2);
             Assert.AreEqual(29.66, totalResultsForField.TotalNitrateLeached, 2);
+        }
+
+        [TestMethod]
+        public void CalculateAmmoniaFromLandApplicationForMultipleDigestateApplications()
+        {
+            var farm = base.GetTestFarm();
+            var viewItem = base.GetTestCropViewItem();
+            viewItem.DigestateApplicationViewItems.Clear();
+            viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
+            viewItem.DigestateApplicationViewItems.Add(base.GetTestLiquidDigestateApplicationViewItem());
+
+            var digestateResults = _sut.CalculateAmmoniaEmissionsFromLandAppliedDigestate(viewItem, farm);
+            var totalResultsForField = _sut.ConvertPerFieldEmissionsToPerHectare(digestateResults, viewItem);
+
+            Assert.AreEqual(550, totalResultsForField.ActualAmountOfNitrogenAppliedFromLandApplication);
+            Assert.AreEqual(91.09, totalResultsForField.AdjustedAmmoniaLoss, 2);
+            Assert.AreEqual(75.02, totalResultsForField.AdjustedAmmoniacalLoss, 2);
+            Assert.AreEqual(113.86, totalResultsForField.AmmoniaLoss, 2);
+            Assert.AreEqual(93.775, totalResultsForField.AmmoniacalLoss, 2);
+            Assert.AreEqual(32.32, totalResultsForField.TotalIndirectN2OEmissions, 2);
+            Assert.AreEqual(20.57, totalResultsForField.TotalIndirectN2ONEmissions, 2);
+            Assert.AreEqual(2, totalResultsForField.TotalN2OFromDigestateVolatilized, 2);
+            Assert.AreEqual(0.32, totalResultsForField.TotalN2ONFromDigestateLeaching, 2);
+            Assert.AreEqual(2, totalResultsForField.TotalN2ONFromDigestateVolatilized, 2);
+            Assert.AreEqual(163.85, totalResultsForField.TotalNitrateLeached, 2);
         }
 
         [TestMethod]

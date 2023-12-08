@@ -32,7 +32,16 @@ namespace H.Core.Services.Animals
             DigestateApplicationViewItem digestateApplicationViewItem,
             DigestateTank tank);
 
-        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
+        /// <summary>
+        /// Equation 4.6.1-4
+        /// 
+        /// Stored nitrogen available for application to land minus digestate applied to fields or exported
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
+
+        double GetTotalNitrogenExported(int year, Farm farm);
 
         /// <summary>
         /// Equation 4.9.7-3

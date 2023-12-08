@@ -549,7 +549,7 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double GetTotalNitrogenRemaining(int year, Farm farm)
+        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm)
         {
             var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
             var totalAppliedNitrogen = this.GetTotalNitrogenAppliedToAllFields(year);
@@ -558,7 +558,7 @@ namespace H.Core.Services.Animals
             return totalAvailableNitrogen - totalAppliedNitrogen - totalExportedNitrogen;
         }
 
-        public double GetTotalNitrogenRemaining(int year, Farm farm, AnimalType animalType)
+        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnimalType animalType)
         {
             var totalNitrogenCreated = this.GetTotalNitrogenCreated(year, animalType);
             var totalNitrogenApplied = this.GetTotalNitrogenAppliedToAllFields(year, animalType);

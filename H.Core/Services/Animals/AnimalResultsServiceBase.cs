@@ -300,11 +300,18 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="dietaryNetEnergyConcentration">Dietary net energy concentration of diet (MJ kg^-1)</param>
         /// <param name="weight">Average weight of animals (kg)</param>
+        /// <param name="areMilkFedOnly"></param>
         /// <returns>The dry matter intake of animals (kg head^-1 day^-1)</returns>
         public double CalculateDryMatterIntakeForCalves(
             double dietaryNetEnergyConcentration,
-            double weight)
+            double weight, 
+            bool areMilkFedOnly)
         {
+            if (areMilkFedOnly)
+            {
+                return weight * 0.01;
+            }
+
             var term1 = Math.Pow(weight, 0.75);
             var term2 = (0.05822 * dietaryNetEnergyConcentration -
                          0.00266 * Math.Pow(dietaryNetEnergyConcentration, 2) - 0.1128);

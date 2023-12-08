@@ -90,7 +90,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemaining(int year, Farm farm);
+        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
 
         /// <summary>
         /// Equation 4.6.2-14
@@ -99,7 +99,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemaining(int year, Farm farm, AnimalType animalType);
+        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnimalType animalType);
 
         /// <summary>
         /// (kg)

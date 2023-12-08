@@ -322,6 +322,12 @@ namespace H.Core.Services.Animals
             return amountOfCarbon;
         }
 
+        public double GetTotalNitrogenExported(int year, Farm farm)
+        {
+            // Exports not supported yet
+            return 0;
+        }
+
         public double GetTotalCarbonRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component)
         {
             var dailyResults = this.GetDailyResults(farm);
@@ -346,7 +352,7 @@ namespace H.Core.Services.Animals
             return totalCarbon;
         }
 
-        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component)
+        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm)
         {
             var dailyResults = this.GetDailyResults(farm);
             if (dailyResults.Any() == false)
@@ -356,6 +362,8 @@ namespace H.Core.Services.Animals
 
             var dateOfLastOutput = dailyResults.Max(x => x.Date);
             var tank = this.GetTank(farm, dateOfLastOutput, dailyResults);
+
+            var component = farm.GetAnaerobicDigestionComponent();
 
             var totalNitrogen = 0d;
             if (component.IsLiquidSolidSeparated)

@@ -104,9 +104,7 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
-                dietaryNetEnergyConcentration: 6,
-                weight: dailyEmissions.AnimalWeight);
+            dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves( 0, dailyEmissions.AnimalWeight, true);
 
             dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,

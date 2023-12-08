@@ -73,7 +73,7 @@ namespace H.Core.Test
             return storage;
         }
 
-        public DigestateApplicationViewItem GetTestDigestateApplicationViewItem()
+        public DigestateApplicationViewItem GetTestRawDigestateApplicationViewItem()
         {
             var digestateApplication = new DigestateApplicationViewItem();
 
@@ -81,6 +81,20 @@ namespace H.Core.Test
             digestateApplication.DigestateState = DigestateState.Raw;
             digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
             digestateApplication.AmountAppliedPerHectare = 50;
+            digestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
+
+            return digestateApplication;
+        }
+
+        public DigestateApplicationViewItem GetTestLiquidDigestateApplicationViewItem()
+        {
+            var digestateApplication = new DigestateApplicationViewItem();
+
+            digestateApplication.DateCreated = DateTime.Now.AddDays(1);
+            digestateApplication.DigestateState = DigestateState.LiquidPhase;
+            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
+            digestateApplication.AmountAppliedPerHectare = 50;
+            digestateApplication.AmountOfNitrogenAppliedPerHectare = 500;
 
             return digestateApplication;
         }

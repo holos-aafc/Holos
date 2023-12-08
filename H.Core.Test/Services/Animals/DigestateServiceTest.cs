@@ -82,7 +82,7 @@ namespace H.Core.Test.Services.Animals
             _farm = base.GetTestFarm();
             var fieldComponent = base.GetTestFieldComponent();
             _cropViewItem = base.GetTestCropViewItem();
-            _digestateApplication = base.GetTestDigestateApplicationViewItem();
+            _digestateApplication = base.GetTestRawDigestateApplicationViewItem();
             _digestateApplication.DateCreated = _date;
             _digestateApplication.DigestateState = _state;
 

@@ -293,8 +293,8 @@ namespace H.Core.Services.LandManagement
             var table = new Dictionary<int, double>();
             foreach (var distinctYear in distinctYears)
             {
-                var reminaing = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm, component);
-                table.Add(distinctYear, reminaing);
+                var remaining = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm);
+                table.Add(distinctYear, remaining);
             }
 
             foreach (var viewItem in fieldSystemComponent.CropViewItems)

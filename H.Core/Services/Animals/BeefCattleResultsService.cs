@@ -87,7 +87,8 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
                 dietaryNetEnergyConcentration: nemf,
-                weight: dailyEmissions.AnimalWeight);
+                weight: dailyEmissions.AnimalWeight, areMilkFedOnly: 
+                managementPeriod.AnimalsAreMilkFedOnly);
 
             dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
@@ -174,19 +175,16 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 crudeProteinContent: managementPeriod.SelectedDiet.CrudeProteinContent);
 
-            if (managementPeriod.AnimalsAreMilkFedOnly)
-            {
-                var managementPeriodOfCows = cowCalfComponent.GetAssociatedManagementPeriodOfParentGroup(
-                    youngAnimalGroup: animalGroup,
-                    parentGroupType: AnimalType.BeefCowLactating,
-                    dateTime: dateTime);
+            var managementPeriodOfCows = cowCalfComponent.GetAssociatedManagementPeriodOfParentGroup(
+                youngAnimalGroup: animalGroup,
+                parentGroupType: AnimalType.BeefCowLactating,
+                dateTime: dateTime);
 
-                if (managementPeriodOfCows != null)
-                {
-                    dailyEmissions.ProteinIntakeFromMilk = base.CalculateCalfProteinIntakeFromMilk(
-                        milkProduction: managementPeriodOfCows.MilkProduction,
-                        proteinContentOfMilk: managementPeriodOfCows.MilkProteinContent);
-                }
+            if (managementPeriodOfCows != null)
+            {
+                dailyEmissions.ProteinIntakeFromMilk = base.CalculateCalfProteinIntakeFromMilk(
+                    milkProduction: managementPeriodOfCows.MilkProduction,
+                    proteinContentOfMilk: managementPeriodOfCows.MilkProteinContent);
             }
 
             dailyEmissions.ProteinIntake = base.CalculateCalfProteinIntake(
