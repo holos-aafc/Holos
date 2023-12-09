@@ -14,54 +14,6 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Public Methods
 
-        public LandApplicationEmissionResult CalculateTotalIndirectEmissionsFromFieldSpecificDigestateApplications(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var indirectEmissionsForAllApplications = new List<LandApplicationEmissionResult>();
-
-            // Calculate results for farm produced digestate spreading
-            var results = this.CalculateAmmoniaEmissionsFromLandAppliedDigestate(viewItem, farm);
-
-            indirectEmissionsForAllApplications.AddRange(results);
-
-            var resultsPerHectare = this.ConvertPerFieldEmissionsToPerHectare(indirectEmissionsForAllApplications, viewItem);
-
-            return resultsPerHectare;
-        }
-
-        public List<LandApplicationEmissionResult> CalculateAmmoniaEmissionsFromLandAppliedDigestate(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var results = new List<LandApplicationEmissionResult>();
-
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, viewItem.Year);
-
-            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
-            {
-                var landApplicationEmissionResult = new LandApplicationEmissionResult();
-
-                landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication = this.GetAmountOfNitrogenUsed(viewItem, digestateApplicationViewItem);
-                landApplicationEmissionResult.AmmoniacalLoss = this.CalculateNH3LossFromLandAppliedDigestateForField(landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication);
-                landApplicationEmissionResult.AmmoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AmmoniacalLoss);
-                landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized = landApplicationEmissionResult.AmmoniacalLoss * emissionFactorForVolatilization;
-                landApplicationEmissionResult.TotalN2OFromDigestateVolatilized = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized);
-                landApplicationEmissionResult.AdjustedAmmoniacalLoss = landApplicationEmissionResult.AmmoniacalLoss - landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized;
-                landApplicationEmissionResult.AdjustedAmmoniaLoss = CoreConstants.ConvertToNH3(landApplicationEmissionResult.AdjustedAmmoniacalLoss);
-                landApplicationEmissionResult.TotalN2ONFromDigestateLeaching = this.CalculateTotalN2ONFromLeachingFromManureApplication(farm, viewItem, digestateApplicationViewItem);
-                landApplicationEmissionResult.TotalNitrateLeached = this.CalculateTotalNitrateLeached(farm, viewItem, digestateApplicationViewItem);
-
-                // Equation 4.9.5-1
-                landApplicationEmissionResult.TotalIndirectN2ONEmissions = landApplicationEmissionResult.TotalN2ONFromDigestateVolatilized + landApplicationEmissionResult.TotalN2ONFromDigestateLeaching;
-                landApplicationEmissionResult.TotalIndirectN2OEmissions = CoreConstants.ConvertToN2O(landApplicationEmissionResult.TotalIndirectN2ONEmissions);
-
-                results.Add(landApplicationEmissionResult);
-            }
-
-            return results;
-        }
-
         public double CalculateNH3LossFromLandAppliedDigestateForField(double amountOfNitrogen)
         {
             return amountOfNitrogen * 0.1705;
@@ -220,6 +172,18 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.3-1
+        /// </summary>
+        public double CalculateN2OFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(int year, Farm farm, CropViewItem cropViewItem)
+        {
+            var ammoniaEmissionsFromLandAppliedManure = CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(year, farm, cropViewItem); var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+
+            var result = CoreConstants.ConvertToN2O((ammoniaEmissionsFromLandAppliedManure));
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 4.6.3-2
         /// </summary>
         public double CalculateN2ONFromVolatilizationOfLeftOverDigestateForField(int year, Farm farm, CropViewItem cropViewItem)
@@ -274,7 +238,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// (kg NH3-N)
         /// </summary>
-        public double CalculateAdjustedDigestateAmmoniaEmissionsForField(
+        public double CalculateAdjustedDigestateNH3NEmissionsForField(
             Farm farm,
             CropViewItem cropViewItem,
             int year)
@@ -287,6 +251,40 @@ namespace H.Core.Calculators.Nitrogen
             result = ammoniaFromLandApplications - volatilizationFromLandApplications;
 
             return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.3-7
+        ///
+        /// (kg NH3-N)
+        /// </summary>
+        public double CalculateAdjustedDigestateNH3EmissionsForField(
+            Farm farm,
+            CropViewItem cropViewItem)
+        {
+            var result = 0d;
+
+            var ammoniaFromLandApplications = CalculateAdjustedDigestateNH3NEmissionsForField(farm, cropViewItem, cropViewItem.Year);
+
+            result = CoreConstants.ConvertToNH3(ammoniaFromLandApplications);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.5-1
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalIndirectEmissionsFromDigestateForField(
+            Farm farm,
+            CropViewItem viewItem,
+            int year)
+        {
+            var nitrateLeached = CalculateTotalDigestateNitrateLeached(farm, viewItem);
+            var totalVolatilization = CalculateTotalDigestateN2ONVolatilizationForField(viewItem, farm, year);
+
+            return nitrateLeached + totalVolatilization;
         }
 
         /// <summary>
@@ -319,7 +317,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            var adjustedAmmoniaFromLandApplications = CalculateAdjustedDigestateAmmoniaEmissionsForField(farm, cropViewItem, year);
+            var adjustedAmmoniaFromLandApplications = CalculateAdjustedDigestateNH3NEmissionsForField(farm, cropViewItem, year);
             var adjustedAmmoniaFromImports = 0;
             var adjustedAmmoniaFromLeftOverManure = this.CalculateTotalAdjustedAmmoniaEmissionsFromLeftOverDigestateForField(farm, cropViewItem, year);
 
