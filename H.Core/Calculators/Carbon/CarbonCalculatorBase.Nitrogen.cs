@@ -998,7 +998,7 @@ namespace H.Core.Calculators.Carbon
                 totalNitrogenRemainingForField: totalRemainingNitrogen, 
                 totalNO3NFromLeaching: combinedNO3NLeachingLoss);
 
-            // Inputs from grazing animals will already have emission subtracted and so we are adding the remaining N from grazing animals here.
+            // Inputs from grazing animals will already have emissions subtracted and so we are adding the remaining N from grazing animals here.
             nitrogenAppliedToSoilAfterLosses += cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture;
 
             return nitrogenAppliedToSoilAfterLosses;

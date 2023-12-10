@@ -105,6 +105,8 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Equation 5.6.2-1
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         public double CalculateManureNitrogenInputsFromGrazingAnimals(
             CropViewItem cropViewItem,
@@ -113,6 +115,7 @@ namespace H.Core.Services.LandManagement
             var totalNitrogenExcretedByAnimals = 0d;
             var totalAmmoniaEmissions = 0d;
             var totalLeaching = 0d;
+            var totalN2ON = 0d;
 
             foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
             {
@@ -122,10 +125,11 @@ namespace H.Core.Services.LandManagement
                     totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
                     totalAmmoniaEmissions += groupEmissionsByMonth.MontlyNH3FromGrazingAnimals;
                     totalLeaching += groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
+                    totalN2ON += (groupEmissionsByMonth.MonthlyManureDirectN2ONEmission + groupEmissionsByMonth.MonthlyManureIndirectN2ONEmission);
                 }
             }
 
-            var result = (totalNitrogenExcretedByAnimals - (totalAmmoniaEmissions * (14.0 / 17.0) + totalLeaching)) / cropViewItem.Area;
+            var result = (totalNitrogenExcretedByAnimals - (totalN2ON + (CoreConstants.ConvertToNH3N(totalAmmoniaEmissions)) + totalLeaching)) / cropViewItem.Area;
 
             return result < 0 ? 0 : result;
         }

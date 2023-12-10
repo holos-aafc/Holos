@@ -58,6 +58,7 @@ namespace H.Core.Providers
         private readonly List<EvapotranspirationData> _evapotranspirationData1970_2000List;
         private readonly List<EvapotranspirationData> _evapotranspirationData1980_2010List;
         private readonly List<EvapotranspirationData> _evapotranspirationData1990_2017List;
+
         #endregion
 
         #region Constructors

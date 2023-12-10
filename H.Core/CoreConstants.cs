@@ -19,6 +19,11 @@ namespace H.Core
         private const double ConvertNH3NToNH3 = 17.0 / 14.0;
 
         /// <summary>
+        /// Converts from NH3 to NH3-N
+        /// </summary>
+        private const double ConvertNH3ToNH3N = 14.0 / 17.0;
+
+        /// <summary>
         /// Converts from NO3-N to NO3
         /// </summary>
         private const double ConvertNO3NToNO3 = 14.0 / 62.0;
@@ -148,6 +153,11 @@ namespace H.Core
         public static double ConvertToNO3(double amountOfNO3N)
         {
             return amountOfNO3N * ConvertNO3NToNO3;
+        }
+
+        public static double ConvertToNH3N(double amountOfNH3)
+        {
+            return amountOfNH3 * ConvertNH3ToNH3N;
         }
 
         #endregion

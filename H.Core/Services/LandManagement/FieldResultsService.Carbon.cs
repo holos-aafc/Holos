@@ -612,6 +612,8 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Equation 5.6.1-1
+        ///
+        /// (kg C ha^-1)
         /// </summary>
         public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
         {
