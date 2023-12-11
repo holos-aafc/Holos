@@ -74,7 +74,6 @@ namespace H.Core.Test.Services.Animals
             _sut = new DigestateService();
 
             _sut.ADCalculator = _mockAdCalculator.Object;
-            _sut.AnimalService = _mockAnimalService.Object;
 
             _date = DateTime.Now;
             _state = DigestateState.LiquidPhase;

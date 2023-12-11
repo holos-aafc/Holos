@@ -66,32 +66,6 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm)
-        {
-            var result = new List<MonthlyManureSpreadingResults>();
-
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-            {
-                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
-                var month = manureApplicationViewItem.DateOfApplication.Month;
-                var year = manureApplicationViewItem.DateOfApplication.Year;
-
-                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(volumeOfLandAppliedManure: totalVolume);
-
-                var resultItem = new MonthlyManureSpreadingResults();
-                resultItem.Year = year;
-                resultItem.Month = month;
-                resultItem.TotalEmissions = totalEnergyEmissions;
-
-                result.Add(resultItem);
-            }
-
-            return result;
-        }
-
         public CropEnergyResults CalculateCropEnergyResults(CropViewItem viewItem, Farm farm)
         {
             var results = new CropEnergyResults();

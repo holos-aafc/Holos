@@ -22,8 +22,9 @@ namespace H.Core.Services.Animals
 
         #region Properties
 
+        public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+
         public IADCalculator ADCalculator { get; set; }
-        public IAnimalService AnimalService { get; set; }
         public bool SubtractAmountsFromLandApplications { get; set; }
 
         #endregion
@@ -33,7 +34,7 @@ namespace H.Core.Services.Animals
         public DigestateService()
         {
             this.ADCalculator = new ADCalculator();
-            this.AnimalService = new AnimalResultsService();
+            this.AnimalResults = new List<AnimalComponentEmissionsResults>();
 
             this.SubtractAmountsFromLandApplications = true;
         }
@@ -49,8 +50,7 @@ namespace H.Core.Services.Animals
                 return new List<DigestorDailyOutput>();
             }
 
-            var animalResults = AnimalService.GetAnimalResults(farm);
-            var dailyResults = ADCalculator.CalculateResults(farm, animalResults);
+            var dailyResults = ADCalculator.CalculateResults(farm, this.AnimalResults);
 
             return dailyResults;
         }
@@ -58,7 +58,7 @@ namespace H.Core.Services.Animals
         public DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year, List<DigestorDailyOutput> digestorDailyOutputs)
         {
             var tankStates = this.GetDailyTankStates(farm, digestorDailyOutputs);
-            if (tankStates.Any() == false)
+            if (tankStates.Any() == false || tankStates.Any(x => x.DateCreated.Year == year) == false)
             {
                 // No management periods selected for input into AD system
                 return DateTime.Now;
@@ -119,8 +119,6 @@ namespace H.Core.Services.Animals
             {
                 var outputOnCurrentDay = digestorDailyOutputs.ElementAt(i);
                 var outputDate = outputOnCurrentDay.Date;
-
-
 
                 var tank = new DigestateTank
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using H.Core.Calculators.Infrastructure;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
@@ -53,5 +54,7 @@ namespace H.Core.Services.Animals
         /// Equation 4.9.7-5
         /// </summary>
         double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
+
+        List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
     }
 }

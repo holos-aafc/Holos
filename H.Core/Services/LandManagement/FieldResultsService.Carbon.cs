@@ -461,6 +461,7 @@ namespace H.Core.Services.LandManagement
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
 
                 foreach (var runInPeriodItem in runinPeriodItems)
                 {
@@ -492,6 +493,7 @@ namespace H.Core.Services.LandManagement
             else
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
 
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
@@ -603,7 +605,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
+            var animalComponentEmissionResults = this.AnimalResults;
 
             this.CalculateManureCarbonInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,

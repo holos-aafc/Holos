@@ -96,7 +96,7 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
+            var animalComponentEmissionResults = this.AnimalResults;
 
             this.CalculateManureNitrogenInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,

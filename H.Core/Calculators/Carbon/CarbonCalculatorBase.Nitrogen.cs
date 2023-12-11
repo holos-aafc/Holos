@@ -16,7 +16,7 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        protected N2OEmissionFactorCalculator N2OEmissionFactorCalculator;
+        public N2OEmissionFactorCalculator N2OEmissionFactorCalculator { get; set; }
         protected IClimateProvider _climateProvider;
 
         #endregion
