@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Services.LandManagement;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Providers;
+using H.Core.Providers.Climate;
 
 namespace H.CLI.Factories
 {
@@ -21,7 +26,13 @@ namespace H.CLI.Factories
 
         public ComponentProcessorFactory()
         {
-            _fieldProcessor = new FieldProcessor();
+            var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+            var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+
+            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            _fieldProcessor = new FieldProcessor(fieldResultsService);
             _shelterbeltProcessor = new ShelterbeltProcessor();
         } 
 

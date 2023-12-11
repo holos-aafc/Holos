@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using H.Core.Calculators.Carbon;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class Tier2NitrousOxideCalculatorTest
+    public class Tier2NitrousOxideCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -35,7 +37,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new IPCCTier2SoilCarbonCalculator();
+            
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            
+            var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
+
+            
+            _sut = ipcc;
         }
 
         [TestCleanup]

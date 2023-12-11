@@ -152,6 +152,10 @@
       <Project>{272EDE97-F58A-42A9-828D-8B3524E390EB}</Project>
       <Name>H.Content</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H.Core.Test\H.Core.Test.csproj">
+      <Project>{9A57BA60-4A1D-43FC-9638-E3640600164F}</Project>
+      <Name>H.Core.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\H.Core\H.Core.csproj">
       <Project>{08D833EF-D06E-42F1-B548-89E985DFC26B}</Project>
       <Name>H.Core</Name>

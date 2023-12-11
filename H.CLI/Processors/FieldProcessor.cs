@@ -19,6 +19,8 @@ using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
 using H.Infrastructure;
 using System.Text.RegularExpressions;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
 
 namespace H.CLI.Processors
 {
@@ -27,22 +29,24 @@ namespace H.CLI.Processors
         #region Fields
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
         private readonly FieldResultsService _fieldResultsService;
-        private FarmResultsService _farmResultsService;
-        private readonly EconomicsCalculator _economicsCalculator;
         private AnimalResultsService _animalService;
 
         #endregion
 
         #region Constructors
 
-        public FieldProcessor()
+        public FieldProcessor(FieldResultsService fieldResultsService)
         {
-            _animalService = new AnimalResultsService();
-            var manureService = new ManureService();
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
 
-            _fieldResultsService = new FieldResultsService();
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, _animalService);
-            _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
+            _animalService = new AnimalResultsService();
         }
 
         #endregion

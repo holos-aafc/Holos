@@ -19,14 +19,20 @@ using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.Animals.Swine;
 using H.Core.Services;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement;
+using H.Core.Test;
 
 namespace H.CLI.Test.Results
 {
     
     [TestClass]
-    public class ComponentResultsProcessorTest
+    public class ComponentResultsProcessorTest : UnitTestBase
     {
         private Storage storage = new Storage();
+        private ComponentResultsProcessor _componentResultsProcessor;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
@@ -44,6 +50,8 @@ namespace H.CLI.Test.Results
         [TestInitialize]
         public void TestInitialize()
         {
+            _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService);
+
             storage.ApplicationData = new ApplicationData();
 
             var swineStarterGroup = new AnimalGroup()
@@ -219,8 +227,8 @@ namespace H.CLI.Test.Results
         [Ignore]
         public void TestWriteEmissionsToFileForEstimatesOfProduction()
         {
-           
-            var results = new ComponentResultsProcessor(storage, new TimePeriodHelper());
+
+            var results = _componentResultsProcessor;
             results.ProcessFarms(storage);
 
             var emissionsForAllFarms = results._animalEmissionResultsForAllFarms;
@@ -459,7 +467,7 @@ namespace H.CLI.Test.Results
             _storage.ApplicationData.Farms.Clear();
             _storage.ApplicationData.Farms.Add(farm1);
             _storage.ApplicationData.Farms.Add(farm2);
-            var results = new ComponentResultsProcessor(_storage, new TimePeriodHelper());
+            var results = _componentResultsProcessor;
             results.ProcessFarms(_storage);
 
             var emissionsForAllFarms = results._animalEmissionResultsForAllFarms;

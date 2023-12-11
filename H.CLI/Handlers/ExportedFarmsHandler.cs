@@ -15,12 +15,15 @@ using H.CLI.UserInput;
 using H.Core;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Calculators.Tillage;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
+using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
+using H.Views.Shared;
 
 namespace H.CLI.Handlers
 {
@@ -30,7 +33,7 @@ namespace H.CLI.Handlers
 
         private readonly InputHelper _inputHelper = new InputHelper();
         private readonly Storage _storage = new Storage();
-        private readonly FieldProcessor _fieldProcessor = new FieldProcessor();
+        private readonly FieldProcessor _fieldProcessor;
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly ExcelInitializer _excelInitializer = new ExcelInitializer();
         private readonly DirectoryKeys _directoryKeys = new DirectoryKeys();
@@ -43,11 +46,22 @@ namespace H.CLI.Handlers
         private readonly PoultryConverter _poultryConverter = new PoultryConverter();
         private readonly OtherLiveStockConverter _otherLiveStockConverter = new OtherLiveStockConverter();
 
-        private readonly IFieldResultsService _fieldResultsService = new FieldResultsService();
+        private readonly FieldResultsService _fieldResultsService;
 
         public string pathToExportedFarm = string.Empty; 
 
         #endregion
+
+        public ExportedFarmsHandler()
+        {
+            var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+            var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+
+            _fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            _fieldProcessor = new FieldProcessor(_fieldResultsService);
+        }
 
         #region Public Methods
 

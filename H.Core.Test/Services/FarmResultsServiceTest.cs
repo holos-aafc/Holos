@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -25,12 +27,11 @@ using Prism.Events;
 namespace H.Core.Test.Services
 {
     [TestClass]
-    public class FarmResultsServiceTest
+    public class FarmResultsServiceTest : UnitTestBase
     {
         #region Fields
 
         private FarmResultsService _farmResultsService;
-        private Mock<IFieldResultsService> _mockFieldResultsService;
 
         #endregion
 
@@ -49,7 +50,7 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _farmResultsService = new FarmResultsService(new EventAggregator(), new FieldResultsService(), new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object);
         }
 
         [TestCleanup]
@@ -65,7 +66,6 @@ namespace H.Core.Test.Services
         public void TestReplicateFarm()
         {
             #region Init Farm
-            var climateProvider = new ClimateProvider();
             var geographicDataProvider = new GeographicDataProvider();
             geographicDataProvider.Initialize();
 
@@ -92,7 +92,7 @@ namespace H.Core.Test.Services
                 },
                 Longitude = -112,
                 Latitude = 49,
-                ClimateData = climateProvider.Get(49, -112, TimeFrame.NineteenNinetyToTwoThousand),
+                ClimateData = _climateProvider.Get(49, -112, TimeFrame.NineteenNinetyToTwoThousand),
                 GeographicData = geographicDataProvider.GetGeographicalData(793011),
                 PolygonId = 793011,
             };
@@ -129,7 +129,7 @@ namespace H.Core.Test.Services
 
             //climate data
             Assert.AreEqual(result.ClimateData.TemperatureData.GetMeanAnnualTemperature(), farmToReplicate.ClimateData.TemperatureData.GetMeanAnnualTemperature());
-            farmToReplicate.ClimateData = climateProvider.Get(50, -105, TimeFrame.NineteenNinetyToTwoThousand);
+            farmToReplicate.ClimateData = _climateProvider.Get(50, -105, TimeFrame.NineteenNinetyToTwoThousand);
             Assert.AreNotEqual(result.ClimateData.TemperatureData.GetMeanAnnualTemperature(), farmToReplicate.ClimateData.TemperatureData.GetMeanAnnualTemperature(), "Assert that climate data was copied");
 
             //DailyClimateData

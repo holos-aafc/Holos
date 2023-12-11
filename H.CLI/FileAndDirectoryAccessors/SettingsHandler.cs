@@ -18,7 +18,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
         private readonly SlcClimateDataProvider _slcClimateDataProvider = new SlcClimateDataProvider();
-        private readonly IClimateProvider _climateProvider = new ClimateProvider();
+        private readonly IClimateProvider _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
 
         public List<int> PolygonIDList { get; set; } = new List<int>();
 

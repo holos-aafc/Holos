@@ -36,7 +36,7 @@ namespace H.CLI.Results
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
         private readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
         private readonly UnitsOfMeasurementCalculator _uCalc = new UnitsOfMeasurementCalculator();
-        private readonly FieldResultsService _fieldResultsService = new FieldResultsService();
+        private readonly FieldResultsService _fieldResultsService;
         private readonly IFarmResultsService _farmResultsService;
 
         private List<FarmEmissionResults> _farmEmissionResults = new List<FarmEmissionResults>();
@@ -55,9 +55,19 @@ namespace H.CLI.Results
 
         #region Constructor
 
-        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper)
+        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, FieldResultsService fieldResultsService)
         {
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
+
             _storage = storage;
+            _storage.ApplicationData = new ApplicationData();
 
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
             _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();

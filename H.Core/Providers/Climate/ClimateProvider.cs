@@ -30,12 +30,16 @@ namespace H.Core.Providers.Climate
 
         #region Constructors
 
-        public ClimateProvider()
+        public ClimateProvider(SlcClimateDataProvider slcClimateDataProvider)
         {
             HTraceListener.AddTraceListener();
 
+            if (slcClimateDataProvider != null)
+            {
+                _slcClimateDataProvider = slcClimateDataProvider;
+            }
+
             _nasaClimateProvider = new NasaClimateProvider();
-            _slcClimateDataProvider = new SlcClimateDataProvider();
             _customFileClimateDataProvider = new CustomFileClimateDataProvider();
             _climateNormalCalculator = new ClimateNormalCalculator();
         }

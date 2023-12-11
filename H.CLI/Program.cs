@@ -16,6 +16,10 @@ using H.Core;
 using H.Core.Models;
 using H.Core.Services;
 using System.Collections.Generic;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement;
 
 namespace H.CLI
 {
@@ -162,8 +166,14 @@ namespace H.CLI
                     Console.WriteLine();
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
+                    var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+                    var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
+                    var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+                    var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+
+                    var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
                     // Overall Results For All the Farms
-                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper());
+                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), fieldResultsService);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -32,9 +33,27 @@ namespace H.Core.Calculators.Carbon
 
         #region Constructors
         
-        public IPCCTier2SoilCarbonCalculator()
+        public IPCCTier2SoilCarbonCalculator(IClimateProvider climateProvider, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
             this.CalculationMode = CalculationModes.Carbon;
+
+            if (climateProvider != null)
+            {
+                _climateProvider = climateProvider;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(climateProvider));
+            }
+
+            if (n2OEmissionFactorCalculator != null)
+            {
+                this.N2OEmissionFactorCalculator = n2OEmissionFactorCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
+            }
         } 
 
         #endregion

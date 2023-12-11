@@ -3,6 +3,7 @@
 using System;
 using System.Collections.ObjectModel;
 using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -13,6 +14,7 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
+using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -21,7 +23,7 @@ using Moq;
 namespace H.Core.Test.Calculators
 {
     [TestClass]
-    public class ICBMSoilCarbonCalculatorTest
+    public class ICBMSoilCarbonCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -44,7 +46,11 @@ namespace H.Core.Test.Calculators
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new ICBMSoilCarbonCalculator();
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(base._climateProvider, base._n2OEmissionFactorCalculator);
+            
+            
+
+            _sut = iCBMSoilCarbonCalculator;
         }
 
         [TestCleanup]

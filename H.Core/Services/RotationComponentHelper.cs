@@ -17,7 +17,6 @@ namespace H.Core.Services
         
         private readonly IMapper _cropViewItemMapper;
         private readonly FieldComponentHelper _fieldComponentHelper;
-        private readonly FieldResultsService _fieldResultsService;
 
         #endregion
 
@@ -25,9 +24,9 @@ namespace H.Core.Services
         
         public RotationComponentHelper()
         {
-            _fieldComponentHelper = new FieldComponentHelper();
 
-            _fieldResultsService = new FieldResultsService();
+
+            _fieldComponentHelper = new FieldComponentHelper();
 
             var cropViewItemMappingConfiguration = new MapperConfiguration(configuration =>
             {

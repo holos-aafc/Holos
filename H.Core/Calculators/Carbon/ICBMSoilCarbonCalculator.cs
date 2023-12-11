@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
+using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
 
 #endregion
@@ -27,8 +29,25 @@ namespace H.Core.Calculators.Carbon
 
         #region Constructors
 
-        public ICBMSoilCarbonCalculator()
+        public ICBMSoilCarbonCalculator(IClimateProvider climateProvider, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
+            if (climateProvider != null)
+            {
+                _climateProvider = climateProvider;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(climateProvider));
+            }
+
+            if (n2OEmissionFactorCalculator != null)
+            {
+                base.N2OEmissionFactorCalculator = n2OEmissionFactorCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
+            }
         }
 
         #endregion

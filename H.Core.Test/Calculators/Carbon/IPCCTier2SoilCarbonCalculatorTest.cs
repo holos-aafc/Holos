@@ -13,6 +13,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using H.Core.Test.Calculators.Carbon;
 using H.Core.Providers.Climate;
 using H.Core.Providers;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Carbon
 {
@@ -20,7 +22,7 @@ namespace H.Core.Test.Calculators.Carbon
     /// Uses the supplied Tier 2 carbon modelling Excel workbook to ensure calculations are being made correctly
     /// </summary>
     [TestClass]
-    public  class IPCCTier2SoilCarbonCalculatorTest
+    public  class IPCCTier2SoilCarbonCalculatorTest :UnitTestBase
     {
         #region Inner Classes
 
@@ -55,7 +57,6 @@ namespace H.Core.Test.Calculators.Carbon
         private static List<TestFactorData> _annualTestData;
         private static List<CropViewItem> _annualCarbonData;
 
-        private static readonly ClimateProvider _climateProvider = new ClimateProvider();
         private static  ClimateData climateData;
 
         private Table_8_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider;
@@ -83,6 +84,17 @@ namespace H.Core.Test.Calculators.Carbon
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
+        {
+            
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
         {
             const double latitude = 49.6;
             const double longitude = 112.8;
@@ -182,17 +194,13 @@ namespace H.Core.Test.Calculators.Carbon
             _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.PassivePool = 58.80;
             _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.SlowPool = 3.6;
             _averageRunInValuesAndInitialStocks.Soc = 62.75;
-        }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-        }
+            
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            
+            var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            _sut = new IPCCTier2SoilCarbonCalculator();
+            _sut = ipcc;
             _globallyCalibratedModelParametersProvider = new Table_8_Globally_Calibrated_Model_Parameters_Provider();
 
             _f1 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionMetabolicDMActivePool, _tillageType).Value;

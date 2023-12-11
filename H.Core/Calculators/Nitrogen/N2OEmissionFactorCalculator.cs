@@ -38,12 +38,16 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Constructors
 
-        public N2OEmissionFactorCalculator()
+        public N2OEmissionFactorCalculator(IClimateProvider climateProvider)
         {
             this.ManureService = new ManureService();
             this.DigestateService = new DigestateService();
 
-            this.ClimateProvider = new ClimateProvider();
+            if (climateProvider != null)
+            {
+                this.ClimateProvider = climateProvider;
+            }
+
             this.LivestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
             this.AnimalAmmoniaEmissionFactorProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
         }
@@ -252,6 +256,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// <para>Implements: Table 14. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
         /// </summary>
+        /// <returns>Fraction of N lost by volatilization (kg N (kg N)-1)</returns>
         public double CalculateFractionOfNitrogenLostByVolatilization(
             CropViewItem cropViewItem,
             Farm farm)
@@ -606,7 +611,7 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 2.5.6-6
-        /// Equation 2.6.2-2 (verify)
+        /// Equation 2.6.2-2
         /// Equation 2.7.2-3 (verify)
         /// Equation 2.7.2-5 (verify)
         /// Equation 2.7.2-7 (verify)
@@ -644,7 +649,7 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 2.5.6-7
-        /// Equation 2.6.2-5 (verify)
+        /// Equation 2.6.2-5
         /// Equation 2.7.2-4 (verify)
         /// Equation 2.7.2-6 (verify)
         /// Equation 2.7.2-8 (verify)

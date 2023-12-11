@@ -18,15 +18,15 @@ using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Prism.Events;
 using Prism.Interactivity.DefaultPopupWindows;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
 
 namespace H.Core.Test.Integration
 {
     [TestClass]
-    public class FieldComponentIntegrationTest
+    public class FieldComponentIntegrationTest : UnitTestBase
     {
         private GeographicDataProvider _geographicDataProvider;
-        private ClimateProvider _climateProvider;
-        private FieldResultsService _fieldResultsService;
         private GlobalSettings _globalSettings;
         private RotationComponentHelper _rotationComponentHelper;
         private ApplicationData _applicationData;
@@ -38,12 +38,6 @@ namespace H.Core.Test.Integration
             // Initialize the soil information provider
             _geographicDataProvider = new GeographicDataProvider();
             _geographicDataProvider.Initialize();
-
-            // Initialize the climate provider
-            _climateProvider = new ClimateProvider();
-
-            // Initialize the calculation class for fields
-            _fieldResultsService = new FieldResultsService();
 
             // Initial system defaults
             _globalSettings = new GlobalSettings();

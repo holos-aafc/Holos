@@ -12,6 +12,9 @@ using H.Core.Providers.Animals;
 using H.Views.ComponentViews.LandManagement.FieldSystem.Controls;
 using Moq;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
+using H.Core.Calculators.Carbon;
+using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
@@ -40,7 +43,12 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestInitialize]
         public void TestInitialize()
         {
-            _sut = new N2OEmissionFactorCalculator();
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+
+
+            
+
+            _sut = n2oEmissionFactorCalculator;
             _sut.ManureService = base._mockManureServiceObject;
             _sut.ClimateProvider = base._mockClimateProviderObject;
             _sut.LivestockEmissionConversionFactorsProvider = base._mockEmissionDataProviderObject;

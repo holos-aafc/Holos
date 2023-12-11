@@ -8,6 +8,7 @@ using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -15,7 +16,8 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        protected readonly N2OEmissionFactorCalculator N2OEmissionFactorCalculator = new N2OEmissionFactorCalculator();
+        protected N2OEmissionFactorCalculator N2OEmissionFactorCalculator;
+        protected IClimateProvider _climateProvider;
 
         #endregion
 
@@ -357,6 +359,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-2
             this.N2O_NFromResidues = this.CropResiduePool * emissionFactorForCropResidues;
 
+            // Equation 2.6.5-3
+            // Not implemented.
+
             // Equation 2.6.5-4
             // Equation 2.7.4-4
             this.N2O_NFromMineralization = this.MineralPool * emissionFactorForCropResidues;
@@ -382,6 +387,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-8
             this.NO_NFromResidues = this.N2O_NFromResidues * nORatio;
 
+            // Equation 2.6.5-9
+            // Not implemented.
+
             // Equation 2.6.5-10
             // Equation 2.7.4-10
             this.NO_NFromMineralization = this.N2O_NFromMineralization * nORatio;
@@ -389,6 +397,9 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.5-11
             // Equation 2.7.4-11
             this.NO_NFromOrganicNitrogen = this.N2O_NFromOrganicNitrogen * nORatio;
+
+            // Equation 2.6.5-12
+            // Not implemented.
         }
 
         protected void CalculateLeachingEmissions(double fractionLeach,
@@ -493,7 +504,6 @@ namespace H.Core.Calculators.Carbon
             var manureVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalManureN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year) / this.CurrentYearResults.Area;
             var digestateVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalDigestateN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year) / this.CurrentYearResults.Area;
 
-            // Equation 2.6.6-14
             // Equation 2.7.5-15
             this.N2O_NOrganicNitrogenVolatilization = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
                                                       manureVolatilization +

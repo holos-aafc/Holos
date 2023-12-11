@@ -29,12 +29,15 @@ using System.Diagnostics;
 using CsvHelper;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Test;
 
 namespace H.Integration.Hay_LCI
 {
     [TestClass]
     [Ignore]
-    public class HayLCIIntegrationTest
+    public class HayLCIIntegrationTest : UnitTestBase
     {
         #region Internal Classes
 
@@ -84,6 +87,7 @@ namespace H.Integration.Hay_LCI
         private string _baseOutputDirectory;
         private bool _usingIrrigation;
         private List<Table3Item> _slcList;
+        private ClimateProvider _climateProvider;
 
         #endregion
 
@@ -92,11 +96,22 @@ namespace H.Integration.Hay_LCI
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
+           
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
             _defaults = new Defaults();
             _defaults.DefaultRunInPeriod = 1;
 
             _defaults.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
-            
+
             _globalSettings = new GlobalSettings();
 
             _climateNormalCalculator = new ClimateNormalCalculator();
@@ -109,20 +124,18 @@ namespace H.Integration.Hay_LCI
             _geograhicDataProvider.Initialize();
 
             _fertilizerBlendConverter = new FertilizerBlendConverter();
-            _fieldResultsService = new FieldResultsService();
+
+            
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
+
+            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+
+            _fieldResultsService = fieldResultsService;
 
             var manureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _manureCompositionTypes = manureCompositionProvider.ManureCompositionData;
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-        }
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
         }
 
         [TestCleanup]

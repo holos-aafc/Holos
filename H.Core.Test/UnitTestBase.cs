@@ -14,6 +14,10 @@ using H.Core.Providers.Climate;
 using H.Core.Services;
 using H.Core.Services.Animals;
 using Moq;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Providers;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Test
 {
@@ -31,6 +35,11 @@ namespace H.Core.Test
         protected IAnimalEmissionFactorsProvider _mockEmissionDataProviderObject;
         protected Mock<IAnimalAmmoniaEmissionFactorProvider> _mockAnimalAmmoniaEmissionFactorProvider;
         protected IAnimalAmmoniaEmissionFactorProvider _mockAnimalAmmoniaEmissionFactorProviderObject;
+        protected ClimateProvider _climateProvider;
+        protected ICBMSoilCarbonCalculator _iCbmSoilCarbonCalculator;
+        protected N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
+        protected IPCCTier2SoilCarbonCalculator _ipcc;
+        protected FieldResultsService _fieldResultsService;
 
         #endregion
 
@@ -52,6 +61,14 @@ namespace H.Core.Test
 
             _mockAnimalAmmoniaEmissionFactorProvider = new Mock<IAnimalAmmoniaEmissionFactorProvider>();
             _mockAnimalAmmoniaEmissionFactorProviderObject = _mockAnimalAmmoniaEmissionFactorProvider.Object;
+
+            var slcClimateProvider = new SlcClimateDataProvider();
+            _climateProvider = new ClimateProvider(slcClimateProvider);
+            _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            _ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+
+            _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipcc, _n2OEmissionFactorCalculator);
         }
 
         #endregion

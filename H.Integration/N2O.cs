@@ -14,11 +14,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Test;
 
 namespace H.Integration
 {
     [TestClass]
-    public class N2O
+    public class N2O : UnitTestBase
     {
         #region Fields
 
@@ -26,13 +29,14 @@ namespace H.Integration
         private Storage _storage;
 
         private static GeographicDataProvider _geographicDataProvider;
-        private ClimateProvider _climateProvider;
+        
         private FieldResultsService _fieldResultsService;
         private CustomFileClimateDataProvider _customFileClimateDataProvider;
         private List<DailyClimateData> _lethbridgeDailyClimateData;
         private ClimateData _lethbridgeClimateData;
         private FieldComponentHelper _fieldComponentHelper;
         private Mock<IFarmResultsService> _mockFarmResultsService;
+        
 
         #endregion
 
@@ -53,7 +57,13 @@ namespace H.Integration
         [TestInitialize]
         public void TestInitialize()
         {
-            _fieldResultsService = new FieldResultsService();
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
+
+            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+
+            _fieldResultsService = fieldResultsService;
 
             _storage = new Storage();
             _storage.ApplicationData = new ApplicationData();
@@ -67,7 +77,7 @@ namespace H.Integration
             _farm.StageStates.Add(new FieldSystemDetailsStageState());
             _mockFarmResultsService = new Mock<IFarmResultsService>();
 
-            _climateProvider = new ClimateProvider();
+            
             _customFileClimateDataProvider = new CustomFileClimateDataProvider();
         }
 
