@@ -1026,6 +1026,11 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem cropViewItem,
             int year)
         {
+            if (cropViewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             var adjustedAmmoniaFromLandApplications = CalculateTotalAdjustedAmmoniaEmissionsFromLandAppliedManureForField(farm, cropViewItem, year);
@@ -1099,6 +1104,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONLeachingFromLeftOverManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var manureNitrogenRemaining = GetManureNitrogenRemainingForField(viewItem, farm);
 
             var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
@@ -1202,6 +1212,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalNitrateLeachedFromLeftOverManureForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var totalNitrogenRemainingForField = this.GetManureNitrogenRemainingForField(viewItem, farm);
 
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;

@@ -427,9 +427,6 @@ namespace H.Core.Calculators.Carbon
             var manureLeachingEmissions = N2OEmissionFactorCalculator.CalculateTotalN2ONFromManureLeachingForField(farm, this.CurrentYearResults) / this.CurrentYearResults.Area;
             var digestateLeachingEmissions = N2OEmissionFactorCalculator.CalculateTotalN2ONFromDigestateLeachingForField(farm, this.CurrentYearResults) / this.CurrentYearResults.Area;
 
-            this.CurrentYearResults.TotalN2ONFromManureAndDigestateLeaching = manureLeachingEmissions +
-                                                                              digestateLeachingEmissions;
-
             var remainingManureLeachingEmissions = N2OEmissionFactorCalculator.CalculateTotalN2ONLeachingFromLeftOverManureLeachingForField(farm, this.CurrentYearResults) / this.CurrentYearResults.Area;
             var remainingDigestateLeachingEmissions = N2OEmissionFactorCalculator.CalculateTotalN2ONLeachingFromLeftOverDigestateLeachingForField(farm, this.CurrentYearResults) / this.CurrentYearResults.Area;
 
@@ -438,6 +435,8 @@ namespace H.Core.Calculators.Carbon
                                                     digestateLeachingEmissions +
                                                     remainingManureLeachingEmissions +
                                                     remainingDigestateLeachingEmissions;
+
+            this.CurrentYearResults.TotalN2ONFromManureAndDigestateLeaching = this.N2O_NFromOrganicNitrogenLeaching;
 
             // Equation 2.6.6-7
             // Equation 2.7.5-7

@@ -405,27 +405,19 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double GetTotalCarbonInputsFromLivestockManureApplications(Farm farm, int year)
+        public double GetTotalCarbonInputsFromLivestockManureApplications(Farm farm, int year, CropViewItem viewItem)
         {
-            var result = 0d;
-
-            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
-            foreach (var cropViewItem in itemsByYear)
-            {
-                result += cropViewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
-            }
-
-            return result;
+            return viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
         }
 
-        public double GetTotalCarbonRemainingForFarm(Farm farm, int year)
+        public double GetTotalCarbonRemainingForFarm(Farm farm, int year, CropViewItem viewItem)
         {
-            var result = 0d;
+            var result = 0d;                                                
 
             var totalCarbonCreated = this.GetTotalCarbonCreated(year);
             var totalCarbonImported = this.GetTotalCarbonFromImportedManure(farm, year);
             var totalCarbonExported = this.GetTotalCarbonFromExportedManure(year, farm);
-            var totalCarbonApplied = this.GetTotalCarbonInputsFromLivestockManureApplications(farm, year);
+            var totalCarbonApplied = this.GetTotalCarbonInputsFromLivestockManureApplications(farm, year, viewItem);
 
             result = totalCarbonCreated + totalCarbonImported - totalCarbonApplied - totalCarbonExported;
             if (result < 0)
@@ -438,7 +430,7 @@ namespace H.Core.Services.Animals
 
         public double GetTotalCarbonRemainingForField(Farm farm, int year, CropViewItem viewItem)
         {
-            var totalRemainingForFarm = this.GetTotalCarbonRemainingForFarm(farm, year);
+            var totalRemainingForFarm = this.GetTotalCarbonRemainingForFarm(farm, year, viewItem);
 
             var totalArea = farm.GetTotalAreaOfFarm(false, year);
 
@@ -457,7 +449,7 @@ namespace H.Core.Services.Animals
 
             var result = remaining + inputsFromImportedManure + inputsFromLocalManure;
 
-            return result;
+            return result / viewItem.Area;
         }
 
         public double GetTotalNitrogenCreated(int year, AnimalType animalType)

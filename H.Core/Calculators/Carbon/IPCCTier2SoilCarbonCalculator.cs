@@ -244,8 +244,8 @@ namespace H.Core.Calculators.Carbon
 
             if (farm.IsCommandLineMode == false)
             {
-                viewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(viewItem);
-            }
+                viewItem.ManureCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.ManureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
+            }            
 
             viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 

@@ -1550,11 +1550,7 @@ namespace H.Core.Test.Calculators
 
         #endregion
 
-        [TestMethod]
-        public void CalculateGrazingAnimalsManureCarbonInput()
-        {
-
-        }
+      
 
         #endregion
     }

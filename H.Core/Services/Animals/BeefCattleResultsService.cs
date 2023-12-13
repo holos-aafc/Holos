@@ -555,13 +555,6 @@ namespace H.Core.Services.Animals
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            if (managementPeriod.HousingDetails.HousingType.IsPasture())
-            {
-                dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = 0;
-                dailyEmissions.ManureCarbonNitrogenRatio = 0;
-                dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = 0;
-            }
-
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
             base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,

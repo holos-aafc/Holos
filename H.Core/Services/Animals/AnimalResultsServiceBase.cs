@@ -2239,8 +2239,6 @@ namespace H.Core.Services.Animals
         {
             var result = 0.0;
 
-            return result;
-
             var tdnStep = 0.01;
             var targetTdnFound = false;
             for (var tdn = currentTdn; tdn <= 100 && targetTdnFound == false; tdn += tdnStep)

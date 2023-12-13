@@ -107,6 +107,8 @@ namespace H.Core.Services.LandManagement
             // Clear existing items because we want to reset values for view items.
             stageState.ClearState();
 
+            
+
             // Initialize the stage state (create view items that will be needed to create result view items)
             this.CreateDetailViewItems(farm);
 

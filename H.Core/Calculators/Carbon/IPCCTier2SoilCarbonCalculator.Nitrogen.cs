@@ -80,8 +80,6 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults = currentYearResults;
             this.PreviousYearResults = previousYearResults;
 
-            
-
             base.SetPoolStartStates(farm);
 
             // Set this before calculating pools

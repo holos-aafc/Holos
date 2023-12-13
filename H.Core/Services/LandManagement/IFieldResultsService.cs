@@ -66,6 +66,7 @@ namespace H.Core.Services.LandManagement
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
         void AssignHarvestMethod(CropViewItem viewItem, Farm farm);
-        
+
+        List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
     }
 }

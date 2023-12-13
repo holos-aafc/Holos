@@ -462,6 +462,7 @@ namespace H.Core.Services.LandManagement
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
                 _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService.Initialize(farm, this.AnimalResults);
 
                 foreach (var runInPeriodItem in runinPeriodItems)
                 {
@@ -493,7 +494,8 @@ namespace H.Core.Services.LandManagement
             else
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
-                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
+                _icbmSoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
+                _icbmSoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService.Initialize(farm, this.AnimalResults);
 
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
@@ -579,7 +581,7 @@ namespace H.Core.Services.LandManagement
 
                         cropViewItem.TotalCarbonLossFromBaleExports = this.CalculateTotalCarbonLossFromBaleExports(
                             percentageOfProductReturnedToSoil: cropViewItem.PercentageOfProductYieldReturnedToSoil,
-                            totalCarbonInExprtedBales: totalCarbonInExportedBales);
+                            totalCarbonInExportedBales: totalCarbonInExportedBales);
                     }
                 }
             }
@@ -589,13 +591,13 @@ namespace H.Core.Services.LandManagement
         /// Equation 12.3.2-4
         /// </summary>
         /// <param name="percentageOfProductReturnedToSoil">Amount of product yield returned to soil (%)</param>
-        /// <param name="totalCarbonInExprtedBales">Total amount of carbon in bales (kg C)</param>
+        /// <param name="totalCarbonInExportedBales">Total amount of carbon in bales (kg C)</param>
         /// <returns>Total amount of carbon lost from exported bales (kg C)</returns>
         private double CalculateTotalCarbonLossFromBaleExports(
             double percentageOfProductReturnedToSoil,
-            double totalCarbonInExprtedBales)
+            double totalCarbonInExportedBales)
         {
-            var result = totalCarbonInExprtedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
+            var result = totalCarbonInExportedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
 
             return result;
         }
@@ -667,25 +669,8 @@ namespace H.Core.Services.LandManagement
                     }
                 }
 
-                cropViewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
-                    forageUtilizationRate: cropViewItem.ForageUtilizationRate,
-                    totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonUptakeByAnimals;
             }
-        }
-
-        /// <summary>
-        /// Equation 12.3.2-4
-        /// </summary>
-        /// <param name="forageUtilizationRate">Utilization rate for the particular forage (%)</param>
-        /// <param name="totalCarbonUptakeByGrazingAnimals">Total carbon uptake from grazing animals (kg C)</param>
-        /// <returns>Total carbon lost from grazing animals (kg C)</returns>
-        private double CalculateTotalCarbonLossFromGrazingAnimals(
-            double forageUtilizationRate,
-            double totalCarbonUptakeByGrazingAnimals)
-        {
-            var result = totalCarbonUptakeByGrazingAnimals / (1 - (forageUtilizationRate / 100.0));
-
-            return result;
         }
 
         #endregion

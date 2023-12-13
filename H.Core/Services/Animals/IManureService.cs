@@ -149,7 +149,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg C)
         /// </summary>
-        double GetTotalCarbonRemainingForFarm(Farm farm, int year);
+        double GetTotalCarbonRemainingForFarm(Farm farm, int year, CropViewItem viewItem);
 
         /// <summary>
         /// Equation 4.7.1-4
@@ -163,8 +163,11 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalCarbonFromExportedManure(int year, Farm farm);
 
-        double GetTotalCarbonInputsFromLivestockManureApplications(Farm farm, int year);
+        
 
+        /// <summary>
+        /// Equation 4.7.2-1
+        /// </summary>
         double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
     }
 }

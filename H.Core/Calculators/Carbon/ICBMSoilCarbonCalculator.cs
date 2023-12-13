@@ -69,20 +69,24 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem: currentYearViewItem,
                 farm: farm);
 
-            var lossesFromGrazingAndBaleExports = this.CalculateLossesFromGrazingAndBaleExports(
-                lossesFromGrazing: currentYearViewItem.TotalCarbonLossesByGrazingAnimals,
-                lossesFromBaleExport: currentYearViewItem.TotalCarbonLossFromBaleExports,
-                area: currentYearViewItem.Area);
-
-            // Subtract carbon utilized from grazing animals and carbon exported as bales
-            // Commented out. Incorrect calculation. Results are negative when subtracting losses.
-            //currentYearViewItem.PlantCarbonInAgriculturalProduct -= lossesFromGrazingAndBaleExports;
-
             currentYearViewItem.CarbonInputFromProduct = this.CalculateCarbonInputFromProduct(
                 previousYearViewItem: previousYearViewItem,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
+
+            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.GetYearsWithGrazingAnimals().Contains(currentYearViewItem.Year))
+            {
+                var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
+                    currentYearViewItem);
+
+                currentYearViewItem.PlantCarbonInAgriculturalProduct = recalculatedPlantCarbonInAgriculturalProduct;
+
+                var recalculatedCarbonInputFromProduct = this.RecalculateCarbonInputForGrazingScenario(
+                    currentYearViewItem);
+
+                currentYearViewItem.CarbonInputFromProduct = recalculatedCarbonInputFromProduct;
+            }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
                 previousYearViewItem: previousYearViewItem,
@@ -119,7 +123,7 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.ManureCarbonInputsPerHectare = this.CalculateManureCarbonInputPerHectare(currentYearViewItem);
+            currentYearViewItem.ManureCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.ManureService.GetTotalManureCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
             currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
             currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
@@ -1060,15 +1064,30 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 12.3.2-5
+        /// Equation 11.3.2-4
         /// </summary>
-        /// <returns>Total carbon losses from grazing animals and bale exports (kg C)</returns>
-        public double CalculateLossesFromGrazingAndBaleExports(
-            double lossesFromGrazing,
-            double lossesFromBaleExport,
-            double area)
+        /// <returns>Total carbon losses from grazing animals (kg C)</returns>
+        public double RecalculatePlantCarbonForGrazingScenario(
+            CropViewItem viewItem)
         {
-            var result = ((lossesFromGrazing + lossesFromBaleExport) / area);
+            var lossesFromGrazing = viewItem.TotalCarbonLossesByGrazingAnimals;
+
+            var denominator = 1 - (viewItem.ForageUtilizationRate / 100.0);
+            if (denominator < 0)
+            {
+                denominator = 1;
+            }
+
+            var uptake = lossesFromGrazing / denominator;
+
+            return uptake;
+        }
+
+        public double RecalculateCarbonInputForGrazingScenario(
+            CropViewItem viewItem)
+        {
+            var result = viewItem.PlantCarbonInAgriculturalProduct -
+                         (viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
 
             return result;
         }

@@ -21,9 +21,24 @@ namespace H.Core.Services.Animals
             double temperature,
             GroupEmissionsByDay groupEmissionsByDay)
         {
-            if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture &&
-                managementPeriod.HousingDetails.PastureLocation != null)
+            if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture)
             {
+                groupEmissionsByDay.TotalAmountOfNitrogenForDay =
+                    groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay;
+
+                groupEmissionsByDay.TanEnteringStorageSystem = 0;
+                groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForHousing = 0;
+                groupEmissionsByDay.AmbientAirTemperatureAdjustmentForStorage = 0;
+                groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForStorage = 0;
+                groupEmissionsByDay.AmmoniaEmissionsFromStorageSystem = 0;
+                groupEmissionsByDay.AdjustedAmountOfTanInStoredManureOnDay = 0;
+                groupEmissionsByDay.AccumulatedTanInStorageOnDay = 0;
+                groupEmissionsByDay.AccumulatedTANAvailableForLandApplicationOnDay = 0;
+                groupEmissionsByDay.AdjustedAmmoniaFromStorage = 0;
+                groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay = 0;
+                groupEmissionsByDay.ManureCarbonNitrogenRatio = 0;
+                groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 0;
+
                 // Equation 5.3.1-1
                 groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.NitrogenExcretionRate *
                                                                    managementPeriod.ManureDetails

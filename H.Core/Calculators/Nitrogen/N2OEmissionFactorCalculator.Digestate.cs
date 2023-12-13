@@ -366,6 +366,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONLeachingFromLeftOverDigestateLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var digestateNitrogenRemainingForField = GetDigestateNitrogenRemainingForField(viewItem, farm);
 
             var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
@@ -400,6 +405,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalNitrateLeachedFromLeftOverDigestateForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var totalNitrogenRemainingForField = this.GetDigestateNitrogenRemainingForField(viewItem, farm);
 
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
