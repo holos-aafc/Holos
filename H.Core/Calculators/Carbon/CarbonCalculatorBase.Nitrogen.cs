@@ -503,6 +503,7 @@ namespace H.Core.Calculators.Carbon
             var manureVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalManureN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year) / this.CurrentYearResults.Area;
             var digestateVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalDigestateN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year) / this.CurrentYearResults.Area;
 
+            // Equation 2.6.6-15
             // Equation 2.7.5-15
             this.N2O_NOrganicNitrogenVolatilization = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
                                                       manureVolatilization +

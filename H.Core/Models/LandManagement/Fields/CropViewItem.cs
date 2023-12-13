@@ -513,7 +513,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// S_p
         /// 
-        /// %
+        /// (%)
         /// </summary>
         public double PercentageOfProductYieldReturnedToSoil
         {
@@ -522,7 +522,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// %
+        /// S_r
+        /// 
+        /// (%)
         /// </summary>
         public double PercentageOfRootsReturnedToSoil
         {
@@ -531,7 +533,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// %
+        /// (%)
         /// </summary>
         public double PercentageOfStrawReturnedToSoil
         {
