@@ -66,9 +66,6 @@ namespace H.CLI.Results
                 throw new ArgumentNullException(nameof(fieldResultsService));
             }
 
-            _storage = storage;
-            _storage.ApplicationData = new ApplicationData();
-
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
             _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();
 

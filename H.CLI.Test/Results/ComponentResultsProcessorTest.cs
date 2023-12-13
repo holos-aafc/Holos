@@ -50,9 +50,9 @@ namespace H.CLI.Test.Results
         [TestInitialize]
         public void TestInitialize()
         {
+            storage.ApplicationData = new ApplicationData();
             _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService);
 
-            storage.ApplicationData = new ApplicationData();
 
             var swineStarterGroup = new AnimalGroup()
             {
