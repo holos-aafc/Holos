@@ -11,7 +11,7 @@ namespace H.Core.Services.Animals
     public interface IManureService
     {
         void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults);
-        ManureTank GetTank(AnimalType animalType, int year, Farm farm);
+        ManureTank GetTank(AnimalType animalType, int year, Farm farm, ManureStateType manureStateType);
         List<AnimalType> GetValidManureTypes();
         List<AnimalType> GetManureCategoriesProducedOnFarm(Farm farm);
         double GetVolumeAvailableForExport(int year);
@@ -169,5 +169,7 @@ namespace H.Core.Services.Animals
         /// Equation 4.7.2-1
         /// </summary>
         double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
+
+        List<ManureStateType> GetManureStatesProducedOnFarm(Farm farm);
     }
 }

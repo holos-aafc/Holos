@@ -32,9 +32,9 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.0.26</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.27</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

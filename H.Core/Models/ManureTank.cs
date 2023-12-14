@@ -10,6 +10,7 @@ namespace H.Core.Models
     {
         #region Fields
 
+        private ManureStateType _manureStateType;
         private AnimalType _animalType;
 
         #endregion
@@ -20,6 +21,12 @@ namespace H.Core.Models
         {
             get => _animalType;
             set => SetProperty(ref _animalType, value);
+        }
+
+        public ManureStateType ManureStateType
+        {
+            get => _manureStateType;
+            set => SetProperty(ref _manureStateType, value);
         }
 
         #endregion

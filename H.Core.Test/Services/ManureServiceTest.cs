@@ -107,6 +107,8 @@ namespace H.Core.Test.Services
         public void GetAmountAvailableForExportReturnsNonZero()
         {
             var farm = base.GetTestFarm();
+            farm.Components.Add(base.GetTestFieldComponent());
+
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
 
             var result = _sut.GetVolumeAvailableForExport(DateTime.Now.Year);

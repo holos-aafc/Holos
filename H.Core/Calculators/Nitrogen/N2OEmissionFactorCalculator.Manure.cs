@@ -34,6 +34,11 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             Farm farm)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
                 viewItem: viewItem,
                 farm: farm);
@@ -140,6 +145,11 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm,
             CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
             var weightedEmissionFactor = CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
@@ -862,6 +872,8 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 4.6.3-5
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalManureN2OVolatilizationForField(
             CropViewItem cropViewItem,
@@ -878,12 +890,19 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 4.6.3-5
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalManureN2ONVolatilizationForField(
             CropViewItem cropViewItem,
             Farm farm,
             int year)
         {
+            if (cropViewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             var volatilizationFromApplications = this.CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedManureForField(year, farm, cropViewItem);
@@ -897,6 +916,8 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 4.6.3-6
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalManureN2ONVolatilizationForFarmAndYear(
             Farm farm,
@@ -1087,6 +1108,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONFromManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
@@ -1195,6 +1221,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalManureNitrateLeached(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)

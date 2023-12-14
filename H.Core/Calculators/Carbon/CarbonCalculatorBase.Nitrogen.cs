@@ -791,6 +791,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.7.9-3
             // Equation 2.7.8-3
+            // Equation 2.6.9-34 (a)
             this.CurrentYearResults.TotalNitrogenEmissions += (totalDirectNitrousOxide + totalIndirectNitrousOxide);
 
             var area = this.CurrentYearResults.Area;
@@ -841,6 +842,7 @@ namespace H.Core.Calculators.Carbon
                                    this.NO_NFromMineralization +
                                    this.NO_NFromOrganicNitrogen;
 
+            // Equation 2.6.9-34 (b)
             this.CurrentYearResults.TotalNitrogenEmissions += totalNitricOxide;
 
             var area = this.CurrentYearResults.Area;
@@ -867,6 +869,7 @@ namespace H.Core.Calculators.Carbon
                                        this.NO3FromMineralizationLeaching +
                                        this.NO3FromOrganicNitrogenLeaching;
 
+            // Equation 2.6.9-34 (c)
             this.CurrentYearResults.TotalNitrogenEmissions += totalNitrateLeaching;
 
             var area = this.CurrentYearResults.Area;
@@ -888,6 +891,7 @@ namespace H.Core.Calculators.Carbon
             var totalAmmoniaVolatilization = this.NH4FromSyntheticNitogenVolatilized +
                                              this.NH4FromOrganicNitogenVolatilized;
 
+            // Equation 2.6.9-34 (d)
             this.CurrentYearResults.TotalNitrogenEmissions += totalAmmoniaVolatilization;
 
             var area = this.CurrentYearResults.Area;
@@ -940,6 +944,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.9-32
             // Equation 2.7.8-32
+            // Equation 2.6.9-37
             this.CurrentYearResults.Overflow = this.AvailabilityOfMineralN + this.MicrobePool - this.N2Loss;
         }
 

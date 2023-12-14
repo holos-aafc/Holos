@@ -35,6 +35,11 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             Farm farm)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var totalNitrogenApplied = 0d;
 
             var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
@@ -60,6 +65,11 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             Farm farm)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
             var weightedEmissionFactorForOrganicNitrogen = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
@@ -198,12 +208,19 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 4.6.3-5
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalDigestateN2ONVolatilizationForField(
             CropViewItem cropViewItem,
             Farm farm,
             int year)
         {
+            if (cropViewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             var volatilizationFromLandAppliedDigestate = this.CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(year, farm, cropViewItem);
@@ -315,6 +332,11 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem cropViewItem,
             int year)
         {
+            if (cropViewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             var adjustedAmmoniaFromLandApplications = CalculateAdjustedDigestateNH3NEmissionsForField(farm, cropViewItem, year);
@@ -349,6 +371,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONFromDigestateLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
@@ -388,6 +415,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalDigestateNitrateLeached(Farm farm, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var result = 0d;
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)

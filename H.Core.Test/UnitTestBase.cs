@@ -207,6 +207,8 @@ namespace H.Core.Test
             managementPeriod.HousingDetails = new HousingDetails();
             monthsAndDaysData.ManagementPeriod = managementPeriod;
 
+            managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+
             var groupEmissionsByDay = new GroupEmissionsByDay()
             {
                 AdjustedAmountOfTanInStoredManureOnDay = 100,

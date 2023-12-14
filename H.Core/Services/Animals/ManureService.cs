@@ -233,6 +233,28 @@ namespace H.Core.Services.Animals
             return animalTypes;
         }
 
+        public List<ManureStateType> GetManureStatesProducedOnFarm(Farm farm)
+        {
+            var animalTypes = new List<ManureStateType>();
+
+            foreach (var animalComponent in farm.AnimalComponents)
+            {
+                foreach (var animalComponentGroup in animalComponent.Groups)
+                {
+                    foreach (var managementPeriod in animalComponentGroup.ManagementPeriods)
+                    {
+                        var stateType = managementPeriod.ManureDetails.StateType;
+                        if (animalTypes.Contains(stateType) == false && stateType != ManureStateType.NotSelected)
+                        {
+                            animalTypes.Add(stateType);
+                        }
+                    }
+                }
+            }
+
+            return animalTypes;
+        }
+
         public List<AnimalType> GetManureTypesImported(Farm farm, int year)
         {
             var animalTypes = new List<AnimalType>();
@@ -690,21 +712,25 @@ namespace H.Core.Services.Animals
 
             var animalTypes = this.GetManureCategoriesProducedOnFarm(farm);
             var years = farm.GetYearsWithAnimals();
+            var stateTypes = this.GetManureStatesProducedOnFarm(farm);
 
             foreach (var year in years)
             {
                 foreach (var animalType in animalTypes)
                 {
-                    this.GetTank(animalType, year, farm);
+                    foreach (var manureStateType in stateTypes)
+                    {
+                        this.GetTank(animalType, year, farm, manureStateType);
+                    }
                 }
             }
         }
 
-        public ManureTank GetTank(AnimalType animalType, int year, Farm farm)
+        public ManureTank GetTank(AnimalType animalType, int year, Farm farm, ManureStateType manureStateType)
         {
-            var tank = this.GetManureTankInternal(animalType, year);
+            var tank = this.GetManureTankInternal(animalType, year, manureStateType);
             this.ResetTank(tank, farm);
-            this.UpdateAmountsUsed(tank, farm);
+            this.UpdateAmountsUsed(tank, farm, manureStateType);
 
             return tank;
         }
@@ -718,14 +744,15 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="manureTank">The <see cref="ManureTank"/> that will have volume and nitrogen amounts subtracted from</param>
         /// <param name="farm">The <see cref="Farm"/> where the application was made</param>
-        private void UpdateAmountsUsed(ManureTank manureTank, Farm farm)
+        /// <param name="manureStateType"></param>
+        private void UpdateAmountsUsed(ManureTank manureTank, Farm farm, ManureStateType manureStateType)
         {
             // Iterate over each field and total the land applied manure
             foreach (var farmFieldSystemComponent in farm.FieldSystemComponents)
             {
                 foreach (var cropViewItem in farmFieldSystemComponent.CropViewItems)
                 {
-                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Where(x => x.ManureStateType == manureStateType))
                     {
                         // If the manure was imported from off-farm, we don't update/reduce the amounts in the storage tanks
                         if (manureApplicationViewItem.IsImportedManure())
@@ -752,13 +779,15 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="manureTank">The <see cref="ManureTank"/> that should have all properties reset</param>
         /// <param name="animalComponentResults">The results that will be used to set the starting state of the tank</param>
+        /// <param name="manureStateType"></param>
         private void SetStartingStateOfManureTank(
-           ManureTank manureTank,
-           List<AnimalComponentEmissionsResults> animalComponentResults)
+            ManureTank manureTank,
+            List<AnimalComponentEmissionsResults> animalComponentResults, 
+            ManureStateType manureStateType)
         {
             manureTank.ResetTank();
 
-            var targetGroupEmissions = this.GetTargetEmissions(animalComponentResults, manureTank.Year);
+            var targetGroupEmissions = this.GetTargetEmissions(animalComponentResults, manureTank.Year, manureStateType);
             foreach (var groupEmissionsByMonth in targetGroupEmissions)
             {
                 manureTank.TotalOrganicNitrogenAvailableForLandApplication += groupEmissionsByMonth.TotalOrganicNitrogenAvailableCreatedInMonth;
@@ -793,6 +822,7 @@ namespace H.Core.Services.Animals
             }
 
             var animalType = manureTank.AnimalType;
+            var manureType = manureTank.ManureStateType;
             var distinctYears = years.Distinct().ToList();
 
             var category = animalType.GetComponentCategoryFromAnimalType();
@@ -800,8 +830,8 @@ namespace H.Core.Services.Animals
 
             foreach (var year in distinctYears)
             {
-                var tank = this.GetManureTankInternal(animalType, year);
-                this.SetStartingStateOfManureTank(tank, resultsForType);
+                var tank = this.GetManureTankInternal(animalType, year, manureType);
+                this.SetStartingStateOfManureTank(tank, resultsForType, manureType);
             }
         }
 
@@ -810,14 +840,15 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="animalType">The tank associated with this type of animal</param>
         /// <param name="year">The year of the tank</param>
+        /// <param name="manureStateType"></param>
         /// <returns>The manure tank associated with animal type and the year</returns>
-        private ManureTank GetManureTankInternal(AnimalType animalType, int year)
+        private ManureTank GetManureTankInternal(AnimalType animalType, int year, ManureStateType manureStateType)
         {
-            var tank = _manureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year);
+            var tank = _manureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year && x.ManureStateType == manureStateType);
             if (tank == null)
             {
                 // If no tank exists for this year, create one now
-                tank = new ManureTank() { AnimalType = animalType, Year = year };
+                tank = new ManureTank() { AnimalType = animalType, Year = year, ManureStateType = manureStateType};
 
                 _manureTanks.Add(tank);
             }
@@ -830,8 +861,11 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="animalComponentEmissionsResults">The emission results for all components with the same livestock type</param>
         /// <param name="yearOfTank">The year of <see cref="ManureTank"/></param>
+        /// <param name="manureStateType"></param>
         /// <returns>A list of <see cref="GroupEmissionsByMonth"/> that match the above criteria</returns>
-        private List<GroupEmissionsByMonth> GetTargetEmissions(List<AnimalComponentEmissionsResults> animalComponentEmissionsResults, int yearOfTank)
+        private List<GroupEmissionsByMonth> GetTargetEmissions(
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults, int yearOfTank,
+            ManureStateType manureStateType)
         {
             var result = new List<GroupEmissionsByMonth>();
 
@@ -841,7 +875,9 @@ namespace H.Core.Services.Animals
                 {
                     foreach (var groupEmissionsByMonth in allGroupEmissions.GroupEmissionsByMonths)
                     {
-                        if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture() == false && groupEmissionsByMonth.MonthsAndDaysData.Year == yearOfTank)
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+
+                        if (managementPeriod.HousingDetails.HousingType.IsPasture() == false && groupEmissionsByMonth.MonthsAndDaysData.Year == yearOfTank && managementPeriod.ManureDetails.StateType == manureStateType)
                         {
                             result.Add(groupEmissionsByMonth);
                         }

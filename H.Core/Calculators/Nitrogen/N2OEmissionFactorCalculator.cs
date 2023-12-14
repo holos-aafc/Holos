@@ -668,30 +668,30 @@ namespace H.Core.Calculators.Nitrogen
                 carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
 
-            var exudate = this.CalculateNitrogenContentExaduatesReturnedToSoil(
+            var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
                 carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
 
             // Equation 2.5.6-7
             if (cropViewItem.CropType.IsAnnual())
             {
-                return rootNitrogen + exudate;
+                return rootNitrogen + exudateNitrogen;
             }
 
             // Equation 2.5.6-8
             if (cropViewItem.CropType.IsPerennial())
             {
-                return (rootNitrogen * (cropViewItem.PercentageOfRootsReturnedToSoil / 100.0)) + exudate;
+                return (rootNitrogen * (cropViewItem.PercentageOfRootsReturnedToSoil / 100.0)) + exudateNitrogen;
             }
 
             if (cropViewItem.CropType.IsRootCrop())
             {
-                return grainNitrogen + exudate;
+                return grainNitrogen + exudateNitrogen;
             }
 
             if (cropViewItem.CropType.IsSilageCrop() || cropViewItem.CropType.IsCoverCrop())
             {
-                return rootNitrogen + exudate;
+                return rootNitrogen + exudateNitrogen;
             }
 
             return 0;
