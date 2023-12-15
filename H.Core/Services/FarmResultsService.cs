@@ -40,7 +40,7 @@ namespace H.Core.Services
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
 
-        private readonly FieldResultsService _fieldResultsService;
+        private readonly IFieldResultsService _fieldResultsService;
         private readonly IAnimalService _animalResultsService;
         private readonly IADCalculator _adCalculator;
 
@@ -65,7 +65,7 @@ namespace H.Core.Services
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, FieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
+        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
         {
             if (animalService != null)
             {

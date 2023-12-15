@@ -39,11 +39,16 @@ namespace H.Core.Test
         protected ICBMSoilCarbonCalculator _iCbmSoilCarbonCalculator;
         protected N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
         protected IPCCTier2SoilCarbonCalculator _ipcc;
-        protected FieldResultsService _fieldResultsService;
+        protected IFieldResultsService _fieldResultsService;
+        protected Mock<ISlcClimateProvider> _slcClimateProvider;
 
         #endregion
 
         #region Constructors
+
+        static UnitTestBase()
+        {
+        }
 
         protected UnitTestBase()
         {
@@ -62,13 +67,13 @@ namespace H.Core.Test
             _mockAnimalAmmoniaEmissionFactorProvider = new Mock<IAnimalAmmoniaEmissionFactorProvider>();
             _mockAnimalAmmoniaEmissionFactorProviderObject = _mockAnimalAmmoniaEmissionFactorProvider.Object;
 
-            var slcClimateProvider = new SlcClimateDataProvider();
-            _climateProvider = new ClimateProvider(slcClimateProvider);
+            _slcClimateProvider = new Mock<ISlcClimateProvider>();
+            _climateProvider = new ClimateProvider(_slcClimateProvider.Object);
             _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
             _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
 
-            _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipcc, _n2OEmissionFactorCalculator);
+            _fieldResultsService = new Mock<IFieldResultsService>().Object;
         }
 
         #endregion

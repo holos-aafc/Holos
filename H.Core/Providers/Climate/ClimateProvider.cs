@@ -22,7 +22,7 @@ namespace H.Core.Providers.Climate
         #region Fields
 
         private readonly NasaClimateProvider _nasaClimateProvider;
-        private readonly SlcClimateDataProvider _slcClimateDataProvider;
+        private readonly ISlcClimateProvider _slcClimateDataProvider;
         private readonly CustomFileClimateDataProvider _customFileClimateDataProvider;
         private readonly ClimateNormalCalculator _climateNormalCalculator;
 
@@ -30,7 +30,7 @@ namespace H.Core.Providers.Climate
 
         #region Constructors
 
-        public ClimateProvider(SlcClimateDataProvider slcClimateDataProvider)
+        public ClimateProvider(ISlcClimateProvider slcClimateDataProvider)
         {
             HTraceListener.AddTraceListener();
 

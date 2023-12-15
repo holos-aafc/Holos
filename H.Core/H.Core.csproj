@@ -361,6 +361,7 @@
     <Compile Include="Providers\Economics\Feed_Costs_For_Beef_Provider.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Data.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Provider.cs" />
+    <Compile Include="Providers\ISlcClimateProvider.cs" />
     <Compile Include="Providers\Plants\Table_10_Default_Values_For_Steady_State_Method_Data.cs" />
     <Compile Include="Providers\Plants\Table_10_Default_Values_For_Steady_State_Method_Provider.cs" />
     <Compile Include="Providers\Soil\Table_15_Default_Soil_N2O_Emission_BreakDown_Provider.cs" />

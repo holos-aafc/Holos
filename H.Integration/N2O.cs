@@ -91,6 +91,9 @@ namespace H.Integration
         [TestMethod]
         public void IntegrationTest()
         {
+            _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+            _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipcc, _n2OEmissionFactorCalculator);
+
             var polygons = new List<int>() {825007}; //_geographicDataProvider.GetPolygonIdList();
             for (int i = 0; i < polygons.Count(); i++)
             {

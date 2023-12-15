@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using AutoMapper.Configuration.Annotations;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -656,7 +657,7 @@ namespace H.Core.Services.LandManagement
             {
                 var totalCarbonUptakeByAnimals = 0d;
 
-                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                foreach (var grazingViewItem in this.GetSelectedGrazingViewItems(cropViewItem))
                 {
                     var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
                     if (animalComponentEmissionsResults != null)
@@ -664,6 +665,8 @@ namespace H.Core.Services.LandManagement
                         var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
                         if (groupEmissionResults != null)
                         {
+                            
+
                             totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
                         }
                     }
@@ -671,6 +674,34 @@ namespace H.Core.Services.LandManagement
 
                 cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonUptakeByAnimals;
             }
+        }
+
+        /// <summary>
+        /// See section 11 for methodology of selected period
+        /// </summary>
+        /// <param name="viewItem"></param>
+        /// <returns></returns>
+        public List<GrazingViewItem> GetSelectedGrazingViewItems(CropViewItem viewItem)
+        {
+            var result = new List<GrazingViewItem>();
+
+            if (viewItem.GrazingViewItems.Count == 1)
+            {
+                result.Add(viewItem.GrazingViewItems.Single());
+            }
+            else
+            {
+                var orderedByDate = viewItem.GrazingViewItems.OrderBy(x => x.DateCreated).ToList();
+
+                // Get all except last
+                var count = viewItem.GrazingViewItems.Count;
+                for (int i = 0; i <= count - 2; i++)
+                {
+                    result.Add(orderedByDate.ElementAt(i));
+                }
+            }
+
+            return result;
         }
 
         #endregion

@@ -36,7 +36,7 @@ namespace H.CLI.Results
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
         private readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
         private readonly UnitsOfMeasurementCalculator _uCalc = new UnitsOfMeasurementCalculator();
-        private readonly FieldResultsService _fieldResultsService;
+        private readonly IFieldResultsService _fieldResultsService;
         private readonly IFarmResultsService _farmResultsService;
 
         private List<FarmEmissionResults> _farmEmissionResults = new List<FarmEmissionResults>();
@@ -55,7 +55,7 @@ namespace H.CLI.Results
 
         #region Constructor
 
-        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, FieldResultsService fieldResultsService)
+        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService)
         {
             if (fieldResultsService != null)
             {

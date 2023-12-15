@@ -21,8 +21,6 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Equation 12.3.2-4
-        ///
         /// (kg C)
         /// </summary>
         public double TotalCarbonLossesByGrazingAnimals

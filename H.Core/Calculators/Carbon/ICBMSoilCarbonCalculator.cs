@@ -86,6 +86,11 @@ namespace H.Core.Calculators.Carbon
                     currentYearViewItem);
 
                 currentYearViewItem.CarbonInputFromProduct = recalculatedCarbonInputFromProduct;
+
+                // Recalculate yield after CptoSoil has been recalculated.
+                var recalculatedYield = this.RecalculateYield(currentYearViewItem);
+
+                currentYearViewItem.Yield = recalculatedYield;
             }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
@@ -131,6 +136,13 @@ namespace H.Core.Calculators.Carbon
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare + currentYearViewItem.DigestateCarbonInputsPerHectare;            
 
             return currentYearViewItem;
+        }
+
+        private double RecalculateYield(CropViewItem cropViewItem)
+        {
+            var result = (cropViewItem.PlantCarbonInAgriculturalProduct / cropViewItem.CarbonConcentration) / cropViewItem.Area;
+
+            return result;
         }
 
         /// <summary>
