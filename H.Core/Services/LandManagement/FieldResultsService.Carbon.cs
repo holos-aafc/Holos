@@ -653,7 +653,8 @@ namespace H.Core.Services.LandManagement
             {
                 var totalCarbonUptakeByAnimals = 0d;
 
-                foreach (var grazingViewItem in this.GetSelectedGrazingViewItems(cropViewItem))
+                var grazingViewItems = this.GetSelectedGrazingViewItems(cropViewItem);
+                foreach (var grazingViewItem in grazingViewItems)
                 {
                     var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
                     if (animalComponentEmissionsResults != null)
@@ -661,8 +662,6 @@ namespace H.Core.Services.LandManagement
                         var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
                         if (groupEmissionResults != null)
                         {
-                            
-
                             totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
                         }
                     }
@@ -673,10 +672,8 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// See section 11 for methodology of selected period
+        /// See section 11 (appendix) for methodology of selected period
         /// </summary>
-        /// <param name="viewItem"></param>
-        /// <returns></returns>
         public List<GrazingViewItem> GetSelectedGrazingViewItems(CropViewItem viewItem)
         {
             var result = new List<GrazingViewItem>();
@@ -687,7 +684,7 @@ namespace H.Core.Services.LandManagement
             }
             else
             {
-                var orderedByDate = viewItem.GrazingViewItems.OrderBy(x => x.DateCreated).ToList();
+                var orderedByDate = viewItem.GrazingViewItems.OrderBy(x => x.Start).ToList();
 
                 // Get all except last
                 var count = viewItem.GrazingViewItems.Count;

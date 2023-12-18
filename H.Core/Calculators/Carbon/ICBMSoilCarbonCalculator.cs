@@ -78,7 +78,7 @@ namespace H.Core.Calculators.Carbon
             if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.GetYearsWithGrazingAnimals().Contains(currentYearViewItem.Year))
             {
                 var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
-                    currentYearViewItem);
+                    currentYearViewItem) / currentYearViewItem.Area;
 
                 currentYearViewItem.PlantCarbonInAgriculturalProduct = recalculatedPlantCarbonInAgriculturalProduct;
 
@@ -87,7 +87,7 @@ namespace H.Core.Calculators.Carbon
 
                 currentYearViewItem.CarbonInputFromProduct = recalculatedCarbonInputFromProduct;
 
-                // Recalculate yield after CptoSoil has been recalculated.
+                // Recalculate yield after Cp has been recalculated.
                 var recalculatedYield = this.RecalculateYield(currentYearViewItem);
 
                 currentYearViewItem.Yield = recalculatedYield;
@@ -140,7 +140,8 @@ namespace H.Core.Calculators.Carbon
 
         private double RecalculateYield(CropViewItem cropViewItem)
         {
-            var result = (cropViewItem.PlantCarbonInAgriculturalProduct / cropViewItem.CarbonConcentration) / cropViewItem.Area;
+            var result = (cropViewItem.PlantCarbonInAgriculturalProduct / cropViewItem.CarbonConcentration);
+
 
             return result;
         }
@@ -1098,8 +1099,7 @@ namespace H.Core.Calculators.Carbon
         public double RecalculateCarbonInputForGrazingScenario(
             CropViewItem viewItem)
         {
-            var result = viewItem.PlantCarbonInAgriculturalProduct -
-                         (viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
+            var result = viewItem.PlantCarbonInAgriculturalProduct -(viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
 
             return result;
         }
