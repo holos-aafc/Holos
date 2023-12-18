@@ -204,7 +204,6 @@ namespace H.Core.Services.Animals
                 dailyEmissions: dailyEmissions,
                 managementPeriod: managementPeriod,
                 animalGroup: animalGroup,
-                farm: farm,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions, 
                 temperature: temperature);
@@ -489,7 +488,6 @@ namespace H.Core.Services.Animals
                 dailyEmissions: dailyEmissions,
                 managementPeriod: managementPeriod,
                 animalGroup: animalGroup,
-                farm: farm,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions, 
                 temperature: temperature);

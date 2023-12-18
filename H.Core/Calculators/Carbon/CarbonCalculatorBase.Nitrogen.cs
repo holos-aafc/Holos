@@ -792,6 +792,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.9-3
             // Equation 2.7.8-3
             // Equation 2.6.9-34 (a)
+            // Equation 2.7.8-29 (a)
             this.CurrentYearResults.TotalNitrogenEmissions += (totalDirectNitrousOxide + totalIndirectNitrousOxide);
 
             var area = this.CurrentYearResults.Area;
@@ -843,6 +844,7 @@ namespace H.Core.Calculators.Carbon
                                    this.NO_NFromOrganicNitrogen;
 
             // Equation 2.6.9-34 (b)
+            // Equation 2.7.8-29 (b)
             this.CurrentYearResults.TotalNitrogenEmissions += totalNitricOxide;
 
             var area = this.CurrentYearResults.Area;
@@ -870,6 +872,7 @@ namespace H.Core.Calculators.Carbon
                                        this.NO3FromOrganicNitrogenLeaching;
 
             // Equation 2.6.9-34 (c)
+            // Equation 2.7.8-29 (c)
             this.CurrentYearResults.TotalNitrogenEmissions += totalNitrateLeaching;
 
             var area = this.CurrentYearResults.Area;
@@ -892,6 +895,7 @@ namespace H.Core.Calculators.Carbon
                                              this.NH4FromOrganicNitogenVolatilized;
 
             // Equation 2.6.9-34 (d)
+            // Equation 2.7.8-29 (d)
             this.CurrentYearResults.TotalNitrogenEmissions += totalAmmoniaVolatilization;
 
             var area = this.CurrentYearResults.Area;

@@ -92,14 +92,15 @@ namespace H.Core.Services.Animals
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
                     leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                     emissionFactorForLeaching: 0.011,
-                    amountOfNitrogenAddedFromBedding: 0);
+                    nitrogenBeddingRate: 0);
 
-                groupEmissionsByDay.ManureNitrateLeachingEmission = this.CalculateManureLeachingNitrogenEmissionRate(
+                groupEmissionsByDay.ManureNitrateLeachingEmission = this.CalculateNitrateLeaching(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
+                    nitrogenBeddingRate: groupEmissionsByDay.RateOfNitrogenAddedFromBeddingMaterial,
                     leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
-                    emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
-                    amountOfNitrogenAddedFromBedding: 0);
-
+                    emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching
+                    );
+                
                 groupEmissionsByDay.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                     leachingNitrogenEmissionRate: groupEmissionsByDay.ManureNitrogenLeachingRate,
                     numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -160,13 +161,13 @@ namespace H.Core.Services.Animals
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
                     leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                     emissionFactorForLeaching: 0.011,
-                    amountOfNitrogenAddedFromBedding: 0);
+                    nitrogenBeddingRate: 0);
 
                 groupEmissionsByDay.ManureNitrateLeachingEmission = this.CalculateManureLeachingNitrogenEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
                     leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                     emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,
-                    amountOfNitrogenAddedFromBedding: 0);
+                    nitrogenBeddingRate: 0);
 
                 groupEmissionsByDay.ManureN2ONLeachingEmission = this.CalculateManureLeachingNitrogenEmission(
                     leachingNitrogenEmissionRate: groupEmissionsByDay.ManureNitrogenLeachingRate,
