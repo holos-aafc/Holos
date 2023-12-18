@@ -895,7 +895,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
                 amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
-                amountOfCarbonFlowingIntoStorage: previousDaysEmissions == null ? 0 : previousDaysEmissions.AmountOfCarbonInStoredManure);
+                amountOfCarbonFlowingIntoStorage:  dailyEmissions.AmountOfCarbonInStoredManure);
 
             if (managementPeriod.HousingDetails.HousingType.IsPasture())
             {

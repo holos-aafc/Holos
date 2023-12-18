@@ -379,7 +379,13 @@ namespace H.Core.Services.LandManagement
                     {
                         if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture())
                         {
-                            result.Add(groupEmissionsByMonth);
+                            var start = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.Start;
+                            var end = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.End;
+
+                            if (start >= grazingViewItem.Start && end <= grazingViewItem.End)
+                            {
+                                result.Add(groupEmissionsByMonth);
+                            }
                         }
                     }
                 }

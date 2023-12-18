@@ -464,6 +464,11 @@ namespace H.Core.Services.Animals
 
         public double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
             var inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
 

@@ -633,20 +633,16 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public double CalculateManureCarbonInputFromGrazingAnimals(CropViewItem cropViewItem, List<AnimalComponentEmissionsResults> results)
         {
-            var totalCarbonExcretedByAnimals = 0d;
-            var manureMethaneEmissions = 0d;
+            var result = 0d;
 
             foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
             {
-                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
-                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
+                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem).ToList();
+                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals.ToList())
                 {
-                    totalCarbonExcretedByAnimals += groupEmissionsByMonth.MonthlyFecalCarbonExcretion;
-                    manureMethaneEmissions += groupEmissionsByMonth.MonthlyManureMethaneEmission;
+                    result += (groupEmissionsByMonth.MonthlyFecalCarbonExcretion - groupEmissionsByMonth.MonthlyManureMethaneEmission) / cropViewItem.Area;
                 }
             }
-
-            var result = (totalCarbonExcretedByAnimals - manureMethaneEmissions) / cropViewItem.Area;
 
             return result < 0 ? 0 : result;
         }
