@@ -41,7 +41,6 @@ namespace H.Core.Services.LandManagement
 
         private const int DefaultNumberOfDecimalPlaces = 3;
 
-        private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
         private readonly IrrigationService _irrigationService = new IrrigationService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
@@ -178,6 +177,7 @@ namespace H.Core.Services.LandManagement
             _smallAreaYieldProvider.Initialize();
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
+            this.AnimalResultsService = new AnimalResultsService();
         }
 
         #endregion
@@ -185,6 +185,8 @@ namespace H.Core.Services.LandManagement
         #region Properties
 
         public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+
+        public IAnimalService AnimalResultsService { get; set; }
 
         #endregion
 

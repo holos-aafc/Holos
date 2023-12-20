@@ -343,9 +343,8 @@ namespace H.Core.Calculators.Carbon
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
             var emissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
 
-            // Emissions from land applied manure
-            var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(currentYearResults, farm);
-            var directN2ONFromLandAppliedManureNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromLeftOverManureForField(farm, currentYearResults);
+            // Emissions from land applied manure (includes remaining manure)
+            var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedManure(farm, currentYearResults);
 
             // Emissions from land applied digestate
             var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(currentYearResults, farm);
@@ -370,7 +369,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-5
             this.N2O_NFromOrganicNitrogen =
                 (this.OrganicPool *
-                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromLandAppliedManureNotAppliedToAnyField + directN2ONFromLandAppliedDigestateNotAppliedToAnyField) / this.CurrentYearResults.Area);
+                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate  + directN2ONFromLandAppliedDigestateNotAppliedToAnyField) / this.CurrentYearResults.Area);
 
             // Equation 2.6.5-6
             // Equation 2.7.4-6
@@ -586,20 +585,24 @@ namespace H.Core.Calculators.Carbon
                 this.MicrobePool > this.AvailabilityOfMineralN)
             {
                 // Equation 2.6.8-10
+                // Equation 2.6.8-15
                 // Equation 2.7.7-15
                 this.AvailabilityOfMineralN -= nitrogenDemand * this.PoolRatio;
 
                 // Equation 2.6.8-11
+                // Equation 2.6.8-16
                 // Equation 2.7.7-16
                 this.MicrobePool -= nitrogenDemand * (1 - this.PoolRatio);
             }
             else
             {
                 // Equation 2.6.8-8
+                // Equation 2.6.8-13
                 // Equation 2.7.7-13
                 this.AvailabilityOfMineralN -= nitrogenDemand * (1 - this.PoolRatio);
 
                 // Equation 2.6.8-9
+                // Equation 2.6.8-14
                 // Equation 2.7.7-14
                 this.MicrobePool -= nitrogenDemand * this.PoolRatio;
             }
@@ -726,12 +729,12 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.7-1
             this.MicrobePool += this.SyntheticNitrogenPool;
 
-            // Equation 2.6.8-2
-            // Equation 2.7.7-2
+            // Equation 2.6.8-3
+            // Equation 2.7.7-2 (verify)
             this.MicrobePool += this.CropResiduePool;
 
-            // Equation 2.6.8-3
-            // Equation 2.7.7-3
+            // Equation 2.6.8-2
+            // Equation 2.7.7-3 (verify)
             this.MicrobePool += this.MineralPool;
 
             // Equation 2.6.8-4
@@ -789,16 +792,18 @@ namespace H.Core.Calculators.Carbon
                                             this.N2O_NSyntheticNitrogenVolatilization +
                                             this.N2O_NOrganicNitrogenVolatilization;
 
-            // Equation 2.7.9-3
-            // Equation 2.7.8-3
+            // Equation 2.6.9-3
+            // Equation 2.7.9-3 (verify)
+            // Equation 2.7.8-3 (verify)
             // Equation 2.6.9-34 (a)
             // Equation 2.7.8-29 (a)
             this.CurrentYearResults.TotalNitrogenEmissions += (totalDirectNitrousOxide + totalIndirectNitrousOxide);
 
             var area = this.CurrentYearResults.Area;
 
-            // Equation 2.7.9-4
-            // Equation 2.7.8-4
+            // Equation 2.6.9-4
+            // Equation 2.7.9-4 (verify)
+            // Equation 2.7.8-4 (verify)
             this.CurrentYearResults.TotalNitrousOxideForArea = this.CurrentYearResults.TotalNitrogenEmissions * area;
 
             this.CurrentYearResults.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea =
@@ -946,7 +951,6 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.DifferenceBetweenInputsAndOutputs = this.CurrentYearResults.TotalNitrogenInputs -
                                                                         this.CurrentYearResults.TotalNitrogenOutputs;
 
-            // Equation 2.6.9-32
             // Equation 2.7.8-32
             // Equation 2.6.9-37
             this.CurrentYearResults.Overflow = this.AvailabilityOfMineralN + this.MicrobePool - this.N2Loss;

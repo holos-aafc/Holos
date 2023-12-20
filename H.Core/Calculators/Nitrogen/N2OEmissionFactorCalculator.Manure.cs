@@ -79,7 +79,7 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm)
         {
             var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
-            var filteredItems = itemsByYear.Where(x => x.IsNativeGrassland == false);
+            var filteredItems = itemsByYear.Where(x => x.CropType.IsNativeGrassland() == false);
 
             foreach (var cropViewItem in filteredItems)
             {
@@ -201,6 +201,27 @@ namespace H.Core.Calculators.Nitrogen
             double weightedEmissionFactor)
         {
             var result = totalExportedManureNitrogen * weightedEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-10
+        ///
+        /// Includes direct emissions from applied manure and direct emissions from remaining manure.
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateDirectN2ONFromFieldAppliedManure(
+            Farm farm,
+            CropViewItem viewItem)
+        {
+            var result = 0d;
+
+            var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(viewItem, farm);
+            var leftOver = this.CalculateDirectN2ONFromLeftOverManureForField(farm, viewItem);
+
+            result = applied + leftOver;
 
             return result;
         }

@@ -389,19 +389,12 @@ namespace H.Core.Services.Animals
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
-            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
-                dryMatterIntake: dailyEmissions.DryMatterIntake,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
+            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
-                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
-
-            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(
-                animalType: animalGroup.GroupType,
-                finalWeightOfAnimal: managementPeriod.EndWeight);
-
-            if (dailyEmissions.DryMatterIntake > dailyEmissions.DryMatterIntakeMax)
+            if (base.IsOverDmiMax(dailyEmissions))
             {
+                dailyEmissions.DryMatterIntake = dailyEmissions.DryMatterIntakeMax;
+
                 dailyEmissions.OptimumTdn = this.CalculateRequiredTdnSoThatMaxDmiIsNotExceeded(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                     netEnergyForActivity: dailyEmissions.NetEnergyForActivity,
@@ -413,6 +406,13 @@ namespace H.Core.Services.Animals
                     currentTdn: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
                     currentDmiMax: dailyEmissions.DryMatterIntakeMax);
             }
+
+            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
+                dryMatterIntake: dailyEmissions.DryMatterIntake,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
+                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             #region Additional enteric methane (CH4) calculations
 

@@ -178,6 +178,24 @@ namespace H.Core.Test
             return stageState;
         }
 
+        public AnimalComponentBase GetTestGrazingAnimalComponent(FieldSystemComponent fieldSystemComponent)
+        {
+            var component = new BackgroundingComponent();
+
+            var group = new AnimalGroup();
+
+            component.Groups.Add(group);
+
+            var managementPeriod = new ManagementPeriod();
+            group.ManagementPeriods.Add(managementPeriod);
+
+            managementPeriod.HousingDetails = new HousingDetails();
+            managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+            managementPeriod.HousingDetails.PastureLocation = fieldSystemComponent;
+
+            return component;
+        }
+
         public AnimalComponentEmissionsResults GetEmptyTestAnimalComponentEmissionsResults()
         {
             var results = new AnimalComponentEmissionsResults();
@@ -210,6 +228,7 @@ namespace H.Core.Test
 
             var managementPeriod = new ManagementPeriod();
             managementPeriod.HousingDetails = new HousingDetails();
+            managementPeriod.HousingDetails.HousingType = HousingType.Confined;
             monthsAndDaysData.ManagementPeriod = managementPeriod;
 
             managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
@@ -229,6 +248,55 @@ namespace H.Core.Test
             results.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() { animalGroupResults };
 
             return results;
+        }
+
+        public AnimalComponentEmissionsResults GetTestGrazingBeefCattleAnimalComponentEmissionsResults(FieldSystemComponent fieldSystemComponent)
+        {
+            var results = new AnimalComponentEmissionsResults();
+            results.Component = this.GetTestGrazingAnimalComponent(fieldSystemComponent);
+
+            var animalGroupResults = this.GetTestGrazingBeefCattleAnimalGroupComponentEmissionsResults(fieldSystemComponent);
+
+            results.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() { animalGroupResults };
+
+            return results;
+        }
+
+        public AnimalGroupEmissionResults GetTestGrazingBeefCattleAnimalGroupComponentEmissionsResults(FieldSystemComponent fieldSystemComponent)
+        {
+            var animalGroupResults = new AnimalGroupEmissionResults();
+
+            var groupEmissionsByMonth = this.GetTestGroupEmissionsByMonthForGrazingAnimals(fieldSystemComponent);
+            animalGroupResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>() { groupEmissionsByMonth };
+
+            return animalGroupResults;
+        }
+
+        public GroupEmissionsByMonth GetTestGroupEmissionsByMonthForGrazingAnimals(FieldSystemComponent fieldSystemComponent)
+        {
+            var monthsAndDaysData = new MonthsAndDaysData();
+            monthsAndDaysData.Year = DateTime.Now.Year;
+
+            var managementPeriod = new ManagementPeriod();
+            managementPeriod.HousingDetails = new HousingDetails();
+            managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+            managementPeriod.HousingDetails.PastureLocation = fieldSystemComponent;
+
+            monthsAndDaysData.ManagementPeriod = managementPeriod;
+
+            managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+
+            var groupEmissionsByDay = new GroupEmissionsByDay()
+            {
+                AdjustedAmountOfTanInStoredManureOnDay = 100,
+                OrganicNitrogenCreatedOnDay = 50,
+                TotalVolumeOfManureAvailableForLandApplication = 100,
+                TotalCarbonUptakeForGroup = 100,
+            };
+
+            var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { groupEmissionsByDay });
+
+            return groupEmissionsByMonth;
         }
 
         public AnimalComponentEmissionsResults GetNonEmptyTestDairyCattleAnimalComponentEmissionsResults()

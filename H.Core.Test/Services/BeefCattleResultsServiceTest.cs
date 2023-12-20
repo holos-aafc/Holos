@@ -527,10 +527,9 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void CalculateDryMatterMax()
         {
-            var result = _resultsService.CalculateDryMatterMax(
-                AnimalType.BeefCowLactating, 100);
+            var result = _resultsService.CalculateDryMatterMax(100);
 
-            Assert.AreEqual(2.5875, result);
+            Assert.AreEqual(2.25, result);
         }
 
         [TestMethod]

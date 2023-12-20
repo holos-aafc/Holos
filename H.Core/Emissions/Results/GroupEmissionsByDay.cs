@@ -407,6 +407,14 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _carbonUptake, value);
         }
 
+        public double TotalDmiUptakeForGroup
+        {
+            get
+            {
+                return this.TotalCarbonUptakeForGroup / CoreConstants.CarbonConcentration;
+            }
+        }
+
         /// <summary>
         /// Crude fat/ether extract intake
         /// 

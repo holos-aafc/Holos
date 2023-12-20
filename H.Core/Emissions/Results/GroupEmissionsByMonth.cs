@@ -381,6 +381,7 @@ namespace H.Core.Emissions.Results
             }
         }
 
+
         /// <summary>
         /// Total carbon uptake by all animals in the group for the month.
         ///
@@ -394,7 +395,18 @@ namespace H.Core.Emissions.Results
             }
         }
 
-
+        /// <summary>
+        /// Total dry matter intake by all animals in the group for the month.
+        ///
+        /// (kg)
+        /// </summary>
+        public double TotalMonthlyDmiUptakeForGroup
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalDmiUptakeForGroup);
+            }
+        }
 
         /// <summary>
         /// Use an average of the daily values when reporting monthly

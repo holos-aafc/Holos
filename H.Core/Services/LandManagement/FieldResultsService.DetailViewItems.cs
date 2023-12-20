@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
@@ -334,11 +335,12 @@ namespace H.Core.Services.LandManagement
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             this.CalculateCarbonLostByGrazingAnimals(
+                farm,
                 fieldSystemComponent: fieldSystemComponent,
-                results: this.AnimalResults);
+                animalComponentEmissionsResults: this.AnimalResults );
 
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
+            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent);
             this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, farm);
 
             // Before creating view items for each year, calculate carbon lost from bale exports

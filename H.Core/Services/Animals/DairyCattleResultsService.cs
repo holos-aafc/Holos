@@ -358,12 +358,12 @@ namespace H.Core.Services.Animals
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             // Equation 12.3.1-5
-            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(
-                animalType: animalGroup.GroupType,
-                finalWeightOfAnimal: managementPeriod.EndWeight);
+            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight);
 
-            if (dailyEmissions.DryMatterIntake > dailyEmissions.DryMatterIntakeMax)
+            if (base.IsOverDmiMax(dailyEmissions))
             {
+                dailyEmissions.DryMatterIntake = dailyEmissions.DryMatterIntakeMax;
+
                 dailyEmissions.OptimumTdn = this.CalculateRequiredTdnSoThatMaxDmiIsNotExceeded(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                     netEnergyForActivity: dailyEmissions.NetEnergyForActivity,

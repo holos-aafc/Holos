@@ -1703,7 +1703,7 @@ namespace H.Core.Services.Animals
             double nO3NLeachingEmissions)
         {
             var result =
-                (fecalNitrogenExcretion + beddingNitrogen) - ((fecalNitrogenExcretion + beddingNitrogen) * (1 - fractionOfMineralizedNitrogen) + directManureEmissions + leachingEmissions + nO3NLeachingEmissions);
+                (fecalNitrogenExcretion + beddingNitrogen) - ((fecalNitrogenExcretion + beddingNitrogen) * fractionOfMineralizedNitrogen + directManureEmissions + leachingEmissions + nO3NLeachingEmissions);
 
             return result;
         }
@@ -2049,21 +2049,21 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 12.3.1-5
         /// </summary>
-        /// <param name="animalType">The animal group type</param>
         /// <param name="finalWeightOfAnimal">Final weight of animal (kg animal^-1)</param>
         /// <returns></returns>
-        public double CalculateDryMatterMax(
-            AnimalType animalType,
-            double finalWeightOfAnimal)
+        public double CalculateDryMatterMax(double finalWeightOfAnimal)
         {
             var intakeLimit = 2.25;
 
             var weightLimit = finalWeightOfAnimal * (intakeLimit / 100.0);
 
-            // Add in additional 15%
-            var result = weightLimit * 1.15;
+            return weightLimit;
+        }
 
-            return result;
+        public bool IsOverDmiMax(GroupEmissionsByDay groupEmissionsByDay)
+        {
+            // Add in additional 15%
+            return groupEmissionsByDay.DryMatterIntake > (groupEmissionsByDay.DryMatterIntakeMax);
         }
 
         /// <summary>

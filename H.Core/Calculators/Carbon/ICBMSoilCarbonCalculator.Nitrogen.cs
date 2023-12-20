@@ -110,6 +110,10 @@ namespace H.Core.Calculators.Carbon
         ///
         /// Modified to to accept the total above ground residue nitrogen instead of calculating the above ground residue nitrogen in place here
         /// </summary>
+        /// <param name="climateFactor"></param>
+        /// <param name="youngPoolDecompositionRate"></param>
+        /// <param name="totalAboveGroundResidueNitrogen"></param>
+        /// <returns>Aboveground residue N (kg N ha-1)</returns>
         public double CalculateAboveGroundResidueNitrogenAtEquilibrium(
             double climateFactor,
             double youngPoolDecompositionRate,
@@ -123,6 +127,11 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.6.2-3
         /// </summary>
+        /// <param name="aboveGroundResidueNitrogenForFieldAtPreviousInterval"></param>
+        /// <param name="aboveGroundResidueNitrogenForCropAtPreviousInterval"></param>
+        /// <param name="climateManagementFactor"></param>
+        /// <param name="decompositionRateYoungPool"></param>
+        /// <returns>Aboveground residue N (kg N ha-1)</returns>
         public double CalculateAboveGroundResidueNitrogenForFieldAtInterval(
             double aboveGroundResidueNitrogenForFieldAtPreviousInterval,
             double aboveGroundResidueNitrogenForCropAtPreviousInterval,
@@ -139,6 +148,10 @@ namespace H.Core.Calculators.Carbon
         ///
         /// Modified to to accept the total below ground residue nitrogen instead of calculating the below ground residue nitrogen in place here
         /// </summary>
+        /// <param name="youngPoolDecompositionRate"></param>
+        /// <param name="climateFactor"></param>
+        /// <param name="totalBelowGroundResidueNitrogen"></param>
+        /// <returns>Belowground residue N (kg N ha-1)</returns>
         public double CalculateBelowGroundResidueNitrogenAtEquilibrium(double youngPoolDecompositionRate,
             double climateFactor,
             double totalBelowGroundResidueNitrogen)
@@ -149,8 +162,13 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.2-6
+        /// Equation 2.6.2-7
         /// </summary>
+        /// <param name="belowGroundResidueNitrogenForFieldAtPreviousInterval"></param>
+        /// <param name="belowGroundResidueNitrogenForCropAtPreviousInterval"></param>
+        /// <param name="climateManagementFactor"></param>
+        /// <param name="decompositionRateYoungPool"></param>
+        /// <returns>Belowground residue N (kg N ha-1)</returns>
         public double CalculateBelowGroundResidueNitrogenForFieldAtInterval(
             double belowGroundResidueNitrogenForFieldAtPreviousInterval,
             double belowGroundResidueNitrogenForCropAtPreviousInterval,
@@ -169,6 +187,10 @@ namespace H.Core.Calculators.Carbon
         ///
         /// (kg N ha^-1)
         /// </summary>
+        /// <param name="manureInputs"></param>
+        /// <param name="decompositionRateConstantYoungPool"></param>
+        /// <param name="climateParameter"></param>
+        /// <returns>Manure residue N pool (kg N ha-1) in a field on a specific year</returns>
         public double CalculateManureResiduePoolAtStartingPoint(
             double manureInputs,
             double decompositionRateConstantYoungPool,
@@ -186,6 +208,11 @@ namespace H.Core.Calculators.Carbon
         ///
         /// (kg N ha^-1)
         /// </summary>
+        /// <param name="manureResidueNitrogenPoolAtPreviousInterval"></param>
+        /// <param name="manureInputsAtPreviousInterval"></param>
+        /// <param name="decompositionRateYoungPool"></param>
+        /// <param name="climateParameter"></param>
+        /// <returns>Manure residue N pool (kg N ha-1) in a field on a specific year</returns>
         public double CalculateManureResiduePoolAtInterval(double manureResidueNitrogenPoolAtPreviousInterval,
             double manureInputsAtPreviousInterval,
             double decompositionRateYoungPool,
@@ -199,6 +226,11 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.6.4-1
         /// </summary>
+        /// <param name="aboveGroundResidueNitrogenForCropAtStartingPoint"></param>
+        /// <param name="belowGroundResidueNitrogenForCropAtStartingPoint"></param>
+        /// <param name="decompositionRateConstantYoungPool"></param>
+        /// <param name="climateParameter"></param>
+        /// <returns>Availability of N from residue decomposition (kg N ha-1) on a given field</returns>
         public double CalculateCropResiduesAtStartingPoint(
             double aboveGroundResidueNitrogenForCropAtStartingPoint,
             double belowGroundResidueNitrogenForCropAtStartingPoint,
@@ -214,6 +246,13 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.6.4-2
         /// </summary>
+        /// <param name="aboveGroundResidueNitrogenForFieldAtCurrentInterval"></param>
+        /// <param name="aboveGroundResidueNitrogenForFieldAtPreviousInterval"></param>
+        /// <param name="aboveGroundResidueNitrogenForCropAtPreviousInterval"></param>
+        /// <param name="belowGroundResidueNitrogenForFieldAtCurrentInterval"></param>
+        /// <param name="belowGroundResidueNitrogenForFieldAtPreviousInterval"></param>
+        /// <param name="belowGroundResidueNitrogenForCropAtPreviousInterval"></param>
+        /// <returns>Availability of N from residue decomposition (kg N ha-1) on a given field</returns>
         public double CalculateCropResiduesAtInterval(
             double aboveGroundResidueNitrogenForFieldAtCurrentInterval,
             double aboveGroundResidueNitrogenForFieldAtPreviousInterval,
