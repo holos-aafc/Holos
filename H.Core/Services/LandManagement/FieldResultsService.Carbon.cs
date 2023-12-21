@@ -680,8 +680,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
             {
-                var emissionsFromGrazingAnimals =
-                    this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem).ToList();
+                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem).ToList();
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals.ToList())
                 {
                     result += (groupEmissionsByMonth.MonthlyFecalCarbonExcretion -
@@ -733,12 +732,17 @@ namespace H.Core.Services.LandManagement
             }
         }
 
-        private List<ManagementPeriod> GetSelectedManagementPeriods(AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent)
+        /// <summary>
+        /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
+        /// </summary>
+        private List<ManagementPeriod> GetSelectedManagementPeriods(
+            AnimalGroup animalGroup, 
+            FieldSystemComponent fieldSystemComponent)
         {
             var result = new List<ManagementPeriod>();
 
             var managementPeriods = animalGroup.ManagementPeriods.ToList();
-            var grazingPeriods = managementPeriods.Where(x => this.IsGrazingManagementPeriodFromPasture(fieldSystemComponent, x)).ToList();
+            var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
             if (grazingPeriods.Count() == 1)
             {
                 result.Add(grazingPeriods.Single());
@@ -758,22 +762,7 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        private bool IsGrazingManagementPeriodFromPasture(
-            FieldSystemComponent fieldSystemComponent,
-            ManagementPeriod managementPeriod)
-        {
-            var housingDetails = managementPeriod.HousingDetails;
-            var isPasture = housingDetails.HousingType.IsPasture();
-            var isNonNullPasture = housingDetails.PastureLocation != null;
-            if (isPasture == false || isNonNullPasture == false)
-            {
-                return false;
-            }
-
-            var isMatchingLocation = housingDetails.PastureLocation.Guid.Equals(fieldSystemComponent.Guid);
-
-            return isMatchingLocation;
-        }
+       
 
         #endregion
     }

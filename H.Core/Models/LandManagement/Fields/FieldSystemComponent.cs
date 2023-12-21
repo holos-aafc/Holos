@@ -10,6 +10,7 @@ using System.Linq;
 using H.Core.Enumerations;
 using H.Infrastructure;
 using H.Core;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers.Soil;
 
@@ -367,6 +368,38 @@ namespace H.Core.Models.LandManagement.Fields
             //    errors.Add(new ErrorInformation(H.Core.Properties.Resources.ErrorFieldAreaCannotBeZero));
             //}
             return errors;
+        }
+
+        public bool IsGrazingManagementPeriodFromPasture(
+            ManagementPeriod managementPeriod)
+        {
+            var housingDetails = managementPeriod.HousingDetails;
+            var isPasture = housingDetails.HousingType.IsPasture();
+            var isNonNullPasture = housingDetails.PastureLocation != null;
+            if (isPasture == false || isNonNullPasture == false)
+            {
+                return false;
+            }
+
+            var isMatchingLocation = housingDetails.PastureLocation.Guid.Equals(this.Guid);
+
+            return isMatchingLocation;
+        }
+
+        public bool HasLivestockManureApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                {
+                    if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && manureApplicationViewItem.DateOfApplication.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         #endregion

@@ -75,7 +75,7 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.GetYearsWithGrazingAnimals().Contains(currentYearViewItem.Year))
+            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem))
             {
                 var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
                     currentYearViewItem) / currentYearViewItem.Area;
@@ -121,15 +121,16 @@ namespace H.Core.Calculators.Carbon
             // Add in any supplemental feeding amounts that were given to grazing animals
             currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
 
-            // Add in any carbon from manure of grazing animals
-            //currentYearViewItem.AboveGroundCarbonInput += carbonInputsFromGrazingAnimalManure;
-
             currentYearViewItem.BelowGroundCarbonInput = this.CalculateTotalBelowGroundCarbonInput(
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
             currentYearViewItem.ManureCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.ManureService.GetTotalManureCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
-            currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+
+            if (farm.CropHasGrazingAnimals(currentYearViewItem))
+            {
+                currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+            }
 
             currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
 

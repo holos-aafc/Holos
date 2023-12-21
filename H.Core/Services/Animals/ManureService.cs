@@ -461,7 +461,6 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-
         public double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem)
         {
             if (viewItem.CropType.IsNativeGrassland())
@@ -469,7 +468,19 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            var inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+            var inputsFromLocalManure = 0d;
+
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null)
+            {
+                return 0;
+            }
+
+            if (field.HasLivestockManureApplicationsInYear(year))
+            {
+                inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+            }
+            
             var inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
 
             var remaining = this.GetTotalCarbonRemainingForField(farm, year, viewItem);

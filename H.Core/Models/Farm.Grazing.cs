@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Enumerations;
+using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Models
 {
@@ -29,6 +31,31 @@ namespace H.Core.Models
             }
 
             return list;
+        }
+
+        public bool CropHasGrazingAnimals(CropViewItem viewItem)
+        {
+            var field = this.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null)
+            {
+                return false;
+            }
+
+            var crops = field.CropViewItems.Where(x => x.CropType == viewItem.CropType);
+            foreach (var cropViewItem in crops)
+            {
+                if (cropViewItem.GrazingViewItems.Any(x => x.Start.Year == viewItem.Year))
+                {
+                    return true;
+                }  
+            }
+
+            return false;
+        }
+
+        public bool HasGrazingAnimalsInYear(int year)
+        {
+            return this.GetYearsWithGrazingAnimals().Contains(year);
         }
 
         #endregion

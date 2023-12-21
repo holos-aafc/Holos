@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Permissions;
+using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Models.Animals;
@@ -635,18 +636,7 @@ namespace H.Core.Models
 
         public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
         {
-            var itemsByYear = new List<CropViewItem>();
-
-            foreach (var fieldSystemComponent in this.FieldSystemComponents)
-            {
-                foreach (var cropViewItem in fieldSystemComponent.CropViewItems.Where(x => x.CropType.IsNativeGrassland() == includeNativeGrasslands))
-                {
-                    if (cropViewItem.Year == year)
-                    {
-                        itemsByYear.Add(cropViewItem);
-                    }
-                }
-            }
+            var itemsByYear = this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrasslands).ToList();
             var area = itemsByYear.Sum(x => x.Area);
             if (area > 0)
             {
@@ -864,6 +854,13 @@ namespace H.Core.Models
             var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
             return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+        }
+
+        public int GetEndYearOfEarliestRotation()
+        {
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
+
+            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
         }
 
         public void Initialize()

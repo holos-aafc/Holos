@@ -107,9 +107,6 @@ namespace H.Core.Services.LandManagement
 
             // Clear existing items because we want to reset values for view items.
             stageState.ClearState();
-
-            
-
             // Initialize the stage state (create view items that will be needed to create result view items)
             this.CreateDetailViewItems(farm);
 
@@ -361,16 +358,16 @@ namespace H.Core.Services.LandManagement
             // Add in a details view message for the undersown year(s). Note that perennials must be processed before this call
             this.ProcessUndersownCrops(viewItems, fieldSystemComponent);
 
-            // Assign carbon inputs for each view item
-            this.AssignCarbonInputs(
-                viewItems: viewItems,
-                farm: farm, 
-                fieldSystemComponent: fieldSystemComponent);
-
             var stageState = this.GetStageState(farm);
 
             // Save the view items to the farm which can then be edited by the user on the details view
             stageState.DetailsScreenViewCropViewItems.AddRange(viewItems.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop));
+
+            // Assign carbon inputs for each view item
+            this.AssignCarbonInputs(
+                viewItems: viewItems,
+                farm: farm,
+                fieldSystemComponent: fieldSystemComponent);
         }
 
         /// <summary>

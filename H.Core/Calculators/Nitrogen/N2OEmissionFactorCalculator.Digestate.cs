@@ -111,6 +111,55 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.1-10
+        ///
+        /// Includes direct emissions from applied digestate and direct emissions from remaining digestate for the field.
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateDirectN2ONFromFieldAppliedDigestate(
+            Farm farm,
+            CropViewItem viewItem)
+        {
+            var result = 0d;
+
+            var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(viewItem, farm);
+            var leftOver = this.CalculateDirectN2ONFromLeftOverDigestateForField(viewItem, farm);
+
+            result = applied + leftOver;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-11
+        ///
+        /// Includes direct emissions from applied manure and direct emissions from remaining manure for the entire farm.
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateDirectN2ONFromFieldAppliedDigestateForFarmAndYear(
+            Farm farm,
+            int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var viewItem in itemsByYear)
+            {
+                var emissions = this.CalculateDirectN2ONFromFieldAppliedDigestate(farm, viewItem);
+
+                result += emissions;
+            }
+
+            var exports = 0;
+
+            result += exports;
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 4.6.2-12
         /// </summary>
         public double CalculateNH3NLossFromFarmSourcedLandAppliedDigestateForField(
@@ -289,22 +338,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.5-1
-        ///
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateTotalIndirectEmissionsFromDigestateForField(
-            Farm farm,
-            CropViewItem viewItem,
-            int year)
-        {
-            var nitrateLeached = CalculateTotalDigestateNitrateLeached(farm, viewItem);
-            var totalVolatilization = CalculateTotalDigestateN2ONVolatilizationForField(viewItem, farm, year);
-
-            return nitrateLeached + totalVolatilization;
-        }
-
-        /// <summary>
         /// Equation 4.6.3-8
         /// </summary>
         public double CalculateTotalAdjustedAmmoniaEmissionsFromLeftOverDigestateForField(
@@ -450,6 +483,113 @@ namespace H.Core.Calculators.Nitrogen
             var result = totalNitrogenRemainingForField * leachingFraction * (1 - leachingEmissionFactorForLandApplication);
 
             return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.4-8
+        ///
+        /// (kg NO3-N)
+        /// </summary>
+        public double CalculateTotalNitrateLeachedFromExportedDigestateForFarmAndYear(Farm farm, int year)
+        {
+            // Export of digestate not supported yet
+            return 0;
+        }
+
+        /// <summary>
+        /// Equation 4.6.4-9
+        ///
+        /// (kg NO3-N)
+        /// </summary>
+        public double CalculateAllDigestateNitrateLeached(Farm farm, CropViewItem cropViewItem)
+        {
+            var result = 0d;
+
+            var leachingFromApplications = this.CalculateTotalDigestateNitrateLeached(farm, cropViewItem);
+            var leachingFromRemaining = CalculateTotalNitrateLeachedFromLeftOverDigestateForField(farm, cropViewItem);
+
+            result = leachingFromApplications + leachingFromRemaining; 
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.4-10
+        ///
+        /// (kg NO3-N)
+        /// </summary>
+        public double CalculateTotalDigestateNitrateLeachedFromForFarmAndYear(Farm farm, int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var cropViewItem in itemsByYear)
+            {
+                result += this.CalculateAllDigestateNitrateLeached(farm, cropViewItem);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.6-1
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalDirectEmissionsFromDigestate(int year, Farm farm)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var cropViewItem in itemsByYear)
+            {
+                result += this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(cropViewItem, farm);
+                result += CalculateDirectN2ONFromLeftOverDigestateForField(cropViewItem, farm);
+            }
+
+            // Exports not considered yet
+            result += 0;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.9.5-1
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalIndirectEmissionsFromDigestateForFarm(
+            Farm farm,
+            int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+
+            foreach (var cropViewItem in itemsByYear)
+            {
+                var nitrateLeached = CalculateTotalN2ONFromDigestateLeachingForField(farm, cropViewItem);
+                var totalVolatilization = CalculateTotalDigestateN2ONVolatilizationForField(cropViewItem, farm, year);
+
+                result += (nitrateLeached + totalVolatilization);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.9.6-1
+        ///
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateTotalEmissionsFromDigestate(
+            Farm farm,
+            int year)
+        {
+            var direct = this.CalculateTotalDirectEmissionsFromDigestate(year, farm);
+            var indirect = CalculateTotalIndirectEmissionsFromDigestateForFarm(farm, year);
+
+            return indirect + direct;
         }
 
         #endregion   

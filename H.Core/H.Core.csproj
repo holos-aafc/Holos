@@ -708,6 +708,7 @@
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Harvest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Manure.cs" />
     <Compile Include="Models\Farm.Digestate.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Grazing.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings" />
     <None Include="Services\OCR\tessdata\eng.traineddata">

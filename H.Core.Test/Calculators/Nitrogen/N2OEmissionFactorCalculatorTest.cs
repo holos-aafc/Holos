@@ -230,6 +230,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
+            var field = new FieldSystemComponent() { Guid = viewItem.Guid };
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
 
             var manureNitrogenFromLandApplication = _sut.GetAmountOfManureNitrogenUsed(viewItem);
             Assert.AreEqual(100, manureNitrogenFromLandApplication, 2);
@@ -270,6 +277,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
+            var field = new FieldSystemComponent() { Guid = viewItem.Guid };
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
 
             var dairyApplication = base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure();
             dairyApplication.AnimalType = AnimalType.DairyLactatingCow;
@@ -316,6 +330,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
+            var field = new FieldSystemComponent() {Guid = viewItem.Guid};
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
             viewItem.ManureApplicationViewItems.Clear();
             viewItem.ManureApplicationViewItems.Add(base.GetTestBeefCattleManureApplicationViewItemUsingImportedManure());
 
@@ -360,6 +381,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
+            var field = new FieldSystemComponent() { Guid = viewItem.Guid };
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
             viewItem.ManureApplicationViewItems.Clear();
             viewItem.ManureApplicationViewItems.Add(base.GetTestBeefCattleManureApplicationViewItemUsingImportedManure());
             viewItem.ManureApplicationViewItems.Add(base.GetTestDairyCattleManureApplicationViewItemUsingImportedManure());
@@ -405,6 +433,9 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
             viewItem.DigestateApplicationViewItems.Clear();
             viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
 
@@ -440,8 +471,8 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(14.83, totalNitrateLeached, 2);
 
             var totalIndirectEmissions =
-                _sut.CalculateTotalIndirectEmissionsFromDigestateForField(farm, viewItem, viewItem.Year);
-            Assert.AreEqual(16.54, totalIndirectEmissions, 2);
+                _sut.CalculateTotalIndirectEmissionsFromDigestateForFarm(farm,  viewItem.Year);
+            Assert.AreEqual(1.87, totalIndirectEmissions, 2);
         }
 
         [TestMethod]
@@ -449,6 +480,9 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
             var viewItem = base.GetTestCropViewItem();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(viewItem);
+            farm.StageStates.Add(stageState);
             viewItem.DigestateApplicationViewItems.Clear();
             viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
             viewItem.DigestateApplicationViewItems.Add(base.GetTestLiquidDigestateApplicationViewItem());
@@ -485,8 +519,8 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(163.18, totalNitrateLeached, 2);
 
             var totalIndirectEmissions =
-                _sut.CalculateTotalIndirectEmissionsFromDigestateForField(farm, viewItem, viewItem.Year);
-            Assert.AreEqual(181.94, totalIndirectEmissions, 2);
+                _sut.CalculateTotalIndirectEmissionsFromDigestateForFarm(farm, viewItem.Year);
+            Assert.AreEqual(20.57, totalIndirectEmissions, 2);
         }
 
         [TestMethod]

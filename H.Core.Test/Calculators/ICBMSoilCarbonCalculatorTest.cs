@@ -641,6 +641,8 @@ namespace H.Core.Test.Calculators
                 }
             };
 
+            
+
             _sut.SetCarbonInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,

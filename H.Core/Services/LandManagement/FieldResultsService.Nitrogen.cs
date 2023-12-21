@@ -123,7 +123,7 @@ namespace H.Core.Services.LandManagement
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
                 {
                     totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
-                    totalAmmoniaEmissions += groupEmissionsByMonth.MontlyNH3FromGrazingAnimals;
+                    totalAmmoniaEmissions += groupEmissionsByMonth.MonthlyNH3FromGrazingAnimals;
                     totalLeaching += groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
                     totalN2ON += (groupEmissionsByMonth.MonthlyManureDirectN2ONEmission + groupEmissionsByMonth.MonthlyManureIndirectN2ONEmission);
                 }

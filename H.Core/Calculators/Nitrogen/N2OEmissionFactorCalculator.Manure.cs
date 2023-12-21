@@ -39,6 +39,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
+
             var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
                 viewItem: viewItem,
                 farm: farm);
@@ -208,7 +209,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.1-10
         ///
-        /// Includes direct emissions from applied manure and direct emissions from remaining manure.
+        /// Includes direct emissions from applied manure and direct emissions from remaining manure for the field.
         /// 
         /// (kg N2O-N)
         /// </summary>
@@ -218,10 +219,44 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(viewItem.Year) == false)
+            {
+                return 0;
+            }
+
             var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(viewItem, farm);
             var leftOver = this.CalculateDirectN2ONFromLeftOverManureForField(farm, viewItem);
 
             result = applied + leftOver;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-11
+        ///
+        /// Includes direct emissions from applied manure and direct emissions from remaining manure for the entire farm.
+        /// 
+        /// (kg N2O-N)
+        /// </summary>
+        public double CalculateDirectN2ONFromFieldAppliedManureForFarmAndYear(
+            Farm farm,
+            int year)
+        {
+            var result = 0d;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            foreach (var viewItem in itemsByYear)
+            {
+                var emissions = this.CalculateDirectN2ONFromFieldAppliedManure(farm, viewItem);
+
+                result += emissions;
+            }
+
+            var exports = this.CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(farm, year);
+
+            result += exports;
 
             return result;
         }
@@ -837,6 +872,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedManureForField(int year, Farm farm, CropViewItem cropViewItem)
         {
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(cropViewItem.Year) == false)
+            {
+                return 0;
+            }
+
             var ammoniaEmissionsFromLandAppliedManure = this.CalculateNH3NLossFromFarmSourcedLandAppliedManureForField(farm, cropViewItem, year);
             var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
 
@@ -850,6 +891,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateN2ONFromVolatilizationOfLeftOverManureForField(int year, Farm farm, CropViewItem cropViewItem)
         {
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(cropViewItem.Year) == false)
+            {
+                return 0;
+            }
+
             var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
             var leftOverAmmonia = this.CalculateNH3NEmissionsFromLeftOverManureForField(cropViewItem, year, farm);
 
@@ -919,6 +966,8 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm,
             int year)
         {
+
+
             if (cropViewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1068,6 +1117,12 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem cropViewItem,
             int year)
         {
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(cropViewItem.Year) == false)
+            {
+                return 0;
+            }
+
             if (cropViewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1129,6 +1184,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONFromManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(viewItem.Year) == false)
+            {
+                return 0;
+            }
+
             if (viewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1151,6 +1212,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONLeachingFromLeftOverManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockManureApplicationsInYear(viewItem.Year) == false)
+            {
+                return 0;
+            }
+
             if (viewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1242,6 +1309,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalManureNitrateLeached(Farm farm, CropViewItem viewItem)
         {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null)
+            {
+                return 0;
+            }
+
             if (viewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1251,6 +1324,11 @@ namespace H.Core.Calculators.Nitrogen
 
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
             {
+                if (manureApplicationViewItem.ManureLocationSourceType== ManureLocationSourceType.Livestock && field.HasLivestockManureApplicationsInYear(viewItem.Year) == false)
+                {
+                    continue;
+                }
+
                 result += this.CalculateTotalNitrateLeached(farm, viewItem, manureApplicationViewItem);
             }
 
@@ -1301,7 +1379,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// (kg NO3-N)
         /// </summary>
-        public double CalculateTotalNitrateLeachedFromForField(Farm farm, CropViewItem viewItem)
+        public double CalculateTotalManureNitrateLeachedFromForField(Farm farm, CropViewItem viewItem)
         {
             var result = 0d;
 
@@ -1325,7 +1403,7 @@ namespace H.Core.Calculators.Nitrogen
             var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             foreach (var cropViewItem in itemsByYear)
             {
-                result += this.CalculateTotalNitrateLeachedFromForField(farm, cropViewItem);
+                result += this.CalculateTotalManureNitrateLeachedFromForField(farm, cropViewItem);
             }
 
             return result;
@@ -1341,7 +1419,7 @@ namespace H.Core.Calculators.Nitrogen
             CropViewItem viewItem,
             int year)
         {
-            var nitrateLeached = CalculateTotalNitrateLeachedFromForField(farm, viewItem);
+            var nitrateLeached = CalculateTotalManureNitrateLeachedFromForField(farm, viewItem);
             var totalVolatilization = CalculateTotalManureN2ONVolatilizationForField(viewItem, farm, year);
 
             return nitrateLeached + totalVolatilization;
@@ -1390,8 +1468,8 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm,
             int year)
         {
-            var indirect = CalculateTotalIndirectEmissionsFromManure(farm, year);
             var direct = this.CalculateTotalDirectEmissionsFromManure(year, farm);
+            var indirect = CalculateTotalIndirectEmissionsFromManure(farm, year);
 
             return indirect + direct;
         }

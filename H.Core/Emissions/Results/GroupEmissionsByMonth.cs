@@ -291,6 +291,14 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double MonthlyManureNitrateLeachingN2ONEmission
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.ManureNitrateLeachingEmission);
+            }
+        }
+
         /// <summary>
         /// (kg N2O)
         /// </summary>
@@ -694,7 +702,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg NH3)
         /// </summary>
-        public double MontlyNH3FromGrazingAnimals
+        public double MonthlyNH3FromGrazingAnimals
         {
             get
             {

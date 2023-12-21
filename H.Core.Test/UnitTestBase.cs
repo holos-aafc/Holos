@@ -346,6 +346,7 @@ namespace H.Core.Test
             var cropViewItem = new CropViewItem();
             cropViewItem.Area = 1;
             cropViewItem.Year = DateTime.Now.Year;
+            cropViewItem.Guid = Guid.NewGuid();
 
             cropViewItem.ManureApplicationViewItems = new ObservableCollection<ManureApplicationViewItem>();
             cropViewItem.ManureApplicationViewItems.Add(this.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
