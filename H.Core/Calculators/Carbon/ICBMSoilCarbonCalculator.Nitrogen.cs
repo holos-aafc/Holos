@@ -46,7 +46,7 @@ namespace H.Core.Calculators.Carbon
             if (climateParameterOrManagementFactor == 0)
             {
                 // Some polygons won't have data for percentage sand, clay, etc. In these cases the re_crop calculations cannot be performed and so the climate/management factor will be 0 in these cases
-                // However, the above/below ground resiude N calculations need a value greater than zero to calculate the N. Assume 1.0 in these situations.
+                // However, the above/below ground residue N calculations need a value greater than zero to calculate the N. Assume 1.0 in these situations.
                 climateParameterOrManagementFactor = 1;
             }
 

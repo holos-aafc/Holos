@@ -60,7 +60,7 @@ namespace H.Core.Calculators.Carbon
 
             // 2.7.2-13
             // Manure inputs are spread across the pools - as opposed to the ICBM approach where manure is added the dedicated manure pool
-            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN + manureAndDigestateResidues; // Note: this is in kg N/ha but algorithm document converts to t N/ha
+            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN;
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;
         }
 
@@ -99,6 +99,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.7.3-14 is calculated when calling CalculatePools()
             // Equation 2.7.3-15 is calculated when calling CalculatePools()
+            // Equation 2.7.3-16 is derived from the calculation of 2.7.3-15
 
             this.TotalInputsBeforeReductions();
             this.CalculateDirectEmissions(farm, currentYearResults);

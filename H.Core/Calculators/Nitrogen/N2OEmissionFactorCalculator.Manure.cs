@@ -1479,6 +1479,11 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double GetManureNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
         {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
             var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
             var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingAtEndOfYear(viewItem.Year, farm);
 

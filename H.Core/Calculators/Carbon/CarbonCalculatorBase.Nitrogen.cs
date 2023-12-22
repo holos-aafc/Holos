@@ -794,7 +794,8 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-1
             var totalDirectNitrousOxide = this.N2O_NFromSyntheticFertilizer +
                                           this.N2O_NFromResidues +
-                                          this.N2O_NFromMineralization + this.N2O_NFromOrganicNitrogen;
+                                          this.N2O_NFromMineralization + 
+                                          this.N2O_NFromOrganicNitrogen;
 
 
             // Equation 2.6.9-2
@@ -1025,7 +1026,7 @@ namespace H.Core.Calculators.Carbon
 
             var manureNitrogenRemaining = this.N2OEmissionFactorCalculator.GetManureNitrogenRemainingForField(cropViewItem, farm);
             var digestateNitrogenRemaining = this.N2OEmissionFactorCalculator.GetDigestateNitrogenRemainingForField(cropViewItem, farm);
-            var totalRemainingNitrogen = manureNitrogenRemaining + digestateNitrogenRemaining;
+            var totalRemainingNitrogen = (manureNitrogenRemaining + digestateNitrogenRemaining) / cropViewItem.Area;
 
             var nitrogenAppliedToSoilAfterLosses = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
                 totalNitrogenAppliedToField: combinedNitrogenApplied,
