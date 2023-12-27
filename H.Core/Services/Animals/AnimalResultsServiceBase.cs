@@ -354,6 +354,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 3.2.1-3
         /// Equation 3.1.1-4
         /// Equation 3.1.1-3
         /// </summary>
@@ -367,7 +368,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 3.1.1-6
-        /// Equation 3.2.1-4
+        /// Equation 3.2.1-5
         /// </summary>
         /// <param name="netEnergyForMaintenance">Net energy for maintenance (MJ head^-1 day^-1)</param>
         /// <returns>Net energy for pregnancy (MJ head^-1 day^-1)</returns>
@@ -399,6 +400,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 3.1.1-8
+        /// Equation 3.2.1-7
         /// </summary>
         /// <param name="weight">Average weight (kg head^-1)</param>
         /// <param name="gainCoefficient">Gain coefficient</param>
@@ -1635,6 +1637,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.6-1
         /// Equation 5.4.5-1
+        /// Equation 5.5.2-6
         /// </summary>
         /// <param name="manureVolatilizationNitrogenEmission">Manure volatilization N emission (kg N2O-N)</param>
         /// <param name="manureLeachingNitrogenEmission">Manure leaching N emission (kg N2O-N)</param>
@@ -1649,11 +1652,13 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.8.1
         /// Equation 5.4.6-1
+        /// Equation 5.5.2-7
         /// </summary>
         /// <param name="manureDirectNitrogenEmission">Manure direct N emission (kg N₂O-N)</param>
         /// <param name="manureIndirectNitrogenEmission">Manure indirect N emission (kg N₂O-N)</param>
         /// <returns>Manure N emission (kg N₂O-N)</returns>
-        public double CalculateManureNitrogenEmission(double manureDirectNitrogenEmission,
+        public double CalculateManureNitrogenEmission(
+            double manureDirectNitrogenEmission,
             double manureIndirectNitrogenEmission)
         {
             return manureDirectNitrogenEmission + manureIndirectNitrogenEmission;
@@ -2067,6 +2072,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 3.1.1.1
         /// Equation 3.1.2-1
         /// Equation 3.2.1-1
         /// Equation 3.3.1-1

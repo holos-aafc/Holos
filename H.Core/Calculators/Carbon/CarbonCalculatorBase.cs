@@ -47,6 +47,7 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 4.9.7-1
         /// Equation 4.9.7-2
+        /// Equation 4.9.7-5
         /// 
         /// Calculate amount of carbon input from all digestate applications in a year.
         /// </summary>
@@ -63,19 +64,6 @@ namespace H.Core.Calculators.Carbon
             }
 
             return result;
-        }
-
-        public double CalculateGrazingAnimalsManureCarbonInput()
-        {
-            var totalCarbonFromGrazingAnimals = 0d;
-
-            // Get all emissions from when animals on pasture
-            foreach (var animalComponentEmissionsResult in this.AnimalComponentEmissionsResults)
-            {
-                
-            }
-
-            throw new NotImplementedException();
         }
 
         #endregion
