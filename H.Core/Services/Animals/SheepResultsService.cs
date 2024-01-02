@@ -476,7 +476,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-112
+        /// Equation 3.3.1-12
         /// </summary>
         /// <param name="percentTotalDigestibleEnergyInFeed">Percent digestible energy in feed</param>
         /// <returns>Ratio of net energy available in diet for gain to digestible energy consumed (unitless)</returns>

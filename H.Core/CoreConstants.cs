@@ -14,24 +14,35 @@ namespace H.Core
         #region Constants
 
         /// <summary>
+        /// Converts from N2O-N to N2O
+        /// </summary>
+        private const double ConvertN2ONToN2O = 44.0 / 28.0;
+
+        /// <summary>
+        /// Converts from NO-N to NO
+        /// </summary>
+        private const double ConvertNONToNO = 30.0 / 14.0;
+
+        /// <summary>
+        /// Converts from NO3-N to NO3
+        /// </summary>
+        private const double ConvertNO3NToNO3 = 62.0 / 14.0;
+
+        /// <summary>
         /// Converts from NH3-N to NH3
         /// </summary>
         private const double ConvertNH3NToNH3 = 17.0 / 14.0;
+
+        /// <summary>
+        /// Converts from N2N to N2
+        /// </summary>
+        private const double ConvertN2NToN2 = 14.0 / 28.0;
 
         /// <summary>
         /// Converts from NH3 to NH3-N
         /// </summary>
         private const double ConvertNH3ToNH3N = 14.0 / 17.0;
 
-        /// <summary>
-        /// Converts from NO3-N to NO3
-        /// </summary>
-        private const double ConvertNO3NToNO3 = 14.0 / 62.0;
-
-        /// <summary>
-        /// Converts from N2O-N to N2O
-        /// </summary>
-        private const double ConvertN2ONToN2O = 44.0 / 28.0;
 
         #endregion
 
@@ -132,7 +143,8 @@ namespace H.Core
 
 
         /// <summary>
-        /// Equation 4.9.6-1
+        /// Equation 2.6.9-27
+        /// Equation 4.9.6-1 (verify)
         /// </summary>
         public static double ConvertToN2O(double amountOfN2ON)
         {
@@ -140,7 +152,27 @@ namespace H.Core
         }
 
         /// <summary>
-        /// Equation 4.9.6-2
+        /// Equation 2.6.9-28
+        /// </summary>
+        /// <param name="amountOfNON"></param>
+        /// <returns></returns>
+        public static double ConvertToNO(double amountOfNON)
+        {
+            return amountOfNON * ConvertNONToNO;
+        }
+
+        /// <summary>
+        /// Equation 2.6.9-29
+        /// Equation 4.9.6-3 (verify)
+        /// </summary>
+        public static double ConvertToNO3(double amountOfNO3N)
+        {
+            return amountOfNO3N * ConvertNO3NToNO3;
+        }
+
+        /// <summary>
+        /// Equation 2.6.9-30
+        /// Equation 4.9.6-2 (verify)
         /// </summary>
         public static double ConvertToNH3(double amountOfNH3N)
         {
@@ -148,11 +180,13 @@ namespace H.Core
         }
 
         /// <summary>
-        /// Equation 4.9.6-3
+        /// Equation 2.6.9-31
         /// </summary>
-        public static double ConvertToNO3(double amountOfNO3N)
+        /// <param name="amountOfN2N"></param>
+        /// <returns></returns>
+        public static double ConvertToN2(double amountOfN2N)
         {
-            return amountOfNO3N * ConvertNO3NToNO3;
+            return amountOfN2N * ConvertN2NToN2;
         }
 
         public static double ConvertToNH3N(double amountOfNH3)

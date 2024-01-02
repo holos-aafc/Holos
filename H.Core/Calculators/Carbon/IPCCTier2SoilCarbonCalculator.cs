@@ -808,7 +808,9 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-7
+        /// <para>Equation 2.2.3-7</para>
+        /// 
+        /// <para>Equation 2.7.3-1 (where totalInputs = Total organic N input (t N ha-1))</para>
         /// </summary>
         /// <param name="totalInputs">Total carbon input (kg C ha^-1 year^-1)</param>
         /// <param name="nitrogenFraction">Nitrogen fraction of the carbon input, (unitless)</param>
@@ -833,7 +835,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-8
+        /// <para>Equation 2.2.3-8</para>
+        /// <para>Equation 2.7.3-2</para>
         /// </summary>
         /// <param name="inputToDeadMatter">Carbon input to the metabolic dead organic matter component (kg C ha^-1 year^-1)</param>
         /// <param name="f1">Fraction of metabolic dead organic matter decay products transferred to the active sub-pool (unitless)</param>
@@ -844,7 +847,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="f6">Fraction of slow sub-pool decay products transferred to the passive sub-pool (unitless)</param>
         /// <param name="f7">Fraction of slow sub-pool decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f8">Fraction of passive sub-pool decay products transferred to the active sub-pool (unitless)</param>
-        /// <param name="totalInputs">Total carbon input (kg C ha^-1 year^-1)</param>
+        /// <param name="totalInputs">Total carbon input (kg C ha^-1 year^-1) for equation 2.2.3-8 and Total organic N input (t N ha-1) for equation 2.7.3-2</param>
         /// <param name="ligninContent">Lignin content of carbon input (unitless)</param>
         /// <returns>Carbon input to the active soil carbon sub-pool (kg C ha^-1)</returns>
         public double CalculateAmountToActivePool(
@@ -928,10 +931,12 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-12
+        /// <para>Equation 2.2.3-12</para>
+        /// <para>Equation 2.7.3-3</para>
         /// </summary>
-        /// <param name="inputsToActiveSubPool">Carbon input to the active SOC sub-pool, (kg C ha^-1 year^-1)</param>
-        /// <param name="decayRateForActivePool">Decay rate for active SOC sub-pool (unitless)</param>
+        /// <param name="inputsToActiveSubPool"><para>Equation 2.2.3-12 = Carbon input to the active SOC sub-pool, (kg C ha^-1 year^-1)</para>
+        /// <para>Equation 2.7.3-3 = Carbon input to the active SOC sub-pool, (kg C ha^-1 year^-1)</para></param>
+        /// <param name="decayRateForActivePool">N input to the active soil C sub-pool (t N ha-1)</param>
         /// <returns>Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</returns>
         public double CalculateSteadyStateActivePool(
             double inputsToActiveSubPool,
@@ -948,7 +953,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-13
+        /// <para>Equation 2.2.3-13</para>
+        /// <para>Equation 2.7.3-4</para>
         /// </summary>
         /// <param name="activePoolAtPreviousInterval">Active sub-pool SOC stock in previous year, (kg C ha^-1)</param>
         /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
@@ -970,9 +976,11 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-14
+        /// <para>Equation 2.2.3-14</para>
+        /// <para>Equation 2.7.3-5</para>
         /// </summary>
-        /// <param name="totalInputs">Total carbon input, (kg C ha^-1)</param>
+        /// <param name="totalInputs"><para>Equation 2.2.3-14 = Total carbon input, (kg C ha^-1)</para>
+        /// <para>Equation 2.7.3-5 = Total organic N input (t N ha-1)</para></param>
         /// <param name="ligninContent">Lignin content of carbon input, (unitless)</param>
         /// <param name="f3">Fraction of structural dead organic matter decay products transferred to the slow sub-pool (unitless)</param>
         /// <param name="steadyStateActivePool">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
@@ -998,7 +1006,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-15
+        /// <para>Equation 2.2.3-15</para>
+        /// <para>Equation 2.7.3-6</para>
         /// </summary>
         /// <param name="slowPoolAtPreviousInterval">Slow sub-pool SOC stock in previous year, (kg C ha^-1)</param>
         /// <param name="slowPoolSteadyState">Steady state slow sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
@@ -1020,7 +1029,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-16
+        /// <para>Equation 2.2.3-16</para>
+        /// <para>Equation 2.7.3-7</para>
         /// </summary>
         /// <param name="activePoolSteadyState">Steady state active sub-pool SOC stock given conditions in year y, (kg C ha^-1)</param>
         /// <param name="activePoolDecayRate">Decay rate for active carbon sub-pool in the soil, (year^-1)</param>
@@ -1053,7 +1063,8 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.2.3-17
+        /// <para>Equation 2.2.3-17</para>
+        /// <para>Equation 2.7.3-8</para>
         /// </summary>
         /// <param name="passivePoolAtPreviousInterval">Passive sub-pool SOC stock in previous year, (kg C ha^-1)</param>
         /// <param name="passivePoolSteadyState">Steady state passive sub-pool SOC given conditions in year y, (kg C ha^-1)</param>

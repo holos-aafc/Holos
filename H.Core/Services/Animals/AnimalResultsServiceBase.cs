@@ -527,7 +527,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 3.1.1-13
         /// Equation 3.2.1-12
-        /// Equation 3.3.1-14
+        /// Equation 3.3.1-15
         /// </summary>
         /// <param name="entericMethaneEmissionRate">Enteric CH4 emission rate (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
@@ -2039,7 +2039,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.4.4-1
+        /// Equation 3.4.1-1
         /// </summary>
         /// <param name="entericMethaneEmissionRate">Enteric CH4 emission (kg CH4 year^-1)</param>
         /// <param name="numberOfAnimals"></param>

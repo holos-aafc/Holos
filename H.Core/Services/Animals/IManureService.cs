@@ -63,6 +63,7 @@ namespace H.Core.Services.Animals
         double GetTotalVolumeCreated(int year, AnimalType animalType);
 
         /// <summary>
+        /// Equation 2.7.2-12
         /// Equation 4.6.1-8
         /// Equation 4.6.2-17
         /// Equation 4.6.2-18
