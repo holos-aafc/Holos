@@ -9,22 +9,9 @@ Swine,None,246,0.65,0,0,0,"A,I"
 Chicken,None,244,0.54,0,0,0,"A,G"
 Turkey,None,288,0.65,0,0,0,A
 Farm residues,,,,,,
-Barley straw,,267,0.44,90,880,6.1,"A,H,I"
-Corn silage,,304,0.45,95,640,13,"A,C"
-Corn stover (4),,427,0.54,88,850,5,H
-Grass clippings,,332,0.54,82,870,15,A
-Grass silage,,366,0.46,88,267,7.7,A
-Maize,,320,0.54,88,850,15,"A,H"
-Maize silage (4),,304,0.45,92,640,13,"G,H"
-Oat straw,,287,0.52,90,880,6,"A,H"
-Oat silage,,442,0.6,83,380,8.1,A
 Paddy straw (4),,470,0.6,90,940,6.5,"H,L"
-Rye straw,,241,0.44,94,880,6,"A,B,J"
 Straw pellets (4)(5),,247,0.6,90,960,5,"E,M"
 Straw sample (4)(5),,210,0.6,90,960,5,"E,M"
-Sunflower residues (4),,200,0.6,90,891,10,"H,J"
-Triticale straw (4),,195,0.6,90,880,6,J
-Wheat straw (4),,162,0.6,90,880,7.8,"H,J"
 Sewage sludge (4),,400,0.6,80,34,2.6,"A,K"
 Food waste,,344,0.65,84.5,184,7.1,A
 Vegetable oil (4),,649,0.8,100,991,0.00075,"D,N"
