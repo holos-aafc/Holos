@@ -5672,4 +5672,7 @@
   <data name="Year" xml:space="preserve">
     <value>année</value>
   </data>
+  <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
+    <value>Add Crop Residue Substrate Type</value>
+  </data>
 </root>
