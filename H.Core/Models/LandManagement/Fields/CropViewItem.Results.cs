@@ -9,6 +9,7 @@ namespace H.Core.Models.LandManagement.Fields
         public double NO3NFromResiduesLeaching;
         public double NO3NFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeaching;
+        public double TotalN2ONFromManureAndDigestateLeachingExcludingRemainingAmounts;
 
         #region Fields
 
@@ -126,6 +127,11 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// (kg N2O-N field^-1)
         /// </summary>
+        public double DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N field^-1)
+        /// </summary>
         public double TotalDirectNitrousOxideForArea { get; set; }
 
         /// <summary>
@@ -149,9 +155,18 @@ namespace H.Core.Models.LandManagement.Fields
         public double IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea { get; set; }
 
         /// <summary>
+        /// Leaching
+        /// 
         /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea { get; set; }
+
+        /// <summary>
+        /// Leaching
+        /// 
+        /// (kg N2O-N field^-1)
+        /// </summary>
+        public double IndirectNitrousOxideLeachingEmissionsFromOrganicNitrogenForAreaExcludingRemainingManure { get; set; }
 
         /// <summary>
         /// (kg N2O-N field^-1)
@@ -162,11 +177,21 @@ namespace H.Core.Models.LandManagement.Fields
         /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea { get; set; }
+        
+        /// <summary>
+        /// (kg N2O-N field^-1)
+        /// </summary>
+        public double IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForAreaExcludingRemainingAmounts { get; set; }
 
         /// <summary>
         /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalIndirectNitrousOxideForArea { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N field^-1)
+        /// </summary>
+        public double TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts { get; set; }
 
         /// <summary>
         /// (kg NO-N field^-1)
@@ -453,7 +478,17 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// (kg N2O ha^-1)
         /// </summary>
+        public double TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts { get; set; }
+
+        /// <summary>
+        /// (kg N2O ha^-1)
+        /// </summary>
         public double TotalIndirectNitrousOxidePerHectare { get; set; }
+
+        /// <summary>
+        /// (kg N2O ha^-1)
+        /// </summary>
+        public double TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts { get; set; }
 
         public CropEnergyResults CropEnergyResults { get; set; }
 

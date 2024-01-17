@@ -654,7 +654,6 @@ namespace H.Core.Calculators.Shelterbelt
 
 
         /// <summary>
-        /// Equation 2.3.1-7
         /// </summary>
         public double CalculateTreeSpacing(
             double rowLength,
@@ -664,7 +663,6 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.3.1-8
         /// 
         /// Calculates the total above ground carbon for a number of trees of the same type
         /// </summary>
@@ -676,7 +674,6 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.3.1-9
         /// </summary>
         public double CalculateCarbonForLinearPlanting(List<double> aboveGroundCarbonForTreetypesInPlanting)
         {

@@ -21,6 +21,8 @@ namespace H.Core.Converters
                     return CropType.BarleySilageUnderSeed;
                 case "bromehay":
                     return CropType.BromeHay;
+                case "grasssilage":
+                    return CropType.GrassSilage;
                 case "beans":
                     return CropType.Beans;
                 case "beansdryfield":

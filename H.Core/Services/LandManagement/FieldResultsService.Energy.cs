@@ -118,8 +118,6 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.1.1-1
-        /// Equation 4.1.1-2
         /// </summary>
         /// <param name="energyFromFuelUse">Energy from fuel use (GJ ha^1)</param>
         /// <param name="area">Area (ha)</param>

@@ -336,10 +336,6 @@ namespace H.Core.Services.LandManagement
                 fieldSystemComponent: fieldSystemComponent,
                 animalComponentEmissionsResults: this.AnimalResults );
 
-            // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent);
-            this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, farm);
-
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
 
@@ -362,6 +358,10 @@ namespace H.Core.Services.LandManagement
 
             // Save the view items to the farm which can then be edited by the user on the details view
             stageState.DetailsScreenViewCropViewItems.AddRange(viewItems.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop));
+
+            // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
+            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, viewItems);
+            this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
 
             // Assign carbon inputs for each view item
             this.AssignCarbonInputs(

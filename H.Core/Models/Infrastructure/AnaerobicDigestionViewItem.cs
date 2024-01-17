@@ -19,6 +19,7 @@ namespace H.Core.Models.Infrastructure
 
         private bool _hasManureSubstrateViewItems;
         private bool _hasFarmResiduesSubstrateViewItems;
+        private bool _hasCropResiduesSubstrateViewItems;
 
         #endregion
 
@@ -28,11 +29,18 @@ namespace H.Core.Models.Infrastructure
         {
             this.ManureSubstrateViewItems.CollectionChanged += ManureSubstrateViewItemsOnCollectionChanged;
             this.FarmResiduesSubstrateViewItems.CollectionChanged += FarmResiduesSubstrateViewItemsOnCollectionChanged;
+            this.CropResiduesSubstrateViewItems.CollectionChanged += CropResiduesSubstrateViewItemsOnCollectionChanged;
         }
 
         #endregion
 
         #region Properties
+
+        public bool HasCropSubstrateViewItems
+        {
+            get => _hasCropResiduesSubstrateViewItems;
+            set => this.SetProperty(ref _hasCropResiduesSubstrateViewItems, value);
+        }
 
         /// <summary>
         /// A boolean value that represents whether a <see cref="ManureSubstrateViewItems"/> collection has any items in it.
@@ -62,6 +70,8 @@ namespace H.Core.Models.Infrastructure
         /// </summary>
         public ObservableCollection<FarmResiduesSubstrateViewItem> FarmResiduesSubstrateViewItems { get; set; } = new ObservableCollection<FarmResiduesSubstrateViewItem>();
 
+        public ObservableCollection<CropResidueSubstrateViewItem> CropResiduesSubstrateViewItems { get; set; } = new ObservableCollection<CropResidueSubstrateViewItem>();
+
         #endregion
 
 
@@ -73,6 +83,11 @@ namespace H.Core.Models.Infrastructure
 
 
         #region Event Handlers
+
+        private void CropResiduesSubstrateViewItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.HasCropSubstrateViewItems = this.CropResiduesSubstrateViewItems.Count > 0;
+        }
 
         /// <summary>
         /// A method that is triggered when the <see cref="ManureSubstrateViewItems"/> collection changes. 

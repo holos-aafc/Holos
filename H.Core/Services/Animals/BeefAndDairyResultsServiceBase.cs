@@ -136,8 +136,6 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
-
-
             /*
              * Volatilization
              */

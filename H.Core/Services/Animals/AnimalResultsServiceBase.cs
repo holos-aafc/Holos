@@ -741,6 +741,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
                 volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
 
+            // Equation 4.1.3-6 (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
             dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
                 volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
                 volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
@@ -950,7 +951,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.2.1-30
+        /// Equation 4.2.1-31
         /// </summary>
         /// <param name="beddingRate">Rate of bedding material added (kg head^-1 day^-1)</param>
         /// <param name="nitrogenConcentrationOfBeddingMaterial">Nitrogen concentration of bedding material (kg N kg^-1 DM)</param>
@@ -966,7 +967,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.2.1-31
+        /// Equation 4.2.1-32
         /// </summary>
         /// <param name="rateOfNitrogenAddedFromBedding">Rate of nitrogen added from bedding material (kg head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of cattle</param>
@@ -1067,6 +1068,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.2.1-1
+        /// Equation 4.2.1-16
         /// </summary>
         /// <param name="grossEnergyIntake">Gross energy intake (MJ head^-1 day^-1)</param>
         /// <param name="crudeProtein">Crude protein content (kg kg⁻¹)</param>
@@ -1261,6 +1263,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 4.3.1-5
         /// Equation 4.3.3-2
         /// Equation 4.3.4-3
         /// </summary>
@@ -1379,7 +1382,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.1-13
+        /// Equation 4.3.1-12
         /// </summary>
         /// <param name="dailyTemperature">Temperature (°C)</param>
         /// <returns>Temperature-based adjustments used to correct default NH3 emission factors for indoor housing</returns>
@@ -1389,6 +1392,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 4.3.1-10
         /// Equation 4.3.1-14
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical Nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
@@ -1402,6 +1406,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 4.3.1-11
         /// Equation 4.3.1-15
         /// </summary>
         /// <param name="emissionRate">Ammonia nitrogen emission rate from housing of animals (kg NH3 head^-1 day^-1)</param>
@@ -1415,6 +1420,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
+        /// Equation 4.3.1-9
         /// Equation 4.3.1-13
         /// </summary>
         /// <param name="emissionFactor">Default ammonia emission factor</param>
@@ -1708,7 +1714,7 @@ namespace H.Core.Services.Animals
             double nO3NLeachingEmissions)
         {
             var result =
-                (fecalNitrogenExcretion + beddingNitrogen) - ((fecalNitrogenExcretion + beddingNitrogen) * fractionOfMineralizedNitrogen + directManureEmissions + leachingEmissions + nO3NLeachingEmissions);
+                (fecalNitrogenExcretion + beddingNitrogen) - (((fecalNitrogenExcretion + beddingNitrogen) * fractionOfMineralizedNitrogen) + directManureEmissions + leachingEmissions + (nO3NLeachingEmissions));
 
             return result;
         }
@@ -1902,7 +1908,6 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 3.1.8-8
-        /// Equation 4.3.1-1
         ///
         /// Note: volume calculation for both solid and liquid manure is the same
         /// </summary>
@@ -2398,8 +2403,8 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             dailyEmissions.ManureNitrateLeachingEmission = CalculateNitrateLeaching(
-                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                nitrogenBeddingRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                nitrogenExcretionRate: dailyEmissions.AmountOfNitrogenExcreted,
+                nitrogenBeddingRate: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                 emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching);
         }

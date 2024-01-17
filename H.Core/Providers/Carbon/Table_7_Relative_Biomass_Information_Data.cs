@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using H.Core.Enumerations;
+using H.Core.Providers.AnaerobicDigestion;
 
 #endregion
 
@@ -73,6 +74,7 @@ namespace H.Core.Providers.Carbon
         public Dictionary<Province, Dictionary<SoilFunctionalCategory, double>> PhosphorusFertilizerRateTable { get; set; } = new Dictionary<Province, Dictionary<SoilFunctionalCategory, double>>();
         public Dictionary<Province, TillageType> TillageTypeTable { get; set; } = new Dictionary<Province, TillageType>();
         public Province? Province { get; set; }
+        public Table_46_Biogas_Methane_Production_CropResidue_Data BiomethaneData { get; set; } = new Table_46_Biogas_Methane_Production_CropResidue_Data();
 
         #endregion
 

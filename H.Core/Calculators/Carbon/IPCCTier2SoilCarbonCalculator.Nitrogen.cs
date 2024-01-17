@@ -76,9 +76,9 @@ namespace H.Core.Calculators.Carbon
             int yearIndex)
         {
             this.YearIndex = yearIndex;
-            this.Year = this.YearIndex + farm.CarbonModellingEquilibriumYear;
             this.CurrentYearResults = currentYearResults;
             this.PreviousYearResults = previousYearResults;
+            this.Year = this.CurrentYearResults.Year;
 
             base.SetPoolStartStates(farm);
 

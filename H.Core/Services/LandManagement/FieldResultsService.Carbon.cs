@@ -644,13 +644,14 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Calculates how much carbon added from manure of animals grazing on the field.
         /// </summary>
-        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent)
+        public void CalculateManureCarbonInputByGrazingAnimals(
+            FieldSystemComponent fieldSystemComponent,
+            List<CropViewItem> cropViewItems)
         {
-            var animalComponentEmissionResults = this.AnimalResults;
-
             this.CalculateManureCarbonInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
+                results: this.AnimalResults,
+                cropViewItems);
         }
 
         /// <summary>
@@ -658,14 +659,13 @@ namespace H.Core.Services.LandManagement
         ///
         /// (kg C ha^-1)
         /// </summary>
-        public void CalculateManureCarbonInputByGrazingAnimals(
-            FieldSystemComponent fieldSystemComponent,
-            IEnumerable<AnimalComponentEmissionsResults> results)
+        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> results, List<CropViewItem> cropViewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in cropViewItems)
             {
                 cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture =
-                    this.CalculateManureCarbonInputFromGrazingAnimals(cropViewItem, results.ToList());
+                    this.CalculateManureCarbonInputFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
             }
         }
 
@@ -673,12 +673,17 @@ namespace H.Core.Services.LandManagement
         /// (kg C ha^-1)
         /// </summary>
         public double CalculateManureCarbonInputFromGrazingAnimals(
+            FieldSystemComponent fieldSystemComponent,
             CropViewItem cropViewItem,
             List<AnimalComponentEmissionsResults> results)
         {
             var result = 0d;
 
-            foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+            var grazingViewItems = fieldSystemComponent.CropViewItems.Where(y => y.CropType == cropViewItem.CropType).SelectMany(x => x.GrazingViewItems).ToList();
+
+            var grazingItems = grazingViewItems.Where(x => x.Start.Year == cropViewItem.Year).ToList();
+
+            foreach (var grazingViewItem in grazingItems)
             {
                 var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem).ToList();
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals.ToList())

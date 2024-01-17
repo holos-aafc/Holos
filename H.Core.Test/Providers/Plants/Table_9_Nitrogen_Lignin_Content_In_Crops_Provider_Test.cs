@@ -80,6 +80,13 @@ namespace H.Core.Test.Providers.Plants
             Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = _provider.GetDataByCropType(CropType.WhiteBeans);
             Assert.AreEqual(0.279, data.InterceptValue);
         }
+
+        [TestMethod]
+        public void GetBiomethaneData()
+        {
+            var data = _provider.GetAllCrops();
+        }
+
         #endregion
     }
 }

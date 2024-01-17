@@ -350,7 +350,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(6.07, ammoniaLoss, 2);
 
             var n2oNFromManureVolatilized =
-                _sut.CalculateAmmoniaEmissionsFromImportedManureForField(farm, viewItem, viewItem.Year)
+                _sut.CalculateAmmoniaEmissionsFromVolatilizationOfImportedManureForField(farm, viewItem, viewItem.Year)
                     .Sum(x => x.Value);
             Assert.AreEqual(5, n2oNFromManureVolatilized, 2);
 
@@ -373,7 +373,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var totalIndirectEmissions =
                 _sut.CalculateTotalIndirectEmissionsFromManureForField(farm, viewItem, viewItem.Year);
-            Assert.AreEqual(14.84 + 5, totalIndirectEmissions, 2);
+            Assert.AreEqual(15.84, totalIndirectEmissions, 2);
         }
 
         [TestMethod]
@@ -402,7 +402,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(12.14, ammoniaLoss, 2);
 
             var n2oNFromManureVolatilized =
-                _sut.CalculateAmmoniaEmissionsFromImportedManureForField(farm, viewItem, viewItem.Year)
+                _sut.CalculateAmmoniaEmissionsFromVolatilizationOfImportedManureForField(farm, viewItem, viewItem.Year)
                     .Sum(x => x.Value);
             Assert.AreEqual(10, n2oNFromManureVolatilized, 2);
 
@@ -425,7 +425,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var totalIndirectEmissions =
                 _sut.CalculateTotalIndirectEmissionsFromManureForField(farm, viewItem, viewItem.Year);
-            Assert.AreEqual(39.67, totalIndirectEmissions, 2);
+            Assert.AreEqual(31.67, totalIndirectEmissions, 2);
         }
 
         [TestMethod]
@@ -549,7 +549,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             _mockManureService.Setup(x => x.GetManureTypesImported(It.IsAny<Farm>(), It.IsAny<int>())).Returns(new List<AnimalType>() { AnimalType.Dairy });
             _mockManureService.Setup(x => x.GetTotalNitrogenFromManureImports(It.IsAny<int>(), It.IsAny<Farm>(), It.IsAny<AnimalType>())).Returns(100);
 
-            var result = _sut.CalculateAmmoniaEmissionsFromImportedManureForField(
+            var result = _sut.CalculateAmmoniaEmissionsFromVolatilizationOfImportedManureForField(
                 farm: farm,
                 cropViewItem: cropViewItem,
                 DateTime.Now.Year);

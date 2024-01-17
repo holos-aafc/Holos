@@ -79,7 +79,15 @@ namespace H.Core.Models
         private bool _denitrificationForArea;
 
         private bool _totalDirectNitrousOxidePerHectare;
+        private bool _totalDirectNitrousOxidePerHectareExcludingRemainingAmounts;
         private bool _totalIndirectNitrousOxidePerHectare;
+        private bool _totalIndirectNitrousOxidePerHectareExcludingRemainingAmounts;
+
+        private bool _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts;
+        private bool _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts;
+
+        private bool _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining;
+        private bool _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea;
 
         #endregion
 
@@ -92,9 +100,10 @@ namespace H.Core.Models
         #endregion
 
         #region Public Methods
+
         public void DefaultVisibility()
         {
-            //remove current selections
+            // Remove current selections
             base.SetAllColumnsInvisible();
 
             this.Name = true;
@@ -108,11 +117,22 @@ namespace H.Core.Models
             this.ChangeInCarbon = true;
 
             this.TotalDirectNitrousOxidePerHectare = true;
+            this.TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
+
             this.TotalIndirectNitrousOxidePerHectare = true;
+            this.TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
+
+            this.DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts = true;
+            this.TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts = true;
+            this.IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining = true;
+
+            this.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea = true;
         }
+
         #endregion
 
         #region Properties
+
         public bool Name
         {
             get { return _name; }
@@ -379,6 +399,12 @@ namespace H.Core.Models
             get { return _directNitrousOxideEmissionsFromOrganicNitrogenForArea; }
             set { SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForArea, value); }
         }
+
+        public bool DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts
+        {
+            get { return _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts, value); }
+        }
         public bool IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea
         {
             get { return _indirectNitrousOxideEmissionsFromSyntheticNitrogenForArea; }
@@ -399,15 +425,35 @@ namespace H.Core.Models
             get { return _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea; }
             set { SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea, value); }
         }
+
+        public bool IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining
+        {
+            get { return _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining, value); }
+        }
+
         public bool IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea
         {
             get { return _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea; }
             set { SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, value); }
         }
+
+        public bool IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea
+        {
+            get { return _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea, value); }
+        }
+
         public bool TotalIndirectNitrousOxideForArea
         {
             get { return _totalIndirectNitrousOxideForArea; }
             set { SetProperty(ref _totalIndirectNitrousOxideForArea, value); }
+        }
+
+        public bool TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts
+        {
+            get { return _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts; }
+            set { SetProperty(ref _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts, value); }
         }
         public bool TotalNitricOxideForArea
         {
@@ -454,10 +500,22 @@ namespace H.Core.Models
             set => SetProperty(ref _totalDirectNitrousOxidePerHectare, value);
         }
 
+        public bool TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts
+        {
+            get => _totalDirectNitrousOxidePerHectareExcludingRemainingAmounts;
+            set => SetProperty(ref _totalDirectNitrousOxidePerHectareExcludingRemainingAmounts, value);
+        }
+
         public bool TotalIndirectNitrousOxidePerHectare
         {
             get => _totalIndirectNitrousOxidePerHectare;
             set => SetProperty(ref _totalIndirectNitrousOxidePerHectare, value);
+        }
+
+        public bool TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts
+        {
+            get => _totalIndirectNitrousOxidePerHectareExcludingRemainingAmounts;
+            set => SetProperty(ref _totalIndirectNitrousOxidePerHectareExcludingRemainingAmounts, value);
         }
 
         public bool DigestateCarbonInput

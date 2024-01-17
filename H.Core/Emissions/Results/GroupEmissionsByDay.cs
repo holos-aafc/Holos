@@ -531,7 +531,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.1-5
         ///
         /// (kg C head^-1 day^-1)
         /// </summary>
@@ -829,9 +828,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-6
-        /// Equation 4.3.1-11
-        ///
+        /// Equation 4.3.1-8
         /// (unitless)
         /// </summary>
         public double AmbientAirTemperatureAdjustmentForHousing
@@ -841,6 +838,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.3.1-9
         /// (kg NH3-N (kg TAN)^-1)
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForHousing
@@ -850,8 +848,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-8
-        ///
+        /// Equation 4.3.1-10
+        /// Equation 4.3.1-14
         /// (kg NH3-N head^-1 day^-1)
         /// </summary>
         public double AmmoniaEmissionRateFromHousing
@@ -861,8 +859,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-9
-        ///
+        /// Equation 4.3.1-11
+        /// Equation 4.3.1-15
         /// (kg NH3-N)
         /// </summary>
         public double AmmoniaConcentrationInHousing
@@ -872,7 +870,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-10
         ///
         /// (kg NH3)
         /// </summary>
@@ -1267,7 +1264,6 @@ namespace H.Core.Emissions.Results
         /// Equation 4.2.1-14
         /// Equation 4.2.1-20
         /// Equation 4.2.1-23
-        /// Equation 4.2.1-20
         /// Equation 4.2.1-23
         ///
         /// (kg head^-1 day^-1)
