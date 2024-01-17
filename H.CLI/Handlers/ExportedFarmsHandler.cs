@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using H.CLI.ComponentKeys;
+﻿using H.CLI.ComponentKeys;
 using H.CLI.Converters;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Processors;
@@ -14,16 +6,18 @@ using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
 using H.Core;
 using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Climate;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Calculators.Tillage;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
-using H.Views.Shared;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace H.CLI.Handlers
 {
@@ -48,7 +42,7 @@ namespace H.CLI.Handlers
 
         private readonly FieldResultsService _fieldResultsService;
 
-        public string pathToExportedFarm = string.Empty; 
+        public string pathToExportedFarm = string.Empty;
 
         #endregion
 
@@ -139,8 +133,9 @@ namespace H.CLI.Handlers
             }
 
             // If using input file
-            if (argValues.FileName != string.Empty) {
-            // Check files for input farm
+            if (argValues.FileName != string.Empty)
+            {
+                // Check files for input farm
                 foreach (var file in files)
                 {
                     if (argValues.FileName == Path.GetFileName(file))
@@ -407,7 +402,7 @@ namespace H.CLI.Handlers
             return createdFiles;
         }
 
-        public void CopyUserSettingsFile(string pathToFarmsDirectory, CLIArguments argValues,  string farmDirectoryPath, Farm farm)
+        public void CopyUserSettingsFile(string pathToFarmsDirectory, CLIArguments argValues, string farmDirectoryPath, Farm farm)
         {
             bool isSettingsFileFound = false;
             var files = Directory.GetFiles(pathToFarmsDirectory);

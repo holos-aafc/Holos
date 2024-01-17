@@ -1,20 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using H.Core.Calculators.Nitrogen;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using H.CLI.TemporaryComponentStorage;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Emissions.Results;
-using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
-using H.Core.Providers.Animals;
-using H.Views.ComponentViews.LandManagement.FieldSystem.Controls;
-using Moq;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
-using H.Core.Calculators.Carbon;
-using H.Core.Providers.Climate;
-using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
@@ -46,7 +40,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
 
 
-            
+
 
             _sut = n2oEmissionFactorCalculator;
             _sut.ManureService = base._mockManureServiceObject;
@@ -61,7 +55,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             _mockManureService.Setup(x => x.GetAmountOfTanUsedDuringLandApplication(It.IsAny<CropViewItem>(), It.IsAny<ManureApplicationViewItem>())).Returns(25);
             _mockManureService
                 .Setup(x => x.GetTotalTanAppliedToAllFields(It.IsAny<int>(), It.IsAny<List<CropViewItem>>())).Returns(
-                    new List<Tuple<double, AnimalType>>() {new Tuple<double, AnimalType>(100, AnimalType.Beef)});
+                    new List<Tuple<double, AnimalType>>() { new Tuple<double, AnimalType>(100, AnimalType.Beef) });
 
             _mockManureService.Setup(x => x.GetManureCategoriesProducedOnFarm(It.IsAny<Farm>())).Returns(
                 new List<AnimalType>()
@@ -78,7 +72,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(8);
             _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(2);
             _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<int>())).Returns(3);
-            
+
             _emissionFactors = new Table_36_Livestock_Emission_Conversion_Factors_Data()
             {
                 VolatilizationFraction = 0.10,
@@ -333,7 +327,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var stageState = farm.GetFieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(viewItem);
             farm.StageStates.Add(stageState);
-            var field = new FieldSystemComponent() {Guid = viewItem.Guid};
+            var field = new FieldSystemComponent() { Guid = viewItem.Guid };
             viewItem.FieldSystemComponentGuid = field.Guid;
             field.CropViewItems.Add(viewItem);
             farm.Components.Add(field);
@@ -471,7 +465,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(14.83, totalNitrateLeached, 2);
 
             var totalIndirectEmissions =
-                _sut.CalculateTotalIndirectEmissionsFromDigestateForFarm(farm,  viewItem.Year);
+                _sut.CalculateTotalIndirectEmissionsFromDigestateForFarm(farm, viewItem.Year);
             Assert.AreEqual(1.87, totalIndirectEmissions, 2);
         }
 
@@ -528,7 +522,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var farm = base.GetTestFarm();
 
-            _mockManureService.Setup(x => x.GetManureTypesExported(It.IsAny<Farm>(), It.IsAny<int>())).Returns(new List<AnimalType>() {AnimalType.Beef});
+            _mockManureService.Setup(x => x.GetManureTypesExported(It.IsAny<Farm>(), It.IsAny<int>())).Returns(new List<AnimalType>() { AnimalType.Beef });
             _mockManureService.Setup(x => x.GetTotalNitrogenFromExportedManure(It.IsAny<int>(), It.IsAny<Farm>(), It.IsAny<AnimalType>())).Returns(100);
 
             var result = _sut.CalculateAmmoniaEmissionsFromExportedManureForFarmAndYear(

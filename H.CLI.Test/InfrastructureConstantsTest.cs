@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using H.CLI.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using H.CLI;
 using System.IO;
-using System.Reflection;
-using H.Views.SupportingViews.Feed;
-using H.CLI.Interfaces;
-using H.CLI.Properties;
 
 namespace H.CLI.Test
 {
@@ -39,7 +30,7 @@ namespace H.CLI.Test
             mockDriveInfo.Setup(d => d.DriveType).Returns(DriveType.Fixed);
             IDriveInfoWrapper driveInfo = mockDriveInfo.Object;
             DriveType driveType = driveInfo.DriveType;
-            
+
             bool check = InfrastructureConstants.CheckOutputDirectoryPath(givenPath, driveInfo, farmsFoldersPath);
 
             Assert.AreEqual(InfrastructureConstants.BaseOutputDirectoryPath, givenPath);
