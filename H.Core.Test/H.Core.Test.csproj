@@ -128,6 +128,7 @@
     <Compile Include="Models\LandManagement\Fields\FertilizerApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\HarvestViewItemTest.cs" />
+    <Compile Include="Models\ManureTankTest.cs" />
     <Compile Include="Models\TreeGroupDataTest.cs" />
     <Compile Include="Models\RowDataTest.cs" />
     <Compile Include="Models\ShelterbeltComponentTest.cs" />
@@ -172,7 +173,7 @@
     <Compile Include="Providers\Climate\NasaClimateProviderTest.cs" />
     <Compile Include="Providers\Climate\ClimateProviderTest.cs" />
     <Compile Include="Providers\Climate\Table_54_Global_Warming_Emissions_Potential_Provider_Test.cs" />
-    <Compile Include="Providers\Climate\Table_46_Biogas_Methane_Production_Parameters_Provider_Test.cs" />
+    <Compile Include="Providers\AnaerobicDigestion\Table_46_Biogas_Methane_Production_Parameters_Provider_Test.cs" />
     <Compile Include="Providers\Climate\IndoorTemperatureProviderTest.cs" />
     <Compile Include="Providers\Economics\CropEconomicProviderTest.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Provider_Test.cs" />

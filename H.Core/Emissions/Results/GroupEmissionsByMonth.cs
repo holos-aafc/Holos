@@ -689,6 +689,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.2.1-30
         /// (kg N)
         /// </summary>
         public double MonthlyAmountOfNitrogenExcreted
@@ -725,7 +726,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg C)
+        /// Equation 4.1.1-5 (kg C)
         /// </summary>
         public double MonthlyFecalCarbonExcretion
         {

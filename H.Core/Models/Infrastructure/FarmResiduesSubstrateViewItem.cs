@@ -13,8 +13,6 @@ namespace H.Core.Models.Infrastructure
         #region Fields
         
         private FarmResidueType _farmResidueType;
-        private DateTime _startDate;
-        private DateTime _endDate;
 
         #endregion
 
@@ -22,8 +20,6 @@ namespace H.Core.Models.Infrastructure
 
         public FarmResiduesSubstrateViewItem()
         {
-            this.StartDate = DateTime.Now;
-            this.EndDate = DateTime.Now.AddDays(1);
         }
 
         #endregion
@@ -34,18 +30,6 @@ namespace H.Core.Models.Infrastructure
         {
             get => _farmResidueType;
             set => this.SetProperty(ref _farmResidueType, value);
-        }
-
-        public DateTime StartDate
-        {
-            get => _startDate;
-            set => SetProperty(ref _startDate, value);
-        }
-
-        public DateTime EndDate
-        {
-            get => _endDate;
-            set => SetProperty(ref _endDate, value);
         }
 
         #endregion

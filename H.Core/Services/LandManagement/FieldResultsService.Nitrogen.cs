@@ -94,13 +94,13 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Calculates how much nitrogen added from manure of animals grazing on the field.
         /// </summary>
-        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            List<CropViewItem> cropViewItems)
         {
-            var animalComponentEmissionResults = this.AnimalResults;
-
             this.CalculateManureNitrogenInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
+                results: this.AnimalResults,
+                cropViewItems);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace H.Core.Services.LandManagement
         ///
         /// (kg N ha^-1)
         /// </summary>
-        public double CalculateManureNitrogenInputsFromGrazingAnimals(
+        public double CalculateManureNitrogenInputsFromGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             CropViewItem cropViewItem,
             List<AnimalComponentEmissionsResults> results)
         {
@@ -117,7 +117,12 @@ namespace H.Core.Services.LandManagement
             var totalLeaching = 0d;
             var totalN2ON = 0d;
 
-            foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+
+            var grazingViewItems = fieldSystemComponent.CropViewItems.Where(y => y.CropType == cropViewItem.CropType).SelectMany(x => x.GrazingViewItems).ToList();
+
+            var grazingItems = grazingViewItems.Where(x => x.Start.Year == cropViewItem.Year).ToList();
+
+            foreach (var grazingViewItem in grazingItems)
             {
                 var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
@@ -134,11 +139,12 @@ namespace H.Core.Services.LandManagement
             return result < 0 ? 0 : result;
         }
 
-        public void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        public void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> results, List<CropViewItem> cropViewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in cropViewItems)
             {
-                cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(cropViewItem, results.ToList());
+                cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
             }
         }
 

@@ -69,6 +69,11 @@ namespace H.Core.Providers.Soil
                 lookupCropType = CropType.TamePasture;
             }
 
+            if (cropType == CropType.GrassSilage)
+            {
+                lookupCropType = CropType.TamePasture;
+            }
+
             if (cropType == CropType.Flax)
             {
                 lookupCropType = CropType.FlaxSeed;

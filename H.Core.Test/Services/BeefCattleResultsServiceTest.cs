@@ -511,8 +511,6 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
-        /// Equation 4.3.1-4
-        /// Equation 4.3.1-5
         /// </summary>
         [TestMethod]
         public void CalculateVolumeOfSolidManureReturnsCorrectValue()

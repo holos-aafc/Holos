@@ -14,7 +14,8 @@ namespace H.Core.Models.Infrastructure
     {
         StoredManure,
         FreshManure,
-        FarmResidues
+        FarmResidues,
+        CropResidues
     }
 
     public class SubstrateFlowInformation : SubstrateViewItemBase

@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using System;
+using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
@@ -15,6 +16,18 @@ namespace H.Core.Models.Infrastructure
         private double _totalCarbon;
         private double _organicNitrogenConcentration;
         private double _tan;
+        private DateTime _startDate;
+        private DateTime _endDate;
+
+        #endregion
+
+        #region Constructors
+
+        public SubstrateViewItemBase()
+        {
+            this.StartDate = DateTime.Now;
+            this.EndDate = DateTime.Now.AddDays(1);
+        }
 
         #endregion
 
@@ -90,7 +103,19 @@ namespace H.Core.Models.Infrastructure
         {
             get => _totalCarbon;
             set => SetProperty(ref _totalCarbon, value);
-        } 
+        }
+
+        public DateTime StartDate
+        {
+            get => _startDate;
+            set => SetProperty(ref _startDate, value);
+        }
+
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set => SetProperty(ref _endDate, value);
+        }
 
         #endregion
     }

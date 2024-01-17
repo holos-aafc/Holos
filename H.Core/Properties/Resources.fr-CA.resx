@@ -169,7 +169,7 @@
     <value>Tous les digestats produits par le digesteur anaérobie sont séparés par défaut en quantités liquides et solides. Pour garder le digestat dans un état non séparé (brut), désactivez cette fonction en sélectionnant l’option « Non » ci-dessous.</value>
   </data>
   <data name="AnaerobicDigestionStepThreeText" xml:space="preserve">
-    <value>Farm residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' button</value>
+    <value>Farm and crop residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' or 'Add Crop Residue Type' button(s)</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
     <value>Tout le fumier produit par les animaux à la ferme peut être ajouté au digesteur anaérobie. Choisissez les périodes de gestion qui seront sélectionnées comme source du fumier entrant dans le digesteur. Pour sélectionner une période de gestion, cochez la case « Ajouter ». Par défaut, tout le fumier produit par jour (100 %) au cours de la période de gestion sélectionnée est ajouté au digesteur. Ce pourcentage quotidien peut être ajusté au besoin en modifiant la colonne « Fumier quotidien ajouté au digesteur ».</value>

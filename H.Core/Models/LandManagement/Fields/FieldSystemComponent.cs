@@ -402,6 +402,22 @@ namespace H.Core.Models.LandManagement.Fields
             return false;
         }
 
+        public bool HasImportedManureApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                {
+                    if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && manureApplicationViewItem.DateOfApplication.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         #endregion
 
         #region Private Methods

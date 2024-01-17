@@ -990,8 +990,6 @@ namespace H.Core.Models.LandManagement.Fields
             set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
-
-
         public double TillageFactor
         {
             get { return _tillageFactor; }

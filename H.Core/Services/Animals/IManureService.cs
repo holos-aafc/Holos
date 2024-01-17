@@ -93,14 +93,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
 
-        /// <summary>
-        /// Equation 4.6.2-14
-        /// 
-        /// Stored nitrogen (by animal manure type) available for application to land minus manure applied to fields or exported
-        ///
-        /// (kg N)
-        /// </summary>
-        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnimalType animalType);
+
 
         /// <summary>
         /// (kg)

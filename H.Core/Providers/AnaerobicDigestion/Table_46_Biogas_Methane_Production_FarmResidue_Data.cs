@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
+using H.Core.Providers.Climate;
 
-namespace H.Core.Providers.Climate
+namespace H.Core.Providers.AnaerobicDigestion
 {
     public class Table_46_Biogas_Methane_Production_FarmResidue_Data : BiogasAndMethaneProductionParametersData
     {

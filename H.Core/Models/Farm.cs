@@ -93,7 +93,7 @@ namespace H.Core.Models
 
         private ChosenClimateAcquisition _climateAcquisition;
         private Table_15_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
-        private YieldAssignmentMethod _yieldAssignmentMethod;        
+        private YieldAssignmentMethod _yieldAssignmentMethod;
 
         private List<TimeFrame> _availableTimeFrame;
         private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
@@ -557,7 +557,7 @@ namespace H.Core.Models
         /// </summary>        
         public bool HasComponentsThatRequireDetailsView()
         {
-            return this.Components.OfType<FieldSystemComponent>().Any() ;
+            return this.Components.OfType<FieldSystemComponent>().Any();
         }
 
         public double StartingSoilOrganicCarbon
@@ -650,7 +650,7 @@ namespace H.Core.Models
 
         public List<int> GetYearsWithAnimals()
         {
-            var years  = new List<int>();
+            var years = new List<int>();
 
             foreach (var animalComponentBase in this.AnimalComponents)
             {
@@ -744,7 +744,7 @@ namespace H.Core.Models
             foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
                 var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-                var manureApplications = viewItem.ManureApplicationViewItems.Where(x => x.DateOfApplication.Date.Equals(dateTime.Date) 
+                var manureApplications = viewItem.ManureApplicationViewItems.Where(x => x.DateOfApplication.Date.Equals(dateTime.Date)
                     && x.AnimalType == animalType
                     && x.ManureLocationSourceType == ManureLocationSourceType.Livestock);
 
@@ -937,7 +937,7 @@ namespace H.Core.Models
         /// <param name="animalType">The type of animal manure</param>
         /// <returns></returns>
         public IList<ManureApplicationViewItem> GetManureApplicationsForMonth(
-            MonthsAndDaysData monthsAndDaysData, 
+            MonthsAndDaysData monthsAndDaysData,
             AnimalType animalType)
         {
             var fields = this.FieldSystemComponents.ToList();
@@ -1041,6 +1041,21 @@ namespace H.Core.Models
         public IList<CropViewItem> GetCropDetailViewItems()
         {
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
+        }
+
+        public List<CropViewItem> GetCropViewItemsByYear(int year, bool includeNativeGrassland = false)
+        {
+            var result = new List<CropViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrassland))
+                {
+                    result.Add(cropViewItem);
+                }
+            }
+
+            return result;
         }
 
         public List<CropViewItem> GetCropDetailViewItemsByYear(int year, bool includeRangeland)

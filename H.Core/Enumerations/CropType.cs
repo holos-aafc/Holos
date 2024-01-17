@@ -613,5 +613,8 @@ namespace H.Core.Enumerations
         Cereals,
 
         #endregion
+
+        [LocalizedDescription("EnumGrassSilage", typeof(Resources))]
+        GrassSilage,
     }
 }

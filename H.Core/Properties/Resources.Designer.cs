@@ -151,7 +151,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default biogas and methane paramters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure or farm residue substrate types..
+        ///   Looks up a localized string similar to The default biogas and methane parameters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure, crop, or farm residue substrate types..
         /// </summary>
         public static string AnaerobicDigestionStepOneInfo {
             get {
@@ -169,7 +169,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Farm residues can be added to the anaerobic digestor by clicking the &apos;Add Farm Residue Type&apos; button.
+        ///   Looks up a localized string similar to Farm and crop residues can be added to the anaerobic digestor by clicking the &apos;Add Farm Residue Type&apos; or &apos;Add Crop Residue Type&apos; button(s).
         /// </summary>
         public static string AnaerobicDigestionStepThreeText {
             get {
@@ -516,6 +516,15 @@ namespace H.Core.Properties {
         public static string BushelsPerAcre {
             get {
                 return ResourceManager.GetString("BushelsPerAcre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Crop Residue Substrate Type.
+        /// </summary>
+        public static string ButtonAddCropResidueSubstrateTypes {
+            get {
+                return ResourceManager.GetString("ButtonAddCropResidueSubstrateTypes", resourceCulture);
             }
         }
         
@@ -9106,6 +9115,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N2O-N from Organic Nitrogen (Excluding Any Manure Not Applied N2O-N_ONdirect).
+        /// </summary>
+        public static string LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts {
+            get {
+                return ResourceManager.GetString("LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N2O-N from Synthetic Nitrogen (N2O-N_SNdirect).
         /// </summary>
         public static string LabelDirectNitrousOxideEmissionsFromSyntheticN {
@@ -9723,6 +9741,33 @@ namespace H.Core.Properties {
         public static string LabelIndirectNitrousOxideFromOrganicNLeaching {
             get {
                 return ResourceManager.GetString("LabelIndirectNitrousOxideFromOrganicNLeaching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N2O-N from Organic Nitrogen Leaching (Excluding Any Manure Not Applied N2O-N_ONleach).
+        /// </summary>
+        public static string LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining {
+            get {
+                return ResourceManager.GetString("LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N2O-N from Organic Nitrogen Volatilization (N2O-N_ONvolatilization).
+        /// </summary>
+        public static string LabelIndirectNitrousOxideFromOrganicNVolatilization {
+            get {
+                return ResourceManager.GetString("LabelIndirectNitrousOxideFromOrganicNVolatilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N2O-N from Organic Nitrogen Volatilization (Excluding Any Manure Not Applied N2O-N_ONvolatilization).
+        /// </summary>
+        public static string LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts {
+            get {
+                return ResourceManager.GetString("LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts", resourceCulture);
             }
         }
         
@@ -11401,6 +11446,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N2O Direct (Excluding Any Manure Not Applied).
+        /// </summary>
+        public static string LabelTotalDirectN2OExcludingRemainingAmounts {
+            get {
+                return ResourceManager.GetString("LabelTotalDirectN2OExcludingRemainingAmounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N2O-N_direct.
         /// </summary>
         public static string LabelTotalDirectNitrousOxide {
@@ -11419,11 +11473,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N2O Indirect (Excluding Any Manure Not Applied).
+        /// </summary>
+        public static string LabelTotalIndirectN2OExcludingRemainingAmounts {
+            get {
+                return ResourceManager.GetString("LabelTotalIndirectN2OExcludingRemainingAmounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N2O-N_indirect.
         /// </summary>
         public static string LabelTotalIndirectNitrousOxide {
             get {
                 return ResourceManager.GetString("LabelTotalIndirectNitrousOxide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N2O-N_indirect (Excluding Any Manure Not Applied).
+        /// </summary>
+        public static string LabelTotalIndirectNitrousOxideExcludingRemainingAmounts {
+            get {
+                return ResourceManager.GetString("LabelTotalIndirectNitrousOxideExcludingRemainingAmounts", resourceCulture);
             }
         }
         

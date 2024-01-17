@@ -4,6 +4,7 @@ using H.Core.Models.Animals.Beef;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models.Animals.Dairy;
@@ -218,6 +219,16 @@ namespace H.Core.Test
             return results;
         }
 
+        public GroupEmissionsByDay GetGroupEmissionsByDay()
+        {
+            return  new GroupEmissionsByDay()
+            {
+                AdjustedAmountOfTanInStoredManureOnDay = 100,
+                OrganicNitrogenCreatedOnDay = 50,
+                TotalVolumeOfManureAvailableForLandApplication = 100,
+            };
+        }
+
         public AnimalComponentEmissionsResults GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults()
         {
             var results = new AnimalComponentEmissionsResults();
@@ -233,14 +244,7 @@ namespace H.Core.Test
 
             managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
 
-            var groupEmissionsByDay = new GroupEmissionsByDay()
-            {
-                AdjustedAmountOfTanInStoredManureOnDay = 100,
-                OrganicNitrogenCreatedOnDay = 50,
-                TotalVolumeOfManureAvailableForLandApplication = 100,
-            };
-
-            var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { groupEmissionsByDay });
+            var groupEmissionsByMonth = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay>() { this.GetGroupEmissionsByDay() });
 
             var animalGroupResults = new AnimalGroupEmissionResults();
             animalGroupResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>() { groupEmissionsByMonth };

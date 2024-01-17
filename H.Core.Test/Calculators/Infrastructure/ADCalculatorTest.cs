@@ -14,7 +14,7 @@ using H.Core.Providers.Climate;
 namespace H.Core.Test.Calculators.Infrastructure
 {
     [TestClass]
-    public class ADCalculatorTest
+    public class ADCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -169,7 +169,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         #region Tests
 
         [TestMethod]
-        public void CombineSubstrateFlowsOfSameTypeOnSameDayReturnsCorectNumberOfItems()
+        public void CombineSubstrateFlowsOfSameTypeOnSameDayReturnsCorrectNumberOfItems()
         {
             var substrateFlows = new List<SubstrateFlowInformation>()
             {
@@ -223,7 +223,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue1.EndDate = DateTime.Now.AddDays(3);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
 
-            var results = _sut.GetDailyFarmResidueFlowRates_NEW( _component);
+            var results = _sut.GetDailyFarmResidueFlowRates( _component);
 
             Assert.AreEqual(3, results.Count);
         }
@@ -274,7 +274,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue2.EndDate = DateTime.Now.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
-            var flows = _sut.GetDailyFarmResidueFlowRates_NEW(_component);
+            var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
             Assert.AreEqual(2, flows.Count);
         }
@@ -308,7 +308,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue2.EndDate = DateTime.Now.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
-            var flows = _sut.GetDailyFarmResidueFlowRates_NEW(_component);
+            var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
             Assert.AreEqual(2, flows.Count);
 
@@ -320,6 +320,17 @@ namespace H.Core.Test.Calculators.Infrastructure
         public void GetAmountOfNitrogenInFieldApplicationTest()
         {
 
+        }
+
+        [TestMethod]
+        public void GetDailyCropResidueFlowRatesTestReturnsNonEmptyList()
+        {
+            var adComponent = new AnaerobicDigestionComponent();
+            adComponent.AnaerobicDigestionViewItem.CropResiduesSubstrateViewItems.Add(new CropResidueSubstrateViewItem());
+
+            var result = _sut.GetDailyCropResidueFlowRates(adComponent);
+
+            Assert.AreEqual(1, result.Count);
         }
 
         #endregion

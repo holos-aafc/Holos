@@ -379,7 +379,15 @@ namespace H.Core.Services.Animals
                 totalNitrogen = tank.NitrogenFromRawDigestate;
             }
 
-            return totalNitrogen;
+            if (totalNitrogen >= 0)
+            {
+                return totalNitrogen;
+            }
+            else
+            {
+                return 0;
+            }
+
         }
 
         public double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state)

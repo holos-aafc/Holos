@@ -4806,7 +4806,7 @@
     <value>Add Manure Substrate Type</value>
   </data>
   <data name="AnaerobicDigestionStepOneInfo" xml:space="preserve">
-    <value>The default biogas and methane paramters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure or farm residue substrate types.</value>
+    <value>The default biogas and methane parameters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure, crop, or farm residue substrate types.</value>
   </data>
   <data name="LabelAnimalType" xml:space="preserve">
     <value>Animal Type</value>
@@ -5514,7 +5514,7 @@
     <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.</value>
   </data>
   <data name="AnaerobicDigestionStepThreeText" xml:space="preserve">
-    <value>Farm residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' button</value>
+    <value>Farm and crop residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' or 'Add Crop Residue Type' button(s)</value>
   </data>
   <data name="EnumElectricity" xml:space="preserve">
     <value>Electricity production</value>
@@ -5711,5 +5711,29 @@ Daily emissions estimates are multipled by the total number of production days i
   </data>
   <data name="LabelP2O5" xml:space="preserve">
     <value>P2O5</value>
+  </data>
+  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O Direct (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen (Excluding Any Manure Not Applied N2O-N_ONdirect)</value>
+  </data>
+  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O Indirect (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Leaching (Excluding Any Manure Not Applied N2O-N_ONleach)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Volatilization (N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Volatilization (Excluding Any Manure Not Applied N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N_indirect (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
+    <value>Add Crop Residue Substrate Type</value>
   </data>
 </root>

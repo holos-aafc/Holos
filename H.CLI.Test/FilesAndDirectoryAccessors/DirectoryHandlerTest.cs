@@ -1,17 +1,9 @@
 ﻿using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.UserInput;
-using H.Core.Providers;
-using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Abstractions;
-using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace H.CLI.Test.FilesAndDirectoryAccessors
 {
@@ -100,8 +92,8 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             string portablePath = Directory.GetCurrentDirectory();
             string testFarmFolder = portablePath + @"\TestFarmFolder";
             string testFarm = @"\TestFarm";
-            string testFarm2 =  @"\TestFarm2";
-     
+            string testFarm2 = @"\TestFarm2";
+
             Directory.CreateDirectory(testFarmFolder);
             Directory.CreateDirectory(testFarmFolder + testFarm);
             Directory.CreateDirectory(testFarmFolder + testFarm2);
@@ -109,7 +101,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, testFarm, null);
             Assert.AreEqual(returnedListOfFarms[0], testFarmFolder + testFarm);
             Assert.AreEqual(returnedListOfFarms[1], testFarmFolder + testFarm2);
-            
+
             Directory.Delete(testFarmFolder, true); // Delete after test
         }
 

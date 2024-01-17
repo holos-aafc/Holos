@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Models.LandManagement.Fields
 {
@@ -12,6 +13,8 @@ namespace H.Core.Models.LandManagement.Fields
         private ObservableCollection<DigestateApplicationViewItem> _digestateApplicationViewItems;
 
         private double _digestateCarbonInputsPerHectare;
+
+        private BiogasAndMethaneProductionParametersData _biogasAndMethaneProductionParametersData;
 
         #endregion
 
@@ -36,6 +39,12 @@ namespace H.Core.Models.LandManagement.Fields
 
         public bool HasDigestateApplications { get; set; }
 
+        public BiogasAndMethaneProductionParametersData BiogasAndMethaneProductionParametersData
+        {
+            get => _biogasAndMethaneProductionParametersData;
+            set => SetProperty(ref _biogasAndMethaneProductionParametersData, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -48,8 +57,15 @@ namespace H.Core.Models.LandManagement.Fields
                 // All digestate view items have the amount of digestate remaining at end of year when detail view items are created. Since all items from
                 // the same year will have the same value for amount remaining, we return the amount from the first item.
                 var firstItem = itemsByYear.First();
-
-                return firstItem.AmountOfNitrogenRemainingAtEndOfYear;
+                var amount = itemsByYear.First().AmountOfNitrogenRemainingAtEndOfYear;
+                if (amount >= 0)
+                {
+                    return amount;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {

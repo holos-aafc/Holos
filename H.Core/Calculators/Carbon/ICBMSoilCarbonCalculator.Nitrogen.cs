@@ -75,7 +75,6 @@ namespace H.Core.Calculators.Carbon
 
             // Need to ensure we are passing in 100% of returns since the N uptake is before the harvest
 
-            // Equation 2.6.7-12
             base.CropNitrogenDemand = this.CalculateCropNitrogenDemand(
                 carbonInputFromProduct: currentYearResults.PlantCarbonInAgriculturalProduct,
                 carbonInputFromStraw: currentYearResults.CarbonInputFromStraw,

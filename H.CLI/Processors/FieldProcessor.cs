@@ -1,26 +1,16 @@
-﻿using System;
-using H.CLI.Interfaces;
+﻿using H.CLI.Interfaces;
 using H.CLI.UserInput;
-using Prism.Events;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using H.CLI.FileAndDirectoryAccessors;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
-using H.Core.Services;
-using H.Core.Services.LandManagement;
-using H.Core.Calculators.Economics;
-using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
+using H.Core.Services.LandManagement;
 using H.Infrastructure;
-using System.Text.RegularExpressions;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace H.CLI.Processors
 {
@@ -28,14 +18,14 @@ namespace H.CLI.Processors
     {
         #region Fields
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
-        private readonly FieldResultsService _fieldResultsService;
+        private readonly IFieldResultsService _fieldResultsService;
         private AnimalResultsService _animalService;
 
         #endregion
 
         #region Constructors
 
-        public FieldProcessor(FieldResultsService fieldResultsService)
+        public FieldProcessor(IFieldResultsService fieldResultsService)
         {
             if (fieldResultsService != null)
             {
