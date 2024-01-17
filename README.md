@@ -24,7 +24,7 @@ To see answers to the most frequently asked questions about Holos (both the soft
 
 A review version of the Holos version 4.0 algorithm document is being made available for comment, review, and feedback.
 
-The Holos version 4.0 can be found at the following link:
+The Holos version 4.0 algorithm document can be found at the following link:
 
 <a href="[https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md](https://github.com/holos-aafc/Holos/raw/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION.docx)" target="_blank">https://github.com/holos-aafc/Holos/raw/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION.docx</a>
 
