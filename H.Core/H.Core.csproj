@@ -355,7 +355,8 @@
     <Compile Include="Providers\Animals\Table 70\Table_62_Volatilization_Fractions_From_Land_Applied_Swine_Manure_Provider.cs" />
     <Compile Include="Providers\Climate\IClimateProvider.cs" />
     <Compile Include="Providers\Climate\IIndoorTemperatureProvider.cs" />
-    <Compile Include="Providers\Climate\IndoorTemperatureProvider.cs" />
+    <Compile Include="Providers\Climate\IndoorTemperatureData.cs" />
+    <Compile Include="Providers\Climate\Table_63_Indoor_Temperature_Provider.cs" />
     <Compile Include="Providers\Economics\BeefCattleFeedCostData.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Data.cs" />
     <Compile Include="Providers\Economics\Beef_Cattle_Winter_Feed_Cost_Provider.cs" />

@@ -850,6 +850,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Equation 4.3.1-10
         /// Equation 4.3.1-14
+        /// Equation 4.3.3-5
         /// (kg NH3-N head^-1 day^-1)
         /// </summary>
         public double AmmoniaEmissionRateFromHousing
@@ -861,6 +862,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Equation 4.3.1-11
         /// Equation 4.3.1-15
+        /// Equation 4.3.3-6
         /// (kg NH3-N)
         /// </summary>
         public double AmmoniaConcentrationInHousing

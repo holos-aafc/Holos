@@ -363,6 +363,9 @@ namespace H.Content
 
                 case CsvResourceNames.UpdatedSmallAreaYields:
                     return SplitFileIntoLines(Resource.small_area_yields_updated_data);
+
+                case CsvResourceNames.IndoorBarnTemperatures:
+                    return SplitFileIntoLines(Resource.Table_63_Indoor_Barn_Temperatures);
                 default:
                     return null;
             }

@@ -1,6 +1,7 @@
 ﻿using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using H.Core.Enumerations;
 
 namespace H.Core.Test.Providers.Climate
 {
@@ -9,7 +10,7 @@ namespace H.Core.Test.Providers.Climate
     {
         #region Fields
 
-        private IIndoorTemperatureProvider _provider;
+        private Table_63_Indoor_Temperature_Provider _sut;
 
         #endregion
 
@@ -28,7 +29,7 @@ namespace H.Core.Test.Providers.Climate
         [TestInitialize]
         public void TestInitialize()
         {
-            _provider = new IndoorTemperatureProvider();
+            _sut = new Table_63_Indoor_Temperature_Provider();
         }
 
         [TestCleanup]
@@ -43,10 +44,26 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void GetTemperatureReturnsCorrectValue()
         {
-            var result = _provider.GetTemperature(new DateTime(DateTime.Now.Year, 2, 1));
+            var result = _sut.GetTemperature(new DateTime(DateTime.Now.Year, 2, 1));
 
             Assert.AreEqual(17, result);
-        } 
+        }
+
+        [TestMethod]
+        public void ReadFileTest()
+        {
+            var result = _sut.ReadFile();
+
+            Assert.AreEqual(10, result.Count);
+        }
+
+        [TestMethod]
+        public void GetDataTest()
+        {
+            var result = _sut.GetIndoorTemperature(Province.Quebec);
+
+            Assert.AreEqual(18.17, result.September, 2);
+        }
 
         #endregion
     }

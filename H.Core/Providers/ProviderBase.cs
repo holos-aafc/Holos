@@ -21,9 +21,23 @@ namespace H.Core.Providers
 
             var culture = InfrastructureConstants.EnglishCultureInfo;
 
-            var d = double.Parse(value, culture);
+            var result = double.Parse(value, culture);
 
-            return d;
+            return result;
+        }
+
+        public int ParseInt(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return 0;
+            }
+
+            var culture = InfrastructureConstants.EnglishCultureInfo;
+
+            var result = int.Parse(value, culture);
+
+            return result;
         }
 
         #endregion

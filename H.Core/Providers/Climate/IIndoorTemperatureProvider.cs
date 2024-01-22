@@ -6,5 +6,6 @@ namespace H.Core.Providers.Climate
     public interface IIndoorTemperatureProvider
     {
         double GetTemperature(DateTime dateTime);
+        IndoorTemperatureData GetIndoorTemperature(Province province);
     }
 }

@@ -3200,7 +3200,7 @@
     <value>Flow rate (ON)</value>
   </data>
   <data name="LabelFlowRateTAN" xml:space="preserve">
-    <value>Fow rate (TAN)</value>
+    <value>Flow rate (TAN)</value>
   </data>
   <data name="LabelFlowRateTotalSolids" xml:space="preserve">
     <value>Flow rate (total solids)</value>

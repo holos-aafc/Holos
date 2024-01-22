@@ -9403,7 +9403,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fow rate (TAN).
+        ///   Looks up a localized string similar to Flow rate (TAN).
         /// </summary>
         public static string LabelFlowRateTAN {
             get {

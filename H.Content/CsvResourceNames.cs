@@ -159,6 +159,7 @@
 
         AnimalSystemProductionDays,
 
-        UpdatedSmallAreaYields
+        UpdatedSmallAreaYields,
+        IndoorBarnTemperatures,
     }
 }

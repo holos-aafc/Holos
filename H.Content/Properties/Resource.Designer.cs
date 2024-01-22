@@ -1208,9 +1208,9 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to OBJECTID,Year,Province,POLY_ID,POLYID_YEAR,BARLEY,CANARYSEED,CANOLA,CHICKPEAS,GRAINCORN,DRYPEAS,DURUMWHEAT,FALLRYE,FLAXSEED,LENTILS,MUSTARDSEED,OATS,RYE,SOYBEANS,SPRINGRYE,SPRINGWHEAT,SUNFLOWERSEED,TRITICALE,WHEAT,WINTERWHEAT
-        ///1,1976,AB,,Small Area Data Region 10 - Alberta,2300,,,,,,1900,,1000,,,1900,,,,1900,,,1900,2300
-        ///2,1977,AB,,Small Area Data Region 10 - Alberta,1700,,,,,,1100,,800,,,1000,,,,1100,,,1100,1600
-        ///3,1978,AB,,Small Area Data Region 10 - Alberta,2100,,900,,,,1700,,1300,,,1400,,,,1600,,,1600,2 [rest of string was truncated]&quot;;.
+        ///1,1976,AB,538001,Small Area Data Region 10 - Alberta,2300,,,,,,1900,,1000,,,1900,,,,1900,,,1900,2300
+        ///2,1977,AB,538001,Small Area Data Region 10 - Alberta,1700,,,,,,1100,,800,,,1000,,,,1100,,,1100,1600
+        ///3,1978,AB,538001,Small Area Data Region 10 - Alberta,2100,,900,,,,1700,,1300,,,140 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string small_area_yields_updated_data {
             get {
@@ -1684,20 +1684,18 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subtrate Type,Bedding Type,Biomethane potential (Nm^3 ton^-1 VS),f_CH4 Fraction of methane in biogas,Volatile Solids(% TS),TS (kg t^-1)^3,TN Substrate (KG N t^-1)^5
-        ///Manure,,,,,,
-        ///Beef,None,308,0.6,0,0,0
-        ///Dairy,None,243,0.6,0,0,0
-        ///Goat,None,112,0.6,0,0,0
-        ///Horse,None,284,0.6,0,0,0
-        ///Horse,Straw,191,0.6,0,0,0
-        ///Swine,None,246,0.65,0,0,0
-        ///Chicken,None,244,0.54,0,0,0
-        ///Turkey,None,288,0.65,0,0,0
+        ///   Looks up a localized string similar to Subtrate Type,Bedding Type,Biomethane potential (Nm^3 ton^-1 VS) (1),f_CH4 Fraction of methane in biogas,Volatile Solids(% TS),TS (kg t^-1) (2),TN Substrate (KG N t^-1)^5
+        ///Manure,Data source (3),,,,,,
+        ///Beef,None,308,0.6,0,0,0,&quot;A,B&quot;
+        ///Dairy,None,243,0.6,0,0,0,C
+        ///Goat (4),None,112,0.6,0,0,0,D
+        ///Horse,None,284,0.6,0,0,0,&quot;A,D&quot;
+        ///Horse (4),Straw,191,0.6,0,0,0,E
+        ///Swine,None,246,0.65,0,0,0,&quot;A,I&quot;
+        ///Chicken,None,244,0.54,0,0,0,&quot;A,G&quot;
+        ///Turkey,None,288,0.65,0,0,0,A
         ///Farm residues,,,,,,
-        ///Barley straw,,267,0.44,90,880,6.1
-        ///Corn silage,,304,0.45,95,640,13
-        ///Corn stover,,427,0.54,88,850,5 [rest of string was truncated]&quot;;.
+        ///Paddy straw (4),,470,0.6,90,940,6.5, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
             get {
@@ -1907,10 +1905,31 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Group,Crop,Growing season precip + irrigation (mm),Moisture content of product (% w/w),&quot;Soil Organic C
-        ///(SOC)&quot;,SOC units,&quot;Bulk density
-        ///(BD)&quot;,BD units,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,,References,,Fertilization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Tillage ,,,,,,,,,,,Irrigation ,,,,,,,,,,,Pesticide ,,,,,,,,,,Lignin Content
-        ///,,,,,,,,,,,,,,,,,,,,Nitrogen rates (kg ha-1) calculate as Fert amount = cropNuptake / FertUseEfficiency (0.5) - SoilNsupply (if user indicates use of Soil [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to AVERAGE MONTHLY INDOOR BARN TEMPERATURES SUMMARY (OC),,,,
+        ///,,,,
+        ///Month,PRAIRIES,ONT,QB,COASTAL
+        ///Jan ,2.767742149,4.244800107,12.53970509,6.201752804
+        ///Feb,2.376671756,4.204597305,12.35603299,6.552435083
+        ///Mar,4.950975575,7.458748373,13.4045558,6.918192633
+        ///Apr,7.786454463,10.93424092,14.88614377,9.242312884
+        ///May,12.21275064,15.07116995,17.19358786,12.96939757
+        ///Jun,17.70633217,21.242531,20.77108073,19.1135931
+        ///Jul,19.00274808,21.55479818,20.61752835,21.3558599
+        ///Aug,17.92325531,22.72447713,21.53815748,21.582944 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Table_63_Indoor_Barn_Temperatures {
+            get {
+                return ResourceManager.GetString("Table_63_Indoor_Barn_Temperatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group,Crop,,Moisture content of product (% w/w),,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,References,,Lignin Content,Biomethane potential (Nm^3 ton^-1 VS) for straw/silage,f_CH4 Fraction of methane in biogas,Volatile Solids (% TS),TS (kg t^-1)^3,TN Substrate (Kg N t^-1)^5
+        ///,,,,,,,,,,,,,,,,,,,,,
+        ///,,,,,Rp Product,Rs Straw,Rr Root,Re Extra-root,,,Np Product,Ns Straw,Nr Root / Ne Extra-root,,,,,,,,
+        ///,,,,,,,,,,,,,,,,,,,,,
+        ///,,,,,,,,,,,,,,,,,,,,,
+        ///,Summerfallow,,0,,0,0,0,0,,,0,0,0,Janz [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_7_Relative_Biomass_Information {
             get {
@@ -1934,17 +1953,12 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Group,Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %
+        ///   Looks up a localized string similar to Group,Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %,Biomethane potential (Nm^3 ton^-1 VS) for straw/silage,f_CH4 Fraction of methane in biogas,Volatile Solids (% TS),TS (kg t^-1)^3,TN Substrate (Kg N t^-1)^5
         ///,Summerfallow,0,0,0,0,0,0
         ///,,,,,,,
         ///Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12
-        ///,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12
-        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12
-        ///,Oats,0.357 (3),0.029 (3),0.419,0.0073,0.047,12
-        ///,Triticale,0.344,0.015,0.229,0.007,0.053,12
-        ///,Sorghum (4),-9,-9,-9,0.0065,0.06,0
-        ///,Canary Seed,0.171,0.11,0.193,0.008,0.073,8
-        ///,Buckwheat,0 [rest of string was truncated]&quot;;.
+        ///,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,162,0.6,90,880,7.8
+        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12,267,0.44,90,88 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops {
             get {

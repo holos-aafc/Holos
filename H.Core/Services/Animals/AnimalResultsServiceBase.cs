@@ -28,7 +28,7 @@ namespace H.Core.Services.Animals
 
         private static readonly DietProvider _dietProvider;
 
-        protected readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new IndoorTemperatureProvider();
+        protected readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new Table_63_Indoor_Temperature_Provider();
 
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
             new Table_49_Electricity_Conversion_Defaults_Provider();
@@ -1292,7 +1292,8 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.1-7
-        ///
+        /// Equation 4.3.3-4
+        /// Equation 4.3.4-5
         /// Total amount of N added from feces, urine, and bedding material
         /// </summary>
         /// <param name="totalNitrogenExcretedThroughFeces">Total nitrogen excreted through feces (kg N animal^-1 day^-1)</param>
@@ -1394,6 +1395,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.1-10
         /// Equation 4.3.1-14
+        /// Equation 4.3.3-5
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical Nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="adjustedEmissionFactor">Adjusted ammonia emission factor</param>
@@ -1408,6 +1410,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.1-11
         /// Equation 4.3.1-15
+        /// Equation 4.3.3-6
         /// </summary>
         /// <param name="emissionRate">Ammonia nitrogen emission rate from housing of animals (kg NH3 head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -1496,7 +1499,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.2-6
-        /// Equation 4.3.3-10
+        /// Equation 4.3.3-9
         /// </summary>
         /// <param name="ambientTemperatureAdjustmentStorage">Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</param>
         /// <param name="ammoniaEmissionFactorStorage">Default ammonia emission factor for manure stores (deep bedding, solid storage/stockpile, compost (passive, active))</param>
@@ -1641,7 +1644,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.6-1
+        /// Equation 4.3.7-1
         /// Equation 5.4.5-1
         /// Equation 5.5.2-6
         /// </summary>
@@ -2425,10 +2428,14 @@ namespace H.Core.Services.Animals
             dailyEmissions.LeachingFraction = managementPeriod.ManureDetails.LeachingFraction;
         }
 
+
         /// <summary>
         /// Equation 4.3.2-8
         /// Equation 4.3.3-11
         /// </summary>
+        /// <param name="amountOfTANFlowingIntoStorageEachDay"></param>
+        /// <param name="adjustedAmmoniaLossFromStorage"></param>
+        /// <returns>Amount of TAN entering the storage system each day (minus housing and storage NH3-N emissions) in broiler, layer and turkey manure (kg TAN day-1), by animal group and manure management system</returns>
         public double CalculateAdjustedAmountOfTANEnteringStorage(
             double amountOfTANFlowingIntoStorageEachDay,
             double adjustedAmmoniaLossFromStorage)

@@ -1,10 +1,14 @@
-﻿using H.Core.Enumerations;
+﻿using System.Collections.Generic;
+using System.Linq;
+using H.Core.Enumerations;
 using H.Infrastructure;
 
 namespace H.Core
 {
     public class MonthlyValueBase<T> : ModelBase
     {
+        #region Fields
+        
         private T _january;
         private T _february;
         private T _march;
@@ -16,7 +20,9 @@ namespace H.Core
         private T _september;
         private T _october;
         private T _november;
-        private T _december;
+        private T _december; 
+
+        #endregion
 
         #region Properties
 
@@ -115,6 +121,22 @@ namespace H.Core
                 default:
                     return this.December;
             }
+        }
+
+        public void AssignMonthlyValues(List<T> valuesByMonth)
+        {
+            this.January = valuesByMonth.ElementAtOrDefault(0);
+            this.February = valuesByMonth.ElementAtOrDefault(1);
+            this.March = valuesByMonth.ElementAtOrDefault(2);
+            this.April = valuesByMonth.ElementAtOrDefault(3);
+            this.May = valuesByMonth.ElementAtOrDefault(4);
+            this.June = valuesByMonth.ElementAtOrDefault(5);
+            this.July = valuesByMonth.ElementAtOrDefault(6);
+            this.August = valuesByMonth.ElementAtOrDefault(7);
+            this.September = valuesByMonth.ElementAtOrDefault(8);
+            this.October = valuesByMonth.ElementAtOrDefault(9);
+            this.November = valuesByMonth.ElementAtOrDefault(10);
+            this.December = valuesByMonth.ElementAtOrDefault(11);
         }
 
         public override string ToString()
