@@ -26,7 +26,7 @@ A review version of the Holos version 4.0 algorithm document is being made avail
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="[https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md](https://github.com/holos-aafc/Holos/raw/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION.docx)" target="_blank">https://github.com/holos-aafc/Holos/raw/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION.docx</a>
+<a href="https://github.com/holos-aafc/Holos/raw/e33ea632053a7635589c245318bd3ad05939607b/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION22Jan2024.docx" target="_blank">AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION22Jan2024.docx</a>
 
 All feedback is welcome and we would appreciate your input on the following items in particular:
 
