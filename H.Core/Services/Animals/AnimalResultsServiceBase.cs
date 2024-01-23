@@ -28,8 +28,6 @@ namespace H.Core.Services.Animals
 
         private static readonly DietProvider _dietProvider;
 
-        protected readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new Table_63_Indoor_Temperature_Provider();
-
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
             new Table_49_Electricity_Conversion_Defaults_Provider();
 

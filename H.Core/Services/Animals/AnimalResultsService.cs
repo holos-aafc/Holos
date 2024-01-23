@@ -12,6 +12,8 @@ namespace H.Core.Services.Animals
     {
         #region Fields
         
+        private IInitializationService _initializationService;
+
         private readonly OtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
         private readonly SwineResultsService _swineResultsService = new SwineResultsService();
         private readonly PoultryResultsService _poultryResultsService = new PoultryResultsService();
@@ -21,10 +23,21 @@ namespace H.Core.Services.Animals
 
         #endregion
 
+        #region Constructors
+
+        public AnimalResultsService()
+        {
+            _initializationService = new InitializationService();
+        }
+
+        #endregion
+
         #region Public Methods
-        
+
         public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm)
         {
+            _initializationService.CheckInitialization(farm);
+
             var results = new List<AnimalComponentEmissionsResults>();
 
             results.AddRange(_otherLivestockResultsService.CalculateResultsForAnimalComponents(farm.OtherLivestockComponents.Cast<AnimalComponentBase>(), farm));
@@ -39,6 +52,8 @@ namespace H.Core.Services.Animals
 
         public List<AnimalComponentEmissionsResults> GetAnimalResults(AnimalType animalType, Farm farm)
         {
+            _initializationService.CheckInitialization(farm);
+
             var results = new List<AnimalComponentEmissionsResults>();
 
             if (animalType.GetCategory() == AnimalType.Beef)
@@ -73,6 +88,8 @@ namespace H.Core.Services.Animals
 
         public AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
+            _initializationService.CheckInitialization(farm);
+
             var animalType = animalGroup.GroupType;
             
             if (animalType.GetCategory() == AnimalType.Beef)
@@ -102,6 +119,8 @@ namespace H.Core.Services.Animals
 
         public AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent, ManagementPeriod managementPeriod)
         {
+            _initializationService.CheckInitialization(farm);
+
             var animalType = animalGroup.GroupType;
 
             if (animalType.GetCategory() == AnimalType.Beef)

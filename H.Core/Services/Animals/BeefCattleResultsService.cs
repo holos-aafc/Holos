@@ -232,7 +232,8 @@ namespace H.Core.Services.Animals
                 animalGroup: animalGroup,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions,
-                temperature: temperature);
+                temperature: temperature, 
+                farm: farm);
 
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
@@ -526,7 +527,8 @@ namespace H.Core.Services.Animals
                 animalGroup: animalGroup,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions,
-                temperature: dailyEmissions.Temperature);
+                temperature: dailyEmissions.Temperature, 
+                farm: farm);
 
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,

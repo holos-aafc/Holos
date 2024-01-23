@@ -21,6 +21,7 @@ namespace H.Core.Providers.Climate
         private PrecipitationData _precipitationData;
         private TemperatureData _temperatureData;
         private EvapotranspirationData _evapotranspirationData;
+        private TemperatureData _barnTemperatureData;
 
         private ObservableCollection<DailyClimateData> _dailyClimateData;
 
@@ -44,6 +45,7 @@ namespace H.Core.Providers.Climate
             this.TemperatureData = new TemperatureData();
             this.PrecipitationData = new PrecipitationData();
             this.EvapotranspirationData = new EvapotranspirationData();
+            this.BarnTemperatureData = new TemperatureData();
         }
 
         public ClimateData(List<DailyClimateData> dailyClimate)
@@ -130,6 +132,12 @@ namespace H.Core.Providers.Climate
         {
             get { return _dailyClimateData; }
             set { SetProperty(ref _dailyClimateData, value); }
+        }
+
+        public TemperatureData BarnTemperatureData
+        {
+            get => _barnTemperatureData;
+            set => SetProperty(ref _barnTemperatureData, value);
         }
 
         #endregion

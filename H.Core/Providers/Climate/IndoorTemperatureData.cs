@@ -1,8 +1,9 @@
 ﻿using H.Core.Enumerations;
+using H.Core.Providers.Temperature;
 
 namespace H.Core.Providers.Climate
 {
-    public class IndoorTemperatureData : MonthlyValueBase<double>
+    public class IndoorTemperatureData : TemperatureData
     {
         #region Properties
 

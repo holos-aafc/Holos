@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Infrastructure;
@@ -20,7 +21,32 @@ namespace H.Core
         private T _september;
         private T _october;
         private T _november;
-        private T _december; 
+        private T _december;
+
+        private readonly List<string> _monthNames;
+
+        #endregion
+
+        #region Constructors
+
+        public MonthlyValueBase()
+        {
+            _monthNames = new List<string>()
+            {
+                nameof(this.January),
+                nameof(this.February),
+                nameof(this.March),
+                nameof(this.April),
+                nameof(this.May),
+                nameof(this.June),
+                nameof(this.July),
+                nameof(this.August),
+                nameof(this.September),
+                nameof(this.October),
+                nameof(this.November),
+                nameof(this.December)
+            };
+        }
 
         #endregion
 
@@ -31,6 +57,7 @@ namespace H.Core
             get { return _january; }
             set { SetProperty(ref _january, value); }
         }
+
         public T February
         {
             get { return _february; }
@@ -137,6 +164,114 @@ namespace H.Core
             this.October = valuesByMonth.ElementAtOrDefault(9);
             this.November = valuesByMonth.ElementAtOrDefault(10);
             this.December = valuesByMonth.ElementAtOrDefault(11);
+        }
+
+        public void AssignValueByMonth(T value, Months month)
+        {
+            switch (month)
+            {
+                case Months.January:
+                    this.January = value; 
+                    break;
+                case Months.February:
+                    this.February = value;
+                    break;
+                case Months.March:
+                    this.March = value;
+                    break;
+                case Months.April:
+                    this.April = value;
+                    break;
+                case Months.May:
+                    this.May = value;
+                    break;
+                case Months.June:
+                    this.June = value;
+                    break;
+                case Months.July:
+                    this.July = value;
+                    break;
+                case Months.August:
+                    this.August = value;
+                    break;
+                case Months.September:
+                    this.September = value;
+                    break;
+                case Months.October:
+                    this.October = value;
+                    break;
+                case Months.November:
+                    this.November = value;
+                    break;
+                default:
+                    this.December = value;
+                    break;
+            }
+        }
+
+        public bool IsNameOfMonth(string propertyName)
+        {
+            foreach (var monthName in _monthNames)
+            {
+                if (propertyName.IndexOf(monthName, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public Months GetMonthFromPropertyUpdateChange(string propertyName)
+        {
+            if (propertyName.IndexOf(nameof(this.January), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.January;
+            }
+            else if (propertyName.IndexOf(nameof(this.February), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.February;
+            }
+            else if (propertyName.IndexOf(nameof(this.March), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.March;
+            }
+            else if (propertyName.IndexOf(nameof(this.April), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.April;
+            }
+            else if (propertyName.IndexOf(nameof(this.May), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.May;
+            }
+            else if (propertyName.IndexOf(nameof(this.June), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.June;
+            }
+            else if (propertyName.IndexOf(nameof(this.July), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.July;
+            }
+            else if (propertyName.IndexOf(nameof(this.August), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.August;
+            }
+            else if (propertyName.IndexOf(nameof(this.September), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.September;
+            }
+            else if (propertyName.IndexOf(nameof(this.October), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.October;
+            }
+            else if (propertyName.IndexOf(nameof(this.November), StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return Months.November;
+            }
+            else
+            {
+                return Months.December;
+            }
         }
 
         public override string ToString()

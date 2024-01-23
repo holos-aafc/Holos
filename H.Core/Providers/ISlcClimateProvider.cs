@@ -9,6 +9,7 @@ namespace H.Core.Providers
     public interface ISlcClimateProvider
     {
         bool HasDataForPolygonId(int polygonId, TimeFrame timeFrame);
+
         ClimateData GetClimateData(int currentPolygonId, TimeFrame timeFrame);
 
         /// <summary>

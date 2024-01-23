@@ -13,7 +13,8 @@ namespace H.Core.Services.Animals
             AnimalGroup animalGroup,
             DateTime dateTime,
             GroupEmissionsByDay previousDaysEmissions,
-            double temperature)
+            double temperature, 
+            Farm farm)
         {
             if (animalGroup.GroupType.IsDairyCattleType())
             {
@@ -58,7 +59,8 @@ namespace H.Core.Services.Animals
                 {
                     if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false)
                     {
-                        temperature = _indoorTemperatureProvider.GetTemperature(dateTime);
+                        var month = (Months) dateTime.Month;
+                        temperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
                     }
                     else
                     {

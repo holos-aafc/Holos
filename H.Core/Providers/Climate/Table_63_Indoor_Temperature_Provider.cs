@@ -32,6 +32,13 @@ namespace H.Core.Providers.Climate
 
         #region Public Methods
 
+        public double GetIndoorTemperatureForMonth(Province province, Months months)
+        {
+            var temperatureForProvince = this.GetIndoorTemperature(province);
+
+            return temperatureForProvince.GetValueByMonth(months);
+        }
+
         public IndoorTemperatureData GetIndoorTemperature(Province province)
         {
             var result = _data.SingleOrDefault(x => x.Province == province);

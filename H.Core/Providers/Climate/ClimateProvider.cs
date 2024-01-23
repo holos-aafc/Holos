@@ -26,6 +26,8 @@ namespace H.Core.Providers.Climate
         private readonly CustomFileClimateDataProvider _customFileClimateDataProvider;
         private readonly ClimateNormalCalculator _climateNormalCalculator;
 
+        private readonly Table_63_Indoor_Temperature_Provider _indoorTemperatureProvider;
+
         #endregion
 
         #region Constructors
@@ -42,6 +44,7 @@ namespace H.Core.Providers.Climate
             _nasaClimateProvider = new NasaClimateProvider();
             _customFileClimateDataProvider = new CustomFileClimateDataProvider();
             _climateNormalCalculator = new ClimateNormalCalculator();
+            _indoorTemperatureProvider = new Table_63_Indoor_Temperature_Provider();
         }
 
         #endregion
@@ -51,6 +54,14 @@ namespace H.Core.Providers.Climate
         public ClimateData Get(int polygonId, TimeFrame timeFrame)
         {
             return _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
+        }
+
+        public ClimateData Get(int polygonId, TimeFrame timeFrame, Farm farm)
+        {
+            var climateData = _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
+            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);    
+
+            return climateData;
         }
 
         public ClimateData Get(List<DailyClimateData> dailyClimateData, TimeFrame timeFrame)
@@ -82,6 +93,17 @@ namespace H.Core.Providers.Climate
             }
 
             return this.Get(dailyClimateData, climateNormalTimeFrame);
+        }
+
+        public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame, Farm farm)
+        {
+            var climateData = this.Get(latitude, longitude, climateNormalTimeFrame);
+            if (climateData != null)
+            {
+                climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
+            }
+
+            return climateData;
         }
 
         public double GetMeanTemperatureForDay(Farm farm, DateTime dateTime)

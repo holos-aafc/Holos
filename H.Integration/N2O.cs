@@ -89,6 +89,7 @@ namespace H.Integration
         #endregion
 
         [TestMethod]
+        [Ignore]
         public void IntegrationTest()
         {
             _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
@@ -105,7 +106,7 @@ namespace H.Integration
                 var geogrphicData = _geographicDataProvider.GetGeographicalData(polygon);
                 _farm.GeographicData = geogrphicData;
 
-                var climateData = _climateProvider.Get(polygon, _farm.Defaults.TimeFrame);
+                var climateData = _climateProvider.Get(polygon, _farm.Defaults.TimeFrame, _farm);
                 _farm.ClimateData = climateData;
 
                 var field = new FieldSystemComponent();

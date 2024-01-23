@@ -679,6 +679,8 @@
     <Compile Include="Services\FarmResultsService.cs" />
     <Compile Include="Services\FieldComponentHelper.cs" />
     <Compile Include="Services\IAnaerobicDigestionComponentHelper.cs" />
+    <Compile Include="Services\IInitializationService.cs" />
+    <Compile Include="Services\InitializationService.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.DetailViewItems.cs" />
     <Compile Include="Converters\IPropertyConverter.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Nitrogen.cs" />
