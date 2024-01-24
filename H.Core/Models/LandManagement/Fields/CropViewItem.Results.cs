@@ -497,6 +497,9 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double AdjustedAmmoniacalLossFromLandAppliedManurePerHectare { get; set; }
 
+        public double FractionOfLandOccupiedByLowerPortionsOfLandscape { get; set; }
+        public double WeightedModifierBasedOnTexture { get; set; }
+
         #endregion
     }
 }

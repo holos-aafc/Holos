@@ -123,6 +123,10 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelClimateFactor + "," +
                 Properties.Resources.LabelTillageFactor + "," +
                 Properties.Resources.LabelManagementFactor + "," +
+                Properties.Resources.LabelGrowingSeasonPrecipitation + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear) + "," +
+                Properties.Resources.LabelGrowingSeasonEvapotranspiration + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear) + "," +
+                Properties.Resources.LabelFractionOfLandOccupied + "," +
+                Properties.Resources.LabelWeightedModifierBasedOnTexture + "," +
 
                 Properties.Resources.LabelPlantCarbonInProduct + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelCarbonInputFromProduct + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
@@ -252,6 +256,10 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ClimateParameter.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.TillageFactor.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ManagementFactor.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonPrecipitation(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonEvapotranspiration(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.WeightedModifierBasedOnTexture.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.PlantCarbonInAgriculturalProduct, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CarbonInputFromProduct, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));

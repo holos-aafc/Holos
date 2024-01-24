@@ -112,6 +112,8 @@ namespace H.Core.Calculators.Nitrogen
                 ecodistrictId: soilData.EcodistrictId,
                 province: soilData.Province);
 
+            viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape = fractionOfLandOccupiedByLowerPortionsOfLandscape;
+
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
                 growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(viewItem.Year),
@@ -121,6 +123,8 @@ namespace H.Core.Calculators.Nitrogen
                 topographyEmission: emissionsDueToLandscapeAndTopography,
                 soilTexture: soilData.SoilTexture,
                 region: soilData.Province.GetRegion());
+
+            viewItem.WeightedModifierBasedOnTexture = this.CalculateModifierBasedOnTexture(soilData.SoilTexture, soilData.Province.GetRegion(), 1);
 
             return baseEcodistrictFactor;
         }

@@ -125,6 +125,7 @@ namespace H.Core.Providers.Soil
 
             return defaultValue;
         }
+
         /// <summary>
         /// Table 16: Lookup function for Tillage Practice = RF_TILL values.
         /// </summary>

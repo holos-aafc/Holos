@@ -5736,4 +5736,16 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
     <value>Add Crop Residue Substrate Type</value>
   </data>
+  <data name="LabelFractionOfLandOccupied" xml:space="preserve">
+    <value>Fraction of land occupied by lower portion of landscape</value>
+  </data>
+  <data name="LabelGrowingSeasonEvapotranspiration" xml:space="preserve">
+    <value>Growing season evapotranspiration</value>
+  </data>
+  <data name="LabelGrowingSeasonPrecipitation" xml:space="preserve">
+    <value>Growing season precipitation</value>
+  </data>
+  <data name="LabelWeightedModifierBasedOnTexture" xml:space="preserve">
+    <value>Weighted modifier based on texture</value>
+  </data>
 </root>

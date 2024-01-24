@@ -9439,6 +9439,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fraction of land occupied by lower portion of landscape.
+        /// </summary>
+        public static string LabelFractionOfLandOccupied {
+            get {
+                return ResourceManager.GetString("LabelFractionOfLandOccupied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraction of nitrogen in manure.
         /// </summary>
         public static string LabelFractionOfNitrogenInManure {
@@ -9597,6 +9606,24 @@ namespace H.Core.Properties {
         public static string LabelGrowerFinisherHogs {
             get {
                 return ResourceManager.GetString("LabelGrowerFinisherHogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Growing season evapotranspiration.
+        /// </summary>
+        public static string LabelGrowingSeasonEvapotranspiration {
+            get {
+                return ResourceManager.GetString("LabelGrowingSeasonEvapotranspiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Growing season precipitation.
+        /// </summary>
+        public static string LabelGrowingSeasonPrecipitation {
+            get {
+                return ResourceManager.GetString("LabelGrowingSeasonPrecipitation", resourceCulture);
             }
         }
         
@@ -11874,6 +11901,15 @@ namespace H.Core.Properties {
         public static string LabelWeightAtWeaning {
             get {
                 return ResourceManager.GetString("LabelWeightAtWeaning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weighted modifier based on texture.
+        /// </summary>
+        public static string LabelWeightedModifierBasedOnTexture {
+            get {
+                return ResourceManager.GetString("LabelWeightedModifierBasedOnTexture", resourceCulture);
             }
         }
         
