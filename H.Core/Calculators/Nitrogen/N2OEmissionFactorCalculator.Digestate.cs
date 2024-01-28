@@ -101,6 +101,8 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Remaining nitrogen is spread evenly across all fields
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         public double GetDigestateNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
         {

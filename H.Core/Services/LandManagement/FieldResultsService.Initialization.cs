@@ -264,7 +264,7 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem,
             Farm farm)
         {
-            var soilData = farm.GetPreferredSoilData(viewItem);
+            var province = farm.Province;
 
             // No small area data exists for years > 2018, take average of last 10 years as placeholder values when considering these years
             const int NoDataYear = 2018;
@@ -279,7 +279,7 @@ namespace H.Core.Services.LandManagement
                         year: year,
                         polygon: farm.PolygonId,
                         cropType: viewItem.CropType,
-                        province: soilData.Province);
+                        province: province);
 
                     if (smallAreaYieldData != null)
                     {
@@ -306,7 +306,7 @@ namespace H.Core.Services.LandManagement
                 year: viewItem.Year,
                 polygon: farm.PolygonId,
                 cropType: viewItem.CropType,
-                province: soilData.Province);
+                province: province);
 
             if (smallAreaYield != null)
             {

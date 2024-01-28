@@ -551,6 +551,30 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(5, result.Sum(x => x.Value));
         }
 
+        [TestMethod]
+        public void GetManureNitrogenRemainingForFieldTest()
+        {
+            _mockManureService.Setup(x => x.GetTotalNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
+
+            var cropViewItem = new CropViewItem() {Year = 2022, Area = 20};
+            var farm = new Farm();
+
+            var detailViewItem1 = new CropViewItem() {Year = 2022, CropType = CropType.Barley, Area = 100};
+            var detailViewItem2 = new CropViewItem() {Year = 2022, CropType = CropType.Wheat, Area = 200};
+            var detailViewItem3 = new CropViewItem() { Year = 2021 ,CropType = CropType.Beans, Area = 50};
+
+            var stageState = new FieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(detailViewItem1);
+            stageState.DetailsScreenViewCropViewItems.Add(detailViewItem2);
+            stageState.DetailsScreenViewCropViewItems.Add(detailViewItem3);
+
+            farm.StageStates.Add(stageState);
+
+            var result = _sut.GetManureNitrogenRemainingForField(cropViewItem, farm);
+
+            Assert.AreEqual(40, result);
+        }
+
         #endregion
     }
 }

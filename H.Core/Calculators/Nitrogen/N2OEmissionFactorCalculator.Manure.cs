@@ -44,7 +44,7 @@ namespace H.Core.Calculators.Nitrogen
                 viewItem: viewItem,
                 farm: farm);
 
-            var totalLocalAndImportedNitrogenApplied = this.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(viewItem);
+            var totalLocalAndImportedNitrogenApplied = this.GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
 
             var result = totalLocalAndImportedNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
 
@@ -56,8 +56,14 @@ namespace H.Core.Calculators.Nitrogen
         /// 
         /// (kg N)
         /// </summary>
-        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem)
+        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            {
+                return 0;
+            }
+
             var totalNitrogen = 0d;
 
             foreach (var manureApplication in viewItem.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == viewItem.Year))
@@ -155,8 +161,7 @@ namespace H.Core.Calculators.Nitrogen
             var weightedEmissionFactor = CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
             // The total N after all applications and exports have been subtracted
-            var totalNitrogenRemaining = this.CalculateTotalManureNitrogenRemaining(farm, viewItem.Year);
-
+            var totalNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
             var emissionsFromNitrogenRemaining = this.CalculateTotalDirectN2ONFromRemainingManureNitrogen(
                 weightedEmissionFactor: weightedEmissionFactor,
                 totalManureNitrogenRemaining: totalNitrogenRemaining);
@@ -221,7 +226,7 @@ namespace H.Core.Calculators.Nitrogen
             var result = 0d;
 
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false)
+            if (field == null)
             {
                 return 0;
             }
@@ -598,29 +603,6 @@ namespace H.Core.Calculators.Nitrogen
             {
                 var nitrogenApplied = CalculateTotalNitrogenFromImportedFieldApplication(cropViewItem, year);
                 result += nitrogenApplied;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-4
-        /// </summary>
-        public double CalculateTotalManureNitrogenRemaining(
-            Farm farm,
-            int year)
-        {
-            var result = 0d;
-
-            var totalNitrogenCreated = this.ManureService.GetTotalNitrogenCreated(year);
-            var totalNitrogenAppliedFromLocalSourcedManure = this.CalculateTotalNitrogenFromAllFieldApplications(farm, year);
-            var totalNitrogenAppliedFromImportedManure = this.CalculateTotalNitrogenFromAllImportFieldApplications(farm, year);
-            var totalNitrogenExported = this.ManureService.GetTotalNitrogenFromExportedManure(year, farm);
-
-            result = totalNitrogenCreated - (totalNitrogenAppliedFromLocalSourcedManure - totalNitrogenAppliedFromImportedManure)- totalNitrogenExported;
-            if (result < 0)
-            {
-                return 0;
             }
 
             return result;
@@ -1513,6 +1495,8 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Remaining nitrogen is spread evenly across all fields
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         public double GetManureNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
         {
@@ -1521,10 +1505,13 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
-            var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingAtEndOfYear(viewItem.Year, farm);
+            var totalAreaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
+            var fractionOfAreaByThisField = viewItem.Area / totalAreaOfFarm;
+            var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
 
-            return fractionUsed * manureNitrogenRemaining;
+            var amountOfNitrogenAssignedToThisField = fractionOfAreaByThisField * manureNitrogenRemaining;
+
+            return amountOfNitrogenAssignedToThisField;
         }
 
         #endregion

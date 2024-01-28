@@ -1076,7 +1076,7 @@ namespace H.Core.Calculators.Carbon
 
             var manureNitrogenRemaining = this.N2OEmissionFactorCalculator.GetManureNitrogenRemainingForField(cropViewItem, farm);
             var digestateNitrogenRemaining = this.N2OEmissionFactorCalculator.GetDigestateNitrogenRemainingForField(cropViewItem, farm);
-            var totalRemainingNitrogen = (manureNitrogenRemaining + digestateNitrogenRemaining) / cropViewItem.Area;
+            var totalRemainingNitrogen = manureNitrogenRemaining + digestateNitrogenRemaining;
 
             var nitrogenAppliedToSoilAfterLosses = CalculateAmountOfNitrogenAppliedToSoilAfterLosses(
                 totalNitrogenAppliedToField: combinedNitrogenApplied,

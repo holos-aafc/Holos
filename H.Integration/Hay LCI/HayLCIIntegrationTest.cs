@@ -87,7 +87,6 @@ namespace H.Integration.Hay_LCI
         private string _baseOutputDirectory;
         private bool _usingIrrigation;
         private List<Table3Item> _slcList;
-        private ClimateProvider _climateProvider;
 
         #endregion
 
@@ -119,6 +118,8 @@ namespace H.Integration.Hay_LCI
             _nasaClimateProvider.Expiry = TimeSpan.MaxValue;
             _nasaClimateProvider.StartDate = new DateTime(SimulationStartYear, 1, 1);
             _nasaClimateProvider.EndDate = new DateTime(SimulationEndYear, 12, 31);
+
+            _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
 
             _geograhicDataProvider = new GeographicDataProvider();
             _geograhicDataProvider.Initialize();
@@ -154,7 +155,7 @@ namespace H.Integration.Hay_LCI
             // Read in data from files
             _fertilizerRates = this.GetFertilizerRates();
             _manureRates = this.GetManureRates();
-            _slcList = this.ReadSlcs().Where(x => x.Polygon == 825012).ToList();
+            _slcList = this.ReadSlcs().ToList();
 
             this.RunSimulations();
         }

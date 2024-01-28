@@ -464,14 +464,8 @@ namespace H.Core.Services.Animals
         {
             var totalRemainingForFarm = this.GetTotalCarbonRemainingForFarm(farm, year, viewItem);
 
-            var items = farm.GetCropViewItemsByYear(year);
-            var totalArea = items.Sum(x => x.Area);
-            if (totalArea <= 0)
-            {
-                return 0;
-            }
-
-            var result = totalRemainingForFarm * (viewItem.Area / totalArea);
+            var totalAreaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
+            var result = totalRemainingForFarm * (viewItem.Area / totalAreaOfFarm);
 
             return result;
         }
@@ -596,7 +590,12 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm)
+        /// <summary>
+        /// Equation 4.6.1-4
+        ///
+        /// (kg N)
+        /// </summary>
+        public double GetTotalNitrogenRemainingForFarmAndYear(int year, Farm farm)
         {
             var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
 
