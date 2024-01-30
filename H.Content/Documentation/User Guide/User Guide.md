@@ -3934,6 +3934,51 @@ The Holos program data files contain useful information that can help the Holos 
 
 - To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on GitHub. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
 
+
+<br>
+<br>
+
+### Holos log file(s).
+
+The Holos program log files contain information regarding the Holos application and its internal processes. The log files track the state of the Holos application since it is started by the user until the point the application is closed or forcefully shut down. Please note a few important points regarding the log files:
+
+- The content of the log files can be easily read using any text editor e.g. Notepad.
+- The log files only contain information regarding Holos and its internal processes. The files do not track any information regarding any other process or part of the user system.
+- The log files are never sent outside of the user system and are always strictly kept offline. They can only leave the user's system if the user explicitly transfers the file themselves.
+- Holos maintains one log file per day and rolls over to a new file up to a maximum of 7 files. On the 8th day, the oldest log file is automatically deleted.
+
+The purpose of the log files is to help users troubleshoot issues regarding Holos and its operation in situations where the application isn't performing within expectations.
+
+<br>
+
+### How to find the Holos log file(s)
+
+The Holos log files are located next to the Holos data and backup files inside a folder called `logfiles`. On windows based systems this folder is located in the `APPDATA` folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
+
+Inside the Holos data folder, you can locate the subfolder called  `logfiles` that contains the logs for the program
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-31.png" alt="Figure11-31" width="650"/>
+    <br>
+    <em>
+		Figure 11-31 - Holos data folder containing a subfolder called logfiles.
+	</em>
+</p>
+<br>
+
+Opening the folder will show the currently stored log files for Holos. Log files are named in the format `<holos-logs><data-log-created>.log` e.g. holos-logs-2024-01-29.log. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-32.png" alt="Figure11-32" width="650"/>
+    <br>
+    <em>
+		Figure 11-32 - Log files inside the data folder.
+	</em>
+</p>
+<br>
+
 <br>
 <br>
 
