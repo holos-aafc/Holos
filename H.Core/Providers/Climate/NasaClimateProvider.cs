@@ -79,16 +79,20 @@ namespace H.Core.Providers.Climate
                     // switch over to SLC data.
                     var getNasaApi = Task.Run(() => GetNasaApiString(url));
                     if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
+                    {
+                        Trace.TraceInformation($"NASA API Task Status: {getNasaApi.Status}");
                         content = getNasaApi.Result;
+                    }
                     else
-                        throw new Exception("NASA API couldn't be reached.");
-
+                    {
+                        Trace.TraceError($"NASA API Task Status: {getNasaApi.Status}");
+                        throw new Exception("NASA API couldn't be reached or timed out.");
+                    }
                 }
                 catch (Exception e)
                 {
                     Trace.TraceInformation($"NASA API: {e.Message}");
-
-                    
+                    Trace.TraceInformation($"Returning SLC Data.");
                     return new List<DailyClimateData>();
                 }
 
@@ -101,12 +105,12 @@ namespace H.Core.Providers.Climate
                     // For some reason we got an empty string from web call
 
                     Trace.TraceInformation($"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data. String was empty.");
-
+                    Trace.TraceInformation($"Returning SLC Data.");
                     return new List<DailyClimateData>();
                 }
             }
 
-            Trace.TraceInformation($"{nameof(NasaClimateProvider)}: Content downloaded from NASA successfully");
+            Trace.TraceInformation($"{nameof(NasaClimateProvider)}: Processing data from NASA API.");
 
             JObject jObject = JObject.Parse(content);
 
@@ -269,9 +273,18 @@ namespace H.Core.Providers.Climate
         /// <returns></returns>
         private string GetNasaApiString(string url)
         {
+            Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : Trying to accessing NASA API.");
             var webClient = new WebClient();
             string content = webClient.DownloadString(url);
-
+            if (content != string.Empty)
+            {
+                Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : API content downloaded successfully.");
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : API content could not be downloaded.");
+                Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API url: {url}");
+            }
             return content;
         }
 

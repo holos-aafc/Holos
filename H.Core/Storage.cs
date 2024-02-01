@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
+using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json;
 using Prism.Mvvm;
 
@@ -30,10 +31,12 @@ namespace H.Core
         private string _baseCrashFileName = $"holos-crash-{DateTime.Now}.json";
 
         private const string _backupNamePrefix = "holos-backup-";
+        private const string _logFilesPrefix = "holos-logs";
         private const string _backupDateFormat = "yyyy-MM-dd_hh_mm_ss_tt";
         private string _dataBackupFileName = $"{_backupNamePrefix}{DateTime.Now.ToString(_backupDateFormat)}.json";
 
         private const int MaxNumberOfBackups = 5;
+        private const int MaxNumberOfLogs = 7;
 
         private readonly SemaphoreSlim _asyncSaveSemaphore = new SemaphoreSlim(1, 1);
         private string _bulkImportProgressMessage;
@@ -55,7 +58,8 @@ namespace H.Core
 
         public Storage()
         {
-            HTraceListener.AddTraceListener();
+            Trace.TraceInformation($"{nameof(Storage)}: Checking log files.");
+            SetMaxLogFiles();
         }
 
         #endregion
@@ -268,6 +272,7 @@ namespace H.Core
                 this.ApplicationData = ReadDataFile(pathToStorageFile);
 
                 IsDataLoaded = true;
+                Trace.TraceInformation("Data loaded successfully.");
                 BackupDataAfterSuccessfulLoad(pathToStorageFile);
             }
             catch (FileNotFoundException)
@@ -295,16 +300,18 @@ namespace H.Core
         /// <param name="pathToStorageFile">The path where the backup file must be stored.</param>
         private void BackupDataAfterSuccessfulLoad(string pathToStorageFile)
         {
+            Trace.TraceInformation("Creating backup of currently loaded data.");
             var backupFilePath = CreateFileLocationPath(_dataBackupFileName, isBackupPath: true);
             
             
             if (_backupFilesInDirectory.Length == MaxNumberOfBackups)
             {
+                Trace.TraceInformation($"Backup folder contains {_backupFilesInDirectory.Length} backups");
                 _backupFilesInDirectory.Last().Delete();
+                Trace.TraceInformation($"Deleted oldest backup file: {_backupFilesInDirectory.Last().Name}");
             }
-
             File.Copy(pathToStorageFile, backupFilePath);
-
+            Trace.TraceInformation($"Backup created successfully.");
         }
 
         /// <summary>
@@ -599,6 +606,35 @@ namespace H.Core
             this.ApplicationData.Farms.AddRange(farmsToImport);
         }
 
+        #endregion
+
+        #region Private Methods
+
+        private string GetLogFolderPath()
+        {
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var logfilesPath = Path.Combine(localAppData, @"HOLOS_4\logfiles");
+
+            return logfilesPath;
+        }
+
+        private void SetMaxLogFiles()
+        {
+            var logFilesPath = GetLogFolderPath();
+            if (!Directory.Exists(logFilesPath))
+            {
+                return;
+            }
+            var directoryInfo = new DirectoryInfo(logFilesPath);
+            
+            var logFilesInDirectory = directoryInfo.GetFiles($"{_logFilesPrefix}*.log").OrderByDescending(x => x.CreationTime).ToArray();
+            Trace.TraceInformation($"Found {logFilesInDirectory.Length} log files in the log folder.");
+            if (logFilesInDirectory.Length > MaxNumberOfLogs)
+            {
+                Trace.TraceInformation($"Deleting oldest log file: {logFilesInDirectory.Last().Name}");
+                logFilesInDirectory.Last().Delete();
+            }
+        }
         #endregion
     }
 }

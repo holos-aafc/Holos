@@ -46,6 +46,7 @@
     <Reference Include="CsvHelper, Version=30.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.30.0.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -706,6 +707,7 @@
     <Compile Include="Services\ShelterbeltComponentHelper.cs" />
     <Compile Include="Services\TimePeriodHelper.cs" />
     <Compile Include="Storage.cs" />
+    <Compile Include="Tools\FileTraceListener.cs" />
     <Compile Include="Tools\HTraceListener.cs" />
   </ItemGroup>
   <ItemGroup>
