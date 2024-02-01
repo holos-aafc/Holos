@@ -128,7 +128,9 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.FertilizerApplicationViewItems, options => options.Ignore())
                     .ForMember(property => property.HayImportViewItems, options => options.Ignore())
                     .ForMember(property => property.DigestateApplicationViewItems, options => options.Ignore())
-                    .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore());
+                    .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore())
+                    .ForMember(property => property.MonthlyIpccTier2TemperatureFactors, options => options.Ignore())
+                    .ForMember(property => property.MonthlyIpccTier2WaterFactors, options => options.Ignore());
             });
 
             _detailViewItemMapper = componentSelectionViewItemToDetailViewItemMapperConfiguration.CreateMapper();

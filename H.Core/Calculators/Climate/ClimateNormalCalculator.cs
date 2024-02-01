@@ -220,7 +220,7 @@ namespace H.Core.Calculators.Climate
         /// <param name="customClimateDatas">the daily climate data from which to calculate the normals</param>
         /// <param name="customTimeFrameStart">beginning of the timeframe</param>
         /// <param name="customTimeFrameEnd">end of the time frame</param>
-        /// <returns>A dicitionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal values</returns>
+        /// <returns>A dictionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal values</returns>
         public Dictionary<MonthlyNormalTypes, Dictionary<Months, double>> GetNormalsForAllTwelveMonths(List<DailyClimateData> customClimateDatas, int customTimeFrameStart, int customTimeFrameEnd)
         {
             int startYear = customTimeFrameStart;

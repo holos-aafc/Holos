@@ -18,11 +18,15 @@ namespace H.Core.Calculators.Carbon
 {
     public partial class IPCCTier2SoilCarbonCalculator : CarbonCalculatorBase
     {
+        #region Enumerations
+
         public enum CalculationModes
         {
             Carbon,
             Nitrogen,
         }
+
+        #endregion
 
         #region Fields
 
@@ -32,7 +36,7 @@ namespace H.Core.Calculators.Carbon
         #endregion
 
         #region Constructors
-        
+
         public IPCCTier2SoilCarbonCalculator(IClimateProvider climateProvider, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
             this.CalculationMode = CalculationModes.Carbon;
@@ -54,7 +58,7 @@ namespace H.Core.Calculators.Carbon
             {
                 throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
             }
-        } 
+        }
 
         #endregion
 
@@ -110,7 +114,7 @@ namespace H.Core.Calculators.Carbon
         public void CalculateResults(
             Farm farm,
             List<CropViewItem> viewItemsByField,
-            FieldSystemComponent fieldSystemComponent, 
+            FieldSystemComponent fieldSystemComponent,
             List<CropViewItem> runInPeriodItems)
         {
             var runInPeriod = this.CalculateRunInPeriod(
@@ -145,7 +149,7 @@ namespace H.Core.Calculators.Carbon
                 this.CalculatePools(
                     currentYearViewItem: currentYearViewItem,
                     previousYearViewItem: previousYearViewItem,
-                    farm: farm) ;
+                    farm: farm);
 
                 if (i == 0 && farm.UseCustomStartingSoilOrganicCarbon)
                 {
@@ -183,7 +187,7 @@ namespace H.Core.Calculators.Carbon
             var cropData = _slopeProvider.GetDataByCropType(viewItem.CropType);
 
             var slope = cropData.SlopeValue;
-            var intercept = cropData.InterceptValue;            
+            var intercept = cropData.InterceptValue;
 
             // Note that the yield must be converted to tons here since the curve equation expects a yield in tons when multiplying by slope
             var harvestIndex = this.CalculateHarvestIndex(
@@ -195,7 +199,7 @@ namespace H.Core.Calculators.Carbon
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
                 freshWeightOfYield: viewItem.Yield,
                 harvestIndex: harvestIndex,
-                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage, 
+                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
                 percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
 
@@ -211,8 +215,8 @@ namespace H.Core.Calculators.Carbon
                 aboveGroundResidueDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
                 area: viewItem.Area,
                 fractionRenewed: fractionRenewed,
-                fractionBurned: 0, 
-                fractionRemoved: 0, 
+                fractionBurned: 0,
+                fractionRemoved: 0,
                 combustionFactor: 0);
 
             const double AboveGroundCarbonContent = 0.42;
@@ -232,9 +236,9 @@ namespace H.Core.Calculators.Carbon
                 aboveGroundResideDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
                 shootToRootRatio: cropData.RSTRatio,
                 area: viewItem.Area,
-                fractionRenewed: fractionRenewed, 
-                freshWeightOfYield: viewItem.Yield, 
-                moistureContentOfCropPercentage: viewItem.MoistureContentOfCropPercentage, 
+                fractionRenewed: fractionRenewed,
+                freshWeightOfYield: viewItem.Yield,
+                moistureContentOfCropPercentage: viewItem.MoistureContentOfCropPercentage,
                 harvestIndex: harvestIndex);
 
             const double BelowGroundCarbonContent = 0.42;
@@ -245,7 +249,7 @@ namespace H.Core.Calculators.Carbon
             if (farm.IsCommandLineMode == false)
             {
                 viewItem.ManureCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.ManureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
-            }            
+            }
 
             viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
@@ -258,7 +262,7 @@ namespace H.Core.Calculators.Carbon
              * Since we report ICBM in kg C (not tons), we do not convert to tons here so output of pool calculations on chart can be compared to ICBM chart on same scale (i.e. kg C and not T C).
              */
 
-            viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare + viewItem.DigestateCarbonInputsPerHectare;  
+            viewItem.TotalCarbonInputs = viewItem.AboveGroundCarbonInput + viewItem.BelowGroundCarbonInput + viewItem.ManureCarbonInputsPerHectare + viewItem.DigestateCarbonInputsPerHectare;
         }
 
         /// <summary>
@@ -342,6 +346,12 @@ namespace H.Core.Calculators.Carbon
                 maximumTemperatureForDecomposition: maximumTemperature.Value,
                 optimumTemperatureForDecomposition: optimumTemperature.Value);
 
+            this.SetMonthlyTemperatureFactors(
+                monthlyAverageTemperatures: temperaturesForYear,
+                maximumTemperatureForDecomposition: maximumTemperature.Value,
+                optimumTemperatureForDecomposition: optimumTemperature.Value,
+                currentYearViewItem);
+
             var slopeParameter = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(
                 parameter: ModelParameters.SlopeParameter,
                 tillageType: currentYearViewItem.TillageType);
@@ -349,7 +359,13 @@ namespace H.Core.Calculators.Carbon
             currentYearViewItem.WFac = this.CalculateAnnualWaterFactor(
                 monthlyTotalPrecipitations: precipitationsForYear,
                 monthlyTotalEvapotranspirations: evapotranspirationsForYear,
-                slopeParameter: slopeParameter.Value);            
+                slopeParameter: slopeParameter.Value);
+
+            this.SetMonthlyWaterFactors(
+                monthlyTotalPrecipitations: precipitationsForYear,
+                monthlyTotalEvapotranspirations: evapotranspirationsForYear,
+                slopeParameter: slopeParameter.Value,
+                viewItem: currentYearViewItem);
         }
 
         public void CalculatePools(
@@ -522,7 +538,7 @@ namespace H.Core.Calculators.Carbon
                 currentYearIpccTier2Results.PassivePoolDiff = 0;
             }
 
-            var totalStock  = this.CalculateTotalStocks(
+            var totalStock = this.CalculateTotalStocks(
                 activePool: currentYearIpccTier2Results.ActivePool,
                 passivePool: currentYearIpccTier2Results.PassivePool,
                 slowPool: currentYearIpccTier2Results.SlowPool);
@@ -584,7 +600,7 @@ namespace H.Core.Calculators.Carbon
         public double CalculateAboveGroundResidueDryMatter(
             double freshWeightOfYield,
             double harvestIndex,
-            double moistureContentOfCropAsPercentage, 
+            double moistureContentOfCropAsPercentage,
             double percentageOfStrawReturned)
         {
             if (harvestIndex <= 0)
@@ -592,7 +608,7 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0) ) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0))))* (percentageOfStrawReturned / 100.0);
+            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (percentageOfStrawReturned / 100.0);
         }
 
         /// <summary>
@@ -632,7 +648,7 @@ namespace H.Core.Calculators.Carbon
             double area,
             double fractionRenewed,
             double fractionBurned,
-            double fractionRemoved, 
+            double fractionRemoved,
             double combustionFactor)
         {
             // Not considering burned residues right now
@@ -654,8 +670,8 @@ namespace H.Core.Calculators.Carbon
             double aboveGroundResideDryMatterForCrop,
             double shootToRootRatio,
             double area,
-            double fractionRenewed, 
-            double freshWeightOfYield, 
+            double fractionRenewed,
+            double freshWeightOfYield,
             double moistureContentOfCropPercentage,
             double harvestIndex)
         {
@@ -674,6 +690,11 @@ namespace H.Core.Calculators.Carbon
             double monthlyTemperature,
             double optimumTemperatureForDecomposition)
         {
+            if (monthlyTemperature > 45)
+            {
+                return 0;
+            }
+
             var temperatureFraction = (maximumMonthlyTemperatureForDecomposition - monthlyTemperature) / (maximumMonthlyTemperatureForDecomposition - optimumTemperatureForDecomposition);
             var firstTerm = Math.Pow(temperatureFraction, 0.2);
             var powerTerm = 1 - Math.Pow(temperatureFraction, 2.63);
@@ -683,6 +704,45 @@ namespace H.Core.Calculators.Carbon
 
             return result;
         }
+
+        public void SetMonthlyWaterFactors(
+            List<double> monthlyTotalPrecipitations,
+            List<double> monthlyTotalEvapotranspirations,
+            double slopeParameter,
+            CropViewItem viewItem)
+        {
+            var monthlyWaterFactors = this.GetMonthlyWaterEffects(
+                monthlyTotalPrecipitations: monthlyTotalPrecipitations,
+                monthlyTotalEvapotranspirations: monthlyTotalEvapotranspirations,
+                slopeParameter: slopeParameter);
+
+            for (int i = 0; i < monthlyWaterFactors.Count; i++)
+            {
+                var month = (Months)(i + 1);
+                var waterFactorAtMonth = monthlyWaterFactors[i];
+                viewItem.MonthlyIpccTier2WaterFactors.AssignValueByMonth(waterFactorAtMonth, month);
+            }
+        }
+
+        public void SetMonthlyTemperatureFactors(
+            List<double> monthlyAverageTemperatures,
+            double maximumTemperatureForDecomposition,
+            double optimumTemperatureForDecomposition,
+            CropViewItem cropViewItem)
+        {
+            var monthlyTemperatureFactors = this.CalculateMonthlyTemperatureFactors(
+                monthlyAverageTemperatures: monthlyAverageTemperatures,
+                maximumTemperatureForDecomposition: maximumTemperatureForDecomposition,
+                optimumTemperatureForDecomposition: optimumTemperatureForDecomposition);
+
+            for (int i = 0; i < monthlyTemperatureFactors.Count; i++)
+            {
+                var month = (Months)(i + 1);
+                var monthlyTemperatureFactor = monthlyTemperatureFactors[i];
+                cropViewItem.MonthlyIpccTier2TemperatureFactors.AssignValueByMonth(monthlyTemperatureFactor, month);
+            }
+        }
+
 
         /// <summary>
         /// Equation 2.2.3-2
@@ -696,35 +756,43 @@ namespace H.Core.Calculators.Carbon
             double maximumTemperatureForDecomposition,
             double optimumTemperatureForDecomposition)
         {
-            var monthlyValues = new List<double>();
+            var monthlyValues = this.CalculateMonthlyTemperatureFactors(
+                monthlyAverageTemperatures: monthlyAverageTemperatures,
+                maximumTemperatureForDecomposition: maximumTemperatureForDecomposition,
+                optimumTemperatureForDecomposition: optimumTemperatureForDecomposition);
+
+            var sum = monthlyValues.Sum();
+
+            // There might be an incomplete year where there isn't 12 values for temperature
+            var annualTemperatureFactor = sum / monthlyValues.Count;
+
+            return annualTemperatureFactor;
+        }
+
+        public List<double> CalculateMonthlyTemperatureFactors(
+            List<double> monthlyAverageTemperatures,
+            double maximumTemperatureForDecomposition,
+            double optimumTemperatureForDecomposition)
+        {
+            var result = new List<double>();
 
             // There might be an incomplete year where there isn't 12 values for precipitation or evapotranspiration, take minimum and use that 
             // to average since we need both a precipitation and a evapotranspiration for each month
             var numberOfMonths = monthlyAverageTemperatures.Count;
 
-            for (int i = 0; i < numberOfMonths; i++)
+            for (int monthNumber = 0; monthNumber < numberOfMonths; monthNumber++)
             {
-                var temperatureAtMonth = monthlyAverageTemperatures.ElementAtOrDefault(i);
+                var temperatureAtMonth = monthlyAverageTemperatures.ElementAtOrDefault(monthNumber);
 
                 var temperatureEffectForMonth = this.CalculateMonthlyTemperatureEffectOnDecomposition(
                     maximumMonthlyTemperatureForDecomposition: maximumTemperatureForDecomposition,
                     monthlyTemperature: temperatureAtMonth,
                     optimumTemperatureForDecomposition: optimumTemperatureForDecomposition);
 
-                if (temperatureAtMonth > 45)
-                {
-                    temperatureEffectForMonth = 0;
-                }
-
-                monthlyValues.Add(temperatureEffectForMonth);
+                result.Add(temperatureEffectForMonth);
             }
-                        
-            var sum = monthlyValues.Sum();
 
-            // There might be an incomplete year where there isn't 12 values for temperature
-            var annualTemperatureFactor = sum / numberOfMonths;
-
-            return annualTemperatureFactor;
+            return result;
         }
 
         /// <summary>
@@ -764,18 +832,35 @@ namespace H.Core.Calculators.Carbon
             List<double> monthlyTotalEvapotranspirations,
             double slopeParameter)
         {
+            var monthlyValues = this.GetMonthlyWaterEffects(
+                monthlyTotalPrecipitations: monthlyTotalPrecipitations,
+                monthlyTotalEvapotranspirations: monthlyTotalEvapotranspirations,
+                slopeParameter: slopeParameter);
+
+            var total = monthlyValues.Sum();
+            var average = total / monthlyValues.Count;
+            var annualWaterEffect = 1.5 * average;
+
+            return annualWaterEffect;
+        }
+
+        public List<double> GetMonthlyWaterEffects(
+            List<double> monthlyTotalPrecipitations,
+            List<double> monthlyTotalEvapotranspirations, 
+            double slopeParameter)
+        {
             var monthlyValues = new List<double>();
 
             // There might be an incomplete year where there isn't 12 values for precipitation or evapotranspiration, take minimum and use that 
             // to average since we need both a precipitation and a evapotranspiration for each month
             var numberOfMonths = Math.Min(monthlyTotalPrecipitations.Count, monthlyTotalEvapotranspirations.Count);
 
-            for (int i = 0; i < numberOfMonths; i++)
+            for (int monthNumber = 0; monthNumber < numberOfMonths; monthNumber++)
             {
-                var precipitationAtMonth = monthlyTotalPrecipitations.ElementAtOrDefault(i);
-                var evapotranspirationAtMonth = monthlyTotalEvapotranspirations.ElementAtOrDefault(i);
+                var precipitationAtMonth = monthlyTotalPrecipitations.ElementAtOrDefault(monthNumber);
+                var evapotranspirationAtMonth = monthlyTotalEvapotranspirations.ElementAtOrDefault(monthNumber);
 
-                var waterEffectForMonth = this.CalculateMonthlyWaterEffectOnDecomposition(
+                var waterEffectForMonth = this.CalculateMonthlyWaterEffect(
                     monthlyTotalPrecipitation: precipitationAtMonth,
                     monthlyTotalEvapotranspiration: evapotranspirationAtMonth,
                     slopeParameter: slopeParameter);
@@ -783,13 +868,20 @@ namespace H.Core.Calculators.Carbon
                 monthlyValues.Add(waterEffectForMonth);
             }
 
-            var total = monthlyValues.Sum();
+            return monthlyValues;
+        }
 
-            var average = total / numberOfMonths;
+        public double CalculateMonthlyWaterEffect(
+            double monthlyTotalPrecipitation,
+            double monthlyTotalEvapotranspiration,
+            double slopeParameter)
+        {
+            var waterEffectForMonth = this.CalculateMonthlyWaterEffectOnDecomposition(
+                monthlyTotalPrecipitation: monthlyTotalPrecipitation,
+                monthlyTotalEvapotranspiration: monthlyTotalEvapotranspiration,
+                slopeParameter: slopeParameter);
 
-            var annualWaterEffect = 1.5 * average;
-
-            return annualWaterEffect;
+            return waterEffectForMonth;
         }
 
         /// <summary>

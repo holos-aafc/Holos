@@ -145,8 +145,8 @@ namespace H.Core.Providers.Energy
 
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
-                    Trace.Write($"{nameof(Table_49_Electricity_Conversion_Defaults_Provider)}.{nameof(ReadFile)}" +
-                                $" - File: {nameof(CsvResourceNames.ElectricityConversionValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
+                    //Trace.Write($"{nameof(Table_49_Electricity_Conversion_Defaults_Provider)}.{nameof(ReadFile)}" +
+                                //$" - File: {nameof(CsvResourceNames.ElectricityConversionValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
 

@@ -5,17 +5,23 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public partial class CropViewItem
     {
+        #region Fields
+
+        private IPCCTier2Results _carbonResults;
+        private IPCCTier2Results _nitrogenResults;
+
+        private MonthlyValueBase<double> _monthlyIpccTier2WaterFactors;
+        private MonthlyValueBase<double> _monthlyIpccTier2TemperatureFactors;
+
+        #endregion
+
+        #region Properties
+
         public double NO3NFromSyntheticFertilizerLeaching;
         public double NO3NFromResiduesLeaching;
         public double NO3NFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeachingExcludingRemainingAmounts;
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// (kg C ha^-1)
@@ -373,8 +379,19 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
-        private IPCCTier2Results _carbonResults;
-        private IPCCTier2Results _nitrogenResults;
+        #region IPCC Tier 2
+
+        public MonthlyValueBase<double> MonthlyIpccTier2WaterFactors
+        {
+            get => _monthlyIpccTier2WaterFactors;
+            set => SetProperty(ref _monthlyIpccTier2WaterFactors, value);
+        }
+
+        public MonthlyValueBase<double> MonthlyIpccTier2TemperatureFactors
+        {
+            get => _monthlyIpccTier2TemperatureFactors;
+            set => SetProperty(ref _monthlyIpccTier2TemperatureFactors, value);
+        }
 
         public IPCCTier2Results IpccTier2CarbonResults
         {
@@ -399,8 +416,6 @@ namespace H.Core.Models.LandManagement.Fields
                 SetProperty(ref _nitrogenResults, value);
             }
         }
-
-        #region IPCC Tier 2
 
         public double ActivePoolCarbon { get; set; }
         public double SlowPoolCarbon { get; set; }

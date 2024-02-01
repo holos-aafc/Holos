@@ -5748,4 +5748,10 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="LabelWeightedModifierBasedOnTexture" xml:space="preserve">
     <value>Weighted modifier based on texture</value>
   </data>
+  <data name="LabelTemperatureEffect" xml:space="preserve">
+    <value>Temperature effect</value>
+  </data>
+  <data name="LabelWaterEffect" xml:space="preserve">
+    <value>Water effect</value>
+  </data>
 </root>

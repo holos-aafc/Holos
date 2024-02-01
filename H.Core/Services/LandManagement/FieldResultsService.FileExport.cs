@@ -150,6 +150,32 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelTFac + "," +
                 Properties.Resources.LabelWFac + "," +
 
+                Properties.Resources.January + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.February + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.March + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.April + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.May + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.June + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.July + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.August + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.September + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.October + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.November + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.December + " " + Properties.Resources.LabelTemperatureEffect + "," +
+
+                Properties.Resources.January + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.February + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.March + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.April + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.May + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.June + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.July + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.August + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.September + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.October + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.November + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.December + " " + Properties.Resources.LabelWaterEffect + "," +
+
                 Properties.Resources.LabelActivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelPassivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelSlowPool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
@@ -283,6 +309,32 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TotalCarbonInputs, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.WFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.January.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.February.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.March.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.April.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.May.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.June.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.July.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.August.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.September.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.October.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.November.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.December.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.January.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.February.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.March.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.April.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.May.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.June.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.July.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.August.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.September.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.October.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.November.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.December.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.ActivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.PassivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));

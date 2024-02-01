@@ -1001,6 +1001,70 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(viewItemsByField.First().SoilCarbon, farm.StartingSoilOrganicCarbon);
         }
 
+        [TestMethod]
+        public void GetMonthlyTemperatureEffectTestReturnsZeroWhenTemperatureIsAboveMaximum()
+        {
+            var monthlyTemperatures = new List<double>() {12, 4, 52};
+
+            var result = _sut.CalculateMonthlyTemperatureEffectOnDecomposition(
+                maximumMonthlyTemperatureForDecomposition: 30,
+                monthlyTemperature: 52,
+                optimumTemperatureForDecomposition: 12);
+
+                Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetMonthlyTemperatureEffectTest()
+        {
+            var result = _sut.CalculateMonthlyTemperatureEffectOnDecomposition(45, 22, 10);
+
+            Assert.AreEqual(0.9673, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateMonthlyWaterEffect()
+        {
+            var precipitation = 1;
+            var evapotranspiration = 11;
+
+            var result = _sut.CalculateMonthlyWaterEffect(precipitation, evapotranspiration, 3);
+
+            Assert.AreEqual(0.4836, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void SetMonthlyWaterFactorsTest()
+        {
+            var precipitations = new List<double>() { 3, 4, 1 };
+            var evapotranspirations = new List<double>() { 19, 22, 11 };
+            var viewItem = new CropViewItem();
+
+            _sut.SetMonthlyWaterFactors(
+                monthlyTotalPrecipitations: precipitations,
+                monthlyTotalEvapotranspirations: evapotranspirations,
+                slopeParameter: 2,
+                viewItem);
+
+            Assert.AreEqual(0.5226, viewItem.MonthlyIpccTier2WaterFactors.January, 0.0001);
+            Assert.AreEqual(0.5685, viewItem.MonthlyIpccTier2WaterFactors.February, 0.0001);
+            Assert.AreEqual(0.3927, viewItem.MonthlyIpccTier2WaterFactors.March, 0.0001);
+        }
+
+
+        [TestMethod]
+        public void SetMonthlyTemperatureFactorsTest()
+        {
+            var averageTemperatures = new List<double>() { 22, 21, 10 };
+            var viewItem = new CropViewItem();
+
+            _sut.SetMonthlyTemperatureFactors(averageTemperatures, 30, 18, viewItem);
+
+            Assert.AreEqual(0.9692, viewItem.MonthlyIpccTier2TemperatureFactors.January, 0.0001);
+            Assert.AreEqual(0.9829, viewItem.MonthlyIpccTier2TemperatureFactors.February, 0.0001);
+            Assert.AreEqual(0.8930, viewItem.MonthlyIpccTier2TemperatureFactors.March, 0.0001);
+        }
+
         #endregion
     }
 }

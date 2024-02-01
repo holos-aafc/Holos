@@ -115,6 +115,7 @@ namespace H.Core.Models.LandManagement.Fields
         private void CalculateYield()
         {
             this.AboveGroundBiomass = this.TotalNumberOfBalesHarvested * this.BaleWeight;
+            
         }
 
         #endregion

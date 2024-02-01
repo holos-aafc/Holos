@@ -11320,6 +11320,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temperature effect.
+        /// </summary>
+        public static string LabelTemperatureEffect {
+            get {
+                return ResourceManager.GetString("LabelTemperatureEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Termination type.
         /// </summary>
         public static string LabelTerminationType {
@@ -11865,6 +11874,15 @@ namespace H.Core.Properties {
         public static string LabelVolumeOfDigestateEnteringStorage {
             get {
                 return ResourceManager.GetString("LabelVolumeOfDigestateEnteringStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Water effect.
+        /// </summary>
+        public static string LabelWaterEffect {
+            get {
+                return ResourceManager.GetString("LabelWaterEffect", resourceCulture);
             }
         }
         

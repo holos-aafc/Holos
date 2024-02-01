@@ -31,6 +31,19 @@ namespace H.Core
 
         public MonthlyValueBase()
         {
+            this.January = default(T);
+            this.February = default(T);
+            this.March = default(T);
+            this.April = default(T);
+            this.May = default(T);
+            this.June = default(T);
+            this.July = default(T);
+            this.August = default(T);
+            this.September = default(T);
+            this.October = default(T);
+            this.November = default(T);
+            this.December = default(T);
+
             _monthNames = new List<string>()
             {
                 nameof(this.January),

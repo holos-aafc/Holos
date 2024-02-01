@@ -165,6 +165,9 @@ namespace H.Core.Models.LandManagement.Fields
             this.MoistureContentOfCropPercentage = 12;
             this.SoilReductionFactor = SoilReductionFactors.None;
 
+            this.MonthlyIpccTier2WaterFactors = new MonthlyValueBase<double>();
+            this.MonthlyIpccTier2TemperatureFactors = new MonthlyValueBase<double>();
+
             this.CoverCropTerminationType = CoverCropTerminationType.Natural;
 
             this.NitrogenDepositionAmount = 5;
