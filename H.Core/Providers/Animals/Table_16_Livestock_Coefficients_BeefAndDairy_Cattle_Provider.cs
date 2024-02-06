@@ -185,6 +185,18 @@ namespace H.Core.Providers.Animals
                         DefaultFinalWeight = 1200,
                     };
                 }
+                
+                case AnimalType.DairyCalf:
+                {
+                    return new AnimalCoefficientData()
+                    {
+                        AnimalType = AnimalType.DairyCalf,
+                        BaselineMaintenanceCoefficient = 0,
+                        GainCoefficient = 0,
+                        DefaultInitialWeight = 45,
+                        DefaultFinalWeight = 127,
+                    };
+                }
 
                 default:
                 {
