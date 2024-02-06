@@ -10321,6 +10321,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Milk-fed dairy calves. A period of no enteric methane emissions.
+        /// </summary>
+        public static string LabelMilkFedManagementPeriod {
+            get {
+                return ResourceManager.GetString("LabelMilkFedManagementPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mineral Nitrogen Balance (N_mineralNbalance).
         /// </summary>
         public static string LabelMineralNitrogenBalance {

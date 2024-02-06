@@ -451,6 +451,11 @@ namespace H.Core.Services.Animals
             var totalCarbonExported = this.GetTotalCarbonFromExportedManure(year, farm);
             var totalCarbonApplied = this.GetTotalCarbonInputsFromLivestockManureApplications(farm, year);
 
+            if (totalCarbonCreated == 0 && totalCarbonImported > 0)
+            {
+                return 0;
+            }
+
             result = totalCarbonCreated + totalCarbonImported - totalCarbonApplied - totalCarbonExported;
             if (result < 0)
             {
@@ -490,7 +495,11 @@ namespace H.Core.Services.Animals
                 inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
             }
 
-            var inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            var inputsFromImportedManure = 0d;
+            if (field.HasImportedManureApplicationsInYear(year))
+            {
+                inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            }
 
             var remaining = this.GetTotalCarbonRemainingForField(farm, year, viewItem);
 
@@ -617,6 +626,12 @@ namespace H.Core.Services.Animals
 
             var totalAppliedNitrogen = localSourcedNitrogenApplied;//this.GetTotalNitrogenAppliedToAllFields(year);
             var totalExportedNitrogen = this.GetTotalNitrogenFromExportedManure(year, farm);
+
+            // If all manure used was imported and none from local sources were used or created then there is no remaining N since all imports are used
+            if (totalAvailableNitrogen == 0 && totalAppliedNitrogen == 0 && importedNitrogenApplied > 0)
+            {
+                return 0;
+            }
 
             return totalAvailableNitrogen - (totalAppliedNitrogen  - importedNitrogenApplied)- totalExportedNitrogen;
         }

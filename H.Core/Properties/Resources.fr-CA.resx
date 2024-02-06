@@ -5693,4 +5693,7 @@
   <data name="LabelWaterEffect" xml:space="preserve">
     <value>Water effect</value>
   </data>
+  <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
+    <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
+  </data>
 </root>
