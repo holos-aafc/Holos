@@ -186,7 +186,7 @@ namespace H.Core.Providers.Animals
                     };
                 }
                 
-                case AnimalType.DairyCalf:
+                case AnimalType.DairyCalves:
                 {
                     return new AnimalCoefficientData()
                     {
