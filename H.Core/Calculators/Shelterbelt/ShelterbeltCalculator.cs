@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -105,7 +106,25 @@ namespace H.Core.Calculators.Shelterbelt
                 yearOfObservationTrannum.CanLookupByEcodistrict = ShelterbeltEcodistrictToClusterLookupProvider.CanLookupByEcodistrict(yearOfObservationTrannum.EcodistrictId);
 
                 // Now we calculate the ratio of real growth compared to ideal growth for the trees at this age
-                yearOfObservationTrannum.RealGrowthRatio = this.CalculateRealGrowthRatioComparedToIdealGrowth(yearOfObservationTrannum);
+
+                // Lookups don't have entries for average species use averages here if this is the case
+                var originalSpecies = yearOfObservationTrannum.TreeSpecies;
+                double realGrowthRatio = 0d;
+                if (originalSpecies == TreeSpecies.AverageConifer)
+                {
+                    realGrowthRatio = this.CalculateRealGrowthRatioAverageConiferous(yearOfObservationTrannum);
+                }
+
+                else if (originalSpecies == TreeSpecies.AverageDeciduous)
+                {
+                    realGrowthRatio = this.CalculateRealGrowthRatioAverageDeciduous(yearOfObservationTrannum);
+                }
+                else
+                {
+                    realGrowthRatio = this.CalculateRealGrowthRatioComparedToIdealGrowth(yearOfObservationTrannum);
+                }
+
+                yearOfObservationTrannum.RealGrowthRatio = realGrowthRatio;
 
                 // Now that we have calculated the real growth ratio, we assign this to all other years within same group and indicate the table lookup method we will use
                 foreach (var trannum in treeGroup)
@@ -120,6 +139,40 @@ namespace H.Core.Calculators.Shelterbelt
                     this.CalculateEstimatedGrowth(data);
                 }
             }
+        }
+
+        private double CalculateRealGrowthRatioAverageConiferous(TrannumData trannumData)
+        {
+            trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
+
+            var whiteSpruceRealGrowth = this.CalculateRealGrowthRatioComparedToIdealGrowth(trannumData);
+
+            trannumData.TreeSpecies = TreeSpecies.ScotsPine;
+
+            var scotsPineRealGrowth = this.CalculateRealGrowthRatioComparedToIdealGrowth(trannumData);
+
+            var result = this.AverageTwo(scotsPineRealGrowth, whiteSpruceRealGrowth);
+
+            trannumData.TreeSpecies = TreeSpecies.AverageConifer;
+
+            return result;
+        }
+
+        private double CalculateRealGrowthRatioAverageDeciduous(TrannumData trannumData)
+        {
+            trannumData.TreeSpecies = TreeSpecies.ManitobaMaple;
+
+            var manitobaMapleRealGrowth = this.CalculateRealGrowthRatioComparedToIdealGrowth(trannumData);
+
+            trannumData.TreeSpecies = TreeSpecies.GreenAsh;
+
+            var greenAshRealGrowth = this.CalculateRealGrowthRatioComparedToIdealGrowth(trannumData);
+
+            var result = this.AverageTwo(greenAshRealGrowth, manitobaMapleRealGrowth);
+
+            trannumData.TreeSpecies = TreeSpecies.AverageDeciduous;
+
+            return result;
         }
 
         /// <summary>
@@ -167,14 +220,13 @@ namespace H.Core.Calculators.Shelterbelt
              */
 
             var age = trannumData.Age;
-            var biomasCarbonPerKilometerMegagrams = 0d;
-            var idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength = 0d;
+            var realGrowthOfIdealTree = 0d;
             if (trannumData.CanLookupByEcodistrict)
             {
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    biomasCarbonPerKilometerMegagrams = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    realGrowthOfIdealTree = ShelterbeltCarbonDataProvider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         ecodistrictId: trannumData.EcodistrictId,
                         percentMortality: trannumData.PercentMortality,
@@ -184,7 +236,7 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (biomasCarbonPerKilometerMegagrams == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
             else
             {
@@ -196,7 +248,7 @@ namespace H.Core.Calculators.Shelterbelt
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    biomasCarbonPerKilometerMegagrams = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                    realGrowthOfIdealTree = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         hardinessZone: trannumData.HardinessZone,
                         percentMortality: trannumData.PercentMortality,
@@ -206,15 +258,12 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (biomasCarbonPerKilometerMegagrams == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
-
-            // Convert total living biomass carbon in megagrams to kilograms
-            idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength = biomasCarbonPerKilometerMegagrams * 1000;
 
             var result = this.CalculateRealGrowthRatio(
                 calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
-                lookupTotalLivingCarbonKilogramsPerStandardLength: idealTotalLivingCarbonKilogramsPerTreeTypePerStandardLength);
+                lookupTotalLivingCarbonKilogramsPerStandardLength: realGrowthOfIdealTree);
 
             return result;
         }
@@ -554,7 +603,6 @@ namespace H.Core.Calculators.Shelterbelt
             return averageCircumference;
         }
 
-        
         /// <summary>
         /// Equation 2.3.2-5
         /// </summary>
@@ -607,7 +655,7 @@ namespace H.Core.Calculators.Shelterbelt
         /// <summary>
         /// Equation 2.3.3-3
         /// </summary>
-        /// <param name="biomassOfAllTrees">Biomassof trees of the same species within a linear planting (kg planting-1)</param>
+        /// <param name="biomassOfAllTrees">Biomass of trees of the same species within a linear planting (kg planting-1)</param>
         /// <param name="rowLength">Length of the </param>
         /// <returns>Total tree biomass per standard length linear planting (kg km^-1)</returns>
         public double CalculateTotalLivingBiomassPerStandardLength(
@@ -648,10 +696,10 @@ namespace H.Core.Calculators.Shelterbelt
                 return 1;
             }
 
-            return calculatedTotalLivingCarbonKilogramPerStandardLength / lookupTotalLivingCarbonKilogramsPerStandardLength;
+            var result = (calculatedTotalLivingCarbonKilogramPerStandardLength / (lookupTotalLivingCarbonKilogramsPerStandardLength));
+
+            return result;
         }
-
-
 
         /// <summary>
         /// </summary>

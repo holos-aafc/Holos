@@ -93,7 +93,7 @@ namespace H.Core.Providers.Shelterbelt
         /// </summary>
         /// <param name="treeSpecies">The tree species</param>
         /// <param name="age">The age of the tree (years)</param>
-        /// <returns>Fraction of aboveground over total biomass (total biomass = aboveground + belowground)</returns>
+        /// <returns>Fraction of above ground over total biomass (total biomass = above ground + below ground)</returns>
         public double GetAboveGroundBiomassTotalTreeBiomassRatio(
             TreeSpecies treeSpecies, 
             int age)

@@ -698,13 +698,13 @@
     <Compile Include="Services\LandManagement\FieldResultsService.CoverCrops.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.UnderSownCrops.cs" />
     <Compile Include="Services\LandManagement\IFieldResultsService.cs" />
-    <Compile Include="Services\IShelterbeltComponentHelper.cs" />
+    <Compile Include="Services\LandManagement\Shelterbelts\IShelterbeltComponentHelper.cs" />
     <Compile Include="Services\ITimePeriodHelper.cs" />
     <Compile Include="Services\LandManagement\IrrigationService.cs" />
     <Compile Include="Services\LandManagement\MonthlyManureSpreadingResults.cs" />
     <Compile Include="Converters\PropertyConverter.cs" />
     <Compile Include="Services\RotationComponentHelper.cs" />
-    <Compile Include="Services\ShelterbeltComponentHelper.cs" />
+    <Compile Include="Services\LandManagement\Shelterbelts\ShelterbeltComponentHelper.cs" />
     <Compile Include="Services\TimePeriodHelper.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Tools\FileTraceListener.cs" />
