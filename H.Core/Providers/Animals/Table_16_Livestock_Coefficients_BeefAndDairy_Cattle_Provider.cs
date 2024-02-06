@@ -190,7 +190,7 @@ namespace H.Core.Providers.Animals
                 {
                     return new AnimalCoefficientData()
                     {
-                        AnimalType = AnimalType.DairyCalf,
+                        AnimalType = AnimalType.DairyCalves,
                         BaselineMaintenanceCoefficient = 0,
                         GainCoefficient = 0,
                         DefaultInitialWeight = 45,
