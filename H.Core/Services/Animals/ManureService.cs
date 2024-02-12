@@ -451,7 +451,8 @@ namespace H.Core.Services.Animals
             var totalCarbonExported = this.GetTotalCarbonFromExportedManure(year, farm);
             var totalCarbonApplied = this.GetTotalCarbonInputsFromLivestockManureApplications(farm, year);
 
-            if (totalCarbonCreated == 0 && totalCarbonImported > 0)
+            // If noting was created on the farm then there is nothing remaining for imported manure since it is all applied when imported
+            if (totalCarbonCreated == 0 &&  totalCarbonImported > 0)
             {
                 return 0;
             }

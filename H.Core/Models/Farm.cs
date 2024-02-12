@@ -1090,6 +1090,12 @@ namespace H.Core.Models
                         {
                             result.Add(animalGroupManagementPeriod.Start.Year);
                         }
+
+
+                        if (result.Contains(animalGroupManagementPeriod.End.Year) == false)
+                        {
+                            result.Add(animalGroupManagementPeriod.End.Year);
+                        }
                     }
                 }
             }

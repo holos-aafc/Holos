@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Net;
 
 namespace H.Infrastructure
@@ -16,9 +17,11 @@ namespace H.Infrastructure
                     return true;
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Trace.TraceError($"Exception thrown.");
                 Trace.TraceError($"{nameof(NetworkHelper)}.{nameof(IsConnectedToInternet)} : Could not connect to the internet.");
+                Trace.TraceError($"Inner Exception message: {e.InnerException}");
                 return false;
             }
         }

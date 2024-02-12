@@ -75,7 +75,7 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem))
+            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
             {
                 var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
                     currentYearViewItem) / currentYearViewItem.Area;
@@ -1100,6 +1100,8 @@ namespace H.Core.Calculators.Carbon
         public double RecalculateCarbonInputForGrazingScenario(
             CropViewItem viewItem)
         {
+            // Check for negative values here
+
             var result = viewItem.PlantCarbonInAgriculturalProduct -(viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
 
             return result;
