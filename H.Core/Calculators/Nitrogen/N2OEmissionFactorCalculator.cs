@@ -15,7 +15,7 @@ using H.Infrastructure;
 
 namespace H.Core.Calculators.Nitrogen
 {
-    public partial class N2OEmissionFactorCalculator
+    public partial class N2OEmissionFactorCalculator : IN2OEmissionFactorCalculator
     {
         #region Fields
 

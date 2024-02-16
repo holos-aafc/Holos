@@ -74,6 +74,24 @@ namespace H.Core.Calculators.Nitrogen
             return totalNitrogen;
         }
 
+        public double GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
+        {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            {
+                return 0;
+            }
+
+            var totalVolume = 0d;
+
+            foreach (var manureApplication in viewItem.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == viewItem.Year))
+            {
+                totalVolume += manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area;
+            }
+
+            return totalVolume;
+        }
+
         /// <summary>
         /// Equation 4.6.1-3
         ///
@@ -180,6 +198,32 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
+        public double CalculateVolumeFromLeftOverManureForField(
+            Farm farm,
+            CropViewItem viewItem)
+        {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+            
+            // The total volume after all applications and exports have been subtracted
+            var totalVolumeRemaining = this.ManureService.GetTotalVolumeRemainingForFarmAndYear(viewItem.Year, farm);
+
+            var totalAreaOfAllFields = farm.GetTotalAreaOfFarm(false, viewItem.Year);
+            if (totalAreaOfAllFields == 0)
+            {
+                totalAreaOfAllFields = 1;
+            }
+
+            var areaOfThisField = viewItem.Area;
+
+            // The total volume that is left over and must be associated with this field so that all manure is applied to the fields in the same year (nothing is remaining to be applied)
+            var result = totalVolumeRemaining * (areaOfThisField / totalAreaOfAllFields);
+
+            return result;
+        }
+
         /// <summary>
         /// Equation 4.6.1-9
         ///
@@ -233,6 +277,32 @@ namespace H.Core.Calculators.Nitrogen
 
             var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(viewItem, farm);
             var leftOver = this.CalculateDirectN2ONFromLeftOverManureForField(farm, viewItem);
+
+            result = applied;
+
+            if (includeRemainingAmounts)
+            {
+                result += leftOver;
+            }
+
+            return result;
+        }
+
+        public double CalculateVolumeFromFieldAppliedManure(
+            Farm farm,
+            CropViewItem viewItem,
+            bool includeRemainingAmounts = true)
+        {
+            var result = 0d;
+
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null)
+            {
+                return 0;
+            }
+
+            var applied = this.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(viewItem, farm);
+            var leftOver = this.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
 
             result = applied;
 

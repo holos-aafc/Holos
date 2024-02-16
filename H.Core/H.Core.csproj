@@ -135,6 +135,7 @@
     <Compile Include="Calculators\Infrastructure\ADCalculator.FieldApplications.cs" />
     <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Infrastructure\IADCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\IN2OEmissionFactorCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Manure.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Digestate.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
@@ -701,8 +702,9 @@
     <Compile Include="Services\LandManagement\Shelterbelts\IShelterbeltComponentHelper.cs" />
     <Compile Include="Services\ITimePeriodHelper.cs" />
     <Compile Include="Services\LandManagement\IrrigationService.cs" />
-    <Compile Include="Services\LandManagement\MonthlyManureSpreadingResults.cs" />
+    <Compile Include="Services\LandManagement\MonthlyManureSpreadingEmissions.cs" />
     <Compile Include="Converters\PropertyConverter.cs" />
+    <Compile Include="Services\MonthlyManureSpreadingData.cs" />
     <Compile Include="Services\RotationComponentHelper.cs" />
     <Compile Include="Services\LandManagement\Shelterbelts\ShelterbeltComponentHelper.cs" />
     <Compile Include="Services\TimePeriodHelper.cs" />

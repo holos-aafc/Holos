@@ -50,6 +50,7 @@ namespace H.Core.Services.LandManagement
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
         private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
         private readonly DigestateService _digestateService = new DigestateService();
+        private readonly IManureService _manureService = new ManureService();
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();

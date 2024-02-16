@@ -8,6 +8,7 @@ using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using H.Core.Services.LandManagement;
 using H.Infrastructure;
 
 namespace H.Core.Services.Animals
@@ -637,6 +638,38 @@ namespace H.Core.Services.Animals
             return totalAvailableNitrogen - (totalAppliedNitrogen  - importedNitrogenApplied)- totalExportedNitrogen;
         }
 
+        public double GetTotalVolumeRemainingForFarmAndYear(int year, Farm farm)
+        {
+            var totalAvailableVolume = this.GetTotalVolumeCreated(year);
+
+            var items = farm.GetCropViewItemsByYear(year, false);
+            var localSourcedVolumeApplied = 0d;
+            var importedVolumeApplied = 0d;
+            foreach (var cropViewItem in items)
+            {
+                foreach (var manureApplicationViewItem in cropViewItem.GetLocalSourcedApplications(year))
+                {
+                    localSourcedVolumeApplied += manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
+                }
+
+                foreach (var manureApplicationViewItem in cropViewItem.GetManureImportsByYear(year))
+                {
+                    importedVolumeApplied += manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
+                }
+            }
+
+            var totalVolumeApplied = localSourcedVolumeApplied;
+            var totalExportedVolume = this.GetTotalVolumeFromExportedManure(year, farm);
+
+            // If all manure used was imported and none from local sources were used or created then there is no remaining N since all imports are used
+            if (totalAvailableVolume == 0 && totalVolumeApplied == 0 && importedVolumeApplied > 0)
+            {
+                return 0;
+            }
+
+            return totalAvailableVolume - (totalVolumeApplied - importedVolumeApplied) - totalExportedVolume;
+        }
+
         public double GetTotalNitrogenFromExportedManure(int year, Farm farm)
         {
             var result = 0d;
@@ -651,6 +684,20 @@ namespace H.Core.Services.Animals
                 }
 
                 result += (amountOfManure * nitrogenContent);
+            }
+
+            return result;
+        }
+
+        public double GetTotalVolumeFromExportedManure(int year, Farm farm)
+        {
+            var result = 0d;
+
+            foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
+            {
+                var amountOfManure = manureExportViewItem.Amount;
+
+                result += amountOfManure;
             }
 
             return result;
@@ -789,6 +836,45 @@ namespace H.Core.Services.Animals
             this.UpdateAmountsUsed(tank, farm, manureStateType);
 
             return tank;
+        }
+
+        public List<MonthlyManureSpreadingData> GetMonthlyManureSpreadingData(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            var result = new List<MonthlyManureSpreadingData>();
+
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            {
+                return result;
+            }
+
+            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            {
+                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
+
+                // When volume is 0, only the amount of N may have been entered. Calculate volume now.
+                if (totalVolume == 0)
+                {
+                    var calculatedVolumePerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
+                    if (manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent > 0)
+                    {
+                        totalVolume = calculatedVolumePerHectare / manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent;
+                    }
+                }
+
+                var resultItem = new MonthlyManureSpreadingData
+                {
+                    Year = manureApplicationViewItem.DateOfApplication.Year,
+                    Month = manureApplicationViewItem.DateOfApplication.Month,
+                    TotalVolume = totalVolume
+                };
+
+                result.Add(resultItem);
+            }
+
+            return result;
         }
 
         #endregion

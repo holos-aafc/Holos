@@ -165,5 +165,13 @@ namespace H.Core.Services.Animals
         double GetTotalManureCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
 
         List<ManureStateType> GetManureStatesProducedOnFarm(Farm farm);
+        double GetTotalVolumeRemainingForFarmAndYear(int year, Farm farm);
+
+        /// <summary>
+        /// Returns a list of items that represent a month and the volume of manure that was applied to the field in that month.
+        /// </summary>
+        List<MonthlyManureSpreadingData> GetMonthlyManureSpreadingData(
+            CropViewItem viewItem,
+            Farm farm);
     }
 }

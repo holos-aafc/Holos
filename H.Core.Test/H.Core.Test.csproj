@@ -227,6 +227,7 @@
     <Compile Include="Converters\InputConversionTest.cs" />
     <Compile Include="Services\SheepResultsServiceTest.cs" />
     <Compile Include="Services\SwineResultsServiceTest.cs" />
+    <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
     <Compile Include="UnitTestBase.cs" />
     <Compile Include="ViewModels\ShelterbeltViewModelTest.cs" />
     <Compile Include="ViewModels\RowViewModelTest.cs" />
