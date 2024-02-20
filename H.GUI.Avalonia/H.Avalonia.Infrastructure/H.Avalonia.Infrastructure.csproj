@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Alberta_No_Styles.kml" />
+    <None Remove="Resources\BC_No_Styles.kml" />
+    <None Remove="Resources\MB_No_Styles.kml" />
+    <None Remove="Resources\NB_No_Styles.kml" />
+    <None Remove="Resources\NFLD_No_Styles.kml" />
+    <None Remove="Resources\NS_No_Styles.kml" />
+    <None Remove="Resources\ON_No_Styles.kml" />
+    <None Remove="Resources\PEI_No_Styles.kml" />
+    <None Remove="Resources\QC_No_Styles.kml" />
+    <None Remove="Resources\SK_No_Styles.kml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="Mapsui.Avalonia" Version="4.0.0" />
+    <PackageReference Include="Mapsui.Extensions" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Prism.Avalonia" Version="8.1.97.11000" />
+    <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11000" />
+    <PackageReference Include="SharpKml.Core" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\..\H.Infrastructure\H.Infrastructure.csproj" />
+    <ProjectReference Include="..\H.Avalonia.Core\H.Avalonia.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Alberta_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\BC_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\MB_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NB_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NFLD_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\NS_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\ON_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\PEI_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\QC_No_Styles.kml" />
+    <EmbeddedResource Include="Resources\SK_No_Styles.kml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Dialogs\DeleteRowDialog.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

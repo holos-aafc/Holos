@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;

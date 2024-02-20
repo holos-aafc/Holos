@@ -1521,6 +1521,7 @@ namespace H.Core.Test.Calculators
                 EcodistrictId = 812,
                 SoilTexture = SoilTexture.Fine,
                 SoilFunctionalCategory = SoilFunctionalCategory.Black,
+                Province = Province.Alberta,
             };
 
             var geographicData = new GeographicData()

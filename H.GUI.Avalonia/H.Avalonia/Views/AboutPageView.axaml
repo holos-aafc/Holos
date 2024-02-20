@@ -1,0 +1,71 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:H.Avalonia.ViewModels"
+             xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="720"
+             x:Class="H.Avalonia.Views.AboutPageView">
+    <Design.DataContext>
+        <viewModels:AboutPageViewModel/>
+    </Design.DataContext>
+  <StackPanel>
+    <Image
+         Width="200"
+         Source="/Assets/Images/holoslogo.png"
+         RenderOptions.BitmapInterpolationMode="HighQuality">
+    </Image>
+    <TextBlock Text="{x:Static properties:Resources.ApplicationTitle}"
+               FontFamily="{StaticResource MonaSansFontFamily}"
+               FontWeight="Bold"
+               FontSize="37"
+               TextWrapping="Wrap"
+               Width="240"
+               TextAlignment="Center"
+               Margin="10"/>
+    <Border Background="#E5E4E2"
+        CornerRadius="10"
+        Width="720">
+        <TextBlock Text ="{x:Static properties:Resources.TextAboutPage}"
+                   TextWrapping="Wrap"
+                   Padding="15"
+                   Width="720"/>
+    </Border>
+
+    <Grid Width="720" Margin="0, 30, 0, 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0"
+                Background="#E5E4E2"
+                Width="340"
+                CornerRadius="10"
+                Padding="10">
+          <StackPanel HorizontalAlignment="Center">
+              <Label Content="{x:Static properties:Resources.LabelContributors}"
+                     FontSize="24"
+                     FontFamily="{StaticResource RobotoFontFamily}"/>
+              <TextBlock Text="{x:Static properties:Resources.ContributorsList}"
+                         Padding="10"/>
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Background="#E5E4E2"
+                Width="340"
+                CornerRadius="10"
+                Padding="10">
+            <StackPanel HorizontalAlignment="Center">
+                <Label Content="{x:Static properties:Resources.LabelUsefulLinks}"
+                       FontSize="24"
+                       FontFamily="{StaticResource RobotoFontFamily}"/>
+                <Label Content="{x:Static properties:Resources.LabelGithub}"
+                       Padding="10, 10, 0, 0"/>
+                <Label Content="{x:Static properties:Resources.LabelHolosOfficialPage}"
+                       Padding="10, 0, 0, 0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+  </StackPanel>
+</UserControl>

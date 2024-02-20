@@ -2,7 +2,7 @@
 
 using System;
 using System.Globalization;
-using System.Windows.Data;
+using Avalonia.Data.Converters;
 
 #endregion
 
@@ -10,7 +10,6 @@ namespace H.Infrastructure.Controls.ValueConverters
 {
     /// <summary>
     /// </summary>
-    [ValueConversion(typeof(bool), typeof(bool))]
     public class InvertableBooleanConverter : IValueConverter
     {
         #region Fields

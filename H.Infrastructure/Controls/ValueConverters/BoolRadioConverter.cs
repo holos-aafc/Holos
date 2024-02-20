@@ -2,7 +2,8 @@
 
 using System;
 using System.Globalization;
-using System.Windows.Data;
+using Avalonia.Data;
+using Avalonia.Data.Converters;
 
 #endregion
 
@@ -32,7 +33,7 @@ namespace H.Infrastructure.Controls.ValueConverters
 
             if (!boolValue)
             {
-                return Binding.DoNothing;
+                return BindingOperations.DoNothing;
             }
 
             return !this.Inverse;

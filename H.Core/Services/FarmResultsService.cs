@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Navigation;
 using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
@@ -126,7 +125,16 @@ namespace H.Core.Services
                     .ForMember(y => y.StageStates, z => z.Ignore())
                     .ForMember(y => y.ClimateData, z => z.Ignore())
                     .ForMember(y => y.GeographicData, z => z.Ignore())
-                    .ForMember(y => y.Components, z => z.Ignore());
+                    .ForMember(y => y.Components, z => z.Ignore())
+                    .ForMember(y => y.AnimalComponents, z => z.Ignore())
+                    .ForMember(y => y.DairyComponents, z => z.Ignore())
+                    .ForMember(y => y.PoultryComponents, z => z.Ignore())
+                    .ForMember(y => y.FieldSystemComponents, z => z.Ignore())
+                    .ForMember(y => y.SheepComponents, z => z.Ignore())
+                    .ForMember(y => y.SwineComponents, z => z.Ignore())
+                    .ForMember(y => y.AnaerobicDigestionComponents, z => z.Ignore())
+                    .ForMember(y => y.BeefCattleComponents, z => z.Ignore())
+                    .ForMember(y => y.OtherLivestockComponents, z => z.Ignore());
 
                 x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
                     Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();

@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\Fonts\*" />
+    <AvaloniaResource Include="Assets\Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="Avalonia" />
+    <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.2" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
+    <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.0" />
+    <PackageReference Include="Mapsui.Avalonia" Version="4.0.0" />
+    <PackageReference Include="Mapsui.Extensions" Version="4.0.0" />
+    <PackageReference Include="Prism.Avalonia" Version="8.1.97.11000" />
+    <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11000" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\H.Content\H.Content.csproj" />
+    <ProjectReference Include="..\..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\..\H.Infrastructure\H.Infrastructure.csproj" />
+    <ProjectReference Include="..\H.Avalonia.Core\H.Avalonia.Core.csproj" />
+    <ProjectReference Include="..\H.Avalonia.Infrastructure\H.Avalonia.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ClimateDataView.axaml.cs">
+      <DependentUpon>ClimateDataView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ResultViews\ClimateResultsView.axaml.cs">
+      <DependentUpon>ClimateResultsView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ResultViews\SoilResultsView.axaml.cs">
+      <DependentUpon>SoilResultsView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\ComponentViews\" />
+    <Folder Include="Views\DetailViews\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\SupportingViews\" />
+  </ItemGroup>
+</Project>

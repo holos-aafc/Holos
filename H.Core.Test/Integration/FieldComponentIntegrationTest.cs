@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using H.CLI.UserInput;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -17,7 +16,6 @@ using H.Core.Services;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Prism.Events;
-using Prism.Interactivity.DefaultPopupWindows;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 
@@ -135,7 +133,7 @@ namespace H.Core.Test.Integration
             const string OutputDirectory = "HOLOS_OUTPUT\\";
             Directory.CreateDirectory(OutputDirectory);
 
-            _fieldResultsService.ExportResultsToFile(finalResults, OutputDirectory, CultureInfo.CurrentCulture, MeasurementSystemType.Metric, CLILanguageConstants.OutputLanguageAddOn, false, farm);
+            _fieldResultsService.ExportResultsToFile(finalResults, OutputDirectory, CultureInfo.CurrentCulture, MeasurementSystemType.Metric, "-en-CA.csv", false, farm);
         }
 
         [TestMethod]

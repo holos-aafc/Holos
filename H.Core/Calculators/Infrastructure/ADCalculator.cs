@@ -497,6 +497,7 @@ namespace H.Core.Calculators.Infrastructure
             // TODO: Unit attributes/comments needed for FarmResidueSubstrateViewItem class.
             foreach (var substrateViewItemBase in substrateViewItems)
             {
+
                 var startDate = substrateViewItemBase.StartDate;
                 var endDate = substrateViewItemBase.EndDate;
 

@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Media.Animation;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;

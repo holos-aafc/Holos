@@ -52,6 +52,7 @@ namespace H.Core.Test.Calculators.Economics
             {
                 Name = "Farm #1",
                 MeasurementSystemType = MeasurementSystemType.Metric,
+                DefaultSoilData = { Province = Province.Alberta}
             };
             _calculator = new EconomicsCalculator(_mockFieldResultsService.Object);
         }
@@ -120,8 +121,7 @@ namespace H.Core.Test.Calculators.Economics
             #endregion
 
             var barleyMetricFile = "barleyMetricEcon.csv";
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var path = Path.Combine(localAppData, "Temp");
+            var path = Path.GetTempPath();
 
             var applicationData = new ApplicationData();
             applicationData.DisplayUnitStrings = new DisplayUnitStrings();

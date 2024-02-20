@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;

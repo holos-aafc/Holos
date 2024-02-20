@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Windows.Navigation;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions;
