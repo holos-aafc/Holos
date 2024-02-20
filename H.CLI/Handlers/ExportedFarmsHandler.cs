@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using H.CLI.ComponentKeys;
+﻿using H.CLI.ComponentKeys;
 using H.CLI.Converters;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Processors;
 using H.CLI.TemporaryComponentStorage;
+using H.CLI.UserInput;
 using H.Core;
 using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Climate;
-using H.Core.Calculators.Tillage;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers;
+using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace H.CLI.Handlers
 {
@@ -27,7 +27,7 @@ namespace H.CLI.Handlers
 
         private readonly InputHelper _inputHelper = new InputHelper();
         private readonly Storage _storage = new Storage();
-        private readonly FieldProcessor _fieldProcessor = new FieldProcessor();
+        private readonly FieldProcessor _fieldProcessor;
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly ExcelInitializer _excelInitializer = new ExcelInitializer();
         private readonly DirectoryKeys _directoryKeys = new DirectoryKeys();
@@ -39,10 +39,23 @@ namespace H.CLI.Handlers
         private readonly SheepConverter _sheepConverter = new SheepConverter();
         private readonly PoultryConverter _poultryConverter = new PoultryConverter();
         private readonly OtherLiveStockConverter _otherLiveStockConverter = new OtherLiveStockConverter();
-        
-        private readonly IFieldResultsService _fieldResultsService = new FieldResultsService();
+
+        private readonly FieldResultsService _fieldResultsService;
+
+        public string pathToExportedFarm = string.Empty;
 
         #endregion
+
+        public ExportedFarmsHandler()
+        {
+            var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+            var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+
+            _fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            _fieldProcessor = new FieldProcessor(_fieldResultsService);
+        }
 
         #region Public Methods
 
@@ -65,7 +78,7 @@ namespace H.CLI.Handlers
             foreach (var farm in farms)
             {
                 // Create input files for all components in farm
-                var componentFilesForFarm = this.CreateInputFilesForFarm(farmsFolderPath, farm);
+                var componentFilesForFarm = this.CreateInputFilesForFarm(farmsFolderPath, farm, null);
 
                 inputFilesForAllFarms.AddRange(componentFilesForFarm);
             }
@@ -77,19 +90,132 @@ namespace H.CLI.Handlers
             return farms;
         }
 
+        public List<string> InitializeWithCLArguements(string farmsFolderPath, CLIArguments argValues)
+        {
+            var files = Directory.GetFiles(farmsFolderPath);
+            var directories = Directory.GetDirectories(farmsFolderPath);
+            List<string> generatedFarmFolders = new List<string>();
+            string path = string.Empty;
+
+            // If using input folder
+            if (argValues.FolderName != string.Empty)
+            {
+                foreach (var directory in directories)
+                {
+                    if (argValues.FolderName == Path.GetFileName(directory))
+                    {
+                        path = directory;
+                        argValues.IsFolderNameFound = true;
+                        break;
+                    }
+                }
+                if (argValues.IsFolderNameFound)
+                {
+                    var farms = GetExportedFarmsFromUserSpecifiedLocation(path);
+
+                    foreach (var farm in farms)
+                    {
+                        if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+                        {
+                            ChangePolygonID(argValues, farm);
+                        }
+
+                        _ = this.CreateInputFilesForFarm(farmsFolderPath, farm, argValues);
+                        generatedFarmFolders.Add(farmsFolderPath + @"\" + farm.Name);
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FolderName);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            // If using input file
+            if (argValues.FileName != string.Empty)
+            {
+                // Check files for input farm
+                foreach (var file in files)
+                {
+                    if (argValues.FileName == Path.GetFileName(file))
+                    {
+                        path = file;
+                        argValues.IsFileNameFound = true;
+                        break;
+                    }
+                }
+                if (argValues.IsFileNameFound)
+                {
+                    var farms = _storage.GetFarmsFromExportFile(path);
+                    var farmsList = farms.ToList();
+                    var exportedFarm = farmsList[0];
+
+                    // PolygonID for climate configuration
+                    if (argValues.PolygonID != "" || argValues.PolygonID != string.Empty)
+                    {
+                        ChangePolygonID(argValues, exportedFarm);
+                    }
+
+                    _ = this.CreateInputFilesForFarm(farmsFolderPath, exportedFarm, argValues);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.InputFileNotFound, argValues.FileName);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            return generatedFarmFolders;
+        }
+
+        public void ChangePolygonID(CLIArguments argValues, Farm exportedFarm)
+        {
+            var polygonID = int.Parse(argValues.PolygonID);
+            var settingsHandler = new SettingsHandler();
+            var geographicDataProvider = new GeographicDataProvider();
+            geographicDataProvider.Initialize();
+            settingsHandler.InitializePolygonIDList(geographicDataProvider);
+
+            if (settingsHandler.PolygonIDList.Contains(polygonID))
+            {
+                var slcClimateDataProvider = new SlcClimateDataProvider();
+                exportedFarm.PolygonId = polygonID;
+                exportedFarm.GeographicData = geographicDataProvider.GetGeographicalData(polygonID);
+                exportedFarm.ClimateData = slcClimateDataProvider.GetClimateData(polygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(String.Format(Properties.Resources.NotAValidPolygonID, argValues.PolygonID.ToString()));
+                throw new Exception("Not A Valid Polygon ID");
+            }
+            Console.ResetColor();
+        }
+
         /// <summary>
         /// Create a list of input files based on the components that make up the farm.
         /// </summary>
-        public List<string> CreateInputFilesForFarm(string pathToFarmsDirectory, Farm farm)
+        public List<string> CreateInputFilesForFarm(string pathToFarmsDirectory, Farm farm, CLIArguments argValues)
         {
             // A list of all the created input files
             var createdFiles = new List<string>();
 
             // Create a directory for the farm
             var farmDirectoryPath = this.CreateDirectoryStructureForImportedFarm(pathToFarmsDirectory, farm);
+            pathToExportedFarm = farmDirectoryPath;
 
-            // Create a settings file for this farm
-            this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            Console.WriteLine();
+            if (argValues != null && argValues.Settings != "")
+            {
+                CopyUserSettingsFile(pathToFarmsDirectory, argValues, farmDirectoryPath, farm);
+            }
+            else
+            {
+                Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
+                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            }
 
             /*
              * Field components
@@ -105,7 +231,7 @@ namespace H.CLI.Handlers
                 {
                     // The input file that gets built based on the field component
                     string inputFile = string.Empty;
-                    
+
                     if (farm.EnableCarbonModelling == false)
                     {
                         // Single year mode field - create input file based on single year view item
@@ -117,7 +243,7 @@ namespace H.CLI.Handlers
                     else
                     {
                         var detailViewItemsForField = new List<CropViewItem>();
-                        
+
                         // Multi-year mode field, create input based on multiple detail view items
                         var stageState = farm.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
                         if (stageState == null)
@@ -128,10 +254,10 @@ namespace H.CLI.Handlers
 
                         detailViewItemsForField = stageState.DetailsScreenViewCropViewItems.Where(x => x.FieldSystemComponentGuid == fieldSystemComponent.Guid).ToList();
 
-                        inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm, 
-                            path: pathToFieldComponents, 
-                            componentKeys: fieldKeys.Keys, 
-                            fieldSystemComponent: fieldSystemComponent, 
+                        inputFile = _fieldProcessor.SetTemplateCSVFileBasedOnExportedField(farm: farm,
+                            path: pathToFieldComponents,
+                            componentKeys: fieldKeys.Keys,
+                            fieldSystemComponent: fieldSystemComponent,
                             detailsScreenViewCropViewItems: detailViewItemsForField);
                     }
 
@@ -151,7 +277,7 @@ namespace H.CLI.Handlers
 
                 var pathToBeefCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultBeefInputFolder;
                 foreach (var beefCattleComponent in farm.BeefCattleComponents)
-                {                    
+                {
                     var createdInputFile = _beefConverter.SetTemplateCSVFileBasedOnExportedFarm(
                         path: pathToBeefCattleComponents,
                         component: beefCattleComponent,
@@ -204,7 +330,7 @@ namespace H.CLI.Handlers
                     createdFiles.Add(createdInputFile);
 
                     Console.WriteLine($@"{farm.Name}: {swineComponent.Name}");
-                } 
+                }
             }
 
             /*
@@ -276,11 +402,40 @@ namespace H.CLI.Handlers
             return createdFiles;
         }
 
+        public void CopyUserSettingsFile(string pathToFarmsDirectory, CLIArguments argValues, string farmDirectoryPath, Farm farm)
+        {
+            bool isSettingsFileFound = false;
+            var files = Directory.GetFiles(pathToFarmsDirectory);
+            string filePath = string.Empty;
+            foreach (var file in files)
+            {
+                if (argValues.Settings == Path.GetFileName(file))
+                {
+                    filePath = file;
+                    isSettingsFileFound = true;
+                }
+            }
+            if (isSettingsFileFound)
+            {
+                string newFilePath = Path.Combine(farmDirectoryPath, Path.GetFileName(filePath));
+                File.Copy(filePath, newFilePath);
+                Console.WriteLine($"Copying {argValues.Settings} to {farmDirectoryPath}");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(Properties.Resources.SettingsFileNotFound, argValues.Settings);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(Properties.Resources.LabelCreatingSettingsFile);
+                this.CreateSettingsFileForFarm(farmDirectoryPath, farm);
+            }
+        }
+
         public string PromptUserForLocationOfExportedFarms(string farmsFolderPath)
         {
             // Ask the user if they have farms that they would like to import from the GUI (they must have already exported the farms to a .json file)
             Console.WriteLine();
-            Console.Write(Properties.Resources.LabelWouldYouLikeToImportFarmsFromTheGui);            
+            Console.Write(Properties.Resources.LabelWouldYouLikeToImportFarmsFromTheGui);
             Console.WriteLine(Properties.Resources.LabelYesNo);
 
             var response = Console.ReadLine();
@@ -307,6 +462,11 @@ namespace H.CLI.Handlers
             }
         }
 
+        public Farm GetExportedFarmFromUserSpecifiedLocation(string path)
+        {
+            return new Farm();
+        }
+
         public List<Farm> GetExportedFarmsFromUserSpecifiedLocation(string path)
         {
             Console.WriteLine();
@@ -323,7 +483,7 @@ namespace H.CLI.Handlers
         #region Private Methods
 
         private void CreateSettingsFileForFarm(string farmDirectoryPath, Farm farm)
-        {            
+        {
             // Create a settings file based on the default object found in the imported farm
             _directoryHandler.GenerateGlobalSettingsFile(farmDirectoryPath, farm);
         }
@@ -335,12 +495,12 @@ namespace H.CLI.Handlers
         /// <param name="farm"></param>
         /// <returns>The full path to the directory created for the farm</returns>
         private string CreateDirectoryStructureForImportedFarm(string pathToFarmsDirectory, Farm farm)
-        {            
+        {
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
 
             // Remove illegal characters from farm name since it will be used to create a folder.
-            var cleanedFarmName = r.Replace(farm.Name, "");            
+            var cleanedFarmName = r.Replace(farm.Name, "");
 
             var farmDirectoryPath = pathToFarmsDirectory + @"\" + cleanedFarmName;
             if (Directory.Exists(farmDirectoryPath))
@@ -350,7 +510,7 @@ namespace H.CLI.Handlers
 
                 farmDirectoryPath += timestamp;
             }
-            
+
             Directory.CreateDirectory(farmDirectoryPath);
             _directoryHandler.ValidateComponentDirectories(farmDirectoryPath);
 

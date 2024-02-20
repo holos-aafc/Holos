@@ -105,7 +105,6 @@ namespace H.Core.Test.Calculators
 
 
         /// <summary>
-        /// Equation 2.3.1-5
         /// </summary>
         [TestMethod]
         public void CalculateAverageCircumferenceReturnsCorrectValue()
@@ -117,7 +116,6 @@ namespace H.Core.Test.Calculators
 
 
         /// <summary>
-        /// Equation 2.3.1-6
         /// </summary>
         [TestMethod]
         public void CalculateTreeCountReturnsCorrectValue()
@@ -131,7 +129,6 @@ namespace H.Core.Test.Calculators
 
 
         /// <summary>
-        ///    Equation 2.3.1-7
         /// </summary>
         [TestMethod]
         public void CalculateTreeSpacingReturnsCorrectValue()
@@ -144,7 +141,6 @@ namespace H.Core.Test.Calculators
 
 
         /// <summary>
-        ///    Equation 2.3.1-8
         /// </summary>
         [TestMethod]
         public void CalculateCarbonForTreetypeReturnsCorrectValue()
@@ -156,7 +152,6 @@ namespace H.Core.Test.Calculators
         }
 
         /// <summary>
-        /// Equation 2.3.1-9
         /// </summary>
         [TestMethod]
         public void CalculateCarbonForLinearPlantingReturnsCorrectValue()

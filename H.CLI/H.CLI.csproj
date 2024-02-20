@@ -18,7 +18,7 @@
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Work PC\Documents\Work\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
+    <PublishUrl>C:\Work PC\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -32,9 +32,9 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.0.18</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.27</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -129,12 +129,14 @@
     <Compile Include="Converters\PoultryConverter.cs" />
     <Compile Include="Converters\SheepConverter.cs" />
     <Compile Include="Converters\SwineConverter.cs" />
+    <Compile Include="DriveInfoWrapper.cs" />
     <Compile Include="Factories\ComponentProcessorFactory.cs" />
     <Compile Include="FileAndDirectoryAccessors\ReadSettingsFile.cs" />
     <Compile Include="FileAndDirectoryAccessors\TemplateFarmHandler.cs" />
     <Compile Include="Handlers\ErrorHandler.cs" />
     <Compile Include="Handlers\ExportedFarmsHandler.cs" />
     <Compile Include="InfrastructureConstants.cs" />
+    <Compile Include="Interfaces\IDriveInfoWrapper.cs" />
     <Compile Include="Interfaces\IProcessor.cs" />
     <Compile Include="Processors\FieldProcessor.cs" />
     <Compile Include="Processors\ProcessorHandler.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="TemporaryComponentStorage\SheepTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\SwineTemporaryInput.cs" />
     <Compile Include="TemporaryComponentStorage\TemporaryInputBase.cs" />
+    <Compile Include="UserInput\CLIArguments.cs" />
     <Compile Include="UserInput\CLILanguageConstants.cs" />
     <Compile Include="ComponentKeys\FieldKeys.cs" />
     <Compile Include="Converters\ComponentConverterHandler.cs" />

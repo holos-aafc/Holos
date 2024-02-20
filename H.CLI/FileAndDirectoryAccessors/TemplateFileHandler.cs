@@ -58,7 +58,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 var files = Directory.GetFileSystemEntries(componentDirectoryPath);
                 var isATemplateFileList = files.Where(file => file.ToUpper().Contains(Path.GetFileName(String.Format(componentDirectoryPath) + "_Example").ToUpper()));
-                if (!isATemplateFileList.Any())
+                if (!isATemplateFileList.Any() && !files.Any())
                 {
                     var componentType = _directoryKeys.directoryWeights.SingleOrDefault(x => x.Key.ToUpper() == Path.GetFileName(componentDirectoryPath).ToUpper()).Key;  
                     var componentKey = _componentKeyFactory.ComponentKeysCreator(componentType);

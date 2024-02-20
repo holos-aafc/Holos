@@ -32,6 +32,7 @@ namespace H.Core.Providers.Animals
                 }
 
                 case HousingType.Pasture:
+                case HousingType.FlatPasture:
                 case HousingType.EnclosedPasture:
                 {
                     return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()

@@ -10,7 +10,7 @@ namespace H.Core.Providers.Animals
     /// Table 43. Default emission factors (kg NH3-N kg-1 TAN) for housing, storage and land application of beef
     /// and dairy cattle manure at the reference temperature of 15 °C (Chai et al., 2014,2016).
     /// </summary>
-    public class Table_43_Beef_Dairy_Default_Emission_Factors_Provider
+    public class Table_43_Beef_Dairy_Default_Emission_Factors_Provider : IAnimalAmmoniaEmissionFactorProvider
     {
         #region Constructors
         
@@ -23,11 +23,6 @@ namespace H.Core.Providers.Animals
 
         #region Methods
 
-        /// <summary>
-        /// Provides the default ammonia emission factor (kg NH3-N kg^-1 TAN) for the given housing type
-        /// </summary>
-        /// <param name="housingType">The housing type</param>
-        /// <returns>The ammonia emission factor for the particular housing type</returns>
         public double GetEmissionFactorByHousing(HousingType housingType)
         {
             if (housingType.IsFeedlot())
@@ -79,11 +74,6 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        /// <summary>
-        /// Provides the default ammonia emission factor (kg NH3-N kg^-1 TAN) for the given manure storage type
-        /// </summary>
-        /// <param name="storageType">The manure storage type</param>
-        /// <returns>The ammonia emission factor for the particular storage type (kg NH3-N kg^-1 TAN)</returns>
         public double GetByManureStorageType(ManureStateType storageType)
         {
             // Footnote 1: Read for data reference information.
@@ -120,11 +110,6 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        /// <summary>
-        /// For liquid manure types, the emission factor will depend on the type of manure application method being used.
-        /// </summary>
-        /// <param name="manureApplicationType">The manure application method</param>
-        /// <returns>The ammonia emission factor for the particular application method (kg NH3-N kg^-1 TAN)</returns>
         public double GetAmmoniaEmissionFactorForLiquidAppliedManure(ManureApplicationTypes manureApplicationType)
         {
             // Footnote 2: Read for data reference information.
@@ -150,11 +135,6 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        /// <summary>
-        /// For solid manure types, the emission factor will depend on the tillage being used when manure is applied to the land.
-        /// </summary>
-        /// <param name="tillageType">The <see cref="TillageType"/> of the crop.</param>
-        /// <returns>The ammonia emission factor for land applied manure (NH3-N (kg TAN)^-1)</returns>
         public double GetAmmoniaEmissionFactorForSolidAppliedManure(TillageType tillageType)
         {
             switch (tillageType)

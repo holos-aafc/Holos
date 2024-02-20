@@ -19,6 +19,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _customReductionFactor;
 
         private SoilReductionFactors _soilReductionFactor;
+        private FertilizerBlends _fertilizerBlend;
 
         private ObservableCollection<FertilizerApplicationViewItem> _fertilizerApplicationViewItems;
         public double NO3NFromMineralizationLeaching;
@@ -98,6 +99,16 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _customReductionFactor;
             set => SetProperty(ref _customReductionFactor, value);
+        }
+
+        /// <summary>
+        /// Used by CLI to indicate which blend is used. Currently only one blend can be specified when using CLI. Amount of blend
+        /// is taken from value in <see cref="NitrogenFertilizerRate"/>
+        /// </summary>
+        public FertilizerBlends FertilizerBlend
+        {
+            get => _fertilizerBlend;
+            set => SetProperty(ref _fertilizerBlend, value);
         }
 
         #endregion

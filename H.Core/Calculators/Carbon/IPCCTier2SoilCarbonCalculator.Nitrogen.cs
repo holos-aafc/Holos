@@ -49,6 +49,8 @@ namespace H.Core.Calculators.Carbon
         {
             base.AboveGroundResidueN = this.CurrentYearResults.CombinedAboveGroundResidueNitrogen;
             base.BelowGroundResidueN = this.CurrentYearResults.CombinedBelowGroundResidueNitrogen;
+            
+            this.CurrentYearResults.ExportedNitrogenResidueForCrop = this.CurrentYearResults.AboveGroundResidueDryMatterExported * this.CurrentYearResults.NitrogenContent;
 
             // Crop residue N inputs from crop are not adjusted later on, so we can display them at this point
             this.CurrentYearResults.AboveGroundNitrogenResidueForCrop = base.AboveGroundResidueN;
@@ -56,9 +58,9 @@ namespace H.Core.Calculators.Carbon
 
             var manureAndDigestateResidues = base.GetManureAndDigestateNitrogenResiduesForYear(farm, this.CurrentYearResults);
 
-            // 2.7.2-12
+            // 2.7.2-13
             // Manure inputs are spread across the pools - as opposed to the ICBM approach where manure is added the dedicated manure pool
-            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN + manureAndDigestateResidues; // Note: this is in kg N/ha but algorithm document converts to t N/ha
+            base.CropResiduePool = base.AboveGroundResidueN + base.BelowGroundResidueN;
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;
         }
 
@@ -74,9 +76,9 @@ namespace H.Core.Calculators.Carbon
             int yearIndex)
         {
             this.YearIndex = yearIndex;
-            this.Year = this.YearIndex + farm.CarbonModellingEquilibriumYear;
             this.CurrentYearResults = currentYearResults;
             this.PreviousYearResults = previousYearResults;
+            this.Year = this.CurrentYearResults.Year;
 
             base.SetPoolStartStates(farm);
 
@@ -97,6 +99,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.7.3-14 is calculated when calling CalculatePools()
             // Equation 2.7.3-15 is calculated when calling CalculatePools()
+            // Equation 2.7.3-16 is derived from the calculation of 2.7.3-15
 
             this.TotalInputsBeforeReductions();
             this.CalculateDirectEmissions(farm, currentYearResults);

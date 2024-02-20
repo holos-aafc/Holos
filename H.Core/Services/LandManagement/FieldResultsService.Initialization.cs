@@ -264,7 +264,7 @@ namespace H.Core.Services.LandManagement
             CropViewItem viewItem,
             Farm farm)
         {
-            var soilData = farm.GetPreferredSoilData(viewItem);
+            var province = farm.Province;
 
             // No small area data exists for years > 2018, take average of last 10 years as placeholder values when considering these years
             const int NoDataYear = 2018;
@@ -279,7 +279,7 @@ namespace H.Core.Services.LandManagement
                         year: year,
                         polygon: farm.PolygonId,
                         cropType: viewItem.CropType,
-                        province: soilData.Province);
+                        province: province);
 
                     if (smallAreaYieldData != null)
                     {
@@ -306,7 +306,7 @@ namespace H.Core.Services.LandManagement
                 year: viewItem.Year,
                 polygon: farm.PolygonId,
                 cropType: viewItem.CropType,
-                province: soilData.Province);
+                province: province);
 
             if (smallAreaYield != null)
             {
@@ -679,8 +679,15 @@ namespace H.Core.Services.LandManagement
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmSoilCarbonCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem:null, currentYearViewItem:grainCropViewItem, farm:farm);
 
             // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem:silageCropViewItem);
+            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem);
             silageCropViewItem.CalculateWetWeightYield();
+
+            // No defaults for any grass silages so we use SAD data
+            if (silageCropViewItem.CropType == CropType.GrassSilage)
+            {
+                this.AssignDefaultYield(silageCropViewItem, farm);
+                silageCropViewItem.CalculateWetWeightYield();
+            }
         }
 
         /// <summary>
@@ -689,10 +696,14 @@ namespace H.Core.Services.LandManagement
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
-        /// <param name="silageCropViewItem">The <see cref="CropViewItem"/> for the silage crop.</param>
         /// <returns>The estimated yield (dry matter) for a silage crop</returns>
-        public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
+        public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
         {
+            if (grainCropViewItem.BiomassCoefficientProduct == 0)
+            {
+                return 0;
+            }
+
             var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
             var term2 = term1 * (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil/100.0));
             var result = term2 * (1 - grainCropViewItem.MoistureContentOfCrop);

@@ -47,12 +47,18 @@ namespace H.Core.Models
             set => SetProperty(ref _totalOrganicNitrogenAvailableForLandApplication, value);
         }
 
+        /// <summary>
+        /// (kg)
+        /// </summary>
         public double TotalTanAvailableForLandApplication
         {
             get => _totalTanAvailableForLandApplication;
             set => SetProperty(ref _totalTanAvailableForLandApplication, value);
         }
 
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double TotalAmountOfCarbonInStoredManure
         {
             get => _totalAmountOfCarbonInStoredManure;
@@ -71,6 +77,9 @@ namespace H.Core.Models
             set => SetProperty(ref _totalNitrogenAvailableAfterAllLandApplications, value);
         }
 
+        /// <summary>
+        /// Total amount of nitrogen applied to fields from manure produced on farm (does not include imports)
+        /// </summary>
         public double NitrogenSumOfAllManureApplicationsMade
         {
             get => _nitrogenSumOfAllManureApplicationsMade;
@@ -89,6 +98,9 @@ namespace H.Core.Models
             set => SetProperty(ref _volumeSumOfAllManureApplicationsMade, value, OnVolumeSumOfAllManureApplicationsMade);
         }
 
+        /// <summary>
+        /// (kg)
+        /// </summary>
         public double VolumeOfManureAvailableForLandApplication
         {
             get => _volumeOfManureAvailableForLandApplication;
@@ -127,5 +139,10 @@ namespace H.Core.Models
         } 
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Year)}: {Year}";
+        }
     }
 }

@@ -4,7 +4,7 @@ using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
-    public class ManureExportViewItem : ModelBase
+    public class ManureExportViewItem : ManureItemBase
     {
         #region Fields
 
@@ -24,6 +24,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        /// <summary>
+        /// The amount/volume of manure exported
+        ///
+        /// (kg)
+        /// </summary>
         public double Amount
         {
             get => _amount;

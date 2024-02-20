@@ -1,113 +1,105 @@
-Group,Crop,Growing season precip + irrigation (mm),Moisture content of product (% w/w),"Soil Organic C
-(SOC)",SOC units,"Bulk density
-(BD)",BD units,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,,References,,Fertilization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Tillage ,,,,,,,,,,,Irrigation ,,,,,,,,,,,Pesticide ,,,,,,,,,,Lignin Content
-,,,,,,,,,,,,,,,,,,,,Nitrogen rates (kg ha-1) calculate as Fert amount = cropNuptake / FertUseEfficiency (0.5) - SoilNsupply (if user indicates use of SoilNtest),,,,,,,,,,,,,,,,,Phosphorus rates (kg ha-1) calculate as Fert amount = cropPuptake / FertUseEfficiency (0.3) - SoilPsupply (if user indicates use of SoilPtest),,,,,,,,,,,,,,,,,"(no till, reduced, or conventional)",,,,,,,,,,,"(mm, if)",,,,,,,,,,,(# of applications),,,,,,,,,,
-,,,,,,,,"Rp
-Product","Rs
-Straw","Rr
-Root","Re
-Extra-root",,,"Np
-Product","Ns
-Straw","Nr
-Root","Ne
-Extra-root",,,BC,AB,,,,,SK,,,MB,ON,QC,NB,PEI,NS,NFL,,BC,AB,,,,,SK,,,MB,ON,QC,NB,PEI,NS,NFL,,BC,AB,SK,MB,ON,QC,NB,PEI,NS,NFL,,BC,AB,SK,MB,ON,QC,NB,PEI,NS,NFL,,BC,AB,SK,MB,ON,QC,NB,PEI,NS,NFL,
-,,,,,,,,,,,,,,,,,,,,,Brown,Darkbrown,Black,Gray,irrigated,Brown,Darkbrown,Black,,,,,,,,,,Brown,Darkbrown,Black,Gray,irrigated,Brown,Darkbrown,Black,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Summerfallow,,0,,,,,0,0,0,0,,,0,0,0,,Janzen et al. (2003),,0,0,0,0,0,-,0,0,0,0,-,-,-,-,-,-,,0,0,0,0,0,-,0,0,0,0,-,-,-,-,-,-,,,no till,no till,no till,-,-,-,-,-,-,,0,0,0,0,-,-,-,-,-,-,,0,2,2,2,-,-,-,-,-,-,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Small-grain cereals,Small grain cereals,Rainfed  ,12,,,,,0.32,0.511,0.102,0.067,Little et al. (2008),,23.9,6,10,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.074
-,Wheat,<200 mm,12,,,,,0.219,0.551,0.136,0.095,Fang et al. (2016),,27.9,8.6,13.4,,Gan et al. (2009); Gan et al. (2011),,,22.04,22.04,28.02,33.63,123.29,78.46,81.82,86.31,61.65,,,,,,,,,5.6,5.6,11.21,16.81,56.04,38.11,40.35,42.59,33.63,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Wheat,200 -350 mm,12,,,,,0.244,0.518,0.147,0.091,Gan et al. (2011),,26.3,8.2,10.4,,Gan et al. (2009),,,39.23,39.23,44.83,67.25,123.29,95.27,109.84,121.05,89.67,,,,,,,,,11.21,16.81,28.02,33.63,,38.11,43.71,47.08,38.11,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Wheat,>350 mm,12,,,,,0.431,0.488,0.049,0.032,Soon and Lupwayi (2012),,56.2,6.5,11.9,,Bolinder et al. (2007); Janzen et al. (2003),,,56.04,56.04,67.25,89.67,123.29,105.36,119.93,121.05,112.09,,,,,,,,,16.81,28.02,39.23,44.83,,41.47,47.08,47.08,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Barley,<350,12,,,,,0.451,0.4,0.09,0.059,Bolinder et al. (2007),,19,7,10,,Janzen et al. (2003),,,22.04,39.23,39.23,44.83,145.71,77.34,82.94,90.79,61.65,,,,,,,,,11.21,16.81,16.81,16.81,56.04,33.63,35.87,39.23,33.63,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Barley,350-750,12,,,,,0.432,0.445,0.074,0.048,Soon and Lupwayi (2012),,23.9,7.3,9.7,,Soon and Lupwayi (2012),,,39.23,56.04,61.65,78.46,145.71,95.27,100.88,110.96,84.06,,,,,,,,,16.81,28.02,28.02,33.63,,38.11,43.71,48.2,38.11,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Barley,>750,12,,,,,0.424,0.498,0.047,0.031,Hakala et al. (2009),,19,3.8,9.5,,Hakala et al. (2009),,,61.65,72.86,89.67,112.09,145.71,95.27,100.88,110.96,100.88,,,,,,,,,22.04,39.23,39.23,50.44,,38.11,43.71,48.2,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Undersown Barley,Canada,12,,,,,0.411,0.241,0.211,0.137,Bolinder et al. (2007),,19,7,10,,Janzen et al. (2003),,,39.23,56.04,61.65,78.46,145.71,95.27,100.88,110.96,84.06,,,,,,,,,16.81,28.02,28.02,33.63,,38.11,43.71,48.2,38.11,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Oats,Canada,12,,,,,0.319,0.283,0.241,0.157,Bolinder et al. (2007),,18,6,10,,Janzen et al. (2003),,,61.65,72.86,89.67,112.09,89.67,68.37,87.43,110.96,100.88,,,,,,,,,22.04,39.23,39.23,50.44,56.04,28.02,35.87,45.95,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.047
-,Triticale,Canada,12,,,,,0.26,0.506,0.142,0.092,Bolinder et al. (2007),,22,6,10,,Janzen et al. (2003),,,-,-,-,-,100.88,,,,72.86,,,,,,,,,-,-,-,-,56.04,,,,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Sorghum,Canada,12,,,,,0.219,0.656,0.075,0.05,Bolinder et al. (2007),,25,6,10,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Canary seed,Canada,12,,,,,0.21,0.511,0.212,0.067,Janzen et al. (2003); Little et al. (2008),,25,7,10,,Cogliatti et al. (2011),,,,,,,,69.49,69.49,69.49,72.86,,,,,,,,,,,,,,59.41,59.41,59.41,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Buckwheat,Canada,12,,,,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,18,6,10,,Janzen et al. (2003),,,,,,,,,,,72.86,,,,,,,,,,,,,,,,,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Mixed grains,Canada,12,,,,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,22.3,6.3,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.047
-,Grain corn,Canada,15,,,,,0.386,0.387,0.138,0.089,Bolinder et al. (2007),,15,5,7,,Janzen et al. (2003),,,-,-,-,-,168.13,118.81,118.81,118.81,151.31,,,,,,,,,-,-,-,-,67.25,53.8,53.8,53.8,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.11
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Silage,Silage corn,Canada,70,,,,,0.866,0,0.081,0.053,Bolinder et al. (2007),,13,13,7,,Dietzel et al. (2014); Janzen et al. (2003),,,-,-,-,-,,,,,,,,,,,,,,-,-,-,-,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.11
-,Barley Silage,<350,63,,,,,0.851,0,0.09,0.059,,,12.7,0,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Barley Silage,350-750,63,,,,,0.877,0,0.074,0.048,,,12.1,0,9.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Barley Silage,>750,63,,,,,0.922,0,0.047,0.031,,,29.7,0,9.5,,,,,-,-,-,-,,,,,,,,,,,,,,-,-,-,-,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Oat Silage,Canada,62,,,,,0.602,0,0.241,0.157,,,8.1,0,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.047
-,Triticale Silage,Canada,60,,,,,0.766,0,0.142,0.092,,,14.5,0,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Wheat Silage,<200 mm,57,,,,,0.77,0,0.136,0.095,,,14.1,0,13.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Wheat Silage,200 -350 mm,57,,,,,0.762,0,0.147,0.091,,,14,0,10.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Wheat Silage,>350 mm,57,,,,,0.919,0,0.049,0.032,,,29.8,0,11.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Oilseeds,Oilseeds,Rainfed  ,9,,,,,0.184,0.637,0.109,0.071,Little et al. (2008),,61.5,7,10,,Little et al. (2008); Average of oilseeds below,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Oilseeds,Irrigated,9,,,,,0.213,0.619,0.101,0.066,Little et al. (2008),,61.5,7,10,,Little et al. (2008); Average of oilseeds below,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Canola,<200 mm,9,,,,,0.133,0.533,0.208,0.126,Gan et al. (2011),,63.6,13.6,8.3,,Gan et al. (2009),,,22.04,33.63,33.63,44.83,123.29,114.33,119.93,124.41,100.88,,,,,,,,,11.21,16.81,16.81,16.81,67.25,61.65,65.01,67.25,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Canola,200 -350 mm,9,,,,,0.176,0.529,0.183,0.111,Gan et al. (2011),,62.1,9.9,13.4,,Gan et al. (2009),,,44.83,56.04,61.65,84.06,123.29,114.33,119.93,124.41,,,,,,,,,,11.21,16.81,22.04,28.02,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Canola,>350 mm,9,,,,,0.203,0.561,0.144,0.093,Soon and Lupwayi (2012),,42,7.1,10.8,,Soon and Lupwayi (2012),,,61.65,78.46,89.67,112.09,123.29,114.33,119.93,124.41,,,,,,,,,,16.81,22.04,28.02,39.23,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Mustard,<200 mm,9,,,,,0.176,0.557,0.166,0.102,Gan et al. (2011),,68.6,13.6,10.3,,Gan et al. (2009),,,22.04,33.63,33.63,44.83,123.29,59.41,59.41,59.41,78.46,,,,,,,,,11.21,16.81,16.81,16.81,67.25,32.5,32.5,32.5,33.63,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Mustard,>200mm,9,,,,,0.21,0.54,0.155,0.095,Gan et al. (2011),,63.9,9.4,10.4,,Gan et al. (2009),,,44.83,56.04,61.65,84.06,123.29,59.41,59.41,59.41,100.88,,,,,,,,,11.21,16.81,22.04,28.02,,,,,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Flax,<200 mm,9,,,,,0.189,0.634,0.123,0.054,Gan et al. (2011),,56.7,11.8,6,,Gan et al. (2009),,,-,11.21,11.21,11.21,112.09,86.31,90.79,,44.83,,,,,,,,,-,5.6,5.6,16.81,44.83,25.78,28.02,,33.63,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.15
-,Flax,>200mm,9,,,,,0.199,0.63,0.105,0.066,Gan et al. (2011),,76,9.7,9.2,,Gan et al. (2009),,,-,22.04,50.44,50.44,112.09,86.31,90.79,,67.25,,,,,,,,,-,16.81,22.04,22.04,,,,,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.15
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Pulse crops,Pulse crops,Rainfed  ,13,,,,,0.29,0.515,0.118,0.077,Little et al. (2008),,59.1,20.4,15.8,,Average of pulse crops below,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Pulse crops,Irrigated,13,,,,,0.343,0.527,0.079,0.051,Little et al. (2008),,59.1,20.4,15.8,,Average of pulse crops below,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Soybean,Canada,14,,,,,0.304,0.455,0.146,0.095,Bolinder et al. (2007),,67,6,10,,Janzen et al. (2003),,,-,-,-,-,44.83,5.6,5.6,6.73,-,,,,,,,,,-,-,-,-,44.83,25.78,28.02,31.38,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.085
-,Beans (dry field),Canada,13,,,,,0.539,0.412,0.03,0.019,Berrocal-Ibarra et al. (2002),,42,10,10,,Janzen et al. (2003),,,11.21,11.21,16.81,0,33.63,8.97,,19.05,33.63,,,,,,,,,16.81,16.81,16.81,16.81,44.83,,,88.55,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.085
-,Chickpea,<200 mm,13,,,,,0.28,0.42,0.187,0.113,Gan et al. (2011),,65.9,23.9,11,,Gan et al. (2009),,,11.21,11.21,16.81,0,33.63,8.97,8.97,11.21,,,,,,,,,,16.81,16.81,16.81,16.81,44.83,40.35,44.83,50.44,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Chickpea,>200mm,13,,,,,0.358,0.42,0.137,0.085,Gan et al. (2011),,56.7,23.4,18.9,,Gan et al. (2009),,,22.04,22.04,28.02,11.21,33.63,8.97,,,,,,,,,,,,33.63,33.63,44.83,33.63,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Dry Pea,<200 mm,13,,,,,0.245,0.49,0.162,0.103,Gan et al. (2011),,70.4,30.4,22.5,,Gan et al. (2009),,,11.21,11.21,16.81,0,33.63,8.97,8.97,11.21,,,,,,,,,,16.81,16.81,16.81,16.81,44.83,40.35,44.83,50.44,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Dry Pea,>200mm,13,,,,,0.263,0.533,0.126,0.078,Gan et al. (2011),,69.4,31.6,28.2,,Gan et al. (2009),,,22.04,22.04,28.02,11.21,33.63,,,,,,,,,,,,,33.63,33.63,44.83,33.63,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Field Pea,Canada,13,,,,,0.33,0.552,0.071,0.046,Soon and Lupwayi (2012),,34.9,9.2,10,,Janzen et al. (2003),,,11.21,11.21,16.81,11.21,33.63,8.97,8.97,11.21,,,,,,,,,,16.81,16.81,16.81,16.81,44.83,40.35,44.83,50.44,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Lentil,<200 mm,13,,,,,0.231,0.448,0.2,0.121,Gan et al. (2011),,64.1,23.4,15,,Gan et al. (2009),,,-,-,-,-,33.63,4.48,4.48,4.48,-,,,,,,,,,-,-,-,-,44.83,23.54,23.54,23.54,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Lentil,>200mm,13,,,,,0.311,0.458,0.142,0.09,Gan et al. (2011),,61.3,25.8,16.2,,Gan et al. (2009),,,-,-,-,-,,5.6,5.6,6.73,,,,,,,,,,-,-,-,-,,25.78,25.78,29.14,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.075
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Root crops,Potato,Canada,75,,,,,0.736,0.239,0.015,0.01,Bolinder et al. (2015),,15,20,10,,Janzen et al. (2003),,,-,-,123.29,123.29,190.54,,,,100.88,,,,,,,,,-,-,123.29,123.29,168.13,,,,61.65,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Potato ,AB,80,,,,,0.771,0.155,0.045,0.029,J. Neilson (pers. Comm. 2019),,15,20,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Sugar Beets,Canada,80,,,,,0.626,0.357,0.01,0.007,Bolinder et al. (2007),,10,29,10,,Janzen et al. (2003),,,-,-,-,-,156.92,,,,,,,,,,,,,-,-,-,-,72.86,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Other field crops,Safflower,Canada,2,,,,,,,,,,,24,10,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Sunflower seed,Canada,2,,,,,,,,,,,24,10,10,,Janzen et al. (2003),,,-,-,-,-,151.31,84.06,84.06,84.06,100.88,,,,,,,,,-,-,-,-,67.25,33.63,33.63,33.63,44.83,,,,,,,,conventional,reduced,reduced,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Tobacco,Canada,20,,,,,,,,,,,20,10,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Vegetables,Canada,80,,,,,,,,,,,20,20,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,
-,Berries & grapes,Canada,85,,,,,,,,,,,7,20,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,
-,Other field crops,Canada,10,,,,,,,,,,,33.25,9.75,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Cover crops,Winter weeds,Canada,65,,,,,0.982,,0.011,0.007,Sainju et al. (2005),,23.9,6,10,,Small grain cereals (Little et al. 2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,
-,Red clover (Trifolium pratense L.),Canada,65,,,,,0.732,,0.162,0.106,Bender et al. (2017),,23.4,,10,,Juca Taveira et al. (2020); Thiessen Martens et al. (2019),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.063
-,Berseem clover (Trifolium alexandrium L.),Canada,65,,,,,0.722,,0.168,0.109,Bender et al. (2017); Toom et al. (2019),,32.6,,52.6,,Bender et al. (2017); Toom et al. (2019),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.063
-,Sweet clover (Melilotus officinalis),Canada,65,,,,,,,,,,,22,,,,Thiessen Martens et al. (2019),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.063
-,Crimson clover (Trifolium incarnatum),Canada,65,,,,,0.761,,0.145,0.094,Bender et al. (2017),,43.8,,30.5,,Bender et al. (2017),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.063
-,Hairy Vetch (Vicia villosa roth),Canada,65,,,,,0.668,,0.201,0.131,Puget & Drinkwater (2001); Kuo et al. 1997; Sainju et al. 2005; Ramirez-Garcia et al. 2015; Santos et al. 2011,,34.4,,14,,Sainju et al. (2000); Thiessen Martens et al. (2019); Kuo et al. 1997; Sainju et al. 2005; Ramirez-Garcia et al. 2015,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.081
-,Alfalfa (Medicago sativa L.),Canada,65,,,,,0.744,,0.155,0.101,Ghimire et al. (2014),,61,,83.4,,Ghimire et al. (2014); Thiessen Martens et al. (2019),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.133
-,Faba bean/broad bean (Vicia faba),Canada,65,,,,,,,,,,,19.7,,,,Thiessen Martens et al. (2019),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Cowpea (Vigna unguiculata),Canada,65,,,,,0.516,,0.294,0.191,Franzluebbers et al. (1994),,23.9,,20.8,,Franzluebbers et al. (1994),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Austrian winter pea,Canada,65,,,,,0.498,,0.304,0.198,Kuo et al. 1997,,23.5,,12.5,,Kuo et al. 1997,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Rapeseed (Brassica Napus L.),Canada,65,,,,,0.661,,0.206,0.134,Kuo et al. 1997,,14.7,,6,,Kuo et al. 1997,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.073
-,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",Canada,65,,,,,0.692,,0.197,0.111,Toom et al. 2019,,22,,22,,Toom et al. 2019,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],Canada,65,,,,,,,,,,,22.2,,,,Luna et al. 2018,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Forage radish (Raphanus sativus L.),Canada,65,,,,,0.532,,0.284,0.185,Wang et al. 2018; Toom et al. 2019; Toom et al. 2020; Lawley et al. 2011,,29.2,,19.7,,Wang et al. 2018; Toom et al. 2019; Toom et al. 2020,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),Canada,65,,,,,0.842,,0.096,0.062,Lenzi et al. 2009,,15,,20,,Lenzi et al. 2009,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.073
-,Barley (Hordeum vulgare),Canada,65,,,,,0.885,,0.07,0.045,Bergstrom & Jokela 2001; Lenzi et al. 2009,,11.3,,13.2,,Bergstrom & Jokela 2001; Lenzi et al. 2009,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Oat (Avena sativa),Canada,65,,,,,0.737,,0.16,0.104,Kaspar et al. 2012; Santos et al. 2011; Francis et al. 1998; Lenzi et al. 2009,,24.3,,15.7,,Kaspar et al. 2012; Francis et al. 1998,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.047
-,Rye (Secale cereale) / Winter rye / Cereal rye,Canada,65,,,,,0.577,,0.266,0.157,Kaspar et al. 2012; Austin et al. 2017; Austin et al. 2018; Lenzi et al. 2009; Toom et al. 2019; Kuo et al. 1997,,12.4,,5.5,,Kaspar et al. 2012; Lenzi et al. 2009; Toom et al. 2019; Kuo et al. 1997,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Sesame (Sesamum indicum),Canada,65,,,,,,,,,,,,12.2,,,Creamer & Baldwin 2000,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Flax (Linum usitatissimum),Canada,65,,,,,0.906,,0.057,0.037,Lenzi et al. 2009,,12.6,,10.2,,Lenzi et al. 2009,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.15
-,Ryegrass (Lolium Perenne L.),Canada,65,,,,,0.532,,0.284,0.184,Bergstrom & Jokela 2001,,12.4,,7.6,,Bergstrom & Jokela 2001,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.063
-,Annual Ryegrass (Lolium multiflorum),Canada,65,,,,,0.493,,0.307,0.2,Santos et al. 2011; Kuo et al. 1997,,10.2,,5.2,,Kuo et al. 1997,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.041
-,Sorghum (Sorghum bicolour),Canada,65,,,,,0.863,,0.083,0.054,Sainju et al. 2005,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,Pigeon Bean,Canada,65,,,,,0.921,,0.048,0.031,Lenzi et al. 2009,,27.8,,15,,Lenzi et al. 2009,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.046
-,Shepherd's purse,Canada,65,,,,,0.352,,0.393,0.255,Kuo et al. 1997,,16.3,,9.4,,Kuo et al. 1997,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.075
-,Winter wheat (Triticum aestivum),Canada,12,,,,,0.451,0.34,0.126,0.082,Francis et al. 1998; Santos et al. 2011,,22.6,6,10,,Francis et al. 1998; Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.053
-,(Fall) Rye,Canada,12,,,,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,18,6,10,,Janzen et al. (2003),,,-,-,-,-,78.46,82.94,93.03,97.51,72.86,,,,,,,,,-,-,-,-,56.04,34.75,39.23,41.47,44.83,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.053
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Perennial forages,Rangeland (native),Canada,13,,,,,0,0.233,0.465,0.302,Bolinder et al. (2007),,15,15,15,,Janzen et al. (2003),,,-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,no till,no till,no till,no till,no till,no till,no till,no till,no till,no till,,,,,,,,,,,,,,,,,,,,,,,0.049
-,Perennial forages,Canada,13,,,,,0,0.492,0.308,0.2,Bolinder et al. (2007),,26,15,15,,Janzen et al. (2003),,,-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.049
-,Tame grass,Canada,13,,,,,0,0.441,0.339,0.22,Bolinder et al. (2007),,16,16,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.057
-,Tame legume,Canada,13,,,,,0,0.571,0.26,0.169,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.072
-,Tame mixed,Canada,13,,,,,0,0.298,0.426,0.277,Bolinder et al. (2007),,15,15,15,,Little et al. (2008),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.061
-,Seeded grassland,Canada,13,,,,,0,0.317,0.414,0.269,Little et al. (2008),,15,15,15,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.049
-,Forage for seed,Canada,13,,,,,0.1,0.392,0.308,0.2,Perenial forages (Bolinder et al. 2007),,30,15,13,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conventional,no till,no till,conventional,conventional,conventional,conventional,conventional,conventional,conventional,,,,,,,,,,,,,,,,,,,,,,,0.049
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Trees,Total tree fruits & nuts,Canada,84,,,,,,,,,,,2,10,10,,Janzen et al. (2003),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Group,Crop,,Moisture content of product (% w/w),,Relative C allocation coefficient,,,,References,,N content (g N/kg),,,References,,Lignin Content,Biomethane potential (Nm^3 ton^-1 VS) for straw/silage,f_CH4 Fraction of methane in biogas,Volatile Solids (% TS),TS (kg t^-1)^3,TN Substrate (Kg N t^-1)^5
+,,,,,,,,,,,,,,,,,,,,,
+,,,,,Rp Product,Rs Straw,Rr Root,Re Extra-root,,,Np Product,Ns Straw,Nr Root / Ne Extra-root,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+,Summerfallow,,0,,0,0,0,0,,,0,0,0,Janzen et al. (2003),,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Small-grain cereals,Small grain cereals,Rainfed,12,,0.32,0.511,0.102,0.067,Little et al. (2008),,23.9,6,10,Little et al. (2008),,0.074,,,,,
+,Wheat,<200 mm,12,,0.219,0.551,0.136,0.095,Fang et al. (2016),,27.9,8.6,13.4,Gan et al. (2009); Gan et al. (2011),,0.053,162,0.6,90,880,7.8
+,Wheat,200 -350 mm,12,,0.244,0.518,0.147,0.091,Gan et al. (2011),,26.3,8.2,10.4,Gan et al. (2009),,0.053,162,0.6,90,880,7.8
+,Wheat,>350 mm,12,,0.431,0.488,0.049,0.032,Soon and Lupwayi (2012),,56.2,6.5,11.9,Bolinder et al. (2007); Janzen et al. (2003),,0.053,162,0.6,90,880,7.8
+,Barley,<350,12,,0.451,0.4,0.09,0.059,Bolinder et al. (2007),,19,7,10,Janzen et al. (2003),,0.046,267,0.44,90,880,6.1
+,Barley,350-750,12,,0.432,0.445,0.074,0.048,Soon and Lupwayi (2012),,23.9,7.3,9.7,Soon and Lupwayi (2012),,0.046,267,0.44,90,880,6.1
+,Barley,>750,12,,0.424,0.498,0.047,0.031,Hakala et al. (2009),,19,3.8,9.5,Hakala et al. (2009),,0.046,267,0.44,90,880,6.1
+,Undersown Barley,Canada,12,,0.411,0.241,0.211,0.137,Bolinder et al. (2007),,19,7,10,Janzen et al. (2003),,0.046,267,0.44,90,880,6.1
+,Oats,Canada,12,,0.319,0.283,0.241,0.157,Bolinder et al. (2007),,18,6,10,Janzen et al. (2003),,0.047,287,0.52,90,880,6
+,Triticale,Canada,12,,0.26,0.506,0.142,0.092,Bolinder et al. (2007),,22,6,10,Janzen et al. (2003),,0.053,195,0.6,90,880,6
+,Sorghum,Canada,12,,0.219,0.656,0.075,0.05,Bolinder et al. (2007),,25,6,10,Little et al. (2008),,0.053,,,,,
+,Canary seed,Canada,12,,0.21,0.511,0.212,0.067,Janzen et al. (2003); Little et al. (2008),,25,7,10,Cogliatti et al. (2011),,0.073,,,,,
+,Buckwheat,Canada,12,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,18,6,10,Janzen et al. (2003),,0.053,,,,,
+,Mixed grains,Canada,12,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,22.3,6.3,10,Janzen et al. (2003),,0.047,,,,,
+,Grain corn,Canada,15,,0.386,0.387,0.138,0.089,Bolinder et al. (2007),,15,5,7,Janzen et al. (2003),,0.11,427,0.54,88,850,5
+,,,,,,,,,,,,,,,,,,,,,
+Silage,Corn Silage,Canada,70,,0.866,0,0.081,0.053,Bolinder et al. (2007),,13,13,7,Dietzel et al. (2014); Janzen et al. (2003),,0.11,304,0.45,95,640,13
+,Barley Silage,<350,63,,0.851,0,0.09,0.059,,,12.7,0,10,,,0.046,,,,,
+,Barley Silage,350-750,63,,0.877,0,0.074,0.048,,,12.1,0,9.7,,,0.046,,,,,
+,Barley Silage,>750,63,,0.922,0,0.047,0.031,,,29.7,0,9.5,,,0.046,,,,,
+,Oat Silage,Canada,62,,0.602,0,0.241,0.157,,,8.1,0,10,,,0.047,442,0.6,83,380,8.1
+,Triticale Silage,Canada,60,,0.766,0,0.142,0.092,,,14.5,0,10,,,0.053,,,,,
+,Wheat Silage,<200 mm,57,,0.77,0,0.136,0.095,,,14.1,0,13.4,,,0.053,,,,,
+,Wheat Silage,200 -350 mm,57,,0.762,0,0.147,0.091,,,14,0,10.4,,,0.053,,,,,
+,Wheat Silage,>350 mm,57,,0.919,0,0.049,0.032,,,29.8,0,11.9,,,0.053,,,,,
+,Grass Silage,Canada,57,,0.441,0,0.339,0.22,Bolinder et al. (2007),,16,16,10,Janzen et al. (2003),,0.057,366,0.46,88,267,7.7
+,,,,,,,,,,,,,,,,,,,,,
+Oilseeds,Oilseeds,Rainfed,9,,0.184,0.637,0.109,0.071,Little et al. (2008),,61.5,7,10,Little et al. (2008); Average of oilseeds below,,0.073,,,,,
+,Oilseeds,Irrigated,9,,0.213,0.619,0.101,0.066,Little et al. (2008),,61.5,7,10,Little et al. (2008); Average of oilseeds below,,0.073,,,,,
+,Camelina,Canada,9,,0.12,0.34,0.34,0.2,Pan (2010),,54.1,4.6,15.35,Olughu et al. (2019); Mohammad et al. (2018); Obeng et al. (2020),,0.15,,,,,
+,Canola,<200 mm,9,,0.133,0.533,0.208,0.126,Gan et al. (2011),,63.6,13.6,8.3,Gan et al. (2009),,0.073,,,,,
+,Canola,200 -350 mm,9,,0.176,0.529,0.183,0.111,Gan et al. (2011),,62.1,9.9,13.4,Gan et al. (2009),,0.073,,,,,
+,Canola,>350 mm,9,,0.203,0.561,0.144,0.093,Soon and Lupwayi (2012),,42,7.1,10.8,Soon and Lupwayi (2012),,0.073,,,,,
+,Mustard,<200 mm,9,,0.176,0.557,0.166,0.102,Gan et al. (2011),,68.6,13.6,10.3,Gan et al. (2009),,0.073,,,,,
+,Mustard,>200mm,9,,0.21,0.54,0.155,0.095,Gan et al. (2011),,63.9,9.4,10.4,Gan et al. (2009),,0.073,,,,,
+,Flax,<200 mm,9,,0.189,0.634,0.123,0.054,Gan et al. (2011),,56.7,11.8,6,Gan et al. (2009),,0.15,,,,,
+,Flax,>200mm,9,,0.199,0.63,0.105,0.066,Gan et al. (2011),,76,9.7,9.2,Gan et al. (2009),,0.15,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Pulse crops,Pulse crops,Rainfed,13,,0.29,0.515,0.118,0.077,Little et al. (2008),,59.1,20.4,15.8,Average of pulse crops below,,0.075,,,,,
+,Pulse crops,Irrigated,13,,0.343,0.527,0.079,0.051,Little et al. (2008),,59.1,20.4,15.8,Average of pulse crops below,,0.075,,,,,
+,Soybean,Canada,14,,0.304,0.455,0.146,0.095,Bolinder et al. (2007),,67,6,10,Janzen et al. (2003),,0.085,,,,,
+,Beans (dry field),Canada,13,,0.539,0.412,0.03,0.019,Berrocal-Ibarra et al. (2002),,42,10,10,Janzen et al. (2003),,0.085,,,,,
+,Chickpea,<200 mm,13,,0.28,0.42,0.187,0.113,Gan et al. (2011),,65.9,23.9,11,Gan et al. (2009),,0.075,,,,,
+,Chickpea,>200mm,13,,0.358,0.42,0.137,0.085,Gan et al. (2011),,56.7,23.4,18.9,Gan et al. (2009),,0.075,,,,,
+,Dry Pea,<200 mm,13,,0.245,0.49,0.162,0.103,Gan et al. (2011),,70.4,30.4,22.5,Gan et al. (2009),,0.075,,,,,
+,Dry Pea,>200mm,13,,0.263,0.533,0.126,0.078,Gan et al. (2011),,69.4,31.6,28.2,Gan et al. (2009),,0.075,,,,,
+,Field Pea,Canada,13,,0.33,0.552,0.071,0.046,Soon and Lupwayi (2012),,34.9,9.2,10,Janzen et al. (2003),,0.075,,,,,
+,Lentil,<200 mm,13,,0.231,0.448,0.2,0.121,Gan et al. (2011),,64.1,23.4,15,Gan et al. (2009),,0.075,,,,,
+,Lentil,>200mm,13,,0.311,0.458,0.142,0.09,Gan et al. (2011),,61.3,25.8,16.2,Gan et al. (2009),,0.075,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Root crops,Potato,Canada,75,,0.736,0.239,0.015,0.01,Bolinder et al. (2015),,15,20,10,Janzen et al. (2003),,0.073,,,,,
+,Potato,AB,80,,0.771,0.155,0.045,0.029,J. Neilson (pers. Comm. 2019),,15,20,10,Janzen et al. (2003),,0.073,,,,,
+,Sugar Beets,Canada,80,,0.626,0.357,0.01,0.007,Bolinder et al. (2007),,10,29,10,Janzen et al. (2003),,0.073,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Other field crops,Safflower,Canada,2,,,,,,,,24,10,10,Janzen et al. (2003),,0.073,,,,,
+,Sunflower seed,Canada,2,,,,,,,,24,10,10,Janzen et al. (2003),,0.073,200,0.6,90,891,10
+,Tobacco,Canada,20,,,,,,,,20,10,10,Janzen et al. (2003),,0.073,,,,,
+,Vegetables,Canada,80,,,,,,,,20,20,10,Janzen et al. (2003),,,,,,,
+,Berries & grapes,Canada,85,,,,,,,,7,20,10,Janzen et al. (2003),,,,,,,
+,Other field crops,Canada,10,,,,,,,,33.25,9.75,10,Janzen et al. (2003),,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Cover crops,Winter weeds,Canada,65,,0.982,,0.011,0.007,Sainju et al. (2005),,23.9,6,10,Small grain cereals (Little et al. 2008),,,,,,,
+,Red clover (Trifolium pratense L.),Canada,65,,0.732,,0.162,0.106,Bender et al. (2017),,23.4,,10,Juca Taveira et al. (2020); Thiessen Martens et al. (2019),,0.063,,,,,
+,Berseem clover (Trifolium alexandrium L.),Canada,65,,0.722,,0.168,0.109,Bender et al. (2017); Toom et al. (2019),,32.6,,52.6,Bender et al. (2017); Toom et al. (2019),,0.063,,,,,
+,Sweet clover (Melilotus officinalis),Canada,65,,,,,,,,22,,,Thiessen Martens et al. (2019),,0.063,,,,,
+,Crimson clover (Trifolium incarnatum),Canada,65,,0.761,,0.145,0.094,Bender et al. (2017),,43.8,,30.5,Bender et al. (2017),,0.063,,,,,
+,Hairy Vetch (Vicia villosa roth),Canada,65,,0.668,,0.201,0.131,Puget & Drinkwater (2001); Kuo et al. 1997; Sainju et al. 2005; Ramirez-Garcia et al. 2015; Santos et al. 2011,,34.4,,14,Sainju et al. (2000); Thiessen Martens et al. (2019); Kuo et al. 1997; Sainju et al. 2005; Ramirez-Garcia et al. 2015,,0.081,,,,,
+,Alfalfa (Medicago sativa L.),Canada,65,,0.744,,0.155,0.101,Ghimire et al. (2014),,61,,83.4,Ghimire et al. (2014); Thiessen Martens et al. (2019),,0.133,,,,,
+,Faba bean/broad bean (Vicia faba),Canada,65,,,,,,,,19.7,,,Thiessen Martens et al. (2019),,0.046,,,,,
+,Cowpea (Vigna unguiculata),Canada,65,,0.516,,0.294,0.191,Franzluebbers et al. (1994),,23.9,,20.8,Franzluebbers et al. (1994),,0.046,,,,,
+,Austrian winter pea,Canada,65,,0.498,,0.304,0.198,Kuo et al. 1997,,23.5,,12.5,Kuo et al. 1997,,0.046,,,,,
+,Rapeseed (Brassica Napus L.),Canada,65,,0.661,,0.206,0.134,Kuo et al. 1997,,14.7,,6,Kuo et al. 1997,,0.073,,,,,
+,"Winter turnip rape [Brassica Rapa spp. oleifera L. (cv. ""Largo"")]",Canada,65,,0.692,,0.197,0.111,Toom et al. 2019,,22,,22,Toom et al. 2019,,0.073,,,,,
+,Phacelia [Phacelia tanacetifolia (cv. 'Phaci')],Canada,65,,,,,,,,22.2,,,Luna et al. 2018,,,,,,,
+,Forage radish (Raphanus sativus L.),Canada,65,,0.532,,0.284,0.185,Wang et al. 2018; Toom et al. 2019; Toom et al. 2020; Lawley et al. 2011,,29.2,,19.7,Wang et al. 2018; Toom et al. 2019; Toom et al. 2020,,0.073,,,,,
+,Mustard (Sinapus alba L. subsp. Mairei (H. Lindb.) Maire),Canada,65,,0.842,,0.096,0.062,Lenzi et al. 2009,,15,,20,Lenzi et al. 2009,,0.073,,,,,
+,Barley (Hordeum vulgare),Canada,65,,0.885,,0.07,0.045,Bergstrom & Jokela 2001; Lenzi et al. 2009,,11.3,,13.2,Bergstrom & Jokela 2001; Lenzi et al. 2009,,0.046,,,,,
+,Oat (Avena sativa),Canada,65,,0.737,,0.16,0.104,Kaspar et al. 2012; Santos et al. 2011; Francis et al. 1998; Lenzi et al. 2009,,24.3,,15.7,Kaspar et al. 2012; Francis et al. 1998,,0.047,,,,,
+,Rye (Secale cereale) / Winter rye / Cereal rye,Canada,65,,0.577,,0.266,0.157,Kaspar et al. 2012; Austin et al. 2017; Austin et al. 2018; Lenzi et al. 2009; Toom et al. 2019; Kuo et al. 1997,,12.4,,5.5,Kaspar et al. 2012; Lenzi et al. 2009; Toom et al. 2019; Kuo et al. 1997,,0.053,,,,,
+,Sesame (Sesamum indicum),Canada,65,,,,,,,,,12.2,,Creamer & Baldwin 2000,,0.053,,,,,
+,Flax (Linum usitatissimum),Canada,65,,0.906,,0.057,0.037,Lenzi et al. 2009,,12.6,,10.2,Lenzi et al. 2009,,0.15,,,,,
+,Ryegrass (Lolium Perenne L.),Canada,65,,0.532,,0.284,0.184,Bergstrom & Jokela 2001,,12.4,,7.6,Bergstrom & Jokela 2001,,0.063,,,,,
+,Annual Ryegrass (Lolium multiflorum),Canada,65,,0.493,,0.307,0.2,Santos et al. 2011; Kuo et al. 1997,,10.2,,5.2,Kuo et al. 1997,,0.041,,,,,
+,Sorghum (Sorghum bicolour),Canada,65,,0.863,,0.083,0.054,Sainju et al. 2005,,,,,,,0.053,,,,,
+,Pigeon Bean,Canada,65,,0.921,,0.048,0.031,Lenzi et al. 2009,,27.8,,15,Lenzi et al. 2009,,0.046,,,,,
+,Shepherd's purse,Canada,65,,0.352,,0.393,0.255,Kuo et al. 1997,,16.3,,9.4,Kuo et al. 1997,,0.075,,,,,
+,Winter wheat (Triticum aestivum),Canada,12,,0.451,0.34,0.126,0.082,Francis et al. 1998; Santos et al. 2011,,22.6,6,10,Francis et al. 1998; Little et al. (2008),,0.053,,,,,
+,(Fall) Rye,Canada,12,,0.32,0.511,0.102,0.067,Small grain cereals (Little et al. 2008),,18,6,10,Janzen et al. (2003),,0.053,241,0.44,94,880,6
+,,,,,,,,,,,,,,,,,,,,,
+Perennial forages,Rangeland (native),Canada,13,,0.233,0,0.465,0.302,Bolinder et al. (2007),,15,15,15,Janzen et al. (2003),,0.049,,,,,
+,Perennial forages,Canada,13,,0.492,0,0.308,0.2,Bolinder et al. (2007),,26,15,15,Janzen et al. (2003),,0.049,,,,,
+,Tame grass,Canada,13,,0.441,0,0.339,0.22,Bolinder et al. (2007),,16,16,10,Janzen et al. (2003),,0.057,332,0.54,82,870,15
+,Tame legume,Canada,13,,0.571,0,0.26,0.169,Bolinder et al. (2007),,15,15,15,Little et al. (2008),,0.072,,,,,
+,Tame mixed,Canada,13,,0.298,0,0.426,0.277,Bolinder et al. (2007),,15,15,15,Little et al. (2008),,0.061,,,,,
+,Seeded grassland,Canada,13,,0.317,0,0.414,0.269,Little et al. (2008),,15,15,15,Janzen et al. (2003),,0.049,,,,,
+,Forage for seed,Canada,13,,0.1,0.392,0.308,0.2,Perenial forages (Bolinder et al. 2007),,30,15,13,Janzen et al. (2003),,0.049,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Trees,Total tree fruits & nuts,Canada,84,,,,,,,,2,10,10,Janzen et al. (2003),,,,,,,

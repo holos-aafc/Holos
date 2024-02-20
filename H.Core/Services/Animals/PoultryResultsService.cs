@@ -49,7 +49,7 @@ namespace H.Core.Services.Animals
 
             var dailyAverageOutdoorTemperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             if (animalGroup.GroupType.IsNewlyHatchedEggs() || animalGroup.GroupType.IsEggs())
             {
@@ -69,7 +69,7 @@ namespace H.Core.Services.Animals
              * Manure carbon (C)
              */
 
-            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.Pasture, AnimalType.Poultry);
+            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.SolidStorageWithOrWithoutLitter, AnimalType.Poultry);
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
                     manureExcretionRate: managementPeriod.ManureDetails.ManureExcretionRate,
@@ -118,7 +118,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -298,7 +298,8 @@ namespace H.Core.Services.Animals
                 directManureN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
                 ammoniaConcentrationInHousing: dailyEmissions.AmmoniaConcentrationInHousing,
                 ammoniaLostFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission);
+                manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission,
+                 dailyEmissions.ManureNitrateLeachingEmission);
 
             // Equation 4.5.2-9
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
@@ -457,11 +458,12 @@ namespace H.Core.Services.Animals
             double directManureN2ONEmission,
             double ammoniaConcentrationInHousing,
             double ammoniaLostFromStorage,
-            double manureN2ONLeachingEmission)
+            double manureN2ONLeachingEmission,
+            double nitrateLeachingEmission)
         {
             return (amountOfNitrogenExcreted + amountOfNitrogenFromBedding)
                    - (directManureN2ONEmission + ammoniaConcentrationInHousing +
-                      ammoniaLostFromStorage + manureN2ONLeachingEmission);
+                      ammoniaLostFromStorage + manureN2ONLeachingEmission + nitrateLeachingEmission);
         }
 
         /// <summary>

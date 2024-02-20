@@ -34,15 +34,15 @@ namespace H.Core.Services.LandManagement
                 carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateStrawNitrogen(
+            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentStrawReturnedToSoil(
                 carbonInputFromStraw: viewItem.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
 
-            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateRootNitrogen(
+            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentRootReturnedToSoil(
                 carbonInputFromRoots: viewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
 
-            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateExtrarootNitrogen(
+            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentExaduatesReturnedToSoil(
                 carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
 
@@ -63,7 +63,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 2.5.2-6
+        /// Equation 2.5.5-7
         ///
         /// Calculates the amount of the fertilizer blend needed to support the yield that was input.This considers the amount of nitrogen uptake by the plant and then
         /// converts that value into an amount of fertilizer blend/product
@@ -94,47 +94,57 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Calculates how much nitrogen added from manure of animals grazing on the field.
         /// </summary>
-        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            List<CropViewItem> cropViewItems)
         {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
-
             this.CalculateManureNitrogenInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
+                results: this.AnimalResults,
+                cropViewItems);
         }
 
         /// <summary>
         /// Equation 5.6.2-1
+        ///
+        /// (kg N ha^-1)
         /// </summary>
-        public double CalculateManureNitrogenInputsFromGrazingAnimals(
+        public double CalculateManureNitrogenInputsFromGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             CropViewItem cropViewItem,
             List<AnimalComponentEmissionsResults> results)
         {
             var totalNitrogenExcretedByAnimals = 0d;
             var totalAmmoniaEmissions = 0d;
             var totalLeaching = 0d;
+            var totalN2ON = 0d;
 
-            foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+
+            var grazingViewItems = fieldSystemComponent.CropViewItems.Where(y => y.CropType == cropViewItem.CropType).SelectMany(x => x.GrazingViewItems).ToList();
+
+            var grazingItems = grazingViewItems.Where(x => x.Start.Year == cropViewItem.Year).ToList();
+
+            foreach (var grazingViewItem in grazingItems)
             {
                 var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
                 {
                     totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
-                    totalAmmoniaEmissions += groupEmissionsByMonth.MontlyNH3FromGrazingAnimals;
+                    totalAmmoniaEmissions += groupEmissionsByMonth.MonthlyNH3FromGrazingAnimals;
                     totalLeaching += groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
+                    totalN2ON += (groupEmissionsByMonth.MonthlyManureDirectN2ONEmission + groupEmissionsByMonth.MonthlyManureIndirectN2ONEmission);
                 }
             }
 
-            var result = (totalNitrogenExcretedByAnimals - (totalAmmoniaEmissions * (14.0 / 17.0) + totalLeaching)) / cropViewItem.Area;
+            var result = (totalNitrogenExcretedByAnimals - (totalN2ON + (CoreConstants.ConvertToNH3N(totalAmmoniaEmissions)) + totalLeaching)) / cropViewItem.Area;
 
             return result < 0 ? 0 : result;
         }
 
-        public void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        public void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> results, List<CropViewItem> cropViewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in cropViewItems)
             {
-                cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(cropViewItem, results.ToList());
+                cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
             }
         }
 
@@ -163,10 +173,7 @@ namespace H.Core.Services.LandManagement
             if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
             {
                 return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
-                    belowGroundResidueDryMatter: cropViewItem.BelowGroundResidueDryMatter,
-                    carbonConcentration: cropViewItem.CarbonConcentration,
-                    nitrogenContentInRoots: cropViewItem.NitrogenContentInRoots,
-                    area: cropViewItem.Area);
+                    viewItem: cropViewItem);
             }
             else
             {

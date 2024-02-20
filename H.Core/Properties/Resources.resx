@@ -1163,7 +1163,7 @@
     <value>ac</value>
   </data>
   <data name="LabelUpstreamCarbonDioxide" xml:space="preserve">
-    <value>Upstream CO₂</value>
+    <value>Upstream CO2</value>
   </data>
   <data name="LabelBirthWeight" xml:space="preserve">
     <value>Birth weight</value>
@@ -4806,7 +4806,7 @@
     <value>Add Manure Substrate Type</value>
   </data>
   <data name="AnaerobicDigestionStepOneInfo" xml:space="preserve">
-    <value>The default biogas and methane paramters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure or farm residue substrate types.</value>
+    <value>The default biogas and methane parameters of various substrate types can be modified in this section. To do this, click one of the buttons below to modify either manure, crop, or farm residue substrate types.</value>
   </data>
   <data name="LabelAnimalType" xml:space="preserve">
     <value>Animal Type</value>
@@ -5391,7 +5391,7 @@
     <value>Flow rate (ON)</value>
   </data>
   <data name="LabelFlowRateTAN" xml:space="preserve">
-    <value>Fow rate (TAN)</value>
+    <value>Flow rate (TAN)</value>
   </data>
   <data name="LabelFlowRateTotalSolids" xml:space="preserve">
     <value>Flow rate (total solids)</value>
@@ -5514,7 +5514,7 @@
     <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.</value>
   </data>
   <data name="AnaerobicDigestionStepThreeText" xml:space="preserve">
-    <value>Farm residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' button</value>
+    <value>Farm and crop residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' or 'Add Crop Residue Type' button(s)</value>
   </data>
   <data name="EnumElectricity" xml:space="preserve">
     <value>Electricity production</value>
@@ -5526,7 +5526,7 @@
     <value>Methane injection to gas grid</value>
   </data>
   <data name="ADStepFourText" xml:space="preserve">
-    <value>Select the target output for the anaerbic digestor component</value>
+    <value>Select the target output for the anaerobic digestor component</value>
   </data>
   <data name="LabelPrimaryADOutput" xml:space="preserve">
     <value>Target digestor output</value>
@@ -5535,7 +5535,7 @@
     <value>Step 4</value>
   </data>
   <data name="LabelDailyPercentageOfManureAddedToAd" xml:space="preserve">
-    <value>Daily proportion of manure added (%)</value>
+    <value>Daily percentage of manure added (%)</value>
   </data>
   <data name="AnaerobicDigestionStepTwoTextNoAnimalComponents" xml:space="preserve">
     <value>To add animal manure to the anaerobic digestor, at least one animal component must be added to the farm. Once an animal component has been added to the farm, the option to add animal manure will be available</value>
@@ -5658,9 +5658,104 @@ Daily emissions estimates are multipled by the total number of production days i
   <data name="MessageCalfsAreAssumedToBeUnweaned" xml:space="preserve">
     <value>Beef calves are assumed to be unweaned animals that are still with the cow and are fed entirely or partially on milk; once weaned any calves kept on the farm are expected to pass into the 'replacement heifers' animal group</value>
   </data>
+  <data name="LabelTotalCarbonInput" xml:space="preserve">
+    <value>Total carbon input</value>
+  </data>
+  <data name="LabelTFac" xml:space="preserve">
+    <value>TFac</value>
+  </data>
+  <data name="LabelWFac" xml:space="preserve">
+    <value>WFac</value>
+  </data>
   <data name="SelectProvince" xml:space="preserve">
     <value>Select Province</value>
   </data>
+  <data name="LabelUseConstantIndoorTemperature" xml:space="preserve">
+    <value>Use constant indoor temperature</value>
+  </data>
+  <data name="ButtonCreateManureExport" xml:space="preserve">
+    <value>Create Manure Export</value>
+  </data>
+  <data name="ManureExportHeader" xml:space="preserve">
+    <value>Manure produced by animals on this farm can be exported off-site. To export manure from this farm, click the 'Create Manure Export' button and specify the amount exported</value>
+  </data>
+  <data name="TitleExportManure" xml:space="preserve">
+    <value>Export Farm Produced Manure</value>
+  </data>
+  <data name="LabelAmountOfManureRemainingForExport" xml:space="preserve">
+    <value>Amount of manure available for export</value>
+  </data>
+  <data name="LabelTotalManureExported" xml:space="preserve">
+    <value>Total manure exported</value>
+  </data>
+  <data name="LabelTotalManureProducedOnFarm" xml:space="preserve">
+    <value>Total manure produced on farm</value>
+  </data>
+  <data name="TitleManureExportDetails" xml:space="preserve">
+    <value>Manure Export Details</value>
+  </data>
+  <data name="MessageExportingDataWarning" xml:space="preserve">
+    <value>Exporting farms. Please wait and do not close this window while data is being exported.</value>
+  </data>
+  <data name="MessageImportFarmWarning" xml:space="preserve">
+    <value>Importing farms. Please wait and do not close this window while data is being imported.</value>
+  </data>
+  <data name="LabelImportData" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="MessageBulkImportProgress" xml:space="preserve">
+    <value>Importing file {0} of {1}. Please do not close this window while data is being imported.</value>
+  </data>
+  <data name="LabelK2O" xml:space="preserve">
+    <value>K2O</value>
+  </data>
+  <data name="LabelP2O5" xml:space="preserve">
+    <value>P2O5</value>
+  </data>
+  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O Direct (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen (Excluding Any Manure Not Applied N2O-N_ONdirect)</value>
+  </data>
+  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O Indirect (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Leaching (Excluding Any Manure Not Applied N2O-N_ONleach)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Volatilization (N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N from Organic Nitrogen Volatilization (Excluding Any Manure Not Applied N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N_indirect (Excluding Any Manure Not Applied)</value>
+  </data>
+  <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
+    <value>Add Crop Residue Substrate Type</value>
+  </data>
+  <data name="LabelFractionOfLandOccupied" xml:space="preserve">
+    <value>Fraction of land occupied by lower portion of landscape</value>
+  </data>
+  <data name="LabelGrowingSeasonEvapotranspiration" xml:space="preserve">
+    <value>Growing season evapotranspiration</value>
+  </data>
+  <data name="LabelGrowingSeasonPrecipitation" xml:space="preserve">
+    <value>Growing season precipitation</value>
+  </data>
+  <data name="LabelWeightedModifierBasedOnTexture" xml:space="preserve">
+    <value>Weighted modifier based on texture</value>
+  </data>
+  <data name="LabelTemperatureEffect" xml:space="preserve">
+    <value>Temperature effect</value>
+  </data>
+  <data name="LabelWaterEffect" xml:space="preserve">
+    <value>Water effect</value>
+  </data>
+  <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
+    <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
   <data name="EnumCanada" xml:space="preserve">
     <value>Canada</value>
   </data>

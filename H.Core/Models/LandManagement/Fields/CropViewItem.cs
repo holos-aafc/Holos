@@ -163,6 +163,9 @@ namespace H.Core.Models.LandManagement.Fields
             this.MoistureContentOfCropPercentage = 12;
             this.SoilReductionFactor = SoilReductionFactors.None;
 
+            this.MonthlyIpccTier2WaterFactors = new MonthlyValueBase<double>();
+            this.MonthlyIpccTier2TemperatureFactors = new MonthlyValueBase<double>();
+
             this.CoverCropTerminationType = CoverCropTerminationType.Natural;
 
             this.NitrogenDepositionAmount = 5;
@@ -511,7 +514,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// S_p
         /// 
-        /// %
+        /// (%)
         /// </summary>
         public double PercentageOfProductYieldReturnedToSoil
         {
@@ -520,7 +523,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// %
+        /// S_r
+        /// 
+        /// (%)
         /// </summary>
         public double PercentageOfRootsReturnedToSoil
         {
@@ -529,7 +534,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// %
+        /// (%)
         /// </summary>
         public double PercentageOfStrawReturnedToSoil
         {
@@ -986,13 +991,6 @@ namespace H.Core.Models.LandManagement.Fields
             set { SetProperty(ref _manureCarbonPerHectare, value); }
         }
 
-        /// <summary>
-        /// (kg C ha^-1)
-        ///
-        /// Total digestate C from all digestate applications
-        /// </summary>
-        public double DigestateCarbonInputsPerHectare { get; set; }
-
         public double TillageFactor
         {
             get { return _tillageFactor; }
@@ -1172,7 +1170,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// This is not manure, but organic fertilizers.
+        /// This is not manure or digestate, but organic fertilizers.
         ///
         /// (kg N)
         /// </summary>
@@ -1202,16 +1200,11 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
-        /// <summary>
-        /// Equation 4.6.1-2
-        /// 
-        /// (kg N)
-        /// </summary>
-        public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear()
+        public double GetTotalNitrogenFromImportedManure()
         {
             var totalNitrogen = 0d;
 
-            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year))
+            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year && manureViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported))
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
             }
@@ -1257,7 +1250,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double GetTotalCarbonFromAppliedManure()
         {
-            return this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock) + this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            return this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock) + 
+                   this.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
         }
 
         /// <summary>
@@ -1277,6 +1271,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// Equation 4.7.1-1
+        /// Equation 4.7.1-2
+        /// 
         /// (kg C year^-1)
         /// </summary>
         public double CalculateTotalCarbonFromManureApplications(IEnumerable<ManureApplicationViewItem> manureApplicationViewItems)

@@ -43,7 +43,7 @@ namespace H.Core.Providers.Animals
                         {
                             FractionImmobilized = 0,
                             FractionMineralized = 0.46,
-                            FractionNitrified = 0,
+                            FractionNitrified = 0.25,
                             FractionDenitrified = 0,
 
                             N2O_N = 0.033,
@@ -60,7 +60,7 @@ namespace H.Core.Providers.Animals
                         {
                             FractionImmobilized = 0,
                             FractionMineralized = 0.28,
-                            FractionNitrified = 0,
+                            FractionNitrified = 0.125,
                             FractionDenitrified = 0,
 
                             N2O_N = 0.033,

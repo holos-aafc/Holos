@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using AutoMapper.Configuration.Annotations;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.LandManagement
@@ -42,7 +44,9 @@ namespace H.Core.Services.LandManagement
             if (mainCropForCurrentYear.CropType.IsPerennial())
             {
                 // Items with same stand id
-                var perennialItemsInStand = viewItems.Where(x => x.CropType.IsPerennial() && x.PerennialStandGroupId.Equals(mainCropForCurrentYear.PerennialStandGroupId));
+                var perennialItemsInStand = viewItems.Where(x =>
+                    x.CropType.IsPerennial() &&
+                    x.PerennialStandGroupId.Equals(mainCropForCurrentYear.PerennialStandGroupId));
                 var previousItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == previousYear);
                 var nextItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == nextYear);
 
@@ -121,7 +125,9 @@ namespace H.Core.Services.LandManagement
                 // Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
                 currentYearViewItem.ClimateParameter = this.CalculateClimateParameter(currentYearViewItem, farm);
                 currentYearViewItem.TillageFactor = this.CalculateTillageFactor(currentYearViewItem, farm);
-                currentYearViewItem.ManagementFactor = this.CalculateManagementFactor(currentYearViewItem.ClimateParameter, currentYearViewItem.TillageFactor);
+                currentYearViewItem.ManagementFactor =
+                    this.CalculateManagementFactor(currentYearViewItem.ClimateParameter,
+                        currentYearViewItem.TillageFactor);
             }
 
             // Consider the secondary crops
@@ -162,7 +168,8 @@ namespace H.Core.Services.LandManagement
                 {
                     if (cropViewItem.Yield == 0)
                     {
-                        cropViewItem.PercentageOfProductYieldReturnedToSoil = 100; // Now C inputs will be calculated correctly for this year
+                        cropViewItem.PercentageOfProductYieldReturnedToSoil =
+                            100; // Now C inputs will be calculated correctly for this year
                     }
                 }
             }
@@ -178,25 +185,30 @@ namespace H.Core.Services.LandManagement
             Farm farm)
         {
             // The user can choose to use either the climate parameter or the management factor in the calculations
-            var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? currentYearResults.ClimateParameter : currentYearResults.ManagementFactor;
+            var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor
+                ? currentYearResults.ClimateParameter
+                : currentYearResults.ManagementFactor;
 
-            currentYearResults.YoungPoolSoilCarbonAboveGround = _icbmSoilCarbonCalculator.CalculateYoungPoolAboveGroundCarbonAtInterval(
-                youngPoolAboveGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonAboveGround,
-                aboveGroundCarbonAtPreviousInterval: previousYearResults.CombinedAboveGroundInput,
-                youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                climateParameter: climateParameterOrManagementFactor);
+            currentYearResults.YoungPoolSoilCarbonAboveGround =
+                _icbmSoilCarbonCalculator.CalculateYoungPoolAboveGroundCarbonAtInterval(
+                    youngPoolAboveGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonAboveGround,
+                    aboveGroundCarbonAtPreviousInterval: previousYearResults.CombinedAboveGroundInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
 
-            currentYearResults.YoungPoolSoilCarbonBelowGround = _icbmSoilCarbonCalculator.CalculateYoungPoolBelowGroundCarbonAtInterval(
-                youngPoolBelowGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonBelowGround,
-                belowGroundCarbonAtPreviousInterval: previousYearResults.CombinedBelowGroundInput,
-                youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                climateParameter: climateParameterOrManagementFactor);
+            currentYearResults.YoungPoolSoilCarbonBelowGround =
+                _icbmSoilCarbonCalculator.CalculateYoungPoolBelowGroundCarbonAtInterval(
+                    youngPoolBelowGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonBelowGround,
+                    belowGroundCarbonAtPreviousInterval: previousYearResults.CombinedBelowGroundInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
 
-            currentYearResults.YoungPoolManureCarbon = _icbmSoilCarbonCalculator.CalculateYoungPoolManureCarbonAtInterval(
-                youngPoolManureCarbonAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
-                manureCarbonInputAtPreviousInterval: previousYearResults.CombinedManureAndDigestateInput,
-                youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                climateParameter: climateParameterOrManagementFactor);
+            currentYearResults.YoungPoolManureCarbon =
+                _icbmSoilCarbonCalculator.CalculateYoungPoolManureCarbonAtInterval(
+                    youngPoolManureCarbonAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
+                    manureCarbonInputAtPreviousInterval: previousYearResults.CombinedManureAndDigestateInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
 
             currentYearResults.OldPoolSoilCarbon = _icbmSoilCarbonCalculator.CalculateOldPoolSoilCarbonAtInterval(
                 oldPoolSoilCarbonAtPreviousInterval: previousYearResults.OldPoolSoilCarbon,
@@ -266,7 +278,8 @@ namespace H.Core.Services.LandManagement
             var fieldSystemComponent = farm.GetFieldSystemComponent(componentId);
 
             // Get the field system component that will be used to calculate the equilibrium year            
-            var sizeOfFirstRotationForField = detailViewItems.OrderBy(viewItem => viewItem.Year).First().SizeOfFirstRotationForField;
+            var sizeOfFirstRotationForField =
+                detailViewItems.OrderBy(viewItem => viewItem.Year).First().SizeOfFirstRotationForField;
             if (sizeOfFirstRotationForField == 0)
             {
                 // Was not set during creation of old farm                
@@ -314,7 +327,7 @@ namespace H.Core.Services.LandManagement
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
                 equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
 
-                equilibriumAboveGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedAboveGroundResidueNitrogen); 
+                equilibriumAboveGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedAboveGroundResidueNitrogen);
                 equilibriumBelowGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedBelowGroundResidueNitrogen);
             }
 
@@ -332,10 +345,14 @@ namespace H.Core.Services.LandManagement
             result.ClimateParameter = equilibriumClimateParameter;
             result.ManagementFactor = equilibriumManagementFactor;
 
-            var averageNitrogenConcentrationInProduct = viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
-            var averageNitrogenConcentrationInStraw = viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
-            var averageNitrogenConcentrationInRoots = viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
-            var averageNitrogenConcentrationInExtraroots = viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
+            var averageNitrogenConcentrationInProduct =
+                viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
+            var averageNitrogenConcentrationInStraw =
+                viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
+            var averageNitrogenConcentrationInRoots =
+                viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
+            var averageNitrogenConcentrationInExtraroots =
+                viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
 
             result.NitrogenContentInProduct = averageNitrogenConcentrationInProduct;
             result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
@@ -347,35 +364,43 @@ namespace H.Core.Services.LandManagement
              */
 
             // The user can choose to use either the climate parameter or the management factor in the calculations
-            var climateOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor ? result.ClimateParameter : result.ManagementFactor;
+            var climateOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor
+                ? result.ClimateParameter
+                : result.ManagementFactor;
 
             if (farm.UseCustomStartingSoilOrganicCarbon == false)
             {
-                result.YoungPoolSoilCarbonAboveGround = _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateAboveGround(
-                    averageAboveGroundCarbonInput: result.CombinedAboveGroundInput,
-                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                    climateParameter: climateOrManagementFactor);
+                result.YoungPoolSoilCarbonAboveGround =
+                    _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateAboveGround(
+                        averageAboveGroundCarbonInput: result.CombinedAboveGroundInput,
+                        youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                        climateParameter: climateOrManagementFactor);
             }
             else
             {
 
                 // Equation 2.1.3-8
-                var youngPoolAboveGround = result.CombinedAboveGroundInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
+                var youngPoolAboveGround = result.CombinedAboveGroundInput /
+                                           (climateOrManagementFactor *
+                                            farm.Defaults.DecompositionRateConstantYoungPool);
 
                 result.YoungPoolSoilCarbonAboveGround = youngPoolAboveGround;
             }
 
             if (farm.UseCustomStartingSoilOrganicCarbon == false)
             {
-                result.YoungPoolSoilCarbonBelowGround = _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateBelowGround(
-                    averageBelowGroundCarbonInput: result.CombinedBelowGroundInput,
-                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
-                    climateParameter: climateOrManagementFactor);
+                result.YoungPoolSoilCarbonBelowGround =
+                    _icbmSoilCarbonCalculator.CalculateYoungPoolSteadyStateBelowGround(
+                        averageBelowGroundCarbonInput: result.CombinedBelowGroundInput,
+                        youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                        climateParameter: climateOrManagementFactor);
             }
             else
             {
                 // Equation 2.1.3-9
-                var youngPoolBelowGround = result.CombinedBelowGroundInput / (climateOrManagementFactor * farm.Defaults.DecompositionRateConstantYoungPool);
+                var youngPoolBelowGround = result.CombinedBelowGroundInput /
+                                           (climateOrManagementFactor *
+                                            farm.Defaults.DecompositionRateConstantYoungPool);
 
                 result.YoungPoolSoilCarbonBelowGround = youngPoolBelowGround;
             }
@@ -404,7 +429,9 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // Equation 2.1.3-10
-                result.OldPoolSoilCarbon = farm.StartingSoilOrganicCarbon - (result.YoungPoolSoilCarbonAboveGround + result.YoungPoolSoilCarbonBelowGround);
+                result.OldPoolSoilCarbon = farm.StartingSoilOrganicCarbon -
+                                           (result.YoungPoolSoilCarbonAboveGround +
+                                            result.YoungPoolSoilCarbonBelowGround);
             }
 
             result.SoilCarbon = _icbmSoilCarbonCalculator.CalculateSoilCarbonAtInterval(
@@ -419,6 +446,7 @@ namespace H.Core.Services.LandManagement
         private FieldSystemComponent GetLeftMostComponent(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
             var currentFieldComponent = new FieldSystemComponent();
+
             var currentComponentId = fieldSystemComponent.CurrentPeriodComponentGuid;
             if (currentComponentId.Equals(Guid.Empty))
             {
@@ -431,7 +459,8 @@ namespace H.Core.Services.LandManagement
 
             if (currentFieldComponent.HistoricalComponents.Any())
             {
-                return currentFieldComponent.HistoricalComponents.Cast<FieldSystemComponent>().OrderBy(x => x.StartYear).First();
+                return currentFieldComponent.HistoricalComponents.Cast<FieldSystemComponent>().OrderBy(x => x.StartYear)
+                    .First();
             }
             else
             {
@@ -453,16 +482,21 @@ namespace H.Core.Services.LandManagement
             var leftMost = this.GetLeftMostComponent(fieldSystemComponent, farm);
 
             // Create run in period items
-            var runinPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear, viewItemsForField, leftMost);
+            var runInPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear,
+                viewItemsForField, leftMost);
 
-            this.AssignYieldToAllYears(runinPeriodItems, farm, leftMost);
+            this.AssignYieldToAllYears(runInPeriodItems, farm, leftMost);
 
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults =
+                    this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService.Initialize(farm,
+                    this.AnimalResults);
 
-                foreach (var runInPeriodItem in runinPeriodItems)
+                foreach (var runInPeriodItem in runInPeriodItems)
                 {
                     if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(runInPeriodItem))
                     {
@@ -475,10 +509,10 @@ namespace H.Core.Services.LandManagement
                 }
 
                 // Combine inputs now that we have C set on cover crops
-                this.CombineInputsForAllCropsInSameYear(runinPeriodItems, leftMost);
+                this.CombineInputsForAllCropsInSameYear(runInPeriodItems, leftMost);
 
                 // Merge all run in period items
-                var mergedRunInItems = this.MergeDetailViewItems(runinPeriodItems, leftMost);
+                var mergedRunInItems = this.MergeDetailViewItems(runInPeriodItems, leftMost);
 
                 // Combine inputs for run in period
                 this.CombineInputsForAllCropsInSameYear(mergedRunInItems, leftMost);
@@ -486,12 +520,16 @@ namespace H.Core.Services.LandManagement
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,
                     viewItemsByField: viewItemsForField,
-                    fieldSystemComponent: leftMost, 
+                    fieldSystemComponent: leftMost,
                     runInPeriodItems: mergedRunInItems);
             }
             else
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
+                _icbmSoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults =
+                    this.AnimalResults;
+                _icbmSoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService
+                    .Initialize(farm, this.AnimalResults);
 
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = this.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
@@ -509,7 +547,7 @@ namespace H.Core.Services.LandManagement
                         currentYearResults: currentYearResults,
                         farm: farm);
 
-                     _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
+                    _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
                         previousYearResults: previousYearResults,
                         currentYearResults: currentYearResults,
                         nextYearResults: null,
@@ -522,14 +560,17 @@ namespace H.Core.Services.LandManagement
             {
                 var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
                 cropViewItem.CropEnergyResults = energyResults;
-                cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
+                cropViewItem.EstimatesOfProductionResultsViewItem =
+                    this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
 
         /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.
         /// </summary>
-        public void CalculateCarbonLostFromHayExports(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public void CalculateCarbonLostFromHayExports(
+            FieldSystemComponent fieldSystemComponent,
+            Farm farm)
         {
             // Get hay exports from component, find other components dependent on exports, assign losses to view item
             foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
@@ -545,7 +586,9 @@ namespace H.Core.Services.LandManagement
                     {
                         foreach (var viewItem in component.CropViewItems)
                         {
-                            foreach (var hayImportViewItem in viewItem.HayImportViewItems.Where(x => x.FieldSourceGuid.Equals(fieldSystemComponent.Guid) && x.Date.Year == cropViewItem.Year))
+                            foreach (var hayImportViewItem in viewItem.HayImportViewItems.Where(x =>
+                                         x.FieldSourceGuid.Equals(fieldSystemComponent.Guid) &&
+                                         x.Date.Year == cropViewItem.Year))
                             {
                                 if (hayImportViewItem.SourceOfBales == ResourceSourceLocation.OffFarm)
                                 {
@@ -577,7 +620,7 @@ namespace H.Core.Services.LandManagement
 
                         cropViewItem.TotalCarbonLossFromBaleExports = this.CalculateTotalCarbonLossFromBaleExports(
                             percentageOfProductReturnedToSoil: cropViewItem.PercentageOfProductYieldReturnedToSoil,
-                            totalCarbonInExprtedBales: totalCarbonInExportedBales);
+                            totalCarbonInExportedBales: totalCarbonInExportedBales);
                     }
                 }
             }
@@ -587,13 +630,13 @@ namespace H.Core.Services.LandManagement
         /// Equation 12.3.2-4
         /// </summary>
         /// <param name="percentageOfProductReturnedToSoil">Amount of product yield returned to soil (%)</param>
-        /// <param name="totalCarbonInExprtedBales">Total amount of carbon in bales (kg C)</param>
+        /// <param name="totalCarbonInExportedBales">Total amount of carbon in bales (kg C)</param>
         /// <returns>Total amount of carbon lost from exported bales (kg C)</returns>
         private double CalculateTotalCarbonLossFromBaleExports(
             double percentageOfProductReturnedToSoil,
-            double totalCarbonInExprtedBales)
+            double totalCarbonInExportedBales)
         {
-            var result = totalCarbonInExprtedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
+            var result = totalCarbonInExportedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
 
             return result;
         }
@@ -601,90 +644,130 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Calculates how much carbon added from manure of animals grazing on the field.
         /// </summary>
-        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, Farm farm)
+        public void CalculateManureCarbonInputByGrazingAnimals(
+            FieldSystemComponent fieldSystemComponent,
+            List<CropViewItem> cropViewItems)
         {
-            var animalComponentEmissionResults = _animalResultsService.GetAnimalResults(farm);
-
             this.CalculateManureCarbonInputByGrazingAnimals(
                 fieldSystemComponent: fieldSystemComponent,
-                results: animalComponentEmissionResults);
+                results: this.AnimalResults,
+                cropViewItems);
         }
 
         /// <summary>
         /// Equation 5.6.1-1
+        ///
+        /// (kg C ha^-1)
         /// </summary>
-        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> results, List<CropViewItem> cropViewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in cropViewItems)
             {
-                cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureCarbonInputFromGrazingAnimals(cropViewItem, results.ToList());
+                cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture =
+                    this.CalculateManureCarbonInputFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
             }
         }
 
         /// <summary>
         /// (kg C ha^-1)
         /// </summary>
-        public double CalculateManureCarbonInputFromGrazingAnimals(CropViewItem cropViewItem, List<AnimalComponentEmissionsResults> results)
+        public double CalculateManureCarbonInputFromGrazingAnimals(
+            FieldSystemComponent fieldSystemComponent,
+            CropViewItem cropViewItem,
+            List<AnimalComponentEmissionsResults> results)
         {
-            var totalCarbonExcretedByAnimals = 0d;
-            var manureMethaneEmissions = 0d;
+            var result = 0d;
 
-            foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+            var grazingViewItems = fieldSystemComponent.CropViewItems.Where(y => y.CropType == cropViewItem.CropType).SelectMany(x => x.GrazingViewItems).ToList();
+
+            var grazingItems = grazingViewItems.Where(x => x.Start.Year == cropViewItem.Year).ToList();
+
+            foreach (var grazingViewItem in grazingItems)
             {
-                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
-                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
+                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem).ToList();
+                foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals.ToList())
                 {
-                    totalCarbonExcretedByAnimals += groupEmissionsByMonth.MonthlyFecalCarbonExcretion;
-                    manureMethaneEmissions += groupEmissionsByMonth.MonthlyManureMethaneEmission;
+                    result += (groupEmissionsByMonth.MonthlyFecalCarbonExcretion -
+                               groupEmissionsByMonth.MonthlyManureMethaneEmission) / cropViewItem.Area;
                 }
             }
-
-            var result = (totalCarbonExcretedByAnimals - manureMethaneEmissions) / cropViewItem.Area;
 
             return result < 0 ? 0 : result;
         }
 
-        public void CalculateCarbonLostByGrazingAnimals(FieldSystemComponent fieldSystemComponent, IEnumerable<AnimalComponentEmissionsResults> results)
+        public void CalculateCarbonLostByGrazingAnimals(
+            Farm farm,
+            FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
             foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
             {
-                var totalCarbonUptakeByAnimals = 0d;
+                var totalCarbonLostForField = 0d;
 
-                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                foreach (var componentResults in animalComponentEmissionsResults.ToList())
                 {
-                    var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
-                    if (animalComponentEmissionsResults != null)
+                    if (componentResults.Component is AnimalComponentBase animalComponentBase)
                     {
-                        var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
-                        if (groupEmissionResults != null)
+                        var totalLostForAllGroups = 0d;
+
+                        var animalGroups = animalComponentBase.Groups;
+                        foreach (var animalGroup in animalGroups)
                         {
-                            totalCarbonUptakeByAnimals += groupEmissionResults.TotalCarbonUptakeByAnimals();
+                            var totalCarbonLostForAllManagementPeriods = 0d;
+
+                            var grazingManagementPeriodsByGroup = this.GetSelectedManagementPeriods(animalGroup, fieldSystemComponent);
+                            foreach (var managementPeriod in grazingManagementPeriodsByGroup)
+                            {
+                                var emissionResultsForPeriod =  this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponentBase, managementPeriod);
+                                totalCarbonLostForAllManagementPeriods += emissionResultsForPeriod.TotalCarbonUptakeByAnimals();
+
+                                // Used for reference
+                                var dmi = emissionResultsForPeriod.TotalDmiUptakeByAnimals();
+                            }
+
+                            totalLostForAllGroups += totalCarbonLostForAllManagementPeriods;
                         }
+
+                        totalCarbonLostForField += totalLostForAllGroups;
                     }
                 }
 
-                cropViewItem.TotalCarbonLossesByGrazingAnimals = this.CalculateTotalCarbonLossFromGrazingAnimals(
-                    forageUtilizationRate: cropViewItem.ForageUtilizationRate,
-                    totalCarbonUptakeByGrazingAnimals: totalCarbonUptakeByAnimals);
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLostForField;
             }
         }
 
         /// <summary>
-        /// Equation 12.3.2-4
+        /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
         /// </summary>
-        /// <param name="forageUtilizationRate">Utilization rate for the particular forage (%)</param>
-        /// <param name="totalCarbonUptakeByGrazingAnimals">Total carbon uptake from grazing animals (kg C)</param>
-        /// <returns>Total carbon lost from grazing animals (kg C)</returns>
-        private double CalculateTotalCarbonLossFromGrazingAnimals(
-            double forageUtilizationRate,
-            double totalCarbonUptakeByGrazingAnimals)
+        private List<ManagementPeriod> GetSelectedManagementPeriods(
+            AnimalGroup animalGroup, 
+            FieldSystemComponent fieldSystemComponent)
         {
-            var result = totalCarbonUptakeByGrazingAnimals / (1 - (forageUtilizationRate / 100.0));
+            var result = new List<ManagementPeriod>();
+
+            var managementPeriods = animalGroup.ManagementPeriods.ToList();
+            var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
+            if (grazingPeriods.Count() == 1)
+            {
+                result.Add(grazingPeriods.Single());
+            }
+            else
+            {
+                var orderedByDate = grazingPeriods.OrderBy(x => x.Start).ToList();
+
+                // Get all except last
+                var count = orderedByDate.Count();
+                for (int i = 0; i < count - 1; i++)
+                {
+                    result.Add(orderedByDate.ElementAt(i));
+                }
+            }
 
             return result;
         }
 
-
+       
 
         #endregion
     }

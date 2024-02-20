@@ -40,16 +40,16 @@ namespace H.Core.Services.LandManagement
 
         private const int DefaultNumberOfDecimalPlaces = 3;
 
-        private readonly AnimalResultsService _animalResultsService = new AnimalResultsService();
         private readonly IrrigationService _irrigationService = new IrrigationService();
 
         private readonly IClimateParameterCalculator _climateParameterCalculator = new ClimateParameterCalculator();
-        private readonly ICBMSoilCarbonCalculator _icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator();
-        private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator();
+        private readonly ICBMSoilCarbonCalculator _icbmSoilCarbonCalculator;
+        private readonly IPCCTier2SoilCarbonCalculator _tier2SoilCarbonCalculator;
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
-        private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator();
+        private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
         private readonly DigestateService _digestateService = new DigestateService();
+        private readonly IManureService _manureService = new ManureService();
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();
@@ -65,7 +65,6 @@ namespace H.Core.Services.LandManagement
         private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
         private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
-        private readonly LumCMax_KValues_Tillage_Practice_Change_Provider _lumCMaxKValuesTillagePracticeChangeProvider = new LumCMax_KValues_Tillage_Practice_Change_Provider();
         private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
         private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
@@ -81,8 +80,38 @@ namespace H.Core.Services.LandManagement
 
         #region Constructors
 
-        public FieldResultsService()
+        public FieldResultsService(
+            ICBMSoilCarbonCalculator icbmSoilCarbonCalculator, 
+            IPCCTier2SoilCarbonCalculator ipccTier2SoilCarbonCalculator, 
+            N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
+            if (icbmSoilCarbonCalculator != null)
+            {
+                _icbmSoilCarbonCalculator = icbmSoilCarbonCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(icbmSoilCarbonCalculator));
+            }
+
+            if (ipccTier2SoilCarbonCalculator != null)
+            {
+                _tier2SoilCarbonCalculator = ipccTier2SoilCarbonCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(ipccTier2SoilCarbonCalculator));
+            }
+
+            if (n2OEmissionFactorCalculator != null)
+            {
+                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
+            }
+
             HTraceListener.AddTraceListener();
 
             /*
@@ -98,7 +127,10 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.GrazingViewItems, options => options.Ignore())
                     .ForMember(property => property.FertilizerApplicationViewItems, options => options.Ignore())
                     .ForMember(property => property.HayImportViewItems, options => options.Ignore())
-                    .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore());
+                    .ForMember(property => property.DigestateApplicationViewItems, options => options.Ignore())
+                    .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore())
+                    .ForMember(property => property.MonthlyIpccTier2TemperatureFactors, options => options.Ignore())
+                    .ForMember(property => property.MonthlyIpccTier2WaterFactors, options => options.Ignore());
             });
 
             _detailViewItemMapper = componentSelectionViewItemToDetailViewItemMapperConfiguration.CreateMapper();
@@ -147,6 +179,7 @@ namespace H.Core.Services.LandManagement
             _smallAreaYieldProvider.Initialize();
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
+            this.AnimalResultsService = new AnimalResultsService();
         }
 
         #endregion
@@ -154,6 +187,8 @@ namespace H.Core.Services.LandManagement
         #region Properties
 
         public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+
+        public IAnimalService AnimalResultsService { get; set; }
 
         #endregion
 
@@ -226,8 +261,6 @@ namespace H.Core.Services.LandManagement
 
             return result;
         }
-
-        
 
         /// <summary>
         /// Calculate climate parameter. Will use custom climate data if it exists for the farm, otherwise will use SLC normals
@@ -350,7 +383,13 @@ namespace H.Core.Services.LandManagement
                     {
                         if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture())
                         {
-                            result.Add(groupEmissionsByMonth);
+                            var start = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.Start;
+                            var end = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.End;
+
+                            if (start >= grazingViewItem.Start && end <= grazingViewItem.End)
+                            {
+                                result.Add(groupEmissionsByMonth);
+                            }
                         }
                     }
                 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
+using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json;
 using Prism.Mvvm;
 
@@ -29,12 +30,15 @@ namespace H.Core
         private string _baseCrashFileName = $"holos-crash-{DateTime.Now}.json";
 
         private const string _backupNamePrefix = "holos-backup-";
+        private const string _logFilesPrefix = "holos-logs";
         private const string _backupDateFormat = "yyyy-MM-dd_hh_mm_ss_tt";
         private string _dataBackupFileName = $"{_backupNamePrefix}{DateTime.Now.ToString(_backupDateFormat)}.json";
 
         private const int MaxNumberOfBackups = 5;
+        private const int MaxNumberOfLogs = 7;
 
         private readonly SemaphoreSlim _asyncSaveSemaphore = new SemaphoreSlim(1, 1);
+        private string _bulkImportProgressMessage;
 
 
         /// <summary>
@@ -53,7 +57,8 @@ namespace H.Core
 
         public Storage()
         {
-            HTraceListener.AddTraceListener();
+            Trace.TraceInformation($"{nameof(Storage)}: Checking log files.");
+            SetMaxLogFiles();
         }
 
         #endregion
@@ -90,6 +95,12 @@ namespace H.Core
         /// A task that handles the async save process.
         /// </summary>
         public Task SaveTask { get; set; }
+
+        public string BulkImportProgressMessage
+        {
+            get => _bulkImportProgressMessage;
+            set => SetProperty(ref _bulkImportProgressMessage, value);
+        }
 
         #endregion
 
@@ -252,6 +263,7 @@ namespace H.Core
                 this.ApplicationData = ReadDataFile(pathToStorageFile);
 
                 IsDataLoaded = true;
+                Trace.TraceInformation("Data loaded successfully.");
                 BackupDataAfterSuccessfulLoad(pathToStorageFile);
             }
             catch (FileNotFoundException)
@@ -279,16 +291,18 @@ namespace H.Core
         /// <param name="pathToStorageFile">The path where the backup file must be stored.</param>
         private void BackupDataAfterSuccessfulLoad(string pathToStorageFile)
         {
+            Trace.TraceInformation("Creating backup of currently loaded data.");
             var backupFilePath = CreateFileLocationPath(_dataBackupFileName, isBackupPath: true);
             
             
             if (_backupFilesInDirectory.Length == MaxNumberOfBackups)
             {
+                Trace.TraceInformation($"Backup folder contains {_backupFilesInDirectory.Length} backups");
                 _backupFilesInDirectory.Last().Delete();
+                Trace.TraceInformation($"Deleted oldest backup file: {_backupFilesInDirectory.Last().Name}");
             }
-
             File.Copy(pathToStorageFile, backupFilePath);
-
+            Trace.TraceInformation($"Backup created successfully.");
         }
 
         /// <summary>
@@ -449,48 +463,66 @@ namespace H.Core
                 return Enumerable.Empty<Farm>();
             }
 
-            var jsonData = string.Empty;
-            var success = true;
+            try
+            {
+                using (StreamReader r = new StreamReader(fileName))
+                {
+                    using (JsonReader reader = new JsonTextReader(r))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+
+                        // Serializer and deserializer must both have this set to Auto
+                        serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                       return serializer.Deserialize<List<Farm>>(reader);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError($"{e.Message}");
+                if (e.InnerException != null)
+                {
+                    Trace.TraceError($"{e.InnerException.ToString()}");
+                }
+                return Enumerable.Empty<Farm>();
+            }
+        }
+
+        public async Task<IEnumerable<Farm>> GetFarmsFromExportFileAsync(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return Enumerable.Empty<Farm>();
+            }
 
             try
             {
-                jsonData = File.ReadAllText(fileName);
-            }
-            catch (FileNotFoundException)
-            {
-                success = false;
-            }
-
-            if (success)
-            {
-                ObservableCollection<Farm> farms = new ObservableCollection<Farm>();
-
-                try
+                return await Task.Run(() =>
                 {
-                    /*
-                     * Replace namespaces in old farm files so deserialization succeeds (some classes were moved from H project to H.Core so any old farm files will not deserialize without
-                     * these adjustments.
-                     */
-
-                    jsonData = jsonData.Replace(@"H.Views.DetailViews.LandManagement.FieldSystem.FieldSystemDetailsStageState, H", "H.Core.Models.LandManagement.Fields.FieldSystemDetailsStageState, H.Core");
-                    jsonData = jsonData.Replace(@"H.Models.LandManagement.Fields.FieldSystemComponent, H", "H.Core.Models.LandManagement.Fields.FieldSystemComponent, H.Core");
-                    jsonData = jsonData.Replace(@"H.Models.LandManagement.Rotation.RotationComponent, H", "H.Core.Models.LandManagement.Rotation.RotationComponent, H.Core");
-
-                    farms = JsonConvert.DeserializeObject<ObservableCollection<Farm>>(jsonData, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-                }
-                catch (Exception e)
-                {
-                    Trace.TraceError($"{e.Message}");
-                    if (e.InnerException != null)
+                    using (StreamReader r = new StreamReader(fileName))
                     {
-                        Trace.TraceError($"{e.InnerException.ToString()}");
+                        using (JsonReader reader = new JsonTextReader(r))
+                        {
+                            JsonSerializer serializer = new JsonSerializer();
+
+                            // Serializer and deserializer must both have this set to Auto
+                            serializer.TypeNameHandling = TypeNameHandling.Auto;
+
+                            return serializer.Deserialize<List<Farm>>(reader);
+                        }
                     }
-                }
-
-                return farms;
+                });
             }
-
-            return Enumerable.Empty<Farm>();
+            catch (Exception e)
+            {
+                Trace.TraceError($"{e.Message}");
+                if (e.InnerException != null)
+                {
+                    Trace.TraceError($"{e.InnerException.ToString()}");
+                }
+                return Enumerable.Empty<Farm>();
+            }
         }
 
         /// <summary>
@@ -516,6 +548,33 @@ namespace H.Core
             return result;
         }
 
+        /// <summary>
+        /// Async
+        /// </summary>
+        public async Task<IEnumerable<Farm>> GetExportedFarmsFromDirectoryRecursivelyAsync(string path)
+        {
+            var result = new List<Farm>();
+
+            var stringCollection = new StringCollection();
+            var files = FileSystemHelper.ListAllFiles(stringCollection, path, $"*{exportedFileExtension}", isRecursiveScan: true);
+            if (files == null)
+            {
+                return result;
+            }
+
+            var farmNumber = 1;
+            var totalFarms = files.Count;
+            foreach (var file in files)
+            {
+                BulkImportProgressMessage = string.Format(H.Core.Properties.Resources.MessageBulkImportProgress, farmNumber, totalFarms);
+                var farmsFromFile = await GetFarmsFromExportFileAsync(file);
+                result.AddRange(farmsFromFile);
+                farmNumber++;
+            }
+
+            return result;
+        }
+
         public void Import(List<Farm> farmsToImport)
         {
             // Check for name clashes
@@ -534,6 +593,35 @@ namespace H.Core
             this.ApplicationData.Farms.AddRange(farmsToImport);
         }
 
+        #endregion
+
+        #region Private Methods
+
+        private string GetLogFolderPath()
+        {
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var logfilesPath = Path.Combine(localAppData, @"HOLOS_4\logfiles");
+
+            return logfilesPath;
+        }
+
+        private void SetMaxLogFiles()
+        {
+            var logFilesPath = GetLogFolderPath();
+            if (!Directory.Exists(logFilesPath))
+            {
+                return;
+            }
+            var directoryInfo = new DirectoryInfo(logFilesPath);
+            
+            var logFilesInDirectory = directoryInfo.GetFiles($"{_logFilesPrefix}*.log").OrderByDescending(x => x.CreationTime).ToArray();
+            Trace.TraceInformation($"Found {logFilesInDirectory.Length} log files in the log folder.");
+            if (logFilesInDirectory.Length > MaxNumberOfLogs)
+            {
+                Trace.TraceInformation($"Deleting oldest log file: {logFilesInDirectory.Last().Name}");
+                logFilesInDirectory.Last().Delete();
+            }
+        }
         #endregion
     }
 }

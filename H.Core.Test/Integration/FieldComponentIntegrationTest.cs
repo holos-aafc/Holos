@@ -15,15 +15,16 @@ using H.Core.Providers.Climate;
 using H.Core.Services;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
+using Prism.Events;
+using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
 
 namespace H.Core.Test.Integration
 {
     [TestClass]
-    public class FieldComponentIntegrationTest
+    public class FieldComponentIntegrationTest : UnitTestBase
     {
         private GeographicDataProvider _geographicDataProvider;
-        private ClimateProvider _climateProvider;
-        private FieldResultsService _fieldResultsService;
         private GlobalSettings _globalSettings;
         private RotationComponentHelper _rotationComponentHelper;
         private ApplicationData _applicationData;
@@ -36,12 +37,6 @@ namespace H.Core.Test.Integration
             _geographicDataProvider = new GeographicDataProvider();
             _geographicDataProvider.Initialize();
 
-            // Initialize the climate provider
-            _climateProvider = new ClimateProvider();
-
-            // Initialize the calculation class for fields
-            _fieldResultsService = new FieldResultsService();
-
             // Initial system defaults
             _globalSettings = new GlobalSettings();
 
@@ -51,6 +46,8 @@ namespace H.Core.Test.Integration
             _applicationData = new ApplicationData();
 
             _nasaClimateProvider = new NasaClimateProvider();
+
+            _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipcc, _n2OEmissionFactorCalculator);
         }
 
         [TestMethod]

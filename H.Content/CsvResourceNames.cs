@@ -157,6 +157,9 @@
 
         PercentageTotalManureProduced,
 
-        AnimalSystemProductionDays
+        AnimalSystemProductionDays,
+
+        UpdatedSmallAreaYields,
+        IndoorBarnTemperatures,
     }
 }

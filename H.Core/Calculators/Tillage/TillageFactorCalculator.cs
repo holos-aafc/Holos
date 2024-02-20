@@ -104,15 +104,21 @@ namespace H.Core.Calculators.Tillage
                                              CropType cropType,
                                              int perennialYear)
         {
-            if (province.IsPrairieProvince() == false)
+            if (cropType.IsRootCrop())
+            {
+                return 1.13;
+            }
+
+            if (cropType.IsAnnual() && province.IsPrairieProvince() == false)
             {
                 return 1;
             }
 
+
             var simplifiedSoilCategory = soilFunctionalCategory.GetSimplifiedSoilCategory();
             if (cropType.IsPerennial())
             {
-                return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear);
+                return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear, province);
             }
 
             return this.CalculateCropTillageFactor(simplifiedSoilCategory, tillageType);
@@ -130,10 +136,11 @@ namespace H.Core.Calculators.Tillage
         /// For perennials, the 0.9 value is applied in the first year (year of planting), in the years, after the no-till factor is used.
         /// </summary>
         private double CalculateTillageFactorForPerennials(
-            SoilFunctionalCategory soilFunctionalCategory, 
-            int perennialYear)
+            SoilFunctionalCategory soilFunctionalCategory,
+            int perennialYear,
+            Province province)
         {
-            if (perennialYear == 1)
+            if (province.IsPrairieProvince() == false)
             {
                 return 0.9;
             }

@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Diagnostics;
+using System.Net;
 
 namespace H.Infrastructure
 {
@@ -9,11 +11,17 @@ namespace H.Infrastructure
             try
             {
                 using (var client = new WebClient())
-                using (client.OpenRead("http://google.com/generate_204"))
+                using (client.OpenRead("https://google.com/generate_204"))
+                {
+                    Trace.TraceInformation($"{nameof(NetworkHelper)}.{nameof(IsConnectedToInternet)} : Successfully connected to the internet");
                     return true;
+                }
             }
-            catch
+            catch(Exception e)
             {
+                Trace.TraceError($"Exception thrown.");
+                Trace.TraceError($"{nameof(NetworkHelper)}.{nameof(IsConnectedToInternet)} : Could not connect to the internet.");
+                Trace.TraceError($"Inner Exception message: {e.InnerException}");
                 return false;
             }
         }

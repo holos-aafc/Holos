@@ -1,13 +1,9 @@
 ﻿using H.CLI.FileAndDirectoryAccessors;
-using H.Core.Providers;
-using H.Core.Providers.Soil;
+using H.CLI.UserInput;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace H.CLI.Test.FilesAndDirectoryAccessors
 {
@@ -82,10 +78,83 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
                 @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Fields",
             };
 
-           var prioritizedComponentPathList = directoryHandler.prioritizeDirectoryKeys(componentPathList);
+            var prioritizedComponentPathList = directoryHandler.prioritizeDirectoryKeys(componentPathList);
             Assert.AreEqual(prioritizedComponentPathList[0] == @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Shelterbelts"
                            ||
                             prioritizedComponentPathList[0] == @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Fields", true);
+        }
+
+        [TestMethod]
+        public void TestGetListOfFarmsWithNoCLArguments()
+        {
+            var directoryHandler = new DirectoryHandler();
+            CLIArguments argValues = new CLIArguments();
+            string portablePath = Directory.GetCurrentDirectory();
+            string testFarmFolder = portablePath + @"\TestFarmFolder";
+            string testFarm = @"\TestFarm";
+            string testFarm2 = @"\TestFarm2";
+
+            Directory.CreateDirectory(testFarmFolder);
+            Directory.CreateDirectory(testFarmFolder + testFarm);
+            Directory.CreateDirectory(testFarmFolder + testFarm2);
+
+            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, testFarm, null);
+            Assert.AreEqual(returnedListOfFarms[0], testFarmFolder + testFarm);
+            Assert.AreEqual(returnedListOfFarms[1], testFarmFolder + testFarm2);
+
+            Directory.Delete(testFarmFolder, true); // Delete after test
+        }
+
+        [TestMethod]
+        public void TestGetListOfFarmsWithInputFile()
+        {
+            var directoryHandler = new DirectoryHandler();
+            CLIArguments argValues = new CLIArguments
+            {
+                IsFileNameFound = true
+            };
+            string portablePath = Directory.GetCurrentDirectory();
+            string testFarmFolder = portablePath + @"\TestFarmFolders";
+            string testFarm = @"\TestFarm";
+
+            Directory.CreateDirectory(testFarmFolder);
+            Directory.CreateDirectory(testFarmFolder + testFarm);
+
+            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, testFarmFolder + testFarm, null);
+            Assert.AreEqual(returnedListOfFarms[0], testFarmFolder + testFarm);
+
+            Directory.Delete(testFarmFolder, true); // Delete after test
+        }
+
+        [TestMethod]
+        public void TestGetListOfFarmsWithInputFolder()
+        {
+            var directoryHandler = new DirectoryHandler();
+            CLIArguments argValues = new CLIArguments
+            {
+                IsFolderNameFound = true
+            };
+            string portablePath = Directory.GetCurrentDirectory();
+            string testFarmFolder = portablePath + @"\TestFarmFolders";
+            string testFarm = @"\TestFarm";
+            string testFarm2 = @"\TestFarm2";
+            string testFarm3 = @"\TestFarm3";
+            Directory.CreateDirectory(testFarmFolder);
+            Directory.CreateDirectory(testFarmFolder + testFarm);
+            Directory.CreateDirectory(testFarmFolder + testFarm2);
+            Directory.CreateDirectory(testFarmFolder + testFarm3);
+            List<string> generatedFarmFolders = new List<string>();
+            generatedFarmFolders.Add(testFarmFolder + testFarm);
+            generatedFarmFolders.Add(testFarmFolder + testFarm2);
+            generatedFarmFolders.Add(testFarmFolder + testFarm3);
+
+            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, "", generatedFarmFolders);
+
+            Assert.IsNotNull(returnedListOfFarms);
+            Assert.AreEqual(returnedListOfFarms[1], testFarmFolder + testFarm2);
+
+            Directory.Delete(testFarmFolder, true); // Delete after test
+
         }
     }
 }

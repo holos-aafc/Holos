@@ -8,22 +8,49 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Calculators.Nitrogen
 {
-    public partial class N2OEmissionFactorCalculator
+    public partial class N2OEmissionFactorCalculator : IN2OEmissionFactorCalculator
     {
         #region Fields
 
-        protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
-        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
-        
         private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
-        private readonly DigestateService _digestateService = new DigestateService();
+
+        #endregion
+
+        #region Properties
+        
+        public IManureService ManureService { get; set; }
+        public IDigestateService DigestateService { get; set; }
+
+        public IClimateProvider ClimateProvider { get; set; }
+
+        public IAnimalEmissionFactorsProvider LivestockEmissionConversionFactorsProvider { get; set; }
+        public IAnimalAmmoniaEmissionFactorProvider AnimalAmmoniaEmissionFactorProvider { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public N2OEmissionFactorCalculator(IClimateProvider climateProvider)
+        {
+            this.ManureService = new ManureService();
+            this.DigestateService = new DigestateService();
+
+            if (climateProvider != null)
+            {
+                this.ClimateProvider = climateProvider;
+            }
+
+            this.LivestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
+            this.AnimalAmmoniaEmissionFactorProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
+        }
 
         #endregion
 
@@ -75,20 +102,9 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
-        /// <summary>
-        /// Equation 4.6.2-2
-        /// </summary>
-        /// <param name="emissionFactorForLandApplication">Default NH3 emission factor for land application</param>
-        /// <param name="ambientTemperatureAdjustment">Ambient temperature based adjustment</param>
-        /// <returns></returns>
-        public double CalculateAdjustedAmmoniaEmissionFactor(
-            double emissionFactorForLandApplication,
-            double ambientTemperatureAdjustment)
-        {
-            return emissionFactorForLandApplication * ambientTemperatureAdjustment;
-        }
-
-        public double CalculateBaseEcodistrictFactor(Farm farm, CropViewItem viewItem)
+        public double CalculateBaseEcodistrictFactor(
+            Farm farm, 
+            CropViewItem viewItem)
         {
             var soilData = farm.GetPreferredSoilData(viewItem);
 
@@ -96,15 +112,19 @@ namespace H.Core.Calculators.Nitrogen
                 ecodistrictId: soilData.EcodistrictId,
                 province: soilData.Province);
 
+            viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape = fractionOfLandOccupiedByLowerPortionsOfLandscape;
+
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
-                growingSeasonPrecipitation: farm.ClimateData.PrecipitationData.GrowingSeasonPrecipitation,
-                growingSeasonEvapotranspiration: farm.ClimateData.EvapotranspirationData.GrowingSeasonEvapotranspiration);
+                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(viewItem.Year),
+                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(viewItem.Year));
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,
                 soilTexture: soilData.SoilTexture,
                 region: soilData.Province.GetRegion());
+
+            viewItem.WeightedModifierBasedOnTexture = this.CalculateModifierBasedOnTexture(soilData.SoilTexture, soilData.Province.GetRegion(), 1);
 
             return baseEcodistrictFactor;
         }
@@ -192,7 +212,9 @@ namespace H.Core.Calculators.Nitrogen
             return ecodistrictManureEmissionFactor;
         }
 
-        public double GetEmissionFactorForCropResidues(CropViewItem viewItem, Farm farm)
+        public double GetEmissionFactorForCropResidues(
+            CropViewItem viewItem, 
+            Farm farm)
         {
             if (viewItem == null)
             {
@@ -229,52 +251,8 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.1-3
-        ///
-        /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
-        /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
-        /// from land applied manure. Native rangeland is not included.
-        /// </summary>
-        public double CalculateWeightedOrganicNitrogenEmissionFactor(List<CropViewItem> itemsByYear, Farm farm)
-        {
-            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
-            var filteredItems = itemsByYear.Where(x => x.IsNativeGrassland == false);
-
-            foreach (var cropViewItem in filteredItems)
-            {
-                var emissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
-                    viewItem: cropViewItem,
-                    farm: farm);
-
-                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
-                {
-                    Value = emissionFactor,
-                    Weight = cropViewItem.Area,
-                });
-            }
-
-            var weightedEmissionFactor = this.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
-
-            return weightedEmissionFactor;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-7
-        /// </summary>
-        public double CalculateTotalEmissionsFromExportedManure(
-            Farm farm,
-            double totalExportedManure,
-            List<CropViewItem> itemsByYear)
-        {
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
-
-            var result = totalExportedManure * weightedEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.6.6-11
+        /// Equation 2.6.6-13
+        /// Equation 2.7.5-13
         /// 
         /// Frac_volatilizationSoil
         ///
@@ -282,6 +260,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// <para>Implements: Table 14. Coefficients used for the Bouwman et al. (2002) equation, which was of the form: emission factor (%) = 100 x exp (sum of relevant coefficients)</para>
         /// </summary>
+        /// <returns>Fraction of N lost by volatilization (kg N (kg N)-1)</returns>
         public double CalculateFractionOfNitrogenLostByVolatilization(
             CropViewItem cropViewItem,
             Farm farm)
@@ -399,9 +378,9 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.1-3
-        /// Equation 2.5.1-4
-        /// Equation 2.5.1-5
+        /// Equation 2.5.2-1
+        /// Equation 2.5.2-2
+        /// Equation 2.5.2-3
         /// </summary>
         /// <param name="fractionOfLandOccupiedByLowerPortionsOfLandscape">Fraction of land occupied by lower portions of landscape (from Rochette et al. 2008)</param>
         /// <param name="growingSeasonPrecipitation">Annual growing season precipitation (May – October)</param>
@@ -448,7 +427,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.1-6
+        /// Equation 2.5.3-1
         /// </summary>
         /// <param name="soilTexture">The soil texture of the ecodistrict</param>
         /// <param name="region">The region of the ecodistrict</param>
@@ -469,7 +448,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.1-7
+        /// Equation 2.5.3-2
         /// </summary>
         /// <param name="topographyEmission">N2O emission factor adjusted due to position in landscape and moisture regime (kg N2O-N)</param>
         /// <param name="soilTexture">The soil texture of the ecodistrict</param>
@@ -500,7 +479,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.1-8
+        /// Equation 2.5.4-1
         /// </summary>
         /// <param name="baseEcodistictEmissionFactor">A function of the three factors that create a base ecodistrict specific value that accounts for the climatic, topographic and edaphic characteristics of the spatial unit for lands</param>
         /// <param name="croppingSystemModifier">Cropping system modifier (Ann = Annual, Per = Perennial)</param>
@@ -520,7 +499,8 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-5
+        /// Equation 2.5.5-5
+        /// Equation 2.5.5-6
         /// </summary>
         /// <param name="nitrogenContentOfGrainReturnedToSoil">Nitrogen content of the grain returned to the soil (kg N ha^-1)</param>
         /// <param name="nitrogenContentOfStrawReturnedToSoil">Nitrogen content of the straw returned to the soil (kg N ha^-1)</param>
@@ -547,10 +527,12 @@ namespace H.Core.Calculators.Nitrogen
             var result = 0d;
             if (isNitrogenFixingCrop)
             {
+                // Equation 2.5.5-6
                 result = (totalNitrogenContent * (1 - nitrogenFixationAmount) - soilTestN - atmosphericNitrogenDeposition) / fertilizerEfficiencyFraction;
             }
             else
             {
+                // Equation 2.5.5-5
                 result = (totalNitrogenContent - soilTestN - atmosphericNitrogenDeposition) / fertilizerEfficiencyFraction;
             }
 
@@ -564,7 +546,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-13
+        /// Equation 2.5.6-1
         /// </summary>
         public double CalculateGrainNitrogenTotal(
             double carbonInputFromAgriculturalProduct,
@@ -576,11 +558,11 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-10
+        /// Equation 2.5.6-2
         /// </summary>
         /// <param name="carbonInputFromProduct">Carbon input from product (kg ha^-1) </param>
         /// <param name="nitrogenConcentrationInProduct">N concentration in the product (kg kg-1) </param>
-        public double CalculateGrainNitrogen(
+        public double CalculateNitrogenContentGrainReturnedToSoil(
             double carbonInputFromProduct, 
             double nitrogenConcentrationInProduct)
         {
@@ -590,11 +572,11 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-11
+        /// Equation 2.5.6-3
         /// </summary>
         /// <param name="carbonInputFromStraw">Carbon input from straw (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInStraw"></param>
-        public double CalculateStrawNitrogen(
+        public double CalculateNitrogenContentStrawReturnedToSoil(
             double carbonInputFromStraw,
             double nitrogenConcentrationInStraw)
         {
@@ -604,11 +586,11 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-12
+        /// Equation 2.5.6-4
         /// </summary>
         /// <param name="carbonInputFromRoots">Carbon input from roots (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInRoots">N concentration in the roots (kg kg-1) </param>
-        public double CalculateRootNitrogen(
+        public double CalculateNitrogenContentRootReturnedToSoil(
             double carbonInputFromRoots,
             double nitrogenConcentrationInRoots)
         {
@@ -618,11 +600,11 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.2-13
+        /// Equation 2.5.6-5
         /// </summary>
         /// <param name="carbonInputFromExtraroots">Carbon input from extra-root material (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInExtraroots">N concentration in the extra root (kg kg-1) (until known from literature, the same N concentration used for roots will be utilized)</param>
-        public double CalculateExtrarootNitrogen(
+        public double CalculateNitrogenContentExaduatesReturnedToSoil(
             double carbonInputFromExtraroots,
             double nitrogenConcentrationInExtraroots)
         {
@@ -632,6 +614,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 2.5.6-6
         /// Equation 2.6.2-2
         /// Equation 2.7.2-3
         /// Equation 2.7.2-5
@@ -641,11 +624,11 @@ namespace H.Core.Calculators.Nitrogen
         /// <returns>Above ground residue N (kg N ha^-1)</returns>
         public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
         {
-            var nitrogenContentOfGrainReturned = this.CalculateGrainNitrogen(
+            var nitrogenContentOfGrainReturned = this.CalculateNitrogenContentGrainReturnedToSoil(
                 carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
                 nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturned = this.CalculateStrawNitrogen(
+            var nitrogenContentOfStrawReturned = this.CalculateNitrogenContentStrawReturnedToSoil(
                 carbonInputFromStraw: cropViewItem.CarbonInputFromStraw,
                 nitrogenConcentrationInStraw: cropViewItem.NitrogenContentInStraw);
 
@@ -669,6 +652,8 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 2.5.6-7
+        /// Equation 2.5.6-8
         /// Equation 2.6.2-5
         /// Equation 2.7.2-4
         /// Equation 2.7.2-6
@@ -679,31 +664,38 @@ namespace H.Core.Calculators.Nitrogen
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
         public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
         {
-            var graiNitrogen = this.CalculateGrainNitrogen(
+            var grainNitrogen = this.CalculateNitrogenContentGrainReturnedToSoil(
                 carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
                 nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
 
-            var rootNitrogen = this.CalculateRootNitrogen(
+            var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
                 carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
                 nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
 
-            var extrarootNitrogen = this.CalculateExtrarootNitrogen(
+            var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
                 carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
                 nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
 
-            if (cropViewItem.CropType.IsAnnual() || cropViewItem.CropType.IsPerennial())
+            // Equation 2.5.6-7
+            if (cropViewItem.CropType.IsAnnual())
             {
-                return rootNitrogen + extrarootNitrogen;
+                return rootNitrogen + exudateNitrogen;
+            }
+
+            // Equation 2.5.6-8
+            if (cropViewItem.CropType.IsPerennial())
+            {
+                return (rootNitrogen * (cropViewItem.PercentageOfRootsReturnedToSoil / 100.0)) + exudateNitrogen;
             }
 
             if (cropViewItem.CropType.IsRootCrop())
             {
-                return graiNitrogen + extrarootNitrogen;
+                return grainNitrogen + exudateNitrogen;
             }
 
             if (cropViewItem.CropType.IsSilageCrop() || cropViewItem.CropType.IsCoverCrop())
             {
-                return rootNitrogen + extrarootNitrogen;
+                return rootNitrogen + exudateNitrogen;
             }
 
             return 0;
@@ -723,16 +715,21 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 2.7.2-2
+        /// Equation 2.7.2-4
+        /// Equation 2.6.2-6
         /// </summary>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
-            double belowGroundResidueDryMatter,
-            double carbonConcentration,
-            double nitrogenContentInRoots,
-            double area)
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem viewItem)
         {
-            // When using below ground residue dry matter as calculated by IPCC, the reside will be for the entire field
+            if (viewItem.CropType.IsPerennial())
+            {
+                var perennialNitrogen = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.CarbonConcentration * viewItem.NitrogenContentInRoots * (viewItem.PercentageOfRootsReturnedToSoil / 100.0);
 
-            return (belowGroundResidueDryMatter / area)* carbonConcentration * nitrogenContentInRoots;
+                return perennialNitrogen;
+            }
+            // Equation 2.7.2-2
+            var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.CarbonConcentration * viewItem.NitrogenContentInRoots;
+
+            return result;
         }
 
         /// <summary>
@@ -769,6 +766,112 @@ namespace H.Core.Calculators.Nitrogen
             return fractionOfNitrogenLostByLeachingAndRunoff;
         }
 
+
+        /// <summary>
+        /// Combines total emissions for entire area of a field from each manure/digestate application into per hectare emissions
+        /// </summary>
+        /// <param name="results">The emissions for each field</param>
+        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be used to calculate per hectare emissions</param>
+        /// <returns></returns>
+        public LandApplicationEmissionResult ConvertPerFieldEmissionsToPerHectare(
+            List<LandApplicationEmissionResult> results,
+            CropViewItem viewItem)
+        {
+            var totalAmountsPerHectareFromManureApplications = new LandApplicationEmissionResult();
+
+            foreach (var landApplicationEmissionResult in results)
+            {
+                /*
+                 * Totals are for the entire field. Convert to per hectare below.
+                 */
+
+                totalAmountsPerHectareFromManureApplications.TotalN2ONFromManureLeaching += landApplicationEmissionResult.TotalN2ONFromManureLeaching > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureLeaching / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalIndirectN2ONEmissions += landApplicationEmissionResult.TotalIndirectN2ONEmissions > 0
+                    ? landApplicationEmissionResult.TotalIndirectN2ONEmissions / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalNitrateLeached += landApplicationEmissionResult.TotalNitrateLeached > 0
+                    ? landApplicationEmissionResult.TotalNitrateLeached / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalIndirectN2OEmissions += landApplicationEmissionResult.TotalIndirectN2OEmissions > 0
+                    ? landApplicationEmissionResult.TotalIndirectN2OEmissions / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalN2OFromManureVolatilized += landApplicationEmissionResult.TotalN2OFromManureVolatilized > 0
+                    ? landApplicationEmissionResult.TotalN2OFromManureVolatilized / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalN2ONFromManureVolatilized += landApplicationEmissionResult.TotalN2ONFromManureVolatilized > 0
+                    ? landApplicationEmissionResult.TotalN2ONFromManureVolatilized / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.TotalVolumeOfManureUsedDuringApplication += landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication > 0
+                    ? landApplicationEmissionResult.TotalVolumeOfManureUsedDuringApplication / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AmmoniacalLoss += landApplicationEmissionResult.AmmoniacalLoss > 0
+                    ? landApplicationEmissionResult.AmmoniacalLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AdjustedAmmoniaLoss += landApplicationEmissionResult.AdjustedAmmoniaLoss > 0
+                    ? landApplicationEmissionResult.AdjustedAmmoniaLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AdjustedAmmoniacalLoss += landApplicationEmissionResult.AdjustedAmmoniacalLoss > 0
+                    ? landApplicationEmissionResult.AdjustedAmmoniacalLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.AmmoniaLoss += landApplicationEmissionResult.AmmoniaLoss > 0
+                    ? landApplicationEmissionResult.AmmoniaLoss / viewItem.Area
+                    : 0;
+
+                totalAmountsPerHectareFromManureApplications.ActualAmountOfNitrogenAppliedFromLandApplication += landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication > 0
+                    ? landApplicationEmissionResult.ActualAmountOfNitrogenAppliedFromLandApplication / viewItem.Area
+                    : 0;
+
+                // Equation 4.6.2-4
+                totalAmountsPerHectareFromManureApplications.TotalTANApplied += landApplicationEmissionResult.TotalTANApplied > 0
+                    ? landApplicationEmissionResult.TotalTANApplied / viewItem.Area
+                    : 0;
+            }
+
+            return totalAmountsPerHectareFromManureApplications;
+        }
+
+
+        public double GetAmountOfNitrogenUsed(CropViewItem viewItem, ManureItemBase manureItemBase)
+        {
+            return viewItem.Area * manureItemBase.AmountOfNitrogenAppliedPerHectare;
+        }
+
+        public double GetAmountOfDigestateNitrogenUsed(CropViewItem viewItem)
+        {
+            var result = 0d;
+
+            foreach (var viewItemDigestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
+            {
+                result += GetAmountOfNitrogenUsed(viewItem, viewItemDigestateApplicationViewItem);
+            }
+
+            return result;
+        }
+
+        public double GetAmountOfManureNitrogenUsed(CropViewItem viewItem)
+        {
+            var result = 0d;
+
+            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            {
+                result += GetAmountOfNitrogenUsed(viewItem, manureApplicationViewItem);
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Private Methods
@@ -790,5 +893,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         #endregion
+
+
     }
 }

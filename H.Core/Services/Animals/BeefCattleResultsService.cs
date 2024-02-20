@@ -47,7 +47,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
@@ -87,7 +87,8 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
                 dietaryNetEnergyConcentration: nemf,
-                weight: dailyEmissions.AnimalWeight);
+                weight: dailyEmissions.AnimalWeight, areMilkFedOnly: 
+                managementPeriod.AnimalsAreMilkFedOnly);
 
             dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
@@ -125,8 +126,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake, 
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -140,12 +140,19 @@ namespace H.Core.Services.Animals
                 carbonExcreted: dailyEmissions.FecalCarbonExcretion,
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
 
-            // Equation 4.1.2-1
-            dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
-                ashContentOfFeed: managementPeriod.SelectedDiet.Ash, 
-                percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
+            if (managementPeriod.AnimalsAreMilkFedOnly)
+            {
+                dailyEmissions.VolatileSolids = (7.6 / 1000.0) * dailyEmissions.AnimalWeight;
+            }
+            else
+            {
+                // Equation 4.1.2-1
+                dailyEmissions.VolatileSolids = base.CalculateVolatileSolids(
+                    grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
+                    percentTotalDigestibleNutrientsInFeed: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
+                    ashContentOfFeed: managementPeriod.SelectedDiet.Ash,
+                    percentageForageInDiet: managementPeriod.SelectedDiet.Forage);
+            }
 
             // Equation 4.1.2-4
             dailyEmissions.ManureMethaneEmissionRate = base.CalculateManureMethaneEmissionRate(
@@ -158,7 +165,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -168,24 +175,22 @@ namespace H.Core.Services.Animals
                 dryMatterIntake: dailyEmissions.DryMatterIntake,
                 crudeProteinContent: managementPeriod.SelectedDiet.CrudeProteinContent);
 
-            if (managementPeriod.AnimalsAreMilkFedOnly)
-            {
-                var managementPeriodOfCows = cowCalfComponent.GetAssociatedManagementPeriodOfParentGroup(
-                    youngAnimalGroup: animalGroup,
-                    parentGroupType: AnimalType.BeefCowLactating,
-                    dateTime: dateTime);
+            var managementPeriodOfCows = cowCalfComponent.GetAssociatedManagementPeriodOfParentGroup(
+                youngAnimalGroup: animalGroup,
+                parentGroupType: AnimalType.BeefCowLactating,
+                dateTime: dateTime);
 
-                if (managementPeriodOfCows != null)
-                {
-                    dailyEmissions.ProteinIntakeFromMilk = base.CalculateCalfProteinIntakeFromMilk(
-                        milkProduction: managementPeriodOfCows.MilkProduction,
-                        proteinContentOfMilk: managementPeriodOfCows.MilkProteinContent);
-                }
+            if (managementPeriodOfCows != null)
+            {
+                dailyEmissions.ProteinIntakeFromMilk = base.CalculateCalfProteinIntakeFromMilk(
+                    milkProduction: managementPeriodOfCows.MilkProduction,
+                    proteinContentOfMilk: managementPeriodOfCows.MilkProteinContent);
             }
 
             dailyEmissions.ProteinIntake = base.CalculateCalfProteinIntake(
                 calfProteinIntakeFromMilk: dailyEmissions.ProteinIntakeFromMilk,
-                calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
+                calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood, 
+                areMilkFedOnly: managementPeriod.AnimalsAreMilkFedOnly);
 
             dailyEmissions.ProteinRetainedFromSolidFood = managementPeriod.AnimalsAreMilkFedOnly ? 0 : base.CalculateCalfProteinRetainedFromSolidFeed(
                 calfProteinIntakeFromSolidFood: dailyEmissions.ProteinIntakeFromSolidFood);
@@ -201,7 +206,7 @@ namespace H.Core.Services.Animals
                 calfProteinIntake: dailyEmissions.ProteinIntake,
                 calfProteinRetained: dailyEmissions.ProteinRetained);
 
-            // used in volatilization calculation
+            // Used in volatilization calculation
             dailyEmissions.AmountOfNitrogenExcreted = base.CalculateAmountOfNitrogenExcreted(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
@@ -225,10 +230,10 @@ namespace H.Core.Services.Animals
                 dailyEmissions: dailyEmissions,
                 managementPeriod: managementPeriod,
                 animalGroup: animalGroup,
-                farm: farm,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions,
-                temperature: temperature);
+                temperature: temperature, 
+                farm: farm);
 
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
@@ -278,7 +283,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.DateTime = dateTime;
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             /*
              * Enteric methane (CH4)
@@ -302,17 +307,9 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
-            if (temperature > 20 || managementPeriod.HousingDetails.HousingType == HousingType.HousedInBarn)
-            {
-                temperature = 20;
-            }
-
-            dailyEmissions.Temperature = temperature;
-
             dailyEmissions.AdjustedMaintenanceCoefficient = base.CalculateTemperatureAdjustedMaintenanceCoefficient(
                 baselineMaintenanceCoefficient: managementPeriod.HousingDetails.BaselineMaintenanceCoefficient,
-                dailyTemperature: temperature);
+                dailyTemperature: dailyEmissions.Temperature);
 
             dailyEmissions.NetEnergyForMaintenance = base.CalculateNetEnergyForMaintenance(
                 maintenanceCoefficient: dailyEmissions.AdjustedMaintenanceCoefficient,
@@ -393,19 +390,12 @@ namespace H.Core.Services.Animals
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
-            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
-                dryMatterIntake: dailyEmissions.DryMatterIntake,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
+            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight);
 
-            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
-                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
-
-            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(
-                animalType: animalGroup.GroupType,
-                finalWeightOfAnimal: managementPeriod.EndWeight);
-
-            if (dailyEmissions.DryMatterIntake > dailyEmissions.DryMatterIntakeMax)
+            if (base.IsOverDmiMax(dailyEmissions))
             {
+                dailyEmissions.DryMatterIntake = dailyEmissions.DryMatterIntakeMax;
+
                 dailyEmissions.OptimumTdn = this.CalculateRequiredTdnSoThatMaxDmiIsNotExceeded(
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance,
                     netEnergyForActivity: dailyEmissions.NetEnergyForActivity,
@@ -417,6 +407,13 @@ namespace H.Core.Services.Animals
                     currentTdn: managementPeriod.SelectedDiet.TotalDigestibleNutrient,
                     currentDmiMax: dailyEmissions.DryMatterIntakeMax);
             }
+
+            dailyEmissions.DryMatterIntakeForGroup = base.CalculateDryMatterIntakeForAnimalGroup(
+                dryMatterIntake: dailyEmissions.DryMatterIntake,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
+
+            dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
+                totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
             #region Additional enteric methane (CH4) calculations
 
@@ -473,8 +470,7 @@ namespace H.Core.Services.Animals
              */
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRate(
-                grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
-                housedOnPasture: managementPeriod.HousingDetails.HousingType.IsPasture());
+                grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
             dailyEmissions.FecalCarbonExcretion = base.CalculateAmountOfFecalCarbonExcreted(
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
@@ -508,7 +504,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -529,10 +525,10 @@ namespace H.Core.Services.Animals
                 dailyEmissions: dailyEmissions,
                 managementPeriod: managementPeriod,
                 animalGroup: animalGroup,
-                farm: farm,
                 dateTime: dateTime,
                 previousDaysEmissions: previousDaysEmissions,
-                temperature: temperature);
+                temperature: dailyEmissions.Temperature, 
+                farm: farm);
 
             dailyEmissions.ManureIndirectN2ONEmission = base.CalculateManureIndirectNitrogenEmission(
                 manureVolatilizationNitrogenEmission: dailyEmissions.ManureVolatilizationN2ONEmission,
@@ -562,7 +558,7 @@ namespace H.Core.Services.Animals
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
             base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(
                 managementPeriod: managementPeriod,
-                temperature: temperature,
+                temperature: dailyEmissions.Temperature,
                 groupEmissionsByDay: dailyEmissions);
 
             return dailyEmissions;

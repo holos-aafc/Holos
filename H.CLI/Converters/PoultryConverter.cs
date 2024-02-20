@@ -12,8 +12,7 @@ using H.CLI.ComponentKeys;
 using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
+
 using IConverter = H.CLI.Interfaces.IConverter;
 using System.Data;
 using System.Globalization;
@@ -63,7 +62,13 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.VolatileSolids.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.ManureExcretionRate.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.FractionOfCarbonInManure.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.FractionOfNitrogenInManure.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.DailyTanExcretion.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(CultureInfo.InvariantCulture));
+            row.Add(managementPeriod.ManureDetails.EmissionFactorLeaching.ToString(CultureInfo.InvariantCulture));
         }
 
         public override AnimalKeyBase GetHeaders()

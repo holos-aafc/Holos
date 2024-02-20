@@ -13,22 +13,20 @@ using H.Core.Providers;
 namespace H.Core.Test.Providers.Climate
 {
     [TestClass]
-    public class ClimateProviderTest
+    public class ClimateProviderTest : UnitTestBase
     {
         #region Fields
 
-        private ClimateProvider _climateProvider;
+        
         private NasaClimateProvider _nasaClimateProvider;
-        private SlcClimateDataProvider _slcClimateData1;
 
         #endregion
 
         [TestInitialize]
         public void Initialize()
         {
-            _climateProvider = new ClimateProvider();
+            
             _nasaClimateProvider = new NasaClimateProvider();
-            _slcClimateData1 = new SlcClimateDataProvider();
         }
 
         #region Tests
@@ -195,6 +193,7 @@ namespace H.Core.Test.Providers.Climate
 
             // Verify
             File.Exists(somePath);
+            File.Delete(somePath); // Delete file test
         }
 
         #endregion

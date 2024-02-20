@@ -145,11 +145,13 @@ namespace H.CLI.Converters
                 VolatileSolids = inputRow.VolatileSolids,
                 ManureExcretionRate = inputRow.ManureExcretionRate,
                 FractionOfCarbonInManure = inputRow.FractionOfCarbonInManure,
+                FractionOfNitrogenInManure = inputRow.FractionOfNitrogenInManure,
                 FractionOfOrganicNitrogenImmobilized = inputRow.FractionOfOrganicNitrogenImmobilized,
                 FractionOfOrganicNitrogenNitrified = inputRow.FractionOfOrganicNitrogenNitrified,
                 FractionOfOrganicNitrogenMineralized = inputRow.FractionOfOrganicNitrogenMineralized,
                 StateType = inputRow.ManureStateType,
                 AmmoniaEmissionFactorForManureStorage = inputRow.AmmoniaEmissionFactorForManureStorage,
+                DailyTanExcretion = inputRow.DailyTanExcretion,
             };
 
             return manureDetails;

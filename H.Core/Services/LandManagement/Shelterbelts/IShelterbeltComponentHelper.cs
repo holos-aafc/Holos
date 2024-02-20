@@ -1,7 +1,7 @@
-﻿using H.Core.Models.LandManagement.Shelterbelt;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using H.Core.Models.LandManagement.Shelterbelt;
 
-namespace H.Core.Services
+namespace H.Core.Services.LandManagement.Shelterbelts
 {
     public interface IShelterbeltComponentHelper
     {

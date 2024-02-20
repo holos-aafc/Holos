@@ -8,18 +8,19 @@ using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Infrastructure;
 using H.Content;
+using H.Core.Providers.AnaerobicDigestion;
 
 namespace H.Core.Providers.Plants
 {
     /// <summary>
     /// Table 9. Default values for nitrogen and lignin contents in crops for the IPCC (2019) Tier 2 steady-state method (iterated)
     /// </summary>
-    public class Table_9_Nitrogen_Lignin_Content_In_Crops_Provider
+    public class Table_9_Nitrogen_Lignin_Content_In_Crops_Provider : ProviderBase
     {
         #region Fields
 
-        private readonly CropTypeStringConverter _cropTypeStringConverter; 
-        
+        private readonly CropTypeStringConverter _cropTypeStringConverter;
+
         #endregion
 
         #region Constructors
@@ -87,6 +88,11 @@ namespace H.Core.Providers.Plants
             }
         }
 
+        public List<Table_9_Nitrogen_Lignin_Content_In_Crops_Data> GetAllCrops()
+        {
+            return this.Data;
+        }
+
         #endregion
 
         #region Private Methods
@@ -109,6 +115,8 @@ namespace H.Core.Providers.Plants
                     continue;
                 }
 
+                var row = new Table_9_Nitrogen_Lignin_Content_In_Crops_Data();
+
                 CropType cropType = _cropTypeStringConverter.Convert(line[1]);
                 var intercept = double.Parse(line[2].ParseUntilOrDefault(), cultureInfo);
                 var slope = double.Parse(line[3].ParseUntilOrDefault(), cultureInfo);
@@ -117,16 +125,31 @@ namespace H.Core.Providers.Plants
                 var ligninContent = double.Parse(line[6], cultureInfo);
                 var moistureContent = double.Parse(line[7], cultureInfo);
 
-                cropInstances.Add(new Table_9_Nitrogen_Lignin_Content_In_Crops_Data 
+                // Check if the line contains biomethane data
+                if (line.Length == 13)
                 {
-                    CropType = cropType,
-                    InterceptValue = intercept,
-                    SlopeValue = slope,
-                    RSTRatio = rst,
-                    NitrogenContentResidues = nitrogenContent,
-                    LigninContentResidues = ligninContent,
-                    MoistureContent = moistureContent,
-                });
+                    var data = new Table_46_Biogas_Methane_Production_CropResidue_Data
+                    {
+                        CropType = cropType,
+                        BioMethanePotential = base.ParseDouble(line[8]),
+                        MethaneFraction = base.ParseDouble(line[9]),
+                        VolatileSolids = base.ParseDouble(line[10]),
+                        TotalSolids = base.ParseDouble(line[11]),
+                        TotalNitrogen = base.ParseDouble(line[12])
+                    };
+
+                    row.BiomethaneData = data;
+                }
+
+                row.CropType = cropType;
+                row.InterceptValue = intercept;
+                row.SlopeValue = slope;
+                row.RSTRatio = rst;
+                row.NitrogenContentResidues = nitrogenContent;
+                row.LigninContentResidues = ligninContent;
+                row.MoistureContent = moistureContent;
+
+                cropInstances.Add(row);
             }
 
             return cropInstances;

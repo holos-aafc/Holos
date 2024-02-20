@@ -64,7 +64,8 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_IsIrrigated, null },
             {Properties.Resources.Key_IrrigationType, null },
             {Properties.Resources.Key_AmountOfIrrigation, ImperialUnitsOfMeasurement.InchesToMm },
-            {Properties.Resources.Key_MoistureContentOfCrop,  ImperialUnitsOfMeasurement.Percentage},
+            {Properties.Resources.Key_MoistureContentOfCrop,  null},
+            {Properties.Resources.Key_MoistureContentOfCropPercentage,  ImperialUnitsOfMeasurement.Percentage},
             {Properties.Resources.Key_PercentageOfStrawReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
             {Properties.Resources.Key_PercentageOfRootsReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
             {Properties.Resources.Key_PercentageOfProductYieldReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
@@ -93,6 +94,7 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_BelowGroundCarbonInput, null },
             {Properties.Resources.Key_ManureCarbonInputsPerHectare, null },
             {Properties.Resources.Key_DigestateCarbonInputsPerHectare, null },
+            {Properties.Resources.Key_TotalCarbonInputs, null },
             {Properties.Resources.Key_Sand, null },
             {Properties.Resources.Key_Lignin, null },
             {Properties.Resources.Key_WFac, null },
@@ -101,17 +103,20 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_NitrogenContent, null },
             {Properties.Resources.Key_AboveGroundResidueDryMatter, null },
             {Properties.Resources.Key_BelowGroundResidueDryMatter, null },
+            {Properties.Resources.Key_FuelEnergy, null },
+            {Properties.Resources.Key_HerbicideEnergy, null },
+            {Properties.Resources.Key_FertilizerBlend, null },
         };
 
         //  Currently only 2 optional headers in the field keys
         public bool IsHeaderOptional(string s)
         {
             if (s == Properties.Resources.Key_NitrogenFixation) return true;
+            else if (s == Properties.Resources.Key_FertilizerBlend) return true;
             else if (s == Properties.Resources.Key_NitrogenDeposit) return true;
             else return false;
         }
         // Populate with all the keys that exist currently and tell if it is missing or not
-        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){
-};
+        public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){};
     }
 }

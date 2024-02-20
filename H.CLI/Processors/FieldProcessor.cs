@@ -1,24 +1,16 @@
-﻿using System;
-using H.CLI.Interfaces;
+﻿using H.CLI.Interfaces;
 using H.CLI.UserInput;
-using Prism.Events;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using H.CLI.FileAndDirectoryAccessors;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
-using H.Core.Services;
-using H.Core.Services.LandManagement;
-using H.Core.Calculators.Economics;
-using H.Core.Calculators.Infrastructure;
 using H.Core.Services.Animals;
+using H.Core.Services.LandManagement;
 using H.Infrastructure;
-using System.Text.RegularExpressions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace H.CLI.Processors
 {
@@ -26,22 +18,25 @@ namespace H.CLI.Processors
     {
         #region Fields
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
-        private readonly FieldResultsService _fieldResultsService;
-        private FarmResultsService _farmResultsService;
-        private readonly EconomicsCalculator _economicsCalculator;
+        private readonly IFieldResultsService _fieldResultsService;
+        private AnimalResultsService _animalService;
 
         #endregion
 
         #region Constructors
 
-        public FieldProcessor()
+        public FieldProcessor(IFieldResultsService fieldResultsService)
         {
-            var animalService = new AnimalResultsService();
-            var manureService = new ManureService(animalService);
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
 
-            _fieldResultsService = new FieldResultsService();
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
-            _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
+            _animalService = new AnimalResultsService();
         }
 
         #endregion
@@ -57,6 +52,9 @@ namespace H.CLI.Processors
             // Should re_crop be overwritten here if the user specifies a custom climate file?
             //var pathToCustomClimateData = farm.CliInputPath + @"\" + farm.ClimateDataFileName;
             //_customClimateDataProvider.LoadUserClimateFile(pathToCustomClimateData, farm);
+
+            var animalResults = _animalService.GetAnimalResults(farm);
+            _fieldResultsService.AnimalResults = animalResults;
 
             var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 
@@ -176,6 +174,7 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.IrrigationType + columnSeparator);
                 stringBuilder.Append(viewItem.AmountOfIrrigation + columnSeparator);
                 stringBuilder.Append(viewItem.MoistureContentOfCrop + columnSeparator);
+                stringBuilder.Append(viewItem.MoistureContentOfCropPercentage + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfStrawReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfRootsReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfProductYieldReturnedToSoil + columnSeparator);
@@ -213,6 +212,18 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.NitrogenContent + columnSeparator);
                 stringBuilder.Append(viewItem.AboveGroundResidueDryMatter + columnSeparator);
                 stringBuilder.Append(viewItem.BelowGroundResidueDryMatter + columnSeparator);
+                stringBuilder.Append(viewItem.FuelEnergy + columnSeparator);
+                stringBuilder.Append(viewItem.HerbicideEnergy + columnSeparator);
+
+                var fertilizerApplication = viewItem.FertilizerApplicationViewItems.FirstOrDefault();
+                if (fertilizerApplication != null && fertilizerApplication.FertilizerBlendData != null)
+                {
+                    stringBuilder.Append(fertilizerApplication.FertilizerBlendData.FertilizerBlend + columnSeparator);
+                }
+                else
+                {
+                    stringBuilder.Append(FertilizerBlends.Custom + columnSeparator);
+                }
 
                 stringBuilder.Append(Environment.NewLine);
             }

@@ -360,6 +360,12 @@ namespace H.Content
 
                 case CsvResourceNames.AnimalSystemProductionDays:
                     return SplitFileIntoLines(Resource.Table_28_Average_Number_Of_Production_Days);
+
+                case CsvResourceNames.UpdatedSmallAreaYields:
+                    return SplitFileIntoLines(Resource.small_area_yields_updated_data);
+
+                case CsvResourceNames.IndoorBarnTemperatures:
+                    return SplitFileIntoLines(Resource.Table_63_Indoor_Barn_Temperatures);
                 default:
                     return null;
             }

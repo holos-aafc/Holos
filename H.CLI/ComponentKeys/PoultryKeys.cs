@@ -35,7 +35,13 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.VolatileSolids, null);
             base.Keys.Add(Properties.Resources.ManureExcretionRate, null);
             base.Keys.Add(Properties.Resources.FractionOfCarbonInManure, null);
+            base.Keys.Add(Properties.Resources.FractionOfNitrogenInManure, null);
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, null);
+            base.Keys.Add(Properties.Resources.DailyTanExcretion, null);
+            base.Keys.Add(Properties.Resources.AmmoniaEmissionFactorForManureStorage, null);
+            base.Keys.Add(Properties.Resources.EmissionFactorVolatilization, null);
+            base.Keys.Add(Properties.Resources.FractionLeaching, null);
+            base.Keys.Add(Properties.Resources.EmissionFactorLeaching, null);
         }
 
         #endregion

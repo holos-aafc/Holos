@@ -36,7 +36,7 @@ namespace H.CLI.Results
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
         private readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
         private readonly UnitsOfMeasurementCalculator _uCalc = new UnitsOfMeasurementCalculator();
-        private readonly FieldResultsService _fieldResultsService = new FieldResultsService();
+        private readonly IFieldResultsService _fieldResultsService;
         private readonly IFarmResultsService _farmResultsService;
 
         private List<FarmEmissionResults> _farmEmissionResults = new List<FarmEmissionResults>();
@@ -55,15 +55,22 @@ namespace H.CLI.Results
 
         #region Constructor
 
-        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper)
+        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService)
         {
-            _storage = storage;
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
 
             _energyCalculator = new EnergyCarbonDioxideEmissionsCalculator();
             _uncertaintyCalculator = new Table_57_58_Expression_Of_Uncertainty_Calculator();
 
             var animalService = new AnimalResultsService();
-            var manureService = new ManureService(animalService);
+            var manureService = new ManureService();
 
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
             _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);
