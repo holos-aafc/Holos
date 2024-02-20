@@ -124,6 +124,12 @@
   <data name="BC_No_Styles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BC_No_Styles.kml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Disclaimer_English" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Disclaimer_English.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Disclaimer_French" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Disclaimer_French.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="MB_No_Styles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MB_No_Styles.kml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

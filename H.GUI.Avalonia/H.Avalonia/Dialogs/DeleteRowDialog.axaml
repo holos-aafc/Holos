@@ -1,0 +1,33 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
+        xmlns:dialogs="clr-namespace:H.Avalonia.Infrastructure.Dialogs"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="150"
+        Width="500" Height="150"
+        x:Class="H.Avalonia.Dialogs.DeleteRowDialog">
+    <Design.DataContext>
+        <dialogs:DeleteRowDialogViewModel/>
+    </Design.DataContext>
+    <Grid RowDefinitions="*, Auto">
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Message}"
+                   Padding="20, 10"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Stretch"/>
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10, 10">
+            <Button Classes="user-prompt-button--confirm"
+                    Content="{x:Static properties:Resources.LabelDelete}"
+                    Command="{Binding DeleteButtonCommand}"
+                    Background="#6495ED"/>
+            <Button Classes="user-prompt-button--cancel"
+                    Content="{x:Static properties:Resources.LabelCancel}"
+                    Command="{Binding CancelButtonCommand}"
+                    Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

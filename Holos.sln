@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Avalonia.Core", "H.GUI.Av
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Avalonia.Test", "H.GUI.Avalonia\H.Avalonia.Test\H.Avalonia.Test.csproj", "{53A9A756-5E6A-43D9-A056-D0FD56DAE226}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.Common", "H.Common\H.Common.csproj", "{98A35C96-2234-44D9-B5C4-07728A0A3B7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{53A9A756-5E6A-43D9-A056-D0FD56DAE226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53A9A756-5E6A-43D9-A056-D0FD56DAE226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53A9A756-5E6A-43D9-A056-D0FD56DAE226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A35C96-2234-44D9-B5C4-07728A0A3B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A35C96-2234-44D9-B5C4-07728A0A3B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A35C96-2234-44D9-B5C4-07728A0A3B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A35C96-2234-44D9-B5C4-07728A0A3B7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

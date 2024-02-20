@@ -3,9 +3,6 @@ using Avalonia.Platform.Storage;
 using CsvHelper;
 using CsvHelper.TypeConversion;
 using H.Avalonia.Infrastructure;
-using H.Avalonia.Infrastructure.Dialogs;
-using H.Avalonia.Models;
-using H.Avalonia.Models.ClassMaps;
 using H.Avalonia.Views;
 using Prism.Commands;
 using Prism.Regions;
@@ -17,7 +14,13 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using H.Avalonia.Core;
+using H.Avalonia.Core.Models;
+using H.Avalonia.Core.Models.ClassMaps;
+using H.Avalonia.Dialogs;
 using H.Avalonia.Views.ResultViews;
+using H.Common.Models;
+using H.Core;
 using ClimateResultsView = H.Avalonia.Views.ResultViews.ClimateResultsView;
 
 namespace H.Avalonia.ViewModels
@@ -38,12 +41,12 @@ namespace H.Avalonia.ViewModels
         public DelegateCommand NavigateToResultsView { get; set; }
 
         /// <summary>
-        /// A command that adds rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="ClimateViewItem"/>.
+        /// A command that adds rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="H.Common.Models.ClimateViewItem"/>.
         /// </summary>
         public DelegateCommand AddRowCommand { get; set; }
 
         /// <summary>
-        /// A command that removes rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="ClimateViewItem"/>.
+        /// A command that removes rows to the grid displayed on <see cref="ClimateDataView"/>. Each row indicates <see cref="H.Common.Models.ClimateViewItem"/>.
         /// </summary>
         public DelegateCommand<object> DeleteRowCommand { get; set; }
 
@@ -71,13 +74,13 @@ namespace H.Avalonia.ViewModels
         /// <summary>
         /// A bool that indicates if the grid has any climate view items currently added to it. Returns true if Any view items exist, returns false otherwise.
         /// </summary>
-        public bool HasViewItems => Storage?.ClimateViewItems != null && Storage.ClimateViewItems.Any();
+        public bool HasViewItems => Storage.ApplicationData.PrototypeStorage.ClimateViewItems != null && Storage.ApplicationData.PrototypeStorage.ClimateViewItems.Any();
 
         /// <summary>
         /// A bool that indicates if any climate view items are selected or not. Returns true if at least one view item is selected, returns false if none are selected.
         /// </summary>
-        public bool AnyViewItemsSelected => Storage?.ClimateViewItems != null &&
-                                                   Storage.ClimateViewItems.Any(item => item.IsSelected);
+        public bool AnyViewItemsSelected => Storage.ApplicationData.PrototypeStorage.ClimateViewItems != null &&
+                                            Storage.ApplicationData.PrototypeStorage.ClimateViewItems.Any(item => item.IsSelected);
 
         public ClimateDataViewModel()
         {
@@ -109,7 +112,7 @@ namespace H.Avalonia.ViewModels
         }
 
         /// <summary>
-        /// Triggered when the <see cref="Storage.ClimateViewItems"/> changes. This method raises CanExecuteChanged events for the various
+        /// Triggered when the <see cref="Storage.ApplicationData.PrototypeStorage.ClimateViewItems"/> changes. This method raises CanExecuteChanged events for the various
         /// buttons on the page and also attaches/detaches PropertyChanged events to individual properties inside the collection so that
         /// we can be notified when an internal property changes in the collection.
         /// </summary>
@@ -142,7 +145,7 @@ namespace H.Avalonia.ViewModels
         }
 
         /// <summary>
-        /// A property changed event that is attached to each property of the <see cref="Storage.ClimateViewItems"/> collection.
+        /// A property changed event that is attached to each property of the <see cref="Storage.ApplicationData.PrototypeStorage.ClimateViewItems"/> collection.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event that was triggered.</param>
@@ -168,10 +171,18 @@ namespace H.Avalonia.ViewModels
         {
             // When we navigate to this view, we instantiate the journal property. This allows us to do navigation through journaling.
             _navigationJournal = navigationContext.NavigationService.Journal;
-            if (Storage?.ClimateViewItems != null)
+            if (Storage.ApplicationData.PrototypeStorage.ClimateViewItems != null)
             {
-                Storage.ClimateViewItems.CollectionChanged += OnClimateViewItemsCollectionChanged;
+                Storage.ApplicationData.PrototypeStorage.ClimateViewItems.CollectionChanged += OnClimateViewItemsCollectionChanged;
+                
+                foreach (var viewItem in Storage.ApplicationData.PrototypeStorage.ClimateViewItems)
+                {
+                    viewItem.PropertyChanged -= CollectionItemOnPropertyChanged;
+                    viewItem.PropertyChanged += CollectionItemOnPropertyChanged;
+                }
             }
+            
+            
         }
 
         /// <summary>
@@ -187,13 +198,13 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void OnAddRow()
         {
-            Storage?.ClimateViewItems?.Add(new ClimateViewItem());
+            Storage.ApplicationData.PrototypeStorage.ClimateViewItems?.Add(new ClimateViewItem());
         }
 
         /// <summary>
         /// Deletes a row from the grid on <see cref="ClimateDataView"/>
         /// </summary>
-        /// <param name="obj">The <see cref="ClimateViewItem"/> that needs to be deleted.</param>
+        /// <param name="obj">The <see cref="H.Common.Models.ClimateViewItem"/> that needs to be deleted.</param>
         private void OnDeleteRow(object obj)
         {
             if (obj is not ClimateViewItem viewItem) return;
@@ -203,25 +214,25 @@ namespace H.Avalonia.ViewModels
             {
                 if (r.Result == ButtonResult.OK)
                 {
-                    Storage?.ClimateViewItems?.Remove(viewItem);
+                    Storage.ApplicationData.PrototypeStorage.ClimateViewItems?.Remove(viewItem);
                 }
             });
         }
 
         /// <summary>
-        /// Deletes a group of <see cref="ClimateViewItem"/> that are selected by the user.
+        /// Deletes a group of <see cref="H.Common.Models.ClimateViewItem"/> that are selected by the user.
         /// </summary>
         private void OnDeleteSelectedRows()
         {
-            if (!Storage.ClimateViewItems.Any()) return;
+            if (Storage.ApplicationData.PrototypeStorage.ClimateViewItems == null || !Storage.ApplicationData.PrototypeStorage.ClimateViewItems.Any()) return;
             var message = Core.Properties.Resources.RowDeleteMessage;
             _dialogService.ShowMessageDialog(nameof(DeleteRowDialog), message, r =>
             {
                 if (r.Result != ButtonResult.OK) return;
-                var currentItems = Storage.ClimateViewItems.ToList();
+                var currentItems = Storage.ApplicationData.PrototypeStorage.ClimateViewItems.ToList();
                 foreach (var item in currentItems.Where(item => item.IsSelected))
                 {
-                    Storage?.ClimateViewItems?.Remove(item);
+                    Storage.ApplicationData.PrototypeStorage.ClimateViewItems?.Remove(item);
                 }
 
                 if (!HasViewItems)
@@ -246,7 +257,7 @@ namespace H.Avalonia.ViewModels
             _importHelper.ImportPath = file.Path.AbsolutePath;
             try
             {
-                Storage?.ClimateViewItems.AddRange(_importHelper.ImportFromCsv(_climateViewItemMap));
+                Storage.ApplicationData.PrototypeStorage.ClimateViewItems.AddRange(_importHelper.ImportFromCsv(_climateViewItemMap));
 
             }
             catch (HeaderValidationException e)
@@ -280,10 +291,10 @@ namespace H.Avalonia.ViewModels
         /// </summary>
         private void OnToggleSelectAllRows()
         {
-            if (Storage?.ClimateViewItems == null) return;
+            if (Storage.ApplicationData.PrototypeStorage.ClimateViewItems == null) return;
             if (AllViewItemsSelected)
             {
-                foreach (var item in Storage.ClimateViewItems)
+                foreach (var item in Storage.ApplicationData.PrototypeStorage.ClimateViewItems)
                 {
                     item.IsSelected = false;
                 }
@@ -292,7 +303,7 @@ namespace H.Avalonia.ViewModels
             }
             else
             {
-                foreach (var item in Storage.ClimateViewItems)
+                foreach (var item in Storage.ApplicationData.PrototypeStorage.ClimateViewItems)
                 {
                     item.IsSelected = true;
                 }

@@ -1,0 +1,107 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ToBeKeptInformedMessage" xml:space="preserve">
+        <value>Pour être informé de la publication des prochaines versions du logiciel, faites parvenir vos coordonnées (y compris votre adresse électronique) à holos@canada.ca</value>
+    </data>
+    <data name="AboutHolosMessage" xml:space="preserve">
+        <value>Holos - outil d'évaluation et de réduction des émissions de gaz à effet de serre des fermes agricoles</value>
+    </data>
+    <data name="SelectYourLanguage" xml:space="preserve">
+        <value>Sélectionnez votre langue</value>
+    </data>
+    <data name="LabelDisclaimer" xml:space="preserve">
+        <value>Avis de non-responsabilité</value>
+    </data>
+    <data name="TextAboutPage" xml:space="preserve">
+        <value>Cette application est un outil qui permet aux utilisateurs d'accéder à des données climatiques et pédologiques à des fins agricoles. Il est basé sur Holos, un outil développé par Agriculture et Agroalimentaire Canada pour estimer les émissions de gaz à effet de serre provenant de différentes pratiques agricoles. L'application utilise l'API NASA Power pour récupérer des données climatiques pour n'importe quel lieu et n'importe quelle période, telles que les précipitations quotidiennes et l'évapotranspiration. L'application permet également aux utilisateurs d'extraire des données pédologiques de Holos, telles que le groupe de sol, la texture du sol, le pourcentage de matière organique dans le sol, etc. L'objectif de cette application est de permettre aux utilisateurs d'accéder facilement à diverses données pédologiques et climatiques sans dépendre du application Holos complète.</value>
+    </data>
+    <data name="ApplicationTitle" xml:space="preserve">
+        <value>Outil d'extraction de données Holos</value>
+    </data>
+    <data name="LabelContributors" xml:space="preserve">
+        <value>Contributeurs</value>
+    </data>
+    <data name="LabelUsefulLinks" xml:space="preserve">
+        <value>Liens utiles</value>
+    </data>
+    <data name="LabelSingleCoordinate" xml:space="preserve">
+        <value>Coordonnée unique</value>
+    </data>
+    <data name="LabelSoilData" xml:space="preserve">
+        <value>Données sur le sol</value>
+    </data>
+    <data name="LabelSelectAllRows" xml:space="preserve">
+        <value>Tout sélectionner</value>
+    </data>
+    <data name="LabelImportFromCSV" xml:space="preserve">
+        <value>Importer depuis CSV</value>
+    </data>
+    <data name="LabelGetSoilData" xml:space="preserve">
+        <value>Obtenez des données sur le sol</value>
+    </data>
+    <data name="LabelYear" xml:space="preserve">
+        <value>Année</value>
+    </data>
+    <data name="LabelAddress" xml:space="preserve">
+        <value>Adresse</value>
+    </data>
+    <data name="LabelAddRow" xml:space="preserve">
+        <value>Ajouter une rangée</value>
+    </data>
+    <data name="LabelBack" xml:space="preserve">
+        <value>Retour</value>
+    </data>
+    <data name="LabelFindCoordinate" xml:space="preserve">
+        <value>Trouver les coordonnées</value>
+    </data>
+    <data name="LabelDelete" xml:space="preserve">
+        <value>Supprimer</value>
+    </data>
+    <data name="LabelExportToCSV" xml:space="preserve">
+        <value>Exporter en CSV</value>
+    </data>
+    <data name="LabelMultipleCoordinates" xml:space="preserve">
+        <value>Coordonnées multiples</value>
+    </data>
+    <data name="LabelGetCoordinates" xml:space="preserve">
+        <value>Obtenir les coordonnées</value>
+    </data>
+    <data name="LabelSoilTexture" xml:space="preserve">
+        <value>Texture du sol</value>
+    </data>
+    <data name="LabelLoadPolygons" xml:space="preserve">
+        <value>Charger des polygones</value>
+    </data>
+    <data name="SelectProvince" xml:space="preserve">
+        <value>Sélectionnez une province</value>
+    </data>
+    <data name="SelectRegion" xml:space="preserve">
+        <value>Sélectionnez une région</value>
+    </data>
+    <data name="MessageRestartRequired" xml:space="preserve">
+        <value>L'application doit être redémarrée pour que ce paramètre prenne effet.</value>
+    </data>
+    <data name="HeadingRestartRequired" xml:space="preserve">
+        <value>Redémarrage requis</value>
+    </data>
+    <data name="HeadingSavingData" xml:space="preserve">
+        <value>Sauvegarde des données</value>
+    </data>
+    <data name="MessageSavingDataOnExit" xml:space="preserve">
+        <value>Sauvegarde des données avant de fermer l'application. S'il vous plaît, attendez.</value>
+    </data>
+    <data name="MessageSavingData" xml:space="preserve">
+        <value>Les données de l'application sont en cours d'enregistrement.</value>
+    </data>
+</root>

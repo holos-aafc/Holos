@@ -1,7 +1,7 @@
-using H.Avalonia.Models.ClassMaps;
-using H.Avalonia.Models.Results;
-using H.Avalonia.ViewModels.Results;
+using H.Avalonia.Core.Models.ClassMaps;
+using H.Avalonia.Core.Models.Results;
 using H.Avalonia.Infrastructure;
+using H.Avalonia.ViewModels.ResultViewModels;
 
 namespace H.Avalonia.Test
 {

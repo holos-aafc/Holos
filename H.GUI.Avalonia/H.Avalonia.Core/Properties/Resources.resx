@@ -433,4 +433,46 @@ Hassan Afzaal</value>
   <data name="Yukon" xml:space="preserve">
     <value>Yukon</value>
   </data>
+  <data name="SelectYourLanguage" xml:space="preserve">
+    <value>Select your language</value>
+  </data>
+  <data name="HolosVersionNumber" xml:space="preserve">
+    <value>Placeholder version</value>
+  </data>
+  <data name="AboutHolosMessage" xml:space="preserve">
+    <value>Holos - a tool to estimate and reduce greenhouse gas emissions from farms</value>
+  </data>
+  <data name="ToBeKeptInformedMessage" xml:space="preserve">
+    <value>To be kept informed about  future versions, please send your contact information (including email address) to holos@canada.ca</value>
+  </data>
+  <data name="LabelDisclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="LabelGetCoordinates" xml:space="preserve">
+    <value>Get Coordinates</value>
+  </data>
+  <data name="LabelLoadPolygons" xml:space="preserve">
+    <value>Load Polygons</value>
+  </data>
+  <data name="SelectRegion" xml:space="preserve">
+    <value>Select your region</value>
+  </data>
+  <data name="HeadingRestartRequired" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="MessageRestartRequired" xml:space="preserve">
+    <value>The application needs to be restarted for this setting to take effect.</value>
+  </data>
+  <data name="Disclaimer_Ireland" xml:space="preserve">
+    <value>Holos - Irish version</value>
+  </data>
+  <data name="HeadingSavingData" xml:space="preserve">
+    <value>Saving Data</value>
+  </data>
+  <data name="MessageSavingDataOnExit" xml:space="preserve">
+    <value>Saving data before closing the application. Please wait.</value>
+  </data>
+  <data name="MessageSavingData" xml:space="preserve">
+    <value>Application data is being saved.</value>
+  </data>
 </root>

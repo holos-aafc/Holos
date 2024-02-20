@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:supportingViewModels="clr-namespace:H.Avalonia.ViewModels.SupportingViewModels"
+             mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="120"
+             x:Class="H.Avalonia.Views.SupportingViews.ToolbarView">
+    <Design.DataContext>
+        <supportingViewModels:ToolbarViewModel/>
+    </Design.DataContext>
+    <Grid ColumnDefinitions="*">
+        <Menu  Grid.Column="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save"
+                          Width="200"
+                          Padding="30,5,0,5"
+                          Command="{Binding SaveCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Settings"/>
+            <MenuItem Header="Tools"/>
+            <MenuItem Header="About"/>
+        </Menu>
+    </Grid>
+    
+</UserControl>

@@ -18,17 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.2" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.2" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.2" />
+    <PackageReference Include="Avalonia" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.2" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.2" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.2" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
-    <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.0" />
-    <PackageReference Include="Mapsui.Avalonia" Version="4.0.0" />
-    <PackageReference Include="Mapsui.Extensions" Version="4.0.0" />
+    <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.3" />
+    <PackageReference Include="Mapsui.Avalonia" Version="4.1.0" />
+    <PackageReference Include="Mapsui.Extensions" Version="4.1.0" />
     <PackageReference Include="Prism.Avalonia" Version="8.1.97.11000" />
     <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11000" />
   </ItemGroup>
@@ -42,6 +42,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Update="Views\ClimateDataView.axaml.cs">
       <DependentUpon>ClimateDataView.axaml</DependentUpon>
     </Compile>
@@ -53,12 +58,40 @@
       <DependentUpon>SoilResultsView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogs\DeleteRowDialog.axaml.cs">
+      <DependentUpon>DeleteRowDialog.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SupportingViews\ToolbarView.axaml.cs">
+      <DependentUpon>ToolbarView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SupportingViews\FooterView.axaml.cs">
+      <DependentUpon>FooterView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\ComponentViews\" />
+    <Folder Include="ViewModels\ComponentViewModels\" />
+    <Folder Include="ViewModels\DetailViewModels\" />
+    <Folder Include="ViewModels\SharedViewModels\" />
     <Folder Include="Views\DetailViews\" />
-    <Folder Include="Views\Shared\" />
-    <Folder Include="Views\SupportingViews\" />
+    <Folder Include="Views\SharedViews\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Dialogs\DeleteRowDialog.axaml" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if exist &quot;$(TargetPath).locked&quot; del &quot;$(TargetPath).locked&quot;&#xD;&#xA;if exist &quot;$(TargetPath)&quot; if not exist &quot;$(TargetPath).locked&quot; move &quot;$(TargetPath)&quot; &quot;$(TargetPath).locked&quot;" />
+  </Target>
 </Project>

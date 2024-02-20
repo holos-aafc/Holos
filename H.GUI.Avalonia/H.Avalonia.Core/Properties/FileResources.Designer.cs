@@ -81,6 +81,32 @@ namespace H.Avalonia.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Important Notices
+        ///
+        ///This software was designed primarily to encourage users to explore possible ways of reducing greenhouse gas emissions from farms. The estimates of emission are approximate, and may change appreciably as new scientific findings emerge. Agriculture and Agri-Food Canada does not warrant the reliability of this tool for uses other than education or exploratory gaming of possible practices.
+        ///
+        ///Copyright/Permission to Reproduce
+        ///
+        ///Material in this software were produced and/or compiled by Agr [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Disclaimer_English {
+            get {
+                return ResourceManager.GetString("Disclaimer_English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avis importants
+        ///
+        ///Ce logiciel a été conçu principalement pour encourager les utilisateurs à explorer des solutions possibles en vue de réduire les émissions de gaz à effet de serre produites par les exploitations agricoles. Les estimations sont approximatives et peuvent changer de façon appréciable si de nouvelles découvertes scientifiques voient le jour. Il s’agit d’un outil éducatif permettant de simuler des pratiques possibles. Agriculture et Agroalimentaire Canada ne garantit pas la fiabilité de cet ou [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Disclaimer_French {
+            get {
+                return ResourceManager.GetString("Disclaimer_French", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] MB_No_Styles {

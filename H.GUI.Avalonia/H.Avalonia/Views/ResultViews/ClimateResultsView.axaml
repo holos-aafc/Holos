@@ -2,13 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
              xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
              x:Class="H.Avalonia.Views.ResultViews.ClimateResultsView"
-             xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing">
+             xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:resultViewModels="clr-namespace:H.Avalonia.ViewModels.ResultViewModels">
     <Design.DataContext>
-        <results:ClimateResultsViewModel/>
+        <resultViewModels:ClimateResultsViewModel/>
     </Design.DataContext>
     
     <Grid RowDefinitions="Auto, Auto, Auto, *">

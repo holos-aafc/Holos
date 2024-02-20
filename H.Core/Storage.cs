@@ -179,7 +179,7 @@ namespace H.Core
         /// <returns>The full path to the backup file.</returns>
         private string GetFullPathToBackupFile(int backupNumber, out string backupFileName)
         {
-            backupFileName = _backupFilesInDirectory.ElementAt(backupNumber).ToString();
+            backupFileName = _backupFilesInDirectory.ElementAt(backupNumber).Name;
             string pathToBackupFile = CreateFileLocationPath(backupFileName, isBackupPath: true);
 
             return pathToBackupFile;
@@ -192,15 +192,13 @@ namespace H.Core
         /// <param name="path"></param>
         private void SaveInternal(string path)
         {
-            using (StreamWriter fileStream = File.CreateText(path))
-            {
-                JsonSerializer serializer = new JsonSerializer();
+            using StreamWriter fileStream = File.CreateText(path);
+            JsonSerializer serializer = new JsonSerializer();
 
-                // Serializer and deserializer must both have this set to Auto
-                serializer.TypeNameHandling = TypeNameHandling.Auto;
+            // Serializer and deserializer must both have this set to Auto
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
-            }
+            serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
         }
 
         /// <summary>
@@ -212,17 +210,15 @@ namespace H.Core
         {
             return Task.Run(() =>
             {
-                using (StreamWriter fileStream = File.CreateText(path))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
+                using StreamWriter fileStream = File.CreateText(path);
+                JsonSerializer serializer = new JsonSerializer();
 
-                    // Serializer and deserializer must both have this set to Auto
-                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+                // Serializer and deserializer must both have this set to Auto
+                serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                    serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
-                    Trace.TraceInformation($"{nameof(Storage)}.{nameof(SaveInternalAsync)}: data serialization completed.");
-                    HasSaveCompleted = true;
-                }
+                serializer.Serialize(fileStream, this.ApplicationData, typeof(ApplicationData));
+                Trace.TraceInformation($"{nameof(Storage)}.{nameof(SaveInternalAsync)}: data serialization completed.");
+                HasSaveCompleted = true;
             });
         }
 
@@ -241,18 +237,14 @@ namespace H.Core
 
 
             // Use streams instead of File.ReadAllText() to prevent OutOfMemoryExceptions when reading large files
-            using (StreamReader r = new StreamReader(pathToStorageFile))
-            {
-                using (JsonReader reader = new JsonTextReader(r))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
+            using StreamReader r = new StreamReader(pathToStorageFile);
+            using JsonReader reader = new JsonTextReader(r);
+            JsonSerializer serializer = new JsonSerializer();
 
-                    // Serializer and deserializer must both have this set to Auto
-                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+            // Serializer and deserializer must both have this set to Auto
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
 
-                    return serializer.Deserialize<ApplicationData>(reader);
-                }
-            }
+            return serializer.Deserialize<ApplicationData>(reader);
         }
 
         /// <summary>
@@ -414,7 +406,7 @@ namespace H.Core
         private string GetUserFolderPath(bool isBackupFolder = false)
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var folderPath = isBackupFolder ? Path.Combine(localAppData, "HOLOS_4\\backups") : Path.Combine(localAppData, "HOLOS_4");
+            var folderPath = isBackupFolder ? Path.Combine(localAppData, "HOLOS_5\\backups") : Path.Combine(localAppData, "HOLOS_5");
             return folderPath;
         }
 
@@ -448,23 +440,19 @@ namespace H.Core
         public void WriteExceptionToFile(Exception e)
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var userFilePath = Path.Combine(localAppData, "HOLOS_4");
+            var userFilePath = Path.Combine(localAppData, "HOLOS_5");
 
             var fullpath = Path.Combine(userFilePath, "logfile.txt");
 
             if (!File.Exists(fullpath))
             {
-                using (StreamWriter sw = File.CreateText(fullpath))
-                {
-                    sw.WriteLine(e.ToString());
-                }
+                using StreamWriter sw = File.CreateText(fullpath);
+                sw.WriteLine(e.ToString());
             }
             else
             {
-                using (StreamWriter sw = File.AppendText(fullpath))
-                {
-                    sw.WriteLine(e.ToString());
-                }
+                using StreamWriter sw = File.AppendText(fullpath);
+                sw.WriteLine(e.ToString());
             }
         }
 

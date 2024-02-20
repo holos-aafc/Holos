@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:H.Avalonia.Core.Properties;assembly=H.Avalonia.Core"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
-             xmlns:results="clr-namespace:H.Avalonia.ViewModels.Results"
              xmlns:infrastructure1="clr-namespace:H.Avalonia.Infrastructure;assembly=H.Avalonia.Infrastructure"
+             xmlns:resultViewModels="clr-namespace:H.Avalonia.ViewModels.ResultViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="H.Avalonia.Views.ResultViews.SoilResultsView">
     <Design.DataContext>
-        <results:SoilResultsViewModel/>
+        <resultViewModels:SoilResultsViewModel/>
     </Design.DataContext>
     <UserControl.Resources>
         <infrastructure1:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
@@ -47,7 +47,7 @@
                   ItemsSource="{Binding SingleSoilResultsViewItems}"
                   Margin="20,0,20,20"
                   IsReadOnly="True"
-                  IsVisible="{Binding Storage.ShowSingleCoordinateResults}">
+                  IsVisible="{Binding Storage.ApplicationData.PrototypeStorage.ShowSingleCoordinateResults}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.LabelLatitude}"
                                     Binding="{Binding Latitude, StringFormat={}{0:0.###}}"
@@ -80,7 +80,7 @@
                   ItemsSource="{Binding SoilResultsViewItems}"
                   Margin="20,0,20,20"
                   IsReadOnly="True"
-                  IsVisible="{Binding Storage.ShowMultipleCoordinateResults}">
+                  IsVisible="{Binding Storage.ApplicationData.PrototypeStorage.ShowMultipleCoordinateResults}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.LabelLatitude}"
                                     Binding="{Binding Latitude, StringFormat={}{0:0.##}}"

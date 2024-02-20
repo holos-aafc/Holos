@@ -30,4 +30,11 @@
     </EmbeddedResource>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\H.Common\H.Common.csproj" />
+    <ProjectReference Include="..\..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\H.Avalonia.Infrastructure\H.Avalonia.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

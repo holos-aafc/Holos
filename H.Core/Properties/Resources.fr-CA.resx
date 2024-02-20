@@ -5544,7 +5544,13 @@
     <value>FacE</value>
   </data>
   <data name="SelectProvince" xml:space="preserve">
-    <value>Select Province</value>
+    <value>Sélectionnez une province</value>
+  </data>
+  <data name="EnumCanada" xml:space="preserve">
+    <value>Canada</value>
+  </data>
+  <data name="EnumIreland" xml:space="preserve">
+    <value>Irlande</value>
   </data>
   <data name="LabelUseConstantIndoorTemperature" xml:space="preserve">
     <value>utiliser une température intérieure constante</value>

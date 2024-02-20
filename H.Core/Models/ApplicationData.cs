@@ -17,6 +17,7 @@ namespace H.Core.Models
         private GlobalSettings _globalSettings;
         private DisplayUnitStrings _displayDisplayUnitStrings;
         private ObservableCollection<Farm> _farms;
+        private PrototypeStorage _prototypeStorage;
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace H.Core.Models
             this.GlobalSettings = new GlobalSettings();
             this.Farms = new ObservableCollection<Farm>();
             this.DisplayUnitStrings = new DisplayUnitStrings();
+            PrototypeStorage = new PrototypeStorage();
         }
 
         #endregion
@@ -49,6 +51,12 @@ namespace H.Core.Models
         {
             get { return _displayDisplayUnitStrings; }
             set { SetProperty(ref _displayDisplayUnitStrings, value); }
+        }
+        
+        public PrototypeStorage PrototypeStorage
+        {
+            get => _prototypeStorage;
+            set => SetProperty(ref _prototypeStorage, value);
         }
 
         #endregion

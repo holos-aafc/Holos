@@ -5756,5 +5756,10 @@ Daily emissions estimates are multipled by the total number of production days i
   </data>
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
     <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
+  <data name="EnumCanada" xml:space="preserve">
+    <value>Canada</value>
+  </data>
+  <data name="EnumIreland" xml:space="preserve">
+    <value>Ireland</value>
   </data>
 </root>
