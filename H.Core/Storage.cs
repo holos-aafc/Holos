@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
-using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json;
 using Prism.Mvvm;
 
@@ -58,7 +57,6 @@ namespace H.Core
         public Storage()
         {
             Trace.TraceInformation($"{nameof(Storage)}: Checking log files.");
-            SetMaxLogFiles();
         }
 
         #endregion
@@ -607,33 +605,5 @@ namespace H.Core
 
         #endregion
 
-        #region Private Methods
-
-        private string GetLogFolderPath()
-        {
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var logfilesPath = Path.Combine(localAppData, @"HOLOS_4\logfiles");
-
-            return logfilesPath;
-        }
-
-        private void SetMaxLogFiles()
-        {
-            var logFilesPath = GetLogFolderPath();
-            if (!Directory.Exists(logFilesPath))
-            {
-                return;
-            }
-            var directoryInfo = new DirectoryInfo(logFilesPath);
-            
-            var logFilesInDirectory = directoryInfo.GetFiles($"{_logFilesPrefix}*.log").OrderByDescending(x => x.CreationTime).ToArray();
-            Trace.TraceInformation($"Found {logFilesInDirectory.Length} log files in the log folder.");
-            if (logFilesInDirectory.Length > MaxNumberOfLogs)
-            {
-                Trace.TraceInformation($"Deleting oldest log file: {logFilesInDirectory.Last().Name}");
-                logFilesInDirectory.Last().Delete();
-            }
-        }
-        #endregion
     }
 }
