@@ -498,8 +498,8 @@ namespace H.Core.Calculators.Infrastructure
             foreach (var substrateViewItemBase in substrateViewItems)
             {
 
-                var startDate = substrateViewItemBase.StartDate;
-                var endDate = substrateViewItemBase.EndDate;
+                var startDate = substrateViewItemBase.StartDate.Date;
+                var endDate = substrateViewItemBase.EndDate.Date;
 
                 for (DateTime i = startDate; i < endDate; i += TimeSpan.FromDays(1))
                 {
