@@ -131,7 +131,10 @@ namespace H.Core.Test
 
         public Farm GetTestFarm()
         {
-            var farm = new Farm();
+            var farm = new Farm
+            {
+                Province = Province.Alberta
+            };
             var backgroundingComponent = new BackgroundingComponent();
             var group = new AnimalGroup();
             @group.GroupType = AnimalType.BeefBackgrounderHeifer;
