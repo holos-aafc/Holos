@@ -45,7 +45,6 @@ namespace H.Core.Test.Calculators.Emissions
 
 
         /// <summary>
-        /// Equation 4.3.1-6
         /// Sum from all animal types
         /// </summary>
         [TestMethod]

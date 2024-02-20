@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using H.CLI.Interfaces;
 using H.Core;
-using Microsoft.Office.Core;
+
 
 namespace H.CLI.ComponentKeys
 {

@@ -19,6 +19,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Permissions;
+using System.Windows.Controls.Primitives;
+using System.Windows.Navigation;
 using AutoMapper.Configuration.Conventions;
 using H.Core.Models.Animals;
 using H.Core.Converters;
@@ -28,7 +30,7 @@ using H.Core.Emissions.Results;
 
 namespace H.Core.Models
 {
-    public class Farm : ModelBase
+    public partial class Farm : ModelBase
     {
         #region Fields
 
@@ -78,6 +80,7 @@ namespace H.Core.Models
         private bool _useCustomStartingSoilOrganicCarbon;
         private bool _isBasicMode;
         private bool _showAdditionalInformationInADView;
+        private bool _isCommandLineMode;
 
         private Defaults _defaults;
         private Province _province;
@@ -90,7 +93,7 @@ namespace H.Core.Models
 
         private ChosenClimateAcquisition _climateAcquisition;
         private Table_15_Default_Soil_N2O_Emission_BreakDown_Provider _annualSoilN2OBreakdown;
-        private YieldAssignmentMethod _yieldAssignmentMethod;        
+        private YieldAssignmentMethod _yieldAssignmentMethod;
 
         private List<TimeFrame> _availableTimeFrame;
         private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
@@ -554,7 +557,7 @@ namespace H.Core.Models
         /// </summary>        
         public bool HasComponentsThatRequireDetailsView()
         {
-            return this.Components.OfType<FieldSystemComponent>().Any() ;
+            return this.Components.OfType<FieldSystemComponent>().Any();
         }
 
         public double StartingSoilOrganicCarbon
@@ -621,9 +624,58 @@ namespace H.Core.Models
 
         public bool UseFieldLevelYieldAssignement { get; set; }
 
+        public bool IsCommandLineMode
+        {
+            get => _isCommandLineMode;
+            set => SetProperty(ref _isCommandLineMode, value);
+        }
+
         #endregion
 
         #region Public Methods
+
+        public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
+        {
+            var itemsByYear = this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrasslands).ToList();
+            var area = itemsByYear.Sum(x => x.Area);
+            if (area > 0)
+            {
+                return area;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
+        public List<int> GetYearsWithAnimals()
+        {
+            var years = new List<int>();
+
+            foreach (var animalComponentBase in this.AnimalComponents)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var startYear = animalGroupManagementPeriod.Start.Year;
+                        var endYear = animalGroupManagementPeriod.End.Year;
+
+                        if (years.Contains(startYear) == false)
+                        {
+                            years.Add(startYear);
+                        }
+
+                        if (years.Contains(endYear) == false)
+                        {
+                            years.Add(endYear);
+                        }
+                    }
+                }
+            }
+
+            return years;
+        }
 
         public List<ManureStateType> GetManureStateTypesInUseOnFarm(AnimalType animalType)
         {
@@ -682,48 +734,6 @@ namespace H.Core.Models
             }
         }
 
-        public List<ManureApplicationViewItem> GetManureApplicationViewItems(AnimalType animalType)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var fieldSystemComponent in this.FieldSystemComponents)
-            {
-                result.AddRange(fieldSystemComponent.GetManureApplicationViewItems(animalType));
-            }
-
-            return result;
-        }
-
-        public List<Tuple<CropViewItem, ManureApplicationViewItem>> GetManureApplicationsAndAssociatedCropByAnimalType(AnimalType animalType)
-        {
-            var result = new List<Tuple<CropViewItem, ManureApplicationViewItem>>();
-
-            foreach (var viewItem in this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems)
-            {
-                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-                {
-                    if (manureApplicationViewItem.AnimalType.GetCategory().Equals(animalType.GetCategory()))
-                    {
-                        result.Add(new Tuple<CropViewItem, ManureApplicationViewItem>(viewItem, manureApplicationViewItem));
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public List<ManureApplicationViewItem> GetManureApplicationViewItems(List<AnimalType> animalTypes)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var animalType in animalTypes)
-            {
-                result.AddRange(this.GetManureApplicationViewItems(animalType));
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Returns the total volume of all manure applications made on a particular date using a particular type of manure (beef, dairy, etc.)
         /// </summary>
@@ -734,7 +744,7 @@ namespace H.Core.Models
             foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
                 var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-                var manureApplications = viewItem.ManureApplicationViewItems.Where(x => x.DateOfApplication.Date.Equals(dateTime.Date) 
+                var manureApplications = viewItem.ManureApplicationViewItems.Where(x => x.DateOfApplication.Date.Equals(dateTime.Date)
                     && x.AnimalType == animalType
                     && x.ManureLocationSourceType == ManureLocationSourceType.Livestock);
 
@@ -831,59 +841,6 @@ namespace H.Core.Models
             }
         }
 
-        /// <summary>
-        /// When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish. This data is therefore held here in the farm object since it is specific
-        /// to this farm instance and lookups should be made here and not from the provider class since this method will persist changes. Returns data associated with table 9.
-        /// </summary>
-        public DefaultManureCompositionData GetManureCompositionData(
-            ManureStateType manureStateType, 
-            AnimalType animalType)
-        {
-            var defaultValue = new DefaultManureCompositionData();
-
-            AnimalType animalLookupType;
-            if (animalType.IsBeefCattleType())
-            {
-                animalLookupType = AnimalType.Beef;
-            }
-            else if (animalType.IsDairyCattleType())
-            {
-                animalLookupType = AnimalType.Dairy;
-            }
-            else if (animalType.IsSheepType())
-            {
-                animalLookupType = AnimalType.Sheep;
-            }
-            else if (animalType.IsSwineType())
-            {
-                animalLookupType = AnimalType.Swine;
-            }
-            else if (animalType.IsPoultryType())
-            {
-                animalLookupType = AnimalType.Poultry;
-            }
-            else
-            {
-                // Other animals have a value for animal group (Horses, Goats, etc.)
-                animalLookupType = animalType;
-            }            
-
-            var manureCompositionData = this.DefaultManureCompositionData.SingleOrDefault(x =>
-                x.ManureStateType == manureStateType &&
-                x.AnimalType == animalLookupType);
-
-            if (manureCompositionData == null)
-            {
-                Trace.TraceError($"{nameof(Farm)}.{nameof(GetManureCompositionData)}" +
-                                 $" unable to get data for manure animal source type: {animalType}, and manure state type: {manureStateType}." +
-                                 $" Returning default value of {defaultValue}.");
-
-                return defaultValue;
-            }
-
-            return manureCompositionData;
-        }
-
         public void ClearStageStates()
         {
             foreach (var stageState in this.StageStates)
@@ -897,6 +854,13 @@ namespace H.Core.Models
             var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
             return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+        }
+
+        public int GetEndYearOfEarliestRotation()
+        {
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
+
+            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
         }
 
         public void Initialize()
@@ -946,6 +910,26 @@ namespace H.Core.Models
             return totalArea;
         }
 
+        public double GetAnnualPrecipitation(int year)
+        {
+            return this.ClimateData.GetTotalPrecipitationForYear(year);
+        }
+
+        public double GetAnnualEvapotranspiration(int year)
+        {
+            return this.ClimateData.GetTotalEvapotranspirationForYear(year);
+        }
+
+        public double GetGrowingSeasonPrecipitation(int year)
+        {
+            return this.ClimateData.GetGrowingSeasonPrecipitation(year);
+        }
+
+        public double GetGrowingSeasonEvapotranspiration(int year)
+        {
+            return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
+        }
+
         /// <summary>
         /// Returns all manure application made on this farm
         /// </summary>
@@ -953,7 +937,7 @@ namespace H.Core.Models
         /// <param name="animalType">The type of animal manure</param>
         /// <returns></returns>
         public IList<ManureApplicationViewItem> GetManureApplicationsForMonth(
-            MonthsAndDaysData monthsAndDaysData, 
+            MonthsAndDaysData monthsAndDaysData,
             AnimalType animalType)
         {
             var fields = this.FieldSystemComponents.ToList();
@@ -988,6 +972,19 @@ namespace H.Core.Models
             }
 
             return result;
+        }
+
+        public FieldSystemDetailsStageState GetFieldSystemDetailsStageState()
+        {
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
+            {
+                return stageState;
+            }
+            else
+            {
+                return new FieldSystemDetailsStageState();
+            }
         }
 
         public ObservableCollection<ErrorInformation> GetErrors()
@@ -1046,9 +1043,31 @@ namespace H.Core.Models
             return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
         }
 
-        public List<CropViewItem> GetCropDetailViewItemsByYear(int year)
+        public List<CropViewItem> GetCropViewItemsByYear(int year, bool includeNativeGrassland = false)
         {
-            return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+            var result = new List<CropViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrassland))
+                {
+                    result.Add(cropViewItem);
+                }
+            }
+
+            return result;
+        }
+
+        public List<CropViewItem> GetCropDetailViewItemsByYear(int year, bool includeRangeland)
+        {
+            if (includeRangeland)
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+            }
+            else
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsNativeGrassland == false).ToList();
+            }
         }
 
         public List<int> GetListOfActiveYears()
@@ -1070,6 +1089,12 @@ namespace H.Core.Models
                         if (result.Contains(animalGroupManagementPeriod.Start.Year) == false)
                         {
                             result.Add(animalGroupManagementPeriod.Start.Year);
+                        }
+
+
+                        if (result.Contains(animalGroupManagementPeriod.End.Year) == false)
+                        {
+                            result.Add(animalGroupManagementPeriod.End.Year);
                         }
                     }
                 }
@@ -1159,18 +1184,7 @@ namespace H.Core.Models
 
         #region Private Methods
 
-        private FieldSystemDetailsStageState GetFieldSystemDetailsStageState()
-        {
-            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
-            if (stageState != null)
-            {
-                return stageState;
-            }
-            else
-            {
-                return new FieldSystemDetailsStageState();
-            }
-        }
+
 
         #endregion
     }

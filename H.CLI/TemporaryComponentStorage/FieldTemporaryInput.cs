@@ -354,6 +354,27 @@ namespace H.CLI.TemporaryComponentStorage
                 }
             }
 
+            if (propertyInfo.PropertyType == typeof(FertilizerBlends))
+            {
+
+                try
+                {
+                    if (_inputHelper.IsNotApplicableInput(value))
+                    {
+                        FertilizerBlend = FertilizerBlends.Ammonia;
+                        return;
+                    }
+
+                    FertilizerBlend = (FertilizerBlends)Enum.Parse(typeof(FertilizerBlends), value, true);
+                    return;
+                }
+
+                catch (Exception)
+                {
+                    throw new FormatException(String.Format(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, fileName));
+                }
+            }
+
             if (propertyInfo.PropertyType == typeof(TillageType))
             {
                 try
@@ -397,7 +418,6 @@ namespace H.CLI.TemporaryComponentStorage
         //List of Properties. When adding a new property, follow the format: NewProperty. If you add a new property here
         //Make sure to add the appropriate key to the list of keys in the FieldKeys class.
         #region Properties
-        public string Name { get; set; }
         //The Guid refers to the Perennial Stand Group GUID
         public Guid Guid { get; set; }
         public Guid PerennialStandID { get; set; }
@@ -417,6 +437,7 @@ namespace H.CLI.TemporaryComponentStorage
         public double Area { get; set; }
         public double Yield { get; set; }
         public double MoistureContentOfCrop { get; set; }
+        public double MoistureContentOfCropPercentage { get; set; }
         public double AmountOfIrrigation { get; set; }
         public double AmountOfManureApplied { get; set; }
         public double NitrogenFertilizerRate { get; set; }
@@ -444,6 +465,7 @@ namespace H.CLI.TemporaryComponentStorage
         public CoverCropTypes CoverCropType { get; set; }
         public ManureAnimalSourceTypes ManureAnimalSourceType { get; set; }
         public IrrigationType IrrigationType { get; set; }
+        public FertilizerBlends FertilizerBlend { get; set; }
         public CropType CropType { get; set; }
         public HarvestMethods HarvestMethod { get; set; }
         public TillageType TillageType { get; set; }
@@ -472,6 +494,8 @@ namespace H.CLI.TemporaryComponentStorage
         public double NitrogenContent { get; set; }
         public double AboveGroundResidueDryMatter { get; set; }
         public double BelowGroundResidueDryMatter { get; set; }
+        public double FuelEnergy { get; set; }
+        public double HerbicideEnergy { get; set; }
 
 
         #endregion

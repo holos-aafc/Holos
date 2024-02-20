@@ -22,7 +22,7 @@ namespace H.Core.Emissions.Results
         private double _upstreamEnergyCarbonDioxideFromHerbicideUse;
         private double _upstreamEnergyFromFertilizerProduction;
 
-        private ObservableCollection<MonthlyManureSpreadingResults> _manureSpreadingResults;
+        private ObservableCollection<MonthlyManureSpreadingEmissions> _manureSpreadingResults;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace H.Core.Emissions.Results
 
         public CropEnergyResults()
         {
-            this.ManureSpreadingResults = new ObservableCollection<MonthlyManureSpreadingResults>();
+            this.ManureSpreadingResults = new ObservableCollection<MonthlyManureSpreadingEmissions>();
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace H.Core.Emissions.Results
             }
         }
 
-        public ObservableCollection<MonthlyManureSpreadingResults> ManureSpreadingResults
+        public ObservableCollection<MonthlyManureSpreadingEmissions> ManureSpreadingResults
         {
             get => _manureSpreadingResults;
             set => SetProperty(ref _manureSpreadingResults, value);

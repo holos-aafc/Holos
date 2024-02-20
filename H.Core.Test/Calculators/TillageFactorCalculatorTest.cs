@@ -73,7 +73,7 @@ namespace H.Core.Test.Calculators
         [TestMethod]
         public void CalculateTillageFactorReturnsConstantForFirstYearOfPerennial()
         {
-            Assert.AreEqual(0.9,
+            Assert.AreEqual(0.6,
                             _calculator.CalculateTillageFactor(Province.Manitoba, SoilFunctionalCategory.Black, TillageType.NoTill,
                                                                CropType.TameLegume, 1));
         }

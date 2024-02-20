@@ -68,6 +68,7 @@ namespace H.Core.Converters
                 case "nf":
                 case "tnl":
                 case "nfld":
+                case "newfoundland":
                     return Province.Newfoundland;
                 case "yukon":
                 case "yt":

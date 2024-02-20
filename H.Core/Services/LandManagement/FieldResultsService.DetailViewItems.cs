@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
@@ -16,6 +17,7 @@ namespace H.Core.Services.LandManagement
 {
     public partial class FieldResultsService
     {
+
         #region Public Methods
 
         /// <summary>
@@ -106,7 +108,6 @@ namespace H.Core.Services.LandManagement
 
             // Clear existing items because we want to reset values for view items.
             stageState.ClearState();
-
             // Initialize the stage state (create view items that will be needed to create result view items)
             this.CreateDetailViewItems(farm);
 
@@ -293,8 +294,8 @@ namespace H.Core.Services.LandManagement
             var table = new Dictionary<int, double>();
             foreach (var distinctYear in distinctYears)
             {
-                var reminaing = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm, component);
-                table.Add(distinctYear, reminaing);
+                var remaining = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm);
+                table.Add(distinctYear, remaining);
             }
 
             foreach (var viewItem in fieldSystemComponent.CropViewItems)
@@ -313,7 +314,7 @@ namespace H.Core.Services.LandManagement
             Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(CreateItems)}: creating details view items for field: '{fieldSystemComponent.Name}' and farm: '{farm.Name}'");
 
             // When called from the CLI, and the user specifies a path to a custom yield file, read in data now and assign yield data to the farm
-            if (farm.YieldAssignmentMethod == YieldAssignmentMethod.InputFile)
+            if (farm.IsCommandLineMode && farm.YieldAssignmentMethod == YieldAssignmentMethod.InputFile)
             {
                 if (_customFileYieldProvider.HasExpectedInputFormat(farm.PathToYieldInputFile))
                 {
@@ -332,12 +333,9 @@ namespace H.Core.Services.LandManagement
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             this.CalculateCarbonLostByGrazingAnimals(
+                farm,
                 fieldSystemComponent: fieldSystemComponent,
-                results: this.AnimalResults);
-
-            // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, farm);
-            this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, farm);
+                animalComponentEmissionsResults: this.AnimalResults );
 
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
@@ -357,16 +355,20 @@ namespace H.Core.Services.LandManagement
             // Add in a details view message for the undersown year(s). Note that perennials must be processed before this call
             this.ProcessUndersownCrops(viewItems, fieldSystemComponent);
 
-            // Assign carbon inputs for each view item
-            this.AssignCarbonInputs(
-                viewItems: viewItems,
-                farm: farm, 
-                fieldSystemComponent: fieldSystemComponent);
-
             var stageState = this.GetStageState(farm);
 
             // Save the view items to the farm which can then be edited by the user on the details view
             stageState.DetailsScreenViewCropViewItems.AddRange(viewItems.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop));
+
+            // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
+            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, viewItems);
+            this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
+
+            // Assign carbon inputs for each view item
+            this.AssignCarbonInputs(
+                viewItems: viewItems,
+                farm: farm,
+                fieldSystemComponent: fieldSystemComponent);
         }
 
         /// <summary>

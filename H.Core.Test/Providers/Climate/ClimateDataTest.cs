@@ -196,7 +196,7 @@ namespace H.Core.Test.Providers.Climate
             climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 1, 2), Year = 2020, MeanDailyPET = 20, });
             climateData.DailyClimateData.Add(new DailyClimateData() { Date = new System.DateTime(2020, 2, 1), Year = 2020, MeanDailyPET = 30 });
 
-            var result = climateData.GetMonthlyEvapotranspirationsForYear(2020);
+            var result = climateData.GetMonthlyEvapotranspirationForYear(2020);
 
             Assert.AreEqual(2, result.Values.Where(x => x > 0).Count());
         }

@@ -85,8 +85,8 @@ namespace H.Core.Providers.AnaerobicDigestion
                     return new SolidLiquidSeparationCoefficientsData
                     {
                         SeparationCoefficient = SeparationCoefficients.FractionCarbon,
-                        Centrifuge = 0.0,
-                        BeltPress = 0.0,
+                        Centrifuge = 0.81,
+                        BeltPress = 0.32,
                     };
 
                 default:

@@ -3420,6 +3420,26 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 <br>
 <br>
 
+## Command Line Arguments and Input Flags
+
+There are a number of useful command line arguments available for the the Holos CLI. 
+
+__The first argument must be the full directory path to your farms folder.__
+
+Following this directory path, and in any order, the following command flags can be used:
+- -i : your input .json file. This is case sensitive and requires the file extension.
+- -f : a folder of .json files for importing multiple farms. This is case sensitive. 
+- -s : a configured .settings file within the farms folder. This input flag is only available if the -i and/or -f flag is also used. This is also case sensitive and requires the file extension.
+- -u : your chosen unit of measurement, "metric" or "imperial". This is not case sensitive.
+- -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file.
+- -o : output directory path for outputs.
+
+Input .json files, input folders, and .SETTINGS files must be in the given farms folder.
+
+If you have built the solution from source code, the CLI executable will be found with the ..\H\H.CLI\bin\Debug folder of your local repository. 
+
+If you have [installed the CLI](https://github.com/holos-aafc/Holos#download), there are extra steps required to utilize the command line arguments and input flags. Instructions can be found in [Chapter 11.](#using-command-line-arguments-and-input-flags-after-installing-the-holos-cli)
+
 ## Command Line Interface Results
 
 -	The Command Line Interface will output the **results for each farm** you have created and their respective components as well as the **total results for all the farms combined.**
@@ -3914,6 +3934,51 @@ The Holos program data files contain useful information that can help the Holos 
 
 - To help troubleshoot issues please add all data/crash files to a zip archive and attach that .zip file to the issue created on GitHub. Please see the following section on [how to create a .zip archive](#how-to-create-a-zip-archive-file).
 
+
+<br>
+<br>
+
+### Holos log file(s).
+
+The Holos program log files contain information regarding the Holos application and its internal processes. The log files track the state of the Holos application since it is started by the user until the point the application is closed or forcefully shut down. Please note a few important points regarding the log files:
+
+- The content of the log files can be easily read using any text editor e.g. Notepad.
+- The log files only contain information regarding Holos and its internal processes. The files do not track any information regarding any other process or part of the user system.
+- The log files are never sent outside of the user system and are always strictly kept offline. They can only leave the user's system if the user explicitly transfers the file themselves.
+- Holos maintains one log file per day and rolls over to a new file up to a maximum of 7 files. On the 8th day, the oldest log file is automatically deleted.
+
+The purpose of the log files is to help users troubleshoot issues regarding Holos and its operation in situations where the application isn't performing within expectations.
+
+<br>
+
+### How to find the Holos log file(s)
+
+The Holos log files are located next to the Holos data and backup files inside a folder called `logfiles`. On windows based systems this folder is located in the `APPDATA` folder. To read instructions on how to access the [Holos data folder, click here](#how-to-find-the-holos-program-data-files).
+
+Inside the Holos data folder, you can locate the subfolder called  `logfiles` that contains the logs for the program
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-31.png" alt="Figure11-31" width="650"/>
+    <br>
+    <em>
+		Figure 11-31 - Holos data folder containing a subfolder called logfiles.
+	</em>
+</p>
+<br>
+
+Opening the folder will show the currently stored log files for Holos. Log files are named in the format `<holos-logs><data-log-created>.log` e.g. holos-logs-2024-01-29.log. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/figure11-32.png" alt="Figure11-32" width="650"/>
+    <br>
+    <em>
+		Figure 11-32 - Log files inside the data folder.
+	</em>
+</p>
+<br>
+
 <br>
 <br>
 
@@ -4217,3 +4282,48 @@ To prevent duplicating folders for farms, answer "Yes" only once to the prompt, 
 </p>
 <br>
 
+### Using command line arguments and input flags after installing the Holos CLI
+
+If you have downloaded and installed the CLI link provided in the README, an application reference icon should appear on your desktop. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-28.png" alt="Figure 11-28" width="450"/>
+    <br>
+    <em>
+		Figure 11-28 - Holos 4 CLI.appref-ms icon
+	</em>
+</p>
+<br>
+
+This icon is not itself an executable, and therefore cannot accept command line arguments. To find the exectuable associated with this icon: 
+1. Run the Holos CLI by double-clicking on the application reference icon.
+2. Open your Windows Task Manager.
+3. Right-click the H.CLI app.
+4. Left-click 'Open file location'.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-29.png" alt="Figure 11-29" height="200"/>
+    <br>
+    <em>
+		Figure 11-29 - Finding H.Cli executable via Task Manager
+	</em>
+</p>
+<br>
+
+Now that you have exposed the file location of the H.CLI, you can create a shortcut, and move the shortcut to a more accessible place within your PC. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter11/Figure 11-30.png" alt="Figure 11-30" width="500" height ="400"/>
+    <br>
+    <em>
+		Figure 11-30 - Create a shortcut of the H.CLI executable 
+    </em>
+</p>
+<br>
+
+This shortcut will have a .lnk file extension. Here is an example of how to use the shortcut within your command prompt using input flags:
+
+_H.CLI.lnk file_path -i farm.json -u metric -p 793011 -o file_path_out_

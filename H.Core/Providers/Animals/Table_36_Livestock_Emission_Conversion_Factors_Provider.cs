@@ -17,7 +17,7 @@ namespace H.Core.Providers.Animals
     /// system. For beef cattle, dairy cattle and broilers, layers and turkeys, the Fracvolatilization values are
     /// estimated by Holos 
     /// </summary>
-    public class Table_36_Livestock_Emission_Conversion_Factors_Provider : IEmissionDataProvider
+    public class Table_36_Livestock_Emission_Conversion_Factors_Provider : IAnimalEmissionFactorsProvider
     {
         #region Fields
 
@@ -58,12 +58,13 @@ namespace H.Core.Providers.Animals
                 N20DirectEmissionFactor = climateDependentDirectEmissionFactor,
                 VolatilizationFraction = 0.21,
                 EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
-                EmissionFactorLeach = 0.011
             };
+
+            factors.EmissionFactorLeach = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
             if (region == Region.WesternCanada)
             {
-                factors.N20DirectEmissionFactor = 0.0006;
+                factors.N20DirectEmissionFactor = 0.00043;
             }
             else
             {
@@ -83,21 +84,30 @@ namespace H.Core.Providers.Animals
                 }
             }
 
+            factors.VolatilizationFraction = this.GetVolatilizationFractionForLandApplication(animalType, farm.Province, year);
+
+            return factors;
+        }
+
+        public double GetVolatilizationFractionForLandApplication(AnimalType animalType, Province province, int year)
+        {
             // Swine and dairy have more accurate volatilization fractions based on province and year
             if (animalType.IsSwineType())
             {
-                var volatilizationFraction = _swineManureProvider.GetData(animalType, farm.Province, year);
+                var volatilizationFraction = _swineManureProvider.GetData(animalType, province, year);
 
-                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+                return volatilizationFraction.ImpliedEmissionFactor;
             }
             else if (animalType.IsDairyCattleType())
             {
-                var volatilizationFraction = _dairyManureProvider.GetData(animalType, farm.Province, year);
+                var volatilizationFraction = _dairyManureProvider.GetData(animalType, province, year);
 
-                factors.VolatilizationFraction = volatilizationFraction.ImpliedEmissionFactor;
+                return volatilizationFraction.ImpliedEmissionFactor;
             }
-
-            return factors;
+            else
+            {
+                return 0.21;
+            }
         }
 
         public IEmissionData GetFactors(
@@ -150,7 +160,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.45,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.CompostIntensive:
@@ -161,7 +171,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.65,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.06,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.CompostPassive:
@@ -172,7 +182,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.60,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.04,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.DeepBedding:
@@ -183,7 +193,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.25,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.035,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             case ManureStateType.AnaerobicDigester:
@@ -194,7 +204,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.1,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.0,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             default:
@@ -475,7 +485,7 @@ namespace H.Core.Providers.Animals
                                     VolatilizationFraction = 0.12,
                                     EmissionFactorVolatilization = climateDependentEmissionFactorForVolatilization,
                                     LeachingFraction = 0.02,
-                                    EmissionFactorLeach = 0.0011
+                                    EmissionFactorLeach = 0.011
                                 };
 
                             default:
@@ -498,11 +508,7 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration)
+        public double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration)
         {
             if (precipitation > evapotranspiration)
             {
@@ -516,6 +522,10 @@ namespace H.Core.Providers.Animals
                 return 0.005;
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private double GetDirectEmissionFactorBasedOnClimate(
             double precipitation,
@@ -532,9 +542,6 @@ namespace H.Core.Providers.Animals
                 return 0.002;
             }
         }
-
-
-
 
         #endregion
 

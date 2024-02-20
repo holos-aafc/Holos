@@ -48,9 +48,8 @@ namespace H.Core.Test.Providers.Carbon
         [TestMethod]
         public void GetData()
         {
-            var result = _sut.GetData().ToList();            
-
-            Assert.AreEqual(89, result.Count);
+            var result = _sut.GetData().ToList();
+            Assert.AreEqual(91, result.Count);
         }
 
         [TestMethod]
@@ -110,34 +109,6 @@ namespace H.Core.Test.Providers.Carbon
             Assert.AreEqual(6d, result.NitrogenContentStraw);
             Assert.AreEqual(10d, result.NitrogenContentRoot);
             Assert.AreEqual(10d, result.NitrogenContentExtraroot);
-
-            var albertaNRate = result.NitrogenFertilizerRateTable[Province.Alberta];
-            Assert.AreEqual(61.65, albertaNRate[SoilFunctionalCategory.Brown]);
-            Assert.AreEqual(72.86, albertaNRate[SoilFunctionalCategory.DarkBrown]);
-            Assert.AreEqual(89.67, albertaNRate[SoilFunctionalCategory.Black]);
-            Assert.AreEqual(112.09, albertaNRate[SoilFunctionalCategory.BlackGrayChernozem]);
-
-            var saskatchewanNRate = result.NitrogenFertilizerRateTable[Province.Saskatchewan];
-            Assert.AreEqual(68.37, saskatchewanNRate[SoilFunctionalCategory.Brown]);
-            Assert.AreEqual(87.43, saskatchewanNRate[SoilFunctionalCategory.DarkBrown]);
-            Assert.AreEqual(110.96, saskatchewanNRate[SoilFunctionalCategory.Black]);
-
-            var manitobaNRate = result.NitrogenFertilizerRateTable[Province.Manitoba];
-            Assert.AreEqual(100.88, manitobaNRate[SoilFunctionalCategory.All]);
-
-            var albertaPRate = result.PhosphorusFertilizerRateTable[Province.Alberta];
-            Assert.AreEqual(22.04, albertaPRate[SoilFunctionalCategory.Brown]);
-            Assert.AreEqual(39.23, albertaPRate[SoilFunctionalCategory.DarkBrown]);
-            Assert.AreEqual(39.23, albertaPRate[SoilFunctionalCategory.Black]);
-            Assert.AreEqual(50.44, albertaPRate[SoilFunctionalCategory.BlackGrayChernozem]);
-
-            var saskatchewanPRate = result.PhosphorusFertilizerRateTable[Province.Saskatchewan];
-            Assert.AreEqual(28.02, saskatchewanPRate[SoilFunctionalCategory.Brown]);
-            Assert.AreEqual(35.87, saskatchewanPRate[SoilFunctionalCategory.DarkBrown]);
-            Assert.AreEqual(45.95, saskatchewanPRate[SoilFunctionalCategory.Black]);
-
-            var manitobaPRate = result.PhosphorusFertilizerRateTable[Province.Manitoba];
-            Assert.AreEqual(44.83, manitobaPRate[SoilFunctionalCategory.All]);
         }
 
         [TestMethod]
@@ -146,7 +117,6 @@ namespace H.Core.Test.Providers.Carbon
             var result = _sut.GetResidueData(IrrigationType.Irrigated, 202, CropType.Canola, SoilFunctionalCategory.Brown, Province.Alberta);
 
             Assert.AreEqual(0.529, result.RelativeBiomassStraw);
-            Assert.AreEqual(TillageType.NoTill, result.TillageTypeTable[Province.Alberta]);
         }
 
         [TestMethod]
@@ -163,14 +133,6 @@ namespace H.Core.Test.Providers.Carbon
             var result = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.Oats, SoilFunctionalCategory.Brown, Province.Alberta);
 
             Assert.AreEqual(0.319, result.RelativeBiomassProduct);
-        }
-
-        [TestMethod]
-        public void GetPotato()
-        {
-            var result = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.Potatoes, SoilFunctionalCategory.Brown, Province.Alberta);
-
-            Assert.AreEqual(TillageType.Intensive, result.TillageTypeTable[Province.Alberta]);
         }
 
         [TestMethod]

@@ -4,11 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Core.Providers.AnaerobicDigestion;
 
 namespace H.Core.Providers.Plants
 {
     public class Table_9_Nitrogen_Lignin_Content_In_Crops_Data
     {
+        #region Constructors
+
+        public Table_9_Nitrogen_Lignin_Content_In_Crops_Data()
+        {
+            this.BiomethaneData = new Table_46_Biogas_Methane_Production_CropResidue_Data();
+        }
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// The crop type for which we need the various information and values.
         /// </summary>
@@ -40,10 +52,14 @@ namespace H.Core.Providers.Plants
         public double LigninContentResidues { get; set; }
 
         /// <summary>
-        /// Moisure content of crop.
-        /// Unit of Measurement = %
+        /// Moisture content of crop
+        /// 
+        /// (%)
         /// </summary>
         public double MoistureContent { get; set; }
 
+        public Table_46_Biogas_Methane_Production_CropResidue_Data BiomethaneData { get; set; } 
+
+        #endregion
     }
 }

@@ -19,7 +19,7 @@ namespace H.Core.Providers
 {
     /// <summary>
     /// </summary>
-    public class SlcClimateDataProvider : ProviderBase
+    public class SlcClimateDataProvider : ProviderBase, ISlcClimateProvider
     {
         // with the added SLC data this new private class is necessary so that we can simplify data processing and get rid of anonymous types which cannot be passed out of functions
         private class SlcIntermediateClimateData
@@ -58,6 +58,7 @@ namespace H.Core.Providers
         private readonly List<EvapotranspirationData> _evapotranspirationData1970_2000List;
         private readonly List<EvapotranspirationData> _evapotranspirationData1980_2010List;
         private readonly List<EvapotranspirationData> _evapotranspirationData1990_2017List;
+
         #endregion
 
         #region Constructors

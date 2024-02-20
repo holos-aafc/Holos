@@ -58,7 +58,7 @@ namespace H.Core.Services.Animals
 
             var temperature = farm.ClimateData.GetMeanTemperatureForDay(dateTime);
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             if (managementPeriod.ProductionStage == ProductionStages.Weaning)
             {
@@ -144,7 +144,7 @@ namespace H.Core.Services.Animals
                     temperature);
             }
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O

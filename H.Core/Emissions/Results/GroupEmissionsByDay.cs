@@ -407,6 +407,14 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _carbonUptake, value);
         }
 
+        public double TotalDmiUptakeForGroup
+        {
+            get
+            {
+                return this.TotalCarbonUptakeForGroup / CoreConstants.CarbonConcentration;
+            }
+        }
+
         /// <summary>
         /// Crude fat/ether extract intake
         /// 
@@ -523,7 +531,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.1.1-5
         ///
         /// (kg C head^-1 day^-1)
         /// </summary>
@@ -821,9 +828,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-6
-        /// Equation 4.3.1-11
-        ///
+        /// Equation 4.3.1-8
         /// (unitless)
         /// </summary>
         public double AmbientAirTemperatureAdjustmentForHousing
@@ -833,6 +838,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.3.1-9
         /// (kg NH3-N (kg TAN)^-1)
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForHousing
@@ -842,8 +848,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-8
-        ///
+        /// Equation 4.3.1-10
+        /// Equation 4.3.1-14
+        /// Equation 4.3.3-5
         /// (kg NH3-N head^-1 day^-1)
         /// </summary>
         public double AmmoniaEmissionRateFromHousing
@@ -853,8 +860,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-9
-        ///
+        /// Equation 4.3.1-11
+        /// Equation 4.3.1-15
+        /// Equation 4.3.3-6
         /// (kg NH3-N)
         /// </summary>
         public double AmmoniaConcentrationInHousing
@@ -864,7 +872,6 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.3.1-10
         ///
         /// (kg NH3)
         /// </summary>
@@ -1259,7 +1266,6 @@ namespace H.Core.Emissions.Results
         /// Equation 4.2.1-14
         /// Equation 4.2.1-20
         /// Equation 4.2.1-23
-        /// Equation 4.2.1-20
         /// Equation 4.2.1-23
         ///
         /// (kg head^-1 day^-1)
@@ -1799,6 +1805,8 @@ namespace H.Core.Emissions.Results
         /// This is the amount created each day (not the accumulated value)
         /// </summary>
         public double NonAccumulatedCarbonCreatedOnDay { get; set; }
+
+        public double TotalAmountOfNitrogenForDay { get; set; }
 
         #endregion
     }

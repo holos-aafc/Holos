@@ -56,7 +56,7 @@ namespace H.Core.Services.Animals
         {
             var dailyEmissions = new GroupEmissionsByDay();
 
-            this.InitializeDailyEmissions(dailyEmissions, managementPeriod);
+            this.InitializeDailyEmissions(dailyEmissions, managementPeriod, farm, dateTime);
 
             // Weaning lambs don't produce any emissions.
             if (managementPeriod.ProductionStage == ProductionStages.Weaning)
@@ -237,7 +237,7 @@ namespace H.Core.Services.Animals
                 emissionRate: dailyEmissions.ManureMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions);
+            base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
 
             /*
              * Direct manure N2O
@@ -476,7 +476,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 3.3.1-112
+        /// Equation 3.3.1-12
         /// </summary>
         /// <param name="percentTotalDigestibleEnergyInFeed">Percent digestible energy in feed</param>
         /// <returns>Ratio of net energy available in diet for gain to digestible energy consumed (unitless)</returns>

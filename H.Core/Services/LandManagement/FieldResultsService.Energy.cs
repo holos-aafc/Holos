@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -24,73 +25,75 @@ namespace H.Core.Services.LandManagement
 
         #region Public Methods
 
-        public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
+        public List<MonthlyManureSpreadingEmissions> GetManureSpreadingEmissions(
             CropViewItem viewItem,
             Farm farm)
         {
-            var result = new List<MonthlyManureSpreadingResults>();
+            var result = new List<MonthlyManureSpreadingEmissions>();
 
-            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            // Get the months in which manure has been spread
+            var monthlySpreadingData = _manureService.GetMonthlyManureSpreadingData(viewItem, farm);
+            if (monthlySpreadingData.Any() == false)
             {
-                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
-                var month = manureApplicationViewItem.DateOfApplication.Month;
-                var year = manureApplicationViewItem.DateOfApplication.Year;
-
-                // When volume is 0, only the amount of N may have been entered. Calculate volume now.
-                if (totalVolume == 0)
+                var volume = _n2OEmissionFactorCalculator.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
+                for (int i = 0; i < 12; i++)
                 {
-                    var calculatedVolumePerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
-                    if (manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent > 0)
+                    var monthlyEmissions = new MonthlyManureSpreadingEmissions()
                     {
-                        totalVolume = calculatedVolumePerHectare /
-                                      manureApplicationViewItem.DefaultManureCompositionData.NitrogenContent;
-                    }
-                    else
-                    {
-                        
-                    }
+                        Month = i + 1,
+                        Year = viewItem.Year,
+                        TotalVolume = volume / 12.0,
+                    };
+
+                    var volumeForMonth = volume / 12.0;
+                    var reducedVolume = volumeForMonth / 1000.0;
+                    var emissionsForMonth = this.CalculateManureSpreadingEmissions(reducedVolume);
+
+                    monthlyEmissions.TotalVolume = volumeForMonth;
+                    monthlyEmissions.TotalEmissions = emissionsForMonth;
+
+                    result.Add(monthlyEmissions);
                 }
 
-                totalVolume /= 1000; // This needs to be per 1000 kg/l since manure spreading energy emissions use factors that are in GJ / 1000 kg/l
-
-                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
-                    volumeOfLandAppliedManure: totalVolume);
-
-                var resultItem = new MonthlyManureSpreadingResults();
-                resultItem.Year = year;
-                resultItem.Month = month;
-                resultItem.TotalEmissions = totalEnergyEmissions;
-
-                result.Add(resultItem);
+                return result;
             }
 
-            return result;
-        }
-
-        public List<MonthlyManureSpreadingResults> GetManureSpreadingResults(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm)
-        {
-            var result = new List<MonthlyManureSpreadingResults>();
-
-            var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            foreach (var monthlyManureSpreadingData in monthlySpreadingData)
             {
-                var totalVolume = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
-                var month = manureApplicationViewItem.DateOfApplication.Month;
-                var year = manureApplicationViewItem.DateOfApplication.Year;
+                // In this month, there was manure spread onto the field. Use the volume used during that month to create a new emissions object
+                var monthlyEmissions = new MonthlyManureSpreadingEmissions(monthlyManureSpreadingData);
 
-                var totalEnergyEmissions = this.CalculateManureSpreadingEmissions(
-                    volumeOfLandAppliedManure: totalVolume);
+                // This needs to be per 1000 kg/l since manure spreading energy emissions use factors that are in GJ / 1000 kg/l
+                var totalVolume = monthlyManureSpreadingData.TotalVolume / 1000;
 
-                var resultItem = new MonthlyManureSpreadingResults();
-                resultItem.Year = year;
-                resultItem.Month = month;
-                resultItem.TotalEmissions = totalEnergyEmissions;
+                // Calculate the total emissions based on the volume of manure spread.
+                monthlyEmissions.TotalEmissions = this.CalculateManureSpreadingEmissions(volumeOfLandAppliedManure: totalVolume);
 
-                result.Add(resultItem);
+                result.Add(monthlyEmissions);
             }
 
+            // Calculate the amount of manure left over for the entire year associated with this field
+            var volumeOfManureLeftOver = _n2OEmissionFactorCalculator.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
+
+            // Assumption is that any remaining amounts will be added to the total volume of manure made in any given month
+            var volumeAmountAttributedToEachMonth = volumeOfManureLeftOver / monthlySpreadingData.Count;
+
+            // This needs to be per 1000 kg/l since manure spreading energy emissions use factors that are in GJ / 1000 kg/l
+            volumeAmountAttributedToEachMonth /= 1000;
+
+            // Calculate emissions from the application of this left over amount
+            var emissionsAttributedToEachMonth = this.CalculateManureSpreadingEmissions(volumeAmountAttributedToEachMonth);
+
+            // Assumption is that all remaining (non-used) amounts are considered for the year
+            bool includeRemainingAMounts = true;
+            if (includeRemainingAMounts)
+            {
+                foreach (var monthlyData in result)
+                {
+                    // Add to existing amounts from actual field applications
+                    monthlyData.TotalEmissions += emissionsAttributedToEachMonth;
+                }
+            }
             return result;
         }
 
@@ -136,7 +139,7 @@ namespace H.Core.Services.LandManagement
                     pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
             }
 
-            var manureSpreadingResults = this.GetManureSpreadingResults(
+            var manureSpreadingResults = this.GetManureSpreadingEmissions(
                 viewItem: viewItem,
                 farm: farm);
 
@@ -146,8 +149,6 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.1.1-1
-        /// Equation 4.1.1-2
         /// </summary>
         /// <param name="energyFromFuelUse">Energy from fuel use (GJ ha^1)</param>
         /// <param name="area">Area (ha)</param>

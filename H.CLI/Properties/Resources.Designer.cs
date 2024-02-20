@@ -133,6 +133,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AmmoniaEmissionFactor {
+            get {
+                return ResourceManager.GetString("AmmoniaEmissionFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ammonia Emission Factor For Manure Storage.
         /// </summary>
         public static string AmmoniaEmissionFactorForManureStorage {
@@ -210,6 +219,15 @@ namespace H.CLI.Properties {
         public static string CA {
             get {
                 return ResourceManager.GetString("CA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot write files to network drive: {0}.
+        /// </summary>
+        public static string CannotWriteToNetworkDrive {
+            get {
+                return ResourceManager.GetString("CannotWriteToNetworkDrive", resourceCulture);
             }
         }
         
@@ -367,6 +385,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Tan Excretion.
+        /// </summary>
+        public static string DailyTanExcretion {
+            get {
+                return ResourceManager.GetString("DailyTanExcretion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is a data input mistake at Row: {0} , Column: {1}. at the location: {2}..
         /// </summary>
         public static string DataInputMistakeData {
@@ -385,7 +412,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are missing the header &quot;{0}&quot; in {1} Holos will use a default value.
+        ///   Looks up a localized string similar to An optional header named &quot;{0}&quot; is missing. Holos will use a default value in {1}.
         /// </summary>
         public static string DataMissingOptionalHeader {
             get {
@@ -799,6 +826,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fraction Of Nitrogen In Manure.
+        /// </summary>
+        public static string FractionOfNitrogenInManure {
+            get {
+                return ResourceManager.GetString("FractionOfNitrogenInManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraction Of Organic Nitrogen Immobilized.
         /// </summary>
         public static string FractionOfOrganicNitrogenImmobilized {
@@ -966,6 +1002,15 @@ namespace H.CLI.Properties {
         public static string InitialWeightOfCalves {
             get {
                 return ResourceManager.GetString("InitialWeightOfCalves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: input file {0} not found..
+        /// </summary>
+        public static string InputFileNotFound {
+            get {
+                return ResourceManager.GetString("InputFileNotFound", resourceCulture);
             }
         }
         
@@ -1204,6 +1249,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid -u argument: {0}.
+        /// </summary>
+        public static string InvalidUnitsArgument {
+            get {
+                return ResourceManager.GetString("InvalidUnitsArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Above Ground Carbon Input.
         /// </summary>
         public static string Key_AboveGroundCarbonInput {
@@ -1429,6 +1483,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fertilizer Blend.
+        /// </summary>
+        public static string Key_FertilizerBlend {
+            get {
+                return ResourceManager.GetString("Key_FertilizerBlend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field System Component Guid.
         /// </summary>
         public static string Key_FieldSystemComponentGuid {
@@ -1438,11 +1501,29 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fuel Energy.
+        /// </summary>
+        public static string Key_FuelEnergy {
+            get {
+                return ResourceManager.GetString("Key_FuelEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Harvest Method.
         /// </summary>
         public static string Key_HarvestMethod {
             get {
                 return ResourceManager.GetString("Key_HarvestMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Herbicide Energy.
+        /// </summary>
+        public static string Key_HerbicideEnergy {
+            get {
+                return ResourceManager.GetString("Key_HerbicideEnergy", resourceCulture);
             }
         }
         
@@ -1551,6 +1632,15 @@ namespace H.CLI.Properties {
         public static string Key_MoistureContentOfCrop {
             get {
                 return ResourceManager.GetString("Key_MoistureContentOfCrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moisture Content Of Crop Percentage.
+        /// </summary>
+        public static string Key_MoistureContentOfCropPercentage {
+            get {
+                return ResourceManager.GetString("Key_MoistureContentOfCropPercentage", resourceCulture);
             }
         }
         
@@ -1884,6 +1974,15 @@ namespace H.CLI.Properties {
         public static string LabelCreatingPoultryInputFiles {
             get {
                 return ResourceManager.GetString("LabelCreatingPoultryInputFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating .SETTINGS file..
+        /// </summary>
+        public static string LabelCreatingSettingsFile {
+            get {
+                return ResourceManager.GetString("LabelCreatingSettingsFile", resourceCulture);
             }
         }
         
@@ -3518,11 +3617,29 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yield Assignment Method.
+        /// </summary>
+        public static string Settings_YieldAssignmentMethod {
+            get {
+                return ResourceManager.GetString("Settings_YieldAssignmentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #Polygon ID: {0}.
         /// </summary>
         public static string SettingsFileHeader {
             get {
                 return ResourceManager.GetString("SettingsFileHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: settings file {0} not found..
+        /// </summary>
+        public static string SettingsFileNotFound {
+            get {
+                return ResourceManager.GetString("SettingsFileNotFound", resourceCulture);
             }
         }
         

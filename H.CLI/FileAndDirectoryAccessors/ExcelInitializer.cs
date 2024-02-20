@@ -42,7 +42,6 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// Takes in the path to the component's directory that does not have a template file and creates a new csv file based
         /// on the component's keys.
         /// </summary>
-
         public void SetTemplateFile(string componentDirectoryPath, string componentType, Dictionary<string, ImperialUnitsOfMeasurement?> componentKeys)
         {
             string fileName = componentType + "_Example";

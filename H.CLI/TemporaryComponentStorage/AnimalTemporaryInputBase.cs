@@ -64,11 +64,13 @@ namespace H.CLI.TemporaryComponentStorage
         public double EmissionFactorLeaching { get; set; }
         public double EmissionFactorVolatilization { get; set; }
         public double FractionOfCarbonInManure { get; set; }
+        public double FractionOfNitrogenInManure { get; set; }
         public double FractionLeaching { get; set; }
         public double VolatileSolidAdjusted { get; set; }
         public double NitrogenExcretionAdjusted { get; set; }
         public double CFTemp { get; set; }
         public double VolatileSolidsExcretion { get; set; }
+        public double DailyTanExcretion { get; set; }
         public double ManureExcretionRate { get; set; }
         public double StartWeight { get; set; }
         public double EndWeight { get; set; }

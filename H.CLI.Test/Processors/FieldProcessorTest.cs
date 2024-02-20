@@ -1,9 +1,11 @@
 ﻿using H.CLI.Processors;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using H.Core.Models;
-using System.Collections.Generic;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Services.LandManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Collections.Generic;
 using System.IO;
 
 namespace H.CLI.Test.Processors
@@ -20,8 +22,8 @@ namespace H.CLI.Test.Processors
         }
 
         [TestCleanup]
-        public void Cleanup() 
-        { 
+        public void Cleanup()
+        {
             Directory.Delete(testPath);
         }
 
@@ -30,7 +32,8 @@ namespace H.CLI.Test.Processors
         {
             var expectedFileName = testPath + "\\Test.csv";
 
-            var fieldProcessor = new FieldProcessor();
+            var mockFieldResultService = new Mock<IFieldResultsService>();
+            var fieldProcessor = new FieldProcessor(mockFieldResultService.Object);
 
             Farm testFarm = new Farm();
             testFarm.Name = "Test Firm";
@@ -46,7 +49,7 @@ namespace H.CLI.Test.Processors
             fieldProcessor.SetTemplateCSVFileBasedOnExportedField(testFarm,
                 testPath,
                 testComponentKeys,
-                testFieldSystemComponent, 
+                testFieldSystemComponent,
                 testCropViewItemList);
 
 
@@ -59,7 +62,8 @@ namespace H.CLI.Test.Processors
         {
             var expectedFileName = testPath + "\\Test-Field.csv";
 
-            var fieldProcessor = new FieldProcessor();
+            var mockFieldResultService = new Mock<IFieldResultsService>();
+            var fieldProcessor = new FieldProcessor(mockFieldResultService.Object);
 
             Farm testFarm = new Farm();
             testFarm.Name = "Test Firm";

@@ -180,6 +180,7 @@ namespace H.Core.Enumerations
                 case CropType.UndersownBarley:
                 case CropType.Oats:
                 case CropType.OatSilage:
+                case CropType.Camelina:
                 case CropType.Triticale:
                 case CropType.TriticaleSilage:
                 case CropType.Sorghum:
@@ -218,6 +219,7 @@ namespace H.Core.Enumerations
             switch (cropType)
             {
                 case CropType.SilageCorn:
+                case CropType.GrassSilage:
                 case CropType.BarleySilage:
                 case CropType.OatSilage:
                 case CropType.TriticaleSilage:
@@ -242,6 +244,7 @@ namespace H.Core.Enumerations
                 case CropType.OatSilage:
                 case CropType.SilageCorn:
                 case CropType.TriticaleSilage:
+                case CropType.GrassSilage:
                 case CropType.WheatSilage:
                     return true;
 
@@ -264,6 +267,8 @@ namespace H.Core.Enumerations
                     return CropType.Barley;
                 case CropType.OatSilage:
                     return CropType.Oats;
+                case CropType.GrassSilage:
+                    return CropType.TameLegume;
                 case CropType.TriticaleSilage:
                     return CropType.Triticale;
                 case CropType.WheatSilage:
@@ -316,6 +321,7 @@ namespace H.Core.Enumerations
             {
                 case CropType.Oilseeds:
                 case CropType.Canola:
+                case CropType.Camelina:
                 case CropType.Mustard:
                 case CropType.Soybeans:
                 case CropType.Flax:
@@ -421,12 +427,14 @@ namespace H.Core.Enumerations
                 CropType.CanarySeed,
                 CropType.Canola,
                 CropType.Chickpeas,
+                CropType.Camelina,
                 CropType.DryPeas,
                 CropType.FallRye,
                 CropType.FieldPeas,
                 CropType.Flax,
                 CropType.ForageForSeed,
                 CropType.GrainCorn,
+                CropType.GrassSilage,
                 CropType.TameGrass,
                 CropType.TameLegume,
                 CropType.TameMixed,

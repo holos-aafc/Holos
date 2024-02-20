@@ -132,7 +132,6 @@ namespace H.Core.Emissions.Results
         /// Equation 3.1.6-3
         /// Equation 3.2.8-3
         /// Equation 3.3.4-3
-        /// Equation 3.4.4-3
         ///
         /// (kg N2O)
         /// </summary>
@@ -219,7 +218,6 @@ namespace H.Core.Emissions.Results
         /// Equation 3.1.6-5
         /// Equation 3.2.8-5
         /// Equation 3.3.4-5
-        /// Equation 3.4.4-5
         ///
         /// (kg N2O)
         /// </summary>

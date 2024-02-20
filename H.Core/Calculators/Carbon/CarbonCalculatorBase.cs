@@ -39,14 +39,15 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         /// <returns>The amount of carbon input during the year (kg C ha^-1)</returns>
         public double CalculateManureCarbonInputPerHectare(
-            CropViewItem viewItem,
-            Farm farm)
+            CropViewItem viewItem)
         {
             return viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
         }
 
         /// <summary>
-        /// Equation 4.9.5-1
+        /// Equation 4.9.7-1
+        /// Equation 4.9.7-2
+        /// Equation 4.9.7-5
         /// 
         /// Calculate amount of carbon input from all digestate applications in a year.
         /// </summary>
@@ -63,19 +64,6 @@ namespace H.Core.Calculators.Carbon
             }
 
             return result;
-        }
-
-        public double CalculateGrazingAnimalsManureCarbonInput()
-        {
-            var totalCarbonFromGrazingAnimals = 0d;
-
-            // Get all emissions from when animals on pasture
-            foreach (var animalComponentEmissionsResult in this.AnimalComponentEmissionsResults)
-            {
-                
-            }
-
-            throw new NotImplementedException();
         }
 
         #endregion

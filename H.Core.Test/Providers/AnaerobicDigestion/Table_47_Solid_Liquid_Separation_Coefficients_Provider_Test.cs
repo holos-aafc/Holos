@@ -53,14 +53,6 @@ namespace H.Core.Test.Providers.AnaerobicDigestion
             Assert.AreEqual(0.19, data.BeltPress);
         }
 
-        [TestMethod]
-        public void TestIncorrectParameter()
-        {
-            var data = _provider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalCarbon);
-            Assert.AreEqual(0, data.Centrifuge);
-            Assert.AreEqual(0, data.BeltPress);
-        }
-
         #endregion
     }
 }

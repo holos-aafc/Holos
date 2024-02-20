@@ -4,13 +4,15 @@ using H.Core.Calculators.Nitrogen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using H.Core.Calculators.Carbon;
+using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement;
 
 #endregion
 
 namespace H.Core.Test.Calculators.Nitrogen
 {
     [TestClass]
-    public class ICBMNitrousOxideCalculatorTest
+    public class ICBMNitrousOxideCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -33,7 +35,13 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestInitialize]
         public void TestInitialize()
         {
-            _calculator = new ICBMSoilCarbonCalculator();
+            
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
+            
+
+            
+            _calculator = iCBMSoilCarbonCalculator;
         }
 
         [TestCleanup]
@@ -46,7 +54,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         #region Tests
 
         /// <summary>
-        /// Equation 2.6.3-1
+        /// Equation 2.6.4-1
         /// </summary>
         [TestMethod]
         public void CalculateAvailablityOfNitrogenInTheMicrobialPoolAtStartingPoint()

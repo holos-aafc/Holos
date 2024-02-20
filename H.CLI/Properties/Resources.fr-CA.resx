@@ -124,7 +124,7 @@
     <value>coefficient d'activité</value>
   </data>
   <data name="ActivityCoefficientOfFeedingSituation" xml:space="preserve">
-    <value>Activity Coefficient Of Feeding Situation</value>
+    <value>Coefficient d’activité de la situation alimentaire</value>
   </data>
   <data name="ADG" xml:space="preserve">
     <value>GMQ</value>
@@ -142,7 +142,7 @@
     <value>tous les mois</value>
   </data>
   <data name="AnimalsAreMilkFedOnly" xml:space="preserve">
-    <value>Animals Are Milk Fed Only</value>
+    <value>Les animaux sont nourris au lait seulement</value>
   </data>
   <data name="AnnualCrops" xml:space="preserve">
     <value>#cultures annuelles</value>
@@ -151,7 +151,7 @@
     <value>teneur en cendres</value>
   </data>
   <data name="AshContentOfDiet" xml:space="preserve">
-    <value>Ash Content Of Diet</value>
+    <value>Teneur en cendres du régime alimentaire</value>
   </data>
   <data name="AverageCircumference" xml:space="preserve">
     <value>circonférence moyenne</value>
@@ -214,16 +214,13 @@
     <value>année de coupe</value>
   </data>
   <data name="DailyManureMethaneEmissionRate" xml:space="preserve">
-    <value>Daily Manure Methane Emission Rate</value>
+    <value>Taux quotidien d’émission de méthane du fumier</value>
   </data>
   <data name="DataInputMistakeData" xml:space="preserve">
     <value>Il y a une erreur de saisie de données à la ligne : {0}, colonne : {1} à l’emplacement : {2}.</value>
   </data>
   <data name="DataInputMistakeHeader" xml:space="preserve">
     <value>Il y a une erreur de saisie de l’en-tête à la ligne : {0} dans {1}. L’en-tête doit être : {2}.</value>
-  </data>
-  <data name="DataMissingOptionalHeader" xml:space="preserve">
-    <value>Vous n’avez pas d’en-tête « {0} » dans {1}. Holos utilisera une valeur par défaut.</value>
   </data>
   <data name="DefaultBeefInputFolder" xml:space="preserve">
     <value>bœuf</value>
@@ -355,7 +352,7 @@
     <value>fraction lessivée</value>
   </data>
   <data name="FractionOfCarbonInManure" xml:space="preserve">
-    <value>Fraction Of Carbon In Manure</value>
+    <value>Fraction de carbone dans le fumier</value>
   </data>
   <data name="GainCoefficient" xml:space="preserve">
     <value>coefficient de gain</value>
@@ -373,7 +370,7 @@
     <value>nom du groupe</value>
   </data>
   <data name="GroupPairingNumber" xml:space="preserve">
-    <value>Group Pairing Number</value>
+    <value>Numéro d'appariement au groupe</value>
   </data>
   <data name="GroupType" xml:space="preserve">
     <value>type de groupe</value>
@@ -565,7 +562,7 @@
     <value>est-ce que des pesticides sont utilisés?</value>
   </data>
   <data name="Key_Lignin" xml:space="preserve">
-    <value>Lignin</value>
+    <value>Lignine</value>
   </data>
   <data name="Key_ManagementFactor" xml:space="preserve">
     <value>facteur de gestion</value>
@@ -643,7 +640,7 @@
     <value>carbone végétal dans le produit agricole</value>
   </data>
   <data name="Key_Sand" xml:space="preserve">
-    <value>Sand</value>
+    <value>Sable</value>
   </data>
   <data name="Key_SizeOfFirstRotationForField" xml:space="preserve">
     <value>superficie de la première rotation pour le champ</value>
@@ -745,7 +742,7 @@
     <value>CH4 du fumier {0}</value>
   </data>
   <data name="ManureExcretionRate" xml:space="preserve">
-    <value>Manure Excretion Rate</value>
+    <value>Taux d’excrétion dans le fumier</value>
   </data>
   <data name="ManureManagement" xml:space="preserve">
     <value>gestion du fumier</value>
@@ -832,7 +829,7 @@
     <value># arbres</value>
   </data>
   <data name="NumberOfYoungAnimals" xml:space="preserve">
-    <value>Number Of Young Animals</value>
+    <value>Nombre de jeunes animaux</value>
   </data>
   <data name="OutputDirectory" xml:space="preserve">
     <value>répertoire de sortie = C:\\Holos\\InterfaceDeLigneDeCommandeHolos\\Sorties</value>
@@ -1171,7 +1168,7 @@
     <value>Pourcentage de la paille des cultures racines qui est retourné au sol</value>
   </data>
   <data name="Settings_PolygonNumber" xml:space="preserve">
-    <value>Polygon Number</value>
+    <value>Numéro du polygone</value>
   </data>
   <data name="Settings_ProportionOfClayInSoil" xml:space="preserve">
     <value>Proportion d’argile du sol</value>
@@ -1294,7 +1291,7 @@
     <value>solides volatils ajustés</value>
   </data>
   <data name="VolatileSolids" xml:space="preserve">
-    <value>Volatile Solids</value>
+    <value>Solides volatils</value>
   </data>
   <data name="VolatileSolidsExcretion" xml:space="preserve">
     <value>excrétion de solides volatils</value>
@@ -1324,28 +1321,28 @@
     <value>année d'observation</value>
   </data>
   <data name="MoistureContentOfBeddingMaterial" xml:space="preserve">
-    <value>Moisture Content Of Bedding Material</value>
+    <value>Teneur en humidité de la matière constituant la litière</value>
   </data>
   <data name="TotalCarbonKilogramsDryMatterForBedding" xml:space="preserve">
-    <value>Total Carbon Kilograms Dry Matter For Bedding</value>
+    <value>Méthode d’attribution du rendement</value>
   </data>
   <data name="TotalNitrogenKilogramsDryMatterForBedding" xml:space="preserve">
-    <value>Total Nitrogen Kilograms Dry Matter For Bedding</value>
+    <value>Qté de carbone total en kg de matière sèche de litière</value>
   </data>
   <data name="UserDefinedBeddingRate" xml:space="preserve">
-    <value>User Defined Bedding Rate</value>
+    <value>Taux relatif à la litière définie par l’utilisateur</value>
   </data>
   <data name="FractionOfOrganicNitrogenImmobilized" xml:space="preserve">
-    <value>Fraction Of Organic Nitrogen Immobilized</value>
+    <value>Fraction d’azote organique immobilisée</value>
   </data>
   <data name="FractionOfOrganicNitrogenMineralized" xml:space="preserve">
-    <value>Fraction Of Organic Nitrogen Mineralized</value>
+    <value>Fraction d’azote organique minéralisée</value>
   </data>
   <data name="FractionOfOrganicNitrogenNitrified" xml:space="preserve">
-    <value>Fraction Of Organic Nitrogen Nitrified</value>
+    <value>Fraction d’azote organique nitrifiée</value>
   </data>
   <data name="AmmoniaEmissionFactorForManureStorage" xml:space="preserve">
-    <value>Ammonia Emission Factor For Manure Storage</value>
+    <value>Facteur d’émission d’ammoniac pour le stockage du fumier</value>
   </data>
   <data name="Settings_Province" xml:space="preserve">
     <value>Province</value>
@@ -1354,38 +1351,80 @@
     <value>Production Stage</value>
   </data>
   <data name="Settings_CarbonModellingStrategy" xml:space="preserve">
-    <value>Carbon Modelling Strategy</value>
+    <value>Stratégie de modélisation du carbone</value>
   </data>
   <data name="Key_DigestateCarbonInputsPerHectare" xml:space="preserve">
-    <value>Digestate Carbon Inputs Per Hectare</value>
+    <value>Apports de carbone du digestat par hectare</value>
   </data>
   <data name="Key_ManureCarbonInputsPerHectare" xml:space="preserve">
-    <value>Manure Carbon Inputs Per Hectare</value>
+    <value>Intrants de carbone du fumier par hectare</value>
   </data>
   <data name="Key_TotalCarbonInputs" xml:space="preserve">
     <value>Total Carbon Inputs</value>
   </data>
   <data name="Settings_RunInPeriodYears" xml:space="preserve">
-    <value>Run In Period Years</value>
+    <value>Exécution en années</value>
   </data>
   <data name="Key_AboveGroundResidueDryMatter" xml:space="preserve">
-    <value>Above Ground Residue Dry Matter</value>
+    <value>Matière sèche des résidus en surface</value>
   </data>
   <data name="Key_BelowGroundResidueDryMatter" xml:space="preserve">
-    <value>Below Ground Residue Dry Matter</value>
+    <value>Matière sèche des résidus souterrains</value>
   </data>
   <data name="Key_NitrogenContent" xml:space="preserve">
-    <value>Nitrogen Content</value>
+    <value>Teneur en azote</value>
   </data>
   <data name="Key_TFac" xml:space="preserve">
-    <value>TFac</value>
+    <value>FacT</value>
     <comment>IPCC Tier 2 Temperature Factor</comment>
   </data>
   <data name="Key_TotalNitrogenInputsForIpccTier2" xml:space="preserve">
-    <value>Total Nitrogen Inputs For Ipcc Tier 2</value>
+    <value>Apports  d’azote total pour le volet 2 du Giec</value>
   </data>
   <data name="Key_WFac" xml:space="preserve">
-    <value>WFac</value>
+    <value>FacE</value>
     <comment>IPCC Tier 2 Water Factor</comment>
+  </data>
+  <data name="Key_MoistureContentOfCropPercentage" xml:space="preserve">
+    <value>Teneur en humidité de la culture en pourcentage</value>
+  </data>
+  <data name="Settings_YieldAssignmentMethod" xml:space="preserve">
+    <value>Méthode d’attribution du rendement</value>
+  </data>
+  <data name="Key_FuelEnergy" xml:space="preserve">
+    <value>Énergie du combustible</value>
+  </data>
+  <data name="Key_HerbicideEnergy" xml:space="preserve">
+    <value>Énergie des herbicides</value>
+  </data>
+  <data name="Key_FertilizerBlend" xml:space="preserve">
+    <value>Mélange d’engrais</value>
+  </data>
+  <data name="DataMissingOptionalHeader" xml:space="preserve">
+    <value>Un en-tête facultatif nommé « {0} » manque. Holos utilisera une valeur par défaut dans {1}.</value>
+  </data>
+  <data name="FractionOfNitrogenInManure" xml:space="preserve">
+    <value>Fraction d’azote dans le fumier</value>
+  </data>
+  <data name="DailyTanExcretion" xml:space="preserve">
+    <value>Excrétion quotidienne d'AAT</value>
+  </data>
+  <data name="CannotWriteToNetworkDrive" xml:space="preserve">
+    <value>Impossible d’écrire des fichiers sur le lecteur réseau : {0}</value>
+  </data>
+  <data name="ComponentType" xml:space="preserve">
+    <value>Type de composant</value>
+  </data>
+  <data name="InputFileNotFound" xml:space="preserve">
+    <value>Erreur : fichier d’entrée {0} introuvable.</value>
+  </data>
+  <data name="LabelAreYourExportedFarmsInCurrentFarmDirectory" xml:space="preserve">
+    <value>Les fermes exportées figurent-elles dans votre répertoire actuel?</value>
+  </data>
+  <data name="LabelCreatingSettingsFile" xml:space="preserve">
+    <value>Création du fichier . SETTINGS.</value>
+  </data>
+  <data name="Nemf" xml:space="preserve">
+    <value>Nemf</value>
   </data>
 </root>

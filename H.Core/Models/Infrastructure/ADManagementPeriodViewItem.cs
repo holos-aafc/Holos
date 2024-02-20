@@ -42,7 +42,7 @@ namespace H.Core.Models.Infrastructure
         public double DailyPercentageOfManureAdded { get; set; }
 
         /// <summary>
-        /// Percentage
+        /// Fraction
         /// </summary>
         public double DailyFractionOfManureAdded 
         {

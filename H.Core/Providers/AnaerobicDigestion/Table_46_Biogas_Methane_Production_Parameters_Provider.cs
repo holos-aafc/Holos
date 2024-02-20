@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Providers.Carbon;
+using H.Core.Providers.Climate;
 using H.Infrastructure;
-using H.Content;
 
-namespace H.Core.Providers.Climate
+namespace H.Core.Providers.AnaerobicDigestion
 {
     /// <summary>
     /// Table 46
@@ -23,6 +22,7 @@ namespace H.Core.Providers.Climate
         private readonly FarmResidueTypeStringConverter _farmResidueTypeStringConverter;
         private readonly BeddingMaterialTypeStringConverter _beddingMaterialTypeStringConverter;
         private readonly AnimalTypeStringConverter _animalTypeStringConverter;
+        private readonly Table_7_Relative_Biomass_Information_Provider _table7RelativeBiomassInformationProvider;
 
         #endregion
 
@@ -33,6 +33,7 @@ namespace H.Core.Providers.Climate
             _farmResidueTypeStringConverter = new FarmResidueTypeStringConverter();
             _beddingMaterialTypeStringConverter = new BeddingMaterialTypeStringConverter();
             _animalTypeStringConverter = new AnimalTypeStringConverter();
+            _table7RelativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
             
             this.ReadFile();
         }
@@ -42,6 +43,7 @@ namespace H.Core.Providers.Climate
         #region Properties
         private List<Table_46_Biogas_Methane_Production_Manure_Data> ManureData { get; set; }
         private List<Table_46_Biogas_Methane_Production_FarmResidue_Data> FarmResiduesData { get; set; }
+        private List<Table_46_Biogas_Methane_Production_CropResidue_Data> CropResiduesData { get; set; }
 
         #endregion
 
@@ -102,7 +104,6 @@ namespace H.Core.Providers.Climate
             }
 
             return new BiogasAndMethaneProductionParametersData();
-
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace H.Core.Providers.Climate
         #region Private Methods
 
         /// <summary>
-        /// Reads the csv file and stores data into two lists. Each list corresponds to Manure Type and Farm Residue Type substrates enteries in the csv respectively.
+        /// Reads the csv file and stores data into two lists. Each list corresponds to Manure Type and Farm Residue Type substrates entries in the csv respectively.
         /// </summary>
         private void ReadFile()
         {
@@ -174,9 +175,8 @@ namespace H.Core.Providers.Climate
                 });
             }
 
-            // We're skipping 11 lines as the farm residue entries in the csv start at row 11.
             // Store the second half of the file into a farm residue type data list.
-            foreach (string[] line in fileLines.Skip(11))
+            foreach (string[] line in fileLines.Skip(11).Take(6))
             {
                 FarmResidueType residueType = _farmResidueTypeStringConverter.Convert(line[0]);
                 biomethanePotential = double.Parse(line[2], cultureInfo);

@@ -17,15 +17,21 @@ using Moq;
 namespace H.Core.Test.Services.Animals
 {
     [TestClass]
-    public class DigestateServiceTest
+    public class DigestateServiceTest : UnitTestBase
     {
         #region Fields
 
         private DigestateService _sut;
-        private Farm _farm;
-        private List<AnimalComponentEmissionsResults> _animalComponentResults;
         private Mock<IADCalculator> _mockAdCalculator;
         private Mock<IAnimalService> _mockAnimalService;
+        private List<DigestorDailyOutput> _dailyResults;
+        private DigestateState _state;
+        private DateTime _date;
+        private Farm _farm;
+        private AnaerobicDigestionComponent _adComponent;
+        private DigestateApplicationViewItem _digestateApplication;
+        private FieldSystemComponent _fieldSystemComponent;
+        private CropViewItem _cropViewItem;
 
         #endregion
 
@@ -47,45 +53,45 @@ namespace H.Core.Test.Services.Animals
             _mockAdCalculator = new Mock<IADCalculator>();
             _mockAnimalService = new Mock<IAnimalService>();
 
-            _sut = new DigestateService();
-
-            var managementPeriod = new ManagementPeriod()
+            var dailyOutput1 = new DigestorDailyOutput()
             {
-                Start = DateTime.Now,
-                End = DateTime.Now.AddYears(1),
-                ManureDetails = new ManureDetails()
-                {
-                    StateType = ManureStateType.AnaerobicDigester,
-                }
+                Date = DateTime.Now,
+                FlowRateOfAllSubstratesInDigestate = 100,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 10,
             };
 
-            _farm = new Farm();
-
-            var animalGroup = new AnimalGroup();
-            animalGroup.ManagementPeriods.Add(managementPeriod);
-
-            var component = new SheepFeedlotComponent();
-            component.Groups.Add(animalGroup);
-
-            _farm.Components.Add(component);
-
-            _animalComponentResults = new List<AnimalComponentEmissionsResults>();
-            _animalComponentResults.Add(new AnimalComponentEmissionsResults()
+            var dailyOutput2 = new DigestorDailyOutput()
             {
-                EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
-                {
-                    new AnimalGroupEmissionResults()
-                    {
-                        GroupEmissionsByMonths = new List<GroupEmissionsByMonth>()
-                        {
-                            new GroupEmissionsByMonth(new MonthsAndDaysData() {ManagementPeriod = managementPeriod}, new List<GroupEmissionsByDay>()
-                            {
-                                new GroupEmissionsByDay(),
-                            })
-                        }
-                    }
-                }
-            });
+                Date = DateTime.Now.AddDays(1),
+                FlowRateOfAllSubstratesInDigestate = 100,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
+            };
+
+            _dailyResults = new List<DigestorDailyOutput>() { dailyOutput1, dailyOutput2 };
+
+            _mockAdCalculator.Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>())).Returns(new List<DigestorDailyOutput>(_dailyResults));
+
+            _sut = new DigestateService();
+
+            _sut.ADCalculator = _mockAdCalculator.Object;
+
+            _date = DateTime.Now;
+            _state = DigestateState.LiquidPhase;
+
+            _farm = base.GetTestFarm();
+            var fieldComponent = base.GetTestFieldComponent();
+            _cropViewItem = base.GetTestCropViewItem();
+            _digestateApplication = base.GetTestRawDigestateApplicationViewItem();
+            _digestateApplication.DateCreated = _date;
+            _digestateApplication.DigestateState = _state;
+
+            _cropViewItem.DigestateApplicationViewItems.Add(_digestateApplication);
+            _fieldSystemComponent = fieldComponent;
+            _fieldSystemComponent.CropViewItems.Add(_cropViewItem);
+
+            _adComponent = base.GetTestAnaerobicDigestionComponent();
+            _farm.Components.Add(_adComponent);
+            _farm.Components.Add(_fieldSystemComponent);
         }
 
         [TestCleanup]
@@ -100,50 +106,52 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTankStatesReturnsReducedAmountsConsideringFieldApplications()
         {
-            var farm = new Farm();
+            _adComponent.IsLiquidSolidSeparated = false;
+            _digestateApplication.DateCreated = _dailyResults[1].Date;
+            _digestateApplication.DigestateState = DigestateState.Raw;
 
-            var field = new FieldSystemComponent();
-            farm.Components.Add(field);
-
-            var crop = new CropViewItem();
-            field.CropViewItems.Add(crop);
-
-            crop.Area = 1;
-
-            var digestateApplication = new DigestateApplicationViewItem();
-            crop.DigestateApplicationViewItems.Add(digestateApplication);
-
-            digestateApplication.DateCreated = DateTime.Now.AddDays(1);
-            digestateApplication.DigestateState = DigestateState.Raw;
-            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
-            digestateApplication.AmountAppliedPerHectare = 50;
-
-            var digestor = new AnaerobicDigestionComponent();
-            farm.Components.Add(digestor);
-
-            digestor.IsLiquidSolidSeparated = false;
-
-            var dailyOutput1 = new DigestorDailyOutput()
-            {
-                Date = DateTime.Now,
-                FlowRateOfAllSubstratesInDigestate = 100,
-            };
-
-            var dailyOutput2 = new DigestorDailyOutput()
-            {
-                Date = DateTime.Now.AddDays(1),
-                FlowRateOfAllSubstratesInDigestate = 100,
-            };
-
-            var dailyResults = new List<DigestorDailyOutput>() {dailyOutput1, dailyOutput2};
-
-            var result = _sut.GetDailyTankStates(farm, dailyResults);
+            var result = _sut.GetDailyTankStates(_farm, _dailyResults);
 
             // 100 kg is produced on 1st day
             Assert.AreEqual(100, result.ElementAt(0).TotalRawDigestateAvailable);
 
             // another 100 kg is produced on second day totaling 200. Subtract 50 for the field application totaling 150 kg available on 2nd day
             Assert.AreEqual(150, result.ElementAt(1).TotalRawDigestateAvailable);
+        }
+
+        [TestMethod]
+        public void GetTotalCarbonRemainingAtEndOfYear()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+
+            var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year,_farm, _adComponent);
+
+            Assert.AreEqual(40, totalCarbon);
+        }
+
+        [TestMethod]
+        public void CalculateAmountOfDigestateRemaining()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _digestateApplication.DigestateState = DigestateState.Raw;
+            var year = DateTime.Now.Year;
+
+            // Total carbon created is 40 over both days (10 kg on day 1, 30 on day 2)
+
+            // Raw digestate applied on first day using 50% of available digestate. 0.5 * 10 kg on day 1 = 5
+            // Total over 2 days is 5 + 30 = 35
+
+            var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
+
+            Assert.AreEqual(35, result);
+        }
+
+        [TestMethod]
+        public void GetTotalAmountOfDigestateAppliedOnDay()
+        {
+            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_date, _farm, _state);
+
+            Assert.AreEqual(50, result);
         }
 
         #endregion

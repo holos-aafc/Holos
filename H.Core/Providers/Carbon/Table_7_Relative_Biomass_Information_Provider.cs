@@ -7,6 +7,7 @@ using System.Linq;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Tools;
 using H.Infrastructure;
 
@@ -42,6 +43,19 @@ namespace H.Core.Providers.Carbon
         #endregion
 
         #region Public Methods
+
+        public Table_46_Biogas_Methane_Production_CropResidue_Data GetBiomethaneData(CropType cropType)
+        {
+            var result = new Table_46_Biogas_Methane_Production_CropResidue_Data();
+
+            var data = _data.FirstOrDefault(x => x.CropType == cropType);
+            if (data != null)
+            {
+                result = data.BiomethaneData;
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Get residue values for a specified set of crop parameters
@@ -106,7 +120,7 @@ namespace H.Core.Providers.Carbon
             var tillageTypeConverter = new TillageTypeStringConverter();
             var provinceStringConverter = new ProvinceStringConverter();
 
-            foreach (var line in fileLines.Skip(15))
+            foreach (var line in fileLines.Skip(4))
             {
                 var residueData = new Table_7_Relative_Biomass_Information_Data();
 
@@ -192,279 +206,102 @@ namespace H.Core.Providers.Carbon
 
                 #region Carbon residue
 
-                var carbonInProductColumn = line[8];
+                var carbonInProductColumn = line[5];
                 if (string.IsNullOrWhiteSpace(carbonInProductColumn) == false)
                 {
                     residueData.RelativeBiomassProduct = double.Parse(carbonInProductColumn, cultureInfo);
                 }
 
-                var carbonInStrawColumn = line[9];
+                var carbonInStrawColumn = line[6];
                 if (string.IsNullOrWhiteSpace(carbonInStrawColumn) == false)
                 {
                     residueData.RelativeBiomassStraw = double.Parse(carbonInStrawColumn, cultureInfo);
                 }
 
-                var carbonInRootsColumn = line[10];
+                var carbonInRootsColumn = line[7];
                 if (string.IsNullOrWhiteSpace(carbonInRootsColumn) == false)
                 {
                     residueData.RelativeBiomassRoot = double.Parse(carbonInRootsColumn, cultureInfo);
                 }
 
-                var carbonInExtrarootsColumn = line[11];
-                if (string.IsNullOrWhiteSpace(carbonInExtrarootsColumn) == false)
+                var carbonInExudateColumn = line[8];
+                if (string.IsNullOrWhiteSpace(carbonInExudateColumn) == false)
                 {
-                    residueData.RelativeBiomassExtraroot = double.Parse(carbonInExtrarootsColumn, cultureInfo);
+                    residueData.RelativeBiomassExtraroot = double.Parse(carbonInExudateColumn, cultureInfo);
                 }
 
                 #endregion
 
                 #region Nitrogen residue
 
-                var nitrogenInProductColumn = line[14];
+                var nitrogenInProductColumn = line[11];
                 if (string.IsNullOrWhiteSpace(nitrogenInProductColumn) == false)
                 {
                     residueData.NitrogenContentProduct = double.Parse(nitrogenInProductColumn, cultureInfo);
                 }
 
-                var nitrogenInStrawColumn = line[15];
+                var nitrogenInStrawColumn = line[12];
                 if (string.IsNullOrWhiteSpace(nitrogenInStrawColumn) == false)
                 {
                     residueData.NitrogenContentStraw = double.Parse(nitrogenInStrawColumn, cultureInfo);
                 }
 
-                var nitrogenInRootsColumn = line[16];
+                var nitrogenInRootsColumn = line[13];
                 if (string.IsNullOrWhiteSpace(nitrogenInRootsColumn) == false)
                 {
                     residueData.NitrogenContentRoot = double.Parse(nitrogenInRootsColumn, cultureInfo);
-
-                    // TODO: As of 6/17/20 we don't have values for extraroot. Current fix (Roland) is to use root values for extraroot too
-                    residueData.NitrogenContentExtraroot = double.Parse(nitrogenInRootsColumn, cultureInfo);
+                    residueData.NitrogenContentExtraroot = residueData.NitrogenContentRoot;
                 }
 
-
-                //var nitrogenInExtrarootsColumn = line[17];
-                //if (string.IsNullOrWhiteSpace(nitrogenInExtrarootsColumn) == false)
-                //{
-                //    residueData.NitrogenContentExtraroot = double.Parse(nitrogenInExtrarootsColumn, cultureInfo);
-                //} 
-
-                #endregion
-
-                #region Nitrogen fertilizer parsing
-                residueData.NitrogenFertilizerRateTable.Add(Province.Alberta, new Dictionary<SoilFunctionalCategory, double>());
-
-                var albertaBrownNitrogenRate = line[21].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaBrownNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.Brown, double.Parse(albertaBrownNitrogenRate, cultureInfo));
-                }
-
-                var albertaDarkBrownNitrogenRate = line[22].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaDarkBrownNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.DarkBrown, double.Parse(albertaDarkBrownNitrogenRate, cultureInfo));
-                }
-
-                var albertaBlackNitrogenRate = line[23].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaBlackNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.Black, double.Parse(albertaBlackNitrogenRate, cultureInfo));
-                }
-
-                var albertaGrayNitrogenRate = line[24].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaGrayNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.BlackGrayChernozem, double.Parse(albertaGrayNitrogenRate, cultureInfo));
-                }
-
-                var nonSpecificProvinceNitrogenRate = line[25].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(nonSpecificProvinceNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRate = double.Parse(nonSpecificProvinceNitrogenRate, cultureInfo);
-                }
-
-                residueData.NitrogenFertilizerRateTable.Add(Province.Saskatchewan, new Dictionary<SoilFunctionalCategory, double>());
-
-                var saskatchewanBrownNitrogenRate = line[26].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanBrownNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.Brown, double.Parse(saskatchewanBrownNitrogenRate, cultureInfo));
-                }
-
-                var saskatchewanDarkBrownNitrogenRate = line[27].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanDarkBrownNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.DarkBrown, double.Parse(saskatchewanDarkBrownNitrogenRate, cultureInfo));
-                }
-
-                var saskatchewanBlackNitrogenRate = line[28].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanBlackNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.Black, double.Parse(saskatchewanBlackNitrogenRate, cultureInfo));
-                }
-
-                residueData.NitrogenFertilizerRateTable.Add(Province.Manitoba, new Dictionary<SoilFunctionalCategory, double>());
-
-                var manitobaNitrogenRate = line[29].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(manitobaNitrogenRate) == false)
-                {
-                    residueData.NitrogenFertilizerRateTable[Province.Manitoba].Add(SoilFunctionalCategory.All, double.Parse(manitobaNitrogenRate, cultureInfo));
-                }
-                #endregion
-
-                #region Phosphorus fertilizer parsing
-                residueData.PhosphorusFertilizerRateTable.Add(Province.Alberta, new Dictionary<SoilFunctionalCategory, double>());
-
-                var albertaBrownPhosphorusRate = line[38].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaBrownPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.Brown, double.Parse(albertaBrownPhosphorusRate, cultureInfo));
-                }
-
-                var albertaDarkBrownPhosphorusRate = line[39].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaDarkBrownPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.DarkBrown, double.Parse(albertaDarkBrownPhosphorusRate, cultureInfo));
-                }
-
-                var albertaBlackPhosphorusRate = line[40].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaBlackPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.Black, double.Parse(albertaBlackPhosphorusRate, cultureInfo));
-                }
-
-                var albertaGrayPhosphorusRate = line[41].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(albertaGrayPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Alberta].Add(SoilFunctionalCategory.BlackGrayChernozem, double.Parse(albertaGrayPhosphorusRate, cultureInfo));
-                }
-
-                var nonSpecificProvincePhosphorusRate = line[42].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(nonSpecificProvincePhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRate = double.Parse(nonSpecificProvincePhosphorusRate, cultureInfo);
-                }
-
-                residueData.PhosphorusFertilizerRateTable.Add(Province.Saskatchewan, new Dictionary<SoilFunctionalCategory, double>());
-
-                var saskatchewanBrownPhosphorusRate = line[43].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanBrownPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.Brown, double.Parse(saskatchewanBrownPhosphorusRate, cultureInfo));
-                }
-
-                var saskatchewanDarkBrownPhosphorusRate = line[44].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanDarkBrownPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.DarkBrown, double.Parse(saskatchewanDarkBrownPhosphorusRate, cultureInfo));
-                }
-
-                var saskatchewanBlackPhosphorusRate = line[45].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(saskatchewanBlackPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Saskatchewan].Add(SoilFunctionalCategory.Black, double.Parse(saskatchewanBlackPhosphorusRate, cultureInfo));
-                }
-
-                residueData.PhosphorusFertilizerRateTable.Add(Province.Manitoba, new Dictionary<SoilFunctionalCategory, double>());
-
-                var manitobaPhosphorusRate = line[46].Replace("-", string.Empty);
-                if (string.IsNullOrWhiteSpace(manitobaPhosphorusRate) == false)
-                {
-                    residueData.PhosphorusFertilizerRateTable[Province.Manitoba].Add(SoilFunctionalCategory.All, double.Parse(manitobaPhosphorusRate, cultureInfo));
-                }
-
-                #endregion
-
-                #region Tillage type parsing
-
-                var bcTillageTypeColumn = line[54].Replace("-", String.Empty);
-                if (string.IsNullOrWhiteSpace(bcTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(bcTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.BritishColumbia, tillageType);
-                }
-
-                var abTillageTypeColumn = line[55].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(abTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(abTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Alberta, tillageType);
-                }
-
-                var skTillageTypeColumn = line[56].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(skTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(skTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Saskatchewan, tillageType);
-                }
-
-                var mbTillageTypeColumn = line[57].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(mbTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(mbTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Manitoba, tillageType);
-                }
-
-                var onTillageTypeColumn = line[58].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(onTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(onTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Ontario, tillageType);
-                }
-
-                var qcTillageTypeColumn = line[59].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(qcTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(qcTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Quebec, tillageType);
-                }
-
-                var nbTillageTypeColumn = line[60].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(nbTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(nbTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.NewBrunswick, tillageType);
-                }
-
-                var peiTillageTypeColumn = line[61].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(peiTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(peiTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.PrinceEdwardIsland, tillageType);
-                }
-
-                var nsTillageTypeColumn = line[62].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(nsTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(nsTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.NovaScotia, tillageType);
-                }
-
-                var nflTillageTypeColumn = line[63].Replace("-", String.Empty); ;
-                if (string.IsNullOrWhiteSpace(nflTillageTypeColumn) == false)
-                {
-                    var tillageType = tillageTypeConverter.Convert(nflTillageTypeColumn);
-                    residueData.TillageTypeTable.Add(Province.Newfoundland, tillageType);
-                }
-
-                #endregion
-
-                #region Irrigation parsing
-                #endregion
-
-                #region Pesticide parsing
                 #endregion
 
                 #region Lignin content parsing
 
-                string ligninContentColumn = line[86];
+                string ligninContentColumn = line[16];
                 if (!string.IsNullOrWhiteSpace(ligninContentColumn))
                 {
                     residueData.LigninContent = double.Parse(ligninContentColumn, cultureInfo);
                 }
 
+                #endregion
+
+                #region Biomethane content parsing
+
+                residueData.BiomethaneData.CropType = residueData.CropType;
+
+                var biomethanePotential = line[17];
+                if (!string.IsNullOrWhiteSpace(biomethanePotential))
+                {
+                    residueData.BiomethaneData.BioMethanePotential = double.Parse(biomethanePotential, cultureInfo);
+                }
+
+                var methaneFraction = line[18];
+                if (!string.IsNullOrWhiteSpace(methaneFraction))
+                {
+                    residueData.BiomethaneData.MethaneFraction = double.Parse(methaneFraction, cultureInfo);
+                }
+
+                var volatileSolids = line[19];
+                if (!string.IsNullOrWhiteSpace(volatileSolids))
+                {
+                    residueData.BiomethaneData.VolatileSolids = double.Parse(volatileSolids, cultureInfo);
+                }
+
+                var totalSolids = line[20];
+                if (!string.IsNullOrWhiteSpace(totalSolids))
+                {
+                    residueData.BiomethaneData.TotalSolids = double.Parse(totalSolids, cultureInfo);
+                }
+
+                var totalNitrogen = line[21];
+                if (!string.IsNullOrWhiteSpace(totalNitrogen))
+                {
+                    residueData.BiomethaneData.TotalNitrogen = double.Parse(totalNitrogen, cultureInfo);
+                }
 
                 #endregion
+
+
 
                 yield return residueData;
             }

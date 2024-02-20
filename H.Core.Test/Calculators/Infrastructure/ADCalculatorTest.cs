@@ -14,7 +14,7 @@ using H.Core.Providers.Climate;
 namespace H.Core.Test.Calculators.Infrastructure
 {
     [TestClass]
-    public class ADCalculatorTest
+    public class ADCalculatorTest : UnitTestBase
     {
         #region Fields
 
@@ -106,6 +106,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _day1Emissions.VolatileSolids = 0.01;
             _day1Emissions.AmountOfNitrogenExcreted = 10;
             _day1Emissions.AmountOfNitrogenAddedFromBedding = 10;
+            _day1Emissions.AmountOfCarbonInStoredManure = 10;
             _day1Emissions.OrganicNitrogenInStoredManure = 20;
             _day1Emissions.TanExcretion = 10;
             _day1Emissions.CarbonFromManureAndBedding = 12;
@@ -117,6 +118,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _day2Emissions.AmountOfNitrogenExcreted = 20;
             _day2Emissions.AmountOfNitrogenAddedFromBedding = 20;
             _day2Emissions.OrganicNitrogenInStoredManure = 30;
+            _day1Emissions.AmountOfCarbonInStoredManure = 10;
             _day2Emissions.TanExcretion = 20;
             _day2Emissions.CarbonFromManureAndBedding = 16;
 
@@ -167,7 +169,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         #region Tests
 
         [TestMethod]
-        public void CombineSubstrateFlowsOfSameTypeOnSameDayReturnsCorectNumberOfItems()
+        public void CombineSubstrateFlowsOfSameTypeOnSameDayReturnsCorrectNumberOfItems()
         {
             var substrateFlows = new List<SubstrateFlowInformation>()
             {
@@ -184,9 +186,9 @@ namespace H.Core.Test.Calculators.Infrastructure
         [TestMethod]
         public void GetFreshManureFlowRatesFromAnimals()
         {
-            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
+            var results = _sut.GetFreshManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1}, new Farm());
 
-            Assert.AreEqual(12, results.CarbonFlowOfSubstrate, 0.00001);
+            Assert.AreEqual(10, results.CarbonFlowOfSubstrate, 0.00001);
         }
 
         [TestMethod]
@@ -221,7 +223,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue1.EndDate = DateTime.Now.AddDays(3);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
 
-            var results = _sut.GetDailyFarmResidueFlowRates_NEW( _component);
+            var results = _sut.GetDailyFarmResidueFlowRates( _component);
 
             Assert.AreEqual(3, results.Count);
         }
@@ -272,7 +274,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue2.EndDate = DateTime.Now.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
-            var flows = _sut.GetDailyFarmResidueFlowRates_NEW(_component);
+            var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
             Assert.AreEqual(2, flows.Count);
         }
@@ -306,18 +308,29 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue2.EndDate = DateTime.Now.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
-            var flows = _sut.GetDailyFarmResidueFlowRates_NEW(_component);
+            var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
             Assert.AreEqual(2, flows.Count);
 
             Assert.AreEqual(0.5, flows[0].CarbonFlowOfSubstrate);
-            Assert.AreEqual(5, flows[1].NitrogenFlowOfSubstrate);
+            Assert.AreEqual(0.005, flows[1].NitrogenFlowOfSubstrate);
         }
 
         [TestMethod]
         public void GetAmountOfNitrogenInFieldApplicationTest()
         {
 
+        }
+
+        [TestMethod]
+        public void GetDailyCropResidueFlowRatesTestReturnsNonEmptyList()
+        {
+            var adComponent = new AnaerobicDigestionComponent();
+            adComponent.AnaerobicDigestionViewItem.CropResiduesSubstrateViewItems.Add(new CropResidueSubstrateViewItem());
+
+            var result = _sut.GetDailyCropResidueFlowRates(adComponent);
+
+            Assert.AreEqual(1, result.Count);
         }
 
         #endregion

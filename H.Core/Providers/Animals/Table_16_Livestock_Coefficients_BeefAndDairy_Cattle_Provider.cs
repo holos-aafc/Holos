@@ -66,7 +66,6 @@ namespace H.Core.Providers.Animals
                     };
                 }
 
-
                 case AnimalType.BeefBulls:
                 {
                     return new AnimalCoefficientData()
@@ -184,6 +183,18 @@ namespace H.Core.Providers.Animals
                         GainCoefficient = 1.2,
                         DefaultInitialWeight = 1200,
                         DefaultFinalWeight = 1200,
+                    };
+                }
+                
+                case AnimalType.DairyCalves:
+                {
+                    return new AnimalCoefficientData()
+                    {
+                        AnimalType = AnimalType.DairyCalves,
+                        BaselineMaintenanceCoefficient = 0,
+                        GainCoefficient = 0,
+                        DefaultInitialWeight = 45,
+                        DefaultFinalWeight = 127,
                     };
                 }
 

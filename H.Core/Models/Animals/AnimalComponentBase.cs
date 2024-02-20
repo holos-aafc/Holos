@@ -80,6 +80,11 @@ namespace H.Core.Models.Animals
                 }
             }
 
+            if (totalOtherAnimals <= 0)
+            {
+                return 0;
+            }
+
             return totalYoungAnimals / totalOtherAnimals;
         }
 

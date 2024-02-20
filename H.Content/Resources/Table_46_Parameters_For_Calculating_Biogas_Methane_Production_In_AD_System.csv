@@ -1,30 +1,25 @@
-Subtrate Type,Bedding Type,Biomethane potential (Nm^3 ton^-1 VS),f_CH4 Fraction of methane in biogas,Volatile Solids(% TS),TS (kg t^-1)^3,TN Substrate (KG N t^-1)^5
-Manure,,,,,,
-Beef,None,308,0.6,0,0,0
-Dairy,None,243,0.6,0,0,0
-Goat,None,112,0.6,0,0,0
-Horse,None,284,0.6,0,0,0
-Horse,Straw,191,0.6,0,0,0
-Swine,None,246,0.65,0,0,0
-Chicken,None,244,0.54,0,0,0
-Turkey,None,288,0.65,0,0,0
+Subtrate Type,Bedding Type,Biomethane potential (Nm^3 ton^-1 VS) (1),f_CH4 Fraction of methane in biogas,Volatile Solids(% TS),TS (kg t^-1) (2),TN Substrate (KG N t^-1)^5
+Manure,Data source (3),,,,,,
+Beef,None,308,0.6,0,0,0,"A,B"
+Dairy,None,243,0.6,0,0,0,C
+Goat (4),None,112,0.6,0,0,0,D
+Horse,None,284,0.6,0,0,0,"A,D"
+Horse (4),Straw,191,0.6,0,0,0,E
+Swine,None,246,0.65,0,0,0,"A,I"
+Chicken,None,244,0.54,0,0,0,"A,G"
+Turkey,None,288,0.65,0,0,0,A
 Farm residues,,,,,,
-Barley straw,,267,0.44,90,880,6.1
-Corn silage,,304,0.45,95,640,13
-Corn stover,,427,0.54,88,850,5
-Grass clippings,,332,0.54,82,870,15
-Grass silage,,366,0.46,88,267,7.7
-Maize,,320,0.54,88,850,15
-Maize silage,,304,0.45,92,640,13
-Oat straw,,287,0.52,90,880,6
-Oat silage,,442,0.6,83,380,8.1
-Paddy straw,,470,0.6,90,940,6.5
-Rye straw,,241,0.44,94,880,6
-Straw pellets,,247,0.6,90,960,5
-Straw sample,,210,0.6,90,960,5
-Sunflower residues,,200,0.6,90,891,10
-Triticale straw,,195,0.6,90,880,6
-Wheat straw,,162,0.6,90,880,7.8
-Sewage sludge,,400,0.6,80,34,2.6
-Food waste,,344,0.65,84.5,184,7.1
-Vegetable oil,,649,0.8,100,991,0.00075
+Paddy straw (4),,470,0.6,90,940,6.5,"H,L"
+Straw pellets (4)(5),,247,0.6,90,960,5,"E,M"
+Straw sample (4)(5),,210,0.6,90,960,5,"E,M"
+Sewage sludge (4),,400,0.6,80,34,2.6,"A,K"
+Food waste,,344,0.65,84.5,184,7.1,A
+Vegetable oil (4),,649,0.8,100,991,0.00075,"D,N"
+,,,,
+,,,,
+,,,,
+1 Values in bold indicate default averages used in Holos,,,,
+2 "Total solids content for crop residues is equal to 100-Moisture content (%) * 10. See Table 7 for moisture content values for the following substrates (values are averages for all available precipitation+irrigation categories): barley straw (barley); corn silage; corn stover (grain corn); grass clippings (grassland (native)); grain corn; corn silage; oat straw (oats); oat silage; rye straw ((fall) rye); triticale straw (triticale); wheat straw (wheat)",,,,
+3 "Sources for BMP, fCH4 and VS as follows: A – Bareha et al. (2021); B - Fen et al. (2017); C – Labatut et al. (2011); D - Carabeo-Pérez et al. (2021); E – Monch-Tegeder et al. (2013); F – Pham et al. (2013); G – Hutnan (2016); H – Dar et al. (2021); I – Schumacher et al. (2014); J - Ozbayram et al. (2021); K – Guérin et al. (2016); L – Kargwal et al. (2019); M – Bradna et al. (2016); N – McGuire et al. (1947)",,,,
+4 "Default values were estimated based on comparable substrates for the following substrates/parameters: goat manure and horse manure - straw-based (fCH4); corn stover, corn silage, paddy straw, straw pellets, straw sample, sunflower residues, triticale straw, wheat straw and municipal sewage sludge (fCH4 and VS); used vegetable oil (fCH4)",,,,
+5 The dry matter content of straw is derived from Ferraz et al. (2020) – see Table 30,,,,

@@ -13,6 +13,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using H.Core.Test.Calculators.Carbon;
 using H.Core.Providers.Climate;
 using H.Core.Providers;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Carbon
 {
@@ -20,7 +22,7 @@ namespace H.Core.Test.Calculators.Carbon
     /// Uses the supplied Tier 2 carbon modelling Excel workbook to ensure calculations are being made correctly
     /// </summary>
     [TestClass]
-    public  class IPCCTier2SoilCarbonCalculatorTest
+    public  class IPCCTier2SoilCarbonCalculatorTest :UnitTestBase
     {
         #region Inner Classes
 
@@ -55,7 +57,6 @@ namespace H.Core.Test.Calculators.Carbon
         private static List<TestFactorData> _annualTestData;
         private static List<CropViewItem> _annualCarbonData;
 
-        private static readonly ClimateProvider _climateProvider = new ClimateProvider();
         private static  ClimateData climateData;
 
         private Table_8_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider;
@@ -83,6 +84,17 @@ namespace H.Core.Test.Calculators.Carbon
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
+        {
+            
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
         {
             const double latitude = 49.6;
             const double longitude = 112.8;
@@ -182,17 +194,13 @@ namespace H.Core.Test.Calculators.Carbon
             _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.PassivePool = 58.80;
             _averageRunInValuesAndInitialStocks.IpccTier2CarbonResults.SlowPool = 3.6;
             _averageRunInValuesAndInitialStocks.Soc = 62.75;
-        }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-        }
+            
+            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            
+            var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            _sut = new IPCCTier2SoilCarbonCalculator();
+            _sut = ipcc;
             _globallyCalibratedModelParametersProvider = new Table_8_Globally_Calibrated_Model_Parameters_Provider();
 
             _f1 = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.FractionMetabolicDMActivePool, _tillageType).Value;
@@ -991,6 +999,70 @@ namespace H.Core.Test.Calculators.Carbon
             _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent, new List<CropViewItem>() {new CropViewItem()});
 
             Assert.AreEqual(viewItemsByField.First().SoilCarbon, farm.StartingSoilOrganicCarbon);
+        }
+
+        [TestMethod]
+        public void GetMonthlyTemperatureEffectTestReturnsZeroWhenTemperatureIsAboveMaximum()
+        {
+            var monthlyTemperatures = new List<double>() {12, 4, 52};
+
+            var result = _sut.CalculateMonthlyTemperatureEffectOnDecomposition(
+                maximumMonthlyTemperatureForDecomposition: 30,
+                monthlyTemperature: 52,
+                optimumTemperatureForDecomposition: 12);
+
+                Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetMonthlyTemperatureEffectTest()
+        {
+            var result = _sut.CalculateMonthlyTemperatureEffectOnDecomposition(45, 22, 10);
+
+            Assert.AreEqual(0.9673, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateMonthlyWaterEffect()
+        {
+            var precipitation = 1;
+            var evapotranspiration = 11;
+
+            var result = _sut.CalculateMonthlyWaterEffect(precipitation, evapotranspiration, 3);
+
+            Assert.AreEqual(0.4836, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void SetMonthlyWaterFactorsTest()
+        {
+            var precipitations = new List<double>() { 3, 4, 1 };
+            var evapotranspirations = new List<double>() { 19, 22, 11 };
+            var viewItem = new CropViewItem();
+
+            _sut.SetMonthlyWaterFactors(
+                monthlyTotalPrecipitations: precipitations,
+                monthlyTotalEvapotranspirations: evapotranspirations,
+                slopeParameter: 2,
+                viewItem);
+
+            Assert.AreEqual(0.5226, viewItem.MonthlyIpccTier2WaterFactors.January, 0.0001);
+            Assert.AreEqual(0.5685, viewItem.MonthlyIpccTier2WaterFactors.February, 0.0001);
+            Assert.AreEqual(0.3927, viewItem.MonthlyIpccTier2WaterFactors.March, 0.0001);
+        }
+
+
+        [TestMethod]
+        public void SetMonthlyTemperatureFactorsTest()
+        {
+            var averageTemperatures = new List<double>() { 22, 21, 10 };
+            var viewItem = new CropViewItem();
+
+            _sut.SetMonthlyTemperatureFactors(averageTemperatures, 30, 18, viewItem);
+
+            Assert.AreEqual(0.9692, viewItem.MonthlyIpccTier2TemperatureFactors.January, 0.0001);
+            Assert.AreEqual(0.9829, viewItem.MonthlyIpccTier2TemperatureFactors.February, 0.0001);
+            Assert.AreEqual(0.8930, viewItem.MonthlyIpccTier2TemperatureFactors.March, 0.0001);
         }
 
         #endregion

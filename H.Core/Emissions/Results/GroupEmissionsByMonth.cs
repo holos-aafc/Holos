@@ -291,6 +291,14 @@ namespace H.Core.Emissions.Results
             }
         }
 
+        public double MonthlyManureNitrateLeachingN2ONEmission
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.ManureNitrateLeachingEmission);
+            }
+        }
+
         /// <summary>
         /// (kg N2O)
         /// </summary>
@@ -381,6 +389,7 @@ namespace H.Core.Emissions.Results
             }
         }
 
+
         /// <summary>
         /// Total carbon uptake by all animals in the group for the month.
         ///
@@ -394,7 +403,18 @@ namespace H.Core.Emissions.Results
             }
         }
 
-
+        /// <summary>
+        /// Total dry matter intake by all animals in the group for the month.
+        ///
+        /// (kg)
+        /// </summary>
+        public double TotalMonthlyDmiUptakeForGroup
+        {
+            get
+            {
+                return DailyEmissions.Sum(x => x.TotalDmiUptakeForGroup);
+            }
+        }
 
         /// <summary>
         /// Use an average of the daily values when reporting monthly
@@ -593,7 +613,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// This is the total amount available for this month only, not the accumulated amount month-to-month
         /// 
-        /// (kg TAN)
+        /// (kg C)
         /// </summary>
         public double TotalAmountOfCarbonInStoredManureAvailableForMonth
         {
@@ -669,6 +689,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.2.1-30
         /// (kg N)
         /// </summary>
         public double MonthlyAmountOfNitrogenExcreted
@@ -682,7 +703,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// (kg NH3)
         /// </summary>
-        public double MontlyNH3FromGrazingAnimals
+        public double MonthlyNH3FromGrazingAnimals
         {
             get
             {
@@ -705,7 +726,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg C)
+        /// Equation 4.1.1-5 (kg C)
         /// </summary>
         public double MonthlyFecalCarbonExcretion
         {

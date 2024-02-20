@@ -18,7 +18,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
         private readonly SlcClimateDataProvider _slcClimateDataProvider = new SlcClimateDataProvider();
-        private readonly IClimateProvider _climateProvider = new ClimateProvider();
+        private readonly IClimateProvider _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
 
         public List<int> PolygonIDList { get; set; } = new List<int>();
 
@@ -111,6 +111,12 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 farm.EnableCarbonModelling = bool.Parse(userSettings[Properties.Resources.Settings_EnableCarbonModelling]);
             }
+
+            if (userSettings.ContainsKey(Properties.Resources.Settings_YieldAssignmentMethod))
+            {
+                farm.YieldAssignmentMethod = (YieldAssignmentMethod)Enum.Parse(typeof(YieldAssignmentMethod), userSettings[Properties.Resources.Settings_YieldAssignmentMethod], true);
+            }
+
 
             farm.Defaults = userDefaults;
 

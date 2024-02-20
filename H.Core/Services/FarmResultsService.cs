@@ -34,12 +34,14 @@ namespace H.Core.Services
     {
         #region Fields
 
+        private readonly  IInitializationService _initializationService;
+
         private readonly IManureService _manureService;
 
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
 
-        private readonly FieldResultsService _fieldResultsService;
+        private readonly IFieldResultsService _fieldResultsService;
         private readonly IAnimalService _animalResultsService;
         private readonly IADCalculator _adCalculator;
 
@@ -64,7 +66,7 @@ namespace H.Core.Services
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, FieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
+        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
         {
             if (animalService != null)
             {
@@ -217,6 +219,8 @@ namespace H.Core.Services
             _customYieldDataMapper = customYieldMapper.CreateMapper();
 
             #endregion
+
+            _initializationService = new InitializationService();
         }
 
         #endregion
@@ -250,7 +254,9 @@ namespace H.Core.Services
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
 
-            // Field results will use animal results to calculated indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
+            _initializationService.CheckInitialization(farm);
+
+            // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
             var animalResults = _animalResultsService.GetAnimalResults(farm);
@@ -263,7 +269,7 @@ namespace H.Core.Services
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
             // Manure calculations - must be calculated after both field and animal results have been calculated.
-            _manureService.CalculateResults(farm);
+            _manureService.Initialize(farm, animalResults);
 
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));

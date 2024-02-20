@@ -10,12 +10,11 @@ namespace H.Core.Services.Animals
     {
         protected void CalculateIndirectManureNitrousOxide(GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod,
-
             AnimalGroup animalGroup,
-            Farm farm,
             DateTime dateTime,
             GroupEmissionsByDay previousDaysEmissions,
-            double temperature)
+            double temperature, 
+            Farm farm)
         {
             if (animalGroup.GroupType.IsDairyCattleType())
             {
@@ -58,7 +57,15 @@ namespace H.Core.Services.Animals
             {
                 if (managementPeriod.AnimalType.IsDairyCattleType())
                 {
-                    temperature = managementPeriod.HousingDetails.IndoorHousingTemperature;
+                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false)
+                    {
+                        var month = (Months) dateTime.Month;
+                        temperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
+                    }
+                    else
+                    {
+                        temperature = managementPeriod.HousingDetails.IndoorHousingTemperature;
+                    }
                 }
 
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForIndoorHousing(
@@ -146,6 +153,11 @@ namespace H.Core.Services.Animals
                     ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
                     amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                     amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
+            }
+
+            if (managementPeriod.HousingDetails.HousingType.IsPasture())
+            {
+                dailyEmissions.FractionOfManureVolatilized = 0;
             }
 
             base.CalculateVolatilizationEmissions(dailyEmissions, managementPeriod);

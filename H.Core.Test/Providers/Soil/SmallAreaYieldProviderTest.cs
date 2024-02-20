@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
@@ -30,7 +31,7 @@ namespace H.Core.Test.Providers.Soil
         }
 
         [TestInitialize]
-        public void TestInitialize()
+        public async Task TestInitialize()
         {
             _provider = new SmallAreaYieldProvider();
 
@@ -41,7 +42,7 @@ namespace H.Core.Test.Providers.Soil
                 _manualResetEvent.Set();
             };
 
-            _provider.InitializeAsync();
+            await _provider.InitializeAsync();
         }
 
         [TestCleanup]
@@ -57,7 +58,7 @@ namespace H.Core.Test.Providers.Soil
         public void GetDataReturnsNonEmptyList()
         {
             // Wait until the async reading of the file has completed
-            _manualResetEvent.WaitOne(5000, false);
+            //_manualResetEvent.WaitOne(5000, false);
 
             var result = _provider.GetData();
 
@@ -72,7 +73,7 @@ namespace H.Core.Test.Providers.Soil
             const int polygon = 538001;
 
             // Wait until the async reading of the file has completed
-            _manualResetEvent.WaitOne(5000, false);
+            //_manualResetEvent.WaitOne(5000, false);
 
             Assert.AreEqual(3522, _provider.GetData(year, polygon, CropType.Barley, province).Yield);
             Assert.AreEqual(2231, _provider.GetData(year, polygon, CropType.Canola, province).Yield);
@@ -106,6 +107,15 @@ namespace H.Core.Test.Providers.Soil
         }
 
         [TestMethod]
+        public void GetUpdateSmallYieldsData()
+        {
+            Assert.AreEqual(1700, _provider.GetUpdatedData(1977, 538001, CropType.Barley, Province.Alberta).Yield);
+            Assert.AreEqual(1500, _provider.GetUpdatedData(1998, 750007, CropType.Canola, Province.BritishColumbia).Yield);
+            Assert.AreEqual(3950, _provider.GetUpdatedData(2018, 809003, CropType.Oats, Province.Manitoba).Yield);
+            Assert.AreEqual(2000, _provider.GetUpdatedData(1976, 525001, CropType.Durum, Province.Saskatchewan).Yield);
+        }
+
+        [TestMethod]
         public void GetDataReturnsNull()
         {
             const int year = 2018;
@@ -113,7 +123,7 @@ namespace H.Core.Test.Providers.Soil
             const int polygon = 538001;
 
             // Wait until the async reading of the file has completed
-            _manualResetEvent.WaitOne(5000, false);
+            //_manualResetEvent.WaitOne(5000, false);
 
             var result = _provider.GetData(1900, polygon, CropType.Barley, province);
 
@@ -128,7 +138,7 @@ namespace H.Core.Test.Providers.Soil
             const int polygon = 538001;
 
             // Wait until the async reading of the file has completed
-            _manualResetEvent.WaitOne(5000, false);
+            //_manualResetEvent.WaitOne(5000, false);
 
             var result = _provider.GetData(1900, polygon, CropType.Barley, province);
 
@@ -144,7 +154,7 @@ namespace H.Core.Test.Providers.Soil
             const CropType cropType = CropType.TameGrass;
 
             // Wait until the async reading of the file has completed
-            _manualResetEvent.WaitOne(5000, false);
+            // _manualResetEvent.WaitOne(5000, false);
 
             var result = _provider.GetData(year, polygon, cropType, province);
 

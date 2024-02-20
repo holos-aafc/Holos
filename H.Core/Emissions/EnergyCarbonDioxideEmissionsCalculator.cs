@@ -6,7 +6,6 @@ namespace H.Core.Emissions
     public class EnergyCarbonDioxideEmissionsCalculator
     {
         /// <summary>
-        /// Equation 4.3.1-3
         /// Sum from all animal types
         /// </summary>
         /// <param name="carbonDioxideEmissionsFromLiquidManureSpreading">CO2 emissions from liquid manure spreading (kg CO2 year^-1)</param>
@@ -20,7 +19,6 @@ namespace H.Core.Emissions
 
 
         /// <summary>
-        /// Equation 4.3.1-6
         /// Sum from all animal types
         /// </summary>
         /// <param name="carbonDioxideEmissionsFromSolidManureSpreading">CO2 emissions from solid manure spreading (kg CO2 year^-1)</param>

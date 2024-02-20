@@ -123,6 +123,10 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelClimateFactor + "," +
                 Properties.Resources.LabelTillageFactor + "," +
                 Properties.Resources.LabelManagementFactor + "," +
+                Properties.Resources.LabelGrowingSeasonPrecipitation + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear) + "," +
+                Properties.Resources.LabelGrowingSeasonEvapotranspiration + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear) + "," +
+                Properties.Resources.LabelFractionOfLandOccupied + "," +
+                Properties.Resources.LabelWeightedModifierBasedOnTexture + "," +
 
                 Properties.Resources.LabelPlantCarbonInProduct + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelCarbonInputFromProduct + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
@@ -142,6 +146,35 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelBelowGroundCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelManureCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
                 Properties.Resources.LabelDigestateCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
+                Properties.Resources.LabelTotalCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
+                Properties.Resources.LabelTFac + "," +
+                Properties.Resources.LabelWFac + "," +
+
+                Properties.Resources.January + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.February + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.March + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.April + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.May + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.June + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.July + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.August + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.September + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.October + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.November + " " + Properties.Resources.LabelTemperatureEffect + "," +
+                Properties.Resources.December + " " + Properties.Resources.LabelTemperatureEffect + "," +
+
+                Properties.Resources.January + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.February + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.March + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.April + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.May + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.June + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.July + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.August + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.September + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.October + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.November + " " + Properties.Resources.LabelWaterEffect + "," +
+                Properties.Resources.December + " " + Properties.Resources.LabelWaterEffect + "," +
 
                 Properties.Resources.LabelActivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelPassivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
@@ -181,17 +214,26 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelRatio + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
 
                 Properties.Resources.LabelTotalDirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
+                Properties.Resources.LabelTotalDirectN2OExcludingRemainingAmounts + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
                 Properties.Resources.LabelDirectNitrousOxideEmissionsFromSyntheticN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 Properties.Resources.LabelDirectNitrousOxideEmissionsFromCropResidues + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 Properties.Resources.LabelDirectNitrousOxideEmissionsFromNMinealization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 Properties.Resources.LabelDirectNitrousOxideEmissionsFromOrganicNitrogen + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
 
                 Properties.Resources.LabelTotalIndirectN2O + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
+                Properties.Resources.LabelTotalIndirectN2OExcludingRemainingAmounts + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare) + "," +
                 Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNitrogenLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 //Properties.Resources.LabelIndirectNitrousOxideFromCropResidueLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 Properties.Resources.LabelIndirectNitrousOxideFromMineralLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
                 Properties.Resources.LabelIndirectNitrousOxideFromOrganicNLeaching + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
-                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNVolatilization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," 
+                Properties.Resources.LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromSyntheticNVolatilization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromOrganicNVolatilization + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+                Properties.Resources.LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField) + "," +
+
+                Properties.Resources.LabelEnergyCO2 + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," +
+                Properties.Resources.LabelUpstreamCarbonDioxide + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + ","
             );
         }
 
@@ -207,7 +249,7 @@ namespace H.Core.Services.LandManagement
         {
             var fieldName = string.Empty;
             fieldName = viewItem.Name;
-            const string DefaultDecimalOutputFormat = "F2";
+            const string DefaultDecimalOutputFormat = "F3";
 
             // Old farm files used the FieldName property which is deprecated
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -232,14 +274,18 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.PercentageOfStrawReturnedToSoil.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.PercentageOfRootsReturnedToSoil.ToString(DefaultDecimalOutputFormat)}"));
 
-            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientProduct.ToString("F3")}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientStraw.ToString("F3")}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientRoots.ToString("F3")}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientExtraroot.ToString("F3")}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientProduct.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientStraw.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientRoots.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.BiomassCoefficientExtraroot.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ClimateParameter.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.TillageFactor.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ManagementFactor.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonPrecipitation(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonEvapotranspiration(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.WeightedModifierBasedOnTexture.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.PlantCarbonInAgriculturalProduct, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CarbonInputFromProduct, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
@@ -260,6 +306,35 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CombinedBelowGroundInput, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CombinedManureInput, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CombinedDigestateInput, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TotalCarbonInputs, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.WFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.January.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.February.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.March.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.April.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.May.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.June.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.July.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.August.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.September.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.October.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.November.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.December.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.January.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.February.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.March.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.April.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.May.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.June.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.July.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.August.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.September.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.October.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.November.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.December.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.ActivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.PassivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
@@ -299,17 +374,26 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, viewItem.Ratio, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalDirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalIndirectNitrousOxidePerHectare, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2OPerHectare, viewItem.TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             //stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromCropResiduesForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideLeachingEmissionsFromOrganicNitrogenForAreaExcludingRemainingManure, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerField, viewItem.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForAreaExcludingRemainingAmounts, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.Kilograms, viewItem.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.Kilograms, viewItem.CropEnergyResults.TotalUpstreamCroppingEnergyEmissions, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.AppendLine();
             #endregion

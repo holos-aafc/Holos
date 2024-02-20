@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using H.Core.Calculators.Infrastructure;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
@@ -32,6 +33,28 @@ namespace H.Core.Services.Animals
             DigestateApplicationViewItem digestateApplicationViewItem,
             DigestateTank tank);
 
-        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
+        /// <summary>
+        /// Equation 4.6.1-4
+        /// 
+        /// Stored nitrogen available for application to land minus digestate applied to fields or exported
+        ///
+        /// (kg N)
+        /// </summary>
+        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
+
+        double GetTotalNitrogenExported(int year, Farm farm);
+
+        /// <summary>
+        /// Equation 4.9.7-3
+        /// </summary>
+        double GetTotalCarbonRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
+        double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state);
+
+        /// <summary>
+        /// Equation 4.9.7-5
+        /// </summary>
+        double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
+
+        List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
     }
 }
