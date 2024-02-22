@@ -443,6 +443,17 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// (1000 kg wet weight for solid manure, 1000 L for liquid manure)
+        /// </summary>
+        public double TotalVolumeOfManureAvailableForLandApplicationAccumulated
+        {
+            get
+            {
+                return DailyEmissions.Last().AccumulatedVolume;
+            }
+        }
+
+        /// <summary>
         /// (kg TAN)
         /// </summary>
         public double MonthlyTanExcretion

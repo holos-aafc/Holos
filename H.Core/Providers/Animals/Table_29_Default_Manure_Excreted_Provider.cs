@@ -116,13 +116,23 @@ namespace H.Core.Providers.Animals
             {
                 animalTypeLookup = AnimalType.Swine;
             }
+            else if (animalType.IsTurkeyType())
+            {
+                animalTypeLookup = AnimalType.Turkeys;
+            }
             else if (animalType.IsPoultryType())
             {
                 if (animalType == AnimalType.ChickenPullets)
                 {
                     animalTypeLookup = AnimalType.Broilers;
                 }
+
+                if (animalType == AnimalType.ChickenHens)
+                {
+                    animalTypeLookup = AnimalType.Layers;
+                }
             }
+
 
             var result = _excretionRates.SingleOrDefault(x => x.AnimalType == animalTypeLookup);
             if (result != null)

@@ -176,7 +176,7 @@ namespace H.Core.Test.Integration
 
 
             var cvi1 = new CropViewItem();
-            cvi1.CropType = CropType.Barley;
+            cvi1.CropType = CropType.AlfalfaMedicagoSativaL;
             _fieldResultsService.AssignSystemDefaults(cvi1, farm, _applicationData.GlobalSettings);  // moisture content will be set here
 
 
@@ -388,9 +388,9 @@ namespace H.Core.Test.Integration
 
 
             fieldComponent.CropViewItems.Add(cvi1);
-            fieldComponent.CropViewItems.Add(cvi2);
-            fieldComponent.CropViewItems.Add(cvi3);
-            fieldComponent.CropViewItems.Add(cvi4);
+            //fieldComponent.CropViewItems.Add(cvi2);
+            //fieldComponent.CropViewItems.Add(cvi3);
+            //fieldComponent.CropViewItems.Add(cvi4);
 
 
 
