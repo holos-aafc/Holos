@@ -402,7 +402,7 @@ namespace H.Core.Providers.Animals
                         return 0.0014;
                     }
 
-                    if (animalType == AnimalType.Layers)
+                    if (animalType == AnimalType.Layers || animalType == AnimalType.ChickenHens)
                     {
                         return 0.0028;
                     }
