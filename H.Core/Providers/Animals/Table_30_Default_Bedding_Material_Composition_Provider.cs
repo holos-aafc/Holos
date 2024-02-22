@@ -397,7 +397,7 @@ namespace H.Core.Providers.Animals
                         return 0.0014;
                     }
                     
-                    if (animalType == AnimalType.Pullets)
+                    if (animalType == AnimalType.ChickenPullets)
                     {
                         return 0.0014;
                     }
