@@ -390,14 +390,14 @@ namespace H.Core.Providers.Animals
 
             if (animalType.IsPoultryType())
             {
-                if (beddingMaterialType == BeddingMaterialType.Straw || beddingMaterialType == BeddingMaterialType.Shavings)
-                {
-                    return 0;
-                }
-
-                if (beddingMaterialType == BeddingMaterialType.Sawdust)
+                if (beddingMaterialType == BeddingMaterialType.Sawdust || beddingMaterialType == BeddingMaterialType.Straw || beddingMaterialType == BeddingMaterialType.Shavings)
                 {
                     if (animalType == AnimalType.Broilers)
+                    {
+                        return 0.0014;
+                    }
+                    
+                    if (animalType == AnimalType.ChickenPullets)
                     {
                         return 0.0014;
                     }
