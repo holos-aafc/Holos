@@ -58,7 +58,16 @@ namespace H.Core.Providers.Plants
         /// </summary>
         public double MoistureContent { get; set; }
 
-        public Table_46_Biogas_Methane_Production_CropResidue_Data BiomethaneData { get; set; } 
+        public Table_46_Biogas_Methane_Production_CropResidue_Data BiomethaneData { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        public override string ToString()
+        {
+            return $"{nameof(CropType)}: {CropType}, {nameof(InterceptValue)}: {InterceptValue}, {nameof(SlopeValue)}: {SlopeValue}, {nameof(RSTRatio)}: {RSTRatio}, {nameof(NitrogenContentResidues)}: {NitrogenContentResidues}, {nameof(LigninContentResidues)}: {LigninContentResidues}, {nameof(MoistureContent)}: {MoistureContent}, {nameof(BiomethaneData)}: {BiomethaneData}";
+        }
 
         #endregion
     }

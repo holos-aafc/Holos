@@ -53,7 +53,6 @@ namespace H.Core.Providers.Animals
         /// If nothing is found, returns an empty instance.</returns>
         public Table_41_Poultry_NExcretionRate_Parameter_Values_Data GetParameterValues(AnimalType animalType)
         {
-
             var data = PoultryParameterValueData.Find(x => x.AnimalType == animalType);
 
             if (data != null)

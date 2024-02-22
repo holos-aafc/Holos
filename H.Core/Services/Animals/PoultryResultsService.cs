@@ -201,6 +201,9 @@ namespace H.Core.Services.Animals
              * Ammonia (NH3) from housing
              */
 
+            // TAN excretion rate is from lookup table and not calculated
+            dailyEmissions.TanExcretionRate = managementPeriod.ManureDetails.DailyTanExcretion;
+
             var emissionFactorForHousing = _defaultDailyTanExcretionRatesForPoultry.GetAmmoniaEmissionFactorForHousing(managementPeriod.AnimalType);
 
             base.CalculateAmmoniaInHousing(dailyEmissions, managementPeriod, emissionFactorForHousing);
@@ -240,9 +243,6 @@ namespace H.Core.Services.Animals
                 flowOfTanEnteringStorage: dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
 
             dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
-
-            // TAN excretion rate is from lookup table and not calculated
-            dailyEmissions.TanExcretionRate = managementPeriod.ManureDetails.DailyTanExcretion;
 
             dailyEmissions.FecalNitrogenExcretionRate = base.CalculateFecalNitrogenExcretionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,

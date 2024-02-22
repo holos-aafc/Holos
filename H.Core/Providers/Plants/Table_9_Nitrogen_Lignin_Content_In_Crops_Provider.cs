@@ -63,11 +63,6 @@ namespace H.Core.Providers.Plants
 
             var lookupType = cropType;
 
-            if (cropType == CropType.FieldPeas || cropType == CropType.DryFieldPeas)
-            {
-                lookupType = CropType.BeansDryField;
-            }
-
             if (cropType == CropType.Wheat)
             {
                 lookupType = CropType.Durum;
