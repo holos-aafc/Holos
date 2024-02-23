@@ -307,8 +307,8 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CombinedManureInput, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.CombinedDigestateInput, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TotalCarbonInputs, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.WFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.TFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.WFac, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.January.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2TemperatureFactors.February.ToString(DefaultDecimalOutputFormat)}"));

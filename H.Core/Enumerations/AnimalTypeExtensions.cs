@@ -222,6 +222,7 @@ namespace H.Core.Enumerations
                 case AnimalType.BeefCow:
                 case AnimalType.BeefCowLactating:
                 case AnimalType.DairyLactatingCow:
+                case AnimalType.DairyDryCow:
                 case AnimalType.Ewes:
                     return true;
 
