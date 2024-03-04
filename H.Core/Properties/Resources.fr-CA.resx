@@ -5696,4 +5696,13 @@
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
     <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
   </data>
+  <data name="LabelMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="LabelEvapotranspiration" xml:space="preserve">
+    <value>Evapotranspiration</value>
+  </data>
+  <data name="LabelPrecipitation" xml:space="preserve">
+    <value>Precipitation</value>
+  </data>
 </root>

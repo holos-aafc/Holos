@@ -8,6 +8,7 @@ using H.Core.Providers.Climate;
 using H.Content;
 using System.Text;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 
 namespace H.Core.Test.Providers.Climate
@@ -190,6 +191,43 @@ namespace H.Core.Test.Providers.Climate
             farm.ClimateData.DailyClimateData.Add(dailyClimateData3);
 
             _climateProvider.OutputDailyClimateData(farm, somePath);
+
+            // Verify
+            File.Exists(somePath);
+            File.Delete(somePath); // Delete file test
+        }
+
+        [TestMethod]
+        public void TestOutputMonthlyClimateData()
+        {
+            // Setup
+            var somePath = Directory.GetCurrentDirectory();
+            somePath = somePath + "test.csv";
+
+            var dailyClimateData = new List<DailyClimateData>() { new DailyClimateData() { Date = DateTime.Now, MeanDailyAirTemperature = 10 } };
+            DailyClimateData dailyClimateData2 = new DailyClimateData() { Date = DateTime.Now, MeanDailyAirTemperature = 12, SolarRadiation = 2 };
+            DailyClimateData dailyClimateData3 = new DailyClimateData()
+            {
+                Year = 2023,
+                JulianDay = 5,
+                MeanDailyAirTemperature = 3,
+                MeanDailyPrecipitation = 4,
+                MeanDailyPET = 5,
+                RelativeHumidity = 5,
+                SolarRadiation = 3,
+                Date = DateTime.Now
+            };
+            var farm = new Farm() { ClimateData = new ClimateData() { DailyClimateData = new ObservableCollection<DailyClimateData>(dailyClimateData) } };
+
+            var viewItem1 = new CropViewItem() {Year = 1985};
+            var viewItem2 = new CropViewItem() {Year = 2002};
+
+            farm.StageStates.Add(new FieldSystemDetailsStageState() {DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>(new List<CropViewItem>(){viewItem1, viewItem2})});
+
+            farm.ClimateData.DailyClimateData.Add(dailyClimateData2);
+            farm.ClimateData.DailyClimateData.Add(dailyClimateData3);
+
+            _climateProvider.OutputMonthlyClimateData(farm, somePath);
 
             // Verify
             File.Exists(somePath);

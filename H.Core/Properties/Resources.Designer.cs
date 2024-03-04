@@ -9232,6 +9232,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evapotranspiration.
+        /// </summary>
+        public static string LabelEvapotranspiration {
+            get {
+                return ResourceManager.GetString("LabelEvapotranspiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fallow area change.
         /// </summary>
         public static string LabelFallowAreaChange {
@@ -10375,6 +10384,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string LabelMonth {
+            get {
+                return ResourceManager.GetString("LabelMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiple fertilizer applications can be made to this field throughout the year. To add a fertilizer application, click &apos;Add Fertilizer Application&apos; to specify the details..
         /// </summary>
         public static string LabelMultipleFertilizerApplicationsCanBeMadeToThisField {
@@ -10731,6 +10749,15 @@ namespace H.Core.Properties {
         public static string LabelPotassium {
             get {
                 return ResourceManager.GetString("LabelPotassium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precipitation.
+        /// </summary>
+        public static string LabelPrecipitation {
+            get {
+                return ResourceManager.GetString("LabelPrecipitation", resourceCulture);
             }
         }
         
