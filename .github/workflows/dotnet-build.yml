@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches: [ "testing" ]
+    branches: [ "testing" ]     # TODO: add main back here
   pull_request:
     branches: [ "main" ]
 
@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug]
+        configuration: [Debug]  # TODO: add release back here
     runs-on:  windows-2019
     env:
       Solution_Name: Holos.sln
@@ -40,10 +40,38 @@ jobs:
     - name: Run Tests
       run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
+    # - name: Upload build artifacts
+    #   if: ${{ matrix.configuration == 'Release' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: Files-${{ matrix.configuration }}
+    #     path: '**/*/bin/*'
 
-    - name: Upload build artifacts
-      if: ${{ matrix.configuration == 'Release' }}
-      uses: actions/upload-artifact@v4
+    - name: Set current date as env variable
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
+    - name: Create Draft Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: Files-${{ matrix.configuration }}
-        path: '**/*/bin/*'
+        tag_name: ${{ github.sha }}
+        release_name: Holos 4 - $NOW
+        draft: true
+        prerelease: false
+
+    - uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Files-Release.zip
+        asset_name: Files-Release.zip
+        asset_content_type: application/zip
+
+    - uses: eregon/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}
