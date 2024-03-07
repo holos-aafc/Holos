@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]     # TODO: add main back here
+    branches: [ "testing" ]
   pull_request:
     branches: [ "main" ]
 
@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug, Release]  # TODO: add debug back here
+        configuration: [Debug, Release]
     runs-on:  windows-2019
     env:
       Solution_Name: Holos.sln
@@ -70,6 +70,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        tag_name: ${{ github.ref }}
         release_name: Holos 4 - ${{ github.event.repository.updated_at }}
         draft: true
         prerelease: false
