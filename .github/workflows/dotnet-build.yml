@@ -37,7 +37,7 @@ jobs:
 
     
     - name: Upload build artifacts
-      if: ${{ matrix.configuration }} == 'Release'
+      if: ${{ matrix.configuration == 'Release' }}
       uses: actions/upload-artifact@v4
       with:
         name: Files-${{ matrix.configuration }}
