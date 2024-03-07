@@ -40,23 +40,22 @@ jobs:
     # - name: Run Tests
     #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
-    - name: list directory (DEBUGGING)
-      run: ls
-
     - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
       uses: actions/upload-artifact@v4
       with:
-        name: Files-${{ matrix.configuration }}
-        path: '**/*/bin/*'
-        
-    - name: list directory (DEBUGGING)
-      run: ls
+        name: Holos4-lib
+        path: '**/H.Core/bin/*'
 
   release:
     needs: build
     runs-on:  windows-2019 # TODO: might be able to use ubuntu here
     steps:
+    - name: "Download build"
+      uses: actions/download-artifact@v4
+      with:
+        name: Holos4-lib
+
     - name: list directory (DEBUGGING)
       run: ls
 
