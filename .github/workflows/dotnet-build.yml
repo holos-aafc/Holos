@@ -25,6 +25,9 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1
+
     - name: Restore nuget packages
       run: msbuild $env:Solution_Name /t:Restore
       env:
@@ -35,7 +38,10 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    
+    - name: Run Tests
+      run: vstest.console.exe ./**/bin/Debug/H.*.Test.dll
+
+
     - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
       uses: actions/upload-artifact@v4
