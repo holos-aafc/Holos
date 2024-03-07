@@ -40,15 +40,25 @@ jobs:
     # - name: Run Tests
     #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
+    - name: list directory (DEBUGGING)
+      run: ls
+
     - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
       uses: actions/upload-artifact@v4
       with:
         name: Files-${{ matrix.configuration }}
         path: '**/*/bin/*'
+        
+    - name: list directory (DEBUGGING)
+      run: ls
 
-    - name: Set current date as env variable
-      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+  release:
+    needs: build
+    runs-on:  windows-2019 # TODO: might be able to use ubuntu here
+    steps:
+    - name: list directory (DEBUGGING)
+      run: ls
 
     - name: Create Draft Release
       if: ${{ matrix.configuration == 'Release' }}
@@ -68,7 +78,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Files-${{ matrix.configuration }}.zip
+        asset_path: Files-${{ matrix.configuration }}.zip
         asset_name: Files-${{ matrix.configuration }}.zip
         asset_content_type: application/zip
 
