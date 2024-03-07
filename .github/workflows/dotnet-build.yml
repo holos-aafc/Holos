@@ -51,6 +51,7 @@ jobs:
       run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
 
     - name: Create Draft Release
+      if: ${{ matrix.configuration == 'Release' }}
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -62,6 +63,7 @@ jobs:
         prerelease: false
 
     - uses: actions/upload-release-asset@v1.0.1
+      if: ${{ matrix.configuration == 'Release' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -71,6 +73,7 @@ jobs:
         asset_content_type: application/zip
 
     - uses: eregon/publish-release@v1
+      if: ${{ matrix.configuration == 'Release' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
