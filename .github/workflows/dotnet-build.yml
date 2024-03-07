@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug]  # TODO: add release back here
+        configuration: [Release]  # TODO: add debug back here
     runs-on:  windows-2019
     env:
       Solution_Name: Holos.sln
