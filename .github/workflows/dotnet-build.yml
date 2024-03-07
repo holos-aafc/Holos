@@ -38,7 +38,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel
+      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
 
     - name: Upload build artifacts
