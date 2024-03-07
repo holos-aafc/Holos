@@ -40,36 +40,42 @@ jobs:
     # - name: Run Tests
     #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
-    # - name: Upload build artifacts
-    #   if: ${{ matrix.configuration == 'Release' }}
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: Holos4-lib
-    #     path: '**/H.Core/bin/*'
-
-    - uses: vimtor/action-zip@v1.2
+    - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
+      uses: actions/upload-artifact@v4
       with:
-        files: H.Core/bin/
-        dest: Holos4-lib.zip
+        name: Holos4-lib
+        path: '**/H.Core/bin/*'
+
+  release:
+    needs: build
+    runs-on:  windows-2019 # TODO: might be able to use ubuntu here
+    steps:
+    - name: "Download build"
+      uses: actions/download-artifact@v4
+      with:
+        name: Holos4-lib
 
     - name: list directory (DEBUGGING)
       run: ls
 
+    - uses: vimtor/action-zip@v1.2
+      with:
+        files: H.Core/
+        dest: Holos4-lib.zip
+
     - name: Create Draft Release
-      if: ${{ matrix.configuration == 'Release' }}
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.sha }}
+        tag_name: holos4 # ${{ github.sha }}
         release_name: Holos 4 - ${{ github.event.repository.updated_at }}
         draft: true
         prerelease: false
 
     - uses: actions/upload-release-asset@v1.0.1
-      if: ${{ matrix.configuration == 'Release' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -79,7 +85,6 @@ jobs:
         asset_content_type: application/zip
 
     - uses: eregon/publish-release@v1
-      if: ${{ matrix.configuration == 'Release' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
