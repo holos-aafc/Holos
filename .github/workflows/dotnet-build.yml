@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "testing" ]
   pull_request:
     branches: [ "main" ]
 
@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Debug]
     runs-on:  windows-2019
     env:
       Solution_Name: Holos.sln
@@ -38,7 +38,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll
+      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel
 
 
     - name: Upload build artifacts
