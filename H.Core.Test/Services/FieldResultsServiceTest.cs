@@ -1,40 +1,28 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Castle.Components.DictionaryAdapter;
-using H.Content;
 using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Climate;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Calculators.Tillage;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
-using H.Core.Models.Animals.Sheep;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
-using H.Core.Providers.Animals;
-using H.Core.Providers.Carbon;
 using H.Core.Providers.Climate;
-using H.Core.Providers.Economics;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;                    
-using H.Core.Providers.Temperature;
-using H.Core.Services;
+using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
-using H.Views.ComponentViews.LandManagement.FieldSystem.Controls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using GroupEmissionsByDay = H.Core.Emissions.Results.GroupEmissionsByDay;
-using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
 
 #endregion
 
@@ -199,7 +187,7 @@ namespace H.Core.Test.Services
                 new CropViewItem() {CropType = CropType.TameMixed, Year = 2006, IsSecondaryCrop = true},
             };
 
-            var component = new FieldSystemComponent() {CropViewItems = new ObservableCollection<CropViewItem>(crops)};
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
 
             var result = _resultsService.AssignPerennialStandIds(crops, component);
 
@@ -286,11 +274,11 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void AssignPerennialStandPositionalYears()
         {
-            var guid= Guid.NewGuid();
+            var guid = Guid.NewGuid();
 
             var crops = new List<CropViewItem>()
             {
-                new CropViewItem() {CropType = CropType.Wheat, Year = 2019, PerennialStandGroupId = guid}, 
+                new CropViewItem() {CropType = CropType.Wheat, Year = 2019, PerennialStandGroupId = guid},
                 new CropViewItem() {CropType = CropType.TameLegume, Year = 2019, IsSecondaryCrop = true, PerennialStandGroupId = guid},
                 new CropViewItem() {CropType = CropType.TameLegume, Year = 2020, PerennialStandGroupId = guid},
                 new CropViewItem() {CropType = CropType.TameLegume, Year = 2020, IsSecondaryCrop = true, PerennialStandGroupId = guid},
@@ -464,7 +452,7 @@ namespace H.Core.Test.Services
                 Yield = 1000,
                 CarbonConcentration = 0.45,
                 PercentageOfProductYieldReturnedToSoil = 2,
-                NitrogenContentInProduct = 18.9/1000,
+                NitrogenContentInProduct = 18.9 / 1000,
                 NitrogenDepositionAmount = 0,
             };
 
@@ -480,7 +468,7 @@ namespace H.Core.Test.Services
             // Required N of plant = 18.849600000000002
             // Required amount of product = (18.849600000000002 / 25) * 100; 
 
-            var result = _resultsService.CalculateAmountOfProductRequired(farm,viewItem, fertilizerApplicationViewItem);
+            var result = _resultsService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
 
             Assert.AreEqual(135.71712, result);
         }
@@ -540,7 +528,7 @@ namespace H.Core.Test.Services
             _resultsService.AssignYieldToYear(farm, detailsScreenViewItem, fieldSystemComponent);
 
             Assert.AreEqual(150, detailsScreenViewItem.Yield);
-        } 
+        }
 
         #endregion
 
@@ -675,9 +663,9 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void ApplyUserDefaults()
         {
-            var viewItem = new CropViewItem() {CropType = CropType.Barley,};
+            var viewItem = new CropViewItem() { CropType = CropType.Barley, };
             var cropDefault = new CropViewItem()
-                {CropType = CropType.Barley, Yield = 777, EnableCustomUserDefaultsForThisCrop = true};
+            { CropType = CropType.Barley, Yield = 777, EnableCustomUserDefaultsForThisCrop = true };
 
             var globalSettings = new GlobalSettings();
             globalSettings.CropDefaults.Add(cropDefault);
@@ -914,13 +902,13 @@ namespace H.Core.Test.Services
 
                 DefaultSoilData =
                 {
-                    ProportionOfSandInSoil = 0.25,                    
+                    ProportionOfSandInSoil = 0.25,
                 },
 
                 Defaults = new Defaults()
                 {
                     CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2,
-                    DefaultRunInPeriod = 2,                    
+                    DefaultRunInPeriod = 2,
                 }
             };
 
@@ -930,7 +918,7 @@ namespace H.Core.Test.Services
                 {
                     Year = 1985,
                     CropType = CropType.Barley,
-                    FieldSystemComponentGuid = guid,                    
+                    FieldSystemComponentGuid = guid,
                     DryYield = 1000,
                 },
 
@@ -1416,7 +1404,7 @@ namespace H.Core.Test.Services
                 }
             };
 
-            var result = _resultsService.CreateItems(fieldSystemComponent, new Farm() { Defaults = new Defaults { CarbonModellingStrategy = CarbonModellingStrategies.ICBM} });
+            var result = _resultsService.CreateItems(fieldSystemComponent, new Farm() { Defaults = new Defaults { CarbonModellingStrategy = CarbonModellingStrategies.ICBM } });
 
             Assert.AreEqual(4, result.Count());
 
@@ -1541,7 +1529,7 @@ namespace H.Core.Test.Services
             var mainCrops = new List<CropViewItem>() { new CropViewItem() };
 
             var fieldComponent = new FieldSystemComponent()
-                { CropViewItems = new ObservableCollection<CropViewItem>(mainCrops) };
+            { CropViewItems = new ObservableCollection<CropViewItem>(mainCrops) };
 
             _resultsService.CreateDetailViewItems(
                 fieldSystemComponent: fieldComponent,
@@ -1583,7 +1571,7 @@ namespace H.Core.Test.Services
                 new CropViewItem() {CropType = CropType.Wheat, Year = startYear + 1},
                 new CropViewItem() {CropType = CropType.TameGrass, Year = startYear + 2},
                 new CropViewItem() {CropType = CropType.TameGrass, Year = startYear + 3},
-            };            
+            };
 
             var items = _resultsService.GetRunInPeriodItems(
                 farm: farm,
@@ -1616,7 +1604,7 @@ namespace H.Core.Test.Services
             var hayExportViewItem = new CropViewItem();
             hayExportViewItem.Year = DateTime.Now.Year;
             hayExportViewItem.PercentageOfProductYieldReturnedToSoil = 2;
-            hayExportViewItem.HarvestViewItems.Add(new HarvestViewItem() { TotalNumberOfBalesHarvested = 20, Start = DateTime.Now});
+            hayExportViewItem.HarvestViewItems.Add(new HarvestViewItem() { TotalNumberOfBalesHarvested = 20, Start = DateTime.Now });
 
             var exportingFieldComponent = new FieldSystemComponent();
             exportingFieldComponent.Guid = fieldId;
@@ -1624,7 +1612,7 @@ namespace H.Core.Test.Services
             exportingFieldComponent.CropViewItems.Add(hayExportViewItem);
 
             var importingViewItem = new CropViewItem();
-            importingViewItem.HayImportViewItems.Add(new HayImportViewItem() {Date = DateTime.Now, FieldSourceGuid = fieldId, NumberOfBales = 5, MoistureContentAsPercentage = 20});
+            importingViewItem.HayImportViewItems.Add(new HayImportViewItem() { Date = DateTime.Now, FieldSourceGuid = fieldId, NumberOfBales = 5, MoistureContentAsPercentage = 20 });
 
             var importingFieldComponent = new FieldSystemComponent();
             importingFieldComponent.Name = "Importing field";
@@ -1706,12 +1694,12 @@ namespace H.Core.Test.Services
                     Component = cowCalfComponent,
                     EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>()
                     {
-              animalResults,        
+              animalResults,
                     }
                 }
             };
 
-             _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
+            _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
             _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults);
 
@@ -1724,7 +1712,7 @@ namespace H.Core.Test.Services
             var date = DateTime.Now.Subtract(TimeSpan.FromDays(30));
 
             var animalComponentResults = new AnimalComponentEmissionsResults();
-            animalComponentResults.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() {new AnimalGroupEmissionResults()};
+            animalComponentResults.EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults>() { new AnimalGroupEmissionResults() };
 
             var animalGroupEmissionResults = new AnimalGroupEmissionResults();
             animalGroupEmissionResults.GroupEmissionsByMonths = new List<GroupEmissionsByMonth>();
@@ -1734,7 +1722,7 @@ namespace H.Core.Test.Services
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = 5;
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = 200;
 
-            var groupEmissionsByMonth = new GroupEmissionsByMonth(new MonthsAndDaysData(), new List<GroupEmissionsByDay>() {dailyEmissions});
+            var groupEmissionsByMonth = new GroupEmissionsByMonth(new MonthsAndDaysData(), new List<GroupEmissionsByDay>() { dailyEmissions });
 
             animalGroupEmissionResults.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
             animalComponentResults.EmissionResultsForAllAnimalGroupsInComponent.Add(animalGroupEmissionResults);
