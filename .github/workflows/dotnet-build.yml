@@ -10,12 +10,11 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug]  #[Debug, Release]
-    runs-on:  windows-2019      # For a list of available runner types, refer to
-                                # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+        configuration: [Debug, Release]
+    runs-on:  windows-2019
     env:
-      Solution_Name: Holos.sln                                # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: H.*.Test/*[tT]est.csproj             # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: Holos.sln
+      Test_Project_Path: H.*.Test/*[tT]est.csproj # not used yet
 
     steps:
     - name: Checkout
@@ -23,7 +22,6 @@ jobs:
       with:
         fetch-depth: 0        
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
@@ -37,7 +35,6 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
