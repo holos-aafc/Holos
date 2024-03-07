@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches: [ "testing" ]     # TODO: add main back here
+    branches: [ "main" ]     # TODO: add main back here
   pull_request:
     branches: [ "main" ]
 
@@ -37,8 +37,8 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    # - name: Run Tests
-    #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
+    - name: Run Tests
+      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
     - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
