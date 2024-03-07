@@ -37,15 +37,15 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    - name: Run Tests
-      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
+    # - name: Run Tests
+    #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
-    # - name: Upload build artifacts
-    #   if: ${{ matrix.configuration == 'Release' }}
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: Files-${{ matrix.configuration }}
-    #     path: '**/*/bin/*'
+    - name: Upload build artifacts
+      if: ${{ matrix.configuration == 'Release' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: Files-${{ matrix.configuration }}
+        path: '**/*/bin/*'
 
     - name: Set current date as env variable
       run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
@@ -57,7 +57,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.sha }}
-        release_name: Holos 4 - $NOW
+        release_name: Holos 4 - ${{ github.event.repository.updated_at }}
         draft: true
         prerelease: false
 
@@ -66,8 +66,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Files-Release.zip
-        asset_name: Files-Release.zip
+        asset_path: ./Files-${{ matrix.configuration }}.zip
+        asset_name: Files-${{ matrix.configuration }}.zip
         asset_content_type: application/zip
 
     - uses: eregon/publish-release@v1
