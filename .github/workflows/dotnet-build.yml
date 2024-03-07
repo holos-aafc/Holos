@@ -39,7 +39,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/bin/Debug/H.*.Test.dll
+      run: vstest.console.exe ./**/bin/{{ matrix.configuration }}/H.*.Test.dll
 
 
     - name: Upload build artifacts
