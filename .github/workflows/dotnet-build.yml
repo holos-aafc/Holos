@@ -40,21 +40,18 @@ jobs:
     # - name: Run Tests
     #   run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
 
-    - name: Upload build artifacts
-      if: ${{ matrix.configuration == 'Release' }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: Holos4-lib
-        path: '**/H.Core/bin/*'
+    # - name: Upload build artifacts
+    #   if: ${{ matrix.configuration == 'Release' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: Holos4-lib
+    #     path: '**/H.Core/bin/*'
 
-  release:
-    needs: build
-    runs-on:  windows-2019 # TODO: might be able to use ubuntu here
-    steps:
-    - name: "Download build"
-      uses: actions/download-artifact@v4
+    - uses: vimtor/action-zip@v1.2
+      if: ${{ matrix.configuration == 'Release' }}
       with:
-        name: Holos4-lib
+        files: H.Core/bin/
+        dest: Holos4-lib.zip
 
     - name: list directory (DEBUGGING)
       run: ls
@@ -77,8 +74,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: Files-${{ matrix.configuration }}.zip
-        asset_name: Files-${{ matrix.configuration }}.zip
+        asset_path: Holos4-lib.zip
+        asset_name: Holos4-lib.zip
         asset_content_type: application/zip
 
     - uses: eregon/publish-release@v1
