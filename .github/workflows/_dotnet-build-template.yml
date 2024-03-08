@@ -37,8 +37,8 @@ jobs:
       env:
         Configuration: ${{ inputs.configuration }}
 
-    # - name: Run Tests
-    #   run: vstest.console.exe ./**/bin/${{ inputs.configuration }}/H.*.Test.dll /Parallel
+    - name: Run Tests
+      run: vstest.console.exe ./**/bin/${{ inputs.configuration }}/H.*.Test.dll /Parallel
 
     - name: Upload build artifacts
       if: ${{ inputs.configuration == 'Release' }}
