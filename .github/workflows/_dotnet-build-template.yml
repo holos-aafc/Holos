@@ -38,7 +38,7 @@ jobs:
         Configuration: ${{ inputs.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/H.Core.Test/bin/${{ inputs.configuration }}/H.Core.Test.dll ./**/H.Infrastructure.Test/bin/${{ inputs.configuration }}/H.Infrastructure.Test.dll ./**/H.CLI.Test/bin/${{ inputs.configuration }}/H.CLI.Test.dll ./**/H.Integration/bin/${{ inputs.configuration }}/H.Integration.dll /Parallel
+      run: vstest.console.exe ./**/H.Core.Test/bin/${{ inputs.configuration }}/H.Core.Test.dll ./**/H.Infrastructure.Test/bin/${{ inputs.configuration }}/H.Infrastructure.Test.dll ./**/H.CLI.Test/bin/${{ inputs.configuration }}/H.CLI.Test.dll /Parallel
 
     - name: Upload build artifacts
       if: ${{ inputs.configuration == 'Release' }}

@@ -27,7 +27,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: holos4
-        release_name: Holos 4 - ${{ github.event.repository.updated_at }}
+        release_name: Holos 4 - ${{ github.event.pull_request.created_at }}
         draft: true
         prerelease: false
 
