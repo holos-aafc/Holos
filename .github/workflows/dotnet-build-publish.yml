@@ -6,85 +6,14 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        # Only do release build. Doing both Debug and Release causes file access error as both will attempt to write to climate data file at the same time
-        configuration: [Release]
-    runs-on:  windows-2019
-    env:
-      Solution_Name: Holos.sln
+    uses: ./.github/workflows/_dotnet-build-template.yml
+    with:
+      configuration: Release
+      solution: Holos.sln
+      filename: Holos4-lib
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0        
-
-  #   - name: Setup MSBuild.exe
-  #     uses: microsoft/setup-msbuild@v2
-
-  #   - name: Setup VSTest
-  #     uses: darenm/Setup-VSTest@v1
-
-  #   - name: Restore nuget packages
-  #     run: msbuild $env:Solution_Name /t:Restore /m
-  #     env:
-  #       Configuration: ${{ matrix.configuration }}
-
-  #   - name: Build solution
-  #     run: msbuild $env:Solution_Name /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
-  #     env:
-  #       Configuration: ${{ matrix.configuration }}
-
-  #   - name: Run Tests
-  #     run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel
-
-  #   - name: Upload build artifacts
-  #     if: ${{ matrix.configuration == 'Release' }}
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: Holos4-lib
-  #       path: '**/H.Core/bin/*'
-
-  # release:
-  #   needs: build
-  #   runs-on:  windows-2019 # TODO: might be able to use ubuntu here
-  #   steps:
-  #   - name: "Download build"
-  #     uses: actions/download-artifact@v4
-  #     with:
-  #       name: Holos4-lib
-
-  #   - name: list directory (DEBUGGING)
-  #     run: ls
-
-  #   - uses: vimtor/action-zip@v1.2
-  #     with:
-  #       files: H.Core/
-  #       dest: Holos4-lib.zip
-
-  #   - name: Create Draft Release
-  #     id: create_release
-  #     uses: actions/create-release@v1
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     with:
-  #       tag_name: ${{ github.ref }}
-  #       release_name: Holos 4 - ${{ github.event.repository.updated_at }}
-  #       draft: true
-  #       prerelease: false
-
-  #   - uses: actions/upload-release-asset@v1.0.1
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     with:
-  #       upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #       asset_path: Holos4-lib.zip
-  #       asset_name: Holos4-lib.zip
-  #       asset_content_type: application/zip
-
-  #   - uses: eregon/publish-release@v1
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     with:
-  #       release_id: ${{ steps.create_release.outputs.id }}
+  publish:
+    needs: build
+    uses: ./.github/workflows/_dotnet-publish-template.yml
+    with:
+      filename: Holos4-lib
