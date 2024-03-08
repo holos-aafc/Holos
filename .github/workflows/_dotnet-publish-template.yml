@@ -20,8 +20,9 @@ jobs:
         files: H.Core/
         dest: ${{ inputs.filename }}.zip
 
-    - name: Add SHORT_SHA env property with commit short sha
-      run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+    - name: Set short SHA
+      id: vars
+      run: echo "sha_short=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_OUTPUT
 
     - name: Create Draft Release
       id: create_release
@@ -29,8 +30,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${SHORT_SHA}
-        release_name: Holos 4 - ${{ github.event.pull_request.created_at }}
+        tag_name: ${{ steps.vars.outputs.sha_short }}
+        release_name: Holos 4 - ${{ steps.vars.outputs.sha_short }}
         draft: true
         prerelease: false
 
