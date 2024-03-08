@@ -1,3 +1,5 @@
+name: '[Reusable] Publish new release'
+
 on:
   workflow_call:
     inputs:
