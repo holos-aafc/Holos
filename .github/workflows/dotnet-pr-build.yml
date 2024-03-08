@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
-    uses: ./dotnet-build-template.yml
+    uses: ./.github/workflows/_dotnet-build-template.yml
     with:
       configuration: Debug
+      solution: Holos.sln
