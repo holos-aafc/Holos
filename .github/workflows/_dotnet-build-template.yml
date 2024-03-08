@@ -1,0 +1,42 @@
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        type: string
+
+jobs:
+  reusable_workflow_job:
+    runs-on:  windows-2019
+    env:
+      Solution_Name: Holos.sln
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0        
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1
+
+    - name: Restore nuget packages
+      run: msbuild $env:Solution_Name /t:Restore /m
+      env:
+        Configuration: ${{ inputs.configuration }}
+
+    - name: Build solution
+      run: msbuild $env:Solution_Name /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
+      env:
+        Configuration: ${{ inputs.configuration }}
+
+    - name: Run Tests
+      run: vstest.console.exe ./**/bin/${{ inputs.configuration }}/H.*.Test.dll /Parallel
+
+    # - name: Upload build artifacts
+    #   if: ${{ inputs.configuration == 'Release' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: Holos4-lib
+    #     path: '**/H.Core/bin/*'
