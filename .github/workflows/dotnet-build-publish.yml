@@ -10,7 +10,8 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        # Only do release build. Doing both Debug and Release causes file access error as both will attempt to write to climate data file at the same time
+        configuration: [Release]
     runs-on:  windows-2019
     env:
       Solution_Name: Holos.sln
@@ -38,7 +39,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel /InIsolation
+      run: vstest.console.exe ./**/bin/${{ matrix.configuration }}/H.*.Test.dll /Parallel
 
     - name: Upload build artifacts
       if: ${{ matrix.configuration == 'Release' }}
