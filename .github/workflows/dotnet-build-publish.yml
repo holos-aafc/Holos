@@ -2,7 +2,7 @@ name: Build and publish new release
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "nuget-package" ] # TODO: for testing, set back to main!
 
 jobs:
   build:
@@ -15,5 +15,11 @@ jobs:
   publish:
     needs: build
     uses: ./.github/workflows/_dotnet-publish-template.yml
+    with:
+      filename: Holos4-lib
+
+  nuget:
+    needs: build
+    uses: ./.github/workflows/_dotnet-nuget-template.yml
     with:
       filename: Holos4-lib

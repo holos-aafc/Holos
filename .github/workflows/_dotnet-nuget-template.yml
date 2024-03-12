@@ -1,0 +1,27 @@
+name: '[Reusable] Publish new release'
+
+on:
+  workflow_call:
+    inputs:
+      filename:
+        type: string
+
+jobs:
+  reusable_workflow_job:
+    runs-on:  windows-2019
+    steps:
+    - name: "Download build"
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.filename }}
+
+    - name: Build solution
+      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.3.$(Rev:.r).$(BuildID) /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
+      env:
+        Configuration: ${{ inputs.configuration }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Holos4-nuget-pkg
+        path: '**/H.Core/bin/aafc.holos*.pkg'
