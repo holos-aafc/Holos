@@ -1,4 +1,4 @@
-name: '[Reusable] Publish new release'
+name: '[Reusable] Pack and publish nuget package'
 
 on:
   workflow_call:
@@ -8,15 +8,21 @@ on:
 
 jobs:
   reusable_workflow_job:
-    runs-on:  windows-2019
+    runs-on:  windows-latest
     steps:
+    - name: Set current date as env variable
+      run: echo "now=$(date +'%Y%m%dT.%H%M%S')" >> $GITHUB_ENV
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
     - name: "Download build"
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.filename }}
 
     - name: Build solution
-      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.3.$(Rev:.r).$(BuildID) /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
+      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.4.$now /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
       env:
         Configuration: ${{ inputs.configuration }}
 

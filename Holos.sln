@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_actions", "_actions", "{77
 		.github\workflows\dotnet-build-publish.yml = .github\workflows\dotnet-build-publish.yml
 		.github\workflows\dotnet-pr-build.yml = .github\workflows\dotnet-pr-build.yml
 		.github\workflows\_dotnet-build-template.yml = .github\workflows\_dotnet-build-template.yml
+		.github\workflows\_dotnet-nuget-template.yml = .github\workflows\_dotnet-nuget-template.yml
 		.github\workflows\_dotnet-publish-template.yml = .github\workflows\_dotnet-publish-template.yml
 	EndProjectSection
 EndProject
