@@ -5,17 +5,20 @@ on:
     inputs:
       configuration:
         type: string
-      solution:
-        type: string
       filename:
         type: string
 
 jobs:
   reusable_workflow_job:
-    runs-on:  windows-latest
-    env:
-      Solution_Name: Holos.sln
+    runs-on:  windows-latest    
     steps:
+    
+    - name: Get date/time
+      id: t1
+      uses: Kaven-Universe/github-action-current-date-time@v1.4.0
+      with:
+        format: "YYYYMMDD.HHmm"
+
     - name: Checkout
       uses: actions/checkout@v4
       with:
@@ -28,12 +31,12 @@ jobs:
     #   uses: darenm/Setup-VSTest@v1
 
     - name: Restore nuget packages
-      run: msbuild ${{ inputs.solution }} /t:Restore /m
+      run: msbuild H.Core/H.Core.csproj /t:Restore /m
       env:
         Configuration: ${{ inputs.configuration }}
 
     - name: Build solution
-      run: msbuild ${{ inputs.solution }} /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
+      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.0.${{ steps.t1.outputs.time }} /p:Configuration=${{ inputs.configuration }} /m
       env:
         Configuration: ${{ inputs.configuration }}
         

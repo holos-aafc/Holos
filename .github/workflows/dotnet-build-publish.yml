@@ -9,7 +9,6 @@ jobs:
     uses: ./.github/workflows/_dotnet-build-template.yml
     with:
       configuration: Release
-      solution: Holos.sln
       filename: Holos4-lib
       
   publish:

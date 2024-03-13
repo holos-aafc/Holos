@@ -38,6 +38,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+  <Target Name="IncludeReferencedProjectInPackage" Condition="'$(IncludeBuildOutput)' != 'false'">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\H.Content.dll" PackagePath="lib/$(TargetFramework)" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\H.Infrastructure.dll" PackagePath="lib/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
