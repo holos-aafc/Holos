@@ -5,42 +5,39 @@ on:
     inputs:
       configuration:
         type: string
+      solution:
+        type: string
       filename:
         type: string
 
 jobs:
   reusable_workflow_job:
-    runs-on:  windows-latest    
+    runs-on:  windows-latest
+    env:
+      Solution_Name: Holos.sln
     steps:
-    
-    - name: Get date/time
-      id: t1
-      uses: Kaven-Universe/github-action-current-date-time@v1.4.0
-      with:
-        format: "YYYYMMDD.HHmm"
-
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 0        
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
+    # TODO: remove unit tests for now, to speed up testing
     # - name: Setup VSTest
     #   uses: darenm/Setup-VSTest@v1
 
     - name: Restore nuget packages
-      run: msbuild H.Core/H.Core.csproj /t:Restore /m
+      run: msbuild ${{ inputs.solution }} /t:Restore /m
       env:
         Configuration: ${{ inputs.configuration }}
 
     - name: Build solution
-      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.0.${{ steps.t1.outputs.time }} /p:Configuration=${{ inputs.configuration }} /m
+      run: msbuild ${{ inputs.solution }} /p:platform="Any CPU" /p:Configuration=$env:Configuration /m
       env:
         Configuration: ${{ inputs.configuration }}
-        
-    # TODO: remove unit tests for now, to speed up testing
+
     # - name: Run Tests
     #   run: vstest.console.exe ./**/H.Core.Test/bin/${{ inputs.configuration }}/H.Core.Test.dll ./**/H.Infrastructure.Test/bin/${{ inputs.configuration }}/H.Infrastructure.Test.dll ./**/H.CLI.Test/bin/${{ inputs.configuration }}/H.CLI.Test.dll /Parallel
 
