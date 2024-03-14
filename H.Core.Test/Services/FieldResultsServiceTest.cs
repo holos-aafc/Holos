@@ -1775,6 +1775,12 @@ namespace H.Core.Test.Services
             Assert.AreEqual(100, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
+        [TestMethod]
+        public void SetSpinUpTillageTypeTest()
+        {
+
+        }
+
         #endregion
     }
 }

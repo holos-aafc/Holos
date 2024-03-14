@@ -133,6 +133,7 @@ namespace H.Core.Models
 
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
+        private TillageType _runInPeriodTillageType;
 
         private double _defaultBiodegradableFractionDairyManure;
         private double _defaultBiodegradableFractionSwineManure;
@@ -140,7 +141,6 @@ namespace H.Core.Models
         private double _defaultBiodegradableFractionGreenWaste;
 
         // Irrigation
-
         private PumpType _defaulPumpType;
         private double _pumpEmissionsFactor;
 
@@ -263,7 +263,7 @@ namespace H.Core.Models
 
             // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
             this.DefaultRunInPeriod = 15;
-
+            this.RunInPeriodTillageType = TillageType.Reduced;
             this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
 
             // AD
@@ -983,6 +983,12 @@ namespace H.Core.Models
         {
             get => _defaultNitrogenFixation;
             set => SetProperty(ref _defaultNitrogenFixation, value);
+        }
+
+        public TillageType RunInPeriodTillageType
+        {
+            get => _runInPeriodTillageType;
+            set => SetProperty(ref _runInPeriodTillageType, value);
         }
 
         #endregion

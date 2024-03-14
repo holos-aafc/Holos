@@ -528,7 +528,40 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
+            this.SetRunInPeriodTillageType(mainCrops, runInPeriodItems, farm);
+
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
+        }
+
+        public void SetRunInPeriodTillageType(List<CropViewItem> mainCrops, List<CropViewItem> runInPeriodItems, Farm farm)
+        {
+            if (farm.UseCustomRunInTillage)
+            {
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = farm.Defaults.RunInPeriodTillageType;
+                }
+
+                return;
+            }
+
+            if (mainCrops.Select(x => x.TillageType).Distinct().Count() == 1)
+            {
+                // There is only one tillage type, use it for all run in period items
+                var tillageType = mainCrops.First().TillageType;
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = tillageType;
+                }
+            }
+            else
+            {
+                // Use the 'average' of reduced tillage
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = TillageType.Reduced;
+                }
+            }
         }
 
         /// <summary>

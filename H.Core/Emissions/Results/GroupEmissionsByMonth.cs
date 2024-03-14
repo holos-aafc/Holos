@@ -533,6 +533,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.5.2-7
         /// (kg N)
         /// </summary>
         public double MonthlyNitrogenAvailableForLandApplication

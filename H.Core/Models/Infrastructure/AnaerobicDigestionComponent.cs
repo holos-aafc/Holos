@@ -72,6 +72,8 @@ namespace H.Core.Models.Infrastructure
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
 
+            
+
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
             ManagementPeriodViewItems = new ObservableCollection<ADManagementPeriodViewItem>();

@@ -193,7 +193,8 @@ namespace H.Core.Providers.Climate
         {
             var path = outputPath;
 
-            var startYear = farm.GetStartYearOfEarliestRotation();
+            var runInPeriodYears = farm.Defaults.DefaultRunInPeriod;
+            var startYear = farm.GetStartYearOfEarliestRotation() - runInPeriodYears;
             var endYear = farm.GetEndYearOfEarliestRotation();
 
             string[] columnNames = {

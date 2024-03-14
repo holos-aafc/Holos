@@ -311,7 +311,6 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Equation 4.4.1-1
         /// </summary>
         /// <param name="totalCarbonDioxideEmissionsFromFallowingFuelUse"></param>
         /// <param name="totalCarbonDioxideEmissionsFromCroppingHerbicideProduction"></param>

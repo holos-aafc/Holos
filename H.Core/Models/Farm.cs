@@ -81,6 +81,7 @@ namespace H.Core.Models
         private bool _isBasicMode;
         private bool _showAdditionalInformationInADView;
         private bool _isCommandLineMode;
+        private bool _useCustomRunInTillage;
 
         private Defaults _defaults;
         private Province _province;
@@ -628,6 +629,12 @@ namespace H.Core.Models
         {
             get => _isCommandLineMode;
             set => SetProperty(ref _isCommandLineMode, value);
+        }
+
+        public bool UseCustomRunInTillage
+        {
+            get => _useCustomRunInTillage;
+            set => SetProperty(ref _useCustomRunInTillage, value);
         }
 
         #endregion
