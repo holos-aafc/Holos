@@ -314,6 +314,8 @@ namespace H.Core.Calculators.Carbon
             result.AboveGroundResidueDryMatter = runInPeriodItems.Average(x => x.AboveGroundResidueDryMatter);
             result.BelowGroundResidueDryMatter = runInPeriodItems.Average(x => x.BelowGroundResidueDryMatter);
 
+            result.TillageType = runInPeriodItems.First().TillageType;
+
             return result;
         }
 

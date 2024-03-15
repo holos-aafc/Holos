@@ -5,7 +5,7 @@
 
 Holos est un logiciel de modélisation agricole intégré qui évalue les émissions de gaz à effet de serre (GES) en fonction des renseignements saisis pour une exploitation agricole donnée. Il vise surtout à mettre à l'essai diverses façons de réduire les émissions de GES produites par les exploitations agricoles. Le logiciel est offert gratuitement aux utilisateurs.
 
-Holos est un programme logiciel de modélisation agricole intégré qui évalue les émissions de gaz à effet de serre
+Holos est un programme logiciel de modélisation agricole intégré qui évalue les émissions de gaz à effet de serre.
 
 Les utilisateurs peuvent choisir les scénarios et les pratiques agricoles qui correspondent le mieux à leur exploitation, puis modifier les pratiques en question afin d'observer les effets sur les émissions de GES. Par exemple, il est possible d'effectuer des modifications comme un changement des aliments du bétail, une réduction du travail du sol ou l'ajout de plantes fourragères vivaces à la rotation de cultures.
 
