@@ -1618,12 +1618,13 @@ namespace H.Content.Properties {
         ///Dairy cattle,64,18,16,2.9,-9
         ///Sheep and lambs,0.1,34,66,0.02,1.8 (2)
         ///Swine,97,3,0,0,-9
-        ///Poultry - pullets/broilers,7,92,0.6,0.6,0.08 (2)
-        ///Poultry - layers,7,92,0.6,0.6,0.12 (2)
-        ///Poultry - turkeys,7,92,0.6,0.6,0.32 (2)
-        ///Poultry - ducks/geese,7,92,0.6,0.6,0.2 (3)(4)
-        ///Llamas (5),0.03,28,72,0.02,1.8
-        ///Alpacas (5),0.03,28,72,0.02 [rest of string was truncated]&quot;;.
+        ///Chicken pullets,7,92,0.6,0.6,0.08 (2)
+        ///Chicken cockerels,7,92,0.6,0.6,0.08 (2)
+        ///Chicken broilers,7,92,0.6,0.6,0.08 (2)
+        ///Chicken layers,7,92,0.6,0.6,0.12 (2)
+        ///Turkeys,7,92,0.6,0.6,0.32 (2)
+        ///Ducks,7,92,0.6,0.6,0.2 (3)
+        ///Geese,7,92,0.6,0.6,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_29_Percentage_Total_Manure_Produced_In_Systems {
             get {
@@ -1905,17 +1906,11 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVERAGE MONTHLY INDOOR BARN TEMPERATURES SUMMARY (OC),,,,
-        ///,,,,
-        ///Month,PRAIRIES,ONT,QB,COASTAL
-        ///Jan ,2.767742149,4.244800107,12.53970509,6.201752804
-        ///Feb,2.376671756,4.204597305,12.35603299,6.552435083
-        ///Mar,4.950975575,7.458748373,13.4045558,6.918192633
-        ///Apr,7.786454463,10.93424092,14.88614377,9.242312884
-        ///May,12.21275064,15.07116995,17.19358786,12.96939757
-        ///Jun,17.70633217,21.242531,20.77108073,19.1135931
-        ///Jul,19.00274808,21.55479818,20.61752835,21.3558599
-        ///Aug,17.92325531,22.72447713,21.53815748,21.582944 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to AVERAGE MONTHLY INDOOR BARN TEMPERATURES SUMMARY (OC),,,,,,,,,,,,,
+        ///,,Jan ,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+        ///British Columbia,,6.201752804,6.552435083,6.918192633,9.242312884,12.96939757,19.1135931,21.3558599,21.58294402,17.90813532,13.32843929,8.99802474,7.377690249
+        ///Alberta,,2.767742149,2.376671756,4.950975575,7.786454463,12.21275064,17.70633217,19.00274808,17.92325531,14.18188056,7.394590455,4.870277062,3.824933543
+        ///Saskatchewan,,2.767742149,2.376671756,4.950975575,7.786454463,12.21275064,17.7 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_63_Indoor_Barn_Temperatures {
             get {
