@@ -1,0 +1,50 @@
+name: '[Reusable] Pack and publish nuget package'
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        type: string
+
+jobs:
+  reusable_workflow_job:
+    runs-on:  windows-latest
+    steps:
+    
+    - name: Get date/time
+      id: t1
+      uses: Kaven-Universe/github-action-current-date-time@v1.4.0
+      with:
+        format: "YYYYMMDD.HHmm"
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Restore nuget packages
+      run: msbuild H.Core/H.Core.csproj /t:Restore /m
+
+    - name: Build H.Content
+      run: msbuild H.Content/H.Content.csproj /t:pack /p:Version=4.0.${{ steps.t1.outputs.time }} /p:Configuration=${{ inputs.configuration }} /m /p:TargetFramework=net6
+
+    - name: Build H.Infrastructure
+      run: msbuild H.Infrastructure/H.Infrastructure.csproj /t:pack /p:Version=4.0.${{ steps.t1.outputs.time }} /p:Configuration=${{ inputs.configuration }} /m /p:TargetFramework=net6
+
+    - name: Build H.Core
+      run: msbuild H.Core/H.Core.csproj /t:pack /p:Version=4.0.${{ steps.t1.outputs.time }} /p:Configuration=${{ inputs.configuration }} /m /p:TargetFramework=net6
+
+    - name: Add registry
+      run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+
+    - name: Publish package
+      run: dotnet nuget push "*/**/h.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Holos4-nuget-pkg
+        path: '*/**/h.*.nupkg'

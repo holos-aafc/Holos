@@ -44,5 +44,5 @@ jobs:
       if: ${{ inputs.configuration == 'Release' }}
       uses: actions/upload-artifact@v4
       with:
-        name: Holos4-lib
+        name: ${{ inputs.filename }}
         path: '**/H.Core/bin/*'
