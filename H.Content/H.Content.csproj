@@ -35,15 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -153,7 +147,6 @@
     <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
     <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
     <None Include="Documentation\User Guide\User Guide.md" />
-    <None Include="packages.config" />
     <None Include="Resources\ab_car_to_slc.csv" />
     <None Include="Resources\ab_default_yields.csv" />
     <None Include="Resources\Agt_Ratios.csv" />
@@ -303,6 +296,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\GitHubGuide\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Core">
+      <Version>7.2.0.1422</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
