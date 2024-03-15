@@ -184,17 +184,12 @@
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
     <Compile Include="Services\LandManagement\IrrigationServiceTest.cs" />
     <Compile Include="Services\ManureServiceTest.cs" />
-    <Compile Include="Services\OCR\OcrServiceTests.cs" />
     <Compile Include="Services\OtherLiveStockResultsServiceTest.cs" />
     <Compile Include="Services\PoultryResultsServiceTest.cs" />
-    <Compile Include="Converters\InputConversionTest.cs" />
     <Compile Include="Services\SheepResultsServiceTest.cs" />
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
     <Compile Include="UnitTestBase.cs" />
-    <Compile Include="ViewModels\ShelterbeltViewModelTest.cs" />
-    <Compile Include="ViewModels\RowViewModelTest.cs" />
-    <Compile Include="ViewModels\TreeGroupViewModelTest.cs" />
     <Compile Include="ViewModels\CircumferenceViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
