@@ -110,7 +110,7 @@ namespace H.Core.Providers.Animals
         #region Footnotes
 
         /*
-         * Footnote 1: Daily VS excretion rates were estimated using default rates from IPCC (2019), Table 10.13a
+         * Footnote 1: Daily VS excretion rates were estimated based on average animal body weight and default VS excretion rates per 1,000 kg liveweight from IPCC (2019), Table 10.13a
             (kg VS (1,000 kg animal mass)-1 day-1). Average weights for each animal group (except pullets) derived 
             from ECCC (2022), Tables A3.4-14 and A3.4-25. Average weight for pullets is based on 
             Pelletier (2017): initial weight (0.043 kg) + (final weight (1.37 kg) – initial weight (0.043 kg))/2 = 0.7065 kg.
