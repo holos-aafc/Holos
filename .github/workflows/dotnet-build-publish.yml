@@ -13,10 +13,11 @@ jobs:
       filename: Holos4-lib
 
   nuget:
+    needs: build
     uses: ./.github/workflows/_dotnet-nuget-template.yml
     with:
-      filename: Holos4-lib
-      
+      configuration: Release
+
   publish:
     needs: build
     uses: ./.github/workflows/_dotnet-publish-template.yml
