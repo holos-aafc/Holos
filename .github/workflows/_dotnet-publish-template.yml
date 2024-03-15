@@ -1,0 +1,51 @@
+name: '[Reusable] Publish new release'
+
+on:
+  workflow_call:
+    inputs:
+      filename:
+        type: string
+
+jobs:
+  reusable_workflow_job:
+    runs-on:  ubuntu-latest
+    steps:
+    - name: "Download build"
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.filename }}
+
+    - uses: vimtor/action-zip@v1.2
+      with:
+        files: H.Core/
+        dest: ${{ inputs.filename }}.zip
+
+    - name: Set short SHA
+      id: vars
+      run: echo "sha_short=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_OUTPUT
+
+    - name: Create Draft Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.vars.outputs.sha_short }}
+        release_name: Holos 4 - ${{ steps.vars.outputs.sha_short }}
+        draft: true
+        prerelease: false
+
+    - uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ inputs.filename }}.zip
+        asset_name: ${{ inputs.filename }}.zip
+        asset_content_type: application/zip
+
+    - uses: eregon/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}

@@ -1,0 +1,19 @@
+name: Build and publish new release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_dotnet-build-template.yml
+    with:
+      configuration: Release
+      solution: Holos.sln
+      filename: Holos4-lib
+
+  publish:
+    needs: build
+    uses: ./.github/workflows/_dotnet-publish-template.yml
+    with:
+      filename: Holos4-lib

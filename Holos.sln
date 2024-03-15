@@ -23,7 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DDD11503
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_actions", "_actions", "{77B16CA8-F32F-4CA8-9F81-D556AC481930}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\dotnet-build.yml = .github\workflows\dotnet-build.yml
+		.github\workflows\dotnet-build-publish.yml = .github\workflows\dotnet-build-publish.yml
+		.github\workflows\dotnet-pr-build.yml = .github\workflows\dotnet-pr-build.yml
+		.github\workflows\_dotnet-build-template.yml = .github\workflows\_dotnet-build-template.yml
+		.github\workflows\_dotnet-publish-template.yml = .github\workflows\_dotnet-publish-template.yml
 	EndProjectSection
 EndProject
 Global
