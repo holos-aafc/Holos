@@ -501,26 +501,10 @@ namespace H.Core.Services.LandManagement
             var residueData = this.GetResidueData(viewItem, farm);
             if (residueData != null)
             {
-                if (viewItem.CropType.IsPerennial())
-                {
-                    /*
-                     * The biomass values for perennials are a special case. The residue table has 0 values (for the R_p) for all perennial types (but values for R_s, R_r, and R_e).
-                     * With perennials the 'product' is the straw and so we need to transfer the value of Rs from the residue table to the Rp property of the crop view item since
-                     * the calculations for C_r and C_e use the R_p value which would be 0 if we didn't transfer values here.
-                     */
-
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassStraw;  // Transfer values
-                    viewItem.BiomassCoefficientStraw = 0;                                   // Not applicable when considering perennials
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
-                else
-                {
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
-                    viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
+                viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
+                viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
+                viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
+                viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
             }
         }
 

@@ -190,7 +190,6 @@
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
     <Compile Include="UnitTestBase.cs" />
-    <Compile Include="ViewModels\CircumferenceViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

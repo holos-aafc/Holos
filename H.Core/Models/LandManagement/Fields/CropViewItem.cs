@@ -218,6 +218,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// A collection of hay import events that occurs when animals grazing on pasture need additional forage for consumption.
         /// </summary>
         public ObservableCollection<HayImportViewItem> HayImportViewItems { get; set; } = new ObservableCollection<HayImportViewItem>();
+
         public ObservableCollection<HarvestViewItem> HarvestViewItems { get; set; } = new ObservableCollection<HarvestViewItem>();
 
         /// <summary>

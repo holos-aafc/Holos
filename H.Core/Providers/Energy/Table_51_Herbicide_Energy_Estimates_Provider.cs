@@ -61,6 +61,12 @@ namespace H.Core.Providers.Energy
         {
             var soilLookupType = soilCategory.GetSimplifiedSoilCategory();
 
+            // No summer fallow in table
+            if (cropType.IsFallow())
+            {
+                cropType = CropType.Fallow;
+            }
+
             Table_51_Herbicide_Energy_Estimates_Data data = Data.Find(x => (x.Province == provinceName) && (x.SoilFunctionalCategory == soilLookupType) 
                                                             && (x.TillageType == tillageType) && (x.CropType == cropType));
 
