@@ -1057,7 +1057,7 @@ namespace H.Core.Test.Calculators
                 farm);
 
             // For perennials, the C input from extraroots in the current year cannot be less than the carbon input from extraroots in the previous year
-            Assert.AreEqual(50, result);
+            Assert.AreEqual(26.6, result, 0.1);
         }
 
         #endregion

@@ -644,12 +644,13 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.1.2-31
             var carbonInputFromExtraroots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
 
-            // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
-            {
-                // Equation 2.1.2-33
-                carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
-            }
+            // Taken out now as the extra roots only ever depend on the C_p and not the extraroots from the previous year
+            //// We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
+            //if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
+            //{
+            //    // Equation 2.1.2-33
+            //    carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
+            //}
 
             return carbonInputFromExtraroots;
         }
