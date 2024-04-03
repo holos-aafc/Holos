@@ -722,6 +722,8 @@ namespace H.Core.Services.LandManagement
                                 var emissionResultsForPeriod =  this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponentBase, managementPeriod);
                                 totalCarbonLostForAllManagementPeriods += emissionResultsForPeriod.TotalCarbonUptakeByAnimals();
 
+                                
+
                                 // Used for reference
                                 var dmi = emissionResultsForPeriod.TotalDmiUptakeByAnimals();
                             }

@@ -51,6 +51,16 @@ namespace H.Core.Services.LandManagement
                 result.HarvestViewItems.Add(copiedHarvestViewItem);
             }
 
+            foreach (var grazingViewItem in viewItem.GrazingViewItems)
+            {
+                var copiedGrazingViewItem = _harvestViewItemMapper.Map<GrazingViewItem, GrazingViewItem>(grazingViewItem);
+
+                // We need to update the year so that the current years' harvest items are copied back in time
+                copiedGrazingViewItem.DateCreated = new DateTime(year, grazingViewItem.DateCreated.Month, grazingViewItem.DateCreated.Day);
+
+                result.GrazingViewItems.Add(copiedGrazingViewItem);
+            }
+
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
             {
                 var copiedHayImportViewItem = _hayImportViewItemMapper.Map<HayImportViewItem, HayImportViewItem>(hayImportViewItem);

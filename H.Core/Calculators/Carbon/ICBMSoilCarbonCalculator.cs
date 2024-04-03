@@ -1087,7 +1087,8 @@ namespace H.Core.Calculators.Carbon
         {
             var lossesFromGrazing = viewItem.TotalCarbonLossesByGrazingAnimals;
 
-            var denominator = 1 - (viewItem.ForageUtilizationRate / 100.0);
+            var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+            var denominator = 1 - (averageUtilizationRate / 100.0);
             if (denominator < 0)
             {
                 denominator = 1;
@@ -1104,6 +1105,10 @@ namespace H.Core.Calculators.Carbon
             // Check for negative values here
 
             var result = viewItem.PlantCarbonInAgriculturalProduct -(viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
+            if (result < 0)
+            {
+                return viewItem.PlantCarbonInAgriculturalProduct;
+            }
 
             return result;
         }
