@@ -5705,4 +5705,7 @@
   <data name="LabelPrecipitation" xml:space="preserve">
     <value>Precipitation</value>
   </data>
+  <data name="MessageTheSelectedYieldAssignmentMethod" xml:space="preserve">
+    <value>Please note that the selected yield assignement method chosen will be used for all fields on this farm. Select the  'Custom Yield' or 'Input File' assignement methods to modify the yields for individual fields</value>
+  </data>
 </root>

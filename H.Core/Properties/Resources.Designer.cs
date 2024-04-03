@@ -12823,6 +12823,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note that the selected yield assignement method chosen will be used for all fields on this farm. Select the  &apos;Custom Yield&apos; or &apos;Input File&apos; assignement methods to modify the yields for individual fields.
+        /// </summary>
+        public static string MessageTheSelectedYieldAssignmentMethod {
+            get {
+                return ResourceManager.GetString("MessageTheSelectedYieldAssignmentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This harvest amount cannot be reduced because it is being used as supplemental feed. To reduce this harvest, first update the supplemental feeding amounts for animals grazing on this field. Amount of bales harvested has been reset to the previous value..
         /// </summary>
         public static string MessageThisHarvestCannotBeReduced {
