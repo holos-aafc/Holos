@@ -12778,7 +12778,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on harvest for perennials. This can be changed on the &apos;Residue Tab&apos;.
+        ///   Looks up a localized string similar to It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on termination for perennials. This can be changed on the &apos;Residue Tab&apos;.
         /// </summary>
         public static string MessageRootTurnOverPerennials {
             get {

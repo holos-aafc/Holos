@@ -3360,7 +3360,7 @@
     <value>Year {0} of a {1}-year perennial stand</value>
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
-    <value>It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on harvest for perennials. This can be changed on the 'Residue Tab'</value>
+    <value>It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on termination for perennials. This can be changed on the 'Residue Tab'</value>
   </data>
   <data name="MessageAllBalesProducedByFarmHaveBeenUsed" xml:space="preserve">
     <value>All bales on this farm have been used. To add more, go to the 'Harvest' tab for any field to add another harvest which will add more available bales to the farm. You can also change the 'Source of bales' to 'Off farm' to add bales that were not produced on this farm</value>

@@ -4203,7 +4203,7 @@
     <value>Veuillez examiner les informations sélectionnées sur le régime alimentaire, le poids corporel et le gain quotidien pour vous assurer que les animaux répondent à leurs besoins énergétiques quotidiens.</value>
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
-    <value>on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte, puis 100 % lors de la récolte des plantes vivaces. ces données peuvent être modifées à l’onglet « résidus ». </value>
+    <value>It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on termination for perennials. This can be changed on the 'Residue Tab'</value>
   </data>
   <data name="MessageShelterbeltComponentNotAvailable" xml:space="preserve">
     <value>Les données sur la zone de rusticité de ce végétal ne sont pas disponibles pour ce polygone.  Par conséquent, la composante pour les exploitations avec brise-vent ne sera pas disponible. Les zones de rusticité des végétaux à l’extérieur de l’intervalle 2A – 4B ne peuvent pas être modélisées par manque de données disponibles.</value>
