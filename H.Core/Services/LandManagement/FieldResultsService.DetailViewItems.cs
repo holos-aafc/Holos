@@ -23,9 +23,9 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Map properties from the component selection screen view item to the detail screen view item.
         /// </summary>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> to copy from.</param>
+        /// <param name="viewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> to copy from.</param>
         /// <param name="year">When creating historical view items, this value will be used to set the year of any associated <see cref="ManureApplicationViewItem"/>s etc.</param>
-        /// <returns>A duplicated <see cref="CropViewItem"/></returns>
+        /// <returns>A duplicated <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/></returns>
         public CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year)
         {
             var result = _detailViewItemMapper.Map<CropViewItem, CropViewItem>(viewItem);
@@ -147,11 +147,13 @@ namespace H.Core.Services.LandManagement
                 {
                     this.CreateDetailViewItems(projectedComponent as FieldSystemComponent, farm);
                 }
+
+               this.PostProcessPerennials(component, farm);
             }
         }
 
         /// <summary>
-        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="CropViewItem.IsSecondaryCrop"/> to determine which view item
+        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop"/> to determine which view item
         /// is the main crop for the particular year.
         /// </summary>
         public CropViewItem GetMainCropForYear(

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
 
@@ -210,6 +211,32 @@ namespace H.Core.Services.LandManagement
             this.AssignPerennialViewItemsDescription(viewItems);
             this.AssignPerennialRootsReturned(viewItems);
             this.AssignTillageToFinalYearOfPerennialStands(viewItems);
+        }
+
+        public void PostProcessPerennials(FieldSystemComponent fieldSystemComponent, Farm farm)
+        {
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            if (stageState == null)
+            {
+                return;
+            }
+
+            var viewItemsForField = stageState.DetailsScreenViewCropViewItems.Where(x => x.FieldSystemComponentGuid == fieldSystemComponent.Guid).OrderBy(x => x.Year).ToList();
+
+            foreach (var cropViewItem in viewItemsForField)
+            {
+                var nextYear = cropViewItem.Year + 1;
+                var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear) != null;
+
+                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false)
+                {
+                    cropViewItem.PercentageOfRootsReturnedToSoil = 30;
+                }
+                else
+                {
+                    // Leave whatever was set for the last year (by default this will be 100% set at initialization)
+                }
+            }
         }
     }
 }

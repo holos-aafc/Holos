@@ -15,7 +15,7 @@ namespace H.Core.Services.LandManagement
     {
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
-        /// of the <see cref="CropViewItem"/> should be set here.
+        /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
         /// </summary>
         public void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
         {
@@ -642,7 +642,7 @@ namespace H.Core.Services.LandManagement
         /// Barley. We check in the <see cref="AssignSystemDefaults"/> method if the crop is a silage crop without
         /// default data, if yes, this method is called to calculate the yield of that crop.
         /// </summary>
-        /// <param name="silageCropViewItem">The <see cref="CropViewItem"/> representing the silage crop. </param>
+        /// <param name="silageCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> representing the silage crop. </param>
         /// <param name="farm">The current farm of the user.</param>
         public void AssignDefaultSilageCropYield(CropViewItem silageCropViewItem, Farm farm)
         {
@@ -679,7 +679,7 @@ namespace H.Core.Services.LandManagement
         /// 
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
-        /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
+        /// <param name="grainCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for the grain crop.</param>
         /// <returns>The estimated yield (dry matter) for a silage crop</returns>
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
         {

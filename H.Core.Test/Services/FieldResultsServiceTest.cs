@@ -1766,7 +1766,27 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void SetSpinUpTillageTypeTest()
         {
+        }
 
+        [TestMethod]
+        public void PostProcessPerennialsTest()
+        {
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            var stageState = farm.GetFieldSystemDetailsStageState();
+            farm.StageStates.Add(stageState);
+
+            var viewItem1 = new CropViewItem() {FieldSystemComponentGuid = field.Guid, CropType = CropType.TameGrass, YearInPerennialStand = 1, PerennialStandLength = 2, Year = 2000};
+            var viewItem2 = new CropViewItem() { FieldSystemComponentGuid = field.Guid, CropType = CropType.TameGrass, YearInPerennialStand = 2, PerennialStandLength = 2, Year = 2001, PercentageOfRootsReturnedToSoil = 100};
+            var viewItem3 = new CropViewItem() { FieldSystemComponentGuid = field.Guid, CropType = CropType.RangelandNative, YearInPerennialStand = 1, PerennialStandLength = 2, Year = 2002 };
+            var viewItem4 = new CropViewItem() { FieldSystemComponentGuid = field.Guid , CropType = CropType.RangelandNative, YearInPerennialStand = 1, PerennialStandLength = 2, Year = 2003, PercentageOfRootsReturnedToSoil = 1};
+
+            stageState.DetailsScreenViewCropViewItems.AddRange(new List<CropViewItem>() {viewItem1, viewItem2, viewItem3, viewItem4});
+
+            _resultsService.PostProcessPerennials(field, farm);
+
+            Assert.AreEqual(100, viewItem2.PercentageOfRootsReturnedToSoil);
+            Assert.AreEqual(1, viewItem4.PercentageOfRootsReturnedToSoil);
         }
 
         #endregion
