@@ -286,6 +286,7 @@
     <Compile Include="Models\Infrastructure\ADManagementPeriodViewItem.cs" />
     <Compile Include="Models\Infrastructure\CropResidueSubstrateViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItem.Perennial.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />
