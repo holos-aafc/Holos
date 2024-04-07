@@ -643,8 +643,9 @@ namespace H.Core.Models
 
         public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
         {
-            var itemsByYear = this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrasslands).ToList();
-            var area = itemsByYear.Sum(x => x.Area);
+            var fields = this.FieldSystemComponents.Where(x => x.CropViewItems.All(y => y.CropType.IsNativeGrassland() == includeNativeGrasslands));
+
+            var area = fields.Sum(x => x.FieldArea);
             if (area > 0)
             {
                 return area;

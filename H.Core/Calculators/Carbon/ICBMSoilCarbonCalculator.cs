@@ -1104,7 +1104,7 @@ namespace H.Core.Calculators.Carbon
         {
             // Check for negative values here
 
-            var result = viewItem.PlantCarbonInAgriculturalProduct -(viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
+            var result = viewItem.PlantCarbonInAgriculturalProduct - (viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
             if (result < 0)
             {
                 return viewItem.PlantCarbonInAgriculturalProduct;

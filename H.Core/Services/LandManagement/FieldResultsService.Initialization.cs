@@ -220,9 +220,15 @@ namespace H.Core.Services.LandManagement
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
 
-            if (viewItem.HarvestMethod == HarvestMethods.Silage || viewItem.HarvestMethod == HarvestMethods.Swathing)
+            if (viewItem.HarvestMethod == HarvestMethods.Silage)
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 2;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
+            }
+            else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = 30;
                 viewItem.PercentageOfStrawReturnedToSoil = 0;
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }

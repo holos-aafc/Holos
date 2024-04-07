@@ -558,10 +558,17 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var cropViewItem = new CropViewItem() {Year = 2022, Area = 20};
             var farm = new Farm();
+            var field = base.GetTestFieldComponent();
+            field.FieldArea = 100;
+            farm.Components.Add(field);
 
-            var detailViewItem1 = new CropViewItem() {Year = 2022, CropType = CropType.Barley, Area = 100};
-            var detailViewItem2 = new CropViewItem() {Year = 2022, CropType = CropType.Wheat, Area = 200};
-            var detailViewItem3 = new CropViewItem() { Year = 2021 ,CropType = CropType.Beans, Area = 50};
+            var field2 = new FieldSystemComponent();
+            field2.FieldArea = 300;
+            farm.Components.Add(field2);
+
+            var detailViewItem1 = new CropViewItem() {Year = 2022, CropType = CropType.Barley};
+            var detailViewItem2 = new CropViewItem() {Year = 2022, CropType = CropType.Wheat};
+            var detailViewItem3 = new CropViewItem() { Year = 2021 ,CropType = CropType.Beans};
 
             var stageState = new FieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(detailViewItem1);
@@ -572,7 +579,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var result = _sut.GetManureNitrogenRemainingForField(cropViewItem, farm);
 
-            Assert.AreEqual(40, result);
+            Assert.AreEqual(30, result);
         }
 
         #endregion

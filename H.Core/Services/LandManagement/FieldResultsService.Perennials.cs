@@ -86,7 +86,7 @@ namespace H.Core.Services.LandManagement
                     {
                         if (cropViewItem.CropType == CropType.RangelandNative)
                         {
-                            // Rangelands are never harvested and so we continue with 30% root turnover
+                            // Range lands are never harvested and so we continue with 30% root turnover
                             cropViewItem.PercentageOfRootsReturnedToSoil = 30;
                         }
                         else
@@ -226,7 +226,7 @@ namespace H.Core.Services.LandManagement
             foreach (var cropViewItem in viewItemsForField)
             {
                 var nextYear = cropViewItem.Year + 1;
-                var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear) != null;
+                var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear && x.IsSecondaryCrop == false) != null;
 
                 if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false)
                 {
