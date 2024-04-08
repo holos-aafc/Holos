@@ -449,11 +449,11 @@ namespace H.Core.Test.Calculators
                 nextYearViewItems: null,
                 farm: farm);
 
-            // = [(10 * 500) * (1 - 12/100) * (1 - 20/100)] * 0.45
+            // = [(10 * 500) * (12/100) * (1 - 20/100)] * 0.45
             // = (5000 * 0.88 * 0.8) * 0.45
             // = 1584
 
-            Assert.AreEqual(1584, result);
+            Assert.AreEqual(396, result);
         }
 
         #endregion

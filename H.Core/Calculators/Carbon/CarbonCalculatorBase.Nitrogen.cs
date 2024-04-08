@@ -1135,7 +1135,7 @@ namespace H.Core.Calculators.Carbon
 
                 // Total additional carbon that must be added to above ground inputs for the field - NOTE: moisture content is already considered in the above method call and so it
                 // is not included here as it is in the equation from the algorithm document
-                var totalCarbon = (totalDryMatterWeight * (1 - loss)) * currentYearViewItem.CarbonConcentration;
+                var totalCarbon = (totalDryMatterWeight * (loss)) * currentYearViewItem.CarbonConcentration;
 
                 result += totalCarbon;
             }
