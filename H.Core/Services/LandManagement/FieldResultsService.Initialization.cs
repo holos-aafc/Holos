@@ -511,6 +511,14 @@ namespace H.Core.Services.LandManagement
                 viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
                 viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
                 viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
+
+                if (viewItem.HarvestMethod == HarvestMethods.Swathing)
+                {
+                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
+                    viewItem.BiomassCoefficientStraw = 0;
+                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
+                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
+                }
             }
         }
 

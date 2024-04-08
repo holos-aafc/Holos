@@ -289,8 +289,6 @@ namespace H.Core.Test.Services
 
             _resultsService.AssignPerennialStandPositionalYears(
                 viewItems: crops, fieldSystemComponent: component);
-
-
         }
 
         #endregion
@@ -1595,7 +1593,6 @@ namespace H.Core.Test.Services
 
         #endregion
 
-
         [TestMethod]
         public void CalculateCarbonLostFromHayExport()
         {
@@ -1619,6 +1616,7 @@ namespace H.Core.Test.Services
             importingFieldComponent.CropViewItems.Add(importingViewItem);
 
             var farm = new Farm();
+
             farm.Components.Add(importingFieldComponent);
             farm.Components.Add(exportingFieldComponent);
 
@@ -1632,6 +1630,7 @@ namespace H.Core.Test.Services
         {
             var farm = new Farm();
             var fieldSystemComponent = new FieldSystemComponent();
+            fieldSystemComponent.Name = "Test";
             var cropViewItem = new CropViewItem();
 
             var cowCalfComponent = new CowCalfComponent();
@@ -1703,7 +1702,7 @@ namespace H.Core.Test.Services
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
             _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults);
 
-            Assert.AreEqual(30, cropViewItem.TotalCarbonLossesByGrazingAnimals);
+            Assert.AreEqual(75, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
         [TestMethod]
@@ -1730,6 +1729,7 @@ namespace H.Core.Test.Services
             var field = new FieldSystemComponent();
 
             var crop = new CropViewItem();
+
             var manureApplication = new ManureApplicationViewItem();
             manureApplication.AnimalType = AnimalType.Poultry;
             manureApplication.DateOfApplication = date;
@@ -1748,6 +1748,7 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
             var fieldComponent = base.GetTestFieldComponent();
+            fieldComponent.Name = "Test";
             var cropViewItem = base.GetTestCropViewItem();
             fieldComponent.CropViewItems.Add(cropViewItem);
 

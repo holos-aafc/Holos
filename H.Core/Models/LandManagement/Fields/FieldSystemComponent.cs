@@ -381,7 +381,7 @@ namespace H.Core.Models.LandManagement.Fields
                 return false;
             }
 
-            var isMatchingLocation = housingDetails.PastureLocation.Guid.Equals(this.Guid);
+            var isMatchingLocation = housingDetails.PastureLocation.Name.Equals(this.Name);
 
             return isMatchingLocation;
         }

@@ -313,7 +313,6 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // At this point, the detail view items have had their C inputs calculated
-
                 // Equation 2.1.3-1
                 equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.CombinedAboveGroundInput);
 
@@ -345,14 +344,10 @@ namespace H.Core.Services.LandManagement
             result.ClimateParameter = equilibriumClimateParameter;
             result.ManagementFactor = equilibriumManagementFactor;
 
-            var averageNitrogenConcentrationInProduct =
-                viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
-            var averageNitrogenConcentrationInStraw =
-                viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
-            var averageNitrogenConcentrationInRoots =
-                viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
-            var averageNitrogenConcentrationInExtraroots =
-                viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
+            var averageNitrogenConcentrationInProduct = viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
+            var averageNitrogenConcentrationInStraw = viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
+            var averageNitrogenConcentrationInRoots = viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
+            var averageNitrogenConcentrationInExtraroots = viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
 
             result.NitrogenContentInProduct = averageNitrogenConcentrationInProduct;
             result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
@@ -696,6 +691,9 @@ namespace H.Core.Services.LandManagement
             return result < 0 ? 0 : result;
         }
 
+        /// <summary>
+        /// Equation 11.3.2-4
+        /// </summary>
         public void CalculateCarbonLostByGrazingAnimals(
             Farm farm,
             FieldSystemComponent fieldSystemComponent,
@@ -714,21 +712,10 @@ namespace H.Core.Services.LandManagement
                         var animalGroups = animalComponentBase.Groups;
                         foreach (var animalGroup in animalGroups)
                         {
-                            var totalCarbonLostForAllManagementPeriods = 0d;
+                            var grazingManagementPeriodsByGroup = this.GetGrazingManagementPeriods(animalGroup, fieldSystemComponent);
+                            var totalCarbonLostForAllManagementPeriods = this.Losses(grazingManagementPeriodsByGroup, cropViewItem, animalGroup, fieldSystemComponent, farm, animalComponentBase);
 
-                            var grazingManagementPeriodsByGroup = this.GetSelectedManagementPeriods(animalGroup, fieldSystemComponent);
-                            foreach (var managementPeriod in grazingManagementPeriodsByGroup)
-                            {
-                                var emissionResultsForPeriod =  this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponentBase, managementPeriod);
-                                totalCarbonLostForAllManagementPeriods += emissionResultsForPeriod.TotalCarbonUptakeByAnimals();
-
-                                
-
-                                // Used for reference
-                                var dmi = emissionResultsForPeriod.TotalDmiUptakeByAnimals();
-                            }
-
-                            totalLostForAllGroups += totalCarbonLostForAllManagementPeriods;
+                            totalLostForAllGroups += totalCarbonLostForAllManagementPeriods.Item1;
                         }
 
                         totalCarbonLostForField += totalLostForAllGroups;
@@ -739,37 +726,75 @@ namespace H.Core.Services.LandManagement
             }
         }
 
-        /// <summary>
-        /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
-        /// </summary>
-        private List<ManagementPeriod> GetSelectedManagementPeriods(
-            AnimalGroup animalGroup, 
-            FieldSystemComponent fieldSystemComponent)
+        public Tuple<double, double> Losses(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
         {
-            var result = new List<ManagementPeriod>();
-
-            var managementPeriods = animalGroup.ManagementPeriods.ToList();
-            var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
-            if (grazingPeriods.Count() == 1)
+            if (managementPeriods.Any() == false)
             {
-                result.Add(grazingPeriods.Single());
+                return new Tuple<double, double>(0, 0);
+            }
+
+            if (managementPeriods.Count == 1)
+            {
+                var resultsForManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, managementPeriods.Single());
+                var totalCarbonUptake = resultsForManagementPeriod.TotalCarbonUptakeByAnimals();
+                var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+                var denominator = 1 - (averageUtilizationRate / 100.0);
+                if (denominator < 0)
+                {
+                    denominator = 1;
+                }
+
+                var result = totalCarbonUptake / denominator;
+
+                return new Tuple<double, double>(result, totalCarbonUptake);
             }
             else
             {
-                var orderedByDate = grazingPeriods.OrderBy(x => x.Start).ToList();
+                var totalCarbonUptake = 0d;
+                var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
 
-                // Get all except last
-                var count = orderedByDate.Count();
-                for (int i = 0; i < count - 1; i++)
+                var lastPeriod = managementPeriods.OrderBy(x => x.Start).Last();
+                var resultsForLastManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, lastPeriod);
+                var totalCarbonUptakeForLastPeriod = resultsForLastManagementPeriod.TotalCarbonUptakeByAnimals();
+                totalCarbonUptake += totalCarbonUptakeForLastPeriod;
+                var denominator = averageUtilizationRate;
+                if (denominator < 0)
                 {
-                    result.Add(orderedByDate.ElementAt(i));
+                    denominator = 1;
                 }
-            }
 
-            return result;
+                var carbonUptakeForLastPeriod = totalCarbonUptakeForLastPeriod / denominator;
+
+                var carbonUpdateForOtherPeriods = 0d;
+                for (int i = 0; i < managementPeriods.Count - 1; i++)
+                {
+                    var managementPeriod = managementPeriods[i];
+                    var resultsForPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, managementPeriod);
+                    var totalCarbonUptakeForPeriod = resultsForPeriod.TotalCarbonUptakeByAnimals();
+                    totalCarbonUptake += totalCarbonUptakeForPeriod;
+
+                    var carbonUptakeForPeriod = totalCarbonUptakeForPeriod ;
+                    carbonUpdateForOtherPeriods += carbonUptakeForPeriod;
+                }
+
+                var result = (carbonUpdateForOtherPeriods + carbonUptakeForLastPeriod);
+
+                return new Tuple<double, double>(result, totalCarbonUptake);
+            }
         }
 
-       
+        /// <summary>
+        /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
+        /// </summary>
+        private List<ManagementPeriod> GetGrazingManagementPeriods(
+            AnimalGroup animalGroup, 
+            FieldSystemComponent fieldSystemComponent)
+        {
+            var managementPeriods = animalGroup.ManagementPeriods.ToList();
+            var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
+            return grazingPeriods;
+
+        }
 
         #endregion
     }

@@ -77,20 +77,11 @@ namespace H.Core.Calculators.Carbon
 
             if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
             {
-                var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
-                    currentYearViewItem) / currentYearViewItem.Area;
+                // Equation 11.3.2-6
+                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals;
+                var dmi = currentYearViewItem.PlantCarbonInAgriculturalProduct / 0.45;
 
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = recalculatedPlantCarbonInAgriculturalProduct;
-
-                var recalculatedCarbonInputFromProduct = this.RecalculateCarbonInputForGrazingScenario(
-                    currentYearViewItem);
-
-                currentYearViewItem.CarbonInputFromProduct = recalculatedCarbonInputFromProduct;
-
-                // Recalculate yield after Cp has been recalculated.
-                var recalculatedYield = this.RecalculateYield(currentYearViewItem);
-
-                currentYearViewItem.Yield = recalculatedYield;
+                currentYearViewItem.Yield = dmi / currentYearViewItem.Area;
             }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
