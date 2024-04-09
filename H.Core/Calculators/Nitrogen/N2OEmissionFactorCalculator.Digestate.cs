@@ -29,7 +29,35 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Calculates direct emissions from the digestate specifically applied to the field (kg N2O-N (kg N)^-1)
+        /// Equation 4.6.1-2
+        /// 
+        /// (kg N)
+        /// </summary>
+        public double GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
+        {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || (field.HasLivestockDigestateApplicationsInYear(viewItem.Year) == false &&
+                                  field.HasImportedDigestateApplicationsInYear(viewItem.Year) == false))
+            {
+                return 0;
+            }
+
+            var totalNitrogen = 0d;
+
+            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems.Where(x => x.DateCreated.Year == viewItem.Year))
+            {
+                totalNitrogen += digestateApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
+            }
+
+            return totalNitrogen;
+        }
+
+        /// <summary>
+        /// Equation 4.6.1-10
+        /// 
+        /// Calculates direct emissions from the digestate specifically applied to the field
+        ///
+        /// (kg N2O-N (kg N)^-1)
         /// </summary>
         public double CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(
             CropViewItem viewItem,

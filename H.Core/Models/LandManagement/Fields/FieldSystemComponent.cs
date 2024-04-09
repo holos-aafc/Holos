@@ -402,6 +402,22 @@ namespace H.Core.Models.LandManagement.Fields
             return false;
         }
 
+        public bool HasLivestockDigestateApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                {
+                    if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && digestateApplicationViewItem.DateCreated.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public bool HasImportedManureApplicationsInYear(int year)
         {
             foreach (var cropViewItem in this.CropViewItems)
@@ -409,6 +425,22 @@ namespace H.Core.Models.LandManagement.Fields
                 foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
                 {
                     if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && manureApplicationViewItem.DateOfApplication.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasImportedDigestateApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                {
+                    if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && digestateApplicationViewItem.DateCreated.Year == year)
                     {
                         return true;
                     }

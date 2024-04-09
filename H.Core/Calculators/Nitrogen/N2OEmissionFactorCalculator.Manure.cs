@@ -39,7 +39,6 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-
             var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
                 viewItem: viewItem,
                 farm: farm);
@@ -59,7 +58,8 @@ namespace H.Core.Calculators.Nitrogen
         public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && 
+                                  field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
             {
                 return 0;
             }
@@ -262,7 +262,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// Includes direct emissions from applied manure.
         /// 
-        /// (kg N2O-N)
+        /// (kg N2O-N (kg N)^-1)
         /// </summary>
         public double CalculateDirectN2ONFromFieldAppliedManure(
             Farm farm,

@@ -582,6 +582,95 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(30, result);
         }
 
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearWhenFieldNotFound()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearWhenNoLocalOrImportedDigestateApplicationsMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            farm.Components.Add(field);
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenLocalApplicationMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+            
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() {ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100});
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenImportedApplicationMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenImportedApplicationAndLocalMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
         #endregion
     }
 }
