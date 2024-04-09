@@ -22,7 +22,8 @@ namespace H.Core.Providers.Plants
             switch (cropType)
             {
                 case CropType.RangelandNative:
-                    return 45;
+                    return 40;
+
                 case CropType.SeededGrassland:
                     return 50;
 

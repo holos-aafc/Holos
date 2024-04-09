@@ -39,6 +39,8 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture { get; set; }
 
+        public double TotalCarbonUptakeByAnimals { get; set; }
+
         #endregion
     }
 }

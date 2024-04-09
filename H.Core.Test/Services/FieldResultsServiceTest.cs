@@ -1702,7 +1702,7 @@ namespace H.Core.Test.Services
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
             _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults);
 
-            Assert.AreEqual(75, cropViewItem.TotalCarbonLossesByGrazingAnimals);
+            Assert.AreEqual(50, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
         [TestMethod]

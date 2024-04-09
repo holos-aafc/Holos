@@ -701,32 +701,37 @@ namespace H.Core.Services.LandManagement
         {
             foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
             {
-                var totalCarbonLostForField = 0d;
+                var totalCarbonLossesForField = 0d;
+                var totalCarbonUptakeForField = 0d;
 
                 foreach (var componentResults in animalComponentEmissionsResults.ToList())
                 {
                     if (componentResults.Component is AnimalComponentBase animalComponentBase)
                     {
                         var totalLostForAllGroups = 0d;
+                        var totalCarbonUptakeForAllGroups = 0d;
 
                         var animalGroups = animalComponentBase.Groups;
                         foreach (var animalGroup in animalGroups)
                         {
                             var grazingManagementPeriodsByGroup = this.GetGrazingManagementPeriods(animalGroup, fieldSystemComponent);
-                            var totalCarbonLostForAllManagementPeriods = this.Losses(grazingManagementPeriodsByGroup, cropViewItem, animalGroup, fieldSystemComponent, farm, animalComponentBase);
+                            var totalCarbonLostForAllManagementPeriods = this.CalculateUptakeByGrazingAnimals(grazingManagementPeriodsByGroup, cropViewItem, animalGroup, fieldSystemComponent, farm, animalComponentBase);
 
                             totalLostForAllGroups += totalCarbonLostForAllManagementPeriods.Item1;
+                            totalCarbonUptakeForAllGroups += totalCarbonLostForAllManagementPeriods.Item2;
                         }
 
-                        totalCarbonLostForField += totalLostForAllGroups;
+                        totalCarbonLossesForField += totalLostForAllGroups;
+                        totalCarbonUptakeForField += totalCarbonUptakeForAllGroups;
                     }
                 }
 
-                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLostForField;
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLossesForField;
+                cropViewItem.TotalCarbonUptakeByAnimals = totalCarbonUptakeForField;
             }
         }
 
-        public Tuple<double, double> Losses(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
+        public Tuple<double, double> CalculateUptakeByGrazingAnimals(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
         {
             if (managementPeriods.Any() == false)
             {
@@ -735,16 +740,23 @@ namespace H.Core.Services.LandManagement
 
             if (managementPeriods.Count == 1)
             {
+                // Equation 11.3.2-4
+                // Equation 11.3.2-5
+
+                /*
+                 * Note: value is reduced by area in Equation 11.3.2-9
+                 */
+
                 var resultsForManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, managementPeriods.Single());
                 var totalCarbonUptake = resultsForManagementPeriod.TotalCarbonUptakeByAnimals();
-                var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
-                var denominator = 1 - (averageUtilizationRate / 100.0);
-                if (denominator < 0)
+                var averageUtilizationRate =  viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+                var utilizationRate = (averageUtilizationRate / 100.0);
+                if (utilizationRate <= 0)
                 {
-                    denominator = 1;
+                    utilizationRate = 1;
                 }
 
-                var result = totalCarbonUptake / denominator;
+                var result = totalCarbonUptake / utilizationRate;
 
                 return new Tuple<double, double>(result, totalCarbonUptake);
             }
@@ -757,14 +769,15 @@ namespace H.Core.Services.LandManagement
                 var resultsForLastManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, lastPeriod);
                 var totalCarbonUptakeForLastPeriod = resultsForLastManagementPeriod.TotalCarbonUptakeByAnimals();
                 totalCarbonUptake += totalCarbonUptakeForLastPeriod;
-                var denominator = averageUtilizationRate;
-                if (denominator < 0)
+                var denominator = averageUtilizationRate / 100;
+                if (denominator <= 0)
                 {
                     denominator = 1;
                 }
 
                 var carbonUptakeForLastPeriod = totalCarbonUptakeForLastPeriod / denominator;
 
+                // Equation 11.3.2-6
                 var carbonUpdateForOtherPeriods = 0d;
                 for (int i = 0; i < managementPeriods.Count - 1; i++)
                 {

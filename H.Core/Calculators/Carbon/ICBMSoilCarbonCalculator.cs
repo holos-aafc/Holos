@@ -77,11 +77,19 @@ namespace H.Core.Calculators.Carbon
 
             if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
             {
-                // Equation 11.3.2-6
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals;
-                var dmi = currentYearViewItem.PlantCarbonInAgriculturalProduct / 0.45;
+                // Total C losses from grazing animals is calculated in Equation 11.3.2-4
 
-                currentYearViewItem.Yield = dmi / currentYearViewItem.Area;
+                // Equation 11.3.2-6
+                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / currentYearViewItem.Area;
+
+                // Equation 11.3.2-7
+                currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
+
+                // Equation 11.3.2-9
+                var totalYieldForArea = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration;
+
+                // Convert to per hectare
+                currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
             }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
