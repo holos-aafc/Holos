@@ -297,7 +297,8 @@ namespace H.Core.Calculators.Carbon
         {
             if (currentYearViewItem.CropType.IsFallow() ||                              // No inputs from fallow fields
                 currentYearViewItem.CropType == CropType.NotSelected ||                 // Need a crop type to calculate input
-                currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure ||      // In this case, the residue fractions for product and straw are combined and so the inputs from straw are omitted
+                currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure ||      // In these two harvest method cases, the residue fractions for product and straw are combined and so the inputs from straw are omitted
+                currentYearViewItem.HarvestMethod == HarvestMethods.Swathing ||
                 currentYearViewItem.CropType.IsPerennial())                             // All above ground inputs from perennials are from the product and not the straw
             {
                 return 0;
@@ -348,10 +349,10 @@ namespace H.Core.Calculators.Carbon
                     farm: farm);
             }
 
-            // This is a special case when using an annual crop as green manure (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            // This is a special case when using an annual crop as green manure or swathed (see note under annual crop C input section)
+            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                return this.CalculateCarbonInputFromRootsForGreenManure(
+                return this.CalculateCarbonInputFromRootsForGreenManureOrSwathing(
                     previousYearViewItem,
                     currentYearViewItem,
                     farm);
@@ -403,9 +404,9 @@ namespace H.Core.Calculators.Carbon
             }
 
             // This is a special case when using an annual crop as green manure (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                return this.CalculateCarbonInputFromExtrarootsForGreenManure(
+                return this.CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
                     previousYearViewItem,
                     currentYearViewItem,
                     farm);
@@ -709,7 +710,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
         /// <returns>The carbon input from roots</returns>
-        private double CalculateCarbonInputFromRootsForGreenManure(
+        private double CalculateCarbonInputFromRootsForGreenManureOrSwathing(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             Farm farm)
@@ -737,7 +738,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
         /// <returns>The carbon input from extraroots</returns>
-        private double CalculateCarbonInputFromExtrarootsForGreenManure(
+        private double CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             Farm farm)

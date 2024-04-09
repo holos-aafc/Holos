@@ -512,7 +512,7 @@ namespace H.Core.Services.LandManagement
                 viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
                 viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
 
-                if (viewItem.HarvestMethod == HarvestMethods.Swathing)
+                if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure)
                 {
                     viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
                     viewItem.BiomassCoefficientStraw = 0;

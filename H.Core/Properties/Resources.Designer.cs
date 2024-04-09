@@ -1096,7 +1096,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dry peas.
+        ///   Looks up a localized string similar to Dry/Field peas.
         /// </summary>
         public static string DryPeas {
             get {
