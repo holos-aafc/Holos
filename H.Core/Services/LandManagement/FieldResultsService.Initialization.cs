@@ -195,8 +195,6 @@ namespace H.Core.Services.LandManagement
             }
             else if (viewItem.CropType.IsSilageCrop())
             {
-                // Check harvest method for swathing and assign
-
                 viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForFodderCorn;
                 viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForFodderCorn;
             }

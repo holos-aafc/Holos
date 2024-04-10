@@ -177,6 +177,11 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public bool CanCalculateInputsForCrop(CropViewItem cropViewItem)
         {
+            if (cropViewItem.HarvestMethod == HarvestMethods.Swathing)
+            {
+                return false;
+            }
+
             var slope = _slopeProvider.GetDataByCropType(cropViewItem.CropType);
 
             return slope.SlopeValue > 0;
@@ -196,11 +201,7 @@ namespace H.Core.Calculators.Carbon
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
-                freshWeightOfYield: viewItem.Yield,
-                harvestIndex: harvestIndex,
-                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
-                percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
+            viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(harvestIndex: harvestIndex, viewItem: viewItem);
 
 
             viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
@@ -594,29 +595,30 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.2.2-2
         /// </summary>
-        /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
-        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
-        /// <param name="percentageOfStrawReturned"></param>
+        /// <param name="viewItem"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
-        public double CalculateAboveGroundResidueDryMatter(
-            double freshWeightOfYield,
-            double harvestIndex,
-            double moistureContentOfCropAsPercentage,
-            double percentageOfStrawReturned)
+        public double CalculateAboveGroundResidueDryMatter(double harvestIndex,
+            CropViewItem viewItem)
         {
             if (harvestIndex <= 0)
             {
                 return 0;
             }
 
-            if (percentageOfStrawReturned == 0)
-            {
-                // This will be the case for green manure and swathing
-                percentageOfStrawReturned = 100;
-            }
+            var freshWeightOfYield = viewItem.Yield;
+            var moistureContentOfCropAsPercentage = viewItem.MoistureContentOfCropPercentage;
+            
 
-            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (percentageOfStrawReturned / 100.0);
+            var a = viewItem.PercentageOfStrawReturnedToSoil / 100.0;
+            var b = viewItem.BiomassCoefficientStraw / (viewItem.BiomassCoefficientProduct + viewItem.BiomassCoefficientStraw);
+            var c = viewItem.PercentageOfProductYieldReturnedToSoil / 100.0;
+            var d = viewItem.BiomassCoefficientProduct / (viewItem.BiomassCoefficientProduct + viewItem.BiomassCoefficientStraw);
+
+            var e = (a * b + c * d);
+
+            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * 
+                   (e);
         }
 
         /// <summary>

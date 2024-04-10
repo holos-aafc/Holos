@@ -537,6 +537,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// S_s
+        /// 
         /// (%)
         /// </summary>
         public double PercentageOfStrawReturnedToSoil
