@@ -18,6 +18,10 @@ using Moq;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
+using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Soil;
+using H.Core.Providers.Temperature;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Test
@@ -356,6 +360,72 @@ namespace H.Core.Test
             cropViewItem.ManureApplicationViewItems.Add(this.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
 
             return cropViewItem;
+        }
+
+        public SoilData GetTestSoilData( )
+        {
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 679;
+            soilData.Province = Province.Alberta;
+            soilData.PolygonId = 679001;
+            soilData.SoilTexture = SoilTexture.Fine;
+
+            return soilData;
+        }
+
+        public ClimateData GetTestClimateData()
+        {
+            var climateData = new ClimateData();
+
+            climateData.PrecipitationData = new PrecipitationData()
+            {
+                January = 10,
+                February = 12,
+                March = 10,
+                April = 22,
+                May = 2,
+                June = 2,
+                July = 8,
+                August = 11,
+                September = 17,
+                October = 10,
+                November = 8,
+                December = 2,
+            };
+
+            climateData.TemperatureData = new TemperatureData()
+            {
+                January = 10,
+                February = 12,
+                March = 10,
+                April = 22,
+                May = 2,
+                June = 2,
+                July = 8,
+                August = 11,
+                September = 17,
+                October = 10,
+                November = 8,
+                December = 2,
+            };
+
+            climateData.EvapotranspirationData = new EvapotranspirationData()
+            {
+                January = 10,
+                February = 12,
+                March = 10,
+                April = 22,
+                May = 2,
+                June = 2,
+                July = 8,
+                August = 11,
+                September = 17,
+                October = 10,
+                November = 8,
+                December = 2,
+            };
+
+            return climateData;
         }
 
         public ManureApplicationViewItem GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure()

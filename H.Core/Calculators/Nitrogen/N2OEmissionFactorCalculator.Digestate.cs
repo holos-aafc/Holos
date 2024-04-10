@@ -29,6 +29,33 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.1-1
+        /// 
+        /// Calculates direct emissions from the digestate specifically applied to the field
+        ///
+        /// (kg N2O-N (kg N)^-1)
+        /// </summary>
+        public double CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            if (viewItem.CropType.IsNativeGrassland())
+            {
+                return 0;
+            }
+
+            var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
+                viewItem: viewItem,
+                farm: farm);
+
+            var totalLocalAndImportedNitrogenApplied = this.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            var result = totalLocalAndImportedNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
+
+            return result;
+        }
+
+        /// <summary>
         /// Equation 4.6.1-2
         /// 
         /// (kg N)

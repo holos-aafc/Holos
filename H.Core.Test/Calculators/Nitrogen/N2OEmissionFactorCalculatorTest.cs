@@ -8,6 +8,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Providers.Soil;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
 
 namespace H.Core.Test.Calculators.Nitrogen
@@ -19,6 +20,8 @@ namespace H.Core.Test.Calculators.Nitrogen
 
         private N2OEmissionFactorCalculator _sut;
         private Table_36_Livestock_Emission_Conversion_Factors_Data _emissionFactors;
+        private Farm _farm;
+        private CropViewItem _viewItem;
 
         #endregion
 
@@ -91,6 +94,21 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForSolidAppliedManure(It.IsAny<TillageType>())).Returns(1);
             _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForLiquidAppliedManure(It.IsAny<ManureApplicationTypes>())).Returns(1);
+
+            _viewItem = base.GetTestCropViewItem();
+            _viewItem.CropType = CropType.Wheat;
+            var field = base.GetTestFieldComponent();
+
+            _viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(_viewItem);
+            var soilData = base.GetTestSoilData();
+            field.SoilData = soilData;
+
+            _farm = base.GetTestFarm();
+            _farm.Components.Add(field);
+
+            var climateData = base.GetTestClimateData();
+            _farm.ClimateData = climateData;
         }
 
         [TestCleanup]
@@ -662,13 +680,54 @@ namespace H.Core.Test.Calculators.Nitrogen
             farm.Components.Add(field);
             field.CropViewItems.Add(viewItem);
 
-
             viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
             viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
 
             var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
 
             Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsZeroWhenFieldIsNativeRangeland()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            viewItem.CropType = CropType.RangelandNative;
+
+            var farm = base.GetTestFarm();
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsZeroWhenNoApplicationsMade()
+        {
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsNonZeroWhenLivestockApplicationsMade()
+        {
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0.056904037428100511, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsNonZeroWhenLivestockAndImportApplicationsMade()
+        {
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0.113808074856201, result, 0.00001);
         }
 
         #endregion

@@ -610,6 +610,12 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
+            if (percentageOfStrawReturned == 0)
+            {
+                // This will be the case for green manure and swathing
+                percentageOfStrawReturned = 100;
+            }
+
             return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (percentageOfStrawReturned / 100.0);
         }
 
