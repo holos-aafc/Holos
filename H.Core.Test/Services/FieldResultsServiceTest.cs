@@ -1701,8 +1701,6 @@ namespace H.Core.Test.Services
                 }
             };
 
-
-
             _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
             _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults, new List<CropViewItem>() {cropViewItem});
@@ -1755,6 +1753,7 @@ namespace H.Core.Test.Services
             var fieldComponent = base.GetTestFieldComponent();
             fieldComponent.Name = "Test";
             var cropViewItem = base.GetTestCropViewItem();
+            
             fieldComponent.CropViewItems.Add(cropViewItem);
 
             var animalResults = base.GetTestGrazingBeefCattleAnimalGroupComponentEmissionsResults(fieldComponent);
@@ -1764,7 +1763,7 @@ namespace H.Core.Test.Services
             _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
 
-            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldComponent, animalEmissionResults, new List<CropViewItem>());
+            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldComponent, animalEmissionResults, new List<CropViewItem>() {cropViewItem});
 
             Assert.AreEqual(100, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
