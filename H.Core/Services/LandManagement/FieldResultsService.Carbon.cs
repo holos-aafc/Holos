@@ -694,12 +694,11 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Equation 11.3.2-4
         /// </summary>
-        public void CalculateCarbonLostByGrazingAnimals(
-            Farm farm,
+        public void CalculateCarbonLostByGrazingAnimals(Farm farm,
             FieldSystemComponent fieldSystemComponent,
-            IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+            IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults, List<CropViewItem> viewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in viewItems)
             {
                 var totalCarbonLossesForField = 0d;
                 var totalCarbonUptakeForField = 0d;
@@ -714,7 +713,8 @@ namespace H.Core.Services.LandManagement
                         var animalGroups = animalComponentBase.Groups;
                         foreach (var animalGroup in animalGroups)
                         {
-                            var grazingManagementPeriodsByGroup = this.GetGrazingManagementPeriods(animalGroup, fieldSystemComponent);
+                            // managementPeriod.Start.Year == currentYearResults.Year
+                            var grazingManagementPeriodsByGroup = this.GetGrazingManagementPeriods(animalGroup, fieldSystemComponent).Where(x => x.Start.Year == cropViewItem.Year).ToList();
                             var totalCarbonLostForAllManagementPeriods = this.CalculateUptakeByGrazingAnimals(grazingManagementPeriodsByGroup, cropViewItem, animalGroup, fieldSystemComponent, farm, animalComponentBase);
 
                             totalLostForAllGroups += totalCarbonLostForAllManagementPeriods.Item1;

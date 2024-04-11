@@ -374,7 +374,6 @@ namespace H.Core.Models.LandManagement.Fields
             ManagementPeriod managementPeriod)
         {
             var housingDetails = managementPeriod.HousingDetails;
-            //var isPasture = housingDetails.HousingType.IsPasture();
             var isNonNullPasture = housingDetails.PastureLocation != null;
             if (isNonNullPasture == false)
             {

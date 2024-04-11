@@ -343,11 +343,7 @@ namespace H.Core.Services.LandManagement
 
             this.ProcessDigestateViewItems(farm, fieldSystemComponent);
 
-            // Before creating view items for each year, calculate carbon uptake by grazing animals
-            this.CalculateCarbonLostByGrazingAnimals(
-                farm,
-                fieldSystemComponent: fieldSystemComponent,
-                animalComponentEmissionsResults: this.AnimalResults );
+
 
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
@@ -366,6 +362,12 @@ namespace H.Core.Services.LandManagement
 
             // Add in a details view message for the undersown year(s). Note that perennials must be processed before this call
             this.ProcessUndersownCrops(viewItems, fieldSystemComponent);
+
+            // Before creating view items for each year, calculate carbon uptake by grazing animals
+            this.CalculateCarbonLostByGrazingAnimals(
+                farm,
+                fieldSystemComponent: fieldSystemComponent,
+                animalComponentEmissionsResults: this.AnimalResults, viewItems: viewItems);
 
             var stageState = this.GetStageState(farm);
 
