@@ -177,11 +177,6 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public bool CanCalculateInputsForCrop(CropViewItem cropViewItem)
         {
-            if (cropViewItem.HarvestMethod == HarvestMethods.Swathing)
-            {
-                return false;
-            }
-
             var slope = _slopeProvider.GetDataByCropType(cropViewItem.CropType);
 
             return slope.SlopeValue > 0;
