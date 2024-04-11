@@ -610,7 +610,7 @@ namespace H.Core.Calculators.Carbon
             var c = viewItem.PercentageOfProductYieldReturnedToSoil / 100.0;
             var d = viewItem.BiomassCoefficientProduct / (viewItem.BiomassCoefficientProduct + viewItem.BiomassCoefficientStraw);
 
-            var e = (a * b + c * d);
+            var e =  (a * b + c * d);
 
             return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * 
                    (e);

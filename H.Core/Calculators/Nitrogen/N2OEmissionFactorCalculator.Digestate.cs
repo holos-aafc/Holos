@@ -79,6 +79,24 @@ namespace H.Core.Calculators.Nitrogen
             return totalNitrogen;
         }
 
+        public double GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
+        {
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null || (field.HasLivestockDigestateApplicationsInYear(viewItem.Year) == false && field.HasImportedDigestateApplicationsInYear(viewItem.Year) == false))
+            {
+                return 0;
+            }
+
+            var totalVolume = 0d;
+
+            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems.Where(manureViewItem => manureViewItem.DateCreated.Year == viewItem.Year))
+            {
+                totalVolume += digestateApplicationViewItem.AmountAppliedPerHectare * viewItem.Area;
+            }
+
+            return totalVolume;
+        }
+
         /// <summary>
         /// Equation 4.6.1-10
         /// 

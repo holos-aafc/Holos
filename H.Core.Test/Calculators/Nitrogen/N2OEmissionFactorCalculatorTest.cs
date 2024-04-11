@@ -730,6 +730,51 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(0.113808074856201, result, 0.00001);
         }
 
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYearReturnsZero()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Clear();
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
         #endregion
     }
 }
