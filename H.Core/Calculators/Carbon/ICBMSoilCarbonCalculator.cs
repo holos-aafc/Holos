@@ -75,7 +75,7 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
+            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom && currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing)
             {
                 // Total C losses from grazing animals is calculated in Equation 11.3.2-4
 

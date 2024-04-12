@@ -198,7 +198,6 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(harvestIndex: harvestIndex, viewItem: viewItem);
 
-
             viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
                 freshWeightOfYield: viewItem.Yield,
                 harvestIndex: harvestIndex,

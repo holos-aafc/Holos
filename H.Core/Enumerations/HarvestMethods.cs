@@ -22,5 +22,8 @@ namespace H.Core.Enumerations
         /// </summary>
         [LocalizedDescription("EnumNone", typeof(Resources))]
         None,
+
+        [LocalizedDescription("EnumStubbleGrazing", typeof(Resources))]
+        StubbleGrazing,
     }
 }

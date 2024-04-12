@@ -5083,6 +5083,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stubble grazing.
+        /// </summary>
+        public static string EnumStubbleGrazing {
+            get {
+                return ResourceManager.GetString("EnumStubbleGrazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suckling.
         /// </summary>
         public static string EnumSuckling {
@@ -11280,6 +11289,24 @@ namespace H.Core.Properties {
         public static string LabelStorage {
             get {
                 return ResourceManager.GetString("LabelStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straw returned to soil.
+        /// </summary>
+        public static string LabelStrawReturnedToSoil {
+            get {
+                return ResourceManager.GetString("LabelStrawReturnedToSoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straw returned to soil after stubble grazing.
+        /// </summary>
+        public static string LabelStrawReturnedToSoilAfterStubbleGrazing {
+            get {
+                return ResourceManager.GetString("LabelStrawReturnedToSoilAfterStubbleGrazing", resourceCulture);
             }
         }
         

@@ -700,6 +700,11 @@ namespace H.Core.Services.LandManagement
         {
             foreach (var cropViewItem in viewItems)
             {
+                if (cropViewItem.HarvestMethod == HarvestMethods.StubbleGrazing)
+                {
+                    continue;
+                }
+
                 var totalCarbonLossesForField = 0d;
                 var totalCarbonUptakeForField = 0d;
 

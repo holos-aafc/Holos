@@ -775,6 +775,108 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(0, result);
         }
 
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockAndImportsInYearReturnsZero()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockAndImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100), result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100), result);
+        }
+
+        [TestMethod]
+        public void CalculateWeightedOrganicNitrogenEmissionFactor()
+        {
+            var viewItem1 = new CropViewItem();
+            var viewItem2 = new CropViewItem();
+
+            var items = new List<CropViewItem>();
+            items.Add(viewItem1);
+            items.Add(viewItem2);
+
+            var field = base.GetTestFieldComponent();
+            _farm.Components.Add(field);
+
+            field.CropViewItems.Add(viewItem1);
+            field.CropViewItems.Add(viewItem2);
+
+            viewItem1.FieldSystemComponentGuid = field.Guid;
+            viewItem2.FieldSystemComponentGuid = field.Guid;
+
+            var result = _sut.CalculateWeightedOrganicNitrogenEmissionFactor(items, _farm);
+
+            Assert.AreEqual(0.00010811767111339097, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONFromLeftOverManureForField()
+        {
+            var stageState = _farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(_viewItem);
+            _farm.StageStates.Add(stageState);
+
+            var fieldWithManureApplication = base.GetTestFieldComponent();
+            fieldWithManureApplication.FieldArea = 133;
+
+            _farm.Components.Clear();
+            _farm.Components.Add(fieldWithManureApplication);
+            _viewItem.FieldSystemComponentGuid = fieldWithManureApplication.Guid;
+
+            var fieldWithOutManureApplications = new FieldSystemComponent();
+            fieldWithOutManureApplications.FieldArea = 222;
+            fieldWithOutManureApplications.CropViewItems.Add(new CropViewItem() {CropType = CropType.Barley});
+
+            _farm.Components.Add(fieldWithOutManureApplications);
+
+            _mockManureService.Setup(x => x.GetTotalNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(10);
+
+            var result = _sut.CalculateDirectN2ONFromLeftOverManureForField(_farm, _viewItem);
+
+            Assert.AreEqual(0.0021318977402640473, result);
+        }
+
         #endregion
     }
 }

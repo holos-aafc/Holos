@@ -32,12 +32,11 @@ namespace H.Core.Providers.Plants
                 case CropType.TameMixed:
                     return 60;
 
+                // Annuals
                 default:
-                {
-                    Trace.TraceError($"No data found for '{cropType.GetDescription()}'");
-
-                    return 0;
-                }
+                    {
+                        return 70;
+                    }
             }
         }
     }

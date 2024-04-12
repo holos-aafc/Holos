@@ -5708,4 +5708,13 @@
   <data name="MessageTheSelectedYieldAssignmentMethod" xml:space="preserve">
     <value>Please note that the selected yield assignement method chosen will be used for all fields on this farm. Select the  'Custom Yield' or 'Input File' assignement methods to modify the yields for individual fields</value>
   </data>
+  <data name="EnumStubbleGrazing" xml:space="preserve">
+    <value>Stubble grazing</value>
+  </data>
+  <data name="LabelStrawReturnedToSoil" xml:space="preserve">
+    <value>Straw returned to soil</value>
+  </data>
+  <data name="LabelStrawReturnedToSoilAfterStubbleGrazing" xml:space="preserve">
+    <value>Straw returned to soil after stubble grazing</value>
+  </data>
 </root>

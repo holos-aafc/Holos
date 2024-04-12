@@ -97,7 +97,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// There can be multiple fields on a farm and the emission factor calculations are field-dependent (accounts for crop type, fertilizer, etc.). So
         /// we take the weighted average of these fields when calculating the EF for organic nitrogen (ON). This is to be used when calculating direct emissions
-        /// from land applied manure. Native rangeland is not included.
+        /// from land applied manure or digestate. Native rangeland is not included.
         /// </summary>
         public double CalculateWeightedOrganicNitrogenEmissionFactor(
             List<CropViewItem> itemsByYear,
