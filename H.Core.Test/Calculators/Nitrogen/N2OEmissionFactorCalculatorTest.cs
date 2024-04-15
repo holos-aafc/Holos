@@ -42,9 +42,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
 
-
-
-
             _sut = n2oEmissionFactorCalculator;
             _sut.ManureService = base._mockManureServiceObject;
             _sut.ClimateProvider = base._mockClimateProviderObject;
@@ -572,7 +569,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestMethod]
         public void GetManureNitrogenRemainingForFieldTest()
         {
-            _mockManureService.Setup(x => x.GetTotalNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
+            _mockManureService.Setup(x => x.GetTotalManureNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
 
             var cropViewItem = new CropViewItem() {Year = 2022, Area = 20};
             var farm = new Farm();
@@ -870,11 +867,17 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             _farm.Components.Add(fieldWithOutManureApplications);
 
-            _mockManureService.Setup(x => x.GetTotalNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(10);
+            _mockManureService.Setup(x => x.GetTotalManureNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(10);
 
             var result = _sut.CalculateDirectN2ONFromLeftOverManureForField(_farm, _viewItem);
 
             Assert.AreEqual(0.0021318977402640473, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenRemainingForFarmAndYearTest()
+        {
+
         }
 
         #endregion

@@ -179,7 +179,7 @@ namespace H.Core.Calculators.Nitrogen
             var weightedEmissionFactor = CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
             // The total N after all applications and exports have been subtracted
-            var totalNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
+            var totalNitrogenRemaining = this.ManureService.GetTotalManureNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
             var emissionsFromNitrogenRemaining = this.CalculateTotalDirectN2ONFromRemainingManureNitrogen(
                 weightedEmissionFactor: weightedEmissionFactor,
                 totalManureNitrogenRemaining: totalNitrogenRemaining);
@@ -1579,7 +1579,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalAreaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
             var fractionOfAreaByThisField = viewItem.Area / totalAreaOfFarm;
-            var manureNitrogenRemaining = this.ManureService.GetTotalNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
+            var manureNitrogenRemaining = this.ManureService.GetTotalManureNitrogenRemainingForFarmAndYear(viewItem.Year, farm);
 
             var amountOfNitrogenAssignedToThisField = fractionOfAreaByThisField * manureNitrogenRemaining;
 

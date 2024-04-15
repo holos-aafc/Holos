@@ -23,6 +23,7 @@ namespace H.Infrastructure
             "Alberta_No_Styles.kml",
             "BC_No_Styles.kml"
         };
+
         public bool IsPointInPolygon(Polygon polygon, Vector point)
         {
             bool inside = false;
