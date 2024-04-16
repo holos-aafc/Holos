@@ -856,9 +856,9 @@ namespace H.Core.Test.Calculators.Carbon
             _sut.CalculateInputs(
                 viewItem: viewItem, farm: new Farm());
 
-            Assert.AreEqual(539, viewItem.AboveGroundCarbonInput, 1);
-            Assert.AreEqual(453, viewItem.BelowGroundCarbonInput, 1);
-            Assert.AreEqual(992, viewItem.TotalCarbonInputs, 1);
+            Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);
+            Assert.AreEqual(997.775453968351, viewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(3155.23433953193, viewItem.TotalCarbonInputs, 1);
         }
 
         [TestMethod]
