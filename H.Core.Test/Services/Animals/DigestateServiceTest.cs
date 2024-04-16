@@ -224,6 +224,60 @@ namespace H.Core.Test.Services.Animals
             Assert.AreEqual(1457.2139303482586, tank.NitrogenFromSolidDigestate);
         }
 
+        [TestMethod]
+        public void CalculateLiquidAmountsAvailable()
+        {
+            var fieldSystemComponent = new FieldSystemComponent();
+            var digestateApplication = new DigestateApplicationViewItem();
+            digestateApplication.DigestateState = DigestateState.LiquidPhase;
+            digestateApplication.AmountAppliedPerHectare = 20;
+
+            var cropViewItem = new CropViewItem();
+            cropViewItem.Area = 50;
+            cropViewItem.DigestateApplicationViewItems.Add(digestateApplication);
+            fieldSystemComponent.CropViewItems.Add(cropViewItem);
+
+            _farm.Components.Clear();
+            _farm.Components.Add(fieldSystemComponent);
+
+            var digestorOutput = new DigestorDailyOutput();
+            var outputDate = DateTime.Now;
+            var outputNumber = 1;
+            var tanks = new List<DigestateTank>();
+            tanks.Add(new DigestateTank()
+            {
+                TotalSolidDigestateAvailable = 0,
+                NitrogenFromSolidDigestate = 0,
+                CarbonFromSolidDigestate = 0,
+
+                TotalLiquidDigestateAvailable = 6000,
+                NitrogenFromLiquidDigestate = 1800,
+                CarbonFromLiquidDigestate = 555,
+            });
+
+            var tank = new DigestateTank();
+
+            var component = new AnaerobicDigestionComponent();
+
+            digestorOutput.FlowRateLiquidFraction = 30;
+            digestorOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 0;
+            digestorOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 0;
+            digestorOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 220;
+            digestorOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 330;
+
+            _sut.CalculateLiquidAmountsAvailable(
+                digestorOutput,
+                outputDate,
+                _farm,
+                outputNumber,
+                tanks,
+                tank,
+                component);
+
+            Assert.AreEqual(738.2338, tank.CarbonFromLiquidDigestate, 0.0001);
+            Assert.AreEqual(1685.0082, tank.NitrogenFromLiquidDigestate, 0.0001);
+        }
+
         #endregion
     }
 }

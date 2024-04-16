@@ -343,8 +343,6 @@ namespace H.Core.Services.LandManagement
 
             this.ProcessDigestateViewItems(farm, fieldSystemComponent);
 
-
-
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
 
