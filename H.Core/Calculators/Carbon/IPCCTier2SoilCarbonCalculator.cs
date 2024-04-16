@@ -671,7 +671,8 @@ namespace H.Core.Calculators.Carbon
         /// <param name="harvestIndex">Harvest ratio/index (R_AG(T))</param>
         /// <param name="cropViewItem"></param>
         /// <returns>Annual total amount of below-ground residue (kg year^-1)</returns>
-        public double CalculateBelowGroundResidueDryMatter(double shootToRootRatio,
+        public double CalculateBelowGroundResidueDryMatter(
+            double shootToRootRatio,
             double fractionRenewed,
             double harvestIndex,
             CropViewItem cropViewItem)
@@ -698,9 +699,7 @@ namespace H.Core.Calculators.Carbon
             else
             {
                 // Swathing, silage, green manure harvests
-                var firstInnerTerm = (freshWeight * moistureContentDifference) / harvestIndex;
-                var secondInnerTerm = freshWeight * moistureContentDifference;
-                var innerResult = firstInnerTerm - secondInnerTerm;
+                var innerResult = (freshWeight * moistureContentDifference);
 
                 result = innerResult * shootToRootRatio * cropArea * fractionRenewed;
             }

@@ -233,7 +233,8 @@ namespace H.Core.Services.LandManagement
             else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 100;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
         }
 
