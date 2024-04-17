@@ -187,7 +187,14 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop))* currentYearViewItem.CarbonConcentration;
+                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+                {
+                    result = ((currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                }
+                else
+                {
+                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                }
             }
 
             return result;
@@ -208,8 +215,8 @@ namespace H.Core.Calculators.Carbon
             CropViewItem cropViewItem,
             Farm farm)
         {
-            // There are no inputs from straw when the harvest method is green manure
-            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            // There are no inputs from straw when the harvest method is green manure or swathing
+            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure || cropViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
                 return cropViewItem.CarbonInputFromProduct;
             }

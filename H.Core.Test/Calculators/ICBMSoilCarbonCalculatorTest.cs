@@ -548,12 +548,7 @@ namespace H.Core.Test.Calculators
 
             // Plant C in agricultural product: Cp = 403.92
 
-            // Cag = CptoSoil
-            // = Cp * (Sp / 100)
-            // = 403.92 * (2 / 100)
-            // = 8.0784
-
-            Assert.AreEqual(8.0784, currentYearViewItem.AboveGroundCarbonInput);
+            Assert.AreEqual(7.92, currentYearViewItem.AboveGroundCarbonInput);
         }
 
         [TestMethod]
@@ -593,18 +588,7 @@ namespace H.Core.Test.Calculators
                 nextYearViewItem: null,
                 farm: farm);
 
-            // In the case when an annual crop is used and green manure is specified as harvest method Rp is the sum of the Rp and Rs values.
-
-            // Plant C in agricultural product: Cp = 403.92
-
-            // Cbg = Cr + Ce
-            // = [Cp * (Rr / Rp) * (Sr / 100)] + [Cp * (Re / Rp)] *** Rp = 0.5 + 0.2 = 0.7 ***
-            // = [403.92 * (0.4 / 0.7) * (100 / 100)] + [403.92 * (0.3 / 0.7)]
-            // = [403.92 * 0.571 * 1] + [403.92 * 0.42857]
-            // = 230.638 + 172.107
-            // = 402.754
-
-            Assert.AreEqual(402.754, currentYearViewItem.BelowGroundCarbonInput, 3);
+            Assert.AreEqual(396, currentYearViewItem.BelowGroundCarbonInput, 3);
         } 
 
         #endregion
@@ -1405,14 +1389,7 @@ namespace H.Core.Test.Calculators
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 594
-
-            // Cag = CptoSoil           *** Cs is omitted in this situation ***
-            // = Cp * (Sp / 100)
-            // = 594 * (50 / 100)
-            // = 297
-
-            Assert.AreEqual(297, currentYearViewItem.AboveGroundCarbonInput, 1);
+            Assert.AreEqual(198, currentYearViewItem.AboveGroundCarbonInput, 1);
         }
 
         /// <summary>
@@ -1455,16 +1432,9 @@ namespace H.Core.Test.Calculators
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
                 farm: farm);
+            
 
-            // Plant C in agricultural product: Cp = 594
-
-            // Cbg = Cr + Ce                *** Rp is the combined sum of Rp and Rs in this situation. So, Rp = 0.451 + 0.34 = 0.791 ***
-            // = [Cp * (Rr / Rp) * (Sr / 100)] + [Cp * (Re / Rp)]
-            // = [594 * (0.126 / 0.791) * 1] + [594 * (0.082 / 0.791)]
-            // = 94.619 + 61.577
-            // = 156.196
-
-            Assert.AreEqual(156.196, currentYearViewItem.BelowGroundCarbonInput, 3);
+            Assert.AreEqual(104.131479140329, currentYearViewItem.BelowGroundCarbonInput, 3);
         }
 
         /// <summary>
