@@ -247,7 +247,7 @@ namespace H.Core.Calculators.Carbon
             viewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(viewItem, farm);
 
             /*
-             * Equation 2.2.2-10 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C
+             * Equation 2.2.2-12 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C
              * here. We report results in kg C on graphs so the conversion to tons is not performed here.
              *
              * Since we report ICBM in kg C (not tons), we do not convert to tons here so output of pool calculations on chart can be compared to ICBM chart on same scale (i.e. kg C and not T C).
