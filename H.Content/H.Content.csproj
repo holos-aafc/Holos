@@ -2,8 +2,12 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <PackageId>H.Content</PackageId>
+    <PackageId>AAFC.Holos.Content</PackageId>
     <Authors>AAFC</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/holos-aafc/Holos</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/holos-aafc/Holos</RepositoryUrl>
+    <PackageTags>holos, aafc, agriculture, ghg</PackageTags>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{272EDE97-F58A-42A9-828D-8B3524E390EB}</ProjectGuid>
@@ -416,6 +420,7 @@
     <None Include="Resources\white_spruce__31_allclusters_future.csv" />
     <None Include="Resources\WS_31_allclusters_past_CBM.csv" />
     <None Include="Resources\WS__31_allclusters_future_DOM.csv" />
+    <None Include="..\LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
