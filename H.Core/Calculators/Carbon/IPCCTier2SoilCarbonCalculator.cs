@@ -196,6 +196,12 @@ namespace H.Core.Calculators.Carbon
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
+
+            if (viewItem.HarvestMethod == HarvestMethods.Swathing && farm.CropHasGrazingAnimals(viewItem))
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = (100 - viewItem.GetAverageUtilizationFromGrazingAnimals());
+            }
+
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(harvestIndex: harvestIndex, viewItem: viewItem);
 
             viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(

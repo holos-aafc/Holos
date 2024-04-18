@@ -64,6 +64,12 @@ namespace H.Core.Calculators.Carbon
             CropViewItem nextYearViewItem,
             Farm farm)
         {
+            var isNonSwathingGrazingScenario = currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
+                                    farm.CropHasGrazingAnimals(currentYearViewItem) &&
+                                    farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
+                                    currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
+                                    currentYearViewItem.HarvestMethod != HarvestMethods.Swathing;
+
             currentYearViewItem.PlantCarbonInAgriculturalProduct = this.CalculatePlantCarbonInAgriculturalProduct(
                 previousYearViewItem: previousYearViewItem,
                 currentYearViewItem: currentYearViewItem,
@@ -75,7 +81,7 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom && currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing)
+            if (isNonSwathingGrazingScenario)
             {
                 // Total C losses from grazing animals is calculated in Equation 11.3.2-4
 
