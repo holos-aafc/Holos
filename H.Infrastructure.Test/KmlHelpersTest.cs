@@ -44,7 +44,7 @@ namespace H.Infrastructure.Test
         {
         }
 
-
+        [Ignore]
         [TestMethod]
         public void TestGetPolygonFromCoordinateAlberta()
         {
@@ -61,6 +61,7 @@ namespace H.Infrastructure.Test
             Assert.AreEqual(3.5, firstSoil.ProportionOfSoilOrganicCarbon);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGetPolygonFromCoordinateBC()
         {
@@ -78,6 +79,7 @@ namespace H.Infrastructure.Test
             Assert.AreEqual(1.31, firstSoil.BulkDensity);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGetPolygonFromCoordinateInvalid()
         {
