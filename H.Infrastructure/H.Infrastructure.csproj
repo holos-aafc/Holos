@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>H.Infrastructure</RootNamespace>
-    <AssemblyName>H.Infrastructure</AssemblyName>
+    <AssemblyName>AAFC.Holos.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -56,7 +56,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\LICENSE" Pack="true" PackagePath=""/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
     <Compile Include="Controls\TreeHelper.cs" />
     <Compile Include="Controls\ValueConverters\BooleanToHeightConverter.cs" />
     <Compile Include="Controls\ValueConverters\BooleanToVisibilityConverter.cs" />
