@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>H.Content</RootNamespace>
-    <AssemblyName>H.Content</AssemblyName>
+    <AssemblyName>AAFC.Holos.Content</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -62,223 +62,223 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\DairyGuide\en\Figure1.png" >
+    <Content Include="Images\DairyGuide\en\Figure1.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure10.png" >
+    <Content Include="Images\DairyGuide\en\Figure10.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure11.gif" >
+    <Content Include="Images\DairyGuide\en\Figure11.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure12.png" >
+    <Content Include="Images\DairyGuide\en\Figure12.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure13.png" >
+    <Content Include="Images\DairyGuide\en\Figure13.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure14.gif" >
+    <Content Include="Images\DairyGuide\en\Figure14.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure15.png" >
+    <Content Include="Images\DairyGuide\en\Figure15.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure16.gif" >
+    <Content Include="Images\DairyGuide\en\Figure16.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure17.png" >
+    <Content Include="Images\DairyGuide\en\Figure17.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure18.png" >
+    <Content Include="Images\DairyGuide\en\Figure18.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure19.png" >
+    <Content Include="Images\DairyGuide\en\Figure19.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure2.png" >
+    <Content Include="Images\DairyGuide\en\Figure2.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure20.png" >
+    <Content Include="Images\DairyGuide\en\Figure20.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure3.png" >
+    <Content Include="Images\DairyGuide\en\Figure3.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure4.png" >
+    <Content Include="Images\DairyGuide\en\Figure4.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure5.png" >
+    <Content Include="Images\DairyGuide\en\Figure5.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure6.png" >
+    <Content Include="Images\DairyGuide\en\Figure6.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure7.png" >
+    <Content Include="Images\DairyGuide\en\Figure7.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure8.png" >
+    <Content Include="Images\DairyGuide\en\Figure8.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\Figure9.gif" >
+    <Content Include="Images\DairyGuide\en\Figure9.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\DairyGuide\en\logo.png" >
+    <Content Include="Images\DairyGuide\en\logo.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure1.png" >
+    <Content Include="Images\PoultryGuide\en\Figure1.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure10.png" >
+    <Content Include="Images\PoultryGuide\en\Figure10.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure11.gif" >
+    <Content Include="Images\PoultryGuide\en\Figure11.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure12.png" >
+    <Content Include="Images\PoultryGuide\en\Figure12.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure13.png" >
+    <Content Include="Images\PoultryGuide\en\Figure13.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure14.gif" >
+    <Content Include="Images\PoultryGuide\en\Figure14.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure15.png" >
+    <Content Include="Images\PoultryGuide\en\Figure15.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure16.png" >
+    <Content Include="Images\PoultryGuide\en\Figure16.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure17.png" >
+    <Content Include="Images\PoultryGuide\en\Figure17.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure18.png" >
+    <Content Include="Images\PoultryGuide\en\Figure18.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure19.png" >
+    <Content Include="Images\PoultryGuide\en\Figure19.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure2.png" >
+    <Content Include="Images\PoultryGuide\en\Figure2.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure20.png" >
+    <Content Include="Images\PoultryGuide\en\Figure20.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure21.png" >
+    <Content Include="Images\PoultryGuide\en\Figure21.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure22.png" >
+    <Content Include="Images\PoultryGuide\en\Figure22.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure3.png" >
+    <Content Include="Images\PoultryGuide\en\Figure3.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure4.png" >
+    <Content Include="Images\PoultryGuide\en\Figure4.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure5.png" >
+    <Content Include="Images\PoultryGuide\en\Figure5.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure6.png" >
+    <Content Include="Images\PoultryGuide\en\Figure6.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure7.png" >
+    <Content Include="Images\PoultryGuide\en\Figure7.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure8.png" >
+    <Content Include="Images\PoultryGuide\en\Figure8.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\Figure9.gif" >
+    <Content Include="Images\PoultryGuide\en\Figure9.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\PoultryGuide\en\logo.png" >
+    <Content Include="Images\PoultryGuide\en\logo.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 1.png" >
+    <Content Include="Images\SwineGuide\en\Figure 1.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 10.png" >
+    <Content Include="Images\SwineGuide\en\Figure 10.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 11.gif" >
+    <Content Include="Images\SwineGuide\en\Figure 11.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 12.png" >
+    <Content Include="Images\SwineGuide\en\Figure 12.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 13.png" >
+    <Content Include="Images\SwineGuide\en\Figure 13.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 14.gif" >
+    <Content Include="Images\SwineGuide\en\Figure 14.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 15.png" >
+    <Content Include="Images\SwineGuide\en\Figure 15.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 16.png" >
+    <Content Include="Images\SwineGuide\en\Figure 16.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 17.png" >
+    <Content Include="Images\SwineGuide\en\Figure 17.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 18.gif" >
+    <Content Include="Images\SwineGuide\en\Figure 18.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 19.png" >
+    <Content Include="Images\SwineGuide\en\Figure 19.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 2.png" >
+    <Content Include="Images\SwineGuide\en\Figure 2.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 20.png" >
+    <Content Include="Images\SwineGuide\en\Figure 20.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 21.png" >
+    <Content Include="Images\SwineGuide\en\Figure 21.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 22.jpg" >
+    <Content Include="Images\SwineGuide\en\Figure 22.jpg">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 23.jpg" >
+    <Content Include="Images\SwineGuide\en\Figure 23.jpg">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 24.png" >
+    <Content Include="Images\SwineGuide\en\Figure 24.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 25.png" >
+    <Content Include="Images\SwineGuide\en\Figure 25.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 26.jpg" >
+    <Content Include="Images\SwineGuide\en\Figure 26.jpg">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 27.jpg" >
+    <Content Include="Images\SwineGuide\en\Figure 27.jpg">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 28.jpg" >
+    <Content Include="Images\SwineGuide\en\Figure 28.jpg">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 3.png" >
+    <Content Include="Images\SwineGuide\en\Figure 3.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 4.png" >
+    <Content Include="Images\SwineGuide\en\Figure 4.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 5.png" >
+    <Content Include="Images\SwineGuide\en\Figure 5.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 6.png" >
+    <Content Include="Images\SwineGuide\en\Figure 6.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 7.png" >
+    <Content Include="Images\SwineGuide\en\Figure 7.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 8.png" >
+    <Content Include="Images\SwineGuide\en\Figure 8.png">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Figure 9.gif" >
+    <Content Include="Images\SwineGuide\en\Figure 9.gif">
       <Pack>false</Pack>
     </Content>
-    <Content Include="Images\SwineGuide\en\Holos logo.png" >
+    <Content Include="Images\SwineGuide\en\Holos logo.png">
       <Pack>false</Pack>
     </Content>
     <Content Include="Scripts\addCopyright.py" />
@@ -420,7 +420,7 @@
     <None Include="Resources\white_spruce__31_allclusters_future.csv" />
     <None Include="Resources\WS_31_allclusters_past_CBM.csv" />
     <None Include="Resources\WS__31_allclusters_future_DOM.csv" />
-    <None Include="..\LICENSE" Pack="true" PackagePath=""/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
