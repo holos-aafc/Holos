@@ -10,7 +10,7 @@ jobs:
   reusable_workflow_job:
     runs-on:  windows-latest
     env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
+        NUGET_AUTH_TOKEN: ${{ secrets.HOLOS_ACTION_SECRET }}
     steps:
     
     - name: Get date/time
@@ -43,7 +43,7 @@ jobs:
     #   run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
     
     - name: Publish packages to nuget.org
-      run: dotnet nuget push "*/**/a*.nupkg" -k $env:NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "*/**/h*.nupkg" -k $env:NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
 
     # - name: Publish packages to github
     #   run: dotnet nuget push "*/**/aafc*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
