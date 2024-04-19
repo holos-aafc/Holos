@@ -12544,6 +12544,17 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Annual Holos estimates for the livestock components represent the sum of monthly emissions for a single production cycle only (as defined by the model user on the Component Selection screen). Therefore, if one or more animal groups have more than one production cycle in a calendar year, multiply the results by the number of production cycles in a year to get an estimate of actual yearly emissions related to housing and manure management/storage.
+        ///
+        ///Please note: emissions related to the deposition or applica [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string MessageAnnualDetailedReportMessage {
+            get {
+                return ResourceManager.GetString("MessageAnnualDetailedReportMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of irrigation, pesticide usage, and yield for the selected crop can be entered on this tab. Harvested yield can be entered as either wet weight or dry weight. Additional information can be entered by clicking on the &apos;Show Additional Information&apos; button..
         /// </summary>
         public static string MessageAnnualsGeneralTab {
@@ -12684,6 +12695,17 @@ namespace H.Core.Properties {
         public static string MessageManureFromGrazingPeriodsAccountedFor {
             get {
                 return ResourceManager.GetString("MessageManureFromGrazingPeriodsAccountedFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly Holos estimates for the livestock components represent monthly estimates are for a single production cycle only. Therefore, to get an annual emissions value for these components, multiply the results by the number of production cycles in a year.
+        ///
+        ///Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component..
+        /// </summary>
+        public static string MessageMonthlyDetailedReportMessage {
+            get {
+                return ResourceManager.GetString("MessageMonthlyDetailedReportMessage", resourceCulture);
             }
         }
         

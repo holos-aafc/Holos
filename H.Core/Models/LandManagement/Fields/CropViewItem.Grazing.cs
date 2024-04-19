@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace H.Core.Models.LandManagement.Fields
 {
@@ -40,6 +41,22 @@ namespace H.Core.Models.LandManagement.Fields
         public double TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture { get; set; }
 
         public double TotalCarbonUptakeByAnimals { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        public double GetAverageUtilizationFromGrazingAnimals()
+        {
+            if (this.HasGrazingViewItems)
+            {
+                return this.GrazingViewItems.Average(x => x.Utilization);
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         #endregion
     }

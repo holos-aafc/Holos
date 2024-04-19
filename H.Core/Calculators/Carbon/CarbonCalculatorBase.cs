@@ -68,6 +68,7 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.1.2-34
+        /// Equation 2.1.2-2
         ///
         /// (kg C ha^-1)
         /// </summary>

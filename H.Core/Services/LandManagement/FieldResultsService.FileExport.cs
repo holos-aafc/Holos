@@ -146,7 +146,7 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelBelowGroundCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelManureCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
                 Properties.Resources.LabelDigestateCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
-                Properties.Resources.LabelTotalCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerYear) + "," +
+                Properties.Resources.LabelTotalCarbonInput + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelTFac + "," +
                 Properties.Resources.LabelWFac + "," +
 

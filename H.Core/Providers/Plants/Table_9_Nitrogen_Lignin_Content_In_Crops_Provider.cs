@@ -68,6 +68,11 @@ namespace H.Core.Providers.Plants
                 lookupType = CropType.Durum;
             }
 
+            if (cropType == CropType.RyeSecaleCerealeWinterRyeCerealRye)
+            {
+                lookupType = CropType.Rye;
+            }
+
             Table_9_Nitrogen_Lignin_Content_In_Crops_Data data = this.Data.Find(x => x.CropType == lookupType);
 
             if (data != null)

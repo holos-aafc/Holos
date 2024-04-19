@@ -32,6 +32,10 @@ namespace H.Core.Test.Services.Animals
         private DigestateApplicationViewItem _digestateApplication;
         private FieldSystemComponent _fieldSystemComponent;
         private CropViewItem _cropViewItem;
+        private DigestorDailyOutput _dailyOutput1;
+        private DigestorDailyOutput _dailyOutput2;
+        private DigestorDailyOutput _dailyOutput3;
+        private DigestorDailyOutput _dailyOutput4;
 
         #endregion
 
@@ -53,31 +57,39 @@ namespace H.Core.Test.Services.Animals
             _mockAdCalculator = new Mock<IADCalculator>();
             _mockAnimalService = new Mock<IAnimalService>();
 
-            var dailyOutput1 = new DigestorDailyOutput()
+            _dailyOutput1 = new DigestorDailyOutput()
             {
-                Date = DateTime.Now,
+                Date = new DateTime(DateTime.Now.Year, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 10,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 20,
             };
 
-            var dailyOutput2 = new DigestorDailyOutput()
+            _dailyOutput2 = new DigestorDailyOutput()
             {
-                Date = DateTime.Now.AddDays(1),
+                Date = new DateTime(DateTime.Now.Year, 4, 2),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
             };
 
-            var dailyOutput3 = new DigestorDailyOutput()
+            _dailyOutput3 = new DigestorDailyOutput()
             {
-                Date = DateTime.Now.AddDays(-1000),
+                Date = new DateTime(DateTime.Now.Year - 1, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
             };
 
-            _dailyResults = new List<DigestorDailyOutput>() { dailyOutput1, dailyOutput2, dailyOutput3 };
+            _dailyOutput4 = new DigestorDailyOutput()
+            {
+                Date = new DateTime(DateTime.Now.Year, 4, 3),
+                FlowRateOfAllSubstratesInDigestate = 300,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 80,
+                TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 20,
+            };
+
+            _dailyResults = new List<DigestorDailyOutput>() { _dailyOutput1, _dailyOutput2, _dailyOutput3, _dailyOutput4 };
 
             _mockAdCalculator.Setup(x => x.CalculateResults(It.IsAny<Farm>(), It.IsAny<List<AnimalComponentEmissionsResults>>())).Returns(new List<DigestorDailyOutput>(_dailyResults));
 
@@ -120,7 +132,7 @@ namespace H.Core.Test.Services.Animals
             _digestateApplication.DateCreated = _dailyResults[1].Date;
             _digestateApplication.DigestateState = DigestateState.Raw;
 
-            var result = _sut.GetDailyTankStates(_farm, _dailyResults);
+            var result = _sut.GetDailyTankStates(_farm, _dailyResults, _dailyResults[1].Date.Year);
 
             // 100 kg is produced on 1st day
             Assert.AreEqual(100, result.ElementAt(0).TotalRawDigestateAvailable);
@@ -136,7 +148,7 @@ namespace H.Core.Test.Services.Animals
 
             var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year,_farm, _adComponent);
 
-            Assert.AreEqual(40, totalCarbon);
+            Assert.AreEqual(120, totalCarbon);
         }
 
         [TestMethod]
@@ -146,14 +158,9 @@ namespace H.Core.Test.Services.Animals
             _digestateApplication.DigestateState = DigestateState.Raw;
             var year = DateTime.Now.Year;
 
-            // Total carbon created is 40 over both days (10 kg on day 1, 30 on day 2)
-
-            // Raw digestate applied on first day using 50% of available digestate. 0.5 * 10 kg on day 1 = 5
-            // Total over 2 days is 5 + 30 = 35
-
             var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
 
-            Assert.AreEqual(35, result);
+            Assert.AreEqual(120, result);
         }
 
         [TestMethod]
@@ -173,7 +180,7 @@ namespace H.Core.Test.Services.Animals
 
             var totalNitrogen = _sut.GetTotalNitrogenRemainingAtEndOfYear(year, _farm);
 
-            Assert.AreEqual(70, totalNitrogen);
+            Assert.AreEqual(90, totalNitrogen);
         }
 
         [TestMethod]
@@ -276,6 +283,99 @@ namespace H.Core.Test.Services.Animals
 
             Assert.AreEqual(738.2338, tank.CarbonFromLiquidDigestate, 0.0001);
             Assert.AreEqual(1685.0082, tank.NitrogenFromLiquidDigestate, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateRawAmountsAvailable()
+        {
+            var fieldSystemComponent = new FieldSystemComponent();
+            var digestateApplication = new DigestateApplicationViewItem();
+            digestateApplication.DigestateState = DigestateState.Raw;
+            digestateApplication.AmountAppliedPerHectare = 20;
+
+            var cropViewItem = new CropViewItem();
+            cropViewItem.Area = 50;
+            cropViewItem.DigestateApplicationViewItems.Add(digestateApplication);
+            fieldSystemComponent.CropViewItems.Add(cropViewItem);
+
+            _farm.Components.Clear();
+            _farm.Components.Add(fieldSystemComponent);
+
+            var digestorOutput = new DigestorDailyOutput();
+            var outputDate = DateTime.Now;
+            var outputNumber = 1;
+            var tanks = new List<DigestateTank>();
+            tanks.Add(new DigestateTank()
+            {
+                TotalSolidDigestateAvailable = 0,
+                NitrogenFromSolidDigestate = 0,
+                CarbonFromSolidDigestate = 0,
+
+                TotalLiquidDigestateAvailable = 0,
+                NitrogenFromLiquidDigestate = 0,
+                CarbonFromLiquidDigestate = 0,
+
+                TotalRawDigestateAvailable = 10,
+                NitrogenFromRawDigestate = 20,
+                CarbonFromRawDigestate = 30,
+            });
+
+            var tank = new DigestateTank();
+
+            var component = new AnaerobicDigestionComponent();
+            component.IsLiquidSolidSeparated = false;
+
+            digestorOutput.FlowRateOfAllSubstratesInDigestate = 10099;
+
+            digestorOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 0;
+            digestorOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 0;
+
+            digestorOutput.TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 0;
+            digestorOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 0;
+
+            digestorOutput.TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 11;
+            digestorOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 33;
+
+            _sut.CalculateRawAmountsAvailable(
+                digestorOutput,
+                outputDate,
+                _farm,
+                outputNumber,
+                tanks,
+                tank,
+                component);
+
+            Assert.AreEqual(56.7679295677119, tank.CarbonFromRawDigestate, 0.0001);
+            Assert.AreEqual(27.9334256603027, tank.NitrogenFromRawDigestate, 0.0001);
+        }
+
+        [TestMethod]
+        public void GetDateOfMaximumAvailableDigestateTest()
+        {
+            var year = DateTime.Now.Year;
+
+            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults);
+
+            Assert.AreEqual(new DateTime(DateTime.Now.Year, 4, 3), result);
+        }
+
+        [TestMethod]
+        public void GetDateOfMaximumAvailableRawDigestateTest()
+        {
+            var year = DateTime.Now.Year;
+
+            _adComponent.IsLiquidSolidSeparated = false;
+
+            _digestateApplication.DigestateState = DigestateState.Raw;
+            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _digestateApplication.AmountAppliedPerHectare = 6000;
+
+            // 2nd day has the most digestate of the 3 total days
+            _dailyOutput2.FlowRateOfAllSubstratesInDigestate = 20000;
+
+            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults);
+
+            Assert.AreEqual(new DateTime(DateTime.Now.Year, 4, 3), result);
         }
 
         #endregion

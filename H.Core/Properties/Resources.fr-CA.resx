@@ -5717,4 +5717,15 @@
   <data name="LabelStrawReturnedToSoilAfterStubbleGrazing" xml:space="preserve">
     <value>Straw returned to soil after stubble grazing</value>
   </data>
+  <data name="MessageAnnualDetailedReportMessage" xml:space="preserve">
+    <value>Annual Holos estimates for the livestock components represent the sum of monthly emissions for a single production cycle only (as defined by the model user on the Component Selection screen). Therefore, if one or more animal groups have more than one production cycle in a calendar year, multiply the results by the number of production cycles in a year to get an estimate of actual yearly emissions related to housing and manure management/storage.
+
+Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component.
+
+Please note: for each field component, the annual emissions in this report represent the total emissions from all synthetic fertilizer applied and all crop residues for the relevant calendar year, but include manure-related emissions for a single production cycle only.</value>
+  </data>
+  <data name="MessageMonthlyDetailedReportMessage" xml:space="preserve">
+    <value>Monthly Holos estimates for the livestock components represent monthly estimates are for a single production cycle only. Therefore, to get an annual emissions value for these components, multiply the results by the number of production cycles in a year.
+Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component.</value>
+  </data>
 </root>

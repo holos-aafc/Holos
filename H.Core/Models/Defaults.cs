@@ -144,6 +144,8 @@ namespace H.Core.Models
         private PumpType _defaulPumpType;
         private double _pumpEmissionsFactor;
 
+        private bool _scaleUpEmissionsEnabled;
+
         #endregion
 
         #region Constructors
@@ -989,6 +991,12 @@ namespace H.Core.Models
         {
             get => _runInPeriodTillageType;
             set => SetProperty(ref _runInPeriodTillageType, value);
+        }
+
+        public bool ScaleUpEmissionsEnabled
+        {
+            get => _scaleUpEmissionsEnabled;
+            set => SetProperty(ref _scaleUpEmissionsEnabled, value);
         }
 
         #endregion
