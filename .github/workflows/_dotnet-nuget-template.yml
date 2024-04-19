@@ -10,7 +10,7 @@ jobs:
   reusable_workflow_job:
     runs-on:  windows-latest
     env:
-        NUGET_AUTH_TOKEN: ${{ secrets.HOLOS_ACTION_SECRET }}
+        NUGET_AUTH_TOKEN: ${{ secrets.HOLOS_NUGET_KEY }}
     steps:
     
     - name: Get date/time
