@@ -60,6 +60,7 @@ namespace H.Core.Models
 
         // Perennial crops
         private double _percentageOfProductReturnedToSoilForPerennials;
+        private double _percentageOfStrawReturnedToSoilForPerennials;
         private double _percentageOfRootsReturnedToSoilForPerennials;
         private double _establishmentGrowthFactorPercentageForPerennials;
         private double _defaultSupplementalFeedingLossPercentage;
@@ -199,6 +200,7 @@ namespace H.Core.Models
 
             // Perennial crops
             this.PercentageOfProductReturnedToSoilForPerennials = 35;
+            this.PercentageOfStrawReturnedToSoilForPerennials = 0;
             this.PercentageOfRootsReturnedToSoilForPerennials = 100;
             this.EstablishmentGrowthFactorPercentageForPerennials = 50;
             this.DefaultSupplementalFeedingLossPercentage = 20;
@@ -997,6 +999,12 @@ namespace H.Core.Models
         {
             get => _scaleUpEmissionsEnabled;
             set => SetProperty(ref _scaleUpEmissionsEnabled, value);
+        }
+
+        public double PercentageOfStrawReturnedToSoilForPerennials
+        {
+            get => _percentageOfStrawReturnedToSoilForPerennials;
+            set => SetProperty(ref _percentageOfStrawReturnedToSoilForPerennials, value);
         }
 
         #endregion
