@@ -160,7 +160,7 @@ namespace H.Core.Models
             this.CarbonConcentration = CoreConstants.CarbonConcentration;
             this.NumberOfYearsInCarRegionAverage = 3;
 
-            //default location is Lethbridge, AB
+            // Default location is Lethbridge, AB
             this.Latitude = 49.69999;
             this.Longitude = -112.81856;
 
