@@ -11860,6 +11860,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use field specific soil data (this will override the default soil data used for the entire farm).
+        /// </summary>
+        public static string LabelUseFieldLevelSoil {
+            get {
+                return ResourceManager.GetString("LabelUseFieldLevelSoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply liquid/solid separation to the digestate.
         /// </summary>
         public static string LabelUseLiquidSolidSeparation {

@@ -7,6 +7,7 @@ using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
+using H.Core.Providers.Soil;
 
 namespace H.Core.Services
 {
@@ -22,6 +23,7 @@ namespace H.Core.Services
         private readonly IMapper _fertilizerApplicationViewItemMapper;
         private readonly IMapper _hayImportViewItemMapper;
         private readonly IMapper _digestateViewItemMapper;
+        private readonly IMapper _soilDataMapper;
 
         #endregion
 
@@ -44,6 +46,7 @@ namespace H.Core.Services
 
             var cropEconomicDataMapperConfiguration =
                 new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>());
+
             _cropEconomicDataMapper = cropEconomicDataMapperConfiguration.CreateMapper();
 
             var harvestPeriodMapperConfiguration = new MapperConfiguration(x =>
@@ -91,6 +94,13 @@ namespace H.Core.Services
             });
             
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
+
+            var soilDataMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<SoilData, SoilData>();
+            });
+
+            _soilDataMapper = soilDataMapper.CreateMapper();
         }
 
         #endregion
@@ -109,6 +119,28 @@ namespace H.Core.Services
             component.GroupPath = fieldName;
 
             component.IsInitialized = true;
+
+            // Assign soil types to field
+            this.InitializeSoilAvailableSoilTypes(farm, component);
+        }
+
+        private void InitializeSoilAvailableSoilTypes(Farm farm, FieldSystemComponent component)
+        {
+            foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
+            {
+                // Add this type of soil if it does not already exist
+                if (component.SoilDataAvailableForField.FirstOrDefault(x => x.SoilGreatGroup == soilData.SoilGreatGroup) == null)
+                {
+                    // We don't model organic soil at this time
+                    if (soilData.SoilFunctionalCategory != SoilFunctionalCategory.Organic)
+                    {
+                        var copiedSoil = new SoilData();
+                        _soilDataMapper.Map(soilData, copiedSoil);
+
+                        component.SoilDataAvailableForField.Add(copiedSoil);
+                    }
+                }
+            }
         }
 
         public string GetUniqueFieldName(IEnumerable<FieldSystemComponent> components)
@@ -184,8 +216,6 @@ namespace H.Core.Services
                 foreach (var hayImportViewItem in cropViewItem.HayImportViewItems)
                 {
                     var copiedHayImportItem = new HayImportViewItem();
-
-
                 }
 
                 foreach (var grazingViewItem in cropViewItem.GrazingViewItems)

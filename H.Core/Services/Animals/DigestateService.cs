@@ -94,7 +94,15 @@ namespace H.Core.Services.Animals
             return 0;
         }
 
-        public DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year, List<DigestorDailyOutput> digestorDailyOutputs)
+        /// <summary>
+        /// Returns the date when the maximum amount of of digestate is available - this is the amount that does not consider any digestate applications made to
+        /// any field
+        /// </summary>
+        public DateTime GetDateOfMaximumAvailableDigestate(Farm farm,
+            DigestateState state,
+            int year,
+            List<DigestorDailyOutput> digestorDailyOutputs, 
+            bool subtractFieldAppliedAmounts)
         {
             var tankStates = this.GetDailyTankStates(farm, digestorDailyOutputs, year);
             if (tankStates.Any() == false || tankStates.Any(x => x.DateCreated.Year == year) == false)
@@ -108,16 +116,24 @@ namespace H.Core.Services.Animals
             {
 
                 case DigestateState.Raw:
-                    result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateProduced).Last().DateCreated;
+                    {
+                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateProduced).Last().DateCreated;
+                    }
+
                     break;
 
                 case DigestateState.LiquidPhase:
-                    result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateProduced).Last().DateCreated;
+                    {
+                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateProduced).Last().DateCreated;
+                    }
+
                     break;
 
                 default:
+                    {
+                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateProduced).Last().DateCreated;
+                    }
 
-                    result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateProduced).Last().DateCreated;
                     break;
             }
 

@@ -5790,4 +5790,7 @@ Please note: for each field component, the annual emissions in this report repre
 
 Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component.</value>
   </data>
+  <data name="LabelUseFieldLevelSoil" xml:space="preserve">
+    <value>Use field specific soil data (this will override the default soil data used for the entire farm)</value>
+  </data>
 </root>

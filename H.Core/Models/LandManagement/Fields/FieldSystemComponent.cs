@@ -28,6 +28,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _fieldArea;
 
         private bool _beginOrderingAtStartYearOfRotation;
+        private bool _useFieldLevelSoilData;
 
         private SoilData _soilData;
         private ObservableCollection<SoilData> _soilDataAvailableForField;
@@ -77,7 +78,15 @@ namespace H.Core.Models.LandManagement.Fields
         /// By default, <see cref="Providers.Soil.SoilData"/> associated with the farm will be used (across all fields). This flag allows for field-specific <see cref="Providers.Soil.SoilData"/>
         /// to be used.
         /// </summary>
-        public bool UseFieldLevelSoilData { get; set; }
+        public bool UseFieldLevelSoilData {
+            get
+            {
+                return _useFieldLevelSoilData;
+            }
+            set
+            {
+                SetProperty(ref _useFieldLevelSoilData, value);
+            } }
 
         /// <summary>
         /// Allow for field specific soil data (as opposed to one type of soil being used for all fields on the farm)

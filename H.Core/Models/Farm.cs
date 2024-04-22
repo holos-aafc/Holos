@@ -1129,11 +1129,6 @@ namespace H.Core.Models
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cropViewItem"></param>
-        /// <returns></returns>
         public SoilData GetPreferredSoilData(CropViewItem cropViewItem)
         {
             var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
@@ -1146,7 +1141,14 @@ namespace H.Core.Models
             }
             else
             {
-                return fieldComponent.SoilData;
+                if (fieldComponent.UseFieldLevelSoilData)
+                {
+                    return fieldComponent.SoilData;
+                }
+                else
+                {
+                    return this.DefaultSoilData;
+                }
             }
         }
 

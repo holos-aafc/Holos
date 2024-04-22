@@ -11,7 +11,8 @@ namespace H.Core.Services.Animals
 {
     public interface IDigestateService
     {
-        DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year, List<DigestorDailyOutput> digestorDailyOutputs);
+        DateTime GetDateOfMaximumAvailableDigestate(Farm farm, DigestateState state, int year,
+            List<DigestorDailyOutput> digestorDailyOutputs, bool subtractFieldAppliedAmounts);
         DigestateTank GetTank(Farm farm, DateTime targetDate, List<DigestorDailyOutput> dailyOutputs);
         List<DigestorDailyOutput> GetDailyResults(Farm farm);
 

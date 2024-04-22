@@ -354,26 +354,26 @@ namespace H.Core.Test.Services.Animals
         {
             var year = DateTime.Now.Year;
 
-            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults);
+            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults, false);
 
             Assert.AreEqual(new DateTime(DateTime.Now.Year, 4, 3), result);
         }
 
         [TestMethod]
-        public void GetDateOfMaximumAvailableRawDigestateTest()
+        public void GetDateOfMaximumAvailableRawDigestateProducedTest()
         {
             var year = DateTime.Now.Year;
 
+            // Since we are interested in the amount of raw digestate, we don't want to separate into liquid/solid fractions
             _adComponent.IsLiquidSolidSeparated = false;
 
             _digestateApplication.DigestateState = DigestateState.Raw;
             _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
             _digestateApplication.AmountAppliedPerHectare = 6000;
 
-            // 2nd day has the most digestate of the 3 total days
             _dailyOutput2.FlowRateOfAllSubstratesInDigestate = 20000;
 
-            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults);
+            var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults, false);
 
             Assert.AreEqual(new DateTime(DateTime.Now.Year, 4, 3), result);
         }

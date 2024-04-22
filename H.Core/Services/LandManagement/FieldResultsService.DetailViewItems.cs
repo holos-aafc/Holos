@@ -350,7 +350,7 @@ namespace H.Core.Services.LandManagement
             var viewItems = this.CreateItems(fieldSystemComponent, farm).ToList();
 
             // Assign a default name, time period category, etc. to the view item
-            this.AssignInitialProperties(fieldSystemComponent, viewItems);
+            this.AssignInitialProperties(fieldSystemComponent, viewItems, farm);
 
             // Once the view items have been created, additional properties that relate to perennials only need to be assigned (stand IDs, positional years, etc.)
             this.ProcessPerennials(viewItems, fieldSystemComponent);
@@ -656,7 +656,8 @@ namespace H.Core.Services.LandManagement
 
         private void AssignInitialProperties(
             FieldSystemComponent fieldSystemComponent,
-            IEnumerable<CropViewItem> viewItems)
+            IEnumerable<CropViewItem> viewItems,
+            Farm farm)
         {
             for (int i = 0; i < viewItems.Count(); i++)
             {
@@ -683,6 +684,8 @@ namespace H.Core.Services.LandManagement
                 {
                     currentYearViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
                 }
+
+                this.AssignSoilProperties(currentYearViewItem, farm);
             }
         }
 
