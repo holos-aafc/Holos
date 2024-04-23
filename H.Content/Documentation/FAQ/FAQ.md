@@ -116,18 +116,21 @@ When importing manure/organic fertilizers from other farms, the farmer gains the
 
 ### 8. The fertilizer or manure application method I use is not present in the dropdown menu in the Holos interface - how do I know which option to choose?
 On the Component Selection screen in the 'Fertilizer' and 'Manure' tabs, there are several options for fertilizer application method (broadcast, incorporated or partially injected, fully injected) and for manure application method (solid spread (intensive tillage), solid spread (no tillage or reduced tillage), slurry broadcasting, drop hose banding, shallow injection, deep injection). The choice of application method determines the NH3 and indirect N2O emission factors used to estimate emissions of these gases from agricultural soils following the application of synthetic fertilizer and manure. In the context of the Holos model, these application methods can be defined as follows:
-For fertilizer application:
-Broadcast: fertilizer is spread uniformly across the field where it remains on the soil surface
-Incorporated: surface-applied fertilizer is incorporated into the soil to limit ammonia (NH3) volatilization. More likely in reduced tillage systems.  
-Partially injected (shallow injection): fertilizer is injected below the soil surface in vertical slots approx. 2-5 cm deep (by knifing or disking), after which the slots are closed. More likely in no-till systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions.
-Fully injected (deep injection) - fertilizer is injected below the soil surface into slots approx. 5-20 cm deep (by knifing or disking) after which the slots are closed. More likely in conventional systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions.
-For manure application:
-Solid spread (intensive tillage) - solid manure is spread on the soil surface and fully incorporated with a tillage implement
-Solid spread (no tillage or reduced tillage) - solid manure is spread on the soil surface with shallow or no incorporation
-Slurry broadcasting - liquid manure is broadcast on the soil surface with partial or no incorporation with a tillage implement
-Drop hose banding - liquid manure is pumped from hoses that are dragged along the soil surface, which apply the manure in bands along the soil below the crop canopy; these systems are primarily designed for grassland 
-Shallow injection - manure is applied below the soil surface in vertical slots approx. 2-5 cm deep, leaving the surface of the manure band exposed 
-Deep injection - manure is injected below the soil surface into slots approx. 5-20 cm deep; in some cases, press wheels or rollers fitted behind the tines cover the slots
+
+***For fertilizer application:***
+- Broadcast: fertilizer is spread uniformly across the field where it remains on the soil surface
+- Incorporated: surface-applied fertilizer is incorporated into the soil to limit ammonia (NH3) volatilization. More likely in reduced tillage systems  
+- Partially injected (shallow injection): fertilizer is injected below the soil surface in vertical slots approx. 2-5 cm deep (by knifing or disking), after which the slots are closed. More likely in no-till systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
+- Fully injected (deep injection) - fertilizer is injected below the soil surface into slots approx. 5-20 cm deep (by knifing or disking) after which the slots are closed. More likely in conventional systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
+
+***For manure application:***
+- Solid spread (intensive tillage) - solid manure is spread on the soil surface and fully incorporated with a tillage implement
+- Solid spread (no tillage or reduced tillage) - solid manure is spread on the soil surface with shallow or no incorporation
+- Slurry broadcasting - liquid manure is broadcast on the soil surface with partial or no incorporation with a tillage implement
+- Drop hose banding - liquid manure is pumped from hoses that are dragged along the soil surface, which apply the manure in bands along the soil below the crop canopy; these systems are primarily designed for grassland 
+- Shallow injection - manure is applied below the soil surface in vertical slots approx. 2-5 cm deep, leaving the surface of the manure band exposed 
+- Deep injection - manure is injected below the soil surface into slots approx. 5-20 cm deep; in some cases, press wheels or rollers fitted behind the tines cover the slots
+
 Sources: BC Ministry of Agriculture (2015) Nutrient Management Factsheet - Efficient Liquid Manure Application Systems; B. Ellert (AAFC, pers. comm., 2024)
 
 
