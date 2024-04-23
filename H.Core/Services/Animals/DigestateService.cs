@@ -60,8 +60,39 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        public double GetTotalManureNitrogenRemainingForFarmAndYear(int year, Farm farm)
+        public double GetTotalManureNitrogenRemainingForFarmAndYear(int year, Farm farm, List<DigestorDailyOutput> digestorDailyOutputs, DigestateState state)
         {
+            var tankStates = this.GetDailyTankStates(farm, digestorDailyOutputs, year);
+            if (tankStates.Any() == false || tankStates.Any(x => x.DateCreated.Year == year) == false)
+            {
+                // No management periods selected for input into AD system
+                return 0;
+            }
+
+            var result = 0d;
+            var amounts = new List<double>();
+            switch (state)
+            {
+                case DigestateState.Raw:
+                    {
+                        amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromRawDigestate).ToList();
+                        result = amounts.Last();
+
+                        return result;
+                    }
+
+                case DigestateState.SolidPhase:
+                {
+                    amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromSolidDigestate).ToList();
+                    result = amounts.Last();
+
+                    return result;
+                }
+
+                default:
+                    return 0;
+            }
+
             //var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
 
             //var items = farm.GetCropViewItemsByYear(year, false);
@@ -95,13 +126,18 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Returns the date when the maximum amount of of digestate is available - this is the amount that does not consider any digestate applications made to
-        /// any field
+        /// Returns the date when the maximum amount of of digestate is available
         /// </summary>
+        /// <param name="farm">The farm to consider</param>
+        /// <param name="state">The <see cref="DigestateState"/> to consider</param>
+        /// <param name="year">The year to be considered</param>
+        /// <param name="digestorDailyOutputs">Daily amounts output from digestor</param>
+        /// <param name="subtractFieldAppliedAmounts">Indicates if amounts used during field applications should be considered</param>
+        /// <returns></returns>
         public DateTime GetDateOfMaximumAvailableDigestate(Farm farm,
             DigestateState state,
             int year,
-            List<DigestorDailyOutput> digestorDailyOutputs, 
+            List<DigestorDailyOutput> digestorDailyOutputs,
             bool subtractFieldAppliedAmounts)
         {
             var tankStates = this.GetDailyTankStates(farm, digestorDailyOutputs, year);
@@ -114,24 +150,44 @@ namespace H.Core.Services.Animals
             var result = DateTime.Now;
             switch (state)
             {
-
                 case DigestateState.Raw:
                     {
-                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateProduced).Last().DateCreated;
+                        if (subtractFieldAppliedAmounts)
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateAvailable).Last().DateCreated;
+                        }
+                        else
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalRawDigestateProduced).Last().DateCreated;
+                        }
                     }
 
                     break;
 
                 case DigestateState.LiquidPhase:
                     {
-                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateProduced).Last().DateCreated;
+                        if (subtractFieldAppliedAmounts)
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateAvailable).Last().DateCreated;
+                        }
+                        else
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalLiquidDigestateProduced).Last().DateCreated;
+                        }
                     }
 
                     break;
 
                 default:
                     {
-                        result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateProduced).Last().DateCreated;
+                        if (subtractFieldAppliedAmounts)
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateAvailable).Last().DateCreated;
+                        }
+                        else
+                        {
+                            result = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.TotalSolidDigestateProduced).Last().DateCreated;
+                        }
                     }
 
                     break;

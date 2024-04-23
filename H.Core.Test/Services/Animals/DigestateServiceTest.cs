@@ -61,32 +61,57 @@ namespace H.Core.Test.Services.Animals
             {
                 Date = new DateTime(DateTime.Now.Year, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
+                FlowRateSolidFraction = 200,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 10,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 20,
+
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 33,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 66,
+
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 103,
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 113,
             };
 
             _dailyOutput2 = new DigestorDailyOutput()
             {
                 Date = new DateTime(DateTime.Now.Year, 4, 2),
                 FlowRateOfAllSubstratesInDigestate = 100,
+                FlowRateSolidFraction = 100,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 21,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 55,
+
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 11,
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 22,
             };
 
             _dailyOutput3 = new DigestorDailyOutput()
             {
                 Date = new DateTime(DateTime.Now.Year - 1, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
+                FlowRateSolidFraction = 600,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 27,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 96,
+
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 2,
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 3,
             };
 
             _dailyOutput4 = new DigestorDailyOutput()
             {
                 Date = new DateTime(DateTime.Now.Year, 4, 3),
                 FlowRateOfAllSubstratesInDigestate = 300,
+                FlowRateSolidFraction = 222,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 80,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 20,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 26,
+                TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction = 77,
+
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction = 55,
+                TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction = 10,
             };
 
             _dailyResults = new List<DigestorDailyOutput>() { _dailyOutput1, _dailyOutput2, _dailyOutput3, _dailyOutput4 };
@@ -376,6 +401,58 @@ namespace H.Core.Test.Services.Animals
             var result = _sut.GetDateOfMaximumAvailableDigestate(_farm, DigestateState.Raw, year, _dailyResults, false);
 
             Assert.AreEqual(new DateTime(DateTime.Now.Year, 4, 3), result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsRawAmountsNotConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = false;
+
+            _adComponent.IsLiquidSolidSeparated = false;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.Raw);
+
+            Assert.AreEqual(90, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsRawAmountsConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = true;
+
+            _digestateApplication.DigestateState = DigestateState.Raw;
+            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _digestateApplication.AmountAppliedPerHectare = 200;
+
+            _adComponent.IsLiquidSolidSeparated = false;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.Raw);
+
+            Assert.AreEqual(54, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsSolidAmountsNotConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = false;
+
+            _adComponent.IsLiquidSolidSeparated = true;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
+
+            Assert.AreEqual(169, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsSolidAmountsConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = true;
+
+            _digestateApplication.DigestateState = DigestateState.SolidPhase;
+            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _digestateApplication.AmountAppliedPerHectare = 200;
+
+            _adComponent.IsLiquidSolidSeparated =true;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
+
+            Assert.AreEqual(105, result, 1);
         }
 
         #endregion
