@@ -50,6 +50,8 @@ A dairy specific training guide can be found <a href="https://github.com/holos-a
 
 A poultry specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Poultry%20Training%20Guide/Holos_4_Training_Guide_Poultry.md" target="_blank">here</a>.
 
+Video tutorials on using Holos 4 as well as navigating the GitHub interface can be found [here](https://www.youtube.com/@holosaafc9123).
+
 # User Guide
 
 There is also a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md" target="_blank">Holos 4 User Guide</a> available. This guide can be used as a more in-depth manual on how to use the various features of Holos.

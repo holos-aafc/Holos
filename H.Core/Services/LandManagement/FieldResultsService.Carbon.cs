@@ -313,7 +313,6 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // At this point, the detail view items have had their C inputs calculated
-
                 // Equation 2.1.3-1
                 equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.CombinedAboveGroundInput);
 
@@ -345,14 +344,10 @@ namespace H.Core.Services.LandManagement
             result.ClimateParameter = equilibriumClimateParameter;
             result.ManagementFactor = equilibriumManagementFactor;
 
-            var averageNitrogenConcentrationInProduct =
-                viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
-            var averageNitrogenConcentrationInStraw =
-                viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
-            var averageNitrogenConcentrationInRoots =
-                viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
-            var averageNitrogenConcentrationInExtraroots =
-                viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
+            var averageNitrogenConcentrationInProduct = viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
+            var averageNitrogenConcentrationInStraw = viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
+            var averageNitrogenConcentrationInRoots = viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
+            var averageNitrogenConcentrationInExtraroots = viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
 
             result.NitrogenContentInProduct = averageNitrogenConcentrationInProduct;
             result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
@@ -696,78 +691,128 @@ namespace H.Core.Services.LandManagement
             return result < 0 ? 0 : result;
         }
 
-        public void CalculateCarbonLostByGrazingAnimals(
-            Farm farm,
+        /// <summary>
+        /// Equation 11.3.2-4
+        /// </summary>
+        public void CalculateCarbonLostByGrazingAnimals(Farm farm,
             FieldSystemComponent fieldSystemComponent,
-            IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+            IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults, List<CropViewItem> viewItems)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var cropViewItem in viewItems)
             {
-                var totalCarbonLostForField = 0d;
+                if (cropViewItem.HarvestMethod == HarvestMethods.StubbleGrazing)
+                {
+                    continue;
+                }
+
+                var totalCarbonLossesForField = 0d;
+                var totalCarbonUptakeForField = 0d;
 
                 foreach (var componentResults in animalComponentEmissionsResults.ToList())
                 {
                     if (componentResults.Component is AnimalComponentBase animalComponentBase)
                     {
                         var totalLostForAllGroups = 0d;
+                        var totalCarbonUptakeForAllGroups = 0d;
 
                         var animalGroups = animalComponentBase.Groups;
                         foreach (var animalGroup in animalGroups)
                         {
-                            var totalCarbonLostForAllManagementPeriods = 0d;
+                            // managementPeriod.Start.Year == currentYearResults.Year
+                            var grazingManagementPeriodsByGroup = this.GetGrazingManagementPeriods(animalGroup, fieldSystemComponent).Where(x => x.Start.Year == cropViewItem.Year).ToList();
+                            var totalCarbonLostForAllManagementPeriods = this.CalculateUptakeByGrazingAnimals(grazingManagementPeriodsByGroup, cropViewItem, animalGroup, fieldSystemComponent, farm, animalComponentBase);
 
-                            var grazingManagementPeriodsByGroup = this.GetSelectedManagementPeriods(animalGroup, fieldSystemComponent);
-                            foreach (var managementPeriod in grazingManagementPeriodsByGroup)
-                            {
-                                var emissionResultsForPeriod =  this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponentBase, managementPeriod);
-                                totalCarbonLostForAllManagementPeriods += emissionResultsForPeriod.TotalCarbonUptakeByAnimals();
-
-                                // Used for reference
-                                var dmi = emissionResultsForPeriod.TotalDmiUptakeByAnimals();
-                            }
-
-                            totalLostForAllGroups += totalCarbonLostForAllManagementPeriods;
+                            totalLostForAllGroups += totalCarbonLostForAllManagementPeriods.Item1;
+                            totalCarbonUptakeForAllGroups += totalCarbonLostForAllManagementPeriods.Item2;
                         }
 
-                        totalCarbonLostForField += totalLostForAllGroups;
+                        totalCarbonLossesForField += totalLostForAllGroups;
+                        totalCarbonUptakeForField += totalCarbonUptakeForAllGroups;
                     }
                 }
 
-                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLostForField;
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLossesForField;
+                cropViewItem.TotalCarbonUptakeByAnimals = totalCarbonUptakeForField;
+            }
+        }
+
+        public Tuple<double, double> CalculateUptakeByGrazingAnimals(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
+        {
+            if (managementPeriods.Any() == false)
+            {
+                return new Tuple<double, double>(0, 0);
+            }
+
+            if (managementPeriods.Count == 1)
+            {
+                // Equation 11.3.2-4
+                // Equation 11.3.2-5
+
+                /*
+                 * Note: value is reduced by area in Equation 11.3.2-9
+                 */
+
+                var resultsForManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, managementPeriods.Single());
+                var totalCarbonUptake = resultsForManagementPeriod.TotalCarbonUptakeByAnimals();
+                var averageUtilizationRate =  viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+                var utilizationRate = (averageUtilizationRate / 100.0);
+                if (utilizationRate <= 0)
+                {
+                    utilizationRate = 1;
+                }
+
+                var result = totalCarbonUptake / utilizationRate;
+
+                return new Tuple<double, double>(result, totalCarbonUptake);
+            }
+            else
+            {
+                var totalCarbonUptake = 0d;
+                var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+
+                var lastPeriod = managementPeriods.OrderBy(x => x.Start).Last();
+                var resultsForLastManagementPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, lastPeriod);
+                var totalCarbonUptakeForLastPeriod = resultsForLastManagementPeriod.TotalCarbonUptakeByAnimals();
+                totalCarbonUptake += totalCarbonUptakeForLastPeriod;
+                var denominator = averageUtilizationRate / 100;
+                if (denominator <= 0)
+                {
+                    denominator = 1;
+                }
+
+                var carbonUptakeForLastPeriod = totalCarbonUptakeForLastPeriod / denominator;
+
+                // Equation 11.3.2-6
+                var carbonUpdateForOtherPeriods = 0d;
+                for (int i = 0; i < managementPeriods.Count - 1; i++)
+                {
+                    var managementPeriod = managementPeriods[i];
+                    var resultsForPeriod = this.AnimalResultsService.GetResultsForManagementPeriod(animalGroup, farm, animalComponent, managementPeriod);
+                    var totalCarbonUptakeForPeriod = resultsForPeriod.TotalCarbonUptakeByAnimals();
+                    totalCarbonUptake += totalCarbonUptakeForPeriod;
+
+                    var carbonUptakeForPeriod = totalCarbonUptakeForPeriod ;
+                    carbonUpdateForOtherPeriods += carbonUptakeForPeriod;
+                }
+
+                var result = (carbonUpdateForOtherPeriods + carbonUptakeForLastPeriod);
+
+                return new Tuple<double, double>(result, totalCarbonUptake);
             }
         }
 
         /// <summary>
         /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
         /// </summary>
-        private List<ManagementPeriod> GetSelectedManagementPeriods(
+        private List<ManagementPeriod> GetGrazingManagementPeriods(
             AnimalGroup animalGroup, 
             FieldSystemComponent fieldSystemComponent)
         {
-            var result = new List<ManagementPeriod>();
-
             var managementPeriods = animalGroup.ManagementPeriods.ToList();
             var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
-            if (grazingPeriods.Count() == 1)
-            {
-                result.Add(grazingPeriods.Single());
-            }
-            else
-            {
-                var orderedByDate = grazingPeriods.OrderBy(x => x.Start).ToList();
+            return grazingPeriods;
 
-                // Get all except last
-                var count = orderedByDate.Count();
-                for (int i = 0; i < count - 1; i++)
-                {
-                    result.Add(orderedByDate.ElementAt(i));
-                }
-            }
-
-            return result;
         }
-
-       
 
         #endregion
     }

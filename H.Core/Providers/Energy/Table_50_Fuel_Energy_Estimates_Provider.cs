@@ -63,6 +63,12 @@ namespace H.Core.Providers.Energy
         {
             var soilLookupType = soilCategory.GetSimplifiedSoilCategory();
 
+            // No summer fallow in table
+            if (cropType.IsFallow())
+            {
+                cropType = CropType.Fallow;
+            }
+
             Table_50_Fuel_Energy_Estimates_Data data = this.Data.Find(x => (x.Province == province) && (x.SoilFunctionalCategory == soilLookupType)
                                                             && (x.TillageType == tillageType) && (x.CropType == cropType));
             
@@ -212,6 +218,5 @@ namespace H.Core.Providers.Energy
         }
 
         #endregion
-
     }
 }

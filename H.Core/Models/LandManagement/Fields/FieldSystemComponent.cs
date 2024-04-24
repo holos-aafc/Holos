@@ -28,6 +28,7 @@ namespace H.Core.Models.LandManagement.Fields
         private double _fieldArea;
 
         private bool _beginOrderingAtStartYearOfRotation;
+        private bool _useFieldLevelSoilData;
 
         private SoilData _soilData;
         private ObservableCollection<SoilData> _soilDataAvailableForField;
@@ -77,7 +78,15 @@ namespace H.Core.Models.LandManagement.Fields
         /// By default, <see cref="Providers.Soil.SoilData"/> associated with the farm will be used (across all fields). This flag allows for field-specific <see cref="Providers.Soil.SoilData"/>
         /// to be used.
         /// </summary>
-        public bool UseFieldLevelSoilData { get; set; }
+        public bool UseFieldLevelSoilData {
+            get
+            {
+                return _useFieldLevelSoilData;
+            }
+            set
+            {
+                SetProperty(ref _useFieldLevelSoilData, value);
+            } }
 
         /// <summary>
         /// Allow for field specific soil data (as opposed to one type of soil being used for all fields on the farm)
@@ -374,14 +383,13 @@ namespace H.Core.Models.LandManagement.Fields
             ManagementPeriod managementPeriod)
         {
             var housingDetails = managementPeriod.HousingDetails;
-            var isPasture = housingDetails.HousingType.IsPasture();
             var isNonNullPasture = housingDetails.PastureLocation != null;
-            if (isPasture == false || isNonNullPasture == false)
+            if (isNonNullPasture == false)
             {
                 return false;
             }
 
-            var isMatchingLocation = housingDetails.PastureLocation.Guid.Equals(this.Guid);
+            var isMatchingLocation = housingDetails.PastureLocation.Name.Equals(this.Name);
 
             return isMatchingLocation;
         }
@@ -393,6 +401,22 @@ namespace H.Core.Models.LandManagement.Fields
                 foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
                 {
                     if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && manureApplicationViewItem.DateOfApplication.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasLivestockDigestateApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                {
+                    if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && digestateApplicationViewItem.DateCreated.Year == year)
                     {
                         return true;
                     }
@@ -418,7 +442,23 @@ namespace H.Core.Models.LandManagement.Fields
             return false;
         }
 
-        #endregion
+        public bool HasImportedDigestateApplicationsInYear(int year)
+        {
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                {
+                    if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && digestateApplicationViewItem.DateCreated.Year == year)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        #endregion  
 
         #region Private Methods
 

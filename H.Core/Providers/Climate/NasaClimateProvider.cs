@@ -1,15 +1,13 @@
-﻿using H.Core.Tools;
+﻿using H.Core.Calculators.Climate;
+using H.Core.Tools;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Calculators.Climate;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace H.Core.Providers.Climate
 {
@@ -255,13 +253,8 @@ namespace H.Core.Providers.Climate
             // ALLSKY_SFC_SW_DWN: All Sky Insolation Incident on a Horizontal Surface (AKA solar radiation) (MJ/m^2/day *when AG community type is specified)
             var parameters = "T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN";
 
-            var latitudeString = latitude.ToString();
-            var longitudeString = longitude.ToString();
-            if (currentCulture == Infrastructure.InfrastructureConstants.FrenchCultureInfo)
-            {
-                latitudeString = latitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
-                longitudeString = longitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
-            }
+            var latitudeString = latitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
+            var longitudeString = longitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
 
             var parameterPath = $"parameters={parameters}&community={userCommunity}&longitude={longitudeString}&latitude={latitudeString}&start={startDate}&end={endDate}&format={format}";
 

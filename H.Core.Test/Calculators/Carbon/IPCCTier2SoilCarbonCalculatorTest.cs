@@ -849,14 +849,16 @@ namespace H.Core.Test.Calculators.Carbon
                 Yield = 7018,
                 PercentageOfStrawReturnedToSoil = 100,
                 MoistureContentOfCrop = 0.12,
+                BiomassCoefficientStraw = 0.2,
+                BiomassCoefficientProduct = 0.6,
             };
 
             _sut.CalculateInputs(
                 viewItem: viewItem, farm: new Farm());
 
-            Assert.AreEqual(2157, viewItem.AboveGroundCarbonInput, 1);
-            Assert.AreEqual(453, viewItem.BelowGroundCarbonInput, 1);
-            Assert.AreEqual(2610, viewItem.TotalCarbonInputs, 1);
+            Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);
+            Assert.AreEqual(997.775453968351, viewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(3155.23433953193, viewItem.TotalCarbonInputs, 1);
         }
 
         [TestMethod]
@@ -881,9 +883,12 @@ namespace H.Core.Test.Calculators.Carbon
             
             var viewItems = new List<CropViewItem>()
             {                
-                new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
-                new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
-                new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100},
+                new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100          ,      BiomassCoefficientStraw = 0.2,
+                    BiomassCoefficientProduct = 0.6,},
+                new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
+                    BiomassCoefficientProduct = 0.6,},
+                new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
+                    BiomassCoefficientProduct = 0.6,},
             };
 
             var fieldSystemComponent = new FieldSystemComponent();

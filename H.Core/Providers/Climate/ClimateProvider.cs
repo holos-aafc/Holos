@@ -13,7 +13,9 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers.Precipitation;
+using H.Core.Providers.Soil;
 using H.Core.Tools;
+using H.Infrastructure;
 
 namespace H.Core.Providers.Climate
 {
@@ -187,6 +189,48 @@ namespace H.Core.Providers.Climate
             };
         }
 
+        public void OutputMonthlyClimateData(Farm farm, string outputPath)
+        {
+            var path = outputPath;
+
+            var runInPeriodYears = farm.Defaults.DefaultRunInPeriod;
+            var startYear = farm.GetStartYearOfEarliestRotation() - runInPeriodYears;
+            var endYear = farm.GetEndYearOfEarliestRotation();
+
+            string[] columnNames = {
+                Properties.Resources.Year,
+                Properties.Resources.LabelMonth,
+                Properties.Resources.Temperature,
+                Properties.Resources.LabelPrecipitation,
+                Properties.Resources.LabelEvapotranspiration,
+            };
+
+            const string stringFormat = "F2";
+
+            using (var writer = new StreamWriter(path))
+            {
+                writer.WriteLine(string.Join(",", columnNames));
+
+                for (int year = startYear; year < endYear; year++)
+                {
+                    for (int j = 0; j < 12; j++)
+                    {
+                        var month = (Months) (j + 1);
+
+                        var precipitation = farm.ClimateData.GetTotalPrecipitationForMonthAndYear(year, month);
+                        var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(year, month);
+                        var evapotranspiration = farm.ClimateData.GetTotalEvapotranspirationForMonthAndYear(year, month);
+
+                        string[] rowData = { year.ToString(), month.GetDescription(), temperature.ToString(stringFormat), precipitation.ToString(stringFormat), evapotranspiration.ToString(stringFormat) };
+
+                        writer.WriteLine(string.Join(",", rowData));
+                    }
+                }
+
+                writer.WriteLine();
+            }
+        }
+
         public void OutputDailyClimateData(Farm farm, string outputPath)
         {
             var path = outputPath;
@@ -221,6 +265,8 @@ namespace H.Core.Providers.Climate
                     string[] rowData = { year, julianDay, meanDailyAirTemperature, meanDailyPrecipitation, meanDailyPET, relativeHumidity, solarRadiation, date };
                     writer.WriteLine(string.Join(",", rowData));
                 }
+
+                writer.WriteLine();
             }
         }
 

@@ -23,8 +23,7 @@ namespace H.Core.Services.Animals
         {
             if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture)
             {
-                groupEmissionsByDay.TotalAmountOfNitrogenForDay =
-                    groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay;
+                groupEmissionsByDay.TotalAmountOfNitrogenForDay = groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay;
 
                 groupEmissionsByDay.TanEnteringStorageSystem = 0;
                 groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForHousing = 0;
@@ -38,6 +37,7 @@ namespace H.Core.Services.Animals
                 groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay = 0;
                 groupEmissionsByDay.ManureCarbonNitrogenRatio = 0;
                 groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 0;
+                groupEmissionsByDay.AccumulatedVolume = 0;
 
                 // Equation 5.3.1-1
                 groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.NitrogenExcretionRate *

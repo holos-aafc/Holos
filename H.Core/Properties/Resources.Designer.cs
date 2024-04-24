@@ -1096,7 +1096,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dry peas.
+        ///   Looks up a localized string similar to Dry/Field peas.
         /// </summary>
         public static string DryPeas {
             get {
@@ -5079,6 +5079,15 @@ namespace H.Core.Properties {
         public static string EnumStripGrazing {
             get {
                 return ResourceManager.GetString("EnumStripGrazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stubble grazing.
+        /// </summary>
+        public static string EnumStubbleGrazing {
+            get {
+                return ResourceManager.GetString("EnumStubbleGrazing", resourceCulture);
             }
         }
         
@@ -9232,6 +9241,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evapotranspiration.
+        /// </summary>
+        public static string LabelEvapotranspiration {
+            get {
+                return ResourceManager.GetString("LabelEvapotranspiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fallow area change.
         /// </summary>
         public static string LabelFallowAreaChange {
@@ -10375,6 +10393,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string LabelMonth {
+            get {
+                return ResourceManager.GetString("LabelMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiple fertilizer applications can be made to this field throughout the year. To add a fertilizer application, click &apos;Add Fertilizer Application&apos; to specify the details..
         /// </summary>
         public static string LabelMultipleFertilizerApplicationsCanBeMadeToThisField {
@@ -10731,6 +10758,15 @@ namespace H.Core.Properties {
         public static string LabelPotassium {
             get {
                 return ResourceManager.GetString("LabelPotassium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precipitation.
+        /// </summary>
+        public static string LabelPrecipitation {
+            get {
+                return ResourceManager.GetString("LabelPrecipitation", resourceCulture);
             }
         }
         
@@ -11253,6 +11289,24 @@ namespace H.Core.Properties {
         public static string LabelStorage {
             get {
                 return ResourceManager.GetString("LabelStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straw returned to soil.
+        /// </summary>
+        public static string LabelStrawReturnedToSoil {
+            get {
+                return ResourceManager.GetString("LabelStrawReturnedToSoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straw returned to soil after stubble grazing.
+        /// </summary>
+        public static string LabelStrawReturnedToSoilAfterStubbleGrazing {
+            get {
+                return ResourceManager.GetString("LabelStrawReturnedToSoilAfterStubbleGrazing", resourceCulture);
             }
         }
         
@@ -11802,6 +11856,15 @@ namespace H.Core.Properties {
         public static string LabelUseCustomVolatilizationFraction {
             get {
                 return ResourceManager.GetString("LabelUseCustomVolatilizationFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use field specific soil data (this will override the default soil data used for the entire farm).
+        /// </summary>
+        public static string LabelUseFieldLevelSoil {
+            get {
+                return ResourceManager.GetString("LabelUseFieldLevelSoil", resourceCulture);
             }
         }
         
@@ -12490,6 +12553,17 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Annual Holos estimates for the livestock components represent the sum of monthly emissions for a single production cycle only (as defined by the model user on the Component Selection screen). Therefore, if one or more animal groups have more than one production cycle in a calendar year, multiply the results by the number of production cycles in a year to get an estimate of actual yearly emissions related to housing and manure management/storage.
+        ///
+        ///Please note: emissions related to the deposition or applica [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string MessageAnnualDetailedReportMessage {
+            get {
+                return ResourceManager.GetString("MessageAnnualDetailedReportMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of irrigation, pesticide usage, and yield for the selected crop can be entered on this tab. Harvested yield can be entered as either wet weight or dry weight. Additional information can be entered by clicking on the &apos;Show Additional Information&apos; button..
         /// </summary>
         public static string MessageAnnualsGeneralTab {
@@ -12634,6 +12708,17 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monthly Holos estimates for the livestock components represent monthly estimates are for a single production cycle only. Therefore, to get an annual emissions value for these components, multiply the results by the number of production cycles in a year.
+        ///
+        ///Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component..
+        /// </summary>
+        public static string MessageMonthlyDetailedReportMessage {
+            get {
+                return ResourceManager.GetString("MessageMonthlyDetailedReportMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The monthly evapotranspiration averages for the farm..
         /// </summary>
         public static string MessageMonthlyEvapotranspirationBreakdownHeader {
@@ -12751,7 +12836,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on harvest for perennials. This can be changed on the &apos;Residue Tab&apos;.
+        ///   Looks up a localized string similar to It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on termination for perennials. This can be changed on the &apos;Residue Tab&apos;.
         /// </summary>
         public static string MessageRootTurnOverPerennials {
             get {
@@ -12792,6 +12877,15 @@ namespace H.Core.Properties {
         public static string MessageSuggestedFertilizerRate {
             get {
                 return ResourceManager.GetString("MessageSuggestedFertilizerRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please note that the selected yield assignement method chosen will be used for all fields on this farm. Select the  &apos;Custom Yield&apos; or &apos;Input File&apos; assignement methods to modify the yields for individual fields.
+        /// </summary>
+        public static string MessageTheSelectedYieldAssignmentMethod {
+            get {
+                return ResourceManager.GetString("MessageTheSelectedYieldAssignmentMethod", resourceCulture);
             }
         }
         

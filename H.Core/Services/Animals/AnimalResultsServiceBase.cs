@@ -1250,6 +1250,7 @@ namespace H.Core.Services.Animals
         /// Equation 4.3.1-4
         /// Equation 4.3.3-1
         /// Equation 4.3.4-2
+        /// Equation 4.3.3-1
         /// </summary>
         /// <param name="tanExcretionRate">Total Ammonical nitrogen (TAN) excretion rate (kg TAN head^-1 day^-1)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
@@ -1448,6 +1449,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.2-1
         /// Equation 4.3.3-7
+        /// Equation 4.3.3-11
         /// </summary>
         /// <param name="tanExcretion">TAN excreted by the animals for this period of time (kg TAN)</param>
         /// <param name="ammoniaLostFromHousing">NH3-N lost through NH3 emissions from housing systems (kg NH3-N) </param>
@@ -1685,6 +1687,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.5.2-1
+        /// Equation 4.5.2-11
         /// </summary>
         /// <param name="accumulatedTANEnteringStorageSystemOnDay">Adjusted amount of TAN in stored manure (kg TAN)</param>
         /// <returns>TAN available for land application (kg TAN)</returns>

@@ -27,6 +27,7 @@ namespace H.Core.Models
         private bool _percentageOfStrawReturned;
         private bool _percentageOfRootsReturned;
         private bool _description;
+        private bool _plantCarbonInAgriculturalProduct;
 
         #endregion
 
@@ -52,6 +53,7 @@ namespace H.Core.Models
             this.AboveGroundCarbonInput = false;
             this.BelowGroundCarbonInput = false;
             this.Description = true;
+            this.PlantCarbonInAgriculturalProduct = false;
         }
 
         public bool FieldName
@@ -120,6 +122,12 @@ namespace H.Core.Models
         {
             get { return _edit; }
             set { SetProperty(ref _edit, value); }
+        }
+
+        public bool PlantCarbonInAgriculturalProduct
+        {
+            get => _plantCarbonInAgriculturalProduct;
+            set => SetProperty(ref _plantCarbonInAgriculturalProduct, value);
         }
 
         public bool PercentageOfProductReturned

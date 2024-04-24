@@ -73,6 +73,8 @@ namespace H.Core.Models
         }
 
         /// <summary>
+        /// Total amount of raw digestate available after all field applications have been considered
+        ///  
         /// (kg)
         /// </summary>
         public double TotalRawDigestateAvailable

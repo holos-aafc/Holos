@@ -17,9 +17,22 @@ namespace H.Core.Providers.Animals
 
         public class Table_29_Default_Manure_Excreted_Provider_Data
         {
+            #region Properties
+            
             public double ManureExcretionRate { get; set; }
             public ManureStateType ManureStateType { get; set; }
             public AnimalType AnimalType { get; set; }
+
+            #endregion
+
+            #region Public Methods
+
+            public override string ToString()
+            {
+                return $"{nameof(ManureExcretionRate)}: {ManureExcretionRate}, {nameof(ManureStateType)}: {ManureStateType}, {nameof(AnimalType)}: {AnimalType}";
+            }
+
+            #endregion
         }
 
         #endregion
@@ -102,6 +115,17 @@ namespace H.Core.Providers.Animals
             else if (animalType.IsSwineType())
             {
                 animalTypeLookup = AnimalType.Swine;
+            }
+            else if (animalType.IsTurkeyType())
+            {
+                animalTypeLookup = AnimalType.Turkeys;
+            }
+            else if (animalType.IsPoultryType())
+            {
+                if (animalType == AnimalType.ChickenHens)
+                {
+                    animalTypeLookup = AnimalType.Layers;
+                }
             }
 
             var result = _excretionRates.SingleOrDefault(x => x.AnimalType == animalTypeLookup);

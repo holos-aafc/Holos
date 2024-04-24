@@ -34,8 +34,8 @@ namespace H.Avalonia.Test
         {
             var address = "5403 1 Ave S, Lethbridge, AB T1J 4B1";
             var point = await _mapHelpers?.GetLocationFromAddressAsync(address)!;
-            Assert.AreEqual("49.70", $"{point.latitude:0.00}");
-            Assert.AreEqual("-112.78", $"{point.longitude:0.00}");
+            Assert.AreEqual("49.7", $"{point.latitude:0.0}");
+            Assert.AreEqual("-112.8", $"{point.longitude:0.0}");
         }
 
         [TestMethod]

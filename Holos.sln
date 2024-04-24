@@ -30,6 +30,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Avalonia.Core", "H.GUI.Avalonia\H.Avalonia.Core\H.Avalonia.Core.csproj", "{DE475DB6-807F-42F5-BD92-D16AF2A5918B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Avalonia.Test", "H.GUI.Avalonia\H.Avalonia.Test\H.Avalonia.Test.csproj", "{53A9A756-5E6A-43D9-A056-D0FD56DAE226}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_actions", "_actions", "{77B16CA8-F32F-4CA8-9F81-D556AC481930}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-build-publish.yml = .github\workflows\dotnet-build-publish.yml
+		.github\workflows\dotnet-pr-build.yml = .github\workflows\dotnet-pr-build.yml
+		.github\workflows\_dotnet-build-template.yml = .github\workflows\_dotnet-build-template.yml
+		.github\workflows\_dotnet-nuget-template.yml = .github\workflows\_dotnet-nuget-template.yml
+		.github\workflows\_dotnet-publish-template.yml = .github\workflows\_dotnet-publish-template.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

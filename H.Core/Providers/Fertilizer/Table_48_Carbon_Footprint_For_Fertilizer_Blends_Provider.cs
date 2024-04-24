@@ -66,7 +66,10 @@ namespace H.Core.Providers.Fertilizer
             }
             else
             {
-                return null;
+                Trace.Write($"{nameof(Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider)}.{nameof(GetData)}" +
+                            $" - Unknown fertilizer blend type: {blend}");
+
+                return new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data();
             }
         }
 

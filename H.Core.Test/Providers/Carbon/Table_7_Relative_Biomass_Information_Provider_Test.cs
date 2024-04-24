@@ -49,7 +49,7 @@ namespace H.Core.Test.Providers.Carbon
         public void GetData()
         {
             var result = _sut.GetData().ToList();
-            Assert.AreEqual(91, result.Count);
+            Assert.AreEqual(90, result.Count);
         }
 
         [TestMethod]
@@ -139,13 +139,12 @@ namespace H.Core.Test.Providers.Carbon
         public void GetLigninContentValue()
         {
             Table_7_Relative_Biomass_Information_Data data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.SmallGrainCereals, SoilFunctionalCategory.Black, Province.Alberta);
-            Assert.AreEqual(0.074, data.LigninContent);
+            Assert.AreEqual(0.073, data.LigninContent);
 
             data = _sut.GetResidueData(IrrigationType.RainFed, 0, CropType.AlfalfaMedicagoSativaL, SoilFunctionalCategory.DarkBrown, Province.Alberta);
             Assert.AreEqual(0.133, data.LigninContent);
         }
 
-        
         #endregion
     }
 }

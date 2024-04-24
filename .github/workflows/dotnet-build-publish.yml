@@ -1,0 +1,29 @@
+name: Build and publish new release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_dotnet-build-template.yml
+    secrets: inherit
+    with:
+      configuration: Release
+      solution: Holos.sln
+      filename: Holos4-lib
+
+  nuget:
+    needs: build
+    uses: ./.github/workflows/_dotnet-nuget-template.yml
+    secrets: inherit
+    with:
+      configuration: Release
+
+  publish:
+    needs: build
+    uses: ./.github/workflows/_dotnet-publish-template.yml
+    secrets: inherit
+    with:
+      filename: Holos4-lib
+

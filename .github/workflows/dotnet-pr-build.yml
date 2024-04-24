@@ -1,0 +1,11 @@
+name: '[PR] Build and Test'
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_dotnet-build-template.yml
+    with:
+      configuration: Debug

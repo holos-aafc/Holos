@@ -606,7 +606,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        public double GetTotalNitrogenRemainingForFarmAndYear(int year, Farm farm)
+        public double GetTotalManureNitrogenRemainingForFarmAndYear(int year, Farm farm)
         {
             var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
 

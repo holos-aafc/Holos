@@ -8,6 +8,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Providers.Soil;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
 
 namespace H.Core.Test.Calculators.Nitrogen
@@ -19,6 +20,8 @@ namespace H.Core.Test.Calculators.Nitrogen
 
         private N2OEmissionFactorCalculator _sut;
         private Table_36_Livestock_Emission_Conversion_Factors_Data _emissionFactors;
+        private Farm _farm;
+        private CropViewItem _viewItem;
 
         #endregion
 
@@ -38,9 +41,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void TestInitialize()
         {
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
-
-
-
 
             _sut = n2oEmissionFactorCalculator;
             _sut.ManureService = base._mockManureServiceObject;
@@ -91,6 +91,21 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForSolidAppliedManure(It.IsAny<TillageType>())).Returns(1);
             _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForLiquidAppliedManure(It.IsAny<ManureApplicationTypes>())).Returns(1);
+
+            _viewItem = base.GetTestCropViewItem();
+            _viewItem.CropType = CropType.Wheat;
+            var field = base.GetTestFieldComponent();
+
+            _viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(_viewItem);
+            var soilData = base.GetTestSoilData();
+            field.SoilData = soilData;
+
+            _farm = base.GetTestFarm();
+            _farm.Components.Add(field);
+
+            var climateData = base.GetTestClimateData();
+            _farm.ClimateData = climateData;
         }
 
         [TestCleanup]
@@ -554,14 +569,21 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestMethod]
         public void GetManureNitrogenRemainingForFieldTest()
         {
-            _mockManureService.Setup(x => x.GetTotalNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
+            _mockManureService.Setup(x => x.GetTotalManureNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
 
             var cropViewItem = new CropViewItem() {Year = 2022, Area = 20};
             var farm = new Farm();
+            var field = base.GetTestFieldComponent();
+            field.FieldArea = 100;
+            farm.Components.Add(field);
 
-            var detailViewItem1 = new CropViewItem() {Year = 2022, CropType = CropType.Barley, Area = 100};
-            var detailViewItem2 = new CropViewItem() {Year = 2022, CropType = CropType.Wheat, Area = 200};
-            var detailViewItem3 = new CropViewItem() { Year = 2021 ,CropType = CropType.Beans, Area = 50};
+            var field2 = new FieldSystemComponent();
+            field2.FieldArea = 300;
+            farm.Components.Add(field2);
+
+            var detailViewItem1 = new CropViewItem() {Year = 2022, CropType = CropType.Barley};
+            var detailViewItem2 = new CropViewItem() {Year = 2022, CropType = CropType.Wheat};
+            var detailViewItem3 = new CropViewItem() { Year = 2021 ,CropType = CropType.Beans};
 
             var stageState = new FieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(detailViewItem1);
@@ -572,7 +594,290 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var result = _sut.GetManureNitrogenRemainingForField(cropViewItem, farm);
 
-            Assert.AreEqual(40, result);
+            Assert.AreEqual(30, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearWhenFieldNotFound()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearWhenNoLocalOrImportedDigestateApplicationsMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            farm.Components.Add(field);
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenLocalApplicationMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+            
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() {ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100});
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenImportedApplicationMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYearReturnsNonZeroWhenImportedApplicationAndLocalMade()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
+            field.CropViewItems.Clear();
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            viewItem.Area = 50;
+            farm.Components.Add(field);
+            field.CropViewItems.Add(viewItem);
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsZeroWhenFieldIsNativeRangeland()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            viewItem.CropType = CropType.RangelandNative;
+
+            var farm = base.GetTestFarm();
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(viewItem, farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsZeroWhenNoApplicationsMade()
+        {
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsNonZeroWhenLivestockApplicationsMade()
+        {
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0.056904037428100511, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForFieldReturnsNonZeroWhenLivestockAndImportApplicationsMade()
+        {
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
+
+            var result = _sut.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(_viewItem, _farm);
+
+            Assert.AreEqual(0.113808074856201, result, 0.00001);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(50 * 100, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+            _viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateCreated = DateTime.Now, AmountAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYearReturnsZero()
+        {
+            _viewItem.Area = 50;
+            _viewItem.DigestateApplicationViewItems.Clear();
+
+            var result = _sut.GetTotalDigestateVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockAndImportsInYearReturnsZero()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockAndImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100) * 2, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromLivestockInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100), result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureVolumeAppliedFromImportsInYear()
+        {
+            _viewItem.Area = 50;
+            _viewItem.ManureApplicationViewItems.Clear();
+
+            _viewItem.ManureApplicationViewItems.Add(new ManureApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Imported, DateOfApplication = DateTime.Now, AmountOfManureAppliedPerHectare = 100 });
+
+            var result = _sut.GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(_viewItem, _farm);
+
+            Assert.AreEqual((50 * 100), result);
+        }
+
+        [TestMethod]
+        public void CalculateWeightedOrganicNitrogenEmissionFactor()
+        {
+            var viewItem1 = new CropViewItem();
+            var viewItem2 = new CropViewItem();
+
+            var items = new List<CropViewItem>();
+            items.Add(viewItem1);
+            items.Add(viewItem2);
+
+            var field = base.GetTestFieldComponent();
+            _farm.Components.Add(field);
+
+            field.CropViewItems.Add(viewItem1);
+            field.CropViewItems.Add(viewItem2);
+
+            viewItem1.FieldSystemComponentGuid = field.Guid;
+            viewItem2.FieldSystemComponentGuid = field.Guid;
+
+            var result = _sut.CalculateWeightedOrganicNitrogenEmissionFactor(items, _farm);
+
+            Assert.AreEqual(0.00010811767111339097, result);
+        }
+
+        [TestMethod]
+        public void CalculateDirectN2ONFromLeftOverManureForField()
+        {
+            var stageState = _farm.GetFieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(_viewItem);
+            _farm.StageStates.Add(stageState);
+
+            var fieldWithManureApplication = base.GetTestFieldComponent();
+            fieldWithManureApplication.FieldArea = 133;
+
+            _farm.Components.Clear();
+            _farm.Components.Add(fieldWithManureApplication);
+            _viewItem.FieldSystemComponentGuid = fieldWithManureApplication.Guid;
+
+            var fieldWithOutManureApplications = new FieldSystemComponent();
+            fieldWithOutManureApplications.FieldArea = 222;
+            fieldWithOutManureApplications.CropViewItems.Add(new CropViewItem() {CropType = CropType.Barley});
+
+            _farm.Components.Add(fieldWithOutManureApplications);
+
+            _mockManureService.Setup(x => x.GetTotalManureNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(10);
+
+            var result = _sut.CalculateDirectN2ONFromLeftOverManureForField(_farm, _viewItem);
+
+            Assert.AreEqual(0.0021318977402640473, result);
+        }
+
+        [TestMethod]
+        public void GetTotalDigestateNitrogenRemainingForFarmAndYearTest()
+        {
+
         }
 
         #endregion

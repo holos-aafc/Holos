@@ -38,7 +38,7 @@ namespace H.Core.Test.Providers.Animals
         {
             var result = _sut.PercentageTotalManureProducedInSystem;
 
-            Assert.AreEqual(16, result.Keys.Count);
+            Assert.AreEqual(19, result.Keys.Count);
         }
 
         [TestMethod]

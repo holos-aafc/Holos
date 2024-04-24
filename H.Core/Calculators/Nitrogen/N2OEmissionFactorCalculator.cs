@@ -771,7 +771,7 @@ namespace H.Core.Calculators.Nitrogen
         /// Combines total emissions for entire area of a field from each manure/digestate application into per hectare emissions
         /// </summary>
         /// <param name="results">The emissions for each field</param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be used to calculate per hectare emissions</param>
+        /// <param name="viewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> that will be used to calculate per hectare emissions</param>
         /// <returns></returns>
         public LandApplicationEmissionResult ConvertPerFieldEmissionsToPerHectare(
             List<LandApplicationEmissionResult> results,
