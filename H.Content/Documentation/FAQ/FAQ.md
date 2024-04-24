@@ -114,19 +114,39 @@ The fertilizer tab of the field or crop rotation component provides the option t
 When importing manure/organic fertilizers from other farms, the farmer gains the benefit of adding carbon to the soil. However, when applying these organic materials, emissions will take place. As it is the farmer’s choice to apply the materials, and the emissions take place on the farm to which they were imported/applied, Holos does report the related emissions (for the purpose of the whole-farm GHG budget). If the purpose of the simulation is a life-cycle analysis approach (to calculate the GHG efficiency/intensity of a product), emission allocation may have to be employed.
 
 
-### 8. How do I add a field where I grow cover crop mixes?
+### 8. The fertilizer or manure application method I use is not present in the dropdown menu in the Holos interface - how do I know which option to choose?
+On the Component Selection screen in the 'Fertilizer' and 'Manure' tabs, there are several options for fertilizer application method (broadcast, incorporated or partially injected, fully injected) and for manure application method (solid spread (intensive tillage), solid spread (no tillage or reduced tillage), slurry broadcasting, drop hose banding, shallow injection, deep injection). The choice of application method determines the NH3 and indirect N2O emission factors used to estimate emissions of these gases from agricultural soils following the application of synthetic fertilizer and manure. In the context of the Holos model, these application methods can be defined as follows:
+
+***For fertilizer application:***
+- Broadcast: fertilizer is spread uniformly across the field where it remains on the soil surface
+- Incorporated: surface-applied fertilizer is incorporated into the soil to limit ammonia (NH3) volatilization. More likely in reduced tillage systems  
+- Partially injected (shallow injection): fertilizer is injected below the soil surface in vertical slots approx. 2-5 cm deep (by knifing or disking), after which the slots are closed. More likely in no-till systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
+- Fully injected (deep injection) - fertilizer is injected below the soil surface into slots approx. 5-20 cm deep (by knifing or disking) after which the slots are closed. More likely in conventional systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
+
+***For manure application:***
+- Solid spread (intensive tillage) - solid manure is spread on the soil surface and fully incorporated with a tillage implement
+- Solid spread (no tillage or reduced tillage) - solid manure is spread on the soil surface with shallow or no incorporation
+- Slurry broadcasting - liquid manure is broadcast on the soil surface with partial or no incorporation with a tillage implement
+- Drop hose banding - liquid manure is pumped from hoses that are dragged along the soil surface, which apply the manure in bands along the soil below the crop canopy; these systems are primarily designed for grassland 
+- Shallow injection - manure is applied below the soil surface in vertical slots approx. 2-5 cm deep, leaving the surface of the manure band exposed 
+- Deep injection - manure is injected below the soil surface into slots approx. 5-20 cm deep; in some cases, press wheels or rollers fitted behind the tines cover the slots
+
+Sources: BC Ministry of Agriculture (2015) Nutrient Management Factsheet - Efficient Liquid Manure Application Systems; B. Ellert (AAFC, pers. comm., 2024)
+
+
+### 9. How do I add a field where I grow cover crop mixes?
 At this time, Holos does not offer an option to input cover crop mixes. The future development and addition of such functionality is planned. At this current time, a single cover crop can be selected from the list of available options, and the carbon coefficients and N concentrations can be adjusted to better reflect the desired mix, e.g., by using average values for the mix).
 
 
-### 9. How do I add a field with inter-cropping?
+### 10. How do I add a field with inter-cropping?
 At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, separate field components for each crop can be used.
 
 
-### 10. How can I explore the effects of 4R nutrient management in Holos?
+### 11. How can I explore the effects of 4R nutrient management in Holos?
 Following the National GHG Inventory methodology, we do not yet know how to account for 4R nutrient management effects. However, we do have preliminary factors for some practices – you can see these by selecting ‘Yes’ for the ‘Show Additional Information’ option in the Fertilizer tab and choose the desired ‘Additive’). A ‘Custom‘ additive option has been added to the model to permit the testing of the preliminary results of other practice applications.
 
 
-### 11. When I add a fall/winter crop in Holos, what crop should I specify for that field in spring of the following year when that crop will be harvested?
+### 12. When I add a fall/winter crop in Holos, what crop should I specify for that field in spring of the following year when that crop will be harvested?
 Currently, in Holos V4, when the user ‘grows’ a crop such as fall rye or winter wheat (via the winter/cover crop section), residues from the winter/cover crop are added to the main crop in the planting year (year t) – this is the default approach. If there is no harvest of the winter crop in year t, the model user must enter 0 for the winter crop yield for this year, and then add a non-zero yield in year t+1. The model user can also omit the winter/cover crop in year t, and specify it in year t+1 with a non-zero yield and the effect on the Holos estimates will be the same in both scenarios. 
 
 ---
