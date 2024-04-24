@@ -61,6 +61,7 @@ namespace H.Core.Providers.Soil
             EcodistrictId = 0;
             Ecozone = Ecozone.Unknown;
             DrainageClass = SoilDrainageClasses.Unknown;
+            Province = Province.Alberta;
         }
 
         #endregion
