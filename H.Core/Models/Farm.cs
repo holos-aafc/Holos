@@ -79,6 +79,7 @@ namespace H.Core.Models
         private bool _isBasicMode;
         private bool _showAdditionalInformationInADView;
         private bool _isCommandLineMode;
+        private bool _useCustomRunInTillage;
 
         private Defaults _defaults;
         private Province _province;
@@ -628,14 +629,21 @@ namespace H.Core.Models
             set => SetProperty(ref _isCommandLineMode, value);
         }
 
+        public bool UseCustomRunInTillage
+        {
+            get => _useCustomRunInTillage;
+            set => SetProperty(ref _useCustomRunInTillage, value);
+        }
+
         #endregion
 
         #region Public Methods
 
         public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
         {
-            var itemsByYear = this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrasslands).ToList();
-            var area = itemsByYear.Sum(x => x.Area);
+            var fields = this.FieldSystemComponents.Where(x => x.CropViewItems.All(y => y.CropType.IsNativeGrassland() == includeNativeGrasslands));
+
+            var area = fields.Sum(x => x.FieldArea);
             if (area > 0)
             {
                 return area;
@@ -1119,11 +1127,6 @@ namespace H.Core.Models
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cropViewItem"></param>
-        /// <returns></returns>
         public SoilData GetPreferredSoilData(CropViewItem cropViewItem)
         {
             var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
@@ -1136,7 +1139,14 @@ namespace H.Core.Models
             }
             else
             {
-                return fieldComponent.SoilData;
+                if (fieldComponent.UseFieldLevelSoilData)
+                {
+                    return fieldComponent.SoilData;
+                }
+                else
+                {
+                    return this.DefaultSoilData;
+                }
             }
         }
 

@@ -130,6 +130,7 @@ namespace H.Core.Converters
                 case "poultry":
                     return AnimalType.Poultry;
                 case "poultrypulletsbroilers":
+                case "chickenbroilers":
                 case "broilers":
                     return AnimalType.Broilers;
                 case "chickenpullets":
@@ -137,6 +138,7 @@ namespace H.Core.Converters
                     return AnimalType.ChickenPullets;
                 case "chicken":
                     return AnimalType.Chicken;
+                case "chickencockerels":
                 case "cockerels":
                     return AnimalType.ChickenCockerels;
                 case "roasters":
@@ -145,12 +147,18 @@ namespace H.Core.Converters
                     return AnimalType.ChickenHens;
                 case "poultryturkeys":
                 case "turkey":
+                case "ducks":
+                    return AnimalType.Ducks;
+                case "geese":
+                    return AnimalType.Geese;
+                case "turkeys":
                     return AnimalType.Turkeys;
                 case "layersdry":
                     return AnimalType.LayersDryPoultry;
                 case "layerswet":
                     return AnimalType.LayersWetPoultry;
                 case "poultrylayers":
+                case "chickenlayers":
                 case "layers":
                     return AnimalType.Layers;
 

@@ -196,12 +196,13 @@ namespace H.Core.Calculators.Carbon
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-            viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(
-                freshWeightOfYield: viewItem.Yield,
-                harvestIndex: harvestIndex,
-                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
-                percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
+            if (viewItem.HarvestMethod == HarvestMethods.Swathing && farm.CropHasGrazingAnimals(viewItem))
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = (100 - viewItem.GetAverageUtilizationFromGrazingAnimals());
+            }
+
+            viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(harvestIndex: harvestIndex, viewItem: viewItem);
 
             viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
                 freshWeightOfYield: viewItem.Yield,
@@ -232,14 +233,10 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
 
-            viewItem.BelowGroundResidueDryMatter = this.CalculateBelowGroundResidueDryMatter(
-                aboveGroundResideDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
-                shootToRootRatio: cropData.RSTRatio,
-                area: viewItem.Area,
+            viewItem.BelowGroundResidueDryMatter = this.CalculateBelowGroundResidueDryMatter(shootToRootRatio: cropData.RSTRatio,
                 fractionRenewed: fractionRenewed,
-                freshWeightOfYield: viewItem.Yield,
-                moistureContentOfCropPercentage: viewItem.MoistureContentOfCropPercentage,
-                harvestIndex: harvestIndex);
+                harvestIndex: harvestIndex, 
+                cropViewItem: viewItem);
 
             const double BelowGroundCarbonContent = 0.42;
 
@@ -256,7 +253,7 @@ namespace H.Core.Calculators.Carbon
             viewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(viewItem, farm);
 
             /*
-             * Equation 2.2.2-10 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C
+             * Equation 2.2.2-12 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C
              * here. We report results in kg C on graphs so the conversion to tons is not performed here.
              *
              * Since we report ICBM in kg C (not tons), we do not convert to tons here so output of pool calculations on chart can be compared to ICBM chart on same scale (i.e. kg C and not T C).
@@ -313,6 +310,8 @@ namespace H.Core.Calculators.Carbon
             // Need average of above ground residue dry matter... etc.
             result.AboveGroundResidueDryMatter = runInPeriodItems.Average(x => x.AboveGroundResidueDryMatter);
             result.BelowGroundResidueDryMatter = runInPeriodItems.Average(x => x.BelowGroundResidueDryMatter);
+
+            result.TillageType = runInPeriodItems.First().TillageType;
 
             return result;
         }
@@ -592,23 +591,37 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.2.2-2
         /// </summary>
-        /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
         /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
-        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
-        /// <param name="percentageOfStrawReturned"></param>
+        /// <param name="viewItem"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
         public double CalculateAboveGroundResidueDryMatter(
-            double freshWeightOfYield,
             double harvestIndex,
-            double moistureContentOfCropAsPercentage,
-            double percentageOfStrawReturned)
+            CropViewItem viewItem)
         {
             if (harvestIndex <= 0)
             {
                 return 0;
             }
 
-            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (percentageOfStrawReturned / 100.0);
+            var freshWeightOfYield = viewItem.Yield;
+            var moistureContentOfCropAsPercentage = viewItem.MoistureContentOfCropPercentage;
+            var moistureContentFraction = moistureContentOfCropAsPercentage / 100.0;
+            var moistureFractionDifference = 1 - moistureContentFraction;
+
+            var strawReturnedToSoilFraction = viewItem.PercentageOfStrawReturnedToSoil / 100.0;
+            var productReturnedToSoilFraction = viewItem.PercentageOfProductYieldReturnedToSoil / 100.0;
+
+            var leftFirstTerm = (freshWeightOfYield * moistureFractionDifference) / harvestIndex;
+            var leftSecondTerm = freshWeightOfYield * moistureFractionDifference;
+            var leftInnerDifference = leftFirstTerm - leftSecondTerm;
+            var leftResult = leftInnerDifference * strawReturnedToSoilFraction;
+
+            var rightFirstTerm = freshWeightOfYield * moistureFractionDifference;
+            var rightResult = rightFirstTerm * productReturnedToSoilFraction;
+
+            var finalResult = leftResult + rightResult;
+
+            return finalResult;
         }
 
         /// <summary>
@@ -657,25 +670,47 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.2.2-5
+        /// Equation 2.2.2-6
         /// </summary>
-        /// <param name="aboveGroundResideDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
-        /// <param name="shootToRootRatio">Ratio of below-ground root biomass to above-ground shoot biomass (kg dm ha^-1 (kg dm ha^-1)^-1)</param>
-        /// <param name="area">Area of field (ha)</param>
+        /// <param name="shootToRootRatio">Ratio of below-ground root biomass to above-ground shoot biomass (RS(T)) (kg dm ha^-1 (kg dm ha^-1)^-1)</param>
         /// <param name="fractionRenewed">(unitless)</param>
-        /// <param name="freshWeightOfYield"></param>
-        /// <param name="moistureContentOfCropPercentage"></param>
-        /// <param name="harvestIndex"></param>
+        /// <param name="harvestIndex">Harvest ratio/index (R_AG(T))</param>
+        /// <param name="cropViewItem"></param>
         /// <returns>Annual total amount of below-ground residue (kg year^-1)</returns>
         public double CalculateBelowGroundResidueDryMatter(
-            double aboveGroundResideDryMatterForCrop,
             double shootToRootRatio,
-            double area,
             double fractionRenewed,
-            double freshWeightOfYield,
-            double moistureContentOfCropPercentage,
-            double harvestIndex)
+            double harvestIndex,
+            CropViewItem cropViewItem)
         {
-            return (((freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0)) / harvestIndex) - (freshWeightOfYield * (1 - moistureContentOfCropPercentage / 100.0))) * shootToRootRatio * area * fractionRenewed;
+            var cropArea = cropViewItem.Area;
+            var freshWeight = cropViewItem.Yield;
+            var moisturePercentage = cropViewItem.MoistureContentOfCropPercentage;
+            var harvestMethod = cropViewItem.HarvestMethod;
+            var moistureContentFraction = moisturePercentage / 100.0;
+            var moistureContentDifference = 1 - moistureContentFraction;
+
+            if (harvestIndex <= 0)
+            {
+                harvestIndex = 1;
+            }
+
+            var result = 0d;
+            if (harvestMethod == HarvestMethods.CashCrop)
+            {
+                var firstTerm = (freshWeight * moistureContentDifference) / harvestIndex;
+
+                result = firstTerm * shootToRootRatio * cropArea * fractionRenewed;
+            }
+            else
+            {
+                // Swathing, silage, green manure harvests
+                var innerResult = (freshWeight * moistureContentDifference);
+
+                result = innerResult * shootToRootRatio * cropArea * fractionRenewed;
+            }
+
+            return result;
         }
 
         /// <summary>

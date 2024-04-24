@@ -91,7 +91,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemainingForFarmAndYear(int year, Farm farm);
+        double GetTotalManureNitrogenRemainingForFarmAndYear(int year, Farm farm);
 
 
 

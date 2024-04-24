@@ -124,7 +124,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.4.2-7
+        /// Equation 4.4.2-8
         /// 
         /// (kg N2O-N)
         /// </summary>
@@ -134,7 +134,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.4.2-8
+        /// Equation 4.4.2-9
         /// 
         /// (kg N2O-N)
         /// </summary>

@@ -23,9 +23,9 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Map properties from the component selection screen view item to the detail screen view item.
         /// </summary>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> to copy from.</param>
+        /// <param name="viewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> to copy from.</param>
         /// <param name="year">When creating historical view items, this value will be used to set the year of any associated <see cref="ManureApplicationViewItem"/>s etc.</param>
-        /// <returns>A duplicated <see cref="CropViewItem"/></returns>
+        /// <returns>A duplicated <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/></returns>
         public CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year)
         {
             var result = _detailViewItemMapper.Map<CropViewItem, CropViewItem>(viewItem);
@@ -49,6 +49,16 @@ namespace H.Core.Services.LandManagement
                 copiedHarvestViewItem.DateCreated = new DateTime(year, harvestViewItem.DateCreated.Month, harvestViewItem.DateCreated.Day);
 
                 result.HarvestViewItems.Add(copiedHarvestViewItem);
+            }
+
+            foreach (var grazingViewItem in viewItem.GrazingViewItems)
+            {
+                var copiedGrazingViewItem = _harvestViewItemMapper.Map<GrazingViewItem, GrazingViewItem>(grazingViewItem);
+
+                // We need to update the year so that the current years' harvest items are copied back in time
+                copiedGrazingViewItem.DateCreated = new DateTime(year, grazingViewItem.DateCreated.Month, grazingViewItem.DateCreated.Day);
+
+                result.GrazingViewItems.Add(copiedGrazingViewItem);
             }
 
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
@@ -137,11 +147,13 @@ namespace H.Core.Services.LandManagement
                 {
                     this.CreateDetailViewItems(projectedComponent as FieldSystemComponent, farm);
                 }
+
+               this.PostProcessPerennials(component, farm);
             }
         }
 
         /// <summary>
-        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="CropViewItem.IsSecondaryCrop"/> to determine which view item
+        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop"/> to determine which view item
         /// is the main crop for the particular year.
         /// </summary>
         public CropViewItem GetMainCropForYear(
@@ -331,12 +343,6 @@ namespace H.Core.Services.LandManagement
 
             this.ProcessDigestateViewItems(farm, fieldSystemComponent);
 
-            // Before creating view items for each year, calculate carbon uptake by grazing animals
-            this.CalculateCarbonLostByGrazingAnimals(
-                farm,
-                fieldSystemComponent: fieldSystemComponent,
-                animalComponentEmissionsResults: this.AnimalResults );
-
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
 
@@ -344,7 +350,7 @@ namespace H.Core.Services.LandManagement
             var viewItems = this.CreateItems(fieldSystemComponent, farm).ToList();
 
             // Assign a default name, time period category, etc. to the view item
-            this.AssignInitialProperties(fieldSystemComponent, viewItems);
+            this.AssignInitialProperties(fieldSystemComponent, viewItems, farm);
 
             // Once the view items have been created, additional properties that relate to perennials only need to be assigned (stand IDs, positional years, etc.)
             this.ProcessPerennials(viewItems, fieldSystemComponent);
@@ -354,6 +360,12 @@ namespace H.Core.Services.LandManagement
 
             // Add in a details view message for the undersown year(s). Note that perennials must be processed before this call
             this.ProcessUndersownCrops(viewItems, fieldSystemComponent);
+
+            // Before creating view items for each year, calculate carbon uptake by grazing animals
+            this.CalculateCarbonLostByGrazingAnimals(
+                farm,
+                fieldSystemComponent: fieldSystemComponent,
+                animalComponentEmissionsResults: this.AnimalResults, viewItems: viewItems);
 
             var stageState = this.GetStageState(farm);
 
@@ -528,7 +540,40 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
+            this.SetRunInPeriodTillageType(mainCrops, runInPeriodItems, farm);
+
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
+        }
+
+        public void SetRunInPeriodTillageType(List<CropViewItem> mainCrops, List<CropViewItem> runInPeriodItems, Farm farm)
+        {
+            if (farm.UseCustomRunInTillage)
+            {
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = farm.Defaults.RunInPeriodTillageType;
+                }
+
+                return;
+            }
+
+            if (mainCrops.Select(x => x.TillageType).Distinct().Count() == 1)
+            {
+                // There is only one tillage type, use it for all run in period items
+                var tillageType = mainCrops.First().TillageType;
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = tillageType;
+                }
+            }
+            else
+            {
+                // Use the 'average' of reduced tillage
+                foreach (var runInPeriodItem in runInPeriodItems)
+                {
+                    runInPeriodItem.TillageType = TillageType.Reduced;
+                }
+            }
         }
 
         /// <summary>
@@ -611,7 +656,8 @@ namespace H.Core.Services.LandManagement
 
         private void AssignInitialProperties(
             FieldSystemComponent fieldSystemComponent,
-            IEnumerable<CropViewItem> viewItems)
+            IEnumerable<CropViewItem> viewItems,
+            Farm farm)
         {
             for (int i = 0; i < viewItems.Count(); i++)
             {
@@ -638,6 +684,8 @@ namespace H.Core.Services.LandManagement
                 {
                     currentYearViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
                 }
+
+                this.AssignSoilProperties(currentYearViewItem, farm);
             }
         }
 

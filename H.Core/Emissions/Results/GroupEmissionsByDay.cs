@@ -1807,6 +1807,7 @@ namespace H.Core.Emissions.Results
         public double NonAccumulatedCarbonCreatedOnDay { get; set; }
 
         public double TotalAmountOfNitrogenForDay { get; set; }
+        public double AccumulatedVolume { get; set; }
 
         #endregion
     }

@@ -463,7 +463,7 @@
     <value>Parc d'élevage (debout ou cours d’exercice)</value>
   </data>
   <data name="DryPeas" xml:space="preserve">
-    <value>pois secs</value>
+    <value>Dry/Field peas</value>
   </data>
   <data name="Durum" xml:space="preserve">
     <value>blé dur</value>
@@ -4203,7 +4203,7 @@
     <value>Veuillez examiner les informations sélectionnées sur le régime alimentaire, le poids corporel et le gain quotidien pour vous assurer que les animaux répondent à leurs besoins énergétiques quotidiens.</value>
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
-    <value>on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte, puis 100 % lors de la récolte des plantes vivaces. ces données peuvent être modifées à l’onglet « résidus ». </value>
+    <value>It is assumed that 30% of root biomass is turned over annually before harvest, and then 100% on termination for perennials. This can be changed on the 'Residue Tab'</value>
   </data>
   <data name="MessageShelterbeltComponentNotAvailable" xml:space="preserve">
     <value>Les données sur la zone de rusticité de ce végétal ne sont pas disponibles pour ce polygone.  Par conséquent, la composante pour les exploitations avec brise-vent ne sera pas disponible. Les zones de rusticité des végétaux à l’extérieur de l’intervalle 2A – 4B ne peuvent pas être modélisées par manque de données disponibles.</value>
@@ -5695,5 +5695,40 @@
   </data>
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
     <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
+  </data>
+  <data name="LabelMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="LabelEvapotranspiration" xml:space="preserve">
+    <value>Evapotranspiration</value>
+  </data>
+  <data name="LabelPrecipitation" xml:space="preserve">
+    <value>Precipitation</value>
+  </data>
+  <data name="MessageTheSelectedYieldAssignmentMethod" xml:space="preserve">
+    <value>Please note that the selected yield assignement method chosen will be used for all fields on this farm. Select the  'Custom Yield' or 'Input File' assignement methods to modify the yields for individual fields</value>
+  </data>
+  <data name="EnumStubbleGrazing" xml:space="preserve">
+    <value>Stubble grazing</value>
+  </data>
+  <data name="LabelStrawReturnedToSoil" xml:space="preserve">
+    <value>Straw returned to soil</value>
+  </data>
+  <data name="LabelStrawReturnedToSoilAfterStubbleGrazing" xml:space="preserve">
+    <value>Straw returned to soil after stubble grazing</value>
+  </data>
+  <data name="MessageAnnualDetailedReportMessage" xml:space="preserve">
+    <value>Annual Holos estimates for the livestock components represent the sum of monthly emissions for a single production cycle only (as defined by the model user on the Component Selection screen). Therefore, if one or more animal groups have more than one production cycle in a calendar year, multiply the results by the number of production cycles in a year to get an estimate of actual yearly emissions related to housing and manure management/storage.
+
+Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component.
+
+Please note: for each field component, the annual emissions in this report represent the total emissions from all synthetic fertilizer applied and all crop residues for the relevant calendar year, but include manure-related emissions for a single production cycle only.</value>
+  </data>
+  <data name="MessageMonthlyDetailedReportMessage" xml:space="preserve">
+    <value>Monthly Holos estimates for the livestock components represent monthly estimates are for a single production cycle only. Therefore, to get an annual emissions value for these components, multiply the results by the number of production cycles in a year.
+Please note: emissions related to the deposition or application of livestock manure to a field are reported under the relevant field or rotation component.</value>
+  </data>
+  <data name="LabelUseFieldLevelSoil" xml:space="preserve">
+    <value>Use field specific soil data (this will override the default soil data used for the entire farm)</value>
   </data>
 </root>

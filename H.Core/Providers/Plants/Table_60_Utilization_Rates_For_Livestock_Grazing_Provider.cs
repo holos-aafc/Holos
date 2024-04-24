@@ -13,7 +13,7 @@ namespace H.Core.Providers.Plants
     /// Table 60: Utilization rate lookup table for livestock grazing.
     /// 
     /// A revised utilization rate table for grazed systems, where the utilization rate depends on the type of grazed perennial
-    /// forage (rather than the grazing regime or stocking density), and this in turn can be used to back-calculate aboveground pasture biomass.
+    /// forage (rather than the grazing regime or stocking density), and this in turn can be used to back-calculate above ground pasture biomass.
     /// </summary>
     public class Table_60_Utilization_Rates_For_Livestock_Grazing_Provider
     {
@@ -22,7 +22,8 @@ namespace H.Core.Providers.Plants
             switch (cropType)
             {
                 case CropType.RangelandNative:
-                    return 45;
+                    return 40;
+
                 case CropType.SeededGrassland:
                     return 50;
 
@@ -31,12 +32,11 @@ namespace H.Core.Providers.Plants
                 case CropType.TameMixed:
                     return 60;
 
+                // Annuals
                 default:
-                {
-                    Trace.TraceError($"No data found for '{cropType.GetDescription()}'");
-
-                    return 0;
-                }
+                    {
+                        return 70;
+                    }
             }
         }
     }

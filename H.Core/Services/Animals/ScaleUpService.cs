@@ -33,8 +33,13 @@ namespace H.Core.Services.Animals
         #region Public Methods
         
         public bool ShouldScaleUp(bool isAnnualReport, AnimalType animalType, ProductionStages productionStage,
-            ComponentType? componentType)
+            ComponentType? componentType, Farm farm)
         {
+            if (farm.Defaults.ScaleUpEmissionsEnabled == false)
+            {
+                return false;
+            }
+
             if (isAnnualReport == false)
             {
                 // Emissions are only scaled up when reporting annually

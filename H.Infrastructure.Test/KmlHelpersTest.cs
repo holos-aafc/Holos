@@ -44,7 +44,6 @@ namespace H.Infrastructure.Test
         {
         }
 
-
         [TestMethod]
         public void TestGetPolygonFromCoordinateAlberta()
         {

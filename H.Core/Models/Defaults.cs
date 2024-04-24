@@ -60,6 +60,7 @@ namespace H.Core.Models
 
         // Perennial crops
         private double _percentageOfProductReturnedToSoilForPerennials;
+        private double _percentageOfStrawReturnedToSoilForPerennials;
         private double _percentageOfRootsReturnedToSoilForPerennials;
         private double _establishmentGrowthFactorPercentageForPerennials;
         private double _defaultSupplementalFeedingLossPercentage;
@@ -133,6 +134,7 @@ namespace H.Core.Models
 
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
+        private TillageType _runInPeriodTillageType;
 
         private double _defaultBiodegradableFractionDairyManure;
         private double _defaultBiodegradableFractionSwineManure;
@@ -140,9 +142,10 @@ namespace H.Core.Models
         private double _defaultBiodegradableFractionGreenWaste;
 
         // Irrigation
-
         private PumpType _defaulPumpType;
         private double _pumpEmissionsFactor;
+
+        private bool _scaleUpEmissionsEnabled;
 
         #endregion
 
@@ -157,7 +160,7 @@ namespace H.Core.Models
             this.CarbonConcentration = CoreConstants.CarbonConcentration;
             this.NumberOfYearsInCarRegionAverage = 3;
 
-            //default location is Lethbridge, AB
+            // Default location is Lethbridge, AB
             this.Latitude = 49.69999;
             this.Longitude = -112.81856;
 
@@ -197,6 +200,7 @@ namespace H.Core.Models
 
             // Perennial crops
             this.PercentageOfProductReturnedToSoilForPerennials = 35;
+            this.PercentageOfStrawReturnedToSoilForPerennials = 0;
             this.PercentageOfRootsReturnedToSoilForPerennials = 100;
             this.EstablishmentGrowthFactorPercentageForPerennials = 50;
             this.DefaultSupplementalFeedingLossPercentage = 20;
@@ -263,7 +267,7 @@ namespace H.Core.Models
 
             // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
             this.DefaultRunInPeriod = 15;
-
+            this.RunInPeriodTillageType = TillageType.Reduced;
             this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
 
             // AD
@@ -983,6 +987,24 @@ namespace H.Core.Models
         {
             get => _defaultNitrogenFixation;
             set => SetProperty(ref _defaultNitrogenFixation, value);
+        }
+
+        public TillageType RunInPeriodTillageType
+        {
+            get => _runInPeriodTillageType;
+            set => SetProperty(ref _runInPeriodTillageType, value);
+        }
+
+        public bool ScaleUpEmissionsEnabled
+        {
+            get => _scaleUpEmissionsEnabled;
+            set => SetProperty(ref _scaleUpEmissionsEnabled, value);
+        }
+
+        public double PercentageOfStrawReturnedToSoilForPerennials
+        {
+            get => _percentageOfStrawReturnedToSoilForPerennials;
+            set => SetProperty(ref _percentageOfStrawReturnedToSoilForPerennials, value);
         }
 
         #endregion

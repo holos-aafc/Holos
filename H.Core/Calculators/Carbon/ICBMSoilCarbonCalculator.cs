@@ -64,6 +64,12 @@ namespace H.Core.Calculators.Carbon
             CropViewItem nextYearViewItem,
             Farm farm)
         {
+            var isNonSwathingGrazingScenario = currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
+                                    farm.CropHasGrazingAnimals(currentYearViewItem) &&
+                                    farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
+                                    currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
+                                    currentYearViewItem.HarvestMethod != HarvestMethods.Swathing;
+
             currentYearViewItem.PlantCarbonInAgriculturalProduct = this.CalculatePlantCarbonInAgriculturalProduct(
                 previousYearViewItem: previousYearViewItem,
                 currentYearViewItem: currentYearViewItem,
@@ -75,22 +81,21 @@ namespace H.Core.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            if (currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 && farm.CropHasGrazingAnimals(currentYearViewItem) && farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
+            if (isNonSwathingGrazingScenario)
             {
-                var recalculatedPlantCarbonInAgriculturalProduct= this.RecalculatePlantCarbonForGrazingScenario(
-                    currentYearViewItem) / currentYearViewItem.Area;
+                // Total C losses from grazing animals is calculated in Equation 11.3.2-4
 
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = recalculatedPlantCarbonInAgriculturalProduct;
+                // Equation 11.3.2-6
+                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / currentYearViewItem.Area;
 
-                var recalculatedCarbonInputFromProduct = this.RecalculateCarbonInputForGrazingScenario(
-                    currentYearViewItem);
+                // Equation 11.3.2-7
+                currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
 
-                currentYearViewItem.CarbonInputFromProduct = recalculatedCarbonInputFromProduct;
+                // Equation 11.3.2-9
+                var totalYieldForArea = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration;
 
-                // Recalculate yield after Cp has been recalculated.
-                var recalculatedYield = this.RecalculateYield(currentYearViewItem);
-
-                currentYearViewItem.Yield = recalculatedYield;
+                // Convert to per hectare
+                currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
             }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
@@ -188,7 +193,14 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop))* currentYearViewItem.CarbonConcentration;
+                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+                {
+                    result = ((currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                }
+                else
+                {
+                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                }
             }
 
             return result;
@@ -209,8 +221,8 @@ namespace H.Core.Calculators.Carbon
             CropViewItem cropViewItem,
             Farm farm)
         {
-            // There are no inputs from straw when the harvest method is green manure
-            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            // There are no inputs from straw when the harvest method is green manure or swathing
+            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure || cropViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
                 return cropViewItem.CarbonInputFromProduct;
             }
@@ -306,7 +318,8 @@ namespace H.Core.Calculators.Carbon
         {
             if (currentYearViewItem.CropType.IsFallow() ||                              // No inputs from fallow fields
                 currentYearViewItem.CropType == CropType.NotSelected ||                 // Need a crop type to calculate input
-                currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure ||      // In this case, the residue fractions for product and straw are combined and so the inputs from straw are omitted
+                currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure ||      // In these two harvest method cases, the residue fractions for product and straw are combined and so the inputs from straw are omitted
+                currentYearViewItem.HarvestMethod == HarvestMethods.Swathing ||
                 currentYearViewItem.CropType.IsPerennial())                             // All above ground inputs from perennials are from the product and not the straw
             {
                 return 0;
@@ -357,10 +370,10 @@ namespace H.Core.Calculators.Carbon
                     farm: farm);
             }
 
-            // This is a special case when using an annual crop as green manure (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            // This is a special case when using an annual crop as green manure or swathed (see note under annual crop C input section)
+            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                return this.CalculateCarbonInputFromRootsForGreenManure(
+                return this.CalculateCarbonInputFromRootsForGreenManureOrSwathing(
                     previousYearViewItem,
                     currentYearViewItem,
                     farm);
@@ -412,9 +425,9 @@ namespace H.Core.Calculators.Carbon
             }
 
             // This is a special case when using an annual crop as green manure (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
             {
-                return this.CalculateCarbonInputFromExtrarootsForGreenManure(
+                return this.CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
                     previousYearViewItem,
                     currentYearViewItem,
                     farm);
@@ -644,12 +657,13 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.1.2-31
             var carbonInputFromExtraroots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
 
-            // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
-            {
-                // Equation 2.1.2-33
-                carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
-            }
+            // Taken out now as the extra roots only ever depend on the C_p and not the extraroots from the previous year
+            //// We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
+            //if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
+            //{
+            //    // Equation 2.1.2-33
+            //    carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
+            //}
 
             return carbonInputFromExtraroots;
         }
@@ -717,7 +731,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
         /// <returns>The carbon input from roots</returns>
-        private double CalculateCarbonInputFromRootsForGreenManure(
+        private double CalculateCarbonInputFromRootsForGreenManureOrSwathing(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             Farm farm)
@@ -745,7 +759,7 @@ namespace H.Core.Calculators.Carbon
         /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
         /// <param name="farm">The <see cref="Farm"/> being considered</param>
         /// <returns>The carbon input from extraroots</returns>
-        private double CalculateCarbonInputFromExtrarootsForGreenManure(
+        private double CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             Farm farm)
@@ -1086,7 +1100,8 @@ namespace H.Core.Calculators.Carbon
         {
             var lossesFromGrazing = viewItem.TotalCarbonLossesByGrazingAnimals;
 
-            var denominator = 1 - (viewItem.ForageUtilizationRate / 100.0);
+            var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
+            var denominator = 1 - (averageUtilizationRate / 100.0);
             if (denominator < 0)
             {
                 denominator = 1;
@@ -1102,7 +1117,11 @@ namespace H.Core.Calculators.Carbon
         {
             // Check for negative values here
 
-            var result = viewItem.PlantCarbonInAgriculturalProduct -(viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
+            var result = viewItem.PlantCarbonInAgriculturalProduct - (viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
+            if (result < 0)
+            {
+                return viewItem.PlantCarbonInAgriculturalProduct;
+            }
 
             return result;
         }

@@ -430,7 +430,6 @@ namespace H.Core.Enumerations
                 CropType.Camelina,
                 CropType.DryPeas,
                 CropType.FallRye,
-                CropType.FieldPeas,
                 CropType.Flax,
                 CropType.ForageForSeed,
                 CropType.GrainCorn,

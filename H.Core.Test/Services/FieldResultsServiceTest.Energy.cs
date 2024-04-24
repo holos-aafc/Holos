@@ -31,13 +31,13 @@ namespace H.Core.Test.Services
             var farm = new Farm();
 
             var field1 = new FieldSystemComponent();
+            field1.FieldArea = 50;
             viewItem1.FieldSystemComponentGuid = field1.Guid;
-            viewItem1.Area = 50;
             farm.Components.Add(field1);
 
             var field2 = new FieldSystemComponent();
+            field2.FieldArea = 33;
             viewItem2.FieldSystemComponentGuid = field2.Guid;
-            viewItem2.Area = 33;
             farm.Components.Add(field2);
 
             farm.StageStates.Add(new FieldSystemDetailsStageState() {DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
@@ -59,7 +59,7 @@ namespace H.Core.Test.Services
             var field2Results = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Results, field1Results);
-            Assert.AreEqual(8.8891566265060238, field1Results);
+            Assert.AreEqual(0.3827566265060241, field1Results);
             Assert.AreEqual(0.13804337349397591, field2Results);
         }
 
@@ -79,13 +79,13 @@ namespace H.Core.Test.Services
             var farm = new Farm();
 
             var field1 = new FieldSystemComponent();
+            field1.FieldArea = 50;
             viewItem1.FieldSystemComponentGuid = field1.Guid;
-            viewItem1.Area = 50;
             farm.Components.Add(field1);
 
             var field2 = new FieldSystemComponent();
+            field2.FieldArea = 33;
             viewItem2.FieldSystemComponentGuid = field2.Guid;
-            viewItem2.Area = 33;
             farm.Components.Add(field2);
 
             farm.StageStates.Add(new FieldSystemDetailsStageState()
@@ -116,8 +116,8 @@ namespace H.Core.Test.Services
             var field2Results = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Results, field1Results);
-            Assert.AreEqual(8.8891566265060238, field1Results);
-            Assert.AreEqual(4.4346433734939756, field2Results);
+            Assert.AreEqual(0.3827566265060241, field1Results);
+            Assert.AreEqual(0.26824337349397587, field2Results);
         }
 
         [TestMethod]
@@ -132,8 +132,9 @@ namespace H.Core.Test.Services
 
             var farm = new Farm();
             var field = new FieldSystemComponent();
+            field.FieldArea = 50;
+
             viewItem.FieldSystemComponentGuid = field.Guid;
-            viewItem.Area = 50;
             farm.Components.Add(field);
 
             farm.StageStates.Add(new FieldSystemDetailsStageState()
@@ -149,7 +150,7 @@ namespace H.Core.Test.Services
 
             var sut = _resultsService.GetManureSpreadingEmissions(viewItem, farm).Sum(x => x.TotalEmissions);
 
-            Assert.AreEqual(0.3472, sut, 0.0001);
+            Assert.AreEqual(0.34719999999999995, sut, 0.000001);
         }
 
         [TestMethod]
@@ -168,13 +169,16 @@ namespace H.Core.Test.Services
             var farm = new Farm();
 
             var field1 = new FieldSystemComponent();
+            field1.FieldArea = 50;
             viewItem1.FieldSystemComponentGuid = field1.Guid;
-            viewItem1.Area = 50;
             farm.Components.Add(field1);
+            field1.CropViewItems.Add(viewItem1);
 
             var field2 = new FieldSystemComponent();
+            field2.FieldArea = 60;
+            field2.CropViewItems.Add(viewItem2);
             viewItem2.FieldSystemComponentGuid = field2.Guid;
-            viewItem2.Area = 32;
+
             farm.Components.Add(field2);
 
             farm.StageStates.Add(new FieldSystemDetailsStageState()
@@ -194,8 +198,8 @@ namespace H.Core.Test.Services
             var field2Result = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Result, field1Result);
-            Assert.AreEqual(field1Result, 0.21170731707317073);
-            Assert.AreEqual(field2Result, 0.13549268292682923);
+            Assert.AreEqual(field1Result, 0.1578181818181818);
+            Assert.AreEqual(field2Result, 0.18938181818181812);
         }
 
         #endregion

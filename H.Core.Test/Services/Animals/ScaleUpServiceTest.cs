@@ -1,15 +1,9 @@
-﻿using H.Core.Calculators.Infrastructure;
-using H.Core.Emissions.Results;
+﻿
 using H.Core.Enumerations;
-using H.Core.Models.Animals.Sheep;
-using H.Core.Models.Animals;
 using H.Core.Models;
+using H.Core.Providers.Animals.Table_28;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using H.Core.Providers.Animals.Table_28;
 
 namespace H.Core.Test.Services.Animals
 {
@@ -54,7 +48,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void ShouldScaleUpReturnsTrue()
         {
-            var result = _scaleUpService.ShouldScaleUp(true, AnimalType.BeefBackgrounderHeifer, ProductionStages.GrowingAndFinishing, ComponentType.Backgrounding);
+            var result = _scaleUpService.ShouldScaleUp(true, AnimalType.BeefBackgrounderHeifer, ProductionStages.GrowingAndFinishing, ComponentType.Backgrounding, new Farm() { Defaults = new Defaults() { ScaleUpEmissionsEnabled = true } });
 
             Assert.IsTrue(result);
         }
@@ -62,7 +56,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void ShouldScaleUpReturnsFalse()
         {
-            var result = _scaleUpService.ShouldScaleUp(true, AnimalType.BeefCowLactating, ProductionStages.Lactating, ComponentType.CowCalf);
+            var result = _scaleUpService.ShouldScaleUp(true, AnimalType.BeefCowLactating, ProductionStages.Lactating, ComponentType.CowCalf, new Farm() {Defaults = new Defaults() {ScaleUpEmissionsEnabled = true}});
 
             Assert.IsFalse(result);
         }

@@ -43,8 +43,10 @@ namespace H.Core.Providers.Animals.Table_28
             return result.EmissionsShouldBeScaled == true;
         }
 
-        public ProductionDaysData GetData(AnimalType animalType,
-            ProductionStages productionStage, ComponentType? componentType = null)
+        public ProductionDaysData GetData(
+            AnimalType animalType,
+            ProductionStages productionStage, 
+            ComponentType? componentType = null)
         {
             AnimalType lookupType = animalType;
 

@@ -15,7 +15,7 @@ namespace H.Core.Services.LandManagement
     {
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
-        /// of the <see cref="CropViewItem"/> should be set here.
+        /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
         /// </summary>
         public void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
         {
@@ -195,8 +195,6 @@ namespace H.Core.Services.LandManagement
             }
             else if (viewItem.CropType.IsSilageCrop())
             {
-                // Check harvest method for swathing and assign
-
                 viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForFodderCorn;
                 viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForFodderCorn;
             }
@@ -220,16 +218,23 @@ namespace H.Core.Services.LandManagement
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
 
-            if (viewItem.HarvestMethod == HarvestMethods.Silage || viewItem.HarvestMethod == HarvestMethods.Swathing)
+            if (viewItem.HarvestMethod == HarvestMethods.Silage)
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 2;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
+            }
+            else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = 30;
                 viewItem.PercentageOfStrawReturnedToSoil = 0;
                 viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
             else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 100;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
+                viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
         }
 
@@ -501,23 +506,15 @@ namespace H.Core.Services.LandManagement
             var residueData = this.GetResidueData(viewItem, farm);
             if (residueData != null)
             {
-                if (viewItem.CropType.IsPerennial())
-                {
-                    /*
-                     * The biomass values for perennials are a special case. The residue table has 0 values (for the R_p) for all perennial types (but values for R_s, R_r, and R_e).
-                     * With perennials the 'product' is the straw and so we need to transfer the value of Rs from the residue table to the Rp property of the crop view item since
-                     * the calculations for C_r and C_e use the R_p value which would be 0 if we didn't transfer values here.
-                     */
+                viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
+                viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
+                viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
+                viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
 
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassStraw;  // Transfer values
-                    viewItem.BiomassCoefficientStraw = 0;                                   // Not applicable when considering perennials
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
-                else
+                if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure || viewItem.HarvestMethod == HarvestMethods.Silage)
                 {
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
-                    viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
+                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
+                    viewItem.BiomassCoefficientStraw = 0;
                     viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
                     viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
                 }
@@ -658,7 +655,7 @@ namespace H.Core.Services.LandManagement
         /// Barley. We check in the <see cref="AssignSystemDefaults"/> method if the crop is a silage crop without
         /// default data, if yes, this method is called to calculate the yield of that crop.
         /// </summary>
-        /// <param name="silageCropViewItem">The <see cref="CropViewItem"/> representing the silage crop. </param>
+        /// <param name="silageCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> representing the silage crop. </param>
         /// <param name="farm">The current farm of the user.</param>
         public void AssignDefaultSilageCropYield(CropViewItem silageCropViewItem, Farm farm)
         {
@@ -695,7 +692,7 @@ namespace H.Core.Services.LandManagement
         /// 
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
-        /// <param name="grainCropViewItem">The <see cref="CropViewItem"/> for the grain crop.</param>
+        /// <param name="grainCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for the grain crop.</param>
         /// <returns>The estimated yield (dry matter) for a silage crop</returns>
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
         {

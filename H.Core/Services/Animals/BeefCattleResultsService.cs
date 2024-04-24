@@ -260,6 +260,9 @@ namespace H.Core.Services.Animals
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
+            dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +
+                                               (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
+
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
@@ -554,6 +557,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
+
+            dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +
+                                               (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
 
             // If animals are housed on pasture, overwrite direct/indirect N2O emissions from manure
             base.GetEmissionsFromGrazingBeefPoultryAndDairyAnimals(

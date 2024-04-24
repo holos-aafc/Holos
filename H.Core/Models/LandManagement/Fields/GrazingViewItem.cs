@@ -45,7 +45,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Identifies the <see cref="AnimalComponentBase"/> that contains the <see cref="AnimalGroup"/> grazing on the <see cref="CropViewItem"/>.
+        /// Identifies the <see cref="AnimalComponentBase"/> that contains the <see cref="AnimalGroup"/> grazing on the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
         /// </summary>
         public Guid AnimalComponentGuid
         {
