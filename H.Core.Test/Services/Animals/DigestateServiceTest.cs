@@ -62,6 +62,8 @@ namespace H.Core.Test.Services.Animals
                 Date = new DateTime(DateTime.Now.Year, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 FlowRateSolidFraction = 200,
+                FlowRateLiquidFraction = 2222,
+
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 10,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 20,
 
@@ -77,6 +79,8 @@ namespace H.Core.Test.Services.Animals
                 Date = new DateTime(DateTime.Now.Year, 4, 2),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 FlowRateSolidFraction = 100,
+                FlowRateLiquidFraction = 3333,
+
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 21,
@@ -91,6 +95,8 @@ namespace H.Core.Test.Services.Animals
                 Date = new DateTime(DateTime.Now.Year - 1, 4, 1),
                 FlowRateOfAllSubstratesInDigestate = 100,
                 FlowRateSolidFraction = 600,
+                FlowRateLiquidFraction = 1001,
+
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplication = 30,
                 TotalAmountOfNitrogenFromRawDigestateAvailableForLandApplication = 50,
                 TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction = 27,
@@ -129,6 +135,7 @@ namespace H.Core.Test.Services.Animals
             var fieldComponent = base.GetTestFieldComponent();
             _cropViewItem = base.GetTestCropViewItem();
             _digestateApplication = base.GetTestRawDigestateApplicationViewItem();
+            _digestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
             _digestateApplication.DateCreated = _date;
             _digestateApplication.DigestateState = _state;
 
@@ -159,10 +166,9 @@ namespace H.Core.Test.Services.Animals
 
             var result = _sut.GetDailyTankStates(_farm, _dailyResults, _dailyResults[1].Date.Year);
 
-            // 100 kg is produced on 1st day
+            
             Assert.AreEqual(100, result.ElementAt(0).TotalRawDigestateAvailable);
 
-            // another 100 kg is produced on second day totaling 200. Subtract 50 for the field application totaling 150 kg available on 2nd day
             Assert.AreEqual(150, result.ElementAt(1).TotalRawDigestateAvailable);
         }
 
@@ -191,7 +197,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalAmountOfDigestateAppliedOnDay()
         {
-            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_date, _farm, _state);
+            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_date, _farm, _state, ManureLocationSourceType.Livestock);
 
             Assert.AreEqual(50, result);
         }
@@ -252,8 +258,8 @@ namespace H.Core.Test.Services.Animals
                 tank, 
                 component);
 
-            Assert.AreEqual(4912.3184079601988, tank.CarbonFromSolidDigestate);
-            Assert.AreEqual(1457.2139303482586, tank.NitrogenFromSolidDigestate);
+            Assert.AreEqual(9776, tank.CarbonFromSolidDigestate);
+            Assert.AreEqual(2900, tank.NitrogenFromSolidDigestate);
         }
 
         [TestMethod]
@@ -306,8 +312,8 @@ namespace H.Core.Test.Services.Animals
                 tank,
                 component);
 
-            Assert.AreEqual(738.2338, tank.CarbonFromLiquidDigestate, 0.0001);
-            Assert.AreEqual(1685.0082, tank.NitrogenFromLiquidDigestate, 0.0001);
+            Assert.AreEqual(885, tank.CarbonFromLiquidDigestate, 0.0001);
+            Assert.AreEqual(2020, tank.NitrogenFromLiquidDigestate, 0.0001);
         }
 
         [TestMethod]
@@ -370,8 +376,8 @@ namespace H.Core.Test.Services.Animals
                 tank,
                 component);
 
-            Assert.AreEqual(56.7679295677119, tank.CarbonFromRawDigestate, 0.0001);
-            Assert.AreEqual(27.9334256603027, tank.NitrogenFromRawDigestate, 0.0001);
+            Assert.AreEqual(63, tank.CarbonFromRawDigestate, 0.0001);
+            Assert.AreEqual(31, tank.NitrogenFromRawDigestate, 0.0001);
         }
 
         [TestMethod]
@@ -453,6 +459,32 @@ namespace H.Core.Test.Services.Animals
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
 
             Assert.AreEqual(105, result, 1);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsNotConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = false;
+
+            _adComponent.IsLiquidSolidSeparated = true;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
+
+            Assert.AreEqual(145, result);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsConsideringLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = true;
+
+            _digestateApplication.DigestateState = DigestateState.LiquidPhase;
+            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _digestateApplication.AmountAppliedPerHectare = 200;
+
+            _adComponent.IsLiquidSolidSeparated = true;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
+
+            Assert.AreEqual(140, result, 1);
         }
 
         #endregion

@@ -49,7 +49,8 @@ namespace H.Core.Services.Animals
         /// Equation 4.9.7-3
         /// </summary>
         double GetTotalCarbonRemainingAtEndOfYear(int year, Farm farm, AnaerobicDigestionComponent component);
-        double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state);
+        double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state,
+            ManureLocationSourceType sourceLocation);
 
         /// <summary>
         /// Equation 4.9.7-5

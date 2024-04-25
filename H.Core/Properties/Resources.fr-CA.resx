@@ -5731,4 +5731,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelUseFieldLevelSoil" xml:space="preserve">
     <value>Use field specific soil data (this will override the default soil data used for the entire farm)</value>
   </data>
+  <data name="LabelAshContentOfFeed" xml:space="preserve">
+    <value>Ash content of feed</value>
+  </data>
 </root>

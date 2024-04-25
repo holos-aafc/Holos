@@ -76,21 +76,36 @@ namespace H.Core.Services.Animals
                 case DigestateState.Raw:
                     {
                         amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromRawDigestate).ToList();
+
                         result = amounts.Last();
 
-                        return result;
+                        break;
                     }
 
                 case DigestateState.SolidPhase:
-                {
-                    amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromSolidDigestate).ToList();
-                    result = amounts.Last();
+                    {
+                        amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromSolidDigestate).ToList();
 
-                    return result;
-                }
+                        result = amounts.Last();
+
+                        break;
+                    }
+
+                case DigestateState.LiquidPhase:
+                    {
+                        amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromLiquidDigestate).ToList();
+
+                        result = amounts.Last();
+
+                        break;
+                    }
 
                 default:
-                    return 0;
+                    {
+                        result = 0;
+
+                        break;
+                    }
             }
 
             //var totalAvailableNitrogen = this.GetTotalNitrogenCreated(year);
@@ -122,7 +137,7 @@ namespace H.Core.Services.Animals
 
             //return totalAvailableNitrogen - (totalAppliedNitrogen - importedNitrogenApplied) - totalExportedNitrogen;
 
-            return 0;
+            return result;
         }
 
         /// <summary>
@@ -401,7 +416,12 @@ namespace H.Core.Services.Animals
             return totalCarbon;
         }
 
-        public double GetTotalAmountOfDigestateAppliedOnDay(DateTime dateTime, Farm farm, DigestateState state)
+        // HERE - account for imports
+        public double GetTotalAmountOfDigestateAppliedOnDay(
+            DateTime dateTime, 
+            Farm farm, 
+            DigestateState state,
+            ManureLocationSourceType sourceLocation)
         {
             var result = 0d;
 
@@ -411,7 +431,7 @@ namespace H.Core.Services.Animals
                 {
                     foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
                     {
-                        if (digestateApplicationViewItem.DateCreated.Date == dateTime.Date && digestateApplicationViewItem.DigestateState == state)
+                        if (digestateApplicationViewItem.DateCreated.Date == dateTime.Date && digestateApplicationViewItem.DigestateState == state && digestateApplicationViewItem.ManureLocationSourceType == sourceLocation)
                         {
                             result += digestateApplicationViewItem.AmountAppliedPerHectare * cropViewItem.Area;
                         }
@@ -524,7 +544,7 @@ namespace H.Core.Services.Animals
 
             // Raw digestate
             var totalRawDigestateOnThisDay = outputOnCurrentDay.FlowRateOfAllSubstratesInDigestate;
-            var totalRawDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw);
+            var totalRawDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Livestock);
             var totalRawDigestateFromPreviousDay = outputNumber == 0 ? 0 : result.ElementAt(outputNumber - 1).TotalRawDigestateAvailable;
             var totalRawProduced = totalRawDigestateOnThisDay + totalRawDigestateFromPreviousDay;
             var totalRawDigestateAvailableAfterFieldApplications = totalRawProduced - totalRawDigestateUsedForFieldApplications;
@@ -569,7 +589,7 @@ namespace H.Core.Services.Animals
             AnaerobicDigestionComponent component)
         {
             var totalLiquidFractionOnThisDay = outputOnCurrentDay.FlowRateLiquidFraction;
-            var totalLiquidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.LiquidPhase);
+            var totalLiquidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.LiquidPhase, ManureLocationSourceType.Livestock);
             var totalLiquidDigestateFromPreviousDay = outputNumber == 0 ? 0 : result.ElementAt(outputNumber - 1).TotalLiquidDigestateAvailable;
             var totalLiquidProduced = totalLiquidFractionOnThisDay + totalLiquidDigestateFromPreviousDay;
             var totalLiquidDigestateAvailableAfterFieldApplications = totalLiquidProduced - totalLiquidDigestateUsedForFieldApplications;
@@ -617,7 +637,7 @@ namespace H.Core.Services.Animals
              */
 
             var totalSolidFractionOnThisDay = outputOnCurrentDay.FlowRateSolidFraction;
-            var totalSolidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.SolidPhase);
+            var totalSolidDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.SolidPhase, ManureLocationSourceType.Livestock);
             var totalSolidDigestateFromPreviousDay = outputNumber == 0 ? 0 : result.ElementAt(outputNumber - 1).TotalSolidDigestateAvailable;
             var totalSolidProduced = totalSolidFractionOnThisDay + totalSolidDigestateFromPreviousDay;
             var totalSolidDigestateAvailableAfterFieldApplications = totalSolidProduced - totalSolidDigestateUsedForFieldApplications;

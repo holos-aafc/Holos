@@ -8224,6 +8224,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ash content of feed.
+        /// </summary>
+        public static string LabelAshContentOfFeed {
+            get {
+                return ResourceManager.GetString("LabelAshContentOfFeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aspartic Acid.
         /// </summary>
         public static string LabelAsparticAcid {
