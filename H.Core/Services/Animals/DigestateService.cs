@@ -26,6 +26,7 @@ namespace H.Core.Services.Animals
 
         public IADCalculator ADCalculator { get; set; }
         public bool SubtractAmountsFromLandApplications { get; set; }
+        public bool SubtractAmountsFromImoprtedDigestateLandApplications { get; set; }
 
         #endregion
 
@@ -529,8 +530,7 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public void CalculateRawAmountsAvailable(
-            DigestorDailyOutput outputOnCurrentDay,
+        public void CalculateRawAmountsAvailable(DigestorDailyOutput outputOnCurrentDay,
             DateTime outputDate,
             Farm farm,
             int outputNumber,
@@ -542,9 +542,17 @@ namespace H.Core.Services.Animals
              * Calculate raw amounts available
              */
 
+            var totalAmountFromApplications = 0d;
+            if (this.SubtractAmountsFromImoprtedDigestateLandApplications)
+            {
+                 totalAmountFromApplications += this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Imported);
+            }
+
+            totalAmountFromApplications += this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Livestock);
+
             // Raw digestate
             var totalRawDigestateOnThisDay = outputOnCurrentDay.FlowRateOfAllSubstratesInDigestate;
-            var totalRawDigestateUsedForFieldApplications = this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Livestock);
+            var totalRawDigestateUsedForFieldApplications = totalAmountFromApplications;
             var totalRawDigestateFromPreviousDay = outputNumber == 0 ? 0 : result.ElementAt(outputNumber - 1).TotalRawDigestateAvailable;
             var totalRawProduced = totalRawDigestateOnThisDay + totalRawDigestateFromPreviousDay;
             var totalRawDigestateAvailableAfterFieldApplications = totalRawProduced - totalRawDigestateUsedForFieldApplications;

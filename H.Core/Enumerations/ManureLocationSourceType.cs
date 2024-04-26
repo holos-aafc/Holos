@@ -12,6 +12,6 @@ namespace H.Core.Enumerations
         Livestock,
 
         [LocalizedDescription("EnumImported", typeof(Resources))]
-        Imported
+        Imported,
     }
 }

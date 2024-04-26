@@ -5796,4 +5796,10 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelAshContentOfFeed" xml:space="preserve">
     <value>Ash content of feed</value>
   </data>
+  <data name="EnumBeltPress" xml:space="preserve">
+    <value>Belt press</value>
+  </data>
+  <data name="EnumCentrifuge" xml:space="preserve">
+    <value>Centrifuge</value>
+  </data>
 </root>

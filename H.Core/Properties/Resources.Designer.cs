@@ -1537,6 +1537,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Belt press.
+        /// </summary>
+        public static string EnumBeltPress {
+            get {
+                return ResourceManager.GetString("EnumBeltPress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Berries &amp; grapes.
         /// </summary>
         public static string EnumBerriesAndGraps {
@@ -1749,6 +1758,15 @@ namespace H.Core.Properties {
         public static string EnumCattle {
             get {
                 return ResourceManager.GetString("EnumCattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Centrifuge.
+        /// </summary>
+        public static string EnumCentrifuge {
+            get {
+                return ResourceManager.GetString("EnumCentrifuge", resourceCulture);
             }
         }
         

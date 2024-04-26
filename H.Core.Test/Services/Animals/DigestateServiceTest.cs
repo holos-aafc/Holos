@@ -29,7 +29,8 @@ namespace H.Core.Test.Services.Animals
         private DateTime _date;
         private Farm _farm;
         private AnaerobicDigestionComponent _adComponent;
-        private DigestateApplicationViewItem _digestateApplication;
+        private DigestateApplicationViewItem _livestockDigestateApplication;
+        private DigestateApplicationViewItem _importedDigestateApplication;
         private FieldSystemComponent _fieldSystemComponent;
         private CropViewItem _cropViewItem;
         private DigestorDailyOutput _dailyOutput1;
@@ -134,12 +135,17 @@ namespace H.Core.Test.Services.Animals
             _farm = base.GetTestFarm();
             var fieldComponent = base.GetTestFieldComponent();
             _cropViewItem = base.GetTestCropViewItem();
-            _digestateApplication = base.GetTestRawDigestateApplicationViewItem();
-            _digestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
-            _digestateApplication.DateCreated = _date;
-            _digestateApplication.DigestateState = _state;
+            _livestockDigestateApplication = base.GetTestRawDigestateApplicationViewItem();
+            _livestockDigestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
+            _livestockDigestateApplication.DateCreated = _date;
+            _livestockDigestateApplication.DigestateState = _state;
 
-            _cropViewItem.DigestateApplicationViewItems.Add(_digestateApplication);
+            _importedDigestateApplication = base.GetTestRawDigestateApplicationViewItem();
+            _importedDigestateApplication.ManureLocationSourceType = ManureLocationSourceType.Imported;
+            _importedDigestateApplication.DateCreated = _date;
+            _importedDigestateApplication.DigestateState = _state;
+
+            _cropViewItem.DigestateApplicationViewItems.Add(_livestockDigestateApplication);
             _fieldSystemComponent = fieldComponent;
             _fieldSystemComponent.CropViewItems.Add(_cropViewItem);
 
@@ -161,8 +167,8 @@ namespace H.Core.Test.Services.Animals
         public void GetTankStatesReturnsReducedAmountsConsideringFieldApplications()
         {
             _adComponent.IsLiquidSolidSeparated = false;
-            _digestateApplication.DateCreated = _dailyResults[1].Date;
-            _digestateApplication.DigestateState = DigestateState.Raw;
+            _livestockDigestateApplication.DateCreated = _dailyResults[1].Date;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
 
             var result = _sut.GetDailyTankStates(_farm, _dailyResults, _dailyResults[1].Date.Year);
 
@@ -186,7 +192,7 @@ namespace H.Core.Test.Services.Animals
         public void CalculateAmountOfDigestateRemaining()
         {
             _adComponent.IsLiquidSolidSeparated = false;
-            _digestateApplication.DigestateState = DigestateState.Raw;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
             var year = DateTime.Now.Year;
 
             var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
@@ -398,9 +404,9 @@ namespace H.Core.Test.Services.Animals
             // Since we are interested in the amount of raw digestate, we don't want to separate into liquid/solid fractions
             _adComponent.IsLiquidSolidSeparated = false;
 
-            _digestateApplication.DigestateState = DigestateState.Raw;
-            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _digestateApplication.AmountAppliedPerHectare = 6000;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+            _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _livestockDigestateApplication.AmountAppliedPerHectare = 6000;
 
             _dailyOutput2.FlowRateOfAllSubstratesInDigestate = 20000;
 
@@ -425,9 +431,9 @@ namespace H.Core.Test.Services.Animals
         {
             _sut.SubtractAmountsFromLandApplications = true;
 
-            _digestateApplication.DigestateState = DigestateState.Raw;
-            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _digestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+            _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
 
             _adComponent.IsLiquidSolidSeparated = false;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.Raw);
@@ -451,9 +457,9 @@ namespace H.Core.Test.Services.Animals
         {
             _sut.SubtractAmountsFromLandApplications = true;
 
-            _digestateApplication.DigestateState = DigestateState.SolidPhase;
-            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _digestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.DigestateState = DigestateState.SolidPhase;
+            _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
 
             _adComponent.IsLiquidSolidSeparated =true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
@@ -477,14 +483,28 @@ namespace H.Core.Test.Services.Animals
         {
             _sut.SubtractAmountsFromLandApplications = true;
 
-            _digestateApplication.DigestateState = DigestateState.LiquidPhase;
-            _digestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _digestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.DigestateState = DigestateState.LiquidPhase;
+            _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
+            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
 
             _adComponent.IsLiquidSolidSeparated = true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
 
             Assert.AreEqual(140, result, 1);
+        }
+
+        [TestMethod]
+        public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsConsideringImportedLandAppliedAmountsTest()
+        {
+            _sut.SubtractAmountsFromLandApplications = true;
+            _sut.SubtractAmountsFromImoprtedDigestateLandApplications = true;
+
+            _cropViewItem.DigestateApplicationViewItems.Add(_importedDigestateApplication);
+
+            _adComponent.IsLiquidSolidSeparated = true;
+            var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
+
+            Assert.AreEqual(145, result, 1);
         }
 
         #endregion

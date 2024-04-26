@@ -414,6 +414,7 @@ namespace H.Core.Enumerations
                 .Concat(GetOntarioEconomicCropTypes())
                 .OrderBy(x => x.GetDescription());
         }
+
         public static IOrderedEnumerable<CropType> GetValidCropTypes()
         {
             return new List<CropType>
