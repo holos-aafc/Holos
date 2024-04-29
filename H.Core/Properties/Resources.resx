@@ -5802,4 +5802,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="EnumCentrifuge" xml:space="preserve">
     <value>Centrifuge</value>
   </data>
+  <data name="LabelADLiquidSolidSeparationMethod" xml:space="preserve">
+    <value>Liquid/solid separation method</value>
+  </data>
 </root>

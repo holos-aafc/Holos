@@ -7855,6 +7855,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liquid/solid separation method.
+        /// </summary>
+        public static string LabelADLiquidSolidSeparationMethod {
+            get {
+                return ResourceManager.GetString("LabelADLiquidSolidSeparationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced Mode.
         /// </summary>
         public static string LabelAdvancedMode {
