@@ -124,7 +124,7 @@ namespace H.Core.Services
             this.InitializeSoilAvailableSoilTypes(farm, component);
         }
 
-        private void InitializeSoilAvailableSoilTypes(Farm farm, FieldSystemComponent component)
+        public void InitializeSoilAvailableSoilTypes(Farm farm, FieldSystemComponent component)
         {
             foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
             {

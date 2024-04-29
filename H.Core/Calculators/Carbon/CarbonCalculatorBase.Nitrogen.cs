@@ -550,7 +550,7 @@ namespace H.Core.Calculators.Carbon
             this.N2O_NOrganicNitrogenVolatilization = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
                                                       manureVolatilization +
                                                       digestateVolatilization +
-                                                      volatilizationFromGrazingAnimals;
+                                                      volatilizationFromGrazingAnimals; 
 
             this.N2O_NOrganicNitrogenVolatilizationExcludingRemainingAmounts = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
                                                                                manureVolatilizationExcludingRemainingAmount +
