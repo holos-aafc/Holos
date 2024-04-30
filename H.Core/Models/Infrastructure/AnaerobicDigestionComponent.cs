@@ -15,6 +15,8 @@ namespace H.Core.Models.Infrastructure
     {
         #region Fields
 
+        private AnaerobicDigestorSeparatorType _separatorType;
+
         private AnaerobicDigestionViewItem _anaerobicDigestionViewItem;
 
         // Methane potential based on hydraulic retention time and kinetic hydrolysis rate
@@ -72,7 +74,7 @@ namespace H.Core.Models.Infrastructure
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
 
-            
+            this.SeparatorType = AnaerobicDigestorSeparatorType.Centrifuge;
 
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
@@ -281,6 +283,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _managementPeriodViewItems;
             set => SetProperty(ref _managementPeriodViewItems, value);
+        }
+
+        public AnaerobicDigestorSeparatorType SeparatorType
+        {
+            get => _separatorType;
+            set => SetProperty(ref _separatorType, value);
         }
 
         #endregion

@@ -76,6 +76,10 @@ namespace H.Core.Providers.Climate
                 }
 
                 var tokens = lines[i].Split(',');
+                if (tokens.All(x => string.IsNullOrWhiteSpace(x)))
+                {
+                    continue;
+                }
 
                 var year = int.Parse(tokens[0], InfrastructureConstants.EnglishCultureInfo);
                 var julianDay = int.Parse(tokens[1], InfrastructureConstants.EnglishCultureInfo);

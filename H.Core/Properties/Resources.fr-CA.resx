@@ -5731,4 +5731,22 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelUseFieldLevelSoil" xml:space="preserve">
     <value>Use field specific soil data (this will override the default soil data used for the entire farm)</value>
   </data>
+  <data name="LabelAshContentOfFeed" xml:space="preserve">
+    <value>Ash content of feed</value>
+  </data>
+  <data name="EnumBeltPress" xml:space="preserve">
+    <value>Belt press</value>
+  </data>
+  <data name="EnumCentrifuge" xml:space="preserve">
+    <value>Centrifuge</value>
+  </data>
+  <data name="LabelADLiquidSolidSeparationMethod" xml:space="preserve">
+    <value>Liquid/solid separation method</value>
+  </data>
+  <data name="EnumOnFarmAnaerobicDigestor" xml:space="preserve">
+    <value>Anaerobic digestor located on farm</value>
+  </data>
+  <data name="LabelOriginOfDigestate" xml:space="preserve">
+    <value>Orgin of digestate</value>
+  </data>
 </root>
