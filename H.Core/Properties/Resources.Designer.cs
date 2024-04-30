@@ -4219,6 +4219,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anaerobic digestor located on farm.
+        /// </summary>
+        public static string EnumOnFarmAnaerobicDigestor {
+            get {
+                return ResourceManager.GetString("EnumOnFarmAnaerobicDigestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open (not lactating or pregnant).
         /// </summary>
         public static string EnumOpen {
@@ -10659,6 +10668,15 @@ namespace H.Core.Properties {
         public static string LabelOpenSows {
             get {
                 return ResourceManager.GetString("LabelOpenSows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orgin of digestate.
+        /// </summary>
+        public static string LabelOriginOfDigestate {
+            get {
+                return ResourceManager.GetString("LabelOriginOfDigestate", resourceCulture);
             }
         }
         

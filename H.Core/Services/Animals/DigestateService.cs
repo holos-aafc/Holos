@@ -18,6 +18,13 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
+        private readonly List<ManureLocationSourceType> _validDigestateLocationSourceTypes = new List<ManureLocationSourceType>()
+        {
+            ManureLocationSourceType.NotSelected,
+            ManureLocationSourceType.OnFarmAnaerobicDigestor,
+            ManureLocationSourceType.Imported,
+        };
+
         #endregion
 
         #region Properties
@@ -26,7 +33,7 @@ namespace H.Core.Services.Animals
 
         public IADCalculator ADCalculator { get; set; }
         public bool SubtractAmountsFromLandApplications { get; set; }
-        public bool SubtractAmountsFromImoprtedDigestateLandApplications { get; set; }
+        public bool SubtractAmountsFromImportedDigestateLandApplications { get; set; }
 
         #endregion
 
@@ -54,6 +61,11 @@ namespace H.Core.Services.Animals
             var dailyResults = ADCalculator.CalculateResults(farm, this.AnimalResults);
 
             return dailyResults;
+        }
+
+        public List<ManureLocationSourceType> GetValidDigestateLocationSourceTypes()
+        {
+            return _validDigestateLocationSourceTypes;
         }
 
         /// <summary>
@@ -342,6 +354,11 @@ namespace H.Core.Services.Animals
                     break;
             }
 
+            if (totalDigestateCreatedOnDay <= 0)
+            {
+                return 0;
+            }
+
             var fraction = totalAmountApplied / totalDigestateCreatedOnDay;
 
             var amountOfNitrogen = fraction * totalNitrogenAvailableOnDay;
@@ -378,6 +395,11 @@ namespace H.Core.Services.Animals
                     totalDigestateCreatedOnDay = tank.TotalLiquidDigestateProduced;
                     totalCarbonAvailableOnDay = tank.CarbonFromLiquidDigestate;
                     break;
+            }
+
+            if (totalDigestateCreatedOnDay <= 0)
+            {
+                return 0;
             }
 
             var fraction = totalAmountApplied / totalDigestateCreatedOnDay;
@@ -543,7 +565,7 @@ namespace H.Core.Services.Animals
              */
 
             var totalAmountFromApplications = 0d;
-            if (this.SubtractAmountsFromImoprtedDigestateLandApplications)
+            if (this.SubtractAmountsFromImportedDigestateLandApplications)
             {
                  totalAmountFromApplications += this.GetTotalAmountOfDigestateAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Imported);
             }

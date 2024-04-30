@@ -497,7 +497,7 @@ namespace H.Core.Test.Services.Animals
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsConsideringImportedLandAppliedAmountsTest()
         {
             _sut.SubtractAmountsFromLandApplications = true;
-            _sut.SubtractAmountsFromImoprtedDigestateLandApplications = true;
+            _sut.SubtractAmountsFromImportedDigestateLandApplications = true;
 
             _cropViewItem.DigestateApplicationViewItems.Add(_importedDigestateApplication);
 

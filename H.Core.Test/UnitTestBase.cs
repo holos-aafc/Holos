@@ -33,6 +33,8 @@ namespace H.Core.Test
         protected Mock<IFarmResultsService> _mockFarmResultService;
         protected IFarmResultsService _mockFarmResultServiceObject;
         protected Mock<IManureService> _mockManureService;
+        protected Mock<IDigestateService> _mockDigestateService;
+        protected IDigestateService _mockDigestateServiceObject;
         protected IManureService _mockManureServiceObject;
         protected Mock<IClimateProvider> _mockClimateProvider;
         protected IClimateProvider _mockClimateProviderObject;
@@ -62,6 +64,11 @@ namespace H.Core.Test
 
             _mockManureService = new Mock<IManureService>();
             _mockManureServiceObject = _mockManureService.Object;
+
+            _mockDigestateService = new Mock<IDigestateService>();
+            _mockDigestateServiceObject = _mockDigestateService.Object;
+            _mockDigestateService.Setup(x => x.GetValidDigestateLocationSourceTypes())
+                .Returns(new List<ManureLocationSourceType>());
 
             _mockClimateProvider = new Mock<IClimateProvider>();
             _mockClimateProviderObject = _mockClimateProvider.Object;

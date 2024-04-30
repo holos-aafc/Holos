@@ -16,6 +16,8 @@ namespace H.Core.Services.Animals
         DigestateTank GetTank(Farm farm, DateTime targetDate, List<DigestorDailyOutput> dailyOutputs);
         List<DigestorDailyOutput> GetDailyResults(Farm farm);
 
+        List<ManureLocationSourceType> GetValidDigestateLocationSourceTypes();
+
         /// <summary>
         /// Returns the total amount of N applied (to the entire field) from a digestate field application.
         /// 
