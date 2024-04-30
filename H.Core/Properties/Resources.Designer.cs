@@ -1537,6 +1537,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Belt press.
+        /// </summary>
+        public static string EnumBeltPress {
+            get {
+                return ResourceManager.GetString("EnumBeltPress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Berries &amp; grapes.
         /// </summary>
         public static string EnumBerriesAndGraps {
@@ -1749,6 +1758,15 @@ namespace H.Core.Properties {
         public static string EnumCattle {
             get {
                 return ResourceManager.GetString("EnumCattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Centrifuge.
+        /// </summary>
+        public static string EnumCentrifuge {
+            get {
+                return ResourceManager.GetString("EnumCentrifuge", resourceCulture);
             }
         }
         
@@ -4197,6 +4215,15 @@ namespace H.Core.Properties {
         public static string EnumOnFarm {
             get {
                 return ResourceManager.GetString("EnumOnFarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anaerobic digestor located on farm.
+        /// </summary>
+        public static string EnumOnFarmAnaerobicDigestor {
+            get {
+                return ResourceManager.GetString("EnumOnFarmAnaerobicDigestor", resourceCulture);
             }
         }
         
@@ -7837,6 +7864,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liquid/solid separation method.
+        /// </summary>
+        public static string LabelADLiquidSolidSeparationMethod {
+            get {
+                return ResourceManager.GetString("LabelADLiquidSolidSeparationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced Mode.
         /// </summary>
         public static string LabelAdvancedMode {
@@ -8220,6 +8256,15 @@ namespace H.Core.Properties {
         public static string LabelAshContent {
             get {
                 return ResourceManager.GetString("LabelAshContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ash content of feed.
+        /// </summary>
+        public static string LabelAshContentOfFeed {
+            get {
+                return ResourceManager.GetString("LabelAshContentOfFeed", resourceCulture);
             }
         }
         
@@ -10623,6 +10668,15 @@ namespace H.Core.Properties {
         public static string LabelOpenSows {
             get {
                 return ResourceManager.GetString("LabelOpenSows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orgin of digestate.
+        /// </summary>
+        public static string LabelOriginOfDigestate {
+            get {
+                return ResourceManager.GetString("LabelOriginOfDigestate", resourceCulture);
             }
         }
         

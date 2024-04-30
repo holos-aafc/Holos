@@ -254,6 +254,11 @@ namespace H.Core.Providers.Soil
             get { return this.SoilFunctionalCategory.GetDescription(); }
         }
 
+        public string SoilNameAndGreatGroup
+        {
+            get { return this.CombinedSoilNameDisplayString + " - " + this.SoilGreatGroupString; }
+        }
+
         public Province Province
         {
             get
