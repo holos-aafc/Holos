@@ -5811,4 +5811,16 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelOriginOfDigestate" xml:space="preserve">
     <value>Orgin of digestate</value>
   </data>
+  <data name="KilogramsWetWeightPerDay" xml:space="preserve">
+    <value>kg wet weight day^-1</value>
+  </data>
+  <data name="PoundsWetWeightPerDay" xml:space="preserve">
+    <value>lbs wet weight day^-1</value>
+  </data>
+  <data name="ButtonAddImportedManure" xml:space="preserve">
+    <value>Add Imported Manure</value>
+  </data>
+  <data name="LabelUseImportedManure" xml:space="preserve">
+    <value>Use imported manure</value>
+  </data>
 </root>

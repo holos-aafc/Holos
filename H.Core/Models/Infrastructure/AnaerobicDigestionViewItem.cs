@@ -74,13 +74,11 @@ namespace H.Core.Models.Infrastructure
 
         #endregion
 
-
         #region Public Methods
         #endregion
 
         #region Private Methods
         #endregion
-
 
         #region Event Handlers
 
@@ -110,6 +108,5 @@ namespace H.Core.Models.Infrastructure
             this.HasFarmResiduesSubstrateViewItems = this.FarmResiduesSubstrateViewItems.Count > 0;
         }
         #endregion
-
     }
 }

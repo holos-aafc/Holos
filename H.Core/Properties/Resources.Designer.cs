@@ -556,6 +556,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Imported Manure.
+        /// </summary>
+        public static string ButtonAddImportedManure {
+            get {
+                return ResourceManager.GetString("ButtonAddImportedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Manure Substrate Type.
         /// </summary>
         public static string ButtonAddManureSubstrateTypes {
@@ -7720,6 +7729,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg wet weight day^-1.
+        /// </summary>
+        public static string KilogramsWetWeightPerDay {
+            get {
+                return ResourceManager.GetString("KilogramsWetWeightPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kg VS m^-3 d^-1.
         /// </summary>
         public static string KilogramVolatileSolidsPerCubicMeterPerDay {
@@ -11923,6 +11941,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use imported manure.
+        /// </summary>
+        public static string LabelUseImportedManure {
+            get {
+                return ResourceManager.GetString("LabelUseImportedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply liquid/solid separation to the digestate.
         /// </summary>
         public static string LabelUseLiquidSolidSeparation {
@@ -14290,6 +14317,15 @@ namespace H.Core.Properties {
         public static string PoundsVolatileSolidsPerPoundFeed {
             get {
                 return ResourceManager.GetString("PoundsVolatileSolidsPerPoundFeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lbs wet weight day^-1.
+        /// </summary>
+        public static string PoundsWetWeightPerDay {
+            get {
+                return ResourceManager.GetString("PoundsWetWeightPerDay", resourceCulture);
             }
         }
         

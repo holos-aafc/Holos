@@ -38,7 +38,7 @@ namespace H.Core.Models.LandManagement.Fields
         public ManureApplicationViewItem()
         {
             this.DateOfApplication = DateTime.Now;
-
+            this.ManureLocationSourceType = ManureLocationSourceType.Livestock;
             this.DefaultManureCompositionData = new DefaultManureCompositionData();
 
             this.AvailableManureApplicationTypes = new ObservableCollection<ManureApplicationTypes>();

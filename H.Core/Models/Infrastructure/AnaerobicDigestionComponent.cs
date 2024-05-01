@@ -60,6 +60,7 @@ namespace H.Core.Models.Infrastructure
         private int _numberOfReactors;
         private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
+        private bool _useImportedManure;
 
         private ObservableCollection<ADManagementPeriodViewItem> _managementPeriodViewItems;
 
@@ -289,6 +290,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _separatorType;
             set => SetProperty(ref _separatorType, value);
+        }
+
+        public bool UseImportedManure
+        {
+            get => _useImportedManure;
+            set => SetProperty(ref _useImportedManure, value);
         }
 
         #endregion

@@ -357,7 +357,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.2-2
+        /// Equation 4.6.2-3
         /// </summary>
         public double CalculateAdjustedAmmoniaEmissionFactor(
             CropViewItem viewItem, 
@@ -372,7 +372,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.2-3
         /// Equation 4.6.2-12
         /// Equation 4.6.2-20
         /// </summary>

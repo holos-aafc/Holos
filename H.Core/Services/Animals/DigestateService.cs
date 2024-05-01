@@ -20,9 +20,7 @@ namespace H.Core.Services.Animals
 
         private readonly List<ManureLocationSourceType> _validDigestateLocationSourceTypes = new List<ManureLocationSourceType>()
         {
-            ManureLocationSourceType.NotSelected,
-            ManureLocationSourceType.OnFarmAnaerobicDigestor,
-            ManureLocationSourceType.Imported,
+            ManureLocationSourceType.Livestock,
         };
 
         #endregion

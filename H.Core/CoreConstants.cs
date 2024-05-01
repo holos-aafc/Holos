@@ -2,6 +2,7 @@
 
 using System;
 using System.Transactions;
+using H.Infrastructure;
 
 #endregion
 
@@ -43,6 +44,9 @@ namespace H.Core
         /// </summary>
         private const double ConvertNH3ToNH3N = 14.0 / 17.0;
 
+        private const double ConvertN2OToN = 28.0 / 44.0;
+
+        private const double ConvertNH3ToN = 14.0 / 17.0;
 
         #endregion
 
@@ -140,7 +144,6 @@ namespace H.Core
         #endregion
 
         #region Public Methods
-
 
         /// <summary>
         /// Equation 2.6.9-27
