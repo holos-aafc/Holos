@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Core.Providers.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
@@ -16,6 +17,7 @@ namespace H.Core.Models.Infrastructure
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
         private ManureSubstrateState _manureSubstrateState;
+        private ManureStateType _manureStateType;
 
         #endregion
 
@@ -51,6 +53,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _manureSubstrateState;
             set => SetProperty(ref _manureSubstrateState, value);
+        }
+
+        public ManureStateType ManureStateType
+        {
+            get => _manureStateType;
+            set => SetProperty(ref _manureStateType, value);
         }
 
         #endregion

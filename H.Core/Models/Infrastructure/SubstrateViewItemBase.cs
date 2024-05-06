@@ -1,4 +1,5 @@
 ﻿using System;
+using H.Core.Enumerations;
 using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
@@ -18,6 +19,7 @@ namespace H.Core.Models.Infrastructure
         private double _tan;
         private DateTime _startDate;
         private DateTime _endDate;
+        private ManureLocationSourceType _sourceType;
 
         #endregion
 
@@ -115,6 +117,15 @@ namespace H.Core.Models.Infrastructure
         {
             get => _endDate;
             set => SetProperty(ref _endDate, value);
+        }
+
+        /// <summary>
+        /// The source of the digestate material (local/imported)
+        /// </summary>
+        public ManureLocationSourceType SourceType
+        {
+            get => _sourceType;
+            set => SetProperty(ref _sourceType, value);
         }
 
         #endregion

@@ -57,16 +57,21 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
+            var year = viewItem.Year;
+
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && 
-                                  field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            if (field == null)
             {
                 return 0;
             }
 
             var totalNitrogen = 0d;
 
-            foreach (var manureApplication in viewItem.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == viewItem.Year))
+            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var importedApplications = field.GetImportedManureApplicationsInYear(year);
+            var allApplications = livestockApplications.Concat(importedApplications);
+
+            foreach (var manureApplication in allApplications)
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
             }
@@ -76,15 +81,21 @@ namespace H.Core.Calculators.Nitrogen
 
         public double GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
+            var year = viewItem.Year;
+
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || (field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false))
+            if (field == null)
             {
                 return 0;
             }
 
+            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var importedApplications = field.GetImportedManureApplicationsInYear(year);
+            var allApplications = livestockApplications.Concat(importedApplications);
+
             var totalVolume = 0d;
 
-            foreach (var manureApplication in viewItem.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == viewItem.Year))
+            foreach (var manureApplication in allApplications)
             {
                 totalVolume += manureApplication.AmountOfManureAppliedPerHectare * viewItem.Area;
             }
@@ -174,7 +185,7 @@ namespace H.Core.Calculators.Nitrogen
             {
                 return 0;
             }
-
+            
             var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
             var weightedEmissionFactor = CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
@@ -1279,8 +1290,10 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONFromManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
+            var year = viewItem.Year;
+
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || field.HasLivestockManureApplicationsInYear(viewItem.Year) == false && field.HasImportedManureApplicationsInYear(viewItem.Year) == false)
+            if (field == null)
             {
                 return 0;
             }
@@ -1292,7 +1305,11 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
-            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var importedApplications = field.GetImportedManureApplicationsInYear(year);
+            var allApplications = livestockApplications.Concat(importedApplications);
+
+            foreach (var manureApplicationViewItem in allApplications)
             {
                 result += this.CalculateTotalN2ONFromLeachingFromManureApplication(farm, viewItem, manureApplicationViewItem);
             }

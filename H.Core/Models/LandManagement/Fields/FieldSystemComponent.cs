@@ -394,68 +394,96 @@ namespace H.Core.Models.LandManagement.Fields
             return isMatchingLocation;
         }
 
-        public bool HasLivestockManureApplicationsInYear(int year)
+        public List<ManureApplicationViewItem> GetlLivestockManureApplicationsInYear(int year)
         {
+            var result = new List<ManureApplicationViewItem>();
+
             foreach (var cropViewItem in this.CropViewItems)
             {
                 foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
                 {
                     if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && manureApplicationViewItem.DateOfApplication.Year == year)
                     {
-                        return true;
+                        result.Add(manureApplicationViewItem);
                     }
                 }
             }
 
-            return false;
+            return result;
         }
 
-        public bool HasLivestockDigestateApplicationsInYear(int year)
+        public bool HasLivestockManureApplicationsInYear(int year)
         {
+            return this.GetlLivestockManureApplicationsInYear(year).Any();
+        }
+
+        public List<DigestateApplicationViewItem> GetLivestockDigestateApplicationsInYear(int year)
+        {
+            var result = new List<DigestateApplicationViewItem>();
+
             foreach (var cropViewItem in this.CropViewItems)
             {
                 foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
                 {
                     if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock && digestateApplicationViewItem.DateCreated.Year == year)
                     {
-                        return true;
+                        result.Add(digestateApplicationViewItem);
                     }
                 }
             }
 
-            return false;
+            return result;
+        }
+
+        public bool HasLivestockDigestateApplicationsInYear(int year)
+        {
+            return this.GetLivestockDigestateApplicationsInYear(year).Any();
         }
 
         public bool HasImportedManureApplicationsInYear(int year)
         {
+            return this.GetImportedManureApplicationsInYear(year).Any();
+        }
+
+        public List<ManureApplicationViewItem> GetImportedManureApplicationsInYear(int year)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
             foreach (var cropViewItem in this.CropViewItems)
             {
-                foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                foreach (var importedManureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
                 {
-                    if (manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && manureApplicationViewItem.DateOfApplication.Year == year)
+                    if (importedManureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && importedManureApplicationViewItem.DateOfApplication.Year == year)
                     {
-                        return true;
+                        result.Add(importedManureApplicationViewItem);
                     }
                 }
             }
 
-            return false;
+            return result;
         }
 
         public bool HasImportedDigestateApplicationsInYear(int year)
         {
+            return this.GetImportedDigestateApplicationsInYear(year).Any();
+        }
+
+        public List<DigestateApplicationViewItem> GetImportedDigestateApplicationsInYear(int year)
+        {
+            var result = new List<DigestateApplicationViewItem>();
+
             foreach (var cropViewItem in this.CropViewItems)
             {
                 foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
                 {
                     if (digestateApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && digestateApplicationViewItem.DateCreated.Year == year)
                     {
-                        return true;
+                        result.Add(digestateApplicationViewItem);
                     }
                 }
             }
 
-            return false;
+            return result;
         }
 
         #endregion  

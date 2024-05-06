@@ -39,6 +39,8 @@ namespace H.Core.Providers.Shelterbelt
 
         #endregion
 
+        #region Public Methods
+        
         public static EcodistrictToClusterData GetClusterData(int ecodistrictId)
         {
             var clusterData = Data.SingleOrDefault(x => x.EcodistrictId == ecodistrictId);
@@ -64,6 +66,8 @@ namespace H.Core.Providers.Shelterbelt
             {
                 return true;
             }
-        }
+        } 
+
+        #endregion
     }
 }
