@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace H.Core.Models.Infrastructure
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
         private ManureSubstrateState _manureSubstrateState;
+        private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ManureStateType _manureStateType;
 
         #endregion
@@ -25,11 +27,24 @@ namespace H.Core.Models.Infrastructure
 
         public ManureSubstrateViewItem()
         {
+            this.ValidManureStateTypesForSelectedTypeOfAnimalManure = new ObservableCollection<ManureStateType>()
+            {
+                ManureStateType.NotSelected,
+            };
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Each view item must have its own collection of valid state types so the table rows presented to the user will have their own distinct collection
+        /// </summary>
+        public ObservableCollection<ManureStateType> ValidManureStateTypesForSelectedTypeOfAnimalManure
+        {
+            get => _validManureStateTypesForSelectedTypeOfAnimalManure;
+            set => SetProperty(ref _validManureStateTypesForSelectedTypeOfAnimalManure, value);
+        }
 
         public AnimalType AnimalType
         {

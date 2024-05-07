@@ -164,7 +164,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             else
             {
                 // For all other years, we use the number of trees that have lived past the first year
-                this.TreeCount = (100 - this.PercentMortality) / 100.0;
+                this.TreeCount = treeGroup.PlantedTreeCount * (100 - this.PercentMortality) / 100.0;
             }
 
             this.SharedConstruction();

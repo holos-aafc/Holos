@@ -220,13 +220,13 @@ namespace H.Core.Calculators.Shelterbelt
              */
 
             var age = trannumData.Age;
-            var realGrowthOfIdealTree = 0d;
+            var totalLivingBiomassCarbonOfIdealTree = 0d;
             if (trannumData.CanLookupByEcodistrict)
             {
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    realGrowthOfIdealTree = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    totalLivingBiomassCarbonOfIdealTree = ShelterbeltCarbonDataProvider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         ecodistrictId: trannumData.EcodistrictId,
                         percentMortality: trannumData.PercentMortality,
@@ -236,7 +236,7 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (totalLivingBiomassCarbonOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
             else
             {
@@ -248,7 +248,7 @@ namespace H.Core.Calculators.Shelterbelt
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    realGrowthOfIdealTree = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                    totalLivingBiomassCarbonOfIdealTree = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         hardinessZone: trannumData.HardinessZone,
                         percentMortality: trannumData.PercentMortality,
@@ -258,12 +258,12 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (totalLivingBiomassCarbonOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
 
             var result = this.CalculateRealGrowthRatio(
                 calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
-                lookupTotalLivingCarbonKilogramsPerStandardLength: realGrowthOfIdealTree);
+                lookupTotalLivingCarbonKilogramsPerStandardLength: totalLivingBiomassCarbonOfIdealTree);
 
             return result;
         }
