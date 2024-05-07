@@ -6,6 +6,7 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Services.LandManagement;
@@ -336,6 +337,16 @@ namespace H.Core.Services.Animals
 
             // Set the selected item to the first item in the updated list
             manureItemBase.ManureStateType = manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
+        }
+
+        public void SetValidManureStateTypes(ManureSubstrateViewItem manureSubstrateViewItem, Farm farm)
+        {
+            // Can't collect manure from a field and apply to another field or export it
+            var types = this.GetValidManureStateTypes(farm, manureSubstrateViewItem.SourceType, manureSubstrateViewItem.AnimalType).Where(x => x != ManureStateType.Pasture);
+            manureSubstrateViewItem.ValidManureStateTypesForSelectedTypeOfAnimalManure.UpdateItems(types);
+
+            // Set the selected item to the first item in the updated list
+            manureSubstrateViewItem.ManureStateType = manureSubstrateViewItem.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
         }
 
         public double GetVolumeAvailableForExport(int year)
