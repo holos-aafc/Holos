@@ -1,45 +1,43 @@
-﻿Manure type,,Moisture content (%),N content (% wet wt),C content (% wet wt),P content (% wet wt),C:N ratio
-Beef cattle,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02
-Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
-Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88
-Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9
-Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91
-Dairy cattle,Pasture/range/paddock,86 (1),-9 (6),6.182 (1),0.118 (6),-9 (6)
-Dairy cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
-Dairy cattle,Solid storage (7),77.3,0.392,2.99,0.118,7.63
-Dairy cattle,Compost - passive windrow (8),78.11,0.265,4.72,-9,17.81
-Dairy cattle,Compost - intensive windrow (8),78.11,0.265,4.72,-9,17.81
-Swine,Composted in-vessel (9),79.23,0.279,9.13,-9,32.72
-Sheep,Pasture/range/paddock ,75.0 (10),0.765 (10),6.182 (1),0.211 (10),8.08
-Sheep,Solid storage,67.8 (11),0.870 (11),8.58 (3),0.340 (11),9.86
-Poultry,Solid storage - with or without litter (12),44.83,2.427,10.12,1.06,4.17
-Llamas ,Pasture/range/paddock,75.0 (13),0.765 (13),6.182 (1),0.211 (13),8.08
-Alpacas,Pasture/range/paddock,75.0 (13),0.765 (13),6.182 (1),0.211 (13),8.08
-Deer,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02
-Elk,Pasture/range/paddock (1),86,0.29,6.182,0.047,21.02
-Goats,Pasture/range/paddock,75 (13),1.096 (14),6.182 (1),0.271 (14),5.64
-Horses,Pasture/range/paddock,80.0 (15),0.590 (15),6.182 (1),0.140 (15),10.48
-Mules,Pasture/range/paddock,80.0 (16),0.590 (16),6.182 (1),0.140 (16),10.48
-Bison,Pasture (17),86,0.294,6.182,0.047,21.02
-Llamas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
-Alpacas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86
-Deer,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
-Elk,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45
-Goats,Solid storage,53.58 (20),0.729 (20),8.58 (3),0.280 (20),11.77
-Horses,Solid storage,56.65 (21),0.864 (21),8.58 (3),0.155 (21),9.93
-Mules,Solid storage,56.65 (22),0.864 (22),8.58 (3),0.155 (22),9.93
-Bison,Solid storage,35 (23),0.638 (23),8.58 (3),0.214 (23),13.45
-Dairy cattle,Daily spread (24),94.41,0.209,2.19,0.06,10.48
-Dairy cattle,Liquid/slurry with natural crust (24),94.41,0.209,2.19,0.06,10.48
-Dairy cattle,Liquid/slurry with no natural crust (24),94.41,0.209,2.19,0.06,10.48
-Dairy cattle,Liquid/slurry with solid cover (24),94.41,0.209,2.19,0.06,10.48
-Dairy cattle,Deep pit under barn,94.41,0.209,2.19,0.06,10.48
-Dairy cattle,Anaerobic digestor (25),95,0.106,2.39,-9,22.55
-Swine,Liquid/slurry with natural crust (26),95.16,0.325,1.29,0.118,3.97
-Swine,Liquid/slurry with no natural crust (26),95.16,0.325,1.29,0.118,3.97
-Swine,Liquid/slurry with solid cover (26),95.16,0.325,1.29,0.118,3.97
-Swine,Deep pit under barn (26),95.16,0.325,1.29,0.118,3.97
-Swine,Anaerobic digestion ,-9,-9,-9,-9,-9
+﻿Manure type,,Moisture content (%),N content (% wet wt),C content (% wet wt),P content (% wet wt),C:N ratio,VS content (% wet weight) (27)
+Beef cattle,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02,-9
+Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66,20.25
+Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88,3.377
+Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9,7.814
+Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91,7.814
+Dairy cattle,Pasture/range/paddock,86 (1),-9 (6),6.182 (1),0.118 (6),-9 (6),-9
+Dairy cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66,20.25
+Dairy cattle,Solid storage (7),77.3,0.392,2.99,0.118,7.63,3.377
+Dairy cattle,Compost - passive windrow (8),78.11,0.265,4.72,-9,17.81,7.814
+Dairy cattle,Compost - intensive windrow (8),78.11,0.265,4.72,-9,17.81,7.814
+Swine,Composted in-vessel (9),79.23,0.279,9.13,-9,32.72,7.814
+Sheep,Pasture/range/paddock ,75.0 (10),0.765 (10),6.182 (1),0.211 (10),8.08,-9
+Sheep,Solid storage,67.8 (11),0.870 (11),8.58 (3),0.340 (11),9.86,3.377
+Poultry,Solid storage - with or without litter (12),44.83,2.427,10.12,1.06,4.17,52.32
+Llamas ,Pasture/range/paddock,75.0 (13),0.765 (13),6.182 (1),0.211 (13),8.08,-9
+Alpacas,Pasture/range/paddock,75.0 (13),0.765 (13),6.182 (1),0.211 (13),8.08,-9
+Deer,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02,-9
+Elk,Pasture/range/paddock (1),86,0.29,6.182,0.047,21.02,-9
+Goats,Pasture/range/paddock,75 (13),1.096 (14),6.182 (1),0.271 (14),5.64,-9
+Horses,Pasture/range/paddock,80.0 (15),0.590 (15),6.182 (1),0.140 (15),10.48,-9
+Mules,Pasture/range/paddock,80.0 (16),0.590 (16),6.182 (1),0.140 (16),10.48,-9
+Bison,Pasture (17),86,0.294,6.182,0.047,21.02,-9
+Llamas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86,-9
+Alpacas,Solid storage,67.8 (18),0.870 (18),8.58 (3),0.340 (18),9.86,-9
+Deer,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45,-9
+Elk,Solid storage,35 (19),0.638 (19),8.58 (3),0.214 (19),13.45,-9
+Goats,Solid storage,53.58 (20),0.729 (20),8.58 (3),0.280 (20),11.77,-9
+Horses,Solid storage,56.65 (21),0.864 (21),8.58 (3),0.155 (21),9.93,-9
+Mules,Solid storage,56.65 (22),0.864 (22),8.58 (3),0.155 (22),9.93,-9
+Bison,Solid storage,35 (23),0.638 (23),8.58 (3),0.214 (23),13.45,-9
+Dairy cattle,Daily spread (24),94.41,0.209,2.19,0.06,10.48,0.37
+Dairy cattle,Liquid/slurry with natural crust (24),94.41,0.209,2.19,0.06,10.48,0.37
+Dairy cattle,Liquid/slurry with no natural crust (24),94.41,0.209,2.19,0.06,10.48,0.37
+Dairy cattle,Liquid/slurry with solid cover (24),94.41,0.209,2.19,0.06,10.48,4.2
+Dairy cattle,Deep pit under barn,94.41,0.209,2.19,0.06,10.48,4.2
+Swine,Liquid/slurry with natural crust (26),95.16,0.325,1.29,0.118,3.97,2.975
+Swine,Liquid/slurry with no natural crust (26),95.16,0.325,1.29,0.118,3.97,2.975
+Swine,Liquid/slurry with solid cover (26),95.16,0.325,1.29,0.118,3.97,3.7
+Swine,Deep pit under barn (26),95.16,0.325,1.29,0.118,3.97,3.7
 ,,,,,,
 ,,,,,,
 "Data on manure composition were organized from multiple publications based on Canadian studies (extension documents, reports, journal publications). Where data from Canada were not available, data were sourced from outside Canada – any non-Canadian data used is indicated in the relevant notes below.",,,,,,
@@ -69,3 +67,4 @@ Swine,Anaerobic digestion ,-9,-9,-9,-9,-9
 "24 Default values for moisture content and C, N and P content for liquid/slurry manure for dairy cattle were averages calculated from data derived from the following sources: Paul and Beauchamp (1989,1993); Pattey et al. (2005); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a); Government of Manitoba (2009); VanderZaag et al. (2009,2010a,b); Brown (2013); Manitoba Agriculture, Food and Rural Development (2015); LeRiche et al. (2016); Ngwabie et al. (2016); Fillingham et al. (2017); Ackerman et al. (2018); Balde et al. (2018); Johannesson et al. (2018); Kariyapperuma et al. (2018a,b); Maldaner et al. (2018). These default values are used for all dairy liquid/slurry manure types: ""Daily spread"", ""Liquid with natural crust"", ""Liquid with no natural crust"", ""Liquid with solid cover"" and ""Deep pit under barn"" (pit storage below animal confinement).",,,,,,
 "25 Default values for moisture content and C, N and P fractions for anaerobic digestate for dairy cattle were averages calculated from data derived from the following sources: Balde et al. (2018); Evans et al. (2018); Maldaner et al (2018).",,,,,,
 "26 Default values for moisture content and C, N and P content for liquid/slurry for swine were averages calculated from data derived from the following sources: Paul and Beauchamp (1989); Fitzgerald and Racz (2001); Olson and Papworth (2002); Dick (2003); Thompson et al. (2004); The Prairie Provinces’ Committee on Livestock Development and Manure Management (2006a,b); Government of Manitoba (2009); Coppi (2012); Brown (2013); Tenuta et al. (2013); Park et al. (2014); Manitoba Agriculture, Food and Rural Development (2015). These default values are used for all swine liquid/slurry manure types: ""Liquid with natural crust"", ""Liquid with no natural crust"", ""Liquid with solid cover"" And ""Deep pit under barn"" (pit storage below animal confinement).",,,,,,
+"27 Default values for volatile solids (VS) content (% wet weight) were derived from the following sources: Beef cattle (deep bedding) - Wedwitschka et al. (2021); Beef cattle (solid storage, compost - passive windrow and compost - active windrow) - values used are for dairy cattle solid storage and composted manure; Dairy cattle (deep bedding) - value used is for beef cattle deep bedding; Dairy cattle (solid storage) - Ackerman et al. (2018), Fillingham et al. (2017); Dairy cattle (compost - passive windrow and compost - active windrow) - Fillingham et al. (2017); Swine (composted in-vessel) - value used is for dairy cattle composted manure; Sheep (solid storage) - value used is for dairy cattle solid storage manure; Poultry (solid storage - with or without litter) - Farrow (2016), Hillborn (2011); Dairy cattle (daily spread, liquid/slurry with and without natural crust) - Dalby et al. (2021); Dairy cattle (liquid/slurry with solid cover and deep pit under barn) - Dalby et al. (2021), Johanesson et al. (2015); Swine (liquid/slurry with and without natural crust) - Dalby et al. (2021), VanderZaag et al. (2021); Swine (liquid/slurry with solid cover and deep pit under barn) - Dalby et al. (2021)
