@@ -20,6 +20,7 @@ namespace H.Core.Models.Infrastructure
         private ManureSubstrateState _manureSubstrateState;
         private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ManureStateType _manureStateType;
+        private DefaultManureCompositionData _manureCompositionData;
 
         #endregion
 
@@ -31,6 +32,8 @@ namespace H.Core.Models.Infrastructure
             {
                 ManureStateType.NotSelected,
             };
+
+            this.ManureCompositionData = new DefaultManureCompositionData();
         }
 
         #endregion
@@ -74,6 +77,12 @@ namespace H.Core.Models.Infrastructure
         {
             get => _manureStateType;
             set => SetProperty(ref _manureStateType, value);
+        }
+
+        public DefaultManureCompositionData ManureCompositionData
+        {
+            get => _manureCompositionData;
+            set => SetProperty(ref _manureCompositionData, value);
         }
 
         #endregion

@@ -621,6 +621,7 @@ namespace H.Core.Providers.Animals
                 var cfraction = double.TryParse(line[4].ParseUntilOrDefault(), numberStyle, cultureInfo, out cellValue) ? cellValue : CoreConstants.ValueNotDetermined;
                 var pfraction = double.TryParse(line[5].ParseUntilOrDefault(), numberStyle, cultureInfo, out cellValue) ? cellValue : CoreConstants.ValueNotDetermined;
                 var cToNRatio = double.TryParse(line[6].ParseUntilOrDefault(), numberStyle, cultureInfo, out cellValue) ? cellValue : CoreConstants.ValueNotDetermined;
+                var volatileSolidsContent = double.TryParse(line[7].ParseUntilOrDefault(), numberStyle, cultureInfo, out cellValue) ? cellValue : CoreConstants.ValueNotDetermined;
 
                 fileData.Add(new DefaultManureCompositionData
                 {
@@ -631,6 +632,7 @@ namespace H.Core.Providers.Animals
                     CarbonFraction = cfraction,     // Note this value is a percentage in the file
                     PhosphorusFraction = pfraction, // Note this value is a percentage in the file
                     CarbonToNitrogenRatio = cToNRatio,
+                    VolatileSolidsContent = volatileSolidsContent,
                 });
             }
 

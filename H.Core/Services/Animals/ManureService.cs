@@ -210,6 +210,19 @@ namespace H.Core.Services.Animals
             return _validManureApplicationTypes;
         }
 
+        public List<AnimalType> GetValidManureForDigestorImports()
+        {
+            return new List<AnimalType>()
+            {
+                AnimalType.NotSelected,
+                AnimalType.Beef,
+                AnimalType.Dairy,
+                AnimalType.Swine,
+                AnimalType.Sheep,
+                AnimalType.Poultry
+            };
+        }
+
         public List<AnimalType> GetValidManureTypes()
         {
             return _validManureTypes;
@@ -785,13 +798,16 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm)
+        public DefaultManureCompositionData GetManureCompositionData(
+            Farm farm, 
+            ManureStateType manureStateType,
+            AnimalType animalType)
         {
-            if (manureItemBase != null && farm != null)
+            if (farm != null && manureStateType != ManureStateType.NotSelected && animalType != AnimalType.NotSelected)
             {
                 var manureComposition = farm.GetManureCompositionData(
-                    manureStateType: manureItemBase.ManureStateType,
-                    animalType: manureItemBase.AnimalType);
+                    manureStateType: manureStateType,
+                    animalType: animalType);
 
                 // Make a copy
                 var mappedItem = _manureCompositionMapper.Map<DefaultManureCompositionData>(manureComposition);

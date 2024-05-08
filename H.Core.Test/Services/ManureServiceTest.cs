@@ -180,7 +180,7 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void GetManureCompositionDataReturnsNonNull()
         {
-            var result = _sut.GetManureCompositionData(new ManureExportViewItem(), new Farm());
+            var result = _sut.GetManureCompositionData(new Farm(), ManureStateType.DeepPit, AnimalType.Beef);
 
             Assert.IsNotNull(result);
         }
@@ -188,7 +188,7 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void GetManureCompositionDataReturnsNonNullWithNullArgument()
         {
-            var result = _sut.GetManureCompositionData(null, null);
+            var result = _sut.GetManureCompositionData(null, ManureStateType.DeepPit, AnimalType.Beef);
 
             Assert.IsNotNull(result);
         }

@@ -69,7 +69,8 @@ namespace H.Core.Services.Animals
                 groupEmissionsByDay.NH3FromGrazingAnimals = CoreConstants.ConvertToNH3(nH3NFromGrazingAnimals);
 
                 // Equation 5.4.3-1
-                var volatilizationFraction = nH3NFromGrazingAnimals / groupEmissionsByDay.AmountOfNitrogenExcreted;
+                // Will be zero if weight entered by user is 0
+                var volatilizationFraction = nH3NFromGrazingAnimals / groupEmissionsByDay.AmountOfNitrogenExcreted <= 0 ? 1 : groupEmissionsByDay.AmountOfNitrogenExcreted;
 
                 groupEmissionsByDay.ManureVolatilizationRate = groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,

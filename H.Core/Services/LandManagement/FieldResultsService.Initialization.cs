@@ -191,6 +191,7 @@ namespace H.Core.Services.LandManagement
             if (viewItem.CropType.IsPerennial())
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForPerennials;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
                 viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForPerennials;
             }
             else if (viewItem.CropType.IsSilageCrop())
