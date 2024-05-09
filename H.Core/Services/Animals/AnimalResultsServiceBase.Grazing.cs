@@ -70,7 +70,7 @@ namespace H.Core.Services.Animals
 
                 // Equation 5.4.3-1
                 // Will be zero if weight entered by user is 0
-                var volatilizationFraction = nH3NFromGrazingAnimals / groupEmissionsByDay.AmountOfNitrogenExcreted <= 0 ? 1 : groupEmissionsByDay.AmountOfNitrogenExcreted;
+                var volatilizationFraction = nH3NFromGrazingAnimals / (groupEmissionsByDay.AmountOfNitrogenExcreted <= 0 ? 1 : groupEmissionsByDay.AmountOfNitrogenExcreted);
 
                 groupEmissionsByDay.ManureVolatilizationRate = groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
