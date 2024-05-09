@@ -27,9 +27,12 @@ namespace H.Core.Providers.Plants
                 case CropType.SeededGrassland:
                     return 50;
 
-                case CropType.TameGrass:
+                case CropType.Forage:
+                case CropType.TameGrass: 
                 case CropType.TameLegume:
                 case CropType.TameMixed:
+                case CropType.PerennialForages:
+                case CropType.ForageForSeed:
                     return 60;
 
                 // Annuals
