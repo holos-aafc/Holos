@@ -632,7 +632,7 @@ namespace H.Core.Providers.Animals
                     CarbonFraction = cfraction,     // Note this value is a percentage in the file
                     PhosphorusFraction = pfraction, // Note this value is a percentage in the file
                     CarbonToNitrogenRatio = cToNRatio,
-                    VolatileSolidsContent = volatileSolidsContent,
+                    VolatileSolidsFraction = volatileSolidsContent, // Note this value is a percentage in the file
                 });
             }
 

@@ -23,6 +23,7 @@ namespace H.Core.Providers.Animals
         private double _carbonToNitrogenRatio;
         private double _nitrogenConcentrationOfManure;
         private double _volatileSolidsContent;
+        private double _volatileSolidsFraction;
 
         private ManureStateType _manureStateType;
         private AnimalType _animalType;
@@ -134,6 +135,17 @@ namespace H.Core.Providers.Animals
         {
             get => _animalType;
             set => SetProperty(ref _animalType, value);
+        }
+
+        /// <summary>
+        /// VS content (% wet weight)
+        ///
+        /// Expressed as a percentage
+        /// </summary>
+        public double VolatileSolidsFraction
+        {
+            get => _volatileSolidsFraction;
+            set => SetProperty(ref _volatileSolidsFraction, value, () => this.VolatileSolidsContent = value / 100.0);
         }
 
         /// <summary>

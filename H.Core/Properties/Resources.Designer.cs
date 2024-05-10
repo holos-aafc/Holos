@@ -12013,6 +12013,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Volatile solids content of manure.
+        /// </summary>
+        public static string LabelVolatileSolidsContentOfManure {
+            get {
+                return ResourceManager.GetString("LabelVolatileSolidsContentOfManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Volatile Solids (% of TS).
         /// </summary>
         public static string LabelVolatileSolidsPercentage {

@@ -109,8 +109,10 @@ namespace H.Core.Calculators.Infrastructure
             }
             else
             {
+                // Broilers, layers, and turkey
+
                 // Equation 4.8.1-7
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = (dailyEmissions.AmountOfNitrogenExcreted - dailyEmissions.TanExcretionRate - dailyEmissions.ManureDirectN2ONEmission) * fractionAdded;
             }
 
             // Equation 4.8.1-8

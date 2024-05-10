@@ -5823,4 +5823,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelUseImportedManure" xml:space="preserve">
     <value>Use imported manure</value>
   </data>
+  <data name="LabelVolatileSolidsContentOfManure" xml:space="preserve">
+    <value>Volatile solids content of manure</value>
+  </data>
 </root>
