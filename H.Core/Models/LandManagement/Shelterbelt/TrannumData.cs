@@ -148,7 +148,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             var mortalityHigh = _shelterbeltCalculator.CalculateMortalityHigh(mortalityLow);
 
             this.RowLength = row.Length;
-            this.TreeSpacing = _shelterbeltCalculator.CalculateTreeSpacing(this.RowLength, this.TreeCount);
 
             this.PercentMortalityLow = mortalityLow;
             this.PercentMortalityHigh = mortalityHigh;
@@ -166,6 +165,8 @@ namespace H.Core.Models.LandManagement.Shelterbelt
                 // For all other years, we use the number of trees that have lived past the first year
                 this.TreeCount = treeGroup.PlantedTreeCount * (100 - this.PercentMortality) / 100.0;
             }
+
+            this.TreeSpacing = _shelterbeltCalculator.CalculateTreeSpacing(this.RowLength, this.TreeCount);
 
             this.SharedConstruction();
         }

@@ -36,7 +36,7 @@ namespace H.Core.Models.Infrastructure
         public double VolatileSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        /// (kg DM day^-1)
         /// </summary>
         public double TotalSolidsFlowOfSubstrate { get; set; }
 

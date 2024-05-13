@@ -99,8 +99,8 @@ namespace H.Core.Calculators.Infrastructure
                  (dailyEmissions.ManureDirectN2ONEmission + dailyEmissions.AmmoniaConcentrationInHousing)) *
                 fractionAdded;
 
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType() ||
-                managementPeriod.AnimalType.IsSheepType())
+            var animalType = managementPeriod.AnimalType;
+            if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsSheepType())
             {
                 // Equation 4.8.1-6
                 substrateFlowRate.OrganicNitrogenFlowOfSubstrate =
@@ -144,6 +144,20 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.1-16
             substrateFlowRate.TotalMassFlowOfSubstrate =
                 dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms * fractionUsed;
+
+            // Change Total Mass Flows here (new 16 and 17)
+            var totalMassFlowOfSubstrate = 0d;
+            var animalType = managementPeriod.AnimalType;
+            var nitrogenContentOfManure = managementPeriod.ManureDetails.FractionOfNitrogenInManure;
+            if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsPoultryType())
+            {
+                totalMassFlowOfSubstrate = (((dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * 100) / nitrogenContentOfManure) * fractionUsed; 
+            }
+            else
+            {
+                // Sheep, swine, and other livestock
+            }
+
 
             // Equation 4.8.1-17
             substrateFlowRate.TotalSolidsFlowOfSubstrate =
