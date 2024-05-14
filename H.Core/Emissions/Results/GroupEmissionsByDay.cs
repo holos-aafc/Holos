@@ -171,6 +171,7 @@ namespace H.Core.Emissions.Results
         private double _ammoniaEmissionRateFromHousingAndStorage;
         private double _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
         private double _adjustedAmmoniaEmissionsFromHousingAndStorage;
+        private double _nonAccumulatedNitrogenEnteringPoolAvailableInStorage;
 
         #endregion
 
@@ -1193,6 +1194,8 @@ namespace H.Core.Emissions.Results
             }
         }
 
+
+
         /// <summary>
         /// (kg)
         /// </summary>
@@ -1810,6 +1813,15 @@ namespace H.Core.Emissions.Results
 
         public double TotalAmountOfNitrogenForDay { get; set; }
         public double AccumulatedVolume { get; set; }
+
+        /// <summary>
+        /// Equation 4.5.2-15
+        /// </summary>
+        public double NonAccumulatedNitrogenEnteringPoolAvailableInStorage
+        {
+            get => _nonAccumulatedNitrogenEnteringPoolAvailableInStorage;
+            set => SetProperty(ref _nonAccumulatedNitrogenEnteringPoolAvailableInStorage, value);
+        }
 
         #endregion
     }

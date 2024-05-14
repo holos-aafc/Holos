@@ -292,9 +292,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay = base.CalculateAccumulatedTanAvailableForLandApplication(
                 accumulatedTANEnteringStorageSystemOnDay: dailyEmissions.AccumulatedTanInStorageOnDay);
 
-
-
-            var accumulatedNitrogenAvailableForLandApplicationOnDay = CalculateAccumulatedNitrogenAvailableForLandApplicationOnDay(
+            dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage = CalculateNonAccumulatedNitrogenAvailableForLandApplicationOnDay(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directManureN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
@@ -303,8 +301,9 @@ namespace H.Core.Services.Animals
                 manureN2ONLeachingEmission: dailyEmissions.ManureN2ONLeachingEmission,
                 dailyEmissions.ManureNitrateLeachingEmission);
 
-            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = accumulatedNitrogenAvailableForLandApplicationOnDay +
-                    (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+            // Equation 4.5.2-16
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
+                    (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
 
             // Equation 4.5.2-13
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
@@ -460,7 +459,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.5.2-15
         /// </summary>
-        private double CalculateAccumulatedNitrogenAvailableForLandApplicationOnDay(
+        private double CalculateNonAccumulatedNitrogenAvailableForLandApplicationOnDay(
             double amountOfNitrogenExcreted,
             double amountOfNitrogenFromBedding,
             double directManureN2ONEmission,

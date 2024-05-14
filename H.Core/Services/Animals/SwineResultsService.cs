@@ -254,13 +254,17 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
+            dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
                 nitrogenExcretion: dailyEmissions.AmountOfNitrogenExcreted,
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
                 ammoniaLostFromHousingAndStorage: dailyEmissions.TotalNitrogenLossesFromHousingAndStorage,
                 leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission,
                 leachingNO3NEmission: dailyEmissions.ManureNitrateLeachingEmission);
+
+            // Equation 4.5.2-22
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
+                (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,

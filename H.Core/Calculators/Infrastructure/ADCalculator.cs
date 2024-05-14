@@ -167,11 +167,11 @@ namespace H.Core.Calculators.Infrastructure
             var reductionFactor = _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
-                var volatilileSolidsOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
-                var volatilileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
+                var volatileSolidsOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
+                var volatileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
 
                 // Equation 4.8.1-19
-                substrateFlowRate.VolatileSolidsFlowOfSubstrate = (volatilileSolidsOnCurrentDay - volatilileSolidsOnPreviousDay) * fractionUsed;
+                substrateFlowRate.VolatileSolidsFlowOfSubstrate = (volatileSolidsOnCurrentDay - volatileSolidsOnPreviousDay) * fractionUsed;
             }
             else
             {
@@ -197,7 +197,7 @@ namespace H.Core.Calculators.Infrastructure
                  */
 
                 // Equation 4.8.1-21
-                substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay * fractionUsed;
+                substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage * fractionUsed;
 
                 // Equation 4.8.1-22
                 substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0;
@@ -212,6 +212,7 @@ namespace H.Core.Calculators.Infrastructure
                  */
 
                 // Equation 4.8.1-21
+                substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage * fractionUsed;
             }
 
             // Equation 4.8.1-25
