@@ -185,10 +185,10 @@ namespace H.Core.Calculators.Infrastructure
                 substrateFlowRate.NitrogenFlowOfSubstrate = (dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * fractionUsed;
 
                 // Equation 4.8.1-22
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay * fractionUsed;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.OrganicNitrogenCreatedOnDay * fractionUsed;
 
-                // Equation 4.8.1-23
-                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay * fractionUsed;
+                // Equation 4.8.1-24
+                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay * fractionUsed;
             }
             else if (animalType.IsPoultryType())
             {
@@ -199,8 +199,8 @@ namespace H.Core.Calculators.Infrastructure
                 // Equation 4.8.1-21
                 substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage * fractionUsed;
 
-                // Equation 4.8.1-22
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0;
+                // Equation 4.8.1-23
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0; // ? Need clarification on this equation (note in alg. doc.)
 
                 // Equation 4.8.1-24
                 substrateFlowRate.ExcretedTanInSubstrate = 0;

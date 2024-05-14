@@ -894,6 +894,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.3.2-8
+        /// 
         /// The non-accumulated amount on one day
         /// 
         /// (kg TAN)
