@@ -1035,8 +1035,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// Equation 4.5.2-16
-        /// Equation 4.5.2-22
+        /// Equation 4.5.2-21
+        /// 
         /// (kg N day^-1)
         /// </summary>
         public double AccumulatedNitrogenAvailableForLandApplicationOnDay

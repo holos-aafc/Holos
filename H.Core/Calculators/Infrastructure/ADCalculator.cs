@@ -124,9 +124,11 @@ namespace H.Core.Calculators.Infrastructure
             return substrateFlowRate;
         }
 
-        public SubstrateFlowInformation GetStoredManureFlowRate(AnaerobicDigestionComponent component,
+        public SubstrateFlowInformation GetStoredManureFlowRate(
+            AnaerobicDigestionComponent component,
             GroupEmissionsByDay dailyEmissions,
-            ADManagementPeriodViewItem adManagementPeriodViewItem)
+            ADManagementPeriodViewItem adManagementPeriodViewItem, 
+            GroupEmissionsByDay previousDaysEmissions)
         {
             var managementPeriod = adManagementPeriodViewItem.ManagementPeriod;
 
@@ -141,69 +143,75 @@ namespace H.Core.Calculators.Infrastructure
 
             var fractionUsed = adManagementPeriodViewItem.DailyFractionOfManureAdded;
 
-            // Equation 4.8.1-16
-            substrateFlowRate.TotalMassFlowOfSubstrate =
-                dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms * fractionUsed;
-
-            // Change Total Mass Flows here (new 16 and 17)
             var totalMassFlowOfSubstrate = 0d;
             var animalType = managementPeriod.AnimalType;
             var nitrogenContentOfManure = managementPeriod.ManureDetails.FractionOfNitrogenInManure;
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsPoultryType())
             {
+                // Equation 4.8.1-16
                 totalMassFlowOfSubstrate = (((dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * 100) / nitrogenContentOfManure) * fractionUsed; 
             }
             else
             {
+                // Equation 4.8.1-17
+
                 // Sheep, swine, and other livestock
+                totalMassFlowOfSubstrate = ((dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay * 100) / nitrogenContentOfManure) * fractionUsed;
             }
 
+            substrateFlowRate.TotalMassFlowOfSubstrate = totalMassFlowOfSubstrate;
 
-            // Equation 4.8.1-17
-            substrateFlowRate.TotalSolidsFlowOfSubstrate =
-                substrateFlowRate.TotalMassFlowOfSubstrate * adManagementPeriodViewItem.FlowRate;
+            // Equation 4.8.1-18
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriodViewItem.TotalSolids / 1000.0);
 
-            var reductionFactor =
-                _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
+            var reductionFactor = _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
-                // Equation 4.8.1-18
-                substrateFlowRate.VolatileSolidsFlowOfSubstrate =
-                    (dailyEmissions.VolatileSolidsLoaded - dailyEmissions.VolatileSolidsConsumed) * fractionUsed;
+                var volatilileSolidsOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
+                var volatilileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
+
+                // Equation 4.8.1-19
+                substrateFlowRate.VolatileSolidsFlowOfSubstrate = (volatilileSolidsOnCurrentDay - volatilileSolidsOnPreviousDay) * fractionUsed;
             }
             else
             {
-                // Equation 4.8.1-19
-                substrateFlowRate.VolatileSolidsFlowOfSubstrate = dailyEmissions.VolatileSolids *
-                                                                  (1 - reductionFactor.VolatileSolidsReductionFactor) *
-                                                                  managementPeriod.NumberOfAnimals * fractionUsed;
+                // Equation 4.8.1-20
+                substrateFlowRate.VolatileSolidsFlowOfSubstrate = dailyEmissions.VolatileSolids * (1 - reductionFactor.VolatileSolidsReductionFactor) * managementPeriod.NumberOfAnimals * fractionUsed;
             }
 
-            // Equation 4.8.1-20
-            substrateFlowRate.NitrogenFlowOfSubstrate =
-                dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay * fractionUsed;
-
-            if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+            if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
             {
+                // Equation 4.8.1-21
+                substrateFlowRate.NitrogenFlowOfSubstrate = (dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * fractionUsed;
+
                 // Equation 4.8.1-22
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate =
-                    dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay * fractionUsed;
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay * fractionUsed;
 
                 // Equation 4.8.1-23
-                substrateFlowRate.ExcretedTanInSubstrate =
-                    dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay * fractionUsed;
+                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay * fractionUsed;
             }
-            else
+            else if (animalType.IsPoultryType())
             {
                 /*
                  * Poultry
                  */
+
+                // Equation 4.8.1-21
+                substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay * fractionUsed;
 
                 // Equation 4.8.1-22
                 substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0;
 
                 // Equation 4.8.1-24
                 substrateFlowRate.ExcretedTanInSubstrate = 0;
+            }
+            else
+            {
+                /*
+                 * Other livestock
+                 */
+
+                // Equation 4.8.1-21
             }
 
             // Equation 4.8.1-25
@@ -705,13 +713,15 @@ namespace H.Core.Calculators.Infrastructure
                             var adManagementPeriod =
                                 selectedManagementPeriods.Single(x => x.ManagementPeriod.Equals(managementPeriod));
 
-                            foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
+                            for (int i = 0; i < groupEmissionsByMonth.DailyEmissions.Count; i++)
                             {
-                                var freshManureFlow = this.GetFreshManureFlowRate(
+                                var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
+                                var previousDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAtOrDefault(i - 1);
+
+                                var freshManureFlow = this.GetStoredManureFlowRate(
                                     component,
-                                    groupEmissionsByDay,
-                                    adManagementPeriod,
-                                    farm);
+                                    currentDayEmissions,
+                                    adManagementPeriod, previousDayEmissions);
 
                                 flows.Add(freshManureFlow);
                             }

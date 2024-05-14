@@ -99,7 +99,7 @@ namespace H.Core.Services.Animals
 
             if (animalGroup.GroupType.IsChickenType())
             {
-                // For chicken, we have VS values used to calculate the manure CH4 emission rate
+                // For chickens, we have VS values used to calculate the manure CH4 emission rate
                 dailyEmissions.VolatileSolids = managementPeriod.ManureDetails.VolatileSolids;
 
                 dailyEmissions.ManureMethaneEmissionRate = this.CalculateManureMethaneEmissionRate(

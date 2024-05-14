@@ -739,7 +739,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
                 volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
 
-            // Equation 4.1.3-6 (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
+            // (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
             dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
                 volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
                 volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
