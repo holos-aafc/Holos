@@ -611,6 +611,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.1.3-14
+        /// 
         /// Total amount of C flowing into storage each day (non-accumulated value)
         /// 
         /// (kg C day^-1)
@@ -895,6 +897,7 @@ namespace H.Core.Emissions.Results
 
         /// <summary>
         /// Equation 4.3.2-8
+        /// Equation 4.3.3-11
         /// 
         /// The non-accumulated amount on one day
         /// 

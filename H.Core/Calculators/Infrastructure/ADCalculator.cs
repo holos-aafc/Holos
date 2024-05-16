@@ -138,6 +138,7 @@ namespace H.Core.Calculators.Infrastructure
                 AnimalType = managementPeriod.AnimalType,
                 DateCreated = dailyEmissions.DateTime,
                 ManagementPeriod = managementPeriod,
+                BiomethanePotential = adManagementPeriodViewItem.BiomethanePotential,
                 Component = component,
             };
 
@@ -202,8 +203,8 @@ namespace H.Core.Calculators.Infrastructure
                 // Equation 4.8.1-23
                 substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0; // ? Need clarification on this equation (note in alg. doc.)
 
-                // Equation 4.8.1-24
-                substrateFlowRate.ExcretedTanInSubstrate = 0;
+                // Equation 4.8.1-25
+                substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay * fractionUsed;
             }
             else
             {
@@ -215,9 +216,8 @@ namespace H.Core.Calculators.Infrastructure
                 substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage * fractionUsed;
             }
 
-            // Equation 4.8.1-25
-            substrateFlowRate.CarbonFlowOfSubstrate =
-                dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay * fractionUsed;
+            // Equation 4.8.1-26
+            substrateFlowRate.CarbonFlowOfSubstrate = dailyEmissions.AmountOfCarbonInStoredManure * fractionUsed;
 
             return substrateFlowRate;
         }
@@ -230,13 +230,13 @@ namespace H.Core.Calculators.Infrastructure
             var biodegradableFraction = this.GetBiodegradableFraction(substrateFlowRate);
             var hydrolosisRate = 0.0;
 
-            if (substrateFlowRate.SubstrateType == SubstrateType.FreshManure)
+            if (substrateFlowRate.SubstrateType == SubstrateType.FreshManure || substrateFlowRate.ManagementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
-
                 hydrolosisRate = 0.18;
             }
             else if (substrateFlowRate.SubstrateType == SubstrateType.StoredManure)
             {
+
                 hydrolosisRate = 0.05;
             }
             else
@@ -249,14 +249,10 @@ namespace H.Core.Calculators.Infrastructure
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate * biodegradableFraction;
 
             // Equation 4.8.2-2 (inner term)
-            substrateFlowRate.MethaneProduction =
-                substrateFlowRate.BiodegradableSolidsFlow * substrateFlowRate.BiomethanePotential;
+            substrateFlowRate.MethaneProduction = substrateFlowRate.BiodegradableSolidsFlow * (substrateFlowRate.BiomethanePotential / 1000.0);
 
             // Equation 4.8.2-3
-            substrateFlowRate.DegradedVolatileSolids = substrateFlowRate.BiodegradableSolidsFlow -
-                                                       (substrateFlowRate.BiodegradableSolidsFlow /
-                                                        (1 + hydrolosisRate * substrateFlowRate.Component
-                                                            .HydraulicRetentionTimeInDays));
+            substrateFlowRate.DegradedVolatileSolids = substrateFlowRate.BiodegradableSolidsFlow - (substrateFlowRate.BiodegradableSolidsFlow / (1 + hydrolosisRate * substrateFlowRate.Component.HydraulicRetentionTimeInDays));
 
             // Equation 4.8.2-5
             substrateFlowRate.BiogasProduction =
@@ -306,7 +302,7 @@ namespace H.Core.Calculators.Infrastructure
             var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
 
             // Equation 4.8.5-1
-            digestorDailyOutput.MethaneEmissionsDuringStorage = methaneEmissionFactorDuringStorage *
+            digestorDailyOutput.MethaneEmissionsDuringStorage = (methaneEmissionFactorDuringStorage / 1000000.0)*
                                                                 digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
             // Equation 4.8.5-2
@@ -594,7 +590,8 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.FlowOfAllCarbon = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
         }
 
-        public List<DigestorDailyOutput> CalculateResults(Farm farm,
+        public List<DigestorDailyOutput> CalculateResults(
+            Farm farm,
             List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
             var results = new List<DigestorDailyOutput>();
@@ -633,7 +630,8 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         public List<SubstrateFlowInformation> GetDailyFlowRatesForFarmAndCropSubstrateTypes(
-            IEnumerable<SubstrateViewItemBase> substrateViewItems, SubstrateType type,
+            IEnumerable<SubstrateViewItemBase> substrateViewItems, 
+            SubstrateType type,
             AnaerobicDigestionComponent component)
         {
             var result = new List<SubstrateFlowInformation>();

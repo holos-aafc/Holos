@@ -881,8 +881,10 @@ namespace H.Core.Services.Animals
             return manureMethane * (1 - emissionReductionFactor);
         }
 
-        public void CalculateCarbonInStorage(GroupEmissionsByDay dailyEmissions,
-            GroupEmissionsByDay previousDaysEmissions, ManagementPeriod managementPeriod)
+        public void CalculateCarbonInStorage(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions, 
+            ManagementPeriod managementPeriod)
         {
             dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = this.CalculateCarbonLostAsMethaneDuringManagement(
                 monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
