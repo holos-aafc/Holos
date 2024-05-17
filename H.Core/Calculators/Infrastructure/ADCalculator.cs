@@ -230,7 +230,7 @@ namespace H.Core.Calculators.Infrastructure
             var biodegradableFraction = this.GetBiodegradableFraction(substrateFlowRate);
             var hydrolosisRate = 0.0;
 
-            if (substrateFlowRate.SubstrateType == SubstrateType.FreshManure || substrateFlowRate.ManagementPeriod.ManureDetails.StateType.IsLiquidManure())
+            if (substrateFlowRate.SubstrateType == SubstrateType.FreshManure || substrateFlowRate.IsLiquidManure())
             {
                 hydrolosisRate = 0.18;
             }
@@ -602,14 +602,19 @@ namespace H.Core.Calculators.Infrastructure
                 return results;
             }
 
-            var dailyManureFlowRates = this.GetDailyManureFlowRates(farm, animalComponentEmissionsResults, component);
-            var dailyCropResidueFlowRates = this.GetDailyCropResidueFlowRates(component);
-            var farmResidueFlows = this.GetDailyFarmResidueFlowRates(component);
+            var dailyFlowRates = new List<SubstrateFlowInformation>();
 
-            dailyManureFlowRates.AddRange(farmResidueFlows);
-            dailyManureFlowRates.AddRange(dailyCropResidueFlowRates);
+            var onFarmManureFlowRates = this.GetDailyManureFlowRates(farm, animalComponentEmissionsResults, component);
+            var cropResidueFlowRates = this.GetDailyCropResidueFlowRates(component);
+            var farmResidueFlowsRates = this.GetDailyFarmResidueFlowRates(component);
+            var importedManureFlowRates = this.GetDailyImportedManureResidueFlowRates(component);
 
-            foreach (var substrateFlowInformation in dailyManureFlowRates)
+            dailyFlowRates.AddRange(onFarmManureFlowRates);
+            dailyFlowRates.AddRange(farmResidueFlowsRates);
+            dailyFlowRates.AddRange(cropResidueFlowRates);
+            dailyFlowRates.AddRange(importedManureFlowRates);
+
+            foreach (var substrateFlowInformation in dailyFlowRates)
             {
                 this.CalculateDailyBiogasProductionFromSingleSubstrate(substrateFlowInformation);
 
@@ -621,15 +626,14 @@ namespace H.Core.Calculators.Infrastructure
             }
 
             // Sum flows that occur on same day.
-            var combinedDailyResults =
-                this.CombineSubstrateFlowsOfSameTypeOnSameDay(dailyManureFlowRates, component, farm);
+            var combinedDailyResults = this.CombineSubstrateFlowsOfSameTypeOnSameDay(dailyFlowRates, component, farm);
 
             results.AddRange(combinedDailyResults);
 
             return results.OrderBy(x => x.Date).ToList();
         }
 
-        public List<SubstrateFlowInformation> GetDailyFlowRatesForFarmAndCropSubstrateTypes(
+        public List<SubstrateFlowInformation> GetDailyFlowRatesForSubstrateTypes(
             IEnumerable<SubstrateViewItemBase> substrateViewItems, 
             SubstrateType type,
             AnaerobicDigestionComponent component)
@@ -642,7 +646,7 @@ namespace H.Core.Calculators.Infrastructure
                 var startDate = substrateViewItemBase.StartDate;
                 var endDate = substrateViewItemBase.EndDate;
 
-                for (DateTime i = startDate; i < endDate; i += TimeSpan.FromDays(1))
+                for (DateTime currentDate = startDate; currentDate < endDate; currentDate += TimeSpan.FromDays(1))
                 {
                     var substrateFlow = new SubstrateFlowInformation()
                     {
@@ -650,21 +654,20 @@ namespace H.Core.Calculators.Infrastructure
                         Component = component,
                         MethaneFraction = substrateViewItemBase.MethaneFraction,
                         BiomethanePotential = substrateViewItemBase.BiomethanePotential,
+                        DateCreated = currentDate,
                     };
-
-                    substrateFlow.DateCreated = i;
 
                     // Equation 4.8.1-10
                     substrateFlow.TotalMassFlowOfSubstrate = substrateViewItemBase.FlowRate;
 
                     // Equation 4.8.1-11
-                    substrateFlow.TotalSolidsFlowOfSubstrate = (substrateViewItemBase.TotalSolids / 1000);
+                    substrateFlow.TotalSolidsFlowOfSubstrate = (substrateViewItemBase.TotalSolids / 1000.0);
 
                     // Equation 4.8.1-12
                     substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
 
                     // Equation 4.8.1-13
-                    substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000);
+                    substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000.0);
 
                     // Equation 4.8.1-14
                     substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.TotalCarbon;
@@ -678,15 +681,22 @@ namespace H.Core.Calculators.Infrastructure
 
         public List<SubstrateFlowInformation> GetDailyFarmResidueFlowRates(AnaerobicDigestionComponent component)
         {
-            return this.GetDailyFlowRatesForFarmAndCropSubstrateTypes(
+            return this.GetDailyFlowRatesForSubstrateTypes(
                 component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems, SubstrateType.FarmResidues,
                 component);
         }
 
         public List<SubstrateFlowInformation> GetDailyCropResidueFlowRates(AnaerobicDigestionComponent component)
         {
-            return this.GetDailyFlowRatesForFarmAndCropSubstrateTypes(
+            return this.GetDailyFlowRatesForSubstrateTypes(
                 component.AnaerobicDigestionViewItem.CropResiduesSubstrateViewItems, SubstrateType.CropResidues,
+                component);
+        }
+
+        public List<SubstrateFlowInformation> GetDailyImportedManureResidueFlowRates(AnaerobicDigestionComponent component)
+        {
+            return this.GetDailyFlowRatesForSubstrateTypes(
+                component.AnaerobicDigestionViewItem.ManureSubstrateViewItems, SubstrateType.ImportedManure,
                 component);
         }
 

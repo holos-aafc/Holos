@@ -15,7 +15,8 @@ namespace H.Core.Models.Infrastructure
         StoredManure,
         FreshManure,
         FarmResidues,
-        CropResidues
+        CropResidues,
+        ImportedManure,
     }
 
     public class SubstrateFlowInformation : SubstrateViewItemBase
@@ -87,6 +88,17 @@ namespace H.Core.Models.Infrastructure
         public double TanFlowInDigestate { get; set; }
 
         public double OrganicNitrogenFlowInDigestate { get; set; }
+
         public double CarbonFlowInDigestate { get; set; }
+
+        #region Public Methods
+
+        public bool IsLiquidManure()
+        {
+            return this.ManagementPeriod != null && this.ManagementPeriod.ManureDetails != null &&
+                   this.ManagementPeriod.ManureDetails.StateType.IsLiquidManure();
+        }
+
+        #endregion
     }
 }
