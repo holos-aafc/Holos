@@ -307,11 +307,11 @@ namespace H.Core.Calculators.Infrastructure
 
             // Equation 4.8.5-2
             digestorDailyOutput.N2OEmissionsDuringStorage =
-                0.0652 * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
+                (0.0652 / 1000000.0) * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
             // Equation 4.8.5-3
             digestorDailyOutput.AmmoniaEmissionsDuringStorage =
-                3.495 * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
+                (3.495 / 1000000.0) * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
         }
 
         public void CalculateLiquidSolidSeparation(
