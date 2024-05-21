@@ -41,7 +41,15 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _digestateState, value);
         }
 
+        /// <summary>
+        /// This is the amount after field applications have been considered
+        /// </summary>
         public double MaximumAmountOfDigestateAvailablePerHectare { get; set; }
+
+        /// <summary>
+        /// This is the amount not considering any field applications and is the total amount produced by the AD system (not considering field size)
+        /// </summary>
+        public double TotalDigestateProducedBySystem { get; set; }
 
         /// <summary>
         /// Amount of digestate applied

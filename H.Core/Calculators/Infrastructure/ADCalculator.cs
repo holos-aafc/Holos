@@ -248,8 +248,6 @@ namespace H.Core.Calculators.Infrastructure
             substrateFlowRate.BiodegradableSolidsFlow =
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate * biodegradableFraction;
 
-
-
             // Equation 4.8.2-3 (equation number is correct, need this value before calculating next value
             substrateFlowRate.DegradedVolatileSolids = substrateFlowRate.BiodegradableSolidsFlow - (substrateFlowRate.BiodegradableSolidsFlow / (1 + hydrolosisRate * substrateFlowRate.Component.HydraulicRetentionTimeInDays));
 

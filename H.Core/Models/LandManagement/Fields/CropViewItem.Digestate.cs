@@ -49,6 +49,32 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Public Methods
 
+        /// <summary>
+        /// Returns the fraction of digestate used (unitless)
+        /// </summary>
+        public double GetFractionOfDigestateUsed(DigestateApplicationViewItem applicationViewItem)
+        {
+            var totalApplied = applicationViewItem.AmountAppliedPerHectare * this.Area;
+
+            var totalDigestateProducedBySystem = 0d;
+            if (this.DigestateApplicationViewItems.Any())
+            {
+                totalDigestateProducedBySystem = this.DigestateApplicationViewItems.First().TotalDigestateProducedBySystem;
+            }
+            else
+            {
+                totalDigestateProducedBySystem = 0d;
+            }
+
+            var result = 0d;
+            if (totalDigestateProducedBySystem > 0)
+            {
+                result = totalApplied / totalDigestateProducedBySystem;
+            }
+
+            return result;
+        }
+
         public double GetRemainingNitrogenFromDigestateAtEndOfYear()
         {
             var itemsByYear = this.DigestateApplicationViewItems.Where(x => x.DateCreated.Year == this.Year);
