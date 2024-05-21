@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Infrastructure;
 
@@ -25,6 +26,7 @@ namespace H.Core.Models.Infrastructure
         public SubstrateType SubstrateType { get; set; }
         public ManagementPeriod ManagementPeriod { get; set; }
         public AnaerobicDigestionComponent Component { get; set; }
+        public DefaultManureCompositionData ManureCompositionData { get; set; }
 
         /// <summary>
         /// (kg day^-1)
@@ -50,6 +52,7 @@ namespace H.Core.Models.Infrastructure
         /// (kg day^-1)
         /// </summary>
         public double CarbonFlowOfSubstrate { get; set; }
+
         public double OrganicNitrogenFlowOfSubstrate { get; set; }
 
         /// <summary>
@@ -90,6 +93,8 @@ namespace H.Core.Models.Infrastructure
         public double OrganicNitrogenFlowInDigestate { get; set; }
 
         public double CarbonFlowInDigestate { get; set; }
+
+
 
         #region Public Methods
 

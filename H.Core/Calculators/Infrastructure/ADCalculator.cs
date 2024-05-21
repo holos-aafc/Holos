@@ -229,14 +229,14 @@ namespace H.Core.Calculators.Infrastructure
         {
             var biodegradableFraction = this.GetBiodegradableFraction(substrateFlowRate);
             var hydrolosisRate = 0.0;
+            var substrateType = substrateFlowRate.SubstrateType;
 
-            if (substrateFlowRate.SubstrateType == SubstrateType.FreshManure || substrateFlowRate.IsLiquidManure())
+            if (substrateType == SubstrateType.FreshManure || substrateFlowRate.IsLiquidManure())
             {
                 hydrolosisRate = 0.18;
             }
-            else if (substrateFlowRate.SubstrateType == SubstrateType.StoredManure)
+            else if (substrateType == SubstrateType.StoredManure || substrateType == SubstrateType.ImportedManure)
             {
-
                 hydrolosisRate = 0.05;
             }
             else
@@ -248,11 +248,13 @@ namespace H.Core.Calculators.Infrastructure
             substrateFlowRate.BiodegradableSolidsFlow =
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate * biodegradableFraction;
 
-            // Equation 4.8.2-2 (inner term)
-            substrateFlowRate.MethaneProduction = substrateFlowRate.BiodegradableSolidsFlow * (substrateFlowRate.BiomethanePotential / 1000.0);
 
-            // Equation 4.8.2-3
+
+            // Equation 4.8.2-3 (equation number is correct, need this value before calculating next value
             substrateFlowRate.DegradedVolatileSolids = substrateFlowRate.BiodegradableSolidsFlow - (substrateFlowRate.BiodegradableSolidsFlow / (1 + hydrolosisRate * substrateFlowRate.Component.HydraulicRetentionTimeInDays));
+
+            // Equation 4.8.2-2 (inner term)
+            substrateFlowRate.MethaneProduction = substrateFlowRate.DegradedVolatileSolids * (substrateFlowRate.BiomethanePotential / 1000.0);
 
             // Equation 4.8.2-5
             substrateFlowRate.BiogasProduction =
@@ -277,9 +279,18 @@ namespace H.Core.Calculators.Infrastructure
                                                    totalNitrogenContentOfVolatileSolids;
 
             // Equation 4.8.3-7 (inner term)
-            substrateFlowRate.OrganicNitrogenFlowInDigestate = substrateFlowRate.OrganicNitrogenFlowOfSubstrate -
-                                                               substrateFlowRate.DegradedVolatileSolids *
-                                                               totalNitrogenContentOfVolatileSolids;
+            var organicFlow = 0d;
+            organicFlow = substrateFlowRate.OrganicNitrogenFlowOfSubstrate - 
+                          substrateFlowRate.DegradedVolatileSolids * 
+                          totalNitrogenContentOfVolatileSolids;
+
+            if (organicFlow < 0)
+            {
+                // Imported manure will have no organic N information available so above calculation will be negative
+                organicFlow = 0;
+            }
+
+            substrateFlowRate.OrganicNitrogenFlowInDigestate = organicFlow;
 
             // Equation 4.8.3-8 (inner term)
             substrateFlowRate.CarbonFlowInDigestate = substrateFlowRate.VolatileSolidsFlowOfSubstrate > 0
@@ -531,6 +542,11 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.TotalCarbonDioxideProduction = digestorDailyOutput.TotalBiogasProduction -
                                                                digestorDailyOutput.TotalMethaneProduction;
 
+            if (digestorDailyOutput.TotalCarbonDioxideProduction < 0)
+            {
+                digestorDailyOutput.TotalCarbonDioxideProduction = 0;
+            }
+
             // Equation 4.8.2-11
             digestorDailyOutput.TotalRecoverableMethane = digestorDailyOutput.TotalMethaneProduction * (1 - 0.03);
 
@@ -560,19 +576,32 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.FlowRateOfAllSubstratesInDigestate =
                 flowInformationForAllSubstrates.Sum(x => x.TotalMassFlowOfSubstrate);
 
-            // Equation 4.8.3-2
-            digestorDailyOutput.FlowRateOfAllTotalSolidsInDigestate =
-                flowInformationForAllSubstrates.Sum(x => x.TotalSolidsFlowOfSubstrate) -
-                flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
-            if (digestorDailyOutput.FlowRateOfAllTotalSolidsInDigestate < 0)
+            var flowRateOfAllTotalSolids = 0d;
+            var flowRateOfAllVolatileSolids = 0d;
+            foreach (var flowInformationForAllSubstrate in flowInformationForAllSubstrates)
             {
-                digestorDailyOutput.FlowRateOfAllTotalSolidsInDigestate = 0;
+                var totalSolidsFlowOfSubstrate = flowInformationForAllSubstrate.TotalSolidsFlowOfSubstrate - flowInformationForAllSubstrate.DegradedVolatileSolids;
+                if (totalSolidsFlowOfSubstrate < 0)
+                {
+                    // Imported manure will have no TS (TS = 0) so we don't add negative numbers here since the degraded VS will be non-zero
+                    totalSolidsFlowOfSubstrate = 0;
+                }
+
+                var volatileSolidsFlowOfSubstrate = flowInformationForAllSubstrate.VolatileSolidsFlowOfSubstrate -flowInformationForAllSubstrate.DegradedVolatileSolids;
+                if (volatileSolidsFlowOfSubstrate < 0)
+                {
+                    volatileSolidsFlowOfSubstrate = 0;
+                }
+
+                flowRateOfAllTotalSolids += totalSolidsFlowOfSubstrate;
+                flowRateOfAllVolatileSolids += volatileSolidsFlowOfSubstrate;
             }
 
+            // Equation 4.8.3-2
+            digestorDailyOutput.FlowRateOfAllTotalSolidsInDigestate = flowRateOfAllTotalSolids;
+
             // Equation 4.8.3-3
-            digestorDailyOutput.FlowRateOfAllVolatileSolidsInDigestate =
-                flowInformationForAllSubstrates.Sum(x => x.VolatileSolidsFlowOfSubstrate) -
-                flowInformationForAllSubstrates.Sum(x => x.DegradedVolatileSolids);
+            digestorDailyOutput.FlowRateOfAllVolatileSolidsInDigestate = flowRateOfAllVolatileSolids;
 
             // Equation 4.8.3-4 (summation)
             digestorDailyOutput.FlowRateOfTotalNitrogenInDigestate =
@@ -655,6 +684,7 @@ namespace H.Core.Calculators.Infrastructure
                         MethaneFraction = substrateViewItemBase.MethaneFraction,
                         BiomethanePotential = substrateViewItemBase.BiomethanePotential,
                         DateCreated = currentDate,
+                        VolatileSolidsContent = substrateViewItemBase.VolatileSolidsContent,
                     };
 
                     // Equation 4.8.1-10
@@ -665,12 +695,24 @@ namespace H.Core.Calculators.Infrastructure
 
                     // Equation 4.8.1-12
                     substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
+                    if (type == SubstrateType.ImportedManure)
+                    {
+                        substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.VolatileSolidsContent;
+                    }
 
                     // Equation 4.8.1-13
                     substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000.0);
+                    if (type == SubstrateType.ImportedManure)
+                    {
+                        substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.NitrogenContent;
+                    }
 
                     // Equation 4.8.1-14
                     substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.TotalCarbon;
+                    if (type == SubstrateType.ImportedManure)
+                    {
+                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.CarbonContent;
+                    }
 
                     result.Add(substrateFlow);
                 }
@@ -774,13 +816,19 @@ namespace H.Core.Calculators.Infrastructure
                 this.CalculateDigestateStorageEmissions(farm, dailyOutput.Date, component, dailyOutput);
 
                 // Equation 4.8.6-1
-                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication =
-                    dailyOutput.FlowRateOfTotalNitrogenInDigestate - (dailyOutput.N2OEmissionsDuringStorage +
-                                                                      dailyOutput.AmmoniaEmissionsDuringStorage);
+                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = dailyOutput.FlowRateOfTotalNitrogenInDigestate - (dailyOutput.N2OEmissionsDuringStorage + dailyOutput.AmmoniaEmissionsDuringStorage);
+                if (dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication < 0)
+                {
+                    dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = 0;
+                }
+
 
                 // Equation 4.8.6-2
-                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication =
-                    dailyOutput.FlowOfAllCarbon - dailyOutput.MethaneEmissionsDuringStorage;
+                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = dailyOutput.FlowOfAllCarbon - dailyOutput.MethaneEmissionsDuringStorage;
+                if (dailyOutput.TotalCarbonInDigestateAvailableForLandApplication < 0)
+                {
+                    dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = 0;
+                }
 
                 result.Add(dailyOutput);
             }

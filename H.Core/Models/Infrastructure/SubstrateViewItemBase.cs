@@ -60,6 +60,23 @@ namespace H.Core.Models.Infrastructure
         }
 
         /// <summary>
+        /// This is the VS content of the substrate - not the same as the <see cref="VolatileSolids"/> which is the flow rate of the VS as entered by the user
+        ///
+        /// (fraction wet weight)
+        /// </summary>
+        public double VolatileSolidsContent { get; set; }
+
+        /// <summary>
+        /// (fraction wet weight)
+        /// </summary>
+        public double NitrogenContent { get; set; }
+
+        /// <summary>
+        /// (fraction wet weight)
+        /// </summary>
+        public double CarbonContent { get; set; }
+
+        /// <summary>
         /// (kg kg^-1)
         /// </summary>
         public double TotalSolids
