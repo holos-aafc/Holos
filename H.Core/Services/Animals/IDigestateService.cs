@@ -43,7 +43,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
+        double GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(int year, Farm farm);
 
         double GetTotalNitrogenExported(int year, Farm farm);
 
@@ -60,6 +60,7 @@ namespace H.Core.Services.Animals
         double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
 
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
-        bool SubtractAmountsFromLandApplications { get; set; }
+        double GetTotalNitrogenCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
+        double GetTotalCarbonCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
     }
 }

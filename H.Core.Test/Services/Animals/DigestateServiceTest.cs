@@ -215,7 +215,7 @@ namespace H.Core.Test.Services.Animals
 
             var year = DateTime.Now.Year;
 
-            var totalNitrogen = _sut.GetTotalNitrogenRemainingAtEndOfYear(year, _farm);
+            var totalNitrogen = _sut.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, _farm);
 
             Assert.AreEqual(90, totalNitrogen);
         }
@@ -418,8 +418,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsRawAmountsNotConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = false;
-
             _adComponent.IsLiquidSolidSeparated = false;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.Raw);
 
@@ -429,8 +427,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsRawAmountsConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = true;
-
             _livestockDigestateApplication.DigestateState = DigestateState.Raw;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
             _livestockDigestateApplication.AmountAppliedPerHectare = 200;
@@ -444,8 +440,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsSolidAmountsNotConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = false;
-
             _adComponent.IsLiquidSolidSeparated = true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
 
@@ -455,8 +449,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsSolidAmountsConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = true;
-
             _livestockDigestateApplication.DigestateState = DigestateState.SolidPhase;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
             _livestockDigestateApplication.AmountAppliedPerHectare = 200;
@@ -470,8 +462,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsNotConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = false;
-
             _adComponent.IsLiquidSolidSeparated = true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
 
@@ -481,8 +471,6 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsConsideringLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = true;
-
             _livestockDigestateApplication.DigestateState = DigestateState.LiquidPhase;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
             _livestockDigestateApplication.AmountAppliedPerHectare = 200;
@@ -496,9 +484,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalManureNitrogenRemainingForFarmAndYearReturnsLiquidAmountsConsideringImportedLandAppliedAmountsTest()
         {
-            _sut.SubtractAmountsFromLandApplications = true;
             _sut.SubtractAmountsFromImportedDigestateLandApplications = true;
-
             _cropViewItem.DigestateApplicationViewItems.Add(_importedDigestateApplication);
 
             _adComponent.IsLiquidSolidSeparated = true;
