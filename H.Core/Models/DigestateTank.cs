@@ -1,4 +1,8 @@
-﻿using H.Core.Enumerations;
+﻿using System.Security.Permissions;
+using H.Core.Enumerations;
+using H.Core.Models.Infrastructure;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Services.Animals;
 
 namespace H.Core.Models
 {
@@ -26,16 +30,22 @@ namespace H.Core.Models
          */
 
         /// <summary>
+        /// Amount of N in tank (optionally, the amount remaining in the tank if <see cref="DigestateService.SubtractAmountsFromLandApplications"/> is true).
+        /// 
         /// (kg N)
         /// </summary>
         public double NitrogenFromRawDigestate { get; set; }
 
         /// <summary>
+        /// Amount of N in tank (optionally, the amount remaining in the tank if <see cref="DigestateService.SubtractAmountsFromLandApplications"/> is true).
+        /// 
         /// (kg N)
         /// </summary>
         public double NitrogenFromSolidDigestate { get; set; }
 
         /// <summary>
+        /// Amount of N in tank (optionally, the amount remaining in the tank if <see cref="DigestateService.SubtractAmountsFromLandApplications"/> is true).
+        /// 
         /// (kg N)
         /// </summary>
         public double NitrogenFromLiquidDigestate  { get; set; }
@@ -122,6 +132,77 @@ namespace H.Core.Models
         #endregion
 
         #region Public Methods
+
+        public double GetFractionUsed(DigestateApplicationViewItem viewItem, AnaerobicDigestionComponent component, CropViewItem cropViewItem)
+        {
+            if (cropViewItem == null)
+            {
+                return 0;
+            }
+
+            var totalAmountCreated = this.GetTotalDigestateCreated(component);
+            var totalAmountApplied = viewItem.AmountAppliedPerHectare * cropViewItem.Area;
+
+            var result = 0d;
+            if (totalAmountCreated > 0)
+            {
+                result = totalAmountApplied / totalAmountCreated;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double GetTotalNitrogenCreatedBySystem(AnaerobicDigestionComponent component)
+        {        
+            if (component.IsLiquidSolidSeparated)
+            {
+                return this.NitrogenFromLiquidDigestate + this.NitrogenFromSolidDigestate;
+            }
+            else
+            {
+                return this.NitrogenFromRawDigestate;
+            }
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double GetTotalCarbonCreatedBySystem(AnaerobicDigestionComponent component)
+        {
+            if (component.IsLiquidSolidSeparated)
+            {
+                return this.CarbonFromLiquidDigestate + this.CarbonFromSolidDigestate;
+            }
+            else
+            {
+                return this.CarbonFromRawDigestate;
+            }
+        }
+
+        /// <summary>
+        /// This will return the total amount of digestate produced (both liquid and solid amounts if there is separation performed)
+        /// 
+        /// (kg digestate)
+        /// </summary>
+        public double GetTotalDigestateCreated(AnaerobicDigestionComponent component)
+        {
+            if (component == null)
+            {
+                return 0;
+            }
+
+            if (component.IsLiquidSolidSeparated)
+            {
+                return this.TotalLiquidDigestateProduced + this.TotalSolidDigestateProduced;
+            }
+            else
+            {
+                return this.TotalRawDigestateProduced;
+            }
+        }
 
         #endregion
     }

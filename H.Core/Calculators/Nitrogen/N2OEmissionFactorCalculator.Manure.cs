@@ -282,12 +282,6 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null)
-            {
-                return 0;
-            }
-
             var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(viewItem, farm);
             var leftOver = this.CalculateDirectN2ONFromLeftOverManureForField(farm, viewItem);
 

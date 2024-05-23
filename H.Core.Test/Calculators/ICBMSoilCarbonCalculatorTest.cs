@@ -1484,6 +1484,8 @@ namespace H.Core.Test.Calculators
                 Province = Province.Alberta,
             };
 
+            farm.Components.Add(fieldSystemComponent);
+
             farm.StageStates.Add(new FieldSystemDetailsStageState() {DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>() {cropViewItem}});
 
             var soilData = new SoilData()
@@ -1507,6 +1509,7 @@ namespace H.Core.Test.Calculators
 
             cropViewItem.ClimateParameter = 1;
             cropViewItem.ManagementFactor = 1;
+            cropViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
 
             _sut.SetCarbonInputs(null, cropViewItem, null, farm);
 

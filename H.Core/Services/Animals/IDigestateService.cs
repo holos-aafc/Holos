@@ -60,5 +60,6 @@ namespace H.Core.Services.Animals
         double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
 
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+        bool SubtractAmountsFromLandApplications { get; set; }
     }
 }

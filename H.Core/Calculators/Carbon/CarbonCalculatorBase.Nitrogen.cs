@@ -367,8 +367,8 @@ namespace H.Core.Calculators.Carbon
             var directN2ONFromGrazingAnimals  = N2OEmissionFactorCalculator.GetDirectN2ONFromGrazingAnimals(farm, currentYearResults, this.AnimalComponentEmissionsResults);
 
             // Emissions from land applied digestate
-            var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(currentYearResults, farm);
-            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromLeftOverDigestateForField(currentYearResults, farm);
+            var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedDigestate(farm, currentYearResults, includeRemainingAmounts: true);
+            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedDigestate(farm, currentYearResults, includeRemainingAmounts: false);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -1055,7 +1055,7 @@ namespace H.Core.Calculators.Carbon
         {
             // These will be the totals for the entire field
             var totalDirectN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificManureSpreadingForField(cropViewItem, farm);
-            var totalDirectN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(cropViewItem, farm);
+            var totalDirectN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(cropViewItem, farm);
 
             // Convert to amount per hectare
             var combinedDirectN2ON = (totalDirectN2ONFromLandAppliedManure + totalDirectN2ONFromLandAppliedDigestate)/ cropViewItem.Area;

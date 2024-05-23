@@ -437,7 +437,9 @@ namespace H.Core.Services.Animals
             return totalCarbon;
         }
 
-        // HERE - account for imports
+        /// <summary>
+        /// (kg digestate)
+        /// </summary>
         public double GetTotalAmountOfDigestateAppliedOnDay(
             DateTime dateTime, 
             Farm farm, 
@@ -483,7 +485,13 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            var dateOfLastOutput = dailyResults.Max(x => x.Date);
+            var outputsByYear = dailyResults.Where(x => x.Date.Year == year).ToList();
+            if (outputsByYear.Any() == false)
+            {
+                return 0;
+            }
+
+            var dateOfLastOutput = outputsByYear.Max(x => x.Date);
             var tank = this.GetTank(farm, dateOfLastOutput, dailyResults);
 
             var component = farm.GetAnaerobicDigestionComponent();

@@ -880,18 +880,19 @@ namespace H.Core.Test.Calculators.Carbon
                     }
                 }
             };
-            
+
+            var fieldSystemComponent = new FieldSystemComponent();
             var viewItems = new List<CropViewItem>()
             {                
                 new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100          ,      BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
                 new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
                 new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
             };
 
-            var fieldSystemComponent = new FieldSystemComponent();
+            farm.Components.Add(fieldSystemComponent);
 
             foreach (var viewItem in viewItems)
             {
@@ -944,11 +945,13 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void UseCustomStartingPoint()
         {
+            var fieldSystemComponent = new FieldSystemComponent();
+
             var runInPeriodItems = new List<CropViewItem>()
             {
-                new CropViewItem() {CropType = CropType.Wheat, TotalCarbonInputs = 1000,},
-                new CropViewItem() {CropType = CropType.Oats, TotalCarbonInputs = 5000,},
-                new CropViewItem() {CropType = CropType.Barley, TotalCarbonInputs = 200,}
+                new CropViewItem() {CropType = CropType.Wheat, TotalCarbonInputs = 1000, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {CropType = CropType.Oats, TotalCarbonInputs = 5000, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {CropType = CropType.Barley, TotalCarbonInputs = 200, FieldSystemComponentGuid = fieldSystemComponent.Guid}
             };
 
             var farm = new Farm()
@@ -956,6 +959,8 @@ namespace H.Core.Test.Calculators.Carbon
                 StartingSoilOrganicCarbon = 30000,
                 UseCustomStartingSoilOrganicCarbon = true,
             };
+
+            farm.Components.Add(fieldSystemComponent);
 
             // Run spin up method once and get the starting points for each pool
             var equilibriumYear = _sut.CalculateRunInPeriod(farm, runInPeriodItems);
@@ -995,11 +1000,11 @@ namespace H.Core.Test.Calculators.Carbon
 
             var viewItemsByField = new List<CropViewItem>()
             {
-                new CropViewItem() {Year = 1985,},
-                new CropViewItem() {Year = 1986},
+                new CropViewItem() {Year = 1985, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {Year = 1986, FieldSystemComponentGuid = fieldSystemComponent.Guid},
             };
 
-            var fieldSystemComponent = new FieldSystemComponent();
+            
 
             _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent, new List<CropViewItem>() {new CropViewItem()});
 

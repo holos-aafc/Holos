@@ -287,38 +287,6 @@ namespace H.Core.Services.LandManagement
             return result;
         }
 
-        public void ProcessDigestateViewItems(
-            Farm farm, 
-            FieldSystemComponent fieldSystemComponent)
-        {
-            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
-            if (component == null)
-            {
-                return;
-            }
-
-            var distinctYears = fieldSystemComponent.CropViewItems.SelectMany(x => x.DigestateApplicationViewItems).Select(x => x.DateCreated.Year).Distinct();
-            if (distinctYears.Any() == false)
-            {
-                return;
-            }
-
-            var table = new Dictionary<int, double>();
-            foreach (var distinctYear in distinctYears)
-            {
-                var remaining = _digestateService.GetTotalNitrogenRemainingAtEndOfYear(distinctYear, farm);
-                table.Add(distinctYear, remaining);
-            }
-
-            foreach (var viewItem in fieldSystemComponent.CropViewItems)
-            {
-                foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
-                {
-                    digestateApplicationViewItem.AmountOfNitrogenRemainingAtEndOfYear = table[digestateApplicationViewItem.DateCreated.Year];
-                }
-            }
-        }
-
         public void CreateDetailViewItems(
             FieldSystemComponent fieldSystemComponent, 
             Farm farm)
@@ -340,8 +308,6 @@ namespace H.Core.Services.LandManagement
                     farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
                 }
             }
-
-            this.ProcessDigestateViewItems(farm, fieldSystemComponent);
 
             // Before creating view items for each year, calculate carbon lost from bale exports
             this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
