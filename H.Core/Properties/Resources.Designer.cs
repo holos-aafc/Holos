@@ -178,7 +178,9 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column..
+        ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column.
+        ///
+        ///If no animals exist on the farm, it is possible to use  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string AnaerobicDigestionStepTwoText {
             get {

@@ -172,7 +172,9 @@
     <value>Farm and crop residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' or 'Add Crop Residue Type' button(s)</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
-    <value>Tout le fumier produit par les animaux à la ferme peut être ajouté au digesteur anaérobie. Choisissez les périodes de gestion qui seront sélectionnées comme source du fumier entrant dans le digesteur. Pour sélectionner une période de gestion, cochez la case « Ajouter ». Par défaut, tout le fumier produit par jour (100 %) au cours de la période de gestion sélectionnée est ajouté au digesteur. Ce pourcentage quotidien peut être ajusté au besoin en modifiant la colonne « Fumier quotidien ajouté au digesteur ».</value>
+    <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.
+
+If no animals exist on the farm, it is possible to use imported manure as a feedstock for the digestor. To add imported manure, the user must enter a daily amount fed into the digestor and the manure type.</value>
   </data>
   <data name="AnaerobicDigestionStepTwoTextNoAnimalComponents" xml:space="preserve">
     <value>Pour ajouter du fumier animal au digesteur anaérobie, au moins un composant animal doit être ajouté à la ferme. Une fois qu’une composante animale a été ajoutée à la ferme, l’option d’ajouter du fumier animal sera offerte.</value>
