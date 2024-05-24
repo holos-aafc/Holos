@@ -271,7 +271,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.1-10
         ///
-        /// Includes direct emissions from applied manure.
+        /// Includes direct emissions from applied manure and optionally direct emissions from remaining manure for the field.
         /// 
         /// (kg N2O-N (kg N)^-1)
         /// </summary>
@@ -1264,6 +1264,8 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.4-1
         ///
+        /// Calculate leaching for single application to a field
+        /// 
         /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalN2ONFromLeachingFromManureApplication(Farm farm, CropViewItem viewItem, ManureItemBase manureItemBase)
@@ -1284,8 +1286,6 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONFromManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
-            var year = viewItem.Year;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
@@ -1299,6 +1299,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
+            var year = viewItem.Year;
             var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
             var importedApplications = field.GetImportedManureApplicationsInYear(year);
             var allApplications = livestockApplications.Concat(importedApplications);
@@ -1318,12 +1319,6 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalN2ONLeachingFromLeftOverManureLeachingForField(Farm farm, CropViewItem viewItem)
         {
-            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null)
-            {
-                return 0;
-            }
-
             if (viewItem.CropType.IsNativeGrassland())
             {
                 return 0;
@@ -1415,12 +1410,6 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalManureNitrateLeached(Farm farm, CropViewItem viewItem)
         {
-            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null)
-            {
-                return 0;
-            }
-
             if (viewItem.CropType.IsNativeGrassland())
             {
                 return 0;

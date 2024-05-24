@@ -368,7 +368,7 @@ namespace H.Core.Calculators.Carbon
 
             // Emissions from land applied digestate
             var directN2ONFromLandAppliedDigestate = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedDigestate(farm, currentYearResults, includeRemainingAmounts: true);
-            var directN2ONFromLandAppliedDigestateNotAppliedToAnyField = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedDigestate(farm, currentYearResults, includeRemainingAmounts: false);
+            var directN2ONFromLandAppliedDigestateExludingRemaining = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedDigestate(farm, currentYearResults, includeRemainingAmounts: false);
 
             // Equation 2.6.5-1
             // Equation 2.7.4-1
@@ -389,12 +389,10 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.5-5
             // Equation 2.7.4-5
             this.N2O_NFromOrganicNitrogen =
-                (this.OrganicPool *
-                 emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromGrazingAnimals + directN2ONFromLandAppliedDigestateNotAppliedToAnyField) / this.CurrentYearResults.Area);
+                (this.OrganicPool * emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromGrazingAnimals + directN2ONFromLandAppliedDigestate) / this.CurrentYearResults.Area);
 
             this.N2O_NFromOrganicNitrogenExcludeRemainingAmounts =
-                (this.OrganicPool *
-                 emissionFactorForOrganicNitrogen) + ((directN2ONFromLandAppliedManureExcludingRemaining + directN2ONFromLandAppliedDigestate + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);
+                (this.OrganicPool * emissionFactorForOrganicNitrogen) + ((directN2ONFromLandAppliedManureExcludingRemaining + directN2ONFromLandAppliedDigestateExludingRemaining + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);
 
             // Equation 2.6.5-6
             // Equation 2.7.4-6
@@ -542,7 +540,8 @@ namespace H.Core.Calculators.Carbon
 
             var manureVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalManureN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year, includeRemainingAmounts: true) / this.CurrentYearResults.Area;
             var manureVolatilizationExcludingRemainingAmount = this.N2OEmissionFactorCalculator.CalculateTotalManureN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year, includeRemainingAmounts: false) / this.CurrentYearResults.Area;
-            var digestateVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalDigestateN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year) / this.CurrentYearResults.Area;
+            var digestateVolatilization = this.N2OEmissionFactorCalculator.CalculateTotalDigestateN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year, includeRemainingAmounts: true) / this.CurrentYearResults.Area;
+            var digestateVolatilizationExcludingRemainingAmount = this.N2OEmissionFactorCalculator.CalculateTotalDigestateN2ONVolatilizationForField(this.CurrentYearResults, farm, this.Year, includeRemainingAmounts: false) / this.CurrentYearResults.Area;
             var volatilizationFromGrazingAnimals = this.N2OEmissionFactorCalculator.GetVolatilizationN2ONFromGrazingAnimals(farm, this.CurrentYearResults, this.AnimalComponentEmissionsResults) / this.CurrentYearResults.Area;
 
             // Equation 2.6.6-15
@@ -554,7 +553,7 @@ namespace H.Core.Calculators.Carbon
 
             this.N2O_NOrganicNitrogenVolatilizationExcludingRemainingAmounts = (this.OrganicPool * volatilizationFraction * volatilizationEmissionFactor) +
                                                                                manureVolatilizationExcludingRemainingAmount +
-                                                                               digestateVolatilization +
+                                                                               digestateVolatilizationExcludingRemainingAmount +
                                                                                volatilizationFromGrazingAnimals;
 
             // Equation 2.6.6-16
