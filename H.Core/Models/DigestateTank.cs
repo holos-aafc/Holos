@@ -35,6 +35,12 @@ namespace H.Core.Models
         /// (kg N)
         /// </summary>
         public double NitrogenFromRawDigestate { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromRawDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
         /// <summary>
@@ -43,14 +49,26 @@ namespace H.Core.Models
         /// (kg N)
         /// </summary>
         public double NitrogenFromSolidDigestate { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
         /// <summary>
-        /// Amount of N in tank
+        /// Amount remaining in tank after field applications
         /// 
         /// (kg N)
         /// </summary>
         public double NitrogenFromLiquidDigestate  { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg N)
+        /// </summary>
         public double NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
         /*
@@ -61,19 +79,41 @@ namespace H.Core.Models
         /// (kg C)
         /// </summary>
         public double CarbonFromRawDigestate { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg C)
+        /// </summary>
         public double CarbonFromRawDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
         /// <summary>
+        /// Amount remaining in tank after field applications
+        /// 
         /// (kg C)
         /// </summary>
         public double CarbonFromSolidDigestate { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg C)
+        /// </summary>
         public double CarbonFromSolidDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
 
         /// <summary>
+        /// Amount remaining in tank after field applications
+        /// 
         /// (kg C)
         /// </summary>
         public double CarbonFromLiquidDigestate { get; set; }
+
+        /// <summary>
+        /// Amount in tank not considering any field applications
+        /// 
+        /// (kg C)
+        /// </summary>
         public double CarbonFromLiquidDigestateNotConsideringFieldApplicationAmounts { get; set; }
 
         #endregion
@@ -192,7 +232,7 @@ namespace H.Core.Models
         /// <summary>
         /// (kg C)
         /// </summary>
-        public double GetTotalCarbonCreatedBySystem(AnaerobicDigestionComponent component)
+        public double GetTotalCarbonRemainingAtEndOfYearAfterDigestateApplications(AnaerobicDigestionComponent component)
         {
             if (component.IsLiquidSolidSeparated)
             {

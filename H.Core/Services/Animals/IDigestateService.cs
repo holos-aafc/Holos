@@ -62,5 +62,6 @@ namespace H.Core.Services.Animals
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
         double GetTotalNitrogenCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
         double GetTotalCarbonCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
+        double GetTotalDigestateCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
     }
 }

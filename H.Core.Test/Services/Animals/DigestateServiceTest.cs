@@ -429,12 +429,12 @@ namespace H.Core.Test.Services.Animals
         {
             _livestockDigestateApplication.DigestateState = DigestateState.Raw;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 10;
 
             _adComponent.IsLiquidSolidSeparated = false;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.Raw);
 
-            Assert.AreEqual(54, result);
+            Assert.AreEqual(80, result);
         }
 
         [TestMethod]
@@ -451,12 +451,12 @@ namespace H.Core.Test.Services.Animals
         {
             _livestockDigestateApplication.DigestateState = DigestateState.SolidPhase;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
 
             _adComponent.IsLiquidSolidSeparated =true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.SolidPhase);
 
-            Assert.AreEqual(105, result, 1);
+            Assert.AreEqual(119, result, 1);
         }
 
         [TestMethod]
@@ -473,12 +473,12 @@ namespace H.Core.Test.Services.Animals
         {
             _livestockDigestateApplication.DigestateState = DigestateState.LiquidPhase;
             _livestockDigestateApplication.DateCreated = new DateTime(DateTime.Now.Year, 4, 3);
-            _livestockDigestateApplication.AmountAppliedPerHectare = 200;
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
 
             _adComponent.IsLiquidSolidSeparated = true;
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
 
-            Assert.AreEqual(140, result, 1);
+            Assert.AreEqual(95, result, 1);
         }
 
         [TestMethod]

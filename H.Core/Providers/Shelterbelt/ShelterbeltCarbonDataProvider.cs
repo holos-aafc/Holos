@@ -189,7 +189,6 @@ namespace H.Core.Providers.Shelterbelt
                     targetLow = tableLookupLow.TecPerKilometer;
                     targetHigh = tableLookupHigh.TecPerKilometer;
                 }
-
                 var ratio = (targetLow - targetHigh) / (mortalityHigh - mortalityLow);
                 var product = (percentMortality - mortalityLow) * ratio;
                 var result = targetLow - product;

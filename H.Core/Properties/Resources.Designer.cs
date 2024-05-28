@@ -11808,6 +11808,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total digestate volume produced.
+        /// </summary>
+        public static string LabelTotalVolumeOfDigestateProduced {
+            get {
+                return ResourceManager.GetString("LabelTotalVolumeOfDigestateProduced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tryptophan.
         /// </summary>
         public static string LabelTryptophan {

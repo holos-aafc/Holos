@@ -137,7 +137,7 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
             }
 
-            currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
+            currentYearViewItem.DigestateCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.DigestateService.GetTotalDigestateCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
 
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare + currentYearViewItem.DigestateCarbonInputsPerHectare;            
 

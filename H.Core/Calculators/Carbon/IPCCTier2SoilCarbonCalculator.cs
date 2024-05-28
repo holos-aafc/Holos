@@ -250,7 +250,7 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
-            viewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(viewItem, farm);
+            viewItem.DigestateCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.DigestateService.GetTotalDigestateCarbonInputsForField(farm, viewItem.Year, viewItem);
 
             /*
              * Equation 2.2.2-12 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C

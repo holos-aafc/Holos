@@ -45,28 +45,6 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 4.9.7-1
-        /// Equation 4.9.7-2
-        /// Equation 4.9.7-5
-        /// 
-        /// Calculate amount of carbon input from all digestate applications in a year.
-        /// </summary>
-        /// <returns>The amount of carbon input during the year (kg C ha^-1)</returns>
-        public double CalculateDigestateCarbonInputPerHectare(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var result = 0d;
-
-            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
-            {
-                result += digestateApplicationViewItem.AmountOfCarbonAppliedPerHectare;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 2.1.2-34
         /// Equation 2.1.2-2
         ///

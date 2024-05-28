@@ -508,14 +508,13 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            var inputsFromLocalManure = 0d;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
+            var inputsFromLocalManure = 0d;
             if (field.HasLivestockManureApplicationsInYear(year))
             {
                 inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
@@ -531,7 +530,7 @@ namespace H.Core.Services.Animals
 
             var result = remaining + inputsFromImportedManure + inputsFromLocalManure;
 
-            return result / viewItem.Area;
+            return result / field.FieldArea;
         }
 
         public double GetTotalNitrogenCreated(int year, AnimalType animalType)

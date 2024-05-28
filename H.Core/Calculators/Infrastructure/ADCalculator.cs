@@ -139,6 +139,7 @@ namespace H.Core.Calculators.Infrastructure
                 DateCreated = dailyEmissions.DateTime,
                 ManagementPeriod = managementPeriod,
                 BiomethanePotential = adManagementPeriodViewItem.BiomethanePotential,
+                MethaneFraction = adManagementPeriodViewItem.MethaneFraction,
                 Component = component,
             };
 
@@ -165,7 +166,6 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.1-18
             substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriodViewItem.TotalSolids / 1000.0);
 
-            var reductionFactor = _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
                 var volatileSolidsOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
@@ -176,6 +176,8 @@ namespace H.Core.Calculators.Infrastructure
             }
             else
             {
+                var reductionFactor = _reductionFactors.GetParametersAdjustmentInstance(managementPeriod.ManureDetails.StateType);
+
                 // Equation 4.8.1-20
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate = dailyEmissions.VolatileSolids * (1 - reductionFactor.VolatileSolidsReductionFactor) * managementPeriod.NumberOfAnimals * fractionUsed;
             }

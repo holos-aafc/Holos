@@ -263,7 +263,7 @@ namespace H.Core.Calculators.Shelterbelt
 
             var result = this.CalculateRealGrowthRatio(
                 calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
-                lookupTotalLivingCarbonKilogramsPerStandardLength: totalLivingBiomassCarbonOfIdealTree);
+                lookupTotalLivingCarbonMegagramsPerStandardLength: totalLivingBiomassCarbonOfIdealTree);
 
             return result;
         }
@@ -335,6 +335,8 @@ namespace H.Core.Calculators.Shelterbelt
 
             // Equation 2.3.3-6
             var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
+
+
 
             // Calculate the estimated biomass carbon based on the real growth ratio
             trannumData.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth = livingBiomassFraction;
@@ -683,20 +685,20 @@ namespace H.Core.Calculators.Shelterbelt
         /// to lookup tables of ideal tree biomass carbon values.
         /// </summary>
         /// <param name="calculatedTotalLivingCarbonKilogramPerStandardLength">Total C stocks in the living biomass per standard length linear planting (kg C km-1)</param>
-        /// <param name="lookupTotalLivingCarbonKilogramsPerStandardLength">Total C stocks per average (ideal) tree recorded for an area of similar geographical location (Saskatchewan)
+        /// <param name="lookupTotalLivingCarbonMegagramsPerStandardLength">Total C stocks per average (ideal) tree recorded for an area of similar geographical location (Saskatchewan)
         /// or ecological condition (plant hardiness zone outside SK) (kg C km-1)</param>
         /// <returns>Ratio of user specified over average (ideal) tree growth</returns>
         public double CalculateRealGrowthRatio(
             double calculatedTotalLivingCarbonKilogramPerStandardLength,
-            double lookupTotalLivingCarbonKilogramsPerStandardLength)
+            double lookupTotalLivingCarbonMegagramsPerStandardLength)
         {
-            if (lookupTotalLivingCarbonKilogramsPerStandardLength == 0)
+            if (lookupTotalLivingCarbonMegagramsPerStandardLength == 0)
             {
                 // Assume value is not available and return 1 to indicate we are assuming an ideal tree for this year
                 return 1;
             }
 
-            var result = (calculatedTotalLivingCarbonKilogramPerStandardLength / (lookupTotalLivingCarbonKilogramsPerStandardLength));
+            var result = (calculatedTotalLivingCarbonKilogramPerStandardLength / (lookupTotalLivingCarbonMegagramsPerStandardLength * 1000));
 
             return result;
         }
@@ -796,7 +798,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-26
+        /// Equation
         /// </summary>
         /// <returns>The total ecosystem carbon (kg C km^-1)</returns>
         private double GetIdealTotalEcosystemCarbon(TrannumData trannumData)
