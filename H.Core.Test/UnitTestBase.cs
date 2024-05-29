@@ -113,7 +113,6 @@ namespace H.Core.Test
 
             digestateApplication.DateCreated = DateTime.Now.AddDays(1);
             digestateApplication.DigestateState = DigestateState.Raw;
-            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
 
@@ -126,7 +125,6 @@ namespace H.Core.Test
 
             digestateApplication.DateCreated = DateTime.Now.AddDays(1);
             digestateApplication.DigestateState = DigestateState.LiquidPhase;
-            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 500;
 

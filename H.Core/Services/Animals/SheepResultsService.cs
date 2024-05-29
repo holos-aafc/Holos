@@ -337,8 +337,10 @@ namespace H.Core.Services.Animals
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
+            dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage;
+
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +

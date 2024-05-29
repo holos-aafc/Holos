@@ -330,13 +330,11 @@ namespace H.Core.Calculators.Shelterbelt
 
             var livingBiomass = totalEcosystemCarbon - deadOrganicMatter;
 
-            // Equation 2.3.4-2
-            var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
-
             // Equation 2.3.3-6
             var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
 
-
+            // Equation 2.3.4-2
+            var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
             trannumData.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth = livingBiomassFraction;

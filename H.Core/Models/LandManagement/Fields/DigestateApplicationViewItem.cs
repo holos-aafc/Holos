@@ -37,11 +37,6 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// This is the amount after field applications have been considered
-        /// </summary>
-        public double MaximumAmountOfDigestateAvailablePerHectare { get; set; }
-
-        /// <summary>
         /// Amount of digestate applied
         ///
         /// (kg ha^-1)

@@ -74,7 +74,7 @@ namespace H.Core.Services.Animals
 
                 groupEmissionsByDay.ManureVolatilizationRate = groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
-                    beddingNitrogen: 0,
+                    beddingNitrogenRate: 0,
                     volatilizationFraction: volatilizationFraction,
                     volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
@@ -146,7 +146,7 @@ namespace H.Core.Services.Animals
 
                 groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
-                    beddingNitrogen: 0,
+                    beddingNitrogenRate: 0,
                     volatilizationFraction: groupEmissionsByDay.FractionOfManureVolatilized,
                     volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 

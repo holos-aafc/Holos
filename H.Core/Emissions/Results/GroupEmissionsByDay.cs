@@ -1183,23 +1183,18 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _totalVolumeOfManureAvailableForLandApplication, value);
         }
 
+        private double _totalAmountOfNitrogenInStoredManureAvailableForDay;
+
         /// <summary>
         /// This is the total amount available for this day only, not the accumulated amount day-to-day
         /// 
-        /// (kg TAN)
+        /// (kg N)
         /// </summary>
         public double TotalAmountOfNitrogenInStoredManureAvailableForDay
         {
-            get
-            {
-                var tan = AdjustedAmountOfTanInStoredManureOnDay;
-                var on = OrganicNitrogenCreatedOnDay;
-
-                return tan + on;
-            }
+            get { return _totalAmountOfNitrogenInStoredManureAvailableForDay;}
+            set { SetProperty(ref _totalAmountOfNitrogenInStoredManureAvailableForDay, value); }
         }
-
-
 
         /// <summary>
         /// (kg)

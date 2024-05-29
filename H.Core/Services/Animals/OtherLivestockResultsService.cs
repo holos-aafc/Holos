@@ -63,7 +63,7 @@ namespace H.Core.Services.Animals
              * Manure carbon (C) and methane (CH4)
              */
 
-            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.Pasture, AnimalType.Poultry);
+            var manureCompositionData = farm.GetManureCompositionData(ManureStateType.Pasture, managementPeriod.AnimalType);
 
             dailyEmissions.FecalCarbonExcretionRate = base.CalculateFecalCarbonExcretionRateForSheepPoultryAndOtherLivestock(
                 manureExcretionRate: managementPeriod.ManureDetails.ManureExcretionRate,
@@ -85,6 +85,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.CarbonFromManureAndBedding = base.CalculateAmountOfCarbonFromManureAndBedding(
                 carbonExcreted: dailyEmissions.FecalCarbonExcretion,
                 carbonFromBedding: dailyEmissions.CarbonAddedFromBeddingMaterial);
+
+            dailyEmissions.VolatileSolids = managementPeriod.ManureDetails.VolatileSolids;
 
             if (animalGroup.GroupType == AnimalType.Deer || animalGroup.GroupType == AnimalType.Elk || animalGroup.GroupType == AnimalType.Llamas || animalGroup.GroupType == AnimalType.Alpacas)
             {
@@ -158,8 +160,10 @@ namespace H.Core.Services.Animals
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
+            dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage;
+
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +

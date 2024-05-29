@@ -339,7 +339,7 @@ namespace H.Core.Models
                 return 0;
             }
 
-            var totalAmountCreated = this.GetTotalDigestateCreated(component);
+            var totalAmountCreated = this.GetTotalDigestateCreated(component, viewItem.DigestateState);
             var totalAmountApplied = viewItem.AmountAppliedPerHectare * cropViewItem.Area;
 
             var result = 0d;
@@ -381,6 +381,19 @@ namespace H.Core.Models
             }
         }
 
+        public double GetTotalNitrogenCreatedBySystemNotIncludingFieldApplicationRemovals(DigestateState state)
+        {
+            switch (state)
+            {
+                case DigestateState.LiquidPhase:
+                    return this.NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+                case DigestateState.SolidPhase:
+                    return NitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts;
+                default:
+                    return NitrogenFromRawDigestateNotConsideringFieldApplicationAmounts;
+            }
+        }
+
         /// <summary>
         /// (kg C)
         /// </summary>
@@ -412,24 +425,41 @@ namespace H.Core.Models
         }
 
         /// <summary>
+        /// (kg C)
+        /// </summary>
+        public double GetTotalCarbonCreatedBySystemNotIncludingFieldApplicationRemovals(DigestateState state)
+        {
+            switch (state)
+            {
+                case DigestateState.LiquidPhase:
+                    return this.CarbonFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+                case DigestateState.SolidPhase:
+                    return CarbonFromSolidDigestateNotConsideringFieldApplicationAmounts;
+                default:
+                    return CarbonFromRawDigestateNotConsideringFieldApplicationAmounts;
+            }
+        }
+
+        /// <summary>
         /// This will return the total amount of digestate produced (both liquid and solid amounts if there is separation performed)
         /// 
         /// (kg digestate)
         /// </summary>
-        public double GetTotalDigestateCreated(AnaerobicDigestionComponent component)
+        public double GetTotalDigestateCreated(AnaerobicDigestionComponent component, DigestateState state)
         {
             if (component == null)
             {
                 return 0;
             }
 
-            if (component.IsLiquidSolidSeparated)
+            switch (state)
             {
-                return this.TotalLiquidDigestateProduced + this.TotalSolidDigestateProduced;
-            }
-            else
-            {
-                return this.TotalRawDigestateProduced;
+                case DigestateState.LiquidPhase:
+                    return this.TotalLiquidDigestateProduced;
+                case DigestateState.SolidPhase:
+                    return TotalSolidDigestateProduced;
+                default:
+                    return TotalRawDigestateProduced;
             }
         }
 
