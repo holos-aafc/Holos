@@ -524,6 +524,7 @@ namespace H.Core.Services.Animals
             var remaining = this.GetTotalCarbonRemainingForField(viewItem, viewItem.Year, farm, component);
             var totalProduced = this.GetTotalCarbonCreatedNotIncludingFieldApplicationRemovals(year, farm);
 
+
             var result = inputsFromLocalManure + remaining;
 
             return result / field.FieldArea;
@@ -576,6 +577,9 @@ namespace H.Core.Services.Animals
             return totalNitrogen;
         }
 
+        /// <summary>
+        /// (kg C)
+        /// </summary>
         public double GetTotalCarbonRemainingForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component)
         {
             var dailyResults = this.GetDailyResults(farm);
@@ -600,7 +604,10 @@ namespace H.Core.Services.Animals
             }
 
             var remaining = tank.GetTotalCarbonRemainingAtEndOfYearAfterDigestateApplications(component);
-            var result = remaining / field.FieldArea;
+
+            var totalAreaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, year);
+
+            var result = remaining * (field.FieldArea / totalAreaOfFarm);
 
             return result;
         }

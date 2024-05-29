@@ -15,110 +15,243 @@ namespace H.Core.Models
 
         private DigestateState _digestateState;
 
-        // Amount of digestate available after all field applications
         private double _totalRawDigestateAvailable;
         private double _totalSolidDigestateAvailable;
         private double _totalLiquidDigestateAvailable;
 
-        // Amount of digestate produced by system (not reduced by field applications)
         private double _totalRawDigestateProduced;
         private double _totalSolidDigestateProduced;
         private double _totalLiquidDigestateProduced;
+
+        private double _nitrogenFromRawDigestate;
+        private double _nitrogenFromRawDigestateNotConsideringFieldApplicationAmounts;
+
+        private double _nitrogenFromSolidDigestate;
+        private double _nitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts;
+
+        private double _nitrogenFromLiquidDigestate;
+        private double _nitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+
+        private double _carbonFromRawDigestate;
+        private double _carbonFromRawDigestateNotConsideringFieldApplicationAmounts;
+
+        private double _carbonFromSolidDigestate;
+        private double _carbonFromSolidDigestateNotConsideringFieldApplicationAmounts;
+
+        private double _carbonFromLiquidDigestate;
+        private double _carbonFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+
+        #endregion
+
+        #region Properties
 
         /*
          * Nitrogen available for land application
          */
 
         /// <summary>
-        /// Amount of N in tank
+        /// Amount of N in tank after any land applications have been considered
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromRawDigestate { get; set; }
+        public double NitrogenFromRawDigestate
+        {
+            get
+            {
+                return _nitrogenFromRawDigestate;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromRawDigestate, value);
+            }
+        }
 
         /// <summary>
         /// Amount in tank not considering any field applications
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromRawDigestateNotConsideringFieldApplicationAmounts { get; set; }
+        public double NitrogenFromRawDigestateNotConsideringFieldApplicationAmounts 
+        {
+            get
+            {
+                return _nitrogenFromRawDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromRawDigestateNotConsideringFieldApplicationAmounts, value);
+            }
+        }
 
         /// <summary>
-        /// Amount of N in tank
+        /// Amount of N in tank after any land applications have been considered
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromSolidDigestate { get; set; }
+        public double NitrogenFromSolidDigestate
+        {
+            get
+            {
+                return _nitrogenFromSolidDigestate;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromSolidDigestate, value);
+            }
+        }
 
         /// <summary>
         /// Amount in tank not considering any field applications
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts { get; set; }
+        public double NitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts 
+        {
+            get
+            {
+                return _nitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts, value);
+            }
+        }
 
         /// <summary>
-        /// Amount remaining in tank after field applications
+        /// Amount of N in tank after any land applications have been considered
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromLiquidDigestate  { get; set; }
+        public double NitrogenFromLiquidDigestate  
+        {
+            get
+            {
+                return _nitrogenFromLiquidDigestate;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromLiquidDigestate, value);
+            }
+        }
 
         /// <summary>
-        /// Amount in tank not considering any field applications
+        /// Amount of N in tank not considering any field applications
         /// 
         /// (kg N)
         /// </summary>
-        public double NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts { get; set; }
+        public double NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts {
+            get
+            {
+                return _nitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts, value);
+            } }
 
         /*
          * Carbon available for land application
          */
 
         /// <summary>
-        /// (kg C)
-        /// </summary>
-        public double CarbonFromRawDigestate { get; set; }
-
-        /// <summary>
-        /// Amount in tank not considering any field applications
+        /// Amount of C in tank after any land applications have been considered
         /// 
         /// (kg C)
         /// </summary>
-        public double CarbonFromRawDigestateNotConsideringFieldApplicationAmounts { get; set; }
+        public double CarbonFromRawDigestate 
+        {
+            get
+            {
+                return _carbonFromRawDigestate;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromRawDigestate, value);
+            }
+        }
 
         /// <summary>
-        /// Amount remaining in tank after field applications
+        /// Amount of C in tank not considering any field applications
         /// 
         /// (kg C)
         /// </summary>
-        public double CarbonFromSolidDigestate { get; set; }
+        public double CarbonFromRawDigestateNotConsideringFieldApplicationAmounts {
+            get
+            {
+                return _carbonFromRawDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromRawDigestateNotConsideringFieldApplicationAmounts, value);
+            }
+        }
 
         /// <summary>
-        /// Amount in tank not considering any field applications
+        /// Amount of C in tank after any land applications have been considered
         /// 
         /// (kg C)
         /// </summary>
-        public double CarbonFromSolidDigestateNotConsideringFieldApplicationAmounts { get; set; }
-
+        public double CarbonFromSolidDigestate
+        {
+            get
+            {
+                return _carbonFromSolidDigestate;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromSolidDigestate, value);
+            }
+        }
 
         /// <summary>
-        /// Amount remaining in tank after field applications
+        /// Amount of C in tank not considering any field applications
         /// 
         /// (kg C)
         /// </summary>
-        public double CarbonFromLiquidDigestate { get; set; }
+        public double CarbonFromSolidDigestateNotConsideringFieldApplicationAmounts
+        {
+            get
+            {
+                return _carbonFromSolidDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromSolidDigestateNotConsideringFieldApplicationAmounts, value);
+            }
+        }
+
 
         /// <summary>
-        /// Amount in tank not considering any field applications
+        /// Amount of C in tank after any land applications have been considered
         /// 
         /// (kg C)
         /// </summary>
-        public double CarbonFromLiquidDigestateNotConsideringFieldApplicationAmounts { get; set; }
+        public double CarbonFromLiquidDigestate {
+            get
+            {
+                return _carbonFromLiquidDigestate;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromLiquidDigestate, value);
+            }
+        }
 
-        #endregion
-
-        #region Properties
+        /// <summary>
+        /// Amount of C in tank not considering any field applications
+        /// 
+        /// (kg C)
+        /// </summary>
+        public double CarbonFromLiquidDigestateNotConsideringFieldApplicationAmounts {
+            get
+            {
+                return _carbonFromLiquidDigestateNotConsideringFieldApplicationAmounts;
+            }
+            set
+            {
+                SetProperty(ref _carbonFromLiquidDigestateNotConsideringFieldApplicationAmounts, value);
+            }
+        }
 
         /// <summary>
         /// A tank of digestate can store whole (raw) digestate or separated digestate
@@ -141,6 +274,19 @@ namespace H.Core.Models
         }
 
         /// <summary>
+        /// Amount of raw digestate in tank not considering any field applications
+        /// 
+        /// (kg)
+        /// </summary>
+        public double TotalRawDigestateProduced
+        {
+            get => _totalRawDigestateProduced;
+            set => SetProperty(ref _totalRawDigestateProduced, value);
+        }
+
+        /// <summary>
+        /// Total amount of solid digestate available after all field applications have been considered
+        /// 
         /// (kg)
         /// </summary>
         public double TotalSolidDigestateAvailable
@@ -150,6 +296,19 @@ namespace H.Core.Models
         }
 
         /// <summary>
+        /// Amount of solid digestate in tank not considering any field applications
+        /// 
+        /// (kg)
+        /// </summary>
+        public double TotalSolidDigestateProduced
+        {
+            get => _totalSolidDigestateProduced;
+            set => SetProperty(ref _totalSolidDigestateProduced, value);
+        }
+
+        /// <summary>
+        /// Total amount of solid digestate available after all field applications have been considered
+        /// 
         /// (kg)
         /// </summary>
         public double TotalLiquidDigestateAvailable
@@ -158,18 +317,11 @@ namespace H.Core.Models
             set => SetProperty(ref _totalLiquidDigestateAvailable, value);
         }
 
-        public double TotalRawDigestateProduced
-        {
-            get => _totalRawDigestateProduced;
-            set => SetProperty(ref _totalRawDigestateProduced, value);
-        }
-
-        public double TotalSolidDigestateProduced
-        {
-            get => _totalSolidDigestateProduced;
-            set => SetProperty(ref _totalSolidDigestateProduced, value);
-        }
-
+        /// <summary>
+        /// Amount of liquid digestate in tank not considering any field applications
+        /// 
+        /// (kg)
+        /// </summary>
         public double TotalLiquidDigestateProduced
         {
             get => _totalLiquidDigestateProduced;
