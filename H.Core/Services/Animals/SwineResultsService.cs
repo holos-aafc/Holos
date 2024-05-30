@@ -94,7 +94,7 @@ namespace H.Core.Services.Animals
                 carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
                 moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
-            if (animalGroup.GroupType == AnimalType.SwinePiglets)
+            if (animalGroup.GroupType == AnimalType.SwinePiglets && managementPeriod.ProductionStage != ProductionStages.Weaned)
             {
                 dailyEmissions.CarbonAddedFromBeddingMaterial = 0;
             }
@@ -225,7 +225,7 @@ namespace H.Core.Services.Animals
                 nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
                 moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
-            if (animalGroup.GroupType == AnimalType.SwinePiglets)
+            if (animalGroup.GroupType == AnimalType.SwinePiglets && managementPeriod.ProductionStage != ProductionStages.Weaned)
             {
                 dailyEmissions.AmountOfNitrogenAddedFromBedding = 0;
             }
