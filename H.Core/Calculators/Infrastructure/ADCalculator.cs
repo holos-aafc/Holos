@@ -816,15 +816,14 @@ namespace H.Core.Calculators.Infrastructure
                 this.CalculateDigestateStorageEmissions(farm, dailyOutput.Date, component, dailyOutput);
 
                 // Equation 4.8.6-1
-                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = dailyOutput.FlowRateOfTotalNitrogenInDigestate - (dailyOutput.N2OEmissionsDuringStorage + dailyOutput.AmmoniaEmissionsDuringStorage);
+                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = dailyOutput.FlowRateOfTotalNitrogenInDigestate - (CoreConstants.ConvertToN(dailyOutput.N2OEmissionsDuringStorage ) + CoreConstants.ConvertToNH3N(dailyOutput.AmmoniaEmissionsDuringStorage));
                 if (dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication < 0)
                 {
                     dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = 0;
                 }
 
-
                 // Equation 4.8.6-2
-                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = dailyOutput.FlowOfAllCarbon - dailyOutput.MethaneEmissionsDuringStorage;
+                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = dailyOutput.FlowOfAllCarbon -  CoreConstants.ConvertToC(dailyOutput.MethaneEmissionsDuringStorage);
                 if (dailyOutput.TotalCarbonInDigestateAvailableForLandApplication < 0)
                 {
                     dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = 0;
