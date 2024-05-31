@@ -203,7 +203,11 @@ namespace H.Core.Calculators.Infrastructure
                 substrateFlowRate.NitrogenFlowOfSubstrate = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage * fractionUsed;
 
                 // Equation 4.8.1-23
-                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0; // ? Need clarification on this equation (note in alg. doc.)
+                substrateFlowRate.OrganicNitrogenFlowOfSubstrate = substrateFlowRate.NitrogenFlowOfSubstrate - dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay;
+                if (substrateFlowRate.OrganicNitrogenFlowOfSubstrate < 0)
+                {
+                    substrateFlowRate.OrganicNitrogenFlowOfSubstrate = 0;
+                }
 
                 // Equation 4.8.1-25
                 substrateFlowRate.ExcretedTanInSubstrate = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay * fractionUsed;
@@ -719,6 +723,7 @@ namespace H.Core.Calculators.Infrastructure
                     substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.TotalCarbon;
                     if (type == SubstrateType.ImportedManure)
                     {
+                        // Equation 4.8.1-31
                         substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.CarbonContent;
                     }
 
