@@ -687,16 +687,23 @@ namespace H.Core.Calculators.Infrastructure
                         VolatileSolidsContent = substrateViewItemBase.VolatileSolidsContent,
                     };
 
-                    // Equation 4.8.1-10
+                    /* Equation 4.8.1-10
+                     * Equation 4.8.1-27
+                     */
                     substrateFlow.TotalMassFlowOfSubstrate = substrateViewItemBase.FlowRate;
 
-                    // Equation 4.8.1-11
+                    /* Equation 4.8.1-11
+                     * Equation 4.8.1-28
+                     *
+                     * Note: TS will be 0 for manure
+                     */
                     substrateFlow.TotalSolidsFlowOfSubstrate = (substrateViewItemBase.TotalSolids / 1000.0);
 
                     // Equation 4.8.1-12
                     substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
                     if (type == SubstrateType.ImportedManure)
                     {
+                        // Equation 4.8.1-29
                         substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.VolatileSolidsContent;
                     }
 
@@ -704,6 +711,7 @@ namespace H.Core.Calculators.Infrastructure
                     substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000.0);
                     if (type == SubstrateType.ImportedManure)
                     {
+                        // Equation 4.8.1-30
                         substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.NitrogenContent;
                     }
 
@@ -769,12 +777,12 @@ namespace H.Core.Calculators.Infrastructure
                                 var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
                                 var previousDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAtOrDefault(i - 1);
 
-                                var freshManureFlow = this.GetStoredManureFlowRate(
+                                var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,
                                     adManagementPeriod, previousDayEmissions);
 
-                                flows.Add(freshManureFlow);
+                                flows.Add(flowRates);
                             }
                         }
                     }
