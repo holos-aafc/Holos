@@ -724,7 +724,7 @@ namespace H.Core.Calculators.Infrastructure
                     if (type == SubstrateType.ImportedManure)
                     {
                         // Equation 4.8.1-31
-                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.CarbonContent;
+                        substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * substrateViewItemBase.CarbonContent;
                     }
 
                     result.Add(substrateFlow);
