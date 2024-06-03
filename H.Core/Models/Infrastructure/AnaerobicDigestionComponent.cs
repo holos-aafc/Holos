@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.CustomAttributes;
@@ -58,7 +59,6 @@ namespace H.Core.Models.Infrastructure
         private double _ammoniaEmissionFactorForDigestateStorage;
 
         private int _numberOfReactors;
-        private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
         private bool _useImportedManure;
 
@@ -268,8 +268,7 @@ namespace H.Core.Models.Infrastructure
         /// </summary>
         public bool IsCentrifugeType
         {
-            get => _isCentrifugeType;
-            set => SetProperty(ref _isCentrifugeType, value);
+            get { return this.SeparatorType == AnaerobicDigestorSeparatorType.Centrifuge; }
         }
 
         public bool IsLiquidSolidSeparated
