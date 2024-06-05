@@ -411,13 +411,14 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.OrganicNSolidFraction =
                 organicNCoefficient * digestorDailyOutput.FlowRateOfAllOrganicNitrogenInDigestate;
 
+            var totalNitrogenLiquidFraction = digestorDailyOutput.TotalTanLiquidFraction + digestorDailyOutput.OrganicNLiquidFraction;
+            var totalNitrogenSolidFraction = digestorDailyOutput.TotalTanSolidFraction + digestorDailyOutput.OrganicNSolidFraction;
+
             // Equation 4.8.4-7
-            digestorDailyOutput.TotalNitrogenLiquidFraction = digestorDailyOutput.TotalTanLiquidFraction +
-                                                              digestorDailyOutput.OrganicNLiquidFraction;
+            digestorDailyOutput.TotalNitrogenLiquidFraction = totalNitrogenLiquidFraction;
 
             // Equation 4.8.4-8
-            digestorDailyOutput.TotalNitrogenSolidFraction = digestorDailyOutput.TotalTanSolidFraction +
-                                                             digestorDailyOutput.OrganicNSolidFraction;
+            digestorDailyOutput.TotalNitrogenSolidFraction = totalNitrogenSolidFraction;
 
             var carbonCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(
@@ -620,7 +621,7 @@ namespace H.Core.Calculators.Infrastructure
                 flowInformationForAllSubstrates.Sum(x => x.OrganicNitrogenFlowInDigestate);
 
             // Equation 4.8.3-8 (summation)
-            digestorDailyOutput.FlowOfAllCarbon = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
+            digestorDailyOutput.FlowOfAllCarbon = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowOfSubstrate);
         }
 
         public List<DigestorDailyOutput> CalculateResults(
@@ -691,6 +692,8 @@ namespace H.Core.Calculators.Infrastructure
                         VolatileSolidsContent = substrateViewItemBase.VolatileSolidsContent,
                     };
 
+                    substrateFlow.FlowRate = substrateViewItemBase.FlowRate;
+
                     /* Equation 4.8.1-10
                      * Equation 4.8.1-27
                      */
@@ -724,7 +727,7 @@ namespace H.Core.Calculators.Infrastructure
                     if (type == SubstrateType.ImportedManure)
                     {
                         // Equation 4.8.1-31
-                        substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * substrateViewItemBase.CarbonContent;
+                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.CarbonContent;
                     }
 
                     result.Add(substrateFlow);

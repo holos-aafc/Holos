@@ -17,6 +17,9 @@ namespace H.Core.Models.Infrastructure
         private double _totalCarbon;
         private double _organicNitrogenConcentration;
         private double _tan;
+        private double _volatileSolidsContent;
+        private double _nitrogenContent;
+        private double _carbonContent;
         private DateTime _startDate;
         private DateTime _endDate;
         private ManureLocationSourceType _sourceType;
@@ -64,17 +67,41 @@ namespace H.Core.Models.Infrastructure
         ///
         /// (fraction wet weight)
         /// </summary>
-        public double VolatileSolidsContent { get; set; }
+        public double VolatileSolidsContent {
+            get
+            {
+                return _volatileSolidsContent;
+            }
+            set
+            {
+                SetProperty(ref _volatileSolidsContent, value);
+            } }
 
         /// <summary>
         /// (fraction wet weight)
         /// </summary>
-        public double NitrogenContent { get; set; }
+        public double NitrogenContent {
+            get
+            {
+                return _nitrogenContent;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenContent, value);
+            } }
 
         /// <summary>
         /// (fraction wet weight)
         /// </summary>
-        public double CarbonContent { get; set; }
+        public double CarbonContent {
+            get
+            {
+                return _carbonContent;
+            }
+            set
+            {
+                SetProperty(ref _carbonContent, value);
+            } }
 
         /// <summary>
         /// (kg kg^-1)
