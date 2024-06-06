@@ -136,8 +136,15 @@ namespace H.Core.Services.Animals
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
+            dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
+                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
+
             // Equation 4.1.1-6
-            dailyEmissions.CarbonAddedFromBeddingMaterial = 0;
+            dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
+                rateOfCarbonAddedFromBedding: dailyEmissions.RateOfCarbonAddedFromBeddingMaterial,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.1.1-7
             dailyEmissions.CarbonFromManureAndBedding = base.CalculateAmountOfCarbonFromManureAndBedding(
@@ -186,7 +193,10 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.2.1-31
-            dailyEmissions.AmountOfNitrogenAddedFromBedding = 0;
+            dailyEmissions.AmountOfNitrogenAddedFromBedding = this.CalculateRateOfNitrogenAddedFromBeddingMaterial(
+                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             dailyEmissions.ManureDirectN2ONEmissionRate = base.CalculateManureDirectNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
