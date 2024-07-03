@@ -189,6 +189,7 @@
     <Compile Include="Services\SheepResultsServiceTest.cs" />
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
+    <Compile Include="Services\InitializationServiceTest.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
