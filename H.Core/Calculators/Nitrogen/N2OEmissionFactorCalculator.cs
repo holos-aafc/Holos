@@ -405,6 +405,11 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0.0;
 
+            /*
+             * Note the base Ef is not multiplied here by 100 as it is in the algorithm document since the FTopo value is a percentage in the lookup table and subsequently divided by 100. This negates the need to multiply
+             * by 100 as in the algorithm document.
+             */
+
             // For irrigated sites
             if (Math.Abs(growingSeasonPrecipitation - growingSeasonEvapotranspiration) < double.Epsilon)
             {
