@@ -715,7 +715,7 @@ namespace H.Core.Calculators.Nitrogen
             double carbonConcentration,
             double nitrogenContentInStraw)
         {
-            return aboveGroundResidueDryMatter * carbonConcentration * nitrogenContentInStraw;
+            return aboveGroundResidueDryMatter * nitrogenContentInStraw;
         }
 
         /// <summary>
@@ -727,12 +727,12 @@ namespace H.Core.Calculators.Nitrogen
         {
             if (viewItem.CropType.IsPerennial())
             {
-                var perennialNitrogen = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.CarbonConcentration * viewItem.NitrogenContentInRoots * (viewItem.PercentageOfRootsReturnedToSoil / 100.0);
+                var perennialNitrogen = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots * (viewItem.PercentageOfRootsReturnedToSoil / 100.0);
 
                 return perennialNitrogen;
             }
             // Equation 2.7.2-2
-            var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.CarbonConcentration * viewItem.NitrogenContentInRoots;
+            var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots;
 
             return result;
         }

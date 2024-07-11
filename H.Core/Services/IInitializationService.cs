@@ -24,5 +24,7 @@ namespace H.Core.Services
         void InitializeBeddingMaterial(ManagementPeriod managementPeriod, Table_30_Default_Bedding_Material_Composition_Data data);
         void InitializeDefaultEmissionFactors(Farm farm);
         void InitializeMethaneProducingCapacity(Farm farm);
+        void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod);
+        void InitializeCattleFeedingActivity(Farm farm);
     }
 }

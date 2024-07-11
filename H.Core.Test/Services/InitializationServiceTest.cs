@@ -13,6 +13,8 @@ using System.Linq;
 using H.Core.Models.Animals.Dairy;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using H.Core.Models.Animals.Beef;
+using H.Core.Models.LandManagement.Fields;
+using System.Collections.ObjectModel;
 
 namespace H.Core.Test.Services
 {
@@ -225,7 +227,121 @@ namespace H.Core.Test.Services
                 Assert.Fail(ex.Message);
             }
         }
+        [TestMethod]
+        public void ReinitializeFuelEnergyUpdatesDefaultTwoArguments()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.FuelEnergy = 12;
+            _farm1.DefaultSoilData.Province = Province.BritishColumbia;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.Brown;
+            viewItem.TillageType = TillageType.Reduced;
+            viewItem.CropType = CropType.Flax;
+            _initializationService.InitializeFuelEnergy(_farm1, viewItem);
+            Assert.AreEqual(expected: 1.78, actual: viewItem.FuelEnergy);
+        }
+        [TestMethod]
+        public void ReinitializeFuelEnergyUpdatesDefaultSingleArgument()
+        {
+            var cropViewItem = new CropViewItem();
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
 
+            cropViewItem.TillageType = TillageType.NoTill;
+            cropViewItem.CropType = CropType.Buckwheat;
+            cropViewItemCollection.Add(cropViewItem);
+            _farm1.DefaultSoilData.Province = Province.Ontario;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.EasternCanada;
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+
+            _initializationService.InitializeFuelEnergy(_farm1);
+
+            var cropViewItemsPostInitialization = _farm1.GetCropDetailViewItems();
+            Assert.AreEqual(1.34, cropViewItemsPostInitialization[0].FuelEnergy);
+        }
+        [TestMethod]
+        public void ReinitializeFuelEnergyUpdatesDefaultSingleArgumentMultipleCropViewItems()
+        {
+            var cropViewItemOne = new CropViewItem();
+            var cropViewItemTwo = new CropViewItem();
+            var cropViewItemThree = new CropViewItem();
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+
+            cropViewItemOne.TillageType = TillageType.NoTill;
+            cropViewItemOne.CropType = CropType.Buckwheat;
+            cropViewItemTwo.TillageType = TillageType.NoTill;
+            cropViewItemTwo.CropType = CropType.GrainCorn;
+            cropViewItemThree.TillageType = TillageType.NoTill;
+            cropViewItemThree.CropType = CropType.PulseCrops;
+            cropViewItemCollection.Add(cropViewItemOne);
+            cropViewItemCollection.Add(cropViewItemTwo);
+            cropViewItemCollection.Add(cropViewItemThree);
+            _farm1.DefaultSoilData.Province = Province.Ontario;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.EasternCanada;
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+
+            _initializationService.InitializeFuelEnergy(_farm1);
+
+            var cropViewItemsPostInitialization = _farm1.GetCropDetailViewItems();
+            Assert.AreEqual(1.34, cropViewItemsPostInitialization[0].FuelEnergy);
+            Assert.AreEqual(1.9, cropViewItemsPostInitialization[1].FuelEnergy);
+            Assert.AreEqual(1.72, cropViewItemsPostInitialization[2].FuelEnergy);
+        }
+
+        [TestMethod]
+        public void ReinitializeFuelEnergyNullArgument()
+        {
+            var farm = new Farm();
+            try
+            {
+                _initializationService.InitializeFuelEnergy(farm);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+        [TestMethod]
+        public void ReinitializeFuelEnergyNoCropViewItems()
+        {
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+            _farm1.DefaultSoilData.Province = Province.Ontario;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.EasternCanada;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+            try
+            {
+                _initializationService.InitializeFuelEnergy(_farm1);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+        [TestMethod]
+        public void ReinitializeFuelEnergyMissingFarmProperties()
+        {
+            var cropViewItem = new CropViewItem();
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+
+            cropViewItem.TillageType = TillageType.NoTill;
+            cropViewItem.CropType = CropType.Buckwheat;
+            cropViewItemCollection.Add(cropViewItem);
+
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+
+            try
+            {
+                _initializationService.InitializeFuelEnergy(_farm1);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
         [TestMethod]
         public void InitializeBeddingMaterialSetsTotalCarbon()
         {
@@ -250,6 +366,52 @@ namespace H.Core.Test.Services
             Assert.AreEqual(0.447, housingDetails.TotalCarbonKilogramsDryMatterForBedding);
         }
 
+        [TestMethod]
+        public void InitializeMethaneProducingCapacitySetsValue()
+        {
+            var managementPeriod = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.Beef,
+
+                ManureDetails = new ManureDetails()
+                {
+                    MethaneProducingCapacityOfManure = 10,
+                }
+            };
+
+            _initializationService.InitializeMethaneProducingCapacity(managementPeriod);
+
+            Assert.AreEqual(0.19, managementPeriod.ManureDetails.MethaneProducingCapacityOfManure);
+        }
+
+        [TestMethod]
+        public void InitializeCattleFeedingActivityCoefficient()
+        {
+            Farm farm = new Farm();
+            var beef = new AnimalGroup()
+            {
+                GroupType = AnimalType.Beef,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        HousingDetails =
+                        {
+                            HousingType = HousingType.EnclosedPasture,
+                            ActivityCeofficientOfFeedingSituation = 100.0,
+                        }
+
+                    }
+                },
+            };
+
+            var dairyComponent = new DairyComponent();
+            dairyComponent.Groups.Add(beef);
+            farm.Components.Add(dairyComponent);
+
+            _initializationService.InitializeCattleFeedingActivity(farm);
+            Assert.AreEqual(0.17, beef.ManagementPeriods.First().HousingDetails.ActivityCeofficientOfFeedingSituation);
+        }
         #endregion
     }
 }

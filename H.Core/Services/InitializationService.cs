@@ -30,7 +30,9 @@ namespace H.Core.Services
         private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _beefAndDairyCattleProvider;
         private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
         private readonly Table_30_Default_Bedding_Material_Composition_Provider _beddingMaterialCompositionProvider;
+        private readonly List<Table_21_Average_Milk_Production_Dairy_Cows_Data> _milkProductionDataList;
         private readonly Table_35_Methane_Producing_Capacity_Default_Values_Provider _defaultMethaneProducingCapacityProvider;
+        private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
 
         #endregion
 
@@ -47,7 +49,10 @@ namespace H.Core.Services
             _beefAndDairyCattleProvider = new Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider();
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
             _beddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
+            _milkProductionDataList = _averageMilkProductionDairyCowsProvider.ReadFile();
+
             _defaultMethaneProducingCapacityProvider = new Table_35_Methane_Producing_Capacity_Default_Values_Provider();
+            _beefDairyCattleFeedingActivityCoefficientProvider = new Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
         }
 
         #endregion
@@ -104,6 +109,9 @@ namespace H.Core.Services
 
                 // Table 63
                 this.InitializeBarnTemperature(farm);
+
+                // Table 17
+                this.InitializeCattleFeedingActivity(farm);
             }
         }
 
@@ -117,12 +125,20 @@ namespace H.Core.Services
                     {
                         foreach (var managementPeriod in animalGroup.ManagementPeriods)
                         {
-                            var capacity = _defaultMethaneProducingCapacityProvider.GetMethaneProducingCapacityOfManure(managementPeriod.AnimalType);
-
-                            managementPeriod.ManureDetails.MethaneProducingCapacityOfManure = capacity;
+                            this.InitializeMethaneProducingCapacity(managementPeriod);
                         }   
                     }
                 }
+            }
+        }
+
+        public void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                var capacity = _defaultMethaneProducingCapacityProvider.GetMethaneProducingCapacityOfManure(managementPeriod.AnimalType);
+
+                managementPeriod.ManureDetails.MethaneProducingCapacityOfManure = capacity;
             }
         }
 
@@ -303,12 +319,11 @@ namespace H.Core.Services
         }
 
         /// <summary>
-        /// Reinitialize the MilkProduction value <see cref="MilkProduction"/> for each ManagementPeriod for each animalGroup in the DairyComponent of a <see cref="Farm"/> with new default values from table 21.
+        /// Reinitialize the MilkProduction value for each ManagementPeriod for each animalGroup in the DairyComponent of a <see cref="Farm"/> with new default values from table 21.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default value for the MilkProduction</param>
         public void InitializeMilkProduction(Farm farm)
         {
-            List<Table_21_Average_Milk_Production_Dairy_Cows_Data> milkProductionDataList = _averageMilkProductionDairyCowsProvider.ReadFile();
             if (farm != null && farm.DairyComponents != null)
             {
                 foreach (var dairyComponent in farm.DairyComponents.Cast<DairyComponent>())
@@ -324,7 +339,7 @@ namespace H.Core.Services
                                     //Calling ReadFile() to get the milkProductionList, extract the province and year to pull value from table and reset to default.
                                     int year = animalGroupManagementPeriod.Start.Year;
                                     IEnumerable<double> milkProduction
-                                        = from mp in milkProductionDataList
+                                        = from mp in _milkProductionDataList
                                         where (mp.Province == farm.DefaultSoilData.Province && (int)mp.Year == year)
                                           select mp.AverageMilkProduction;
                                     if (milkProduction?.Any() != true)
@@ -348,6 +363,31 @@ namespace H.Core.Services
             else
             {
                 return;
+            }
+        }
+
+        /// <summary>
+        /// Reinitialize the Beef_Dairy_Cattle_Feeding_Activity_Coefficient object
+        /// </summary>
+        /// <param name="farm"> Contains the ActivityCoefficientFeedingSituation of each HousingDetails of each ManagementPeriod of each <see cref="farm"/></param>
+        public void InitializeCattleFeedingActivity(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var animalComponent in farm.AnimalComponents)
+                {
+                    foreach (var animalGroup in animalComponent.Groups)
+                    {
+                        if (animalGroup.GroupType.IsBeefCattleType())
+                        {
+                            foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                            {
+                                managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation =_beefDairyCattleFeedingActivityCoefficientProvider.GetByHousing(managementPeriod
+                                    .HousingDetails.HousingType).FeedingActivityCoefficient;
+                            }
+                        }
+                    }
+                }
             }
         }
 
