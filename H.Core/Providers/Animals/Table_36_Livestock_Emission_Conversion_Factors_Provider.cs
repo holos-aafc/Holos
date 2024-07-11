@@ -112,7 +112,6 @@ namespace H.Core.Providers.Animals
 
         public IEmissionData GetFactors(
             ManureStateType manureStateType,
-            ComponentCategory componentCategory,
             double meanAnnualPrecipitation,
             double meanAnnualTemperature,
             double meanAnnualEvapotranspiration,
@@ -146,7 +145,8 @@ namespace H.Core.Providers.Animals
              * The following factors are for animals not on pasture.
              */
 
-            switch (componentCategory)
+            var category = animalType.GetComponentCategoryFromAnimalType();
+            switch (category)
             {
                 case ComponentCategory.BeefProduction:
                     {
@@ -501,7 +501,7 @@ namespace H.Core.Providers.Animals
                 default:
                     {
                         System.Diagnostics.Trace.TraceError($"{nameof(Table_36_Livestock_Emission_Conversion_Factors_Provider)}.{nameof(Table_36_Livestock_Emission_Conversion_Factors_Provider.GetFactors)}" +
-                                                            $": Unable to get data for manure state type '{manureStateType.GetDescription()}' and component category '{componentCategory.GetDescription()}'." +
+                                                            $": Unable to get data for manure state type '{manureStateType.GetDescription()}' and component category '{category.GetDescription()}'." +
                                                             $" Returning default value.");
                         return new Table_36_Livestock_Emission_Conversion_Factors_Data();
                     }

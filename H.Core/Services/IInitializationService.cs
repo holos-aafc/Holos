@@ -17,14 +17,20 @@ namespace H.Core.Services
         void InitializeMilkProduction(Farm farm);
         void InitializeFuelEnergy(Farm farm);
         void InitializeFuelEnergy(Farm farm, CropViewItem viewItem);
+        void InitializeHerbicideEnergy(Farm farm);
+        void InitializeHerbicideEnergy(Farm farm, CropViewItem viewItem);
         void InitializeManureMineralizationFractions(Farm farm);
         void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod, FractionOfOrganicNitrogenMineralizedData  mineralizationFractions);
-        void InitializeDefaultEmissionFactors(Farm farm, AnimalComponentBase animalComponent, ManagementPeriod managementPeriod);
+        void InitializeDefaultEmissionFactors(Farm farm, ManagementPeriod managementPeriod);
         void ReinitializeBeddingMaterial(Farm farm);
         void InitializeBeddingMaterial(ManagementPeriod managementPeriod, Table_30_Default_Bedding_Material_Composition_Data data);
         void InitializeDefaultEmissionFactors(Farm farm);
         void InitializeMethaneProducingCapacity(Farm farm);
         void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod);
         void InitializeCattleFeedingActivity(Farm farm);
+        void InitializeParameterAdjustmenstForManure(Farm farm);
+        void InitializeManureExcretionRate(ManagementPeriod managementPeriod);
+        void InitializeManureExcretionRate(Farm farm);
     }
 }
+    

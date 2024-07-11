@@ -29,10 +29,12 @@ namespace H.Core.Services
         private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _beefAndDairyCattleProvider;
         private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
+        protected readonly Table_29_Default_Manure_Excreted_Provider _defaultManureExcretionRateProvider;
         private readonly Table_30_Default_Bedding_Material_Composition_Provider _beddingMaterialCompositionProvider;
         private readonly List<Table_21_Average_Milk_Production_Dairy_Cows_Data> _milkProductionDataList;
         private readonly Table_35_Methane_Producing_Capacity_Default_Values_Provider _defaultMethaneProducingCapacityProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
+        private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
 
         #endregion
 
@@ -50,9 +52,10 @@ namespace H.Core.Services
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
             _beddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
             _milkProductionDataList = _averageMilkProductionDairyCowsProvider.ReadFile();
-
             _defaultMethaneProducingCapacityProvider = new Table_35_Methane_Producing_Capacity_Default_Values_Provider();
             _beefDairyCattleFeedingActivityCoefficientProvider = new Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
+            _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
+            _defaultManureExcretionRateProvider = new Table_29_Default_Manure_Excreted_Provider();
         }
 
         #endregion
@@ -95,7 +98,10 @@ namespace H.Core.Services
                 // Table 21
                 this.InitializeMilkProduction(farm);
 
-                // Table 36
+                // Table 29
+                this.InitializeManureExcretionRate(farm);
+               
+                // Table 35
                 this.InitializeMethaneProducingCapacity(farm);
 
                 // Table 36
@@ -107,6 +113,9 @@ namespace H.Core.Services
                 // Table 50
                 this.InitializeFuelEnergy(farm);
 
+                // Table 51
+                this.InitializeHerbicideEnergy(farm);
+
                 // Table 63
                 this.InitializeBarnTemperature(farm);
 
@@ -114,20 +123,33 @@ namespace H.Core.Services
                 this.InitializeCattleFeedingActivity(farm);
             }
         }
+        public void InitializeManureExcretionRate(Farm farm)
+        {
 
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeManureExcretionRate(managementPeriod);
+                }
+            }
+        }
+        public void InitializeManureExcretionRate(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.HousingDetails != null)
+            {
+                managementPeriod.ManureDetails.ManureExcretionRate = _defaultManureExcretionRateProvider.GetManureExcretionRate(managementPeriod.AnimalType);
+            }
+        }
         public void InitializeMethaneProducingCapacity(Farm farm)
         {
             if (farm != null)
             {
-                foreach (var animalComponent in farm.AnimalComponents)
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    foreach (var animalGroup in animalComponent.Groups)
-                    {
-                        foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                        {
                             this.InitializeMethaneProducingCapacity(managementPeriod);
-                        }   
-                    }
+                           
+                    
                 }
             }
         }
@@ -144,37 +166,30 @@ namespace H.Core.Services
 
         public void InitializeManureCompositionData(Farm farm)
         {
-            var manureCompositionData = _defaultManureCompositionProvider.ManureCompositionData;
-
-            farm.DefaultManureCompositionData.Clear();
-            farm.DefaultManureCompositionData.AddRange(manureCompositionData);
-
-            var animalComponents = farm.AnimalComponents;
-            foreach (var animalComponent in animalComponents)
+            if (farm != null)
             {
-                foreach (var animalGroup in animalComponent.Groups)
+                var manureCompositionData = _defaultManureCompositionProvider.ManureCompositionData;
+
+                farm.DefaultManureCompositionData.Clear();
+                farm.DefaultManureCompositionData.AddRange(manureCompositionData);
+
+                var animalComponents = farm.AnimalComponents;
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                    {
-                        var defaults = _defaultManureCompositionProvider.GetManureCompositionDataByType(animalGroup.GroupType, managementPeriod.ManureDetails.StateType);
-                        this.InitializeManureCompositionData(managementPeriod, defaults);
-                    }
+                    var defaults = _defaultManureCompositionProvider.GetManureCompositionDataByType(managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
+                    this.InitializeManureCompositionData(managementPeriod, defaults);
                 }
             }
         }
 
         public void InitializeManureMineralizationFractions(Farm farm)
         {
-            var animalComponents = farm.AnimalComponents;
-            foreach (var animalComponent in animalComponents)
+            if (farm != null)
             {
-                foreach (var animalGroup in animalComponent.Groups)
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                    {
                         var fractions = _fractionOrganicNMineralizedAsTanProvider.GetByStorageType(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
                         this.InitializeManureMineralizationFractions(managementPeriod, fractions);
-                    }
                 }
             }
         }
@@ -229,6 +244,39 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Reinitialize each <see cref="CropViewItem"/> within <see cref="Farm"/> with new default values
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
+        public void InitializeHerbicideEnergy(Farm farm)
+        {
+            var viewItems = farm.GetCropDetailViewItems();
+            foreach (var viewItem in viewItems)
+            {
+                InitializeHerbicideEnergy(farm, viewItem);
+            }
+        }
+
+        /// <summary>
+        /// Reinitialize the <see cref="CropViewItem"/> from the selected <see cref="Farm"/> with new default values
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the relevant data to pass into <see cref="Table_51_Herbicide_Energy_Estimates_Provider"/></param>
+        /// <param name="viewItem">The <see cref="CropViewItem"/> that will have its values reset with new default values</param>
+        public void InitializeHerbicideEnergy(Farm farm, CropViewItem viewItem)
+        {
+            var soilData = farm.GetPreferredSoilData(viewItem);
+            var herbicideEnergyEstimates = _herbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance(
+                provinceName: soilData.Province,
+                soilCategory: soilData.SoilFunctionalCategory,
+                tillageType: viewItem.TillageType,
+                cropType: viewItem.CropType);
+
+            if (herbicideEnergyEstimates != null)
+            {
+                viewItem.HerbicideEnergy = herbicideEnergyEstimates.HerbicideEstimate;
+            }
+        }
+
         public void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod, FractionOfOrganicNitrogenMineralizedData  mineralizationFractions)
         {
             if (managementPeriod != null &&
@@ -245,27 +293,19 @@ namespace H.Core.Services
         {
             if (farm != null)
             {
-                foreach (var animalComponent in farm.AnimalComponents)
-                {
-                    foreach (var animalGroup in animalComponent.Groups)
-                    {
-                        foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
-                        {
-                            this.InitializeDefaultEmissionFactors(farm, animalComponent, animalGroupManagementPeriod);
-                        }
-                    }
+                foreach (var managementPeriod in farm.GetAllManagementPeriods()){
+                    this.InitializeDefaultEmissionFactors(farm, managementPeriod);
                 }
             }
         }
 
-        public void InitializeDefaultEmissionFactors(Farm farm, AnimalComponentBase animalComponent, ManagementPeriod managementPeriod)
+        public void InitializeDefaultEmissionFactors(Farm farm,
+            ManagementPeriod managementPeriod)
         {
             if (farm != null &&
-                animalComponent != null &&
                 managementPeriod != null)
             {
                 var emissionData = _livestockEmissionConversionFactorsProvider.GetFactors(manureStateType: managementPeriod.ManureDetails.StateType,
-                    componentCategory: animalComponent.ComponentCategory,
                     meanAnnualPrecipitation: farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation(),
                     meanAnnualTemperature: farm.ClimateData.TemperatureData.GetMeanAnnualTemperature(),
                     meanAnnualEvapotranspiration: farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration(),
@@ -290,19 +330,13 @@ namespace H.Core.Services
                 farm.DefaultsCompositionOfBeddingMaterials.Clear();
                 farm.DefaultsCompositionOfBeddingMaterials.AddRange(data);
 
-                foreach (var animalComponent in farm.AnimalComponents)
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    foreach (var animalGroup in animalComponent.Groups)
-                    {
-                        foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                        {
-                            var beddingMaterialComposition = farm.GetBeddingMaterialComposition(
+                    var beddingMaterialComposition = farm.GetBeddingMaterialComposition(
                                 beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType,
                                 animalType: managementPeriod.AnimalType);
 
                             this.InitializeBeddingMaterial(managementPeriod, beddingMaterialComposition);
-                        }
-                    }
                 }
             }
         }
@@ -391,6 +425,22 @@ namespace H.Core.Services
             }
         }
 
+        public void InitializeParameterAdjustmenstForManure(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var animalComponent in farm.AnimalComponents)
+                {
+                    foreach (var animalGroup in animalComponent.Groups)
+                    {
+                        foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                        {
+                            
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -406,6 +456,7 @@ namespace H.Core.Services
                 climateData.BarnTemperatureData.IsInitialized = true;
             }
         }
+
 
         #endregion
     }

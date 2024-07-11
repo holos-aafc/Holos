@@ -33,7 +33,6 @@ namespace H.Core.Test.Providers.Animals
         public void GetByAnimalType()
         {
             var result = _provider.GetFactors(manureStateType: ManureStateType.SolidStorage,
-                componentCategory: ComponentCategory.BeefProduction,
                 meanAnnualPrecipitation: 100,
                 meanAnnualTemperature: 23,
                 meanAnnualEvapotranspiration: 40,
