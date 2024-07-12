@@ -33,6 +33,7 @@ namespace H.Core.Services
         void InitializeManureExcretionRate(Farm farm);
         void InitializeAnnualEntericMethaneRate(Farm farm);
         void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod);
+        void InitializeLivestockCoefficientSheep(Farm farm);
     }
 }
     

@@ -15,6 +15,7 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
 using System.Collections.ObjectModel;
+using H.Core.Models.Animals.Sheep;
 
 namespace H.Core.Test.Services
 {
@@ -588,6 +589,99 @@ namespace H.Core.Test.Services
             }
         }
 
+        [TestMethod]
+        public void InitializeLivestockCoefficientSheep()
+        {
+            var farm = new Farm();
+            var ram = new AnimalGroup()
+            {
+                GroupType = AnimalType.Ram,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        AnimalType =AnimalType.Ram,
+                        GainCoefficientA = 0,
+                        GainCoefficientB = 0,
+                        WoolProduction = 0,
+                        StartWeight = 0,
+                        EndWeight = 0,
+                    }
+                },
+            };
+            var ramComponent = new RamsComponent();
+            ramComponent.Groups.Add(ram);
+
+            farm.Components.Add(ramComponent);
+
+            _initializationService.InitializeLivestockCoefficientSheep(farm);
+            Assert.AreEqual(4, ram.ManagementPeriods.First().WoolProduction);
+            Assert.AreEqual(125, ram.ManagementPeriods.First().StartWeight);
+            Assert.AreEqual(125, ram.ManagementPeriods.First().EndWeight);
+            Assert.AreEqual(2.5, ram.ManagementPeriods.First().GainCoefficientA);
+            Assert.AreEqual(0.35, ram.ManagementPeriods.First().GainCoefficientB);
+        }
+
+        [TestMethod]
+        public void InitializeLivestockCoefficientMultipleComponents()
+        {
+            var farm = new Farm();
+            var ewe = new AnimalGroup()
+            {
+                GroupType = AnimalType.Ewes,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        AnimalType =AnimalType.Ewes,
+                        GainCoefficientA = 0,
+                        GainCoefficientB = 0,
+                        WoolProduction = 0,
+                        StartWeight = 0,
+                        EndWeight = 0,
+                    }
+                },
+            };
+            var weanedLamb = new AnimalGroup()
+            {
+                GroupType = AnimalType.WeanedLamb,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        AnimalType =AnimalType.WeanedLamb,
+                        GainCoefficientA = 0,
+                        GainCoefficientB = 0,
+                        WoolProduction = 0,
+                        StartWeight = 0,
+                        EndWeight = 0,
+                    }
+                },
+            };
+            var eweAndLambsComponent = new EwesAndLambsComponent();
+            eweAndLambsComponent.Groups.Add(ewe);
+            eweAndLambsComponent.Groups.Add(weanedLamb);
+
+            farm.Components.Add(eweAndLambsComponent);
+
+            _initializationService.InitializeLivestockCoefficientSheep(farm);
+            Assert.AreEqual(0.45, ewe.ManagementPeriods.First().GainCoefficientB);
+            Assert.AreEqual(0.385, weanedLamb.ManagementPeriods.First().GainCoefficientB);
+        }
+
+        [TestMethod]
+        public void InitializeLivestockCoefficientNullArguments()
+        {
+            Farm farm = new Farm();
+            try
+            {
+                _initializationService.InitializeLivestockCoefficientSheep(farm); //passing null farm
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
         #endregion
     }
 }

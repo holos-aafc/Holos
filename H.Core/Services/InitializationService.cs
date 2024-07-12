@@ -36,6 +36,7 @@ namespace H.Core.Services
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
         private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
         private readonly Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider _entericMethaneProvider;
+        private readonly Table_31_Swine_VS_Excretion_For_Diets_Provider _volatileExcretionForDietsProvider;
 
         #endregion
 
@@ -58,6 +59,7 @@ namespace H.Core.Services
             _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
             _defaultManureExcretionRateProvider = new Table_29_Default_Manure_Excreted_Provider();
             _entericMethaneProvider = new Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider();
+            _volatileExcretionForDietsProvider = new Table_31_Swine_VS_Excretion_For_Diets_Provider();
         }
 
         #endregion
@@ -100,11 +102,17 @@ namespace H.Core.Services
                 // Table 21
                 this.InitializeMilkProduction(farm);
 
+                // Table 22
+                this.InitializeLivestockCoefficientSheep(farm);
+
                 // Table 27
                 this.InitializeAnnualEntericMethaneRate(farm);
 
                 // Table 29
                 this.InitializeManureExcretionRate(farm);
+
+                // Table 31
+                this.InitializeVolatileSolidsExcretion(farm);
                
                 // Table 35
                 this.InitializeMethaneProducingCapacity(farm);
@@ -127,6 +135,24 @@ namespace H.Core.Services
                 // Table 17
                 this.InitializeCattleFeedingActivity(farm);
             }
+        }
+
+        private void InitializeVolatileSolidsExcretion(Farm farm)
+        {
+            if (farm != null && farm.DefaultSoilData != null)
+            {
+                var province = farm.DefaultSoilData.Province;
+
+                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => x.AnimalType.IsSwineType()))
+                {
+                    this.InitializeVolatileSolidsExcretion(managementPeriod, province);
+                }
+            }
+        }
+
+        public void InitializeVolatileSolidsExcretion(ManagementPeriod managementPeriod, Province province)
+        {
+
         }
 
         public void InitializeAnnualEntericMethaneRate(Farm farm)
@@ -159,6 +185,7 @@ namespace H.Core.Services
                 }
             }
         }
+
         public void InitializeManureExcretionRate(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.HousingDetails != null)
@@ -166,15 +193,14 @@ namespace H.Core.Services
                 managementPeriod.ManureDetails.ManureExcretionRate = _defaultManureExcretionRateProvider.GetManureExcretionRate(managementPeriod.AnimalType);
             }
         }
+
         public void InitializeMethaneProducingCapacity(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
-                {
-                            this.InitializeMethaneProducingCapacity(managementPeriod);
-                           
-                    
+                { 
+                    this.InitializeMethaneProducingCapacity(managementPeriod);
                 }
             }
         }
@@ -466,6 +492,31 @@ namespace H.Core.Services
                 }
             }
         }
+
+        public void InitializeLivestockCoefficientSheep(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    if (managementPeriod != null && (managementPeriod.AnimalType == AnimalType.Ewes || managementPeriod.AnimalType == AnimalType.Ram || managementPeriod.AnimalType == AnimalType.WeanedLamb))
+                    {
+                        var result =
+                            _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType) as
+                                Table_22_Livestock_Coefficients_Sheep_Data;
+                        if (result != null)
+                        {
+                            managementPeriod.WoolProduction = result.WoolProduction;
+                            managementPeriod.GainCoefficientA = result.CoefficientA;
+                            managementPeriod.GainCoefficientB = result.CoefficientB;
+                            managementPeriod.StartWeight = result.DefaultInitialWeight;
+                            managementPeriod.EndWeight = result.DefaultFinalWeight;
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Private Methods

@@ -48,6 +48,8 @@ namespace H.Core.Test
         protected IPCCTier2SoilCarbonCalculator _ipcc;
         protected IFieldResultsService _fieldResultsService;
         protected Mock<ISlcClimateProvider> _slcClimateProvider;
+        protected Mock<IInitializationService> _mockInitializationService;
+        protected IInitializationService _initializationService;
 
         #endregion
 
@@ -59,6 +61,9 @@ namespace H.Core.Test
 
         protected UnitTestBase()
         {
+
+            _initializationService = new InitializationService();
+
             _mockFarmResultService = new Mock<IFarmResultsService>();
             _mockFarmResultServiceObject = _mockFarmResultService.Object;
 
