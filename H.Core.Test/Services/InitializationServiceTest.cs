@@ -481,6 +481,23 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void InitializeAnnualEntericMethaneRateSetsNewDefault()
+        {
+            var managementPeriod = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.Bison,
+                ManureDetails = new ManureDetails()
+                {
+                    YearlyEntericMethaneRate = 10,
+                }
+            };
+
+            _initializationService.InitializeAnnualEntericMethaneRate(managementPeriod);
+
+            Assert.AreEqual(64, managementPeriod.ManureDetails.YearlyEntericMethaneRate);
+        }
+
+        [TestMethod]
         public void InitializeManureExcretionRateSetsNewExcretionRate()
         {
             var managementPeriod = new ManagementPeriod()

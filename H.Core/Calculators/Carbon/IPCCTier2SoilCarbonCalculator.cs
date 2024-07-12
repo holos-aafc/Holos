@@ -302,7 +302,7 @@ namespace H.Core.Calculators.Carbon
             result.WFac = runInPeriodItems.Average(x => x.WFac);
             result.TFac = runInPeriodItems.Average(x => x.TFac);
             result.TotalCarbonInputs = runInPeriodItems.Average(y => y.TotalCarbonInputs);
-            result.TotalNitrogenInputsForIpccTier2 = runInPeriodItems.Average(x => x.TotalNitrogenInputsForIpccTier2);
+            result.TotalNitrogenInputsForIpccTier2 = runInPeriodItems.Average(x =>  (x.CombinedAboveGroundResidueNitrogen + x.CombinedBelowGroundResidueNitrogen));
             result.Sand = runInPeriodItems.Average(x => x.Sand);
             result.LigninContent = runInPeriodItems.Average(x => x.LigninContent);
             result.NitrogenContent = runInPeriodItems.Average(x => x.NitrogenContent);

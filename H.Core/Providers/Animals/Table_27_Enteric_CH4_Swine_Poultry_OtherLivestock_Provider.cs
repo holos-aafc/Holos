@@ -26,10 +26,10 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
-        public double GetAnnualEntericMethaneEmissionRate(AnimalType animalType, ManagementPeriod managementPeriod)
+        public double GetAnnualEntericMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
             var weightMidPoint = (managementPeriod.EndWeight + managementPeriod.StartWeight) / 2.0;
-
+            var animalType = managementPeriod.AnimalType;
             
             if (animalType == AnimalType.SwineSows || animalType == AnimalType.SwineLactatingSow || animalType == AnimalType.SwineDrySow) // Footnote 1
             {

@@ -29,12 +29,13 @@ namespace H.Core.Services
         private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _beefAndDairyCattleProvider;
         private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
-        protected readonly Table_29_Default_Manure_Excreted_Provider _defaultManureExcretionRateProvider;
+        private readonly Table_29_Default_Manure_Excreted_Provider _defaultManureExcretionRateProvider;
         private readonly Table_30_Default_Bedding_Material_Composition_Provider _beddingMaterialCompositionProvider;
         private readonly List<Table_21_Average_Milk_Production_Dairy_Cows_Data> _milkProductionDataList;
         private readonly Table_35_Methane_Producing_Capacity_Default_Values_Provider _defaultMethaneProducingCapacityProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
         private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
+        private readonly Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider _entericMethaneProvider;
 
         #endregion
 
@@ -56,6 +57,7 @@ namespace H.Core.Services
             _beefDairyCattleFeedingActivityCoefficientProvider = new Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
             _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
             _defaultManureExcretionRateProvider = new Table_29_Default_Manure_Excreted_Provider();
+            _entericMethaneProvider = new Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider();
         }
 
         #endregion
@@ -98,6 +100,9 @@ namespace H.Core.Services
                 // Table 21
                 this.InitializeMilkProduction(farm);
 
+                // Table 27
+                this.InitializeAnnualEntericMethaneRate(farm);
+
                 // Table 29
                 this.InitializeManureExcretionRate(farm);
                
@@ -123,6 +128,26 @@ namespace H.Core.Services
                 this.InitializeCattleFeedingActivity(farm);
             }
         }
+
+        public void InitializeAnnualEntericMethaneRate(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeAnnualEntericMethaneRate(managementPeriod);
+                }
+            }
+        }
+
+        public void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                managementPeriod.ManureDetails.YearlyEntericMethaneRate = _entericMethaneProvider.GetAnnualEntericMethaneEmissionRate(managementPeriod);
+            }
+        }
+
         public void InitializeManureExcretionRate(Farm farm)
         {
 
