@@ -136,8 +136,11 @@ namespace H.Core.Services
                 this.InitializeCattleFeedingActivity(farm);
             }
         }
-
-        private void InitializeVolatileSolidsExcretion(Farm farm)
+        /// <summary>
+        /// Reinitialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing <see cref="ManagementPeriod"/>'s to be reinitialized</param>
+        public void InitializeVolatileSolidsExcretion(Farm farm)
         {
             if (farm != null && farm.DefaultSoilData != null)
             {
@@ -149,10 +152,17 @@ namespace H.Core.Services
                 }
             }
         }
-
+        /// <summary>
+        /// Reinitialize the <see cref="ManagementPeriod"/> volatile solid excretion manure detail
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to be reinitialized</param>
+        /// <param name="province">The <see cref="Province"/> used to get correct values from lookup table</param>
         public void InitializeVolatileSolidsExcretion(ManagementPeriod managementPeriod, Province province)
         {
-
+            if (managementPeriod != null && managementPeriod.ManureDetails != null && managementPeriod.AnimalType.IsSwineType())
+            {
+                managementPeriod.ManureDetails.VolatileSolidExcretion = _volatileExcretionForDietsProvider.Get(province, managementPeriod.AnimalType);
+            }
         }
 
         public void InitializeAnnualEntericMethaneRate(Farm farm)
@@ -486,13 +496,17 @@ namespace H.Core.Services
                     {
                         foreach (var managementPeriod in animalGroup.ManagementPeriods)
                         {
+
                             
                         }
                     }
                 }
             }
         }
-
+        /// <summary>
+        /// Reinitializes the values for Ewes, ram and weanedLamb from Table 22
+        /// </summary>
+        /// <param name="farm">Contains the coefficient(s), weight(s) and wool production details that need to be reinitialized</param>
         public void InitializeLivestockCoefficientSheep(Farm farm)
         {
             if (farm != null)
@@ -506,6 +520,8 @@ namespace H.Core.Services
                                 Table_22_Livestock_Coefficients_Sheep_Data;
                         if (result != null)
                         {
+                            managementPeriod.HousingDetails.BaselineMaintenanceCoefficient =
+                                result.BaselineMaintenanceCoefficient;
                             managementPeriod.WoolProduction = result.WoolProduction;
                             managementPeriod.GainCoefficientA = result.CoefficientA;
                             managementPeriod.GainCoefficientB = result.CoefficientB;

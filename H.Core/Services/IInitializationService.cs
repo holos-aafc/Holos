@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
@@ -34,6 +35,8 @@ namespace H.Core.Services
         void InitializeAnnualEntericMethaneRate(Farm farm);
         void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod);
         void InitializeLivestockCoefficientSheep(Farm farm);
+        void InitializeVolatileSolidsExcretion(Farm farm);
+        void InitializeVolatileSolidsExcretion(ManagementPeriod managementPeriod, Province province);
     }
 }
     

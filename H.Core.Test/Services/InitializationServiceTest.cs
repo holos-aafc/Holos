@@ -16,6 +16,7 @@ using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
 using System.Collections.ObjectModel;
 using H.Core.Models.Animals.Sheep;
+using H.Core.Models.Animals.Swine;
 
 namespace H.Core.Test.Services
 {
@@ -606,6 +607,7 @@ namespace H.Core.Test.Services
                         WoolProduction = 0,
                         StartWeight = 0,
                         EndWeight = 0,
+                        HousingDetails = new HousingDetails{ BaselineMaintenanceCoefficient = 0,},
                     }
                 },
             };
@@ -620,6 +622,7 @@ namespace H.Core.Test.Services
             Assert.AreEqual(125, ram.ManagementPeriods.First().EndWeight);
             Assert.AreEqual(2.5, ram.ManagementPeriods.First().GainCoefficientA);
             Assert.AreEqual(0.35, ram.ManagementPeriods.First().GainCoefficientB);
+            Assert.AreEqual(0.25, ram.ManagementPeriods.First().HousingDetails.BaselineMaintenanceCoefficient);
         }
 
         [TestMethod]
@@ -639,6 +642,7 @@ namespace H.Core.Test.Services
                         WoolProduction = 0,
                         StartWeight = 0,
                         EndWeight = 0,
+                        HousingDetails = new HousingDetails{ BaselineMaintenanceCoefficient = 0,},
                     }
                 },
             };
@@ -655,6 +659,7 @@ namespace H.Core.Test.Services
                         WoolProduction = 0,
                         StartWeight = 0,
                         EndWeight = 0,
+                        HousingDetails = new HousingDetails{ BaselineMaintenanceCoefficient = 0,},
                     }
                 },
             };
@@ -682,6 +687,93 @@ namespace H.Core.Test.Services
                 Assert.Fail(ex.Message);
             }
         }
+        [TestMethod]
+        public void InitializeSwineVsExcretionForDietsDefaultValue()
+        {
+            _farm1.DefaultSoilData.Province = Province.Alberta;
+
+            var managementPeriod = new ManagementPeriod();
+            managementPeriod.AnimalType = AnimalType.SwineDrySow;
+            
+            var animalGroup = new AnimalGroup();
+            animalGroup.ManagementPeriods.Add(managementPeriod);
+            animalGroup.GroupType = AnimalType.SwineDrySow;
+
+            var drySowsComponent = new DrySowsComponent();
+            drySowsComponent.Groups.Add(animalGroup);
+
+            _farm1.Components.Add(drySowsComponent);
+
+            _initializationService.InitializeVolatileSolidsExcretion(_farm1);
+            Assert.AreEqual(expected: 0.1228, actual: managementPeriod.ManureDetails.VolatileSolidExcretion);
+        }
+
+        [TestMethod]
+        public void InitializeSwineVsExcretionForDietsDefaultValuesNullArgument()
+        {
+            Farm farm = new Farm();
+            try
+            {
+                _initializationService.InitializeVolatileSolidsExcretion(farm);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+        [TestMethod]
+        public void InitializeSwineVsExcretionForDietsDefaultValueMultipleSwineTypes()
+        {
+            _farm1.DefaultSoilData.Province = Province.Alberta;
+
+            var managementPeriodOne = new ManagementPeriod();
+            managementPeriodOne.AnimalType = AnimalType.SwineDrySow;
+            var animalGroupOne = new AnimalGroup();
+            animalGroupOne.GroupType = AnimalType.SwineDrySow;
+            animalGroupOne.ManagementPeriods.Add(managementPeriodOne);
+            var drySowsComponent = new DrySowsComponent();
+            drySowsComponent.Groups.Add(animalGroupOne);
+
+            var managementPeriodTwo = new ManagementPeriod();
+            managementPeriodTwo.AnimalType = AnimalType.SwineFinisher;
+            var animalGroupTwo = new AnimalGroup();
+            animalGroupTwo.GroupType = AnimalType.SwineFinisher;
+            animalGroupTwo.ManagementPeriods.Add(managementPeriodTwo);
+            var swineFinisherComponent = new SwineFinishersComponent();
+            swineFinisherComponent.Groups.Add(animalGroupTwo);
+
+            var managementPeriodThree = new ManagementPeriod();
+            managementPeriodThree.AnimalType = AnimalType.SwineStarter;
+            var animalGroupThree = new AnimalGroup();
+            animalGroupThree.GroupType = AnimalType.SwineStarter;
+            animalGroupThree.ManagementPeriods.Add(managementPeriodThree);
+            var swineStarterComponent = new SwineFinishersComponent();
+            swineStarterComponent.Groups.Add(animalGroupThree);
+
+            _farm1.Components.Add(drySowsComponent);
+            _farm1.Components.Add(swineFinisherComponent);
+            _farm1.Components.Add(swineStarterComponent);
+
+            _initializationService.InitializeVolatileSolidsExcretion(_farm1);
+            Assert.AreEqual(expected: 0.1228, actual: managementPeriodOne.ManureDetails.VolatileSolidExcretion);
+            Assert.AreEqual(expected: 0.1389, actual: managementPeriodTwo.ManureDetails.VolatileSolidExcretion);
+            Assert.AreEqual(expected: 0.1504, actual: managementPeriodThree.ManureDetails.VolatileSolidExcretion);
+        }
+        [TestMethod]
+        public void intializeSwineVsExcretionForDietNullManagementPeriod()
+        {
+            var province = Province.Alberta;
+            var managementPeriod = new ManagementPeriod();
+            try
+            {
+                _initializationService.InitializeVolatileSolidsExcretion(managementPeriod, province);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #endregion
     }
 }

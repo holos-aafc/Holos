@@ -288,6 +288,16 @@ namespace H.Core.Calculators.Carbon
                 farm: farm,
                 isEquilibriumYear: true);
 
+            this.CalculationMode = CalculationModes.Nitrogen;
+
+            this.CalculatePools(
+                currentYearViewItem: result,    // Use the run-in period item
+                previousYearViewItem: null,     // There is no previous year
+                farm: farm,
+                isEquilibriumYear: true);
+
+            this.CalculationMode = CalculationModes.Carbon;
+
             return result;
         }
 

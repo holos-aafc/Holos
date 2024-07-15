@@ -17,10 +17,12 @@ namespace H.Core.Providers.Animals
         public Table_31_Swine_VS_Excretion_For_Diets_Provider()
         {
             HTraceListener.AddTraceListener();
-        } 
+        }
 
         #endregion
 
+        #region Public Methods
+        
         /// <summary>
         /// 
         /// </summary>
@@ -31,7 +33,7 @@ namespace H.Core.Providers.Animals
 
             return byProvince.FirstOrDefault(x => x.Key == animalType).Value;
         }
-        
+
         public Dictionary<AnimalType, double> GetByProvince(Province province)
         {
             switch (province)
@@ -49,7 +51,7 @@ namespace H.Core.Providers.Animals
                         {AnimalType.SwineBoar, 0.1228},
                         {AnimalType.SwineLactatingSow, 0.1228}
                     };
-                    
+
                 case Province.BritishColumbia:
                     return new Dictionary<AnimalType, double>
                     {
@@ -191,7 +193,9 @@ namespace H.Core.Providers.Animals
                     $" Returning default value of {defaultValue}.");
                     return defaultValue;
             }
-        }
+        } 
+
+        #endregion
     }
 }
 
