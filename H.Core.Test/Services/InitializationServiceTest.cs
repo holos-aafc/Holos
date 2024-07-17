@@ -966,6 +966,65 @@ namespace H.Core.Test.Services
             Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
         }
 
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForRootCrop()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.Potatoes };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(0, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfStrawReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForCoverCrop()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.PigeonBean };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(100, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForSilageHarvestMethod()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.PigeonBean, HarvestMethod = HarvestMethods.Silage};
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(2, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(0, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForSwathingHarvestMethod()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.PigeonBean, HarvestMethod = HarvestMethods.Swathing };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(30, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(0, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForGreenManureHarvestMethod()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.PigeonBean, HarvestMethod = HarvestMethods.GreenManure };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(100, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(0, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
+        }
+
         #endregion
     }
 }

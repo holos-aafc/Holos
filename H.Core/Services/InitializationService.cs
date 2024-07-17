@@ -689,6 +689,9 @@ namespace H.Core.Services
 
         }
 
+        /// <summary>
+        /// Assigns default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
+        /// </summary>
         public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
         {
             if (farm != null && viewItem != null)

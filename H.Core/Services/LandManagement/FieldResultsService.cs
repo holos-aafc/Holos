@@ -77,6 +77,7 @@ namespace H.Core.Services.LandManagement
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();
+        private IInitializationService _initializationService;
 
         #endregion
 
@@ -85,8 +86,18 @@ namespace H.Core.Services.LandManagement
         public FieldResultsService(
             ICBMSoilCarbonCalculator icbmSoilCarbonCalculator, 
             IPCCTier2SoilCarbonCalculator ipccTier2SoilCarbonCalculator, 
-            N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
+            N2OEmissionFactorCalculator n2OEmissionFactorCalculator,
+            IInitializationService initializationService)
         {
+            if (initializationService != null)
+            {
+                _initializationService = initializationService; 
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(initializationService));
+            }
+
             if (icbmSoilCarbonCalculator != null)
             {
                 _icbmSoilCarbonCalculator = icbmSoilCarbonCalculator;

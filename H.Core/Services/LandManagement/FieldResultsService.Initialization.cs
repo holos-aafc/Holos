@@ -31,7 +31,9 @@ namespace H.Core.Services.LandManagement
             this.AssignDefaultBiomassCoefficients(viewItem, farm);
             this.AssignDefaultNitrogenContentValues(viewItem, farm);
             this.AssignSoilProperties(viewItem, farm);
-            this.AssignDefaultPercentageReturns(viewItem, farm.Defaults);
+
+            _initializationService.InitializePercentageReturns(farm, viewItem);
+
             this.AssignDefaultMoistureContent(viewItem, farm);
             this.AssignDefaultTillageTypeForSelectedProvince(viewItem, farm);
             this.AssignYield(viewItem, farm);
@@ -180,62 +182,6 @@ namespace H.Core.Services.LandManagement
             if (herbicideEnergyEstimates != null)
             {
                 viewItem.HerbicideEnergy = herbicideEnergyEstimates.HerbicideEstimate;
-            }
-        }
-
-        /// <summary>
-        /// Assigns default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        public void AssignDefaultPercentageReturns(CropViewItem viewItem, Defaults defaults)
-        {
-            if (viewItem.CropType.IsPerennial())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForPerennials;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForPerennials;
-            }
-            else if (viewItem.CropType.IsSilageCrop())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForFodderCorn;
-                viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForFodderCorn;
-            }
-            else if (viewItem.CropType.IsAnnual())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForAnnuals;
-                viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForAnnuals;
-                viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForAnnuals;
-            }
-
-            if (viewItem.CropType.IsRootCrop())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForRootCrops;
-                viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
-            }
-
-            if (viewItem.CropType.IsCoverCrop())
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 100;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
-            }
-
-            if (viewItem.HarvestMethod == HarvestMethods.Silage)
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 2;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
-            }
-            else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 30;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
-            }
-            else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
-            {
-                viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = 100;
             }
         }
 

@@ -33,10 +33,6 @@ namespace H.Core.Services.LandManagement
         void AssignYieldToYear(Farm farm, CropViewItem viewItem, FieldSystemComponent fieldSystemComponent);
         void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
             FieldSystemComponent fieldSystemComponent);
-
-        void AssignDefaultPercentageReturns(
-            CropViewItem viewItem,
-            Defaults defaults);
         FieldSystemDetailsStageState GetStageState(Farm farm);
         void AssignDefaultLumCMaxValues(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultNitrogenFertilizerRate(CropViewItem viewItem, Farm farm,
