@@ -37,8 +37,11 @@ namespace H.Core.Services
         void InitializeLivestockCoefficientSheep(Farm farm);
         void InitializeVolatileSolidsExcretion(Farm farm);
         void InitializeVolatileSolidsExcretion(ManagementPeriod managementPeriod, Province province);
+        void InitializeIrrigationWaterApplication(Farm farm);
+        void InitializeIrrigationWaterApplication(Farm farm, CropViewItem viewItem);
         void InitializeBarnTemperature(Farm farm);
         void InitializePercentageReturns(Farm farm, CropViewItem viewItem);
+        void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm);
     }
 }
     

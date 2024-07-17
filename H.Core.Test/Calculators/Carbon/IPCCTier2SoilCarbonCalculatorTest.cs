@@ -827,9 +827,9 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(2.606, runInPeriodYear.IpccTier2CarbonResults.Beta, 0.001);
             Assert.AreEqual(1.74, runInPeriodYear.IpccTier2CarbonResults.Alpha, 0.01);
 
-            Assert.AreEqual(2.751, runInPeriodYear.IpccTier2CarbonResults.ActivePoolDecayRate, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePoolSteadyState, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePool, 0.01);
+            Assert.AreEqual(1, runInPeriodYear.IpccTier2CarbonResults.ActivePoolDecayRate, 0.01);
+            Assert.AreEqual(1.743, runInPeriodYear.IpccTier2CarbonResults.ActivePoolSteadyState, 0.01);
+            Assert.AreEqual(1.743, runInPeriodYear.IpccTier2CarbonResults.ActivePool, 0.01);
 
             Assert.AreEqual(0.178, runInPeriodYear.IpccTier2CarbonResults.SlowPoolDecayRate, 0.01);
             Assert.AreEqual(6.62, runInPeriodYear.IpccTier2CarbonResults.SlowPoolSteadyState, 0.01);

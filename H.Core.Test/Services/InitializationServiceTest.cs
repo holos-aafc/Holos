@@ -15,8 +15,10 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
 using System.Collections.ObjectModel;
+using H.Core.Models.Animals.OtherAnimals;
 using H.Core.Models.Animals.Sheep;
 using H.Core.Models.Animals.Swine;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Test.Services
 {
@@ -626,6 +628,36 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void InitializeLivestockCoefficientSheepFeedLot()
+        {
+            var farm = new Farm();
+            var sheepFeedLot = new AnimalGroup()
+            {
+                GroupType = AnimalType.SheepFeedlot,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        AnimalType =AnimalType.SheepFeedlot,
+                        GainCoefficientA = 0,
+                        GainCoefficientB = 0,
+                        WoolProduction = 0,
+                        StartWeight = 0,
+                        EndWeight = 0,
+                        HousingDetails = new HousingDetails{ BaselineMaintenanceCoefficient = 0,},
+                    }
+                },
+            };
+            var ramComponent = new RamsComponent();
+            ramComponent.Groups.Add(sheepFeedLot);
+
+            farm.Components.Add(ramComponent);
+
+            _initializationService.InitializeLivestockCoefficientSheep(farm);
+            Assert.AreEqual(4, sheepFeedLot.ManagementPeriods.First().WoolProduction);
+        }
+
+        [TestMethod]
         public void InitializeLivestockCoefficientMultipleComponents()
         {
             var farm = new Farm();
@@ -775,6 +807,141 @@ namespace H.Core.Test.Services
             }
         }
 
+        [TestMethod]
+        public void InitializeOtherLivestockCh4EmissionFactor()
+        {
+            var farm = new Farm();
+            var deer = new AnimalGroup()
+            {
+                GroupType = AnimalType.Deer,
+                ManagementPeriods =
+                {
+                    new ManagementPeriod
+                    {
+                        ManureDetails = new ManureDetails
+                        {
+                             
+                            DailyManureMethaneEmissionRate = 0.0,
+                        }
+                    }
+                },
+            };
+            var deerComponent = new DeerComponent();
+            deerComponent.Groups.Add(deer);
+
+            farm.Components.Add(deerComponent);
+
+            _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
+            Assert.AreEqual(0.000603, deer.ManagementPeriods.First().ManureDetails.DailyManureMethaneEmissionRate);
+
+        }
+
+        [TestMethod]
+        public void InitializeIrrigationWaterApplicationTwoArguments()
+        {
+            _farm1.DefaultSoilData.Province = Province.Alberta;
+            var climateData = new ClimateData();
+            var cropViewItemOne = new CropViewItem()
+            {
+                Year = 2022,
+            };
+            var cropViewItemTwo = new CropViewItem()
+            {
+                Year = 2002
+            };
+
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+            cropViewItemCollection.Add(cropViewItemOne);
+            cropViewItemCollection.Add(cropViewItemTwo);
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+
+            climateData.PrecipitationData.April = 1;
+            climateData.PrecipitationData.May = 1;
+            climateData.PrecipitationData.June = 1;
+            climateData.PrecipitationData.July = 1;
+            climateData.PrecipitationData.August = 1;
+            climateData.PrecipitationData.September = 1;
+            climateData.PrecipitationData.October = 1;
+            climateData.EvapotranspirationData.April = 2;
+            climateData.EvapotranspirationData.May = 2;
+            climateData.EvapotranspirationData.June = 2;
+            climateData.EvapotranspirationData.July = 2;
+            climateData.EvapotranspirationData.August = 2;
+            climateData.EvapotranspirationData.September = 2;
+            climateData.EvapotranspirationData.October = 2;
+
+            _farm1.ClimateData = climateData;
+
+            _initializationService.InitializeIrrigationWaterApplication(_farm1);
+
+            Assert.AreEqual(expected: 7, actual: cropViewItemOne.AmountOfIrrigation);
+            Assert.AreEqual(expected: 96.93, cropViewItemOne.GrowingSeasonIrrigation, 0.01);
+            Assert.AreEqual(expected: 7, actual: cropViewItemTwo.AmountOfIrrigation);
+            Assert.AreEqual(expected: 96.93, cropViewItemTwo.GrowingSeasonIrrigation, 0.01);
+        }
+
+        [TestMethod]
+        public void InitializeIrrigationWaterApplicationSingleArgument()
+        {
+            _farm1.DefaultSoilData.Province = Province.Ontario;
+            var cropViewItem = new CropViewItem()
+            {
+                Year = 2022
+            };
+            var climateData = new ClimateData();
+            climateData.PrecipitationData.April = 1;
+            climateData.PrecipitationData.May = 1;
+            climateData.PrecipitationData.June = 1;
+            climateData.PrecipitationData.July = 1;
+            climateData.PrecipitationData.August = 1;
+            climateData.PrecipitationData.September = 1;
+            climateData.PrecipitationData.October = 1;
+            climateData.EvapotranspirationData.April = 2;
+            climateData.EvapotranspirationData.May = 2;
+            climateData.EvapotranspirationData.June = 2;
+            climateData.EvapotranspirationData.July = 2;
+            climateData.EvapotranspirationData.August = 2;
+            climateData.EvapotranspirationData.September = 2;
+            climateData.EvapotranspirationData.October = 2;
+
+            _farm1.ClimateData = climateData;
+
+            _initializationService.InitializeIrrigationWaterApplication(_farm1, cropViewItem);
+
+            Assert.AreEqual(expected: 7, actual: cropViewItem.AmountOfIrrigation);
+            Assert.AreEqual(expected: 96.18, cropViewItem.GrowingSeasonIrrigation, 0.01);
+        }
+
+        [TestMethod]
+        public void InitializeIrrigationWaterApplicationTwoArgumentsNullCropViewItem()
+        {
+            _farm1.Province = Province.Alberta;
+            var cropViewItem = new CropViewItem();
+            try
+            {
+                _initializationService.InitializeIrrigationWaterApplication(_farm1, cropViewItem);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+    
+        public void InitializeOtherLivestockCh4EmissionFactorNullArguments()
+        {
+            Farm farm = new Farm();
+            try
+            {
+                _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);// passing farm with null dairyComponent
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
         [TestMethod]
         public void InitializePercentageReturnsSetsDefaultsForPerennials()
         {

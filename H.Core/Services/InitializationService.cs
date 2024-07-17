@@ -13,6 +13,7 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Energy;
+using H.Core.Providers.Irrigation;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
@@ -40,6 +41,8 @@ namespace H.Core.Services
         private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
         private readonly Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider _entericMethaneProvider;
         private readonly Table_31_Swine_VS_Excretion_For_Diets_Provider _volatileExcretionForDietsProvider;
+        private readonly Table_4_Monthly_Irrigation_Water_Application_Provider _irrigationWaterApplicationProvider;
+        private readonly Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider _otherLivestockDefaultCH4EmissionFactorsProvider;
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider;
 
         #endregion
@@ -65,6 +68,8 @@ namespace H.Core.Services
             _entericMethaneProvider = new Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider();
             _volatileExcretionForDietsProvider = new Table_31_Swine_VS_Excretion_For_Diets_Provider();
             _smallAreaYieldProvider = new SmallAreaYieldProvider();
+            _irrigationWaterApplicationProvider = new Table_4_Monthly_Irrigation_Water_Application_Provider();
+            _otherLivestockDefaultCH4EmissionFactorsProvider = new Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider();
         }
 
         #endregion
@@ -101,6 +106,8 @@ namespace H.Core.Services
         {
             foreach (var farm in farms)
             {
+                // Table 4
+                this.InitializeIrrigationWaterApplication(farm);
                 // Table 6
                 this.InitializeManureCompositionData(farm);
 
@@ -128,6 +135,9 @@ namespace H.Core.Services
                 // Table 36
                 this.InitializeDefaultEmissionFactors(farm);
 
+                //Table 38
+                this.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
+
                 // Table 44
                 this.InitializeManureMineralizationFractions(farm);
 
@@ -139,6 +149,62 @@ namespace H.Core.Services
 
                 // Table 63
                 this.InitializeBarnTemperature(farm);
+            }
+        }
+        /// <summary>
+        /// Reinitialize each <see cref="CropViewItem"/>'s irrigation properties with a <see cref="Farm"/>
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing <see cref="CropViewItem"/>'s to be reinitialized</param>
+        public void InitializeIrrigationWaterApplication(Farm farm)
+        {
+            var viewItems = farm.GetCropDetailViewItems();
+            foreach (var viewItem in viewItems)
+            {
+                InitializeIrrigationWaterApplication(farm, viewItem);
+            }
+        }
+        /// <summary>
+        /// Reinitialize the <see cref="CropViewItem"/> irrigation properties
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> that contains the climate data and province data required for the lookup table</param>
+        /// <param name="viewItem">The <see cref="CropViewItem"/> to have its irrigation properties reinitialized</param>
+        public void InitializeIrrigationWaterApplication(Farm farm, CropViewItem viewItem)
+        {
+            viewItem.GrowingSeasonIrrigation = _irrigationWaterApplicationProvider.GetTotalGrowingSeasonIrrigation(farm.DefaultSoilData.Province);
+            var annualPrecipitation = farm.ClimateData.GetTotalPrecipitationForYear(viewItem.Year);
+            var potentialEvapotranspiration = farm.ClimateData.GetTotalEvapotranspirationForYear(viewItem.Year);
+            if (potentialEvapotranspiration > annualPrecipitation)
+            {
+                viewItem.AmountOfIrrigation = potentialEvapotranspiration - annualPrecipitation;
+            }
+            else
+            {
+                viewItem.AmountOfIrrigation = 0;
+            }
+        }
+        /// <summary>
+        /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
+        /// </summary>
+        /// <param name="farm"> Contains the ManagementPeriod.ManureDetails.DailyMAnureMethaneEmissionRate that needs to be reinitialized to default</param>
+        public void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var component in farm.AnimalComponents)
+                {
+                    if (component.Groups != null)
+                    {
+                        foreach (var animalGroup in component.Groups)
+                        {
+                            foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                            {
+                                managementPeriod.ManureDetails.DailyManureMethaneEmissionRate =
+                                    _otherLivestockDefaultCH4EmissionFactorsProvider
+                                        .GetDailyManureMethaneEmissionRate(animalGroup.GroupType);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -513,15 +579,7 @@ namespace H.Core.Services
                             }
                         }
                     }
-                    else
-                    {
-                        return;
-                    }
                 }
-            }
-            else
-            {
-                return;
             }
         }
 
@@ -577,22 +635,21 @@ namespace H.Core.Services
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    if (managementPeriod != null && (managementPeriod.AnimalType == AnimalType.Ewes || managementPeriod.AnimalType == AnimalType.Ram || managementPeriod.AnimalType == AnimalType.WeanedLamb))
+            
+                    var result =
+                        _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType) as
+                            Table_22_Livestock_Coefficients_Sheep_Data;
+                    if (result != null)
                     {
-                        var result =
-                            _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType) as
-                                Table_22_Livestock_Coefficients_Sheep_Data;
-                        if (result != null)
-                        {
-                            managementPeriod.HousingDetails.BaselineMaintenanceCoefficient =
-                                result.BaselineMaintenanceCoefficient;
-                            managementPeriod.WoolProduction = result.WoolProduction;
-                            managementPeriod.GainCoefficientA = result.CoefficientA;
-                            managementPeriod.GainCoefficientB = result.CoefficientB;
-                            managementPeriod.StartWeight = result.DefaultInitialWeight;
-                            managementPeriod.EndWeight = result.DefaultFinalWeight;
-                        }
+                        managementPeriod.HousingDetails.BaselineMaintenanceCoefficient =
+                            result.BaselineMaintenanceCoefficient;
+                        managementPeriod.WoolProduction = result.WoolProduction;
+                        managementPeriod.GainCoefficientA = result.CoefficientA;
+                        managementPeriod.GainCoefficientB = result.CoefficientB;
+                        managementPeriod.StartWeight = result.DefaultInitialWeight;
+                        managementPeriod.EndWeight = result.DefaultFinalWeight;
                     }
+                    
                 }
             }
         }
