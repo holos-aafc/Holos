@@ -285,11 +285,11 @@ namespace H.Core.Calculators.Nitrogen
                 {
                     fertilizerTypeFactor = 0.666;
                 }
-                if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.UreaAmmoniumNitrate)
+                else if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.UreaAmmoniumNitrate)
                 {
                     fertilizerTypeFactor = 0.282;
                 }
-                if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.AmmoniumSulphate)
+                else if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.AmmoniumSulphate)
                 {
                     fertilizerTypeFactor = -1.151;
                 }

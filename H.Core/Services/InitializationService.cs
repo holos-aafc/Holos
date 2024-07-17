@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -13,7 +14,9 @@ using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Energy;
 using H.Core.Providers.Plants;
+using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
+using H.Infrastructure;
 
 namespace H.Core.Services
 {
@@ -37,6 +40,7 @@ namespace H.Core.Services
         private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
         private readonly Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider _entericMethaneProvider;
         private readonly Table_31_Swine_VS_Excretion_For_Diets_Provider _volatileExcretionForDietsProvider;
+        private readonly SmallAreaYieldProvider _smallAreaYieldProvider;
 
         #endregion
 
@@ -48,7 +52,7 @@ namespace H.Core.Services
             _averageMilkProductionDairyCowsProvider = new Table_21_Average_Milk_Production_Dairy_Cows_Provider();
             _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _fractionOrganicNMineralizedAsTanProvider = new Table_44_Fraction_OrganicN_Mineralized_As_Tan_Provider();
-            _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();;
+            _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider(); ;
             _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
             _beefAndDairyCattleProvider = new Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider();
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
@@ -60,6 +64,7 @@ namespace H.Core.Services
             _defaultManureExcretionRateProvider = new Table_29_Default_Manure_Excreted_Provider();
             _entericMethaneProvider = new Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider();
             _volatileExcretionForDietsProvider = new Table_31_Swine_VS_Excretion_For_Diets_Provider();
+            _smallAreaYieldProvider = new SmallAreaYieldProvider();
         }
 
         #endregion
@@ -99,6 +104,9 @@ namespace H.Core.Services
                 // Table 6
                 this.InitializeManureCompositionData(farm);
 
+                // Table 17
+                this.InitializeCattleFeedingActivity(farm);
+
                 // Table 21
                 this.InitializeMilkProduction(farm);
 
@@ -113,7 +121,7 @@ namespace H.Core.Services
 
                 // Table 31
                 this.InitializeVolatileSolidsExcretion(farm);
-               
+
                 // Table 35
                 this.InitializeMethaneProducingCapacity(farm);
 
@@ -131,11 +139,9 @@ namespace H.Core.Services
 
                 // Table 63
                 this.InitializeBarnTemperature(farm);
-
-                // Table 17
-                this.InitializeCattleFeedingActivity(farm);
             }
         }
+
         /// <summary>
         /// Reinitialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
         /// </summary>
@@ -152,6 +158,7 @@ namespace H.Core.Services
                 }
             }
         }
+
         /// <summary>
         /// Reinitialize the <see cref="ManagementPeriod"/> volatile solid excretion manure detail
         /// </summary>
@@ -165,6 +172,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the default annual enteric methane rate for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>Whi
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
         public void InitializeAnnualEntericMethaneRate(Farm farm)
         {
             if (farm != null)
@@ -176,6 +187,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the default annual enteric methane rate for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.YearlyEntericMethaneRate"/></param>
         public void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.ManureDetails != null)
@@ -184,6 +199,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the default manure excretion rate for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
         public void InitializeManureExcretionRate(Farm farm)
         {
 
@@ -196,6 +215,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the default <see cref="ManureDetails.ManureExcretionRate"/> for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.ManureExcretionRate"/></param>
         public void InitializeManureExcretionRate(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.HousingDetails != null)
@@ -204,17 +227,25 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
         public void InitializeMethaneProducingCapacity(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
-                { 
+                {
                     this.InitializeMethaneProducingCapacity(managementPeriod);
                 }
             }
         }
 
+        /// <summary>
+        /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/></param>
         public void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.ManureDetails != null)
@@ -225,6 +256,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Reinitialize the default <see cref="DefaultManureCompositionData"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
         public void InitializeManureCompositionData(Farm farm)
         {
             if (farm != null)
@@ -234,36 +269,24 @@ namespace H.Core.Services
                 farm.DefaultManureCompositionData.Clear();
                 farm.DefaultManureCompositionData.AddRange(manureCompositionData);
 
-                var animalComponents = farm.AnimalComponents;
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
                     var defaults = _defaultManureCompositionProvider.GetManureCompositionDataByType(managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
+
                     this.InitializeManureCompositionData(managementPeriod, defaults);
                 }
             }
         }
 
-        public void InitializeManureMineralizationFractions(Farm farm)
-        {
-            if (farm != null)
-            {
-                foreach (var managementPeriod in farm.GetAllManagementPeriods())
-                {
-                        var fractions = _fractionOrganicNMineralizedAsTanProvider.GetByStorageType(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
-                        this.InitializeManureMineralizationFractions(managementPeriod, fractions);
-                }
-            }
-        }
-
         /// <summary>
-        /// Reinitialize the manure <see cref="DefaultManureCompositionData"/> for the selected <see cref="ManagementPeriod"/>.
+        /// Initialize the manure <see cref="DefaultManureCompositionData"/> for the selected <see cref="ManagementPeriod"/>.
         /// </summary>
-        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will have it's fractions reset to default values</param>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will have it's values reset to system defaults</param>
         /// <param name="manureCompositionData">The <see cref="DefaultManureCompositionData"/> containing the new default values to use</param>
         public void InitializeManureCompositionData(ManagementPeriod managementPeriod, DefaultManureCompositionData manureCompositionData)
         {
-            if (managementPeriod != null && 
-                managementPeriod.ManureDetails != null && 
+            if (managementPeriod != null &&
+                managementPeriod.ManureDetails != null &&
                 manureCompositionData != null)
             {
                 managementPeriod.ManureDetails.FractionOfPhosphorusInManure = manureCompositionData.PhosphorusFraction;
@@ -271,7 +294,40 @@ namespace H.Core.Services
                 managementPeriod.ManureDetails.FractionOfNitrogenInManure = manureCompositionData.NitrogenFraction;
             }
         }
-        
+
+        /// <summary>
+        /// Initialize the default manure mineralization fractions for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
+        public void InitializeManureMineralizationFractions(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    var fractions = _fractionOrganicNMineralizedAsTanProvider.GetByStorageType(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
+                    this.InitializeManureMineralizationFractions(managementPeriod, fractions);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initialize the manure fractions for the selected <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will have it's values reset to system defaults</param>
+        /// <param name="mineralizationFractions">The <see cref="FractionOfOrganicNitrogenMineralizedData"/> containing the new default values to use</param>
+        public void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod, FractionOfOrganicNitrogenMineralizedData mineralizationFractions)
+        {
+            if (managementPeriod != null &&
+                managementPeriod.ManureDetails != null &&
+                mineralizationFractions != null)
+            {
+                managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized = mineralizationFractions.FractionImmobilized;
+                managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified = mineralizationFractions.FractionNitrified;
+                managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized = mineralizationFractions.FractionMineralized;
+            }
+        }
+
         /// <summary>
         /// Reinitialize each <see cref="CropViewItem"/> within <see cref="Farm"/> with new default values
         /// </summary>
@@ -338,29 +394,28 @@ namespace H.Core.Services
             }
         }
 
-        public void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod, FractionOfOrganicNitrogenMineralizedData  mineralizationFractions)
-        {
-            if (managementPeriod != null &&
-                managementPeriod.ManureDetails != null &&
-                mineralizationFractions != null)
-            {
-                managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized = mineralizationFractions.FractionImmobilized;
-                managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified = mineralizationFractions.FractionNitrified;
-                managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized = mineralizationFractions.FractionMineralized;
-            }
-        }
-
+        /// <summary>
+        /// Initialize the default emission factors for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
         public void InitializeDefaultEmissionFactors(Farm farm)
         {
             if (farm != null)
             {
-                foreach (var managementPeriod in farm.GetAllManagementPeriods()){
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
                     this.InitializeDefaultEmissionFactors(farm, managementPeriod);
                 }
             }
         }
 
-        public void InitializeDefaultEmissionFactors(Farm farm,
+        /// <summary>
+        /// Initialize the default emission factors for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/></param>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
+        public void InitializeDefaultEmissionFactors(
+            Farm farm,
             ManagementPeriod managementPeriod)
         {
             if (farm != null &&
@@ -383,6 +438,10 @@ namespace H.Core.Services
             }
         }
 
+        /// <summary>
+        /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for all <see cref="ManagementPeriod"/>s for the <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The farm containing the <see cref="ManagementPeriod"/>s to initialize with new defaults</param>
         public void ReinitializeBeddingMaterial(Farm farm)
         {
             if (farm != null)
@@ -394,14 +453,19 @@ namespace H.Core.Services
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
                     var beddingMaterialComposition = farm.GetBeddingMaterialComposition(
-                                beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType,
-                                animalType: managementPeriod.AnimalType);
+                        beddingMaterialType: managementPeriod.HousingDetails.BeddingMaterialType,
+                        animalType: managementPeriod.AnimalType);
 
-                            this.InitializeBeddingMaterial(managementPeriod, beddingMaterialComposition);
+                    this.InitializeBeddingMaterial(managementPeriod, beddingMaterialComposition);
                 }
             }
         }
 
+        /// <summary>
+        /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
+        /// <param name="data">The defaults to use for the initialization</param>
         public void InitializeBeddingMaterial(ManagementPeriod managementPeriod, Table_30_Default_Bedding_Material_Composition_Data data)
         {
             if (managementPeriod != null && managementPeriod.HousingDetails != null && data != null)
@@ -435,7 +499,7 @@ namespace H.Core.Services
                                     int year = animalGroupManagementPeriod.Start.Year;
                                     IEnumerable<double> milkProduction
                                         = from mp in _milkProductionDataList
-                                        where (mp.Province == farm.DefaultSoilData.Province && (int)mp.Year == year)
+                                          where (mp.Province == farm.DefaultSoilData.Province && (int)mp.Year == year)
                                           select mp.AverageMilkProduction;
                                     if (milkProduction?.Any() != true)
                                     {
@@ -477,7 +541,7 @@ namespace H.Core.Services
                         {
                             foreach (var managementPeriod in animalGroup.ManagementPeriods)
                             {
-                                managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation =_beefDairyCattleFeedingActivityCoefficientProvider.GetByHousing(managementPeriod
+                                managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation = _beefDairyCattleFeedingActivityCoefficientProvider.GetByHousing(managementPeriod
                                     .HousingDetails.HousingType).FeedingActivityCoefficient;
                             }
                         }
@@ -497,7 +561,7 @@ namespace H.Core.Services
                         foreach (var managementPeriod in animalGroup.ManagementPeriods)
                         {
 
-                            
+
                         }
                     }
                 }
@@ -533,11 +597,11 @@ namespace H.Core.Services
             }
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void InitializeBarnTemperature(Farm farm)
+        /// <summary>
+        /// Initialize all <see cref="ClimateData.BarnTemperatureData"/> for all <see cref="ManagementPeriod"/>s in the <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> to initialize with new defaults</param>
+        public void InitializeBarnTemperature(Farm farm)
         {
             if (farm != null && farm.ClimateData != null)
             {
@@ -549,6 +613,81 @@ namespace H.Core.Services
             }
         }
 
+        public void InitializeCropViewItems(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+                {
+                    foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                    {
+                        this.InitializePercentageReturns(farm, cropViewItem);
+                    }   
+                }
+            }
+        }
+
+        public void InitializeCropViewItem(Farm farm, CropViewItem viewItem)
+        {
+
+        }
+
+        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
+        {
+            if (farm != null && viewItem != null)
+            {
+                var defaults = farm.Defaults;
+
+                if (viewItem.CropType.IsPerennial())
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForPerennials;
+                    viewItem.PercentageOfStrawReturnedToSoil = 0;
+                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForPerennials;
+                }
+                else if (viewItem.CropType.IsAnnual())
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForAnnuals;
+                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForAnnuals;
+                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForAnnuals;
+                }
+
+                if (viewItem.CropType.IsRootCrop())
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForRootCrops;
+                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
+                }
+
+                if (viewItem.CropType.IsCoverCrop())
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
+                    viewItem.PercentageOfStrawReturnedToSoil = 100;
+                    viewItem.PercentageOfRootsReturnedToSoil = 100;
+                }
+
+                if (viewItem.CropType.IsSilageCrop() || viewItem.HarvestMethod == HarvestMethods.Silage)
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = 2;
+                    viewItem.PercentageOfStrawReturnedToSoil = 0;
+                    viewItem.PercentageOfRootsReturnedToSoil = 100;
+                }
+                else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = 30;
+                    viewItem.PercentageOfStrawReturnedToSoil = 0;
+                    viewItem.PercentageOfRootsReturnedToSoil = 100;
+                }
+                else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
+                {
+                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
+                    viewItem.PercentageOfStrawReturnedToSoil = 0;
+                    viewItem.PercentageOfRootsReturnedToSoil = 100;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
     }

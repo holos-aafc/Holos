@@ -450,6 +450,11 @@ namespace H.Core.Calculators.Carbon
                 sand: currentYearViewItem.Sand,
                 tillageFactor: tillageFactor);
 
+            if (currentYearIpccTier2Results.ActivePoolDecayRate > 1)
+            {
+                currentYearIpccTier2Results.ActivePoolDecayRate = 1;
+            }
+
             var slowPoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRateSlow, currentYearViewItem.TillageType).Value;
 
             currentYearIpccTier2Results.SlowPoolDecayRate = this.CalculateSlowPoolDecayRate(
@@ -458,12 +463,22 @@ namespace H.Core.Calculators.Carbon
                 waterFactor: currentYearViewItem.WFac,
                 tillageFactor: tillageFactor);
 
+            if (currentYearIpccTier2Results.SlowPoolDecayRate > 1)
+            {
+                currentYearIpccTier2Results.SlowPoolDecayRate = 1;
+            }
+
             var passivePoolDecayRateConstant = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(ModelParameters.DecayRatePassive, currentYearViewItem.TillageType).Value;
 
             currentYearIpccTier2Results.PassivePoolDecayRate = this.CalculatePassivePoolDecayRate(
                 passivePoolDecayRateConstant: passivePoolDecayRateConstant,
                 temperatureFactor: currentYearViewItem.TFac,
                 waterFactor: currentYearViewItem.WFac);
+
+            if (currentYearIpccTier2Results.PassivePoolDecayRate > 1)
+            {
+                currentYearIpccTier2Results.PassivePoolDecayRate = 1;
+            }
 
             currentYearIpccTier2Results.ActivePoolSteadyState = this.CalculateSteadyStateActivePool(
                 inputsToActiveSubPool: currentYearIpccTier2Results.Alpha,

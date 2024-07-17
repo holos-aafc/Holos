@@ -759,8 +759,9 @@ namespace H.Core.Test.Services
             Assert.AreEqual(expected: 0.1389, actual: managementPeriodTwo.ManureDetails.VolatileSolidExcretion);
             Assert.AreEqual(expected: 0.1504, actual: managementPeriodThree.ManureDetails.VolatileSolidExcretion);
         }
+
         [TestMethod]
-        public void intializeSwineVsExcretionForDietNullManagementPeriod()
+        public void InitializeSwineVsExcretionForDietNullManagementPeriod()
         {
             var province = Province.Alberta;
             var managementPeriod = new ManagementPeriod();
@@ -772,6 +773,30 @@ namespace H.Core.Test.Services
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForPerennials()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.TameGrass };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(35, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(0, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void InitializePercentageReturnsSetsDefaultsForSilageCrop()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.SilageCorn };
+
+            _initializationService.InitializePercentageReturns(new Farm(), viewItem);
+
+            Assert.AreEqual(2, viewItem.PercentageOfProductYieldReturnedToSoil);
+            Assert.AreEqual(0, viewItem.PercentageOfStrawReturnedToSoil);
+            Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
         }
 
         #endregion
