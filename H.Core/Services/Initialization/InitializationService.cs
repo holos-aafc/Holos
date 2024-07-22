@@ -945,6 +945,20 @@ namespace H.Core.Services.Initialization
             }
         }
 
+        public void InitializeFallow(CropViewItem viewItem, Farm farm)
+        {
+            if (viewItem.CropType.IsFallow())
+            {
+                viewItem.Yield = 0;
+                viewItem.TillageType = farm.Defaults.DefaultTillageTypeForFallow;
+                viewItem.PastTillageType = TillageType.NoTill;
+                viewItem.HarvestMethod = HarvestMethods.None;
+                viewItem.PercentageOfProductYieldReturnedToSoil = 0;
+                viewItem.PercentageOfStrawReturnedToSoil = 0;
+                viewItem.PercentageOfRootsReturnedToSoil = 0;
+            }
+        }
+
         #endregion
     }
 }

@@ -74,6 +74,8 @@ namespace H.Core.Services.Initialization
         void InitializeTillageType(
             CropViewItem viewItem,
             Farm farm);
+
+        void InitializeFallow(CropViewItem viewItem, Farm farm);
     }
 }
     

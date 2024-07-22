@@ -1286,6 +1286,30 @@ namespace H.Core.Test.Services
             Assert.AreEqual(TillageType.Reduced, viewItem.TillageType);
         }
 
+        [TestMethod]
+        public void InitializeFallowSetTillageType()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Fallow;
+            viewItem.TillageType = TillageType.Reduced;
+
+            _initializationService.InitializeFallow(viewItem, new Farm());
+
+            Assert.AreEqual(TillageType.NoTill, viewItem.TillageType);
+        }
+
+        [TestMethod]
+        public void InitializeFallowDoesNotSetTillageTypeWhenCropIsNotFallow()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Barley;
+            viewItem.TillageType = TillageType.Reduced;
+
+            _initializationService.InitializeFallow(viewItem, new Farm());
+
+            Assert.AreEqual(TillageType.Reduced, viewItem.TillageType);
+        }
+
         #endregion
     }
 }
