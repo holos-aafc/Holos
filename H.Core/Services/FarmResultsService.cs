@@ -26,6 +26,7 @@ using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
+using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
 using Prism.Events;
 

@@ -3,6 +3,7 @@ using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
 using System;
 using System.Collections.ObjectModel;
+using H.Core.Services.Initialization;
 
 namespace H.Core.Services
 {

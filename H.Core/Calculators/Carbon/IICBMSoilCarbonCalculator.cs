@@ -4,7 +4,7 @@ using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Calculators.Carbon
 {
-    public interface IICBMSoilCarbonCalculator
+    public interface IICBMSoilCarbonCalculator 
     {
         double CalculateSoilCarbonAtInterval(
             double youngPoolSoilCarbonAboveGroundAtInterval, 
@@ -107,21 +107,6 @@ namespace H.Core.Calculators.Carbon
             CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem,
             CropViewItem nextYearViewItem,
-            Farm farm);
-
-        /// <summary>
-        /// Calculates the plant carbon in the agricultural product for the given species grown in the given year.
-        /// 
-        /// C_p
-        ///
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The total above ground carbon input</returns>
-        double CalculatePlantCarbonInAgriculturalProduct(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
             Farm farm);
 
         void CalculateNitrogenAtInterval(

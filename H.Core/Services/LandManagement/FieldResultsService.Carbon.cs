@@ -78,7 +78,7 @@ namespace H.Core.Services.LandManagement
             FieldSystemComponent fieldSystemComponent)
         {
             // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
-            this.AssignYieldToAllYears(
+            _initializationService.InitializeYieldForAllYears(
                 cropViewItems: viewItems,
                 farm: farm, fieldSystemComponent: fieldSystemComponent);
 
@@ -480,7 +480,7 @@ namespace H.Core.Services.LandManagement
             var runInPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear,
                 viewItemsForField, leftMost);
 
-            this.AssignYieldToAllYears(runInPeriodItems, farm, leftMost);
+            _initializationService.InitializeYieldForAllYears(runInPeriodItems, farm, leftMost);
 
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)

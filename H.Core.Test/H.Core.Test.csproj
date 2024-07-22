@@ -48,7 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculatorTest.cs" />
-    <Compile Include="Calculators\ICBMSoilCarbonCalculatorTest.cs" />
+    <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculatorTest.cs" />
+    <Compile Include="Calculators\Carbon\ICBMCarbonInputCalculatorTest.cs" />
     <Compile Include="Calculators\ClimateParameterCalculatorTest.cs" />
     <Compile Include="Calculators\Climate\ClimateNormalCalculatorTest.cs" />
     <Compile Include="Calculators\Climate\EvapotranspirationCalculatorTest.cs" />

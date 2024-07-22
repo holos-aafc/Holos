@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Controls;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Carbon;
 
-namespace H.Core.Services
+namespace H.Core.Services.Initialization
 {
     public interface IInitializationService
     {
@@ -42,6 +42,31 @@ namespace H.Core.Services
         void InitializeBarnTemperature(Farm farm);
         void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm);
         void InitializePercentageReturns(Farm farm, CropViewItem viewItem);
+        void InitializeCarbonConcentration(Farm farm);
+        void InitializeCarbonConcentration(CropViewItem viewItem, Defaults defaults);
+        void InitializeNitrogenFixation(Farm farm);
+        void InitializeNitrogenFixation(CropViewItem viewItem);
+
+        void InitializeMoistureContent(Farm farm);
+        void InitializeMoistureContent(
+            Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem);
+
+
+        void InitializeSilageCropYield(CropViewItem silageCropViewItem, Farm farm);
+
+        void InitializeYield(CropViewItem viewItem, Farm farm);
+
+        void InitializeYieldForAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
+            FieldSystemComponent fieldSystemComponent);
+
+        void InitializeYieldForYear(
+            Farm farm,
+            CropViewItem viewItem,
+            FieldSystemComponent fieldSystemComponent);
+
+        void InitializeMoistureContent(CropViewItem viewItem, Farm farm);
+        void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm);
+        void InitializeNitrogenContent(CropViewItem viewItem, Farm farm);
     }
 }
     

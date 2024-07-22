@@ -30,6 +30,7 @@ using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
+using H.Core.Services.Initialization;
 using H.Core.Tools;
 using H.Infrastructure;
 
@@ -69,10 +70,7 @@ namespace H.Core.Services.LandManagement
         private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
         private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
-        private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
-        private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
-        private readonly NitogenFixationProvider _nitrogenFixationProvider = new NitogenFixationProvider();
         private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();

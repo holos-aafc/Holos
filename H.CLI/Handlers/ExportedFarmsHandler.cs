@@ -19,6 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using H.Core.Services;
+using H.Core.Services.Initialization;
 
 namespace H.CLI.Handlers
 {

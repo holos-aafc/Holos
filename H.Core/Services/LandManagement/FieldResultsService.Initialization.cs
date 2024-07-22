@@ -25,19 +25,23 @@ namespace H.Core.Services.LandManagement
 
             var defaults = farm.Defaults;
 
-            this.AssignNitrogenFixation(viewItem);
-            this.AssignCarbonConcentration(viewItem, defaults);
-            this.AssignIrrigation(farm, viewItem);
-            this.AssignDefaultBiomassCoefficients(viewItem, farm);
-            this.AssignDefaultNitrogenContentValues(viewItem, farm);
+            _initializationService.InitializeNitrogenFixation(viewItem);
+            _initializationService.InitializeCarbonConcentration(viewItem, defaults);
+            _initializationService.InitializeIrrigationWaterApplication(farm, viewItem);
+            _initializationService.InitializeBiomassCoefficients(viewItem, farm);
+            _initializationService.InitializeNitrogenContent(viewItem, farm);
+
             this.AssignSoilProperties(viewItem, farm);
 
             _initializationService.InitializePercentageReturns(farm, viewItem);
+            _initializationService.InitializeMoistureContent(viewItem, farm);
 
-            this.AssignDefaultMoistureContent(viewItem, farm);
             this.AssignDefaultTillageTypeForSelectedProvince(viewItem, farm);
-            this.AssignYield(viewItem, farm);
-            this.AssignDefaultEnergyRequirements(viewItem, farm);
+
+            _initializationService.InitializeYield(viewItem, farm);
+            _initializationService.InitializeHerbicideEnergy(farm, viewItem);
+            _initializationService.InitializeFuelEnergy(farm, viewItem);
+
             this.AssignFallowDefaultsIfApplicable(viewItem, farm);
             this.AssignPerennialDefaultsIfApplicable(viewItem, farm);
             this.AssignHarvestMethod(viewItem, farm);
@@ -59,34 +63,6 @@ namespace H.Core.Services.LandManagement
 
             viewItem.IsInitialized = true;
             viewItem.CropEconomicData.IsInitialized = true;
-        }
-
-        public void AssignYield(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsSilageCropWithoutDefaults())
-            {
-                AssignDefaultSilageCropYield(viewItem, farm);
-            }
-            else
-            {
-                this.AssignDefaultYield(viewItem, farm);
-            }
-        }
-
-        public void AssignIrrigation(Farm farm, CropViewItem viewItem)
-        {
-            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
-            viewItem.GrowingSeasonIrrigation = _irrigationService.GetGrowingSeasonIrrigation(farm, viewItem);
-        }
-
-        public void AssignCarbonConcentration(CropViewItem viewItem, Defaults defaults)
-        {
-            viewItem.CarbonConcentration = defaults.CarbonConcentration;
-        }
-
-        public void AssignNitrogenFixation(CropViewItem viewItem)
-        {
-            viewItem.NitrogenFixationPercentage = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
         }
 
         public void AssignHarvestMethod(CropViewItem viewItem, Farm farm)
@@ -158,119 +134,6 @@ namespace H.Core.Services.LandManagement
             mapper.Map(cropDefaults, viewItem);
         }
 
-        public void AssignDefaultEnergyRequirements(CropViewItem viewItem, Farm farm)
-        {
-            var soilData = farm.GetPreferredSoilData(viewItem);
-
-            var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
-                province: soilData.Province,
-                soilCategory: soilData.SoilFunctionalCategory,
-                tillageType: viewItem.TillageType,
-                cropType: viewItem.CropType);
-
-            var herbicideEnergyEstimates = _herbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance(
-                provinceName: soilData.Province,
-                soilCategory: soilData.SoilFunctionalCategory,
-                tillageType: viewItem.TillageType,
-                cropType: viewItem.CropType);
-
-            if (fuelEnergyEstimates != null)
-            {
-                viewItem.FuelEnergy = fuelEnergyEstimates.FuelEstimate;
-            }
-
-            if (herbicideEnergyEstimates != null)
-            {
-                viewItem.HerbicideEnergy = herbicideEnergyEstimates.HerbicideEstimate;
-            }
-        }
-
-        public void AssignDefaultMoistureContent(CropViewItem cropViewItem, Farm farm)
-        {
-            var residueData = this.GetResidueData(cropViewItem, farm);
-
-            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure ||
-                cropViewItem.HarvestMethod == HarvestMethods.Silage ||
-                cropViewItem.HarvestMethod == HarvestMethods.Swathing ||
-                cropViewItem.CropType.IsSilageCrop())
-            {
-                cropViewItem.MoistureContentOfCropPercentage = 65;
-            }
-            else
-            {
-                if (residueData != null)
-                {
-                    cropViewItem.MoistureContentOfCropPercentage = residueData.MoistureContentOfProduct;
-                }
-                else
-                {
-                    cropViewItem.MoistureContentOfCropPercentage = 12;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Assigns a default yield to the view item using default yield provider.
-        /// </summary>
-        public void AssignDefaultYield(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var province = farm.Province;
-
-            // No small area data exists for years > 2018, take average of last 10 years as placeholder values when considering these years
-            const int NoDataYear = 2018;
-            const int NumberOfYearsInAverage = 10;
-            if (viewItem.Year > NoDataYear)
-            {
-                var startYear = NoDataYear - NumberOfYearsInAverage;
-                var yields = new List<double>();
-                for (int year = startYear; year <= NoDataYear; year++)
-                {
-                    var smallAreaYieldData = _smallAreaYieldProvider.GetData(
-                        year: year,
-                        polygon: farm.PolygonId,
-                        cropType: viewItem.CropType,
-                        province: province);
-
-                    if (smallAreaYieldData != null)
-                    {
-                        yields.Add(smallAreaYieldData.Yield);
-                    }
-                }
-
-                if (yields.Any())
-                {
-                    viewItem.Yield = Math.Round(yields.Average(), 1);
-                    viewItem.DefaultYield = viewItem.Yield;
-                }
-                else
-                {
-                    Trace.TraceWarning($"No default yield data found for {viewItem.CropType.GetDescription()}");
-                }
-
-                viewItem.CalculateDryYield();
-
-                return;
-            }
-
-            var smallAreaYield = _smallAreaYieldProvider.GetData(
-                year: viewItem.Year,
-                polygon: farm.PolygonId,
-                cropType: viewItem.CropType,
-                province: province);
-
-            if (smallAreaYield != null)
-            {
-                viewItem.Yield = smallAreaYield.Yield;
-                viewItem.CalculateDryYield();
-            }
-            else
-            {
-                Trace.TraceWarning($"No default yield data found for {viewItem.CropType.GetDescription()} in {viewItem.Year}");
-            }
-        }
-
         public void AssignDefaultBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var data = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
@@ -324,171 +187,6 @@ namespace H.Core.Services.LandManagement
 
             cropViewItem.LumCMax = lumCMax;
             cropViewItem.KValue = kValue;
-        }
-
-        public void AssignYieldToAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
-            FieldSystemComponent fieldSystemComponent)
-        {
-            foreach (var viewItem in cropViewItems)
-            {
-                this.AssignYieldToYear(farm, viewItem, fieldSystemComponent);
-            }
-        }
-
-        /// <summary>
-        /// Assigns a yield to one view item for a field
-        /// </summary>
-        public void AssignYieldToYear(
-            Farm farm,
-            CropViewItem viewItem, 
-            FieldSystemComponent fieldSystemComponent)
-        {
-            var yieldAssignmentMethod = farm.UseFieldLevelYieldAssignement ? fieldSystemComponent.YieldAssignmentMethod : farm.YieldAssignmentMethod;
-            if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
-            {
-                Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: bad crop type or bad year for view item '{viewItem}'");
-
-                viewItem.Yield = 0;
-            }
-
-            /*
-             * The user will enter (or has entered) yields for each year manually, do not overwrite the value
-             */
-
-            if (yieldAssignmentMethod == YieldAssignmentMethod.Custom)
-            {
-                return;
-            }
-
-            /*
-             * Use an average of the crops
-             */
-
-            if (yieldAssignmentMethod == YieldAssignmentMethod.Average)
-            {
-                // Create an average from the crops that define the rotation
-                var average = fieldSystemComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
-
-                viewItem.Yield = average;
-
-                return;
-            }
-
-            if (yieldAssignmentMethod == YieldAssignmentMethod.SmallAreaData || 
-                yieldAssignmentMethod == YieldAssignmentMethod.CARValue)
-            {
-                // If the cropviewitem is of a silage crop, we assign defaults using a different method.
-                if (viewItem.CropType.IsSilageCropWithoutDefaults())
-                {
-                    this.AssignDefaultSilageCropYield(viewItem, farm);
-                }
-                else
-                {
-                    this.AssignDefaultYield(viewItem, farm);
-                }
-
-                return;
-            }
-
-            /*
-             * Use values from a custom yield file whose path has been specified by the user
-             */
-
-            if (yieldAssignmentMethod == YieldAssignmentMethod.InputFile)
-            {
-                var results = new List<CustomUserYieldData>();
-
-                foreach (var customYieldItem in farm.GeographicData.CustomYieldData)
-                {
-                    var yearMatch = customYieldItem.Year == viewItem.Year;
-                    var fieldNameMatch = fieldSystemComponent.Name.IndexOf(customYieldItem.FieldName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0;
-                    var farmNameMatch = farm.Name.IndexOf(customYieldItem.RotationName.Trim(), StringComparison.InvariantCultureIgnoreCase) >= 0;
-
-
-                    // Don't assign main year yields to a cover crop yield (for now)
-                    if (yearMatch && fieldNameMatch && farmNameMatch && viewItem.IsSecondaryCrop == false)
-                    {
-                        results.Add(customYieldItem);
-                    }
-                }
-
-                CustomUserYieldData yieldDataRow = null;
-                if (results.Count > 1)
-                {
-                    yieldDataRow = results.FirstOrDefault(x => x.FieldName.Trim().Equals(fieldSystemComponent.Name.Trim(), StringComparison.InvariantCultureIgnoreCase));
-                }
-                else if (results.Count == 1)
-                {
-                    yieldDataRow = results.Single();
-                }
-
-                if (yieldDataRow != null)
-                {
-                    viewItem.Yield = yieldDataRow.Yield;
-                }
-                else
-                {
-                    Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no custom yield data for {viewItem.Year} and {fieldSystemComponent.Name} was found in custom yield file. Attempting to assign a default yield for this year from the default yield provider.");
-
-                    // With the Tier 2 model, we need to have yields for the run-in years. If the user loads a custom yield file, they might not have yields for this period. In this case,
-                    // we check if we can get yields for these years by checking the small area data table.
-                    this.AssignDefaultYield(
-                        viewItem: viewItem,
-                        farm: farm); ;
-
-                    if (viewItem.Yield == 0)
-                    {
-                        Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(AssignYieldToYear)}: no yield data for {viewItem.Year} and {fieldSystemComponent.Name} was found.");
-                    }                    
-                }
-
-                return;
-            }
-
-            throw new Exception("Yield assignment method not accounted for");
-        }
-
-        public void AssignDefaultBiomassCoefficients(CropViewItem viewItem, Farm farm)
-        {
-            var residueData = this.GetResidueData(viewItem, farm);
-            if (residueData != null)
-            {
-                viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
-                viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
-                viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-
-                if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure || viewItem.HarvestMethod == HarvestMethods.Silage)
-                {
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
-                    viewItem.BiomassCoefficientStraw = 0;
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
-            }
-        }
-
-        public void AssignDefaultNitrogenContentValues(CropViewItem viewItem, Farm farm)
-        {
-            // Assign N content values used for the ICBM methodology
-            var residueData = this.GetResidueData(viewItem, farm);
-            if (residueData != null)
-            {
-                // Table has values in grams but unit of display is kg
-                viewItem.NitrogenContentInProduct = residueData.NitrogenContentProduct / 1000;
-                viewItem.NitrogenContentInStraw = residueData.NitrogenContentStraw / 1000;
-                viewItem.NitrogenContentInRoots = residueData.NitrogenContentRoot / 1000;
-                viewItem.NitrogenContentInExtraroot = residueData.NitrogenContentExtraroot / 1000;
-
-                if (viewItem.CropType.IsPerennial())
-                {
-                    viewItem.NitrogenContentInStraw = 0;
-                }
-            }
-
-            // Assign N content values used for IPCC Tier 2
-            var cropData = _slopeProviderTable.GetDataByCropType(viewItem.CropType);
-            viewItem.NitrogenContent = cropData.NitrogenContentResidues;
         }
 
         public void AssignSoilProperties(CropViewItem viewItem, Farm farm)
@@ -595,64 +293,6 @@ namespace H.Core.Services.LandManagement
             {
                 cropViewItem.LigninContent = 0.0;
             }
-        }
-
-        /// <summary>
-        /// Calculates the yield of silage crop using information from the grain crop equivalent to that silage crop e.g. if silage crop is Barley Silage, its grain equivalent will be
-        /// Barley. We check in the <see cref="AssignSystemDefaults"/> method if the crop is a silage crop without
-        /// default data, if yes, this method is called to calculate the yield of that crop.
-        /// </summary>
-        /// <param name="silageCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> representing the silage crop. </param>
-        /// <param name="farm">The current farm of the user.</param>
-        public void AssignDefaultSilageCropYield(CropViewItem silageCropViewItem, Farm farm)
-        {
-            // Find the grain crop equivalent of the silage crop.
-            var grainCrop = silageCropViewItem.CropType.GetGrainCropEquivalentOfSilageCrop();
-
-            // Create a new CropViewItem that will represent this grain crop. It gets assigned the same year as the silage crop.
-            var grainCropViewItem = new CropViewItem
-            {
-                Year = silageCropViewItem.Year,
-                CropType = grainCrop,
-            };
-            // We call AssignSystemDefaults with the CropViewItem representing the grain crop to get its default values.
-            var globalSettings = new GlobalSettings();
-            AssignSystemDefaults(grainCropViewItem, farm, globalSettings);
-
-            // We specifically find the PlantCarbonInAgriculturalProduct of the grain crop as that is needed in the yield calculation.
-            grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmSoilCarbonCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem:null, currentYearViewItem:grainCropViewItem, farm:farm);
-
-            // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem);
-            silageCropViewItem.CalculateWetWeightYield();
-
-            // No defaults for any grass silages so we use SAD data
-            if (silageCropViewItem.CropType == CropType.GrassSilage)
-            {
-                this.AssignDefaultYield(silageCropViewItem, farm);
-                silageCropViewItem.CalculateWetWeightYield();
-            }
-        }
-
-        /// <summary>
-        /// Equation 2.1.2-13
-        /// 
-        /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
-        /// </summary>
-        /// <param name="grainCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for the grain crop.</param>
-        /// <returns>The estimated yield (dry matter) for a silage crop</returns>
-        public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
-        {
-            if (grainCropViewItem.BiomassCoefficientProduct == 0)
-            {
-                return 0;
-            }
-
-            var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
-            var term2 = term1 * (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil/100.0));
-            var result = term2 * (1 - grainCropViewItem.MoistureContentOfCrop);
-
-            return result;
         }
     }
 }

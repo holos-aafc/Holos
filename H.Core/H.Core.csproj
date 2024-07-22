@@ -70,8 +70,14 @@
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.Nitrogen.cs" />
+    <Compile Include="Calculators\Carbon\CarbonInputCalculatorBase.cs" />
+    <Compile Include="Calculators\Carbon\ICarbonInputCalculator.cs" />
+    <Compile Include="Calculators\Carbon\ICBMCarbonInputCalculator.cs" />
+    <Compile Include="Calculators\Carbon\IICBMCarbonInputCalculator.cs" />
     <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculator.cs" />
     <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculator.Nitrogen.cs" />
+    <Compile Include="Calculators\Carbon\IIPCCTier2CarbonInputCalculator.cs" />
+    <Compile Include="Calculators\Carbon\IPCCTier2CarbonInputCalculator.cs" />
     <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculator.cs" />
     <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculator.Nitrogen.cs" />
     <Compile Include="Calculators\Climate\ClimateNormalCalculator.cs" />
@@ -633,8 +639,9 @@
     <Compile Include="Services\FarmResultsService.cs" />
     <Compile Include="Services\FieldComponentHelper.cs" />
     <Compile Include="Services\IAnaerobicDigestionComponentHelper.cs" />
-    <Compile Include="Services\IInitializationService.cs" />
-    <Compile Include="Services\InitializationService.cs" />
+    <Compile Include="Services\Initialization\IInitializationService.cs" />
+    <Compile Include="Services\Initialization\InitializationService.cs" />
+    <Compile Include="Services\Initialization\InitializationService.Yield.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.DetailViewItems.cs" />
     <Compile Include="Converters\IPropertyConverter.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Nitrogen.cs" />
@@ -744,5 +751,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

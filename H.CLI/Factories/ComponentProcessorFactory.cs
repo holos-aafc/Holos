@@ -11,6 +11,7 @@ using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Services;
+using H.Core.Services.Initialization;
 
 namespace H.CLI.Factories
 {

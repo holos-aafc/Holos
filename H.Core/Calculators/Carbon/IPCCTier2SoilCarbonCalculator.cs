@@ -30,6 +30,7 @@ namespace H.Core.Calculators.Carbon
 
         #region Fields
 
+        private IIPCCTier2CarbonInputCalculator _inputCalculator;
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
         private readonly Table_8_Globally_Calibrated_Model_Parameters_Provider _globallyCalibratedModelParametersProvider = new Table_8_Globally_Calibrated_Model_Parameters_Provider();
 
@@ -58,6 +59,8 @@ namespace H.Core.Calculators.Carbon
             {
                 throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
             }
+
+            _inputCalculator = new IPCCTier2CarbonInputCalculator();
         }
 
         #endregion
@@ -225,7 +228,7 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-3 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.AboveGroundCarbonInput = (finalAboveGroundResidue * AboveGroundCarbonContent) / viewItem.Area;
 
-            var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
+            var supplementalFeedingAmount = _inputCalculator.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
                 previousYearViewItem: null,
                 currentYearViewItem: viewItem,
                 nextYearViewItems: null,

@@ -473,63 +473,6 @@ namespace H.Core.Test.Services
 
         #endregion
 
-        #region AssignYieldToDetailViewItems Tests
-
-        [TestMethod]
-        public void AssignYieldToDetailViewItems()
-        {
-            var farm = new Farm()
-            {
-                YieldAssignmentMethod = YieldAssignmentMethod.Average,
-            };
-
-            var fieldSystemComponent = new FieldSystemComponent();
-            fieldSystemComponent.CropViewItems = new ObservableCollection<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley,
-                    Yield = 100,
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Wheat,
-                    Yield = 200,
-                }
-            };
-
-            farm.Components.Add(fieldSystemComponent);
-
-            var stageState = new FieldSystemDetailsStageState();
-            stageState.DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    Year = 1985,
-                    CropType = CropType.Barley,
-                },
-
-                new CropViewItem()
-                {
-                    Year = 1986,
-                    CropType = CropType.Wheat,
-                },
-            };
-
-            farm.StageStates.Add(stageState);
-
-            var detailsScreenViewItem = new CropViewItem();
-            detailsScreenViewItem.CropType = CropType.Barley;
-            detailsScreenViewItem.Year = 1985;
-            detailsScreenViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
-
-            _resultsService.AssignYieldToYear(farm, detailsScreenViewItem, fieldSystemComponent);
-
-            Assert.AreEqual(150, detailsScreenViewItem.Yield);
-        }
-
-        #endregion
-
         #region CalculateCarbonDioxideEmissionsFromCroppingFuelUse Tests
 
         /// <summary>

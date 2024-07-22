@@ -19,6 +19,8 @@ using H.Core.Models.Animals.OtherAnimals;
 using H.Core.Models.Animals.Sheep;
 using H.Core.Models.Animals.Swine;
 using H.Core.Providers.Climate;
+using H.Core.Providers.Carbon;
+using H.Core.Services.Initialization;
 
 namespace H.Core.Test.Services
 {
@@ -886,10 +888,12 @@ namespace H.Core.Test.Services
         public void InitializeIrrigationWaterApplicationSingleArgument()
         {
             _farm1.DefaultSoilData.Province = Province.Ontario;
+
             var cropViewItem = new CropViewItem()
             {
                 Year = 2022
             };
+            
             var climateData = new ClimateData();
             climateData.PrecipitationData.April = 1;
             climateData.PrecipitationData.May = 1;
@@ -915,6 +919,21 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void InitializeIrrigationWaterApplicationLessTranspiration()
+        {
+            _farm1.DefaultSoilData.Province = Province.Ontario;
+            var cropViewItem = new CropViewItem()
+            {
+                Year = 2022
+            };
+            var climateData = new ClimateData();
+            climateData.PrecipitationData.April = 1;
+            _farm1.ClimateData = climateData;
+            _initializationService.InitializeIrrigationWaterApplication(_farm1, cropViewItem);
+
+            Assert.AreEqual(expected: 0, actual: cropViewItem.AmountOfIrrigation);
+        }
+        [TestMethod]
         public void InitializeIrrigationWaterApplicationTwoArgumentsNullCropViewItem()
         {
             _farm1.Province = Province.Alberta;
@@ -929,13 +948,66 @@ namespace H.Core.Test.Services
             }
         }
 
+        [TestMethod]
+        public void InitializeIrrigationWaterApplicationNullFarm()
+        {
+            var cropViewItem = new CropViewItem()
+            {
+                Year = 2022
+            };
+            var farm = new Farm(); try
+            {
+                _initializationService.InitializeIrrigationWaterApplication(_farm1, cropViewItem);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
     
+        [TestMethod]
         public void InitializeOtherLivestockCh4EmissionFactorNullArguments()
         {
             Farm farm = new Farm();
             try
             {
                 _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);// passing farm with null dairyComponent
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void InitializeDefaultMoistureContent()
+        {
+            var stageState = new FieldSystemDetailsStageState()
+            {
+                DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
+                {
+                    new CropViewItem() { HarvestMethod = HarvestMethods.Silage},
+                    new CropViewItem() { HarvestMethod = HarvestMethods.GreenManure},
+                    new CropViewItem() { HarvestMethod = HarvestMethods.Swathing},
+                    new CropViewItem() { CropType = CropType.SilageCorn},
+                }
+            };
+            Farm farm = new Farm();
+            farm.StageStates.Add(stageState);
+            _initializationService.InitializeMoistureContent(farm);
+            foreach (var item in farm.StageStates.OfType<FieldSystemDetailsStageState>().First().DetailsScreenViewCropViewItems)
+            {
+                Assert.AreEqual(65, item.MoistureContentOfCropPercentage);
+            }
+        }
+
+        [TestMethod]
+        public void InitializeDefaultMoistureContentNullArguments()
+        {
+            Farm farm = new Farm();
+            try
+            {
+                _initializationService.InitializeMoistureContent(farm);// passing farm with null dairyComponent
             }
             catch (Exception ex)
             {
@@ -1025,6 +1097,171 @@ namespace H.Core.Test.Services
             Assert.AreEqual(100, viewItem.PercentageOfRootsReturnedToSoil);
         }
 
+        [TestMethod]
+        public void InitializeCarbonConcentrationSingleArgument()
+        {
+            var cropViewItem = new CropViewItem();
+            cropViewItem.CarbonConcentration = 0;
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+            cropViewItemCollection.Add(cropViewItem);
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+
+            _initializationService.InitializeCarbonConcentration(_farm1);
+
+            Assert.AreEqual(expected: 0.45, actual: cropViewItem.CarbonConcentration);
+        }
+
+        [TestMethod]
+        public void InitializeCarbonConcentrationTwoArgument()
+        {
+            var cropViewItem = new CropViewItem();
+            var defaults = new Defaults();
+            cropViewItem.CarbonConcentration = 0;
+
+            _initializationService.InitializeCarbonConcentration(cropViewItem, defaults);
+
+            Assert.AreEqual(expected: 0.45, actual: cropViewItem.CarbonConcentration); 
+        }
+
+        [TestMethod]
+        public void InitializeNitrogenFixationNonLegumousCrop()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.NitrogenFixationPercentage = 15;
+            _initializationService.InitializeNitrogenFixation(viewItem);
+            Assert.AreEqual(expected: 0, actual: viewItem.NitrogenFixationPercentage);
+        }
+
+        [TestMethod]
+        public void InitializeNitrogenFixationLegumousCrop()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.PulseCrops;
+            _initializationService.InitializeNitrogenFixation(viewItem);
+            Assert.AreEqual(expected: 70, actual: viewItem.NitrogenFixationPercentage);
+        }
+
+        [TestMethod]
+        public void InitializeNitrogenFixationFarmArgumentTwoCropViewItems()
+        {
+            var cropViewItemOne = new CropViewItem();
+            var cropViewItemTwo = new CropViewItem();
+            cropViewItemOne.CropType = CropType.AlfalfaMedicagoSativaL;
+            cropViewItemTwo.CropType = CropType.PulseCrops;
+            var cropViewItemCollection = new ObservableCollection<CropViewItem>();
+            var fieldSystemDetailsStageState = new FieldSystemDetailsStageState();
+            cropViewItemCollection.Add(cropViewItemOne);
+            cropViewItemCollection.Add(cropViewItemTwo);
+            fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
+            _farm1.StageStates.Add(fieldSystemDetailsStageState);
+            _initializationService.InitializeNitrogenFixation(_farm1);
+            Assert.AreEqual(expected: 0, actual: cropViewItemOne.NitrogenFixationPercentage);
+            Assert.AreEqual(expected: 70, actual: cropViewItemTwo.NitrogenFixationPercentage);
+        }
+
+        [TestMethod]
+        public void InitializeNitrogenFixationNullFarm()
+        {
+            var farm = new Farm();
+            try
+            {
+                _initializationService.InitializeNitrogenFixation(farm);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+
+        }
+
+
+        [TestMethod]
+        public void InitializeDefaultMoistureContentWithNullResidueData()
+        {
+            var cropViewItem = new CropViewItem()
+            {
+                MoistureContentOfCropPercentage = 0,
+            };
+            _initializationService.InitializeMoistureContent(null, cropViewItem);
+            Assert.AreEqual(12, cropViewItem.MoistureContentOfCropPercentage);
+        }
+        [TestMethod]
+        public void InitializeDefaultMoistureContentWithEmptyResidueData()
+        {
+            var cropViewItem = new CropViewItem()
+            {
+                MoistureContentOfCropPercentage = 0,
+            };
+            _initializationService.InitializeMoistureContent(new Table_7_Relative_Biomass_Information_Data(), cropViewItem);
+            Assert.AreEqual(12, cropViewItem.MoistureContentOfCropPercentage);
+        }
+        [TestMethod]
+        public void InitializeDefaultMoistureContentWithResidueData()
+        {
+            Table_7_Relative_Biomass_Information_Data residueData = new Table_7_Relative_Biomass_Information_Data();
+            residueData.MoistureContentOfProduct = 40;
+            var cropViewItem = new CropViewItem()
+            {
+                MoistureContentOfCropPercentage = 0,
+            };
+            _initializationService.InitializeMoistureContent(residueData, cropViewItem);
+            Assert.AreEqual(40, cropViewItem.MoistureContentOfCropPercentage);
+        }
+
+        [TestMethod]
+        public void AssignYieldToDetailViewItems()
+        {
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Average,
+            };
+
+            var fieldSystemComponent = new FieldSystemComponent();
+            fieldSystemComponent.CropViewItems = new ObservableCollection<CropViewItem>()
+            {
+                new CropViewItem()
+                {
+                    CropType = CropType.Barley,
+                    Yield = 100,
+                },
+                new CropViewItem()
+                {
+                    CropType = CropType.Wheat,
+                    Yield = 200,
+                }
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            var stageState = new FieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
+            {
+                new CropViewItem()
+                {
+                    Year = 1985,
+                    CropType = CropType.Barley,
+                },
+
+                new CropViewItem()
+                {
+                    Year = 1986,
+                    CropType = CropType.Wheat,
+                },
+            };
+
+            farm.StageStates.Add(stageState);
+
+            var detailsScreenViewItem = new CropViewItem();
+            detailsScreenViewItem.CropType = CropType.Barley;
+            detailsScreenViewItem.Year = 1985;
+            detailsScreenViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
+
+            _initializationService.InitializeYieldForYear(farm, detailsScreenViewItem, fieldSystemComponent);
+
+            Assert.AreEqual(150, detailsScreenViewItem.Yield);
+        }
         #endregion
     }
 }
