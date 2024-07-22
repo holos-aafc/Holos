@@ -959,6 +959,18 @@ namespace H.Core.Services.Initialization
             }
         }
 
+        public void InitializeHarvestMethod(CropViewItem viewItem, Farm farm)
+        {
+            if (viewItem.CropType.IsSilageCrop())
+            {
+                viewItem.HarvestMethod = HarvestMethods.Silage;
+            }
+            else
+            {
+                viewItem.HarvestMethod = HarvestMethods.CashCrop;
+            }
+        }
+
         #endregion
     }
 }

@@ -1310,6 +1310,27 @@ namespace H.Core.Test.Services
             Assert.AreEqual(TillageType.Reduced, viewItem.TillageType);
         }
 
+        [TestMethod]
+        public void InitializeHarvestMethodSetsCashCrop()
+        {
+            var viewItem = new CropViewItem();
+
+            _initializationService.InitializeHarvestMethod(viewItem, new Farm());
+
+            Assert.AreEqual(HarvestMethods.CashCrop, viewItem.HarvestMethod);
+        }
+
+        [TestMethod]
+        public void InitializeHarvestMethodSetsSilage()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.SilageCorn;
+
+            _initializationService.InitializeHarvestMethod(viewItem, new Farm());
+
+            Assert.AreEqual(HarvestMethods.Silage, viewItem.HarvestMethod);
+        }
+
         #endregion
     }
 }

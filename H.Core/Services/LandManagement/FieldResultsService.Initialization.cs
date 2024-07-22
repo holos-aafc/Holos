@@ -39,8 +39,8 @@ namespace H.Core.Services.LandManagement
             _initializationService.InitializeYield(viewItem, farm);
             _initializationService.InitializeHerbicideEnergy(farm, viewItem);
             _initializationService.InitializeFuelEnergy(farm, viewItem);
-
-            this.AssignFallowDefaultsIfApplicable(viewItem, farm);
+            _initializationService.InitializeFallow(viewItem, farm);
+            
             this.AssignPerennialDefaultsIfApplicable(viewItem, farm);
             this.AssignHarvestMethod(viewItem, farm);
             this.AssignDefaultLigninContent(viewItem, farm);
@@ -84,20 +84,6 @@ namespace H.Core.Services.LandManagement
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
                 viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
-            }
-        }
-
-        public void AssignFallowDefaultsIfApplicable(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsFallow())
-            {
-                viewItem.Yield = 0;
-                viewItem.TillageType = farm.Defaults.DefaultTillageTypeForFallow;
-                viewItem.PastTillageType = TillageType.NoTill;
-                viewItem.HarvestMethod = HarvestMethods.None;
-                viewItem.PercentageOfProductYieldReturnedToSoil = 0;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = 0;
             }
         }
 

@@ -40,7 +40,6 @@ namespace H.Core.Services.LandManagement
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);
         void AssignPerennialDefaultsIfApplicable(CropViewItem viewItem, Farm farm);
-        void AssignFallowDefaultsIfApplicable(CropViewItem viewItem, Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);
         void AssignDefaultBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
