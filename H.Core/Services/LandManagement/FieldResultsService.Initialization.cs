@@ -35,9 +35,7 @@ namespace H.Core.Services.LandManagement
 
             _initializationService.InitializePercentageReturns(farm, viewItem);
             _initializationService.InitializeMoistureContent(viewItem, farm);
-
-            this.AssignDefaultTillageTypeForSelectedProvince(viewItem, farm);
-
+            _initializationService.InitializeTillageType(viewItem, farm);
             _initializationService.InitializeYield(viewItem, farm);
             _initializationService.InitializeHerbicideEnergy(farm, viewItem);
             _initializationService.InitializeFuelEnergy(farm, viewItem);
@@ -250,35 +248,6 @@ namespace H.Core.Services.LandManagement
             _economicsHelper.ConvertValuesToMetricIfNecessary(cropViewItem.CropEconomicData, farm);
 
             cropViewItem.CropEconomicData.IsInitialized = true;
-        }
-
-        /// <summary>
-        /// Sets the tillage type (current & past) for a view item based on the province.
-        /// </summary>
-        public void AssignDefaultTillageTypeForSelectedProvince(
-            CropViewItem viewItem, 
-            Farm farm)
-        {
-            var soilData = farm.GetPreferredSoilData(viewItem);
-
-            var province = soilData.Province;
-            var residueData = this.GetResidueData(viewItem, farm);
-            if (residueData != null)
-            {
-                if (residueData.TillageTypeTable.ContainsKey(province))
-                {
-                    var tillageTypeForProvince = residueData.TillageTypeTable[province];
-
-                    viewItem.TillageType = tillageTypeForProvince;
-                    viewItem.PastTillageType = tillageTypeForProvince;
-                }
-            }
-
-            if (viewItem.CropType.IsPerennial())
-            {
-                viewItem.TillageType = TillageType.NoTill;
-                viewItem.PastTillageType = TillageType.NoTill;
-            }
         }
 
         public void AssignDefaultLigninContent(CropViewItem cropViewItem, Farm farm)

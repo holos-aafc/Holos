@@ -67,6 +67,13 @@ namespace H.Core.Services.Initialization
         void InitializeMoistureContent(CropViewItem viewItem, Farm farm);
         void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm);
         void InitializeNitrogenContent(CropViewItem viewItem, Farm farm);
+
+        /// <summary>
+        /// Sets the tillage type for a view item based on the province.
+        /// </summary>
+        void InitializeTillageType(
+            CropViewItem viewItem,
+            Farm farm);
     }
 }
     

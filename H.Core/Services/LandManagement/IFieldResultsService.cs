@@ -34,7 +34,6 @@ namespace H.Core.Services.LandManagement
         void AssignDefaultLumCMaxValues(CropViewItem cropViewItem, Farm farm);
         void AssignDefaultNitrogenFertilizerRate(CropViewItem viewItem, Farm farm,
                                                  FertilizerApplicationViewItem fertilizerApplicationViewItem);
-        void AssignDefaultTillageTypeForSelectedProvince(CropViewItem viewItem, Farm farm);
         void AssignDefaultPhosphorusFertilizerRate(CropViewItem viewItem, Farm farm);
         Table_7_Relative_Biomass_Information_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);

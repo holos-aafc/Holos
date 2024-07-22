@@ -1197,6 +1197,7 @@ namespace H.Core.Test.Services
             _initializationService.InitializeMoistureContent(new Table_7_Relative_Biomass_Information_Data(), cropViewItem);
             Assert.AreEqual(12, cropViewItem.MoistureContentOfCropPercentage);
         }
+
         [TestMethod]
         public void InitializeDefaultMoistureContentWithResidueData()
         {
@@ -1262,6 +1263,29 @@ namespace H.Core.Test.Services
 
             Assert.AreEqual(150, detailsScreenViewItem.Yield);
         }
+
+        [TestMethod]
+        public void InitializeTillageTypeForProvinceWithPerennialSelected()
+        {
+            var viewItem = new CropViewItem() { CropType = CropType.TameGrass };
+
+            _initializationService.InitializeTillageType(viewItem, _farm1);
+
+            Assert.AreEqual(TillageType.NoTill, viewItem.TillageType);
+        }
+
+        [TestMethod]
+        public void InitializeTillageTypeForProvinceWithAnnualSelected()
+        {
+            _farm1.DefaultSoilData.Province = Province.BritishColumbia;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.Black;
+            var viewItem = new CropViewItem() { CropType = CropType.Barley };
+
+            _initializationService.InitializeTillageType(viewItem, _farm1);
+
+            Assert.AreEqual(TillageType.Reduced, viewItem.TillageType);
+        }
+
         #endregion
     }
 }
