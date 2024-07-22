@@ -40,9 +40,9 @@ namespace H.Core.Services.LandManagement
             _initializationService.InitializeHerbicideEnergy(farm, viewItem);
             _initializationService.InitializeFuelEnergy(farm, viewItem);
             _initializationService.InitializeFallow(viewItem, farm);
-            
-            this.AssignPerennialDefaultsIfApplicable(viewItem, farm);
-            this.AssignHarvestMethod(viewItem, farm);
+            _initializationService.InitializePerennialDefaults(viewItem, farm);
+            _initializationService.InitializeHarvestMethod(viewItem, farm);
+
             this.AssignDefaultLigninContent(viewItem, farm);
 
             if (viewItem.CropType == CropType.RangelandNative)
@@ -61,30 +61,6 @@ namespace H.Core.Services.LandManagement
 
             viewItem.IsInitialized = true;
             viewItem.CropEconomicData.IsInitialized = true;
-        }
-
-        public void AssignHarvestMethod(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsSilageCrop())
-            {
-                viewItem.HarvestMethod = HarvestMethods.Silage;
-            }
-            else
-            {
-                viewItem.HarvestMethod = HarvestMethods.CashCrop;
-            }
-        }
-
-        public void AssignPerennialDefaultsIfApplicable(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsPerennial())
-            {
-                viewItem.TillageType = TillageType.NoTill;
-                viewItem.PastTillageType = TillageType.NoTill;
-                viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
-                viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
-            }
         }
 
         public void AssignUserDefaults(CropViewItem viewItem, GlobalSettings globalSettings)

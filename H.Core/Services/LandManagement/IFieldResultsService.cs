@@ -39,7 +39,6 @@ namespace H.Core.Services.LandManagement
         void AssignSystemDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);
-        void AssignPerennialDefaultsIfApplicable(CropViewItem viewItem, Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);
         void AssignDefaultBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
@@ -51,8 +50,6 @@ namespace H.Core.Services.LandManagement
             Farm farm, 
             CropViewItem viewItem, 
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
-
-        void AssignHarvestMethod(CropViewItem viewItem, Farm farm);
 
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
     }

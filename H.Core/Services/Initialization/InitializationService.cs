@@ -51,6 +51,7 @@ namespace H.Core.Services.Initialization
         private readonly NitogenFixationProvider _nitrogenFixationProvider;
         private readonly IrrigationService _irrigationService;
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable;
+        private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
 
         #endregion
 
@@ -82,7 +83,8 @@ namespace H.Core.Services.Initialization
             _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
             _irrigationService = new IrrigationService();
             _smallAreaYieldProvider = new SmallAreaYieldProvider();
-            _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
+            _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider(); 
+            _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
         }
         
         #endregion
@@ -968,6 +970,18 @@ namespace H.Core.Services.Initialization
             else
             {
                 viewItem.HarvestMethod = HarvestMethods.CashCrop;
+            }
+        }
+
+        public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
+        {
+            if (viewItem.CropType.IsPerennial())
+            {
+                viewItem.TillageType = TillageType.NoTill;
+                viewItem.PastTillageType = TillageType.NoTill;
+                viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
+                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
+                viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
             }
         }
 

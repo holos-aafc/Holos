@@ -77,6 +77,7 @@ namespace H.Core.Services.Initialization
 
         void InitializeFallow(CropViewItem viewItem, Farm farm);
         void InitializeHarvestMethod(CropViewItem viewItem, Farm farm);
+        void InitializePerennialDefaults(CropViewItem viewItem, Farm farm);
     }
 }
     
