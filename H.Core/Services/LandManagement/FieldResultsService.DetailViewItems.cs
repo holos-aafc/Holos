@@ -651,7 +651,7 @@ namespace H.Core.Services.LandManagement
                     currentYearViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
                 }
 
-                this.AssignSoilProperties(currentYearViewItem, farm);
+                _initializationService.InitializeSoilProperties(currentYearViewItem, farm);
             }
         }
 

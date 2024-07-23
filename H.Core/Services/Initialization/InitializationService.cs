@@ -982,7 +982,31 @@ namespace H.Core.Services.Initialization
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
                 viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
+                viewItem.IsNativeGrassland = viewItem.CropType == CropType.RangelandNative;
             }
+        }
+
+        public void InitializeLigninContent(CropViewItem cropViewItem, Farm farm)
+        {
+            var province = farm.DefaultSoilData.Province;
+            var soilFunctionCategory = farm.GetPreferredSoilData(cropViewItem).SoilFunctionalCategory;
+            var residueData = _relativeBiomassInformationProvider.GetResidueData(cropViewItem.IrrigationType, cropViewItem.AmountOfIrrigation, cropViewItem.CropType, soilFunctionCategory, province);
+
+            if (residueData != null)
+            {
+                cropViewItem.LigninContent = residueData.LigninContent;
+            }
+            else
+            {
+                cropViewItem.LigninContent = 0.0;
+            }
+        }
+
+        public void InitializeSoilProperties(CropViewItem viewItem, Farm farm)
+        {
+            var soilData = farm.GetPreferredSoilData(viewItem);
+
+            viewItem.Sand = soilData.ProportionOfSandInSoil;
         }
 
         #endregion

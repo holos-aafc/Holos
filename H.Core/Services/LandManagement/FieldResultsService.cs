@@ -55,7 +55,6 @@ namespace H.Core.Services.LandManagement
 
         private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
         private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();
-        private readonly FieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
 
         private readonly IMapper _detailViewItemMapper;
         private readonly IMapper _manureApplicationViewItemMapper;
@@ -66,12 +65,10 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _grazingViewItemMapper;
 
         private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
-        private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
         private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
         private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
-        private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
         private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();

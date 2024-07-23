@@ -1331,6 +1331,66 @@ namespace H.Core.Test.Services
             Assert.AreEqual(HarvestMethods.Silage, viewItem.HarvestMethod);
         }
 
+        [TestMethod]
+        public void InitializeLigninContentForSilage()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.SilageCorn;
+            _farm1.DefaultSoilData.Province = Province.BritishColumbia;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.Black;
+
+            _initializationService.InitializeLigninContent(viewItem, _farm1);
+
+            Assert.AreEqual(0.11, viewItem.LigninContent);
+        }
+
+        [TestMethod]
+        public void InitializeLigninContentForAnnual()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Barley;
+            _farm1.DefaultSoilData.Province = Province.BritishColumbia;
+            _farm1.DefaultSoilData.SoilFunctionalCategory = SoilFunctionalCategory.Black;
+
+            _initializationService.InitializeLigninContent(viewItem, _farm1);
+
+            Assert.AreEqual(0.046, viewItem.LigninContent);
+        }
+
+        [TestMethod]
+        public void InitializePerennialsForTameGrass()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.TameGrass;
+
+            _initializationService.InitializePerennialDefaults(viewItem, new Farm());
+
+            Assert.AreEqual(60, viewItem.ForageUtilizationRate);
+        }
+
+        [TestMethod]
+        public void InitializePerennialsForRangeland()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.RangelandNative;
+
+            _initializationService.InitializePerennialDefaults(viewItem, new Farm());
+
+            Assert.AreEqual(40, viewItem.ForageUtilizationRate);
+        }
+
+        [TestMethod]
+        public void InitializeSoilProperties()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Barley;
+            _farm1.DefaultSoilData.ProportionOfSandInSoil = 50;
+
+            _initializationService.InitializeSoilProperties(viewItem, _farm1);
+
+            Assert.AreEqual(50, viewItem.Sand);
+        }
+
         #endregion
     }
 }

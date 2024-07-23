@@ -30,9 +30,7 @@ namespace H.Core.Services.LandManagement
             _initializationService.InitializeIrrigationWaterApplication(farm, viewItem);
             _initializationService.InitializeBiomassCoefficients(viewItem, farm);
             _initializationService.InitializeNitrogenContent(viewItem, farm);
-
-            this.AssignSoilProperties(viewItem, farm);
-
+            _initializationService.InitializeSoilProperties(viewItem, farm);
             _initializationService.InitializePercentageReturns(farm, viewItem);
             _initializationService.InitializeMoistureContent(viewItem, farm);
             _initializationService.InitializeTillageType(viewItem, farm);
@@ -42,17 +40,7 @@ namespace H.Core.Services.LandManagement
             _initializationService.InitializeFallow(viewItem, farm);
             _initializationService.InitializePerennialDefaults(viewItem, farm);
             _initializationService.InitializeHarvestMethod(viewItem, farm);
-
-            this.AssignDefaultLigninContent(viewItem, farm);
-
-            if (viewItem.CropType == CropType.RangelandNative)
-            {
-                viewItem.IsNativeGrassland = true;
-            }
-            else
-            {
-                viewItem.IsNativeGrassland = false;
-            }
+            _initializationService.InitializeLigninContent(viewItem, farm);
 
             this.AssignEconomicDefaults(viewItem, farm);
 
@@ -149,13 +137,6 @@ namespace H.Core.Services.LandManagement
             cropViewItem.KValue = kValue;
         }
 
-        public void AssignSoilProperties(CropViewItem viewItem, Farm farm)
-        {
-            var soilData = farm.GetPreferredSoilData(viewItem);
-
-            viewItem.Sand = soilData.ProportionOfSandInSoil;
-        }
-
         /// <summary>
         /// When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
         /// </summary>
@@ -210,20 +191,6 @@ namespace H.Core.Services.LandManagement
             _economicsHelper.ConvertValuesToMetricIfNecessary(cropViewItem.CropEconomicData, farm);
 
             cropViewItem.CropEconomicData.IsInitialized = true;
-        }
-
-        public void AssignDefaultLigninContent(CropViewItem cropViewItem, Farm farm)
-        {
-            Providers.Carbon.Table_7_Relative_Biomass_Information_Data table10RelativeBiomassData = this.GetResidueData(cropViewItem, farm);
-            
-            if (table10RelativeBiomassData != null)
-            {
-                cropViewItem.LigninContent = table10RelativeBiomassData.LigninContent;
-            }
-            else
-            {
-                cropViewItem.LigninContent = 0.0;
-            }
         }
     }
 }
