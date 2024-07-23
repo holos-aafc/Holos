@@ -353,10 +353,6 @@ Holos provides the user the option to have more than one lactating cows group. W
  17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2022"** is set as the 'Start date' and that **"November 04, 2022"** is set as the 'End date' (95 days). 
  
  18. **Repeat** Step 16 above. Enter in the same information in **Step 3** for this management period.
- 
- 19. Click the management period named **"Dry period"** in **Step 2**. Ensure **"January 01, 2023"** is set as the 'Start date' and that **"March 01, 2023"** is set as the 'End date' (60 days). 
- 
- 20. On the **General** tab enter **"65"** animals, on the **Diet** tab choose 'Close-up Diet', on the **Housing** tab choose 'Drylot (standing or exercise yard)', and on the **Manure** tab choose 'Solid storage (stockpiled)'.
 
 <br>
 
