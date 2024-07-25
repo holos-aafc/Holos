@@ -195,7 +195,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
 2. Enter **"100"** ha as the total area of the field.
 3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** area when a perennial crop is selected.
-4. Keep **"80.78"** as the amount of irrigation and **"0"** as the number of pesticide passes.
+4. Keep **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 5. No fertilizer is used for this crop.
 
 <br>
@@ -229,7 +229,7 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
     * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
     * Change the tillage type to **"Reduced Tillage"**.
-    * Keep the default values of **"80.78"** as the amount of irrigation and **"0"** number of pesticide passes.
+    * Keep the default values of **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 
 6. Now add another crop to this rotation. Click on **Add Crop** under **Step 2** to add a second crop to the rotation. 
 
@@ -318,19 +318,19 @@ Holos provides the user the option to have more than one lactating cows group. W
 
 <br>
 
-> *Note: Holos now reports the diet being complete since all ingredients total up to 100%.*
-
-<br>
-
- 10.  Now select 'Custom Dairy Diet' from the drop down-down menu on the **Diet** tab.
-
-<br>
-
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
     <br>
     <em>Figure 15: Custom diet creator for Dairy Lactating animal group.</em>
 </p> 
+
+<br>
+
+> *Note: Holos now reports the diet being complete since all ingredients total up to 100%.*
+
+<br>
+
+ 10.  Now select 'Custom Dairy Diet' from the drop down-down menu on the **Diet** tab.
 
 <br>
 
