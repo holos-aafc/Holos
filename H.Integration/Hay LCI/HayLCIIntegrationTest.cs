@@ -465,7 +465,7 @@ namespace H.Integration.Hay_LCI
 
                 foreach (var cropViewItem in field.CropViewItems)
                 {
-                    _fieldResultsService.AssignSystemDefaults(cropViewItem, farm, _globalSettings);
+                    _initializationService.InitializeCropDefaults(cropViewItem, farm, _globalSettings);
 
                     this.AssignFertilizerApplications(cropViewItem, farm);
                     this.AssignManureApplications(cropViewItem, farm);
@@ -544,7 +544,7 @@ namespace H.Integration.Hay_LCI
                 fertilizerApplication.FertilizerBlendData.FertilizerBlend = blend;
                 fertilizerApplication.AmountOfBlendedProductApplied = rate;
 
-                _fieldResultsService.AssignDefaultBlendData(fertilizerApplication);
+                _initializationService.InitializeBlendData(fertilizerApplication);
 
                 viewItem.FertilizerApplicationViewItems.Add(fertilizerApplication);
 

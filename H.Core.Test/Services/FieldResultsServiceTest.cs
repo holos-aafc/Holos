@@ -439,37 +439,7 @@ namespace H.Core.Test.Services
 
         #region CalculateAmountOfProductRequired Tests
 
-        [TestMethod]
-        public void CalculateAmountOfProductRequired()
-        {
-            var farm = new Farm();
-            var viewItem = new CropViewItem()
-            {
-                CropType = CropType.Barley,
-                MoistureContentOfCrop = 0.12,
-                Yield = 1000,
-                CarbonConcentration = 0.45,
-                PercentageOfProductYieldReturnedToSoil = 2,
-                NitrogenContentInProduct = 18.9 / 1000,
-                NitrogenDepositionAmount = 0,
-            };
 
-            var fertilizerApplicationViewItem = new FertilizerApplicationViewItem()
-            {
-                FertilizerEfficiencyPercentage = 50,
-                FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                {
-                    PercentageNitrogen = 25,
-                }
-            };
-
-            // Required N of plant = 18.849600000000002
-            // Required amount of product = (18.849600000000002 / 25) * 100; 
-
-            var result = _resultsService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
-
-            Assert.AreEqual(135.71712, result);
-        }
 
         #endregion
 
@@ -599,21 +569,6 @@ namespace H.Core.Test.Services
                 totalCarbonDioxideEmissionsFromPotassiumProduction,
                 totalCarbonDioxideEmissionsFromIrrigation);
             Assert.AreEqual(756.791, result);
-        }
-
-        [TestMethod]
-        public void ApplyUserDefaults()
-        {
-            var viewItem = new CropViewItem() { CropType = CropType.Barley, };
-            var cropDefault = new CropViewItem()
-            { CropType = CropType.Barley, Yield = 777, EnableCustomUserDefaultsForThisCrop = true };
-
-            var globalSettings = new GlobalSettings();
-            globalSettings.CropDefaults.Add(cropDefault);
-
-            _resultsService.AssignUserDefaults(viewItem, globalSettings);
-
-            Assert.AreEqual(777, viewItem.Yield);
         }
 
         #region AssignCarbonInputs Tests

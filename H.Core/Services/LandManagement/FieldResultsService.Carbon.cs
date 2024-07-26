@@ -115,7 +115,8 @@ namespace H.Core.Services.LandManagement
                     // Use ICBM approach to assign inputs if the Tier 2 approach cannot be used
 
                     // Some crop types (currently only perennials, need access to the previous year's crop and also next year's crop in order to calculate inputs in some scenarios)
-                    _icbmSoilCarbonCalculator.SetCarbonInputs(
+
+                    _icbmCarbonInputCalculator.SetCarbonInputs(
                         previousYearViewItem: previousYearViewItem,
                         currentYearViewItem: currentYearViewItem,
                         nextYearViewItem: nextYearViewItem,
@@ -145,7 +146,7 @@ namespace H.Core.Services.LandManagement
                 {
                     // Use ICBM approach to assign inputs
 
-                    _icbmSoilCarbonCalculator.SetCarbonInputs(
+                    _icbmCarbonInputCalculator.SetCarbonInputs(
                         previousYearViewItem: null,
                         currentYearViewItem: secondaryCrop,
                         nextYearViewItem: null,
@@ -486,10 +487,8 @@ namespace H.Core.Services.LandManagement
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
-                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults =
-                    this.AnimalResults;
-                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService.Initialize(farm,
-                    this.AnimalResults);
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.DigestateService.AnimalResults = this.AnimalResults;
+                _tier2SoilCarbonCalculator.N2OEmissionFactorCalculator.ManureService.Initialize(farm, this.AnimalResults);
 
                 foreach (var runInPeriodItem in runInPeriodItems)
                 {
@@ -499,7 +498,7 @@ namespace H.Core.Services.LandManagement
                     }
                     else
                     {
-                        _icbmSoilCarbonCalculator.SetCarbonInputs(null, runInPeriodItem, null, farm);
+                        _icbmCarbonInputCalculator.SetCarbonInputs(null, runInPeriodItem, null, farm);
                     }
                 }
 
@@ -555,8 +554,7 @@ namespace H.Core.Services.LandManagement
             {
                 var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
                 cropViewItem.CropEnergyResults = energyResults;
-                cropViewItem.EstimatesOfProductionResultsViewItem =
-                    this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
+                cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
 

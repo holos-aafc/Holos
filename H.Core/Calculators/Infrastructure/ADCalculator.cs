@@ -22,11 +22,8 @@ namespace H.Core.Calculators.Infrastructure
     {
         #region Fields
 
-        private AnimalResultsService _animalResultsService = new AnimalResultsService();
+        
         private readonly IMapper _substrateMapper;
-
-        private readonly Table_46_Biogas_Methane_Production_Parameters_Provider
-            _biogasMethaneProductionParametersProvider = new Table_46_Biogas_Methane_Production_Parameters_Provider();
 
         protected readonly Table_47_Solid_Liquid_Separation_Coefficients_Provider
             _solidLiquidSeparationCoefficientsProvider = new Table_47_Solid_Liquid_Separation_Coefficients_Provider();

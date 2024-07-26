@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using AutoMapper;
 using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Economics;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -12,17 +15,20 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
 using H.Core.Providers.Climate;
+using H.Core.Providers.Economics;
 using H.Core.Providers.Energy;
+using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Irrigation;
 using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
+using H.Core.Services.Initialization.Crops;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
 
 namespace H.Core.Services.Initialization
 {
-    public partial class InitializationService : IInitializationService
+    public partial class InitializationService :  IInitializationService
     {
         #region Fields
 
@@ -31,7 +37,6 @@ namespace H.Core.Services.Initialization
         private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider;
         private readonly Table_44_Fraction_OrganicN_Mineralized_As_Tan_Provider _fractionOrganicNMineralizedAsTanProvider;
         private readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider;
-        private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _beefAndDairyCattleProvider;
         private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
         private readonly Table_29_Default_Manure_Excreted_Provider _defaultManureExcretionRateProvider;
@@ -39,19 +44,16 @@ namespace H.Core.Services.Initialization
         private readonly List<Table_21_Average_Milk_Production_Dairy_Cows_Data> _milkProductionDataList;
         private readonly Table_35_Methane_Producing_Capacity_Default_Values_Provider _defaultMethaneProducingCapacityProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
-        private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
         private readonly Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider _entericMethaneProvider;
         private readonly Table_31_Swine_VS_Excretion_For_Diets_Provider _volatileExcretionForDietsProvider;
-        private readonly Table_4_Monthly_Irrigation_Water_Application_Provider _irrigationWaterApplicationProvider;
         private readonly Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider _otherLivestockDefaultCH4EmissionFactorsProvider;
         private readonly Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider _otherLivestockDefaultCh4EmissionFactorsProvider;
-        private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider;
-        private readonly SmallAreaYieldProvider _smallAreaYieldProvider;
-        private readonly ICBMCarbonInputCalculator _icbmCarbonInputCalculator;
-        private readonly NitogenFixationProvider _nitrogenFixationProvider;
-        private readonly IrrigationService _irrigationService;
-        private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable;
-        private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
+
+
+
+
+        private readonly ICropInitializationService _cropInitializationService;
+        
 
         #endregion
 
@@ -64,27 +66,18 @@ namespace H.Core.Services.Initialization
             _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _fractionOrganicNMineralizedAsTanProvider = new Table_44_Fraction_OrganicN_Mineralized_As_Tan_Provider();
             _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider(); ;
-            _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
             _beefAndDairyCattleProvider = new Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider();
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
             _beddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
             _milkProductionDataList = _averageMilkProductionDairyCowsProvider.ReadFile();
             _defaultMethaneProducingCapacityProvider = new Table_35_Methane_Producing_Capacity_Default_Values_Provider();
             _beefDairyCattleFeedingActivityCoefficientProvider = new Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider();
-            _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
             _defaultManureExcretionRateProvider = new Table_29_Default_Manure_Excreted_Provider();
             _entericMethaneProvider = new Table_27_Enteric_CH4_Swine_Poultry_OtherLivestock_Provider();
             _volatileExcretionForDietsProvider = new Table_31_Swine_VS_Excretion_For_Diets_Provider();
             _otherLivestockDefaultCH4EmissionFactorsProvider = new Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider();
-            _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
-            _nitrogenFixationProvider = new NitogenFixationProvider();
-            _irrigationWaterApplicationProvider = new Table_4_Monthly_Irrigation_Water_Application_Provider();
             _otherLivestockDefaultCh4EmissionFactorsProvider = new Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider();
-            _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
-            _irrigationService = new IrrigationService();
-            _smallAreaYieldProvider = new SmallAreaYieldProvider();
-            _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider(); 
-            _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
+            _cropInitializationService = new CropInitializationService();
         }
         
         #endregion
@@ -125,7 +118,7 @@ namespace H.Core.Services.Initialization
                 this.InitializeCarbonConcentration(farm);
 
                 // Nitrogen Fixation
-                this.InitializeNitrogenFixation(farm);
+                _cropInitializationService.InitializeNitrogenFixation(farm);
 
                 // Table 4
                 this.InitializeIrrigationWaterApplication(farm);
@@ -174,29 +167,7 @@ namespace H.Core.Services.Initialization
             }
         }
 
-        /// <summary>
-        /// Reinitialize each <see cref="CropViewItem"/>'s irrigation properties with a <see cref="Farm"/>
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> containing <see cref="CropViewItem"/>'s to be reinitialized</param>
-        public void InitializeIrrigationWaterApplication(Farm farm)
-        {
-            var viewItems = farm.GetCropDetailViewItems();
-            foreach (var viewItem in viewItems)
-            {
-                InitializeIrrigationWaterApplication(farm, viewItem);
-            }
-        }
 
-        /// <summary>
-        /// Reinitialize the <see cref="CropViewItem"/> irrigation properties
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> that contains the climate data and province data required for the lookup table</param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> to have its irrigation properties reinitialized</param>
-        public void InitializeIrrigationWaterApplication(Farm farm, CropViewItem viewItem)
-        {
-            viewItem.GrowingSeasonIrrigation = _irrigationService.GetGrowingSeasonIrrigation(farm, viewItem);
-            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
-        }
 
         /// <summary>
         /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
@@ -408,71 +379,6 @@ namespace H.Core.Services.Initialization
             }
         }
 
-        /// <summary>
-        /// Reinitialize each <see cref="CropViewItem"/> within <see cref="Farm"/> with new default values
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
-        public void InitializeFuelEnergy(Farm farm)
-        {
-            var viewItems = farm.GetCropDetailViewItems();
-            foreach (var viewItem in viewItems)
-            {
-                InitializeFuelEnergy(farm, viewItem);
-            }
-        }
-
-        /// <summary>
-        /// Reinitialize the <see cref="CropViewItem"/> from the selected <see cref="Farm"/> with new default values
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> containing the relevant data to pass into <see cref="Table_50_Fuel_Energy_Estimates_Provider"/></param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will have its values reset with new default values</param>
-        public void InitializeFuelEnergy(Farm farm, CropViewItem viewItem)
-        {
-            var soilData = farm.GetPreferredSoilData(viewItem);
-            var fuelEnergyEstimates = _fuelEnergyEstimatesProvider.GetFuelEnergyEstimatesDataInstance(
-                province: soilData.Province,
-                soilCategory: soilData.SoilFunctionalCategory,
-                tillageType: viewItem.TillageType,
-                cropType: viewItem.CropType);
-
-            if (fuelEnergyEstimates != null)
-            {
-                viewItem.FuelEnergy = fuelEnergyEstimates.FuelEstimate;
-            }
-        }
-
-        /// <summary>
-        /// Reinitialize each <see cref="CropViewItem"/> within <see cref="Farm"/> with new default values
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
-        public void InitializeHerbicideEnergy(Farm farm)
-        {
-            var viewItems = farm.GetCropDetailViewItems();
-            foreach (var viewItem in viewItems)
-            {
-                InitializeHerbicideEnergy(farm, viewItem);
-            }
-        }
-
-        /// <summary>
-        /// Reinitialize the <see cref="CropViewItem"/> from the selected <see cref="Farm"/> with new default values
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> containing the relevant data to pass into <see cref="Table_51_Herbicide_Energy_Estimates_Provider"/></param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will have its values reset with new default values</param>
-        public void InitializeHerbicideEnergy(Farm farm, CropViewItem viewItem)
-        {
-            var soilData = farm.GetPreferredSoilData(viewItem);
-            var herbicideEnergyEstimates = _herbicideEnergyEstimatesProvider.GetHerbicideEnergyDataInstance(
-                provinceName: soilData.Province,
-                soilCategory: soilData.SoilFunctionalCategory,
-                tillageType: viewItem.TillageType,
-                cropType: viewItem.CropType);
-
-            if (herbicideEnergyEstimates != null)
-            {
-                viewItem.HerbicideEnergy = herbicideEnergyEstimates.HerbicideEstimate;
-            }
-        }
 
         /// <summary>
         /// Initialize the default emission factors for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
@@ -684,329 +590,176 @@ namespace H.Core.Services.Initialization
             }
         }
 
-        public void InitializeCropViewItems(Farm farm)
-        {
-            if (farm != null)
-            {
-                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
-                {
-                    foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
-                    {
-                        this.InitializePercentageReturns(farm, cropViewItem);
-                    }   
-                }
-            }
-        }
-
-        public void InitializeCropViewItem(Farm farm, CropViewItem viewItem)
-        {
-            this.InitializePercentageReturns(farm, viewItem);
-        }
-
-        /// <summary>
-        /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
-        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
-        {
-            if (farm != null && viewItem != null)
-            {
-                var defaults = farm.Defaults;
-
-                /*
-                 * Initialize the view item by checking the crop type
-                 */
-
-                if (viewItem.CropType.IsPerennial())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForPerennials;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForPerennials;
-                }
-                else if (viewItem.CropType.IsAnnual())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForAnnuals;
-                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForAnnuals;
-                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForAnnuals;
-                }
-
-                if (viewItem.CropType.IsRootCrop())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForRootCrops;
-                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
-                }
-
-                if (viewItem.CropType.IsCoverCrop())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                    viewItem.PercentageOfStrawReturnedToSoil = 100;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-
-                /*
-                 * Initialize the view item by checking the harvest method (override any setting based on crop type
-                 */
-
-                if (viewItem.CropType.IsSilageCrop() || viewItem.HarvestMethod == HarvestMethods.Silage)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 2;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-                else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 30;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-                else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initialize the carbon concentration of each <see cref="CropViewItem"/> within a farm
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="CropViewItem"/>s that will have reset their carbon concentrations reset</param>
         public void InitializeCarbonConcentration(Farm farm)
         {
-            var defaults = new Defaults();
-            var viewItems = farm.GetCropDetailViewItems();
-            foreach (var viewItem in viewItems)
-            {
-                InitializeCarbonConcentration(viewItem, defaults);
-            }
+            _cropInitializationService.InitializeCarbonConcentration(farm);
         }
 
-        /// <summary>
-        /// Initialize the carbon concentration of the <see cref="CropViewItem"/> with the values in the <see cref="Defaults"/> paramaeter
-        /// </summary>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> to have it's carbon concentration reset with default value</param>
-        /// <param name="defaults">The <see cref="Defaults"/> containing the default carbon concentration</param>
         public void InitializeCarbonConcentration(CropViewItem viewItem, Defaults defaults)
         {
-            viewItem.CarbonConcentration = defaults.CarbonConcentration;
-        }
-        /// <summary>
-        /// Initialize the nitrogen fixation for each <see cref="CropViewItem"/> within a <see cref="Farm"/>
-        /// </summary>
-        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="CropViewItem"/>'s that will have their nitrogen fixation reinitialized</param>
-        public void InitializeNitrogenFixation(Farm farm)
-        {
-            var viewItems = farm.GetCropDetailViewItems();
-            foreach (var viewItem in viewItems)
-            {
-                InitializeNitrogenFixation(viewItem);
-            }
-        }
-        /// <summary>
-        /// Initialize the nitrogen fixation within a <see cref="CropViewItem"/>
-        /// </summary>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> having its nitrogen fixation reinitialized</param>
-        public void InitializeNitrogenFixation(CropViewItem viewItem)
-        {
-            viewItem.NitrogenFixationPercentage =
-                _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
-        }
-
-        /// <summary>
-        /// Sets default moisture percentage to the cropViewItem component.
-        /// </summary>
-        /// <param name="farm"></param>
-        public void InitializeMoistureContent(Farm farm)
-        {
-            if (farm != null)
-            {
-                foreach (var stateStage in farm.StageStates.OfType<FieldSystemDetailsStageState>().ToList())
-                {
-                    foreach (var cropViewItem in stateStage.DetailsScreenViewCropViewItems)
-                    {
-                        var soilFunctionCategory = farm.GetPreferredSoilData(cropViewItem).SoilFunctionalCategory;
-                        var residueData = _relativeBiomassInformationProvider.GetResidueData(cropViewItem.IrrigationType,
-                            cropViewItem.AmountOfIrrigation, cropViewItem.CropType, soilFunctionCategory, farm.Province);
-                       
-                        this.InitializeMoistureContent(residueData, cropViewItem);
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// Sets default moisture percentage to the cropViewItem component.
-        /// </summary>
-        /// <param name="residueData"> Contains the <see cref="Table_7_Relative_Biomass_Information_Data"/> data to help initialize the <see cref="CropViewItem"/></param>
-        /// <param name="cropViewItem"> Contains the <see cref="CropViewItem"/> value to be changed</param>
-        public void InitializeMoistureContent(
-            Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem)
-        {
-            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure ||
-                cropViewItem.HarvestMethod == HarvestMethods.Silage ||
-                cropViewItem.HarvestMethod == HarvestMethods.Swathing ||
-                cropViewItem.CropType.IsSilageCrop())
-            {
-                cropViewItem.MoistureContentOfCropPercentage = 65;
-            }
-            else
-            {
-                if (residueData != null && residueData.MoistureContentOfProduct != 0)
-                {
-                    cropViewItem.MoistureContentOfCropPercentage = residueData.MoistureContentOfProduct;
-                }
-                else
-                {
-                    cropViewItem.MoistureContentOfCropPercentage = 12;
-                }
-            }
+            _cropInitializationService.InitializeCarbonConcentration(viewItem, defaults);
         }
 
         public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
         {
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
-            if (residueData != null)
-            {
-                viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
-                viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
-                viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
+            _cropInitializationService.InitializeBiomassCoefficients(viewItem, farm);
+        }
 
-                if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure || viewItem.HarvestMethod == HarvestMethods.Silage)
-                {
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
-                    viewItem.BiomassCoefficientStraw = 0;
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
-            }
+        public void InitializeLumCMaxValues(CropViewItem cropViewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeLumCMaxValues(cropViewItem, farm);
+        }
+
+        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
+        {
+            _cropInitializationService.InitializePercentageReturns(farm, viewItem);
+        }
+
+        public void InitializeYield(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeYield(viewItem, farm);
+        }
+
+        public void InitializeSilageCropYield(CropViewItem silageCropViewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeSilageCropYield(silageCropViewItem, farm);
+        }
+
+        public void InitializeYieldForAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            _cropInitializationService.InitializeYieldForAllYears(cropViewItems, farm, fieldSystemComponent);
+        }
+
+        public void InitializeYieldForYear(Farm farm, CropViewItem viewItem, FieldSystemComponent fieldSystemComponent)
+        {
+            _cropInitializationService.InitializeYieldForYear(farm, viewItem, fieldSystemComponent);
+        }
+
+        public void InitializeEconomicDefaults(CropViewItem cropViewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeEconomicDefaults(cropViewItem, farm);
+        }
+
+        public double CalculateAmountOfProductRequired(Farm farm, CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            return _cropInitializationService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
+        }
+
+        public void InitializePhosphorusFertilizerRate(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializePhosphorusFertilizerRate(viewItem, farm);
+        }
+
+        public void InitializeBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            _cropInitializationService.InitializeBlendData(fertilizerApplicationViewItem);
+        }
+
+        public double CalculateRequiredNitrogenFertilizer(Farm farm, CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            return _cropInitializationService.CalculateRequiredNitrogenFertilizer(farm, viewItem, fertilizerApplicationViewItem);
         }
 
         public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
         {
-            // Assign N content values used for the ICBM methodology
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
-            if (residueData != null)
-            {
-                // Table has values in grams but unit of display is kg
-                viewItem.NitrogenContentInProduct = residueData.NitrogenContentProduct / 1000;
-                viewItem.NitrogenContentInStraw = residueData.NitrogenContentStraw / 1000;
-                viewItem.NitrogenContentInRoots = residueData.NitrogenContentRoot / 1000;
-                viewItem.NitrogenContentInExtraroot = residueData.NitrogenContentExtraroot / 1000;
+            _cropInitializationService.InitializeNitrogenContent(viewItem, farm);
+        }
 
-                if (viewItem.CropType.IsPerennial())
-                {
-                    viewItem.NitrogenContentInStraw = 0;
-                }
-            }
+        public void InitializeNitrogenFixation(CropViewItem viewItem)
+        {
+            _cropInitializationService.InitializeNitrogenFixation(viewItem);
+        }
 
-            // Assign N content values used for IPCC Tier 2
-            var cropData = _slopeProviderTable.GetDataByCropType(viewItem.CropType);
-            
-            viewItem.NitrogenContent = cropData.NitrogenContentResidues;
+        public void InitializeNitrogenFixation(Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenFixation(farm);
+        }
+
+        public void InitializeHerbicideEnergy(Farm farm)
+        {
+            _cropInitializationService.InitializeHerbicideEnergy(farm);
+        }
+
+        public void InitializeHerbicideEnergy(Farm farm, CropViewItem viewItem)
+        {
+            _cropInitializationService.InitializeHerbicideEnergy(farm, viewItem);
+        }
+
+        public void InitializeIrrigationWaterApplication(Farm farm)
+        {
+            _cropInitializationService.InitializeIrrigationWaterApplication(farm);
+        }
+
+        public void InitializeIrrigationWaterApplication(Farm farm, CropViewItem viewItem)
+        {
+            _cropInitializationService.InitializeIrrigationWaterApplication(farm, viewItem);
+        }
+
+        public void InitializeMoistureContent(Farm farm)
+        {
+            _cropInitializationService.InitializeMoistureContent(farm);
+        }
+
+        public void InitializeMoistureContent(Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem)
+        {
+            _cropInitializationService.InitializeMoistureContent(residueData, cropViewItem);
         }
 
         public void InitializeMoistureContent(CropViewItem viewItem, Farm farm)
         {
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType,
-                viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
-
-            this.InitializeMoistureContent(residueData, viewItem);
-        }
-
-        /// <summary>
-        /// Sets the tillage type for a view item based on the province.
-        /// </summary>
-        public void InitializeTillageType(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            var province = farm.DefaultSoilData.Province;
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, province);
-
-            if (residueData != null)
-            {
-                if (residueData.TillageTypeTable.ContainsKey(province))
-                {
-                    var tillageTypeForProvince = residueData.TillageTypeTable[province];
-
-                    viewItem.TillageType = tillageTypeForProvince;
-                    viewItem.PastTillageType = tillageTypeForProvince;
-                }
-            }
-
-            if (viewItem.CropType.IsPerennial())
-            {
-                viewItem.TillageType = TillageType.NoTill;
-                viewItem.PastTillageType = TillageType.NoTill;
-            }
-        }
-
-        public void InitializeFallow(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsFallow())
-            {
-                viewItem.Yield = 0;
-                viewItem.TillageType = farm.Defaults.DefaultTillageTypeForFallow;
-                viewItem.PastTillageType = TillageType.NoTill;
-                viewItem.HarvestMethod = HarvestMethods.None;
-                viewItem.PercentageOfProductYieldReturnedToSoil = 0;
-                viewItem.PercentageOfStrawReturnedToSoil = 0;
-                viewItem.PercentageOfRootsReturnedToSoil = 0;
-            }
-        }
-
-        public void InitializeHarvestMethod(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsSilageCrop())
-            {
-                viewItem.HarvestMethod = HarvestMethods.Silage;
-            }
-            else
-            {
-                viewItem.HarvestMethod = HarvestMethods.CashCrop;
-            }
-        }
-
-        public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
-        {
-            if (viewItem.CropType.IsPerennial())
-            {
-                viewItem.TillageType = TillageType.NoTill;
-                viewItem.PastTillageType = TillageType.NoTill;
-                viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
-                viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
-                viewItem.IsNativeGrassland = viewItem.CropType == CropType.RangelandNative;
-            }
-        }
-
-        public void InitializeLigninContent(CropViewItem cropViewItem, Farm farm)
-        {
-            var province = farm.DefaultSoilData.Province;
-            var soilFunctionCategory = farm.GetPreferredSoilData(cropViewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(cropViewItem.IrrigationType, cropViewItem.AmountOfIrrigation, cropViewItem.CropType, soilFunctionCategory, province);
-
-            if (residueData != null)
-            {
-                cropViewItem.LigninContent = residueData.LigninContent;
-            }
-            else
-            {
-                cropViewItem.LigninContent = 0.0;
-            }
+            _cropInitializationService.InitializeMoistureContent(viewItem, farm);
         }
 
         public void InitializeSoilProperties(CropViewItem viewItem, Farm farm)
         {
-            var soilData = farm.GetPreferredSoilData(viewItem);
+            _cropInitializationService.InitializeSoilProperties(viewItem, farm);
+        }
 
-            viewItem.Sand = soilData.ProportionOfSandInSoil;
+        public void InitializeFuelEnergy(Farm farm)
+        {
+            _cropInitializationService.InitializeFuelEnergy(farm);
+        }
+
+        public void InitializeFuelEnergy(Farm farm, CropViewItem viewItem)
+        {
+            _cropInitializationService.InitializeFuelEnergy(farm, viewItem);
+        }
+
+        public void InitializeHarvestMethod(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeHarvestMethod(viewItem, farm);
+        }
+
+        public void InitializeFallow(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeFallow(viewItem, farm);
+        }
+
+        public void InitializeTillageType(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeTillageType(viewItem, farm);
+        }
+
+        public void InitializeLigninContent(CropViewItem cropViewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeLigninContent(cropViewItem, farm);
+        }
+
+        public void InitializeUserDefaults(CropViewItem viewItem, GlobalSettings globalSettings)
+        {
+            _cropInitializationService.InitializeUserDefaults(viewItem, globalSettings);
+        }
+
+        public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializePerennialDefaults(viewItem, farm);
+        }
+
+        public void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
+        {
+            _cropInitializationService.InitializeCropDefaults(viewItem, farm, globalSettings);
         }
 
         #endregion

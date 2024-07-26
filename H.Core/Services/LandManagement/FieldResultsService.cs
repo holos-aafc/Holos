@@ -50,11 +50,9 @@ namespace H.Core.Services.LandManagement
         private readonly ITillageFactorCalculator _tillageFactorCalculator = new TillageFactorCalculator();
         private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
         private readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
-        private readonly DigestateService _digestateService = new DigestateService();
         private readonly IManureService _manureService = new ManureService();
 
-        private readonly LandManagementChangeHelper _landManagementChangeHelper = new LandManagementChangeHelper();
-        private readonly EconomicsHelper _economicsHelper = new EconomicsHelper();
+        
 
         private readonly IMapper _detailViewItemMapper;
         private readonly IMapper _manureApplicationViewItemMapper;
@@ -65,14 +63,14 @@ namespace H.Core.Services.LandManagement
         private readonly IMapper _grazingViewItemMapper;
 
         private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
-        private readonly LumCMax_KValues_Perennial_Cropping_Change_Provider _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
-        private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
+
         private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
-        private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
+        
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider = new Table_7_Relative_Biomass_Information_Provider();
-        private readonly CropEconomicsProvider _economicsProvider = new CropEconomicsProvider();
-        private IInitializationService _initializationService;
+        private readonly IInitializationService _initializationService;
+        private readonly IICBMCarbonInputCalculator _icbmCarbonInputCalculator;
+        private readonly IICBMNitrogenInputCalculator _icbmNitrogenInputCalculator;
 
         #endregion
 
@@ -195,6 +193,9 @@ namespace H.Core.Services.LandManagement
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
             this.AnimalResultsService = new AnimalResultsService();
+
+            _icbmNitrogenInputCalculator = new ICBMNitrogenInputCalculator();
+            _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
         }
 
         #endregion

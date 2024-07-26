@@ -3,17 +3,15 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Providers.Soil;
 using H.Core.Services.LandManagement;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Infrastructure;
 
-namespace H.Core.Services.Initialization
+namespace H.Core.Services.Initialization.Crops
 {
-    public partial class InitializationService
+    public partial class CropInitializationService
     {
         #region Public Methods
 
@@ -130,7 +128,9 @@ namespace H.Core.Services.Initialization
             throw new Exception("Yield assignment method not accounted for");
         }
 
-        public void InitializeYieldForAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
+        public void InitializeYieldForAllYears(
+            IEnumerable<CropViewItem> cropViewItems, 
+            Farm farm,
             FieldSystemComponent fieldSystemComponent)
         {
             foreach (var viewItem in cropViewItems)

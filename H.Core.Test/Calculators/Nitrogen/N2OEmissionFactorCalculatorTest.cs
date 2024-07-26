@@ -163,36 +163,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(0, result);
         }
 
-        [TestMethod]
-        public void CalculateSyntheticFertilizerApplied()
-        {
-            var firstRate = _sut.CalculateSyntheticFertilizerApplied(
-                nitrogenContentOfGrainReturnedToSoil: 100,
-                nitrogenContentOfStrawReturnedToSoil: 200,
-                nitrogenContentOfRootReturnedToSoil: 300,
-                nitrogenContentOfExtrarootReturnedToSoil: 200,
-                fertilizerEfficiencyFraction: 0.5,
-                soilTestN: 10,
-                isNitrogenFixingCrop: false,
-                nitrogenFixationAmount: 0,
-                atmosphericNitrogenDeposition: 0);
 
-            Assert.AreEqual(1580, firstRate);
-
-            // Increasing efficiency should reduce the required amount of fertilizer
-            var secondRate = _sut.CalculateSyntheticFertilizerApplied(
-                nitrogenContentOfGrainReturnedToSoil: 100,
-                nitrogenContentOfStrawReturnedToSoil: 200,
-                nitrogenContentOfRootReturnedToSoil: 300,
-                nitrogenContentOfExtrarootReturnedToSoil: 200,
-                fertilizerEfficiencyFraction: 0.75,
-                soilTestN: 10,
-                isNitrogenFixingCrop: false,
-                nitrogenFixationAmount: 0,
-                atmosphericNitrogenDeposition: 0);
-
-            Assert.IsTrue(secondRate < firstRate);
-        }
 
         #region CalculateFractionOfNitrogenLostByVolatilization Tests
 

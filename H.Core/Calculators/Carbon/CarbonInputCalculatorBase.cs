@@ -1,10 +1,28 @@
 ﻿using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Services.Animals;
 
 namespace H.Core.Calculators.Carbon
 {
     public class CarbonInputCalculatorBase : ICarbonInputCalculator
     {
+        #region Fields
+
+        protected readonly IManureService manureService;
+        protected readonly IDigestateService digestateService;
+
+        #endregion
+
+        #region Constructors
+
+        public CarbonInputCalculatorBase()
+        {
+            manureService = new ManureService();
+            digestateService = new DigestateService();
+        }
+
+        #endregion
+
         #region Public Methods
 
         public double CalculateInputsFromSupplementalHayFedToGrazingAnimals(

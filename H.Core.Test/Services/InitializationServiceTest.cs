@@ -21,6 +21,7 @@ using H.Core.Models.Animals.Swine;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Carbon;
 using H.Core.Services.Initialization;
+using H.Core.Providers.Fertilizer;
 
 namespace H.Core.Test.Services
 {
@@ -70,6 +71,38 @@ namespace H.Core.Test.Services
         #endregion
 
         #region Tests
+
+        [TestMethod]
+        public void CalculateAmountOfProductRequired()
+        {
+            var farm = new Farm();
+            var viewItem = new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                MoistureContentOfCrop = 0.12,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 2,
+                NitrogenContentInProduct = 18.9 / 1000,
+                NitrogenDepositionAmount = 0,
+            };
+
+            var fertilizerApplicationViewItem = new FertilizerApplicationViewItem()
+            {
+                FertilizerEfficiencyPercentage = 50,
+                FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                {
+                    PercentageNitrogen = 25,
+                }
+            };
+
+            // Required N of plant = 18.849600000000002
+            // Required amount of product = (18.849600000000002 / 25) * 100; 
+
+            var result = _initializationService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
+
+            Assert.AreEqual(135.71712, result);
+        }
 
         [TestMethod]
         public void ReInitializeFarmsTest()
@@ -1389,6 +1422,43 @@ namespace H.Core.Test.Services
             _initializationService.InitializeSoilProperties(viewItem, _farm1);
 
             Assert.AreEqual(50, viewItem.Sand);
+        }
+
+        [TestMethod]
+        public void InitializeUserDefaultsSetsYield()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Wheat;
+            var globalSettings = new GlobalSettings();
+
+            var defaultCrop = new CropViewItem();
+            defaultCrop.EnableCustomUserDefaultsForThisCrop = true;
+            defaultCrop.CropType = CropType.Wheat;
+            defaultCrop.Yield = 555;
+            globalSettings.CropDefaults.Add(defaultCrop);
+
+            _initializationService.InitializeUserDefaults(viewItem, globalSettings);
+
+            Assert.AreEqual(555, viewItem.Yield);
+        }
+
+        [TestMethod]
+        public void InitializeUserDefaultsDoesNotSetYield()
+        {
+            var viewItem = new CropViewItem();
+            viewItem.CropType = CropType.Wheat;
+            viewItem.Yield = 100;
+            var globalSettings = new GlobalSettings();
+
+            var defaultCrop = new CropViewItem();
+            defaultCrop.EnableCustomUserDefaultsForThisCrop = false;
+            defaultCrop.CropType = CropType.Wheat;
+            defaultCrop.Yield = 555;
+            globalSettings.CropDefaults.Add(defaultCrop);
+
+            _initializationService.InitializeUserDefaults(viewItem, globalSettings);
+
+            Assert.AreEqual(100, viewItem.Yield);
         }
 
         #endregion

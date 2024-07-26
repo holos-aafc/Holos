@@ -103,12 +103,6 @@ namespace H.Core.Calculators.Carbon
             double changeInSoilOrganicCarbonAtInterval, 
             double fieldArea);
 
-        CropViewItem SetCarbonInputs(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItem,
-            Farm farm);
-
         void CalculateNitrogenAtInterval(
             CropViewItem previousYearResults,
             CropViewItem currentYearResults,

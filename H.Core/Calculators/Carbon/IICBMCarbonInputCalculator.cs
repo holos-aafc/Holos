@@ -249,5 +249,11 @@ namespace H.Core.Calculators.Carbon
         double CalculateTotalBelowGroundCarbonInput(
             CropViewItem cropViewItem,
             Farm farm);
+
+        CropViewItem SetCarbonInputs(
+            CropViewItem previousYearViewItem, 
+            CropViewItem currentYearViewItem, 
+            CropViewItem nextYearViewItem, 
+            Farm farm);
     }
 }

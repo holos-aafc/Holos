@@ -16,80 +16,9 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-        /// <summary>
-        /// Determines the amount of N fertilizer required for the specified crop type and yield
-        /// </summary>
-        public double CalculateRequiredNitrogenFertilizer(
-            Farm farm,
-            CropViewItem viewItem,
-            FertilizerApplicationViewItem fertilizerApplicationViewItem)
-        {
-            _icbmSoilCarbonCalculator.SetCarbonInputs(
-                previousYearViewItem: null,
-                currentYearViewItem: viewItem,
-                nextYearViewItem: null,
-                farm: farm);
 
-            var nitrogenContentOfGrainReturnedToSoil = _n2OEmissionFactorCalculator.CalculateGrainNitrogenTotal(
-                carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
-                nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: viewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
 
-            var nitrogenContentOfRootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: viewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
-
-            var nitrogenContentOfExtrarootReturnedToSoil = _n2OEmissionFactorCalculator.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
-
-            var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
-
-            var syntheticFertilizerApplied = _n2OEmissionFactorCalculator.CalculateSyntheticFertilizerApplied(
-                nitrogenContentOfGrainReturnedToSoil: nitrogenContentOfGrainReturnedToSoil,
-                nitrogenContentOfStrawReturnedToSoil: nitrogenContentOfStrawReturnedToSoil,
-                nitrogenContentOfRootReturnedToSoil: nitrogenContentOfRootReturnedToSoil,
-                nitrogenContentOfExtrarootReturnedToSoil: nitrogenContentOfExtrarootReturnedToSoil,
-                fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
-                soilTestN: viewItem.SoilTestNitrogen,
-                isNitrogenFixingCrop: isLeguminousCrop,
-                nitrogenFixationAmount: viewItem.NitrogenFixation,
-                atmosphericNitrogenDeposition: viewItem.NitrogenDepositionAmount);
-
-            return syntheticFertilizerApplied;
-        }
-
-        /// <summary>
-        /// Equation 2.5.5-7
-        ///
-        /// Calculates the amount of the fertilizer blend needed to support the yield that was input.This considers the amount of nitrogen uptake by the plant and then
-        /// converts that value into an amount of fertilizer blend/product
-        /// </summary>
-        /// <returns>The amount of product required (kg product ha^-1)</returns>
-        public double CalculateAmountOfProductRequired(
-            Farm farm,
-            CropViewItem viewItem,
-            FertilizerApplicationViewItem fertilizerApplicationViewItem)
-        {
-            var requiredNitrogen = CalculateRequiredNitrogenFertilizer(
-                farm: farm,
-                viewItem: viewItem,
-                fertilizerApplicationViewItem: fertilizerApplicationViewItem);
-
-            // If blend is custom, default N value will be zero and so we can't calculate the amount of product required
-            if (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen == 0)
-            {
-                return 0;
-            }
-
-            // Need to convert to amount of fertilizer product from required nitrogen
-            var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100));
-
-            return requiredAmountOfProduct;
-        }
 
         /// <summary>
         /// Calculates how much nitrogen added from manure of animals grazing on the field.
