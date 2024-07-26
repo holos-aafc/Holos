@@ -115,7 +115,7 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **All Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
+Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
 
 If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the  training section, we will be working with the “Land management” and “Dairy Cattle” categories. 
 
@@ -154,7 +154,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 2. Select **"Wheat"** as the main crop and **"Hairy Vetch"** as the cover crop in **Step 2**.
 
 3. Under the **General** tab:
-    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value..
+    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value.
     * Select **"Reduced Tillage"**" as the tillage type.
     * Enter **"200"** mm ha<sup>-1</sup> as the amount of irrigation.
     * Select **"0"** as the number of pesticide passes.
@@ -330,7 +330,7 @@ Holos provides the user the option to have more than one lactating cows group. W
 
 <br>
 
- 10.  Now select 'Custom Dairy Diet' from the drop down-down menu on the **Diet** tab.
+ 10.  Now select 'Custom Dairy Diet' from the drop-down menu on the **Diet** tab.
 
 <br>
 
