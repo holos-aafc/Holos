@@ -6,6 +6,7 @@ using H.Core.Services.LandManagement;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using System.Drawing.Design;
 using System.Linq;
 using H.Infrastructure;
 
@@ -204,7 +205,7 @@ namespace H.Core.Services.Initialization.Crops
             }
             else
             {
-                this.InitializeYieldInternal(viewItem, farm);
+                this.InitializeYieldUsingSmallAreaData(viewItem, farm);
             }
         }
 
@@ -212,7 +213,7 @@ namespace H.Core.Services.Initialization.Crops
 
         #region Private Methods
 
-        private void InitializeYieldInternal(CropViewItem viewItem, Farm farm)
+        private void InitializeYieldUsingSmallAreaData(CropViewItem viewItem, Farm farm)
         {
             var province = farm.Province;
 
@@ -244,12 +245,28 @@ namespace H.Core.Services.Initialization.Crops
                 }
                 else
                 {
-                    Trace.TraceWarning($"No default yield data found for {viewItem.CropType.GetDescription()}");
+                    Trace.TraceWarning($"No default yield found for {viewItem.CropType.GetDescription()} in {viewItem.Year}");
                 }
 
                 viewItem.CalculateDryYield();
 
                 return;
+            }
+
+            var smallAreaYield = _smallAreaYieldProvider.GetData(
+                year: viewItem.Year,
+                polygon: farm.PolygonId,
+                cropType: viewItem.CropType,
+                province: province);
+
+            if (smallAreaYield != null)
+            {
+                viewItem.Yield = smallAreaYield.Yield;
+                viewItem.CalculateDryYield();
+            }
+            else
+            {
+                Trace.TraceWarning($"No default yield found for {viewItem.CropType.GetDescription()} in {viewItem.Year}");
             }
         }
 

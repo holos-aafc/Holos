@@ -170,5 +170,7 @@ namespace H.Core.Services.Initialization.Crops
         /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
         /// </summary>
         void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
+
+        void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings);
     }
 }

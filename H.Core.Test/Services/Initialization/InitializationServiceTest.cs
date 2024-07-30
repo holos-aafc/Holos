@@ -1,29 +1,24 @@
-﻿using H.Core.Emissions.Results;
-using H.Core.Services.Animals;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Providers.Animals;
-using H.Core.Services;
-using System.Linq;
-using H.Core.Models.Animals.Dairy;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using H.Core.Models.Animals.Beef;
-using H.Core.Models.LandManagement.Fields;
-using System.Collections.ObjectModel;
+using H.Core.Models.Animals.Dairy;
 using H.Core.Models.Animals.OtherAnimals;
 using H.Core.Models.Animals.Sheep;
 using H.Core.Models.Animals.Swine;
-using H.Core.Providers.Climate;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
-using H.Core.Services.Initialization;
+using H.Core.Providers.Climate;
 using H.Core.Providers.Fertilizer;
+using H.Core.Services.Initialization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace H.Core.Test.Services
+namespace H.Core.Test.Services.Initialization
 {
     [TestClass]
     public class InitializationServiceTest
@@ -178,6 +173,7 @@ namespace H.Core.Test.Services
                 {
                     new ManagementPeriod
                     {
+                        AnimalType = AnimalType.DairyLactatingCow,
                         Start = new DateTime(1990,  4, 25),
                         MilkProduction = 200,
 
@@ -197,26 +193,31 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void ReinitializeAverageMilkProductionYearNotFound()
         {
-            var dairycow2 = new AnimalGroup()
+            var mp =
+                new ManagementPeriod
+                {
+                    AnimalType = AnimalType.DairyLactatingCow,
+                    Start = new DateTime(1989, 4, 25), //invalid year
+                    MilkProduction = 200,
+
+                };
+            
+        
+
+        var dairycow2 = new AnimalGroup()
             {
                 GroupType = AnimalType.DairyLactatingCow,
-                ManagementPeriods =
-                {
-                    new ManagementPeriod
-                    {
-                        Start = new DateTime(1989,  4, 25),//invalid year
-                        MilkProduction = 200,
-
-                    }
-                },
             };
             var dairyComponent2 = new DairyComponent();
+            dairycow2.ManagementPeriods.Add(mp);
             dairyComponent2.Groups.Add(dairycow2);
             _farm2.Components.Add(dairyComponent2);
             _farm2.DairyComponents.Cast<DairyComponent>().First().Groups.Add(dairycow2);
             _farm2.DefaultSoilData.Province = Province.BritishColumbia;
 
-            Assert.ThrowsException<NullReferenceException>(() => _initializationService.InitializeMilkProduction(_farm2));
+            _initializationService.InitializeMilkProduction(_farm2);
+
+            Assert.AreEqual(24.3, mp.MilkProduction);
         }
         [TestMethod]
         public void ReinitializeAverageMilkProductionIncorrectAnimalGroup()
@@ -241,7 +242,7 @@ namespace H.Core.Test.Services
             _farm1.DairyComponents.Cast<DairyComponent>().First().Groups.Add(beef);
             _farm1.DefaultSoilData.Province = Province.BritishColumbia;
             _initializationService.InitializeMilkProduction(_farm1);
-            Assert.AreEqual(1000, beef.ManagementPeriods.First().MilkProduction);
+            Assert.AreEqual(0, beef.ManagementPeriods.First().MilkProduction);
         }
         [TestMethod]
         public void ReinitializationAverageMilkProductionNullArgument()
@@ -581,6 +582,7 @@ namespace H.Core.Test.Services
                 {
                     new ManagementPeriod
                     {
+                        AnimalType = AnimalType.Dairy,
                         HousingDetails =
                         {
                             HousingType = HousingType.EnclosedPasture,
@@ -853,6 +855,7 @@ namespace H.Core.Test.Services
                 {
                     new ManagementPeriod
                     {
+                        AnimalType = AnimalType.Deer,
                         ManureDetails = new ManureDetails
                         {
                              
@@ -868,7 +871,6 @@ namespace H.Core.Test.Services
 
             _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
             Assert.AreEqual(0.000603, deer.ManagementPeriods.First().ManureDetails.DailyManureMethaneEmissionRate);
-
         }
 
         [TestMethod]

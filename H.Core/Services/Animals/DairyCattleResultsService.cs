@@ -455,7 +455,7 @@ namespace H.Core.Services.Animals
             /*
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
              *
-             *  If user specifies custom a custom methane conversion factor, then skip liquid calculations (even if system is liquid, calculate manure methane using 2-4 and 2-5.)
+             * If user specifies custom a custom methane conversion factor, then skip liquid calculations (even if system is liquid, calculate manure methane using 2-4 and 2-5.)
              */
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure() || 

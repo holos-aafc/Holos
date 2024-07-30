@@ -184,6 +184,7 @@
     <Compile Include="Services\FieldResultsServiceTest.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
+    <Compile Include="Services\Initialization\CropInitializationServiceTest.cs" />
     <Compile Include="Services\LandManagement\IrrigationServiceTest.cs" />
     <Compile Include="Services\ManureServiceTest.cs" />
     <Compile Include="Services\OtherLiveStockResultsServiceTest.cs" />
@@ -191,7 +192,7 @@
     <Compile Include="Services\SheepResultsServiceTest.cs" />
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
-    <Compile Include="Services\InitializationServiceTest.cs" />
+    <Compile Include="Services\Initialization\InitializationServiceTest.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +254,7 @@
   <ItemGroup>
     <Content Include="Providers\Climate\concat_new_slc.py" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

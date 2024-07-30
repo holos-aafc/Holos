@@ -160,7 +160,7 @@ namespace H.Core.Providers.Feed
 
         /// <summary>
         /// Crude protein content
-        ///
+        /// 
         /// CP
         /// 
         /// (fraction [kg kg^-1])

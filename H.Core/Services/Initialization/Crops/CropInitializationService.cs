@@ -31,7 +31,6 @@ namespace H.Core.Services.Initialization.Crops
         private readonly LumCMax_KValues_Fallow_Practice_Change_Provider _lumCMaxKValuesFallowPracticeChangeProvider;
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider;
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider;
-        private readonly SmallAreaYieldProvider _smallAreaYieldProvider;
         private readonly ICBMCarbonInputCalculator _icbmCarbonInputCalculator;
         private readonly EconomicsHelper _economicsHelper;
         private readonly CropEconomicsProvider _economicsProvider;
@@ -44,9 +43,17 @@ namespace H.Core.Services.Initialization.Crops
         private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
 
+        private static readonly SmallAreaYieldProvider _smallAreaYieldProvider;
+
         #endregion
 
         #region Constructors
+
+        static CropInitializationService()
+        {
+            _smallAreaYieldProvider = new SmallAreaYieldProvider();
+            _smallAreaYieldProvider.Initialize();
+        }
 
         public CropInitializationService()
         {
@@ -55,7 +62,6 @@ namespace H.Core.Services.Initialization.Crops
             _lumCMaxKValuesFallowPracticeChangeProvider = new LumCMax_KValues_Fallow_Practice_Change_Provider();
             _lumCMaxKValuesPerennialCroppingChangeProvider = new LumCMax_KValues_Perennial_Cropping_Change_Provider();
             _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
-            _smallAreaYieldProvider = new SmallAreaYieldProvider();
             _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
             _economicsHelper = new EconomicsHelper();
             _economicsProvider = new CropEconomicsProvider();
@@ -72,6 +78,27 @@ namespace H.Core.Services.Initialization.Crops
         #endregion
 
         #region Public Methods
+
+        public void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings)
+        {
+            if (farm != null)
+            {
+                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+                {
+                    foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                    {
+                        this.InitializeCropDefaults(cropViewItem, farm, globalSettings);    
+                    }
+                }
+
+                // Initialize state state
+                var stageState = farm.GetFieldSystemDetailsStageState();
+                foreach (var cropViewItem in stageState.DetailsScreenViewCropViewItems)
+                {
+                    this.InitializeCropDefaults(cropViewItem, farm, globalSettings);
+                }
+            }
+        }
 
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor

@@ -11,8 +11,9 @@ namespace H.Core.Providers.Animals
     {
         public Table_23_Feeding_Activity_Coefficient_Sheep_Provider()
         {
-            HTraceListener.AddTraceListener(); 
+            HTraceListener.AddTraceListener();
         }
+
         public IFeedingActivityCoeffientData GetByHousing(HousingType housingType)
         {
             switch (housingType)

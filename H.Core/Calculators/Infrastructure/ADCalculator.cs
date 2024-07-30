@@ -170,6 +170,11 @@ namespace H.Core.Calculators.Infrastructure
 
                 // Equation 4.8.1-19
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate = (volatileSolidsOnCurrentDay - volatileSolidsOnPreviousDay) * fractionUsed;
+
+                if (substrateFlowRate.VolatileSolidsFlowOfSubstrate < 0)
+                {
+                    substrateFlowRate.VolatileSolidsFlowOfSubstrate = 0;
+                }
             }
             else
             {

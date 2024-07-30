@@ -642,6 +642,17 @@
     <Compile Include="Services\FarmResultsService.cs" />
     <Compile Include="Services\FieldComponentHelper.cs" />
     <Compile Include="Services\IAnaerobicDigestionComponentHelper.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Methane.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.VolatileSolids.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Bedding.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Ammonia.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Excretion.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Climate.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Milk.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.ManureComposition.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Sheep.cs" />
+    <Compile Include="Services\Initialization\Animals\IAnimalInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Carbon.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Yield.cs" />
@@ -694,6 +705,7 @@
     <Compile Include="Models\Farm.Digestate.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Grazing.cs" />
     <None Include="Properties\Settings.settings" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.EmissionFactors.cs" />
     <None Include="Services\OCR\tessdata\eng.traineddata">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
