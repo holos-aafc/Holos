@@ -145,5 +145,12 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData);
         void InitializeLeachingFraction(Farm farm, ManagementPeriod managementPeriod);
         void InitializeLeachingFraction(Farm farm);
+        void InitializeDailyTanExcretion(ManagementPeriod managementPeriod);
+        void InitializeAmmoniaEmissionFactorForManureStorage(ManagementPeriod managementPeriod);
+        void InitializeAmmoniaEmissionFactorForHousing(ManagementPeriod managementPeriod);
+        void InitializeAmmoniaEmissionFactorForLandApplication(ManagementPeriod managementPeriod);
+        void InitializeLivestockCoefficientSheep(ManagementPeriod managementPeriod);
+        void InitializeBaselineCoefficient(ManagementPeriod managementPeriod);
+        void InitializeGainCoefficient(ManagementPeriod managementPeriod);
     }
 }

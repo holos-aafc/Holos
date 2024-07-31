@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 
 namespace H.Core.Services.Initialization.Animals
@@ -17,9 +18,20 @@ namespace H.Core.Services.Initialization.Animals
         {
             if (farm != null)
             {
-                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => x.AnimalType.IsSheepType()))
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    if (_sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType) is Table_22_Livestock_Coefficients_Sheep_Data result)
+                    this.InitializeLivestockCoefficientSheep(managementPeriod);
+                }
+            }
+        }
+
+        public void InitializeLivestockCoefficientSheep(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null)
+            {
+                if (_sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType) is Table_22_Livestock_Coefficients_Sheep_Data result)
+                {
+                    if (managementPeriod.AnimalType.IsSheepType())
                     {
                         managementPeriod.HousingDetails.BaselineMaintenanceCoefficient = result.BaselineMaintenanceCoefficient;
                         managementPeriod.WoolProduction = result.WoolProduction;
@@ -27,6 +39,9 @@ namespace H.Core.Services.Initialization.Animals
                         managementPeriod.GainCoefficientB = result.CoefficientB;
                         managementPeriod.StartWeight = result.DefaultInitialWeight;
                         managementPeriod.EndWeight = result.DefaultFinalWeight;
+                        managementPeriod.NumberOfAnimals = 100;
+                        managementPeriod.EnergyRequiredForWool = 24;
+                        managementPeriod.EnergyRequiredForMilk = 4.6;
                     }
                 }
             }

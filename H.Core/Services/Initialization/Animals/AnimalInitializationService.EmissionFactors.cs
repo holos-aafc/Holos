@@ -94,6 +94,36 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
-		#endregion
-	}
+        public void InitializeBaselineCoefficient(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.HousingDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+                {
+                    managementPeriod.HousingDetails.BaselineMaintenanceCoefficient = _livestockCoefficientsBeefAndDairyCattleProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType).BaselineMaintenanceCoefficient;
+                }
+                else if (managementPeriod.AnimalType.IsSheepType())
+                {
+                    managementPeriod.HousingDetails.BaselineMaintenanceCoefficient = _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType).BaselineMaintenanceCoefficient;
+                }
+            }
+        }
+
+        public void InitializeGainCoefficient(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null )
+            {
+                if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+                {
+                    managementPeriod.GainCoefficient = _livestockCoefficientsBeefAndDairyCattleProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType).GainCoefficient;
+                }
+                else if (managementPeriod.AnimalType.IsSheepType())
+                {
+                    managementPeriod.GainCoefficient = _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType).GainCoefficient;
+                }
+            }
+        }
+
+        #endregion
+    }
 }

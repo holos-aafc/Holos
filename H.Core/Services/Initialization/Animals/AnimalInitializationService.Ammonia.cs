@@ -78,6 +78,54 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
+        public void InitializeDailyTanExcretion(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsPoultryType())
+                {
+                    managementPeriod.ManureDetails.DailyTanExcretion = _defaultDailyTanExcretionRatesForPoultry.GetDailyTanExcretionRate(animalType: managementPeriod.AnimalType);
+                }
+            }
+        }
+
+        public void InitializeAmmoniaEmissionFactorForManureStorage(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsPoultryType())
+                {
+                    managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage = _defaultAmmoniaEmissionFactorsForPoultryManureStorageProvider.GetAmmoniaEmissionFactorForStorage(animalType: managementPeriod.AnimalType);
+                }
+                else if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
+                {
+                    managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage = _beefDairyDefaultEmissionFactorsProvider.GetByManureStorageType(managementPeriod.ManureDetails.StateType);
+                }
+            }
+        }
+
+        public void InitializeAmmoniaEmissionFactorForHousing(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.HousingDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsPoultryType())
+                {
+                    managementPeriod.HousingDetails.AmmoniaEmissionFactorForHousing = _defaultDailyTanExcretionRatesForPoultry.GetAmmoniaEmissionFactorForHousing(animalType: managementPeriod.AnimalType);
+                }
+            }
+        }
+
+        public void InitializeAmmoniaEmissionFactorForLandApplication(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsPoultryType())
+                {
+                    managementPeriod.ManureDetails.AmmoniaEmissionFactorForLandApplication = _defaultAmmoniaEmissionFactorForPoultryLandAppliedManure.GetAmmoniaEmissionFactorForLandAppliedManure(animalType: managementPeriod.AnimalType);
+                }
+            }
+        }
+
         #endregion
     }
 }

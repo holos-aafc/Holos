@@ -24,6 +24,11 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
         private readonly INitrogenInputCalculator _nitrogenInputCalculator;
+        private readonly DefaultDailyTanExcretionRatesForPoultry _defaultDailyTanExcretionRatesForPoultry;
+        private readonly DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider _defaultAmmoniaEmissionFactorsForPoultryManureStorageProvider;
+        private readonly DefaultAmmoniaEmissionFactorForPoultryLandAppliedManureProvider _defaultAmmoniaEmissionFactorForPoultryLandAppliedManure ;
+        private readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _beefDairyDefaultEmissionFactorsProvider;
+        private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _livestockCoefficientsBeefAndDairyCattleProvider;
 
         #endregion
 
@@ -46,6 +51,11 @@ namespace H.Core.Services.Initialization.Animals
             _feedingActivityCoefficientSheepProvider = new Table_23_Feeding_Activity_Coefficient_Sheep_Provider();
             _nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
+            _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
+            _defaultAmmoniaEmissionFactorsForPoultryManureStorageProvider = new DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider();
+            _defaultAmmoniaEmissionFactorForPoultryLandAppliedManure = new DefaultAmmoniaEmissionFactorForPoultryLandAppliedManureProvider(); 
+            _beefDairyDefaultEmissionFactorsProvider  = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
+            _livestockCoefficientsBeefAndDairyCattleProvider = new Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider();
         }
 
         #endregion

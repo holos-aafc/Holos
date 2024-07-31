@@ -456,6 +456,41 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeLeachingFraction(farm);
         }
 
+        public void InitializeDailyTanExcretion(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeDailyTanExcretion(managementPeriod);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForManureStorage(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForManureStorage(managementPeriod);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForHousing(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForHousing(managementPeriod);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForLandApplication(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForLandApplication(managementPeriod);
+        }
+
+        public void InitializeLivestockCoefficientSheep(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeLivestockCoefficientSheep(managementPeriod);
+        }
+
+        public void InitializeBaselineCoefficient(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeBaselineCoefficient(managementPeriod);
+        }
+
+        public void InitializeGainCoefficient(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeGainCoefficient(managementPeriod);
+        }
+
         #endregion
     }
 }
