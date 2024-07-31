@@ -1,6 +1,6 @@
 ﻿namespace H.Core.Calculators.Nitrogen
 {
-    public class ICBMNitrogenInputCalculator : IICBMNitrogenInputCalculator
+    public class ICBMNitrogenInputCalculator : NitrogenInputCalculatorBase, IICBMNitrogenInputCalculator
     {
         #region Public Methods
 

@@ -380,10 +380,9 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeManureMineralizationFractions(farm);
         }
 
-        public void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod,
-            FractionOfOrganicNitrogenMineralizedData mineralizationFractions)
+        public void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod)
         {
-            _animalInitializationService.InitializeManureMineralizationFractions(managementPeriod, mineralizationFractions);
+            _animalInitializationService.InitializeManureMineralizationFractions(managementPeriod);
         }
 
         public void InitializeManureExcretionRate(Farm farm)
@@ -445,6 +444,16 @@ namespace H.Core.Services.Initialization
         public void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData)
         {
             _animalInitializationService.InitializeMilkProduction(managementPeriod, soilData);
+        }
+
+        public void InitializeLeachingFraction(Farm farm, ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeLeachingFraction(farm, managementPeriod);
+        }
+
+        public void InitializeLeachingFraction(Farm farm)
+        {
+            _animalInitializationService.InitializeLeachingFraction(farm);
         }
 
         #endregion

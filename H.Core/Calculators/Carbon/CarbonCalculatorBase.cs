@@ -3,6 +3,7 @@ using H.Core.Emissions.Results;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System.Collections.Generic;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Services.Animals;
 
 namespace H.Core.Calculators.Carbon
@@ -11,7 +12,7 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
-        protected DigestateService _digestateService = new DigestateService();
+        protected INitrogenInputCalculator nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -44,6 +45,19 @@ namespace H.Core.Test.Calculators.Nitrogen
         [TestMethod]
         public void TestMethod1()
         {
+        }
+
+        [TestMethod]
+        public void CalculateFractionOfNitrogenLostByLeachingAndRunoffReturnsCorrectValue()
+        {
+            var growingSeasonPrecipitation = 34.2;
+            var growingSeasonEvapotranspiration = 0.65;
+            var result =
+                _nitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
+                    growingSeasonPrecipitation,
+                    growingSeasonEvapotranspiration);
+
+            Assert.AreEqual(0.3, result);
         }
 
         [TestMethod]

@@ -136,21 +136,6 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
         }
 
-        /// <summary>
-        ///    Equation 2.5.3-1
-        /// </summary>
-        [TestMethod]
-        public void CalculateFractionOfNitrogenLostByLeachingAndRunoffReturnsCorrectValue()
-        {
-            var growingSeasonPrecipitation = 34.2;
-            var growingSeasonEvapotranspiration = 0.65;
-            var result =
-                _sut.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
-                    growingSeasonPrecipitation,
-                    growingSeasonEvapotranspiration);
-
-            Assert.AreEqual(0.3, result);
-        }
 
         [TestMethod]
         public void CalculateTopographyEmissionsReturnsZeroWhenNoClimateDataAvailable()

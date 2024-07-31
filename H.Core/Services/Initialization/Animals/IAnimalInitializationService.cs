@@ -75,8 +75,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the manure fractions for the selected <see cref="ManagementPeriod"/>.
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will have it's values reset to system defaults</param>
-        /// <param name="mineralizationFractions">The <see cref="FractionOfOrganicNitrogenMineralizedData"/> containing the new default values to use</param>
-        void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod, FractionOfOrganicNitrogenMineralizedData mineralizationFractions);
+        void InitializeManureMineralizationFractions(ManagementPeriod managementPeriod);
 
         /// <summary>
         /// Initialize the default manure excretion rate for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
@@ -144,5 +143,7 @@ namespace H.Core.Services.Initialization.Animals
 
         void InitializeFeedingActivityCoefficient(ManagementPeriod managementPeriod);
         void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData);
+        void InitializeLeachingFraction(Farm farm, ManagementPeriod managementPeriod);
+        void InitializeLeachingFraction(Farm farm);
     }
 }

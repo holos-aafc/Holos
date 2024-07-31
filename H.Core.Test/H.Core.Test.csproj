@@ -61,6 +61,7 @@
     <Compile Include="Calculators\Infrastructure\ADCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrousOxideCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculatorTest.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\Tier2NitrousOxideCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculatorTest.cs" />
     <Compile Include="Calculators\TillageFactorCalculatorTest.cs" />

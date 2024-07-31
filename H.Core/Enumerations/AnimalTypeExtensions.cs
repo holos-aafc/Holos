@@ -78,6 +78,7 @@ namespace H.Core.Enumerations
                 case AnimalType.Sheep:
                 case AnimalType.LambsAndEwes:
                 case AnimalType.Ram:
+                case AnimalType.WeanedLamb:
                 case AnimalType.Lambs:
                 case AnimalType.Ewes:
                 case AnimalType.SheepFeedlot:

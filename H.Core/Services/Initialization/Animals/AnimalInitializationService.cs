@@ -1,6 +1,7 @@
 ﻿using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using System.Collections.Generic;
+using H.Core.Calculators.Nitrogen;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -22,6 +23,7 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
         private readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
+        private readonly INitrogenInputCalculator _nitrogenInputCalculator;
 
         #endregion
 
@@ -42,7 +44,7 @@ namespace H.Core.Services.Initialization.Animals
             _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
             _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _feedingActivityCoefficientSheepProvider = new Table_23_Feeding_Activity_Coefficient_Sheep_Provider();
-
+            _nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
             _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
         }
 

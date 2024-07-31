@@ -74,6 +74,9 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(-711.111111111111, result, 4);
         }
 
+
+
+
         #endregion
     }
 }

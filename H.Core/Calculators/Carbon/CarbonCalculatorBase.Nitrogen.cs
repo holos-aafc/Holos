@@ -742,7 +742,7 @@ namespace H.Core.Calculators.Carbon
 
         protected void CalculateIndirectEmissions(Farm farm, CropViewItem currentYearResults)
         {
-            var fractionLeach = N2OEmissionFactorCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
+            var fractionLeach = nitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
                 farm.GetGrowingSeasonPrecipitation(currentYearResults.Year),
                 farm.GetGrowingSeasonEvapotranspiration(currentYearResults.Year));
 

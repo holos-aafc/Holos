@@ -131,15 +131,17 @@ namespace H.Core.Test.Services.Initialization
         {
             var managementPeriod = new ManagementPeriod()
             {
+                AnimalType = AnimalType.Beef,
                 ManureDetails = new ManureDetails()
                 {
+                    StateType = ManureStateType.CompostIntensive,
                     FractionOfOrganicNitrogenNitrified = 10,
                 }
             };
 
-            _initializationService.InitializeManureMineralizationFractions(managementPeriod, new FractionOfOrganicNitrogenMineralizedData() {FractionNitrified = 2});
+            _initializationService.InitializeManureMineralizationFractions(managementPeriod);
 
-            Assert.AreEqual(expected: 2, actual: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified);
+            Assert.AreEqual(expected: 0.25, actual: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified);
         }
 
         [TestMethod]

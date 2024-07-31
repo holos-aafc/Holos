@@ -1,6 +1,6 @@
 ﻿namespace H.Core.Calculators.Nitrogen
 {
-    public interface IICBMNitrogenInputCalculator
+    public interface IICBMNitrogenInputCalculator : INitrogenInputCalculator
     {
         /// <summary>
         /// Equation 2.5.6-1
