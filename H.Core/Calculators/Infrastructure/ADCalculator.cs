@@ -165,11 +165,17 @@ namespace H.Core.Calculators.Infrastructure
 
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
-                var volatileSolidsOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
+                var volatileSolidsAvailableOnCurrentDay = dailyEmissions.VolatileSolidsAvailable;
                 var volatileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
 
                 // Equation 4.8.1-19
-                substrateFlowRate.VolatileSolidsFlowOfSubstrate = (volatileSolidsOnCurrentDay - volatileSolidsOnPreviousDay) * fractionUsed;
+                var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * 1000);
+                var b = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication - (previousDaysEmissions == null ? 0 : previousDaysEmissions.TotalVolumeOfManureAvailableForLandApplication);
+                var c = fractionUsed * 1000;
+
+                var result = a * (b - c);
+
+                substrateFlowRate.VolatileSolidsFlowOfSubstrate = result;
 
                 if (substrateFlowRate.VolatileSolidsFlowOfSubstrate < 0)
                 {
