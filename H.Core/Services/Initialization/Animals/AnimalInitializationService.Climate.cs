@@ -16,11 +16,8 @@ namespace H.Core.Services.Initialization.Animals
         {
             if (farm != null && farm.ClimateData != null)
             {
-                var climateData = farm.ClimateData;
-                var province = farm.DefaultSoilData.Province;
-
-                climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(province);
-                climateData.BarnTemperatureData.IsInitialized = true;
+                farm.ClimateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.DefaultSoilData.Province);
+                farm.ClimateData.BarnTemperatureData.IsInitialized = true;
             }
         }
 

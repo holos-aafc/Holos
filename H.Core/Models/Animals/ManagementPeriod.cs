@@ -74,11 +74,9 @@ namespace H.Core.Models.Animals
             this.Start = new DateTime(DateTime.Now.Year, 1, 1);
 
             this.ManureDetails = new ManureDetails();
-
             this.HousingDetails = new HousingDetails();
 
             this.NumberOfAnimals = 20;
-            this.MilkProduction = 8;
             this.MilkFatContent = 4;
             this.MilkProteinContentAsPercentage = 3.5;
 

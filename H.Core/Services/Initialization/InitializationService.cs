@@ -90,10 +90,10 @@ namespace H.Core.Services.Initialization
                 this.InitializeIrrigationWaterApplication(farm);
 
                 // Table 6
-                this.InitializeManureCompositionData(farm);
+                this.ReinitializeManureCompositionData(farm);
 
                 // Table 17
-                this.InitializeCattleFeedingActivity(farm);
+                this.InitializeFeedingActivityCoefficient(farm);
 
                 // Table 21
                 this.InitializeMilkProduction(farm);
@@ -102,7 +102,7 @@ namespace H.Core.Services.Initialization
                 this.InitializeLivestockCoefficientSheep(farm);
 
                 // Table 27
-                this.InitializeAnnualEntericMethaneRate(farm);
+                this.InitializeAnnualEntericMethaneEmissionRate(farm);
 
                 // Table 29
                 this.InitializeManureExcretionRate(farm);
@@ -111,13 +111,13 @@ namespace H.Core.Services.Initialization
                 this.InitializeVolatileSolidsExcretion(farm);
 
                 // Table 35
-                this.InitializeMethaneProducingCapacity(farm);
+                this.InitializeMethaneProducingCapacityOfManure(farm);
 
                 // Table 36
                 this.InitializeDefaultEmissionFactors(farm);
 
                 //Table 38
-                this.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
+                this.InitializeAnnualManureMethaneEmissionRate(farm);
 
                 // Table 44
                 this.InitializeManureMineralizationFractions(farm);
@@ -130,25 +130,6 @@ namespace H.Core.Services.Initialization
 
                 // Table 63
                 this.InitializeBarnTemperature(farm);
-            }
-        }
-
-
-        public void InitializeParameterAdjustmenstForManure(Farm farm)
-        {
-            if (farm != null)
-            {
-                foreach (var animalComponent in farm.AnimalComponents)
-                {
-                    foreach (var animalGroup in animalComponent.Groups)
-                    {
-                        foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                        {
-
-
-                        }
-                    }
-                }
             }
         }
 
@@ -329,9 +310,9 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeCropDefaults(farm, globalSettings);
         }
 
-        public void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm)
+        public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {
-            _animalInitializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
+            _animalInitializationService.InitializeAnnualManureMethaneEmissionRate(farm);
         }
 
         public void InitializeVolatileSolidsExcretion(Farm farm)
@@ -344,24 +325,24 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeVolatileSolidsExcretion(managementPeriod, province);
         }
 
-        public void InitializeAnnualEntericMethaneRate(Farm farm)
+        public void InitializeAnnualEntericMethaneEmissionRate(Farm farm)
         {
-            _animalInitializationService.InitializeAnnualEntericMethaneRate(farm);
+            _animalInitializationService.InitializeAnnualEntericMethaneEmissionRate(farm);
         }
 
-        public void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod)
+        public void InitializeAnnualEntericMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
-            _animalInitializationService.InitializeAnnualEntericMethaneRate(managementPeriod);
+            _animalInitializationService.InitializeAnnualEntericMethaneEmissionRate(managementPeriod);
         }
 
-        public void InitializeMethaneProducingCapacity(Farm farm)
+        public void InitializeMethaneProducingCapacityOfManure(Farm farm)
         {
-            _animalInitializationService.InitializeMethaneProducingCapacity(farm);
+            _animalInitializationService.InitializeMethaneProducingCapacityOfManure(farm);
         }
 
-        public void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod)
+        public void InitializeMethaneProducingCapacityOfManure(ManagementPeriod managementPeriod)
         {
-            _animalInitializationService.InitializeMethaneProducingCapacity(managementPeriod);
+            _animalInitializationService.InitializeMethaneProducingCapacityOfManure(managementPeriod);
         }
 
         public void ReinitializeBeddingMaterial(Farm farm)
@@ -405,9 +386,9 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeMilkProduction(farm);
         }
 
-        public void InitializeManureCompositionData(Farm farm)
+        public void ReinitializeManureCompositionData(Farm farm)
         {
-            _animalInitializationService.InitializeManureCompositionData(farm);
+            _animalInitializationService.ReinitializeManureCompositionData(farm);
         }
 
         public void InitializeManureCompositionData(ManagementPeriod managementPeriod,
@@ -431,9 +412,9 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeDefaultEmissionFactors(farm, managementPeriod);
         }
 
-        public void InitializeCattleFeedingActivity(Farm farm)
+        public void InitializeFeedingActivityCoefficient(Farm farm)
         {
-            _animalInitializationService.InitializeCattleFeedingActivity(farm);
+            _animalInitializationService.InitializeFeedingActivityCoefficient(farm);
         }
 
         public void InitializeFeedingActivityCoefficient(ManagementPeriod managementPeriod)
@@ -489,6 +470,86 @@ namespace H.Core.Services.Initialization
         public void InitializeGainCoefficient(ManagementPeriod managementPeriod)
         {
             _animalInitializationService.InitializeGainCoefficient(managementPeriod);
+        }
+
+        public void InitializeBeddingMaterial(ManagementPeriod managementPeriod, Farm farm)
+        {
+            _animalInitializationService.InitializeBeddingMaterial(managementPeriod, farm);
+        }
+
+        public void InitializeBeddingMaterialRate(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeBeddingMaterialRate(managementPeriod);
+        }
+
+        public void InitializeNitrogenExcretionRate(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeNitrogenExcretionRate(managementPeriod);
+        }
+
+        public void InitializeVolatileSolids(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeVolatileSolids(managementPeriod);
+        }
+
+        public void InitializeDailyTanExcretion(Farm farm)
+        {
+            _animalInitializationService.InitializeDailyTanExcretion(farm);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForManureStorage(Farm farm)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForManureStorage(farm);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForHousing(Farm farm)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForHousing(farm);
+        }
+
+        public void InitializeAmmoniaEmissionFactorForLandApplication(Farm farm)
+        {
+            _animalInitializationService.InitializeAmmoniaEmissionFactorForLandApplication(farm);
+        }
+
+        public void InitializeBeddingMaterial(Farm farm)
+        {
+            _animalInitializationService.InitializeBeddingMaterial(farm);
+        }
+
+        public void InitializeBeddingMaterialRate(Farm farm)
+        {
+            _animalInitializationService.InitializeBeddingMaterialRate(farm);
+        }
+
+        public void InitializeBaselineCoefficient(Farm farm)
+        {
+            _animalInitializationService.InitializeBaselineCoefficient(farm);
+        }
+
+        public void InitializeGainCoefficient(Farm farm)
+        {
+            _animalInitializationService.InitializeGainCoefficient(farm);
+        }
+
+        public void InitializeNitrogenExcretionRate(Farm farm)
+        {
+            _animalInitializationService.InitializeNitrogenExcretionRate(farm);
+        }
+
+        public void InitializeManureCompositionData(Farm farm)
+        {
+            _animalInitializationService.InitializeManureCompositionData(farm);
+        }
+
+        public void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeAnnualManureMethaneEmissionRate(managementPeriod);
+        }
+
+        public void InitializeVolatileSolids(Farm farm)
+        {
+            _animalInitializationService.InitializeVolatileSolids(farm);
         }
 
         #endregion

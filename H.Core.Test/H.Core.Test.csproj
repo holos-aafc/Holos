@@ -179,6 +179,7 @@
     <Compile Include="ResultConversionClassTests.cs" />
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
+    <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\BeefCattleResultsServiceTest.cs" />
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />

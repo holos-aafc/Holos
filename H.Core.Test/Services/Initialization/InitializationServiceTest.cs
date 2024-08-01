@@ -534,7 +534,7 @@ namespace H.Core.Test.Services.Initialization
                 }
             };
 
-            _initializationService.InitializeAnnualEntericMethaneRate(managementPeriod);
+            _initializationService.InitializeAnnualEntericMethaneEmissionRate(managementPeriod);
 
             Assert.AreEqual(64, managementPeriod.ManureDetails.YearlyEntericMethaneRate);
         }
@@ -568,7 +568,7 @@ namespace H.Core.Test.Services.Initialization
                 }
             };
 
-            _initializationService.InitializeMethaneProducingCapacity(managementPeriod);
+            _initializationService.InitializeMethaneProducingCapacityOfManure(managementPeriod);
 
             Assert.AreEqual(0.19, managementPeriod.ManureDetails.MethaneProducingCapacityOfManure);
         }
@@ -598,7 +598,7 @@ namespace H.Core.Test.Services.Initialization
             dairyComponent.Groups.Add(beef);
             farm.Components.Add(dairyComponent);
 
-            _initializationService.InitializeCattleFeedingActivity(farm);
+            _initializationService.InitializeFeedingActivityCoefficient(farm);
             Assert.AreEqual(0.17, beef.ManagementPeriods.First().HousingDetails.ActivityCeofficientOfFeedingSituation);
         }
 
@@ -608,7 +608,7 @@ namespace H.Core.Test.Services.Initialization
             Farm farm = new Farm();
             try
             {
-                _initializationService.InitializeCattleFeedingActivity(farm); //passing null farm
+                _initializationService.InitializeFeedingActivityCoefficient(farm); //passing null farm
             }
             catch (Exception ex)
             {
@@ -623,7 +623,7 @@ namespace H.Core.Test.Services.Initialization
             farm.Components.Add(dairyComponent);
             try
             {
-                _initializationService.InitializeCattleFeedingActivity(farm);// passing farm with null dairyComponent
+                _initializationService.InitializeFeedingActivityCoefficient(farm);// passing farm with null dairyComponent
             }
             catch (Exception ex)
             {
@@ -871,7 +871,7 @@ namespace H.Core.Test.Services.Initialization
 
             farm.Components.Add(deerComponent);
 
-            _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);
+            _initializationService.InitializeAnnualManureMethaneEmissionRate(farm);
             Assert.AreEqual(0.000603, deer.ManagementPeriods.First().ManureDetails.DailyManureMethaneEmissionRate);
         }
 
@@ -1008,7 +1008,7 @@ namespace H.Core.Test.Services.Initialization
             Farm farm = new Farm();
             try
             {
-                _initializationService.InitializeOtherLivestockDefaultCH4EmissionFactor(farm);// passing farm with null dairyComponent
+                _initializationService.InitializeAnnualManureMethaneEmissionRate(farm);// passing farm with null dairyComponent
             }
             catch (Exception ex)
             {

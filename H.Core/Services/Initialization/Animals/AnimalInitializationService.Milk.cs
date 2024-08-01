@@ -30,7 +30,7 @@ namespace H.Core.Services.Initialization.Animals
 
         public void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData)
         {
-            if (managementPeriod != null)
+            if (managementPeriod != null && soilData != null)
             {
                 var province = soilData.Province;
                 var year = managementPeriod.Start.Year;
@@ -45,6 +45,11 @@ namespace H.Core.Services.Initialization.Animals
                     {
                         var milkProduction = _averageMilkProductionDairyCowsProvider.GetAverageMilkProductionForDairyCowsValue(year, province);
                         managementPeriod.MilkProduction = milkProduction;
+                    }
+                    else
+                    {
+                        // Unknown animal type but is lactating so use default
+                        managementPeriod.MilkProduction = 8;
                     }
                 }
                 else

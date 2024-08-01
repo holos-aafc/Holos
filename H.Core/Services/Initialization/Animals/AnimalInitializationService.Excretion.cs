@@ -28,9 +28,28 @@ namespace H.Core.Services.Initialization.Animals
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.ManureExcretionRate"/></param>
         public void InitializeManureExcretionRate(ManagementPeriod managementPeriod)
         {
-            if (managementPeriod != null && managementPeriod.HousingDetails != null)
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
             {
                 managementPeriod.ManureDetails.ManureExcretionRate = _defaultManureExcretionRateProvider.GetManureExcretionRate(managementPeriod.AnimalType);
+            }
+        }
+
+        public void InitializeNitrogenExcretionRate(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeNitrogenExcretionRate(managementPeriod);
+                }
+            }
+        }
+
+        public void InitializeNitrogenExcretionRate(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                managementPeriod.ManureDetails.NitrogenExretionRate = _poultryOtherLivestockDefaultNExcretionRatesProvider.GetNitrogenExcretionRateValue(managementPeriod.AnimalType);
             }
         }
 

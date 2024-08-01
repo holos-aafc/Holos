@@ -60,7 +60,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the Beef_Dairy_Cattle_Feeding_Activity_Coefficient object
         /// </summary>
         /// <param name="farm"> Contains the ActivityCoefficientFeedingSituation of each HousingDetails of each ManagementPeriod of each <see cref="Farm"/></param>
-        public void InitializeCattleFeedingActivity(Farm farm)
+        public void InitializeFeedingActivityCoefficient(Farm farm)
         {
             if (farm != null)
             {
@@ -87,9 +87,20 @@ namespace H.Core.Services.Initialization.Animals
                 }
                 else
                 {
-                    Trace.TraceError($"{nameof(AnimalInitializationService.InitializeFeedingActivityCoefficient)}" + $" unable to get data for housing type: {managementPeriod.HousingDetails.HousingType}." + $" Returning default value of '{defaultValue}'.");
+                    Trace.TraceError($"{nameof(InitializeFeedingActivityCoefficient)}" + $" unable to get data for housing type: {managementPeriod.HousingDetails.HousingType}." + $" Returning default value of '{defaultValue}'.");
 
                     managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation = defaultValue;
+                }
+            }
+        }
+
+        public void InitializeBaselineCoefficient(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeBaselineCoefficient(managementPeriod);
                 }
             }
         }
@@ -105,6 +116,17 @@ namespace H.Core.Services.Initialization.Animals
                 else if (managementPeriod.AnimalType.IsSheepType())
                 {
                     managementPeriod.HousingDetails.BaselineMaintenanceCoefficient = _sheepProvider.GetCoefficientsByAnimalType(managementPeriod.AnimalType).BaselineMaintenanceCoefficient;
+                }
+            }
+        }
+
+        public void InitializeGainCoefficient(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeGainCoefficient(managementPeriod);
                 }
             }
         }

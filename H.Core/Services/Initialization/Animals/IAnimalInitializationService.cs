@@ -13,7 +13,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
         /// </summary>
         /// <param name="farm"> Contains the ManagementPeriod.ManureDetails.DailyMAnureMethaneEmissionRate that needs to be reinitialized to default</param>
-        void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm);
+        void InitializeAnnualManureMethaneEmissionRate(Farm farm);
 
         /// <summary>
         /// Reinitialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
@@ -32,25 +32,25 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the default annual enteric methane rate for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>Whi
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        void InitializeAnnualEntericMethaneRate(Farm farm);
+        void InitializeAnnualEntericMethaneEmissionRate(Farm farm);
 
         /// <summary>
         /// Initialize the default annual enteric methane rate for the <see cref="ManagementPeriod"/>.
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.YearlyEntericMethaneRate"/></param>
-        void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod);
+        void InitializeAnnualEntericMethaneEmissionRate(ManagementPeriod managementPeriod);
 
         /// <summary>
         /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        void InitializeMethaneProducingCapacity(Farm farm);
+        void InitializeMethaneProducingCapacityOfManure(Farm farm);
 
         /// <summary>
         /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for the <see cref="ManagementPeriod"/>.
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/></param>
-        void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod);
+        void InitializeMethaneProducingCapacityOfManure(ManagementPeriod managementPeriod);
 
         /// <summary>
         /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for all <see cref="ManagementPeriod"/>s for the <see cref="Farm"/>.
@@ -105,7 +105,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the default <see cref="DefaultManureCompositionData"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        void InitializeManureCompositionData(Farm farm);
+        void ReinitializeManureCompositionData(Farm farm);
 
         /// <summary>
         /// Initialize the manure <see cref="DefaultManureCompositionData"/> for the selected <see cref="ManagementPeriod"/>.
@@ -139,7 +139,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the Beef_Dairy_Cattle_Feeding_Activity_Coefficient object
         /// </summary>
         /// <param name="farm"> Contains the ActivityCoefficientFeedingSituation of each HousingDetails of each ManagementPeriod of each <see cref="farm"/></param>
-        void InitializeCattleFeedingActivity(Farm farm);
+        void InitializeFeedingActivityCoefficient(Farm farm);
 
         void InitializeFeedingActivityCoefficient(ManagementPeriod managementPeriod);
         void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData);
@@ -152,5 +152,33 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeLivestockCoefficientSheep(ManagementPeriod managementPeriod);
         void InitializeBaselineCoefficient(ManagementPeriod managementPeriod);
         void InitializeGainCoefficient(ManagementPeriod managementPeriod);
+
+        /// <summary>
+        /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
+        /// <param name="farm"></param>
+        void InitializeBeddingMaterial(ManagementPeriod managementPeriod, Farm farm);
+
+        /// <summary>
+        /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
+        void InitializeBeddingMaterialRate(ManagementPeriod managementPeriod);
+
+        void InitializeNitrogenExcretionRate(ManagementPeriod managementPeriod);
+        void InitializeVolatileSolids(ManagementPeriod managementPeriod);
+        void InitializeDailyTanExcretion(Farm farm);
+        void InitializeAmmoniaEmissionFactorForManureStorage(Farm farm);
+        void InitializeAmmoniaEmissionFactorForHousing(Farm farm);
+        void InitializeAmmoniaEmissionFactorForLandApplication(Farm farm);
+        void InitializeBeddingMaterial(Farm farm);
+        void InitializeBeddingMaterialRate(Farm farm);
+        void InitializeBaselineCoefficient(Farm farm);
+        void InitializeGainCoefficient(Farm farm);
+        void InitializeNitrogenExcretionRate(Farm farm);
+        void InitializeManureCompositionData(Farm farm);
+        void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod);
+        void InitializeVolatileSolids(Farm farm);
     }
 }

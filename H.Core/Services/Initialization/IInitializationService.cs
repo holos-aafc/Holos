@@ -14,8 +14,6 @@ namespace H.Core.Services.Initialization
     {
         void CheckInitialization(Farm farm);
         void ReInitializeFarms(IEnumerable<Farm> farms);
-
-        void InitializeParameterAdjustmenstForManure(Farm farm);
     }
 }
     

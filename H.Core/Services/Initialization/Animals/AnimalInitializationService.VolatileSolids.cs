@@ -10,7 +10,7 @@ namespace H.Core.Services.Initialization.Animals
         #region Public Methods
 
         /// <summary>
-        /// Reinitialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
+        /// Initialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing <see cref="ManagementPeriod"/>'s to be reinitialized</param>
         public void InitializeVolatileSolidsExcretion(Farm farm)
@@ -19,7 +19,7 @@ namespace H.Core.Services.Initialization.Animals
             {
                 var province = farm.DefaultSoilData.Province;
 
-                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => AnimalTypeExtensions.IsSwineType(x.AnimalType)))
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
                     this.InitializeVolatileSolidsExcretion(managementPeriod, province);
                 }
@@ -27,15 +27,37 @@ namespace H.Core.Services.Initialization.Animals
         }
 
         /// <summary>
-        /// Reinitialize the <see cref="ManagementPeriod"/> volatile solid excretion manure detail
+        /// Initialize the <see cref="ManagementPeriod"/> volatile solid excretion manure detail
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to be reinitialized</param>
         /// <param name="province">The <see cref="Province"/> used to get correct values from lookup table</param>
         public void InitializeVolatileSolidsExcretion(ManagementPeriod managementPeriod, Province province)
         {
-            if (managementPeriod != null && managementPeriod.ManureDetails != null && managementPeriod.AnimalType.IsSwineType())
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
             {
-                managementPeriod.ManureDetails.VolatileSolidExcretion = _volatileExcretionForDietsProvider.Get(province, managementPeriod.AnimalType);
+                if (managementPeriod.AnimalType.IsSwineType())
+                {
+                    managementPeriod.ManureDetails.VolatileSolidExcretion = _volatileExcretionForDietsProvider.Get(province, managementPeriod.AnimalType);
+                }
+            }
+        }
+
+        public void InitializeVolatileSolids(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeVolatileSolids(managementPeriod);
+                }
+            }
+        }
+
+        public void InitializeVolatileSolids(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                managementPeriod.ManureDetails.VolatileSolids = _livestockDailyVolatileExcretionFactorsProvider.GetVolatileSolids(managementPeriod.AnimalType);
             }
         }
 

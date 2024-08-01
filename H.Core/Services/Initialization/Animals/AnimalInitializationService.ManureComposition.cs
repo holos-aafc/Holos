@@ -13,7 +13,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the default <see cref="DefaultManureCompositionData"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        public void InitializeManureCompositionData(Farm farm)
+        public void ReinitializeManureCompositionData(Farm farm)
         {
             if (farm != null)
             {
@@ -24,9 +24,22 @@ namespace H.Core.Services.Initialization.Animals
 
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    var defaults = _defaultManureCompositionProvider.GetManureCompositionDataByType(managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
+                    var defaults = farm.GetManureCompositionData(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
 
                     this.InitializeManureCompositionData(managementPeriod, defaults);
+                }
+            }
+        }
+
+        public void InitializeManureCompositionData(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    var manureCompositionData = farm.GetManureCompositionData(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
+
+                    this.InitializeManureCompositionData(managementPeriod, manureCompositionData);
                 }
             }
         }

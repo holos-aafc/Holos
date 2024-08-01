@@ -78,6 +78,17 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
+        public void InitializeDailyTanExcretion(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeDailyTanExcretion(managementPeriod);
+                }
+            }
+        }
+
         public void InitializeDailyTanExcretion(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.ManureDetails != null)
@@ -85,6 +96,17 @@ namespace H.Core.Services.Initialization.Animals
                 if (managementPeriod.AnimalType.IsPoultryType())
                 {
                     managementPeriod.ManureDetails.DailyTanExcretion = _defaultDailyTanExcretionRatesForPoultry.GetDailyTanExcretionRate(animalType: managementPeriod.AnimalType);
+                }
+            }
+        }
+
+        public void InitializeAmmoniaEmissionFactorForManureStorage(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeAmmoniaEmissionFactorForManureStorage(managementPeriod);
                 }
             }
         }
@@ -104,6 +126,17 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
+        public void InitializeAmmoniaEmissionFactorForHousing(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeAmmoniaEmissionFactorForHousing(managementPeriod);
+                }
+            }
+        }
+
         public void InitializeAmmoniaEmissionFactorForHousing(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.HousingDetails != null)
@@ -111,6 +144,17 @@ namespace H.Core.Services.Initialization.Animals
                 if (managementPeriod.AnimalType.IsPoultryType())
                 {
                     managementPeriod.HousingDetails.AmmoniaEmissionFactorForHousing = _defaultDailyTanExcretionRatesForPoultry.GetAmmoniaEmissionFactorForHousing(animalType: managementPeriod.AnimalType);
+                }
+            }
+        }
+
+        public void InitializeAmmoniaEmissionFactorForLandApplication(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeAmmoniaEmissionFactorForLandApplication(managementPeriod);
                 }
             }
         }

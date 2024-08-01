@@ -6,7 +6,7 @@ namespace H.Core.Providers.Animals
     /// <summary>
     /// Table 38. Default CH4 emission factors for solid manure for other livestock groups.
     /// </summary>
-    public class Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider
+    public class Table_38_Poultry_Other_Livestock_Default_CH4_Emission_Factors_Provider
     {
         public double GetDailyManureMethaneEmissionRate(AnimalType animalType)
         {
@@ -42,7 +42,7 @@ namespace H.Core.Providers.Animals
             }
 
             System.Diagnostics.Trace.TraceError(
-                $"{nameof(Table_38_OtherLivestock_Default_CH4_Emission_Factors_Provider)}.{nameof(GetDailyManureMethaneEmissionRate)}" +
+                $"{nameof(Table_38_Poultry_Other_Livestock_Default_CH4_Emission_Factors_Provider)}.{nameof(GetDailyManureMethaneEmissionRate)}" +
                 $": Unable to get data for animal type: {animalType.GetDescription()}." +
                 $" Returning default value of 0.");
 

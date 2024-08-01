@@ -1,4 +1,6 @@
-﻿using H.Core.Models;
+﻿using System.Linq;
+using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.Animals;
 
 namespace H.Core.Services.Initialization.Animals
@@ -11,13 +13,24 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
         /// </summary>
         /// <param name="farm"> Contains the <see cref="ManureDetails.DailyManureMethaneEmissionRate"/> that needs to be reinitialized to default</param>
-        public void InitializeOtherLivestockDefaultCH4EmissionFactor(Farm farm)
+        public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    managementPeriod.ManureDetails.DailyManureMethaneEmissionRate = _otherLivestockDefaultCh4EmissionFactorsProvider.GetDailyManureMethaneEmissionRate(managementPeriod.AnimalType);
+                    this.InitializeAnnualManureMethaneEmissionRate(managementPeriod);
+                }
+            }
+        }
+
+        public void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod)
+        {
+            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            {
+                if (managementPeriod.AnimalType.IsPoultryType() || managementPeriod.AnimalType.IsOtherAnimalType())
+                {
+                    managementPeriod.ManureDetails.DailyManureMethaneEmissionRate = _poultryAndOtherLivestockDefaultCh4EmissionFactorsProvider.GetDailyManureMethaneEmissionRate(managementPeriod.AnimalType);
                 }
             }
         }
@@ -26,13 +39,13 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the default annual enteric methane rate for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>Whi
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        public void InitializeAnnualEntericMethaneRate(Farm farm)
+        public void InitializeAnnualEntericMethaneEmissionRate(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    this.InitializeAnnualEntericMethaneRate(managementPeriod);
+                    this.InitializeAnnualEntericMethaneEmissionRate(managementPeriod);
                 }
             }
         }
@@ -41,11 +54,16 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the default annual enteric methane rate for the <see cref="ManagementPeriod"/>.
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.YearlyEntericMethaneRate"/></param>
-        public void InitializeAnnualEntericMethaneRate(ManagementPeriod managementPeriod)
+        public void InitializeAnnualEntericMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.ManureDetails != null)
             {
-                managementPeriod.ManureDetails.YearlyEntericMethaneRate = _entericMethaneProvider.GetAnnualEntericMethaneEmissionRate(managementPeriod);
+                if (managementPeriod.AnimalType.IsSwineType() || 
+                    managementPeriod.AnimalType.IsPoultryType() || 
+                    managementPeriod.AnimalType.IsOtherAnimalType())
+                {
+                    managementPeriod.ManureDetails.YearlyEntericMethaneRate = _entericMethaneProvider.GetAnnualEntericMethaneEmissionRate(managementPeriod);
+                }
             }
         }
 
@@ -53,13 +71,13 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        public void InitializeMethaneProducingCapacity(Farm farm)
+        public void InitializeMethaneProducingCapacityOfManure(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    this.InitializeMethaneProducingCapacity(managementPeriod);
+                    this.InitializeMethaneProducingCapacityOfManure(managementPeriod);
                 }
             }
         }
@@ -68,13 +86,21 @@ namespace H.Core.Services.Initialization.Animals
         /// Initialize the default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/> for the <see cref="ManagementPeriod"/>.
         /// </summary>
         /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> to initialize with a default <see cref="ManureDetails.MethaneProducingCapacityOfManure"/></param>
-        public void InitializeMethaneProducingCapacity(ManagementPeriod managementPeriod)
+        public void InitializeMethaneProducingCapacityOfManure(ManagementPeriod managementPeriod)
         {
-            if (managementPeriod != null && managementPeriod.ManureDetails != null)
+            if (managementPeriod != null && managementPeriod.ManureDetails != null && managementPeriod.HousingDetails != null)
             {
-                var capacity = _defaultMethaneProducingCapacityProvider.GetMethaneProducingCapacityOfManure(managementPeriod.AnimalType);
+                if (managementPeriod.HousingDetails.HousingType.IsPasture())
+                {
+                    // When housed on pasture, this value should be set to a constant. See table 38 "Default values for maximum methane producing capacity (Bo)" footnote 3.
+                    managementPeriod.ManureDetails.MethaneProducingCapacityOfManure = 0.19;
+                }
+                else
+                {
+                    var capacity = _defaultMethaneProducingCapacityProvider.GetMethaneProducingCapacityOfManure(managementPeriod.AnimalType);
 
-                managementPeriod.ManureDetails.MethaneProducingCapacityOfManure = capacity;
+                    managementPeriod.ManureDetails.MethaneProducingCapacityOfManure = capacity;
+                }
             }
         }
 
