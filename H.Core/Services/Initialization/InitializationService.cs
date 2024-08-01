@@ -310,6 +310,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeCropDefaults(farm, globalSettings);
         }
 
+        public void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            _cropInitializationService.InitializeAvailableSoilTypes(farm, fieldSystemComponent);
+        }
+
         public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {
             _animalInitializationService.InitializeAnnualManureMethaneEmissionRate(farm);

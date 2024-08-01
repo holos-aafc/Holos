@@ -172,5 +172,6 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
 
         void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings);
+        void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent);
     }
 }

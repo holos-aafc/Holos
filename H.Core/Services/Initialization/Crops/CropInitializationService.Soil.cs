@@ -1,5 +1,7 @@
-﻿using H.Core.Models.LandManagement.Fields;
+﻿using System.Linq;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Providers.Soil;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -27,6 +29,52 @@ namespace H.Core.Services.Initialization.Crops
             else
             {
                 cropViewItem.LigninContent = 0.0;
+            }
+        }
+
+        public void InitializeSoil(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+                {
+                    this.InitializeDefaultSoilForField(fieldSystemComponent);
+                }
+            }
+        }
+
+        public void InitializeDefaultSoilForField(FieldSystemComponent fieldSystemComponent)
+        {
+            if (fieldSystemComponent != null)
+            {
+                // Old farms will have an empty collection of available soil types for the soil data collection held by the field
+                if (fieldSystemComponent.SoilDataAvailableForField == null || fieldSystemComponent.SoilDataAvailableForField.Any() == false)
+                {
+                    
+                }
+            }
+        }
+
+        public void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            if (farm != null)
+            {
+                foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
+                {
+                    // Add this soil type if it does not already exist as an option for this field
+                    var shouldAddToField = fieldSystemComponent.SoilDataAvailableForField.FirstOrDefault(x => x.SoilGreatGroup == soilData.SoilGreatGroup) == null;
+                    if (shouldAddToField)
+                    {
+                        // We don't model organic soil at this time
+                        if (soilData.IsOrganic() == false)
+                        {
+                            var copiedSoil = new SoilData();
+                            _soilDataMapper.Map(soilData, copiedSoil);
+
+                            fieldSystemComponent.SoilDataAvailableForField.Add(copiedSoil);
+                        }
+                    }
+                }
             }
         }
 

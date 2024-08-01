@@ -667,6 +667,8 @@
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Harvest.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Tillage.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Perennials.cs" />
+    <Compile Include="Services\Initialization\Crops\CropInitializationService.Returns.cs" />
+    <Compile Include="Services\Initialization\Crops\CropInitializationService.Custom.cs" />
     <Compile Include="Services\Initialization\Crops\ICropInitializationService.cs" />
     <Compile Include="Services\Initialization\IInitializationService.cs" />
     <Compile Include="Services\Initialization\InitializationService.cs" />

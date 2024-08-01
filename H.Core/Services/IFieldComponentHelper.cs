@@ -10,6 +10,5 @@ namespace H.Core.Services
         void Replicate(ComponentBase copyFrom, ComponentBase copyTo);
         FieldSystemComponent Replicate(FieldSystemComponent component);
         string GetUniqueFieldName(IEnumerable<FieldSystemComponent> components);
-        void InitializeSoilAvailableSoilTypes(Farm farm, FieldSystemComponent component);
     }
 }

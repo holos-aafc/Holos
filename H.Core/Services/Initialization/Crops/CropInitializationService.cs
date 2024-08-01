@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Calculators.Carbon;
@@ -45,6 +46,8 @@ namespace H.Core.Services.Initialization.Crops
 
         private static readonly SmallAreaYieldProvider _smallAreaYieldProvider;
 
+        private readonly IMapper _soilDataMapper;
+
         #endregion
 
         #region Constructors
@@ -73,6 +76,13 @@ namespace H.Core.Services.Initialization.Crops
             _irrigationService = new IrrigationService();
             _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
             _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
+
+            var soilDataMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<SoilData, SoilData>();
+            });
+
+            _soilDataMapper = soilDataMapper.CreateMapper();
         }
 
         #endregion
@@ -83,6 +93,11 @@ namespace H.Core.Services.Initialization.Crops
         {
             if (farm != null)
             {
+                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+                {
+
+                }
+
                 foreach (var fieldSystemComponent in farm.FieldSystemComponents)
                 {
                     foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
@@ -100,6 +115,11 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
+        public void InitializeFieldComponent(FieldSystemComponent fieldSystemComponent)
+        {
+
+        }
+
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
         /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
@@ -110,10 +130,8 @@ namespace H.Core.Services.Initialization.Crops
 
             Trace.TraceInformation($"{nameof(CropInitializationService)}.{nameof(InitializeCropDefaults)}: applying defaults to {viewItem.CropTypeString}");
 
-            var defaults = farm.Defaults;
-
             this.InitializeNitrogenFixation(viewItem);
-            this.InitializeCarbonConcentration(viewItem, defaults);
+            this.InitializeCarbonConcentration(viewItem, farm.Defaults);
             this.InitializeIrrigationWaterApplication(farm, viewItem);
             this.InitializeBiomassCoefficients(viewItem, farm);
             this.InitializeNitrogenContent(viewItem, farm);
@@ -132,104 +150,6 @@ namespace H.Core.Services.Initialization.Crops
             this.InitializeUserDefaults(viewItem, globalSettings);
 
             viewItem.IsInitialized = true;
-            viewItem.CropEconomicData.IsInitialized = true;
-        }
-
-        /// <summary>
-        /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
-        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
-        {
-            if (farm != null && viewItem != null)
-            {
-                var defaults = farm.Defaults;
-
-                /*
-                 * Initialize the view item by checking the crop type
-                 */
-
-                if (viewItem.CropType.IsPerennial())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForPerennials;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForPerennials;
-                }
-                else if (viewItem.CropType.IsAnnual())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForAnnuals;
-                    viewItem.PercentageOfRootsReturnedToSoil = defaults.PercentageOfRootsReturnedToSoilForAnnuals;
-                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForAnnuals;
-                }
-
-                if (viewItem.CropType.IsRootCrop())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = defaults.PercentageOfProductReturnedToSoilForRootCrops;
-                    viewItem.PercentageOfStrawReturnedToSoil = defaults.PercentageOfStrawReturnedToSoilForRootCrops;
-                }
-
-                if (viewItem.CropType.IsCoverCrop())
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                    viewItem.PercentageOfStrawReturnedToSoil = 100;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-
-                /*
-                 * Initialize the view item by checking the harvest method (override any setting based on crop type
-                 */
-
-                if (viewItem.CropType.IsSilageCrop() || viewItem.HarvestMethod == HarvestMethods.Silage)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 2;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-                else if (viewItem.HarvestMethod == HarvestMethods.Swathing)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 30;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-                else if (viewItem.HarvestMethod == HarvestMethods.GreenManure)
-                {
-                    viewItem.PercentageOfProductYieldReturnedToSoil = 100;
-                    viewItem.PercentageOfStrawReturnedToSoil = 0;
-                    viewItem.PercentageOfRootsReturnedToSoil = 100;
-                }
-            }
-        }
-
-        public void InitializeUserDefaults(CropViewItem viewItem, GlobalSettings globalSettings)
-        {
-            // Check if user has defaults defined for the type of crop
-            var cropDefaults = globalSettings.CropDefaults.SingleOrDefault(x => x.CropType == viewItem.CropType);
-            if (cropDefaults == null)
-            {
-                return;
-            }
-
-            if (cropDefaults.EnableCustomUserDefaultsForThisCrop == false)
-            {
-                // User did not specify defaults for this crop (or just wants to use system defaults) so return from here without modifying the view item further
-
-                return;
-            }
-
-            var customCropDefaultsMapperConfiguration = new MapperConfiguration(configuration =>
-            {
-                // Don't copy the GUID, and do not overwrite the year, name, or area, on the crop
-                configuration.CreateMap<CropViewItem, CropViewItem>()
-                    .ForMember(x => x.Guid, options => options.Ignore())
-                    .ForMember(x => x.Year, options => options.Ignore())
-                    .ForMember(x => x.Name, options => options.Ignore())
-                    .ForMember(x => x.Area, options => options.Ignore());
-            });
-
-            var mapper = customCropDefaultsMapperConfiguration.CreateMapper();
-
-            mapper.Map(cropDefaults, viewItem);
         }
 
         #endregion

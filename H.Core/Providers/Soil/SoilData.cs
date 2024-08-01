@@ -422,6 +422,11 @@ namespace H.Core.Providers.Soil
 
         #region Public Methods
 
+        public bool IsOrganic()
+        {
+            return this.SoilFunctionalCategory == SoilFunctionalCategory.Organic;
+        }
+
         public override string ToString()
         {
             return
