@@ -5831,4 +5831,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelTotalVolumeOfDigestateProduced" xml:space="preserve">
     <value>Total digestate volume produced</value>
   </data>
+  <data name="LabelFugitiveMethaneLoss" xml:space="preserve">
+    <value>Fugitive CH₄ loss</value>
+  </data>
 </root>

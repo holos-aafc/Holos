@@ -573,8 +573,10 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.2-14
             digestorDailyOutput.HeatProduced = digestorDailyOutput.TotalPrimaryEnergyProduction * 0.5;
 
+            digestorDailyOutput.FugitiveMethaneLost = digestorDailyOutput.TotalRecoverableMethane * 0.0081;
+
             // Equation 4.8.2-15
-            digestorDailyOutput.MethaneToGrid = digestorDailyOutput.TotalRecoverableMethane * 0.0081;
+            digestorDailyOutput.MethaneToGrid = digestorDailyOutput.TotalRecoverableMethane * (1 - 0.0081);
         }
 
         public void CalculateTotalProductionFromAllSubstratesOnSameDay(

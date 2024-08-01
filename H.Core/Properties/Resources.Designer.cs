@@ -9549,6 +9549,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fugitive CH₄ loss.
+        /// </summary>
+        public static string LabelFugitiveMethaneLoss {
+            get {
+                return ResourceManager.GetString("LabelFugitiveMethaneLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gestation.
         /// </summary>
         public static string LabelGestationDiet {
