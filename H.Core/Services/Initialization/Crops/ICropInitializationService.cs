@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Carbon;
@@ -169,9 +170,12 @@ namespace H.Core.Services.Initialization.Crops
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
         /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
         /// </summary>
-        void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
+        void InitializeCrop(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings);
 
-        void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings);
+        void InitializeCrops(Farm farm, GlobalSettings globalSettings);
         void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent);
+        void InitializeDefaultSoilForField(Farm farm, FieldSystemComponent fieldSystemComponent);
+        void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes);
+        void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
     }
 }

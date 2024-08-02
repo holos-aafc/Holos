@@ -465,7 +465,7 @@ namespace H.Integration.Hay_LCI
 
                 foreach (var cropViewItem in field.CropViewItems)
                 {
-                    _initializationService.InitializeCropDefaults(cropViewItem, farm, _globalSettings);
+                    _initializationService.InitializeCrop(cropViewItem, farm, _globalSettings);
 
                     this.AssignFertilizerApplications(cropViewItem, farm);
                     this.AssignManureApplications(cropViewItem, farm);

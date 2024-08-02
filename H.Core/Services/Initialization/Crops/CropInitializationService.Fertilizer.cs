@@ -1,6 +1,9 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using System.Collections.Generic;
+using System.Linq;
+using H.Infrastructure;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -127,6 +130,82 @@ namespace H.Core.Services.Initialization.Crops
             var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100));
 
             return requiredAmountOfProduct;
+        }
+
+        public void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes)
+        {
+            if (manureApplicationViewItem.AnimalType.IsBeefCattleType())
+            {
+                var validBeefCattleApplicationMethods = new List<ManureApplicationTypes>()
+                {
+                    ManureApplicationTypes.UntilledLandSolidSpread,
+                    ManureApplicationTypes.TilledLandSolidSpread,
+                };
+
+                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validBeefCattleApplicationMethods);
+
+                // Update the selected item based on the tillage type of the field
+                if (viewItem.TillageType == TillageType.NoTill)
+                {
+                    manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.UntilledLandSolidSpread;
+                }
+                else
+                {
+                    manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.TilledLandSolidSpread;
+                }
+            }
+            else if (manureApplicationViewItem.AnimalType.IsDairyCattleType())
+            {
+                var validDairyCattleApplicationMethods = new List<ManureApplicationTypes>()
+                {
+                    ManureApplicationTypes.UntilledLandSolidSpread,
+                    ManureApplicationTypes.TilledLandSolidSpread,
+                    ManureApplicationTypes.SlurryBroadcasting,
+                    ManureApplicationTypes.DropHoseBanding,
+                    ManureApplicationTypes.ShallowInjection,
+                    ManureApplicationTypes.DeepInjection,
+                };
+
+                // Can't use ObservableCollection.Clear(),
+                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validDairyCattleApplicationMethods);
+
+                if (manureApplicationViewItem.ManureStateType.IsSolidManure())
+                {
+                    if (viewItem.TillageType == TillageType.NoTill)
+                    {
+                        manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.UntilledLandSolidSpread;
+                    }
+                    else
+                    {
+                        manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.TilledLandSolidSpread;
+                    }
+                }
+                else
+                {
+                    manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.DeepInjection;
+                }
+            }
+            else
+            {
+                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validManureApplicationTypes);
+
+                manureApplicationViewItem.ManureApplicationMethod = validManureApplicationTypes.FirstOrDefault();
+            }
+        }
+
+        public void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            if (viewItem != null && fertilizerApplicationViewItem != null)
+            {
+                if (viewItem.CropType.IsPerennial())
+                {
+                    fertilizerApplicationViewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
+                }
+                else
+                {
+                    fertilizerApplicationViewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected;
+                } 
+            }
         }
 
         #endregion

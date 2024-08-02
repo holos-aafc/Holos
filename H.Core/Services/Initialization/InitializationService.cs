@@ -300,20 +300,38 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializePerennialDefaults(viewItem, farm);
         }
 
-        public void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
+        public void InitializeCrop(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
         {
-            _cropInitializationService.InitializeCropDefaults(viewItem, farm, globalSettings);
+            _cropInitializationService.InitializeCrop(viewItem, farm, globalSettings);
         }
 
-        public void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings)
+        public void InitializeCrops(Farm farm, GlobalSettings globalSettings)
         {
-            _cropInitializationService.InitializeCropDefaults(farm, globalSettings);
+            _cropInitializationService.InitializeCrops(farm, globalSettings);
         }
 
         public void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent)
         {
             _cropInitializationService.InitializeAvailableSoilTypes(farm, fieldSystemComponent);
         }
+
+        public void InitializeDefaultSoilForField(Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            _cropInitializationService.InitializeDefaultSoilForField(farm, fieldSystemComponent);
+        }
+
+        public void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem,
+            List<ManureApplicationTypes> validManureApplicationTypes)
+        {
+            _cropInitializationService.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureApplicationTypes);
+        }
+
+        public void InitializeFertilizerApplicationMethod(CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            _cropInitializationService.InitializeFertilizerApplicationMethod(viewItem, fertilizerApplicationViewItem);
+        }
+
 
         public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {

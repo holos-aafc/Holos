@@ -89,46 +89,46 @@ namespace H.Core.Services.Initialization.Crops
 
         #region Public Methods
 
-        public void InitializeCropDefaults(Farm farm, GlobalSettings globalSettings)
+        public void InitializeCrops(Farm farm, GlobalSettings globalSettings)
         {
             if (farm != null)
             {
                 foreach (var fieldSystemComponent in farm.FieldSystemComponents)
                 {
-
-                }
-
-                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
-                {
-                    foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
-                    {
-                        this.InitializeCropDefaults(cropViewItem, farm, globalSettings);    
-                    }
+                    this.InitializeFieldComponent(fieldSystemComponent, farm, globalSettings);
                 }
 
                 // Initialize state state
                 var stageState = farm.GetFieldSystemDetailsStageState();
                 foreach (var cropViewItem in stageState.DetailsScreenViewCropViewItems)
                 {
-                    this.InitializeCropDefaults(cropViewItem, farm, globalSettings);
+                    this.InitializeCrop(cropViewItem, farm, globalSettings);
                 }
             }
         }
 
-        public void InitializeFieldComponent(FieldSystemComponent fieldSystemComponent)
+        public void InitializeFieldComponent(FieldSystemComponent fieldSystemComponent, Farm farm, GlobalSettings globalSettings)
         {
+            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            {
+                this.InitializeCrop(cropViewItem, farm, globalSettings);
+            }
 
+            foreach (var cropViewItem in fieldSystemComponent.CoverCrops)
+            {
+                this.InitializeCrop(cropViewItem, farm, globalSettings);
+            }
         }
 
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
         /// of the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> should be set here.
         /// </summary>
-        public void InitializeCropDefaults(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
+        public void InitializeCrop(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
         {
             viewItem.IsInitialized = false;
 
-            Trace.TraceInformation($"{nameof(CropInitializationService)}.{nameof(InitializeCropDefaults)}: applying defaults to {viewItem.CropTypeString}");
+            Trace.TraceInformation($"{nameof(CropInitializationService)}.{nameof(InitializeCrop)}: applying defaults to {viewItem.CropTypeString}");
 
             this.InitializeNitrogenFixation(viewItem);
             this.InitializeCarbonConcentration(viewItem, farm.Defaults);

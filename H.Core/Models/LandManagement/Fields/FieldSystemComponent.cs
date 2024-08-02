@@ -86,7 +86,8 @@ namespace H.Core.Models.LandManagement.Fields
             set
             {
                 SetProperty(ref _useFieldLevelSoilData, value);
-            } }
+            }
+        }
 
         /// <summary>
         /// Allow for field specific soil data (as opposed to one type of soil being used for all fields on the farm)

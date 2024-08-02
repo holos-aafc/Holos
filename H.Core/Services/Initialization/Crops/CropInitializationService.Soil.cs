@@ -32,32 +32,46 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
-        public void InitializeSoil(Farm farm)
+        public void InitializeSoilForFields(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var fieldSystemComponent in farm.FieldSystemComponents)
                 {
-                    this.InitializeDefaultSoilForField(fieldSystemComponent);
+                    this.InitializeDefaultSoilForField(farm, fieldSystemComponent);
                 }
             }
         }
 
-        public void InitializeDefaultSoilForField(FieldSystemComponent fieldSystemComponent)
+        public void InitializeDefaultSoilForField(Farm farm, FieldSystemComponent fieldSystemComponent)
         {
             if (fieldSystemComponent != null)
             {
                 // Old farms will have an empty collection of available soil types for the soil data collection held by the field
                 if (fieldSystemComponent.SoilDataAvailableForField == null || fieldSystemComponent.SoilDataAvailableForField.Any() == false)
                 {
-                    
+                    this.InitializeAvailableSoilTypes(farm, fieldSystemComponent);
+
+                    if (fieldSystemComponent.SoilDataAvailableForField != null)
+                    {
+                        fieldSystemComponent.SoilData = fieldSystemComponent.SoilDataAvailableForField.FirstOrDefault();
+                    }
+                }
+
+                if (fieldSystemComponent.SoilData != null && fieldSystemComponent.SoilData.PolygonId == 0)
+                {
+                    var soilDataAvailableForField = fieldSystemComponent.SoilDataAvailableForField;
+                    if (soilDataAvailableForField != null)
+                    {
+                        fieldSystemComponent.SoilData = soilDataAvailableForField.FirstOrDefault();
+                    }
                 }
             }
         }
 
         public void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent)
         {
-            if (farm != null)
+            if (farm != null && farm.GeographicData != null && farm.GeographicData.SoilDataForAllComponentsWithinPolygon != null)
             {
                 foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
                 {

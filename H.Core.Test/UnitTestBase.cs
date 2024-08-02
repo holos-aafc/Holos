@@ -347,6 +347,16 @@ namespace H.Core.Test
             return results;
         }
 
+        public GeographicData GetTestGeographicData()
+        {
+            var geographicData = new GeographicData();
+
+            geographicData.SoilDataForAllComponentsWithinPolygon = new List<SoilData>();
+            geographicData.SoilDataForAllComponentsWithinPolygon.Add(this.GetTestSoilData());
+
+            return geographicData;
+        }
+
         public FieldSystemComponent GetTestFieldComponent()
         {
             var component = new FieldSystemComponent();
@@ -363,6 +373,7 @@ namespace H.Core.Test
         public CropViewItem GetTestCropViewItem()
         {
             var cropViewItem = new CropViewItem();
+            cropViewItem.CropType = CropType.Wheat;
             cropViewItem.Area = 1;
             cropViewItem.Year = DateTime.Now.Year;
             cropViewItem.Guid = Guid.NewGuid();
@@ -373,12 +384,20 @@ namespace H.Core.Test
             return cropViewItem;
         }
 
+        public FertilizerApplicationViewItem GetTestFertilizerApplicationViewItem()
+        {
+            var fertilizerApplicationViewItem = new FertilizerApplicationViewItem();
+
+            return fertilizerApplicationViewItem;
+        }
+
         public SoilData GetTestSoilData( )
         {
             var soilData = new SoilData();
             soilData.EcodistrictId = 679;
             soilData.Province = Province.Alberta;
             soilData.PolygonId = 679001;
+            soilData.SoilGreatGroup = SoilGreatGroupType.BlackChernozem;
             soilData.SoilTexture = SoilTexture.Fine;
 
             return soilData;
