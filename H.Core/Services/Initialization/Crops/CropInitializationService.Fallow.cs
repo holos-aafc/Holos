@@ -10,7 +10,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeFallow(CropViewItem viewItem, Farm farm)
         {
-            if (viewItem.CropType.IsFallow())
+            if (farm != null && viewItem != null && viewItem.CropType.IsFallow())
             {
                 viewItem.Yield = 0;
                 viewItem.TillageType = farm.Defaults.DefaultTillageTypeForFallow;

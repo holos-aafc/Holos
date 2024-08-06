@@ -18,10 +18,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeLigninContent(CropViewItem cropViewItem, Farm farm)
         {
-            var province = farm.DefaultSoilData.Province;
-            var soilFunctionCategory = farm.GetPreferredSoilData(cropViewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(cropViewItem.IrrigationType, cropViewItem.AmountOfIrrigation, cropViewItem.CropType, soilFunctionCategory, province);
-
+            var residueData = this.GetResidueData(farm, cropViewItem);
             if (residueData != null)
             {
                 cropViewItem.LigninContent = residueData.LigninContent;
@@ -29,17 +26,6 @@ namespace H.Core.Services.Initialization.Crops
             else
             {
                 cropViewItem.LigninContent = 0.0;
-            }
-        }
-
-        public void InitializeSoilForFields(Farm farm)
-        {
-            if (farm != null)
-            {
-                foreach (var fieldSystemComponent in farm.FieldSystemComponents)
-                {
-                    this.InitializeDefaultSoilForField(farm, fieldSystemComponent);
-                }
             }
         }
 

@@ -8,7 +8,7 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
-        public void InitializeHarvestMethod(CropViewItem viewItem, Farm farm)
+        public void InitializeHarvestMethod(CropViewItem viewItem)
         {
             if (viewItem.CropType.IsSilageCrop())
             {
@@ -17,6 +17,19 @@ namespace H.Core.Services.Initialization.Crops
             else
             {
                 viewItem.HarvestMethod = HarvestMethods.CashCrop;
+            }
+        }
+
+        public void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem)
+        {
+            if (harvestViewItem.ForageActivity == ForageActivities.Hayed)
+            {
+                // If item was hayed (there is a 35% loss by default)
+                harvestViewItem.Utilization = 100 - farm.Defaults.PercentageOfProductReturnedToSoilForPerennials;
+            }
+            else
+            {
+                harvestViewItem.Utilization = 65; // For silage... not sure what else to put here
             }
         }
 

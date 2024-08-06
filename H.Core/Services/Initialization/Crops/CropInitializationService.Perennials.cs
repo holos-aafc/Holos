@@ -10,7 +10,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
         {
-            if (viewItem.CropType.IsPerennial())
+            if (farm != null && viewItem != null && viewItem.CropType.IsPerennial())
             {
                 viewItem.TillageType = TillageType.NoTill;
                 viewItem.PastTillageType = TillageType.NoTill;

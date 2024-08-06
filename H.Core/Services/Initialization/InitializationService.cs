@@ -270,9 +270,9 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeFuelEnergy(farm, viewItem);
         }
 
-        public void InitializeHarvestMethod(CropViewItem viewItem, Farm farm)
+        public void InitializeHarvestMethod(CropViewItem viewItem)
         {
-            _cropInitializationService.InitializeHarvestMethod(viewItem, farm);
+            _cropInitializationService.InitializeHarvestMethod(viewItem);
         }
 
         public void InitializeFallow(CropViewItem viewItem, Farm farm)
@@ -336,6 +336,11 @@ namespace H.Core.Services.Initialization
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             _cropInitializationService.InitializeAmountOfBlendedProduct(farm, viewItem, fertilizerApplicationViewItem);
+        }
+
+        public void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem)
+        {
+            _cropInitializationService.InitializeUtilization(farm, harvestViewItem);
         }
 
 

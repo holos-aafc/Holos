@@ -12,12 +12,12 @@ namespace H.Core.Services.Initialization.Crops
         #region Public Methods
 
         /// <summary>
-        /// Reinitialize each <see cref="CropViewItem"/>'s irrigation properties with a <see cref="Farm"/>
+        /// Initialize each <see cref="CropViewItem"/>'s irrigation properties with a <see cref="Farm"/>
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing <see cref="CropViewItem"/>'s to be reinitialized</param>
         public void InitializeIrrigationWaterApplication(Farm farm)
         {
-            var viewItems = farm.GetCropDetailViewItems();
+            var viewItems = farm.GetAllCropViewItems();
             foreach (var viewItem in viewItems)
             {
                 InitializeIrrigationWaterApplication(farm, viewItem);
@@ -25,7 +25,7 @@ namespace H.Core.Services.Initialization.Crops
         }
 
         /// <summary>
-        /// Reinitialize the <see cref="CropViewItem"/> irrigation properties
+        /// Initialize the <see cref="CropViewItem"/> irrigation properties
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> that contains the climate data and province data required for the lookup table</param>
         /// <param name="viewItem">The <see cref="CropViewItem"/> to have its irrigation properties reinitialized</param>
@@ -47,9 +47,7 @@ namespace H.Core.Services.Initialization.Crops
                 {
                     foreach (var cropViewItem in stateStage.DetailsScreenViewCropViewItems)
                     {
-                        var soilFunctionCategory = farm.GetPreferredSoilData(cropViewItem).SoilFunctionalCategory;
-                        var residueData = _relativeBiomassInformationProvider.GetResidueData(cropViewItem.IrrigationType,
-                            cropViewItem.AmountOfIrrigation, cropViewItem.CropType, soilFunctionCategory, farm.Province);
+                        var residueData = this.GetResidueData(farm, cropViewItem);
 
                         this.InitializeMoistureContent(residueData, cropViewItem);
                     }
@@ -87,9 +85,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeMoistureContent(CropViewItem viewItem, Farm farm)
         {
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType,
-                viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
+            var residueData = this.GetResidueData(farm, viewItem);
 
             this.InitializeMoistureContent(residueData, viewItem);
         }

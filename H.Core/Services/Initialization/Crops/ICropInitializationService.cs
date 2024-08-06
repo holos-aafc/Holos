@@ -152,7 +152,7 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="viewItem">The <see cref="CropViewItem"/> that will have its values reset with new default values</param>
         void InitializeFuelEnergy(Farm farm, CropViewItem viewItem);
 
-        void InitializeHarvestMethod(CropViewItem viewItem, Farm farm);
+        void InitializeHarvestMethod(CropViewItem viewItem);
         void InitializeFallow(CropViewItem viewItem, Farm farm);
 
         /// <summary>
@@ -178,5 +178,6 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes);
         void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
         void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
+        void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem);
     }
 }

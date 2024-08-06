@@ -15,7 +15,7 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="CropViewItem"/>'s that will have their nitrogen fixation reinitialized</param>
         public void InitializeNitrogenFixation(Farm farm)
         {
-            var viewItems = farm.GetCropDetailViewItems();
+            var viewItems = farm.GetAllCropViewItems();
             foreach (var viewItem in viewItems)
             {
                 InitializeNitrogenFixation(viewItem);
@@ -28,15 +28,13 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="viewItem">The <see cref="CropViewItem"/> having its nitrogen fixation reinitialized</param>
         public void InitializeNitrogenFixation(CropViewItem viewItem)
         {
-            viewItem.NitrogenFixationPercentage =
-                _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
+            viewItem.NitrogenFixationPercentage = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
         }
 
         public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
         {
             // Assign N content values used for the ICBM methodology
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
+            var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 // Table has values in grams but unit of display is kg

@@ -13,7 +13,7 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
         public void InitializeHerbicideEnergy(Farm farm)
         {
-            var viewItems = farm.GetCropDetailViewItems();
+            var viewItems = farm.GetAllCropViewItems();
             foreach (var viewItem in viewItems)
             {
                 InitializeHerbicideEnergy(farm, viewItem);
@@ -46,7 +46,7 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
         public void InitializeFuelEnergy(Farm farm)
         {
-            var viewItems = farm.GetCropDetailViewItems();
+            var viewItems = farm.GetAllCropViewItems();
             foreach (var viewItem in viewItems)
             {
                 InitializeFuelEnergy(farm, viewItem);

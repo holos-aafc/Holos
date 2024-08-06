@@ -1352,7 +1352,7 @@ namespace H.Core.Test.Services.Initialization
         {
             var viewItem = new CropViewItem();
 
-            _initializationService.InitializeHarvestMethod(viewItem, new Farm());
+            _initializationService.InitializeHarvestMethod(viewItem);
 
             Assert.AreEqual(HarvestMethods.CashCrop, viewItem.HarvestMethod);
         }
@@ -1363,7 +1363,7 @@ namespace H.Core.Test.Services.Initialization
             var viewItem = new CropViewItem();
             viewItem.CropType = CropType.SilageCorn;
 
-            _initializationService.InitializeHarvestMethod(viewItem, new Farm());
+            _initializationService.InitializeHarvestMethod(viewItem);
 
             Assert.AreEqual(HarvestMethods.Silage, viewItem.HarvestMethod);
         }

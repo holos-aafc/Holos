@@ -50,7 +50,7 @@ namespace H.Core.Services.Initialization.Crops
                 }
 
                 /*
-                 * Initialize the view item by checking the harvest method (override any setting based on crop type
+                 * Initialize the view item by checking the harvest method (override any setting based on crop type)
                  */
 
                 if (viewItem.CropType.IsSilageCrop() || viewItem.HarvestMethod == HarvestMethods.Silage)

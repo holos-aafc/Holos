@@ -16,7 +16,7 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeCarbonConcentration(Farm farm)
         {
             var defaults = new Defaults();
-            var viewItems = farm.GetCropDetailViewItems();
+            var viewItems = farm.GetAllCropViewItems();
             foreach (var viewItem in viewItems)
             {
                 InitializeCarbonConcentration(viewItem, defaults);
@@ -35,8 +35,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
         {
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
+            var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;

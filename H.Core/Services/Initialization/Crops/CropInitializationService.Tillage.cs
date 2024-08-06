@@ -16,9 +16,7 @@ namespace H.Core.Services.Initialization.Crops
             Farm farm)
         {
             var province = farm.DefaultSoilData.Province;
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, province);
-
+            var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 if (residueData.TillageTypeTable.ContainsKey(province))
