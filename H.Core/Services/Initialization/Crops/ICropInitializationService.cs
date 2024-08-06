@@ -177,5 +177,6 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeDefaultSoilForField(Farm farm, FieldSystemComponent fieldSystemComponent);
         void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes);
         void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
+        void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
     }
 }

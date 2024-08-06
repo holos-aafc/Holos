@@ -19,6 +19,7 @@ using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
 using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
@@ -51,6 +52,7 @@ namespace H.Core.Test
         protected Mock<ISlcClimateProvider> _slcClimateProvider;
         protected Mock<IInitializationService> _mockInitializationService;
         protected IInitializationService _initializationService;
+        protected ICBMCarbonInputCalculator icbmCarbonInputCalculator;
 
         #endregion
 
@@ -62,7 +64,7 @@ namespace H.Core.Test
 
         protected UnitTestBase()
         {
-
+            icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
             _initializationService = new InitializationService();
 
             _mockFarmResultService = new Mock<IFarmResultsService>();
@@ -387,6 +389,11 @@ namespace H.Core.Test
         public FertilizerApplicationViewItem GetTestFertilizerApplicationViewItem()
         {
             var fertilizerApplicationViewItem = new FertilizerApplicationViewItem();
+            fertilizerApplicationViewItem.FertilizerBlendData =
+                new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                {
+                    PercentageNitrogen = 50,
+                };
 
             return fertilizerApplicationViewItem;
         }

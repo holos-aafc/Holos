@@ -208,6 +208,27 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
+        public void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            var selectedBlend = fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend;
+
+            if (selectedBlend == FertilizerBlends.Lime)
+            {
+                // Leave as 0 for now until methodology developed to calculate amount of lime needed by crop
+                fertilizerApplicationViewItem.AmountOfBlendedProductApplied = 0;
+            }
+            else if (selectedBlend == FertilizerBlends.CustomOrganic)
+            {
+                // Leave as 0 for now until methodology to calculate default is developed
+                fertilizerApplicationViewItem.AmountOfBlendedProductApplied = 0;
+            }
+            else
+            {
+                var amountSuggested = this.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
+                fertilizerApplicationViewItem.AmountOfBlendedProductApplied = amountSuggested;
+            }
+        }
+
         #endregion
     }
 }

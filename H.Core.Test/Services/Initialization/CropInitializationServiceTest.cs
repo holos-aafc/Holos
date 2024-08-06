@@ -3,6 +3,7 @@ using H.Core.Services.Initialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using H.Core.Calculators.Carbon;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Initialization.Crops;
@@ -48,6 +49,7 @@ namespace H.Core.Test.Services.Initialization
             _farm.Components.Add(_field);
 
             _cropsInitializationService = new CropInitializationService();
+            
         }
 
         [TestCleanup]
@@ -202,6 +204,23 @@ namespace H.Core.Test.Services.Initialization
             _cropsInitializationService.InitializeFertilizerApplicationMethod(viewItem, fertilizerApplication);
 
             Assert.AreEqual(FertilizerApplicationMethodologies.Broadcast, fertilizerApplication.FertilizerApplicationMethodology);
+        }
+
+        [TestMethod]
+        public void InitializeAmountOfBlendedProductTest()
+        {
+            var viewItem = base.GetTestCropViewItem();
+            viewItem.CropType = CropType.Wheat;
+
+            _cropsInitializationService.InitializeBiomassCoefficients(viewItem, _farm);
+            _cropsInitializationService.InitializeNitrogenContent(viewItem, _farm);
+            _cropsInitializationService.InitializePercentageReturns(_farm, viewItem);
+
+            var fertilizerApplication = base.GetTestFertilizerApplicationViewItem();
+
+            _cropsInitializationService.InitializeAmountOfBlendedProduct(_farm, viewItem, fertilizerApplication);
+
+            Assert.AreEqual(139, fertilizerApplication.AmountOfBlendedProductApplied, 1);
         }
 
         #endregion

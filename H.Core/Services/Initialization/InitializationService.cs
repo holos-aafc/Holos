@@ -332,6 +332,12 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeFertilizerApplicationMethod(viewItem, fertilizerApplicationViewItem);
         }
 
+        public void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        {
+            _cropInitializationService.InitializeAmountOfBlendedProduct(farm, viewItem, fertilizerApplicationViewItem);
+        }
+
 
         public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {
