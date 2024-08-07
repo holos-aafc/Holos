@@ -235,7 +235,7 @@ namespace H.Core.Models
 
             this.MicrobeDeath = 0.2;
             this.Denitrification = 0.5;
-            this.FertilizerEfficiency = 0.75;
+            this.FertilizerEfficiency = 0.5;
             this.FTopo = 14.03;
             this.DefaultNitrogenFixation = 0.7;
 

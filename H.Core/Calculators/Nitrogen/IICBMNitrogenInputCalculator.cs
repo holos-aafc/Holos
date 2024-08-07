@@ -50,9 +50,6 @@
         /// Equation 2.5.5-6
         /// </summary>
         /// <param name="nitrogenContentOfGrainReturnedToSoil">Nitrogen content of the grain returned to the soil (kg N ha^-1)</param>
-        /// <param name="nitrogenContentOfStrawReturnedToSoil">Nitrogen content of the straw returned to the soil (kg N ha^-1)</param>
-        /// <param name="nitrogenContentOfRootReturnedToSoil">Nitrogen content of the root returned to the soil (kg N ha^-1)</param>
-        /// <param name="nitrogenContentOfExtrarootReturnedToSoil">Nitrogen content of the extraroot returned to the soil (kg N ha^-1)</param>
         /// <param name="fertilizerEfficiencyFraction">Fertilizer use efficiency (fraction)</param>
         /// <param name="soilTestN">User defined value for existing Soil N supply for which fertilization rate was adapted</param>
         /// <param name="isNitrogenFixingCrop">Indicates if the type of crop is nitrogen fixing.</param>
@@ -60,9 +57,6 @@
         /// <param name="atmosphericNitrogenDeposition">N deposition on a specific field n (kg ha^-1) </param>
         /// <returns>N fertilizer applied (kg ha^-1)</returns>
         double CalculateSyntheticFertilizerApplied(double nitrogenContentOfGrainReturnedToSoil,
-            double nitrogenContentOfStrawReturnedToSoil,
-            double nitrogenContentOfRootReturnedToSoil,
-            double nitrogenContentOfExtrarootReturnedToSoil,
             double fertilizerEfficiencyFraction,
             double soilTestN,
             bool isNitrogenFixingCrop,

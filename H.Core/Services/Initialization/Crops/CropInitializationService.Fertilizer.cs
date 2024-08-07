@@ -29,25 +29,10 @@ namespace H.Core.Services.Initialization.Crops
                 carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturnedToSoil = _icbmNitrogenInputCalculator.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: viewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: viewItem.NitrogenContentInStraw);
-
-            var nitrogenContentOfRootReturnedToSoil = _icbmNitrogenInputCalculator.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: viewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
-
-            var nitrogenContentOfExtrarootReturnedToSoil = _icbmNitrogenInputCalculator.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
-
             var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
 
             var syntheticFertilizerApplied = _icbmNitrogenInputCalculator.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: nitrogenContentOfGrainReturnedToSoil,
-                nitrogenContentOfStrawReturnedToSoil: nitrogenContentOfStrawReturnedToSoil,
-                nitrogenContentOfRootReturnedToSoil: nitrogenContentOfRootReturnedToSoil,
-                nitrogenContentOfExtrarootReturnedToSoil: nitrogenContentOfExtrarootReturnedToSoil,
                 fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
                 soilTestN: viewItem.SoilTestNitrogen,
                 isNitrogenFixingCrop: isLeguminousCrop,

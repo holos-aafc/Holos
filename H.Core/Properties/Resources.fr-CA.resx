@@ -5772,4 +5772,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelFugitiveMethaneLoss" xml:space="preserve">
     <value>Fugitive CH₄ loss</value>
   </data>
+  <data name="ToolTipAdvancedDietMethaneConversionFactorForDietInfo" xml:space="preserve">
+    <value>Defines the portion of methane-producing potential achieved for each diet type</value>
+  </data>
 </root>

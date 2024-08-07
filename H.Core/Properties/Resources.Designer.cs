@@ -15502,6 +15502,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Defines the portion of methane-producing potential achieved for each diet type.
+        /// </summary>
+        public static string ToolTipAdvancedDietMethaneConversionFactorForDietInfo {
+            get {
+                return ResourceManager.GetString("ToolTipAdvancedDietMethaneConversionFactorForDietInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defines the portion of methane-producing potential achieved for each type of manure management system.
         /// </summary>
         public static string ToolTipAdvancedDIetMethaneConversionFactorInfo {

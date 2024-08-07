@@ -220,7 +220,7 @@ namespace H.Core.Test.Services.Initialization
 
             _cropsInitializationService.InitializeAmountOfBlendedProduct(_farm, viewItem, fertilizerApplication);
 
-            Assert.AreEqual(139, fertilizerApplication.AmountOfBlendedProductApplied, 1);
+            Assert.AreEqual(53.4, fertilizerApplication.AmountOfBlendedProductApplied, 1);
         }
 
         #endregion

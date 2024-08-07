@@ -65,23 +65,17 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             var firstRate = _nitrogenInputCalculator.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: 100,
-                nitrogenContentOfStrawReturnedToSoil: 200,
-                nitrogenContentOfRootReturnedToSoil: 300,
-                nitrogenContentOfExtrarootReturnedToSoil: 200,
                 fertilizerEfficiencyFraction: 0.5,
                 soilTestN: 10,
                 isNitrogenFixingCrop: false,
                 nitrogenFixationAmount: 0,
                 atmosphericNitrogenDeposition: 0);
 
-            Assert.AreEqual(1580, firstRate);
+            Assert.AreEqual(180, firstRate);
 
             // Increasing efficiency should reduce the required amount of fertilizer
             var secondRate = _nitrogenInputCalculator.CalculateSyntheticFertilizerApplied(
                 nitrogenContentOfGrainReturnedToSoil: 100,
-                nitrogenContentOfStrawReturnedToSoil: 200,
-                nitrogenContentOfRootReturnedToSoil: 300,
-                nitrogenContentOfExtrarootReturnedToSoil: 200,
                 fertilizerEfficiencyFraction: 0.75,
                 soilTestN: 10,
                 isNitrogenFixingCrop: false,
