@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System.Collections.Generic;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
@@ -180,5 +181,6 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeManureCompositionData(Farm farm);
         void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod);
         void InitializeVolatileSolids(Farm farm);
+        List<DietAdditiveType> GetValidDietAdditiveTypes();
     }
 }

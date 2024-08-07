@@ -16,6 +16,15 @@ namespace H.Core.Services.Initialization.Crops
             viewItem.Sand = soilData.ProportionOfSandInSoil;
         }
 
+        public void InitializeLigninContent(Farm farm)
+        {
+            var viewItems = farm.GetAllCropViewItems();
+            foreach (var viewItem in viewItems)
+            {
+                this.InitializeLigninContent(viewItem, farm);
+            }
+        }
+
         public void InitializeLigninContent(CropViewItem cropViewItem, Farm farm)
         {
             var residueData = this.GetResidueData(farm, cropViewItem);

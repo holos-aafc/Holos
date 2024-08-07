@@ -653,6 +653,7 @@
     <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Milk.cs" />
     <Compile Include="Services\Initialization\Animals\AnimalInitializationService.ManureComposition.cs" />
     <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Sheep.cs" />
+    <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Diet.cs" />
     <Compile Include="Services\Initialization\Animals\IAnimalInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Carbon.cs" />

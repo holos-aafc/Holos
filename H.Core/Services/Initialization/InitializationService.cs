@@ -343,6 +343,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeUtilization(farm, harvestViewItem);
         }
 
+        public void InitializeLigninContent(Farm farm)
+        {
+            _cropInitializationService.InitializeLigninContent(farm);
+        }
+
 
         public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {
@@ -584,6 +589,11 @@ namespace H.Core.Services.Initialization
         public void InitializeVolatileSolids(Farm farm)
         {
             _animalInitializationService.InitializeVolatileSolids(farm);
+        }
+
+        public List<DietAdditiveType> GetValidDietAdditiveTypes()
+        {
+            return _animalInitializationService.GetValidDietAdditiveTypes();
         }
 
         #endregion

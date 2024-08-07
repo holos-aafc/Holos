@@ -179,5 +179,6 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
         void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
         void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem);
+        void InitializeLigninContent(Farm farm);
     }
 }

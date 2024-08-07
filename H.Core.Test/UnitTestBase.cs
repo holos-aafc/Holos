@@ -4,6 +4,7 @@ using H.Core.Models.Animals.Beef;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -356,6 +357,8 @@ namespace H.Core.Test
             geographicData.SoilDataForAllComponentsWithinPolygon = new List<SoilData>();
             geographicData.SoilDataForAllComponentsWithinPolygon.Add(this.GetTestSoilData());
 
+            geographicData.DefaultSoilData = geographicData.SoilDataForAllComponentsWithinPolygon.FirstOrDefault();
+
             return geographicData;
         }
 
@@ -404,6 +407,7 @@ namespace H.Core.Test
             soilData.EcodistrictId = 679;
             soilData.Province = Province.Alberta;
             soilData.PolygonId = 679001;
+            soilData.SoilFunctionalCategory = SoilFunctionalCategory.Brown;
             soilData.SoilGreatGroup = SoilGreatGroupType.BlackChernozem;
             soilData.SoilTexture = SoilTexture.Fine;
 
@@ -496,6 +500,22 @@ namespace H.Core.Test
             manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare = 50;
 
             return manureApplicationViewItem;
+        }
+
+        public Storage GetTestStorage()
+        {
+            var storage = new Storage();
+
+            var farm = this.GetTestFarm();
+            var applicationData = new ApplicationData();
+            applicationData.GlobalSettings = new GlobalSettings();
+            storage.ApplicationData = applicationData;
+
+            storage.ApplicationData.Farms.Add(farm);
+            
+            applicationData.GlobalSettings.ActiveFarm = farm;
+            ;
+            return storage;
         }
 
         #endregion

@@ -610,9 +610,7 @@ namespace H.Core.Providers.Feed
             // Assign a default ym so that if there are no cases that cover the diet below, there will be a value assigned
             this.MethaneConversionFactor = 0.04;
 
-            if (this.AnimalType == AnimalType.DairyLactatingCow ||
-                this.AnimalType == AnimalType.DairyDryCow ||
-                this.AnimalType == AnimalType.DairyHeifers)
+            if (this.AnimalType.IsDairyCattleType())
             {
                 if (this.TotalDigestibleNutrient >= 65)
                 {
@@ -628,11 +626,7 @@ namespace H.Core.Providers.Feed
                 }
             }
 
-            if (this.AnimalType == AnimalType.BeefCow ||
-                this.AnimalType == AnimalType.BeefReplacementHeifers ||
-                this.AnimalType == AnimalType.Stockers ||
-                this.AnimalType == AnimalType.BeefBackgrounder ||
-                this.AnimalType == AnimalType.BeefBulls)
+            if (this.AnimalType.IsBeefCattleType())
             {
                 if (this.TotalDigestibleNutrient >= 65)
                 {
