@@ -54,7 +54,13 @@ namespace H.Core.Test.Services.Animals
             var farm = new Farm();
 
             _service.InitializeFarm(farm);
-        } 
+        }
+
+        [TestMethod]
+        public void InitializeMCFTest()
+        {
+
+        }
 
         #endregion
     }

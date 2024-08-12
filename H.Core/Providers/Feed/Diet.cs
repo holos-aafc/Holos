@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
@@ -14,9 +15,6 @@ using H.Infrastructure;
 
 namespace H.Core.Providers.Feed
 {
-    /// <summary>
-    /// Do not hold a reference to a Diet object in a ManagementPeriod object since it causes too much complication in the GUI
-    /// </summary>
     public class Diet : ModelBase
     {
         #region Fields                
@@ -466,7 +464,7 @@ namespace H.Core.Providers.Feed
             this.CrudeFiber = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeFiber);
             this.P = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.P);
 
-            this.AssignYmValue();
+            this.CalculateMCF();
         }
 
         public double GetTotalPercentageOfDietItems()
@@ -601,63 +599,74 @@ namespace H.Core.Providers.Feed
             return this.Ingredients.WeightedAverage(x => x.Nemf, x => x.PercentageInDiet);
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void AssignYmValue()
+        public double CalculateMCF(AnimalType animalType, double totalDigestibleNutrient)
         {
             // Assign a default ym so that if there are no cases that cover the diet below, there will be a value assigned
-            this.MethaneConversionFactor = 0.04;
+            var result = 0.4;
 
-            if (this.AnimalType.IsDairyCattleType())
+            if (animalType.IsDairyCattleType())
             {
-                if (this.TotalDigestibleNutrient >= 65)
+                if (totalDigestibleNutrient >= 65)
                 {
-                    this.MethaneConversionFactor = 0.063;
+                    result = 0.063;
                 }
-                else if (55 <= this.TotalDigestibleNutrient && this.TotalDigestibleNutrient < 65)
+                else if (55 <= totalDigestibleNutrient && totalDigestibleNutrient < 65)
                 {
-                    this.MethaneConversionFactor = 0.065;
+                    result = 0.065;
                 }
                 else
                 {
-                    this.MethaneConversionFactor = 0.07;
+                    result = 0.07;
                 }
             }
 
-            if (this.AnimalType.IsBeefCattleType())
+            if (animalType.IsBeefCattleType())
             {
-                if (this.TotalDigestibleNutrient >= 65)
+                if (totalDigestibleNutrient >= 65)
                 {
-                    this.MethaneConversionFactor = 0.065;
+                    result = 0.065;
                 }
-                else if (this.TotalDigestibleNutrient >= 55 && this.TotalDigestibleNutrient < 65)
+                else if (totalDigestibleNutrient >= 55 && totalDigestibleNutrient < 65)
                 {
-                    this.MethaneConversionFactor = 0.07;
+                    result = 0.07;
                 }
                 else
                 {
-                    this.MethaneConversionFactor = 0.08;
+                    result = 0.08;
                 }
             }
 
-            if (this.AnimalType == AnimalType.BeefFinisher)
+            if (animalType == AnimalType.BeefFinisher)
             {
                 if (string.IsNullOrWhiteSpace(this.Name) == false)
                 {
                     if (this.Name.Equals(Resources.LabelCornGrainBasedDiet))
                     {
-                        this.MethaneConversionFactor = 0.03;
+                        result = 0.03;
                     }
 
                     if (this.Name.Equals(Resources.LabelBarleyGrainBasedDiet))
                     {
-                        this.MethaneConversionFactor = 0.04;
+                        result = 0.04;
+
                     }
                 }
             }
+
+
+            return result;
         }
+
+        public void CalculateMCF()
+        {
+            this.MethaneConversionFactor = this.CalculateMCF(this.AnimalType, this.TotalDigestibleNutrient);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+
 
         #endregion
 

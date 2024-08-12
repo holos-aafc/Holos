@@ -5837,4 +5837,16 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="ToolTipAdvancedDietMethaneConversionFactorForDietInfo" xml:space="preserve">
     <value>Defines the portion of methane-producing potential achieved for each diet type</value>
   </data>
+  <data name="ButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="LabelResetLignin" xml:space="preserve">
+    <value>Reset lignin content</value>
+  </data>
+  <data name="LabelResetCarbon" xml:space="preserve">
+    <value>Reset carbon concentration</value>
+  </data>
+  <data name="LabelResetNitrogenFixation" xml:space="preserve">
+    <value>Reset nitrogen fixation</value>
+  </data>
 </root>

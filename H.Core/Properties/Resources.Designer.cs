@@ -576,6 +576,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string ButtonApply {
+            get {
+                return ResourceManager.GetString("ButtonApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Manure Export.
         /// </summary>
         public static string ButtonCreateManureExport {
@@ -10967,6 +10976,33 @@ namespace H.Core.Properties {
         public static string LabelReportYear {
             get {
                 return ResourceManager.GetString("LabelReportYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset carbon concentration.
+        /// </summary>
+        public static string LabelResetCarbon {
+            get {
+                return ResourceManager.GetString("LabelResetCarbon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset lignin content.
+        /// </summary>
+        public static string LabelResetLignin {
+            get {
+                return ResourceManager.GetString("LabelResetLignin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset nitrogen fixation.
+        /// </summary>
+        public static string LabelResetNitrogenFixation {
+            get {
+                return ResourceManager.GetString("LabelResetNitrogenFixation", resourceCulture);
             }
         }
         

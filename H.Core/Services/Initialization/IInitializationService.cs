@@ -16,4 +16,3 @@ namespace H.Core.Services.Initialization
         void ReInitializeFarms(IEnumerable<Farm> farms);
     }
 }
-    

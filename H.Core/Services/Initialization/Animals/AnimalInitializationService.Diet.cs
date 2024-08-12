@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using H.Core.Enumerations;
+using H.Core.Models.Animals;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -20,6 +21,11 @@ namespace H.Core.Services.Initialization.Animals
             };
 
             return result;
+        }
+
+        public void InitializeTotals(ManagementPeriod managementPeriod)
+        {
+            managementPeriod.SelectedDiet.UpdateTotals();
         }
 
         #endregion

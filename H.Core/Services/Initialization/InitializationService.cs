@@ -326,7 +326,8 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureApplicationTypes);
         }
 
-        public void InitializeFertilizerApplicationMethod(CropViewItem viewItem,
+        public void InitializeFertilizerApplicationMethod(
+            CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             _cropInitializationService.InitializeFertilizerApplicationMethod(viewItem, fertilizerApplicationViewItem);
@@ -594,6 +595,11 @@ namespace H.Core.Services.Initialization
         public List<DietAdditiveType> GetValidDietAdditiveTypes()
         {
             return _animalInitializationService.GetValidDietAdditiveTypes();
+        }
+
+        public void InitializeTotals(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeTotals(managementPeriod);
         }
 
         #endregion

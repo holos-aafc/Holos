@@ -182,5 +182,6 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod);
         void InitializeVolatileSolids(Farm farm);
         List<DietAdditiveType> GetValidDietAdditiveTypes();
+        void InitializeTotals(ManagementPeriod managementPeriod);
     }
 }
