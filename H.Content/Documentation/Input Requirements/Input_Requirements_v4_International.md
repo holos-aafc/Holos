@@ -689,7 +689,7 @@ Diet management
 |Forage |% |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions
 |Crude protein (CP) |% DM |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions	
 |Fat |% DM |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions		
-|Ash content of manure |% DM |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions	
+|Ash content of diet |% DM |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions	
 |Starch |% DM  |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions			
 |Neutral detergent fiber (NDF) |% DM  |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions			
 |Total digestible nutrient (TDN) |% DM  |Info only, can be changed using the custom diet creator |enteric CH<sub>4</sub> emissions / manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions			
