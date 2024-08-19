@@ -197,6 +197,15 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
+        public void InitializeYield(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeYield(viewItem, farm);
+            }
+        }
+
+
         public void InitializeYield(CropViewItem viewItem, Farm farm)
         {
             if (viewItem.CropType.IsSilageCropWithoutDefaults())

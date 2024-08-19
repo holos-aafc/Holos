@@ -36,8 +36,6 @@ namespace H.Core.Services
     {
         #region Fields
 
-        private readonly  IInitializationService _initializationService;
-
         private readonly IManureService _manureService;
 
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
@@ -212,8 +210,6 @@ namespace H.Core.Services
             _customYieldDataMapper = customYieldMapper.CreateMapper();
 
             #endregion
-
-            _initializationService = new InitializationService();
         }
 
         #endregion
@@ -246,8 +242,6 @@ namespace H.Core.Services
             {
                 Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
             }
-
-            _initializationService.CheckInitialization(farm);
 
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();

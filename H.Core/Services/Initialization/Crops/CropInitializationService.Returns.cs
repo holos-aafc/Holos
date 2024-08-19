@@ -8,12 +8,20 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
+        public void InitializePercentageReturns(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializePercentageReturns(farm, viewItem);
+            }
+        }
+
         /// <summary>
-        /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-        /// </summary>
-        /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
-        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
-        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
+            /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
+            /// </summary>
+            /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
+            /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
+            public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
         {
             if (farm != null && viewItem != null)
             {

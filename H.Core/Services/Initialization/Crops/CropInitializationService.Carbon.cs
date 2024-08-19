@@ -33,6 +33,13 @@ namespace H.Core.Services.Initialization.Crops
             viewItem.CarbonConcentration = defaults.CarbonConcentration;
         }
 
+        public void InitializeBiomassCoefficients(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                InitializeBiomassCoefficients(viewItem, farm);
+            }
+        }
         public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
         {
             var residueData = this.GetResidueData(farm, viewItem);

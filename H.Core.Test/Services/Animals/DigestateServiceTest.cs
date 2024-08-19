@@ -183,6 +183,8 @@ namespace H.Core.Test.Services.Animals
         {
             _adComponent.IsLiquidSolidSeparated = false;
 
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() {base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults()});
+
             var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year,_farm, _adComponent);
 
             Assert.AreEqual(120, totalCarbon);
@@ -194,6 +196,8 @@ namespace H.Core.Test.Services.Animals
             _adComponent.IsLiquidSolidSeparated = false;
             _livestockDigestateApplication.DigestateState = DigestateState.Raw;
             var year = DateTime.Now.Year;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
 
             var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
 
@@ -215,6 +219,7 @@ namespace H.Core.Test.Services.Animals
 
             var year = DateTime.Now.Year;
 
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
             var totalNitrogen = _sut.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, _farm);
 
             Assert.AreEqual(90, totalNitrogen);

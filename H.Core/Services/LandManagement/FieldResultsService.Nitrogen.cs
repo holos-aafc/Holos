@@ -16,10 +16,6 @@ namespace H.Core.Services.LandManagement
     {
         #region Public Methods
 
-
-
-
-
         /// <summary>
         /// Calculates how much nitrogen added from manure of animals grazing on the field.
         /// </summary>
@@ -53,7 +49,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var grazingViewItem in grazingItems)
             {
-                var emissionsFromGrazingAnimals = this.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
+                var emissionsFromGrazingAnimals =  _animalService.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
                 {
                     totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
@@ -80,36 +76,6 @@ namespace H.Core.Services.LandManagement
         #endregion
 
         #region Private Methods
-
-        private double CalculateAboveGroundResidueNitrogen(CropViewItem cropViewItem)
-        {
-            if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
-            {
-                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-                    aboveGroundResidueDryMatter: cropViewItem.AboveGroundResidueDryMatter,
-                    cropViewItem.CarbonConcentration,
-                    nitrogenContentInStraw: cropViewItem.NitrogenContentInStraw);
-            }
-            else
-            {
-                return _n2OEmissionFactorCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
-                    cropViewItem: cropViewItem);
-            }
-        }
-
-        private double CalculateBelowGroundResidueNitrogen(CropViewItem cropViewItem)
-        {
-            if (_tier2SoilCarbonCalculator.CanCalculateInputsForCrop(cropViewItem))
-            {
-                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
-                    viewItem: cropViewItem);
-            }
-            else
-            {
-                return _n2OEmissionFactorCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
-                    cropViewItem: cropViewItem);
-            }
-        }
 
         #endregion
     }

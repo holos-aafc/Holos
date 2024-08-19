@@ -89,8 +89,12 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
             farm.Components.Add(base.GetTestFieldComponent());
-            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {_componentResults});
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
             var result = _sut.GetVolumeAvailableForExport(DateTime.Now.Year);
 
             Assert.IsTrue(result > 0);
@@ -108,6 +112,10 @@ namespace H.Core.Test.Services
         {
             var farm = base.GetTestFarm();
             farm.Components.Add(base.GetTestFieldComponent());
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { _componentResults });
 
@@ -149,7 +157,12 @@ namespace H.Core.Test.Services
         public void GetValidManureStateTypesForOnFarmManureReturnsCorrectCount()
         {
             var farm = base.GetTestFarm();
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
+            _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {_componentResults});
             var result = _sut.GetValidManureStateTypes(farm, ManureLocationSourceType.Livestock, AnimalType.Beef);
 
             Assert.AreEqual(1, result.Count);
@@ -197,6 +210,8 @@ namespace H.Core.Test.Services
         public void GetTotalNitrogenFromExportedManureReturnsZeroTest()
         {
             var farm = base.GetTestFarm();
+            farm.ManureExportViewItems.Clear();
+            
 
             var result = _sut.GetTotalNitrogenFromExportedManure(DateTime.Now.Year, farm);
 
@@ -258,6 +273,10 @@ namespace H.Core.Test.Services
             var farm = base.GetTestFarm();
             var cropViewItem = base.GetTestCropViewItem();
             var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() {emissions});
 
@@ -273,6 +292,11 @@ namespace H.Core.Test.Services
             var farm = base.GetTestFarm();
             var cropViewItem = base.GetTestCropViewItem();
             var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { emissions });
 
@@ -292,6 +316,11 @@ namespace H.Core.Test.Services
             cropViewItem.ManureApplicationViewItems.Add(base.GetTestBeefCattleManureApplicationViewItemUsingOnLivestockManure());
 
             var emissions = base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults();
+
+            foreach (var allManagementPeriod in farm.GetAllManagementPeriods())
+            {
+                allManagementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            }
 
             _sut.Initialize(farm, new List<AnimalComponentEmissionsResults>() { emissions });
 

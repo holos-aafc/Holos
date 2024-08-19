@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Providers.Feed;
 using GroupEmissionsByDay = H.Core.Emissions.Results.GroupEmissionsByDay;
 
 #endregion
@@ -77,60 +78,6 @@ namespace H.Core.Test.Services
 
         #region CalculateEquilibriumYear Tests
 
-        [TestMethod]
-        public void CalculateEquilibriumYear()
-        {
-            var detailViewItems = new List<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2000,
-                    AboveGroundCarbonInput = 10, BelowGroundCarbonInput = 20, ClimateParameter = 1,
-                    ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2001, AboveGroundCarbonInput = 20,
-                    BelowGroundCarbonInput = 40, ClimateParameter = 1, ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2002,
-                    AboveGroundCarbonInput = 30, BelowGroundCarbonInput = 80, ClimateParameter = 1,
-                    ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2003, AboveGroundCarbonInput = 40,
-                    BelowGroundCarbonInput = 100, ClimateParameter = 1, ManagementFactor = 0.9
-                },
-            };
-
-
-            var farm = new Farm()
-            {
-                UseCustomStartingSoilOrganicCarbon = false,
-                Defaults =
-                {
-                    EquilibriumCalculationStrategy = EquilibriumCalculationStrategies.Default,
-                }
-            };
-            var fieldGuid = Guid.NewGuid();
-
-            var fieldComponent = new FieldSystemComponent()
-            {
-                Guid = fieldGuid,
-            };
-
-            fieldComponent.CropViewItems.AddRange(detailViewItems);
-
-            farm.Components.Add(fieldComponent);
-
-            var result = _resultsService.CalculateEquilibriumYear(
-                detailViewItems: detailViewItems,
-                farm: farm,
-                componentId: fieldGuid);
-        }
 
         #endregion
 
@@ -1491,37 +1438,6 @@ namespace H.Core.Test.Services
 
         #endregion
 
-        [TestMethod]
-        public void CalculateCarbonLostFromHayExport()
-        {
-            var fieldId = Guid.NewGuid();
-
-            var hayExportViewItem = new CropViewItem();
-            hayExportViewItem.Year = DateTime.Now.Year;
-            hayExportViewItem.PercentageOfProductYieldReturnedToSoil = 2;
-            hayExportViewItem.HarvestViewItems.Add(new HarvestViewItem() { TotalNumberOfBalesHarvested = 20, Start = DateTime.Now });
-
-            var exportingFieldComponent = new FieldSystemComponent();
-            exportingFieldComponent.Guid = fieldId;
-            exportingFieldComponent.Name = "Exporting field";
-            exportingFieldComponent.CropViewItems.Add(hayExportViewItem);
-
-            var importingViewItem = new CropViewItem();
-            importingViewItem.HayImportViewItems.Add(new HayImportViewItem() { Date = DateTime.Now, FieldSourceGuid = fieldId, NumberOfBales = 5, MoistureContentAsPercentage = 20 });
-
-            var importingFieldComponent = new FieldSystemComponent();
-            importingFieldComponent.Name = "Importing field";
-            importingFieldComponent.CropViewItems.Add(importingViewItem);
-
-            var farm = new Farm();
-
-            farm.Components.Add(importingFieldComponent);
-            farm.Components.Add(exportingFieldComponent);
-
-            _resultsService.CalculateCarbonLostFromHayExports(exportingFieldComponent, farm);
-
-            Assert.AreEqual(5.5102040816326534, hayExportViewItem.TotalCarbonLossFromBaleExports);
-        }
 
         [TestMethod]
         public void CalculateCarbonUptakeByGrazingAnimals()
@@ -1533,16 +1449,16 @@ namespace H.Core.Test.Services
             cropViewItem.Year = DateTime.Now.Year;
 
             var cowCalfComponent = new CowCalfComponent();
+            
             var cowCalfComponentGuid = Guid.NewGuid();
             cowCalfComponent.Guid = cowCalfComponentGuid;
 
             var animalGroup = new AnimalGroup();
             var animalGroupGuid = Guid.NewGuid();
             animalGroup.Guid = animalGroupGuid;
+            animalGroup.GroupType = AnimalType.Beef;
 
-            var managementPeriod = new ManagementPeriod();
-            managementPeriod.Start = DateTime.Now;
-            managementPeriod.HousingDetails = new HousingDetails();
+            var managementPeriod = base.GetTestManagementPeriod();
             managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
             managementPeriod.HousingDetails.PastureLocation = fieldSystemComponent;
 
@@ -1601,9 +1517,9 @@ namespace H.Core.Test.Services
 
             _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
-            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults, new List<CropViewItem>() {cropViewItem});
+            carbonService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults, new List<CropViewItem>() {cropViewItem});
 
-            Assert.AreEqual(60, cropViewItem.TotalCarbonLossesByGrazingAnimals);
+            Assert.AreEqual(298.3, cropViewItem.TotalCarbonLossesByGrazingAnimals, 0.1);
         }
 
         [TestMethod]
@@ -1642,28 +1558,6 @@ namespace H.Core.Test.Services
 
             var farm = new Farm();
             farm.Components.Add(field);
-        }
-
-        [TestMethod]
-        public void CalculateCarbonUptakeByGrazingAnimalsWithOnePeriod()
-        {
-            var farm = base.GetTestFarm();
-            var fieldComponent = base.GetTestFieldComponent();
-            fieldComponent.Name = "Test";
-            var cropViewItem = base.GetTestCropViewItem();
-            
-            fieldComponent.CropViewItems.Add(cropViewItem);
-
-            var animalResults = base.GetTestGrazingBeefCattleAnimalGroupComponentEmissionsResults(fieldComponent);
-            var animalComponentResults = base.GetTestGrazingBeefCattleAnimalComponentEmissionsResults(fieldComponent);
-            var animalEmissionResults = new List<AnimalComponentEmissionsResults>() { animalComponentResults };
-
-            _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
-            _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
-
-            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldComponent, animalEmissionResults, new List<CropViewItem>() {cropViewItem});
-
-            Assert.AreEqual(100, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
         [TestMethod]

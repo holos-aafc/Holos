@@ -102,6 +102,10 @@ namespace H.Core.Services.Animals
             var result = 0d;
 
             var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(year, animalType);
+            if (totalVolumeOfManureCreated <=0)
+            {
+                return 0;
+            }
 
             result = amountExported / totalVolumeOfManureCreated;
 

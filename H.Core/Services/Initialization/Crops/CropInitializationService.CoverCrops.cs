@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Properties;
 
-namespace H.Core.Services.LandManagement
+namespace H.Core.Services.Initialization.Crops
 {
-    public partial class FieldResultsService
+    public partial class CropInitializationService
     {
-        #region Private Methods
-        
-        protected void ProcessCoverCrops(
-           IEnumerable<CropViewItem> viewItems,
-           FieldSystemComponent fieldSystemComponent)
+        public void InitializeCoverCrops(IEnumerable<CropViewItem> viewItems)
         {
             this.AssignCoverCropViewItemsDescription(viewItems);
         }
 
-        private void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems)
+        public void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems)
         {
             // Group items by year
             var viewItemsGroupedByYear = viewItems.GroupBy(x => x.Year);
@@ -34,8 +28,6 @@ namespace H.Core.Services.LandManagement
                     }
                 }
             }
-        } 
-
-        #endregion
+        }
     }
 }

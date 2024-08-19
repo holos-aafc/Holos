@@ -19,7 +19,6 @@ namespace H.Core.Test.Services
         public void GetTotalManureSpreadingEmissionsWhenOnlyOneFieldHasManureApplicationsTest()
         {
             _mockManureService.Setup(x => x.GetTotalVolumeRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(200);
-            _n2OEmissionFactorCalculator.ManureService = _mockManureService.Object;
             _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
 
             var viewItem1 = new CropViewItem();
@@ -28,7 +27,7 @@ namespace H.Core.Test.Services
             var viewItem2 = new CropViewItem();
             viewItem2.Year = DateTime.Now.Year;
 
-            var farm = new Farm();
+            var farm = base.GetTestFarm();
 
             var field1 = new FieldSystemComponent();
             field1.FieldArea = 50;
@@ -59,15 +58,14 @@ namespace H.Core.Test.Services
             var field2Results = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Results, field1Results);
-            Assert.AreEqual(0.3827566265060241, field1Results);
-            Assert.AreEqual(0.13804337349397591, field2Results);
+            Assert.AreEqual(0.1736, field1Results);
+            Assert.AreEqual(0, field2Results);
         }
 
         [TestMethod]
         public void GetTotalManureSpreadingEmissionsWhenTwoFieldsHaveManureApplicationsTest()
         {
             _mockManureService.Setup(x => x.GetTotalVolumeRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(200);
-            _n2OEmissionFactorCalculator.ManureService = _mockManureService.Object;
             _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
 
             var viewItem1 = new CropViewItem();
@@ -116,22 +114,18 @@ namespace H.Core.Test.Services
             var field2Results = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Results, field1Results);
-            Assert.AreEqual(0.3827566265060241, field1Results);
-            Assert.AreEqual(0.26824337349397587, field2Results);
+            Assert.AreEqual(0.1736, field1Results);
+            Assert.AreEqual(0.1302, field2Results, 0.0001);
         }
 
         [TestMethod]
         public void GetTotalManureSpreadingEmissionsWhenNoFieldApplicationsMadeAndOnlyOneFieldExistsTest()
         {
-            _mockManureService.Setup(x => x.GetTotalVolumeRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(200);
-            _n2OEmissionFactorCalculator.ManureService = _mockManureService.Object;
-            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
-
-            var viewItem = new CropViewItem();
+            var viewItem = base.GetTestCropViewItem();
             viewItem.Year = DateTime.Now.Year;
 
-            var farm = new Farm();
-            var field = new FieldSystemComponent();
+            var farm = base.GetTestFarm();
+            var field = base.GetTestFieldComponent();
             field.FieldArea = 50;
 
             viewItem.FieldSystemComponentGuid = field.Guid;
@@ -148,17 +142,20 @@ namespace H.Core.Test.Services
 
             field.CropViewItems.Add(viewItem);
 
+            
+            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
+            _n2OEmissionFactorCalculator.Initialize(farm);
+
             var sut = _resultsService.GetManureSpreadingEmissions(viewItem, farm).Sum(x => x.TotalEmissions);
 
-            Assert.AreEqual(0.34719999999999995, sut, 0.000001);
+            Assert.AreEqual(13375.1350833923, sut, 0.0001);
         }
 
         [TestMethod]
         public void GetTotalManureSpreadingEmissionsWhenNoFieldApplicationsMadeAndTwoFieldsExistTest()
         {
             _mockManureService.Setup(x => x.GetTotalVolumeRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(200);
-            _n2OEmissionFactorCalculator.ManureService = _mockManureService.Object;
-            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
+            
 
             var viewItem1 = new CropViewItem();
             viewItem1.Year = DateTime.Now.Year;
@@ -166,9 +163,9 @@ namespace H.Core.Test.Services
             var viewItem2 = new CropViewItem();
             viewItem2.Year = DateTime.Now.Year;
 
-            var farm = new Farm();
+            var farm = base.GetTestFarm();
 
-            var field1 = new FieldSystemComponent();
+            var field1 = base.GetTestFieldComponent();
             field1.FieldArea = 50;
             viewItem1.FieldSystemComponentGuid = field1.Guid;
             farm.Components.Add(field1);
@@ -194,12 +191,15 @@ namespace H.Core.Test.Services
             field1.CropViewItems.Add(viewItem1);
             field2.CropViewItems.Add(viewItem2);
 
+            _n2OEmissionFactorCalculator.Initialize(farm);
+            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
+
             var field1Result = _resultsService.GetManureSpreadingEmissions(viewItem1, farm).Sum(x => x.TotalEmissions);
             var field2Result = _resultsService.GetManureSpreadingEmissions(viewItem2, farm).Sum(x => x.TotalEmissions);
 
             Assert.AreNotEqual(field2Result, field1Result);
-            Assert.AreEqual(field1Result, 0.1578181818181818);
-            Assert.AreEqual(field2Result, 0.18938181818181812);
+            Assert.AreEqual(field1Result, 6079.60685608741, 0.00001);
+            Assert.AreEqual(field2Result, 7295.52822730488, 0.00001);
         }
 
         #endregion

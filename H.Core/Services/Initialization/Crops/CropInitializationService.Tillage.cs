@@ -8,6 +8,13 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
+        public void InitializeTillageType(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeTillageType(viewItem, farm);
+            }
+        }
         /// <summary>
         /// Sets the tillage type for a view item based on the province.
         /// </summary>

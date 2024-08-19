@@ -3,6 +3,7 @@
 using System;
 using System.Security.RightsManagement;
 using System.Transactions;
+using H.Core.Properties;
 using H.Infrastructure;
 
 #endregion
@@ -14,6 +15,8 @@ namespace H.Core
     public class CoreConstants
     {
         #region Constants
+
+        public const int DefaultNumberOfDecimalPlaces = 3;
 
         /// <summary>
         /// Converts from N2O-N to N2O
@@ -141,7 +144,7 @@ namespace H.Core
 
         public static string NotApplicableOutputString
         {
-            get { return H.Core.Properties.Resources.NotApplicable; } // Don't use a '-' character as it confuses when there are negative numbers in a grid cell
+            get { return Resources.NotApplicable; } // Don't use a '-' character as it confuses when there are negative numbers in a grid cell
         }
 
         #endregion

@@ -8,6 +8,14 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
+        public void InitializeHarvestMethod(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeHarvestMethod(viewItem);
+            }
+        }
+
         public void InitializeHarvestMethod(CropViewItem viewItem)
         {
             if (viewItem.CropType.IsSilageCrop())

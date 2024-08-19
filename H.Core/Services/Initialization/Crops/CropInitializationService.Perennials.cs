@@ -1,12 +1,22 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Crops
 {
     public partial class CropInitializationService
     {
         #region Public Methods
+
+        public void InitializePerennialDefaults(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializePerennialDefaults(viewItem, farm);
+            }
+        }
+
 
         public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
         {
@@ -19,7 +29,8 @@ namespace H.Core.Services.Initialization.Crops
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
                 viewItem.IsNativeGrassland = viewItem.CropType == CropType.RangelandNative;
             }
-        } 
+        }
+
 
         #endregion
     }

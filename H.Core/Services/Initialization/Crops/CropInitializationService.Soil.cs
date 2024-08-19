@@ -8,7 +8,14 @@ namespace H.Core.Services.Initialization.Crops
     public partial class CropInitializationService
     {
         #region Public Methods
-        
+
+        public void InitializeSoilProperties(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeSoilProperties(viewItem, farm);
+            }
+        }
         public void InitializeSoilProperties(CropViewItem viewItem, Farm farm)
         {
             var soilData = farm.GetPreferredSoilData(viewItem);

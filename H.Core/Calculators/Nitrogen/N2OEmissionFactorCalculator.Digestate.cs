@@ -132,7 +132,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var nitrogenRemainingAtEndOfYear = DigestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
+            var nitrogenRemainingAtEndOfYear = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
 
             // The total N2O-N from the remaining N
             var emissionsFromNitrogenRemaining = this.CalculateTotalEmissionsFromRemainingDigestateThatIsAppliedToAllFields(
@@ -162,7 +162,7 @@ namespace H.Core.Calculators.Nitrogen
         public double GetDigestateNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
         {
             var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
-            var digestateNitrogenRemaining = this.DigestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(viewItem.Year, farm);
+            var digestateNitrogenRemaining = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(viewItem.Year, farm);
 
             return fractionUsed * digestateNitrogenRemaining;
         }
@@ -222,8 +222,8 @@ namespace H.Core.Calculators.Nitrogen
             var result = 0d;
 
             // This will return total amount of N created minus amounts from land applications
-            var nitrogenRemainingAtEndOfYear = this.DigestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
-            var totalNitrogenExported = this.DigestateService.GetTotalNitrogenExported(year, farm);
+            var nitrogenRemainingAtEndOfYear = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
+            var totalNitrogenExported = _digestateService.GetTotalNitrogenExported(year, farm);
 
             result = nitrogenRemainingAtEndOfYear - totalNitrogenExported;
             if (result < 0)

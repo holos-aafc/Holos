@@ -8,6 +8,14 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
+        public void InitializeFallow(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeFallow(viewItem, farm);
+            }
+        }
+
         public void InitializeFallow(CropViewItem viewItem, Farm farm)
         {
             if (farm != null && viewItem != null && viewItem.CropType.IsFallow())

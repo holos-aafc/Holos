@@ -1,6 +1,7 @@
 ﻿#region Imports
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using H.Core.Calculators.Carbon;
 using H.Core.Enumerations;
@@ -454,8 +455,63 @@ namespace H.Core.Test.Calculators.Carbon
         #endregion
 
 
-        #endregion
 
-        
+        [TestMethod]
+        public void CalculateEquilibriumYear()
+        {
+            var detailViewItems = new List<CropViewItem>()
+            {
+                new CropViewItem()
+                {
+                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2000,
+                    AboveGroundCarbonInput = 10, BelowGroundCarbonInput = 20, ClimateParameter = 1,
+                    ManagementFactor = 0.9
+                },
+                new CropViewItem()
+                {
+                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2001, AboveGroundCarbonInput = 20,
+                    BelowGroundCarbonInput = 40, ClimateParameter = 1, ManagementFactor = 0.9
+                },
+                new CropViewItem()
+                {
+                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2002,
+                    AboveGroundCarbonInput = 30, BelowGroundCarbonInput = 80, ClimateParameter = 1,
+                    ManagementFactor = 0.9
+                },
+                new CropViewItem()
+                {
+                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2003, AboveGroundCarbonInput = 40,
+                    BelowGroundCarbonInput = 100, ClimateParameter = 1, ManagementFactor = 0.9
+                },
+            };
+
+
+            var farm = new Farm()
+            {
+                UseCustomStartingSoilOrganicCarbon = false,
+                Defaults =
+                {
+                    EquilibriumCalculationStrategy = EquilibriumCalculationStrategies.Default,
+                }
+            };
+            var fieldGuid = Guid.NewGuid();
+
+            var fieldComponent = new FieldSystemComponent()
+            {
+                Guid = fieldGuid,
+            };
+
+            fieldComponent.CropViewItems.AddRange(detailViewItems);
+
+            farm.Components.Add(fieldComponent);
+
+            var result = _sut.CalculateEquilibriumYear(
+                detailViewItems: detailViewItems,
+                farm: farm,
+                componentId: fieldGuid);
+        }
+
+
+        #endregion
     }
 }

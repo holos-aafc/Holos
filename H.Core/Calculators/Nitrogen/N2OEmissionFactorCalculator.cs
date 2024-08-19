@@ -22,18 +22,19 @@ namespace H.Core.Calculators.Nitrogen
         private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly IICBMNitrogenInputCalculator _nitrogenInputCalculator;
+        private readonly IManureService _manureService;
+        private readonly IDigestateService _digestateService;
 
         #endregion
 
         #region Properties
-        
-        public IManureService ManureService { get; set; }
-        public IDigestateService DigestateService { get; set; }
 
         public IClimateProvider ClimateProvider { get; set; }
 
         public IAnimalEmissionFactorsProvider LivestockEmissionConversionFactorsProvider { get; set; }
         public IAnimalAmmoniaEmissionFactorProvider AnimalAmmoniaEmissionFactorProvider { get; set; }
+
+        private IAnimalService _animalService;
 
         #endregion
 
@@ -41,9 +42,6 @@ namespace H.Core.Calculators.Nitrogen
 
         public N2OEmissionFactorCalculator(IClimateProvider climateProvider)
         {
-            this.ManureService = new ManureService();
-            this.DigestateService = new DigestateService();
-
             if (climateProvider != null)
             {
                 this.ClimateProvider = climateProvider;
@@ -53,11 +51,23 @@ namespace H.Core.Calculators.Nitrogen
             this.AnimalAmmoniaEmissionFactorProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
 
             _nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
+            _manureService = new ManureService();
+            _digestateService = new DigestateService();
+
+            _animalService = new AnimalResultsService();
         }
 
         #endregion
 
         #region Public Methods
+
+        public void Initialize(Farm farm)
+        {
+            var results = _animalService.GetAnimalResults(farm);
+
+            _manureService.Initialize(farm, results);
+            _digestateService.Initialize(farm, results);
+        }
 
         /// <summary>
         /// Equation 2.6.6-1
@@ -508,124 +518,12 @@ namespace H.Core.Calculators.Nitrogen
 
 
 
-        /// <summary>
-        /// Equation 2.5.6-6
-        /// Equation 2.6.2-2
-        /// Equation 2.7.2-3
-        /// Equation 2.7.2-5
-        /// Equation 2.7.2-7
-        /// Equation 2.7.2-9
-        /// </summary>
-        /// <returns>Above ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
-        {
-            var nitrogenContentOfGrainReturned = _nitrogenInputCalculator.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
 
-            var nitrogenContentOfStrawReturned = _nitrogenInputCalculator.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: cropViewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: cropViewItem.NitrogenContentInStraw);
 
-            if (cropViewItem.CropType.IsAnnual() || cropViewItem.CropType.IsPerennial())
-            {
-                return nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned;
-            }
 
-            if (cropViewItem.CropType.IsRootCrop())
-            {
-                return nitrogenContentOfStrawReturned;
-            }
 
-            if (cropViewItem.CropType.IsCoverCrop() || cropViewItem.CropType.IsSilageCrop())
-            {
-                return nitrogenContentOfGrainReturned;
-            }
 
-            // Fallow
-            return 0;
-        }
 
-        /// <summary>
-        /// Equation 2.5.6-7
-        /// Equation 2.5.6-8
-        /// Equation 2.6.2-5
-        /// Equation 2.7.2-4
-        /// Equation 2.7.2-6
-        /// Equation 2.7.2-8
-        /// Equation 2.7.2-10
-        /// </summary>
-        /// <param name="cropViewItem"></param>
-        /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
-        {
-            var grainNitrogen = _nitrogenInputCalculator.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
-
-            var rootNitrogen = _nitrogenInputCalculator.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
-
-            var exudateNitrogen = _nitrogenInputCalculator.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
-
-            // Equation 2.5.6-7
-            if (cropViewItem.CropType.IsAnnual())
-            {
-                return rootNitrogen + exudateNitrogen;
-            }
-
-            // Equation 2.5.6-8
-            if (cropViewItem.CropType.IsPerennial())
-            {
-                return (rootNitrogen * (cropViewItem.PercentageOfRootsReturnedToSoil / 100.0)) + exudateNitrogen;
-            }
-
-            if (cropViewItem.CropType.IsRootCrop())
-            {
-                return grainNitrogen + exudateNitrogen;
-            }
-
-            if (cropViewItem.CropType.IsSilageCrop() || cropViewItem.CropType.IsCoverCrop())
-            {
-                return rootNitrogen + exudateNitrogen;
-            }
-
-            return 0;
-        }
-
-        /// <summary>
-        /// Equation 2.7.2-1
-        /// </summary>
-        /// <returns></returns>
-        public double CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-            double aboveGroundResidueDryMatter,
-            double carbonConcentration,
-            double nitrogenContentInStraw)
-        {
-            return aboveGroundResidueDryMatter * nitrogenContentInStraw;
-        }
-
-        /// <summary>
-        /// Equation 2.7.2-2
-        /// Equation 2.7.2-4
-        /// Equation 2.6.2-6
-        /// </summary>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem viewItem)
-        {
-            if (viewItem.CropType.IsPerennial())
-            {
-                var perennialNitrogen = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots * (viewItem.PercentageOfRootsReturnedToSoil / 100.0);
-
-                return perennialNitrogen;
-            }
-            // Equation 2.7.2-2
-            var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots;
-
-            return result;
-        }
 
         /// <summary>
         /// Equation 2.5.2-20

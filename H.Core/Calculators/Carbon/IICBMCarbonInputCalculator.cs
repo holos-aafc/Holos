@@ -4,7 +4,7 @@ using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
 {
-    public interface IICBMCarbonInputCalculator
+    public interface IICBMCarbonInputCalculator : ICarbonInputCalculator
     {
         /// <summary>
         /// Calculates the plant carbon in the agricultural product for the given species grown in the given year.
@@ -221,18 +221,6 @@ namespace H.Core.Calculators.Carbon
         /// <returns>The total above ground carbon input</returns>
         double CalculateTotalAboveGroundCarbonInput(
             CropViewItem cropViewItem,
-            Farm farm);
-
-        /// <summary>
-        /// Equation 2.1.2-34
-        /// Equation 2.1.2-2
-        ///
-        /// (kg C ha^-1)
-        /// </summary>
-        double CalculateInputsFromSupplementalHayFedToGrazingAnimals(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItems,
             Farm farm);
 
         /// <summary>

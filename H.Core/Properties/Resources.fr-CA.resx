@@ -1564,7 +1564,7 @@ If no animals exist on the farm, it is possible to use imported manure as a feed
     <value>mal drainé</value>
   </data>
   <data name="EnumPotash" xml:space="preserve">
-    <value>potasse 0-0-60-0</value>
+    <value>potasse 0-0-60</value>
   </data>
   <data name="EnumPotassiumSulphate" xml:space="preserve">
     <value>sulfate de potassium</value>

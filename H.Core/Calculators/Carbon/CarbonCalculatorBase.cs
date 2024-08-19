@@ -5,6 +5,8 @@ using H.Core.Models.LandManagement.Fields;
 using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Services.Animals;
+using H.Core.Enumerations;
+using System.Linq;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -44,6 +46,12 @@ namespace H.Core.Calculators.Carbon
         {
             return viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
         }
+
+        #endregion
+
+        #region Private Methods
+
+
 
         #endregion
     }

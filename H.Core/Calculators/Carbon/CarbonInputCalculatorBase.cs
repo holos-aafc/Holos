@@ -1,6 +1,10 @@
 ﻿using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Services.Animals;
+using H.Core.Emissions.Results;
+using System.Collections.Generic;
+using System.Linq;
+using H.Core.Enumerations;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -10,6 +14,7 @@ namespace H.Core.Calculators.Carbon
 
         protected readonly IManureService manureService;
         protected readonly IDigestateService digestateService;
+        protected readonly IAnimalService animalService;
 
         #endregion
 
@@ -19,12 +24,19 @@ namespace H.Core.Calculators.Carbon
         {
             manureService = new ManureService();
             digestateService = new DigestateService();
+            animalService = new AnimalResultsService();
         }
 
         #endregion
 
         #region Public Methods
 
+        /// <summary>
+        /// Equation 2.1.2-34
+        /// Equation 2.1.2-2
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CalculateInputsFromSupplementalHayFedToGrazingAnimals(
             CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem,

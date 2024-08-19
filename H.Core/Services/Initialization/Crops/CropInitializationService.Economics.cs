@@ -7,6 +7,14 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
+        public void InitializeEconomicDefaults(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeEconomicDefaults(viewItem, farm);
+            }
+        }
+
         public void InitializeEconomicDefaults(
             CropViewItem cropViewItem,
             Farm farm)

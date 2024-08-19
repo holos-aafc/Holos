@@ -20,6 +20,7 @@ using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
 using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Feed;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
@@ -54,6 +55,7 @@ namespace H.Core.Test
         protected Mock<IInitializationService> _mockInitializationService;
         protected IInitializationService _initializationService;
         protected ICBMCarbonInputCalculator icbmCarbonInputCalculator;
+        protected ICarbonService carbonService;
 
         #endregion
 
@@ -95,6 +97,7 @@ namespace H.Core.Test
             _ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
 
             _fieldResultsService = new Mock<IFieldResultsService>().Object;
+            carbonService = new CarbonService();
         }
 
         #endregion
@@ -114,6 +117,23 @@ namespace H.Core.Test
             };
 
             return storage;
+        }
+
+        public ManagementPeriod GetTestManagementPeriod()
+        {
+            var managementPeriod = new ManagementPeriod();
+
+            managementPeriod.AnimalType = AnimalType.Beef;
+            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.StartWeight = 100;
+            managementPeriod.EndWeight = 200;
+            managementPeriod.Duration = TimeSpan.FromDays(30);
+            managementPeriod.HousingDetails = new HousingDetails();
+            managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+            managementPeriod.SelectedDiet = new Diet();
+            managementPeriod.SelectedDiet.TotalDigestibleNutrient = 75;
+
+            return managementPeriod;
         }
 
         public DigestateApplicationViewItem GetTestRawDigestateApplicationViewItem()
@@ -159,10 +179,22 @@ namespace H.Core.Test
             cowsGroup.GroupType = AnimalType.DairyLactatingCow;
 
             var managementPeriod = new ManagementPeriod();
-            managementPeriod.Start = DateTime.Now;
-            managementPeriod.End = managementPeriod.Start.AddDays(30 * 2);
+            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.AnimalType = AnimalType.BeefBackgrounderHeifer;
+            managementPeriod.StartWeight = 100;
+            managementPeriod.NumberOfAnimals = 1000;
+            managementPeriod.EndWeight = 200;
+            managementPeriod.GainCoefficient = 0.4;
+            managementPeriod.SelectedDiet = new Diet();
+            managementPeriod.SelectedDiet.TotalDigestibleNutrient = 100;
+            managementPeriod.SelectedDiet.CrudeProtein = 50;
 
-            managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            var timespan = TimeSpan.FromDays(30 * 2);
+            managementPeriod.Duration = timespan;
+            managementPeriod.End = managementPeriod.Start.Add(timespan);
+
+            managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
+            managementPeriod.ManureDetails.FractionOfNitrogenInManure = 0.5;
 
             farm.Components.Add(backgroundingComponent);
             farm.Components.Add(dairyComponent);
@@ -176,8 +208,8 @@ namespace H.Core.Test
              * Manure exports
              */
 
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy });
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy });
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData(){NitrogenContent = 0.5}});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 } });
 
             return farm;
         }

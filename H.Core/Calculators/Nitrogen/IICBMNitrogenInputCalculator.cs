@@ -1,4 +1,6 @@
-﻿namespace H.Core.Calculators.Nitrogen
+﻿using H.Core.Models.LandManagement.Fields;
+
+namespace H.Core.Calculators.Nitrogen
 {
     public interface IICBMNitrogenInputCalculator : INitrogenInputCalculator
     {
@@ -62,5 +64,29 @@
             bool isNitrogenFixingCrop,
             double nitrogenFixationAmount,
             double atmosphericNitrogenDeposition);
+
+        /// <summary>
+        /// Equation 2.5.6-6
+        /// Equation 2.6.2-2
+        /// Equation 2.7.2-3
+        /// Equation 2.7.2-5
+        /// Equation 2.7.2-7
+        /// Equation 2.7.2-9
+        /// </summary>
+        /// <returns>Above ground residue N (kg N ha^-1)</returns>
+        double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem);
+
+        /// <summary>
+        /// Equation 2.5.6-7
+        /// Equation 2.5.6-8
+        /// Equation 2.6.2-5
+        /// Equation 2.7.2-4
+        /// Equation 2.7.2-6
+        /// Equation 2.7.2-8
+        /// Equation 2.7.2-10
+        /// </summary>
+        /// <param name="cropViewItem"></param>
+        /// <returns>Below ground residue N (kg N ha^-1)</returns>
+        double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem);
     }
 }

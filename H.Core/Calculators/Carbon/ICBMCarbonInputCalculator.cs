@@ -8,6 +8,14 @@ namespace H.Core.Calculators.Carbon
 {
     public class ICBMCarbonInputCalculator : CarbonInputCalculatorBase, IICBMCarbonInputCalculator
     {
+        #region Constructors
+
+        public ICBMCarbonInputCalculator()
+        {
+        }
+
+        #endregion
+
         #region Public Methods
 
         public CropViewItem SetCarbonInputs(

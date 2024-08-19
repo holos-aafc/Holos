@@ -109,5 +109,10 @@ namespace H.Core.Calculators.Carbon
             CropViewItem nextYearResults,
             Farm farm,
             int yearIndex);
+
+        void CalculateCarbonAtInterval(
+            CropViewItem previousYearResults,
+            CropViewItem currentYearResults,
+            Farm farm);
     }
 }

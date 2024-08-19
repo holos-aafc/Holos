@@ -52,6 +52,7 @@ namespace H.Core.Test.Calculators.Carbon
         #region Fields
 
         private IPCCTier2SoilCarbonCalculator _sut;
+        private IPCCTier2CarbonInputCalculator _inputCalculator = new IPCCTier2CarbonInputCalculator();
 
         private static List<TestClimateData> _monthlyTestData;
         private static List<TestFactorData> _annualTestData;
@@ -225,9 +226,7 @@ namespace H.Core.Test.Calculators.Carbon
 
         #endregion
 
-        #region Tests      
-
-
+        #region Tests
 
         [TestMethod]
         public void CalculateMonthlyTemperatureFactor()
@@ -840,26 +839,7 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(108, runInPeriodYear.IpccTier2CarbonResults.PassivePool, 1);
         }
 
-        [TestMethod]
-        public void CalculateInputs()
-        {
-            var viewItem = new CropViewItem()
-            {
-                CropType = CropType.Barley,
-                Yield = 7018,
-                PercentageOfStrawReturnedToSoil = 100,
-                MoistureContentOfCrop = 0.12,
-                BiomassCoefficientStraw = 0.2,
-                BiomassCoefficientProduct = 0.6,
-            };
 
-            _sut.CalculateInputs(
-                viewItem: viewItem, farm: new Farm());
-
-            Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);
-            Assert.AreEqual(997.775453968351, viewItem.BelowGroundCarbonInput, 1);
-            Assert.AreEqual(3155.23433953193, viewItem.TotalCarbonInputs, 1);
-        }
 
         [TestMethod]
         public void CalculateResults()
@@ -896,7 +876,7 @@ namespace H.Core.Test.Calculators.Carbon
 
             foreach (var viewItem in viewItems)
             {
-                _sut.CalculateInputs(viewItem, new Farm());
+                _inputCalculator.CalculateInputsForCrop(viewItem, new Farm());
             }
 
             _sut.CropResiduePool = 100;
@@ -926,21 +906,7 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPoolDiff != 0);
         }
 
-        [TestMethod]
-        public void CanCalculateInputsForCropReturnsTrue()
-        {
-            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.Barley });
 
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void CanCalculateInputsForCropReturnsFalse()
-        {
-            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.TameMixed });
-
-            Assert.IsFalse(result);
-        }
 
         [TestMethod]
         public void UseCustomStartingPoint()

@@ -31,6 +31,14 @@ namespace H.Core.Services.Initialization.Crops
             viewItem.NitrogenFixationPercentage = _nitrogenFixationProvider.GetNitrogenFixationResult(viewItem.CropType).Fixation * 100;
         }
 
+        public void InitializeNitrogenContent(Farm farm)
+        {
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeNitrogenContent(viewItem, farm);
+            }
+        }
+
         public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
         {
             // Assign N content values used for the ICBM methodology

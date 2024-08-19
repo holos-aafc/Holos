@@ -50,32 +50,6 @@ namespace H.Core.Services.Initialization
 
         #region Public Methods
 
-        public void CheckInitialization(Farm farm)
-        {
-            if (farm == null)
-            {
-                return;
-            }
-
-            if (farm.DefaultSoilData == null)
-            {
-                return;
-            }
-
-            if (farm.ClimateData == null)
-            {
-                return;
-            }
-
-            var climateData = farm.ClimateData;
-
-            var barnTemperature = climateData.BarnTemperatureData;
-            if (barnTemperature == null || barnTemperature.IsInitialized == false)
-            {
-                this.InitializeBarnTemperature(farm);
-            }
-        }
-
         public void ReInitializeFarms(IEnumerable<Farm> farms)
         {
             foreach (var farm in farms)
@@ -143,6 +117,10 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeCarbonConcentration(viewItem, defaults);
         }
 
+        public void InitializeBiomassCoefficients (Farm farm)
+        {
+            _cropInitializationService.InitializeBiomassCoefficients(farm);
+        }
         public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeBiomassCoefficients(viewItem, farm);
@@ -152,12 +130,19 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeLumCMaxValues(cropViewItem, farm);
         }
-
+        public void InitializePercentageReturns(Farm farm)
+        {
+            _cropInitializationService.InitializePercentageReturns(farm);
+        }
         public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
         {
             _cropInitializationService.InitializePercentageReturns(farm, viewItem);
         }
 
+        public void InitializeYield(Farm farm)
+        {
+            _cropInitializationService.InitializeYield(farm);
+        }
         public void InitializeYield(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeYield(viewItem, farm);
@@ -177,7 +162,10 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeYieldForYear(farm, viewItem, fieldSystemComponent);
         }
-
+        public void InitializeEconomicDefaults( Farm farm)
+        {
+            _cropInitializationService.InitializeEconomicDefaults(farm);
+        }
         public void InitializeEconomicDefaults(CropViewItem cropViewItem, Farm farm)
         {
             _cropInitializationService.InitializeEconomicDefaults(cropViewItem, farm);
@@ -205,6 +193,10 @@ namespace H.Core.Services.Initialization
             return _cropInitializationService.CalculateRequiredNitrogenFertilizer(farm, viewItem, fertilizerApplicationViewItem);
         }
 
+        public void InitializeNitrogenContent(Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContent(farm);
+        }
         public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeNitrogenContent(viewItem, farm);
@@ -254,7 +246,10 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeMoistureContent(viewItem, farm);
         }
-
+        public void InitializeSoilProperties(Farm farm)
+        {
+            _cropInitializationService.InitializeSoilProperties(farm);
+        }
         public void InitializeSoilProperties(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeSoilProperties(viewItem, farm);
@@ -269,17 +264,26 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeFuelEnergy(farm, viewItem);
         }
-
+        public void InitializeHarvestMethod(Farm farm)
+        {
+            _cropInitializationService.InitializeHarvestMethod(farm);
+        }
         public void InitializeHarvestMethod(CropViewItem viewItem)
         {
             _cropInitializationService.InitializeHarvestMethod(viewItem);
         }
-
+        public void InitializeFallow( Farm farm)
+        {
+            _cropInitializationService.InitializeFallow(farm);
+        }
         public void InitializeFallow(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeFallow(viewItem, farm);
         }
-
+        public void InitializeTillageType(Farm farm)
+        {
+            _cropInitializationService.InitializeTillageType( farm);
+        }
         public void InitializeTillageType(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeTillageType(viewItem, farm);
@@ -294,7 +298,10 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeUserDefaults(viewItem, globalSettings);
         }
-
+        public void InitializePerennialDefaults( Farm farm)
+        {
+            _cropInitializationService.InitializePerennialDefaults( farm);
+        }
         public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializePerennialDefaults(viewItem, farm);
@@ -347,6 +354,16 @@ namespace H.Core.Services.Initialization
         public void InitializeLigninContent(Farm farm)
         {
             _cropInitializationService.InitializeLigninContent(farm);
+        }
+
+        public void InitializeCoverCrops(IEnumerable<CropViewItem> viewItems)
+        {
+            _cropInitializationService.InitializeCoverCrops(viewItems);
+        }
+
+        public void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems)
+        {
+            _cropInitializationService.AssignCoverCropViewItemsDescription(viewItems);
         }
 
 

@@ -3651,7 +3651,7 @@
     <value>NPK</value>
   </data>
   <data name="EnumPotash" xml:space="preserve">
-    <value>Potash 0-0-60-0</value>
+    <value>Potash 0-0-60</value>
   </data>
   <data name="EnumTripleSuperPhosphate" xml:space="preserve">
     <value>Triple superphosphate</value>
@@ -5843,10 +5843,157 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelResetLignin" xml:space="preserve">
     <value>Reset lignin content</value>
   </data>
-  <data name="LabelResetCarbon" xml:space="preserve">
+  <data name="LabelResetCarbonConcentration" xml:space="preserve">
     <value>Reset carbon concentration</value>
   </data>
   <data name="LabelResetNitrogenFixation" xml:space="preserve">
     <value>Reset nitrogen fixation</value>
+  </data>
+  <data name="ResetWaterIrrigation" xml:space="preserve">
+    <value>Reset water irrigation</value>
+  </data>
+  <data name="LabelResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
+    <value>Reset annual enteric CH₄ emission rate</value>
+  </data>
+  <data name="LabelResetAnnualExcretionRate" xml:space="preserve">
+    <value>Reset annual excretion rate</value>
+  </data>
+  <data name="LabelResetFeedingActivityCoefficient" xml:space="preserve">
+    <value>Reset feeding activity coefficient</value>
+  </data>
+  <data name="LabelResetLivestockCoefficientSheep" xml:space="preserve">
+    <value>Reset livestock coefficient (Sheep)</value>
+  </data>
+  <data name="LabelResetManureComposition" xml:space="preserve">
+    <value>Reset manure composition</value>
+  </data>
+  <data name="LabelResetMilkProduction" xml:space="preserve">
+    <value>Reset milk production</value>
+  </data>
+  <data name="LabelResetWaterIrrigation" xml:space="preserve">
+    <value>Reset water irrigation</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
+    <value>Reset NH₃ emission factor (housing)</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Reset NH₃ emission factor (land application)</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
+    <value>Reset NH₃ emission factor (manure storage)</value>
+  </data>
+  <data name="LabelResetAnnualManureMethaneEmissionRate" xml:space="preserve">
+    <value>Reset annual manure CH₄ emission rate</value>
+  </data>
+  <data name="LabelResetBarnTemperature" xml:space="preserve">
+    <value>Reset barn temperature</value>
+  </data>
+  <data name="LabelResetBaselineCoefficient" xml:space="preserve">
+    <value>Reset baseline coefficient</value>
+  </data>
+  <data name="LabelResetBeddingMaterial" xml:space="preserve">
+    <value>Reset bedding material</value>
+  </data>
+  <data name="LabelResetBeddingMaterialRate" xml:space="preserve">
+    <value>Reset bedding material rate</value>
+  </data>
+  <data name="LabelResetBiomassCoefficient" xml:space="preserve">
+    <value>Reset biomass coefficient</value>
+  </data>
+  <data name="LabelResetDailyTanExcretion" xml:space="preserve">
+    <value>Reset daily tan excretion</value>
+  </data>
+  <data name="LabelResetDefaultEmissionFactors" xml:space="preserve">
+    <value>Reset default emission factors</value>
+  </data>
+  <data name="LabelResetFuelEnergy" xml:space="preserve">
+    <value>Reset fuel energy</value>
+  </data>
+  <data name="LabelResetGainCoefficient" xml:space="preserve">
+    <value>Reset gain coefficient</value>
+  </data>
+  <data name="LabelResetHerbicideEnergy" xml:space="preserve">
+    <value>Reset herbicide energy</value>
+  </data>
+  <data name="LabelResetLeachingFraction" xml:space="preserve">
+    <value>Reset leaching fraction</value>
+  </data>
+  <data name="LabelResetManureCompositionData" xml:space="preserve">
+    <value>Reset manure composition data</value>
+  </data>
+  <data name="LabelResetManureMineralizationFractions" xml:space="preserve">
+    <value>Reset manure mineralization fractions</value>
+  </data>
+  <data name="LabelResetMethaneProducingCapacityOfManure" xml:space="preserve">
+    <value>Reset CH₄ producing capacity of manure</value>
+  </data>
+  <data name="LabelResetMoistureContent" xml:space="preserve">
+    <value>Reset moisture content</value>
+  </data>
+  <data name="LabelResetNitrogenContent" xml:space="preserve">
+    <value>Reset nitrogen content</value>
+  </data>
+  <data name="LabelResetNitrogenExcretionRate" xml:space="preserve">
+    <value>Reset nitrogen excretion rate</value>
+  </data>
+  <data name="LabelResetSoilProperties" xml:space="preserve">
+    <value>Reset soil properties</value>
+  </data>
+  <data name="LabelResetVolatileSolidsExcretion" xml:space="preserve">
+    <value>Reset volatile solids excretion</value>
+  </data>
+  <data name="LabelResetPercentageReturns" xml:space="preserve">
+    <value>Reset percent returns</value>
+  </data>
+  <data name="LabelResetTillageType" xml:space="preserve">
+    <value>Reset tillage type</value>
+  </data>
+  <data name="LabelResetFallow" xml:space="preserve">
+    <value>Reset fallow</value>
+  </data>
+  <data name="LabelResetYield" xml:space="preserve">
+    <value>Reset yield</value>
+  </data>
+  <data name="LabelResetAmountOfBlendedProduct" xml:space="preserve">
+    <value>Reset amount of blended product</value>
+  </data>
+  <data name="LabelResetAvailableSoilTypes" xml:space="preserve">
+    <value>Reset available soil types</value>
+  </data>
+  <data name="LabelResetBlendData" xml:space="preserve">
+    <value>Reset blend data</value>
+  </data>
+  <data name="LabelResetDefaultSoilForField" xml:space="preserve">
+    <value>Reset default soil data for field</value>
+  </data>
+  <data name="LabelResetEconomicDefaults" xml:space="preserve">
+    <value>Reset economic defaults</value>
+  </data>
+  <data name="LabelResetFertilizerApplicationMethod" xml:space="preserve">
+    <value>Reset fertilizer application method</value>
+  </data>
+  <data name="LabelResetHarvestMethod" xml:space="preserve">
+    <value>Reset harvest method</value>
+  </data>
+  <data name="LabelResetLumCMaxValues" xml:space="preserve">
+    <value>Reset lum c max values</value>
+  </data>
+  <data name="LabelResetManureApplicationMethod" xml:space="preserve">
+    <value>Reset manure application method</value>
+  </data>
+  <data name="LabelResetPerennialDefaults" xml:space="preserve">
+    <value>Reset perennial defaults</value>
+  </data>
+  <data name="LabelResetPhosphorusFertilizerRate" xml:space="preserve">
+    <value>Reset phosphorus fertlizer rate</value>
+  </data>
+  <data name="LabelResetUserDefaults" xml:space="preserve">
+    <value>Reset user defaults</value>
+  </data>
+  <data name="LabelResetUtilization" xml:space="preserve">
+    <value>Reset pasture utilization</value>
+  </data>
+  <data name="LabelResetYieldsAllYears" xml:space="preserve">
+    <value>Reset yields for all years</value>
   </data>
 </root>

@@ -12,7 +12,6 @@ namespace H.Core.Services.Initialization
 {
     public interface IInitializationService : ICropInitializationService, IAnimalInitializationService
     {
-        void CheckInitialization(Farm farm);
         void ReInitializeFarms(IEnumerable<Farm> farms);
     }
 }

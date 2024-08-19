@@ -231,8 +231,8 @@ namespace H.Core.Services.LandManagement
                      * Calculate nitrogen totals
                      */
 
-                    var coverCropAboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(cropViewItem);
-                    var coverCropBelowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(cropViewItem);
+                    var coverCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem);
+                    var coverCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem);
 
                     totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
                     totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
@@ -252,8 +252,8 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropAboveGroundResidueNitrogen = this.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
-                var mainCropBelowGroundResidueNitrogen = this.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
 
                 mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
                 mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
@@ -310,7 +310,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // Before creating view items for each year, calculate carbon lost from bale exports
-            this.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
+            _carbonService.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
 
             // Create a view item for each year (and also create additional items for each cover crop in the same year)
             var viewItems = this.CreateItems(fieldSystemComponent, farm).ToList();
@@ -322,13 +322,13 @@ namespace H.Core.Services.LandManagement
             this.ProcessPerennials(viewItems, fieldSystemComponent);
 
             // Similarly with cover crops, the view items need to be adjusted
-            this.ProcessCoverCrops(viewItems, fieldSystemComponent);
+            _initializationService.InitializeCoverCrops(viewItems);
 
             // Add in a details view message for the undersown year(s). Note that perennials must be processed before this call
             this.ProcessUndersownCrops(viewItems, fieldSystemComponent);
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
-            this.CalculateCarbonLostByGrazingAnimals(
+            _carbonService.CalculateCarbonLostByGrazingAnimals(
                 farm,
                 fieldSystemComponent: fieldSystemComponent,
                 animalComponentEmissionsResults: this.AnimalResults, viewItems: viewItems);
@@ -337,9 +337,10 @@ namespace H.Core.Services.LandManagement
 
             // Save the view items to the farm which can then be edited by the user on the details view
             stageState.DetailsScreenViewCropViewItems.AddRange(viewItems.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop));
-
+            
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            this.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, viewItems);
+            _carbonService.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, this.AnimalResults, viewItems);
+
             this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
 
             // Assign carbon inputs for each view item

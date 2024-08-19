@@ -8,6 +8,23 @@ namespace H.Core.Services.Initialization.Crops
 {
     public interface ICropInitializationService
     {
+
+        /**
+         * Need to add secondary functions with only farm argument for
+         * -InitializeEconomicDefaults
+         * -InitializeUserDefaults
+         * -InitializeLumCMaxValues
+         * -InitializePhosphorusFertilizerRate
+         * -InitializeYieldForAllYears
+         * -InitializeBlendData
+         * -InitializeAvailableSoilTypes
+         * -InitializeDefaultSoilDataForField
+         * -InitializeManureApplicationMethod
+         * -InitializeFertilizerApplicationMethod
+         * -InitializeUtilization
+         */
+
+
         /// <summary>
         /// Initialize the carbon concentration of each <see cref="CropViewItem"/> within a farm
         /// </summary>
@@ -20,6 +37,8 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="viewItem">The <see cref="CropViewItem"/> to have it's carbon concentration reset with default value</param>
         /// <param name="defaults">The <see cref="Defaults"/> containing the default carbon concentration</param>
         void InitializeCarbonConcentration(CropViewItem viewItem, Defaults defaults);
+
+        void InitializeBiomassCoefficients(Farm farm);
         void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm);
         void InitializeLumCMaxValues(CropViewItem cropViewItem, Farm farm);
 
@@ -29,7 +48,8 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
         /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
         void InitializePercentageReturns(Farm farm, CropViewItem viewItem);
-
+        void InitializePercentageReturns(Farm farm);
+        void InitializeYield(Farm farm);
         void InitializeYield(CropViewItem viewItem, Farm farm);
 
         /// <summary>
@@ -50,6 +70,8 @@ namespace H.Core.Services.Initialization.Crops
             Farm farm,
             CropViewItem viewItem,
             FieldSystemComponent fieldSystemComponent);
+
+        void InitializeEconomicDefaults(Farm farm);
 
         void InitializeEconomicDefaults(
             CropViewItem cropViewItem,
@@ -81,7 +103,7 @@ namespace H.Core.Services.Initialization.Crops
             Farm farm,
             CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem);
-
+        void InitializeNitrogenContent(Farm farm);
         void InitializeNitrogenContent(CropViewItem viewItem, Farm farm);
 
         /// <summary>
@@ -137,6 +159,7 @@ namespace H.Core.Services.Initialization.Crops
             Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem);
 
         void InitializeMoistureContent(CropViewItem viewItem, Farm farm);
+        void InitializeSoilProperties(Farm farm);
         void InitializeSoilProperties(CropViewItem viewItem, Farm farm);
 
         /// <summary>
@@ -151,8 +174,9 @@ namespace H.Core.Services.Initialization.Crops
         /// <param name="farm">The <see cref="Farm"/> containing the relevant data to pass into <see cref="Table_50_Fuel_Energy_Estimates_Provider"/></param>
         /// <param name="viewItem">The <see cref="CropViewItem"/> that will have its values reset with new default values</param>
         void InitializeFuelEnergy(Farm farm, CropViewItem viewItem);
-
+        void InitializeHarvestMethod(Farm farm);
         void InitializeHarvestMethod(CropViewItem viewItem);
+        void InitializeFallow(Farm farm);
         void InitializeFallow(CropViewItem viewItem, Farm farm);
 
         /// <summary>
@@ -162,9 +186,12 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             Farm farm);
 
+        void InitializeTillageType(Farm farm);
+
         void InitializeLigninContent(CropViewItem cropViewItem, Farm farm);
         void InitializeUserDefaults(CropViewItem viewItem, GlobalSettings globalSettings);
         void InitializePerennialDefaults(CropViewItem viewItem, Farm farm);
+        void InitializePerennialDefaults(Farm farm);
 
         /// <summary>
         /// Applies the default properties on a crop view item based on Holos defaults and user defaults (if available). Any property that cannot be set in the constructor
@@ -180,5 +207,9 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
         void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem);
         void InitializeLigninContent(Farm farm);
+
+        void InitializeCoverCrops(IEnumerable<CropViewItem> viewItems);
+
+        void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems);
     }
 }

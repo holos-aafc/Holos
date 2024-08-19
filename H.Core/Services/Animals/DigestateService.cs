@@ -27,10 +27,11 @@ namespace H.Core.Services.Animals
 
         #region Properties
 
-        public List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
-
         public IADCalculator ADCalculator { get; set; }
         public bool SubtractAmountsFromImportedDigestateLandApplications { get; set; }
+
+        private List<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
+        private List<DigestorDailyOutput> _dailyResults;
 
         #endregion
 
@@ -39,12 +40,25 @@ namespace H.Core.Services.Animals
         public DigestateService()
         {
             this.ADCalculator = new ADCalculator();
-            this.AnimalResults = new List<AnimalComponentEmissionsResults>();
+
+            _animalComponentEmissionsResults = new List<AnimalComponentEmissionsResults>();
+            _dailyResults = new List<DigestorDailyOutput>();
         }
 
         #endregion
 
         #region Public Methods
+
+        public List<DigestorDailyOutput> Initialize(Farm farm, List<AnimalComponentEmissionsResults> results)
+        {
+            _animalComponentEmissionsResults.Clear();
+            _animalComponentEmissionsResults.AddRange(results);
+
+            _dailyResults.Clear();
+            _dailyResults = ADCalculator.CalculateResults(farm, _animalComponentEmissionsResults);
+
+            return _dailyResults;
+        }
 
         public List<DigestorDailyOutput> GetDailyResults(Farm farm)
         {
@@ -53,9 +67,7 @@ namespace H.Core.Services.Animals
                 return new List<DigestorDailyOutput>();
             }
 
-            var dailyResults = ADCalculator.CalculateResults(farm, this.AnimalResults);
-
-            return dailyResults;
+            return _dailyResults;
         }
 
         public List<ManureLocationSourceType> GetValidDigestateLocationSourceTypes()

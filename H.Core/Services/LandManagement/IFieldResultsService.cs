@@ -9,9 +9,8 @@ using H.Core.Providers.Carbon;
 
 namespace H.Core.Services.LandManagement
 {
-    public interface IFieldResultsService
+    public interface IFieldResultsService 
     { 
-        double CalculateClimateParameter(CropViewItem viewItem, Farm farm);
         double CalculateTillageFactor(CropViewItem viewItem, Farm farm);
         double CalculateManagementFactor(double climateParameter, double tillageFactor);
         void CreateDetailViewItems(Farm farm);
@@ -29,7 +28,6 @@ namespace H.Core.Services.LandManagement
         double CalculateHarvest(CropViewItem viewItem);
 
         FieldSystemDetailsStageState GetStageState(Farm farm);
-        Table_7_Relative_Biomass_Information_Data GetResidueData(CropViewItem cropViewItem, Farm farm);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);

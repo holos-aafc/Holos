@@ -68,9 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <Compile Include="Calculators\Carbon\CarbonService.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.Nitrogen.cs" />
     <Compile Include="Calculators\Carbon\CarbonInputCalculatorBase.cs" />
+    <Compile Include="Calculators\Carbon\ICarbonService.cs" />
     <Compile Include="Calculators\Carbon\ICarbonInputCalculator.cs" />
     <Compile Include="Calculators\Carbon\ICBMCarbonInputCalculator.cs" />
     <Compile Include="Calculators\Carbon\IICBMCarbonInputCalculator.cs" />
@@ -84,7 +86,9 @@
     <Compile Include="Calculators\Climate\ClimateParameterCalculator.cs" />
     <Compile Include="Calculators\Carbon\IICBMSoilCarbonCalculator.cs" />
     <Compile Include="Calculators\Climate\ClimateParameterDailyResult.cs" />
+    <Compile Include="Calculators\Climate\ClimateService.cs" />
     <Compile Include="Calculators\Climate\EvapotranspirationCalculator.cs" />
+    <Compile Include="Calculators\Climate\IClimateService.cs" />
     <Compile Include="Calculators\Economics\EconomicsCalculator.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelper.cs" />
     <Compile Include="Calculators\Infrastructure\ADCalculator.cs" />
@@ -92,11 +96,15 @@
     <Compile Include="Calculators\Infrastructure\DigestorDailyOutput.cs" />
     <Compile Include="Calculators\Infrastructure\IADCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\IICBMNitrogenInputCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\IIPCCNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\IN2OEmissionFactorCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\INitrogenCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\INitrogenInputCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\IPCCNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Manure.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Digestate.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
@@ -671,6 +679,7 @@
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Returns.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Custom.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Grazing.cs" />
+    <Compile Include="Services\Initialization\Crops\CropInitializationService.CoverCrops.cs" />
     <Compile Include="Services\Initialization\Crops\ICropInitializationService.cs" />
     <Compile Include="Services\Initialization\IInitializationService.cs" />
     <Compile Include="Services\Initialization\InitializationService.cs" />
@@ -687,7 +696,6 @@
     <Compile Include="Services\LandManagement\FieldResultsService.EstimatesOfProduction.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Perennials.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.FileExport.cs" />
-    <Compile Include="Services\LandManagement\FieldResultsService.CoverCrops.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.UnderSownCrops.cs" />
     <Compile Include="Services\LandManagement\IFieldResultsService.cs" />
     <Compile Include="Services\LandManagement\Shelterbelts\IShelterbeltComponentHelper.cs" />
