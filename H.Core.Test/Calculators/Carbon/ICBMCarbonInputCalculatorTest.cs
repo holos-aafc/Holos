@@ -559,6 +559,63 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(396, result, delta: 2);
         }
 
+        /// <summary>
+        /// Equation 2.2.5-3
+        /// </summary>
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductGrazedFieldAndCustomYieldAssignmentMethod()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 10,
+                CropType = CropType.Barley,
+                MoistureContentOfCrop = 0.12,
+            };
+
+            currentYearViewItem.GrazingViewItems.Add(new GrazingViewItem());
+            var farm = new Farm();
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, currentYearViewItem, farm);
+
+            // = [(1000) * (1 - 0.12)] * 0.45
+            // = 1000 * 0.88 * 0.45
+
+            Assert.AreEqual(396, result, delta: 2);
+        }
+
+        /// <summary>
+        /// Equation 2.2.5-3
+        /// </summary>
+        [TestMethod]
+        public void CalculateAboveGroundCarbonInputFromPerennialsGrazedFieldAndCustomYieldAssignmentMethod()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 10,
+                CropType = CropType.Barley,
+                MoistureContentOfCrop = 0.12,
+                YearInPerennialStand = 1,
+                PlantCarbonInAgriculturalProduct = 20,
+            };
+
+            var grazingViewItem = new GrazingViewItem();
+            grazingViewItem.Utilization = 55;
+
+            currentYearViewItem.GrazingViewItems.Add(grazingViewItem);
+
+            var farm = new Farm();
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            var result = _sut.CalculateAboveGroundCarbonInputFromPerennials(null, currentYearViewItem, null, farm);
+
+            Assert.AreEqual(9, result);
+        }
+
         [TestMethod]
         public void CalculateProductivity()
         {

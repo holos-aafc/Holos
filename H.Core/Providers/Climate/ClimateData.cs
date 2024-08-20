@@ -167,7 +167,14 @@ namespace H.Core.Providers.Climate
                                              this.PrecipitationData.August +
                                              this.PrecipitationData.September;
 
-                var proportion = precipitationForPeriod / this.PrecipitationData.GetTotalAnnualPrecipitation();
+                var annualPrecipitation = this.PrecipitationData.GetTotalAnnualPrecipitation();
+                if (annualPrecipitation == 0)
+                {
+                    // Don't divide by 0
+                    annualPrecipitation = 1;
+                }
+
+                var proportion = precipitationForPeriod / annualPrecipitation;
 
                 return proportion;
             }

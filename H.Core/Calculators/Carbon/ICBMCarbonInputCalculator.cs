@@ -133,7 +133,10 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
+                var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                var isGrazed = currentYearViewItem.HasGrazingViewItems;
+
+                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || (isCustomYieldAssignmentMethod && isGrazed))
                 {
                     result = ((currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
                 }
@@ -212,6 +215,15 @@ namespace H.Core.Calculators.Carbon
                      */
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
+
+                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                    var isGrazed = currentYearViewItem.HasGrazingViewItems;
+
+                    if (isGrazed && isCustomYieldAssignmentMethod)
+                    {
+                        var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
+                        carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * returned;
+                    }
                 }
                 else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
                 {
@@ -290,6 +302,15 @@ namespace H.Core.Calculators.Carbon
                      */
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
+
+                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                    var isGrazed = currentYearViewItem.HasGrazingViewItems;
+
+                    if (isGrazed && isCustomYieldAssignmentMethod)
+                    {
+                        var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
+                        carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * returned;
+                    }
                 }
                 else
                 {

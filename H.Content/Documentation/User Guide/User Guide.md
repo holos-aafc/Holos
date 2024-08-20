@@ -562,6 +562,8 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 		A: A list of options available to set the defaults for your operations.
 		<br>
 		B: Allows the user to set custom default values for individual crops.
+		<br>
+		C: Allows the user to reset to default values in their farms.
 	</em>
 </p>
 <br>
@@ -669,6 +671,12 @@ The default data for this screen is based on information found in the algorithm 
 </p>
 <br>
 
+## Reset Defaults
+
+  1. Select “**Reset Defaults**” 
+  2. Here you will be able to reset to default some values for the **Crops** and **Animals** in your farms that you have saved. Defaults may be changed for current farm or for all farms.
+  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the cahnges to the farm(s), **Apply All** when clicked will revert to default all values given in the tab, **Cancel** will undo any changes made to the tab.
+ 
 
 # Chapter 5 - Tools
 
