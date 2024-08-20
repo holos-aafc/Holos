@@ -663,6 +663,8 @@
     <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Sheep.cs" />
     <Compile Include="Services\Initialization\Animals\AnimalInitializationService.Diet.cs" />
     <Compile Include="Services\Initialization\Animals\IAnimalInitializationService.cs" />
+    <Compile Include="Services\Initialization\Climate\ClimateInitializationService.cs" />
+    <Compile Include="Services\Initialization\Climate\IClimateInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Carbon.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Yield.cs" />
@@ -681,6 +683,8 @@
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Grazing.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.CoverCrops.cs" />
     <Compile Include="Services\Initialization\Crops\ICropInitializationService.cs" />
+    <Compile Include="Services\Initialization\Geography\GeographyInitializationService.cs" />
+    <Compile Include="Services\Initialization\Geography\IGeographyInitializationService.cs" />
     <Compile Include="Services\Initialization\IInitializationService.cs" />
     <Compile Include="Services\Initialization\InitializationService.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.DetailViewItems.cs" />

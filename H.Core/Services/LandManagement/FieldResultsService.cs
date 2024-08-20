@@ -75,14 +75,14 @@ namespace H.Core.Services.LandManagement
         #region Constructors
 
         public FieldResultsService(
-            ICBMSoilCarbonCalculator icbmSoilCarbonCalculator, 
-            IPCCTier2SoilCarbonCalculator ipccTier2SoilCarbonCalculator, 
+            ICBMSoilCarbonCalculator icbmSoilCarbonCalculator,
+            IPCCTier2SoilCarbonCalculator ipccTier2SoilCarbonCalculator,
             N2OEmissionFactorCalculator n2OEmissionFactorCalculator,
             IInitializationService initializationService)
         {
             if (initializationService != null)
             {
-                _initializationService = initializationService; 
+                _initializationService = initializationService;
             }
             else
             {

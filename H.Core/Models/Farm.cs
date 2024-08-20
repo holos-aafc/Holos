@@ -231,6 +231,9 @@ namespace H.Core.Models
 
         public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
 
+        /// <summary>
+        /// Indicates the location of the farm
+        /// </summary>
         public int PolygonId
         {
             get { return _polygonId; }

@@ -419,7 +419,6 @@ namespace H.Core.Enumerations
         {
             return new List<CropType>
             {
-                //CropType.NotSelected,
                 CropType.Barley,
                 CropType.BarleySilage,
                 CropType.BeansDryField,
