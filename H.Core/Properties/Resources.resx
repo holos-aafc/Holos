@@ -5996,4 +5996,61 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelResetYieldsAllYears" xml:space="preserve">
     <value>Reset yields for all years</value>
   </data>
+  <data name="MessageResetLigninContent" xml:space="preserve">
+    <value>Resets the lignin content of all crops (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetBiomassCoefficient" xml:space="preserve">
+    <value>Resets the biomass coefficients for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetCarbonConcentration" xml:space="preserve">
+    <value>Resets the carbon concentration for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetEconomicDefaults" xml:space="preserve">
+    <value>Resets the economic defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetFallow" xml:space="preserve">
+    <value>Resets the fallow for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetFuelEnergy" xml:space="preserve">
+    <value>Resets the fuel energy property for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetHarvestMethod" xml:space="preserve">
+    <value>Resets the harvest method for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetHerbicideEnergy" xml:space="preserve">
+    <value>Resets the herbicide energy properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetLumCMaxValues" xml:space="preserve">
+    <value>Resets the lum C max values for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetMoistureContent" xml:space="preserve">
+    <value>Resets the moisture content for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetNitrogenContent" xml:space="preserve">
+    <value>Resets the nitrogen content for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetNitrogenFixation" xml:space="preserve">
+    <value>Resets the nitrogen fixation percentage of all crops (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetPercentageReturns" xml:space="preserve">
+    <value>Resets the percentage returns for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetPerennialDefaults" xml:space="preserve">
+    <value>Resets the perennial defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetSoilProprties" xml:space="preserve">
+    <value>Resets the soil properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetTillageType" xml:space="preserve">
+    <value>Resets the tillage type for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetUserDefaults" xml:space="preserve">
+    <value>Resets the user defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetWaterIrrigation" xml:space="preserve">
+    <value>Resets the irrigation properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetYield" xml:space="preserve">
+    <value>Resets yield for each crop (in each year) to the default value</value>
+  </data>
 </root>

@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers;
 using H.Core.Providers.Animals.Table_69;
+using H.Core.Providers.Climate;
+using H.Core.Services.Initialization;
 using H.Core.Services.Initialization.Climate;
 using H.Core.Services.Initialization.Crops;
 using H.Core.Services.Initialization.Geography;
+using H.Core.Services.LandManagement;
+using H.Infrastructure;
 
 namespace H.Template
 {
@@ -23,6 +31,13 @@ namespace H.Template
         private static readonly IClimateInitializationService _climateInitializationService;
         private static readonly IGeographyInitializationService _geographyInitializationService;
         private static readonly ICropInitializationService _cropInitializationService;
+        private static readonly ICBMSoilCarbonCalculator _icbmsoilCarbonCalculator;
+        private static readonly IPCCTier2SoilCarbonCalculator _ipccTier2SoilCarbonCalculator;
+        private static readonly N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
+        private static readonly IInitializationService _initializationService;
+        private static readonly FieldResultsService _fieldResultsService;
+        private static readonly IClimateProvider _climateProvider;
+        private static readonly ISlcClimateProvider _sliClimateProvider;
 
         #endregion
 
@@ -31,6 +46,13 @@ namespace H.Template
             _climateInitializationService = new ClimateInitializationService();
             _geographyInitializationService = new GeographyInitializationService();
             _cropInitializationService = new CropInitializationService();
+            _sliClimateProvider = new SlcClimateDataProvider();
+            _initializationService = new InitializationService();
+            _climateProvider = new ClimateProvider(_sliClimateProvider);
+            _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            _icbmsoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            _ipccTier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            _fieldResultsService = new FieldResultsService(_icbmsoilCarbonCalculator, _ipccTier2SoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
         }
 
         static void Main(string[] args)
@@ -45,6 +67,7 @@ namespace H.Template
 
             // Create a farm
             var farm = new Farm();
+            farm.Name = "Template_Test_Farm";
 
             /*
              * All farms need to have their location set.
@@ -125,6 +148,27 @@ namespace H.Template
             _cropInitializationService.InitializeCrop(barleyYear, farm, globalSettings);
 
             farm.Components.Add(fieldComponent);
+
+            // Create the field history
+            _fieldResultsService.InitializeStageState(farm);
+
+            // Holos has now back-populated our field with historical data. Finally adjustments can be made to each individual year if need
+            foreach (var cropViewItem in farm.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems)
+            {
+                if (cropViewItem.Year == 1999)
+                {
+                    // Very high yield in this year
+                    cropViewItem.Yield = 10000;
+                }
+            }
+
+            // Farm setup is complete - calculate final emission results
+            var finalResults = _fieldResultsService.CalculateFinalResults(farm);
+
+            // Print results to file
+            const string outputDirectory = "Holos_Template_Run_Output";
+            Directory.CreateDirectory(outputDirectory);
+            _fieldResultsService.ExportResultsToFile(finalResults, outputDirectory + Path.DirectorySeparatorChar, InfrastructureConstants.EnglishCultureInfo, MeasurementSystemType.Metric, string.Empty, false, farm);
         }
     }
 }

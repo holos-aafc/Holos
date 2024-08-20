@@ -13396,6 +13396,177 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resets the biomass coefficients for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetBiomassCoefficient {
+            get {
+                return ResourceManager.GetString("MessageResetBiomassCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the carbon concentration for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetCarbonConcentration {
+            get {
+                return ResourceManager.GetString("MessageResetCarbonConcentration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the economic defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetEconomicDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetEconomicDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the fallow for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetFallow {
+            get {
+                return ResourceManager.GetString("MessageResetFallow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the fuel energy property for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetFuelEnergy {
+            get {
+                return ResourceManager.GetString("MessageResetFuelEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the harvest method for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetHarvestMethod {
+            get {
+                return ResourceManager.GetString("MessageResetHarvestMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the herbicide energy properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetHerbicideEnergy {
+            get {
+                return ResourceManager.GetString("MessageResetHerbicideEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the lignin content of all crops (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetLigninContent {
+            get {
+                return ResourceManager.GetString("MessageResetLigninContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the lum C max values for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetLumCMaxValues {
+            get {
+                return ResourceManager.GetString("MessageResetLumCMaxValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the moisture content for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetMoistureContent {
+            get {
+                return ResourceManager.GetString("MessageResetMoistureContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the nitrogen content for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetNitrogenContent {
+            get {
+                return ResourceManager.GetString("MessageResetNitrogenContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the nitrogen fixation percentage of all crops (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetNitrogenFixation {
+            get {
+                return ResourceManager.GetString("MessageResetNitrogenFixation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the percentage returns for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPercentageReturns {
+            get {
+                return ResourceManager.GetString("MessageResetPercentageReturns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the perennial defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPerennialDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetPerennialDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the soil properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetSoilProprties {
+            get {
+                return ResourceManager.GetString("MessageResetSoilProprties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the tillage type for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetTillageType {
+            get {
+                return ResourceManager.GetString("MessageResetTillageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the user defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetUserDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetUserDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the irrigation properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetWaterIrrigation {
+            get {
+                return ResourceManager.GetString("MessageResetWaterIrrigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets yield for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetYield {
+            get {
+                return ResourceManager.GetString("MessageResetYield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The residue tab can be used to change the default carbon allocation coefficients for the main crop. Additional details such as nitrogen concentrations and percentages of the plant returned to soil can be entered here. Default values have been provided that the model will use unless custom values are entered here.
         /// </summary>
         public static string MessageResidueTabDescription {
