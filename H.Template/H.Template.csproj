@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\H.CLI\H.CLI.csproj">
+      <Project>{7A9469D6-B913-49DB-B85F-319FD195C212}</Project>
+      <Name>H.CLI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\H.Core\H.Core.csproj">
       <Project>{08D833EF-D06E-42F1-B548-89E985DFC26B}</Project>
       <Name>H.Core</Name>

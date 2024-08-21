@@ -75,7 +75,7 @@ namespace H.CLI
             var processorHandler = new ProcessorHandler();
 
             // Get The Directories in the "Farms" folder
-            var listOfFarmPaths = directoryHandler.getListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
+            var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
             // Set up the geographic data provider only once to speed up processing.
             var geographicDataProvider = new GeographicDataProvider();

@@ -34,7 +34,6 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// </summary>
         public void InitializeDirectoriesAndFilesForComponents(string farmDirectoryPath)
         {
-
             if (!Directory.Exists(farmDirectoryPath))
             {
                 Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -44,12 +43,11 @@ namespace H.CLI.FileAndDirectoryAccessors
 
             ValidateComponentDirectories(farmDirectoryPath);
             var componentDirectories = Directory.GetDirectories(farmDirectoryPath).ToList();
-            var validComponentDirectories = prioritizeDirectoryKeys(componentDirectories);
+            var validComponentDirectories = PrioritizeDirectoryKeys(componentDirectories);
             _templateFileHandler.validateTemplateFiles(validComponentDirectories);
-
         }
 
-        public void checkForInvalidComponentDirectoryNames(List<string> componentDirectoryPathsInAFarm, string farmDirectoryPath)
+        public void CheckForInvalidComponentDirectoryNames(List<string> componentDirectoryPathsInAFarm, string farmDirectoryPath)
         {
             var invalidDirectories = componentDirectoryPathsInAFarm.Where(x => !_directoryKeys.directoryWeights.Select(y => y.Key.ToUpper()).Contains(Path.GetFileName(x).ToUpper())).ToList();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -81,7 +79,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// Swines, if the user selects their HousingType to be pasture, they will potentially need to be refer to one of their
         /// created Field Components, which needs to be processed first in order to use it in that Swine component.
         /// </summary>
-        public List<string> prioritizeDirectoryKeys(List<string> componentDirectoryPathsInAFarm)
+        public List<string> PrioritizeDirectoryKeys(List<string> componentDirectoryPathsInAFarm)
         {
             var validDirectories = componentDirectoryPathsInAFarm.Where(x => _directoryKeys.directoryWeights.Select(y => y.Key.ToUpper()).Contains(Path.GetFileName(x).ToUpper())).ToList();
             return validDirectories.OrderByDescending(x => _directoryKeys.directoryWeights.ContainsKey(Path.GetFileName(x))).ToList();
@@ -249,7 +247,7 @@ namespace H.CLI.FileAndDirectoryAccessors
 
         }
 
-        public string[] getListOfFarms(string farmsFolderPath, CLIArguments argvalues, string pathToExportedFarm, List<string> generatedFarmFolders)
+        public string[] GetListOfFarms(string farmsFolderPath, CLIArguments argvalues, string pathToExportedFarm, List<string> generatedFarmFolders)
         {
             if (!argvalues.IsFileNameFound && !argvalues.IsFolderNameFound)
             {

@@ -78,7 +78,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
                 @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Fields",
             };
 
-            var prioritizedComponentPathList = directoryHandler.prioritizeDirectoryKeys(componentPathList);
+            var prioritizedComponentPathList = directoryHandler.PrioritizeDirectoryKeys(componentPathList);
             Assert.AreEqual(prioritizedComponentPathList[0] == @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Shelterbelts"
                            ||
                             prioritizedComponentPathList[0] == @"C:\Holos\HolosCommandLineInterface\Farms\HolosExampleFarm1\Fields", true);
@@ -98,7 +98,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory(testFarmFolder + testFarm);
             Directory.CreateDirectory(testFarmFolder + testFarm2);
 
-            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, testFarm, null);
+            var returnedListOfFarms = directoryHandler.GetListOfFarms(testFarmFolder, argValues, testFarm, null);
             Assert.AreEqual(returnedListOfFarms[0], testFarmFolder + testFarm);
             Assert.AreEqual(returnedListOfFarms[1], testFarmFolder + testFarm2);
 
@@ -120,7 +120,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Directory.CreateDirectory(testFarmFolder);
             Directory.CreateDirectory(testFarmFolder + testFarm);
 
-            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, testFarmFolder + testFarm, null);
+            var returnedListOfFarms = directoryHandler.GetListOfFarms(testFarmFolder, argValues, testFarmFolder + testFarm, null);
             Assert.AreEqual(returnedListOfFarms[0], testFarmFolder + testFarm);
 
             Directory.Delete(testFarmFolder, true); // Delete after test
@@ -148,7 +148,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             generatedFarmFolders.Add(testFarmFolder + testFarm2);
             generatedFarmFolders.Add(testFarmFolder + testFarm3);
 
-            var returnedListOfFarms = directoryHandler.getListOfFarms(testFarmFolder, argValues, "", generatedFarmFolders);
+            var returnedListOfFarms = directoryHandler.GetListOfFarms(testFarmFolder, argValues, "", generatedFarmFolders);
 
             Assert.IsNotNull(returnedListOfFarms);
             Assert.AreEqual(returnedListOfFarms[1], testFarmFolder + testFarm2);

@@ -183,5 +183,6 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeVolatileSolids(Farm farm);
         List<DietAdditiveType> GetValidDietAdditiveTypes();
         void InitializeTotals(ManagementPeriod managementPeriod);
+        void InitializeFarm(Farm farm);
     }
 }

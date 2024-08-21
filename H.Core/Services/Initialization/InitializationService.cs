@@ -619,6 +619,11 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeTotals(managementPeriod);
         }
 
+        public void InitializeFarm(Farm farm)
+        {
+            _animalInitializationService.InitializeFarm(farm);
+        }
+
         #endregion
     }
 }
