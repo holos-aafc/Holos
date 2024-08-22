@@ -69,6 +69,7 @@ A command line interface (CLI) version of Holos is available <a href="https://ag
 Holos version 3 is also available to download. Note that version 3 is no longer supported and is included here for education purpsoses only. Version 3 is provided on an as-is basis only.
 
 <a href="https://github.com/holos-aafc/Holos/raw/d3a4f26d61f98520caa9e966507087a62e43db35/Holos%203.0.6%20Installer%20-%20English.zip" target="_blank">Holos v3 - English (Unsupported)</a>
+
 <a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - French (Unsupported)</a>
 
 
