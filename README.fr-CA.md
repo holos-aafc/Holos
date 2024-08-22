@@ -48,6 +48,12 @@ L'interface graphique de Holos 4 peut être téléchargée et utilisée à parti
 
 Une version d'interface de ligne de commande (CLI) de Holos est disponible <a href="https://agriculture.canada.ca/holos/cli/setup.exe">à ce lien</a>.
 
+La version 3 de Holos est également disponible en téléchargement. Veuillez noter que la version 3 n'est plus prise en charge et qu'elle est incluse ici uniquement à des fins éducatives. La version 3 est fournie telle quelle uniquement.
+
+<a href="https://github.com/holos-aafc/Holos/raw/d3a4f26d61f98520caa9e966507087a62e43db35/Holos%203.0.6%20Installer%20-%20English.zip" target="_blank">Holos v3 - Anglais (non pris en charge)</a>
+
+<a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - Français (non pris en charge)</a>
+
 # License
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
