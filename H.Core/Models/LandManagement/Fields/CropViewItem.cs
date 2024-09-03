@@ -1205,51 +1205,6 @@ namespace H.Core.Models.LandManagement.Fields
             return totalNitrogen;
         }
 
-        public double GetTotalNitrogenFromImportedManure()
-        {
-            var totalNitrogen = 0d;
-
-            foreach (var manureApplication in this.ManureApplicationViewItems.Where(manureViewItem => manureViewItem.DateOfApplication.Year == this.Year && manureViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported))
-            {
-                totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * this.Area;
-            }
-
-            return totalNitrogen;
-        }
-
-        public double GetTotalAmountOfDigestateAppliedInYear()
-        {
-            var totalNitrogen = 0d;
-
-            foreach (var digestateApplicationViewItem in this.DigestateApplicationViewItems.Where(viewItem => viewItem.DateCreated.Year == this.Year))
-            {
-                var totalVolume = digestateApplicationViewItem.AmountAppliedPerHectare * this.Area;
-
-            }
-
-            return totalNitrogen;
-        }
-
-        /// <summary>
-        /// Get all manure applications made on all fields on this date using the specified type of manure
-        /// </summary>
-        public IEnumerable<ManureApplicationViewItem> GetManureApplicationsFromLivestock(AnimalType animalType, DateTime dateOfManureApplication)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var manureApplicationViewItem in this.ManureApplicationViewItems)
-            {
-                if (manureApplicationViewItem.AnimalType == animalType &&
-                    manureApplicationViewItem.DateOfApplication.Equals(dateOfManureApplication) &&
-                    manureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Livestock)
-                {
-                    result.Add(manureApplicationViewItem);
-                }
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// (kg C year^-1)
         /// </summary>

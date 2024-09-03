@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.CustomAttributes;
@@ -14,6 +15,8 @@ namespace H.Core.Models.Infrastructure
     public class AnaerobicDigestionComponent : ComponentBase
     {
         #region Fields
+
+        private AnaerobicDigestorSeparatorType _separatorType;
 
         private AnaerobicDigestionViewItem _anaerobicDigestionViewItem;
 
@@ -56,8 +59,8 @@ namespace H.Core.Models.Infrastructure
         private double _ammoniaEmissionFactorForDigestateStorage;
 
         private int _numberOfReactors;
-        private bool _isCentrifugeType;
         private bool _isLiquidSolidSeparated;
+        private bool _useImportedManure;
 
         private ObservableCollection<ADManagementPeriodViewItem> _managementPeriodViewItems;
 
@@ -72,7 +75,7 @@ namespace H.Core.Models.Infrastructure
             this.ComponentCategory = ComponentCategory.Infrastructure;
             this.ComponentType = ComponentType.AnaerobicDigestion;
 
-            
+            this.SeparatorType = AnaerobicDigestorSeparatorType.Centrifuge;
 
             _anaerobicDigestionViewItem = new AnaerobicDigestionViewItem();
 
@@ -265,8 +268,7 @@ namespace H.Core.Models.Infrastructure
         /// </summary>
         public bool IsCentrifugeType
         {
-            get => _isCentrifugeType;
-            set => SetProperty(ref _isCentrifugeType, value);
+            get { return this.SeparatorType == AnaerobicDigestorSeparatorType.Centrifuge; }
         }
 
         public bool IsLiquidSolidSeparated
@@ -281,6 +283,18 @@ namespace H.Core.Models.Infrastructure
         {
             get => _managementPeriodViewItems;
             set => SetProperty(ref _managementPeriodViewItems, value);
+        }
+
+        public AnaerobicDigestorSeparatorType SeparatorType
+        {
+            get => _separatorType;
+            set => SetProperty(ref _separatorType, value);
+        }
+
+        public bool UseImportedManure
+        {
+            get => _useImportedManure;
+            set => SetProperty(ref _useImportedManure, value);
         }
 
         #endregion

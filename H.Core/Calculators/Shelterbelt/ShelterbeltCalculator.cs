@@ -220,13 +220,13 @@ namespace H.Core.Calculators.Shelterbelt
              */
 
             var age = trannumData.Age;
-            var realGrowthOfIdealTree = 0d;
+            var totalLivingBiomassCarbonOfIdealTree = 0d;
             if (trannumData.CanLookupByEcodistrict)
             {
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    realGrowthOfIdealTree = ShelterbeltCarbonDataProvider.GetLookupValue(
+                    totalLivingBiomassCarbonOfIdealTree = ShelterbeltCarbonDataProvider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         ecodistrictId: trannumData.EcodistrictId,
                         percentMortality: trannumData.PercentMortality,
@@ -236,7 +236,7 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (totalLivingBiomassCarbonOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
             else
             {
@@ -248,7 +248,7 @@ namespace H.Core.Calculators.Shelterbelt
                 do
                 {
                     // Get total living biomass carbon of an ideal tree
-                    realGrowthOfIdealTree = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
+                    totalLivingBiomassCarbonOfIdealTree = Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue(
                         treeSpecies: trannumData.TreeSpecies,
                         hardinessZone: trannumData.HardinessZone,
                         percentMortality: trannumData.PercentMortality,
@@ -258,12 +258,12 @@ namespace H.Core.Calculators.Shelterbelt
                         column: ShelterbeltCarbonDataProviderColumns.Biom_Mg_C_km);
 
                     age++;
-                } while (realGrowthOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
+                } while (totalLivingBiomassCarbonOfIdealTree == 0 && age < CoreConstants.ShelterbeltCarbonTablesMaximumAge);
             }
 
             var result = this.CalculateRealGrowthRatio(
                 calculatedTotalLivingCarbonKilogramPerStandardLength: trannumData.TotalLivingCarbonPerTreeTypePerStandardLength,
-                lookupTotalLivingCarbonKilogramsPerStandardLength: realGrowthOfIdealTree);
+                lookupTotalLivingCarbonMegagramsPerStandardLength: totalLivingBiomassCarbonOfIdealTree);
 
             return result;
         }
@@ -330,11 +330,11 @@ namespace H.Core.Calculators.Shelterbelt
 
             var livingBiomass = totalEcosystemCarbon - deadOrganicMatter;
 
-            // Equation 2.3.4-2
-            var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
-
             // Equation 2.3.3-6
             var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
+
+            // Equation 2.3.4-2
+            var deadOrganicMatterFraction = deadOrganicMatter * trannumData.RealGrowthRatio;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
             trannumData.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth = livingBiomassFraction;
@@ -683,20 +683,20 @@ namespace H.Core.Calculators.Shelterbelt
         /// to lookup tables of ideal tree biomass carbon values.
         /// </summary>
         /// <param name="calculatedTotalLivingCarbonKilogramPerStandardLength">Total C stocks in the living biomass per standard length linear planting (kg C km-1)</param>
-        /// <param name="lookupTotalLivingCarbonKilogramsPerStandardLength">Total C stocks per average (ideal) tree recorded for an area of similar geographical location (Saskatchewan)
+        /// <param name="lookupTotalLivingCarbonMegagramsPerStandardLength">Total C stocks per average (ideal) tree recorded for an area of similar geographical location (Saskatchewan)
         /// or ecological condition (plant hardiness zone outside SK) (kg C km-1)</param>
         /// <returns>Ratio of user specified over average (ideal) tree growth</returns>
         public double CalculateRealGrowthRatio(
             double calculatedTotalLivingCarbonKilogramPerStandardLength,
-            double lookupTotalLivingCarbonKilogramsPerStandardLength)
+            double lookupTotalLivingCarbonMegagramsPerStandardLength)
         {
-            if (lookupTotalLivingCarbonKilogramsPerStandardLength == 0)
+            if (lookupTotalLivingCarbonMegagramsPerStandardLength == 0)
             {
                 // Assume value is not available and return 1 to indicate we are assuming an ideal tree for this year
                 return 1;
             }
 
-            var result = (calculatedTotalLivingCarbonKilogramPerStandardLength / (lookupTotalLivingCarbonKilogramsPerStandardLength));
+            var result = (calculatedTotalLivingCarbonKilogramPerStandardLength / (lookupTotalLivingCarbonMegagramsPerStandardLength * 1000));
 
             return result;
         }
@@ -796,7 +796,7 @@ namespace H.Core.Calculators.Shelterbelt
         }
 
         /// <summary>
-        /// Equation 2.1.6-26
+        /// Equation
         /// </summary>
         /// <returns>The total ecosystem carbon (kg C km^-1)</returns>
         private double GetIdealTotalEcosystemCarbon(TrannumData trannumData)

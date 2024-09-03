@@ -136,8 +136,15 @@ namespace H.Core.Services.Animals
                 excretionRate: dailyEmissions.FecalCarbonExcretionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
+            dailyEmissions.RateOfCarbonAddedFromBeddingMaterial = base.CalculateRateOfCarbonAddedFromBeddingMaterial(
+                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
+
             // Equation 4.1.1-6
-            dailyEmissions.CarbonAddedFromBeddingMaterial = 0;
+            dailyEmissions.CarbonAddedFromBeddingMaterial = base.CalculateAmountOfCarbonAddedFromBeddingMaterial(
+                rateOfCarbonAddedFromBedding: dailyEmissions.RateOfCarbonAddedFromBeddingMaterial,
+                numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.1.1-7
             dailyEmissions.CarbonFromManureAndBedding = base.CalculateAmountOfCarbonFromManureAndBedding(
@@ -186,7 +193,10 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             // Equation 4.2.1-31
-            dailyEmissions.AmountOfNitrogenAddedFromBedding = 0;
+            dailyEmissions.AmountOfNitrogenAddedFromBedding = this.CalculateRateOfNitrogenAddedFromBeddingMaterial(
+                beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
+                moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
             dailyEmissions.ManureDirectN2ONEmissionRate = base.CalculateManureDirectNitrogenEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
@@ -229,6 +239,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+
+            dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay;
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
@@ -443,7 +455,7 @@ namespace H.Core.Services.Animals
             /*
              * Manure methane calculations differ depending if the manure is stored as a liquid or as a solid
              *
-             *  If user specifies custom a custom methane conversion factor, then skip liquid calculations (even if system is liquid, calculate manure methane using 2-4 and 2-5.)
+             * If user specifies custom a custom methane conversion factor, then skip liquid calculations (even if system is liquid, calculate manure methane using 2-4 and 2-5.)
              */
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure() || 
@@ -516,6 +528,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+
+            dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay;
 
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
                 totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,

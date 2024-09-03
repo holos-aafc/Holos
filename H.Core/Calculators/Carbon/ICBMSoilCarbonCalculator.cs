@@ -24,6 +24,7 @@ namespace H.Core.Calculators.Carbon
     {
         #region Fields
 
+        private ICBMCarbonInputCalculator _inputCalculator;
 
         #endregion
 
@@ -48,6 +49,8 @@ namespace H.Core.Calculators.Carbon
             {
                 throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
             }
+
+            _inputCalculator = new ICBMCarbonInputCalculator();
         }
 
         #endregion
@@ -57,723 +60,6 @@ namespace H.Core.Calculators.Carbon
         #endregion
 
         #region Public Methods
-
-        public CropViewItem SetCarbonInputs(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItem,
-            Farm farm)
-        {
-            var isNonSwathingGrazingScenario = currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
-                                    farm.CropHasGrazingAnimals(currentYearViewItem) &&
-                                    farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
-                                    currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
-                                    currentYearViewItem.HarvestMethod != HarvestMethods.Swathing;
-
-            currentYearViewItem.PlantCarbonInAgriculturalProduct = this.CalculatePlantCarbonInAgriculturalProduct(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                farm: farm);
-
-            currentYearViewItem.CarbonInputFromProduct = this.CalculateCarbonInputFromProduct(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                nextYearViewItem: nextYearViewItem,
-                farm: farm);
-
-            if (isNonSwathingGrazingScenario)
-            {
-                // Total C losses from grazing animals is calculated in Equation 11.3.2-4
-
-                // Equation 11.3.2-6
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / currentYearViewItem.Area;
-
-                // Equation 11.3.2-7
-                currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
-
-                // Equation 11.3.2-9
-                var totalYieldForArea = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration;
-
-                // Convert to per hectare
-                currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
-            }
-
-            currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                farm: farm);
-
-            currentYearViewItem.CarbonInputFromRoots = this.CalculateCarbonInputFromRoots(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                farm: farm);
-
-            currentYearViewItem.CarbonInputFromExtraroots = this.CalculateCarbonInputFromExtraroot(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                farm: farm);
-
-            currentYearViewItem.AboveGroundCarbonInput = this.CalculateTotalAboveGroundCarbonInput(
-                cropViewItem: currentYearViewItem,
-                farm: farm);
-
-            var supplementalFeedingAmount = this.CalculateInputsFromSupplementalHayFedToGrazingAnimals(
-                previousYearViewItem: previousYearViewItem,
-                currentYearViewItem: currentYearViewItem,
-                nextYearViewItems: nextYearViewItem,
-                farm: farm);
-
-            // Add in any supplemental feeding amounts that were given to grazing animals
-            currentYearViewItem.AboveGroundCarbonInput += supplementalFeedingAmount;
-
-            currentYearViewItem.BelowGroundCarbonInput = this.CalculateTotalBelowGroundCarbonInput(
-                cropViewItem: currentYearViewItem,
-                farm: farm);
-
-            currentYearViewItem.ManureCarbonInputsPerHectare = this.N2OEmissionFactorCalculator.ManureService.GetTotalManureCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
-
-            if (farm.CropHasGrazingAnimals(currentYearViewItem))
-            {
-                currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
-            }
-
-            currentYearViewItem.DigestateCarbonInputsPerHectare = this.CalculateDigestateCarbonInputPerHectare(currentYearViewItem, farm);
-
-            currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare + currentYearViewItem.DigestateCarbonInputsPerHectare;            
-
-            return currentYearViewItem;
-        }
-
-        private double RecalculateYield(CropViewItem cropViewItem)
-        {
-            var result = (cropViewItem.PlantCarbonInAgriculturalProduct / cropViewItem.CarbonConcentration);
-
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the plant carbon in the agricultural product for the given species grown in the given year.
-        /// 
-        /// C_p
-        ///
-        /// Equation 2.1.2-1
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The total above ground carbon input</returns>
-        public double CalculatePlantCarbonInAgriculturalProduct(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            Farm farm)
-        {
-            if (currentYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct)
-            {
-                return currentYearViewItem.PlantCarbonInAgriculturalProduct;
-            }
-
-            if (currentYearViewItem.CropType.IsFallow() || currentYearViewItem.CropType == CropType.NotSelected)
-            {
-                return 0;
-            }
-
-            // Old farms fix
-            if (currentYearViewItem.MoistureContentOfCrop > 1)
-            {
-                currentYearViewItem.MoistureContentOfCrop /= 100;
-            }
-
-            var result = 0d;
-            if (Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon)
-            {
-                // If all product is returned to soil, use this calculation otherwise when 100% of product is returned, a doubling of yield will be used as in below calculation. 
-                // 100 % of product will be returned when crops are being used as 'green manure' e.g. lentils
-                result = (currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop) * currentYearViewItem.CarbonConcentration;                
-            }
-            else
-            {
-                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure)
-                {
-                    result = ((currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
-                }
-                else
-                {
-                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the total above ground carbon input for the given species grown in the given year.
-        /// 
-        /// C_ag
-        /// 
-        /// Equation 2.1.2-2
-        /// Equation 2.1.2-4
-        /// </summary>
-        /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The total above ground carbon input</returns>
-        public double CalculateTotalAboveGroundCarbonInput(
-            CropViewItem cropViewItem,
-            Farm farm)
-        {
-            // There are no inputs from straw when the harvest method is green manure or swathing
-            if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure || cropViewItem.HarvestMethod == HarvestMethods.Swathing)
-            {
-                return cropViewItem.CarbonInputFromProduct;
-            }
-
-            if (cropViewItem.IsSelectedCropTypeRootCrop == false)
-            {
-                return cropViewItem.CarbonInputFromProduct + cropViewItem.CarbonInputFromStraw;
-            }
-            else
-            {
-                return cropViewItem.CarbonInputFromStraw;
-            }
-        }
-
-        /// <summary>
-        /// Calculates the total below ground carbon input for the given species grown in the given year.
-        /// 
-        /// C_bg
-        ///
-        /// Equation 2.1.2-3
-        /// Equation 2.1.2-5
-        /// </summary>
-        /// <param name="cropViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The total below ground carbon input</returns>
-        public double CalculateTotalBelowGroundCarbonInput(
-            CropViewItem cropViewItem,
-            Farm farm)
-        {
-            if (cropViewItem.IsSelectedCropTypeRootCrop == false)
-            {
-                return cropViewItem.CarbonInputFromRoots + cropViewItem.CarbonInputFromExtraroots;
-            }
-            else
-            {
-                return cropViewItem.CarbonInputFromProduct + cropViewItem.CarbonInputFromExtraroots;
-            }
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from the product for the given species grown in the given year.
-        /// 
-        /// C_ptoSoil
-        /// 
-        /// Equation 2.1.2-6
-        /// Equation 2.1.2-10
-        /// Equation 2.1.2-14
-        /// Equation 2.1.2-17
-        /// Equation 2.1.2-20
-        /// Equation 2.1.2-23
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="nextYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the subsequent year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from the product</returns>
-        public double CalculateCarbonInputFromProduct(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            CropViewItem nextYearViewItem,
-            Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsPerennial())
-            {
-                return this.CalculateAboveGroundCarbonInputFromPerennials(
-                    previousYearViewItem: previousYearViewItem,
-                    currentYearViewItem: currentYearViewItem,
-                    nextYearViewItem: nextYearViewItem,
-                    farm: farm);
-            }
-
-            var result = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from straw for the given species grown in the given year.
-        /// 
-        /// C_s
-        ///
-        /// Equation 2.1.2-7
-        /// Equation 2.1.2-18
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from straw</returns>
-        public double CalculateCarbonInputFromStraw(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsFallow() ||                              // No inputs from fallow fields
-                currentYearViewItem.CropType == CropType.NotSelected ||                 // Need a crop type to calculate input
-                currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure ||      // In these two harvest method cases, the residue fractions for product and straw are combined and so the inputs from straw are omitted
-                currentYearViewItem.HarvestMethod == HarvestMethods.Swathing ||
-                currentYearViewItem.CropType.IsPerennial())                             // All above ground inputs from perennials are from the product and not the straw
-            {
-                return 0;
-            }
-
-            // Some crop types do not have values for biomass of product, since dividing by 0 will cause NaN (in the next calculation below) return 0
-            if (Math.Abs(currentYearViewItem.BiomassCoefficientProduct) < double.Epsilon)
-            {
-                return 0;
-            }
-
-            var result = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientStraw / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfStrawReturnedToSoil / 100);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from roots for the given species grown in the given year.
-        ///
-        /// C_r
-        /// 
-        /// Equation 2.1.2-8
-        /// Equation 2.1.2-11
-        /// Equation 2.1.2-15
-        /// Equation 2.1.2-21
-        /// Equation 2.1.2-24
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from roots</returns>
-        public double CalculateCarbonInputFromRoots(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsFallow() ||                              // No inputs from fallow fields
-                currentYearViewItem.CropType == CropType.NotSelected)                   // Need a crop type to calculate input
-            {
-                return 0;
-            }
-
-            if (currentYearViewItem.CropType.IsPerennial())
-            {
-                return this.CalculateCarbonInputFromRootsForPerennials(
-                    previousYearViewItem: previousYearViewItem,
-                    currentYearViewItem: currentYearViewItem,
-                    farm: farm);
-            }
-
-            // This is a special case when using an annual crop as green manure or swathed (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
-            {
-                return this.CalculateCarbonInputFromRootsForGreenManureOrSwathing(
-                    previousYearViewItem,
-                    currentYearViewItem,
-                    farm);
-            }
-
-            // Some crop types do not have values for biomass of product, since dividing by 0 will cause NaN (in the next calculation below) return 0 instead.
-            if (Math.Abs(currentYearViewItem.BiomassCoefficientProduct) < double.Epsilon)
-            {
-                return 0;
-            }
-
-            var result = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from extraroots for the given species grown in the given year.
-        /// 
-        /// C_e
-        /// 
-        /// Equation 2.1.2-9
-        /// Equation 2.1.2-12
-        /// Equation 2.1.2-16
-        /// Equation 2.1.2-19
-        /// Equation 2.1.2-25
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from extraroots</returns>
-        public double CalculateCarbonInputFromExtraroot(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            if (currentYearViewItem.CropType.IsFallow() ||                              // No inputs from fallow fields
-                currentYearViewItem.CropType == CropType.NotSelected)                   // Need a crop type to calculate input
-            {
-                return 0;
-            }
-
-            if (currentYearViewItem.CropType.IsPerennial())
-            {
-                return this.CalculateCarbonInputFromExtrarootsForPerennials(
-                    previousYearViewItem: previousYearViewItem,
-                    currentYearViewItem: currentYearViewItem,
-                    farm: farm);
-            }
-
-            // This is a special case when using an annual crop as green manure (see note under annual crop C input section)
-            if (currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || currentYearViewItem.HarvestMethod == HarvestMethods.Swathing)
-            {
-                return this.CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
-                    previousYearViewItem,
-                    currentYearViewItem,
-                    farm);
-            }
-
-            // Some crop types do not have values for biomass of product, since dividing by 0 will cause NaN (in the next calculation below) return 0 instead.
-            if (Math.Abs(currentYearViewItem.BiomassCoefficientProduct) < double.Epsilon)
-            {
-                return 0;
-            }
-
-            var result = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the total above ground carbon input for a year in which a perennial crop is grown. Note that for perennials, all above ground inputs are
-        /// contributed by the C_ptoSoil as there is no C_s calculation for perennials.
-        ///
-        /// Side effect: if this year doesn't have any C_p, a value will be assigned
-        /// 
-        /// C_ag (which is equivalent to the C_ptoSoil when considering a perennial)
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="nextYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the subsequent year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The total above ground carbon input</returns>
-        public double CalculateAboveGroundCarbonInputFromPerennials(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            CropViewItem nextYearViewItem, 
-            Farm farm)
-        {
-            // Estimate the value using the productivity calculation
-            var estimatedPlantCarbonInAgriculturalProductInNextYear = this.EstimatePlantCarbonInAgriculturalProductForNextYear(
-                nextYearViewItem: currentYearViewItem,
-                farm: farm);
-            
-            // C_ptoSoil
-            var carbonInputFromProduct = 0.0;
-            if (currentYearViewItem.YearInPerennialStand == 1)
-            {
-                /*
-                 * Consider the first year
-                 */
-
-                if (currentYearViewItem.PlantCarbonInAgriculturalProduct > 0)
-                {
-                    /* Equation 2.1.2-20
-                     *
-                     * Situation when C_p for current year (first year in this condition) is known
-                     */
-
-                    carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
-                }
-                else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
-                {
-                    /* Equation 2.1.2-21
-                     *
-                     * Situation when C_p for the current year (first year in this condition) is not known, but yield or C_p for subsequent year (second year in this condition)
-                     * is known.
-                     *
-                     * If the next years C_p has been set already we use that, otherwise we need to calculate it here.
-                     */
-
-                    var plantCarbonInAgriculturalProductForNextYear = 0.0;
-                    if (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0)
-                    {
-                        // We will already have a calculated C_p value for the next year when the previous year set it for us (down below)
-                        plantCarbonInAgriculturalProductForNextYear = nextYearViewItem.PlantCarbonInAgriculturalProduct;
-                    }
-                    else
-                    {
-                        plantCarbonInAgriculturalProductForNextYear = this.CalculatePlantCarbonInAgriculturalProduct(
-                            previousYearViewItem: null,
-                            currentYearViewItem: nextYearViewItem,
-                            farm: farm);
-                    }
-
-                    // This year's C_p will be a fraction of next year's C_p
-                    
-                    // Equation 2.1.2-23
-                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = plantCarbonInAgriculturalProductForNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
-
-                    // Equation 2.1.2-24
-                    carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
-
-                    // Since this year doesn't have any C_p, we assign the value now so that when we calculate C_r and C_e for this year, we will have a C_p value to work with
-                    currentYearViewItem.PlantCarbonInAgriculturalProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears;
-
-                }
-                else
-                {
-                    /*
-                     * Situation when the C_p is not known for the current year (first year in this condition) or the subsequent year (second year in this condition). Have to use estimated value
-                     */
-
-                    // This year's C_p will be a fraction of the estimated value for next year's C_p 
-                    var thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears = (estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials);
-
-                    carbonInputFromProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
-
-                    // Since this year doesn't have any C_p, we assign the value now so that when we calculate C_r and C_e for this year, we will have a C_p value to work with
-                    currentYearViewItem.PlantCarbonInAgriculturalProduct = thisYearsPlantCarbonInAgriculturalProductAsAFractionOfNextYears;
-
-                    if (nextYearViewItem != null)
-                    {
-                        /* Equation 2.1.2-25 
-                         *
-                         * Set the the C_p for next year to be the calculated value
-                         */
-                        nextYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantCarbonInAgriculturalProductInNextYear;
-
-                        // Since we are assigning a calculated value to the next year's C_p value, we need to set a flag so that it doesn't get overwritten when we calculate C_p on the next iteration
-                        nextYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
-                    }
-                }
-            }
-            else
-            {
-                /* Equation 2.1.2-27
-                 *  
-                 * Consider any year other than the first
-                 */
-
-                if (currentYearViewItem.PlantCarbonInAgriculturalProduct > 0)
-                {
-                    /*
-                     * Situation when C_p for the current year is available
-                     */
-
-                    carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
-                }
-                else
-                {
-                    /*
-                     * Situation when C_p for the current year is not known. Have to use estimated value
-                     */
-
-                    var estimatedPlantC = estimatedPlantCarbonInAgriculturalProductInNextYear * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
-
-                    carbonInputFromProduct = (estimatedPlantC)* (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
-
-                    // Since this year doesn't have any C_p, we assign the value now so that when we calculate C_r and C_e for this year, we will have a C_p value to work with
-                    currentYearViewItem.PlantCarbonInAgriculturalProduct = estimatedPlantC;
-                }
-            }
-
-            // Note that the straw inputs are not considered when calculating above ground inputs from perennials - just the product (where the 'straw' is considered to be the product)
-            return carbonInputFromProduct;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from roots for a year in which a perennial crop is grown.
-        /// 
-        /// C_r
-        ///
-        /// Note: the <see cref="FieldResultsService.AssignDefaultBiomassCoefficients"/> sets the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.BiomassCoefficientProduct"/> to the value of the biomass coefficient of straw returned by the provider for perennials.
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from roots</returns>
-        public double CalculateCarbonInputFromRootsForPerennials(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            Farm farm)
-        {
-            // Next line divides by biomass of product so it can't be zero
-            if (currentYearViewItem.BiomassCoefficientProduct == 0)
-            {
-                return 0;
-            }
-
-            // Equation 2.1.2-28
-            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
-            if (carbonInputFromRoots < 450)
-            {
-                carbonInputFromRoots = 450;
-            }
-
-            if (currentYearViewItem.YearInPerennialStand == 1)
-            {
-                return carbonInputFromRoots;
-            }
-
-            // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)))
-            {
-                // Equation 2.1.2-30
-                carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots + (previousYearViewItem.CarbonInputFromRoots * (19.35 / 100.0));
-
-                if (currentYearViewItem.YearInPerennialStand > 5)
-                {
-                    carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
-                }
-            }
-
-            return carbonInputFromRoots;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from extraroots for a year in which a perennial crop is grown.
-        /// 
-        /// C_e
-        ///
-        /// Note: the <see cref="FieldResultsService.AssignDefaultBiomassCoefficients"/> sets the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.BiomassCoefficientProduct"/> to the value of the biomass coefficient of straw returned by the provider for perennials.
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from extraroots</returns>
-        public double CalculateCarbonInputFromExtrarootsForPerennials(
-            CropViewItem previousYearViewItem,
-            CropViewItem currentYearViewItem,
-            Farm farm)
-        {
-            // Next line divides by biomass of product so it can't be zero
-            if (currentYearViewItem.BiomassCoefficientProduct == 0)
-            {
-                return 0;
-            }
-
-            // Equation 2.1.2-29
-            // Equation 2.1.2-31
-            var carbonInputFromExtraroots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / currentYearViewItem.BiomassCoefficientProduct);
-
-            // Taken out now as the extra roots only ever depend on the C_p and not the extraroots from the previous year
-            //// We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            //if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)) && carbonInputFromExtraroots < previousYearViewItem.CarbonInputFromExtraroots)
-            //{
-            //    // Equation 2.1.2-33
-            //    carbonInputFromExtraroots = previousYearViewItem.CarbonInputFromExtraroots;
-            //}
-
-            return carbonInputFromExtraroots;
-        }
-
-        /// <summary>
-        /// Estimates the plant carbon in agricultural product for the subsequent year (t + 1) when considering perennial stands with missing yield data.
-        /// 
-        /// C_p
-        /// </summary>
-        /// <param name="nextYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the subsequent (t + 1) year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The estimated plant carbon in agricultural product</returns>
-        private double EstimatePlantCarbonInAgriculturalProductForNextYear(
-            CropViewItem nextYearViewItem,
-            Farm farm)
-        {
-            if (nextYearViewItem == null)
-            {
-                // If there is no data for the next year, there can be no estimated value
-                return 0;
-            }
-
-            var year = nextYearViewItem.Year;
-            var moistureContentAsPercentage = nextYearViewItem.MoistureContentOfCropPercentage;
-            var carbonConcentration = nextYearViewItem.CarbonConcentration;
-            var totalPrecipitationForTheYear = farm.ClimateData.GetTotalPrecipitationForYear(year);
-            var totalEvapotranspirationForTheYear = farm.ClimateData.GetTotalEvapotranspirationForYear(year);
-            var proportionOfPrecipitationMayThroughSeptember = farm.ClimateData.ProportionOfPrecipitationFallingInMayThroughSeptember(year);
-
-            var result = this.CalculateProductivity(
-                annualPrecipitation: totalPrecipitationForTheYear,
-                annualPotentialEvapotranspiration: totalEvapotranspirationForTheYear,
-                proportionOfPrecipitationMayThroughSeptember: proportionOfPrecipitationMayThroughSeptember,
-                carbonConcentration: carbonConcentration);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.1.2-22
-        /// Equation 2.1.2-26
-        /// </summary>
-        public double CalculateProductivity(double annualPrecipitation,
-            double annualPotentialEvapotranspiration,
-            double proportionOfPrecipitationMayThroughSeptember,
-            double carbonConcentration)
-        {
-            var production = (2.973 + (0.00453 * annualPrecipitation) + (-0.00259 * annualPotentialEvapotranspiration) + (6.187 * proportionOfPrecipitationMayThroughSeptember));
-            var dryMatter = Math.Pow(Math.E, production);
-
-            var result = dryMatter * carbonConcentration;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from roots for the given species grown in the given year when the harvest method is green manure.
-        /// 
-        /// C_r
-        ///
-        /// When green manure is chosen as a harvest option for a main crop (meaning the user is entering an above ground biomass value instead of a grain yield), the residue fractions for product
-        /// and straw are combined to form a single coefficient, Rp, and Cs is omitted.
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from roots</returns>
-        private double CalculateCarbonInputFromRootsForGreenManureOrSwathing(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            Farm farm)
-        {
-            var combinedBiomassCoefficientOfProduct = currentYearViewItem.BiomassCoefficientProduct + currentYearViewItem.BiomassCoefficientStraw;
-            if (combinedBiomassCoefficientOfProduct == 0)
-            {
-                return 0;
-            }
-
-            var greenManureResult = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / combinedBiomassCoefficientOfProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100);
-
-            return greenManureResult;
-        }
-
-        /// <summary>
-        /// Calculates the carbon input from extraroots for the given species grown in the given year when the harvest method is green manure.
-        /// 
-        /// C_e
-        ///
-        /// When green manure is chosen as a harvest option for a main crop (meaning the user is entering an above ground biomass value instead of a grain yield), the residue fractions for product
-        /// and straw are combined to form a single coefficient, Rp, and Cs is omitted.
-        /// </summary>
-        /// <param name="previousYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the previous year</param>
-        /// <param name="currentYearViewItem">The details of the <see cref="FieldSystemComponent"/> in the current year</param>
-        /// <param name="farm">The <see cref="Farm"/> being considered</param>
-        /// <returns>The carbon input from extraroots</returns>
-        private double CalculateCarbonInputFromExtrarootsForGreenManureOrSwathing(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            Farm farm)
-        {
-            var combinedBiomassCoefficientOfProduct = currentYearViewItem.BiomassCoefficientProduct + currentYearViewItem.BiomassCoefficientStraw;
-            if (combinedBiomassCoefficientOfProduct == 0)
-            {
-                return 0;
-            }
-
-            var greenManureResult = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientExtraroot / combinedBiomassCoefficientOfProduct);
-
-            return greenManureResult;
-        }
 
         /// <summary>
         /// Equation 2.2.2-27
@@ -1023,6 +309,175 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
+        public CropViewItem CalculateEquilibriumYear(
+    List<CropViewItem> detailViewItems,
+    Farm farm,
+    Guid componentId)
+        {
+            var fieldSystemComponent = farm.GetFieldSystemComponent(componentId);
+
+            // Get the field system component that will be used to calculate the equilibrium year            
+            var sizeOfFirstRotationForField =
+                detailViewItems.OrderBy(viewItem => viewItem.Year).First().SizeOfFirstRotationForField;
+            if (sizeOfFirstRotationForField == 0)
+            {
+                // Was not set during creation of old farm                
+                sizeOfFirstRotationForField = fieldSystemComponent.SizeOfFirstRotationInField();
+            }
+
+            // Get the detail view items that represent the crops that define the first rotation
+            var viewItemsInRotation = detailViewItems.Take(sizeOfFirstRotationForField).ToList();
+
+            /*
+             * Calculate averages for the crops that define the first rotation - this is used to calculate the equilibrium state
+             *
+             * Use a specified strategy to calculate these starting values
+             */
+
+            var equilibriumAboveGroundInput = 0d;
+            var equilibriumBelowGroundInput = 0d;
+            var equilibriumManureInput = 0d;
+            var equilibriumClimateParameter = 0d;
+            var equilibriumManagementFactor = 0d;
+            var equilibriumDigestateInput = 0d;
+
+            var equilibriumAboveGroundNitrogen = 0d;
+            var equilibriumBelowGroundNitrogen = 0d;
+
+            var strategy = farm.Defaults.EquilibriumCalculationStrategy;
+            if (strategy == EquilibriumCalculationStrategies.CarMultipleYearAverage)
+            {
+                // Not implemented yet
+            }
+            else
+            {
+                // At this point, the detail view items have had their C inputs calculated
+                // Equation 2.1.3-1
+                equilibriumAboveGroundInput = viewItemsInRotation.Average(x => x.CombinedAboveGroundInput);
+
+                // Equation 2.1.3-2
+                equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.CombinedBelowGroundInput);
+
+                // Equation 2.1.3-3
+                equilibriumManureInput = viewItemsInRotation.Average(x => x.CombinedManureInput);
+                equilibriumDigestateInput = viewItemsInRotation.Average(x => x.CombinedDigestateInput);
+
+                equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
+                equilibriumManagementFactor = viewItemsInRotation.Average(x => x.ManagementFactor);
+
+                equilibriumAboveGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedAboveGroundResidueNitrogen);
+                equilibriumBelowGroundNitrogen = viewItemsInRotation.Average(x => x.CombinedBelowGroundResidueNitrogen);
+            }
+
+            // This is the equilibrium year result
+            var result = new CropViewItem();
+
+            result.CombinedAboveGroundInput = equilibriumAboveGroundInput;
+            result.CombinedBelowGroundInput = equilibriumBelowGroundInput;
+
+            result.CombinedAboveGroundResidueNitrogen = equilibriumAboveGroundNitrogen;
+            result.CombinedBelowGroundResidueNitrogen = equilibriumBelowGroundNitrogen;
+
+            result.CombinedManureInput = equilibriumManureInput;
+            result.CombinedDigestateInput = equilibriumDigestateInput;
+            result.ClimateParameter = equilibriumClimateParameter;
+            result.ManagementFactor = equilibriumManagementFactor;
+
+            var averageNitrogenConcentrationInProduct = viewItemsInRotation.Select(x => x.NitrogenContentInProduct).Average();
+            var averageNitrogenConcentrationInStraw = viewItemsInRotation.Select(x => x.NitrogenContentInStraw).Average();
+            var averageNitrogenConcentrationInRoots = viewItemsInRotation.Select(x => x.NitrogenContentInRoots).Average();
+            var averageNitrogenConcentrationInExtraroots = viewItemsInRotation.Select(x => x.NitrogenContentInExtraroot).Average();
+
+            result.NitrogenContentInProduct = averageNitrogenConcentrationInProduct;
+            result.NitrogenContentInStraw = averageNitrogenConcentrationInStraw;
+            result.NitrogenContentInRoots = averageNitrogenConcentrationInRoots;
+            result.NitrogenContentInExtraroot = averageNitrogenConcentrationInExtraroots;
+
+            /*
+             * Carbon
+             */
+
+            // The user can choose to use either the climate parameter or the management factor in the calculations
+            var climateOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor
+                ? result.ClimateParameter
+                : result.ManagementFactor;
+
+            if (farm.UseCustomStartingSoilOrganicCarbon == false)
+            {
+                result.YoungPoolSoilCarbonAboveGround =
+                    this.CalculateYoungPoolSteadyStateAboveGround(
+                        averageAboveGroundCarbonInput: result.CombinedAboveGroundInput,
+                        youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                        climateParameter: climateOrManagementFactor);
+            }
+            else
+            {
+
+                // Equation 2.1.3-8
+                var youngPoolAboveGround = result.CombinedAboveGroundInput /
+                                           (climateOrManagementFactor *
+                                            farm.Defaults.DecompositionRateConstantYoungPool);
+
+                result.YoungPoolSoilCarbonAboveGround = youngPoolAboveGround;
+            }
+
+            if (farm.UseCustomStartingSoilOrganicCarbon == false)
+            {
+                result.YoungPoolSoilCarbonBelowGround =
+                    this.CalculateYoungPoolSteadyStateBelowGround(
+                        averageBelowGroundCarbonInput: result.CombinedBelowGroundInput,
+                        youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                        climateParameter: climateOrManagementFactor);
+            }
+            else
+            {
+                // Equation 2.1.3-9
+                var youngPoolBelowGround = result.CombinedBelowGroundInput /
+                                           (climateOrManagementFactor *
+                                            farm.Defaults.DecompositionRateConstantYoungPool);
+
+                result.YoungPoolSoilCarbonBelowGround = youngPoolBelowGround;
+            }
+
+            result.YoungPoolManureCarbon = this.CalculateYoungPoolSteadyStateManure(
+                averageManureCarbonInput: (result.CombinedManureInput + result.CombinedDigestateInput),
+                youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                climateParameter: climateOrManagementFactor);
+
+            if (farm.UseCustomStartingSoilOrganicCarbon == false)
+            {
+                result.OldPoolSoilCarbon = this.CalculateOldPoolSteadyState(
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    oldPoolDecompositionRate: farm.Defaults.DecompositionRateConstantOldPool,
+                    climateParameter: climateOrManagementFactor,
+                    aboveGroundHumificationCoefficient: farm.Defaults.HumificationCoefficientAboveGround,
+                    belowGroundHumificationCoefficient: farm.Defaults.HumificationCoefficientBelowGround,
+                    averageAboveGroundCarbonInputOfRotation: result.CombinedAboveGroundInput,
+                    averageBelowGroundCarbonInputOfRotation: result.CombinedBelowGroundInput,
+                    aboveGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonAboveGround,
+                    belowGroundYoungPoolSteadyState: result.YoungPoolSoilCarbonBelowGround,
+                    manureYoungPoolSteadyState: result.YoungPoolSteadyStateManure,
+                    averageManureCarbonInputOfRotation: (result.CombinedManureInput + result.CombinedDigestateInput),
+                    manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure);
+            }
+            else
+            {
+                // Equation 2.1.3-10
+                result.OldPoolSoilCarbon = farm.StartingSoilOrganicCarbon -
+                                           (result.YoungPoolSoilCarbonAboveGround +
+                                            result.YoungPoolSoilCarbonBelowGround);
+            }
+
+            result.SoilCarbon = this.CalculateSoilCarbonAtInterval(
+                youngPoolSoilCarbonAboveGroundAtInterval: result.YoungPoolSoilCarbonAboveGround,
+                youngPoolSoilCarbonBelowGroundAtInterval: result.YoungPoolSoilCarbonBelowGround,
+                oldPoolSoilCarbonAtInterval: result.OldPoolSoilCarbon,
+                youngPoolManureAtInterval: result.YoungPoolManureCarbon);
+
+            return result;
+        }
+
+
         /// <summary>
         /// Equation 2.1.3-15
         /// </summary>
@@ -1124,6 +579,74 @@ namespace H.Core.Calculators.Carbon
             }
 
             return result;
+        }
+
+        public void CalculateCarbonAtInterval(
+    CropViewItem previousYearResults,
+    CropViewItem currentYearResults,
+    Farm farm)
+        {
+            // The user can choose to use either the climate parameter or the management factor in the calculations
+            var climateParameterOrManagementFactor = farm.Defaults.UseClimateParameterInsteadOfManagementFactor
+                ? currentYearResults.ClimateParameter
+                : currentYearResults.ManagementFactor;
+
+            currentYearResults.YoungPoolSoilCarbonAboveGround =
+                this.CalculateYoungPoolAboveGroundCarbonAtInterval(
+                    youngPoolAboveGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonAboveGround,
+                    aboveGroundCarbonAtPreviousInterval: previousYearResults.CombinedAboveGroundInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
+
+            currentYearResults.YoungPoolSoilCarbonBelowGround =
+                this.CalculateYoungPoolBelowGroundCarbonAtInterval(
+                    youngPoolBelowGroundCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonBelowGround,
+                    belowGroundCarbonAtPreviousInterval: previousYearResults.CombinedBelowGroundInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
+
+            currentYearResults.YoungPoolManureCarbon =
+                this.CalculateYoungPoolManureCarbonAtInterval(
+                    youngPoolManureCarbonAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
+                    manureCarbonInputAtPreviousInterval: previousYearResults.CombinedManureAndDigestateInput,
+                    youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                    climateParameter: climateParameterOrManagementFactor);
+
+            currentYearResults.OldPoolSoilCarbon = this.CalculateOldPoolSoilCarbonAtInterval(
+                oldPoolSoilCarbonAtPreviousInterval: previousYearResults.OldPoolSoilCarbon,
+                aboveGroundHumificationCoefficient: farm.Defaults.HumificationCoefficientAboveGround,
+                belowGroundHumificationCoefficient: farm.Defaults.HumificationCoefficientBelowGround,
+                youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
+                oldPoolDecompositionRate: farm.Defaults.DecompositionRateConstantOldPool,
+                youngPoolAboveGroundOrganicCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonAboveGround,
+                youngPoolBelowGroundOrganicCarbonAtPreviousInterval: previousYearResults.YoungPoolSoilCarbonBelowGround,
+                aboveGroundCarbonResidueAtPreviousInterval: previousYearResults.CombinedAboveGroundInput,
+                belowGroundCarbonResidueAtPreviousInterval: previousYearResults.CombinedBelowGroundInput,
+                climateParameter: climateParameterOrManagementFactor,
+                youngPoolManureAtPreviousInterval: previousYearResults.YoungPoolManureCarbon,
+                manureHumificationCoefficient: farm.Defaults.HumificationCoefficientManure,
+                manureCarbonInputAtPreviousInterval: previousYearResults.CombinedManureAndDigestateInput);
+
+            currentYearResults.SoilCarbon = this.CalculateSoilCarbonAtInterval(
+                youngPoolSoilCarbonAboveGroundAtInterval: currentYearResults.YoungPoolSoilCarbonAboveGround,
+                youngPoolSoilCarbonBelowGroundAtInterval: currentYearResults.YoungPoolSoilCarbonBelowGround,
+                oldPoolSoilCarbonAtInterval: currentYearResults.OldPoolSoilCarbon,
+                youngPoolManureAtInterval: currentYearResults.YoungPoolManureCarbon);
+
+            currentYearResults.ChangeInCarbon = this.CalculateChangeInSoilCarbonAtInterval(
+                soilOrganicCarbonAtInterval: currentYearResults.SoilCarbon,
+                soilOrganicCarbonAtPreviousInterval: previousYearResults.SoilCarbon);
+
+            // If there is a measured value, then use the calculated Y_ag, Y_bg, and O pool values for the current year (using 2.1.3-8, 2.1.3-9, and 2.1.3-10)
+            if (previousYearResults.Year == 0 && farm.UseCustomStartingSoilOrganicCarbon)
+            {
+                currentYearResults.YoungPoolSoilCarbonAboveGround = previousYearResults.YoungPoolSoilCarbonAboveGround;
+                currentYearResults.YoungPoolSoilCarbonBelowGround = previousYearResults.YoungPoolSoilCarbonBelowGround;
+                currentYearResults.YoungPoolManureCarbon = previousYearResults.YoungPoolManureCarbon;
+                currentYearResults.OldPoolSoilCarbon = previousYearResults.OldPoolSoilCarbon;
+                currentYearResults.SoilCarbon = farm.StartingSoilOrganicCarbon;
+                currentYearResults.ChangeInCarbon = 0;
+            }
         }
 
         #endregion

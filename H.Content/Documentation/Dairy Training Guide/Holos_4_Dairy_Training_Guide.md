@@ -12,7 +12,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2023"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2024"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -115,7 +115,7 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **All Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
+Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
 
 If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the  training section, we will be working with the “Land management” and “Dairy Cattle” categories. 
 
@@ -154,7 +154,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 2. Select **"Wheat"** as the main crop and **"Hairy Vetch"** as the cover crop in **Step 2**.
 
 3. Under the **General** tab:
-    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value..
+    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value.
     * Select **"Reduced Tillage"**" as the tillage type.
     * Enter **"200"** mm ha<sup>-1</sup> as the amount of irrigation.
     * Select **"0"** as the number of pesticide passes.
@@ -195,7 +195,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
 2. Enter **"100"** ha as the total area of the field.
 3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** area when a perennial crop is selected.
-4. Keep **"0"** as the amount of irrigation and number of pesticide passes.
+4. Keep **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 5. No fertilizer is used for this crop.
 
 <br>
@@ -222,20 +222,20 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 
 2. To expand the horizontal space available in Holos, click on **View** from the top menu bar and select **Hide List of Available Components**.
 
-3. The rotation of this field begins in **"1985"** and ends in **"2023"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
+3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
 
 4. Enter **"70"** (ha) as the total area of this field.
 
-5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2023"**.
+5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
     * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
     * Change the tillage type to **"Reduced Tillage"**.
-    * Keep **"0"** as the amount of irrigation and number of pesticide passes.
+    * Keep the default values of **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 
 6. Now add another crop to this rotation. Click on **Add Crop** under **Step 2** to add a second crop to the rotation. 
 
 <br>
 
-> *Note: Holos sets the year for this new crop to 2022 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
+> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
 
 > *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
 
@@ -245,9 +245,9 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 
 8. Click on the **Add crop** button one more time. For this third crop, select **"Tame Mixed (grass/legume)"** once again as the crop type.
 
-9. Now add harvest data to each of the tame mixed crops. You will need to select each "**tame mixed crop**" and add the harvest data to that specific crop. So select the first tame mixed crop **(2022)** and then:
+9. Now add harvest data to each of the tame mixed crops. You will need to select each "**tame mixed crop**" and add the harvest data to that specific crop. So select the first tame mixed crop **(2023)** and then:
     * Under the **Harvest Tab** click the **"Add Harvest Date"** button to create a new harvest.
-    * Select a Harvest date of "**"August 31, 2022"**, assuming the harvest is done on the same day every year.
+    * Select a Harvest date of "**"August 31, 2023"**, assuming the harvest is done on the same day every year.
     * Select **"Mid"** for Forage growth stage.
     * Enter **"5"** as the total number of bales.
     * Enter **"500"** as the Wet bale weight.
@@ -294,7 +294,7 @@ Holos provides the user the option to have more than one lactating cows group. W
 
 1. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected in order to enter the associated management information for that group of animals.
 
-2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2022"** is set as the 'Start date' and that **"May 31, 2022"** is set as the 'End date' (150 days). Note that the 'Number of days' being shown will be inclusive of the start and end dates.
+2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the 'Start date' and that **"May 31, 2023"** is set as the 'End date' (150 days). Note that the 'Number of days' being shown will be inclusive of the start and end dates.
 
 3. Next, we can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3**. 
 
@@ -318,19 +318,19 @@ Holos provides the user the option to have more than one lactating cows group. W
 
 <br>
 
-> *Note: Holos now reports the diet being complete since all ingredients total up to 100%.*
-
-<br>
-
- 10.  Now select 'Custom Dairy Diet' from the drop down-down menu on the **Diet** tab.
-
-<br>
-
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
     <br>
     <em>Figure 15: Custom diet creator for Dairy Lactating animal group.</em>
 </p> 
+
+<br>
+
+> *Note: Holos now reports the diet being complete since all ingredients total up to 100%.*
+
+<br>
+
+ 10.  Now select 'Custom Dairy Diet' from the drop-down menu on the **Diet** tab.
 
 <br>
 
@@ -344,19 +344,15 @@ Holos provides the user the option to have more than one lactating cows group. W
  
  13. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected to enter further management period information.
  
- 14. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2022"** is set as the 'Start date' and that **"July 31, 2022"** is set as the 'End date' (60 days). 
+ 14. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2023"** is set as the 'Start date' and that **"July 31, 2023"** is set as the 'End date' (60 days). 
  
  15. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
  
  16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose 'Custom Dairy Diet', on the **Housing** tab choose 'Tie stall (solid litter)', and on the **Manure** tab choose 'Solid storage (stockpiled)'.
  
- 17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2022"** is set as the 'Start date' and that **"November 04, 2022"** is set as the 'End date' (95 days). 
+ 17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the 'Start date' and that **"November 04, 2023"** is set as the 'End date' (95 days). 
  
  18. **Repeat** Step 16 above. Enter in the same information in **Step 3** for this management period.
- 
- 19. Click the management period named **"Dry period"** in **Step 2**. Ensure **"January 01, 2023"** is set as the 'Start date' and that **"March 01, 2023"** is set as the 'End date' (60 days). 
- 
- 20. On the **General** tab enter **"65"** animals, on the **Diet** tab choose 'Close-up Diet', on the **Housing** tab choose 'Drylot (standing or exercise yard)', and on the **Manure** tab choose 'Solid storage (stockpiled)'.
 
 <br>
 
@@ -366,11 +362,11 @@ Calves that are not used for replacement will enter into the veal system and are
 
 1. Under the animal groups section in **Step 1**, make sure that the **"Dairy calves"** row is selected in order to enter the associated management information for this group. 
 
-2. Under **Step 2**, the first management period will be from **"January 1, 2022"** to **"March 31, 2022"** (90 days).
+2. Under **Step 2**, the first management period will be from **"January 1, 2023"** to **"March 31, 2023"** (90 days).
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** for 'Number of animals'. Click on the **Manure** tab and select 'Solid storage (stockpiled)' from the list.
 
-4. Returning to **Step 2**, click on the **"Add Management Period"** button. This will add a second management period for our group of calves. Ensure the 'start date' is **"April 01, 2022"** and the 'end date' is "**June 30, 2022**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**.
+4. Returning to **Step 2**, click on the **"Add Management Period"** button. This will add a second management period for our group of calves. Ensure the 'start date' is **"April 01, 2023"** and the 'end date' is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**.
 
 <br>
 
@@ -384,11 +380,29 @@ Out of the 30 female calves produced, the farm selected 15 as replacement heifer
 
 1. Under the animal groups section in **Step 1**, make sure that the **"Dairy heifers"** row is selected in order to enter the associated management information for that group.
 
-2. For **"Management period #1"**, enter **"January 01, 2022"** as the 'Start date’ and   **"December 31, 2022"** as the ‘End date’.
+2. For **"Management period #1"**, enter **"January 01, 2023"** as the 'Start date’ and   **"December 31, 2023"** as the ‘End date’.
 
 3. Click on the **General** tab and enter **"15"** for 'Number of animals'.
 
 4. On the **Diet** tab, ensure the 'High fiber' diet is selected for the heifers.
+
+5. On the **Housing** tab, select 'Free stall barn (solid litter)' as the housing type.
+
+6. On the **Manure** tab, select 'Solid storage (stockpiled)'.
+
+<br>
+
+**To set up for Dairy Dry:**
+
+20 cows will stop milking for a rest period allowing for recovery and recuperation.
+
+1. Under the animal groups section in **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
+
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the 'Start date’ and **"January 4, 2024"** as the ‘End date’.
+
+3. Click on the **General** tab and enter **"20"** for 'Number of animals'.
+
+4. On the **Diet** tab, ensure the 'Legume forage based diet' is selected.
 
 5. On the **Housing** tab, select 'Free stall barn (solid litter)' as the housing type.
 

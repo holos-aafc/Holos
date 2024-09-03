@@ -94,7 +94,7 @@ namespace H.Core.Services.Animals
                 carbonConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding,
                 moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
-            if (animalGroup.GroupType == AnimalType.SwinePiglets)
+            if (animalGroup.GroupType == AnimalType.SwinePiglets && managementPeriod.ProductionStage != ProductionStages.Weaned)
             {
                 dailyEmissions.CarbonAddedFromBeddingMaterial = 0;
             }
@@ -225,7 +225,7 @@ namespace H.Core.Services.Animals
                 nitrogenConcentrationOfBeddingMaterial: managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding,
                 moistureContentOfBeddingMaterial: managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial);
 
-            if (animalGroup.GroupType == AnimalType.SwinePiglets)
+            if (animalGroup.GroupType == AnimalType.SwinePiglets && managementPeriod.ProductionStage != ProductionStages.Weaned)
             {
                 dailyEmissions.AmountOfNitrogenAddedFromBedding = 0;
             }
@@ -254,7 +254,7 @@ namespace H.Core.Services.Animals
                 manureDirectNitrogenEmission: dailyEmissions.ManureDirectN2ONEmission,
                 manureIndirectNitrogenEmission: dailyEmissions.ManureIndirectN2ONEmission);
 
-            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
+            dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage = base.CalculateNitrogenAvailableForLandApplicationFromSheepSwineAndOtherLivestock(
                 nitrogenExcretion: dailyEmissions.AmountOfNitrogenExcreted,
                 nitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 directN2ONEmission: dailyEmissions.ManureDirectN2ONEmission,
@@ -262,12 +262,18 @@ namespace H.Core.Services.Animals
                 leachingN2ONEmission: dailyEmissions.ManureN2ONLeachingEmission,
                 leachingNO3NEmission: dailyEmissions.ManureNitrateLeachingEmission);
 
+            // Equation 4.5.2-22
+            dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
+                (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
+
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
+            dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage;
+
             dailyEmissions.TotalVolumeOfManureAvailableForLandApplication = base.CalculateTotalVolumeOfManureAvailableForLandApplication(
-                totalNitrogenAvailableForLandApplication: dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay,
+                totalNitrogenAvailableForLandApplication: dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
             dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +

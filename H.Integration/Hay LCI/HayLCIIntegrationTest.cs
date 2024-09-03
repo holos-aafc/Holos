@@ -31,6 +31,8 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Services.Initialization.Climate;
+using H.Core.Services.Initialization.Geography;
 using H.Core.Test;
 
 namespace H.Integration.Hay_LCI
@@ -87,6 +89,8 @@ namespace H.Integration.Hay_LCI
         private string _baseOutputDirectory;
         private bool _usingIrrigation;
         private List<Table3Item> _slcList;
+        private IClimateInitializationService _climateInitializationService;
+        private IGeographyInitializationService _geographyInitializationService;
 
         #endregion
 
@@ -126,17 +130,20 @@ namespace H.Integration.Hay_LCI
 
             _fertilizerBlendConverter = new FertilizerBlendConverter();
 
-            
+
             var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
             var ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2oEmissionFactorCalculator);
 
-            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, _initializationService);
 
             _fieldResultsService = fieldResultsService;
 
             var manureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _manureCompositionTypes = manureCompositionProvider.ManureCompositionData;
+
+            _climateInitializationService = new ClimateInitializationService();
+            _geographyInitializationService = new GeographyInitializationService();
         }
 
         [TestCleanup]
@@ -465,7 +472,7 @@ namespace H.Integration.Hay_LCI
 
                 foreach (var cropViewItem in field.CropViewItems)
                 {
-                    _fieldResultsService.AssignSystemDefaults(cropViewItem, farm, _globalSettings);
+                    _initializationService.InitializeCrop(cropViewItem, farm, _globalSettings);
 
                     this.AssignFertilizerApplications(cropViewItem, farm);
                     this.AssignManureApplications(cropViewItem, farm);
@@ -544,7 +551,7 @@ namespace H.Integration.Hay_LCI
                 fertilizerApplication.FertilizerBlendData.FertilizerBlend = blend;
                 fertilizerApplication.AmountOfBlendedProductApplied = rate;
 
-                _fieldResultsService.AssignDefaultBlendData(fertilizerApplication);
+                _initializationService.InitializeBlendData(fertilizerApplication);
 
                 viewItem.FertilizerApplicationViewItems.Add(fertilizerApplication);
 
@@ -615,17 +622,7 @@ namespace H.Integration.Hay_LCI
 
             foreach (var farm in farms)
             {
-                var nasaClimate = _nasaClimateProvider.GetCustomClimateData(farm.Latitude, farm.Longitude);
-                var climateForPeriod = nasaClimate.Where(x => x.Date.Year >= startYear && x.Date.Year <= endYear).ToList();
-                var temperatureNormalsForPeriod = _climateNormalCalculator.GetTemperatureDataByDailyValues(climateForPeriod, startYear, endYear);
-                var precipitationNormalsForPeriod = _climateNormalCalculator.GetPrecipitationDataByDailyValues(climateForPeriod, startYear, endYear);
-                var evapotranspirationNormalsForPeriod = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(climateForPeriod, startYear, endYear);
-
-                farm.ClimateData.DailyClimateData.AddRange(climateForPeriod);
-
-                farm.ClimateData.EvapotranspirationData = evapotranspirationNormalsForPeriod;
-                farm.ClimateData.PrecipitationData = precipitationNormalsForPeriod;
-                farm.ClimateData.TemperatureData = temperatureNormalsForPeriod;
+                _climateInitializationService.InitializeClimate(farm, startYear, endYear);
 
                 currentCount++;
 

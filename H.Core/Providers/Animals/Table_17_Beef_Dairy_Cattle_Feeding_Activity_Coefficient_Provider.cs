@@ -17,6 +17,7 @@ namespace H.Core.Providers.Animals
         {
             HTraceListener.AddTraceListener();
         }
+
         public IFeedingActivityCoeffientData GetByHousing(HousingType housingType)
         {
             switch (housingType)

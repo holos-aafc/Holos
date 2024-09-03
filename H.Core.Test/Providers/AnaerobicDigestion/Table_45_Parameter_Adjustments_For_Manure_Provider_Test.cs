@@ -65,14 +65,6 @@ namespace H.Core.Test.Providers.AnaerobicDigestion
             Assert.AreEqual(0.05, data.HydrolysisRateOfSubstrate);
         }
 
-        [TestMethod]
-        public void CheckIncorrectManureStateType()
-        {
-            var data = _provider.GetParametersAdjustmentInstance(ManureStateType.LiquidWithNaturalCrust);
-
-            Assert.AreEqual(0, data.HydrolysisRateOfSubstrate);
-        }
-
         #endregion
     }
 }

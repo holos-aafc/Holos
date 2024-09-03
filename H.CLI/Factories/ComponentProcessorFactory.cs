@@ -10,6 +10,8 @@ using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
+using H.Core.Services;
+using H.Core.Services.Initialization;
 
 namespace H.CLI.Factories
 {
@@ -30,8 +32,9 @@ namespace H.CLI.Factories
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
             var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
             var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+            var initializationService = new InitializationService();
 
-            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
             _fieldProcessor = new FieldProcessor(fieldResultsService);
             _shelterbeltProcessor = new ShelterbeltProcessor();
         } 

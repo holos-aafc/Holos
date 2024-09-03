@@ -69,11 +69,12 @@ namespace H.Core.Services.Animals
                 groupEmissionsByDay.NH3FromGrazingAnimals = CoreConstants.ConvertToNH3(nH3NFromGrazingAnimals);
 
                 // Equation 5.4.3-1
-                var volatilizationFraction = nH3NFromGrazingAnimals / groupEmissionsByDay.AmountOfNitrogenExcreted;
+                // Will be zero if weight entered by user is 0
+                var volatilizationFraction = nH3NFromGrazingAnimals / (groupEmissionsByDay.AmountOfNitrogenExcreted <= 0 ? 1 : groupEmissionsByDay.AmountOfNitrogenExcreted);
 
                 groupEmissionsByDay.ManureVolatilizationRate = groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
-                    beddingNitrogen: 0,
+                    beddingNitrogenRate: 0,
                     volatilizationFraction: volatilizationFraction,
                     volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
@@ -125,6 +126,22 @@ namespace H.Core.Services.Animals
             if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture &&
                 managementPeriod.HousingDetails.PastureLocation != null)
             {
+                groupEmissionsByDay.TotalAmountOfNitrogenForDay = groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay;
+
+                groupEmissionsByDay.TanEnteringStorageSystem = 0;
+                groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForHousing = 0;
+                groupEmissionsByDay.AmbientAirTemperatureAdjustmentForStorage = 0;
+                groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForStorage = 0;
+                groupEmissionsByDay.AmmoniaEmissionsFromStorageSystem = 0;
+                groupEmissionsByDay.AdjustedAmountOfTanInStoredManureOnDay = 0;
+                groupEmissionsByDay.AccumulatedTanInStorageOnDay = 0;
+                groupEmissionsByDay.AccumulatedTANAvailableForLandApplicationOnDay = 0;
+                groupEmissionsByDay.AdjustedAmmoniaFromStorage = 0;
+                groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay = 0;
+                groupEmissionsByDay.ManureCarbonNitrogenRatio = 0;
+                groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication = 0;
+                groupEmissionsByDay.AccumulatedVolume = 0;
+
                 // Equation 5.3.1-2
                 groupEmissionsByDay.ManureDirectN2ONEmissionRate = groupEmissionsByDay.NitrogenExcretionRate *
                                                                    managementPeriod.ManureDetails.N2ODirectEmissionFactor;
@@ -145,7 +162,7 @@ namespace H.Core.Services.Animals
 
                 groupEmissionsByDay.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
-                    beddingNitrogen: 0,
+                    beddingNitrogenRate: 0,
                     volatilizationFraction: groupEmissionsByDay.FractionOfManureVolatilized,
                     volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 

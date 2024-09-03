@@ -16,6 +16,8 @@ namespace H.Core.Services.Animals
         DigestateTank GetTank(Farm farm, DateTime targetDate, List<DigestorDailyOutput> dailyOutputs);
         List<DigestorDailyOutput> GetDailyResults(Farm farm);
 
+        List<ManureLocationSourceType> GetValidDigestateLocationSourceTypes();
+
         /// <summary>
         /// Returns the total amount of N applied (to the entire field) from a digestate field application.
         /// 
@@ -41,7 +43,7 @@ namespace H.Core.Services.Animals
         ///
         /// (kg N)
         /// </summary>
-        double GetTotalNitrogenRemainingAtEndOfYear(int year, Farm farm);
+        double GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(int year, Farm farm);
 
         double GetTotalNitrogenExported(int year, Farm farm);
 
@@ -57,6 +59,9 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalCarbonForField(CropViewItem cropViewItem, int year, Farm farm, AnaerobicDigestionComponent component);
 
-        List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+        double GetTotalNitrogenCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
+        double GetTotalCarbonCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
+        double GetTotalDigestateCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
+        List<DigestorDailyOutput> Initialize(Farm farm, List<AnimalComponentEmissionsResults> results);
     }
 }

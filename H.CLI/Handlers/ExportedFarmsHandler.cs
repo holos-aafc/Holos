@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using H.Core.Services;
+using H.Core.Services.Initialization;
 
 namespace H.CLI.Handlers
 {
@@ -52,8 +54,9 @@ namespace H.CLI.Handlers
             var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
             var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
             var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+            var initializationService = new InitializationService();
 
-            _fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+            _fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
             _fieldProcessor = new FieldProcessor(_fieldResultsService);
         }
 

@@ -226,21 +226,21 @@ namespace H.Core.Calculators.Climate
             int startYear = customTimeFrameStart;
             int endYear = customTimeFrameEnd;
 
-            //Precipitation} 
+            // Precipitation
             var precipNormal = new Dictionary<Months, double>();
             var listOfPrecips = new List<SpecificClimateValueType>();
 
-            //Temperature 
+            // Temperature 
             var temperatureNormals = new Dictionary<Months, double>();
             var listOfTemperatures = new List<SpecificClimateValueType>();
 
-            //Evapotranspiration 
+            // Evapotranspiration 
             var evapotransNormals = new Dictionary<Months, double>();
             var listOfEvapotrans = new List<SpecificClimateValueType>();
 
             foreach (var item in customClimateDatas)
             {
-                //precip values
+                // Precipitation values
                 var precip = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Precipitation,
@@ -250,7 +250,7 @@ namespace H.Core.Calculators.Climate
                 };
                 listOfPrecips.Add(precip);
 
-                //temperature values
+                // Temperature values
                 var temperature = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Temperature,
@@ -260,7 +260,7 @@ namespace H.Core.Calculators.Climate
                 };
                 listOfTemperatures.Add(temperature);
 
-                //evapotrans value
+                // Evapotranspiration values
                 var evapotrans = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Evapotranspiration,
@@ -271,7 +271,7 @@ namespace H.Core.Calculators.Climate
                 listOfEvapotrans.Add(evapotrans);
             }
 
-            //Get the normals for each month 
+            // Get the normals for each month 
             foreach (var months in Enum.GetValues(typeof(Months)).Cast<Months>())
             {
                 var m = GetStartandEndJulianDays(months);

@@ -6,8 +6,7 @@ namespace H.Core.Providers.Animals
     public interface IAnimalEmissionFactorsProvider
     {
         IEmissionData GetFactors(
-            ManureStateType manureStateType, 
-            ComponentCategory componentCategory,
+            ManureStateType manureStateType,
             double meanAnnualPrecipitation, 
             double meanAnnualTemperature,
             double meanAnnualEvapotranspiration, 

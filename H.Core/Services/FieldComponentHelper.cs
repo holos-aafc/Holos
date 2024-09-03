@@ -8,6 +8,7 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
+using H.Core.Services.Initialization.Crops;
 
 namespace H.Core.Services
 {
@@ -25,12 +26,16 @@ namespace H.Core.Services
         private readonly IMapper _digestateViewItemMapper;
         private readonly IMapper _soilDataMapper;
 
+        ICropInitializationService _cropInitializationService;
+
         #endregion
 
         #region Constructors
 
         public FieldComponentHelper()
         {
+            _cropInitializationService = new CropInitializationService();
+
             var cropViewItemMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<CropViewItem, CropViewItem>()
@@ -121,26 +126,7 @@ namespace H.Core.Services
             component.IsInitialized = true;
 
             // Assign soil types to field
-            this.InitializeSoilAvailableSoilTypes(farm, component);
-        }
-
-        private void InitializeSoilAvailableSoilTypes(Farm farm, FieldSystemComponent component)
-        {
-            foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
-            {
-                // Add this type of soil if it does not already exist
-                if (component.SoilDataAvailableForField.FirstOrDefault(x => x.SoilGreatGroup == soilData.SoilGreatGroup) == null)
-                {
-                    // We don't model organic soil at this time
-                    if (soilData.SoilFunctionalCategory != SoilFunctionalCategory.Organic)
-                    {
-                        var copiedSoil = new SoilData();
-                        _soilDataMapper.Map(soilData, copiedSoil);
-
-                        component.SoilDataAvailableForField.Add(copiedSoil);
-                    }
-                }
-            }
+            _cropInitializationService.InitializeAvailableSoilTypes(farm, component);
         }
 
         public string GetUniqueFieldName(IEnumerable<FieldSystemComponent> components)

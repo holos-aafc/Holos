@@ -253,6 +253,11 @@ namespace H.Core.Providers.Soil
             get { return this.SoilFunctionalCategory.GetDescription(); }
         }
 
+        public string SoilNameAndGreatGroup
+        {
+            get { return this.CombinedSoilNameDisplayString + " - " + this.SoilGreatGroupString; }
+        }
+
         public Province Province
         {
             get
@@ -416,6 +421,11 @@ namespace H.Core.Providers.Soil
         #endregion
 
         #region Public Methods
+
+        public bool IsOrganic()
+        {
+            return this.SoilFunctionalCategory == SoilFunctionalCategory.Organic;
+        }
 
         public override string ToString()
         {

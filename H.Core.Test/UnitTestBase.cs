@@ -4,6 +4,7 @@ using H.Core.Models.Animals.Beef;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -19,9 +20,12 @@ using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers;
 using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Feed;
+using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
+using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Test
@@ -33,6 +37,8 @@ namespace H.Core.Test
         protected Mock<IFarmResultsService> _mockFarmResultService;
         protected IFarmResultsService _mockFarmResultServiceObject;
         protected Mock<IManureService> _mockManureService;
+        protected Mock<IDigestateService> _mockDigestateService;
+        protected IDigestateService _mockDigestateServiceObject;
         protected IManureService _mockManureServiceObject;
         protected Mock<IClimateProvider> _mockClimateProvider;
         protected IClimateProvider _mockClimateProviderObject;
@@ -46,6 +52,10 @@ namespace H.Core.Test
         protected IPCCTier2SoilCarbonCalculator _ipcc;
         protected IFieldResultsService _fieldResultsService;
         protected Mock<ISlcClimateProvider> _slcClimateProvider;
+        protected Mock<IInitializationService> _mockInitializationService;
+        protected IInitializationService _initializationService;
+        protected ICBMCarbonInputCalculator icbmCarbonInputCalculator;
+        protected ICarbonService carbonService;
 
         #endregion
 
@@ -57,11 +67,19 @@ namespace H.Core.Test
 
         protected UnitTestBase()
         {
+            icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
+            _initializationService = new InitializationService();
+
             _mockFarmResultService = new Mock<IFarmResultsService>();
             _mockFarmResultServiceObject = _mockFarmResultService.Object;
 
             _mockManureService = new Mock<IManureService>();
             _mockManureServiceObject = _mockManureService.Object;
+
+            _mockDigestateService = new Mock<IDigestateService>();
+            _mockDigestateServiceObject = _mockDigestateService.Object;
+            _mockDigestateService.Setup(x => x.GetValidDigestateLocationSourceTypes())
+                .Returns(new List<ManureLocationSourceType>());
 
             _mockClimateProvider = new Mock<IClimateProvider>();
             _mockClimateProviderObject = _mockClimateProvider.Object;
@@ -79,6 +97,7 @@ namespace H.Core.Test
             _ipcc = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
 
             _fieldResultsService = new Mock<IFieldResultsService>().Object;
+            carbonService = new CarbonService();
         }
 
         #endregion
@@ -100,13 +119,29 @@ namespace H.Core.Test
             return storage;
         }
 
+        public ManagementPeriod GetTestManagementPeriod()
+        {
+            var managementPeriod = new ManagementPeriod();
+
+            managementPeriod.AnimalType = AnimalType.Beef;
+            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.StartWeight = 100;
+            managementPeriod.EndWeight = 200;
+            managementPeriod.Duration = TimeSpan.FromDays(30);
+            managementPeriod.HousingDetails = new HousingDetails();
+            managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+            managementPeriod.SelectedDiet = new Diet();
+            managementPeriod.SelectedDiet.TotalDigestibleNutrient = 75;
+
+            return managementPeriod;
+        }
+
         public DigestateApplicationViewItem GetTestRawDigestateApplicationViewItem()
         {
             var digestateApplication = new DigestateApplicationViewItem();
 
             digestateApplication.DateCreated = DateTime.Now.AddDays(1);
             digestateApplication.DigestateState = DigestateState.Raw;
-            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
 
@@ -119,7 +154,6 @@ namespace H.Core.Test
 
             digestateApplication.DateCreated = DateTime.Now.AddDays(1);
             digestateApplication.DigestateState = DigestateState.LiquidPhase;
-            digestateApplication.MaximumAmountOfDigestateAvailablePerHectare = 100;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 500;
 
@@ -145,10 +179,22 @@ namespace H.Core.Test
             cowsGroup.GroupType = AnimalType.DairyLactatingCow;
 
             var managementPeriod = new ManagementPeriod();
-            managementPeriod.Start = DateTime.Now;
-            managementPeriod.End = managementPeriod.Start.AddDays(30 * 2);
+            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.AnimalType = AnimalType.BeefBackgrounderHeifer;
+            managementPeriod.StartWeight = 100;
+            managementPeriod.NumberOfAnimals = 1000;
+            managementPeriod.EndWeight = 200;
+            managementPeriod.GainCoefficient = 0.4;
+            managementPeriod.SelectedDiet = new Diet();
+            managementPeriod.SelectedDiet.TotalDigestibleNutrient = 100;
+            managementPeriod.SelectedDiet.CrudeProtein = 50;
 
-            managementPeriod.ManureDetails.StateType = ManureStateType.AnaerobicDigester;
+            var timespan = TimeSpan.FromDays(30 * 2);
+            managementPeriod.Duration = timespan;
+            managementPeriod.End = managementPeriod.Start.Add(timespan);
+
+            managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
+            managementPeriod.ManureDetails.FractionOfNitrogenInManure = 0.5;
 
             farm.Components.Add(backgroundingComponent);
             farm.Components.Add(dairyComponent);
@@ -162,8 +208,8 @@ namespace H.Core.Test
              * Manure exports
              */
 
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy });
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy });
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData(){NitrogenContent = 0.5}});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 } });
 
             return farm;
         }
@@ -336,6 +382,18 @@ namespace H.Core.Test
             return results;
         }
 
+        public GeographicData GetTestGeographicData()
+        {
+            var geographicData = new GeographicData();
+
+            geographicData.SoilDataForAllComponentsWithinPolygon = new List<SoilData>();
+            geographicData.SoilDataForAllComponentsWithinPolygon.Add(this.GetTestSoilData());
+
+            geographicData.DefaultSoilData = geographicData.SoilDataForAllComponentsWithinPolygon.FirstOrDefault();
+
+            return geographicData;
+        }
+
         public FieldSystemComponent GetTestFieldComponent()
         {
             var component = new FieldSystemComponent();
@@ -352,6 +410,7 @@ namespace H.Core.Test
         public CropViewItem GetTestCropViewItem()
         {
             var cropViewItem = new CropViewItem();
+            cropViewItem.CropType = CropType.Wheat;
             cropViewItem.Area = 1;
             cropViewItem.Year = DateTime.Now.Year;
             cropViewItem.Guid = Guid.NewGuid();
@@ -362,12 +421,26 @@ namespace H.Core.Test
             return cropViewItem;
         }
 
+        public FertilizerApplicationViewItem GetTestFertilizerApplicationViewItem()
+        {
+            var fertilizerApplicationViewItem = new FertilizerApplicationViewItem();
+            fertilizerApplicationViewItem.FertilizerBlendData =
+                new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+                {
+                    PercentageNitrogen = 50,
+                };
+
+            return fertilizerApplicationViewItem;
+        }
+
         public SoilData GetTestSoilData( )
         {
             var soilData = new SoilData();
             soilData.EcodistrictId = 679;
             soilData.Province = Province.Alberta;
             soilData.PolygonId = 679001;
+            soilData.SoilFunctionalCategory = SoilFunctionalCategory.Brown;
+            soilData.SoilGreatGroup = SoilGreatGroupType.BlackChernozem;
             soilData.SoilTexture = SoilTexture.Fine;
 
             return soilData;
@@ -459,6 +532,22 @@ namespace H.Core.Test
             manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare = 50;
 
             return manureApplicationViewItem;
+        }
+
+        public Storage GetTestStorage()
+        {
+            var storage = new Storage();
+
+            var farm = this.GetTestFarm();
+            var applicationData = new ApplicationData();
+            applicationData.GlobalSettings = new GlobalSettings();
+            storage.ApplicationData = applicationData;
+
+            storage.ApplicationData.Farms.Add(farm);
+            
+            applicationData.GlobalSettings.ActiveFarm = farm;
+            ;
+            return storage;
         }
 
         #endregion

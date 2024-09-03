@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Providers.Feed;
 using GroupEmissionsByDay = H.Core.Emissions.Results.GroupEmissionsByDay;
 
 #endregion
@@ -62,7 +63,7 @@ namespace H.Core.Test.Services
             _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _ipccSoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
 
-            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator);
+            _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
         }
 
@@ -77,60 +78,6 @@ namespace H.Core.Test.Services
 
         #region CalculateEquilibriumYear Tests
 
-        [TestMethod]
-        public void CalculateEquilibriumYear()
-        {
-            var detailViewItems = new List<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2000,
-                    AboveGroundCarbonInput = 10, BelowGroundCarbonInput = 20, ClimateParameter = 1,
-                    ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2001, AboveGroundCarbonInput = 20,
-                    BelowGroundCarbonInput = 40, ClimateParameter = 1, ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley, SizeOfFirstRotationForField = 2, Year = 2002,
-                    AboveGroundCarbonInput = 30, BelowGroundCarbonInput = 80, ClimateParameter = 1,
-                    ManagementFactor = 0.9
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Oats, SizeOfFirstRotationForField = 2, Year = 2003, AboveGroundCarbonInput = 40,
-                    BelowGroundCarbonInput = 100, ClimateParameter = 1, ManagementFactor = 0.9
-                },
-            };
-
-
-            var farm = new Farm()
-            {
-                UseCustomStartingSoilOrganicCarbon = false,
-                Defaults =
-                {
-                    EquilibriumCalculationStrategy = EquilibriumCalculationStrategies.Default,
-                }
-            };
-            var fieldGuid = Guid.NewGuid();
-
-            var fieldComponent = new FieldSystemComponent()
-            {
-                Guid = fieldGuid,
-            };
-
-            fieldComponent.CropViewItems.AddRange(detailViewItems);
-
-            farm.Components.Add(fieldComponent);
-
-            var result = _resultsService.CalculateEquilibriumYear(
-                detailViewItems: detailViewItems,
-                farm: farm,
-                componentId: fieldGuid);
-        }
 
         #endregion
 
@@ -439,94 +386,7 @@ namespace H.Core.Test.Services
 
         #region CalculateAmountOfProductRequired Tests
 
-        [TestMethod]
-        public void CalculateAmountOfProductRequired()
-        {
-            var farm = new Farm();
-            var viewItem = new CropViewItem()
-            {
-                CropType = CropType.Barley,
-                MoistureContentOfCrop = 0.12,
-                Yield = 1000,
-                CarbonConcentration = 0.45,
-                PercentageOfProductYieldReturnedToSoil = 2,
-                NitrogenContentInProduct = 18.9 / 1000,
-                NitrogenDepositionAmount = 0,
-            };
 
-            var fertilizerApplicationViewItem = new FertilizerApplicationViewItem()
-            {
-                FertilizerEfficiencyPercentage = 50,
-                FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-                {
-                    PercentageNitrogen = 25,
-                }
-            };
-
-            // Required N of plant = 18.849600000000002
-            // Required amount of product = (18.849600000000002 / 25) * 100; 
-
-            var result = _resultsService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
-
-            Assert.AreEqual(135.71712, result);
-        }
-
-        #endregion
-
-        #region AssignYieldToDetailViewItems Tests
-
-        [TestMethod]
-        public void AssignYieldToDetailViewItems()
-        {
-            var farm = new Farm()
-            {
-                YieldAssignmentMethod = YieldAssignmentMethod.Average,
-            };
-
-            var fieldSystemComponent = new FieldSystemComponent();
-            fieldSystemComponent.CropViewItems = new ObservableCollection<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Barley,
-                    Yield = 100,
-                },
-                new CropViewItem()
-                {
-                    CropType = CropType.Wheat,
-                    Yield = 200,
-                }
-            };
-
-            farm.Components.Add(fieldSystemComponent);
-
-            var stageState = new FieldSystemDetailsStageState();
-            stageState.DetailsScreenViewCropViewItems = new ObservableCollection<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    Year = 1985,
-                    CropType = CropType.Barley,
-                },
-
-                new CropViewItem()
-                {
-                    Year = 1986,
-                    CropType = CropType.Wheat,
-                },
-            };
-
-            farm.StageStates.Add(stageState);
-
-            var detailsScreenViewItem = new CropViewItem();
-            detailsScreenViewItem.CropType = CropType.Barley;
-            detailsScreenViewItem.Year = 1985;
-            detailsScreenViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
-
-            _resultsService.AssignYieldToYear(farm, detailsScreenViewItem, fieldSystemComponent);
-
-            Assert.AreEqual(150, detailsScreenViewItem.Yield);
-        }
 
         #endregion
 
@@ -656,21 +516,6 @@ namespace H.Core.Test.Services
                 totalCarbonDioxideEmissionsFromPotassiumProduction,
                 totalCarbonDioxideEmissionsFromIrrigation);
             Assert.AreEqual(756.791, result);
-        }
-
-        [TestMethod]
-        public void ApplyUserDefaults()
-        {
-            var viewItem = new CropViewItem() { CropType = CropType.Barley, };
-            var cropDefault = new CropViewItem()
-            { CropType = CropType.Barley, Yield = 777, EnableCustomUserDefaultsForThisCrop = true };
-
-            var globalSettings = new GlobalSettings();
-            globalSettings.CropDefaults.Add(cropDefault);
-
-            _resultsService.AssignUserDefaults(viewItem, globalSettings);
-
-            Assert.AreEqual(777, viewItem.Yield);
         }
 
         #region AssignCarbonInputs Tests
@@ -1593,37 +1438,6 @@ namespace H.Core.Test.Services
 
         #endregion
 
-        [TestMethod]
-        public void CalculateCarbonLostFromHayExport()
-        {
-            var fieldId = Guid.NewGuid();
-
-            var hayExportViewItem = new CropViewItem();
-            hayExportViewItem.Year = DateTime.Now.Year;
-            hayExportViewItem.PercentageOfProductYieldReturnedToSoil = 2;
-            hayExportViewItem.HarvestViewItems.Add(new HarvestViewItem() { TotalNumberOfBalesHarvested = 20, Start = DateTime.Now });
-
-            var exportingFieldComponent = new FieldSystemComponent();
-            exportingFieldComponent.Guid = fieldId;
-            exportingFieldComponent.Name = "Exporting field";
-            exportingFieldComponent.CropViewItems.Add(hayExportViewItem);
-
-            var importingViewItem = new CropViewItem();
-            importingViewItem.HayImportViewItems.Add(new HayImportViewItem() { Date = DateTime.Now, FieldSourceGuid = fieldId, NumberOfBales = 5, MoistureContentAsPercentage = 20 });
-
-            var importingFieldComponent = new FieldSystemComponent();
-            importingFieldComponent.Name = "Importing field";
-            importingFieldComponent.CropViewItems.Add(importingViewItem);
-
-            var farm = new Farm();
-
-            farm.Components.Add(importingFieldComponent);
-            farm.Components.Add(exportingFieldComponent);
-
-            _resultsService.CalculateCarbonLostFromHayExports(exportingFieldComponent, farm);
-
-            Assert.AreEqual(5.5102040816326534, hayExportViewItem.TotalCarbonLossFromBaleExports);
-        }
 
         [TestMethod]
         public void CalculateCarbonUptakeByGrazingAnimals()
@@ -1635,16 +1449,16 @@ namespace H.Core.Test.Services
             cropViewItem.Year = DateTime.Now.Year;
 
             var cowCalfComponent = new CowCalfComponent();
+            
             var cowCalfComponentGuid = Guid.NewGuid();
             cowCalfComponent.Guid = cowCalfComponentGuid;
 
             var animalGroup = new AnimalGroup();
             var animalGroupGuid = Guid.NewGuid();
             animalGroup.Guid = animalGroupGuid;
+            animalGroup.GroupType = AnimalType.Beef;
 
-            var managementPeriod = new ManagementPeriod();
-            managementPeriod.Start = DateTime.Now;
-            managementPeriod.HousingDetails = new HousingDetails();
+            var managementPeriod = base.GetTestManagementPeriod();
             managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
             managementPeriod.HousingDetails.PastureLocation = fieldSystemComponent;
 
@@ -1703,9 +1517,9 @@ namespace H.Core.Test.Services
 
             _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
-            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults, new List<CropViewItem>() {cropViewItem});
+            carbonService.CalculateCarbonLostByGrazingAnimals(farm, fieldSystemComponent, animalComponentEmissionsResults, new List<CropViewItem>() {cropViewItem});
 
-            Assert.AreEqual(60, cropViewItem.TotalCarbonLossesByGrazingAnimals);
+            Assert.AreEqual(298.3, cropViewItem.TotalCarbonLossesByGrazingAnimals, 0.1);
         }
 
         [TestMethod]
@@ -1744,28 +1558,6 @@ namespace H.Core.Test.Services
 
             var farm = new Farm();
             farm.Components.Add(field);
-        }
-
-        [TestMethod]
-        public void CalculateCarbonUptakeByGrazingAnimalsWithOnePeriod()
-        {
-            var farm = base.GetTestFarm();
-            var fieldComponent = base.GetTestFieldComponent();
-            fieldComponent.Name = "Test";
-            var cropViewItem = base.GetTestCropViewItem();
-            
-            fieldComponent.CropViewItems.Add(cropViewItem);
-
-            var animalResults = base.GetTestGrazingBeefCattleAnimalGroupComponentEmissionsResults(fieldComponent);
-            var animalComponentResults = base.GetTestGrazingBeefCattleAnimalComponentEmissionsResults(fieldComponent);
-            var animalEmissionResults = new List<AnimalComponentEmissionsResults>() { animalComponentResults };
-
-            _mockAnimalResultsService.Setup(x => x.GetResultsForManagementPeriod(It.IsAny<AnimalGroup>(), It.IsAny<Farm>(), It.IsAny<AnimalComponentBase>(), It.IsAny<ManagementPeriod>())).Returns(animalResults);
-            _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
-
-            _resultsService.CalculateCarbonLostByGrazingAnimals(farm, fieldComponent, animalEmissionResults, new List<CropViewItem>() {cropViewItem});
-
-            Assert.AreEqual(100, cropViewItem.TotalCarbonLossesByGrazingAnimals);
         }
 
         [TestMethod]

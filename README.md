@@ -4,8 +4,6 @@
  
 Holos is a whole-farm model and software program that estimates greenhouse gas (GHG) emissions based on information entered for individual farms. The main purpose of Holos is to test possible ways of reducing GHG emissions from farms and is available at no cost to users.
 
-Holos: a tool to estimate and reduce greenhouse gases from farms
-
 Users can select scenarios and farm management practices that best describe their operation and then adjust these practices to see the effect on emissions. Examples of these adjustments include changing livestock feed, reducing tillage or including perennial forages in rotation.
 
 Once information is entered into the program, Holos estimates carbon dioxide, nitrous oxide and methane emissions. The sources of emissions include enteric fermentation and manure management, cropping systems and energy use. Carbon storage and loss from lineal tree plantings and changes in land use and management are also estimated. The result is a greenhouse gas emission estimate for the whole farm that can help the user identify ways to reduce farm emissions.
@@ -67,6 +65,13 @@ The GUI for Holos 4 is freely available to download and use from the <a href="ht
 *Note that the Holos 4 GUI is not open source at this time.*
 
 A command line interface (CLI) version of Holos is available <a href="https://agriculture.canada.ca/holos/cli/setup.exe">at this link</a>.
+
+Holos version 3 is also available to download. Note that version 3 is no longer supported and is included here for education purpsoses only. Version 3 is provided on an as-is basis only.
+
+<a href="https://github.com/holos-aafc/Holos/raw/d3a4f26d61f98520caa9e966507087a62e43db35/Holos%203.0.6%20Installer%20-%20English.zip" target="_blank">Holos v3 - English (Unsupported)</a>
+
+<a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - French (Unsupported)</a>
+
 
 # License
 

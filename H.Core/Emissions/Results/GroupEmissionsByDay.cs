@@ -171,6 +171,7 @@ namespace H.Core.Emissions.Results
         private double _ammoniaEmissionRateFromHousingAndStorage;
         private double _adjustedTotalNitrogenEmissionsFromHousingAndStorage;
         private double _adjustedAmmoniaEmissionsFromHousingAndStorage;
+        private double _nonAccumulatedNitrogenEnteringPoolAvailableInStorage;
 
         #endregion
 
@@ -610,6 +611,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.1.3-14
+        /// 
         /// Total amount of C flowing into storage each day (non-accumulated value)
         /// 
         /// (kg C day^-1)
@@ -893,6 +896,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.3.2-8
+        /// Equation 4.3.3-11
+        /// 
         /// The non-accumulated amount on one day
         /// 
         /// (kg TAN)
@@ -1035,6 +1041,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
+        /// Equation 4.5.2-21
+        /// 
         /// (kg N day^-1)
         /// </summary>
         public double AccumulatedNitrogenAvailableForLandApplicationOnDay
@@ -1175,20 +1183,17 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _totalVolumeOfManureAvailableForLandApplication, value);
         }
 
+        private double _totalAmountOfNitrogenInStoredManureAvailableForDay;
+
         /// <summary>
         /// This is the total amount available for this day only, not the accumulated amount day-to-day
         /// 
-        /// (kg TAN)
+        /// (kg N)
         /// </summary>
         public double TotalAmountOfNitrogenInStoredManureAvailableForDay
         {
-            get
-            {
-                var tan = AdjustedAmountOfTanInStoredManureOnDay;
-                var on = OrganicNitrogenCreatedOnDay;
-
-                return tan + on;
-            }
+            get { return _totalAmountOfNitrogenInStoredManureAvailableForDay;}
+            set { SetProperty(ref _totalAmountOfNitrogenInStoredManureAvailableForDay, value); }
         }
 
         /// <summary>
@@ -1808,6 +1813,15 @@ namespace H.Core.Emissions.Results
 
         public double TotalAmountOfNitrogenForDay { get; set; }
         public double AccumulatedVolume { get; set; }
+
+        /// <summary>
+        /// Equation 4.5.2-15
+        /// </summary>
+        public double NonAccumulatedNitrogenEnteringPoolAvailableInStorage
+        {
+            get => _nonAccumulatedNitrogenEnteringPoolAvailableInStorage;
+            set => SetProperty(ref _nonAccumulatedNitrogenEnteringPoolAvailableInStorage, value);
+        }
 
         #endregion
     }

@@ -179,6 +179,8 @@ namespace H.Core.Calculators.Infrastructure
         /// </summary>
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
 
+        public double FugitiveMethaneLost { get; set; }
+
         #region Public Methods
 
         public override string ToString()

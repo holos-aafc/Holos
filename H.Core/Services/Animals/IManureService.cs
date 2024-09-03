@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 
@@ -31,7 +32,8 @@ namespace H.Core.Services.Animals
         /// </summary>
         double GetTotalVolumeOfManureExported(int year, Farm farm, AnimalType animalType);
         int GetYearHighestVolumeRemaining(AnimalType animalType);
-        DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm);
+        DefaultManureCompositionData GetManureCompositionData(Farm farm, ManureStateType manureStateType,
+            AnimalType animalType);
 
         /// <summary>
         /// Returns total TAN created by all animals on farm in specified year
@@ -173,5 +175,8 @@ namespace H.Core.Services.Animals
         List<MonthlyManureSpreadingData> GetMonthlyManureSpreadingData(
             CropViewItem viewItem,
             Farm farm);
+
+        void SetValidManureStateTypes(ManureSubstrateViewItem manureSubstrateViewItem, Farm farm);
+        List<AnimalType> GetValidManureForDigestorImports();
     }
 }

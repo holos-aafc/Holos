@@ -30,18 +30,11 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
-        /// <summary>
-        /// (kg N)
-        /// </summary>
-        public double AmountOfNitrogenRemainingAtEndOfYear { get; set; }
-
         public DigestateState DigestateState
         {
             get => _digestateState;
             set => SetProperty(ref _digestateState, value);
         }
-
-        public double MaximumAmountOfDigestateAvailablePerHectare { get; set; }
 
         /// <summary>
         /// Amount of digestate applied

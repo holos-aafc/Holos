@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
+using H.Core.Providers.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
@@ -16,6 +18,9 @@ namespace H.Core.Models.Infrastructure
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
         private ManureSubstrateState _manureSubstrateState;
+        private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
+        private ManureStateType _manureStateType;
+        private DefaultManureCompositionData _manureCompositionData;
 
         #endregion
 
@@ -23,11 +28,26 @@ namespace H.Core.Models.Infrastructure
 
         public ManureSubstrateViewItem()
         {
+            this.ValidManureStateTypesForSelectedTypeOfAnimalManure = new ObservableCollection<ManureStateType>()
+            {
+                ManureStateType.NotSelected,
+            };
+
+            this.ManureCompositionData = new DefaultManureCompositionData();
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Each view item must have its own collection of valid state types so the table rows presented to the user will have their own distinct collection
+        /// </summary>
+        public ObservableCollection<ManureStateType> ValidManureStateTypesForSelectedTypeOfAnimalManure
+        {
+            get => _validManureStateTypesForSelectedTypeOfAnimalManure;
+            set => SetProperty(ref _validManureStateTypesForSelectedTypeOfAnimalManure, value);
+        }
 
         public AnimalType AnimalType
         {
@@ -51,6 +71,18 @@ namespace H.Core.Models.Infrastructure
         {
             get => _manureSubstrateState;
             set => SetProperty(ref _manureSubstrateState, value);
+        }
+
+        public ManureStateType ManureStateType
+        {
+            get => _manureStateType;
+            set => SetProperty(ref _manureStateType, value);
+        }
+
+        public DefaultManureCompositionData ManureCompositionData
+        {
+            get => _manureCompositionData;
+            set => SetProperty(ref _manureCompositionData, value);
         }
 
         #endregion

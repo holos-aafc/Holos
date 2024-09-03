@@ -14,6 +14,11 @@ namespace H.Core.Calculators.Nitrogen
     {
         #region Public Methods
 
+        /// <summary>
+        /// No equation. See section 4.9.2
+        /// </summary>
+        /// <param name="amountOfNitrogen"></param>
+        /// <returns></returns>
         public double CalculateNH3LossFromLandAppliedDigestateForField(double amountOfNitrogen)
         {
             return amountOfNitrogen * 0.1705;
@@ -62,16 +67,21 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
+            var year = viewItem.Year;
+
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
-            if (field == null || (field.HasLivestockDigestateApplicationsInYear(viewItem.Year) == false &&
-                                  field.HasImportedDigestateApplicationsInYear(viewItem.Year) == false))
+            if (field == null)
             {
                 return 0;
             }
 
             var totalNitrogen = 0d;
 
-            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems.Where(x => x.DateCreated.Year == viewItem.Year))
+            var livestockApplications = field.GetLivestockDigestateApplicationsInYear(year);
+            var importedApplications = field.GetImportedDigestateApplicationsInYear(year);
+            var allApplications = livestockApplications.Concat(importedApplications);
+
+            foreach (var digestateApplicationViewItem in allApplications)
             {
                 totalNitrogen += digestateApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
             }
@@ -98,38 +108,6 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 4.6.1-10
-        /// 
-        /// Calculates direct emissions from the digestate specifically applied to the field
-        ///
-        /// (kg N2O-N (kg N)^-1)
-        /// </summary>
-        public double CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(
-            CropViewItem viewItem,
-            Farm farm)
-        {
-            if (viewItem.CropType.IsNativeGrassland())
-            {
-                return 0;
-            }
-
-            var totalNitrogenApplied = 0d;
-
-            var fieldSpecificOrganicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(
-                viewItem: viewItem,
-                farm: farm);
-
-            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
-            {
-                totalNitrogenApplied += digestateApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
-            }
-
-            var result = totalNitrogenApplied * fieldSpecificOrganicNitrogenEmissionFactor;
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 4.6.1-6
         /// 
         /// (kg N2O-N)
@@ -143,28 +121,32 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
+            var year = viewItem.Year;
+
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             var weightedEmissionFactorForOrganicNitrogen = this.CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
-            var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
+            var component = farm.GetAnaerobicDigestionComponent();
             if (component == null)
             {
                 return 0;
             }
 
-            // Get all fields that exist in the same year
-            var itemsInYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
-
-            // This is the total N remaining after all field applications have been considered
-            var nitrogenRemainingAtEndOfYear = viewItem.GetRemainingNitrogenFromDigestateAtEndOfYear();
+            var nitrogenRemainingAtEndOfYear = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
 
             // The total N2O-N from the remaining N
             var emissionsFromNitrogenRemaining = this.CalculateTotalEmissionsFromRemainingDigestateThatIsAppliedToAllFields(
                     weightedEmissionFactor: weightedEmissionFactorForOrganicNitrogen,
                     totalNitrogenFromRemainingDigestate: nitrogenRemainingAtEndOfYear);
 
-            var totalAreaOfAllFields = itemsInYear.Sum(x => x.Area);
-            var areaOfThisField = viewItem.Area;
+            var totalAreaOfAllFields = farm.GetTotalAreaOfFarm(false, year);
+            if (totalAreaOfAllFields == 0)
+            {
+                totalAreaOfAllFields = 1;
+            }
+
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            var areaOfThisField = field.FieldArea;
 
             // The total N2O-N that is left over and must be associated with this field so that all digestate is applied to the fields in the same year (nothing is remaining to be applied)
             var result = emissionsFromNitrogenRemaining * (areaOfThisField / totalAreaOfAllFields);
@@ -180,56 +162,34 @@ namespace H.Core.Calculators.Nitrogen
         public double GetDigestateNitrogenRemainingForField(CropViewItem viewItem, Farm farm)
         {
             var fractionUsed = viewItem.Area / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, viewItem.Year);
-            var manureNitrogenRemaining = this.DigestateService.GetTotalNitrogenRemainingAtEndOfYear(viewItem.Year, farm);
+            var digestateNitrogenRemaining = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(viewItem.Year, farm);
 
-            return fractionUsed * manureNitrogenRemaining;
+            return fractionUsed * digestateNitrogenRemaining;
         }
 
         /// <summary>
         /// Equation 4.6.1-10
         ///
-        /// Includes direct emissions from applied digestate and direct emissions from remaining digestate for the field.
+        /// Includes direct emissions from applied digestate and optionally direct emissions from remaining digestate for the field.
         /// 
-        /// (kg N2O-N)
+        /// (kg N2O-N (kg N)^-1)
         /// </summary>
         public double CalculateDirectN2ONFromFieldAppliedDigestate(
             Farm farm,
-            CropViewItem viewItem)
+            CropViewItem viewItem, 
+            bool includeRemainingAmounts)
         {
             var result = 0d;
 
-            var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(viewItem, farm);
+            var applied = this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(viewItem, farm);
             var leftOver = this.CalculateDirectN2ONFromLeftOverDigestateForField(viewItem, farm);
 
-            result = applied + leftOver;
+            result = applied;
 
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 4.6.1-11
-        ///
-        /// Includes direct emissions from applied manure and direct emissions from remaining manure for the entire farm.
-        /// 
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateDirectN2ONFromFieldAppliedDigestateForFarmAndYear(
-            Farm farm,
-            int year)
-        {
-            var result = 0d;
-
-            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
-            foreach (var viewItem in itemsByYear)
+            if (includeRemainingAmounts)
             {
-                var emissions = this.CalculateDirectN2ONFromFieldAppliedDigestate(farm, viewItem);
-
-                result += emissions;
+                result += leftOver;
             }
-
-            var exports = 0;
-
-            result += exports;
 
             return result;
         }
@@ -262,8 +222,8 @@ namespace H.Core.Calculators.Nitrogen
             var result = 0d;
 
             // This will return total amount of N created minus amounts from land applications
-            var nitrogenRemainingAtEndOfYear = this.DigestateService.GetTotalNitrogenRemainingAtEndOfYear(year, farm);
-            var totalNitrogenExported = this.DigestateService.GetTotalNitrogenExported(year, farm);
+            var nitrogenRemainingAtEndOfYear = _digestateService.GetTotalNitrogenRemainingAtEndOfYearAfterFieldApplications(year, farm);
+            var totalNitrogenExported = _digestateService.GetTotalNitrogenExported(year, farm);
 
             result = nitrogenRemainingAtEndOfYear - totalNitrogenExported;
             if (result < 0)
@@ -338,7 +298,8 @@ namespace H.Core.Calculators.Nitrogen
         public double CalculateTotalDigestateN2ONVolatilizationForField(
             CropViewItem cropViewItem,
             Farm farm,
-            int year)
+            int year, 
+            bool includeRemainingAmounts)
         {
             if (cropViewItem.CropType.IsNativeGrassland())
             {
@@ -347,11 +308,21 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
+            /*
+             * Note: currently the user imports manure into the AD system and the outptut is identical to the outputs as if the AD was using on-farm manure
+             * and so we don't add in an 'extra' amount for the imported manure (which is then transformed into digestate). This different than the approach
+             * taken when considering manure applications to a field
+             */
+
             var volatilizationFromLandAppliedDigestate = this.CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(year, farm, cropViewItem);
             var volatilizationFromLeftOverDigestate = this.CalculateN2ONFromVolatilizationOfLeftOverDigestateForField(year, farm, cropViewItem);
             var volatilizationFromImportedDigestate = 0;
 
-            result = volatilizationFromLandAppliedDigestate + volatilizationFromLeftOverDigestate + volatilizationFromImportedDigestate;
+            result = volatilizationFromLandAppliedDigestate + volatilizationFromImportedDigestate;
+            if (includeRemainingAmounts)
+            {
+                result += volatilizationFromLeftOverDigestate;
+            }
 
             return result;
         }
@@ -368,7 +339,7 @@ namespace H.Core.Calculators.Nitrogen
             var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             foreach (var cropViewItem in itemsByYear)
             {
-                result += this.CalculateTotalDigestateN2ONVolatilizationForField(cropViewItem, farm, year);
+                result += this.CalculateTotalDigestateN2ONVolatilizationForField(cropViewItem, farm, year, true);
             }
 
             return result;
@@ -449,15 +420,17 @@ namespace H.Core.Calculators.Nitrogen
 
             var adjustedAmmoniaFromLandApplications = CalculateAdjustedDigestateNH3NEmissionsForField(farm, cropViewItem, year);
             var adjustedAmmoniaFromImports = 0;
-            var adjustedAmmoniaFromLeftOverManure = this.CalculateTotalAdjustedAmmoniaEmissionsFromLeftOverDigestateForField(farm, cropViewItem, year);
+            var adjustedAmmoniaFromLeftOverDigestate = this.CalculateTotalAdjustedAmmoniaEmissionsFromLeftOverDigestateForField(farm, cropViewItem, year);
 
-            result = adjustedAmmoniaFromLandApplications + adjustedAmmoniaFromImports + adjustedAmmoniaFromLeftOverManure;
+            result = adjustedAmmoniaFromLandApplications + adjustedAmmoniaFromImports + adjustedAmmoniaFromLeftOverDigestate;
 
             return result;
         }
 
         /// <summary>
         /// Equation 4.6.4-1
+        ///
+        /// Calculate leaching for single application to a field
         ///
         /// (kg N2O-N)
         /// </summary>
@@ -475,6 +448,8 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.4-1
         ///
+        /// Calculate leaching for all applications on field
+        ///
         /// (kg N2O-N)
         /// </summary>
         public double CalculateTotalN2ONFromDigestateLeachingForField(Farm farm, CropViewItem viewItem)
@@ -484,11 +459,22 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
+            var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+            if (field == null)
+            {
+                return 0;
+            }
+
             var result = 0d;
 
-            foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
+            var year = viewItem.Year;
+            var livestockApplications = field.GetLivestockDigestateApplicationsInYear(year);
+            var importedApplications = field.GetImportedDigestateApplicationsInYear(year);
+            var allApplications = livestockApplications.Concat(importedApplications);
+
+            foreach (var fieldApplication in allApplications)
             {
-                result += this.CalculateTotalN2ONFromDigestateLeachingFromDigestateApplication(farm, viewItem, digestateApplicationViewItem);
+                result += this.CalculateTotalN2ONFromDigestateLeachingFromDigestateApplication(farm, viewItem, fieldApplication);
             }
 
             return result;
@@ -618,7 +604,7 @@ namespace H.Core.Calculators.Nitrogen
             var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
             foreach (var cropViewItem in itemsByYear)
             {
-                result += this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreading(cropViewItem, farm);
+                result += this.CalculateDirectN2ONEmissionsFromFieldSpecificDigestateSpreadingForField(cropViewItem, farm);
                 result += CalculateDirectN2ONFromLeftOverDigestateForField(cropViewItem, farm);
             }
 
@@ -644,7 +630,7 @@ namespace H.Core.Calculators.Nitrogen
             foreach (var cropViewItem in itemsByYear)
             {
                 var nitrateLeached = CalculateTotalN2ONFromDigestateLeachingForField(farm, cropViewItem);
-                var totalVolatilization = CalculateTotalDigestateN2ONVolatilizationForField(cropViewItem, farm, year);
+                var totalVolatilization = CalculateTotalDigestateN2ONVolatilizationForField(cropViewItem, farm, year, true);
 
                 result += (nitrateLeached + totalVolatilization);
             }

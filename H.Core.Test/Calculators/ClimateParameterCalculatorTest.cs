@@ -304,9 +304,6 @@ namespace H.Core.Test.Calculators
             Assert.AreEqual(149.8639641345, result, 0.0000000001);
         }
 
-
-
-
         [TestMethod]
         public void CalculateCropCoefficientCorrectValue()
         {

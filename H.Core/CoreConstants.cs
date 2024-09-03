@@ -1,7 +1,10 @@
 ﻿#region Imports
 
 using System;
+using System.Security.RightsManagement;
 using System.Transactions;
+using H.Core.Properties;
+using H.Infrastructure;
 
 #endregion
 
@@ -12,6 +15,8 @@ namespace H.Core
     public class CoreConstants
     {
         #region Constants
+
+        public const int DefaultNumberOfDecimalPlaces = 3;
 
         /// <summary>
         /// Converts from N2O-N to N2O
@@ -43,6 +48,11 @@ namespace H.Core
         /// </summary>
         private const double ConvertNH3ToNH3N = 14.0 / 17.0;
 
+        private const double ConvertN2OToN = 28.0 / 44.0;
+
+        private const double ConvertNH3ToN = 14.0 / 17.0;
+
+        private const double ConvertCH4ToC = 12.0 / 16.0;
 
         #endregion
 
@@ -134,13 +144,12 @@ namespace H.Core
 
         public static string NotApplicableOutputString
         {
-            get { return H.Core.Properties.Resources.NotApplicable; } // Don't use a '-' character as it confuses when there are negative numbers in a grid cell
+            get { return Resources.NotApplicable; } // Don't use a '-' character as it confuses when there are negative numbers in a grid cell
         }
 
         #endregion
 
         #region Public Methods
-
 
         /// <summary>
         /// Equation 2.6.9-27
@@ -179,19 +188,23 @@ namespace H.Core
             return amountOfNH3N * ConvertNH3NToNH3;
         }
 
-        /// <summary>
-        /// Equation 2.6.9-31
-        /// </summary>
-        /// <param name="amountOfN2N"></param>
-        /// <returns></returns>
-        public static double ConvertToN2(double amountOfN2N)
-        {
-            return amountOfN2N * ConvertN2NToN2;
-        }
-
         public static double ConvertToNH3N(double amountOfNH3)
         {
             return amountOfNH3 * ConvertNH3ToNH3N;
+        }
+
+        /// <summary>
+        /// Equation 2.6.9-31
+        /// Equation 4.8.6-1
+        /// </summary>
+        public static double ConvertToN(double amountOfN2O)
+        {
+            return amountOfN2O * ConvertN2OToN;
+        }
+
+        public static double ConvertToC(double amountOfCH4)
+        {
+            return amountOfCH4 * ConvertCH4ToC;
         }
 
         #endregion

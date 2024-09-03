@@ -362,7 +362,6 @@ namespace H.CLI.Results
                             // Farm name
                             stringBuilder.Append(CLILanguageConstants.Delimiter);
 
-                            // Component category
                             stringBuilder.Append(CLILanguageConstants.Delimiter);
 
                             // Component name

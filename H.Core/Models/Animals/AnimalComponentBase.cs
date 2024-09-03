@@ -112,7 +112,9 @@ namespace H.Core.Models.Animals
             }
             else
             {
-                return null;
+                // Orphaned group, assign to first parent of appropriate type
+                var firstParent = this.Groups.FirstOrDefault(group => @group.GroupType == parentGroupType);
+                return firstParent;
             }
         }
 

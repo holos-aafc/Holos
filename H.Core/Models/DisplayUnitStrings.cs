@@ -11,6 +11,7 @@ namespace H.Core.Models
 
         private string _fertilizerKilogramsPerHectareString;
         private string _kilogramsPerDayString;
+        private string _kilogramsPerDayWetWeightString;
         private string _kilogramsPerHectareString;
         private string _hectaresString;
         private string _kilogramsString;
@@ -843,6 +844,12 @@ namespace H.Core.Models
             set => SetProperty(ref _kilowattHoursPerYearString, value);
         }
 
+        public string KilogramsPerDayWetWeightString
+        {
+            get => _kilogramsPerDayWetWeightString;
+            set => SetProperty(ref _kilogramsPerDayWetWeightString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -977,6 +984,7 @@ namespace H.Core.Models
                 KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
                 CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
                 KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
+                KilogramsPerDayWetWeightString = WrapString(Resources.KilogramsWetWeightPerDay);
             }
             else
             {
@@ -1098,6 +1106,7 @@ namespace H.Core.Models
                 KilowattHoursPerMonthString = WrapString(Resources.KilowattHoursPerMonth);
                 CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
                 KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
+                KilogramsPerDayWetWeightString = WrapString(Resources.KilogramsWetWeightPerDay);
             }
         }
 

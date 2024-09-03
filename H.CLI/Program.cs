@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers.Climate;
+using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
 
 namespace H.CLI
@@ -74,7 +75,7 @@ namespace H.CLI
             var processorHandler = new ProcessorHandler();
 
             // Get The Directories in the "Farms" folder
-            var listOfFarmPaths = directoryHandler.getListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
+            var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
             // Set up the geographic data provider only once to speed up processing.
             var geographicDataProvider = new GeographicDataProvider();
@@ -170,8 +171,9 @@ namespace H.CLI
                     var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
                     var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
                     var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
+                    var initializationService = new InitializationService();
 
-                    var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator);
+                    var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
                     // Overall Results For All the Farms
                     var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), fieldResultsService);
 

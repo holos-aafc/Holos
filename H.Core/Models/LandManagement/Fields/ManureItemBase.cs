@@ -16,6 +16,7 @@ namespace H.Core.Models.LandManagement.Fields
         private ObservableCollection<ManureStateType> _validManureStateTypesForSelectedTypeOfAnimalManure;
         private ManureLocationSourceType manureLocationSourceType;
         private DefaultManureCompositionData _defaultManureCompositionData;
+
         protected double _amountOfNitrogenAppliedPerHectare;
 
         #endregion

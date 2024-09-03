@@ -47,11 +47,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculators\Carbon\IPCCTier2CarbonInputCalculatorTest.cs" />
     <Compile Include="Calculators\Carbon\IPCCTier2SoilCarbonCalculatorTest.cs" />
-    <Compile Include="Calculators\ICBMSoilCarbonCalculatorTest.cs" />
+    <Compile Include="Calculators\Carbon\ICBMSoilCarbonCalculatorTest.cs" />
+    <Compile Include="Calculators\Carbon\ICBMCarbonInputCalculatorTest.cs" />
+    <Compile Include="Calculators\Carbon\CarbonCalculatorTest.cs" />
     <Compile Include="Calculators\ClimateParameterCalculatorTest.cs" />
     <Compile Include="Calculators\Climate\ClimateNormalCalculatorTest.cs" />
     <Compile Include="Calculators\Climate\EvapotranspirationCalculatorTest.cs" />
+    <Compile Include="Calculators\Climate\ClimateServiceTest.cs" />
     <Compile Include="Calculators\Economics\EconomicsCalculatorTest.cs" />
     <Compile Include="Calculators\Economics\EconomicsHelperTests.cs" />
     <Compile Include="Calculators\Emissions\EnergyCarbonDioxideEmissionsCalculatorTest.cs" />
@@ -60,7 +64,9 @@
     <Compile Include="Calculators\Infrastructure\ADCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrousOxideCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculatorTest.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorTest.cs" />
     <Compile Include="Calculators\Nitrogen\Tier2NitrousOxideCalculatorTest.cs" />
+    <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculatorTest.cs" />
     <Compile Include="Calculators\TillageFactorCalculatorTest.cs" />
     <Compile Include="Calculators\ShelterbeltCalculatorTest.cs" />
     <Compile Include="Calculators\UnitsOfMeasurementCalculatorTest.cs" />
@@ -176,12 +182,14 @@
     <Compile Include="ResultConversionClassTests.cs" />
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
+    <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\BeefCattleResultsServiceTest.cs" />
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
+    <Compile Include="Services\Initialization\CropInitializationServiceTest.cs" />
     <Compile Include="Services\LandManagement\IrrigationServiceTest.cs" />
     <Compile Include="Services\ManureServiceTest.cs" />
     <Compile Include="Services\OtherLiveStockResultsServiceTest.cs" />
@@ -189,6 +197,7 @@
     <Compile Include="Services\SheepResultsServiceTest.cs" />
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
+    <Compile Include="Services\Initialization\InitializationServiceTest.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +259,7 @@
   <ItemGroup>
     <Content Include="Providers\Climate\concat_new_slc.py" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

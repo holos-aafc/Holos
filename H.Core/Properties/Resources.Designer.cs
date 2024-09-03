@@ -178,7 +178,9 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column..
+        ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column.
+        ///
+        ///If no animals exist on the farm, it is possible to use  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string AnaerobicDigestionStepTwoText {
             get {
@@ -556,11 +558,29 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Imported Manure.
+        /// </summary>
+        public static string ButtonAddImportedManure {
+            get {
+                return ResourceManager.GetString("ButtonAddImportedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Manure Substrate Type.
         /// </summary>
         public static string ButtonAddManureSubstrateTypes {
             get {
                 return ResourceManager.GetString("ButtonAddManureSubstrateTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string ButtonApply {
+            get {
+                return ResourceManager.GetString("ButtonApply", resourceCulture);
             }
         }
         
@@ -1537,6 +1557,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Belt press.
+        /// </summary>
+        public static string EnumBeltPress {
+            get {
+                return ResourceManager.GetString("EnumBeltPress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Berries &amp; grapes.
         /// </summary>
         public static string EnumBerriesAndGraps {
@@ -1749,6 +1778,15 @@ namespace H.Core.Properties {
         public static string EnumCattle {
             get {
                 return ResourceManager.GetString("EnumCattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Centrifuge.
+        /// </summary>
+        public static string EnumCentrifuge {
+            get {
+                return ResourceManager.GetString("EnumCentrifuge", resourceCulture);
             }
         }
         
@@ -4201,6 +4239,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anaerobic digestor located on farm.
+        /// </summary>
+        public static string EnumOnFarmAnaerobicDigestor {
+            get {
+                return ResourceManager.GetString("EnumOnFarmAnaerobicDigestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open (not lactating or pregnant).
         /// </summary>
         public static string EnumOpen {
@@ -4399,7 +4446,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Potash 0-0-60-0.
+        ///   Looks up a localized string similar to Potash 0-0-60.
         /// </summary>
         public static string EnumPotash {
             get {
@@ -7693,6 +7740,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg wet weight day^-1.
+        /// </summary>
+        public static string KilogramsWetWeightPerDay {
+            get {
+                return ResourceManager.GetString("KilogramsWetWeightPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kg VS m^-3 d^-1.
         /// </summary>
         public static string KilogramVolatileSolidsPerCubicMeterPerDay {
@@ -7833,6 +7889,15 @@ namespace H.Core.Properties {
         public static string LabelAdjustDetailsForFallow {
             get {
                 return ResourceManager.GetString("LabelAdjustDetailsForFallow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liquid/solid separation method.
+        /// </summary>
+        public static string LabelADLiquidSolidSeparationMethod {
+            get {
+                return ResourceManager.GetString("LabelADLiquidSolidSeparationMethod", resourceCulture);
             }
         }
         
@@ -9493,6 +9558,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fugitive CH₄ loss.
+        /// </summary>
+        public static string LabelFugitiveMethaneLoss {
+            get {
+                return ResourceManager.GetString("LabelFugitiveMethaneLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gestation.
         /// </summary>
         public static string LabelGestationDiet {
@@ -10636,6 +10710,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orgin of digestate.
+        /// </summary>
+        public static string LabelOriginOfDigestate {
+            get {
+                return ResourceManager.GetString("LabelOriginOfDigestate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overflow.
         /// </summary>
         public static string LabelOverflow {
@@ -10897,11 +10980,470 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset NH₃ emission factor (housing).
+        /// </summary>
+        public static string LabelResetAmmoniaEmissionFactorForHousing {
+            get {
+                return ResourceManager.GetString("LabelResetAmmoniaEmissionFactorForHousing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset NH₃ emission factor (land application).
+        /// </summary>
+        public static string LabelResetAmmoniaEmissionFactorForLandApplication {
+            get {
+                return ResourceManager.GetString("LabelResetAmmoniaEmissionFactorForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset NH₃ emission factor (manure storage).
+        /// </summary>
+        public static string LabelResetAmmoniaEmissionFactorForManureStorage {
+            get {
+                return ResourceManager.GetString("LabelResetAmmoniaEmissionFactorForManureStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset amount of blended product.
+        /// </summary>
+        public static string LabelResetAmountOfBlendedProduct {
+            get {
+                return ResourceManager.GetString("LabelResetAmountOfBlendedProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset annual enteric CH₄ emission rate.
+        /// </summary>
+        public static string LabelResetAnnualEntericMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("LabelResetAnnualEntericMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset annual excretion rate.
+        /// </summary>
+        public static string LabelResetAnnualExcretionRate {
+            get {
+                return ResourceManager.GetString("LabelResetAnnualExcretionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset annual manure CH₄ emission rate.
+        /// </summary>
+        public static string LabelResetAnnualManureMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("LabelResetAnnualManureMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset available soil types.
+        /// </summary>
+        public static string LabelResetAvailableSoilTypes {
+            get {
+                return ResourceManager.GetString("LabelResetAvailableSoilTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset barn temperature.
+        /// </summary>
+        public static string LabelResetBarnTemperature {
+            get {
+                return ResourceManager.GetString("LabelResetBarnTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset baseline coefficient.
+        /// </summary>
+        public static string LabelResetBaselineCoefficient {
+            get {
+                return ResourceManager.GetString("LabelResetBaselineCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset bedding material.
+        /// </summary>
+        public static string LabelResetBeddingMaterial {
+            get {
+                return ResourceManager.GetString("LabelResetBeddingMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset bedding material rate.
+        /// </summary>
+        public static string LabelResetBeddingMaterialRate {
+            get {
+                return ResourceManager.GetString("LabelResetBeddingMaterialRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset biomass coefficient.
+        /// </summary>
+        public static string LabelResetBiomassCoefficient {
+            get {
+                return ResourceManager.GetString("LabelResetBiomassCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset blend data.
+        /// </summary>
+        public static string LabelResetBlendData {
+            get {
+                return ResourceManager.GetString("LabelResetBlendData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset carbon concentration.
+        /// </summary>
+        public static string LabelResetCarbonConcentration {
+            get {
+                return ResourceManager.GetString("LabelResetCarbonConcentration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset daily tan excretion.
+        /// </summary>
+        public static string LabelResetDailyTanExcretion {
+            get {
+                return ResourceManager.GetString("LabelResetDailyTanExcretion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset default emission factors.
+        /// </summary>
+        public static string LabelResetDefaultEmissionFactors {
+            get {
+                return ResourceManager.GetString("LabelResetDefaultEmissionFactors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset default soil data for field.
+        /// </summary>
+        public static string LabelResetDefaultSoilForField {
+            get {
+                return ResourceManager.GetString("LabelResetDefaultSoilForField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset economic defaults.
+        /// </summary>
+        public static string LabelResetEconomicDefaults {
+            get {
+                return ResourceManager.GetString("LabelResetEconomicDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset fallow.
+        /// </summary>
+        public static string LabelResetFallow {
+            get {
+                return ResourceManager.GetString("LabelResetFallow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset feeding activity coefficient.
+        /// </summary>
+        public static string LabelResetFeedingActivityCoefficient {
+            get {
+                return ResourceManager.GetString("LabelResetFeedingActivityCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset fertilizer application method.
+        /// </summary>
+        public static string LabelResetFertilizerApplicationMethod {
+            get {
+                return ResourceManager.GetString("LabelResetFertilizerApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset fuel energy.
+        /// </summary>
+        public static string LabelResetFuelEnergy {
+            get {
+                return ResourceManager.GetString("LabelResetFuelEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset gain coefficient.
+        /// </summary>
+        public static string LabelResetGainCoefficient {
+            get {
+                return ResourceManager.GetString("LabelResetGainCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset harvest method.
+        /// </summary>
+        public static string LabelResetHarvestMethod {
+            get {
+                return ResourceManager.GetString("LabelResetHarvestMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset herbicide energy.
+        /// </summary>
+        public static string LabelResetHerbicideEnergy {
+            get {
+                return ResourceManager.GetString("LabelResetHerbicideEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset leaching fraction.
+        /// </summary>
+        public static string LabelResetLeachingFraction {
+            get {
+                return ResourceManager.GetString("LabelResetLeachingFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset lignin content.
+        /// </summary>
+        public static string LabelResetLignin {
+            get {
+                return ResourceManager.GetString("LabelResetLignin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset livestock coefficient (Sheep).
+        /// </summary>
+        public static string LabelResetLivestockCoefficientSheep {
+            get {
+                return ResourceManager.GetString("LabelResetLivestockCoefficientSheep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset lum c max values.
+        /// </summary>
+        public static string LabelResetLumCMaxValues {
+            get {
+                return ResourceManager.GetString("LabelResetLumCMaxValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset manure application method.
+        /// </summary>
+        public static string LabelResetManureApplicationMethod {
+            get {
+                return ResourceManager.GetString("LabelResetManureApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset manure composition.
+        /// </summary>
+        public static string LabelResetManureComposition {
+            get {
+                return ResourceManager.GetString("LabelResetManureComposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset manure composition data.
+        /// </summary>
+        public static string LabelResetManureCompositionData {
+            get {
+                return ResourceManager.GetString("LabelResetManureCompositionData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset manure mineralization fractions.
+        /// </summary>
+        public static string LabelResetManureMineralizationFractions {
+            get {
+                return ResourceManager.GetString("LabelResetManureMineralizationFractions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset CH₄ producing capacity of manure.
+        /// </summary>
+        public static string LabelResetMethaneProducingCapacityOfManure {
+            get {
+                return ResourceManager.GetString("LabelResetMethaneProducingCapacityOfManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset milk production.
+        /// </summary>
+        public static string LabelResetMilkProduction {
+            get {
+                return ResourceManager.GetString("LabelResetMilkProduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset moisture content.
+        /// </summary>
+        public static string LabelResetMoistureContent {
+            get {
+                return ResourceManager.GetString("LabelResetMoistureContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset nitrogen content.
+        /// </summary>
+        public static string LabelResetNitrogenContent {
+            get {
+                return ResourceManager.GetString("LabelResetNitrogenContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset nitrogen excretion rate.
+        /// </summary>
+        public static string LabelResetNitrogenExcretionRate {
+            get {
+                return ResourceManager.GetString("LabelResetNitrogenExcretionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset nitrogen fixation.
+        /// </summary>
+        public static string LabelResetNitrogenFixation {
+            get {
+                return ResourceManager.GetString("LabelResetNitrogenFixation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset percent returns.
+        /// </summary>
+        public static string LabelResetPercentageReturns {
+            get {
+                return ResourceManager.GetString("LabelResetPercentageReturns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset perennial defaults.
+        /// </summary>
+        public static string LabelResetPerennialDefaults {
+            get {
+                return ResourceManager.GetString("LabelResetPerennialDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset phosphorus fertlizer rate.
+        /// </summary>
+        public static string LabelResetPhosphorusFertilizerRate {
+            get {
+                return ResourceManager.GetString("LabelResetPhosphorusFertilizerRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset soil properties.
+        /// </summary>
+        public static string LabelResetSoilProperties {
+            get {
+                return ResourceManager.GetString("LabelResetSoilProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset tillage type.
+        /// </summary>
+        public static string LabelResetTillageType {
+            get {
+                return ResourceManager.GetString("LabelResetTillageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset to Defaults.
         /// </summary>
         public static string LabelResetToDefaults {
             get {
                 return ResourceManager.GetString("LabelResetToDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset user defaults.
+        /// </summary>
+        public static string LabelResetUserDefaults {
+            get {
+                return ResourceManager.GetString("LabelResetUserDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset pasture utilization.
+        /// </summary>
+        public static string LabelResetUtilization {
+            get {
+                return ResourceManager.GetString("LabelResetUtilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset volatile solids excretion.
+        /// </summary>
+        public static string LabelResetVolatileSolidsExcretion {
+            get {
+                return ResourceManager.GetString("LabelResetVolatileSolidsExcretion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset water irrigation.
+        /// </summary>
+        public static string LabelResetWaterIrrigation {
+            get {
+                return ResourceManager.GetString("LabelResetWaterIrrigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset yield.
+        /// </summary>
+        public static string LabelResetYield {
+            get {
+                return ResourceManager.GetString("LabelResetYield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset yields for all years.
+        /// </summary>
+        public static string LabelResetYieldsAllYears {
+            get {
+                return ResourceManager.GetString("LabelResetYieldsAllYears", resourceCulture);
             }
         }
         
@@ -11743,6 +12285,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total digestate volume produced.
+        /// </summary>
+        public static string LabelTotalVolumeOfDigestateProduced {
+            get {
+                return ResourceManager.GetString("LabelTotalVolumeOfDigestateProduced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tryptophan.
         /// </summary>
         public static string LabelTryptophan {
@@ -11878,6 +12429,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use imported manure.
+        /// </summary>
+        public static string LabelUseImportedManure {
+            get {
+                return ResourceManager.GetString("LabelUseImportedManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply liquid/solid separation to the digestate.
         /// </summary>
         public static string LabelUseLiquidSolidSeparation {
@@ -11937,6 +12497,15 @@ namespace H.Core.Properties {
         public static string LabelVitaminE {
             get {
                 return ResourceManager.GetString("LabelVitaminE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volatile solids content of manure.
+        /// </summary>
+        public static string LabelVolatileSolidsContentOfManure {
+            get {
+                return ResourceManager.GetString("LabelVolatileSolidsContentOfManure", resourceCulture);
             }
         }
         
@@ -12823,6 +13392,456 @@ namespace H.Core.Properties {
         public static string MessageRemovingUndersownStatus {
             get {
                 return ResourceManager.GetString("MessageRemovingUndersownStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the ammonia emission factor for housing for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetAmmoniaEmissionFactorForHousing {
+            get {
+                return ResourceManager.GetString("MessageResetAmmoniaEmissionFactorForHousing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the ammonia emission factor for land application for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetAmmoniaEmissionFactorForLandApplication {
+            get {
+                return ResourceManager.GetString("MessageResetAmmoniaEmissionFactorForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the ammonia emission factor for manure storage for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetAmmoniaEmissionFactorForManureStorage {
+            get {
+                return ResourceManager.GetString("MessageResetAmmoniaEmissionFactorForManureStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the amount of blended product for each crop (in each year) to the default valu.
+        /// </summary>
+        public static string MessageResetAmountOfBlendedProduct {
+            get {
+                return ResourceManager.GetString("MessageResetAmountOfBlendedProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the Enteric Methane emission rate for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetAnnualEntericMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("MessageResetAnnualEntericMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the manure methane emission rate for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetAnnualManureMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("MessageResetAnnualManureMethaneEmissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the soil types for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetAvailableSoilTypes {
+            get {
+                return ResourceManager.GetString("MessageResetAvailableSoilTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the barn temperature for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetBarnTemperature {
+            get {
+                return ResourceManager.GetString("MessageResetBarnTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the baseline coefficient for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetBaselineCoefficient {
+            get {
+                return ResourceManager.GetString("MessageResetBaselineCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the bedding material for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetBeddingMaterial {
+            get {
+                return ResourceManager.GetString("MessageResetBeddingMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the bedding material rate for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetBeddingMaterialRate {
+            get {
+                return ResourceManager.GetString("MessageResetBeddingMaterialRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the biomass coefficients for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetBiomassCoefficient {
+            get {
+                return ResourceManager.GetString("MessageResetBiomassCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the blend data for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetBlendData {
+            get {
+                return ResourceManager.GetString("MessageResetBlendData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the carbon concentration for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetCarbonConcentration {
+            get {
+                return ResourceManager.GetString("MessageResetCarbonConcentration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the daily tan excretion for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetDailyTanExcretion {
+            get {
+                return ResourceManager.GetString("MessageResetDailyTanExcretion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the default emission factors for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetDefaultEmissionFactors {
+            get {
+                return ResourceManager.GetString("MessageResetDefaultEmissionFactors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the soil for field to the default value.
+        /// </summary>
+        public static string MessageResetDefaultSoilForField {
+            get {
+                return ResourceManager.GetString("MessageResetDefaultSoilForField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the economic defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetEconomicDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetEconomicDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the fallow for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetFallow {
+            get {
+                return ResourceManager.GetString("MessageResetFallow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the feeding activity coefficient for each animal group (for each management period) to the default value.
+        /// </summary>
+        public static string MessageResetFeedingActivityCoefficient {
+            get {
+                return ResourceManager.GetString("MessageResetFeedingActivityCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the fertilizer application method for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetFertilizerApplicationMethod {
+            get {
+                return ResourceManager.GetString("MessageResetFertilizerApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the fuel energy property for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetFuelEnergy {
+            get {
+                return ResourceManager.GetString("MessageResetFuelEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the gain coefficient for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetGainCoefficient {
+            get {
+                return ResourceManager.GetString("MessageResetGainCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the harvest method for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetHarvestMethod {
+            get {
+                return ResourceManager.GetString("MessageResetHarvestMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the herbicide energy properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetHerbicideEnergy {
+            get {
+                return ResourceManager.GetString("MessageResetHerbicideEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the leaching fraction for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetLeachingFraction {
+            get {
+                return ResourceManager.GetString("MessageResetLeachingFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the lignin content of all crops (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetLigninContent {
+            get {
+                return ResourceManager.GetString("MessageResetLigninContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the livestock coefficient for sheep (for each management period) to the default value.
+        /// </summary>
+        public static string MessageResetLivestockCoefficientSheep {
+            get {
+                return ResourceManager.GetString("MessageResetLivestockCoefficientSheep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the lum C max values for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetLumCMaxValues {
+            get {
+                return ResourceManager.GetString("MessageResetLumCMaxValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the manure application method for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetManureApplicationMethod {
+            get {
+                return ResourceManager.GetString("MessageResetManureApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the manure composition for each animal group (for each management period) to the default value.
+        /// </summary>
+        public static string MessageResetManureComposition {
+            get {
+                return ResourceManager.GetString("MessageResetManureComposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the manure excretion rate for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetManureExcretionRate {
+            get {
+                return ResourceManager.GetString("MessageResetManureExcretionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the manure mineralization fractions for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetManureMineralizationFractions {
+            get {
+                return ResourceManager.GetString("MessageResetManureMineralizationFractions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the methane producing capacity of manure for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetMethaneProducingCapacityOfManure {
+            get {
+                return ResourceManager.GetString("MessageResetMethaneProducingCapacityOfManure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the milk production for each animal group (for each management period) to the default value.
+        /// </summary>
+        public static string MessageResetMilkProduction {
+            get {
+                return ResourceManager.GetString("MessageResetMilkProduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the moisture content for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetMoistureContent {
+            get {
+                return ResourceManager.GetString("MessageResetMoistureContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the nitrogen content for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetNitrogenContent {
+            get {
+                return ResourceManager.GetString("MessageResetNitrogenContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the nitrogen excretion rate for each animal group (for management period) to the default value.
+        /// </summary>
+        public static string MessageResetNitrogenExcretionRate {
+            get {
+                return ResourceManager.GetString("MessageResetNitrogenExcretionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the nitrogen fixation percentage of all crops (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetNitrogenFixation {
+            get {
+                return ResourceManager.GetString("MessageResetNitrogenFixation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the utilization for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPastureUtilization {
+            get {
+                return ResourceManager.GetString("MessageResetPastureUtilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the percentage returns for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPercentageReturns {
+            get {
+                return ResourceManager.GetString("MessageResetPercentageReturns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the perennial defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPerennialDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetPerennialDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the phosphorus fertilizer rate for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetPhosphorusFertilizerRate {
+            get {
+                return ResourceManager.GetString("MessageResetPhosphorusFertilizerRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the soil properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetSoilProprties {
+            get {
+                return ResourceManager.GetString("MessageResetSoilProprties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the tillage type for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetTillageType {
+            get {
+                return ResourceManager.GetString("MessageResetTillageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the user defaults for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetUserDefaults {
+            get {
+                return ResourceManager.GetString("MessageResetUserDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the volatile solids excretion for each animal group (for each year) to the default value.
+        /// </summary>
+        public static string MessageResetVolatileSoildsExcretion {
+            get {
+                return ResourceManager.GetString("MessageResetVolatileSoildsExcretion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the irrigation properties for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetWaterIrrigation {
+            get {
+                return ResourceManager.GetString("MessageResetWaterIrrigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets yield for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetYield {
+            get {
+                return ResourceManager.GetString("MessageResetYield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the yield for each crop (in each year) to the default value.
+        /// </summary>
+        public static string MessageResetYield_ForAllYears {
+            get {
+                return ResourceManager.GetString("MessageResetYield|ForAllYears", resourceCulture);
             }
         }
         
@@ -14249,6 +15268,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lbs wet weight day^-1.
+        /// </summary>
+        public static string PoundsWetWeightPerDay {
+            get {
+                return ResourceManager.GetString("PoundsWetWeightPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to lb VS yd^-3 day^-1.
         /// </summary>
         public static string PoundVolatileSolidsPerCubicYardPerDay {
@@ -14389,6 +15417,15 @@ namespace H.Core.Properties {
         public static string RelativeHumidity {
             get {
                 return ResourceManager.GetString("RelativeHumidity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset water irrigation.
+        /// </summary>
+        public static string ResetWaterIrrigation {
+            get {
+                return ResourceManager.GetString("ResetWaterIrrigation", resourceCulture);
             }
         }
         
@@ -15388,6 +16425,15 @@ namespace H.Core.Properties {
         public static string ToolTipAdvancedDietMetabolizableEnergyInfo {
             get {
                 return ResourceManager.GetString("ToolTipAdvancedDietMetabolizableEnergyInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defines the portion of methane-producing potential achieved for each diet type.
+        /// </summary>
+        public static string ToolTipAdvancedDietMethaneConversionFactorForDietInfo {
+            get {
+                return ResourceManager.GetString("ToolTipAdvancedDietMethaneConversionFactorForDietInfo", resourceCulture);
             }
         }
         

@@ -9,6 +9,10 @@ namespace H.Core.Providers.Soil
         public Province Province { get; set; }
         public int PMayToOct { get; set; }
         public int PEMayToOct { get; set; }
+
+        /// <summary>
+        /// (percentage %)
+        /// </summary>
         public double FTopo { get; set; }
         public SoilFunctionalCategory SoilFunctionalCategory { get; set; }
         public SoilTexture SoilTexture { get; set; }

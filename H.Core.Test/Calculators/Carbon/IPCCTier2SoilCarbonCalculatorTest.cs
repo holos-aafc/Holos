@@ -52,6 +52,7 @@ namespace H.Core.Test.Calculators.Carbon
         #region Fields
 
         private IPCCTier2SoilCarbonCalculator _sut;
+        private IPCCTier2CarbonInputCalculator _inputCalculator = new IPCCTier2CarbonInputCalculator();
 
         private static List<TestClimateData> _monthlyTestData;
         private static List<TestFactorData> _annualTestData;
@@ -225,9 +226,7 @@ namespace H.Core.Test.Calculators.Carbon
 
         #endregion
 
-        #region Tests      
-
-
+        #region Tests
 
         [TestMethod]
         public void CalculateMonthlyTemperatureFactor()
@@ -827,9 +826,9 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(2.606, runInPeriodYear.IpccTier2CarbonResults.Beta, 0.001);
             Assert.AreEqual(1.74, runInPeriodYear.IpccTier2CarbonResults.Alpha, 0.01);
 
-            Assert.AreEqual(2.751, runInPeriodYear.IpccTier2CarbonResults.ActivePoolDecayRate, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePoolSteadyState, 0.01);
-            Assert.AreEqual(0.63, runInPeriodYear.IpccTier2CarbonResults.ActivePool, 0.01);
+            Assert.AreEqual(1, runInPeriodYear.IpccTier2CarbonResults.ActivePoolDecayRate, 0.01);
+            Assert.AreEqual(1.743, runInPeriodYear.IpccTier2CarbonResults.ActivePoolSteadyState, 0.01);
+            Assert.AreEqual(1.743, runInPeriodYear.IpccTier2CarbonResults.ActivePool, 0.01);
 
             Assert.AreEqual(0.178, runInPeriodYear.IpccTier2CarbonResults.SlowPoolDecayRate, 0.01);
             Assert.AreEqual(6.62, runInPeriodYear.IpccTier2CarbonResults.SlowPoolSteadyState, 0.01);
@@ -840,26 +839,7 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(108, runInPeriodYear.IpccTier2CarbonResults.PassivePool, 1);
         }
 
-        [TestMethod]
-        public void CalculateInputs()
-        {
-            var viewItem = new CropViewItem()
-            {
-                CropType = CropType.Barley,
-                Yield = 7018,
-                PercentageOfStrawReturnedToSoil = 100,
-                MoistureContentOfCrop = 0.12,
-                BiomassCoefficientStraw = 0.2,
-                BiomassCoefficientProduct = 0.6,
-            };
 
-            _sut.CalculateInputs(
-                viewItem: viewItem, farm: new Farm());
-
-            Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);
-            Assert.AreEqual(997.775453968351, viewItem.BelowGroundCarbonInput, 1);
-            Assert.AreEqual(3155.23433953193, viewItem.TotalCarbonInputs, 1);
-        }
 
         [TestMethod]
         public void CalculateResults()
@@ -880,22 +860,23 @@ namespace H.Core.Test.Calculators.Carbon
                     }
                 }
             };
-            
+
+            var fieldSystemComponent = new FieldSystemComponent();
             var viewItems = new List<CropViewItem>()
             {                
                 new CropViewItem() { Year = 1985, CropType = CropType.Barley, Yield = 5, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100          ,      BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
                 new CropViewItem() { Year = 1986, CropType = CropType.Barley, Yield = 2, LigninContent = 0.1, NitrogenContent = 0.3 , AboveGroundNitrogenResidueForCrop = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
                 new CropViewItem() { Year = 1987, CropType = CropType.Barley, Yield = 3, LigninContent = 0.1, NitrogenContent = 0.3, AboveGroundResidueDryMatter = 20 , NitrogenContentInStraw = 0.8, NitrogenContentInRoots = 0.7, PercentageOfStrawReturnedToSoil = 100,                BiomassCoefficientStraw = 0.2,
-                    BiomassCoefficientProduct = 0.6,},
+                    BiomassCoefficientProduct = 0.6, FieldSystemComponentGuid = fieldSystemComponent.Guid},
             };
 
-            var fieldSystemComponent = new FieldSystemComponent();
+            farm.Components.Add(fieldSystemComponent);
 
             foreach (var viewItem in viewItems)
             {
-                _sut.CalculateInputs(viewItem, new Farm());
+                _inputCalculator.CalculateInputsForCrop(viewItem, new Farm());
             }
 
             _sut.CropResiduePool = 100;
@@ -925,30 +906,18 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.IsTrue(firstItemInSimulation.IpccTier2CarbonResults.SlowPoolDiff != 0);
         }
 
-        [TestMethod]
-        public void CanCalculateInputsForCropReturnsTrue()
-        {
-            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.Barley });
 
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void CanCalculateInputsForCropReturnsFalse()
-        {
-            var result = _sut.CanCalculateInputsForCrop(new CropViewItem() { CropType = CropType.TameMixed });
-
-            Assert.IsFalse(result);
-        }
 
         [TestMethod]
         public void UseCustomStartingPoint()
         {
+            var fieldSystemComponent = new FieldSystemComponent();
+
             var runInPeriodItems = new List<CropViewItem>()
             {
-                new CropViewItem() {CropType = CropType.Wheat, TotalCarbonInputs = 1000,},
-                new CropViewItem() {CropType = CropType.Oats, TotalCarbonInputs = 5000,},
-                new CropViewItem() {CropType = CropType.Barley, TotalCarbonInputs = 200,}
+                new CropViewItem() {CropType = CropType.Wheat, TotalCarbonInputs = 1000, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {CropType = CropType.Oats, TotalCarbonInputs = 5000, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {CropType = CropType.Barley, TotalCarbonInputs = 200, FieldSystemComponentGuid = fieldSystemComponent.Guid}
             };
 
             var farm = new Farm()
@@ -956,6 +925,8 @@ namespace H.Core.Test.Calculators.Carbon
                 StartingSoilOrganicCarbon = 30000,
                 UseCustomStartingSoilOrganicCarbon = true,
             };
+
+            farm.Components.Add(fieldSystemComponent);
 
             // Run spin up method once and get the starting points for each pool
             var equilibriumYear = _sut.CalculateRunInPeriod(farm, runInPeriodItems);
@@ -995,11 +966,11 @@ namespace H.Core.Test.Calculators.Carbon
 
             var viewItemsByField = new List<CropViewItem>()
             {
-                new CropViewItem() {Year = 1985,},
-                new CropViewItem() {Year = 1986},
+                new CropViewItem() {Year = 1985, FieldSystemComponentGuid = fieldSystemComponent.Guid},
+                new CropViewItem() {Year = 1986, FieldSystemComponentGuid = fieldSystemComponent.Guid},
             };
 
-            var fieldSystemComponent = new FieldSystemComponent();
+            
 
             _sut.CalculateResults(farm, viewItemsByField, fieldSystemComponent, new List<CropViewItem>() {new CropViewItem()});
 

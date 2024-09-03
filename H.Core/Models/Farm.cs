@@ -231,6 +231,9 @@ namespace H.Core.Models
 
         public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
 
+        /// <summary>
+        /// Indicates the location of the farm
+        /// </summary>
         public int PolygonId
         {
             get { return _polygonId; }
@@ -1150,6 +1153,32 @@ namespace H.Core.Models
                     return this.DefaultSoilData;
                 }
             }
+        }
+
+        public List<CropViewItem> GetAllCropViewItems()
+        {
+            var result = new List<CropViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var viewItem in fieldSystemComponent.CropViewItems)
+                {
+                    result.Add(viewItem);
+                }
+
+                foreach (var viewItem in fieldSystemComponent.CoverCrops)
+                {
+                    result.Add(viewItem);
+                }
+            }
+
+            var stageState = this.GetFieldSystemDetailsStageState();
+            foreach (var viewItem in stageState.DetailsScreenViewCropViewItems)
+            {
+                result.Add(viewItem);
+            }
+
+            return result;
         }
 
         #endregion

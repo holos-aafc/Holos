@@ -26,7 +26,8 @@ namespace H.Core.Enumerations
         {
             return manureStateType == ManureStateType.LiquidNoCrust ||
                    manureStateType == ManureStateType.LiquidWithNaturalCrust ||
-                   manureStateType == ManureStateType.LiquidWithSolidCover;
+                   manureStateType == ManureStateType.LiquidWithSolidCover ||
+                   manureStateType == ManureStateType.DeepPit;
         }
 
         public static bool IsCompost(this ManureStateType manureStateType)

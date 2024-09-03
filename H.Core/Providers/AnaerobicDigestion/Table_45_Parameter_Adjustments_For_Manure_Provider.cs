@@ -47,21 +47,15 @@ namespace H.Core.Providers.AnaerobicDigestion
                 });
             }
 
-            else if (manureStateType == ManureStateType.SolidStorage)
+            else
             {
+                // All other solid types
+
                 return (new Table_45_Parameter_Adjustments_For_Manure_Data 
                 {
                     VolatileSolidsReductionFactor = 0.9,
                     HydrolysisRateOfSubstrate = 0.05,
                 });
-            }
-
-            else
-            {
-                Trace.TraceError($"{nameof(Table_45_Parameter_Adjustments_For_Manure_Provider)}.{nameof(Table_45_Parameter_Adjustments_For_Manure_Provider.GetParametersAdjustmentInstance)}" +
-                    $" does not contain ManureStateType: {manureStateType}. Please specify either {nameof(ManureStateType.DeepBedding)} or {nameof(ManureStateType.SolidStorage)}" +
-                    $" returning empty object instance.");
-                return new Table_45_Parameter_Adjustments_For_Manure_Data();
             }
         }
 

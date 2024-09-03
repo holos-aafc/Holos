@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Infrastructure;
 
@@ -15,7 +16,8 @@ namespace H.Core.Models.Infrastructure
         StoredManure,
         FreshManure,
         FarmResidues,
-        CropResidues
+        CropResidues,
+        ImportedManure,
     }
 
     public class SubstrateFlowInformation : SubstrateViewItemBase
@@ -24,6 +26,7 @@ namespace H.Core.Models.Infrastructure
         public SubstrateType SubstrateType { get; set; }
         public ManagementPeriod ManagementPeriod { get; set; }
         public AnaerobicDigestionComponent Component { get; set; }
+        public DefaultManureCompositionData ManureCompositionData { get; set; }
 
         /// <summary>
         /// (kg day^-1)
@@ -36,7 +39,7 @@ namespace H.Core.Models.Infrastructure
         public double VolatileSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        /// (kg DM day^-1)
         /// </summary>
         public double TotalSolidsFlowOfSubstrate { get; set; }
 
@@ -49,6 +52,7 @@ namespace H.Core.Models.Infrastructure
         /// (kg day^-1)
         /// </summary>
         public double CarbonFlowOfSubstrate { get; set; }
+
         public double OrganicNitrogenFlowOfSubstrate { get; set; }
 
         /// <summary>
@@ -87,6 +91,19 @@ namespace H.Core.Models.Infrastructure
         public double TanFlowInDigestate { get; set; }
 
         public double OrganicNitrogenFlowInDigestate { get; set; }
+
         public double CarbonFlowInDigestate { get; set; }
+
+
+
+        #region Public Methods
+
+        public bool IsLiquidManure()
+        {
+            return this.ManagementPeriod != null && this.ManagementPeriod.ManureDetails != null &&
+                   this.ManagementPeriod.ManureDetails.StateType.IsLiquidManure();
+        }
+
+        #endregion
     }
 }

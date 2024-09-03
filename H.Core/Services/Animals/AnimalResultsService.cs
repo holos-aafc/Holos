@@ -5,14 +5,14 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Services.Initialization;
 
 namespace H.Core.Services.Animals
 {
     public class AnimalResultsService : IAnimalService
     {
         #region Fields
-        
-        private IInitializationService _initializationService;
 
         private readonly OtherLivestockResultsService _otherLivestockResultsService = new OtherLivestockResultsService();
         private readonly SwineResultsService _swineResultsService = new SwineResultsService();
@@ -27,7 +27,6 @@ namespace H.Core.Services.Animals
 
         public AnimalResultsService()
         {
-            _initializationService = new InitializationService();
         }
 
         #endregion
@@ -36,8 +35,6 @@ namespace H.Core.Services.Animals
 
         public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm)
         {
-            _initializationService.CheckInitialization(farm);
-
             var results = new List<AnimalComponentEmissionsResults>();
 
             results.AddRange(_otherLivestockResultsService.CalculateResultsForAnimalComponents(farm.OtherLivestockComponents.Cast<AnimalComponentBase>(), farm));
@@ -52,8 +49,6 @@ namespace H.Core.Services.Animals
 
         public List<AnimalComponentEmissionsResults> GetAnimalResults(AnimalType animalType, Farm farm)
         {
-            _initializationService.CheckInitialization(farm);
-
             var results = new List<AnimalComponentEmissionsResults>();
 
             if (animalType.GetCategory() == AnimalType.Beef)
@@ -88,8 +83,6 @@ namespace H.Core.Services.Animals
 
         public AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
-            _initializationService.CheckInitialization(farm);
-
             var animalType = animalGroup.GroupType;
             
             if (animalType.GetCategory() == AnimalType.Beef)
@@ -119,8 +112,6 @@ namespace H.Core.Services.Animals
 
         public AnimalGroupEmissionResults GetResultsForManagementPeriod(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent, ManagementPeriod managementPeriod)
         {
-            _initializationService.CheckInitialization(farm);
-
             var animalType = animalGroup.GroupType;
 
             if (animalType.GetCategory() == AnimalType.Beef)
@@ -146,6 +137,53 @@ namespace H.Core.Services.Animals
 
             // Dairy
             return _dairyCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+        }
+
+        public List<GroupEmissionsByMonth> GetGroupEmissionsFromGrazingAnimals(
+            List<AnimalComponentEmissionsResults> results,
+            GrazingViewItem grazingViewItem)
+        {
+            var result = new List<GroupEmissionsByMonth>();
+
+            // Get all animal components that have been placed on this field for grazing.
+            var animalComponentEmissionsResults = results.SingleOrDefault(x => x.Component.Guid == grazingViewItem.AnimalComponentGuid);
+            if (animalComponentEmissionsResults != null)
+            {
+                //Get all animal groups that have been placed on this field for grazing.
+                var groupEmissionResults = animalComponentEmissionsResults.EmissionResultsForAllAnimalGroupsInComponent.SingleOrDefault(x => x.AnimalGroup.Guid == grazingViewItem.AnimalGroupGuid);
+                if (groupEmissionResults != null)
+                {
+                    // Get emissions from the group when they are placed on pasture (housing type is pasture)
+                    foreach (var groupEmissionsByMonth in groupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.HousingDetails.HousingType.IsPasture())
+                        {
+                            var start = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.Start;
+                            var end = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.End;
+
+                            if (start >= grazingViewItem.Start && end <= grazingViewItem.End)
+                            {
+                                result.Add(groupEmissionsByMonth);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Selects the management periods and associated emissions for animals that are grazing on pasture according to Chapter 11/Appendix methodology
+        /// </summary>
+        public List<ManagementPeriod> GetGrazingManagementPeriods(
+            AnimalGroup animalGroup,
+            FieldSystemComponent fieldSystemComponent)
+        {
+            var managementPeriods = animalGroup.ManagementPeriods.ToList();
+            var grazingPeriods = managementPeriods.Where(x => fieldSystemComponent.IsGrazingManagementPeriodFromPasture(x)).ToList();
+            return grazingPeriods;
+
         }
     }
 }

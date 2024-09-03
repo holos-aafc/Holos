@@ -739,7 +739,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
                 volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
 
-            // Equation 4.1.3-6 (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
+            // (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
             dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
                 volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
                 volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
@@ -881,8 +881,10 @@ namespace H.Core.Services.Animals
             return manureMethane * (1 - emissionReductionFactor);
         }
 
-        public void CalculateCarbonInStorage(GroupEmissionsByDay dailyEmissions,
-            GroupEmissionsByDay previousDaysEmissions, ManagementPeriod managementPeriod)
+        public void CalculateCarbonInStorage(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions, 
+            ManagementPeriod managementPeriod)
         {
             dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = this.CalculateCarbonLostAsMethaneDuringManagement(
                 monthlyManureMethaneEmission: dailyEmissions.ManureMethaneEmission);
@@ -1334,7 +1336,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.5-10
+        /// Equation 4.5.3-10
         /// </summary>
         /// <param name="totalAmmoniaLossFromHousingAndStorage">Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</param>
         /// <param name="manureVolatilizationEmissions">Manure volatilization N emissions during the housing and manure storage stages (kg N2O-N day-1)</param>
@@ -1566,17 +1568,17 @@ namespace H.Core.Services.Animals
         /// Equation 5.4.3-2
         /// </summary>
         /// <param name="nitrogenExcretionRate">Amount of N excreted (kg N)</param>
-        /// <param name="beddingNitrogen">Bedding nitrogen (kg N)</param>
+        /// <param name="beddingNitrogenRate">Bedding nitrogen (kg N)</param>
         /// <param name="volatilizationFraction">Fraction of manure N volatilized as NH3 and NOx from the specific manure management system</param>
         /// <param name="volatilizationEmissionFactor">Emission factor for volatilization [kg N2O-N (kg N)^-1]</param>
         /// <returns>Manure volatilization N emission rate (kg N2O-N head^-1 day^-1)</returns>
         public double CalculateManureVolatilizationEmissionRate(
             double nitrogenExcretionRate,
-            double beddingNitrogen,
+            double beddingNitrogenRate,
             double volatilizationFraction,
             double volatilizationEmissionFactor)
         {
-            var result = (nitrogenExcretionRate + beddingNitrogen) * volatilizationFraction *
+            var result = (nitrogenExcretionRate + beddingNitrogenRate) * volatilizationFraction *
                          volatilizationEmissionFactor;
 
             return result;
@@ -2341,7 +2343,7 @@ namespace H.Core.Services.Animals
                 ammoniaEmissionRate: dailyEmissions.AmmoniaEmissionRateFromHousingAndStorage,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            dailyEmissions.AmmoniaEmissionsFromHousingAndStorage = CoreConstants.ConvertToNH3(dailyEmissions.TotalNitrogenLossesFromHousingAndStorage);
+            dailyEmissions.AmmoniaEmissionsFromHousingAndStorage = dailyEmissions.TotalNitrogenLossesFromHousingAndStorage;
 
             // Since the emissions from these animals are from a combination of the housing and storage, split the values in half so that the 
 
@@ -2383,7 +2385,7 @@ namespace H.Core.Services.Animals
         {
             dailyEmissions.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                beddingNitrogen: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
+                beddingNitrogenRate: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized,
                 volatilizationEmissionFactor: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 

@@ -38,10 +38,10 @@ namespace H.CLI.FileAndDirectoryAccessors
             var farm = _farmHelper.Create();
 
                 var componentDirectoryList = Directory.GetDirectories(farmDirectoryPath).ToList();
-                _directoryHandler.checkForInvalidComponentDirectoryNames(componentDirectoryList, farmDirectoryPath);
+                _directoryHandler.CheckForInvalidComponentDirectoryNames(componentDirectoryList, farmDirectoryPath);
 
                 //Fields and Shelterbelts are prioritized. Priority is set in the Directory Keys Class by number weight
-                componentDirectoryList = _directoryHandler.prioritizeDirectoryKeys(componentDirectoryList);
+                componentDirectoryList = _directoryHandler.PrioritizeDirectoryKeys(componentDirectoryList);
                 foreach (var componentDirectoryPath in componentDirectoryList)
                 {
                     var componentCategoryType = Path.GetFileName(componentDirectoryPath);

@@ -172,7 +172,9 @@
     <value>Farm and crop residues can be added to the anaerobic digestor by clicking the 'Add Farm Residue Type' or 'Add Crop Residue Type' button(s)</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
-    <value>Tout le fumier produit par les animaux à la ferme peut être ajouté au digesteur anaérobie. Choisissez les périodes de gestion qui seront sélectionnées comme source du fumier entrant dans le digesteur. Pour sélectionner une période de gestion, cochez la case « Ajouter ». Par défaut, tout le fumier produit par jour (100 %) au cours de la période de gestion sélectionnée est ajouté au digesteur. Ce pourcentage quotidien peut être ajusté au besoin en modifiant la colonne « Fumier quotidien ajouté au digesteur ».</value>
+    <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.
+
+If no animals exist on the farm, it is possible to use imported manure as a feedstock for the digestor. To add imported manure, the user must enter a daily amount fed into the digestor and the manure type.</value>
   </data>
   <data name="AnaerobicDigestionStepTwoTextNoAnimalComponents" xml:space="preserve">
     <value>Pour ajouter du fumier animal au digesteur anaérobie, au moins un composant animal doit être ajouté à la ferme. Une fois qu’une composante animale a été ajoutée à la ferme, l’option d’ajouter du fumier animal sera offerte.</value>
@@ -1562,7 +1564,7 @@
     <value>mal drainé</value>
   </data>
   <data name="EnumPotash" xml:space="preserve">
-    <value>potasse 0-0-60-0</value>
+    <value>potasse 0-0-60</value>
   </data>
   <data name="EnumPotassiumSulphate" xml:space="preserve">
     <value>sulfate de potassium</value>
@@ -5733,5 +5735,200 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="LabelAshContentOfFeed" xml:space="preserve">
     <value>Ash content of feed</value>
+  </data>
+  <data name="EnumBeltPress" xml:space="preserve">
+    <value>Belt press</value>
+  </data>
+  <data name="EnumCentrifuge" xml:space="preserve">
+    <value>Centrifuge</value>
+  </data>
+  <data name="LabelADLiquidSolidSeparationMethod" xml:space="preserve">
+    <value>Liquid/solid separation method</value>
+  </data>
+  <data name="EnumOnFarmAnaerobicDigestor" xml:space="preserve">
+    <value>Anaerobic digestor located on farm</value>
+  </data>
+  <data name="LabelOriginOfDigestate" xml:space="preserve">
+    <value>Orgin of digestate</value>
+  </data>
+  <data name="KilogramsWetWeightPerDay" xml:space="preserve">
+    <value>kg wet weight day^-1</value>
+  </data>
+  <data name="PoundsWetWeightPerDay" xml:space="preserve">
+    <value>lbs wet weight day^-1</value>
+  </data>
+  <data name="ButtonAddImportedManure" xml:space="preserve">
+    <value>Add Imported Manure</value>
+  </data>
+  <data name="LabelUseImportedManure" xml:space="preserve">
+    <value>Use imported manure</value>
+  </data>
+  <data name="LabelVolatileSolidsContentOfManure" xml:space="preserve">
+    <value>Volatile solids content of manure</value>
+  </data>
+  <data name="LabelTotalVolumeOfDigestateProduced" xml:space="preserve">
+    <value>Total digestate volume produced</value>
+  </data>
+  <data name="LabelFugitiveMethaneLoss" xml:space="preserve">
+    <value>Fugitive CH₄ loss</value>
+  </data>
+  <data name="ToolTipAdvancedDietMethaneConversionFactorForDietInfo" xml:space="preserve">
+    <value>Defines the portion of methane-producing potential achieved for each diet type</value>
+  </data>
+  <data name="ButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="LabelResetLignin" xml:space="preserve">
+    <value>Reset lignin content</value>
+  </data>
+  <data name="MessageResetLigninContent" xml:space="preserve">
+    <value>Resets the lignin content of all crops (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetBiomassCoefficient" xml:space="preserve">
+    <value>Resets the biomass coefficients for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetCarbonConcentration" xml:space="preserve">
+    <value>Resets the carbon concentration for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetEconomicDefaults" xml:space="preserve">
+    <value>Resets the economic defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetFallow" xml:space="preserve">
+    <value>Resets the fallow for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetFuelEnergy" xml:space="preserve">
+    <value>Resets the fuel energy property for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetHarvestMethod" xml:space="preserve">
+    <value>Resets the harvest method for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetHerbicideEnergy" xml:space="preserve">
+    <value>Resets the herbicide energy properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetLumCMaxValues" xml:space="preserve">
+    <value>Resets the lum C max values for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetMoistureContent" xml:space="preserve">
+    <value>Resets the moisture content for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetNitrogenContent" xml:space="preserve">
+    <value>Resets the nitrogen content for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetNitrogenFixation" xml:space="preserve">
+    <value>Resets the nitrogen fixation percentage of all crops (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetPercentageReturns" xml:space="preserve">
+    <value>Resets the percentage returns for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetPerennialDefaults" xml:space="preserve">
+    <value>Resets the perennial defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetSoilProprties" xml:space="preserve">
+    <value>Resets the soil properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetTillageType" xml:space="preserve">
+    <value>Resets the tillage type for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetUserDefaults" xml:space="preserve">
+    <value>Resets the user defaults for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetWaterIrrigation" xml:space="preserve">
+    <value>Resets the irrigation properties for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetYield" xml:space="preserve">
+    <value>Resets yield for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetAmountOfBlendedProduct" xml:space="preserve">
+    <value>Resets the amount of blended product for each crop (in each year) to the default valu</value>
+  </data>
+  <data name="MessageResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
+    <value>Resets the Enteric Methane emission rate for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetAnnualManureMethaneEmissionRate" xml:space="preserve">
+    <value>Resets the manure methane emission rate for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetAvailableSoilTypes" xml:space="preserve">
+    <value>Resets the soil types for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetBlendData" xml:space="preserve">
+    <value>Resets the blend data for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetDefaultEmissionFactors" xml:space="preserve">
+    <value>Resets the default emission factors for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetDefaultSoilForField" xml:space="preserve">
+    <value>Resets the soil for field to the default value</value>
+  </data>
+  <data name="MessageResetFeedingActivityCoefficient" xml:space="preserve">
+    <value>Resets the feeding activity coefficient for each animal group (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetFertilizerApplicationMethod" xml:space="preserve">
+    <value>Resets the fertilizer application method for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetLivestockCoefficientSheep" xml:space="preserve">
+    <value>Resets the livestock coefficient for sheep (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetManureApplicationMethod" xml:space="preserve">
+    <value>Resets the manure application method for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetManureComposition" xml:space="preserve">
+    <value>Resets the manure composition for each animal group (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetManureExcretionRate" xml:space="preserve">
+    <value>Resets the manure excretion rate for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetManureMineralizationFractions" xml:space="preserve">
+    <value>Resets the manure mineralization fractions for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetMethaneProducingCapacityOfManure" xml:space="preserve">
+    <value>Resets the methane producing capacity of manure for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetMilkProduction" xml:space="preserve">
+    <value>Resets the milk production for each animal group (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetPastureUtilization" xml:space="preserve">
+    <value>Resets the utilization for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetPhosphorusFertilizerRate" xml:space="preserve">
+    <value>Resets the phosphorus fertilizer rate for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetVolatileSoildsExcretion" xml:space="preserve">
+    <value>Resets the volatile solids excretion for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetYield|ForAllYears" xml:space="preserve">
+    <value>Resets the yield for each crop (in each year) to the default value</value>
+  </data>
+  <data name="MessageResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
+    <value>Resets the ammonia emission factor for housing for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Resets the ammonia emission factor for land application for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
+    <value>Resets the ammonia emission factor for manure storage for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetBarnTemperature" xml:space="preserve">
+    <value>Resets the barn temperature for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetBaselineCoefficient" xml:space="preserve">
+    <value>Resets the baseline coefficient for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetBeddingMaterial" xml:space="preserve">
+    <value>Resets the bedding material for each animal group (for each year) to the default value</value>
+  </data>
+  <data name="MessageResetBeddingMaterialRate" xml:space="preserve">
+    <value>Resets the bedding material rate for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetDailyTanExcretion" xml:space="preserve">
+    <value>Resets the daily tan excretion for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetGainCoefficient" xml:space="preserve">
+    <value>Resets the gain coefficient for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetLeachingFraction" xml:space="preserve">
+    <value>Resets the leaching fraction for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="MessageResetNitrogenExcretionRate" xml:space="preserve">
+    <value>Resets the nitrogen excretion rate for each animal group (for management period) to the default value</value>
   </data>
 </root>

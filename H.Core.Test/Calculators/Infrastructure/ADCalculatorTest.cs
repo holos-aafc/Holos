@@ -196,7 +196,7 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             _managementPeriod1.ManureDetails.StateType = ManureStateType.DeepBedding;
 
-            var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1});
+            var results = _sut.GetStoredManureFlowRate(_component, _day1Emissions, new ADManagementPeriodViewItem() {ManagementPeriod = _managementPeriod1}, new GroupEmissionsByDay());
 
             Assert.AreEqual(0.07, results.VolatileSolidsFlowOfSubstrate,0.00001);
         }

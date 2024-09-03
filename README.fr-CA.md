@@ -5,8 +5,6 @@
 
 Holos est un logiciel de modélisation agricole intégré qui évalue les émissions de gaz à effet de serre (GES) en fonction des renseignements saisis pour une exploitation agricole donnée. Il vise surtout à mettre à l'essai diverses façons de réduire les émissions de GES produites par les exploitations agricoles. Le logiciel est offert gratuitement aux utilisateurs.
 
-Holos est un programme logiciel de modélisation agricole intégré qui évalue les émissions de gaz à effet de serre
-
 Les utilisateurs peuvent choisir les scénarios et les pratiques agricoles qui correspondent le mieux à leur exploitation, puis modifier les pratiques en question afin d'observer les effets sur les émissions de GES. Par exemple, il est possible d'effectuer des modifications comme un changement des aliments du bétail, une réduction du travail du sol ou l'ajout de plantes fourragères vivaces à la rotation de cultures.
 
 Une fois les renseignements entrés dans le logiciel, Holos évalue les émissions de dioxyde de carbone, d'oxyde nitreux et de méthane issues de la fermentation entérique et de l'utilisation du fumier, des systèmes de culture et de la consommation d'énergie. La séquestration du carbone et les pertes causées par les plantations linéaires d'arbres et les changements dans l'utilisation et la gestion des terres sont aussi évalués. On obtient ainsi une estimation des émissions de GES pour l'ensemble de l'exploitation agricole, ce qui peut aider l'utilisateur à déterminer des moyens de réduire les émissions produites par son exploitation.
@@ -49,6 +47,12 @@ L'interface graphique de Holos 4 peut être téléchargée et utilisée à parti
 *Notez que l'interface graphique Holos 4 n'est pas open source pour le moment.*
 
 Une version d'interface de ligne de commande (CLI) de Holos est disponible <a href="https://agriculture.canada.ca/holos/cli/setup.exe">à ce lien</a>.
+
+La version 3 de Holos est également disponible en téléchargement. Veuillez noter que la version 3 n'est plus prise en charge et qu'elle est incluse ici uniquement à des fins éducatives. La version 3 est fournie telle quelle uniquement.
+
+<a href="https://github.com/holos-aafc/Holos/raw/d3a4f26d61f98520caa9e966507087a62e43db35/Holos%203.0.6%20Installer%20-%20English.zip" target="_blank">Holos v3 - Anglais (non pris en charge)</a>
+
+<a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - Français (non pris en charge)</a>
 
 # License
 

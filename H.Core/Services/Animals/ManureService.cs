@@ -6,6 +6,7 @@ using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Services.LandManagement;
@@ -101,6 +102,10 @@ namespace H.Core.Services.Animals
             var result = 0d;
 
             var totalVolumeOfManureCreated = this.GetTotalVolumeCreated(year, animalType);
+            if (totalVolumeOfManureCreated <=0)
+            {
+                return 0;
+            }
 
             result = amountExported / totalVolumeOfManureCreated;
 
@@ -207,6 +212,19 @@ namespace H.Core.Services.Animals
         public List<ManureApplicationTypes> GetValidManureApplicationTypes()
         {
             return _validManureApplicationTypes;
+        }
+
+        public List<AnimalType> GetValidManureForDigestorImports()
+        {
+            return new List<AnimalType>()
+            {
+                AnimalType.NotSelected,
+                AnimalType.Beef,
+                AnimalType.Dairy,
+                AnimalType.Swine,
+                AnimalType.Sheep,
+                AnimalType.Poultry
+            };
         }
 
         public List<AnimalType> GetValidManureTypes()
@@ -336,6 +354,16 @@ namespace H.Core.Services.Animals
 
             // Set the selected item to the first item in the updated list
             manureItemBase.ManureStateType = manureItemBase.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
+        }
+
+        public void SetValidManureStateTypes(ManureSubstrateViewItem manureSubstrateViewItem, Farm farm)
+        {
+            // Can't collect manure from a field and apply to another field or export it
+            var types = this.GetValidManureStateTypes(farm, manureSubstrateViewItem.SourceType, manureSubstrateViewItem.AnimalType).Where(x => x != ManureStateType.Pasture);
+            manureSubstrateViewItem.ValidManureStateTypesForSelectedTypeOfAnimalManure.UpdateItems(types);
+
+            // Set the selected item to the first item in the updated list
+            manureSubstrateViewItem.ManureStateType = manureSubstrateViewItem.ValidManureStateTypesForSelectedTypeOfAnimalManure.FirstOrDefault();
         }
 
         public double GetVolumeAvailableForExport(int year)
@@ -484,14 +512,13 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            var inputsFromLocalManure = 0d;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
+            var inputsFromLocalManure = 0d;
             if (field.HasLivestockManureApplicationsInYear(year))
             {
                 inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
@@ -507,7 +534,7 @@ namespace H.Core.Services.Animals
 
             var result = remaining + inputsFromImportedManure + inputsFromLocalManure;
 
-            return result / viewItem.Area;
+            return result / field.FieldArea;
         }
 
         public double GetTotalNitrogenCreated(int year, AnimalType animalType)
@@ -774,13 +801,16 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public DefaultManureCompositionData GetManureCompositionData(ManureItemBase manureItemBase, Farm farm)
+        public DefaultManureCompositionData GetManureCompositionData(
+            Farm farm, 
+            ManureStateType manureStateType,
+            AnimalType animalType)
         {
-            if (manureItemBase != null && farm != null)
+            if (farm != null && manureStateType != ManureStateType.NotSelected && animalType != AnimalType.NotSelected)
             {
                 var manureComposition = farm.GetManureCompositionData(
-                    manureStateType: manureItemBase.ManureStateType,
-                    animalType: manureItemBase.AnimalType);
+                    manureStateType: manureStateType,
+                    animalType: animalType);
 
                 // Make a copy
                 var mappedItem = _manureCompositionMapper.Map<DefaultManureCompositionData>(manureComposition);
