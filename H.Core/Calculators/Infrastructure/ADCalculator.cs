@@ -84,7 +84,7 @@ namespace H.Core.Calculators.Infrastructure
 
             // Equation 4.8.1-3
             substrateFlowRate.TotalSolidsFlowOfSubstrate =
-                substrateFlowRate.TotalMassFlowOfSubstrate * adManagementPeriod.TotalSolids;
+                substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriod.TotalSolids / 1000);
 
             // Equation 4.8.1-4
             substrateFlowRate.VolatileSolidsFlowOfSubstrate =
@@ -705,16 +705,14 @@ namespace H.Core.Calculators.Infrastructure
                     substrateFlow.FlowRate = substrateViewItemBase.FlowRate;
 
                     /* Equation 4.8.1-10
-                     * Equation 4.8.1-27
                      */
                     substrateFlow.TotalMassFlowOfSubstrate = substrateViewItemBase.FlowRate;
 
                     /* Equation 4.8.1-11
-                     * Equation 4.8.1-28
                      *
                      * Note: TS will be 0 for manure
                      */
-                    substrateFlow.TotalSolidsFlowOfSubstrate = (substrateViewItemBase.TotalSolids / 1000.0);
+                    substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (substrateViewItemBase.TotalSolids / 1000.0);
 
                     // Equation 4.8.1-12
                     substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;

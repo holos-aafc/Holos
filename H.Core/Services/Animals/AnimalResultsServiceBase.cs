@@ -779,6 +779,11 @@ namespace H.Core.Services.Animals
         public double CalculateDegreeKelvin(
             double degreesCelsius)
         {
+            if (degreesCelsius <= 0)
+            {
+                degreesCelsius = 1;
+            }
+
             return degreesCelsius + 273.15;
         }
 
@@ -1787,7 +1792,7 @@ namespace H.Core.Services.Animals
             double nitrogenFromBedding,
             double directN2ONEmission,
             double ammoniaLostFromHousingAndStorage,
-            double leachingN2ONEmission, 
+            double leachingN2ONEmission,
             double leachingNO3NEmission)
         {
             return (nitrogenExcretion + nitrogenFromBedding) -
@@ -2430,7 +2435,6 @@ namespace H.Core.Services.Animals
             dailyEmissions.EmissionFactorForLeaching = managementPeriod.ManureDetails.EmissionFactorLeaching;
             dailyEmissions.LeachingFraction = managementPeriod.ManureDetails.LeachingFraction;
         }
-
 
         /// <summary>
         /// Equation 4.3.2-8

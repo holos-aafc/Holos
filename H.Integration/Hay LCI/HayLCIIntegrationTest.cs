@@ -551,7 +551,7 @@ namespace H.Integration.Hay_LCI
                 fertilizerApplication.FertilizerBlendData.FertilizerBlend = blend;
                 fertilizerApplication.AmountOfBlendedProductApplied = rate;
 
-                _initializationService.InitializeBlendData(fertilizerApplication);
+                _initializationService.InitializeFertilizerBlendData(fertilizerApplication);
 
                 viewItem.FertilizerApplicationViewItems.Add(fertilizerApplication);
 

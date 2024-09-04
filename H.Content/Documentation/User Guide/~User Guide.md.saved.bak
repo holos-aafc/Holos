@@ -554,7 +554,7 @@ Under the “**Defaults**” header, there are three options available: **Farm D
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter4/figure4-1.png" alt="Figure4-1" width="142"/>
+ <img src="../../Images/UserGuide/en/chapter4/figure4-1.png" alt="Figure4-1" width=""/>
     <br>
     <em>
 		Figure 4.1: Defaults Options
@@ -675,22 +675,8 @@ The default data for this screen is based on information found in the algorithm 
 
   1. Select “**Reset Defaults**” 
   2. Here you will be able to reset to default some values for the **Crops** and **Animals** in your farms that you have saved. Defaults may be changed for current farm or for all farms.
-
-  <br>
-  <p align="center">
-   <img src="../../Images/UserGuide/en/chapter4/figure4-10.png" alt="Figure4-7" width="650"/>
-      <br>
-      <em>
-	  	Figure 4.7: Reset Defaults
-	  	<br>
-		A: Step 1. Select a if you would like to reset to default values for 'All Farms' or 'Selected Frams'.
-		<br>
-		B:Step 2. Select 'Toggle All On' if you want to reset all values in the list or 'Toggle All Off' if you want to undo all changes.
-  	  </em>
-  </p>
-  <br>
-
-  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the cahnges to the farm(s) and **Cancel** will undo any changes made to the tab.  
+  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the cahnges to the farm(s), **Apply All** when clicked will revert to default all values given in the tab, **Cancel** will undo any changes made to the tab.
+ 
 
 # Chapter 5 - Tools
 

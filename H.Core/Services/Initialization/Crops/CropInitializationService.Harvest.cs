@@ -28,16 +28,27 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
-        public void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem)
+        public void InitializeHarvestLoss(Farm farm)
+        {
+            foreach (var cropViewItem in farm.GetAllCropViewItems())
+            {
+                foreach (var harvestViewItem in cropViewItem.HarvestViewItems)
+                {
+                    this.InitializeHarvestLoss(farm, harvestViewItem);
+                }
+            }
+        }
+
+        public void InitializeHarvestLoss(Farm farm, HarvestViewItem harvestViewItem)
         {
             if (harvestViewItem.ForageActivity == ForageActivities.Hayed)
             {
                 // If item was hayed (there is a 35% loss by default)
-                harvestViewItem.Utilization = 100 - farm.Defaults.PercentageOfProductReturnedToSoilForPerennials;
+                harvestViewItem.HarvestLossPercentage = 35;
             }
             else
             {
-                harvestViewItem.Utilization = 65; // For silage... not sure what else to put here
+                harvestViewItem.HarvestLossPercentage = 65; // For silage... not sure what else to put here
             }
         }
 

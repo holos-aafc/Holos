@@ -16,12 +16,12 @@ namespace H.Core.Services.Initialization.Crops
          * -InitializeLumCMaxValues
          * -InitializePhosphorusFertilizerRate
          * -InitializeYieldForAllYears
-         * -InitializeBlendData
+         * -InitializeFertilizerBlendData
          * -InitializeAvailableSoilTypes
          * -InitializeDefaultSoilDataForField
          * -InitializeManureApplicationMethod
          * -InitializeFertilizerApplicationMethod
-         * -InitializeUtilization
+         * -InitializeHarvestLoss
          */
 
 
@@ -94,7 +94,7 @@ namespace H.Core.Services.Initialization.Crops
         /// </summary>
         void InitializePhosphorusFertilizerRate(CropViewItem viewItem, Farm farm);
 
-        void InitializeBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem);
+        void InitializeFertilizerBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem);
 
         /// <summary>
         /// Determines the amount of N fertilizer required for the specified crop type and yield
@@ -205,11 +205,22 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes);
         void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
         void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem);
-        void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem);
+        void InitializeHarvestLoss(Farm farm, HarvestViewItem harvestViewItem);
         void InitializeLigninContent(Farm farm);
 
         void InitializeCoverCrops(IEnumerable<CropViewItem> viewItems);
 
         void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems);
+        void InitializeManureApplicationMethod(Farm farm);
+        void InitializeFertilizerBlendData(Farm farm);
+
+        /// <summary>
+        /// When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
+        /// </summary>
+        void InitializePhosphorusFertilizerRate(Farm farm);
+
+        void InitializeHarvestLoss(Farm farm);
+        void InitializeFertilizerApplicationMethod(Farm farm);
+        void InitializeDefaultSoilForField(Farm farm);
     }
 }

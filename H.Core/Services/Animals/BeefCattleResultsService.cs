@@ -762,7 +762,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 9.4-3
+        /// Equation 11.4.2-1
         /// </summary>
         /// <param name="averageDailyGain"></param>
         /// <param name="numberOfAnimals"></param>

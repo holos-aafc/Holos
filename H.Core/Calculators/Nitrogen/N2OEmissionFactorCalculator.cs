@@ -516,15 +516,6 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// Equation 2.5.2-20
         /// </summary>
@@ -532,9 +523,6 @@ namespace H.Core.Calculators.Nitrogen
         {
             return areasAndEmissionFactors.WeightedAverage(record => record.Value, record => record.Weight);
         }
-
-
-
 
         /// <summary>
         /// Combines total emissions for entire area of a field from each manure/digestate application into per hectare emissions
