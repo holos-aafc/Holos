@@ -113,7 +113,7 @@
       <Version>33.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Office.Interop.Excel">
-      <Version>15.0.4795.1000</Version>
+      <Version>15.0.4795.1001</Version>
     </PackageReference>
     <PackageReference Include="Moq">
       <Version>4.20.71</Version>
