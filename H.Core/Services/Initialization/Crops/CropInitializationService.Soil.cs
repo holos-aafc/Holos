@@ -38,10 +38,21 @@ namespace H.Core.Services.Initialization.Crops
             if (residueData != null)
             {
                 cropViewItem.LigninContent = residueData.LigninContent;
+                return;
             }
             else
             {
                 cropViewItem.LigninContent = 0.0;
+            }
+        }
+
+        public void InitializeDefaultSoilForField(Farm farm)
+        {
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                fieldSystemComponent.SoilDataAvailableForField.Clear();
+
+                this.InitializeDefaultSoilForField(farm, fieldSystemComponent);
             }
         }
 
@@ -69,6 +80,10 @@ namespace H.Core.Services.Initialization.Crops
                     }
                 }
             }
+        }
+
+        public void InitializeAvailableSoilTypes(Farm farm)
+        {
         }
 
         public void InitializeAvailableSoilTypes(Farm farm, FieldSystemComponent fieldSystemComponent)

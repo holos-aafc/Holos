@@ -31,8 +31,6 @@ namespace H.Core.Models.LandManagement.Fields
 
             // https://hayforks.com/blog/how-much-does-a-bale-of-hay-weigh
             this.BaleWeight = 500;
-
-            this.HarvestLossPercentage = 35;
         }
 
         #endregion

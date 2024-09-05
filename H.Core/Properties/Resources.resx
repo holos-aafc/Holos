@@ -5990,8 +5990,8 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelResetUserDefaults" xml:space="preserve">
     <value>Reset user defaults</value>
   </data>
-  <data name="LabelResetUtilization" xml:space="preserve">
-    <value>Reset pasture utilization</value>
+  <data name="LabelResetHarvestLoss" xml:space="preserve">
+    <value>Reset harvest loss</value>
   </data>
   <data name="LabelResetYieldsAllYears" xml:space="preserve">
     <value>Reset yields for all years</value>
@@ -6145,5 +6145,38 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="MessageResetNitrogenExcretionRate" xml:space="preserve">
     <value>Resets the nitrogen excretion rate for each animal group (for management period) to the default value</value>
+  </data>
+  <data name="TitleResetDefaultValues" xml:space="preserve">
+    <value>Reset default values</value>
+  </data>
+  <data name="LabelStepOneDefaultValues" xml:space="preserve">
+    <value>Select if you would like to apply defaults to all farms or only the selected farm.</value>
+  </data>
+  <data name="LabelAllFarms" xml:space="preserve">
+    <value>All farms</value>
+  </data>
+  <data name="LabelSelectedFarm" xml:space="preserve">
+    <value>Selected farm</value>
+  </data>
+  <data name="LabelStepTwoDefaultValues" xml:space="preserve">
+    <value>Select all buttons that you would like default values reset for.</value>
+  </data>
+  <data name="LabelToggleAllOff" xml:space="preserve">
+    <value>Toggle all off</value>
+  </data>
+  <data name="LabelToggleAllOn" xml:space="preserve">
+    <value>Toggle all on</value>
+  </data>
+  <data name="TitleResetDefaults" xml:space="preserve">
+    <value>Reset defaults</value>
+  </data>
+  <data name="LabelAnimals" xml:space="preserve">
+    <value>Animals</value>
+  </data>
+  <data name="LabelCrops" xml:space="preserve">
+    <value>Crops</value>
+  </data>
+  <data name="LabelDefaultResetWindow" xml:space="preserve">
+    <value>This window allows the user to reset the default values on crops and animals.</value>
   </data>
 </root>

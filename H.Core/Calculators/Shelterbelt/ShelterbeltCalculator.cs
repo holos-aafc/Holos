@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Transactions;
-using AutoMapper.Configuration.Conventions;
 using H.Core.Enumerations;
-using H.Core.Models;
 using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers.Shelterbelt;
 using H.Infrastructure;

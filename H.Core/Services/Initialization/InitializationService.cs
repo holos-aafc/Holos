@@ -182,9 +182,9 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializePhosphorusFertilizerRate(viewItem, farm);
         }
 
-        public void InitializeBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        public void InitializeFertilizerBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            _cropInitializationService.InitializeBlendData(fertilizerApplicationViewItem);
+            _cropInitializationService.InitializeFertilizerBlendData(fertilizerApplicationViewItem);
         }
 
         public double CalculateRequiredNitrogenFertilizer(Farm farm, CropViewItem viewItem,
@@ -346,9 +346,9 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeAmountOfBlendedProduct(farm, viewItem, fertilizerApplicationViewItem);
         }
 
-        public void InitializeUtilization(Farm farm, HarvestViewItem harvestViewItem)
+        public void InitializeHarvestLoss(Farm farm, HarvestViewItem harvestViewItem)
         {
-            _cropInitializationService.InitializeUtilization(farm, harvestViewItem);
+            _cropInitializationService.InitializeHarvestLoss(farm, harvestViewItem);
         }
 
         public void InitializeLigninContent(Farm farm)
@@ -364,6 +364,36 @@ namespace H.Core.Services.Initialization
         public void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems)
         {
             _cropInitializationService.AssignCoverCropViewItemsDescription(viewItems);
+        }
+
+        public void InitializeManureApplicationMethod(Farm farm)
+        {
+            _cropInitializationService.InitializeManureApplicationMethod(farm);
+        }
+
+        public void InitializeFertilizerBlendData(Farm farm)
+        {
+            _cropInitializationService.InitializeFertilizerBlendData(farm);
+        }
+
+        public void InitializePhosphorusFertilizerRate(Farm farm)
+        {
+            _cropInitializationService.InitializePhosphorusFertilizerRate(farm);
+        }
+
+        public void InitializeHarvestLoss(Farm farm)
+        {
+            _cropInitializationService.InitializeHarvestLoss(farm);
+        }
+
+        public void InitializeFertilizerApplicationMethod(Farm farm)
+        {
+            _cropInitializationService.InitializeFertilizerApplicationMethod(farm);
+        }
+
+        public void InitializeDefaultSoilForField(Farm farm)
+        {
+            _cropInitializationService.InitializeDefaultSoilForField(farm);
         }
 
 

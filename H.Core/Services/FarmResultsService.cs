@@ -336,7 +336,15 @@ namespace H.Core.Services
 
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
+                // Need to restore the field GUID for grazing periods
                 var replicatedFieldSystemComponent = _fieldComponentHelper.Replicate(fieldSystemComponent);
+
+                var originalFieldGuid = fieldSystemComponent.Guid;
+                var replicatedFieldGuid = replicatedFieldSystemComponent.Guid;
+                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => x.HousingDetails.PastureLocation != null && x.HousingDetails.PastureLocation.Guid.Equals(originalFieldGuid)))
+                {
+                    managementPeriod.HousingDetails.PastureLocation.Guid = replicatedFieldGuid;
+                }
 
                 replicatedFarm.Components.Add(replicatedFieldSystemComponent);
             }
@@ -344,6 +352,7 @@ namespace H.Core.Services
             #endregion
 
             #region StageStates
+
             foreach (var fieldSystemDetailsStageState in farm.StageStates.OfType<FieldSystemDetailsStageState>().ToList())
             {
                 var stageState = new FieldSystemDetailsStageState();
@@ -362,6 +371,7 @@ namespace H.Core.Services
             #endregion
 
             #region GeographicData
+
             foreach (var soilData in farm.GeographicData.SoilDataForAllComponentsWithinPolygon)
             {
                 var replicatedSoilData = new SoilData();

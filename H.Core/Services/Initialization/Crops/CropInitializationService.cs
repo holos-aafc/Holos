@@ -20,6 +20,7 @@ using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Energy;
 using H.Core.Services.LandManagement;
 using AutoMapper;
+using H.Core.Services.Animals;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -43,6 +44,7 @@ namespace H.Core.Services.Initialization.Crops
         private readonly IrrigationService _irrigationService;
         private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
+        private readonly IManureService _manureService;
 
         private static readonly SmallAreaYieldProvider _smallAreaYieldProvider;
 
@@ -76,6 +78,7 @@ namespace H.Core.Services.Initialization.Crops
             _irrigationService = new IrrigationService();
             _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
             _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
+            _manureService = new ManureService();
 
             var soilDataMapper = new MapperConfiguration(x =>
             {
@@ -147,7 +150,7 @@ namespace H.Core.Services.Initialization.Crops
 
         #region Private Methods
 
-        private Table_7_Relative_Biomass_Information_Data GetResidueData(Farm farm, CropViewItem viewItem)
+        private Table_7_Relative_Biomass_Information_Data  GetResidueData(Farm farm, CropViewItem viewItem)
         {
             var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
             var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);

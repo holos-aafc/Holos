@@ -42,7 +42,18 @@ namespace H.Core.Services.Initialization.Crops
             return syntheticFertilizerApplied;
         }
 
-        public void InitializeBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        public void InitializeFertilizerBlendData(Farm farm)
+        {
+            foreach (var cropViewItem in farm.GetAllCropViewItems())
+            {
+                foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
+                {
+                    this.InitializeFertilizerBlendData(fertilizerApplicationViewItem);
+                }
+            }
+        }
+
+        public void InitializeFertilizerBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var data = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
             if (data != null)
@@ -58,6 +69,17 @@ namespace H.Core.Services.Initialization.Crops
                 fertilizerApplicationViewItem.FertilizerBlendData.PercentageSulphur = data.PercentageSulphur;
                 fertilizerApplicationViewItem.FertilizerBlendData.ApplicationEmissions = data.ApplicationEmissions;
                 fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate = data.CarbonDioxideEmissionsAtTheGate;
+            }
+        }
+
+        /// <summary>
+        /// When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
+        /// </summary>
+        public void InitializePhosphorusFertilizerRate(Farm farm)
+        {
+            foreach (var cropViewItem in farm.GetAllCropViewItems())
+            {
+               this.InitializePhosphorusFertilizerRate(cropViewItem, farm);
             }
         }
 
@@ -115,6 +137,19 @@ namespace H.Core.Services.Initialization.Crops
             var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100));
 
             return requiredAmountOfProduct;
+        }
+
+        public void InitializeManureApplicationMethod(Farm farm)
+        {
+            var validManureAppliciationTypes = _manureService.GetValidManureApplicationTypes();
+
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+                {
+                    this.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureAppliciationTypes);
+                }
+            }
         }
 
         public void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes)
@@ -175,6 +210,17 @@ namespace H.Core.Services.Initialization.Crops
                 manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validManureApplicationTypes);
 
                 manureApplicationViewItem.ManureApplicationMethod = validManureApplicationTypes.FirstOrDefault();
+            }
+        }
+
+        public void InitializeFertilizerApplicationMethod(Farm farm)
+        {
+            foreach (var cropViewItem in farm.GetAllCropViewItems())
+            {
+                foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
+                {
+                    this.InitializeFertilizerApplicationMethod(cropViewItem, fertilizerApplicationViewItem);
+                }
             }
         }
 

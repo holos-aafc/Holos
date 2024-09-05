@@ -22,17 +22,9 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             Farm farm)
         {
-            var province = farm.DefaultSoilData.Province;
-            var residueData = this.GetResidueData(farm, viewItem);
-            if (residueData != null)
+            if (viewItem.CropType.IsAnnual())
             {
-                if (residueData.TillageTypeTable.ContainsKey(province))
-                {
-                    var tillageTypeForProvince = residueData.TillageTypeTable[province];
-
-                    viewItem.TillageType = tillageTypeForProvince;
-                    viewItem.PastTillageType = tillageTypeForProvince;
-                }
+                viewItem.TillageType = TillageType.Reduced;
             }
 
             if (viewItem.CropType.IsPerennial())

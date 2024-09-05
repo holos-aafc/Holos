@@ -43,14 +43,11 @@ namespace H.Core.Services.Initialization.Crops
         {
             if (farm != null)
             {
-                foreach (var stateStage in farm.StageStates.OfType<FieldSystemDetailsStageState>().ToList())
+                foreach (var viewItem in farm.GetAllCropViewItems())
                 {
-                    foreach (var cropViewItem in stateStage.DetailsScreenViewCropViewItems)
-                    {
-                        var residueData = this.GetResidueData(farm, cropViewItem);
+                    var residueData = this.GetResidueData(farm, viewItem);
 
-                        this.InitializeMoistureContent(residueData, cropViewItem);
-                    }
+                    this.InitializeMoistureContent(residueData, viewItem);
                 }
             }
         }

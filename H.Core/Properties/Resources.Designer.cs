@@ -8109,6 +8109,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All farms.
+        /// </summary>
+        public static string LabelAllFarms {
+            get {
+                return ResourceManager.GetString("LabelAllFarms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of C from applied digestate.
         /// </summary>
         public static string LabelAmountOfCFromDigestate {
@@ -8213,6 +8222,15 @@ namespace H.Core.Properties {
         public static string LabelAmountOfStrawReturnedToSoil {
             get {
                 return ResourceManager.GetString("LabelAmountOfStrawReturnedToSoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Animals.
+        /// </summary>
+        public static string LabelAnimals {
+            get {
+                return ResourceManager.GetString("LabelAnimals", resourceCulture);
             }
         }
         
@@ -8991,6 +9009,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crops.
+        /// </summary>
+        public static string LabelCrops {
+            get {
+                return ResourceManager.GetString("LabelCrops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crude Fiber.
         /// </summary>
         public static string LabelCrudeFiber {
@@ -9050,6 +9077,15 @@ namespace H.Core.Properties {
         public static string LabelDefaultLossForSupplementalFeeding {
             get {
                 return ResourceManager.GetString("LabelDefaultLossForSupplementalFeeding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This window allows the user to reset the default values on crops and animals..
+        /// </summary>
+        public static string LabelDefaultResetWindow {
+            get {
+                return ResourceManager.GetString("LabelDefaultResetWindow", resourceCulture);
             }
         }
         
@@ -11196,6 +11232,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset harvest loss.
+        /// </summary>
+        public static string LabelResetHarvestLoss {
+            get {
+                return ResourceManager.GetString("LabelResetHarvestLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset harvest method.
         /// </summary>
         public static string LabelResetHarvestMethod {
@@ -11403,15 +11448,6 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset pasture utilization.
-        /// </summary>
-        public static string LabelResetUtilization {
-            get {
-                return ResourceManager.GetString("LabelResetUtilization", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reset volatile solids excretion.
         /// </summary>
         public static string LabelResetVolatileSolidsExcretion {
@@ -11498,6 +11534,15 @@ namespace H.Core.Properties {
         public static string LabelSeededGrassland {
             get {
                 return ResourceManager.GetString("LabelSeededGrassland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected farm.
+        /// </summary>
+        public static string LabelSelectedFarm {
+            get {
+                return ResourceManager.GetString("LabelSelectedFarm", resourceCulture);
             }
         }
         
@@ -11835,6 +11880,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select if you would like to apply defaults to all farms or only the selected farm..
+        /// </summary>
+        public static string LabelStepOneDefaultValues {
+            get {
+                return ResourceManager.GetString("LabelStepOneDefaultValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select all buttons that you would like default values reset for..
+        /// </summary>
+        public static string LabelStepTwoDefaultValues {
+            get {
+                return ResourceManager.GetString("LabelStepTwoDefaultValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage.
         /// </summary>
         public static string LabelStorage {
@@ -12002,6 +12065,24 @@ namespace H.Core.Properties {
         public static string LabelTimePeriod {
             get {
                 return ResourceManager.GetString("LabelTimePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle all off.
+        /// </summary>
+        public static string LabelToggleAllOff {
+            get {
+                return ResourceManager.GetString("LabelToggleAllOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle all on.
+        /// </summary>
+        public static string LabelToggleAllOn {
+            get {
+                return ResourceManager.GetString("LabelToggleAllOn", resourceCulture);
             }
         }
         
@@ -16299,6 +16380,24 @@ namespace H.Core.Properties {
         public static string TitlePesticide {
             get {
                 return ResourceManager.GetString("TitlePesticide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset defaults.
+        /// </summary>
+        public static string TitleResetDefaults {
+            get {
+                return ResourceManager.GetString("TitleResetDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset default values.
+        /// </summary>
+        public static string TitleResetDefaultValues {
+            get {
+                return ResourceManager.GetString("TitleResetDefaultValues", resourceCulture);
             }
         }
         
