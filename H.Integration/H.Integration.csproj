@@ -110,7 +110,7 @@
       <Version>2.0.5</Version>
     </PackageReference>
     <PackageReference Include="CsvHelper">
-      <Version>30.0.1</Version>
+      <Version>33.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Office.Interop.Excel">
       <Version>15.0.4795.1000</Version>
