@@ -2,6 +2,7 @@
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System;
+using System.Linq;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
@@ -125,24 +126,30 @@ namespace H.Core.Calculators.Carbon
             }
 
             var result = 0d;
+            var moistureContentFraction = currentYearViewItem.MoistureContentOfCrop;
+            var isGrazed = currentYearViewItem.HasGrazingViewItems;
+            if (isGrazed)
+            {
+                moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
+            }
+
             if (Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon)
             {
                 // If all product is returned to soil, use this calculation otherwise when 100% of product is returned, a doubling of yield will be used as in below calculation. 
                 // 100 % of product will be returned when crops are being used as 'green manure' e.g. lentils
-                result = (currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop) * currentYearViewItem.CarbonConcentration;
+                result = (currentYearViewItem.Yield) * (1 - moistureContentFraction) * currentYearViewItem.CarbonConcentration;
             }
             else
             {
                 var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
-                var isGrazed = currentYearViewItem.HasGrazingViewItems;
 
                 if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || (isCustomYieldAssignmentMethod && isGrazed))
                 {
-                    result = ((currentYearViewItem.Yield) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                    result = ((currentYearViewItem.Yield) * (1 - moistureContentFraction)) * currentYearViewItem.CarbonConcentration;
                 }
                 else
                 {
-                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - currentYearViewItem.MoistureContentOfCrop)) * currentYearViewItem.CarbonConcentration;
+                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - moistureContentFraction)) * currentYearViewItem.CarbonConcentration;
                 }
             }
 

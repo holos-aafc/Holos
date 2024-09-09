@@ -396,6 +396,12 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeDefaultSoilForField(farm);
         }
 
+        public void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
+            AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem)
+        {
+            _cropInitializationService.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent, animalGroup, cropViewItem);
+        }
+
 
         public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
         {

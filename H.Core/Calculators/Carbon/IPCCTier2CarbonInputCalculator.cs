@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -156,6 +157,12 @@ namespace H.Core.Calculators.Carbon
 
             var freshWeightOfYield = viewItem.Yield;
             var moistureContentOfCropAsPercentage = viewItem.MoistureContentOfCropPercentage;
+
+            if (viewItem.HasGrazingViewItems)
+            {
+                moistureContentOfCropAsPercentage = viewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage);
+            }
+
             var moistureContentFraction = moistureContentOfCropAsPercentage / 100.0;
             var moistureFractionDifference = 1 - moistureContentFraction;
 
