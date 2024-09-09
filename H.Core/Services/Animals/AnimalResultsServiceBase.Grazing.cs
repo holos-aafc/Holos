@@ -123,8 +123,7 @@ namespace H.Core.Services.Animals
             ManagementPeriod managementPeriod,
             GroupEmissionsByDay groupEmissionsByDay)
         {
-            if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture &&
-                managementPeriod.HousingDetails.PastureLocation != null)
+            if (managementPeriod.HousingDetails.HousingType == HousingType.Pasture)
             {
                 groupEmissionsByDay.TotalAmountOfNitrogenForDay = groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay;
 
