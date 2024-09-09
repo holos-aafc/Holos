@@ -56,6 +56,7 @@ Perennials,Rangeland (native),-9,-9,-9,0.0134,0.049,13,,,,,
 ,Seeded grassland,-9,-9,-9,-9,0.049,13,,,,,
 ,Forage for seed,-9,-9,-9,-9,0.049,13,,,,,
 ,Alfalfa,-9,-9,-9,0.0238,0.072,13,,,,,
+,Grazed pasture (all perennial types) (7),-9,-9,-9,-9,-9,80,,,,,
 ,,,,,,,
 ,,,,,,,
 ,,,,,,,"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a."
@@ -64,4 +65,5 @@ Perennials,Rangeland (native),-9,-9,-9,0.0134,0.049,13,,,,,
 ,,,,,,,4 Simple average of nitrogen content of aboveground and belowground. 
 ,,,,,,,5 Nitrogen content of aboveground assumed to represent all residue.
 ,,,,,,,6 Value is an average of N fixing and non-N fixing grasses. 
+,,,,,,,7 Approximate mid-point of values from www.ontario.ca (75% MC in dry year, 80% MC in normal year, 85% MC in wet year), madbarn.ca (70-80% MC) and fieldcropnews.com (70-85% MC)
 ,,,,,,,"Notes: Uncertainty is assumed to be ±75% for the N content estimates and ±50% for the lignin content estimates, expressed as 95% confidence intervals."
