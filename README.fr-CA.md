@@ -54,6 +54,10 @@ La version 3 de Holos est également disponible en téléchargement. Veuillez no
 
 <a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - Français (non pris en charge)</a>
 
+# Changelog
+
+A table containing information about changes made can be found at <a href="https://github.com/holos-aafc/Holos/blob/main/Changelog.md" target="_blank">Changelog.md</a>.
+
 # License
 
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la licence <a href="https://github.com/holos-aafc/Holos/blob/main/LICENSE" target="_blank">GPLv3</a>.
