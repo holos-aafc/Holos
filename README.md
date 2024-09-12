@@ -74,7 +74,7 @@ Holos version 3 is also available to download. Note that version 3 is no longer 
 
 # Changelog
 
-A table containing information about changes made can be found at <a href="https://github.com/holos-aafc/Holos/blob/main/Changelog.md" target="_blank">Changelog.md</a>
+A table containing information about changes made can be found at <a href="https://github.com/holos-aafc/Holos/blob/main/Changelog.md" target="_blank">Changelog.md</a>.
 
 # License
 
