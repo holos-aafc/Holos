@@ -1,8 +1,6 @@
 | Date | Commit ID | Summary of changes |
 | -------- | ------- | ------- |
-| September 5, 2024 | [15a4d62](https://github.com/holos-aafc/Holos/commit/15a4d6237226b86242c4d2a1899de8939022c8fd) | Updates to table 38 provider |
-| September 5, 2024 | [cbc512c](https://github.com/holos-aafc/Holos/commit/cbc512c194967965f8fcd18499960b18381d6d55) | Updates to table 55 provider |
-| September 4, 2024 | [9baad4d](https://github.com/holos-aafc/Holos/commit/9baad4db5f56904a108db870245344aeee8e0a61) | Updates to Eq. 4.8.1-11 and 4.1.3-1 |
-| September 3, 2024 | [be55113](https://github.com/holos-aafc/Holos/commit/be55113bc33a678f72383c14ff736114cadfa7b0) | Updates to table 55 |
-| September 3, 2024 | [edb2bc4](https://github.com/holos-aafc/Holos/commit/edb2bc4fadcb88f61b7b9418d7b1b049611eba0a) | Updates to table 9 |
-| September 3, 2024 | [cfe954d](https://github.com/holos-aafc/Holos/commit/f2c8270e60f42b13fbb640d6e793c9ce3493fc8c) | Updates to table 7 |
+| July 17, 2024 | [15a4d62](https://github.com/holos-aafc/Holos/commit/15a4d6237226b86242c4d2a1899de8939022c8fd) | IPCC Tier 2 active pool decay rate check (value cannot be greater than 1) |
+| April 19, 2024 | [58d819e](https://github.com/holos-aafc/Holos/commit/58d819e6275ec9fa8ed40f5a3d759c3e521f225f) | Use Rye values for cover crop type 'RyeSecale' when looking up IPCC Tier 2 values |
+| April 18, 2024 | [2447fc0](https://github.com/holos-aafc/Holos/commit/2447fc0f16a37a7a7dcdcc55b516a2f466a4a08f) | Update Table 9 values for Tame grass, and Rangeland crop types |
+| April 18, 2024 | [fa6a60d](https://github.com/holos-aafc/Holos/commit/fa6a60deff7174f964ce56e76410221e8005f427) | Update Table 7 values to match Table 9 |
