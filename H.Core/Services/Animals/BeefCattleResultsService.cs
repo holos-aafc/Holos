@@ -395,7 +395,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
-            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight);
+            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight, animalType: managementPeriod.AnimalType);
 
             if (base.IsOverDmiMax(dailyEmissions))
             {
