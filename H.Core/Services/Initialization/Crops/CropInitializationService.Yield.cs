@@ -181,6 +181,7 @@ namespace H.Core.Services.Initialization.Crops
 
             // We call AssignSystemDefaults with the CropViewItem representing the grain crop to get its default values.
             this.InitializePercentageReturns(farm, grainCropViewItem);
+            this.InitializeBiomassCoefficients(grainCropViewItem, farm);
 
             // We specifically find the PlantCarbonInAgriculturalProduct of the grain crop as that is needed in the yield calculation.
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmCarbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem: null, currentYearViewItem: grainCropViewItem, farm: farm);

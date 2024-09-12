@@ -245,7 +245,6 @@ namespace H.Core.Models.Animals
         /// <returns>The <see cref="ManagementPeriod"/> that contains the given <see cref="DateTime"/>, or null if the <see cref="ManagementPeriod"/> doesn't exist</returns>
         public ManagementPeriod GetManagementPeriodByDate(DateTime dateTime)
         {
-
             var result = this.ManagementPeriods.OrderBy(managementPeriod => managementPeriod.Start).FirstOrDefault(managementPeriod => managementPeriod.Start <= dateTime && managementPeriod.End >= dateTime);
             if (result != null)
             {

@@ -650,7 +650,5 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         #endregion
-
-
     }
 }
