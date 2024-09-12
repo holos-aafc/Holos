@@ -308,6 +308,11 @@ namespace H.Core.Providers.Animals
                 return 0;
             }
 
+            if (animalType.IsYoungType())
+            {
+                return 0;
+            }
+
             if (animalType.IsBeefCattleType())
             {
                 if (beddingMaterialType == BeddingMaterialType.Straw)
