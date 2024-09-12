@@ -362,7 +362,6 @@ namespace H.Core.Services.Animals
                 entericMethaneEmissionRate: dailyEmissions.EntericMethaneEmissionRate,
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
-            // Equation 12.3.1-1
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntake(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake);
 
@@ -373,8 +372,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.TotalCarbonUptakeForGroup = base.CalculateDailyCarbonUptakeForGroup(
                 totalDailyDryMatterIntakeForGroup: dailyEmissions.DryMatterIntakeForGroup);
 
-            // Equation 12.3.1-5
-            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight);
+            dailyEmissions.DryMatterIntakeMax = base.CalculateDryMatterMax(finalWeightOfAnimal: managementPeriod.EndWeight, animalType: managementPeriod.AnimalType);
 
             if (base.IsOverDmiMax(dailyEmissions))
             {
