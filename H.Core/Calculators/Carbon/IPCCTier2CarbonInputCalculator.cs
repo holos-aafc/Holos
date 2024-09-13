@@ -66,7 +66,7 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
                 freshWeightOfYield: viewItem.Yield,
-                harvestIndex: harvestIndex,
+                harvestRatio: harvestIndex,
                 moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
                 percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
 
@@ -208,22 +208,33 @@ namespace H.Core.Calculators.Carbon
         /// Equation 2.2.2-3
         /// </summary>
         /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
-        /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
+        /// <param name="harvestRatio">The harvest index (kg DM ha^-1)</param>
         /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
         /// <param name="percentageOfStrawReturned"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
         public double CalculateAboveGroundResidueDryMatterExported(
             double freshWeightOfYield,
-            double harvestIndex,
+            double harvestRatio,
             double moistureContentOfCropAsPercentage,
             double percentageOfStrawReturned)
         {
-            if (harvestIndex <= 0)
+            if (harvestRatio <= 0)
             {
                 return 0;
             }
 
-            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (1 - (percentageOfStrawReturned / 100.0));
+            var moistureContentFraction = moistureContentOfCropAsPercentage / 100.0;
+            var percentageOfStrawFraction = percentageOfStrawReturned / 100.0;
+
+            var firstTerm = (freshWeightOfYield * (1 - moistureContentFraction)) / harvestRatio;
+            var secondTerm = (freshWeightOfYield * (1 - moistureContentFraction));
+            var thirdTerm = 1 - percentageOfStrawFraction;
+            var fourthTerm = (freshWeightOfYield * (1 - moistureContentFraction));
+            var fifthTerm = 1 - percentageOfStrawFraction;
+
+            var result = ((firstTerm - secondTerm) * (thirdTerm)) + ((fourthTerm * fifthTerm));
+
+            return result;
         }
 
         /// <summary>
