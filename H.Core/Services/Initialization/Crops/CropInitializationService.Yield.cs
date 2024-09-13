@@ -193,7 +193,7 @@ namespace H.Core.Services.Initialization.Crops
             // No defaults for any grass silages so we use SAD data
             if (silageCropViewItem.CropType == CropType.GrassSilage)
             {
-                this.InitializeYield(silageCropViewItem, farm);
+                this.InitializeYieldUsingSmallAreaData(silageCropViewItem, farm);
                 silageCropViewItem.CalculateWetWeightYield();
             }
         }

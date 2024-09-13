@@ -432,7 +432,7 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            if (currentYearViewItem.CropType.IsPerennial())
+            if (currentYearViewItem.CropType.IsPerennial() || currentYearViewItem.CropType == CropType.GrassSilage)
             {
                 return this.CalculateCarbonInputFromRootsForPerennials(
                     previousYearViewItem: previousYearViewItem,
@@ -487,7 +487,7 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            if (currentYearViewItem.CropType.IsPerennial())
+            if (currentYearViewItem.CropType.IsPerennial() || currentYearViewItem.CropType == CropType.GrassSilage)
             {
                 return this.CalculateCarbonInputFromExtrarootsForPerennials(
                     previousYearViewItem: previousYearViewItem,

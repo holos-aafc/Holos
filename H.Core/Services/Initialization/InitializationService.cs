@@ -91,7 +91,7 @@ namespace H.Core.Services.Initialization
                 this.InitializeDefaultEmissionFactors(farm);
 
                 //Table 38
-                this.InitializeAnnualManureMethaneEmissionRate(farm);
+                this.InitializeDailyManureMethaneEmissionRate(farm);
 
                 // Table 44
                 this.InitializeManureMineralizationFractions(farm);
@@ -403,9 +403,9 @@ namespace H.Core.Services.Initialization
         }
 
 
-        public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
+        public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {
-            _animalInitializationService.InitializeAnnualManureMethaneEmissionRate(farm);
+            _animalInitializationService.InitializeDailyManureMethaneEmissionRate(farm);
         }
 
         public void InitializeVolatileSolidsExcretion(Farm farm)
@@ -635,9 +635,9 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeManureCompositionData(farm);
         }
 
-        public void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod)
+        public void InitializeDailyManureMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
-            _animalInitializationService.InitializeAnnualManureMethaneEmissionRate(managementPeriod);
+            _animalInitializationService.InitializeDailyManureMethaneEmissionRate(managementPeriod);
         }
 
         public void InitializeVolatileSolids(Farm farm)
