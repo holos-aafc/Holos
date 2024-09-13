@@ -5882,8 +5882,8 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
     <value>Reset NH₃ emission factor (manure storage)</value>
   </data>
-  <data name="LabelResetAnnualManureMethaneEmissionRate" xml:space="preserve">
-    <value>Reset annual manure CH₄ emission rate</value>
+  <data name="LabelResetDailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Reset daily manure CH₄ emission rate</value>
   </data>
   <data name="LabelResetBarnTemperature" xml:space="preserve">
     <value>Reset barn temperature</value>
