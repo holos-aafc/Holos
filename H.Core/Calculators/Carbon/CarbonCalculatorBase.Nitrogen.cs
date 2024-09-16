@@ -131,6 +131,11 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// (kg N2O-N ha^-1)
         /// </summary>
+        public double N2O_NFromExportedCropResidues { get; set; }
+
+        /// <summary>
+        /// (kg N2O-N ha^-1)
+        /// </summary>
         public double N2O_NFromMineralization { get; set; }
 
         /// <summary>
@@ -381,6 +386,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.5-3
             // Equation 2.7.4-3
             // Not implemented.
+            this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(currentYearResults, farm);
 
             // Equation 2.6.5-4
             // Equation 2.7.4-4
@@ -742,7 +748,7 @@ namespace H.Core.Calculators.Carbon
 
         protected void CalculateIndirectEmissions(Farm farm, CropViewItem currentYearResults)
         {
-            var fractionLeach = nitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
+            var fractionLeach = icbmNitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
                 farm.GetGrowingSeasonPrecipitation(currentYearResults.Year),
                 farm.GetGrowingSeasonEvapotranspiration(currentYearResults.Year));
 

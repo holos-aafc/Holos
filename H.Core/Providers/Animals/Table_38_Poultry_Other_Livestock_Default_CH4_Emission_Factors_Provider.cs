@@ -48,7 +48,6 @@ namespace H.Core.Providers.Animals
 
             return 0;
 
-
             #region Footnotes
 
             /*

@@ -62,7 +62,7 @@ namespace H.Core.Providers.Climate
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.IndoorBarnTemperatures).ToList();
 
-            var dataRows = fileLines.Skip(2).Take(12);
+            var dataRows = fileLines.Skip(2).Take(10);
             foreach (var line in dataRows)
             {
                 var province = _provincesConverter.Convert(line[0]);

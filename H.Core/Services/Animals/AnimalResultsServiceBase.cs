@@ -28,13 +28,11 @@ namespace H.Core.Services.Animals
 
         private static readonly DietProvider _dietProvider;
 
-        protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider =
-            new Table_49_Electricity_Conversion_Defaults_Provider();
+        protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider = new Table_49_Electricity_Conversion_Defaults_Provider();
 
         protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _defaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
 
-        protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider =
-            new Table_19_Additive_Reduction_Factors_Provider();
+        protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new Table_19_Additive_Reduction_Factors_Provider();
 
         protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider
             _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
@@ -2068,15 +2066,29 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 12.3.1-5
+        /// Equation 11.3.1-5
         /// </summary>
         /// <param name="finalWeightOfAnimal">Final weight of animal (kg animal^-1)</param>
-        /// <returns></returns>
-        public double CalculateDryMatterMax(double finalWeightOfAnimal)
+        /// <param name="animalType">The type of animal</param>
+        /// <returns>The maximum dry matter intake (kg head day^-1)</returns>
+        public double CalculateDryMatterMax(double finalWeightOfAnimal, AnimalType animalType)
         {
-            var intakeLimit = 2.25;
+            var intakeLimit = 0d;
 
-            var weightLimit = finalWeightOfAnimal * (intakeLimit / 100.0);
+            if (animalType.IsBeefCattleType())
+            {
+                intakeLimit = 0.0225;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                intakeLimit = 0.04;
+            }
+            else
+            {
+                intakeLimit = 1.0;
+            }
+
+            var weightLimit = finalWeightOfAnimal * intakeLimit;
 
             return weightLimit;
         }

@@ -38,6 +38,17 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
+        /// <summary>
+        /// Equation 2.6.2-8
+        /// </summary>
+        /// <param name="aboveGroundBiomassExported">Above ground biomass (kg DM) exported (Equation 2.2.2-3)</param>
+        /// <param name="nitrogenContentOfStraw">(kg kg^-1)</param>
+        /// <returns>Total N from exported crop residues</returns>
+        public double CalculateTotalNitrogenFromExportedResidues(double aboveGroundBiomassExported, double nitrogenContentOfStraw)
+        {
+            return aboveGroundBiomassExported * nitrogenContentOfStraw;
+        }
+
         #endregion
     }
 }

@@ -100,7 +100,14 @@ namespace H.Core.Providers.Climate
             {
                 foreach (KeyValuePair<int, EmissionTypes> item in dataLocation)
                 {
-                    var year = int.Parse(line[0]);
+                    var cellValue = 0;
+
+                    if (int.TryParse(line[0].ParseUntilOrDefault(), out cellValue) == false)
+                    {
+                        continue;
+                    }
+
+                    var year = cellValue;
                     // Gets the value from a specific column in the line. Column is based on dictionary key.
                     var radiativeForcingValue = double.Parse(line[item.Key], cultureInfo);
 

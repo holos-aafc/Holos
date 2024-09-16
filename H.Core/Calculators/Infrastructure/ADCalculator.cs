@@ -727,7 +727,7 @@ namespace H.Core.Calculators.Infrastructure
                     if (type == SubstrateType.ImportedManure)
                     {
                         // Equation 4.8.1-30
-                        substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.NitrogenContent;
+                        substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.NitrogenContent / 100.0);
                     }
 
                     // Equation 4.8.1-14
@@ -735,7 +735,7 @@ namespace H.Core.Calculators.Infrastructure
                     if (type == SubstrateType.ImportedManure)
                     {
                         // Equation 4.8.1-31
-                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.CarbonContent;
+                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.CarbonContent / 100.0);
                     }
 
                     result.Add(substrateFlow);

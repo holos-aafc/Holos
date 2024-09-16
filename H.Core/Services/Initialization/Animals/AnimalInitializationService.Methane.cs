@@ -13,18 +13,18 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
         /// </summary>
         /// <param name="farm"> Contains the <see cref="ManureDetails.DailyManureMethaneEmissionRate"/> that needs to be reinitialized to default</param>
-        public void InitializeAnnualManureMethaneEmissionRate(Farm farm)
+        public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {
             if (farm != null)
             {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
-                    this.InitializeAnnualManureMethaneEmissionRate(managementPeriod);
+                    this.InitializeDailyManureMethaneEmissionRate(managementPeriod);
                 }
             }
         }
 
-        public void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod)
+        public void InitializeDailyManureMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null && managementPeriod.ManureDetails != null)
             {

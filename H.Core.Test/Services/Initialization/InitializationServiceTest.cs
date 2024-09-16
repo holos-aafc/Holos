@@ -871,7 +871,7 @@ namespace H.Core.Test.Services.Initialization
 
             farm.Components.Add(deerComponent);
 
-            _initializationService.InitializeAnnualManureMethaneEmissionRate(farm);
+            _initializationService.InitializeDailyManureMethaneEmissionRate(farm);
             Assert.AreEqual(0.000603, deer.ManagementPeriods.First().ManureDetails.DailyManureMethaneEmissionRate);
         }
 
@@ -1008,7 +1008,7 @@ namespace H.Core.Test.Services.Initialization
             Farm farm = new Farm();
             try
             {
-                _initializationService.InitializeAnnualManureMethaneEmissionRate(farm);// passing farm with null dairyComponent
+                _initializationService.InitializeDailyManureMethaneEmissionRate(farm);// passing farm with null dairyComponent
             }
             catch (Exception ex)
             {

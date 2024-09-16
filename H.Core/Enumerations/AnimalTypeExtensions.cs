@@ -6,6 +6,22 @@ namespace H.Core.Enumerations
 {
     public static class AnimalTypeExtensions
     {
+        public static bool IsYoungType(this AnimalType animalType)
+        {
+            switch (animalType)
+            {
+                case AnimalType.BeefCalf:
+                case AnimalType.DairyCalves:
+                case AnimalType.SwinePiglets:
+                case AnimalType.WeanedLamb:
+                case AnimalType.Lambs:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public static bool IsBeefCattleType(this AnimalType animalType)
         {
             switch (animalType)

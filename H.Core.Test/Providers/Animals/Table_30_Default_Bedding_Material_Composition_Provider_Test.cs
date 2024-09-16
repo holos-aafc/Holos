@@ -24,13 +24,13 @@ namespace H.Core.Test.Providers.Animals
 
             value = _provider.GetDefaultBeddingRate(HousingType.HousedInBarn,
                                                     BeddingMaterialType.WoodChip,
-                                                    AnimalType.BeefCalf);
+                                                    AnimalType.Beef);
             Assert.AreEqual(5.0, value);
 
 
             value = _provider.GetDefaultBeddingRate(HousingType.TieStall,
                 BeddingMaterialType.StrawChopped,
-                AnimalType.DairyCalves);
+                AnimalType.Dairy);
             Assert.AreEqual(0.7, value);
 
             value = _provider.GetDefaultBeddingRate(HousingType.DryLot,

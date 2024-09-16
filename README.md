@@ -72,6 +72,9 @@ Holos version 3 is also available to download. Note that version 3 is no longer 
 
 <a href="https://github.com/holos-aafc/Holos/raw/main/Holos%203.0.6%20Installer%20-%20French.zip" target="_blank">Holos v3 - French (Unsupported)</a>
 
+# Changelog
+
+A table containing information about changes made can be found at <a href="https://github.com/holos-aafc/Holos/blob/main/Changelog.md" target="_blank">Changelog.md</a>.
 
 # License
 

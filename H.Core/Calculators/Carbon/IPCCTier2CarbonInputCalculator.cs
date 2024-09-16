@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -55,7 +57,6 @@ namespace H.Core.Calculators.Carbon
                 intercept: intercept,
                 moistureContentAsPercentage: viewItem.MoistureContentOfCropPercentage);
 
-
             if (viewItem.HarvestMethod == HarvestMethods.Swathing && farm.CropHasGrazingAnimals(viewItem))
             {
                 viewItem.PercentageOfProductYieldReturnedToSoil = (100 - viewItem.GetAverageUtilizationFromGrazingAnimals());
@@ -63,11 +64,7 @@ namespace H.Core.Calculators.Carbon
 
             viewItem.AboveGroundResidueDryMatter = this.CalculateAboveGroundResidueDryMatter(harvestIndex: harvestIndex, viewItem: viewItem);
 
-            viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(
-                freshWeightOfYield: viewItem.Yield,
-                harvestIndex: harvestIndex,
-                moistureContentOfCropAsPercentage: viewItem.MoistureContentOfCropPercentage,
-                percentageOfStrawReturned: viewItem.PercentageOfStrawReturnedToSoil);
+            viewItem.AboveGroundResidueDryMatterExported = this.CalculateAboveGroundResidueDryMatterExported(harvestRatio: harvestIndex, cropViewItem: viewItem);
 
             var fractionRenewed = viewItem.CropType.IsAnnual() ? 1 : 1 / viewItem.PerennialStandLength;
 
@@ -156,6 +153,12 @@ namespace H.Core.Calculators.Carbon
 
             var freshWeightOfYield = viewItem.Yield;
             var moistureContentOfCropAsPercentage = viewItem.MoistureContentOfCropPercentage;
+
+            if (viewItem.HasGrazingViewItems)
+            {
+                moistureContentOfCropAsPercentage = viewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage);
+            }
+
             var moistureContentFraction = moistureContentOfCropAsPercentage / 100.0;
             var moistureFractionDifference = 1 - moistureContentFraction;
 
@@ -200,23 +203,40 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.2.2-3
         /// </summary>
-        /// <param name="freshWeightOfYield">The yield of the harvest (wet/fresh weight) (kg ha^-1)</param>
-        /// <param name="harvestIndex">The harvest index (kg DM ha^-1)</param>
-        /// <param name="moistureContentOfCropAsPercentage">The moisture content of the yield (%)</param>
-        /// <param name="percentageOfStrawReturned"></param>
+        /// <param name="harvestRatio">The harvest index (kg DM ha^-1)</param>
+        /// <param name="cropViewItem"></param>
         /// <returns>Above ground residue dry matter for crop (kg ha^-1)</returns>
-        public double CalculateAboveGroundResidueDryMatterExported(
-            double freshWeightOfYield,
-            double harvestIndex,
-            double moistureContentOfCropAsPercentage,
-            double percentageOfStrawReturned)
+        public double CalculateAboveGroundResidueDryMatterExported(double harvestRatio,
+            CropViewItem cropViewItem)
         {
-            if (harvestIndex <= 0)
+            if (harvestRatio <= 0)
             {
                 return 0;
             }
 
-            return (((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)) / harvestIndex) - ((freshWeightOfYield * (1 - moistureContentOfCropAsPercentage / 100.0)))) * (1 - (percentageOfStrawReturned / 100.0));
+            var moistureContentFraction = cropViewItem.MoistureContentOfCropPercentage / 100.0;
+            var percentageOfStrawFraction = cropViewItem.PercentageOfStrawReturnedToSoil / 100.0;
+            var freshWeightOfYield = cropViewItem.Yield;
+
+            var percentageOfProductFraction = 0d;
+            if (cropViewItem.HasGrazingViewItems)
+            {
+                percentageOfProductFraction = 1.0 - ((cropViewItem.GrazingViewItems.Average(x => x.Utilization) / 100.0));
+            }
+            else
+            {
+                percentageOfProductFraction = cropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0;
+            }
+
+            var firstTerm = (freshWeightOfYield * (1 - moistureContentFraction)) / harvestRatio;
+            var secondTerm = (freshWeightOfYield * (1 - moistureContentFraction));
+            var thirdTerm = 1 - percentageOfStrawFraction;
+            var fourthTerm = (freshWeightOfYield * (1 - moistureContentFraction));
+            var fifthTerm = 1 - percentageOfProductFraction;
+
+            var result = ((firstTerm - secondTerm) * (thirdTerm)) + ((fourthTerm * fifthTerm));
+
+            return result;
         }
 
         /// <summary>

@@ -131,6 +131,10 @@ namespace H.Core.Providers.Carbon
                 }
 
                 residueData.CropType = cropTypeStringConverter.Convert(cropTypeColumn);
+                if (residueData.CropType == CropType.NotSelected)
+                {
+                    continue;
+                }
 
                 var irrigationTypeColumn = line[2].Trim();
                 if (irrigationTypeColumn.Equals("rainfed", StringComparison.InvariantCultureIgnoreCase))

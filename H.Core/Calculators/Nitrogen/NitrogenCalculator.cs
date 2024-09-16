@@ -53,6 +53,11 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
+        public double CalculateCropResidueExportNitrogen(CropViewItem cropViewItem)
+        {
+            return _ipccNitrogenInputCalculator.CalculateTotalNitrogenFromExportedResidues(cropViewItem.AboveGroundResidueDryMatterExported, cropViewItem.NitrogenContentInStraw);
+        }
+
         #endregion
     }
 }

@@ -580,10 +580,10 @@ namespace H.Core.Test.Calculators.Carbon
 
             var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, currentYearViewItem, farm);
 
-            // = [(1000) * (1 - 0.12)] * 0.45
+            // = [(1000) * (1 - 0.80)] * 0.45
             // = 1000 * 0.88 * 0.45
 
-            Assert.AreEqual(396, result, delta: 2);
+            Assert.AreEqual(450, result, delta: 2);
         }
 
         /// <summary>

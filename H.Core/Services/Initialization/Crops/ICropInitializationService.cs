@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Carbon;
 
@@ -221,6 +222,8 @@ namespace H.Core.Services.Initialization.Crops
 
         void InitializeHarvestLoss(Farm farm);
         void InitializeFertilizerApplicationMethod(Farm farm);
-        void InitializeDefaultSoilForField(Farm farm);
+        void InitializeDefaultSoilForField(Farm farm); 
+        void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
+            AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem);
     }
 }

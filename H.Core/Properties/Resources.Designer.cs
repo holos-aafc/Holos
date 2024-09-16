@@ -11070,15 +11070,6 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset annual manure CH₄ emission rate.
-        /// </summary>
-        public static string LabelResetAnnualManureMethaneEmissionRate {
-            get {
-                return ResourceManager.GetString("LabelResetAnnualManureMethaneEmissionRate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reset available soil types.
         /// </summary>
         public static string LabelResetAvailableSoilTypes {
@@ -11147,6 +11138,15 @@ namespace H.Core.Properties {
         public static string LabelResetCarbonConcentration {
             get {
                 return ResourceManager.GetString("LabelResetCarbonConcentration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset daily manure CH₄ emission rate.
+        /// </summary>
+        public static string LabelResetDailyManureMethaneEmissionRate {
+            get {
+                return ResourceManager.GetString("LabelResetDailyManureMethaneEmissionRate", resourceCulture);
             }
         }
         

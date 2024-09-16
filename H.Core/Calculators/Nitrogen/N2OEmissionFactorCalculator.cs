@@ -21,9 +21,9 @@ namespace H.Core.Calculators.Nitrogen
 
         private readonly Table_13_Soil_N2O_Emission_Factors_Provider _soilN2OEmissionFactorsProvider = new Table_13_Soil_N2O_Emission_Factors_Provider();
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
-        private readonly IICBMNitrogenInputCalculator _nitrogenInputCalculator;
         private readonly IManureService _manureService;
         private readonly IDigestateService _digestateService;
+        private readonly INitrogenCalculator _nitrogenCalculator;
 
         #endregion
 
@@ -50,9 +50,9 @@ namespace H.Core.Calculators.Nitrogen
             this.LivestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
             this.AnimalAmmoniaEmissionFactorProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
 
-            _nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
             _manureService = new ManureService();
             _digestateService = new DigestateService();
+            _nitrogenCalculator = new NitrogenCalculator();
 
             _animalService = new AnimalResultsService();
         }
@@ -650,7 +650,5 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         #endregion
-
-
     }
 }

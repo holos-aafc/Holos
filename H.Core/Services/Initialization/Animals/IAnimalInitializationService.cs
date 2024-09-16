@@ -14,7 +14,7 @@ namespace H.Core.Services.Initialization.Animals
         /// Reinitialize the DailyMethaneEmissionRate for each ManagementPeriod of each farm
         /// </summary>
         /// <param name="farm"> Contains the ManagementPeriod.ManureDetails.DailyMAnureMethaneEmissionRate that needs to be reinitialized to default</param>
-        void InitializeAnnualManureMethaneEmissionRate(Farm farm);
+        void InitializeDailyManureMethaneEmissionRate(Farm farm);
 
         /// <summary>
         /// Reinitialize each <see cref="ManagementPeriod"/>'s volatile solid excretion manure detail within a <see cref="Farm"/>
@@ -179,7 +179,7 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeGainCoefficient(Farm farm);
         void InitializeNitrogenExcretionRate(Farm farm);
         void InitializeManureCompositionData(Farm farm);
-        void InitializeAnnualManureMethaneEmissionRate(ManagementPeriod managementPeriod);
+        void InitializeDailyManureMethaneEmissionRate(ManagementPeriod managementPeriod);
         void InitializeVolatileSolids(Farm farm);
         List<DietAdditiveType> GetValidDietAdditiveTypes();
         void InitializeTotals(ManagementPeriod managementPeriod);

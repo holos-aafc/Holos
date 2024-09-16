@@ -85,7 +85,7 @@ namespace H.Core.Services.Initialization.Animals
             this.InitializeManureExcretionRate(farm);
             this.InitializeNitrogenExcretionRate(farm);
             this.InitializeManureCompositionData(farm);
-            this.InitializeAnnualManureMethaneEmissionRate(farm);
+            this.InitializeDailyManureMethaneEmissionRate(farm);
             this.InitializeAnnualEntericMethaneEmissionRate(farm);
             this.InitializeMethaneProducingCapacityOfManure(farm);
             this.InitializeMilkProduction(farm);

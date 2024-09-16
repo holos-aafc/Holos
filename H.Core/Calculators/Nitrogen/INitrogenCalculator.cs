@@ -6,5 +6,6 @@ namespace H.Core.Calculators.Nitrogen
     {
         double CalculateAboveGroundResidueNitrogen(CropViewItem cropViewItem);
         double CalculateBelowGroundResidueNitrogen(CropViewItem cropViewItem);
+        double CalculateCropResidueExportNitrogen(CropViewItem cropViewItem);
     }
 }
