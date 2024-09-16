@@ -169,6 +169,9 @@ Currently, in Holos V4, when the user ‘grows’ a crop such as fall rye or win
 ### 14. In the Holos interface, how can I represent a single field that is both hayed and grazed in the same year?
 Currently, Holos is not set up to permit haying and grazing on a single field in a given year. It is therefore suggested to split the field in half for each practice and then to combine the emissions estimates/soil C estimates for the two fields. For example: if you have a 12 ha field that is both hayed and grazed in the same year, this could be represented in the model as a hay field of 6 ha and a grazing pasture of 6 ha. For the purpose of maintaining the productivity, the 12 ha yields (or stocking densities) are applied to each 6 ha field (e.g., 50 bales harvested from 12 ha are now harvested from 6 ha instead). As a result, the 6 ha fields will be overly-productive/emitting, which is why the Holos emissions estimates/soil C estimates have to be understood as if they have taken place on a 12ha field. Thus, carbon gains and/or losses have to be scaled back to the original field size, e.g., if the C gained was 6000 kg per ha on the 6 ha field, it would only be 3000 kg per ha on the 12ha field due to the lower productivity on the larger area. On the emissions side, however, the emissions of both 6 ha fields can simply be added together.
 
+### 15. In the Holos interface, how can I represent multiple cuts of hay or silage on a field in a single year?
+When there are multiple cuts, the Yield entered should represent the total aboveground biomass yield from all cuts in the year, and the 'Product returned to soil' value (which typically represents the harvest loss for each harvesting operation) should be multiplied by the number of cuts to provide an estimate of the total harvest loss across all cuts in the year.
+
 ---
 
 # Carbon FAQ
