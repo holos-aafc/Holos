@@ -158,6 +158,11 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public double NO_NFromResidues { get; set; }
 
+        /// <summary>
+        /// (kg NO-N ha^-1)
+        /// </summary>
+        public double NO_NFromExportedCropResidues { get; set; }
+
         public double N2O_NFromExportedNitrogen { get; set; }
 
         /// <summary>
@@ -385,7 +390,6 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.5-3
             // Equation 2.7.4-3
-            // Not implemented.
             this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(currentYearResults, farm);
 
             // Equation 2.6.5-4
@@ -417,7 +421,7 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.6.5-9
             // Equation 2.7.4-9
-            // Not implemented.
+            this.NO_NFromExportedCropResidues = this.N2O_NFromExportedCropResidues * nORatio;
 
             // Equation 2.6.5-10
             // Equation 2.7.4-10
