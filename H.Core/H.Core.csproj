@@ -104,6 +104,7 @@
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Manure.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Digestate.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculator.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.CropResidues.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
