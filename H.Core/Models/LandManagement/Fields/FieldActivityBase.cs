@@ -79,6 +79,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// The proportion of pasture consumed by animals or the amount gathered from harvest (after considering harvest loss)
+        ///
+        /// (%)
         /// </summary>
         public double Utilization
         {

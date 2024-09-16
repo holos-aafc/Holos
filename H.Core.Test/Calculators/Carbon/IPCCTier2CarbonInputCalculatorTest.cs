@@ -19,18 +19,39 @@ namespace H.Core.Test.Calculators.Carbon
         #region Tests
 
         [TestMethod]
+        public void CalculateAboveGroundResidueDryMatterExportedTestWithGrazingAnimals()
+        {
+            const double harvestRatio = 1;
+
+            var cropViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                MoistureContentOfCropPercentage = 0,
+                PercentageOfStrawReturnedToSoil = 50,
+                PercentageOfProductYieldReturnedToSoil = 50,
+            };
+
+            cropViewItem.GrazingViewItems.Add(new GrazingViewItem() {Utilization = 75});
+
+            var result = _sut.CalculateAboveGroundResidueDryMatterExported(harvestRatio: harvestRatio, cropViewItem: cropViewItem);
+
+            Assert.AreEqual(750, result);
+        }
+
+        [TestMethod]
         public void CalculateAboveGroundResidueDryMatterExportedTest()
         {
-            const double freshWeightOfYield = 1000;
             const double harvestRatio = 1;
-            const double moistureContentOfCropAsPercentage = 0;
-            const double percentageofStrawReturned = 50;
 
-            var result = _sut.CalculateAboveGroundResidueDryMatterExported(
-                freshWeightOfYield: freshWeightOfYield,
-                harvestRatio: harvestRatio,
-                moistureContentOfCropAsPercentage: moistureContentOfCropAsPercentage,
-                percentageOfStrawReturned: percentageofStrawReturned);
+            var cropViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                MoistureContentOfCropPercentage = 0,
+                PercentageOfStrawReturnedToSoil = 50,
+                PercentageOfProductYieldReturnedToSoil = 50,
+            };
+
+            var result = _sut.CalculateAboveGroundResidueDryMatterExported(harvestRatio: harvestRatio, cropViewItem: cropViewItem);
 
             Assert.AreEqual(500, result);
         }
@@ -38,16 +59,17 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void CalculateAboveGroundResidueDryMatterExportedTestAllStraw()
         {
-            const double freshWeightOfYield = 1000;
             const double harvestRatio = 1;
-            const double moistureContentOfCropAsPercentage = 0;
-            const double percentageofStrawReturned = 100;
 
-            var result = _sut.CalculateAboveGroundResidueDryMatterExported(
-                freshWeightOfYield: freshWeightOfYield,
-                harvestRatio: harvestRatio,
-                moistureContentOfCropAsPercentage: moistureContentOfCropAsPercentage,
-                percentageOfStrawReturned: percentageofStrawReturned);
+            var cropViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                MoistureContentOfCropPercentage = 0,
+                PercentageOfStrawReturnedToSoil = 100,
+                PercentageOfProductYieldReturnedToSoil = 100,
+            };
+
+            var result = _sut.CalculateAboveGroundResidueDryMatterExported(harvestRatio: harvestRatio, cropViewItem: cropViewItem);
 
             Assert.AreEqual(0, result);
         }
@@ -55,16 +77,17 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void CalculateAboveGroundResidueDryMatterExportedTestNoStraw()
         {
-            const double freshWeightOfYield = 1000;
             const double harvestRatio = 1;
-            const double moistureContentOfCropAsPercentage = 0;
-            const double percentageofStrawReturned = 0;
 
-            var result = _sut.CalculateAboveGroundResidueDryMatterExported(
-                freshWeightOfYield: freshWeightOfYield,
-                harvestRatio: harvestRatio,
-                moistureContentOfCropAsPercentage: moistureContentOfCropAsPercentage,
-                percentageOfStrawReturned: percentageofStrawReturned);
+            var cropViewItem = new CropViewItem()
+            {
+                Yield = 1000,
+                MoistureContentOfCropPercentage = 0,
+                PercentageOfStrawReturnedToSoil = 0,
+                PercentageOfProductYieldReturnedToSoil = 0,
+            };
+
+            var result = _sut.CalculateAboveGroundResidueDryMatterExported(harvestRatio: harvestRatio, cropViewItem: cropViewItem);
 
             Assert.AreEqual(1000, result);
         }
