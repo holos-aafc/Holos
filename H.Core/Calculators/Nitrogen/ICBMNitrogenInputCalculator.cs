@@ -188,7 +188,7 @@ namespace H.Core.Calculators.Nitrogen
             // Equation 2.5.6-8
             if (cropViewItem.CropType.IsPerennial())
             {
-                return (rootNitrogen * (cropViewItem.PercentageOfRootsReturnedToSoil / 100.0)) + exudateNitrogen;
+                return rootNitrogen + exudateNitrogen;
             }
 
             if (cropViewItem.CropType.IsRootCrop())
