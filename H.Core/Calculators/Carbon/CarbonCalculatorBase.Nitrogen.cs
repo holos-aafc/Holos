@@ -991,6 +991,7 @@ namespace H.Core.Calculators.Carbon
         protected void SumExportEmissions()
         {
             // Equation 2.6.9-22
+            this.CurrentYearResults.TotalDirectNitrousOxideFromCropExports = this.N2O_NFromExportedCropResidues;
         }
 
         protected void SumEmissions()

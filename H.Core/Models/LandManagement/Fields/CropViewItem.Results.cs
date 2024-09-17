@@ -141,6 +141,11 @@ namespace H.Core.Models.LandManagement.Fields
         public double TotalDirectNitrousOxideForArea { get; set; }
 
         /// <summary>
+        /// (kg N2O-N ha^-1)
+        /// </summary>
+        public double TotalDirectNitrousOxideFromCropExports { get; set; }
+
+        /// <summary>
         /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalNitrousOxideForArea { get; set; }
@@ -283,8 +288,6 @@ namespace H.Core.Models.LandManagement.Fields
         /// kg N ha^-1
         /// </summary>
         public double BelowGroundResidueNitrogenForCrop { get; set; }
-
-        
 
         /// <summary>
         /// kg N
