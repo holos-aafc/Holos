@@ -984,10 +984,13 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.8-10
             this.CurrentYearResults.TotalAmmoniaForArea = totalAmmoniaVolatilization * area;
 
-            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfSyntheticNitrogenForArea =
-                this.NH4FromSyntheticNitogenVolatilized * area;
-            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfOrganicNitrogenForArea =
-                this.NH4FromOrganicNitogenVolatilized * area;
+            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfSyntheticNitrogenForArea = this.NH4FromSyntheticNitogenVolatilized * area;
+            this.CurrentYearResults.IndirectAmmoniumEmissionsFromVolatilizationOfOrganicNitrogenForArea = this.NH4FromOrganicNitogenVolatilized * area;
+        }
+
+        protected void SumExportEmissions()
+        {
+            // Equation 2.6.9-22
         }
 
         protected void SumEmissions()
