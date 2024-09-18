@@ -129,6 +129,8 @@ namespace H.Core.Calculators.Carbon
         public double N2O_NFromResidues { get; set; }
 
         /// <summary>
+        /// Direct N2O-N emissions from crop reside exports
+        /// 
         /// (kg N2O-N ha^-1)
         /// </summary>
         public double N2O_NFromExportedCropResidues { get; set; }
@@ -991,7 +993,10 @@ namespace H.Core.Calculators.Carbon
         protected void SumExportEmissions()
         {
             // Equation 2.6.9-22
-            this.CurrentYearResults.TotalDirectNitrousOxideFromCropExports = this.N2O_NFromExportedCropResidues;
+            this.CurrentYearResults.TotalDirectN2ONFromCropExports = this.N2O_NFromExportedCropResidues;
+
+            // Equation 2.6.9-23
+            this.CurrentYearResults.TotalNONFromExportedCropResidues = this.NO_NFromExportedCropResidues;
         }
 
         protected void SumEmissions()
@@ -1000,6 +1005,7 @@ namespace H.Core.Calculators.Carbon
             this.SumNitricOxide();
             this.SumNitrateLeaching();
             this.SumAmmoniaVolatilization();
+            this.SumExportEmissions();
 
             // Equation 2.7.8-11
             this.CurrentYearResults.DenitrificationForArea = this.N2Loss * this.CurrentYearResults.Area;

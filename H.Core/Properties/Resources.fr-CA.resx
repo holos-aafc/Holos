@@ -5931,4 +5931,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="MessageResetNitrogenExcretionRate" xml:space="preserve">
     <value>Resets the nitrogen excretion rate for each animal group (for management period) to the default value</value>
   </data>
+  <data name="LabelTotalDirectN2ONFromCropResidueExports" xml:space="preserve">
+    <value>N2O-N From Exported Crop Residues</value>
+  </data>
 </root>

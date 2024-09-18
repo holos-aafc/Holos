@@ -41,6 +41,7 @@ namespace H.Core.Models
         private string _kilogramsN20NString;
         private string _kilogramsN20String;
         private string _kilogramsN2OPerHectareString;
+        private string _kilogramsN2ONPerHectareString;
         private string _kilogramsN2OPerFieldString;
         private string _kilogramsN2ONPerFieldString;
         private string _kilogramsNONPerFieldString;
@@ -850,6 +851,12 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsPerDayWetWeightString, value);
         }
 
+        public string KilogramsN2ONPerHectareString
+        {
+            get => _kilogramsN2ONPerHectareString;
+            set => SetProperty(ref _kilogramsN2ONPerHectareString, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -891,6 +898,7 @@ namespace H.Core.Models
                 KilogramPerHeadPerDayString = WrapString(Resources.KilogramPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.KilogramsN2ONPerKilogramN);
                 KilogramsN2OPerHectareString = WrapString(Resources.KilogramsN2OPerHectareString);
+                KilogramsN2ONPerHectareString = WrapString(Resources.KilogramsN2ONPerHectareString);
                 KilogramsNONPerHectareString = WrapString(Resources.KilogramsNONPerHectareString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.KilogramsNO3NPerHectareString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.KilogramsNH4NPerHectareString);
@@ -1013,6 +1021,7 @@ namespace H.Core.Models
                 KilogramPerHeadPerDayString = WrapString(Resources.PoundPerHeadPerDay);
                 KilogramsN2ONPerKilogramNString = WrapString(Resources.PoundsN2ONPerPoundN);
                 KilogramsN2OPerHectareString = WrapString(Resources.PoundsN2OPerAcreString);
+                KilogramsN2ONPerHectareString = WrapString(Resources.PoundsN2ONPerAcreString);
                 KilogramsNONPerHectareString = WrapString(Resources.PoundsNONPerAcreString);
                 KilogramsNO3NPerHectareString = WrapString(Resources.PoundsNO3NPerAcreString);
                 KilogramsNH4NPerHectareString = WrapString(Resources.PoundsNH4NPerAcreString);

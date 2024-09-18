@@ -12186,6 +12186,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N2O-N From Exported Crop Residues.
+        /// </summary>
+        public static string LabelTotalDirectN2ONFromCropResidueExports {
+            get {
+                return ResourceManager.GetString("LabelTotalDirectN2ONFromCropResidueExports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N2O-N_direct.
         /// </summary>
         public static string LabelTotalDirectNitrousOxide {

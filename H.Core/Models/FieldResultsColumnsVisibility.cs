@@ -65,6 +65,7 @@ namespace H.Core.Models
         private bool _totalDirectNitrousOxideForArea;
         private bool _directNitrousOxideEmissionsFromSyntheticNitrogenForArea;
         private bool _directNitrousOxideEmissionsFromCropResiduesForArea;
+        private bool _directNitrousOxideEmissionsFromExportedCropResidues;
         private bool _directNitrousOxideEmissionsFromMineralizedNitrogenForArea;
         private bool _directNitrousOxideEmissionsFromOrganicNitrogenForArea;
         private bool _totalIndirectNitrousOxideForArea;
@@ -540,6 +541,12 @@ namespace H.Core.Models
         {
             get => _slowPoolCarbon;
             set => SetProperty(ref _slowPoolCarbon, value);
+        }
+
+        public bool DirectNitrousOxideEmissionsFromExportedCropResidues
+        {
+            get => _directNitrousOxideEmissionsFromExportedCropResidues;
+            set => SetProperty(ref _directNitrousOxideEmissionsFromExportedCropResidues, value); 
         }
 
         #endregion

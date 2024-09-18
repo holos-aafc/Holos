@@ -6179,4 +6179,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelDefaultResetWindow" xml:space="preserve">
     <value>This window allows the user to reset the default values on crops and animals.</value>
   </data>
+  <data name="LabelTotalDirectN2ONFromCropResidueExports" xml:space="preserve">
+    <value>N2O-N From Exported Crop Residues</value>
+  </data>
 </root>
