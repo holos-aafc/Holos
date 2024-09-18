@@ -8,74 +8,6 @@ namespace H.Core.Calculators.Nitrogen
         #region Public Methods
 
         /// <summary>
-        /// Equation 2.5.6-1
-        /// </summary>
-        public double CalculateGrainNitrogenTotal(
-            double carbonInputFromAgriculturalProduct,
-            double nitrogenConcentrationInProduct)
-        {
-            var result = (carbonInputFromAgriculturalProduct / 0.45) * nitrogenConcentrationInProduct;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-2
-        /// </summary>
-        /// <param name="carbonInputFromProduct">Carbon input from product (kg ha^-1) </param>
-        /// <param name="nitrogenConcentrationInProduct">N concentration in the product (kg kg-1) </param>
-        public double CalculateNitrogenContentGrainReturnedToSoil(
-            double carbonInputFromProduct,
-            double nitrogenConcentrationInProduct)
-        {
-            var result = (carbonInputFromProduct / 0.45) * nitrogenConcentrationInProduct;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-3
-        /// </summary>
-        /// <param name="carbonInputFromStraw">Carbon input from straw (kg ha^-1)</param>
-        /// <param name="nitrogenConcentrationInStraw"></param>
-        public double CalculateNitrogenContentStrawReturnedToSoil(
-            double carbonInputFromStraw,
-            double nitrogenConcentrationInStraw)
-        {
-            var result = (carbonInputFromStraw / 0.45) * nitrogenConcentrationInStraw;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-4
-        /// </summary>
-        /// <param name="carbonInputFromRoots">Carbon input from roots (kg ha^-1)</param>
-        /// <param name="nitrogenConcentrationInRoots">N concentration in the roots (kg kg-1) </param>
-        public double CalculateNitrogenContentRootReturnedToSoil(
-            double carbonInputFromRoots,
-            double nitrogenConcentrationInRoots)
-        {
-            var result = (carbonInputFromRoots / 0.45) * nitrogenConcentrationInRoots;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Equation 2.5.6-5
-        /// </summary>
-        /// <param name="carbonInputFromExtraroots">Carbon input from extra-root material (kg ha^-1)</param>
-        /// <param name="nitrogenConcentrationInExtraroots">N concentration in the extra root (kg kg-1) (until known from literature, the same N concentration used for roots will be utilized)</param>
-        public double CalculateNitrogenContentExaduatesReturnedToSoil(
-            double carbonInputFromExtraroots,
-            double nitrogenConcentrationInExtraroots)
-        {
-            var result = (carbonInputFromExtraroots / 0.45) * nitrogenConcentrationInExtraroots;
-
-            return result;
-        }
-
-        /// <summary>
         /// Equation 2.5.5-5
         /// Equation 2.5.5-6
         /// </summary>
@@ -156,7 +88,6 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 2.5.6-7
-        /// Equation 2.5.6-8
         /// Equation 2.6.2-5
         /// Equation 2.7.2-4
         /// Equation 2.7.2-6

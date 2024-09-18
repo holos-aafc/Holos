@@ -256,6 +256,7 @@ namespace H.Core.Services.LandManagement
                 var mainCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
                 var mainCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
 
+                
                 mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
                 mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
             }
