@@ -87,8 +87,8 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.5.6-7
-        /// Equation 2.6.2-5
+        /// Equation 2.6.5-8
+        /// Equation 2.6.2-6
         /// Equation 2.7.2-4
         /// Equation 2.7.2-6
         /// Equation 2.7.2-8
@@ -117,6 +117,7 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Equation 2.5.6-8
+            // Equation 2.6.2-6
             if (cropViewItem.CropType.IsPerennial())
             {
                 return rootNitrogen + exudateNitrogen;
