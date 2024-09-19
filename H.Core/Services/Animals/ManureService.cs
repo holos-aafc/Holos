@@ -703,14 +703,25 @@ namespace H.Core.Services.Animals
 
             foreach (var manureExportViewItem in farm.ManureExportViewItems.Where(x => x.DateOfExport.Year == year))
             {
-                var nitrogenContent = 0d;
-                var amountOfManure = manureExportViewItem.Amount;
-                if (manureExportViewItem.DefaultManureCompositionData != null)
-                {
-                    nitrogenContent = manureExportViewItem.DefaultManureCompositionData.NitrogenContent;
-                }
+                var nitrogen = this.GetTotalNitrogenFromExportedManure(manureExportViewItem);
 
-                result += (amountOfManure * nitrogenContent);
+                result += nitrogen;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// (kg N)
+        /// </summary>
+        public double GetTotalNitrogenFromExportedManure(ManureExportViewItem exportViewItem)
+        {
+            var result = 0d;
+
+            var amountOfManure = exportViewItem.Amount;
+            if (exportViewItem.DefaultManureCompositionData != null)
+            {
+                result = amountOfManure * exportViewItem.DefaultManureCompositionData.NitrogenContent;
             }
 
             return result;

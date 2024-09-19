@@ -244,7 +244,7 @@ namespace H.Core.Calculators.Nitrogen
         ///
         /// (kg N2O-N)
         /// </summary>
-        public double CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(
+        public double CalculateTotalDirectN2ONFromExportedManure(
             double totalExportedManureNitrogen,
             double weightedEmissionFactor)
         {

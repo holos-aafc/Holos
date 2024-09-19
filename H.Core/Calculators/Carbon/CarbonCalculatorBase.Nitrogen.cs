@@ -405,10 +405,6 @@ namespace H.Core.Calculators.Carbon
 
             this.N2O_NFromOrganicNitrogenExcludeRemainingAmounts =
                 (this.OrganicPool * emissionFactorForOrganicNitrogen) + ((directN2ONFromLandAppliedManureExcludingRemaining + directN2ONFromLandAppliedDigestateExludingRemaining + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);
-
-            // Equation 2.6.5-6
-            // Equation 2.7.4-6
-            this.N2O_NFromExportedNitrogen = (N2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(farm, this.Year) / farm.GetTotalAreaOfFarm(false, this.Year));
         }
 
         protected void CalculateNitricOxide(double nORatio)

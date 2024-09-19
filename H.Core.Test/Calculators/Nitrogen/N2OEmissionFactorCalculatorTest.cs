@@ -189,7 +189,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var farm = base.GetTestFarm();
             farm.StageStates.Add(base.GetFieldStageState());
 
-            var result = _sut.CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(100, 0.5);
+            var result = _sut.CalculateTotalDirectN2ONFromExportedManure(100, 0.5);
 
             Assert.AreEqual(result, 50);
         }

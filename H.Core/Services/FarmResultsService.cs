@@ -18,6 +18,7 @@ using H.Core.Events;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Models.Results;
 using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
@@ -273,6 +274,23 @@ namespace H.Core.Services
             Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results for farm: '{farm.Name}' calculated. {farmResults.ToString()}");
 
             return farmResults;
+        }
+
+        public List<ManureExportResultViewItem> CalculateExportEmissions(Farm farm)
+        {
+            var result = new List<ManureExportResultViewItem>();
+
+            foreach (var manureExportViewItem in farm.ManureExportViewItems)
+            {
+                var manureExportResultItem = new ManureExportResultViewItem
+                {
+                    DateOfExport = manureExportViewItem.DateOfExport,
+                };
+
+                manureExportResultItem.N2ON = _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
+            }
+
+            return result;
         }
 
         public List<CropViewItem> CalculateFieldResults(Farm farm)
