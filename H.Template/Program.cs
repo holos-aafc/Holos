@@ -85,8 +85,8 @@ namespace H.Template
             _ipccTier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _fieldResultsService = new FieldResultsService(_icbmsoilCarbonCalculator, _ipccTier2SoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
             _animalService = new AnimalResultsService();
-            _componentResultsProcessor = new ComponentResultsProcessor(_storage, _timePeriodHelper, _fieldResultsService);
-            _farmResultsService = new FarmResultsService(_eventAggregator, _fieldResultsService, _adCalculator, _manureService, _animalService);
+            _componentResultsProcessor = new ComponentResultsProcessor(_storage, _timePeriodHelper, _fieldResultsService, _n2OEmissionFactorCalculator);
+            _farmResultsService = new FarmResultsService(_eventAggregator, _fieldResultsService, _adCalculator, _manureService, _animalService, _n2OEmissionFactorCalculator);
             _animalInitializationService = new AnimalInitializationService();
         }
 

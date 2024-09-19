@@ -50,7 +50,7 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object, _n2OEmissionFactorCalculator);
         }
 
         [TestCleanup]

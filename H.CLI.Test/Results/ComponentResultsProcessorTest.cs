@@ -51,7 +51,7 @@ namespace H.CLI.Test.Results
         public void TestInitialize()
         {
             storage.ApplicationData = new ApplicationData();
-            _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService);
+            _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
 
             var swineStarterGroup = new AnimalGroup()

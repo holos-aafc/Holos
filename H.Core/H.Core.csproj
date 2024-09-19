@@ -105,6 +105,7 @@
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Digestate.cs" />
     <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.CropResidues.cs" />
+    <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Exports.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
@@ -316,6 +317,7 @@
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureItemBase.cs" />
+    <Compile Include="Models\Results\ManureExportResultViewItem.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
     <Compile Include="Providers\AnaerobicDigestion\Table_46_Biogas_Methane_Production_CropResidue_Data.cs" />
     <Compile Include="Providers\Animals\IAnimalAmmoniaEmissionFactorProvider.cs" />

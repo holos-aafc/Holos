@@ -237,22 +237,7 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
-        /// <summary>
-        /// Equation 4.6.1-9
-        ///
-        /// (kg N2O-N)
-        /// </summary>
-        public double CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(Farm farm, int year)
-        {
-            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
 
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsByYear, farm);
-            var totalExportedManureNitrogen = _manureService.GetTotalNitrogenFromExportedManure(year, farm);
-
-            var emissions = this.CalculateTotalDirectN2ONFromExportedManureForFarmAndYear(totalExportedManureNitrogen, weightedEmissionFactor);
-
-            return emissions;
-        }
 
         /// <summary>
         /// Equation 4.6.1-9

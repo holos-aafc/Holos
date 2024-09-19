@@ -10,6 +10,7 @@ using AutoMapper;
 using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -45,10 +46,6 @@ namespace H.Core.Services
         private readonly IAnimalService _animalResultsService;
         private readonly IADCalculator _adCalculator;
 
-        private readonly IDietProvider _dietProvider = new DietProvider();
-        private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
-        private readonly Table_30_Default_Bedding_Material_Composition_Provider _defaultBeddingMaterialCompositionProvider = new Table_30_Default_Bedding_Material_Composition_Provider();
-
         private readonly IMapper _farmMapper;
         private readonly IMapper _defaultsMapper;
         private readonly IMapper _detailsScreenCropViewItemMapper;
@@ -61,13 +58,22 @@ namespace H.Core.Services
         private readonly IEventAggregator _eventAggregator;
 
         private readonly EconomicsCalculator _economicsCalculator;
-        private readonly UnitsOfMeasurementCalculator _unitsCalculator = new UnitsOfMeasurementCalculator();
+        private IN2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
 
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
+        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService, IN2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
+            if (n2OEmissionFactorCalculator != null)
+            {
+                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator; 
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
+            }
+
             if (animalService != null)
             {
                 _animalResultsService = animalService;

@@ -25,6 +25,7 @@ namespace H.Core.Emissions.Results
         private ObservableCollection<EconomicsResultsViewItem> _economicsResultsViewItems;
         private ObservableCollection<CropViewItem> _finalFieldResultViewItems;
         private ObservableCollection<DigestorDailyOutput> _anaerobicDigestorResults;
+        private ObservableCollection<ManureExportResultViewItem> _manureExportResultsViewItems;
 
         private double _economicsProfit;
 
@@ -38,6 +39,7 @@ namespace H.Core.Emissions.Results
             this.EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
             this.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
             this.AnaerobicDigestorResults = new ObservableCollection<DigestorDailyOutput>();
+            this.ManureExportResultsViewItems = new ObservableCollection<ManureExportResultViewItem>();
         }
 
         #endregion
@@ -79,7 +81,6 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _farm, value);
         }
 
-        /// <summary>
         /// <summary>
         /// The total emissions for the entire farm !!!
         ///
@@ -371,6 +372,12 @@ namespace H.Core.Emissions.Results
         {
             get => _anaerobicDigestorResults;
             set => SetProperty(ref _anaerobicDigestorResults, value);
+        }
+
+        public ObservableCollection<ManureExportResultViewItem> ManureExportResultsViewItems
+        {
+            get => _manureExportResultsViewItems;
+            set => SetProperty(ref _manureExportResultsViewItems, value);
         }
 
         #endregion
