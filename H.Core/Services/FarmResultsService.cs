@@ -265,6 +265,8 @@ namespace H.Core.Services
             // Manure calculations - must be calculated after both field and animal results have been calculated.
             _manureService.Initialize(farm, animalResults);
 
+            farmResults.ManureExportResultsViewItems.AddRange(this.CalculateExportEmissions(farm));
+
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);
@@ -288,6 +290,8 @@ namespace H.Core.Services
                 };
 
                 manureExportResultItem.N2ON = _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
+
+                result.Add(manureExportResultItem);
             }
 
             return result;

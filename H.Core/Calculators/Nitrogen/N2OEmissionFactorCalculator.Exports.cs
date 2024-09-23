@@ -16,7 +16,7 @@ namespace H.Core.Calculators.Nitrogen
         /// (kg N2O-N ha^-1)
         /// </summary>
         /// <returns>Returns the total direct N2O emissions from exported manure (kg N2O-N ha^-1)</returns>
-        public double CalculateTotalDirectN2ONFromExportedManure(Farm farm, int year)
+        public double CalculateTotalDirectN2ONFromExportedManureByYear(Farm farm, int year)
         {
             var result = 0d;
 
@@ -34,9 +34,9 @@ namespace H.Core.Calculators.Nitrogen
         public double CalculateTotalDirectN2ONFromExportedManure(Farm farm, ManureExportViewItem manureExportViewItem)
         {
             var totalNitrogen = _manureService.GetTotalNitrogenFromExportedManure(manureExportViewItem);
-            var viewItemsByYear = farm.GetCropDetailViewItemsByYear(manureExportViewItem.DateOfExport.Year, false);
-            var weightedEmissionFactor = this.CalculateWeightedOrganicNitrogenEmissionFactor(viewItemsByYear, farm);
-            var emissionsForFarm = this.CalculateTotalDirectN2ONFromExportedManure(totalNitrogen, weightedEmissionFactor);
+            
+            var organicNitrogenEmissionFactor = this.CalculateOrganicNitrogenEmissionFactor(farm, manureExportViewItem.DateOfExport.Year);
+            var emissionsForFarm = this.CalculateTotalDirectN2ONFromExportedManure(totalNitrogen, organicNitrogenEmissionFactor);
             var result = emissionsForFarm / farm.GetTotalAreaOfFarm(false, manureExportViewItem.DateOfExport.Year);
 
             return result;
@@ -53,7 +53,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            result = this.CalculateTotalDirectN2ONFromExportedManure(farm, year) * farm.GetTotalAreaOfFarm(false, year);
+            result = this.CalculateTotalDirectN2ONFromExportedManureByYear(farm, year) * farm.GetTotalAreaOfFarm(false, year);
 
             return result;
         }

@@ -1,18 +1,8 @@
-﻿using H.Core.Emissions.Results;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Services.Animals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Windows.Media.Animation;
-using AutoMapper.Configuration.Annotations;
-using H.Core.Events;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Infrastructure;
@@ -246,9 +236,9 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateTotalDirectN2ONFromExportedManure(
             double totalExportedManureNitrogen,
-            double weightedEmissionFactor)
+            double organicNitrogenEmissionFactor)
         {
-            var result = totalExportedManureNitrogen * weightedEmissionFactor;
+            var result = totalExportedManureNitrogen * organicNitrogenEmissionFactor;
 
             return result;
         }
