@@ -53,6 +53,7 @@ namespace H.Core.Providers.Animals
             {
                 return new List<ManureStateType>()
                 {
+                    ManureStateType.Pasture,
                     ManureStateType.CompostedInVessel,
 
                     /*

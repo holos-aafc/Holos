@@ -9135,6 +9135,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crop residue exports.
+        /// </summary>
+        public static string LabelCropResidueExports {
+            get {
+                return ResourceManager.GetString("LabelCropResidueExports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crop residues before adjustment (N_CropResidues).
         /// </summary>
         public static string LabelCropResiduesBeforeAdjustment {

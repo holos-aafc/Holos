@@ -6344,4 +6344,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelManureExportedFromFarm" xml:space="preserve">
     <value>Manure exported from farm</value>
   </data>
+  <data name="LabelCropResidueExports" xml:space="preserve">
+    <value>Crop residue exports</value>
+  </data>
 </root>
