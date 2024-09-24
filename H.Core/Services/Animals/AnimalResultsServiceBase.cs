@@ -2353,7 +2353,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionRateFromHousingAndStorage = this.CalculateAmmoniaEmissionRateFromHousingAndStorage(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                rateOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                rateOfNitrogenAddedFromBedding: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized);
 
             dailyEmissions.TotalNitrogenLossesFromHousingAndStorage = this.CalculateTotalNitrogenLossFromHousingAndStorage(
