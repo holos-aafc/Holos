@@ -69,6 +69,12 @@ namespace H.Core.Calculators.Nitrogen
             _digestateService.Initialize(farm, results);
         }
 
+        public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
+        {
+            _manureService.Initialize(farm, animalResults);
+            _digestateService.Initialize(farm, animalResults);
+        }
+
         /// <summary>
         /// Equation 2.6.6-1
         /// Equation 2.6.6-2

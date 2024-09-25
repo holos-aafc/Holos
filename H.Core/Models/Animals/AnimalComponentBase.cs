@@ -20,6 +20,24 @@ namespace H.Core.Models.Animals
     /// </summary>
     public abstract class AnimalComponentBase : ComponentBase
     {
+        protected bool Equals(AnimalComponentBase other)
+        {
+            return base.Equals(other) && Equals(_groups, other._groups);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((AnimalComponentBase)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), _groups.GetHashCodeByItems());
+        }
+
         #region Fields
 
         private ObservableCollection<AnimalGroup> _groups;

@@ -83,6 +83,24 @@ namespace H.Core.Models.Animals
             this.SelectedDiet = new Diet();
         }
 
+        protected bool Equals(ManagementPeriod other)
+        {
+            return base.Equals(other) && Equals(_housingDetails, other._housingDetails);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((ManagementPeriod)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), _housingDetails);
+        }
+
         #endregion
 
         #region Properties
