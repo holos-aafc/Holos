@@ -32,23 +32,7 @@ namespace H.Core.Models
 {
     public partial class Farm : ModelBase
     {
-        protected bool Equals(Farm other)
-        {
-            return base.Equals(other) && Equals(Components, other.Components);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Farm)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(base.GetHashCode(), Components.GetHashCodeByItems());
-        }
+        
 
         #region Fields
 

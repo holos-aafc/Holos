@@ -290,46 +290,5 @@ namespace H.Core.Models.Animals
         }
 
         #endregion
-
-        #region Equality
-
-        protected bool Equals(HousingDetails other)
-        {
-            return base.Equals(other) && Equals(_pastureLocation, other._pastureLocation) && _housingType == other._housingType && _beddingMaterialType == other._beddingMaterialType && _grazingSystemType == other._grazingSystemType && _userDefinedBeddingRate.Equals(other._userDefinedBeddingRate) && _maintenanceCoefficientModifiedByTemperature.Equals(other._maintenanceCoefficientModifiedByTemperature) && _activityCeofficientOfFeedingSituation.Equals(other._activityCeofficientOfFeedingSituation) && _baselineMaintenanceCoefficient.Equals(other._baselineMaintenanceCoefficient) && _ammoniaEmissionFactorForHousing.Equals(other._ammoniaEmissionFactorForHousing) && _totalNitrogenKilogramsDryMatterForBedding.Equals(other._totalNitrogenKilogramsDryMatterForBedding) && _totalCarbonKilogramsDryMatterForBedding.Equals(other._totalCarbonKilogramsDryMatterForBedding) && _totalPhosphorusKilogramsDryMatterForBedding.Equals(other._totalPhosphorusKilogramsDryMatterForBedding) && _carbonToNitrogenRatioOfBeddingMaterial.Equals(other._carbonToNitrogenRatioOfBeddingMaterial) && _moistureContentOfBeddingMaterial.Equals(other._moistureContentOfBeddingMaterial) && _indoorHousingTemperature.Equals(other._indoorHousingTemperature) && _nameOfPastureLocation == other._nameOfPastureLocation && _useCustomIndoorHousingTemperature == other._useCustomIndoorHousingTemperature;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((HousingDetails)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = new HashCode();
-            hashCode.Add(base.GetHashCode());
-            hashCode.Add(_pastureLocation);
-            hashCode.Add((int)_housingType);
-            hashCode.Add((int)_beddingMaterialType);
-            hashCode.Add(_grazingSystemType);
-            hashCode.Add(_userDefinedBeddingRate);
-            hashCode.Add(_maintenanceCoefficientModifiedByTemperature);
-            hashCode.Add(_activityCeofficientOfFeedingSituation);
-            hashCode.Add(_baselineMaintenanceCoefficient);
-            hashCode.Add(_ammoniaEmissionFactorForHousing);
-            hashCode.Add(_totalNitrogenKilogramsDryMatterForBedding);
-            hashCode.Add(_totalCarbonKilogramsDryMatterForBedding);
-            hashCode.Add(_totalPhosphorusKilogramsDryMatterForBedding);
-            hashCode.Add(_carbonToNitrogenRatioOfBeddingMaterial);
-            hashCode.Add(_moistureContentOfBeddingMaterial);
-            hashCode.Add(_indoorHousingTemperature);
-            hashCode.Add(_nameOfPastureLocation);
-            hashCode.Add(_useCustomIndoorHousingTemperature);
-            return hashCode.ToHashCode();
-        }
-
-        #endregion
     }
 }

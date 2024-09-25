@@ -21,24 +21,6 @@ namespace H.Core.Models.Animals
     /// </summary>
     public class AnimalGroup : ModelBase
     {
-        protected bool Equals(AnimalGroup other)
-        {
-            return base.Equals(other) && Equals(ManagementPeriods, other.ManagementPeriods);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((AnimalGroup)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(base.GetHashCode(), ManagementPeriods.GetHashCodeByItems());
-        }
-
         #region Fields                              
 
         private AnimalType _groupType;
