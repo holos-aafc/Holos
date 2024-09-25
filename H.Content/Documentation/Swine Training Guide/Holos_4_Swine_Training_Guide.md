@@ -300,7 +300,7 @@ Adding animal components follows the exact same approach that was used for land 
 
 ## Farrow-to-Wean
 
-The farrow-to-wean component is divided into **three animal groups**, and each of these animal group is then divided into **a number of corresponding management (production) periods**. We will now enter information into each of these management period. 
+The farrow-to-wean component is divided into **four animal groups**, and each of these animal group is then divided into **a number of corresponding management (production) periods**. We will now enter information into each of these management period. 
 
 ### Gilts
 
@@ -430,7 +430,7 @@ Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned pigl
     
 25.  From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
-26. Information related to diet, housing and manure management is entered in the same manner as for the **"Weaned piglets Stage #2"** management period. We will leave the default dates 'January 21, 2024' to 'February 04, 2024' (16 days). Repeat steps 23 to 25, with the exception of selecting 'Nursery weaners (starter diet #2)'.
+26. Information related to diet, housing and manure management is entered in the same manner as for the **"Weaned piglets Stage #2"** management period. We will leave the default dates 'January 21, 2024' to 'February 6, 2024' (16 days). Repeat steps 23 to 25, with the exception of selecting 'Nursery weaners (starter diet #2)'.
 
 <br>
 
