@@ -7,6 +7,50 @@ namespace H.Core.Test.Models.LandManagement.Fields
     [TestClass]
     public class HarvestViewItemTest
     {
+        #region Tests
+
+        [TestMethod]
+        public void CalculateDryMatterOfBalesFiftyPercent()
+        {
+            var viewItem = new HarvestViewItem();
+            viewItem.MoistureContentAsPercentage = 50;
+            viewItem.BaleWeight = 1000;
+            viewItem.TotalNumberOfBalesHarvested = 1;
+
+            Assert.AreEqual(500, viewItem.AboveGroundBiomassDryWeight);
+        }
+
+        [TestMethod]
+        public void CalculateDryMatterOfBalesTwentyFivePercent()
+        {
+            var viewItem = new HarvestViewItem();
+            viewItem.MoistureContentAsPercentage = 25;
+            viewItem.BaleWeight = 1000;
+            viewItem.TotalNumberOfBalesHarvested = 1;
+
+            Assert.AreEqual(750, viewItem.AboveGroundBiomassDryWeight);
+        }
+
+        [TestMethod]
+        public void CalculateWetWeightOfBales()
+        {
+            var viewItem = new HarvestViewItem();
+            viewItem.BaleWeight = 1000;
+            viewItem.TotalNumberOfBalesHarvested = 1;
+
+            Assert.AreEqual(1000, viewItem.AboveGroundBiomass);
+        }
+
+        [TestMethod]
+        public void CalculateWetWeightOfTwoBales()
+        {
+            var viewItem = new HarvestViewItem();
+            viewItem.BaleWeight = 1000;
+            viewItem.TotalNumberOfBalesHarvested = 2;
+
+            Assert.AreEqual(2000, viewItem.AboveGroundBiomass);
+        }
+
         [TestMethod]
         public void BaleHasHasExpiredLifespanReturnsFalseForHayBales()
         {
@@ -57,6 +101,8 @@ namespace H.Core.Test.Models.LandManagement.Fields
             var result = viewItem.BaleHasExpiredLifespan();
 
             Assert.IsTrue(result);
-        }
+        } 
+
+        #endregion
     }
 }

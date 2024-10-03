@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
@@ -7,16 +8,13 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// Used on fields in the dry season to add forage for animals grazing on a field
     /// </summary>
-    public class HayImportViewItem : FieldActivityBase
+    public class HayImportViewItem : BaleActivityBase
     {
         #region Fields
 
         private DateTime _date;
         private ResourceSourceLocation _sourceOfBales;
-        private double _amount;
         private int _numberOfBales;
-        private double _moistureContentAsPercentage;
-        private double _baleWeight;
         private Guid _fieldSourceGuid;
 
         #endregion
@@ -26,6 +24,9 @@ namespace H.Core.Models.LandManagement.Fields
         public HayImportViewItem()
         {
             this.Date = DateTime.Now;
+
+            this.PropertyChanged -= OnPropertyChanged;
+            this.PropertyChanged += OnPropertyChanged;
         }
 
         #endregion
@@ -39,15 +40,6 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _date;
             set => SetProperty(ref _date, value);
-        }
-
-        /// <summary>
-        /// User can specify a dry matter amount
-        /// </summary>
-        public double Amount
-        {
-            get => _amount;
-            set => SetProperty(ref _amount, value);
         }
 
         /// <summary>
@@ -69,17 +61,6 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// When user imports bales, we need bale weight (wet weight)
-        /// 
-        /// (kg)
-        /// </summary>
-        public double BaleWeight
-        {
-            get => _baleWeight;
-            set => SetProperty(ref _baleWeight, value);
-        }
-
-        /// <summary>
         /// The field from where these bases came from (if sourced on farm).
         /// </summary>
         public Guid FieldSourceGuid
@@ -92,20 +73,26 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Public Methods
 
-        /// <summary>
-        /// Equation 12.1.1-1
-        /// </summary>
         public double GetTotalDryMatterWeightOfAllBales()
         {
-            return (this.BaleWeight * (1 - (this.MoistureContentAsPercentage / 100))) * this.NumberOfBales;
+            return (this.BaleWeight * (1 - (this.MoistureContentAsPercentage / 100.0))) * this.NumberOfBales;
         }
 
-        /// <summary>
-        /// Equation 12.1.1-2
-        /// </summary>
         public double GetTotalWetWeightOfAllBales()
         {
-            return this.GetTotalDryMatterWeightOfAllBales() * (1 + (this.MoistureContentAsPercentage / 100));
+            return this.GetTotalDryMatterWeightOfAllBales() * (1 + (this.MoistureContentAsPercentage / 100.0));
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(BaleWeight)) || e.PropertyName.Equals(nameof(MoistureContentAsPercentage)) || e.PropertyName.Equals(nameof(NumberOfBales)))
+            {
+                base.AboveGroundBiomassDryWeight = this.GetTotalWetWeightOfAllBales();
+            }
         }
 
         #endregion

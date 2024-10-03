@@ -6347,4 +6347,10 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelCropResidueExports" xml:space="preserve">
     <value>Crop residue exports</value>
   </data>
+  <data name="MenuIncludeBiomassExportsInResults" xml:space="preserve">
+    <value>Include biomass exports in reported results</value>
+  </data>
+  <data name="MessageNoManureAvailableForExportInSelectedYear" xml:space="preserve">
+    <value>No manure available for export in {0}. Select a different year of export or add animal components to the farm so that manure is produced in {0} and will be available for export</value>
+  </data>
 </root>

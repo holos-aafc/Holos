@@ -13428,6 +13428,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Include biomass exports in reported results.
+        /// </summary>
+        public static string MenuIncludeBiomassExportsInResults {
+            get {
+                return ResourceManager.GetString("MenuIncludeBiomassExportsInResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mesisol.
         /// </summary>
         public static string Mesisol {
@@ -13716,6 +13725,15 @@ namespace H.Core.Properties {
         public static string MessageNoAnimalsGrazingOnThisField {
             get {
                 return ResourceManager.GetString("MessageNoAnimalsGrazingOnThisField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No manure available for export in {0}. Select a different year of export or add animal components to the farm so that manure is produced in {0} and will be available for export.
+        /// </summary>
+        public static string MessageNoManureAvailableForExportInSelectedYear {
+            get {
+                return ResourceManager.GetString("MessageNoManureAvailableForExportInSelectedYear", resourceCulture);
             }
         }
         

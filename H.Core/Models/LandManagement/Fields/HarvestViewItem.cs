@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
@@ -7,14 +8,11 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// A class to hold harvest information so total yield calculations can be made.
     /// </summary>
-    public class HarvestViewItem : FieldActivityBase
+    public class HarvestViewItem : BaleActivityBase
     {
         #region Fields
 
         private int _totalNumberOfBalesHarvested;
-        private int _totalNumberOfBalesExported;
-
-        private double _baleWeight;
         private double _harvestLossPercentage;
 
         private Guid _fieldGuid;
@@ -31,6 +29,9 @@ namespace H.Core.Models.LandManagement.Fields
 
             // https://hayforks.com/blog/how-much-does-a-bale-of-hay-weigh
             this.BaleWeight = 500;
+
+            base.PropertyChanged -= OnPropertyChanged;
+            base.PropertyChanged += OnPropertyChanged;
         }
 
         #endregion
@@ -44,17 +45,6 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _totalNumberOfBalesHarvested;
             set => SetProperty(ref _totalNumberOfBalesHarvested, value, OnTotalNumberOFBalesHarvestedChanged);
-        }
-
-        /// <summary>
-        /// The total weight of each bale. This is the wet bale weight.
-        ///
-        /// (kg)
-        /// </summary>
-        public double BaleWeight
-        {
-            get => _baleWeight;
-            set => SetProperty(ref _baleWeight, value, OnBaleWeightChanged);
         }
 
         /// <summary>
@@ -75,15 +65,6 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _fieldGuid;
             set => SetProperty(ref _fieldGuid, value);
-        }
-
-        /// <summary>
-        /// Allows for accounting of bales that have been used for supplemental feeding or exporting
-        /// </summary>
-        public int TotalNumberOfBalesExported
-        {
-            get => _totalNumberOfBalesExported;
-            set => SetProperty(ref _totalNumberOfBalesExported, value);
         }
 
         #endregion
@@ -110,15 +91,32 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Private Methods
 
+        /// <summary>
+        /// Returns the wet weight of all bales harvested
+        /// </summary>
         private void CalculateYield()
         {
             this.AboveGroundBiomass = this.TotalNumberOfBalesHarvested * this.BaleWeight;
-            
+        }
+
+        private void CalculateDryWeightYield()
+        {
+            this.AboveGroundBiomassDryWeight = this.TotalNumberOfBalesHarvested * this.BaleWeight * (1 - (MoistureContentAsPercentage / 100.0));
         }
 
         #endregion
 
         #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // Need to update the total yield for the field if the weight of the bales changes.
+            if (e.PropertyName.Equals(nameof(MoistureContentAsPercentage)) || e.PropertyName.Equals(nameof(BaleWeight)))
+            {
+                this.CalculateYield();
+                this.CalculateDryWeightYield();
+            }
+        }
 
         /// <summary>
         /// Need to update the total yield for the field if the number of bales changes.
@@ -126,14 +124,7 @@ namespace H.Core.Models.LandManagement.Fields
         private void OnTotalNumberOFBalesHarvestedChanged()
         {
             this.CalculateYield();
-        }
-
-        /// <summary>
-        /// Need to update the total yield for the field if the weight of the bales changes.
-        /// </summary>
-        private void OnBaleWeightChanged()
-        {
-            this.CalculateYield();
+            this.CalculateDryWeightYield();
         }
 
         #endregion

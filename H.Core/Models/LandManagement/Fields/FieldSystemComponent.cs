@@ -487,6 +487,79 @@ namespace H.Core.Models.LandManagement.Fields
             return result;
         }
 
+        public bool HasHayHarvestInYear(int year)
+        {
+            return this.GetHarvestViewItemsInYear(year).Any();
+        }
+
+        public List<HarvestViewItem> GetHarvestViewItemsInYear(int year)
+        {
+            var result = new List<HarvestViewItem>();
+
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                var byYear = cropViewItem.HarvestViewItems.Where(x => x.Start.Year.Equals(year));
+                result.AddRange(byYear);
+            }
+
+            return result;
+        }
+
+        public List<HarvestViewItem> GetHarvestViewItems()
+        {
+            var result = new List<HarvestViewItem>();
+
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                var harvestViewItems = cropViewItem.HarvestViewItems;
+                result.AddRange(harvestViewItems);
+            }
+
+            return result;
+        }
+
+        public List<HayImportViewItem> GetHayImports(ResourceSourceLocation baleSource)
+        {
+            var result = new List<HayImportViewItem>();
+
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                var harvestViewItems = cropViewItem.HayImportViewItems.Where(x => x.SourceOfBales.Equals(baleSource));
+                result.AddRange(harvestViewItems);
+            }
+
+            return result;
+        }
+
+        public double GetDryMatterWeightOfHayHarvestsInYear(int year)
+        {
+            return this.GetHarvestViewItemsInYear(year).Sum(x => x.AboveGroundBiomassDryWeight);
+        }
+
+        public double GetDryMatterWeightOfHayHarvests()
+        {
+            var result = 0d;
+
+            foreach (var harvestViewItem in this.GetHarvestViewItems())
+            {
+                result += harvestViewItem.AboveGroundBiomassDryWeight;
+            }
+
+            return result;
+        }
+
+        public double GetDryMatterWeightOfHayImports(ResourceSourceLocation sourceOfBales = ResourceSourceLocation.OnFarm)
+        {
+            var result = 0d;
+
+            foreach (var harvestViewItem in this.GetHayImports(sourceOfBales))
+            {
+                result += harvestViewItem.AboveGroundBiomassDryWeight;
+            }
+
+            return result;
+        }
+
         #endregion  
 
         #region Private Methods

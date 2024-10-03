@@ -71,7 +71,43 @@ namespace H.Core.Test.Models
             Assert.AreEqual(500, result);
         }
 
-    
+        [TestMethod]
+        public void GetHayImportsUsingImportedHayFromSourceFieldReturnsEmptyList()
+        {
+            var farm = new Farm();
+
+            var field = new FieldSystemComponent();
+
+            var result = farm.GetHayImportsUsingImportedHayFromSourceField(field);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void GetHayImportsUsingImportedHayFromSourceFieldReturnsCorrectCount()
+        {
+            var farm = new Farm();
+
+            var field = new FieldSystemComponent();
+            field.Guid = Guid.NewGuid(); ;
+
+            var cropViewItem = new CropViewItem();
+
+            var hayImport = new HayImportViewItem();
+            hayImport.FieldSourceGuid = field.Guid;
+
+            cropViewItem.HayImportViewItems.Add(hayImport);
+            field.CropViewItems.Add(cropViewItem);
+            farm.Components.Add(field);
+
+            var result = farm.GetHayImportsUsingImportedHayFromSourceField(field);
+
+            Assert.AreEqual(1, result.Count);
+
+            cropViewItem.HayImportViewItems.Add(hayImport);
+
+            Assert.AreEqual(2, farm.GetHayImportsUsingImportedHayFromSourceField(field).Count);
+        }
 
         #endregion
     }

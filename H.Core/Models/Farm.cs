@@ -75,7 +75,6 @@ namespace H.Core.Models
         private bool _showDefaultDietsInDietFormulator;
         private bool _showDetailsOnComponentSelectionView;
         private bool _enableCarbonModelling;
-        private bool _showAvailableComponentsList;
         private bool _showFieldSystemResultsAsGrid;
         private bool _enableDebugDisplay;
         private bool _showSimplifiedResults;
@@ -122,6 +121,7 @@ namespace H.Core.Models
             this.ShowSimplifiedResults = false;
             this.IsBasicMode = false;
             this.EnableCarbonModelling = true;
+            this.ShowExportEmissionsInFinalReport = true;
 
             this.StageStates = new List<StageStateBase>();
             this.Components.CollectionChanged += ComponentsOnCollectionChanged;
@@ -505,22 +505,7 @@ namespace H.Core.Models
             set { SetProperty(ref _showFieldSystemResultsAsGrid, value); }
         }
 
-        /// <summary>
-        /// Enables the showing/hiding of the list of available components on the component selection view. This allows users with smaller screen sizes to hide this
-        /// additional information.
-        /// </summary>
-        public bool ShowAvailableComponentsList
-        {
-            get
-            {
-                return _showAvailableComponentsList;
-            }
 
-            set
-            {
-                SetProperty(ref _showAvailableComponentsList, value);
-            }
-        }
 
         public Defaults Defaults
         {
@@ -1181,6 +1166,35 @@ namespace H.Core.Models
             }
 
             return result;
+        }
+
+        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceField(FieldSystemComponent fieldUsedAsSource)
+        {
+            var result = new List<HayImportViewItem>();
+
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                {
+                    var hayImports = cropViewItem.HayImportViewItems.Where(x => x.FieldSourceGuid.Equals(fieldUsedAsSource.Guid));
+                    result.AddRange(hayImports);
+                }
+            }
+
+            return result;
+        }
+
+        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceField(Guid fieldSystemGuid)
+        {
+            var field = this.GetFieldSystemComponent(fieldSystemGuid);
+            if (field != null)
+            {
+                return this.GetHayImportsUsingImportedHayFromSourceField(field);
+            }
+            else
+            {
+                return new List<HayImportViewItem>();
+            }
         }
 
         #endregion

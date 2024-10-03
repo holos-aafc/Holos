@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.Calculators.Carbon;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -24,6 +25,7 @@ namespace H.Core.Calculators.Nitrogen
         private readonly IManureService _manureService;
         private readonly IDigestateService _digestateService;
         private readonly INitrogenCalculator _nitrogenCalculator;
+        private readonly ICarbonService _carbonService;
 
         #endregion
 
@@ -52,8 +54,8 @@ namespace H.Core.Calculators.Nitrogen
 
             _manureService = new ManureService();
             _digestateService = new DigestateService();
-            _nitrogenCalculator = new NitrogenCalculator();
-
+            _nitrogenCalculator = new NitrogenService();
+            _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
         }
 

@@ -153,7 +153,6 @@ namespace H.Core
 
         /// <summary>
         /// Equation 2.6.9-27
-        /// Equation 4.9.6-1 (verify)
         /// </summary>
         public static double ConvertToN2O(double amountOfN2ON)
         {
@@ -163,8 +162,6 @@ namespace H.Core
         /// <summary>
         /// Equation 2.6.9-28
         /// </summary>
-        /// <param name="amountOfNON"></param>
-        /// <returns></returns>
         public static double ConvertToNO(double amountOfNON)
         {
             return amountOfNON * ConvertNONToNO;

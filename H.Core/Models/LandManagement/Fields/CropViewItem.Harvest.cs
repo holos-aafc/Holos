@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using H.Core.Models.Results;
 
 namespace H.Core.Models.LandManagement.Fields
@@ -8,6 +9,7 @@ namespace H.Core.Models.LandManagement.Fields
         #region Fields
 
         private double _totalCarbonLossFromBaleExports;
+        private double _totalDryMatterLostFromBaleExports;
         private EstimatesOfProductionResultsViewItem _estimatesOfProductionResultsViewItem;
 
         #endregion
@@ -30,6 +32,73 @@ namespace H.Core.Models.LandManagement.Fields
             get => _estimatesOfProductionResultsViewItem;
             set => SetProperty(ref _estimatesOfProductionResultsViewItem, value);
         }
+
+        /// <summary>
+        /// (kg DM)
+        /// </summary>
+        public double TotalDryMatterLostFromBaleExports
+        {
+            get => _totalDryMatterLostFromBaleExports;
+            set => SetProperty(ref _totalDryMatterLostFromBaleExports, value);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public double GetTotalWeightWeightFromHarvestedHay(int year)
+        {
+            var result = 0d;
+
+            foreach (var harvestViewItem in this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)))
+            {
+                result += harvestViewItem.TotalNumberOfBalesHarvested * harvestViewItem.BaleWeight;
+            }
+
+            return result;
+        }
+
+        public double GetTotalWeightWeightFromHarvestedHay()
+        {
+            var result = 0d;
+
+            foreach (var harvestViewItem in this.HarvestViewItems)
+            {
+                result += harvestViewItem.TotalNumberOfBalesHarvested * harvestViewItem.BaleWeight;
+            }
+
+            return result;
+        }
+
+        public double GetTotalDryWeightFromHarvestedHay()
+        {
+            var result = 0d;
+
+            foreach (var harvestViewItem in this.HarvestViewItems)
+            {
+                var amount = harvestViewItem.AboveGroundBiomass * (1 - (harvestViewItem.MoistureContentAsPercentage / 100.0));
+
+                result += amount;
+            }
+
+            return result;
+        }
+
+        public double GetTotalDryWeightFromImportedHay()
+        {
+            var result = 0d;
+
+            foreach (var hayImportViewItem in this.HayImportViewItems)
+            {
+                var amount = hayImportViewItem.AboveGroundBiomass * (1 - (hayImportViewItem.MoistureContentAsPercentage / 100.0));
+
+                result += amount;
+            }
+
+            return result;
+        }
+
+        
 
         #endregion
     }

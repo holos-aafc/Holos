@@ -7,6 +7,7 @@ namespace H.Core.Calculators.Carbon
 {
     public interface ICarbonService
     {
+        bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem);
         void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
 
         double CalculateManureCarbonInputFromGrazingAnimals(
@@ -50,5 +51,7 @@ namespace H.Core.Calculators.Carbon
             FieldSystemComponent fieldSystemComponent,
             IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
             List<CropViewItem> viewItems);
+
+        double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm);
     }
 }

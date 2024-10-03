@@ -15,6 +15,7 @@ namespace H.Core.Models.LandManagement.Fields
         private DateTime _start;
         private DateTime _end;
         private double _aboveGroundBiomass;
+        private double _aboveGroundBiomassDryWeight;
         private double _moistureContentAsPercentage;
         private ForageGrowthStages _forageGrowthStage;
         private BaleTypes _baleType;
@@ -49,7 +50,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// The total wet weight of harvested bales. This value will be added to the total yield for a crop.
+        /// The total wet weight of harvested/imported bales
         /// 
         /// (kg)
         /// </summary>
@@ -57,6 +58,17 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get { return _aboveGroundBiomass; }
             set { this.SetProperty(ref _aboveGroundBiomass, value); }
+        }
+
+        /// <summary>
+        /// The total dry matter weight of harvested bales.
+        ///
+        /// (kg)
+        /// </summary>
+        public double AboveGroundBiomassDryWeight
+        {
+            get => _aboveGroundBiomassDryWeight;
+            set => SetProperty(ref _aboveGroundBiomassDryWeight, value);
         }
 
         /// <summary>
@@ -91,7 +103,7 @@ namespace H.Core.Models.LandManagement.Fields
         public BaleTypes BaleType 
         { 
             get => _baleType; 
-            set => _baleType = value; 
+            set => SetProperty(ref _baleType, value); 
         }
 
         #endregion

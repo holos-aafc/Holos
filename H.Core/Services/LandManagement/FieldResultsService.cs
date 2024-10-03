@@ -191,7 +191,7 @@ namespace H.Core.Services.LandManagement
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
 
-            _nitrogenCalculator = new NitrogenCalculator();
+            _nitrogenCalculator = new NitrogenService();
             _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
             _climateService = new ClimateService();
