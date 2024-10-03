@@ -123,17 +123,21 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Calculates the total dry matter lost from a field once reductions have been made to account for other fields on the farm may be using that dry matter
         /// as supplemental feed.
+        ///
+        /// (kg DM)
         /// </summary>
-        /// <returns>Dry matter (kg)</returns>
+        /// <returns>Total dry matter lost from exports off farm (kg DM)</returns>
         public double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm)
         {
             var result = 0d;
 
+            var targetYear = cropViewItem.Year;
+
             // Get all hay harvests by year
-            var hayHarvestsByYear = cropViewItem.HarvestViewItems.Where(x => x.Start.Year.Equals(cropViewItem.Year));
+            var hayHarvestsByYear = cropViewItem.GetHayHarvestsByYear(targetYear);
 
             // Get all hay imports for entire farm
-            var hayImportsByYear = farm.GetHayImportsUsingImportedHayFromSourceField(cropViewItem.FieldSystemComponentGuid).Where(x => x.Start.Year == cropViewItem.Year);
+            var hayImportsByYear = farm.GetHayImportsUsingImportedHayFromSourceFieldByYear(cropViewItem.FieldSystemComponentGuid, targetYear);
 
             // Get total harvested mass
             var dryMatterHarvested = hayHarvestsByYear.Sum(x => x.AboveGroundBiomassDryWeight);

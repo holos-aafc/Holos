@@ -1197,6 +1197,19 @@ namespace H.Core.Models
             }
         }
 
+        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceFieldByYear(Guid fieldSystemGuid, int year)
+        {
+            var field = this.GetFieldSystemComponent(fieldSystemGuid);
+            if (field != null)
+            {
+                return this.GetHayImportsUsingImportedHayFromSourceField(field).Where(x => x.Start.Year.Equals(year)).ToList(); ;
+            }
+            else
+            {
+                return new List<HayImportViewItem>();
+            }
+        }
+
         #endregion
 
         #region Event Handlers

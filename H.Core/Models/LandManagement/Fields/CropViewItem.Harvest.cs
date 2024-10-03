@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Models.Results;
 
@@ -98,7 +99,10 @@ namespace H.Core.Models.LandManagement.Fields
             return result;
         }
 
-        
+        public List<HarvestViewItem> GetHayHarvestsByYear(int year)
+        {
+            return this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)).ToList();
+        }
 
         #endregion
     }
