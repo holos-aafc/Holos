@@ -396,6 +396,7 @@ As an alternative to the default set of standard animal diets that are found in 
     * Enter **"Corn distiller's dried grains (10.6%)"**. Continue to add all the various ingredients to your diet. For our boar diet, add ingredients as follows: "Soybean meal, fermented (8.15%)", "Canola, Full fat (1%)", "Field peas (5.0%)", "Canola Meal, Expelled (15%)", and "Barley (20%)". 
     * If any ingredient is not found in the **Full Text Search**, the user can enter the ingredient information independently using the **"Create Custom Ingredient"** button. For our example we will add the combination of lysine/vitamins (0.25%) following these steps.  
     * Holos will now report the diet as being complete when **all ingredients total 100%**.
+    * Under **Step 1** input **"3"** as the value for 'Feed intake' 
     * Click the **OK** button to save the new custom diet
     * Now from the Diet tab, **"Custom Boar Diet"** can be selected from the drop down-down menu as the new diet for this animal group.
  
@@ -477,11 +478,11 @@ The second management period in **Step 2** will be named **"Summer Pasture Hogs"
 
 3. We will create a new diet as a supplement to grazing on pasture. Select the 'Custom Diet Creator' button. In **Step 1** on the this screen, select 'Add Custom Diet' and name it **"Hog Supplement"**. 
 
-4. In **Step 2** add the ingredients Barley (99.5%) and lysine/vitamins (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Boar Diet'. 
+4. In **Step 2** add the ingredients Barley (99.5%) and lysine/vitamins (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Boar Diet'.
 
-5. Adjust the 'Percentage in diet' values in **Step 3**. Click **OK** to save.
+5. Adjust the 'Percentage in diet' values in **Step 3**. Then under **Step 1** input the 'feed intake' for 'Hog Supplement' as **"3"**.  Click **OK** to save.
 
-6. On the **Diet tab** select 'Hog Diet Supplement' from the drop down menu.
+6. On the **Diet tab** select 'Hog Supplement' from the drop down menu.
 
 7. On the **Housing Tab:**
     * Select **Pasture/range/paddock** as the housing type.
