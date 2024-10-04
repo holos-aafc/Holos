@@ -43,16 +43,23 @@ namespace H.Core.Calculators.Carbon
             return _ipccTier2CarbonInputCalculator.CanCalculateInputsForCrop(cropViewItem);
         }
 
-        public void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
         {
             if (this.CanCalculateInputsUsingIpccTier2(viewItem))
             {
-                _ipccTier2CarbonInputCalculator.CalculateInputsForCrop(viewItem, farm);
+                _ipccTier2CarbonInputCalculator.CalculateInputs(viewItem, farm);
             }
             else
             {
-                _icbmCarbonInputCalculator.SetCarbonInputs(previousYear, viewItem, nextYear, farm);
+                _icbmCarbonInputCalculator.CalculateInputs(previousYear, viewItem, nextYear, farm);
             }
+
+            this.CalculateLosses(viewItem, farm);
+        }
+
+        public void CalculateLosses(CropViewItem cropViewItem, Farm farm)
+        {
+            this.CalculateCarbonLostFromHayExports(farm, cropViewItem);
         }
 
         /// <summary>
@@ -107,17 +114,12 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.
         /// </summary>
-        public void CalculateCarbonLostFromHayExports(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm)
+        public void CalculateCarbonLostFromHayExports(Farm farm, CropViewItem cropViewItem)
         {
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
-            {
-                var dryMatter = this.CalculateTotalDryMatterLossFromResidueExports(cropViewItem, farm);
+            var dryMatter = this.CalculateTotalDryMatterLossFromResidueExports(cropViewItem, farm);
 
-                cropViewItem.TotalDryMatterLostFromBaleExports = dryMatter;
-                cropViewItem.TotalCarbonLossFromBaleExports = dryMatter * farm.Defaults.CarbonConcentration;
-            }
+            cropViewItem.TotalDryMatterLostFromBaleExports = dryMatter;
+            cropViewItem.TotalCarbonLossFromBaleExports = dryMatter * farm.Defaults.CarbonConcentration;
         }
 
         /// <summary>
@@ -127,11 +129,17 @@ namespace H.Core.Calculators.Carbon
         /// (kg DM)
         /// </summary>
         /// <returns>Total dry matter lost from exports off farm (kg DM)</returns>
-        public double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm)
+        public double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem,
+            Farm farm)
         {
             var result = 0d;
-
             var targetYear = cropViewItem.Year;
+
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasHayHarvestInYear(cropViewItem.Year) == false)
+            {
+                return result;
+            }
 
             // Get all hay harvests by year
             var hayHarvestsByYear = cropViewItem.GetHayHarvestsByYear(targetYear);

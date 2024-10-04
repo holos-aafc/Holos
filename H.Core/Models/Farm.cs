@@ -1197,6 +1197,9 @@ namespace H.Core.Models
             }
         }
 
+        /// <summary>
+        /// Returns all <see cref="HayImportViewItem"/> that have used harvests from the <see cref="FieldSystemComponent"/> identified by the <see cref="Guid"/>.
+        /// </summary>
         public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceFieldByYear(Guid fieldSystemGuid, int year)
         {
             var field = this.GetFieldSystemComponent(fieldSystemGuid);

@@ -876,7 +876,7 @@ namespace H.Core.Test.Calculators.Carbon
 
             foreach (var viewItem in viewItems)
             {
-                _inputCalculator.CalculateInputsForCrop(viewItem, new Farm());
+                _inputCalculator.CalculateInputs(viewItem, new Farm());
             }
 
             _sut.CropResiduePool = 100;

@@ -6,6 +6,6 @@ namespace H.Core.Calculators.Carbon
     public interface IIPCCTier2CarbonInputCalculator : ICarbonInputCalculator
     {
         bool CanCalculateInputsForCrop(CropViewItem cropViewItem);
-        void CalculateInputsForCrop(CropViewItem viewItem, Farm farm);
+        void CalculateInputs(CropViewItem viewItem, Farm farm);
     }
 }

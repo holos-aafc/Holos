@@ -78,7 +78,7 @@ namespace H.Core.Test.Calculators.Carbon
             farm.Components.Add(importingFieldComponent);
             farm.Components.Add(exportingFieldComponent);
 
-            _sut.CalculateCarbonLostFromHayExports(exportingFieldComponent, farm);
+            _sut.CalculateCarbonLostFromHayExports(farm, hayExportViewItem);
 
             // Amount of hay harvested is 10,000 kg, amount imported onto another field is 480 kg. Carbon lost is (10000 - 480) * 0.45
             Assert.AreEqual((10000 - 480) * 0.45, hayExportViewItem.TotalCarbonLossFromBaleExports);

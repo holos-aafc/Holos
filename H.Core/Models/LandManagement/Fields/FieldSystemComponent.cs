@@ -395,7 +395,7 @@ namespace H.Core.Models.LandManagement.Fields
             return isMatchingLocation;
         }
 
-        public List<ManureApplicationViewItem> GetlLivestockManureApplicationsInYear(int year)
+        public List<ManureApplicationViewItem> GetLivestockManureApplicationsInYear(int year)
         {
             var result = new List<ManureApplicationViewItem>();
 
@@ -415,7 +415,7 @@ namespace H.Core.Models.LandManagement.Fields
 
         public bool HasLivestockManureApplicationsInYear(int year)
         {
-            return this.GetlLivestockManureApplicationsInYear(year).Any();
+            return this.GetLivestockManureApplicationsInYear(year).Any();
         }
 
         public List<DigestateApplicationViewItem> GetLivestockDigestateApplicationsInYear(int year)

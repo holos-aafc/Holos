@@ -19,7 +19,7 @@ namespace H.Core.Calculators.Carbon
 
         #region Public Methods
 
-        public CropViewItem SetCarbonInputs(
+        public CropViewItem CalculateInputs(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             CropViewItem nextYearViewItem, 

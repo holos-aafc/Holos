@@ -11,6 +11,7 @@ namespace H.Core.Models.LandManagement.Fields
 
         private double _totalCarbonLossFromBaleExports;
         private double _totalDryMatterLostFromBaleExports;
+
         private EstimatesOfProductionResultsViewItem _estimatesOfProductionResultsViewItem;
 
         #endregion
@@ -99,6 +100,9 @@ namespace H.Core.Models.LandManagement.Fields
             return result;
         }
 
+        /// <summary>
+        /// Returns all <see cref="HarvestViewItems"/> by year
+        /// </summary>
         public List<HarvestViewItem> GetHayHarvestsByYear(int year)
         {
             return this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)).ToList();

@@ -57,7 +57,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalNitrogen = 0d;
 
-            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
             var importedApplications = field.GetImportedManureApplicationsInYear(year);
             var allApplications = livestockApplications.Concat(importedApplications);
 
@@ -79,7 +79,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
             var importedApplications = field.GetImportedManureApplicationsInYear(year);
             var allApplications = livestockApplications.Concat(importedApplications);
 
@@ -1275,7 +1275,7 @@ namespace H.Core.Calculators.Nitrogen
             var result = 0d;
 
             var year = viewItem.Year;
-            var livestockApplications = field.GetlLivestockManureApplicationsInYear(year);
+            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
             var importedApplications = field.GetImportedManureApplicationsInYear(year);
             var allApplications = livestockApplications.Concat(importedApplications);
 

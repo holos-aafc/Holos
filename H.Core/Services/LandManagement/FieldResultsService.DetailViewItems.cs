@@ -311,9 +311,6 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            // Before creating view items for each year, calculate carbon lost from bale exports
-            _carbonService.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
-
             // Create a view item for each year (and also create additional items for each cover crop in the same year)
             var viewItems = this.CreateItems(fieldSystemComponent, farm).ToList();
 
@@ -331,7 +328,7 @@ namespace H.Core.Services.LandManagement
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             _carbonService.CalculateCarbonLostByGrazingAnimals(
-                farm,
+                farm: farm,
                 fieldSystemComponent: fieldSystemComponent,
                 animalComponentEmissionsResults: this.AnimalResults, viewItems: viewItems);
 
