@@ -6353,4 +6353,7 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="MessageNoManureAvailableForExportInSelectedYear" xml:space="preserve">
     <value>No manure available for export in {0}. Select a different year of export or add animal components to the farm so that manure is produced in {0} and will be available for export</value>
   </data>
+  <data name="KilogramsNH3N3PerHectare" xml:space="preserve">
+    <value>kg NH3-N ha^-1</value>
+  </data>
 </root>

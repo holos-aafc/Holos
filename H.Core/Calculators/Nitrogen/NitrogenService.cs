@@ -8,7 +8,7 @@ namespace H.Core.Calculators.Nitrogen
     /// <summary>
     /// A service class to calculate inputs related to N. This will route calculations to the IPCC Tier 2 or ICBM methodology as required
     /// </summary>
-    public class NitrogenService : INitrogenCalculator
+    public class NitrogenService : INitrogenService
     {
         #region Fields
 
@@ -58,6 +58,13 @@ namespace H.Core.Calculators.Nitrogen
             {
                 return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(cropViewItem);
             }
+        }
+
+        public double CalculateCropResidueExportNitrogen(CropViewItem cropViewItem, HarvestViewItem harvestViewItem)
+        {
+            var result = 0d;
+
+            return result;
         }
 
         public double CalculateCropResidueExportNitrogen(CropViewItem cropViewItem)

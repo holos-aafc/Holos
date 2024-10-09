@@ -265,7 +265,7 @@ namespace H.Core.Services
             // Manure calculations - must be calculated after both field and animal results have been calculated.
             _manureService.Initialize(farm, animalResults);
 
-            farmResults.ManureExportResultsViewItems.AddRange(this.CalculateExportEmissions(farm));
+            farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));
 
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
@@ -278,7 +278,7 @@ namespace H.Core.Services
             return farmResults;
         }
 
-        public List<ManureExportResultViewItem> CalculateExportEmissions(Farm farm)
+        public List<ManureExportResultViewItem> CalculateManureExportEmissions(Farm farm)
         {
             var result = new List<ManureExportResultViewItem>();
 
@@ -289,10 +289,23 @@ namespace H.Core.Services
                     DateOfExport = manureExportViewItem.DateOfExport,
                 };
 
-                manureExportResultItem.N2ON = _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.DirectN2ON = _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.IndirectN2ON = _n2OEmissionFactorCalculator.CalculateTotalIndirectN2ONFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.NitrateLeachedEmissions = _n2OEmissionFactorCalculator.CalculateTotalNitrateLeachedFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.VolatilizationEmissions = _n2OEmissionFactorCalculator.CalculateVolatilizationEmissionsFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.AdjustedVolatilizationEmissions = _n2OEmissionFactorCalculator.CalculateAdjustedNH3NLossFromManureExports(farm, manureExportViewItem);
 
                 result.Add(manureExportResultItem);
             }
+
+            return result;
+        }
+
+        public List<CropResidueExportResultViewItem> CalculateCropResidueExportViewItems(Farm farm)
+        {
+            var result = new List<CropResidueExportResultViewItem>();
+
+            
 
             return result;
         }

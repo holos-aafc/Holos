@@ -136,6 +136,13 @@ namespace H.Core.Calculators.Carbon
         public double N2O_NFromExportedCropResidues { get; set; }
 
         /// <summary>
+        /// Direct N2O-N emissions from manure exports
+        /// 
+        /// (kg N2O-N ha^-1)
+        /// </summary>
+        public double N2O_NFromExportedManure { get; set; }
+
+        /// <summary>
         /// (kg N2O-N ha^-1)
         /// </summary>
         public double N2O_NFromMineralization { get; set; }
@@ -207,6 +214,9 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public double N2O_NFromOrganicNitrogenLeachingExcludingRemainingAmounts { get; set; }
 
+        /// <summary>
+        /// (kg N2O-N ha^-1)
+        /// </summary>
         public double N2O_NFromOrganicNitrogenLeachingExported { get; set; }
 
         /// <summary>
@@ -230,13 +240,19 @@ namespace H.Core.Calculators.Carbon
         public double NO3FromOrganicNitrogenLeaching { get; set; }
 
         /// <summary>
-        /// (kg NO3-N)
+        /// (kg NO3-N ha^-1)
         /// </summary>
         public double NO3FromOrganicNitrogenLeachingExported { get; set; }
 
         public double N2O_NSyntheticNitrogenVolatilization { get; set; }
         public double N2O_NOrganicNitrogenVolatilization { get; set; }
         public double N2O_NOrganicNitrogenVolatilizationExcludingRemainingAmounts { get; set; }
+
+        /// <summary>
+        /// Volatilization from manure exports
+        /// 
+        /// (kg N2O-N ha^-1)
+        /// </summary>
         public double N2O_NFromVolatilizationForExports { get; set; }
 
         /// <summary>
@@ -246,7 +262,7 @@ namespace H.Core.Calculators.Carbon
         public double NH4FromOrganicNitogenVolatilized { get; set; }
 
         /// <summary>
-        /// (kg NH3-N)
+        /// (kg NH3-N ha^-1)
         /// </summary>
         public double NH4FromExports { get; set; }
 
@@ -405,6 +421,10 @@ namespace H.Core.Calculators.Carbon
 
             this.N2O_NFromOrganicNitrogenExcludeRemainingAmounts =
                 (this.OrganicPool * emissionFactorForOrganicNitrogen) + ((directN2ONFromLandAppliedManureExcludingRemaining + directN2ONFromLandAppliedDigestateExludingRemaining + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);
+
+            // Equation 2.6.5-6
+            // Equation 2.6.4-6
+            this.N2O_NFromExportedManure = N2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManureByYear(farm, currentYearResults.Year);
         }
 
         protected void CalculateNitricOxide(double nORatio)
@@ -531,10 +551,6 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.NO3NFromManureAndDigestateLeaching = nitrateLeachedFromManure +
                                                                         nitrateLeachedFromDigestate;
-
-            // Equation 2.6.6-12
-            // Equation 2.7.5-12
-            this.NO3FromOrganicNitrogenLeachingExported = this.N2OEmissionFactorCalculator.CalculateTotalNitrateLeachedFromExportedManureForFarmAndYear(farm, this.Year) / farm.GetTotalAreaOfFarm(false, this.Year);
         }
 
         protected void CalculateVolatilization(
@@ -565,7 +581,7 @@ namespace H.Core.Calculators.Carbon
                                                                                volatilizationFromGrazingAnimals;
 
             // Equation 2.6.6-16
-            // Equation 2.7.5-17
+            // Equation 2.7.5-16
             this.N2O_NFromVolatilizationForExports = this.N2OEmissionFactorCalculator.CalculateVolatilizationEmissionsFromExportedManureForFarmAndYear(farm, this.Year) / farm.GetTotalAreaOfFarm(false, this.Year);
         }
 
@@ -988,11 +1004,36 @@ namespace H.Core.Calculators.Carbon
 
         protected void SumExportEmissions()
         {
+            /*
+             * Direct N2O
+             */
+
             // Equation 2.6.9-22
+            // Equation 2.7.8-22
             this.CurrentYearResults.TotalDirectN2ONFromCropExports = this.N2O_NFromExportedCropResidues;
 
             // Equation 2.6.9-23
+            // Equation 2.7.8-23
             this.CurrentYearResults.TotalNONFromExportedCropResidues = this.NO_NFromExportedCropResidues;
+
+            /*
+             * Indirect N2O
+             */
+
+            /*
+             * Note: Can't attribute indirect N2O emissions from exported manure to any one particular field. The following amounts are not reported on the
+             * multi year carbon modelling report. For this reason, only the amount from 2.7.8-24 (or the equivalent 2.6.9-24) will be shown and only on the detailed emissions from (export emissions section)
+             *
+             * Equations 2.6.9-24, 2.7.8-24 are found in the N2OEmissionFactorCalculator class
+             */
+
+            // Equation 2.6.9-25
+            // Equation 2.7.8-25
+            this.CurrentYearResults.TotalNO3NFromExportedManure = this.NO3FromOrganicNitrogenLeachingExported;
+
+            // Equation 2.6.9-26
+            // Equation 2.7.8-26
+            this.CurrentYearResults.TotalNH3NFromExportedManure = this.NH4FromExports;
         }
 
         protected void SumEmissions()

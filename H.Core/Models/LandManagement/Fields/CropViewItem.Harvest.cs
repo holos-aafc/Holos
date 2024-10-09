@@ -36,7 +36,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// (kg DM)
+        /// (kg DM year^-1)
         /// </summary>
         public double TotalDryMatterLostFromBaleExports
         {

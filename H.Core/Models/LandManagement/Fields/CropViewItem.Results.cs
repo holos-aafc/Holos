@@ -146,6 +146,21 @@ namespace H.Core.Models.LandManagement.Fields
         public double TotalDirectN2ONFromCropExports { get; set; }
 
         /// <summary>
+        /// (kg N2O-N ha^-1)
+        /// </summary>
+        public double TotalIndirectN2ONFromExportedManure { get; set; }
+
+        /// <summary>
+        /// (kg NO3-N ha^-1)
+        /// </summary>
+        public double TotalNO3NFromExportedManure { get; set; }
+
+        /// <summary>
+        /// (kg NH3-N ha^-1)
+        /// </summary>
+        public double TotalNH3NFromExportedManure { get; set; }
+
+        /// <summary>
         /// (kg NO-N ha^-1)
         /// </summary>
         public double TotalNONFromExportedCropResidues { get; set; }

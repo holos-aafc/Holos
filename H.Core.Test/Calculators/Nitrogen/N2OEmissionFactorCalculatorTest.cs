@@ -152,8 +152,6 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreEqual(0, result);
         }
 
-
-
         #region CalculateFractionOfNitrogenLostByVolatilization Tests
 
         [TestMethod]
@@ -857,9 +855,27 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         [TestMethod]
-        public void GetTotalDigestateNitrogenRemainingForFarmAndYearTest()
+        public void CalculateTotalIndirectN2ONFromExportedManureTest()
         {
+            var farm = new Farm();
+            var manureExportViewItem = base.GetTestManureExportViewItem();
+            var year = DateTime.Now.Year;
 
+            var result = _sut.CalculateTotalIndirectN2ONFromExportedManure(farm, manureExportViewItem);
+
+            Assert.AreEqual(1.7475, result);
+        }
+
+        [TestMethod]
+        public void CalculateAdjustedNH3NLossFromManureExports()
+        {
+            var farm = new Farm();
+            var year = DateTime.Now.Year;
+            var manureExportViewItem = base.GetTestManureExportViewItem();
+
+            var result = _sut.CalculateAdjustedNH3NLossFromManureExports(farm, year, manureExportViewItem);
+
+            Assert.AreEqual(6, result);
         }
 
         #endregion

@@ -7560,6 +7560,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg NH3-N ha^-1.
+        /// </summary>
+        public static string KilogramsNH3N3PerHectare {
+            get {
+                return ResourceManager.GetString("KilogramsNH3N3PerHectare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg NH3-N (kg N)^-1.
         /// </summary>
         public static string KilogramsNH3NPerKilogramN {

@@ -66,7 +66,7 @@ namespace H.Core.Services.LandManagement
         private readonly IInitializationService _initializationService;
         private readonly IICBMNitrogenInputCalculator _icbmNitrogenInputCalculator;
         private readonly IIPCCNitrogenInputCalculator _ipccNitrogenInputCalculator;
-        private readonly INitrogenCalculator _nitrogenCalculator;
+        private readonly INitrogenService _nitrogenService;
         private readonly ICarbonService _carbonService;
         private readonly IAnimalService _animalService;
 
@@ -191,7 +191,7 @@ namespace H.Core.Services.LandManagement
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
 
-            _nitrogenCalculator = new NitrogenService();
+            _nitrogenService = new NitrogenService();
             _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
             _climateService = new ClimateService();

@@ -534,6 +534,20 @@ namespace H.Core.Test
             return manureApplicationViewItem;
         }
 
+        public ManureExportViewItem GetTestManureExportViewItem()
+        {
+            var manureExportViewItem = new ManureExportViewItem();
+            manureExportViewItem.AnimalType = AnimalType.BeefBackgrounder;
+            manureExportViewItem.DateOfExport = DateTime.Now;
+            manureExportViewItem.Amount = 100;
+            manureExportViewItem.DefaultManureCompositionData = new DefaultManureCompositionData()
+            {
+                NitrogenContent = 0.75,
+            };
+
+            return manureExportViewItem;
+        }
+
         public Storage GetTestStorage()
         {
             var storage = new Storage();

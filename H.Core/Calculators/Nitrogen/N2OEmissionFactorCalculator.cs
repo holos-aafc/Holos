@@ -24,7 +24,7 @@ namespace H.Core.Calculators.Nitrogen
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly IManureService _manureService;
         private readonly IDigestateService _digestateService;
-        private readonly INitrogenCalculator _nitrogenCalculator;
+        private readonly INitrogenService _nitrogenCalculator;
         private readonly ICarbonService _carbonService;
 
         #endregion

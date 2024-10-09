@@ -232,8 +232,8 @@ namespace H.Core.Services.LandManagement
                      * Calculate nitrogen totals
                      */
 
-                    var coverCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem);
-                    var coverCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem);
+                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem);
+                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem);
 
                     totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
                     totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
@@ -253,8 +253,8 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
-                var mainCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
 
                 
                 mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;

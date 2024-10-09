@@ -24,6 +24,8 @@ namespace H.Core.Providers.Animals
 
         /// <summary>
         /// Frac_volatilization
+        ///
+        /// [kg NH3-N (kg)^-1]
         /// </summary>
         double VolatilizationFraction { get; set; }
 
