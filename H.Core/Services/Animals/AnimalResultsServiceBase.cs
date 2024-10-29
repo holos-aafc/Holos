@@ -1825,6 +1825,12 @@ namespace H.Core.Services.Animals
             double totalNitrogenAvailableForLandApplication,
             double nitrogenContentOfManure)
         {
+            // Prevent divide by zero
+            if (nitrogenContentOfManure <= 0)
+            {
+                return 0;
+            }
+
             var result = ((totalNitrogenAvailableForLandApplication * 100) / nitrogenContentOfManure) / 1000.0;
 
             return result;
