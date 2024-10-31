@@ -2517,6 +2517,16 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 </p>
 <br>
 
+#### Multiyear Carbon Modelling Header Descriptions
+
+| Heading | Description |
+| -------- | ------- |
+| N~2~O Direct (Excluding any manure not applied) (kg N~2~O (ha)^-1^) | Placeholder |
+| N~2~O-N from Organic Nitrogen (Excluding any manure not applied N~2~O-N_ONdirect) (kg N2O-N field^-1^) | Placeholder |
+| N~2~O Indirect (Excluding any manure not applied) (kg N~2~O (ha)^-1^) | Placeholder |
+| N~2~O-N Indirect (Excluding any manure not applied) (kg N~2~O-N field^-1^) | Placeholder |
+| N~2~O from Organic Nitrogen Leaching (Excluding any manure not applied N~2~O-N_ONleach) (kg N~2~O-N field^-1^) | Placeholder |  
+| N~2~O from Organic Nitrogen Volatilization (Excluding any manure not applied N~2~O-N_ONvolatilization) (kg N~2~O-N field^-1^) | Placeholder |
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>
