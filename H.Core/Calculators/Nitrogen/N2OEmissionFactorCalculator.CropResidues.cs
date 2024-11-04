@@ -16,7 +16,13 @@ namespace H.Core.Calculators.Nitrogen
             var result = emissionFactorForCropResidues * nitrogenFromExportedCropResidues;
 
             return result;
-        } 
+        }
+
+        public double CalculateN2OFromCropResidueExports(CropViewItem cropViewItem, HarvestViewItem harvestViewItem, Farm farm)
+        {
+            var emissionFactorForCropResidues = this.GetEmissionFactorForCropResidues(cropViewItem, farm);
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

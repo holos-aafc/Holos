@@ -7,9 +7,14 @@ using H.Core.Services.Animals;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using System;
+using System.Runtime.CompilerServices;
+using H.Core.Providers.AnaerobicDigestion;
 
 namespace H.Core.Calculators.Carbon
 {
+    /// <summary>
+    /// A service class to calculate inputs related to C. This will route calculations to the IPCC Tier 2 or ICBM methodology as required
+    /// </summary>
     public class CarbonService : ICarbonService
     {
         #region Fields
@@ -33,16 +38,28 @@ namespace H.Core.Calculators.Carbon
 
         #region Public Methods
 
-        public void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem)
         {
-            if (_ipccTier2CarbonInputCalculator.CanCalculateInputsForCrop(viewItem))
+            return _ipccTier2CarbonInputCalculator.CanCalculateInputsForCrop(cropViewItem);
+        }
+
+        public void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        {
+            if (this.CanCalculateInputsUsingIpccTier2(viewItem))
             {
-                _ipccTier2CarbonInputCalculator.CalculateInputsForCrop(viewItem, farm);
+                _ipccTier2CarbonInputCalculator.CalculateInputs(viewItem, farm);
             }
             else
             {
-                _icbmCarbonInputCalculator.SetCarbonInputs(previousYear, viewItem, nextYear, farm);
+                _icbmCarbonInputCalculator.CalculateInputs(previousYear, viewItem, nextYear, farm);
             }
+
+            this.CalculateLosses(viewItem, farm);
+        }
+
+        public void CalculateLosses(CropViewItem cropViewItem, Farm farm)
+        {
+            this.CalculateCarbonLostFromHayExports(farm, cropViewItem);
         }
 
         /// <summary>
@@ -97,62 +114,52 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.
         /// </summary>
-        public void CalculateCarbonLostFromHayExports(
-            FieldSystemComponent fieldSystemComponent,
+        public void CalculateCarbonLostFromHayExports(Farm farm, CropViewItem cropViewItem)
+        {
+            var dryMatter = this.CalculateTotalDryMatterLossFromResidueExports(cropViewItem, farm);
+
+            cropViewItem.TotalDryMatterLostFromBaleExports = dryMatter;
+            cropViewItem.TotalCarbonLossFromBaleExports = dryMatter * farm.Defaults.CarbonConcentration;
+        }
+
+        /// <summary>
+        /// Calculates the total dry matter lost from a field once reductions have been made to account for other fields on the farm may be using that dry matter
+        /// as supplemental feed.
+        ///
+        /// (kg DM)
+        /// </summary>
+        /// <returns>Total dry matter lost from exports off farm (kg DM)</returns>
+        public double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem,
             Farm farm)
         {
-            // Get hay exports from component, find other components dependent on exports, assign losses to view item
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            var result = 0d;
+            var targetYear = cropViewItem.Year;
+
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasHayHarvestInYear(cropViewItem.Year) == false)
             {
-                if (cropViewItem.HasHarvestViewItems)
-                {
-                    var totalHarvestedBales = cropViewItem.HarvestViewItems.Sum(x => x.TotalNumberOfBalesHarvested);
-                    var totalBalesImportedFromOtherFields = 0d;
-                    var moistureContentOfImportedBales = new List<double>();
-
-                    // Check all other fields to see if anyone is using these harvested bales
-                    foreach (var component in farm.FieldSystemComponents)
-                    {
-                        foreach (var viewItem in component.CropViewItems)
-                        {
-                            foreach (var hayImportViewItem in viewItem.HayImportViewItems.Where(x =>
-                                         x.FieldSourceGuid.Equals(fieldSystemComponent.Guid) &&
-                                         x.Date.Year == cropViewItem.Year))
-                            {
-                                if (hayImportViewItem.SourceOfBales == ResourceSourceLocation.OffFarm)
-                                {
-                                    continue;
-                                }
-
-                                totalBalesImportedFromOtherFields += hayImportViewItem.NumberOfBales;
-                                moistureContentOfImportedBales.Add(hayImportViewItem.MoistureContentAsPercentage);
-                            }
-                        }
-                    }
-
-                    if (totalBalesImportedFromOtherFields == 0)
-                    {
-                        continue;
-                    }
-
-                    var totalWetWeight = totalHarvestedBales - totalBalesImportedFromOtherFields;
-                    if (totalWetWeight > 0)
-                    {
-                        // Get average moisture content to calculate the dry matter
-                        var averageMoistureContentPercentage = moistureContentOfImportedBales.Average();
-
-                        // Calculate dry matter of the bales
-                        var totalDryMatter = totalWetWeight * (1 - (averageMoistureContentPercentage / 100.0));
-
-                        // Calculate total carbon in dry matter
-                        var totalCarbonInExportedBales = totalDryMatter * CoreConstants.CarbonConcentration;
-
-                        cropViewItem.TotalCarbonLossFromBaleExports = this.CalculateTotalCarbonLossFromBaleExports(
-                            percentageOfProductReturnedToSoil: cropViewItem.PercentageOfProductYieldReturnedToSoil,
-                            totalCarbonInExportedBales: totalCarbonInExportedBales);
-                    }
-                }
+                return result;
             }
+
+            // Get all hay harvests by year
+            var hayHarvestsByYear = cropViewItem.GetHayHarvestsByYear(targetYear);
+
+            // Get all hay imports for entire farm
+            var hayImportsByYear = farm.GetHayImportsUsingImportedHayFromSourceFieldByYear(cropViewItem.FieldSystemComponentGuid, targetYear);
+
+            // Get total harvested mass
+            var dryMatterHarvested = hayHarvestsByYear.Sum(x => x.AboveGroundBiomassDryWeight);
+            
+            // Get total imported dry matter that have used 
+            var dryMatterImported = hayImportsByYear.Sum(x => x.AboveGroundBiomassDryWeight);
+
+            result = dryMatterHarvested - dryMatterImported;
+            if (result < 0)
+            {
+                result = 0;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -205,21 +212,6 @@ namespace H.Core.Calculators.Carbon
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Equation 12.3.2-4
-        /// </summary>
-        /// <param name="percentageOfProductReturnedToSoil">Amount of product yield returned to soil (%)</param>
-        /// <param name="totalCarbonInExportedBales">Total amount of carbon in bales (kg C)</param>
-        /// <returns>Total amount of carbon lost from exported bales (kg C)</returns>
-        private double CalculateTotalCarbonLossFromBaleExports(
-            double percentageOfProductReturnedToSoil,
-            double totalCarbonInExportedBales)
-        {
-            var result = totalCarbonInExportedBales / (1 - (percentageOfProductReturnedToSoil / 100.0));
-
-            return result;
-        }
 
         public Tuple<double, double> CalculateUptakeByGrazingAnimals(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
         {

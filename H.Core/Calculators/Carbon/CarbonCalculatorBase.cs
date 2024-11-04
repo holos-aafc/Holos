@@ -17,7 +17,7 @@ namespace H.Core.Calculators.Carbon
         protected INitrogenInputCalculator icbmNitrogenInputCalculator = new ICBMNitrogenInputCalculator();
         protected INitrogenInputCalculator ipccNitrogenInputCalculator = new IPCCNitrogenInputCalculator();
 
-        protected INitrogenCalculator nitrogenInputCalculator = new NitrogenCalculator();
+        protected INitrogenService nitrogenInputCalculator = new NitrogenService();
 
         #endregion
 

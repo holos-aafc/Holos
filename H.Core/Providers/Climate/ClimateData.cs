@@ -92,7 +92,7 @@ namespace H.Core.Providers.Climate
                 }
                 else
                 {
-                    _dailyClimateByYear.Add(addedItem.Year, new List<DailyClimateData>());
+                    _dailyClimateByYear.Add(addedItem.Year, new List<DailyClimateData>() {addedItem});
                 }
             }
         }
@@ -190,7 +190,12 @@ namespace H.Core.Providers.Climate
             if (_dailyClimateByYear.ContainsKey(year))
             {
                 var dailyDataForYear = _dailyClimateByYear[year];
-                if (dailyDataForYear.Count == 365)
+                var count = dailyDataForYear.Count;
+
+                /*
+                 * Check for leap years
+                 */
+                if (count == 365 || count == 366)
                 {
                     var dailyClimateDataForPeriod = dailyDataForYear.Where(x => x.JulianDay >= CoreConstants.GrowingSeasonJulianStartDay && x.JulianDay <= CoreConstants.GrowingSeasonJulianEndDaySeptember).ToList();
                     var growingSeasonPrecipitation = dailyClimateDataForPeriod.Sum(x => x.MeanDailyPrecipitation);
@@ -215,7 +220,13 @@ namespace H.Core.Providers.Climate
             if (_dailyClimateByYear.ContainsKey(year))
             {
                 var dailyDataForYear = _dailyClimateByYear[year];
-                if (dailyDataForYear.Count == 365)
+
+                var count = dailyDataForYear.Count;
+
+                /*
+                 * Check for leap years
+                 */
+                if (count == 365 || count == 366)
                 {
                     var dailyClimateDataForPeriod = dailyDataForYear.Where(x => x.JulianDay >= CoreConstants.GrowingSeasonJulianStartDay && x.JulianDay <= CoreConstants.GrowingSeasonJulianEndDaySeptember).ToList();
                     var growingSeasonEvapotranspiration = dailyClimateDataForPeriod.Sum(x => x.MeanDailyPET);
@@ -243,7 +254,12 @@ namespace H.Core.Providers.Climate
             if (_dailyClimateByYear.ContainsKey(year))
             {
                 var dailyDataForYear = _dailyClimateByYear[year];
-                if (dailyDataForYear.Count == 365)
+                var count = dailyDataForYear.Count;
+
+                /*
+                 * Check for leap years
+                 */
+                if (count == 365 || count == 366)
                 {
                     var totalPrecipitationForYear = dailyDataForYear.Sum(x => x.MeanDailyPrecipitation);
                     _precipitationByYear[year] = totalPrecipitationForYear;
@@ -266,7 +282,12 @@ namespace H.Core.Providers.Climate
             if (_dailyClimateByYear.ContainsKey(year))
             {
                 var dailyDataForYear = _dailyClimateByYear[year];
-                if (dailyDataForYear.Count == 365)
+                var count = dailyDataForYear.Count;
+
+                /*
+                 * Check for leap years
+                 */
+                if (count == 365 || count == 366)
                 {
                     var totalEvapotranspiration = dailyDataForYear.Sum(x => x.MeanDailyPET);
                     _evapotranspirationByYear[year] = totalEvapotranspiration;

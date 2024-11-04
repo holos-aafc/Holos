@@ -67,6 +67,25 @@ namespace H.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Hash code depending on the content and order of the elements of the collection
+        /// </summary>
+        /// <param name="lst">Collection</param>
+        /// <typeparam name="T">The type of items in the collection</typeparam>
+        /// <returns>Hash code</returns>
+        public static int GetHashCodeByItems<T>(this IEnumerable<T> lst)
+        {
+            unchecked
+            {
+                int hash = 19;
+                foreach (T item in lst)
+                {
+                    hash = hash * 31 + (item != null ? item.GetHashCode() : 1);
+                }
+                return hash;
+            }
+        }
+
         #endregion
 
         #region Private Methods

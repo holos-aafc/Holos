@@ -27,10 +27,14 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
+        #region Constructors
+        
         public Table_36_Livestock_Emission_Conversion_Factors_Provider()
         {
             HTraceListener.AddTraceListener();
-        }
+        } 
+
+        #endregion
 
         #region Public Methods
 

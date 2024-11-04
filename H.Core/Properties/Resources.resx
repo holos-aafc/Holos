@@ -6179,4 +6179,181 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelDefaultResetWindow" xml:space="preserve">
     <value>This window allows the user to reset the default values on crops and animals.</value>
   </data>
+  <data name="LabelTotalDirectN2ONFromCropResidueExports" xml:space="preserve">
+    <value>N2O-N From Exported Crop Residues</value>
+  </data>
+  <data name="AbbrevAcidEtherExtract" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AbbrevCrudeFiber" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AbbrevDryMatter" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AbbrevGrossEnergy" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AbbrevNeutralDetergentFiber" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CO2Equivalents" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumMetabolicDMFractionActive" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumPeanuts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumStructuraDMFractionActive" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumStructuraDMFractionPassive" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumStructuraDMFractionSlow" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelBoarTest1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelEnterCropHistoryDuringMultiYearModelInstructionalString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelFarrowingGilts1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelFarrowingSows1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelIdoine" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelNotes1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MessageMontlyPrecipitationBreakdownHeader" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MessageSoilReductionFactorsExperimental1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Removing undersown status for the crop grown in {0}" xml:space="preserve">
+    <value />
+  </data>
+  <data name="String1ToolTipResidueCarbonCoefficientRootsInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitleDirectCosts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitleEconomicsComponent" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitleGrazing1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitleN2OEmissions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitlePoultry" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipLandEconmomicsBuildingRepairsCostInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipLandEconmomicsCustomWorkCostInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipLandEconmomicsLabourCostInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipLandEconmomicsOperatingInterestCostInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipLandEconmomicsUtilitiesCostInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipManureTableAmountOfManureInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipSheepGeneralGainCoefficientA" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToolTipSheepGeneralGainCoefficientB" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DescriptorSoilTypeForFarm" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DescriptorSoilTypeForField" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelBulkDensity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelHeatDetectionBoars" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelProportionOfClayInSoil" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelProportionOfSandInSoil" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelProportionOfSoilOrganicCarbon" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelSoilPh" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelSoilTexture" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelTopLayThickness" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MeanDailyPrecipication" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProportionOfClayInSoilAsPercentage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProportionOfSandInSoilAsPercentage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SoilDrainageClassString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SoilGreatGroupString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SoilTextureString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SoldStorageHandlingSystemName" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TitleSoil" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LabelExports" xml:space="preserve">
+    <value>Exports</value>
+  </data>
+  <data name="LabelManureExportedFromFarm" xml:space="preserve">
+    <value>Manure exported from farm</value>
+  </data>
+  <data name="LabelCropResidueExports" xml:space="preserve">
+    <value>Crop residue exports</value>
+  </data>
+  <data name="MenuIncludeBiomassExportsInResults" xml:space="preserve">
+    <value>Include biomass exports in reported results</value>
+  </data>
+  <data name="MessageNoManureAvailableForExportInSelectedYear" xml:space="preserve">
+    <value>No manure available for export in {0}. Select a different year of export or add animal components to the farm so that manure is produced in {0} and will be available for export</value>
+  </data>
+  <data name="KilogramsNH3N3PerHectare" xml:space="preserve">
+    <value>kg NH3-N ha^-1</value>
+  </data>
 </root>

@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2023"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2024"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure “**Metric**” is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -206,7 +206,7 @@ The swine operation (defined later on) relies on native pasture for the summer m
 
 3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** area when a perennial crop is selected.
 
-4. Keep **"0"** as the amount of irrigation and number of pesticide passes.
+4. Set **"0"** as the amount of irrigation and number of pesticide passes.
 
 5. No fertilizer is used for this crop.
 
@@ -234,20 +234,20 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 2. To expand the horizontal space available in Holos, click on **View** from the top menu bar and select **"Hide List of Available Components"**.
 
-3. The rotation of this field begins in **"1985"** and ends in **"2023"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
+3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
 
 4. Enter **"70"** ha as the **total area** of this field.
 
-5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2023"**.
+5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
     * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
     * Change the tillage type to **"Reduced Tillage"**.
-    * Keep **"0"** as the amount of irrigation and number of pesticide passes.
+    * Keep the default values of **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 
 6. Now add another crop to this rotation. Click on **"Add Crop"** under **Step 2** to add a second crop to the rotation. 
 
 <br>
 
-> *Note: Holos sets the year for this new crop to 2022 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
+> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
 
 > *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
 
@@ -300,7 +300,7 @@ Adding animal components follows the exact same approach that was used for land 
 
 ## Farrow-to-Wean
 
-The farrow-to-wean component is divided into **three animal groups**, and each of these animal group is then divided into **a number of corresponding management (production) periods**. We will now enter information into each of these management period. 
+The farrow-to-wean component is divided into **four animal groups**, and each of these animal group is then divided into **a number of corresponding management (production) periods**. We will now enter information into each of these management period. 
 
 ### Gilts
 
@@ -308,34 +308,34 @@ The farrow-to-wean component is divided into **three animal groups**, and each o
 
 2. Click the management period named **"Open gilts"** in **Step 2** to activate that management period.
 
-3. Ensure **"January 1, 2022"** is set as the 'Start date' and **"January 5, 2022"** is set as the 'End date' (5 days). The default start and end dates that are provided in Holos can be changed by the user and the ‘Number of days’ will adjust accordingly. 
+3. Ensure **"January 1, 2024"** is set as the 'Start date' and **"January 6, 2024"** is set as the 'End date' (5 days). The default start and end dates that are provided in Holos can be changed by the user and the ‘Number of days’ will adjust accordingly. 
 
 4. Enter data related to the number of animals, diet, manure system, and housing type in **Step 3**. Under the **General** Tab:
     * Select 'Open (not lactating or pregnant)' as the Production stage.
     * Enter **"83"** as the number of animals.
     * Keep the remaining entries at their default values.
 
-5. Under the **Diet Tab** select 'Gestation based diet' from the drop down menu. From the **Housing Tab** select 'Housed in Barn' and leave the Bedding type as 'Straw'. From the **Manure Tab**, select 'Liquid/Slurry with natural crust'.
+5. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' and set the Bedding type as 'Straw (Chopped)'. From the **Manure Tab**, select 'Liquid/Slurry with natural crust'.
 
-6.  For each of the three management periods named **"Bred Gilts (Stages 1-3)"** set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 06, 2022' to 'February 12, 2022', etc.).
+6.  For each of the three management periods named **"Bred Gilts (Stages 1-3)"** set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 7, 2024' to 'February 14, 2024', etc.).
 
 7. Highlight **"Bred Gilts (Stage #1)"** management period and from the **General Tab:**
     * Select 'Gestating' as the Production stage.
     * Enter **"83"** as the number of animals.
     * Keep the remaining entries at their default values.
     
-8. Under the **Diet Tab** select 'Gestation based diet' from the drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+8. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
 9. Repeat the Steps 7 and 8 for **"Bred Gilts (Stage#2) and (Stage #3)"** management periods.
 
-10. Lastly select the **"Farrowing gilts"**, and enter **"April 04, 2022"** as the 'Start date' and **"May 07, 2022"** as the 'End date' (21 days).
+10. Lastly select the **"Farrowing gilts"**, and enter **"May 3, 2024"** as the 'Start date' and **"May 24, 2024"** as the 'End date' (21 days).
 
 11. Under the **General Tab:**
     * Select 'Lactating' as the Production stage.
     * Enter **"83"** as the number of animals.
     * Keep the remaining entries at their default values.
     
-12. Under the **Diet Tab** select 'Lactation based diet' from the drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+12. Under the **Diet Tab** select 'Lactation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
 <br>
 
@@ -343,37 +343,37 @@ The farrow-to-wean component is divided into **three animal groups**, and each o
 
 We will now move on to the **"Sow"** animal group in **Step 1** by highlighting it. 
 
-13. For each of the three management periods in **Step 2** named **"Bred Sows (Stages 1-3)"**, set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 31, 2022' to 'March 10, 2022', etc.). 
+13. For each of the three management periods in **Step 2** named **"Bred Sows (Stages 1-3)"**, set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 07, 2024' to 'February 14, 2024', etc.). 
 
 14. Under the **General Tab** for **all three** 'Bred Sows' management periods:
     * Select 'Gestating' as the Production stage.
     * Enter **"83"** as the number of animals.
     * Keep the remaining entries at their default values.
-    * **"Litter size"** can be adjusted accordingly in all Management periods for Sows; here we will leave the default value of **13.5**.  
+    * **"Litter size"** can be adjusted accordingly in all Management periods for Sows; here we will leave the default value of **9**.  
     
-15. Under the **Diet Tab** select 'Gestation based diet' from the drop down menu.     From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+15. Under the **Diet Tab** select 'Gestation' from the diet drop down menu.     From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
-16. Moving to the **"Farrowing lactating sows"** management period in **Step 2**, set the 'Start date' to **"May 28, 2022"** and 'End date' to **"June 09, 2022"**(21 days).
+16. Moving to the **"Farrowing lactating sows"** management period in **Step 2**, set the 'Start date' to **"May 3, 2024"** and 'End date' to **"June 24, 2024"** (21 days).
 
 17. Under the **General Tab:** 
     * Select 'Lactating' as the Production stage.
     * Enter **"83"** as the number of animals.
     * Keep the remaining entries at their default values.
     
-18. Under the **Diet Tab** select 'Lactation based diet' from the drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+18. Under the **Diet Tab** select 'Lactation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
 19. Lastly, in the **"Open sows"** management period under the **General Tab:**
     * Select 'Open (not lactating or pregnant)' as the Production stage.
     * Enter **"370"** as the number of animals.
     * Keep the remaining entries at their default values.
     
-20. Under the **Diet Tab** select 'Gestation based diet' from the drop down menu.     From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+20. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
 <br>
 
 ### Boars
 
-Moving on to the **"Boars"** section, ensure this group is highlighted in **Step 1**. In **Step 2** we will have a single Management period setting **"January 1, 2022"** as the 'Start date' and **"December 31,2022"** as the 'End date'(365 days).
+Moving on to the **"Boars"** section, ensure this group is highlighted in **Step 1**. In **Step 2** we will have a single Management period setting **"January 1, 2024"** as the 'Start date' and **"December 31, 2024"** as the 'End date'(365 days).
 
 20. Under the **General Tab:**
     * Select 'Breeding stock' as the Production stage.
@@ -389,15 +389,16 @@ As an alternative to the default set of standard animal diets that are found in 
     **Custom Diet Creator Screen:**
 
     * Click the **"Add Custom Diet"** button in **Step 1** to begin to create our new custom diet. 
-    * Rename the diet **"Boar Diet"** then press the Enter to save.
+    * Rename the diet **"Custom Boar Diet"** then press the Enter to save.
     * Add ingredients to the new diet in **Step 2**. Select **"Add Selected Ingredients to Diet"**. Search for **"Wheat, Hard Red"** from the ingredient list, highlight the choice, and then click the **OK** button below to have it appear in **Step 3** where the diet is being comprised.
     * Enter the **Percentage in diet (%DM)** that this ingredient will hold; here we will input **38%**.
     * Continue to add more ingredients to the diet. Select **"Wheat Shorts"** from the “**Add Selected Ingredient to Diet**” list, highlight, and click **OK**. Enter **2%** in **Step 3** for **Percentage in diet (%DM)**.
-    * Enter **"Corn distiller's dried grains (10.6%)"**. Continue to add all the various ingredients to your diet. For our boar diet, add ingredients as follows: "Soybean meal, fermented (7.1%)", "Canola, Full fat (0.5%)", "Field peas (5.0%)", "salt (0.26%)", "phosphorus (1.3%)", "Canola Meal, Expelled (15%)", and "Barley (20%)". 
-    * If any ingredient is not found in the **Full Text Search**, the user can enter the ingredient information independently using the **"Create Custom Ingredient"** button. For our example we will add the combination of lysine/vitamins (0.24%) following these steps.  
+    * Enter **"Corn distiller's dried grains (10.6%)"**. Continue to add all the various ingredients to your diet. For our boar diet, add ingredients as follows: "Soybean meal, fermented (8.15%)", "Canola, Full fat (1%)", "Field peas (5.0%)", "Canola Meal, Expelled (15%)", and "Barley (20%)". 
+    * If any ingredient is not found in the **Full Text Search**, the user can enter the ingredient information independently using the **"Create Custom Ingredient"** button. For our example we will add the combination of lysine/vitamins (0.25%) following these steps.  
     * Holos will now report the diet as being complete when **all ingredients total 100%**.
+    * Under **Step 1** input **"3"** as the value for 'Feed intake' 
     * Click the **OK** button to save the new custom diet
-    * Now from the Diet tab, **"Boar Diet"** can be selected from the drop down-down menu as the new diet for this animal group.
+    * Now from the Diet tab, **"Custom Boar Diet"** can be selected from the drop down-down menu as the new diet for this animal group.
  
  <br>
  
@@ -413,13 +414,13 @@ As an alternative to the default set of standard animal diets that are found in 
 
 <br>
 
-22.  From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+22.  From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
 <br>
 
 ## Iso-Wean
 
-Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned piglets Stage #1"** management period in **Step 2**. We will leave the default dates 'January 01, 2022' to 'January 19, 2022' (19 days).
+Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned piglets Stage #1"** management period in **Step 2**. We will leave the default dates 'January 01, 2024' to 'January 20, 2024' (19 days).
 
 23. From the **General Tab:**
        * Enter **"100:** as the number of animals.
@@ -428,9 +429,9 @@ Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned pigl
 24. From the **Diet Tab:**
     * Select 'Nursery weaners (starter diet #1)' as the diet type. 
     
-25.  From the **Housing Tab** select 'Housed in Barn' with 'Straw' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+25.  From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
 
-26. Information related to diet, housing and manure management is entered in the same manner as for the **"Weaned piglets Stage #2"** management period. We will leave the default dates 'January 20, 2022' to 'February 04, 2022' (16 days). Repeat steps 23 to 25, with the exception of selecting 'Nursery weaners (starter diet #2)'.
+26. Information related to diet, housing and manure management is entered in the same manner as for the **"Weaned piglets Stage #2"** management period. We will leave the default dates 'January 21, 2024' to 'February 6, 2024' (16 days). Repeat steps 23 to 25, with the exception of selecting 'Nursery weaners (starter diet #2)'.
 
 <br>
 
@@ -444,7 +445,7 @@ Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned pigl
 
 ## Grower-to-Finish 
 
-Click on the **Hogs** animal group in **Step 1**. In **Step 2** we will create three Management periods for this group. The first is the winter period, setting **"January 01, 2022"** as the 'Start date' and **"April 30, 2022"** as the ‘End date’ (120 days). Name this period **"Spring Hogs"**. We can go ahead and remove the 4th Management period by clicking the **X**.
+Click on the **Hogs** animal group in **Step 1**. In **Step 2** we will create three Management periods for this group. The first is the winter period, setting **"January 01, 2024"** as the 'Start date' and **"April 30, 2024"** as the ‘End date’ (121 days). Name this period **"Spring Hogs"**. We can go ahead and remove the 4th Management period by clicking the **X**.
 
 1. Highlight the 'Spring Hogs' management period, and on the **General Tab:**
       * Leave the default 'Growing/finishing' as the production stage.
@@ -454,7 +455,7 @@ Click on the **Hogs** animal group in **Step 1**. In **Step 2** we will create t
     * Select 'Grower/Finisher diet 2' as the diet type.
 
     **Housing Tab:**
-    * Select 'Housed in barn' as the housing type and leave 'Straw' as the bedding type.
+    * Select 'Housed in barn' as the housing type and leave 'Straw (Chopped)' as the bedding type.
     
     **Manure Tab:**
     * Select 'Liquid/Slurry with natural crust' as the manure handling system.
@@ -462,7 +463,7 @@ Click on the **Hogs** animal group in **Step 1**. In **Step 2** we will create t
 
 ### Hogs - On Pasture
 
-The second management period in **Step 2** will be named **"Summer Pasture Hogs"**. Our warm season grazing will be set from **"May 01, 2022"**  to **"October 31, 2022"** (184 days). 
+The second management period in **Step 2** will be named **"Summer Pasture Hogs"**. Our warm season grazing will be set from **"May 01, 2024"**  to **"October 31, 2024"** (184 days). 
 
 2. Highlight 'Summer Pasture Hogs', and on the **General Tab:"** 
       * Leave the production stage as 'Growing/finishing' 
@@ -477,11 +478,11 @@ The second management period in **Step 2** will be named **"Summer Pasture Hogs"
 
 3. We will create a new diet as a supplement to grazing on pasture. Select the 'Custom Diet Creator' button. In **Step 1** on the this screen, select 'Add Custom Diet' and name it **"Hog Supplement"**. 
 
-4. In **Step 2** add the ingredients Barley (97.5%), phosphorus (2%) and lysine/vitamins (0.5%). The last two ingredients will now appear in the text search as they were previously added for the 'Boar Diet'. 
+4. In **Step 2** add the ingredients Barley (99.5%) and lysine/vitamins (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Boar Diet'.
 
-5. Adjust the 'Percentage in diet' values in **Step 3**. Click **OK** to save.
+5. Adjust the 'Percentage in diet' values in **Step 3**. Then under **Step 1** input the 'feed intake' for 'Hog Supplement' as **"3"**.  Click **OK** to save.
 
-6. On the **Diet tab** select 'Hog Diet Supplement' from the drop down menu.
+6. On the **Diet tab** select 'Hog Supplement' from the drop down menu.
 
 7. On the **Housing Tab:**
     * Select **Pasture/range/paddock** as the housing type.
@@ -490,7 +491,7 @@ The second management period in **Step 2** will be named **"Summer Pasture Hogs"
 8. On the **Manure Tab:**
     * Select **Pasture** as the manure handling system.
 
-Lastly set the fall period as **"November 01, 2022"** to **"December 31,2022"** (61 days) and name this **"Winter Hogs"**.
+Lastly set the fall period as **"November 01, 2024"** to **"December 31, 2024"** (61 days) and name this **"Winter Hogs"**.
 
 9. Highlight the 'Winter Hogs' management period, and on the **General Tab:**
       * Leave the default 'Growing/finishing' as the production stage.
@@ -500,7 +501,7 @@ Lastly set the fall period as **"November 01, 2022"** to **"December 31,2022"** 
     * Select 'Grower/Finisher diet #4' as the diet type.
 
     **Housing Tab:**
-    * Select 'Housed in barn' as the housing type and leave 'Straw' as the bedding type.
+    * Select 'Housed in barn' as the housing type and leave 'Straw (Chopped)' as the bedding type.
     
     **Manure Tab:**
     * Select 'Liquid/Slurry with natural crust' as the manure handling system.
@@ -618,7 +619,7 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 22.jpg" alt="Figure 22" width="650"/>
+    <img src="../../Images/SwineGuide/en/Figure 22.png" alt="Figure 22" width="650"/>
     <br>
     <em>Figure 22: Editing crops in a historical period of the rotation. </em>
 </p> 
@@ -700,7 +701,7 @@ The **'Feed Estimate'** report provides an estimate of dry matter intake based o
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 26.jpg" alt="Figure 26" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 26.png" alt="Figure 26" width="950"/>
     <br>
     <em>Figure 26: Feed estimate report.</em>
 </p> 
@@ -720,7 +721,7 @@ If you would like to export your entire farm file, from **File** on the main tas
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 27.jpg" alt="Figure 27" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 27.png" alt="Figure 27" width="950"/>
     <br>
     <br>
     <em>Figure 27: Carbon report section. Allows switching between graph shown here and table format shown below.</em>
@@ -729,7 +730,7 @@ If you would like to export your entire farm file, from **File** on the main tas
 <br>
     
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 28.jpg" alt="Figure 28" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure 28.png" alt="Figure 28" width="950"/>
     <br>
     <em>Figure 28: Carbon report section. The table format.</em>
 </p>

@@ -25,6 +25,9 @@ namespace H.Core.Services.LandManagement
 
         #region Public Methods
 
+        /// <summary>
+        /// Equation 6.3.1-2
+        /// </summary>
         public List<MonthlyManureSpreadingEmissions> GetManureSpreadingEmissions(
             CropViewItem viewItem,
             Farm farm)

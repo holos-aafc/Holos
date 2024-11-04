@@ -232,8 +232,8 @@ namespace H.Core.Services.LandManagement
                      * Calculate nitrogen totals
                      */
 
-                    var coverCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem);
-                    var coverCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem);
+                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem);
+                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem);
 
                     totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
                     totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
@@ -253,9 +253,10 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropAboveGroundResidueNitrogen = _nitrogenCalculator.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
-                var mainCropBelowGroundResidueNitrogen = _nitrogenCalculator.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
 
+                
                 mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
                 mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
             }
@@ -310,9 +311,6 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            // Before creating view items for each year, calculate carbon lost from bale exports
-            _carbonService.CalculateCarbonLostFromHayExports(fieldSystemComponent, farm);
-
             // Create a view item for each year (and also create additional items for each cover crop in the same year)
             var viewItems = this.CreateItems(fieldSystemComponent, farm).ToList();
 
@@ -330,7 +328,7 @@ namespace H.Core.Services.LandManagement
 
             // Before creating view items for each year, calculate carbon uptake by grazing animals
             _carbonService.CalculateCarbonLostByGrazingAnimals(
-                farm,
+                farm: farm,
                 fieldSystemComponent: fieldSystemComponent,
                 animalComponentEmissionsResults: this.AnimalResults, viewItems: viewItems);
 

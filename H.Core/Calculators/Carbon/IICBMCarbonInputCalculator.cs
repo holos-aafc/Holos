@@ -238,7 +238,7 @@ namespace H.Core.Calculators.Carbon
             CropViewItem cropViewItem,
             Farm farm);
 
-        CropViewItem SetCarbonInputs(
+        CropViewItem CalculateInputs(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
             CropViewItem nextYearViewItem, 

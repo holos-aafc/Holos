@@ -42,10 +42,9 @@ namespace H.Core.Providers.Soil
         /// <summary>
         /// Table 16: Lookup function for Nitrogen source = RF_NS values.
         /// <para>Note: a = A Soil N2O ratio factor for nitrogen source is only applied on annual crops</para>
+        ///
+        /// If there are no crops on the farm, call <see cref="GetFactorForNitrogenSource(H.Core.Providers.Soil.Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes)"/> instead.
         /// </summary>
-        /// <param name="nitrogenSourceType"></param>
-        /// <param name="cropViewItem"></param>
-        /// <returns></returns>
         public double GetFactorForNitrogenSource(NitrogenSourceTypes nitrogenSourceType, CropViewItem cropViewItem)
         {
             // For all perennials systems, nitrogen source has no effect (RF = 1)
@@ -54,6 +53,14 @@ namespace H.Core.Providers.Soil
                 return 1;
             }
 
+            return this.GetFactorForNitrogenSource(nitrogenSourceType);
+        }
+
+        /// <summary>
+        /// Over loaded method to accomodate farms without any fields - e.g. only animals and exported manure. These situations will still need access to the ON factor.
+        /// </summary>
+        public double GetFactorForNitrogenSource(NitrogenSourceTypes nitrogenSourceType)
+        {
             switch (nitrogenSourceType)
             {
                 case NitrogenSourceTypes.CropResidueNitrogen:
@@ -62,20 +69,18 @@ namespace H.Core.Providers.Soil
                 case NitrogenSourceTypes.SyntheticNitrogen:
                     return 1;
                 default:
-                    {
-                        const double defaultValue = 1;
+                {
+                    const double defaultValue = 1;
 
-                        Trace.TraceError($"{nameof(Table_13_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(nitrogenSourceType)}: {nitrogenSourceType}. Returning {defaultValue}");
-                        return 1;
-                    }
+                    Trace.TraceError($"{nameof(Table_13_Soil_N2O_Emission_Factors_Provider)}.{nameof(GetFactorForSoilTexture)}: unknown value for {nameof(nitrogenSourceType)}: {nitrogenSourceType}. Returning {defaultValue}");
+                    return 1;
+                }
             }
         }
 
         /// <summary>
         /// Table 16: Lookup function for Cropping System = RF_CS values.
         /// </summary>
-        /// <param name="cropType"></param>
-        /// <returns></returns>
         public double GetFactorForCroppingSystem(CropType cropType)
         {
             if (cropType.IsAnnual())
@@ -92,9 +97,6 @@ namespace H.Core.Providers.Soil
         /// <summary>
         /// Table 16: Lookup function for Soil Texture = RF_TX values.
         /// </summary>
-        /// <param name="soilTexture"></param>
-        /// <param name="region"></param>
-        /// <returns></returns>
         public double GetFactorForSoilTexture(SoilTexture soilTexture, Region region)
         {
             if (region == Region.WesternCanada)

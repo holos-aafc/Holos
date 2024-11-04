@@ -107,6 +107,9 @@ namespace H.Core.Enumerations
         [LocalizedDescription("KilogramsNH4NPerHectare", typeof(Resources))]
         KilogramsNH4NPerHectare,
 
+        [LocalizedDescription("KilogramsNH3NPerHectare", typeof(Resources))]
+        KilogramsNH3NPerHectare,
+
         [LocalizedDescription("KilogramsNONPerHectare", typeof(Resources))]
         KilogramsNONPerHectare,
 

@@ -299,7 +299,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// Note used.
+        /// Not used.
         /// </summary>
         [Obsolete]
         public Diet DisplayDiet
@@ -403,7 +403,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (kg head ^-1)
+        /// (kg head^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double LiveWeightOfYoungAtBirth

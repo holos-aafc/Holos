@@ -118,6 +118,7 @@ namespace H.Core.Providers.Climate
             return this.GetAnnualPrecipitation(farm, dateTime.Year);
         }
 
+
         public double GetAnnualPrecipitation(Farm farm, int year)
         {
             return farm.GetAnnualPrecipitation(year);

@@ -20,18 +20,27 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 2.5.6-8
         /// Equation 2.7.2-2
-        /// Equation 2.7.2-4
-        /// Equation 2.6.2-6
         /// </summary>
         public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem viewItem)
         {
             if (viewItem.CropType.IsPerennial())
             {
-                var perennialNitrogen = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots * (viewItem.PercentageOfRootsReturnedToSoil / 100.0);
+                var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
+                    carbonInputFromRoots: viewItem.CarbonInputFromRoots,
+                    nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
+
+                var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
+                    carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
+                    nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
+
+                // Equation 2.5.6-8
+                var perennialNitrogen = rootNitrogen + exudateNitrogen;
 
                 return perennialNitrogen;
             }
+
             // Equation 2.7.2-2
             var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots;
 

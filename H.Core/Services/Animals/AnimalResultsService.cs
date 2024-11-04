@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -10,6 +11,7 @@ using H.Core.Services.Initialization;
 
 namespace H.Core.Services.Animals
 {
+
     public class AnimalResultsService : IAnimalService
     {
         #region Fields
@@ -79,12 +81,10 @@ namespace H.Core.Services.Animals
             return results;
         }
 
-        #endregion
-
         public AnimalGroupEmissionResults GetResultsForGroup(AnimalGroup animalGroup, Farm farm, AnimalComponentBase animalComponent)
         {
             var animalType = animalGroup.GroupType;
-            
+
             if (animalType.GetCategory() == AnimalType.Beef)
             {
                 return _beefCattleResultsService.GetResultsForGroup(animalGroup, farm, animalComponent);
@@ -114,29 +114,33 @@ namespace H.Core.Services.Animals
         {
             var animalType = animalGroup.GroupType;
 
+            AnimalGroupEmissionResults result = null;
             if (animalType.GetCategory() == AnimalType.Beef)
             {
-                return _beefCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+                result = _beefCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
             }
             else if (animalType.GetCategory() == AnimalType.OtherLivestock)
             {
-                return _otherLivestockResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+                result = _otherLivestockResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
             }
             else if (animalType.GetCategory() == AnimalType.Swine)
             {
-                return _swineResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+                result = _swineResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
             }
             else if (animalType.GetCategory() == AnimalType.Poultry)
             {
-                return _poultryResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+                result = _poultryResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
             }
             else if (animalType.GetCategory() == AnimalType.Sheep)
             {
-                return _sheepResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+                result = _sheepResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            }
+            else
+            {
+                result = _dairyCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
             }
 
-            // Dairy
-            return _dairyCattleResultsService.GetResultsForManagementPeriod(animalGroup, managementPeriod, animalComponent, farm);
+            return result;
         }
 
         public List<GroupEmissionsByMonth> GetGroupEmissionsFromGrazingAnimals(
@@ -185,5 +189,7 @@ namespace H.Core.Services.Animals
             return grazingPeriods;
 
         }
+
+        #endregion
     }
 }

@@ -348,8 +348,11 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 4.	After you have selected your farm(s) and have clicked the “**Export**” button. You will be prompted to **choose a location where you would like the file to be created**. 
 5.	You can **navigate** through your system with the tabs on the left side of the screen. 
 6.	You can also **add a new folder** in the current location by **clicking on the “New Folder” button** at the top left of your screen. 
-7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen.
+7.	You can **modify the name** of your file by **clicking in the section where it says “File name:”** at the bottom of your screen. This name only affects the name of the saved file, it has no effect on the names of the farms within the file.
 8. Click “**Save**” to finish once you have selected a location
+
+
+> *Note: Renaming the exported file does not change the farm's name once it's imported back into Holos. The exported file serves as a container for the farm's data, including its name, description, and parameters, which remain independent of the file name itself.*
 
 <br>
 <p align="center">
@@ -391,6 +394,8 @@ You can export your farm configuration files to a JSON file (file extension ‘.
 
 4.	After the file has been opened, a window will pop up displaying the list of farms in that file, **select the farm(s) that you would like to import by clicking anywhere in their sections**.  They are selected when the box becomes a darker shade.
 5.	Click “**Import**” to proceed
+
+> *Note: If the file has been renamed between its export and import, the contents of the file are not changed. The names of the farms imported will be the same as the names given at export, regardless of edits to the naming of the file.*
 
 <br>
 <p align="center">
@@ -2512,6 +2517,16 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 </p>
 <br>
 
+#### Multiyear Carbon Modelling Header Descriptions
+
+| Heading | Description |
+| -------- | ------- |
+| N~2~O Direct (Excluding any manure not applied) (kg N~2~O (ha)^-1^) | Placeholder |
+| N~2~O-N from Organic Nitrogen (Excluding any manure not applied N~2~O-N_ONdirect) (kg N2O-N field^-1^) | Placeholder |
+| N~2~O Indirect (Excluding any manure not applied) (kg N~2~O (ha)^-1^) | Placeholder |
+| N~2~O-N Indirect (Excluding any manure not applied) (kg N~2~O-N field^-1^) | Placeholder |
+| N~2~O from Organic Nitrogen Leaching (Excluding any manure not applied N~2~O-N_ONleach) (kg N~2~O-N field^-1^) | Placeholder |  
+| N~2~O from Organic Nitrogen Volatilization (Excluding any manure not applied N~2~O-N_ONvolatilization) (kg N~2~O-N field^-1^) | Placeholder |
 
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter9/figure9-11.png" alt="Figure9-11" width="850"/>

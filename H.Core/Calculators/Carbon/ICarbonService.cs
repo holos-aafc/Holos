@@ -2,12 +2,15 @@
 using H.Core.Models;
 using H.Core.Emissions.Results;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace H.Core.Calculators.Carbon
 {
     public interface ICarbonService
     {
-        void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
+        bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem);
+        void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
+        void CalculateLosses(CropViewItem cropViewItem, Farm farm);
 
         double CalculateManureCarbonInputFromGrazingAnimals(
             FieldSystemComponent fieldSystemComponent,
@@ -39,9 +42,7 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.
         /// </summary>
-        void CalculateCarbonLostFromHayExports(
-            FieldSystemComponent fieldSystemComponent,
-            Farm farm);
+        void CalculateCarbonLostFromHayExports(Farm farm, CropViewItem cropViewItem);
 
         /// <summary>
         /// Equation 11.3.2-4
@@ -50,5 +51,7 @@ namespace H.Core.Calculators.Carbon
             FieldSystemComponent fieldSystemComponent,
             IEnumerable<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
             List<CropViewItem> viewItems);
+
+        double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm);
     }
 }

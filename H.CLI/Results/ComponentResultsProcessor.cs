@@ -17,7 +17,9 @@ using System.Linq;
 using System.Text;
 using H.Core;
 using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Converters;
+using H.Core.Providers.Climate;
 using H.Core.Services.Animals;
 
 
@@ -55,7 +57,7 @@ namespace H.CLI.Results
 
         #region Constructor
 
-        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService)
+        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
             if (fieldResultsService != null)
             {
@@ -72,7 +74,7 @@ namespace H.CLI.Results
             var animalService = new AnimalResultsService();
             var manureService = new ManureService();
 
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService);
+            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService, n2OEmissionFactorCalculator );
             _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);
         }
 

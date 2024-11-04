@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.Calculators.Carbon;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -23,7 +24,8 @@ namespace H.Core.Calculators.Nitrogen
         private readonly EcodistrictDefaultsProvider _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
         private readonly IManureService _manureService;
         private readonly IDigestateService _digestateService;
-        private readonly INitrogenCalculator _nitrogenCalculator;
+        private readonly INitrogenService _nitrogenCalculator;
+        private readonly ICarbonService _carbonService;
 
         #endregion
 
@@ -52,8 +54,8 @@ namespace H.Core.Calculators.Nitrogen
 
             _manureService = new ManureService();
             _digestateService = new DigestateService();
-            _nitrogenCalculator = new NitrogenCalculator();
-
+            _nitrogenCalculator = new NitrogenService();
+            _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
         }
 
@@ -67,6 +69,12 @@ namespace H.Core.Calculators.Nitrogen
 
             _manureService.Initialize(farm, results);
             _digestateService.Initialize(farm, results);
+        }
+
+        public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
+        {
+            _manureService.Initialize(farm, animalResults);
+            _digestateService.Initialize(farm, animalResults);
         }
 
         /// <summary>
@@ -115,29 +123,39 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
-        public double CalculateBaseEcodistrictFactor(
-            Farm farm, 
-            CropViewItem viewItem)
+        public double CalculateBaseEcodistrictFactor(Farm farm, int year)
         {
-            var soilData = farm.GetPreferredSoilData(viewItem);
+            return this.CalculateBaseEcodistrictFactor(farm, null, year);
+        }
+
+        public double CalculateBaseEcodistrictFactor(
+            Farm farm,
+            CropViewItem viewItem, 
+            int year)
+        {
+            // Item may be null if there are no fields on the farm
+            var soilData = viewItem == null ? farm.DefaultSoilData : farm.GetPreferredSoilData(viewItem);
 
             var fractionOfLandOccupiedByLowerPortionsOfLandscape = _ecodistrictDefaultsProvider.GetFractionOfLandOccupiedByPortionsOfLandscape(
                 ecodistrictId: soilData.EcodistrictId,
                 province: soilData.Province);
 
-            viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape = fractionOfLandOccupiedByLowerPortionsOfLandscape;
-
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
-                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(viewItem.Year),
-                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(viewItem.Year));
+                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(year),
+                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year));
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,
                 soilTexture: soilData.SoilTexture,
                 region: soilData.Province.GetRegion());
 
-            viewItem.WeightedModifierBasedOnTexture = this.CalculateModifierBasedOnTexture(soilData.SoilTexture, soilData.Province.GetRegion(), 1);
+            if (viewItem != null)
+            {
+                // Assign values that will be used for reporting
+                viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape = fractionOfLandOccupiedByLowerPortionsOfLandscape;
+                viewItem.WeightedModifierBasedOnTexture = this.CalculateModifierBasedOnTexture(soilData.SoilTexture, soilData.Province.GetRegion(), 1);
+            }
 
             return baseEcodistrictFactor;
         }
@@ -156,7 +174,7 @@ namespace H.Core.Calculators.Nitrogen
                 return farm.Defaults.CustomN2OEmissionFactor;
             }
 
-            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem);
+            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem, viewItem.Year);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
@@ -187,6 +205,36 @@ namespace H.Core.Calculators.Nitrogen
             return syntheticNitrogenEmissionFactor;
         }
 
+        /// <summary>
+        /// Overload to be called if only animals are on the farm - no crops.
+        /// </summary>
+        public double CalculateOrganicNitrogenEmissionFactor(Farm farm, int year)
+        {
+            if (farm.Defaults.UseCustomN2OEmissionFactor)
+            {
+                return farm.Defaults.CustomN2OEmissionFactor;
+            }
+
+            var baseEcodistrictFactor = CalculateBaseEcodistrictFactor(farm, year); 
+            
+            var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen);
+
+            // Farm doesn't have any crops
+            const double croppingSystemModifier = 1.0;
+
+            // No tillage on farm
+            const double tillageModifier = 1.0;
+
+            var organicNitrogenEmissionFactor = this.CalculateEmissionFactor(
+                baseEcodistictEmissionFactor: baseEcodistrictFactor,
+                croppingSystemModifier: croppingSystemModifier,
+                tillageModifier: tillageModifier,
+                nitrogenSourceModifier: nitrogenSourceModifier);
+
+            return organicNitrogenEmissionFactor;
+        }
+
         public double CalculateOrganicNitrogenEmissionFactor(
             CropViewItem viewItem,
             Farm farm)
@@ -201,7 +249,7 @@ namespace H.Core.Calculators.Nitrogen
                 return farm.Defaults.CustomN2OEmissionFactor;
             }
 
-            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem);
+            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem, viewItem.Year);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);
@@ -239,7 +287,7 @@ namespace H.Core.Calculators.Nitrogen
                 return farm.Defaults.CustomN2OEmissionFactor;
             }
 
-            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem);
+            var baseEcodistrictFactor = this.CalculateBaseEcodistrictFactor(farm, viewItem, viewItem.Year);
 
             var croppingSystemModifier = _soilN2OEmissionFactorsProvider.GetFactorForCroppingSystem(
                 cropType: viewItem.CropType);

@@ -1825,6 +1825,12 @@ namespace H.Core.Services.Animals
             double totalNitrogenAvailableForLandApplication,
             double nitrogenContentOfManure)
         {
+            // Prevent divide by zero
+            if (nitrogenContentOfManure <= 0)
+            {
+                return 0;
+            }
+
             var result = ((totalNitrogenAvailableForLandApplication * 100) / nitrogenContentOfManure) / 1000.0;
 
             return result;
@@ -2353,7 +2359,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionRateFromHousingAndStorage = this.CalculateAmmoniaEmissionRateFromHousingAndStorage(
                 nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                rateOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
+                rateOfNitrogenAddedFromBedding: dailyEmissions.RateOfNitrogenAddedFromBeddingMaterial,
                 volatilizationFraction: dailyEmissions.FractionOfManureVolatilized);
 
             dailyEmissions.TotalNitrogenLossesFromHousingAndStorage = this.CalculateTotalNitrogenLossFromHousingAndStorage(

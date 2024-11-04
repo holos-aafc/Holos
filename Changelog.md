@@ -1,6 +1,7 @@
 | Date | Commit ID | Summary of changes | GUI version |
 | -------- | ------- | ------- | ------- |
-| September 12, 2024 | [71c1ce8](https://github.com/holos-aafc/Holos/commit/71c1ce87b889f50df6f1ea386d315cea3dc0f7df) | Set default bedding rate for young animals to 0 | 4.0.0.597 | 
+| October 20, 2024 | [d43e527](https://github.com/holos-aafc/Holos/commit/d43e5273514f39b9a7a35277a6731e30dcbb5c2d) | Check for leap years when downloading NASA climate data. This change affects all emission calculations | 4.0.0.602 | 
+| September 17, 2024 | [3f491ec](https://github.com/holos-aafc/Holos/commit/3f491ec246f287a9d7cdeee15f1cd4e8ee2e84d7) | Update below ground N calculation for perennials | 4.0.0.597 | 
 | September 12, 2024 | [419799a](https://github.com/holos-aafc/Holos/commit/419799ae1dc1ae4eedb3e6019d32f84f3fab3708) | Update DMI max calculation for dairy animals | 4.0.0.597 |
 | July 17, 2024 | [15a4d62](https://github.com/holos-aafc/Holos/commit/15a4d6237226b86242c4d2a1899de8939022c8fd) | IPCC Tier 2 active pool decay rate check (value cannot be greater than 1) ||
 | April 19, 2024 | [58d819e](https://github.com/holos-aafc/Holos/commit/58d819e6275ec9fa8ed40f5a3d759c3e521f225f) | Use Rye values for cover crop type 'RyeSecale' when looking up IPCC Tier 2 values ||

@@ -77,7 +77,6 @@ namespace H.Core.Providers.Animals
         #endregion
 
         #region Private Methods
-
         private List<DefaultManureCompositionData> ReadFile()
         {
             var fileData = new List<DefaultManureCompositionData>();

@@ -175,7 +175,7 @@ namespace H.CLI
 
                     var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
                     // Overall Results For All the Farms
-                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), fieldResultsService);
+                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), fieldResultsService, n2oEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);

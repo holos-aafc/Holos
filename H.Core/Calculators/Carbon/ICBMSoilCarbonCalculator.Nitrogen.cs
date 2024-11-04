@@ -37,7 +37,7 @@ namespace H.Core.Calculators.Carbon
            Farm farm,
            int yearIndex)
         {
-            N2OEmissionFactorCalculator.Initialize(farm);
+            N2OEmissionFactorCalculator.Initialize(farm, this.AnimalComponentEmissionsResults);
 
             this.CurrentYearResults = currentYearResults;
             this.PreviousYearResults = previousYearResults;

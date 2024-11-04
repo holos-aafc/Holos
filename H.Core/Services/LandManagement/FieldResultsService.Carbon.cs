@@ -99,7 +99,7 @@ namespace H.Core.Services.LandManagement
                 var currentYearViewItem = adjoiningYears.CurrentYearViewItem;
                 var nextYearViewItem = adjoiningYears.NextYearViewItem;
 
-                _carbonService.CalculateInputs(previousYearViewItem, currentYearViewItem, nextYearViewItem, farm);
+                _carbonService.CalculateInputsAndLosses(previousYearViewItem, currentYearViewItem, nextYearViewItem, farm);
 
                 // Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
                 currentYearViewItem.ClimateParameter = _climateService.CalculateClimateParameter(currentYearViewItem, farm);
@@ -111,7 +111,7 @@ namespace H.Core.Services.LandManagement
             var secondaryCrops = viewItems.OrderBy(x => x.Year).Where(x => x.IsSecondaryCrop).ToList();
             foreach (var secondaryCrop in secondaryCrops)
             {
-                _carbonService.CalculateInputs(null, secondaryCrop, null, farm);
+                _carbonService.CalculateInputsAndLosses(null, secondaryCrop, null, farm);
             }
         }
 
@@ -214,7 +214,7 @@ namespace H.Core.Services.LandManagement
 
                 foreach (var runInPeriodItem in runInPeriodItems)
                 {
-                    _carbonService.CalculateInputs(null, runInPeriodItem, null, farm);
+                    _carbonService.CalculateInputsAndLosses(null, runInPeriodItem, null, farm);
                 }
 
                 // Combine inputs now that we have C set on cover crops
