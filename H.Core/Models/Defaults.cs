@@ -920,7 +920,6 @@ namespace H.Core.Models
             set => SetProperty (ref _defaultRunInPeriod, value); 
         }
 
-
         /// <summary>
         /// The type of pump used for irrigation in the farm. Can be changed by the user in the User Settings menu of the UI.
         /// </summary>
