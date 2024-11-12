@@ -20,7 +20,10 @@ namespace H.Core.Enumerations
         [LocalizedDescription("EnumCalciumAmmoniumNitrate", typeof(Resources))]
         CalciumAmmoniumNitrate,
 
-        [LocalizedDescription("EnumAmmoniumSulphate", typeof(Resources))]
+        /// <summary>
+        /// TODO: rename this to Anhydrous Ammonia
+        /// </summary>
+        [LocalizedDescription("EnumAnhydrousAmmonia", typeof(Resources))]
         AmmoniumSulphate,
 
         [LocalizedDescription("EnumMesS15", typeof(Resources))]
