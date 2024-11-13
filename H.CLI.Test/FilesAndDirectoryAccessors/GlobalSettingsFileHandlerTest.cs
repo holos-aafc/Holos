@@ -96,7 +96,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             Assert.AreEqual(farm.Defaults.PercentageOfRootsReturnedToSoilForAnnuals, 100.0);
 
             //Silage Crops
-            Assert.AreEqual(farm.Defaults.PercentageOfProductYieldReturnedToSoilForSilageCrops, 35.0);
+            Assert.AreEqual(farm.Defaults.PercentageOfProductYieldReturnedToSoilForSilageCrops, 2.0);
             Assert.AreEqual(farm.Defaults.PercentageOfRootsReturnedToSoilForSilageCrops, 100.0);
 
             //Cover Crops

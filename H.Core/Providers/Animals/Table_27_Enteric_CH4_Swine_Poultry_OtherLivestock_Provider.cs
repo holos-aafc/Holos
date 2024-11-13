@@ -38,26 +38,28 @@ namespace H.Core.Providers.Animals
             
             if (animalType == AnimalType.SwineBoar) // Footnote 1
             {
-                return 2.64;
+                if (managementPeriod.ProductionStage == ProductionStages.GrowingAndFinishing)
+                {
+                    if (weightMidPoint <= 65)
+                    {
+                        return 0.7;
+                    }
+                    else
+                    {
+                        return 1.5;
+                    }
+                }
+                else
+                {
+                    return 2.64;
+                }
             }
                
             if (animalType == AnimalType.SwineGilts) // Footnote 1
             {
                 return 2.42;
             }
-                
-            if (animalType == AnimalType.SwineGrower) // Footnote 1
-            {
-                if (weightMidPoint <= 65)
-                {
-                    return 0.7;
-                }
-                else
-                {
-                    return 1.5;
-                }
-            }
-            
+
             if (animalType == AnimalType.SwineFinisher) // Footnote 1
             {
                 return 1.5;
