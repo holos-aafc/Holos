@@ -184,7 +184,7 @@ namespace H.Core.Models
             this.PercentageOfRootsReturnedToSoilForAnnuals = 100;
 
             // Silage crops
-            this.PercentageOfProductYieldReturnedToSoilForSilageCrops = 35;
+            this.PercentageOfProductYieldReturnedToSoilForSilageCrops = 2;
             this.PercentageOfRootsReturnedToSoilForSilageCrops = 100;
 
             // Cover crops
