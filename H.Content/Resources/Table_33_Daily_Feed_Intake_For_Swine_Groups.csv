@@ -1,13 +1,15 @@
-Swine Group,Feed Intake (kg head -1 day-1)
-Dry gilt/sow,2.488
-Lactating gilt/sow,6.590
-Nursery weaners (starter diet 1),0.797
-Nursery weaners (starter diet 2),1.165
-Grower/Finisher diet 1,1.679
-Grower/Finisher diet 2,2.134
-Grower/Finisher diet 3,2.55
-Grower/Finisher diet 4,2.934
-Boar,3.00
+Swine Group,Feed Intake (kg head -1 day-1),Start Weight (kg),End Weight (kg),Litter size (no. piglets),No. days in management period
+Dry gilt/sow,2.488,198,198,9,
+Lactating gilt/sow,6.590,198,198,9,
+Piglet (nursing),,1.4,6,,21
+Nursery weaners (starter diet 1),0.797,6,20,,19
+Nursery weaners (starter diet 2),1.165,20,30,,16
+Grower/Finisher diet 1 (1),1.679,30,50,,26
+Grower/Finisher diet 2 (1),2.134,50,65,,17
+Grower/Finisher diet 3 (1),2.55,65,90,,27
+Grower/Finisher diet 4 (1),2.934,90,130,,45
+Boar,3.00,198,198,,365
 ,,,,,,
 ,,,,,,
 "Data source: D. Beaulieu, U. of Saskatchewan, pers. comm.",,,,,,
+1 Grower/Finisher diets relate to Grower-Finisher animals (Hogs) in the Grower-to-Finish component and the Farrow-to-Finish component,,,,,,
