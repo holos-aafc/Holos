@@ -38,6 +38,7 @@ namespace H.Core.Providers.Animals
                 return 2.42;
             }
 
+            // Swine boars are also used to indicate hogs
             if (animalType == AnimalType.SwineBoar || animalType == AnimalType.SwineGrower) // Footnote 1
             {
                 // Check if is young animal (hogs/growers). Boars will have a higher rate.
