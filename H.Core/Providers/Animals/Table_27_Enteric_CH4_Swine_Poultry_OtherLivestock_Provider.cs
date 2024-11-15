@@ -38,8 +38,9 @@ namespace H.Core.Providers.Animals
                 return 2.42;
             }
 
-            if (animalType == AnimalType.SwineBoar) // Footnote 1
+            if (animalType == AnimalType.SwineBoar || animalType == AnimalType.SwineGrower) // Footnote 1
             {
+                // Check if is young animal (hogs/growers). Boars will have a higher rate.
                 if (managementPeriod.ProductionStage == ProductionStages.GrowingAndFinishing)
                 {
                     if (weightMidPoint <= 65)
