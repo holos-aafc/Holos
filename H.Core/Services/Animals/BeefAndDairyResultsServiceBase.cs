@@ -68,8 +68,10 @@ namespace H.Core.Services.Animals
                     }
                 }
 
+                var isIndoorDairyHousing = managementPeriod.HousingDetails.HousingType.IsIndoorHousing() && managementPeriod.AnimalType.IsDairyCattleType();
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForIndoorHousing(
-                    dailyTemperature: temperature);
+                    dailyTemperature: temperature,
+                    isDairyIndoorHousing: isIndoorDairyHousing);
             }
             else
             {
