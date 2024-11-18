@@ -243,6 +243,10 @@ To modify one of the default diets in Holos for a specific animal group and mana
 >*Please note: if the user selects the same diet (either the original default diet or a copy) for more than one management period, any changes made to the diet in one management period will automatically be replicated for any other management periods using the same diet. Therefore, if the user needs to make different modifications to an existing diet for multiple animal groups/management periods, it is recommended that a copy be created for each management period, and then modified accordingly. Alternatively, the user can create an entirely new diet for each management period using the Custom Diet Creator.*
 
 
+### 10. How can I model dairy cattle that spend part of the day on pasture and the rest of the day in the barn?
+To model dairy cattle that divide their day between different housing systems, the model user can split the number of cattle in the relevant dairy cattle group(s) to create different groups that are housed in different housing systems, with the number of animals in each group representative of the proportion of time spend in each housing type. For example, if a group of 120 lactating dairy cows spends 8 hours on pasture and 16 hours in the barn in a typical day, this group could be split into two separate groups of 40 cows that spend all of their time on pasture (with the relevant diet, housing type and manure management system) and 80 cows that spend all of their time in the barn (with the relevant diet, housing type and manure management system). The model user can adjust the number of animals, diet, housing and manure management settings, etc., as appropriate to reflect where and for how long the cows spend their time, eat, urinate/defecate, etc.
+
+
 ---
 
 To download Holos, for more information, or to access a recent list of Holos related publications, visit:
