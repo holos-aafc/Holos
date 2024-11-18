@@ -1,5 +1,6 @@
 | Date | Commit ID | Summary of changes | GUI version |
 | -------- | ------- | ------- | ------- |
+| November 18, 2024 | [4186ac7](https://github.com/holos-aafc/Holos/commit/4186ac7f3e851db8f7ff73ebdd6e244d5a714d74) | Use outdoor temperature for dairy manure storage calculations. This change affect dairy N3N-N emissions from manure storage | 4.0.1.6 | 
 | October 20, 2024 | [d43e527](https://github.com/holos-aafc/Holos/commit/d43e5273514f39b9a7a35277a6731e30dcbb5c2d) | Check for leap years when downloading NASA climate data. This change affects all emission calculations | 4.0.0.602 | 
 | September 17, 2024 | [3f491ec](https://github.com/holos-aafc/Holos/commit/3f491ec246f287a9d7cdeee15f1cd4e8ee2e84d7) | Update below ground N calculation for perennials | 4.0.0.597 | 
 | September 12, 2024 | [419799a](https://github.com/holos-aafc/Holos/commit/419799ae1dc1ae4eedb3e6019d32f84f3fab3708) | Update DMI max calculation for dairy animals | 4.0.0.597 |
