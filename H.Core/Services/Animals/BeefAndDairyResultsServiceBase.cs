@@ -55,22 +55,23 @@ namespace H.Core.Services.Animals
 
             if (managementPeriod.HousingDetails.HousingType.IsIndoorHousing())
             {
+                var housingTemperature = temperature;
                 if (managementPeriod.AnimalType.IsDairyCattleType())
                 {
                     if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false)
                     {
                         var month = (Months) dateTime.Month;
-                        temperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
+                        housingTemperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
                     }
                     else
                     {
-                        temperature = managementPeriod.HousingDetails.IndoorHousingTemperature;
+                        housingTemperature = managementPeriod.HousingDetails.IndoorHousingTemperature;
                     }
                 }
 
                 var isIndoorDairyHousing = managementPeriod.HousingDetails.HousingType.IsIndoorHousing() && managementPeriod.AnimalType.IsDairyCattleType();
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForIndoorHousing(
-                    dailyTemperature: temperature,
+                    dailyTemperature: housingTemperature,
                     isDairyIndoorHousing: isIndoorDairyHousing);
             }
             else
