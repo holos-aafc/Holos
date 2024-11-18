@@ -96,29 +96,42 @@ namespace H.Core.Providers.Soil
 
             foreach (var line in lines.Skip(1))
             {
-                var year = int.Parse(line[0], cultureInfo);
-                for (int i = 1; i < line.Count(); i++)
+                if (line.All(string.IsNullOrWhiteSpace))
                 {
-                    var yieldString = line[i];
-                    var yield = 0d;
-                    if (string.IsNullOrWhiteSpace(yieldString) == false)
-                    {
-                        yield = double.Parse(yieldString, cultureInfo);
-                    }
-                    else
-                    {
-                        yield = 0;
-                    }
+                    continue;
+                }
 
-                    var entry = new CustomUserYieldData()
+                try
+                {
+                    var year = int.Parse(line[0], cultureInfo);
+                    for (int i = 1; i < line.Count(); i++)
                     {
-                        Year = year,
-                        FieldName = fieldNames.ElementAt(i - 1),
-                        Yield = Math.Round(yield, 1),
-                        RotationName = rotationNames.ElementAt(i - 1),
-                    };
+                        var yieldString = line[i];
+                        var yield = 0d;
+                        if (string.IsNullOrWhiteSpace(yieldString) == false)
+                        {
+                            yield = double.Parse(yieldString, cultureInfo);
+                        }
+                        else
+                        {
+                            yield = 0;
+                        }
 
-                    customUserYieldData.Add(entry);
+                        var entry = new CustomUserYieldData()
+                        {
+                            Year = year,
+                            FieldName = fieldNames.ElementAt(i - 1),
+                            Yield = Math.Round(yield, 1),
+                            RotationName = rotationNames.ElementAt(i - 1),
+                        };
+
+                        customUserYieldData.Add(entry);
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    throw;
                 }
             }
 

@@ -26,48 +26,54 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
+        #region Public Methods
+
         public double GetAnnualEntericMethaneEmissionRate(ManagementPeriod managementPeriod)
         {
             var weightMidPoint = (managementPeriod.EndWeight + managementPeriod.StartWeight) / 2.0;
             var animalType = managementPeriod.AnimalType;
-            
+
             if (animalType == AnimalType.SwineSows || animalType == AnimalType.SwineLactatingSow || animalType == AnimalType.SwineDrySow) // Footnote 1
             {
                 return 2.42;
             }
-            
-            if (animalType == AnimalType.SwineBoar) // Footnote 1
+
+            // Swine boars are also used to indicate hogs
+            if (animalType == AnimalType.SwineBoar || animalType == AnimalType.SwineGrower) // Footnote 1
             {
-                return 2.64;
+                // Check if is young animal (hogs/growers). Boars will have a higher rate.
+                if (managementPeriod.ProductionStage == ProductionStages.GrowingAndFinishing)
+                {
+                    if (weightMidPoint <= 65)
+                    {
+                        return 0.7;
+                    }
+                    else
+                    {
+                        return 1.5;
+                    }
+                }
+                else
+                {
+                    return 2.64;
+                }
             }
-               
+
             if (animalType == AnimalType.SwineGilts) // Footnote 1
             {
                 return 2.42;
             }
-                
-            if (animalType == AnimalType.SwineGrower) // Footnote 1
-            {
-                if (weightMidPoint <= 65)
-                {
-                    return 0.7;
-                }
-                else
-                {
-                    return 1.5;
-                }
-            }
-            
+
             if (animalType == AnimalType.SwineFinisher) // Footnote 1
             {
                 return 1.5;
             }
-            
+
             if (animalType == AnimalType.SwineStarter || animalType == AnimalType.SwinePiglets) // Footnote 1
             {
                 return 0.23;
             }
-                           
+
             if (animalType.IsPoultryType()) // Footnote 2
             {
                 return 0;
@@ -77,7 +83,7 @@ namespace H.Core.Providers.Animals
             {
                 return 8;
             }
-            
+
             if (animalType == AnimalType.Goats) // Footnote 3
             {
                 return 5;
@@ -108,11 +114,13 @@ namespace H.Core.Providers.Animals
                              $" Returning default value of 0.");
 
             return 0;
-        }
+        } 
+
+        #endregion
 
         #region Footnotes
 
- 	    // Footnote 1: Source: Verge et al. (2009)
+        // Footnote 1: Source: Verge et al. (2009)
         // Footnote 2: Due to insufficient data, no default enteric CH4 emission factors are available for poultry (IPCC, 2019)
         // Footnote 3: Low productivity systems. Source: IPCC (2019), Table 10.10
         // Footnote 4: Elk were added to this category

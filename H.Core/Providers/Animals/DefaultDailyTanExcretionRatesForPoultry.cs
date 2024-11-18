@@ -47,7 +47,7 @@ namespace H.Core.Providers.Animals
             else
             {
                 // Turkeys
-                return 0.2;
+                return 0.25;
             }
         }
 

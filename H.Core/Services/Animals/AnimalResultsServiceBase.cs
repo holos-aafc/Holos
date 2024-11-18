@@ -1388,12 +1388,22 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.1-12
+        ///
+        /// Indoor dairy housing systems do not get an additional +2 degrees - just beef housing systems
         /// </summary>
         /// <param name="dailyTemperature">Temperature (°C)</param>
+        /// <param name="isDairyIndoorHousing"></param>
         /// <returns>Temperature-based adjustments used to correct default NH3 emission factors for indoor housing</returns>
-        public double CalculateAmbientTemperatureAdjustmentForIndoorHousing(double dailyTemperature)
+        public double CalculateAmbientTemperatureAdjustmentForIndoorHousing(double dailyTemperature,
+            bool isDairyIndoorHousing = false)
         {
-            return Math.Pow(1.041, dailyTemperature + 2) / Math.Pow(1.041, 15);
+            var temperatureAdjustment = dailyTemperature;
+            if (isDairyIndoorHousing == false)
+            {
+                temperatureAdjustment += 2;
+            }
+
+            return Math.Pow(1.041, temperatureAdjustment) / Math.Pow(1.041, 15);
         }
 
         /// <summary>

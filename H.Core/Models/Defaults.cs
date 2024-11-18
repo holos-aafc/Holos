@@ -184,7 +184,7 @@ namespace H.Core.Models
             this.PercentageOfRootsReturnedToSoilForAnnuals = 100;
 
             // Silage crops
-            this.PercentageOfProductYieldReturnedToSoilForSilageCrops = 35;
+            this.PercentageOfProductYieldReturnedToSoilForSilageCrops = 2;
             this.PercentageOfRootsReturnedToSoilForSilageCrops = 100;
 
             // Cover crops
@@ -919,7 +919,6 @@ namespace H.Core.Models
             get => _defaultRunInPeriod; 
             set => SetProperty (ref _defaultRunInPeriod, value); 
         }
-
 
         /// <summary>
         /// The type of pump used for irrigation in the farm. Can be changed by the user in the User Settings menu of the UI.
