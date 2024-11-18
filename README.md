@@ -23,6 +23,7 @@ To see answers to the most frequently asked questions about Holos (both the soft
 A draft version of the Holos version 4.0 algorithm document is being made available for review
 
 The Holos version 4.0 algorithm document can be found at the following link:
+
 <a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx" target="_blank">AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx</a>
 
 # Training Guide
