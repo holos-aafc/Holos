@@ -350,7 +350,7 @@ namespace H.Core.Calculators.Nitrogen
                 {
                     fertilizerTypeFactor = 0.282;
                 }
-                else if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.AmmoniumSulphate)
+                else if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.AnhydrousAmmonia)
                 {
                     fertilizerTypeFactor = -1.151;
                 }
