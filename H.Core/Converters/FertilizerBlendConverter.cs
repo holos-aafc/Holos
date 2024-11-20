@@ -15,6 +15,7 @@ namespace H.Core.Converters
                     return FertilizerBlends.Urea;
 
                 case "ammonia":
+                case "anhydrousammonia":
                     return FertilizerBlends.Ammonia;
 
                 case "ureaammoniumnitrate":

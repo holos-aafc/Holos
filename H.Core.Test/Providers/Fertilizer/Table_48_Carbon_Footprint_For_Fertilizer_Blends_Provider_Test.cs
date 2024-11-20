@@ -58,7 +58,7 @@ namespace H.Core.Test.Providers.Fertilizer
             Assert.AreEqual(82, data.PercentageNitrogen);
 
             data = _provider.GetData(FertilizerBlends.CalciumNitrate);
-            Assert.AreEqual(1.87, data.CarbonDioxideEmissionsAtTheGate);
+            Assert.AreEqual(1.58, data.CarbonDioxideEmissionsAtTheGate);
 
             data = _provider.GetData(FertilizerBlends.Urea);
             Assert.AreEqual(0.73, data.ApplicationEmissions);

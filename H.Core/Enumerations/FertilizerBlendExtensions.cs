@@ -22,7 +22,6 @@
                 case FertilizerBlends.CalciumNitrate:
                 case FertilizerBlends.AmmoniumNitroSulphate:
                 case FertilizerBlends.MesS15:
-                case FertilizerBlends.AnhydrousAmmonia:
                 case FertilizerBlends.MonoAmmoniumPhosphate:
                 {
                     return true;
