@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2023"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2024"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -236,20 +236,20 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 2. To expand the horizontal space available in Holos, click on "**View**" from the top menu bar and select "**Hide List of Available Components**".
 
-3. The rotation of this field begins in **"1985"** and ends in **"2023"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
+3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
 
 4. Enter **"70"** ha as the **total area** of this field.
 
-5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2023"**.
+5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
     * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
-     * Change the tillage type to **"Reduced Tillage"**.
-    * Keep **"0"** as the amount of irrigation and number of pesticide passes.
+    * Change the tillage type to **"Reduced Tillage"**.
+    * Keep **"80.78"** as the amount of irrigation and **"0"** as the number of pesticide passes.
 
 6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. 
 
 <br>
 
-> *Note: Holos sets the year for this new crop to 2022 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
+> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
 
 > *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
 
@@ -259,9 +259,10 @@ For this example, we assume that the farm requires **70 ha** of barley grain and
 
 8. Click on the **Add crop** button one more time. For this third crop, select **"Tame Mixed (grass/legume)"** once again as the crop type.
 
-9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2022) and then:
+9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2023) and then:
     * Under the **Harvest Tab** click the **"Add Harvest Date"** button to create a new harvest.
-    * Select a Harvest date of "**"August 31, 2022"**", assuming the harvest is done on the same day every year.
+    * Select a Harvest date of "**"August 31, 2023
+    "**", assuming the harvest is done on the same day every year.
     * Select **"Mid"** for Forage growth stage.
     * Enter **"5"** as the total number of bales.
     * Enter **"500"** as the Wet bale weight.
@@ -305,13 +306,13 @@ If you hover your mouse cursor over the “Chicken Meat Production” component 
 
 Click on **View** menu item in the top taskbar and uncheck the **Hide List of Available Components** option. 
 
-The poultry meat production farm is **divided into three  management (production) periods** for both pullet and cockerels. We will enter production and management data corresponding to these three management periods for both of these animal groups. 
+The poultry meat production farm is **divided into three  management (production) periods**. We will enter production and management data corresponding to these three management periods.
 
-1. Under **Step 1**, make sure that the “**Pullets**” row is selected.
+1. Under **Step 1**, make sure that the “**Broilers**” row is selected.
 
 2. Click the management period “**Brooding**” in **Step 2** to activate that management period.
 
-3. Ensure “**January 1, 2023**” appears as the **Start date** and that “**January 15, 2022**” appears as the **End date**. These dates are set as the defaults.
+3. Ensure “**January 1, 2024**” appears as the **Start date** and that “**January 15, 2024**” appears as the **End date**. These dates are set as the defaults.
 
  Keep the remaining entries as their default values for the two "**Rearing stage**" management periods. Thus, all three management periods will be 14 days in length. 
 
@@ -325,8 +326,6 @@ Next, we can enter data related to the number of animals, manure system, and hou
 
 * **Manure Tab**:
     * Leave **Solid storage (with or without litter)** as the default manure handling system.
-    
-We can now go back and fill in the selections for the **Cockerels** group. Highlight the the "**Pullets**" group and right click on it to activate the **Copy Management From -> Pullets**. All of the previously entered information will appear within the **Cockerels** group. 
 
 > *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane and nitrous oxide emissions. Length of management periods (e.g., duration of grazing) will also be needed.*
 
@@ -355,7 +354,7 @@ Click on the "**Hens**" row in the animal group section in **Step 1**. Informati
 
 2. Click the management period “**Brooding**” in **Step 2** to activate that management period.
 
-3. Ensure “**January 1, 2023**” appears as the **Start date** and that “**January 15, 2022**” appears as the **End date**. These dates are set as the defaults.
+3. Ensure “**January 1, 2024**” appears as the **Start date** and that “**January 15, 2024**” appears as the **End date**. These dates are set as the defaults.
 
 * **General Tab:**:
     * Enter **150,000** as the number of animals. 
