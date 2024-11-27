@@ -74,7 +74,7 @@ Find and right-click on this polygon to select it on the map (Figure 6). Note th
 > *Note: Climate data is central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
 > 
 
-> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon change (climate parameter), nitrous oxide emissions, and ammonia volatilization.*
+> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon (C) change (climate parameter), nitrous oxide (N<sub>2</sub>O) emissions, and ammonia (NH<sub>3</sub>) volatilization.*
 
 <br>
 
@@ -191,7 +191,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 > *At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate (where applicable) to calculate direct and indirect N<sub>2</sub>O emissions.*
  
-> *Residue management of each crop (and cover crop) can be adjusted in Holos (see the ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil carbon change estimates, as well as soil N<sub>2</sub>O emissions estimates.*
+> *Residue management of each crop (and cover crop) can be adjusted in Holos (see the ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil C change estimates, as well as soil N<sub>2</sub>O emissions estimates.*
  
 > *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available in the crop drop-down menus.*
 
@@ -301,7 +301,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
     * Enter **14,000 kg/ha** as the amount of manure applied to this field.
 4. Note that both chemical fertilizer and manure applications can be made on the same field.
 
-> Holos provides an interactive gauge on the left of the manure tab to show the "**Amount of Stored Manure N Remaining (Poultry) (kg N)**" which will move to reflect the user's application choices and quantify the amount of manure remaining for application.
+> Holos provides an interactive gauge on the left of the manure tab to show the "**Amount of Stored Manure N Remaining (Poultry) (kg N)**" that will move to reflect the user's application choices and quantify the amount of stored manure remaining for application.
 
 <br>
 
@@ -316,7 +316,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 # Timeline Screen
 
 We are now finished the process of defining our farm. Click the **Next** button to go forward to the timeline screen.
-The timeline screen provides a visual layout of all the fields from 1985 to the specified end year for each field. This screen also allows the user to add historical and projected production systems. 
+The timeline screen provides a visual layout of the farm's fields from the start year to the end year for each field. This screen also allows the user to add historical and projected production systems for individual fields and/or rotations. 
 
 The **Add Historical Production System** button enables the user to add a different cropping history to individual fields whereas the **Add Projected Production System** button enables the user to add a future (projected) cropping system to individual fields.
 
@@ -324,47 +324,47 @@ The **Add Historical Production System** button enables the user to add a differ
 ### Adding a historical production system
 
 
-We will assume that the barley grain and mixed hay rotation fields were previously in a continuous wheat cropping system between **1985 and 2000**.
+We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barley** grain - **Tame mixed (grass\legume)** hay rotation between **1985 and 2000**.
 
-1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of **"Crop rotation #1 [Field #1] - Barley"**).
+1. To add a new historical cropping system, select the "**Wheat & Hairy Vetch field**". To select an item, click on the timeline bar to activate that field.
 
-2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left section of the screen. Notice that this new entry has the words **"Historical management practice"** added.
+2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left section of the screen. Note that this new entry has the words **"Historical management practice"** added.
 
 3. We will set the end year of this historical management practice to the year **2000**. To adjust this we use the numeric up/down buttons within the cell.
 
-4. Select the newly added **Historical management practice** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and the management during this period.
+4. Select the newly added **Historical management practice** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and their management during this period.
 
-5. Click on the **"Barley"** crop under the **"Step 2"** section. Change the crop type to **'Wheat'** and on the **'General'** tab change the yield to **3,500** kg/ha. We will keep the other settings unchanged.
+5. As we want to make this a three-crop rotation, under **"Step 2"** click the "**Add Crop**" button twice to add two more crops. 
 
-6. We also need to remove the **"Tame mixed"** crops from this historical period. Click the **'X'** icon beside each of the **"Tame mixed"** crops under the **"Step 2"** section. Clicking the **'X'** icon will remove these crops from the rotation for this period of time.
+7. Change the first crop type to "**Barley**" (with no cover crop). Enter a yield of "**3,500 kg ha<sup>-1</sup>**" (wet weight) and keep all other settings as default.
+  
+8. Change the second and third rows to **"Tame mixed (grass/legume)"** - note that when a perennial crop is selected as the main crop, Holos automatically selects the same crop type as the cover crop. Keep all other settings as default for both years. 
 
-7. Click **"OK"** to save adjustments we just made to this field.
-
-8. Repeat these same steps so that the other fields in this rotation also have continuous wheat from **1985 to 2000** using the same steps we used for the first field.
+10. Click **"OK"** to save these adjustments.
 
 
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure16.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure14_Revised.png" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 16: Customized Timeline Screen</em>
+    <em>Figure 14: Customized Timeline screen</em>
 </p> 
 
 <br>  
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure17.png" alt="Figure 17" width="550"/>
+    <img src="../../Images/PoultryGuide/en/Figure15_Revised.png" alt="Figure 15" width="550"/>
     <br>
-    <em>Figure 17: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 15: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 
 <br> 
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure18.png" alt="Figure 18" width="650"/>
+    <img src="../../Images/PoultryGuide/en/Figure16_Revised.png" alt="Figure 16" width="650"/>
     <br>
-    <em>Figure 18: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 16: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -376,9 +376,9 @@ Click the **"Next"** button to go forward to the details screen.
 
 To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil carbon sequestration rates and soil N<sub>2</sub>O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground carbon inputs to the soil.
 
-We will adjust this grid so that we can view the above-ground and below-ground carbon inputs for our wheat field and then we will adjust the crop yield for one specific year.
+We will adjust this grid so that we can view the above-ground and below-ground carbon inputs for our **Wheat & Hairy Vetch** field and then we will adjust the crop yield for one specific year.
 
-1. We will set a filter on the first column named **'Field name'** so that we only display information for our **'Wheat and hairy vetch field'**. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **'Wheat & hairy vetch'**.
+1. We will set a filter on the first column named **'Field name'** so that we only display information for our current **Wheat and hairy vetch** field. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **'Wheat & hairy vetch'**.
 
 2. On the far left of this screen, click the **"Enable Columns"** sidebar (located near the “Field name” column).
 
@@ -386,74 +386,73 @@ We will adjust this grid so that we can view the above-ground and below-ground c
 
 4. Click the **'Enable Columns'** sidebar again to collapse it.
 
-5. We can now (optionally) adjust the yields for our wheat field for any given year if actual measured yields are available.
+5. We can now (optionally) adjust the yields for our wheat crop for any given year if actual measured yields are available.
 
-6. Adjust the yield for **1987** to be **4,100** kg/ha.
+6. Adjust the wheat
+7. yield for **2006** to be **4,100** kg/ha.
 
-7. Note that Holos has updated the above-ground carbon inputs for this.
+8. Note that Holos has updated the above-ground C inputs for this.
 
 
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure19.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 19: Details screen</em>
+    <em>Figure 17: Details screen</em>
 </p> 
 
 <br>
 
 #  Results Screen
 
-Click the **"Next"** button to move on to discover the results in the final section. Results will now be displayed in a variety of reports and charts.
+Click the **"Next"** button to move on to discover the results on the final screen. The Holos outputs for our simulated farm are displayed in a variety of reports and charts.
 
 1. Click on the tab named **Detailed Emission Report**
 
-    The **Detailed Emission Report** will display a monthly or annual GHG emission report. The detailed emission report will report on enteric methane, manure methane, direct & indirect N2O, and CO2 emissions from the farm.
+    The **Detailed Emission Report** will display a monthly or annual GHG emission report. The detailed emission report will report on enteric methane (CH<sub>4</sub>), manure CH<sub>4</sub>, direct and indirect N<sub>2</sub>O, and carbon dioxide (CO<sub>2</sub>) emissions from the farm.
 
 2. Click the **Report Format (Monthly)** button to switch to a monthly report. Now we can see a monthly breakdown of all emissions from the farm and the emission source.
 
-    In the **Unit of measurements** drop-down menu, you can choose to have the results displayed as CO2 equivalents (CO2e) or as unconverted greenhouse gas (GHG), and you can also choose the unit of measurement as either tonnes or kilograms.
+    In the **Unit of measurement** drop-down menu, you can choose to have the results displayed as CO<sub>2</sub> equivalents (CO<sub>2</sub>e) or as unconverted greenhouse gases (GHG), and you can also choose the unit of measurement as either tonnes/megagrammes (Mg) or kilograms (kg).
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 20: Detailed emissions report.</em>
+    <em>Figure 18: Detailed emissions report.</em>
 </p> 
 
 <br>
 
-3. Click on the **Estimates of Production** report which provides total harvest yields, amount of land applied manure, and estimates of milk production for dairy components.
-    
-    Use the slide bar on the right of the screen to see the bar graph display of **Land Applied Manure**.
+3. Click on the **Estimates of Production** report which provides total harvest yields for the farm's fields and of the amount of N available in manure produced by the farm's livestock.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure21.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 21: Estimates of production report.</em>
+    <em>Figure 19: Estimates of production report.</em>
 </p> 
 
 <br>
 
 ## Soil carbon modelling results
 
-On the results screen we can see the change in soil carbon over time by clicking the “**Multiyear Carbon Modelling**” tab. This tab displays a graph showing the change in soil carbon over time for each one of our fields.
+On the results screen we can see the change in soil C over time by clicking the “**Multiyear Carbon Modelling**” tab. This tab displays a graph showing the estimated soil C stock for each field on the farm.
 
-For each field on the graph, you can hover your mouse over the series to get more information for each historical year of the field.
+For each field on the graph (where more than one field is present), you can hover your mouse over the series to get more information for each year of the simulation.
 
-If we click on one of these points, we can then view a more detailed breakdown of these results via the “Grid” report format. We can also export this data by clicking the "**Export to Excel**" button.
+If we click on one of these points, we can then view a more detailed breakdown of these results via the “Grid” report format. We can also export this data by clicking the "**Export to Excel**" button on the top-left.
 
 If you would like to export your entire farm file, from '**File**' on the main taskbar select '**Export**'. Click the arrow to highlight your farm and save it as a .json file.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure22.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 22: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 20: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 
 <br>
@@ -464,12 +463,12 @@ If you would like to export your entire farm file, from '**File**' on the main t
 
 ## Whole-systems approach 
 
-> An ecosystem consists of not only the organisms and the environment they live in but also the interactions within and between. A whole systems approach seeks to describe and understand the entire system as an integrated whole, rather than as individual components. This holistic approach can be very complex and describing the process can be difficult. One method to conceptualize a whole system is with a mathematical model.
+> An ecosystem consists of not only the organisms and the environment in which they live but also the interactions within and between these organisms and their surroundings. A whole systems approach seeks to describe and understand the entire system as an integrated whole, rather than as individual components. This holistic approach can be very complex and describing the process can be difficult. One method to conceptualize a whole system is with a mathematical model.
 > 
 > The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
 
 
-To download Holos, for more information, or to access a recent list of Holos related publications, visit: www.agr.gc.ca
+To download Holos, for more information, or to access a recent list of Holos-related publications, visit: www.agr.gc.ca
 
 To contact us, email:
 aafc.holos.acc@canada.ca
