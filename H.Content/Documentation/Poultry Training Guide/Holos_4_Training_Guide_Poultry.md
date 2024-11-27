@@ -226,17 +226,17 @@ If you hover your cursor over the “Chicken Meat Production” component under 
 **“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg, depending on bird type and end product) after approximately 30-56 days (depending on the bird type and rearing system).”**
 
 
-The poultry meat production farm is **divided into three  management (production) periods**. We will enter production and management data corresponding to these three management periods.
+The poultry meat production farm is **divided into three management (production) periods**. We will enter production and management data corresponding to these three management periods.
 
 1. Under **Step 1**, make sure that the “**Broilers**” row is selected.
 
-2. Click the management period “**Brooding**” in **Step 2** to activate that management period.
+2. Click the management period “**Brooding stage**” in **Step 2** to activate that management period.
 
 3. Ensure “**January 1, 2024**” appears as the **Start date** and that “**January 15, 2024**” appears as the **End date**. These dates are set as the defaults.
 
- Keep the remaining entries as their default values for the two "**Rearing stage**" management periods. Thus, all three management periods will be 14 days in length. 
+Keep the remaining entries as their default values for the two "**Rearing stage**" management periods. Thus, all three management periods will be 14 days in length. 
 
-Next, we can enter data related to the number of animals, manure system, and housing type for each of the three management periods. Select "**Brooding stage**" first, and then repeat the steps for each of the "**Rearing stage**" periods following. This means the number of animals will be consistent throughout the management periods / year. 
+Next, we can enter data related to the number of animals, manure management system, and housing type for each of the three management periods. Select "**Brooding stage**" first, and then repeat the steps outlined below for each of the "**Rearing stage**" periods. This means the number of animals will be consistent throughout the production cycle. 
 
 * **General Tab:**
     * Enter **75,000** as the number of animals. 
@@ -247,12 +247,10 @@ Next, we can enter data related to the number of animals, manure system, and hou
 * **Manure Tab**:
     * Leave **Solid storage (with or without litter)** as the default manure handling system.
 
-> *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane and nitrous oxide emissions. Length of management periods (e.g., duration of grazing) will also be needed.*
-
 
 ## Entering 'Chicken Egg Production' Information
 
-Click on the "**Hens**" row in the animal group section in **Step 1**. Information related to numbers, housing, and manure management is entered the same as it was for the cockerel and pullet groups above. As egg-laying occurs year round, there is only a single 365 day management period for hens.
+Click on the "**Hens**" row in the animal group section in **Step 1**. As egg-laying occurs year round, there is only a single 358-day management period for hens.
 
 * **General Tab:**
 
@@ -267,12 +265,12 @@ Click on the "**Hens**" row in the animal group section in **Step 1**. Informati
     * Leave **Solid storage (with or without litter)** as the default manure handling system.
 
 
-## Entering 'Pullet Farm' Information:
- We can enter data related to the number of animals, manure system, and housing type for each of the two management periods. Select "**Brooding stage**" first, and then repeat the steps for the "**Rearing stage**". The number of animals will be consistent throughout the management periods / year. 
+## Entering 'Pullet Farm' Information
+We can enter data related to the number of animals, manure system, and housing type for each of the two management periods. Select the "**Brooding stage**" management period first, and then repeat the steps for the "**Rearing stage**". The number of animals will be consistent throughout the production cycle. 
  
 1. Under **Step 1**, make sure that the “**Pullets**” row is selected.
 
-2. Click the management period “**Brooding**” in **Step 2** to activate that management period.
+2. Click the management period “**Brooding stage**” in **Step 2** to activate that management period.
 
 3. Ensure “**January 1, 2024**” appears as the **Start date** and that “**January 15, 2024**” appears as the **End date**. These dates are set as the defaults.
 
@@ -285,31 +283,32 @@ Click on the "**Hens**" row in the animal group section in **Step 1**. Informati
 * **Manure Tab**:
     * Leave **Solid storage (with or without litter)** as the default manure handling system.
 
-Highlight the "**Rearing stage**" and enter the above information once more. The number of days for this stage should appear as 119 as a default.
+Highlight the "**Rearing stage**" management period and set the **Start date** to “**January 16, 2024**” and the **End date** to “**May 14, 2024**”; enter the same animal number, housing and manure management information as for the "**Brooding stage**".
 
 
 ### Adding a Manure Application to the Wheat Field
 
-In Holos, the user can apply livestock manure to a field using either manure produced by the livestock on the farm or using manure imported from off-farm. Since we have now defined our animal components, we can apply manure to any field on our farm.
+In Holos, the user can apply livestock manure to a field using either manure produced by the livestock on the farm or manure imported from off-farm. Since we have now defined our animal components, we can apply poultry manure produced on-farm to any field on our farm.
 
 1. Select the **Wheat & hairy vetch** field from the list of components added to our farm.
 
-2. Click on the **Manure tab** and then click the **Add Manure Application** button. 
+2. Click on the **Manure tab** and then click the **Add Manure Application** button.
+    * Select **April 30, 2024** as the **Date**.
     * Select **Livestock** as the **Origin of manure**.
     * Select **Poultry** as the **Manure type** .
     * Select **Solid storage (with or without litter)** as the **Manure handling system**.
-    * Select **Slurry broadcasting** as the **Application method**
-    * Enter **14000 kg/ha** as the amount of manure applied to this field.
-3. Note that both chemical fertilizers and manure applications can be made on the same field.
+    * Select **Solid spread (no tillage or reduced tillage)** as the **Application method**
+    * Enter **14,000 kg/ha** as the amount of manure applied to this field.
+4. Note that both chemical fertilizer and manure applications can be made on the same field.
 
-> Holos provides an interactive gauge on the left of the manure tab to show the "**Amount of Stored Manure N Remaining (poultry) (kg N)**" which will move to reflect the users application choices and quantify manure availability.
+> Holos provides an interactive gauge on the left of the manure tab to show the "**Amount of Stored Manure N Remaining (Poultry) (kg N)**" which will move to reflect the user's application choices and quantify the amount of manure remaining for application.
 
 <br>
 
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 15 - Adding a Manure Application to a Field.</em>
+    <em>Figure 13: Adding a Manure Application to a Field.</em>
 </p>
  
 <br>
