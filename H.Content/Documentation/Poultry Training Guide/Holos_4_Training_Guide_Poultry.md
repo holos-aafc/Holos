@@ -4,7 +4,7 @@
 </p>
 The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. optional inputs.
 
-For the purpose of this training, we are going to create a farm that has an annual poultry production system (including both meat and eggs), and a feed crop production system. The farm is located in Manitoba near Portage La Prairie. 
+For the purpose of this training, we are going to create a farm that has an annual poultry production system (including both meat and eggs). We will also create a field component to 'grow' crops on our farm. The farm is located in Manitoba near Portage La Prairie. 
 
 <br>
 
@@ -12,9 +12,9 @@ For the purpose of this training, we are going to create a farm that has an annu
 
 Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS will be supported in the next version.
 
-Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
+Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system, Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2024"** as the Name and **"Training Version"** as the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2024"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -23,7 +23,7 @@ Ensure **"Metric"** is selected as the unit of measurement type and then click t
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure1.png" alt="Figure 1" width="650"/>
     <br>
-    <em>Figure 1: If a farm has been previously saved, Holos will prompt to re-open that farm.</em>
+    <em>Figure 1: If a farm has previously been saved, Holos will prompt the user to re-open that farm.</em>
 </p>
 
 <br>
@@ -39,7 +39,7 @@ Ensure **"Metric"** is selected as the unit of measurement type and then click t
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure3.png" alt="Figure 3" width="550"/>
     <br>
-    <em>Figure 3: Select metric as the unit of measurement.</em>
+    <em>Figure 3: Select "metric" as the unit of measurement.</em>
 </p>
 
 <br>
@@ -58,13 +58,13 @@ The poultry farm that we will create for this exercise is located in the provinc
 
 <br>
 
-Holos uses **Soil Landscapes of Canada** (SLC), which are a series of GIS coverages that show the major characteristics of soils and land for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
+Holos uses **Soil Landscapes of Canada** (SLC) polygons, which are a series of GIS coverages that report the soil characteristics for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
 
 The “**Farm Location**” screen brings up a map of Canada with the province of Manitoba centered on the screen (Figure 5). 
 
 The map contains red colored polygons that can be selected by moving the cursor over the region that contains the location of your farm. You can zoom in or out of the map by using the mouse wheel or by hovering the cursor over the zoom icon at the bottom of the screen.
 
-The beef farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
+The poultry farm for this example is located between Winnipeg and Portage la Prairie (Portage), in SLC polygon number **851003**. 
 
 
 Find and right-click on this polygon to select it on the map (Figure 6). Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
@@ -74,7 +74,7 @@ Find and right-click on this polygon to select it on the map (Figure 6). Note th
 > *Note: Climate data is central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
 > 
 
-> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon change (climate parameter), nitrous oxide emissions, as well as ammonia volatilization.*
+> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon change (climate parameter), nitrous oxide emissions, and ammonia volatilization.*
 
 <br>
 
@@ -94,16 +94,16 @@ Find and right-click on this polygon to select it on the map (Figure 6). Note th
 
 <br>
 
-Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this polygon are displayed on the right side of the screen. It is possible that more than one soil type per polygon will be found and the user is expected to select their soil type from this list or use the default selection (Figure 7). The default soil type selected represents the dominant soil type for the chosen polygon.
+Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this polygon are displayed on the right side of the screen. It is possible that more than one soil type per polygon is available and the user is expected to select the relevant soil type from this list or use the default selection (Figure 7). The default soil type selected represents the dominant soil type for the chosen polygon.
 
-For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the default "**Hardiness Zone**" as '3b'. 
+For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the default **Hardiness Zone** as '3b'. 
 
 <br>
 
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure7.png" alt="Figure 7" width="950"/>
     <br>
-    <em>Figure 7: Multiple soil types might be available for a given region.</em>
+    <em>Figure 7: Multiple soil types may be available for a given region.</em>
 </p>  
 
 <br>
@@ -118,27 +118,27 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 8). These components are grouped into various categories including Land Management, Beef and Dairy Cattle, Other Livestock and Poultry.
+Now that the farm location has been selected, we can move on to the “Component Selection” screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the “All Available Components” column (Figure 8). These components are grouped into various categories including Land Management, Beef production, Dairy cattle, Swine, Sheep, Poultry and Other Livestock.
 
-If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the  training section, we will be working with the “Land management” and “Poultry” categories. 
+If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the training section, we will be working with the “Land management” and “Poultry” categories. 
 
 <br>
 
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure8.png" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 8: The available components screen. Specific components can be chosen here to include in the farm.</em>
+    <em>Figure 8: The Available Components screen. Specific components can be chosen here to include in the farm.</em>
 </p> 
 
 <br>
 
-The Holos model is designed so that the land management components are defined before the livestock components. This is because the model allows for the placement of livestock onto a specific field(s) (i.e., pasture(s)) for grazing. It is easier to do this if the pasture field has already been defined. However, the user can first set up their livestock components and then their field components, but will then need to return to their livestock components to specify and ‘place’ them on pasture.
+The Holos model is designed so that the land management components are defined before the livestock components. This is because the model allows for the placement of livestock onto a specific field(s) (i.e., pasture(s)) for grazing. It is easier to do this if the pasture field has already been defined. However, the user can first set up their livestock components and then their field components, but will then need to return to their livestock components to ‘place’ them on pasture.
 
 <div style="page-break-after: always"></div>
 
 ## Crop and Hay Production
 
-Now we can add our first component to the farm. Drag a **Field** component from the left side of the screen and drop it on the **My Farm** on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as **“Field #1”**. At this point, we can enter production information related to the crop being grown on this field.
+Now we can add our first component to the farm. Drag a **Field** component from the left side of the screen and drop it on the **My Farm** section on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will label the field as **“Field #1”**. At this point, we can enter production information related to the crop being grown on this field.
 
 <br>
 
@@ -159,7 +159,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 2. Select "**Wheat**" as the main crop and "**Hairy Vetch**" as the cover crop in "**Step 2**".
 
 3. Under the "**General**" tab:
-    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value..
+    * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value.
     * Select "**Reduced Tillage**" as the tillage type.
     * Enter "**200**" as the amount of irrigation.
     * Select **"0"** as the number of pesticide passes.
@@ -170,12 +170,12 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure10.png" alt="Figure 10" width="950"/>
     <br>
-    <em>Figure 10: Field Component of the farm.</em>
+    <em>Figure 10: Field component of the farm.</em>
 </p> 
 
 <br> 
 
-4. Select the **Fertilizer** tab and click the **Add Fertilizer Application** button. Holos has now added a new fertilizer application for this field and will suggest Urea as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, different fertilizer blend, etc.).
+4. Select the **Fertilizer** tab and click the **Add Fertilizer Application** button. Holos has now added a new fertilizer application for this field and will suggest "Urea" as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, blend, method of application, etc.).
 
 <br>
 
@@ -187,97 +187,17 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 
-> *Note: At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate to calculate direct and indirect nitrous oxide emissions.*
+> *Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year), only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
+
+> *At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate (where applicable) to calculate direct and indirect N<sub>2</sub>O emissions.*
  
-> *Residue management of each crop (and cover crop) can be adjusted in Holos (see ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil carbon change estimates.*
+> *Residue management of each crop (and cover crop) can be adjusted in Holos (see the ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil carbon change estimates, as well as soil N<sub>2</sub>O emissions estimates.*
  
-> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
+> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available in the crop drop-down menus.*
 
 
 <div style="page-break-after: always"></div>
 
-## Native Grassland 
-
-The poultry operation (defined later on) can utilize native pasture for free-range grazing in the summer months (May through October).
-
-1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
-
-2. Enter **"100"** ha as the total area of the field.
-
-3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** area when a perennial crop is selected.
-
-4. Keep **"0"** as the amount of irrigation and number of pesticide passes.
-
-5. No fertilizer is used for this crop.
-
-<br>
-
-<p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure12.png" alt="Figure 12" width="950"/>
-    <br>
-    <em>Figure 12: Native Grasslands information.</em>
-</p> 
-
-> *Please note: In the Holos farm we are building all of the production components on 'My Farm' are to be housed in barns, thus they will not have a grazing management period. This step was included for information purposes only.*
-
-<br>
-
-## Barley Grain and Mixed Hay Rotation
-
-To demonstrate the crop rotation component (as opposed to using individual field components), we will assume that barley grain and mixed hay are grown in rotation, with the mixed hay under-seeded to the barley so that it can be harvested in both main years (example derived from University of Alberta’s Breton plots). 
-
-When using the “Crop Rotation” component, any sequence of crops that are input into this component will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different management history, soil carbon algorithms will run for each field.
-
-For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to set up three fields where barley grain is rotated in each field every two years (Figure 13). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
-
-**To set up the rotation:** 
-
-1. Add one "**Crop Rotation**" component from the available components.
-
-2. To expand the horizontal space available in Holos, click on "**View**" from the top menu bar and select "**Hide List of Available Components**".
-
-3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
-
-4. Enter **"70"** ha as the **total area** of this field.
-
-5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
-    * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
-    * Change the tillage type to **"Reduced Tillage"**.
-    * Keep **"80.78"** as the amount of irrigation and **"0"** as the number of pesticide passes.
-
-6. Now add another crop to this rotation. Click on "**Add Crop**" under "**Step 2**" to add a second crop to the rotation. 
-
-<br>
-
-> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
-
-> *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
-
-<br>
-
-7. For this newly added crop select **"Tame Mixed (grass/legume)"** as the crop type.
-
-8. Click on the **Add crop** button one more time. For this third crop, select **"Tame Mixed (grass/legume)"** once again as the crop type.
-
-9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2023) and then:
-    * Under the **Harvest Tab** click the **"Add Harvest Date"** button to create a new harvest.
-    * Select a Harvest date of "**"August 31, 2023
-    "**", assuming the harvest is done on the same day every year.
-    * Select **"Mid"** for Forage growth stage.
-    * Enter **"5"** as the total number of bales.
-    * Enter **"500"** as the Wet bale weight.
-    
-10. **Repeat** Step 9 for the second tame mixed crop.
-
-If the tame mixed field is harvested more than once, the **Add Harvest Date** button can be used to add subsequent harvests.
-
-<br>
-
-<p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure13.png" alt="Figure 13" width="950"/>
-    <br>
-    <em>Figure 13: An example of a crop rotation of three crops.</em>
-</p> 
 
 <br>
 
@@ -285,26 +205,26 @@ If the tame mixed field is harvested more than once, the **Add Harvest Date** bu
 
 # Poultry Operation
 
-Adding animal components follows the exact same approach that was used for the land management components. Under the **Poultry** category, drag and drop the available components of **Chicken Meat Production**, **Chicken Egg Production**, and **Pullet Farm** to the **My farm** section on the right.
+Adding animal components follows the same approach that was used for the land management components. Under the **Poultry** category, drag and drop the following components to the **My Farm** section of the screen: **Chicken Meat Production**, **Chicken Egg Production**, and **Pullet Farm**.
+
+> *Note: Click on the **View** menu item in the top taskbar and check/uncheck the **Hide List of Available Components** option. Checking this option hides the list of **Available Components**, allowing more room on the screen for the **My Farm** section.*
 
 <br>
 
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure14.gif" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 14: The Poultry Components.</em>
+    <em>Figure 12: The Poultry Components.</em>
 </p>
 
 <br>
 
 ## Entering 'Chicken Meat Production' Information
 
-If you hover your mouse cursor over the “Chicken Meat Production” component under the “Poultry” category, Holos will display a tooltip that gives a brief description of a chicken meat production operation:
+If you hover your cursor over the “Chicken Meat Production” component under the “Poultry” category, Holos will display a tooltip that gives a brief description of a chicken meat production operation:
     
 **“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg, depending on bird type and end product) after approximately 30-56 days (depending on the bird type and rearing system).”**
 
-
-Click on **View** menu item in the top taskbar and uncheck the **Hide List of Available Components** option. 
 
 The poultry meat production farm is **divided into three  management (production) periods**. We will enter production and management data corresponding to these three management periods.
 
