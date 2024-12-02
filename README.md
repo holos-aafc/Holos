@@ -18,25 +18,13 @@ See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" targ
 
 To see answers to the most frequently asked questions about Holos (both the software and model), visit the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ here.</a>
 
-# Algorithm Document (Review Version)
+# Algorithm Document (Draft Version)
 
-A review version of the Holos version 4.0 algorithm document is being made available for comment, review, and feedback.
+A draft version of the Holos version 4.0 algorithm document is being made available for review
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="https://github.com/holos-aafc/Holos/raw/e33ea632053a7635589c245318bd3ad05939607b/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION22Jan2024.docx" target="_blank">AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_REVIEWVERSION22Jan2024.docx</a>
-
-All feedback is welcome and we would appreciate your input on the following items in particular:
-
-1. Any typos,
-2. Formatting errors, and
-3. Corrections to equations and/or methodology
- 
-We request that all feedback be made via our GitHub discussion board dedicated to the Holos model/software
-
-A direct link to this discussion area can be found here:
-
-<a href="https://github.com/holos-aafc/Holos/discussions/categories/algorithm-document-feedback" target="_blank">https://github.com/holos-aafc/Holos/discussions/categories/algorithm-document-feedback</a>
+<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx" target="_blank">AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx</a>
 
 # Training Guide
 
