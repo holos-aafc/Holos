@@ -429,6 +429,12 @@ namespace H.CLI.FileAndDirectoryAccessors
                         break;
                 }
 
+                case Farm.ChosenClimateAcquisition.InputFile:
+                {
+                    farm.ClimateData = _climateProvider.Get(farm.ClimateDataFileName, farm.Defaults.TimeFrame);
+                    break;
+                }
+
                 default:
                     farm.ClimateData = _climateProvider.Get(farm.Latitude, farm.Longitude, farm.Defaults.TimeFrame);
                     break;

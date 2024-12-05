@@ -10,6 +10,7 @@ namespace H.CLI.FileAndDirectoryAccessors
     public class ReadSettingsFile
     {
         public Dictionary<string, string> GlobalSettingsDictionary { get; set; } = new Dictionary<string, string>();
+
         /// <summary>
         /// Takes in a path to a global settings file in a farm and processes the data. The results are stored in a dictionary, with key to value pairs.
         /// The data is split using a comma in the example format: "Output Directory, :c\Holos..."
@@ -28,11 +29,9 @@ namespace H.CLI.FileAndDirectoryAccessors
                             var line = reader.ReadLine();
                             if (line.StartsWith("#") || String.IsNullOrWhiteSpace(line))
                             {
-
                                 continue;
 
                             }
-
                             else
                             {
                                 if (line.Contains("("))
@@ -40,14 +39,11 @@ namespace H.CLI.FileAndDirectoryAccessors
                                     var startIndex = line.IndexOf('(');
                                     var countToRemove = line.LastIndexOf(')') - startIndex + 1;
                                     line = line.Remove(startIndex, countToRemove);
-
                                 }
                                 var keyAndValueForGlobalSettings = line.Split('=');
                                 GlobalSettingsDictionary.Add(keyAndValueForGlobalSettings[0].Trim(), keyAndValueForGlobalSettings[1].Trim());
                             }
-
                         }
-
                     }
                 }
             }
