@@ -154,10 +154,10 @@ namespace H.Core.Services.Animals
 
             // Equation 4.5.2-22
             dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
-                (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
+                (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
-                carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
+                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage;

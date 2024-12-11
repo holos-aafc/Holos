@@ -140,9 +140,12 @@ namespace H.Core.Services.Animals
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
             }
 
-            dailyEmissions.NetEnergyForWoolProduction = this.CalculateNetEnergyForWoolProduction(
-                energyValueOfAKilogramOfWool: managementPeriod.EnergyRequiredForWool,
-                woolProduction: managementPeriod.WoolProduction);
+            if (managementPeriod.AnimalType == AnimalType.Ewes || managementPeriod.AnimalType == AnimalType.Ram || managementPeriod.AnimalType == AnimalType.SheepFeedlot)
+            {
+                dailyEmissions.NetEnergyForWoolProduction = this.CalculateNetEnergyForWoolProduction(
+                    energyValueOfAKilogramOfWool: managementPeriod.EnergyRequiredForWool, 
+                    woolProduction: managementPeriod.WoolProduction); 
+            }
 
             if (animalGroup.GroupType == AnimalType.SheepFeedlot)
             {
@@ -331,10 +334,10 @@ namespace H.Core.Services.Animals
 
             // Equation 4.5.2-22
             dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
-                (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
+                (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
-                carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
+                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage;

@@ -237,7 +237,7 @@ namespace H.Core.Services.Animals
                 organicNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
-                carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
+                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay;
@@ -524,7 +524,7 @@ namespace H.Core.Services.Animals
                 organicNitrogenAvailableForLandApplication: dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
-                carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
+                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay;

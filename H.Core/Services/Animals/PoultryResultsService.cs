@@ -303,14 +303,14 @@ namespace H.Core.Services.Animals
 
             // Equation 4.5.2-16
             dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay = dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage +
-                    (previousDaysEmissions == null ? 0 : previousDaysEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage);
+                    (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             // Equation 4.5.2-13
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
                 dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay - dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay;
 
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
-                carbonFromStorage: dailyEmissions.AmountOfCarbonInStoredManure,
+                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
 
             dailyEmissions.TotalAmountOfNitrogenInStoredManureAvailableForDay = dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay;
