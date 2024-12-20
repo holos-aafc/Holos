@@ -2,7 +2,7 @@
  <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
     <br>
 </p>
-The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. the optional inputs. We are going to create a farm that has a dairy production system, and a feed crop production system. The farm is located in Manitoba near Portage La Prairie.
+The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. the optional inputs. We are going to create a farm that has a dairy production system and a feed crop production system. The farm is located in Manitoba near Portage La Prairie.
 
 <br>
 
@@ -37,7 +37,7 @@ Ensure **"Metric"** is selected as the unit of measurement type and then click t
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure3.png" alt="Figure 3" width="550"/>
     <br>
-    <em>Figure 3: Select metric as the unit of measurement.</em>
+    <em>Figure 3: Select "metric" as the unit of measurement.</em>
 </p>
 
 <br>
@@ -56,13 +56,13 @@ The dairy farm that we will create for this exercise is located in the province 
 
 <br>
 
-Holos uses **Soil Landscapes of Canada** (SLC), which are a series of GIS coverages that show the major characteristics of soils and land for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
+Holos uses **Soil Landscapes of Canada** (SLC) polygons, which are a series of GIS coverages that report the soil characteristics for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
 
 The **Farm Location** screen brings up a map of Canada with the province of Manitoba centered on the screen (Figure 5). 
 
 The map contains red colored polygons that can be selected by moving the cursor over the region that contains the location of your farm. You can zoom in or out of the map by using the mouse wheel or by hovering the cursor over the zoom icon at the bottom of the screen.
 
-The dairy farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
+The dairy farm for this example is located between Winnipeg and Portage la Prairie (Portage), in SLC polygon number **851003**. 
 
 Find and right-click on this polygon to select it on the map (Figure 6). Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
@@ -71,7 +71,7 @@ Find and right-click on this polygon to select it on the map (Figure 6). Note th
 > *Note: Climate data is central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
 > 
 
-> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon change (climate parameter), nitrous oxide emissions, as well as ammonia volatilization.*
+> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon (C) change (climate parameter), nitrous oxide (N<sub>2</sub>O) emissions, and ammonia (NH<sub>3</sub>) volatilization.*
 
 <br>
 
@@ -100,7 +100,7 @@ For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the defau
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure7.png" alt="Figure 7" width="950"/>
     <br>
-    <em>Figure 7: Multiple soil types will be displayed for the selected SLC polygon.</em>
+    <em>Figure 7: Multiple soil types may be available for the selected SLC polygon.</em>
 </p> 
 
 <br>
@@ -115,21 +115,21 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production and Dairy Cattle.
+Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production, Dairy Cattle, Swine, Sheep, Poultry and Other Livestock.
 
-If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the  training section, we will be working with the “Land management” and “Dairy Cattle” categories. 
+If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the training, we will be working with the “Land management” and “Dairy Cattle” categories. 
 
 <br>
 
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure8.png" alt="Figure 8" width="950"/>
     <br>
-    <em>Figure 8: The available components screen. Specific components can be chosen here to include in the farm. </em>
+    <em>Figure 8: The Available Components screen. Specific components can be chosen here to include in the farm. </em>
 </p> 
 
 <br>
 
-The Holos model is designed so that the land management components are defined before the livestock components. This is because the model allows for the placement of livestock onto a specific field(s) (i.e., pasture(s)) for grazing. It is easier to do this if the pasture field has already been defined. However, the user can first set up their livestock components and then their field components, but will then need to return to their livestock components to specify and ‘place’ them on pasture.
+The Holos model is designed so that the land management components are defined before the livestock components. This is because the model allows for the placement of livestock onto a specific field(s) (i.e., pasture(s)) for grazing. It is easier to do this if the pasture field has already been defined. However, the user can first set up their livestock components and then their field components, but will then need to return to their livestock components to ‘place’ them on pasture.
 
 ## Crop and Hay Production
 
@@ -140,7 +140,7 @@ Now we can add our first component to the farm. Drag a **Field** component from 
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure9.gif" alt="Figure 9" width="950"/>
     <br>
-    <em>Figure 9: Specific components can be chosen here to include in the farm.</em>
+    <em>Figure 9: Adding a component to the farm.</em>
 </p> 
 
 <br>
@@ -158,7 +158,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
     * Select **"Reduced Tillage"**" as the tillage type.
     * Enter **"200"** mm ha<sup>-1</sup> as the amount of irrigation.
     * Select **"0"** as the number of pesticide passes.
-    * Leave 'Harvest method' as the default selection.
+    * Leave **"Cash crop"** as the harvest method.
 
 <br>
 
@@ -170,7 +170,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 
-4. Select the **Fertilizer** tab and click the **Add Fertilizer Application** button. Holos has now added a new fertilizer application for this field and will suggest Urea as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, different fertilizer blend, etc.).
+4. Select the **Fertilizer** tab and click the **Add Fertilizer Application** button. Holos has now added a new fertilizer application for this field and will suggest "Urea" as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, blend, method of application, etc.).
 
 <br>
 
@@ -182,11 +182,13 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 
-> *Note: At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate to calculate direct and indirect nitrous oxide emissions.*
+>*Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year), only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
 
-> *Residue management of each crop (and cover crop) can be adjusted in Holos (see ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil carbon change estimates.*
+>*At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate (where applicable) to calculate direct and indirect N<sub>2</sub>O emissions.*
 
-> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
+> *Residue management of each crop (and cover crop) can be adjusted in Holos (see the ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil C change estimates, as well as soil N<sub>2</sub>O emissions estimates.*
+
+> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available in the crop drop-down menus.*
 
 <div style="page-break-after: always"></div>
 
@@ -194,7 +196,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
 2. Enter **"100"** ha as the total area of the field.
-3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** area when a perennial crop is selected.
+3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** field when a perennial crop is selected.
 4. Keep **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 5. No fertilizer is used for this crop.
 
@@ -212,7 +214,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 To demonstrate the crop rotation component (as opposed to using individual field components), we will assume that barley grain and mixed hay are grown in rotation, with the mixed hay under-seeded to the barley so that it can be harvested in both main years (example derived from University of Alberta’s Breton plots). 
 
-When using the **Crop Rotation** component, any sequence of crops that are input into this component will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different management history, soil carbon algorithms will run for each field.
+When using the **Crop Rotation** component, any sequence of crops that are input into this component will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different management history, soil C algorithms will run for each field.
 
 For this example, we assume that the farm requires **70** ha of barley grain and mixed hay, which are grown in rotation. We will need to set up three fields where barley grain is rotated in each field every two years. When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
 
@@ -220,7 +222,7 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 
 1. Add one **Crop Rotation** component from the available components.
 
-2. To expand the horizontal space available in Holos, click on **View** from the top menu bar and select **Hide List of Available Components**.
+2. To expand the horizontal space available in Holos, click on **View** in the top menu bar and select **Hide List of Available Components**.
 
 3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
 
@@ -235,7 +237,7 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 
 <br>
 
-> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
+> *Note: As a default, Holos sets the year for this new crop to 2023 (or the year before the previously defined crop year). This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
 
 > *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
 
@@ -247,12 +249,12 @@ For this example, we assume that the farm requires **70** ha of barley grain and
 
 9. Now add harvest data to each of the tame mixed crops. You will need to select each "**tame mixed crop**" and add the harvest data to that specific crop. So select the first tame mixed crop **(2023)** and then:
     * Under the **Harvest Tab** click the **"Add Harvest Date"** button to create a new harvest.
-    * Select a Harvest date of "**"August 31, 2023"**, assuming the harvest is done on the same day every year.
-    * Select **"Mid"** for Forage growth stage.
+    * Select a Harvest date of **"August 31, 2023"**, assuming the harvest is done on the same day every year.
+    * Select **"Mid"** for  the forage growth stage.
     * Enter **"5"** as the total number of bales.
-    * Enter **"500"** as the Wet bale weight.
+    * Enter **"500"** as the wet bale weight.
     
-10. **Repeat** Step 9 for the second tame mixed crop.
+10. **Repeat** Step 9 for the second tame mixed crop **(2022)**.
 
 <br>
 
@@ -263,7 +265,7 @@ If the tame mixed field is harvested more than once, the **Add Harvest Date** bu
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure13.png" alt="Figure 13" width="950"/>
     <br>
-    <em>Figure 13: An example of a crop rotation of three crops.</em>
+    <em>Figure 13: An example of a crop rotation with three crops.</em>
 </p> 
 
 <br>
@@ -272,9 +274,9 @@ If the tame mixed field is harvested more than once, the **Add Harvest Date** bu
 
 # Dairy Operation
 
-Click on **View** menu item and uncheck the **Hide List of Available Components** option.
+Click on the **View** menu item and uncheck the **Hide List of Available Components** option.
 
-Adding animal components follows the exact same approach that was used for land management components. Under the **"Dairy cattle"** category, drag and drop one dairy component to the **My Farm** area. If any of the animal groups under **Step 1** are not needed for the farm, they can be removed by clicking the relevant **"X"** icon (similarly, additional dairy groups can be added using the **Add Group** button).
+Adding animal components follows the same approach that was used for the land management components. Under the **"Dairy cattle"** category, drag and drop one dairy component to the **My Farm** area. If any of the animal groups under **Step 1** are not needed for the farm, they can be removed by clicking the relevant **"X"** icon (similarly, additional dairy groups can be added using the **Add Group** button).
 
 <br>
 
@@ -286,25 +288,25 @@ Adding animal components follows the exact same approach that was used for land 
 
 <br>
 
-## **Lactating cows, calves, dairy heifers, and dry cow information**
+## **Lactating cows, calves, dairy heifers, and dry cows information**
 
-**To set up for Lactating Cows:**
+**Lactating Cows:**
 
-Holos provides the user the option to have more than one lactating cows group. We assumed that the calving interval is 10 months within a 12-month lactation period.
+Holos provides the user with the option to have more than one lactating cows group. Holos assumes that lactation lasts for 10 months and that the cows are dry for the remaining 2 months in a 12-month period.
 
 1. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected in order to enter the associated management information for that group of animals.
 
-2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the 'Start date' and that **"May 31, 2023"** is set as the 'End date' (150 days). Note that the 'Number of days' being shown will be inclusive of the start and end dates.
+2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the 'Start date' and that **"May 31, 2023"** is set as the 'End date' (150 days). Note that the 'Number of days' being shown is inclusive of the start and end dates.
 
 3. Next, we can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3**. 
 
 4. Click on the **General** tab and enter **"65"** for 'Number of animals'.
 
-5. We are going to create a custom diet for our group of lactating cows. Click on the **Diet** tab. Note that Holos provides a default set of animal diets that can be used. Since we are going to create our own custom diet, we will click on the **"Custom Diet Creator"** button.
+5. We are going to create a custom diet for our group of lactating cows. Click on the **Diet** tab. Note that Holos provides a default set of animal diets that can also be used. Since we are going to create our own custom diet, we will click on the **"Custom Diet Creator"** button.
 
 <br>
 
-> *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane and nitrous oxide emissions. Length of management periods (e.g., duration of grazing) will also be needed. Housing and manure management information are also important inputs but are relatively more impactful on the emissions of monogastrics.*
+> *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane (CH<sub>4</sub>) and N<sub>2</sub>O emissions. The duration of individual management periods (e.g., the number of days spend in confined housing or on pasture) will also be needed. Housing and manure management information are also important inputs but are relatively more impactful on the emissions of monogastrics.*
 
 <br>
 
@@ -321,12 +323,12 @@ Holos provides the user the option to have more than one lactating cows group. W
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
     <br>
-    <em>Figure 15: Custom diet creator for Dairy Lactating animal group.</em>
+    <em>Figure 15: Custom diet creator for the Dairy Lactating animal group.</em>
 </p> 
 
 <br>
 
-> *Note: Holos now reports the diet being complete since all ingredients total up to 100%.*
+> *Note: Holos now reports the diet being complete since all ingredients add up to 100%.*
 
 <br>
 
@@ -334,13 +336,13 @@ Holos provides the user the option to have more than one lactating cows group. W
 
 <br>
 
-> *Note: Diet quality information such as crude protein, total digestible nutrient, and fat are required inputs so that Holos can estimate enteric methane emissions from an animal group.*
+> *Note: Diet quality information such as crude protein, total digestible nutrient, and fat are required inputs so that Holos can estimate enteric CH<sub>4</sub> emissions from an animal group.*
 
 <br>
 
- 11. On the **Housing** tab, select 'Tie stall (solid litter)' for the housing type.
+ 11. On the **Housing** tab, select **"Tie stall (solid litter)"** for the housing type.
 
- 12. Click on the **Manure** tab and select 'Solid storage (stockpiled)' from the list.
+ 12. Click on the **Manure** tab and select **"Solid storage (stockpiled)"** from the list.
  
  13. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected to enter further management period information.
  
@@ -348,7 +350,7 @@ Holos provides the user the option to have more than one lactating cows group. W
  
  15. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
  
- 16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose 'Custom Dairy Diet', on the **Housing** tab choose 'Tie stall (solid litter)', and on the **Manure** tab choose 'Solid storage (stockpiled)'.
+ 16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (solid litter)"**, and on the **Manure** tab choose **"Solid storage (stockpiled)"**.
  
  17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the 'Start date' and that **"November 04, 2023"** is set as the 'End date' (95 days). 
  
