@@ -197,7 +197,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
 2. Enter **"100"** ha as the total area of the field.
 3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** field when a perennial crop is selected.
-4. Keep **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
+4. Enter **"0"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
 5. No fertilizer is used for this crop.
 
 <br>
@@ -340,9 +340,9 @@ Holos provides the user with the option to have more than one lactating cows gro
 
 <br>
 
- 11. On the **Housing** tab, select **"Tie stall (solid litter)"** for the housing type.
+ 11. On the **Housing** tab, select **"Tie stall (slurry)"** for the housing type.
 
- 12. Click on the **Manure** tab and select **"Solid storage (stockpiled)"** from the list.
+ 12. Click on the **Manure** tab and select **"Liquid/Slurry with no natural crust"** from the list.
  
  13. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected to enter further management period information.
  
@@ -350,7 +350,7 @@ Holos provides the user with the option to have more than one lactating cows gro
  
  15. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
  
- 16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (solid litter)"**, and on the **Manure** tab choose **"Solid storage (stockpiled)"**.
+ 16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (slurry)"**, and on the **Manure** tab choose **"Liquid/Slurry with no natural crust"**.
  
  17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the 'Start date' and that **"November 04, 2023"** is set as the 'End date' (95 days). 
  
@@ -358,66 +358,91 @@ Holos provides the user with the option to have more than one lactating cows gro
 
 <br>
 
-**To set up for Calves:**
+**Calves:**
 
-Calves that are not used for replacement will enter into the veal system and are fed mainly milk replacer and corn grain. Factoring in a fertility loss of 7.7%, 60 calves are produced with a sex ratio of 50:50 male:female. Out of the 30 female calves produced, the farm selected 15 as a replacement heifer (young heifer) for lactating dairy cows. With an assumed mortality rate of 4.4% at four months of age, 43 veal calves will be fed on a corn grain-based diet. Veal calves are slaughtered at the age of 6 months (~270 kg body weight).
+Calves that are not used for replacement will enter into the veal system and are fed mainly milk replacer and corn grain. Factoring in a fertility loss of 7.7%, 60 calves are produced with a sex ratio of 50:50 male:female. Out of the 30 female calves produced, the farm selected 15 as replacement heifers (young heifers) for lactating dairy cows. With an assumed mortality rate of 4.4% at four months of age, 43 veal calves will be fed on a corn grain-based diet. Veal calves are slaughtered at the age of 6 months (~270 kg body weight).
 
-1. Under the animal groups section in **Step 1**, make sure that the **"Dairy calves"** row is selected in order to enter the associated management information for this group. 
+1. Under **Step 1**, make sure that the **"Calves"** row is selected in order to enter the associated management information for this group. 
 
 2. Under **Step 2**, the first management period will be from **"January 1, 2023"** to **"March 31, 2023"** (90 days).
 
-3. Under **Step 3**, click on the **General** tab and enter **"45"** for 'Number of animals'. Click on the **Manure** tab and select 'Solid storage (stockpiled)' from the list.
+3. Under **Step 3**, click on the **General** tab and enter **"45"** for 'Number of animals'. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
 4. Returning to **Step 2**, click on the **"Add Management Period"** button. This will add a second management period for our group of calves. Ensure the 'start date' is **"April 01, 2023"** and the 'end date' is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**.
 
 <br>
 
-> *Note: Diet and housing data for dairy calves are not needed for Holos calculations (i.e. tabs are omitted in **Step 3**).*
+> *Note: Dietary data for dairy calves are not currently needed for Holos calculations and so this tab is not present in **Step 3**.*
 
 <br>
 
-**To set up for Dairy Heifers:**
+**Dairy (Replacement) Heifers:**
 
 Out of the 30 female calves produced, the farm selected 15 as replacement heifers for lactating dairy cows.
 
-1. Under the animal groups section in **Step 1**, make sure that the **"Dairy heifers"** row is selected in order to enter the associated management information for that group.
+1. Under **Step 1**, make sure that the **"Dairy heifers"** row is selected in order to enter the associated management information for that group.
 
-2. For **"Management period #1"**, enter **"January 01, 2023"** as the 'Start date’ and   **"December 31, 2023"** as the ‘End date’.
+2. For **"Management period #1"**, enter **"January 01, 2023"** as the 'Start date’ and **"December 31, 2023"** as the ‘End date’ (365 days).
 
 3. Click on the **General** tab and enter **"15"** for 'Number of animals'.
 
-4. On the **Diet** tab, ensure the 'High fiber' diet is selected for the heifers.
+4. On the **Diet** tab, ensure the **"High fiber"** diet is selected.
 
-5. On the **Housing** tab, select 'Free stall barn (solid litter)' as the housing type.
+5. On the **Housing** tab, select **"Free stall barn (slurry scraping)"** as the housing type.
 
-6. On the **Manure** tab, select 'Solid storage (stockpiled)'.
+6. On the **Manure** tab, select **"Liquid/Slurry with no natural crust"**.
 
 <br>
 
-**To set up for Dairy Dry:**
+**Dairy Dry:**
 
-20 cows will stop milking for a rest period allowing for recovery and recuperation.
+In this dairy animal group there are 20 cows that are not milked, allowing for recovery and recuperation.
 
-1. Under the animal groups section in **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
+1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the 'Start date’ and **"January 4, 2024"** as the ‘End date’.
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the 'Start date’ and **"January 4, 2024"** as the ‘End date’ (60 days).
 
 3. Click on the **General** tab and enter **"20"** for 'Number of animals'.
 
-4. On the **Diet** tab, ensure the 'Legume forage based diet' is selected.
+4. On the **Diet** tab, ensure the **"Legume forage based diet"** is selected.
 
-5. On the **Housing** tab, select 'Free stall barn (solid litter)' as the housing type.
+5. On the **Housing** tab, select **"Free stall barn (slurry scraping)"** as the housing type.
 
-6. On the **Manure** tab, select 'Solid storage (stockpiled)'.
+6. On the **Manure** tab, select **"Liquid/Slurry with no natural crust"**.
 
 <br>
 
-# Discover Results 
+### Adding a Manure Application to the Wheat Field
+
+In Holos, the user can apply livestock manure to a field using either manure produced by the livestock on the farm or manure imported from off-farm. Since we have now defined our animal components, we can apply poultry manure produced on-farm to any field on our farm.
+
+1. Select the **Wheat & hairy vetch** field from the list of components added to our farm.
+
+2. Click on the **Manure tab** and then click the **Add Manure Application** button.
+    * Select **April 30, 2023** as the **Date**.
+    * Select **Livestock** as the **Origin of manure**.
+    * Select **Dairy** as the **Manure type** .
+    * Select **Liquid/Slurry with no natural crust** as the **Manure handling system**.
+    * Select **Shallow injection** as the **Application method**
+    * Enter **14,000 kg ha<sub>-1</sub> ** as the amount of manure applied to this field.
+4. Note that both chemical fertilizer and manure applications can be made on the same field.
+
+> Holos provides an interactive gauge on the left of the manure tab to show the "**Amount of Stored Manure N Remaining (Dairy cattle) (kg N)**" that will move to reflect the user's application choices and quantify the amount of stored manure remaining for application.
+
+<br>
+
+<p align="center">
+    <img src="../../Images/DairyGuide/en/Figure16_Revised.png" alt="Figure 16" width="950"/>
+    <br>
+    <em>Figure 16: Adding a Manure Application to a Field.</em>
+</p>
+ 
+<br>
 
 ## Timeline Screen
 
-We are now finishing the process of defining our farm. Click the **Next** button to go forward to the **Timeline** screen.
-The Timeline screen provides a visual layout of all the fields from 1985 to the specified end year for each field. This screen also allows the user to add historical and projected production systems. 
+We have now finished the process of defining our farm. Click the **Next** button to go forward to the **Timeline** screen.
+This screen provides a visual layout of each field from 1985 (or another user-defined start year) to the specified end year for each field. This screen also allows the user to add historical and projected production systems. 
 
 The **Add Historical Production System** button enables the user to add a different cropping history to individual fields whereas the **Add Projected Production System** button enables the user to add a future (projected) cropping system to individual fields.
 
@@ -425,7 +450,7 @@ Click the **Next** button to go forward to the **Details** screen.
 
 ## Details Screen
 
-To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil carbon sequestration rates and soil N2O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground carbon inputs to the soil.
+To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the user-defined start year, if different) for each field on the farm, the model uses default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil C sequestration rates and soil N<sub>2</sub>O emissions.
 
 Click the **Next** button to move to the final **Results** screen. 
 
