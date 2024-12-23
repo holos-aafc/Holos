@@ -356,20 +356,36 @@ On the **Custom Diet Creator** screen:
 
 *Note: For the other Swine components, the animal groups and management periods are added/defined in the same way as for the Farrow-to-Wean component.*
 
+### Piglets
+
+We will now move on to the **"Piglet"** animal group in **Step 1** by highlighting it. 
+
+1. By default, there is just a single management period for this animal group, with a 'Start date' of **"May 3, 2024"** and an 'End date' of **"May 24, 2024"** (21 days). This group represents unweaned piglets that are on a milk-only diet.
+   
+2. Enter data related to the number of animals, housing type and manure management system in **Step 3**. On the **General** Tab:
+    * Select **"Nursing piglet"** as the production stage.
+    * Enter **"80"** as the number of animals.
+    * Enter **"1.4"** for the start weight and **"6"** for the end weight.
+    * For all other fields keep the default values.
+
+4. Under the **Diet Tab**, as these animals are exclusively milk-fed, select **"None"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** and set the Bedding type as **"Straw (Chopped)"** (keep the default application rate). From the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
+
+<br>
+
 ## Grower-to-Finish 
 
-1. Click on the **Hogs** animal group in **Step 1** to enter the associated management information for this group. As we will have just three management periods for this animal group, we can go ahead and remove the fourth Management period by clicking the **X**.
+1. Click on the **Hogs** animal group in **Step 1** to enter the associated management information for this group.
  
-2. Under **Step 2**, select the first management period and set the 'Start date' to **"January 01, 2024"** and the 'End date' to **"April 30, 2024"** (121 days). Name this period **"Spring Hogs"**. 
+2. Under **Step 2**, select the first management period and set the 'Start date' to **"May 25 2024"** and the 'End date' to **"June 19, 2024"** (26 days). Name this period **"Spring Hogs"**. 
 
 3. Highlight the 'Spring Hogs' management period, and on the **General** tab leave 'Growing/finishing' as the production stage and enter **1000** as the number of animals.
 
-5. On the **Diet** tab, select **"Grower/Finisher diet 2"** as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and **"Straw (Chopped)"** as the bedding type (keep the default application rate) and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
+5. On the **Diet** tab, select **"Grower/Finisher diet 1"** as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and **"Straw (Chopped)"** as the bedding type (keep the default application rate) and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
 <br>  
 
-6. For the second management period, the hogs will be placed on pasture - rename this management period **"Summer Pasture Hogs"** and set the 'Start date' to **"May 01, 2024"** and the 'End date' to **"October 31, 2024"** (184 days). 
+6. For the second, and third management periods, the hogs will be placed on pasture - rename these management periods **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**. Set the 'Start date' for **"Summer Pasture Hogs 1"** to **"June 20, 2024"** and the 'End date' to **"July 6, 2024"** (17 days), and set the 'Start date' and 'End date' for **"Summer Pasture Hogs 2"** to **"July 7, 2024"** and **"August 2, 2024"**, respectively (27 days). 
 
-7. Highlight the 'Summer Pasture Hogs' management period and on the **General"** tab, leave the production stage as **"Growing/finishing"** and enter **1000** as the number of animals.
+7. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"** management periods, on the **General"** tab, leave the production stage as **"Growing/finishing"** and enter **1000** as the number of animals.
 
 8. For the diet for these hogs on pasture, we will create a new diet. Select the **"Custom Diet Creator"** button. In **Step 1** on this screen, select **"Add Custom Diet"** and name the new diet **"Hog Supplement"**. 
 
@@ -379,19 +395,15 @@ On the **Custom Diet Creator** screen:
 
 <br>
 
-3. In **Step 2**  and **Step 3**, add the diet ingredients as follows: 'Barley' (99.5%) and 'Lysine/vitamins' (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Custom Boar Diet'.
+3. In **Step 2** and **Step 3**, add the diet ingredients as follows: 'Barley' (99.5%) and 'Lysine/vitamins' (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Custom Boar Diet'.
 
 4. Under **Step 1** enter **"3"** as the 'Feed intake' for the 'Hog Supplement' diet. Click **OK** to save.
 
-5. On the **Diet tab** select 'Hog Supplement' from the drop down menu.
+5. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**, on the **Diet tab** select 'Hog Supplement' from the drop down menu. On the **Housing** tab, select **Pasture/range/paddock** as the housing type and select **Native Grassland** as the pasture location, and on the **Manure** tab, select **Pasture** as the manure handling system.
 
-6. On the **Housing** tab, select **Pasture/range/paddock** as the housing type and select **Native Grassland** as the pasture location. 
- 
-7. On the **Manure** tab, select **Pasture** as the manure handling system.
+6. Finally, for the final management period, set the 'Start date' and 'End date' to **"August 3, 2024"** and **"September 16, 2024"**, respectively (45 days).
 
-8. Finally, set the 'Start date' and 'End date' for the third management period to **"November 01, 2024"** to and **"December 31, 2024"** (61 days) and rename this period **"Winter Hogs"**.
-
-10. Highlight the 'Winter Hogs' management period, and on the **General** tab leave **"Growing/finishing"** as the production stage and enter **1000** as the number of animals.\
+10. Highlight this management period, and on the **General** tab leave **"Growing/finishing"** as the production stage and enter **1000** as the number of animals.
 
 11. On the **Diet** tab, select 'Grower/Finisher diet #4' as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and leave **"Straw (Chopped)"** as the bedding type (keep the default application rate, and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
 
