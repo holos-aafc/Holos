@@ -4,7 +4,7 @@
 </p>
 The purpose of this document is to provide an introduction on how to use the Holos model (version 4) and the required vs. optional inputs.
 
-For the purpose of this training, we are going to create a farm that has an annual swine production system, and a feed crop production system. The farm is located in Manitoba near Portage La Prairie. 
+For the purpose of this training, we are going to create a farm that has a swine production system and a feed crop production system. The farm is located in Manitoba near Portage La Prairie. 
 
 <br>
 
@@ -39,7 +39,7 @@ Ensure “**Metric**” is selected as the unit of measurement type and then cli
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 3.png" alt="Figure 3" width="550"/>
     <br>
-    <em>Figure 3: Select metric as the unit of measurement.</em>
+    <em>Figure 3: Select "metric" as the unit of measurement.</em>
 </p>
 
 <br>
@@ -58,23 +58,23 @@ The swine farm that we will create for this exercise is located in the province 
 
 <br>
 
-Holos uses **Soil Landscapes of Canada** (SLC), which are a series of GIS coverages that show the major characteristics of soils and land for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
+Holos uses **Soil Landscapes of Canada** (SLC) polygons, which are a series of GIS coverages that report the soil characteristics for all of Canada (compiled at a scale of 1:1 million). SLC polygons may contain one or more distinct soil landscape components.
 
 The **Farm Location** screen brings up a map of Canada with the province of Manitoba centered on the screen (Figure 5). 
 
 The map contains red colored polygons that can be selected by moving the cursor over the region that contains the location of your farm. You can zoom in or out of the map by using the mouse wheel or by hovering the cursor over the zoom icon at the bottom of the screen.
 
-The swine farm for this example is located between Winnipeg and Portage la Prairie (Portage) with SLC polygon number **851003**. 
+The swine farm for this example is located between Winnipeg and Portage la Prairie (Portage), in SLC polygon number **851003**. 
 
 
 Find and right-click on this polygon to select it on the map (Figure 6). Note that at this point daily climate data will be downloaded from [NASA](https://power.larc.nasa.gov/data-access-viewer/). 
 
 <br>
 
-> *Note: Climate data is central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
+> *Note: Climate data are central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
 > 
 
-> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon change (climate parameter), nitrous oxide emissions, as well as ammonia volatilization.*
+> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon (C) change (climate parameter), nitrous oxide (N<sub>2</sub>O) emissions, as well as ammonia (NH<sub>3</sub>) volatilization.*
 
 <br>
 
@@ -86,12 +86,6 @@ Find and right-click on this polygon to select it on the map (Figure 6). Note th
 
 <br>
 
-Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this polygon are displayed on the right side of the screen. It is possible that more than one soil type per polygon will be found and the user is expected to select their soil type from this list or use the default selection (Figure 7). The default soil type selected represents the dominant soil type for the chosen polygon.
-
-For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the default "**Hardiness Zone**" as '3b'. 
-
-<br>
-
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 6.png" alt="Figure 6" width="950"/>
     <br>
@@ -100,6 +94,11 @@ For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the defau
 
 <br>
 
+Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this polygon are displayed on the right side of the screen. It is possible that more than one soil type per polygon will be found and the user is expected to select their soil type from this list or use the default selection (Figure 7). The default soil type selected represents the dominant soil type for the chosen polygon.
+
+For this tutorial, keep the default **Soil Zone** as 'Black' soil, and the default "**Hardiness Zone**" as '3b'. 
+
+<br>
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 7.png" alt="Figure 7" width="950"/>
     <br>
@@ -118,9 +117,9 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **All Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production, Dairy Cattle, and Swine.
+Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **All Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production, Dairy Cattle, Swine, Sheep, Poultry and Other Livestock.
 
-If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the  training section, we will be working with the “Land management” and “Swine” categories. 
+If we click on the drop-down button next to a category's name, we can then see the available components in that category.  For this portion of the training section, we will be working with the “Land management” and “Swine” categories. 
 
 <br>
 
@@ -163,7 +162,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
     * Select "**Reduced Tillage**" as the tillage type.
     * Enter "**200**" as the amount of irrigation.
     * Select **"0"** as the number of pesticide passes.
-    * Leave 'Harvest method' as the default selection.
+    * Leave "**Cash crop**" as the harvest method.
     
 
 <br>
@@ -176,7 +175,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br> 
 
-4. Select the **Fertilizer** tab and click the **"Add Fertilizer Application"** button. Holos has now added a new fertilizer application for this field and will suggest Urea as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, different fertilizer blend, etc.).
+4. Select the **Fertilizer** tab and click the **"Add Fertilizer Application"** button. Holos has now added a new fertilizer application for this field and will suggest "Urea" as the fertilizer blend. A default application rate is calculated based on the yield value entered for this field. Details of this fertilizer application can be changed by clicking the **Show Additional Information** button (e.g., season of application, blend, method of application, etc.).
 
 <br>
 
@@ -188,17 +187,19 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 <br>
 
-> *Note: At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate to calculate direct and indirect nitrous oxide emissions.*
+> *Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year), only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
 
-> *Residue management of each crop (and cover crop) can be adjusted in Holos (see ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil carbon change estimates.*
+> *At a minimum, Holos requires the area of the field, type of crop grown, and a field-specific fertilizer application rate to calculate direct and indirect N<sub>2</sub>O emissions.*
 
-> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available.*
+> *Residue management of each crop (and cover crop) can be adjusted in Holos (see ‘Residue’ tab). Holos provides default values depending on the type of crop being grown and will set a value for percentage of product returned to soil, percentage of straw returned to soil, etc. These residue input settings will have an impact on the final soil C change estimates, as well as soil N<sub>2</sub>O emissions.*
+
+> *Furthermore, biomass fractions and N concentrations can be overwritten by the user, and in this way ‘custom’ crops can be added that are currently not available in the crop drop-down menus.*
 
 <div style="page-break-after: always"></div>
 
 ### Native Grasslands 
 
-The swine operation (defined later on) relies on native pasture for the summer months (May through October) as a supplement to feed.
+The swine operation (defined later on) places some swine groups on pasture during the summer months (May through October).
 
 1. Drag a new **Field** component to your list of components. Enter the name **"Native Grassland"** in the **Field name** input box.
 
@@ -220,87 +221,25 @@ The swine operation (defined later on) relies on native pasture for the summer m
 
 <br>
 
-### Barley Grain and Mixed Hay Rotation
-
-To demonstrate the crop rotation component (as opposed to using individual field components), we will assume that barley grain and mixed hay are grown in rotation, with the mixed hay under-seeded to the barley so that it can be harvested in both main years (example derived from University of Alberta’s Breton plots). 
-
-When using the **Crop Rotation** component, any sequence of crops that are input into this component will be applied to each individual field that is part of the rotation setup. This means one field is added for each rotation phase, and the rotation shifts so that each rotation phase is present on one field. Since each field can have a different management history, soil carbon algorithms will run for each field.
-
-For this example, we assume that the farm requires **70 ha** of barley grain and mixed hay, which are grown in rotation. We will need to set up three fields where barley grain is rotated in each field every two years (Figure 12). When using the crop rotation component, the crop management input of a specific crop is repeated on each field in the rotation where the crop is grown. 
-
-**To set up the rotation:** 
-
-1. Add one **"Crop Rotation"** component from the available components.
-
-2. To expand the horizontal space available in Holos, click on **View** from the top menu bar and select **"Hide List of Available Components"**.
-
-3. The rotation of this field begins in **"1985"** and ends in **"2024"**. Under **Step 1**, please ensure that these two values are set as the start and end year, respectively.
-
-4. Enter **"70"** ha as the **total area** of this field.
-
-5. Under **Step 2** change the crop to **"Barley"**. The year for this crop should be **"2024"**.
-    * Under the **General** Tab enter **"3,000 kg ha<sup>-1</sup>"** (wet weight) as the yield for this crop.
-    * Change the tillage type to **"Reduced Tillage"**.
-    * Keep the default values of **"80.78"** mm ha<sup>-1</sup> as the amount of irrigation and **"0"** as the number of pesticide passes.
-
-6. Now add another crop to this rotation. Click on **"Add Crop"** under **Step 2** to add a second crop to the rotation. 
-
-<br>
-
-> *Note: Holos sets the year for this new crop to 2023 or one before the previous crop's year. This means that Holos is expecting the user to enter crops that have been grown in reverse order back to 1985.*
-
-> *It is not necessary to enter a crop for each individual year going back to 1985, only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy the phase information and back-populate the field history (i.e., Holos will copy the rotation back to 1985 on behalf of the user).*
-
-<br>
-
-7. For this newly added crop select **"Tame Mixed (grass/legume)"** as the crop type.
-
-8. Click on the **Add crop** button one more time. For this third crop, select **"Tame Mixed (grass/legume)"** once again as the crop type.
-
-9. Now add harvest data to each of the tame mixed crops. You will need to select each **tame mixed** crop and add the harvest data to that specific crop. So select the first tame mixed crop (2022) and then:
-      * Under the **Harvest Tab** click the **"Add Harvest Date"** button to create a new harvest.
-    * Select a Harvest date of **"August 31, 2022"**, assuming the harvest is done on the same day every year.
-    * Select **"Mid"** for Forage growth stage.
-    * Enter **"5"** as the total number of bales.
-    * Enter **"500"** as the Wet bale weight.
-    
-10. **Repeat** Step 9 for the second tame mixed crop.
-
-If the tame mixed field is harvested more than once, the **Add Harvest Date** button can be used to add subsequent harvests.
-
-<br>
-
-<p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 13.png" alt="Figure 13" width="950"/>
-    <br>
-    <em>Figure 13: An example of a crop rotation of three crops.</em>
-</p> 
-
-<div style="page-break-after: always"></div>
-
 # Swine Operation
 
-Click on **View** menu item and uncheck the **Hide List of Available Components** option.
+Adding animal components follows the same approach used for the land management components. Under the **Swine** category in the available components, drag and drop one **Farrow-to-Wean** component to the **My farm** section on the right. In this example, all animal groups listed under this component will be used. This means we will not have to remove any animal group by clicking the **X** icon next to it under **Step 1**. We can now begin entering information into each Animal Group.
 
-Adding animal components follows the exact same approach that was used for land management components. Under the **Swine** category in the available components, drag and drop one **Grower-to-Finish** component to the **My farm** section on the right. Add a **Farrow-to-Wean**, followed by an **Iso-Wean** component. In this example, all groups listed under each component will be used. This means we will not have to remove any animal group by clicking the **X** icon next to it under **Step 1**. We can now begin entering information into each Animal Group from our three Swine Components.
+*Note: Click on the **View** menu item in the top taskbar and check/uncheck the **Hide List of Available Components** option. Checking this option hides the list of **Available Components**, allowing more room on the screen for the **My Farm** section.*
 
 <br>
 
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 14.gif" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 14: The Swine Farm Components.</em>
+    <em>Figure 14: Adding Swine Farm Components.</em>
 </p> 
-
-<br>
-
-> *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane and nitrous oxide emissions. Length of management periods (e.g., duration of grazing) will also be needed. Housing and manure management information are also important inputs but are **relatively more impactful on the emissions of monogastrics.***
 
 <br>
 
 ## Farrow-to-Wean
 
-The farrow-to-wean component is divided into **four animal groups**, and each of these animal group is then divided into **a number of corresponding management (production) periods**. We will now enter information into each of these management period. 
+The farrow-to-wean component is divided into four **Animal groups** (under Step 1), and each of these groups is then divided into a number of **Management periods** (under Step 2). We will now enter information into each of these management periods. 
 
 ### Gilts
 
@@ -311,31 +250,32 @@ The farrow-to-wean component is divided into **four animal groups**, and each of
 3. Ensure **"January 1, 2024"** is set as the 'Start date' and **"January 6, 2024"** is set as the 'End date' (5 days). The default start and end dates that are provided in Holos can be changed by the user and the ‘Number of days’ will adjust accordingly. 
 
 4. Enter data related to the number of animals, diet, manure system, and housing type in **Step 3**. Under the **General** Tab:
-    * Select 'Open (not lactating or pregnant)' as the Production stage.
+    * Select **"Open (not lactating or pregnant)"** as the production stage.
     * Enter **"83"** as the number of animals.
-    * Keep the remaining entries at their default values.
+    * Enter **"9"** for the litter size, **"1.4"** for the weight of piglets at birth and **"6"** for the weight of weaned piglets.
+    * For all other fields keep the default values.
 
-5. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' and set the Bedding type as 'Straw (Chopped)'. From the **Manure Tab**, select 'Liquid/Slurry with natural crust'.
+5. Under the **Diet Tab** select **"Gestation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** and set the Bedding type as **"Straw (Chopped)"** (keep the default application rate). From the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
-6.  For each of the three management periods named **"Bred Gilts (Stages 1-3)"** set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 7, 2024' to 'February 14, 2024', etc.).
+6. For each of the three management periods named **"Bred Gilts (Stages 1-3)"** adjust the 'Start' and 'End' dates so that each management period lasts **38** days, i.e., Stage #1: January 7, 2024 to February 14, 2024; Stage #2: February 15, 2024 to March 24, 2024; Stage #3: March 25, 2024 to May 2, 2024.
 
-7. Highlight **"Bred Gilts (Stage #1)"** management period and from the **General Tab:**
-    * Select 'Gestating' as the Production stage.
+7. Highlight the **"Bred Gilts (Stage #1)"** management period and on the **General Tab:**
+    * Select **"Gestating"** as the production stage.
     * Enter **"83"** as the number of animals.
-    * Keep the remaining entries at their default values.
+    * For all other fields keep the default values.
     
-8. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+8. Under the **Diet Tab** select **"Gestation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** with **"Straw (Chopped)"** bedding (keep the default application rate), and from the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
-9. Repeat the Steps 7 and 8 for **"Bred Gilts (Stage#2) and (Stage #3)"** management periods.
-
-10. Lastly select the **"Farrowing gilts"**, and enter **"May 3, 2024"** as the 'Start date' and **"May 24, 2024"** as the 'End date' (21 days).
+9. Repeat Steps 7 and 8 for **"Bred Gilts (Stage #2) and Bred Gilts (Stage #3)"**.
+  
+10. Lastly, select the **"Farrowing gilts"** management period, and enter **"May 3, 2024"** as the 'Start date' and **"May 24, 2024"** as the 'End date' (21 days).
 
 11. Under the **General Tab:**
-    * Select 'Lactating' as the Production stage.
+    * Select **"Lactating"** as the production stage.
     * Enter **"83"** as the number of animals.
-    * Keep the remaining entries at their default values.
+    * For all other fields keep the default values.
     
-12. Under the **Diet Tab** select 'Lactation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+12. Under the **Diet Tab** select **"Lactation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** with **"Straw (Chopped)"** bedding (keep the default application rate), and from the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
 <br>
 
@@ -343,131 +283,111 @@ The farrow-to-wean component is divided into **four animal groups**, and each of
 
 We will now move on to the **"Sow"** animal group in **Step 1** by highlighting it. 
 
-13. For each of the three management periods in **Step 2** named **"Bred Sows (Stages 1-3)"**, set the 'Start' and 'End' dates to **38** days, respectively (i.e., Stage #1: 'January 07, 2024' to 'February 14, 2024', etc.). 
+1. Click the management period named **"Open sows"** in **Step 2** to activate that management period.
 
-14. Under the **General Tab** for **all three** 'Bred Sows' management periods:
-    * Select 'Gestating' as the Production stage.
+2. Ensure **"January 1, 2024"** is set as the 'Start date' and **"January 6, 2024"** is set as the 'End date' (5 days). The default start and end dates that are provided in Holos can be changed by the user and the ‘Number of days’ will adjust accordingly. 
+
+3. Enter data related to the number of animals, diet, manure system, and housing type in **Step 3**. Under the **General** Tab:
+    * Select **"Open (not lactating or pregnant)"** as the production stage.
     * Enter **"83"** as the number of animals.
-    * Keep the remaining entries at their default values.
-    * **"Litter size"** can be adjusted accordingly in all Management periods for Sows; here we will leave the default value of **9**.  
-    
-15. Under the **Diet Tab** select 'Gestation' from the diet drop down menu.     From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+    * Enter **"9"** for the litter size, **"1.4"** for the weight of piglets at birth and **"6"** for the weight of weaned piglets.
+    * For all other fields keep the default values.
 
-16. Moving to the **"Farrowing lactating sows"** management period in **Step 2**, set the 'Start date' to **"May 3, 2024"** and 'End date' to **"June 24, 2024"** (21 days).
+4. Under the **Diet Tab** select **"Gestation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** and set the Bedding type as **"Straw (Chopped)"** (keep the default application rate). From the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
-17. Under the **General Tab:** 
-    * Select 'Lactating' as the Production stage.
+5. For each of the three management periods in **Step 2** named **"Bred Sows (Stages 1-3)"**, adjust the 'Start' and 'End' dates so that each management period lasts **38** days, i.e., Stage #1: January 7, 2024 to February 14, 2024; Stage #2: February 15, 2024 to March 24, 2024; Stage #3: March 25, 2024 to May 2, 2024.
+
+6. Under the **General** tab for **all three** 'Bred Sows' management periods:
+    * Select **"Gestating"** as the production stage.
     * Enter **"83"** as the number of animals.
-    * Keep the remaining entries at their default values.
+    * Enter **"9"** for the litter size, **"1.4"** for the weight of piglets at birth and **"6"** for the weight of weaned piglets
+    * For all other fields keep the default values.  
     
-18. Under the **Diet Tab** select 'Lactation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+3. Under the **Diet Tab** select **"Gestation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** with **"Straw (Chopped)"** bedding (keep the default application rate), and from the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
-19. Lastly, in the **"Open sows"** management period under the **General Tab:**
-    * Select 'Open (not lactating or pregnant)' as the Production stage.
-    * Enter **"370"** as the number of animals.
-    * Keep the remaining entries at their default values.
+7. Moving to the **"Farrowing lactating sows"** management period in **Step 2**, set the 'Start date' to **"May 3, 2024"** and the 'End date' to **"June 24, 2024"** (21 days).
+
+8. Under the **General** tab, select **"Lactating"** as the production stage and enter **"83"** as the number of animals. For all other fields keep the default values.
     
-20. Under the **Diet Tab** select 'Gestation' from the diet drop down menu. From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+9. Under the **Diet Tab** select **"Lactation"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** with **"Straw (Chopped)"** bedding (keep the default application rate), and from the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
 <br>
 
 ### Boars
 
-Moving on to the **"Boars"** section, ensure this group is highlighted in **Step 1**. In **Step 2** we will have a single Management period setting **"January 1, 2024"** as the 'Start date' and **"December 31, 2024"** as the 'End date'(365 days).
+Moving on to the **"Boars"** animal group, ensure this group is highlighted in **Step 1**. In **Step 2** we will have a single management period with a 'Start date' of **"January 1, 2024"** and an 'End date' of  **"December 31, 2024"** (365 days).
 
-20. Under the **General Tab:**
-    * Select 'Breeding stock' as the Production stage.
+1. Under the **General Tab:**
+    * Select **"Breeding stock"** as the production stage.
     * Enter **"2"** as the number of animals.
-    * Keep the remaining entries at their default values.
+    * For all other fields keep the default values.
+      
+2. For the Boar animal group, we will create a custom diet.
     
 #### **Creating a New Diet**
 
-As an alternative to the default set of standard animal diets that are found in Holos users can create custom diets. *(Note: Holos incorporates feed ingredient information from D. Beaulieu, University of Saskatchewan for swine diets (20XX).* 
+As an alternative to the default set of standard animal diets that are found in Holos, users can create custom diets. *(Note: Holos incorporates feed ingredient information from D. Beaulieu, University of Saskatchewan, for swine diets.* 
 
-21. We will create a custom diet for our group of breeding boars that are housed in the barn. Click the **Diet** tab followed by the **"Custom Diet Creator"** button. 
+We will create a custom diet for our group of breeding boars that are housed in the barn. Click the **Diet** tab followed by the **"Custom Diet Creator"** button.
 
-    **Custom Diet Creator Screen:**
-
-    * Click the **"Add Custom Diet"** button in **Step 1** to begin to create our new custom diet. 
+On the **Custom Diet Creator** screen:
+    * Click the **"Add Custom Diet"** button under **Step 1** to begin to create our new custom diet. 
     * Rename the diet **"Custom Boar Diet"** then press the Enter to save.
-    * Add ingredients to the new diet in **Step 2**. Select **"Add Selected Ingredients to Diet"**. Search for **"Wheat, Hard Red"** from the ingredient list, highlight the choice, and then click the **OK** button below to have it appear in **Step 3** where the diet is being comprised.
-    * Enter the **Percentage in diet (%DM)** that this ingredient will hold; here we will input **38%**.
+    * Add ingredients to the new diet in **Step 2**. Select **"Add Selected Ingredients to Diet"**. Search for **"Wheat, Hard Red"** from the ingredient list, highlight the choice, and then click the **OK** button below to have it appear in **Step 3**.
+    * Enter the **Percentage in diet (%DM)** value for this ingredient; here we will input **38%**.
     * Continue to add more ingredients to the diet. Select **"Wheat Shorts"** from the “**Add Selected Ingredient to Diet**” list, highlight, and click **OK**. Enter **2%** in **Step 3** for **Percentage in diet (%DM)**.
-    * Enter **"Corn distiller's dried grains (10.6%)"**. Continue to add all the various ingredients to your diet. For our boar diet, add ingredients as follows: "Soybean meal, fermented (8.15%)", "Canola, Full fat (1%)", "Field peas (5.0%)", "Canola Meal, Expelled (15%)", and "Barley (20%)". 
-    * If any ingredient is not found in the **Full Text Search**, the user can enter the ingredient information independently using the **"Create Custom Ingredient"** button. For our example we will add the combination of lysine/vitamins (0.25%) following these steps.  
+    * Add the remaining ingredients to the diet as follows: "Corn distiller's dried grains" (10.6%); "Soybean meal, fermented" (8.15%), "Canola, Full fat" (1%), "Field peas" (5.0%), "Canola Meal, Expelled" (15%), and "Barley" (20%). 
+    * If any ingredient is not found in the **Full Text Search**, the user can enter the ingredient information independently using the **"Create Custom Ingredient"** button. In this example, we will add the combination of lysine/vitamins (0.25%) as a custom ingredient. 
     * Holos will now report the diet as being complete when **all ingredients total 100%**.
-    * Under **Step 1** input **"3"** as the value for 'Feed intake' 
-    * Click the **OK** button to save the new custom diet
+    * Under **Step 1** input **"3"** as the value for 'Feed intake'. 
+    * Click the **OK** button to save the new custom diet.
     * Now from the Diet tab, **"Custom Boar Diet"** can be selected from the drop down-down menu as the new diet for this animal group.
- 
+
+3. From the **Housing Tab** select **"Housed in Barn"** with **"Straw (Chopped)"** bedding (keep the default application rate), and from the **Manure Tab** select **"Liquid/Slurry with natural crust"**. 
  <br>
  
-> *Note: Diet quality information such as crude protein, total digestible nutrient, and fat are required inputs so that Holos can estimate enteric methane emissions from an animal group.*
-
-<br>
-
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 15.png" alt="Figure 15" width="850"/>
     <br>
-    <em>Figure 15: Custom diet creator for Swine animal group.</em>
+    <em>Figure 15: The Custom diet creator for the Boar animal group.</em>
 </p> 
 
 <br>
 
-22.  From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
+*Note: For the other Swine components, the animal groups and management periods are added/defined in the same way as for the Farrow-to-Wean component.*
 
-<br>
+### Piglets
 
-## Iso-Wean
+We will now move on to the **"Piglet"** animal group in **Step 1** by highlighting it. 
 
-Click on the **Piglets** animal group in **Step 1**. Click on the **"Weaned piglets Stage #1"** management period in **Step 2**. We will leave the default dates 'January 01, 2024' to 'January 20, 2024' (19 days).
+1. By default, there is just a single management period for this animal group, with a 'Start date' of **"May 3, 2024"** and an 'End date' of **"May 24, 2024"** (21 days). This group represents unweaned piglets that are on a milk-only diet.
+   
+2. Enter data related to the number of animals, housing type and manure management system in **Step 3**. On the **General** Tab:
+    * Select **"Nursing piglet"** as the production stage.
+    * Enter **"80"** as the number of animals.
+    * Enter **"1.4"** for the start weight and **"6"** for the end weight.
+    * For all other fields keep the default values.
 
-23. From the **General Tab:**
-       * Enter **"100:** as the number of animals.
-       * Keep the remaining entries at their default values.
-
-24. From the **Diet Tab:**
-    * Select 'Nursery weaners (starter diet #1)' as the diet type. 
-    
-25.  From the **Housing Tab** select 'Housed in Barn' with 'Straw (Chopped)' bedding, and from the **Manure Tab** select 'Liquid/Slurry with natural crust'.
-
-26. Information related to diet, housing and manure management is entered in the same manner as for the **"Weaned piglets Stage #2"** management period. We will leave the default dates 'January 21, 2024' to 'February 6, 2024' (16 days). Repeat steps 23 to 25, with the exception of selecting 'Nursery weaners (starter diet #2)'.
-
-<br>
-
-<p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 16.png" alt="Figure 16" width="950"/>
-    <br>
-    <em>Figure 16: Iso-Wean - Piglet group</em>
-</p> 
+4. Under the **Diet Tab**, as these animals are exclusively milk-fed, select **"None"** from the diet drop down menu. From the **Housing Tab** select **"Housed in Barn"** and set the Bedding type as **"Straw (Chopped)"** (keep the default application rate). From the **Manure Tab** select **"Liquid/Slurry with natural crust"**.
 
 <br>
 
 ## Grower-to-Finish 
 
-Click on the **Hogs** animal group in **Step 1**. In **Step 2** we will create three Management periods for this group. The first is the winter period, setting **"January 01, 2024"** as the 'Start date' and **"April 30, 2024"** as the ‘End date’ (121 days). Name this period **"Spring Hogs"**. We can go ahead and remove the 4th Management period by clicking the **X**.
+1. Click on the **Hogs** animal group in **Step 1** to enter the associated management information for this group.
+ 
+2. Under **Step 2**, select the first management period and set the 'Start date' to **"May 25 2024"** and the 'End date' to **"June 19, 2024"** (26 days). Name this period **"Spring Hogs"**. 
 
-1. Highlight the 'Spring Hogs' management period, and on the **General Tab:**
-      * Leave the default 'Growing/finishing' as the production stage.
-      * Enter **1000** as the number of animals.
+3. Highlight the 'Spring Hogs' management period, and on the **General** tab leave 'Growing/finishing' as the production stage and enter **1000** as the number of animals.
 
-   **Diet Tab:**
-    * Select 'Grower/Finisher diet 2' as the diet type.
-
-    **Housing Tab:**
-    * Select 'Housed in barn' as the housing type and leave 'Straw (Chopped)' as the bedding type.
-    
-    **Manure Tab:**
-    * Select 'Liquid/Slurry with natural crust' as the manure handling system.
+5. On the **Diet** tab, select **"Grower/Finisher diet 1"** as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and **"Straw (Chopped)"** as the bedding type (keep the default application rate) and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
 <br>  
 
-### Hogs - On Pasture
+6. For the second, and third management periods, the hogs will be placed on pasture - rename these management periods **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**. Set the 'Start date' for **"Summer Pasture Hogs 1"** to **"June 20, 2024"** and the 'End date' to **"July 6, 2024"** (17 days), and set the 'Start date' and 'End date' for **"Summer Pasture Hogs 2"** to **"July 7, 2024"** and **"August 2, 2024"**, respectively (27 days). 
 
-The second management period in **Step 2** will be named **"Summer Pasture Hogs"**. Our warm season grazing will be set from **"May 01, 2024"**  to **"October 31, 2024"** (184 days). 
+7. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"** management periods, on the **General"** tab, leave the production stage as **"Growing/finishing"** and enter **1000** as the number of animals.
 
-2. Highlight 'Summer Pasture Hogs', and on the **General Tab:"** 
-      * Leave the production stage as 'Growing/finishing' 
-      * Enter **1000** as the number of animals.  
+8. For the diet for these hogs on pasture, we will create a new diet. Select the **"Custom Diet Creator"** button. In **Step 1** on this screen, select **"Add Custom Diet"** and name the new diet **"Hog Supplement"**. 
 
 <br>
 
@@ -475,36 +395,17 @@ The second management period in **Step 2** will be named **"Summer Pasture Hogs"
 
 <br>
 
+3. In **Step 2** and **Step 3**, add the diet ingredients as follows: 'Barley' (99.5%) and 'Lysine/vitamins' (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Custom Boar Diet'.
 
-3. We will create a new diet as a supplement to grazing on pasture. Select the 'Custom Diet Creator' button. In **Step 1** on the this screen, select 'Add Custom Diet' and name it **"Hog Supplement"**. 
+4. Under **Step 1** enter **"3"** as the 'Feed intake' for the 'Hog Supplement' diet. Click **OK** to save.
 
-4. In **Step 2** add the ingredients Barley (99.5%) and lysine/vitamins (0.5%). Lysine/vitamins will now appear in the text search as it was previously added for the 'Boar Diet'.
+5. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**, on the **Diet tab** select 'Hog Supplement' from the drop down menu. On the **Housing** tab, select **Pasture/range/paddock** as the housing type and select **Native Grassland** as the pasture location, and on the **Manure** tab, select **Pasture** as the manure handling system.
 
-5. Adjust the 'Percentage in diet' values in **Step 3**. Then under **Step 1** input the 'feed intake' for 'Hog Supplement' as **"3"**.  Click **OK** to save.
+6. Finally, for the final management period, set the 'Start date' and 'End date' to **"August 3, 2024"** and **"September 16, 2024"**, respectively (45 days).
 
-6. On the **Diet tab** select 'Hog Supplement' from the drop down menu.
+10. Highlight this management period, and on the **General** tab leave **"Growing/finishing"** as the production stage and enter **1000** as the number of animals.
 
-7. On the **Housing Tab:**
-    * Select **Pasture/range/paddock** as the housing type.
-    * Select **Native Grassland** as the pasture location.
- 
-8. On the **Manure Tab:**
-    * Select **Pasture** as the manure handling system.
-
-Lastly set the fall period as **"November 01, 2024"** to **"December 31, 2024"** (61 days) and name this **"Winter Hogs"**.
-
-9. Highlight the 'Winter Hogs' management period, and on the **General Tab:**
-      * Leave the default 'Growing/finishing' as the production stage.
-      * Enter **1000** as the number of animals.
-
-   **Diet Tab:**
-    * Select 'Grower/Finisher diet #4' as the diet type.
-
-    **Housing Tab:**
-    * Select 'Housed in barn' as the housing type and leave 'Straw (Chopped)' as the bedding type.
-    
-    **Manure Tab:**
-    * Select 'Liquid/Slurry with natural crust' as the manure handling system.
+11. On the **Diet** tab, select 'Grower/Finisher diet #4' as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and leave **"Straw (Chopped)"** as the bedding type (keep the default application rate, and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
 
 <br>
 
@@ -542,36 +443,6 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 
 <br>
 
-### Adding supplemental hay/forage for grazing animals
-
-We can also add additional hay/forage for animals that are grazing on a particular field. Since we have now placed a group of animals on the “Native Grassland” field component, and we have also provided harvest information for our mixed hay crops on the crop rotation component, we can then add an additional forage supplement for these grazing animals.
-
-1. Select the **Native Grassland** field component we created earlier.
-
-2. Click on the **Grazing tab.**
-    - Click the **Add Supplemental Hay** button to add additional forage for the animals on this field.
-    - Enter "**On-farm**" as the **Sources of bales**.
-    - Choose **Crop rotation #1 [Field #2] - Tame Mixed (grass/legume)** under **Field** to select the source of the supplemental hay.
-    - Change the **Number of bales** to **1**
-    - Enter **500** as the wet bale weight.
-    - Keep the moisture content as the default value.
-
-3. On the field receiving the supplemental forage, there is a chart showing how much forage is still available on the right of the screen for reference.
-
-<br>
-  
- > *Note: It is not recommended to mix different species of grasses together. Here, we are only demonstrating the ability of Holos to add supplemental hay to a field that has grazing animals.*
-
-<br>
-
-<p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 19.png" alt="Figure 19" width="950"/>
-    <br>
-    <em>Figure 19: Adding supplemental hay/forage for grazing animals.</em>
-</p>
-
-<br>
-
 # Timeline Screen
 
 We are now finishing the process of defining our farm. Click the **Next** button to go forward to the timeline screen.
@@ -582,46 +453,46 @@ The **Add Historical Production System** button enables the user to add a differ
 
 ### Adding a historical production system
 
-We will assume that the barley grain and mixed hay rotation fields were previously in a continuous wheat cropping system between **1985 and 2000.**
+We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barley** grain - **Tame mixed (grass/legume)** hay rotation between between **1985 and 2000.**
 
-1. To add a new historical cropping system, select one of the fields that are in the barley grain and mixed hay rotation. To select an item, click on the timeline bar to activate that field. We will select the first field in this rotation (i.e., the field with the name of **"Crop rotation #1 [Field #1] - Barley"**).
+1. To add a new historical cropping system, select the **Wheat & Hairy Vetch** field. To select an item, click on the timeline bar to activate that field.
 
-2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left section of the screen. Notice that this new entry has the words **"Historical management practice"** added.
+2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left of the screen. Note that this new entry has the words **"Historical management practice"** added.
 
 3. We will set the end year of this historical management practice to the year **2000**. To adjust this we use the numeric up/down buttons within the cell.
 
-4. Select the newly added **'Historical management practice'** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and the management during this period.
+4. Select the newly added **'Historical management practice'** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and their management during this period.
 
-5. Click on the **"Barley"** crop under the **"Step 2"** section. Change the crop type to **"Wheat"** and on the **'General'** tab change the yield to **3,500** kg/ha. We will keep the other settings unchanged.
+5. As we want to make this a three-crop rotation, under **"Step 2"** click the **"Add Crop"** button twice to add two more crops.
 
-6. We also need to remove the **"Tame mixed"** crops from this historical period. Click the **'X'**’ icon beside each of the **"Tame mixed"** crops under the **"Step 2"** section. Clicking the **'X'** icon will remove these crops from the rotation for this period of time.
+6. Change the first crop type to **"Barley"** (with no cover crop). Enter a yield of **"3,500 kg ha<sub>-1</sub>"** (wet weight) and keep all other settings as default.
 
-7. Click **'OK'** to save adjustments we just made to this field.
+7. Change the second and third rows to **"Tame mixed (grass/legume)"** - note that when a perennial crop is selected as the main crop, Holos automatically selects the same crop type as the cover crop. Keep all other settings as default for both years.
 
-8. Repeat these same steps so that the other fields in this rotation also have continuous wheat from **1985 to 2000** using the same steps we used for the first field.
+8. Click "OK" to save these adjustments.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 20.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure14_Revised.png" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 20: Customized Timeline Screen</em>
+    <em>Figure 14: Customized Timeline screen</em>
 </p> 
 
 <br>  
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 21.png" alt="Figure 21" width="550"/>
+    <img src="../../Images/PoultryGuide/en/Figure15_Revised.png" alt="Figure 15" width="550"/>
     <br>
-    <em>Figure 21: Adjusted start and end year for production systems on the timeline screen.</em>
+    <em>Figure 15: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 
-<br>
+<br> 
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 22.png" alt="Figure 22" width="650"/>
+    <img src="../../Images/PoultryGuide/en/Figure16_Revised.png" alt="Figure 16" width="650"/>
     <br>
-    <em>Figure 22: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 16: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -630,9 +501,9 @@ We will assume that the barley grain and mixed hay rotation fields were previous
 
 Click the **"Next"** button to go forward to the details screen.
 
-To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil carbon sequestration rates and soil N<sub>2</sub>O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground carbon inputs to the soil.
+To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil C sequestration rates and soil N<sub>2</sub>O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground C inputs to the soil.
 
-We will adjust this grid so that we can view the above-ground and below-ground carbon inputs for our wheat field and then we will adjust the crop yield for one specific year.
+We will adjust this grid so that we can view the above-ground and below-ground C inputs for the **Wheat & Hairy Vetch** and then we will adjust the wheat crop yield for one specific year.
 
 1. We will set a filter on the first column named **'Field name'** so that we only display information for our **Wheat and hairy vetch field**. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **Wheat & hairy vetch**.
 
@@ -644,27 +515,27 @@ We will adjust this grid so that we can view the above-ground and below-ground c
 
 5. We can now (optionally) adjust the yields for our wheat field for any given year if actual measured yields are available.
 
-6. Adjust the yield for **1987** to be **4,100** kg/ha.
+6. Adjust the yield for **2006** to be **4,100** kg/ha.
 
-7. Note that Holos has updated the above-ground carbon inputs for this.
+7. Note that Holos has updated the above-ground C inputs for this.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 23.jpg" alt="Figure 23" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 23: Details screen</em>
-</p>
+    <em>Figure 17: Details screen</em>
+</p> 
 
 <br>
 
-# Discover Results
+# Results Screen
 
 Click the **"Next"** button to move to the final results report. Results will now be displayed in a variety of reports and charts. 
 
-1. Click on the tab named **"Emissions Pie Chart"**.
+1. Click on the tab named **"Detailed Emission Report"**.
 
-    Starting with the **Emissions pie chart** we can see an overall breakdown of the enteric CH<sub>4</sub>, manure CH<sub>4</sub>, direct and indirect N<sub>2</sub>O. We are also able to see a detailed breakdown of the sources of these emissions.
+    The **Detailed Emission Report** displays a monthly or annual GHG emission report. The detailed emission report will report on enteric methane (CH<sub>4</sub>), manure CH<sub>4</sub>, direct and indirect N<sub>2</sub>O, and carbon dioxide (CO<sub>2</sub>) emissions from the farm.
 
 2. Click the **"Yes"** button beside **'Show details'**.
 
@@ -672,38 +543,29 @@ Click the **"Next"** button to move to the final results report. Results will no
 
 3. Click on the tab named **"Detailed Emission Report"**.
 
-    The **Detailed Emission Report** will display a monthly or annual GHG emission report. The detailed emission report will report on enteric methane, manure methane, direct & indirect N<sub>2</sub>O, and CO<sub>2</sub> emissions from the farm.
+    The **Detailed Emission Report** will display a monthly or annual GHG emission report. The detailed emission report will report on enteric methane (CH<sub>4</sub>), manure CH<sub>4</sub>, direct and indirect N<sub>2</sub>O, and carbon dioxide (CO<sub>2</sub>) emissions from the farm.
 
-Click the **"Report Format (Monthly)"** button to switch to a monthly report. Now we can see a monthly breakdown of all emissions from the farm and the emission source.
+2. Click the **Report Format (Monthly)** button to switch to a monthly report. Now we can see a monthly breakdown of all emissions from the farm and the emission source.
 
-In the **'Unit of measurements'** drop-down menu, you can choose to have the results displayed as CO<sub>2</sub> equivalents (CO<sub>2</sub>e) or as unconverted greenhouse gas (GHG), and you can also choose the unit of measurement as either tonnes or kilograms.
-
-The **'Estimates of Production'** report provides total harvest yields, farm land information, and amount of land-applied manure produced from each of the swine animal components.
-
-The **'Feed Estimate'** report provides an estimate of dry matter intake based on energy requirements of the animal and the energy in the feed.
-
+    In the **Unit of measurement** drop-down menu, you can choose to have the results displayed as CO<sub>2</sub> equivalents (CO<sub>2</sub>e) or as unconverted greenhouse gases (GHG), and you can also choose the unit of measurement as either tonnes/megagrammes (Mg) or kilograms (kg).
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 24.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 24: Detailed emissions report.</em>
+    <em>Figure 18: Detailed emissions report.</em>
 </p> 
 
 <br>
 
-<p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 25.png" alt="Figure 25" width="950"/>
-    <br>
-    <em>Figure 25: Estimates of production report.</em>
-</p> 
+3. Click on the **Estimates of Production** report which provides total harvest yields for the farm's fields and of the amount of N available in manure produced by the farm's livestock.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure 26.png" alt="Figure 26" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 26: Feed estimate report.</em>
+    <em>Figure 19: Estimates of production report.</em>
 </p> 
 
 <br>
