@@ -187,7 +187,7 @@ namespace H.Core.Test.Services
 
             var result = _sut.GetYearHighestVolumeRemaining(AnimalType.Dairy);
 
-            Assert.AreEqual(2024, result);
+            Assert.AreEqual(DateTime.Now.Year, result);
         }
 
         [TestMethod]
