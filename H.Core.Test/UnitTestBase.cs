@@ -124,7 +124,7 @@ namespace H.Core.Test
             var managementPeriod = new ManagementPeriod();
 
             managementPeriod.AnimalType = AnimalType.Beef;
-            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.StartWeight = 100;
             managementPeriod.EndWeight = 200;
             managementPeriod.Duration = TimeSpan.FromDays(30);
@@ -179,7 +179,7 @@ namespace H.Core.Test
             cowsGroup.GroupType = AnimalType.DairyLactatingCow;
 
             var managementPeriod = new ManagementPeriod();
-            managementPeriod.Start = new DateTime(2024, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.AnimalType = AnimalType.BeefBackgrounderHeifer;
             managementPeriod.StartWeight = 100;
             managementPeriod.NumberOfAnimals = 1000;
