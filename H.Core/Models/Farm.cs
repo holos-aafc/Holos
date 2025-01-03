@@ -32,8 +32,6 @@ namespace H.Core.Models
 {
     public partial class Farm : ModelBase
     {
-        
-
         #region Fields
 
         public enum ChosenClimateAcquisition
@@ -44,7 +42,7 @@ namespace H.Core.Models
             SLC,
 
             /// <summary>
-            /// A user created file of climate data whereby the user must specify daily values for temperature, precipitation, evapotranspiration, etc.
+            /// Used with the CLI where the user can specify default monthly values in a climate settings file
             /// </summary>
             Custom,
 
@@ -52,6 +50,11 @@ namespace H.Core.Models
             /// Daily climate data is downloaded from NASA website API
             /// </summary>
             NASA,
+
+            /// <summary>
+            /// Used with the CLI where the user can specify default daily values in a custom CSV file
+            /// </summary>
+            InputFile,
         }
 
         private string _comments;
@@ -875,6 +878,10 @@ namespace H.Core.Models
             else if (climateAcquisitionString == "NASA")
             {
                 return ChosenClimateAcquisition.NASA;
+            }
+            else if (climateAcquisitionString == "InputFile")
+            {
+                return ChosenClimateAcquisition.InputFile;
             }
             else
             {

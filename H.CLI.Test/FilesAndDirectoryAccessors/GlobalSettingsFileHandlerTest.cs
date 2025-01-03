@@ -60,9 +60,33 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
         }
 
         [TestMethod]
+        [Ignore]
+        public void TestReadCustomClimateFile()
+        {
+            CLIUnitsOfMeasurementConstants.measurementSystem = MeasurementSystemType.Metric;
+            var farm = new Farm();
+            var applicationData = new ApplicationData();
+            var lethbridgeGeographicData = geographicDataProvider.GetGeographicalData(793006);
+            var climateDataProvider = new SlcClimateDataProvider();
+            var climatateData = climateDataProvider.GetClimateData(793006, TimeFrame.ProjectionPeriod);
+
+            var globalSettingsHandler = new SettingsHandler();
+            var reader = new ReadSettingsFile();
+            var directoryHandler = new DirectoryHandler();
+            Directory.CreateDirectory("H.CLI.TestFiles");
+            Directory.CreateDirectory(@"H.CLI.TestFiles\TestGlobalSettingsHandler");
+            var pathToSettingsFile = @"H.CLI.TestFiles\TestGlobalSettingsHandler";
+            var path = @"E:\Sync\Work\Source\aafc\H\H.CLI.Test\bin\Debug\climate.csv";
+            directoryHandler.GenerateGlobalSettingsFile(pathToSettingsFile, new Farm() { GeographicData = lethbridgeGeographicData, ClimateData = climatateData, ClimateAcquisition = Farm.ChosenClimateAcquisition.InputFile, ClimateDataFileName = path});
+            reader.ReadGlobalSettings(pathToSettingsFile + @"\farm.settings");
+            globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
+
+            Assert.IsTrue(farm.ClimateData.DailyClimateData.Count > 1000);
+        }
+
+        [TestMethod]
         public void TestSetGlobalSettingsSetsDefaultsProperly()
         {
-       
             CLIUnitsOfMeasurementConstants.measurementSystem = MeasurementSystemType.Metric;
             var farm = new Farm();
             var applicationData = new ApplicationData();

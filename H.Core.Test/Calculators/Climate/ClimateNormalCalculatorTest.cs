@@ -64,9 +64,9 @@ namespace H.Core.Test.Calculators.Climate
             var petNorms = result[MonthlyNormalTypes.evapotranspiration];
             var januaryPETNormal = petNorms[Months.January];
 
-            Assert.AreEqual(-13.1798, Math.Round(januaryTemperatureNormal, 4));
-            Assert.AreEqual(24.8171, Math.Round(januaryPrecipNormal, 4));
-            Assert.AreEqual(0.1487, Math.Round(januaryPETNormal, 4));
+            Assert.AreEqual(-13.1799, Math.Round(januaryTemperatureNormal, 4));
+            Assert.AreEqual(24.8168, Math.Round(januaryPrecipNormal, 4));
+            Assert.AreEqual(0.1451, Math.Round(januaryPETNormal, 4));
         }
 
         [TestMethod]

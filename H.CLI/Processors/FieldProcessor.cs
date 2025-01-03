@@ -42,16 +42,13 @@ namespace H.CLI.Processors
         #endregion
 
         #region Public Methods
+
         public void ProcessComponent(Farm farm, List<ComponentBase> componentList, ApplicationData applicationData)
         {
             /*
              * Do not recreate the details stage state here. This will be created FieldSystemInputConverter class when each row of an input file is read. This allows
              * a user to export a GUI farm with the existing stage state. That existing stage state will be used to create the rows in the input file (one for each year).
              */
-
-            // Should re_crop be overwritten here if the user specifies a custom climate file?
-            //var pathToCustomClimateData = farm.CliInputPath + @"\" + farm.ClimateDataFileName;
-            //_customClimateDataProvider.LoadUserClimateFile(pathToCustomClimateData, farm);
 
             var animalResults = _animalService.GetAnimalResults(farm);
             _fieldResultsService.AnimalResults = animalResults;
@@ -62,7 +59,7 @@ namespace H.CLI.Processors
 
             string filePath = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmName + @"\" + Properties.Resources.DefaultFieldsInputFolder + @"\";
 
-            //write field system data to file
+            // Write field system data to file
             _fieldResultsService.ExportResultsToFile(
                 results: finalResults,
                 path: filePath,
@@ -72,7 +69,7 @@ namespace H.CLI.Processors
                 exportedFromGui: false,
                 farm: farm);
 
-            //write econ data to file
+            // Write econ data to file
             //_economicsCalculator.ExportEconomicsDataToFile(
             //    farm: farm,
             //    path: filePath,

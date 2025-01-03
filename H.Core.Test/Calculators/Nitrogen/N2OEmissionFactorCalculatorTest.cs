@@ -540,7 +540,9 @@ namespace H.Core.Test.Calculators.Nitrogen
         {
             _mockManureService.Setup(x => x.GetTotalManureNitrogenRemainingForFarmAndYear(It.IsAny<int>(), It.IsAny<Farm>())).Returns(600);
 
-            var cropViewItem = new CropViewItem() {Year = 2024, Area = 20};
+            var currentYear = DateTime.Now.Year;
+
+            var cropViewItem = new CropViewItem() {Year = currentYear, Area = 20};
             var farm = base.GetTestFarm();
             var field = base.GetTestFieldComponent();
             field.FieldArea = 100;
@@ -550,9 +552,9 @@ namespace H.Core.Test.Calculators.Nitrogen
             field2.FieldArea = 300;
             farm.Components.Add(field2);
 
-            var detailViewItem1 = new CropViewItem() {Year = 2024, CropType = CropType.Barley};
-            var detailViewItem2 = new CropViewItem() {Year = 2024, CropType = CropType.Wheat};
-            var detailViewItem3 = new CropViewItem() { Year = 2022 ,CropType = CropType.Beans};
+            var detailViewItem1 = new CropViewItem() {Year = currentYear, CropType = CropType.Barley};
+            var detailViewItem2 = new CropViewItem() {Year = currentYear, CropType = CropType.Wheat};
+            var detailViewItem3 = new CropViewItem() { Year = (currentYear - 3) ,CropType = CropType.Beans};
 
             var stageState = new FieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(detailViewItem1);
@@ -851,7 +853,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var result = _sut.CalculateDirectN2ONFromLeftOverManureForField(farm, viewItem);
 
-            Assert.AreEqual(7.65351457261074, result, 0.0001);
+            Assert.AreEqual(7.65433909810864, result, 0.0001);
         }
 
         [TestMethod]
