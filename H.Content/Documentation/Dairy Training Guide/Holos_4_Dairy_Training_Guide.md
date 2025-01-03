@@ -150,10 +150,12 @@ Now we can add our first component to the farm. Drag a **Field** component from 
 Our first field on the farm will grow continuous wheat with a cover crop of hairy vetch. Change the following elements in the **"Field #1"** component.
 
 1. Rename the field to **"Wheat & Hairy Vetch"** in the **Step 1** section of the screen. Change the area of the field to **18 ha**.
+   
+2. Leave the start year as 1985 and change the end year to 2023.
 
-2. Select **"Wheat"** as the main crop and **"Hairy Vetch"** as the cover crop in **Step 2**.
+3. Select **"Wheat"** as the main crop and **"Hairy Vetch"** as the cover crop in **Step 2**.
 
-3. Under the **General** tab:
+4. Under the **General** tab:
     * Enter a yield of **"3,000 kg ha<sup>-1</sup>"** (wet weight). The dry weight value will be calculated automatically based on the moisture content of crop value.
     * Select **"Reduced Tillage"**" as the tillage type.
     * Enter **"200"** mm ha<sup>-1</sup> as the amount of irrigation.
@@ -195,10 +197,11 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 ### Native Grassland 
 
 1. Drag a new **Field** component to your list of components. Enter **"Native Grassland"** as the field name.
-2. Enter **"100"** ha as the total area of the field.
-3. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** field when a perennial crop is selected.
-4. Enter **"0" mm ha<sup>-1</sup>** as the amount of irrigation and **"0"** as the number of pesticide passes.
-5. No fertilizer is used for this crop.
+2. Leave the start year as 1985 and change the end year to 2023.
+3. Enter **"100"** ha as the total area of the field.
+4. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** field when a perennial crop is selected.
+5. Enter **"0" mm ha<sup>-1</sup>** as the amount of irrigation and **"0"** as the number of pesticide passes.
+6. No fertilizer is used for this crop.
 
 <br>
 
@@ -237,7 +240,7 @@ Holos provides the user with the option to have more than one lactating cows gro
 
 1. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected in order to enter the associated management information for that group of animals.
 
-2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the start date and **"May 31, 2023"** as the end date (150 days). Note that the **Number of days** being shown is inclusive of the start and end dates.
+2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the start date and **"May 31, 2023"** as the end date (151 days). Note that the **Number of days** being shown is inclusive of the start and end dates.
 
 3. Next, we can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3**. 
 
@@ -264,7 +267,7 @@ Holos provides the user with the option to have more than one lactating cows gro
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
     <br>
-    <em>Figure 15: Custom diet creator for the Dairy Lactating animal group.</em>
+    <em>Figure 14: Custom diet creator for the Dairy Lactating animal group.</em>
 </p> 
 
 <br>
@@ -285,21 +288,19 @@ Holos provides the user with the option to have more than one lactating cows gro
 
  12. Click on the **Manure** tab and select **"Liquid/Slurry with no natural crust"** from the list.
  
- 13. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected to enter further management period information.
+ 13. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2023"** is set as the start date and **"July 31, 2023"** as the end date (61 days). 
  
- 14. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2023"** is set as the start date and **"July 31, 2023"** as the end date (60 days). 
+ 14. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
  
- 15. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
+ 15. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (slurry)"**, and on the **Manure** tab choose **"Liquid/Slurry with no natural crust"**.
  
- 16. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (slurry)"**, and on the **Manure** tab choose **"Liquid/Slurry with no natural crust"**.
+ 16. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the start date and **"November 04, 2023"** as the end date (96 days). 
  
- 17. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the start date and **"November 04, 2023"** as the end date (95 days). 
- 
- 18. Repeat Step 16 above. Enter in the same information in **Step 3** for this management period.
+ 17. Repeat Step 16 above. Enter in the same information in **Step 3** for this management period.
 
 <br>
 
-**Calves:**
+**Dairy calves:**
 
 Calves that are not used for replacement will enter into the veal system and are fed mainly milk replacer and corn grain. Factoring in a fertility loss of 7.7%, 60 calves are produced with a sex ratio of 50:50 male:female. Out of the 30 female calves produced, the farm selected 15 as replacement heifers (young heifers) for lactating dairy cows. With an assumed mortality rate of 4.4% at four months of age, 43 veal calves will be fed on a corn grain-based diet. Veal calves are slaughtered at the age of 6 months (~270 kg body weight).
 
@@ -309,7 +310,7 @@ Calves that are not used for replacement will enter into the veal system and are
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
-4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2023"** and the end date is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**.
+4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2023"** and the end date is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
 
 <br>
 
@@ -341,7 +342,7 @@ In this dairy animal group there are 20 cows that are not milked, allowing for r
 
 1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the start date and **"January 4, 2024"** as the end date (60 days).
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the start date and **"January 4, 2024"** as the end date (61 days).
 
 3. Click on the **General** tab and enter **"20"** as the number of animals.
 
@@ -373,9 +374,9 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure16_Revised.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure15_Revised.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 16: Adding a Manure Application to a Field.</em>
+    <em>Figure 15: Adding a Manure Application to a Field.</em>
 </p>
  
 <br>
@@ -413,25 +414,25 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure14_Revised.png" alt="Figure 14" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure16_Revised.png" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 14: Customized Timeline screen</em>
+    <em>Figure 16: Customized Timeline screen</em>
 </p> 
 
 <br>  
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure15_Revised.png" alt="Figure 15" width="550"/>
+    <img src="../../Images/DairyGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 15: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 17: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 
 <br> 
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure16_Revised.png" alt="Figure 16" width="650"/>
+    <img src="../../Images/DairyGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 16: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 18: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -469,9 +470,9 @@ We will adjust this grid so that we can view the above-ground and below-ground C
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 17: Details screen</em>
+    <em>Figure 19: Details screen</em>
 </p> 
 
 <br>
@@ -490,9 +491,9 @@ Click the **"Next"** button to move on to discover the results on the final scre
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 18: Detailed emissions report.</em>
+    <em>Figure 20: Detailed emissions report.</em>
 </p> 
 
 <br>
@@ -502,9 +503,9 @@ Click the **"Next"** button to move on to discover the results on the final scre
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure21_Revised.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 19: Estimates of production report.</em>
+    <em>Figure 21: Estimates of production report.</em>
 </p> 
 
 <br>
@@ -522,9 +523,9 @@ If you would like to export your entire farm file, from '**File**' on the main t
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure22_Revised.png" alt="Figure 22" width="950"/>
     <br>
-    <em>Figure 20: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 22: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 
 <br>
