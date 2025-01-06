@@ -86,6 +86,8 @@ namespace H.Core.Converters
                  * Sheep
                  */
 
+                case "sheepfeedlot":
+                    return AnimalType.SheepFeedlot;
                 case "ewe":
                 case "ewes":
                     return AnimalType.Ewes;
