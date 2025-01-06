@@ -362,11 +362,11 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 
 2. Click on the **Manure tab** and then click the **Add Manure Application** button.
     * Select **"April 30, 2024"** as the date.
-    * Select **Livestock** as the origin of manure.
-    * Select **Dairy** as the manure type.
-    * Select **Liquid/Slurry with no natural crust** as the manure handling system.
-    * Select **Shallow injection** as the application method.
-    * Enter **14,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
+    * Select **"Livestock"** as the origin of manure.
+    * Select **"Dairy"** as the manure type.
+    * Select **"Liquid/Slurry with no natural crust"** as the manure handling system.
+    * Select **"Shallow injection"** as the application method.
+    * Enter **"14,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
 4. Note that both chemical fertilizer and manure applications can be made on the same field.
 
 > Holos provides an interactive gauge on the left of the manure tab to show the **Amount of Stored Manure N Remaining (Dairy cattle) (kg N)**, which adjusts to reflect the user's application choices and quantify the amount of stored manure (N) remaining for application.
@@ -376,7 +376,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 <p align="center">
     <img src="../../Images/DairyGuide/en/Figure15_Revised.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 15: Adding a Manure Application to a Field.</em>
+    <em>Figure 15: Adding a manure application to a field.</em>
 </p>
  
 <br>
@@ -398,7 +398,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left section of the screen. Note that this new entry has the words **"Historical management practice"** added.
 
-3. We will set the end year of this historical management practice to the year **2000**. To adjust this we use the numeric up/down buttons within the cell.
+3. We will set the end year of this historical management practice to the year **"2000"**. To adjust this we use the numeric up/down buttons within the cell.
 
 4. Select the newly added **Historical management practice** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and their management during this period.
 
