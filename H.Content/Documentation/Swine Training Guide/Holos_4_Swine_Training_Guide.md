@@ -231,7 +231,7 @@ Adding animal components follows the same approach used for the land management 
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 14.gif" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 14: Adding Swine Farm Components.</em>
+    <em>Figure 13: Adding Swine Farm Components.</em>
 </p> 
 
 <br>
@@ -347,7 +347,7 @@ On the **Custom Diet Creator** screen:
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 15.png" alt="Figure 15" width="850"/>
     <br>
-    <em>Figure 15: The Custom Diet Creator for the Boar animal group.</em>
+    <em>Figure 14: The Custom Diet Creator for the Boar animal group.</em>
 </p> 
 
 <br>
@@ -410,7 +410,7 @@ For other Swine components, the animal groups and management periods are added/d
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 17: Defining the Grower-to-Finish swine component</em>
+    <em>Figure 15: Defining the Grower-to-Finish swine component</em>
 </p> 
 
 <br> 
@@ -436,7 +436,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 <p align="center">
     <img src="../../Images/SwineGuide/en/Figure 18.gif" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 18: Adding a manure application to the Wheat & Hairy Vetch component</em>
+    <em>Figure 16: Adding a manure application to the Wheat & Hairy Vetch component</em>
 </p>
 
 <br>
@@ -474,25 +474,25 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 19: Customized Timeline screen</em>
+    <em>Figure 17: Customized Timeline screen</em>
 </p> 
 
 <br>  
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 20: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 18: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
 
 <br> 
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure21_Revised.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 21: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 19: Editing crops in a historical period of the rotation. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -530,9 +530,9 @@ We will adjust this grid so that we can view the above-ground and below-ground C
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure22_Revised.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 22: Details screen</em>
+    <em>Figure 20: Details screen</em>
 </p> 
 
 <br>
@@ -551,9 +551,9 @@ Click the **"Next"** button to move on to discover the results on the final scre
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure23_Revised.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure21_Revised.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 23: Detailed emissions report.</em>
+    <em>Figure 21: Detailed emissions report.</em>
 </p> 
 
 <br>
@@ -563,9 +563,9 @@ Click the **"Next"** button to move on to discover the results on the final scre
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure23_Revised.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure22_Revised.png" alt="Figure 22" width="950"/>
     <br>
-    <em>Figure 23: Estimates of production report.</em>
+    <em>Figure 22: Estimates of production report.</em>
 </p> 
 
 <br>
@@ -583,9 +583,9 @@ If you would like to export your entire farm file, from **File** on the main tas
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure24_Revised.png" alt="Figure 24" width="950"/>
+    <img src="../../Images/SwineGuide/en/Figure23_Revised.png" alt="Figure 23" width="950"/>
     <br>
-    <em>Figure 24: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 23: Carbon report section. Allows switching between graph and table format.</em>
 </p> 
 
 <br>
