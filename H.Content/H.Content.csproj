@@ -284,6 +284,7 @@
     <Content Include="Scripts\addCopyright.py" />
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
+    <None Include="Documentation\Beef Training Guide\Holos_4_Training_Guide_Beef.md" />
     <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide.md" />
     <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide_French.md" />
     <None Include="Documentation\Doxyfile" />
