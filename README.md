@@ -30,6 +30,8 @@ The Holos version 4.0 algorithm document can be found at the following link:
 
 There is a <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide.md" target="_blank">Holos 4 Training Guide</a> for the graphical user interface (GUI) available. This guide can be used as a step-by-step tutorial on how to set up a farm and calculate emissions in the GUI. 
 
+A beef cattle specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Beef%20Training%20Guide/Holos_4_Training_Guide_Beef.md" target="_blank">here</a>.
+
 A swine specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Swine%20Training%20Guide/Holos_4_Swine_Training_Guide.md" target="_blank">here</a>.
 
 A dairy specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Dairy%20Training%20Guide/Holos_4_Dairy_Training_Guide.md" target="_blank">here</a>.
