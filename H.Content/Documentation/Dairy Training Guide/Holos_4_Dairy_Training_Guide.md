@@ -404,7 +404,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 5. As we want to make this a three-crop rotation, under **"Step 2"** click the "**Add Crop**" button twice to add two more crops. 
 
-7. Change the first crop type to "**Barley**" (with no cover crop). Enter a yield of "**3,500 kg ha<sup>-1</sup>**" (wet weight) and keep all other settings as default.
+7. Change the first crop type to "**Barley**" (with no cover crop). Enter a yield of **"3,500 kg ha<sup>-1</sup>"** (wet weight) and keep all other settings as default.
   
 8. Change the second and third rows to **"Tame mixed (grass/legume)"** - note that when a perennial crop is selected as the main crop, Holos automatically selects the same crop type as the cover crop. Keep all other settings as default for both years. 
 
@@ -439,21 +439,15 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 ## Details Screen
 
-To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the user-defined start year, if different) for each field on the farm, the model uses default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil C sequestration rates and soil N<sub>2</sub>O emissions.
-
-Click the **Next** button to move to the final **Results** screen. 
-
-<br>
-
-Click the **"Next"** button to go forward to the details screen.
+Click the **Next** button to go forward to the details screen.
 
 To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil C sequestration rates and soil N<sub>2</sub>O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground C inputs to the soil.
 
 We will adjust this grid so that we can view the above-ground and below-ground C inputs for our **Wheat & Hairy Vetch** field and then we will adjust the crop yield for one specific year.
 
-1. We will set a filter on the first column named **'Field name'** so that we only display information for our current **Wheat and hairy vetch** field. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **'Wheat & hairy vetch'**.
+1. We will set a filter on the first column named **"Field name"** so that we only display information for our current **Wheat and hairy vetch** field. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **'Wheat & hairy vetch'**.
 
-2. On the far left of this screen, click the **"Enable Columns"** sidebar (located near the “Field name” column).
+2. On the far left of this screen, click the **Enable Columns** sidebar (located near the “Field name” column).
 
 3. Place a check beside **"Above-ground carbon input"** to show the column and remove the check beside the **'Notes'** column to hide it.
 
@@ -461,10 +455,9 @@ We will adjust this grid so that we can view the above-ground and below-ground C
 
 5. We can now (optionally) adjust the yields for our wheat crop for any given year if actual measured yields are available.
 
-6. Adjust the wheat
-7. yield for **2006** to be **4,100** kg/ha.
+6. Adjust the wheat yield for **2006** to be **4,100 kg ha<sup>-1</sup>"**.
 
-8. Note that Holos has updated the above-ground C inputs for this.
+7. Note that Holos has updated the above-ground C inputs for this.
 
 
 <br>
@@ -539,7 +532,6 @@ If you would like to export your entire farm file, from '**File**' on the main t
 > An ecosystem consists of not only the organisms and the environment in which they live but also the interactions within and between these organisms and their surroundings. A whole systems approach seeks to describe and understand the entire system as an integrated whole, rather than as individual components. This holistic approach can be very complex and describing the process can be difficult. One method to conceptualize a whole system is with a mathematical model.
 > 
 > The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
-
 
 To download Holos, for more information, or to access a recent list of Holos-related publications, visit: www.agr.gc.ca
 
