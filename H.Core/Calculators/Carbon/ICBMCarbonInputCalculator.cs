@@ -127,7 +127,7 @@ namespace H.Core.Calculators.Carbon
 
             var result = 0d;
             var moistureContentFraction = currentYearViewItem.MoistureContentOfCrop;
-            var isGrazed = currentYearViewItem.HasGrazingViewItems;
+            var isGrazed = currentYearViewItem.GrazingViewItems.Any();
             if (isGrazed)
             {
                 moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
