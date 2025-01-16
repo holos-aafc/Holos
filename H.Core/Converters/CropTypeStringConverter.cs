@@ -73,8 +73,6 @@ namespace H.Core.Converters
                     return CropType.FallRye;
                 case "fieldpea":
                     return CropType.FieldPeas;
-                case "Flaxseed":
-                    return CropType.Flax;
                 case "flaxseed":
                     return CropType.FlaxSeed;
                 case "freshcornsweet":
