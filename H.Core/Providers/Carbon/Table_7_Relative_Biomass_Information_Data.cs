@@ -62,7 +62,6 @@ namespace H.Core.Providers.Carbon
         /// </summary>
         public double NitrogenContentExtraroot { get; set; }
 
-        public double PhosphorusFertilizerRate { get; set; }
         public double IrrigationLowerRangeLimit { get; set; }
         public double IrrigationUpperRangeLimit { get; set; }
 
