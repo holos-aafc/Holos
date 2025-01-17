@@ -20,7 +20,6 @@ namespace H.Core.Providers.Carbon
 
         public CropType CropType { get; set; }
         public IrrigationType? IrrigationType { get; set; }
-        public double IrrigationAmount { get; set; }
         public double MoistureContentOfProduct { get; set; }
 
         /// <summary>
