@@ -71,7 +71,6 @@ namespace H.Core.Calculators.Carbon
             var finalAboveGroundResidue = this.CalculateAnnualAboveGroundResidue(
                 aboveGroundResidueDryMatterForCrop: viewItem.AboveGroundResidueDryMatter,
                 area: viewItem.Area,
-                fractionRenewed: fractionRenewed,
                 fractionBurned: 0,
                 fractionRemoved: 0,
                 combustionFactor: 0);
@@ -183,21 +182,18 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         /// <param name="aboveGroundResidueDryMatterForCrop">Above ground residue dry matter for crop (kg ha^-1)</param>
         /// <param name="area">Area of field (ha)</param>
-        /// <param name="fractionRenewed">(unitless)</param>
         /// <param name="fractionBurned">(unitless)</param>
         /// <param name="fractionRemoved">(unitless)</param>
         /// <param name="combustionFactor">(unitless)</param>
         /// <returns>Annual total amount of above-ground residue (kg year^-1)</returns>
-        public double CalculateAnnualAboveGroundResidue(
-            double aboveGroundResidueDryMatterForCrop,
+        public double CalculateAnnualAboveGroundResidue(double aboveGroundResidueDryMatterForCrop,
             double area,
-            double fractionRenewed,
             double fractionBurned,
             double fractionRemoved,
             double combustionFactor)
         {
             // Not considering burned residues right now
-            return aboveGroundResidueDryMatterForCrop * area * fractionRenewed * (1 - fractionRemoved - (fractionBurned * combustionFactor));
+            return aboveGroundResidueDryMatterForCrop * area * (1 - fractionRemoved - (fractionBurned * combustionFactor));
         }
 
         /// <summary>
