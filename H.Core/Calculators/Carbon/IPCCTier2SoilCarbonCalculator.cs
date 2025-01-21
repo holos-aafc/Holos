@@ -760,7 +760,8 @@ namespace H.Core.Calculators.Carbon
         /// <para>Equation 2.2.3-8</para>
         /// <para>Equation 2.7.3-2</para>
         /// </summary>
-        /// <param name="inputToDeadMatter">Carbon input to the metabolic dead organic matter component (kg C ha^-1 year^-1)</param>
+        /// <param name="inputToDeadMatter">Carbon or nitrogen input to the metabolic dead organic matter component (kg C ha^-1 year^-1 or kg C ha^-1 year^-1).
+        /// Inputs will be determined according to the <see cref="CalculationMode"/></param>
         /// <param name="f1">Fraction of metabolic dead organic matter decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f2">Fraction of structural dead organic matter decay products transferred to the active sub-pool (unitless)</param>
         /// <param name="f3">Fraction of structural dead organic matter decay products transferred to the slow sub-pool (unitless)</param>
