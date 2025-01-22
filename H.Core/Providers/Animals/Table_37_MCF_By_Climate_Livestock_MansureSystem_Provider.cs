@@ -151,34 +151,36 @@ namespace H.Core.Providers.Animals
         {
             // Read Footnote 1 for data reference.
 
-            if (temperature > 10 && ((precipitation / potentialEvapotranspiration) > 1))
+            double ratio = precipitation / potentialEvapotranspiration;
+
+            if (temperature >= 10 && (ratio >= 1))
             {
                 return ClimateZones.WarmTemperateMoist;
             }
 
-            if (temperature > 10 && ((precipitation / potentialEvapotranspiration) < 1))
+            if (temperature >= 10 && (ratio < 1))
             {
                 return ClimateZones.WarmTemperateDry;
             }
 
-            if ((temperature > 0 && temperature < 10) && ((precipitation / potentialEvapotranspiration) > 1))
+            if ((temperature > 0 && temperature < 10) && (ratio >= 1))
             {
                 return ClimateZones.CoolTemperateMoist;
             }
 
-            if ((temperature > 0 && temperature < 10) && ((precipitation / potentialEvapotranspiration) < 1))
+            if ((temperature > 0 && temperature < 10) && (ratio < 1))
             {
                 return ClimateZones.CoolTemperateDry;
             }
 
-            if (temperature <= 0 && ((precipitation / potentialEvapotranspiration) > 1))
+            if (temperature <= 0 && (ratio >= 1))
             {
-                return ClimateZones.WarmTemperateMoist;
+                return ClimateZones.BorealMoist;
             }
 
-            if (temperature <= 0 && ((precipitation / potentialEvapotranspiration) < 1))
+            if (temperature <= 0 && (ratio < 1))
             {
-                return ClimateZones.WarmTemperateDry;
+                return ClimateZones.BorealDry;
             }
 
             Trace.TraceError($"{nameof(Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider.GetClimateZone)}" +
