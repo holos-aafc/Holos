@@ -47,8 +47,19 @@ namespace H.Core.Services.Initialization.Crops
 
             if (yieldAssignmentMethod == YieldAssignmentMethod.Average)
             {
-                // Create an average from the crops that define the rotation
-                var average = fieldSystemComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
+                double average = 0;
+
+                // In CLI mode, the fields won't have CropViewItems, need to get average from DetailViewItems instead
+                if (farm.IsCommandLineMode)
+                {
+                    var itemsByField = farm.GetDetailViewItemsForField(fieldSystemComponent);
+                    average = itemsByField.Average(x => x.Yield);
+                }
+                else
+                {
+                    // Create an average from the crops that define the rotation
+                    average = fieldSystemComponent.CropViewItems.Average(cropViewItem => cropViewItem.Yield);
+                }
 
                 viewItem.Yield = average;
 
