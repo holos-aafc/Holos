@@ -12,7 +12,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system, Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2024"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2025"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -20,7 +20,7 @@ Ensure **"Metric"** is selected as the unit of measurement type and then click t
 <p align="center">
     <img src="../../Images/Training/en/figure1.png" alt="Figure 1" width="650"/>
     <br>
-    <em>Figure 1: Entering a name for the new farm.</em>
+    <em>Figure 1: If a farm has been previously saved, Holos will prompt the user to re-open that farm.</em>
 </p>
 <br>
 
@@ -28,7 +28,7 @@ Ensure **"Metric"** is selected as the unit of measurement type and then click t
 <p align="center">
     <img src="../../Images/Training/en/figure2.png" alt="Figure 2" width="750"/>
     <br>
-    <em>Figure 2: If a farm has been previously saved, Holos will prompt the user to re-open that farm.</em>
+    <em>Figure 2: Entering a name for the new farm.</em>
 </p>
 <br>
 
@@ -104,7 +104,7 @@ Click the **Next** button to proceed to the next step.
 
 # Selecting Farm Components
 
-Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 8). These components are grouped into various categories including Land Management, Beef Production, Dairy Cattle, Swine, Sheep, Poultry and Other Livestock.
+Now that the farm location has been selected, we can move on to the **Component Selection** screen. This is where the user can select different components for their farm. Holos will display all available components on the left side of the screen under the **Available Components** column (Figure 7). These components are grouped into various categories including Land Management, Beef Production, Dairy Cattle, Swine, Sheep, Poultry and Other Livestock.
 
 If we click on the drop-down button next to a category's name, we can see the available components in that category.  For this portion of the training, we will be working with the “Land management” and “Beef Production” categories.  
 
@@ -122,7 +122,7 @@ The Holos model is designed so that the land management components are defined b
 
 ## Crop and Hay Production
 
-Now we can add our first component to the farm. Drag a **Field** component from the left side of the screen and drop it on the **My Farm** on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as **"Field #1"**. At this point, we can enter production information related to the crop being grown on this field.  
+Now we can add our first component to the farm. Drag a **Field** component from the left side of the screen and drop it on the **My Farm** on the right side (Figure 8). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as **"Field #1"**. At this point, we can enter production information related to the crop being grown on this field.  
 
 <p align="center">
     <img src="../../Images/Training/en/figure8.gif" alt="Figure 8" width="950"/>
@@ -134,7 +134,7 @@ Now we can add our first component to the farm. Drag a **Field** component from 
 
 ### Wheat with Cover Crop
 
-Our first field on the farm will grow continuous wheat with a cover crop of hairy vetch. Change the following elements in the **"Field #1"** component.
+Our first field on the farm will grow continuous wheat with a cover crop of hairy vetch. Change the following elements in the **"Field #1"** component (Figure 9).
 
 1. Rename the field to **"Wheat & Hairy Vetch"** in the **Step 1** section of the screen. Change the area of the field to **18 ha**.
    
