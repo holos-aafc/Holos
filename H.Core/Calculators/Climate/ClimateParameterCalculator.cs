@@ -748,7 +748,7 @@ namespace H.Core.Calculators.Climate
                 return 1;
             }
 
-            if (volumetricSoilWaterContent < alfa / 100 * wiltingPoint)
+            if (volumetricSoilWaterContent < alfa * wiltingPoint)
             {
                 return 0;
             }
