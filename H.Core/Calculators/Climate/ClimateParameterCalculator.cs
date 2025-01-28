@@ -805,7 +805,6 @@ namespace H.Core.Calculators.Climate
 
             if (julianDay == 1)
             {
-                currentWaterStorage = fieldCapacity * layerThickness;
                 previousWaterStorage = fieldCapacity * layerThickness;
             }
 
