@@ -60,11 +60,18 @@ namespace H.Core.Providers.Carbon
         /// <summary>
         /// Get residue values for a specified set of crop parameters
         /// </summary>
-        public Table_7_Relative_Biomass_Information_Data GetResidueData(IrrigationType irrigationType,
-                                          double irrigationAmount,
-                                          CropType cropType,
-                                          SoilFunctionalCategory soilFunctionalCategory,
-                                          Province province)
+        /// <param name="irrigationType">Irrigation</param>
+        /// <param name="totalWaterInputs">The total water from irrigation and precipitation (mm)</param>
+        /// <param name="cropType"></param>
+        /// <param name="soilFunctionalCategory"></param>
+        /// <param name="province"></param>
+        /// <returns></returns>
+        public Table_7_Relative_Biomass_Information_Data GetResidueData(
+            IrrigationType irrigationType, 
+            double totalWaterInputs, 
+            CropType cropType, 
+            SoilFunctionalCategory soilFunctionalCategory, 
+            Province province)
         {
             if (cropType == CropType.NotSelected || cropType.IsFallow())
             {
@@ -93,7 +100,7 @@ namespace H.Core.Providers.Carbon
             var firstItem = byCropType.First();
             if (firstItem.IrrigationUpperRangeLimit > 0)
             {
-                return byCropType.Single(x => irrigationAmount >= x.IrrigationLowerRangeLimit && irrigationAmount < x.IrrigationUpperRangeLimit);
+                return byCropType.Single(x => totalWaterInputs >= x.IrrigationLowerRangeLimit && totalWaterInputs < x.IrrigationUpperRangeLimit);
             }
 
             if (firstItem.IrrigationType != null)

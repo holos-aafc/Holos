@@ -20,6 +20,7 @@ using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Energy;
 using H.Core.Services.LandManagement;
 using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using H.Core.Services.Animals;
 
 namespace H.Core.Services.Initialization.Crops
@@ -153,7 +154,8 @@ namespace H.Core.Services.Initialization.Crops
         private Table_7_Relative_Biomass_Information_Data  GetResidueData(Farm farm, CropViewItem viewItem)
         {
             var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
+            var totalWater = _irrigationService.GetTotalWaterInputs(farm, viewItem);
+            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, totalWater, viewItem.CropType, soilFunctionCategory, farm.Province);
 
             return residueData;
         }

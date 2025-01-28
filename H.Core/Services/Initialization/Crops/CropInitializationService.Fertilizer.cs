@@ -94,8 +94,7 @@ namespace H.Core.Services.Initialization.Crops
             // Start with a default then get lookup value if one is available
             viewItem.PhosphorusFertilizerRate = 25;
 
-            var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
-            var residueData = _relativeBiomassInformationProvider.GetResidueData(viewItem.IrrigationType, viewItem.AmountOfIrrigation, viewItem.CropType, soilFunctionCategory, farm.Province);
+            var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 if (residueData.PhosphorusFertilizerRateTable.ContainsKey(province))

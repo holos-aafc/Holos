@@ -57,7 +57,7 @@ namespace H.Core.Test.Providers.Carbon
         {
             var result = _sut.GetResidueData(
                 irrigationType: IrrigationType.RainFed,
-                irrigationAmount: 0,
+                totalWaterInputs: 0,
                 cropType: CropType.AnnualRyeGrassLoliumMultiflorum,
                 soilFunctionalCategory: SoilFunctionalCategory.Black,
                 province: Province.Alberta);
@@ -72,7 +72,7 @@ namespace H.Core.Test.Providers.Carbon
 
             var result = _sut.GetResidueData(
                 irrigationType: IrrigationType.Irrigated,
-                irrigationAmount: 200,
+                totalWaterInputs: 200,
                 cropType: CropType.Potatoes,
                 soilFunctionalCategory: SoilFunctionalCategory.Brown,
                 province: Province.Saskatchewan);
@@ -87,7 +87,7 @@ namespace H.Core.Test.Providers.Carbon
 
             var result = _sut.GetResidueData(
                 irrigationType: IrrigationType.Irrigated,
-                irrigationAmount: 200,
+                totalWaterInputs: 200,
                 cropType: CropType.Potatoes,
                 soilFunctionalCategory: SoilFunctionalCategory.Brown,
                 province: Province.Alberta);

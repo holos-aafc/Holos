@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -41,6 +42,34 @@ namespace H.Core.Services.LandManagement
             {
                 return 0;
             }
+        }
+
+        public double GetTotalWaterInputs(Farm farm, CropViewItem viewItem)
+        {
+            var climateDataGroupedByYear = farm.ClimateData.DailyClimateData.GroupBy(userClimateData => userClimateData.Year);
+            var climateDataForYear = climateDataGroupedByYear.SingleOrDefault(groupingByYear => groupingByYear.Key == viewItem.Year);
+            var result = 0d;
+
+            if (climateDataForYear != null && climateDataForYear.Count() == 365)
+            {
+                // Use daily climate data
+                var precipitationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPrecipitation).ToList();
+
+                // Add irrigation amounts to daily precipitations
+                var totalPrecipitationList = this.AddIrrigationToDailyPrecipitations(precipitationList, farm, viewItem);
+
+                result = totalPrecipitationList.Sum();
+            }
+            else
+            {
+                // We don't have a complete set of daily values, use normals as a fallback
+                var totalPrecipitation = farm.ClimateData.GetTotalPrecipitationForYear(viewItem.Year);
+                var totalIrrigation = viewItem.AmountOfIrrigation;
+
+                result = totalPrecipitation + totalIrrigation;
+            }
+
+            return result;
         }
 
         public double GetGrowingSeasonIrrigation(Farm farm, CropViewItem cropViewItem)
