@@ -432,7 +432,7 @@ namespace H.Core.Calculators.Climate
             var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref waterTemperaturePrevious);
             dailyClimateParameterResult.DeepPercolation = deepPercolation;
 
-            var currentWaterStorage = this.CalculateJulianDayWaterStorage(fieldCapacity, layerThickness, ref waterTemperaturePrevious, soilAvailableWater, actualEvapotranspiration);
+            var currentWaterStorage = this.CalculateJulianDayWaterStorage(deepPercolation, ref waterTemperaturePrevious, soilAvailableWater, actualEvapotranspiration);
             dailyClimateParameterResult.WaterStorage = currentWaterStorage;
 
             var temperatureResponseFactor = this.CalculateTemperatureResponseFactor(ref soilTemperaturePrevious, decompositionMinimumTemperature, decompositionMaximumTemperature);
@@ -807,15 +807,12 @@ namespace H.Core.Calculators.Climate
         /// Equation 2.1.1-35
         /// </summary>
         private double CalculateJulianDayWaterStorage(
-            double fieldCapacity,
-            double layerThickness,
+            double deepPercolation,
             ref double previousWaterStorage,
             double soilAvailableWater,
             double actualEvapotranspiration)
         {
             var currentWaterStorage = 0d;
-
-            var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref previousWaterStorage);
 
             currentWaterStorage = previousWaterStorage +
                                   soilAvailableWater -
