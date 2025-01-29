@@ -57,27 +57,36 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.7.2-9
         /// </summary>
         /// <returns>Above ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
+        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
+            CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem)
         {
+            if (previousYearViewItem == null)
+            {
+                return 0;
+            }
+
             var nitrogenContentOfGrainReturned = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
 
             var nitrogenContentOfStrawReturned = this.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: cropViewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: cropViewItem.NitrogenContentInStraw);
+                carbonInputFromStraw: previousYearViewItem.CarbonInputFromStraw,
+                nitrogenConcentrationInStraw: previousYearViewItem.NitrogenContentInStraw);
 
-            if (cropViewItem.CropType.IsAnnual() || cropViewItem.CropType.IsPerennial())
+            var cropType = previousYearViewItem.CropType;
+
+            if (cropType.IsAnnual() || cropType.IsPerennial())
             {
                 return nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned;
             }
 
-            if (cropViewItem.CropType.IsRootCrop())
+            if (cropType.IsRootCrop())
             {
                 return nitrogenContentOfStrawReturned;
             }
 
-            if (cropViewItem.CropType.IsCoverCrop() || cropViewItem.CropType.IsSilageCrop())
+            if (cropType.IsCoverCrop() || cropType.IsSilageCrop())
             {
                 return nitrogenContentOfGrainReturned;
             }
@@ -94,41 +103,49 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.7.2-8
         /// Equation 2.7.2-10
         /// </summary>
-        /// <param name="cropViewItem"></param>
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem cropViewItem)
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
+            CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem)
         {
+            if (previousYearViewItem == null)
+            {
+                return 0;
+            }
+
             var grainNitrogen = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: cropViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: cropViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
 
             var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: cropViewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: cropViewItem.NitrogenContentInRoots);
+                carbonInputFromRoots: previousYearViewItem.CarbonInputFromRoots,
+                nitrogenConcentrationInRoots: previousYearViewItem.NitrogenContentInRoots);
 
             var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: cropViewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: cropViewItem.NitrogenContentInExtraroot);
+                carbonInputFromExtraroots: previousYearViewItem.CarbonInputFromExtraroots,
+                nitrogenConcentrationInExtraroots: previousYearViewItem.NitrogenContentInExtraroot);
+
+            var cropType = previousYearViewItem.CropType;
 
             // Equation 2.5.6-7
-            if (cropViewItem.CropType.IsAnnual())
+            if (cropType.IsAnnual())
             {
                 return rootNitrogen + exudateNitrogen;
             }
 
             // Equation 2.5.6-8
             // Equation 2.6.2-6
-            if (cropViewItem.CropType.IsPerennial())
+            if (cropType.IsPerennial())
             {
                 return rootNitrogen + exudateNitrogen;
             }
 
-            if (cropViewItem.CropType.IsRootCrop())
+            if (cropType.IsRootCrop())
             {
                 return grainNitrogen + exudateNitrogen;
             }
 
-            if (cropViewItem.CropType.IsSilageCrop() || cropViewItem.CropType.IsCoverCrop())
+            if (cropType.IsSilageCrop() || cropType.IsCoverCrop())
             {
                 return rootNitrogen + exudateNitrogen;
             }

@@ -151,7 +151,7 @@ namespace H.Core.Services.Initialization.Crops
 
         #region Private Methods
 
-        private Table_7_Relative_Biomass_Information_Data  GetResidueData(Farm farm, CropViewItem viewItem)
+        private Table_7_Relative_Biomass_Information_Data GetResidueData(Farm farm, CropViewItem viewItem)
         {
             var soilFunctionCategory = farm.GetPreferredSoilData(viewItem).SoilFunctionalCategory;
             var totalWater = _irrigationService.GetTotalWaterInputs(farm, viewItem);

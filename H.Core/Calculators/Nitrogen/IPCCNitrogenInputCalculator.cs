@@ -12,28 +12,29 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         /// <returns></returns>
         public double CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-            double aboveGroundResidueDryMatter,
+            double aboveGroundResidueDryMatterFromPreviousYear,
             double carbonConcentration,
             double nitrogenContentInStraw)
         {
-            return aboveGroundResidueDryMatter * nitrogenContentInStraw;
+            return aboveGroundResidueDryMatterFromPreviousYear * nitrogenContentInStraw;
         }
 
         /// <summary>
         /// Equation 2.5.6-8
         /// Equation 2.7.2-2
         /// </summary>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem viewItem)
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem)
         {
-            if (viewItem.CropType.IsPerennial())
+            if (currentYearViewItem.CropType.IsPerennial())
             {
                 var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
-                    carbonInputFromRoots: viewItem.CarbonInputFromRoots,
-                    nitrogenConcentrationInRoots: viewItem.NitrogenContentInRoots);
+                    carbonInputFromRoots: currentYearViewItem.CarbonInputFromRoots,
+                    nitrogenConcentrationInRoots: currentYearViewItem.NitrogenContentInRoots);
 
                 var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
-                    carbonInputFromExtraroots: viewItem.CarbonInputFromExtraroots,
-                    nitrogenConcentrationInExtraroots: viewItem.NitrogenContentInExtraroot);
+                    carbonInputFromExtraroots: currentYearViewItem.CarbonInputFromExtraroots,
+                    nitrogenConcentrationInExtraroots: currentYearViewItem.NitrogenContentInExtraroot);
 
                 // Equation 2.5.6-8
                 var perennialNitrogen = rootNitrogen + exudateNitrogen;
@@ -42,7 +43,8 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Equation 2.7.2-2
-            var result = (viewItem.BelowGroundResidueDryMatter / viewItem.Area) * viewItem.NitrogenContentInRoots;
+            var belowGroundResidueDryMatterFromPreviousYear = previousYearViewItem != null ? previousYearViewItem.BelowGroundResidueDryMatter : 0;
+            var result = (belowGroundResidueDryMatterFromPreviousYear / currentYearViewItem.Area) * currentYearViewItem.NitrogenContentInRoots;
 
             return result;
         }

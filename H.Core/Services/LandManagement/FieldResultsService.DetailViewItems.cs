@@ -162,19 +162,19 @@ namespace H.Core.Services.LandManagement
             int year, 
             FieldSystemComponent fieldSystemComponent)
         {
-            var detailViewItemsForYear = viewItems.Where(x => x.Year == year).ToList();
-            if (detailViewItemsForYear.Any() == false)
+            var viewItemsForYear = viewItems.Where(x => x.Year == year).ToList();
+            if (viewItemsForYear.Any() == false)
             {
                 return null;
             }
 
-            if (detailViewItemsForYear.Count() == 1)
+            if (viewItemsForYear.Count() == 1)
             {
                 // There is only one crop grown, return it as the main crop
-                return detailViewItemsForYear.Single();
+                return viewItemsForYear.Single();
             }
 
-            var mainCrop = detailViewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == false);
+            var mainCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == false);
             if (mainCrop != null)
             {
                 return mainCrop;
@@ -182,7 +182,35 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // Old farms won't have this boolean set, so return first item or have user rebuild stage state
-                return detailViewItemsForYear.First();
+                return viewItemsForYear.First();
+            }
+        }
+
+        public CropViewItem GetCoverCropForYear(
+            IEnumerable<CropViewItem> viewItems,
+            int year)
+        {
+            var viewItemsForYear = viewItems.Where(x => x.Year == year).ToList();
+            if (viewItemsForYear.Any() == false)
+            {
+                return null;
+            }
+
+            if (viewItemsForYear.Count() == 1 && viewItemsForYear.Single().IsSecondaryCrop == false)
+            {
+                // There is only one crop grown and it is not a cover crop
+                return null;
+            }
+
+            var coverCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == true);
+            if (coverCrop != null)
+            {
+                return coverCrop;
+            }
+            else
+            {
+                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
+                return null;
             }
         }
 
@@ -204,7 +232,9 @@ namespace H.Core.Services.LandManagement
                 var viewItemsForYear = viewItems.Where(x => x.Year == year);
                 
                 // Get the main crop
-                var mainCrop = this.GetMainCropForYear(viewItemsForYear, year, fieldSystemComponent);
+                var mainCropForCurrentYear = this.GetMainCropForYear(viewItemsForYear, year, fieldSystemComponent);
+
+                var mainCropFromPreviousYear = this.GetMainCropForYear(viewItems, (year - 1), fieldSystemComponent);
 
                 // Combine inputs from other crops grown in the same year (undersown, cover crop, etc.)
 
@@ -216,24 +246,26 @@ namespace H.Core.Services.LandManagement
                 var totalCoverCropAboveGroundResidueNitrogen = 0d;
                 var totalCoverCropBelowGroundResidueNitrogen = 0d;
 
-                var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCrop});
-                foreach (var cropViewItem in cropsOtherThanMainCrop)
+                var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCropForCurrentYear});
+                foreach (var secondaryCropInCurrentYear in cropsOtherThanMainCrop)
                 {
                     /*
                      * Carbon will already have been calculated using IPCC Tier 2/ICBM methods
                      */
 
-                    coverCropAboveGroundInput += cropViewItem.AboveGroundCarbonInput;
-                    coverCropBelowGroundInput += cropViewItem.BelowGroundCarbonInput;
-                    coverCropManureInput += cropViewItem.ManureCarbonInputsPerHectare;
-                    coverCropDigestateInput += cropViewItem.DigestateCarbonInputsPerHectare;
+                    coverCropAboveGroundInput += secondaryCropInCurrentYear.AboveGroundCarbonInput;
+                    coverCropBelowGroundInput += secondaryCropInCurrentYear.BelowGroundCarbonInput;
+                    coverCropManureInput += secondaryCropInCurrentYear.ManureCarbonInputsPerHectare;
+                    coverCropDigestateInput += secondaryCropInCurrentYear.DigestateCarbonInputsPerHectare;
 
                     /*
                      * Calculate nitrogen totals
                      */
 
-                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem);
-                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem);
+                    var secondaryCropFromPreviousYear = this.GetCoverCropForYear(viewItems, year - 1);
+
+                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
+                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
 
                     totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
                     totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
@@ -243,22 +275,21 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop carbon inputs
                  */
 
-                mainCrop.CombinedAboveGroundInput = mainCrop.AboveGroundCarbonInput + coverCropAboveGroundInput;
-                mainCrop.CombinedBelowGroundInput = mainCrop.BelowGroundCarbonInput + coverCropBelowGroundInput;
-                mainCrop.CombinedManureInput = mainCrop.ManureCarbonInputsPerHectare + coverCropManureInput;
-                mainCrop.CombinedDigestateInput = mainCrop.DigestateCarbonInputsPerHectare + coverCropDigestateInput;
-                mainCrop.TotalCarbonInputs = mainCrop.CombinedAboveGroundInput + mainCrop.CombinedBelowGroundInput + mainCrop.CombinedManureInput + mainCrop.CombinedDigestateInput;
+                mainCropForCurrentYear.CombinedAboveGroundInput = mainCropForCurrentYear.AboveGroundCarbonInput + coverCropAboveGroundInput;
+                mainCropForCurrentYear.CombinedBelowGroundInput = mainCropForCurrentYear.BelowGroundCarbonInput + coverCropBelowGroundInput;
+                mainCropForCurrentYear.CombinedManureInput = mainCropForCurrentYear.ManureCarbonInputsPerHectare + coverCropManureInput;
+                mainCropForCurrentYear.CombinedDigestateInput = mainCropForCurrentYear.DigestateCarbonInputsPerHectare + coverCropDigestateInput;
+                mainCropForCurrentYear.TotalCarbonInputs = mainCropForCurrentYear.CombinedAboveGroundInput + mainCropForCurrentYear.CombinedBelowGroundInput + mainCropForCurrentYear.CombinedManureInput + mainCropForCurrentYear.CombinedDigestateInput;
 
                 /*
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(cropViewItem: mainCrop);
-                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(cropViewItem: mainCrop);
+                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
+                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
 
-                
-                mainCrop.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
-                mainCrop.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
+                mainCropForCurrentYear.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
+                mainCropForCurrentYear.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
             }
         }
 

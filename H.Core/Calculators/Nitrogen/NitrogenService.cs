@@ -33,30 +33,36 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Public Methods
 
-        public double CalculateAboveGroundResidueNitrogen(CropViewItem cropViewItem)
+        public double CalculateAboveGroundResidueNitrogen(
+            CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem)
         {
-            if (this.CanCalculateNitrogenInputsUsingIpccTier2(cropViewItem))
+            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem))
             {
+                var aboveGroundResidueDryMatterFromPreviousYear = previousYearViewItem != null ? previousYearViewItem.AboveGroundResidueDryMatter : 0;
+
                 return _ipccNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-                    cropViewItem.AboveGroundResidueDryMatter,
-                    cropViewItem.CarbonConcentration,
-                    cropViewItem.NitrogenContentInStraw);
+                    aboveGroundResidueDryMatterFromPreviousYear,
+                    currentYearViewItem.CarbonConcentration,
+                    currentYearViewItem.NitrogenContentInStraw);
             }
             else
             {
-                return _icbmNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(cropViewItem);
+                return _icbmNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(currentYearViewItem, previousYearViewItem);
             }
         }
 
-        public double CalculateBelowGroundResidueNitrogen(CropViewItem cropViewItem)
+        public double CalculateBelowGroundResidueNitrogen(
+            CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem)
         {
-            if (this.CanCalculateNitrogenInputsUsingIpccTier2(cropViewItem))
+            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem))
             {
-                return _ipccNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(cropViewItem);
+                return _ipccNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(currentYearViewItem, previousYearViewItem);
             }
             else
             {
-                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(cropViewItem);
+                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(currentYearViewItem, previousYearViewItem);
             }
         }
 

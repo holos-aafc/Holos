@@ -4,8 +4,8 @@ namespace H.Core.Calculators.Nitrogen
 {
     public interface INitrogenService
     {
-        double CalculateAboveGroundResidueNitrogen(CropViewItem cropViewItem);
-        double CalculateBelowGroundResidueNitrogen(CropViewItem cropViewItem);
+        double CalculateAboveGroundResidueNitrogen(CropViewItem currentYearViewItem, CropViewItem previousYearViewItem);
+        double CalculateBelowGroundResidueNitrogen(CropViewItem currentYearViewItem, CropViewItem previousYearViewItem);
         double CalculateCropResidueExportNitrogen(CropViewItem cropViewItem);
     }
 }

@@ -9,14 +9,15 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         /// <returns></returns>
         double CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-            double aboveGroundResidueDryMatter,
+            double aboveGroundResidueDryMatterFromPreviousYear,
             double carbonConcentration,
             double nitrogenContentInStraw);
 
         /// <summary>
         /// Equation 2.6.2-6
         /// </summary>
-        double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem viewItem);
+        double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem);
 
         /// <summary>
         /// Equation 2.6.2-8
