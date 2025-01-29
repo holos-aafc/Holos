@@ -144,7 +144,7 @@ namespace H.Core.Calculators.Climate
 
 
             double soilTemperaturePrevious = 0;
-            double waterTemperaturePrevious = fieldCapacity * layerThicknessInMillimeters;
+            double waterStoragePrevious = fieldCapacity * layerThicknessInMillimeters;
 
             var dailyClimateParameterList = new List<double>();
             var julianDays = this.GetJulianDays().ToList();
@@ -173,7 +173,7 @@ namespace H.Core.Calculators.Climate
                                                                                 moistureResponseFunctionAtSaturation,
                                                                                 moistureResponseFunctionAtWiltingPoint,
                                                                                 ref soilTemperaturePrevious,
-                                                                                ref waterTemperaturePrevious);
+                                                                                ref waterStoragePrevious);
 
                 dailyClimateParameterList.Add(dailyClimateParameter.ClimateParameter);
             }
@@ -215,7 +215,7 @@ namespace H.Core.Calculators.Climate
 
 
             double soilTemperaturePrevious = 0;
-            double waterTemperaturePrevious = fieldCapacity * layerThicknessInMillimeters;
+            double waterStoragePrevious = fieldCapacity * layerThicknessInMillimeters;
 
             var dailyClimateParameterList = new List<ClimateParameterDailyResult>();
             var julianDays = this.GetJulianDays().ToList();
@@ -244,7 +244,7 @@ namespace H.Core.Calculators.Climate
                                                                                 moistureResponseFunctionAtSaturation,
                                                                                 moistureResponseFunctionAtWiltingPoint,
                                                                                 ref soilTemperaturePrevious,
-                                                                                ref waterTemperaturePrevious);
+                                                                                ref waterStoragePrevious);
                 dailyClimateParameterList.Add(dailyClimateParameter);
             }
 
@@ -390,7 +390,7 @@ namespace H.Core.Calculators.Climate
                                                                             double moistureResponseFunctionAtSaturation,
                                                                             double moistureResponseFunctionAtWiltingPoint,
                                                                             ref double soilTemperaturePrevious,
-                                                                            ref double waterTemperaturePrevious)
+                                                                            ref double waterStoragePrevious)
         {
             var dailyClimateParameterResult = new ClimateParameterDailyResult();
             dailyClimateParameterResult.JulianDay = julianDay;
@@ -422,17 +422,17 @@ namespace H.Core.Calculators.Climate
             var soilAvailableWater = this.CalculateSoilAvailableWater(precipitation, greenAreaIndex, cropEvapotranspiration);
             dailyClimateParameterResult.SoilAvailableWater = soilAvailableWater;
 
-            var volumetricSoilWaterContent = this.CalculateVolumetricSoilWaterContent(ref waterTemperaturePrevious, layerThickness, fieldCapacity);
+            var volumetricSoilWaterContent = this.CalculateVolumetricSoilWaterContent(ref waterStoragePrevious, layerThickness, fieldCapacity);
             dailyClimateParameterResult.VolumetricSoilWaterContent = volumetricSoilWaterContent;
 
             var soilCoefficient = this.CalculateSoilCoefficient(fieldCapacity, volumetricSoilWaterContent, wiltingPoint, alfa);
             var actualEvapotranspiration = this.CalculateActualEvapotranspiration(cropEvapotranspiration, soilCoefficient);
             dailyClimateParameterResult.ActualEvapotranspiration = actualEvapotranspiration;
 
-            var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref waterTemperaturePrevious);
+            var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref waterStoragePrevious);
             dailyClimateParameterResult.DeepPercolation = deepPercolation;
 
-            var currentWaterStorage = this.CalculateJulianDayWaterStorage(deepPercolation, ref waterTemperaturePrevious, soilAvailableWater, actualEvapotranspiration);
+            var currentWaterStorage = this.CalculateJulianDayWaterStorage(deepPercolation, ref waterStoragePrevious, soilAvailableWater, actualEvapotranspiration);
             dailyClimateParameterResult.WaterStorage = currentWaterStorage;
 
             var temperatureResponseFactor = this.CalculateTemperatureResponseFactor(ref soilTemperaturePrevious, decompositionMinimumTemperature, decompositionMaximumTemperature);
@@ -445,7 +445,7 @@ namespace H.Core.Calculators.Climate
             dailyClimateParameterResult.ClimateParameter = climateFactor;
 
             soilTemperaturePrevious = soilTemperatureCurrent;
-            waterTemperaturePrevious = currentWaterStorage;
+            waterStoragePrevious = currentWaterStorage;
 
             return dailyClimateParameterResult;
         }
