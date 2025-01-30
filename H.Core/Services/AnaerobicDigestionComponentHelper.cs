@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using H.Core.Models.Infrastructure;
 using H.Core.Models;
 
@@ -13,6 +14,27 @@ namespace H.Core.Services
     /// </summary>
     public class AnaerobicDigestionComponentHelper : IAnaerobicDigestionComponentHelper
     {
+        #region Fields
+
+        private readonly IMapper _anaerobicDigestionComponentMapper;
+
+        #endregion
+
+        #region Constructors
+
+        public AnaerobicDigestionComponentHelper()
+        {
+            var anaerobicDigestionComponentMapperConfiguration = new MapperConfiguration(x =>
+                x.CreateMap<AnaerobicDigestionComponent, AnaerobicDigestionComponent>()
+                    .ForMember(y => y.Guid, z => z.Ignore()));
+
+            _anaerobicDigestionComponentMapper = anaerobicDigestionComponentMapperConfiguration.CreateMapper();
+        }
+
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Initializes a new component. The method gives each component a unique name and sets the <see cref="AnaerobicDigestionComponent.IsInitialized"/> flag.
         /// </summary>
@@ -46,5 +68,21 @@ namespace H.Core.Services
             }
             return uniqueName;
         }
+
+        public AnaerobicDigestionComponent Replicate(AnaerobicDigestionComponent component)
+        {
+            var replicatedComponent = (AnaerobicDigestionComponent)Activator.CreateInstance(component.GetType());
+
+            return this.Replicate(component, replicatedComponent);
+        }
+
+        public AnaerobicDigestionComponent Replicate(AnaerobicDigestionComponent source, AnaerobicDigestionComponent destination)
+        {
+            _anaerobicDigestionComponentMapper.Map(source, destination);
+
+            throw new NotImplementedException();
+        } 
+
+        #endregion
     }
 }
