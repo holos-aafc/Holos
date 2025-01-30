@@ -183,6 +183,7 @@
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodServiceTest.cs" />
     <Compile Include="Services\BeefCattleResultsServiceTest.cs" />
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Services\SwineResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.Energy.cs" />
     <Compile Include="Services\Initialization\InitializationServiceTest.cs" />
+    <Compile Include="Services\AnaerobicDigestionComponentHelperTest.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

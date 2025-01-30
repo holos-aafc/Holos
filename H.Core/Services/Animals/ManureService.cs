@@ -957,6 +957,15 @@ namespace H.Core.Services.Animals
             }
         }
 
+        public void UpdateAmountsUsedNEW(ManureTank manureTank, Farm farm, ManureStateType manureStateType)
+        {
+            // Get amounts used from field application
+            foreach (var manureExportViewItem in farm.ManureExportViewItems)
+            {
+                
+            }
+        }
+
         /// <summary>
         /// Set the state of the manure tank as if there had been no field applications made on the farm.
         /// </summary>

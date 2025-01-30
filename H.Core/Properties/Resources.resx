@@ -6347,6 +6347,39 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelCropResidueExports" xml:space="preserve">
     <value>Crop residue exports</value>
   </data>
+  <data name="LabelWinterFeeding" xml:space="preserve">
+    <value>Winter feeding</value>
+  </data>
+  <data name="LabelSummerGrazing" xml:space="preserve">
+    <value>Summer grazing</value>
+  </data>
+  <data name="LabelExtendedFallGrazing" xml:space="preserve">
+    <value>Extended fall grazing</value>
+  </data>
+  <data name="LabelWinterFeedingDry" xml:space="preserve">
+    <value>Winter feeding - dry</value>
+  </data>
+  <data name="LabelWinterFeedingLactating" xml:space="preserve">
+    <value>Winter feeding - lactating</value>
+  </data>
+  <data name="LabelDryPeriodName" xml:space="preserve">
+    <value>Dry period</value>
+  </data>
+  <data name="LabelEarlyLactationPeriodName" xml:space="preserve">
+    <value>Early lactation</value>
+  </data>
+  <data name="LabelMidLactationPeriodName" xml:space="preserve">
+    <value>Mid lactation</value>
+  </data>
+  <data name="LabelLateLactationPeriodName" xml:space="preserve">
+    <value>Late lactation</value>
+  </data>
+  <data name="LabelFarrowingLactatingSows" xml:space="preserve">
+    <value>Farrowing lactating sows</value>
+  </data>
+  <data name="LabelStage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
   <data name="MenuIncludeBiomassExportsInResults" xml:space="preserve">
     <value>Include biomass exports in reported results</value>
   </data>

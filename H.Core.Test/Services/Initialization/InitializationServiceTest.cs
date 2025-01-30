@@ -632,6 +632,124 @@ namespace H.Core.Test.Services.Initialization
         }
 
         [TestMethod]
+        public void InitializeStartAndEndWeightsForCattleManagementPeriods()
+        {
+            var managementPeriod1 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.BeefFinishingSteer,
+            };
+            var managementPeriod2 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.DairyCalves,
+            };
+            var managementPeriod3 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.SwineBoar,
+            };
+
+            var farm = new Farm();
+
+            var beefGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.BeefFinishingSteer,
+            };
+            beefGroup.ManagementPeriods.Add(managementPeriod1);
+            var beefComponent = new FinishingComponent();
+            beefComponent.Groups.Add(beefGroup);
+
+            var dairyGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.DairyCalves,
+            };
+            dairyGroup.ManagementPeriods.Add(managementPeriod2);
+            var dairyComponent = new DairyComponent();
+            dairyComponent.Groups.Add(dairyGroup);
+
+            var swineGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.SwineBoar,
+            };
+            swineGroup.ManagementPeriods.Add(managementPeriod3);
+            var swineComponent = new FarrowToWeanComponent();
+            swineComponent.Groups.Add(swineGroup);
+            
+            farm.Components.Add(beefComponent);
+            farm.Components.Add(dairyComponent);
+            farm.Components.Add(swineComponent);
+
+            _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod1);
+            _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod2);
+            _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod3);
+
+            Assert.AreEqual(beefGroup.ManagementPeriods.ElementAt(0).StartWeight, 310, 0.01);
+            Assert.AreEqual(beefGroup.ManagementPeriods.ElementAt(0).EndWeight, 610, 0.01);
+
+            Assert.AreEqual(dairyGroup.ManagementPeriods.ElementAt(0).StartWeight, 45, 0.01);
+            Assert.AreEqual(dairyGroup.ManagementPeriods.ElementAt(0).EndWeight, 127, 0.01);
+
+            Assert.AreEqual(swineGroup.ManagementPeriods.ElementAt(0).StartWeight, 0, 0.01);
+            Assert.AreEqual(swineGroup.ManagementPeriods.ElementAt(0).EndWeight, 0, 0.01);
+        }
+
+        [TestMethod]
+        public void InitializeStartAndEndWeightsForCattleFarm()
+        {
+            var managementPeriod1 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.BeefFinishingSteer,
+            };
+            var managementPeriod2 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.DairyCalves,
+            };
+            var managementPeriod3 = new ManagementPeriod()
+            {
+                AnimalType = AnimalType.SwineBoar,
+            };
+
+            var farm = new Farm();
+
+            var beefGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.BeefFinishingSteer,
+            };
+            beefGroup.ManagementPeriods.Add(managementPeriod1);
+            var beefComponent = new FinishingComponent();
+            beefComponent.Groups.Add(beefGroup);
+
+            var dairyGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.DairyCalves,
+            };
+            dairyGroup.ManagementPeriods.Add(managementPeriod2);
+            var dairyComponent = new DairyComponent();
+            dairyComponent.Groups.Add(dairyGroup);
+
+            var swineGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.SwineBoar,
+            };
+            swineGroup.ManagementPeriods.Add(managementPeriod3);
+            var swineComponent = new FarrowToWeanComponent();
+            swineComponent.Groups.Add(swineGroup);
+
+            farm.Components.Add(beefComponent);
+            farm.Components.Add(dairyComponent);
+            farm.Components.Add(swineComponent);
+
+            _initializationService.InitializeStartAndEndWeightsForCattle(farm);
+
+            Assert.AreEqual(beefGroup.ManagementPeriods.ElementAt(0).StartWeight, 310, 0.01);
+            Assert.AreEqual(beefGroup.ManagementPeriods.ElementAt(0).EndWeight, 610, 0.01);
+
+            Assert.AreEqual(dairyGroup.ManagementPeriods.ElementAt(0).StartWeight, 45, 0.01);
+            Assert.AreEqual(dairyGroup.ManagementPeriods.ElementAt(0).EndWeight, 127, 0.01);
+
+            Assert.AreEqual(swineGroup.ManagementPeriods.ElementAt(0).StartWeight, 0, 0.01);
+            Assert.AreEqual(swineGroup.ManagementPeriods.ElementAt(0).EndWeight, 0, 0.01);
+        }
+
+        [TestMethod]
         public void InitializeLivestockCoefficientSheep()
         {
             var farm = new Farm();

@@ -9414,6 +9414,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dry period.
+        /// </summary>
+        public static string LabelDryPeriodName {
+            get {
+                return ResourceManager.GetString("LabelDryPeriodName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Early lactation.
+        /// </summary>
+        public static string LabelEarlyLactationPeriodName {
+            get {
+                return ResourceManager.GetString("LabelEarlyLactationPeriodName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Egg laying.
         /// </summary>
         public static string LabelEggLaying {
@@ -9531,6 +9549,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extended fall grazing.
+        /// </summary>
+        public static string LabelExtendedFallGrazing {
+            get {
+                return ResourceManager.GetString("LabelExtendedFallGrazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fallow area change.
         /// </summary>
         public static string LabelFallowAreaChange {
@@ -9590,6 +9617,15 @@ namespace H.Core.Properties {
         public static string LabelFarrowingGilts1 {
             get {
                 return ResourceManager.GetString("LabelFarrowingGilts1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farrowing lactating sows.
+        /// </summary>
+        public static string LabelFarrowingLactatingSows {
+            get {
+                return ResourceManager.GetString("LabelFarrowingLactatingSows", resourceCulture);
             }
         }
         
@@ -10386,6 +10422,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Late lactation.
+        /// </summary>
+        public static string LabelLateLactationPeriodName {
+            get {
+                return ResourceManager.GetString("LabelLateLactationPeriodName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leaching fraction.
         /// </summary>
         public static string LabelLeachingFraction {
@@ -10670,6 +10715,15 @@ namespace H.Core.Properties {
         public static string LabelMicrobialNitrogenBalance {
             get {
                 return ResourceManager.GetString("LabelMicrobialNitrogenBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid lactation.
+        /// </summary>
+        public static string LabelMidLactationPeriodName {
+            get {
+                return ResourceManager.GetString("LabelMidLactationPeriodName", resourceCulture);
             }
         }
         
@@ -12249,6 +12303,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Summer grazing.
+        /// </summary>
+        public static string LabelSummerGrazing {
+            get {
+                return ResourceManager.GetString("LabelSummerGrazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mineral + microbial.
         /// </summary>
         public static string LabelSumOfMineralAndMicrobialPools {
@@ -12974,6 +13037,33 @@ namespace H.Core.Properties {
         public static string LabelWFac {
             get {
                 return ResourceManager.GetString("LabelWFac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winter feeding.
+        /// </summary>
+        public static string LabelWinterFeeding {
+            get {
+                return ResourceManager.GetString("LabelWinterFeeding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winter feeding - dry.
+        /// </summary>
+        public static string LabelWinterFeedingDry {
+            get {
+                return ResourceManager.GetString("LabelWinterFeedingDry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winter feeding - lactating.
+        /// </summary>
+        public static string LabelWinterFeedingLactating {
+            get {
+                return ResourceManager.GetString("LabelWinterFeedingLactating", resourceCulture);
             }
         }
         

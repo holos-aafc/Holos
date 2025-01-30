@@ -5940,4 +5940,34 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelManureExportedFromFarm" xml:space="preserve">
     <value>Manure exported from farm</value>
   </data>
+  <data name="LabelWinterFeeding" xml:space="preserve">
+    <value>alimentation en hiver</value>
+  </data>
+  <data name="LabelSummerGrazing" xml:space="preserve">
+    <value>pâturage estival</value>
+  </data>
+  <data name="LabelExtendedFallGrazing" xml:space="preserve">
+    <value>pâturage prolongé à l’automne</value>
+  </data>
+  <data name="LabelWinterFeedingDry" xml:space="preserve">
+    <value>Alimentation d'hiver - sec</value>
+  </data>
+  <data name="LabelWinterFeedingLactating" xml:space="preserve">
+    <value>Alimentation d'hiver - lactation</value>
+  </data>
+  <data name="LabelDryPeriodName" xml:space="preserve">
+    <value>tarissement</value>
+  </data>
+  <data name="LabelMidLactationPeriodName" xml:space="preserve">
+    <value>mi-lactation</value>
+  </data>
+  <data name="LabelLateLactationPeriodName" xml:space="preserve">
+    <value>en fin de lactation</value>
+  </data>
+  <data name="LabelFarrowingLactatingSows" xml:space="preserve">
+    <value>truies de naissage en lactation</value>
+  </data>
+  <data name="LabelStage" xml:space="preserve">
+    <value>étape</value>
+  </data>
 </root>

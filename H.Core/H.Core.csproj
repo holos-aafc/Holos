@@ -641,6 +641,7 @@
     <Compile Include="Services\Animals\IBeefCattleResultsService.cs" />
     <Compile Include="Services\Animals\IDairyResultsService.cs" />
     <Compile Include="Services\Animals\IDigestateService.cs" />
+    <Compile Include="Services\Animals\IManagementPeriodService.cs" />
     <Compile Include="Services\Animals\IManureService.cs" />
     <Compile Include="Services\Animals\IOtherLivestockResultsService.cs" />
     <Compile Include="Services\Animals\IPoultryResultsService.cs" />
@@ -648,6 +649,18 @@
     <Compile Include="Services\Animals\ISheepResultsService.cs" />
     <Compile Include="Services\Animals\ISwineResultsService.cs" />
     <Compile Include="Services\Animals\LandApplicationEmissionResult.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Beef.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Bison.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Dairy.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Deer.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Goats.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Horses.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Llamas.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Mules.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Poultry.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Sheep.cs" />
+    <Compile Include="Services\Animals\ManagementPeriodService.Swine.cs" />
     <Compile Include="Services\Animals\ManureService.cs" />
     <Compile Include="Services\Animals\OtherLivestockResultsService.cs" />
     <Compile Include="Services\Animals\PoultryResultsService.cs" />

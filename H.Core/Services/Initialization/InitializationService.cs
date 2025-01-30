@@ -655,6 +655,16 @@ namespace H.Core.Services.Initialization
             _animalInitializationService.InitializeTotals(managementPeriod);
         }
 
+        public void InitializeStartAndEndWeightsForCattle(Farm farm)
+        {
+            _animalInitializationService.InitializeStartAndEndWeightsForCattle(farm);
+        }
+
+        public void InitializeStartAndEndWeightsForCattle(ManagementPeriod managementPeriod)
+        {
+            _animalInitializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
+        }
+
         public void InitializeFarm(Farm farm)
         {
             _animalInitializationService.InitializeFarm(farm);

@@ -183,6 +183,16 @@ namespace H.Core.Services.Initialization.Animals
         void InitializeVolatileSolids(Farm farm);
         List<DietAdditiveType> GetValidDietAdditiveTypes();
         void InitializeTotals(ManagementPeriod managementPeriod);
+        /// <summary>
+        /// Initializes StartWeight and EndWeight properties of beef or dairy cattle ManagementPeriods within the farm 
+        /// </summary>
+        /// <param name="farm">The farm containing beef or dairy cattle ManagementPeriods that will be configured</param>
+        void InitializeStartAndEndWeightsForCattle(Farm farm);
+        /// <summary>
+        /// Initializes StartWeight and EndWeight properties of a beef or dairy cattle ManagementPeriod
+        /// </summary>
+        /// <param name="managementPeriod">The management period having its properties altered</param>
+        void InitializeStartAndEndWeightsForCattle(ManagementPeriod managementPeriod);
         void InitializeFarm(Farm farm);
     }
 }
