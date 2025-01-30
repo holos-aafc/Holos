@@ -66,6 +66,9 @@ Once this form has been submitted someone will reach out to you to confirm a lic
 
 After Visual Studio has been installed you can begin following the [GitHub Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md) if you're unfamiliar or need a refresher on working with Github. Once that's complete follow the [Github Devops Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Github%20Devops%20Guide/GithubDevopsGuide.md) to complete Visual Studio setup and connect to the Holos repositories.
 
+## Handling resource strings in Holos
+Due to Canada having two official languages of English and French, Holos must be accessible to both. This means all strings in Holos are held in respective English and French resource files, any new English strings added to the software are entered into a Google Sheets Spreadsheet. Once enough strings have accumulated in this spreadsheet, the file is sent off to an internal translation service. After the translated strings are sent back, they are entered into the French resource file. To access this translation spreadsheet you must have a Google account and receive an invite from a Holos developer.
+
 <br>
 
 # Figma
