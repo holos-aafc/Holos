@@ -101,8 +101,7 @@ namespace H.Core.Calculators.Tillage
         public double CalculateTillageFactor(Province province,
                                              SoilFunctionalCategory soilFunctionalCategory,
                                              TillageType tillageType,
-                                             CropType cropType,
-                                             int perennialYear)
+                                             CropType cropType)
         {
             if (cropType.IsRootCrop())
             {
@@ -118,7 +117,7 @@ namespace H.Core.Calculators.Tillage
             var simplifiedSoilCategory = soilFunctionalCategory.GetSimplifiedSoilCategory();
             if (cropType.IsPerennial())
             {
-                return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear, province);
+                return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, province);
             }
 
             return this.CalculateCropTillageFactor(simplifiedSoilCategory, tillageType);
@@ -137,7 +136,6 @@ namespace H.Core.Calculators.Tillage
         /// </summary>
         private double CalculateTillageFactorForPerennials(
             SoilFunctionalCategory soilFunctionalCategory,
-            int perennialYear,
             Province province)
         {
             if (province.IsPrairieProvince() == false)
