@@ -419,7 +419,7 @@ namespace H.Core.Calculators.Climate
             var cropInterception = this.CalculateCropInterception(precipitation, greenAreaIndex, cropEvapotranspiration);
             dailyClimateParameterResult.CropInterception = cropInterception;
 
-            var soilAvailableWater = this.CalculateSoilAvailableWater(precipitation, greenAreaIndex, cropEvapotranspiration);
+            var soilAvailableWater = this.CalculateSoilAvailableWater(precipitation, cropInterception);
             dailyClimateParameterResult.SoilAvailableWater = soilAvailableWater;
 
             var volumetricSoilWaterContent = this.CalculateVolumetricSoilWaterContent(ref waterStoragePrevious, layerThickness, fieldCapacity);
@@ -706,13 +706,8 @@ namespace H.Core.Calculators.Climate
         /// </summary>
         private double CalculateSoilAvailableWater(
             double totalDailyPrecipitation, 
-            double greenAreaIndex, 
-            double cropEvapotranspiration)
+            double cropInterception)
         {
-            var cropInterception = this.CalculateCropInterception(
-                totalDailyPrecipitation: totalDailyPrecipitation,
-                greenAreaIndex: greenAreaIndex,
-                cropEvapotranspiration: cropEvapotranspiration);
 
             var soilAvailableWater = totalDailyPrecipitation - cropInterception;
 
