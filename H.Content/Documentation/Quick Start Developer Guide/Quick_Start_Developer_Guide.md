@@ -9,6 +9,7 @@ The purpose of this document is to provide a guide for new developers joining th
 # Table of Contents
 - [Table of Contents](#table-of-content)
 - [Visual Studio](#visual-studio)
+   - [Handling Resource Strings in Holos](#handling-resource-strings-in-holos)
 - [Figma](#figma)
 - [Discord](discord)
 
@@ -62,12 +63,32 @@ Once this form has been submitted someone will reach out to you to confirm a lic
 
 <p align="center">
     <img src="../../Images/QuickStartDeveloperGuide/figure1.png"/>
+    <br>
+    <em>Figure 1: List of required components for Visual Studio</em>
 </p>
+
+<br>
 
 After Visual Studio has been installed you can begin following the [GitHub Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/GitHub%20Guide/GitHub%20Guide.md) if you're unfamiliar or need a refresher on working with Github. Once that's complete follow the [Github Devops Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Github%20Devops%20Guide/GithubDevopsGuide.md) to complete Visual Studio setup and connect to the Holos repositories.
 
 ## Handling resource strings in Holos
-Due to Canada having two official languages of English and French, Holos must be accessible to both. This means all strings in Holos are held in respective English and French resource files, any new English strings added to the software are entered into a Google Sheets Spreadsheet. Once enough strings have accumulated in this spreadsheet, the file is sent off to an internal translation service. After the translated strings are sent back, they are entered into the French resource file. To access this translation spreadsheet you must have a Google account and receive an invite from a Holos developer.
+Due to Canada having two official languages of English and French, Holos must be accessible to both. This means all strings in Holos are held in respective English and French **resource** files, any new English strings are added to a **Resources.resx** and also get entered into a Google Sheets Spreadsheet. Once enough strings have accumulated in this spreadsheet, the file is sent off to an internal translation service. After the translated strings are sent back, they are entered into the French resource file. To access this translation spreadsheet you must have a Google account and receive an invite from a Holos developer.
+
+<p align="center">
+    <img src="../../Images/QuickStartDeveloperGuide/figure2.png"/>
+    <br>
+    <em>Figure 2: Editing a .resx file in Visual Studio</em>
+</p>
+
+<br>
+
+Within the Google Sheets file, the first column is the key, the second column is the value that will be displayed to the user, the third column is helpful/explanation notes for the translation team. Once this file is sent off and the translation process has been completed, we are sent back all the strings with the French translations for anything in the second column.
+
+<p align="center">
+    <img src="../../Images/QuickStartDeveloperGuide/figure3.png"/>
+    <br>
+    <em>Figure 3: The Google Sheets translation table</em>
+</p>
 
 <br>
 
@@ -77,7 +98,9 @@ The Holos developer team uses [Figma](https://www.figma.com/) for GUI prototypin
 <br>
 
 <p align="center">
-    <img src="../../Images/QuickStartDeveloperGuide/figure2.png"/>
+    <img src="../../Images/QuickStartDeveloperGuide/figure4.png"/>
+    <em>Figure 4: Overview of the Figma document containing GUI prototypes.</em>
+    <br>
 </p>
 
 <br>
