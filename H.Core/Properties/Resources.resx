@@ -6377,9 +6377,6 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelFarrowingLactatingSows" xml:space="preserve">
     <value>Farrowing lactating sows</value>
   </data>
-  <data name="LabelStage" xml:space="preserve">
-    <value>Stage</value>
-  </data>
   <data name="MenuIncludeBiomassExportsInResults" xml:space="preserve">
     <value>Include biomass exports in reported results</value>
   </data>
@@ -6388,5 +6385,44 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="KilogramsNH3N3PerHectare" xml:space="preserve">
     <value>kg NH3-N ha^-1</value>
+  </data>
+  <data name="Beta_B_N" xml:space="preserve">
+    <value>Beta (B_N)</value>
+  </data>
+  <data name="Alpha_a_N" xml:space="preserve">
+    <value>Alpha (a_N)</value>
+  </data>
+  <data name="TitleActivePoolDecayRate" xml:space="preserve">
+    <value>Active Pool Decay Rate (ka)</value>
+  </data>
+  <data name="TitleSlowPoolDecayRate" xml:space="preserve">
+    <value>Slow Pool Decay Rate (ks)</value>
+  </data>
+  <data name="TitlePassivePoolDecayRate" xml:space="preserve">
+    <value>Passive Pool Decay Rate (kp)</value>
+  </data>
+  <data name="TitleActivePoolSteadyState" xml:space="preserve">
+    <value>Active Pool Steady State (ActiveN_y*)</value>
+  </data>
+  <data name="TitleSlowPoolSteadyState" xml:space="preserve">
+    <value>Slow Pool Steady State (SlowN_y*)</value>
+  </data>
+  <data name="TitlePassivePoolSteadyState" xml:space="preserve">
+    <value>Passive Pool Steady State (PassiveN_y*)</value>
+  </data>
+  <data name="TitleActivePoolN" xml:space="preserve">
+    <value>Active Pool (ActiveN_y)</value>
+  </data>
+  <data name="TitleSlowPoolN" xml:space="preserve">
+    <value>Slow Pool (SlowN_y)</value>
+  </data>
+  <data name="TitlePassivePoolN" xml:space="preserve">
+    <value>Passive Pool (PassiveN_y)</value>
+  </data>
+  <data name="N_min" xml:space="preserve">
+    <value>N_min</value>
+  </data>
+  <data name="SocNRequirement" xml:space="preserve">
+    <value>SocNRequirement</value>
   </data>
 </root>

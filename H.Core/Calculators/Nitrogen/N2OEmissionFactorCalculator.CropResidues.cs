@@ -10,6 +10,11 @@ namespace H.Core.Calculators.Nitrogen
         
         public double CalculateN2OFromCropResidueExports(CropViewItem cropViewItem, Farm farm)
         {
+            if (cropViewItem == null)
+            {
+                return 0;
+            }
+
             var emissionFactorForCropResidues = this.GetEmissionFactorForCropResidues(cropViewItem, farm);
             var nitrogenFromExportedCropResidues = _nitrogenCalculator.CalculateCropResidueExportNitrogen(cropViewItem);
 

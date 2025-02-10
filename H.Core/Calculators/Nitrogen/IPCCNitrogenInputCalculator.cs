@@ -23,7 +23,8 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.5.6-8
         /// Equation 2.7.2-2
         /// </summary>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem currentYearViewItem,
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+            CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem)
         {
             if (currentYearViewItem.CropType.IsPerennial())
@@ -43,8 +44,8 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Equation 2.7.2-2
-            var belowGroundResidueDryMatterFromPreviousYear = previousYearViewItem != null ? previousYearViewItem.BelowGroundResidueDryMatter : 0;
-            var result = (belowGroundResidueDryMatterFromPreviousYear / currentYearViewItem.Area) * currentYearViewItem.NitrogenContentInRoots;
+            var belowGroundResidueDryMatter = currentYearViewItem.BelowGroundResidueDryMatter;
+            var result = (belowGroundResidueDryMatter / currentYearViewItem.Area) * currentYearViewItem.NitrogenContentInRoots;
 
             return result;
         }

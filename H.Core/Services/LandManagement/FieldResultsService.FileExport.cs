@@ -176,6 +176,28 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.November + " " + Properties.Resources.LabelWaterEffect + "," +
                 Properties.Resources.December + " " + Properties.Resources.LabelWaterEffect + "," +
 
+                Properties.Resources.LabelAboveGroundNitrogenResidueForCrop + "," +
+                Properties.Resources.LabelBelowGroundResidueNitrogenForCrop + "," +
+
+                Properties.Resources.Beta_B_N + "," +
+                Properties.Resources.Alpha_a_N + "," +
+
+                Properties.Resources.TitleActivePoolDecayRate + "," +
+                Properties.Resources.TitleSlowPoolDecayRate + "," +
+                Properties.Resources.TitlePassivePoolDecayRate + "," +
+
+                Properties.Resources.TitleActivePoolSteadyState + "," +
+                Properties.Resources.TitleActivePoolN + "," +
+
+                Properties.Resources.TitleSlowPoolSteadyState + "," +
+                Properties.Resources.TitleSlowPoolN + "," +
+
+                Properties.Resources.TitlePassivePoolSteadyState + "," +
+                Properties.Resources.TitlePassivePoolN + "," +
+
+                Properties.Resources.N_min + "," +
+                Properties.Resources.SocNRequirement + "," +
+
                 Properties.Resources.LabelActivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelPassivePool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelSlowPool + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
@@ -335,6 +357,28 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.October.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.November.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.December.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.CombinedAboveGroundResidueNitrogen.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.CombinedBelowGroundResidueNitrogen.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.Beta.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.Alpha.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.ActivePoolDecayRate.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.SlowPoolDecayRate.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.PassivePoolDecayRate.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.ActivePoolSteadyState.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.ActivePool.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.SlowPoolSteadyState.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.SlowPool.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.PassivePoolSteadyState.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.IpccTier2NitrogenResults.PassivePool.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MineralPool.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.SocNRequirement.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.ActivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare, viewItem.PassivePoolCarbon, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));

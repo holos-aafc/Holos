@@ -57,24 +57,23 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.7.2-9
         /// </summary>
         /// <returns>Above ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
-            CropViewItem currentYearViewItem,
-            CropViewItem previousYearViewItem)
+        public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem)
         {
-            if (previousYearViewItem == null)
+            if (currentYearViewItem == null)
             {
                 return 0;
             }
 
             var nitrogenContentOfGrainReturned = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: currentYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: currentYearViewItem.NitrogenContentInProduct);
 
             var nitrogenContentOfStrawReturned = this.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: previousYearViewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: previousYearViewItem.NitrogenContentInStraw);
+                carbonInputFromStraw: currentYearViewItem.CarbonInputFromStraw,
+                nitrogenConcentrationInStraw: currentYearViewItem.NitrogenContentInStraw);
 
-            var cropType = previousYearViewItem.CropType;
+            var cropType = currentYearViewItem.CropType;
 
             if (cropType.IsAnnual() || cropType.IsPerennial())
             {
@@ -104,28 +103,26 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.7.2-10
         /// </summary>
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
-            CropViewItem currentYearViewItem,
-            CropViewItem previousYearViewItem)
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem)
         {
-            if (previousYearViewItem == null)
+            if (currentYearViewItem == null)
             {
                 return 0;
             }
 
             var grainNitrogen = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: currentYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: currentYearViewItem.NitrogenContentInProduct);
 
             var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: previousYearViewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: previousYearViewItem.NitrogenContentInRoots);
+                carbonInputFromRoots: currentYearViewItem.CarbonInputFromRoots,
+                nitrogenConcentrationInRoots: currentYearViewItem.NitrogenContentInRoots);
 
             var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: previousYearViewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: previousYearViewItem.NitrogenContentInExtraroot);
+                carbonInputFromExtraroots: currentYearViewItem.CarbonInputFromExtraroots,
+                nitrogenConcentrationInExtraroots: currentYearViewItem.NitrogenContentInExtraroot);
 
-            var cropType = previousYearViewItem.CropType;
+            var cropType = currentYearViewItem.CropType;
 
             // Equation 2.5.6-7
             if (cropType.IsAnnual())

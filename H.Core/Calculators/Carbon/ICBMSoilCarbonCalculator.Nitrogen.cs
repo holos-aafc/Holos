@@ -61,7 +61,7 @@ namespace H.Core.Calculators.Carbon
                 oldCarbonNitrogen: farm.Defaults.OldPoolCarbonN);
 
             base.TotalInputsBeforeReductions();
-            base.CalculateDirectEmissions(farm, currentYearResults);
+            base.CalculateDirectEmissions(farm, currentYearResults, previousYearResults);
             base.CalculateIndirectEmissions(farm, currentYearResults);
             base.AdjustPools();
             base.CloseNitrogenBudget(currentYearResults);

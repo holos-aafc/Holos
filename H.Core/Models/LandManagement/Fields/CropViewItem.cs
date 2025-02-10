@@ -1252,6 +1252,11 @@ namespace H.Core.Models.LandManagement.Fields
             return result;
         }
 
+        public double CombinedResidueNitrogen()
+        {
+            return this.CombinedAboveGroundResidueNitrogen + this.CombinedBelowGroundResidueNitrogen;
+        }
+
         #endregion
 
         #region Private Methods

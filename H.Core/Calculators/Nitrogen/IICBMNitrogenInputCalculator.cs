@@ -65,9 +65,8 @@ namespace H.Core.Calculators.Nitrogen
             double nitrogenFixationAmount,
             double atmosphericNitrogenDeposition);
 
-        double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem,
-            CropViewItem previousYearViewItem);
-        double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem,
-            CropViewItem previousYearViewItem);
+        double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem);
+        double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem);
     }
 }

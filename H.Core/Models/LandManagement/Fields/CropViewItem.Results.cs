@@ -537,6 +537,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public double FractionOfLandOccupiedByLowerPortionsOfLandscape { get; set; }
         public double WeightedModifierBasedOnTexture { get; set; }
+        public double SocNRequirement { get; set; }
+        public double MineralPool { get; set; }
 
         #endregion
     }

@@ -382,7 +382,10 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.N_min_FromDecompositionOfOldCarbon = this.MineralPool;
         }
 
-        protected void CalculateDirectNitrousOxide(CropViewItem currentYearResults, Farm farm)
+        protected void CalculateDirectNitrousOxide(
+            CropViewItem currentYearResults, 
+            Farm farm,
+            CropViewItem previousYearResults)
         {
             var emissionFactorForSyntheticFertilizer = N2OEmissionFactorCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
@@ -402,13 +405,15 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-1
             this.N2O_NFromSyntheticFertilizer = this.SyntheticNitrogenPool * emissionFactorForSyntheticFertilizer;
 
+            var previousYearResidue = previousYearResults != null ? previousYearResults.CombinedResidueNitrogen() : 0;
+
             // Equation 2.6.5-2
             // Equation 2.7.4-2
-            this.N2O_NFromResidues = this.CropResiduePool * emissionFactorForCropResidues;
+            this.N2O_NFromResidues =  previousYearResidue * emissionFactorForCropResidues;
 
             // Equation 2.6.5-3
             // Equation 2.7.4-3
-            this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(currentYearResults, farm);
+            this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(previousYearResults, farm);
 
             // Equation 2.6.5-4
             // Equation 2.7.4-4
@@ -782,9 +787,10 @@ namespace H.Core.Calculators.Carbon
             this.CalculateActualVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, farm);
         }
 
-        protected void CalculateDirectEmissions(Farm farm, CropViewItem currentYearResults)
+        protected void CalculateDirectEmissions(Farm farm, CropViewItem currentYearResults,
+            CropViewItem previousYearResults)
         {
-            this.CalculateDirectNitrousOxide(currentYearResults, farm);
+            this.CalculateDirectNitrousOxide(currentYearResults, farm, previousYearResults);
             this.CalculateNitricOxide(farm.Defaults.NORatio);
         }
 

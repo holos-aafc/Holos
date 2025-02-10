@@ -94,17 +94,21 @@ namespace H.Core.Calculators.Carbon
                                this.PreviousYearResults.IpccTier2NitrogenResults.SlowPool * this.CurrentYearResults.IpccTier2NitrogenResults.SlowPoolDecayRate +
                                this.PreviousYearResults.IpccTier2NitrogenResults.PassivePool * this.CurrentYearResults.IpccTier2NitrogenResults.PassivePoolDecayRate;
 
+            this.CurrentYearResults.MineralPool = base.MineralPool;
+
             // Equation 2.7.3-10
             this.SocNRequirement = this.PreviousYearResults.IpccTier2NitrogenResults.ActivePoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.ActivePoolDecayRate +
                                    this.PreviousYearResults.IpccTier2NitrogenResults.SlowPoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.SlowPoolDecayRate +
                                    this.PreviousYearResults.IpccTier2NitrogenResults.PassivePoolSteadyState * this.CurrentYearResults.IpccTier2NitrogenResults.PassivePoolDecayRate;
+
+            this.CurrentYearResults.SocNRequirement = this.SocNRequirement;
 
             // Equation 2.7.3-14 is calculated when calling CalculatePools()
             // Equation 2.7.3-15 is calculated when calling CalculatePools()
             // Equation 2.7.3-16 is derived from the calculation of 2.7.3-15
 
             this.TotalInputsBeforeReductions();
-            this.CalculateDirectEmissions(farm, currentYearResults);
+            this.CalculateDirectEmissions(farm, currentYearResults, previousYearResults);
             this.CalculateIndirectEmissions(farm, currentYearResults);
             this.AdjustPools();
             base.CloseNitrogenBudget(currentYearResults);
@@ -120,7 +124,10 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
             // Equation 2.7.7-11
-            base.CropNitrogenDemand = (this.AboveGroundResidueN + this.BelowGroundResidueN) * (1 - this.CurrentYearResults.NitrogenFixation);
+            base.CropNitrogenDemand =
+                (this.CurrentYearResults.AboveGroundResidueDryMatter * this.CurrentYearResults.NitrogenContentInStraw +
+                 ((this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) *
+                  this.CurrentYearResults.NitrogenContentInRoots)) * (1 - this.CurrentYearResults.NitrogenFixation);
 
             base.AdjustPoolsAfterDemandCalculation(this.CropNitrogenDemand);
 

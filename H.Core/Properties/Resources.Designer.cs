@@ -169,6 +169,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alpha (a_N).
+        /// </summary>
+        public static string Alpha_a_N {
+            get {
+                return ResourceManager.GetString("Alpha_a_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NH3 m^-3 d^-1.
         /// </summary>
         public static string AmmoniaPerCubicMeterPerDay {
@@ -365,6 +374,15 @@ namespace H.Core.Properties {
         public static string BarleySilageUnderSeed {
             get {
                 return ResourceManager.GetString("BarleySilageUnderSeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beta (B_N).
+        /// </summary>
+        public static string Beta_B_N {
+            get {
+                return ResourceManager.GetString("Beta_B_N", resourceCulture);
             }
         }
         
@@ -14638,6 +14656,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N_min.
+        /// </summary>
+        public static string N_min {
+            get {
+                return ResourceManager.GetString("N_min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Native Pasture.
         /// </summary>
         public static string NativePasture {
@@ -16150,6 +16177,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SocNRequirement.
+        /// </summary>
+        public static string SocNRequirement {
+            get {
+                return ResourceManager.GetString("SocNRequirement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soft Wheat.
         /// </summary>
         public static string SoftWheat {
@@ -16564,6 +16600,33 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Pool Decay Rate (ka).
+        /// </summary>
+        public static string TitleActivePoolDecayRate {
+            get {
+                return ResourceManager.GetString("TitleActivePoolDecayRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Pool (ActiveN_y).
+        /// </summary>
+        public static string TitleActivePoolN {
+            get {
+                return ResourceManager.GetString("TitleActivePoolN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Pool Steady State (ActiveN_y*).
+        /// </summary>
+        public static string TitleActivePoolSteadyState {
+            get {
+                return ResourceManager.GetString("TitleActivePoolSteadyState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Supplemental Hay/Forage for Grazing Animals.
         /// </summary>
         public static string TitleAddSupplementalForageForGrazingAnimals {
@@ -16906,6 +16969,33 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passive Pool Decay Rate (kp).
+        /// </summary>
+        public static string TitlePassivePoolDecayRate {
+            get {
+                return ResourceManager.GetString("TitlePassivePoolDecayRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passive Pool (PassiveN_y).
+        /// </summary>
+        public static string TitlePassivePoolN {
+            get {
+                return ResourceManager.GetString("TitlePassivePoolN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passive Pool Steady State (PassiveN_y*).
+        /// </summary>
+        public static string TitlePassivePoolSteadyState {
+            get {
+                return ResourceManager.GetString("TitlePassivePoolSteadyState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pesticide.
         /// </summary>
         public static string TitlePesticide {
@@ -16965,6 +17055,33 @@ namespace H.Core.Properties {
         public static string TitleSheepComponentDisplayString {
             get {
                 return ResourceManager.GetString("TitleSheepComponentDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow Pool Decay Rate (ks).
+        /// </summary>
+        public static string TitleSlowPoolDecayRate {
+            get {
+                return ResourceManager.GetString("TitleSlowPoolDecayRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow Pool (SlowN_y).
+        /// </summary>
+        public static string TitleSlowPoolN {
+            get {
+                return ResourceManager.GetString("TitleSlowPoolN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow Pool Steady State (SlowN_y*).
+        /// </summary>
+        public static string TitleSlowPoolSteadyState {
+            get {
+                return ResourceManager.GetString("TitleSlowPoolSteadyState", resourceCulture);
             }
         }
         

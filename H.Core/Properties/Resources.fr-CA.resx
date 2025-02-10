@@ -5967,7 +5967,8 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="LabelFarrowingLactatingSows" xml:space="preserve">
     <value>truies de naissage en lactation</value>
   </data>
-  <data name="LabelStage" xml:space="preserve">
-    <value>étape</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Beta_B_N" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

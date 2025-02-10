@@ -45,6 +45,13 @@ namespace H.Core.Calculators.Carbon
 
         public void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
         {
+            this.CalculateInputs(previousYear, viewItem, nextYear, farm);
+
+            this.CalculateLosses(viewItem, farm);
+        }
+
+        public void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        {
             if (this.CanCalculateInputsUsingIpccTier2(viewItem))
             {
                 _ipccTier2CarbonInputCalculator.CalculateInputs(viewItem, farm);
@@ -53,8 +60,6 @@ namespace H.Core.Calculators.Carbon
             {
                 _icbmCarbonInputCalculator.CalculateInputs(previousYear, viewItem, nextYear, farm);
             }
-
-            this.CalculateLosses(viewItem, farm);
         }
 
         public void CalculateLosses(CropViewItem cropViewItem, Farm farm)

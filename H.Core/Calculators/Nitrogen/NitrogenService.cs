@@ -39,16 +39,15 @@ namespace H.Core.Calculators.Nitrogen
         {
             if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem))
             {
-                var aboveGroundResidueDryMatterFromPreviousYear = previousYearViewItem != null ? previousYearViewItem.AboveGroundResidueDryMatter : 0;
-
                 return _ipccNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
-                    aboveGroundResidueDryMatterFromPreviousYear,
+                    currentYearViewItem.AboveGroundResidueDryMatter,
                     currentYearViewItem.CarbonConcentration,
                     currentYearViewItem.NitrogenContentInStraw);
             }
             else
             {
-                return _icbmNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(currentYearViewItem, previousYearViewItem);
+                return _icbmNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
+                    previousYearViewItem, currentYearViewItem);
             }
         }
 
@@ -62,7 +61,7 @@ namespace H.Core.Calculators.Nitrogen
             }
             else
             {
-                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(currentYearViewItem, previousYearViewItem);
+                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(currentYearViewItem);
             }
         }
 
