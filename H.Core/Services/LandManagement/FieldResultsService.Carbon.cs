@@ -218,13 +218,13 @@ namespace H.Core.Services.LandManagement
                 }
 
                 // Combine inputs now that we have C set on cover crops
-                this.CombineInputsForAllCropsInSameYear(runInPeriodItems, leftMost);
+                this.CombineInputsForAllCropsInSameYear(farm, runInPeriodItems, leftMost);
 
                 // Merge all run in period items
                 var mergedRunInItems = this.MergeDetailViewItems(runInPeriodItems, leftMost);
 
                 // Combine inputs for run in period
-                this.CombineInputsForAllCropsInSameYear(mergedRunInItems, leftMost);
+                this.CombineInputsForAllCropsInSameYear(farm, mergedRunInItems, leftMost);
 
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,

@@ -67,6 +67,7 @@ namespace H.Core.Calculators.Nitrogen
 
         double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem);
-        double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem);
+        double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem,
+            CropViewItem previousYearViewItem);
     }
 }

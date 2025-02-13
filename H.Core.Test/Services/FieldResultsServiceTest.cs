@@ -922,7 +922,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            _resultsService.CombineInputsForAllCropsInSameYear(viewItems, component);
+            _resultsService.CombineInputsForAllCropsInSameYear(base.GetTestFarm(), viewItems, component);
 
             // The main crop gets the total inputs from all other crops added to its inputs since ICBM will use this main crop when calculating final results
             Assert.AreEqual(300, viewItem1.CombinedAboveGroundInput);
@@ -953,7 +953,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            _resultsService.CombineInputsForAllCropsInSameYear(viewItems, component);
+            _resultsService.CombineInputsForAllCropsInSameYear(base.GetTestFarm(), viewItems, component);
 
             Assert.AreEqual(200, viewItem1.AboveGroundCarbonInput);
             Assert.AreEqual(50, viewItem1.BelowGroundCarbonInput);

@@ -220,7 +220,8 @@ namespace H.Core.Services.LandManagement
         /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM/IPCC Tier 2 calculations
         /// </summary>
         public void CombineInputsForAllCropsInSameYear(
-            IEnumerable<CropViewItem> viewItems, 
+            Farm farm, 
+            IEnumerable<CropViewItem> viewItems,
             FieldSystemComponent fieldSystemComponent)
         {
             // Add up all residues for each year and combine into the main crop
@@ -264,8 +265,8 @@ namespace H.Core.Services.LandManagement
 
                     var secondaryCropFromPreviousYear = this.GetCoverCropForYear(viewItems, year - 1);
 
-                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
-                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
+                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(farm, secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
+                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(farm, secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
 
                     totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
                     totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
@@ -285,8 +286,8 @@ namespace H.Core.Services.LandManagement
                  * Sum up the main crop and cover crop nitrogen inputs
                  */
 
-                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
-                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
+                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(farm, currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
+                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(farm, currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
 
                 mainCropForCurrentYear.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
                 mainCropForCurrentYear.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;

@@ -539,6 +539,8 @@ namespace H.Core.Models.LandManagement.Fields
         public double WeightedModifierBasedOnTexture { get; set; }
         public double SocNRequirement { get; set; }
         public double MineralPool { get; set; }
+        public double YoungPoolAboveGroundResidueN { get; set; }
+        public double YoungPoolBelowGroundResidueN { get; set; }
 
         #endregion
     }

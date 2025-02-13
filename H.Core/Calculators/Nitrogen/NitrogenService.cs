@@ -1,6 +1,7 @@
 ﻿using System;
 using H.Core.Calculators.Carbon;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Calculators.Nitrogen
@@ -34,10 +35,11 @@ namespace H.Core.Calculators.Nitrogen
         #region Public Methods
 
         public double CalculateAboveGroundResidueNitrogen(
+            Farm farm, 
             CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem)
         {
-            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem))
+            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem) && farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 return _ipccNitrogenInputCalculator.CalculateTotalAboveGroundResidueNitrogenUsingIpccTier2(
                     currentYearViewItem.AboveGroundResidueDryMatter,
@@ -52,16 +54,17 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         public double CalculateBelowGroundResidueNitrogen(
+            Farm farm, 
             CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem)
         {
-            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem))
+            if (this.CanCalculateNitrogenInputsUsingIpccTier2(currentYearViewItem) && farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
                 return _ipccNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(currentYearViewItem, previousYearViewItem);
             }
             else
             {
-                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(currentYearViewItem);
+                return _icbmNitrogenInputCalculator.CalculateTotalBelowGroundResidueNitrogenUsingIcbm(currentYearViewItem, previousYearViewItem);
             }
         }
 

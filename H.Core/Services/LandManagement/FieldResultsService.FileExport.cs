@@ -210,6 +210,8 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelSyntheticInputsBeforeAdjustment + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
                 //Properties.Resources.LabelAboveGroundNitrogenResidueForCrop + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
                 //Properties.Resources.LabelBelowGroundResidueNitrogenForCrop + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
+                "Young Pool Aboveground Residue" + "," +
+                "Young Pool Belowground Residue" + "," +
                 Properties.Resources.LabelAboveGroundResiduePool_AGresidueN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
                 Properties.Resources.LabelBelowGroundResiduePool_BGresidueN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
                 Properties.Resources.LabelCropResiduesBeforeAdjustment + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
@@ -271,7 +273,7 @@ namespace H.Core.Services.LandManagement
         {
             var fieldName = string.Empty;
             fieldName = viewItem.Name;
-            const string DefaultDecimalOutputFormat = "F3";
+            const string DefaultDecimalOutputFormat = "F4";
 
             // Old farm files used the FieldName property which is deprecated
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -392,6 +394,8 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, viewItem.SyntheticInputsBeforeAdjustment, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             //stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, viewItem.AboveGroundNitrogenResidueForCrop, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             //stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, viewItem.BelowGroundResidueNitrogenForCrop, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.YoungPoolAboveGroundResidueN.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.YoungPoolBelowGroundResidueN.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, viewItem.AboveGroundResiduePool_AGresidueN, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, viewItem.BelowGroundResiduePool_BGresidueN, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, viewItem.CropResiduesBeforeAdjustment, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
