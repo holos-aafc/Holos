@@ -24,7 +24,7 @@ A draft version of the Holos version 4.0 algorithm document is being made availa
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx" target="_blank">AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx</a>
+<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Holos_V4.0_Algorithm_Document_Feb%2013%202025.docx" target="_blank">Holos_V4.0_Algorithm_Document_Feb 13 2025.docx</a>
 
 # Training Guide
 
