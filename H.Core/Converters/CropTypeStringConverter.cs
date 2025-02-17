@@ -175,6 +175,7 @@ namespace H.Core.Converters
                 case "perennialgrasses":
                     return CropType.PerennialGrasses;
                 case "potatoes":
+                case "potatos":
                 case "potato":
                     return CropType.Potatoes;
                 case "rice":
