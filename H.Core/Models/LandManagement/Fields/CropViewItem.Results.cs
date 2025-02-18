@@ -34,9 +34,19 @@ namespace H.Core.Models.LandManagement.Fields
         public double ChangeInNitrogenStock { get; set; }
 
         /// <summary>
-        /// kg ha^-1
+        /// Soil C at beginning of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double SoilCarbon { get; set; }
+
+        /// <summary>
+        /// Soil C at end of year
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        public double SoilCarbonEndOfYear { get; set; }
+
         public double ActualMeasuredSoilCarbon { get; set; }
         public double DifferenceOfCurrentYearCalculatedCarbonAndStartYearCalculatedCarbon { get; set; }
         public double DifferenceOfCurrentYearMeasuredCarbonAndStartYearMeasuredCarbon { get; set; }
@@ -44,16 +54,48 @@ namespace H.Core.Models.LandManagement.Fields
         public double OldPoolSoilCarbon { get; set; }
 
         /// <summary>
-        /// kg C ha^-1
+        /// Young pool aboveground at start of year
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        public double YoungPoolSoilCarbonAboveGround { get; set; }
+
+        /// <summary>
+        /// Young pool aboveground at end of year
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        public double YoungPoolSoilCarbonAboveGroundEndOfYear { get; set; }
+
+        /// <summary>
+        /// Young pool belowground at start of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolSoilCarbonBelowGround { get; set; }
 
         /// <summary>
-        /// kg C ha^-1
+        /// Young pool belowground at end of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
-        public double YoungPoolSoilCarbonAboveGround { get; set; }
-        public double YoungPoolSteadyStateManure { get; set; }
+        public double YoungPoolSoilCarbonBelowGroundEndOfYear { get; set; }
+
+        /// <summary>
+        /// Young pool manure at start of year
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
         public double YoungPoolManureCarbon { get; set; }
+
+        /// <summary>
+        /// Young pool manure at end of year
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        public double YoungPoolManureCarbonEndOfYear { get; set; }
+
+        public double YoungPoolSteadyStateManure { get; set; }
         public double AmountOfCarbonAppliedFromManure { get; set; }
         public double AmountOfNitrogenAppliedFromManure { get; set; }
         public double AmountOfPhosphorusAppliedFromManure { get; set; }

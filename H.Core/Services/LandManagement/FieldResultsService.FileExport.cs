@@ -204,7 +204,7 @@ namespace H.Core.Services.LandManagement
 
                 Properties.Resources.LabelYoungPoolAboveGround + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
                 Properties.Resources.LabelYoungPoolBelowGround + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
-
+                
                 Properties.Resources.LabelOldPoolSoilCarbon + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsCarbonPerHectare) + "," +
 
                 Properties.Resources.LabelSyntheticInputsBeforeAdjustment + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
