@@ -96,13 +96,14 @@ namespace H.Core.Services.Initialization.Animals
         {
             if (managementPeriod != null && managementPeriod.HousingDetails != null)
             {
+                var beddingType = managementPeriod.HousingDetails.BeddingMaterialType;
+
                 var beddingRate = _beddingMaterialCompositionProvider.GetDefaultBeddingRate(
                     managementPeriod.HousingDetails.HousingType,
                     managementPeriod.HousingDetails.BeddingMaterialType,
                     managementPeriod.AnimalType);
 
                 managementPeriod.HousingDetails.UserDefinedBeddingRate = beddingRate;
-
             }
         }
 

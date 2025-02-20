@@ -32,7 +32,7 @@ using H.Core.Services.LandManagement;
 using H.Infrastructure;
 using Prism.Events;
 
-namespace H.Template
+namespace H.TemplateT
 {
     internal class Program
     {

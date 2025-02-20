@@ -503,5 +503,15 @@ namespace H.Core.Services.Animals
         /// <param name="animalGroupOnPropertyChanged">The instance of a <see cref="PropertyChangedEventHandler"/> that monitors animal group for property changed</param>
         void LlamaManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod,
             PropertyChangedEventHandler animalGroupOnPropertyChanged);
+
+        ObservableCollection<BeddingMaterialType> GetValidBeddingTypes(AnimalType animalType);
+        List<ManureStateType> GetValidManureStateType(AnimalType animalType, Farm farm, ManagementPeriod managementPeriod);
+
+        /// <summary>
+        /// The available housing types depends on the type of components on the farm. If there is an animal component on the farm that is housed on a pasture, there must be
+        /// at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1 field has been added to the farm
+        /// </summary>
+        List<HousingType> GetValidHousingTypes(Farm farm, ManagementPeriod bindingManagementPeriod,
+            AnimalType animalType);
     }
 }

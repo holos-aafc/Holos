@@ -2910,10 +2910,10 @@
     <value>Turkey Multiplier Breeder</value>
   </data>
   <data name="EnumYoungTom" xml:space="preserve">
-    <value>Young toms</value>
+    <value>Toms</value>
   </data>
   <data name="EnumYoungTurkeyHen" xml:space="preserve">
-    <value>Young turkey hens</value>
+    <value>Turkey hens</value>
   </data>
   <data name="EnumTurkeyMeatProduction" xml:space="preserve">
     <value>Turkey Meat Production</value>
@@ -2922,7 +2922,7 @@
     <value>Chicken Egg Production</value>
   </data>
   <data name="EnumChickenMultiplierHatchery" xml:space="preserve">
-    <value>Chicken Multiplier Hatchery</value>
+    <value>Multiplier Hatchery</value>
   </data>
   <data name="EnumChickenEggs" xml:space="preserve">
     <value>Chicken eggs</value>
