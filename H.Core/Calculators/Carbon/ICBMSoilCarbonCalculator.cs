@@ -537,7 +537,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.1.3-17
+        /// Equation 2.1.3-20
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFieldAtInterval(
             double changeInSoilOrganicCarbonAtInterval, 
@@ -547,7 +547,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.1.3-18
+        /// Equation 2.1.3-21
         /// </summary>
         public double CalculateChangeInSoilOrganicCarbonForFarmAtInterval(
             IEnumerable<double> changeInSoilOrganicCarbonForFields)

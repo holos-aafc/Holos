@@ -498,7 +498,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="soilTexture">The soil texture of the ecodistrict</param>
         /// <param name="region">The region of the ecodistrict</param>
         /// <param name="fractionOfThisTexture">The fraction of the ecodistrict that is comprised of this soil texture type (100% for now)</param>
-        /// <returns>A weighted modifier which provides a correction of the EF_Topo in ecodistrict ‘‘i’’ based on the soil texture </returns>
+        /// <returns>A weighted modifier which provides a correction of the EF_Topo in ecodistrict "i" based on the soil texture </returns>
         public double CalculateModifierBasedOnTexture(
             SoilTexture soilTexture, 
             Region region, 
@@ -646,7 +646,6 @@ namespace H.Core.Calculators.Nitrogen
 
             return totalAmountsPerHectareFromManureApplications;
         }
-
 
         public double GetAmountOfNitrogenUsed(CropViewItem viewItem, ManureItemBase manureItemBase)
         {

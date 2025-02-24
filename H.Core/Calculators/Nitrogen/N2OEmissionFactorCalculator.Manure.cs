@@ -333,7 +333,19 @@ namespace H.Core.Calculators.Nitrogen
             double emissionFactorForLandApplication,
             double ambientTemperatureAdjustment)
         {
-            return emissionFactorForLandApplication * ambientTemperatureAdjustment;
+            var result = emissionFactorForLandApplication * ambientTemperatureAdjustment;
+
+            if (result > 1)
+            {
+                return 1;
+            }
+
+            if (result < 0)
+            {
+                return 0;
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -51,7 +51,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.6.2-8
+        /// Equation 2.6.2-7
         /// </summary>
         /// <param name="aboveGroundBiomassExported">Above ground biomass (kg DM) exported (Equation 2.2.2-3)</param>
         /// <param name="nitrogenContentOfStraw">(kg kg^-1)</param>
