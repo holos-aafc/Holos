@@ -154,7 +154,7 @@ namespace H.Core.Services.Animals
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
                     crudeProtein: poultryDietData.CrudeProtein );
 
-                if (managementPeriod.AnimalType == AnimalType.ChickenHens)
+                if (managementPeriod.AnimalType == AnimalType.ChickenHens || managementPeriod.AnimalType == AnimalType.Layers)
                 {
                     dailyEmissions.ProteinRetained = this.CalculateProteinRetainedLayers(
                         proteinInLiveWeight: poultryDietData.ProteinLiveWeight,
