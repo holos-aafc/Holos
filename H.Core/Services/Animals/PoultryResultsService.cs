@@ -309,6 +309,9 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
                 dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay - dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay;
 
+            // This value is shown on the manure tank
+            dailyEmissions.OrganicNitrogenCreatedOnDay = dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay;
+
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
