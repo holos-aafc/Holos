@@ -1115,9 +1115,32 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _forageUtilizationRate, value);
         }
 
+        /// <summary>
+        /// The total aboveground C inputs from the main crop residue and any secondary crop residues from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedAboveGroundInput { get; set; }
+
+        /// <summary>
+        /// The total belowground C inputs from the main crop residue and any secondary crop residues from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedBelowGroundInput { get; set; }
+
+        /// <summary>
+        /// The total manure C inputs from the main crop manure applications and any secondary crop manure applications from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedManureInput { get; set; }
+
+        /// <summary>
+        /// The total digestate C inputs from the main crop digestate applications and any secondary crop digestate applications from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedDigestateInput { get; set; }
 
         /// <summary>
