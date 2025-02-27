@@ -217,6 +217,19 @@ namespace H.Core.Services.LandManagement
                     _carbonService.CalculateInputsAndLosses(null, runInPeriodItem, null, farm);
                 }
 
+                if (farm.IsCommandLineMode)
+                {
+                    foreach (var cropViewItem in viewItemsForField)
+                    {
+                        // If the CLI user wants us to calculate carbon inputs, do that now. This will be the case when the user has not entered any value
+                        // for aboveground, belowground, manure, or digestate inputs.
+                        if (cropViewItem.TotalCarbonInputs == 0)
+                        {
+                            _carbonService.CalculateInputsAndLosses(null, cropViewItem, null, farm);
+                        }
+                    }
+                }
+
                 // Combine inputs now that we have C set on cover crops
                 this.CombineInputsForAllCropsInSameYear(farm, runInPeriodItems, leftMost);
 
