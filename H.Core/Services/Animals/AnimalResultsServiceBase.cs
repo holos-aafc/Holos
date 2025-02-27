@@ -118,6 +118,11 @@ namespace H.Core.Services.Animals
                      currentDate <= endDate;
                      currentDate = currentDate.AddDays(1))
                 {
+                    if (this.HasMovedToNewYear(currentDate))
+                    {
+                        previousDaysEmissions = null;
+                    }
+
                     var groupEmissionsForDay = CalculateDailyEmissions(
                         animalComponentBase: animalComponent,
                         managementPeriod: managementPeriod,
@@ -174,6 +179,11 @@ namespace H.Core.Services.Animals
                          currentDate <= endDate;
                          currentDate = currentDate.AddDays(1))
                     {
+                        if (this.HasMovedToNewYear(currentDate))
+                        {
+                            previousDaysEmissions = null;
+                        }
+
                         var groupEmissionsForDay = CalculateDailyEmissions(
                             animalComponentBase: animalComponent,
                             managementPeriod: managementPeriod,
@@ -2476,6 +2486,22 @@ namespace H.Core.Services.Animals
             double adjustedAmmoniaLossFromStorage)
         {
             return amountOfTANFlowingIntoStorageEachDay - adjustedAmmoniaLossFromStorage;
+        }
+
+        /// <summary>
+        /// Checks if daily calculations are from the same year.
+        /// </summary>
+        private bool HasMovedToNewYear(DateTime currentDate)
+        {
+            var previousDate = currentDate.Subtract(TimeSpan.FromDays(1));
+            if (previousDate.Year != currentDate.Year)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
