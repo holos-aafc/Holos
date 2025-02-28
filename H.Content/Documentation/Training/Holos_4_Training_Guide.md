@@ -270,13 +270,13 @@ Adding animal components follows the exact same approach that was used for land 
 
 ### Entering Beef Cows, Calves and Bulls Information.
 
-#### Beef Cows - Winter Feeding
+#### Beef Cows - Winter Feeding Management Periods
 
-Following the annual feeding cycle, the beef farm we are working with is **divided into three  management (production) periods**. We can now enter production and management data corresponding to these three  management periods. 
+Following the annual feeding cycle, the beef farm we are working with is **divided into four management (production) periods**. We can now enter production and management data corresponding to these four  management periods. 
 
 1. Under the animal groups section in ‘**Step 1**’, make sure that the “**Cows**” row is selected in order to enter the associated management information for that group.
 
-2. Click the management period named “**Winter Feeding**” in ‘**Step 2**’ to activate that management period.
+2. Click the management period named “**Winter feeding - dry**” in ‘**Step 2**’ to activate that management period.
 
 3. Ensure “**January 1, 2022**” is set as the ‘**Start date**’ and that “**April 30, 2022**” is set as the ‘**End date**’.
 
@@ -295,7 +295,7 @@ Next, we can enter data related to the number of animals, diet, manure system, a
 
 * **Diet Tab:**
 
-We are going to create a custom diet for our group of cows during the “**Winter feeding**” management period. (Holos incorporates feed ingredient information from the recently published Nutrient Requirements of Beef Cattle book (2016).
+We are going to create a custom diet for our group of cows during the “**Winter feeding - dry**” management period. (Holos incorporates feed ingredient information from the recently published Nutrient Requirements of Beef Cattle book (2016).
 
 
 Click on the ‘**Diet**’ tab. Since we are going to create our own custom diet, we will click on the ‘**Custom Diet Creator**’ button. Note that Holos provides a default set of animal diets that can be used.
@@ -332,6 +332,9 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
 
 * Manure Tab:
     * Select **Deep Bedding** as the manure handling system.
+ 
+ 
+ **Repeat** all of the previous steps for the **Winter feeding - lactating** management period.
     
 
 <br>
@@ -379,9 +382,9 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/Training/en/Figure15_Updated.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 15: Beef Cow-Calf, Cow group</em>
+    <em>Figure 15: Beef Cow-Calf, Cow group (Updated for 2025)</em>
 </p> 
 <br> 
 
@@ -574,18 +577,13 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 ***“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg)”***
 
-1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
-2. Select the **Pullets** group. The start and end dates for each management period will be:
+1. Drag one "**Chicken Meat Production**" component to the farm. For the single group (Broilers), each management period for the group will consist of **800** animals. This means numbers of animals will be consistent throughout the management periods / year.
+2. Select the **Broilers** group. The start and end dates for each management period will be:
     - **Brooding Stage:** Start: January 1st, 2023 - End: January 22nd, 2023. 
     - **Rearing Stage:** Start: January 23rd, 2023 - End: June 26th, 2023.
     - **Rearing Stage:** Start: June 27th, 2023 - End: November 28th, 2023.
-3. For each management period, set number of animals to **400**.
+3. For each management period, set number of animals to **800**.
 4. Leave the entries in Housing and Manure as default.
-
-
-- The management data for the **Cockerels** group is the same as **Pullets**. Right click on the Cockerels group to activate the right click menu and select **Copy Management From -> Pullets**
-
-
 
 <br>
 <br>
