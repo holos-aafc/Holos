@@ -259,13 +259,13 @@ Adding animal components follows the same approach used for the land management 
 
 ### Entering information for Beef Cows, Calves and Bulls
 
-#### Beef Cows - Winter Feeding
+#### Beef Cows - Winter Feeding Management Periods
 
-Following the annual feeding cycle, the beef farm we are working with is **divided into three  management (production) periods**. We can now enter production and management data corresponding to these three management periods. 
+Following the annual feeding cycle, the beef farm we are working with is **divided into four management (production) periods**. We can now enter production and management data corresponding to these four management periods. 
 
 1. Under the animal groups section in **Step 1**, make sure that the **"Cows"** row is selected in order to enter the associated management information for that group.
 
-2. Click the management period named **"Winter Feeding"** in **Step 2** to activate that management period.
+2. Click the management period named **"Winter feeding - dry"** in **Step 2** to activate that management period.
 
 3. Ensure **"January 1, 2023"** is set as the start date and **"April 30, 2023"** as the end date.
 
@@ -284,7 +284,7 @@ Next, we can enter data related to the number of animals, diet, manure system, a
 
 * **Diet tab:**
 
-We are going to create a custom diet for our group of cows during the **"Winter feeding"** management period. (Holos incorporates feed ingredient information from the recently published Nutrient Requirements of Beef Cattle book (2016)).
+We are going to create a custom diet for our group of cows during the **"Winter feeding - dry"** management period. (Holos incorporates feed ingredient information from the recently published Nutrient Requirements of Beef Cattle book (2016)).
 
 
 Click on the **Diet** tab. Since we are going to create our own custom diet, we will click on the **Custom Diet Creator** button. Note that Holos also provides a default set of animal diets that can be used.
@@ -321,6 +321,9 @@ Click on the **Diet** tab. Since we are going to create our own custom diet, we 
 
 * **Manure tab**:
     * Select **"Deep Bedding"** as the manure handling system.
+
+
+**Repeat** all of the previous steps for the **Winter feeding - lactating** management period.
     
 
 <br>
@@ -368,9 +371,9 @@ Click on the management period named **"Extended Fall Grazing"**. Ensure that th
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/Training/en/Figure15_Updated.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 15: Beef Cow-Calf component, Cow group</em>
+    <em>Figure 15: Beef Cow-Calf component, Cow group (Updated for 2025)</em>
 </p> 
 <br> 
 
