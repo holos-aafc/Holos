@@ -334,7 +334,6 @@ Click on the ‘**Diet**’ tab. Since we are going to create our own custom die
     * Select **Deep Bedding** as the manure handling system.
  
  
- 
  **Repeat** all of the previous steps for the **Winter feeding - lactating** management period.
     
 
@@ -578,18 +577,13 @@ We will add one last animal component to our farm. In addition to the beef cattl
 
 ***“Chicks arriving in the operation from a multiplier hatchery are raised to market weight (1-4 kg)”***
 
-1. Drag one "**Chicken Meat Production**" component to the farm. For each group (Pullets and Cockerels), each management period for that group will consist of **400** animals. This means numbers of animals will be consistent throughout the management periods / year.
-2. Select the **Pullets** group. The start and end dates for each management period will be:
+1. Drag one "**Chicken Meat Production**" component to the farm. For the single group (Broilers), each management period for the group will consist of **800** animals. This means numbers of animals will be consistent throughout the management periods / year.
+2. Select the **Broilers** group. The start and end dates for each management period will be:
     - **Brooding Stage:** Start: January 1st, 2023 - End: January 22nd, 2023. 
     - **Rearing Stage:** Start: January 23rd, 2023 - End: June 26th, 2023.
     - **Rearing Stage:** Start: June 27th, 2023 - End: November 28th, 2023.
-3. For each management period, set number of animals to **400**.
+3. For each management period, set number of animals to **800**.
 4. Leave the entries in Housing and Manure as default.
-
-
-- The management data for the **Cockerels** group is the same as **Pullets**. Right click on the Cockerels group to activate the right click menu and select **Copy Management From -> Pullets**
-
-
 
 <br>
 <br>
