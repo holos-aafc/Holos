@@ -383,9 +383,9 @@ Click on the management period named **Extended Fall Grazing**. Ensure that the 
 
 <br>
 <p align="center">
-    <img src="../../Images/Training/en/figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/Training/en/Figure15_Updated.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 15: Beef Cow-Calf, Cow group</em>
+    <em>Figure 15: Beef Cow-Calf, Cow group (Updated for 2025)</em>
 </p> 
 <br> 
 
