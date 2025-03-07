@@ -5,6 +5,6 @@ namespace H.Core.Calculators.Tillage
     public interface ITillageFactorCalculator
     {
         double CalculateTillageFactor(Province province, SoilFunctionalCategory soilFunctionalCategory,
-                                      TillageType tillageType, CropType cropType, int perennialYear);
+                                      TillageType tillageType, CropType cropType);
     }
 }

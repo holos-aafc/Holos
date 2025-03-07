@@ -285,8 +285,7 @@ namespace H.Core.Services.LandManagement
                 province: soilData.Province,
                 soilFunctionalCategory: farm.GeographicData.DefaultSoilData.SoilFunctionalCategory,
                 tillageType: viewItem.TillageType,
-                cropType: viewItem.CropType,
-                perennialYear: viewItem.YearInPerennialStand);
+                cropType: viewItem.CropType);
 
             return Math.Round(result, CoreConstants.DefaultNumberOfDecimalPlaces);
         }

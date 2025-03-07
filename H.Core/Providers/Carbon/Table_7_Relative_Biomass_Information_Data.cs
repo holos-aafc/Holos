@@ -20,7 +20,6 @@ namespace H.Core.Providers.Carbon
 
         public CropType CropType { get; set; }
         public IrrigationType? IrrigationType { get; set; }
-        public double IrrigationAmount { get; set; }
         public double MoistureContentOfProduct { get; set; }
 
         /// <summary>
@@ -63,8 +62,6 @@ namespace H.Core.Providers.Carbon
         /// </summary>
         public double NitrogenContentExtraroot { get; set; }
 
-        public double NitrogenFertilizerRate { get; set; }
-        public double PhosphorusFertilizerRate { get; set; }
         public double IrrigationLowerRangeLimit { get; set; }
         public double IrrigationUpperRangeLimit { get; set; }
 

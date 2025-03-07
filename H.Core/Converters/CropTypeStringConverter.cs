@@ -73,8 +73,6 @@ namespace H.Core.Converters
                     return CropType.FallRye;
                 case "fieldpea":
                     return CropType.FieldPeas;
-                case "Flaxseed":
-                    return CropType.Flax;
                 case "flaxseed":
                     return CropType.FlaxSeed;
                 case "freshcornsweet":
@@ -177,6 +175,7 @@ namespace H.Core.Converters
                 case "perennialgrasses":
                     return CropType.PerennialGrasses;
                 case "potatoes":
+                case "potatos":
                 case "potato":
                     return CropType.Potatoes;
                 case "rice":
