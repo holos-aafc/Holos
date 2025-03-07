@@ -142,6 +142,9 @@ namespace H.Core.Models.LandManagement.Fields
         private string _tillageTypeString;
         private string _cropTypeStringWithYear;
 
+        private double _abovegroundNitrogenInputs;
+        private double _belowgroundNitrogenInputs;
+
         #endregion
 
         #region Constructors
@@ -1156,7 +1159,21 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedStrawNitrogen { get; set; }
         public double CombinedRootNitrogen { get; set; }
         public double CombinedExtrarootNitrogen { get; set; }
-        public double CombinedAboveGroundResidueNitrogen { get; set; }
+
+        private double _combinedAboveGroundResidueNitrogen;
+
+        public double CombinedAboveGroundResidueNitrogen
+        {
+            get
+            {
+                return _combinedAboveGroundResidueNitrogen;
+            }
+            set
+            {
+                SetProperty(ref _combinedAboveGroundResidueNitrogen, value);
+            }
+        }
+
         public double CombinedBelowGroundResidueNitrogen { get; set; }
         public double GrowingSeasonIrrigation { get; set; }
 
@@ -1171,6 +1188,18 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 SetProperty(ref _nitrogenFixationPercentage, value, () => this.NitrogenFixation = (value / 100.0));
             }
+        }
+
+        public double AbovegroundNitrogenInputs
+        {
+            get => _abovegroundNitrogenInputs;
+            set => SetProperty(ref _abovegroundNitrogenInputs, value);
+        }
+
+        public double BelowgroundNitrogenInputs
+        {
+            get => _belowgroundNitrogenInputs;
+            set => SetProperty(ref _belowgroundNitrogenInputs, value);
         }
 
         #endregion

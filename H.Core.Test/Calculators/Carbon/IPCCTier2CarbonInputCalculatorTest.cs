@@ -121,7 +121,7 @@ namespace H.Core.Test.Calculators.Carbon
                 BiomassCoefficientProduct = 0.6,
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 viewItem: viewItem, farm: new Farm());
 
             Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);

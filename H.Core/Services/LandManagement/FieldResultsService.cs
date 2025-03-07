@@ -69,6 +69,7 @@ namespace H.Core.Services.LandManagement
         private readonly INitrogenService _nitrogenService;
         private readonly ICarbonService _carbonService;
         private readonly IAnimalService _animalService;
+        private readonly IFieldComponentHelper _fieldComponentHelper;
 
         #endregion
 
@@ -195,6 +196,7 @@ namespace H.Core.Services.LandManagement
             _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
             _climateService = new ClimateService();
+            _fieldComponentHelper = new FieldComponentHelper();
         }
 
         #endregion
@@ -257,7 +259,7 @@ namespace H.Core.Services.LandManagement
                      * At this point there could be multiple items for one year (e.g. a main crop and a cover crop or an undersown crop), here we combine
                      * multiple inputs from same year into the main crop
                      */
-                    this.CombineInputsForAllCropsInSameYear(farm, detailViewItems, fieldSystemComponent);
+                    this.CombineInputsForAllCropsInSameYear(farm, detailViewItems);
 
                     // Merge multiple items with the same year into a single year view items so that no two view items have the same year when calculating ICBM results (ICBM calculations
                     // require exactly one item per year (with combined inputs when there is a secondary crop grown)

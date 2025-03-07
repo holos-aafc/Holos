@@ -258,6 +258,7 @@
     <Compile Include="Enumerations\YieldAssignmentMethod.cs" />
     <Compile Include="Events\FarmResultsCalculatedEvent.cs" />
     <Compile Include="Events\FarmResultsCalculatedEventArgs.cs" />
+    <Compile Include="Models\AdjoiningYears.cs" />
     <Compile Include="Models\Animals\AnimalComponentBase.cs" />
     <Compile Include="Models\Animals\AnimalGroup.cs" />
     <Compile Include="Models\Animals\Beef\BackgroundingComponent.cs" />
@@ -316,6 +317,7 @@
     <Compile Include="Models\LandManagement\Fields\BaleActivityBase.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Perennial.cs" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItemExtensions.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />

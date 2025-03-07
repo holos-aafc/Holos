@@ -43,7 +43,7 @@ namespace H.Core.Calculators.Carbon
             return slope.SlopeValue > 0;
         }
 
-        public void CalculateInputs(CropViewItem viewItem, Farm farm)
+        public void AssignInputs(CropViewItem viewItem, Farm farm)
         {
             var cropData = _slopeProvider.GetDataByCropType(viewItem.CropType);
 

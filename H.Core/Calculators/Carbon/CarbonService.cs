@@ -9,6 +9,8 @@ using H.Core.Models.Animals;
 using System;
 using System.Runtime.CompilerServices;
 using H.Core.Providers.AnaerobicDigestion;
+using H.Core.Services;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
 {
@@ -22,6 +24,7 @@ namespace H.Core.Calculators.Carbon
         private readonly IIPCCTier2CarbonInputCalculator _ipccTier2CarbonInputCalculator;
         private readonly IICBMCarbonInputCalculator _icbmCarbonInputCalculator;
         private readonly IAnimalService _animalService;
+        private readonly IFieldComponentHelper _fieldComponentHelper;
 
         #endregion
 
@@ -32,6 +35,7 @@ namespace H.Core.Calculators.Carbon
             _ipccTier2CarbonInputCalculator = new IPCCTier2CarbonInputCalculator();
             _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
             _animalService = new AnimalResultsService();
+            _fieldComponentHelper = new FieldComponentHelper();
         }
 
         #endregion
@@ -43,28 +47,88 @@ namespace H.Core.Calculators.Carbon
             return _ipccTier2CarbonInputCalculator.CanCalculateInputsForCrop(cropViewItem);
         }
 
-        public void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm)
         {
-            this.CalculateInputs(previousYear, viewItem, nextYear, farm);
+            this.AssignInputsAndLosses(tuple.PreviousYearViewItem, tuple.CurrentYearViewItem, tuple.NextYearViewItem, farm);
+        }
 
+        public void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        {
+            this.AssignInputs(previousYear, viewItem, nextYear, farm);
             this.CalculateLosses(viewItem, farm);
         }
 
-        public void CalculateInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm)
+        {
+            this.AssignInputs(viewItems, farm);
+            this.CalculateLosses(viewItems, farm);
+        }
+
+        public void CalculateLosses(List<CropViewItem> viewItems, Farm farm)
+        {
+            var orderedItems = viewItems.OrderBy(x => x.Year).ToList();
+
+            for (int index = 0; index < orderedItems.Count; index++)
+            {
+                CropViewItem currentYearItem = orderedItems[index];
+
+                this.CalculateLosses(currentYearItem, farm);
+            }
+        }
+
+        public void AssignInputs(List<CropViewItem> cropViewItems, Farm farm)
+        {
+            var orderedItems = cropViewItems.OrderBy(x => x.Year).ToList();
+
+            for (int index = 0; index < orderedItems.Count; index++)
+            {
+                var itemAtIndex = orderedItems.ElementAt(index);
+                var year = itemAtIndex.Year;
+                var tuple = _fieldComponentHelper.GetAdjoiningYears(orderedItems, year);
+
+                this.AssignInputs(
+                    previousYear: tuple.PreviousYearViewItem,
+                    viewItem: tuple.CurrentYearViewItem,
+                    nextYear: tuple.NextYearViewItem,
+                    farm: farm);
+            }
+        }
+
+        public void AssignInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
         {
             if (this.CanCalculateInputsUsingIpccTier2(viewItem))
             {
-                _ipccTier2CarbonInputCalculator.CalculateInputs(viewItem, farm);
+                _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm);
             }
             else
             {
-                _icbmCarbonInputCalculator.CalculateInputs(previousYear, viewItem, nextYear, farm);
+                _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
             }
         }
 
         public void CalculateLosses(CropViewItem cropViewItem, Farm farm)
         {
             this.CalculateCarbonLostFromHayExports(farm, cropViewItem);
+        }
+
+        public double SumTotalAbovegroundCarbonInput(List<CropViewItem> viewItems)
+        {
+            return viewItems.Sum(x => x.AboveGroundCarbonInput);
+        }
+
+        public double SumTotalBelowgroundCarbonInput(List<CropViewItem> viewItems)
+        {
+            return viewItems.Sum(x => x.BelowGroundCarbonInput);
+        }
+
+        public double SumTotalManureCarbonInput(List<CropViewItem> viewItems)
+        {
+            return viewItems.Sum(x => x.ManureCarbonInputsPerHectare);
+        }
+
+        public double SumTotalDigestateCarbonInput(List<CropViewItem> viewItems)
+        {
+            return viewItems.Sum(x => x.DigestateCarbonInputsPerHectare);
         }
 
         /// <summary>
@@ -214,6 +278,39 @@ namespace H.Core.Calculators.Carbon
             }
         }
 
+        /// <summary>
+        /// Once C inputs have been determined for all crops, this method will check if there are one or more crops grown in the same year. If there is, the total C
+        /// inputs from the crops being grown in the same year will be combined and assigned to the main crop for that year since it is the inputs from the main crop
+        /// that are used in the C models
+        /// </summary>
+        public void CombineCarbonInputs(
+            Farm farm,
+            List<CropViewItem> viewItems)
+        {
+            var distinctYears = viewItems.GetDistinctYears();
+            foreach (var year in distinctYears)
+            {
+                var viewItemsForYear = viewItems.GetItemsByYear(year);
+                var mainCropForYear = _fieldComponentHelper.GetMainCropForYear(viewItemsForYear, year);
+                var secondaryCropsForYear = viewItemsForYear.GetSecondaryCrops(mainCropForYear);
+
+                var totalAbovegroundCarbonFromCoverCrops = this.SumTotalAbovegroundCarbonInput(secondaryCropsForYear);
+                var totalBelowgroundCarbonFromCoverCrops = this.SumTotalBelowgroundCarbonInput(secondaryCropsForYear);
+                var totalManureCarbonFromCoverCrops = this.SumTotalManureCarbonInput(secondaryCropsForYear);
+                var totalDigestateCarbonFromCoverCrops = this.SumTotalDigestateCarbonInput(secondaryCropsForYear);
+
+                /*
+                 * Sum up the main crop and cover crop C inputs
+                 */
+
+                mainCropForYear.CombinedAboveGroundInput = mainCropForYear.AboveGroundCarbonInput + totalAbovegroundCarbonFromCoverCrops;
+                mainCropForYear.CombinedBelowGroundInput = mainCropForYear.BelowGroundCarbonInput + totalBelowgroundCarbonFromCoverCrops;
+                mainCropForYear.CombinedManureInput = mainCropForYear.ManureCarbonInputsPerHectare + totalManureCarbonFromCoverCrops;
+                mainCropForYear.CombinedDigestateInput = mainCropForYear.DigestateCarbonInputsPerHectare + totalDigestateCarbonFromCoverCrops;
+                mainCropForYear.TotalCarbonInputs = mainCropForYear.CombinedAboveGroundInput + mainCropForYear.CombinedBelowGroundInput + mainCropForYear.CombinedManureInput + mainCropForYear.CombinedDigestateInput;
+            }
+        }
+
         #endregion
 
         #region Private Methods
@@ -280,6 +377,28 @@ namespace H.Core.Calculators.Carbon
                 var result = (carbonUpdateForOtherPeriods + carbonUptakeForLastPeriod);
 
                 return new Tuple<double, double>(result, totalCarbonUptake);
+            }
+        }
+
+        public void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm)
+        {
+            if (farm.IsCommandLineMode == false)
+            {
+                return;
+            }
+
+            for (int i = 0; i < viewItems.Count; i++)
+            {
+                var itemAtIndex = viewItems.ElementAt(i);
+                var year = itemAtIndex.Year;
+                var tupleForYear = _fieldComponentHelper.GetAdjoiningYears(viewItems, year);
+                var currentYearViewItem = tupleForYear.CurrentYearViewItem;
+
+                // If the CLI user has not entered a value for aboveground, belowground, manure, or digestate C inputs we will need to assign C inputs now before the C model runs
+                if (currentYearViewItem.TotalCarbonInputs == 0)
+                {
+                    this.AssignInputsAndLosses(tupleForYear, farm);
+                }
             }
         }
 

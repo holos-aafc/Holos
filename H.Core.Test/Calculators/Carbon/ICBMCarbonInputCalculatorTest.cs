@@ -81,7 +81,7 @@ namespace H.Core.Test.Calculators.Carbon
 
 
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -128,7 +128,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -178,7 +178,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -251,7 +251,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -328,7 +328,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -366,7 +366,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -422,7 +422,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -464,7 +464,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -801,7 +801,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -848,7 +848,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -900,7 +900,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -948,7 +948,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -1002,7 +1002,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -1054,7 +1054,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
@@ -1106,7 +1106,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
@@ -1150,7 +1150,7 @@ namespace H.Core.Test.Calculators.Carbon
                 }
             };
 
-            _sut.CalculateInputs(
+            _sut.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,

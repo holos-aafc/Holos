@@ -19,7 +19,7 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            _icbmCarbonInputCalculator.CalculateInputs(
+            _icbmCarbonInputCalculator.AssignInputs(
                 previousYearViewItem: null,
                 currentYearViewItem: viewItem,
                 nextYearViewItem: null,

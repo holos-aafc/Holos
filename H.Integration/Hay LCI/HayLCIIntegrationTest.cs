@@ -486,7 +486,7 @@ namespace H.Integration.Hay_LCI
                     cropViewItem.PercentageOfRootsReturnedToSoil = 30;
                 }
 
-                _fieldResultsService.AssignCarbonInputs(new List<CropViewItem>(field.CropViewItems) {}, farm, field);
+                _fieldResultsService.AssignCarbonInputs(new List<CropViewItem>(field.CropViewItems) {}, farm);
 
                 currentCount++;
 

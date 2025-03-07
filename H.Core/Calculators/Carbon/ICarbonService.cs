@@ -3,13 +3,14 @@ using H.Core.Models;
 using H.Core.Emissions.Results;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
 {
     public interface ICarbonService
     {
         bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem);
-        void CalculateInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
+        void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
         void CalculateLosses(CropViewItem cropViewItem, Farm farm);
 
         double CalculateManureCarbonInputFromGrazingAnimals(
@@ -53,5 +54,47 @@ namespace H.Core.Calculators.Carbon
             List<CropViewItem> viewItems);
 
         double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm);
+        void AssignInputs(List<CropViewItem> cropViewItems, Farm farm);
+        void CalculateLosses(List<CropViewItem> viewItems, Farm farm);
+        void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm);
+        void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm);
+
+        /// <summary>
+        /// Totals the aboveground carbon input
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        double SumTotalAbovegroundCarbonInput(List<CropViewItem> viewItems);
+
+        /// <summary>
+        /// Totals the belowground carbon input
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        double SumTotalBelowgroundCarbonInput(List<CropViewItem> viewItems);
+
+        /// <summary>
+        /// Totals the manure carbon input
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        double SumTotalManureCarbonInput(List<CropViewItem> viewItems);
+
+        /// <summary>
+        /// Totals the digestate carbon input
+        /// 
+        /// (kg C ha^-1)
+        /// </summary>
+        double SumTotalDigestateCarbonInput(List<CropViewItem> viewItems);
+
+        /// <summary>
+        /// Combines C inputs for all items by year. This would combine the inputs from the main crop grown that year plus the cover crop (if specified by user). This must be called
+        /// after all inputs from crops, manure, etc. have been calculated for each detail view item since we simply add up the total above and below ground C inputs for each
+        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM/IPCC Tier 2 calculations
+        /// </summary>
+        void CombineCarbonInputs(Farm farm,
+            List<CropViewItem> viewItems);
+
+        void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm);
     }
 }

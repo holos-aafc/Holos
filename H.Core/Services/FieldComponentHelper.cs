@@ -9,6 +9,7 @@ using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Crops;
+using static H.Core.Services.LandManagement.FieldResultsService;
 
 namespace H.Core.Services
 {
@@ -219,6 +220,106 @@ namespace H.Core.Services
                     _fertilizerApplicationViewItemMapper.Map(fertilizerApplicationViewItem, copiedFertilizerApplicationViewItem);
                     copiedViewItem.FertilizerApplicationViewItems.Add(copiedFertilizerApplicationViewItem);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop"/> to determine which view item
+        /// is the main crop for the particular year.
+        /// </summary>
+        public CropViewItem GetMainCropForYear(IEnumerable<CropViewItem> viewItems,
+            int year)
+        {
+            var viewItemsForYear = viewItems.GetByYear(year);
+            if (viewItemsForYear.Any() == false)
+            {
+                return null;
+            }
+
+            if (viewItemsForYear.Count() == 1)
+            {
+                // There is only one crop grown, return it as the main crop
+                return viewItemsForYear.Single();
+            }
+
+            var mainCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == false);
+            if (mainCrop != null)
+            {
+                return mainCrop;
+            }
+            else
+            {
+                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
+                return viewItemsForYear.First();
+            }
+        }
+
+        public CropViewItem GetCoverCropForYear(
+            IEnumerable<CropViewItem> viewItems,
+            int year)
+        {
+            var viewItemsForYear = viewItems.GetByYear(year);
+            if (viewItemsForYear.Any() == false)
+            {
+                return null;
+            }
+
+            if (viewItemsForYear.Count() == 1 && viewItemsForYear.Single().IsSecondaryCrop == false)
+            {
+                // There is only one crop grown and it is not a cover crop
+                return null;
+            }
+
+            var coverCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == true);
+            if (coverCrop != null)
+            {
+                return coverCrop;
+            }
+            else
+            {
+                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
+                return null;
+            }
+        }
+
+        public AdjoiningYears GetAdjoiningYears(
+            IEnumerable<CropViewItem> viewItems,
+            int year)
+        {
+            var previousYear = year - 1;
+            var nextYear = year + 1;
+
+            // Get all items from the same year
+            var viewItemsForYear = viewItems.GetItemsByYear(year);
+
+            var mainCropForCurrentYear = this.GetMainCropForYear(viewItemsForYear, year);
+            if (mainCropForCurrentYear.CropType.IsPerennial())
+            {
+                // Items with same stand id
+                var perennialItemsInStand = viewItems.Where(x =>
+                    x.CropType.IsPerennial() &&
+                    x.PerennialStandGroupId.Equals(mainCropForCurrentYear.PerennialStandGroupId));
+                var previousItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == previousYear);
+                var nextItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == nextYear);
+
+                return new AdjoiningYears()
+                {
+                    PreviousYearViewItem = previousItemInStand,
+                    CurrentYearViewItem = mainCropForCurrentYear,
+                    NextYearViewItem = nextItemInStand
+                };
+            }
+            else
+            {
+                var previousYearViewItem = viewItems.SingleOrDefault(x => x.Year == previousYear);
+                var nextYearViewItem = viewItems.SingleOrDefault(x => x.Year == nextYear);
+
+                return new AdjoiningYears()
+                {
+                    PreviousYearViewItem = previousYearViewItem,
+                    CurrentYearViewItem = mainCropForCurrentYear,
+                    NextYearViewItem = nextYearViewItem,
+                };
             }
         }
 
