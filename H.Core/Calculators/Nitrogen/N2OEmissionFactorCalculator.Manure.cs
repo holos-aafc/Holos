@@ -227,8 +227,6 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
-
-
         /// <summary>
         /// Equation 4.6.1-9
         ///
@@ -366,6 +364,8 @@ namespace H.Core.Calculators.Nitrogen
         /// <summary>
         /// Equation 4.6.2-12
         /// Equation 4.6.2-20
+        ///
+        /// (kg NH3-N)
         /// </summary>
         public double CalculateNH3NLossFromLandAppliedManure(
             Farm farm, 
@@ -401,28 +401,39 @@ namespace H.Core.Calculators.Nitrogen
             }
             else
             {
+                var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
                 var temperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
-                var volumeOfManureUsed = manureApplicationViewItem.AmountOfManureAppliedPerHectare * viewItem.Area;
-                var emissionFraction = 0d;
-                if (temperature >= 15)
-                {
-                    emissionFraction = 0.85;
-                }
-                else if (temperature >= 10 && temperature < 15)
-                {
-                    emissionFraction = 0.73;
-                }
-                else if (temperature >= 5 && temperature < 10)
-                {
-                    emissionFraction = 0.35;
-                }
-                else
-                {
-                    emissionFraction = 0.25;
-                }
+                var emissionFactorForPoultry = this.GetAmmoniaEmissionFactorForPoultryManure(temperature);
 
-                result = volumeOfManureUsed * emissionFraction;
+                result = emissionFactorForPoultry * tanUsed;
             }
+
+            return result;
+        }
+
+        public double GetAmmoniaEmissionFactorForPoultryManure(double temperature)
+        {
+            var result = 0d;
+
+            var emissionFraction = 0d;
+            if (temperature >= 15)
+            {
+                emissionFraction = 0.85;
+            }
+            else if (temperature >= 10 && temperature < 15)
+            {
+                emissionFraction = 0.73;
+            }
+            else if (temperature >= 5 && temperature < 10)
+            {
+                emissionFraction = 0.35;
+            }
+            else
+            {
+                emissionFraction = 0.25;
+            }
+
+            result =  emissionFraction;
 
             return result;
         }
@@ -491,6 +502,37 @@ namespace H.Core.Calculators.Nitrogen
             return weightedEmissionFactor;
         }
 
+        public double CalculateWeightedLandApplicationEmissionFactorForPoultry(
+            int year,
+            Farm farm)
+        {
+            var itemsByYear = farm.GetCropDetailViewItemsByYear(year, false);
+            var fieldAreasAndEmissionFactors = new List<WeightedAverageInput>();
+
+            foreach (var cropViewItem in itemsByYear)
+            {
+                // Each field can have multiple manure applications, to simplify emission factor calculation take first application if there is more than
+                // one. Alternative is to take average of emission factors calculated for each manure application
+                var manureApplication = cropViewItem.ManureApplicationViewItems.FirstOrDefault();
+                if (manureApplication == null)
+                {
+                    manureApplication = new ManureApplicationViewItem() { DateOfApplication = new DateTime(year, 10, 1) };
+                }
+
+                var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplication.DateOfApplication);
+                var emissionFactor = this.GetAmmoniaEmissionFactorForPoultryManure(averageDailyTemperature);
+                fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
+                {
+                    Value = emissionFactor,
+                    Weight = cropViewItem.Area,
+                });
+            }
+
+            var weightedEmissionFactor = this.CalculateWeightedEmissionFactor(fieldAreasAndEmissionFactors);
+
+            return weightedEmissionFactor;
+        }
+
         /// <summary>
         /// Equation 4.6.2-6
         /// </summary>
@@ -549,6 +591,28 @@ namespace H.Core.Calculators.Nitrogen
             return results;
         }
 
+        public List<Tuple<double, AnimalType>> CalculateAmmoniaFromLeftOverPoultryManureForFarm(
+            int year,
+            Farm farm)
+        {
+            var results = new List<Tuple<double, AnimalType>>();
+
+            var poultryWeightedFactor = this.CalculateWeightedLandApplicationEmissionFactorForPoultry(year, farm);
+
+            var tanRemainingForAllAnimalTypes = this.CalculateTANRemainingForAllManureTypes(farm, year);
+            foreach (var tanRemainingForAllAnimalType in tanRemainingForAllAnimalTypes.Where(x => x.Item2.IsPoultryType()))
+            {
+                var tan = tanRemainingForAllAnimalType.Item1;
+                var ammonia = tan * poultryWeightedFactor;
+
+                var result = new Tuple<double, AnimalType>(ammonia, tanRemainingForAllAnimalType.Item2);
+
+                results.Add(result);
+            }
+
+            return results;
+        }
+
         /// <summary>
         /// Equation 4.6.2-8
         /// </summary>
@@ -589,6 +653,8 @@ namespace H.Core.Calculators.Nitrogen
 
         /// <summary>
         /// Equation 4.6.2-12
+        ///
+        /// (kg NH3-N)
         /// </summary>
         public double CalculateNH3NLossFromFarmSourcedLandAppliedManureForField(
             Farm farm,
@@ -720,10 +786,15 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalAmmoniaFromBeefAndDairyLeftOverManure = CalculateAmmoniacalLossFromLeftOverBeefAndDairyManureForField(year, farm, cropViewItem);
 
+            var poultry = this.CalculateAmmoniaFromLeftOverPoultryManureForFarm(year, farm);
+            var totalAmmoniaFromLeftOverPoultryManure = poultry.Sum(x => x.Item1);
+
             var areaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, cropViewItem.Year);
             var areaOfField = cropViewItem.Area;
 
-            result = (totalAmmoniaFromBeefAndDairyLeftOverManure + (totalAmmoniaLeftOverForSheepSwineAndOtherAnimals *(areaOfField / areaOfFarm))) ;
+            var poultryEmissions = totalAmmoniaFromLeftOverPoultryManure * (areaOfField / areaOfFarm);
+
+            result = (poultryEmissions + totalAmmoniaFromBeefAndDairyLeftOverManure + (totalAmmoniaLeftOverForSheepSwineAndOtherAnimals *(areaOfField / areaOfFarm))) ;
 
             return result;
         }

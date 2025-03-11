@@ -186,7 +186,7 @@ namespace H.Core.Services.LandManagement
                     this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 
-                //// Combine inputs now that we have C and N inputs set for all items
+                // Combine inputs now that we have C and N inputs set for all items
                 this.CombineInputsForAllCropsInSameYear(farm, runInPeriodItems);
 
                 // Merge all run in period items

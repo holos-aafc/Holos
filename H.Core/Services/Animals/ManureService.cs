@@ -117,7 +117,6 @@ namespace H.Core.Services.Animals
             var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manualApplicationViewItem);
             var totalTANCreated = this.GetTotalTANCreated(manualApplicationViewItem.DateOfApplication.Year, manualApplicationViewItem.AnimalType);
 
-
             return fractionUsed * totalTANCreated;
         }
 
