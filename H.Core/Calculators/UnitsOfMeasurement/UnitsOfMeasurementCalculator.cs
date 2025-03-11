@@ -231,7 +231,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         }
 
         /// <summary>
-        /// This does the opposite of <see cref="GetMetricValueFromViewModels"/>.  When the Holos equation inputs change (if at all) we want to make sure that
+        /// This does the opposite of <see cref="GetMetricValueFromViewModels"/>. When the Holos equation inputs change (if at all) we want to make sure that
         /// the GUI will also see those changes made. For use just with the VM's.
         /// </summary>
         /// <param name="measurementSystemType">the units of measurement that the farm is using</param>

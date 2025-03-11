@@ -121,11 +121,10 @@ namespace H.Core.Calculators.Infrastructure
             return substrateFlowRate;
         }
 
-        public SubstrateFlowInformation GetStoredManureFlowRate(
-            AnaerobicDigestionComponent component,
+        public SubstrateFlowInformation GetStoredManureFlowRate(AnaerobicDigestionComponent component,
             GroupEmissionsByDay dailyEmissions,
-            ADManagementPeriodViewItem adManagementPeriodViewItem, 
-            GroupEmissionsByDay previousDaysEmissions)
+            ADManagementPeriodViewItem adManagementPeriodViewItem,
+            GroupEmissionsByDay previousDaysEmissions, Farm farm)
         {
             var managementPeriod = adManagementPeriodViewItem.ManagementPeriod;
 
@@ -145,6 +144,8 @@ namespace H.Core.Calculators.Infrastructure
             var totalMassFlowOfSubstrate = 0d;
             var animalType = managementPeriod.AnimalType;
             var nitrogenContentOfManure = managementPeriod.ManureDetails.FractionOfNitrogenInManure;
+            var manureComposition = farm.GetManureCompositionData(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
+            var moistureContent = manureComposition.MoistureContent;
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsPoultryType())
             {
                 // Equation 4.8.1-16
@@ -161,7 +162,7 @@ namespace H.Core.Calculators.Infrastructure
             substrateFlowRate.TotalMassFlowOfSubstrate = totalMassFlowOfSubstrate;
 
             // Equation 4.8.1-18
-            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriodViewItem.TotalSolids / 1000.0);
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (1 - (moistureContent / 100.0));
 
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
@@ -796,7 +797,7 @@ namespace H.Core.Calculators.Infrastructure
                                 var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,
-                                    adManagementPeriod, previousDayEmissions);
+                                    adManagementPeriod, previousDayEmissions, farm);
 
                                 flows.Add(flowRates);
                             }
