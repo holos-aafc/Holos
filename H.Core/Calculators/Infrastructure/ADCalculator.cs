@@ -848,7 +848,9 @@ namespace H.Core.Calculators.Infrastructure
                 }
 
                 // Equation 4.8.6-2
-                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = dailyOutput.FlowOfAllCarbon -  CoreConstants.ConvertToC(dailyOutput.MethaneEmissionsDuringStorage);
+                var flowOfCarbonInDigestate = flowsForDate.Sum(x => x.CarbonFlowInDigestate);
+                var totalCarbon = flowOfCarbonInDigestate - CoreConstants.ConvertToC(dailyOutput.MethaneEmissionsDuringStorage);
+                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = totalCarbon;
                 if (dailyOutput.TotalCarbonInDigestateAvailableForLandApplication < 0)
                 {
                     dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = 0;
