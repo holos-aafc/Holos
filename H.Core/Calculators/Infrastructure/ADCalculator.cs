@@ -172,9 +172,9 @@ namespace H.Core.Calculators.Infrastructure
                 // Equation 4.8.1-19
                 var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * 1000);
                 var b = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication - (previousDaysEmissions == null ? 0 : previousDaysEmissions.TotalVolumeOfManureAvailableForLandApplication);
-                var c = fractionUsed * 1000;
+                var c = fractionUsed * 1000; 
 
-                var result = a * (b - c);
+                var result = a * (b * c);
 
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate = result;
 
