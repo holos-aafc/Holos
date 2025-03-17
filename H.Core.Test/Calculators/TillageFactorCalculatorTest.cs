@@ -49,25 +49,25 @@ namespace H.Core.Test.Calculators
         {
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.Ontario, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.Barley, 0));
+                                                               CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.Quebec, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.Barley, 0));
+                                                               CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.BritishColumbia, SoilFunctionalCategory.Black,
-                                                               TillageType.NoTill, CropType.Barley, 0));
+                                                               TillageType.NoTill, CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.Quebec, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.Barley, 0));
+                                                               CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.PrinceEdwardIsland, SoilFunctionalCategory.Black,
-                                                               TillageType.NoTill, CropType.Barley, 0));
+                                                               TillageType.NoTill, CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.Newfoundland, SoilFunctionalCategory.Black,
-                                                               TillageType.NoTill, CropType.Barley, 0));
+                                                               TillageType.NoTill, CropType.Barley));
             Assert.AreEqual(1,
                             _calculator.CalculateTillageFactor(Province.NovaScotia, SoilFunctionalCategory.Black,
-                                                               TillageType.NoTill, CropType.Barley, 0));
+                                                               TillageType.NoTill, CropType.Barley));
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace H.Core.Test.Calculators
         {
             Assert.AreEqual(0.6,
                             _calculator.CalculateTillageFactor(Province.Manitoba, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.TameLegume, 1));
+                                                               CropType.TameLegume));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace H.Core.Test.Calculators
         {
             Assert.AreEqual(0.6,
                             _calculator.CalculateTillageFactor(Province.Manitoba, SoilFunctionalCategory.Black, TillageType.NoTill,
-                                                               CropType.TameLegume, 2));
+                                                               CropType.TameLegume));
         }
 
         #endregion
