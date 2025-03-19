@@ -832,7 +832,9 @@ namespace H.Core.Services.Animals
         public double CalculateVolatileSolidsLoaded(
             double volatileSolidsProduced)
         {
-            return volatileSolidsProduced * 0.45;
+            var managementAndDesignPracticeFactor = 1.0;
+
+            return volatileSolidsProduced * managementAndDesignPracticeFactor;
         }
 
         /// <summary>
