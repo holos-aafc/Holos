@@ -41,7 +41,6 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
-
         #endregion
 
         #region Private Methods
@@ -51,7 +50,7 @@ namespace H.Core.Services.Animals
             ManagementPeriod managementPeriod, 
             DateTime dateTime, 
             GroupEmissionsByDay previousDaysEmissions, 
-            AnimalGroup animalGroup, 
+            AnimalGroup animalGroup,
             Farm farm)
         {
             var dailyEmissions = new GroupEmissionsByDay();
@@ -141,7 +140,8 @@ namespace H.Core.Services.Animals
                     dailyEmissions, 
                     previousDaysEmissions, 
                     managementPeriod,
-                    temperature);
+                    temperature, 
+                    farm);
             }
 
             base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
@@ -309,7 +309,6 @@ namespace H.Core.Services.Animals
         #endregion
 
         #region Equations
-
 
         /// <summary>
         /// Equation 4.2.1-20

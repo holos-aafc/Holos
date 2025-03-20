@@ -177,7 +177,8 @@ namespace H.Core.Services.Animals
                     dailyEmissions,
                     previousDaysEmissions,
                     managementPeriod,
-                    temperature);
+                    temperature, 
+                    farm);
             }
 
             base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
@@ -476,7 +477,8 @@ namespace H.Core.Services.Animals
                     dailyEmissions,
                     previousDaysEmissions,
                     managementPeriod,
-                    temperature);
+                    temperature, 
+                    farm);
             }
 
             base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);

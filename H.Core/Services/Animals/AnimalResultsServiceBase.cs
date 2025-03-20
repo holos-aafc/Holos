@@ -733,12 +733,12 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay dailyEmissions,
             GroupEmissionsByDay previousDaysEmissions,
             ManagementPeriod managementPeriod,
-            double temperature)
+            double temperature, Farm farm)
         {
-            dailyEmissions.KelvinAirTemperature = this.CalculateDegreeKelvin(temperature);
+            var averageTemperatureOverLast30Days = this.CalculateDegreesKelvinOverLast30Days(farm, dailyEmissions);
 
             dailyEmissions.ClimateFactor = this.CalculateClimateFactor(
-                kelvinAirTemperature: dailyEmissions.KelvinAirTemperature);
+                averageKelvinAirTemperature: averageTemperatureOverLast30Days);
 
             dailyEmissions.VolatileSolidsProduced = this.CalculateVolatileSolidsProduced(
                 volatileSolids: dailyEmissions.VolatileSolids,
@@ -782,33 +782,64 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.1.3-1
         /// </summary>
-        /// <param name="degreesCelsius">Air temperature (degrees Celsius)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateDegreeKelvin(
-            double degreesCelsius)
+        /// <param name="farm"></param>
+        /// <param name="groupEmissionsByDay"></param>
+        /// <returns>Average air temperature over last 30 days (degrees Kelvin)</returns>
+        public double CalculateDegreesKelvinOverLast30Days(Farm farm, GroupEmissionsByDay groupEmissionsByDay)
         {
-            if (degreesCelsius <= 0)
+            var degreesKelvinList = new List<double>();
+
+            var dateNow = groupEmissionsByDay.DateTime;
+            var dateStart = dateNow.Subtract(TimeSpan.FromDays(30)).Date;
+            var climateInDateRange = farm.ClimateData.DailyClimateData.Where(x => x.Date <= dateNow.Date && x.Date >= dateStart.Date).OrderBy(x => x.Date).ToList();
+
+            if (climateInDateRange.Any() == false)
             {
-                degreesCelsius = 1;
+                var monthlyAverage = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateNow.Year, (Months)dateNow.Month);
+                degreesKelvinList.Add(monthlyAverage);
+            }
+            else
+            {
+                foreach (var dailyClimateData in climateInDateRange)
+                {
+                    var degreesKelvin = 0d;
+                    var degreesCelsius = dailyClimateData.MeanDailyAirTemperature;
+                    if (dailyClimateData.MeanDailyAirTemperature <= 0)
+                    {
+                        degreesCelsius = 1;
+                    }
+
+                    degreesKelvin = degreesCelsius + 273.15;
+                    degreesKelvinList.Add(degreesKelvin);
+                }
             }
 
-            return degreesCelsius + 273.15;
+            var result = degreesKelvinList.Average();
+
+            return result;
         }
 
         /// <summary>
         /// Equation 4.1.3-2
         /// </summary>
-        /// <param name="kelvinAirTemperature">Air temperature (degrees Kelvin)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateClimateFactor(
-            double kelvinAirTemperature)
+        /// <param name="averageKelvinAirTemperature">Air temperature (degrees Kelvin)</param>
+        /// <returns>Average air temperature over last 30 days(degrees Kelvin)</returns>
+        public double CalculateClimateFactor(double averageKelvinAirTemperature)
         {
-            const double t1 = 303.16;
+            const double t1 = 308.16;
+            var t2 = averageKelvinAirTemperature;
 
-            var numerator = 15175 * (kelvinAirTemperature - t1);
-            var denominator = 1.987 * kelvinAirTemperature * t1;
+            const double activationEnergy = 19347.0;
+            const double idealGasConstant = 1.987;
 
-            return Math.Exp(numerator / denominator);
+            var numerator = activationEnergy * (t2 - t1);
+            var denominator = idealGasConstant * t1 * t2;
+
+            var exponent = Math.Exp(numerator / denominator);
+
+            var result = exponent / 30;
+
+            return result;
         }
 
         /// <summary>
