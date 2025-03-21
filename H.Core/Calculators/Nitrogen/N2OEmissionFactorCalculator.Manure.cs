@@ -403,15 +403,15 @@ namespace H.Core.Calculators.Nitrogen
             {
                 var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
                 var temperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
-                var emissionFactorForPoultry = this.GetAmmoniaEmissionFactorForPoultryManure(temperature);
+                var fractionVolatilized = this.GetFractionOfPoultryManureVolatilized(temperature);
 
-                result = emissionFactorForPoultry * tanUsed;
+                result = fractionVolatilized * tanUsed;
             }
 
             return result;
         }
 
-        public double GetAmmoniaEmissionFactorForPoultryManure(double temperature)
+        public double GetFractionOfPoultryManureVolatilized(double temperature)
         {
             var result = 0d;
 
@@ -502,7 +502,7 @@ namespace H.Core.Calculators.Nitrogen
             return weightedEmissionFactor;
         }
 
-        public double CalculateWeightedLandApplicationEmissionFactorForPoultry(
+        public double CalculateWeightedLandApplicationFractionForPoultry(
             int year,
             Farm farm)
         {
@@ -520,10 +520,10 @@ namespace H.Core.Calculators.Nitrogen
                 }
 
                 var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplication.DateOfApplication);
-                var emissionFactor = this.GetAmmoniaEmissionFactorForPoultryManure(averageDailyTemperature);
+                var fractionOfPoultryManureVolatilized = this.GetFractionOfPoultryManureVolatilized(averageDailyTemperature);
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {
-                    Value = emissionFactor,
+                    Value = fractionOfPoultryManureVolatilized,
                     Weight = cropViewItem.Area,
                 });
             }
@@ -597,13 +597,13 @@ namespace H.Core.Calculators.Nitrogen
         {
             var results = new List<Tuple<double, AnimalType>>();
 
-            var poultryWeightedFactor = this.CalculateWeightedLandApplicationEmissionFactorForPoultry(year, farm);
+            var fractionOfManureVolatilized = this.CalculateWeightedLandApplicationFractionForPoultry(year, farm);
 
             var tanRemainingForAllAnimalTypes = this.CalculateTANRemainingForAllManureTypes(farm, year);
             foreach (var tanRemainingForAllAnimalType in tanRemainingForAllAnimalTypes.Where(x => x.Item2.IsPoultryType()))
             {
                 var tan = tanRemainingForAllAnimalType.Item1;
-                var ammonia = tan * poultryWeightedFactor;
+                var ammonia = tan * fractionOfManureVolatilized;
 
                 var result = new Tuple<double, AnimalType>(ammonia, tanRemainingForAllAnimalType.Item2);
 
@@ -786,15 +786,15 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalAmmoniaFromBeefAndDairyLeftOverManure = CalculateAmmoniacalLossFromLeftOverBeefAndDairyManureForField(year, farm, cropViewItem);
 
-            var poultry = this.CalculateAmmoniaFromLeftOverPoultryManureForFarm(year, farm);
-            var totalAmmoniaFromLeftOverPoultryManure = poultry.Sum(x => x.Item1);
+            var totalAmmoniaFromPoultryLeftOverManure = this.CalculateAmmoniaFromLeftOverPoultryManureForFarm(year, farm);
+            var totalAmmoniaFromLeftOverPoultryManure = totalAmmoniaFromPoultryLeftOverManure.Sum(x => x.Item1);
 
             var areaOfFarm = farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, cropViewItem.Year);
             var areaOfField = cropViewItem.Area;
 
             var poultryEmissions = totalAmmoniaFromLeftOverPoultryManure * (areaOfField / areaOfFarm);
 
-            result = (poultryEmissions + totalAmmoniaFromBeefAndDairyLeftOverManure + (totalAmmoniaLeftOverForSheepSwineAndOtherAnimals *(areaOfField / areaOfFarm))) ;
+            result = (poultryEmissions + totalAmmoniaFromBeefAndDairyLeftOverManure + (totalAmmoniaLeftOverForSheepSwineAndOtherAnimals * (areaOfField / areaOfFarm)));
 
             return result;
         }
