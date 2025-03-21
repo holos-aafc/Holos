@@ -73,8 +73,9 @@ namespace H.Core.Calculators.Infrastructure
             };
 
             var fractionAdded = adManagementPeriod.DailyFractionOfManureAdded;
-            var manureComposition =
-                farm.GetManureCompositionData(ManureStateType.Pasture, managementPeriod.AnimalType);
+
+            // See section 4.8.1 (fresh manure always uses pasture values)
+            var manureComposition = farm.GetManureCompositionData(ManureStateType.Pasture, managementPeriod.AnimalType);
 
             // Equation 4.8.1-2
             substrateFlowRate.TotalMassFlowOfSubstrate =
@@ -82,9 +83,10 @@ namespace H.Core.Calculators.Infrastructure
                  managementPeriod.HousingDetails.UserDefinedBeddingRate * managementPeriod.NumberOfAnimals) *
                 fractionAdded;
 
+            var moistureContent = manureComposition.MoistureContent;
+
             // Equation 4.8.1-3
-            substrateFlowRate.TotalSolidsFlowOfSubstrate =
-                substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriod.TotalSolids / 1000);
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (1 - (moistureContent / 100.0));
 
             // Equation 4.8.1-4
             substrateFlowRate.VolatileSolidsFlowOfSubstrate =
@@ -322,8 +324,8 @@ namespace H.Core.Calculators.Infrastructure
             DigestorDailyOutput digestorDailyOutput)
         {
             var temperature =
-                farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months) dateTime.Month);
-            var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
+                farm.ClimateData.GetMeanTemperatureForDay(dateTime);
+            var methaneEmissionFactorDuringStorage = 0.0176 * Math.Pow(temperature, 2) - 0.0118 * temperature + 0.0743;
 
             // Equation 4.8.5-1
             digestorDailyOutput.MethaneEmissionsDuringStorage = (methaneEmissionFactorDuringStorage / 1000000.0)*
