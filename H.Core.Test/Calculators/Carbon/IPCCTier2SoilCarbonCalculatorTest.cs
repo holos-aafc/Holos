@@ -14,6 +14,7 @@ using H.Core.Test.Calculators.Carbon;
 using H.Core.Providers.Climate;
 using H.Core.Providers;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Emissions.Results;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Carbon
@@ -876,7 +877,7 @@ namespace H.Core.Test.Calculators.Carbon
 
             foreach (var viewItem in viewItems)
             {
-                _inputCalculator.AssignInputs(viewItem, new Farm());
+                _inputCalculator.AssignInputs(viewItem, new Farm(), new List<AnimalComponentEmissionsResults>());
             }
 
             _sut.CropResiduePool = 100;

@@ -10,7 +10,8 @@ namespace H.Core.Calculators.Carbon
     public interface ICarbonService
     {
         bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem);
-        void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm);
+        void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults);
         void CalculateLosses(CropViewItem cropViewItem, Farm farm);
 
         double CalculateManureCarbonInputFromGrazingAnimals(
@@ -54,10 +55,12 @@ namespace H.Core.Calculators.Carbon
             List<CropViewItem> viewItems);
 
         double CalculateTotalDryMatterLossFromResidueExports(CropViewItem cropViewItem, Farm farm);
-        void AssignInputs(List<CropViewItem> cropViewItems, Farm farm);
+        void AssignInputs(List<CropViewItem> cropViewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults);
         void CalculateLosses(List<CropViewItem> viewItems, Farm farm);
-        void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm);
-        void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm);
+        void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults);
+        void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm, List<AnimalComponentEmissionsResults> animalResults);
 
         /// <summary>
         /// Totals the aboveground carbon input
@@ -95,6 +98,7 @@ namespace H.Core.Calculators.Carbon
         void CombineCarbonInputs(Farm farm,
             List<CropViewItem> viewItems);
 
-        void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm);
+        void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults);
     }
 }

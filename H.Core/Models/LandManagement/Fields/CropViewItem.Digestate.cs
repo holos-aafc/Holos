@@ -15,6 +15,7 @@ namespace H.Core.Models.LandManagement.Fields
         private ObservableCollection<DigestateApplicationViewItem> _digestateApplicationViewItems;
 
         private double _digestateCarbonInputsPerHectare;
+        private double _digestateCarbonInputsPerHectareFromApplicationsOnly;
 
         private BiogasAndMethaneProductionParametersData _biogasAndMethaneProductionParametersData;
 
@@ -25,12 +26,23 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// (kg C ha^-1)
         ///
-        /// Total digestate C from all digestate applications
+        /// Total digestate C from all digestate applications, remaining digestate, etc.
         /// </summary>
         public double DigestateCarbonInputsPerHectare
         {
             get { return _digestateCarbonInputsPerHectare;}
             set { SetProperty(ref _digestateCarbonInputsPerHectare, value); }
+        }
+
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total digestate C from all digestate applications. Does not inlcude remaining amounts
+        /// </summary>
+        public double DigestateCarbonInputsPerHectareFromApplicationsOnly
+        {
+            get { return _digestateCarbonInputsPerHectareFromApplicationsOnly; }
+            set { SetProperty(ref _digestateCarbonInputsPerHectareFromApplicationsOnly, value); }
         }
 
         public ObservableCollection<DigestateApplicationViewItem> DigestateApplicationViewItems

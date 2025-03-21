@@ -132,7 +132,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _tillageFactor;
         private double _managementFactor;
         private double _manureCarbonInput;
-        private double _manureCarbonPerHectare;
+        private double _manureCarbonPerHectare; 
+        private double _manureCarbonPerHectareRemaining;
         private double _ligninContent;
 
         private string _timePeriodCategoryString;
@@ -991,12 +992,23 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// (kg C ha^-1)
         ///
-        /// Total manure C from all manure applications
+        /// Total manure C from all manure applications, remaining manure, and imports
         /// </summary>
         public double ManureCarbonInputsPerHectare
         {
             get { return _manureCarbonPerHectare; }
             set { SetProperty(ref _manureCarbonPerHectare, value); }
+        }
+
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total manure C from manure applications only
+        /// </summary>
+        public double ManureCarbonInputsFromManureOnly
+        {
+            get { return _manureCarbonPerHectareRemaining; }
+            set { SetProperty(ref _manureCarbonPerHectareRemaining, value); }
         }
 
         public double TillageFactor

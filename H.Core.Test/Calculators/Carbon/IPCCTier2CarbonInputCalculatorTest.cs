@@ -2,7 +2,9 @@
 using H.Core.Models.LandManagement.Fields;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using H.Core.Calculators.Carbon;
+using H.Core.Emissions.Results;
 using H.Core.Models;
 
 namespace H.Core.Test.Calculators.Carbon
@@ -122,7 +124,7 @@ namespace H.Core.Test.Calculators.Carbon
             };
 
             _sut.AssignInputs(
-                viewItem: viewItem, farm: new Farm());
+                viewItem: viewItem, farm: new Farm(), new List<AnimalComponentEmissionsResults>());
 
             Assert.AreEqual(2157.45888556357, viewItem.AboveGroundCarbonInput, 1);
             Assert.AreEqual(997.775453968351, viewItem.BelowGroundCarbonInput, 1);

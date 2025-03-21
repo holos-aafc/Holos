@@ -51,8 +51,10 @@ namespace H.Core.Services.LandManagement
             var mainCrops = viewItems.GetMainCrops();
             var secondaryCrops = viewItems.GetSecondaryCrops();
 
-            _carbonService.AssignInputsAndLosses(mainCrops, farm);
-            _carbonService.AssignInputsAndLosses(secondaryCrops, farm);
+            var animalResults = _animalService.GetAnimalResults(farm);
+
+            _carbonService.AssignInputsAndLosses(mainCrops, farm, animalResults);
+            _carbonService.AssignInputsAndLosses(secondaryCrops, farm, animalResults);
 
             this.CalculateFactors(mainCrops, farm);
         }
@@ -167,7 +169,7 @@ namespace H.Core.Services.LandManagement
                  * Process run in period items
                  */
 
-                _carbonService.AssignInputsAndLosses(runInPeriodItems, farm);
+                _carbonService.AssignInputsAndLosses(runInPeriodItems, farm, this.AnimalResults);
                 _nitrogenService.AssignNitrogenInputs(runInPeriodItems, farm);
 
                 /*
@@ -181,7 +183,7 @@ namespace H.Core.Services.LandManagement
                      * When in CLI mode, we need to check if there are missing values and process any missing input values before calculating final results
                      */
 
-                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
+                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
                     _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
                     this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }

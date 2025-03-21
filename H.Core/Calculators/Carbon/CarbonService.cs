@@ -25,6 +25,7 @@ namespace H.Core.Calculators.Carbon
         private readonly IICBMCarbonInputCalculator _icbmCarbonInputCalculator;
         private readonly IAnimalService _animalService;
         private readonly IFieldComponentHelper _fieldComponentHelper;
+        
 
         #endregion
 
@@ -47,20 +48,23 @@ namespace H.Core.Calculators.Carbon
             return _ipccTier2CarbonInputCalculator.CanCalculateInputsForCrop(cropViewItem);
         }
 
-        public void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm)
+        public void AssignInputsAndLosses(AdjoiningYears tuple, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults)
         {
-            this.AssignInputsAndLosses(tuple.PreviousYearViewItem, tuple.CurrentYearViewItem, tuple.NextYearViewItem, farm);
+            this.AssignInputsAndLosses(tuple.PreviousYearViewItem, tuple.CurrentYearViewItem, tuple.NextYearViewItem, farm, animalResults);
         }
 
-        public void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear,
+            Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
-            this.AssignInputs(previousYear, viewItem, nextYear, farm);
+            this.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
             this.CalculateLosses(viewItem, farm);
         }
 
-        public void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm)
+        public void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults)
         {
-            this.AssignInputs(viewItems, farm);
+            this.AssignInputs(viewItems, farm, animalResults);
             this.CalculateLosses(viewItems, farm);
         }
 
@@ -76,7 +80,8 @@ namespace H.Core.Calculators.Carbon
             }
         }
 
-        public void AssignInputs(List<CropViewItem> cropViewItems, Farm farm)
+        public void AssignInputs(List<CropViewItem> cropViewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults)
         {
             var orderedItems = cropViewItems.OrderBy(x => x.Year).ToList();
 
@@ -90,15 +95,16 @@ namespace H.Core.Calculators.Carbon
                     previousYear: tuple.PreviousYearViewItem,
                     viewItem: tuple.CurrentYearViewItem,
                     nextYear: tuple.NextYearViewItem,
-                    farm: farm);
+                    farm: farm, animalResults: animalResults);
             }
         }
 
-        public void AssignInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm)
+        public void AssignInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults)
         {
             if (this.CanCalculateInputsUsingIpccTier2(viewItem))
             {
-                _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm);
+                _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
             }
             else
             {
@@ -380,7 +386,8 @@ namespace H.Core.Calculators.Carbon
             }
         }
 
-        public void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm)
+        public void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm,
+            List<AnimalComponentEmissionsResults> animalResults)
         {
             if (farm.IsCommandLineMode == false)
             {
@@ -397,7 +404,7 @@ namespace H.Core.Calculators.Carbon
                 // If the CLI user has not entered a value for aboveground, belowground, manure, or digestate C inputs we will need to assign C inputs now before the C model runs
                 if (currentYearViewItem.TotalCarbonInputs == 0)
                 {
-                    this.AssignInputsAndLosses(tupleForYear, farm);
+                    this.AssignInputsAndLosses(tupleForYear, farm, animalResults);
                 }
             }
         }
