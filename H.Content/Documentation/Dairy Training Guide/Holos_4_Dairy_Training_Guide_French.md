@@ -190,7 +190,7 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 
 >*Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year); only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
 
->*Remarque: Holos exige au minimum la superficie du champ, le type de culture et un taux d’épandage d’engrais propre au champ pour pouvoir calculer les émissions directes et indirectes d’oxyde nitreux.*
+>* Holos exige au minimum la superficie du champ, le type de culture et un taux d’épandage d’engrais propre au champ pour pouvoir calculer les émissions directes et indirectes d’oxyde nitreux.*
 
 > *La gestion des résidus de chaque culture (et de chaque culture de couverture) peut être ajustée dans Holos (voir la page d’onglet Résidus). Holos fournit des valeurs par défaut selon le type de culture et établi une valeur selon le pourcentage de produit et de paille retournés dans le sol, etc. Ces paramètres d’entrée des résidus auront une incidence sur les estimations finales de la variation du carbone dans le sol.*
 
@@ -210,7 +210,7 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure12.png" alt="Figure 12" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure12.png" alt="Figure 12" width="950"/>
     <br>
     <em>Figure 12: Renseignements sur les pâturages indigènes.</em>
 </p> 
@@ -219,142 +219,142 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 
 <div style="page-break-after: always"></div>
 
-# Dairy Operation
+# Exploitation laitière 
 
-Adding animal components follows the same approach used for the land management components. Under the **Dairy** category in the available components, drag and drop one **Dairy Cattle** component to the **My farm** section on the right. In this example, all animal groups listed under this component will be used. This means we will not have to remove any animal group by clicking the **X** icon next to it under **Step 1**. We can now begin entering information for each animal group.
+L’ajout de composantes animales se fait exactement comme l’ajout de composantes de gestion des terres. Dans la catégorie Bovins laitiers, glissez et déposez une composante laitière dans la volet Ma ferme. Si l’un des groupes d’animaux de l’étape 1 n’est pas nécessaire pour la ferme, vous pouvez le supprimer en cliquant sur l’icône « X » correspondante (de même, d’autres groupes d’animaux laitiers peuvent être ajoutés à l’aide du bouton Ajouter un groupe).
 
-*Note: Click on the **View** menu item in the top taskbar and check/uncheck the **Hide List of Available Components** option. Checking this option hides the list of **Available Components**, allowing more room on the screen for the **My Farm** section.*
+*Remarque: Sélectionnez l’option de menu Visualiser et décochez l’option Masquer la liste des composantes disponibles.*
 
-
-<br>
-
-<p align="center">
-    <img src="../../Images/DairyGuide/en/Figure14.gif" alt="Figure 14" width="950"/>
-    <br>
-    <em>Figure 13: The Dairy Cattle Component.</em>
-</p> 
-
-<br>
-
-## **Lactating cows, calves, dairy heifers, and dry cows**
-
-**Lactating Cows:**
-
-Holos provides the user with the option to have more than one lactating cows group. Holos assumes that lactation lasts for 10 months and that the cows are dry for the remaining 2 months in a 12-month period.
-
-1. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected in order to enter the associated management information for that group of animals.
-
-2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the start date and **"May 31, 2023"** as the end date (151 days). Note that the **Number of days** being shown is inclusive of the start and end dates.
-
-3. Next, we can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3**. 
-
-4. Click on the **General** tab and enter **"65"** as the number of animals.
-
-5. We are going to create a custom diet for our group of lactating cows. Click on the **Diet** tab. Note that Holos provides a default set of animal diets that can also be used. Since we are going to create our own custom diet, we will click on the **Custom Diet Creator** button.
-
-<br>
-
-> *Note: The number of animals, average daily gain, and feed quality are the minimum required inputs for calculating methane (CH<sub>4</sub>) and N<sub>2</sub>O emissions. The duration of individual management periods (e.g., the number of days spent in confined housing or on pasture) will also be needed. Housing and manure management information are also important inputs but are relatively more impactful on the emissions of monogastrics.*
-
-<br>
-
- 6. Click the **Add Custom Diet** button in the **Step 1** section of the screen to create a new custom diet. Rename this diet to **"Custom Dairy Diet"** then press the Enter key to save the name.
- 
- 7. To add ingredients to our new diet, move to the **Step 2** section and select **"ALFALFA"** from the ingredient list, and then click the **Add Selected Ingredient to Diet** button.
- 
- 8. We will add one more ingredient to our diet. Select **"Barley grain, rolled"** from the ingredient list, and then click the **Add Selected Ingredient to Diet** button once again. 
- 
- 9. Enter **"50%"** for **ALFALFA** and **"50%"** for **Barley grain, rolled** in **Step 3**. Click the **OK** button to save the new custom diet.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/DairyGuide/fr/Figure13.gif" alt="Figure 14" width="950"/>
     <br>
-    <em>Figure 14: Custom diet creator for the Dairy Lactating animal group.</em>
+    <em>Figure 13: Composante Bovins laitiers.</em>
 </p> 
 
 <br>
 
-> *Note: Holos now reports the diet being complete since all ingredients add up to 100%.*
+## **Données sur les vaches en lactation, les veaux, les génisses laitières et les vaches taries**
+
+**Pour définir les paramètres liés aux vaches en lactation:**
+
+Holos donne à l’utilisateur la possibilité d’avoir plus d’un groupe de vaches en lactation. Nous avons supposé que l’intervalle de vêlage était de 10 mois au cours d’une période de lactation de 12 mois.
+
+1. À **l’étape 1**, assurez-vous que la ligne Laitier en lactation/laitière en lactation est sélectionnée avant d’entrer l’information de gestion connexe pour ce groupe.
+
+2. Cliquez sur la période de gestion **Early lactation** à **l’étape 2** pour activer cette période de gestion. Assurez-vous que la date de début est le **1er janvier 2024** et que la date de fin est le **31 mai 2024** (150 jours). Veuillez noter que le **nombre de jours** qui s’affiche inclut les dates de début et de fin.
+
+3. Nous pouvons ensuite entrer les données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration pour notre groupe de vaches en lactation de **l’étape 3**. 
+
+4. Ouvrez la page d’onglet **Général** et entrez la valeur **"65"** dans le champ Nombre d’animaux. 
+
+5. Nous allons créer une ration personnalisée pour notre groupe de vaches en lactation. Ouvrez la page d’onglet **Ration** Notez que Holos fournit un ensemble de rations par défaut que vous pouvez utiliser. Puisque nous allons créer une ration personnalisée, nous allons cliquer sur le bouton **Créateur de ration personnalisée**.
 
 <br>
 
- 10.  Now select **"Custom Dairy Diet"** from the drop-down menu on the **Diet** tab.
+> *Remarque : Le nombre d’animaux, le gain quotidien moyen et la qualité des aliments sont les données minimales requises pour que le système puisse calculer les émissions de méthane et d’oxyde nitreux. La durée des périodes de gestion (p. ex. la durée du broutage) sera également nécessaire. Les données sur le logement et la gestion du fumier sont *
 
 <br>
 
-> *Note: Diet quality information such as crude protein, total digestible nutrient, and fat are required inputs so that Holos can estimate enteric CH<sub>4</sub> emissions from an animal group.*
-
-<br>
-
- 11. On the **Housing** tab, select **"Tie stall (slurry)"** for the housing type.
-
- 12. Click on the **Manure** tab and select **"Liquid/Slurry with no natural crust"** from the list.
+ 6. Cliquez sur le bouton **Ajouter une ration** personnalisée, dans la section **Étape 1** de l’écran, pour créer une nouvelle ration personnalisée. Donnez à cette nouvelle ration le nom de **Ma ration personnalisée**, puis appuyez sur la touche Entrée pour l’enregistrer.
  
- 13. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2023"** is set as the start date and **"July 31, 2023"** as the end date (61 days). 
+ 7. Pour ajouter des ingrédients à la nouvelle ration, passez à la section **Étape 2** et sélectionnez l’option **"Luzerne"** dans la liste des ingrédients, puis cliquez sur le bouton Ajouter l’ingrédient sélectionné à la ration.
  
- 14. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
+ 8. Nous ajouterons encore un ingrédient à notre ration. Sélectionnez l’option **"Orge roulée"** dans la liste des ingrédients, puis cliquez de nouveau sur le bouton **Ajouter l’ingrédient sélectionné à la ration**.
  
- 15. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (slurry)"**, and on the **Manure** tab choose **"Liquid/Slurry with no natural crust"**.
- 
- 16. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the start date and **"November 04, 2023"** as the end date (96 days). 
- 
- 17. Repeat Step 16 above. Enter in the same information in **Step 3** for this management period.
+ 9. Entrez la valeur **"50 %"**" pour le **foin de luzerne** et la valeur **"50 %"** pour le **grain d’orge aplati** à **l’étape 3**. Cliquez sur **OK** pour enregistrer la nouvelle ration personnalisée.
 
 <br>
 
-**Dairy calves:**
-
-Calves that are not used for replacement will enter into the veal system and are fed mainly milk replacer and corn grain. Factoring in a fertility loss of 7.7%, 60 calves are produced with a sex ratio of 50:50 male:female. Out of the 30 female calves produced, the farm selected 15 as replacement heifers (young heifers) for lactating dairy cows. With an assumed mortality rate of 4.4% at four months of age, 43 veal calves will be fed on a corn grain-based diet. Veal calves are slaughtered at the age of 6 months (~270 kg body weight).
-
-1. Under **Step 1**, make sure that the **"Calves"** row is selected in order to enter the associated management information for this group. 
-
-2. Under **Step 2**, the first management period will be from **"January 1, 2023"** to **"March 31, 2023"** (90 days).
-
-3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
-
-4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2023"** and the end date is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
+<p align="center">
+    <img src="../../Images/DairyGuide/fr/Figure14.png" alt="Figure 15" width="850"/>
+    <br>
+    <em>Figure 14: Créateur de ration personnalisée pour le groupe d’animaux laitiers en lactation.</em>
+</p> 
 
 <br>
 
-> *Note: Dietary data for dairy calves are not currently needed for Holos calculations and so this tab is not present in **Step 3**.*
+> *Remarque : La ration est maintenant complète dans Holos, puisque la somme de ses ingrédients arrive à 100 %.*
 
 <br>
 
-**Dairy (Replacement) Heifers:**
-
-Out of the 30 female calves produced, the farm selected 15 as replacement heifers for lactating dairy cows.
-
-1. Under **Step 1**, make sure that the **"Dairy heifers"** row is selected in order to enter the associated management information for that group.
-
-2. For **"Management period #1"**, enter **"January 01, 2023"** as the start date and **"December 31, 2023"** as the end date (365 days).
-
-3. Click on the **General** tab and enter **"15"** as the number of animals.
-
-4. On the **Diet** tab, ensure the **"High fiber"** diet is selected.
-
-5. On the **Housing** tab, select **"Free stall barn (slurry scraping)"** as the housing type.
-
-6. On the **Manure** tab, select **"Liquid/Slurry with no natural crust"**.
+ 10.  Sélectionnez maintenant l’option **"Ma ration personnalisée"** dans le menu déroulant de la page d’onglet **Ration**.
 
 <br>
 
-**Dairy Dry:**
+> *Remarque : Les renseignements sur la qualité de l’alimentation, comme la teneur en protéines brutes, le total des nutriments digestibles et la teneur en graisses, sont nécessaires pour que Holos puisse estimer les émissions de méthane entérique d’un groupe animal.*
 
-In this dairy animal group there are 20 cows that are not milked, allowing for recovery and recuperation.
+<br>
 
-1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
+ 11. Dans la page d’onglet **Logement**, sélectionnez le type de bâtiment **Stabulation entravée (litière solide)**. 
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the start date and **"January 4, 2024"** as the end date (61 days).
+ 12. Ouvrez la page d’onglet **Fumier** et sélectionnez l’option **litière solide (entreposée)** dans la liste.
+ 
+ 13. Cliquez sur la période de gestion **Mi-lactation** à **l’étape 2**. Assurez-vous que la date de début est le **"1er juin 2023"** et que la date de fin est le **"31 juillet 2023"** (60 jours).
+ 
+ 14. Nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration pour notre groupe de vaches en lactation de l’étape 3, comme nous l’avons fait précédemment.
+ 
+ 15. Dans la page d’onglet **Général**, entrez la valeur **65** pour le nombre d’animaux; dans la page d’onglet **Ration**, sélectionnez l’option **Régime laitier personnalisé**; dans la page d’onglet **Logement**, sélectionnez l’option **Stabulation entravée (litière solide)** et dans la page d’onglet **Fumier**, sélectionnez l’option **Solid storage (stockpiled)**.
+ 
+ 16. Cliquez sur la période de gestion **Lactation tardive**, à **l’étape 2**. Assurez-vous que la date de début est le **"1er août 2023"** et que la date de fin est le **"4 novembre 2023"** (95 jours).
+ 
+ 17. Répétez l’étape 16 ci-dessus. Entrez les mêmes données à **l’étape 3** pour cette période de gestion.
 
-3. Click on the **General** tab and enter **"20"** as the number of animals.
+<br>
 
-4. On the **Diet** tab, ensure the **"Legume forage based diet"** is selected.
+**Pour établir les paramètres liés aux veaux:**
 
-5. On the **Housing** tab, select **"Free stall barn (slurry scraping)"** as the housing type.
+Les veaux qui ne sont pas destinés au remplacement seront saisis dans le système de production des veaux et recevront principalement du lait de remplacement et du maïs grain. Si l’on tient compte d’une perte de fertilité de 7,7 %, 60 veaux sont produits selon un rapport mâle:femelle de 50:50. Sur les 30 veaux femelles produits, la ferme en a sélectionné 15 comme génisse de relève (jeune génisse) pour les vaches laitières en lactation. Avec un taux de mortalité présumé de 4,4 % à l’âge de 4 mois, 43 veaux de boucherie recevront une ration à base de maïs grain. Les veaux de boucherie sont abattus à 6 mois (~ 270 kg de poids corporel).
 
-6. On the **Manure** tab, select **"Liquid/Slurry with no natural crust"**.
+1. Dans la section des groupes d’animaux de **l’étape 1**, assurez-vous que la ligne **des veaux laitiers** est sélectionnée avant d’y entrer les données de gestion connexe pour ce groupe. 
+
+2. À **l’étape 2**, la première période de gestion ira du **"1er janvier 2023"** au **"31 mars 2023"** (90 jours).
+
+3. À **l’étape 3**, ouvrez la page d’onglet **Général** et entrez la valeur **"45"** dans le champ Nombre d’animaux. Ouvrez la page d’onglet **Fumier** et sélectionnez l’option **"litière solide (entreposée)"** dans la liste.
+
+4. Retournez à **l’étape 2** et cliquez sur le bouton **Ajouter une période de gestion**. Une deuxième période de gestion sera ainsi ajoutée pour notre groupe de veaux. Assurez-vous que la date de début est le **"1er avril 2023"** et que la date de fin est le **"30 juin 2023"** (90 jours). Comme nous avons supposé un taux de mortalité de 4,4 % à l’âge de quatre mois, nous ajusterons le nombre d’animaux au cours de la deuxième période de gestion à **"43"**.
+
+<br>
+
+> *Remarque: Les données sur la ration et sur le logement des veaux laitiers ne sont pas nécessaires pour les calculs de Holos (les pages d’onglets correspondantes sont donc ignorées à **l’étape 3**).*
+
+<br>
+
+**Pour définir les paramètres liés aux génisses laitières:**
+
+Sur les 30 veaux femelles produits, la ferme en a sélectionné 15 comme génisses de relève pour les vaches laitières en lactation.
+
+1. Dans la section des groupes d’animaux de **l’étape 1**, assurez-vous que la ligne **des génisses laitières** est sélectionnée avant d’entrer l’information de gestion connexe pour ce groupe.
+
+2. Pour la **"période de gestion no 1"**, entrez la date de début du **"1er janvier 2023"** et la date de fin du **"31 décembre 2023"**. 
+
+3. Ouvrez la page d’onglet **Général** et entrez la valeur **"15"** dans le champ Nombre d’animaux.
+
+4. Dans la page d’onglet **Ration**, assurez-vous que la ration **"Haute teneur en fibres"** est sélectionnée pour les génisses.
+
+5. Dans la page d’onglet **Logement**, sélectionnez le type de logement **"Étable à stabulation libre en logettes (litière solide)"**". 
+
+6. Dans la page d’onglet **Fumier**, sélectionnez l’option **"Solid storage (stockpiled)"**.
+
+<br>
+
+**Pour définir les paramètres liés aux produits laitiers:**
+
+Vingt vaches cesseront de produire du lait durant une période de repos, ce qui permettra leur rétablissement et leur récupération.
+
+1. Dans la section des groupes d’animaux de **l’étape 1**, assurez-vous que la ligne des **animaux laitiers taris** est sélectionnée avant d’entrer l’information de gestion connexe pour ce groupe.
+
+2. À **l’étape 2** de la période de gestion du tarissement, entrez la date de début du **"5 novembre 2023"** et la date de fin du **"4 janvier 2024"**. 
+
+3. Ouvrez la page d’onglet **"Général"** et entrez la valeur **"20"** dans le champ Nombre d’animaux.
+
+4. Dans la page d’onglet **"Ration"**, assurez-vous que l’option **"Ration à base de fourrage de légumineuses"** est sélectionnée.
+
+5. Dans la page d’onglet **"Logement"**, sélectionnez l’option **"Étable à stabulation libre en logettes (litière solide)"** comme type de logement.
+
+6. Dans la page d’onglet **"Fumier"**, sélectionnez l’option **"Solid storage (stockpiled)"**.
 
 <br>
 
@@ -378,7 +378,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure15_Revised.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure15.png" alt="Figure 15" width="950"/>
     <br>
     <em>Figure 15: Adding a manure application to a field.</em>
 </p>
@@ -441,11 +441,11 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 <div style="page-break-after: always"></div>
 
-## Details Screen
+## Écran Détails
 
 Click the **Next** button to go forward to the details screen.
 
-To avoid the requirement that a user needs to provide annual crop yields going back to 1985 (or the specified start year, if different) for each field on the farm, the model will use default year- and crop-specific yield data from *Statistics Canada* (where available). Changes in crop yield affect various model outputs, including soil C sequestration rates and soil N<sub>2</sub>O emissions. The following steps demonstrate how adjusting the crop yield affects the above- and below-ground C inputs to the soil.
+Pour éviter qu’un utilisateur soit obligé de fournir les rendements annuels des cultures en remontant jusqu’à 1985 (ou à une autre date, si la date précisée est différente) pour chaque champ de la ferme, le modèle utilisera les données de *Statistique Canada* sur le rendement annuel propre à une culture par défaut (le cas échéant). Les changements dans le rendement des cultures ont une incidence sur divers extrants du modèle, notamment sur les taux de séquestration du carbone dans le sol et sur les émissions de N<sub>2</sub>O des sols. Les étapes suivantes montrent comment l’ajustement du rendement des cultures influe sur les intrants de carbone au-dessus et en dessous du sol.
 
 We will adjust this grid so that we can view the above-ground and below-ground C inputs for our **Wheat & Hairy Vetch** field and then we will adjust the crop yield for one specific year.
 
@@ -463,81 +463,82 @@ We will adjust this grid so that we can view the above-ground and below-ground C
 
 7. Note that Holos has updated the above-ground C inputs for this.
 
+Cliquez sur le bouton Suivant pour passer à l’écran du rapport final des résultats. 
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure19_Revised.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure19.png" alt="Figure 19" width="950"/>
     <br>
     <em>Figure 19: Details screen</em>
 </p> 
 
 <br>
 
-#  Results Screen
+#  Écran des résultats
 
-Click the **"Next"** button to move on to discover the results on the final screen. The Holos outputs for our simulated farm are displayed in a variety of reports and charts.
+Les résultats sont maintenant affichés dans divers rapports et graphiques.
 
-1. Click on the tab named **Detailed Emission Report**
+1. Cliquez sur l’onglet intitulé **Diagramme circulaire des émissions**.
 
-    The **Detailed Emission Report** will display a monthly or annual GHG emission report. The detailed emission report will report on enteric methane (CH<sub>4</sub>), manure CH<sub>4</sub>, direct and indirect N<sub>2</sub>O, and carbon dioxide (CO<sub>2</sub>) emissions from the farm.
+    Ouvrez la page d’onglet **Rapport d’émissions détaillées** pour accéder à un rapport mensuel ou annuel sur les émissions de GES. Ce rapport porte sur les émissions de CH<sub>4</sub> entérique, les émissions de CH<sub>4</sub> du fumier et les émissions directes et indirectes de N<sub>2</sub>0 de la ferme.
 
-2. Click the **Report Format (Monthly)** button to switch to a monthly report. Now we can see a monthly breakdown of all emissions from the farm and the emission source.
+2. Le Format du rapport offre la possibilité de se déplacer entre les rapports mensuels et annuels.
 
-    In the **Unit of measurement** drop-down menu, you can choose to have the results displayed as CO<sub>2</sub> equivalents (CO<sub>2</sub>e) or as unconverted greenhouse gases (GHG), and you can also choose the unit of measurement as either tonnes/megagrammes (Mg) or kilograms (kg).
+    Dans le menu **déroulant Unité de mesure**, vous pouvez choisir d’afficher les résultats sous forme d’équivalents CO<sub>2</sub> (CO2<sub>2</sub>) ou de gaz à effet de serre non convertis (GES), et vous pouvez également choisir l’unité de mesure (tonnes ou kilogrammes). 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure20_Revised.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 20: Detailed emissions report.</em>
+    <em>Figure 20: Rapport d’émissions détaillées. </em>
 </p> 
 
 <br>
 
-3. Click on the **Estimates of Production** report which provides total harvest yields for the farm's fields and of the amount of N available in manure produced by the farm's livestock.
+3. Le rapport Estimations de la production fournit les rendements totaux des récoltes, la quantité de terres sur lesquelles du fumier a été épandu et les estimations de la production laitière pour les composantes laitières.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure21_Revised.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure21.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 21: Estimates of production report.</em>
+    <em>Figure 21: Rapport Estimation de la production. </em>
 </p> 
 
 <br>
 
-## Soil carbon modelling results
+## Résultats de la modélisation du carbone dans le sol 
 
-On the results screen we can see the change in soil C over time by clicking the “**Multiyear Carbon Modelling**” tab. This tab displays a graph showing the estimated soil C stock for each field on the farm.
+Dans l’écran des résultats, nous pouvons voir l’évolution du carbone dans le sol au fil du temps en cliquant sur l’onglet **"Modélisation pluriannuelle du carbone"**. Dans cette page d’onglet, un graphique présente l’évolution du carbone dans le sol avec le temps pour chacun de nos champs.
 
-For each field on the graph (where more than one field is present), you can hover your mouse over the series to get more information for each year of the simulation.
+Pour chacun des champs présents dans le graphique, vous pouvez passer votre souris sur la série pour obtenir plus de données sur chaque année de la simulation. 
 
-If we click on one of these points, we can then view a more detailed breakdown of these results via the “Grid” report format. We can also export this data by clicking the "**Export to Excel**" button on the top-left.
+Cliquez sur l’un de ces points pour voir une répartition plus détaillée des résultats sous forme de grille. Vous pouvez également exporter les données en cliquant sur le bouton **"Exporter vers Excel"**. 
 
-If you would like to export your entire farm file, from '**File**' on the main taskbar select '**Export**'. Click the arrow to highlight your farm and save it as a .json file.
+Si vous voulez exporter l’ensemble de votre fichier agricole, sélectionnez les options de menu **"Fichier"**, puis **"Exporter"** dans le menu principal. Cliquez sur la flèche pour mettre votre ferme en évidence et enregistrez-la sous forme de fichier JSON. 
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure22_Revised.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure22.png" alt="Figure 22" width="950"/>
     <br>
-    <em>Figure 22: Carbon report section. Allows switching between graph and table format.</em>
+    <em>Figure 22: Modélisation pluriannuelle du carbone.</em>
 </p> 
 
 <br>
 
 <div style="page-break-after: always"></div>
 
-# Finally...
+# Finalement…
 
-## Whole-systems approach 
+## Approche intégrée
 
-> An ecosystem consists of not only the organisms and the environment in which they live but also the interactions within and between these organisms and their surroundings. A whole systems approach seeks to describe and understand the entire system as an integrated whole, rather than as individual components. This holistic approach can be very complex and describing the process can be difficult. One method to conceptualize a whole system is with a mathematical model.
+> Un écosystème est composé non seulement des organismes et de l’environnement où ils vivent, mais également des interactions des organismes avec leur milieu et entre eux. L’approche intégrée vise à décrire et à comprendre le système entier comme un ensemble intégré et non comme un ensemble de composantes distinctes, c’est-à-dire que l’on considère le tout plutôt que la somme des parties. C’est une approche holistique qui peut être très complexe et il est difficile d’en décrire le processus. Recourir à un modèle mathématique est une façon de conceptualiser un système dans son ensemble. 
 > 
-> The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
+> C’est une approche intégrée qui permet de s’assurer que les effets des changements de gestion à l’échelle du système influent sur les émissions nettes des fermes. Dans certains cas, la réduction des émissions d’un GES entraîne une hausse des émissions d’un autre GES. L’approche intégrée permet d’éviter d’adopter des pratiques potentiellement inopportunes fondées sur les préoccupations à l’égard d’un seul GES.
 
-To download Holos, for more information, or to access a recent list of Holos-related publications, visit: www.agr.gc.ca
+Pour télécharger Holos, obtenir de plus amples renseignements ou accéder à une liste récente des publications concernant Holos, visitez le site : https://agriculture.canada.ca/fr/production-agricole/holos. 
 
-To contact us, email:
-aafc.holos.acc@canada.ca
+Pour nous joindre, envoyez un courriel à:
+aafc.holos.acc@canada.ca. 
