@@ -1422,11 +1422,11 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.1-8
         /// </summary>
-        /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
+        /// <param name="temperature">Average monthly temperature (°C)</param>
         /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission for feedlot (confined no barn) housing, or pasture (unitless)</returns>
-        public double CalculateAmbientTemperatureAdjustmentNoBarn(double averageMonthlyTemperature)
+        public double CalculateAmbientTemperatureAdjustmentNoBarn(double temperature)
         {
-            return Math.Pow(1.041, averageMonthlyTemperature) / Math.Pow(1.041, 15);
+            return Math.Pow(1.041, temperature) / Math.Pow(1.041, 15);
         }
 
         /// <summary>
@@ -1434,7 +1434,7 @@ namespace H.Core.Services.Animals
         ///
         /// Indoor dairy housing systems do not get an additional +2 degrees - just beef housing systems
         /// </summary>
-        /// <param name="dailyTemperature">Temperature (°C)</param>
+        /// <param name="dailyTemperature">Average daily outdoor temperature (°C)</param>
         /// <param name="isDairyIndoorHousing"></param>
         /// <returns>Temperature-based adjustments used to correct default NH3 emission factors for indoor housing</returns>
         public double CalculateAmbientTemperatureAdjustmentForIndoorHousing(double dailyTemperature,
