@@ -127,7 +127,7 @@ namespace H.Core.Models
         private string _kilogramsPerMonthString;
         private string _kilowattHoursPerMonthString;
         private string _kilowattHoursPerYearString;
-
+        private string _kilogramsPerHectareWetWeight;
 
         #endregion
 
@@ -857,6 +857,12 @@ namespace H.Core.Models
             set => SetProperty(ref _kilogramsN2ONPerHectareString, value);
         }
 
+        public string KilogramsPerHectareWetWeight
+        {
+            get => _kilogramsPerHectareWetWeight;
+            set => SetProperty(ref _kilogramsPerHectareWetWeight, value);
+        }
+
         #endregion
 
         #region Public Methods
@@ -993,6 +999,7 @@ namespace H.Core.Models
                 CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
                 KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
                 KilogramsPerDayWetWeightString = WrapString(Resources.KilogramsWetWeightPerDay);
+                KilogramsPerHectareWetWeight = WrapString(Resources.KilogramsPerHectareCropWetWeight);
             }
             else
             {
@@ -1116,6 +1123,7 @@ namespace H.Core.Models
                 CubicNormalMetersPerYearString = WrapString(Resources.CubicNormalMetersPerYear);
                 KilowattHoursPerYearString = WrapString(Resources.KilowattHoursPerYear);
                 KilogramsPerDayWetWeightString = WrapString(Resources.KilogramsWetWeightPerDay);
+                KilogramsPerHectareWetWeight = WrapString(Resources.KilogramsPerHectareCropWetWeight);
             }
         }
 

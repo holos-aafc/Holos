@@ -5540,7 +5540,7 @@ If no animals exist on the farm, it is possible to use imported manure as a feed
     <value>Water effect</value>
   </data>
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
-    <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
+    <value>Milk-fed dairy calves</value>
   </data>
   <data name="LabelMonth" xml:space="preserve">
     <value>Month</value>
@@ -5969,6 +5969,9 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Beta_B_N" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
     <value />
   </data>
 </root>

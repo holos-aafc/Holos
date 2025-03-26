@@ -464,7 +464,7 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().Count.Equals(1));
 
 
-            Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).Name.Equals("Milk-fed dairy calves. A period of no enteric methane emissions"));
+            Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).Name.Equals("Milk-fed dairy calves"));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).StartWeight.Equals(1));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).EndWeight.Equals(2));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType

@@ -107,7 +107,7 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelNotes + ", " +
                 Properties.Resources.LabelCrop + ", " +
 
-                Properties.Resources.LabelYield + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerHectareCrop) + "," +
+                Properties.Resources.LabelYield + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerHectareCropWetWeight) + "," +
                 Properties.Resources.LabelMoistureContent + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.Percentage) + "," +
                 Properties.Resources.LabelHarvestMethod + "," +
                 Properties.Resources.LabelTillageType + "," +
