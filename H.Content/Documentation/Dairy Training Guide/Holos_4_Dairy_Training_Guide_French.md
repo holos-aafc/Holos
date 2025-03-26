@@ -12,8 +12,6 @@ Veuillez noter que Holos 4 ne peut être installé que sur le système Windows d
 
 Lancez Holos en double-cliquant sur l’icône Holos qui se trouve sur le bureau. Holos demande à l’utilisateur d’ouvrir une ferme existante, de créer une nouvelle ferme ou d’importer un fichier enregistré (figure 1). Si une ferme est déjà enregistrée dans le système, l’utilisateur peut cliquer sur **Ouvrir**. Si aucune ferme n’est enregistrée dans le système, Holos demande à l’utilisateur s’il veut créer une **nouvelle** ferme ou **importer** un fichier de ferme enregistré (c.-à-d. un fichier JSON). Si l’utilisateur crée une nouvelle ferme, le système lui demande le nom de celle-ci et un commentaire facultatif (figure 2).
 
-Enter **"Holos 2024"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
-
 Entrez le nom de ferme **Holos 2024** et le commentaire **Version de formation**. Cliquez sur **OK** pour passer à l’écran suivant. 
 
 Assurez-vous de sélectionner l’option **Métrique** comme unité de mesure, puis cliquez sur le bouton Suivant, au bas de l’écran (figure 3).
@@ -39,14 +37,14 @@ Assurez-vous de sélectionner l’option **Métrique** comme unité de mesure, p
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure3.png" alt="Figure 3" width="550"/>
     <br>
-    <em>Figure 3: Select "Metric" as the unit of measurement.</em>
+    <em>Figure 3: Sélectionnez l’unité de mesure Métrique. </em>
 </p>
 
 <br>
 
 # Création et emplacement de la nouvelle ferme laitière
 
-La ferme laitière que nous allons créer dans le cadre de notre exercice sera située dans la province du Manitoba. Sélectionnez l’option **Manitoba** dans l’écran **Sélectionner une province**, puis cliquez sur le bouton Suivant.
+La ferme laitière que nous allons créer dans le cadre de notre exercice sera située dans la province du Manitoba. Sélectionnez l’option **Manitoba** dans l’écran **Sélectionner une province**, puis cliquez sur le bouton **Suivant**.
 
 <br>
 
@@ -117,7 +115,7 @@ Click the **Next** button to proceed to the next step.
 
 # Sélection des composantes de la ferme
 
-Sélection des composantes. C’est dans cet écran que vous pouvez sélectionner différentes composantes pour votre ferme. Holos affiche toutes les composantes disponibles du côté gauche de l’écran dans la colonne Composantes disponibles (figure 8). Ces composantes sont regroupées en catégories telles que Gestion des terres, Production bovine, Bovins laitiers, etc.
+Maintenant que l’emplacement de la ferme a été sélectionné, nous passons à l’écran Sélection des composantes. C’est dans cet écran que vous pouvez sélectionner différentes composantes pour votre ferme. Holos affiche toutes les composantes disponibles du côté gauche de l’écran dans la colonne Composantes disponibles (figure 8). Ces composantes sont regroupées en catégories telles que Gestion des terres, Production bovine, Bovins laitiers, etc.
 
 Si vous cliquez pour visualiser la liste déroulante de l’une de ces catégories, les composantes disponibles s’affichent. Dans le cadre de la présente formation, nous travaillerons avec les catégories Gestion des terres et Bovins laitiers.
 
@@ -135,8 +133,6 @@ Le modèle Holos est conçu de manière à ce que les composantes de gestion des
 
 ## Culture et production de foin
 
-Now we can add our first component to the farm. Drag a **Field** component from the left side of the screen and drop it on the **My Farm** on the right side (Figure 9). The screen will now update to reflect this new component that you have added to your farm. Holos will  label the field as **"Field #1"**. At this point, we can enter production information related to the crop being grown on this field.
-
 Nous pouvons maintenant ajouter à la ferme notre première composante. Faites glisser une composante Champ du côté gauche de l’écran et déposez-la dans le volet **Ma ferme**, du côté droit (Figure 9). L’écran est maintenant mis à jour pour refléter la composante que vous avez ajoutée à votre ferme. Holos a étiqueté le champ comme **Champ 1**. À ce stade, nous pouvons entrer des données de production sur la culture dans ce champ.
 
 <br>
@@ -151,7 +147,7 @@ Nous pouvons maintenant ajouter à la ferme notre première composante. Faites g
 
 ### Blé et culture de couverture
 
-Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec une culture de couverture de vesce velue. Changez les éléments suivants dans la composante "Champ 1".
+Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec une culture de couverture de vesce velue. Changez les éléments suivants dans la composante **"Champ 1"**.
 
 1. Renommez le champ pour lui donner le nom de **Blé et vesce velue** dans la section **Étape 1** de l’écran. Changez la superficie du champ pour la faire passer à **18 ha**.
    
@@ -190,7 +186,7 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 
 >*Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year); only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
 
->* Holos exige au minimum la superficie du champ, le type de culture et un taux d’épandage d’engrais propre au champ pour pouvoir calculer les émissions directes et indirectes d’oxyde nitreux.*
+>*Holos exige au minimum la superficie du champ, le type de culture et un taux d’épandage d’engrais propre au champ pour pouvoir calculer les émissions directes et indirectes d’oxyde nitreux.*
 
 > *La gestion des résidus de chaque culture (et de chaque culture de couverture) peut être ajustée dans Holos (voir la page d’onglet Résidus). Holos fournit des valeurs par défaut selon le type de culture et établi une valeur selon le pourcentage de produit et de paille retournés dans le sol, etc. Ces paramètres d’entrée des résidus auront une incidence sur les estimations finales de la variation du carbone dans le sol.*
 
@@ -201,7 +197,7 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 ### Prairies indigènes
 
 1. Faites glisser une nouvelle composante de champ vers votre liste de composantes. Entrez le nom **Prairie indigène** dans la case de saisie **Nom du champ**.
-2. Leave the start year as 1985 and change the end year to 2023.
+2. Laissez l'année de départ à 1985 et changez l'année de fin à 2023.
 3. Entrez une superficie totale du champ de **100 ha**.
 4. Sélectionnez l’option **Parcours (indigène)** dans la liste déroulante de la colonne Culture, à **l’étape 2**. Veuillez noter que Holos remplit automatiquement la colonne **Culture d’hiver/de couverture/intermédiaire** lorsqu’un type de culture vivace est sélectionné.
 5. Conserver la valeur **"0" mm ha<sup>-1</sup>** comme quantité d’eau d’irrigation et la valeur **"0"** comme nombre d’applications de pesticides.
@@ -221,9 +217,9 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 
 # Exploitation laitière 
 
-L’ajout de composantes animales se fait exactement comme l’ajout de composantes de gestion des terres. Dans la catégorie Bovins laitiers, glissez et déposez une composante laitière dans la volet Ma ferme. Si l’un des groupes d’animaux de l’étape 1 n’est pas nécessaire pour la ferme, vous pouvez le supprimer en cliquant sur l’icône « X » correspondante (de même, d’autres groupes d’animaux laitiers peuvent être ajoutés à l’aide du bouton Ajouter un groupe).
+L’ajout de composantes animales se fait exactement comme l’ajout de composantes de gestion des terres. Dans la catégorie **Bovins laitiers**, glissez et déposez une composante laitière dans la volet **Ma ferme**. Si l’un des groupes d’animaux de **l’étape 1** n’est pas nécessaire pour la ferme, vous pouvez le supprimer en cliquant sur l’icône **X** correspondante (de même, d’autres groupes d’animaux laitiers peuvent être ajoutés à l’aide du bouton Ajouter un groupe).
 
-*Remarque: Sélectionnez l’option de menu Visualiser et décochez l’option Masquer la liste des composantes disponibles.*
+*Remarque: Sélectionnez l’option de menu **Visualiser** et décochez l’option **Masquer la liste des composantes disponibles**.*
 
 
 <br>
@@ -254,7 +250,7 @@ Holos donne à l’utilisateur la possibilité d’avoir plus d’un groupe de v
 
 <br>
 
-> *Remarque : Le nombre d’animaux, le gain quotidien moyen et la qualité des aliments sont les données minimales requises pour que le système puisse calculer les émissions de méthane et d’oxyde nitreux. La durée des périodes de gestion (p. ex. la durée du broutage) sera également nécessaire. Les données sur le logement et la gestion du fumier sont *
+> *Remarque : Le nombre d’animaux, le gain quotidien moyen et la qualité des aliments sont les données minimales requises pour que le système puisse calculer les émissions de méthane et d’oxyde nitreux. La durée des périodes de gestion (p. ex. la durée du broutage) sera également nécessaire. Les données sur le logement et la gestion du fumier sont*
 
 <br>
 
@@ -276,7 +272,7 @@ Holos donne à l’utilisateur la possibilité d’avoir plus d’un groupe de v
 
 <br>
 
-> *Remarque : La ration est maintenant complète dans Holos, puisque la somme de ses ingrédients arrive à 100 %.*
+> *Remarque: La ration est maintenant complète dans Holos, puisque la somme de ses ingrédients arrive à 100 %.*
 
 <br>
 
@@ -284,19 +280,19 @@ Holos donne à l’utilisateur la possibilité d’avoir plus d’un groupe de v
 
 <br>
 
-> *Remarque : Les renseignements sur la qualité de l’alimentation, comme la teneur en protéines brutes, le total des nutriments digestibles et la teneur en graisses, sont nécessaires pour que Holos puisse estimer les émissions de méthane entérique d’un groupe animal.*
+> *Remarque: Les renseignements sur la qualité de l’alimentation, comme la teneur en protéines brutes, le total des nutriments digestibles et la teneur en graisses, sont nécessaires pour que Holos puisse estimer les émissions de méthane entérique d’un groupe animal.*
 
 <br>
 
- 11. Dans la page d’onglet **Logement**, sélectionnez le type de bâtiment **Stabulation entravée (litière solide)**. 
+ 11. Dans la page d’onglet **Logement**, sélectionnez le type de bâtiment **"Stabulation entravée (litière solide)"**. 
 
- 12. Ouvrez la page d’onglet **Fumier** et sélectionnez l’option **litière solide (entreposée)** dans la liste.
+ 12. Ouvrez la page d’onglet **Fumier** et sélectionnez l’option **"litière solide (entreposée)"** dans la liste.
  
  13. Cliquez sur la période de gestion **Mi-lactation** à **l’étape 2**. Assurez-vous que la date de début est le **"1er juin 2023"** et que la date de fin est le **"31 juillet 2023"** (60 jours).
  
  14. Nous pouvons entrer des données liées au nombre d’animaux, au type de logement, au système de gestion du fumier et à la ration pour notre groupe de vaches en lactation de l’étape 3, comme nous l’avons fait précédemment.
  
- 15. Dans la page d’onglet **Général**, entrez la valeur **65** pour le nombre d’animaux; dans la page d’onglet **Ration**, sélectionnez l’option **Régime laitier personnalisé**; dans la page d’onglet **Logement**, sélectionnez l’option **Stabulation entravée (litière solide)** et dans la page d’onglet **Fumier**, sélectionnez l’option **Solid storage (stockpiled)**.
+ 15. Dans la page d’onglet **Général**, entrez la valeur **65** pour le nombre d’animaux; dans la page d’onglet **Ration**, sélectionnez l’option **Régime laitier personnalisé**; dans la page d’onglet **Logement**, sélectionnez l’option **Stabulation entravée (litière solide)** et dans la page d’onglet **Fumier**, sélectionnez l’option **"litière solide (entreposée)"**.
  
  16. Cliquez sur la période de gestion **Lactation tardive**, à **l’étape 2**. Assurez-vous que la date de début est le **"1er août 2023"** et que la date de fin est le **"4 novembre 2023"** (95 jours).
  
@@ -336,7 +332,7 @@ Sur les 30 veaux femelles produits, la ferme en a sélectionné 15 comme géniss
 
 5. Dans la page d’onglet **Logement**, sélectionnez le type de logement **"Étable à stabulation libre en logettes (litière solide)"**". 
 
-6. Dans la page d’onglet **Fumier**, sélectionnez l’option **"Solid storage (stockpiled)"**.
+6. Dans la page d’onglet **Fumier**, sélectionnez l’option **"litière solide (entreposée)"**.
 
 <br>
 
@@ -354,7 +350,7 @@ Vingt vaches cesseront de produire du lait durant une période de repos, ce qui 
 
 5. Dans la page d’onglet **"Logement"**, sélectionnez l’option **"Étable à stabulation libre en logettes (litière solide)"** comme type de logement.
 
-6. Dans la page d’onglet **"Fumier"**, sélectionnez l’option **"Solid storage (stockpiled)"**.
+6. Dans la page d’onglet **"Fumier"**, sélectionnez l’option **"litière solide (entreposée)"**.
 
 <br>
 
@@ -371,7 +367,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
     * Select **"Liquid/Slurry with no natural crust"** as the manure handling system.
     * Select **"Shallow injection"** as the application method.
     * Enter **"14,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
-4. Note that both chemical fertilizer and manure applications can be made on the same field.
+3. Note that both chemical fertilizer and manure applications can be made on the same field.
 
 > Holos provides an interactive gauge on the left of the manure tab to show the **Amount of Stored Manure N Remaining (Dairy cattle) (kg N)**, which adjusts to reflect the user's application choices and quantify the amount of stored manure (N) remaining for application.
 
@@ -385,12 +381,11 @@ In Holos, the user can apply livestock manure to a field using either manure pro
  
 <br>
 
-# Timeline Screen
+# Écran Calendrier
 
-We are now finished the process of defining our farm. Click the **Next** button to go forward to the timeline screen.
-The timeline screen provides a visual layout of the farm's fields from the start year to the end year for each field. This screen also allows the user to add historical and projected production systems for individual fields and/or rotations. 
+Nous sommes en train de terminer la définition de notre ferme. Cliquez sur le bouton **Suivant** pour continuer vers l’écran Calendrier. Cet écran présente une vue d’ensemble de tous les champs, de 1985 à l’année de fin spécifiée pour chaque champ. Cet écran permet également à l’utilisateur d’ajouter des systèmes de production antérieurs et prévus.
 
-The **Add Historical Production System** button enables the user to add a different cropping history to individual fields whereas the **Add Projected Production System** button enables the user to add a future (projected) cropping system to individual fields.
+Le bouton **Ajouter un système de production historique** permet à l’utilisateur d’ajouter un historique de culture différent à des champs individuels, tandis que le bouton **Ajouter un système de production prévu** permet à l’utilisateur d’ajouter un système de culture futur (prévu) à des champs individuels.
 
 
 ### Adding a historical production system
@@ -414,11 +409,12 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 10. Click **"OK"** to save these adjustments.
 
+<em>Cliquez sur le bouton Suivant pour passer à l’écran Détails.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure16_Revised.png" alt="Figure 16" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure16.png" alt="Figure 16" width="950"/>
     <br>
     <em>Figure 16: Customized Timeline screen</em>
 </p> 
@@ -426,7 +422,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <br>  
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure17_Revised.png" alt="Figure 17" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure17.png" alt="Figure 17" width="950"/>
     <br>
     <em>Figure 17: Adjusted start and end year for productions systems on the timeline screen.</em>
 </p> 
@@ -434,7 +430,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <br> 
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure18_Revised.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure18.png" alt="Figure 18" width="950"/>
     <br>
     <em>Figure 18: Editing crops in a historical period of the rotation. </em>
 </p> 
@@ -442,8 +438,6 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <div style="page-break-after: always"></div>
 
 ## Écran Détails
-
-Click the **Next** button to go forward to the details screen.
 
 Pour éviter qu’un utilisateur soit obligé de fournir les rendements annuels des cultures en remontant jusqu’à 1985 (ou à une autre date, si la date précisée est différente) pour chaque champ de la ferme, le modèle utilisera les données de *Statistique Canada* sur le rendement annuel propre à une culture par défaut (le cas échéant). Les changements dans le rendement des cultures ont une incidence sur divers extrants du modèle, notamment sur les taux de séquestration du carbone dans le sol et sur les émissions de N<sub>2</sub>O des sols. Les étapes suivantes montrent comment l’ajustement du rendement des cultures influe sur les intrants de carbone au-dessus et en dessous du sol.
 
