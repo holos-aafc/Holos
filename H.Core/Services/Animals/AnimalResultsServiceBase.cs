@@ -835,9 +835,13 @@ namespace H.Core.Services.Animals
             var numerator = activationEnergy * (t2 - t1);
             var denominator = idealGasConstant * t1 * t2;
 
-            var exponent = Math.Exp(numerator / denominator);
+            var exponentResult = Math.Exp(numerator / denominator);
+            var innerTerm = 1 - exponentResult;
 
-            var result = exponent / 30;
+            var power = 1.0 / 30.0;
+            var powerTerm = Math.Pow(innerTerm, power);
+
+            var result = 1 - powerTerm;
 
             return result;
         }
