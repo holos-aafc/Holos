@@ -17,6 +17,7 @@ using H.Core.Enumerations;
 using H.Core.Events;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
 using H.Core.Providers;
@@ -30,6 +31,7 @@ using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
+using H.Infrastructure;
 using Prism.Events;
 
 namespace H.Core.Services
@@ -42,6 +44,7 @@ namespace H.Core.Services
 
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
+        private readonly IAnaerobicDigestionComponentHelper _anaerobicDigestionComponentHelper = new AnaerobicDigestionComponentHelper();
 
         private readonly IFieldResultsService _fieldResultsService;
         private readonly IAnimalService _animalResultsService;
@@ -388,6 +391,17 @@ namespace H.Core.Services
                 }
 
                 replicatedFarm.Components.Add(replicatedFieldSystemComponent);
+            }
+
+            #endregion
+
+            #region AnaerobicDigestionComponents
+
+            foreach (var anaerobicDigestionComponent in farm.AnaerobicDigestionComponents)
+            {
+                var replicatedAnaerobicDigestionComponent = _anaerobicDigestionComponentHelper.Replicate(anaerobicDigestionComponent, replicatedFarm.AnimalComponents);
+
+                replicatedFarm.Components.Add(replicatedAnaerobicDigestionComponent);
             }
 
             #endregion
