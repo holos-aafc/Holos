@@ -58,7 +58,7 @@ namespace H.Core.Services.Animals
                 var housingTemperature = temperature;
                 if (managementPeriod.AnimalType.IsDairyCattleType())
                 {
-                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false)
+                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false && farm.ClimateData.BarnTemperatureData != null)
                     {
                         var month = (Months) dateTime.Month;
                         housingTemperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);

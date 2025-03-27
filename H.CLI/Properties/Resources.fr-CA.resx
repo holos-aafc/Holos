@@ -117,56 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboveGroundCStocksPerTree" xml:space="preserve">
-    <value>stocks de C aérien par arbre</value>
-  </data>
-  <data name="ActivityCoefficient" xml:space="preserve">
-    <value>coefficient d'activité</value>
-  </data>
-  <data name="ActivityCoefficientOfFeedingSituation" xml:space="preserve">
-    <value>Coefficient d’activité de la situation alimentaire</value>
-  </data>
-  <data name="ADG" xml:space="preserve">
-    <value>GMQ</value>
-  </data>
-  <data name="Age" xml:space="preserve">
-    <value>âge</value>
-  </data>
-  <data name="Alfa" xml:space="preserve">
-    <value>alfa = {0}</value>
-  </data>
   <data name="AllFarms" xml:space="preserve">
     <value>toutes les fermes</value>
-  </data>
-  <data name="AllMonths" xml:space="preserve">
-    <value>tous les mois</value>
-  </data>
-  <data name="AnimalsAreMilkFedOnly" xml:space="preserve">
-    <value>Les animaux sont nourris au lait seulement</value>
-  </data>
-  <data name="AnnualCrops" xml:space="preserve">
-    <value>#cultures annuelles</value>
-  </data>
-  <data name="AshContent" xml:space="preserve">
-    <value>teneur en cendres</value>
-  </data>
-  <data name="AshContentOfDiet" xml:space="preserve">
-    <value>Teneur en cendres du régime alimentaire</value>
-  </data>
-  <data name="AverageCircumference" xml:space="preserve">
-    <value>circonférence moyenne</value>
-  </data>
-  <data name="AverageDailyGain" xml:space="preserve">
-    <value>gain moyen quotidien</value>
-  </data>
-  <data name="BelowGroundCStocksPerTree" xml:space="preserve">
-    <value>stocks de C souterrain par arbre</value>
-  </data>
-  <data name="CA" xml:space="preserve">
-    <value>CA</value>
-  </data>
-  <data name="CFTemp" xml:space="preserve">
-    <value>CF temp</value>
   </data>
   <data name="CO2" xml:space="preserve">
     <value>CO2 {0}</value>
@@ -174,23 +126,11 @@
   <data name="ComponentCategory" xml:space="preserve">
     <value>catégorie de composantes</value>
   </data>
-  <data name="ComponentGroupName" xml:space="preserve">
-    <value>nom de groupe de composantes</value>
-  </data>
   <data name="ComponentName" xml:space="preserve">
     <value>nom de composante</value>
   </data>
   <data name="ConversionFinished" xml:space="preserve">
     <value>conversion terminée.</value>
-  </data>
-  <data name="CoverCrops" xml:space="preserve">
-    <value>#cultures de couverture</value>
-  </data>
-  <data name="CowCalfPairingNumber" xml:space="preserve">
-    <value>nombre de paires de vache et de veau</value>
-  </data>
-  <data name="CPlanting" xml:space="preserve">
-    <value>C_plantation</value>
   </data>
   <data name="CreateADefaultLethbridgeSettingsFile" xml:space="preserve">
     <value>3. Générer un fichier de paramètres pour votre ferme avec les données d’emplacement correspondant à celles de Lethbridge en Alberta.</value>
@@ -201,53 +141,11 @@
   <data name="CreatingDefaultLethbridgeGeographicData" xml:space="preserve">
     <value>L’interface de ligne de commande de Holos génère par défaut un fichier de paramètres qui sont fondés sur les données d’emplacement d’une ferme située à Lethbridge en Alberta. Le fichier de paramètres se trouve à l’emplacement : {0}. Veuillez vous référer à cet endroit si vous modifiez le fichier de paramètres pour établir une correspondance avec les données d’emplacement de votre ferme.</value>
   </data>
-  <data name="CrudeProtein" xml:space="preserve">
-    <value>protéine brute</value>
-  </data>
-  <data name="CStocksPerTree" xml:space="preserve">
-    <value>stocks de C par arbre</value>
-  </data>
-  <data name="CTreeType" xml:space="preserve">
-    <value>C_typed'arbre</value>
-  </data>
-  <data name="CutYear" xml:space="preserve">
-    <value>année de coupe</value>
-  </data>
-  <data name="DailyManureMethaneEmissionRate" xml:space="preserve">
-    <value>Taux quotidien d’émission de méthane du fumier</value>
-  </data>
   <data name="DataInputMistakeData" xml:space="preserve">
     <value>Il y a une erreur de saisie de données à la ligne : {0}, colonne : {1} à l’emplacement : {2}.</value>
   </data>
   <data name="DataInputMistakeHeader" xml:space="preserve">
     <value>Il y a une erreur de saisie de l’en-tête à la ligne : {0} dans {1}. L’en-tête doit être : {2}.</value>
-  </data>
-  <data name="DefaultBeefInputFolder" xml:space="preserve">
-    <value>bœuf</value>
-  </data>
-  <data name="DefaultDairyInputFolder" xml:space="preserve">
-    <value>bovins laitiers</value>
-  </data>
-  <data name="DefaultFieldsInputFolder" xml:space="preserve">
-    <value>champs</value>
-  </data>
-  <data name="DefaultOtherLivestockInputFolder" xml:space="preserve">
-    <value>autre bétail</value>
-  </data>
-  <data name="DefaultPoultryInputFolder" xml:space="preserve">
-    <value>volaille</value>
-  </data>
-  <data name="DefaultSheepInputFolder" xml:space="preserve">
-    <value>mouton</value>
-  </data>
-  <data name="DefaultShelterbeltInputFolder" xml:space="preserve">
-    <value>brise-vents</value>
-  </data>
-  <data name="DefaultSwineInputFolder" xml:space="preserve">
-    <value>porc</value>
-  </data>
-  <data name="DietAdditiveType" xml:space="preserve">
-    <value>type de supplément de ration</value>
   </data>
   <data name="DirectN2O" xml:space="preserve">
     <value>N2O direct {0}</value>
@@ -255,38 +153,14 @@
   <data name="DirectoryNotFound" xml:space="preserve">
     <value>Avez-vous saisi correctement le chemin d’accès au répertoire? : {0}</value>
   </data>
-  <data name="DryMatterIntake" xml:space="preserve">
-    <value>ingestion de matière sèche</value>
-  </data>
   <data name="DuplicateAnimalGroupTypesReferringToSameAnimalGroup" xml:space="preserve">
     <value>Un seul type de groupe devrait être associé par groupe (nom du groupe des composantes). Les types de groupes : {0} se rapporte au même groupe nommé {1}. L’erreur se trouve dans le fichier à {2}.</value>
-  </data>
-  <data name="EcodistrictId" xml:space="preserve">
-    <value>ID de l'écodistrict</value>
-  </data>
-  <data name="EmergenceDay" xml:space="preserve">
-    <value>jour de levée = {0}</value>
-  </data>
-  <data name="EmissionFactorLeaching" xml:space="preserve">
-    <value>facteur d'émission due au lessivage</value>
-  </data>
-  <data name="EmissionFactorVolatilization" xml:space="preserve">
-    <value>facteur d'émission due à la volatilisation</value>
   </data>
   <data name="EmptyDataInput" xml:space="preserve">
     <value>Un champ de données est vide à la ligne : {0}, colonne : {1} dans {2}.</value>
   </data>
-  <data name="EndWeight" xml:space="preserve">
-    <value>poids final</value>
-  </data>
   <data name="EnergyCO2" xml:space="preserve">
     <value>CO2 énergétique {0}</value>
-  </data>
-  <data name="EnergyRequiredToProduceMilk" xml:space="preserve">
-    <value>énergie nécessaire à la production de lait</value>
-  </data>
-  <data name="EnergyRequiredToProduceWool" xml:space="preserve">
-    <value>énergie nécessaire à la production de laine</value>
   </data>
   <data name="EntericCH4" xml:space="preserve">
     <value>CH4 entérique {0}</value>
@@ -294,119 +168,20 @@
   <data name="EnterYourChoice" xml:space="preserve">
     <value>Veuillez entrer votre choix :</value>
   </data>
-  <data name="EnumOutputDirectory" xml:space="preserve">
-    <value>répertoire d’extrants</value>
-  </data>
-  <data name="EvapotranspirationData" xml:space="preserve">
-    <value>#données d'évapotranspiration{0}</value>
-  </data>
   <data name="ExitAndRunHolosToDetermineFarmLocation" xml:space="preserve">
     <value>1. Sortir et exécuter Holos pour déterminer l’emplacement de votre ferme</value>
-  </data>
-  <data name="FarmDoesNotContainAnyData" xml:space="preserve">
-    <value>La ferme : {0} ne contient aucune donnée relative aux composants. Il n’y a donc aucune donnée à traiter!</value>
   </data>
   <data name="FarmName" xml:space="preserve">
     <value>nom de la ferme</value>
   </data>
-  <data name="FarmResultsCO2E" xml:space="preserve">
-    <value>_CO2EÉmissions_</value>
-  </data>
-  <data name="FarmResultsEP" xml:space="preserve">
-    <value>_EstimationsDeLaProduction_</value>
-  </data>
-  <data name="FarmResultsFE" xml:space="preserve">
-    <value>_EstimationsDeL'alimentation_</value>
-  </data>
-  <data name="FarmResultsGHG" xml:space="preserve">
-    <value>_ÉmissionsDeGES_</value>
-  </data>
   <data name="FarmTotal" xml:space="preserve">
     <value>total de la ferme</value>
-  </data>
-  <data name="Fat" xml:space="preserve">
-    <value>gras</value>
-  </data>
-  <data name="FeedIntake" xml:space="preserve">
-    <value>prise alimentaire</value>
-  </data>
-  <data name="FinalWeight" xml:space="preserve">
-    <value>poids final</value>
-  </data>
-  <data name="FinalWeightOfCalves" xml:space="preserve">
-    <value>poids final des veaux</value>
-  </data>
-  <data name="FodderCorn" xml:space="preserve">
-    <value>#maïs fourrager</value>
   </data>
   <data name="FollowingFileHasBeenParsed" xml:space="preserve">
     <value>Le fichier suivant a été analysé : {0}.</value>
   </data>
-  <data name="Forage" xml:space="preserve">
-    <value>fourrage</value>
-  </data>
-  <data name="FPCM" xml:space="preserve">
-    <value>LCMGP</value>
-  </data>
-  <data name="FractionLeaching" xml:space="preserve">
-    <value>fraction lessivée</value>
-  </data>
-  <data name="FractionOfCarbonInManure" xml:space="preserve">
-    <value>Fraction de carbone dans le fumier</value>
-  </data>
-  <data name="GainCoefficient" xml:space="preserve">
-    <value>coefficient de gain</value>
-  </data>
-  <data name="GainCoefficientA" xml:space="preserve">
-    <value>coefficient de gain A</value>
-  </data>
-  <data name="GainCoefficientB" xml:space="preserve">
-    <value>coefficient de gain B</value>
-  </data>
-  <data name="GroupId" xml:space="preserve">
-    <value>ID du groupe</value>
-  </data>
-  <data name="GroupName" xml:space="preserve">
-    <value>nom du groupe</value>
-  </data>
-  <data name="GroupPairingNumber" xml:space="preserve">
-    <value>Numéro d'appariement au groupe</value>
-  </data>
-  <data name="GroupType" xml:space="preserve">
-    <value>type de groupe</value>
-  </data>
-  <data name="HardinessZone" xml:space="preserve">
-    <value>zone de rusticité</value>
-  </data>
-  <data name="Harvest" xml:space="preserve">
-    <value>récolte</value>
-  </data>
-  <data name="HolosExampleFarm" xml:space="preserve">
-    <value>exemple de ferme Holos</value>
-  </data>
-  <data name="HousingType" xml:space="preserve">
-    <value>type de logement</value>
-  </data>
-  <data name="ICBMSettingsHeader" xml:space="preserve">
-    <value># MIBC/Climat</value>
-  </data>
   <data name="IndirectN2O" xml:space="preserve">
     <value>N2O indirect {0}</value>
-  </data>
-  <data name="InitialMessageAfterInstallation" xml:space="preserve">
-    <value>Holos a généré un dossier de ferme modèle avec les répertoires d’échantillons et les fichiers de données dans le répertoire suivant : {0}. Veuillez aller dans ces dossiers et créer des fichiers de données pour votre ferme. Appuyez sur la touche « enter » pour sortir de l’application.</value>
-  </data>
-  <data name="InitialWeight" xml:space="preserve">
-    <value>poids initial</value>
-  </data>
-  <data name="InitialWeightOfCalves" xml:space="preserve">
-    <value>poids initial des veaux</value>
-  </data>
-  <data name="InterpolatedTotalFarmsSuccessfullyImported" xml:space="preserve">
-    <value>{0} total de fermes importées.</value>
-  </data>
-  <data name="InterpolatedTotalNumberOfFarmsFound" xml:space="preserve">
-    <value>{0} total de fermes trouvées.</value>
   </data>
   <data name="InvalidBaseDirectory" xml:space="preserve">
     <value>Il est impossible de trouver le répertoire à {0}.</value>
@@ -480,8 +255,116 @@
   <data name="InvalidTreeSpecies" xml:space="preserve">
     <value>{0} n’est pas une espèce d’arbre valide. L’erreur se trouve à la ligne : {1}, colonne {2} dans {3}.</value>
   </data>
-  <data name="Key_AboveGroundCarbonInput" xml:space="preserve">
-    <value>apport de carbone aérien</value>
+  <data name="ListOfValidDirectories" xml:space="preserve">
+    <value>Assurez-vous que les répertoires énumérés plus haut sont bien épelés, conformément à la liste des noms de répertoires de composantes valides ci-dessous :</value>
+  </data>
+  <data name="ManureCH4" xml:space="preserve">
+    <value>CH4 du fumier {0}</value>
+  </data>
+  <data name="NegativeInteger" xml:space="preserve">
+    <value>{0} n’est pas une donnée valide. L’erreur se trouve à la ligne : {1}, colonne {2} dans {3}.</value>
+  </data>
+  <data name="NoFileData" xml:space="preserve">
+    <value>Le fichier suivant n’a aucune donnée à analyser : {0}.</value>
+  </data>
+  <data name="NotAValidPolygonID" xml:space="preserve">
+    <value>{0} n’est pas un ID de polygone valide.</value>
+  </data>
+  <data name="ParsingFiles" xml:space="preserve">
+    <value>Analyse des fichiers ...</value>
+  </data>
+  <data name="ParsingFinished" xml:space="preserve">
+    <value>L’analyse est terminée.</value>
+  </data>
+  <data name="PromptToEnterPolygonID" xml:space="preserve">
+    <value>Veuillez entrer l'ID de l’emplacement de votre ferme (ID du polygone).</value>
+  </data>
+  <data name="PromptUserForLanguage" xml:space="preserve">
+    <value>Veuillez entrer le numéro correspondant à votre langue de préférence (anglais = 1, français = 2)</value>
+  </data>
+  <data name="PromptUserForPolygonSelection" xml:space="preserve">
+    <value>Afin de traiter les données de votre ferme, l’interface de ligne de commande de Holos doit connaître l’emplacement de votre ferme pour générer des résultats. Si vous ignorez l’emplacement de la ferme, utilisez Holos pour la déterminer en sélectionnant votre zone géographique à la section « Détermination de l’emplacement de votre ferme ». La ferme qui n’a pas de fichier de paramètres est le : {0}</value>
+  </data>
+  <data name="PromptUserForUnitsOfMeasurement" xml:space="preserve">
+    <value>Veuillez entrer le numéro correspondant aux unités du système de mesure préféré (métrique = 1, impérial = 2)</value>
+  </data>
+  <data name="ReadingSettingsFile" xml:space="preserve">
+    <value>Lecture du fichier de paramètres ...</value>
+  </data>
+  <data name="SameNameError" xml:space="preserve">
+    <value>Composantes ayant la même erreur de nom : Le fichier {0} suivant n’a pas un nom de composante unique : {1}. Le nom en conflit est {2}. Veuillez modifier la colonne appropriée qui réfère au nom des composantes dans le fichier mentionné qui doit être unique.</value>
+  </data>
+  <data name="SameNameErrorExceptionMessage" xml:space="preserve">
+    <value>Il y a {0} {1} composantes qui ont le même nom dans leurs fichiers de données. Veuillez modifier les fichiers mentionnés dans le CLI de manière à avoir des noms uniques.</value>
+  </data>
+  <data name="SelectPolygonOptions" xml:space="preserve">
+    <value>Veuillez sélectionner l’une des options ci-dessous pour poursuivre le traitement.</value>
+  </data>
+  <data name="SettingsFileWillBeCreatedHere" xml:space="preserve">
+    <value>Le fichier de paramètres sera créé ici : {0}</value>
+  </data>
+  <data name="StartingComponentConversion" xml:space="preserve">
+    <value>début de la conversion de composantes…</value>
+  </data>
+  <data name="StartingConversion" xml:space="preserve">
+    <value>début de la conversion de {0}...</value>
+  </data>
+  <data name="StartingProcessing" xml:space="preserve">
+    <value>Début du traitement des fermes.</value>
+  </data>
+  <data name="StartingIndividualComponentProcessing" xml:space="preserve">
+    <value>Début du traitement des composantes de la ferme suivante : {0}</value>
+  </data>
+  <data name="SubTotal" xml:space="preserve">
+    <value>sous-total {0}</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>totaux</value>
+  </data>
+  <data name="Uncertainty" xml:space="preserve">
+    <value>incertitude</value>
+  </data>
+  <data name="Yards" xml:space="preserve">
+    <value>verges</value>
+  </data>
+  <data name="AllMonths" xml:space="preserve">
+    <value>tous les mois</value>
+  </data>
+  <data name="Key_Area" xml:space="preserve">
+    <value>superficie</value>
+  </data>
+  <data name="DefaultBeefInputFolder" xml:space="preserve">
+    <value>bœuf</value>
+  </data>
+  <data name="FPCM" xml:space="preserve">
+    <value>LCMGP</value>
+  </data>
+  <data name="Harvest" xml:space="preserve">
+    <value>récolte</value>
+  </data>
+  <data name="Lamb" xml:space="preserve">
+    <value>agneau</value>
+  </data>
+  <data name="LandAppliedManure" xml:space="preserve">
+    <value>fumier appliqué sur les terres</value>
+  </data>
+  <data name="Milk" xml:space="preserve">
+    <value>lait </value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>mois</value>
+  </data>
+  <data name="ComponentGroupName" xml:space="preserve">
+    <value>nom de groupe de composantes</value>
+  </data>
+  <data name="DryMatterIntake" xml:space="preserve">
+    <value>ingestion de matière sèche</value>
+  </data>
+  <data name="ActivityCoefficient" xml:space="preserve">
+    <value>coefficient d'activité</value>
+  </data>
+  <data name="ADG" xml:space="preserve">
+    <value>GMQ</value>
   </data>
   <data name="Key_AmountOfIrrigation" xml:space="preserve">
     <value>quantité d'eau d'irrigation</value>
@@ -489,11 +372,14 @@
   <data name="Key_AmountOfManureApplied" xml:space="preserve">
     <value>quantité de fumier appliquée</value>
   </data>
-  <data name="Key_Area" xml:space="preserve">
-    <value>superficie</value>
+  <data name="AshContent" xml:space="preserve">
+    <value>teneur en cendres</value>
   </data>
-  <data name="Key_BelowGroundCarbonInput" xml:space="preserve">
-    <value>apport de carbone souterrain</value>
+  <data name="AverageCircumference" xml:space="preserve">
+    <value>circonférence moyenne</value>
+  </data>
+  <data name="AverageDailyGain" xml:space="preserve">
+    <value>gain moyen quotidien</value>
   </data>
   <data name="Key_BiomassCoefficientExtraroot" xml:space="preserve">
     <value>coefficient de biomasse extraracinaire</value>
@@ -507,23 +393,17 @@
   <data name="Key_BiomassCoefficientStraw" xml:space="preserve">
     <value>coefficient de biomasse de la paille</value>
   </data>
+  <data name="CA" xml:space="preserve">
+    <value>CA</value>
+  </data>
   <data name="Key_CarbonConcentration" xml:space="preserve">
     <value>concentration de carbone</value>
   </data>
-  <data name="Key_CarbonInputFromExtraroots" xml:space="preserve">
-    <value>apport de carbone du matériel extraracinaire</value>
+  <data name="Settings_CarbonConcentration" xml:space="preserve">
+    <value>concentration de carbone</value>
   </data>
-  <data name="Key_CarbonInputFromProduct" xml:space="preserve">
-    <value>apport de carbone du produit</value>
-  </data>
-  <data name="Key_CarbonInputFromRoots" xml:space="preserve">
-    <value>apport de carbone des racines</value>
-  </data>
-  <data name="Key_CarbonInputFromStraw" xml:space="preserve">
-    <value>apport de carbone de la paille</value>
-  </data>
-  <data name="Key_ClimateParameter" xml:space="preserve">
-    <value>paramètre climatique</value>
+  <data name="CFTemp" xml:space="preserve">
+    <value>CF temp</value>
   </data>
   <data name="Key_CoverCropsUsed" xml:space="preserve">
     <value>cultures de couverture utilisées</value>
@@ -537,20 +417,131 @@
   <data name="Key_CropIsGrazed" xml:space="preserve">
     <value>culture est pâturée</value>
   </data>
+  <data name="Key_FieldSystemComponentGuid" xml:space="preserve">
+    <value>GUID des composants du système de champ</value>
+  </data>
+  <data name="Key_TimePeriodCategoryString" xml:space="preserve">
+    <value>chaîne de catégories de période</value>
+  </data>
+  <data name="Key_ClimateParameter" xml:space="preserve">
+    <value>paramètre climatique</value>
+  </data>
+  <data name="Key_TillageFactor" xml:space="preserve">
+    <value>facteur de travail du sol</value>
+  </data>
+  <data name="Key_ManagementFactor" xml:space="preserve">
+    <value>facteur de gestion</value>
+  </data>
+  <data name="Key_PlantCarbonInAgriculturalProduct" xml:space="preserve">
+    <value>carbone végétal dans le produit agricole</value>
+  </data>
+  <data name="Key_CarbonInputFromProduct" xml:space="preserve">
+    <value>apport de carbone du produit</value>
+  </data>
+  <data name="Key_CarbonInputFromStraw" xml:space="preserve">
+    <value>apport de carbone de la paille</value>
+  </data>
+  <data name="Key_CarbonInputFromRoots" xml:space="preserve">
+    <value>apport de carbone des racines</value>
+  </data>
+  <data name="Key_CarbonInputFromExtraroots" xml:space="preserve">
+    <value>apport de carbone du matériel extraracinaire</value>
+  </data>
+  <data name="Key_SizeOfFirstRotationForField" xml:space="preserve">
+    <value>superficie de la première rotation pour le champ</value>
+  </data>
+  <data name="Key_AboveGroundCarbonInput" xml:space="preserve">
+    <value>apport de carbone aérien</value>
+  </data>
+  <data name="Key_BelowGroundCarbonInput" xml:space="preserve">
+    <value>apport de carbone souterrain</value>
+  </data>
+  <data name="Key_NumberOfCropsInRotation" xml:space="preserve">
+    <value>nombre de cultures en rotation</value>
+  </data>
   <data name="Key_CropType" xml:space="preserve">
     <value>type de culture</value>
   </data>
   <data name="Key_CropYear" xml:space="preserve">
     <value>année de la culture</value>
   </data>
+  <data name="CrudeProtein" xml:space="preserve">
+    <value>protéine brute</value>
+  </data>
   <data name="Key_CurrentYear" xml:space="preserve">
     <value>année en cours</value>
   </data>
-  <data name="Key_FieldSystemComponentGuid" xml:space="preserve">
-    <value>GUID des composants du système de champ</value>
+  <data name="CutYear" xml:space="preserve">
+    <value>année de coupe</value>
+  </data>
+  <data name="DefaultDairyInputFolder" xml:space="preserve">
+    <value>bovins laitiers</value>
+  </data>
+  <data name="DietAdditiveType" xml:space="preserve">
+    <value>type de supplément de ration</value>
+  </data>
+  <data name="EcodistrictId" xml:space="preserve">
+    <value>ID de l'écodistrict</value>
+  </data>
+  <data name="EndWeight" xml:space="preserve">
+    <value>poids final</value>
+  </data>
+  <data name="EnergyRequiredToProduceMilk" xml:space="preserve">
+    <value>énergie nécessaire à la production de lait</value>
+  </data>
+  <data name="EnergyRequiredToProduceWool" xml:space="preserve">
+    <value>énergie nécessaire à la production de laine</value>
+  </data>
+  <data name="Fat" xml:space="preserve">
+    <value>gras</value>
+  </data>
+  <data name="FeedIntake" xml:space="preserve">
+    <value>prise alimentaire</value>
+  </data>
+  <data name="DefaultFieldsInputFolder" xml:space="preserve">
+    <value>champs</value>
+  </data>
+  <data name="FinalWeight" xml:space="preserve">
+    <value>poids final</value>
+  </data>
+  <data name="FinalWeightOfCalves" xml:space="preserve">
+    <value>poids final des veaux</value>
+  </data>
+  <data name="Forage" xml:space="preserve">
+    <value>fourrage</value>
+  </data>
+  <data name="GainCoefficient" xml:space="preserve">
+    <value>coefficient de gain</value>
+  </data>
+  <data name="GainCoefficientA" xml:space="preserve">
+    <value>coefficient de gain A</value>
+  </data>
+  <data name="GainCoefficientB" xml:space="preserve">
+    <value>coefficient de gain B</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>nom du groupe</value>
+  </data>
+  <data name="GroupType" xml:space="preserve">
+    <value>type de groupe</value>
+  </data>
+  <data name="GroupId" xml:space="preserve">
+    <value>ID du groupe</value>
+  </data>
+  <data name="HardinessZone" xml:space="preserve">
+    <value>zone de rusticité</value>
   </data>
   <data name="Key_HarvestMethod" xml:space="preserve">
     <value>méthode de récolte</value>
+  </data>
+  <data name="HousingType" xml:space="preserve">
+    <value>type de logement</value>
+  </data>
+  <data name="InitialWeight" xml:space="preserve">
+    <value>poids initial</value>
+  </data>
+  <data name="InitialWeightOfCalves" xml:space="preserve">
+    <value>poids initial des veaux</value>
   </data>
   <data name="Key_IrrigationType" xml:space="preserve">
     <value>type d'irrigation</value>
@@ -561,11 +552,23 @@
   <data name="Key_IsPesticideUsed" xml:space="preserve">
     <value>est-ce que des pesticides sont utilisés?</value>
   </data>
-  <data name="Key_Lignin" xml:space="preserve">
-    <value>Lignine</value>
+  <data name="LiveTreeCount" xml:space="preserve">
+    <value>nombre d'arbres vivants</value>
   </data>
-  <data name="Key_ManagementFactor" xml:space="preserve">
-    <value>facteur de gestion</value>
+  <data name="MaintenanceCoefficient" xml:space="preserve">
+    <value>coefficient d'entretien</value>
+  </data>
+  <data name="ManagementPeriodDays" xml:space="preserve">
+    <value>jours de la période de gestion</value>
+  </data>
+  <data name="ManagementPeriodName" xml:space="preserve">
+    <value>nom de la période de gestion</value>
+  </data>
+  <data name="CowCalfPairingNumber" xml:space="preserve">
+    <value>nombre de paires de vache et de veau</value>
+  </data>
+  <data name="ManagementPeriodStartDate" xml:space="preserve">
+    <value>date de début de la période de gestion </value>
   </data>
   <data name="Key_ManureAnimalSourceType" xml:space="preserve">
     <value>source animale de fumier</value>
@@ -579,14 +582,50 @@
   <data name="Key_ManureLocationSourceType" xml:space="preserve">
     <value>emplacement du fumier</value>
   </data>
+  <data name="ManureManagement" xml:space="preserve">
+    <value>gestion du fumier</value>
+  </data>
   <data name="Key_ManureStateType" xml:space="preserve">
     <value>état du fumier</value>
+  </data>
+  <data name="ME" xml:space="preserve">
+    <value>énergie métabolisée</value>
+  </data>
+  <data name="MethaneConversionFactor" xml:space="preserve">
+    <value>facteur de conversion en méthane</value>
+  </data>
+  <data name="MethaneConversionFactorAdjusted" xml:space="preserve">
+    <value>facteur de conversion en méthane ajusté</value>
+  </data>
+  <data name="MethaneConversionFactorOfDiet" xml:space="preserve">
+    <value>facteur de conversion en méthane de la ration</value>
+  </data>
+  <data name="MethaneConversionFactorOfManure" xml:space="preserve">
+    <value>facteur de conversion en méthane du fumier</value>
+  </data>
+  <data name="MethaneProducingCapacityOfManure" xml:space="preserve">
+    <value>potentiel de production de méthane du fumier</value>
+  </data>
+  <data name="MilkFatContent" xml:space="preserve">
+    <value>teneur en matières grasses du lait</value>
+  </data>
+  <data name="MilkProduction" xml:space="preserve">
+    <value>production laitière</value>
+  </data>
+  <data name="MilkProtein" xml:space="preserve">
+    <value>protéine laitière</value>
   </data>
   <data name="Key_MoistureContentOfCrop" xml:space="preserve">
     <value>teneur en humidité de la culture</value>
   </data>
+  <data name="N2ODirectEmissionFactor" xml:space="preserve">
+    <value>facteur d'émission directe de N2O</value>
+  </data>
   <data name="Key_Name" xml:space="preserve">
     <value>nom</value>
+  </data>
+  <data name="NDF" xml:space="preserve">
+    <value>fibre au détergent neutre (FDN)</value>
   </data>
   <data name="Key_NitrogenContentInExtraroot" xml:space="preserve">
     <value>teneur en azote extraracinaire</value>
@@ -600,20 +639,29 @@
   <data name="Key_NitrogenContentInStraw" xml:space="preserve">
     <value>teneur en azote de la paille</value>
   </data>
-  <data name="Key_NitrogenDeposit" xml:space="preserve">
-    <value>dépôt de l'azote</value>
+  <data name="NitrogenExcretionAdjusted" xml:space="preserve">
+    <value>excrétion d'azote ajustée</value>
   </data>
   <data name="Key_NitrogenFertilizerRate" xml:space="preserve">
     <value>taux de fertilisation azotée</value>
   </data>
-  <data name="Key_NitrogenFixation" xml:space="preserve">
-    <value>fixation de l'azote</value>
+  <data name="NumberOfAnimals" xml:space="preserve">
+    <value>nombre d'animaux</value>
   </data>
-  <data name="Key_NumberOfCropsInRotation" xml:space="preserve">
-    <value>nombre de cultures en rotation</value>
+  <data name="NumberOfCalves" xml:space="preserve">
+    <value>nombre de veaux</value>
+  </data>
+  <data name="NumberOfLambs" xml:space="preserve">
+    <value>nombre d'agneaux</value>
   </data>
   <data name="Key_NumberOfPesticidePasses" xml:space="preserve">
     <value>nombre d'applications de pesticides</value>
+  </data>
+  <data name="DefaultOtherLivestockInputFolder" xml:space="preserve">
+    <value>autre bétail</value>
+  </data>
+  <data name="PastureLocation" xml:space="preserve">
+    <value>emplacement du pâturage</value>
   </data>
   <data name="Key_PercentageOfProductYieldReturnedToSoil" xml:space="preserve">
     <value>pourcentage de rendement du produit retourné au sol</value>
@@ -636,231 +684,6 @@
   <data name="Key_PhosphorousFertilizerRate" xml:space="preserve">
     <value>dose d'application d'engrais phosphoré</value>
   </data>
-  <data name="Key_PlantCarbonInAgriculturalProduct" xml:space="preserve">
-    <value>carbone végétal dans le produit agricole</value>
-  </data>
-  <data name="Key_Sand" xml:space="preserve">
-    <value>Sable</value>
-  </data>
-  <data name="Key_SizeOfFirstRotationForField" xml:space="preserve">
-    <value>superficie de la première rotation pour le champ</value>
-  </data>
-  <data name="Key_TillageFactor" xml:space="preserve">
-    <value>facteur de travail du sol</value>
-  </data>
-  <data name="Key_TillageType" xml:space="preserve">
-    <value>type de travail du sol</value>
-  </data>
-  <data name="Key_TimePeriodCategoryString" xml:space="preserve">
-    <value>chaîne de catégories de période</value>
-  </data>
-  <data name="Key_UnderSownCropsUsed" xml:space="preserve">
-    <value>cultures contre-semées utilisées</value>
-  </data>
-  <data name="Key_YearInPerennialStand" xml:space="preserve">
-    <value>année du peuplement vivace</value>
-  </data>
-  <data name="Key_Yield" xml:space="preserve">
-    <value>rendement</value>
-  </data>
-  <data name="LabelCreatingBeefCattleInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les bovins de boucherie.</value>
-  </data>
-  <data name="LabelCreatingDairyCattleInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les bovins laitiers.</value>
-  </data>
-  <data name="LabelCreatingFieldInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les champs.</value>
-  </data>
-  <data name="LabelCreatingOtherAnimalsInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les autres animaux.</value>
-  </data>
-  <data name="LabelCreatingPoultryInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les volailles.</value>
-  </data>
-  <data name="LabelCreatingSheepInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les ovins.</value>
-  </data>
-  <data name="LabelCreatingSwineInputFiles" xml:space="preserve">
-    <value>création de fichiers de données sur les porcs.</value>
-  </data>
-  <data name="LabelFarm" xml:space="preserve">
-    <value>ferme</value>
-  </data>
-  <data name="LabelGettingExportedFarms" xml:space="preserve">
-    <value>lecture des fermes exportées ...</value>
-  </data>
-  <data name="LabelInputFilesHaveBeenCreatedAndStoredInYourFarmsDirectory" xml:space="preserve">
-    <value>{0} fichiers de composantes ont été créés en tout pour vos fermes importées.</value>
-  </data>
-  <data name="LabelNo" xml:space="preserve">
-    <value>non</value>
-  </data>
-  <data name="LabelProcessingComplete" xml:space="preserve">
-    <value>Le traitement est terminé, appuyez sur la touche « enter » pour sortir de l’application.</value>
-  </data>
-  <data name="LabelWhatIsThePathToYourExportedFarms" xml:space="preserve">
-    <value>Quel est le chemin d'accès complet au répertoire de vos fermes exportées?</value>
-  </data>
-  <data name="LabelWouldYouLikeToImportFarmsFromTheGui" xml:space="preserve">
-    <value>Avez-vous des fermes que vous aimeriez importer depuis l’interface graphique de l’utilisateur (GUI) de Holos?</value>
-  </data>
-  <data name="LabelYes" xml:space="preserve">
-    <value>oui</value>
-  </data>
-  <data name="LabelYesNo" xml:space="preserve">
-    <value>(oui/non)</value>
-  </data>
-  <data name="Lamb" xml:space="preserve">
-    <value>agneau</value>
-  </data>
-  <data name="LandAppliedManure" xml:space="preserve">
-    <value>fumier appliqué sur les terres</value>
-  </data>
-  <data name="LanguageNotSupported" xml:space="preserve">
-    <value>La langue {0} n’est pas supportée par l’interface de ligne de commande de Holos. Veuillez modifier la langue dans votre système d’opération et choisir français (Canada) ou anglais (Canada).</value>
-  </data>
-  <data name="ListOfValidDirectories" xml:space="preserve">
-    <value>Assurez-vous que les répertoires énumérés plus haut sont bien épelés, conformément à la liste des noms de répertoires de composantes valides ci-dessous :</value>
-  </data>
-  <data name="LiveTreeCount" xml:space="preserve">
-    <value>nombre d'arbres vivants</value>
-  </data>
-  <data name="MaintenanceCoefficient" xml:space="preserve">
-    <value>coefficient d'entretien</value>
-  </data>
-  <data name="ManagementPeriodDays" xml:space="preserve">
-    <value>jours de la période de gestion</value>
-  </data>
-  <data name="ManagementPeriodName" xml:space="preserve">
-    <value>nom de la période de gestion</value>
-  </data>
-  <data name="ManagementPeriodStartDate" xml:space="preserve">
-    <value>date de début de la période de gestion </value>
-  </data>
-  <data name="ManureCH4" xml:space="preserve">
-    <value>CH4 du fumier {0}</value>
-  </data>
-  <data name="ManureExcretionRate" xml:space="preserve">
-    <value>Taux d’excrétion dans le fumier</value>
-  </data>
-  <data name="ManureManagement" xml:space="preserve">
-    <value>gestion du fumier</value>
-  </data>
-  <data name="ME" xml:space="preserve">
-    <value>énergie métabolisée</value>
-  </data>
-  <data name="MethaneConversionFactor" xml:space="preserve">
-    <value>facteur de conversion en méthane</value>
-  </data>
-  <data name="MethaneConversionFactorAdjusted" xml:space="preserve">
-    <value>facteur de conversion en méthane ajusté</value>
-  </data>
-  <data name="MethaneConversionFactorOfDiet" xml:space="preserve">
-    <value>facteur de conversion en méthane de la ration</value>
-  </data>
-  <data name="MethaneConversionFactorOfManure" xml:space="preserve">
-    <value>facteur de conversion en méthane du fumier</value>
-  </data>
-  <data name="MethaneProducingCapacityOfManure" xml:space="preserve">
-    <value>potentiel de production de méthane du fumier</value>
-  </data>
-  <data name="Milk" xml:space="preserve">
-    <value>lait </value>
-  </data>
-  <data name="MilkFatContent" xml:space="preserve">
-    <value>teneur en matières grasses du lait</value>
-  </data>
-  <data name="MilkProduction" xml:space="preserve">
-    <value>production laitière</value>
-  </data>
-  <data name="MilkProtein" xml:space="preserve">
-    <value>protéine laitière</value>
-  </data>
-  <data name="MilkProteinContentAsPercentage" xml:space="preserve">
-    <value>Milk Protein Content As Percentage</value>
-  </data>
-  <data name="MoistureResponseFunctionAtSaturation" xml:space="preserve">
-    <value>Fonction de réponse à l’humidité au point de saturation = {0}</value>
-  </data>
-  <data name="MoistureResponseFunctionAtWiltingPoint" xml:space="preserve">
-    <value>Fonction de réponse à l’humidité au point de flétrissement = {0}</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>mois</value>
-  </data>
-  <data name="N2ODirectEmissionFactor" xml:space="preserve">
-    <value>facteur d'émission directe de N2O</value>
-  </data>
-  <data name="NameOfSettingsFile" xml:space="preserve">
-    <value>nom du fichier de paramètres</value>
-  </data>
-  <data name="NDF" xml:space="preserve">
-    <value>fibre au détergent neutre (FDN)</value>
-  </data>
-  <data name="NegativeInteger" xml:space="preserve">
-    <value>{0} n’est pas une donnée valide. L’erreur se trouve à la ligne : {1}, colonne {2} dans {3}.</value>
-  </data>
-  <data name="DietaryNetEnergyConcentration" xml:space="preserve">
-    <value>Dietary Net Energy Concentration</value>
-  </data>
-  <data name="NitrogenExcretionAdjusted" xml:space="preserve">
-    <value>excrétion d'azote ajustée</value>
-  </data>
-  <data name="NoFarmsToProcess" xml:space="preserve">
-    <value>Aucune ferme ne peut être traitée. Veuillez créer des fichiers de données pour vos fermes. Appuyez sur la touche « enter » pour sortir.</value>
-  </data>
-  <data name="NoFileData" xml:space="preserve">
-    <value>Le fichier suivant n’a aucune donnée à analyser : {0}.</value>
-  </data>
-  <data name="NotAValidPolygonID" xml:space="preserve">
-    <value>{0} n’est pas un ID de polygone valide.</value>
-  </data>
-  <data name="NumberOfAnimals" xml:space="preserve">
-    <value>nombre d'animaux</value>
-  </data>
-  <data name="NumberOfCalves" xml:space="preserve">
-    <value>nombre de veaux</value>
-  </data>
-  <data name="NumberOfLambs" xml:space="preserve">
-    <value>nombre d'agneaux</value>
-  </data>
-  <data name="NumberOfTrees" xml:space="preserve">
-    <value># arbres</value>
-  </data>
-  <data name="NumberOfYoungAnimals" xml:space="preserve">
-    <value>Nombre de jeunes animaux</value>
-  </data>
-  <data name="OutputDirectory" xml:space="preserve">
-    <value>répertoire de sortie = C:\\Holos\\InterfaceDeLigneDeCommandeHolos\\Sorties</value>
-  </data>
-  <data name="Outputs" xml:space="preserve">
-    <value>sorties</value>
-  </data>
-  <data name="ParsingFiles" xml:space="preserve">
-    <value>Analyse des fichiers ...</value>
-  </data>
-  <data name="ParsingFinished" xml:space="preserve">
-    <value>L’analyse est terminée.</value>
-  </data>
-  <data name="PastureLocation" xml:space="preserve">
-    <value>emplacement du pâturage</value>
-  </data>
-  <data name="PercentageOfProductReturnedToSoilForAnnuals" xml:space="preserve">
-    <value>Pourcentage du produit des cultures annuelles  qui est retourné au sol = {0}</value>
-  </data>
-  <data name="PercentageOfRootsReturnedToSoilForAnnuals" xml:space="preserve">
-    <value>Pourcentage des racines des cultures annuelles qui est retourné au sol = {0}</value>
-  </data>
-  <data name="PercentageOfStrawReturnedToSoilForAnnuals" xml:space="preserve">
-    <value>Pourcentage de la paille des cultures annuelles qui est retourné au sol = {0}</value>
-  </data>
-  <data name="PercentMortality" xml:space="preserve">
-    <value>% de mortalité</value>
-  </data>
-  <data name="PerennialCrops" xml:space="preserve">
-    <value>#cultures vivaces</value>
-  </data>
   <data name="PlantedTreeCount" xml:space="preserve">
     <value>nombre d'arbres plantés</value>
   </data>
@@ -870,47 +693,8 @@
   <data name="PlantYear" xml:space="preserve">
     <value>année de plantation</value>
   </data>
-  <data name="PrecipitationData" xml:space="preserve">
-    <value>#données de précipitations{0}</value>
-  </data>
-  <data name="PromptForFarmsFolderLocation" xml:space="preserve">
-    <value>Veuillez indiquer l’emplacement de votre dossier de « Fermes » pour exécuter l’interface de ligne de commande de Holos.</value>
-  </data>
-  <data name="PromptToEnterPolygonID" xml:space="preserve">
-    <value>Veuillez entrer l'ID de l’emplacement de votre ferme (ID du polygone).</value>
-  </data>
-  <data name="PromptUserForLanguage" xml:space="preserve">
-    <value>Veuillez entrer le numéro correspondant à votre langue de préférence (anglais = 1, français = 2)</value>
-  </data>
-  <data name="PromptUserForPolygonSelection" xml:space="preserve">
-    <value>Afin de traiter les données de votre ferme, l’interface de ligne de commande de Holos doit connaître l’emplacement de votre ferme pour générer des résultats. Si vous ignorez l’emplacement de la ferme, utilisez Holos pour la déterminer en sélectionnant votre zone géographique à la section « Détermination de l’emplacement de votre ferme ». La ferme qui n’a pas de fichier de paramètres est le : {0}</value>
-  </data>
-  <data name="PromptUserForUnitsOfMeasurement" xml:space="preserve">
-    <value>Veuillez entrer le numéro correspondant aux unités du système de mesure préféré (métrique = 1, impérial = 2)</value>
-  </data>
-  <data name="PromptUserToUsePreviousDirectory" xml:space="preserve">
-    <value>Le répertoire précédemment entré contenant vos fermes est : {0}.\n Voulez-vous continuer d’utiliser ce répertoire?</value>
-  </data>
-  <data name="ProportionOfIdealTree" xml:space="preserve">
-    <value>proportion de l'arbre idéal</value>
-  </data>
-  <data name="Rangeland" xml:space="preserve">
-    <value>#parcours naturel</value>
-  </data>
-  <data name="ReadingSettingsFile" xml:space="preserve">
-    <value>Lecture du fichier de paramètres ...</value>
-  </data>
-  <data name="Results" xml:space="preserve">
-    <value>_Résultats</value>
-  </data>
-  <data name="RipeningDay" xml:space="preserve">
-    <value>jour de maturation = {0}</value>
-  </data>
-  <data name="RootCrops" xml:space="preserve">
-    <value>#cultures racines</value>
-  </data>
-  <data name="Row" xml:space="preserve">
-    <value>rangée</value>
+  <data name="DefaultPoultryInputFolder" xml:space="preserve">
+    <value>volaille</value>
   </data>
   <data name="RowId" xml:space="preserve">
     <value>ID de la rangée</value>
@@ -921,23 +705,161 @@
   <data name="RowName" xml:space="preserve">
     <value>nom de la rangée</value>
   </data>
-  <data name="SameNameError" xml:space="preserve">
-    <value>Composantes ayant la même erreur de nom : Le fichier {0} suivant n’a pas un nom de composante unique : {1}. Le nom en conflit est {2}. Veuillez modifier la colonne appropriée qui réfère au nom des composantes dans le fichier mentionné qui doit être unique.</value>
+  <data name="DefaultSheepInputFolder" xml:space="preserve">
+    <value>mouton</value>
   </data>
-  <data name="SameNameErrorExceptionMessage" xml:space="preserve">
-    <value>Il y a {0} {1} composantes qui ont le même nom dans leurs fichiers de données. Veuillez modifier les fichiers mentionnés dans le CLI de manière à avoir des noms uniques.</value>
+  <data name="DefaultShelterbeltInputFolder" xml:space="preserve">
+    <value>brise-vents</value>
   </data>
-  <data name="SelectPolygonOptions" xml:space="preserve">
-    <value>Veuillez sélectionner l’une des options ci-dessous pour poursuivre le traitement.</value>
+  <data name="Species" xml:space="preserve">
+    <value>espèces</value>
+  </data>
+  <data name="Starch" xml:space="preserve">
+    <value>amidon</value>
+  </data>
+  <data name="StartWeight" xml:space="preserve">
+    <value>poids de départ</value>
+  </data>
+  <data name="DefaultSwineInputFolder" xml:space="preserve">
+    <value>porc</value>
+  </data>
+  <data name="TDN" xml:space="preserve">
+    <value>UNT</value>
+  </data>
+  <data name="Key_TillageType" xml:space="preserve">
+    <value>type de travail du sol</value>
+  </data>
+  <data name="Key_UnderSownCropsUsed" xml:space="preserve">
+    <value>cultures contre-semées utilisées</value>
+  </data>
+  <data name="VolatileSolidAdjusted" xml:space="preserve">
+    <value>solides volatils ajustés</value>
+  </data>
+  <data name="VolatileSolidsExcretion" xml:space="preserve">
+    <value>excrétion de solides volatils</value>
+  </data>
+  <data name="VolatilizationFraction" xml:space="preserve">
+    <value>fraction de volatilisation</value>
+  </data>
+  <data name="WoolProduction" xml:space="preserve">
+    <value>production de laine</value>
+  </data>
+  <data name="Key_YearInPerennialStand" xml:space="preserve">
+    <value>année du peuplement vivace</value>
+  </data>
+  <data name="YearlyEntericMethaneRate" xml:space="preserve">
+    <value>taux annuel de méthane entérique</value>
+  </data>
+  <data name="YearlyManureMethaneRate" xml:space="preserve">
+    <value>taux annuel de méthane du fumier</value>
+  </data>
+  <data name="YearlyNitrogenExcretionRate" xml:space="preserve">
+    <value>taux annuel d'excrétion d'azote</value>
+  </data>
+  <data name="YearOfObservation" xml:space="preserve">
+    <value>année d'observation</value>
+  </data>
+  <data name="Key_Yield" xml:space="preserve">
+    <value>rendement</value>
+  </data>
+  <data name="FarmResultsCO2E" xml:space="preserve">
+    <value>_CO2EÉmissions_</value>
+  </data>
+  <data name="FarmResultsEP" xml:space="preserve">
+    <value>_EstimationsDeLaProduction_</value>
+  </data>
+  <data name="FarmResultsFE" xml:space="preserve">
+    <value>_EstimationsDeL'alimentation_</value>
+  </data>
+  <data name="FarmResultsGHG" xml:space="preserve">
+    <value>_ÉmissionsDeGES_</value>
+  </data>
+  <data name="Outputs" xml:space="preserve">
+    <value>sorties</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>_Résultats</value>
+  </data>
+  <data name="TotalResultsCO2E" xml:space="preserve">
+    <value>résultatstotaux_EmissionsCO2E</value>
+  </data>
+  <data name="TotalResultsEP" xml:space="preserve">
+    <value>résultatstotaux_EstimationsDeLa Production</value>
+  </data>
+  <data name="TotalResultsFE" xml:space="preserve">
+    <value>résultatstotaux_EstimationsDeL'Alimentation</value>
+  </data>
+  <data name="TotalResultsForAllFarms" xml:space="preserve">
+    <value>résultats totaux pour toutes les fermes</value>
+  </data>
+  <data name="TotalResultsGHG" xml:space="preserve">
+    <value>résultatstotaux_EmissionsGES</value>
+  </data>
+  <data name="Alfa" xml:space="preserve">
+    <value>alfa = {0}</value>
+  </data>
+  <data name="AnnualCrops" xml:space="preserve">
+    <value>#cultures annuelles</value>
+  </data>
+  <data name="CoverCrops" xml:space="preserve">
+    <value>#cultures de couverture</value>
+  </data>
+  <data name="EmergenceDay" xml:space="preserve">
+    <value>jour de levée = {0}</value>
+  </data>
+  <data name="EvapotranspirationData" xml:space="preserve">
+    <value>#données d'évapotranspiration{0}</value>
+  </data>
+  <data name="FodderCorn" xml:space="preserve">
+    <value>#maïs fourrager</value>
   </data>
   <data name="SettingsFileHeader" xml:space="preserve">
     <value>#ID de polygone : {0}</value>
   </data>
-  <data name="SettingsFileWillBeCreatedHere" xml:space="preserve">
-    <value>Le fichier de paramètres sera créé ici : {0}</value>
+  <data name="MoistureResponseFunctionAtSaturation" xml:space="preserve">
+    <value>Fonction de réponse à l’humidité au point de saturation = {0}</value>
   </data>
-  <data name="Settings_Alfa" xml:space="preserve">
-    <value>alfa</value>
+  <data name="MoistureResponseFunctionAtWiltingPoint" xml:space="preserve">
+    <value>Fonction de réponse à l’humidité au point de flétrissement = {0}</value>
+  </data>
+  <data name="OutputDirectory" xml:space="preserve">
+    <value>répertoire de sortie = C:\\Holos\\InterfaceDeLigneDeCommandeHolos\\Sorties</value>
+  </data>
+  <data name="PercentageOfProductReturnedToSoilForAnnuals" xml:space="preserve">
+    <value>Pourcentage du produit des cultures annuelles  qui est retourné au sol = {0}</value>
+  </data>
+  <data name="PercentageOfRootsReturnedToSoilForAnnuals" xml:space="preserve">
+    <value>Pourcentage des racines des cultures annuelles qui est retourné au sol = {0}</value>
+  </data>
+  <data name="PercentageOfStrawReturnedToSoilForAnnuals" xml:space="preserve">
+    <value>Pourcentage de la paille des cultures annuelles qui est retourné au sol = {0}</value>
+  </data>
+  <data name="PerennialCrops" xml:space="preserve">
+    <value>#cultures vivaces</value>
+  </data>
+  <data name="PrecipitationData" xml:space="preserve">
+    <value>#données de précipitations{0}</value>
+  </data>
+  <data name="Rangeland" xml:space="preserve">
+    <value>#parcours naturel</value>
+  </data>
+  <data name="RipeningDay" xml:space="preserve">
+    <value>jour de maturation = {0}</value>
+  </data>
+  <data name="RootCrops" xml:space="preserve">
+    <value>#cultures racines</value>
+  </data>
+  <data name="SilageCrops" xml:space="preserve">
+    <value>#cultures à ensilage</value>
+  </data>
+  <data name="SoilData" xml:space="preserve">
+    <value>#données sur le sol</value>
+  </data>
+  <data name="TemperatureData" xml:space="preserve">
+    <value>#données de température{0}</value>
+  </data>
+  <data name="Variance" xml:space="preserve">
+    <value>variance = {0}</value>
   </data>
   <data name="Settings_AprilMeanTemperature" xml:space="preserve">
     <value>température moyenne d'avril</value>
@@ -959,15 +881,6 @@
   </data>
   <data name="Settings_BulkDensity" xml:space="preserve">
     <value>densité apparente</value>
-  </data>
-  <data name="Settings_CarbonConcentration" xml:space="preserve">
-    <value>concentration de carbone</value>
-  </data>
-  <data name="Settings_ClimateDataAcquisition" xml:space="preserve">
-    <value>acquisition de données climatiques</value>
-  </data>
-  <data name="Settings_ClimateFilename" xml:space="preserve">
-    <value>nom du fichier du climat</value>
   </data>
   <data name="Settings_DecemberMeanTemperature" xml:space="preserve">
     <value>température moyenne de décembre</value>
@@ -1004,9 +917,6 @@
   </data>
   <data name="Settings_EmissionFactorForVolatilization" xml:space="preserve">
     <value>facteur d'émission due à la volatilisation</value>
-  </data>
-  <data name="Settings_EnableCarbonModelling" xml:space="preserve">
-    <value>permettre la modélisation du carbone</value>
   </data>
   <data name="Settings_FebruaryMeanTemperature" xml:space="preserve">
     <value>température moyenne de février</value>
@@ -1055,12 +965,6 @@
   </data>
   <data name="Settings_JunePrecipitation" xml:space="preserve">
     <value>précipitations de juin</value>
-  </data>
-  <data name="Settings_Latitude" xml:space="preserve">
-    <value>latitude</value>
-  </data>
-  <data name="Settings_Longitude" xml:space="preserve">
-    <value>longitude</value>
   </data>
   <data name="Settings_MarchMeanTemperature" xml:space="preserve">
     <value>température moyenne de mars</value>
@@ -1167,9 +1071,6 @@
   <data name="Settings_PercentageOfStrawReturnedToSoilForRootCrops" xml:space="preserve">
     <value>Pourcentage de la paille des cultures racines qui est retourné au sol</value>
   </data>
-  <data name="Settings_PolygonNumber" xml:space="preserve">
-    <value>Numéro du polygone</value>
-  </data>
   <data name="Settings_ProportionOfClayInSoil" xml:space="preserve">
     <value>Proportion d’argile du sol</value>
   </data>
@@ -1191,9 +1092,6 @@
   <data name="Settings_SeptemberPrecipitation" xml:space="preserve">
     <value>précipitations de septembre</value>
   </data>
-  <data name="Settings_SoilFunctionalCategory" xml:space="preserve">
-    <value>catégorie fonctionnelle de sol</value>
-  </data>
   <data name="Settings_SoilGreatGroup" xml:space="preserve">
     <value>grand groupe de sols</value>
   </data>
@@ -1206,53 +1104,53 @@
   <data name="Settings_TopLayerThickness" xml:space="preserve">
     <value>épaisseur de la couche supérieure</value>
   </data>
-  <data name="Settings_UseClimateParameterInsteadOfManagementFactor" xml:space="preserve">
-    <value>Utilisez un paramètre climatique au lieu d’un facteur de gestion</value>
-  </data>
   <data name="Settings_Variance" xml:space="preserve">
     <value>écart</value>
   </data>
   <data name="Settings_YearOfObservation" xml:space="preserve">
     <value>année d'observation</value>
   </data>
+  <data name="EnumOutputDirectory" xml:space="preserve">
+    <value>répertoire d’extrants</value>
+  </data>
+  <data name="LanguageNotSupported" xml:space="preserve">
+    <value>La langue {0} n’est pas supportée par l’interface de ligne de commande de Holos. Veuillez modifier la langue dans votre système d’opération et choisir français (Canada) ou anglais (Canada).</value>
+  </data>
+  <data name="NameOfSettingsFile" xml:space="preserve">
+    <value>nom du fichier de paramètres</value>
+  </data>
+  <data name="AboveGroundCStocksPerTree" xml:space="preserve">
+    <value>stocks de C aérien par arbre</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>âge</value>
+  </data>
+  <data name="BelowGroundCStocksPerTree" xml:space="preserve">
+    <value>stocks de C souterrain par arbre</value>
+  </data>
+  <data name="CPlanting" xml:space="preserve">
+    <value>C_plantation</value>
+  </data>
+  <data name="CStocksPerTree" xml:space="preserve">
+    <value>stocks de C par arbre</value>
+  </data>
+  <data name="CTreeType" xml:space="preserve">
+    <value>C_typed'arbre</value>
+  </data>
+  <data name="NumberOfTrees" xml:space="preserve">
+    <value># arbres</value>
+  </data>
+  <data name="PercentMortality" xml:space="preserve">
+    <value>% de mortalité</value>
+  </data>
+  <data name="ProportionOfIdealTree" xml:space="preserve">
+    <value>proportion de l'arbre idéal</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>rangée</value>
+  </data>
   <data name="Shelterbelt" xml:space="preserve">
     <value>brise-vent</value>
-  </data>
-  <data name="SilageCrops" xml:space="preserve">
-    <value>#cultures à ensilage</value>
-  </data>
-  <data name="SoilData" xml:space="preserve">
-    <value>#données sur le sol</value>
-  </data>
-  <data name="Species" xml:space="preserve">
-    <value>espèces</value>
-  </data>
-  <data name="Starch" xml:space="preserve">
-    <value>amidon</value>
-  </data>
-  <data name="StartingComponentConversion" xml:space="preserve">
-    <value>début de la conversion de composantes…</value>
-  </data>
-  <data name="StartingConversion" xml:space="preserve">
-    <value>début de la conversion de {0}...</value>
-  </data>
-  <data name="StartingIndividualComponentProcessing" xml:space="preserve">
-    <value>Début du traitement des composantes de la ferme suivante : {0}</value>
-  </data>
-  <data name="StartingProcessing" xml:space="preserve">
-    <value>Début du traitement des fermes.</value>
-  </data>
-  <data name="StartWeight" xml:space="preserve">
-    <value>poids de départ</value>
-  </data>
-  <data name="SubTotal" xml:space="preserve">
-    <value>sous-total {0}</value>
-  </data>
-  <data name="TDN" xml:space="preserve">
-    <value>UNT</value>
-  </data>
-  <data name="TemperatureData" xml:space="preserve">
-    <value>#données de température{0}</value>
   </data>
   <data name="TotalCO2Shelterbelt" xml:space="preserve">
     <value>CO2 total_brise-vent</value>
@@ -1260,65 +1158,170 @@
   <data name="TotalCShelterbelt" xml:space="preserve">
     <value>C total_brise-vent</value>
   </data>
+  <data name="Year" xml:space="preserve">
+    <value>année</value>
+  </data>
+  <data name="Settings_Alfa" xml:space="preserve">
+    <value>alfa</value>
+  </data>
+  <data name="HolosExampleFarm" xml:space="preserve">
+    <value>exemple de ferme Holos</value>
+  </data>
+  <data name="ICBMSettingsHeader" xml:space="preserve">
+    <value># MIBC/Climat</value>
+  </data>
+  <data name="EmissionFactorLeaching" xml:space="preserve">
+    <value>facteur d'émission due au lessivage</value>
+  </data>
+  <data name="EmissionFactorVolatilization" xml:space="preserve">
+    <value>facteur d'émission due à la volatilisation</value>
+  </data>
+  <data name="FractionLeaching" xml:space="preserve">
+    <value>fraction lessivée</value>
+  </data>
+  <data name="PromptForFarmsFolderLocation" xml:space="preserve">
+    <value>Veuillez indiquer l’emplacement de votre dossier de « Fermes » pour exécuter l’interface de ligne de commande de Holos.</value>
+  </data>
+  <data name="InitialMessageAfterInstallation" xml:space="preserve">
+    <value>Holos a généré un dossier de ferme modèle avec les répertoires d’échantillons et les fichiers de données dans le répertoire suivant : {0}. Veuillez aller dans ces dossiers et créer des fichiers de données pour votre ferme. Appuyez sur la touche « enter » pour sortir de l’application.</value>
+  </data>
+  <data name="FarmDoesNotContainAnyData" xml:space="preserve">
+    <value>La ferme : {0} ne contient aucune donnée relative aux composants. Il n’y a donc aucune donnée à traiter!</value>
+  </data>
+  <data name="NoFarmsToProcess" xml:space="preserve">
+    <value>Aucune ferme ne peut être traitée. Veuillez créer des fichiers de données pour vos fermes. Appuyez sur la touche « enter » pour sortir.</value>
+  </data>
+  <data name="PromptUserToUsePreviousDirectory" xml:space="preserve">
+    <value>Le répertoire précédemment entré contenant vos fermes est : {0}.\n Voulez-vous continuer d’utiliser ce répertoire?</value>
+  </data>
+  <data name="LabelProcessingComplete" xml:space="preserve">
+    <value>Le traitement est terminé, appuyez sur la touche « enter » pour sortir de l’application.</value>
+  </data>
+  <data name="InterpolatedTotalNumberOfFarmsFound" xml:space="preserve">
+    <value>{0} total de fermes trouvées.</value>
+  </data>
+  <data name="LabelWhatIsThePathToYourExportedFarms" xml:space="preserve">
+    <value>Quel est le chemin d'accès complet au répertoire de vos fermes exportées?</value>
+  </data>
+  <data name="LabelWouldYouLikeToImportFarmsFromTheGui" xml:space="preserve">
+    <value>Avez-vous des fermes que vous aimeriez importer depuis l’interface graphique de l’utilisateur (GUI) de Holos?</value>
+  </data>
+  <data name="LabelYes" xml:space="preserve">
+    <value>oui</value>
+  </data>
+  <data name="LabelCreatingFieldInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les champs.</value>
+  </data>
+  <data name="LabelCreatingSwineInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les porcs.</value>
+  </data>
+  <data name="LabelCreatingBeefCattleInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les bovins de boucherie.</value>
+  </data>
+  <data name="LabelCreatingDairyCattleInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les bovins laitiers.</value>
+  </data>
+  <data name="LabelCreatingSheepInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les ovins.</value>
+  </data>
+  <data name="LabelCreatingPoultryInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les volailles.</value>
+  </data>
+  <data name="LabelCreatingOtherAnimalsInputFiles" xml:space="preserve">
+    <value>création de fichiers de données sur les autres animaux.</value>
+  </data>
+  <data name="LabelGettingExportedFarms" xml:space="preserve">
+    <value>lecture des fermes exportées ...</value>
+  </data>
+  <data name="LabelFarm" xml:space="preserve">
+    <value>ferme</value>
+  </data>
+  <data name="InterpolatedTotalFarmsSuccessfullyImported" xml:space="preserve">
+    <value>{0} total de fermes importées.</value>
+  </data>
+  <data name="LabelNo" xml:space="preserve">
+    <value>non</value>
+  </data>
+  <data name="LabelYesNo" xml:space="preserve">
+    <value>(oui/non)</value>
+  </data>
+  <data name="LabelInputFilesHaveBeenCreatedAndStoredInYourFarmsDirectory" xml:space="preserve">
+    <value>{0} fichiers de composantes ont été créés en tout pour vos fermes importées.</value>
+  </data>
+  <data name="Settings_UseClimateParameterInsteadOfManagementFactor" xml:space="preserve">
+    <value>Utilisez un paramètre climatique au lieu d’un facteur de gestion</value>
+  </data>
+  <data name="Settings_ClimateFilename" xml:space="preserve">
+    <value>nom du fichier du climat</value>
+  </data>
+  <data name="Settings_SoilFunctionalCategory" xml:space="preserve">
+    <value>catégorie fonctionnelle de sol</value>
+  </data>
   <data name="TotalResultsAllFields" xml:space="preserve">
     <value>ICBM_Resultats_toutes les_farms</value>
   </data>
-  <data name="TotalResultsCO2E" xml:space="preserve">
-    <value>résultatstotaux_EmissionsCO2E</value>
+  <data name="Key_NitrogenDeposit" xml:space="preserve">
+    <value>dépôt de l'azote</value>
   </data>
-  <data name="TotalResultsEP" xml:space="preserve">
-    <value>résultatstotaux_EstimationsDeLa Production</value>
+  <data name="Key_NitrogenFixation" xml:space="preserve">
+    <value>fixation de l'azote</value>
   </data>
-  <data name="TotalResultsFE" xml:space="preserve">
-    <value>résultatstotaux_EstimationsDeL'Alimentation</value>
+  <data name="DataMissingOptionalHeader" xml:space="preserve">
+    <value>Un en-tête facultatif nommé « {0} » manque. Holos utilisera une valeur par défaut dans {1}.</value>
   </data>
-  <data name="TotalResultsForAllFarms" xml:space="preserve">
-    <value>résultats totaux pour toutes les fermes</value>
+  <data name="Settings_Latitude" xml:space="preserve">
+    <value>latitude</value>
   </data>
-  <data name="TotalResultsGHG" xml:space="preserve">
-    <value>résultatstotaux_EmissionsGES</value>
+  <data name="Settings_Longitude" xml:space="preserve">
+    <value>longitude</value>
   </data>
-  <data name="Totals" xml:space="preserve">
-    <value>totaux</value>
+  <data name="Settings_ClimateDataAcquisition" xml:space="preserve">
+    <value>acquisition de données climatiques</value>
   </data>
-  <data name="Uncertainty" xml:space="preserve">
-    <value>incertitude</value>
+  <data name="Settings_EnableCarbonModelling" xml:space="preserve">
+    <value>permettre la modélisation du carbone</value>
   </data>
-  <data name="Variance" xml:space="preserve">
-    <value>variance = {0}</value>
+  <data name="Key_Lignin" xml:space="preserve">
+    <value>Lignine</value>
   </data>
-  <data name="VolatileSolidAdjusted" xml:space="preserve">
-    <value>solides volatils ajustés</value>
+  <data name="Key_Sand" xml:space="preserve">
+    <value>Sable</value>
+  </data>
+  <data name="Settings_PolygonNumber" xml:space="preserve">
+    <value>Numéro du polygone</value>
+  </data>
+  <data name="DailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Taux quotidien d’émission de méthane du fumier</value>
   </data>
   <data name="VolatileSolids" xml:space="preserve">
     <value>Solides volatils</value>
   </data>
-  <data name="VolatileSolidsExcretion" xml:space="preserve">
-    <value>excrétion de solides volatils</value>
+  <data name="NumberOfYoungAnimals" xml:space="preserve">
+    <value>Nombre de jeunes animaux</value>
   </data>
-  <data name="VolatilizationFraction" xml:space="preserve">
-    <value>fraction de volatilisation</value>
+  <data name="FractionOfCarbonInManure" xml:space="preserve">
+    <value>Fraction de carbone dans le fumier</value>
   </data>
-  <data name="WoolProduction" xml:space="preserve">
-    <value>production de laine</value>
+  <data name="ManureExcretionRate" xml:space="preserve">
+    <value>Taux d’excrétion dans le fumier</value>
   </data>
-  <data name="Yards" xml:space="preserve">
-    <value>verges</value>
+  <data name="ActivityCoefficientOfFeedingSituation" xml:space="preserve">
+    <value>Coefficient d’activité de la situation alimentaire</value>
   </data>
-  <data name="Year" xml:space="preserve">
-    <value>année</value>
+  <data name="AshContentOfDiet" xml:space="preserve">
+    <value>Teneur en cendres du régime alimentaire</value>
   </data>
-  <data name="YearlyEntericMethaneRate" xml:space="preserve">
-    <value>taux annuel de méthane entérique</value>
+  <data name="GroupPairingNumber" xml:space="preserve">
+    <value>Numéro d'appariement au groupe</value>
   </data>
-  <data name="YearlyManureMethaneRate" xml:space="preserve">
-    <value>taux annuel de méthane du fumier</value>
+  <data name="MilkProteinContentAsPercentage" xml:space="preserve">
+    <value>Milk Protein Content As Percentage</value>
   </data>
-  <data name="YearlyNitrogenExcretionRate" xml:space="preserve">
-    <value>taux annuel d'excrétion d'azote</value>
+  <data name="AnimalsAreMilkFedOnly" xml:space="preserve">
+    <value>Les animaux sont nourris au lait seulement</value>
   </data>
-  <data name="YearOfObservation" xml:space="preserve">
-    <value>année d'observation</value>
+  <data name="DietaryNetEnergyConcentration" xml:space="preserve">
+    <value>Dietary Net Energy Concentration</value>
   </data>
   <data name="MoistureContentOfBeddingMaterial" xml:space="preserve">
     <value>Teneur en humidité de la matière constituant la litière</value>
@@ -1343,6 +1346,9 @@
   </data>
   <data name="AmmoniaEmissionFactorForManureStorage" xml:space="preserve">
     <value>Facteur d’émission d’ammoniac pour le stockage du fumier</value>
+  </data>
+  <data name="LabelAreYourExportedFarmsInCurrentFarmDirectory" xml:space="preserve">
+    <value>Les fermes exportées figurent-elles dans votre répertoire actuel?</value>
   </data>
   <data name="Settings_Province" xml:space="preserve">
     <value>Province</value>
@@ -1400,8 +1406,14 @@
   <data name="Key_FertilizerBlend" xml:space="preserve">
     <value>Mélange d’engrais</value>
   </data>
-  <data name="DataMissingOptionalHeader" xml:space="preserve">
-    <value>Un en-tête facultatif nommé « {0} » manque. Holos utilisera une valeur par défaut dans {1}.</value>
+  <data name="InputFileNotFound" xml:space="preserve">
+    <value>Erreur : fichier d’entrée {0} introuvable.</value>
+  </data>
+  <data name="LabelCreatingSettingsFile" xml:space="preserve">
+    <value>Création du fichier . SETTINGS.</value>
+  </data>
+  <data name="CannotWriteToNetworkDrive" xml:space="preserve">
+    <value>Impossible d’écrire des fichiers sur le lecteur réseau : {0}</value>
   </data>
   <data name="FractionOfNitrogenInManure" xml:space="preserve">
     <value>Fraction d’azote dans le fumier</value>
@@ -1409,22 +1421,13 @@
   <data name="DailyTanExcretion" xml:space="preserve">
     <value>Excrétion quotidienne d'AAT</value>
   </data>
-  <data name="CannotWriteToNetworkDrive" xml:space="preserve">
-    <value>Impossible d’écrire des fichiers sur le lecteur réseau : {0}</value>
-  </data>
   <data name="ComponentType" xml:space="preserve">
     <value>Type de composant</value>
   </data>
-  <data name="InputFileNotFound" xml:space="preserve">
-    <value>Erreur : fichier d’entrée {0} introuvable.</value>
-  </data>
-  <data name="LabelAreYourExportedFarmsInCurrentFarmDirectory" xml:space="preserve">
-    <value>Les fermes exportées figurent-elles dans votre répertoire actuel?</value>
-  </data>
-  <data name="LabelCreatingSettingsFile" xml:space="preserve">
-    <value>Création du fichier . SETTINGS.</value>
-  </data>
   <data name="Nemf" xml:space="preserve">
     <value>Nemf</value>
+  </data>
+  <data name="IndoorBarnTemperature" xml:space="preserve">
+    <value />
   </data>
 </root>
