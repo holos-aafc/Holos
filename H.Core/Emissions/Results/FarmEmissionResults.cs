@@ -15,6 +15,16 @@ namespace H.Core.Emissions.Results
 {
     public class FarmEmissionResults : ResultsViewItemBase
     {
+        public class DailyPrint
+        {
+            public string Component { get; set; }
+            public string AnimalGroup { get; set; }
+            public DateTime Date { get; set; }
+            public double Temp { get; set; }
+            public double AverageTemparatureLast30DaysKelving { get; set; }
+            public double ClimateFactor { get; set; }
+        }
+
         #region Fields
 
         private readonly EmissionTypeConverter _emissionTypeConverter = new EmissionTypeConverter();
@@ -391,6 +401,60 @@ namespace H.Core.Emissions.Results
         #endregion
 
         #region Public Methods
+
+        public List<DailyPrint> GetDailyPrint()
+        {
+            var result = new List<DailyPrint>();
+
+            foreach (var animalResult in this.AnimalComponentEmissionsResults)
+            {
+                foreach (var resultsForAllGroups in animalResult.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    foreach (var groupEmissionsByMonth in resultsForAllGroups.GroupEmissionsByMonths)
+                    {
+                        foreach (var groupEmissionsByDay in groupEmissionsByMonth.DailyEmissions)
+                        {
+                            var a = new DailyPrint
+                            {
+                                Component = animalResult.Component.Name,
+                                AnimalGroup = resultsForAllGroups.AnimalGroup.Name,
+                                Date = groupEmissionsByDay.DateTime,
+                                Temp = groupEmissionsByDay.Temperature,
+                                AverageTemparatureLast30DaysKelving =
+                                    groupEmissionsByDay.AverageTemperatureOverLast30Days,
+                                ClimateFactor = groupEmissionsByDay.ClimateFactor,
+                            };
+
+                            result.Add(a);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public List<GroupEmissionsByDay> GetAllDailyResultsByYear(int year)
+        {
+            var result = this.GetAllDailyResults();
+
+            var byYear = result.Where(x => x.DateTime.Year == year).ToList();
+
+            return byYear;
+        }
+
+        public List<GroupEmissionsByDay> GetAllDailyResults()
+        {
+            var result = new List<GroupEmissionsByDay>();
+
+            foreach (var animalComponentEmissionsResult in this.AnimalComponentEmissionsResults)
+            {
+                var results = animalComponentEmissionsResult.GetDailyEmissions();
+                results.AddRange(results);
+            }
+
+            return result;
+        }
 
         public List<CropViewItem> GetCropResultsByField(FieldSystemComponent fieldSystemComponent)
         {
