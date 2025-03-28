@@ -53,7 +53,7 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
 
                 // Equation 11.3.2-9
-                var totalYieldForArea = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration;
+                var totalYieldForArea = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration) / (1 - (currentYearViewItem.MoistureContentOfCropPercentage / 100.0));
 
                 // Convert to per hectare
                 currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
