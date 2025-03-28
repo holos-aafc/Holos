@@ -1823,6 +1823,11 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _nonAccumulatedNitrogenEnteringPoolAvailableInStorage, value);
         }
 
+        /// <summary>
+        /// (degrees kelvin)
+        /// </summary>
+        public double AverageTemperatureOverLast30Days { get; set; }
+
         #endregion
     }
 }

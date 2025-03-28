@@ -736,6 +736,7 @@ namespace H.Core.Services.Animals
             double temperature, Farm farm)
         {
             var averageTemperatureOverLast30Days = this.CalculateDegreesKelvinOverLast30Days(farm, dailyEmissions);
+            dailyEmissions.AverageTemperatureOverLast30Days = averageTemperatureOverLast30Days;
 
             dailyEmissions.ClimateFactor = this.CalculateClimateFactor(
                 averageKelvinAirTemperature: averageTemperatureOverLast30Days);
