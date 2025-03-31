@@ -25,11 +25,7 @@ namespace H.Core.Calculators.Carbon
             CropViewItem nextYearViewItem, 
             Farm farm)
         {
-            var isNonSwathingGrazingScenario = currentYearViewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
-                                    farm.CropHasGrazingAnimals(currentYearViewItem) &&
-                                    farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
-                                    currentYearViewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
-                                    currentYearViewItem.HarvestMethod != HarvestMethods.Swathing;
+            var isNonSwathingGrazingScenario = farm.IsNonSwathingGrazingScenario(currentYearViewItem);
 
             currentYearViewItem.PlantCarbonInAgriculturalProduct = this.CalculatePlantCarbonInAgriculturalProduct(
                 previousYearViewItem: previousYearViewItem,
@@ -53,7 +49,8 @@ namespace H.Core.Calculators.Carbon
                 currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
 
                 // Equation 11.3.2-9
-                var totalYieldForArea = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration) / (1 - (currentYearViewItem.MoistureContentOfCropPercentage / 100.0));
+                var moistureContent = currentYearViewItem.GrazingViewItems.Any() ? currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
+                var totalYieldForArea = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration) / (1 - (moistureContent / 100.0));
 
                 // Convert to per hectare
                 currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;

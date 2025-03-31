@@ -236,6 +236,12 @@ namespace H.Core.Services.LandManagement
                 {
                     // Leave whatever was set for the last year (by default this will be 100% set at initialization)
                 }
+
+                if (farm.IsNonSwathingGrazingScenario(cropViewItem))
+                {
+                    var moistureContent = cropViewItem.GrazingViewItems.Any() ? cropViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
+                    cropViewItem.MoistureContentOfCropPercentage = moistureContent;
+                }
             }
         }
     }
