@@ -96,7 +96,6 @@ namespace H.Core.Services.Animals
                 case DigestateState.Raw:
                     {
                         amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromRawDigestate).ToList();
-
                         result = amounts.Last();
 
                         break;
@@ -105,7 +104,6 @@ namespace H.Core.Services.Animals
                 case DigestateState.SolidPhase:
                     {
                         amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromSolidDigestate).ToList();
-
                         result = amounts.Last();
 
                         break;
@@ -114,7 +112,6 @@ namespace H.Core.Services.Animals
                 case DigestateState.LiquidPhase:
                     {
                         amounts = tankStates.Where(x => x.DateCreated.Year == year).OrderBy(x => x.DateCreated).Select(x => x.NitrogenFromLiquidDigestate).ToList();
-
                         result = amounts.Last();
 
                         break;
@@ -132,7 +129,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Returns the date when the maximum amount of of digestate is available
+        /// Returns the date when the maximum amount of digestate is available
         /// </summary>
         /// <param name="farm">The farm to consider</param>
         /// <param name="state">The <see cref="DigestateState"/> to consider</param>
@@ -689,7 +686,6 @@ namespace H.Core.Services.Animals
             // There should only be raw amounts if there is no separation performed
             if (component.IsLiquidSolidSeparated == false)
             {
-
                 var totalCarbonUsed = this.GetTotalAmountOfCarbonAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Livestock);
                 var totalNitrogenUsed = this.GetTotalAmountOfNitrogenAppliedOnDay(outputDate, farm, DigestateState.Raw, ManureLocationSourceType.Livestock);
 
