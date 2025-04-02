@@ -796,8 +796,15 @@ namespace H.Core.Services.Animals
 
             if (climateInDateRange.Any() == false)
             {
-                var monthlyAverage = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateNow.Year, (Months)dateNow.Month);
-                degreesKelvinList.Add(monthlyAverage);
+                var degreesCelsius = farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateNow.Year, (Months)dateNow.Month);
+                if (degreesCelsius <= 0)
+                {
+                    degreesCelsius = 1;
+                }
+
+                var degreesKelvin = degreesCelsius + 273.15;
+
+                degreesKelvinList.Add(degreesKelvin);
             }
             else
             {
