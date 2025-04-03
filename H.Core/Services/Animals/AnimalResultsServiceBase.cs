@@ -138,7 +138,7 @@ namespace H.Core.Services.Animals
 
                 var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
 
-                CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                CalculateEnergyEmissions(groupEmissionsByMonth, farm, animalComponent);
                 CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
 
                 animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
@@ -199,7 +199,7 @@ namespace H.Core.Services.Animals
 
                     var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
 
-                    CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                    CalculateEnergyEmissions(groupEmissionsByMonth, farm, animalComponent);
                     CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
 
                     animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
@@ -253,7 +253,8 @@ namespace H.Core.Services.Animals
 
         #region Protected Methods
 
-        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
+        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm,
+            AnimalComponentBase animalComponentBase)
         {
         }
 

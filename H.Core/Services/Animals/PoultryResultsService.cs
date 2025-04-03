@@ -337,12 +337,13 @@ namespace H.Core.Services.Animals
             return dailyEmissions;
         }
 
-        protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
+        protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm,
+            AnimalComponentBase animalComponentBase)
         {
             if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsNewlyHatchedEggs() || 
                 groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsEggs())
             {
-                groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateEnergyEmissionsFromHatchery(groupEmissionsByMonth, farm);
+                groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateEnergyEmissionsFromHatchery(groupEmissionsByMonth, farm, animalComponentBase);
 
                 return;
             }
@@ -506,15 +507,26 @@ namespace H.Core.Services.Animals
         ///
         /// (kg CO2)
         /// </summary>
-        private double CalculateEnergyEmissionsFromHatchery(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
+        private double CalculateEnergyEmissionsFromHatchery(
+            GroupEmissionsByMonth groupEmissionsByMonth, 
+            Farm farm,
+            AnimalComponentBase animalComponent)
         {
+            // Get entire production cycle length in days
+            var managementPeriods = animalComponent.Groups.SelectMany(x => x.ManagementPeriods).ToList();
+            var totalDaysInProductionCycle = managementPeriods.Sum(x => x.Duration.TotalDays);
+            if (totalDaysInProductionCycle == 0)
+            {
+                // Prevent division by zero
+                totalDaysInProductionCycle = 1;
+            }
+
             var energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
             var barnCapacity = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals;
             var daysInMonth = (double) groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth;
-            var daysInManagementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.Duration.TotalDays;
 
             var emissionsForEntireProductionCycle = (barnCapacity / 1000.0) * 223.52 * energyConversionFactor;
-            var emissionsPerDay = emissionsForEntireProductionCycle * (1.0 / daysInManagementPeriod);
+            var emissionsPerDay = emissionsForEntireProductionCycle * (1.0 / totalDaysInProductionCycle);
             var result  = emissionsPerDay * daysInMonth;
 
             return result;
