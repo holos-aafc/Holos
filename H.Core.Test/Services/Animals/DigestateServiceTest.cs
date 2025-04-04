@@ -207,7 +207,7 @@ namespace H.Core.Test.Services.Animals
         [TestMethod]
         public void GetTotalAmountOfDigestateAppliedOnDay()
         {
-            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_date, _farm, _state, ManureLocationSourceType.Livestock);
+            var result = _sut.GetTotalAmountOfDigestateAppliedOnDay(_livestockDigestateApplication.DateCreated.Date, _farm, _state, ManureLocationSourceType.Livestock);
 
             Assert.AreEqual(50, result);
         }
