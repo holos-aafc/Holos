@@ -137,7 +137,7 @@ namespace H.Core.Test.Services.Animals
             _cropViewItem = base.GetTestCropViewItem();
             _livestockDigestateApplication = base.GetTestRawDigestateApplicationViewItem();
             _livestockDigestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
-            _livestockDigestateApplication.DateCreated = _date;
+            _livestockDigestateApplication.DateCreated = _dailyOutput1.Date.Date;
             _livestockDigestateApplication.DigestateState = _state;
 
             _importedDigestateApplication = base.GetTestRawDigestateApplicationViewItem();
