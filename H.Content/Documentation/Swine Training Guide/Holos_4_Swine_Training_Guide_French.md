@@ -246,7 +246,7 @@ La composante Naissage au sevrage est divisée en quatre groupes d’animaux, qu
 
 1. Cliquez sur la période de gestion **"Jeunes truies vides"**, à **l’étape 2**, pour activer cette période de gestion.
 
-2. Assurez-vous que la date de début est le **"1er janvier 2024"** et que la date de fin est le **"6 janvier 2024"** (5 jours). Les dates de début et de fin par défaut indiquées dans Holos peuvent être modifiées par l’utilisateur; le **nombre de jours** est alors ajusté en conséquence.
+2. Assurez-vous que la date de début est le **"1er janvier 2025"** et que la date de fin est le **"6 janvier 2025"** (5 jours). Les dates de début et de fin par défaut indiquées dans Holos peuvent être modifiées par l’utilisateur; le **nombre de jours** est alors ajusté en conséquence.
 
 3. Entrez les données liées au nombre d’animaux, à la ration, au système de gestion du fumier et au type de logement à **l’étape 3**. Dans la page d’onglet **Général**:
     * Sélectionnez l’option **"Vide (pas en lactation ni en gestation)"** comme étape de production.
@@ -256,7 +256,7 @@ La composante Naissage au sevrage est divisée en quatre groupes d’animaux, qu
 
 3. Dans le menu déroulant Ration de la page d’onglet **Ration**, sélectionnez l’option **"Gestation"**. Dans la page d’onglet **Logement**, sélectionnez l’option **"Logé dans l’étable"** et sélectionnez le type de litière à **"Paille (hachée)"**. Dans la page d’onglet **Fumier**, sélectionnez l’option **"Liquide/lisier avec croûte naturelle"**.
 
-4. Pour chacune des trois périodes de gestion nommées **"Jeunes truies saillies (étapes 1 à 3)"**", fixez les dates de début et de fin respectives pour que les périodes aient **38** jours (étape 1 : 7 janvier 2024 à 14 février 2024, etc.).
+4. Pour chacune des trois périodes de gestion nommées **"Jeunes truies saillies (étapes 1 à 3)"**", fixez les dates de début et de fin respectives pour que les périodes aient **38** jours (étape 1 : 7 janvier 2025 à 14 février 2025, etc.).
 
 5. Surlignez la période de gestion **"Jeunes truies saillies (étape 1)"**, et dans la page **d’onglet Général**:
     * Sélectionnez l’option **"Gestation"** comme étape de production.
@@ -267,7 +267,7 @@ La composante Naissage au sevrage est divisée en quatre groupes d’animaux, qu
 
 7. Répétez les étapes 7 et 8 pour les périodes de gestion **Jeunes truies saillies (étape 2 et 3)**.
   
-8. Enfin, sélectionnez l’option **"Jeunes truies de naissage"**, entrez la date du **"1er octobre 2024"** comme date de début et la date du **"24 mai 2024"** comme date de fin (21 jours).
+8. Enfin, sélectionnez l’option **"Jeunes truies de naissage"**, entrez la date du **"1er octobre 2025"** comme date de début et la date du **"24 mai 2025"** comme date de fin (21 jours).
 
 9. Dans la page **d’onglet Général**:**
     * Sélectionnez l’option **"Lactation"** comme étape de production.
@@ -284,7 +284,7 @@ Nous allons maintenant passer au groupe des **"truies"** à **l’étape 1** en 
 
 1. Cliquez sur la période de gestion intitulée **"Truies ouvertes** à **l’étape 2** pour activer cette période de gestion.
 
-2. Veillez à ce que la date de début soit fixée au **"1er janvier 2024"** et la date de fin au **"6 janvier 2024"** (5 jours). Les dates de début et de fin par défaut fournies par Holos peuvent être modifiées par l'utilisateur et le **nombre de jours** sera ajusté en conséquence.
+2. Veillez à ce que la date de début soit fixée au **"1er janvier 2025"** et la date de fin au **"6 janvier 2025"** (5 jours). Les dates de début et de fin par défaut fournies par Holos peuvent être modifiées par l'utilisateur et le **nombre de jours** sera ajusté en conséquence.
 
 3. Dans la page d’onglet Général:
     * Sélectionnez l’option **"vide (pas en lactation ni en gestation)"** comme étape de production.
@@ -294,7 +294,7 @@ Nous allons maintenant passer au groupe des **"truies"** à **l’étape 1** en 
 
 4. Dans le menu déroulant Ration de la page **d’onglet Ration**, sélectionnez l’option **"Gestation"**. Dans la page **d’onglet Logement**, sélectionnez l’option **"Logé dans l’étable"** et l’option **"Paille (hachée)"**, et dans la page **d’onglet Fumier**, sélectionnez l’option **"Liquide/lisier avec croûte naturelle"**.
 
-5. Pour chacune des trois périodes de gestion de **l’étape 2** nommées **Truies saillies (étapes 1 à 3)**, les dates de début et de fin sont respectivement fixées à **38 jours** (c.-à-d. étape no 1 : **07 janvier 2024** au **14 février 2024**, etc.). 
+5. Pour chacune des trois périodes de gestion de **l’étape 2** nommées **Truies saillies (étapes 1 à 3)**, les dates de début et de fin sont respectivement fixées à **38 jours** (c.-à-d. étape no 1 : **07 janvier 2025** au **14 février 2025**, etc.). 
 
 6. Dans la page **d’onglet Général** pour les trois périodes de gestion des truies saillies: 
     * Sélectionnez l’option **"Gestation"** comme étape de production.
@@ -304,7 +304,7 @@ Nous allons maintenant passer au groupe des **"truies"** à **l’étape 1** en 
     
 7. Dans la page **d’onglet Ration**, sélectionnez l’option **"Gestation"** dans le menu déroulant **Ration**. Dans la page **d’onglet Logement**, sélectionnez l’option **"Logé dans l’étable"** et l’option **"Paille (hachée)"**", et dans la page **d’onglet Fumier**, sélectionnez l’option **"Liquide/lisier avec croûte naturelle"**.
 
-8. Pour passer à la période de gestion des **"truies de naissage en lactation"** à **l’étape 2**, choisissez la date de début du **"3 mai 2024"** et la date de fin du **"24 juin 2024"** (21 jours).
+8. Pour passer à la période de gestion des **"truies de naissage en lactation"** à **l’étape 2**, choisissez la date de début du **"3 mai 2025"** et la date de fin du **"24 juin 2025"** (21 jours).
 
 9. Sélectionnez l’option **"en lactation"** comme étape de production et entrez la valeur **"370"** comme nimbre d'animaux. Pour les autres paramètres, conservez les valeurs par défaut.
     
@@ -313,7 +313,7 @@ Nous allons maintenant passer au groupe des **"truies"** à **l’étape 1** en 
 
 ### Verrats 
 
-Dans la section **Verrats**, assurez-vous que ce groupe est mis en évidence à **"l’étape 1"**. À **"l’étape 2"**, une seule période de gestion est définie, avec la date de début du **"1er janvier 2024"** et la date de fin du **"31 décembre 2024"** (365 jours).
+Dans la section **Verrats**, assurez-vous que ce groupe est mis en évidence à **"l’étape 1"**. À **"l’étape 2"**, une seule période de gestion est définie, avec la date de début du **"1er janvier 2025"** et la date de fin du **"31 décembre 2025"** (365 jours).
 
 1. Dans la page **d’onglet Général**:
     * Sélectionnez le stade de production **"Reproducteurs"**.
@@ -343,7 +343,7 @@ Nous allons créer une ration personnalisée pour notre groupe de verrats reprod
  <br>
  
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/SwineGuide/fr/Figure14.png" alt="Figure 14" width="850"/>
     <br>
     <em>Figure 14: Créateur de ration personnalisée pour le groupe des porcsa</em>
 </p> 
@@ -354,7 +354,7 @@ Nous allons créer une ration personnalisée pour notre groupe de verrats reprod
 
 We will now move on to the **"Piglet"** animal group in **Step 1** by highlighting it. 
 
-1. Cliquez sur le groupe d’animaux Porcelets à **l’étape 1**. À **l’étape 2**, cliquez sur la période de gestion **Porcelets sevrés – Étape 1**. Nous laisserons les dates par défaut du **1er janvier 2024** au **22 janvier 2024** (21 jours).
+1. Cliquez sur le groupe d’animaux Porcelets à **l’étape 1**. À **l’étape 2**, cliquez sur la période de gestion **Porcelets sevrés – Étape 1**. Nous laisserons les dates par défaut du **1er janvier 2025** au **22 janvier 2025** (21 jours).
    
 2. Dans la page d’onglet Général :
     * Select **"Nursing piglet"** as the production stage.
@@ -374,13 +374,13 @@ Cliquez sur le groupe des porcs à l’étape 1.
  
 1. Click on the **"Hogs"** animal group in **Step 1** to enter the associated management information for this group.
  
-2. Under **Step 2**, select the first management period and set the start date to **"May 25 2024"** and the end date to **"June 19, 2024"** (26 days). Name this period **"Spring Hogs"**. 
+2. Under **Step 2**, select the first management period and set the start date to **"May 25 2025"** and the end date to **"June 19, 2025"** (26 days). Name this period **"Spring Hogs"**. 
 
 3. Highlight the **"Spring Hogs"** management period, and on the **General** tab leave **"Growing/finishing"** as the production stage and enter **"1000"** as the number of animals.
 
 4. On the **Diet** tab, select **"Grower/Finisher diet 1"** as the diet type. On the **Housing** tab, select **"Housed in barn"** as the housing type and **"Straw (Chopped)"** as the bedding type (keep the default application rate) and on the **Manure** tab, select **"Liquid/Slurry with natural crust"** as the manure handling system.
 
-5. For the second, and third management periods, the hogs will be placed on pasture - rename these management periods **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**. Set the start date for **"Summer Pasture Hogs 1"** to **"June 20, 2024"** and the end date to **"July 6, 2024"** (17 days), and set the start and end dates for **"Summer Pasture Hogs 2"** to **"July 7, 2024"** and **"August 2, 2024"**, respectively (27 days). 
+5. For the second, and third management periods, the hogs will be placed on pasture - rename these management periods **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**. Set the start date for **"Summer Pasture Hogs 1"** to **"June 20, 2025"** and the end date to **"July 6, 2025"** (17 days), and set the start and end dates for **"Summer Pasture Hogs 2"** to **"July 7, 2025"** and **"August 2, 2025"**, respectively (27 days). 
 
 6. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"** management periods, on the **General** tab, leave the production stage as **"Growing/finishing"** and enter **"1000"** as the number of animals.
 
@@ -398,7 +398,7 @@ Cliquez sur le groupe des porcs à l’étape 1.
 
 10. For the **"Summer Pasture Hogs 1"** and **"Summer Pasture Hogs 2"**, on the **Diet tab** select **"Hog Supplement"** from the drop down menu. On the **Housing** tab, select **"Pasture/range/paddock"** as the housing type and select **"Native Grassland"** as the pasture location, and on the **Manure** tab, select **"Pasture/range/paddock** as the manure handling system.
 
-11. For the final management period, set the start and end dates to **"August 3, 2024"** and **"September 16, 2024"**, respectively (45 days).
+11. For the final management period, set the start and end dates to **"August 3, 2025"** and **"September 16, 2025"**, respectively (45 days).
 
 12. Highlight this management period, and on the **General** tab leave **"Growing/finishing"** as the production stage and enter **"1000"** as the number of animals.
 
@@ -407,9 +407,9 @@ Cliquez sur le groupe des porcs à l’étape 1.
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure14.png" alt="Figure 17" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure15.png" alt="Figure 15" width="950"/>
     <br>
-    <em>Figure 14: Engraissement à finition, groupe des porcs</em>
+    <em>Figure 15: Engraissement à finition, groupe des porcs</em>
 </p> 
 
 <br> 
@@ -433,9 +433,9 @@ Dans Holos, l’utilisateur peut utiliser le fumier produit par le bétail dans 
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure15.gif" alt="Figure 18" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure16.gif" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 15: Ajout d’une application de fumier à la composante du blé et de la vesce velue</em>
+    <em>Figure 16: Ajout d’une application de fumier à la composante du blé et de la vesce velue</em>
 </p>
 
 <br>
@@ -471,25 +471,25 @@ Nous supposerons que les champs de rotation **de l’orge et du mélange de foin
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure16.png" alt="Figure 17" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 16: Écran Calendrier personnalisé</em>
+    <em>Figure 17: Écran Calendrier personnalisé</em>
 </p> 
 
 <br>  
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure17.png" alt="Figure 18" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 17: Définir l’année de début et de fin des systèmes de production dans l’écran Calendrier.</em>
+    <em>Figure 18: Définir l’année de début et de fin des systèmes de production dans l’écran Calendrier.</em>
 </p> 
 
 <br> 
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure18.png" alt="Figure 19" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 18: Modification des cultures au cours d’une période de rotation antérieure. </em>
+    <em>Figure 19: Modification des cultures au cours d’une période de rotation antérieure. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -523,9 +523,9 @@ Cliquez sur le bouton Suivant pour passer à l’écran du rapport final des ré
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure19.png" alt="Figure 20" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure20.png" alt="Figure 20" width="950"/>
     <br>
-    <em>Figure 19: Écran Détails </em>
+    <em>Figure 20: Écran Détails </em>
 </p> 
 
 <br>
@@ -544,9 +544,9 @@ Cliquez sur le bouton **Suivant** pour accéder au rapport final des résultats.
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure20.png" alt="Figure 21" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure21.png" alt="Figure 21" width="950"/>
     <br>
-    <em>Figure 20: Rapport d’émissions détaillées</em>
+    <em>Figure 21: Rapport d’émissions détaillées</em>
 </p> 
 
 <br>
@@ -556,9 +556,9 @@ Cliquez sur le bouton **Suivant** pour accéder au rapport final des résultats.
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure21.png" alt="Figure 22" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure22.png" alt="Figure 22" width="950"/>
     <br>
-    <em>Figure 21: Rapport Estimations de la production.</em>
+    <em>Figure 22: Rapport Estimations de la production.</em>
 </p> 
 
 <br>
@@ -576,9 +576,9 @@ Si vous voulez exporter l’ensemble de votre fichier agricole, sélectionnez le
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/en/Figure22.png" alt="Figure 23" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure23.png" alt="Figure 23" width="950"/>
     <br>
-    <em>Figure 22: Section du rapport concernant le carbone. Permet de basculer entre le graphique présenté ici et le format tableau présenté ci-dessous.</em>
+    <em>Figure 23: Section du rapport concernant le carbone. Permet de basculer entre le graphique présenté ici et le format tableau présenté ci-dessous.</em>
 </p> 
 
 <br>
