@@ -20,7 +20,7 @@ Assurez-vous de sélectionner l’option **"Métrique"** comme unité de mesure,
 
 <br>
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure1.png" alt="Figure 1-1" width="750"/>
+    <img src="../../Images/SwineGuide/fr/Figure1.png" alt="Figure 1" width="750"/>
     <br>
     <em>Figure 1: Si une ferme a déjà été enregistrée, Holos présente une invite pour la rouvrir.</em>
 </p>
@@ -229,7 +229,7 @@ L’ajout de composantes animales se fait exactement de la même façon que pour
 <br>
 
 <p align="center">
-    <img src="../../Images/SwineGuide/fr/Figure13.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/SwineGuide/fr/Figure13.gif" alt="Figure 13" width="950"/>
     <br>
     <em>Figure 13: Composantes de la ferme porcine.</em>
 </p> 
@@ -328,7 +328,7 @@ Les utilisateurs de Holos peuvent créer des rations personnalisées pour rempla
 
 Nous allons créer une ration personnalisée pour notre groupe de verrats reproducteurs logés dans l’étable. Ouvrez la page d’onglet **Ration**, puis cliquez sur le bouton **Créateur de ration personnalisée**.
 
-## **Écran **Créateur de ration personnalisée**:
+## Écran **Créateur de ration personnalisée**:
 1. Cliquez sur le bouton **Ajouter une ration personnalisée**, à **l’étape 1**, pour créer notre nouvelle ration personnalisée.
 2. Renommez cette ration en lui donnant le nom de **"Ration personnalisée pour verrat"**, puis appuyez sur la touche Enter pour l’enregistrer.
 3. À **l’étape 2**, ajoutez des ingrédients à la nouvelle ration. Sélectionnez l’option **"Ajouter l’ingrédient sélectionné à la ration"**. Cherchez l’option **"Blé de force roux"** dans la liste des ingrédients, mettez-la en évidence, puis cliquez sur le bouton **OK** qui se trouve en dessous pour qu’elle apparaisse à **l’étape 3**, qui comprend la ration.
