@@ -172,8 +172,8 @@ namespace H.Core.Calculators.Infrastructure
                 var volatileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
 
                 // Equation 4.8.1-19
-                var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * 1000);
-                var b = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication - (previousDaysEmissions == null ? 0 : previousDaysEmissions.TotalVolumeOfManureAvailableForLandApplication);
+                var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.AccumulatedVolume * 1000);
+                var b = (dailyEmissions.AccumulatedVolume) - (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
                 var c = fractionUsed * 1000; 
 
                 var result = a * (b * c);
@@ -598,14 +598,16 @@ namespace H.Core.Calculators.Infrastructure
             var flowRateOfAllVolatileSolids = 0d;
             foreach (var flowInformationForAllSubstrate in flowInformationForAllSubstrates)
             {
-                var totalSolidsFlowOfSubstrate = flowInformationForAllSubstrate.TotalSolidsFlowOfSubstrate - flowInformationForAllSubstrate.DegradedVolatileSolids;
+                var degradedVolatileSolids = flowInformationForAllSubstrate.DegradedVolatileSolids;
+
+                var totalSolidsFlowOfSubstrate = flowInformationForAllSubstrate.TotalSolidsFlowOfSubstrate - degradedVolatileSolids;
                 if (totalSolidsFlowOfSubstrate < 0)
                 {
                     // Imported manure will have no TS (TS = 0) so we don't add negative numbers here since the degraded VS will be non-zero
                     totalSolidsFlowOfSubstrate = 0;
                 }
 
-                var volatileSolidsFlowOfSubstrate = flowInformationForAllSubstrate.VolatileSolidsFlowOfSubstrate -flowInformationForAllSubstrate.DegradedVolatileSolids;
+                var volatileSolidsFlowOfSubstrate = flowInformationForAllSubstrate.VolatileSolidsFlowOfSubstrate - degradedVolatileSolids;
                 if (volatileSolidsFlowOfSubstrate < 0)
                 {
                     volatileSolidsFlowOfSubstrate = 0;
@@ -782,11 +784,14 @@ namespace H.Core.Calculators.Infrastructure
                 foreach (var animalGroupResults in animalComponentEmissionsResult
                              .EmissionResultsForAllAnimalGroupsInComponent)
                 {
+                    GroupEmissionsByDay previousDaysEmissions = null;
+
                     foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
                     {
                         if (selectedManagementPeriods.Select(x => x.ManagementPeriod)
                             .Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
                         {
+
                             var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
                             var adManagementPeriod =
                                 selectedManagementPeriods.Single(x => x.ManagementPeriod.Equals(managementPeriod));
@@ -794,14 +799,16 @@ namespace H.Core.Calculators.Infrastructure
                             for (int i = 0; i < groupEmissionsByMonth.DailyEmissions.Count; i++)
                             {
                                 var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
-                                var previousDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAtOrDefault(i - 1);
+                                
 
                                 var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,
-                                    adManagementPeriod, previousDayEmissions, farm);
+                                    adManagementPeriod, previousDaysEmissions, farm);
 
                                 flows.Add(flowRates);
+
+                                previousDaysEmissions = currentDayEmissions;
                             }
                         }
                     }
@@ -871,19 +878,20 @@ namespace H.Core.Calculators.Infrastructure
         {
             if (substrateFlowInformation.SubstrateType == SubstrateType.FarmResidues)
             {
-                return 0.024;
+                return 0.23;
             }
 
             if (substrateFlowInformation.AnimalType.IsDairyCattleType())
             {
-                return 0.025;
+                return 0.4;
             }
             else if (substrateFlowInformation.AnimalType.IsSwineType())
             {
-                return 0.024;
+                return 0.7;
             }
             else
             {
+                // Other manure
                 return 0.55;
             }
         }
