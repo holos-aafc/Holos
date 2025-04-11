@@ -791,7 +791,6 @@ namespace H.Core.Calculators.Infrastructure
                         if (selectedManagementPeriods.Select(x => x.ManagementPeriod)
                             .Contains(groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod))
                         {
-
                             var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
                             var adManagementPeriod =
                                 selectedManagementPeriods.Single(x => x.ManagementPeriod.Equals(managementPeriod));
@@ -800,7 +799,6 @@ namespace H.Core.Calculators.Infrastructure
                             {
                                 var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
                                 
-
                                 var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,

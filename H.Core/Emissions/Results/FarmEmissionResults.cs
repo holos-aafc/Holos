@@ -21,8 +21,72 @@ namespace H.Core.Emissions.Results
             public string AnimalGroup { get; set; }
             public DateTime Date { get; set; }
             public double Temp { get; set; }
-            public double AverageTemparatureLast30DaysKelving { get; set; }
+            public double ProteinIntake { get; set; }
+            public double ProteinRetainedForPregnancy { get; set; }
+            public double ProteinRetainedForLactation { get; set; }
+            public double EmptyBodyWeight { get; set; }
+            public double EmptyBodyGain { get; set; }
+            public double RetainedEnergy { get; set; }
+            public double ProteinRetainedForGain { get; set; }
+            public double AverageTemparatureLast30DaysKelvin { get; set; }
             public double ClimateFactor { get; set; }
+            public double FractionOfNitrogenExcretedInUrine { get; set; }
+            public double TanExcretionRate { get; set; }
+            public double TanExcretion { get; set; }
+            public double NitrogenExcretionRate { get; set; }
+            public double FecalNitrogenExcretionRate { get; set; }
+            public double OrganicNitrogenCreatedOnDay { get; set; }
+            public double AdjustedAmountOfTanInStoredManureOnDay { get; set; }
+            public double FecalNitrogenExcretion { get; set; }
+            public double AmountOfNitrogenAddedFromBedding { get; set; }
+            public double ManureDirectN2ONEmission { get; set; }
+            public double ManureN2ONLeachingEmission { get; set; }
+            public double ManureNitrateLeachingEmission { get; set; }
+            public double StartWeight { get; set; }
+            public double EndWeight { get; set; }
+            public double NEMaintenance { get; set; }
+            public double NEactivity { get; set; }
+            public double ADG { get; set; }
+            public double NEgain { get; set; }
+            public double REM { get; set; }
+            public double REG { get; set; }
+            public double GEI { get; set; }
+            public double EntericRate { get; set; }
+            public double EntericEmissions { get; set; }
+            public double VolatileSolidsProduced { get; set; }
+            public double VolatileSolidsLoaded { get; set; }
+            public double VolatileSolidsConsumed { get; set; }
+            public double ManureMethaneEmission { get; set; }
+            public double ManureDirectN2ONEmissionRate { get; set; }
+            public double AdjustedAmmoniaEmissionFactorForHousing { get; set; }
+            public double AmmoniaEmissionRateFromHousing { get; set; }
+            public double AmmoniaConcentrationInHousing { get; set; }
+            public double AmmoniaEmissionsFromHousingSystem { get; set; }
+            public double AdjustedNH3NFromHousing { get; set; }
+            public double TanEnteringStorageSystem { get; set; }
+            public double AdjustedAmountOfTanFlowingIntoStorageEachDay { get; set; }
+            public double AmbientAirTemperatureAdjustmentForStorage { get; set; }
+            public double AdjustedAmmoniaEmissionFactorForStorage { get; set; }
+            public double AmmoniaEmissionsFromStorageSystem { get; set; }
+            public double AccumulatedTanInStorageOnDay { get; set; }
+            public double VolatilizationForStorage { get; set; }
+            public double AmmoniaLossFromStorage { get; set; }
+            public double AdjustedAmmoniaFromStorage { get; set; }
+            public double ManureIndirectN2ONEmission { get; set; }
+            public double AmountOfCarbonLostAsMethaneDuringManagement { get; set; }
+            public double FecalCarbonExcretion { get; set; }
+            public double CarbonAddedFromBeddingMaterial { get; set; }
+            public double NonAccumulatedCarbonCreatedOnDay { get; set; }
+            public double AccumulatedAmountOfCarbonInStoredManureOnDay { get; set; }
+            public double AccumulatedTANAvailableForLandApplicationOnDay { get; set; }
+            public double AccumulatedNitrogenAvailableForLandApplicationOnDay { get; set; }
+            public double ManureCarbonNitrogenRatio { get; set; }
+            public double TotalAmountOfNitrogenInStoredManureAvailableForDay { get; set; }
+            public double TotalVolumeOfManureAvailableForLandApplication { get; set; }
+            public double AccumulatedVolume { get; set; }
+            public double VolatileSolidsAvailable { get; set; }
+            public double NetEnergyForLactation { get; set; }
+            public double NetEnergyForPregnancy { get; set; }
         }
 
         #region Fields
@@ -420,10 +484,73 @@ namespace H.Core.Emissions.Results
                                 AnimalGroup = resultsForAllGroups.AnimalGroup.Name,
                                 Date = groupEmissionsByDay.DateTime,
                                 Temp = groupEmissionsByDay.Temperature,
-                                AverageTemparatureLast30DaysKelving =
+                                AverageTemparatureLast30DaysKelvin =
                                     groupEmissionsByDay.AverageTemperatureOverLast30Days,
                                 ClimateFactor = groupEmissionsByDay.ClimateFactor,
-                            };
+                                StartWeight = groupEmissionsByDay.AnimalWeight,
+                                NEMaintenance = groupEmissionsByDay.NetEnergyForMaintenance,
+                                NEactivity = groupEmissionsByDay.NetEnergyForActivity,
+                                NetEnergyForLactation = groupEmissionsByDay.NetEnergyForLactation,
+                                NetEnergyForPregnancy = groupEmissionsByDay.NetEnergyForPregnancy,
+                                ADG = groupEmissionsByDay.AverageDailyGain,
+                                NEgain = groupEmissionsByDay.NetEnergyForGain,
+                                REM = groupEmissionsByDay.RatioOfEnergyAvailableForMaintenance,
+                                REG = groupEmissionsByDay.RatioOfEnergyAvailableForGain,
+                                GEI = groupEmissionsByDay.GrossEnergyIntake,
+                                EntericRate = groupEmissionsByDay.EntericMethaneEmissionRate,
+                                EntericEmissions = groupEmissionsByDay.EntericMethaneEmission,
+                                ProteinIntake = groupEmissionsByDay.ProteinIntake,
+                                ProteinRetainedForPregnancy = groupEmissionsByDay.ProteinRetainedForPregnancy,
+                                ProteinRetainedForLactation = groupEmissionsByDay.ProteinRetainedForLactation,
+                                EmptyBodyWeight = groupEmissionsByDay.EmptyBodyWeight,
+                                EmptyBodyGain = groupEmissionsByDay.EmptyBodyGain,
+                                RetainedEnergy = groupEmissionsByDay.RetainedEnergy,
+                                ProteinRetainedForGain = groupEmissionsByDay.ProteinRetainedForGain,
+                                FractionOfNitrogenExcretedInUrine = groupEmissionsByDay.FractionOfNitrogenExcretedInUrine,
+                                TanExcretionRate = groupEmissionsByDay.TanExcretionRate,
+                                TanExcretion = groupEmissionsByDay.TanExcretion,
+                                NitrogenExcretionRate = groupEmissionsByDay.NitrogenExcretionRate,
+                                FecalNitrogenExcretionRate = groupEmissionsByDay.FecalNitrogenExcretionRate,
+                                OrganicNitrogenCreatedOnDay = groupEmissionsByDay.OrganicNitrogenCreatedOnDay,
+                                AdjustedAmountOfTanInStoredManureOnDay = groupEmissionsByDay.AdjustedAmountOfTanInStoredManureOnDay,
+                                FecalNitrogenExcretion = groupEmissionsByDay.FecalNitrogenExcretion,
+                                AmountOfNitrogenAddedFromBedding = groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
+                                ManureDirectN2ONEmission = groupEmissionsByDay.ManureDirectN2ONEmission,
+                                ManureN2ONLeachingEmission = groupEmissionsByDay.ManureN2ONLeachingEmission,
+                                ManureNitrateLeachingEmission = groupEmissionsByDay.ManureNitrateLeachingEmission,
+                                VolatileSolidsProduced = groupEmissionsByDay.VolatileSolidsProduced,
+                                VolatileSolidsLoaded = groupEmissionsByDay.VolatileSolidsLoaded,
+                                VolatileSolidsConsumed = groupEmissionsByDay.VolatileSolidsConsumed,
+                                VolatileSolidsAvailable = groupEmissionsByDay.VolatileSolidsAvailable,
+                                ManureMethaneEmission = groupEmissionsByDay.ManureMethaneEmission,
+                                ManureDirectN2ONEmissionRate = groupEmissionsByDay.ManureDirectN2ONEmissionRate,
+                                AdjustedAmmoniaEmissionFactorForHousing = groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForHousing,
+                                AmmoniaEmissionRateFromHousing = groupEmissionsByDay.AmmoniaEmissionRateFromHousing,
+                                AmmoniaConcentrationInHousing = groupEmissionsByDay.AmmoniaConcentrationInHousing,
+                                AmmoniaEmissionsFromHousingSystem = groupEmissionsByDay.AmmoniaEmissionsFromHousingSystem,
+                                AdjustedNH3NFromHousing = groupEmissionsByDay.AdjustedNH3NFromHousing,
+                                TanEnteringStorageSystem = groupEmissionsByDay.TanEnteringStorageSystem,
+                                AdjustedAmountOfTanFlowingIntoStorageEachDay = groupEmissionsByDay.AdjustedAmountOfTanFlowingIntoStorageEachDay,
+                                AmbientAirTemperatureAdjustmentForStorage = groupEmissionsByDay.AmbientAirTemperatureAdjustmentForStorage,
+                                AdjustedAmmoniaEmissionFactorForStorage = groupEmissionsByDay.AdjustedAmmoniaEmissionFactorForStorage,
+                                AmmoniaEmissionsFromStorageSystem = groupEmissionsByDay.AmmoniaEmissionsFromStorageSystem,
+                                AccumulatedTanInStorageOnDay = groupEmissionsByDay.AccumulatedTanInStorageOnDay,
+                                VolatilizationForStorage = groupEmissionsByDay.VolatilizationForStorage,
+                                AmmoniaLossFromStorage = groupEmissionsByDay.AmmoniaLossFromStorage,
+                                AdjustedAmmoniaFromStorage = groupEmissionsByDay.AdjustedAmmoniaFromStorage,
+                                ManureIndirectN2ONEmission = groupEmissionsByDay.ManureIndirectN2ONEmission,
+                                AmountOfCarbonLostAsMethaneDuringManagement = groupEmissionsByDay.AmountOfCarbonLostAsMethaneDuringManagement,
+                                FecalCarbonExcretion = groupEmissionsByDay.FecalCarbonExcretion,
+                                CarbonAddedFromBeddingMaterial = groupEmissionsByDay.CarbonAddedFromBeddingMaterial,
+                                NonAccumulatedCarbonCreatedOnDay = groupEmissionsByDay.NonAccumulatedCarbonCreatedOnDay,
+                                AccumulatedAmountOfCarbonInStoredManureOnDay = groupEmissionsByDay.AccumulatedAmountOfCarbonInStoredManureOnDay,
+                                AccumulatedTANAvailableForLandApplicationOnDay = groupEmissionsByDay.AccumulatedTANAvailableForLandApplicationOnDay,
+                                AccumulatedNitrogenAvailableForLandApplicationOnDay = groupEmissionsByDay.AccumulatedNitrogenAvailableForLandApplicationOnDay,
+                                ManureCarbonNitrogenRatio = groupEmissionsByDay.ManureCarbonNitrogenRatio,
+                                TotalAmountOfNitrogenInStoredManureAvailableForDay = groupEmissionsByDay.TotalAmountOfNitrogenInStoredManureAvailableForDay,
+                                TotalVolumeOfManureAvailableForLandApplication = groupEmissionsByDay.TotalVolumeOfManureAvailableForLandApplication,
+                                AccumulatedVolume = groupEmissionsByDay.AccumulatedVolume,
+                            }; 
 
                             result.Add(a);
                         }

@@ -1828,6 +1828,14 @@ namespace H.Core.Emissions.Results
         /// </summary>
         public double AverageTemperatureOverLast30Days { get; set; }
 
+        public double VolatilizationFractionForHousing { get; set; }
+        public double VolatilizationEmissionsFromHousing { get; set; }
+        public double AmmoniaHousingAdjustment { get; set; }
+        public double AdjustedAmountOfTanFlowingIntoStorageEachDay { get; set; }
+        public double VolatilizationForStorage { get; set; }
+        public double AmmoniaLossFromStorage { get; set; }
+        public double AdjustedAmmoniaLossFromStorage { get; set; }
+
         #endregion
     }
 }

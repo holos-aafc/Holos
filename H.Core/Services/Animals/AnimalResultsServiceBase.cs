@@ -2203,23 +2203,25 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double CalculateAdjustedAmmoniaFromHousing(GroupEmissionsByDay dailyEmissions,
+        public double CalculateAdjustedAmmoniaFromHousing(
+            GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
-            var volatilizationFractionForHousing = CalculateVolatalizationFractionForHousing(
+
+            dailyEmissions.VolatilizationFractionForHousing = CalculateVolatalizationFractionForHousing(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 dailyAmmoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            var volatilizationEmissionsFromHousing = CalculateAmmoniaVolatilizationFromHousing(
+            dailyEmissions.VolatilizationEmissionsFromHousing = CalculateAmmoniaVolatilizationFromHousing(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                volatilizationFractionFromHousing: volatilizationFractionForHousing,
+                volatilizationFractionFromHousing: dailyEmissions.VolatilizationFractionForHousing,
                 emissionFactorForVolatilization: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
             var ammoniaHousingAdjustment = CalculateAmmoniaHousingAdjustment(
                 ammoniaFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
-                ammoniaVolatilizedDuringHousing: volatilizationEmissionsFromHousing);
+                ammoniaVolatilizedDuringHousing: dailyEmissions.VolatilizationEmissionsFromHousing);
 
             var result = ammoniaHousingAdjustment;
 
@@ -2370,20 +2372,20 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
-            var volatilizationForStorage = CalculateVolatilizationFractionForStorage(
+            dailyEmissions.VolatilizationForStorage = CalculateVolatilizationFractionForStorage(
                 dailyAmmoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            var ammoniaLossFromStorage = CalculateAmmoniaVolatilizationFromStorage(
+            dailyEmissions.AmmoniaLossFromStorage = CalculateAmmoniaVolatilizationFromStorage(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                volatilizationFractionFromStorage: volatilizationForStorage,
+                volatilizationFractionFromStorage: dailyEmissions.VolatilizationForStorage,
                 emissionFactorForVolatilization: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
             var adjustedAmmoniaLossFromStorage = CalculateAmmoniaStorageAdjustment(
                 ammoniaFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                ammoniaVolatilizedDuringStorage: ammoniaLossFromStorage);
+                ammoniaVolatilizedDuringStorage: dailyEmissions.AmmoniaLossFromStorage);
 
             var totalAdjustedAmmoniaLossesFromStorage = CoreConstants.ConvertToNH3(
                 amountOfNH3N: adjustedAmmoniaLossFromStorage);
