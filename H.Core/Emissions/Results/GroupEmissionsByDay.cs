@@ -1695,7 +1695,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
         ///
-        /// (kg NH3)
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaEmissionsFromHousingAndStorage
         {
@@ -1706,7 +1706,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
         ///
-        /// (kg N)
+        /// (kg NH3-N)
         /// </summary>
         public double TotalNitrogenLossesFromHousingAndStorage
         {

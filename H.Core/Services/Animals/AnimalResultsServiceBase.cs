@@ -1386,7 +1386,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="ammoniaEmissionRate">Manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
-        /// <returns>Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</returns>
+        /// <returns>Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</returns>
         public double CalculateTotalNitrogenLossFromHousingAndStorage(
             double ammoniaEmissionRate,
             double numberOfAnimals)
@@ -2435,8 +2435,6 @@ namespace H.Core.Services.Animals
                 numberOfAnimals: managementPeriod.NumberOfAnimals);
 
             dailyEmissions.AmmoniaEmissionsFromHousingAndStorage = dailyEmissions.TotalNitrogenLossesFromHousingAndStorage;
-
-            // Since the emissions from these animals are from a combination of the housing and storage, split the values in half so that the 
 
             /*
              * Volatilization
