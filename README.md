@@ -18,7 +18,7 @@ See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" targ
 
 To see answers to the most frequently asked questions about Holos (both the software and model), visit the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ here.</a>
 
-# Algorithm Document (Draft Version)
+# Algorithm Document (Print Version)
 
 A draft version of the Holos version 4.0 algorithm document is being made available for review
 
