@@ -21,6 +21,8 @@ namespace H.Core.Models.LandManagement.Fields
         #region Fields
 
         private DateTime _dateOfApplication;
+        private DateTime _minimumAllowableDateOfApplication;
+        private DateTime _maximumAllowableDateOfApplication;
 
         private double _amount;
         private double _amountOfNitrogenInManureApplied;
@@ -30,9 +32,6 @@ namespace H.Core.Models.LandManagement.Fields
         private ManureApplicationTypes _manureApplicationTypes;
 
         private ObservableCollection<ManureApplicationTypes> _availableManureApplicationTypes;
-
-        private DateTime _minimumAllowableDateOfApplication;
-        private DateTime _maximumAllowableDateOfApplication;
 
         #endregion
 
@@ -52,6 +51,12 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        public DateTime DateOfApplication
+        {
+            get => _dateOfApplication;
+            set => SetProperty(ref _dateOfApplication, value);
+        }
 
         public DateTime MinimumAllowableDateOfApplication
         {
@@ -89,12 +94,6 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 return this.ManureApplicationMethod.GetDescription();
             }
-        }
-
-        public DateTime DateOfApplication 
-        { 
-            get => _dateOfApplication; 
-            set => SetProperty(ref _dateOfApplication, value); 
         }
 
         /// <summary>
