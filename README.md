@@ -20,7 +20,7 @@ To see answers to the most frequently asked questions about Holos (both the soft
 
 # Algorithm Document (Print Version)
 
-A draft version of the Holos version 4.0 algorithm document is being made available for review
+A print version of the Holos version 4.0 algorithm document is being made available
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
