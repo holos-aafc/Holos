@@ -56,7 +56,7 @@ Perennials,Rangeland (native),-9,-9,-9,0.0134,0.049,13,,,,,
 ,Seeded grassland,-9,-9,-9,-9,0.049,13,,,,,
 ,Forage for seed,-9,-9,-9,-9,0.049,13,,,,,
 ,Alfalfa,-9,-9,-9,0.0238,0.072,13,,,,,
-,Grazed pasture (all perennial types) (7),-9,-9,-9,-9,-9,80,,,,,
+,Grazed/ungrazed pasture (all perennial types, no harvest) (7),-9,-9,-9,-9,-9,80,,,,,
 ,,,,,,,
 ,,,,,,,
 ,,,,,,,"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a."
