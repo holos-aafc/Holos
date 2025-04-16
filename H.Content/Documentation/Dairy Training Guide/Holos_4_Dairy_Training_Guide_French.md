@@ -225,7 +225,7 @@ L’ajout de composantes animales se fait exactement comme l’ajout de composan
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/fr/Figure13.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/DairyGuide/fr/Figure13.gif" alt="Figure 13" width="950"/>
     <br>
     <em>Figure 13: Composante Bovins laitiers.</em>
 </p> 
@@ -265,7 +265,7 @@ Holos donne à l’utilisateur la possibilité d’avoir plus d’un groupe de v
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/fr/Figure14.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/DairyGuide/fr/Figure14.png" alt="Figure 14" width="850"/>
     <br>
     <em>Figure 14: Créateur de ration personnalisée pour le groupe d’animaux laitiers en lactation.</em>
 </p> 
