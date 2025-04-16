@@ -50,6 +50,12 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
+        public DateTime DateOfApplication
+        {
+            get => _dateOfApplication;
+            set => SetProperty(ref _dateOfApplication, value);
+        }
+
         public ObservableCollection<ManureApplicationTypes> AvailableManureApplicationTypes
         {
             get => _availableManureApplicationTypes;
@@ -74,12 +80,6 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 return this.ManureApplicationMethod.GetDescription();
             }
-        }
-
-        public DateTime DateOfApplication 
-        { 
-            get => _dateOfApplication; 
-            set => SetProperty(ref _dateOfApplication, value); 
         }
 
         /// <summary>

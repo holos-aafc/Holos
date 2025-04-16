@@ -7794,6 +7794,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg ha^-1 (wet wt).
+        /// </summary>
+        public static string KilogramsPerHectareCropWetWeight {
+            get {
+                return ResourceManager.GetString("KilogramsPerHectareCropWetWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg (kg protein intake)^-1.
         /// </summary>
         public static string KilogramsPerKilogramProteinIntake {
@@ -10746,7 +10755,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Milk-fed dairy calves. A period of no enteric methane emissions.
+        ///   Looks up a localized string similar to Milk-fed dairy calves.
         /// </summary>
         public static string LabelMilkFedManagementPeriod {
             get {

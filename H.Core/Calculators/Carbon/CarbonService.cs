@@ -321,6 +321,7 @@ namespace H.Core.Calculators.Carbon
 
         #region Private Methods
 
+
         public Tuple<double, double> CalculateUptakeByGrazingAnimals(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
         {
             if (managementPeriods.Any() == false)

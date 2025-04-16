@@ -18,13 +18,13 @@ See <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.md" targ
 
 To see answers to the most frequently asked questions about Holos (both the software and model), visit the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md" target="_blank">FAQ here.</a>
 
-# Algorithm Document (Draft Version)
+# Algorithm Document (Print Version)
 
-A draft version of the Holos version 4.0 algorithm document is being made available for review
+A print version of the Holos version 4.0 algorithm document is being made available
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Holos_V4.0_Algorithm_Document_Feb%2013%202025.docx" target="_blank">Holos_V4.0_Algorithm_Document_Feb 13 2025.docx</a>
+<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx" target="_blank">Pogue et al 2025_Printversion_Holos_V4.0_Algorithm_Document.docx</a>
 
 # Training Guide
 

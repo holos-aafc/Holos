@@ -243,6 +243,8 @@ namespace H.Core.Services.Animals
                 managementPeriod.MilkProteinContentAsPercentage = 3.38;
                 managementPeriod.NumberOfAnimals = 120;
 
+                _initializationService.InitializeMilkProduction(managementPeriod, farm.DefaultSoilData);
+
                 managementPeriod.Name = H.Core.Properties.Resources.LabelWinterFeedingLactating;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 3, 1);
                 managementPeriod.NumberOfDays = 61;
@@ -268,6 +270,8 @@ namespace H.Core.Services.Animals
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
+                _initializationService.InitializeMilkProduction(managementPeriod, farm.DefaultSoilData);
+
                 managementPeriod.SelectedDiet =
                     GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
                 managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
@@ -283,6 +287,8 @@ namespace H.Core.Services.Animals
                 managementPeriod.NumberOfDays = 60;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
+
+                managementPeriod.MilkProduction = 0;
 
                 managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
                     DietType.MediumEnergyAndProtein);

@@ -12,6 +12,7 @@ using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.Animals.Dairy;
 using H.Core.Models.Animals.Sheep;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
@@ -112,6 +113,7 @@ namespace H.Core.Test.Services
                         }
                     }
                 }
+                
             });
             #endregion
 
@@ -201,7 +203,79 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void TestCalculateAdResults()
         {
-            //_farmResultsService.CalculateAdResults();
+            var farm = new Farm();
+            var animalGroup = new AnimalGroup()
+            {
+                GroupType = AnimalType.BeefCow,
+                Name = "Test Beef Cows",
+            };
+
+            var managementPeriod = new ManagementPeriod()
+            {
+                AnimalGroupGuid = animalGroup.Guid,
+                Name = "Test Management Period #1",
+            };
+
+            animalGroup.ManagementPeriods.Add(managementPeriod);
+
+            var animalComponent = new CowCalfComponent();
+            animalComponent.Groups.Add(animalGroup);
+            farm.Components.Add(animalComponent);
+
+            var componentToReplicate = new AnaerobicDigestionComponent()
+            {
+                ManagementPeriodViewItems = new ObservableCollection<ADManagementPeriodViewItem>()
+                {
+                    new ADManagementPeriodViewItem()
+                    {
+                        ManagementPeriod = managementPeriod,
+                        AnimalComponent = animalComponent,
+                        AnimalGroup = animalGroup,
+                        DailyPercentageOfManureAdded = 11,
+                        FlowRate = 11,
+                    },
+                },
+                AnaerobicDigestionViewItem = new AnaerobicDigestionViewItem()
+                {
+                    ManureSubstrateViewItems = new ObservableCollection<ManureSubstrateViewItem>()
+                    {
+                        new ManureSubstrateViewItem()
+                        {
+                            FlowRate = 11,
+                            ManureStateType = ManureStateType.SolidStorage,
+                        }
+                    },
+                    CropResiduesSubstrateViewItems = new ObservableCollection<CropResidueSubstrateViewItem>()
+                    {
+                        new CropResidueSubstrateViewItem()
+                        {
+                            CropType = CropType.Barley,
+                            FlowRate = 11,
+                        }
+                    },
+                    FarmResiduesSubstrateViewItems = new ObservableCollection<FarmResiduesSubstrateViewItem>()
+                    {
+                        new FarmResiduesSubstrateViewItem()
+                        {
+                            FlowRate = 11,
+                            FarmResidueType = FarmResidueType.FoodWaste,
+                        }
+                    },
+                }
+            };
+
+            farm.Components.Add(componentToReplicate);
+
+            var replicateFarm = _farmResultsService.ReplicateFarm(farm);
+
+            // Check that replicated animal components have been copied in to new AD component correctly and old animal components were not modified
+            Assert.IsTrue(farm.AnimalComponents.Contains(animalComponent));
+
+            // Check that animal component in the AD Component is the same as the animal component in the farm
+            Assert.IsTrue(replicateFarm.AnimalComponents.Contains(replicateFarm.GetAnaerobicDigestionComponent().ManagementPeriodViewItems[0].AnimalComponent));
+
+            // Ensure that the animal component in the original AD component has different GUID to the animal component in the replicated AD component
+            Assert.AreNotEqual(farm.GetAnaerobicDigestionComponent().ManagementPeriodViewItems[0].AnimalComponent.Guid, replicateFarm.GetAnaerobicDigestionComponent().ManagementPeriodViewItems[0].AnimalComponent.Guid);
         }
 
         #endregion

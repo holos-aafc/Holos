@@ -47,7 +47,7 @@ namespace H.Core.Providers.Animals
         #region Public Methods
 
         /// <summary>
-        /// This methods takes in a province and a year and returns the average milk production value. If either of the province or year are incorrect, the method returns zero.
+        /// This method takes in a province and a year and returns the average milk production value. If either of the province or year are incorrect, the method returns zero.
         /// Unit of Measurement: kg head-1 day-1
         /// </summary>
         /// <param name="year">The year for which we need the milk production data.</param>

@@ -979,6 +979,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indoor Barn Temperature.
+        /// </summary>
+        public static string IndoorBarnTemperature {
+            get {
+                return ResourceManager.GetString("IndoorBarnTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Holos has created a template farm folder with the sample directories and data input files in the following directory: {0}. Please go into these folders and create your data files for your Farm. Please hit enter to exit the application..
         /// </summary>
         public static string InitialMessageAfterInstallation {

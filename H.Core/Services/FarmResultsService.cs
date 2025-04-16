@@ -17,6 +17,7 @@ using H.Core.Enumerations;
 using H.Core.Events;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
 using H.Core.Providers;
@@ -30,6 +31,7 @@ using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
+using H.Infrastructure;
 using Prism.Events;
 
 namespace H.Core.Services
@@ -42,6 +44,7 @@ namespace H.Core.Services
 
         private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
+        private readonly IAnaerobicDigestionComponentHelper _anaerobicDigestionComponentHelper = new AnaerobicDigestionComponentHelper();
 
         private readonly IFieldResultsService _fieldResultsService;
         private readonly IAnimalService _animalResultsService;
@@ -258,6 +261,8 @@ namespace H.Core.Services
             farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
             _fieldResultsService.AnimalResults = animalResults;
 
+            //var a = farmResults.GetDailyPrint();
+
             farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
 
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
@@ -304,8 +309,6 @@ namespace H.Core.Services
         public List<CropResidueExportResultViewItem> CalculateCropResidueExportViewItems(Farm farm)
         {
             var result = new List<CropResidueExportResultViewItem>();
-
-            
 
             return result;
         }
@@ -365,12 +368,14 @@ namespace H.Core.Services
             replicatedFarm.Name = farm.Name;
 
             #region Animal Components
+
             foreach (var animalComponent in farm.AnimalComponents.Cast<AnimalComponentBase>())
             {
                 var replicatedAnimalComponent = _animalComponentHelper.ReplicateAnimalComponent(animalComponent);
 
                 replicatedFarm.Components.Add(replicatedAnimalComponent);
             }
+
             #endregion
 
             #region FieldSystemComponents
@@ -388,6 +393,17 @@ namespace H.Core.Services
                 }
 
                 replicatedFarm.Components.Add(replicatedFieldSystemComponent);
+            }
+
+            #endregion
+
+            #region AnaerobicDigestionComponents
+
+            foreach (var anaerobicDigestionComponent in farm.AnaerobicDigestionComponents)
+            {
+                var replicatedAnaerobicDigestionComponent = _anaerobicDigestionComponentHelper.Replicate(anaerobicDigestionComponent, replicatedFarm.AnimalComponents);
+
+                replicatedFarm.Components.Add(replicatedAnaerobicDigestionComponent);
             }
 
             #endregion
@@ -428,15 +444,18 @@ namespace H.Core.Services
                 _customYieldDataMapper.Map(customYieldData, replicatedCustomYieldData);
                 replicatedFarm.GeographicData.CustomYieldData.Add(replicatedCustomYieldData);
             }
+
             #endregion
 
             #region ClimateData
+
             foreach (var dailyClimateData in farm.ClimateData.DailyClimateData)
             {
                 var replicatedDailyClimateData = new DailyClimateData();
                 _dailyClimateDataMapper.Map(dailyClimateData, replicatedDailyClimateData);
                 replicatedFarm.ClimateData.DailyClimateData.Add(dailyClimateData);
             }
+
             #endregion
 
             return replicatedFarm;

@@ -20,7 +20,7 @@ namespace H.Core.Providers.Animals
             else
             {
                 // Turkeys
-                return 0.026;
+                return 0.025;
             }
         }
     }

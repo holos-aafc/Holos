@@ -8,7 +8,8 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
-        public void InitializeGrazingViewItem(GrazingViewItem grazingViewItem,
+        public void InitializeGrazingViewItem(
+            GrazingViewItem grazingViewItem,
             ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent,
             AnimalGroup animalGroup, CropViewItem cropViewItem)
@@ -28,8 +29,8 @@ namespace H.Core.Services.Initialization.Crops
             grazingViewItem.Description = string.Format(H.Core.Properties.Resources.LabelGrazingAnimalsDescription,
                 managementPeriod.NumberOfAnimals,
                 animalGroup.AnimalTypeString.ToLowerInvariant(),
-                managementPeriod.Start.ToString("m"),
-                managementPeriod.End.ToString("m"),
+                managementPeriod.Start.ToString("MM/dd/yyyy"),
+                managementPeriod.End.ToString("MM/dd/yyyy"),
                 managementPeriod.NumberOfDays,
                 managementPeriod.SelectedDiet.Name.ToLowerInvariant());
 

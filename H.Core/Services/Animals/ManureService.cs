@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -566,8 +567,6 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            
-
             var tank = _manureTanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
@@ -934,14 +933,12 @@ namespace H.Core.Services.Animals
             {
                 foreach (var cropViewItem in farmFieldSystemComponent.CropViewItems)
                 {
-                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Where(x => x.ManureStateType == manureStateType && x.DateOfApplication.Year == manureTank.Year))
+                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Get(
+                                 year: manureTank.Year, 
+                                 manureStateType: manureStateType, 
+                                 animalType: manureTank.AnimalType,
+                                 includeImports: false))            // If the manure was imported from off-farm, we don't update/reduce the amounts in the storage tanks
                     {
-                        // If the manure was imported from off-farm, we don't update/reduce the amounts in the storage tanks
-                        if (manureApplicationViewItem.IsImportedManure())
-                        {
-                            continue;
-                        }
-
                         // Account for the total nitrogen that was applied and removed from the tank
                         var amountOfNitrogenAppliedPerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
                         var totalAmountOfNitrogen = amountOfNitrogenAppliedPerHectare * cropViewItem.Area;
@@ -953,15 +950,6 @@ namespace H.Core.Services.Animals
                         manureTank.VolumeSumOfAllManureApplicationsMade += totalVolume;
                     }
                 }
-            }
-        }
-
-        public void UpdateAmountsUsedNEW(ManureTank manureTank, Farm farm, ManureStateType manureStateType)
-        {
-            // Get amounts used from field application
-            foreach (var manureExportViewItem in farm.ManureExportViewItems)
-            {
-                
             }
         }
 

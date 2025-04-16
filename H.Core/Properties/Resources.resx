@@ -5757,7 +5757,7 @@ Daily emissions estimates are multipled by the total number of production days i
     <value>Water effect</value>
   </data>
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
-    <value>Milk-fed dairy calves. A period of no enteric methane emissions</value>
+    <value>Milk-fed dairy calves</value>
   </data>
   <data name="LabelMonth" xml:space="preserve">
     <value>Month</value>
@@ -6424,5 +6424,8 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="SocNRequirement" xml:space="preserve">
     <value>SocNRequirement</value>
+  </data>
+  <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
+    <value>kg ha^-1 (wet wt)</value>
   </data>
 </root>

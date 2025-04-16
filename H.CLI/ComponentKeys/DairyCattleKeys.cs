@@ -61,6 +61,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.TotalCarbonKilogramsDryMatterForBedding, null);
             base.Keys.Add(Properties.Resources.TotalNitrogenKilogramsDryMatterForBedding, null);
             base.Keys.Add(Properties.Resources.MoistureContentOfBeddingMaterial, null);
+            base.Keys.Add(Properties.Resources.IndoorBarnTemperature, ImperialUnitsOfMeasurement.DegreesFahrenheit);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
             base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);

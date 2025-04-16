@@ -89,6 +89,7 @@ namespace H.CLI.TemporaryComponentStorage
         public double FractionOfOrganicNitrogenMineralized { get; set; }
         public ManureStateType ManureStateType { get; set; }
         public double AmmoniaEmissionFactorForManureStorage { get; set; }
+        public double IndoorBarnTemperature { get; set; }
 
         #endregion
 

@@ -207,6 +207,7 @@
     <Compile Include="Enumerations\HousingTypeExtensions.cs" />
     <Compile Include="Enumerations\Languages.cs" />
     <Compile Include="Enumerations\ManureAnimalSourceTypeExtension.cs" />
+    <Compile Include="Enumerations\ManureApplicationViewItemExtensions.cs" />
     <Compile Include="Enumerations\ManureStateTypeExtensions.cs" />
     <Compile Include="Enumerations\IngredientType.cs" />
     <Compile Include="Enumerations\IrrigationMethodType.cs" />

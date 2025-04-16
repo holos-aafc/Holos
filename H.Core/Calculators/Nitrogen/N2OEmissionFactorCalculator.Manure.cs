@@ -746,17 +746,16 @@ namespace H.Core.Calculators.Nitrogen
         {
             var dictionary = new Dictionary<AnimalType, double>();
 
-            // Get left over manure by type - need to get only poultry, etc. types as beef dairy calculated using TAN
+            // Get left over manure by type of animal manure being considered - need to get only poultry, etc. types as beef dairy calculated using TAN.
             var typesOfManureUsed = _manureService.GetManureCategoriesProducedOnFarm(farm).Where(x => x.IsSheepType() || x.IsSwineType() || x.IsOtherAnimalType());
             foreach (var animalType in typesOfManureUsed)
             {
-                var volatilizationFractionForLandApplication = this.LivestockEmissionConversionFactorsProvider.GetVolatilizationFractionForLandApplication(animalType, farm.DefaultSoilData.Province, year);
+                var totalNitrogenCreatedByAnimalType = _manureService.GetTotalNitrogenCreated(year, animalType);
+                var totalNitrogenUsedByAnimalType = _manureService.GetTotalNitrogenAppliedToAllFields(year, animalType);
+                var nitrogenRemainingByAnimalType = totalNitrogenCreatedByAnimalType - totalNitrogenUsedByAnimalType;
 
-                var createdByType = _manureService.GetTotalNitrogenCreated(year, animalType);
-                var usedByType = _manureService.GetTotalNitrogenAppliedToAllFields(year);
-                var remainingByType = createdByType - usedByType;
-
-                var ammonia = remainingByType * volatilizationFractionForLandApplication;
+                var volatilizationFractionForLandApplication = this.GetVolatilizationFractionForLandApplication(animalType, farm.DefaultSoilData.Province, year);
+                var ammonia = nitrogenRemainingByAnimalType * volatilizationFractionForLandApplication;
 
                 dictionary[animalType] = ammonia;
             }
@@ -1571,6 +1570,11 @@ namespace H.Core.Calculators.Nitrogen
         #endregion
 
         #region Private Methods
+
+        private double GetVolatilizationFractionForLandApplication(AnimalType animalType, Province province, int year)
+        {
+return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizationFractionForLandApplication(animalType, province, year);
+        }
 
         private double GetEmissionFactorForVolatilization(Farm farm, int year)
         {
