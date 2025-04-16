@@ -4,6 +4,7 @@ using H.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
 using H.Infrastructure;
+using System;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -210,6 +211,9 @@ namespace H.Core.Services.Initialization.Crops
 
                 manureApplicationViewItem.ManureApplicationMethod = validManureApplicationTypes.FirstOrDefault();
             }
+
+            manureApplicationViewItem.MinimumAllowableDateOfApplication = new DateTime(viewItem.Year, 1, 1);
+            manureApplicationViewItem.MaximumAllowableDateOfApplication = new DateTime(viewItem.Year, 12, 31);
         }
 
         public void InitializeFertilizerApplicationMethod(Farm farm)

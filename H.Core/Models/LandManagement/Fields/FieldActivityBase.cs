@@ -21,10 +21,25 @@ namespace H.Core.Models.LandManagement.Fields
         private BaleTypes _baleType;
         private double _utilization;
 
+        private DateTime _minimumAllowableDateOfApplication;
+        private DateTime _maximumAllowableDateOfApplication;
+
         #endregion
 
         #region Properties
-        
+
+        public DateTime MinimumAllowableDateOfApplication
+        {
+            get { return _minimumAllowableDateOfApplication; }
+            set { SetProperty(ref _minimumAllowableDateOfApplication, value); }
+        }
+
+        public DateTime MaximumAllowableDateOfApplication
+        {
+            get { return _maximumAllowableDateOfApplication; }
+            set { SetProperty(ref _maximumAllowableDateOfApplication, value); }
+        }
+
         public ForageActivities ForageActivity
         {
             get { return _forageActivity; }

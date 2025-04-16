@@ -8,7 +8,8 @@ namespace H.Core.Services.Initialization.Crops
     {
         #region Public Methods
 
-        public void InitializeGrazingViewItem(GrazingViewItem grazingViewItem,
+        public void InitializeGrazingViewItem(
+            GrazingViewItem grazingViewItem,
             ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent,
             AnimalGroup animalGroup, CropViewItem cropViewItem)
