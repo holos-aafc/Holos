@@ -88,7 +88,7 @@ Trouvez ce polygone et cliquez à droite pour le sélectionner dans la carte (fi
 <p align="center">
     <img src="../../Images/SwineGuide/fr/Figure6.png" alt="Figure 6" width="950"/>
     <br>
-    <em>Figure 6: Sélectionner le polygone du PPC comme emplacement de la ferme</em>
+    <em>Figure 6: Sélectionner le polygone du PPC comme emplacement de la ferme.</em>
 </p> 
 
 <br>
@@ -502,7 +502,7 @@ Pour éviter qu’un utilisateur soit obligé de fournir les rendements annuels 
 
 Nous ajusterons cette grille afin de voir les intrants de carbone en surface et sous la terre pour notre **champ de blé**, puis nous ajusterons le rendement des cultures pour une année donnée.
 
-1. WNous allons définir un filtre pour la première colonne (Nom du champ) afin de ne visualiser que l’information concernant notre champ de blé et de vesce velue. À côté de l’en-tête de la colonne, cliquez sur l’icône Entonnoir. Cochez la case à côté de **'Blé et vesce velue'**.
+1. Nous allons définir un filtre pour la première colonne (Nom du champ) afin de ne visualiser que l’information concernant notre champ de blé et de vesce velue. À côté de l’en-tête de la colonne, cliquez sur l’icône Entonnoir. Cochez la case à côté de **'Blé et vesce velue'**.
 
 2. À l’extrême gauche de cet écran, cliquez sur la barre latérale **Activer les colonnes** (près de la colonne Nom du champ).
 
@@ -512,11 +512,9 @@ Nous ajusterons cette grille afin de voir les intrants de carbone en surface et 
 
 5. Nous pouvons maintenant (facultativement) ajuster les rendements de notre champ de blé pour une année donnée si les rendements mesurés réels sont disponibles.
 
-6. Ajuster le blé
+6. Ajuster le blé Définissez le rendement de **"2006"** à **"4100 kg/ha<sup>-1</sup>"**.
 
-7. Définissez le rendement de **"2006"** à **"4100 kg/ha"**.
-
-8. Notez que Holos a mis à jour les intrants de carbone en surface à cette fin.
+7. Notez que Holos a mis à jour les intrants de carbone en surface à cette fin.
 
 Cliquez sur le bouton Suivant pour passer à l’écran du rapport final des résultats. 
 

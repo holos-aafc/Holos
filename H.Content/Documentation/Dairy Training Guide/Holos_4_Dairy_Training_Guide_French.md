@@ -68,17 +68,17 @@ Trouvez ce polygone et cliquez à droite pour le sélectionner sur la carte (fig
 
 <br>
 
-> *Note: Climate data is central to most calculations performed by Holos. For the most accurate estimation of farm emissions, measured climate data should be provided by the user which will override the default data obtained from the NASA weather API. If the user chooses to use the default NASA climate data, these data are available in a 10 km grid, and so can vary throughout the SLC polygon, depending on the precise location of the farm. Therefore, if possible, the user should choose the location of their farm as precisely as possible. Doing so can be aided by using different views (e.g., the Aerial view), which can be selected via the eye icon at the bottom of the map on the Farm Location screen.*
+> *Remarque: Les données climatiques sont au cœur de la plupart des calculs effectués par Holos. Pour obtenir l’estimation la plus exacte des émissions des exploitations agricoles, les données climatiques mesurées doivent être fournies par l’utilisateur; elles remplaceront alors les données par défaut obtenues à partir des données d’API météo de la NASA. Si l’utilisateur choisit d’utiliser les données climatiques par défaut de la NASA, ces données sont présentées dans une grille de 10 km et peuvent donc varier dans le polygone du PPC, selon l’emplacement précis de la ferme. Par conséquent, si c’est possible, l’utilisateur devrait choisir l’emplacement de sa ferme avec la plus grande précision possible. Pour ce faire, il peut utiliser différentes vues (p. ex., la vue aérienne), qui peuvent être sélectionnées à l’aide de l’icône d’œil au bas de la carte, dans l’écran **Emplacement de la ferme**.*
 > 
 
-> *Holos will use daily precipitation, temperature, and potential evapotranspiration values to model soil carbon (C) change (climate parameter), nitrous oxide (N<sub>2</sub>O) emissions, and ammonia (NH<sub>3</sub>) volatilization.*
+> *Holos utilisera des valeurs quotidiennes de précipitations, de température et d’évapotranspiration potentielle pour modéliser les changements du carbone dans le sol (paramètre climatique), les émissions d’oxyde nitreux, ainsi que la volatilisation de l’ammoniac.*
 
 <br>
 
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure5.png" alt="Figure 5" width="950"/>
     <br>
-    <em>Figure 5: Map of the Manitoba province showing the different selectable SCL polygons.</em>
+    <em>Figure 5: Carte de la province du Manitoba montrant les différents polygones pouvant être sélectionnés.</em>
 </p>
 
 <br>
@@ -86,30 +86,30 @@ Trouvez ce polygone et cliquez à droite pour le sélectionner sur la carte (fig
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure6.png" alt="Figure 6" width="950"/>
     <br>
-    <em>Figure 6: Selecting the SLC polygon for the farm location.</em>
+    <em>Figure 6: Sélectionner le polygone du PPC comme emplacement de la ferme.</em>
  </p>
  
  <br>
  
-Once the farm location is selected, soil information (texture, sand, and clay proportions) for the types of soils found in this polygon are displayed on the right side of the screen. It is possible that more than one soil type per polygon will be found and the user is expected to select their soil type from this list or use the default selection (Figure 7). The default soil type selected represents the dominant soil type for the chosen polygon.
+Une fois l’emplacement de la ferme choisi, les renseignements sur le sol (texture, proportions de sable et d’argile) pour les types de sols trouvés dans ce polygone sont affichés dans le côté droit de l’écran. Il est possible que plus d’un type de sol par polygone soit trouvé et que l’utilisateur choisisse son type de sol dans cette liste ou utilise la sélection par défaut. Le type de sol par défaut sélectionné représente le type de sol dominant pour le polygone choisi.
 
-For this tutorial, keep the default **Soil Zone** as **"Black"** soil, and the default **Hardiness Zone** as **"3b"**.  
+Dans le cadre du présent tutoriel, conservez la zone de sol par défaut sol **"noir"**, et la **"zone de rusticité"** par défaut **"3b"**. 
   
 <br>
 
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure7.png" alt="Figure 7" width="950"/>
     <br>
-    <em>Figure 7: Multiple soil types may be available for the selected SLC polygon.</em>
+    <em>Figure 7: Plusieurs types de sols seront affichés pour le polygone du PPC sélectionné.</em>
 </p> 
 
 <br>
 
- > *Note: Soil data obtained from the user’s selected location will be used in the calculation of location-specific N<sub>2</sub>O emission factors. Properties such as soil texture, top layer thickness, and pH are required for these calculations, and can be overwritten on the Component Selection screen, under Settings > Farm Defaults > Soil.*
+ > *Remarque: Les données sur le sol obtenues à l’emplacement choisi par l’utilisateur seront utilisées dans le calcul des facteurs d’émission d’oxyde nitreux (N2O) propres à l’emplacement. Des propriétés telles que la texture, l’épaisseur de la couche de surface et le pH du sol sont nécessaires à ces calculs et peuvent être écrasées dans l’écran Sélection des composantes, sous Paramètres > Valeurs par défaut de la ferme > Sol.*
 
 <br>
 
-Click the **Next** button to proceed to the next step.
+Cliquez sur le bouton **Suivant** pour passer à l’étape suivante.
 
 <div style="page-break-after: always"></div>
 
@@ -184,7 +184,7 @@ Dans le premier champ de notre ferme, nous cultiverons du blé en continu avec u
 
 <br>
 
->*Note: It is not necessary to enter a crop for each individual year going back to 1985 (or an alternative user-defined start year); only enough crops to describe a single phase of the rotation will need to be entered by the user. Holos will then copy this phase information and back-populate the field history (i.e., Holos will copy the specified rotation back to the start year on behalf of the user).*
+>*Remarque: Il n’est pas nécessaire d’entrer une culture pour chaque année depuis 1985; l’utilisateur n’aura à entrer qu’un nombre suffisant de cultures pour définir une seule phase de la rotation. Holos copie ensuite les renseignements sur la phase et remplit automatiquement l’historique des champs (c.-à-d. qu’Holos copie la rotation jusqu’en 1985).*
 
 >*Holos exige au minimum la superficie du champ, le type de culture et un taux d’épandage d’engrais propre au champ pour pouvoir calculer les émissions directes et indirectes d’oxyde nitreux.*
 
@@ -388,26 +388,26 @@ Nous sommes en train de terminer la définition de notre ferme. Cliquez sur le b
 Le bouton **Ajouter un système de production historique** permet à l’utilisateur d’ajouter un historique de culture différent à des champs individuels, tandis que le bouton **Ajouter un système de production prévu** permet à l’utilisateur d’ajouter un système de culture futur (prévu) à des champs individuels.
 
 
-### Adding a historical production system
+### Ajout d’un système de production antérieur 
 
 
-We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barley** grain - **Tame mixed (grass\legume)** hay rotation between **1985 and 2000**.
+Nous supposerons que les champs de rotation **de l’orge et du mélange de foin** étaient auparavant dans un système de culture continue du blé entre **1985 et 2000**.
 
-1. To add a new historical cropping system, select the "**Wheat & Hairy Vetch field**". To select an item, click on the timeline bar to activate that field.
+1. Pour sélectionner un élément, cliquez sur la barre de calendrier pour activer ce champ. Nous sélectionnerons le premier champ de cette rotation (c.-à-d. le champ portant le nom **"Rotation de cultures no 1 (champ no 1) – Orge"**.
 
-2. Click on the **Add Historical Production System** button which will add a new row to the table under the **"Step 1"** section in the upper left section of the screen. Note that this new entry has the words **"Historical management practice"** added.
+2. Cliquez sur le bouton **"Ajouter un système de production historique"** pour ajouter une nouvelle ligne au tableau dans la section **Étape 1**, dans le coin supérieur gauche de l’écran. Vous pouvez remarquer que la mention **"Pratique de gestion historique"** a été ajoutée.
 
-3. We will set the end year of this historical management practice to the year **"2000"**. To adjust this we use the numeric up/down buttons within the cell.
+3. Nous fixerons la fin de cette pratique à l’an **2000**. Pour ce faire, utilisez les boutons numériques haut/bas dans la cellule.
 
-4. Select the newly added **Historical management practice** and then click the **"Edit Selected"** button. This will open a new screen that allows us to adjust the crops grown and their management during this period.
+4. Sélectionnez la nouvelle pratique, puis cliquez sur le bouton **Modifier les éléments sélectionnés**. Un nouvel écran s’affiche; il nous permettra d’ajuster les cultures et la gestion durant cette période.
 
-5. As we want to make this a three-crop rotation, under **"Step 2"** click the "**Add Crop**" button twice to add two more crops. 
+5. Cliquez sur la culture Orge, dans la section Étape 2.
 
-7. Change the first crop type to "**Barley**" (with no cover crop). Enter a yield of **"3,500 kg ha<sup>-1</sup>"** (wet weight) and keep all other settings as default.
+7. Faites passer le type de culture à **"Blé"** et, dans la page d’onglet Général, faites passer le rendement à **"3 500 kg/ha <sup>-1</sup>"**. Nous ne modifierons pas les autres paramètres. 
   
-8. Change the second and third rows to **"Tame mixed (grass/legume)"** - note that when a perennial crop is selected as the main crop, Holos automatically selects the same crop type as the cover crop. Keep all other settings as default for both years. 
+8. Nous devons également retirer les cultures de mélange de foin de cette période antérieure. Cliquez sur l’icône **X**, à côté de chacune des cultures de mélange de foin, dans la section **Étape 2**. Cliquez sur l’icône **X** pour supprimer ces cultures de la rotation pour cette période.
 
-10. Click **"OK"** to save these adjustments.
+10. Cliquez sur **OK** pour enregistrer les modifications que nous venons d’apporter à ce champ.
 
 <em>Cliquez sur le bouton Suivant pour passer à l’écran Détails.
 
@@ -416,7 +416,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure16.png" alt="Figure 16" width="950"/>
     <br>
-    <em>Figure 16: Customized Timeline screen</em>
+    <em>Figure 16: Écran Calendrier personnalisé</em>
 </p> 
 
 <br>  
@@ -424,7 +424,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure17.png" alt="Figure 17" width="950"/>
     <br>
-    <em>Figure 17: Adjusted start and end year for productions systems on the timeline screen.</em>
+    <em>Figure 17: Définir l’année de début et de fin des systèmes de production dans l’écran Calendrier.</em>
 </p> 
 
 <br> 
@@ -432,7 +432,7 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure18.png" alt="Figure 18" width="950"/>
     <br>
-    <em>Figure 18: Editing crops in a historical period of the rotation. </em>
+    <em>Figure 18: Modification des cultures au cours d’une période de rotation antérieure. </em>
 </p> 
 
 <div style="page-break-after: always"></div>
@@ -441,21 +441,21 @@ We will assume that the **Wheat & Hairy Vetch** field was used to grow a **Barle
 
 Pour éviter qu’un utilisateur soit obligé de fournir les rendements annuels des cultures en remontant jusqu’à 1985 (ou à une autre date, si la date précisée est différente) pour chaque champ de la ferme, le modèle utilisera les données de *Statistique Canada* sur le rendement annuel propre à une culture par défaut (le cas échéant). Les changements dans le rendement des cultures ont une incidence sur divers extrants du modèle, notamment sur les taux de séquestration du carbone dans le sol et sur les émissions de N<sub>2</sub>O des sols. Les étapes suivantes montrent comment l’ajustement du rendement des cultures influe sur les intrants de carbone au-dessus et en dessous du sol.
 
-We will adjust this grid so that we can view the above-ground and below-ground C inputs for our **Wheat & Hairy Vetch** field and then we will adjust the crop yield for one specific year.
+Nous ajusterons cette grille afin de voir les intrants de carbone en surface et sous la terre pour notre **champ de blé**, puis nous ajusterons le rendement des cultures pour une année donnée.
 
-1. We will set a filter on the first column named **"Field name"** so that we only display information for our current **Wheat and hairy vetch** field. Beside the column heading, click the **'funnel'** icon to set a filter. Check the box beside **'Wheat & hairy vetch'**.
+1. WNous allons définir un filtre pour la première colonne (**Nom du champ**) afin de ne visualiser que l’information concernant notre champ de blé et de vesce velue. À côté de l’en-tête de la colonne, cliquez sur l’icône **Entonnoir**. Cochez la case à côté de **'Blé et vesce velue'**.
 
-2. On the far left of this screen, click the **Enable Columns** sidebar (located near the “Field name” column).
+2. À l’extrême gauche de cet écran, cliquez sur la barre latérale **Activer les colonnes** (près de la colonne Nom du champ).
 
-3. Place a check beside **"Above-ground carbon input"** to show the column and remove the check beside the **'Notes'** column to hide it.
+3. Cochez la case **Intrants de carbone en surface** pour afficher la colonne et décochez la case à côté de la colonne **Notes** pour masquer celle-ci. 
 
-4. Click the **'Enable Columns'** sidebar again to collapse it.
+4. Cliquez de nouveau sur la barre latérale **"Activer les colonnes"** pour la réduire.
 
-5. We can now (optionally) adjust the yields for our wheat crop for any given year if actual measured yields are available.
+5. Nous pouvons maintenant (facultativement) ajuster les rendements de notre champ de blé pour une année donnée si les rendements mesurés réels sont disponibles.
 
-6. Adjust the wheat yield for **2006** to be **4,100 kg ha<sup>-1</sup>"**.
+6. Ajuster le blé Définissez le rendement de **"2006"** à **"4100 kg/ha<sup>-1</sup>"**.
 
-7. Note that Holos has updated the above-ground C inputs for this.
+7. Notez que Holos a mis à jour les intrants de carbone en surface à cette fin.
 
 Cliquez sur le bouton Suivant pour passer à l’écran du rapport final des résultats. 
 
@@ -464,7 +464,7 @@ Cliquez sur le bouton Suivant pour passer à l’écran du rapport final des ré
 <p align="center">
     <img src="../../Images/DairyGuide/fr/Figure19.png" alt="Figure 19" width="950"/>
     <br>
-    <em>Figure 19: Details screen</em>
+    <em>Figure 19: Écran Détails </em>
 </p> 
 
 <br>
