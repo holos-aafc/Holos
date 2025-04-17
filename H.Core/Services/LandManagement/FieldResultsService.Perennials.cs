@@ -242,6 +242,19 @@ namespace H.Core.Services.LandManagement
                     var moistureContent = cropViewItem.GrazingViewItems.Any() ? cropViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
                     cropViewItem.MoistureContentOfCropPercentage = moistureContent;
                 }
+
+                // Check if there was a harvest in this year
+                var harvestViewItems = cropViewItem.GetHayHarvestsByYear(cropViewItem.Year);
+                if (harvestViewItems.Any())
+                {
+                    var moistureContent = harvestViewItems.Average(x => x.MoistureContentAsPercentage);
+                    if (moistureContent == 0)
+                    {
+                        moistureContent = 1;
+                    }
+
+                    cropViewItem.MoistureContentOfCropPercentage = moistureContent;
+                }
             }
         }
     }

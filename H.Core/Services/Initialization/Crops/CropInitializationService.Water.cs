@@ -60,6 +60,14 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeMoistureContent(
             Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem)
         {
+            // https://github.com/holos-aafc/Holos/pull/310
+            if (cropViewItem.CropType.IsPerennial())
+            {
+                cropViewItem.MoistureContentOfCropPercentage = 80;
+
+                return;
+            }
+
             if (cropViewItem.HarvestMethod == HarvestMethods.GreenManure ||
                 cropViewItem.HarvestMethod == HarvestMethods.Silage ||
                 cropViewItem.HarvestMethod == HarvestMethods.Swathing ||
