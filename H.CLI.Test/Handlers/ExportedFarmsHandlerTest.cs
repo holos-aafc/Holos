@@ -34,7 +34,6 @@ namespace H.CLI.Test.Handlers
         [TestInitialize]
         public void TestInitialize()
         {
-            _handler = new ExportedFarmsHandler();
         }
 
         [TestCleanup]
@@ -50,7 +49,6 @@ namespace H.CLI.Test.Handlers
         [Ignore]
         public void PromptUserForLocationOfExportedFarms()
         {
-            _handler.PromptUserForLocationOfExportedFarms("");
         }
 
         #endregion

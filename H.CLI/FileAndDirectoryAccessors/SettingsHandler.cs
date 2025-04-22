@@ -17,12 +17,24 @@ namespace H.CLI.FileAndDirectoryAccessors
 
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
-        private readonly SlcClimateDataProvider _slcClimateDataProvider = new SlcClimateDataProvider();
-        private readonly IClimateProvider _climateProvider = new ClimateProvider(new SlcClimateDataProvider());
+        
+        private readonly IClimateProvider _climateProvider;
 
         public List<int> PolygonIDList { get; set; } = new List<int>();
 
         #endregion
+
+        public SettingsHandler(IClimateProvider climateProvider)
+        {
+            if (climateProvider != null)
+            {
+                _climateProvider = climateProvider;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(climateProvider));
+            }
+        }
 
         #region Public Methods
 
@@ -233,7 +245,7 @@ namespace H.CLI.FileAndDirectoryAccessors
 
                 var lethbridgePolygonID = 793006;
                 var lethbridgeGeographicData = geographicDataProvider.GetGeographicalData(lethbridgePolygonID);
-                var climateData = _slcClimateDataProvider.GetClimateData(lethbridgePolygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
+                var climateData = _climateProvider.GetClimateData(lethbridgePolygonID, TimeFrame.NineteenNinetyToTwoThousandSeventeen);
 
                 _directoryHandler.GenerateGlobalSettingsFile(farmDirectoryPath, new Farm() { PolygonId = lethbridgePolygonID, GeographicData = lethbridgeGeographicData, ClimateData = climateData });
             }

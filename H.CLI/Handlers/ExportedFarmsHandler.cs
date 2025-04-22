@@ -28,12 +28,12 @@ namespace H.CLI.Handlers
         #region Fields
 
         private readonly InputHelper _inputHelper = new InputHelper();
-        private readonly Storage _storage = new Storage();
+        private readonly Storage _storage;
         private readonly FieldProcessor _fieldProcessor;
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly ExcelInitializer _excelInitializer = new ExcelInitializer();
         private readonly DirectoryKeys _directoryKeys = new DirectoryKeys();
-        private readonly SettingsHandler _settingsHandler = new SettingsHandler();
+        private readonly SettingsHandler _settingsHandler;
 
         private readonly BeefConverter _beefConverter = new BeefConverter();
         private readonly DairyConverter _dairyConverter = new DairyConverter();
@@ -42,22 +42,42 @@ namespace H.CLI.Handlers
         private readonly PoultryConverter _poultryConverter = new PoultryConverter();
         private readonly OtherLiveStockConverter _otherLiveStockConverter = new OtherLiveStockConverter();
 
-        private readonly FieldResultsService _fieldResultsService;
 
         public string pathToExportedFarm = string.Empty;
+        private FieldResultsService _fieldResultsService;
 
         #endregion
 
-        public ExportedFarmsHandler()
+        public ExportedFarmsHandler(FieldResultsService fieldResultsService, IClimateProvider climateProvider, Storage storage)
         {
-            var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
-            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
-            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-            var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-            var initializationService = new InitializationService();
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService; 
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
 
-            _fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
-            _fieldProcessor = new FieldProcessor(_fieldResultsService);
+            if (climateProvider != null)
+            {
+                _settingsHandler = new SettingsHandler(climateProvider);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(climateProvider));
+            }
+
+            if (storage != null)
+            {
+                _storage = storage;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(storage));
+            }
+            
+            _fieldProcessor = new FieldProcessor(fieldResultsService);
         }
 
         #region Public Methods
@@ -176,12 +196,11 @@ namespace H.CLI.Handlers
         public void ChangePolygonID(CLIArguments argValues, Farm exportedFarm)
         {
             var polygonID = int.Parse(argValues.PolygonID);
-            var settingsHandler = new SettingsHandler();
             var geographicDataProvider = new GeographicDataProvider();
             geographicDataProvider.Initialize();
-            settingsHandler.InitializePolygonIDList(geographicDataProvider);
+            _settingsHandler.InitializePolygonIDList(geographicDataProvider);
 
-            if (settingsHandler.PolygonIDList.Contains(polygonID))
+            if (_settingsHandler.PolygonIDList.Contains(polygonID))
             {
                 var slcClimateDataProvider = new SlcClimateDataProvider();
                 exportedFarm.PolygonId = polygonID;

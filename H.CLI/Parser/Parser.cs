@@ -63,6 +63,7 @@ namespace H.CLI.Parser
 
                     if (filelines.Count() < 2)
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine(String.Format(H.CLI.Properties.Resources.NoFileData, file));
                         continue;
                     }

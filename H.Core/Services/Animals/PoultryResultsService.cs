@@ -17,12 +17,17 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        private Table_41_Poultry_NExcretionRate_Parameter_Values_Provider _poultryNExcretionRateValuesProvider = new Table_41_Poultry_NExcretionRate_Parameter_Values_Provider();
+        private static readonly Table_41_Poultry_NExcretionRate_Parameter_Values_Provider _poultryNExcretionRateValuesProvider;
         private readonly DefaultDailyTanExcretionRatesForPoultry _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
 
         #endregion
 
         #region Constructors
+
+        static PoultryResultsService()
+        {
+            _poultryNExcretionRateValuesProvider = new Table_41_Poultry_NExcretionRate_Parameter_Values_Provider();
+        }
 
         public PoultryResultsService() : base()
         {

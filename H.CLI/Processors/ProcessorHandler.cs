@@ -7,14 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Models;
+using H.Core.Services.LandManagement;
 
 namespace H.CLI.Processors
 {
     public class ProcessorHandler
     {
         #region Fields
-        private ComponentProcessorFactory processorFactory = new ComponentProcessorFactory();
+
+        private ComponentProcessorFactory _processorFactory;
+        private FieldResultsService _fieldResultsService;
         public IProcessor _processor { get; set; }
+        #endregion
+
+        #region Constructors
+
+        public ProcessorHandler(FieldResultsService fieldResultsService)
+        {
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService; 
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
+
+            _processorFactory = new ComponentProcessorFactory(_fieldResultsService);
+        }
+
         #endregion
 
         #region Public Methods
@@ -53,7 +74,7 @@ namespace H.CLI.Processors
                         //seenComponentTypes list so we do not keep processing components of the same type.
                         if (!componentTypeAlreadyExists.Any())
                         {
-                            SetProccessor(processorFactory.GetComponentProcessor(component.GetType()));
+                            SetProccessor(_processorFactory.GetComponentProcessor(component.GetType()));
                             var componentList = currentFarm.Components.Where(x => x.GetType() == component.GetType()).ToList();
                             _processor.ProcessComponent(currentFarm, componentList, applicationData);
                             seenComponentTypes.Add(currentType);
@@ -61,8 +82,10 @@ namespace H.CLI.Processors
                     }
                 }
             }
-        } 
-            #endregion
         }
+
     }
+
+    #endregion
+}
 

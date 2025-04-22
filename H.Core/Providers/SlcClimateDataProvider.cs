@@ -63,6 +63,8 @@ namespace H.Core.Providers
 
         #region Constructors
 
+
+
         public SlcClimateDataProvider()
         {
             HTraceListener.AddTraceListener();

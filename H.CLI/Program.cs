@@ -1,5 +1,6 @@
 ﻿using H.CLI.Properties;
 using System;
+using System.Deployment;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -26,10 +27,59 @@ namespace H.CLI
 {
     class Program
     {
-        static void Main(string[] args)
+        #region Fields
+
+        private static Storage _storage;
+        private static ClimateProvider _climateProvider;
+        private static SlcClimateDataProvider _slcClimateDataProvider;
+        private static N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
+        private static ICBMSoilCarbonCalculator _iCbmSoilCarbonCalculator;
+        private static IPCCTier2SoilCarbonCalculator _ipccSoilCarbonCalculator;
+        private static InitializationService _initializationService;
+        private static FieldResultsService _fieldResultsService;
+        private static ExportedFarmsHandler _exportedFarmsHandler;
+        private static SettingsHandler _globalSettingsHandler;
+        private static ProcessorHandler _processorHandler;
+
+        #endregion
+
+        #region Constructors
+
+        static Program()
         {
             ShowBanner();
 
+            _storage = new Storage();
+            _slcClimateDataProvider = new SlcClimateDataProvider();
+            _climateProvider = new ClimateProvider(_slcClimateDataProvider);
+            _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator); 
+            _ipccSoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
+            _initializationService = new InitializationService();
+            _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
+            _exportedFarmsHandler = new ExportedFarmsHandler(_fieldResultsService, _climateProvider, _storage);
+            _globalSettingsHandler = new SettingsHandler(_climateProvider);
+            _processorHandler = new ProcessorHandler(_fieldResultsService);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public static string GetVersionString()
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            else
+            {
+                return "1.0";
+            }
+        }
+
+        static void Main(string[] args)
+        {
             // CLI arguments access 
             CLIArguments argValues = new CLIArguments();
             argValues.ParseArgs(args);
@@ -44,17 +94,16 @@ namespace H.CLI
             var farmsFolderPath = Directory.GetCurrentDirectory();
 
             // Farms exported from GUI access
-            var exportedFarmsHandler = new ExportedFarmsHandler();
             List<string> generatedFarmFolders = new List<string>();
 
             // Separate initialize functions with and without CLI arguments
             if (argValues.FileName != string.Empty || argValues.FolderName != string.Empty)
             {
-                generatedFarmFolders = exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, argValues);
+                generatedFarmFolders = _exportedFarmsHandler.InitializeWithCLArguements(farmsFolderPath, argValues);
             }
             else
             {
-                _ = exportedFarmsHandler.Initialize(farmsFolderPath);
+                _ = _exportedFarmsHandler.Initialize(farmsFolderPath);
             }
 
             // Ensure output directory is not a network drive 
@@ -72,10 +121,10 @@ namespace H.CLI
             var applicationData = new ApplicationData();
             var storage = new Storage();
             var templateFarmHandler = new TemplateFarmHandler();
-            var processorHandler = new ProcessorHandler();
+
 
             // Get The Directories in the "Farms" folder
-            var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
+            var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, _exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
             // Set up the geographic data provider only once to speed up processing.
             var geographicDataProvider = new GeographicDataProvider();
@@ -85,10 +134,9 @@ namespace H.CLI
             if (Directory.Exists(farmsFolderPath) && listOfFarmPaths.Any())
             {
                 //if there is no template farm folder, create one
-                templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
+                //templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
 
-                var globalSettingsHandler = new SettingsHandler();
-                globalSettingsHandler.InitializePolygonIDList(geographicDataProvider);
+                _globalSettingsHandler.InitializePolygonIDList(geographicDataProvider);
 
                 foreach (var farmDirectoryPath in listOfFarmPaths)
                 {
@@ -97,8 +145,8 @@ namespace H.CLI
 
                     if (!settingsFilePathsInFarmDirectory.Any())
                     {
-                        globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, geographicDataProvider);
-  
+                        _globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, geographicDataProvider);
+
                         // This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
                         var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
 
@@ -119,6 +167,7 @@ namespace H.CLI
                             var farmSettingsFileName = Path.GetFileNameWithoutExtension(settingsFilePath);
                             var reader = new ReadSettingsFile();
                             var dataInputHandler = new DataInputHandler();
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine(String.Format(Environment.NewLine + Properties.Resources.StartingConversion, Path.GetFileName(farmDirectoryPath)));
 
                             // Parse And Convert Raw Input Files Into Components and add them to a Farm
@@ -135,8 +184,8 @@ namespace H.CLI
                             // for each Farm and therefore, are set for each farm
                             Console.WriteLine(Properties.Resources.ReadingSettingsFile);
                             reader.ReadGlobalSettings(settingsFilePath);
-                            globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
-  
+                            _globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
+
                             // Create a KeyValuePair which takes in the farmDirectoryPath and the Farm itself
                             if (farm.Components.Any())
                             {
@@ -167,22 +216,15 @@ namespace H.CLI
                     Console.WriteLine();
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
-                    var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
-                    var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
-                    var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-                    var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-                    var initializationService = new InitializationService();
-
-                    var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
                     // Overall Results For All the Farms
-                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), fieldResultsService, n2oEmissionFactorCalculator);
+                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);
 
                     // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
                     // Slowest section because we initialize view models for every component
-                    processorHandler.InitializeComponentProcessing(storage.ApplicationData);
+                    _processorHandler.InitializeComponentProcessing(storage.ApplicationData);
 
                     // Calculate emissions for all farms
                     componentResults.ProcessFarms(storage);
@@ -222,10 +264,12 @@ namespace H.CLI
         static void ShowBanner()
         {
             Console.WriteLine();
-            Console.WriteLine("HOLOS CLI");
+            Console.WriteLine("HOLOS CLI " + "(" + GetVersionString() + ")");
+            Console.WriteLine("Loading data please wait...");
             Console.WriteLine();
             Console.WriteLine();
-        }
+        } 
+        #endregion
     }
 }
 

@@ -21,21 +21,24 @@ namespace H.CLI.Factories
 
         private readonly FieldProcessor _fieldProcessor;
         private readonly ShelterbeltProcessor _shelterbeltProcessor;
+        private FieldResultsService _fieldResultsService;
 
         #endregion
 
         #region Constructors
 
-        public ComponentProcessorFactory()
+        public ComponentProcessorFactory(FieldResultsService fieldResultsService)
         {
-            var climateProvider = new ClimateProvider(new SlcClimateDataProvider());
-            var n2oEmissionFactorCalculator = new N2OEmissionFactorCalculator(climateProvider);
-            var iCBMSoilCarbonCalculator = new ICBMSoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-            var ipcc = new IPCCTier2SoilCarbonCalculator(climateProvider, n2oEmissionFactorCalculator);
-            var initializationService = new InitializationService();
-
-            var fieldResultsService = new FieldResultsService(iCBMSoilCarbonCalculator, ipcc, n2oEmissionFactorCalculator, initializationService);
-            _fieldProcessor = new FieldProcessor(fieldResultsService);
+            if (fieldResultsService != null)
+            {
+                _fieldResultsService = fieldResultsService; 
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(fieldResultsService));
+            }
+            
+            _fieldProcessor = new FieldProcessor(_fieldResultsService);
             _shelterbeltProcessor = new ShelterbeltProcessor();
         } 
 

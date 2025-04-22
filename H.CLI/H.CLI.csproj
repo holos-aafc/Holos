@@ -32,7 +32,7 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.1.15</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.16</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
@@ -71,7 +71,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>HolosIcon.ico</ApplicationIcon>
@@ -80,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
