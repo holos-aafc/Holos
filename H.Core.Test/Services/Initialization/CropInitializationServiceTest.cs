@@ -211,6 +211,7 @@ namespace H.Core.Test.Services.Initialization
         {
             var viewItem = base.GetTestCropViewItem();
             viewItem.CropType = CropType.Wheat;
+            viewItem.Yield = 1000;
 
             _cropsInitializationService.InitializeBiomassCoefficients(viewItem, _farm);
             _cropsInitializationService.InitializeNitrogenContent(viewItem, _farm);
