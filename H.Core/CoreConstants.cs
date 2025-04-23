@@ -204,6 +204,11 @@ namespace H.Core
             return amountOfCH4 * ConvertCH4ToC;
         }
 
+        public static bool IsWetClimate(double precipitation, double evapotranspiration)
+        {
+            return precipitation >= evapotranspiration;
+        }
+
         #endregion
 
         #region Private Methods

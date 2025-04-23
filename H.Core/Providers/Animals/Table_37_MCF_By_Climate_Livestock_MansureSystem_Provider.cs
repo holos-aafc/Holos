@@ -132,7 +132,6 @@ namespace H.Core.Providers.Animals
                         return 0.04;
                     case ClimateZones.BorealMoist:
                         return 0.04;
-
                     case ClimateZones.WarmTemperateDry:
                         return 0.15;
                     case ClimateZones.WarmTemperateMoist:
@@ -151,36 +150,42 @@ namespace H.Core.Providers.Animals
         {
             // Read Footnote 1 for data reference.
 
-            double ratio = precipitation / potentialEvapotranspiration;
+            var isWetClimate = CoreConstants.IsWetClimate(precipitation, potentialEvapotranspiration);
 
-            if (temperature >= 10 && (ratio >= 1))
+            if (temperature >= 10)
             {
-                return ClimateZones.WarmTemperateMoist;
+                if (isWetClimate)
+                {
+                    return ClimateZones.WarmTemperateMoist;
+                }
+                else
+                {
+                    return ClimateZones.WarmTemperateDry;
+                }
             }
 
-            if (temperature >= 10 && (ratio < 1))
+            if (temperature > 0 && temperature < 10)
             {
-                return ClimateZones.WarmTemperateDry;
+                if (isWetClimate)
+                {
+                    return ClimateZones.CoolTemperateMoist;
+                }
+                else
+                {
+                    return ClimateZones.CoolTemperateDry;
+                }
             }
 
-            if ((temperature > 0 && temperature < 10) && (ratio >= 1))
+            if (temperature <= 0)
             {
-                return ClimateZones.CoolTemperateMoist;
-            }
-
-            if ((temperature > 0 && temperature < 10) && (ratio < 1))
-            {
-                return ClimateZones.CoolTemperateDry;
-            }
-
-            if (temperature <= 0 && (ratio >= 1))
-            {
-                return ClimateZones.BorealMoist;
-            }
-
-            if (temperature <= 0 && (ratio < 1))
-            {
-                return ClimateZones.BorealDry;
+                if (isWetClimate)
+                {
+                    return ClimateZones.BorealMoist;
+                }
+                else
+                {
+                    return ClimateZones.BorealDry;
+                }
             }
 
             Trace.TraceError($"{nameof(Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider.GetClimateZone)}" +
