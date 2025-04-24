@@ -871,7 +871,7 @@ namespace H.Core.Services.Animals
         public ManureTank GetTank(AnimalType animalType, int year, Farm farm, ManureStateType manureStateType)
         {
             var tank = this.GetManureTankInternal(animalType, year, manureStateType);
-            this.ResetTank(tank, farm);
+            this.ResetTank(tank);
             this.UpdateAmountsUsed(tank, farm, manureStateType);
 
             return tank;
@@ -983,35 +983,17 @@ namespace H.Core.Services.Animals
             }
         }
 
-        private void ResetTank(ManureTank manureTank, Farm farm)
+        private void ResetTank(ManureTank manureTank)
         {
-            var years = new List<int>();
-            foreach (var animalComponent in farm.AnimalComponents)
-            {
-                foreach (var animalComponentGroup in animalComponent.Groups)
-                {
-                    foreach (var managementPeriod in animalComponentGroup.ManagementPeriods)
-                    {
-                        for (int i = managementPeriod.Start.Year; i <= managementPeriod.End.Year; i++)
-                        {
-                            years.Add(i);
-                        }
-                    }
-                }
-            }
-
+            var year = manureTank.Year;
             var animalType = manureTank.AnimalType;
             var manureType = manureTank.ManureStateType;
-            var distinctYears = years.Distinct().ToList();
 
             var category = animalType.GetComponentCategoryFromAnimalType();
             var resultsForType = _animalComponentEmissionsResults.GetByCategory(category);
 
-            foreach (var year in distinctYears)
-            {
-                var tank = this.GetManureTankInternal(animalType, year, manureType);
-                this.SetStartingStateOfManureTank(tank, resultsForType, manureType);
-            }
+            var tank = this.GetManureTankInternal(animalType, year, manureType);
+            this.SetStartingStateOfManureTank(tank, resultsForType, manureType);
         }
 
         /// <summary>
