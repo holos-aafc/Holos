@@ -1,42 +1,80 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Properties;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace H.Core.Converters
 {
     public class SoilFunctionalCategoryStringConverter : ConverterBase
     {
+        #region Properties
+
+        public static Dictionary<string, SoilFunctionalCategory> Cache { get; set; } = new Dictionary<string, SoilFunctionalCategory>();
+
+        #endregion
+
         public SoilFunctionalCategory Convert(string input)
         {
+            SoilFunctionalCategory result;
+
+            if (Cache.ContainsKey(input))
+            {
+                return Cache[input];
+            }
+
             switch (this.GetLettersAsLowerCase(input))
             {
                 case "brownchernozem":
-                    return SoilFunctionalCategory.BrownChernozem;
+                    result =  SoilFunctionalCategory.BrownChernozem;
+                    break;
+
                 case "darkbrownchernozem":
-                    return SoilFunctionalCategory.DarkBrownChernozem;
+                    result =  SoilFunctionalCategory.DarkBrownChernozem;
+                    break;
+
                 case "blackgraychernozem":
-                    return SoilFunctionalCategory.BlackGrayChernozem;
+                    result =  SoilFunctionalCategory.BlackGrayChernozem;
+                    break;
+
                 case "all":
-                    return SoilFunctionalCategory.All;
+                    result =  SoilFunctionalCategory.All;
+                    break;
+
                 case "brown":
-                    return SoilFunctionalCategory.Brown;
+                    result =  SoilFunctionalCategory.Brown;
+                    break;
+
                 case "darkbrown":
-                    return SoilFunctionalCategory.DarkBrown;
+                    result =  SoilFunctionalCategory.DarkBrown;
+                    break;
+
                 case "black":
-                    return SoilFunctionalCategory.Black;
+                    result =  SoilFunctionalCategory.Black;
+                    break;
+
                 case "organic":
-                    return SoilFunctionalCategory.Organic;
+                    result =  SoilFunctionalCategory.Organic;
+                    break;
+
                 case "easterncanada":
                 case "east":
-                    return SoilFunctionalCategory.EasternCanada;
+                    result =  SoilFunctionalCategory.EasternCanada;
+                    break;
+
                 default:
                     {
-                        Trace.TraceError($"{nameof(SoilFunctionalCategoryStringConverter)}: Soil functional category '{input}' not mapped, returning default value.");
+                        Trace.TraceError($"{nameof(SoilFunctionalCategoryStringConverter)}: Soil functional category '{input}' not mapped, result = ing default value.");
 
-                        return SoilFunctionalCategory.NotApplicable;
+                        result =  SoilFunctionalCategory.NotApplicable;
+
+                        break;
                     }
             }
+
+            Cache.Add(input, result);
+
+            return result;
 
         }
     }

@@ -29,24 +29,11 @@ namespace H.Core.Services.Animals
         private static readonly DietProvider _dietProvider;
 
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider = new Table_49_Electricity_Conversion_Defaults_Provider();
-
         protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _defaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
-
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new Table_19_Additive_Reduction_Factors_Provider();
-
-        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider
-            _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
-
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 
-        /// <summary>
-        /// Calculations are expensive, cache results if they have already been calculated. Recalculate if component is 'dirty' i.e. has <see cref="ComponentBase.ResultsCalculated"/> flag set to false
-        /// </summary>
-        protected Dictionary<AnimalComponentBase, IList<AnimalGroupEmissionResults>> _cachedComponentListResults =
-            new Dictionary<AnimalComponentBase, IList<AnimalGroupEmissionResults>>();
-
         protected ComponentCategory _animalComponentCategory;
-        private readonly Table_29_Default_Manure_Excreted_Provider _manureExcretionAmountProvider = new Table_29_Default_Manure_Excreted_Provider();
         private static List<Diet> _diets;
 
         #endregion
@@ -62,7 +49,6 @@ namespace H.Core.Services.Animals
         protected AnimalResultsServiceBase()
         {
             HTraceListener.AddTraceListener();
-
         }
 
         #endregion

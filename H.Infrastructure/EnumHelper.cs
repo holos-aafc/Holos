@@ -1,6 +1,7 @@
 ﻿#region Imports
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 #endregion
@@ -11,10 +12,17 @@ namespace H.Infrastructure
     /// </summary>
     public static class EnumHelper
     {
+        public static Dictionary<object, string> Dictionary { get; set; } = new Dictionary<object, string>();
+
         #region Public Methods
 
         public static string GetDescription<T>(this T enumerationValue) where T : struct
         {
+            if (Dictionary.ContainsKey(enumerationValue))
+            {
+                return Dictionary[enumerationValue];
+            }
+
             var type = enumerationValue.GetType();
             if (!type.IsEnum)
             {
@@ -30,7 +38,11 @@ namespace H.Infrastructure
 
                 if (attrs.Length > 0)
                 {
-                    return ((DescriptionAttribute) attrs[0]).Description;
+                    var result = ((DescriptionAttribute)attrs[0]).Description;
+
+                    Dictionary.Add(enumerationValue, result);
+
+                    return result;
                 }
             }
 

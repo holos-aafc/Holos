@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
@@ -6,41 +7,67 @@ namespace H.Core.Converters
 {
     public class ProductionStageStringConverter : ConverterBase
     {
+        #region Properties
+
+        public static Dictionary<string, ProductionStages> Cache { get; set; } = new Dictionary<string, ProductionStages>();
+
+        #endregion
+
         public ProductionStages Convert(string input)
         {
+            ProductionStages result;
+
+            if (Cache.ContainsKey(input))
+            {
+                return Cache[input];
+            }
+
             var cleanedInput = base.GetLettersAsLowerCase(input);
             switch (cleanedInput)
             {
                 case "gestating":
-                    return ProductionStages.Gestating;
+                    result =  ProductionStages.Gestating;
+                    break;
 
                 case "lactating":
-                    return ProductionStages.Lactating;
+                    result =  ProductionStages.Lactating;
+                    break;
 
                 case "open":
-                    return ProductionStages.Open;
+                    result =  ProductionStages.Open;
+                    break;
 
                 case "weaning":
-                    return ProductionStages.Weaning;
+                    result =  ProductionStages.Weaning;
+                    break;
 
                 case "growingandfinishing":
-                    return ProductionStages.GrowingAndFinishing;
+                    result =  ProductionStages.GrowingAndFinishing;
+                    break;
 
                 case "breedingstock":
-                    return ProductionStages.BreedingStock;
+                    result =  ProductionStages.BreedingStock;
+                    break;
 
                 case "weaned":
-                    return ProductionStages.Weaned;
+                    result =  ProductionStages.Weaned;
+                    break;
 
                 default:
                 {
                         ProductionStages notFound = ProductionStages.Gestating;
 
-                    Trace.TraceError($"{nameof(ProductionStageStringConverter)}.{nameof(ProductionStageStringConverter.Convert)}: unknown production stage '{input}'. Returning {notFound.GetDescription()}");
+                    Trace.TraceError($"{nameof(ProductionStageStringConverter)}.{nameof(ProductionStageStringConverter.Convert)}: unknown production stage '{input}'. result = ing {notFound.GetDescription()}");
 
-                    return notFound;
-                }
+                    result =  notFound;
+
+                    break;
+                    }
             }
+
+            Cache.Add(input, result);
+
+            return result;
         }
     }
 }
