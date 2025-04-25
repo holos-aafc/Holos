@@ -40,6 +40,7 @@ namespace H.CLI
         private static ExportedFarmsHandler _exportedFarmsHandler;
         private static SettingsHandler _globalSettingsHandler;
         private static ProcessorHandler _processorHandler;
+        private static DataInputHandler _dataInputHandler;
 
         #endregion
 
@@ -60,6 +61,7 @@ namespace H.CLI
             _exportedFarmsHandler = new ExportedFarmsHandler(_fieldResultsService, _climateProvider, _storage);
             _globalSettingsHandler = new SettingsHandler(_climateProvider);
             _processorHandler = new ProcessorHandler(_fieldResultsService);
+            _dataInputHandler = new DataInputHandler();
         }
 
         #endregion
@@ -122,7 +124,6 @@ namespace H.CLI
             var storage = new Storage();
             var templateFarmHandler = new TemplateFarmHandler();
 
-
             // Get The Directories in the "Farms" folder
             var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, _exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
@@ -166,12 +167,11 @@ namespace H.CLI
                             var farmName = Path.GetFileName(farmDirectoryPath);
                             var farmSettingsFileName = Path.GetFileNameWithoutExtension(settingsFilePath);
                             var reader = new ReadSettingsFile();
-                            var dataInputHandler = new DataInputHandler();
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine(String.Format(Environment.NewLine + Properties.Resources.StartingConversion, Path.GetFileName(farmDirectoryPath)));
 
                             // Parse And Convert Raw Input Files Into Components and add them to a Farm
-                            var farm = dataInputHandler.ProcessDataInputFiles(farmDirectoryPath);
+                            var farm = _dataInputHandler.ProcessDataInputFiles(farmDirectoryPath);
                             farm.IsCommandLineMode = true;
                             farm.CliInputPath = farmDirectoryPath;
                             farm.SettingsFileName = farmSettingsFileName;

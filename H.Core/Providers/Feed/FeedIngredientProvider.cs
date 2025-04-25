@@ -19,7 +19,6 @@ namespace H.Core.Providers.Feed
     /// </summary>
     public class FeedIngredientProvider : IFeedIngredientProvider 
     {
-        
         #region Fields
 
         private readonly IList<FeedIngredient> _beefFeedIngredients;
@@ -27,7 +26,6 @@ namespace H.Core.Providers.Feed
         private readonly IList<FeedIngredient> _swineFeedIngredients;
         
         private readonly IMapper _feedIngredientMapper;
-
 
         #endregion
 
