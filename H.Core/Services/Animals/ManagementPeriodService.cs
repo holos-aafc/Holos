@@ -23,10 +23,6 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        protected ObservableCollection<HousingType> ValidHousingTypes { get; set; } = new ObservableCollection<HousingType>(Enum.GetValues(typeof(HousingType)).Cast<HousingType>().Where(x => x != HousingType.Custom));
-        protected ObservableCollection<BeddingMaterialType> ValidBeddingMaterialTypes { get; set; } = new ObservableCollection<BeddingMaterialType>(Enum.GetValues(typeof(BeddingMaterialType)).Cast<BeddingMaterialType>());
-        protected ObservableCollection<ManureStateType> ValidManureManagementTypes { get; set; } = new ObservableCollection<ManureStateType>(Enum.GetValues(typeof(ManureStateType)).Cast<ManureStateType>().Where(x => x != ManureStateType.Custom));
-
         protected readonly HousingTypeProvider _housingTypeProvider = new HousingTypeProvider();
         protected readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
 
@@ -127,14 +123,10 @@ namespace H.Core.Services.Animals
 
                 managementPeriod.SelectedDiet = firstDefaultDietForAnimalType;
                 managementPeriod.DietAdditive = DietAdditiveType.None;
-
-                this.UpdateValidHousingTypes(farm, group, bindingManagementPeriod);
-                this.UpdateValidManureHandlingSystems(farm, group, bindingManagementPeriod);
-                this.UpdateValidBeddingTypes(farm, managementPeriod);
-
-                managementPeriod.HousingDetails.HousingType = ValidHousingTypes.FirstOrDefault();
-                managementPeriod.HousingDetails.BeddingMaterialType = ValidBeddingMaterialTypes.FirstOrDefault();
-                managementPeriod.ManureDetails.StateType = ValidManureManagementTypes.FirstOrDefault();
+                
+                managementPeriod.HousingDetails.HousingType = this.GetValidHousingTypes(farm, managementPeriod, group.GroupType).FirstOrDefault();
+                managementPeriod.HousingDetails.BeddingMaterialType = this.GetValidBeddingTypes(group.GroupType).FirstOrDefault();
+                managementPeriod.ManureDetails.StateType = this.GetValidManureStateType(group.GroupType, farm, managementPeriod).FirstOrDefault();
 
                 group.ManagementPeriods.Add(managementPeriod);
 
@@ -158,97 +150,134 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        protected void UpdateValidHousingTypes(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod)
+        /// <summary>
+        /// The available housing types depends on the type of components on the farm. If there is an animal component on the farm that is housed on a pasture, there must be
+        /// at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1 field has been added to the farm
+        /// </summary>
+        public List<HousingType> GetValidHousingTypes(Farm farm, ManagementPeriod bindingManagementPeriod,
+            AnimalType animalType)
         {
-            var validHousingTypes = _housingTypeProvider.GetValidHousingTypes(animalGroup.GroupType);
+            var types = new List<HousingType>();
+
+            var validHousingTypes = _housingTypeProvider.GetValidHousingTypes(animalType);
+            types.AddRange(validHousingTypes);
+
             var thisAnimalCategoryCanHavePasture = validHousingTypes.Any(x => x == HousingType.Pasture);
 
-            this.ValidHousingTypes.Clear();
-            this.ValidHousingTypes.AddRange(validHousingTypes);
-
             var farmContainsFields = farm.Components.OfType<FieldSystemComponent>().Any();
             if (farmContainsFields)
             {
                 if (thisAnimalCategoryCanHavePasture)
                 {
-                    if (this.ValidHousingTypes.Contains(HousingType.Pasture) == false)
+                    if (types.Contains(HousingType.Pasture) == false)
                     {
-                        this.ValidHousingTypes.Add(HousingType.Pasture);
+                        types.Add(HousingType.Pasture);
                     }
                 }
             }
-            
             else
             {
-                this.ValidHousingTypes.Remove(HousingType.Pasture);
+                types.Remove(HousingType.Pasture);
 
-                this.ValidHousingTypes.Remove(HousingType.Pasture);
+                types.Remove(HousingType.Pasture);
                 if (bindingManagementPeriod != null)
                 {
-                    bindingManagementPeriod.HousingDetails.HousingType = this.ValidHousingTypes.FirstOrDefault();
+                    bindingManagementPeriod.HousingDetails.HousingType = types.FirstOrDefault();
                 }
             }
+
+            return types;
         }
 
-        protected void UpdateValidManureHandlingSystems(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod)
+        /// <summary>
+        /// The available manure handling systems depend on the type of components on the farm. If there is an animal component on the farm that is housed on pasture, there must be
+        /// at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1 field has been added to the farm
+        /// </summary>
+        public List<ManureStateType> GetValidManureStateType(AnimalType animalType, Farm farm, ManagementPeriod managementPeriod)
         {
-            var validHandlingSystems = _manureHandlingSystemProvider.GetValidManureStateTypesByAnimalCategory(animalGroup.GroupType);
+            var manureStateTypes = new List<ManureStateType>();
+
+            var animalCategory = animalType.GetCategory();
+
+            var validHandlingSystems = _manureHandlingSystemProvider.GetValidManureStateTypesByAnimalCategory(animalCategory);
+            manureStateTypes.AddRange(validHandlingSystems);
+
             var thisAnimalCategoryCanHavePasture = validHandlingSystems.Any(x => x == ManureStateType.Pasture);
 
-            this.ValidManureManagementTypes.Clear();
-            this.ValidManureManagementTypes.AddRange(validHandlingSystems);
-
             var farmContainsFields = farm.Components.OfType<FieldSystemComponent>().Any();
             if (farmContainsFields)
             {
                 if (thisAnimalCategoryCanHavePasture)
                 {
-                    if (this.ValidManureManagementTypes.Contains(ManureStateType.Pasture) == false)
+                    if (manureStateTypes.Contains(ManureStateType.Pasture) == false)
                     {
-                        this.ValidManureManagementTypes.Add(ManureStateType.Pasture);
+                        manureStateTypes.Add(ManureStateType.Pasture);
                     }
                 }
             }
             else
             {
-                this.ValidManureManagementTypes.Remove(ManureStateType.Pasture);
-                if (bindingManagementPeriod != null)
-                {
-                    bindingManagementPeriod.ManureDetails.StateType = this.ValidManureManagementTypes.FirstOrDefault();
+                manureStateTypes.Remove(ManureStateType.Pasture);
+                if (managementPeriod != null)
+                { 
+                    managementPeriod.ManureDetails.StateType = manureStateTypes.FirstOrDefault();
                 }
             }
+
+            return manureStateTypes;
         }
 
-        protected void UpdateValidBeddingTypes(Farm farm, ManagementPeriod managementPeriod)
+        public ObservableCollection<BeddingMaterialType> GetValidBeddingTypes(AnimalType animalType)
         {
-            if (managementPeriod.AnimalType.IsBeefCattleType())
+            var validTypes = new ObservableCollection<BeddingMaterialType>();
+
+            if (animalType.IsBeefCattleType())
             {
-                this.ValidBeddingMaterialTypes = new ObservableCollection<BeddingMaterialType>()
-                    { BeddingMaterialType.Straw, BeddingMaterialType.WoodChip };
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.WoodChip);
+                validTypes.Add(BeddingMaterialType.Straw);
             }
 
-            if (managementPeriod.AnimalType.IsDairyCattleType())
+            if (animalType.IsDairyCattleType())
             {
-                this.ValidBeddingMaterialTypes = new ObservableCollection<BeddingMaterialType>()
-                {
-                    BeddingMaterialType.Sand,
-                    BeddingMaterialType.SeparatedManureSolid,
-                    BeddingMaterialType.StrawLong,
-                    BeddingMaterialType.StrawChopped,
-                    BeddingMaterialType.Shavings,
-                    BeddingMaterialType.Sawdust,
-                };
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.Sand);
+                validTypes.Add(BeddingMaterialType.SeparatedManureSolid);
+                validTypes.Add(BeddingMaterialType.StrawLong);
+                validTypes.Add(BeddingMaterialType.StrawChopped);
+                validTypes.Add(BeddingMaterialType.Shavings);
+                validTypes.Add(BeddingMaterialType.Sawdust);
             }
 
-            if (managementPeriod.AnimalType.IsSwineType())
+            if (animalType.IsSwineType())
             {
-                this.ValidBeddingMaterialTypes = new ObservableCollection<BeddingMaterialType>()
-                {
-                    BeddingMaterialType.None,
-                    BeddingMaterialType.StrawLong,
-                    BeddingMaterialType.StrawChopped,
-                };
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.StrawLong);
+                validTypes.Add(BeddingMaterialType.StrawChopped);
             }
+
+            if (animalType.IsSheepType())
+            {
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.Straw);
+                validTypes.Add(BeddingMaterialType.Shavings);
+            }
+
+            if (animalType.IsPoultryType())
+            {
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.Straw);
+                validTypes.Add(BeddingMaterialType.Shavings);
+                validTypes.Add(BeddingMaterialType.Sawdust);
+            }
+
+            if (animalType.IsOtherAnimalType())
+            {
+                validTypes.Add(BeddingMaterialType.None);
+                validTypes.Add(BeddingMaterialType.Straw);
+            }
+
+            return validTypes;
         }
         #endregion
     }

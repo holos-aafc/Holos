@@ -21,7 +21,6 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_21_Average_Milk_Production_Dairy_Cows_Provider _averageMilkProductionDairyCowsProvider;
         private readonly Table_6_Manure_Types_Default_Composition_Provider _defaultManureCompositionProvider;
         private readonly Table_23_Feeding_Activity_Coefficient_Sheep_Provider _feedingActivityCoefficientSheepProvider;
-        private readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
         private readonly Table_36_Livestock_Emission_Conversion_Factors_Provider _livestockEmissionConversionFactorsProvider;
         private readonly Table_17_Beef_Dairy_Cattle_Feeding_Activity_Coefficient_Provider _beefDairyCattleFeedingActivityCoefficientProvider;
         private readonly INitrogenInputCalculator _nitrogenInputCalculator;
@@ -33,9 +32,16 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider _livestockCoefficientsBeefAndDairyCattleProvider;
         private readonly Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider _poultryOtherLivestockDefaultNExcretionRatesProvider;
 
+        private static readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
+
         #endregion
 
         #region Constructors
+
+        static AnimalInitializationService()
+        {
+            _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
+        }
 
         public AnimalInitializationService()
         {
@@ -53,7 +59,6 @@ namespace H.Core.Services.Initialization.Animals
             _defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
             _feedingActivityCoefficientSheepProvider = new Table_23_Feeding_Activity_Coefficient_Sheep_Provider();
             _nitrogenInputCalculator = new ICBMNitrogenInputCalculator();
-            _sheepProvider = new Table_22_Livestock_Coefficients_Sheep_Provider();
             _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
             _defaultAmmoniaEmissionFactorsForPoultryManureStorageProvider = new DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider();
             _defaultAmmoniaEmissionFactorForPoultryLandAppliedManure = new DefaultAmmoniaEmissionFactorForPoultryLandAppliedManureProvider(); 

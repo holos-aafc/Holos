@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using H.Core.Enumerations;
 using H.Core.Properties;
@@ -7,436 +8,852 @@ namespace H.Core.Converters
 {
     public class CropTypeStringConverter : ConverterBase
     {
+        #region Properties
+
+        public static Dictionary<string, CropType> Cache { get; set; } = new Dictionary<string, CropType>();
+
+        #endregion
+
+        #region Methods
+
         public CropType Convert(string input)
         {
+            CropType result;
+
+            if (Cache.ContainsKey(input))
+            {
+                return Cache[input];
+            }
+
             switch (this.GetLettersAsLowerCase(input))
             {
                 case "alfalfaseed":
-                    return CropType.AlfalfaSeed;
+                    result = CropType.AlfalfaSeed;
+                    break;
+
                 case "barley":
-                    return CropType.Barley;
+                    result = CropType.Barley;
+                    break;
+
                 case "barleysilage":
-                    return CropType.BarleySilage;
+                    result = CropType.BarleySilage;
+                    break;
+
                 case "barleysilageunderseed":
-                    return CropType.BarleySilageUnderSeed;
+                    result = CropType.BarleySilageUnderSeed;
+                    break;
+
                 case "bromehay":
-                    return CropType.BromeHay;
+                    result = CropType.BromeHay;
+                    break;
+
                 case "grasssilage":
-                    return CropType.GrassSilage;
+                    result = CropType.GrassSilage;
+                    break;
+
                 case "beans":
-                    return CropType.Beans;
+                    result = CropType.Beans;
+                    break;
+
                 case "beansdryfield":
                 case "dryfieldbeans":
-                    return CropType.BeansDryField;
+                    result = CropType.BeansDryField;
+                    break;
+
                 case "otherdryfieldbeans":
-                    return CropType.OtherDryFieldBeans;
+                    result = CropType.OtherDryFieldBeans;
+                    break;
+
                 case "berriesgrapes":
-                    return CropType.BerriesAndGrapes;
+                    result = CropType.BerriesAndGrapes;
+                    break;
+
                 case "buckwheat":
-                    return CropType.Buckwheat;
+                    result = CropType.Buckwheat;
+                    break;
+
                 case "canaryseed":
                 case "canaryseeds":
-                    return CropType.CanarySeed;
+                    result = CropType.CanarySeed;
+                    break;
+
                 case "canola":
-                    return CropType.Canola;
+                    result = CropType.Canola;
+                    break;
+
                 case "caraway":
-                    return CropType.Caraway;
+                    result = CropType.Caraway;
+                    break;
+
                 case "carrot":
-                    return CropType.Carrot;
+                    result = CropType.Carrot;
+                    break;
+
                 case "chickpeas":
                 case "chickpea":
-                    return CropType.Chickpeas;
+                    result = CropType.Chickpeas;
+                    break;
+
                 case "colouredwhitefababeans":
-                    return CropType.ColouredWhiteFabaBeans;
+                    result = CropType.ColouredWhiteFabaBeans;
+                    break;
+
                 case "cpswheat":
-                    return CropType.CPSWheat;
+                    result = CropType.CPSWheat;
+                    break;
+
                 case "drybean":
-                    return CropType.DryBean;
+                    result = CropType.DryBean;
+                    break;
+
                 case "drypeas":
                 case "drypea":
                 case "peasdry":
-                    return CropType.DryPeas;
+                    result = CropType.DryPeas;
+                    break;
+
                 case "dryfieldpeas":
-                    return CropType.DryFieldPeas;
+                    result = CropType.DryFieldPeas;
+                    break;
+
                 case "dill":
-                    return CropType.Dill;
+                    result = CropType.Dill;
+                    break;
+
                 case "durum":
                 case "wheatdurum":
                 case "durumwheat":
-                    return CropType.Durum;
+                    result = CropType.Durum;
+                    break;
+
                 case "fababean":
-                    return CropType.FabaBeans;
+                    result = CropType.FabaBeans;
+                    break;
+
                 case "fallow":
-                    return CropType.Fallow;
+                    result = CropType.Fallow;
+                    break;
+
                 case "fallrye":
                 case "ryefallremaining":
-                    return CropType.FallRye;
+                    result = CropType.FallRye;
+                    break;
+
                 case "fieldpea":
-                    return CropType.FieldPeas;
+                    result = CropType.FieldPeas;
+                    break;
+
                 case "Flaxseed":
-                    return CropType.Flax;
+                    result = CropType.Flax;
+                    break;
+
                 case "flaxseed":
-                    return CropType.FlaxSeed;
+                    result = CropType.FlaxSeed;
+                    break;
+
                 case "freshcornsweet":
-                    return CropType.FreshCornSweet;
+                    result = CropType.FreshCornSweet;
+                    break;
+
                 case "freshpeas":
-                    return CropType.FreshPeas;
+                    result = CropType.FreshPeas;
+                    break;
+
                 case "forage":
-                    return CropType.Forage;
+                    result = CropType.Forage;
+                    break;
+
                 case "foddercorn":
-                    return CropType.FodderCorn;
+                    result = CropType.FodderCorn;
+                    break;
+
                 case "forageforseed":
-                    return CropType.ForageForSeed;
+                    result = CropType.ForageForSeed;
+                    break;
+
                 case "graincorn":
                 case "cornforgrain":
-                    return CropType.GrainCorn;
+                    result = CropType.GrainCorn;
+                    break;
+
                 case "grains":
-                    return CropType.Grains;
+                    result = CropType.Grains;
+                    break;
+
                 case "genericgrains":
-                    return CropType.GenericGrains;
+                    result = CropType.GenericGrains;
+                    break;
+
                 case "corn":
                 case "maize":
-                    return CropType.Corn;
+                    result = CropType.Corn;
+                    break;
+
                 case "grainsorghum":
-                    return CropType.GrainSorghum;
+                    result = CropType.GrainSorghum;
+                    break;
+
                 case "grassseed":
-                    return CropType.GrassSeed;
+                    result = CropType.GrassSeed;
+                    break;
+
                 case "rangelandlandnative":
-                    return CropType.RangelandNative;
+                    result = CropType.RangelandNative;
+                    break;
+
                 case "greenfeed":
-                    return CropType.GreenFeed;
+                    result = CropType.GreenFeed;
+                    break;
+
                 case "hardredspringwheat":
-                    return CropType.HardRedSpringWheat;
+                    result = CropType.HardRedSpringWheat;
+                    break;
+
                 case "tamegrass":
-                    return CropType.TameGrass;
+                    result = CropType.TameGrass;
+                    break;
+
                 case "grasshay":
-                    return CropType.GrassHay;
+                    result = CropType.GrassHay;
+                    break;
+
                 case "tamelegume":
-                    return CropType.TameLegume;
+                    result = CropType.TameLegume;
+                    break;
+
                 case "nonlegumehay":
-                    return CropType.NonLegumeHay;
+                    result = CropType.NonLegumeHay;
+                    break;
+
                 case "tamemixed":
                 case "mixedhay":
-                    return CropType.TameMixed;
+                    result = CropType.TameMixed;
+                    break;
+
                 case "hayandforageseed":
-                    return CropType.HayAndForageSeed;
+                    result = CropType.HayAndForageSeed;
+                    break;
+
                 case "hairyvetch":
-                    return CropType.HairyVetch;
+                    result = CropType.HairyVetch;
+                    break;
+
                 case "hairyvetchrye":
-                    return CropType.HairyVetchAndRye;
+                    result = CropType.HairyVetchAndRye;
+                    break;
+
                 case "hyola":
-                    return CropType.Hyola;
+                    result = CropType.Hyola;
+                    break;
+
                 case "lentils":
                 case "lentil":
-                    return CropType.Lentils;
+                    result = CropType.Lentils;
+                    break;
+
                 case "linola":
-                    return CropType.Linola;
+                    result = CropType.Linola;
+                    break;
+
                 case "maltbarley":
-                    return CropType.MaltBarley;
+                    result = CropType.MaltBarley;
+                    break;
+
                 case "marketgarden":
-                    return CropType.MarketGarden;
+                    result = CropType.MarketGarden;
+                    break;
+
                 case "milkvetch":
-                    return CropType.MilkVetch;
+                    result = CropType.MilkVetch;
+                    break;
+
                 case "millet":
-                    return CropType.Millet;
+                    result = CropType.Millet;
+                    break;
+
                 case "mint":
-                    return CropType.Mint;
+                    result = CropType.Mint;
+                    break;
+
                 case "mixedgrains":
                 case "mixedgrain":
-                    return CropType.MixedGrains;
+                    result = CropType.MixedGrains;
+                    break;
+
                 case "mustard":
-                    return CropType.Mustard;
+                    result = CropType.Mustard;
+                    break;
+
                 case "mustardseed":
-                    return CropType.MustardSeed;
+                    result = CropType.MustardSeed;
+                    break;
+
                 case "monarda":
-                    return CropType.Monarda;
+                    result = CropType.Monarda;
+                    break;
+
                 case "nativepasture":
-                    return CropType.NativePasture;
+                    result = CropType.NativePasture;
+                    break;
+
                 case "oats":
-                    return CropType.Oats;
+                    result = CropType.Oats;
+                    break;
+
                 case "oatsilage":
-                    return CropType.OatSilage;
+                    result = CropType.OatSilage;
+                    break;
+
                 case "oilseeds":
-                    return CropType.Oilseeds;
+                    result = CropType.Oilseeds;
+                    break;
+
                 case "onion":
-                    return CropType.Onion;
+                    result = CropType.Onion;
+                    break;
+
                 case "otherfieldcrops":
-                    return CropType.OtherFieldCrops;
+                    result = CropType.OtherFieldCrops;
+                    break;
+
                 case "peas":
-                    return CropType.Peas;
+                    result = CropType.Peas;
+                    break;
+
                 case "pulses":
-                    return CropType.Pulses;
+                    result = CropType.Pulses;
+                    break;
+
                 case "pulsecrops":
-                    return CropType.PulseCrops;
+                    result = CropType.PulseCrops;
+                    break;
+
                 case "seededgrassland":
-                    return CropType.SeededGrassland;
+                    result = CropType.SeededGrassland;
+                    break;
+
                 case "peanuts":
-                    return CropType.Peanuts;
+                    result = CropType.Peanuts;
+                    break;
+
                 case "perennialforages":
-                    return CropType.PerennialForages;
+                    result = CropType.PerennialForages;
+                    break;
+
                 case "perennialgrasses":
-                    return CropType.PerennialGrasses;
+                    result = CropType.PerennialGrasses;
+                    break;
+
                 case "potatoes":
                 case "potato":
-                    return CropType.Potatoes;
+                    result = CropType.Potatoes;
+                    break;
+
                 case "rice":
-                    return CropType.Rice;
+                    result = CropType.Rice;
+                    break;
+
                 case "rye":
                 case "ryeall":
-                    return CropType.Rye;
+                    result = CropType.Rye;
+                    break;
+
                 case "safflower":
-                    return CropType.Safflower;
+                    result = CropType.Safflower;
+                    break;
+
                 case "seedpotato":
-                    return CropType.SeedPotato;
+                    result = CropType.SeedPotato;
+                    break;
+
                 case "silagecorn":
                 case "cornsilage":
-                    return CropType.SilageCorn;
+                    result = CropType.SilageCorn;
+                    break;
+
                 case "smallfruit":
-                    return CropType.SmallFruit;
+                    result = CropType.SmallFruit;
+                    break;
+
                 case "softwheat":
-                    return CropType.SoftWheat;
+                    result = CropType.SoftWheat;
+                    break;
+
                 case "soybeans":
                 case "soybean":
-                    return CropType.Soybeans;
+                    result = CropType.Soybeans;
+                    break;
+
                 case "sorghum":
-                    return CropType.Sorghum;
+                    result = CropType.Sorghum;
+                    break;
+
                 case "sorghumsudangrass":
-                    return CropType.SorghumSudanGrass;
+                    result = CropType.SorghumSudanGrass;
+                    break;
+
                 case "smallgraincereals":
-                    return CropType.SmallGrainCereals;
+                    result = CropType.SmallGrainCereals;
+                    break;
+
                 case "springwheat":
                 case "wheatspring":
-                    return CropType.SpringWheat;
+                    result = CropType.SpringWheat;
+                    break;
+
                 case "springrye":
                 case "ryespring":
-                    return CropType.SpringRye;
+                    result = CropType.SpringRye;
+                    break;
+
                 case "sugarbeets":
-                    return CropType.SugarBeets;
+                    result = CropType.SugarBeets;
+                    break;
+
                 case "summerfallow":
-                    return CropType.SummerFallow;
+                    result = CropType.SummerFallow;
+                    break;
+
                 case "sunflower":
-                    return CropType.Sunflower;
+                    result = CropType.Sunflower;
+                    break;
+
                 case "sunflowerseed":
                 case "sunflowerseeds":
-                    return CropType.SunflowerSeed;
+                    result = CropType.SunflowerSeed;
+                    break;
+
                 case "tamepasture":
-                    return CropType.TamePasture;
+                    result = CropType.TamePasture;
+                    break;
+
                 case "timothyhay":
-                    return CropType.TimothyHay;
+                    result = CropType.TimothyHay;
+                    break;
+
                 case "tobacco":
-                    return CropType.Tobacco;
+                    result = CropType.Tobacco;
+                    break;
+
                 case "totaltreefruitsnuts":
-                    return CropType.TreeFruitAndNuts;
+                    result = CropType.TreeFruitAndNuts;
+                    break;
+
                 case "triticale":
-                    return CropType.Triticale;
+                    result = CropType.Triticale;
+                    break;
+
                 case "tubers":
-                    return CropType.Tubers;
+                    result = CropType.Tubers;
+                    break;
+
                 case "turfsod":
-                    return CropType.TurfSod;
+                    result = CropType.TurfSod;
+                    break;
+
                 case "undersownbarley":
-                    return CropType.UndersownBarley;
+                    result = CropType.UndersownBarley;
+                    break;
+
                 case "vegetables":
-                    return CropType.Vegetables;
+                    result = CropType.Vegetables;
+                    break;
+
                 case "wheatbolinder":
-                    return CropType.WheatBolinder;
+                    result = CropType.WheatBolinder;
+                    break;
+
                 case "wheatgan":
-                    return CropType.WheatGan;
+                    result = CropType.WheatGan;
+                    break;
+
                 case "wheat":
                 case "wheatall":
-                    return CropType.Wheat;
+                    result = CropType.Wheat;
+                    break;
+
                 case "wheatrye":
-                    return CropType.WheatRye;
+                    result = CropType.WheatRye;
+                    break;
+
                 case "winterwheat":
                 case "wheatwinter":
                 case "wheatwinterremaining":
-                    return CropType.WinterWheat;
+                    result = CropType.WinterWheat;
+                    break;
+
                 case "winterweeds":
-                    return CropType.WinterWeeds;
+                    result = CropType.WinterWeeds;
+                    break;
+
                 case "fieldpeas":
-                    return CropType.FieldPeas;
+                    result = CropType.FieldPeas;
+                    break;
+
                 case "berriesandgrapes":
-                    return CropType.BerriesAndGrapes;
+                    result = CropType.BerriesAndGrapes;
+                    break;
+
                 case "flax":
-                    return CropType.Flax;
+                    result = CropType.Flax;
+                    break;
+
                 case "triticalesilage":
-                    return CropType.TriticaleSilage;
+                    result = CropType.TriticaleSilage;
+                    break;
+
                 case "wheatsilage":
-                    return CropType.WheatSilage;
+                    result = CropType.WheatSilage;
+                    break;
+
                 case "grassclovermixtures":
-                    return CropType.GrassCloverMixtures;
+                    result = CropType.GrassCloverMixtures;
+                    break;
+
                 case "redclovertrifoliumpratensel":
-                    return CropType.RedCloverTrifoliumPratenseL;
+                    result = CropType.RedCloverTrifoliumPratenseL;
+                    break;
+
                 case "berseemclovertrifoliumalexandriuml":
-                    return CropType.BerseemCloverTrifoliumAlexandriumL;
+                    result = CropType.BerseemCloverTrifoliumAlexandriumL;
+                    break;
+
                 case "sweetclovermelilotusofficinalis":
-                    return CropType.SweetCloverMelilotusOfficinalis;
+                    result = CropType.SweetCloverMelilotusOfficinalis;
+                    break;
+
                 case "crimsonclovertrifoliumincarnatum":
-                    return CropType.CrimsonCloverTrifoliumIncarnatum;
+                    result = CropType.CrimsonCloverTrifoliumIncarnatum;
+                    break;
+
                 case "hairyvetchviciavillosaroth":
-                    return CropType.HairyVetchViciaVillosaRoth;
+                    result = CropType.HairyVetchViciaVillosaRoth;
+                    break;
+
                 case "alfalfamedicagosatival":
-                    return CropType.AlfalfaMedicagoSativaL;
+                    result = CropType.AlfalfaMedicagoSativaL;
+                    break;
+
                 case "fababeanbroadbeanviciafaba":
-                    return CropType.FabaBeanBroadBeanViciaFaba;
+                    result = CropType.FabaBeanBroadBeanViciaFaba;
+                    break;
+
                 case "cowpeavignaunguiculata":
-                    return CropType.CowpeaVignaUnguiculata;
+                    result = CropType.CowpeaVignaUnguiculata;
+                    break;
+
                 case "austrianwinterpea":
-                    return CropType.AustrianWinterPea;
+                    result = CropType.AustrianWinterPea;
+                    break;
+
                 case "rapeseedbrassicanapusl":
-                    return CropType.RapeseedBrassicaNapusL;
+                    result = CropType.RapeseedBrassicaNapusL;
+                    break;
+
                 case "winterturniprapebrassicarapasppoleiferalcvlargo":
-                    return CropType.WinterTurnipRapeBrassicaRapaSppOleiferaLCVLargo;
+                    result = CropType.WinterTurnipRapeBrassicaRapaSppOleiferaLCVLargo;
+                    break;
+
                 case "phaceliaphaceliatanacetifoliacvphaci":
-                    return CropType.PhaceliaPhaceliaTanacetifoliaCVPhaci;
+                    result = CropType.PhaceliaPhaceliaTanacetifoliaCVPhaci;
+                    break;
+
                 case "forageradishraphanussativusl":
-                    return CropType.ForageRadishRaphanusSativusL;
+                    result = CropType.ForageRadishRaphanusSativusL;
+                    break;
+
                 case "mustardsinapusalbalsubspmaireihlindbmaire":
-                    return CropType.MustardSinapusAlbaLSubspMaireiHLindbMaire;
+                    result = CropType.MustardSinapusAlbaLSubspMaireiHLindbMaire;
+                    break;
+
                 case "barleyhordeumvulgare":
-                    return CropType.BarleyHordeumVulgare;
+                    result = CropType.BarleyHordeumVulgare;
+                    break;
+
                 case "oatavenasativa":
-                    return CropType.OatAvenaSativa;
+                    result = CropType.OatAvenaSativa;
+                    break;
+
                 case "ryesecalecerealewinterryecerealrye":
-                    return CropType.RyeSecaleCerealeWinterRyeCerealRye;
+                    result = CropType.RyeSecaleCerealeWinterRyeCerealRye;
+                    break;
+
                 case "sesamesesamumindicum":
-                    return CropType.SesameSesamumIndicum;
+                    result = CropType.SesameSesamumIndicum;
+                    break;
+
                 case "flaxlinumusitatissimum":
-                    return CropType.FlaxLinumUsitatissimum;
+                    result = CropType.FlaxLinumUsitatissimum;
+                    break;
+
                 case "ryegrassloliumperennel":
-                    return CropType.RyeGrassLoliumPerenneL;
+                    result = CropType.RyeGrassLoliumPerenneL;
+                    break;
+
                 case "annualryegrassloliummultiflorum":
-                    return CropType.AnnualRyeGrassLoliumMultiflorum;
+                    result = CropType.AnnualRyeGrassLoliumMultiflorum;
+                    break;
+
                 case "sorghumsorghumbicolour":
-                    return CropType.SorghumSorghumBicolour;
+                    result = CropType.SorghumSorghumBicolour;
+                    break;
+
                 case "pigeonbean":
-                    return CropType.PigeonBean;
+                    result = CropType.PigeonBean;
+                    break;
+
                 case "shepherdspurse":
-                    return CropType.ShepherdsPurse;
+                    result = CropType.ShepherdsPurse;
+                    break;
+
                 case "winterwheattriticumaestivum":
-                    return CropType.WinterWheatTriticumAestivum;
+                    result = CropType.WinterWheatTriticumAestivum;
+                    break;
+
                 case "feedbarley":
-                    return CropType.FeedBarley;
+                    result = CropType.FeedBarley;
+                    break;
+
                 case "redlentil":
-                    return CropType.RedLentils;
+                    result = CropType.RedLentils;
+                    break;
+
                 case "millingoats":
-                    return CropType.MillingOats;
+                    result = CropType.MillingOats;
+                    break;
+
                 case "polishcanola":
-                    return CropType.PolishCanola;
+                    result = CropType.PolishCanola;
+                    break;
+
                 case "argentinehtcanola":
-                    return CropType.ArgentineHTCanola;
+                    result = CropType.ArgentineHTCanola;
+                    break;
+
                 case "kabulichickpea":
-                    return CropType.KabuliChickpea;
+                    result = CropType.KabuliChickpea;
+                    break;
+
                 case "yellowmustard":
-                    return CropType.YellowMustard;
+                    result = CropType.YellowMustard;
+                    break;
+
                 case "cerealsilage":
-                    return CropType.CerealSilage;
+                    result = CropType.CerealSilage;
+                    break;
+
                 case "cereals":
-                    return CropType.Cereals;
+                    result = CropType.Cereals;
+                    break;
+
                 case "alfalfahay":
                 case "alfalfa":
-                    return CropType.AlfalfaHay;
+                    result = CropType.AlfalfaHay;
+                    break;
+
                 case "ediblegreenpeas":
-                    return CropType.EdibleGreenPeas;
+                    result = CropType.EdibleGreenPeas;
+                    break;
+
                 case "edibleyellowpeas":
-                    return CropType.EdibleYellowPeas;
+                    result = CropType.EdibleYellowPeas;
+                    break;
+
                 case "blackbean":
-                    return CropType.BlackBean;
+                    result = CropType.BlackBean;
+                    break;
+
                 case "hybridfallrye":
-                    return CropType.HybridFallRye;
+                    result = CropType.HybridFallRye;
+                    break;
+
                 case "brownmustard":
-                    return CropType.BrownMustard;
+                    result = CropType.BrownMustard;
+                    break;
+
                 case "orientalmustard":
-                    return CropType.OrientalMustard;
+                    result = CropType.OrientalMustard;
+                    break;
+
                 case "sunfloweroilseedemss":
-                    return CropType.SunflowerOilseedEMSS;
+                    result = CropType.SunflowerOilseedEMSS;
+                    break;
+
                 case "desichickpea":
-                    return CropType.DesiChickpeas;
+                    result = CropType.DesiChickpeas;
+                    break;
+
                 case "camelina":
-                    return CropType.Camelina;
+                    result = CropType.Camelina;
+                    break;
+
                 case "carawayfirstseason":
-                    return CropType.CarawayFirstSeason;
+                    result = CropType.CarawayFirstSeason;
+                    break;
+
                 case "carawaysecondseason":
-                    return CropType.CarawaySecondSeason;
+                    result = CropType.CarawaySecondSeason;
+                    break;
+
                 case "coriander":
-                    return CropType.Coriander;
+                    result = CropType.Coriander;
+                    break;
+
                 case "fenugreek":
-                    return CropType.Fenugreek;
+                    result = CropType.Fenugreek;
+                    break;
+
                 case "quinoa":
-                    return CropType.Quinoa;
+                    result = CropType.Quinoa;
+                    break;
+
                 case "wheathardredspring":
-                    return CropType.WheatHardRedSpring;
+                    result = CropType.WheatHardRedSpring;
+                    break;
+
                 case "wheatprairiespring":
-                    return CropType.WheatPrairieSpring;
+                    result = CropType.WheatPrairieSpring;
+                    break;
+
                 case "wheatotherspring":
-                    return CropType.WheatOtherSpring;
+                    result = CropType.WheatOtherSpring;
+                    break;
+
                 case "beanspinto":
-                    return CropType.BeansPinto;
+                    result = CropType.BeansPinto;
+                    break;
+
                 case "sunflowerconfection":
-                    return CropType.SunflowerConfection;
+                    result = CropType.SunflowerConfection;
+                    break;
+
                 case "largegreenlentils":
-                    return CropType.LargeGreenLentils;
+                    result = CropType.LargeGreenLentils;
+                    break;
+
                 case "wheatnorthernhardred":
-                    return CropType.WheatNorthernHardRed;
+                    result = CropType.WheatNorthernHardRed;
+                    break;
+
                 case "sunfloweroil":
-                    return CropType.SunflowerOil;
+                    result = CropType.SunflowerOil;
+                    break;
+
                 case "beanswhite":
-                    return CropType.BeansWhite;
+                    result = CropType.BeansWhite;
+                    break;
+
                 case "kabulichickpealarge":
-                    return CropType.LargeKabuliChickpea;
+                    result = CropType.LargeKabuliChickpea;
+                    break;
+
                 case "kabulichickpeasmall":
-                    return CropType.SmallKabuliChickpea;
+                    result = CropType.SmallKabuliChickpea;
+                    break;
+
                 case "colouredbeans":
-                    return CropType.ColouredBeans;
+                    result = CropType.ColouredBeans;
+                    break;
+
                 case "hardredwinterwheat":
-                    return CropType.HardRedWinterWheat;
+                    result = CropType.HardRedWinterWheat;
+                    break;
+
                 case "northernontariobarley":
-                    return CropType.NorthernOntarioBarley;
+                    result = CropType.NorthernOntarioBarley;
+                    break;
+
                 case "southernontariobarley":
-                    return CropType.SouthernOntarioBarley;
+                    result = CropType.SouthernOntarioBarley;
+                    break;
+
                 case "northernontariooats":
-                    return CropType.NorthernOntarioOats;
+                    result = CropType.NorthernOntarioOats;
+                    break;
+
                 case "rangelandnative":
-                    return CropType.RangelandNative;
+                    result = CropType.RangelandNative;
+                    break;
+
                 case "southernontariooats":
-                    return CropType.SouthernOntarioOats;
+                    result = CropType.SouthernOntarioOats;
+                    break;
+
                 case "springcanolaht":
-                    return CropType.SpringCanolaHt;
+                    result = CropType.SpringCanolaHt;
+                    break;
+
                 case "soybeansnotill":
-                    return CropType.SoybeanNoTill;
+                    result = CropType.SoybeanNoTill;
+                    break;
+
                 case "soybeansroundupready":
-                    return CropType.SoybeansRoundUpReady;
+                    result = CropType.SoybeansRoundUpReady;
+                    break;
+
                 case "switchgrassdirect":
-                    return CropType.SwitchgrassDirect;
+                    result = CropType.SwitchgrassDirect;
+                    break;
+
                 case "switchgrassdirectnotill":
-                    return CropType.SwitchgrassDirectNoTill;
+                    result = CropType.SwitchgrassDirectNoTill;
+                    break;
+
                 case "switchgrassunderseeded":
-                    return CropType.SwitchgrassUnderseeded;
+                    result = CropType.SwitchgrassUnderseeded;
+                    break;
+
                 case "switchgrassunderseedednotill":
-                    return CropType.SwitchgrassUnderseededNoTill;
+                    result = CropType.SwitchgrassUnderseededNoTill;
+                    break;
+
                 case "softwinterwheat":
-                    return CropType.SoftWinterWheat;
+                    result = CropType.SoftWinterWheat;
+                    break;
+
                 case "softwinterwheatnotill":
-                    return CropType.SoftWinterWheatNoTill;
+                    result = CropType.SoftWinterWheatNoTill;
+                    break;
+
                 case "whiteblackbeans":
-                    return CropType.WhiteBlackBeans;
+                    result = CropType.WhiteBlackBeans;
+                    break;
+
                 case "whitebeans":
-                    return CropType.WhiteBeans;
+                    result = CropType.WhiteBeans;
+                    break;
+
                 case "wintercanolahybrid":
-                    return CropType.WinterCanolaHybrid;
+                    result = CropType.WinterCanolaHybrid;
+                    break;
+
                 case "hardredwinterwheatnotillage":
-                    return CropType.HardRedWinterWheatNoTill;
+                    result = CropType.HardRedWinterWheatNoTill;
+                    break;
+
                 case "nfixingforages":
-                    return CropType.NFixingForages;
+                    result = CropType.NFixingForages;
+                    break;
+
                 case "nonnfixingforages":
-                    return CropType.NonNFixingForages;
+                    result = CropType.NonNFixingForages;
+                    break;
 
                 default:
                     {
                         Trace.TraceError($"{nameof(CropTypeStringConverter)}: Crop type '{input}' not mapped, returning default value.");
 
-                        return CropType.NotSelected;
+                        result = CropType.NotSelected;
+
+                        break;
                     }
             }
-        }
+
+            Cache.Add(input, result);
+
+            return result;
+        } 
+
+        #endregion
     }
 }

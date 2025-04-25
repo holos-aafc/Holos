@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Windows.Interactivity;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models;
@@ -37,16 +38,21 @@ namespace H.Core.Services.Initialization.Animals
 		{
 			if (farm != null &&
 				managementPeriod != null)
-			{
+            {
+                var year = managementPeriod.Start.Date.Year;
+
+                var precipitation = farm.GetAnnualPrecipitation(year);
+                var evapotranspiration = farm.GetAnnualEvapotranspiration(year);
+                
 				var emissionData = _livestockEmissionConversionFactorsProvider.GetFactors(
                     manureStateType: managementPeriod.ManureDetails.StateType,
-					meanAnnualPrecipitation: farm.ClimateData.PrecipitationData.GetTotalAnnualPrecipitation(),
+					meanAnnualPrecipitation: precipitation,
 					meanAnnualTemperature: farm.ClimateData.TemperatureData.GetMeanAnnualTemperature(),
-					meanAnnualEvapotranspiration: farm.ClimateData.EvapotranspirationData.GetTotalAnnualEvapotranspiration(),
+					meanAnnualEvapotranspiration: evapotranspiration,
 					beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
 					animalType: managementPeriod.AnimalType,
 					farm: farm,
-					year: managementPeriod.Start.Date.Year);
+					year: year);
 
 				managementPeriod.ManureDetails.MethaneConversionFactor = emissionData.MethaneConversionFactor;
 				managementPeriod.ManureDetails.N2ODirectEmissionFactor = emissionData.N20DirectEmissionFactor;

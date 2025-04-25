@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -14,8 +16,6 @@ namespace H.Core.Calculators.Carbon
         #region Fields
 
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProvider;
-        private readonly IManureService _manureService;
-        private readonly IDigestateService _digestateService;
 
         #endregion
 
@@ -24,8 +24,6 @@ namespace H.Core.Calculators.Carbon
         public IPCCTier2CarbonInputCalculator()
         {
             _slopeProvider = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
-            _manureService = new ManureService();
-            _digestateService = new DigestateService();
         }
 
         #endregion
@@ -43,8 +41,11 @@ namespace H.Core.Calculators.Carbon
             return slope.SlopeValue > 0;
         }
 
-        public void CalculateInputs(CropViewItem viewItem, Farm farm)
+        public void AssignInputs(CropViewItem viewItem, Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
+            manureService.Initialize(farm, animalComponentEmissionsResults);
+            digestateService.Initialize(farm, animalComponentEmissionsResults);
+
             var cropData = _slopeProvider.GetDataByCropType(viewItem.CropType);
 
             var slope = cropData.SlopeValue;
@@ -98,15 +99,16 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-4 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = (viewItem.BelowGroundResidueDryMatter * BelowGroundCarbonContent) / viewItem.Area;
 
-
             if (farm.IsCommandLineMode == false)
             {
-                viewItem.ManureCarbonInputsPerHectare = _manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
+                viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
+                viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
             }
 
             viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
 
-            viewItem.DigestateCarbonInputsPerHectare = _digestateService.GetTotalDigestateCarbonInputsForField(farm, viewItem.Year, viewItem);
+            viewItem.DigestateCarbonInputsPerHectare = digestateService.GetTotalDigestateCarbonInputsForField(farm, viewItem.Year, viewItem);
+            viewItem.DigestateCarbonInputsPerHectareFromApplicationsOnly = viewItem.GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType.Livestock) / viewItem.Area;
 
             /*
              * Equation 2.2.2-12 (kg C will be used in pool calculations instead of tons C). Algorithm document converts to tons before inputs are used in pool calculations but inputs are kept in kg C

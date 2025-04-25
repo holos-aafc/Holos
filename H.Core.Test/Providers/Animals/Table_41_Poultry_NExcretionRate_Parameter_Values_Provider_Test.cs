@@ -98,7 +98,7 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void GetAllData()
         {
-            var data = _provider.PoultryParameterValueData;
+            var data = _provider.GetData();
 
             Assert.AreEqual(8, data.Count);
         }

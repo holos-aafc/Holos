@@ -114,7 +114,6 @@ namespace H.Core.Calculators.Tillage
                 return 1;
             }
 
-
             var simplifiedSoilCategory = soilFunctionalCategory.GetSimplifiedSoilCategory();
             if (cropType.IsPerennial())
             {

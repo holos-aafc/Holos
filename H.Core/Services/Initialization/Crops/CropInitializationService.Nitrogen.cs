@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System.Collections.Generic;
+using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Providers.Nitrogen;
@@ -36,6 +37,14 @@ namespace H.Core.Services.Initialization.Crops
             foreach (var viewItem in farm.GetAllCropViewItems())
             {
                 this.InitializeNitrogenContent(viewItem, farm);
+            }
+        }
+
+        public void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm)
+        {
+            foreach (var cropViewItem in viewItem)
+            {
+                this.InitializeNitrogenContent(cropViewItem, farm);
             }
         }
 

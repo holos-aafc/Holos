@@ -184,7 +184,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure11.gif" alt="Figure 11" width="950"/>
     <br>
-    <em>Figure 11: Adding fertilizer to a field.</em>
+    <em>Figure 11: Adding fertilizer to a field (Updated for 2025).</em>
 </p> 
 
 <br>
@@ -214,9 +214,9 @@ Adding animal components follows the same approach that was used for the land ma
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure14.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure12.gif" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 12: The Poultry Components.</em>
+    <em>Figure 12: The Poultry Components (Updated for 2025).</em>
 </p>
 
 <br>
@@ -308,9 +308,9 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 <br>
 
 <p align="center">
-    <img src="../../Images/PoultryGuide/en/Figure15.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/PoultryGuide/en/Figure13.png" alt="Figure 13" width="950"/>
     <br>
-    <em>Figure 13: Adding a manure application to a field.</em>
+    <em>Figure 13: Adding a manure application to a field (Updated for 2025).</em>
 </p>
  
 <br>

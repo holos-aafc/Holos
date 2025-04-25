@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -18,6 +19,8 @@ namespace H.Core.Models.LandManagement.Fields
         private DefaultManureCompositionData _defaultManureCompositionData;
 
         protected double _amountOfNitrogenAppliedPerHectare;
+        private DateTime _minimumAllowableDateOfApplication;
+        private DateTime _maximumAllowableDateOfApplication;
 
         #endregion
 
@@ -34,6 +37,29 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        public DateTime MaximumAllowableDateOfApplication {
+            get
+            {
+                return _maximumAllowableDateOfApplication;
+            }
+            set
+            {
+                SetProperty(ref _maximumAllowableDateOfApplication, value);
+            }
+        }
+
+        public DateTime MinimumAllowableDateOfApplication
+        {
+            get
+            {
+                return _minimumAllowableDateOfApplication;
+            }
+            set
+            {
+                SetProperty(ref _minimumAllowableDateOfApplication, value);
+            }
+        }
 
         /// <summary>
         /// Animal type is required for lookups into default manure composition table since 'other animals' requires the specific animal group for lookups

@@ -177,7 +177,8 @@ namespace H.Core.Services.Animals
                     dailyEmissions,
                     previousDaysEmissions,
                     managementPeriod,
-                    temperature);
+                    temperature, 
+                    farm);
             }
 
             base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
@@ -476,7 +477,8 @@ namespace H.Core.Services.Animals
                     dailyEmissions,
                     previousDaysEmissions,
                     managementPeriod,
-                    temperature);
+                    temperature, 
+                    farm);
             }
 
             base.CalculateCarbonInStorage(dailyEmissions, previousDaysEmissions, managementPeriod);
@@ -546,9 +548,8 @@ namespace H.Core.Services.Animals
             return dailyEmissions;
         }
 
-        protected override void CalculateEnergyEmissions(
-            GroupEmissionsByMonth groupEmissionsByMonth, 
-            Farm farm)
+        protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth,
+            Farm farm, AnimalComponentBase animalComponentBase)
         {
             if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType != AnimalType.DairyLactatingCow)
             {

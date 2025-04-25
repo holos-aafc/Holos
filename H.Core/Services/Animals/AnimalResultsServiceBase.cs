@@ -26,27 +26,15 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
+
         private static readonly DietProvider _dietProvider;
 
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider = new Table_49_Electricity_Conversion_Defaults_Provider();
-
         protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _defaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
-
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new Table_19_Additive_Reduction_Factors_Provider();
-
-        protected readonly Table_36_Livestock_Emission_Conversion_Factors_Provider
-            _livestockEmissionConversionFactorsProvider = new Table_36_Livestock_Emission_Conversion_Factors_Provider();
-
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 
-        /// <summary>
-        /// Calculations are expensive, cache results if they have already been calculated. Recalculate if component is 'dirty' i.e. has <see cref="ComponentBase.ResultsCalculated"/> flag set to false
-        /// </summary>
-        protected Dictionary<AnimalComponentBase, IList<AnimalGroupEmissionResults>> _cachedComponentListResults =
-            new Dictionary<AnimalComponentBase, IList<AnimalGroupEmissionResults>>();
-
         protected ComponentCategory _animalComponentCategory;
-        private readonly Table_29_Default_Manure_Excreted_Provider _manureExcretionAmountProvider = new Table_29_Default_Manure_Excreted_Provider();
         private static List<Diet> _diets;
 
         #endregion
@@ -62,7 +50,6 @@ namespace H.Core.Services.Animals
         protected AnimalResultsServiceBase()
         {
             HTraceListener.AddTraceListener();
-
         }
 
         #endregion
@@ -74,7 +61,7 @@ namespace H.Core.Services.Animals
         #region Public Methods
 
         public List<AnimalComponentEmissionsResults> CalculateResultsForAnimalComponents(
-            IEnumerable<AnimalComponentBase> components, 
+            IEnumerable<AnimalComponentBase> components,
             Farm farm)
         {
             var animalComponentEmissionResults = new List<AnimalComponentEmissionsResults>();
@@ -118,6 +105,11 @@ namespace H.Core.Services.Animals
                      currentDate <= endDate;
                      currentDate = currentDate.AddDays(1))
                 {
+                    if (this.HasMovedToNewYear(currentDate))
+                    {
+                        previousDaysEmissions = null;
+                    }
+
                     var groupEmissionsForDay = CalculateDailyEmissions(
                         animalComponentBase: animalComponent,
                         managementPeriod: managementPeriod,
@@ -133,7 +125,7 @@ namespace H.Core.Services.Animals
 
                 var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
 
-                CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                CalculateEnergyEmissions(groupEmissionsByMonth, farm, animalComponent);
                 CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
 
                 animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
@@ -174,6 +166,11 @@ namespace H.Core.Services.Animals
                          currentDate <= endDate;
                          currentDate = currentDate.AddDays(1))
                     {
+                        if (this.HasMovedToNewYear(currentDate))
+                        {
+                            previousDaysEmissions = null;
+                        }
+
                         var groupEmissionsForDay = CalculateDailyEmissions(
                             animalComponentBase: animalComponent,
                             managementPeriod: managementPeriod,
@@ -189,7 +186,7 @@ namespace H.Core.Services.Animals
 
                     var groupEmissionsByMonth = new GroupEmissionsByMonth(month, dailyEmissionsForMonth);
 
-                    CalculateEnergyEmissions(groupEmissionsByMonth, farm);
+                    CalculateEnergyEmissions(groupEmissionsByMonth, farm, animalComponent);
                     CalculateEstimatesOfProduction(groupEmissionsByMonth, farm);
 
                     animalGroupEmissionResult.GroupEmissionsByMonths.Add(groupEmissionsByMonth);
@@ -243,7 +240,8 @@ namespace H.Core.Services.Animals
 
         #region Protected Methods
 
-        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
+        protected virtual void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm,
+            AnimalComponentBase animalComponentBase)
         {
         }
 
@@ -287,7 +285,7 @@ namespace H.Core.Services.Animals
         /// <returns>The dry matter intake of animals (kg head^-1 day^-1)</returns>
         public double CalculateDryMatterIntakeForCalves(
             double dietaryNetEnergyConcentration,
-            double weight, 
+            double weight,
             bool areMilkFedOnly)
         {
             if (areMilkFedOnly)
@@ -669,7 +667,7 @@ namespace H.Core.Services.Animals
         public double CalculateVolatileSolids(
             double grossEnergyIntake,
             double percentTotalDigestibleNutrientsInFeed,
-            double ashContentOfFeed, 
+            double ashContentOfFeed,
             double percentageForageInDiet)
         {
             double totalGrainInDiet = 100 - percentageForageInDiet;
@@ -723,12 +721,13 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay dailyEmissions,
             GroupEmissionsByDay previousDaysEmissions,
             ManagementPeriod managementPeriod,
-            double temperature)
+            double temperature, Farm farm)
         {
-            dailyEmissions.KelvinAirTemperature = this.CalculateDegreeKelvin(temperature);
+            var averageTemperatureOverLast30Days = this.CalculateDegreesKelvinOverLast30Days(farm, dailyEmissions);
+            dailyEmissions.AverageTemperatureOverLast30Days = averageTemperatureOverLast30Days;
 
             dailyEmissions.ClimateFactor = this.CalculateClimateFactor(
-                kelvinAirTemperature: dailyEmissions.KelvinAirTemperature);
+                averageKelvinAirTemperature: averageTemperatureOverLast30Days);
 
             dailyEmissions.VolatileSolidsProduced = this.CalculateVolatileSolidsProduced(
                 volatileSolids: dailyEmissions.VolatileSolids,
@@ -772,33 +771,61 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.1.3-1
         /// </summary>
-        /// <param name="degreesCelsius">Air temperature (degrees Celsius)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateDegreeKelvin(
-            double degreesCelsius)
+        /// <param name="farm"></param>
+        /// <param name="groupEmissionsByDay"></param>
+        /// <returns>Average air temperature over last 30 days (degrees Kelvin)</returns>
+        public double CalculateDegreesKelvinOverLast30Days(Farm farm, GroupEmissionsByDay groupEmissionsByDay)
         {
-            if (degreesCelsius <= 0)
+            var degreesKelvinList = new List<double>();
+
+            var dateNow = groupEmissionsByDay.DateTime;
+            var dateStart = dateNow.Subtract(TimeSpan.FromDays(30)).Date;
+
+            var temperatures = farm.ClimateData.GetTemperatureByDateRange(dateStart.Date, dateNow.Date);
+
+            foreach (var temperature in temperatures)
             {
-                degreesCelsius = 1;
+                var degreesKelvin = 0d;
+                var degreesCelsius = temperature;
+                if (degreesCelsius <= 0)
+                {
+                    degreesCelsius = 1;
+                }
+
+                degreesKelvin = degreesCelsius + 273.15;
+                degreesKelvinList.Add(degreesKelvin);
             }
 
-            return degreesCelsius + 273.15;
+            var result = degreesKelvinList.Average();
+
+            return result;
         }
 
         /// <summary>
         /// Equation 4.1.3-2
         /// </summary>
-        /// <param name="kelvinAirTemperature">Air temperature (degrees Kelvin)</param>
-        /// <returns>Air temperature (degrees Kelvin)</returns>
-        public double CalculateClimateFactor(
-            double kelvinAirTemperature)
+        /// <param name="averageKelvinAirTemperature">Air temperature (degrees Kelvin)</param>
+        /// <returns>Average air temperature over last 30 days(degrees Kelvin)</returns>
+        public double CalculateClimateFactor(double averageKelvinAirTemperature)
         {
-            const double t1 = 303.16;
+            const double t1 = 308.16;
+            var t2 = averageKelvinAirTemperature;
 
-            var numerator = 15175 * (kelvinAirTemperature - t1);
-            var denominator = 1.987 * kelvinAirTemperature * t1;
+            const double activationEnergy = 19347.0;
+            const double idealGasConstant = 1.987;
 
-            return Math.Exp(numerator / denominator);
+            var numerator = activationEnergy * (t2 - t1);
+            var denominator = idealGasConstant * t1 * t2;
+
+            var exponentResult = Math.Exp(numerator / denominator);
+            var innerTerm = 1 - exponentResult;
+
+            var power = 1.0 / 30.0;
+            var powerTerm = Math.Pow(innerTerm, power);
+
+            var result = 1 - powerTerm;
+
+            return result;
         }
 
         /// <summary>
@@ -822,7 +849,9 @@ namespace H.Core.Services.Animals
         public double CalculateVolatileSolidsLoaded(
             double volatileSolidsProduced)
         {
-            return volatileSolidsProduced * 0.45;
+            var managementAndDesignPracticeFactor = 1.0;
+
+            return volatileSolidsProduced * managementAndDesignPracticeFactor;
         }
 
         /// <summary>
@@ -886,7 +915,7 @@ namespace H.Core.Services.Animals
 
         public void CalculateCarbonInStorage(
             GroupEmissionsByDay dailyEmissions,
-            GroupEmissionsByDay previousDaysEmissions, 
+            GroupEmissionsByDay previousDaysEmissions,
             ManagementPeriod managementPeriod)
         {
             dailyEmissions.AmountOfCarbonLostAsMethaneDuringManagement = this.CalculateCarbonLostAsMethaneDuringManagement(
@@ -901,7 +930,7 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay = this.CalculateAmountOfCarbonInStorageOnCurrentDay(
                 amountOfCarbonInStorageInPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
-                amountOfCarbonFlowingIntoStorage:  dailyEmissions.AmountOfCarbonInStoredManure);
+                amountOfCarbonFlowingIntoStorage: dailyEmissions.AmountOfCarbonInStoredManure);
 
             if (managementPeriod.HousingDetails.HousingType.IsPasture())
             {
@@ -947,7 +976,7 @@ namespace H.Core.Services.Animals
         /// <param name="amountOfCarbonFlowingIntoStorage">Amount of C flowing into storage from manure on the current day for each animal group and manure management system (kg C day^-1)</param>
         /// <returns>Amount of C in stored manure on the current day for each animal group and manure management system (kg C)</returns>
         public double CalculateAmountOfCarbonInStorageOnCurrentDay(
-            double amountOfCarbonInStorageInPreviousDay, 
+            double amountOfCarbonInStorageInPreviousDay,
             double amountOfCarbonFlowingIntoStorage)
         {
             return amountOfCarbonFlowingIntoStorage + amountOfCarbonInStorageInPreviousDay;
@@ -983,8 +1012,8 @@ namespace H.Core.Services.Animals
         }
 
         public void CalculateDirectN2OFromBeefAndDairy(
-            GroupEmissionsByDay dailyEmissions, 
-            ManagementPeriod managementPeriod, 
+            GroupEmissionsByDay dailyEmissions,
+            ManagementPeriod managementPeriod,
             AnimalGroup animalGroup,
             bool isLactatingAnimalGroup,
             double totalNumberOfYoungAnimalsOnDate)
@@ -1010,7 +1039,7 @@ namespace H.Core.Services.Animals
                     milkProduction: managementPeriod.MilkProduction,
                     proteinContentOfMilk: managementPeriod.MilkProteinContent,
                     numberOfYoungAnimals: totalNumberOfYoungAnimalsOnDate,
-                    numberOfAnimals: managementPeriod.NumberOfAnimals, 
+                    numberOfAnimals: managementPeriod.NumberOfAnimals,
                     animalsAreAlwaysLactating: animalsAreAlwaysLactating);
             }
 
@@ -1103,7 +1132,7 @@ namespace H.Core.Services.Animals
             double milkProduction,
             double proteinContentOfMilk,
             double numberOfYoungAnimals,
-            double numberOfAnimals, 
+            double numberOfAnimals,
             bool animalsAreAlwaysLactating)
         {
             if (Math.Abs(numberOfAnimals) < Double.Epsilon)
@@ -1330,7 +1359,7 @@ namespace H.Core.Services.Animals
         /// </summary>
         /// <param name="ammoniaEmissionRate">Manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</param>
         /// <param name="numberOfAnimals">Number of animals</param>
-        /// <returns>Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg N)</returns>
+        /// <returns>Total manure N losses via NH3 volatilization during housing and storage for sheep, swine, and other livestock manure systems (kg NH3-N)</returns>
         public double CalculateTotalNitrogenLossFromHousingAndStorage(
             double ammoniaEmissionRate,
             double numberOfAnimals)
@@ -1379,11 +1408,11 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.1-8
         /// </summary>
-        /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
+        /// <param name="temperature">Average monthly temperature (°C)</param>
         /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission for feedlot (confined no barn) housing, or pasture (unitless)</returns>
-        public double CalculateAmbientTemperatureAdjustmentNoBarn(double averageMonthlyTemperature)
+        public double CalculateAmbientTemperatureAdjustmentNoBarn(double temperature)
         {
-            return Math.Pow(1.041, averageMonthlyTemperature) / Math.Pow(1.041, 15);
+            return Math.Pow(1.041, temperature) / Math.Pow(1.041, 15);
         }
 
         /// <summary>
@@ -1391,7 +1420,7 @@ namespace H.Core.Services.Animals
         ///
         /// Indoor dairy housing systems do not get an additional +2 degrees - just beef housing systems
         /// </summary>
-        /// <param name="dailyTemperature">Temperature (°C)</param>
+        /// <param name="dailyTemperature">Average daily outdoor temperature (°C)</param>
         /// <param name="isDairyIndoorHousing"></param>
         /// <returns>Temperature-based adjustments used to correct default NH3 emission factors for indoor housing</returns>
         public double CalculateAmbientTemperatureAdjustmentForIndoorHousing(double dailyTemperature,
@@ -1729,7 +1758,7 @@ namespace H.Core.Services.Animals
             double beddingNitrogen,
             double fractionOfMineralizedNitrogen,
             double directManureEmissions,
-            double leachingEmissions, 
+            double leachingEmissions,
             double nO3NLeachingEmissions)
         {
             var result =
@@ -1742,15 +1771,15 @@ namespace H.Core.Services.Animals
         /// Equation 4.5.2-4 
         /// </summary>
         public double CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
-            double organicNitrogenAvailableOnCurrentDay, 
+            double organicNitrogenAvailableOnCurrentDay,
             double organicNitrogenAvailableFromPreviousDay)
         {
             return organicNitrogenAvailableFromPreviousDay + organicNitrogenAvailableOnCurrentDay;
         }
 
         public void CalculateOrganicNitrogen(
-            GroupEmissionsByDay dailyEmissions, 
-            ManagementPeriod managementPeriod, 
+            GroupEmissionsByDay dailyEmissions,
+            ManagementPeriod managementPeriod,
             GroupEmissionsByDay previousDaysEmissions)
         {
             dailyEmissions.OrganicNitrogenCreatedOnDay = this.CalculateOrganicNitrogenCreatedOnDay(
@@ -1758,7 +1787,7 @@ namespace H.Core.Services.Animals
                 beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 fractionOfMineralizedNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
                 directManureEmissions: dailyEmissions.ManureDirectN2ONEmission,
-                leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission, 
+                leachingEmissions: dailyEmissions.ManureN2ONLeachingEmission,
                 nO3NLeachingEmissions: dailyEmissions.ManureNitrateLeachingEmission);
 
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay = this.CalculateOrganicNitrogenAvailableForLandApplicationOnDay(
@@ -2147,23 +2176,25 @@ namespace H.Core.Services.Animals
             return result;
         }
 
-        public double CalculateAdjustedAmmoniaFromHousing(GroupEmissionsByDay dailyEmissions,
+        public double CalculateAdjustedAmmoniaFromHousing(
+            GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
-            var volatilizationFractionForHousing = CalculateVolatalizationFractionForHousing(
+
+            dailyEmissions.VolatilizationFractionForHousing = CalculateVolatalizationFractionForHousing(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
                 dailyAmmoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            var volatilizationEmissionsFromHousing = CalculateAmmoniaVolatilizationFromHousing(
+            dailyEmissions.VolatilizationEmissionsFromHousing = CalculateAmmoniaVolatilizationFromHousing(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                volatilizationFractionFromHousing: volatilizationFractionForHousing,
+                volatilizationFractionFromHousing: dailyEmissions.VolatilizationFractionForHousing,
                 emissionFactorForVolatilization: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
             var ammoniaHousingAdjustment = CalculateAmmoniaHousingAdjustment(
                 ammoniaFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
-                ammoniaVolatilizedDuringHousing: volatilizationEmissionsFromHousing);
+                ammoniaVolatilizedDuringHousing: dailyEmissions.VolatilizationEmissionsFromHousing);
 
             var result = ammoniaHousingAdjustment;
 
@@ -2314,20 +2345,20 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
-            var volatilizationForStorage = CalculateVolatilizationFractionForStorage(
+            dailyEmissions.VolatilizationForStorage = CalculateVolatilizationFractionForStorage(
                 dailyAmmoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            var ammoniaLossFromStorage = CalculateAmmoniaVolatilizationFromStorage(
+            dailyEmissions.AmmoniaLossFromStorage = CalculateAmmoniaVolatilizationFromStorage(
                 amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
                 amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding,
-                volatilizationFractionFromStorage: volatilizationForStorage,
+                volatilizationFractionFromStorage: dailyEmissions.VolatilizationForStorage,
                 emissionFactorForVolatilization: managementPeriod.ManureDetails.EmissionFactorVolatilization);
 
             var adjustedAmmoniaLossFromStorage = CalculateAmmoniaStorageAdjustment(
                 ammoniaFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                ammoniaVolatilizedDuringStorage: ammoniaLossFromStorage);
+                ammoniaVolatilizedDuringStorage: dailyEmissions.AmmoniaLossFromStorage);
 
             var totalAdjustedAmmoniaLossesFromStorage = CoreConstants.ConvertToNH3(
                 amountOfNH3N: adjustedAmmoniaLossFromStorage);
@@ -2378,8 +2409,6 @@ namespace H.Core.Services.Animals
 
             dailyEmissions.AmmoniaEmissionsFromHousingAndStorage = dailyEmissions.TotalNitrogenLossesFromHousingAndStorage;
 
-            // Since the emissions from these animals are from a combination of the housing and storage, split the values in half so that the 
-
             /*
              * Volatilization
              */
@@ -2413,7 +2442,7 @@ namespace H.Core.Services.Animals
         }
 
         protected void CalculateVolatilizationEmissions(
-            GroupEmissionsByDay dailyEmissions, 
+            GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
             dailyEmissions.ManureVolatilizationRate = CalculateManureVolatilizationEmissionRate(
@@ -2428,7 +2457,7 @@ namespace H.Core.Services.Animals
         }
 
         protected void CalculateLeachingEmissions(
-            GroupEmissionsByDay dailyEmissions, 
+            GroupEmissionsByDay dailyEmissions,
             ManagementPeriod managementPeriod)
         {
             dailyEmissions.ManureNitrogenLeachingRate = CalculateManureLeachingNitrogenEmissionRate(
@@ -2450,8 +2479,8 @@ namespace H.Core.Services.Animals
 
         protected void InitializeDailyEmissions(
             GroupEmissionsByDay dailyEmissions,
-            ManagementPeriod managementPeriod, 
-            Farm farm, 
+            ManagementPeriod managementPeriod,
+            Farm farm,
             DateTime dateTime)
         {
             dailyEmissions.DateTime = dateTime;
@@ -2476,6 +2505,22 @@ namespace H.Core.Services.Animals
             double adjustedAmmoniaLossFromStorage)
         {
             return amountOfTANFlowingIntoStorageEachDay - adjustedAmmoniaLossFromStorage;
+        }
+
+        /// <summary>
+        /// Checks if daily calculations are from the same year.
+        /// </summary>
+        private bool HasMovedToNewYear(DateTime currentDate)
+        {
+            var previousDate = currentDate.Subtract(TimeSpan.FromDays(1));
+            if (previousDate.Year != currentDate.Year)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

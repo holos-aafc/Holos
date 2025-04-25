@@ -303,6 +303,11 @@ namespace H.Core.Providers.Animals
             BeddingMaterialType beddingMaterialType, 
             AnimalType animalType)
         {
+            if (beddingMaterialType == BeddingMaterialType.None)
+            {
+                return 0;
+            }
+
             if (housingType.IsPasture())
             {
                 return 0;

@@ -12,18 +12,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using H.Core.Models;
+using H.Core.Providers.Climate;
 
 namespace H.CLI.Test.FilesAndDirectoryAccessors
 {
     [TestClass]
     public class GlobalSettingsFileHandlerTest
     {
-       public static readonly GeographicDataProvider geographicDataProvider = new GeographicDataProvider();
+        #region Fields
+
+        public static readonly GeographicDataProvider geographicDataProvider = new GeographicDataProvider();
+        private static ClimateProvider _climateProvider;
+        private static SlcClimateDataProvider _slcClimateDataProvider; 
+
+        #endregion
+
         [ClassInitialize]
         public static void ClassInitialzie(TestContext context)
         {
             geographicDataProvider.Initialize();
             CLILanguageConstants.SetCulture(CultureInfo.CreateSpecificCulture("en-CA"));
+            _slcClimateDataProvider = new SlcClimateDataProvider();
+            _climateProvider = new ClimateProvider(_slcClimateDataProvider);
         }
 
         [ClassCleanup]
@@ -70,7 +80,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var climateDataProvider = new SlcClimateDataProvider();
             var climatateData = climateDataProvider.GetClimateData(793006, TimeFrame.ProjectionPeriod);
 
-            var globalSettingsHandler = new SettingsHandler();
+            var globalSettingsHandler = new SettingsHandler(_climateProvider);
             var reader = new ReadSettingsFile();
             var directoryHandler = new DirectoryHandler();
             Directory.CreateDirectory("H.CLI.TestFiles");
@@ -94,7 +104,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var climateDataProvider = new SlcClimateDataProvider();
             var climatateData = climateDataProvider.GetClimateData(793006, TimeFrame.ProjectionPeriod);
             
-            var globalSettingsHandler = new SettingsHandler();
+            var globalSettingsHandler = new SettingsHandler(_climateProvider);
             var reader = new ReadSettingsFile();
             var directoryHandler = new DirectoryHandler();
             Directory.CreateDirectory("H.CLI.TestFiles");
@@ -178,7 +188,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
         public void TestInitializePolygonID_UserChoiceIs3_ExpectLethbridgeSettingsFileToBeMade()
         {
             CLILanguageConstants.SetCulture(CultureInfo.GetCultureInfo("en-CA"));
-            var globalSettingsHandler = new SettingsHandler();
+            var globalSettingsHandler = new SettingsHandler(_climateProvider);
             var reader = new ReadSettingsFile();
 
             globalSettingsHandler.InitializePolygonIDList(geographicDataProvider);

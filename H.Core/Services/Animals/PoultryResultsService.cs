@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Permissions;
+using System.Security.Principal;
 using H.Core.Emissions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -16,12 +17,17 @@ namespace H.Core.Services.Animals
     {
         #region Fields
 
-        private Table_41_Poultry_NExcretionRate_Parameter_Values_Provider _poultryNExcretionRateValuesProvider = new Table_41_Poultry_NExcretionRate_Parameter_Values_Provider();
+        private static readonly Table_41_Poultry_NExcretionRate_Parameter_Values_Provider _poultryNExcretionRateValuesProvider;
         private readonly DefaultDailyTanExcretionRatesForPoultry _defaultDailyTanExcretionRatesForPoultry = new DefaultDailyTanExcretionRatesForPoultry();
 
         #endregion
 
         #region Constructors
+
+        static PoultryResultsService()
+        {
+            _poultryNExcretionRateValuesProvider = new Table_41_Poultry_NExcretionRate_Parameter_Values_Provider();
+        }
 
         public PoultryResultsService() : base()
         {
@@ -53,6 +59,8 @@ namespace H.Core.Services.Animals
 
             if (animalGroup.GroupType.IsNewlyHatchedEggs() || animalGroup.GroupType.IsEggs())
             {
+                // No CH4 or N2O emissions, but there is electricity used in the barn so we calculate those associated emissions
+
                 return dailyEmissions;
             }
 
@@ -154,7 +162,7 @@ namespace H.Core.Services.Animals
                     dryMatterIntake: dailyEmissions.DryMatterIntake,
                     crudeProtein: poultryDietData.CrudeProtein );
 
-                if (managementPeriod.AnimalType == AnimalType.ChickenHens)
+                if (managementPeriod.AnimalType == AnimalType.ChickenHens || managementPeriod.AnimalType == AnimalType.Layers)
                 {
                     dailyEmissions.ProteinRetained = this.CalculateProteinRetainedLayers(
                         proteinInLiveWeight: poultryDietData.ProteinLiveWeight,
@@ -309,6 +317,8 @@ namespace H.Core.Services.Animals
             dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay =
                 dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay - dailyEmissions.AccumulatedTANAvailableForLandApplicationOnDay;
 
+            dailyEmissions.OrganicNitrogenCreatedOnDay = dailyEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay - (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay);
+
             dailyEmissions.ManureCarbonNitrogenRatio = base.CalculateManureCarbonToNitrogenRatio(
                 carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
                 nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
@@ -332,11 +342,14 @@ namespace H.Core.Services.Animals
             return dailyEmissions;
         }
 
-        protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm)
+        protected override void CalculateEnergyEmissions(GroupEmissionsByMonth groupEmissionsByMonth, Farm farm,
+            AnimalComponentBase animalComponentBase)
         {
             if (groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsNewlyHatchedEggs() || 
                 groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.AnimalType.IsEggs())
             {
+                groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateEnergyEmissionsFromHatchery(groupEmissionsByMonth, farm, animalComponentBase);
+
                 return;
             }
 
@@ -476,11 +489,11 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 6.2.3-1
+        /// Equation 6.2.3-2
         /// </summary>
         /// <param name="numberOfAnimals">Barn capacity for poultry</param>
         /// <param name="numberOfDays">Number of days in month</param>
-        /// <param name="energyConversion">kWh per poultry placement per year for electricity electricity (kWh poultry placement^-1 year^-1) </param>
+        /// <param name="energyConversion">kWh per poultry placement per year for electricity (kWh poultry placement^-1 year^-1) </param>
         /// <returns>Total CO2 emissions from poultry operations (kg CO2)</returns>
         public double CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(
             double numberOfAnimals, 
@@ -490,6 +503,38 @@ namespace H.Core.Services.Animals
             const double poultryConversion = 2.88;
 
             return numberOfAnimals * (poultryConversion / CoreConstants.DaysInYear) * energyConversion * numberOfDays;
+        }
+
+        /// <summary>
+        /// Equation 6.2.3-3
+        ///
+        /// Calculates the monthly energy emissions for a hatchery in a particular month
+        ///
+        /// (kg CO2)
+        /// </summary>
+        private double CalculateEnergyEmissionsFromHatchery(
+            GroupEmissionsByMonth groupEmissionsByMonth, 
+            Farm farm,
+            AnimalComponentBase animalComponent)
+        {
+            // Get entire production cycle length in days
+            var managementPeriods = animalComponent.Groups.SelectMany(x => x.ManagementPeriods).ToList();
+            var totalDaysInProductionCycle = managementPeriods.Sum(x => x.Duration.TotalDays);
+            if (totalDaysInProductionCycle == 0)
+            {
+                // Prevent division by zero
+                totalDaysInProductionCycle = 1;
+            }
+
+            var energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            var barnCapacity = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals;
+            var daysInMonth = (double) groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth;
+
+            var emissionsForEntireProductionCycle = (barnCapacity / 1000.0) * 223.52 * energyConversionFactor;
+            var emissionsPerDay = emissionsForEntireProductionCycle * (1.0 / totalDaysInProductionCycle);
+            var result  = emissionsPerDay * daysInMonth;
+
+            return result;
         }
 
         #endregion

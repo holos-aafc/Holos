@@ -316,7 +316,7 @@ Pour fermer un fichier, cliquez sur **Fermer** sous l’onglet **Fichier**. Cett
 
 Vous pouvez exporter vos fichiers de configuration de ferme dans un fichier JSON (extension de fichier «. **json** »), puis les importer dans Holos sur un autre ordinateur. Cela ne fonctionne que pour Holos 4, vous ne pouvez pas importer d’anciens fichiers de Holos 3 dans Holos 4 et vice versa.
 
-#### Exporter
+#### Exportation de fermes 
 
 1. Pour exporter un fichier, cliquez sur l’icône **Exporter** sous l’onglet **Fichier**. Cette opération ouvre une fenêtre dans laquelle vous verrez la liste des fermes que vous pouvez exporter.
 2. Vous pouvez **ajouter une description** à chaque ferme ou modifier le nom de la ferme en cliquant sur la case appropriée et en modifiant son contenu.
@@ -338,7 +338,7 @@ Vous pouvez exporter vos fichiers de configuration de ferme dans un fichier JSON
 </p>
 <br>
 
-4. Après avoir sélectionné votre ferme et cliqué sur le bouton **Exporter**, vous serez invité à **choisir un emplacement où vous souhaitez créer le fichier**.
+4. Après avoir choisi la ou les fermes que vous voulez exporter, cliquez sur le bouton **Exporter**. Vous serez invité à choisir un emplacement à associer au fichier qui sera créé.
 5. Vous pouvez **naviguer** dans votre système avec les onglets du côté gauche de l’écran.
 6. Vous pouvez également **ajouter un nouveau dossier** à l’emplacement actuel en **cliquant sur le bouton Nouveau dossier** dans le coin supérieur gauche de votre écran.
 7. Vous pouvez **modifier le nom** de votre fichier en **cliquant dans la section où il est écrit Nom du fichier** au bas de votre écran.
@@ -351,11 +351,11 @@ Vous pouvez exporter vos fichiers de configuration de ferme dans un fichier JSON
     <em>
 	    Figure 3.7 Choix d’un emplacement pour exporter les fermes sélectionnées. 
 		<br>
-		A : Naviguez dans votre ordinateur à l’aide de cette section.
+		A: Naviguez dans votre ordinateur à l’aide de cette section.
 		<br>
-		B : Personnalisez le nom de vos fermes exportées ici. 
+		B: Personnalisez le nom de vos fermes exportées ici. 
 		<br>
-		C : Cliquez sur **Sauvegarder** pour finaliser l’exportation de votre ferme. 
+		C: Cliquez sur **Enregistrer** pour finaliser l’exportation de vos fermes.
 	</em>
 </p>
 <br>
@@ -420,11 +420,37 @@ Vous pouvez exporter vos fichiers de configuration de ferme dans un fichier JSON
 </p>
 <br>
 
-#### Sauvegarder
+#### Exportation de fichiers de données climatiques 
 
-1. Si vous avez déjà créé une ferme, mais souhaitez l’enregistrer sous un autre nom et la modifier, vous pouvez sélectionner **Enregistrer sous**. Comme pour d’autres produits, vous pouvez créer une copie au moyen de **Enregistrer sous**. Il vous suffit de sélectionner E**nregistrer sous** à l’onglet Fichier et d’entrer un nom pour enregistrer votre nouvelle ferme.
+Vous pouvez exporter les données climatiques de vos fermes vers un fichier CSV, qui pourra être visualisé dans un logiciel comme Excel.
 
-2. Si le nom existe déjà, Holos vous en avertira et vous demandera de le changer.
+1. Pour exporter un fichier, sélectionnez les options de menu **Fichier**, puis **"Export climate data"**. Une fenêtre dans laquelle vous verrez la liste des fermes que vous pouvez exporter s’ouvre.
+
+2. Vous pouvez **"ajouter une description"** pour chaque ferme ou modifier le nom de la ferme en cliquant sur la case appropriée et en modifiant son contenu.
+
+3. Cliquez sur la ou les **fermes** que vous voulez inclure et cliquez sur **"Exporter"**, dans le bas de l’écran, pour choisir l’emplacement de votre fichier exporté. La ou les fermes sélectionnées s’affichent en gris.
+
+4. Après avoir choisi la ou les fermes que vous voulez **"exporter"**, cliquez sur le bouton Exporter. Vous serez invité à choisir un emplacement à associer au fichier qui sera créé.
+
+5. Vous pouvez **naviguer** dans votre système avec les onglets situés du côté gauche de l’écran.
+
+6. Vous pouvez aussi **ajouter un nouveau dossier** à l’emplacement actuel en cliquant sur le bouton **"Nouveau dossier"**, dans le coin supérieur gauche de votre écran.
+
+7. Vous pouvez **modifier le nom de** votre fichier en **cliquant dans la section portant la mention "Nom du fichier"**, au bas de votre écran.
+
+8. Une fois que vous avez sélectionné un emplacement, cliquez sur **"Sauvegarder"** pour terminer l’opération.
+<br>
+<br>
+Veuillez noter que ces instructions sont semblables à celles concernant [l’exportation](#exportation-de-fermes) d’une ferme. En effet, l’interface et la fonctionnalité associées à ces options d’exportation sont presque identiques.
+<br>
+La principale différence fonctionnelle est que l’exportation de plusieurs fermes donnera lieu à un fichier JSON unique, tandis que l’exportation des données climatiques pour plusieurs fermes donnera lieu à plusieurs fichiers CSV. 
+<br>
+Lorsque vous exportez les données climatiques correspondant à plusieurs fermes, l’étape 4 du processus décrit ci-dessus se répétera pour le nombre de fermes pour lesquelles vous avez choisi d’exporter des données climatiques.
+
+#### Enregistrer sous
+
+1. Si vous avez déjà créé une ferme, mais souhaitez l’enregistrer sous un autre nom et la modifier, vous pouvez sélectionner **Enregistrer sous**. Comme pour d’autres produits, vous pouvez créer une copie au moyen de **Enregistrer sous**. Il vous suffit de sélectionner **Enregistrer sous** à l’onglet Fichier et d’entrer un nom pour enregistrer votre nouvelle ferme.
+2. Si le nom existe déjà, Holos vous en avertira et vous demandera de choisir un autre nom. 
 3. Vous pouvez maintenant accéder à cette nouvelle ferme copiée de la même façon que vous ouvririez une ferme à partir de l’onglet Fichier.
 
 <br>
@@ -896,16 +922,16 @@ Un résumé de tous les épandages de fumier à une ferme se trouve dans la sect
 
 <br>
 
-##### Soil
+##### Sol 
 
-The soil tab allows the user to change the soil type for the specific field. The table shows the list of all soil types available for the selected polygon. If a soil type is to be set on the specific field, select one from the list. To customize the soil, click "Custom Mode" and edit the individual soil properties for the field only.
+Dans la page d’onglet Sol, l’utilisateur peut modifier le type de sol pour le champ voulu. Le tableau présente la liste de tous les types de sol disponibles pour le polygone sélectionné. Si un type de sol doit être associé au champ spécifique, sélectionnez-en un dans la liste. Pour personnaliser le sol, cliquez sur Mode personnalisé et modifiez les propriétés individuelles du sol pour le champ seulement.
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter6/figure6-62.png" alt="Figure6-62"  width="650"/>
     <br>
     <em>
-		Figure 6.62 – Soil tab for a field component. 
+		Figure 6.62 – Page d’onglet Sol pour une composante de champ. 
 	</em>
 </p>
 
@@ -914,7 +940,7 @@ The soil tab allows the user to change the soil type for the specific field. The
  <img src="../../Images/UserGuide/en/chapter6/figure6-63.png" alt="Figure6-63"  width="650"/>
     <br>
     <em>
-		Figure 6.63 – Customize a soil type for a field. 
+		Figure 6.63 – Personnaliser un type de sol pour un champ. 
 	</em>
 </p>
 <br>
@@ -3246,16 +3272,20 @@ Voici un exemple de fichier de données sur les composantes Moutons divisé en s
 2.  La première fois que vous démarrerez l'interface de ligne de commande, vous serez invité à entrer l'emplacement de votre dossier « Fermes » (il peut s'agir de n'importe quel dossier que vous créez sur votre ordinateur).
 
     - Les autres fois que vous démarrez l'interface de ligne de commande Holos, vous devez indiquer si vous souhaitez utiliser votre emplacement précédemment entré ou entrer un nouvel emplacement.
-
+    
     - Reportez-vous à la section [Créer un nouveau dossier Fermes](#créer-un-nouveau-dossier-fermes) pour obtenir de l'aide sur la création d'un dossier de ferme initiales et pour en savoir plus sur les invites subséquentes.
 
-3.  Vous serez invité à sélectionner une unité de mesure pour le programme à exécuter (Métrique = 1, Impérial = 2). Veuillez faire un choix
+3.  Le système vous demandera si vous voulez importer des fermes de l’IUG Holos (oui/non). Si vous sélectionnez l’option **"Oui"**, vous êtes invité à entrer le chemin d’accès au référentiel complet de votre ferme exportée.  
 
-4.  L'interface de ligne de commande traitera maintenant chacune des fermes que vous avez créées et les fichiers d'entrée de données de leurs composantes correspondantes.
+    - Nous vous recommandons d’enregistrer/déplacer le fichier JSON de la ferme exportée depuis l’IUG au même endroit que votre dossier Fermes. Cela parce que le fichier JSON importé sera converti en un dossier contenant des fichiers CSV correspondant aux composantes de la ferme, que l’interface de ligne de commande pourra ensuite traiter. 
 
-- Une fois le traitement et l'analyse terminés, vous verrez un message « Conversion terminée » dans la CLI.
+4.  Vous serez invité à sélectionner une unité de mesure pour l’exécution du programme (Métrique = 1, Impérial = 2). Veuillez sélectionner une option. 
 
-5.  Les résultats pour votre ferme seront exportés dans le répertoire de base de votre répertoire « Fermes » dans un dossier « Extrants » à l'étape 1.
+5.  L’interface de ligne de commande traitera maintenant chacune des fermes que vous avez créées et les fichiers d’entrée de données de leurs composantes correspondantes.
+
+    - Une fois le traitement et l’analyse terminés, vous voyez le message "Conversion terminée" dans l’ILC. 
+
+6. Les résultats pour votre ferme sont exportés dans le référentiel de base de votre référentiel « Fermes », dans un dossier "Extrants" à l’étape 1.
 
 <br>
 <p align="center">
@@ -3266,6 +3296,26 @@ Voici un exemple de fichier de données sur les composantes Moutons divisé en s
 	</em>
 </p>
 <br>
+
+## Arguments de la ligne de commande et indicateurs d’entrée 
+Il existe un certain nombre d’arguments de ligne de commande utiles pour l’ILC Holos.
+
+**Le premier argument doit être le chemin d’accès complet vers votre dossier de fermes.**
+
+En suivant ce chemin d’accès au référentiel et dans n’importe quel ordre, les indicateurs de commande suivants peuvent être utilisés:
+
+- – i: votre fichier de saisie JSON. C’est un dossier sensible à la casse qui nécessite l’extension de fichier.
+- – f: dossier de fichiers JSON pour l’importation de plusieurs fermes. Il est sensible à la casse.
+- – s: fichier configuré SETTINGS dans le dossier des fermes. Cet indicateur d’entrée n’est disponible que si l’indicateur -i ou -f est également utilisé. Ce fichier est également sensible à la casse et nécessite l’extension de fichier.
+- – u: unité de mesure que vous avez choisie, soit l’unité métrique ou l’unité impériale. Elle n’est pas sensible à la casse.
+- – p: ID du polygone du PPC pour traiter la ferme d’entrée donnée à l’aide des données climatiques et géographiques tirées d’un ID de polygone. Cela ne modifiera pas le fichier JSON.
+- – o: chemin d’accès au référentiel pour les extrants.
+
+Les fichiers d’entrée JSON, les dossiers d’entrée et les fichiers SETTINGS doivent se trouver dans le dossier de fermes donné.
+
+Si vous avez créé la solution à partir du code source, le fichier exécutable ILC se trouvera dans le dossier .. ..\H\H.CLI\bin\Debug de votre référentiel local.
+
+Si vous [avez installé l’IL](), des étapes supplémentaires sont nécessaires pour utiliser les arguments de ligne de commande et les indicateurs d’entrée. Vous trouverez des instructions à cet effet dans le [chapitre 11](). 
 
 ## Résultats de l'interface de ligne de commande
 
@@ -4046,3 +4096,87 @@ Holos utilise par défaut le modèle de carbone de niveau 2 du GIEC, mais il per
 	</em>
 </p>
 <br>
+
+### Template Files
+
+The Holos CLI will [generate template input files](#navigating-through-the-farms-folder) (.csv) for the user to manually enter farm data for processing. You can identify these generated template files by their filename, which will end with "_Example-en-CA.csv" or "_Example-fr-CA.csv". These file will be contain headers for user entered data, but will otherwise be empty. 
+
+If the Holos CLI finds unmodified template files, it will display a message stating: "The following file does not have any data to parse:" followed by the full directory path to the file. These files will not affect your results, and may be deleted by the user. 
+
+Note that template files will be generated when importing a farm from the Holos GUI. These template files may be deleted by the user as well.
+
+### Dossiers des fermes en double pour les fermes exportées depuis l’IUG 
+
+Chaque fois que l’ILC est exécutée, Holos vous demande si vous avez des fermes à importer de l’IUG.
+
+Si vous répondez "Oui" à cette question, l’ILC trouvera tout fichier JSON dans le référentiel courant des fermes, le convertira et traitera ses données, même si cette procédure avait déjà été suivie. 
+
+Cela peut entraîner des doublons parmi les dossiers dans le cas des fermes exportées depuis l’IUG Holos.
+
+Pour éviter ces doublons, ne répondez "Oui" qu’une seule fois à l’invite, et "Non" chaque fois que vous exécuterez l’ILC par la suite. 
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-26.png" alt="Figure11-26" width="650"/>
+    <br>
+    <em>
+		Figure 11-26 - Invite à l’importation de fermes
+	</em>
+</p>
+<br>
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-27.png" alt="Figure11-27"/>
+    <br>
+    <em>
+		Figure 11-27 - Exemple de dossier de fermes dupliqué non voulu
+	</em>
+</p>
+<br>
+
+### Utilisation des arguments de ligne de commande et des indicateurs d’entrée, après installation de l’application ILC Holos 
+
+Si vous avez téléchargé et installé le lien ILC fourni dans README, une icône de référence d’application devrait apparaître sur votre bureau.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-28.png" alt="Figure 11-28" width="450"/>
+    <br>
+    <em>
+		Figure 11-28 - Icône CLI.appref-ms CLI.appref-ms 
+	</em>
+</p>
+<br>
+
+Cette icône n’est pas exécutable en soi et ne peut donc pas accepter des arguments de ligne de commande. Pour trouver le fichier exécutable associé à cette icône:
+1. Exécutez l’ILC Holos en double-cliquant sur l’icône de référence de l’application.
+2. Ouvrez votre gestionnaire de tâches Windows.
+3. Cliquez à droite sur l’application H.CLI.
+4. Cliquez à gauche sur Ouvrir l’emplacement du fichier.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-29.png" alt="Figure 11-29" height="200"/>
+    <br>
+    <em>
+		Figure 11-29 - Trouver le fichier exécutable H.Cli à l’aide du gestionnaire de tâches 
+	</em>
+</p>
+<br>
+
+Maintenant que vous avez exposé l’emplacement du fichier H.CLI, vous pouvez créer un raccourci et le déplacer vers un endroit plus accessible dans votre ordinateur.
+
+<br>
+<p align="center">
+ <img src="../../Images/UserGuide/fr/chapter11/figure11-30.png" alt="Figure 11-30" width="500" height ="400"/>
+    <br>
+    <em>
+		Figure 11-30 - Créer un raccourci vers le fichier exécutable H.CLI 
+	</em>
+</p>
+<br>
+
+Ce raccourci aura une extension de fichier LNK. Voici un exemple d’utilisation du raccourci dans votre invite de commande à l’aide des indicateurs de saisie:
+
+_H.CLI.lnk file_path -i farm.json -u metric -p 793011 -o file_path_out_

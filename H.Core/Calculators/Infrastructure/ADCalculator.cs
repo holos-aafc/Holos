@@ -73,8 +73,9 @@ namespace H.Core.Calculators.Infrastructure
             };
 
             var fractionAdded = adManagementPeriod.DailyFractionOfManureAdded;
-            var manureComposition =
-                farm.GetManureCompositionData(ManureStateType.Pasture, managementPeriod.AnimalType);
+
+            // See section 4.8.1 (fresh manure always uses pasture values)
+            var manureComposition = farm.GetManureCompositionData(ManureStateType.Pasture, managementPeriod.AnimalType);
 
             // Equation 4.8.1-2
             substrateFlowRate.TotalMassFlowOfSubstrate =
@@ -82,9 +83,10 @@ namespace H.Core.Calculators.Infrastructure
                  managementPeriod.HousingDetails.UserDefinedBeddingRate * managementPeriod.NumberOfAnimals) *
                 fractionAdded;
 
+            var moistureContent = manureComposition.MoistureContent;
+
             // Equation 4.8.1-3
-            substrateFlowRate.TotalSolidsFlowOfSubstrate =
-                substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriod.TotalSolids / 1000);
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (1 - (moistureContent / 100.0));
 
             // Equation 4.8.1-4
             substrateFlowRate.VolatileSolidsFlowOfSubstrate =
@@ -121,11 +123,10 @@ namespace H.Core.Calculators.Infrastructure
             return substrateFlowRate;
         }
 
-        public SubstrateFlowInformation GetStoredManureFlowRate(
-            AnaerobicDigestionComponent component,
+        public SubstrateFlowInformation GetStoredManureFlowRate(AnaerobicDigestionComponent component,
             GroupEmissionsByDay dailyEmissions,
-            ADManagementPeriodViewItem adManagementPeriodViewItem, 
-            GroupEmissionsByDay previousDaysEmissions)
+            ADManagementPeriodViewItem adManagementPeriodViewItem,
+            GroupEmissionsByDay previousDaysEmissions, Farm farm)
         {
             var managementPeriod = adManagementPeriodViewItem.ManagementPeriod;
 
@@ -145,6 +146,8 @@ namespace H.Core.Calculators.Infrastructure
             var totalMassFlowOfSubstrate = 0d;
             var animalType = managementPeriod.AnimalType;
             var nitrogenContentOfManure = managementPeriod.ManureDetails.FractionOfNitrogenInManure;
+            var manureComposition = farm.GetManureCompositionData(managementPeriod.ManureDetails.StateType, managementPeriod.AnimalType);
+            var moistureContent = manureComposition.MoistureContent;
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsPoultryType())
             {
                 // Equation 4.8.1-16
@@ -161,7 +164,7 @@ namespace H.Core.Calculators.Infrastructure
             substrateFlowRate.TotalMassFlowOfSubstrate = totalMassFlowOfSubstrate;
 
             // Equation 4.8.1-18
-            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (adManagementPeriodViewItem.TotalSolids / 1000.0);
+            substrateFlowRate.TotalSolidsFlowOfSubstrate = substrateFlowRate.TotalMassFlowOfSubstrate * (1 - (moistureContent / 100.0));
 
             if (managementPeriod.ManureDetails.StateType.IsLiquidManure())
             {
@@ -169,11 +172,11 @@ namespace H.Core.Calculators.Infrastructure
                 var volatileSolidsOnPreviousDay = previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable;
 
                 // Equation 4.8.1-19
-                var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.TotalVolumeOfManureAvailableForLandApplication * 1000);
-                var b = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication - (previousDaysEmissions == null ? 0 : previousDaysEmissions.TotalVolumeOfManureAvailableForLandApplication);
-                var c = fractionUsed * 1000;
+                var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.AccumulatedVolume * 1000);
+                var b = (dailyEmissions.AccumulatedVolume) - (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
+                var c = fractionUsed * 1000; 
 
-                var result = a * (b - c);
+                var result = a * (b * c);
 
                 substrateFlowRate.VolatileSolidsFlowOfSubstrate = result;
 
@@ -321,8 +324,8 @@ namespace H.Core.Calculators.Infrastructure
             DigestorDailyOutput digestorDailyOutput)
         {
             var temperature =
-                farm.ClimateData.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months) dateTime.Month);
-            var methaneEmissionFactorDuringStorage = 0.0175 * Math.Pow(temperature, 2) - 0.0245 * temperature + 0.1433;
+                farm.ClimateData.GetMeanTemperatureForDay(dateTime);
+            var methaneEmissionFactorDuringStorage = 0.0176 * Math.Pow(temperature, 2) - 0.0118 * temperature + 0.0743;
 
             // Equation 4.8.5-1
             digestorDailyOutput.MethaneEmissionsDuringStorage = (methaneEmissionFactorDuringStorage / 1000000.0)*
@@ -595,14 +598,16 @@ namespace H.Core.Calculators.Infrastructure
             var flowRateOfAllVolatileSolids = 0d;
             foreach (var flowInformationForAllSubstrate in flowInformationForAllSubstrates)
             {
-                var totalSolidsFlowOfSubstrate = flowInformationForAllSubstrate.TotalSolidsFlowOfSubstrate - flowInformationForAllSubstrate.DegradedVolatileSolids;
+                var degradedVolatileSolids = flowInformationForAllSubstrate.DegradedVolatileSolids;
+
+                var totalSolidsFlowOfSubstrate = flowInformationForAllSubstrate.TotalSolidsFlowOfSubstrate - degradedVolatileSolids;
                 if (totalSolidsFlowOfSubstrate < 0)
                 {
                     // Imported manure will have no TS (TS = 0) so we don't add negative numbers here since the degraded VS will be non-zero
                     totalSolidsFlowOfSubstrate = 0;
                 }
 
-                var volatileSolidsFlowOfSubstrate = flowInformationForAllSubstrate.VolatileSolidsFlowOfSubstrate -flowInformationForAllSubstrate.DegradedVolatileSolids;
+                var volatileSolidsFlowOfSubstrate = flowInformationForAllSubstrate.VolatileSolidsFlowOfSubstrate - degradedVolatileSolids;
                 if (volatileSolidsFlowOfSubstrate < 0)
                 {
                     volatileSolidsFlowOfSubstrate = 0;
@@ -779,6 +784,8 @@ namespace H.Core.Calculators.Infrastructure
                 foreach (var animalGroupResults in animalComponentEmissionsResult
                              .EmissionResultsForAllAnimalGroupsInComponent)
                 {
+                    GroupEmissionsByDay previousDaysEmissions = null;
+
                     foreach (var groupEmissionsByMonth in animalGroupResults.GroupEmissionsByMonths)
                     {
                         if (selectedManagementPeriods.Select(x => x.ManagementPeriod)
@@ -791,14 +798,15 @@ namespace H.Core.Calculators.Infrastructure
                             for (int i = 0; i < groupEmissionsByMonth.DailyEmissions.Count; i++)
                             {
                                 var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
-                                var previousDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAtOrDefault(i - 1);
-
+                                
                                 var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,
-                                    adManagementPeriod, previousDayEmissions);
+                                    adManagementPeriod, previousDaysEmissions, farm);
 
                                 flows.Add(flowRates);
+
+                                previousDaysEmissions = currentDayEmissions;
                             }
                         }
                     }
@@ -847,7 +855,9 @@ namespace H.Core.Calculators.Infrastructure
                 }
 
                 // Equation 4.8.6-2
-                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = dailyOutput.FlowOfAllCarbon -  CoreConstants.ConvertToC(dailyOutput.MethaneEmissionsDuringStorage);
+                var flowOfCarbonInDigestate = flowsForDate.Sum(x => x.CarbonFlowInDigestate);
+                var totalCarbon = flowOfCarbonInDigestate - CoreConstants.ConvertToC(dailyOutput.MethaneEmissionsDuringStorage);
+                dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = totalCarbon;
                 if (dailyOutput.TotalCarbonInDigestateAvailableForLandApplication < 0)
                 {
                     dailyOutput.TotalCarbonInDigestateAvailableForLandApplication = 0;
@@ -866,19 +876,20 @@ namespace H.Core.Calculators.Infrastructure
         {
             if (substrateFlowInformation.SubstrateType == SubstrateType.FarmResidues)
             {
-                return 0.024;
+                return 0.23;
             }
 
             if (substrateFlowInformation.AnimalType.IsDairyCattleType())
             {
-                return 0.025;
+                return 0.4;
             }
             else if (substrateFlowInformation.AnimalType.IsSwineType())
             {
-                return 0.024;
+                return 0.7;
             }
             else
             {
+                // Other manure
                 return 0.55;
             }
         }

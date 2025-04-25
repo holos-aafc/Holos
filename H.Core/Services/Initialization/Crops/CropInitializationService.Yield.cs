@@ -166,8 +166,8 @@ namespace H.Core.Services.Initialization.Crops
             }
 
             var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
-            var term2 = term1 * (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
-            var result = term2 * (1 - grainCropViewItem.MoistureContentOfCrop);
+            var term2 = (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
+            var result = term1 * term2;
 
             return result;
         }

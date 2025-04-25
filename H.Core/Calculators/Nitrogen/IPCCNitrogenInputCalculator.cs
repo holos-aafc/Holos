@@ -23,7 +23,8 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 2.5.6-8
         /// Equation 2.7.2-2
         /// </summary>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(CropViewItem currentYearViewItem,
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIpccTier2(
+            CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem)
         {
             if (currentYearViewItem.CropType.IsPerennial())
@@ -43,14 +44,14 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             // Equation 2.7.2-2
-            var belowGroundResidueDryMatterFromPreviousYear = previousYearViewItem != null ? previousYearViewItem.BelowGroundResidueDryMatter : 0;
-            var result = (belowGroundResidueDryMatterFromPreviousYear / currentYearViewItem.Area) * currentYearViewItem.NitrogenContentInRoots;
+            var belowGroundResidueDryMatter = currentYearViewItem.BelowGroundResidueDryMatter;
+            var result = (belowGroundResidueDryMatter / currentYearViewItem.Area) * currentYearViewItem.NitrogenContentInRoots;
 
             return result;
         }
 
         /// <summary>
-        /// Equation 2.6.2-8
+        /// Equation 2.6.2-7
         /// </summary>
         /// <param name="aboveGroundBiomassExported">Above ground biomass (kg DM) exported (Equation 2.2.2-3)</param>
         /// <param name="nitrogenContentOfStraw">(kg kg^-1)</param>

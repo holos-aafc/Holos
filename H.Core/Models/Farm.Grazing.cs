@@ -58,6 +58,15 @@ namespace H.Core.Models
             return this.GetYearsWithGrazingAnimals().Contains(year);
         }
 
+        public bool IsNonSwathingGrazingScenario(CropViewItem viewItem)
+        {
+            return viewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
+                   this.CropHasGrazingAnimals(viewItem) &&
+                   this.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
+                   viewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
+                   viewItem.HarvestMethod != HarvestMethods.Swathing;
+        }
+
         #endregion
     }
 }

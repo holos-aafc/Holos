@@ -179,5 +179,6 @@ namespace H.Core.Services.Animals
         void SetValidManureStateTypes(ManureSubstrateViewItem manureSubstrateViewItem, Farm farm);
         List<AnimalType> GetValidManureForDigestorImports();
         double GetTotalNitrogenFromExportedManure(ManureExportViewItem exportViewItem);
+        double GetTotalNitrogenAppliedToAllFields(int year, AnimalType animalType);
     }
 }

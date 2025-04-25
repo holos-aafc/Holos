@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Input;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Temperature;
@@ -35,6 +38,7 @@ namespace H.Core.Providers.Climate
         private readonly Dictionary<int, double> _precipitationByYear = new Dictionary<int, double>();
         private readonly Dictionary<int, double> _growingSeasonPrecipitationByYear = new Dictionary<int, double>();
         private readonly Dictionary<int, double> _growingSeasonEvapotranspirationByYear = new Dictionary<int, double>();
+        private Dictionary<Tuple<DateTime, DateTime>, List<double>> _temperaturesByDateRange = new Dictionary<Tuple<DateTime, DateTime>, List<double>>();
 
         #endregion
 
@@ -422,6 +426,28 @@ namespace H.Core.Providers.Climate
             {
                 return this.GetAverageTemperatureForMonthAndYear(dateTime.Year, (Months)dateTime.Month);
             }
+        }
+
+        public List<double> GetTemperatureByDateRange(DateTime start, DateTime end)
+        {
+            var result = new List<double>();
+
+            var key = new Tuple<DateTime, DateTime>(start.Date, end.Date);
+            if (_temperaturesByDateRange.ContainsKey(key))
+            {
+                return _temperaturesByDateRange[key];
+            }
+
+            for (DateTime date = start; date <= end; date = date.AddDays(1))
+            {
+                var temperatureForDay = this.GetMeanTemperatureForDay(date);
+
+                result.Add(temperatureForDay);
+            }
+
+            _temperaturesByDateRange[key] = result;
+
+            return result;
         }
 
         #endregion

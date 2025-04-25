@@ -5,6 +5,7 @@ using H.Core.Emissions.Results;
 using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
+using H.Core.Services;
 
 namespace H.Core.Calculators.Carbon
 {

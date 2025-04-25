@@ -59,7 +59,7 @@ namespace H.Core.Providers.Animals
         #region Footnotes
 
         // Footnote 1: Values for dairy cattle are based on expert opinion (Darryl Gibb, Karen Beauchemin, Sean McGinn, AAFC).
-        // Footnote 2: The effect of ionophores is reduced over time. This calculation prorates the reduction over the time period.
+        // Footnote 2: 'Ionophore' refers to monensin. The effect of ionophores is reduced over time. This calculation prorates the reduction over the time period.
         // Footnote 3 : Up to 6% added fat possible.
 
         #endregion

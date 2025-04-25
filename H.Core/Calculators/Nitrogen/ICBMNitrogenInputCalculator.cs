@@ -58,99 +58,99 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         /// <returns>Above ground residue N (kg N ha^-1)</returns>
         public double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(
-            CropViewItem currentYearViewItem,
-            CropViewItem previousYearViewItem)
+            CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem)
         {
-            if (previousYearViewItem == null)
+            if (currentYearViewItem == null)
             {
                 return 0;
             }
 
+            var result = 0d;
+
             var nitrogenContentOfGrainReturned = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: currentYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: currentYearViewItem.NitrogenContentInProduct);
 
             var nitrogenContentOfStrawReturned = this.CalculateNitrogenContentStrawReturnedToSoil(
-                carbonInputFromStraw: previousYearViewItem.CarbonInputFromStraw,
-                nitrogenConcentrationInStraw: previousYearViewItem.NitrogenContentInStraw);
+                carbonInputFromStraw: currentYearViewItem.CarbonInputFromStraw,
+                nitrogenConcentrationInStraw: currentYearViewItem.NitrogenContentInStraw);
 
-            var cropType = previousYearViewItem.CropType;
+            var cropType = currentYearViewItem.CropType;
 
             if (cropType.IsAnnual() || cropType.IsPerennial())
             {
-                return nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned;
+                result = (nitrogenContentOfGrainReturned + nitrogenContentOfStrawReturned);
             }
 
             if (cropType.IsRootCrop())
             {
-                return nitrogenContentOfStrawReturned;
+                result = nitrogenContentOfStrawReturned;
             }
 
             if (cropType.IsCoverCrop() || cropType.IsSilageCrop())
             {
-                return nitrogenContentOfGrainReturned;
+                result = nitrogenContentOfGrainReturned;
             }
 
-            // Fallow
-            return 0;
+            return result;
         }
 
         /// <summary>
         /// Equation 2.6.5-8
-        /// Equation 2.6.2-6
         /// Equation 2.7.2-4
         /// Equation 2.7.2-6
         /// Equation 2.7.2-8
         /// Equation 2.7.2-10
         /// </summary>
         /// <returns>Below ground residue N (kg N ha^-1)</returns>
-        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(
-            CropViewItem currentYearViewItem,
+        public double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem)
         {
-            if (previousYearViewItem == null)
+            if (currentYearViewItem == null)
             {
                 return 0;
             }
 
+            var result = 0d;
+
             var grainNitrogen = this.CalculateNitrogenContentGrainReturnedToSoil(
-                carbonInputFromProduct: previousYearViewItem.CarbonInputFromProduct,
-                nitrogenConcentrationInProduct: previousYearViewItem.NitrogenContentInProduct);
+                carbonInputFromProduct: currentYearViewItem.CarbonInputFromProduct,
+                nitrogenConcentrationInProduct: currentYearViewItem.NitrogenContentInProduct);
 
             var rootNitrogen = this.CalculateNitrogenContentRootReturnedToSoil(
-                carbonInputFromRoots: previousYearViewItem.CarbonInputFromRoots,
-                nitrogenConcentrationInRoots: previousYearViewItem.NitrogenContentInRoots);
+                carbonInputFromRoots: currentYearViewItem.CarbonInputFromRoots,
+                nitrogenConcentrationInRoots: currentYearViewItem.NitrogenContentInRoots);
 
             var exudateNitrogen = this.CalculateNitrogenContentExaduatesReturnedToSoil(
-                carbonInputFromExtraroots: previousYearViewItem.CarbonInputFromExtraroots,
-                nitrogenConcentrationInExtraroots: previousYearViewItem.NitrogenContentInExtraroot);
+                carbonInputFromExtraroots: currentYearViewItem.CarbonInputFromExtraroots,
+                nitrogenConcentrationInExtraroots: currentYearViewItem.NitrogenContentInExtraroot);
 
-            var cropType = previousYearViewItem.CropType;
+            var cropType = currentYearViewItem.CropType;
 
             // Equation 2.5.6-7
             if (cropType.IsAnnual())
             {
-                return rootNitrogen + exudateNitrogen;
+                result = rootNitrogen + exudateNitrogen;
             }
 
             // Equation 2.5.6-8
-            // Equation 2.6.2-6
             if (cropType.IsPerennial())
             {
-                return rootNitrogen + exudateNitrogen;
+                result =rootNitrogen + exudateNitrogen;
             }
 
             if (cropType.IsRootCrop())
             {
-                return grainNitrogen + exudateNitrogen;
+                result = grainNitrogen + exudateNitrogen;
             }
 
             if (cropType.IsSilageCrop() || cropType.IsCoverCrop())
             {
-                return rootNitrogen + exudateNitrogen;
+                result = rootNitrogen + exudateNitrogen;
             }
 
-            return 0;
+            return result;
         }
 
         #endregion

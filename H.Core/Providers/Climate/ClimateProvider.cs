@@ -171,6 +171,11 @@ namespace H.Core.Providers.Climate
             };
         }
 
+        public ClimateData GetClimateData(int polygonId, TimeFrame timeFrame)
+        {
+            return _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
+        }
+
         /// <summary>
         /// Called when user changes the time frame in user settings. Normals must be recalculated in this situation.
         /// </summary>

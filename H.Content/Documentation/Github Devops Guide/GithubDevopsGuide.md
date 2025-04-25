@@ -58,7 +58,11 @@ To clone the Holos repository from Azure DevOps Server, we will use Visual Studi
 1. Start visual studio and click on "Clone Repository."
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure1.png"  />
+    <img src="../../Images/GitHubDevopsGuide/en/figure1.png"  />
+    <br>
+    <em>
+		Figure 1 - Visual Studio, Cloning repository in Visual Studio
+	</em>
 </p>
 
 <br>
@@ -66,7 +70,11 @@ To clone the Holos repository from Azure DevOps Server, we will use Visual Studi
 2. Select a "**Path**" location for where you want to store the repository locally. After selecting your path, click on "Azure DevOps.”
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure2.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure2.png" />
+    <br>
+    <em>
+		Figure 2 - Visual Studio, Selecting local path 
+	</em>
 </p>
 
 <br>
@@ -74,7 +82,11 @@ To clone the Holos repository from Azure DevOps Server, we will use Visual Studi
 3. In the new window that shows up, select "**Holos 4**" and click on "**Connect**".
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure3.png"  />
+    <img src="../../Images/GitHubDevopsGuide/en/figure3.png"  />
+    <br>
+    <em>
+		Figure 3 - Visual Studio, Selecting remote repository
+	</em>
 </p>
 
 <br>
@@ -86,14 +98,22 @@ To clone the Holos repository from Azure DevOps Server, we will use Visual Studi
 * In this new tab, right click on "**Holos 4**" and select "**Get Latest Version**".
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure4.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure4.png" />
+    <br>
+    <em>
+		Figure 4 - Visual Studio, Team explorer tab
+	</em>
 </p>
 
 
 Visual studio will now copy the online repository to your local machine.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure5.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure5.png" />
+    <br>
+    <em>
+		Figure 5 - Visual Studio, Pulling remote repository
+	</em>
 </p>
 
 
@@ -102,7 +122,11 @@ Visual studio will now copy the online repository to your local machine.
 5. You should now see a new "**Solutions**" section in the Team Explorer sidebar menu. Right click the "H.sln" file and open it.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure6.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure6.png" />
+    <br>
+    <em>
+		Figure 6 - Visual Studio, Opening H.sln
+	</em>
 </p>
 
 
@@ -126,14 +150,22 @@ Before pushing any changes to Azure DevOps, pull changes from the remote server 
 To get the latest version of the repository, right click the solution file and select `Get Latest Version (Recursive)`
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure35.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure35.png" />
+    <br>
+    <em>
+		Figure 35 - Visual Studio, Getting latest Version
+	</em>
 </p>
 
 
 The files that are updated will appear in the `Output` window. This can be accessed by clicking `View -> Output`. If you have the latest version of all files a message saying "**All files are up to date**" will appear.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure36.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure36.png" />
+    <br>
+    <em>
+		Figure 36 - Visual Studio, Updated files in output console
+	</em>
 </p>
 
 
@@ -145,7 +177,11 @@ The files that are updated will appear in the `Output` window. This can be acces
 - Changes can be committed to Azure DevOps by going to the `Team Explorer` tab in Visual Studio. Click on `Pending Changes` to view the files that have been edited and are waiting to be pushed.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure37.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure37.png" />
+    <br>
+    <em>
+		Figure 37 - Visual Studio, Pending changes view
+	</em>
 </p>
 
 
@@ -163,7 +199,11 @@ The files that are updated will appear in the `Output` window. This can be acces
 A message should pop-up asking you for confirmation to associate work items and push these changes. Select "Yes" to confirm.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure38.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure38.png" />
+    <br>
+    <em>
+		Figure 38 - Check-in Confirmation
+	</em>
 </p>
 
 
@@ -184,7 +224,11 @@ A message should pop-up asking you for confirmation to associate work items and 
 2. Open the tool and select "**Clone a repository from the Internet**".
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure8.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure8.png" />
+    <br>
+    <em>
+		Figure 8 - GitHub Desktop, Start screen
+	</em>
 </p>
 
 <br>
@@ -192,11 +236,19 @@ A message should pop-up asking you for confirmation to associate work items and 
 3. In the new window that pops up, click on the "URL" tab. Then enter your github repository's HTTPS web url and select a local path where the repository will be downloaded.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure8-2.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure8-2.png" />
+    <br>
+    <em>
+		Figure 8-2 - GitHub Desktop, Entering remote repository URL and local save path
+	</em>
 </p>
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure9.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure9.png" />
+    <br>
+    <em>
+		Figure 9 - Entering repository URL
+	</em>
 </p>
 
 <br>
@@ -204,11 +256,19 @@ A message should pop-up asking you for confirmation to associate work items and 
 Github will now create a local repository in the location specified.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure10.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure10.png" />
+    <br>
+    <em>
+		Figure 10 - Cloning Holos repository
+	</em>
 </p>
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure11.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure11.png" />
+    <br>
+    <em>
+		Figure 11 - Holos directory
+	</em>
 </p>
 
 <br>
@@ -219,20 +279,32 @@ Github will now create a local repository in the location specified.
 Open GitHub desktop and make sure that your current repository is set properly to `holos-aafc/Holos`.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure48.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure48.png" />
+    <br>
+    <em>
+		Figure 48 - GitHub Desktop, Setting current repository in GitHub Desktop 
+	</em>
 </p>
 
 Then click the `Fetch Origin` button to check if any changes are available to pull. 
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure49.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure49.png" />
+    <br>
+    <em>
+		Figure 49 - GitHub Desktop, Fetch origin
+	</em>
 </p>
 
 
 If some changes are available, you'll see a number denoting the amount of changes that need to be pulled and the previous fetch origins button will now say `Pull Origin`.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure50.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure50.png" />
+    <br>
+    <em>
+		Figure 50 - GitHub Desktop, Pull origin
+	</em>
 </p>
 
 Click the `pull origin` button to pull changes from the remote GitHub repository to your local folder.
@@ -245,21 +317,33 @@ Click the `pull origin` button to pull changes from the remote GitHub repository
 - After syncing your folders using FreeFileSync, open GitHub. On the left side, you'll see a list of files ready to be added to the next commit. Review changes and files as needed.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure52.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure52.png" />
+    <br>
+    <em>
+		Figure 52 - GitHub Desktop, Pending changes
+	</em>
 </p>
 
 
 - Add a comment and an optional description for this commit. Then click on `commit to main`.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure53.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure53.png" />
+    <br>
+    <em>
+		Figure 53 - GitHub Desktop, Commit comment
+	</em>
 </p>
 
 - Finally, click the `Push Origin` button to push the commit to the remote server.
 
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure54.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure54.png" />
+    <br>
+    <em>
+		Figure 54 - GitHub Desktop, Push origin
+	</em>
 </p>
 
 
@@ -283,31 +367,43 @@ FreeFileSync, therefore, allows us to:
 The documentation/manual for FreeFileSync is available [here.](https://freefilesync.org/manual.php?topic=freefilesync)
 
 
-The main interface of FreeFileSync
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure12.png" />
-</p>
-
-The comparison screen
-
-
-<p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure13.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure12.png" />
+    <br>
+    <em>
+		Figure 12 - FreeFileSync, Main interface
+	</em>
 </p>
 
 
-The filters screen
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure14.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure13.png" />
+    <br>
+    <em>
+		Figure 13 - FreeFileSync, Comparison screen
+	</em>
 </p>
 
 
-The synchronization screen
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure15.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure14.png" />
+    <br>
+    <em>
+		Figure 14 - FreeFileSync, Filters screen
+	</em>
+</p>
+
+
+
+<p align="center">
+    <img src="../../Images/GitHubDevopsGuide/en/figure15.png" />
+        <br>
+    <em>
+		Figure 15 - FreeFileSync, Synchronization screen
+	</em>
 </p>
 
 
@@ -320,7 +416,11 @@ Please make sure that you select the appropriate folders for the source and targ
 For this guide, we will use "**Compare File Content**" as the file comparison type and "**Two Way Synchronization**" as the synchronization type.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure12-2.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure12-2.png" />
+    <br>
+    <em>
+		Figure 12-2 - FreeFileSync, main interface
+	</em>
 </p>
 
 
@@ -330,23 +430,23 @@ For this guide, we will use "**Compare File Content**" as the file comparison ty
 
 FreeFileSync uses various icons to indicate the action the synchronization process will perform.
 
-* **Green Arrow** ![](../../Images/GitHubDevopsGuide/figure39.png): A green arrow indicates a file being updated in the target folder (GitHub). The direction of the arrow shows which file will be updated.
+* **Green Arrow** ![](../../Images/GitHubDevopsGuide/en/figure39.png): A green arrow indicates a file being updated in the target folder (GitHub). The direction of the arrow shows which file will be updated.
 
-* **Blue Arrow** ![](../../Images/GitHubDevopsGuide/figure40.png): A blue arrow indicates a file being updated in the source folder (Azure DevOps). The direction of the arrow shows which file will be updated.
+* **Blue Arrow** ![](../../Images/GitHubDevopsGuide/en/figure40.png): A blue arrow indicates a file being updated in the source folder (Azure DevOps). The direction of the arrow shows which file will be updated.
 
-* **Green Arrow with Plus Sign** ![](../../Images/GitHubDevopsGuide/figure41.png): A green arrow with a plus sign indicates a new file being added to the destination folder (on Github). The direction of the arrow shows which folder this file will be added to.
+* **Green Arrow with Plus Sign** ![](../../Images/GitHubDevopsGuide/en/figure41.png): A green arrow with a plus sign indicates a new file being added to the destination folder (on Github). The direction of the arrow shows which folder this file will be added to.
 
-* **Blue Arrow with Plus Sign** ![](../../Images/GitHubDevopsGuide/figure42.png): A blue arrow with a plus sign indicates a new file being added in the source folder (Azure DevOps). The direction of the arrow shows which folder this file will be added to.
+* **Blue Arrow with Plus Sign** ![](../../Images/GitHubDevopsGuide/en/figure42.png): A blue arrow with a plus sign indicates a new file being added in the source folder (Azure DevOps). The direction of the arrow shows which folder this file will be added to.
 
-* **Recycle Bin with Red Dash** ![](../../Images/GitHubDevopsGuide/figure43.png): A green recycle bin with a red dash indicates a file being deleted in the destination folder (GitHub). The specific file that is being deleted will also have a '**File Icon with a Red Dash**" icon next to the file name.
+* **Recycle Bin with Red Dash** ![](../../Images/GitHubDevopsGuide/en/figure43.png): A green recycle bin with a red dash indicates a file being deleted in the destination folder (GitHub). The specific file that is being deleted will also have a '**File Icon with a Red Dash**" icon next to the file name.
 
-* **Recycle Bin with Red Dash** ![](../../Images/GitHubDevopsGuide/figure44.png): A blue recycle bin with a red dash indicates a file being deleted in the source folder (Azure DevOps). The specific file that is being deleted will also have a '**File Icon with a Red Dash**" icon next to the file name.
+* **Recycle Bin with Red Dash** ![](../../Images/GitHubDevopsGuide/en/figure44.png): A blue recycle bin with a red dash indicates a file being deleted in the source folder (Azure DevOps). The specific file that is being deleted will also have a '**File Icon with a Red Dash**" icon next to the file name.
 
-* **A Grayed out Dash** ![](../../Images/GitHubDevopsGuide/figure45.png): A grayed-out dash indicates no change is occurring with a file.
+* **A Grayed out Dash** ![](../../Images/GitHubDevopsGuide/en/figure45.png): A grayed-out dash indicates no change is occurring with a file.
 
-* **An Equal Sign** ![](../../Images/GitHubDevopsGuide/figure46.png): Indicates that two files are equal
+* **An Equal Sign** ![](../../Images/GitHubDevopsGuide/en/figure46.png): Indicates that two files are equal
 
-* **A Not Equal Sign or Lightning Bolt Sign** ![](../../Images/GitHubDevopsGuide/figure47.png): Indicates that two files are not equal and a conflict exists. Some action needs to be taken to resolve the conflict. This usually happens when a file is edited in both the source and destination folders. A quick way to resolve this conflict is to ensure you have the latest version of the file in both GitHub and Azure DevOps (pull changes from remote in each). Most conflicts are resolved by pulling the latest file version from their respective sources.
+* **A Not Equal Sign or Lightning Bolt Sign** ![](../../Images/GitHubDevopsGuide/en/figure47.png): Indicates that two files are not equal and a conflict exists. Some action needs to be taken to resolve the conflict. This usually happens when a file is edited in both the source and destination folders. A quick way to resolve this conflict is to ensure you have the latest version of the file in both GitHub and Azure DevOps (pull changes from remote in each). Most conflicts are resolved by pulling the latest file version from their respective sources.
 
 
 <br>
@@ -371,7 +471,11 @@ After pulling changes from each remote server, open FreeFileSync. In FFS:
 
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure51.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure51.png" />
+    <br>
+    <em>
+		Figure 51 - FreeFileSync, Synchronizing changes of two local folders
+	</em>
 </p>
 
 
@@ -390,20 +494,32 @@ This section shows how to handle synchronization between the two repositories wh
 1. Create a new file inside Visual Studio. This change should appear in the **Pending Changes** section of the Team Explorer right sidebar.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure16.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure16.png" />
+    <br>
+    <em>
+		Figure 16 - Visual Studio, Creating new file for Azure DevOps Server
+	</em>
 </p>
 
 
 2. Open FreeFileSync and click on "**Compare**".
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure17.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure17.png" />
+    <br>
+    <em>
+		Figure 17 - FreeFileSync, Comparing directories
+	</em>
 </p>
 
 3. That file that was just created in visual studio should now appear in FreeFileSync.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure18.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure18.png" />
+    <br>
+    <em>
+		Figure 18 - FreeFileSync, Comparing directories
+	</em>
 </p>
 
 
@@ -412,27 +528,43 @@ Note the section that is marked red in the above image. This section represents 
 4. Click on **synchronize** to copy this file to the target folder.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure19.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure19.png" />
+    <br>
+    <em>
+		Figure 19 - FreeFileSync, Synchronizing directories
+	</em>
 </p>
 
 
 5. A pop-op will now appear showing the summary of the changes. In this example, one file will be created in the target folder. Click on start to begin the synchronization process.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure20.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure20.png" />
+    <br>
+    <em>
+		Figure 20 - FreeFileSync, Comparing directories
+	</em>
 </p>
 
 
 6. After the sync process finishes, a new pop-up will appear showing the log and the overall progress.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure21.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure21.png" />
+    <br>
+    <em>
+		Figure 21 - FreeFileSync, Successful synchronization
+	</em>
 </p>
 
 7. The file should now appear in the Github Desktop tool and can be pushed online to the github repository.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure22.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure22.png" />
+    <br>
+    <em>
+		Figure 22 - Github Desktop, Created files appearing in Github Desktop
+	</em>
 </p>
 
 
@@ -446,21 +578,33 @@ The file creation process works similarly for files created on Github or new fil
 1. Create or push files to Github.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure23.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure23.png" />
+    <br>
+    <em>
+		Figure 23 - Creating a new file in GitHub
+	</em>
 </p>
 
 
 2. In your local Github Desktop client, click on Fetch Origin to fetch the changes.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure24.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure24.png" />
+    <br>
+    <em>
+		Figure 24 - GitHub Desktop, Fetch Origin
+	</em>
 </p>
 
 
 3. After that click on **Pull Origin** to pull the changes to the local machine.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure25.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure25.png" />
+    <br>
+    <em>
+		Figure 25 - GitHub Desktop, Pull Origin
+	</em>
 </p>
 
 
@@ -468,7 +612,11 @@ The file creation process works similarly for files created on Github or new fil
 4. Open FreeFileSync and click on Compare. The new file should now appear in the window.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure26.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure26.png" />
+    <br>
+    <em>
+		Figure 26 - FreeFileSync, Comparing directories
+	</em>
 </p>
 
 
@@ -481,7 +629,11 @@ If a file is created outside of Visual Studio, it does not directly appear in th
 
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure27.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure27.png" />
+    <br>
+    <em>
+		Figure 27 - Visual Studio, Adding files to Visual Studios Pending Changes 
+	</em>
 </p>
 
 
@@ -489,14 +641,22 @@ If a file is created outside of Visual Studio, it does not directly appear in th
 6. Select the file that was just copied over and click on **Promote**.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure28.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure28.png" />
+    <br>
+    <em>
+		Figure 28 - Promoting pending changes
+	</em>
 </p>
 
 
 7. The file should now appear under the **Included Changes** section of **Pending Changes**.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure29.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure29.png" />
+    <br>
+    <em>
+		Figure 29 - Visual Studio, Included changes
+	</em>
 </p>
 
 
@@ -518,7 +678,11 @@ File deletion are handled almost identically to file creation. Follow the same s
 2. Open FreeFileSync and click on **Compare**.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure30.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure30.png" />
+    <br>
+    <em>
+		Figure 30 - FreeFileSync, Comparing directories for deleted Visual Studio files
+	</em>
 </p>
 
 
@@ -537,7 +701,11 @@ As Visual Studio deleted the file in the source folder, the sync process will de
 2. Open FreeFileSync and click on **Compare**.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure31.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure31.png" />
+    <br>
+    <em>
+		Figure 31 - FreeFileSync, Comparing directories for deleted GitHub files 
+	</em>
 </p>
 
 
@@ -561,7 +729,11 @@ File conflicts can occur when a file in either directory is changed. This can be
 In this example a file's name is changed in visual studio and all references of that file is edited throughout the Azure Devops repository.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure32.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure32.png" />
+        <br>
+    <em>
+		Figure 32 - FreeFileSync, Comparing directories after editing file name
+	</em>
 </p>
 
 
@@ -577,7 +749,11 @@ In this example a file's name is changed in visual studio and all references of 
 In this example a number of files are changed in github and the changed files are pulled into the local github repository.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure33.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure33.png" />
+    <br>
+    <em>
+		Figure 33 - FreeFileSync, Viewing changed GitHub files
+	</em>
 </p>
 
 
@@ -590,7 +766,11 @@ In this example a number of files are changed in github and the changed files ar
 4. Click on synchronized to sync the changes.
 
 <p align="center">
-    <img src="../../Images/GitHubDevopsGuide/figure34.png" />
+    <img src="../../Images/GitHubDevopsGuide/en/figure34.png" />
+    <br>
+    <em>
+		Figure 34 - Visual Studio, Pending Changes
+	</em>
 </p>
 
 5. These files should now appear in Visual Studio in the **Pending Changes** section.

@@ -20,7 +20,7 @@ namespace H.Core.Providers.Animals
     {
         #region Fields
 
-        private readonly AnimalTypeStringConverter _animalTypeStringConverter;
+        private static AnimalTypeStringConverter _animalTypeStringConverter;
 
         #endregion
 
@@ -29,16 +29,20 @@ namespace H.Core.Providers.Animals
         /// <summary>
         /// A list containing all the data read from the .csv file for Table_41.
         /// </summary>
-        public List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> PoultryParameterValueData { get;  }
+        public static List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> PoultryParameterValueData { get;  }
 
         #endregion
 
         #region Constructor
 
-        public Table_41_Poultry_NExcretionRate_Parameter_Values_Provider()
+        static Table_41_Poultry_NExcretionRate_Parameter_Values_Provider()
         {
             _animalTypeStringConverter = new AnimalTypeStringConverter();
             PoultryParameterValueData = ReadFile();
+        }
+
+        public Table_41_Poultry_NExcretionRate_Parameter_Values_Provider()
+        {
         }
 
         #endregion
@@ -69,7 +73,12 @@ namespace H.Core.Providers.Animals
 
         #region Private Methods
 
-        private List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> ReadFile()
+        public List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data>  GetData()
+        {
+            return PoultryParameterValueData;
+        }
+
+        private static List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> ReadFile()
         {
             var fileData = new List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data>();
             IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.PoultryNExcretionParameterValues);

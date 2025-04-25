@@ -36,18 +36,18 @@ namespace H.Core.Services.Initialization.Crops
         private readonly Table_7_Relative_Biomass_Information_Provider _relativeBiomassInformationProvider;
         private readonly ICBMCarbonInputCalculator _icbmCarbonInputCalculator;
         private readonly EconomicsHelper _economicsHelper;
-        private readonly CropEconomicsProvider _economicsProvider;
-        private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider;
         private readonly IICBMNitrogenInputCalculator _icbmNitrogenInputCalculator;
         private readonly NitogenFixationProvider _nitrogenFixationProvider;
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable;
-        private readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
         private readonly IrrigationService _irrigationService;
-        private readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
         private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
         private readonly IManureService _manureService;
 
         private static readonly SmallAreaYieldProvider _smallAreaYieldProvider;
+        private static readonly CropEconomicsProvider _economicsProvider;
+        private static readonly Table_51_Herbicide_Energy_Estimates_Provider _herbicideEnergyEstimatesProvider;
+        private static readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider;
+        private static readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
 
         private readonly IMapper _soilDataMapper;
 
@@ -59,6 +59,11 @@ namespace H.Core.Services.Initialization.Crops
         {
             _smallAreaYieldProvider = new SmallAreaYieldProvider();
             _smallAreaYieldProvider.Initialize();
+
+            _economicsProvider = new CropEconomicsProvider();
+            _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
+            _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
+            _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
         }
 
         public CropInitializationService()
@@ -70,14 +75,10 @@ namespace H.Core.Services.Initialization.Crops
             _ecodistrictDefaultsProvider = new EcodistrictDefaultsProvider();
             _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
             _economicsHelper = new EconomicsHelper();
-            _economicsProvider = new CropEconomicsProvider();
-            _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
             _icbmNitrogenInputCalculator = new ICBMNitrogenInputCalculator();
             _nitrogenFixationProvider = new NitogenFixationProvider();
             _slopeProviderTable = new Table_9_Nitrogen_Lignin_Content_In_Crops_Provider();
-            _herbicideEnergyEstimatesProvider = new Table_51_Herbicide_Energy_Estimates_Provider();
             _irrigationService = new IrrigationService();
-            _fuelEnergyEstimatesProvider = new Table_50_Fuel_Energy_Estimates_Provider();
             _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
             _manureService = new ManureService();
 

@@ -58,7 +58,7 @@ namespace H.Core.Services.Animals
                 var housingTemperature = temperature;
                 if (managementPeriod.AnimalType.IsDairyCattleType())
                 {
-                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false)
+                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false && farm.ClimateData.BarnTemperatureData != null)
                     {
                         var month = (Months) dateTime.Month;
                         housingTemperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
@@ -77,7 +77,7 @@ namespace H.Core.Services.Animals
             else
             {
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentNoBarn(
-                    averageMonthlyTemperature: temperature);
+                    temperature: temperature);
             }
 
             var ammoniaEmissionFactorForHousingType = _defaultEmissionFactorsProvider.GetEmissionFactorByHousing(
@@ -93,7 +93,7 @@ namespace H.Core.Services.Animals
                 tanExcretion: dailyEmissions.TanExcretion,
                 ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
 
-            var adjustedAmountOfTanFlowingIntoStorageEachDay = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
+            dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
                 tanEnteringStorageSystem: dailyEmissions.TanEnteringStorageSystem,
                 fractionOfTanImmobilizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
                 fractionOfTanNitrifiedDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
@@ -106,7 +106,7 @@ namespace H.Core.Services.Animals
                 if (animalGroup.GroupType.IsBeefCattleType())
                 {
                     dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(
-                        averageMonthlyTemperature: temperature);
+                        temperature: temperature);
                 }
                 else
                 {
@@ -125,14 +125,14 @@ namespace H.Core.Services.Animals
                 ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
 
             dailyEmissions.AmmoniaLostFromStorage = base.CalculateAmmoniaLossFromStoredManure(
-                adjustedAmountOfTanFlowingIntoStorageEachDay,
+                dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay,
                 dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = CoreConstants.ConvertToNH3(
                 amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = this.CalculateAdjustedAmountOfTANEnteringStorage(
-                amountOfTANFlowingIntoStorageEachDay: adjustedAmountOfTanFlowingIntoStorageEachDay, 
+                amountOfTANFlowingIntoStorageEachDay: dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay, 
                 adjustedAmmoniaLossFromStorage: dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.AccumulatedTanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
@@ -210,17 +210,17 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.2-3
         /// </summary>
-        /// <param name="averageMonthlyTemperature">Average monthly temperature (°C)</param>
+        /// <param name="temperature">Average daily outdoor temperature (°C)</param>
         /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</returns>
-        public double CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(double averageMonthlyTemperature)
+        public double CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(double temperature)
         {
-            return Math.Pow(1.041, averageMonthlyTemperature + 2) / Math.Pow(1.041, 15);
+            return Math.Pow(1.041, temperature + 2) / Math.Pow(1.041, 15);
         }
 
         /// <summary>
         /// Equation 4.3.2-4
         /// </summary>
-        /// <param name="temperature">Average daily temperature (degrees Celsius)</param>
+        /// <param name="temperature">Average daily outdoor temperature (°C)</param>
         /// <returns>Temperature adjustment for solid manure</returns>
         public double CalculateTemperatureAdjustmentForDairyCattleSolidStoredManure(double temperature)
         {
@@ -230,7 +230,7 @@ namespace H.Core.Services.Animals
         /// <summary>
         /// Equation 4.3.2-5
         /// </summary>
-        /// <param name="temperature">Average daily temperature (degrees Celsius)</param>
+        /// <param name="temperature">Average daily outdoor temperature (°C)</param>
         /// <returns>Temperature adjustment for liquid manure</returns>
         public double CalculateStorageTemperatureAdjustmentForLiquidManure(double temperature)
         {

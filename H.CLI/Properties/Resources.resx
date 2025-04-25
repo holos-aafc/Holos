@@ -1469,4 +1469,7 @@ Would you like to continue using this directory?</value>
   <data name="AmmoniaEmissionFactor" xml:space="preserve">
     <value />
   </data>
+  <data name="IndoorBarnTemperature" xml:space="preserve">
+    <value>Indoor Barn Temperature</value>
+  </data>
 </root>

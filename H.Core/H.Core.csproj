@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <Compile Include="Enumerations\CalculationMode.cs" />
     <Compile Include="Calculators\Carbon\CarbonService.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.Nitrogen.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Enumerations\HousingTypeExtensions.cs" />
     <Compile Include="Enumerations\Languages.cs" />
     <Compile Include="Enumerations\ManureAnimalSourceTypeExtension.cs" />
+    <Compile Include="Enumerations\ManureApplicationViewItemExtensions.cs" />
     <Compile Include="Enumerations\ManureStateTypeExtensions.cs" />
     <Compile Include="Enumerations\IngredientType.cs" />
     <Compile Include="Enumerations\IrrigationMethodType.cs" />
@@ -257,6 +259,7 @@
     <Compile Include="Enumerations\YieldAssignmentMethod.cs" />
     <Compile Include="Events\FarmResultsCalculatedEvent.cs" />
     <Compile Include="Events\FarmResultsCalculatedEventArgs.cs" />
+    <Compile Include="Models\AdjoiningYears.cs" />
     <Compile Include="Models\Animals\AnimalComponentBase.cs" />
     <Compile Include="Models\Animals\AnimalGroup.cs" />
     <Compile Include="Models\Animals\Beef\BackgroundingComponent.cs" />
@@ -315,6 +318,7 @@
     <Compile Include="Models\LandManagement\Fields\BaleActivityBase.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Digestate.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItem.Perennial.cs" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItemExtensions.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\IPCCTier2Results.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureExportViewItem.cs" />

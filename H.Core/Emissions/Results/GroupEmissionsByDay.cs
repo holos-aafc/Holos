@@ -1695,7 +1695,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
         ///
-        /// (kg NH3)
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaEmissionsFromHousingAndStorage
         {
@@ -1706,7 +1706,7 @@ namespace H.Core.Emissions.Results
         /// <summary>
         /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
         ///
-        /// (kg N)
+        /// (kg NH3-N)
         /// </summary>
         public double TotalNitrogenLossesFromHousingAndStorage
         {
@@ -1822,6 +1822,19 @@ namespace H.Core.Emissions.Results
             get => _nonAccumulatedNitrogenEnteringPoolAvailableInStorage;
             set => SetProperty(ref _nonAccumulatedNitrogenEnteringPoolAvailableInStorage, value);
         }
+
+        /// <summary>
+        /// (degrees kelvin)
+        /// </summary>
+        public double AverageTemperatureOverLast30Days { get; set; }
+
+        public double VolatilizationFractionForHousing { get; set; }
+        public double VolatilizationEmissionsFromHousing { get; set; }
+        public double AmmoniaHousingAdjustment { get; set; }
+        public double AdjustedAmountOfTanFlowingIntoStorageEachDay { get; set; }
+        public double VolatilizationForStorage { get; set; }
+        public double AmmoniaLossFromStorage { get; set; }
+        public double AdjustedAmmoniaLossFromStorage { get; set; }
 
         #endregion
     }

@@ -104,6 +104,9 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public double MineralNBalance { get; set; }
 
+        public double YoungPoolAboveGroundResidueN { get; set; }
+        public double YoungPoolBelowGroundResidueN { get; set; }
+
         /// <summary>
         /// N_microbeN - Interannual N balance in the microbe overflow pool on the field
         ///
@@ -382,7 +385,10 @@ namespace H.Core.Calculators.Carbon
             this.CurrentYearResults.N_min_FromDecompositionOfOldCarbon = this.MineralPool;
         }
 
-        protected void CalculateDirectNitrousOxide(CropViewItem currentYearResults, Farm farm)
+        protected void CalculateDirectNitrousOxide(
+            CropViewItem currentYearResults, 
+            Farm farm,
+            CropViewItem previousYearResults)
         {
             var emissionFactorForSyntheticFertilizer = N2OEmissionFactorCalculator.CalculateSyntheticNitrogenEmissionFactor(currentYearResults, farm);
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
@@ -402,13 +408,21 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.7.4-1
             this.N2O_NFromSyntheticFertilizer = this.SyntheticNitrogenPool * emissionFactorForSyntheticFertilizer;
 
+            var ipccInputs = previousYearResults != null ? previousYearResults.CombinedResidueNitrogen() : 0;
+            var icbmInputs = this.CurrentYearResults.CropResiduesBeforeAdjustment;
+
+            // Only IPCC uses previous year inputs, not ICBM
+            var residueInputs = farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.ICBM
+                ? icbmInputs
+                : ipccInputs;
+
             // Equation 2.6.5-2
             // Equation 2.7.4-2
-            this.N2O_NFromResidues = this.CropResiduePool * emissionFactorForCropResidues;
+            this.N2O_NFromResidues =  residueInputs * emissionFactorForCropResidues;
 
             // Equation 2.6.5-3
             // Equation 2.7.4-3
-            this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(currentYearResults, farm);
+            this.N2O_NFromExportedCropResidues = N2OEmissionFactorCalculator.CalculateN2OFromCropResidueExports(previousYearResults, farm);
 
             // Equation 2.6.5-4
             // Equation 2.7.4-4
@@ -782,9 +796,10 @@ namespace H.Core.Calculators.Carbon
             this.CalculateActualVolatilization(volatilizationFractionSoil, emissionFactorForVolatilization, farm);
         }
 
-        protected void CalculateDirectEmissions(Farm farm, CropViewItem currentYearResults)
+        protected void CalculateDirectEmissions(Farm farm, CropViewItem currentYearResults,
+            CropViewItem previousYearResults)
         {
-            this.CalculateDirectNitrousOxide(currentYearResults, farm);
+            this.CalculateDirectNitrousOxide(currentYearResults, farm, previousYearResults);
             this.CalculateNitricOxide(farm.Defaults.NORatio);
         }
 
@@ -1050,6 +1065,8 @@ namespace H.Core.Calculators.Carbon
 
         protected virtual void AssignFinalValues()
         {
+            this.CurrentYearResults.YoungPoolAboveGroundResidueN = this.YoungPoolAboveGroundResidueN;
+            this.CurrentYearResults.YoungPoolBelowGroundResidueN = this.YoungPoolBelowGroundResidueN;
             this.CurrentYearResults.MicrobeDeath = this.MicrobeDeathPool;
             this.CurrentYearResults.MineralizedNitrogenPool_N_min = this.MineralPool;
             this.CurrentYearResults.OrganicNitrogenPool_N_ON = this.OrganicPool;

@@ -75,7 +75,6 @@ namespace H.CLI.Results
             var manureService = new ManureService();
 
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService, n2OEmissionFactorCalculator );
-            _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms);
         }
 
         #endregion
@@ -87,11 +86,14 @@ namespace H.CLI.Results
         /// </summary>
         public void ProcessFarms(Storage storage)
         {
+            var results = new List<FarmEmissionResults>();
+
             // Change ordering here
             var orderedFarms = storage.ApplicationData.Farms.OrderBy(x => x.Name);
             foreach (var farm in orderedFarms)
             {
                 var farmResults = _farmResultsService.CalculateFarmEmissionResults(farm);
+                results.Add(farmResults);
 
                 var key = farm.Name + "_" + farm.SettingsFileName + "_";
 
@@ -100,7 +102,7 @@ namespace H.CLI.Results
                 // TODO: Add emission results from fields and shelterbelts
             }
 
-            _farmEmissionResults = _farmResultsService.CalculateFarmEmissionResults(storage.ApplicationData.Farms.OrderBy(farm => farm.Name));
+            _farmEmissionResults = results;
         }
 
         /// <summary>

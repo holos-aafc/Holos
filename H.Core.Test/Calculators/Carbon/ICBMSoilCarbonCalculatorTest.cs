@@ -197,7 +197,7 @@ namespace H.Core.Test.Calculators.Carbon
             cropViewItem.ManagementFactor = 1;
             cropViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
 
-            _soilCarbonInputCalculator.CalculateInputs(null, cropViewItem, null, farm);
+            _soilCarbonInputCalculator.AssignInputs(null, cropViewItem, null, farm);
 
             // ICBM uses the previous year's inputs for residue calculations so we use the view item for both the current year and the previous year
             _sut.CalculateNitrogenAtInterval(cropViewItem, cropViewItem, null, farm, 0);

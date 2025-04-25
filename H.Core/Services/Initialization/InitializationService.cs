@@ -402,6 +402,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent, animalGroup, cropViewItem);
         }
 
+        public void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContent(viewItem, farm);
+        }
+
 
         public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {

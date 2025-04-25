@@ -178,7 +178,7 @@ namespace H.Core
 
         /// <summary>
         /// Equation 2.6.9-30
-        /// Equation 4.9.6-2 (verify)
+        /// Equation 4.9.6-2
         /// </summary>
         public static double ConvertToNH3(double amountOfNH3N)
         {
@@ -202,6 +202,11 @@ namespace H.Core
         public static double ConvertToC(double amountOfCH4)
         {
             return amountOfCH4 * ConvertCH4ToC;
+        }
+
+        public static bool IsWetClimate(double precipitation, double evapotranspiration)
+        {
+            return precipitation >= evapotranspiration;
         }
 
         #endregion

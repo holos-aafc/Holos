@@ -61,7 +61,7 @@ namespace H.Core.Calculators.Carbon
                 oldCarbonNitrogen: farm.Defaults.OldPoolCarbonN);
 
             base.TotalInputsBeforeReductions();
-            base.CalculateDirectEmissions(farm, currentYearResults);
+            base.CalculateDirectEmissions(farm, currentYearResults, previousYearResults);
             base.CalculateIndirectEmissions(farm, currentYearResults);
             base.AdjustPools();
             base.CloseNitrogenBudget(currentYearResults);
@@ -126,7 +126,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.2-3
+        /// Equation 2.6.2-5
         /// </summary>
         /// <param name="aboveGroundResidueNitrogenForFieldAtPreviousInterval"></param>
         /// <param name="aboveGroundResidueNitrogenForCropAtPreviousInterval"></param>
@@ -163,7 +163,7 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
-        /// Equation 2.6.2-7
+        /// Equation 2.6.2-5
         /// </summary>
         /// <param name="belowGroundResidueNitrogenForFieldAtPreviousInterval"></param>
         /// <param name="belowGroundResidueNitrogenForCropAtPreviousInterval"></param>
@@ -247,23 +247,27 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// Equation 2.6.4-2
         /// </summary>
-        /// <param name="aboveGroundResidueNitrogenForFieldAtCurrentInterval"></param>
-        /// <param name="aboveGroundResidueNitrogenForFieldAtPreviousInterval"></param>
-        /// <param name="aboveGroundResidueNitrogenForCropAtPreviousInterval"></param>
-        /// <param name="belowGroundResidueNitrogenForFieldAtCurrentInterval"></param>
-        /// <param name="belowGroundResidueNitrogenForFieldAtPreviousInterval"></param>
-        /// <param name="belowGroundResidueNitrogenForCropAtPreviousInterval"></param>
+        /// <param name="aboveGroundResiduePoolNitrogenAtPreviousInterval"></param>
+        /// <param name="aboveGroundResiduePoolNitrogenAtCurrentInterval"></param>
+        /// <param name="grainAndStrawN"></param>
+        /// <param name="rootAndExudateN"></param>
+        /// <param name="belowGroundResiduePoolNitrogenAtPreviousInterval"></param>
+        /// <param name="belowGroundResiduePoolNitrogenAtCurrentInterval"></param>
         /// <returns>Availability of N from residue decomposition (kg N ha-1) on a given field</returns>
         public double CalculateCropResiduesAtInterval(
-            double aboveGroundResidueNitrogenForFieldAtCurrentInterval,
-            double aboveGroundResidueNitrogenForFieldAtPreviousInterval,
-            double aboveGroundResidueNitrogenForCropAtPreviousInterval,
-            double belowGroundResidueNitrogenForFieldAtCurrentInterval,
-            double belowGroundResidueNitrogenForFieldAtPreviousInterval,
-            double belowGroundResidueNitrogenForCropAtPreviousInterval)
+            double aboveGroundResiduePoolNitrogenAtPreviousInterval,
+            double aboveGroundResiduePoolNitrogenAtCurrentInterval,
+            double grainAndStrawN,
+            double rootAndExudateN,
+            double belowGroundResiduePoolNitrogenAtPreviousInterval,
+            double belowGroundResiduePoolNitrogenAtCurrentInterval)
         {
-            var result = ((aboveGroundResidueNitrogenForFieldAtPreviousInterval + aboveGroundResidueNitrogenForCropAtPreviousInterval) - aboveGroundResidueNitrogenForFieldAtCurrentInterval) +
-                         ((belowGroundResidueNitrogenForFieldAtPreviousInterval + belowGroundResidueNitrogenForCropAtPreviousInterval) - belowGroundResidueNitrogenForFieldAtCurrentInterval);
+            var result = (aboveGroundResiduePoolNitrogenAtPreviousInterval - aboveGroundResiduePoolNitrogenAtCurrentInterval - grainAndStrawN) + 
+                         (belowGroundResiduePoolNitrogenAtPreviousInterval - belowGroundResiduePoolNitrogenAtCurrentInterval + rootAndExudateN);
+            if (result < 0)
+            {
+                result = 0;
+            }
 
             return result;
         }
@@ -337,13 +341,19 @@ namespace H.Core.Calculators.Carbon
                     climateManagementFactor: climateParameterOrManagementFactor,
                     decompositionRateYoungPool: farm.Defaults.DecompositionRateConstantYoungPool);
 
+                // Equation 2.6.2-3
+                this.YoungPoolAboveGroundResidueN = this.AboveGroundResidueN + base.CurrentYearResults.CombinedAboveGroundResidueNitrogen;
+
+                // Equation 2.6.2-6
+                this.YoungPoolBelowGroundResidueN = base.BelowGroundResidueN + base.CurrentYearResults.CombinedBelowGroundResidueNitrogen;
+
                 base.CropResiduePool = this.CalculateCropResiduesAtInterval(
-                    aboveGroundResidueNitrogenForFieldAtCurrentInterval: base.CurrentYearResults.AboveGroundResiduePool_AGresidueN,
-                    aboveGroundResidueNitrogenForFieldAtPreviousInterval: base.PreviousYearResults.AboveGroundResiduePool_AGresidueN,
-                    aboveGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.CombinedAboveGroundResidueNitrogen,
-                    belowGroundResidueNitrogenForFieldAtCurrentInterval: base.CurrentYearResults.BelowGroundResiduePool_BGresidueN,
-                    belowGroundResidueNitrogenForFieldAtPreviousInterval: base.PreviousYearResults.BelowGroundResiduePool_BGresidueN,
-                    belowGroundResidueNitrogenForCropAtPreviousInterval: base.PreviousYearResults.CombinedBelowGroundResidueNitrogen);
+                    aboveGroundResiduePoolNitrogenAtPreviousInterval: this.PreviousYearResults.YoungPoolAboveGroundResidueN,
+                    aboveGroundResiduePoolNitrogenAtCurrentInterval: this.YoungPoolAboveGroundResidueN,
+                    grainAndStrawN: base.CurrentYearResults.CombinedAboveGroundResidueNitrogen,
+                    rootAndExudateN: base.CurrentYearResults.CombinedBelowGroundResidueNitrogen,
+                    belowGroundResiduePoolNitrogenAtPreviousInterval: base.PreviousYearResults.YoungPoolBelowGroundResidueN,
+                    belowGroundResiduePoolNitrogenAtCurrentInterval: base.YoungPoolBelowGroundResidueN);
             }
 
             base.CurrentYearResults.CropResiduesBeforeAdjustment = base.CropResiduePool;

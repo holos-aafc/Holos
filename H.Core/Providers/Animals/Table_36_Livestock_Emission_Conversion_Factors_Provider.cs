@@ -514,7 +514,7 @@ namespace H.Core.Providers.Animals
 
         public double GetEmissionFactorForVolatilizationBasedOnClimate(double precipitation, double evapotranspiration)
         {
-            if (precipitation > evapotranspiration)
+            if (CoreConstants.IsWetClimate(precipitation, evapotranspiration))
             {
                 // Wet
                 return 0.014;

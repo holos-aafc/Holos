@@ -402,7 +402,7 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType
                 .Equals(HousingType.ConfinedNoBarn));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.BeddingMaterialType
-                .Equals(BeddingMaterialType.Straw));
+                .Equals(BeddingMaterialType.None));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ManureDetails.StateType
                 .Equals(ManureStateType.DeepBedding));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).StartWeight.Equals(1));
@@ -464,13 +464,13 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().Count.Equals(1));
 
 
-            Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).Name.Equals("Milk-fed dairy calves. A period of no enteric methane emissions"));
+            Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).Name.Equals("Milk-fed dairy calves"));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).StartWeight.Equals(1));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).EndWeight.Equals(2));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType
                 .Equals(HousingType.FreeStallBarnSolidLitter));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.BeddingMaterialType
-                .Equals(BeddingMaterialType.Sand));
+                .Equals(BeddingMaterialType.None));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ManureDetails.StateType
                 .Equals(ManureStateType.SolidStorage));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ProductionStage
@@ -500,7 +500,7 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType
                 .Equals(HousingType.FreeStallBarnSolidLitter));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.BeddingMaterialType
-                .Equals(BeddingMaterialType.Sand));
+                .Equals(BeddingMaterialType.None));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ManureDetails.StateType
                 .Equals(ManureStateType.SolidStorage));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).NumberOfDays.Equals(31));
@@ -528,7 +528,7 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType
                 .Equals(HousingType.FreeStallBarnSolidLitter));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.BeddingMaterialType
-                .Equals(BeddingMaterialType.Sand));
+                .Equals(BeddingMaterialType.None));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ManureDetails.StateType
                 .Equals(ManureStateType.SolidStorage));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).NumberOfDays.Equals(60));
@@ -556,7 +556,7 @@ namespace H.Core.Test.Services.Animals
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.HousingType
                 .Equals(HousingType.FreeStallBarnSolidLitter));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).HousingDetails.BeddingMaterialType
-                .Equals(BeddingMaterialType.Sand));
+                .Equals(BeddingMaterialType.None));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).ManureDetails.StateType
                 .Equals(ManureStateType.SolidStorage));
             Assert.IsTrue(_farm.GetAllManagementPeriods().ElementAt(0).NumberOfDays.Equals(150));

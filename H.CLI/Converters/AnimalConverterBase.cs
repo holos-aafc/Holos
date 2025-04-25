@@ -120,6 +120,7 @@ namespace H.CLI.Converters
                 TotalCarbonKilogramsDryMatterForBedding = inputRow.TotalCarbonKilogramsDryMatterForBedding,
                 MoistureContentOfBeddingMaterial = inputRow.MoistureContentOfBeddingMaterial,
                 TotalNitrogenKilogramsDryMatterForBedding = inputRow.TotalNitrogenKilogramsDryMatterForBedding,
+                IndoorHousingTemperature = inputRow.IndoorBarnTemperature,
             };
 
             return housingDetails;

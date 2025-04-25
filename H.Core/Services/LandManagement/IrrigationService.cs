@@ -44,6 +44,9 @@ namespace H.Core.Services.LandManagement
             }
         }
 
+        /// <summary>
+        /// Equation 2.1.1-48
+        /// </summary>
         public double GetTotalWaterInputs(Farm farm, CropViewItem viewItem)
         {
             var climateDataGroupedByYear = farm.ClimateData.DailyClimateData.GroupBy(userClimateData => userClimateData.Year);

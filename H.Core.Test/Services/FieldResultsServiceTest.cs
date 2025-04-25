@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Providers.Feed;
+using H.Core.Services;
 using GroupEmissionsByDay = H.Core.Emissions.Results.GroupEmissionsByDay;
 
 #endregion
@@ -39,6 +40,7 @@ namespace H.Core.Test.Services
         private N2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
         private ICBMSoilCarbonCalculator _iCbmSoilCarbonCalculator;
         private IPCCTier2SoilCarbonCalculator _ipccSoilCarbonCalculator;
+        private IFieldComponentHelper _fieldComponentHelper;
 
         #endregion
 
@@ -65,6 +67,8 @@ namespace H.Core.Test.Services
 
             _resultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
             _resultsService.AnimalResultsService = _mockAnimalResultsService.Object;
+
+            _fieldComponentHelper = new FieldComponentHelper();
         }
 
         [TestCleanup]
@@ -575,7 +579,7 @@ namespace H.Core.Test.Services
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(orderedViewItems) };
 
 
-            _resultsService.AssignCarbonInputs(orderedViewItems, farm, component);
+            _resultsService.AssignCarbonInputs(orderedViewItems, farm);
 
             // Now we should have carbon input from product values for all items/years
             Assert.IsTrue(orderedViewItems.All(x => x.CarbonInputFromProduct > 0));
@@ -645,7 +649,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(orderedViewItems) };
 
-            _resultsService.AssignCarbonInputs(orderedViewItems, farm, component);
+            _resultsService.AssignCarbonInputs(orderedViewItems, farm);
 
             // Now we should have carbon input from product values for all items/years
             Assert.IsTrue(orderedViewItems.All(x => x.CarbonInputFromProduct > 0));
@@ -662,7 +666,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            _resultsService.AssignCarbonInputs(viewItems, new Farm(), component);
+            _resultsService.AssignCarbonInputs(viewItems, new Farm());
         }
 
         [TestMethod]
@@ -728,7 +732,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(orderedViewItems) };
 
-            _resultsService.AssignCarbonInputs(orderedViewItems, farm, component);
+            _resultsService.AssignCarbonInputs(orderedViewItems, farm);
 
             // Now we should have carbon input from product values for all items/years
             Assert.IsTrue(orderedViewItems.All(x => x.CarbonInputFromProduct > 0));
@@ -786,7 +790,7 @@ namespace H.Core.Test.Services
 
             farm.Components.Add(component);
 
-            _resultsService.AssignCarbonInputs(orderedViewItems, farm, component);
+            _resultsService.AssignCarbonInputs(orderedViewItems, farm);
 
         }
 
@@ -844,60 +848,6 @@ namespace H.Core.Test.Services
 
         #endregion
 
-        #region GetMainCropForYear Tests
-
-        [TestMethod]
-        public void GetMainCropForYearReturnsMainCrop()
-        {
-            var detailViewItems = new List<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Lentils, Year = 2000,
-                },
-
-                new CropViewItem()
-                {
-                    CropType = CropType.TameGrass, IsSecondaryCrop = true, Year = 2000
-                }
-            };
-
-            var result = _resultsService.GetMainCropForYear(
-                viewItems: detailViewItems,
-                year: 2000,
-                fieldSystemComponent: new FieldSystemComponent());
-
-            Assert.AreEqual(CropType.Lentils, result.CropType);
-        }
-
-        [TestMethod]
-        public void GetCoverCropForYearReturnsMainCrop()
-        {
-            var detailViewItems = new List<CropViewItem>()
-            {
-                new CropViewItem()
-                {
-                    CropType = CropType.Lentils,  Year = 2000,
-                },
-
-                new CropViewItem()
-                {
-                    //We set IsSecondaryCrop to false to test situations with old farms where this boolean would not have been set
-                    CropType = CropType.TameGrass, IsSecondaryCrop = false, Year = 2000
-                }
-            };
-
-            // Since the IsSecondaryCrop is FALSE we expect the first item in the list to be returned as a workaround for old farms
-            var result = _resultsService.GetMainCropForYear(
-                viewItems: detailViewItems,
-                year: 2000,
-                fieldSystemComponent: new FieldSystemComponent());
-
-            Assert.AreEqual(CropType.Lentils, result.CropType);
-        }
-
-        #endregion
-
         #region CombineInputsForAllCropsInSameYear Tests
 
         [TestMethod]
@@ -922,7 +872,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            _resultsService.CombineInputsForAllCropsInSameYear(viewItems, component);
+            _resultsService.CombineInputsForAllCropsInSameYear(base.GetTestFarm(), viewItems);
 
             // The main crop gets the total inputs from all other crops added to its inputs since ICBM will use this main crop when calculating final results
             Assert.AreEqual(300, viewItem1.CombinedAboveGroundInput);
@@ -953,7 +903,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            _resultsService.CombineInputsForAllCropsInSameYear(viewItems, component);
+            _resultsService.CombineInputsForAllCropsInSameYear(base.GetTestFarm(), viewItems);
 
             Assert.AreEqual(200, viewItem1.AboveGroundCarbonInput);
             Assert.AreEqual(50, viewItem1.BelowGroundCarbonInput);
@@ -1306,7 +1256,7 @@ namespace H.Core.Test.Services
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
             // In the year 2000 we have two crops being grown, this is why careful consideration must be made so that we return the undersown perennial and not the annual being grown in the year 2000
-            var result = _resultsService.GetAdjoiningYears(viewItems, 2001, component);
+            var result = _fieldComponentHelper.GetAdjoiningYears(viewItems, 2001);
 
             Assert.AreEqual(CropType.TameGrass, result.PreviousYearViewItem.CropType);
             Assert.AreEqual(2000, result.PreviousYearViewItem.Year);
@@ -1330,14 +1280,14 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            var result = _resultsService.GetAdjoiningYears(viewItems, 2001, component);
+            var result = _fieldComponentHelper.GetAdjoiningYears(viewItems, 2001);
 
-            Assert.IsNull(result.PreviousYearViewItem);
+            Assert.IsNotNull(result.PreviousYearViewItem);
 
             Assert.AreEqual(CropType.Lentils, result.CurrentYearViewItem.CropType);
             Assert.AreEqual(2001, result.CurrentYearViewItem.Year);
 
-            Assert.IsNull(result.NextYearViewItem);
+            Assert.IsNotNull(result.NextYearViewItem);
         }
 
         /// <summary>
@@ -1353,7 +1303,7 @@ namespace H.Core.Test.Services
 
             var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(viewItems) };
 
-            var result = _resultsService.GetAdjoiningYears(viewItems, 2000, component);
+            var result = _fieldComponentHelper.GetAdjoiningYears(viewItems, 2000);
 
             Assert.IsNull(result.PreviousYearViewItem);
             Assert.AreEqual(CropType.Lentils, result.CurrentYearViewItem.CropType);

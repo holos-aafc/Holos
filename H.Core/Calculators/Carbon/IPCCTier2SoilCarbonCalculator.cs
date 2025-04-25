@@ -20,12 +20,6 @@ namespace H.Core.Calculators.Carbon
     {
         #region Enumerations
 
-        public enum CalculationModes
-        {
-            Carbon,
-            Nitrogen,
-        }
-
         #endregion
 
         #region Fields
@@ -40,7 +34,7 @@ namespace H.Core.Calculators.Carbon
 
         public IPCCTier2SoilCarbonCalculator(IClimateProvider climateProvider, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
-            this.CalculationMode = CalculationModes.Carbon;
+            this.CalculationMode = CalculationMode.Carbon;
 
             if (climateProvider != null)
             {
@@ -67,7 +61,7 @@ namespace H.Core.Calculators.Carbon
 
         #region Properties
 
-        public CalculationModes CalculationMode { get; set; }
+        public CalculationMode CalculationMode { get; set; }
 
         #endregion
 
@@ -164,13 +158,13 @@ namespace H.Core.Calculators.Carbon
                     AssignCustomStartPoint(runInPeriod, farm, currentYearViewItem);
                 }
 
-                this.CalculationMode = CalculationModes.Nitrogen;
+                this.CalculationMode = CalculationMode.Nitrogen;
 
                 // Calculate nitrogen stocks for this year
                 this.CalculateNitrogenAtInterval(previousYearViewItem, currentYearViewItem, null, farm, i);
 
                 // Change back to C mode for next iteration 
-                this.CalculationMode = CalculationModes.Carbon;
+                this.CalculationMode = CalculationMode.Carbon;
             }
         }
 
@@ -200,7 +194,7 @@ namespace H.Core.Calculators.Carbon
                 farm: farm,
                 isEquilibriumYear: true);
 
-            this.CalculationMode = CalculationModes.Nitrogen;
+            this.CalculationMode = CalculationMode.Nitrogen;
 
             this.CalculatePools(
                 currentYearViewItem: result,    // Use the run-in period item
@@ -208,7 +202,7 @@ namespace H.Core.Calculators.Carbon
                 farm: farm,
                 isEquilibriumYear: true);
 
-            this.CalculationMode = CalculationModes.Carbon;
+            this.CalculationMode = CalculationMode.Carbon;
 
             return result;
         }
@@ -299,7 +293,7 @@ namespace H.Core.Calculators.Carbon
             IPCCTier2Results previousYearIpccTier2Results = new IPCCTier2Results();
 
             var inputs = 0d;
-            if (this.CalculationMode == CalculationModes.Carbon)
+            if (this.CalculationMode == CalculationMode.Carbon)
             {
                 inputs = currentYearViewItem.TotalCarbonInputs;
                 currentYearIpccTier2Results = currentYearViewItem.IpccTier2CarbonResults;
@@ -312,7 +306,7 @@ namespace H.Core.Calculators.Carbon
 
             if (isEquilibriumYear == false)
             {
-                if (this.CalculationMode == CalculationModes.Carbon)
+                if (this.CalculationMode == CalculationMode.Carbon)
                 {
                     previousYearIpccTier2Results = previousYearViewItem.IpccTier2CarbonResults;
                 }
@@ -479,7 +473,7 @@ namespace H.Core.Calculators.Carbon
                 passivePool: currentYearIpccTier2Results.PassivePool,
                 slowPool: currentYearIpccTier2Results.SlowPool);
 
-            if (this.CalculationMode == CalculationModes.Carbon)
+            if (this.CalculationMode == CalculationMode.Carbon)
             {
                 currentYearViewItem.SoilCarbon = totalStock;
                 currentYearViewItem.ActivePoolCarbon = currentYearIpccTier2Results.ActivePool;
@@ -493,7 +487,7 @@ namespace H.Core.Calculators.Carbon
 
             if (previousYearViewItem != null)
             {
-                if (this.CalculationMode == CalculationModes.Carbon)
+                if (this.CalculationMode == CalculationMode.Carbon)
                 {
                     currentYearViewItem.ChangeInCarbon = this.CalculateStockChange(currentYearViewItem.SoilCarbon, previousYearViewItem.SoilCarbon);
                 }

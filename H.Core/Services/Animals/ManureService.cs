@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -116,7 +117,6 @@ namespace H.Core.Services.Animals
         {
             var fractionUsed = this.GetFractionOfTotalManureUsedFromLandApplication(cropViewItem, manualApplicationViewItem);
             var totalTANCreated = this.GetTotalTANCreated(manualApplicationViewItem.DateOfApplication.Year, manualApplicationViewItem.AnimalType);
-
 
             return fractionUsed * totalTANCreated;
         }
@@ -567,8 +567,6 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            
-
             var tank = _manureTanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
@@ -873,7 +871,7 @@ namespace H.Core.Services.Animals
         public ManureTank GetTank(AnimalType animalType, int year, Farm farm, ManureStateType manureStateType)
         {
             var tank = this.GetManureTankInternal(animalType, year, manureStateType);
-            this.ResetTank(tank, farm);
+            this.ResetTank(tank);
             this.UpdateAmountsUsed(tank, farm, manureStateType);
 
             return tank;
@@ -935,14 +933,12 @@ namespace H.Core.Services.Animals
             {
                 foreach (var cropViewItem in farmFieldSystemComponent.CropViewItems)
                 {
-                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Where(x => x.ManureStateType == manureStateType && x.DateOfApplication.Year == manureTank.Year))
+                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems.Get(
+                                 year: manureTank.Year, 
+                                 manureStateType: manureStateType, 
+                                 animalType: manureTank.AnimalType,
+                                 includeImports: false))            // If the manure was imported from off-farm, we don't update/reduce the amounts in the storage tanks
                     {
-                        // If the manure was imported from off-farm, we don't update/reduce the amounts in the storage tanks
-                        if (manureApplicationViewItem.IsImportedManure())
-                        {
-                            continue;
-                        }
-
                         // Account for the total nitrogen that was applied and removed from the tank
                         var amountOfNitrogenAppliedPerHectare = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare;
                         var totalAmountOfNitrogen = amountOfNitrogenAppliedPerHectare * cropViewItem.Area;
@@ -954,15 +950,6 @@ namespace H.Core.Services.Animals
                         manureTank.VolumeSumOfAllManureApplicationsMade += totalVolume;
                     }
                 }
-            }
-        }
-
-        public void UpdateAmountsUsedNEW(ManureTank manureTank, Farm farm, ManureStateType manureStateType)
-        {
-            // Get amounts used from field application
-            foreach (var manureExportViewItem in farm.ManureExportViewItems)
-            {
-                
             }
         }
 
@@ -996,35 +983,17 @@ namespace H.Core.Services.Animals
             }
         }
 
-        private void ResetTank(ManureTank manureTank, Farm farm)
+        private void ResetTank(ManureTank manureTank)
         {
-            var years = new List<int>();
-            foreach (var animalComponent in farm.AnimalComponents)
-            {
-                foreach (var animalComponentGroup in animalComponent.Groups)
-                {
-                    foreach (var managementPeriod in animalComponentGroup.ManagementPeriods)
-                    {
-                        for (int i = managementPeriod.Start.Year; i <= managementPeriod.End.Year; i++)
-                        {
-                            years.Add(i);
-                        }
-                    }
-                }
-            }
-
+            var year = manureTank.Year;
             var animalType = manureTank.AnimalType;
             var manureType = manureTank.ManureStateType;
-            var distinctYears = years.Distinct().ToList();
 
             var category = animalType.GetComponentCategoryFromAnimalType();
             var resultsForType = _animalComponentEmissionsResults.GetByCategory(category);
 
-            foreach (var year in distinctYears)
-            {
-                var tank = this.GetManureTankInternal(animalType, year, manureType);
-                this.SetStartingStateOfManureTank(tank, resultsForType, manureType);
-            }
+            var tank = this.GetManureTankInternal(animalType, year, manureType);
+            this.SetStartingStateOfManureTank(tank, resultsForType, manureType);
         }
 
         /// <summary>

@@ -17,7 +17,6 @@ namespace H.Core.Providers.Energy
     /// </summary>
     public class Table_49_Electricity_Conversion_Defaults_Provider
     {
-
         #region Fields
 
         private readonly ProvinceStringConverter _provinceStringConverter;
@@ -91,7 +90,6 @@ namespace H.Core.Providers.Energy
         /// <returns>Returns a electricity conversion value based on the year and province. If nothing found, returns a multi-year average value(kg CO2 kWh-1)</returns>
         public double GetElectricityConversionValue (int year, Province province)
         {
-            
             if (year > LastYear)
             {
                 // Add 1 to include the LastYear in average calculation
@@ -100,7 +98,6 @@ namespace H.Core.Providers.Energy
 
                 return CalculateAverageElectricityValue(province, startYear, endYear);
             }
-
             else if (year < FirstYear)
             {
                 int startYear = FirstYear;
@@ -109,13 +106,11 @@ namespace H.Core.Providers.Energy
 
                 return CalculateAverageElectricityValue(province, startYear, endYear);
             }
-
             else
             {
                 Table_49_Electricity_Conversion_Defaults_Data data = this.Data.Find(x => (x.Year == year) && (x.Province == province));
                 return data.ElectricityValue;
             }
-
         }
 
         #endregion
@@ -142,11 +137,10 @@ namespace H.Core.Providers.Energy
             // Province data for each column is read using the corresponding dictionary index.
             foreach (string[] line in fileLines.Skip(1))
             {
-
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
                     //Trace.Write($"{nameof(Table_49_Electricity_Conversion_Defaults_Provider)}.{nameof(ReadFile)}" +
-                                //$" - File: {nameof(CsvResourceNames.ElectricityConversionValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
+                    //$" - File: {nameof(CsvResourceNames.ElectricityConversionValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
 
@@ -162,8 +156,9 @@ namespace H.Core.Providers.Energy
                         Province = currentProvince,
                         ElectricityValue = electricityValue,
                     });
-                } 
+                }
             }
+
             return results;
         }
 
@@ -184,7 +179,7 @@ namespace H.Core.Providers.Energy
                 {
                     dataLocation.Add(_provinceStringConverter.Convert(province), columnNumber);
                 }
-                columnNumber++;
+                columnNumber++; //TODO 
             }
         }
 

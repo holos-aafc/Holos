@@ -132,7 +132,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _tillageFactor;
         private double _managementFactor;
         private double _manureCarbonInput;
-        private double _manureCarbonPerHectare;
+        private double _manureCarbonPerHectare; 
+        private double _manureCarbonPerHectareRemaining;
         private double _ligninContent;
 
         private string _timePeriodCategoryString;
@@ -141,6 +142,9 @@ namespace H.Core.Models.LandManagement.Fields
         private string _harvestMethodString;
         private string _tillageTypeString;
         private string _cropTypeStringWithYear;
+
+        private double _abovegroundNitrogenInputs;
+        private double _belowgroundNitrogenInputs;
 
         #endregion
 
@@ -154,7 +158,7 @@ namespace H.Core.Models.LandManagement.Fields
             this.PastFallowArea = this.Area;                // Assume past areas are the same as current areas when starting out
             this.PastPerennialArea = this.Area;             // Assume past areas are the same as current areas when starting out
 
-            this.Yield = 1000;                              // Start all crops with this yield, assign a CAR yield when user adds crop to field
+            this.Yield = 2500;                              // Start all crops with this yield, assign a CAR yield when user adds crop to field
             this.IsIrrigated = Response.No;
             this.IrrigationType = IrrigationType.RainFed;
 
@@ -988,12 +992,23 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// (kg C ha^-1)
         ///
-        /// Total manure C from all manure applications
+        /// Total manure C from all manure applications, remaining manure, and imports
         /// </summary>
         public double ManureCarbonInputsPerHectare
         {
             get { return _manureCarbonPerHectare; }
             set { SetProperty(ref _manureCarbonPerHectare, value); }
+        }
+
+        /// <summary>
+        /// (kg C ha^-1)
+        ///
+        /// Total manure C from manure applications only
+        /// </summary>
+        public double ManureCarbonInputsFromManureOnly
+        {
+            get { return _manureCarbonPerHectareRemaining; }
+            set { SetProperty(ref _manureCarbonPerHectareRemaining, value); }
         }
 
         public double TillageFactor
@@ -1115,9 +1130,32 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _forageUtilizationRate, value);
         }
 
+        /// <summary>
+        /// The total aboveground C inputs from the main crop residue and any secondary crop residues from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedAboveGroundInput { get; set; }
+
+        /// <summary>
+        /// The total belowground C inputs from the main crop residue and any secondary crop residues from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedBelowGroundInput { get; set; }
+
+        /// <summary>
+        /// The total manure C inputs from the main crop manure applications and any secondary crop manure applications from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedManureInput { get; set; }
+
+        /// <summary>
+        /// The total digestate C inputs from the main crop digestate applications and any secondary crop digestate applications from the same year
+        ///
+        /// (kg C ha^-1)
+        /// </summary>
         public double CombinedDigestateInput { get; set; }
 
         /// <summary>
@@ -1133,7 +1171,21 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedStrawNitrogen { get; set; }
         public double CombinedRootNitrogen { get; set; }
         public double CombinedExtrarootNitrogen { get; set; }
-        public double CombinedAboveGroundResidueNitrogen { get; set; }
+
+        private double _combinedAboveGroundResidueNitrogen;
+
+        public double CombinedAboveGroundResidueNitrogen
+        {
+            get
+            {
+                return _combinedAboveGroundResidueNitrogen;
+            }
+            set
+            {
+                SetProperty(ref _combinedAboveGroundResidueNitrogen, value);
+            }
+        }
+
         public double CombinedBelowGroundResidueNitrogen { get; set; }
         public double GrowingSeasonIrrigation { get; set; }
 
@@ -1148,6 +1200,18 @@ namespace H.Core.Models.LandManagement.Fields
             {
                 SetProperty(ref _nitrogenFixationPercentage, value, () => this.NitrogenFixation = (value / 100.0));
             }
+        }
+
+        public double AbovegroundNitrogenInputs
+        {
+            get => _abovegroundNitrogenInputs;
+            set => SetProperty(ref _abovegroundNitrogenInputs, value);
+        }
+
+        public double BelowgroundNitrogenInputs
+        {
+            get => _belowgroundNitrogenInputs;
+            set => SetProperty(ref _belowgroundNitrogenInputs, value);
         }
 
         #endregion
@@ -1250,6 +1314,11 @@ namespace H.Core.Models.LandManagement.Fields
             }
 
             return result;
+        }
+
+        public double CombinedResidueNitrogen()
+        {
+            return this.CombinedAboveGroundResidueNitrogen + this.CombinedBelowGroundResidueNitrogen;
         }
 
         #endregion

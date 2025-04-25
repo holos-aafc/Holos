@@ -1091,15 +1091,15 @@ namespace H.Core.Models
                 {
                     foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
                     {
-                        if (result.Contains(animalGroupManagementPeriod.Start.Year) == false)
-                        {
-                            result.Add(animalGroupManagementPeriod.Start.Year);
-                        }
+                        var startYear = animalGroupManagementPeriod.Start.Year;
+                        var endYear = animalGroupManagementPeriod.End.Year;
 
-
-                        if (result.Contains(animalGroupManagementPeriod.End.Year) == false)
+                        for (int i = startYear; i <= endYear; i++)
                         {
-                            result.Add(animalGroupManagementPeriod.End.Year);
+                            if (result.Contains(i) == false)
+                            {
+                                result.Add(i);
+                            }
                         }
                     }
                 }

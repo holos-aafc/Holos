@@ -14,105 +14,58 @@ namespace H.Core.Services.LandManagement
 {
     public partial class FieldResultsService
     {
-        public class AdjoiningYears
-        {
-            public CropViewItem PreviousYearViewItem { get; set; }
-            public CropViewItem CurrentYearViewItem { get; set; }
-            public CropViewItem NextYearViewItem { get; set; }
-        }
-
         #region Public Methods
 
-        /// <summary>
-        /// A method to get the previous year from a perennial stand when undersown crops are used. Getting the previous year and next year for an
-        /// item is required since the carbon input calculations for perennials need to look back/forward in time to calculate inputs for any year that has a missing yield.
-        /// 
-        /// For annuals, there is no need to get the previous/next years but for consistency, this method is called for annual crops regardless.
-        /// </summary>
-        public AdjoiningYears GetAdjoiningYears(
-            IEnumerable<CropViewItem> viewItems,
-            int year,
-            FieldSystemComponent fieldSystemComponent)
+        public void CalculateFactors(AdjoiningYears adjoiningYears, Farm farm)
         {
-            var previousYear = year - 1;
-            var nextYear = year + 1;
+            var viewItem = adjoiningYears.CurrentYearViewItem;
 
-            // Get all items from the same year
-            var viewItemsForYear = viewItems.Where(x => x.Year == year).OrderBy(x => x.Year).ToList();
+            this.CalculateFactors(viewItem, farm);
+        }
 
-            var mainCropForCurrentYear = this.GetMainCropForYear(viewItemsForYear, year, fieldSystemComponent);
-            if (mainCropForCurrentYear.CropType.IsPerennial())
+        public void CalculateFactors(List<CropViewItem> viewItems, Farm farm)
+        {
+            foreach (var cropViewItem in viewItems)
             {
-                // Items with same stand id
-                var perennialItemsInStand = viewItems.Where(x =>
-                    x.CropType.IsPerennial() &&
-                    x.PerennialStandGroupId.Equals(mainCropForCurrentYear.PerennialStandGroupId));
-                var previousItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == previousYear);
-                var nextItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == nextYear);
+                this.CalculateFactors(cropViewItem, farm);
+            }
+        }
 
-                return new AdjoiningYears()
-                {
-                    PreviousYearViewItem = previousItemInStand,
-                    CurrentYearViewItem = mainCropForCurrentYear,
-                    NextYearViewItem = nextItemInStand
-                };
-            }
-            else
-            {
-                return new AdjoiningYears()
-                {
-                    PreviousYearViewItem = null,
-                    CurrentYearViewItem = mainCropForCurrentYear,
-                    NextYearViewItem = null,
-                };
-            }
+        /// <summary>
+        /// Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
+        /// </summary>
+        public void CalculateFactors(CropViewItem viewItem, Farm farm)
+        {
+            viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
+            viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
+            viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
         }
 
         /// <summary>
         /// Before carbon change can be calculated, all view items must have yields assigned so that we can determine the total carbon inputs from all crops, manure applications, supplemental 
         /// hay applications, etc. Then we can proceed to the actual carbon change calculations.
         /// </summary>
-        public void AssignCarbonInputs(
-            IEnumerable<CropViewItem> viewItems,
-            Farm farm,
-            FieldSystemComponent fieldSystemComponent)
+        public void AssignCarbonInputs(IEnumerable<CropViewItem> viewItems,
+            Farm farm)
         {
-            // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
-            _initializationService.InitializeYieldForAllYears(
-                cropViewItems: viewItems,
-                farm: farm, fieldSystemComponent: fieldSystemComponent);
+            var mainCrops = viewItems.GetMainCrops();
+            var secondaryCrops = viewItems.GetSecondaryCrops();
 
-            // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
-            this.UpdatePercentageReturnsForPerennials(
-                viewItems: viewItems);
+            var animalResults = _animalService.GetAnimalResults(farm);
 
-            var mainCrops = viewItems.OrderBy(x => x.Year).Where(x => x.IsSecondaryCrop == false).ToList();
-            var distinctYears = mainCrops.Select(x => x.Year).Distinct().OrderBy(x => x).ToList();
+            _carbonService.AssignInputsAndLosses(mainCrops, farm, animalResults);
+            _carbonService.AssignInputsAndLosses(secondaryCrops, farm, animalResults);
 
-            // Consider the main crops for each year in the sequence
-            foreach (var year in distinctYears)
-            {
-                // Get the previous, current, and next year view items for the year being considered
-                var adjoiningYears = this.GetAdjoiningYears(mainCrops, year, fieldSystemComponent);
+            this.CalculateFactors(mainCrops, farm);
+        }
 
-                var previousYearViewItem = adjoiningYears.PreviousYearViewItem;
-                var currentYearViewItem = adjoiningYears.CurrentYearViewItem;
-                var nextYearViewItem = adjoiningYears.NextYearViewItem;
+        public void AssignNitrogenInputs(List<CropViewItem> viewItems, Farm farm)
+        {
+            var mainCrops = viewItems.GetMainCrops();
+            var secondaryCrops = viewItems.GetSecondaryCrops();
 
-                _carbonService.CalculateInputsAndLosses(previousYearViewItem, currentYearViewItem, nextYearViewItem, farm);
-
-                // Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
-                currentYearViewItem.ClimateParameter = _climateService.CalculateClimateParameter(currentYearViewItem, farm);
-                currentYearViewItem.TillageFactor = this.CalculateTillageFactor(currentYearViewItem, farm);
-                currentYearViewItem.ManagementFactor = this.CalculateManagementFactor(currentYearViewItem.ClimateParameter, currentYearViewItem.TillageFactor);
-            }
-
-            // Consider the secondary crops
-            var secondaryCrops = viewItems.OrderBy(x => x.Year).Where(x => x.IsSecondaryCrop).ToList();
-            foreach (var secondaryCrop in secondaryCrops)
-            {
-                _carbonService.CalculateInputsAndLosses(null, secondaryCrop, null, farm);
-            }
+            _nitrogenService.AssignNitrogenInputs(mainCrops, farm);
+            _nitrogenService.AssignNitrogenInputs(secondaryCrops, farm);
         }
 
         /// <summary>
@@ -212,19 +165,37 @@ namespace H.Core.Services.LandManagement
             {
                 _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
-                foreach (var runInPeriodItem in runInPeriodItems)
+                /*
+                 * Process run in period items
+                 */
+
+                _carbonService.AssignInputsAndLosses(runInPeriodItems, farm, this.AnimalResults);
+                _nitrogenService.AssignNitrogenInputs(runInPeriodItems, farm);
+
+                /*
+                 * Process main view items
+                 */
+
+                if (farm.IsCommandLineMode)
                 {
-                    _carbonService.CalculateInputsAndLosses(null, runInPeriodItem, null, farm);
+                    /*
+                     * When in GUI mode, the inputs for the main view items will already have been assigned at AssignCarbonInputs() and AssignNitrogenInputs().
+                     * When in CLI mode, we need to check if there are missing values and process any missing input values before calculating final results
+                     */
+
+                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
+                    _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
+                    this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 
-                // Combine inputs now that we have C set on cover crops
-                this.CombineInputsForAllCropsInSameYear(runInPeriodItems, leftMost);
+                // Combine inputs now that we have C and N inputs set for all items
+                this.CombineInputsForAllCropsInSameYear(farm, runInPeriodItems);
 
                 // Merge all run in period items
                 var mergedRunInItems = this.MergeDetailViewItems(runInPeriodItems, leftMost);
 
                 // Combine inputs for run in period
-                this.CombineInputsForAllCropsInSameYear(mergedRunInItems, leftMost);
+                this.CombineInputsForAllCropsInSameYear(farm, mergedRunInItems);
 
                 _tier2SoilCarbonCalculator.CalculateResults(
                     farm: farm,

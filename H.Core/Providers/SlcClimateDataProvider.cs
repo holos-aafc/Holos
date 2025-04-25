@@ -63,6 +63,8 @@ namespace H.Core.Providers
 
         #region Constructors
 
+
+
         public SlcClimateDataProvider()
         {
             HTraceListener.AddTraceListener();
@@ -402,7 +404,7 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Create the Temp, precip and evap data for each list of each timeframe. Thes are the climate normals
+        /// Create the Temp, precip and evap data for each list of each timeframe. These are the climate normals
         /// </summary>
         /// <param name="timeFrame">time frame to determine which list to populate</param>
         /// <param name="projectionsGroupedByPolygonId">list of intermediate climate data grouped by polygonId</param>
@@ -469,7 +471,6 @@ namespace H.Core.Providers
                     December = grouping.ElementAt(11).PotentialEvapotranspiration
                 };
 
-
                 //PET list
                 SlcListsGroupedByTimeFrame[timeFrame].Item3.Add(evapotranspirationData);
             }
@@ -480,7 +481,7 @@ namespace H.Core.Providers
         /// </summary>
         /// <param name="cultureInfo">the culture info</param>
         /// <param name="fileLines">file contents read from resources</param>
-        /// <returns>IEnumberable of the intermediate climate data</returns>
+        /// <returns>IEnumerable of the intermediate climate data</returns>
         private IEnumerable<SlcIntermediateClimateData> MakeProjections(System.Globalization.CultureInfo cultureInfo, List<string[]> fileLines)
         {
             return from line in fileLines

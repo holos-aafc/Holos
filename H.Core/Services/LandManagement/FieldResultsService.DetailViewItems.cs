@@ -154,143 +154,14 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop"/> to determine which view item
-        /// is the main crop for the particular year.
+        /// Combines C and N input for all items by year. Does not calculate inputs for individual items but assumes inputs have already been calculated and combines inputs for
+        /// the main crop and any secondary crops
         /// </summary>
-        public CropViewItem GetMainCropForYear(
-            IEnumerable<CropViewItem> viewItems, 
-            int year, 
-            FieldSystemComponent fieldSystemComponent)
+        public void CombineInputsForAllCropsInSameYear(Farm farm,
+            IEnumerable<CropViewItem> viewItems)
         {
-            var viewItemsForYear = viewItems.Where(x => x.Year == year).ToList();
-            if (viewItemsForYear.Any() == false)
-            {
-                return null;
-            }
-
-            if (viewItemsForYear.Count() == 1)
-            {
-                // There is only one crop grown, return it as the main crop
-                return viewItemsForYear.Single();
-            }
-
-            var mainCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == false);
-            if (mainCrop != null)
-            {
-                return mainCrop;
-            }
-            else
-            {
-                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
-                return viewItemsForYear.First();
-            }
-        }
-
-        public CropViewItem GetCoverCropForYear(
-            IEnumerable<CropViewItem> viewItems,
-            int year)
-        {
-            var viewItemsForYear = viewItems.Where(x => x.Year == year).ToList();
-            if (viewItemsForYear.Any() == false)
-            {
-                return null;
-            }
-
-            if (viewItemsForYear.Count() == 1 && viewItemsForYear.Single().IsSecondaryCrop == false)
-            {
-                // There is only one crop grown and it is not a cover crop
-                return null;
-            }
-
-            var coverCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == true);
-            if (coverCrop != null)
-            {
-                return coverCrop;
-            }
-            else
-            {
-                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Combines input for a particular year. This would combine the inputs from the main crop grown that year plus the cover crop (if specified by user). This must be called
-        /// after all inputs from crops, manure, etc. have been calculated for each detail view item since we simply add up the total above and below ground inputs for each
-        /// year. Inputs from the secondary crop are added to the main crop since the main crop view item will be used in the final ICBM/IPCC Tier 2 calculations
-        /// </summary>
-        public void CombineInputsForAllCropsInSameYear(
-            IEnumerable<CropViewItem> viewItems, 
-            FieldSystemComponent fieldSystemComponent)
-        {
-            // Add up all residues for each year and combine into the main crop
-
-            var years = viewItems.Select(x => x.Year).Distinct().OrderBy(x => x);
-            foreach (var year in years)
-            {
-                // Get the main crop view item and the secondary crop item (if user specified a secondary crop)
-                var viewItemsForYear = viewItems.Where(x => x.Year == year);
-                
-                // Get the main crop
-                var mainCropForCurrentYear = this.GetMainCropForYear(viewItemsForYear, year, fieldSystemComponent);
-
-                var mainCropFromPreviousYear = this.GetMainCropForYear(viewItems, (year - 1), fieldSystemComponent);
-
-                // Combine inputs from other crops grown in the same year (undersown, cover crop, etc.)
-
-                var coverCropAboveGroundInput = 0d;
-                var coverCropBelowGroundInput = 0d;
-                var coverCropManureInput = 0d;
-                var coverCropDigestateInput = 0d;
-
-                var totalCoverCropAboveGroundResidueNitrogen = 0d;
-                var totalCoverCropBelowGroundResidueNitrogen = 0d;
-
-                var cropsOtherThanMainCrop = viewItemsForYear.Except(new List<CropViewItem>() {mainCropForCurrentYear});
-                foreach (var secondaryCropInCurrentYear in cropsOtherThanMainCrop)
-                {
-                    /*
-                     * Carbon will already have been calculated using IPCC Tier 2/ICBM methods
-                     */
-
-                    coverCropAboveGroundInput += secondaryCropInCurrentYear.AboveGroundCarbonInput;
-                    coverCropBelowGroundInput += secondaryCropInCurrentYear.BelowGroundCarbonInput;
-                    coverCropManureInput += secondaryCropInCurrentYear.ManureCarbonInputsPerHectare;
-                    coverCropDigestateInput += secondaryCropInCurrentYear.DigestateCarbonInputsPerHectare;
-
-                    /*
-                     * Calculate nitrogen totals
-                     */
-
-                    var secondaryCropFromPreviousYear = this.GetCoverCropForYear(viewItems, year - 1);
-
-                    var coverCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
-                    var coverCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(secondaryCropInCurrentYear, secondaryCropFromPreviousYear);
-
-                    totalCoverCropAboveGroundResidueNitrogen += coverCropAboveGroundResidueNitrogen;
-                    totalCoverCropBelowGroundResidueNitrogen += coverCropBelowGroundResidueNitrogen;
-                }
-
-                /*
-                 * Sum up the main crop and cover crop carbon inputs
-                 */
-
-                mainCropForCurrentYear.CombinedAboveGroundInput = mainCropForCurrentYear.AboveGroundCarbonInput + coverCropAboveGroundInput;
-                mainCropForCurrentYear.CombinedBelowGroundInput = mainCropForCurrentYear.BelowGroundCarbonInput + coverCropBelowGroundInput;
-                mainCropForCurrentYear.CombinedManureInput = mainCropForCurrentYear.ManureCarbonInputsPerHectare + coverCropManureInput;
-                mainCropForCurrentYear.CombinedDigestateInput = mainCropForCurrentYear.DigestateCarbonInputsPerHectare + coverCropDigestateInput;
-                mainCropForCurrentYear.TotalCarbonInputs = mainCropForCurrentYear.CombinedAboveGroundInput + mainCropForCurrentYear.CombinedBelowGroundInput + mainCropForCurrentYear.CombinedManureInput + mainCropForCurrentYear.CombinedDigestateInput;
-
-                /*
-                 * Sum up the main crop and cover crop nitrogen inputs
-                 */
-
-                var mainCropAboveGroundResidueNitrogen = _nitrogenService.CalculateAboveGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
-                var mainCropBelowGroundResidueNitrogen = _nitrogenService.CalculateBelowGroundResidueNitrogen(currentYearViewItem: mainCropForCurrentYear, previousYearViewItem: mainCropFromPreviousYear);
-
-                mainCropForCurrentYear.CombinedAboveGroundResidueNitrogen = mainCropAboveGroundResidueNitrogen + totalCoverCropAboveGroundResidueNitrogen;
-                mainCropForCurrentYear.CombinedBelowGroundResidueNitrogen = mainCropBelowGroundResidueNitrogen + totalCoverCropBelowGroundResidueNitrogen;
-            }
+            _carbonService.CombineCarbonInputs(farm, viewItems.ToList());
+            _nitrogenService.CombineNitrogenInputs(farm, viewItems.ToList());
         }
 
         /// <summary>
@@ -308,7 +179,7 @@ namespace H.Core.Services.LandManagement
                 var itemsForYear = viewItems.Where(x => x.Year == year);
 
                 // Get the main crop
-                var mainCropForYear = this.GetMainCropForYear(itemsForYear, year, fieldSystemComponent);
+                var mainCropForYear = _fieldComponentHelper.GetMainCropForYear(itemsForYear, year);
 
                 // Copy the item
                 var copiedItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropForYear, year);
@@ -373,11 +244,24 @@ namespace H.Core.Services.LandManagement
 
             this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
 
-            // Assign carbon inputs for each view item
+            // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
+            _initializationService.InitializeYieldForAllYears(
+                cropViewItems: viewItems,
+                farm: farm, fieldSystemComponent: fieldSystemComponent);
+
+            // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
+            this.UpdatePercentageReturnsForPerennials(
+                viewItems: viewItems);
+
+            // Assign C inputs for each view item
             this.AssignCarbonInputs(
                 viewItems: viewItems,
-                farm: farm,
-                fieldSystemComponent: fieldSystemComponent);
+                farm: farm);
+
+            // Assign N inputs for each view item
+            this.AssignNitrogenInputs(
+                viewItems,
+                farm);
         }
 
         /// <summary>
