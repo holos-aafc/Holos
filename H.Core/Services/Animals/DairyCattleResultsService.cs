@@ -119,7 +119,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.AdditiveReductionFactor = AdditiveReductionFactorsProvider.GetAdditiveReductionFactor(
                 additiveType: managementPeriod.DietAdditive,
                 numberOfDays: managementPeriod.Duration.TotalDays,
-                fat: managementPeriod.SelectedDiet.Fat);
+                fat: managementPeriod.SelectedDiet.Ee);
 
             // Equation 3.2.2-1
             dailyEmissions.EntericMethaneEmission = 0;
@@ -352,7 +352,7 @@ namespace H.Core.Services.Animals
             dailyEmissions.AdditiveReductionFactor = AdditiveReductionFactorsProvider.GetAdditiveReductionFactor(
                 additiveType: managementPeriod.DietAdditive,
                 numberOfDays: managementPeriod.Duration.TotalDays,
-                fat: managementPeriod.SelectedDiet.Fat);
+                fat: managementPeriod.SelectedDiet.Ee);
 
             dailyEmissions.EntericMethaneEmissionRate = base.CalculateEntericMethaneEmissionRate(
                 grossEnergyIntake: dailyEmissions.GrossEnergyIntake,
