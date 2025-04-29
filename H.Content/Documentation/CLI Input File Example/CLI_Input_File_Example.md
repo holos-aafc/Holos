@@ -5,7 +5,7 @@ This document provides example data for the user created input Excel file(s) tha
 <br>
 
 # Field
-## Phase Number
+## PhaseNumber
 
 Example value: 0
 
@@ -50,7 +50,7 @@ note:
 Source (code, csv?, etc.): 
 
 ***
-## Current Year
+## CurrentYear
 
 Example value: 2024
 
@@ -65,7 +65,7 @@ note:
 Source (code, csv?, etc.): 
 
 ***
-## Crop Year
+## CropYear
 
 Example value: 1985
 
@@ -80,7 +80,7 @@ note: Each (row) in input file must correspond to a certain year
 Source (code, csv?, etc.): 
 
 ***
-## Crop Type
+## CropType
 
 Example value: Wheat 
 
@@ -95,7 +95,7 @@ note:
 Source (code, csv?, etc.): 
 
 ***
-## Tillage Type
+## TillageType
 
 Example value: Reduced 
 
@@ -110,7 +110,7 @@ note: See GUI for supported list of crop types since not all items in the enum a
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CropType.cs 
 
 ***
-## Year In Perennial Stand
+## YearInPerennialStand
 
 Example value: 0
 
@@ -125,7 +125,7 @@ note: Each year of a perennial stand must have the year identified in the row of
 Source (code, csv?, etc.): 
 
 ***
-## Perennial Stand ID
+## PerennialStandID
 
 Example value: 00000000-0000-0000-0000-000000000000 
 
@@ -140,7 +140,7 @@ note: Used to group all years of a perennial stand together. Each year in a dist
 Source (code, csv?, etc.): 
 
 ***
-## Perennial Stand Length
+## PerennialStandLength
 
 Example value: 1
 
@@ -155,7 +155,7 @@ note: Indicates how long the perennial is grown
 Source (code, csv?, etc.): 
 
 ***
-## Biomass Coefficient Product
+## BiomassCoefficientProduct
 
 Example value: 0.244 
 
@@ -170,7 +170,7 @@ note: Rp Product
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Biomass Coefficient Straw
+## BiomassCoefficientStraw
 
 Example value: 0.518 
 
@@ -185,7 +185,7 @@ note: Rs Straw
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Biomass Coefficient Roots
+## BiomassCoefficientRoots
 
 Example value: 0.147 
 
@@ -200,7 +200,7 @@ note: Rr Root
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Biomass Coefficient Extraroot
+## BiomassCoefficientExtraroot
 
 Example value: 0.091 
 
@@ -215,7 +215,7 @@ note: Re Extra-root
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Nitrogen Content In Product
+## NitrogenContentInProduct
 
 Example value: 0.0263 
 
@@ -230,7 +230,7 @@ note: Np Product
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Nitrogen Content In Straw
+## NitrogenContentInStraw
 
 Example value: 0.0082 
 
@@ -245,7 +245,7 @@ note: Ns Straw
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Nitrogen Content In Roots
+## NitrogenContentInRoots
 
 Example value: 0.0104 
 
@@ -260,7 +260,7 @@ note: Nr Root
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Nitrogen Content In Extraroot
+## NitrogenContentInExtraroot
 
 Example value: 0.0104 
 
@@ -275,7 +275,7 @@ note: Ne Extra-root
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
-## Nitrogen Fixation
+## NitrogenFixation
 
 Example value: 0
 
@@ -290,7 +290,7 @@ note: Indexed by crop type
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Nitrogen/NitogenFixationProvider.cs 
 
 ***
-## Nitrogen Deposit
+## NitrogenDeposit
 
 Example value: 5
 
@@ -302,10 +302,10 @@ has default?: 5
 
 note: Common value for all crop types. Page 74 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Carbon Concentration
+## CarbonConcentration
 
 Example value: 0.45 
 
@@ -317,7 +317,7 @@ has default?: 0.45
 
 note: Common value for all crop types. Page 37 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## Yield
@@ -335,7 +335,7 @@ note: Look up value from Small Area Database
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/small_area_yields.csv 
 
 ***
-## Harvest Method
+## HarvestMethod
 
 Example value: CashCrop 
 
@@ -350,7 +350,7 @@ note: Depends on crop type. Line 19 in source
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Harvest.cs 
 
 ***
-## Nitrogen Fertilizer Rate
+## NitrogenFertilizerRate
 
 Example value: 87.7608533333333 
 
@@ -365,7 +365,7 @@ note: Calculated based on yield. Line 17 in source
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Fertilizer.cs 
 
 ***
-## Phosphorous Fertilizer Rate
+## PhosphorousFertilizerRate
 
 Example value: 0
 
@@ -380,7 +380,7 @@ note: Not used/implemented yet. Future version will utilize
 Source (code, csv?, etc.): 
 
 ***
-## Is Irrigated
+## IsIrrigated
 
 Example value: No 
 
@@ -395,7 +395,7 @@ note: Not used/implemented yet. Future version will utilize
 Source (code, csv?, etc.): 
 
 ***
-## Irrigation Type
+## IrrigationType
 
 Example value: RainFed 
 
@@ -410,7 +410,7 @@ note: Used to lookup values in Table 7. Line 1290 in source
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
 
 ***
-## Amount Of Irrigation
+## AmountOfIrrigation
 
 Example value: 200
 
@@ -425,7 +425,7 @@ note: Line 35
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
 
 ***
-## Moisture Content Of Crop
+## MoistureContentOfCrop
 
 Example value: 0.12 
 
@@ -440,7 +440,7 @@ note: Look up value by crop type and irrigation amount. Additional logic in sour
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
 
 ***
-## Moisture Content Of Crop Percentage
+## MoistureContentOfCropPercentage
 
 Example value: 12
 
@@ -467,7 +467,7 @@ has default?: Yes
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## PercentageOfRootsReturnedToSoil
@@ -482,7 +482,7 @@ has default?: Yes
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## PercentageOfProductYieldReturnedToSoil
@@ -497,10 +497,10 @@ has default?: Yes
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Is Pesticide Used
+## IsPesticideUsed
 
 Example value: No 
 
@@ -515,7 +515,7 @@ note: Should be set if "Number of Pesticide Passes" > 0
 Source (code, csv?, etc.): 
 
 ***
-## Number Of Pesticide Passes
+## NumberOfPesticidePasses
 
 Example value: 0
 
@@ -530,7 +530,7 @@ note: Any value > 0
 Source (code, csv?, etc.): 
 
 ***
-## Manure Applied
+## ManureApplied
 
 Example value: False 
 
@@ -545,7 +545,7 @@ note: Should be set to true if any manure application/amount has been applied to
 Source (code, csv?, etc.): 
 
 ***
-## Amount Of Manure Applied
+## AmountOfManureApplied
 
 Example value: 0
 
@@ -560,7 +560,7 @@ note: Amount of manure applied to field (kg/ha)
 Source (code, csv?, etc.): 
 
 ***
-## Manure Application Type
+## ManureApplicationType
 
 Example value: NotSelected 
 
@@ -572,10 +572,10 @@ has default?: No
 
 note: See page 201 in algorithm document and table 43 line 113 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureApplicationTypes.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_43_Beef_Dairy_Default_Emission_Factors_Provider.cs 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureApplicationTypes.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_43_Beef_Dairy_Default_Emission_Factors_Provider.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Manure Animal Source Type
+## ManureAnimalSourceType
 
 Example value: NotSelected 
 
@@ -590,7 +590,7 @@ note: Used for various table lookups
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureAnimalSourceTypes.cs 
 
 ***
-## Manure State Type
+## ManureStateType
 
 Example value: NotSelected 
 
@@ -605,7 +605,7 @@ note: Used for various table lookups
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
 
 ***
-## Manure Location Source Type
+## ManureLocationSourceType
 
 Example value: NotSelected 
 
@@ -620,7 +620,7 @@ note: Used to inidcate if manure was source from on farm or imported onto farm
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureLocationSourceType.cs 
 
 ***
-## Under Sown Crops Used
+## UnderSownCropsUsed
 
 Example value: False 
 
@@ -635,7 +635,7 @@ note: See notes in source file on line 449
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
 
 ***
-## Crop Is Grazed
+## CropIsGrazed
 
 Example value: False 
 
@@ -650,7 +650,7 @@ note: Not used/implemented yet. Future version will utilize
 Source (code, csv?, etc.): 
 
 ***
-## Field System Component Guid
+## FieldSystemComponentGuid
 
 Example value: 642a2cb7-0321-4395-9ebb-d5743c27c960 
 
@@ -665,7 +665,7 @@ note: Unique ID for each field component on the farm
 Source (code, csv?, etc.): 
 
 ***
-## Time Period Category String
+## TimePeriodCategoryString
 
 Example value: Current 
 
@@ -680,7 +680,7 @@ note: Used to indicate time period in field history. Leave as "Current" if not s
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/TimePeriodCategory.cs 
 
 ***
-## Climate Parameter
+## ClimateParameter
 
 Example value: 1.363 
 
@@ -695,7 +695,7 @@ note: Used with the ICBM C model. Will be generated when the user imports GUI fa
 Source (code, csv?, etc.): 
 
 ***
-## Tillage Factor
+## TillageFactor
 
 Example value: 0.8 
 
@@ -707,10 +707,10 @@ has default?: 0/Calculated
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Management Factor
+## ManagementFactor
 
 Example value: 1.09 
 
@@ -722,10 +722,10 @@ has default?: 0/Calculated
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Plant Carbon In Agricultural Product
+## PlantCarbonInAgriculturalProduct
 
 Example value: 1211.76 
 
@@ -740,7 +740,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Carbon Input From Product
+## CarbonInputFromProduct
 
 Example value: 24.2352 
 
@@ -755,7 +755,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Carbon Input From Straw
+## CarbonInputFromStraw
 
 Example value: 2572.5068852459 
 
@@ -770,7 +770,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Carbon Input From Roots
+## CarbonInputFromRoots
 
 Example value: 730.035737704918 
 
@@ -785,7 +785,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Carbon Input From Extraroots
+## CarbonInputFromExtraroots
 
 Example value: 451.926885245902 
 
@@ -800,7 +800,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Size Of First Rotation For Field
+## SizeOfFirstRotationForField
 
 Example value: 1
 
@@ -815,7 +815,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Above Ground Carbon Input
+## AboveGroundCarbonInput
 
 Example value: 1650.63391153725 
 
@@ -830,7 +830,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Below Ground Carbon Input
+## BelowGroundCarbonInput
 
 Example value: 601.948372142029 
 
@@ -845,7 +845,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Manure Carbon Inputs Per Hectare
+## ManureCarbonInputsPerHectare
 
 Example value: 0
 
@@ -860,7 +860,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Digestate Carbon Inputs Per Hectare
+## DigestateCarbonInputsPerHectare
 
 Example value: 0
 
@@ -875,7 +875,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Total Carbon Inputs
+## TotalCarbonInputs
 
 Example value: 2845.39665493676 
 
@@ -950,7 +950,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Total Nitrogen Inputs For Ipcc Tier 2
+## TotalNitrogenInputsForIpccTier2
 
 Example value: 0
 
@@ -965,7 +965,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Nitrogen Content
+## NitrogenContent
 
 Example value: 0.007 
 
@@ -980,7 +980,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Above Ground Residue Dry Matter
+## AboveGroundResidueDryMatter
 
 Example value: 3930.08074175535 
 
@@ -995,7 +995,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Below Ground Residue Dry Matter
+## BelowGroundResidueDryMatter
 
 Example value: 25797.7873775155 
 
@@ -1010,7 +1010,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Fuel Energy
+## FuelEnergy
 
 Example value: 2.39 
 
@@ -1022,10 +1022,10 @@ has default?: no
 
 note: See table 50 and section 6 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_50_Fuel_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_50_Fuel_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Herbicide Energy
+## HerbicideEnergy
 
 Example value: 0.23 
 
@@ -1037,10 +1037,10 @@ has default?: no
 
 note: See table 51 and section 6 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/AAFC_Technical_Report_Holos_V4.0_Algorithm_Document_DRAFTVersion_18Nov2024.docx 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
-## Fertilizer Blend
+## FertilizerBlend
 
 Example value: Urea 
 
@@ -1074,7 +1074,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Component Type
+## ComponentType
 
 Example value: 
 
@@ -1089,7 +1089,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Name
+## GroupName
 
 Example value: 
 
@@ -1104,7 +1104,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Type
+## GroupType
 
 Example value: 
 
@@ -1119,7 +1119,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Name
+## ManagementPeriodName
 
 Example value: 
 
@@ -1134,7 +1134,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Start Date
+## ManagementPeriodStartDate
 
 Example value: 
 
@@ -1149,7 +1149,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Days
+## ManagementPeriodDays
 
 Example value: 
 
@@ -1164,7 +1164,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Number Of Animals
+## NumberOfAnimals
 
 Example value: 
 
@@ -1179,7 +1179,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Production Stage
+## ProductionStage
 
 Example value: 
 
@@ -1194,7 +1194,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Number Of Young Animals
+## NumberOfYoungAnimals
 
 Example value: 
 
@@ -1209,7 +1209,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Pairing Number
+## GroupPairingNumber
 
 Example value: 
 
@@ -1224,7 +1224,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Start Weight(kg)
+## StartWeight(kg)
 
 Example value: 
 
@@ -1239,7 +1239,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## End Weight(kg)
+## EndWeight(kg)
 
 Example value: 
 
@@ -1254,7 +1254,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Average Daily Gain(kg)
+## AverageDailyGain(kg)
 
 Example value: 
 
@@ -1269,7 +1269,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Milk Production
+## MilkProduction
 
 Example value: 
 
@@ -1284,7 +1284,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Milk Fat Content
+## MilkFatContent
 
 Example value: 
 
@@ -1299,7 +1299,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Milk Protein Content As Percentage
+## MilkProteinContentAsPercentage
 
 Example value: 
 
@@ -1314,7 +1314,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Diet Additive Type
+## DietAdditiveType
 
 Example value: 
 
@@ -1329,7 +1329,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Of Diet(kg CH4 (kg CH4)^-1)
+## MethaneConversionFactorOfDiet(kgCH4(kgCH4)^-1)
 
 Example value: 
 
@@ -1344,7 +1344,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Adjusted(%)
+## MethaneConversionFactorAdjusted(%)
 
 Example value: 
 
@@ -1359,7 +1359,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Feed Intake(kg head^-1 day^-1)
+## FeedIntake(kghead^-1day^-1)
 
 Example value: 
 
@@ -1374,7 +1374,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Crude Protein(kg kg^-1)
+## CrudeProtein(kgkg^-1)
 
 Example value: 
 
@@ -1389,7 +1389,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Ash Content Of Diet(kg kg^-1)
+## AshContentOfDiet(kgkg^-1)
 
 Example value: 
 
@@ -1404,7 +1404,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Forage(% DM)
+## Forage(%DM)
 
 Example value: 
 
@@ -1419,7 +1419,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## TDN(% DM)
+## TDN(%DM)
 
 Example value: 
 
@@ -1434,7 +1434,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Starch(% DM)
+## Starch(%DM)
 
 Example value: 
 
@@ -1449,7 +1449,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Fat(% DM)
+## Fat(%DM)
 
 Example value: 
 
@@ -1464,7 +1464,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## ME(MJ kg^-1)
+## ME(MJkg^-1)
 
 Example value: 
 
@@ -1479,7 +1479,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## NDF(% DM)
+## NDF(%DM)
 
 Example value: 
 
@@ -1494,7 +1494,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Volatile Solid Adjusted(kg kg^-1)
+## VolatileSolidAdjusted(kgkg^-1)
 
 Example value: 
 
@@ -1509,7 +1509,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Nitrogen Excretion Adjusted(kg kg^-1)
+## NitrogenExcretionAdjusted(kgkg^-1)
 
 Example value: 
 
@@ -1524,7 +1524,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Dietary Net Energy Concentration
+## DietaryNetEnergyConcentration
 
 Example value: 
 
@@ -1539,7 +1539,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Gain Coefficient
+## GainCoefficient
 
 Example value: 
 
@@ -1554,7 +1554,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Gain Coefficient A
+## GainCoefficientA
 
 Example value: 
 
@@ -1569,7 +1569,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Gain Coefficient B
+## GainCoefficientB
 
 Example value: 
 
@@ -1584,7 +1584,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Housing Type
+## HousingType
 
 Example value: 
 
@@ -1599,7 +1599,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Activity Coefficient Of Feeding Situation(MJ day^-1 kg^-1)
+## ActivityCoefficientOfFeedingSituation(MJday^-1kg^-1)
 
 Example value: 
 
@@ -1614,7 +1614,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Maintenance Coefficient(MJ day^-1 kg^-1)
+## MaintenanceCoefficient(MJday^-1kg^-1)
 
 Example value: 
 
@@ -1629,7 +1629,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## User Defined Bedding Rate
+## UserDefinedBeddingRate
 
 Example value: 
 
@@ -1644,7 +1644,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Total Carbon Kilograms Dry Matter For Bedding
+## TotalCarbonKilogramsDryMatterForBedding
 
 Example value: 
 
@@ -1659,7 +1659,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Total Nitrogen Kilograms Dry Matter For Bedding
+## TotalNitrogenKilogramsDryMatterForBedding
 
 Example value: 
 
@@ -1674,7 +1674,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Moisture Content Of Bedding Material
+## MoistureContentOfBeddingMaterial
 
 Example value: 
 
@@ -1689,7 +1689,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Of Manure(kg CH4 (kg CH4)^-1)
+## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
 
 Example value: 
 
@@ -1704,7 +1704,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## N2O Direct Emission Factor(kg N2O-N (kg N)^-1)
+## N2ODirectEmissionFactor(kgN2O-N(kgN)^-1)
 
 Example value: 
 
@@ -1719,7 +1719,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Emission Factor Volatilization
+## EmissionFactorVolatilization
 
 Example value: 
 
@@ -1734,7 +1734,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Volatilization Fraction
+## VolatilizationFraction
 
 Example value: 
 
@@ -1749,7 +1749,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Emission Factor Leaching
+## EmissionFactorLeaching
 
 Example value: 
 
@@ -1764,7 +1764,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Fraction Leaching
+## FractionLeaching
 
 Example value: 
 
@@ -1779,7 +1779,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Ash Content(%)
+## AshContent(%)
 
 Example value: 
 
@@ -1794,7 +1794,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Producing Capacity Of Manure
+## MethaneProducingCapacityOfManure
 
 Example value: 
 
@@ -1828,7 +1828,7 @@ note: Should be unique string differentiate from other components/input files
 Source (code, csv?, etc.): 
 
 ***
-## Component Type
+## ComponentType
 
 Example value: H.Core.Models.Animals.Beef.BackgroundingComponent 
 
@@ -1843,7 +1843,7 @@ note:
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/ComponentType.cs 
 
 ***
-## Group Name
+## GroupName
 
 Example value: Heifers 
 
@@ -1858,7 +1858,7 @@ note: Must be unique string differentiate from other animal groups in the same c
 Source (code, csv?, etc.): 
 
 ***
-## Group Type
+## GroupType
 
 Example value: BeefBackgrounderHeifer 
 
@@ -1873,7 +1873,7 @@ note: See converter class used to convert animal type string names to enumeratio
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs 
 
 ***
-## Management Period Name
+## ManagementPeriodName
 
 Example value: Management period #1 
 
@@ -1888,7 +1888,7 @@ note: Must be a unique string within the animal group
 Source (code, csv?, etc.): 
 
 ***
-## Group Pairing Number
+## GroupPairingNumber
 
 Example value: 0
 
@@ -1903,7 +1903,7 @@ note: Used to group a parent and child group of animals. E.g. a group of lactati
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs 
 
 ***
-## Management Period Start Date
+## ManagementPeriodStartDate
 
 Example value: 2023-10-01 00:00:00 
 
@@ -1918,7 +1918,7 @@ note: Must be set to indicate the start of management period
 Source (code, csv?, etc.): 
 
 ***
-## Management Period Days
+## ManagementPeriodDays
 
 Example value: 110
 
@@ -1933,7 +1933,7 @@ note: Must be set to indicate how long the management period lasts
 Source (code, csv?, etc.): 
 
 ***
-## Number Of Animals
+## NumberOfAnimals
 
 Example value: 100
 
@@ -1948,7 +1948,7 @@ note: Number of animals in the animal group
 Source (code, csv?, etc.): 
 
 ***
-## Production Stage
+## ProductionStage
 
 Example value: Gestating 
 
@@ -1963,7 +1963,7 @@ note: Must be set to indicate which stage a group of animals are in the lifecycl
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
 
 ***
-## Number Of Young Animals
+## NumberOfYoungAnimals
 
 Example value: 0
 
@@ -1978,7 +1978,7 @@ note: Used to indicate how many young animals (i.e. beef calves) are associated 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
 
 ***
-## Animals Are Milk Fed Only
+## AnimalsAreMilkFedOnly
 
 Example value: False 
 
@@ -1993,7 +1993,7 @@ note: Use to specify that a group of animals are on a milk diet only. Used when 
 Source (code, csv?, etc.): 
 
 ***
-## Start Weight
+## StartWeight
 
 Example value: 240
 
@@ -2008,7 +2008,7 @@ note: Start weight of the animals in a particular management period
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 ***
-## End Weight
+## EndWeight
 
 Example value: 361
 
@@ -2023,7 +2023,7 @@ note: End weight of the animals in a particular management period
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 ***
-## Average Daily Gain
+## AverageDailyGain
 
 Example value: 1.1 
 
@@ -2038,7 +2038,7 @@ note: This will be a value that is calculated based on the start and end weight
 Source (code, csv?, etc.): 
 
 ***
-## Milk Production
+## MilkProduction
 
 Example value: 0
 
@@ -2053,7 +2053,7 @@ note: The amount of milk produced by the group of animals
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs 
 
 ***
-## Milk Fat Content
+## MilkFatContent
 
 Example value: 4
 
@@ -2068,7 +2068,7 @@ note: Used with dairy components. Old default value was 4but has been changed
 Source (code, csv?, etc.): 
 
 ***
-## Milk Protein Content As Percentage
+## MilkProteinContentAsPercentage
 
 Example value: 3.5 
 
@@ -2083,7 +2083,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Diet Additive Type
+## DietAdditiveType
 
 Example value: 
 
@@ -2098,7 +2098,7 @@ note: Optional input used to calculate enteric CH4. See GUI for supported types
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs 
 
 ***
-## Methane Conversion Factor Of Diet
+## MethaneConversionFactorOfDiet
 
 Example value: 0.063 
 
@@ -2113,7 +2113,7 @@ note: Also known as Ym of diet. See source file for defaults based on diet type
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 ***
-## Methane Conversion Factor Adjusted
+## MethaneConversionFactorAdjusted
 
 Example value: 0
 
@@ -2128,7 +2128,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Feed Intake
+## FeedIntake
 
 Example value: 0
 
@@ -2143,7 +2143,7 @@ note: Used with some animal types (i.e. swine types). See swine diets in source 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 ***
-## Crude Protein
+## CrudeProtein
 
 Example value: 12.28 
 
@@ -2188,7 +2188,7 @@ note: TDN value of diet. See feed ingredient list tdn values
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
-## Ash Content Of Diet
+## AshContentOfDiet
 
 Example value: 6.57 
 
@@ -2263,7 +2263,7 @@ note: Neutral detergent fibre of diet
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
-## Dietary Net Energy Concentration
+## DietaryNetEnergyConcentration
 
 Example value: 0
 
@@ -2278,7 +2278,7 @@ note: Used only for diet/DMI calculations for beef calves. See line 419
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
 
 ***
-## Housing Type
+## HousingType
 
 Example value: ConfinedNoBarn 
 
@@ -2293,7 +2293,7 @@ note: Required field used for many calculations. See GUI for correct types when 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/HousingType.cs 
 
 ***
-## Gain Coefficient
+## GainCoefficient
 
 Example value: 1
 
@@ -2308,7 +2308,7 @@ note: See line 134 for default setting
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## User Defined Bedding Rate
+## UserDefinedBeddingRate
 
 Example value: 1.5 
 
@@ -2323,7 +2323,7 @@ note: Amount of bedding added. Used in C and N input calculations. See line 52 i
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
 
 ***
-## Total Carbon Kilograms Dry Matter For Bedding
+## TotalCarbonKilogramsDryMatterForBedding
 
 Example value: 0.447 
 
@@ -2338,7 +2338,7 @@ note: See HousingDetails.cs line 186
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
-## Total Nitrogen Kilograms Dry Matter For Bedding
+## TotalNitrogenKilogramsDryMatterForBedding
 
 Example value: 0.0057 
 
@@ -2353,7 +2353,7 @@ note: See HousingDetails.cs line 177
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
-## Moisture Content Of Bedding Material
+## MoistureContentOfBeddingMaterial
 
 Example value: 9.57 
 
@@ -2368,7 +2368,7 @@ note: See HousingDetails.cs line 219
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
-## Activity Coefficient Of Feeding Situation
+## ActivityCoefficientOfFeedingSituation
 
 Example value: 0
 
@@ -2383,7 +2383,7 @@ note: See line 74 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Maintenance Coefficient
+## MaintenanceCoefficient
 
 Example value: 0.322 
 
@@ -2398,7 +2398,7 @@ note: See line 108 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Methane Conversion Factor Of Manure
+## MethaneConversionFactorOfManure
 
 Example value: 0.26 
 
@@ -2413,7 +2413,7 @@ note: Methane conversion factor of manure, not to be consufed with Methane conve
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 ***
-## N2O Direct Emission Factor
+## N2ODirectEmissionFactor
 
 Example value: 0.01 
 
@@ -2428,7 +2428,7 @@ note: See line 34 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Emission Factor Volatilization
+## EmissionFactorVolatilization
 
 Example value: 0.005 
 
@@ -2443,7 +2443,7 @@ note: See line 34 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Volatilization Fraction
+## VolatilizationFraction
 
 Example value: 0.25 
 
@@ -2458,7 +2458,7 @@ note: See line 34 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Emission Factor Leaching
+## EmissionFactorLeaching
 
 Example value: 0.011 
 
@@ -2473,7 +2473,7 @@ note: See line 34 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
-## Fraction Leaching
+## FractionLeaching
 
 Example value: 0.035 
 
@@ -2488,7 +2488,7 @@ note: See line 55 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
-## Ash Content
+## AshContent
 
 Example value: 8
 
@@ -2503,7 +2503,7 @@ note: Deprecated. Do not use. Will be removed in future version
 Source (code, csv?, etc.): 
 
 ***
-## Methane Producing Capacity Of Manure
+## MethaneProducingCapacityOfManure
 
 Example value: 0.19 
 
@@ -2518,7 +2518,7 @@ note: Also known as Bo. See line 89 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 ***
-## Fraction Of Organic Nitrogen Immobilized
+## FractionOfOrganicNitrogenImmobilized
 
 Example value: 0
 
@@ -2533,7 +2533,7 @@ note: See line 31 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
-## Fraction Of Organic Nitrogen Nitrified
+## FractionOfOrganicNitrogenNitrified
 
 Example value: 0.125 
 
@@ -2548,7 +2548,7 @@ note: See line 31 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
-## Fraction Of Organic Nitrogen Mineralized
+## FractionOfOrganicNitrogenMineralized
 
 Example value: 0.28 
 
@@ -2563,7 +2563,7 @@ note: See line 31 for defaults
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
-## Manure State Type
+## ManureStateType
 
 Example value: DeepBedding 
 
@@ -2578,7 +2578,7 @@ note: Required. See GUI for valid types for particular animal type
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
 
 ***
-## Ammonia Emission Factor For Manure Storage
+## AmmoniaEmissionFactorForManureStorage
 
 Example value: 0.35 
 
@@ -2612,7 +2612,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Component Type
+## ComponentType
 
 Example value: 
 
@@ -2627,7 +2627,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Name
+## GroupName
 
 Example value: 
 
@@ -2642,7 +2642,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Type
+## GroupType
 
 Example value: 
 
@@ -2657,7 +2657,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Name
+## ManagementPeriodName
 
 Example value: 
 
@@ -2672,7 +2672,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Group Pairing Number
+## GroupPairingNumber
 
 Example value: 
 
@@ -2687,7 +2687,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Start Date
+## ManagementPeriodStartDate
 
 Example value: 
 
@@ -2702,7 +2702,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Management Period Days
+## ManagementPeriodDays
 
 Example value: 
 
@@ -2717,7 +2717,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Number Of Animals
+## NumberOfAnimals
 
 Example value: 
 
@@ -2732,7 +2732,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Production Stage
+## ProductionStage
 
 Example value: 
 
@@ -2747,7 +2747,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Number Of Young Animals
+## NumberOfYoungAnimals
 
 Example value: 
 
@@ -2762,7 +2762,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Start Weight(kg)
+## StartWeight(kg)
 
 Example value: 
 
@@ -2777,7 +2777,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## End Weight(kg)
+## EndWeight(kg)
 
 Example value: 
 
@@ -2792,7 +2792,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Average Daily Gain(kg)
+## AverageDailyGain(kg)
 
 Example value: 
 
@@ -2807,7 +2807,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Energy Required To Produce Wool(MJ kg^-1)
+## EnergyRequiredToProduceWool(MJkg^-1)
 
 Example value: 
 
@@ -2822,7 +2822,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Wool Production(kg year^-1)
+## WoolProduction(kgyear^-1)
 
 Example value: 
 
@@ -2837,7 +2837,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Energy Required To Produce Milk(MJ kg^-1)
+## EnergyRequiredToProduceMilk(MJkg^-1)
 
 Example value: 
 
@@ -2852,7 +2852,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Diet Additive Type
+## DietAdditiveType
 
 Example value: 
 
@@ -2867,7 +2867,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Of Diet(kg CH4 (kg CH4)^-1)
+## MethaneConversionFactorOfDiet(kgCH4(kgCH4)^-1)
 
 Example value: 
 
@@ -2882,7 +2882,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Adjusted(%)
+## MethaneConversionFactorAdjusted(%)
 
 Example value: 
 
@@ -2897,7 +2897,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Feed Intake(kg head^-1 day^-1)
+## FeedIntake(kghead^-1day^-1)
 
 Example value: 
 
@@ -2912,7 +2912,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Crude Protein(kg kg^-1)
+## CrudeProtein(kgkg^-1)
 
 Example value: 
 
@@ -2927,7 +2927,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Forage(% DM)
+## Forage(%DM)
 
 Example value: 
 
@@ -2942,7 +2942,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## TDN(% DM)
+## TDN(%DM)
 
 Example value: 
 
@@ -2957,7 +2957,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Ash Content Of Diet(% DM)
+## AshContentOfDiet(%DM)
 
 Example value: 
 
@@ -2972,7 +2972,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Starch(% DM)
+## Starch(%DM)
 
 Example value: 
 
@@ -2987,7 +2987,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Fat(% DM)
+## Fat(%DM)
 
 Example value: 
 
@@ -3002,7 +3002,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## ME(MJ kg^-1)
+## ME(MJkg^-1)
 
 Example value: 
 
@@ -3017,7 +3017,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## NDF(% DM)
+## NDF(%DM)
 
 Example value: 
 
@@ -3032,7 +3032,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Gain Coefficient A
+## GainCoefficientA
 
 Example value: 
 
@@ -3047,7 +3047,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Gain Coefficient B
+## GainCoefficientB
 
 Example value: 
 
@@ -3062,7 +3062,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Activity Coefficient Of Feeding Situation(MJ day^-1 kg^-1)
+## ActivityCoefficientOfFeedingSituation(MJday^-1kg^-1)
 
 Example value: 
 
@@ -3077,7 +3077,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Maintenance Coefficient(MJ day^-1 kg^-1)
+## MaintenanceCoefficient(MJday^-1kg^-1)
 
 Example value: 
 
@@ -3092,7 +3092,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## User Defined Bedding Rate
+## UserDefinedBeddingRate
 
 Example value: 
 
@@ -3107,7 +3107,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Total Carbon Kilograms Dry Matter For Bedding
+## TotalCarbonKilogramsDryMatterForBedding
 
 Example value: 
 
@@ -3122,7 +3122,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Total Nitrogen Kilograms Dry Matter For Bedding
+## TotalNitrogenKilogramsDryMatterForBedding
 
 Example value: 
 
@@ -3137,7 +3137,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Moisture Content Of Bedding Material
+## MoistureContentOfBeddingMaterial
 
 Example value: 
 
@@ -3152,7 +3152,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Conversion Factor Of Manure(kg CH4 (kg CH4)^-1)
+## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
 
 Example value: 
 
@@ -3167,7 +3167,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## N2O Direct Emission Factor(kg N2O-N (kg N)^-1)
+## N2ODirectEmissionFactor(kgN2O-N(kgN)^-1)
 
 Example value: 
 
@@ -3182,7 +3182,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Emission Factor Volatilization
+## EmissionFactorVolatilization
 
 Example value: 
 
@@ -3197,7 +3197,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Volatilization Fraction
+## VolatilizationFraction
 
 Example value: 
 
@@ -3212,7 +3212,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Emission Factor Leaching
+## EmissionFactorLeaching
 
 Example value: 
 
@@ -3227,7 +3227,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Fraction Leaching
+## FractionLeaching
 
 Example value: 
 
@@ -3242,7 +3242,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Ash Content(%)
+## AshContent(%)
 
 Example value: 
 
@@ -3257,7 +3257,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Methane Producing Capacity Of Manure
+## MethaneProducingCapacityOfManure
 
 Example value: 
 
@@ -3272,7 +3272,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Manure Excretion Rate
+## ManureExcretionRate
 
 Example value: 
 
@@ -3287,7 +3287,7 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## Fraction Of Carbon In Manure
+## FractionOfCarbonInManure
 
 Example value: 
 
@@ -3306,7 +3306,7 @@ note:
 <br>
 
 # Farm Setting
-## Polygon ID: 
+## PolygonID:
 
 Example value: 851003
 
@@ -3321,7 +3321,7 @@ note: Required. Use GUI map view to get polygon number if needed
 Source (code, csv?, etc.): 
 
 ***
-## Yield Assignment Method = 
+## YieldAssignmentMethod=
 
 Example value: SmallAreaData 
 
@@ -3336,7 +3336,7 @@ note: Used to lookup default yields for a particular year and crop type
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/YieldAssignmentMethod.cs 
 
 ***
-## Polygon Number = 
+## PolygonNumber=
 
 Example value: 851003
 
@@ -3351,7 +3351,7 @@ note: Required. Use GUI map view to get polygon number if needed
 Source (code, csv?, etc.): 
 
 ***
-## Latitude = 
+## Latitude=
 
 Example value: 49.9805772869656 
 
@@ -3366,7 +3366,7 @@ note: Required if using NASA as the source for climate data. Values are determin
 Source (code, csv?, etc.): 
 
 ***
-## Longitude = 
+## Longitude=
 
 Example value: -98.0433082580568 
 
@@ -3381,7 +3381,7 @@ note: Required if using NASA as the source for climate data. Values are determin
 Source (code, csv?, etc.): 
 
 ***
-## Carbon Concentration  (kg kg^-1) =
+## CarbonConcentration(kgkg^-1)=
 
 Example value: 0.45 
 
@@ -3396,7 +3396,7 @@ note: See line 90 in source
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/CoreConstants.cs 
 
 ***
-## Emergence Day = 
+## EmergenceDay=
 
 Example value: 141
 
@@ -3411,7 +3411,7 @@ note: Used with ICBM carbon model. See line 167 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Ripening Day = 
+## RipeningDay=
 
 Example value: 197
 
@@ -3426,7 +3426,7 @@ note: Used with ICBM carbon model. See line 168 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Variance = 
+## Variance=
 
 Example value: 300
 
@@ -3441,7 +3441,7 @@ note: Used with ICBM carbon model. See line 169 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Alfa =
+## Alfa=
 
 Example value: 0.7 
 
@@ -3456,7 +3456,7 @@ note: Used with ICBM carbon model. See line 175 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Decomposition Minimum Temperature  (�C) = -3.78
+## DecompositionMinimumTemperature(�C)=-3.78
 
 Example value: -3.78 
 
@@ -3471,7 +3471,7 @@ note: Used with ICBM carbon model. See line 176 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Decomposition Maximum Temperature  (�C) =
+## DecompositionMaximumTemperature(�C)=
 
 Example value: 30
 
@@ -3486,7 +3486,7 @@ note: Used with ICBM carbon model. See line 177 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Moisture Response Function At Saturation = 
+## MoistureResponseFunctionAtSaturation=
 
 Example value: 0.42 
 
@@ -3501,7 +3501,7 @@ note: Used with ICBM carbon model. See line 178 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Moisture Response Function At Wilting Point = 
+## MoistureResponseFunctionAtWiltingPoint=
 
 Example value: 0.18 
 
@@ -3516,7 +3516,7 @@ note: Used with ICBM carbon model. See line 179 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Percentage Of Product Returned To Soil For Annuals = 2
+## PercentageOfProductReturnedToSoilForAnnuals=2
 
 Example value: 2
 
@@ -3531,7 +3531,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Straw Returned To Soil For Annuals = 100
+## PercentageOfStrawReturnedToSoilForAnnuals=100
 
 Example value: 100
 
@@ -3546,7 +3546,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Annuals = 100
+## PercentageOfRootsReturnedToSoilForAnnuals=100
 
 Example value: 100
 
@@ -3561,7 +3561,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Yield Returned To Soil For Silage Crops = 35
+## PercentageOfProductYieldReturnedToSoilForSilageCrops=35
 
 Example value: 35
 
@@ -3576,7 +3576,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Silage Crops = 100
+## PercentageOfRootsReturnedToSoilForSilageCrops=100
 
 Example value: 100
 
@@ -3591,7 +3591,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Yield Returned To Soil For Cover Crops = 100
+## PercentageOfProductYieldReturnedToSoilForCoverCrops=100
 
 Example value: 100
 
@@ -3606,7 +3606,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Yield Returned To Soil For Cover Crops Forage = 35
+## PercentageOfProductYieldReturnedToSoilForCoverCropsForage=35
 
 Example value: 35
 
@@ -3621,7 +3621,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Yield Returned To Soil For Cover Crops Produce = 0
+## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce=0
 
 Example value: 0
 
@@ -3636,7 +3636,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Straw Returned To Soil For Cover Crops = 100
+## PercentageOfStrawReturnedToSoilForCoverCrops=100
 
 Example value: 100
 
@@ -3651,7 +3651,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Cover Crops = 100
+## PercentageOfRootsReturnedToSoilForCoverCrops=100
 
 Example value: 100
 
@@ -3666,7 +3666,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Returned To Soil For Root Crops = 0
+## PercentageOfProductReturnedToSoilForRootCrops=0
 
 Example value: 0
 
@@ -3681,7 +3681,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Straw Returned To Soil For Root Crops = 100
+## PercentageOfStrawReturnedToSoilForRootCrops=100
 
 Example value: 100
 
@@ -3696,7 +3696,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Returned To Soil For Perennials = 35
+## PercentageOfProductReturnedToSoilForPerennials=35
 
 Example value: 35
 
@@ -3711,7 +3711,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Perennials = 100
+## PercentageOfRootsReturnedToSoilForPerennials=100
 
 Example value: 100
 
@@ -3726,7 +3726,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Returned To Soil For Rangeland Due To Harvest Loss = 35
+## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss=35
 
 Example value: 35
 
@@ -3741,7 +3741,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Rangeland = 100
+## PercentageOfRootsReturnedToSoilForRangeland=100
 
 Example value: 100
 
@@ -3756,7 +3756,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Product Returned To Soil For Fodder Corn = 35
+## PercentageOfProductReturnedToSoilForFodderCorn=35
 
 Example value: 35
 
@@ -3771,7 +3771,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Percentage Of Roots Returned To Soil For Fodder Corn = 100
+## PercentageOfRootsReturnedToSoilForFodderCorn=100
 
 Example value: 100
 
@@ -3786,7 +3786,7 @@ note: Used as a global default. See line 24 on how the default is used. User can
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## Decomposition Rate Constant Young Pool = 0.8
+## DecompositionRateConstantYoungPool=0.8
 
 Example value: 0.8 
 
@@ -3801,7 +3801,7 @@ note: Used with ICBM carbon model. See line 221 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Decomposition Rate Constant Old Pool =
+## DecompositionRateConstantOldPool=
 
 Example value: 0.00605 
 
@@ -3816,7 +3816,7 @@ note: Used with ICBM carbon model. See line 222 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Old Pool Carbon N =
+## OldPoolCarbonN=
 
 Example value: 0.1 
 
@@ -3831,7 +3831,7 @@ note: Used with both ICBM and IPCC Tier 2 carbon models. See line 224
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## NO Ratio =
+## NORatio=
 
 Example value: 0.1 
 
@@ -3846,7 +3846,7 @@ note: Used with both ICBM and IPCC Tier 2 carbon models. See line 227
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Emission Factor For Leaching And Runoff  (kg N2O-N (kg N)^-1) = 
+## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)=
 
 Example value: 0.011 
 
@@ -3861,7 +3861,7 @@ note: Used for N2O calculations. See line 228
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Emission Factor For Volatilization  (kg N2O-N (kg N)^-1) = 
+## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)=
 
 Example value: 0.01 
 
@@ -3876,7 +3876,7 @@ note: Used for N2O calculations. See line 229
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Fraction Of N Lost By Volatilization = 
+## FractionOfNLostByVolatilization=
 
 Example value: 0.21 
 
@@ -3891,7 +3891,7 @@ note: Used for N2O calculations. See line 232
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Microbe Death = 
+## MicrobeDeath=
 
 Example value: 0.2 
 
@@ -3906,7 +3906,7 @@ note: Used by both ICBM and IPCC Tier carbon models. See line 236
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Denitrification = 
+## Denitrification=
 
 Example value: 0.5 
 
@@ -3921,7 +3921,7 @@ note: Used by both ICBM and IPCC Tier carbon models. See line 237
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Carbon modelling strategy =
+## Carbonmodellingstrategy=
 
 Example value:  IPCCTier2 
 
@@ -3936,7 +3936,7 @@ note: Will determine which carbon model will be used (IPCC Tier 2 is the newest 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CarbonModellingStrategies.cs 
 
 ***
-## Run In Period Years = 
+## RunInPeriodYears=
 
 Example value: 15
 
@@ -3951,7 +3951,7 @@ note: Used to indicate how many years will be used when calculating equilibrium 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Humification Coefficient Above Ground = 
+## HumificationCoefficientAboveGround=
 
 Example value: 0.125 
 
@@ -3966,7 +3966,7 @@ note: Used with ICBM carbon model. See line 217 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Humification Coefficient Below Ground = 
+## HumificationCoefficientBelowGround=
 
 Example value: 0.3 
 
@@ -3981,7 +3981,7 @@ note: Used with ICBM carbon model. See line 218 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Humification Coefficient Manure = 
+## HumificationCoefficientManure=
 
 Example value: 0.31 
 
@@ -3996,7 +3996,7 @@ note: Used with ICBM carbon model. See line 219 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Climate filename = climate.csv
+## Climatefilename=climate.csv
 
 Example value: climate.csv 
 
@@ -4011,7 +4011,7 @@ note: Used when climate acquisition is set to "InputFile"
 Source (code, csv?, etc.): 
 
 ***
-## Climate Data Acquisition = 
+## ClimateDataAcquisition=
 
 Example value: NASA 
 
@@ -4026,7 +4026,7 @@ note: Specifies how Holos will aquire climate data. See source file for more det
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs 
 
 ***
-## Use climate parameter instead of management factor = 
+## Useclimateparameterinsteadofmanagementfactor=
 
 Example value: True 
 
@@ -4041,7 +4041,7 @@ note: Set to true for most scenarios
 Source (code, csv?, etc.): 
 
 ***
-## Enable Carbon Modelling = 
+## EnableCarbonModelling=
 
 Example value: True 
 
@@ -4056,7 +4056,7 @@ note: Set to true for most scenarios
 Source (code, csv?, etc.): 
 
 ***
-## January Precipitation = 
+## JanuaryPrecipitation=
 
 Example value: 17.6213 
 
@@ -4071,7 +4071,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## February Precipitation = 
+## FebruaryPrecipitation=
 
 Example value: 12.8316 
 
@@ -4086,7 +4086,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## March Precipitation = 
+## MarchPrecipitation=
 
 Example value: 22.426 
 
@@ -4101,7 +4101,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## April Precipitation = 
+## AprilPrecipitation=
 
 Example value: 27.4144 
 
@@ -4116,7 +4116,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## May Precipitation = 
+## MayPrecipitation=
 
 Example value: 61.5015 
 
@@ -4131,7 +4131,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## June Precipitation = 
+## JunePrecipitation=
 
 Example value: 77.9022 
 
@@ -4146,7 +4146,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## July Precipitation = 
+## JulyPrecipitation=
 
 Example value: 57.274 
 
@@ -4161,7 +4161,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## August Precipitation = 
+## AugustPrecipitation=
 
 Example value: 53.0356 
 
@@ -4176,7 +4176,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## September Precipitation = 
+## SeptemberPrecipitation=
 
 Example value: 40.4796 
 
@@ -4191,7 +4191,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## October Precipitation = 
+## OctoberPrecipitation=
 
 Example value: 33.7571 
 
@@ -4206,7 +4206,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## November Precipitation = 
+## NovemberPrecipitation=
 
 Example value: 23.0151 
 
@@ -4221,7 +4221,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## December Precipitation = 
+## DecemberPrecipitation=
 
 Example value: 21.4046 
 
@@ -4236,7 +4236,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## January Potential Evapotranspiration = 
+## JanuaryPotentialEvapotranspiration=
 
 Example value: 0.0327 
 
@@ -4251,7 +4251,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## February Potential Evapotranspiration = 
+## FebruaryPotentialEvapotranspiration=
 
 Example value: 0.0888 
 
@@ -4266,7 +4266,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## March Potential Evapotranspiration = 
+## MarchPotentialEvapotranspiration=
 
 Example value: 3.5731 
 
@@ -4281,7 +4281,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## April Potential Evapotranspiration = 
+## AprilPotentialEvapotranspiration=
 
 Example value: 44.1505 
 
@@ -4296,7 +4296,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## May Potential Evapotranspiration = 
+## MayPotentialEvapotranspiration=
 
 Example value: 100.0393 
 
@@ -4311,7 +4311,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## June Potential Evapotranspiration = 
+## JunePotentialEvapotranspiration=
 
 Example value: 123.5476 
 
@@ -4326,7 +4326,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## July Potential Evapotranspiration = 
+## JulyPotentialEvapotranspiration=
 
 Example value: 135.7116 
 
@@ -4341,7 +4341,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## August Potential Evapotranspiration = 
+## AugustPotentialEvapotranspiration=
 
 Example value: 120.4341 
 
@@ -4356,7 +4356,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## September Potential Evapotranspiration = 
+## SeptemberPotentialEvapotranspiration=
 
 Example value: 66.0041 
 
@@ -4371,7 +4371,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## October Potential Evapotranspiration = 
+## OctoberPotentialEvapotranspiration=
 
 Example value: 16.8898 
 
@@ -4386,7 +4386,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## November Potential Evapotranspiration = 
+## NovemberPotentialEvapotranspiration=
 
 Example value: 0.7677 
 
@@ -4401,7 +4401,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## December Potential Evapotranspiration = 
+## DecemberPotentialEvapotranspiration=
 
 Example value: 0.0252 
 
@@ -4416,7 +4416,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## January Mean Temperature = 
+## JanuaryMeanTemperature=
 
 Example value: -14.8531 
 
@@ -4431,7 +4431,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## February Mean Temperature = 
+## FebruaryMeanTemperature=
 
 Example value: -12.4063 
 
@@ -4446,7 +4446,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## March Mean Temperature = 
+## MarchMeanTemperature=
 
 Example value: -5.3584 
 
@@ -4461,7 +4461,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## April Mean Temperature =
+## AprilMeanTemperature=
 
 Example value: 3.7295 
 
@@ -4476,7 +4476,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## May Mean Temperature = 
+## MayMeanTemperature=
 
 Example value: 10.7967 
 
@@ -4491,7 +4491,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## June Mean Temperature = 
+## JuneMeanTemperature=
 
 Example value: 16.4886 
 
@@ -4506,7 +4506,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## July Mean Temperature = 
+## JulyMeanTemperature=
 
 Example value: 18.8914 
 
@@ -4521,7 +4521,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## August Mean Temperature = 
+## AugustMeanTemperature=
 
 Example value: 18.2291 
 
@@ -4536,7 +4536,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## September Mean Temperature = 
+## SeptemberMeanTemperature=
 
 Example value: 13.2652 
 
@@ -4551,7 +4551,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## October Mean Temperature = 
+## OctoberMeanTemperature=
 
 Example value: 5.6419 
 
@@ -4566,7 +4566,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## November Mean Temperature = 
+## NovemberMeanTemperature=
 
 Example value: -3.5511 
 
@@ -4581,7 +4581,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## December Mean Temperature = 
+## DecemberMeanTemperature=
 
 Example value: -11.9174 
 
@@ -4596,7 +4596,7 @@ note: Can be set and used if climate data acquisition is set to custom. Value wi
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## Province = 
+## Province=
 
 Example value: Manitoba 
 
@@ -4611,7 +4611,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Year Of Observation =
+## YearOfObservation=
 
 Example value: 2024
 
@@ -4626,7 +4626,7 @@ note: Defaults to the current year
 Source (code, csv?, etc.): 
 
 ***
-## Ecodistrict ID = 
+## EcodistrictID=
 
 Example value: 851
 
@@ -4641,7 +4641,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Soil Great Group = 
+## SoilGreatGroup=
 
 Example value: Regosol 
 
@@ -4656,7 +4656,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Soil functional category = 
+## Soilfunctionalcategory=
 
 Example value: Black 
 
@@ -4671,7 +4671,7 @@ note: deduced following code in Holos
 Source (code, csv?, etc.): 
 
 ***
-## Bulk Density = 
+## BulkDensity=
 
 Example value: 1.2 
 
@@ -4686,7 +4686,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Soil Texture = 
+## SoilTexture=
 
 Example value: Fine 
 
@@ -4701,7 +4701,7 @@ note: deduced following code in Holos
 Source (code, csv?, etc.): 
 
 ***
-## Soil Ph = 
+## SoilPh=
 
 Example value: 7.8 
 
@@ -4716,7 +4716,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Top Layer Thickness  (mm) = 
+## TopLayerThickness(mm)=
 
 Example value: 200
 
@@ -4731,7 +4731,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Proportion Of Sand In Soil = 
+## ProportionOfSandInSoil=
 
 Example value: 0.2 
 
@@ -4746,7 +4746,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Proportion Of Clay In Soil = 
+## ProportionOfClayInSoil=
 
 Example value: 0.3 
 
@@ -4761,7 +4761,7 @@ note: extracted from slc DB with lat long data
 Source (code, csv?, etc.): 
 
 ***
-## Proportion Of Soil Organic Carbon = 
+## ProportionOfSoilOrganicCarbon=
 
 Example value: 3.1 
 
