@@ -1,6 +1,6 @@
 # Example Input Tables For Command Line Interface
 
-The purpose of this document is to provide examples of how to format input tables in an Excel file for the Holos Command Line Interface. Please read [here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#chapter-10---command-line-interface) for more information on the Holos CLI.
+This document provides example data for the user created input Excel file(s) that will be processed by the Holos CLI. Please read [here](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#chapter-10---command-line-interface) for more information on the Holos CLI.
 
 <br>
 
