@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Threading;
+using System.Xaml;
 using CsvHelper;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
@@ -29,6 +30,9 @@ namespace H.Core.Providers.Climate
         private readonly ClimateNormalCalculator _climateNormalCalculator;
 
         private readonly Table_63_Indoor_Temperature_Provider _indoorTemperatureProvider;
+
+        private readonly Dictionary<Tuple<int, TimeFrame>, ClimateData> _cacheByPolygon = new Dictionary<Tuple<int, TimeFrame>, ClimateData>();
+        private readonly Dictionary<Tuple<double, double, TimeFrame>, ClimateData> _cacheByPosition = new Dictionary<Tuple<double, double, TimeFrame>, ClimateData>();
 
         #endregion
 
@@ -87,6 +91,13 @@ namespace H.Core.Providers.Climate
 
         public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame)
         {
+            // Cache here since climate normal calculations are expensive
+            var key = new Tuple<double, double, TimeFrame>(latitude, longitude, climateNormalTimeFrame);
+            if (_cacheByPosition.ContainsKey(key))
+            {
+                return _cacheByPosition[key];
+            }
+
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
             if (dailyClimateData.Any() == false)
             {                
@@ -94,7 +105,10 @@ namespace H.Core.Providers.Climate
                 return null;
             }
 
-            return this.Get(dailyClimateData, climateNormalTimeFrame);
+            var result = this.Get(dailyClimateData, climateNormalTimeFrame);
+            _cacheByPosition.Add(key, result);
+
+            return result;
         }
 
         public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame, Farm farm)
@@ -173,7 +187,18 @@ namespace H.Core.Providers.Climate
 
         public ClimateData GetClimateData(int polygonId, TimeFrame timeFrame)
         {
-            return _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
+            // Cache here since climate normal calculations are expensive
+            var key = new Tuple<int, TimeFrame>(polygonId, timeFrame);
+            if (_cacheByPolygon.ContainsKey(key))
+            {
+                return _cacheByPolygon[key];
+            }
+
+            var result = _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
+
+            _cacheByPolygon.Add(key, result);
+
+            return result;
         }
 
         /// <summary>

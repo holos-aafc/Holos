@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace H.Core.Calculators.Climate
 {
     public class EvapotranspirationCalculator
     {
+        #region Fields
+
+        private readonly Dictionary<Tuple<double, double, double>, double> _cache = new Dictionary<Tuple<double, double, double>, double>();
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -16,6 +23,12 @@ namespace H.Core.Calculators.Climate
         /// <returns>Reference evapotranspiration (mm day^-1)</returns>
         public double CalculateReferenceEvapotranspiration(double meanDailyTemperature, double solarRadiation, double relativeHumidity)
         {
+            var key = new Tuple<double, double, double>(meanDailyTemperature, solarRadiation, relativeHumidity);
+            if (_cache.ContainsKey(key))
+            {
+                return _cache[key];
+            }
+
             double term1 = 0.013;
 
             // As per Roland chat on December 9 in Discord (wasn't in algorithm document). Evapotranspiration will be zero when temperature is < 0 for the day.
@@ -49,6 +62,8 @@ namespace H.Core.Calculators.Climate
             {
                 return 0;
             }
+
+            _cache[key] = result;
 
             return result;
         }

@@ -21,7 +21,7 @@ namespace H.Core.Providers
     /// </summary>
     public class SlcClimateDataProvider : ProviderBase, ISlcClimateProvider
     {
-        // with the added SLC data this new private class is necessary so that we can simplify data processing and get rid of anonymous types which cannot be passed out of functions
+        // With the added SLC data this new private class is necessary so that we can simplify data processing and get rid of anonymous types which cannot be passed out of functions
         private class SlcIntermediateClimateData
         {
             public int PolygonId { get; set; }
@@ -37,10 +37,10 @@ namespace H.Core.Providers
         private readonly List<PrecipitationData> _precipitationDataList;
         private readonly List<EvapotranspirationData> _evapotranspirationDataList;
 
-        //a dictionary keyed by the time, mapped to temp, precip, and PET for that timeframe
+        // A dictionary keyed by the time, mapped to temp, precipitation, and PET for that timeframe
         private Dictionary<TimeFrame, Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>> SlcListsGroupedByTimeFrame = new Dictionary<TimeFrame, Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>>();
 
-        //lists for the appropriate timeframe these will get handed to 'SlcListsGroupedByTimeFrame' in 'BuildListsGroupedByTimeFrame'
+        // Lists for the appropriate timeframe these will get handed to 'SlcListsGroupedByTimeFrame' in 'BuildListsGroupedByTimeFrame'
         private readonly List<TemperatureData> _temperatureData1950_1980List;
         private readonly List<TemperatureData> _temperatureData1960_1990List;
         private readonly List<TemperatureData> _temperatureData1970_2000List;
@@ -59,11 +59,11 @@ namespace H.Core.Providers
         private readonly List<EvapotranspirationData> _evapotranspirationData1980_2010List;
         private readonly List<EvapotranspirationData> _evapotranspirationData1990_2017List;
 
+        private readonly Dictionary<Tuple<int, TimeFrame>, ClimateData> _cache = new Dictionary<Tuple<int, TimeFrame>, ClimateData>();
+
         #endregion
 
         #region Constructors
-
-
 
         public SlcClimateDataProvider()
         {
@@ -121,16 +121,27 @@ namespace H.Core.Providers
                 Trace.TraceInformation($"{nameof(SlcClimateDataProvider)}.{nameof(GetClimateData)}: {currentPolygonId} is not associated with any SLC climate data. Asking user for another polygon to get data from.");
                 return new ClimateData();
             }
+
+            var key = new Tuple<int, TimeFrame>(currentPolygonId, timeFrame);
+            if (_cache.ContainsKey(key))
+            {
+                return _cache[key];
+            }
+
             var evapotranspirationData = this.GetEvapotranspirationDataByPolygonId(polygonId, timeFrame);
             var precipitationData = this.GetPrecipitationDataByPolygonId(polygonId, timeFrame);
             var temperatureData = this.GetTemperatureDataByPolygonId(polygonId, timeFrame);
 
-            return new ClimateData()
+            var result = new ClimateData()
             {
                 EvapotranspirationData = evapotranspirationData,
                 PrecipitationData = precipitationData,
                 TemperatureData = temperatureData,
             };
+
+            _cache.Add(key, result);
+
+            return result;
         }
 
         /// <summary>
@@ -176,7 +187,7 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Get precip data for a polygon by timeframe
+        /// Get precipitation data for a polygon by timeframe
         /// </summary>
         /// <param name="polygonId">Polygon to get data for</param>
         /// <param name="timeFrame">the time frame to get data for</param>
@@ -331,7 +342,7 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// populate the lists of normals (temperature, precip, evapotranspiration) connected to the old climate file not bound by a specific timeframe
+        /// populate the lists of normals (temperature, precipitation, evapotranspiration) connected to the old climate file not bound by a specific timeframe
         /// </summary>
         /// <param name="projectionsGroupedByPolygonId">intermediate climate data grouped by polygon id</param>
         private void PopulateOriginalClimateLists(IEnumerable<IGrouping<int, SlcIntermediateClimateData>> projectionsGroupedByPolygonId)
@@ -404,7 +415,7 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Create the Temp, precip and evap data for each list of each timeframe. These are the climate normals
+        /// Create the Temp, precipitation and evapotranspiration data for each list of each timeframe. These are the climate normals
         /// </summary>
         /// <param name="timeFrame">time frame to determine which list to populate</param>
         /// <param name="projectionsGroupedByPolygonId">list of intermediate climate data grouped by polygonId</param>
@@ -431,7 +442,7 @@ namespace H.Core.Providers
                     December = grouping.ElementAt(11).AverageTemperature
                 };
 
-                //temperature list
+                // Temperature list
                 SlcListsGroupedByTimeFrame[timeFrame].Item1.Add(temperatureData);
 
                 var precipitationData = new PrecipitationData
@@ -451,7 +462,7 @@ namespace H.Core.Providers
                     December = grouping.ElementAt(11).Precipitation
                 };
 
-                //precipitation list
+                // Precipitation list
                 SlcListsGroupedByTimeFrame[timeFrame].Item2.Add(precipitationData);
 
                 var evapotranspirationData = new EvapotranspirationData
@@ -471,7 +482,7 @@ namespace H.Core.Providers
                     December = grouping.ElementAt(11).PotentialEvapotranspiration
                 };
 
-                //PET list
+                // PET list
                 SlcListsGroupedByTimeFrame[timeFrame].Item3.Add(evapotranspirationData);
             }
         }

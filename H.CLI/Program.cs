@@ -121,7 +121,7 @@ namespace H.CLI
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 
             var applicationData = new ApplicationData();
-            var storage = new Storage();
+            
             var templateFarmHandler = new TemplateFarmHandler();
 
             // Get The Directories in the "Farms" folder
@@ -211,23 +211,23 @@ namespace H.CLI
 
                 if (applicationData.Farms.Any())
                 {
-                    storage.ApplicationData = applicationData;
+                    _storage.ApplicationData = applicationData;
                     // Start Processing Farms
                     Console.WriteLine();
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
                     // Overall Results For All the Farms
-                    var componentResults = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
+                    var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);
 
                     // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
                     // Slowest section because we initialize view models for every component
-                    _processorHandler.InitializeComponentProcessing(storage.ApplicationData);
+                    _processorHandler.InitializeComponentProcessing(_storage.ApplicationData);
 
                     // Calculate emissions for all farms
-                    componentResults.ProcessFarms(storage);
+                    componentResults.ProcessFarms(_storage);
 
                     // Output all results files
                     componentResults.WriteEmissionsToFiles(applicationData);
