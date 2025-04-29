@@ -780,7 +780,6 @@ namespace H.Core.Services.Animals
 
             var dateNow = groupEmissionsByDay.DateTime;
             var dateStart = dateNow.Subtract(TimeSpan.FromDays(30)).Date;
-
             var temperatures = farm.ClimateData.GetTemperatureByDateRange(dateStart.Date, dateNow.Date);
 
             foreach (var temperature in temperatures)

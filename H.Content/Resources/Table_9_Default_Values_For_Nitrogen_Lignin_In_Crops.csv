@@ -1,7 +1,7 @@
 Group,Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %,Biomethane potential (Nm^3 ton^-1 VS) for straw/silage,f_CH4 Fraction of methane in biogas,Volatile Solids (% TS),TS (kg t^-1)^3,TN Substrate (Kg N t^-1)^5
-,Summerfallow,0,0,0,0,0,0
-,,,,,,,
-Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12
+,Summerfallow,0,0,0,0,0,0,,,,,
+,,,,,,,,,,,,
+Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12,,,,,
 ,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,162,0.6,90,880,7.8
 ,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12,267,0.44,90,880,6.1
 ,Oats,0.357 (3),0.029 (3),0.419,0.0073,0.047,12,287,0.52,90,880,6
@@ -13,19 +13,19 @@ Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12
 ,Grain Corn,0.369 (3),0.015 (3),0.25,0.0063,0.11,15,427,0.54,88,850,5
 ,Rye,0.344,0.015,0.229,0.007,0.053,12,241,0.44,94,880,6
 ,Durum wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,162,0.6,90,880,7.8
-,,,,,,,
+,,,,,,,,,,,,
 Silage,Corn Silage,0.369 (3),0.015 (3),0.25,0.0063,0.11,70,304,0.45,95,640,13
 ,Barley Silage,0.373 (3),0.028 (3),0.21,0.009,0.046,63,,,,,
 ,Oat Silage,0.357 (3),0.029 (3),0.419,0.0073,0.047,62,442,0.6,83,380,8.1
 ,Triticale Silage,0.344,0.015,0.229,0.007,0.053,60,,,,,
 ,Wheat Silage,0.344 (3),0.015 (3),0.229,0.007,0.053,57,,,,,
-,,,,,,,
+,,,,,,,,,,,,
 Oilseeds,Oilseeds,0.197,0.078,0.246,0.008,0.073,9,,,,,
 ,Canola,0.18 (3),0.046 (3),0.375,0.0083,0.073,9,,,,,
 ,Mustard,0.18,0.046,0.375,0.0083,0.073,9,,,,,
 ,Flax,0.171 (3),0.11 (3),0.193,0.0063,0.15,8,,,,,
-,,,,,,,
-Pulse crops,Pulse crops,0.279,0.046,0.223,0.008,0.075,13
+,,,,,,,,,,,,
+Pulse crops,Pulse crops,0.279,0.046,0.223,0.008,0.075,13,,,,,
 ,Soybeans,0.2 (3),0.099 (3),0.224,0.008,0.085,14,,,,,
 ,Beans (dry field),0.2,0.099,0.224,0.008,0.085,13,,,,,
 ,Chickpea,0.301 (3),0.063 (3),0.219,0.008,0.075,13,,,,,
@@ -34,20 +34,20 @@ Pulse crops,Pulse crops,0.279,0.046,0.223,0.008,0.075,13
 ,Fababean,0.2,0.099,0.224,0.008,0.085,13,,,,,
 ,White Beans,0.279,0.046,0.223,0.008,0.075,13,,,,,
 ,Other (dry field) Beans,0.279,0.046,0.223,0.008,0.075,13,,,,,
-,,,,,,,
+,,,,,,,,,,,,
 Root crops,Potatos,0.795,0,0.097,0.0169,0.073,75,,,,,
 ,Sugar Beets,0.925,0,0.097,0.0169,0.073,80,,,,,
-,,,,,,,
+,,,,,,,,,,,,
 Other field crops,Safflower,0.197,0.078,0.246,0.008,0.073,2,,,,,
 ,Sunflower seeds,0.197,0.078,0.246,0.0169,0.073,2,200,0.6,90,891,10
 ,Tobacco,0.5,0,0.2,0.008,0.073,13,,,,,
 ,Vegetables,-9,-9,-9,-9,-9,-9,,,,,
 ,Berries and Grapes,-9,-9,-9,-9,-9,-9,,,,,
 ,Other field crops,-9,-9,-9,-9,-9,-9,,,,,
-,,,,,,,
-Cover/Winter crops,Winter wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12
+,,,,,,,,,,,,
+Cover/Winter crops,Winter wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,,,,,
 ,(Fall) Rye,0.344,0.015,0.229,0.007,0.053,12,241,0.44,94,880,6
-,,,,,,,
+,,,,,,,,,,,,
 Perennials,Rangeland (native),-9,-9,-9,0.0134,0.049,13,,,,,
 ,Perennial forages,-9,-9,-9,0.0126,0.049,13,,,,,
 ,Tame grass,-9,-9,-9,0.0134,0.057,13,332,0.54,82,870,15
@@ -56,14 +56,14 @@ Perennials,Rangeland (native),-9,-9,-9,0.0134,0.049,13,,,,,
 ,Seeded grassland,-9,-9,-9,-9,0.049,13,,,,,
 ,Forage for seed,-9,-9,-9,-9,0.049,13,,,,,
 ,Alfalfa,-9,-9,-9,0.0238,0.072,13,,,,,
-,Grazed/ungrazed pasture (all perennial types, no harvest) (7),-9,-9,-9,-9,-9,80,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a."
-,,,,,,,"2 Values for the lignin content of residues from IPCC (2019), Table 5.5B. Winter wheat, spring wheat, barley, oats, millet, beans and pulses, soybeans, peanuts, values from Equi-Analytical Laboratories (2018); maize, rice, and sorghum from Cornell University (2017); and potatoes and tubers from Zereu et al. (2014)."
-,,,,,,,3 Thiagarajan et al. (2018)
-,,,,,,,4 Simple average of nitrogen content of aboveground and belowground. 
-,,,,,,,5 Nitrogen content of aboveground assumed to represent all residue.
-,,,,,,,6 Value is an average of N fixing and non-N fixing grasses. 
-,,,,,,,7 Approximate mid-point of values from www.ontario.ca (75% MC in dry year, 80% MC in normal year, 85% MC in wet year), madbarn.ca (70-80% MC) and fieldcropnews.com (70-85% MC)
-,,,,,,,"Notes: Uncertainty is assumed to be ±75% for the N content estimates and ±50% for the lignin content estimates, expressed as 95% confidence intervals."
+,Grazed/ungrazed pasture (all perennial types no harvest) (7),-9,-9,-9,-9,-9,-9,80,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,"1 Values for the N content of residues from IPCC (2019), Table 5.5B. The estimates are in units of g N (g residue)-1 on dry weight basis from a biomass-weighted average of aboveground and belowground for each crop based on data in IPCC (2019), Table 11.1a.",,,,,
+,,,,,,,"2 Values for the lignin content of residues from IPCC (2019), Table 5.5B. Winter wheat, spring wheat, barley, oats, millet, beans and pulses, soybeans, peanuts, values from Equi-Analytical Laboratories (2018); maize, rice, and sorghum from Cornell University (2017); and potatoes and tubers from Zereu et al. (2014).",,,,,
+,,,,,,,3 Thiagarajan et al. (2018),,,,,
+,,,,,,,4 Simple average of nitrogen content of aboveground and belowground. ,,,,,
+,,,,,,,5 Nitrogen content of aboveground assumed to represent all residue.,,,,,
+,,,,,,,6 Value is an average of N fixing and non-N fixing grasses. ,,,,,
+,,,,,,,7 Approximate mid-point of values from www.ontario.ca (75% MC in dry year, 80% MC in normal year, 85% MC in wet year), madbarn.ca (70-80% MC) and fieldcropnews.com (70-85% MC),,
+,,,,,,,"Notes: Uncertainty is assumed to be ±75% for the N content estimates and ±50% for the lignin content estimates, expressed as 95% confidence intervals.",,,,,

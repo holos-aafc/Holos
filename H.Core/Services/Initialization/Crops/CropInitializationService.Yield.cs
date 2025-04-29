@@ -157,17 +157,20 @@ namespace H.Core.Services.Initialization.Crops
         /// Calculates the default yield for a silage crop using information from its grain crop equivalent.
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for the grain crop.</param>
+        /// <param name="silageCropViewItem"></param>
         /// <returns>The estimated yield (dry matter) for a silage crop</returns>
-        public double CalculateSilageCropYield(CropViewItem grainCropViewItem)
+        public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
         {
-            if (grainCropViewItem.BiomassCoefficientProduct == 0)
+            // Prevent division by 0 in subsequent calculations
+            if (grainCropViewItem.BiomassCoefficientProduct == 0 || grainCropViewItem.MoistureContentOfCropPercentage == 0)
             {
                 return 0;
             }
 
             var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
-            var term2 = (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
-            var result = term1 * term2;
+            var term2 = (silageCropViewItem.MoistureContentOfCropPercentage / grainCropViewItem.MoistureContentOfCropPercentage);
+            var term3 = (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
+            var result = term1 * term2  * term3;
 
             return result;
         }
@@ -198,7 +201,7 @@ namespace H.Core.Services.Initialization.Crops
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmCarbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem: null, currentYearViewItem: grainCropViewItem, farm: farm);
 
             // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem);
+            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem: silageCropViewItem);
             silageCropViewItem.CalculateWetWeightYield();
 
             // No defaults for any grass silages so we use SAD data
