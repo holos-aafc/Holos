@@ -73,7 +73,7 @@ namespace H.Core.Test.Providers.Climate
         public void GetCH4NonFossilValue()
         {
             Table_54_Global_Warming_Emissions_Potential_Data data = _provider.GetGlobalWarmingEmissionsInstance(2021, EmissionTypes.NonFossilCH4);
-            Assert.AreEqual(30, data.GlobalWarmingPotentialValue);
+            Assert.AreEqual(27, data.GlobalWarmingPotentialValue);
         }
 
         [TestMethod]
