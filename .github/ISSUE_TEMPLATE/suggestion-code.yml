@@ -2,7 +2,7 @@ name: Code Suggestion
 description: Suggest a change to the Holos source code.
 labels: ["suggestion", "code"]
 assignees:
-  - hafzaal
+  - holos-aafc
 body:
   - type: markdown
     attributes:

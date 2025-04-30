@@ -1,6 +1,8 @@
 name: Bug/Issue Report
 description: File a bug or report an issue with Holos.
 labels: ["bug"]
+assignees:
+  - holos-aafc
 body:
   - type: markdown
     attributes:
