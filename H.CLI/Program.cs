@@ -198,9 +198,7 @@ namespace H.CLI
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine(Properties.Resources.FarmDoesNotContainAnyData, farm.Name + "_" + farm.SettingsFileName);
-                                System.Threading.Thread.Sleep(2000);
                             }
-
                         }
                         else
                         {
