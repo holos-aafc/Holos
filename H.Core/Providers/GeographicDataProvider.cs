@@ -28,6 +28,7 @@ namespace H.Core.Providers
     {
         #region Fields
 
+        private List<int> _polygonIdsCache = new List<int>();
         private readonly ISoilDataProvider _soilDataProvider;
 
         #endregion
@@ -71,7 +72,16 @@ namespace H.Core.Providers
 
         public List<int> GetPolygonIdList()
         {
-            return _soilDataProvider.GetPolygonIdList();
+            if (_polygonIdsCache.Any())
+            {
+                return _polygonIdsCache;
+            }
+
+            var result =  _soilDataProvider.GetPolygonIdList();
+
+            _polygonIdsCache.AddRange(result);
+
+            return result;
         }
 
         public string GetEcodistrictName(int polygonId)
