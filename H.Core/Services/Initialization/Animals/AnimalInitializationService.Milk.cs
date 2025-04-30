@@ -41,14 +41,14 @@ namespace H.Core.Services.Initialization.Animals
                     {
                         managementPeriod.MilkProduction = 2;
                     }
-                    else if(managementPeriod.AnimalType.IsDairyCattleType() || managementPeriod.AnimalType.IsBeefCattleType())
+                    else if(managementPeriod.AnimalType.IsDairyCattleType())
                     {
                         var milkProduction = _averageMilkProductionDairyCowsProvider.GetAverageMilkProductionForDairyCowsValue(year, province);
                         managementPeriod.MilkProduction = milkProduction;
                     }
                     else
                     {
-                        // Unknown animal type but is lactating so use default
+                        // Other animal types (including beef cattle) but is lactating so use default
                         managementPeriod.MilkProduction = 8;
                     }
                 }
