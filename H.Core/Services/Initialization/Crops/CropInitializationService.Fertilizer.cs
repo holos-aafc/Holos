@@ -20,14 +20,13 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            _icbmCarbonInputCalculator.AssignInputs(
+            var plantCarbonInAgriculturalProduct = _icbmCarbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(
                 previousYearViewItem: null,
                 currentYearViewItem: viewItem,
-                nextYearViewItem: null,
                 farm: farm);
 
             var nitrogenContentOfGrainReturnedToSoil = _icbmNitrogenInputCalculator.CalculateGrainNitrogenTotal(
-                carbonInputFromAgriculturalProduct: viewItem.PlantCarbonInAgriculturalProduct,
+                carbonInputFromAgriculturalProduct: plantCarbonInAgriculturalProduct,
                 nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
 
             var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
