@@ -1,6 +1,8 @@
 name: Feature Request
 description: Submit a request for a feature you would like to see in Holos.
 labels: ["feature request"]
+assignees:
+  - holos-aafc
 body:
   - type: markdown
     attributes:
