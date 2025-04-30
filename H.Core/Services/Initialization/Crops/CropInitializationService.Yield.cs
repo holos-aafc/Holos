@@ -162,15 +162,19 @@ namespace H.Core.Services.Initialization.Crops
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
         {
             // Prevent division by 0 in subsequent calculations
-            if (grainCropViewItem.BiomassCoefficientProduct == 0 || grainCropViewItem.MoistureContentOfCropPercentage == 0)
+            if (grainCropViewItem.BiomassCoefficientProduct == 0)
             {
                 return 0;
             }
 
-            var term1 = grainCropViewItem.Yield + grainCropViewItem.Yield * (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
-            var term2 = (silageCropViewItem.MoistureContentOfCropPercentage / grainCropViewItem.MoistureContentOfCropPercentage);
-            var term3 = (1 + (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
-            var result = term1 * term2  * term3;
+            var term1 = grainCropViewItem.Yield / (1.0 - (grainCropViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
+            var term2 = 1.0 + (grainCropViewItem.BiomassCoefficientStraw / grainCropViewItem.BiomassCoefficientProduct);
+
+            var term3a = 1.0 - (grainCropViewItem.MoistureContentOfCropPercentage / 100.0);
+            var term3b = 1.0 - (silageCropViewItem.MoistureContentOfCropPercentage / 100.0);
+            var term3 = term3a / term3b;
+
+            var result = term1 * term2 * term3;
 
             return result;
         }
