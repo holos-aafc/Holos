@@ -786,7 +786,7 @@ namespace H.Core.Services.Animals
             {
                 var degreesKelvin = 0d;
                 var degreesCelsius = temperature;
-                if (degreesCelsius <= 0)
+                if (degreesCelsius <= 1)
                 {
                     degreesCelsius = 1;
                 }
