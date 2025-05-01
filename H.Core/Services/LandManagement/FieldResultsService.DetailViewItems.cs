@@ -240,7 +240,7 @@ namespace H.Core.Services.LandManagement
             stageState.DetailsScreenViewCropViewItems.AddRange(viewItems.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop));
             
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
-            _carbonService.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, this.AnimalResults, viewItems);
+            _carbonService.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, this.AnimalResults, viewItems, farm);
 
             this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
 

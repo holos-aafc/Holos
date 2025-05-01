@@ -227,5 +227,6 @@ namespace H.Core.Services.Initialization.Crops
             AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem);
 
         void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm);
+        void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem);
     }
 }

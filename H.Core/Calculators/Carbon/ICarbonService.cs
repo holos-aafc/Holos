@@ -14,10 +14,9 @@ namespace H.Core.Calculators.Carbon
             List<AnimalComponentEmissionsResults> animalResults);
         void CalculateLosses(CropViewItem cropViewItem, Farm farm);
 
-        double CalculateManureCarbonInputFromGrazingAnimals(
-            FieldSystemComponent fieldSystemComponent,
+        double CalculateManureCarbonInputFromGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             CropViewItem cropViewItem,
-            List<AnimalComponentEmissionsResults> results);
+            List<AnimalComponentEmissionsResults> results, Farm farm);
 
         /// <summary>
         /// Equation 2.1.2-34
@@ -36,10 +35,9 @@ namespace H.Core.Calculators.Carbon
         ///
         /// (kg C ha^-1)
         /// </summary>
-        void CalculateManureCarbonInputByGrazingAnimals(
-            FieldSystemComponent fieldSystemComponent,
+        void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             IEnumerable<AnimalComponentEmissionsResults> results,
-            List<CropViewItem> cropViewItems);
+            List<CropViewItem> cropViewItems, Farm farm);
 
         /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.

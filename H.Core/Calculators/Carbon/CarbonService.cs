@@ -10,6 +10,7 @@ using System;
 using System.Runtime.CompilerServices;
 using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Services;
+using H.Core.Services.Initialization.Crops;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
@@ -25,6 +26,7 @@ namespace H.Core.Calculators.Carbon
         private readonly IICBMCarbonInputCalculator _icbmCarbonInputCalculator;
         private readonly IAnimalService _animalService;
         private readonly IFieldComponentHelper _fieldComponentHelper;
+        private readonly ICropInitializationService _cropInitializationService;
         
 
         #endregion
@@ -33,6 +35,7 @@ namespace H.Core.Calculators.Carbon
 
         public CarbonService()
         {
+            _cropInitializationService = new CropInitializationService();
             _ipccTier2CarbonInputCalculator = new IPCCTier2CarbonInputCalculator();
             _icbmCarbonInputCalculator = new ICBMCarbonInputCalculator();
             _animalService = new AnimalResultsService();
@@ -140,14 +143,15 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// (kg C ha^-1)
         /// </summary>
-        public double CalculateManureCarbonInputFromGrazingAnimals(
-            FieldSystemComponent fieldSystemComponent,
+        public double CalculateManureCarbonInputFromGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             CropViewItem cropViewItem,
-            List<AnimalComponentEmissionsResults> results)
+            List<AnimalComponentEmissionsResults> results, Farm farm)
         {
+            _cropInitializationService.InitializeGrazingViewItems(farm, cropViewItem);
+
             var result = 0d;
 
-            var grazingViewItems = fieldSystemComponent.CropViewItems.Where(y => y.CropType == cropViewItem.CropType).SelectMany(x => x.GrazingViewItems).ToList();
+            var grazingViewItems = cropViewItem.GrazingViewItems.ToList();
 
             var grazingItems = grazingViewItems.Where(x => x.Start.Year == cropViewItem.Year).ToList();
 
@@ -169,14 +173,13 @@ namespace H.Core.Calculators.Carbon
         ///
         /// (kg C ha^-1)
         /// </summary>
-        public void CalculateManureCarbonInputByGrazingAnimals(
-            FieldSystemComponent fieldSystemComponent,
+        public void CalculateManureCarbonInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
             IEnumerable<AnimalComponentEmissionsResults> results,
-            List<CropViewItem> cropViewItems)
+            List<CropViewItem> cropViewItems, Farm farm)
         {
             foreach (var cropViewItem in cropViewItems)
             {
-                cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureCarbonInputFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
+                cropViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureCarbonInputFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList(), farm);
             }
         }
 
@@ -320,7 +323,6 @@ namespace H.Core.Calculators.Carbon
         #endregion
 
         #region Private Methods
-
 
         public Tuple<double, double> CalculateUptakeByGrazingAnimals(List<ManagementPeriod> managementPeriods, CropViewItem viewItem, AnimalGroup animalGroup, FieldSystemComponent fieldSystemComponent, Farm farm, AnimalComponentBase animalComponent)
         {
