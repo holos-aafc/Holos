@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
@@ -104,6 +105,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// (kg)
         /// </summary>
+        [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double WeightOfWeanedAnimals 
         { 
             get => _weightOfWeanedAnimals; 
@@ -113,6 +115,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// (kg)
         /// </summary>
+        [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double WeightOfPigletsAtBirth 
         { 
             get => _weightOfPigletsAtBirth; 

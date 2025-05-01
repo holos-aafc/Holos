@@ -395,6 +395,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// (kg head^-1)
         /// </summary>
+        [Obsolete("Use WeightOfWeanedAnimals property on AnimalGroup instead")]
         [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double LiveWeightOfYoungAtWeaningAge
         {
@@ -405,6 +406,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// (kg head^-1)
         /// </summary>
+        [Obsolete("Use WeightOfPigletsAtBirth property on AnimalGroup instead")]
         [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double LiveWeightOfYoungAtBirth
         {

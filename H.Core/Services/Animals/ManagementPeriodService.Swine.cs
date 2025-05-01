@@ -19,7 +19,6 @@ namespace H.Core.Services.Animals
         const double PeriodDailyGain = 0.25;
         #endregion
 
-
         #region Public Methods
         public void FarrowToFinishBoarsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged, PropertyChangedEventHandler managementPeriodOnPropertyChanged)
@@ -37,6 +36,9 @@ namespace H.Core.Services.Animals
         public void FarrowToFinishGiltsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged, PropertyChangedEventHandler managementPeriodOnPropertyChanged)
         {
+            animalGroup.WeightOfPigletsAtBirth = 1.4;
+            animalGroup.WeightOfWeanedAnimals = 6;
+
             var managementPeriod = AddSwineManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged, managementPeriodOnPropertyChanged);
             managementPeriod.Name = H.Core.Properties.Resources.LabelOpenGilts;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
@@ -89,6 +91,9 @@ namespace H.Core.Services.Animals
         public void FarrowToFinishSowsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged, PropertyChangedEventHandler managementPeriodOnPropertyChanged)
         {
+            animalGroup.WeightOfPigletsAtBirth = 1.4;
+            animalGroup.WeightOfWeanedAnimals = 6;
+
             var managementPeriod = AddSwineManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged, managementPeriodOnPropertyChanged);
             managementPeriod.SelectedDiet = farm.GetDietByName(DietType.Gestation);
             managementPeriod.Name = Properties.Resources.LabelOpenSows;
@@ -267,6 +272,9 @@ namespace H.Core.Services.Animals
         public void FarrowToWeanGiltsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged, PropertyChangedEventHandler managementPeriodOnPropertyChanged)
         {
+            animalGroup.WeightOfPigletsAtBirth = 1.4;
+            animalGroup.WeightOfWeanedAnimals = 6;
+
             var managementPeriod = AddSwineManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged, managementPeriodOnPropertyChanged);
             managementPeriod.SelectedDiet = farm.GetDietByName(DietType.GiltDeveloperDiet);
             managementPeriod.Name = Properties.Resources.LabelOpenGilts;
@@ -320,6 +328,9 @@ namespace H.Core.Services.Animals
         public void FarrowToWeanSowsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged, PropertyChangedEventHandler managementPeriodOnPropertyChanged)
         {
+            animalGroup.WeightOfPigletsAtBirth = 1.4;
+            animalGroup.WeightOfWeanedAnimals = 6;
+
             var managementPeriod = AddSwineManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged, managementPeriodOnPropertyChanged);
             managementPeriod.SelectedDiet = farm.GetDietByName(DietType.Gestation);
             managementPeriod.Name = Properties.Resources.LabelOpenSows;
@@ -451,6 +462,5 @@ namespace H.Core.Services.Animals
         }
 
         #endregion
-
     }
 }
