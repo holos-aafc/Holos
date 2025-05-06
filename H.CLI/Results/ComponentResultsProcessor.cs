@@ -11,6 +11,7 @@ using H.Infrastructure;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -88,6 +89,10 @@ namespace H.CLI.Results
         {
             var results = new List<FarmEmissionResults>();
 
+            var numberOfFarms = storage.ApplicationData.Farms.Count;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             // Change ordering here
             var orderedFarms = storage.ApplicationData.Farms.OrderBy(x => x.Name);
             foreach (var farm in orderedFarms)
@@ -100,10 +105,18 @@ namespace H.CLI.Results
                 _animalEmissionResultsForAllFarms.Add(new KeyValuePair<string, List<AnimalComponentEmissionsResults>>(key, farmResults.AnimalComponentEmissionsResults.ToList()));
 
                 // TODO: Add emission results from fields and shelterbelts
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(string.Format(H.CLI.Properties.Resources.FinishedCalculatingResultsForForName, farm.Name));
+                Console.WriteLine(string.Format(H.CLI.Properties.Resources.NumberOfFarmsRemainingToProcess, numberOfFarms--));
             }
+
+            stopwatch.Stop();
+            Console.WriteLine(string.Format(H.CLI.Properties.Resources.FinishedCLIRunInTime, stopwatch.Elapsed.ToString("g")));
 
             _farmEmissionResults = results;
         }
+
 
         /// <summary>
         /// Responsible For Creating All Final Reports based on the base directory of the argument passed when running the CLI (location of the Farms folder)

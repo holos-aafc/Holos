@@ -76,7 +76,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// Used to create a template csv file that corresponds to a Shelterbelt for testing purposes that contains the headers for a Shelterbelt
         /// and two rows of corresponding data and writes it to the filePath. Creates a stringBuilder and appends each added key or element with a comma
         /// For example: "Hardiness Zone, Ecodistrict Id, Year Of Observation, ... ,". After the headers (keys) have been built, then we append a new line and
-        /// create another comma delimited string for the second row in our file.
+        /// create another comma-delimited string for the second row in our file.
         /// </summary>
     
         public void SetTemplateCSVFileForTesting(string testPath, Dictionary<string, ImperialUnitsOfMeasurement?> componentKeys)

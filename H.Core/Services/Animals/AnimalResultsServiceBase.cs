@@ -166,7 +166,7 @@ namespace H.Core.Services.Animals
                          currentDate <= endDate;
                          currentDate = currentDate.AddDays(1))
                     {
-                        if (this.HasMovedToNewYear(currentDate))
+                        if (this.HasMovedToNewYear(currentDate)) 
                         {
                             previousDaysEmissions = null;
                         }

@@ -49,8 +49,6 @@ namespace H.Core.Providers.Soil
 
         private List<DefaultYieldTableData> GetData()
         {
-            //return new List<DefaultYieldTableData>();
-
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var files = new List<CsvResourceNames>
             {
@@ -165,4 +163,3 @@ namespace H.Core.Providers.Soil
         }
     }
 }
-

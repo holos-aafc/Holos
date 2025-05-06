@@ -1421,13 +1421,22 @@
   <data name="DailyTanExcretion" xml:space="preserve">
     <value>Excrétion quotidienne d'AAT</value>
   </data>
+  <data name="IndoorBarnTemperature" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FinishedCalculatingResultsForForName" xml:space="preserve">
+    <value />
+  </data>
   <data name="ComponentType" xml:space="preserve">
     <value>Type de composant</value>
   </data>
   <data name="Nemf" xml:space="preserve">
     <value>Nemf</value>
   </data>
-  <data name="IndoorBarnTemperature" xml:space="preserve">
+  <data name="NumberOfFarmsRemainingToProcess" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FinishedCLIRunInTime" xml:space="preserve">
     <value />
   </data>
 </root>

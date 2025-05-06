@@ -772,6 +772,24 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished calculating results for {0}.
+        /// </summary>
+        public static string FinishedCalculatingResultsForForName {
+            get {
+                return ResourceManager.GetString("FinishedCalculatingResultsForForName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished in {0}.
+        /// </summary>
+        public static string FinishedCLIRunInTime {
+            get {
+                return ResourceManager.GetString("FinishedCLIRunInTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #Fodder Corn.
         /// </summary>
         public static string FodderCorn {
@@ -2424,6 +2442,15 @@ namespace H.CLI.Properties {
         public static string NumberOfCalves {
             get {
                 return ResourceManager.GetString("NumberOfCalves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} farms remaining to process.
+        /// </summary>
+        public static string NumberOfFarmsRemainingToProcess {
+            get {
+                return ResourceManager.GetString("NumberOfFarmsRemainingToProcess", resourceCulture);
             }
         }
         

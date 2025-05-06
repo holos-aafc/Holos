@@ -32,9 +32,9 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.1.20</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.24</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -71,7 +71,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>HolosIcon.ico</ApplicationIcon>
