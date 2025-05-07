@@ -242,7 +242,7 @@ namespace H.Core.Providers.Climate
             {
                 writer.WriteLine(string.Join(",", columnNames));
 
-                for (int year = startYear; year < endYear; year++)
+                for (int year = startYear; year <= endYear; year++)
                 {
                     for (int j = 0; j < 12; j++)
                     {

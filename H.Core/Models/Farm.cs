@@ -854,14 +854,28 @@ namespace H.Core.Models
         {
             var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
-            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+            if (stageState.DetailsScreenViewCropViewItems.Any() == false)
+            {
+                return this.ClimateData.DailyClimateData.Min(x => x.Date.Year);
+            }
+            else
+            {
+                return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+            }
         }
 
         public int GetEndYearOfEarliestRotation()
         {
             var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
-            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
+            if (stageState.DetailsScreenViewCropViewItems.Any() == false)
+            {
+                return this.ClimateData.DailyClimateData.Max(x => x.Date.Year);
+            }
+            else
+            {
+                return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
+            }
         }
 
         public void Initialize()
