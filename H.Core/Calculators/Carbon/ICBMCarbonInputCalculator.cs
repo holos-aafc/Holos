@@ -130,24 +130,41 @@ namespace H.Core.Calculators.Carbon
                 moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
             }
 
-            if (Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon)
+            var isPerennial = currentYearViewItem.CropType.IsPerennial();
+            var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+            var isAllProductReturned = Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon;
+            var isSwathing = currentYearViewItem.HarvestMethod == HarvestMethods.Swathing;
+            var isGreenManure = currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure;
+            var isCustomYieldAndIsGrazed = isCustomYieldAssignmentMethod && isGrazed;
+            var hasHarvest = currentYearViewItem.GetHayHarvests().Any();
+            var isCustomYieldAndNoHarvestAndNoGrazing = isCustomYieldAssignmentMethod && (hasHarvest == false) && (isGrazed == false);
+            var isSmallAreaAssignment = farm.YieldAssignmentMethod == YieldAssignmentMethod.SmallAreaData;
+            var tameHayAdjustmentNeeded = (hasHarvest == false) && (isGrazed == false) && isSmallAreaAssignment && isPerennial; 
+
+            var moistureContentAdjustment = (1.0 - moistureContentFraction);
+            var carbonConcentration = currentYearViewItem.CarbonConcentration;
+            var yield = currentYearViewItem.Yield;
+
+            if (isAllProductReturned || isSwathing || isGreenManure || isCustomYieldAndIsGrazed || isCustomYieldAndNoHarvestAndNoGrazing)
             {
-                // If all product is returned to soil, use this calculation otherwise when 100% of product is returned, a doubling of yield will be used as in below calculation. 
-                // 100 % of product will be returned when crops are being used as 'green manure' e.g. lentils
-                result = (currentYearViewItem.Yield) * (1 - moistureContentFraction) * currentYearViewItem.CarbonConcentration;
+                result = yield * moistureContentAdjustment * carbonConcentration;
             }
             else
             {
-                var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                var firstTerm = 0d;
+                var yieldAdjustment = yield / (1 - (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
 
-                if (currentYearViewItem.HarvestMethod == HarvestMethods.Swathing || currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure || (isCustomYieldAssignmentMethod && isGrazed))
+                if (tameHayAdjustmentNeeded)
                 {
-                    result = ((currentYearViewItem.Yield) * (1 - moistureContentFraction)) * currentYearViewItem.CarbonConcentration;
+                    firstTerm = yieldAdjustment * ((1.0 - 0.13) / (1.0 - moistureContentFraction));
+                    moistureContentAdjustment = 1 - moistureContentFraction;
                 }
                 else
                 {
-                    result = ((currentYearViewItem.Yield + currentYearViewItem.Yield * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100)) * (1 - moistureContentFraction)) * currentYearViewItem.CarbonConcentration;
+                    firstTerm = yield / (1 - (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
                 }
+
+                result = (firstTerm * moistureContentAdjustment) * carbonConcentration;
             }
 
             return result;

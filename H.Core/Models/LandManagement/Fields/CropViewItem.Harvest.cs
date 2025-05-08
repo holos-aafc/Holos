@@ -108,6 +108,14 @@ namespace H.Core.Models.LandManagement.Fields
             return this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)).ToList();
         }
 
+        /// <summary>
+        /// Returns all <see cref="HarvestViewItems"/> for the current year
+        /// </summary>
+        public List<HarvestViewItem> GetHayHarvests()
+        {
+            return this.GetHayHarvestsByYear(this.Year);
+        }
+
         #endregion
     }
 }

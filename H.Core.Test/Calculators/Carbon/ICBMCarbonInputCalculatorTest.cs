@@ -156,15 +156,14 @@ namespace H.Core.Test.Calculators.Carbon
             var currentYearViewItem = new CropViewItem()
             {
                 CropType = CropType.TameMixed,
-                Yield = 1000,
-                PercentageOfProductYieldReturnedToSoil = 10,
+                Yield = 5000,
+                PercentageOfProductYieldReturnedToSoil = 35,
                 PercentageOfStrawReturnedToSoil = 0, // This will be set to zero for the user when they have selected a perennial
                 CarbonConcentration = 0.45,
                 IrrigationType = IrrigationType.RainFed,
                 AmountOfIrrigation = 0,
-                MoistureContentOfCrop = 0.12,
+                MoistureContentOfCrop = 0.13,
                 HarvestMethod = HarvestMethods.CashCrop,
-                PlantCarbonInAgriculturalProduct = 435.6,
             };
 
             var nextYearViewItem = new CropViewItem();
@@ -184,14 +183,14 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 435.6
+            // Plant C in agricultural product: Cp = 3011.538
 
             // Cag = Cptosoil
             // = (Cp * %yieldReturned / 100) 
-            // = (435.6 * 0.1) 
-            // = 43.56 
+            // = (3011.538 * 0.35) 
+            // = 1054.03 
 
-            Assert.AreEqual(43.56, currentYearViewItem.AboveGroundCarbonInput, 2);
+            Assert.AreEqual(1053.04, currentYearViewItem.AboveGroundCarbonInput, 2);
         }
 
         [TestMethod]
@@ -372,7 +371,7 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: null,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 396
+            // Plant C in agricultural product: Cp = 391.5
 
             // Cbg = Cr + Ce
             // = [Cp * (Rr/Rp) * (Sr/100) * 1/standLength] + [Cp * (Re/Rp)]
@@ -384,12 +383,13 @@ namespace H.Core.Test.Calculators.Carbon
             // * NOTE: the stand length was removed from this calculation (not considered anymore). New calculation should be:
             // Cbg = Cr + Ce
             // = [Cp * (Rr/Rp) * (Sr/100)] + [Cp * (Re/Rp)]
-            // = [396 * (0.4/0.5) * (100/100)] + [396 * (0.3 / 0.5)]
-            // = [396 * 0.8 * 1] + [396 * (0.6)]
-            // = 316.8 + 237.6
-            // = 554.4
+            // = [391.5 * (0.4/0.5) * (100/100)] + [391.5 * (0.3 / 0.5)]
+            // = [391.5 * 0.8 * 1] + [391.5 * (0.6)]
+            // = [root input less than 450 so = 450] 
+            // = 450 + 234.9
+            // = 684.9
 
-            Assert.AreEqual(687.6, currentYearViewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(684.9, currentYearViewItem.BelowGroundCarbonInput, 1);
         }
 
         [TestMethod]
@@ -530,10 +530,10 @@ namespace H.Core.Test.Calculators.Carbon
 
             var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, currentYearViewItem, new Farm());
 
-            // = [(1000 + 1000 * .22) * (1 - 0.12)] * 0.45
-            // = 1220 * 0.88 * 0.45
+            // = [(1000 / (1 - 0.22)) * (1 - 0.12)] * 0.45
+            // = [(1000 / 0.78) * (0.88)] * 0.45
 
-            Assert.AreEqual(483.12, result, delta: 2);
+            Assert.AreEqual(507.69, result, delta: 2);
         }
 
         /// <summary>
@@ -807,14 +807,14 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 534.6
+            // Plant C in agricultural product: Cp = 609.23
 
             // Cag = Cptosoil + Cs 
             // = [Cp * (Sp/100)] + 0 (since straw inputs are not calculated for silage crops)
-            // = 534.6 * 0.35
+            // = 609.23 * 0.35
             // = 187.11
 
-            Assert.AreEqual(187.11, currentYearViewItem.AboveGroundCarbonInput, 2);
+            Assert.AreEqual(213.23, currentYearViewItem.AboveGroundCarbonInput, 2);
         }
 
         [TestMethod]
@@ -854,16 +854,16 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: null,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 534.6
+            // Plant C in agricultural product: Cp = 609.23
 
             // Cbg = Cr + Ce
             // = [Cp * (Rr/Rp) * (Sr/100)] + [Cp * (Re/Rp)]
-            // = [534.6 * (0.4/0.2) * 100/100] + [534.6 * (0.3/0.2)]
-            // = [534.6 * 2 * 1] + [534.6 * 1.5]
-            // = 1069.2 + 801.9
-            // = 1871.1
+            // = [609.23 * (0.4/0.2) * 100/100] + [609.23 * (0.3/0.2)]
+            // = [609.23 * 2 * 1] + [609.23 * 1.5]
+            // = 1218.46 + 913.845
+            // = 2132.305
 
-            Assert.AreEqual(1871, currentYearViewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(2132.305, currentYearViewItem.BelowGroundCarbonInput, 1);
         }
 
         #endregion
@@ -988,7 +988,6 @@ namespace H.Core.Test.Calculators.Carbon
                 HarvestMethod = HarvestMethods.CashCrop,
                 BiomassCoefficientProduct = 0.451,
                 BiomassCoefficientStraw = 0.340,
-                PlantCarbonInAgriculturalProduct = 594
             };
 
             var nextYearViewItem = new CropViewItem();
@@ -1008,16 +1007,16 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm);
 
-            // Plant C in agricultural product: Cp = 594
+            // Plant C in agricultural product: Cp = 792
 
             // Cag = CptoSoil + Cs
             // = [Cp * (Sp / 100)] + [Cp * (Rs / Rp) * (Ss / 100)]
-            // = [594 * (50 / 100)] + [594 * (0.340 / 0.451) * (10 / 100)]
-            // = [594 * 0.5] + [594 * 0.753 * 0.1] 
-            // = 297 + 44.7282
-            // = 341.7282
+            // = [792 * (50 / 100)] + [792 * (0.340 / 0.451) * (10 / 100)]
+            // = [792 * 0.5] + [792 * 0.753 * 0.1] 
+            // = 396 + 59.6376
+            // = 455.6376
 
-            Assert.AreEqual(341.7282, currentYearViewItem.AboveGroundCarbonInput, 4);
+            Assert.AreEqual(455.6376, currentYearViewItem.AboveGroundCarbonInput, 4);
         }
 
         /// <summary>

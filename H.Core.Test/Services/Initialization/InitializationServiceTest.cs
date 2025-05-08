@@ -96,7 +96,7 @@ namespace H.Core.Test.Services.Initialization
 
             var result = _initializationService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
 
-            Assert.AreEqual(135.71712, result);
+            Assert.AreEqual(135.77142857142857, result);
         }
 
         [TestMethod]
