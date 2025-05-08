@@ -4,6 +4,7 @@ using H.Core.Services.Animals;
 using H.Core.Emissions.Results;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Navigation;
 using H.Core.Enumerations;
 using H.Core.Services;
 
@@ -64,6 +65,39 @@ namespace H.Core.Calculators.Carbon
             }
 
             return (result / currentYearViewItem.Area);
+        }
+
+        /// <summary>
+        /// Equation 11.3.2-2 (b)
+        /// 
+        /// (kg C)
+        /// </summary>
+        public double GetSupplementalLosses(
+            CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItems,
+            Farm farm)
+        {
+            var result = 0.0;
+
+            // Get total amount of supplemental hay added
+            var hayImportViewItems = currentYearViewItem.HayImportViewItems;
+            foreach (var hayImportViewItem in hayImportViewItems)
+            {
+                // Total dry matter weight
+                var totalDryMatterWeight = hayImportViewItem.GetTotalDryMatterWeightOfAllBales();
+
+                var totalCarbon = totalDryMatterWeight * currentYearViewItem.CarbonConcentration;
+
+                // Amount lost during feeding
+                var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
+
+                var localResult = (totalCarbon / loss) * (1 - loss);
+
+                result += localResult;
+            }
+
+            return result;
         }
 
         #endregion

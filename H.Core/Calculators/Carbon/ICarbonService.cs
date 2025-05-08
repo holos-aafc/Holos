@@ -98,5 +98,11 @@ namespace H.Core.Calculators.Carbon
 
         void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm,
             List<AnimalComponentEmissionsResults> animalResults);
+
+        double GetSupplementalLosses(
+            CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItems,
+            Farm farm);
     }
 }

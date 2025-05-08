@@ -582,41 +582,6 @@ namespace H.Core.Calculators.Carbon
             return carbonDioxideChangeForSoilByMonth;
         }
 
-        /// <summary>
-        /// Equation 11.3.2-4
-        /// </summary>
-        /// <returns>Total carbon losses from grazing animals (kg C)</returns>
-        public double RecalculatePlantCarbonForGrazingScenario(
-            CropViewItem viewItem)
-        {
-            var lossesFromGrazing = viewItem.TotalCarbonLossesByGrazingAnimals;
-
-            var averageUtilizationRate = viewItem.GrazingViewItems.Any() ? viewItem.GrazingViewItems.Average(x => x.Utilization) : 0;
-            var denominator = 1 - (averageUtilizationRate / 100.0);
-            if (denominator < 0)
-            {
-                denominator = 1;
-            }
-
-            var uptake = lossesFromGrazing / denominator;
-
-            return uptake;
-        }
-
-        public double RecalculateCarbonInputForGrazingScenario(
-            CropViewItem viewItem)
-        {
-            // Check for negative values here
-
-            var result = viewItem.PlantCarbonInAgriculturalProduct - (viewItem.TotalCarbonLossesByGrazingAnimals / viewItem.Area);
-            if (result < 0)
-            {
-                return viewItem.PlantCarbonInAgriculturalProduct;
-            }
-
-            return result;
-        }
-
         public void CalculateCarbonAtInterval(
             CropViewItem previousYearResults, 
             CropViewItem currentYearResults, 

@@ -18,5 +18,14 @@ namespace H.Core.Calculators.Carbon
             CropViewItem currentYearViewItem,
             CropViewItem nextYearViewItems,
             Farm farm);
+
+        /// <summary>
+        /// (kg C)
+        /// </summary>
+        double GetSupplementalLosses(
+            CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItems,
+            Farm farm);
     }
 }

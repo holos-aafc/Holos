@@ -8,6 +8,7 @@ using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Services;
 using H.Core.Services.Initialization.Crops;
@@ -190,6 +191,18 @@ namespace H.Core.Calculators.Carbon
         }
 
         /// <summary>
+        /// (kg C)
+        /// </summary>
+        public double GetSupplementalLosses(
+            CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItems,
+            Farm farm)
+        {
+            return _icbmCarbonInputCalculator.GetSupplementalLosses(previousYearViewItem, currentYearViewItem, nextYearViewItems, farm);
+        }
+
+        /// <summary>
         /// Calculates how much carbon was lost due to bales being exported off field.
         /// </summary>
         public void CalculateCarbonLostFromHayExports(Farm farm, CropViewItem cropViewItem)
@@ -282,7 +295,9 @@ namespace H.Core.Calculators.Carbon
                     }
                 }
 
-                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLossesForField;
+                var amountsNotEaten = GetSupplementalLosses(null, cropViewItem, null, farm);
+
+                cropViewItem.TotalCarbonLossesByGrazingAnimals = totalCarbonLossesForField - amountsNotEaten;
                 cropViewItem.TotalCarbonUptakeByAnimals = totalCarbonUptakeForField;
             }
         }
@@ -383,6 +398,7 @@ namespace H.Core.Calculators.Carbon
                     carbonUpdateForOtherPeriods += carbonUptakeForPeriod;
                 }
 
+                // Equation 11.3.2-7
                 var result = (carbonUpdateForOtherPeriods + carbonUptakeForLastPeriod);
 
                 return new Tuple<double, double>(result, totalCarbonUptake);
