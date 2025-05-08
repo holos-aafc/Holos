@@ -156,6 +156,9 @@ namespace H.Core.Calculators.Carbon
 
                 if (tameHayAdjustmentNeeded)
                 {
+                    // Here the moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document)
+                    // The 13% used below is the default moisture content for all crops and will represent the moisture content of the hay crop (see algorithm document)
+
                     firstTerm = yieldAdjustment * ((1.0 - 0.13) / (1.0 - moistureContentFraction));
                     moistureContentAdjustment = 1 - moistureContentFraction;
                 }
