@@ -30,20 +30,27 @@ namespace H.Core.Services.Initialization.Crops
             grazingViewItem.MoistureContentAsPercentage = 80;
 
             // Create a string that will be used on the field view to list details of this view item
-            grazingViewItem.Description = string.Format(H.Core.Properties.Resources.LabelGrazingAnimalsDescription,
-                managementPeriod.NumberOfAnimals,
-                animalGroup.AnimalTypeString.ToLowerInvariant(),
-                managementPeriod.Start.ToString("MM/dd/yyyy"),
-                managementPeriod.End.ToString("MM/dd/yyyy"),
-                managementPeriod.NumberOfDays,
-                managementPeriod.SelectedDiet.Name.ToLowerInvariant());
+            grazingViewItem.Description = this.InitializeDescription(managementPeriod, animalGroup);
 
             // set utilization based on crop type
             var utilization = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(cropViewItem.CropType);
             grazingViewItem.Utilization = utilization;
         }
 
-        public void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem)
+        public string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup)
+        {
+            // Create a string that will be used on the field view to list details of this view item
+            return  string.Format(H.Core.Properties.Resources.LabelGrazingAnimalsDescription,
+                managementPeriod.NumberOfAnimals,
+                animalGroup.AnimalTypeString.ToLowerInvariant(),
+                managementPeriod.Start.ToString("MM/dd/yyyy"),
+                managementPeriod.End.ToString("MM/dd/yyyy"),
+                managementPeriod.NumberOfDays,
+                managementPeriod.SelectedDiet.Name.ToLowerInvariant());
+        }
+
+        public void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem,
+            FieldSystemComponent fieldSystemComponent)
         {
             var managementPeriodsThatAlreadyExistAsGrazingItems = new List<GrazingViewItem>();
             var managementPeriodsThatNeedToBeAddedAsGrazingItems = new List<GrazingViewItem>();
@@ -63,7 +70,7 @@ namespace H.Core.Services.Initialization.Crops
                             var fieldComponent = managementPeriod.HousingDetails.PastureLocation;
 
                             // This event could have come from any animal component associated with any field, ensure the animals are grazing on this field
-                            if (fieldComponent.Guid.Equals(fieldComponent.Guid))
+                            if (fieldComponent.Guid.Equals(fieldSystemComponent.Guid))
                             {
                                 // Create a grazing view item that specifies when the animals started grazing and when they completed the grazing
                                 var grazingViewItem = new GrazingViewItem();
@@ -88,10 +95,12 @@ namespace H.Core.Services.Initialization.Crops
 
                                 if (thisManagementPeriodExistsAsAGrazingItem != null)
                                 {
+                                    thisManagementPeriodExistsAsAGrazingItem.Description = this.InitializeDescription(managementPeriod, animalGroup);
                                     managementPeriodsThatAlreadyExistAsGrazingItems.Add(thisManagementPeriodExistsAsAGrazingItem);
                                 }
                                 else
                                 {
+                                    grazingViewItem.Description = this.InitializeDescription(managementPeriod, animalGroup);
                                     managementPeriodsThatNeedToBeAddedAsGrazingItems.Add(grazingViewItem);
                                 }
                             }

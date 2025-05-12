@@ -407,9 +407,15 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeNitrogenContent(viewItem, farm);
         }
 
-        public void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem)
+        public void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem,
+            FieldSystemComponent fieldSystemComponent)
         {
-            _cropInitializationService.InitializeGrazingViewItems(farm, viewItem);
+            _cropInitializationService.InitializeGrazingViewItems(farm, viewItem, fieldSystemComponent);
+        }
+
+        public string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup)
+        {
+            return _cropInitializationService.InitializeDescription(managementPeriod, animalGroup);
         }
 
 

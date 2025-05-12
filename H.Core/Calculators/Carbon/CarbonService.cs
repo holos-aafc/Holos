@@ -148,7 +148,7 @@ namespace H.Core.Calculators.Carbon
             CropViewItem cropViewItem,
             List<AnimalComponentEmissionsResults> results, Farm farm)
         {
-            _cropInitializationService.InitializeGrazingViewItems(farm, cropViewItem);
+            _cropInitializationService.InitializeGrazingViewItems(farm, cropViewItem, fieldSystemComponent);
 
             var result = 0d;
 
