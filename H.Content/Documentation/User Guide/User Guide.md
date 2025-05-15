@@ -2815,9 +2815,9 @@ There are two methods to add a new farm to an existing farms folder. [The common
 -	**Crop Row Data**: Crop Year, Crop Type, Tillage  Type, Year In Perennial Stand, Row ID, Perennial Stand Length(Years), Biomass Coefficient Product, Biomass Coefficient Straw, Biomass Coefficient Roots, Biomass Coefficient Extra roots, Nitrogen Content In Product (kg kg^-1), Nitrogen Content In Straw (kg kg^-1), Nitrogen Content In Roots(kg kg^-1), Nitrogen Content In Extra roots (kg kg^-1), Carbon Concentration (kg kg^-1).
 -	**Crop Data**: Yield (kg ha ^-1), Harvest Method, Nitrogen Fertilizer Rate(kg N ha^-1), Phosphorous Fertilizer Rate(kg P ha^-1), Is Irrigated, Irrigation Type, Amount Of Irrigation(mm), Moisture Content Of Crop(%), Percentage Of Straw Returned To Soil(%),Percentage Of Roots Returned To Soil(%), Percentage Of Product Yield Returned To Soil(%), Is Pesticide Used, Number Of Pesticide Passes
 -	**Manure Data**: Manure Applied, Amount of Manure Applied (kg ha^-1), Manure Application Type, Manure Animal Source Type, Manure State Type, Manure Location Source Type
--	**Cover Crop Data**: Cover Crops Used, Cover Crop Type, Cover Crop Termination Type
 -	**Undersown Crop Data**: Under Sown Crops Used
 -	**Grazed Crop Data**: Crop Is Grazed
+-	**Crop Climate Data**: Climate Parameter, Tillage Factor, Fuel Energy
 -	The figures below are an example of the different data groups based on the field data input Excel file to make it easier to visualize.
 
 <br>
@@ -2866,7 +2866,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
 </p>
 <br>
 
-**Field Data Input Section (Crop Data, Manure Data, Cover Crop Data)**
+**Field Data Input Section (Crop Data, Manure Data, Undersown Crops/Grazed Crop Data)**
 
 <br>
 <p align="center">
@@ -2879,21 +2879,21 @@ There are two methods to add a new farm to an existing farms folder. [The common
 		<br>
 		D: Manure Data
 		<br>
-		E: Cover Crop Data
+		E: Undersown Crops/Grazed Crop Data
 	</em>
 </p>
 <br>
 
-**Field Data Input Section (Undersown Crops or Grazed Crop Data)**
+**Field Data Input Section (Crop Climate Data)**
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-14.png" alt="Figure10-14" width="950"/>
     <br>
     <em>
-		Figure 10-14 - Field Data Input Section (Crop Data).
+		Figure 10-14 - Field Data Input Section (Crop Climate Data).
 		<br>
-		F: Undersown Crops/Grazed Crop Data.
+		F: Crop Climate Data.
 	</em>
 </p>
 <br>
@@ -3203,6 +3203,8 @@ Below is an example of a beef component data file broken into sections
     <em>
 		Figure 10-23 - Dairy Data Section 2.
 		<br>
+	    	C: Dairy group management period.
+		<br>
 		D: Diet details for management period.
 	</em>
 </p>
@@ -3229,7 +3231,7 @@ Below is an example of a beef component data file broken into sections
     <em>
 		Figure 10-25 - Dairy Data Section 4.
 		<br>
-		F: Manure details for management period.
+		F: Bedding details for management period.
 	</em>
 </p>
 <br>
@@ -3251,7 +3253,7 @@ Below is an example of a beef component data file broken into sections
 -	Each row in the Excel file will refer to **one of these animal groups** and **one management period** (an animal group can have multiple management periods).
 -	**If you have multiple management periods for an animal group (same group name and group type)**, please add another row referring to the same animal group but change the management period data accordingly.
 -	Sheep components have specific data for **wool production, energy required to produce wool, energy required to produce milk, gain coefficient A and gain coefficient B**,
--	**If the data does not apply to an animal group, please enter “N/A” as shown below in figure 10.18**
+-	**If the data does not apply to an animal group, please enter “N/A”**
 
 Below is an example of a sheep component data file broken into sections
 
@@ -3292,9 +3294,21 @@ Below is an example of a sheep component data file broken into sections
     <em>
 		Figure 10-28 - Sheep Data Section 3.
 		<br>
-		E: Housing details for management period.
+		D: Diet details for management period.
 		<br>
-		F: Manure details for management period.
+		E: Bedding details for management period.
+	</em>
+</p>
+<br>
+
+
+<p align="center">
+ <img src="../../Images/UserGuide/en/chapter10/figure10-28b.png" alt="Figure10-28" width="950"/>
+    <br>
+    <em>
+		Figure 10-28 - Sheep Data Section 3.
+		<br>
+		E: Bedding details for management period.
 	</em>
 </p>
 <br>
@@ -3540,7 +3554,7 @@ If you have [installed the CLI](https://github.com/holos-aafc/Holos#download), t
 		<br>
 		B: Results for a component
 		<br>
-		C: Monthly results for an animal group, including totals for all the months
+		C: Monthly results for an animal group
 	</em>
 </p>
 <br>
@@ -3691,14 +3705,14 @@ If the names of the component’s are not valid, the data will not be processed.
 
 ### One of the Data Values is Empty
 
-1. Below is an example of an empty data value in a shelterbelt data input Excel file
+1. Below is an example of an empty data value in a Beef Finisher data input Excel file
 
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-38.png" alt="Figure10-38" width="850"/>
     <br>
     <em>
-		Figure 10-38 - Example of an Empty Data Value in a Shelterbelt Data Input Excel File
+		Figure 10-38 - Example of an Empty Data Value in a Beef Finisher Data Input Excel File
 		<br>
 		A: Empty data value
 	</em>
