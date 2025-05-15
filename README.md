@@ -40,6 +40,8 @@ A poultry specific training guide can be found <a href="https://github.com/holos
 
 An anaerobic digestor specific tranining guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Anaerobic%20Digestion/Holos_4_Training_Guide_AnaerobicDigestor.md" target="_blank">here</a>.
 
+A CLI specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/CLI%20Training%20Guide/Holos_4_Training_Guide_CLI.md" target="_blank">here</a>.
+
 Video tutorials on using Holos 4 as well as navigating the GitHub interface can be found [here](https://www.youtube.com/@holosaafc9123).
 
 # User Guide
