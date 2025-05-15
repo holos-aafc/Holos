@@ -1633,20 +1633,17 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swine Group,Feed Intake (kg head -1 day-1)
-        ///Dry gilt/sow,2.488
-        ///Lactating gilt/sow,6.590
-        ///Nursery weaners (starter diet 1),0.797
-        ///Nursery weaners (starter diet 2),1.165
-        ///Grower/Finisher diet 1,1.679
-        ///Grower/Finisher diet 2,2.134
-        ///Grower/Finisher diet 3,2.55
-        ///Grower/Finisher diet 4,2.934
-        ///Boar,3.00
-        ///,,,,,,
-        ///,,,,,,
-        ///&quot;Data source: D. Beaulieu, U. of Saskatchewan, pers. comm.&quot;,,,,,,
-        ///.
+        ///   Looks up a localized string similar to Swine Group,Feed Intake (kg head -1 day-1),Start Weight (kg),End Weight (kg),Litter size (no. piglets),No. days in management period
+        ///Dry gilt/sow,2.488,198,198,9,
+        ///Lactating gilt/sow,6.590,198,198,9,
+        ///Piglet (nursing),,1.4,6,,21
+        ///Nursery weaners (starter diet 1),0.797,6,20,,19
+        ///Nursery weaners (starter diet 2),1.165,20,30,,16
+        ///Grower/Finisher diet 1 (1),1.679,30,50,,26
+        ///Grower/Finisher diet 2 (1),2.134,50,65,,17
+        ///Grower/Finisher diet 3 (1),2.55,65,90,,27
+        ///Grower/Finisher diet 4 (1),2.934,90,130,,45
+        ///Boar,3 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_33_Daily_Feed_Intake_For_Swine_Groups {
             get {
@@ -1709,12 +1706,11 @@ namespace H.Content.Properties {
         ///,,,,,,Production (US numbers),Application,,
         ///Fert product,Abbrev.,%N,%P2O5,%K2O,%S,kg CO2 eq. kg product -1,,Source,
         ///Urea,Urea,46,0,0,0,1.01,0.73,Brentrup et al. 2018.,
-        ///Ammonia,NH3,82,0,0,0,2.49,,,
+        ///Anhydrous Ammonia,NH3,82,0,0,0,2.49,,,
         ///Urea ammonium nitrate,UAN,30,0,0,0,1.33,0.25,Brentrup et al. 2018.,
-        ///Ammonium nitrate (prilled),AN,33.5,0,0,0,2.28,,Brentrup et al. 2018.,
-        ///Ammonium nitrate (granulated),AN,33.5,0,0,0,2.25,,Brentrup et al. 2018.,
-        ///Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al. 2018.,
-        /// [rest of string was truncated]&quot;;.
+        ///Ammonium nitrate (prilled),AN,33.5,0,0,0,2.25,,Brentrup et al. 2018.,
+        ///Ammonium nitrate (granulated),AN,33.5,0,0,0,2.28,,Brentrup et al. 2018.,
+        ///Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
             get {
@@ -1785,7 +1781,7 @@ namespace H.Content.Properties {
         ///2001,IPCC 3rd assessment,1,23,23,296
         ///2005,IPCC 4th assessment,1,25,25,298
         ///2013,IPCC 5th assessment,1,28,28,265
-        ///2021,IPCC 6th assessment,1,27,30,273
+        ///2021,IPCC 6th assessment,1,30,27,273
         ///,,,,,
         ///These conversion factors are the Direct Global Warming Potentials (mass basis) relative to carbon dioxide (for gases for which the lifetimes have been adequately characterised). The time horizon is 100 years (IPCC 2006).,,,,,
         ///.
@@ -1859,13 +1855,13 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N content (% wet wt),C content (% wet wt),P content (% wet wt),C:N ratio
-        ///Beef cattle,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02
-        ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66
-        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88
-        ///Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9
-        ///Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91
-        ///Dairy cattle,Pasture/range/paddock,86 (1),-9 (6),6.182 (1),0.118 (6),-9  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Manure type,,Moisture content (%),N content (% wet wt),C content (% wet wt),P content (% wet wt),C:N ratio,VS content (% wet weight) (27)
+        ///Beef cattle,Pasture/range/paddock (1),86,0.294,6.182,0.047,21.02,-9
+        ///Beef cattle,Deep bedding (2),60.08,0.715,12.63,0.223,17.66,20.25
+        ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88,3.377
+        ///Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9,7.814
+        ///Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91,7.814
+        ///Dairy cattle,P [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_6_Manure_Types_And_Default_Composition {
             get {
@@ -1949,11 +1945,11 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Group,Crops,Intercept,Slope,RSt,N Content of Residues (1),Lingin Content of residues (2),Moisture Content %,Biomethane potential (Nm^3 ton^-1 VS) for straw/silage,f_CH4 Fraction of methane in biogas,Volatile Solids (% TS),TS (kg t^-1)^3,TN Substrate (Kg N t^-1)^5
-        ///,Summerfallow,0,0,0,0,0,0
-        ///,,,,,,,
-        ///Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12
+        ///,Summerfallow,0,0,0,0,0,0,,,,,
+        ///,,,,,,,,,,,,
+        ///Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12,,,,,
         ///,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,162,0.6,90,880,7.8
-        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12,267,0.44,90,88 [rest of string was truncated]&quot;;.
+        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops {
             get {
