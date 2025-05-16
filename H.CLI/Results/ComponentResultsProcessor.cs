@@ -219,7 +219,7 @@ namespace H.CLI.Results
                                 // Output subtotals for this group
                                 if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                                 {
-                                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, groupEmissionResult.TotalCarbonDioxideEquivalentEmissionsFromAnimalGroup)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                                    stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, groupEmissionResult.TotalCarbonDioxideEquivalentEmissionsFromAnimalGroup), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                                 }
                                 else
                                 {
@@ -255,7 +255,7 @@ namespace H.CLI.Results
                             // Output subtotals for this component
                             if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                             {
-                                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, animalComponentEmissionsResults.TotalCarbonDioxideEquivalentsFromAllGroupsInComponent)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, animalComponentEmissionsResults.TotalCarbonDioxideEquivalentsFromAllGroupsInComponent), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                             }
                             else
                             {
@@ -288,7 +288,7 @@ namespace H.CLI.Results
 
                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                     {
-                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, farmEmissionResult.TotalCarbonDioxideEquivalentsFromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, farmEmissionResult.TotalCarbonDioxideEquivalentsFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     }
                     else
                     {
@@ -435,7 +435,7 @@ namespace H.CLI.Results
                                     // Output subtotals for this group
                                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                                     {
-                                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, groupEmissionsByMonth.TotalCarbonDioxideEquivalentsForMonth)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, groupEmissionsByMonth.TotalCarbonDioxideEquivalentsForMonth), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                                     }
                                     else
                                     {
@@ -479,7 +479,7 @@ namespace H.CLI.Results
                             // Output subtotals for this component
                             if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                             {
-                                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, animalComponentEmissionsResults.TotalCarbonDioxideEquivalentsFromAllGroupsInComponent)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                                stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, animalComponentEmissionsResults.TotalCarbonDioxideEquivalentsFromAllGroupsInComponent), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                             }
                             else
                             {
@@ -521,7 +521,7 @@ namespace H.CLI.Results
 
                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                     {
-                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, farmEmissionResult.TotalCarbonDioxideEquivalentsFromFarm)).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
+                        stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, farmEmissionResult.TotalCarbonDioxideEquivalentsFromFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
                     }
                     else
                     {

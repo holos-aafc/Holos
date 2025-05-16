@@ -4,6 +4,8 @@ using H.Core.Providers.Feed;
 using System;
 using System.Collections.ObjectModel;
 using H.Core.Services.Initialization;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace H.Core.Services
 {
@@ -38,10 +40,8 @@ namespace H.Core.Services
             farm.DateCreated = DateTime.Now;
 
             farm.Diets.AddRange(_dietProvider.GetDiets());
-            farm.DefaultManureCompositionData.AddRange(_defaultManureCompositionProvider.ManureCompositionData);
-            farm.DefaultsCompositionOfBeddingMaterials.AddRange(_defaultBeddingMaterialCompositionProvider.Data);
 
-            _initializationService.ReinitializeBeddingMaterial(farm);
+            _initializationService.InitializeFarm(farm);
 
             return farm;
         }
