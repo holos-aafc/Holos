@@ -3,6 +3,7 @@ using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models;
 using H.Core.Providers.Animals;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -11,16 +12,16 @@ namespace H.Core.Services.Initialization.Animals
         #region Public Methods
 
         /// <summary>
-        /// Reinitialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for all <see cref="ManagementPeriod"/>s for the <see cref="Farm"/>.
+        /// Initialize the <see cref="Table_30_Default_Bedding_Material_Composition_Data"/> for all <see cref="ManagementPeriod"/>s for the <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The farm containing the <see cref="ManagementPeriod"/>s to initialize with new defaults</param>
-        public void ReinitializeBeddingMaterial(Farm farm)
+        public void InitializeBeddingMaterial(Farm farm)
         {
             if (farm != null)
             {
                 var data = _beddingMaterialCompositionProvider.Data;
                 farm.DefaultsCompositionOfBeddingMaterials.Clear();
-                farm.DefaultsCompositionOfBeddingMaterials.AddRange(data);
+                farm.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>(SeedDefaultBeddingCompositionData(data));
 
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
@@ -33,7 +34,7 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
-        public void InitializeBeddingMaterial(Farm farm)
+        public void ReinitializeBeddingMaterial(Farm farm)
         {
             if (farm != null)
             {
@@ -105,6 +106,21 @@ namespace H.Core.Services.Initialization.Animals
 
                 managementPeriod.HousingDetails.UserDefinedBeddingRate = beddingRate;
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+        private List<Table_30_Default_Bedding_Material_Composition_Data> SeedDefaultBeddingCompositionData(List<Table_30_Default_Bedding_Material_Composition_Data> source)
+        {
+            var beddingMaterialCompositionData = new List<Table_30_Default_Bedding_Material_Composition_Data>();
+
+            foreach (var item in source)
+            {
+                var copiedInstance = _defaultBeddingCompositionDataMapper.Map<Table_30_Default_Bedding_Material_Composition_Data, Table_30_Default_Bedding_Material_Composition_Data>(item);
+                beddingMaterialCompositionData.Add(copiedInstance);
+            }
+            return beddingMaterialCompositionData;
         }
 
         #endregion

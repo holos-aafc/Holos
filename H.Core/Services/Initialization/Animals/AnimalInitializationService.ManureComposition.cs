@@ -2,6 +2,7 @@
 using H.Core.Models.Animals;
 using H.Core.Models;
 using H.Core.Providers.Animals;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -10,17 +11,16 @@ namespace H.Core.Services.Initialization.Animals
         #region Public Methods
 
         /// <summary>
-        /// Reinitialize the default <see cref="DefaultManureCompositionData"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// Initialize the default <see cref="DefaultManureCompositionData"/> for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
         /// </summary>
         /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/>s to initialize</param>
-        public void ReinitializeManureCompositionData(Farm farm)
+        public void InitializeManureCompositionData(Farm farm)
         {
             if (farm != null)
             {
                 var manureCompositionData = _defaultManureCompositionProvider.ManureCompositionData;
-
                 farm.DefaultManureCompositionData.Clear();
-                farm.DefaultManureCompositionData.AddRange(manureCompositionData);
+                farm.DefaultManureCompositionData = new ObservableCollection<DefaultManureCompositionData>(SeedDefaultManureCompositionData(manureCompositionData));
 
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
                 {
@@ -31,7 +31,7 @@ namespace H.Core.Services.Initialization.Animals
             }
         }
 
-        public void InitializeManureCompositionData(Farm farm)
+        public void ReinitializeManureCompositionData(Farm farm)
         {
             if (farm != null)
             {
@@ -59,6 +59,22 @@ namespace H.Core.Services.Initialization.Animals
                 managementPeriod.ManureDetails.FractionOfCarbonInManure = manureCompositionData.CarbonFraction;
                 managementPeriod.ManureDetails.FractionOfNitrogenInManure = manureCompositionData.NitrogenFraction;
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private List<DefaultManureCompositionData> SeedDefaultManureCompositionData(List<DefaultManureCompositionData> source)
+        {
+            var manureCompositionData = new List<DefaultManureCompositionData>();
+
+            foreach (var item in source)
+            {
+                var copiedInstance = _defaultManureCompositionDataMapper.Map<DefaultManureCompositionData, DefaultManureCompositionData>(item);
+                manureCompositionData.Add(copiedInstance);
+            }
+            return manureCompositionData;
         }
 
         #endregion

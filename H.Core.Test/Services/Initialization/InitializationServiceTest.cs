@@ -517,7 +517,7 @@ namespace H.Core.Test.Services.Initialization
 
             _farm1.Components.Add(component);
 
-            _initializationService.ReinitializeBeddingMaterial(_farm1);
+            _initializationService.InitializeBeddingMaterial(_farm1);
 
             Assert.AreEqual(0.447, housingDetails.TotalCarbonKilogramsDryMatterForBedding);
         }
