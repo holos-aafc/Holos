@@ -62,6 +62,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\CliTrainingGuide\figure1-1.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-10.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-11.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-12.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-2.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-3.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-4.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-5.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-6.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-7.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-8.png" />
+    <Content Include="Images\CliTrainingGuide\figure1-9.png" />
     <Content Include="Images\DairyGuide\en\Figure1.png">
       <Pack>false</Pack>
     </Content>

@@ -14,7 +14,7 @@ For example, it is currently not possible to add an Anaerobic Digestion componen
 
 The CLI can be downloaded from the GitHub page.
 
-_(show link)_
+<a href="https://agriculture.canada.ca/holos/cli/setup.exe">link to download</a>
 
 The installation package will install the CLI on your computer. As with the GUI, the CLI is only supported on Microsoft Windows PCs. Similar to the GUI, the CLI will automatically update itself when there are new features or bug fixes.
 
@@ -24,7 +24,9 @@ Basic requirements such as the farm’s location, number of animals, fertilizer 
 
 The fundamental difference between the GUI and CLI is that the user must create a collection of Excel comma separated files (or CSVs) where each file will represent the input data that would have been entered manually in the GUI.
 
-_(show sample CLI files in farm folder named “_**_Demo CLI Farm_**_”)_
+<img src="../../Images/CliTrainingGuide/figure1-1.png" alt="Figure 1-1" width="750"/>
+
+_(Figure 1-1, CLI input files)_
 
 All field and animal management inputs must be specified by the user through the use of these CSV files and the files must have the expected headings and a certain layout of columns and rows.
 
@@ -55,7 +57,9 @@ Now that we have created our input files, we can run the CLI and get our results
 
 Start by double clicking the HOLOS CLI desktop icon to begin the application.
 
-_(Open the Holos CLI)_
+<img src="../../Images/CliTrainingGuide/figure1-2.png" alt="Figure 1-2" width="750"/>
+
+_(Open the Holos CLI, Figure1-2)_
 
 The first question the CLI will ask the user is to specify the location of the CLI input files. The user must enter the full path to the directory/folder including the drive letter. You can copy the path to your input folder/directory displayed in Windows Explorer and paste it into the CLI window.
 
@@ -63,7 +67,9 @@ _(Enter path to farms folder_ **_C:\\Users\\Aaron\\Documents\\WORK\\Projects\\Ho
 
 The CLI will then ask the user if they would like to import farm files from the GUI. This next step allows for the user to export any farms from the GUI and then import them as a CLI input files. The user can then use a GUI farm file as a starting point instead of having to manually create the component input files. If you do have files you would like to import, you will need to enter the path to those files on your PC during this prompt.
 
-_(Enter no here)_
+<img src="../../Images/CliTrainingGuide/figure1-3.png" alt="Figure 1-3" width="750"/>
+
+_(Enter no here, Figure1-3)_
 
 Note, all input files must be closed when running the CLI. If you have any input files opened (i.e. opened in Microsoft Excel) the CLI will produce an error and end the session.
 
@@ -73,7 +79,9 @@ Finally, the CLI will ask which units of measurement will be used
 
 Once the initialization process is completed, Holos will then iterate over all of the farm folders located in the directory specified and calculate GHG emission results.
 
-_(Enter units of measurement and then run the CLI)_
+<img src="../../Images/CliTrainingGuide/figure1-4.png" alt="Figure 1-4" width="750"/>
+
+_(Enter units of measurement and then run the CLI, Figure1-4)_
 
 At the end of the simulation, the CLI indicates that it is finished, and that the user can now view the output/result files.
 
@@ -81,11 +89,15 @@ At the end of the simulation, the CLI indicates that it is finished, and that th
 
 For our field component results, the CLI will create an Excel output file in the “**Outputs/Farm_Name_Results/Fields**” folder. If we look at this file, we can see that it is the exact same output file that we get if we export our field results from the GUI. We have columns for SOC, N2O emissions, etc.
 
-_(Open field results file)_
+<img src="../../Images/CliTrainingGuide/figure1-5.png" alt="Figure 1-5" width="750"/>
+
+_(Open field results file, Figure1-5)_
 
 For our animal results, there will be an output file placed in the “**Outputs/FarmName_Results**”. There will be a file named “**Farm_Name_CO2EEmissions_Farm-en-CA**” which is equivalent to the “Detailed Emissions Report” available in the GUI. By default, the results will be shown in Mg CO2e which is different from the GUI report which defaults to reporting emissions in kg CO2e.
 
-_(Open animal results file)_
+<img src="../../Images/CliTrainingGuide/figure1-6.png" alt="Figure 1-6" width="750"/>
+
+_(Open animal results file, Figure1-6)_
 
 **Running 2 or more farms**
 
@@ -95,17 +107,25 @@ In this demonstration, we will keep most settings between the two farms the same
 
 To create a second farm, we will simply copy the entire farm folder we used previously and then rename it to farm #2.
 
-_(copy farm folder and rename it to farm #2)_
+<img src="../../Images/CliTrainingGuide/figure1-7.png" alt="Figure 1-7" width="750"/>
+
+_(copy farm folder and rename it to farm #2, Figure1-7)_
 
 Now we have created a carbon copy of our first farm we can modify the second farm’s settings so that it has a different location. To change the farm’s location, we need to modify the settings file found in the farm folder. This settings file will have the name “Farm” and a file extension of .SETTINGS. You can use any text file editor when editing this .SETTINGS file (i.e. Notepad etc.)
 
-_(Open settings file)_
+<img src="../../Images/CliTrainingGuide/figure1-8.png" alt="Figure 1-8" width="750"/>
+
+_(Open settings file, Figure1-8)_
 
 Once we open the settings file, we want to locate the two lines that define the Latitude and the Longitude of the farm. Here we can see that these two lines are on the 4<sup>th</sup> and 5<sup>th</sup> line of this settings file. Since these two values represent the position of our first farm, we will modify the latitude and longitude now.
 
-_(Change two values)_
+<img src="../../Images/CliTrainingGuide/figure1-9.png" alt="Figure 1-9" width="750"/>
+
+_(Change two values, Figure1-9)_
 
 Our next change will be to edit the number of animals in our beef stockers and backgrounders component. To make this change we need to go into our second farm folder, find our Beef category folder that contains all of our beef cattle components, and open the component input file.
+
+<img src="../../Images/CliTrainingGuide/figure1-10.png" alt="Figure 1-10" width="750"/>
 
 _(Open backgrounders file)_
 
@@ -113,7 +133,9 @@ Once we have the beef cattle file opened, we can see all the columns and rows th
 
 In this component file, we can see that we have columns that represent what would normally be displayed and modified in the GUI. For example, we can see one row that represents a group of beef backgrounding heifers
 
-_(show row)_
+<img src="../../Images/CliTrainingGuide/figure1-11.png" alt="Figure 1-11" width="750"/>
+
+_(show row, Figure1-11)_
 
 and another row that represents beef backgrounding steers.
 
@@ -129,7 +151,9 @@ Now we are finished with our second run.
 
 When you have two or more farms that you run through the CLI, there will be a combined output file that summarizes the results from all the animal emissions from all farms in the scenario. This combined file will be created in a folder called TotalResultsForAllFarms.
 
-_(Open_ **_totalresults_CO2EEmissions-en-CA_**_.csv)_
+<img src="../../Images/CliTrainingGuide/figure1-12.png" alt="Figure 1-12" width="750"/>
+
+_(Open_ **_totalresults_CO2EEmissions-en-CA_**_.csv, Figure1-12)_
 
 Finished training, move on to Q and A
 
