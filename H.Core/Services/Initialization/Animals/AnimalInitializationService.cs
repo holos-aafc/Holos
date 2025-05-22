@@ -3,6 +3,7 @@ using H.Core.Providers.Climate;
 using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Models;
+using AutoMapper;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -33,6 +34,8 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider _poultryOtherLivestockDefaultNExcretionRatesProvider;
 
         private static readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
+        private IMapper _defaultManureCompositionDataMapper;
+        private IMapper _defaultBeddingCompositionDataMapper;
 
         #endregion
 
@@ -66,6 +69,8 @@ namespace H.Core.Services.Initialization.Animals
             _livestockCoefficientsBeefAndDairyCattleProvider = new Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider();
             _poultryOtherLivestockDefaultNExcretionRatesProvider = new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider();
             _livestockDailyVolatileExcretionFactorsProvider = new Table_34_Livestock_Daily_Volatile_Excretion_Factors_Provider();
+
+            this.InitializeMappers();
         }
 
         #endregion
@@ -97,6 +102,27 @@ namespace H.Core.Services.Initialization.Animals
             this.InitializeLivestockCoefficientSheep(farm);
             this.InitializeVolatileSolidsExcretion(farm);
             this.InitializeVolatileSolids(farm);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void InitializeMappers()
+        {
+            var _manureCompositionDataMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
+            });
+
+            _defaultManureCompositionDataMapper = _manureCompositionDataMapperConfiguration.CreateMapper();
+
+            var _beddingMaterialCompositionMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            {
+                configuration.CreateMap<Table_30_Default_Bedding_Material_Composition_Data, Table_30_Default_Bedding_Material_Composition_Data>();
+            });
+
+            _defaultBeddingCompositionDataMapper = _beddingMaterialCompositionMapperConfiguration.CreateMapper();
         }
 
         #endregion

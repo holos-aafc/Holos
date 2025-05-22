@@ -24,7 +24,7 @@ A print version of the Holos version 4.0 algorithm document is being made availa
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx" target="_blank">Pogue et al 2025_Printversion_Holos_V4.0_Algorithm_Document.docx</a>
+<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document%201.docx" target="_blank">Pogue et al 2025_Printversion_Holos_V4.0_Algorithm_Document.docx</a>
 
 # Training Guide
 
@@ -39,6 +39,8 @@ A dairy specific training guide can be found <a href="https://github.com/holos-a
 A poultry specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Poultry%20Training%20Guide/Holos_4_Training_Guide_Poultry.md" target="_blank">here</a>.
 
 An anaerobic digestor specific tranining guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Anaerobic%20Digestion/Holos_4_Training_Guide_AnaerobicDigestor.md" target="_blank">here</a>.
+
+A CLI specific training guide can be found <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/CLI%20Training%20Guide/Holos_4_Training_Guide_CLI.md" target="_blank">here</a>.
 
 Video tutorials on using Holos 4 as well as navigating the GitHub interface can be found [here](https://www.youtube.com/@holosaafc9123).
 
