@@ -158,7 +158,7 @@ namespace H.Core.Services.Initialization.Crops
         /// </summary>
         /// <param name="grainCropViewItem">The <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for the grain crop.</param>
         /// <param name="silageCropViewItem"></param>
-        /// <returns>The estimated yield (dry matter) for a silage crop</returns>
+        /// <returns>The estimated yield (wet weight) for a silage crop</returns>
         public double CalculateSilageCropYield(CropViewItem grainCropViewItem, CropViewItem silageCropViewItem)
         {
             // Prevent division by 0 in subsequent calculations
@@ -205,8 +205,8 @@ namespace H.Core.Services.Initialization.Crops
             grainCropViewItem.PlantCarbonInAgriculturalProduct = _icbmCarbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(previousYearViewItem: null, currentYearViewItem: grainCropViewItem, farm: farm);
 
             // We then calculate the wet and dry yield of the crop.
-            silageCropViewItem.DryYield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem: silageCropViewItem);
-            silageCropViewItem.CalculateWetWeightYield();
+            silageCropViewItem.Yield = CalculateSilageCropYield(grainCropViewItem: grainCropViewItem, silageCropViewItem: silageCropViewItem);
+            silageCropViewItem.CalculateDryYield();
 
             // No defaults for any grass silages so we use SAD data
             if (silageCropViewItem.CropType == CropType.GrassSilage)
