@@ -241,6 +241,22 @@ namespace H.Core.Services.Initialization.Crops
 
         #region Private Methods
 
+        /// <summary>
+        /// Equation 2.1.2-1
+        /// </summary>
+        /// <param name="yield"></param>
+        /// <param name="moistureContent">Default moisture content for all crops (default 13%) which represents the moisture content of the hay crop (see algorithm document)</param>
+        /// <param name="viewItem"></param>
+        private double CalculateStandingBiomassAdjustment(double yield, double moistureContent, CropViewItem viewItem)
+        {
+            // The moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document).
+            var moistureContentFreshBiomass = 0.8;
+
+            var result = yield * ((1.0 - moistureContent) / (1.0 - moistureContentFreshBiomass));
+
+            return result;
+        }
+
         private void InitializeYieldUsingSmallAreaData(CropViewItem viewItem, Farm farm)
         {
             var province = farm.Province;
@@ -262,7 +278,15 @@ namespace H.Core.Services.Initialization.Crops
 
                     if (smallAreaYieldData != null)
                     {
-                        yields.Add(smallAreaYieldData.Yield);
+                        if (viewItem.CropType.IsPerennial())
+                        {
+                            var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYieldData.Yield, viewItem.MoistureContentOfCrop, viewItem);
+                            yields.Add(adjustment);
+                        }
+                        else
+                        {
+                            yields.Add(smallAreaYieldData.Yield);
+                        }
                     }
                 }
 
@@ -289,7 +313,16 @@ namespace H.Core.Services.Initialization.Crops
 
             if (smallAreaYield != null)
             {
-                viewItem.Yield = smallAreaYield.Yield;
+                if (viewItem.CropType.IsPerennial())
+                {
+                    var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYield.Yield, viewItem.MoistureContentOfCrop, viewItem);
+                    viewItem.Yield = adjustment;
+                }
+                else
+                {
+                    viewItem.Yield = smallAreaYield.Yield;
+                }
+
                 viewItem.CalculateDryYield();
             }
             else

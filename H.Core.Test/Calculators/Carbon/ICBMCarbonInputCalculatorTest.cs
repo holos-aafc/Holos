@@ -383,13 +383,13 @@ namespace H.Core.Test.Calculators.Carbon
             // * NOTE: the stand length was removed from this calculation (not considered anymore). New calculation should be:
             // Cbg = Cr + Ce
             // = [Cp * (Rr/Rp) * (Sr/100)] + [Cp * (Re/Rp)]
-            // = [391.5 * (0.4/0.5) * (100/100)] + [391.5 * (0.3 / 0.5)]
-            // = [391.5 * 0.8 * 1] + [391.5 * (0.6)]
+            // = [396 * (0.3/0.5) * (100/100)] + [396 * (0.3 / 0.5)]
+            // = [396 * 0.8 * 1] + [396 * (0.6)]
             // = [root input less than 450 so = 450] 
-            // = 450 + 234.9
+            // = 237.6 + 450
             // = 684.9
 
-            Assert.AreEqual(684.9, currentYearViewItem.BelowGroundCarbonInput, 1);
+            Assert.AreEqual(687.6, currentYearViewItem.BelowGroundCarbonInput, 1);
         }
 
         [TestMethod]

@@ -130,7 +130,6 @@ namespace H.Core.Calculators.Carbon
                 moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
             }
 
-            var isPerennial = currentYearViewItem.CropType.IsPerennial();
             var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
             var isAllProductReturned = Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon;
             var isSwathing = currentYearViewItem.HarvestMethod == HarvestMethods.Swathing;
@@ -138,8 +137,6 @@ namespace H.Core.Calculators.Carbon
             var isCustomYieldAndIsGrazed = isCustomYieldAssignmentMethod && isGrazed;
             var hasHarvest = currentYearViewItem.GetHayHarvests().Any();
             var isCustomYieldAndNoHarvestAndNoGrazing = isCustomYieldAssignmentMethod && (hasHarvest == false) && (isGrazed == false);
-            var isSmallAreaAssignment = farm.YieldAssignmentMethod == YieldAssignmentMethod.SmallAreaData;
-            var tameHayAdjustmentNeeded = (hasHarvest == false) && (isGrazed == false) && isSmallAreaAssignment && isPerennial; 
 
             var moistureContentAdjustment = (1.0 - moistureContentFraction);
             var carbonConcentration = currentYearViewItem.CarbonConcentration;
@@ -151,23 +148,9 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                var firstTerm = 0d;
-                var yieldAdjustment = yield / (1 - (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
+                var firstTerm = yield / (1 - (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
 
-                if (tameHayAdjustmentNeeded)
-                {
-                    // Here the moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document)
-                    // The 13% used below is the default moisture content for all crops and will represent the moisture content of the hay crop (see algorithm document)
-
-                    firstTerm = yieldAdjustment * ((1.0 - 0.13) / (1.0 - moistureContentFraction));
-                    moistureContentAdjustment = 1 - moistureContentFraction;
-                }
-                else
-                {
-                    firstTerm = yield / (1 - (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100.0));
-                }
-
-                result = (firstTerm * moistureContentAdjustment) * carbonConcentration;
+                result = firstTerm * moistureContentAdjustment * carbonConcentration;
             }
 
             return result;
