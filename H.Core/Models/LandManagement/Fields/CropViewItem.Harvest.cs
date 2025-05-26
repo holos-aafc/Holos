@@ -116,6 +116,19 @@ namespace H.Core.Models.LandManagement.Fields
             return this.GetHayHarvestsByYear(this.Year);
         }
 
+        /// <summary>
+        /// (%)
+        /// </summary>
+        public double AverageMoistureContentOfHarvests()
+        {
+            return this.GetHayHarvests().Average(x => x.MoistureContentAsPercentage);
+        }
+
+        public bool IsHarvested()
+        {
+            return this.GetHayHarvests().Any();
+        }
+        
         #endregion
     }
 }

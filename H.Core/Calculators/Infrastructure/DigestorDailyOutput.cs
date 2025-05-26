@@ -36,7 +36,7 @@ namespace H.Core.Calculators.Infrastructure
 
         public double FlowRateOfAllOrganicNitrogenInDigestate { get; set; }
 
-        public double FlowOfAllCarbon { get; set; }
+        public double FlowOfAllCarbonInDigestate { get; set; }
 
         /*
          * Liquid/solid separation
