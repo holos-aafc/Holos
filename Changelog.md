@@ -1,5 +1,6 @@
 | Date | Commit ID | Summary of changes | GUI version |
 | -------- | ------- | ------- | ------- |
+| May 26, 2025 | [See Issue #323](https://github.com/holos-aafc/Holos/issues/323) | Update to perennial yield calculations under specific scenarios | 4.0.1.63 
 | May 8, 2025 | [See Issue #332](https://github.com/holos-aafc/Holos/issues/332) | Update to perennial yield calculations under specific scenarios. Subtract supplemental feeding amounts from grazing animal scenarios | 4.0.1.59 
 | February 14, 2025 | [3b3d028](https://github.com/holos-aafc/Holos/commit/2aad31804071235e6cce12d1cff890a233b3d028), [ac27b4f](https://github.com/holos-aafc/Holos/commit/e85d134e32318c8f83a8ea58321b92613ac27b4f), [8f6ab0e](https://github.com/holos-aafc/Holos/commit/8813a935b22eff22f9bf5d9d6377b39398f6ab0e) | Update IPCC and ICBM models. This change will affect emissions and soil carbon calculations. More information about this update can be found on this discussion post https://github.com/holos-aafc/Holos/discussions/253 | 4.0.1.20 | 
 | January 28, 2025 | [0759cdb](https://github.com/holos-aafc/Holos/commit/f184abb9830c4a3aa789f11656e1a2e450759cdb) | Update climate factor calculation. This change will affect emissions when the ICBM carbon model is used | 4.0.1.17 | 
