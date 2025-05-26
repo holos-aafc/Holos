@@ -439,10 +439,10 @@ namespace H.Core.Calculators.Infrastructure
                 : carbonCoefficients.BeltPress;
 
             // Equation 4.8.4-13
-            digestorDailyOutput.CarbonLiquidFraction = (1 - carbonCoefficient) * digestorDailyOutput.FlowOfAllCarbon;
+            digestorDailyOutput.CarbonLiquidFraction = (1 - carbonCoefficient) * digestorDailyOutput.FlowOfAllCarbonInDigestate;
 
             // Equation 4.8.4-14
-            digestorDailyOutput.CarbonSolidFraction = carbonCoefficient * digestorDailyOutput.FlowOfAllCarbon;
+            digestorDailyOutput.CarbonSolidFraction = carbonCoefficient * digestorDailyOutput.FlowOfAllCarbonInDigestate;
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace H.Core.Calculators.Infrastructure
 
             // Equation 4.8.3-8
             digestorDailyOutput.TotalAmountOfCarbonInRawDigestateAvailableForLandApplication =
-                digestorDailyOutput.FlowOfAllCarbon;
+                digestorDailyOutput.FlowOfAllCarbonInDigestate;
 
             /*
              * Liquid fractions of liquid/solid separated digestate
@@ -636,7 +636,8 @@ namespace H.Core.Calculators.Infrastructure
                 flowInformationForAllSubstrates.Sum(x => x.OrganicNitrogenFlowInDigestate);
 
             // Equation 4.8.3-8 (summation)
-            digestorDailyOutput.FlowOfAllCarbon = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowOfSubstrate);
+            digestorDailyOutput.FlowOfAllCarbonInDigestate = flowInformationForAllSubstrates.Sum(x => x.CarbonFlowInDigestate);
+
         }
 
         public List<DigestorDailyOutput> CalculateResults(
