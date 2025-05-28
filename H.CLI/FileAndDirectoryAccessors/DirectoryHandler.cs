@@ -204,7 +204,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             //Read the data file which stores the users previous directory.
             var previousFarmsFolderPath = ReadUserFarmsPath(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt");
 
-            //If they have entered a command line argument when running the HCLI
+            //If they have entered a command line argument when running the CLI
             if (args.Any())
             {
                 Directory.SetCurrentDirectory(args[0]);
