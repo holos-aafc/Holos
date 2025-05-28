@@ -198,7 +198,7 @@ _(Open_ **_totalresults_CO2EEmissions-en-CA_**_.csv, Figure1-12)_
 
 **End of Training**
 
-# Questations and Answers
+# Questions and Answers
 
 **What scenarios should I use the CLI for?**
 
@@ -219,7 +219,5 @@ If you are only interested in simulating a small number of farms, the GUI should
 Although the CLI can run scenarios a lot faster than the GUI, the user still needs to create the input files representing the farm components. If there are many farms with many different components, the process of creating these input files can be time consuming as well. One approach to help build these input files is to simply copy and paste entire farm folders essentially making a carbon copy of one farm which can then be adjusted to differ from the original farm in some way. There is also an option to automate the creation of the CLI input files using a scripting languages such as Python.
 
 To help understand how to use the CLI, there is a general CLI user guide on GitHub. We also have a list of CLI parameters which can be used as a reference guide when creating the CLI input files.
-
-_Show demo of 100 farms being run in CLI_
 
 Finished
