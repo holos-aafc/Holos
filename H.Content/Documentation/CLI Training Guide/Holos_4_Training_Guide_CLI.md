@@ -47,7 +47,7 @@ We begin by opening up the Holos GUI and creating a new farm.
 
 4. Navigate to the component selection screen and add a single field component to the farm. The details of this field are not important since we are only interested in understanding how to build a basic template for the CLI.
 
-5. Next we will add a single **"Beef Finisher"** component to our farm. Again the details of the animal management are not important (i.e. number of animals or diet information does not need to be changed).
+5. Next we will add a single **"Beef Stockers & Backgrounders"** component to our farm. Again the details of the animal management are not important (i.e. number of animals or diet information does not need to be changed).
 
 6. Next we will navigate to the results screen so that Holos can generate the export file (in .JSON format) we will need in the next steps. It is important to always navigate to the final results screen when exporting farm files. The farm files will be empty unless the user has navigated to the final results screen before exporting their data.
 
