@@ -45,7 +45,7 @@ We begin by opening up the Holos GUI and creating a new farm.
 3. Choose **Manitoba** on the province selection screen and then locate any polygon near Winnipeg. Right-click on the polygon to download the climate data.
     * For the purposes of this demonstration it is not important to select a particular polygon. Any polygon can be selected on the map screen.
 
-4. Navigate to the component selection screen and add a single field component to the farm. The details of this field are not important since we are only interested in understanding how to build a basic template for the CLI.
+4. Navigate to the component selection screen and add a single **Field** component to the farm. The details of this field are not important since we are only interested in understanding how to build a basic template for the CLI.
 
 5. Next we will add a single **"Beef Stockers & Backgrounders"** component to our farm. Again the details of the animal management are not important (i.e. number of animals or diet information does not need to be changed).
 
