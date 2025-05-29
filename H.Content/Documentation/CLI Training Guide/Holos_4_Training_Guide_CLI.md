@@ -124,7 +124,7 @@ Lets first look at the set of input files the CLI has created for us based on th
 
 # Running 2 or More Farms
 
-Now that we have demonstrated single farm scenario and understand how to create CLI input files for our farm components, we can look at how to run 2 or more farms.
+Now that we have demonstrated a single farm scenario and understand how to create CLI input files for our farm components, we can look at how to run 2 or more farms.
 
 **Before continuing, we will create a new folder to contain our new farms for this next scenario**
 
@@ -157,7 +157,7 @@ _(Open settings file, Figure1-8)_
 
 Once we open the settings file, we want to locate the two lines that define the **Latitude** and the **Longitude** of the farm. Here we can see that these two lines are on the 4<sup>th</sup> and 5<sup>th</sup> line of this settings file. Since these two values represent the position of our first farm, we will modify the latitude and longitude now.
 
-1. Locate latitude and longitude in the settigns file and make simple edits to change the location of the farm.
+1. Locate latitude and longitude in the settings file and make simple edits to change the location of the farm.
 
 <img src="../../Images/CliTrainingGuide/figure1-9.png" alt="Figure 1-9" width="750"/>
 
@@ -185,9 +185,12 @@ This is where we will make our edit to change the number of animals from 50 heif
 
 Once we make the change, we save and then close the CLI file. It is important to make sure all input files are closed before running the CLI.
 
-Now that we have created our second farm and changed our settings, we will run the CLI again. Before we start the CLI we will ensure all input files are closed.
+Now that we have created our second farm and changed our settings, we will run the CLI again. Before starting the CLI, ensure all input files are closed.
 
-1. **Start the CLI for our second scenario by double-clicking the CLI desktop icon. Enter the information asked for by the CLI ensure that we use the new folder directory we created for the second scenario. Note that we are entering the name of the folder containing our two farm folders - we don't enter the directory of the farm folders but the directory containing these two folders. We also indicate that we do not want to import farms from the GUI for this second scenario since we already have our two farm folders with the component input files.**
+1. Start the CLI for our second scenario by double-clicking the CLI desktop icon.
+2. Enter the information asked for by the CLI ensure that we use the **new** folder directory we created for the second scenario.
+
+*Note that we are entering the path of the directory containing our two farm folders - we don't enter the directory of the individual farm folders but the directory containing these two folders. We also indicate that we do not want to import farms from the GUI for this second scenario since we already have our two farm folders with the component input files.*
 
 Now we are finished with our second run.
 
@@ -209,7 +212,7 @@ The very simple interface offered by the CLI results in much faster processing t
 
 One possible use case of the CLI would be if you are interested in iterating over all possible values of one or many input variables (i.e. Monte Carlo analysis). In this case, the CLI should be used since it is easier to create multiple farms having different values of one particular target variable.
 
-For example, one variable that could be easily iterated over would the TDN value of an animal diet. Using the CLI, the user can create 1 farm file with the starting TDN, and then subsequent farm files that each add step value to the beginning TDN value. (i.e. One farm file starts with a TDN of 50, subsequent farm files use a TDN value of 55, 60, etc.)
+For example, one variable that could be easily iterated over would be the TDN value of an animal diet. Using the CLI, the user can create 1 farm file with the starting TDN, and then subsequent farm files that each add a step value to the beginning TDN value. (i.e. One farm file starts with a TDN of 50, subsequent farm files use a TDN value of 55, 60, etc.)
 
 **What scenarios should I use the GUI for?**
 
