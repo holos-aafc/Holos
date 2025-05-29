@@ -53,9 +53,11 @@ We begin by opening up the Holos GUI and creating a new farm.
 
 7. Finally, we will export our farm file to a location on our computer. Go to the "**File->Export Farm(s)**" to select and then export your farm. Note the name of the file and the location you have saved the file. On my machine. To find the full path to a file, you can right-click on the file and get the location. For this demonstration we will use the location of "**C:\CLI\Scenario 1**".
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-1.png" alt="Figure 1-1"/>
-
-_(Scenario 1 folder location, Figure 1-1)_
+<br>
+<em>Scenario 1 folder location, Figure 1-1</em>
+</p>
 
 ### Running a Single Farm Though the CLI
 
@@ -63,9 +65,10 @@ One of the first steps in running the CLI is to tell Holos where your farm files
 
 1. Start by double clicking the HOLOS CLI desktop icon to begin the application.
 
+<p align="Center">
 <img src="../../Images/CliTrainingGuide/figure1-2.png" alt="Figure 1-2"/>
-
-_(Open the Holos CLI, Figure1-2)_
+<br>
+<em>Open the Holos CLI, Figure1-2</em>
 
 The first question the CLI will ask is for the location of the CLI input files. The user must enter the full path to the directory/folder including the drive letter. You can copy the path to your input folder/directory displayed in Windows Explorer and paste it into the CLI window.
 
@@ -77,17 +80,21 @@ The CLI will then ask if you would like to import farm files from the GUI. This 
 
 3. Type **"Yes"** and then the press the "**Enter**" key so that the CLI will use our exported farm file as an input. The next question will be if your exported farm files are in the same directory, type "**Yes**" then press "**Enter**"
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-3.png" alt="Figure 1-3"/>
-
-_(Import files from the GUI, Figure1-3)_
+<br>
+<em>Import files from the GUI, Figure1-3</em>
+</p>
 
 Finally, the CLI will ask which units of measurement will be used.
 
 4. Type "**1**" for metric and then press "**Enter**"
 
-<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4"/>
-
-_(Entering units of measurement, Figure1-4)_
+<p align="center">
+<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4" width="80%" height="80%"/>
+<br>
+<em>Entering units of measurement, Figure1-4</em>
+</p>
 
 After all the necessary information required has been collected from the user, the CLI will begin the simulation. The CLI will first read all necessary tables needed to calculate results so the first few seconds will be dedicated to the reading of these data and also downloading the NASA climate data.
 
@@ -99,15 +106,18 @@ Once the CLI has completed the calculations it will inform the user that they ca
 
 For our field component results, the CLI will create an Excel output file in the “**Outputs/Farm_Name_Results/Fields**” folder. If we look at this file, we can see that it is the exact same output file that we get if we export our field results from the GUI. We have columns for SOC, N2O emissions, etc.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-5.png" alt="Figure 1-5" width="750"/>
-
-_(Open field results file, Figure1-5)_
+<br>
+<em>Open field results file, Figure1-5</em>
+</p>
 
 For our animal results, there will be an output file placed in the “**Outputs/FarmName_Results**”. There will be a file named “**Farm_Name_CO2EEmissions_Farm-en-CA**” which is equivalent to the “Detailed Emissions Report” available in the GUI. By default, the results will be shown in Mg CO2e which is different from the GUI report which defaults to reporting emissions in kg CO2e.
-
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-6.png" alt="Figure 1-6" width="750"/>
-
-_(Open animal results file, Figure1-6)_
+<br>
+<em>Open animal results file, Figure1-6</em>
+</p>
 
 ## Exploring the CSV Input Files
 
@@ -132,50 +142,63 @@ Now that we have demonstrated a single farm scenario and understand how to creat
 
 In this second demonstration, we will keep most settings between the two farms the same. The only things we will change is the location of the second farm and the number of animals in one of our management periods. Changing the location of the second farm will demonstrate how to use the settings file that is read by the CLI to determine the climate data for the farm.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-7.png" alt="Figure 1-7"/>
-
-_(Second scenario folder location, Figure1-7)_
-
+<br>
+<em>Second scenario folder location, Figure1-7</em>
+</p>
 
 1. Copy the first farm folder named "**My CLI template for export**" from the **Scenario 1** directory and paste it into the second scenario folder.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-7b.png" alt="Figure 1-7b"/>
-
-_(Second scenario folder location with copied farm folder, Figure1-7b)_
+<br>
+<em>Second scenario folder location with copied farm folder, Figure1-7b</em>
+</p>
 
 2. To create our second farm, right click on "**My CLI template for export**" folder to and select copy and then paste the content in the same location so that we two folders. Rename the second farm folder to "**Farm 2**".
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-7c.png" alt="Figure 1-7c"/>
-
-_(Second scenario folder location with two farm folders, Figure1-7c)_
+<br>
+<em>Second scenario folder location with two farm folders, Figure1-7c</em>
+</p>
 
 Now we have created a carbon copy of our first farm we can modify the second farm’s settings so that it has a different location. To change the farm’s location, we need to modify the settings file found in the second farm folder. This settings file will have the name "**Farm**" and a file extension of .SETTINGS. You can use any text file editor when editing this .SETTINGS file (i.e. Notepad)
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-8.png" alt="Figure 1-8" width="750"/>
-
-_(Open settings file, Figure1-8)_
+<br>
+<em>Open settings file, Figure1-8</em>
+</p>
 
 Once we open the settings file, we want to locate the two lines that define the **Latitude** and the **Longitude** of the farm. Here we can see that these two lines are on the 4<sup>th</sup> and 5<sup>th</sup> line of this settings file. Since these two values represent the position of our first farm, we will modify the latitude and longitude now.
 
 1. Locate latitude and longitude in the settings file and make simple edits to change the location of the farm.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-9.png" alt="Figure 1-9" width="750"/>
-
-_(Change two values, Figure1-9)_
+<br>
+<em>Change two values, Figure1-9</em>
+</p>
 
 Our next change will be to edit the number of animals in our beef stockers and backgrounders component. To make this change we need to go into our second farm folder, find our Beef category folder that contains all of our beef cattle components, and open the component input file.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-10.png" alt="Figure 1-10" width="750"/>
-
-_(Open backgrounders file, Figure1-10)_
+<br>
+<em>Open backgrounders file, Figure1-10</em>
+</p>
 
 Once we have the beef cattle file opened, we can see all the columns and rows that represent our management periods for our animal groups.
 
 In this component file, we can see that we have columns that represent what would normally be displayed and modified in the GUI. For example, we can see one row that represents a group of beef backgrounding heifers
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-11.png" alt="Figure 1-11" width="750"/>
-
-_(Heifer group row, Figure1-11)_
+<br>
+<em>Heifer group row, Figure1-11</em>
+</p>
 
 Next we will locate the column that represents the number of animals for each group.
 
@@ -196,9 +219,11 @@ Now we are finished with our second run.
 
 When you have two or more farms that you run through the CLI, there will be a combined output file that summarizes the results from all the animal emissions from all farms in the scenario. This combined file will be created in a folder called TotalResultsForAllFarms.
 
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-12.png" alt="Figure 1-12" width="750"/>
-
-_(Open_ **_totalresults_CO2EEmissions-en-CA_**_.csv, Figure1-12)_
+<br>
+<em>Open totalresults_CO2EEmissions-en-CA.csv, Figure1-12</em>
+</p>
 
 **End of Training**
 
