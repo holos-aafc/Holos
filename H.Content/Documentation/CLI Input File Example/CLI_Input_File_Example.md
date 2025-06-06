@@ -24,9 +24,9 @@ Source (code, csv?, etc.):
 
 Example value: wheat and hairy vetch 
 
-Type value: 
+Type value: Text
 
-Is user provided: x 
+Is user provided: Yes
 
 has default?: Yes 
 
@@ -39,11 +39,11 @@ Source (code, csv?, etc.):
 
 Example value: 18
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
 Is user provided: Yes 
 
-has default?: No 
+has default?: No
 
 note: 
 
@@ -54,7 +54,7 @@ Source (code, csv?, etc.):
 
 Example value: 2024
 
-Type value: Int 
+Type value: Int (Integer/Numeric)
 
 Is user provided: Yes 
 
@@ -69,11 +69,11 @@ Source (code, csv?, etc.):
 
 Example value: 1985
 
-Type value: 
+Type value: Int (Integer/Numeric)
 
 Is user provided: Yes 
 
-has default?: 
+has default?: No
 
 note: Each (row) in input file must correspond to a certain year 
 
@@ -84,11 +84,29 @@ Source (code, csv?, etc.):
 
 Example value: Wheat 
 
-Type value: 
+Type value: Text
 
-Is user provided: x 
+Is user provided: Yes
 
-has default?: 
+has default?: No
+
+Possible Values (see table below):
+<br>
+| Oilseeds  | Other field crops  |  Pulse crops | Root crop   | Silage  | Small grain cereals   | Fallow  | Perenial  |
+|---|---|---|---|---|---|---|---|
+| Carnelina  | Berries & Grapes  | Beans (dry field) | Potatoes  | Barley silage   | Barley  | Fallow  | Forage for seed  |
+| Canola  | Other Field Crops  | Chickpeas  | Sugar beets  | Grass silage  | Buckwheat  |   | Rangeland (Native)  |
+| Flax  | Safflower  | Dry/Field Peas  |   | Oat silage  | Canary seed  |   | Seeded grassland  |
+| Mustard  | Sunflower seed  | Lentils  |   | Silage corn  | Fall rye  |   | Tame grass  |
+| Oilseeds  | Tobacco  | Pulse Crops  |   | Triticale silage  | Grain corn  |   | Tame legume  |
+|  Soybeans | Vegetables  |   |   | Wheat silage  | Mixed grains  |   | tame mixed (grass/legume)  |
+|   |   |   |   |   | Oats  |   |   |
+|   |   |   |   |   | Small grain cereals  |   |   |
+|   |   |   |   |   | Sorghurn |   |   |
+|   |   |   |   |   | Triticale |   |   |
+|   |   |   |   |   | Undersown barley |   |   |
+|   |   |   |   |   |  Wheat |   |   |
+
 
 note: 
 
