@@ -87,6 +87,8 @@ namespace H.Core.Emissions.Results
             public double VolatileSolidsAvailable { get; set; }
             public double NetEnergyForLactation { get; set; }
             public double NetEnergyForPregnancy { get; set; }
+            public double LambEweRatio { get; set; }
+            public double PregnancyCoefficient { get; set; }
         }
 
         #region Fields
@@ -492,6 +494,8 @@ namespace H.Core.Emissions.Results
                                 NEactivity = groupEmissionsByDay.NetEnergyForActivity,
                                 NetEnergyForLactation = groupEmissionsByDay.NetEnergyForLactation,
                                 NetEnergyForPregnancy = groupEmissionsByDay.NetEnergyForPregnancy,
+                                LambEweRatio = groupEmissionsByDay.LambEweRatio,
+                                PregnancyCoefficient = groupEmissionsByDay.PregnancyCoefficient,
                                 ADG = groupEmissionsByDay.AverageDailyGain,
                                 NEgain = groupEmissionsByDay.NetEnergyForGain,
                                 REM = groupEmissionsByDay.RatioOfEnergyAvailableForMaintenance,

@@ -21,10 +21,7 @@ namespace H.CLI.Converters
     {
         #region Fields
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
-        private Farm _farm = new Farm();
-        private Storage _storage = new Storage();
         private KeyConverter.KeyConverter _keyConverter = new KeyConverter.KeyConverter();
-        private DirectoryHandler _directoryHandler = new DirectoryHandler();
 
         #endregion
 

@@ -1835,6 +1835,7 @@ namespace H.Core.Emissions.Results
         public double VolatilizationForStorage { get; set; }
         public double AmmoniaLossFromStorage { get; set; }
         public double AdjustedAmmoniaLossFromStorage { get; set; }
+        public double PregnancyCoefficient { get; set; }
 
         #endregion
     }

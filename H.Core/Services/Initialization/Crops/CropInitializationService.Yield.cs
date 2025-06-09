@@ -251,8 +251,9 @@ namespace H.Core.Services.Initialization.Crops
         {
             // The moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document).
             var moistureContentFreshBiomass = 0.8;
+            var moistureContentHay = 0.13;
 
-            var result = yield * ((1.0 - moistureContent) / (1.0 - moistureContentFreshBiomass));
+            var result = yield * ((1.0 - moistureContentHay) / (1.0 - moistureContentFreshBiomass));
 
             return result;
         }

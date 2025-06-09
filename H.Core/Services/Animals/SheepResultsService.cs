@@ -135,6 +135,8 @@ namespace H.Core.Services.Animals
                 var pregnancyCoefficient = _pregnancyCoefficientProvider.GetPregnancyCoefficient(
                     lambRatio: dailyEmissions.LambEweRatio);
 
+                dailyEmissions.PregnancyCoefficient = pregnancyCoefficient;
+
                 dailyEmissions.NetEnergyForPregnancy = this.CalculateNetEnergyForPregnancy(
                     pregnancyCoefficient: pregnancyCoefficient,
                     netEnergyForMaintenance: dailyEmissions.NetEnergyForMaintenance);
